@@ -292,27 +292,41 @@ It may require some knowledge that you may not have or do not have the time to l
 
 <p>The most important file is the <code class="highlighter-rouge">tutorial.md</code> where the content of the tutorial is. The other files are there to support the tutorial and make it robust and usable across many environments.</p>
 
-<p>To help you get started, we have created a template for new tutorials, complete with all of the above requirements.</p>
-
 <blockquote class="hands_on">
   <h3 id="-hands-on-copy-the-required-files"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Copy the required files</h3>
 
   <ol>
-    <li>Copy the <code class="highlighter-rouge">templates/tutorial/tutorial1</code> directory to <code class="highlighter-rouge">topics/sequence-analysis/tutorials</code></li>
-    <li>Rename the copied <code class="highlighter-rouge">tutorial1</code> directory to <code class="highlighter-rouge">similarity-search</code></li>
+    <li>
+      <p>Run (by adpating the information between the quotes)</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ python bin/setup_training_content.py \
+         --topic_name "my-topic" \
+         --tutorial_name "my-new-tutorial" \
+         --tutorial_title "Title of the tutorial" \
+         --hands_on
+</code></pre></div>      </div>
+    </li>
+    <li>Check that a new directory (with your tutorial name) has been generated in the topic folder</li>
+    <li>
+      <p>Make sure that Jekyll is running</p>
+
+      <blockquote>
+        <p>Want to learn how to start Jekyll? <a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Check out our tutorial to serve the website locally</a></p>
+      </blockquote>
+    </li>
+    <li>Check if the tutorial has been correctly added at <a href="http://localhost:4000/training-material/">http://localhost:4000/training-material/</a></li>
   </ol>
 </blockquote>
 
 <h1 id="add-metadata">Add metadata</h1>
 
-<p>To make the topic aware of this new tutorial, you need to add some metadata about the tutorial in the topic’s <code class="highlighter-rouge">metadata.yaml</code> file. This metadata will include some technological and pedagogical support for the training. Once this is filled out, you can run the Galaxy Training material website locally to check that the new tutorial is accessible.</p>
+<p>To make the topic aware of this new tutorial, some metadata about the tutorial has been added in the topic’s <code class="highlighter-rouge">metadata.yaml</code> file. This metadata includes some technological and pedagogical support for the training. Once this is filled out, you can run the Galaxy Training material website locally to check that the new tutorial is accessible.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-add-metadata"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Add metadata</h3>
 
   <ol>
     <li>Check out and run our <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-metadata/tutorial.html">metadata tutorial</a></li>
-    <li>(Optional) Build the website locally by following the <a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Jekyll tutorial</a> and check that the tutorial is referenced in the topic page</li>
   </ol>
 </blockquote>
 

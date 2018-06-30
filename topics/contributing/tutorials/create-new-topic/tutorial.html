@@ -165,14 +165,16 @@
             <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
             <ul>
             
-            <li></li>
+            <li>How to include a new topic?</li>
             
             </ul>
 
             <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
             <ul>
             
-            <li></li>
+            <li>Create a new topic</li>
+            
+            <li>Set up the metadata for a topic</li>
             
             </ul>
 
@@ -249,8 +251,8 @@ images. We recommend to use the content of <a href="https://github.com/galaxypro
 
 <ol id="markdown-toc">
   <li><a href="#defining-the-topic" id="markdown-toc-defining-the-topic">Defining the topic</a></li>
-  <li><a href="#creating-the-directory-for-the-topic" id="markdown-toc-creating-the-directory-for-the-topic">Creating the directory for the topic</a></li>
-  <li><a href="#make-the-templating-system-aware-about-the-topic" id="markdown-toc-make-the-templating-system-aware-about-the-topic">Make the templating system aware about the topic</a></li>
+  <li><a href="#creating-the-skeleton-for-the-topic" id="markdown-toc-creating-the-skeleton-for-the-topic">Creating the skeleton for the topic</a></li>
+  <li><a href="#adapt-the-metadata-for-your-topic" id="markdown-toc-adapt-the-metadata-for-your-topic">Adapt the metadata for your topic</a></li>
 </ol>
 
 </blockquote>
@@ -285,7 +287,7 @@ We decided to put it in “Sequence analysis” because this is the most general
 
 <p>In this tutorial, we want to add a new topic called about “my-favorite-topic”.</p>
 
-<h1 id="creating-the-directory-for-the-topic">Creating the directory for the topic</h1>
+<h1 id="creating-the-skeleton-for-the-topic">Creating the skeleton for the topic</h1>
 
 <p>Once the topic name has been chosen, we can create it.</p>
 
@@ -293,23 +295,18 @@ We decided to put it in “Sequence analysis” because this is the most general
   <h3 id="-hands-on-copy-the-required-files"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Copy the required files</h3>
 
   <ol>
-    <li>Copy the <code class="highlighter-rouge">templates</code> directory in <code class="highlighter-rouge">topics</code></li>
-    <li>Rename the copied directory to <code class="highlighter-rouge">my-favorite-topic</code></li>
-    <li>Update the index.md file in the new directory to match your topic’s name.</li>
-  </ol>
-</blockquote>
+    <li>Open a terminal</li>
+    <li>
+      <p>Run (by adpating the information between the quotes)</p>
 
-<h1 id="make-the-templating-system-aware-about-the-topic">Make the templating system aware about the topic</h1>
-
-<p>We use Jekyll to generate the website out of the Markdown and YAML files. We need to tell Jekyll that there is a new topic by adding a symbolic link to the <code class="highlighter-rouge">metadata.yaml</code> inside the <code class="highlighter-rouge">metadata</code> folder.</p>
-
-<blockquote class="hands_on">
-  <h3 id="-hands-on-add-the-new-topic-to-the-website"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Add the new topic to the website</h3>
-
-  <ol>
-    <li>Go the <code class="highlighter-rouge">metadata</code> folder using the terminal: <code class="highlighter-rouge">cd metadata</code></li>
-    <li>Add a symbolic link to the <code class="highlighter-rouge">metadata.yaml</code> file on our new topic: <code class="highlighter-rouge">ln -s ../topics/my-favorite-topic/metadata.yaml my-favorite-topic.yaml</code></li>
-    <li>Move back to the root: <code class="highlighter-rouge">cd ..</code></li>
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ python bin/setup_training_content.py \
+         --topic_name "my-favorite-topic" \
+         --topic_title "Test" \
+         --topic_target "use" \
+         --topic_summary "Summary of the topic"
+</code></pre></div>      </div>
+    </li>
+    <li>Check that a new directory has been generated in <code class="highlighter-rouge">topics</code></li>
     <li>
       <p>Make sure that Jekyll is running</p>
 
@@ -317,7 +314,54 @@ We decided to put it in “Sequence analysis” because this is the most general
         <p>Want to learn how to start Jekyll? <a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Check out our tutorial to serve the website locally</a></p>
       </blockquote>
     </li>
-    <li>Check if the tutorial has been correctly added at <a href="http://localhost:4000/training-material/">http://localhost:4000/training-material/</a></li>
+    <li>Check if the topic has been correctly added at <a href="http://localhost:4000/training-material/">http://localhost:4000/training-material/</a></li>
+  </ol>
+
+</blockquote>
+
+<h1 id="adapt-the-metadata-for-your-topic">Adapt the metadata for your topic</h1>
+
+<p>Several metadata are defined in <code class="highlighter-rouge">metadata.yaml</code> file in your topic folder to :</p>
+
+<ul>
+  <li><code class="highlighter-rouge">name</code>: name of the topic (name of the folder)</li>
+  <li><code class="highlighter-rouge">title</code>: title of the topic (the one displayed on the webpage)</li>
+  <li><code class="highlighter-rouge">type</code>: target for the topic (‘use’, ‘admin-dev’, ‘instructors’)</li>
+  <li><code class="highlighter-rouge">summary</code>: summary of the focus of the topic</li>
+  <li><code class="highlighter-rouge">requirements</code>: list of resources that the reader of the material should be familiar with before starting any tutorial in this topic:
+    <ul>
+      <li><code class="highlighter-rouge">title</code></li>
+      <li><code class="highlighter-rouge">link</code>: relative for internal (inside training material) requirement or full for external requirement)</li>
+      <li><code class="highlighter-rouge">type</code>: the type of link (<code class="highlighter-rouge">internal</code> or <code class="highlighter-rouge">external</code>)</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">docker_image</code>: name of the Docker image for the topic</p>
+
+    <p>If no Docker image exists for this topic, let this information empty</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">material</code>: the list of the tutorials for the topic</p>
+
+    <p>To add a new tutorial, <a href="/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html">check out our tutorial to serve the website locally</a></p>
+  </li>
+  <li><code class="highlighter-rouge">maintainers</code>: GitHub username of people maintaining the topic</li>
+</ul>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-add-the-new-topic-to-the-website"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Add the new topic to the website</h3>
+
+  <ol>
+    <li>Open the <code class="highlighter-rouge">metadata.yaml</code> file</li>
+    <li>Play with the metadata of the topic</li>
+    <li>
+      <p>Make sure that Jekyll is running</p>
+
+      <blockquote>
+        <p>Want to learn how to start Jekyll? <a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Check out our tutorial to serve the website locally</a></p>
+      </blockquote>
+    </li>
+    <li>Check how it changes the local website</li>
   </ol>
 
 </blockquote>
@@ -333,7 +377,7 @@ We decided to put it in “Sequence analysis” because this is the most general
 
             <ul>
                 
-                <li></li>
+                <li>A new topic can be easily added for new tutorials</li>
                 
             </ul>
         </blockquote>
