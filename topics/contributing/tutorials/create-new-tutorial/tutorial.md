@@ -84,23 +84,33 @@ Once the topic has been chosen and you set up your contribution environment, you
 
 The most important file is the `tutorial.md` where the content of the tutorial is. The other files are there to support the tutorial and make it robust and usable across many environments.
 
-To help you get started, we have created a template for new tutorials, complete with all of the above requirements.
-
-
 > ### {% icon hands_on %} Hands-on: Copy the required files
 >
-> 1. Copy the `templates/tutorial/tutorial1` directory to `topics/sequence-analysis/tutorials`
-> 2. Rename the copied `tutorial1` directory to `similarity-search`
+> 1. Run (by adpating the information between the quotes)
+>
+>    ```
+>    $ python bin/setup_training_content.py \
+>             --topic_name "my-topic" \
+>             --tutorial_name "my-new-tutorial" \
+>             --tutorial_title "Title of the tutorial" \
+>             --hands_on
+>    ```
+>
+> 2. Check that a new directory (with your tutorial name) has been generated in the topic folder
+> 3. Make sure that Jekyll is running
+>
+>    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}/topics/contributing/tutorials/running-jekyll/tutorial.html)
+>
+> 2. Check if the tutorial has been correctly added at [http://localhost:4000/training-material/](http://localhost:4000/training-material/)
 {: .hands_on}
 
 # Add metadata
 
-To make the topic aware of this new tutorial, you need to add some metadata about the tutorial in the topic's `metadata.yaml` file. This metadata will include some technological and pedagogical support for the training. Once this is filled out, you can run the Galaxy Training material website locally to check that the new tutorial is accessible.
+To make the topic aware of this new tutorial, some metadata about the tutorial has been added in the topic's `metadata.yaml` file. This metadata includes some technological and pedagogical support for the training. Once this is filled out, you can run the Galaxy Training material website locally to check that the new tutorial is accessible.
 
 > ### {% icon hands_on %} Hands-on: Add metadata
 >
 > 1. Check out and run our [metadata tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-metadata/tutorial.html)
-> 2. (Optional) Build the website locally by following the [Jekyll tutorial]({{ site.baseurl }}/topics/contributing/tutorials/running-jekyll/tutorial.html) and check that the tutorial is referenced in the topic page
 {: .hands_on}
 
 # A toy dataset

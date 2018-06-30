@@ -28,7 +28,7 @@ To make a tutorial appear within a topic, we need to add metadata for the tutori
 > ### {% icon hands_on %} Hands-on: Fill the basic metadata
 >
 > 1. Open the `metadata.yaml` of `sequence-analysis` topic (`/topics/sequence-analysis/metadata.yaml`)
-> 2. Add in the `material` section the new tutorial:
+> 2. Update the tutorial information in the `material` section:
 >
 >     ```
 >     -
