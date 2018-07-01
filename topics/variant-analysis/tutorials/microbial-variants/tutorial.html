@@ -310,7 +310,7 @@
 
 <p>Imagine that you have been asked to find the differences between a sample that has been sequenced and a known genome. For example: You have a new sample from a patient and you want to see if it has any differences from a well known reference genome of the same species. Typically, you would have a couple of fastq read files sent back to you from the sequencing provider and either an annotated or non annotated reference genome.</p>
 
-<p>In this tutorial, we will use the tool “Snippy” (link to Snippy is <a href="https://github.com/tseemann/snippy">here</a>) to find high confidence differences (indels or SNPs) between our known genome and our reads. Snippy uses one tool to align the reads to the reference genome, and another tool to decide (“call”) if any of the resulting discrepancies are real variants or technical artifacts that can be ignored. Finally, Snippy uses another tool to check what effect these differences have on the predicted genes - truncation, frame shift or if the changes are synonomous.</p>
+<p>In this tutorial, we will use the tool “Snippy” (link to Snippy is <a href="https://github.com/tseemann/snippy">here</a>) to find high confidence differences (indels or SNPs) between our known genome and our reads. Snippy uses one tool to align the reads to the reference genome, and another tool to decide (“call”) if any of the resulting discrepancies are real variants or technical artifacts that can be ignored. Finally, Snippy uses another tool to check what effect these differences have on the predicted genes - truncation, frame shift or if the changes are synonymous.</p>
 
 <p>For the read alignment (read mapping) step, Snippy uses BWA MEM with a custom set of settings which are very suitable to aligning reads for microbial type data. For the variant calling step, Smippy uses Freebayes with a custom set of settings. snpeff is then used to describe what the predicted changes do in terms of the genes themselves.</p>
 
@@ -334,7 +334,7 @@
 
 <h1 id="get-the-data">Get the data</h1>
 
-<p>The data for today is a subset of a real dataset from a Staphylococcus aureus bacteria.
+<p>The data for today is a subset of a real dataset from a <em>Staphylococcus aureus</em> bacteria.
 We have a closed genome sequence and an annotation for our “wildtype” strain.
 We have used a whole genome shotgun approach to produce a set of short sequence reads on an Illumina DNA sequencing instrument for our mutant strain.</p>
 
@@ -470,7 +470,7 @@ https://zenodo.org/record/582600/files/wildtype.gff
     </tr>
     <tr>
       <td>outdir</td>
-      <td>A tarball of the Snippy output directory for inout into Snippy-core if required</td>
+      <td>A tarball of the Snippy output directory for input into Snippy-core if required</td>
     </tr>
   </tbody>
 </table>
@@ -557,7 +557,7 @@ Wildtype    190866  del GTT GT  GT:18 GTT:0 CDS -   28/1356 10/451  frameshift_v
             </li>
             <li><strong>Track 2 - variants</strong>: Click on <code class="highlighter-rouge">Insert Track Group</code> and fill it with
               <ul>
-                <li>“Track Cateogry” to <code class="highlighter-rouge">variants</code></li>
+                <li>“Track Category” to <code class="highlighter-rouge">variants</code></li>
                 <li>Click on <code class="highlighter-rouge">Insert Annotation Track</code> and fill it with
                   <ul>
                     <li>“Track Type” to <code class="highlighter-rouge">GFF/GFF3/BED/GBK Features</code></li>
@@ -569,7 +569,7 @@ Wildtype    190866  del GTT GT  GT:18 GTT:0 CDS -   28/1356 10/451  frameshift_v
             </li>
             <li><strong>Track 3 - annotated reference</strong>: Click on <code class="highlighter-rouge">Insert Track Group</code> and fill it with
               <ul>
-                <li>“Track Cateogry” to <code class="highlighter-rouge">annotated reference</code></li>
+                <li>“Track Category” to <code class="highlighter-rouge">annotated reference</code></li>
                 <li>Click on <code class="highlighter-rouge">Insert Annotation Track</code> and fill it with
                   <ul>
                     <li>“Track Type” to <code class="highlighter-rouge">GFF/GFF3/BED/GBK Features</code></li>
