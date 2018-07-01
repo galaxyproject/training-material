@@ -44,8 +44,41 @@ The first step of EWAS data anylalysis is raw methylation data loading (intensit
 > ### {% icon hands_on %} Hands-on: Data Loading
 >
 > 1. Create a new history for this tutorial and give it a proper name
-> 2. Import Grn and Red .IDAT files from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y)
-> 3. Run **minfi read450k**  {% icon tool %} with red and green .IDAT files i.e. red files: `GSM1588704_8795207135_R01C02_Red.idat`, `GSM1588705_8795207119_R05C02_Red.idat`, `GSM1588706_8795207135_R02C02_Red.idat`, `GSM1588707_8795207119_R06C02_Red.idat` and green files: `GSM1588704_8795207135_R01C02_Grn.idat`, `GSM1588705_8795207119_R05C02_Grn.idat`, `GSM1588706_8795207135_R02C02_Grn.idat`, `GSM1588707_8795207119_R06C02_Grn.idat`
+> 2. Import the following IDAT files from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y)
+> `GSM1588704_8795207135_R01C02_Red.idat`, `GSM1588705_8795207119_R05C02_Red.idat`, `GSM1588706_8795207135_R02C02_Red.idat`, `GSM1588707_8795207119_R06C02_Red.idat`
+> ,`GSM1588704_8795207135_R01C02_Grn.idat`, `GSM1588705_8795207119_R05C02_Grn.idat`, `GSM1588706_8795207135_R02C02_Grn.idat`, `GSM1588707_8795207119_R06C02_Grn.idat`
+>
+>   > ### {% icon tip %} Tip: Importing data via links
+>   >
+>   > * Copy the link location
+>   > * Open the Galaxy Upload Manager
+>   > * Select **Paste/Fetch Data**
+>   > * Paste the link into the text field
+>   > * Press **Start**    
+>   {: .tip}
+>   
+>  
+>      
+>   You can directly paste:
+>
+>   ```
+>   https://zenodo.org/record/1185122/files/GSM1588704_8795207135_R01C02_Red.idat
+>   https://zenodo.org/record/1185122/files/GSM1588705_8795207119_R05C02_Red.idat
+>   https://zenodo.org/record/1185122/files/GSM1588706_8795207135_R02C02_Red.idat
+>   https://zenodo.org/record/1185122/files/GSM1588707_8795207119_R06C02_Red.idat
+>   https://zenodo.org/record/1185122/files/GSM1588704_8795207135_R01C02_Grn.idat
+>   https://zenodo.org/record/1185122/files/GSM1588705_8795207119_R05C02_Grn.idat
+>   https://zenodo.org/record/1185122/files/GSM1588706_8795207135_R02C02_Grn.idat
+>   https://zenodo.org/record/1185122/files/GSM1588707_8795207119_R06C02_Grn.idat
+>   ```
+>
+>
+>
+> 3. Run **minfi read450k**  {% icon tool %} with the following parameteres for input files: 
+>     - *"red files"*: `GSM1588704_8795207135_R01C02_Red.idat`, `GSM1588705_8795207119_R05C02_Red.idat`,`GSM1588706_8795207135_R02C02_Red.idat`,
+> ,`GSM1588707_8795207119_R06C02_Red.idat`
+>     - *"green files"*: `GSM1588704_8795207135_R01C02_Grn.idat`,`GSM1588705_8795207119_R05C02_Grn.idat`, `GSM1588706_8795207135_R02C02_Grn.idat`,
+> ,`GSM1588707_8795207119_R06C02_Grn.idat`
 > 4. Inspect generated set of data
 {: .hands_on}
 
@@ -67,11 +100,11 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 > 2. Run **minfi qc** {% icon tool %} to estimate sample-specific quality control
 > 3. Convert methylation data from the `MethylSet` , to ratios with **minfi rset** {% icon tool %}
 > 4. Then map ratio data to the genome using **minfi maptogenome** {% icon tool %} tool  
+>
 > > ### {% icon tip %} Tip: Preprocess and Normalize data
-> >
 > > If your files require normalisation, you might prefer to use other of preprocessing tools provided in EWAS suite i.e. **minfi ppfun** {% icon tool %} or **minfi ppquantile**  {% icon tool %} look for recomendation at (ref).
 > >
->    {: .tip}
+> {: .tip}
 > 
 {: .hands_on}
 
@@ -88,30 +121,34 @@ The main goal of the EWAS suite is to simplify the way differentially methylated
 > ### {% icon hands_on %} Hands-on: DMPs and DMRs Identification
 >
 > 1. Import `phenotypeTable.txt` from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y)
-> 2. Run **minfi dmp** {% icon tool %} with 
->    -  `GenomicRatioSet` from step4 and `phenotypeTable.txt`
->   -  Phenotype Type = `categorical`
->   -  qCutoff Size = `0.5` (DMPs with an FDR q-value greater than this will not be returned)
->   -  Variance Shrinkage =` TRUE` (is recommended when sample sizes are small <10)
+> 2. Run **minfi dmp** {% icon tool %} with the following parameters
+>    - *"Input set"*:`GenomicRatioSet`
+>    - *"Phenotype Table"*:`phenotypeTable.txt`
+>    - *"Phenotype Type"*:`categorical`
+>    - *"qCutoff Size"*:`0.5` (DMPs with an FDR q-value greater than this will not be returned)
+>    - *"Variance Shrinkage"*:` TRUE` (is recommended when sample sizes are small <10)
 > 3. Run **minfi dmr** {% icon tool %} 
->   -  `GenomicRatioSet` from step4 and phenotypeTable.txt
->   -  factor1 = `sensitive` factor2 = `resistant` (factor1 vs factor2)
->   -  maxGap Size = `250`
->   - coef Size =`2`
->   - Cutoff Size = `0.1`
->   - nullMethod = `permutation`
->   - verbose = `TRUE`
+>    - *"Input set"*:`GenomicRatioSet`
+>    - *"Phenotype Table"*:`phenotypeTable.txt`
+>    - *"factor1"*: `sensitive`
+>    - *"factor2"*: `resistant` 
+>    - *"maxGap Size"*:`250`
+>    - *"coef Size"*:`2`
+>    - *"Cutoff Size"*:`0.1`
+>    - *"nullMethod"*:`permutation`
+>    - *"verbose"*:`TRUE`
 > 4. Visualize `Differentially Methylated Regions` with `UCSC`
 >  - Click on the **minfi dmr**  {% icon tool %} output in your history to expand it
 >  - Click on the pencil button displayed in your dataset in the history set Database/Build `Human Feb. 2009 (GRCh37/hg19) (hg19)`
 >  - Press **Save**
 >  - Towards the bottom of the history item, find the line starting with `display at UCSC`
 >  - This will launch UCSC Genome Browser with your Custom Track
-> > ### {% icon tip %} Tip: Phenotype table
-> >
-> > Phenotype table can be in diffrent size with diffrent arguments only second column is required to contain phenotype covariate information for each sample. 
-> {: .tip}
+> 
+>  > ### {% icon tip %} Tip: Phenotype table
+>  > Phenotype table can be in diffrent size with diffrent arguments only second column is required to contain phenotype covariate information for each sample. 
+>  {: .tip}
 >
+> ![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
 {: .hands_on}
   
 > ### {% icon question %} Questions
@@ -120,33 +157,33 @@ The main goal of the EWAS suite is to simplify the way differentially methylated
 > > Phenotype covariate is the set of observable characteristics of an individual resulting from the gene-environment interactions.</li>
 > {: .solution}
 {: .question}
-> ![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
+
 # Annotation and Visualization
 In addition to downstream analysis users can annotate the differentially methylated loci to the promoter regions of genes with gene function description, and relationships between these concepts.
 
 > ### {% icon hands_on %} Hands-on:  Annotate Differentially Methylated Position
-> 1. Run **chipeakanno annopeaks** {% icon tool %} with
-> - `Differentially Methylated Positions` from Step 4
-> - bindingType: `StartSite`
-> - promoter region defined as upstream bindingRegionStart:`-5000` 
-> - downstream 3000 from TSS (transcription start sites) bindingRegionEnd:`3000`
-> - Additional Column of Score:`8` optional value if it is required 
-> 2. **Cut** {% icon tool %}  "gene_name" Column from Table of Annotated Peaks to get List of Genes
-> - Cut columns: `c16`
-> - Delimited by: `Tab`
-> 3. **Remove beginning** {% icon tool %} of `Gene List`
-> - Remove first: `1`
-> 4. Convert List of Genes to List of entrez ID using **clusterProfiler bitr** {% icon tool %}
-> - Input Type Gene ID: `SYMBOL`
-> - Output Type Gene ID: `ENTREZID`
-> 5. Run GO Enrichment Analysis of a `gene set` with **clusterProfiler go** {% icon tool %}
+> 1. Run **chipeakanno annopeaks** {% icon tool %}  with the following parameters
+> - *"Differentialy methylated data"*: `use output of Differentially Methylated Positions analysis from Step 4`  
+> - *"bindingType"*: `StartSite`
+> - *"bindingRegionStart"*:`-5000` 
+> - *"bindingRegionEnd"*:`3000`
+> - *"Additional Column of Score"*:`8` position of column of score optional value if it is required 
+> 2. **Cut** {% icon tool %}  "gene_name" Column from Table of Annotated Peaks to get List of Genes with the following parameters
+> - *"Cut columns"*: `c16`
+> - *"Delimited by"*: `Tab`
+> 3. **Remove beginning** {% icon tool %} of `Gene List` with the following parameter
+> - *"Remove first"*: `1`
+> 4. Convert List of Genes to List of entrez ID using **clusterProfiler bitr** {% icon tool %} with the following parameters
+> - *"Input Type Gene ID"*: `SYMBOL`
+> - *"Output Type Gene ID"*: `ENTREZID`
+> 5. Run GO Enrichment Analysis  with **clusterProfiler go** {% icon tool %} using output of step 4
 >
 > > ### {% icon tip %} Tip: Biological id translator
 > >  No matter what ID we need, this tool allows various conversions suitable for different databases and annotations.
->    {: .tip}
+> {: .tip}
 {: .hands_on}
 
->    ![Functional annotations](../../images/funcann.jpg, "Results of GO enrichments analysis for DMPs)
+![Functional annotations](../../images/funcann.jpg "Results of GO enrichments analysis for DMPs")
 
 
 
