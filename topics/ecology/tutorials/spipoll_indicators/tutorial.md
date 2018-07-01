@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: sdm
-tutorial_name: species distribution modeling
+topic_name: chip-seq
+tutorial_name: estrogen-receptor-binding-site-identification
 ---
 
 # Introduction

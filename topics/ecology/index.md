@@ -1,4 +1,4 @@
 ---
 layout: topic
-topic_name: chip-seq
+topic_name: ecology
 ---
