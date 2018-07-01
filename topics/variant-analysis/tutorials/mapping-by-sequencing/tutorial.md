@@ -68,7 +68,7 @@ two types of variants (diamonds):
 
 For mapping the causative mutation, additional variants (blue open diamonds)
 are introduced through a cross to a mapping strain and F2 progeny is selected
-for the mutant phenotype. While each individuum in the F2 generation carries
+for the mutant phenotype. While each individual in the F2 generation carries
 its uniquely recombined variant pattern (3 possible outcomes for the diploid
 genome are shown in the figure), this phenotypic selection will work against
 mapping strain variants in the vicinity (yellow boxes) of the causative
