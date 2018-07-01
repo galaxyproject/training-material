@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: galaxy-basics
-tutorial_name: galaxy-intro-history
+topic_name: galaxy-ui
+tutorial_name: history
 ---
 
 When data is uploaded from your computer or analysis is done on existing data using Galaxy, each output from those steps
