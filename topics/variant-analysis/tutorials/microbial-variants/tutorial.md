@@ -11,7 +11,7 @@ Variant calling is the process of identifying differences between two genome sam
 
 Imagine that you have been asked to find the differences between a sample that has been sequenced and a known genome. For example: You have a new sample from a patient and you want to see if it has any differences from a well known reference genome of the same species. Typically, you would have a couple of fastq read files sent back to you from the sequencing provider and either an annotated or non annotated reference genome.
 
-In this tutorial, we will use the tool “Snippy” (link to Snippy is [here](https://github.com/tseemann/snippy)) to find high confidence differences (indels or SNPs) between our known genome and our reads. Snippy uses one tool to align the reads to the reference genome, and another tool to decide (“call”) if any of the resulting discrepancies are real variants or technical artifacts that can be ignored. Finally, Snippy uses another tool to check what effect these differences have on the predicted genes - truncation, frame shift or if the changes are synonomous.
+In this tutorial, we will use the tool “Snippy” (link to Snippy is [here](https://github.com/tseemann/snippy)) to find high confidence differences (indels or SNPs) between our known genome and our reads. Snippy uses one tool to align the reads to the reference genome, and another tool to decide (“call”) if any of the resulting discrepancies are real variants or technical artifacts that can be ignored. Finally, Snippy uses another tool to check what effect these differences have on the predicted genes - truncation, frame shift or if the changes are synonymous.
 
 For the read alignment (read mapping) step, Snippy uses BWA MEM with a custom set of settings which are very suitable to aligning reads for microbial type data. For the variant calling step, Smippy uses Freebayes with a custom set of settings. snpeff is then used to describe what the predicted changes do in terms of the genes themselves.
 
@@ -30,7 +30,7 @@ More can be read about SNP calling [here](https://en.wikipedia.org/wiki/SNV_call
 
 # Get the data
 
-The data for today is a subset of a real dataset from a Staphylococcus aureus bacteria.
+The data for today is a subset of a real dataset from a *Staphylococcus aureus* bacteria.
 We have a closed genome sequence and an annotation for our "wildtype" strain.
 We have used a whole genome shotgun approach to produce a set of short sequence reads on an Illumina DNA sequencing instrument for our mutant strain.
 
@@ -113,7 +113,7 @@ aligned fasta | A version of the reference but with - at position with depth=0 a
 consensus fasta | A version of the reference genome with all variants instantiated
 mapping depth | A table of the mapping depth
 mapped reads bam  | A BAM file containing all of the mapped reads
-outdir  | A tarball of the Snippy output directory for inout into Snippy-core if required
+outdir  | A tarball of the Snippy output directory for input into Snippy-core if required
 
 We will now have a look at the contents of the SNP table file (`snippy on data XX, data XX and data XX table`):
 
@@ -179,13 +179,13 @@ We could go through all of the variants like this and read them out of a text ta
 >               - "Autogenerate SNP Track" to `Yes`
 >               - "Track Visibility" to `On for new users`
 >       - **Track 2 - variants**: Click on `Insert Track Group` and fill it with
->           - "Track Cateogry" to `variants`
+>           - "Track Category" to `variants`
 >           - Click on `Insert Annotation Track` and fill it with
 >               - "Track Type" to `GFF/GFF3/BED/GBK Features`
 >               - "GFF/GFF3/BED Track Data" to `snippy snps gff file`
 >               - "Track Visibility" to `On for new users`
 >       - **Track 3 - annotated reference**: Click on `Insert Track Group` and fill it with
->           - "Track Cateogry" to `annotated reference`
+>           - "Track Category" to `annotated reference`
 >           - Click on `Insert Annotation Track` and fill it with
 >               - "Track Type" to `GFF/GFF3/BED/GBK Features`
 >               - "GFF/GFF3/BED Track Data" to `wildtype.gff`
