@@ -1,4 +1,4 @@
 ---
 layout: topic
-topic_name: templates
+topic_name: your_topic
 ---

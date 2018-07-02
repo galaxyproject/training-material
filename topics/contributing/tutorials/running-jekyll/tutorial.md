@@ -33,10 +33,10 @@ This step has to be done once.
 > 1. Navigate to the `training-material/` folder with `cd`
 > 3. Set up the conda environment
 >     
->     It will install some needed tools (ruby, nodejs, etc) in a protected environment, without interferring with the existing tools or versions.
+>     It will install some needed tools (ruby, nodejs, etc) in a protected environment, without interfering with the existing tools or versions.
 >
 >     1. Install conda (if not already installed): `make install-conda`
->     2. Add conda to the path: `export PATH="$HOME/miniconda/bin:$PATH"`
+>     2. Add conda to the path: `export PATH="$HOME/miniconda3/bin:$PATH"`
 >     3. Create conda environment: `make create-env`
 > 
 > 4. Activate the conda environment: `source activate galaxy_training_material`
@@ -62,7 +62,7 @@ Once Jekyll and its modules are installed in our conda environment, we can check
 
 With `make serve`, a local Jekyll server will run in background. It will check the changes and regenerate the website accordingly. You may need to reload the page to see the changes (and sometimes to wait 1-2 minutes).
 
-# Stoping the server
+# Stopping the server
 
 Once you are done, you can stop the server and cleaning your repository.
 

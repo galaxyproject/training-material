@@ -65,18 +65,18 @@ layout: base
                         {% endif %}
                     {% endif %}
 
-                    {% if topic.docker_image and topic.docker_image != "" or instances[topic.name].supported and instances[topic.name]['tutorials'][tutorial.name].supported %}
+                    {% if topic.docker_image or instances[topic.name].supported and instances[topic.name]['tutorials'][tutorial.name].supported %}
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
                                 {% icon instances %} Galaxy Instances
                             </a>
                             <div class="dropdown-menu">
-                                {% if topic.docker_image and topic.docker_image != "" %}
+                                {% if topic.docker_image %}
                                     <a class="dropdown-item" href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/docker" title="Docker image for this tutorial">
                                         {% icon docker_image %} Docker image
                                     </a>
                                 {% endif %}
-                                {% if topic.docker_image and topic.docker_image != "" and instances[topic.name].supported and instances[topic.name]['tutorials'][tutorial.name].supported %}
+                                {% if topic.docker_image and instances[topic.name].supported and instances[topic.name]['tutorials'][tutorial.name].supported %}
                                     <div class="dropdown-divider"></div>
                                 {% endif %}
                                 {% if instances[topic.name]['tutorials'][tutorial.name].supported %}

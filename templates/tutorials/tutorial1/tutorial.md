@@ -11,6 +11,8 @@ tutorial_name: tutorial1
 
 General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
 
+**Please follow our [tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+
 > ### Agenda
 >
 > In this tutorial, we will deal with:
@@ -76,9 +78,16 @@ Some blabla
 >
 > 1. Step1
 > 2. **My Tool** {% icon tool %} with the following parameters
->   - "param1" to the file `myfile`
->   - "param2" to `42`
->   - "param3" to `Yes`
+>   - *"param1"*: the file `myfile`
+>   - *"param2"*: `42`
+>   - *"param3"*: `Yes`
+>
+> 3. **My Tool** {% icon tool %} with the following parameters
+>   - {% icon param-text %} *"My text parameter"*: `my value`
+>   - {% icon param-file %} *"My input file"*: `my file`
+>   - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
+>   - {% icon param-select %} *"My select menu"*: `my choice`
+>   - {% icon param-check %} *"My check box"*: `yes`
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -113,6 +122,7 @@ Short introduction about this subpart.
 {: .comment}
 
 
+
 > ### {% icon details %} Background: More details on the ....
 >
 > Add more details in Markdown. By default the box is collapsed. And is expanded when clicked
@@ -123,4 +133,4 @@ Short introduction about this subpart.
 # Conclusion
 {:.no_toc}
 
-Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.
+Conclusion about the technical key points. And then relation between the techniques and the biological question to end with a global view.

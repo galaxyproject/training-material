@@ -25,7 +25,7 @@ endif
 default: help
 
 install-conda: ## install Miniconda
-	wget $(MINICONDA_URL) -O miniconda.sh
+	curl $(MINICONDA_URL) -o miniconda.sh
 	bash miniconda.sh -b
 .PHONY: install-conda
 
@@ -130,7 +130,7 @@ pdf: detached-serve ## generate the PDF of the tutorials and slides
 	pkill -f jekyll
 .PHONY: pdf
 
-annotate:
+annotate: ## annotate the tutorials with usable Galaxy instances and generate badges
 	python bin/add_galaxy_instance_annotations.py
 	python bin/add_galaxy_instance_badges.py
 .PHONY: annotate

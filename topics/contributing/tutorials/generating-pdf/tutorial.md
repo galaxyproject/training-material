@@ -24,7 +24,7 @@ To generate the PDFs, a command `make pdf` is given. This command:
 
 - Launches a detached Jekyll server to serve the website
 - Generates the PDFs of the tutorials by calling Chrome via command line
-- Generates the PDFs of the slide decks by calling decktage
+- Generates the PDFs of the slide decks by calling decktape
 
 > ### {% icon hands_on %} Hands-on: Checking the website generation locally
 >
