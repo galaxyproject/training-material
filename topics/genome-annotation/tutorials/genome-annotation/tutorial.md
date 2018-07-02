@@ -169,7 +169,7 @@ This file will be the input for more detailed analysis:
 
 ![BLAST programs](../../images/blastprograms.png)
 
-![BLAST databases](../../images/blast%20database.png)
+![BLAST databases](../../images/blast_database.png)
 
 > ### {% icon tip %} Tip:
 >
@@ -224,4 +224,4 @@ When you have a whole genome **antiSMASH** analysis, your result may look like t
 
 At the end, you can extract a reproducible workflow out of your history. The workflow should look like this:
 
-![GenomeAnnotation Workflow](../../images/work%20flow_Screenshot%20from%202015-06-23%2009-33-23.png)
+![GenomeAnnotation Workflow](../../images/work_flow_Screenshot_from_2015-06-23_09-33-23.png)
