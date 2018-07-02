@@ -108,7 +108,7 @@ For quality control we will use similar tools as described in [NGS-QC tutorial](
 >       > You can select several files by keeping the CTRL (or COMMAND) key pressed and clicking on the files of interest
 >       {: .tip}
 >
-> 2. Inspect the webpage for `GSM461177_1` sample
+> 2. Inspect the webpage output from FastQC for the `GSM461177` sample
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -122,56 +122,55 @@ For quality control we will use similar tools as described in [NGS-QC tutorial](
 >    >
 >    {: .question}
 >
-> 3. **MultiQC** {% icon tool %}: Aggregate the FastQC reports with
+> 3. **MultiQC** {% icon tool %}: Run MultiQC to aggregate the FastQC reports
 >      - "Which tool was used generate logs?" to `FastQC`
 >      - "Type of FastQC output?" to `Raw data`
 >      - "FastQC output" to the generated `Raw data` files (multiple datasets)
 >
-> 4. Inspect the webpage output from MultiQC
+> 4. Inspect the webpage output from MultiQC for each FASTQ
 >
 >    > ### {% icon question %} Questions
 >    >
->    > What is the quality for the sequences for the different files?
+>    > What do you think of the quality of the sequences?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > Everything seems ok for 3 of the files. But for GSM461180_2, the quality seems to decrease quite a lot at the end of the sequences
+>    > > Everything seems ok for 3 of the files but for GSM461180_2 the quality decreases quite a lot at the end of the sequences
 >    > >
 >    > {: .solution}
 >    >
 >    {: .question}
 >
-> 2. **Trim Galore** {% icon tool %}: Treat for the quality of sequences by running Trim Galore! with
+> 2. **Trim Galore** {% icon tool %}: Trim low quality sequences by running Trim Galore! with
 >      - "Is this library paired- or single-end?" to `Paired-end`
 >      - First "Reads in FASTQ format" to both `_1` fastqsanger datasets (multiple datasets)
 >      - Second "Reads in FASTQ format" to both `_2` fastqsanger datasets (multiple datasets)
 >
 >    > ### {% icon question %} Questions
 >    >
->    > Why do we run Trim Galore! only once on a paired-end dataset and not twice, once for each dataset?
+>    > Why do we run Trim Galore only once on a paired-end dataset and not twice, once for each dataset?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > Trim Galore can remove sequences if they become too short during the trimming process. For paired-end files Trim Galore! removes entire sequence pairs if one (or both) of the two reads became shorter than the set length cutoff. Reads of a read-pair that are longer than a given threshold but for which the partner read has become too short can optionally be written out to single-end files. This ensures that the information of a read pair is not lost entirely if only one read is of good quality.
+>    > > Trim Galore can remove sequences if they become too short during the trimming process. For paired-end files Trim Galore removes entire sequence pairs if one (or both) of the two reads became shorter than the set length cutoff. Reads of a read-pair that are longer than a given threshold but for which the partner read has become too short can optionally be written out to single-end files. This ensures that the information of a read pair is not lost entirely if only one read is of good quality.
 >    > >
 >    > {: .solution}
->    >
 >    {: .question}
 >
 {: .hands_on}
 
-As the genome of *Drosophila melanogaster* is known and assembled, we can use this information and map the sequences on this genome to identify the effects of *Pasilla* gene depletion on splicing events.
+As the genome of *Drosophila melanogaster* is known and assembled, we can use this information and map the sequences to this genome to identify the effects of the *Pasilla* gene depletion on splicing events.
 
 # Mapping
 
-To make sense of the reads, we need to determine to which genes they belong. The first step is to determine their positions within the *Drosophila melanogaster* genome. This process is known as aligning or 'mapping' the reads to a reference.
+To make sense of the reads we need to determine to which genes they belong. The first step is to determine their positions within the *Drosophila melanogaster* genome. This process is known as aligning or 'mapping' the reads to a reference.
 
 > ### {% icon comment %} Comment
 >
 > Do you want to learn more about the principles behind mapping? Follow our [training]({{site.baseurl}}/topics/sequence-analysis/)
 {: .comment}
 
-Because in the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking introns, they cannot be simply mapped back to the genome as we normally do for DNA data. Instead the reads must be separated into two categories:
+With eukaryotic transcriptomes most reads originate from processed mRNAs lacking introns, therefore they cannot be simply mapped back to the genome as we normally do for DNA data. Instead the reads must be separated into two categories:
 
 - Reads that map entirely within exons
 - Reads that cannot be mapped within an exon across their entire length because they span two or more exons
@@ -183,9 +182,9 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 ![Splice-aware alignment](../../images/splice_aware_alignment.png "Principle of spliced mappers: (1) identification of the reads spanning a single exon, (2) identification of the splicing junctions on the unmapped reads")
 
 > ### {% icon details %} More details on the difference spliced mappers
->
-> Several spliced mappers have been developed over the year specially with the explosion of RNA-seq data.
->
+> 
+> Several spliced mappers have been developed over the year with the explosion of RNA-seq data.
+> 
 > [TopHat](https://ccb.jhu.edu/software/tophat/index.shtml) ([Trapnell et al, Bioinformatics, 2009](https://academic.oup.com/bioinformatics/article/25/9/1105/203994)) was one of the first tools designed specifically to address this problem. In TopHat reads are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that initially unmapped (IUM). "Piles" of reads representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions.
 >
 >    ![TopHat](../../images/tophat.png "TopHat (Trapnell et al, Bioinformatics, 2009)")
@@ -197,14 +196,14 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 > To further optimize and speed up spliced read alignment Kim et al ([Nat Methods, 2015](https://www.nature.com/articles/nmeth.3317)) developed [HISAT](https://ccb.jhu.edu/software/hisat2/index.shtml). It uses a set of [FM-indices](https://en.wikipedia.org/wiki/FM-index) consisting one global genome-wide index and a collection of ~48,000 local overlapping 42 kb indices (~55,000 56 kb indices in HISAT2). This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:
 >
 >    ![Hierarchical Graph FM index in HISAT/HISAT2](../../images/hisat.png "Hierarchical Graph FM index in HiSat/HiSat2 (Kim et al, Nat Methods, 2015)")
->
-> A part of the read (blue arrow) is first mapped to the genome using the global FM index. The HISAT then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (**a**) it succeeds and this read aligned as it completely resides within an exon. In (**b**) the extension hits a mismatch. Now HISAT takes advantage of the local FM index overlapping this location to find the appropriate mapping for the remainder of this read (green arrow). The (**c**) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow).
->
-> [STAR aligner](https://github.com/alexdobin/STAR) is a fast alternative for mapping RNAseq reads against genome utilizing uncompressed [suffix array](https://en.wikipedia.org/wiki/Suffix_array). It operates in two stages [Dobin et al, Bioinformatics, 2013](https://academic.oup.com/bioinformatics/article/29/1/15/272537). In the first stage it performs seed search:
+> 
+> A part of the read (blue arrow) is first mapped to the genome using the global FM index. HISAT then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (**a**) it succeeds and this read is aligned as it completely resides within an exon. In (**b**) the extension hits a mismatch. Now HISAT takes advantage of the local FM index overlapping this location to find the appropriate mapping for the remainder of this read (green arrow). The (**c**) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow).
+> 
+> [STAR aligner](https://github.com/alexdobin/STAR) is a fast alternative for mapping RNA-seq reads against a reference genome utilizing an uncompressed [suffix array](https://en.wikipedia.org/wiki/Suffix_array). It operates in two stages [Dobin et al, Bioinformatics, 2013](https://academic.oup.com/bioinformatics/article/29/1/15/272537). In the first stage it performs seed search:
 >
 >    ![STAR's seed search](../../images/star.png "STAR's seed search (Dobin et al, Bioinformatics, 2013)")
 >
-> Here a read is split between two consecutive exons. STAR starts to look for a maximum mappable prefix (MMP) from the beginning of the read until it can no longer match continuously. After this point it start to MMP for the unmatched portion of the read (**a**). In the case of mismatches (**b**) and unalignable regions (**c**) MMPs serve as anchors from which to extend alignments</p>
+> Here a read is split between two consecutive exons. STAR starts to look for a maximum mappable prefix (MMP) from the beginning of the read until it can no longer match continuously. After this point it start to look for a MMP for the unmatched portion of the read (**a**). In the case of mismatches (**b**) and unalignable regions (**c**) MMPs serve as anchors from which to extend alignments</p>
 >
 > At the second stage STAR stitches MMPs to generate read-level alignments that (contrary to MMPs) can contain mismatches and indels. A scoring scheme is used to evaluate and prioritize stitching combinations and to evaluate reads that map to multiple locations. STAR is extremely fast but requires a substantial amount of RAM to run efficiently.
 >
@@ -216,9 +215,9 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using STAR.
 
 > ### {% icon hands_on %} Hands-on: Spliced mapping
 >
-> 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDGP6.87.gtf`) from the shared data library or from [Zenodo](https://doi.org/10.5281/zenodo.1185122) into your current Galaxy history
+> 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDGP6.87.gtf`) from the Shared Data library if available or from [Zenodo](https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.gtf) into your current Galaxy history
 >    - Rename the dataset if necessary
->    - Verify that the datatype is `gtf` and not `gff`
+>    - Verify that the datatype is `gtf` and not `gff` and that the datatype is `dm6`
 >
 > 2. **RNA STAR** {% icon tool %}: Map your reads on the reference genome with
 >    - "Single-end or paired-end reads" to `Paired-end (as individual datasets)`
@@ -239,7 +238,7 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using STAR.
 >
 >    > ### {% icon question %} Question
 >    >
->    > Which percentage of reads were mapped exactly once for both samples?
+>    > Which percentage of reads mapped exactly once for both samples?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
@@ -259,7 +258,7 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using STAR.
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. a BAM file is the binary version of a SAM file
+> > 1. A Binary Alignment Map (BAM) file is the compressed version of a Sequence Alignment Map (SAM) file. A SAM file is a tab-delimited text file that contains sequence alignment data.
 > > 2. It contains information about the mapping: for each mapped read, the position on the reference genome, the mapping quality, ...
 > >
 > {: .solution}
@@ -267,19 +266,19 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using STAR.
 
 ## Inspection of the mapping results
 
-The BAM file contains information about where the reads are mapped on the reference genome. But it is a binary file and with the information for more than 3 million reads encoded in it, it is difficult to inspect and explore the file.
+The BAM file contains information about where the reads are mapped on the reference genome. But as it is a binary file containing information for many reads (several million for these samples), it is difficult to inspect and explore the file.
 
-A powerful tool to visualize the content of BAM files is the Integrative Genomics Viewer IGV.
+A powerful tool to visualize the content of BAM files is the Integrative Genomics Viewer (IGV).
 
 > ### {% icon hands_on %} Hands-on: Inspection of mapping results
 >
 > 1. **IGV** {% icon tool %}: Visualize the aligned reads for `GSM461177`
->     - Click on the STAR BAM output in your history to expand it.
+>     - Click on the STAR BAM name in your history to expand it.
 >     - Towards the bottom of the history item, find the line starting with `Display with IGV`
 >
 >        This is followed by 2 links:
 >        - option 1: `local`. Select this option if you already have IGV installed on your machine
->        - option 2: `D. melanogaster (dm3)`. This will download and launch IGV on your local machine
+>        - option 2: `D. melanogaster (dm6)`. This will download and launch IGV on your local machine
 >
 >    > ### {% icon comment %} Comments
 >    >
@@ -296,13 +295,13 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 >    >
 >    > ![Screenshot of the IGV view on Chromosome 4](../../images/junction_igv_screenshot.png "Screenshot of IGV on Chromosome 4")
 >    >
->    > 1. Which information does appear on the top in grey?
+>    > 1. What information appears at the top as grey peaks?
 >    > 2. What do the connecting lines between some of the aligned reads indicate?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > 1. The coverage plot: the sum of mapped reads at each position
->    > > 2. They indicate junction events (or splice sites), *i.e.*, reads that are mapped across an intron
+>    > > 2. They indicate junction events (or splice sites), *i.e.* reads that are mapped across an intron
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -311,23 +310,23 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 >
 >    > ### {% icon tip %} Tip: Creation of a Sashimi plot
 >    >
->    > * Right click on the BAM file
->    > * Select **Sashimi Plot** from the context menu
+>    > * Right click on the BAM file (in IGV)
+>    > * Select **Sashimi Plot** from the menu
 >    {: .tip}
 >
 >    > ### {% icon question %} Question
 >    >
 >    > ![Screenshot of a Sashimi plot of Chromosome 4](../../images/star_igv_sashimi.png "Screenshot of a Sashimi plot of Chromosome 4")
 >    >
->    > 1. What does the vertical bar graph represent? And the numbered arcs?
+>    > 1. What does the vertical red bar graph represent? And the arcs with numbers?
 >    > 2. What do the numbers on the arcs mean?
 >    > 3. Why do we observe different stacked groups of blue linked boxes at the bottom?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. The coverage for each alignment track is plotted as a bar graph. Arcs represent observed splice junctions, *i.e.*, reads spanning introns
->    > > 2. The numbers refer to the number of these observed junction reads.
->    > > 3. The groups of linked boxes on the bottom represent different transcripts from a single gene differing in the involved exon.
+>    > > 1. The coverage for each alignment track is plotted as a red bar graph. Arcs represent observed splice junctions, *i.e.*, reads spanning introns
+>    > > 2. The numbers refer to the number of observed junction reads. 
+>    > > 3. The different groups of linked boxes on the bottom represent the different transcripts from the genes at this location, that are present in the GTF file.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -339,23 +338,21 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 >
 {: .hands_on}
 
-After the mapping, we have the information on where the reads are located on the reference genome. We also know how well they were mapped.
-
-The next step in the RNA-Seq data analysis is quantification of expression level of the genomic features (gene, transcript, exons, ...) to be able then to compare several samples for the different expression analysis. The quantification consist into taking each known genomic feature (*e.g.* gene) of the reference genome and then counting how many reads are mapped on this genomic feature. So, in this step, we start with an information per mapped reads to end with an information per genomic feature.
+After the mapping, we have the information on where the reads are located on the reference genome. We also know how well they were mapped. The next step in RNA-Seq data analysis is quantification of the number of reads mapped to genomic features (genes, transcripts, exons, ...).
 
 > ### {% icon comment %} Comment
 >
-> The quantification depends on the definition of the genomic features of the reference genome, and then on the annotations. We strongly recommend you to use an annotation corresponding to the same version of the reference genome you used for the mapping.
+> The quantification depends on both the reference genome (the fasta file) and its associated annotations (the GTF file). It is extremely important to use an annotation file that corresponds to the same version of the reference genome you used for the mapping (e.g. `dm6` here), as the chromosomal coordinates of genes are usually different amongst different reference genome versions.
 {: .comment}
 
-To identify exons that are regulated by the *Pasilla* gene, we need to identify genes and exons which are differentially expressed between samples with PS gene depletion and control samples.
-In this tutorial, we will then analyze the differential gene expression, but also the differential exon usage.
+To identify exons that are regulated by the *Pasilla* gene, we need to identify genes and exons which are differentially expressed between samples with PS gene depletion (treated) and control (untreated) samples.
+In this tutorial, we will then analyze the differential gene expression and also the differential exon usage.
 
-Did mapping exercise work for you? Great! :tada:
+Did the mapping exercise work for you? Great! :tada:
 
 # Analysis of the differential gene expression
 
-We will first investigate the differential gene expression to identify which genes are impacted by the *Pasilla* gene depletion
+We will first investigate the differential gene expression to identify which genes are impacted by the *Pasilla* gene depletion.
 
 ## Count the number of reads per annotated gene
 
@@ -363,34 +360,34 @@ To compare the expression of single genes between different conditions (*e.g.* w
 
 ![Counting the number of reads per annotated gene](../../images/gene_counting.png "Counting the number of reads per annotated gene")
 
-Two main tools could be used for that: [HTSeq-count](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ([Anders et al, Bioinformatics, 2015](https://academic.oup.com/bioinformatics/article/31/2/166/2366196)) or featureCounts ([Liao et al, Bioinformatics, 2014](https://academic.oup.com/bioinformatics/article/31/2/166/2366196)). The second one is considerably faster and requires far less computational resources. We will use it.
+Two main tools could be used for that: [HTSeq-count](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ([Anders et al, Bioinformatics, 2015](https://academic.oup.com/bioinformatics/article/31/2/166/2366196)) or featureCounts ([Liao et al, Bioinformatics, 2014](https://academic.oup.com/bioinformatics/article/31/2/166/2366196)). FeatureCounts is considerably faster and requires far less computational resources so we will use it here.
 
-In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be given to featureCounts: for example the strandness...
+In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be given to featureCounts: for example the strandness.
 
 ### Estimation of the strandness
 
-RNAs that are typically targeted in RNAseq experiments are single stranded (*e.g.*, mRNAs) and thus have polarity (5' and 3' ends that are functionally distinct):
+RNAs that are typically targeted in RNA-seq experiments are single stranded (*e.g.*, mRNAs) and thus have polarity (5' and 3' ends that are functionally distinct):
 
 ![Relationship between DNA and RNA orientation](../../images/dna_rna.png "Relationship between DNA and RNA orientation")
 
-During a typical RNAseq experiment the information about strandedness is lost after both strands of cDNA are synthesized, size selected, and converted into sequencing library. However, this information can be quite useful for the read counting.
+During a typical RNA-seq experiment the information about strandedness is lost after both strands of cDNA are synthesized, size selected, and converted into sequencing library. However, this information can be quite useful for the read counting.
 
-Some library preparation protocols create so called *stranded* RNAseq libraries that preserve the strand information (an excellent overview in [Levin et al, Nat Meth, 2010](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3005310/)). The implication of stranded RNAseq is that you can distinguish whether the reads are derived from forward- or reverse-encoded transcripts:
+Some library preparation protocols create so called *stranded* RNA-seq libraries that preserve the strand information (an excellent overview in [Levin et al, Nat Meth, 2010](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3005310/)). The implication of stranded RNA-seq is that you can distinguish whether the reads are derived from forward or reverse-encoded transcripts:
 
-![Stranded RNAseq data look like this](../../images/stranded_result.png "How do stranded RNAseq data look like (image from GATC Biotech)")
+![Stranded RNAseq data look like this](../../images/stranded_result.png "What does stranded RNA-seq data look like (image from GATC Biotech)")
 
-Depending on the approach and whether one performs single- or paired-end sequencing there are multiple possibilities on how to interpret the results of mapping of these reads onto the genome:
+Depending on the approach, and whether one performs single-end or paired-end sequencing, there are multiple possibilities on how to interpret the results of the mapping of these reads to the genome:
 
-![Effects of RNAseq library types](../../images/rnaseq_library_type.png "Effects of RNAseq library types (adapted from Sailfish documentation)")
+![Effects of RNAseq library types](../../images/rnaseq_library_type.png "Effects of RNA-seq library types (adapted from Sailfish documentation)")
 
-In practice, with Illumina paired-end RNAseq protocols, you are unlikely to uncover many of these possibilities. You will either deal with:
+In practice, with Illumina paired-end RNA-seq protocols you are unlikely to encounter many of these possibilities. You will most likely deal with either:
 
 - Unstranded RNAseq data
-- Stranded RNAseq data produced with Illumina TrueSeq RNAseq kits and [dUTP tagging](https://nar.oxfordjournals.org/content/37/18/e123) (**ISR**)
+- Stranded RNA-seq data produced with - kits and [dUTP tagging](https://nar.oxfordjournals.org/content/37/18/e123) (**ISR**)
 
-This information should usually come with your FASTQ files, ask your sequencing facility! If not, try to find them on the site where you downloaded the data or in the corresponding publication.
+This information should be provided with your FASTQ files, ask your sequencing facility! If not, try to find it on the site where you downloaded the data or in the corresponding publication.
 
-Another option is to estimate these parameters with a tool called **Infer Experiment**. This tool takes the output of your mappings (BAM files), takes a subsample of your reads and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how reads are stranded.
+Another option is to estimate these parameters with a tool called **Infer Experiment** from the [RSeQC](https://www.ncbi.nlm.nih.gov/pubmed/22743226) tool suite. This tool takes the output of your mappings (BAM files), selects a subsample of your reads and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how reads are stranded.
 
 > ### {% icon hands_on %} Hands-on: Determining the library strandness
 >
