@@ -9,14 +9,14 @@ tutorial_name: create-new-tutorial
 
 Galaxy is a great solution to train bioinformatics concepts:
 
-- numerous bioinformatics tools are available (almost 5,000 in the ToolShed)
+- numerous bioinformatics tools are available (almost 6,000 in the ToolShed)
 - it can be used by people without any computer science skills
 - it trains to use technology, outlining available resources and efforts that have made them accessible to researchers
 - it is scalable
 
 In 2016, the Galaxy Training Network decide to set up a new infrastructure for easily delivering Galaxy related training material. The idea was to develop something open, online, based on a community effort, and on top of the Galaxy platform.
 
-We took inspiration from [Software Carpentry](https://software-carpentry.org) and collected everything on a GitHub repository: [https://github.com/galaxyproject/training-material ](https://github.com/galaxyproject/training-material).
+We took inspiration from [Software Carpentry](https://software-carpentry.org) and collected everything on a GitHub repository: [https://github.com/galaxyproject/training-material](https://github.com/galaxyproject/training-material).
 We decided on a structure focusing on tutorials with hands-on activities; fitting both for online self-training but also for workshops. Each tutorial follows the same structure and comes with a virtualised instance allowing you to run the training anywhere you have resources available.
 
 Here you will learn how to create a new tutorial by developing a small tutorial that explains how to use BLAST.
@@ -74,6 +74,28 @@ This can be done online via the GitHub interface or locally on your computer via
 
 # Create the directory for the tutorial
 
+Each training material is related to a topic. All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to exome sequencing analysis). Each topic have the following structure:
+
+```
+├── README.md
+├── metadata.yaml
+├── images
+├── docker
+│   ├── Dockerfile
+├── slides
+│   ├── index.html
+├── tutorials
+│   ├── tutorial1
+│   │   ├── tutorial.md
+│   │   ├── slides.html
+│   │   ├── tools.yaml
+│   │   ├── data-library.yaml
+│   │   ├── workflows
+│   │   │   ├── workflow.ga
+│   │   ├── tours
+│   │   │   ├── tour.yaml
+```
+
 Once the topic has been chosen and you set up your contribution environment, you can create the tutorial. An ideal tutorial in the Galaxy Training Network contains:
 - a tutorial file `tutorial.md` written in Markdown with hands-on
 - an optional slides file `slides.md` in Markdown with slides to support the tutorial
@@ -84,9 +106,9 @@ Once the topic has been chosen and you set up your contribution environment, you
 
 The most important file is the `tutorial.md` where the content of the tutorial is. The other files are there to support the tutorial and make it robust and usable across many environments.
 
-> ### {% icon hands_on %} Hands-on: Copy the required files
+> ### {% icon hands_on %} Hands-on: Create all the required files and folders structures automatically
 >
-> 1. Run (by adpating the information between the quotes)
+> 1. Run (by adapting the information between the quotes)
 >
 >    ```
 >    $ python bin/setup_training_content.py \
@@ -106,7 +128,7 @@ The most important file is the `tutorial.md` where the content of the tutorial i
 
 # Add metadata
 
-To make the topic aware of this new tutorial, some metadata about the tutorial has been added in the topic's `metadata.yaml` file. This metadata includes some technological and pedagogical support for the training. Once this is filled out, you can run the Galaxy Training material website locally to check that the new tutorial is accessible.
+To make the topic aware of this new tutorial, some metadata about the tutorial has been added in the topic's `metadata.yaml` file. This metadata includes some technological and pedagogical support for the training. Once this is filled out, you can run the Galaxy Training Material website locally to check that the new tutorial is accessible.
 
 > ### {% icon hands_on %} Hands-on: Add metadata
 >
@@ -127,7 +149,7 @@ For example, we could generate a small dataset by
     - Extracting one similar sequence found with Blast
     - Searching and extracting 2 other sequences of the same species using the [NCBI Nucleotide database](https://www.ncbi.nlm.nih.gov/nuccore)
 
-We would then develope the tutorial and test it on this toy dataset. Once we were ready to share it, we would upload the datasets on [Zenodo](https://zenodo.org/) to store them on long-term and obtain a dedicated DOI in the [Galaxy training network community](https://zenodo.org/communities/galaxy-training/?page=1&size=20).
+We would then develop the tutorial and test it on this toy dataset. Once we were ready to share it, we would upload the datasets on [Zenodo](https://zenodo.org/) to store them on long-term and obtain a dedicated DOI in the [Galaxy training network community](https://zenodo.org/communities/galaxy-training/?page=1&size=20).
 
 > ### {% icon hands_on %} Hands-on: Upload the dataset to Zenodo
 >
@@ -161,7 +183,7 @@ We would then develope the tutorial and test it on this toy dataset. Once we wer
 
 # Write the tutorial
 
-Now that you have the structure in place, you can the fill the tutorial per se.
+Now that you have the structure in place, you can then fill the tutorial per se.
 
 > ### {% icon hands_on %} Hands-on: Write the tutorial
 >
@@ -174,7 +196,7 @@ Now that you have the structure in place, you can the fill the tutorial per se.
 
 To able to run the tutorial, we need a Galaxy instance where the needed tools and the data are available. We need then to describe the required technical infrastructure.
 
-This description will be used to automatically set up a Docker Galaxy flavour, to set un an existing Galaxy instance and also to test if a public Galaxy instance is able to run the tool.
+This description will be used to automatically set up a Docker Galaxy flavour, to set up an existing Galaxy instance and also to test if a public Galaxy instance is able to run the tool.
 
 The technical support are different files:
 

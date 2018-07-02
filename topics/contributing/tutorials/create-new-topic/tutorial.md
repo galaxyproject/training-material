@@ -107,10 +107,10 @@ In this tutorial, we want to add a new topic called about "my-favorite-topic".
 
 Once the topic name has been chosen, we can create it.
 
-> ### {% icon hands_on %} Hands-on: Copy the required files
+> ### {% icon hands_on %} Hands-on: Create all the required files and folders structures automatically
 >
 > 1. Open a terminal
-> 2. Run (by adpating the information between the quotes)
+> 2. Run (by adapting the information between the quotes)
 >
 >    ```
 >    $ python bin/setup_training_content.py \
