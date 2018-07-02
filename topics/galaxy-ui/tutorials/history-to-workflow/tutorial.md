@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: introduction
-tutorial_name: galaxy-intro-history-to-workflow
+topic_name: galaxy-ui
+tutorial_name: history-to-workflow
 ---
 
 # Create a reusable workflow from a history

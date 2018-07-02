@@ -127,7 +127,7 @@ In this example we will use a downsampled version of *E. coli* C-1 Illumina and 
 >   - Log in into Galaxy
 >   - Create new history (if you are new to Galaxy see [Galaxy 101 tutorial]({{site.baseurl}}/topics/introduction/tutorials/galaxy-intro-101/tutorial.html) first).
 >
-> 2. **Get data** {% icon tool %} as shown below (see [these slides]({{site.baseurl}}/topics/introduction/tutorials/galaxy-intro-get-data/slides.html) for an introduction on how to load data into Galaxy):
+> 2. **Get data** {% icon tool %} as shown below (see [these slides]({{site.baseurl}}/topics/galaxy-data-manipulation/tutorials/get-data/slides.html) for an introduction on how to load data into Galaxy):
 > 
 >       ![Get Data](../../images/get_data.png "Getting data into history starts with clicking <b>Get data</b> button")
 >
