@@ -21,18 +21,10 @@ After a corrected Hi-C matrix is created other tools can be used to visualize it
 >
 > In this tutorial, we will deal with:
 >
-> 1. Data upload
-> 2. Mapping Hi-C data
-> 3. Create a contact matrix
-> 4. Learn how to correct a contact matrix
-> 5. Visualize a contact matrix
-> 6. Compute and visualize topological associating domains (TADs)
+> 1. TOC
 > {:toc}
 >
 {: .agenda}
-
-
-
 
 # Data upload
 
