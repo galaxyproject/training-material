@@ -109,7 +109,7 @@
         <p>Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you’ve got hundreds - it becomes very annoying. In Galaxy we have introduced <strong>Dataset collections</strong> that allow you to combine numerous datasets in a single entity that can be easily manipulated.</p>
 
 <h1 id="getting-data">Getting data</h1>
-<p><a href="https://usegalaxy.org/library/list#folders/Fab5f788f07073c11">Here</a> is a history containing a few datasets we will be practicing with (as always with Galaxy tutorial you can upload your own data and play with it instead of the provided datasets):</p>
+<p><a href="https://usegalaxy.org/library/list#folders/Fab5f788f07073c11">Here</a> is a history containing a few datasets we will be practicing with (as with any Galaxy tutorial, you can upload your own data and play with it instead of the provided datasets):</p>
 
 <ul>
   <li><code class="highlighter-rouge">M117-bl_1</code> - family 117, mother, 1-st (<strong>F</strong>) read from <strong>blood</strong></li>
@@ -130,7 +130,7 @@
 
 <p class="img-responsive"><img src="../../images/grab_data.png" alt="Data in Galaxy library" /></p>
 
-<p>Select all datasets and click <strong>to History</strong> button. This will import all datasets into a history. Follow the direction and will see a screen like this:</p>
+<p>Select all datasets, click <strong>to History</strong> button, and select <strong>as Datasets</strong>. In the pop-up window, either select a history or create a new one. This will import all datasets into a history. The screen will look like this:</p>
 
 <p class="img-responsive"><img src="../../images/manyDatasets.png" alt="manyDatasets" /></p>
 
@@ -148,11 +148,11 @@
 
 <p class="img-responsive"><img src="../../images/collectionCreation.png" alt="collectionCreation" /></p>
 
-<p>In this case Galaxy automatically assigned pairs using the <code class="highlighter-rouge">_1</code> and <code class="highlighter-rouge">_2</code> endings of dataset names. Let’s however pretend that this did not happen. Click on <strong>Unpair all</strong> (highlighted in red in the figure above) link and then on <strong>Clear</strong> link (highlighted in blue in the figure above). The interface will change into its virgin state:</p>
+<p>In this case Galaxy automatically assigned pairs using the <code class="highlighter-rouge">_1</code> and <code class="highlighter-rouge">_2</code> endings of dataset names. Let’s however pretend that this did not happen. Click on <strong>Unpair all</strong> (highlighted in red in the figure above) link and then on <strong>Clear</strong> link (highlighted in blue in the figure above). The interface will change into its unpaired state:</p>
 
 <p class="img-responsive"><img src="../../images/collectionCreationClean.png" alt="collectionCreationClean" /></p>
 
-<p>Hopefully you remember that we have paired-end data in this scenario. Datasets containing the first (forward) and the second (reverse) read are differentiated by having <code class="highlighter-rouge">_1</code> and <code class="highlighter-rouge">_2</code> in the filename. We can use this feature in dataset collection wizard to pair our datasets.  Type <code class="highlighter-rouge">_1</code> in the left <strong>Filter this list</strong> text box and <code class="highlighter-rouge">_2</code> in the right:</p>
+<p>These datasets contain paired-end reads. Datasets containing the first (forward) and the second (reverse) read are differentiated by having <code class="highlighter-rouge">_1</code> and <code class="highlighter-rouge">_2</code> in the filename. We can use this feature in dataset collection wizard to pair our datasets.  Type <code class="highlighter-rouge">_1</code> in the left <strong>Filter this list</strong> text box and <code class="highlighter-rouge">_2</code> in the right:</p>
 
 <p class="img-responsive"><img src="../../images/1and2.png" alt="1and2" /></p>
 
@@ -174,11 +174,11 @@
 
 <h2 id="using-collections">Using collections</h2>
 
-<p>By now we see that a collection can be used to bundle a large number of items into a single history item. This means that many Galaxy tools will be able to process all datasets in a collection transparently to you. Let’s try to map these datasets to human genome using <code class="highlighter-rouge">bwa-mem</code> mapper:</p>
+<p>By now we see that a collection can be used to bundle a large number of items into a single history item. This means that many Galaxy tools will be able to process all datasets in a collection transparently to you. Let’s try to map these datasets to human genome using <code class="highlighter-rouge">bwa-mem</code> mapper. In the Tools pane on the left, use the <code class="highlighter-rouge">search-tools</code> to find <code class="highlighter-rouge">bwa-mem</code>. Click on <code class="highlighter-rouge">Map with BWA-MEM</code> in the search list.</p>
 
 <p class="img-responsive"><img src="../../images/bwa_mem_collection_readGroups.png" alt="bwa_mem_collection_readGroups" /></p>
 
-<p>Here is what you need to do:</p>
+<p>In the middle pane, provide the following parameters for <code class="highlighter-rouge">Map with BWA-MEM</code>:</p>
 
 <ul>
   <li>set <strong>Using reference genome</strong> to <code class="highlighter-rouge">hg38</code> (red outline);</li>
@@ -252,7 +252,7 @@
 
 <p class="img-responsive"><img src="../../images/browserLinks.png" alt="browserLinks" /></p>
 
-<p>Click the <strong>Human hg38</strong> link in the <strong>display with IGV</strong> line as highlighted above (to learn more about displaying Galaxy data in IGV with this <a href="https://vimeo.com/123442619#t=4m16s">movie</a>). Below is an example generated with IGV on these data. In this screenshot reads are colored by read group (four distinct colors). A yellow inset displays additional information about a single read. One can see that this read corresponds to read group <code class="highlighter-rouge">M117-bl</code>.</p>
+<p>Click the <strong>Human hg38</strong> link in the <strong>display with IGV</strong> line as highlighted above (learn more about displaying Galaxy data in IGV with this <a href="https://vimeo.com/123442619#t=4m16s">movie</a>). Below is an example generated with IGV on these data. In this screenshot, reads are colored by read group (four distinct colors). A yellow inset displays additional information about a single read. One can see that this read corresponds to read group <code class="highlighter-rouge">M117-bl</code>.</p>
 
 <p class="img-responsive"><img src="../../images/igv.png" alt="igv" /></p>
 
@@ -269,6 +269,22 @@
 <p>…you need to complain. Use <a href="https://usegalaxy.org/biostar/biostar_redirect">Galaxy’s BioStar Channel</a> to do this.</p>
 
 
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+
+            <ul>
+                
+                <li>Jobs running on data collections use the same settings for each dataset in the collection.</li>
+                
+                <li>For example, FASTQ files can be combined into lists of dataset pairs. Each pair is made up of the forward reads dataset and the reverse reads dataset.</li>
+                
+                <li>In this tutorial, several tools were run on the list of dataset pairs, such as `bwa-mem`, `cleanSam`, `Filter SAM or BAM`, etc.</li>
+                
+                <li>When using collections, you have to click on the `batch input mode` button, to select one of the collections available in the history. Otherwise, the collections are not available in the drop-down list.</li>
+                
+            </ul>
+        </blockquote>
         
 
         
