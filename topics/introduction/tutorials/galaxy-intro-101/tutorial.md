@@ -152,16 +152,16 @@ Let's remind ourselves that our objective is to find which exon contains the mos
 >    ![Contents of the `Join` output dataset](../../images/101_joined.png)
 >
 >    Remember that variations are possible due to using different versions of UCSC databases, as long as you have similar looking columns you did everything right :)
-> 
->> ### {% icon tip %} Tip: If things don't work...
->>
->> Did the Join tool error with a memory failure? Or is this step executing for a long time? Most likely a setting was missed when extracting the data from the UCSC Table Browser. Try again, double checking that:
->> 
->>  * For both SNP and EXON: **region** is actually changed to `position` with value `chr22`
->>  * For EXON: **Create one BED record per** `Coding Exons` is selected (*not* `Whole Gene` as for the SNP data)
->>  * Carefully inspect remaining Table Browser settings if these two most common reasons for problems are Ok in your query
-{: .tip}
-> 
+>
+> > ### {% icon tip %} Tip: If things don't work...
+> >
+> > Did the Join tool error with a memory failure? Or is this step executing for a long time? Most likely a setting was missed when extracting the data from the UCSC Table Browser. Try again, double checking that:
+> >
+> >  * For both SNP and EXON: **region** is actually changed to `position` with value `chr22`
+> >  * For EXON: **Create one BED record per** `Coding Exons` is selected (*not* `Whole Gene` as for the SNP data)
+> >  * Carefully inspect remaining Table Browser settings if these two most common reasons for problems are Ok in your query
+> {: .tip}
+>
 {: .hands_on}
 
 Let's take a look at this dataset. The first six columns correspond to the exons, and the last six columns correspond to the SNPs. Column 4 contains the exon IDs, and column 10 contains the SNP IDs. In our screenshot you see that the first lines in the file all have the same exon ID but different SNP IDs, meaning these lines represent different SNPs that all overlap the same exon. Therefore we can find the total number of SNPs in an exon simply by counting the number of lines that have the same exon ID in the fourth column.
