@@ -194,7 +194,7 @@
 <p>Galaxy is a great solution to train bioinformatics concepts:</p>
 
 <ul>
-  <li>numerous bioinformatics tools are available (almost 5,000 in the ToolShed)</li>
+  <li>numerous bioinformatics tools are available (almost 6,000 in the ToolShed)</li>
   <li>it can be used by people without any computer science skills</li>
   <li>it trains to use technology, outlining available resources and efforts that have made them accessible to researchers</li>
   <li>it is scalable</li>
@@ -202,7 +202,7 @@
 
 <p>In 2016, the Galaxy Training Network decide to set up a new infrastructure for easily delivering Galaxy related training material. The idea was to develop something open, online, based on a community effort, and on top of the Galaxy platform.</p>
 
-<p>We took inspiration from <a href="https://software-carpentry.org">Software Carpentry</a> and collected everything on a GitHub repository: <a href="https://github.com/galaxyproject/training-material">https://github.com/galaxyproject/training-material </a>.
+<p>We took inspiration from <a href="https://software-carpentry.org">Software Carpentry</a> and collected everything on a GitHub repository: <a href="https://github.com/galaxyproject/training-material">https://github.com/galaxyproject/training-material</a>.
 We decided on a structure focusing on tutorials with hands-on activities; fitting both for online self-training but also for workshops. Each tutorial follows the same structure and comes with a virtualised instance allowing you to run the training anywhere you have resources available.</p>
 
 <p>Here you will learn how to create a new tutorial by developing a small tutorial that explains how to use BLAST.</p>
@@ -280,6 +280,27 @@ It may require some knowledge that you may not have or do not have the time to l
 
 <h1 id="create-the-directory-for-the-tutorial">Create the directory for the tutorial</h1>
 
+<p>Each training material is related to a topic. All training materials (slides, tutorials, …) related to a topic are found in a dedicated directory (<em>e.g.</em> <code class="highlighter-rouge">transcriptomics</code> directory contains the material related to exome sequencing analysis). Each topic have the following structure:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── README.md
+├── metadata.yaml
+├── images
+├── docker
+│   ├── Dockerfile
+├── slides
+│   ├── index.html
+├── tutorials
+│   ├── tutorial1
+│   │   ├── tutorial.md
+│   │   ├── slides.html
+│   │   ├── tools.yaml
+│   │   ├── data-library.yaml
+│   │   ├── workflows
+│   │   │   ├── workflow.ga
+│   │   ├── tours
+│   │   │   ├── tour.yaml
+</code></pre></div></div>
+
 <p>Once the topic has been chosen and you set up your contribution environment, you can create the tutorial. An ideal tutorial in the Galaxy Training Network contains:</p>
 <ul>
   <li>a tutorial file <code class="highlighter-rouge">tutorial.md</code> written in Markdown with hands-on</li>
@@ -293,11 +314,11 @@ It may require some knowledge that you may not have or do not have the time to l
 <p>The most important file is the <code class="highlighter-rouge">tutorial.md</code> where the content of the tutorial is. The other files are there to support the tutorial and make it robust and usable across many environments.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-copy-the-required-files"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Copy the required files</h3>
+  <h3 id="-hands-on-create-all-the-required-files-and-folders-structures-automatically"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Create all the required files and folders structures automatically</h3>
 
   <ol>
     <li>
-      <p>Run (by adpating the information between the quotes)</p>
+      <p>Run (by adapting the information between the quotes)</p>
 
       <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ python bin/setup_training_content.py \
          --topic_name "my-topic" \
@@ -320,7 +341,7 @@ It may require some knowledge that you may not have or do not have the time to l
 
 <h1 id="add-metadata">Add metadata</h1>
 
-<p>To make the topic aware of this new tutorial, some metadata about the tutorial has been added in the topic’s <code class="highlighter-rouge">metadata.yaml</code> file. This metadata includes some technological and pedagogical support for the training. Once this is filled out, you can run the Galaxy Training material website locally to check that the new tutorial is accessible.</p>
+<p>To make the topic aware of this new tutorial, some metadata about the tutorial has been added in the topic’s <code class="highlighter-rouge">metadata.yaml</code> file. This metadata includes some technological and pedagogical support for the training. Once this is filled out, you can run the Galaxy Training Material website locally to check that the new tutorial is accessible.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-add-metadata"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Add metadata</h3>
@@ -349,7 +370,7 @@ It may require some knowledge that you may not have or do not have the time to l
   </li>
 </ul>
 
-<p>We would then develope the tutorial and test it on this toy dataset. Once we were ready to share it, we would upload the datasets on <a href="https://zenodo.org/">Zenodo</a> to store them on long-term and obtain a dedicated DOI in the <a href="https://zenodo.org/communities/galaxy-training/?page=1&amp;size=20">Galaxy training network community</a>.</p>
+<p>We would then develop the tutorial and test it on this toy dataset. Once we were ready to share it, we would upload the datasets on <a href="https://zenodo.org/">Zenodo</a> to store them on long-term and obtain a dedicated DOI in the <a href="https://zenodo.org/communities/galaxy-training/?page=1&amp;size=20">Galaxy training network community</a>.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-upload-the-dataset-to-zenodo"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Upload the dataset to Zenodo</h3>
@@ -389,7 +410,7 @@ So be careful when you start your upload that all your needed files are ready.</
 
 <h1 id="write-the-tutorial">Write the tutorial</h1>
 
-<p>Now that you have the structure in place, you can the fill the tutorial per se.</p>
+<p>Now that you have the structure in place, you can then fill the tutorial per se.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-write-the-tutorial"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Write the tutorial</h3>
@@ -405,7 +426,7 @@ So be careful when you start your upload that all your needed files are ready.</
 
 <p>To able to run the tutorial, we need a Galaxy instance where the needed tools and the data are available. We need then to describe the required technical infrastructure.</p>
 
-<p>This description will be used to automatically set up a Docker Galaxy flavour, to set un an existing Galaxy instance and also to test if a public Galaxy instance is able to run the tool.</p>
+<p>This description will be used to automatically set up a Docker Galaxy flavour, to set up an existing Galaxy instance and also to test if a public Galaxy instance is able to run the tool.</p>
 
 <p>The technical support are different files:</p>
 
