@@ -300,7 +300,7 @@
 
 <h2 id="removing-duplicates">Removing duplicates</h2>
 
-<p>Preparation of sequencing libraries (at least at the time of writing) for technologies such as Illumina (used in this example) involves PCR amplification. It is required to generate sufficient number of sequencing templates so that a reliable detection can be performed by base callers. Yet PCR has it’s biases, which are especially profound in cases of multitemplate PCR used for construction of sequencing libraries (Kanagawa et al. <a href="https://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;dopt=Abstract&amp;list_uids=16233530">2003</a>).</p>
+<p>Preparation of sequencing libraries (at least at the time of writing) for technologies such as Illumina (used in this example) involves PCR amplification. It is required to generate sufficient number of sequencing templates so that a reliable detection can be performed by base callers. Yet PCR has its own biases, which are especially profound in cases of multi-template PCR used for construction of sequencing libraries (Kanagawa et al. <a href="https://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;dopt=Abstract&amp;list_uids=16233530">2003</a>).</p>
 
 <p>Duplicates can be identified based on their outer alignment coordinates or using sequence-based clustering. One of the common ways for identification of duplicate reads is the <code class="highlighter-rouge">MarkDuplicates</code> utility from <a href="https://broadinstitute.github.io/picard/command-line-overview.html">Picard</a> package. It is designed to identify both PCR and optical duplicates (the following is an excerpt from Picard documentation):</p>
 
@@ -535,24 +535,11 @@ chrM	15326	.	A	G	79542.1	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=2574;CIGAR=1X;DP=2586;DP
 </code></pre></div></div>
 
 <h1 id="filtering-vcf-data">Filtering VCF data</h1>
-
-<p>Even though we selected somewhat stringent input parameters (restricting base quality to a minimum of 30 and mapping quality to a minimum of 20) there is still a lot of just in our data. <a href="https://github.com/ekg">Erik Garrison</a> has a beautiful illustration of various biases potentially affecting called variants (and making a locus sequence-able):</p>
-
-<table>
-  <thead>
-    <tr>
-      <th> </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><img src="../../images/mt_biases.png" alt="Various biases potentially affecting called variants" /></td>
-    </tr>
-    <tr>
-      <td><small>Here you can see that in an ideal case (indicated with a green star) a variant is evenly represent by different areas of sequencing reads (cycle and placement biases) and is balanced across the two strands (strand bias). Allele imbalance is not applicable in our case as it reflects significant deviation from the diploid (50/50) expectation (see <a href="../../images/freebayes.pdf">here</a> for more details).</small></td>
-    </tr>
-  </tbody>
-</table>
+<p>After filtering the data with stringent input parameters (restricting base quality to a minimum of 30 and mapping quality to a minimum of 20) a considerable amount variants due to read-alignment bias exits. <a href="https://github.com/ekg">Erik Garrison</a> has a beautiful illustration of various biases potentially affecting called variants (and making a locus sequence-able):
+|                            |
+|—————————-|
+|<img src="../../images/mt_biases.png" alt="Various biases potentially affecting called variants" />|
+|<small>Here you can see that in an ideal case (indicated with a green star) a variant is evenly represent by different areas of sequencing reads (cycle and placement biases) and is balanced across the two strands (strand bias). Allele imbalance is not applicable in our case as it reflects significant deviation from the diploid (50/50) expectation (see <a href="../../images/freebayes.pdf">here</a> for more details).</small>|</p>
 
 <p>A robust tool set for processing VCF data is provided by <a href="https://github.com/vcflib/vcflib">vcflib</a> developed by Erik Garrison, the author of FreeBayes. One way to filter VCF is using <code class="highlighter-rouge">INFO</code> fields of the VCF dataset. If you look at the VCF dataset shown above you will see all comment lines beginning with <code class="highlighter-rouge">##INFO</code>.  These are <code class="highlighter-rouge">INFO</code> fields. Each VCF record contains a list of <code class="highlighter-rouge">INFO</code> tags describing a wide range of properties for each VCF record. You will see that FreeBayes and NVC differ significantly in the number and types of <code class="highlighter-rouge">INFO</code> fields each of these caller generates. This why the two require different filtering strategies.</p>
 
@@ -586,7 +573,7 @@ chrM	8557	.	G	C	2590.97	.	AB=0.267066;ABP=790.051;AC=2;AF=0.5;AN=4;AO=446;CIGAR=
 </code></pre></div></div>
 <h1 id="looking-at-the-data">Looking at the data</h1>
 
-<p>For visalizaning VCFs Galaxy relies on the two external tools.  The first is called <a href="http://vcf.iobio.io/">VCF.IOBIO</a> and is developed by <a href="http://marthlab.org/">Gabor Marth’s group</a> at the University of Utah. The second is called <a href="http://software.broadinstitute.org/software/igv/">IGV</a> developed by Broad Institute.</p>
+<p>For visualizing VCFs Galaxy relies on the two external tools.  The first is called <a href="http://vcf.iobio.io/">VCF.IOBIO</a> and is developed by <a href="http://marthlab.org/">Gabor Marth’s group</a> at the University of Utah. The second is called <a href="http://software.broadinstitute.org/software/igv/">IGV</a> developed by Broad Institute.</p>
 
 <h2 id="vcfiobio">VCF.IOBIO</h2>
 
