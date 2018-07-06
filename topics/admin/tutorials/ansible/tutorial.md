@@ -182,7 +182,7 @@ For a real-life example, UseGalaxy.eu [generally attempts](https://github.com/us
 
 The above introduction was certainly not enough for you to feel confident in Ansible, so we will now build a small role and a playbook to run this role.
 
-> ### <i class="fa fa-warning" aria-hidden="true"></i> Safety First
+> ### {% icon warning %} Safety First
 >
 > Many of the things you can do with Ansible can be quite dangerous. As dangerous as normally being at the linux command line, but scaled across N machines. Be very careful with the changes you plan to make.
 > Ansible provides some flags which can help you identify changes before they're made to production systems:
