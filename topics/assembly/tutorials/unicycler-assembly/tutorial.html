@@ -257,9 +257,9 @@
 
         <h1 id="the-goal-e-coli-c-1-assembly">The goal: <em>E. coli</em> C-1 assembly</h1>
 
-<p>In this tutorial we assemble and annotate genome of <em>E. coli</em> strain <a href="http://cgsc2.biology.yale.edu/Strain.php?ID=8232">C-1</a>. This strain is routinely used in experimental evolution studies involving bacteriophages. For instance, now classical works by Holly Wichman and Jim Bull (<a href="https://www.ncbi.nlm.nih.gov/pubmed/9409816">Bull et al. 1997</a>, <a href="https://www.ncbi.nlm.nih.gov/pubmed/9767038">Bull &amp; Wichman 1998</a>, <a href="https://www.ncbi.nlm.nih.gov/pubmed/10411508">Wichman et al. 1999</a>) have been performed using this strain and bacteriophage phiX174.</p>
+<p>In this tutorial we assemble and annotate the genome of <em>E. coli</em> strain <a href="http://cgsc2.biology.yale.edu/Strain.php?ID=8232">C-1</a>. This strain is routinely used in experimental evolution studies involving bacteriophages. For instance, now classic works by Holly Wichman and Jim Bull (<a href="https://www.ncbi.nlm.nih.gov/pubmed/9409816">Bull et al. 1997</a>, <a href="https://www.ncbi.nlm.nih.gov/pubmed/9767038">Bull &amp; Wichman 1998</a>, <a href="https://www.ncbi.nlm.nih.gov/pubmed/10411508">Wichman et al. 1999</a>) have been performed using this strain and bacteriophage phiX174.</p>
 
-<p>To sequence the genome we have obtained the strain from the <a href="http://cgsc2.biology.yale.edu/">Yale E. coli Stock Center</a>. The stock center sent us a filter paper disk infused with cells. The disk was placed in the center of an LB-agar plate. A single colony was picked and resuspended in a liquid LB medium, grown overnight, and genomic DNA was isolated. The DNA was then sequenced using two methods. To obtain high coverage, high accuracy data we used Illumina miSEQ to generated 250-bp paired end reads. To generate high length reads we used the Oxford Nanopore MinIon machine.</p>
+<p>To sequence the genome we have obtained the strain from the <a href="http://cgsc2.biology.yale.edu/">Yale E. coli Stock Center</a>. The stock center sent us a filter paper disk infused with cells. The disk was placed in the center of an LB-agar plate. A single colony was picked and resuspended in a liquid LB medium, grown overnight, and genomic DNA was isolated. The DNA was then sequenced using two methods. To obtain high coverage, high accuracy data we used Illumina miSEQ to generated 250-bp paired end reads. To generate high length reads we used the Oxford Nanopore MinION machine.</p>
 
 <p>Our goal is to reconstruct and annotate the full genome of <em>E. coli</em> C-1. As you will see in this tutorial a combination of many short, high accuracy reads with long, error-prone reads helps us produce an almost perfect assembly.</p>
 
@@ -291,15 +291,15 @@
 
 <h2 id="the-data">The data</h2>
 
-<p>In this tutorial we assemble genome using two types of input data: (1) Illumina 250 bp paired-end reads and (2) Oxford Nanopore reads.</p>
+<p>In this tutorial we will assemble a genome using two types of input data: (1) Illumina 250 bp paired-end reads and (2) Oxford Nanopore reads.</p>
 
 <h3 id="illumina-data">Illumina data</h3>
 
-<p>We generated 9,345,897 250 bp read pairs (library preparation performed on genomic DNA fragmented to mean size of 600 bp). However, to make sure that you can complete this tutorial in a finite amount of time we have downsampled (reduced in size) this to 1,000,000 paired end reads - just enough to produce an accurate assembly.</p>
+<p>We generated 9,345,897 250 bp read pairs (library preparation performed on genomic DNA fragmented to mean size of 600 bp). However, to make sure that you can complete this tutorial in a finite amount of time we have downsampled (reduced in size) to 1,000,000 paired end reads - just enough to produce an accurate assembly.</p>
 
 <h3 id="oxford-nanopore-data">Oxford Nanopore Data</h3>
 
-<p>There are 12,738 <a href="http://www.nature.com/nmeth/journal/v12/n4/fig_tab/nmeth.3290_SF13.html">2d-reads</a>. Maximum read length is 27,518. The distribution of reads lengths looks like this:</p>
+<p>There are 12,738 <a href="http://www.nature.com/nmeth/journal/v12/n4/fig_tab/nmeth.3290_SF13.html">2d-reads</a>. Maximum read length is 27,518 bp. The distribution of reads lengths looks like this:</p>
 
 <figure id="figure-1"><img src="../../images/ont_length.png" alt="Nanopore read length distribution" title="Distribution of nanopore read lengths." /><figcaption><span class="figcaption-prefix">Figure 1:</span> Distribution of nanopore read lengths.</figcaption></figure>
 
@@ -308,12 +308,12 @@
 <blockquote class="warning-box">
   <h3 id="-oxford-nanopore-data-format"><i class="fa fa-warning" aria-hidden="true"></i> Oxford Nanopore Data Format</h3>
   <p>Oxford Nanopore machines output
- data in <a href="http://bioinformatics.cvr.ac.uk/blog/exploring-the-fast5-format/">fast5</a> format that contains additional information besides sequence data. In this tutorial we assume that these data are <em>already</em> converted into <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq</a>. An additional tutorial dedicated to handling of fast5 datasets will be developed shortly.</p>
+ data in <a href="http://bioinformatics.cvr.ac.uk/blog/exploring-the-fast5-format/">fast5</a> format that contains additional information besides sequence data. In this tutorial we assume that this data is <em>already</em> converted into <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq</a>. An additional tutorial dedicated to handling fast5 datasets will be developed shortly.</p>
 </blockquote>
 
 <h2 id="the-tools">The tools</h2>
 
-<p>In this analysis we will perform two tasks: (1) assembly and (2) annotation. Below we will briefly outline main ideas behind these two procedures and will describe the tools we will be using.</p>
+<p>In this analysis we will perform two tasks: (1) assembly and (2) annotation. Below we will briefly outline the main ideas behind these two procedures and will describe the tools we will be using.</p>
 
 <h3 id="assembly">Assembly</h3>
 
@@ -325,9 +325,9 @@
 
 <p><img src="https://github.com/rrwick/Unicycler/raw/master/misc/logo.png" alt="Logo unicycler" /></p>
 
-<p>For assembly we will be using <a href="https://github.com/rrwick/Unicycler">Unicycler</a> (also see publication by Wick:<a href="http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005595">2017</a>). Unicycler is designed specifically for <em>hybrid assembly</em> (the one combines short and long read sequencing data) of small (e.g., bacterial, viral, organellar) genomes. In our hands it has produced complete high quality assemblies. Unicycler employs a multi-step process that utilizes a number of software tools:</p>
+<p>For assembly we will be using <a href="https://github.com/rrwick/Unicycler">Unicycler</a> (also see publication by Wick:<a href="http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005595">2017</a>). Unicycler is designed specifically for <em>hybrid assembly</em> (that is, using both short- and long-read sequencing data) of small (e.g., bacterial, viral, organellar) genomes. In our hands it has produced complete high quality assemblies. Unicycler employs a multi-step process that utilizes a number of software tools:</p>
 
-<figure id="figure-2"><img src="../../images/unicycler.png" alt="Unicycler process" title="Simplified view of the Unicycler assembly process (From Wick:2017). In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long reads to produce longest possible set of contigs. These are then polished by aligning original short reads against produced contigs and feeding these alignment to Pilon - an assembly improvement tool." /><figcaption><span class="figcaption-prefix">Figure 2:</span> Simplified view of the Unicycler assembly process (From Wick:2017). In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long reads to produce longest possible set of contigs. These are then polished by aligning original short reads against produced contigs and feeding these alignment to Pilon - an assembly improvement tool.</figcaption></figure>
+<figure id="figure-2"><img src="../../images/unicycler.png" alt="Unicycler process" title="Simplified view of the Unicycler assembly process (From Wick:2017). In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long reads to produce the longest possible set of contigs. These are then polished by aligning the original short reads against contigs and feeding these alignments to Pilon - an assembly improvement tool." /><figcaption><span class="figcaption-prefix">Figure 2:</span> Simplified view of the Unicycler assembly process (From Wick:2017). In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long reads to produce the longest possible set of contigs. These are then polished by aligning the original short reads against contigs and feeding these alignments to Pilon - an assembly improvement tool.</figcaption></figure>
 
 <p>As you can see Unicycler relies heavily on <a href="http://cab.spbu.ru/software/spades/">SPAdes</a> and <a href="https://github.com/broadinstitute/pilon/wiki">Pilon</a>. We will briefly describe these two tools.</p>
 
@@ -335,22 +335,22 @@
 
 <h5 id="multisized-debruijn-graph">Multisized deBruijn graph</h5>
 
-<p>Assemblers usually constructing graphs for <em>k</em>-mers of a fixed size. We have noted that when <em>k</em> is small it is difficult to resolve the repeats. If <em>k</em> is too large a corresponding graph may become fragments (especially if read coverage is low). SPAdes uses several values for <em>k</em> (that are either manually set or inferred automatically) to create a <em>multisized</em> graph that minimized tangledness and fragmentation by combining various <em>k</em>-mers (see <a href="http://online.liebertpub.com/doi/full/10.1089/cmb.2012.0021">Bankevich:2012</a>):</p>
+<p>Assemblers usually construct graphs for <em>k</em>-mers of a fixed size. We have noted that when <em>k</em> is small it is difficult to resolve the repeats. If <em>k</em> is too large a corresponding graph may be fragmented (especially if read coverage is low). SPAdes uses several values for <em>k</em> (that are either manually set or inferred automatically) to create a <em>multisized</em> graph that minimized tangledness and fragmentation by combining various <em>k</em>-mers (see <a href="http://online.liebertpub.com/doi/full/10.1089/cmb.2012.0021">Bankevich:2012</a>):</p>
 
-<figure id="figure-3"><img src="../../images/multiGraph.jpg" alt="Multigraph approach implemented in SPAdes" title="Multisized de Bruijn graph. A circular Genome CATCAGATAGGA is covered by a set Reads consisting of nine 4-mers, {ACAT, CATC, ATCA, TCAG, CAGA, AGAT, GATA, TAGG, GGAC}. Three out of 12 possible 4-mers from Genome are missing from Reads (namely {ATAG,AGGA,GACA}), but all 3-mers from Genome are present in Reads. (A) The outside circle shows a separate black edge for each 3-mer from Reads. Dotted red lines indicate vertices that will be glued. The inner circle shows the result of applying some of the glues. (B) The graph DB(Reads, 3) resulting from all the glues is tangled. The three h-paths of length 2 in this graph (shown in blue) correspond to h-reads ATAG, AGGA, and GACA. Thus Reads3,4 contains all 4-mers from Genome. (C) The outside circle shows a separate edge for each of the nine 4-mer reads. The next inner circle shows the graph DB(Reads, 4), and the innermost circle represents the Genome. The graph DB(Reads, 4) is fragmented into 3 connected components. (D) The multisized de Bruijn graph DB (Reads, 3, 4). Figure from [Bankevich:2012]" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Multisized de Bruijn graph. A circular Genome CATCAGATAGGA is covered by a set Reads consisting of nine 4-mers, {ACAT, CATC, ATCA, TCAG, CAGA, AGAT, GATA, TAGG, GGAC}. Three out of 12 possible 4-mers from Genome are missing from Reads (namely {ATAG,AGGA,GACA}), but all 3-mers from Genome are present in Reads. (A) The outside circle shows a separate black edge for each 3-mer from Reads. Dotted red lines indicate vertices that will be glued. The inner circle shows the result of applying some of the glues. (B) The graph DB(Reads, 3) resulting from all the glues is tangled. The three h-paths of length 2 in this graph (shown in blue) correspond to h-reads ATAG, AGGA, and GACA. Thus Reads3,4 contains all 4-mers from Genome. (C) The outside circle shows a separate edge for each of the nine 4-mer reads. The next inner circle shows the graph DB(Reads, 4), and the innermost circle represents the Genome. The graph DB(Reads, 4) is fragmented into 3 connected components. (D) The multisized de Bruijn graph DB (Reads, 3, 4). Figure from [Bankevich:2012]</figcaption></figure>
+<figure id="figure-3"><img src="../../images/multiGraph.jpg" alt="Multigraph approach implemented in SPAdes" title="Multisized de Bruijn graph. A circular Genome CATCAGATAGGA is covered by a set of Reads consisting of nine 4-mers, {ACAT, CATC, ATCA, TCAG, CAGA, AGAT, GATA, TAGG, GGAC}. Three out of 12 possible 4-mers from Genome are missing from Reads (namely {ATAG,AGGA,GACA}), but all 3-mers from the Genome are present in the Reads. (A) The outside circle shows a separate black edge for each 3-mer from Reads. Dotted red lines indicate vertices that will be glued. The inner circle shows the result of applying some of the glues. (B) The graph DB(Reads, 3) resulting from all the glues is tangled. The three h-paths of length 2 in this graph (shown in blue) correspond to h-reads ATAG, AGGA, and GACA. Thus Reads&lt;sub&gt;3,4&lt;/sub&gt; contains all 4-mers from Genome. (C) The outside circle shows a separate edge for each of the nine 4-mer reads. The next inner circle shows the graph DB(Reads, 4), and the innermost circle represents the Genome. The graph DB(Reads, 4) is fragmented into 3 connected components. (D) The multisized de Bruijn graph DB (Reads, 3, 4). Figure and text from [Bankevich:2012](https://www.ncbi.nlm.nih.gov/pubmed/22506599)" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Multisized de Bruijn graph. A circular Genome CATCAGATAGGA is covered by a set of Reads consisting of nine 4-mers, {ACAT, CATC, ATCA, TCAG, CAGA, AGAT, GATA, TAGG, GGAC}. Three out of 12 possible 4-mers from Genome are missing from Reads (namely {ATAG,AGGA,GACA}), but all 3-mers from the Genome are present in the Reads. (A) The outside circle shows a separate black edge for each 3-mer from Reads. Dotted red lines indicate vertices that will be glued. The inner circle shows the result of applying some of the glues. (B) The graph DB(Reads, 3) resulting from all the glues is tangled. The three h-paths of length 2 in this graph (shown in blue) correspond to h-reads ATAG, AGGA, and GACA. Thus Reads<sub>3,4</sub> contains all 4-mers from Genome. (C) The outside circle shows a separate edge for each of the nine 4-mer reads. The next inner circle shows the graph DB(Reads, 4), and the innermost circle represents the Genome. The graph DB(Reads, 4) is fragmented into 3 connected components. (D) The multisized de Bruijn graph DB (Reads, 3, 4). Figure and text from [Bankevich:2012](https://www.ncbi.nlm.nih.gov/pubmed/22506599)</figcaption></figure>
 
 <h5 id="read-pair-utilization">Read pair utilization</h5>
 
-<p>While the use of paired reads and mate pairs is not new (and key) to genome assembly, SPAdes utilizes so called paired DeBruin graphs to take the advantage of the paired end data. One of the key issues with paired DeBruin graphs is the resulting genome assemblies do not tolerate variability in insert sizes (the initial formulation of paired DeBruijn graphs assumed constant distance between pairs of reads). In practice this distance is always variable. SPAdes performs <em>k</em>-bimer (these are <em>k</em>-mers derived from <em>paired</em> reads) adjustment to identify exact of nearly-exact distances for each <em>k</em>-bimer pair.</p>
+<p>While the use of paired reads and mate pairs is key to genome assembly, and not new, SPAdes utilizes so called paired DeBruin graphs to take the advantage of the paired end data. One of the key issues with paired DeBruin graphs is that the resulting genome assemblies do not tolerate variability in insert sizes: The initial formulation of paired DeBruijn graphs assumed constant distance between pairs of reads. In practice this distance is always variable. SPAdes performs <em>k</em>-bimer (these are <em>k</em>-mers derived from <em>paired</em> reads) adjustment to identify exact or nearly-exact distances for each <em>k</em>-bimer pair.</p>
 
 <h5 id="error-correction">Error correction</h5>
 
-<p>Sequencing data contains a substantial number of sequencing errors that manifest themselves as deviations (bulges and non-connected components) within the assembly graph. One of the ways to improve the graph even constructing it is to minimize the amount sequencing errors by performing error correction. SPAdes uses <a href="https://goo.gl/1iGkMe">BayesHammer</a> to correct the reads. Here is a brief summary of what it does (see <a href="https://goo.gl/1iGkMe">Nikolenko:2013</a>):</p>
+<p>Sequencing data contains a substantial number of sequencing errors that manifest themselves as deviations (bulges and non-connected components) within the assembly graph. One way to improve the graph before assembly it is to minimize the number of sequencing errors by performing error correction. SPAdes uses <a href="https://goo.gl/1iGkMe">BayesHammer</a> to correct the reads. Here is a brief summary of what it does (see <a href="https://goo.gl/1iGkMe">Nikolenko:2013</a>):</p>
 
 <ol>
-  <li>SPAdes (or rather BayesHammer) counts <em>k</em>-mers in reads and computed <em>k</em>-mer statistics that takes into account base quality values.</li>
-  <li><a href="https://en.wikipedia.org/wiki/Hamming_graph">Hamming graph</a> is constructed for <em>k</em>-mers is which <em>k</em>-mers are nodes. In this graph edges connect nodes (<em>k</em>-mers) is they differ from each other by a number of nucleotides up to a certain threshold (the <a href="https://en.wikipedia.org/wiki/Hamming_distance">Hamming distance</a>). The graph is central to the error correction algorithm.</li>
-  <li>At this step Bayesian subclustering of the graph produced in the previous step. For each <em>k</em>-mer we now know the center of its subcluster.</li>
+  <li>SPAdes (or rather BayesHammer) counts <em>k</em>-mers in reads and computes <em>k</em>-mer statistics that take into account base quality values.</li>
+  <li>A <a href="https://en.wikipedia.org/wiki/Hamming_graph">Hamming graph</a> is constructed in which <em>k</em>-mers are nodes. In this graph edges connect nodes (<em>k</em>-mers) if they differ from each other by a number of nucleotides up to a certain threshold (the <a href="https://en.wikipedia.org/wiki/Hamming_distance">Hamming distance</a>). The graph is central to the error correction algorithm.</li>
+  <li>Then Bayesian subclustering is done on the graph from the previous step. For each <em>k</em>-mer we now know the center of its subcluster.</li>
   <li><strong>Solid</strong> <em>k</em>-mers are derived from cluster centers and are assumed to be <em>error free</em>.</li>
   <li>Solid <em>k</em>-mers are mapped back to the reads.</li>
   <li>Reads are corrected using solid <em>k</em>-mers:</li>
@@ -358,7 +358,7 @@
 
 <figure id="figure-4"><img src="../../images/readCorrection.jpg" alt="Read correction with BayesHammer" title="Read correction. Black &lt;em&gt;k&lt;/em&gt;-mers are solid. Grey &lt;em&gt;k&lt;/em&gt;-mers are non-solid. Red &lt;em&gt;k&lt;/em&gt;-mers are the centers of the corresponding clusters (two grey &lt;em&gt;k&lt;/em&gt;-mers striked through on the right are non-solid singletons). As a result, one nucleotide is changed based on majority rule. (From [Nikolenko:2013])" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Read correction. Black <em>k</em>-mers are solid. Grey <em>k</em>-mers are non-solid. Red <em>k</em>-mers are the centers of the corresponding clusters (two grey <em>k</em>-mers striked through on the right are non-solid singletons). As a result, one nucleotide is changed based on majority rule. (From [Nikolenko:2013])</figcaption></figure>
 
-<p>In the case of the full dataset SPAdes error correction changed 14,013,757 bases in 3,382,337 reads - a substantial fraction of the full ~18 million read dataset.</p>
+<p>In the case of the full dataset, SPAdes error correction changed 14,013,757 bases in 3,382,337 reads - a substantial fraction of the full ~18 million read dataset.</p>
 
 <h4 id="pilon">Pilon</h4>
 
@@ -439,7 +439,7 @@
 
 <p>If all goes well you will see datasets uploading and changing states from gray to green as shown below. The figure below also shows how datasets can be tagged.</p>
 
-<figure id="figure-9"><img src="../../images/starting_data.png" alt="Datasets in History" title="Sequencing data loaded into Galaxy history. The full progression from gray (scheduling) to green (all OK) state is shown. To make it easier to identify datasets as we progress through the analysis we use so called &lt;em&gt;Hashtags&lt;/em&gt;. To tag a dataset: click on dataset to expand it (as shown in panel four); click tag icon (&lt;i class='fa fa-tags' aria-hidden='true'&gt;&lt;/i&gt;) and a text field will appear. Add a tag (in this case &lt;b&gt;F&lt;/b&gt;) pre-pended with hash (#). Hit enter. Do this for all three datasets and it will look like it is shown in panel five." /><figcaption><span class="figcaption-prefix">Figure 9:</span> Sequencing data loaded into Galaxy history. The full progression from gray (scheduling) to green (all OK) state is shown. To make it easier to identify datasets as we progress through the analysis we use so called <em>Hashtags</em>. To tag a dataset: click on dataset to expand it (as shown in panel four); click tag icon (<i class="fa fa-tags" aria-hidden="true"></i>) and a text field will appear. Add a tag (in this case <b>F</b>) pre-pended with hash (#). Hit enter. Do this for all three datasets and it will look like it is shown in panel five.</figcaption></figure>
+<figure id="figure-9"><img src="../../images/starting_data.png" alt="Datasets in History" title="Sequencing data loaded into Galaxy history. The full progression from gray (scheduling) to green (all OK) state is shown. To make it easier to identify datasets as we progress through the analysis we use so-called &lt;em&gt;Hashtags&lt;/em&gt;. To tag a dataset: click on dataset to expand it (as shown in panel four); click the tag icon (&lt;i class='fa fa-tags' aria-hidden='true'&gt;&lt;/i&gt;) and a text field will appear. Add a tag (in this case &lt;b&gt;F&lt;/b&gt;) pre-pended with hash (#). Hit enter. Do this for all three datasets and it will appear as in panel five." /><figcaption><span class="figcaption-prefix">Figure 9:</span> Sequencing data loaded into Galaxy history. The full progression from gray (scheduling) to green (all OK) state is shown. To make it easier to identify datasets as we progress through the analysis we use so-called <em>Hashtags</em>. To tag a dataset: click on dataset to expand it (as shown in panel four); click the tag icon (<i class="fa fa-tags" aria-hidden="true"></i>) and a text field will appear. Add a tag (in this case <b>F</b>) pre-pended with hash (#). Hit enter. Do this for all three datasets and it will appear as in panel five.</figcaption></figure>
 
 <h3 id="assess-read-quality">Assess Read Quality</h3>
 
@@ -465,7 +465,7 @@
 
 <p>A quick look at quality score distribution will show a confusing picture:</p>
 
-<figure id="figure-10"><img src="../../images/multiqc1.png" alt="QC reported zoomed out" title="Because Illumina reads (green) are &lt;b&gt;much&lt;/b&gt; shorter that ONT reads (red) the plot looks strange. ONT reads generally have low quality scores and so they are not really meaningful in the context of this technology. However, in case of Illumina data they mean a lot..." /><figcaption><span class="figcaption-prefix">Figure 10:</span> Because Illumina reads (green) are <b>much</b> shorter that ONT reads (red) the plot looks strange. ONT reads generally have low quality scores and so they are not really meaningful in the context of this technology. However, in case of Illumina data they mean a lot...</figcaption></figure>
+<figure id="figure-10"><img src="../../images/multiqc1.png" alt="QC reported zoomed out" title="Because Illumina reads (green) are &lt;b&gt;much&lt;/b&gt; shorter that ONT reads (red) the plot looks strange. ONT reads generally have low quality scores and so they are not really meaningful in the context of this technology. However, in the case of Illumina data they mean a lot..." /><figcaption><span class="figcaption-prefix">Figure 10:</span> Because Illumina reads (green) are <b>much</b> shorter that ONT reads (red) the plot looks strange. ONT reads generally have low quality scores and so they are not really meaningful in the context of this technology. However, in the case of Illumina data they mean a lot...</figcaption></figure>
 
 <p>So let’s zoom in into Illumina data:</p>
 
@@ -484,7 +484,7 @@
         <li>“Paired or Single end data?” to <code class="highlighter-rouge">Paired</code></li>
         <li>“First Set of reads” to the forward reads file <code class="highlighter-rouge">f</code></li>
         <li>“Second Set of reads” to the reverse reads file <code class="highlighter-rouge">r</code></li>
-        <li>“Long reads” to the minion file</li>
+        <li>“Long reads” to the MinION file</li>
         <li>Use default parameters</li>
       </ul>
     </li>
@@ -495,7 +495,7 @@
 <blockquote class="warning-box">
   <h3 id="--assembly-takes-time"><i class="fa fa-cutlery" aria-hidden="true"></i> <i class="fa fa-coffee" aria-hidden="true"></i> Assembly takes time!</h3>
 
-  <p>There is no such thing as Assembly in real time. It takes time so it is a good time to have lunch or at least coffee. This Unicycler run will take anywhere between 90 min to two hours.</p>
+  <p>There is no such thing as Assembly in real time. It takes time so it is a good time to have lunch or at least coffee. This Unicycler run will take anywhere between 90 minutes and two hours.</p>
 </blockquote>
 
 <h2 id="assess-assembly-quality-with-quast">Assess Assembly quality with Quast</h2>
@@ -563,14 +563,14 @@
 
 <h4 id="starting-igv">Starting IGV</h4>
 
-<p>Go to IGV <a href="http://software.broadinstitute.org/software/igv/download">download page</a> and select one of the options. The one I would try first would be <strong>Jave Web Start</strong>.Simply click the <strong>Launch</strong> button for 10 GB distribution.</p>
+<p>Go to IGV <a href="http://software.broadinstitute.org/software/igv/download">download page</a> and select one of the options. The one I would try first would be <strong>Java Web Start</strong>. Simply click the <strong>Launch</strong> button for 10 GB distribution.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-visualization-in-igv"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Visualization in IGV</h3>
 
   <ol>
     <li>
-      <p>Start IGV, it will look something like this:</p>
+      <p>Start IGV. It will look something like this:</p>
 
       <figure id="figure-13"><img src="../../images/igv1.png" alt="IGV just started" title="IGV started by using Java Web Start. Note that it is currently showing Human Genome (hg38) build. This is obviously &lt;b&gt;not&lt;/b&gt; what we want." /><figcaption><span class="figcaption-prefix">Figure 13:</span> IGV started by using Java Web Start. Note that it is currently showing Human Genome (hg38) build. This is obviously <b>not</b> what we want.</figcaption></figure>
     </li>
