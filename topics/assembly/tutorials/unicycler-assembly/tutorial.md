@@ -63,7 +63,7 @@ In this analysis we will perform two tasks: (1) assembly and (2) annotation. Bel
 
 For assembly we will be using [Unicycler](https://github.com/rrwick/Unicycler) (also see publication by Wick:[2017](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005595)). Unicycler is designed specifically for *hybrid assembly* (that is, using both short- and long-read sequencing data) of small (e.g., bacterial, viral, organellar) genomes. In our hands it has produced complete high quality assemblies. Unicycler employs a multi-step process that utilizes a number of software tools:
 
-![Unicycler process](../../images/unicycler.png "Simplified view of the Unicycler assembly process (From Wick:2017). In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long reads to produce the longest possible set of contigs. These are then polished by aligning the original short-reads against long-read contigs and feeding these alignments to Pilon - an assembly improvement tool.")
+![Unicycler process](../../images/unicycler.png "Simplified view of the Unicycler assembly process (From Wick:2017). In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long reads to produce the longest possible set of contigs. These are then polished by aligning the original short reads against contigs and feeding these alignments to Pilon - an assembly improvement tool.")
 
 As you can see Unicycler relies heavily on [SPAdes](http://cab.spbu.ru/software/spades/) and [Pilon](https://github.com/broadinstitute/pilon/wiki). We will briefly describe these two tools.
 
