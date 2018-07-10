@@ -310,6 +310,30 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >    >    {: .solution }
 >    {: .question}
 >
+>    > ### {% icon tip %} Too Many Cows?
+>    > If you've installed the `cowsay` tool, ansible (for some reason) will take advantage of that to output a lot of the output with cowsay. To disable this you can `export ANSIBLE_NOCOWS=1` (Remember that exporting will only last as long as the current invocation of your terminal does, so consider adding this to your user profile if you wish to keep cowsay installed and still have legible output.)
+>    >
+>    > ```
+>    >  ________________
+>    > < PLAY [general] >
+>    >  ----------------
+>    >         \   ^__^
+>    >          \  (oo)\_______
+>    >             (__)\       )\/\
+>    >                 ||----w |
+>    >                 ||     ||
+>    >  ________________________
+>    > < TASK [Gathering Facts] >
+>    >  ------------------------
+>    >         \   ^__^
+>    >          \  (oo)\_______
+>    >             (__)\       )\/\
+>    >                 ||----w |
+>    >                 ||     ||
+>    > ```
+>    {: .tip}
+>
+>
 > 10. Login to the appropriate host and `cat /tmp/test.txt` to see that the change was made.
 >
 {: .hands_on}
