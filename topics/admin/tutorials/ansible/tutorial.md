@@ -246,7 +246,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >    >
 >    {: .tip }
 >
-> 6. Create a `roles/my-role/files` folder and within a file `test.txt`, containing the content "Hello, World"
+> 6. Create a `roles/my-role/files` folder, and within it a file `test.txt`, containing the content "Hello, World"
 >
 > 7. This is a complete role by itself and will copy the file `test.txt` from the `roles/my-role/files/` folder over to the remote server and place it in `/tmp`.
 >
