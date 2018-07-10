@@ -7,7 +7,7 @@ tutorial_name: ansible
 # Overview
 {:.no_toc}
 
-In this tutorial we have briefly cover what ansible is and how to understand what it does. This guide is not meant to make you an expert on ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Or maybe to contribute to the Galaxyproject Ansible roles
+In this tutorial we have briefly cover what ansible is and how to understand what it does. This guide is not meant to make you an expert on ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Or maybe to contribute to the [Galaxyproject Ansible roles](https://github.com/galaxyproject?q=ansible)
 
 This will be a very practical training with emphasis on looking at examples from modules and becoming self sufficient.
 
@@ -19,9 +19,9 @@ This will be a very practical training with emphasis on looking at examples from
 {: .agenda}
 
 
-# What is Ansible
+# What is Ansible?
 
-It runs commands on local or remote computers. It can move files around, create files from templates, and run command line tools. Primarily used for system administration tasks at scale. It has a push model rather than a pull model like puppet. If you've used puppet, ansible doesn't evaluate what changes need to be made and make those, it just runs through all of commands every time.
+Ansible runs commands on local or remote computers. It can move files around, create files from templates, and run command line tools. Primarily used for system administration tasks at scale. It has a push model rather than a pull model like puppet. If you've used puppet, ansible doesn't evaluate what changes need to be made and make those, it just runs through all of commands every time.
 
 Some terms that you should know first:
 
@@ -246,7 +246,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >    >
 >    {: .tip }
 >
-> 6. Create the folder and then file `roles/my-role/files/test.txt`, containing the content "Hello, World"
+> 6. Create a `roles/my-role/files` folder and within a file `test.txt`, containing the content "Hello, World"
 >
 > 7. This is a complete role by itself and will copy the file `test.txt` from the `roles/my-role/files/` folder over to the remote server and place it in `/tmp`.
 >
@@ -310,29 +310,6 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >    >    {: .solution }
 >    {: .question}
 >
->    > ### {% icon tip %} Too Many Cows?
->    > If you've installed the `cowsay` tool, ansible (for some reason) will take advantage of that to output a lot of the output with cowsay. To disable this you can `export ANSIBLE_NOCOWS=1` (Remember that exporting will only last as long as the current invocation of your terminal does, so consider adding this to your user profile if you wish to keep cowsay installed and still have legible output.)
->    >
->    > ```
->    >  ________________
->    > < PLAY [general] >
->    >  ----------------
->    >         \   ^__^
->    >          \  (oo)\_______
->    >             (__)\       )\/\
->    >                 ||----w |
->    >                 ||     ||
->    >  ________________________
->    > < TASK [Gathering Facts] >
->    >  ------------------------
->    >         \   ^__^
->    >          \  (oo)\_______
->    >             (__)\       )\/\
->    >                 ||----w |
->    >                 ||     ||
->    > ```
->    {: .tip}
->
 >
 > 10. Login to the appropriate host and `cat /tmp/test.txt` to see that the change was made.
 >
@@ -342,6 +319,30 @@ Now that you've done this, here are some starting points for exploration:
 
 - Add more hosts, watch as ansible executes over all of them in parallel.
 - Identify a task you do regularly, e.g. restarting a service. Find the ansible service module and add that to your playbook.
+
+> ### {% icon tip %} Too Many Cows?
+> If you've installed the `cowsay` tool, ansible (for some reason) will take advantage of that to output a lot of the output with cowsay. To disable this you can `export ANSIBLE_NOCOWS=1` (Remember that exporting will only last as long as the current invocation of your terminal does, so consider adding this to your user profile if you wish to keep cowsay installed and still have legible output.)
+>
+> ```
+>  ________________
+> < PLAY [general] >
+>  ----------------
+>         \   ^__^
+>          \  (oo)\_______
+>             (__)\       )\/\
+>                 ||----w |
+>                 ||     ||
+>  ________________________
+> < TASK [Gathering Facts] >
+>  ------------------------
+>         \   ^__^
+>          \  (oo)\_______
+>             (__)\       )\/\
+>                 ||----w |
+>                 ||     ||
+> ```
+{: .tip}
+
 
 ## Facts
 
@@ -386,7 +387,7 @@ The [`setup`](https://docs.ansible.com/ansible/latest/modules/setup_module.html)
 
 ## Templates
 
-Templates give you greater control over the files you are deploying to the remote system. If you need to deploy a file to multiple hosts, but configure it differently on each host, you should use templates. For instance deploying a service that should only listen on the correct IP address for that host would be a good use case for templates. All of the facts you discovered in the previous hands on are available to you to use in templates, `when` statements (like the ansible-cvmfs example we saw earlier). Additionally all of the variables you've defined are available as well.
+Templates give you greater control over the files you are deploying to the remote system. If you need to deploy a file to multiple hosts, but configure it differently on each host, you should use templates. For instance deploying a service that should only listen on the correct IP address for that host would be a good use case for templates. All of the facts you discovered in the previous hands on are available to you to use in templates, `when` statements (like the [ansible-cvmfs example we saw earlier](#modules-and-tasks)). Additionally all of the variables you've defined are available as well.
 
 > ### {% icon tip %} Template Syntax
 > Templates use Jinja2 syntax. If you are not familiar with it, you should [read about it](http://jinja.pocoo.org/docs/2.10/templates/) first, before moving on with the tutorial.
@@ -411,11 +412,13 @@ Templates give you greater control over the files you are deploying to the remot
 >
 > 5. Insert the following content:
 >
+>    {% raw %}
 >    ```
 >    [example]
 >    api_key = {{ my_role_key }}
 >    listen = {{ ansible_default_ipv4.address }}
 >    ```
+>    {% endraw %}
 >
 > 6. Edit `roles/my-role/tasks/main.yml` and append a new task to the end to template this file:
 >
@@ -453,7 +456,7 @@ Templates give you greater control over the files you are deploying to the remot
 >    Now that this has worked successfully, we will setup a `group_vars` folder
 >    to show how a person using `my-role` would override the `my_role_key` variable.
 >
-> 9. Create the directory `group_vars/`
+> 9. Create the folder `group_vars/` (in the root of your directory)
 >
 > 10. Create and edit `group_vars/general.yml`
 >
@@ -508,6 +511,8 @@ Now that you've built a small role, you can imagine that building real roles tha
 > ### {% icon hands_on %} Hands-on: Installing a module from ansible-galaxy
 >
 > 1. Run the command `ansible-galaxy install -p roles geerlingguy.git`
+>
+>    This will install the new role into your `roles` folder, alongside your own role.
 >
 > 2. Edit your playbook.yml and add the role at the bottom, after `my-role`
 >
