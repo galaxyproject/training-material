@@ -210,14 +210,14 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 >    1. Identify a host you have `SSH` access to. If you do not have access to any remote machines, `localhost` is fine.
 >    2. Make sure you can SSH into it. Test it now.
->    3. We will call our group "general".
->    4. Create a hosts file with the group general and the host you have chosen.
+>    3. We will call our group "my_hosts".
+>    4. Create a hosts file with the group `my_hosts` and the host you have chosen.
 >
 >    > ### {% icon solution %} Solution
 >    > The file should look like:
 >    >
 >    > ```
->    > [general]
+>    > [my_hosts]
 >    > your.host
 >    > ```
 >    >
@@ -246,7 +246,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >    >
 >    {: .tip }
 >
-> 6. Create a `roles/my-role/files` folder, and within it a file `test.txt`, containing the content "Hello, World"
+> 6. Create a `roles/my-role/files` folder, and within it a file named `test.txt`, containing the content "Hello, World"
 >
 > 7. This is a complete role by itself and will copy the file `test.txt` from the `roles/my-role/files/` folder over to the remote server and place it in `/tmp`.
 >
@@ -254,7 +254,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 >    ```
 >    ---
->    - hosts: general
+>    - hosts: my_hosts
 >      roles:
 >        - my-role
 >    ```
@@ -297,7 +297,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >    >    >
 >    >    > ```
 >    >    > $ ansible-playbook -i hosts playbook.yml -c local
->    >    > PLAY [general] *********************************
+>    >    > PLAY [my_hosts] *********************************
 >    >    > TASK [Gathering Facts] *************************
 >    >    > ok: [localhost]
 >    >    > TASK [my-role : Copy] **************************
@@ -325,7 +325,7 @@ Now that you've done this, here are some starting points for exploration:
 >
 > ```
 >  ________________
-> < PLAY [general] >
+> < PLAY [my_hosts] >
 >  ----------------
 >         \   ^__^
 >          \  (oo)\_______
@@ -357,9 +357,9 @@ The [`setup`](https://docs.ansible.com/ansible/latest/modules/setup_module.html)
 
 > ### {% icon hands_on %} Hands-on: The Setup Module
 >
-> 1. Run the command `ansible -i hosts -c local -m setup general`.
+> 1. Run the command `ansible -i hosts -c local -m setup my_hosts`.
 >
->    The `general` at the end refers to the group we defined in our hosts file.
+>    The `my_hosts` at the end refers to the group we defined in our hosts file.
 >
 > 2. Investigate the output. See what sort of information is made available to you.
 >
@@ -458,7 +458,7 @@ Templates give you greater control over the files you are deploying to the remot
 >
 > 9. Create the folder `group_vars/` (in the root of your directory)
 >
-> 10. Create and edit `group_vars/general.yml`
+> 10. Create and edit `group_vars/my_hosts.yml`
 >
 > 11. Insert the following:
 >
@@ -477,7 +477,7 @@ Templates give you greater control over the files you are deploying to the remot
 >     >    >
 >     >    > ```
 >     >    > $ ansible-playbook -i hosts playbook.yml -c local --check --diff
->     >    > PLAY [general] ******************************************
+>     >    > PLAY [my_hosts] ******************************************
 >     >    > TASK [Gathering Facts] **********************************
 >     >    > ok: [localhost]
 >     >    > TASK [my-role : Copy] ***********************************
@@ -525,7 +525,7 @@ Now that you've built a small role, you can imagine that building real roles tha
 >    >    > ### {% icon solution %} Solution
 >    >    >
 >    >    > Since you have been running the playbook as a non-root user (or at least you should have been!), the step to install a package fails.
->    >    > The solution to this is to set `become: true`. Edit your playbook.yml and add `become: true` just below `hosts: general`.
+>    >    > The solution to this is to set `become: true`. Edit your playbook.yml and add `become: true` just below `hosts: my_hosts`.
 >    >    >
 >    >    > `become` causes ansible to attempt to become a different user (using sudo/su/whatever is appropriate), by default this is `root`. If you want to become a different user, just set `become_user`. Beware, the user should be able to privilege escalate without a password prompt. Otherwise when you execute the playbook you should set `--ask-become-pass`, using the privilege escalation password for that host.
 >    >    >
