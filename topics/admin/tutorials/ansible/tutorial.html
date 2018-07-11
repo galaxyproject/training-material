@@ -211,7 +211,10 @@
       <li><a href="#templates" id="markdown-toc-templates">Templates</a></li>
     </ol>
   </li>
-  <li><a href="#ansible-galaxy" id="markdown-toc-ansible-galaxy">Ansible Galaxy</a></li>
+  <li><a href="#ansible-galaxy" id="markdown-toc-ansible-galaxy">Ansible Galaxy</a>    <ol>
+      <li><a href="#choosing-a-role" id="markdown-toc-choosing-a-role">Choosing a Role</a></li>
+    </ol>
+  </li>
   <li><a href="#other-stuff" id="markdown-toc-other-stuff">Other Stuff</a>    <ol>
       <li><a href="#with-items" id="markdown-toc-with-items">With Items</a></li>
       <li><a href="#when-changed" id="markdown-toc-when-changed">When Changed</a></li>
@@ -867,6 +870,26 @@ The solution to this is to set <code class="highlighter-rouge">become: true</cod
   </ol>
 
 </blockquote>
+
+<h2 id="choosing-a-role">Choosing a Role</h2>
+
+<p>Picking the best role for a task from Ansible Galaxy is not always a trivial task. Sometimes there will only be a single role doing what you need. Other times you’ll have to choose between 20 different roles that all look more or less the same. Here are some tips to guide you in identifying appropriate and well-written roles:</p>
+
+<ul>
+  <li>The name should match the software you are using (I.e. ignore a role named <code class="highlighter-rouge">stackstorm</code> when you are trying to set up <code class="highlighter-rouge">rabbitmq</code>. Ansible Galaxy does not have perfect search.)</li>
+  <li><code class="highlighter-rouge">geerlingguy</code> wrote a huge number of roles for many pieces of standard software. If there is a role from this person, this is usually a safe choice.</li>
+  <li>Check the GitHub readme of each role you consider using. Look for:
+    <ul>
+      <li>Extensive documentation of all of the variables, their default values, and how they behave.</li>
+      <li>An example playbook using the role</li>
+    </ul>
+  </li>
+  <li>A large number of downloads is a good sign that other people found it useful</li>
+</ul>
+
+<p>These are usually good proxies for quality, but do not treat them as strict rules. For an example of a role meeting many of these qualities, <a href="https://github.com/galaxyproject/ansible-cvmfs"><code class="highlighter-rouge">ansible-cvmfs</code></a> is good; the variables are well documented and there are example playbooks that you can (more or less) copy-and-paste and run.</p>
+
+<p>Sometimes a role will accomplish 95% of what you need to do, but not everything. Once you have installed the role with <code class="highlighter-rouge">ansible-galaxy install</code>, you can edit it locally to make any changes. In an ideal world you would contribute this back, but this is not always a high priority. Many projects copy roles directly into their repositories, e.g. <a href="https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles">galaxyproject</a> and <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles">usegalaxy.eu</a></p>
 
 <h1 id="other-stuff">Other Stuff</h1>
 
