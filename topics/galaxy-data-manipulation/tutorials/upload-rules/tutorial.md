@@ -301,33 +301,39 @@ For this multiomics example, we will start with a uniprot query and build URLs f
 
 ![UniProt table screenshot](../../images/rules/uniprot_url.png)
 
-Lets describe how to turn these accession IDs into URLs. If you:
+Lets describe how to turn these accession IDs into URLs.
 
-1. Click on one of the entries in the table (e.g. `E7C0H6`) in your [web browser](https://www.uniprot.org/uniprot/E7C0H6)
-2. Select "Format" from the top menu
-3. Click "FASTA (canonical)"
-
-   ![Link to access FASTA file](../../images/rules/uniprot_fasta.png)
-
-4. Your browser will redirect to the fasta file
-
-   ![Viewing the FASTA file](../../images/rules/uniprot_fasta_url.png)
-
-5. We can deduce that the FASTA files for the other entires in our table will be available from URLs of the form `https://www.uniprot.org/uniprot/{identifier}.fasta`
-
-We can use that to build a collection of FASTA files for this query. The following metadata will be used for this example
-
-```
-Entry	Entry name	Status	Protein names	Gene names	Organism	Length
-E7C0H6	E7C0H6_9PAPI	unreviewed	Major capsid protein L1	L1	Equus caballus papillomavirus 3	498
-E7C0H0	E7C0H0_9PAPI	unreviewed	Protein E6	E6	Equus caballus papillomavirus 3	150
-E7C0H5	E7C0H5_9PAPI	unreviewed	Minor capsid protein L2	L2	Equus caballus papillomavirus 3	498
-E7C0H1	E7C0H1_9PAPI	unreviewed	Protein E7		Equus caballus papillomavirus 3	93
-E7C0H3	E7C0H3_9PAPI	unreviewed	Regulatory protein E2	E2	Equus caballus papillomavirus 3	421
-E7C0H4	E7C0H4_9PAPI	unreviewed	Putative E4 early protein (Fragment)		Equus caballus papillomavirus 3	175
-E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-dependent helicase E1)	E1	Equus caballus papillomavirus 3	621
-```
+> ### {% icon hands_on %} Hands-on: Turn Uniprot Accession IDs into URLs
+>
+> 1. Open [Uniprot](https://www.uniprot.org/uniprot/E7C0H6)
+> 1. **Click** on one of the entries in the table (e.g. `E7C0H6`)
+> 2. **Select** `Format` from the top menu
+> 3. **Click** `FASTA (canonical)`
+>
+>    ![Link to access FASTA file](../../images/rules/uniprot_fasta.png)
+>
+> 4. Your browser will redirect to the fasta file
+>
+>    ![Viewing the FASTA file](../../images/rules/uniprot_fasta_url.png)
+>
+> 5. We can deduce that the FASTA files for the other entires in our table will be available from URLs of the form `https://www.uniprot.org/uniprot/{identifier}.fasta`
+>
+>    We can use that to build a collection of FASTA files for this query:
+>
+>    ```
+>    Entry	Entry name	Status	Protein names	Gene names	Organism	Length
+>    E7C0H6	E7C0H6_9PAPI	unreviewed	Major capsid protein L1	L1	Equus caballus papillomavirus 3	498
+>    E7C0H0	E7C0H0_9PAPI	unreviewed	Protein E6	E6	Equus caballus papillomavirus 3	150
+>    E7C0H5	E7C0H5_9PAPI	unreviewed	Minor capsid protein L2	L2	Equus caballus papillomavirus 3	498
+>    E7C0H1	E7C0H1_9PAPI	unreviewed	Protein E7		Equus caballus papillomavirus 3	93
+>    E7C0H3	E7C0H3_9PAPI	unreviewed	Regulatory protein E2	E2	Equus caballus papillomavirus 3	421
+>    E7C0H4	E7C0H4_9PAPI	unreviewed	Putative E4 early protein (Fragment)		Equus caballus papillomavirus 3	175
+>    E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-dependent helicase E1)	E1	Equus caballus papillomavirus 3	621
+>    ```
+{: .hands_on}
 {:#example-3-metadata}
+
+We will use this metadata in our next example.
 
 > ### {% icon hands_on %} Hands-on: Create history
 >
