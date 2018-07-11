@@ -32,6 +32,11 @@ Two scenarios:
 The latter is probably better in case of large changes.
 
 ---
+# Another possibility
+
+If you want to keep your configurations and other local changes under version control, you can move these files/folders outside of Galaxy and into their own repository. You can then use symbolic links to place the files where Galaxy expects them. A good case for this could be dynamic runners, galaxy.yml files, job_conf.xml, etc.
+
+---
 class: left
 # Keeping a release up to date (1)
 
@@ -116,8 +121,11 @@ $ deactivate
 class: left
 # make client on `dev`
 
-Since January 2018, the `dev` and the freezed Galaxy branches do not contain updated client
-build artifacts (e.g. JavaScript bundles in `static/`).
+Since January 2018, the `dev` and pre-release (frozen) Galaxy branches do not
+contain client build artifacts (e.g. JavaScript bundles in `static/`).  For
+`dev`, Galaxy will automatically build the client locally, as needed, though if
+you need to do so manually (e.g. to include local changes), the following steps
+should do it:
 
 1. install `yarn`
 2. run `make client-production`

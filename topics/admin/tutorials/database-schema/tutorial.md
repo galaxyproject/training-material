@@ -347,7 +347,7 @@ The SpyOut directory will contain the generated reports and diagrams, anchored a
 
 # Conclusion
 
-There is a lot of information stored in the Galaxy database. Use this information for trouble shooting when necessary and use it as a source for extendend user statistics.
+There is a lot of information stored in the Galaxy database. Use this information for trouble shooting when necessary and use it as a source for extended user statistics.
 
 
 # :clap: Thank you

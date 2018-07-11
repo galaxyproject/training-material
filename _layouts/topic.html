@@ -37,7 +37,7 @@ layout: base
                 <th>Slides</th>
                 <th>Hands-on</th>
 
-                {% if topic.type != "admin-dev" %}
+                {% if topic.type == "use" %}
                 <th>Input dataset</th>
                 <th>Workflows</th>
                 <th>Galaxy tour</th>
@@ -50,6 +50,9 @@ layout: base
 
             {% for material in topic.material %}
                 {% if material.enable != "false" %}
+                        <script type="application/ld+json">
+                            {% include material.jsonld content=material %}
+                        </script>
                     <tr>
                         <td>
                             {{ material.title }}
@@ -70,7 +73,7 @@ layout: base
                                 {% endif %}
                             </td>
                             <td></td>
-                            {% if topic.type != "admin-dev" %}
+                            {% if topic.type == "use" %}
                                 <td></td>
                                 <td></td>
                             {% endif %}
@@ -102,7 +105,7 @@ layout: base
                                 {% endif %}
                             </td>
 
-                            {% if topic.type != "admin-dev" %}
+                            {% if topic.type == "use" %}
                                 <td>
                                     {% if material.zenodo_link != "" %}
                                     <a href="{{ material.zenodo_link }}">
@@ -150,9 +153,9 @@ layout: base
         </table>
 
         <h2 id="docker_image">Galaxy instances</h2>
-        <p>You can also a public Galaxy instance which has been tested for the availability of the used tools. They are listed along with the tutorials above.</p>
+        <p>You can use a public Galaxy instance which has been tested for the availability of the used tools. They are listed along with the tutorials above.</p>
         {% if topic.docker_image and topic.docker_image != "" %}
-            <p>You can also use for these tutorials the dedicated Docker image:</p>
+            <p>You can also use the following Docker image for these tutorials:</p>
             <pre><code>docker run -d -p 8080:80 {{ topic.docker_image }}</code></pre>
             <p>It will launch a flavored Galaxy instance available on <a href="http://localhost:8080">http://localhost:8080</a>.</p>
         {% endif %}
@@ -163,15 +166,22 @@ layout: base
         {% for maintainer in topic.maintainers %}
             <li>
                 <a href="{{ site.baseurl }}/hall-of-fame#{{ maintainer }}">{{ contributors[maintainer].name }}</a>
-                {% if contributors[maintainer].email and contributors[maintainer].email != "" %}
-                    (<a href="mailto:{{ contributors[maintainer].email }}">{{ contributors[maintainer].email }}</a>)
+                {% if contributors[maintainer].maintainer_contact %}
+                    {% if contributors[maintainer].maintainer_contact == 'email' %}
+                    (<a href="mailto:{{ contributors[maintainer].email }}">Contact {% icon email %}</a> )
+                    {% elsif contributors[maintainer].maintainer_contact == 'gitter' %}
+                    (<a href="https://gitter.im/{{ contributors[maintainer].gitter }}">Contact {% icon gitter %}</a> )
+                    {% else %}
+                    (<a href="{{ contributors[maintainer].maintainer_contact }}">Contact</a>)
+                    {% endif %}
+
                 {% endif %}
             </li>
         {% endfor %}
         </ul>
 
         <p>
-            <em>For any question related to this topic and the content, you can contact them.</em>
+            <em>For any question related to this topic and the content, you can contact them or visit our <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter channel</a>.</em>
         </p>
 
         <h2 id="contributors">Contributors</h2>
@@ -192,7 +202,7 @@ layout: base
         {% for username in contributors_list %}
             {% assign contributor = contributors[username] %}
             <li>
-                <a href="{{ site.baseurl }}/hall-of-fame#{{ username }}"> {{ contributor.name }}</a>
+                <a href="{{ site.baseurl }}/hall-of-fame#{{ username }}">{% if contributor.name %}{{ contributor.name }}{% else %}{{ username }}{% endif %}</a>
             </li>
         {% endfor %}
         </ul>

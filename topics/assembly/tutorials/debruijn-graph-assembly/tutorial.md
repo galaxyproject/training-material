@@ -109,7 +109,7 @@ Tables of results from **(a)** Simple assembly and **(b)** optimised assembly.
 
 # Assemble with SPAdes
 
-We will now perform an assembly with the much more modern SPAdes assembler. It goes through a similar process to Velvet in the fact that it uses and simplifies de Bruijn graphs but it uses multiple values for k-mer size and combines the resultant graphs. This combination produces very good assemblies. When using SPAdes it is typical to choose at least 3 k-mer sizes. One lowm one medium and one high. We will use 33, 55 and 91.
+We will now perform an assembly with the much more modern SPAdes assembler. It goes through a similar process to Velvet in the fact that it uses and simplifies de Bruijn graphs but it uses multiple values for k-mer size and combines the resultant graphs. This combination produces very good assemblies. When using SPAdes it is typical to choose at least 3 k-mer sizes. One low, one medium and one high. We will use 33, 55 and 91.
 
 > ### {% icon hands_on %} Hands-on: Assemble with SPAdes
 >

@@ -20,7 +20,7 @@ The computational analysis of DS data (Part `C` in the figure above) produces tw
 * Single Strand Consensus Sequences (SSCS; panel `iv` in the figure above);
 * Duplex Consensus Sequences (DCS; panel `v` in the figure above).
 
-The DCSs have the ultimate accuracy, yet the SSCSs can also be very useful when ampliconic DNA is used as an input to a DS experiment. Let us illustrate the utility of SSCSs with the following example. Suppose one is interested in quantifying variants in a virus that has a very low titer in body fluids. Since DS procedure requires a substantial amount of starting DNA (between [between 0.2 and 3 micrograms](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4271547/)) the virus needs to be enriched. This can be done, for example, with a PCR designed to amplify the entire genome of the virus. Yet the problem is that during the amplification heterologous strands will almost certainly realign to some extent forming hetoroduplex molecules:
+The DCSs have the ultimate accuracy, yet the SSCSs can also be very useful when ampliconic DNA is used as an input to a DS experiment. Let us illustrate the utility of SSCSs with the following example. Suppose one is interested in quantifying variants in a virus that has a very low titer in body fluids. Since DS procedure requires a substantial amount of starting DNA (between [between 0.2 and 3 micrograms](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4271547/)) the virus needs to be enriched. This can be done, for example, with a PCR designed to amplify the entire genome of the virus. Yet the problem is that during the amplification heterologous strands will almost certainly realign to some extent forming heteroduplex molecules:
 
 >![hd](../../images/het.png)
 >
@@ -73,7 +73,7 @@ This is the exact image of the **Make consensus reads** interface:
 
 ## Filtering consensuses
 
-The _Du Novo_ algorithm occasionally inserts`N`and/or [IUPAC notations](https://en.wikipedia.org/wiki/Nucleic_acid_notation) at sites where a definive base cannot be identified according to the major rule consensus. We however do not want such bases when we call variants. The tool **Sequence Content Trimmer** will help with filtering these out. Here are the parameters we used:
+The _Du Novo_ algorithm occasionally inserts`N`and/or [IUPAC notations](https://en.wikipedia.org/wiki/Nucleic_acid_notation) at sites where a definitive base cannot be identified according to the major rule consensus. We however do not want such bases when we call variants. The tool **Sequence Content Trimmer** will help with filtering these out. Here are the parameters we used:
 
 
 >![ContentTrimmer](../../images/contentTrimmer.png)
@@ -176,7 +176,7 @@ SSCSs are generated when the **Output single-strand consensus sequences** option
 
 ## Repeating this analysis using workflows
 
-The analysis described above can be rerun using a workflow. Workflow combined all steps into a single entity that only needs to be executed once. We provide two workflows:
+The analysis described above can be rerun using a workflow. Workflow combined all steps into a single entity that only needs to be executed once. We provide two different workflows:
 
 * _Du Novo_ analysis from reads (import from [here](https://usegalaxy.org/u/aun1/w/duplex-analysis-from-reads)). This workflow uses fastq reads as input. It should be used if you analyze data for first time.
 * _Du Novo_ analysis from aligned families (import from [here](https://usegalaxy.org/u/aun1/w/copy-of-duplex-analysis-from-reads)). This workflow starts with aligned families. It should be used for re-analysis of already generated DCS and SSCS data.

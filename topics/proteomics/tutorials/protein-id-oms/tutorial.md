@@ -123,13 +123,10 @@ To calculate FDRs, we first have to annotate the identified peptides to determin
 >   > 1. How many peptides were identified?
 >   > 2. How many peptides with oxidized methionine were identified?
 >   >
->   >  <details>
->   >  <summary>Click to view answers</summary>
->   >   <ol type="1">
->   >     <li> You should have identified 2,616 unique stripped peptides.</li>
->   >     <li> 503 peptides contain an oxidized methionine (MeO).</li>
->   >   </ol>
->   >  </details>
+>   >  > ### {% icon solution %} Solution
+>   >  > 1. You should have identified 2,616 unique stripped peptides.
+>   >  > 2. 503 peptides contain an oxidized methionine (MeO).
+>   >  {: .solution }
 >   {: .question}
 {: .hands_on}
 
@@ -168,15 +165,12 @@ It also enables you to check for contaminations in your samples.
 >   > 3. How many mycoplasma proteins did you identify? Does this mean that the analyzed HeLa cells were infected with mycoplasma?
 >   > 4. How many false positives do we expect in our list?
 >   >
->   >  <details>
->   >  <summary>Click to view answers</summary>
->   >   <ol type="1">
->   >     <li> TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts. Also, five human proteins are listed, these are commonly introduced during sample preparation. As we were analyzing a human sample, it is not neccessary to remove these proteins, as they may as well originate from the HeLa cells.</li>
->   >     <li> Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.</li>
->   >     <li> One protein stemming from *Acholeplasma laidlawii* (ACHLI) was identified. If you again filter the protein list for "ACHLI", you will see that it was identified by a single peptide. Thus, it is likely a false positive and does not indicate contamination.</li>
->   >     <li> As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list.</li>
->   >   </ol>
->   >  </details>
+>   >  > ### {% icon solution %} Solution
+>   >  > 1.  TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts. Also, five human proteins are listed, these are commonly introduced during sample preparation. As we were analyzing a human sample, it is not neccessary to remove these proteins, as they may as well originate from the HeLa cells.
+>   >  > 2.  Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.
+>   >  > 3.  One protein stemming from *Acholeplasma laidlawii* (ACHLI) was identified. If you again filter the protein list for "ACHLI", you will see that it was identified by a single peptide. Thus, it is likely a false positive and does not indicate contamination.
+>   >  > 4.  As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list.
+>   >  {: .solution }
 >   {: .question}
 {: .hands_on}
 
@@ -221,13 +215,10 @@ Here, we will use the OpenMS tool [ConsensusID](http://ftp.mi.fu-berlin.de/pub/O
 >   > 1. How many PSMs could be matched with XTandem and MSGFPlus alone? How many peptides were identified?
 >   > 2. How many PSMs could be matched after combining the results with ConsensusID? How many peptides were identified?
 >   >
->   >  <details>
->   >  <summary>Click to view answers</summary>
->   >   <ol type="1">
->   >     <li> After FDR-filtering, XTandem matched 3,552 PSMs (2,616 unique peptides) and MSGFPlus matched 4,292 PSMs (2,991 peptides).</li>
->   >     <li> Combining the results with ConsensusID leads to matching of 4,299 PSMs (3,041 unique peptides).</li>
->   >   </ol>
->   >  </details>
+>   >  > ### {% icon solution %} Solution
+>   >  > 1.  After FDR-filtering, XTandem matched 3,552 PSMs (2,616 unique peptides) and MSGFPlus matched 4,292 PSMs (2,991 peptides).
+>   >  > 2.  Combining the results with ConsensusID leads to matching of 4,299 PSMs (3,041 unique peptides).
+>   >  {: .solution }
 >   {: .question}
 {: .hands_on}
 

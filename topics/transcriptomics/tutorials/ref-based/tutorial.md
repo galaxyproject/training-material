@@ -46,7 +46,7 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 >
 >       To import the files, there are two options:
 >       - Option 1: From a shared data library if available (ask your instructor)
->       - Option 2: From [Zenodo](https://dx.doi.org/10.5281/zenodo.1185122)
+>       - Option 2: From [Zenodo](https://doi.org/10.5281/zenodo.1185122)
 >
 >           > ### {% icon tip %} Tip: Importing data via links
 >           >
@@ -81,7 +81,7 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 > 
 >    > ### {% icon tip %} Tip: Adding a tag
 >    > * Click on the dataset
->    > * Click on **Edit dataset tags**
+>    > * Click on <i class="fa fa-tags"></i> **Edit dataset tags** 
 >    > * Add the tag starting with `#`
 >    >    
 >    >     The tags starting with `#` will be automatically propagated to the outputs of tools using this dataset.
@@ -115,10 +115,12 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    >
 >    > What is the read length?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    The read length is 37 bp
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    >
+>    >    > The read length is 37 bp
+>    >    >
+>    >    {: .solution}
+>    >
 >    {: .question}
 >
 > 3. **MultiQC** {% icon tool %}: Aggregate the FastQC reports with
@@ -132,10 +134,12 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    >
 >    > What is the quality for the sequences for the different files?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    Everything seems ok for 3 of the files. But for GSM461180_2, the quality seems to decrease quite a lot at the end of the sequences
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    >
+>    >    > Everything seems ok for 3 of the files. But for GSM461180_2, the quality seems to decrease quite a lot at the end of the sequences
+>    >    >
+>    >    {: .solution}
+>    >
 >    {: .question}
 >
 > 2. **Trim Galore** {% icon tool %}: Treat for the quality of sequences by running Trim Galore! with
@@ -147,10 +151,12 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    >
 >    > Why do we run Trim Galore! only once on a paired-end dataset and not twice, once for each dataset?
 >    >
->    > <details>
->    > <summary>Click to view answers</summary>
->    > Trim Galore can remove sequences if they become too short during the trimming process. For paired-end files Trim Galore! removes entire sequence pairs if one (or both) of the two reads became shorter than the set length cutoff. Reads of a read-pair that are longer than a given threshold but for which the partner read has become too short can optionally be written out to single-end files. This ensures that the information of a read pair is not lost entirely if only one read is of good quality.
->    > </details>
+>    >    > ### {% icon solution %} Solution
+>    >    >
+>    >    > Trim Galore can remove sequences if they become too short during the trimming process. For paired-end files Trim Galore! removes entire sequence pairs if one (or both) of the two reads became shorter than the set length cutoff. Reads of a read-pair that are longer than a given threshold but for which the partner read has become too short can optionally be written out to single-end files. This ensures that the information of a read pair is not lost entirely if only one read is of good quality.
+>    >    >
+>    >    {: .solution}
+>    >
 >    {: .question}
 >
 {: .hands_on}
@@ -177,33 +183,33 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 
 ![Splice-aware alignment](../../images/splice_aware_alignment.png "Principle of spliced mappers: (1) identification of the reads spanning a single exon, (2) identification of the splicing junctions on the unmapped reads")
 
-<details>
-<summary>Click for more details on the difference spliced mappers</summary>
-
-<p>Several spliced mappers have been developed over the year specially with the explosion of RNA-seq data.</p>
-
-<p><a hef="https://ccb.jhu.edu/software/tophat/index.shtml">TopHat</a> (<a href="https://academic.oup.com/bioinformatics/article/25/9/1105/203994">Trapnell et al, Bioinformatics, 2009</a>) was one of the first tools designed specifically to address this problem. In TopHat reads are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that initially unmapped (IUM). "Piles" of reads representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions.</p>
-
-![TopHat](../../images/tophat.png "TopHat (Trapnell et al, Bioinformatics, 2009)")
-
-<p>TopHat has been subsequently improved with the development of TopHat2 (<a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36">Kim et al, Genome Biology, 2013</a>):</p>
-
-![TopHat2](../../images/13059_2012_Article_3053_Fig6_HTML.jpg "TopHat2 (Kim et al, Genome Biology, 2013)")
-
-<p>To further optimize and speed up spliced read alignment Kim et al (<a href="https://www.nature.com/articles/nmeth.3317">Nat Methods, 2015</a>) developed <a href="https://ccb.jhu.edu/software/hisat2/index.shtml">HISAT</a>. It uses a set of <a href="https://en.wikipedia.org/wiki/FM-index">FM-indices</a> consisting one global genome-wide index and a collection of ~48,000 local overlapping 42 kb indices (~55,000 56 kb indices in HISAT2). This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:</p>
-
-![Hierarchical Graph FM index in HISAT/HISAT2](../../images/hisat.png "Hierarchical Graph FM index in HiSat/HiSat2 (Kim et al, Nat Methods, 2015)")
-
-<p>A part of the read (blue arrow) is first mapped to the genome using the global FM index. The HISAT then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (<strong>a</strong>) it succeeds and this read aligned as it completely resides within an exon. In (<strong>b</strong>) the extension hits a mismatch. Now HISAT takes advantage of the local FM index overlapping this location to find the appropriate mapping for the remainder of this read (green arrow). The (<strong>c</strong>) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow).</p>
-
-<p><a href="https://github.com/alexdobin/STAR">STAR aligner</a> is a fast alternative for mapping RNAseq reads against genome utilizing uncompressed <a href="https://en.wikipedia.org/wiki/Suffix_array">suffix array</a>. It operates in two stages (<a href="https://academic.oup.com/bioinformatics/article/29/1/15/272537">Dobin et al, Bioinformatics, 2013</a>). In the first stage it performs seed search:</p>
-
-![STAR's seed search](../../images/star.png "STAR's seed search (Dobin et al, Bioinformatics, 2013)")
-
-<p>Here a read is split between two consecutive exons. STAR starts to look for a maximum mappable prefix (MMP) from the beginning of the read until it can no longer match continuously. After this point it start to MMP for the unmatched portion of the read (<strong>a</strong>). In the case of mismatches (<strong>b</strong>) and unalignable regions (<strong>c</strong>) MMPs serve as anchors from which to extend alignments</p>
-
-<p>At the second stage STAR stitches MMPs to generate read-level alignments that (contrary to MMPs) can contain mismatches and indels. A scoring scheme is used to evaluate and prioritize stitching combinations and to evaluate reads that map to multiple locations. STAR is extremely fast but requires a substantial amount of RAM to run efficiently.</p>
-</details>
+> ### {% icon details %} More details on the difference spliced mappers
+> 
+> Several spliced mappers have been developed over the year specially with the explosion of RNA-seq data.
+> 
+> [TopHat](https://ccb.jhu.edu/software/tophat/index.shtml) ([Trapnell et al, Bioinformatics, 2009](https://academic.oup.com/bioinformatics/article/25/9/1105/203994)) was one of the first tools designed specifically to address this problem. In TopHat reads are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that initially unmapped (IUM). "Piles" of reads representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions.
+> 
+>    ![TopHat](../../images/tophat.png "TopHat (Trapnell et al, Bioinformatics, 2009)")
+> 
+> TopHat has been subsequently improved with the development of TopHat2 ([Kim et al, Genome Biology, 2013](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36)):
+>
+>    ![TopHat2](../../images/13059_2012_Article_3053_Fig6_HTML.jpg "TopHat2 (Kim et al, Genome Biology, 2013)")
+>
+> To further optimize and speed up spliced read alignment Kim et al ([Nat Methods, 2015](https://www.nature.com/articles/nmeth.3317)) developed [HISAT](https://ccb.jhu.edu/software/hisat2/index.shtml). It uses a set of [FM-indices](https://en.wikipedia.org/wiki/FM-index) consisting one global genome-wide index and a collection of ~48,000 local overlapping 42 kb indices (~55,000 56 kb indices in HISAT2). This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:
+>
+>    ![Hierarchical Graph FM index in HISAT/HISAT2](../../images/hisat.png "Hierarchical Graph FM index in HiSat/HiSat2 (Kim et al, Nat Methods, 2015)")
+> 
+> A part of the read (blue arrow) is first mapped to the genome using the global FM index. The HISAT then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (**a**) it succeeds and this read aligned as it completely resides within an exon. In (**b**) the extension hits a mismatch. Now HISAT takes advantage of the local FM index overlapping this location to find the appropriate mapping for the remainder of this read (green arrow). The (**c**) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow).
+> 
+> [STAR aligner](https://github.com/alexdobin/STAR) is a fast alternative for mapping RNAseq reads against genome utilizing uncompressed [suffix array](https://en.wikipedia.org/wiki/Suffix_array). It operates in two stages [Dobin et al, Bioinformatics, 2013](https://academic.oup.com/bioinformatics/article/29/1/15/272537). In the first stage it performs seed search:
+> 
+>    ![STAR's seed search](../../images/star.png "STAR's seed search (Dobin et al, Bioinformatics, 2013)")
+>
+> Here a read is split between two consecutive exons. STAR starts to look for a maximum mappable prefix (MMP) from the beginning of the read until it can no longer match continuously. After this point it start to MMP for the unmatched portion of the read (**a**). In the case of mismatches (**b**) and unalignable regions (**c**) MMPs serve as anchors from which to extend alignments</p>
+>
+> At the second stage STAR stitches MMPs to generate read-level alignments that (contrary to MMPs) can contain mismatches and indels. A scoring scheme is used to evaluate and prioritize stitching combinations and to evaluate reads that map to multiple locations. STAR is extremely fast but requires a substantial amount of RAM to run efficiently.
+> 
+{: .details}
 
 ## Mapping
 
@@ -211,7 +217,7 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using STAR.
 
 > ### {% icon hands_on %} Hands-on: Spliced mapping
 >
-> 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDGP6.87.gtf`) from the shared data library or from [Zenodo](https://dx.doi.org/10.5281/zenodo.1185122) into your current Galaxy history
+> 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDGP6.87.gtf`) from the shared data library or from [Zenodo](https://doi.org/10.5281/zenodo.1185122) into your current Galaxy history
 >    - Rename the dataset if necessary
 >    - Verify that the datatype is `gtf` and not `gff`
 >
@@ -236,10 +242,12 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using STAR.
 >    >
 >    > Which percentage of reads were mapped exactly once for both samples?
 >    >
->    >    <details>
->    >    <summary>Click to view answer</summary>
->    >    More than 83% for GSM461177 and more than 78% for GSM461180
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    >
+>    >    > More than 83% for GSM461177 and more than 78% for GSM461180
+>    >    >
+>    >    {: .solution}
+>    >
 >    {: .question}
 {: .hands_on}
 
@@ -250,13 +258,12 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using STAR.
 > 1. What is a BAM file?
 > 2. What does such a file contain?
 >
->    <details>
->    <summary>Click to view answer</summary>
->    <ol type="1">
->    <li>a BAM file is the binary version of a SAM file</li>
->    <li>It contains information about the mapping: for each mapped read, the position on the reference genome, the mapping quality, ...</li>
->    </ol>
->    </details>
+>    > ### {% icon solution %} Solution
+>    >
+>    > 1. a BAM file is the binary version of a SAM file
+>    > 2. It contains information about the mapping: for each mapped read, the position on the reference genome, the mapping quality, ...
+>    >
+>    {: .solution}
 {: .question}
 
 ## Inspection of the mapping results
@@ -293,13 +300,12 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 >    > 1. Which information does appear on the top in grey?
 >    > 2. What do the connecting lines between some of the aligned reads indicate?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The coverage plot: the sum of mapped reads at each position</li>
->    >    <li>They indicate junction events (or splice sites), *i.e.*, reads that are mapped across an intron</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    >
+>    >    > 1. The coverage plot: the sum of mapped reads at each position
+>    >    > 2. They indicate junction events (or splice sites), *i.e.*, reads that are mapped across an intron
+>    >    >
+>    >    {: .solution}
 >    {: .question}
 >
 > 3. **IGV** {% icon tool %}: Inspect the splice junctions using a **Sashimi plot**
@@ -318,14 +324,13 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 >    > 2. What do the numbers on the arcs mean?
 >    > 3. Why do we observe different stacked groups of blue linked boxes at the bottom?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The coverage for each alignment track is plotted as a bar graph. Arcs represent observed splice junctions, *i.e.*, reads spanning introns</li>
->    >    <li>The numbers refer to the number of these observed junction reads. </li>
->    >    <li>The groups of linked boxes on the bottom represent different transcripts from a single gene differing in the involved exon.</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    >
+>    >    > 1. The coverage for each alignment track is plotted as a bar graph. Arcs represent observed splice junctions, *i.e.*, reads spanning introns
+>    >    > 2. The numbers refer to the number of these observed junction reads. 
+>    >    > 3. The groups of linked boxes on the bottom represent different transcripts from a single gene differing in the involved exon.
+>    >    >
+>    >    {: .solution}
 >    {: .question}
 >
 >    > ### {% icon comment %} Comment
@@ -414,13 +419,11 @@ If the fractions in the two last lines are too close to each other, we conclude 
 > 1. Which fraction of the reads in the BAM file can be explained assuming which library type for `GSM461177`?
 > 2. Which library type do you choose for both samples?
 >
->    <details>
->    <summary>Click to view answer</summary>
->    <ol type="1">
->    <li>Fraction of reads explained by "1++,1--,2+-,2-+": 0.4648 - Fraction of reads explained by "1+-,1-+,2++,2--": 0.4388</li>
->    <li>The library seems to be of the type unstranded for both samples. </li>
->    </ol>
->    </details>
+>    > ### {% icon solution %} Solution
+>    > 
+>    > 1. Fraction of reads explained by "1++,1--,2+-,2-+": 0.4648 - Fraction of reads explained by "1+-,1-+,2++,2--": 0.4388
+>    > 2. The library seems to be of the type unstranded for both samples.
+>    {: .solution}
 {: .question}
 
 > ### {% icon comment %} Comment
@@ -462,14 +465,13 @@ We now run **featureCounts** to count the number of reads per annotated gene.
 >
 >    > ### {% icon question %} Question
 >    >
->    > 1. How many reads have been assigned to a gene?
+>    > How many reads have been assigned to a gene?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>Around 70% of the reads have been assigned to genes: this quantity is correct enough. If it is going below 50%, you should investigate where are mapping your reads (with IGV) and check that the annotation corresponds to the reference genome (version).</li>
->    >    </ol>
->    >    </details>
+>    >    >### {% icon solution %} Solution
+>    >    >
+>    >    > Around 70% of the reads have been assigned to genes: this quantity is correct enough. If it is going below 50%, you should investigate where are mapping your reads (with IGV) and check that the annotation corresponds to the reference genome (version).
+>    >    >
+>    >    {: .solution}
 >    {: .question}
 >
 {: .hands_on}
@@ -481,13 +483,12 @@ The main output of **featureCounts** is a big table.
 > 1. Which information does the generated table files contain?
 > 2. Which feature has the most reads mapped on it for both samples?
 >
->    <details>
->    <summary>Click to view answers</summary>
->    <ol type="1">
->    <li>The useful result file is a tabular file with two columns: the gene id and the number of reads mapped on the corresponding gene</li>
->    <li>To display the most abundantly detected feature, we need to sort the files with the features and the number of reads mapped to them. This can be done using the Sort tool on the second column and in descending order, which reveals that FBgn0000556 is the feature with the most reads (around 258,000 in GSM461177 and 253,000 in GSM461180) mapped on it.</li>
->    </ol>
->    </details>
+>    > ### {% icon solution %} Solution
+>    >
+>    > 1. The useful result file is a tabular file with two columns: the gene id and the number of reads mapped on the corresponding gene
+>    > 2. To display the most abundantly detected feature, we need to sort the files with the features and the number of reads mapped to them. This can be done using the Sort tool on the second column and in descending order, which reveals that FBgn0000556 is the feature with the most reads (around 258,000 in GSM461177 and 253,000 in GSM461180) mapped on it.
+>    >
+>    {: .solution}
 {: .question}
 
 ## Identification of the differentially expressed features
@@ -496,7 +497,7 @@ In the previous section, we counted reads that mapped to genes for two sample. T
 
 > ### {% icon hands_on %} (Optional) Hands-on: Re-run on the other datasets
 >
-> You can do the same process on the other sequence files available on [Zenodo](https://dx.doi.org/10.5281/zenodo.1185122)
+> You can do the same process on the other sequence files available on [Zenodo](https://doi.org/10.5281/zenodo.1185122)
 >
 > - Paired-end data
 >     - `GSM461178_1` and `GSM461178_2`
@@ -509,7 +510,7 @@ In the previous section, we counted reads that mapped to genes for two sample. T
 > This is really interesting to redo on the other datasets, specially to check how the parameters are inferred given the different type of data.
 {: .hands_on}
 
-To save time, we have run the necessary steps for you and obtained 7 count files, available on [Zenodo](https://dx.doi.org/10.5281/zenodo.1185122).
+To save time, we have run the necessary steps for you and obtained 7 count files, available on [Zenodo](https://doi.org/10.5281/zenodo.1185122).
 
 These files contain for each gene of *Drosophila* the number of reads mapped to it. We could compare the files directly and calculate the extent of differential gene expression, but the number of sequenced reads mapped to a gene depends on:
 
@@ -548,7 +549,7 @@ Here treatment is the primary factor which we are interested in. The sequencing 
 > ### {% icon hands_on %} Hands-on: Determines differentially expressed features
 >
 > 1. Create a new history
-> 2. Import the seven count files from [Zenodo](https://dx.doi.org/10.5281/zenodo.1185122) or the data library
+> 2. Import the seven count files from [Zenodo](https://doi.org/10.5281/zenodo.1185122) or the data library
 >    - `GSM461176_untreat_single.counts`
 >    - `GSM461177_untreat_paired.counts`
 >    - `GSM461178_untreat_paired.counts`
@@ -594,13 +595,11 @@ Here treatment is the primary factor which we are interested in. The sequencing 
         > 1. What is the first axis separating?
         > 2. And the second axis?    
         >
-        >    <details>
-        >    <summary>Click to view answers</summary>
-        >    <ol type="1">
-        >    <li>The first axis is seperating the treated samples from the untreated samples, as defined when DESeq2 was launched</li>
-        >    <li>The second axis is separating the single-end datasets from the paired-end datasets</li>
-        >    </ol>
-        >    </details>
+        >    > ### {% icon solution %} Solution
+        >    >
+        >    > 1. The first axis is seperating the treated samples from the untreated samples, as defined when DESeq2 was launched
+        >    > 2. The second axis is separating the single-end datasets from the paired-end datasets
+        >    {: .solution}
         {: .question}
 
 
@@ -610,12 +609,10 @@ Here treatment is the primary factor which we are interested in. The sequencing 
         >
         > How are the samples grouped?
         >
-        >    <details>
-        >    <summary>Click to view answers</summary>
-        >    <ol type="1">    
-        >    <li>They are first grouped depending on the treatment (the first factor) and after on the library type (the second factor), as defined when DESeq2 was launched</li>
-        >    </ol>
-        >    </details>
+        >    > ### {% icon solution %} Solution   
+        >    > They are first grouped depending on the treatment (the first factor) and after on the library type (the second factor), as defined when DESeq2 was launched
+        >    > 
+        >    {: .solution}
         {: .question}
 
     5. Dispersion estimates: gene-wise estimates (black), the fitted values (red), and the final maximum a posteriori estimates used in testing (blue)
@@ -659,10 +656,11 @@ We would proceed in several steps
 >    >
 >    > How many genes have a significant change in gene expression between these conditions?
 >    >
->    > <details>
->    > <summary>Click to view answers</summary>
->    > We get 1,091 genes (6.21%) with a significant change in gene expression between treated and untreated samples.
->    > </details>
+>    >    > ### {% icon solution %} Solution
+>    >    >
+>    >    > We get 1,091 genes (6.21%) with a significant change in gene expression between treated and untreated samples.
+>    >    >
+>    >    {: .solution}
 >    {: .question}
 >
 >    > ### {% icon comment %} Comment
@@ -680,10 +678,11 @@ We would proceed in several steps
 >    >
 >    > How many genes have been conserved?
 >    >
->    > <details>
->    > <summary>Click to view answers</summary>
->    > 11.92% (130) of the differentially expressed genes 
->    > </details>
+>    >    > ### {% icon solution %} Solution
+>    >    >
+>    >    > 11.92% (130) of the differentially expressed genes 
+>    >    >
+>    >    {: .solution}
 >    {: .question}
 >
 >    The number of genes is still too high there. So we will take only the 10 most up-regulated and 10 most down-regulated genes
@@ -756,14 +755,12 @@ You should obtain something similar to:
 > 2. What is changing if we select `Plot the data as it is` in "Advanced - log transformation"?
 > 3. Can you generate an heatmap the normalized counts for the up-regulated genes with FC > 2?
 >
-> <details>
-> <summary>Click to view answers</summary>
-> <ol type="1">    
->   <li>The samples are clustering by treatment. The genes are also clustering based on the counts. 2 genes (FBgn0026562, FBgn00003360)</li>
->   <li>The scale is changing and the differences between the genes are not visible anymore</li>
->   <li>Extract the genes with logFC > 2 (filter for genes with c3>1 on the summary of the differentially expressed genes) and run heatmap2 on the generated table</li>
-> </ol>
-> </details>
+>   > ### {% icon solution %} Solution
+>   > 
+>   > 1. The samples are clustering by treatment. The genes are also clustering based on the counts. 2 genes (FBgn0026562, FBgn00003360)
+>   > 2. The scale is changing and the differences between the genes are not visible anymore
+>   > 3. Extract the genes with logFC > 2 (filter for genes with c3>1 on the summary of the differentially expressed genes) and run heatmap2 on the generated table
+>   {: .solution}
 {: .question}
 
 ## Analysis of the functional enrichment among the differentially expressed genes
@@ -846,13 +843,12 @@ To identify categories significantly enriched/unenriched below some p-value cuto
 > 1. How many GO terms are over represented? Under represented?
 > 2. How are the over represented GO terms divided between MF, CC and BP? And for under represented GO terms?
 >
-> <details>
-> <summary>Click to view answers</summary>
-> <ol type="1">    
->   <li>48 GO terms (0.49%) are over represented and 65 (0.66%) - Filter on c8 (over-represented) and c9 (under-represented)</li>
->   <li>For over-represented, 31 BP, 6 CC and 10 MF - For under-represented, 36 BP, 25 CC and 3 MF - Group data on column 7 and count on column 1</li>
-> </ol>
-> </details>
+>   > ### {% icon solution %} Solution
+>   >   
+>   > 1. 48 GO terms (0.49%) are over represented and 65 (0.66%) - Filter on c8 (over-represented) and c9 (under-represented)
+>   > 2. For over-represented, 31 BP, 6 CC and 10 MF - For under-represented, 36 BP, 25 CC and 3 MF - Group data on column 7 and count on column 1
+>   >
+>   {: .solution}
 {: .question}
 
 # Inference of the differential exon usage
@@ -891,17 +887,19 @@ DEXSeq generates a file similar to the one generated by featureCounts, but with 
 > 2. From which gene have these exon been extracted?
 > 3. Is there a connection to the previous result obtained with HTSeq-count?
 >
-> <details>
-> <summary>Click to view answers</summary>
-> FBgn0000556:005 is the exon with the most reads mapped to it for both samples. It is part of FBgn0000556, the feature with the most reads mapped on it (from featureCounts).
-> </details>
+>    > ### {% icon solution %} Solution
+>    > 
+>    > FBgn0000556:005 is the exon with the most reads mapped to it for both samples. It is part of FBgn0000556, the feature with the most reads mapped on it (from featureCounts).
+>    > 
+>    {: .solution}
+>
 {: .question}
 
 ## Differential exon usage
 
 DEXSeq usage is similar to DESeq2. It uses similar statistics to find differentially used exons.
 
-As for DESeq2, in the previous step, we counted only reads that mapped to exons on chromosome 4 and for only one sample. To be able to identify differential exon usage induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed following the same procedure. To save time, we did that for you. The results are available on [Zenodo](https://dx.doi.org/10.5281/zenodo.1185122):
+As for DESeq2, in the previous step, we counted only reads that mapped to exons on chromosome 4 and for only one sample. To be able to identify differential exon usage induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed following the same procedure. To save time, we did that for you. The results are available on [Zenodo](https://doi.org/10.5281/zenodo.1185122):
 
 - The results of running DEXSeq-count in 'Prepare annotation' mode
 - Seven count files generated in 'Count reads' mode
@@ -909,7 +907,7 @@ As for DESeq2, in the previous step, we counted only reads that mapped to exons 
 > ### {% icon hands_on %} Hands-on:
 >
 > 1. Create a new history
-> 2. Import the seven exon count files and the annotation GTF file from [Zenodo](https://dx.doi.org/10.5281/zenodo.1185122) or the data library
+> 2. Import the seven exon count files and the annotation GTF file from [Zenodo](https://doi.org/10.5281/zenodo.1185122) or the data library
 >    - `Drosophila_melanogaster.BDGP6.87.dexseq.gtf`
 >    - `GSM461176_untreat_single.exon.counts`
 >    - `GSM461177_untreat_paired.exon.counts`
@@ -962,10 +960,11 @@ Similarly to DESeq2, DEXSeq generates a table with:
 >    >
 >    > How many exons show a significant change in usage between these conditions?
 >    >
->    > <details>
->    > <summary>Click to view answers</summary>
->    > We get 38 exons (12.38%) with a significant usage change between treated and untreated samples
->    > </details>
+>    >    > ### {% icon solution %} Solution
+>    >    >
+>    >    > We get 38 exons (12.38%) with a significant usage change between treated and untreated samples
+>    >    >
+>    >    {: .solution}
 >    {: .question}
 {: .hands_on}
 
