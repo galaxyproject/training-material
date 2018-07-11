@@ -373,7 +373,7 @@ The first thing we want to do is to further de-noise our sequences from potentia
 {: .hands_on}
 
 <!-- optional additional QC: chimera.uchime -->
-We would like to classify the sequences using a training set, which is again is provided on [[mothur's MiSeq SOP](https://mothur.org/wiki/MiSeq_SOP)]. 
+We would like to classify the sequences using a training set, which is again is provided on [[mothur's MiSeq SOP](https://mothur.org/wiki/MiSeq_SOP)].
 
 > ### {% icon hands_on %} Hands-on: Classify the sequences into phylotypes
 >
@@ -414,7 +414,7 @@ SRR531818.61708-G88ZSJI01AVPPR-2    Bacteria(100);Acidobacteria(99);Acidobacteri
 
 You will see that every read now has a classification.
 
-The next step is then to use this information to know the abundance of the different found taxons. This consists of three steps: 
+The next step is then to use this information to know the abundance of the different found taxons. This consists of three steps:
 1. first all individual sequences are classified, and get assigned a confidence score (0-100%)
 2. next, sequences are grouped at 97% identity threshold (not using taxonomy info)
 3. finally, for each cluster, a consensus classification is determined based on the classification of the individual sequences and taking their confidence scores into account
@@ -513,8 +513,7 @@ In this new Krona output you can switch between the combined plot and the per-sa
 > > The anguil sample had a higher proportion of Acidobacteria. The exact percentages can be found by looking at the pie charts at the
 > > top right-hand corner after clicking on the label Acidobacteria. For anguil the percentage is 36%, for the pampa sample it is 26%.
 > >
-> ![krona plot with acidobactaria highlighted](../../images/krona-multisample.png)
->
+> > ![krona plot with acidobactaria highlighted](../../images/krona-multisample.png)
 > {: .solution }
 {: .question}
 
