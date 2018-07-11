@@ -541,16 +541,18 @@ Now that you've built a small role, you can imagine that building real roles tha
 
 ## Choosing a Role
 
-Picking the best role for a task from Ansible Galaxy is not always a trivial task. Sometimes there will only be a single role doing what you need. Other times you'll have to choose between 20 different roles that all look more or less the same. Here are some tips to guide you in identifying good roles:
+Picking the best role for a task from Ansible Galaxy is not always a trivial task. Sometimes there will only be a single role doing what you need. Other times you'll have to choose between 20 different roles that all look more or less the same. Here are some tips to guide you in identifying appropriate and well-written roles:
 
+- The name should match the software you are using (I.e. ignore a role named `stackstorm` when you are trying to set up `rabbitmq`. Ansible Galaxy does not have perfect search.)
 - `geerlingguy` wrote a huge number of roles for many pieces of standard software. If there is a role from this person, this is usually a safe choice.
 - Check the GitHub readme of each role you consider using. Look for:
   - Extensive documentation of all of the variables, their default values, and how they behave.
   - An example playbook using the role
+- A large number of downloads is a good sign that other people found it useful
 
-These are usually good proxies for quality. [`ansible-cvmfs`](https://github.com/galaxyproject/ansible-cvmfs) is a good example of this; the variables are well documented and there are example playbooks that you can (more or less) copy-and-paste and run.
+These are usually good proxies for quality, but do not treat them as strict rules. For an example of a role meeting many of these qualities, [`ansible-cvmfs`](https://github.com/galaxyproject/ansible-cvmfs) is good; the variables are well documented and there are example playbooks that you can (more or less) copy-and-paste and run.
 
-Sometimes a role will accomplish most of what you need to do but not everything. Once you have installed the role with `ansible-galaxy install`, you can edit it locally to make any changes. In an ideal world you would contribute this back, but this is not always a high priority. Many projects copy roles directly into their repositories, e.g. [galaxyproject](https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles) and [usegalaxy.eu](https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles)
+Sometimes a role will accomplish 95% of what you need to do, but not everything. Once you have installed the role with `ansible-galaxy install`, you can edit it locally to make any changes. In an ideal world you would contribute this back, but this is not always a high priority. Many projects copy roles directly into their repositories, e.g. [galaxyproject](https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles) and [usegalaxy.eu](https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles)
 
 # Other Stuff
 
