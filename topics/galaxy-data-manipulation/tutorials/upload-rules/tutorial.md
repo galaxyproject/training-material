@@ -114,34 +114,32 @@ In order to get these files into Galaxy, we will want to do a few things:
 >
 > We will start by stripping that header out of the table. We call rules that strip rows out the table `Filter rules` in this dialog.
 >
-> 1. **Click** on the `Filter` popup menu button to bring up a list of filters to apply.
->    - Select `First or Last N Rows`.
->    - Fill in `1` to strip the first row as shown below
+> 1. From **Filter** menu select `First or Last N Rows`
+>    - *"Filter which rows?"*: `first`
+>    - *"Filter how many rows?"*: `1`
 >    - Click `Apply`
 >    ![screenshot](../../images/rules/rules_example_1_4_filter_header.png)
 >
 >    Next we will define these columns for Galaxy.
 >
-> 3. **Click** on the `Rules` popup menu button
->     - Select `Add / Modify Column Definitions`.
->
->    Here we will add two column definitions.
->
-> 4. **Click** on the `Add Definition` button and select `Name`.
+> 2. From **Rules** menu select `Add / Modify Column Definitions`
+>     - Click `Add Definition` button and select `Name`
+>       - *"Name"*: `C`
 >     - Repeat this again and select `URL` instead.
->     - Use the resulting dropdown selection box to define column `C` as `Name` and column `D` as `URL`.
->       ![screenshot](../../images/rules/rules_example_1_5_mapping_edit.png)
+>       - *"URL"*: `D`
 >
-> 5. **Click** `Apply`, and you should see your new column definitions listed as in the following screenshot.
+>    ![screenshot](../../images/rules/rules_example_1_5_mapping_edit.png)
+>
+> 3. **Click** `Apply`, and you should see your new column definitions listed as in the following screenshot.
 >    ![screenshot](../../images/rules/rules_example_1_6_mapping_set.png)
 >
-> 6. **Click** the `Type` selection box at the bottom left of the upload dialog
+> 4. **Click** the `Type` selection box at the bottom left of the upload dialog
        - Change the datatype from `Auto-detect` to `fastqsanger`.
 >    ![screenshot](../../images/rules/rules_example_1_7_extension_set.png)
 >
 >    You are now ready to start the upload
 >
-> 7. **Click** the `Upload` button and wait for the upload job to complete.
+> 5. **Click** the `Upload` button and wait for the upload job to complete.
 >    After some time, the result in this case will be six datasets in your history. The next example will show to use the rule builder to create a collection.
 {: .hands_on}
 
@@ -163,97 +161,123 @@ This example will demonstrate using such history datasets as the source for coll
 >
 > 1. **Upload** the metadata from the [first example](#example-1-metadata) to your Galaxy
 > 2. **Open** the `Rule-based` upload tab again, but this time:
->    - **Upload data as** Collection(s)
->    - **Load tabular data from** a History Dataset
->    - **Select dataset to load** selecting the dataset you have just uploaded
+>    - *"Upload data as"*: `Collection(s)`
+>    - *"Load tabular data from"*: `a History Dataset`
+>    - *"Select dataset to load"*: the dataset you just uploaded
 >    ![screenshot](../../images/rules/rules_example_2_1_inputs.png)
 > 3. Now click **Build** to bring up the rule builder.
 >    ![screenshot](../../images/rules/rules_example_2_2_initial_rules.png)
-> 4. **Repeat** the steps from last time, except define column `C` as a `List Identifier` instead of Name.
->    - **Filter** menu, select First or Last N Rows
->        - Filter 1 Row
->    - **Rules** menu, select Add / Modify Column Definitions
->        - Add Definition, URL, Select Column D
->        - Add Definition, List Identifier(s), Column C
->    - **Type**, change "Auto-detect" to "fastqsanger"
+> 4. **Repeat** the steps from last time, except define column `C` as a `List Identifier` instead of Name:
+>    - From **Filter** menu select `First or Last N Rows`
+>        - *"Filter which rows?"*: `first`
+>        - *"Filter how many rows?"*: `1`
+>    - From **Rules** menu, select `Add / Modify Column Definitions`
+>        - `Add Definition`, `URL`, Select Column `D`
+>        - `Add Definition`, `List Identifier(s)`, Column `C`
+>    - *"Type"*: `fastqsanger`
 >
->    Rather than assiging column `C` as `Name` in this example we will assign it as a `List Identifier`. This is the description of the element in the resulting dataset collection. This identifier is preserved in mapped outputs as you map tools over collections and is useful for tracking sample names, replicate numbers, conditions, etc..
 >    ![screenshot](../../images/rules/rules_example_2_3_rules.png)
-> 5. Unlike the last example, this time we need to give the resulting collection a name before the "Upload" button becomes clickable. Enter the ENA study identifier as shown below, PRJDA60709.
+>
+>    Rather than assiging column `C` as `Name`, in this example we assigned it as a `List Identifier`. This is the description of the element in the resulting dataset collection. This identifier is preserved in mapped outputs as you map tools over collections and is useful for tracking sample names, replicate numbers, conditions, etc..
+>
+> 5. **Enter** a name for our collection, for example the ENA study identifier as shown below, `PRJDA60709`.
 >    ![screenshot](../../images/rules/rules_example_2_4_name.png)
-> 6. Finally, click "Upload" and wait for the collection to be created. This time a single new entry will appear in your history panel corresponding to all the files gathered together in a simple list named **PRJDA60709**.
+> 6. **Click** `Upload`
+>
+>    This time a single new entry will appear in your history panel corresponding to all the files gathered together in a simple list named **PRJDA60709**.
 {: .hands_on}
 
 
 # Creating a List of Dataset Pairs
 
-For this next example we will again use ENA data, this time corresponding to the study [PRJDB3920](https://www.ebi.ac.uk/ena/data/view/PRJDB3920) instead. Again you can build the spreadsheet from the ENA website link or copy it from below:
+For this next example we will again use ENA data, this time corresponding to the study [PRJDB3920](https://www.ebi.ac.uk/ena/data/view/PRJDB3920) instead.
 
-```
-study_accession	sample_accession	experiment_accession	fastq_ftp
-PRJDB3920	SAMD00034150	DRX036147	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039919/DRR039919_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039919/DRR039919_2.fastq.gz
-PRJDB3920	SAMD00034150	DRX036148	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039920/DRR039920_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039920/DRR039920_2.fastq.gz
-PRJDB3920	SAMD00034150	DRX036149	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039921/DRR039921_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039921/DRR039921_2.fastq.gz
-PRJDB3920	SAMD00034150	DRX036150	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039922/DRR039922_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039922/DRR039922_2.fastq.gz
-PRJDB3920	SAMD00034150	DRX036151	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039923/DRR039923_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039923/DRR039923_2.fastq.gz
-PRJDB3920	SAMD00034153	DRX036152	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039924/DRR039924_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039924/DRR039924_2.fastq.gz
-PRJDB3920	SAMD00034152	DRX036164	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039936/DRR039936_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039936/DRR039936_2.fastq.gz
-```
-
-> ### {% icon hands_on %} Hands-on: Creating a List of Dataset Pair
+> ### {% icon hands_on %} Hands-on: Creating a List of Dataset Pairs
 >
 > 1. **Open** the Rule Builder
 >
 > 2. **Open** the `Rule-based` upload tab again, but this time:
 >    - *"Upload data as"*: Collection(s)
 >    - *"Load tabular data from"*: a `Pasted Table`
->    - **Paste** the table from above
+>    - **Paste** the following table
+>
+>      ```
+>      study_accession	sample_accession	experiment_accession	fastq_ftp
+>      PRJDB3920	SAMD00034150	DRX036147	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039919/DRR039919_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039919/DRR039919_2.fastq.gz
+>      PRJDB3920	SAMD00034150	DRX036148	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039920/DRR039920_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039920/DRR039920_2.fastq.gz
+>      PRJDB3920	SAMD00034150	DRX036149	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039921/DRR039921_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039921/DRR039921_2.fastq.gz
+>      PRJDB3920	SAMD00034150	DRX036150	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039922/DRR039922_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039922/DRR039922_2.fastq.gz
+>      PRJDB3920	SAMD00034150	DRX036151	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039923/DRR039923_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039923/DRR039923_2.fastq.gz
+>      PRJDB3920	SAMD00034153	DRX036152	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039924/DRR039924_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039924/DRR039924_2.fastq.gz
+>      PRJDB3920	SAMD00034152	DRX036164	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039936/DRR039936_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039936/DRR039936_2.fastq.gz
+>      ```
+>
 >
 > 3. **Click** `Build` and proceed to the rule builder.
 >    ![screenshot](../../images/rules/rules_example_3_2_initial_rules.png)
 >
 > 4. **Repeat** the last example with:
->    - *"Filter"*: select First or Last N Rows
->        - Filter 1 Row
->    - *"Rules"*: `Add / Modify Column Definitions`
->        - Add Definition, List Identifier(s), Column C
+>    - From **Filter** menu select `First or Last N Rows`
+>        - *"Filter which rows?"*: `first`
+>        - *"Filter how many rows?"*: `1`
+>    - From **Rules** menu, select `Add / Modify Column Definitions`
+>        - `Add Definition`, `List Identifier(s)`, Column `C`
 >    - *"Type"*: `fastqsanger`
 >
-> 5. In this dataset, column `D` contains two URLs, separated by a semicolon `;`. So we cannot define that column as the URL directly, we will need to split it into two columns first.
+>    In this dataset, column `D` contains two URLs, separated by a semicolon `;`. So we cannot define that column as the URL directly, we will need to split it into two columns first.
 >    We will build a regular expression that captures two "groups" from this column with two URLs - one group for everything before the `;` and one group for everything after.
->    - **Column**, select **Using a Regular Expression**
->        - **Column** `D`
->        - Select the option for **Create columns matching expression groups**
->        - Provide the **Regular Expression** `(.*);(.*)`. Here `.*` means match any number of any character - so basically match anything. The parentheses around `.*` means form a "group" from whatever is matched. The `;` will match with the actual `;` in the target cells.
->        - We have defined two matching groups (the `(.*)` in the regex), so set **Number of Groups** to 2
->    - The completed form should look like:
+> 5. From **Column**, select `Using a Regular Expression`
+>    - *"From Column"*: `D`
+>    - Select `Create columns matching expression groups`
+>    - *"Regular Expression"*: `(.*);(.*)`
+>    - *"Number of Groups"*: `2`
 >    ![screenshot](../../images/rules/rules_example_3_4_regex.png)
+>
+>    > ### {% icon comment %} Regular expression explained
+>    > Here `.*` means match any number of any character - so basically match anything.
+>    > The parentheses around `.*` means form a "group" from whatever is matched. The `;` will match with the actual `;` in the target cells.
+>    > In his example we have two such matching groups.
+>    {: .comment}
 >
 > 6. Click **Apply** to apply the regular expression to the metadata table
 >
-> 7. Column `D` is no longer needed, so we can remove it. Select **Rules** and **Remove Column(s)**, and then select column **D** to remove.
+>    Column `D` is no longer needed, so we can remove it:
+> 7. From **Rules** select `Remove Column(s)`
+>     - *"From Column"*: `D`
 >    ![screenshot](../../images/rules/rules_example_3_7_removed_column.png)
 >
-> 8. We now have two columns containing URLs - but we can only have one URL per row. So we will split each row into two (one for the forward reads and one for the reverse). Do this by opening the **Rules** menu and selecting **Split Column(s)**.
->    - **Odd Row Column(s)** select `D`
->    - **Even Row Column(s)** selecte `E`
->    - Click **Apply**
->   For every row before the transformation with columns `ABCDE`, this will produce two rows, `ABCD` and `ABCE`. Thus you will have twice as many rows as before.
->   ![screenshot](../../images/rules/rules_example_3_9_columns_are_split.png)
+>    We now have two columns containing URLs - but we can only have one URL per row. So we will split each row into two (one for the forward reads and one for the reverse):
+> 8. From **Rules** select `Split Column(s)`
+>    - *"Odd Row Column(s)"*: `D`
+>    - *"Even Row Column(s)"*: `E`
+>    - Click `Apply`
 >
-> 9. Now we need to inform Galaxy which of these rows are "forward" reads and which are "reverse" reads. We will do this by adding a new column again using a regular expression. Here we will match on the _1 or _2 in the filename at the end of the URLs. We can use the regular expression wildcard ``\d`` that matches any digit to do this.
->    - Click **Column**, select **Using a Regular Expression**
->        - **Column** `D`
->        - Select the option for **Create columns matching expression groups**
->        - Provide the **Regular Expression** `.*_(\d).fastq.gz`. This will use a capturing group to select only the `1` or `2` part of the URL that appears before the extension.
->        - We have defined one matching group (the `(\d)` in the regex), so set **Number of Groups** to 1
->    - The completed form should look like:
+>    ![screenshot](../../images/rules/rules_example_3_9_columns_are_split.png)
+>    For every row before the transformation with columns `ABCDE`, this will produce two rows, `ABCD` and `ABCE`. Thus you will have twice as many rows as before.
+>    <br><br>
+>    Now we need to inform Galaxy which of these rows are "forward" reads and which are "reverse" reads. We will do this by adding a new column again using a regular expression. Here we will match on the `_1` or `_2` in the filename at the end of the URLs.
+> 9. From **Column**, select `Using a Regular Expression`
+>     - *"Column"*: `D`
+>     - Select `Create columns matching expression groups`
+>     - *"Regular Expression"*: `.*_(\d).fastq.gz`.
+>     - *"Number of groups"*: `1`
 >    ![screenshot](../../images/rules/rules_example_3_10_regex_paired.png)
 >
-> 10. At this point, you can swap the last two columns to bring this new paired indicator column toward the beginning of the table. This is not nessecary but it makes the screenshots more informative. To do this, use the **Rule** menu to select **Swap Columns**, and swap columns **D** and **E**.
->    ![screenshot](../../images/rules/rules_example_3_12_swap_columns.png)
+>    > ### {% icon comment %} Regular expression explained
+>    > Here `\d` means match any digit. This regular expression will use a capturing group to select only the `1` or `2` part of the URL that appears before the extension.
+>    > In his example we have one matching groups ( contained in the parentheses )
+>    {: .comment}
 >
-> 1. Finally open the column definitions back up (**Rules** Menu, **Add / Modify Column Definitions**) and set the **paired indicator** to column **D** and the **URL** to column **E**.
+>    At this point, you can swap the last two columns to bring this new paired indicator column toward the beginning of the table. This is not nessecary but it makes the screenshots more informative.
+> 1. From **Rule** select `Swap Columns`
+>     - *"Swap Column"*: `D`
+>     - *"With Column"*: `E`
+>
+>     ![screenshot](../../images/rules/rules_example_3_12_swap_columns.png)
+>
+> 1. **Open** the column definitions back up (**Rules** Menu, `Add / Modify Column Definitions`)
+>    - *"paired indicator"*: column `D`
+>    - *"URL"*: column `E`
 >
 >    > ### {% icon tip %} Tip: Paired Indicator Column Definition
 >    > The column selector for paired indicator is a bit less obvious and a bit more picky than the other ones we have used. The row value of the paired indicator column must be one of the following to indicate "forward" or "reverse" reads.
@@ -264,7 +288,7 @@ PRJDB3920	SAMD00034152	DRX036164	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039936/D
 >    > Reverse | `2`, `R2`, `reverse`, `r`, or `R`
 >    {: .tip}
 >
-> 12. Finally, supply a Name to your collection and click **Upload**
+> 12. **Supply** a name for your collection and click **Upload**
 > ![screenshot](../../images/rules/rules_example_3_14_paired_identifier_set.png)
 >
 {: .hands_on}
