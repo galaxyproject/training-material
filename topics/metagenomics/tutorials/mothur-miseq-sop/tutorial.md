@@ -349,6 +349,7 @@ times, we'll unique our sequences using the `unique.seqs` command:
 > >    >
 > >    > This can be determined from the number of lines in the fasta (or names) output, compared to the
 > >    > number of lines in the fasta file before this step.
+> >    {: .solution}
 > {: .question}
 {: .hands_on}
 
