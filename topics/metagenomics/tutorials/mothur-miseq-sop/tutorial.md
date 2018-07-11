@@ -870,9 +870,7 @@ sequences (100%) were classified as being members of the Alistipes.
 >
 > > ### {% icon solution %} Solution
 > > Examine the tax.summary file.
-> {: .solution }
->
-> > ### {% icon solution %} Solution
+> >
 > > Samples F3D141, F3D142,  F3D144, F3D145, F3D2. This answer can be found by
 > > examining the tax.summary output and finding the columns with nonzero
 > > values for the line of Staphylococcus
