@@ -335,20 +335,16 @@ Lets describe how to turn these accession IDs into URLs.
 
 We will use this metadata in our next example.
 
-> ### {% icon hands_on %} Hands-on: Create history
+> ### {% icon hands_on %} Hands-on: Build Collection from Uniprot Accession IDs
 >
 > 1. Open the Rule Builder
->
-> 2. Next open the "Rule-based" upload tab again, but this time:
->
->    - **Upload data as** Collection(s)
->    - **Load tabular data from** a "Pasted Table"
->    - Paste the table from above
->
-> 3. Click **Build** and proceed to the rule builder.
+>    - *"Upload data as"*: `Collection(s)`
+>    - *"Load tabular data from"*: `Pasted Table`
+>    - **Paste** the table from above
+>    - Click `Build`
 >   ![screenshot](../../images/rules/rules_example_4_2_initial_rules.png)
 >
-> 4. Let's apply some initial filtering to our data:
+> 2. Let's apply some initial filtering to our data:
 >    - **Filter** menu, select  **First or Last N Rows**
 >        - Filter 1 Row
 >    - **Rules** menu, select  **Remove Columns**
