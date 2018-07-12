@@ -166,7 +166,7 @@ This example will demonstrate using such history datasets as the source for coll
 >    - *"Load tabular data from"*: `a History Dataset`
 >    - *"Select dataset to load"*: the dataset you just uploaded
 >    ![screenshot](../../images/rules/rules_example_2_1_inputs.png)
-> 3. Now click **Build** to bring up the rule builder.
+> 3. Click `Build` to bring up the rule builder.
 >    ![screenshot](../../images/rules/rules_example_2_2_initial_rules.png)
 > 4. **Repeat** the steps from last time, except define column `C` as a `List Identifier` instead of Name:
 >    - From **Filter** menu select `First or Last N Rows`
