@@ -345,41 +345,54 @@ We will use this metadata in our next example.
 >   ![screenshot](../../images/rules/rules_example_4_2_initial_rules.png)
 >
 > 2. Let's apply some initial filtering to our data:
->    - **Filter** menu, select  **First or Last N Rows**
->        - Filter 1 Row
->    - **Rules** menu, select  **Remove Columns**
+>    - From **Filter** menu, select `First or Last N Rows`
+>        - Filter the first row
+>    - From **Rules** menu, select  `Remove Columns`
 >        - Remove columns B, C, E, F, and G.
->    - **Rules** menu, select  **Add / Modify Column Definitions**
->        - Add Definition, "Info", Column B. This is a block of text that appears in the history panel when the dataset is expanded.
+>    - From **Rules** menu, select  `Add / Modify Column Definitions`
+>        - Click `Add Definition`, `Info`, Column `B`
+>
+>          This is a block of text that will appear in the history panel when the dataset is expanded.
 >    ![screenshot](../../images/rules/rules_example_4_3_basic_rules.png)
 >
-> 5. These datasets appear in a seemingly random order, it will be easier to manage things in the history panel if we sort this data first.
->   ![screenshot](../../images/rules/rules_example_4_4_sort.png)
->    - **Rules** menu, select **Sort**
->        - **From Column**: A
+>    These datasets appear in a seemingly random order, it will be easier to manage things in the history panel if we sort this data first.
+>    ![screenshot](../../images/rules/rules_example_4_4_sort.png)
 >
-> 6. Next is the key step, we will build a URL from the pattern we described above using the accession ID in column A. Click to add a new column "Using a Regular Expression" from the "Column" popup menu.
->    - **Column** menu, select **Using a Regular Expression**
->        - **From Column** select A
->        - **Create column from expression replacement**
->        - **Regular Expression** set to a value of `.*`. This will capture the entire accession ID.
->        - **Replacement Expression** set to `https://www.uniprot.org/uniprot/\0.fasta`. The `\0` will be replaced by the captured regular expression in the resulting column values.
->    - The final screen should look like:
+> 3. From **Rules** menu, select `Sort`
+>     - *"From Column"*: `A`
+>
+>    Next is the key step, we will build a URL from the pattern we described above using the accession ID in column A.
+>
+> 4. From **Column** menu, select `Using a Regular Expression`
+>    - *"From Column"*: `A`
+>    - Select `Create column from expression replacement`
+>    - *"Regular Expression"*: `.*`
+>    - *"Replacement Expression"*: `https://www.uniprot.org/uniprot/\0.fasta`
+>    - Click `Apply`
 >
 >      ![screenshot](../../images/rules/rules_example_4_5_url.png)
 >
-> 7. After clicking "Okay", the new column C with the URL we built should appear as shown below.
->   ![screenshot](../../images/rules/rules_example_4_6_url_built.png)
+>    > ### {% icon comment %} Regular expression explained
+>    > In this regular expression, `.*` will capture the entire accession ID.
+>    >
+>    > In the replacement expression, `https://www.uniprot.org/uniprot/\0.fasta`, the `\0` will be replaced by the captured
+>    > regular expression (the accession ID) in the resulting column values.
+>    {: .comment}
 >
-> 8. Finally let us set our column definitions
+>    The new column C with the URL we built should appear as shown below.
+>    ![screenshot](../../images/rules/rules_example_4_6_url_built.png)
 >
->    - **Rules** menu, select Add / Modify Column Definitions
->        - Add Definition, List Identifier(s), Select Column A
->        - Add Definition, URL, Column C
->    - **Type**, change "Auto-detect" to "fasta"
+>    Finally, let us set our column definitions:
 >
-> 9. Give the collection a name, such as "UP000052092" and finally "Upload"
->   ![screenshot](../../images/rules/rules_example_4_7_mapping_extension_and_name.png)
+> 5. From **Rules** menu, select `Add / Modify Column Definitions`
+>     - `Add Definition`, `List Identifier(s)`, Select Column `A`
+>     - `Add Definition`, `URL`, Column `C`
+>
+> 6. Finalize the collection:
+>     - *"Name"*: for exmple `UP000052092`
+>     - *"Type"*: `fasta`
+>     - Click `Upload`
+>    ![screenshot](../../images/rules/rules_example_4_7_mapping_extension_and_name.png)
 >
 >    > ### {% icon tip %} Tip: JSON Rule Definitions
 >    > This example is ready to go, but before clicking "Build" it may be interesting to check out the rules Galaxy is following to clean and import your data. Click the little Wrench icon at the top of the list of rules. The result is a bunch of JavaScript object notation (JSON) text that you should never need to worry about but that you can build or modify by hand if you find it useful. We will use it the next example to quickly restore the list builder back to this state.
@@ -388,7 +401,7 @@ We will use this metadata in our next example.
 >    >
 >    > This could additionally be copied and pasted if you need to do the same set of operations on multiple metadata inputs that are similarly formatted.
 >    {: .tip}
-> 10. Click "Build" and wait for your list of FASTA files to appear.
+> 7. Click `Build` and wait for your list of FASTA files to appear.
 {: .hands_on}
 
 
@@ -400,74 +413,93 @@ For this example we will re-use the metadata from the [previous example](#exampl
 
 > ### {% icon hands_on %} Hands-on: Create history
 >
-> 1. Open the Rule Builder
+> 1. **Open** the Rule Builder
+>    - *"Upload data as"*: `Collection(s)`
+>    - *"Load tabular data from"*: `Pasted Table`
+>    - Paste the table from the previous exercise:
+>    ```
+>    Entry	Entry name	Status	Protein names	Gene names	Organism	Length
+>    E7C0H6	E7C0H6_9PAPI	unreviewed	Major capsid protein L1	L1	Equus caballus papillomavirus 3	498
+>    E7C0H0	E7C0H0_9PAPI	unreviewed	Protein E6	E6	Equus caballus papillomavirus 3	150
+>    E7C0H5	E7C0H5_9PAPI	unreviewed	Minor capsid protein L2	L2	Equus caballus papillomavirus 3	498
+>    E7C0H1	E7C0H1_9PAPI	unreviewed	Protein E7		Equus caballus papillomavirus 3	93
+>    E7C0H3	E7C0H3_9PAPI	unreviewed	Regulatory protein E2	E2	Equus caballus papillomavirus 3	421
+>    E7C0H4	E7C0H4_9PAPI	unreviewed	Putative E4 early protein (Fragment)		Equus caballus papillomavirus 3	175
+>    E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-dependent helicase E1)	E1	Equus caballus papillomavirus 3	621
+>    ```
+>    - Click `Build` and proceed to the rule builder.
+>    ![screenshot](../../images/rules/rules_example_5_1_inputs.png)
 >
-> 2. Next open the "Rule-based" upload tab again, but this time:
->
->    - **Upload data as** Collection(s)
->    - **Load tabular data from** a "Pasted Table"
->    - Paste the table from above
->
-> 3. Click **Build** and proceed to the rule builder.
->   ![screenshot](../../images/rules/rules_example_5_1_inputs.png)
->
-> 4. Instead of manually creating the rules this time, we will import an existing set of rules from some JSON. Copy the following text into your clipboard. These are the same rules as used in the ["Building URLs from Accession Information"](#building-urls-from-accession-information) tutorial.
+> 2. Instead of manually creating the rules this time, we will import an existing set of rules from some JSON. Copy the following text into your clipboard. These are the same rules as used in the [Building URLs from Accession Information](#building-urls-from-accession-information) tutorial.
 >
 >    ```json
 >    {"rules":[{"type":"add_filter_count","count":"1","which":"first","invert":false},{"type":"remove_columns","target_columns":[1,2,4,5,6]},{"type":"sort","target_column":0,"numeric":false},{"type":"add_column_regex","target_column":0,"expression":".*","replacement":"http://www.uniprot.org/uniprot/\\0.fasta"}],"mapping":[{"type":"info","columns":[1]},{"type":"list_identifiers","columns":[0],"editing":false},{"type":"url","columns":[2]}],"extension":"csfasta"}
 >    ```
 >
-> 5. In the ruler builder interface, select the wrench icon next to the world "Rules" and paste the rules into the textbox. Click **Apply**
->   ![screenshot](../../images/rules/rules_example_5_2_source.png)
+> 3. In the ruler builder interface, select the **wrench icon** next to the word `Rules`
+>    - Paste the rules into the textbox
+>    - Click `Apply`
+>    ![screenshot](../../images/rules/rules_example_5_2_source.png)
 >
-> 6. You should now see the rules you created in the last example.
->   ![screenshot](../../images/rules/rules_example_5_3_initial_rules.png)
+>    You should now see the rules you created in the last example.
+>    ![screenshot](../../images/rules/rules_example_5_3_initial_rules.png)
 >
-> 7. This part may seem a bit silly at first but we are going to add some columns with fixed values into the builder. When we split up the columns at a later step this will make sense. So click "Fixed Value" under the "Column" value. Enter "fasta" for the column type.
->    - **Column** menu, select  **Fixed Value**
->        - Enter **fasta** and click Apply. This value will eventually be used for the datatype of the file.
->    - Repeat this process with the value:
->        - **UP000052092 FASTA**
+> 4. This part may seem a bit silly at first but we are going to add some columns with fixed values into the builder. When we split up the columns at a later step this will make sense.
+>    - From **Column** menu, select  `Fixed Value`
+>       - *"Value"*: `fasta`
+>       - Click `Apply`
+       This value will eventually be used for the datatype of the file.
+>    - Repeat this process with:
+>        - *"Value"*:`UP000052092 FASTA`
 >
-> 8. Next we will repeat the process of adding URL, name, and datatype columns but for GFF files.
+>    Next we will repeat the process of adding URL, name, and datatype columns but for GFF files.
 >
->    - **Column**, select **Using a Regular Expression**
->        - **From Column** select A
->        - **Create column from expression replacement**
->        - **Regular Expression** set to a value of `.*`
->        - **Replacement Expression** set to `https://www.uniprot.org/uniprot/\0.gff`. The `\0` will be replaced by the captured regular expression in the resulting column values.
->    - This mirrors exactly what we did for FASTA files earlier on.
->      ![screenshot](../../images/rules/rules_example_5_5_url.png)
+> 5. From **Column**, select `Using a Regular Expression`
+>     - *"From Column"*: `A`
+>     - Select `Create column from expression replacement`
+>     - *"Regular Expression"*: `.*`
+>     - *"Replacement Expression"*: `https://www.uniprot.org/uniprot/\0.gff`.
+>     ![screenshot](../../images/rules/rules_example_5_5_url.png)
 >
-> 9. Next add two more columns
->    - **Column** menu, select  **Fixed Value**
->        - Enter **gff3** and click Apply. This value will eventually be used for the datatype of the file.
->    - Repeat this process with the value:
->        - **UP000052092 GFF3**
->    - Your very large list of rules should now look like the following screenshot.
->      ![screenshot](../../images/rules/rules_example_5_6_presplit.png)
+>    Next we will add two more columns
+> 6. From **Column** menu, select  `Fixed Value`
+>     - *"Value"*: `gff3`
+>     - Click `Apply`
 >
-> 10. Notice we have two URLs, two collection names, and two datatype extensions for each accession ID we started with. Like in the example where we split the columns, here we will split these up to describe multiple collections.
->    - **Rules** menu, select  **Split Columns**
->        - **Odd Number Column(s)** specify C, D, and E (the fasta columns)
->        - **Even Number Column(s)** specify F, G, and H (the gff3 columns)
->    - This will take the row consisting of the columns `ABCDEFGH` and build two rows, one with `ABCDEF` and the other with `ABFGH`
->      ![screenshot](../../images/rules/rules_example_5_7_split_columns.png)
+>    This value will eventually be used for the datatype of the file.
 >
-> 11. Click "Apply" and you should be returned the list of rules.
+> 7. Repeat this process with:
+>     - *"Value"*: `UP000052092 GFF3`
+>
+>    Your very large list of rules should now look like the following screenshot.
+>    ![screenshot](../../images/rules/rules_example_5_6_presplit.png)
+>
+>    Notice we have two URLs, two collection names, and two datatype extensions for each accession ID we started with. Like in the example where we split the columns, here we will split these up to describe multiple collections.
+> 7. From **Rules** menu, select  `Split Columns`
+>    - *"Odd Number Column(s)"*: `C`, `D`, and `E` (the fasta columns)
+>    - *"Even Number Column(s)"*: `F`, `G`, and `H` (the gff3 columns)
+>
+>    This will take the row consisting of the columns `ABCDEFGH` and build two rows, one with `ABCDEF` and the other with `ABFGH`
+>    ![screenshot](../../images/rules/rules_example_5_7_split_columns.png)
+>
+> 8. Click `Apply` and you should be returned the list of rules.
 >    ![screenshot](../../images/rules/rules_example_5_8_split.png)
 >
-> 12. Finally, we need to add some more column definitions for these new columns we just created:
->    - **Rules** menu, select Add / Modify Column Definitions
->        - Add Definition, List Identifier, Select Column A
->        - Add Definition, Info, Column B
->        - Add Definition, URL, Column C
->        - Add Definition, Type, Column D
->        - Add Definition, Collection Name, Column E
->    -  Notice when these values are being generated from the metadata the option to specify them manually from the **type** and **collection name** boxes from the bottom of the form disappear.
->      ![screenshot](../../images/rules/rules_example_5_9_mapping.png)
+>    Finally, we need to add some more column definitions for these new columns we just created:
 >
-> 13. Click "Upload" and Galaxy should make two collections - one containing FASTA files and one containing GFF3 files.
+> 9. From **Rules** menu, select `Add / Modify Column Definitions`
+>     - `Add Definition`, `List Identifier`, Column `A`
+>     - `Add Definition`, `Info`, Column `B`
+>     - `Add Definition`, `URL`, Column `C`
+>     - `Add Definition`, `Type`, Column `D`
+>     - `Add Definition`, `Collection Name`, Column `E`
+>
+>    Notice when these values are being generated from the metadata the option to specify them manually from the **type** and **collection name** boxes from the bottom of the form disappear.
+>    ![screenshot](../../images/rules/rules_example_5_9_mapping.png)
+>
+> 10. Click `Upload`
+>
+>     Galaxy should make two collections - one containing FASTA files and one containing GFF3 files.
 >
 {: .hands_on}
 
