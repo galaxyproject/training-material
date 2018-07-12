@@ -680,7 +680,7 @@ So use either the SRA exporter tool or download the CSV file with fake URLs. If 
 >    - Name your Collection
 >    - Click `Upload`
 >
->    Note: set Type to `sra` if you used real data from SRA instead of the table from exercise.
+>    Note: set *"Type"* to `sra` if you used real data from SRA instead of the table from exercise.
 >   ![screenshot](../../images/rules/rules_example_6_7_named.png)
 >
 {: .hands_on}
