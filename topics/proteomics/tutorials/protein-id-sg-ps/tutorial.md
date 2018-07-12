@@ -116,11 +116,11 @@ The FASTA database used for the peptide to spectrum matching contained some entr
 >   > 4. How many false positives do we expect in our list? How many of these are expected to match mycoplasma proteins?
 >   >
 >   >  > ### {% icon solution %} Solution
->   >  1. TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts.
->   >  2. Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.
->   >  3. There should be five _Mycoplasma_ proteins in your protein list. However, all of them stem from different _Mycoplasma_ species. Also, every protein was identified by one peptide only. You can see this in column 17-19 of your output. These observations make it quite likely that we might have identified false positives here.
->   >  4. As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list.
->   >     False positives are expected to be randomly assigned to peptides in the FASTA database. Our database consists of about 20,000 human proteins and 4,000 mycoplasma proteins. Therefore, we would expect 17 % (= 2) of all false positives matching to mycoplasma proteins.
+>   >  > 1. TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts.
+>   >  > 2. Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.
+>   >  > 3. There should be five _Mycoplasma_ proteins in your protein list. However, all of them stem from different _Mycoplasma_ species. Also, every protein was identified by one peptide only. You can see this in column 17-19 of your output. These observations make it quite likely that we might have identified false positives here.
+>   >  > 4. As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list.
+>   >  >    False positives are expected to be randomly assigned to peptides in the FASTA database. Our database consists of about 20,000 human proteins and 4,000 mycoplasma proteins. Therefore, we would expect 17 % (= 2) of all false positives matching to mycoplasma proteins.
 >   >  {: .solution }
 >   {: .question}
 {: .hands_on}

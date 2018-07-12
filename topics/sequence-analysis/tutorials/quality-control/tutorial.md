@@ -87,11 +87,11 @@ To estimate sequence quality and how to filter raw data, different indicators ca
 >    > 2. Why is there a warning for the per-base sequence content and the per-sequence GC content graphs?
 >    > 3. What needs to be done to improve the sequences?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. The sequence scores are quite good: no warnings from FastQC, even if we can see a slight decrease of the quality at the end of the reads.
->    >    > 2. In the beginning of sequences, the sequence content per base is not really good and the percentages are not equal. For the GC content, the distribution is slightly shifted on the left, and too high.
->    >    > 3. We can trim the end of the sequences a little, but not too much as the sequences are already small.
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. The sequence scores are quite good: no warnings from FastQC, even if we can see a slight decrease of the quality at the end of the reads.
+>    > > 2. In the beginning of sequences, the sequence content per base is not really good and the percentages are not equal. For the GC content, the distribution is slightly shifted on the left, and too high.
+>    > > 3. We can trim the end of the sequences a little, but not too much as the sequences are already small.
+>    > {: .solution }
 >    {: .question}
 {: .hands_on}
 
@@ -139,11 +139,11 @@ To improve the overall sequence quality, we use the [Trim Galore!](https://www.b
 >    > 2. Has sequence quality been improved?
 >    > 3. Can you explain why the per-base sequence content is not good now?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. Before Trim Galore, the dataset comprised 100,000 sequences. After Trim Galore, there are 99,653 sequences
->    >    > 2. The per-base quality score looks better, but other indicators show bad values now. The sequence length distribution is not clear anymore because sequences have different size after the trimming operation
->    >    > 3. The per-base sequence content has turned red. Again, the cause is the trimming of the end of some sequences
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. Before Trim Galore, the dataset comprised 100,000 sequences. After Trim Galore, there are 99,653 sequences
+>    > > 2. The per-base quality score looks better, but other indicators show bad values now. The sequence length distribution is not clear anymore because sequences have different size after the trimming operation
+>    > > 3. The per-base sequence content has turned red. Again, the cause is the trimming of the end of some sequences
+>    > {: .solution }
 >    {: .question}
 {: .hands_on}
 
@@ -164,11 +164,11 @@ Now, we take a look at the impact of quality control and treatment on a bad data
 >    > 1. How good is this dataset?
 >    > 2. What needs to be done to improve the sequences?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. There is a red warning on the per-base sequence quality (pretty bad along the sequence but worse at the end of sequences), the per-base sequence content (bad at the beginning of the sequences), and the per-sequence GC content
->    >    > 2. The end of sequences must be cut.
->    >    > 3. Generally, the 5' end of each sequence read is not of bad quality unless something went wrong with the sequencng experiment itself. Here, the problem is that the sample was sequenced using the an Illumina sequencing machine, which carries out its calibration while reading fragments that are in the beginning of the flowcell. Unfortunately, the first 100k reads which we selected for the analysis are generated during the calibration, a problem that we don't have with more recent sequencing machines. However, if you adopted one of the latest sequencing machine and still experience bad quality bases at the beginning of the reads, please don't just trim them, but consider investigating the problem further.
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. There is a red warning on the per-base sequence quality (pretty bad along the sequence but worse at the end of sequences), the per-base sequence content (bad at the beginning of the sequences), and the per-sequence GC content
+>    > > 2. The end of sequences must be cut.
+>    > > 3. Generally, the 5' end of each sequence read is not of bad quality unless something went wrong with the sequencng experiment itself. Here, the problem is that the sample was sequenced using the an Illumina sequencing machine, which carries out its calibration while reading fragments that are in the beginning of the flowcell. Unfortunately, the first 100k reads which we selected for the analysis are generated during the calibration, a problem that we don't have with more recent sequencing machines. However, if you adopted one of the latest sequencing machine and still experience bad quality bases at the beginning of the reads, please don't just trim them, but consider investigating the problem further.
+>    > {: .solution }
 >    {: .question}
 >
 > 4. **Trim Galore** {% icon tool %}: Run Run **Trim Galore! Quality and adapter trimmer of reads** on the new dataset to apply the decisions taken at the previous step
@@ -180,10 +180,10 @@ Now, we take a look at the impact of quality control and treatment on a bad data
 >    > 2. Has sequence quality been improved?
 >    > 3. Can you explain why the per-base sequence content is not good now?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. Before Trim Galore the dataset comprised 100,000 sequences. After Trim Galore, there are 97,644 sequences.
->    >    > 2. The per-base quality score looks better (not red anymore), but the per-base sequence content, even if slightly better, is still red.
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. Before Trim Galore the dataset comprised 100,000 sequences. After Trim Galore, there are 97,644 sequences.
+>    > > 2. The per-base quality score looks better (not red anymore), but the per-base sequence content, even if slightly better, is still red.
+>    > {: .solution }
 >    {: .question}
 {: .hands_on}
 

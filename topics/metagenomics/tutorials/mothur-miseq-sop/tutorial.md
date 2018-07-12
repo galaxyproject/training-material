@@ -317,13 +317,13 @@ The following tool will remove any sequences with ambiguous bases (`maxambig` pa
 > >
 > > How many reads were removed in this screening step? (Hint: run the summary.seqs tool again)
 > >
-> >    > ### {% icon solution %} Solution
-> >    > 23,488.
-> >    >
-> >    > This can be determined by looking at the number of lines in bad.accnos output of screen.seqs
-> >    > or by comparing the total number of seqs between of the summary log before and after this screening
-> >    > step
-> >    {: .solution }
+> > > ### {% icon solution %} Solution
+> > > 23,488.
+> > >
+> > > This can be determined by looking at the number of lines in bad.accnos output of screen.seqs
+> > > or by comparing the total number of seqs between of the summary log before and after this screening
+> > > step
+> > {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -344,12 +344,12 @@ times, we'll unique our sequences using the `unique.seqs` command:
 > >
 > > How many sequences were unique? how many duplicates were removed?
 > >
-> >    > ### {% icon solution %} Solution
-> >    > 16,426 unique sequences and 112,446 duplicates.
-> >    >
-> >    > This can be determined from the number of lines in the fasta (or names) output, compared to the
-> >    > number of lines in the fasta file before this step.
-> >    {: .solution}
+> > > ### {% icon solution %} Solution
+> > > 16,426 unique sequences and 112,446 duplicates.
+> > >
+> > > This can be determined from the number of lines in the fasta (or names) output, compared to the
+> > > number of lines in the fasta file before this step.
+> > {: .solution}
 > {: .question}
 {: .hands_on}
 
@@ -500,7 +500,7 @@ columns. Because we've perhaps created some redundancy across our sequences by t
 > >  How many duplicate sequences did our filter step produce?
 > >
 > > > ### {% icon solution %} Solution
-> > > 3. The number of unique sequences was reduced from 16298 to 16295
+> > > 3: The number of unique sequences was reduced from 16298 to 16295
 > > {: .solution }
 > {: .question}
 {: .hands_on}
@@ -524,7 +524,7 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 > >
 > >  How many unique sequences are we left with after this clustering of highly similar sequences?
 > > > ### {% icon solution %} Solution
-> > > 5720. This is the number of lines in the fasta output
+> > > 5720: This is the number of lines in the fasta output
 > > {: .solution }
 > {: .question}
 {: .hands_on}
@@ -614,18 +614,18 @@ Let's go ahead and classify those sequences using the Bayesian classifier with t
 > > 1. How many unique (representative) sequences were removed in this step?
 > > 2. How many sequences in total?
 > >
-> >    > ### {% icon solution %} Solution
-> >    > 20 representative sequences were removed.
-> >    >
-> >    > The fasta file output from Remove.seqs had 2281 sequences while the fasta output from Remove.lineages
-> >    > contained 2261 sequences.
-> >    >
-> >    > 162 total sequences were removed.
-> >    >
-> >    > If you run summary.seqs with the count table, you will see that we now have 2261 unique sequences
-> >    > representing a total of 117,929 total sequences (down from 118,091 before). This means 162 of our
-> >    > sequences were in represented by these 20 representative sequences.
-> >    {: .solution }
+> > > ### {% icon solution %} Solution
+> > > 20 representative sequences were removed.
+> > >
+> > > The fasta file output from Remove.seqs had 2281 sequences while the fasta output from Remove.lineages
+> > > contained 2261 sequences.
+> > >
+> > > 162 total sequences were removed.
+> > >
+> > > If you run summary.seqs with the count table, you will see that we now have 2261 unique sequences
+> > > representing a total of 117,929 total sequences (down from 118,091 before). This means 162 of our
+> > > sequences were in represented by these 20 representative sequences.
+> > {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -750,8 +750,7 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 > >
 > >  How many OTUs were identified in our mock community?
 > > > ### {% icon solution %} Solution
-> > > 34.
-> > > Open the shared file or OTU list and look at the header line. You will see a column for each OTU
+> > > 34: Open the shared file or OTU list and look at the header line. You will see a column for each OTU
 > > {: .solution }
 > {: .question}
 {: .hands_on}

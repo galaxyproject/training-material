@@ -156,10 +156,10 @@ This box at the top of each tutorial is automatically generated using the metada
 >    >
 >    > What metadata hasn't been added to this box?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    >
->    >    > The take-home messages are not added to this box but into the last box of the tutorial
->    >    {: .solution}
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > The take-home messages are not added to this box but into the last box of the tutorial
+>    > {: .solution}
 >    {: .question}
 {: .hands_on}
 
@@ -295,12 +295,12 @@ They can also help the instructors by exposing and clarifying common scenarios, 
 > 1. Why are some tests filtered?
 > 2. Does it improve the *p*-value distribution?
 >
->    > ### {% icon solution %} Solution
->    >
->    > 1. Sol for the first question
->    > 2. Sol for the second question
->    >
->    {: .solution}
+> > ### {% icon solution %} Solution
+> >
+> > 1. Sol for the first question
+> > 2. Sol for the second question
+> >
+> {: .solution}
 {: .question}
 ```
 {% endraw %}
@@ -312,12 +312,12 @@ Which will be rendered as:
 > 1. Why are some tests filtered?
 > 2. Does it improve the *p*-value distribution?
 >
->    > ### {% icon solution %} Solution
->    >
->    > 1. Sol for the first question
->    > 2. Sol for the second question
->    >
->    {: .solution}
+> > ### {% icon solution %} Solution
+> >
+> > 1. Sol for the first question
+> > 2. Sol for the second question
+> >
+> {: .solution}
 {: .question}
 
 Questions should be quick to answer. You can directly ask a question and expect an answer, or you can provide some answers and create multiple choices questions (MCQs).
@@ -413,11 +413,11 @@ Boxes can be nested, *e.g.* for having tips inside a hands-on:
 >    >
 >    > In which topic will you put the tutorial?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    >
->    >    > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
->    >    > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
->    >    {: .solution}
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
+>    > > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
+>    > {: .solution}
 >    {: .question}
 {: .hands_on}
 ```

@@ -71,10 +71,10 @@ We will now import the data that we will use for the tutorial.
 >    > 1. What are four key features of a FASTQ file?
 >    > 2. What is the main difference between a FASTQ and a FASTA file?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. Each sequence in a FASTQ file is represented by 4 lines: 1st line is the id, 2nd line is the sequence, 3rd line is not used, and 4th line is the quality of sequencing per nucleotide
->    >    > 2. In a FASTQ file, not only are the sequences present, but information about the quality of sequencing is also included.
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. Each sequence in a FASTQ file is represented by 4 lines: 1st line is the id, 2nd line is the sequence, 3rd line is not used, and 4th line is the quality of sequencing per nucleotide
+>    > > 2. In a FASTQ file, not only are the sequences present, but information about the quality of sequencing is also included.
+>    > {: .solution }
 >    {: .question}
 >
 {: .hands_on}
@@ -85,9 +85,9 @@ The reads have been sequenced from an imaginary *Staphylococcus aureus* bacteriu
 >
 > Why do we have 2 files here if we only sequenced the bacteria once?
 >
->    > ### {% icon solution %} Solution
->    > 1. The bacteria has been sequenced using paired-end sequencing. The first file corresponds to forward reads and the second file to reverse reads.
->    {: .solution }
+> > ### {% icon solution %} Solution
+> > 1. The bacteria has been sequenced using paired-end sequencing. The first file corresponds to forward reads and the second file to reverse reads.
+> {: .solution }
 {: .question}
 
 # Evaluate the input reads
@@ -130,10 +130,10 @@ MultiQC generates a webpage combining reports for FastQC on both datasets. It in
     > 1. How long are the sequences?
     > 2. What is the average coverage of the genome, given our imaginary *Staphylococcus aureus* bacterium has a genome of 197,394 bp?
     >
-    >    > ### {% icon solution %} Solution
-    >    > 1. The sequences are 150 bp long
-    >    > 2. We have 2 x 12,480 sequences of 150 bp, so the average genome coverage is: 2 * 12480 * 150 / 197394, or approximately 19 X coverage.
-    >    {: .solution }
+    > > ### {% icon solution %} Solution
+    > > 1. The sequences are 150 bp long
+    > > 2. We have 2 x 12,480 sequences of 150 bp, so the average genome coverage is: 2 * 12480 * 150 / 197394, or approximately 19 X coverage.
+    > {: .solution }
     {: .question}
 
 - Sequence Quality Histograms
@@ -147,10 +147,10 @@ MultiQC generates a webpage combining reports for FastQC on both datasets. It in
     > 1. What does the y-axis represent?
     > 2. Why is the quality score decreasing across the length of the reads?
     >
-    >    > ### {% icon solution %} Solution
-    >    > 1. The y-axis represents the quality score for each base (an estimate of the error during sequencing).
-    >    > 2. The quality score is decreasing accross the length of the reads because the sequencing become less and less reliable at the end of the reads.
-    >    {: .solution }
+    > > ### {% icon solution %} Solution
+    > > 1. The y-axis represents the quality score for each base (an estimate of the error during sequencing).
+    > > 2. The quality score is decreasing accross the length of the reads because the sequencing become less and less reliable at the end of the reads.
+    > {: .solution }
     {: .question}
 
 - Per Sequence GC Content
@@ -228,10 +228,10 @@ Two files are generated:
 > 1. How many contigs have been built?
 > 2. What is the mean, min and max length of the contigs?
 >
->    > ### {% icon solution %} Solution
->    > 1. 190
->    > 2. To compute this information, we can use the Datamash tool on the 2nd columns (length). Be careful with the first line, the header. As a result, we obtain: 597.82 as mean, 1 as min and 12904 as max. It would mean that the smallest contig has a length of 1 bp, even smaller than k. The length on the 2nd column corresponds to length of the contig in k-mers. This means that the smallest contig has a length of 1k = 29. So to obtain the real length, we need to add k-1 to the length. We then obtain a mean contig length of 625.82 bp, a min contig of 29 bp and a max contig of 12,932 bp.
->    {: .solution }
+> > ### {% icon solution %} Solution
+> > 1. 190
+> > 2. To compute this information, we can use the Datamash tool on the 2nd columns (length). Be careful with the first line, the header. As a result, we obtain: 597.82 as mean, 1 as min and 12904 as max. It would mean that the smallest contig has a length of 1 bp, even smaller than k. The length on the 2nd column corresponds to length of the contig in k-mers. This means that the smallest contig has a length of 1k = 29. So to obtain the real length, we need to add k-1 to the length. We then obtain a mean contig length of 625.82 bp, a min contig of 29 bp and a max contig of 12,932 bp.
+> {: .solution }
 {: .question}
 
 This table is limitted, but we will now collect more basic statistics on our assembly.
@@ -253,9 +253,9 @@ This tool generates 5 output files, but we will focus on the HTML report and the
 >
 > 1. What is represented in the Icarus viewer?
 >
->    > ### {% icon solution %} Solution
->    > 1. Icarus is a novel genome visualizer for accurate assessment and analysis of genomic draft assemblies. It draws contigs ordered from longest to shortest, highlights N50, N75 (NG50, NG75) and long contigs larger than a user-specified threshold
->    {: .solution }
+> > ### {% icon solution %} Solution
+> > 1. Icarus is a novel genome visualizer for accurate assessment and analysis of genomic draft assemblies. It draws contigs ordered from longest to shortest, highlights N50, N75 (NG50, NG75) and long contigs larger than a user-specified threshold
+> {: .solution }
 {: .question}
 
 The HTML report reports many statistics computed by QUAST to assess the quality of the assembly:
@@ -281,14 +281,14 @@ The HTML report reports many statistics computed by QUAST to assess the quality 
 > 5. What are N50 and L50?
 > 6. Is there a bias in GC percentage induced by the assembly?
 >
->    > ### {% icon solution %} Solution
->    > 1. 190 contigs have been constructed, but only 47 have a length > 500 bp.
->    > 2. The contigs represents 87.965% of the reference genome.
->    > 3. 1 misassembly has been found: it corresponds to a relocation, *i.e.* a misassembly event (breakpoint) where the left flanking sequence aligns over 1 kbp away from the right flanking sequence on the reference genome.
->    > 4. 8.06 mismatches per 100 kbp and 4.03 indels per 100 kbp are found.
->    > 5. N50 is the length for which the collection of all contigs of that length or longer covers at least half an assembly. In other words, if contigs were ordered from small to large, half of all the nucleotides will be in contigs this size or larger. And L50 is the number of contigs equal to or longer than N50: L50 is the minimal number of contigs that cover half the assembly.
->    > 6. The GC % in the assembly is 33.64%, really similar to the one of the reference genome (33.43%).
->    {: .solution }
+> > ### {% icon solution %} Solution
+> > 1. 190 contigs have been constructed, but only 47 have a length > 500 bp.
+> > 2. The contigs represents 87.965% of the reference genome.
+> > 3. 1 misassembly has been found: it corresponds to a relocation, *i.e.* a misassembly event (breakpoint) where the left flanking sequence aligns over 1 kbp away from the right flanking sequence on the reference genome.
+> > 4. 8.06 mismatches per 100 kbp and 4.03 indels per 100 kbp are found.
+> > 5. N50 is the length for which the collection of all contigs of that length or longer covers at least half an assembly. In other words, if contigs were ordered from small to large, half of all the nucleotides will be in contigs this size or larger. And L50 is the number of contigs equal to or longer than N50: L50 is the minimal number of contigs that cover half the assembly.
+> > 6. The GC % in the assembly is 33.64%, really similar to the one of the reference genome (33.43%).
+> {: .solution }
 {: .question}
 
 # Discussion
