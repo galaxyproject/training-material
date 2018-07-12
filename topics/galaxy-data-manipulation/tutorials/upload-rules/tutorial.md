@@ -166,7 +166,7 @@ This example will demonstrate using such history datasets as the source for coll
 >    - *"Load tabular data from"*: `a History Dataset`
 >    - *"Select dataset to load"*: the dataset you just uploaded
 >    ![screenshot](../../images/rules/rules_example_2_1_inputs.png)
-> 3. Click `Build` to bring up the rule builder.
+> 3. **Click** `Build` to bring up the rule builder.
 >    ![screenshot](../../images/rules/rules_example_2_2_initial_rules.png)
 > 4. **Repeat** the steps from last time, except define column `C` as a `List Identifier` instead of Name:
 >    - From **Filter** menu select `First or Last N Rows`
@@ -274,8 +274,6 @@ For this next example we will again use ENA data, this time corresponding to the
 >     - *"Swap Column"*: `D`
 >     - *"With Column"*: `E`
 >
->     ![screenshot](../../images/rules/rules_example_3_12_swap_columns.png)
->
 > 1. **Open** the column definitions back up (**Rules** Menu, `Add / Modify Column Definitions`)
 >    - *"paired indicator"*: column `D`
 >    - *"URL"*: column `E`
@@ -302,7 +300,7 @@ For this multiomics example, we will start with a uniprot query and build URLs f
 
 ![UniProt table screenshot](../../images/rules/uniprot_url.png)
 
-Lets describe how to turn these accession IDs into URLs.
+In order to make this data useful for the Rule Builder, we need to turn these accessoin IDs into URLs.
 
 > ### {% icon hands_on %} Hands-on: Turn Uniprot Accession IDs into URLs
 >
@@ -317,31 +315,31 @@ Lets describe how to turn these accession IDs into URLs.
 >
 >    ![Viewing the FASTA file](../../images/rules/uniprot_fasta_url.png)
 >
-> 5. We can deduce that the FASTA files for the other entries in our table will be available from URLs of the form `https://www.uniprot.org/uniprot/{identifier}.fasta`
+> 5. We can deduce that the FASTA files for the other accession IDs will be available from URLs of the form `https://www.uniprot.org/uniprot/{identifier}.fasta`
 >
->    We can use that to build a collection of FASTA files for this query:
->
->    ```
->    Entry	Entry name	Status	Protein names	Gene names	Organism	Length
->    E7C0H6	E7C0H6_9PAPI	unreviewed	Major capsid protein L1	L1	Equus caballus papillomavirus 3	498
->    E7C0H0	E7C0H0_9PAPI	unreviewed	Protein E6	E6	Equus caballus papillomavirus 3	150
->    E7C0H5	E7C0H5_9PAPI	unreviewed	Minor capsid protein L2	L2	Equus caballus papillomavirus 3	498
->    E7C0H1	E7C0H1_9PAPI	unreviewed	Protein E7		Equus caballus papillomavirus 3	93
->    E7C0H3	E7C0H3_9PAPI	unreviewed	Regulatory protein E2	E2	Equus caballus papillomavirus 3	421
->    E7C0H4	E7C0H4_9PAPI	unreviewed	Putative E4 early protein (Fragment)		Equus caballus papillomavirus 3	175
->    E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-dependent helicase E1)	E1	Equus caballus papillomavirus 3	621
->    ```
 {: .hands_on}
 {:#example-3-metadata}
 
-We will use this metadata in our next example.
+We will use this information to build a collection of FASTA files from our query.
 
 > ### {% icon hands_on %} Hands-on: Build Collection from Uniprot Accession IDs
 >
 > 1. Open the Rule Builder
 >    - *"Upload data as"*: `Collection(s)`
 >    - *"Load tabular data from"*: `Pasted Table`
->    - **Paste** the table from above
+>    - **Paste** the following table:
+>
+>      ```
+>      Entry	Entry name	Status	Protein names	Gene names	Organism	Length
+>      E7C0H6	E7C0H6_9PAPI	unreviewed	Major capsid protein L1	L1	Equus caballus papillomavirus 3	498
+>      E7C0H0	E7C0H0_9PAPI	unreviewed	Protein E6	E6	Equus caballus papillomavirus 3	150
+>      E7C0H5	E7C0H5_9PAPI	unreviewed	Minor capsid protein L2	L2	Equus caballus papillomavirus 3	498
+>      E7C0H1	E7C0H1_9PAPI	unreviewed	Protein E7		Equus caballus papillomavirus 3	93
+>      E7C0H3	E7C0H3_9PAPI	unreviewed	Regulatory protein E2	E2	Equus caballus papillomavirus 3	421
+>      E7C0H4	E7C0H4_9PAPI	unreviewed	Putative E4 early protein (Fragment)		Equus caballus papillomavirus 3	175
+>      E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-dependent helicase E1)	E1	Equus caballus papillomavirus 3	621
+>      ```
+>
 >    - Click `Build`
 >   ![screenshot](../../images/rules/rules_example_4_2_initial_rules.png)
 >
@@ -440,18 +438,21 @@ For this example we will re-use the metadata from the [previous example](#exampl
 > 3. In the ruler builder interface, select the **wrench icon** next to the word `Rules`
 >    - Paste the rules into the textbox
 >    - Click `Apply`
+>
 >    ![screenshot](../../images/rules/rules_example_5_2_source.png)
 >
 >    You should now see the rules you created in the last example.
 >    ![screenshot](../../images/rules/rules_example_5_3_initial_rules.png)
 >
-> 4. This part may seem a bit silly at first but we are going to add some columns with fixed values into the builder. When we split up the columns at a later step this will make sense.
->    - From **Column** menu, select  `Fixed Value`
->       - *"Value"*: `fasta`
->       - Click `Apply`
-       This value will eventually be used for the datatype of the file.
->    - Repeat this process with:
->        - *"Value"*:`UP000052092 FASTA`
+>    This next part may seem a bit silly at first but we are going to add some columns with fixed values into the builder. When we split up the columns at a later step this will make sense.
+>
+> 4. From **Column** menu, select  `Fixed Value`
+>     - *"Value"*: `fasta`
+>     - Click `Apply`
+>    This value will eventually be used for the datatype of the file.
+>
+> 4. **Repeat** this process with:
+>      - *"Value"*:`UP000052092 FASTA`
 >
 >    Next we will repeat the process of adding URL, name, and datatype columns but for GFF files.
 >
@@ -469,7 +470,7 @@ For this example we will re-use the metadata from the [previous example](#exampl
 >
 >    This value will eventually be used for the datatype of the file.
 >
-> 7. Repeat this process with:
+> 7. **Repeat** this process with:
 >     - *"Value"*: `UP000052092 GFF3`
 >
 >    Your very large list of rules should now look like the following screenshot.
@@ -645,7 +646,7 @@ So use either the SRA exporter tool or download the CSV file with fake URLs. If 
 >     - *"From Column"*: `L`
 >     - Select `Create column from regular expression groups`
 >     - *"Regular Expression"*: `([^\d]+)\d+`.
->     - *"Number of Groups"*: 1
+>     - *"Number of Groups"*: `1`
 >
 >    The result looks like:
 >    ![screenshot](../../images/rules/rules_example_6_4_regex.png)
@@ -767,6 +768,7 @@ from the [Pasilla Bioconductor Package](https://bioconductor.org/packages/releas
 >    - `Assign another column`, column `C`
 >    - `Assign another column`, column `A`
 >    - Click `Save`
+>
 >    ![screenshot](../../images/rules/rules_apply_rules_example_4_7_apply_rules_add_depth.png)
 >
 >    The resulting collection should have two new levels of depth for "untreated" vs "treated" and "paired" vs "single" as shown below:
@@ -779,23 +781,26 @@ from the [Pasilla Bioconductor Package](https://bioconductor.org/packages/releas
 > 8. **Apply Rule to Collection** {% icon tool %} with the following parameters:
 >    - *"Input Collection"*: the new nested list we created in the previous step
 >    - Click "Edit".
+>
 >     ![screenshot](../../images/rules/rules_apply_rules_example_4_9_apply_rules_init_nested.png)
 >
 >    Notice when loading a nested collection into the rule builder, there is a column for each layer of the list for each element.
 >    One can pretty easily invert the outer two layers of the list by simply assigning the list identifiers in a new order. So select to assign "List Identifiers" and this time assign them to columns "B", "A", and "C" - in that order.
 >
 > 9. From **Rules**, select `Add / Modify Column Definitions`
->        - `Add Definition`, `List Identifier(s)`, Column `B`
->        - `Assign another column`, Column `A`
->        - `Assign another column`, Column `C`
->        - Click `Save`
->        ![screenshot](../../images/rules/rules_apply_rules_example_4_10_apply_rules_inverted.png)
+>    - `Add Definition`, `List Identifier(s)`, Column `B`
+>    - `Assign another column`, Column `A`
+>    - `Assign another column`, Column `C`
+>    - Click `Save`
 >
->     The resulting collection should be inverted.
->     ![screenshot](../../images/rules/rules_apply_rules_example_4_11_inverted.png)
+>    ![screenshot](../../images/rules/rules_apply_rules_example_4_10_apply_rules_inverted.png)
 >
->     In addition to structural re-organizations of a collection, the Apply Rules tool can be used to
->     filter elements out of the collection.
+>    The resulting collection should be inverted.
+>
+>    ![screenshot](../../images/rules/rules_apply_rules_example_4_11_inverted.png)
+>
+>    In addition to structural re-organizations of a collection, the Apply Rules tool can be used to
+>    filter elements out of the collection.
 >
 > 10. **Apply Rule to Collection** {% icon tool %} with the following parameters:
 >     - *"Input Collection"*: the original flat list created
@@ -805,9 +810,11 @@ from the [Pasilla Bioconductor Package](https://bioconductor.org/packages/releas
 >       - *"Regular Expression"*: `.*_single_.*`
 >     - From **Rules** menu, select `Add / Modify Column Definitions`
 >       - `Add Definition`, `List Identifier(s)`, Column `A`
+>
 >     ![screenshot](../../images/rules/rules_apply_rules_example_4_12_apply_rules_filter.png)
 >
 >     The resulting collection should be a filtered version of the original list.
+>
 >     ![screenshot](../../images/rules/rules_apply_rules_example_4_13_filtered.png)
 >
 >     Structural re-organizations of collections can also be combined with filtering. To demonstrate this, reopen the original flat list created for this example again in the rule builder of the Apply Rules tool. Use the same regular expression as last time to filter the result but also add a column for "treated" and "untreated" list identifiers.
@@ -824,8 +831,10 @@ from the [Pasilla Bioconductor Package](https://bioconductor.org/packages/releas
 >     - From **Rules** menu, select  `Add / Modify Column Definitions`
 >       - `Add Definition`, `List Identifier(s)`. Column `B`
 >       - `Assign another column`, Column `A`
+>
 >     ![screenshot](../../images/rules/rules_apply_rules_example_4_14_apply_rules_filtered_and_nested.png)
 >
 >     The resulting collection should be a filtered to only include the "single" data and broken into "treated" and "untreated" sublists.
+>
 >     ![screenshot](../../images/rules/rules_apply_rules_example_4_15_filtered_and_nested.png)
 {: .hands_on}
