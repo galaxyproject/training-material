@@ -618,12 +618,20 @@ So use either the SRA exporter tool or download the CSV file with fake URLs. If 
 >    The resulting table should look something like the following:
 >    ![screenshot](../../images/rules/rules_example_6_2_rules_landing.png)
 >
-> 2. Like in other examples, strip the header row. Navigate to the end of the table and notice that column J is the URL target we are hoping to download for each file. Set this column definition accordingly.
->    - **Filter** menu, select  **First or Last N Rows**
->        - Filter 1 Row
->    - **Rules** menu, select  **Add / Modify Column Definitions**
->        - Add Definition, "URL", Column J.
->    ![screenshot](../../images/rules/rules_example_6_3_end_of_table.png)
+>    Navigate to the end of the table and notice that column J is the URL target we are hoping to download for each file.
+>
+> 2. As in the previous exercises, please:
+>     - Set this `Column definition` for the URL target
+>     - Strip the header row
+>
+>       > ### {% icon solution %} Solution
+>       > From **Filter** menu, select `First or Last N Rows`
+>       >   - Filter first Row
+>       >
+>       >  From **Rules** menu, select  `Add / Modify Column Definitions`
+>       >   - `Add Definition`, `URL`, Column `J`.
+>       >   ![screenshot](../../images/rules/rules_example_6_3_end_of_table.png)
+>       {: .solution}
 >
 > 5. For the analysis we wish to do, we want to group these files based on the type indicated in column L (LibraryName) shown below. The source data though adds numbers to the library type to to generate the LibraryName, we need to strip those out to use the type as an identifier for grouping the datasets. To do this, use the regex column adder rule again.
 >    - **Column** menu, select **Using a Regular Expression**
