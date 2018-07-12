@@ -411,7 +411,7 @@ This example will demonstrate creating multiple collections at the same time. We
 
 For this example we will re-use the metadata from the [previous example](#example-3-metadata).
 
-> ### {% icon hands_on %} Hands-on: Create history
+> ### {% icon hands_on %} Hands-on: Build a matched collection
 >
 > 1. **Open** the Rule Builder
 >    - *"Upload data as"*: `Collection(s)`
