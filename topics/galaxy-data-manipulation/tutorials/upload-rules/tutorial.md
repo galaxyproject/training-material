@@ -100,7 +100,7 @@ At first glance, this may be feel like Excel or another spreadsheet program and 
 
 * **Manually modifying this metadata is not reproducible** - we will not belabor the point here but check out [Why not use excel for this?]({{ site.baseurl }}/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html#why-not-use-excel-for-this) for more context. Building up rules for modifying this metadata will allow Galaxy to track and report your manipulations (providing tracibility) and apply them to new sets of files (providing reproducibility).
 * **Manually modifying this metadata is error prone** - we believe defining rules and treating the metadata in a systematic way minimizes the possibility to manual errors. These errors can be very hard to detect for large sets of data.
-* **Manually modifying data is not scalable** - this rule-based technique potentailly scales to importing tens of thousands of datasets.
+* **Manually modifying data is not scalable** - this rule-based technique potentially scales to importing tens of thousands of datasets.
 
 So rather than modifying the data, we will define rules for manipulating it and setting up "column definitions" that tell Galaxy how to use the metadata during upload or collection creation.
 
@@ -179,7 +179,7 @@ This example will demonstrate using such history datasets as the source for coll
 >
 >    ![screenshot](../../images/rules/rules_example_2_3_rules.png)
 >
->    Rather than assiging column `C` as `Name`, in this example we assigned it as a `List Identifier`. This is the description of the element in the resulting dataset collection. This identifier is preserved in mapped outputs as you map tools over collections and is useful for tracking sample names, replicate numbers, conditions, etc..
+>    Rather than assigning column `C` as `Name`, in this example we assigned it as a `List Identifier`. This is the description of the element in the resulting dataset collection. This identifier is preserved in mapped outputs as you map tools over collections and is useful for tracking sample names, replicate numbers, conditions, etc..
 >
 > 5. **Enter** a name for our collection, for example the ENA study identifier as shown below, `PRJDA60709`.
 >    ![screenshot](../../images/rules/rules_example_2_4_name.png)
@@ -269,7 +269,7 @@ For this next example we will again use ENA data, this time corresponding to the
 >    > In his example we have one matching groups ( contained in the parentheses )
 >    {: .comment}
 >
->    At this point, you can swap the last two columns to bring this new paired indicator column toward the beginning of the table. This is not nessecary but it makes the screenshots more informative.
+>    At this point, you can swap the last two columns to bring this new paired indicator column toward the beginning of the table. This is not necessary but it makes the screenshots more informative.
 > 1. From **Rule** select `Swap Columns`
 >     - *"Swap Column"*: `D`
 >     - *"With Column"*: `E`
@@ -317,7 +317,7 @@ Lets describe how to turn these accession IDs into URLs.
 >
 >    ![Viewing the FASTA file](../../images/rules/uniprot_fasta_url.png)
 >
-> 5. We can deduce that the FASTA files for the other entires in our table will be available from URLs of the form `https://www.uniprot.org/uniprot/{identifier}.fasta`
+> 5. We can deduce that the FASTA files for the other entries in our table will be available from URLs of the form `https://www.uniprot.org/uniprot/{identifier}.fasta`
 >
 >    We can use that to build a collection of FASTA files for this query:
 >
@@ -390,7 +390,7 @@ We will use this metadata in our next example.
 >     - `Add Definition`, `URL`, Column `C`
 >
 > 6. Finalize the collection:
->     - *"Name"*: for exmple `UP000052092`
+>     - *"Name"*: for example `UP000052092`
 >     - *"Type"*: `fasta`
 >     - Click `Upload`
 >    ![screenshot](../../images/rules/rules_example_4_7_mapping_extension_and_name.png)
@@ -497,7 +497,7 @@ For this example we will re-use the metadata from the [previous example](#exampl
 >
 >    Notice when these values are being generated from the metadata the option to specify them manually from the **type** and **collection name** boxes from the bottom of the form disappear.
 >    ![screenshot](../../images/rules/rules_example_5_9_mapping.png)
-olumn definition for the URL target>
+>
 > 10. Click `Upload`
 >
 >     Galaxy should make two collections - one containing FASTA files and one containing GFF3 files.
@@ -653,7 +653,7 @@ So use either the SRA exporter tool or download the CSV file with fake URLs. If 
 >    > ### {% icon comment %} Regular expression explained
 >    > In this regular expression, `\d` means any digit, so `[^...]` means match anything that is not inside the brackets.
 >    > So together `[^\d]+` means match one or more, non digits at the start of the column and the `()` around that means capture
->    > them into a group. We've add `\d+` at the end of the expression but it isn't groupped so we are effectively ignoring the
+>    > them into a group. We've add `\d+` at the end of the expression but it isn't grouped so we are effectively ignoring the
 >    > digits at the end as we had hoped.
 >    {: .comment}
 >
