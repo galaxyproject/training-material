@@ -68,7 +68,6 @@ If your data were generated on a low resolution mass spectrometer, use ***PeakPi
 >   > ### {% icon comment %} Comment: MS2 peak picking during data acquisition
 >   > MS2 peaks are often acquired in centroided mode in first place. The profile data are converted to centroided mode already during data acquisition, resulting in MS2-centroided `raw` files. If your MS2 data are already centroided, simply omit the peak picking step.
 >  {: .comment}
-
 {: .hands_on}
 
 # Peptide Identification

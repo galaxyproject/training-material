@@ -108,8 +108,9 @@ Depending on the search algorithm in use,  you might need to merge all FASTA ent
 >
 > 1. Run **FASTA Merge Files and Filter Unique Sequences** {% icon tool %} on the main database and the tagged cRAP database.
 >
->	> ### Optional: Merging mycoplasma databases
->	> At this step you may also merge the mycoplasma protein databases that you downloaded earlier on. Simply enter them as additional inputs in **FASTA Merge Files and Filter Unique Sequences** {% icon tool %}. You can enter any number of protein databases when you click on `Insert Input FASTA file(s)`.
+> 2. **Optional**: Merging mycoplasma databases
+>
+>    At this step you may also merge the mycoplasma protein databases that you downloaded earlier on. Simply enter them as additional inputs in **FASTA Merge Files and Filter Unique Sequences** {% icon tool %}. You can enter any number of protein databases when you click on `Insert Input FASTA file(s)`.
 {: .hands_on}
 
 
