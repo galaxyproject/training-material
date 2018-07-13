@@ -101,7 +101,7 @@ It is often necessary to trim a sequenced read to remove bases sequenced with hi
 
 > ### {% icon hands_on %} Hands-on: Trimming and clipping reads
 >
-> 1. **Trimmomatic** {% icon tool %}: with the following parameters:
+> 1. **Trimmomatic** {% icon tool %} to trim low-quality reads:
 >    - *"Paired end data?"*: `No`
 >    - {% icon param-files %} *"Input FASTQ file"*: all of the FASTQ files
 >    - *"Perform initial ILLUMINACLIP?"*: `No`
@@ -137,13 +137,11 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 
 > ### {% icon hands_on %} Hands-on: Aligning reads to a reference genome
 >
-> 1. **Map with BWA** {% icon tool %} with the following parameters:
+> 1. **Map with BWA** {% icon tool %} to map the trimmed/clipped reads to the mouse genome:
 >    - *"Will you select a reference genome..."*: `Use a built-in genome index`
 >    - *"Using reference genome"*: `Mouse (mus musculus) mm10`
 >    - *"Select input type"*: `Single fastq`
 >    - {% icon param-file %} *"Select fastq dataset"*: to the generated `trimmed reads`
->
->    This will map the trimmed/clipped reads to the mouse genome.
 >
 > 2. **Rename** your files after BWA finishes to reflect the origin and contents
 > 3. **Inspect** a file produced by running BWA
@@ -195,14 +193,11 @@ We expect that the replicate samples will cluster more closely to each other tha
 > **multiBamSummary** splits the reference genome into bins of equal size and counts the number of reads in each bin from each sample. We set a small **Bin size** here because we are working with a subset of reads that align to only a fraction of the genome.
 >
 > 1. **multiBamSummary** {% icon tool %} with the following parameters:
->
 >     - *"Sample order matters"*: `No`
 >     - {% icon param-files %} *"Bam files"*: Select all of the aligned BAM files (`Aligned ...`)
 >     - *"Bin size in bp"*: 1000
 >
->     Next we will run the tool **plotCorrelation** from the **deepTools** package to visualize the results
->
-> 2. **plotCorrelation** {% icon tool %} with the following parameters:
+> 2. **plotCorrelation** {% icon tool %} from the **deepTools** package to visualize the results:
 >     - *"Matrix file from the multiBamSummary tool"*: Select the output from the previous step
 >     - *"Correlation method"*: `Pearson`
 >     - *"Plotting type"*: `Heatmap`
@@ -236,7 +231,7 @@ We will now evaluate the quality of the immuno-precipitation step in the ChIP-se
 
 > ### {% icon hands_on %} Hands-on: Assessing IP strength
 >
-> 1. **plotFingerprint** {% icon tool %} with the following parameters:
+> 1. **plotFingerprint** {% icon tool %} from the **deepTools** package with the following parameters:
 >    - {% icon param-files %} *"Bam files"*: Select all of the aligned BAM files for the G1E cell type
 >    - *"Show advanced options"*: `yes`
 >    - *"Bin size in bases"*: `100`
