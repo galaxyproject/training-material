@@ -217,9 +217,9 @@ One can see that there are two (!) contigs. The largest contig is 4,576,290 bp (
 > 1. **Prokka** {% icon tool %}:
 >   - *"Contigs to annotate"*: Select the assembly ouput of `Unicycler`
 >   - *"Genus name"*: `Escherichia`
->   - *"Species name"* `coli`
->   - *"Strain name"* `C-1`
->   - *"Use genus-specific BLAST database"* `yes`
+>   - *"Species name"*: `coli`
+>   - *"Strain name"*: `C-1`
+>   - *"Use genus-specific BLAST database"*: `yes`
 >
 {: .hands_on}
 
