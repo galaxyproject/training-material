@@ -103,11 +103,11 @@ It is often necessary to trim a sequenced read to remove bases sequenced with hi
 >
 > 1. **Trimmomatic** {% icon tool %}: Run the tool **Trimmomatic** on each FASTQ file to trim low-quality bases (remember how to run tools on all files at once?). Explore the full parameter list for `Trimmomatic` in the Tool Form and set the following `Trimmomatic` parameters:
 >
->    - *"Paired end data?"* `No`
->    - *"Perform initial ILLUMINACLIP?"* `No`
->    - *"Select Trimmomatic operation to perform"* `Sliding window trimming (SLIDINGWINDOW)`
->    - *"Number of bases to average across"* `4`
->    - *"Average quality required"* `20`
+>    - *Paired end data?*: `No`
+>    - *Perform initial ILLUMINACLIP?*: `No`
+>    - *Select Trimmomatic operation to perform*: `Sliding window trimming (SLIDINGWINDOW)`
+>    - *Number of bases to average across*: `4`
+>    - *Average quality required*: `20`
 >
 >    > ### {% icon tip %} Tip: Changing datatypes
 >    >
@@ -139,10 +139,10 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 >
 > 1. **Map with BWA** {% icon tool %}: Run the tool **Map with BWA** to map the trimmed/clipped reads to the mouse genome. Set the following **Map with BWA** parameters:
 >
->    - *"Will you select a reference genome..."* `Use a built-in genome index`
->    - *"Using reference genome"* `Mouse (mus musculus) mm10`
->    - *"Select input type"* `Single fastq`
->    - {% icon param-file %} *"Select fastq dataset"* to the generated `trimmed reads`
+>    - *Will you select a reference genome...*: `Use a built-in genome index`
+>    - *Using reference genome*: `Mouse (mus musculus) mm10`
+>    - *Select input type*: `Single fastq`
+>    - {% icon param-file %} *Select fastq dataset*: to the generated `trimmed reads`
 >
 > 2. Rename your files after **BWA** finishes to reflect the origin and contents
 > 3. Inspect a file produced by running **BWA**
@@ -193,20 +193,20 @@ We expect that the replicate samples will cluster more closely to each other tha
 >
 > 1. **multiBamSummary** {% icon tool %}: Run the tool **multiBamSummary** with the following parameters:
 >
->     - *"Sample order matters"* `No`
->     - {% icon param-files %} *"Bam files"* Select all of the aligned BAM files (`Aligned ...`)
->     - *"Bin size in bp"* 1000
+>     - *Sample order matters*: `No`
+>     - {% icon param-files %} *Bam files*: Select all of the aligned BAM files (`Aligned ...`)
+>     - *Bin size in bp*: 1000
 >
 > 2. **plotCorrelation** {% icon tool %}: Run the tool **plotCorrelation** from the **deepTools** package to visualize the results from the previous step.
 >
 >    Feel free to try different parameters. To start, set the following **plotCorrelation** parameters:
 >
->     - *"Matrix file from the multiBamSummary tool"* Select the output from the previous step
->     - *"Correlation method"* `Pearson`
->     - *"Plotting type"* `Heatmap`
->     - *"Plot the correlation value"* `Yes`
->     - *"Skip zeros"* `Yes`
->     - *"Remove regions with very large counts"* `Yes`
+>     - *Matrix file from the multiBamSummary tool*: Select the output from the previous step
+>     - *Correlation method*: `Pearson`
+>     - *Plotting type*: `Heatmap`
+>     - *Plot the correlation value*: `Yes`
+>     - *Skip zeros*: `Yes`
+>     - *Remove regions with very large counts*: `Yes`
 >
 >     > ### {% icon question %} Questions
 >     >
@@ -234,10 +234,10 @@ We will now evaluate the quality of the immuno-precipitation step in the ChIP-se
 >
 > 1. **plotFingerprint** {% icon tool %}: Run the tool **plotFingerprint** from the **deepTools** package.
 >
->    - {% icon param-files %} *"Bam files"* Select all of the aligned BAM files for the G1E cell type
->    - *"Show advanced options"* `yes`
->    - *"Bin size in bases"* `100`
->    - *"Skip zeros"* `Yes`
+>    - {% icon param-files %} *Bam files*: Select all of the aligned BAM files for the G1E cell type
+>    - *Show advanced options*: `yes`
+>    - *Bin size in bases*: `100`
+>    - *Skip zeros*: `Yes`
 >
 > 2. View the output image.
 >
@@ -298,8 +298,8 @@ First, we will reformat the peak file before we send it to Trackster, and then w
 >
 > 1. **Cut** {% icon tool %}: Run the tool **Cut** with the following parameters:
 >
->    - *"Cut columns"* `c1,c2,c3,c4`
->    - {% icon param-file %} *"From"* the peak file
+>    - *Cut columns*: `c1,c2,c3,c4`
+>    - {% icon param-file %} *From*: the peak file
 >
 >    Afterwards, rename this file to reflect the origin and contents.
 >
@@ -351,22 +351,22 @@ We have processed ChIP-seq data from two stages of hematopoiesis and have lists 
 >
 > 1. **Intersect intervals** {% icon tool %}: Run the tool **Intersect intervals** to find peaks that exist both in G1E and megakaryocytes.
 >
->    - {% icon param-file %} *"File A to intersect with B"* `TAL1 G1E peaks`
->    - {% icon param-file %} *"File B to intersect with A"* `TAL1 Mega peaks`
+>    - {% icon param-file %} *File A to intersect with B*: `TAL1 G1E peaks`
+>    - {% icon param-file %} *File B to intersect with A*: `TAL1 Mega peaks`
 >
 >    Running this tool with the default settings will return overlapping peaks of both files.
 >
 > 2. **Intersect intervals** {% icon tool %}: Run the tool **Intersect intervals** to find peaks that exist only in G1E.
 >
->    - {% icon param-file %} *"File A to intersect with B"* `TAL1 G1E peaks`
->    - {% icon param-file %} *"File B to intersect with A"* `TAL1 Mega peaks`
->    - *Report only those alignments that \*\*do not\*\*" overlap the BED file"* `Yes`
+>    - {% icon param-file %} *File A to intersect with B*: `TAL1 G1E peaks`
+>    - {% icon param-file %} *File B to intersect with A*: `TAL1 Mega peaks`
+>    - *Report only those alignments that \*\*do not\*\* overlap the BED file*: `Yes`
 >
 > 3. **Intersect intervals** {% icon tool %}: Run the tool **Intersect intervals** to find peaks that exist only in megakaryocytes.
 >
->    - {% icon param-file %} *"File A to intersect with B"* `TAL1 Mega peaks`
->    - {% icon param-file %} *"File B to intersect with A"* `TAL1 G1E peaks`
->    - *Report only those alignments that \*\*do not\*\*" overlap the BED file"* `Yes`
+>    - {% icon param-file %} *File A to intersect with B*: `TAL1 Mega peaks`
+>    - {% icon param-file %} *File B to intersect with A*: `TAL1 G1E peaks`
+>    - *Report only those alignments that \*\*do not\*\* overlap the BED file*: `Yes`
 >
 > 4. Re-name the three files we generated to reflect their contents.
 >
@@ -392,9 +392,9 @@ We will generate Input normalized coverage (bigwig) files for the ChIP samples, 
 >
 > 1. **bamCompare** {% icon tool %}: Run the tool **bamCompare**:
 >
->    - *"First BAM/CRAM file (e.g. treated sample)"* `Megakaryocyte_Tal1_R2.bam`
->    - *"Second BAM/CRAM file (e.g. control sample)"* `Megakaryocyte_Input_R2.bam`
->    - *"How to compare the two files"* `Compute log2 of the number of reads`
+>    - *First BAM/CRAM file (e.g. treated sample)*: `Megakaryocyte_Tal1_R2.bam`
+>    - *Second BAM/CRAM file (e.g. control sample)*: `Megakaryocyte_Input_R2.bam`
+>    - *How to compare the two files*: `Compute log2 of the number of reads`
 >
 > 2. Repeat this step for all treatment and input samples: Megakaryocyte_Tal1_R1.bam and Megakaryocyte_Input_R1.bam; G1E_Tal1_R2.bam and G1E_Input_R2.bam; G1E_Tal1_R1.bam and G1E_Input_R1.bam.
 >
@@ -414,15 +414,15 @@ optionally, you can also use `plotProfile`to create a profile plot using to comp
 >
 > 1. **computeMatrix** {% icon tool %}: Run the tool **computeMatrix** with:
 >
->    - {% icon param-file %} *Select Regions* > *"Regions to plot"* select the MACS2 output (narrowpeaks) for G1E cells (TAL1 over Input)
->    - {% icon param-file %} *"Score file"* Select the bigWigs (log2 ratios from bamCompare)
->    - *"computeMatrix has two main output options"* `reference-point`
->    - *"The Reference point for plotting"* `center of region`
->    - *"Distance upstream of the start site of the regions defined in the region file"* `5000`
->    - *"Distance downstream of the end site of the given regions"* `5000`
->    - *"Show advanced options"* `Yes`
->    - *"Convert missing values ot zero"* `Yes`
->    - *"Skip zeros"* `Yes`
+>    - {% icon param-file %} *Select Regions* > *Regions to plot*: select the MACS2 output (narrowpeaks) for G1E cells (TAL1 over Input)
+>    - {% icon param-file %} *Score file*: Select the bigWigs (log2 ratios from bamCompare)
+>    - *computeMatrix has two main output options*: `reference-point`
+>    - *The Reference point for plotting*: `center of region`
+>    - *Distance upstream of the start site of the regions defined in the region file*: `5000`
+>    - *Distance downstream of the end site of the given regions*: `5000`
+>    - *Show advanced options*: `Yes`
+>    - *Convert missing values ot zero*: `Yes`
+>    - *Skip zeros*: `Yes`
 >
 {: .hands_on}
 
@@ -432,9 +432,9 @@ optionally, you can also use `plotProfile`to create a profile plot using to comp
 >
 > 1. **plotHeatmap** {% icon tool %}: Run the tool **plotHeatmap** with:
 >
->    - *"Matrix file from the computeMatrix tool"* Select the computeMatrix output
->    - *"Show advanced options"* `Yes`
->    - *"Labels for the samples (each bigwig) plotted"* Enter sample labels in the order you added them in compueMatrix, separated by spaces.
+>    - *Matrix file from the computeMatrix tool*: Select the computeMatrix output
+>    - *Show advanced options*: `Yes`
+>    - *Labels for the samples (each bigwig) plotted*: Enter sample labels in the order you added them in compueMatrix, separated by spaces.
 >
 > The output should look like this :
 >
@@ -453,12 +453,12 @@ We will now check whether the samples have more reads from regions of the genome
 >
 > 1. **computeGCbias** {% icon tool %}: Run the tool **computeGCbias** from the **deepTools** package.
 >
->    - {% icon param-file %} *"Bam file"* select an aligned BAM file
->    - *"Reference genome"* `locally cached`
->    - *"Using reference genome"* `mm10`
->    - *"Effective genome size"* `user specified`
->    - *"Effective genome size"* `10000000`
->    - *"Fragment length used for the sequencing"* `50`
+>    - {% icon param-file %} *Bam file*: select an aligned BAM file
+>    - *Reference genome*: `locally cached`
+>    - *Using reference genome*: `mm10`
+>    - *Effective genome size*: `user specified`
+>    - *Effective genome size*: `10000000`
+>    - *Fragment length used for the sequencing*: `50`
 >
 >    > ### {% icon question %} Questions
 >    >
