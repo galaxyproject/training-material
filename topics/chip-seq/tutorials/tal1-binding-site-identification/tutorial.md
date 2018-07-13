@@ -101,9 +101,9 @@ It is often necessary to trim a sequenced read to remove bases sequenced with hi
 
 > ### {% icon hands_on %} Hands-on: Trimming and clipping reads
 >
-> 1. **Trimmomatic** {% icon tool %}: Run the tool **Trimmomatic** on each FASTQ file to trim low-quality bases (remember how to run tools on all files at once?). Explore the full parameter list for `Trimmomatic` in the Tool Form and set the following `Trimmomatic` parameters:
->
+> 1. **Trimmomatic** {% icon tool %}: with the following parameters:
 >    - *"Paired end data?"*: `No`
+>    - {% icon param-files %} *"Input FASTQ file"*: all of the FASTQ files
 >    - *"Perform initial ILLUMINACLIP?"*: `No`
 >    - *"Select Trimmomatic operation to perform"*: `Sliding window trimming (SLIDINGWINDOW)`
 >    - *"Number of bases to average across"*: `4`
@@ -137,15 +137,16 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 
 > ### {% icon hands_on %} Hands-on: Aligning reads to a reference genome
 >
-> 1. **Map with BWA** {% icon tool %}: Run the tool **Map with BWA** to map the trimmed/clipped reads to the mouse genome. Set the following **Map with BWA** parameters:
->
+> 1. **Map with BWA** {% icon tool %} with the following parameters:
 >    - *"Will you select a reference genome..."*: `Use a built-in genome index`
 >    - *"Using reference genome"*: `Mouse (mus musculus) mm10`
 >    - *"Select input type"*: `Single fastq`
 >    - {% icon param-file %} *"Select fastq dataset"*: to the generated `trimmed reads`
 >
-> 2. Rename your files after **BWA** finishes to reflect the origin and contents
-> 3. Inspect a file produced by running **BWA**
+>    This will map the trimmed/clipped reads to the mouse genome.
+>
+> 2. **Rename** your files after BWA finishes to reflect the origin and contents
+> 3. **Inspect** a file produced by running BWA
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -158,7 +159,9 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 >    >    {: .solution }
 >    {: .question}
 >
-> 3. **IdxStats** {% icon tool %}: Run the tool **IdxStats** on all mapped files and look at the output (poke it in the eye!).
+> 3. **IdxStats** {% icon tool %} with the following parameters:
+>     - {% icon param-files %} *"BAM file"*: all the mapped files
+>    Examine the output (poke it in the eye!)
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -167,16 +170,16 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 >    > 3. If the mouse genome has 21 pairs of chromosomes, what are the other reference chromosomes (*e.g.* chr1_GL456210_random)?
 >    >
 >    >    > ### {% icon solution %} Solution
->    >    > 1. 
+>    >    > 1.
 >    >    >    Column | Description
 >    >    >    --- | ---
 >    >    >    1 | Reference sequence identifier
 >    >    >    2 | Reference sequence length
 >    >    >    3 | Number of mapped reads
 >    >    >    4 | Number of placed but unmapped reads (typically unmapped partners of mapped reads)
->    >    >   
+>    >    >
 >    >    > 2. This information can be seen in column 3, e.g. for Megakaryocyte_Tal1_R1 2143352 reads are mapped.
->    >    > 3. These are parts of chromosomes that e.g. for chr1_GL456210_random do belong to chr1 but it is unclear where exactly. There entires like chrUn that are not associated with a chromosome but it is believed that they are part of the genome. 
+>    >    > 3. These are parts of chromosomes that e.g. for chr1_GL456210_random do belong to chr1 but it is unclear where exactly. There entires like chrUn that are not associated with a chromosome but it is believed that they are part of the genome.
 >    >    {: .solution }
 >    {: .question}
 {: .hands_on}
@@ -191,22 +194,23 @@ We expect that the replicate samples will cluster more closely to each other tha
 >
 > **multiBamSummary** splits the reference genome into bins of equal size and counts the number of reads in each bin from each sample. We set a small **Bin size** here because we are working with a subset of reads that align to only a fraction of the genome.
 >
-> 1. **multiBamSummary** {% icon tool %}: Run the tool **multiBamSummary** with the following parameters:
+> 1. **multiBamSummary** {% icon tool %} with the following parameters:
 >
 >     - *"Sample order matters"*: `No`
 >     - {% icon param-files %} *"Bam files"*: Select all of the aligned BAM files (`Aligned ...`)
 >     - *"Bin size in bp"*: 1000
 >
-> 2. **plotCorrelation** {% icon tool %}: Run the tool **plotCorrelation** from the **deepTools** package to visualize the results from the previous step.
+>     Next we will run the tool **plotCorrelation** from the **deepTools** package to visualize the results
 >
->    Feel free to try different parameters. To start, set the following **plotCorrelation** parameters:
->
+> 2. **plotCorrelation** {% icon tool %} with the following parameters:
 >     - *"Matrix file from the multiBamSummary tool"*: Select the output from the previous step
 >     - *"Correlation method"*: `Pearson`
 >     - *"Plotting type"*: `Heatmap`
 >     - *"Plot the correlation value"*: `Yes`
 >     - *"Skip zeros"*: `Yes`
 >     - *"Remove regions with very large counts"*: `Yes`
+>
+>     Feel free to play around with these parameter settings
 >
 >     > ### {% icon question %} Questions
 >     >
@@ -215,9 +219,9 @@ We expect that the replicate samples will cluster more closely to each other tha
 >     > 3. What does the output of making a Scatterplot instead of a Heatmap look like?
 >     >
 >     >    > ### {% icon solution %} Solution
->     >    > 1. Large areas of zeros would lead to a correlation of these areas. The information we would get out of this computation would be meaningless. 
+>     >    > 1. Large areas of zeros would lead to a correlation of these areas. The information we would get out of this computation would be meaningless.
 >     >    > 2. The clusters are different, e.g. Megakaryocyte_input_R2 and G1E_input_R2 are clustered together. [ More information about Pearson and Spearman correlation. ](http://support.minitab.com/en-us/minitab-express/1/help-and-how-to/modeling-statistics/regression/supporting-topics/basics/a-comparison-of-the-pearson-and-spearman-correlation-methods/)
->     >    > 3. No solution for you, just compare the different outputs. 
+>     >    > 3. No solution for you, just compare the different outputs.
 >     >    {: .solution }
 >     {: .question}
 >
@@ -232,8 +236,7 @@ We will now evaluate the quality of the immuno-precipitation step in the ChIP-se
 
 > ### {% icon hands_on %} Hands-on: Assessing IP strength
 >
-> 1. **plotFingerprint** {% icon tool %}: Run the tool **plotFingerprint** from the **deepTools** package.
->
+> 1. **plotFingerprint** {% icon tool %} with the following parameters:
 >    - {% icon param-files %} *"Bam files"*: Select all of the aligned BAM files for the G1E cell type
 >    - *"Show advanced options"*: `yes`
 >    - *"Bin size in bases"*: `100`
@@ -251,9 +254,9 @@ We will now evaluate the quality of the immuno-precipitation step in the ChIP-se
 >    > 4. How does the quality of the IP for megakaryocytes compare to G1E cells?
 >    >
 >    >    > ### {% icon solution %} Solution
->    >    > 1. It shows us how good the ChIP Signal compared to the control signal is. An ideal control [input] with perfect uniform distribution of reads along the genome (i.e. without enrichments in open chromatin etc.) and infinite sequencing coverage should generate a straight diagonal line. A very specific and strong ChIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank. 
->    >    > 2. We expect that the control (input) signal is more or less uniform distributed over the genome (e.g. like the green line in the image above.) The IP dataset should look more like the red line but it would be better if the values for IP start to increase at around 0.8 on the x-axis. 
->    >    > 3. The enrichment did not work as it should. Compare the blue line with the red one! For your future experiments: You can never have enough replicates! 
+>    >    > 1. It shows us how good the ChIP Signal compared to the control signal is. An ideal control [input] with perfect uniform distribution of reads along the genome (i.e. without enrichments in open chromatin etc.) and infinite sequencing coverage should generate a straight diagonal line. A very specific and strong ChIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank.
+>    >    > 2. We expect that the control (input) signal is more or less uniform distributed over the genome (e.g. like the green line in the image above.) The IP dataset should look more like the red line but it would be better if the values for IP start to increase at around 0.8 on the x-axis.
+>    >    > 3. The enrichment did not work as it should. Compare the blue line with the red one! For your future experiments: You can never have enough replicates!
 >    >    > 4. The quality of megakaryocytes is better then G1E.
 >    >    {: .solution }
 >    {: .question}
@@ -296,12 +299,11 @@ First, we will reformat the peak file before we send it to Trackster, and then w
 
 > ### {% icon hands_on %} Hands-on: Inspection of peaks and aligned data with Trackster
 >
-> 1. **Cut** {% icon tool %}: Run the tool **Cut** with the following parameters:
->
+> 1. **Cut** {% icon tool %} with the following parameters:
 >    - *"Cut columns"*: `c1,c2,c3,c4`
 >    - {% icon param-file %} *"From"*: the peak file
 >
->    Afterwards, rename this file to reflect the origin and contents.
+>    Afterwards, **rename** this file to reflect the origin and contents.
 >
 > 2. Import the gene annotations file from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.197100.svg)](https://doi.org/10.5281/zenodo.197100)
 >
@@ -309,17 +311,21 @@ First, we will reformat the peak file before we send it to Trackster, and then w
 >
 >    ![vizbutton](../../images/Highlighting_viz_button.png "Trackster can be accessed from the Visualizations button at the top of the screen.")
 >
-> 4. Give this session a descriptive name and choose "mm10" as the "Reference genome build (dbkey)".
+> 4. **Configure** the new visualization:
+>    - *"Browswer name"*: something descriptive
+>    - *"Reference genome build (dbkey)"*: `mm10`
 >
 >    ![tracksterdb](../../images/Trackster_session_and_db.png "Session name and assigning reference genome.")
 >
-> 5. Click "Add Datasets to visualization" and select the history containing the data from this analysis. Select the BEDgraph files and the peak files that you renamed.
+> 5. **Click** `Add Datasets to visualization`
+>    - Select the history containing the data from this analysis.
+>    - Select the BEDgraph files and the peak files that you renamed.
 >
 >    ![tracksteradd](../../images/Trackster_add_datasets.png "Load your data into Trackster with the Add Datasets to visualization feature.")
 >
 >    ![tracksterselect](../../images/Trackster_selecting_datasets.png "Select data from your histories to view in Trackster.")
 >
-> 6. Navigate to the Runx1 locus (chr16:92501466-92926074) to inspect the aligned reads and TAL1 peaks.
+> 6. Navigate to the `Runx1` locus (`chr16:92501466-92926074`) to inspect the aligned reads and `TAL1` peaks.
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -349,26 +355,23 @@ We have processed ChIP-seq data from two stages of hematopoiesis and have lists 
 
 > ### {% icon hands_on %} Hands-on: Identifying unique and common TAL1 peaks between states
 >
-> 1. **Intersect intervals** {% icon tool %}: Run the tool **Intersect intervals** to find peaks that exist both in G1E and megakaryocytes.
->
+> 1. **Intersect intervals** {% icon tool %} to find peaks that exist both in G1E and megakaryocytes:
 >    - {% icon param-file %} *"File A to intersect with B"*: `TAL1 G1E peaks`
 >    - {% icon param-file %} *"File B to intersect with A"*: `TAL1 Mega peaks`
 >
 >    Running this tool with the default settings will return overlapping peaks of both files.
 >
-> 2. **Intersect intervals** {% icon tool %}: Run the tool **Intersect intervals** to find peaks that exist only in G1E.
->
+> 2. **Intersect intervals** {% icon tool %} to find peaks that exist only in G1E:
 >    - {% icon param-file %} *"File A to intersect with B"*: `TAL1 G1E peaks`
 >    - {% icon param-file %} *"File B to intersect with A"*: `TAL1 Mega peaks`
 >    - *Report only those alignments that \*\*do not\*\*" overlap the BED file"*: `Yes`
 >
-> 3. **Intersect intervals** {% icon tool %}: Run the tool **Intersect intervals** to find peaks that exist only in megakaryocytes.
->
+> 3. **Intersect intervals** {% icon tool %} to find peaks that exist only in megakaryocytes:
 >    - {% icon param-file %} *"File A to intersect with B"*: `TAL1 Mega peaks`
 >    - {% icon param-file %} *"File B to intersect with A"*: `TAL1 G1E peaks`
 >    - *Report only those alignments that \*\*do not\*\*" overlap the BED file"*: `Yes`
 >
-> 4. Re-name the three files we generated to reflect their contents.
+> 4. **Rename** the three files we generated to reflect their contents.
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -390,8 +393,7 @@ We will generate Input normalized coverage (bigwig) files for the ChIP samples, 
 
 > ### {% icon hands_on %} Hands-on: Generate Input-normalized bigwigs
 >
-> 1. **bamCompare** {% icon tool %}: Run the tool **bamCompare**:
->
+> 1. **bamCompare** {% icon tool %} with the following parameters:
 >    - *"First BAM/CRAM file (e.g. treated sample)"*: `Megakaryocyte_Tal1_R2.bam`
 >    - *"Second BAM/CRAM file (e.g. control sample)"*: `Megakaryocyte_Input_R2.bam`
 >    - *"How to compare the two files"*: `Compute log2 of the number of reads`
@@ -412,8 +414,7 @@ optionally, you can also use `plotProfile`to create a profile plot using to comp
 
 > ### {% icon hands_on %} Hands-on: calculate signal matrix on the MACS2 output
 >
-> 1. **computeMatrix** {% icon tool %}: Run the tool **computeMatrix** with:
->
+> 1. **computeMatrix** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *Select Regions* > *"Regions to plot"*: select the MACS2 output (narrowpeaks) for G1E cells (TAL1 over Input)
 >    - {% icon param-file %} *"Score file"*: Select the bigWigs (log2 ratios from bamCompare)
 >    - *"computeMatrix has two main output options"*: `reference-point`
@@ -430,8 +431,7 @@ optionally, you can also use `plotProfile`to create a profile plot using to comp
 
 > ### {% icon hands_on %} Hands-on: plot a Heatmap using computeMarix output
 >
-> 1. **plotHeatmap** {% icon tool %}: Run the tool **plotHeatmap** with:
->
+> 1. **plotHeatmap** {% icon tool %} with the following parameters:
 >    - *"Matrix file from the computeMatrix tool"*: Select the computeMatrix output
 >    - *"Show advanced options"*: `Yes`
 >    - *"Labels for the samples (each bigwig) plotted"*: Enter sample labels in the order you added them in compueMatrix, separated by spaces.
@@ -451,8 +451,7 @@ We will now check whether the samples have more reads from regions of the genome
 
 > ### {% icon hands_on %} Hands-on: Assessing GC bias
 >
-> 1. **computeGCbias** {% icon tool %}: Run the tool **computeGCbias** from the **deepTools** package.
->
+> 1. **computeGCbias** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Bam file"*: select an aligned BAM file
 >    - *"Reference genome"*: `locally cached`
 >    - *"Using reference genome"*: `mm10`
