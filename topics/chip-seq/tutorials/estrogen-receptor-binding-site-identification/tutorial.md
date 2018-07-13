@@ -367,7 +367,7 @@ To extract only the information induced by the immunoprecipitation, we normalize
 
 > ### {% icon hands_on %} Hands-on: Generation of input-normalized coverage files
 >
-> 1.  **bamCompare** {% icon tool %} with
+> 1. **bamCompare** {% icon tool %} with
 >    - "First BAM file (e.g. treated sample)" to `patient1_ChIP_ER_good_outcome`
 >    - "Second BAM file (e.g. control sample)" to `patient1_input_good_outcome`
 >    - "Bin size in bases" to `50`
@@ -375,14 +375,14 @@ To extract only the information induced by the immunoprecipitation, we normalize
 >    - "Coverage file format" to `bedgraph`
 >    - "Region of the genome to limit the operation to" to `chr11` (to reduce the computation time for the tutorial)
 >
->    > ### {% icon question %} Questions
->    >
->    > 1. What does mean a positive or a negative value in the 4th column?
->    >
->    > > ### {% icon solution %} Solution
->    > > 1. The 4th column contains the log2 of the number of reads ratio between the ChIP-seq sample and the input sample. A positive value means that the coverage on the portion is more important in the ChIP-seq sample than in the input sample
->    > {: .solution }
->    {: .question}
+>      > ### {% icon question %} Questions
+>      >
+>      > 1. What does mean a positive or a negative value in the 4th column?
+>      >
+>      > > ### {% icon solution %} Solution
+>      > > 1. The 4th column contains the log2 of the number of reads ratio between the ChIP-seq sample and the input sample. A positive value means that the coverage on the portion is more important in the ChIP-seq sample than in the input sample
+>      > {: .solution }
+>      {: .question}
 >
 > 2. **bamCompare** {% icon tool %} with the same parameters but to generate a `bigWig` output file
 > 3. **IGV** {% icon tool %} to inspect the log2 ratio
