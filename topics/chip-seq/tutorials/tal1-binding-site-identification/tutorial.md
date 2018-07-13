@@ -348,6 +348,7 @@ We show here an alternative to Trackster, [IGV](http://software.broadinstitute.o
 > 1. Open IGV on your local computer.
 > 2. Click on each 'narrow peaks' result file from the MACS2 computations on 'display with IGV' --> 'local Mouse mm10'
 > 3. For more information about IGV see [here]({{site.baseurl}}/topics/introduction/tutorials/igv-introduction/tutorial.html)
+{: .hands_on}
 
 # Step 8: Identifying unique and common TAL1 peaks between stages
 
