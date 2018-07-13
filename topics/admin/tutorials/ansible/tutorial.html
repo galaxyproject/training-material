@@ -662,30 +662,28 @@ ok: [localhost]
 
         <ol>
           <li>What variable stores the OS name?</li>
-          <li>
-            <p>Where are all of the places that you can find your machine’s IP (v4) addresses?</p>
-
-            <blockquote class="solution">
-              <h3 id="-solution-3"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
-
-              <ol>
-                <li>
-                  <p>The OS name is stored in <code class="highlighter-rouge">ansible_distribution</code>. We saw <code class="highlighter-rouge">ansible_os_family</code> used above in the ansible-cvmfs role. You can use these variables if you are writing a generic role but packages or commands are named different on different operating systems.</p>
-                </li>
-                <li>
-                  <p>Ansible stores network information in quite a few places, sometimes one place is more convenient or more correct to use:</p>
-
-                  <ul>
-                    <li><code class="highlighter-rouge">ansible_all_ipv4_addresses</code></li>
-                    <li><code class="highlighter-rouge">ansible_default_ipv4</code></li>
-                    <li><code class="highlighter-rouge">ansible_&lt;interface_name&gt;.ipv4</code></li>
-                  </ul>
-                </li>
-              </ol>
-
-            </blockquote>
-          </li>
+          <li>Where are all of the places that you can find your machine’s IP (v4) addresses?</li>
         </ol>
+
+        <blockquote class="solution">
+          <h3 id="-solution-3"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+          <ol>
+            <li>
+              <p>The OS name is stored in <code class="highlighter-rouge">ansible_distribution</code>. We saw <code class="highlighter-rouge">ansible_os_family</code> used above in the ansible-cvmfs role. You can use these variables if you are writing a generic role but packages or commands are named different on different operating systems.</p>
+            </li>
+            <li>
+              <p>Ansible stores network information in quite a few places, sometimes one place is more convenient or more correct to use:</p>
+
+              <ul>
+                <li><code class="highlighter-rouge">ansible_all_ipv4_addresses</code></li>
+                <li><code class="highlighter-rouge">ansible_default_ipv4</code></li>
+                <li><code class="highlighter-rouge">ansible_&lt;interface_name&gt;.ipv4</code></li>
+              </ul>
+            </li>
+          </ol>
+
+        </blockquote>
 
       </blockquote>
     </li>

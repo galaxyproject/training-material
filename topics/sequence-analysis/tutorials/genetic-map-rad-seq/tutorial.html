@@ -287,6 +287,7 @@ appeared in one of the linkage groups and worked backwards to provide the raw re
   </li>
   <li><a href="#building-loci-using-stacks" id="markdown-toc-building-loci-using-stacks">Building loci using STACKS</a></li>
   <li><a href="#genotypes-determination" id="markdown-toc-genotypes-determination">Genotypes determination</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
 
 </blockquote>
@@ -389,25 +390,22 @@ https://zenodo.org/record/1219888/files/progeny_20
 
   <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_cstacks.png" alt="De novo map: cstacks" /></p>
 
-  <blockquote>
+  <blockquote class="question">
     <h3 id="-question"><i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
 
     <ol>
       <li>Can you identify the meanning of the number 425?</li>
-      <li>
-        <p>Looking at the catalog.tags file, identify specific and shared loci from each individual. Count the number of catalog loci coming from the first individual, from the second, and find on both parents.</p>
-
-        <blockquote class="solution">
-          <h3 id="-solution"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
-          <ol>
-            <li>Here, the catalog is made with 459 tags, 425 coming from the “reference individual”, a female. Some of these 425 can be shared with the other parent.</li>
-            <li>3500</li>
-          </ol>
-        </blockquote>
-      </li>
+      <li>Looking at the catalog.tags file, identify specific and shared loci from each individual. Count the number of catalog loci coming from the first individual, from the second, and find on both parents.</li>
     </ol>
-  </blockquote>
 
+    <blockquote class="solution">
+      <h3 id="-solution"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+      <ol>
+        <li>Here, the catalog is made with 459 tags, 425 coming from the “reference individual”, a female. Some of these 425 can be shared with the other parent.</li>
+        <li>3500</li>
+      </ol>
+    </blockquote>
+  </blockquote>
   <p><code class="highlighter-rouge">sstacks</code></p>
 
   <p><img src="../../images/RAD2_Genetic_Map/denovo_map_log_sstacks.png" alt="De novo map: sstacks log" /></p>
@@ -502,29 +500,26 @@ https://zenodo.org/record/1219888/files/progeny_20
   <p><img src="../../images/RAD2_Genetic_Map/haplotypes_tsv.png" alt="Haplotypes.tsv file overview" /></p>
 </blockquote>
 
-<blockquote>
+<blockquote class="no_toc">
 
-  <blockquote>
+  <blockquote class="question">
     <h3 id="-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
 
     <ol>
       <li>The use of the deleverage algorithm allows to not consider loci obtained from merging more than 3 stacks. Why 3 if biologically, you are waiting something related to 2 for diploid organisms?</li>
-      <li>
-        <p>Re-execute <strong>Stacks: De novo map</strong> pipeline modifying the p-value treshold for the SNP model. What is the difference regarding to unverified haplotypes ?</p>
-
-        <blockquote class="solution">
-          <h3 id="-solution-1"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
-          <ol>
-            <li>This value of 3 is important to use if we don’t want to blacklist loci for whom 99.9% of individuals have one and/or the alt allele and 0.01% have a third one, resulting of a sequencing error.</li>
-            <li>We see a moficiation of the number of unverified haplotypes</li>
-          </ol>
-        </blockquote>
-      </li>
+      <li>Re-execute <strong>Stacks: De novo map</strong> pipeline modifying the p-value treshold for the SNP model. What is the difference regarding to unverified haplotypes ?</li>
     </ol>
-  </blockquote>
-</blockquote>
 
-<h1 class="no_toc" id="conclusion">Conclusion</h1>
+    <blockquote class="solution">
+      <h3 id="-solution-1"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+      <ol>
+        <li>This value of 3 is important to use if we don’t want to blacklist loci for whom 99.9% of individuals have one and/or the alt allele and 0.01% have a third one, resulting of a sequencing error.</li>
+        <li>We see a moficiation of the number of unverified haplotypes</li>
+      </ol>
+    </blockquote>
+  </blockquote>
+  <h1 id="conclusion">Conclusion</h1>
+</blockquote>
 
 <p>In this tutorial, we have analyzed real RAD sequencing data to extract useful information, such as genotypes and haplotypes to generate input files for downstream genetic map creation. This approach can be summarized with the following scheme:</p>
 

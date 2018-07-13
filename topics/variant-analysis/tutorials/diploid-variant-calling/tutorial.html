@@ -442,31 +442,29 @@ READ5:     atcatgacggcaGtagc
 
   <ol>
     <li>What is the probability of a having a real polymorphism <strong>A</strong> given our observation of variants in reads <strong>B</strong>? In other words what is the probability of A given <strong>B</strong>? Or, as stated in the original <a href="https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/">blog</a>: “given that we are in region <strong>B</strong> what is the probability that we are in the region <strong>AB</strong>?”</li>
-    <li>
-      <p>Now, let’s ask an opposite question. Given a true polymorphism <strong>A</strong> what are the chances that we do detect it (i.e., find ourselves in <strong>AB</strong>)?</p>
-
-      <blockquote class="solution">
-        <h3 id="-solution">
-<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
-        <ol>
-          <li>
-            <script type="math/tex; mode=display">P(A|B) = \frac{\vert AB \vert}{|B|}</script>
-
-            <p>Dividing by <script type="math/tex">\vert U \vert</script>: <script type="math/tex">P(A \vert B) = \frac{\frac{\vert AB \vert}{\vert U \vert}}{\frac{\vert B \vert}{\vert U \vert}}</script></p>
-
-            <p>Because we know that <script type="math/tex">P(AB) = \frac{\vert AB \vert}{\vert U \vert}</script> and <script type="math/tex">P(B) = \frac{\vert B \vert}{\vert U \vert}</script>, we can rewrite the equation in the previous bullet point as <script type="math/tex">P(A \vert B) = \frac{P(AB)}{P(B)}</script></p>
-          </li>
-          <li>
-            <p>It will be <script type="math/tex">P(B \vert A) = \frac{P(AB)}{P(A)}</script>.</p>
-
-            <p>So, because we know that <script type="math/tex">P(A \vert B) = \frac{P(AB)}{P(B)}</script> and we just reasoned that <script type="math/tex">P(B \vert A) = \frac{P(AB)}{P(A)}</script>, we can say that <script type="math/tex">P(A \vert B)P(B) = P(B \vert A)P(A)</script> leading us to the Bayes formula <script type="math/tex">P(A \vert B) = \frac{P(B \vert A)P(A)}{P(B)}</script>.</p>
-
-            <p>Translating this into “genomics terms” the probability of having a genotype G given reads R is: <script type="math/tex">P(G \vert R) = \frac{P(R \vert G)P(G)}{P(R)}</script>. Because in a given calculation of <script type="math/tex">P(G \vert R)</script> reads are fixed we can re-write the Bayes formula in the following way <script type="math/tex">P(G \vert R) \sim P(R \vert G)P(G)</script> with <script type="math/tex">P(R)</script> becoming a constant.</p>
-          </li>
-        </ol>
-      </blockquote>
-    </li>
+    <li>Now, let’s ask an opposite question. Given a true polymorphism <strong>A</strong> what are the chances that we do detect it (i.e., find ourselves in <strong>AB</strong>)?</li>
   </ol>
+
+  <blockquote class="solution">
+    <h3 id="-solution">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+    <ol>
+      <li>
+        <script type="math/tex; mode=display">P(A|B) = \frac{\vert AB \vert}{|B|}</script>
+
+        <p>Dividing by <script type="math/tex">\vert U \vert</script>: <script type="math/tex">P(A \vert B) = \frac{\frac{\vert AB \vert}{\vert U \vert}}{\frac{\vert B \vert}{\vert U \vert}}</script></p>
+
+        <p>Because we know that <script type="math/tex">P(AB) = \frac{\vert AB \vert}{\vert U \vert}</script> and <script type="math/tex">P(B) = \frac{\vert B \vert}{\vert U \vert}</script>, we can rewrite the equation in the previous bullet point as <script type="math/tex">P(A \vert B) = \frac{P(AB)}{P(B)}</script></p>
+      </li>
+      <li>
+        <p>It will be <script type="math/tex">P(B \vert A) = \frac{P(AB)}{P(A)}</script>.</p>
+
+        <p>So, because we know that <script type="math/tex">P(A \vert B) = \frac{P(AB)}{P(B)}</script> and we just reasoned that <script type="math/tex">P(B \vert A) = \frac{P(AB)}{P(A)}</script>, we can say that <script type="math/tex">P(A \vert B)P(B) = P(B \vert A)P(A)</script> leading us to the Bayes formula <script type="math/tex">P(A \vert B) = \frac{P(B \vert A)P(A)}{P(B)}</script>.</p>
+
+        <p>Translating this into “genomics terms” the probability of having a genotype G given reads R is: <script type="math/tex">P(G \vert R) = \frac{P(R \vert G)P(G)}{P(R)}</script>. Because in a given calculation of <script type="math/tex">P(G \vert R)</script> reads are fixed we can re-write the Bayes formula in the following way <script type="math/tex">P(G \vert R) \sim P(R \vert G)P(G)</script> with <script type="math/tex">P(R)</script> becoming a constant.</p>
+      </li>
+    </ol>
+  </blockquote>
 </blockquote>
 
 <p><img class="emoji" title=":exclamation:" alt=":exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2757.png" height="20" width="20"> This leaves us with the need to estimate two things:</p>
@@ -765,31 +763,29 @@ family1	   HG002_NA24385_son	HG003_NA24149_father HG004_NA24143_mother 1  2     
   <ol>
     <li>At how many sites does child have a non-reference allele?</li>
     <li>At how many sites both father and son have non reference alleles?</li>
-    <li>
-      <p>List genotypes for father and son where they have non-reference alleles.</p>
-
-      <blockquote class="solution">
-        <h3 id="-solution-1">
-<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
-        <ol>
-          <li>
-            <p>To answer this question we will use two fields of GEMINI_query interface:</p>
-
-            <ul>
-              <li>Type <code class="highlighter-rouge">SELECT * from variants</code> into <strong>The query to be issued to the database</strong>
-</li>
-              <li>Type <code class="highlighter-rouge">gt_types.HG002_NA24385_son &lt;&gt; HOM_REF</code> into <strong>Restrictions to apply to genotype values</strong>
-</li>
-            </ul>
-
-            <p>Here is an <a href="../../images/gemini_query2.png">example</a>. It will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True">this output</a></p>
-          </li>
-          <li>Typing the same expression <code class="highlighter-rouge">SELECT * from variants</code> into <strong>The query to be issued to the database</strong> and <code class="highlighter-rouge">(gt_types.HG002_NA24385_son &lt;&gt; HOM_REF AND gt_types.HG003_NA24149_father &lt;&gt; HOM_REF)</code> into <strong>Restrictions to apply to genotype values</strong> will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b5aab445b3cd632ba7/display/?preview=True">this output</a>.</li>
-          <li>Typing <code class="highlighter-rouge">SELECT gts.HG002_NA24385_son, gts.HG003_NA24149_father from variants</code> into <strong>The query to be issued to the database</strong> and <code class="highlighter-rouge">(gt_types.HG002_NA24385_son &lt;&gt; HOM_REF AND gt_types.HG003_NA24149_father &lt;&gt; HOM_REF)</code> into <strong>Restrictions to apply to genotype values</strong> will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be21ed02/display/?preview=True">this output</a>.</li>
-        </ol>
-      </blockquote>
-    </li>
+    <li>List genotypes for father and son where they have non-reference alleles.</li>
   </ol>
+
+  <blockquote class="solution">
+    <h3 id="-solution-1">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+    <ol>
+      <li>
+        <p>To answer this question we will use two fields of GEMINI_query interface:</p>
+
+        <ul>
+          <li>Type <code class="highlighter-rouge">SELECT * from variants</code> into <strong>The query to be issued to the database</strong>
+</li>
+          <li>Type <code class="highlighter-rouge">gt_types.HG002_NA24385_son &lt;&gt; HOM_REF</code> into <strong>Restrictions to apply to genotype values</strong>
+</li>
+        </ul>
+
+        <p>Here is an <a href="../../images/gemini_query2.png">example</a>. It will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True">this output</a></p>
+      </li>
+      <li>Typing the same expression <code class="highlighter-rouge">SELECT * from variants</code> into <strong>The query to be issued to the database</strong> and <code class="highlighter-rouge">(gt_types.HG002_NA24385_son &lt;&gt; HOM_REF AND gt_types.HG003_NA24149_father &lt;&gt; HOM_REF)</code> into <strong>Restrictions to apply to genotype values</strong> will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b5aab445b3cd632ba7/display/?preview=True">this output</a>.</li>
+      <li>Typing <code class="highlighter-rouge">SELECT gts.HG002_NA24385_son, gts.HG003_NA24149_father from variants</code> into <strong>The query to be issued to the database</strong> and <code class="highlighter-rouge">(gt_types.HG002_NA24385_son &lt;&gt; HOM_REF AND gt_types.HG003_NA24149_father &lt;&gt; HOM_REF)</code> into <strong>Restrictions to apply to genotype values</strong> will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be21ed02/display/?preview=True">this output</a>.</li>
+    </ol>
+  </blockquote>
 </blockquote>
 
 <h3 id="using-wildcards">Using wildcards</h3>
