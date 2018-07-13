@@ -84,7 +84,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >  - Enzyme: sbfI
 >  - Capture discarded reads to a file: Yes
 >  - Output format: fastq
-
+{: .hands_on}
 
 > ### {% icon question %} Questions
 >
@@ -93,16 +93,17 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 > 3. Can you try to explain the reason why we loose a lot of reads here?
 > 4. What kind of information this result gives concerning the upcoming data analysis and the barcodes design in general ?
 >
->    > ### {% icon solution %} Solution
->    > The informations can be found in the results log file:
->    >
->    > 1. 8895289 total reads
->    > 2. 8139531 retained reads
->    > 3. There are no sequences filtered because of low quality. This is because radtags didn't apply quality related filtering since the corresponding advanced option (Discard reads with low quality scores) has not been enabled. So here, all not retained sequences are removed because of an ambiguous barcode (626265) or an ambiguous RAD-Tag (129493). This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This strategy is often used to avoid having too much sequences beginning with the exact same nucleotide sequence which may cause Illumina related issues during sequencing and cluster analysis 
->    > 4. Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!
->    >
->    > In addition to the overall statistics the numbers of retained and removed reads are also given for each bar code sequence.
->    {: .solution }
+> > ### {% icon solution %} Solution
+> > The informations can be found in the results log file:
+> >
+> > 1. 8895289 total reads
+> > 2. 8139531 retained reads
+> > 3. There are no sequences filtered because of low quality. This is because radtags didn't apply quality related filtering since the corresponding advanced option (Discard reads with low quality scores) has not been enabled. So here, all not retained sequences are removed because of an ambiguous barcode (626265) or an ambiguous RAD-Tag (129493). This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This strategy is often used to avoid having too much sequences beginning with the exact same nucleotide sequence which may cause Illumina related issues during sequencing and cluster analysis 
+> > 4. Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!
+> >
+> > In addition to the overall statistics the numbers of retained and removed reads are also given for each bar code sequence.
+> {: .solution }
+{: .question}
 
 In order to obtain results of higher quality we will play with the advanced options:  
 
@@ -111,10 +112,9 @@ In order to obtain results of higher quality we will play with the advanced opti
 > 2. **Process Radtags** {% icon tool %}: Re-Run `Stacks: process radtags` on FastQ file playing with parameters
 >   - In `advanced options`, activate the `Discard reads with low quality scores` option and play with the score limit (default (nolimit) vs 20 vs 10 for example) and examine the change in reads retained. 
 >   - Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
-
-Then we generate a graphical display of the changes: 
-
-> ### {% icon hands_on %} Hands-on: 
+>
+> Then we generate a graphical display of the changes: 
+>
 > 
 > First we cut the interesting lines of each `result.log with Stacks: process radtags` 
 >
@@ -122,13 +122,15 @@ Then we generate a graphical display of the changes:
 > 4. **Concatenate datasets tail-to-head** on the resulting data sets
 > 
 > Alternatively just copy/paste these lines on the Galaxy upload tool using Paste/fetch data section and modifying the File header by sample and filename by Score 10 / Score 20 and noscorelimit for example... Before Starting the upload, you can select the `Convert spaces to tabs` option through the `Upload configuration` wheel. If you did not pay attention to the order you can just sort the file using the first column.
+>
+> ```
+> quality	Retained Reads	Low Quality	Ambiguous Barcodes	Ambiguous RAD-Tag	Total
+> 20	2980543		5158988		626265		129493		8895289
+> 10	7373160		766371		626265		129493		8895289
+> nolimit	8139531		0		626265		129493		8895289
+> ```
+{: .hands_on}
 
-```
-quality	Retained Reads	Low Quality	Ambiguous Barcodes	Ambiguous RAD-Tag	Total
-20	2980543		5158988		626265		129493		8895289
-10	7373160		766371		626265		129493		8895289
-nolimit	8139531		0		626265		129493		8895289
-```
 
 You can use the `Charts` functionality through the Visualize button to plot the data. 
 
@@ -154,10 +156,11 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    >
 >    > 1. What is the read length?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > The read length is 32 bp
->    >    {: .solution }
->
+>    > > ### {% icon solution %} Solution
+>    > > The read length is 32 bp
+>    > {: .solution}
+>    {: .question}
+{: .hands_on}
 
 Note the quality drop at bases 5-10 which are the cut site of the RADSeq
 protocol (TGCAGG). This is caused by the extremely uneven distribution the
@@ -188,6 +191,7 @@ Here we will use BWA. BWA is a fast light-weighted tool that aligns relatively s
 *[Li et Durbin, Bioinformatics, 2009](https://www.ncbi.nlm.nih.gov/pubmed/19451168)*
 
 
+> ### {% icon hands_on %} Hands-on: Map with BWA
 > 1. **Map with BWA - map short reads (< 100 bp) against reference genome ** {% icon tool %}: 
 > 
 > - Will you select a reference genome from your history or use a built-in index?: Use a genome from history and build index
@@ -195,6 +199,7 @@ Here we will use BWA. BWA is a fast light-weighted tool that aligns relatively s
 > - Select input type: Single-end
 > - Select fastq dataset: One dataset collection containing the demultiplexed (in the following we discuss the TODO which setting we discuss?)
 > - Leave everything else 
+{: .hands_on}
 
 **BWA** generates BAM files with the mapped reads.
 
@@ -208,6 +213,7 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 >
 > Information on ref_map.pl and its parameters can be found online: https://creskolab.uoregon.edu/stacks/comp/ref_map.php.
 
+> ### {% icon hands_on %} Hands-on: Stacks: Reference map
 > **Stacks: Reference map** {% icon tool %}: 
 > - Select your usage: Population 
 > - Files containing an individual sample from a population: Choose the mapped reads (data collection)
@@ -223,8 +229,12 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 > Notice that each locus now has a chromosome/base pair specified in each of the `*tags.tsv` files and in the catalog files.
 > TODO: probably the tags summary file? 
 > TODO: Would be nice to have some specific informations to look for in the files.  
+{: .hands_on}
 
 # Calculate population genomics statistics
+
+> ### {% icon hands_on %} Hands-on: Calculate population genomics statistics
+>
 > **Stacks: populations** {% icon tool %}: Run the last step of **Stacks: Reference map** pipeline specifying data filtering options (minimum percentage of individuals in a population required to process a locus for that population: 0.75 , output options (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
 > - Input type: Stacks output
 > - Output from previous Stacks pipeline steps (e.g. denovo_map or refmap): Full output from ref_map 
@@ -233,20 +243,21 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 > - Output results in Variant Call Format (VCF): yes
 > - Output results in Structure Format: yes
 > - Enable SNP and haplotype-based F statistics: yes
-> 
-> Now look at the output in the file `batch_1.sumstats` named `SNP and Haplotype-based F statistics with Stacks: populations ...` on your history. This file is also reachable on the data collection nammed `Full output from ref_map .....` with his original name `batch_1.sumstats`. There are a large number of statistics calculated at each SNP, so use Galaxy tools like filter, cut, and sort to focus on some.
-
 >
->    > ### {% icon question %} Question
->    >
->    > 1. What is the maximum value of FST at any SNP?
->    > 2. How many SNPs reach this FST value?
->    >
->    >    > ### {% icon solution %} Solution
->    >    > - 0.75
->    >    > - 3500
->    >    {: .solution }
+> Now look at the output in the file `batch_1.sumstats` named `SNP and Haplotype-based F statistics with Stacks: populations ...` on your history. This file is also reachable on the data collection nammed `Full output from ref_map .....` with his original name `batch_1.sumstats`. There are a large number of statistics calculated at each SNP, so use Galaxy tools like filter, cut, and sort to focus on some.
+>
+> > ### {% icon question %} Question
+> >
+> > 1. What is the maximum value of FST at any SNP?
+> > 2. How many SNPs reach this FST value?
+> >
+> > > ### {% icon solution %} Solution
+> > > - 0.75
+> > > - 3500
+> > {: .solution }
+> {: .question}
 > TODO: There is no column named `FST`, but one named `Fst'` (column 30). I find larger values than 0.75 in my results (e.g. 1.00.
+{: .hands_on}
 
 
 # Conclusion

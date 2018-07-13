@@ -219,10 +219,10 @@ A new file will be created in your history, this contains the JBrowse interactiv
 >     > 1. What is the correct codon at this position?
 >     > 2. What is the mutation found here?
 >     >
->     >    > ### {% icon solution %} Solution
->     >    > 1. The correct codon at this position is TGT, coding for the amino acid Cysteine (middle row of the amino acid translations).
->     >    > 2. The mutation of T → A turns this triplet into TGA, a stop codon.
->     >    {: .solution}
+>     > > ### {% icon solution %} Solution
+>     > > 1. The correct codon at this position is TGT, coding for the amino acid Cysteine (middle row of the amino acid translations).
+>     > > 2. The mutation of T → A turns this triplet into TGA, a stop codon.
+>     > {: .solution}
 >     {: .question}
 >
 {: .hands_on}

@@ -263,21 +263,21 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >    >
 >    > How does your file tree look now? Use `find` or `tree`.
 >    >
->    >    > ### {% icon solution %} Solution
->    >    >
->    >    > ```
->    >    > .
->    >    > ├── hosts
->    >    > ├── playbook.yml
->    >    > └── roles
->    >    >     └── my-role
->    >    >         ├── files
->    >    >         │   └── test.txt
->    >    >         └── tasks
->    >    >             └── main.yml
->    >    > ```
->    >    >
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > ```
+>    > > .
+>    > > ├── hosts
+>    > > ├── playbook.yml
+>    > > └── roles
+>    > >     └── my-role
+>    > >         ├── files
+>    > >         │   └── test.txt
+>    > >         └── tasks
+>    > >             └── main.yml
+>    > > ```
+>    > >
+>    > {: .solution }
 >    {: .question}
 >
 > 9. Run one of the following command, whichever is appropriate:
@@ -291,23 +291,23 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >    >
 >    > How does the output look?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    >
->    >    > The important thing is `failed=0`
->    >    >
->    >    > ```
->    >    > $ ansible-playbook -i hosts playbook.yml -c local
->    >    > PLAY [my_hosts] *********************************
->    >    > TASK [Gathering Facts] *************************
->    >    > ok: [localhost]
->    >    > TASK [my-role : Copy] **************************
->    >    > changed: [localhost]
->    >    > PLAY RECAP *************************************
->    >    > localhost                  : ok=2    changed=1    unreachable=0    failed=0
->    >    > ```
->    >    >
->    >    > You can re-run this and it should say `changed=0`
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > The important thing is `failed=0`
+>    > >
+>    > > ```
+>    > > $ ansible-playbook -i hosts playbook.yml -c local
+>    > > PLAY [my_hosts] *********************************
+>    > > TASK [Gathering Facts] *************************
+>    > > ok: [localhost]
+>    > > TASK [my-role : Copy] **************************
+>    > > changed: [localhost]
+>    > > PLAY RECAP *************************************
+>    > > localhost                  : ok=2    changed=1    unreachable=0    failed=0
+>    > > ```
+>    > >
+>    > > You can re-run this and it should say `changed=0`
+>    > {: .solution }
 >    {: .question}
 >
 >
@@ -368,17 +368,17 @@ The [`setup`](https://docs.ansible.com/ansible/latest/modules/setup_module.html)
 >    > 1. What variable stores the OS name?
 >    > 2. Where are all of the places that you can find your machine's IP (v4) addresses?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    >
->    >    > 1. The OS name is stored in `ansible_distribution`. We saw `ansible_os_family` used above in the ansible-cvmfs role. You can use these variables if you are writing a generic role but packages or commands are named different on different operating systems.
->    >    >
->    >    > 2. Ansible stores network information in quite a few places, sometimes one place is more convenient or more correct to use:
->    >    >
->    >    >    - `ansible_all_ipv4_addresses`
->    >    >    - `ansible_default_ipv4`
->    >    >    - `ansible_<interface_name>.ipv4`
->    >    >
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 1. The OS name is stored in `ansible_distribution`. We saw `ansible_os_family` used above in the ansible-cvmfs role. You can use these variables if you are writing a generic role but packages or commands are named different on different operating systems.
+>    > >
+>    > > 2. Ansible stores network information in quite a few places, sometimes one place is more convenient or more correct to use:
+>    > >
+>    > >    - `ansible_all_ipv4_addresses`
+>    > >    - `ansible_default_ipv4`
+>    > >    - `ansible_<interface_name>.ipv4`
+>    > >
+>    > {: .solution }
 >    >
 >    {: .question}
 >
@@ -437,19 +437,19 @@ Templates give you greater control over the files you are deploying to the remot
 >    >
 >    > How does it look?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    >
->    >    > The file should look like:
->    >    >
->    >    > ```
->    >    > [example]
->    >    > api_key = deadbeefcafe
->    >    > listen = 192.168.0.2
->    >    > ```
->    >    >
->    >    > Where the last line has the machine's IP address.
->    >    >
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > The file should look like:
+>    > >
+>    > > ```
+>    > > [example]
+>    > > api_key = deadbeefcafe
+>    > > listen = 192.168.0.2
+>    > > ```
+>    > >
+>    > > Where the last line has the machine's IP address.
+>    > >
+>    > {: .solution }
 >    >
 >    {: .question}
 >
@@ -473,30 +473,30 @@ Templates give you greater control over the files you are deploying to the remot
 >     >
 >     > How does the output look?
 >     >
->     >    > ### {% icon solution %} Solution
->     >    >
->     >    > ```
->     >    > $ ansible-playbook -i hosts playbook.yml -c local --check --diff
->     >    > PLAY [my_hosts] ******************************************
->     >    > TASK [Gathering Facts] **********************************
->     >    > ok: [localhost]
->     >    > TASK [my-role : Copy] ***********************************
->     >    > ok: [localhost]
->     >    > TASK [my-role : Template the configuration file] ********
->     >    > --- before: /tmp/test.ini
->     >    > +++ after: /home/hxr/.ansible/tmp/ansible-local-1906887dr2u6j8n/tmptx9pdelg/test.ini.j2
->     >    > @@ -1,3 +1,3 @@
->     >    >  [example]
->     >    > -api_key = deadbeefcafe
->     >    > +api_key = my_super_secret_api_key
->     >    >  listen = 192.168.0.25
->     >    > changed: [localhost]
->     >    > PLAY RECAP **********************************************
->     >    > localhost                  : ok=3    changed=1    unreachable=0    failed=0
->     >    > ```
->     >    >
->     >    > Here you can see that the api_key value will be changed. Despite ansible reporting `changed=1`, no changes have actually been applied to the system.
->     >    {: .solution }
+>     > > ### {% icon solution %} Solution
+>     > >
+>     > > ```
+>     > > $ ansible-playbook -i hosts playbook.yml -c local --check --diff
+>     > > PLAY [my_hosts] ******************************************
+>     > > TASK [Gathering Facts] **********************************
+>     > > ok: [localhost]
+>     > > TASK [my-role : Copy] ***********************************
+>     > > ok: [localhost]
+>     > > TASK [my-role : Template the configuration file] ********
+>     > > --- before: /tmp/test.ini
+>     > > +++ after: /home/hxr/.ansible/tmp/ansible-local-1906887dr2u6j8n/tmptx9pdelg/test.ini.j2
+>     > > @@ -1,3 +1,3 @@
+>     > >  [example]
+>     > > -api_key = deadbeefcafe
+>     > > +api_key = my_super_secret_api_key
+>     > >  listen = 192.168.0.25
+>     > > changed: [localhost]
+>     > > PLAY RECAP **********************************************
+>     > > localhost                  : ok=3    changed=1    unreachable=0    failed=0
+>     > > ```
+>     > >
+>     > > Here you can see that the api_key value will be changed. Despite ansible reporting `changed=1`, no changes have actually been applied to the system.
+>     > {: .solution }
 >     {: .question}
 >
 > 13. Run the playbook again, without the `--check` flag to apply your changes.
@@ -522,19 +522,19 @@ Now that you've built a small role, you can imagine that building real roles tha
 >    >
 >    > Did something go wrong?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    >
->    >    > Since you have been running the playbook as a non-root user (or at least you should have been!), the step to install a package fails.
->    >    > The solution to this is to set `become: true`. Edit your playbook.yml and add `become: true` just below `hosts: my_hosts`.
->    >    >
->    >    > `become` causes ansible to attempt to become a different user (using sudo/su/whatever is appropriate), by default this is `root`. If you want to become a different user, just set `become_user`. Beware, the user should be able to privilege escalate without a password prompt. Otherwise when you execute the playbook you should set `--ask-become-pass`, using the privilege escalation password for that host.
->    >    >
->    >    > > ### {% icon tip %} Ansible Become
->    >    > > See the [documentation](https://docs.ansible.com/ansible/latest/user_guide/become.html) if you need to control this behaviour differently. `become` can be set either at the task level or the playbook level.
->    >    > >
->    >    > {: .tip}
->    >    >
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > Since you have been running the playbook as a non-root user (or at least you should have been!), the step to install a package fails.
+>    > > The solution to this is to set `become: true`. Edit your playbook.yml and add `become: true` just below `hosts: my_hosts`.
+>    > >
+>    > > `become` causes ansible to attempt to become a different user (using sudo/su/whatever is appropriate), by default this is `root`. If you want to become a different user, just set `become_user`. Beware, the user should be able to privilege escalate without a password prompt. Otherwise when you execute the playbook you should set `--ask-become-pass`, using the privilege escalation password for that host.
+>    > >
+>    > > > ### {% icon tip %} Ansible Become
+>    > > > See the [documentation](https://docs.ansible.com/ansible/latest/user_guide/become.html) if you need to control this behaviour differently. `become` can be set either at the task level or the playbook level.
+>    > > >
+>    > > {: .tip}
+>    > >
+>    > {: .solution }
 >    {: .question}
 >
 {: .hands_on}

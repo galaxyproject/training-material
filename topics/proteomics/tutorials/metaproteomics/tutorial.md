@@ -285,10 +285,10 @@ As a tabular file is being read, line filters may be applied and an SQL query ca
 >    > 1. What does `FROM psm` mean?
 >    > 2. What need to be changed if we only want peptides with a confidence higher then 98%?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. We want to read from table "psm". We defined the name before in the "Specify Name for Table" option.
->    >    > 2. We need to change the value in line 3: "WHERE validation IS NOT 'Confident' AND confidence >= 98"
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. We want to read from table "psm". We defined the name before in the "Specify Name for Table" option.
+>    > > 2. We need to change the value in line 3: "WHERE validation IS NOT 'Confident' AND confidence >= 98"
+>    > {: .solution }
 >    {: .question}
 >
 >    - **include query result column headers**: `No`
