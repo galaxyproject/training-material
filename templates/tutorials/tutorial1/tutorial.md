@@ -64,11 +64,11 @@ Short introduction about this subpart.
 >    >
 >    > Question?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    >
->    >    > Answer to question
->    >    >
->    >    {: .solution}
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > Answer to question
+>    > >
+>    > {: .solution}
 >    >
 >    {: .question}
 {: .hands_on}
@@ -94,12 +94,12 @@ Some blabla
 >    > 1. Question1?
 >    > 2. Question2?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    >
->    >    > 1. Answer for question1
->    >    > 2. Answer for question2
->    >    >
->    >    {: .solution}
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 1. Answer for question1
+>    > > 2. Answer for question2
+>    > >
+>    > {: .solution}
 >    >
 >    {: .question}
 >

@@ -93,11 +93,11 @@ When we structured the repository, we decided to use as topics the categories th
 >    >
 >    > In which topic will you put the new tutorial?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    >
->    >    > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is placed in 2 categories (bottom): "Next Gen Mappers", and "Sequence Analysis".
->    >    > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
->    >    {: .solution}
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is placed in 2 categories (bottom): "Next Gen Mappers", and "Sequence Analysis".
+>    > > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
+>    > {: .solution}
 >    {: .question}
 {: .hands_on}
 

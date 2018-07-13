@@ -151,12 +151,12 @@ times, we'll unique our sequences using the `Unique.seqs` command:
 >    >
 >    > How many sequences were unique? How many duplicates were removed?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 19,502 unique sequences and 498 duplicates.
->    >    >
->    >    > This can be determined from the number of lines in the fasta (or names) output, compared to the
->    >    > number of lines in the fasta file before this step.
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 19,502 unique sequences and 498 duplicates.
+>    > >
+>    > > This can be determined from the number of lines in the fasta (or names) output, compared to the
+>    > > number of lines in the fasta file before this step.
+>    > {: .solution }
 >    {: .question}
 >
 {: .hands_on}
@@ -300,10 +300,10 @@ total # of seqs:    18178
 > 1. How many sequences have been aligned?
 > 2. Between which positions most of the reads are aligned to this references?
 >
->    > ### {% icon solution %} Solution
->    > 1. 17,698 are aligned
->    > 2. From this we can see that most of our reads align nicely to positions `3080-13424` on this reference. This corresponds exactly to the V4 target region of the 16S gene.
->    {: .solution }
+> > ### {% icon solution %} Solution
+> > 1. 17,698 are aligned
+> > 2. From this we can see that most of our reads align nicely to positions `3080-13424` on this reference. This corresponds exactly to the V4 target region of the 16S gene.
+> {: .solution }
 {: .question}
 
 To make sure that everything overlaps the same region we'll re-run `Screen.seqs` to get sequences that start at or before position 3,080 and end at or after position 13,424.
@@ -462,10 +462,10 @@ We probably also want to know the taxonomy for each of our OTUs. We can get the 
 > 1. How many OTUs with taxonomic assignation are found for the Anguil sample? And for the Pampa sample?
 > 2. What is the annotation of first OTU and its size?
 >
->    > ### {% icon solution %} Solution
->    > 1. 2,195 for Anguil and 2,472 for Pampa ("tax.summary")
->    > 2. Otu00001 is associated to 929 sequences and to Bacteria (kingdom), Verrucomicrobia (phylum), Spartobacteria (class) in "taxonomy" file
->    {: .solution }
+> > ### {% icon solution %} Solution
+> > 1. 2,195 for Anguil and 2,472 for Pampa ("tax.summary")
+> > 2. Otu00001 is associated to 929 sequences and to Bacteria (kingdom), Verrucomicrobia (phylum), Spartobacteria (class) in "taxonomy" file
+> {: .solution }
 {: .question}
 
 ## Visualization
@@ -611,11 +611,11 @@ In this tutorial, we use the second approach with MetaPhlAn2. This tools is usin
 > 2. What are the two orders found in our sample?
 > 3. What is the most abundant family in our sample?
 >
->    > ### {% icon solution %} Solution
->    > 1. We have access to species level
->    > 2. Pseudomonadales and Solirubrobacterales are found in our sample
->    > 3. The most abundant family is Pseudomonadaceae with 86.21 % of the assigned sequences
->    {: .solution }
+> > ### {% icon solution %} Solution
+> > 1. We have access to species level
+> > 2. Pseudomonadales and Solirubrobacterales are found in our sample
+> > 3. The most abundant family is Pseudomonadaceae with 86.21 % of the assigned sequences
+> {: .solution }
 {: .question}
 
 Even if the output of MetaPhlAn2 is bit easier to parse than the BIOM file, we want to visualize and explore the community structure with KRONA
@@ -681,9 +681,9 @@ HUMAnN2 generates 3 files
 >
 > How many gene families and pathways have been identified?
 >
->    > ### {% icon solution %} Solution
->    > 44 gene families but no pathways are identified
->    {: .solution }
+> > ### {% icon solution %} Solution
+> > 44 gene families but no pathways are identified
+> {: .solution }
 {: .question}
 
 The RPK for the gene families are quite difficult to interpret in term of relative abundance. We decide then to normalize the values
@@ -700,10 +700,10 @@ The RPK for the gene families are quite difficult to interpret in term of relati
 >  > 1. Which percentage of sequences has not be assigned to a gene family?
 >  > 2. What is the most abundant gene family?
 >  >
->  >    > ### {% icon solution %} Solution
->  >    > 1. 55% of the sequences has not be assigned to a gene family
->  >    > 2. The most abundant gene family with 25% of sequences is a putative secreted protein
->  >    {: .solution }
+>  > > ### {% icon solution %} Solution
+>  > > 1. 55% of the sequences has not be assigned to a gene family
+>  > > 2. The most abundant gene family with 25% of sequences is a putative secreted protein
+>  > {: .solution }
 >  {: .question}
 {: .hands_on}
 
