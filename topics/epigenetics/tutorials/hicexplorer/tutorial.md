@@ -35,18 +35,19 @@ After a corrected Hi-C matrix is created other tools can be used to visualize it
 >
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
->    > * Copy the link location
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > Below are the links to the read files that can be copied and pasted in the upload manager.
+>    > 1. Copy the link location
+>    > 2. Open the Galaxy Upload Manager
+>    > 3. Select **Paste/Fetch Data**
 >    >
->    > ```
->    > https://zenodo.org/record/1183661/files/HiC_S2_1p_10min_lowU_R1.fastq.gz
->    > https://zenodo.org/record/1183661/files/HiC_S2_1p_10min_lowU_R2.fastq.gz
->    > ```
+>    >    Below are the links to the read files that can be copied and pasted in the upload manager.
 >    >
->    > * Paste the links into the text field
->    > * Press **Start**
+>    >    ```
+>    >    https://zenodo.org/record/1183661/files/HiC_S2_1p_10min_lowU_R1.fastq.gz
+>    >    https://zenodo.org/record/1183661/files/HiC_S2_1p_10min_lowU_R2.fastq.gz
+>    >    ```
+>    >
+>    > 4. Paste the links into the text field
+>    > 5. Press **Start**
 >    {: .tip}
 >
 > 3. Rename the data set to something meaningful, e.g. `HiC_S2_1p_10min_lowU_R1` and `HiC_S2_1p_10min_lowU_R2`.
