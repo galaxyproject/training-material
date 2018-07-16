@@ -68,9 +68,9 @@ Before starting any analyses we need to upload the assembly produced in [Unicycl
 
  > ### {% icon hands_on %} Uploading *E. coli* assembly into Galaxy
  >
- > 1. Upload tool {% icon tool %} (Upload icon on the top of the left pane)
+ > 1. **Upload** {% icon tool %}:
  >   - Click **Paste/Fetch data** button (Bottom of the interface box)
- >   - Paste `https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna` into the box.
+ >   - **Paste** `https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna` into the box.
  >   - *"Type"*: `fasta`
  >   - Click **Start**
 {: .hands_on}

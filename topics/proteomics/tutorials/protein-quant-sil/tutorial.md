@@ -68,6 +68,7 @@ The OpenMS suite provides several tools (FeatureFinders) for MS1 feature detecti
 >   > When using SILAC-KR or dimethyl-labelling and trypsin digestion, exactly one labelled amino acid per peptide is expected. The only labelled amino acids are lysine (K) and arginine (R) and trypsin cuts after each of them. However, a small percentage of missed cleavage normally occur also in those datasets. Setting **Maximum number of missed cleavages due to incomplete digestion** to `1` will be sufficient to deal with most missed cleavages.
 >   >
 >   > When using other enzymes (e.g. Lys-C) or other labels (e.g. <sup>18</sup>O), several labelled amino acids per peptide are expected. You can search for those features by increasing the parameter **Maximum number of missed cleavages due to incomplete digestion**.
+>   {: .comment}
 {: .hands_on}
 
 # Peptide and Protein Identification

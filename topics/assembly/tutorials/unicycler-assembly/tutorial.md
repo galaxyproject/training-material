@@ -152,11 +152,14 @@ To assess quality we will use two tools: [FastQC](https://www.bioinformatics.bab
 
 > ### {% icon hands_on %} Hands-on: Quality Control
 >
-> 1. **FastQC** {% icon tool %} on all three fastq datasets simultaneously using the multi-datasets button
+> 1. **FastQC** {% icon tool %}:
 >
-> 2. **MultiQC** {% icon tool %} on FastQC outputs. Although FastQC generated graphical reports for each dataset we can look at everything at once using multiQC with the following parameters :
->   - "Software name" to `FastQC`
->   - "Result file" to all Multiple datasets selection button an `RawData` outputs of FastQC
+>    - {% icon param-files %} *"Short read data from your current history"*: Select all three FastQ datasets simultaneously
+>
+> 2. **MultiQC** {% icon tool %}: to generate a summary of the FastQC reports with
+>   - *"Which tool was used generate logs?"*: `FastQC`
+>   - *"Type of FastQC output"*: `Raw data`
+>   - {% icon param-files %} *"FastQC Output"*: `RawData` outputs of FastQC
 >
 {: .hands_on}
 
@@ -195,9 +198,8 @@ Now it is time to perform assembly.
 
 > ### {% icon hands_on %} Hands-on: Assembly Quality
 >
-> 1. **Quast** {% icon tool %} with the following parameters :
->   - "Input assembly file" to the fasta file resulting from the Unicycler assembly.
->   - Other parameters at default settings
+> 1. **Quast** {% icon tool %}: with the following parameters
+>   - *"Contigs/scaffolds output file"*: Select the fasta file resulting from the Unicycler assembly.
 >
 {: .hands_on}
 
@@ -212,12 +214,12 @@ One can see that there are two (!) contigs. The largest contig is 4,576,290 bp (
 
 > ### {% icon hands_on %} Hands-on: Annotation
 >
-> 1. **Prokka** {% icon tool %} with the following parameters:
->   - "Contigs to annotate" parameter to the assembly ouput of `Unicycler`
->   - "Genus name" parameter to `Escherichia`
->   - "Species name" parameter to `coli`
->   - "Strain name" parameter to `C-1`
->   - "Use genus" parameter to `yes`
+> 1. **Prokka** {% icon tool %}:
+>   - *"Contigs to annotate"*: Select the assembly ouput of `Unicycler`
+>   - *"Genus name"*: `Escherichia`
+>   - *"Species name"*: `coli`
+>   - *"Strain name"*: `C-1`
+>   - *"Use genus-specific BLAST database"*: `yes`
 >
 {: .hands_on}
 

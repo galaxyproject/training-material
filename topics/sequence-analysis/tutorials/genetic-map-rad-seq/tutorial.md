@@ -37,6 +37,7 @@ The original data is available at [STACKS website](http://catchenlab.life.illino
 >
 >    > ### {% icon comment %} Comments
 >    > If you are using the [GenOuest Galaxy instance](https://galaxy.genouest.org), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> '1 Galaxy teaching folder' -> 'EnginesOn' -> 'RADseq' -> 'Genetic map'
+>    {: .comment}
 >
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
@@ -69,9 +70,11 @@ The original data is available at [STACKS website](http://catchenlab.life.illino
 >    > https://zenodo.org/record/1219888/files/progeny_20
 >    > ```
 >    > * Press **Start**  
+>    {: .tip}
 >
 >    As default, Galaxy takes the link as name. It does not link the dataset to a database or a reference genome.
 >
+{: .hands_on}
 
 # Building loci using STACKS
 
@@ -80,12 +83,14 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 > ### {% icon comment %} Comment
 >
 > Information on `denovo_map.pl` and its parameters can be found online: https://creskolab.uoregon.edu/stacks/comp/denovo_map.php.
+{: .comment}
 
 
+> ### {% icon hands_on %} Hands-On: Stacks: De novo map
 > **Stacks: De novo map** {% icon tool %}: Run Stacks selecting the Genetic map usage. Specify each parent as a sample in the appropriate box, then each of the 20 progeny and specify a CP Cross type, 3 for the Minimum number of identical raw reads required to create a stack, 3 for minimum number of identical raw reads required to create a stack in 'progeny' individuals, 3 for the number of mismatches allowed between loci when building the catalog and activate the option "remove, or break up, highly repetitive RAD-Tags in the ustacks program".
 >
 >    ![De novo map input](../../images/RAD2_Genetic_Map/denovomap_in.png)
-
+>
 >    Once Stacks has completed running, you will see 5 new data collections and 8 datasets.
 >
 >    ![The output of de novo map](../../images/RAD2_Genetic_Map/denovomap_out.png)
@@ -134,38 +139,40 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 >
 >    Finally, 447 loci, markers, are kept to generate the `batch_1.genotypess_1.tsv` file. 459 loci are stored on the observed haplotype file `batch_1.haplotypes_1.tsv`.
 >
+{: .hands_on}
 
 ### Matches files
->
->    Here are `sample1.snps` (left) and `sample2.snps` (right)
->
->    ![De novo map matches files](../../images/RAD2_Genetic_Map/denovo_map_matches1.PNG)
->
->    Catalog_ID (= catalog Stacks_ID) is composed by the `Stack_ID` from the "reference" individual, here sample1, but number is different from sample2 `Stack_ID`. Thus, in the `catalog.alleles.tsv`, the `Stack_ID` number 3 corresponds to the `Stack_ID` number 16 from sample2!
->
->    You can inspect the matches files (you maybe have to change the tsv datatype to a tabular one to correctly display the datasets).
->
->    ![Male and female matches files](../../images/RAD2_Genetic_Map/denovo_map_matches2.png)
->
->    Consider catalog SNPs 27 & 28, on the 302 catalog locus:
->
->    ![De novo map matches considering catalog SNPs](../../images/RAD2_Genetic_Map/denovo_map_matches_snps.png)
->
->   and the corresponding catalog haplotypes, 3 on the 4 possible (AA, AT, GT but no GA):
->
->    ![De novo map matches considering catalog haplotypes](../../images/RAD2_Genetic_Map/denovo_map_matches_alleles_haplotypes.png)
->
->    heterozygosity is observed on each parent (one ab, the other ac) and there are 19 genotypes for the 22 individuals.
->
->    ![De novo map macthes: markers](../../images/RAD2_Genetic_Map/denovo_map_matches_markers.png)
->
->    We can then see that Stack_ID 330 for female corresponds to the 39 for male:
->
->
->    ![De novo map matches: male and female](../../images/RAD2_Genetic_Map/denovo_map_matches_alleles_male_female.png)
->
+
+Here are `sample1.snps` (left) and `sample2.snps` (right)
+
+![De novo map matches files](../../images/RAD2_Genetic_Map/denovo_map_matches1.PNG)
+
+Catalog_ID (= catalog Stacks_ID) is composed by the `Stack_ID` from the "reference" individual, here sample1, but number is different from sample2 `Stack_ID`. Thus, in the `catalog.alleles.tsv`, the `Stack_ID` number 3 corresponds to the `Stack_ID` number 16 from sample2!
+
+You can inspect the matches files (you maybe have to change the tsv datatype to a tabular one to correctly display the datasets).
+
+![Male and female matches files](../../images/RAD2_Genetic_Map/denovo_map_matches2.png)
+
+Consider catalog SNPs 27 & 28, on the 302 catalog locus:
+
+![De novo map matches considering catalog SNPs](../../images/RAD2_Genetic_Map/denovo_map_matches_snps.png)
+
+nd the corresponding catalog haplotypes, 3 on the 4 possible (AA, AT, GT but no GA):
+
+![De novo map matches considering catalog haplotypes](../../images/RAD2_Genetic_Map/denovo_map_matches_alleles_haplotypes.png)
+
+heterozygosity is observed on each parent (one ab, the other ac) and there are 19 genotypes for the 22 individuals.
+
+![De novo map macthes: markers](../../images/RAD2_Genetic_Map/denovo_map_matches_markers.png)
+
+We can then see that Stack_ID 330 for female corresponds to the 39 for male:
+
+
+![De novo map matches: male and female](../../images/RAD2_Genetic_Map/denovo_map_matches_alleles_male_female.png)
 
 # Genotypes determination
+
+> ### {% icon hands_on %} Hands-on: Stacks: Genotypes
 > **Stacks: genotypes** {% icon tool %}: Re-Run the last step of `Stacks: De novo map` pipeline specifying more options as:
 >    > 1. The genetic map type (ie F1, F2 (left figure, F1xF1), Double Haploid, Back Cross (F1xF0), Cross Pollination (right figure, F1 or F2 but resulting from the cross of pure homozygous parents))
 >    >
@@ -184,40 +191,41 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 >
 >    You can re-run **Stacks: genotypes** {% icon tool %}: modifying the number of genotyped progeny to consider a marker and thus be more or less stringent. Compare results.
 >
+{: .hands_on}
+
 ### Genotypes.tsv files
->
->    One line by locus, one column by individual (aa, ab, AB if automatic correction applied, bb, bc, ...) with observed genotype for each locus:
->
->    ![Genotypes.tsv file overview](../../images/RAD2_Genetic_Map/genotypes_tsv.png)
->
+
+One line by locus, one column by individual (aa, ab, AB if automatic correction applied, bb, bc, ...) with observed genotype for each locus:
+
+![Genotypes.tsv file overview](../../images/RAD2_Genetic_Map/genotypes_tsv.png)
+
 ### Genotypes.txt files
->
->    One line by individual, and for each individual, for each catalog locus, genotype:
->
->    ![Genotypes.txt file overview](../../images/RAD2_Genetic_Map/genotypes_txt.png)
->
+
+One line by individual, and for each individual, for each catalog locus, genotype:
+
+![Genotypes.txt file overview](../../images/RAD2_Genetic_Map/genotypes_txt.png)
+
 ### Haplotypes.tsv files
+
+One line by locus, one column by individual (aa, ab, AB if automatic correction applied, bb, bc, ...) with observed genotype for each locus:
+
+![Haplotypes.tsv file overview](../../images/RAD2_Genetic_Map/haplotypes_tsv.png)
+
+> ### {% icon question %} Question
 >
->    One line by locus, one column by individual (aa, ab, AB if automatic correction applied, bb, bc, ...) with observed genotype for each locus:
+> 1. The use of the deleverage algorithm allows to not consider loci obtained from merging more than 3 stacks. Why 3 if biologically, you are waiting something related to 2 for diploid organisms?
+> 2. Re-execute **Stacks: De novo map** pipeline modifying the p-value treshold for the SNP model. What is the difference regarding to unverified haplotypes ?
 >
->    ![Haplotypes.tsv file overview](../../images/RAD2_Genetic_Map/haplotypes_tsv.png)
+> > ### {% icon solution %} Solution
+> > 1. This value of 3 is important to use if we don't want to blacklist loci for whom 99.9% of individuals have one and/or the alt allele and 0.01% have a third one, resulting of a sequencing error.
+> > 2. We see a moficiation of the number of unverified haplotypes
+> {: .solution }
+{: .question}
 
 
->
->    > ### {% icon question %} Question
->    >
->    > 1. The use of the deleverage algorithm allows to not consider loci obtained from merging more than 3 stacks. Why 3 if biologically, you are waiting something related to 2 for diploid organisms?
->    > 2. Re-execute **Stacks: De novo map** pipeline modifying the p-value treshold for the SNP model. What is the difference regarding to unverified haplotypes ?
->    >
->    > > ### {% icon solution %} Solution
->    > > 1. This value of 3 is important to use if we don't want to blacklist loci for whom 99.9% of individuals have one and/or the alt allele and 0.01% have a third one, resulting of a sequencing error.
->    > > 2. We see a moficiation of the number of unverified haplotypes
->    > {: .solution }
->    {: .question}
 # Conclusion
 {:.no_toc}
 
 In this tutorial, we have analyzed real RAD sequencing data to extract useful information, such as genotypes and haplotypes to generate input files for downstream genetic map creation. This approach can be summarized with the following scheme:
-
 
 ![The genetic map tutorial workflow](../../images/genetic_map_workflow.PNG)
