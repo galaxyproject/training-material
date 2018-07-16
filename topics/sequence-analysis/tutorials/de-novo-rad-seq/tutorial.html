@@ -183,7 +183,7 @@
 
 <p>We will look at the first run SRR034310 out of seven which includes 16 samples from 2 populations, 8 from Bear Paw (freshwater) and 8 from Rabbit Slough (oceanic). We will download the reads directly from SRA and the remaining data (i.e reference genome, population map file, and barcodes file) from <a href="https://zenodo.org/record/1134547#.WkugUjfjJXI">Zenodo</a>.</p>
 
-<blockquote>
+<blockquote class="hands_on">
   <h3 id="-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Data upload</h3>
 
   <ol>
@@ -206,12 +206,12 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
         </li>
       </ul>
 
-      <blockquote>
+      <blockquote class="comment">
         <h3 id="-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comments</h3>
         <p>If you are using the <a href="https://galaxy.genouest.org">GenOuest Galaxy instance</a>, you can load the dataset using ‘Shared Data’ -&gt; ‘Data Libraries’ -&gt; ‘1 Galaxy teaching folder’ -&gt; ‘EnginesOn’ -&gt; ‘RADseq’ -&gt; ‘Stickelback population genomics’ -&gt; ‘SRR034310’</p>
       </blockquote>
 
-      <blockquote>
+      <blockquote class="tip">
         <h3 id="-tip"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip:</h3>
         <p>Changing the file type <code class="highlighter-rouge">fastq</code> to <code class="highlighter-rouge">fastqsanger</code> once the data file is in your history (warning! Be cautious because there is closed datatpes as <code class="highlighter-rouge">fastqcssanger</code>). As we know here that the datatype is <code class="highlighter-rouge">fastqsanger</code>, we can directly change it through the upcoming method. Normally, you need to execute <code class="highlighter-rouge">FastQGroomer</code> tool to be sure to have a correct <code class="highlighter-rouge">fastqsanger</code> file format. And if you don’t know how your quality score is encoded on raw fastQ files, please, use the <code class="highlighter-rouge">FastQC</code> tool to determine it!</p>
 
@@ -225,7 +225,7 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
 
       <p>As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.</p>
 
-      <blockquote>
+      <blockquote class="comment">
         <h3 id="-comments-1"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comments</h3>
         <ul>
           <li>Add the “stickleback” custom build from the Fasta reference genome file</li>
@@ -235,7 +235,6 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
       </blockquote>
     </li>
   </ol>
-
 </blockquote>
 
 <p>The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be demultiplexed. To do so, we can use the Process Radtags tool from STACKS.</p>
@@ -400,7 +399,7 @@ nolimit	8139531		0		626265		129493		8895289
 
   <p><img src="../../images/RAD4_Population_Genomics/denovo/denovo_in.png" alt="Stacks: De novo map parameters" /></p>
 
-  <blockquote>
+  <blockquote class="comment">
     <h3 id="-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment</h3>
 
     <p>If you are using a file presenting population information and individual name in a different manner than expected by STACKS, you can use Galaxy tools like <code class="highlighter-rouge">Regex Replace</code> or <code class="highlighter-rouge">Cut columns from a table</code> to generate it.</p>

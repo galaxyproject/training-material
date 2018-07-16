@@ -184,7 +184,7 @@
 
 <p>We will look at the first run SRR034310 out of seven which includes 16 samples from 2 populations, 8 from Bear Paw (freshwater) and 8 from Rabbit Slough (oceanic). We will download the reads directly from SRA and the remaining data (i.e reference genome, population map file, and barcodes file) from <a href="https://zenodo.org/record/1134547#.WkugUjfjJXI">Zenodo</a>.</p>
 
-<blockquote>
+<blockquote class="hands_on">
   <h3 id="-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Data upload</h3>
 
   <ol>
@@ -208,12 +208,12 @@ https://zenodo.org/record/1134547/files/Reference_genome_11_chromosomes.fasta
         </li>
       </ul>
 
-      <blockquote>
+      <blockquote class="comment">
         <h3 id="-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comments</h3>
         <p>If you are using the <a href="https://galaxy.genouest.org">GenOuest Galaxy instance</a>, you can load the dataset using ‘Shared Data’ <i class="fa fa-long-arrow-right"></i> ‘Data Libraries’ <i class="fa fa-long-arrow-right"></i> ‘1 Galaxy teaching folder’ <i class="fa fa-long-arrow-right"></i> ‘EnginesOn’ <i class="fa fa-long-arrow-right"></i> ‘RADseq’ <i class="fa fa-long-arrow-right"></i> ‘Stickelback population genomics’ <i class="fa fa-long-arrow-right"></i> ‘SRR034310’</p>
       </blockquote>
 
-      <blockquote>
+      <blockquote class="tip">
         <h3 id="-tip-changing-the-file-type-fastqgz-to-fastqsangergz-once-the-data-file-is-in-your-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Changing the file type <code class="highlighter-rouge">fastq.gz</code> to <code class="highlighter-rouge">fastqsanger.gz</code> once the data file is in your history.</h3>
         <p>As we know here that the datatype is fastqsanger, we can directly change it through the upcoming method. Normally, you need to execute FastQGroomer to be sure to have a correct fastqsanger file format. And if you don’t know how your quality score is encoded on raw fastQ files, please, use the FastQC tool to determine it!</p>
 
@@ -227,7 +227,7 @@ https://zenodo.org/record/1134547/files/Reference_genome_11_chromosomes.fasta
 
       <p>As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.</p>
 
-      <blockquote>
+      <blockquote class="comment">
         <h3 id="-comments-1"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comments</h3>
         <ul>
           <li>Add the “stickleback” custom build from the Fasta reference genome file</li>
@@ -237,7 +237,6 @@ https://zenodo.org/record/1134547/files/Reference_genome_11_chromosomes.fasta
       </blockquote>
     </li>
   </ol>
-
 </blockquote>
 
 <p>The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be demultiplexed. To do so, we can use the Process Radtags tool from STACKS.</p>
@@ -364,12 +363,12 @@ protocol (TGCAGG). This is caused by the extremely uneven distribution the
 sequencer observes TGCAGG in lockstep on all spots/clusters, i.e. all clusters
 light up at the same time. Therefore the sequencer can not be sure that each
 spot/cluster is correct which is expressed by the lower quality score. Usually
-PhiX is added to reduce this problem, but in the publication it is not stated 
-if and to which extent this was done here. 
-Still, approximately ~99% of the cases match nucleotide expected for the cut 
-site sequence.<br />
+PhiX is added to reduce this problem, but in the publication it is not stated
+if and to which extent this was done here.
+Still, approximately ~99% of the cases match nucleotide expected for the cut
+site sequence.
 TODO the question now is: is that to be expected? Can we refer some document here?
-Also note that the nucleotide distribution of the inidices (bases 1-4) is 
+Also note that the nucleotide distribution of the inidices (bases 1-4) is
 slightly skewed.</p>
 
 <p>As there is a draft genome for <em>Gasterosteus aculeatus</em>, we can use this information and map the sequences on this genome to identify polymorphism.</p>
@@ -378,7 +377,7 @@ slightly skewed.</p>
 
 <p>To make sense of the reads, their positions within <em>Gasterosteus aculeatus</em> genome must be determined. This process is known as aligning or ‘mapping’ the reads to the reference genome.</p>
 
-<blockquote>
+<blockquote class="comment">
   <h3 id="-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment</h3>
 
   <p>Do you want to learn more about the principles behind mapping? Follow our <a href="/training-material/topics/sequence-analysis/">training</a></p>
@@ -411,13 +410,13 @@ slightly skewed.</p>
 
 <p>Run <code class="highlighter-rouge">Stacks: Reference map</code> Galaxy tool. This program will run pstacks, cstacks, and sstacks using a perl scrip (ref_map.pl) on the members of the population, accounting for the alignments of each read.</p>
 
-<blockquote>
+<blockquote class="comment">
   <h3 id="-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment</h3>
 
   <p>Information on ref_map.pl and its parameters can be found online: https://creskolab.uoregon.edu/stacks/comp/ref_map.php.</p>
 </blockquote>
 
-<blockquote>
+<blockquote class="hands_on">
   <h3 id="-hands-on-stacks-reference-map"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Stacks: Reference map</h3>
   <p><strong>Stacks: Reference map</strong> <i class="fa fa-wrench" aria-hidden="true"></i>:</p>
   <ul>
@@ -427,20 +426,18 @@ slightly skewed.</p>
     <li>
       <p>Minimum depth of coverage: 3</p>
 
-      <blockquote>
+      <blockquote class="comment">
         <h3 id="-comment-2"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment</h3>
 
         <p>If you are using a file presenting population information and individual name in a different manner than expected by STACKS, you can use Galaxy tools like <code class="highlighter-rouge">Regex Replace</code> or <code class="highlighter-rouge">Cut columns from a table</code> to generate it.</p>
       </blockquote>
     </li>
   </ul>
-</blockquote>
 
-<blockquote class="hands_on">
-  <p>Once Stacks has completed running, investigate the output files: <code class="highlighter-rouge">Summary from Stacks ref_map.log with Stacks</code> and <code class="highlighter-rouge">Catalog haplotypes (*)</code> (snps, alleles and tags). 
+  <p>Once Stacks has completed running, investigate the output files: <code class="highlighter-rouge">Summary from Stacks ref_map.log with Stacks</code> and <code class="highlighter-rouge">Catalog haplotypes (*)</code> (snps, alleles and tags).
 TODO: Summary from Stacks has some quite nice html output (seems preferable to the log file which is named ref_map.log .. not results.log)
 Notice that each locus now has a chromosome/base pair specified in each of the <code class="highlighter-rouge">*tags.tsv</code> files and in the catalog files.
-TODO: probably the tags summary file? 
+TODO: probably the tags summary file?
 TODO: Would be nice to have some specific informations to look for in the files.</p>
 </blockquote>
 
