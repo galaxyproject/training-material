@@ -33,7 +33,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="/training-material/topics/proteomics" title="Go back to list of tutorials">
-                            <i class="fa fa-folder-o" aria-hidden="true"></i> Proteomics
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Proteomics
                         </a>
                     </li>
 
@@ -46,12 +46,12 @@
                     
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
-                                <i class="fa fa-cog" aria-hidden="true"></i> Galaxy Instances
+                                <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">instances</span> Galaxy Instances
                             </a>
                             <div class="dropdown-menu">
                                 
                                     <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/docker" title="Docker image for this tutorial">
-                                        <i class="fa fa-ship" aria-hidden="true"></i> Docker image
+                                        <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
                                     </a>
                                 
                                 
@@ -65,7 +65,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://zenodo.org/record/546301" title="Links to data">
-                            <i class="fa fa-files-o" aria-hidden="true"></i> Input Dataset
+                            <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Input Dataset
                         </a>
                     </li>
                     
@@ -73,14 +73,14 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="/training-material/topics/proteomics#references" title="References">
-                            <i class="fa fa-book" aria-hidden="true"></i> Literature
+                            <i class="fa fa-book" aria-hidden="true"></i><span class="visually-hidden">references</span> Literature
                         </a>
                     </li>
                     
 
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
-        <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
     </a>
     <div class="dropdown-menu">
         <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
@@ -98,7 +98,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.md">
-                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
                         </a>
                     </li>
                 </ul>
@@ -114,7 +114,7 @@
         <blockquote class="overview">
             <h3>Overview</h3>
 
-            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
             <ul>
             
             <li>How to convert LC-MS/MS raw files?</li>
@@ -127,7 +127,7 @@
             
             </ul>
 
-            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
             <ul>
             
             <li>Protein identification from LC-MS/MS raw files.</li>
@@ -135,7 +135,7 @@
             </ul>
 
             
-            <strong><i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
             <ul>
             
                 <li>
@@ -148,7 +148,7 @@
             </ul>
             
 
-            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 45min</p>
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 45min</p>
         </blockquote>
 
         <h1 class="no_toc" id="introduction">Introduction</h1>
@@ -173,7 +173,7 @@ use the <a href="http://proteowizard.sourceforge.net/">ProteoWizard</a> tool MSc
 in <a href="https://www.ncbi.nlm.nih.gov/pubmed/24678044">Vaudel et al., 2014, Proteomics</a>. Detailed information
 about the dataset can be found on <a href="https://www.ebi.ac.uk/pride/archive/projects/PXD000674">PRIDE</a>.
 For step 2, we will use a validated human Uniprot FASTA database without appended decoy sequences.
-If you already completed the tutorial on <a href="/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Database Handling</a> you can use the constructed database priot to the <strong>DecoyDatabase</strong> <i class="fa fa-wrench" aria-hidden="true"></i> step. You can find a prepared database, as well as the input proteomics data in different file formats on <a href="https://zenodo.org/record/796184">Zenodo</a>.</p>
+If you already completed the tutorial on <a href="/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Database Handling</a> you can use the constructed database priot to the <strong>DecoyDatabase</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step. You can find a prepared database, as well as the input proteomics data in different file formats on <a href="https://zenodo.org/record/796184">Zenodo</a>.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -194,55 +194,55 @@ If you already completed the tutorial on <a href="/training-material/topics/prot
 <p>Raw data conversion is the first step of any proteomic data analysis. The most common converter is msconvert from the <a href="http://proteowizard.sourceforge.net/">ProteoWizard software suite</a>, the format to convert to is mzML. SearchGUI needs <code class="highlighter-rouge">MGF</code> format as input, but as we need the <code class="highlighter-rouge">mzML</code> format for several other tasks, we will convert to <code class="highlighter-rouge">mzML</code> first. Due to licensing reasons, msconvert runs only on windows systems and will not work on most Galaxy servers.</p>
 
 <p>Depending on your machine settings, raw data will be generated either in profile mode or centroid mode. For most peptide search engines, the tandem mass spectrometry (MS2) data have to be converted to centroid mode, a process called “peak picking” or “centroiding”. 
-Machine vendors offer algorithms to extract peaks from profile raw data. This is implemented in <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i> and can be run in parallel to the mzML conversion. However, the OpenMS tool <strong><em>PeakPickerHiRes</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i> is reported to generate slightly better results (<a href="https://www.ncbi.nlm.nih.gov/pubmed/17094243">Lange et al., 2006, Pac Symp Biocomput</a>) and is therefore recommended for quantitative studies (<a href="https://www.ncbi.nlm.nih.gov/pubmed/19953549">Vaudel et al., 2010, Proteomics</a>).
-If your data were generated on a low resolution mass spectrometer, use <strong><em>PeakPickerWavelet</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i> instead.</p>
+Machine vendors offer algorithms to extract peaks from profile raw data. This is implemented in <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and can be run in parallel to the mzML conversion. However, the OpenMS tool <strong><em>PeakPickerHiRes</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is reported to generate slightly better results (<a href="https://www.ncbi.nlm.nih.gov/pubmed/17094243">Lange et al., 2006, Pac Symp Biocomput</a>) and is therefore recommended for quantitative studies (<a href="https://www.ncbi.nlm.nih.gov/pubmed/19953549">Vaudel et al., 2010, Proteomics</a>).
+If your data were generated on a low resolution mass spectrometer, use <strong><em>PeakPickerWavelet</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> instead.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-file-conversion-and-peak-picking"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-On: File Conversion and Peak Picking</h3>
+  <h3 id="hands_on-hands-on-file-conversion-and-peak-picking"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-On: File Conversion and Peak Picking</h3>
 
-  <p>We provide the <a href="https://zenodo.org/record/796184">input data</a> in the original <code class="highlighter-rouge">raw</code> format and also already converted to <code class="highlighter-rouge">MGF</code> and <code class="highlighter-rouge">mzML</code> file formats. If <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i> does not run on your Galaxy instance, please download the preconverted <code class="highlighter-rouge">mzML</code> as an input.</p>
+  <p>We provide the <a href="https://zenodo.org/record/796184">input data</a> in the original <code class="highlighter-rouge">raw</code> format and also already converted to <code class="highlighter-rouge">MGF</code> and <code class="highlighter-rouge">mzML</code> file formats. If <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> does not run on your Galaxy instance, please download the preconverted <code class="highlighter-rouge">mzML</code> as an input.</p>
 
   <ol>
     <li>Create a new history for this Peptide and Protein ID exercise.</li>
     <li>Load the example dataset into your history from Zenodo: <a href="https://zenodo.org/record/892005/files/qExactive01819.raw">raw</a> <a href="https://zenodo.org/record/892005/files/qExactive01819_profile.mzml">mzML</a></li>
     <li>Rename the dataset to something meaningful.</li>
-    <li>(<em>optional</em>) Run <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i> on the test data to convert to the <code class="highlighter-rouge">mzML</code> format.</li>
-    <li>Run <strong><em>PeakPickerHiRes</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i> on the resulting file. Click <code class="highlighter-rouge">+ Insert param.algorithm_ms_levels</code> and change the entry to “2”. Thus, peak picking will only be performed on MS2 level.</li>
-    <li>Run <strong><em>FileConverter</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i> on the picked mzML. In the <strong>Advanced Options</strong> set the <strong>Output file type</strong> to <code class="highlighter-rouge">MGF</code>.</li>
+    <li>(<em>optional</em>) Run <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the test data to convert to the <code class="highlighter-rouge">mzML</code> format.</li>
+    <li>Run <strong><em>PeakPickerHiRes</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the resulting file. Click <code class="highlighter-rouge">+ Insert param.algorithm_ms_levels</code> and change the entry to “2”. Thus, peak picking will only be performed on MS2 level.</li>
+    <li>Run <strong><em>FileConverter</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the picked mzML. In the <strong>Advanced Options</strong> set the <strong>Output file type</strong> to <code class="highlighter-rouge">MGF</code>.</li>
   </ol>
 
   <blockquote class="comment">
-    <h3 id="-comment-local-use-of-msconvert"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment: Local Use of MSConvert</h3>
-    <p>The vendor libraries used by msconvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i> is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps <a href="https://compomics.com/bioinformatics-for-proteomics/identification/">here</a> (“Peak List Generation”). Afterwards, upload the resulting mzML file to your Galaxy history.</p>
+    <h3 id="comment-comment-local-use-of-msconvert"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Local Use of MSConvert</h3>
+    <p>The vendor libraries used by msconvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps <a href="https://compomics.com/bioinformatics-for-proteomics/identification/">here</a> (“Peak List Generation”). Afterwards, upload the resulting mzML file to your Galaxy history.</p>
   </blockquote>
 </blockquote>
 
 <h1 id="peptide-and-protein-identification">Peptide and Protein Identification</h1>
 <p>Mass spectrometry experiments identify peptides by isolating them, ioinizing and subsequently colliding them with a gas for fragmentation. This method generates a spectrum of peptide fragment masses for each isolated peptide - an MS2 spectrum. To find out the peptide sequences, the MS2 spectrum is compared to a theoretical spectrum generated from a protein database. This step is called peptide-to-spectrum (also: spectrum-to-sequence) matching. Accordingly, a peptide that is successfully matched to a sequence is termed PSM (Peptide-Spectrum-Match). There can be multiple PSMs per peptide, if the peptide was fragmented several times. Different peptide search engines have been developed to fulfill the matching procedure.</p>
 
-<p>It is generally recommended to use more than one peptide search engine and use the combined results for the final peptide inference (<a href="https://www.ncbi.nlm.nih.gov/pubmed/23720762">Shteynberg et al., 2013, Mol. Cell. Proteomics</a>). Again, there are several software solutions for this, e.g. iProphet (TPP) or ConsensusID (OpenMS). In this tutorial we will use <strong><em>Search GUI</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i>, as it can automatically search the data using several search engines. Its partner tool <strong><em>Peptide Shaker</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i> is then used to combine and evaluate the search engine results.</p>
+<p>It is generally recommended to use more than one peptide search engine and use the combined results for the final peptide inference (<a href="https://www.ncbi.nlm.nih.gov/pubmed/23720762">Shteynberg et al., 2013, Mol. Cell. Proteomics</a>). Again, there are several software solutions for this, e.g. iProphet (TPP) or ConsensusID (OpenMS). In this tutorial we will use <strong><em>Search GUI</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, as it can automatically search the data using several search engines. Its partner tool <strong><em>Peptide Shaker</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is then used to combine and evaluate the search engine results.</p>
 
-<p>In bottom-up proteomics, it is necessary to combine the identified peptides to proteins. This is not a trivial task, as proteins are redundant in most eukaryotic organisms. Thus, not every peptide can be assigned to only one protein. Luckily, the <strong><em>Peptide Shaker</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i> already takes care of protein inference and even gives us some information on validity of the protein identifications. We will discuss validation in a <a href="#evaluation-of-peptide-and-protein-ids">later step</a> of this tutorial.</p>
+<p>In bottom-up proteomics, it is necessary to combine the identified peptides to proteins. This is not a trivial task, as proteins are redundant in most eukaryotic organisms. Thus, not every peptide can be assigned to only one protein. Luckily, the <strong><em>Peptide Shaker</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> already takes care of protein inference and even gives us some information on validity of the protein identifications. We will discuss validation in a <a href="#evaluation-of-peptide-and-protein-ids">later step</a> of this tutorial.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-peptide-and-protein-identification"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-On: Peptide and Protein Identification</h3>
+  <h3 id="hands_on-hands-on-peptide-and-protein-identification"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-On: Peptide and Protein Identification</h3>
 
   <ol>
     <li>Copy the prepared protein database from the tutorial <a href="../database-handling/tutorial.html">Database Handling</a> into your current history by using the multiple history view or upload the ready-made database from this <a href="https://zenodo.org/record/892005/files/Human_database_%28cRAP_and_Mycoplasma_added%29.fasta">link</a>.</li>
-    <li>Open <strong><em>Search GUI</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i> to search the mgf file against the protein database. In the <strong><code class="highlighter-rouge">Search Engine Options</code></strong> select <code class="highlighter-rouge">X!Tandem</code> and <code class="highlighter-rouge">MS-GF+</code>. In the <strong><code class="highlighter-rouge">Protein Modification Options</code></strong> add the <strong><code class="highlighter-rouge">Fixed Modifications</code></strong>: <code class="highlighter-rouge">Carbamidomethylation of C</code> and the <strong><code class="highlighter-rouge">Variable Modifications</code></strong>: <code class="highlighter-rouge">Oxidation of M</code>.</li>
-    <li>Run <strong><em>Peptide Shaker</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i> on the Search GUI output. Enable the following outputs: <code class="highlighter-rouge">Zip File for import to Desktop App</code>, <code class="highlighter-rouge">mzidentML File</code>, <code class="highlighter-rouge">PSM Report</code>, <code class="highlighter-rouge">Peptide Report</code>, <code class="highlighter-rouge">Protein Report</code>.</li>
+    <li>Open <strong><em>Search GUI</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to search the mgf file against the protein database. In the <strong><code class="highlighter-rouge">Search Engine Options</code></strong> select <code class="highlighter-rouge">X!Tandem</code> and <code class="highlighter-rouge">MS-GF+</code>. In the <strong><code class="highlighter-rouge">Protein Modification Options</code></strong> add the <strong><code class="highlighter-rouge">Fixed Modifications</code></strong>: <code class="highlighter-rouge">Carbamidomethylation of C</code> and the <strong><code class="highlighter-rouge">Variable Modifications</code></strong>: <code class="highlighter-rouge">Oxidation of M</code>.</li>
+    <li>Run <strong><em>Peptide Shaker</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the Search GUI output. Enable the following outputs: <code class="highlighter-rouge">Zip File for import to Desktop App</code>, <code class="highlighter-rouge">mzidentML File</code>, <code class="highlighter-rouge">PSM Report</code>, <code class="highlighter-rouge">Peptide Report</code>, <code class="highlighter-rouge">Protein Report</code>.</li>
   </ol>
 
   <blockquote class="comment">
-    <h3 id="-comment-search-gui-parameters"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment: Search GUI Parameters</h3>
-    <p>We ran <strong><em>Search GUI</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i> with default settings. When you are processing files of a different experiment, you may need to adjust some of the parameters.
+    <h3 id="comment-comment-search-gui-parameters"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Search GUI Parameters</h3>
+    <p>We ran <strong><em>Search GUI</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with default settings. When you are processing files of a different experiment, you may need to adjust some of the parameters.
 <strong>Search GUI</strong> bundles numerous peptide search engines for matching MS/MS to peptide sequences within a database. In practice, using 2-3 different search engines offers high confidence while keeping analysis time reasonable. In our hands, X! tandem, MS-GF+, OMSSA and Comet search algorithms offer good results.
 The <strong><code class="highlighter-rouge">Precursor Options</code></strong> have to be adjusted to the mass spectrometer which was used to generate the files. The default settings fit a  high resolution Orbitrap instrument.
 In the <strong><code class="highlighter-rouge">Advanced Options</code></strong> you may set much more detailed settings for each of the used search engines. When using X!Tandem, we recommend to switch off the advanced X!Tandem options <strong><code class="highlighter-rouge">Noise suppression</code></strong>, <strong><code class="highlighter-rouge">Quick Pyrolidone</code></strong> and <strong><code class="highlighter-rouge">Quick Acetyl</code></strong>. When using MSGF, we recommend to select the correct <strong><code class="highlighter-rouge">Instrument type</code></strong>.</p>
   </blockquote>
 
   <blockquote class="comment">
-    <h3 id="-comment-peptideshaker-outputs"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment: PeptideShaker Outputs</h3>
+    <h3 id="comment-comment-peptideshaker-outputs"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: PeptideShaker Outputs</h3>
     <p>Peptide Shaker offers a variety of outputs. 
 The <code class="highlighter-rouge">Zip File for import to Desktop App</code> can be downloaded to view and evaluate the search results in the Peptide Shaker viewer (<a href="https://compomics.github.io/projects/peptide-shaker.html">Download</a>). 
 The several <code class="highlighter-rouge">Reports</code> contain tabular, human-readable information. 
@@ -251,17 +251,17 @@ The <code class="highlighter-rouge">Certificate of Analysis</code> provides deta
   </blockquote>
 
   <blockquote class="question">
-    <h3 id="-questions"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions:</h3>
+    <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions:</h3>
     <ol>
       <li>How many peptides were identified? How many proteins?</li>
       <li>How many peptides with oxidized methionine were identified?</li>
     </ol>
 
     <blockquote class="solution">
-      <h3 id="-solution"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+      <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
       <ol>
         <li>You should have identified 3,325 peptides and 1,170 proteins.</li>
-        <li>328 peptides contain an oxidized methionine (MeO). To get to this number, you can use <strong><em>Select</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i> on the Peptide Report and search for either “Oxidation of M” or “M&lt;ox&gt;”.</li>
+        <li>328 peptides contain an oxidized methionine (MeO). To get to this number, you can use <strong><em>Select</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the Peptide Report and search for either “Oxidation of M” or “M&lt;ox&gt;”.</li>
       </ol>
     </blockquote>
   </blockquote>
@@ -271,15 +271,15 @@ The <code class="highlighter-rouge">Certificate of Analysis</code> provides deta
 <p>The FASTA database used for the peptide to spectrum matching contained some entries that were not expected to stem from the HeLa cell lysate, but are common contaminations in LC-MS/MS samples. The main reason to add those is to avoid misidentification of the spectra to other proteins. However, it also enables you to check for contaminations in your samples. <strong>CAVE:</strong> in human samples, many proteins that are common contaminants may also stem from the real sample. The real source of such human proteins might require advanced investigation.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-analysis-of-contaminants"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-On: Analysis of Contaminants</h3>
+  <h3 id="hands_on-hands-on-analysis-of-contaminants"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-On: Analysis of Contaminants</h3>
 
   <ol>
-    <li>Run <strong><em>Select</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i> on the Peptide Shaker Protein Report to select all lines that match the pattern “CONTAMINANT”.</li>
-    <li>Remove all contaminants from your protein list by running <strong><em>Select</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i> on the Peptide Shaker Protein Report. Select only those lines that <strong>do not</strong> match the pattern “CONTAMINANT”.</li>
+    <li>Run <strong><em>Select</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the Peptide Shaker Protein Report to select all lines that match the pattern “CONTAMINANT”.</li>
+    <li>Remove all contaminants from your protein list by running <strong><em>Select</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the Peptide Shaker Protein Report. Select only those lines that <strong>do not</strong> match the pattern “CONTAMINANT”.</li>
   </ol>
 
   <blockquote class="question">
-    <h3 id="-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+    <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
     <ol>
       <li>Which contaminants did you identify? Where do these contaminations come from?</li>
       <li>What other sources of contaminants exist?</li>
@@ -288,7 +288,7 @@ The <code class="highlighter-rouge">Certificate of Analysis</code> provides deta
     </ol>
 
     <blockquote class="solution">
-      <h3 id="-solution-1"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+      <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
       <ol>
         <li>TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts.</li>
         <li>Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.</li>
@@ -301,7 +301,7 @@ False positives are expected to be randomly assigned to peptides in the FASTA da
 </blockquote>
 
 <h1 id="evaluation-of-peptide-and-protein-ids">Evaluation of Peptide and Protein IDs</h1>
-<p><strong><em>Peptide Shaker</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i> provides you with validation results for the identified PSM, peptides and proteins. It classifies all these IDs in the categories “Confident” or “Doubtful”. On each level, the meaning of these terms differs to some extent:</p>
+<p><strong><em>Peptide Shaker</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> provides you with validation results for the identified PSM, peptides and proteins. It classifies all these IDs in the categories “Confident” or “Doubtful”. On each level, the meaning of these terms differs to some extent:</p>
 
 <ul>
   <li><strong>PSMs</strong> are marked as “Doubtful” when the measured MS2 spectrum did not fit well to the theoretical spectrum.</li>
@@ -310,23 +310,23 @@ False positives are expected to be randomly assigned to peptides in the FASTA da
 </ul>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-evaluation-of-peptide-and-protein-ids"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-On: Evaluation of Peptide and Protein IDs</h3>
+  <h3 id="hands_on-hands-on-evaluation-of-peptide-and-protein-ids"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-On: Evaluation of Peptide and Protein IDs</h3>
 
   <ol>
-    <li>Remove all “Doubtful” proteins from your protein list by running <strong><em>Select</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i> on the Peptide Shaker Protein Report. Select only those lines that <strong>do not</strong> match the pattern “Doubtful”.</li>
+    <li>Remove all “Doubtful” proteins from your protein list by running <strong><em>Select</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the Peptide Shaker Protein Report. Select only those lines that <strong>do not</strong> match the pattern “Doubtful”.</li>
   </ol>
 
   <blockquote class="question">
-    <h3 id="-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions:</h3>
+    <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions:</h3>
     <ol>
       <li>How to exclude mycoplasma proteins?</li>
       <li>How many “Confident” non-contaminant proteins were identified?</li>
     </ol>
 
     <blockquote class="solution">
-      <h3 id="-solution-2"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+      <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
       <ol>
-        <li>Add another <strong><em>Select</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i> matching the pattern “HUMAN”.</li>
+        <li>Add another <strong><em>Select</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> matching the pattern “HUMAN”.</li>
         <li>You should have identified 582 human non-contaminant proteins that were validated to be “Confident”.</li>
       </ol>
     </blockquote>
@@ -347,7 +347,7 @@ False positives are expected to be randomly assigned to peptides in the FASTA da
 
         
         <blockquote class="key_points">
-            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+            <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
 
             <ul>
                 
@@ -368,12 +368,12 @@ False positives are expected to be randomly assigned to peptides in the FASTA da
 
         
 
-        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
 
         <hr>
 
         <blockquote class="overview">
-            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Help us improve this content!</h3>
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Help us improve this content!</h3>
             Please take a moment to fill in the Galaxy Training Network
             <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>.
             Your feedback helps us improve this tutorial and will be considered

@@ -33,7 +33,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="/training-material/topics/dev" title="Go back to list of tutorials">
-                            <i class="fa fa-folder-o" aria-hidden="true"></i> Development in Galaxy
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Development in Galaxy
                         </a>
                     </li>
 
@@ -43,7 +43,7 @@
                         
                             <li class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
-                                    <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
                                 </a>
                                 <div class="dropdown-menu">
                                     
@@ -117,7 +117,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="" title="Links to data">
-                            <i class="fa fa-files-o" aria-hidden="true"></i> Input Dataset
+                            <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Input Dataset
                         </a>
                     </li>
                     
@@ -126,7 +126,7 @@
 
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
-        <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
     </a>
     <div class="dropdown-menu">
         <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
@@ -144,7 +144,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/dev/tutorials/visualization-charts/tutorial.md">
-                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
                         </a>
                     </li>
                 </ul>
@@ -160,14 +160,14 @@
         <blockquote class="overview">
             <h3>Overview</h3>
 
-            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
             <ul>
             
             <li>How can I make a custom plugin for Charts?</li>
             
             </ul>
 
-            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
             <ul>
             
             <li>Learn how to add custom javascript plugins to the Galaxy Charts framework</li>
@@ -176,7 +176,7 @@
 
             
 
-            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 1h</p>
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1h</p>
         </blockquote>
 
         <h2 class="no_toc" id="introduction">Introduction</h2>
@@ -184,7 +184,7 @@
 <p>In this tutorial we are going to demonstrate how to add a 3rd-party visualization to <em>Charts</em> and what the benefits are. The plugin we select for this purpose is the <a href="https://biasmv.github.io/pv/"><em>PV-Javascript Protein Viewer</em></a>. It is an open source, protein structure viewer for <code class="highlighter-rouge">PDB</code>-files. There are many other popular protein structure viewers available for the visualization of <code class="highlighter-rouge">PDB</code>-files such as e.g. <a href="https://arose.github.io/ngl/">NGL</a> (also available in <em>Charts</em>) and <a href="https://chemapps.stolaf.edu/jmol/jsmol/jsmol.htm">JSMol</a>.</p>
 
 <blockquote class="tip">
-  <h3 id="-background-what-is-the-pdb-protein-data-bank-file-format"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Background: What is the PDB (Protein Data Bank) file format?</h3>
+  <h3 id="tip-background-what-is-the-pdb-protein-data-bank-file-format"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Background: What is the PDB (Protein Data Bank) file format?</h3>
 
   <p>The <code class="highlighter-rouge">PDB</code>-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial cyrstallographic snapshot of a protein. There are 100s of thousands of protein structures publicly available at the Protein Databank (https://www.rcsb.org). Proteins are usually labeled by a four-letter code.
 Here is an example of a <code class="highlighter-rouge">PDB</code>-file for a hydrolase bond to its inhibitor (PDB: <a href="https://www.rcsb.org/pdb/explore/explore.do?structureId=1acb">1ACB</a>):</p>
@@ -232,7 +232,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 <p>As mentioned above we will be focusing on the <em>PV-Javascript Protein Viewer</em> in this tutorial. Now that we have learned about the underlying file format, let us continue by visiting the viewers developer site at <a href="https://biasmv.github.io/pv/">https://biasmv.github.io/pv/ </a> to get familiar with the plugin.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="hands_on-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
     <li>
@@ -267,7 +267,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 <p>In this section we will download the viewer and add it to a local <em>Galaxy</em> instance. All development takes place within the <em>Galaxy</em> codebase. The first thing we are going to do is to clone a <em>Galaxy</em> instance and prepare the directory structure for the new visualization plugin.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-1"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="hands_on-hands-on-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
     <li>Clone an instance of <em>Galaxy</em> in a path, further referred to as <code class="highlighter-rouge">$GALAXY_ROOT</code>:
@@ -313,7 +313,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 <p><img src="../../files/charts-plugins/pdb/logo.png" alt="Logo" /></p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-2"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="hands_on-hands-on-2"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
     <li>
@@ -330,7 +330,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 <p>Each visualization has a configuration file named <code class="highlighter-rouge">config.js</code>. This file has conceptual similarities with a Tool’s XML-file. It allows developers to specify a variety of attributes and input parameters for their visualization. Throughout this tutorial we are going to gradually augment this file but for now we keep it simple.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-3"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="hands_on-hands-on-3"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
     <li>
@@ -368,7 +368,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 </ul>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-4"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="hands_on-hands-on-4"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
     <li>Create a file named <code class="highlighter-rouge">wrapper.js</code> which returns a <em>Backbone</em> model:
@@ -389,7 +389,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 <p>The above wrapper does not do much yet, except requesting the minified plugin code which we downloaded earlier. In order to execute a 3rd-party plugin we need to figure out how it works. This can be done by finding a working example or documentation. Fortunately the <em>PV-Viewer</em> comes with both. Let’s take a look at the <a href="https://pv.readthedocs.io/">documentation</a>.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-5"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="hands_on-hands-on-5"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
     <li>
@@ -408,7 +408,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 <p>Now that we have learned the basics on how the viewer plugin works, we can initialize and load it in <code class="highlighter-rouge">wrapper.js</code>.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-6"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="hands_on-hands-on-6"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
     <li>
@@ -441,7 +441,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 <p>Now that we have completed the <em>Charts</em> plugin definition, it is time to bundle the scripts and libraries into a single module file using <a href="https://webpack.github.io"><em>webpack</em></a>. Once packed the plugin will be accessible through <em>Galaxy</em>’s user interface. Packing modules does not require restarting your <em>Galaxy</em> instance, just make sure to properly refresh your browser.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-7"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="hands_on-hands-on-7"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
     <li>Navigate to <em>Chart</em>’s root directory:
@@ -470,7 +470,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 <p>In this section we will select a <code class="highlighter-rouge">PDB</code>-file from the Protein Databank and visualize it with our new plugin.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-8"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="hands_on-hands-on-8"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
     <li>
@@ -513,7 +513,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 More information on parameters can be found in the <a href="https://docs.galaxyproject.org/en/latest/dev/schema.html">wiki</a>.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-9"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="hands_on-hands-on-9"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
     <li>Add the following block into the <code class="highlighter-rouge">config.js</code> file:
@@ -565,7 +565,7 @@ More information on parameters can be found in the <a href="https://docs.galaxyp
 <p>From the <em>PV-Viewer</em> documentation we can see that there are more settings available such as e.g. ‘pointSize’, ‘lineWidth’ and ‘radius’. In this section we are going to further enhance the visualizations user interface to incorporate these input parameters</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-10"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="hands_on-hands-on-10"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
     <li>Add the following block into the <code class="highlighter-rouge">settings</code> of your <code class="highlighter-rouge">config.js</code> file:
@@ -617,7 +617,7 @@ More information on parameters can be found in the <a href="https://docs.galaxyp
 
         
         <blockquote class="key_points">
-            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+            <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
 
             <ul>
                 
@@ -633,12 +633,12 @@ More information on parameters can be found in the <a href="https://docs.galaxyp
 
         
 
-        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
 
         <hr>
 
         <blockquote class="overview">
-            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Help us improve this content!</h3>
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Help us improve this content!</h3>
             Please take a moment to fill in the Galaxy Training Network
             <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>.
             Your feedback helps us improve this tutorial and will be considered

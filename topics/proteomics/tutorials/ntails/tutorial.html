@@ -33,7 +33,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="/training-material/topics/proteomics" title="Go back to list of tutorials">
-                            <i class="fa fa-folder-o" aria-hidden="true"></i> Proteomics
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Proteomics
                         </a>
                     </li>
 
@@ -46,12 +46,12 @@
                     
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
-                                <i class="fa fa-cog" aria-hidden="true"></i> Galaxy Instances
+                                <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">instances</span> Galaxy Instances
                             </a>
                             <div class="dropdown-menu">
                                 
                                     <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/docker" title="Docker image for this tutorial">
-                                        <i class="fa fa-ship" aria-hidden="true"></i> Docker image
+                                        <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
                                     </a>
                                 
                                 
@@ -175,14 +175,14 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="/training-material/topics/proteomics#references" title="References">
-                            <i class="fa fa-book" aria-hidden="true"></i> Literature
+                            <i class="fa fa-book" aria-hidden="true"></i><span class="visually-hidden">references</span> Literature
                         </a>
                     </li>
                     
 
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
-        <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
     </a>
     <div class="dropdown-menu">
         <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
@@ -200,7 +200,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/proteomics/tutorials/ntails/tutorial.md">
-                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
                         </a>
                     </li>
                 </ul>
@@ -216,7 +216,7 @@
         <blockquote class="overview">
             <h3>Overview</h3>
 
-            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
             <ul>
             
             <li>How can protein N-termini be enriched for LC-MS/MS?</li>
@@ -225,7 +225,7 @@
             
             </ul>
 
-            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
             <ul>
             
             <li>Run an N-TAILS data analysis.</li>
@@ -233,7 +233,7 @@
             </ul>
 
             
-            <strong><i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
             <ul>
             
                 <li>
@@ -246,7 +246,7 @@
             </ul>
             
 
-            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 1h</p>
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1h</p>
         </blockquote>
 
         <p>N-Tails is a special Proteomics technique to analyze peptide abundancy changes of protein N-termini. Prior to the MS measurement, N-Tails enriches unmodified, as well as acetylated N-termini. Both common and “unusual” N-termini are identified, where “unusual” means that the protein N-terminus was changes.
@@ -260,7 +260,7 @@ The N-Tails technique includes the use of heavy isotope dimethyl labelling.</p>
 <p>The N-Tails technique was originally designed to research protease biology and has most often been used in this field. It was originally published in <a href="https://www.ncbi.nlm.nih.gov/pubmed/20208520">Kleifeld et al., Nat. Biotechnol., 2010</a>.</p>
 
 <blockquote class="comment">
-  <h3 id="-comment-interpretation-of-n-tails-results"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment: Interpretation of N-Tails results</h3>
+  <h3 id="comment-comment-interpretation-of-n-tails-results"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Interpretation of N-Tails results</h3>
 
   <p>Be careful when interpreting the results of N-Tails experiments. While the technique <strong>is</strong> fit to identify direct protease substrates, it does not discriminate direct from indirect (“downstream”) effects. Thus, most of the identified N-termini will <strong>not</strong> be direct protease substrates, even if their change in protein abundance is statistically significant. To identify direct protease substrates, you have to further validate substrate candidates by comparing the prime and non-prime amino acids of each identified N-terminus with the protease cleavage motif. The information can be extracted from the peptide IDs, but this step is so far not included in the workflow.</p>
 
@@ -286,7 +286,7 @@ The N-Tails technique includes the use of heavy isotope dimethyl labelling.</p>
 
 <ul>
   <li><em>Running the workflow on a non-prefractionated sample:</em> Simply use only one file as an input.</li>
-  <li><em>Running the workflow on a double dimethyl labeling (only light and heavy labeling):</em> remove the third <strong>MSGFPlusAdapter</strong> <i class="fa fa-wrench" aria-hidden="true"></i> and the following <strong>PeptideIndexer</strong> <i class="fa fa-wrench" aria-hidden="true"></i> . Make sure that the mass changes are correctly given in the <strong>MSGFPlusAdapter</strong> <i class="fa fa-wrench" aria-hidden="true"></i> .</li>
+  <li><em>Running the workflow on a double dimethyl labeling (only light and heavy labeling):</em> remove the third <strong>MSGFPlusAdapter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and the following <strong>PeptideIndexer</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> . Make sure that the mass changes are correctly given in the <strong>MSGFPlusAdapter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> .</li>
 </ul>
 
 <h2 id="citation">Citation</h2>
@@ -299,7 +299,7 @@ please cite:</p>
 
         
         <blockquote class="key_points">
-            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+            <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
 
             <ul>
                 
@@ -320,12 +320,12 @@ please cite:</p>
 
         
 
-        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
 
         <hr>
 
         <blockquote class="overview">
-            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Help us improve this content!</h3>
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Help us improve this content!</h3>
             Please take a moment to fill in the Galaxy Training Network
             <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>.
             Your feedback helps us improve this tutorial and will be considered
