@@ -109,8 +109,8 @@ for each family member, we will start with one BAM file with mapping results.
 > ### {% icon hands_on %} Hands-on: Data pre-processing
 >
 > 1.  Import all 3 BAM's into a new history:
->     - [Father](https://zenodo.org/record/60520/files/father.bam)  
->     - [Mother](https://zenodo.org/record/60520/files/mother.bam)  
+>     - [Father](https://zenodo.org/record/60520/files/father.bam)
+>     - [Mother](https://zenodo.org/record/60520/files/mother.bam)
 >     - [Child = Patient](https://zenodo.org/record/60520/files/patient.bam)
 > 2. Specify the used genome for mapping (for each dataset)
 >     1. Click on **Edit attributes** (pencil icon on right panel)
@@ -246,7 +246,7 @@ Now that we have an annotated VCF file it is time to peek inside our variation d
 >    >
 >    > This creates a sqlite database. To see the content of the database use
 >    > **GEMINI_db_info**
->{: .comment}
+>    {: .comment}
 >
 {: .hands_on}
 
