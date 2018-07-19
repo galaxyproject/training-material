@@ -275,7 +275,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 
 <h2 id="start-docker-and-galaxy">Start Docker and Galaxy</h2>
 
-<blockquote>
+<blockquote class="hands_on">
   <h3 id="hands_on-hands-on">
 <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> <strong><em>Hands on!</em></strong>
 </h3>
@@ -307,7 +307,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 
 <h2 id="important-tables">Important tables</h2>
 
-<blockquote>
+<blockquote class="hands_on">
   <h3 id="hands_on-hands-on-1">
 <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> <strong><em>Hands on!</em></strong>
 </h3>
@@ -334,7 +334,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 
 <h3 id="table-galaxy_user">Table “galaxy_user”</h3>
 
-<blockquote>
+<blockquote class="hands_on">
   <h3 id="hands_on-hands-on-2">
 <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
@@ -345,7 +345,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 
 <p>As described in Björn’s introduction, an Admin user is already pre-set (email: ‘admin@galaxy.org’, password: ‘admin’). Now let’s add (i.e. register) a new user via the Galaxy website. And check the database:</p>
 
-<blockquote>
+<blockquote class="hands_on">
   <h3 id="hands_on-hands-on-3">
 <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
@@ -356,7 +356,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 
 <h3 id="table-job">Table “job”</h3>
 
-<blockquote>
+<blockquote class="hands_on">
   <h3 id="hands_on-hands-on-4">
 <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
@@ -367,7 +367,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 
 <p>Run a few jobs on the galaxy website (e.g <em>upload file</em> a simple table and <em>add column</em> with ‘Iterate’ no and yes) and check the database again:</p>
 
-<blockquote>
+<blockquote class="hands_on">
   <h3 id="hands_on-hands-on-5">
 <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
@@ -378,7 +378,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 
 <h3 id="table-job_parameter">Table “job_parameter”</h3>
 
-<blockquote>
+<blockquote class="hands_on">
   <h3 id="hands_on-hands-on-6">
 <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
@@ -389,7 +389,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 
 <h3 id="table-history">Table “history”</h3>
 
-<blockquote>
+<blockquote class="hands_on">
   <h3 id="hands_on-hands-on-7">
 <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
@@ -402,7 +402,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 
 <h3 id="table-dataset">Table “dataset”</h3>
 
-<blockquote>
+<blockquote class="hands_on">
   <h3 id="hands_on-hands-on-8">
 <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
@@ -413,7 +413,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 
 <h3 id="table-history_dataset_association">Table “history_dataset_association”</h3>
 
-<blockquote>
+<blockquote class="hands_on">
   <h3 id="hands_on-hands-on-9">
 <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
@@ -434,7 +434,9 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 
 <p>You can add the numbers per month from the reports, or:</p>
 
-<blockquote>
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-10">
+<i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
   <div class="language-sql highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="n">j</span><span class="p">.</span><span class="n">id</span><span class="p">,</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span> <span class="k">limit</span> <span class="mi">5</span><span class="p">;</span>
 </code></pre></div>  </div>
@@ -477,7 +479,9 @@ all the users who have used the broken version, without alerting users who never
 
 <p>The following example is from the development server at the FMI</p>
 
-<blockquote>
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-11">
+<i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:</h3>
   <div class="language-sql highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="k">distinct</span><span class="p">(</span><span class="n">j</span><span class="p">.</span><span class="n">tool_version</span><span class="p">)</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span>
           <span class="k">where</span> <span class="n">j</span><span class="p">.</span><span class="n">tool_id</span> <span class="o">=</span> <span class="s1">'qAlign'</span><span class="p">;</span>
@@ -499,8 +503,8 @@ all the users who have used the broken version, without alerting users who never
 
 <h2 id="all-users-running-a-job-using-a-certain-parameter">All users running a job using a certain parameter</h2>
 
-<blockquote>
-  <h3 id="hands_on-hands-on-10">
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-12">
 <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> <strong><em>Hands on!</em></strong>
 </h3>
 
@@ -522,7 +526,9 @@ all the users who have used the broken version, without alerting users who never
 
 <h2 id="close-postgresql-client-and-quit-docker">Close PostgreSQL client and quit docker</h2>
 
-<blockquote>
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-13">
+<i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:</h3>
   <p>Close the PostgreSQL client</p>
 
   <div class="language-sql highlighter-rouge">
@@ -554,7 +560,9 @@ https://docs.google.com/presentation/d/1l4DD0IaJjuvk1zAT1Sjv26bLyrSOg3VUm7rD-TQl
 
 <p>To run SchemaSpy in your container you’ll need to get it, and also install some required software packages.</p>
 
-<blockquote>
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-schema-spy">
+<i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Schema Spy</h3>
   <div class="language-sh highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code>  wget http://downloads.sourceforge.net/project/schemaspy/schemaspy/SchemaSpy%205.0.0/schemaSpy_5.0.0.jar
   apt-get update
