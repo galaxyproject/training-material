@@ -141,13 +141,14 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >
 > 1. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters: 
 >    - Use the result of MethylDackel to transform it to a bigWig file.
->    > ### {% icon tip %} Tip: Database edit
->    >
->    > It can happen that you can not select the correct input file. In this case you have to add meta information about the used genome to the file.
->    > * Click on the pencil of the correct history item. 
->    > * Change `Database/Build:` to the genome you used.
->    > * In our case the correct genome is `Human Dec. 2013 (GRCh38/hg38) (hg38)`.
->    {: .tip}
+>
+>      > ### {% icon tip %} Tip: Database edit
+>      >
+>      > It can happen that you can not select the correct input file. In this case you have to add meta information about the used genome to the file.
+>      > * Click on the pencil of the correct history item. 
+>      > * Change `Database/Build:` to the genome you used.
+>      > * In our case the correct genome is `Human Dec. 2013 (GRCh38/hg38) (hg38)`.
+>      {: .tip}
 >
 > 2. **computeMatrix** {% icon tool %} with the following parameters:
 >    - Use the file `CpGIslands.bed`as `Regions to plot` and the in the previous step created bigwig file as the `score file`.

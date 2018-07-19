@@ -427,7 +427,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 
 > ### {% icon comment %} Comment
 > Because most intermediate steps of the workflow were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, we can unhide all hidden datasets by selecting `Unhide Hidden Datasets` from the history options menu.
-{: .Comment}
+{: .comment}
 
 > ### {% icon question %} Questions
 > Which exon had the highest number of repeats? How many repeats were there?
