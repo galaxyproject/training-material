@@ -207,7 +207,7 @@ This file will be the input for more detailed analysis:
 
 For identification of gene clusters, **antiSMASH** is used. The tool uses genbank file as input files and predicts gene clusters. Output files are a html visualization and the gene cluster proteins.
 
-> ### Hands-On: antiSMASH analysis
+> ### {% icon hands_on %} Hands-on: antiSMASH analysis
 >
 > {% icon tool %} Import this [dataset](../../input_data/Streptomyces_coelicolor_part.genbank) into your Galaxy history and run **antiSMASH** to detect gene clusters. The genbank file contains a part of the *Streptomyces coelicolor* genome sequence.
 >
