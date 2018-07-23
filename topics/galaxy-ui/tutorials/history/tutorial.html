@@ -128,10 +128,10 @@ generates a dataset. These datasets (and the output datasets from later analysis
 <h2 id="the-current-history">The Current History</h2>
 
 <p>All users have one ‘current’ history, which can be thought of as <strong>a workspace or a current working directory</strong> in
-bioinformatics terms. You current history displayed in the right hand side of the main ‘Analyze Data’ Galaxy page in
+bioinformatics terms. Your current history is displayed in the right hand side of the main ‘Analyze Data’ Galaxy page in
 what is called the history panel.</p>
 
-<p>The history panel displays output datasets in the order in which they were created with the oldest/first shown on the
+<p>The history panel displays output datasets in the order in which they were created, with the oldest/first shown at the
 bottom. As new analyses are done and new output datasets are generated, the newest datasets are added to the top of the
 the history panel. In this way, the history panel displays the history of your <strong>analysis over time</strong>.</p>
 
@@ -151,10 +151,10 @@ clear you sessions - that history will be lost!</strong> We can not recover it f
 
 <p>Above the current history panel are three buttons: the refresh, history options, and ‘view all histories’ button.</p>
 
-<p>The refresh button will entirely reload the history being viewed. This can be helpful if you believe the history
+<p>The ‘refresh’ button will entirely reload the history being viewed. This can be helpful if you believe the history
 interface needs to be updated or isn’t updating properly.</p>
 
-<p>The history options button opens the history options menu which allows you to perform history-related tasks.</p>
+<p>The ‘history options’ button opens the history options menu which allows you to perform history-related tasks.</p>
 
 <p>The ‘view all histories’ button sends you to the interface for managing multiple histories</p>
 
@@ -169,8 +169,8 @@ annotated.</p>
 
 <ol>
   <li>Click the existing name. A text input field will appear with the current name.</li>
-  <li>Entered a new name or edit the existing the way you’d like.</li>
-  <li>Press ‘Enter’ to save the new name. The input field will disappear and the new name display.</li>
+  <li>Enter a new name or edit the existing one.</li>
+  <li>Press ‘Enter’ to save the new name. The input field will disappear and the new history name will display.</li>
   <li>To cancel renaming, press ‘Esc’ or click outside the input field.</li>
 </ol>
 
@@ -183,6 +183,8 @@ Each item can have many tags and you can add new tags or remove them at any time
 organize and search your data. For instance, you might tag a history with the type of analysis you did in it: ‘assembly’
 or ‘variants’. Or you may tag them according to data sources or some other metadata: ‘long-term-care-facility’ or
 ‘yellowstone park:2014’.</p>
+
+<p class="alert alert-warning"><strong>Note:</strong> It is recommended to replace spaces in tags with _ or -. Although spaces are allowed in tags for histories, they are removed from the tags for datasets.</p>
 
 <p>To tag a history:</p>
 
@@ -199,7 +201,7 @@ or ‘variants’. Or you may tag them according to data sources or some other m
 <h3 id="annotating-a-history">Annotating a history</h3>
 
 <p>Sometimes tags and names are not enough to describe the work done within a history. Galaxy allows you to create history
-annotations: longer text entries that allow more formatting options. Newlines and whitespace are preserved. Later, if
+annotations: longer text entries that allow more formatting options. The formatting of the text is preserved. Later, if
 you publish or share the history, the annotation will be displayed automatically - allowing you to share additional
 notes about the analysis.</p>
 
@@ -208,8 +210,8 @@ notes about the analysis.</p>
 <ol>
   <li>Click the annotation button at the top of the history panel. A larger text section will appear displaying any
   existing annotation (or, if there’s none, italic text saying you can click on the control to create an annotation).</li>
-  <li>Click the annotation section. The a larger input field will appear.</li>
-  <li>Add any annotations you desire. ‘Return’ will create a line break and white space is preserved. (Tabs cannot be
+  <li>Click the annotation section. A larger input field will appear.</li>
+  <li>Add your annotations. ‘Enter/Return’ will move the cursor to the next line. (Tabs cannot be
   entered since the ‘Tab’ button is used to switch between controls on the page - tabs can be pasted in however).</li>
   <li>To save the annotation, click the ‘Done’ button.</li>
 </ol>
@@ -218,12 +220,11 @@ notes about the analysis.</p>
 
 <h3 id="history-size">History size</h3>
 
-<p>As datasets are added to a history, Galaxy will store them in files on its file system. The total size of these files
-for all the datasets in a history is displayed underneath the history name. For example, if a history has 200 megabytes
-of dataset data on Galaxy’s filesystem, ‘200 MB’ will be displayed underneath the name.</p>
+<p>As datasets are added to a history, Galaxy will store them on the server. The total size of these files,
+for all the datasets in a history, is displayed underneath the history name. For example, if a history has 200 megabytes
+of dataset data on Galaxy’s filesystem, ‘200 MB’ will be displayed underneath the history name.</p>
 
-<p>If your Galaxy server uses quotas, the total combined size of all your histories will be compared to your quota and
-if you’re using more than the quota allows Galaxy will prevent you from running any new jobs until you’ve deleted some
+<p>If your Galaxy server uses quotas, the total combined size of all your histories will be compared to your quota. If you’re using more than the quota allows, Galaxy will prevent you from running any new jobs until you’ve deleted some
 datasets and brought that total below the quota.</p>
 
 <h2 id="history-panel-datasets">History Panel Datasets</h2>
@@ -235,9 +236,9 @@ datasets and brought that total below the quota.</p>
 <ol>
   <li>When you first upload a file or run a tool, the dataset will be in the <strong>queued</strong> state. This indicates that the
   job that will create this dataset has not yet started and is in line to begin.</li>
-  <li>When the job starts the dataset will be in the <strong>running</strong> state. The job that created these datasets is now
+  <li>When the job starts, the dataset will be in the <strong>running</strong> state. The job that created these datasets is now
   running on Galaxy’s cluster.</li>
-  <li>When the job has completed successfully, the datasets will be in the <strong>ok</strong> state.</li>
+  <li>When the job has completed successfully, the datasets it generated will be in the <strong>ok</strong> state.</li>
   <li>If there’s been an error while running the tool, the datasets will be in the <strong>error</strong> state.</li>
   <li>If a previously running or queued job has been paused by Galaxy, the dataset will be in the <strong>paused</strong> state.
   You can re-start/resume paused jobs using the options menu above the history panel and selecting ‘Resume Paused Jobs’.</li>
@@ -248,14 +249,14 @@ datasets and brought that total below the quota.</p>
 <p>Datasets in the panel are initially shown in a ‘summary’ view, that only displays:</p>
 
 <ol>
-  <li>a <strong>number</strong> indicating in what order (or what step) this dataset was created</li>
-  <li>the dataset <strong>name</strong></li>
-  <li>a <strong>view</strong> button: click this to view the dataset contents in raw format in the browser</li>
-  <li>an <strong>edit</strong> button: click this to edit dataset properties</li>
-  <li>a <strong>delete</strong> button: click this to delete the dataset from the history (<em>don’t worry</em>, you can undo this action)</li>
+  <li>A <strong>number</strong> indicating in what order (or what step) this dataset was created,</li>
+  <li>The dataset <strong>name</strong>.</li>
+  <li>A <strong>view</strong> button: click this to view the dataset contents in raw format in the browser.</li>
+  <li>An <strong>edit</strong> button: click this to edit dataset properties.</li>
+  <li>A <strong>delete</strong> button: click this to delete the dataset from the history (<em>don’t worry</em>, you can undo this action).</li>
 </ol>
 
-<p class="alert alert-warning"><strong>Note:</strong> some of the buttons above may be disabled if the dataset is in a state that shouldn’t allow doing the
+<p class="alert alert-warning"><strong>Note:</strong> some of the buttons above may be disabled if the dataset is in a state that doesn’t allow the
 action. For example, the ‘edit’ button is disabled for datasets that are still queued or running.</p>
 
 <p><img src="../../images/summary.png" alt="Datasets as summary in history" /></p>
@@ -263,12 +264,12 @@ action. For example, the ‘edit’ button is disabled for datasets that are sti
 <p>You can click the dataset name and the view will expand to show more details:</p>
 
 <ol>
-  <li>a short description of the data</li>
-  <li>the file <strong>format</strong></li>
-  <li>the reference sequence (or <strong>database</strong>) for the data</li>
-  <li>(optionally) some information/output from the job that produced this dataset</li>
-  <li>a row of buttons that allow further actions on the dataset</li>
-  <li>a <strong>peek</strong> of the data: a couple of rows of data with the column headers (if available)</li>
+  <li>A short description of the data.</li>
+  <li>The file <strong>format</strong>.</li>
+  <li>The reference sequence (or <strong>database</strong>) for the data.</li>
+  <li>(Optionally) some information/output from the job that produced this dataset.</li>
+  <li>A row of buttons that allow further actions on the dataset.</li>
+  <li>A <strong>peek</strong> of the data: a couple of rows of data with the column headers (if available).</li>
 </ol>
 
 <p><img src="../../images/details.png" alt="Details" /></p>
@@ -283,7 +284,7 @@ is waiting to run’)</p>
 
 <p>Some procedures in Galaxy such as workflows will often <strong>hide</strong> history datasets in order to simplify the history
 and hide intermediate steps of an automated analysis. These hidden datasets won’t normally appear in the history panel
-but their still mentioned in the history subtitle (the smaller, grey text that appears below the history name). If you
+but they’re still mentioned in the history subtitle (the smaller, grey text that appears below the history name). If your
 history has hidden datasets, the number will appear there (e.g. ‘3 hidden’) as a clickable link. If you click this link,
 the hidden datasets are shown. Each hidden dataset has a link in the top of the summary view that allows you to unhide
 it. You can click that link again (which will now be ‘hide hidden’) to make them not shown again.</p>
@@ -296,7 +297,7 @@ it. You can click that link again (which will now be ‘hide hidden’) to make 
 dataset’s data from Galaxy and <strong>it is reversible</strong>. When you delete a dataset from the history, it will be removed
 from the panel but (like hidden datasets) the total number of deleted datasets is shown in the history subtitle as a
 link. Clicking this link (e.g. ‘3 deleted’) will make the deleted datasets visible and each deleted dataset will have a
-link for manually undeleting it above its title. You can click that link again (which will now be ‘hide deleted’) to
+link for manually undeleting it, above its title. You can click that link again (which will now be ‘hide deleted’) to
 make them not shown again.</p>
 
 <p><img src="../../images/delete.png" alt="Deleting dataset" /></p>
@@ -313,8 +314,8 @@ and cannot be undone</strong>.</p>
 <h3 id="admins-may-purge-your-deleted-datasets">Admins may purge your deleted datasets</h3>
 
 <p>Depending on the policy of your Galaxy server, administrators will often run scripts that search for and purge the
-datasets you’ve marked as deleted. Often deleted datasets and histories are purged based on the age of the deletion
-(e.g. datasets that have been marked as deleted for 90 days or more). Check with the administrators of your instance to
+datasets you’ve marked as deleted. Often, deleted datasets and histories are purged based on the age of the deletion
+(e.g. datasets that have been marked as deleted for 90 days or more). Check with the administrators of your Galaxy instance to
 find out the policy used.</p>
 
 <h2 id="managing-multiple-datasets-easily">Managing Multiple Datasets Easily</h2>
@@ -324,13 +325,12 @@ find out the policy used.</p>
 <p>You can also hide, delete, and purge multiple datasets at once by <strong>multi-selecting datasets</strong>:</p>
 
 <ol>
-  <li>Click the multiselect button containing the checkbox to the right of the history size.</li>
+  <li>Click the multi-select button containing the checkbox to the right of the history size.</li>
   <li>Checkboxes will appear inside each dataset in the history.</li>
   <li>Scroll and click the checkboxes next to the datasets you want to manage. You can also ‘shift+click’ to select a
   range of datasets.</li>
   <li>Click the ‘All’ button to select all datasets. Click the ‘None’ button to clear/remove all selections.</li>
-  <li>Click the ‘For all selected…’ to choose the action. The action will be performed on all selected datasets. (If
-  an action doesn’t apply to a selected dataset - like deleting a deleted dataset - nothing will happen.)</li>
+  <li>Click the ‘For all selected…’ to choose the action. The action will be performed on all selected datasets, except for the ones that don’t support the action. That is, if an action doesn’t apply to a selected dataset - like deleting a deleted dataset - nothing will happen to that dataset, while all other selected datasets will be deleted.</li>
   <li>You can click the multiselect button again to hide the checkboxes again.</li>
 </ol>
 
@@ -343,7 +343,7 @@ any text that a dataset you’d be looking for would contain, including:</p>
 
 <ul>
   <li>the name or part of the name</li>
-  <li>any text (or partial text) from the description and info fields</li>
+  <li>any text (or partial text) from the info field</li>
   <li>the file format or reference database</li>
   <li>any text or partial text from the annotation or tags of a dataset</li>
 </ul>
@@ -369,7 +369,7 @@ or - while entering text in the search bar - hitting the escape key (‘esc’).
 <h3 id="advanced-searching">Advanced searching</h3>
 
 <p>You can also specify what dataset properties you’re searching using keyword search. These are the property names
-followed by ‘=’ then the value. When using these only the property named is searched for that value:</p>
+followed by ‘=’ then the value. When using these, only the property named is searched for that value:</p>
 
 <ul>
   <li><em>name</em>: for example, <code class="highlighter-rouge">name=my-dataset</code> would show all datasets whose names contain ‘my-dataset’ - <em>but</em> not
@@ -382,18 +382,18 @@ datasets that have multiple tags by re-using the tag keyword search: <code class
 </ul>
 
 <p class="alert alert-warning"><strong>Note</strong> that keyword searches can be combined: <code class="highlighter-rouge">database=mm10 annotation=successful</code><br />
-You can enclose text and include spaces using double quotes: <code class="highlighter-rouge">name="My Dataset" annotation="First run"</code>.<br />
- All keyword searches are AND’d - all searches should be true in order for the dataset to be shown.</p>
+You can enclose text with double quotes and include spaces: <code class="highlighter-rouge">name="My Dataset" annotation="First run"</code>.<br />
+ Only the datasets that meet ALL search criteria will be shown.</p>
 
-<p>If you find normal searching is showing too many datasets, and not what you’re looking for, try the advanced keyword
+<p>If you find normal searching is showing too many datasets, and not what you’re looking for, try the advanced, keyword
 search.</p>
 
 <p><img src="../../images/adv-search.png" alt="Advanced search" /></p>
 
 <h3 id="search-and-multiselect">Search and multiselect</h3>
 
-<p>It’s often useful to combine search and multiselect. Multiselections will persist over searches and the All/None buttons
-will only apply to those datasets that are currently shown with the given search.</p>
+<p>It’s often useful to combine search and multiselect. Multiselections will persist between searches, and the All/None buttons
+will only apply to the datasets currently shown with the given search.</p>
 
 <p>So, for example, to select and manipulate two different sets of datasets: a) fastqsanger files tagged with ‘low quality’
 and b) hg19 reference BAM files whose names contain “Output”:</p>
@@ -402,7 +402,7 @@ and b) hg19 reference BAM files whose names contain “Output”:</p>
   <li>In the search bar, enter: <code class="highlighter-rouge">format=fastqsanger tag="low quality"</code> and hit enter.</li>
   <li>Click the multiselect button to show the checkboxes.</li>
   <li>Click the ‘All’ button to select all the fastqsanger files</li>
-  <li>In the search bar again, enter: <code class="highlighter-rouge">database=hg19 format=BAM name=output</code> and hit enter.</li>
+  <li>In the search bar, enter: <code class="highlighter-rouge">database=hg19 format=BAM name=output</code> and hit enter.</li>
   <li>Click the ‘All’ button again to select all the BAM files.</li>
   <li>Clear the search using the clear button. All datasets are shown and both fastqsanger and BAM files are still
   selected.</li>
@@ -419,27 +419,32 @@ search for deleted histories and then to undelete the one we’re interested in.
 history method is presented here:</p>
 
 <p>Click the multi-history icon at the top right of the ‘Analyze Data’ (home) page. Note: you must be logged in to
-see the icon and use the multi-history page. You should see all the (non-deleted) histories that you’ve created.
-<img src="../../images/undelete.multihistory-button.png" alt="Multi-history button" /></p>
+see the icon and use the multi-history page. You should see all the (non-deleted) histories that you’ve created.</p>
 
-<p>Click the ‘…’ icon button in the grey header at the top of the page. You should see a dialog that presents some options for viewing the histories. Click the ‘include deleted histories’ option.
-<img src="../../images/undelete.multihistory-options.png" alt="Multihistory options" /></p>
+<p><img src="../../images/undelete.multihistory-button.png" alt="Multi-history button" /></p>
+
+<p>Click the ‘…’ icon button in the grey header at the top of the page. You should see a dialog that presents some options for viewing the histories. Click the ‘include deleted histories’ option.</p>
+
+<p><img src="../../images/undelete.multihistory-options.png" alt="Multihistory options" /></p>
 
 <p>The page should reload and now both non-deleted and deleted histories will be displayed. Deleted histories will
 have a small message under their titles stating ‘This history has been deleted’.</p>
 
-<p><img src="../../images/undelete.thishasbeendeleted.png" alt="Deleted and non-deleted histories" />
-Now click the small button with the down arrow just above the deleted history you want to undelete. Then click
-the ‘Undelete’ option there. Your history should now be undeleted.
-<img src="../../images/undelete.undelete-button.png" alt="Undelete button" /></p>
+<p><img src="../../images/undelete.thishasbeendeleted.png" alt="Deleted and non-deleted histories" /></p>
+
+<p>Now click the small button with the down arrow just above the deleted history you want to undelete. Then click
+the ‘Undelete’ option there. Your history should now be undeleted.</p>
+
+<p><img src="../../images/undelete.undelete-button.png" alt="Undelete button" /></p>
 
 <p>Click the ‘Switch to’ button at the top of that history and then click ‘done’ at the very top left to return to
-the ‘Analyze Data’ page.
-<img src="../../images/undelete.switchto.png" alt="Switch to history" /></p>
+the ‘Analyze Data’ page.</p>
+
+<p><img src="../../images/undelete.switchto.png" alt="Switch to history" /></p>
 
 <h2 id="dataset-collections">Dataset Collections</h2>
 
-<p>When you have multiple datasets that will be sent through the same analysis it can often be useful to place those
+<p>When you have multiple datasets that will be sent through the same analysis, it can often be useful to place those
 datasets in a dataset collection. When collections are used as input when running a tool, you’re telling Galaxy to run
 that tool on each  dataset in the collection using the same settings. This happens automatically and there’s no need to
 fill in the tool form more than once.</p>
@@ -448,7 +453,7 @@ fill in the tool form more than once.</p>
 datasets. To create a dataset collection from datasets in a history:</p>
 
 <ol>
-  <li>Use multiselect to select the datasets you’d like to make into a collection.</li>
+  <li>Use multiselect to select the datasets you’d like to put into a collection.</li>
   <li>From the drop down menu labeled ‘For all selected…’, choose one of the collections types.</li>
   <li>Depending on the type you chose, some configuration and options may be displayed, and when you’ve chosen those,
   the collection is created and will show in the current history panel.</li>
@@ -462,7 +467,7 @@ datasets. To create a dataset collection from datasets in a history:</p>
 replaced by a list of the collection contents and each are expandable as a normal dataset in a history would be. You
 can click the ‘&lt; Back to (you history name)’ link at the top to return to the history view (see below for examples).</p>
 
-<p>They current collection types are:</p>
+<p>The current collection types are: dataset pairs, dataset list, and list of dataset pairs - described below.</p>
 
 <h3 id="dataset-pairs">Dataset pairs</h3>
 
