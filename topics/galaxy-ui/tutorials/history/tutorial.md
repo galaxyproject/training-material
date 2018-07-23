@@ -52,7 +52,7 @@ annotated.
 All histories begin with the name 'Unnamed history'. Non-anonymous users can rename the history as they see fit:
 
 1. Click the existing name. A text input field will appear with the current name.
-2. Entere a new name or edit the existing one.
+2. Enter a new name or edit the existing one.
 3. Press 'Enter' to save the new name. The input field will disappear and the new history name will display.
 4. To cancel renaming, press 'Esc' or click outside the input field.
 
