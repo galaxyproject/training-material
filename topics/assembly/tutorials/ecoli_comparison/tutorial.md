@@ -68,9 +68,9 @@ Before starting any analyses we need to upload the assembly produced in [Unicycl
 
  > ### {% icon hands_on %} Uploading *E. coli* assembly into Galaxy
  >
- > 1. Upload tool {% icon tool %} (Upload icon on the top of the left pane)
+ > 1. **Upload** {% icon tool %}:
  >   - Click **Paste/Fetch data** button (Bottom of the interface box)
- >   - Paste `https://zenodo.org/record/1251125/files/Ecoli_C_assembly.fna` into the box.
+ >   - **Paste** `https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna` into the box.
  >   - *"Type"*: `fasta`
  >   - Click **Start**
 {: .hands_on}
@@ -92,7 +92,7 @@ Because phiX173 is around 5,000bp, we can remove those sequences by setting a mi
 > ### {% icon hands_on %} Hands-on: Fixing assembly
 >
 > 1. **Filter sequences by length** {% icon tool %} with the following parameters:
->   - *"Fasta file"*: the dataset you've just uploaded. (`https://zenodo.org/record/1251125/files/Ecoli_C_assembly.fna`).
+>   - *"Fasta file"*: the dataset you've just uploaded. (`https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna`).
 >   - *"Minimal length"*: `10000`
 >
 >
@@ -130,12 +130,13 @@ Because phiX173 is around 5,000bp, we can remove those sequences by setting a mi
 >
 > 1. What is the meaning of `^` character is SED expression?
 > 2. Where do you go to learn more about regular expressions?
->    > ### {% icon solution %} Solution
->    >
->    > 1. It tells SED to start matching from the beginning of the string.
->    > 2. [Software Carpentry](https://software-carpentry.org)
->    >
->    {: .solution}
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. It tells SED to start matching from the beginning of the string.
+> > 2. [Software Carpentry](https://software-carpentry.org)
+> >
+> {: .solution}
 {: .question}
 
 
