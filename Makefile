@@ -33,7 +33,7 @@ create-env: ## create conda environment
 	${CONDA} env create -f environment.yml
 .PHONY: create-env	
 
-install: ## install dependencies
+install: clean ## install dependencies
 	npm install decktape
 	gem install bundler
 	gem install pkg-config -v "~> 1.1"
