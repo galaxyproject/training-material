@@ -7,7 +7,7 @@ tutorial_name: Defining trends and create biodiverstiy indicators
 # Introduction
 {:.no_toc}
 
-This exercise uses the public dataset of Reto Schmucki on Github. It is a file recording the presence of various species per site and per days through a period of time. [regoinal dat] (https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1)
+This exercise uses the public dataset of Reto Schmucki [Zenodo](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1). It is a file recording the presence of various species per site and per days through a period of time. 
 The goal of this exercise is to be able to create biodiversity indicators and abundance trend over time. Using different tools we will show the occurence of one specw through time. 
 You could for example try to predict the occurence of one specific specy in a certain type of environnement using the prediction model of climate evolution.
 You will basically learn how to create a visual material which can be guite easily understood and therefore be efficient for a large audience.
@@ -27,8 +27,9 @@ The first step of any Regional Gam data analysis is making sure to have one data
 > ### {% icon hands_on %} Hands-on: Quality control
 >
 > 1. Create a new history for this tutorial and give it a proper name
-> 2. Import `patient1_input_good_outcome` from [Zenodo](https://zenodo.org/record/892432/files/patient1_input_good_outcome.fastq) or from the data library into the history
->
+> 2. Then you can either import `gatekeeper_CM .RData` from [Zenodo](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1) or either import `regional GAM data.csv`from [Zenodo](https://zenodo.org/record/1321885/files/regional%20GAM%20data.csv?download=1)
+> 2.1 Please note that the file from Github is on RData and if you choose to use it, you will have to use the tools `RData binary file reader` and `RData parser` and then finaly `Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data required. 
+
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
 >    > * Copy the link location
