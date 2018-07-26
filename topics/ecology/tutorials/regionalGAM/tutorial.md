@@ -21,7 +21,7 @@ You will basically learn how to create a visual material which can be guite easi
 
 # Step 1: Selectionning one specific specy and showing all the data corresponding to it
 
-The first step of any Regional Gam data analysis is making sure to have one dataset of only one specific specy that you will then be able to use. 
+The first step of any Regional GAM data analysis is making sure to have one dataset of only one specific specy that you will then be able to use. 
 
 
 > ### {% icon hands_on %} Hands-on: Quality control
@@ -92,7 +92,7 @@ It is often necessary to trim sequenced read, for example, to get rid of bases t
 >
 {: .hands_on}
 
-# Step 2: Mapping of the reads
+# Step 2: Show the occurence of the chosen specy through the years
 
 In order to figure where the sequenced DNA fragments originated from in the genome, the short reads must be aligned to the reference genome. This is equivalent to solving a jigsaw puzzles, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way may, however, take a couple of weeks.
 
