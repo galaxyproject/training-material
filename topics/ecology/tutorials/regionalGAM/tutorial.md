@@ -29,7 +29,7 @@ The first step of any Regional Gam data analysis is making sure to have one data
 > 1. Create a new history for this tutorial and give it a proper name
 > 2. Then you can either import `gatekeeper_CM .RData` from [Zenodo](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1) or either import `regional GAM data.csv`from [Zenodo](https://zenodo.org/record/1321885/files/regional%20GAM%20data.csv?download=1)
 
-> 2.1 Please note that the file from Github is on RData and if you choose to use it, you will have to use the tools `RData binary file reader` and `RData parser` and then finaly `Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data required. 
+> ⚠️ Please note that the file from Github is on RData and if you choose to use it, you will have to use the tools `RData binary file reader` and `RData parser` and then finaly `Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data required. 
 
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
