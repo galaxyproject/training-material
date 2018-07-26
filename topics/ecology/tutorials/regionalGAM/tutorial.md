@@ -29,7 +29,7 @@ The first step of any Regional GAM data analysis is making sure to have one data
 > 1. Create a new history for this tutorial and give it a proper name
 > 2. Then you can either import `gatekeeper_CM .RData` from [Zenodo](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1) or either import `regional GAM data.csv`from [Zenodo](https://zenodo.org/record/1321885/files/regional%20GAM%20data.csv?download=1)
 
-> ⚠️ Please note that the file from Github is on RData and if you choose to use it, you will have to use the tools `RData binary file reader` and `RData parser` and then finaly `Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data required. 
+> ⚠️ Please note that the first above file is on RData and if you choose to use it, you will have to use the tools `RData binary file reader` and `RData parser` and then finaly `Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data required. The last tool must be used because `RData parser` creates a different file for each coluumn.
 
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
@@ -94,7 +94,7 @@ It is often necessary to trim sequenced read, for example, to get rid of bases t
 
 # Step 2: Show the occurence of the chosen specy through the years
 
-In order to figure where the sequenced DNA fragments originated from in the genome, the short reads must be aligned to the reference genome. This is equivalent to solving a jigsaw puzzles, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way may, however, take a couple of weeks.
+In order to be able to draw conclusions based on the occurence, you have to create a file and a curve that shows the occurence of the specy 
 
 ### Running Bowtie2
 
