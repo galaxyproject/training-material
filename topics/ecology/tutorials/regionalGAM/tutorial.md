@@ -1,32 +1,16 @@
 ---
 layout: tutorial_hands_on
-topic_name: chip-seq
-tutorial_name: estrogen-receptor-binding-site-identification
+topic_name: regional GAM
+tutorial_name: Defining trends and create biodiverstiy indicators 
 ---
 
 # Introduction
 {:.no_toc}
 
-This exercise uses the dataset from the Nature publication by [Ross-Inness et al., 2012](https://www.ncbi.nlm.nih.gov/pubmed/22217937).
-The goal of this article was to identify the binding sites of the Estrogen receptor, a transcription factor known to be associated with different types of breast cancer.
-
-To this end, ChIP-seq was performed in breast cancer cells from 4 patients of different outcomes (good and poor). For each ChIP-seq experiment there is a matching technical control, i.e. there are 8 samples in total:
-
-Patient | Outcome | Treatment
---- | --- | ---
-Patient 1 | Good | ChIP ER
-Patient 1 | Good | input (no immunoprecipitation step)
-Patient 2 | Good | ChIP ER
-Patient 2 | Good | input (no immunoprecipitation step)
-Patient 3 | Poor | ChIP ER
-Patient 3 | Poor | input (no immunoprecipitation step)
-Patient 4 | Poor | ChIP ER
-Patient 4 | Poor | input (no immunoprecipitation step)
-
-Half of which are the so-called 'input' samples for which the same treatment as the ChIP-seq samples was done except for the immunoprecipitation step.
-The input files are used to identify potential sequencing bias, like open chromatin or GC bias.
-
-Because of the long processing time for the large original files, we have downsampled the original data and provide already processed data for subsequent steps.
+This exercise uses the public dataset of Reto Schmucki on Github. It is a file recording the presence of various species per site and per days through a period of time.
+The goal of this exercise is to be able to create biodiversity indicators and abundance trend over time. Using different tools we will show the occurence of one specw through time. 
+You could for example try to predict the occurence of one specific specy in a certain type of environnement using the prediction model of climate evolution.
+You will basically learn how to create a visual material which can be guite easily understood and therefore be efficient for a large audience.
 
 > ### Agenda
 >
@@ -35,9 +19,10 @@ Because of the long processing time for the large original files, we have downsa
 >
 {: .agenda}
 
-# Step 1: Quality control and treatment of the sequences
+# Step 1: Selectionning one specific specy and showing all the data corresponding to it
 
-The first step of any ChIP-Seq data analysis is quality control of the raw sequencing data.
+The first step of any Regional Gam data analysis is making sure to have one dataset of only one specific specy that wou will then be able to use. 
+
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
