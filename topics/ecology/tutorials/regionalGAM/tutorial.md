@@ -7,7 +7,7 @@ tutorial_name: Defining trends and create biodiverstiy indicators
 # Introduction
 {:.no_toc}
 
-This exercise uses the public dataset of Reto Schmucki on Github. It is a file recording the presence of various species per site and per days through a period of time.
+This exercise uses the public dataset of Reto Schmucki on Github. It is a file recording the presence of various species per site and per days through a period of time. [regoinal dat] (https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1)
 The goal of this exercise is to be able to create biodiversity indicators and abundance trend over time. Using different tools we will show the occurence of one specw through time. 
 You could for example try to predict the occurence of one specific specy in a certain type of environnement using the prediction model of climate evolution.
 You will basically learn how to create a visual material which can be guite easily understood and therefore be efficient for a large audience.
@@ -21,7 +21,7 @@ You will basically learn how to create a visual material which can be guite easi
 
 # Step 1: Selectionning one specific specy and showing all the data corresponding to it
 
-The first step of any Regional Gam data analysis is making sure to have one dataset of only one specific specy that wou will then be able to use. 
+The first step of any Regional Gam data analysis is making sure to have one dataset of only one specific specy that you will then be able to use. 
 
 
 > ### {% icon hands_on %} Hands-on: Quality control
