@@ -8,13 +8,14 @@ tutorial_name: Defining trends and create biodiverstiy indicators
 {:.no_toc}
 
 This exercise uses the public dataset of Reto Schmucki [regional GAM](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1). It is a file recording the presence of various species per site and per days through a period of time. 
-The goal of this exercise is to be able to create biodiversity indicators and abundance trend over time. Using different tools we will show the occurence of one specy through the years. 
-You could for example try to predict the occurence of one specific specy in a certain type of environnement using the prediction model of climate evolution.
+The goal of this exercise is to be able to create biodiversity indicators and abundance trend over time. Using different tools we will show the occurrence of one specie through the years. 
+You could for example try to predict the occurence of one specific specie in a certain type of environnement using the prediction model of climate evolution.
 You will basically learn how to create a visual material which can be guite easily understood and therefore be efficient for a large audience.
 
 > ### Agenda
 >
-> 1. Pre processing
+1. Pre processing
+
 > {:toc}
  2. 
 >
@@ -26,7 +27,7 @@ You will basically learn how to create a visual material which can be guite easi
 The goal of the first step is to upload and prepare the file so that it will be usable for the regional GAM analysis.
 First of all the dataset must be uploaded.
 
-> ### {% icon hands_on %} Hands-on: Quality control
+> ### {% icon hands_on %} Hands-on: Upoading dataset
 >
 > 1. Create a new history for this tutorial and give it a proper name.
 > 2. Then you can either import `gatekeeper_CM .RData` from [Zenodo](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1) or either import `regional GAM data.csv`from [Zenodo](https://zenodo.org/record/1321885/files/regional%20GAM%20data.csv?download=1).
@@ -57,11 +58,23 @@ First of all the dataset must be uploaded.
 >    > * Import in the history
 >    {: .tip}
 >
-> ## Re-sampling 
+>    > ## Re-sampling 
+>    > The SITES of the dataset you are using are very precise and they are classified in sub-categories of sites. You don't   >      really need our file to contain all these sub-sites because it lengthens the file processing time on E-Galaxy. This is 
+>      the reason why you have to specify you don't want the sub-sites to be considered
+>
+>
+>    > > 1.`trouver et remplacer des patterns dans des colonnes` on the CSV file. 
+>    > >
+>
+>
+>
+>
+>
+>
 
-# Step 2: Selectionning one specific specy and showing all the data corresponding to it
+# Step 2: Selectionning one specific specie and showing all the data corresponding to it
 
-The second step of any Regional GAM data analysis is making sure to have one dataset of only one specific specy that you will then be able to use. 
+The second step of any Regional GAM data analysis is making sure to have one dataset of only one specific specie that you will then be able to use. 
 
 
 
@@ -78,11 +91,11 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >    > 2. What are the other entries?
 >    
 >
-> 4. In order to be be able to show the occurence of only one specy, you have to make sure that your file countains only the data concerning this specy.
+> 4. In order to be be able to show the occurrence of only one specie, you have to make sure that your file countains only the data concerning this specie.
 >
 >    > 1.`compter le nombre d'occurence de chaque enrégistrement` and select `column 1` délimité par `tabulation`.
->    > 2. Copy the full name of the specy you are interested in (for example: "Pyronia tithonus") from the file on csv. 
->    > 3.`filter des données sur une colonne en utilisant des expressions simples`on the CSV file en utilisant la condition suivante c1=='name of the specy'(for example: c1=='"Pyronia tithonus"').
+>    > 2. Copy the full name of the specie you are interested in (for example: "Pyronia tithonus") from the file on csv. 
+>    > 3.`filter des données sur une colonne en utilisant des expressions simples`on the CSV file en utilisant la condition suivante c1=='name of the specie'(for example: c1=='"Pyronia tithonus"').
 >    > 4. `tabular to CSV` on the above data.
 >
 > ### {% icon hands_on %} Hands-on: Quality control
@@ -101,9 +114,9 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >
 {: .hands_on}
 
-# Step 3: Show the occurence of the chosen specy through the years
+# Step 3: Show the occurrence of the chosen specie through the years
 
-In order to be able to draw conclusions based on the occurence, you have to create a file and a curve that shows the occurence of the specy 
+In order to be able to draw conclusions based on the occurrence, you have to create a flight curve that shows the occurence of the specie 
 
 ### Running Bowtie2
 
