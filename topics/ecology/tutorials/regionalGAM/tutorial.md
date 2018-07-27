@@ -8,7 +8,7 @@ tutorial_name: Defining trends and create biodiverstiy indicators
 {:.no_toc}
 
 This exercise uses the public dataset of Reto Schmucki [regional GAM](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1). It is a file recording the presence of various species per site and per days through a couple of years. 
-The goal of this exercise is to be able to create biodiversity indicators and abundance trend over time. Using different tools we will show the occurrence of one specie through the years. 
+The goal of this exercise is to be able to create biodiversity indicators and abundance trend over time based on this dataset. Using different tools we will show the occurrence of one specie through the years. 
 You could for example try to predict the occurence of one specific specie in a certain type of environnement using the prediction model of climate evolution.
 You will basically learn how to create a visual material which can be guite easily understood and therefore be efficient for a large audience.
 
