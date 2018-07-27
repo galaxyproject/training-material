@@ -57,7 +57,7 @@ First of all the dataset must be uploaded.
 >    > * Import in the history
 >    {: .tip}
 >
->
+> ## Re-sampling 
 
 # Step 2: Selectionning one specific specy and showing all the data corresponding to it
 
@@ -74,7 +74,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. How many species are represeted on this file ?
+>    > 1. How many species are represented on this file ?
 >    > 2. What are the other entries?
 >    
 >
@@ -101,7 +101,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >
 {: .hands_on}
 
-# Step 2: Show the occurence of the chosen specy through the years
+# Step 3: Show the occurence of the chosen specy through the years
 
 In order to be able to draw conclusions based on the occurence, you have to create a file and a curve that shows the occurence of the specy 
 
