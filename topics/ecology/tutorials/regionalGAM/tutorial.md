@@ -8,7 +8,7 @@ tutorial_name: Defining trends and create biodiverstiy indicators
 {:.no_toc}
 
 This exercise uses the public dataset of Reto Schmucki [regional GAM](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1). It is a file recording the presence of various species per site and per days through a period of time. 
-The goal of this exercise is to be able to create biodiversity indicators and abundance trend over time. Using different tools we will show the occurence of one specy through time. 
+The goal of this exercise is to be able to create biodiversity indicators and abundance trend over time. Using different tools we will show the occurence of one specy through the years. 
 You could for example try to predict the occurence of one specific specy in a certain type of environnement using the prediction model of climate evolution.
 You will basically learn how to create a visual material which can be guite easily understood and therefore be efficient for a large audience.
 
@@ -59,23 +59,16 @@ The first step of any Regional GAM data analysis is making sure to have one data
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. How are the DNA sequences stored?
+>    > 1. How many species are represeted on this file ?
 >    > 2. What are the other entries?
+>    
+>
+> 4. In order to be be able to show the occurence of only one specy, you have to make sure that your file countains only the data concerning this specy.
+>
+>    >`compter le nombre d'occurence de chaque enrégistrement` and select `column 1` délimité par `tabulation`
+> Copy the full name of the specy you are interested in (for example: "Pyronia tithonus") on the file on csv 
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. The DNA sequences are stored in the second line of every 4-line group
->    >    > 2. This file is called a [FastQ file](https://en.wikipedia.org/wiki/FASTQ_format). It stores sequence information and quality information. Each sequence is represented by a group of 4 lines with the 1st line being the sequence id, the second the sequence of nucleotides, the third a transition line and the last one a sequence of quality score for each nucleotide.
->    >    {: .solution }
->    {: .question}
 >
-> 4. Run **FastQC** {% icon tool %} with
->    - "Short read data from your current history" to the imported file
->
->    Inspect the generated files
-{: .hands_on}
-
-It is often necessary to trim sequenced read, for example, to get rid of bases that were sequenced with high uncertainty (= low quality bases).
-
 > ### {% icon hands_on %} Hands-on: Quality control
 >
 > 1. Run **Trim Galore!** {% icon tool %} with
