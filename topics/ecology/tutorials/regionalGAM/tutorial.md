@@ -64,7 +64,7 @@ First of all the dataset must be uploaded.
 >
 >
 >    > > 1.`trouver et remplacer des patterns dans des colonnes` on the CSV file. 
->    > >
+>    > > and 
 >
 >
 >
@@ -83,7 +83,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >    As default, Galaxy takes the link as name, so rename them.
 >
 >
-> 3. Inspect the file by clicking on the `eye` icon
+> 1. Inspect the file by clicking on the `eye` icon
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -91,7 +91,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >    > 2. What are the other entries?
 >    
 >
-> 4. In order to be be able to show the occurrence of only one specie, you have to make sure that your file countains only the data concerning this specie.
+> 2. In order to be be able to show the occurrence of only one specie, you have to make sure that your file countains only the data concerning this specie.
 >
 >    > 1.`compter le nombre d'occurence de chaque enrégistrement` and select `column 1` délimité par `tabulation`.
 >    > 2. Copy the full name of the specie you are interested in (for example: "Pyronia tithonus") from the file on csv. 
@@ -114,7 +114,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >
 {: .hands_on}
 
-# Step 3: Show the occurrence of the chosen specie through the years
+# Step 4: Show the occurrence of the chosen specie through the years
 
 In order to be able to draw conclusions based on the occurrence, you have to create a flight curve that shows the occurence of the specie 
 
