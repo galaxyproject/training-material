@@ -33,16 +33,6 @@ First of all the dataset must be uploaded.
 > 1. Create a new history for this tutorial and give it a proper name.
 > 2. Then you can either import `gatekeeper_CM .RData` from [Zenodo](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1) or either import `regional GAM data.csv`from [Zenodo](https://zenodo.org/record/1321885/files/regional%20GAM%20data.csv?download=1).
 
->   >⚠️ Please note that the first above file is on RData and if you choose to use it, you will have to use the tools
->   > *`RData binary file reader` 
->   > *`RData parser`
->   > *`Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data required.
->   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`and select the file on "SPECIE" to the file on "SITE"   >   >  >  * Repeat `Coller deux jeux de données l'un à côté de l'autre`  and select the file obtained above and the one on "YEAR" 
->   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "MONTH"
->   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "DAY"
->   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "COUNT"
-> 
-> >⚠️ Please note that we left the file on "TREND" aside on purpose because we will be able to show it afterwards using some tools
 > ### {% icon tip %} Tip: Importing data via links
 >    >
 >    > * Copy the link location
@@ -63,6 +53,18 @@ First of all the dataset must be uploaded.
 >    > * Click on "Import selected datasets into history"
 >    > * Import in the history
 >    {: .tip}
+
+>   >⚠️ Please note that the first file mentionned above is on RData and if you choose to use it, you will have to use the tools
+>   > *`RData binary file reader` 
+>   > *`RData parser`
+>   > *`Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data required.
+>   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`and select the file on "SPECIE" to the file on "SITE"   >   >  >  * Repeat `Coller deux jeux de données l'un à côté de l'autre`  and select the file obtained above and the one on "YEAR" 
+>   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "MONTH"
+>   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "DAY"
+>   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "COUNT"
+> 
+> >⚠️ Please note that we left the file on "TREND" aside on purpose because we will be able to show it afterwards using some tools
+
 >
 >    > ## Re-sampling 
 >    > The SITES of the dataset you are using are very precise and they are classified in sub-categories of sites. You don't   >      really need our file to contain all these sub-sites because it lengthens the file processing time on E-Galaxy. This is 
