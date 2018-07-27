@@ -15,7 +15,7 @@ You will basically learn how to create a file with which you can create a visual
 > ### Agenda
 >
 1. Pre processing
-2. Selectionning one specific specy and showing all the data corresponding to it
+2. Selectionning one specific species and show all the data corresponding to it
 
 > {:toc}
  2. 
@@ -120,9 +120,9 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >
 {: .hands_on}
 
-# Step 4: Show the occurrence of the chosen specie through the years
+# Step 4: Show the occurrence of the chosen species through the years
 
-In order to be able to draw conclusions based on the occurrence, you have to create a flight curve that shows the occurence of the specie 
+In order to be able to draw conclusions based on the occurrence, you have to create a flight curve that shows the occurence of the species you chose. 
 
 ### Running Bowtie2
 
