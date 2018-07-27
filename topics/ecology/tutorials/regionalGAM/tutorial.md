@@ -30,7 +30,7 @@ The first step of any Regional GAM data analysis is making sure to have one data
 > 2. Then you can either import `gatekeeper_CM .RData` from [Zenodo](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1) or either import `regional GAM data.csv`from [Zenodo](https://zenodo.org/record/1321885/files/regional%20GAM%20data.csv?download=1)
 
 > ⚠️ Please note that the first above file is on RData and if you choose to use it, you will have to use the tools
-> 1.`RData binary file reader` and `RData parser` 
+> 1.`RData binary file reader` and `RData parser`.
 > 2.`Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data required.
 > You must do it with the right files in the right order to have the columns SPECIES, SITE, YEAR, MONTH, DAY, COUNT 
 
@@ -69,8 +69,8 @@ The first step of any Regional GAM data analysis is making sure to have one data
 > 4. In order to be be able to show the occurence of only one specy, you have to make sure that your file countains only the data concerning this specy.
 >
 >    > 1.`compter le nombre d'occurence de chaque enrégistrement` and select `column 1` délimité par `tabulation`
->    > 2. Copy the full name of the specy you are interested in (for example: "Pyronia tithonus") on the file on csv 
->    >
+>    > 2. Copy the full name of the specy you are interested in (for example: "Pyronia tithonus") from the file on csv 
+>    > 3.`filter des données sur une colonne en utilisant des expressions simples`on the CSV file en utilisant la condition suivante c1=='name of the specy'(for example: c1=='"Pyronia tithonus"')
 >
 > ### {% icon hands_on %} Hands-on: Quality control
 >
