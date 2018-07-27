@@ -63,7 +63,7 @@ First of all the dataset must be uploaded.
 >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "DAY"
 >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "COUNT"
 > 
-> >⚠️ Please note that we left the file on "TREND" aside on purpose because we will be able to show it afterwards using some tools
+>   >  > ⚠️ Please note that we left the file on "TREND" aside on purpose because we will be able to show it afterwards using some tools
 
 >
 >    > ## Re-sampling 
