@@ -34,10 +34,15 @@ First of all the dataset must be uploaded.
 > 2. Then you can either import `gatekeeper_CM .RData` from [Zenodo](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1) or either import `regional GAM data.csv`from [Zenodo](https://zenodo.org/record/1321885/files/regional%20GAM%20data.csv?download=1).
 
 >   >⚠️ Please note that the first above file is on RData and if you choose to use it, you will have to use the tools
->   > 1.`RData binary file reader` and `RData parser`.
->   > 2.`Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data required.
->   > You must do it with the right files in the right order to have the succesivelly the columns SPECIES, SITE, YEAR, MONTH, >     DAY, COUNT 
->   
+>   > *`RData binary file reader` 
+>   > *`RData parser`
+>   > *`Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data required.
+>   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`and select the file on "SPECIE" to the file on "SITE"   >   >  >  * Repeat `Coller deux jeux de données l'un à côté de l'autre`  and select the file obtained above and the one on "YEAR" 
+>   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "MONTH"
+>   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "DAY"
+>   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "COUNT"
+> 
+> >⚠️ Please note that we left the file on "TREND" aside on purpose because we will be able to show it afterwards using some tools
 > ### {% icon tip %} Tip: Importing data via links
 >    >
 >    > * Copy the link location
