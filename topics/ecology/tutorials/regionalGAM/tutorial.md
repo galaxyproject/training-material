@@ -64,7 +64,8 @@ First of all the dataset must be uploaded.
 >
 >
 >    > > 1.`trouver et remplacer des patterns dans des colonnes` on the CSV file. 
->    > > and 
+>    > > * Choose "column 2"
+>    > > * Write "(\.[0-9]+)" which specifies that you don't want the sub-sites to be taken into account.
 >
 >
 >
