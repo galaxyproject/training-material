@@ -18,22 +18,22 @@ You will basically learn how to create a visual material which can be guite easi
 > {:toc}
 >
 {: .agenda}
+>
+>
+# Step 1: Pre processing
 
-# Step 1: Selectionning one specific specy and showing all the data corresponding to it
-
-The first step of any Regional GAM data analysis is making sure to have one dataset of only one specific specy that you will then be able to use. 
-
+The goal of the first step is to upload and prepare the file so that it will be usable for the regional GAM analysis.
+First of all the dataset must be uploaded.
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
-> 1. Create a new history for this tutorial and give it a proper name
-> 2. Then you can either import `gatekeeper_CM .RData` from [Zenodo](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1) or either import `regional GAM data.csv`from [Zenodo](https://zenodo.org/record/1321885/files/regional%20GAM%20data.csv?download=1)
+> 1. Create a new history for this tutorial and give it a proper name.
+> 2. Then you can either import `gatekeeper_CM .RData` from [Zenodo](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1) or either import `regional GAM data.csv`from [Zenodo](https://zenodo.org/record/1321885/files/regional%20GAM%20data.csv?download=1).
 
 > ⚠️ Please note that the first above file is on RData and if you choose to use it, you will have to use the tools
 > 1.`RData binary file reader` and `RData parser`.
 > 2.`Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data required.
 > You must do it with the right files in the right order to have the columns SPECIES, SITE, YEAR, MONTH, DAY, COUNT 
-
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
 >    > * Copy the link location
@@ -55,6 +55,16 @@ The first step of any Regional GAM data analysis is making sure to have one data
 >    > * Import in the history
 >    {: .tip}
 >
+>
+
+# Step 2: Selectionning one specific specy and showing all the data corresponding to it
+
+The second step of any Regional GAM data analysis is making sure to have one dataset of only one specific specy that you will then be able to use. 
+
+
+
+
+>
 >    As default, Galaxy takes the link as name, so rename them.
 >
 >
@@ -68,9 +78,10 @@ The first step of any Regional GAM data analysis is making sure to have one data
 >
 > 4. In order to be be able to show the occurence of only one specy, you have to make sure that your file countains only the data concerning this specy.
 >
->    > 1.`compter le nombre d'occurence de chaque enrégistrement` and select `column 1` délimité par `tabulation`
->    > 2. Copy the full name of the specy you are interested in (for example: "Pyronia tithonus") from the file on csv 
->    > 3.`filter des données sur une colonne en utilisant des expressions simples`on the CSV file en utilisant la condition suivante c1=='name of the specy'(for example: c1=='"Pyronia tithonus"')
+>    > 1.`compter le nombre d'occurence de chaque enrégistrement` and select `column 1` délimité par `tabulation`.
+>    > 2. Copy the full name of the specy you are interested in (for example: "Pyronia tithonus") from the file on csv. 
+>    > 3.`filter des données sur une colonne en utilisant des expressions simples`on the CSV file en utilisant la condition suivante c1=='name of the specy'(for example: c1=='"Pyronia tithonus"').
+>    > 4. `tabular to CSV` on the above data.
 >
 > ### {% icon hands_on %} Hands-on: Quality control
 >
