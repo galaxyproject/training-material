@@ -7,7 +7,7 @@ tutorial_name: Defining trends and create biodiverstiy indicators
 # Introduction
 {:.no_toc}
 
-This exercise uses the public dataset of Reto Schmucki [regional GAM](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1). It is a file recording the presence of various species per site and per days through a period of time. 
+This exercise uses the public dataset of Reto Schmucki [regional GAM](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1). It is a file recording the presence of various species per site and per days through a couple of years. 
 The goal of this exercise is to be able to create biodiversity indicators and abundance trend over time. Using different tools we will show the occurrence of one specie through the years. 
 You could for example try to predict the occurence of one specific specie in a certain type of environnement using the prediction model of climate evolution.
 You will basically learn how to create a visual material which can be guite easily understood and therefore be efficient for a large audience.
@@ -15,6 +15,7 @@ You will basically learn how to create a visual material which can be guite easi
 > ### Agenda
 >
 1. Pre processing
+2. Selectionning one specific specy and showing all the data corresponding to it
 
 > {:toc}
  2. 
@@ -86,12 +87,16 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >    > 2. What are the other entries?
 >    
 >
-> 2. In order to be be able to show the occurrence of only one specie, you have to make sure that your file countains only the data concerning this specie.
+> > In order to be be able to show the occurrence of only one specie, you have to make sure that your file countains only the data concerning this specie.
 >
->    > 1.`compter le nombre d'occurence de chaque enrégistrement` and select `column 1` délimité par `tabulation`.
->    > 2. Copy the full name of the specie you are interested in (for example: "Pyronia tithonus") from the file on csv. 
->    > 3.`filter des données sur une colonne en utilisant des expressions simples`on the CSV file en utilisant la condition suivante c1=='name of the specie'(for example: c1=='"Pyronia tithonus"').
+>    > 1.`compter le nombre d'occurence de chaque enrégistrement` and select "column 1" délimité par "tabulation"
+>    > 2. Copy the full name of the specie you are interested in (for example: "Pyronia tithonus") from the file on CSV 
+>    > 3.`filter des données sur une colonne en utilisant des expressions simples`on the CSV file en utilisant la condition suivante "c1=='name of the specie'"(for example: c1=='"Pyronia tithonus"').
 >    > 4. `tabular to CSV` on the above data.
+>
+>
+>
+> # Step 3: Obtaining a graph which shows 
 >
 > ### {% icon hands_on %} Hands-on: Quality control
 >
