@@ -58,15 +58,15 @@ First of all the dataset must be uploaded.
 >   > *`RData binary file reader`. 
 >   > *`RData parser`.
 >   > *`Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data required.
->   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`and select the file on "SPECIE" to the file on "SITE"   >   >  >  * Repeat `Coller deux jeux de données l'un à côté de l'autre`  and select the file obtained above and the one on "YEAR" 
->   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "MONTH"
->   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "DAY"
->   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "COUNT"
+>   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`and select the file on "SPECIE" to the file on "SITE".   >   >  >  * Repeat `Coller deux jeux de données l'un à côté de l'autre`  and select the file obtained above and the one on "YEAR". 
+>   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "MONTH".
+>   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "DAY".
+>   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "COUNT".
 > 
->   >  > ⚠️ Please note that we left the file on "TREND" aside on purpose because we will be able to show it afterwards using some tools
+>   >  > ⚠️ Please note that we left the file on "TREND" aside on purpose because we will be able to show it afterwards using some tools.
 
 >
->    > ## Re-sampling 
+>    > ## Re-sampling. 
 >    > The SITES of the dataset you are using are very precise and they are classified in sub-categories of sites. You don't   >      really need our file to contain all these sub-sites because it lengthens the file processing time on E-Galaxy. This is 
 >      the reason why you have to specify you don't want the sub-sites to be considered
 >
