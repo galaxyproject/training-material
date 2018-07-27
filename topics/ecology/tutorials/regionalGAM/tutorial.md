@@ -23,7 +23,7 @@ You will basically learn how to create a file with which you can create a visual
 {: .agenda}
 >
 >
-# Step 1: Pre processing
+# Step 1: Pre-processing
 
 The goal of the first step is to upload and prepare the file so that it will be usable for the regional GAM analysis.
 First of all the dataset must be uploaded.
@@ -95,14 +95,14 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >
 > > In order to be be able to show the occurrence of only one specie, you have to make sure that your file countains only the data concerning this specie.
 >
->    > 1.`compter le nombre d'occurence de chaque enrégistrement` and select "column 1" délimité par "tabulation"
->    > 2. Copy the full name of the specie you are interested in (for example: "Pyronia tithonus") from the file on CSV 
->    > 3.`filter des données sur une colonne en utilisant des expressions simples`on the CSV file en utilisant la condition suivante "c1=='name of the specie'"(for example: c1=='"Pyronia tithonus"').
+>    > 1.`compter le nombre d'occurrence de chaque enrégistrement` and select "column 1" délimité par "tabulation".
+>    > 2. Copy the full name of the specie you are interested in (for example: "Pyronia tithonus") from the file on CSV. 
+>    > 3.`filter des données sur une colonne en utilisant des expressions simples`on the CSV file en utilisant la condition    >      suivante "c1=='name of the specie'"(for example: c1=='"Pyronia tithonus"').
 >    > 4. `tabular to CSV` on the above data.
 >
 >
 >
-> # Step 3: Obtaining a graph which shows 
+ # Step 3: flight curve 
 >
 > ### {% icon hands_on %} Hands-on: Quality control
 >
