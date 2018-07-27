@@ -35,7 +35,7 @@ First of all the dataset must be uploaded.
 >   >⚠️ Please note that the first above file is on RData and if you choose to use it, you will have to use the tools
 >   > 1.`RData binary file reader` and `RData parser`.
 >   > 2.`Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data required.
->   > You must do it with the right files in the right order to have the succesivelly the columns SPECIES, SITE, YEAR, MONTH, DAY, COUNT 
+>   > You must do it with the right files in the right order to have the succesivelly the columns SPECIES, SITE, YEAR, MONTH, >     DAY, COUNT 
 >   
 > ### {% icon tip %} Tip: Importing data via links
 >    >
@@ -66,20 +66,14 @@ First of all the dataset must be uploaded.
 >    > > 1.`trouver et remplacer des patterns dans des colonnes` on the CSV file. 
 >    > > * Choose "column 2"
 >    > > * Write "(\.[0-9]+)" which specifies that you don't want the sub-sites to be taken into account.
->
->
->
->
+>    > > 2.`tabular to CSV`on the file obtained above
+>    
 >
 >
 
 # Step 2: Selectionning one specific specie and showing all the data corresponding to it
 
 The second step of any Regional GAM data analysis is making sure to have one dataset of only one specific specie that you will then be able to use. 
-
-
-
-
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
