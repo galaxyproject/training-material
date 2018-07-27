@@ -14,8 +14,9 @@ You will basically learn how to create a visual material which can be guite easi
 
 > ### Agenda
 >
-> 1. TOC
+> 1. Pre processing
 > {:toc}
+ 2. 
 >
 {: .agenda}
 >
@@ -30,11 +31,12 @@ First of all the dataset must be uploaded.
 > 1. Create a new history for this tutorial and give it a proper name.
 > 2. Then you can either import `gatekeeper_CM .RData` from [Zenodo](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1) or either import `regional GAM data.csv`from [Zenodo](https://zenodo.org/record/1321885/files/regional%20GAM%20data.csv?download=1).
 
-> ⚠️ Please note that the first above file is on RData and if you choose to use it, you will have to use the tools
-> 1.`RData binary file reader` and `RData parser`.
-> 2.`Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data required.
-> You must do it with the right files in the right order to have the columns SPECIES, SITE, YEAR, MONTH, DAY, COUNT 
->    > ### {% icon tip %} Tip: Importing data via links
+>   >⚠️ Please note that the first above file is on RData and if you choose to use it, you will have to use the tools
+>   > 1.`RData binary file reader` and `RData parser`.
+>   > 2.`Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data required.
+>   > You must do it with the right files in the right order to have the succesivelly the columns SPECIES, SITE, YEAR, MONTH, DAY, COUNT 
+>   
+> ### {% icon tip %} Tip: Importing data via links
 >    >
 >    > * Copy the link location
 >    > * Open the Galaxy Upload Manager
