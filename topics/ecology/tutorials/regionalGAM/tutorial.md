@@ -9,7 +9,7 @@ tutorial_name: Defining trends and create biodiverstiy indicators
 
 This exercise uses the public dataset of Reto Schmucki [regional GAM](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1). It is a file recording the presence of various species per site and per days through a couple of years. 
 The goal of this exercise is to be able to create biodiversity indicators and abundance trend over time based on this dataset. Using different tools we will show the occurrence of one specie through the years. 
-You could for example try to predict the occurence of one specific specie in a certain type of environnement using the prediction model of climate evolution.
+You could for example try to predict the occurence of one specific species in a certain type of environnement using the prediction model of climate evolution.
 You will basically learn how to create a file with which you can create a visual material that can be quite easily understood and therefore be efficient for a large audience.
 
 > ### Agenda
@@ -55,16 +55,16 @@ First of all the dataset must be uploaded.
 >    {: .tip}
 
 >   >⚠️ Please note that the first file mentionned above is on RData and if you choose to use it, you will have to use the tools
->   > *`RData binary file reader`. 
->   > *`RData parser`.
->   > *`Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data required.
->   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`and select the file on "SPECIE" to the file on "SITE".   >   >  >  * Repeat `Coller deux jeux de données l'un à côté de l'autre`  and select the file obtained above and the one on "YEAR". 
+>   > * `RData binary file reader`. 
+>   > * `RData parser`.
+>   > * `Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data required.
+>   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`and select the file on "SPECIES" to the file on "SITE".   >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`  and select the file obtained above and the one on>                   >         "YEAR". 
 >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "MONTH".
 >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "DAY".
 >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "COUNT".
 > 
 >   >  > ⚠️ Please note that we left the file on "TREND" aside on purpose because we will be able to show it afterwards using some tools.
-
+>
 >
 >    > ## Re-sampling. 
 >    > The SITES of the dataset you are using are very precise and they are classified in sub-categories of sites. You don't   >      really need our file to contain all these sub-sites because it lengthens the file processing time on E-Galaxy. This is 
