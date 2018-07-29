@@ -1,10 +1,12 @@
 # Settings
 JEKYLL=jekyll
+PORT?=4000
+HOST?=localhost
 CHROME=google-chrome-stable
 TUTORIALS=$(shell find _site/training-material -name 'tutorial.html' | sed 's/_site\/training-material\///')
 SLIDES=$(shell find _site/training-material -name 'slides.html' | sed 's/_site\/training-material\///')
 SLIDES+=$(shell find _site/training-material/*/*/slides/* | sed 's/_site\/training-material\///')
-SITE_URL=http://localhost:4000/training-material
+SITE_URL=http://${HOST}:${PORT}/training-material
 PDF_DIR=_pdf
 REPO=$(shell echo "$${ORIGIN_REPO:-galaxyproject/training-material}")
 BRANCH=$(shell echo "$${ORIGIN_BRANCH:-master}")
@@ -46,11 +48,11 @@ install: clean ## install dependencies
 .PHONY: install
 
 serve: ## run a local server}
-	${JEKYLL} serve -d _site/training-material
+	${JEKYLL} serve -d _site/training-material -P ${PORT} -H ${HOST}
 .PHONY: serve
 
 detached-serve: clean ## run a local server in detached mode
-	${JEKYLL} serve --detach -d _site/training-material
+	${JEKYLL} serve --detach -d _site/training-material -P ${PORT} -H ${HOST}
 .PHONY: detached-serve
 
 build: clean ## build files but do not run a server
