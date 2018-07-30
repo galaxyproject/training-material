@@ -54,7 +54,7 @@ First of all the dataset must be uploaded.
 >    > * Import in the history
 >    {: .tip}
 
->   >⚠️ Please note that the first file mentionned above is on RData and if you choose to use it, you will have to use the tools
+>   >⚠️ Please note that the first file mentionned above is on RData and if you choose to use it, you will have to use the following tools:
 >   > * `RData binary file reader`. 
 >   > * `RData parser`.
 >   > * `Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data required.
