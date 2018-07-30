@@ -7,6 +7,38 @@ tutorial_name: species distribution modeling
 # Introduction
 {:.no_toc}
 
+Species Modeling Distribution can help understand the distribution of a species depending of environemental parameters such as temperature or humidity. It can also help understand th impact of climate change on the repartiotion of some species. This is done done by coupling data occurences of a species and environemental data.
+
+The goal of this study is to model an ecological niche using Species Modeling Distribution through the interactive environement Wallace.    
+
+# Step 1: Loading a dataset
+
+In this study the data set are all imported from the tool `Get species occurrences data and taxref informations` in Galaxy-E. With this tool, data are available from differents databanks like gbif, bison, inat and other.
+
+>    > ### {% icon tip %} Tip: Importing data set from a data bank
+>    >
+>    > * Go into "upload files" (top panel) then "Get species occurrences data and taxref informations"
+>    > * Fill the scientific name of the species wanted wanted 
+>    > * Choose the data source and the number of occurences needed
+>    > * Click on "Execute"
+
+Then use `Tabular to CSV` on the new file to have the right format to use in Wallace.
+
+# Step 2: Using Wallace
+
+Wallace is an interactive interface which can simulate a species modeling distribution.
+
+## Obtain occurrence data
+
+With this you can either upload data direcly from Wallace or you can upload file you've loaded earlier frome Galaxy-E
+
+## Process occurrence data
+
+
+
+
+
+
 This exercise uses the dataset from the Nature publication by [Ross-Inness et al., 2012](https://www.ncbi.nlm.nih.gov/pubmed/22217937).
 The goal of this article was to identify the binding sites of the Estrogen receptor, a transcription factor known to be associated with different types of breast cancer.
 
