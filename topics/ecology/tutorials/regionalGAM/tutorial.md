@@ -89,20 +89,19 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 > * Selct "column 1"
 > * Délimité par "tabulation"
 > * "Avec la valeur la plus présente en premier 
-> 1. Inspect the file by clicking on the `eye` icon
+> 2. Inspect the file by clicking on the `eye` icon to check how many species are taken into account.
+> > If there is ony one species you can't skip the following steps ang go directly to "tabular to CSV"
 >
->    > ### {% icon question %} Questions
->    >
->    > 1. How many species are represented on this file ?
->    > 2. What are the other entries?
+>    > ### Create a new file concerning only the data of one species
+>    > 1. Copy the name of the species you are interested in from the file on CSV (for example: "Pyronia tithonus")
+>    > 2. Click on `filtrer`
+>    > * Replace 'habitat2' with the name of the species (for example: c1=='"Pyronia tithonus"'  instead of c1=='habitat2')  
+>    > * Select "Nombre de lignes d'en-tête à passer": 0
+>    > * You can repeat this set of actions as much as is necessary changing only yhe name of the species taken into account
+>    > Click `tabular to CSV` and select the file you've just created on one species
+>    > * Repeat this action with all the dfferents files on different species 
 >    
 >
-> > In order to be be able to show the occurrence of only one specie, you have to make sure that your file countains only the data concerning this specie.
->
->    > 1.`compter le nombre d'occurrence de chaque enrégistrement` and select "column 1" délimité par "tabulation".
->    > 2. Copy the full name of the specie you are interested in (for example: "Pyronia tithonus") from the file on CSV. 
->    > 3.`filter des données sur une colonne en utilisant des expressions simples`on the CSV file en utilisant la condition    >      suivante "c1=='name of the specie'"(for example: c1=='"Pyronia tithonus"').
->    > 4. `tabular to CSV` on the above data.
 >
 >
 >
