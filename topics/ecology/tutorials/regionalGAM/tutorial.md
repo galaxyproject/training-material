@@ -67,7 +67,7 @@ First of all the dataset must be uploaded.
 >
 >
 >    > ## Re-sampling. 
->    > The list of SITES of the dataset you are using are is really long and the SITES are classified into sub-categories.    >    > Your file doesn't really need  to contain all these sub-sites because it lengthens the file processing time on Galaxy-     >    > E.This is the reason why you have to specify you don't want the sub-sites to be considered in order to create a new >  >    > file that you will be able to use.   
+>    > The list of SITES of the dataset you are using are is really long and the SITES are classified into sub-categories.    >    > Your file doesn't really need  to contain all these sub-sites because it lengthens the file processing time on Galaxy-     >    > E.This is the reason why you have to specify you don't want the sub-sites to be considered in order to create a new     >    > file that you will be able to use.   
 >    >
 >    >
 >    > > 1.`trouver et remplacer des patterns dans des colonnes` on the CSV file. 
