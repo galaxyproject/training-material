@@ -58,7 +58,7 @@ First of all the dataset must be uploaded.
 >   > * `RData binary file reader`. 
 >   > * `RData parser`.
 >   > * `Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data required.
->   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`and select the file on "SPECIES" to the file on "SITE".   >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`  and select the file obtained above and the one on>                   >         "YEAR". 
+>   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`and select the file on "SPECIES" and the file on "SITE".   >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`  and select the file obtained above and the one on>                   >         "YEAR". 
 >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "MONTH".
 >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "DAY".
 >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "COUNT".
@@ -67,9 +67,9 @@ First of all the dataset must be uploaded.
 >
 >
 >    > ## Re-sampling. 
->    > The list of SITES of the dataset you are using are is really long and the SITES are classed into sub-categories. Your     >      file doesn't really need  to contain all these sub-sites because it lengthens the file processing time on Galaxy-E.        >      This is the reason why you have to specify you don't want the sub-sites to be considered in order to create a new file 
->      that you will be able to use. 
->
+>    > The list of SITES of the dataset you are using are is really long and the SITES are classified into sub-categories.    >    > Your file doesn't really need  to contain all these sub-sites because it lengthens the file processing time on Galaxy-     >    > E.This is the reason why you have to specify you don't want the sub-sites to be considered in order to create a new >  >    > file that you will be able to use.   
+>    >
+>    >
 >    > > 1.`trouver et remplacer des patterns dans des colonnes` on the CSV file. 
 >    > > * Choose "column 2"
 >    > > * Write "(\.[0-9]+)" which specifies that you don't want the sub-sites to be taken into account.
@@ -80,11 +80,15 @@ First of all the dataset must be uploaded.
 
 # Step 2: Selectionning one specific specie and showing all the data corresponding to it
 
-The second step of any Regional GAM data analysis is making sure to have one dataset of only one specific specie that you will then be able to use. 
+The second step of any Regional GAM data analysis is making sure to have one dataset of only one specific specie that you will then be able to use. Because a graph is occurent only if it shows the occurence of one species trough the years. If you want to compare this evolution with the one of another species, you will have to superimpose the graphs onto the others. 
 >
->    As default, Galaxy takes the link as name, so rename them.
->
->
+>    
+> ## Count on many species are taken into account in the dataset your are using 
+> As the dataset is important and countains manw informations, you want to know if the data are about only one species or > > > more.
+> 1. Click on `compter le nombre d'occurence de chaque enrégistrement`
+> * Selct "column 1"
+> * Délimité par "tabulation"
+> * "Avec la valeur la plus présente en premier 
 > 1. Inspect the file by clicking on the `eye` icon
 >
 >    > ### {% icon question %} Questions
