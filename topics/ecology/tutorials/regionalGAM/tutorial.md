@@ -14,13 +14,11 @@ You will basically learn how to create a file with which you can create a visual
 
 > ### Agenda
 >
-1. Pre processing
-2. Selectionning one specific species and show all the data corresponding to it
+1. Pre processing.
+2. Selectionning one specific species and show all the data corresponding to it.
+3. Show the occurence of the chosen species through the years.
+> {:toc
 
-> {:toc}
- 2. 
->
-{: .agenda}
 >
 >
 # Step 1: Pre-processing
@@ -57,7 +55,7 @@ First of all the dataset must be uploaded.
 >   >⚠️ Please note that the first file mentionned above is on RData and if you choose to use it, you will have to use the following tools:
 >   > * `RData binary file reader`. 
 >   > * `RData parser`.
->   > * `Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data required.
+>   > * Search for the tool `Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data     >   > required.
 >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`and select the file on "SPECIES" and the file on "SITE".   >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`  and select the file obtained above and the one on                   >   >  >   "YEAR". 
 >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "MONTH".
 >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "DAY".
@@ -70,10 +68,10 @@ First of all the dataset must be uploaded.
 >    > The list of SITES of the dataset you are using are is really long and the SITES are classified into sub-categories.    >    > Your file doesn't really need  to contain all these sub-sites because it lengthens the file processing time on Galaxy-     >    > E.This is the reason why you have to specify you don't want the sub-sites to be considered in order to create a new     >    > file that you will be able to use.   
 >    >
 >    >
->    > > 1.`trouver et remplacer des patterns dans des colonnes` on the CSV file. 
+>    > > 1. Search for the tool `trouver et remplacer des patterns dans des colonnes` on the file on CSV. 
 >    > > * Choose "column 2"
 >    > > * Write "(\.[0-9]+)" which specifies that you don't want the sub-sites to be taken into account.
->    > > 2. Click on`tabular to CSV`and select the file obtained above
+>    > > 2. Search for the tool `tabular to CSV`and select the file obtained above
 >    
 >
 >
@@ -85,8 +83,8 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >    
 > ## Count on many species are taken into account in the dataset your are using 
 > As the dataset is important and countains manw informations, you want to know if the data are about only one species or > > > more.
-> 1. Click on `compter le nombre d'occurence de chaque enrégistrement`.
-> * Selct "column 1".
+> 1. Search for the tool `compter le nombre d'occurence de chaque enrégistrement`.
+> * Select "column 1".
 > * Délimité par "tabulation".
 > * "Avec la valeur la plus présente en premier.
 > 2. Inspect the file by clicking on the `eye` icon to check how many species are taken into account.
@@ -94,11 +92,11 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >
 >    > ### Create a new file concerning only the data of one species
 >    > 1. Copy the name of the species you are interested in from the file on CSV (for example: "Pyronia tithonus").
->    > 2. Click on `filtrer`.
+>    > 2. Search for the tool`filtrer`.
 >    > * Replace 'habitat2' with the name of the species (for example: c1=='"Pyronia tithonus"'  instead of c1=='habitat2')  
 >    > * Select "Nombre de lignes d'en-tête à passer": 0.
 >    > * You can repeat this set of actions as much as is necessary changing only yhe name of the species taken into account.
->    > Click on `tabular to CSV` and select the file you've just created on one species.
+>    > Search for the tool`tabular to CSV` and select the file you've just created on one species.
 >    > * Repeat this action with all the dfferents files on different species. 
 >    
 >
@@ -109,7 +107,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >
 > ### Create a flight curve 
 >
-> 1. Click on `flight curve`
+> 1. Search for the tool `flight curve`
 > * Select the file on CSV with the data on one species
 >
 > Based on the flight curve, you can create a line chart which shows the occurence of the species through the years on a very visual material 
@@ -125,8 +123,18 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >    > 5. Visualize
 >    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 >
-{: .hands_on}
-
+>
+> ### Regional GAM per year and per site 
+>
+> 1. Look for the tool `Abundance index`
+> * "Fichier de comptage": tabular on CSV corresponding to the data of one species. 
+> * "Flight curve output": flight curved obtained above. 
+>
+>
+> ### Previsions on the temporal 
+>    > 1. Look for the tool `Expected temporal trend`
+>    >
+>    >
 # Step 4: Show the occurrence of the chosen species through the years
 
 In order to be able to draw conclusions based on the occurrence, you have to create a flight curve that shows the occurence of the species you chose. 
