@@ -105,21 +105,25 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >
 >
 >
- # Step 3: flight curve 
+ # Step 3: Show the occurrence of the chosen species through the years
 >
-> ### {% icon hands_on %} Hands-on: Quality control
+> ### Create a flight curve 
 >
-> 1. Run **Trim Galore!** {% icon tool %} with
->    - "Is this library paired- or single-end?" to `Single-end`
->    - "Reads in FASTQ format" to the imported file
->    - "Trim Galore! advanced settings" to `Full parameter list`
->    - "Trim low-quality ends from reads" to `15`
->    - "Overlap with adapter sequence required to trim a sequence" to `3`
+> 1. Click on `flight curve`
+> * Select the file on CSV with the data on one species
 >
->    > ### {% icon tip %} Tip: Importing data from a data library
->    >
->    > If your FASTQ files cannot be selected, you might check whether their format is FASTQ with Sanger-scaled quality values (`fastqsanger`). You can edit the data type by clicking on the `pencil` symbol.
->    {: .tip}
+> Based on the flight curve, you can create a line chart which shows the occurence of the species through the years on a very visual material 
+>
+>    > ### {% icon tip %} Visualiser 
+>    > 1. Select `Charts`
+>    > 2. Give it a proper name
+>    > 3. Select a visualization: "line chart (NVD 3) 
+>    > 4. Select data 
+>    > * "Data point labels": Column 1 
+>    > * "Values for x-axis": Column 2
+>    > * "Values for y-axis": Column 6
+>    > 5. Visualize
+>    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 >
 {: .hands_on}
 
