@@ -130,7 +130,16 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 > * "Fichier de comptage": tabular on CSV corresponding to the data of one species. 
 > * "Flight curve output": flight curved obtained above. 
 >
->
+> Based on the abundance index, we can create chart showing the abundance of the species at a certain date. 
+>    > 1. Select `Charts`
+>    > 2. Give it a proper name
+>    > 3. Select a visualization: "Bar diagram (NVD 3)" 
+>    > 4. Select data 
+>    > * "Data point labels": Column 1 
+>    > * "Values for x-axis": Column 3
+>    > * "Values for y-axis": Column 4
+>    > 5. Visualize
+>    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 > ### Previsions on the temporal 
 >    > 1. Look for the tool `Expected temporal trend`
 >    >
