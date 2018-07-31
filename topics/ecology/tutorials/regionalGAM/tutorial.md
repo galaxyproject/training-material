@@ -34,6 +34,14 @@ First of all the dataset must be uploaded.
 > 1. Create a new history for this tutorial and give it a proper name.
 > 2. Then you can either import `gatekeeper_CM .RData` from [Zenodo](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1) or either import `regional GAM data.csv`from [Zenodo](https://zenodo.org/record/1321885/files/regional%20GAM%20data.csv?download=1).
 
+
+>    ```
+>    (https://zenodo.org/record/1324204/files/regional%20GAM%20data.csv?download=1)
+>    (https://zenodo.org/record/1324204/files/gatekeeper_CM%20.RData?download=1csv)
+>     (https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv?download=1)
+>     
+>    ```
+
 > ### {% icon tip %} Tip: Importing data via links
 >    >
 >    > * Copy the link location
