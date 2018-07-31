@@ -7,6 +7,9 @@ tutorial_name: Regional GAM
 # Introduction
 {:.no_toc}
 
+<!-- This is a comment. -->
+
+
 This exercise uses the public dataset of Reto Schmucki [regional GAM](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1). It is a file recording the presence of various species per site and per days through a couple of years. 
 The goal of this exercise is to be able to create biodiversity indicators and abundance trend over time based on this dataset. Using different tools we will show the occurrence of one specie through the years. 
 You could for example try to predict the occurence of one specific species in a certain type of environnement using the prediction model of climate evolution.
@@ -62,6 +65,27 @@ First of all the dataset must be uploaded.
 >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "COUNT".
 > 
 >   >  > ⚠️ Please note that we left the file on "TREND" aside on purpose because we will be able to show it afterwards using some tools.
+>
+>
+>
+>
+> ### {% icon question %} Questions
+>
+> 1. Why do you need to use `Coller deux jeux de données l'un à côté de l'autre` 
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Because you want to create a single file which countains all the data. You decided to upload a dataset on RData and therefore you had to use `RData binary file reader` and `RData parser`. This last tool treats the file and allows you to open it on Galaxy-E but it creates as many files as there are columns.
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
+
+
 >
 >
 >    > ## Re-sampling. 
