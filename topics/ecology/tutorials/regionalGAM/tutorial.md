@@ -68,8 +68,7 @@ First of all the dataset must be uploaded.
 >    > The list of SITES of the dataset you are using are is really long and the SITES are classified into sub-categories.    >    > Your file doesn't really need  to contain all these sub-sites because it lengthens the file processing time on Galaxy-     >    > E.This is the reason why you have to specify you don't want the sub-sites to be considered in order to create a new     >    > file that you will be able to use.   
 >    >
 >    >
->    > > 1. Search for the tool `trouver et remplacer des patterns dans des colonnes` on the file on CSV. 
->    > > 2. Use the following parameters.
+>    > > 1. Search for the tool `trouver et remplacer des patterns dans des colonnes` on the file on CSV with the following   >        parameters.
 >    > > * Click on "insert checks"
 >    > > * Trouver l'expression suivante: "(\.[0-9]+)" which specifies that you don't want the sub-sites to be taken into                                    >    > > account.
 >    > > * Remplacement: "leave it empty".
@@ -85,21 +84,23 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >    
 > ## Count on many species are taken into account in the dataset your are using 
 > As the dataset is important and countains manw informations, you want to know if the data are about only one species or > > > more.
-> 1. Search for the tool `compter le nombre d'occurence de chaque enrégistrement`.
-> * Select "column 1".
-> * Délimité par "tabulation".
-> * "Avec la valeur la plus présente en premier.
+> 1. Search for the tool `compter le nombre d'occurence de chaque enrégistrement`with the following parameters.
+> * Select: "column 1".
+> * Délimité par: "tabulation".
+> * Comment les résultats doivent t'ils être triés ?: "Avec la valeur la plus présente en premier".
 > 2. Inspect the file by clicking on the `eye` icon to check how many species are taken into account.
-> > If there is ony one species you can't skip the following steps ang go directly to "tabular to CSV"
+> > If there is ony one species you can't skip the following steps ang go directly convert your file usin the tool `tabular to >   CSV`
 >
 >    > ### Create a new file concerning only the data of one species
 >    > 1. Copy the name of the species you are interested in from the file on CSV (for example: "Pyronia tithonus").
->    > 2. Search for the tool`filtrer`.
->    > * Replace 'habitat2' with the name of the species (for example: c1=='"Pyronia tithonus"'  instead of c1=='habitat2')  
->    > * Select "Nombre de lignes d'en-tête à passer": 0.
->    > * You can repeat this set of actions as much as is necessary changing only yhe name of the species taken into account.
->    > Search for the tool`tabular to CSV` and select the file you've just created on one species.
->    > * Repeat this action with all the dfferents files on different species. 
+>    > 2. Search for the tool`filtrer des données dur une colonne en utilisant des expressions simples`with the following   parameters.
+>    > * En utilisant la condition suivante: c1=='habitat2' replacing 'habitat2' with the name of the species (for example: c1=='"Pyronia tithonus"'  instead of c1=='habitat2')  
+>    > * Nombre de lignes d'en-tête à passer: "0".
+>    > * You can repeat this set of actions as much as is necessary changing only the name of the species taken into account.
+>    > 3. Search for the tool`tabular to CSV` with the following parameters 
+>    > * Choose the file you've just created 
+>    > * Separators: ",".
+>    > 4. Repeat this last operation on all the differents files on different species. 
 >    
 >
 >
