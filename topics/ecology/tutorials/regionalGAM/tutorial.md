@@ -16,11 +16,13 @@ You could for example try to predict the occurence of one specific species in a 
 You will basically learn how to create a file with which you can create a visual material that can be quite easily understood and therefore be efficient for a large audience.
 
 > ### Agenda
->
-1. Pre processing.
+> In this tutorial, we will cover:
+1. Pre-processing.
+> {:pre-processing}
 2. Selectionning one specific species and show all the data corresponding to it.
+> {:selectionning one specific species and show all te data corresponding to it}
 3. Show the occurence of the chosen species through the years.
-> {:toc
+> {:show the occurence of the chosen species through the years}
 
 >
 >
