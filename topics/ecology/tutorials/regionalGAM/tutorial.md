@@ -17,11 +17,11 @@ You will basically learn how to create a file with which you can create a visual
 
 > ### Agenda
 > In this tutorial, we will cover:
-1. Pre-processing.
+1. Pre-processing
 > {:pre-processing}
-2. Selectionning one specific species and show all the data corresponding to it.
+2. Selectionning one specific species and show all the data corresponding to it
 > {:selectionning one specific species and show all te data corresponding to it}
-3. Show the occurence of the chosen species through the years.
+3. Show the occurence of the chosen species through the years
 > {:show the occurence of the chosen species through the years}
 
 >
@@ -34,7 +34,7 @@ First of all the dataset must be uploaded.
 >  ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial and give it a proper name.
-> 2. Import the following files from[Zenodo](https://zenodo.org/record/1324204#.W2BmRn7fNE4) from a data
+> 2. Import the following files from[Zenodo](https://zenodo.org/record/1324204#.W2BmRn7fNE4) or from a data
 >    library named `regional GAM data tutorial`
 >
 >
