@@ -59,8 +59,8 @@ First of all the dataset must be uploaded.
 >   > * 1. Note also that he first file mentionned above is on RData and if you choose to use it, you will have to use the following tools:
 >   > * `RData binary file reader`. 
 >   > * `RData parser`.
->   > * Search for the tool `Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data     >   > required.
->   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`and select the file on "SPECIES" and the file on "SITE".   >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`  and select the file obtained above and the one on                   >   >  >   "YEAR". 
+>   > * Search for the tool `Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data     required.
+>   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`and select the file on "SPECIES" and the file on "SITE".   >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`  and select the file obtained above and the one on                 "YEAR". 
 >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "MONTH".
 >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "DAY".
 >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "COUNT".
