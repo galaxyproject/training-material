@@ -29,16 +29,19 @@ You will basically learn how to create a file with which you can create a visual
 The goal of the first step is to upload and prepare the file so that it will be usable for the regional GAM analysis.
 First of all the dataset must be uploaded.
 
-> ### {% icon hands_on %} Hands-on: Upoading dataset
+>  ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial and give it a proper name.
-> 2. Then you can either import `gatekeeper_CM .RData` from [Zenodo](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1) or either import `regional GAM data.csv`from [Zenodo](https://zenodo.org/record/1321885/files/regional%20GAM%20data.csv?download=1).
-
-
+> 2. Import the following files from[Zenodo](https://zenodo.org/record/1321885) or from a data
+>    library named `regional GAM data tutorial`
+>
+>
+>
+>
 >    ```
->    (https://zenodo.org/record/1324204/files/regional%20GAM%20data.csv?download=1)
->    (https://zenodo.org/record/1324204/files/gatekeeper_CM%20.RData?download=1csv)
->     (https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv?download=1)
+>    [Unispecies dataset.csv](https://zenodo.org/record/1324204/files/regional%20GAM%20data.csv?download=1)
+>    [Unispecies dataset.RData](https://zenodo.org/record/1324204/files/gatekeeper_CM%20.RData?download=1csv)
+>    [Multispecies dataset.csv](https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv?download=1)
 >     
 >    ```
 
