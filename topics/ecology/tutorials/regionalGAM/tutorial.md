@@ -77,7 +77,7 @@ First of all the dataset must be uploaded.
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Because you want to create a single file which countains all the data. You decided to upload a dataset on RData and therefore you had to use `RData binary file reader` and `RData parser`. This last tool treats the file and allows you to open it on Galaxy-E but it creates as many files as there are columns.
+> > 1. Because you want to create a single file which countains all the data. You decided to upload a dataset on RData and therefore you had to use `RData binary file reader` and `RData parser`. This last tool treats the file and allows you to open it on Galaxy-E but it creates as many files as there are columns. This is the reason why you had to carry out on a set of actions ending by the creation of one complete file. 
 > > 2. Answer for question2
 > >
 > {: .solution}
