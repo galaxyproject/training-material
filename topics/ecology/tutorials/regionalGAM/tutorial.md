@@ -169,12 +169,15 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >    > * "Values for y-axis": `"Column 4"`
 >    > 5. Visualize
 >    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
-> ### Previsions on the temporal 
+> ### Expected temporal trend
 >    > 1. Look for the tool `Expected temporal trend`
 >    > * Select the file obtained afer the abundance index.
 >    
+> ⚠️ Please note that sometimes the expected temporal trend can't be done. It happens that the data are to random or that to many parameters must be taken into account and therefore it isn't possible for the software to estimate the expected temporal trend.
+
+
+
 # Step 4: Show the occurrence of the chosen species through the years
 
-In order to be able to draw conclusions based on the occurrence, you have to create a flight curve that shows the occurence of the species you chose. 
 
 
