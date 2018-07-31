@@ -131,7 +131,7 @@ First of all the dataset must be uploaded.
 The second step of any Regional GAM data analysis is making sure to have one dataset of only one specific species that you will then be able to use. Because a graph is occurent only if it shows the occurence of one species trough the years. If you want to compare this evolution with the one of another species, you will have to superimpose the graphs onto the others. 
 >
 >    
-> ## You want to know on how many species are taken into account in the datqet you are using.
+> ## How many species are taken into account in this dataset
 > As the dataset is important and countains manw informations, you want to know wether the data are about only one species or  more.
 > 1. Search for the tool `compter le nombre d'occurence de chaque enrégistrement`with the following parameters.
 > * Compter les occurrences des valeurs présentes dans la(les) colonne(s): select: `"column 1"`
