@@ -8,13 +8,12 @@ tutorial_name: formation_of_super-structures_on_xi
 {:.no_toc}
 
 This exercise uses the published data from [Chen-Yu Wang et al., 2018](https://www.cell.com/cell/fulltext/S0092-8674(18)30584-1).
-The goal of this research was to investigate the mechanism by which SMCHD1 gene shapes the Xi and represses gene expression.
+The goal of this research is to investigate the mechanism by which the SMCHD1 gene shapes the Xi (inactive X chromosome) and represses the gene expression.
 
-To this end, several ChIP-seq experiments were performed on both wild-type and SMCHD1 gene knockdown cells including ChIP data for H3K27me3, H3K4me3 histone marks and CTCF transcription factor which will be used in the upcoming tutorial to present a step by step ChIP-seq data analysis.
+To this end, several ChIP-seq experiments were performed on both wild-type and SMCHD1 gene knockdown samples to study the SMCHD1 effect. It include ChIP-seq data for H3K27me3, H3K4me3 histone marks and the CTCF transcription factor which will be used in the upcoming tutorial to present a step by step ChIP-seq data analysis.
 
 During the following steps, the corresponding 'input' samples, for which the same treatment as the ChIP-seq samples was done except for the immunoprecipitation step, are also used along with the 'ChIP-seq' samples to identify the potential sequencing bias and help for differential analysis.
 
-Because of the long processing time for the large original files, we have extracted the data from the chromosome X and provide you with the already processed data for the subsequent steps.
 
 > ### Agenda
 >
@@ -25,12 +24,12 @@ Because of the long processing time for the large original files, we have extrac
 
 # Step 1: Quality control and treatment of the sequences
 
-The first step of any ChIP-Seq data analysis is quality control of the raw sequencing data.
+The first step of any ChIP-Seq data analysis is quality control of the raw sequencing data. The provided files for this step were already sub-sampled in the interest of saving time.
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
 > 1. Create a new history for this tutorial and give it a proper name
-> 2. Import `wt_H3K4me3_read1.fastq` (link in [Zenodo](https://zenodo.org/record/1321974/files/wt_H3K4me3_read1.fastq)) and `wt_H3K4me3_read2.fastq` (link in [Zenodo](https://zenodo.org/record/1321974/files/wt_H3K4me3_read2.fastq)) from
+> 2. Import `wt_H3K4me3_read1.fastq.gz` (link in [Zenodo](https://zenodo.org/record/1324070/files/wt_H3K4me3_read1.fastq.gz)) and `wt_H3K4me3_read2.fastq.gz` (link in [Zenodo](https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz)) from
  [Zenodo](https://zenodo.org/) or from the data library into the history
 >
 >    > ### {% icon tip %} Tip: Importing data via links
@@ -96,7 +95,6 @@ It is often necessary to trim sequenced read, for example, to get rid of bases t
 >    {: .tip}
 >
 {: .hands_on}
-
 # Step 2: Mapping of the reads
 
 In order to figure where the sequenced DNA fragments originated from in the genome, the short reads must be aligned to the reference genome. This is equivalent to solving a jigsaw puzzles, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way may, however, take a couple of weeks.
@@ -112,6 +110,7 @@ Nowadays, there are many read alignment programs for shotgun sequenced DNA, Bowt
 >    - "FASTA/Q file" to the Trim Galore! output with the trimmed reads
 >    - "Will you select a reference genome from your history or use a built-in index?" to `Use a built-in genome index`
 >    - "Select reference genome" to `Mouse (Mus musculus): mm10`
+>    - "Save the bowtie2 mapping statistics to the history" to `Yes`
 >    - "Execute"
 >
 >    > ### {% icon question %} Questions
@@ -119,8 +118,8 @@ Nowadays, there are many read alignment programs for shotgun sequenced DNA, Bowt
 >    > 1. How many reads where mapped?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. This information can be accessed by clicking on the resulting history entry. You can see some basic mapping statistics once the alignment is completed. 100220 (81.55%) aligned concordantly exactly 1 time
->    22350 (18.19%) aligned concordantly >1 times.
+>    > > 1. This information can be accessed from `mapping stats`. You can see the mapping statistics once the alignment is completed. 43719 (90.27%) aligned concordantly exactly 1 time and 
+>    3340 (6.90%) aligned concordantly >1 times.
 >    > {: .solution }
 >    {: .question}
 >
@@ -133,13 +132,12 @@ We will show you two ways to inspect the file:
 1. Visualization using a Genome Browser
 2. Converting the binary format into its text file equivalent
 
-
 ## Visualization using a Genome Browser
 
 > ### {% icon hands_on %} Hands-on: Visualization of the reads in IGV
 >
 > 1. Click on the `display with IGV local` to load the reads into the IGV browser
-> 2. Zoom at the start of chromosome X (or `chrX:106,435,807-106,439,377`)
+> 2. Zoom at the start of chromosome X (or `chr2:91,053,413-91,055,345`)
 {: .hands_on}
 
 The reads have a direction: they are mapped to the forward or reverse strand, respectively. When hovering over a read, extra information is displayed
@@ -203,21 +201,21 @@ That is, because the input samples should not have enriched regions included - r
 
 To compute the correlation between the samples we are going to to use the QC modules of deepTools (http://deeptools.readthedocs.io/), a software package for the QC, processing and analysis of NGS data. Before computing the correlation a time consuming step is required, which is to compute the read coverage over a large number of regions from each of the inputed BAM files. For this we will use the tool **multiBamSummary** {% icon tool %}.
 
-Since in this tutorial we are interested in assessing H3K4me3, H3K27me3 and CTCF ChIP samples, at first we need to catch up with all the replicates of ChIP samples as well as the input samples and re-run the previous steps (quality control and mapping) on each sample.
-To save time, we already did that and you can now work directly on the BAM files of the 8 samples. For simplicity, the files include only ChrX.
+Since in this tutorial we are interested in assessing H3K4me3, H3K27me3 and CTCF ChIP samples,  the previous steps (quality control and mapping) needs to be run on all the replicates of ChIP samples as well as the input samples.
+To save time, we have already done that and you can now work directly on the BAM files of the provided 8 samples. For simplicity, the files include only the ChrX.
 
 > ### {% icon hands_on %} Hands-on: Correlation between samples
 >
 > 1. Create a new history
-> 2. Import the 8 BAM files from [Zenodo](https://zenodo.org/record/1321974) or from the data library into the history
->    - [`wt_CTCF_rep1.bam`](https://zenodo.org/record/1321974/files/wt_CTCF_rep1.bam)
->    - [`wt_CTCF_rep2.bam`](https://zenodo.org/record/1321974/files/wt_CTCF_rep2.bam)
->    - [`wt_H3K4me3_rep1.bam`](https://zenodo.org/record/1321974/files/wt_H3K4me3_rep1.bam)
->    - [`wt_H3K4me3_rep2.bam`](https://zenodo.org/record/1321974/files/wt_H3K4me3_rep2.bam)
->    - [`wt_H3K27me3_rep1.bam`](https://zenodo.org/record/1321974/files/wt_H3K27me3_rep1.bam)
->    - [`wt_H3K27me3_rep2.bam`](https://zenodo.org/record/1321974/files/wt_H3K27me3_rep2.bam)
->    - [`wt_input_rep1.bam`](https://zenodo.org/record/1321974/files/wt_input_rep1.bam)
->    - [`wt_input_rep2.bam`](https://zenodo.org/record/1321974/files/wt_input_rep2.bam)
+> 2. Import the 8 BAM files from [Zenodo](https://zenodo.org/record/1324070) or from the data library into the history
+>    - [`wt_CTCF_rep1.bam`](https://zenodo.org/record/1324070/files/wt_CTCF_rep1.bam)
+>    - [`wt_CTCF_rep2.bam`](https://zenodo.org/record/1324070/files/wt_CTCF_rep2.bam)
+>    - [`wt_H3K4me3_rep1.bam`](https://zenodo.org/record/1324070/files/wt_H3K4me3_rep1.bam)
+>    - [`wt_H3K4me3_rep2.bam`](https://zenodo.org/record/1324070/files/wt_H3K4me3_rep2.bam)
+>    - [`wt_H3K27me3_rep1.bam`](https://zenodo.org/record/1324070/files/wt_H3K27me3_rep1.bam)
+>    - [`wt_H3K27me3_rep2.bam`](https://zenodo.org/record/1324070/files/wt_H3K27me3_rep2.bam)
+>    - [`wt_input_rep1.bam`](https://zenodo.org/record/1324070/files/wt_input_rep1.bam)
+>    - [`wt_input_rep2.bam`](https://zenodo.org/record/1324070/files/wt_input_rep2.bam)
 >
 > 3. **multiBamSummary** {% icon tool %} with
 >    - "Sample order matters" to `No`
@@ -270,6 +268,8 @@ To evaluate the quality of the immuno-precipitation step, we can compute the IP 
 >    - "Sample order matters" to `No`
 >    - "Bam file" to `wt_input_rep1`and `wt_H3K4me3_rep1`
 >    - "Region of the genome to limit the operation to" to `ChrX`
+>    - "Show advanced options" to `Yes`
+>    - "Number of samples" to `10000`
 >    - "Execute"
 {: .hands_on}
 
@@ -286,13 +286,13 @@ The plotFingerprint tool generates a fingerprint plot. You need to intepret it t
 > > ### {% icon solution %} Solution
 > >  There is a obvious signal between H3K4me3 and input.
 > >
-> >  Almost 20% of chromosome 1 are not sequenced at all.
+> >  Almost 25% of the chromosome X is not sequenced at all.
 > {: .solution }
 {: .question}
 
 > ### {% icon hands_on %} (Optional) Hands-on: IP strength estimation (other samples)
 >
-> 1. Run the same analysis on data of the 3 other patients
+> 1. Run the same analysis on the other ChIP-seq data along with their corresponding input and compare the output
 {: .hands_on}
 
 
