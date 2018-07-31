@@ -55,7 +55,8 @@ First of all the dataset must be uploaded.
 >    > * Import in the history
 >    {: .tip}
 
->   >⚠️ Please note that the first file mentionned above is on RData and if you choose to use it, you will have to use the following tools:
+>   >⚠️ Please note that the file must contain the headers "SITES","SPECIES","YEAR", "MONTH","DAY","COUNT", that all the non numerum content must have "x" and that separators have to be ",".
+>   > * 1. Note also that he first file mentionned above is on RData and if you choose to use it, you will have to use the following tools:
 >   > * `RData binary file reader`. 
 >   > * `RData parser`.
 >   > * Search for the tool `Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data     >   > required.
