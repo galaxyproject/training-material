@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: regional GAM
-tutorial_name: Defining trends and create biodiverstiy indicators 
+topic_name: ecology
+tutorial_name: Regional GAM
 ---
 
 # Introduction
@@ -69,9 +69,11 @@ First of all the dataset must be uploaded.
 >    >
 >    >
 >    > > 1. Search for the tool `trouver et remplacer des patterns dans des colonnes` on the file on CSV. 
->    > > * Choose "column 2"
->    > > * Write "(\.[0-9]+)" which specifies that you don't want the sub-sites to be taken into account.
->    > > 2. Search for the tool `tabular to CSV`and select the file obtained above
+>    > > 2. Use the following parameters.
+>    > > * Click on "insert checks"
+>    > > * Trouver l'expression suivante: "(\.[0-9]+)" which specifies that you don't want the sub-sites to be taken into                                    >    > > account.
+>    > > * Remplacement: "leave it empty".
+>    > > 3. Search for the tool `tabular to CSV`and select the file obtained above.
 >    
 >
 >
