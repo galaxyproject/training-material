@@ -156,9 +156,10 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >
 > 1. Look for the tool `Abundance index`
 > * "Fichier de comptage": tabular on CSV corresponding to the data of one species. 
-> * "Flight curve output": flight curved obtained above. 
+> * "Flight curve output": flight curved obtained above.
 >
-> Based on the abundance index, we can create chart showing the abundance of the species at a certain date. 
+>
+> Based on the abundance index, we can create a chart showing the anual trend abundance of a certain species per site. 
 >    > 1. Select `"Charts"`
 >    > 2. Give it a proper name
 >    > 3. Select a visualization: "Bar diagram (NVD 3)" 
