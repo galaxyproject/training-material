@@ -40,19 +40,19 @@ First of all the dataset must be uploaded.
 >
 >    ```
 >    Unispecies dataset on CSV:
->    (https://zenodo.org/record/1324204/files/regional%20GAM%20data.csv?download=1)
+>    https://zenodo.org/record/1324204/files/regional%20GAM%20data.csv?download=1
 >    
 >    ```
 >
 >    ```
 >    Unispecies dataset on RData:
->    (https://zenodo.org/record/1324204/files/gatekeeper_CM%20.RData?download=1csv)
+>    https://zenodo.org/record/1324204/files/gatekeeper_CM%20.RData?download=1csv
 >     
 >    ```
 >
 >    ```
 >    Multispecies dataset on CSV: 
->    (https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv?download=1)
+>    https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv?download=1
 >     
 >    ```
 
