@@ -32,7 +32,7 @@ First of all the dataset must be uploaded.
 >  ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial and give it a proper name.
-> 2. Import the following files from[Zenodo](https://zenodo.org/record/1321885) or from a data
+> 2. Import the following files from[Zenodo](https://zenodo.org/record/1324204#.W2BmRn7fNE4) from a data
 >    library named `regional GAM data tutorial`
 >
 >
