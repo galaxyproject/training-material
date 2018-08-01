@@ -9,8 +9,8 @@ tutorial_name: Regional GAM
 
 
 This tutorial is on regional GAM data analysis, it will explain to you how to use different tools on Galaxy-E allowing you to deal with the dataset containing informations on the occurence of various species per site and per days through a couple of years.
-After a certain numbers of steps, you will be able extract the data on a single species and show its occurence through the years. The goal of this exercise is to be able to create biodiversity indicators and abundance trend over time based on the dataset. You could for example try to predict the occurence of one specific species in a certain type of environnement using the prediction model of climate evolution. Based on charts that you will generate, you could try to explain the evolution of with environmental data (temperatures changing, modifications of the 
-You will basically learn how to create a file with which you can create a visual material that can be quite easily understood and therefore be efficient for a large audience.
+After a certain numbers of steps, you will be able to extract the data on a single species and show its occurence through the years. The goal of this exercise is to be able to create abundance trend over time and biodiversity indicators based on the dataset. You could for example try to predict the occurence of one specific species in a certain type of environnement using the prediction model of climate evolution. Based on charts that you will generate, you could try to explain the evolution of a species with environmental data (temperatures changing, modifications of the environmental conditions).
+You will basically learn how to create a file on the base of which you can create a visual material that can be quite easily understood and therefore be efficient for a large audience.
 
 
 > ### Agenda
@@ -27,7 +27,7 @@ You will basically learn how to create a file with which you can create a visual
 # Step 1: Pre-processing
 
 The goal of the first step is to upload and prepare the file so that it will be usable for the regional GAM analysis.
-First of all, you will have to upload the files on Galaxy-E so you will be able to use them and then depending on the informations of your dataset, you might have to follow some steps in order to 
+First of all, you will have to upload the files on Galaxy-E so you will be able to use them and then depending on the informations of your dataset, you might have to follow some steps in order to format them 
 
 >  ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -69,8 +69,9 @@ First of all, you will have to upload the files on Galaxy-E so you will be able 
 >    > * Import in the history
 >    {: .tip}
 
->   > ⚠️ Please note that the file must contain the headers "SITES","SPECIES","YEAR", "MONTH","DAY","COUNT", that all the non numerum content must have "x" and that separators have to be ",".
->  --> Note also that he first file mentionned above is on RData and if you choose to use it, you will have to use the following tools:
+>   > ⚠️ Please note that the file must contain the headers "SITES","SPECIES","YEAR", "MONTH","DAY","COUNT", that all the non numerum content must have "x" and that separators have to be ",". 
+
+>   >       Note also that he first file mentionned above is on RData and if you choose to use it, you will have to use the following tools:
 >   > * Search for the tool `RData binary file reader`with the following parameters:
 >   >      * "Rdata binary file to explore": "dataset on RData" 
 >   > * Search for the tool `RData parser` with the following parameters:
@@ -91,12 +92,10 @@ First of all, you will have to upload the files on Galaxy-E so you will be able 
 > ### {% icon question %} Questions
 >
 > 1. Why do you need to use `Coller deux jeux de données l'un à côté de l'autre` 
-> 2. Question2?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Because you want to create a single file which countains all the data. You decided to upload a dataset on RData and therefore you had to use `RData binary file reader` and `RData parser`. This last tool treats the file and allows you to open it on Galaxy-E but it creates as many files as there are columns. This is the reason why you had to carry out on a set of actions ending by the creation of one complete file. 
-> > 2. Answer for question 2
+> > 1. Because you want to create a single dataset which countains all the data on a species. You decided to upload a dataset on RData and therefore you had to use `RData binary file reader` and `RData parser`. This last tool treats the file and allows you to open it on Galaxy-E but it creates as many files as there are columns. This is the reason why you had to carry out on a set of actions ending by the creation of one complete file. 
 > >
 > {: .solution}
 >
@@ -106,9 +105,9 @@ First of all, you will have to upload the files on Galaxy-E so you will be able 
 
 
 >    > ## Re-sampling. 
-When the dataset contains many details, it kengthens the file processing time therefor it can be very useful to learn how to The list of SITES of the dataset you are using are is really long and the SITES are classified into sub-categories. Your file doesn't really need  to contain all these sub-sites because it lengthens the file processing time on Galaxy-E. This is the reason why you have to specify you don't want the sub-sites to be considered in order to create a new  file that you will be able to use.   
+When the dataset contains many details, it lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example; the list of SITE of the dataset you are using are is really long and the SITES are classified into sub-sites. Your file doesn't really need be as precised and this is the reason why you have to specify you don't want the sub-sites to be considered in order to create a new  file that you will be able to use.   
 
->    > 1. Search for the tool `trouver et remplacer des patterns dans des colonnes` on the file on CSV with the following   >        parameters.
+>    > 1. Search for the tool `trouver et remplacer des patterns dans des colonnes` on the file on CSV with the following  parameters.
 >    >  * Click on`"insert checks"`
 >    >  * "Trouver l'expression suivante": `"(\.[0-9]+)"` which specifies that you don't want the sub-sites to be taken into                                    >          account.
 >    >  * "Remplacement":`"leave it empty"`.
@@ -205,7 +204,5 @@ The point of doing a linear regression is to determinate if the year has an infl
 >    > * "Fichier produit par l'outil glmmpql/Expected temporal trend": `output 2` of **temporal trend**. 
 >    > * "Fichier produit par l'outil ab_index": `output` of **abundance index**.
  
-# Conclusions 
-
-Now that you have finished this tutorial, you are able to manipulate a dataset previously uploaded in order to highlight only the informations on one single species. Then you can handle this specific dataset 
+# Conclusions  
 
