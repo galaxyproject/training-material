@@ -12,6 +12,8 @@ This tutorial is on regional GAM data analysis, it will explain to you how to us
 After a certain numbers of steps, you will be able extract the data on a single species and show its occurence through the years. The goal of this exercise is to be able to create biodiversity indicators and abundance trend over time based on the dataset. You could for example try to predict the occurence of one specific species in a certain type of environnement using the prediction model of climate evolution. Based on charts that you will generate, you could try to explain the evolution of with environmental data (temperatures changing, modifications of the 
 You will basically learn how to create a file with which you can create a visual material that can be quite easily understood and therefore be efficient for a large audience.
 
+
+
 > ### Agenda
 > In this tutorial, we will cover:
 1. Pre-processing
@@ -20,9 +22,9 @@ You will basically learn how to create a file with which you can create a visual
 > {:selectionning one specific species and show all te data corresponding to it}
 3. Show the occurence of the chosen species through the years
 > {:show the occurence of the chosen species through the years}
+4. Conclusion 
+> {:conclusion}
 
->
->
 # Step 1: Pre-processing
 
 The goal of the first step is to upload and prepare the file so that it will be usable for the regional GAM analysis.
@@ -54,7 +56,8 @@ First of all, you will have to upload the files on Galaxy-E so you will be able 
 >    https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv?download=1
 >     
 >    ```
-
+>
+>
 > ### {% icon tip %} Tip: Importing data via links
 >    >
 >    > * Copy the link location
@@ -108,8 +111,6 @@ First of all, you will have to upload the files on Galaxy-E so you will be able 
 
 
 
->
->
 >    > ## Re-sampling. 
 >    > When the dataset contains many details, it kengthens the file processing time therefor it can be very useful to learn how to The list of SITES of the dataset you are using are is really long and the SITES are classified into sub-categories.    >    > Your file doesn't really need  to contain all these sub-sites because it lengthens the file processing time on Galaxy-     >    > E.This is the reason why you have to specify you don't want the sub-sites to be considered in order to create a new     >    > file that you will be able to use.   
 >    >
@@ -126,8 +127,9 @@ First of all, you will have to upload the files on Galaxy-E so you will be able 
 # Step 2: Selectionning one specific species and showing all the data corresponding to it
 
 The second step of any Regional GAM data analysis is making sure to have one dataset of only one specific species that you will then be able to use. Because a graph is occurent only if it shows the occurence of one species trough the years. If you want to compare this evolution with the one of another species, you will have to superimpose the graphs onto the others. 
->
->    
+
+
+
 > ## How many species are taken into account in this dataset
 > As the dataset is important and countains manw informations, you want to know wether the data are about only one species or  more.
 > 1. Search for the tool `compter le nombre d'occurence de chaque enrégistrement`with the following parameters.
@@ -149,9 +151,9 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >    > 4. Repeat this last operation on all the differents files on different species. 
 >    
 >
->
->
->
+
+
+
  # Step 3: Show the occurrence of the chosen species through the years
  
 Now that you have a file containing all the data on the species you chose, this step is goint to explain to you what you can do with it and how useful it can be. The main goal of this step is basically to create a material that can be used to generate charts.  What you could also do, for example, would be to compare the evolution of various species trough the years in the same site. You would have to superpose the different graphs on one another. The charts have the benefit of being very visual and to be easier to interpret than a dataset.
@@ -200,7 +202,7 @@ Now that you have a file containing all the data on the species you chose, this 
 
 
 
-# Step 4: Show the occurrence of the chosen species through the years
+# Conclusions 
 
-
+Now that you have just finished this tutorial, you are able to manipulate a dataset previously uploaded in order to highlight only the informations on one species. Then you can handle this psecific dataset 
 
