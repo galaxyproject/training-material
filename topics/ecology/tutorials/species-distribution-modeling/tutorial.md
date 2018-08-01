@@ -7,9 +7,9 @@ tutorial_name: species distribution modeling
 # Introduction
 {:.no_toc}
 
-Species Modeling Distribution can help understand the distribution of a species depending of environemental parameters such as temperature or humidity. It can also help understand th impact of climate change on the repartiotion of some species. This is done done by coupling data occurences of a species and environemental data.
+Species Modeling Distribution can help understand the distribution of a species depending of environemental parameters such as temperature and precipitation. It can also help understand the impact of climate change on the repartition of some species. This is done by associating data occurrences of a species with environmental data.
 
-The goal of this study is to model an ecological niche using Species Modeling Distribution through the interactive environement Wallace.    
+The goal of this study is to model an theorical ecological niche using Species Modeling Distribution through the interactive environment Wallace.    
 
 # Step 1: Loading a dataset
 
@@ -18,7 +18,7 @@ In this study the data set are all imported from the tool `Get species occurrenc
 >    > ### {% icon tip %} Tip: Importing data set from a data bank
 >    >
 >    > * Go into "upload files" (top panel) then "Get species occurrences data and taxref informations"
->    > * Fill the scientific name of the species wanted wanted 
+>    > * Fill the scientific name of the species wanted 
 >    > * Choose the data source and the number of occurences needed
 >    > * Click on "Execute"
 
@@ -30,13 +30,52 @@ Wallace is an interactive interface which can simulate a species modeling distri
 
 ## Obtain occurrence data
 
-With this you can either upload data direcly from Wallace or you can upload file you've loaded earlier frome Galaxy-E
+With this you can either upload data directly from Wallace or you can upload file you've loaded earlier frome Galaxy-E
+
+> 1. Upload data from Galaxy-E
+>    > * Check `Galaxy History User`
+>    > * Select the corect csv file
+> ### or
+> 2. If you want to upload data from Wallace
+>    > * Check `Query Database`
+>    > * Select the databank of your interstest between Gbif, VertNet and BISON 
+>    > * Type the name of the wanted species
+>    > * And then set the number of occurrences
+
+You now have your data for the next step.
 
 ## Process occurrence data
 
+Here you'll have to chose the data you want to use for the rest of your model. To do so, you have three option
 
+> * Option 1: `Select Occurrences On Map`
+> With this, you have to select your occurrence on the map by delimiting an area you want to use.
 
+> * Option 2: `Remove Occurrences By ID`
+> You'll be remooving occurrences you don't need, or want, by their ID.
 
+> * Option 3: `Spacial thin`
+> This can allow you to select occurrences by setting a minimum distance (in km) beetween the different occurrences. For exemple:
+>    > If you type 30 km, you'll end up with all the occurrences on the map which are at minimum 30km from each other.
+
+For this part you have to know where you want your study to take place with the occurrence informations you have.
+Best would be not to do it on the whole map, but to create multiple sub-habitats to compare the parametres after.
+
+## Obtain Environmental Data
+
+The `WorldClim Bioclims` module will provide ratser with environmental variations from online sources. The Variables are mostly about temperature and precipitations.
+This will later be associated with the environnemental data
+
+> You can either:
+>    > * Use `WorldClim Bioclims` module (this one only use 'presence' data)
+>    > * Load your own raster from your Galaxy-E history by checking the box `Galaxy History User`
+
+## Process environnemental Data
+
+Wallace associate environnmental data and the occurence data to make an area for your model.
+> * First: `Choose Background Extent` make a buffer zone aroud the occurences. You can chosse the size of the buffer zone around your occurrences by choosing the distance in `Study region buffer distance`. This allows you to control the area you'll be working with
+
+## Partition Occurrence Data
 
 
 This exercise uses the dataset from the Nature publication by [Ross-Inness et al., 2012](https://www.ncbi.nlm.nih.gov/pubmed/22217937).
