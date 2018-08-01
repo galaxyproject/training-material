@@ -42,21 +42,17 @@ First of all, you will have to upload the files on Galaxy-E so you will be able 
 >    ```
 >    Unispecies dataset on CSV:
 >    https://zenodo.org/record/1324204/files/regional%20GAM%20data.csv?download=1
->    
->    ```
+>    ```   
 >
 >    ```
 >    Unispecies dataset on RData:
 >    https://zenodo.org/record/1324204/files/gatekeeper_CM%20.RData?download=1csv
->     
->    ```
+>    ```   
 >
 >    ```
 >    Multispecies dataset on CSV: 
 >    https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv?download=1
->     
 >    ```
->
 >
 > ### {% icon tip %} Tip: Importing data via links
 >    >
@@ -114,14 +110,13 @@ First of all, you will have to upload the files on Galaxy-E so you will be able 
 
 
 >    > ## Re-sampling. 
->    > When the dataset contains many details, it kengthens the file processing time therefor it can be very useful to learn how to The list of SITES of the dataset you are using are is really long and the SITES are classified into sub-categories.    >    > Your file doesn't really need  to contain all these sub-sites because it lengthens the file processing time on Galaxy-     >    > E.This is the reason why you have to specify you don't want the sub-sites to be considered in order to create a new     >    > file that you will be able to use.   
->    >
->    >
->    > > 1. Search for the tool `trouver et remplacer des patterns dans des colonnes` on the file on CSV with the following   >        parameters.
->    > > * Click on`"insert checks"`
->    > > * Trouver l'expression suivante: `"(\.[0-9]+)"` which specifies that you don't want the sub-sites to be taken into                                    >          account.
->    > > * Remplacement:`"leave it empty"`.
->    > > 3. Search for the tool `tabular to CSV`and select the file obtained above.
+When the dataset contains many details, it kengthens the file processing time therefor it can be very useful to learn how to The list of SITES of the dataset you are using are is really long and the SITES are classified into sub-categories. Your file doesn't really need  to contain all these sub-sites because it lengthens the file processing time on Galaxy-E. This is the reason why you have to specify you don't want the sub-sites to be considered in order to create a new  file that you will be able to use.   
+
+>    > 1. Search for the tool `trouver et remplacer des patterns dans des colonnes` on the file on CSV with the following   >        parameters.
+>    >  * Click on`"insert checks"`
+>    >  * "Trouver l'expression suivante": `"(\.[0-9]+)"` which specifies that you don't want the sub-sites to be taken into                                    >          account.
+>    >  * "Remplacement":`"leave it empty"`.
+>    > 3. Search for the tool `tabular to CSV`and select the file of **trouver et remplacer des patterns dans des colonnes**.
 >    
 >
 >
@@ -181,9 +176,9 @@ Now that you have a file containing all the data on the species you chose, this 
 >
 > ### Abundance per year and per site 
 >
-> 1. Look for the tool `Abundance index`
-> * "Fichier de comptage": tabular on CSV corresponding to the data of one species. 
-> * "Flight curve output": flight curved obtained above.
+> 1. Look for the tool `Abundance index` with the following parameters:
+> * "Fichier de comptage": onespecies dataset on CSV.  
+> * "Flight curve output": flight curved obtained .
 
 
 > Based on the abundance index, we can create a chart showing the anual trend abundance of a certain species per site. 
