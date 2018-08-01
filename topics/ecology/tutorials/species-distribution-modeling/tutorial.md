@@ -46,10 +46,10 @@ You now have your data for the next step.
 
 ## Process occurrence data
 
-Here you'll have to chose the data you want to use for the rest of your model. To do so, you have three option
+Here you'll have to chose the occurrences you want to use for the rest of your model. To do so, you have three options
 
 > * Option 1: `Select Occurrences On Map`
-> With this, you have to select your occurrence on the map by delimiting an area you want to use.
+> With this, you have to select your occurrence on the map by delimiting a geografic area you want to use.
 
 > * Option 2: `Remove Occurrences By ID`
 > You'll be remooving occurrences you don't need, or want, by their ID.
@@ -63,7 +63,7 @@ Best would be not to do it on data occurrences, but to create multiple sub-habit
 
 ## Obtain Environmental Data
 
-The `WorldClim Bioclims` module will provide a ratser with environmental variations from online sources. The Variables are mostly about temperature and precipitations. This will later be associated with the occurrences data.
+The `WorldClim Bioclims` module will provide a raster with environmental variations from online sources. The Variables are mostly about temperature and precipitations. This will later be associated with the occurrences data.
 The raster is composed of environmental info. Each layer of the raster contain a climatic variable; going from BIO1 = Anual mean temperature, to BIO19 = Precipitation of Coldest Quarter.
 
 > To load these data you can either:
@@ -76,12 +76,12 @@ After loading the environmental data, you can go to the next point.
 ## Process environnemental Data
 
 Wallace will now associate environnmental data and occurrences data to make an area for your model.
-> * First: `Choose Background Extent` make a buffer zone aroud the occurrences. You can chosse the size of the buffer zone around your occurrences by choosing the distance in `Study region buffer distance`. This allows you to control the area you'll be working with and on which a map of suitability will be made.
+> * First: `Choose Background Extent` make a buffer zone around the occurrences. You can chosse the size of the buffer zone around your occurrences by choosing the distance in `Study region buffer distance`. This allows you to control the area you'll be working with and on which a map of suitability will be made.
 
-This is why you have to know what type of backround extent you want to use.
->    > `Bounding box` will difine an area whit the orrucrence centered
+This is why you have to know what type of background extent you want to use.
+>    > `Bounding box` will difine an area whit the occurrence centered
 
->    > `Minimum convex polygon` will make an area considering the repartition of you occurrences
+>    > `Minimum convex polygon` will make an area considering the repartition of your occurrences
 
 >    > `Point buffers` will use occurrences to build a buffer zone aroud them
 
@@ -89,12 +89,16 @@ Then, to associate your occurrences to the environmental data, you'll have to ch
 
 ## Partition Occurrence Data
 
-Partitioning data allows to divide a data set into subset, then make a model on each of all the groups and test it on the other 
+Partitioning data allows to divide a data set into subset, then make a model on each of all the groups but one and test it on the last one (assuming that all the groups are independent. You'll have two options: 
 
-* `Non-spatial Partition`,is a type of partition used when sure that no  biais existe from space, time or sampling
->    > 1.
->    > 2.
+* `Non-spatial Partition`,is a type of partition used when sure that no biais due to space, time or sampling methode
+>    > 1. `Jakknife (k=n)` consider that each occurrence in the dataset is equal to a bin. This is usually used when you have a dataset with no known biais.
+>    > 2. `Random k-fold` partition de data randomly in a nuber of bin set by the user with the option `Number of Folds`
+
 * `Spatial Partition`, when there could be biais due to time, space or sampling methode
+>    > 1.`Block (k=4)`
+>    > 2.
+>    > 3.
 
 ## Build and Evaluate Niche Model
 
