@@ -7,12 +7,9 @@ tutorial_name: Regional GAM
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
 
-
-This exercise uses the public dataset of Reto Schmucki [regional GAM](https://zenodo.org/record/1321885/files/gatekeeper_CM%20.RData?download=1). It is a file recording the presence of various species per site and per days through a couple of years. 
-The goal of this exercise is to be able to create biodiversity indicators and abundance trend over time based on this dataset. Using different tools we will show the occurrence of one specie through the years. 
-You could for example try to predict the occurence of one specific species in a certain type of environnement using the prediction model of climate evolution.
+This tutorial is on regional GAM data analysis, it will explain to you how to use different tools on Galaxy-E allowing you to deal with the dataset containing informations on the occurence of various species per site and per days through a couple of years.
+After a certain numbers of steps, you will be able extract the data on a single species and show its occurence through the years. The goal of this exercise is to be able to create biodiversity indicators and abundance trend over time based on the dataset. You could for example try to predict the occurence of one specific species in a certain type of environnement using the prediction model of climate evolution. Based on charts that you will generate, you could try to explain the evolution of with environmental data (temperatures changing, modifications of the 
 You will basically learn how to create a file with which you can create a visual material that can be quite easily understood and therefore be efficient for a large audience.
 
 > ### Agenda
@@ -29,7 +26,7 @@ You will basically learn how to create a file with which you can create a visual
 # Step 1: Pre-processing
 
 The goal of the first step is to upload and prepare the file so that it will be usable for the regional GAM analysis.
-First of all the dataset must be uploaded.
+First of all, you will have to upload the files on Galaxy-E so you will be able to use them and then depending on the informations of your dataset, you might have to follow some steps in order to 
 
 >  ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -114,7 +111,7 @@ First of all the dataset must be uploaded.
 >
 >
 >    > ## Re-sampling. 
->    > The list of SITES of the dataset you are using are is really long and the SITES are classified into sub-categories.    >    > Your file doesn't really need  to contain all these sub-sites because it lengthens the file processing time on Galaxy-     >    > E.This is the reason why you have to specify you don't want the sub-sites to be considered in order to create a new     >    > file that you will be able to use.   
+>    > When the dataset contains many details, it kengthens the file processing time therefor it can be very useful to learn how to The list of SITES of the dataset you are using are is really long and the SITES are classified into sub-categories.    >    > Your file doesn't really need  to contain all these sub-sites because it lengthens the file processing time on Galaxy-     >    > E.This is the reason why you have to specify you don't want the sub-sites to be considered in order to create a new     >    > file that you will be able to use.   
 >    >
 >    >
 >    > > 1. Search for the tool `trouver et remplacer des patterns dans des colonnes` on the file on CSV with the following   >        parameters.
