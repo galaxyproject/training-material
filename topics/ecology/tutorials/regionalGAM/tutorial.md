@@ -13,7 +13,6 @@ After a certain numbers of steps, you will be able extract the data on a single 
 You will basically learn how to create a file with which you can create a visual material that can be quite easily understood and therefore be efficient for a large audience.
 
 
-
 > ### Agenda
 > In this tutorial, we will cover:
 1. Pre-processing
@@ -36,19 +35,14 @@ First of all, you will have to upload the files on Galaxy-E so you will be able 
 > 2. Import the following files from[Zenodo](https://zenodo.org/record/1324204#.W2BmRn7fNE4) or from a data
 >    library named `regional GAM data tutorial`
 >
->
->
->
 >    ```
 >    Unispecies dataset on CSV:
 >    https://zenodo.org/record/1324204/files/regional%20GAM%20data.csv?download=1
 >    ```   
->
 >    ```
 >    Unispecies dataset on RData:
 >    https://zenodo.org/record/1324204/files/gatekeeper_CM%20.RData?download=1csv
 >    ```   
->
 >    ```
 >    Multispecies dataset on CSV: 
 >    https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv?download=1
@@ -78,18 +72,20 @@ First of all, you will have to upload the files on Galaxy-E so you will be able 
 >   > ⚠️ Please note that the file must contain the headers "SITES","SPECIES","YEAR", "MONTH","DAY","COUNT", that all the non numerum content must have "x" and that separators have to be ",".
 >  --> Note also that he first file mentionned above is on RData and if you choose to use it, you will have to use the following tools:
 >   > * Search for the tool `RData binary file reader`with the following parameters:
->   >      * 1. "Rdata binary file to explore": "RData dataset" 
+>   >      * "Rdata binary file to explore": "dataset on RData" 
 >   > * Search for the tool `RData parser` with the following parameters:
->   >      * 1. 
+>   >      * "Rdata file to explore": "dataset on RData"
+>   >      * "File with .Rdata content details": file of **`RData binary file reader`**
+>   >      * "Select which attribute(s) you want to extract": select everything but "trend"
+>   >      * ⚠️ Please note that the tool `RData parser` creates separated files, each of them containing one column. Therefore we left the column headed by "TREND" aside on purpose because we don't need it for what will follows.
 >   > * Search for the tool `Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data     required with the following parameters:
->   > * 1. Repeat `Coller deux jeux de données l'un à côté de l'autre`and select the file on "SPECIES" and the file on "SITE".   >   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`  and select the file obtained above and the one on                 "YEAR". 
->   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "MONTH".
->   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "DAY".
->   >  > * Repeat `Coller deux jeux de données l'un à côté de l'autre`select the file obtained above and the one on "COUNT".
-> 
->   >  > ⚠️ Please note that we left the file on "TREND" aside on purpose because we will be able to show it afterwards using some tools.
->
->
+>   >      * "Coller":  file of **RData parser** headed with "SPECIES"
+>   >      * "et": file of **RData parser** with headed with "SITE"
+>   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` as many times as there are separated files in order to create a final dataset with all the columns. First you must past 2 columns together and the you must past this last file with a third column and do this action again and again until your final file countains all the columns. 
+>   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` pasting the file containing 2 columns with the one headed by "YEAR".
+>   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre`pasting the filecontaining 3 columns with the one headed by "MONTH". 
+>   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre`pasting the file containing 4 columns with the one headed by "DAY".
+>   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre`pasting the file you containing 5 with the one headed by "COUNT". 
 >
 >
 > ### {% icon question %} Questions
@@ -211,5 +207,5 @@ The point of doing a linear regression is to determinate if the year has an infl
  
 # Conclusions 
 
-Now that you have finished this tutorial, you are able to manipulate a dataset previously uploaded in order to highlight only the informations on one species. Then you can handle this psecific dataset 
+Now that you have finished this tutorial, you are able to manipulate a dataset previously uploaded in order to highlight only the informations on one single species. Then you can handle this specific dataset 
 
