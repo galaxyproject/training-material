@@ -132,7 +132,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 
 
 
- # Step 3: Show the occurrence of the chosen species through the years
+ # Step 3: Displaying the occurence of the chosen species through the years
  
 Now that you have a file containing all the data on the species you chose, this step is goint to explain to you what you can do with it and how useful it can be. The main goal of this step is basically to create a material that can be used to generate charts.  What you could also do, for example, would be to compare the evolution of various species trough the years in the same site. You would have to superpose the different graphs on one another. The charts have the benefit of being very visual and to be easier to interpret than a dataset.
 >
