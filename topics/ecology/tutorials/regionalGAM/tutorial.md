@@ -56,20 +56,21 @@ First of all, you will have to upload the files on Galaxy-E and then you maybe w
 >    {: .tip}
 >
 
->   > ⚠️ Please note that the file must contain the headers "SITES","SPECIES","YEAR", "MONTH","DAY","COUNT", that all the non numerum content must have "x" and that separators have to be ",". 
+>   > ⚠️ Please note that the file must contain the headers "SITES","SPECIES","YEAR", "MONTH","DAY","COUNT", that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
 
->   >  Note also that he first file mentionned above is on RData and if you choose to use it, you will have to use the following tools:
+>   >       Note also that the first file mentionned above is on the RData format and if you choose to use it, you will have to process this binary file to obtain an appropriate CSV dataset. To do so, you can use the following tools:
 >   > * Search for the tool `RData binary file reader`with the following parameters:
 >   >      * "Rdata binary file to explore": "dataset on RData" 
 >   > * Search for the tool `RData parser` with the following parameters:
 >   >      * "Rdata file to explore": "dataset on RData"
 >   >      * "File with .Rdata content details": file of **`RData binary file reader`**
 >   >      * "Select which attribute(s) you want to extract": select everything but "trend"
->   >      * ⚠️ Please note that the tool `RData parser` creates separated files, each of them containing one column. Therefore we left the column headed by "TREND" aside on purpose because we don't need it for what will follow.
+
+>   >      * ⚠️ Please note that the tool `RData parser` creates separated files, each of them containing one column. The file with the "TREND" header can be let aside as we don't need it for what will follow.
 >   > * Search for the tool `Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data     required with the following parameters:
 >   >      * "Coller":  file of **RData parser** headed with "SPECIES"
 >   >      * "et": file of **RData parser** with headed with "SITE"
->   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` as many times as there are separated files in order to create a final dataset with all the columns. First you must past 2 columns together and the you must past this last file with a third column and do this action again and again until your final file countains all the columns. 
+>   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` as many times as there are separated files in order to create a final dataset with all the columns. First you must paste 2 columns together, then you must paste this last file with a third column and do this action again and again until your final file countains all the columns. 
 >   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` pasting the file containing 2 columns with the one headed by "YEAR".
 >   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre`pasting the file containing 3 columns with the one headed by "MONTH". 
 >   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre`pasting the file containing 4 columns with the one headed by "DAY".
@@ -82,7 +83,7 @@ First of all, you will have to upload the files on Galaxy-E and then you maybe w
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Because you want to create a single dataset which countains all the data on a species. You decided to upload a dataset on RData and therefore you had to use `RData binary file reader` and `RData parser`. This last tool treats the file and allows you to open it on Galaxy-E but it creates as many files as there are columns. This is the reason why you had to carry out on a set of actions ending by the creation of one complete file. 
+> > 1. Because you want to create a single dataset which countains all the data on a species. You decided to upload a dataset on RData and therefore you had to use `RData binary file reader` and `RData parser`. This last tool treats the file and allows you to open it on Galaxy-E but it creates as many files as there are columns (when RData object is composed from a unique data table). This is the reason why you had to carry out on a set of actions ending by the creation of one complete file. 
 > >
 > {: .solution}
 >
