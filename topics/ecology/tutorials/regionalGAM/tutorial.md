@@ -191,8 +191,8 @@ Now that you have a file containing all the data on the species you chose, this 
 > ### Expected temporal trend
 
 The expected temporal trend allows you to have an overview of the evolution of a species in a certain type of environment in the futur.
->    > 1. Look for the tool `Expected temporal trend` withe the following parameters: 
->    > * Fichier tabulé, produit par l'outil ab_index: `output` of **abundance index**.
+>    > 1. Look for the tool `Expected temporal trend` with the the following parameters: 
+>    > * "Fichier tabulé, produit par l'outil ab_index": `output` of **abundance index**.
 >    
 > ⚠️ Please note that sometimes the expected temporal trend can't be done. It happens that the data are to random or that to many parameters must be taken into account and therefore it isn't possible for the software to estimate the expected temporal trend.
 
