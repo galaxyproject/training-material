@@ -22,7 +22,7 @@ In this study the datasets are all imported from the tool `Get species occurrenc
 >    > * Choose the data source and the number of occurrences needed
 >    > * Click on "Execute"
 
-Then using `Tabular to CSV` on the new file to have the right format to use in Wallace.
+Then using the tool `Tabular to CSV` on the new file to have the right format to use in Wallace.
 
 # Step 2: Using Wallace
 
@@ -30,7 +30,7 @@ Then using `Tabular to CSV` on the new file to have the right format to use in W
 
 ## Obtain occurrence data
 
-With this you can either upload data directly from Wallace or you can upload file you've loaded earlier from Galaxy-E
+With this you can either upload file you've loaded earlier from Galaxy-E data or you can upload  data directly from Wallace
 
 > 1. Upload data from Galaxy-E
 >    > * Check `Galaxy History User`
@@ -38,7 +38,7 @@ With this you can either upload data directly from Wallace or you can upload fil
 > ### or
 > 2. If you want to upload data from Wallace
 >    > * Check `Query Database`
->    > * Select the databank of your interstest between Gbif, VertNet and BISON 
+>    > * Select the databank of your interest between Gbif, VertNet or BISON 
 >    > * Type the name of the wanted species
 >    > * And then set the number of occurrences
 
@@ -51,11 +51,12 @@ Here you'll have to chose the occurrences you want to use for the rest of your m
 > * Option 1: `Select Occurrences On Map`
 > With this, you have to select your occurrence on the map by delimiting a geographic area you want to use.
 
+
 > * Option 2: `Remove Occurrences By ID`
 > You'll be removing occurrences you don't need, or want, by their ID.
 
 > * Option 3: `Spacial thin`
-> This can allow you to select occurrences by setting a minimum distance (in km) beetween the different occurrences. For exemple:
+> This can allow you to select occurrences by setting a minimum distance (in km) between the different occurrences. For exemple:
 >    > If you type 30 km, you'll end up with all the occurrences on the map which are at minimum 30km from each other.
 
 To have better idea about the robustness of you species distrbution model, it would be better at this step, to don't select the entire set of data occurrences, but repeat the complete Wallace workflow on occurences subgroups, one by one.
@@ -94,13 +95,17 @@ Partitioning data allows to divide a data set into subsets (ie bins), then make 
 >    > 2. `Random k-fold` partition the data randomly in a number of bins set by the user with the option `Number of Folds`
 
 * `Spatial Partition`, when there could be biais due to time, space or sampling method
->    > 1.`Block (k=4)`
->    > 2.
->    > 3.
+>    > 1.`Block (k=4)` divide the area in four an put equally into four bins, the different occurrences.
+>    > 2. `Checkboard (k=2)` uses two bins according to the position of the occurence on the grid.
+>    > 3. `Checkboard (k=4)` uses four bins according to the position of the occurence on the grid.
+> for both of these technics the number of occurrences into each bin may vary.
+> ⚠️ 
 
 ## Build and Evaluate Niche Model
 
+Wallace can now test different models on the occurrences and see if the model is accurate. The AUC mean represent all the model tested on the data and to know if it's suitable you have too look at the AUCmean. The threshold is 0,75 to consider a model accurate. The closer to 1 the better.
+
 ## Visualize Model Results
 
-
-{: .hands_on}
+After the precedent step you can now model your theoretical niche.
+first with `BIOCLIM Envelope Plots`you can make a chart and choose the parameters of your interest and see how the data respond and you can also adapt the threshold for more accuracy 
