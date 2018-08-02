@@ -27,7 +27,7 @@ You will basically learn how to create a file on the base of which you can creat
 # Step 1: Pre-processing
 
 The goal of the first step is to upload and prepare the file so that it will be usable for the regional GAM analysis.
-First of all, you will have to upload the files on Galaxy-E and then you maybe will have to use some speific tools to format them in order to be able to use them.
+First of all, you will have to upload the files on Galaxy-E and then you maybe will have to use some specific tools to format them in order to be able to use them.
 
 >  ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -71,7 +71,7 @@ First of all, you will have to upload the files on Galaxy-E and then you maybe w
 
 >   > ⚠️ Please note that the file must contain the headers "SITES","SPECIES","YEAR", "MONTH","DAY","COUNT", that all the non numerum content must have "x" and that separators have to be ",". 
 
->   >       Note also that he first file mentionned above is on RData and if you choose to use it, you will have to use the following tools:
+>   >  Note also that he first file mentionned above is on RData and if you choose to use it, you will have to use the following tools:
 >   > * Search for the tool `RData binary file reader`with the following parameters:
 >   >      * "Rdata binary file to explore": "dataset on RData" 
 >   > * Search for the tool `RData parser` with the following parameters:
@@ -105,7 +105,7 @@ First of all, you will have to upload the files on Galaxy-E and then you maybe w
 
 
 >    > ## Re-sampling. 
-When the dataset contains many details, it lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example; the list of SITE of the dataset you are using are is really long and the SITES are classified into sub-sites. Your file doesn't really need be as precised and this is the reason why you have to specify you don't want the sub-sites to be considered in order to create a new  file that you will be able to use.   
+When the dataset contains many details, it lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example, the list of SITE of the dataset you are using are is really long and the SITES are classified into sub-sites. Your file doesn't really need be as precised and this is the reason why you have to specify you don't want the sub-sites to be considered in order to create a new  file that you will be able to use.   
 
 >    > 1. Search for the tool `trouver et remplacer des patterns dans des colonnes` on the file on CSV with the following  parameters.
 >    >  * Click on`"insert checks"`
@@ -118,18 +118,18 @@ When the dataset contains many details, it lengthens the file processing time th
 
 # Step 2: Selectionning one specific species and showing all the data corresponding to it
 
-The second step of any Regional GAM data analysis is making sure to have one dataset of only one specific species that you will then be able to use. Because a graph is occurent only if it shows the occurence of one species trough the years. If you want to compare this evolution with the one of another species, you will have to superimpose the graphs onto the others. 
+The second step of any Regional GAM data analysis is making sure to have one dataset of only one specific species that you will then be able to use. Because a graph is occurent only if it shows the occurence of one species trough the years. If you want to compare this evolution with the one of another species, you will have to superimpose the graphs on one another. 
 
 
 
 > ## How many species are taken into account in this dataset
 > As the dataset is important and countains manw informations, you want to know wether the data are about only one species or  more.
 > 1. Search for the tool `compter le nombre d'occurence de chaque enrégistrement`with the following parameters.
-> * Compter les occurrences des valeurs présentes dans la(les) colonne(s): select: `"column 1"`
-> * Délimité par: `"tabulation"`.
-> * Comment les résultats doivent t'ils être triés ?: `"Avec la valeur la plus présente en premier"`.
+> * "Compter les occurrences des valeurs présentes dans la(les) colonne(s)": `column 1`
+> * "Délimité par": `tabulation`.
+> * "Comment les résultats doivent t'ils être triés ?": `Avec la valeur la plus présente en premier`.
 > 2. Inspect the file by clicking on the `eye` icon to check how many species are taken into account.
-> > If there is ony one species you can't skip the following steps ang go directly convert your file using the tool `tabular t    to CSV`
+> > If there is ony one species you can't skip the following steps ang go directly convert your file using the tool `tabular  to CSV`
 >
 >    > ### Create a new file concerning only the data of one species
 >    > 1. Copy the name of the species you are interested in from the file on CSV (for example: "Pyronia tithonus").
