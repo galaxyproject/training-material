@@ -32,18 +32,17 @@ First of all, you will have to upload the files on Galaxy-E so you will be able 
 >  ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial and give it a proper name.
-> 2. Import the following files from[Zenodo](https://zenodo.org/record/1324204#.W2BmRn7fNE4) or from a data
+> 2. Import the following files from [Zenodo](https://zenodo.org/record/1324204#.W2BmRn7fNE4) or from a data
 >    library named `regional GAM data tutorial`
 >
 >    ```
 >    Unispecies dataset on CSV:
 >    https://zenodo.org/record/1324204/files/regional%20GAM%20data.csv?download=1
->    ```   
->    ```
+>
 >    Unispecies dataset on RData:
 >    https://zenodo.org/record/1324204/files/gatekeeper_CM%20.RData?download=1csv
->    ```   
->    ```
+>
+>
 >    Multispecies dataset on CSV: 
 >    https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv?download=1
 >    ```
@@ -55,19 +54,8 @@ First of all, you will have to upload the files on Galaxy-E so you will be able 
 >    > * Select **Paste/Fetch Data**
 >    > * Paste the link into the text field
 >    > * Press **Start** and **Close** the window
->    > * Click on the `pencil` icon once the file is imported
->    > * Click on **Datatype** in the middle panel
->    > * Select `fastqsanger` as **New Type**
 >    {: .tip}
 >
->    > ### {% icon tip %} Tip: Importing data from a data library
->    >
->    > * Go into "Shared data" (top panel) then "Data libraries"
->    > * Click on "Training data" and then "Analyses of ChIP-Seq data"
->    > * Select interesting file
->    > * Click on "Import selected datasets into history"
->    > * Import in the history
->    {: .tip}
 
 >   > ⚠️ Please note that the file must contain the headers "SITES","SPECIES","YEAR", "MONTH","DAY","COUNT", that all the non numerum content must have "x" and that separators have to be ",". 
 
