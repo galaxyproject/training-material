@@ -179,14 +179,12 @@ If you want to access the chart on an interactive interface, you can use click o
 
 The expected temporal trend allows you to have an overview of the evolution of a species in a certain type of environment in the futur.
 
-
-
-[Figure 1-1](http://openstack-192-168-100-19.genouest.org/plugins/visualizations/charts/saved?id=e85a3be143d5905b)
+![Expected temporal trend](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Expected%20temporal%20trend.png)
 
 >    > 1. Look for the tool `Expected temporal trend` with the the following parameters: 
 >    > * "Fichier tabulé, produit par l'outil ab_index": `output` of **abundance index**.
 >    
-> ⚠️ Please note that sometimes the expected temporal trend can't be done. It happens that the data are to random or that to many parameters must be taken into account and therefore it isn't possible for the software to estimate the expected temporal trend.
+> ⚠️ Please note that sometimes the expected temporal trend can't be done on dataset. If you want this action to work, the occurences on your dataset must lie between the month of April and the end of the month of September.
 
 > ### Linear regression 
 
