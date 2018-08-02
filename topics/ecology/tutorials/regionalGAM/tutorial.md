@@ -69,7 +69,7 @@ First of all, you will have to upload the files on Galaxy-E so you will be able 
 >    > * Import in the history
 >    {: .tip}
 
->   > ⚠️ Please note that the file must contain the headers "SITES","SPECIES","YEAR", "MONTH","DAY","COUNT", that all the non numerum content must have "x" and that separators have to be ",". 
+>   > ⚠️ Please note that the file must contain the headers "SITES","SPECIES","YEAR", "MONTH","DAY","COUNT", that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
 
 >   >       Note also that he first file mentionned above is on RData and if you choose to use it, you will have to use the following tools:
 >   > * Search for the tool `RData binary file reader`with the following parameters:
@@ -78,7 +78,7 @@ First of all, you will have to upload the files on Galaxy-E so you will be able 
 >   >      * "Rdata file to explore": "dataset on RData"
 >   >      * "File with .Rdata content details": file of **`RData binary file reader`**
 >   >      * "Select which attribute(s) you want to extract": select everything but "trend"
->   >      * ⚠️ Please note that the tool `RData parser` creates separated files, each of them containing one column. Therefore we left the column headed by "TREND" aside on purpose because we don't need it for what will follows.
+>   >      * ⚠️ Please note that the tool `RData parser` creates separated files, each of them containing one column. The file with the "TREND" header can be let aside as we don't need it for what will follows.
 >   > * Search for the tool `Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data     required with the following parameters:
 >   >      * "Coller":  file of **RData parser** headed with "SPECIES"
 >   >      * "et": file of **RData parser** with headed with "SITE"
