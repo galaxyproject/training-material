@@ -57,7 +57,7 @@ First of all, you will have to upload the files on Galaxy-E and then you maybe w
 >
 > ### {% icon comment %} Comment
 >
-> ⚠️ Please note that the file must contain the headers "SITES","SPECIES","YEAR", "MONTH","DAY","COUNT", that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
+> ⚠️ Please note that the file must contain a header corresponding to: ```"SITES","SPECIES","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
 > 
 >  Note also that the first file mentionned above is on the RData format and if you choose to use it, you will have to process this binary file to obtain an appropriate CSV dataset. To do so, you can use the following tools:
 >   > * Search for the tool `RData binary file reader`with the following parameters:
