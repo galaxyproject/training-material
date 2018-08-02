@@ -139,11 +139,13 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 Now that you have a file containing all the data on the species you chose, this step is goint to explain to you what you can do with it and how useful it can be. The main goal of this step is basically to create a material that can be used to generate charts.  What you could also do, for example, would be to compare the evolution of various species trough the years in the same site. You would have to superpose the different graphs on one another. The charts have the benefit of being very visual and to be easier to interpret than a dataset.
 >
 > ### Create a flight curve 
->
+
 > 1. Search for the tool `flight curve`
 > * Select the file on CSV with the data on one species
 >
 > Based on the flight curve, you can create a line chart which shows the occurence of the species through the years on a very visual material 
+
+![Flight curve chart](https://raw.githubusercontent.com/Claraurf/training-material/ecology/topics/ecology/tutorials/regionalGAM/Images/Chart%20flight%20curve%20.png)
 >
 >    > ### {% icon tip %} Visualiser 
 >    > 1. Select `Charts`
@@ -179,6 +181,15 @@ Now that you have a file containing all the data on the species you chose, this 
 > ### Expected temporal trend
 
 The expected temporal trend allows you to have an overview of the evolution of a species in a certain type of environment in the futur.
+
+
+![Expected temporal](http://openstack-192-168-100-19.genouest.org/u/clara_urfer/v/chart-flight-curve-regional-gam-tuto)
+
+
+trend]https://raw.githubusercontent.com/Claraurf/training-material/ecology/topics/ecology/tutorials/regionalGAM/Images/Expected%20temporal%20trend.png
+
+[Figure 1-1](http://openstack-192-168-100-19.genouest.org/plugins/visualizations/charts/saved?id=e85a3be143d5905b)
+
 >    > 1. Look for the tool `Expected temporal trend` with the the following parameters: 
 >    > * "Fichier tabulé, produit par l'outil ab_index": `output` of **abundance index**.
 >    
