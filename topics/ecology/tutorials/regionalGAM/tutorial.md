@@ -145,7 +145,9 @@ Now that you have a file containing all the data on the species you chose, this 
 >
 > Based on the flight curve, you can create a line chart which shows the occurence of the species through the years on a very visual material 
 
-![Flight curve chart](https://raw.githubusercontent.com/Claraurf/training-material/ecology/topics/ecology/tutorials/regionalGAM/Images/Chart%20flight%20curve%20.png)
+![Flight curve chart](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20Regional%20GAM.png)
+
+If you want to access the chart on an interactive interface, you can use click on the following link: [Chart on Galaxy](http://openstack-192-168-100-19.genouest.org/plugins/visualizations/charts/saved?id=e85a3be143d5905b)
 >
 >    > ### {% icon tip %} Visualiser 
 >    > 1. Select `Charts`
@@ -183,10 +185,6 @@ Now that you have a file containing all the data on the species you chose, this 
 The expected temporal trend allows you to have an overview of the evolution of a species in a certain type of environment in the futur.
 
 
-![Expected temporal](http://openstack-192-168-100-19.genouest.org/u/clara_urfer/v/chart-flight-curve-regional-gam-tuto)
-
-
-trend]https://raw.githubusercontent.com/Claraurf/training-material/ecology/topics/ecology/tutorials/regionalGAM/Images/Expected%20temporal%20trend.png
 
 [Figure 1-1](http://openstack-192-168-100-19.genouest.org/plugins/visualizations/charts/saved?id=e85a3be143d5905b)
 
