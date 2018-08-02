@@ -95,7 +95,7 @@ Partitioning data allows to divide a data set into subsets (ie bins), then make 
 >    > 2. `Random k-fold` partition the data randomly in a number of bins set by the user with the option `Number of Folds`
 
 * `Spatial Partition`, when there could be biais due to time, space or sampling method
->    > 1.`Block (k=4)` divide the area in four an put equally into four bins, the different occurrences.
+>    > 1. `Block (k=4)` divide the area in four an put equally into four bins, the different occurrences.
 >    > 2. `Checkboard (k=2)` uses two bins according to the position of the occurence on the grid.
 >    > 3. `Checkboard (k=4)` uses four bins according to the position of the occurence on the grid.
 > for both of these technics the number of occurrences into each bin may vary.
