@@ -1,5 +1,5 @@
 ---
-layout: tutorial_hands_on
+layout: tutorial hands on
 topic_name: ecology
 tutorial_name: Regional GAM
 ---
@@ -75,7 +75,8 @@ First of all, you will have to upload the files on Galaxy-E and then you maybe w
 >   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre`pasting the file containing 3 columns with the one headed by "MONTH". 
 >   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre`pasting the file containing 4 columns with the one headed by "DAY".
 >   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre`pasting the file you containing 5 with the one headed by "COUNT". 
->   >{: .comment}
+>   >  
+>   > {: .comment}
 >
 >   > ### {% icon question %} Questions
 >   >
@@ -101,6 +102,7 @@ When the dataset contains many details, it lengthens the file processing time th
 >
 
 # Step 2: Selectionning one specific species and showing all the data corresponding to it
+
 
 The second step of any Regional GAM data analysis is making sure to have one dataset of only one specific species that you will then be able to use. Because a graph is occurent only if it shows the occurence of one species trough the years. If you want to compare this evolution with the one of another species, you will have to superimpose the graphs on one another. 
 
@@ -197,3 +199,6 @@ The point of doing a linear regression is to determinate if the year has an infl
  
 # Conclusions  
 
+{:.no_toc}
+
+In this tutorial, we have analyzed regional GAM data to extract useful informations in order to be able to show different tendencies of a chosen species. 
