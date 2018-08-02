@@ -76,20 +76,15 @@ First of all, you will have to upload the files on Galaxy-E and then you maybe w
 >   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre`pasting the file containing 4 columns with the one headed by "DAY".
 >   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre`pasting the file you containing 5 with the one headed by "COUNT". 
 >
->
-> ### {% icon question %} Questions
->
-> 1. Why do you need to use `Coller deux jeux de données l'un à côté de l'autre` 
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Because you want to create a single dataset which countains all the data on a species. You decided to upload a dataset on RData and therefore you had to use `RData binary file reader` and `RData parser`. This last tool treats the file and allows you to open it on Galaxy-E but it creates as many files as there are columns (when RData object is composed from a unique data table). This is the reason why you had to carry out on a set of actions ending by the creation of one complete file. 
-> >
-> {: .solution}
->
-{: .question}
-
-
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. Why do you need to use `Coller deux jeux de données l'un à côté de l'autre` 
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>1. Because you want to create a single dataset which countains all the data on a species. You decided to upload a dataset on RData and therefore you had to use `RData binary file reader` and `RData parser`. This last tool treats the file and allows you to open it on Galaxy-E but it creates as many files as there are columns (when RData object is composed from a unique data table). This is the reason why you had to carry out on a set of actions ending by the creation of one complete file. 
+>    >    </details>
 
 
 >    > ## Re-sampling. 
