@@ -26,7 +26,7 @@ Then using `Tabular to CSV` on the new file to have the right format to use in W
 
 # Step 2: Using Wallace
 
-Wallace is an interactive interface which can simulate a species modeling distribution.
+[Wallace](https://wallaceecomod.github.io/) ([source code](https://github.com/wallaceEcoMod/wallace), [CRAN page](https://cran.r-project.org/web/packages/wallace/index.html)) is a R Shiny app integrated into Galaxy as an interactive environment which can simulate a species modeling distribution.
 
 ## Obtain occurrence data
 
@@ -34,7 +34,7 @@ With this you can either upload data directly from Wallace or you can upload fil
 
 > 1. Upload data from Galaxy-E
 >    > * Check `Galaxy History User`
->    > * Select the corect csv file
+>    > * Select the correct csv file
 > ### or
 > 2. If you want to upload data from Wallace
 >    > * Check `Query Database`
@@ -49,22 +49,20 @@ You now have your data for the next step.
 Here you'll have to chose the occurrences you want to use for the rest of your model. To do so, you have three options
 
 > * Option 1: `Select Occurrences On Map`
-> With this, you have to select your occurrence on the map by delimiting a geografic area you want to use.
+> With this, you have to select your occurrence on the map by delimiting a geographic area you want to use.
 
 > * Option 2: `Remove Occurrences By ID`
-> You'll be remooving occurrences you don't need, or want, by their ID.
+> You'll be removing occurrences you don't need, or want, by their ID.
 
 > * Option 3: `Spacial thin`
 > This can allow you to select occurrences by setting a minimum distance (in km) beetween the different occurrences. For exemple:
 >    > If you type 30 km, you'll end up with all the occurrences on the map which are at minimum 30km from each other.
 
-For this part you have to know where you want your study to take place with the occurrence informations you have.
-Best would be not to do it on data occurrences, but to create multiple sub-habitats to compare the parametres after.
-
+To have better idea about the robustness of you species distrbution model, it would be better at this step, to don't select the entire set of data occurrences, but repeat the complete Wallace workflow on occurences subgroups, one by one.
 ## Obtain Environmental Data
 
-The `WorldClim Bioclims` module will provide a raster with environmental variations from online sources. The Variables are mostly about temperature and precipitations. This will later be associated with the occurrences data.
-The raster is composed of environmental info. Each layer of the raster contain a climatic variable; going from BIO1 = Anual mean temperature, to BIO19 = Precipitation of Coldest Quarter.
+The `WorldClim Bioclims` module will provide a raster with environmental variations from online sources. The [Bioclimatic variables](http://www.worldclim.org/bioclim) are describing temperature and precipitations variations. This will later be associated with the occurrences data.
+The raster is composed of environmental information. Each layer of the raster contain a climatic variable; going from BIO1 = Anual mean temperature, to BIO19 = Precipitation of Coldest Quarter.
 
 > To load these data you can either:
 >    > * Use `WorldClim Bioclims` module
@@ -76,26 +74,26 @@ After loading the environmental data, you can go to the next point.
 ## Process environnemental Data
 
 Wallace will now associate environnmental data and occurrences data to make an area for your model.
-> * First: `Choose Background Extent` make a buffer zone around the occurrences. You can chosse the size of the buffer zone around your occurrences by choosing the distance in `Study region buffer distance`. This allows you to control the area you'll be working with and on which a map of suitability will be made.
+> * First: `Choose Background Extent` make a buffer zone around the occurrences. You can chosse the size of the buffer zone by choosing the distance in `Study region buffer distance`. This allows you to control the area you'll be working with and on which a map of suitability will be made.
 
 This is why you have to know what type of background extent you want to use.
->    > `Bounding box` will difine an area whit the occurrence centered
+>    > `Bounding box` will define an area whit occurrences centered
 
 >    > `Minimum convex polygon` will make an area considering the repartition of your occurrences
 
->    > `Point buffers` will use occurrences to build a buffer zone aroud them
+>    > `Point buffers` will use occurrences localities to build a buffer zone aroud each of them
 
-Then, to associate your occurrences to the environmental data, you'll have to choose the number of point to sample. This will cross
+Then, to associate your occurrences to the environmental data, you'll have to choose the number of points to sample. This will cross
 
 ## Partition Occurrence Data
 
-Partitioning data allows to divide a data set into subset, then make a model on each of all the groups but one and test it on the last one (assuming that all the groups are independent. You'll have two options: 
+Partitioning data allows to divide a data set into subsets (ie bins), then make a model on each of all the groups but one and test it on the last one (assuming that all the groups are independent). You'll have two options: 
 
-* `Non-spatial Partition`,is a type of partition used when sure that no biais due to space, time or sampling methode
+* `Non-spatial Partition`, is a type of partition used when there is no biais due to space, time or sampling method
 >    > 1. `Jakknife (k=n)` consider that each occurrence in the dataset is equal to a bin. This is usually used when you have a dataset with no known biais.
->    > 2. `Random k-fold` partition de data randomly in a nuber of bin set by the user with the option `Number of Folds`
+>    > 2. `Random k-fold` partition the data randomly in a number of bins set by the user with the option `Number of Folds`
 
-* `Spatial Partition`, when there could be biais due to time, space or sampling methode
+* `Spatial Partition`, when there could be biais due to time, space or sampling method
 >    > 1.`Block (k=4)`
 >    > 2.
 >    > 3.
