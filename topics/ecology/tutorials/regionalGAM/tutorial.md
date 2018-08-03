@@ -88,24 +88,20 @@ First of all, you will have to upload the files on Galaxy-E and then you maybe w
 >   >    1. Because you want to create a single dataset which countains all the data on a species. You decided to upload a dataset on RData and therefore you had to use `RData binary file reader` and `RData parser`. This last tool treats the file and allows you to open it on Galaxy-E but it creates as many files as there are columns (when RData object is composed from a unique data table). This is the reason why you had to carry out on a set of actions ending by the creation of one complete file. 
 >    >    </details>
 
-
 >    > ## Re-sampling. 
-When the dataset contains many details, it lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example, the list of SITE of the dataset you are using is really long and the SITES are classified into sub-sites. Here, we will assume that your file doesn't really need be as precised and this is the reason why you have to specify you don't want the sub-sites. To create a new "down-sampled" file, you can follow these steps:   
+When the dataset contains many details, it lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example, the list of SITE of the dataset you are using is really long and the SITES are classified into sub-sites. Here, we will assume that your file doesn't really need be as precise and this is the reason why you have to specify you don't want the sub-sites. To create a new "down-sampled" file, you can follow these steps:   
 
 >    > 1. Search for the tool `trouver et remplacer des patterns dans des colonnes` on the file on CSV with the following  parameters.
 >    >  * Click on`"insert checks"`
->    >  * "Trouver l'expression suivante": `"(\.[0-9]+)"` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into                                    >          account.
+>    >  * "Trouver l'expression suivante": `"(\.[0-9]+)"` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
 >    >  * "Remplacement":`"leave it empty"`.
 >    > 3. Search for the tool `tabular to CSV`and select the file of **trouver et remplacer des patterns dans des colonnes**.
 >    
 >
->
-
 # Step 2: Selectionning one specific species and showing all the data corresponding to it
 
 
 The second step of any Regional GAM data analysis is making sure to have one dataset of only one specific species that you will then be able to use. If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another. 
-
 
 
 > ## How many species are taken into account in this dataset
@@ -128,7 +124,17 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >    > * Separators: `","`.
 >    > 4. Repeat this last operation on all files if you want to work on different species. 
 >    
+>   > {: .comment}
 >
+>   > ### {% icon question %} Questions
+>   >
+>   > 1. How many species does your dataset take into account ?
+>   >
+>   >    <details>
+>   >    <summary>Click to view answers</summary>
+>   >    <ol type="1">
+>   >    1. Because you want to create a single dataset which countains all the data on a species. You decided to upload a dataset on RData and therefore you had to use `RData binary file reader` and `RData parser`. This last tool treats the file and allows you to open it on Galaxy-E but it creates as many files as there are columns (when RData object is composed from a unique data table). This is the reason why you had to carry out on a set of actions ending by the creation of one complete file. 
+>    >    </details>
 
 
 
