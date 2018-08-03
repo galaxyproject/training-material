@@ -90,11 +90,11 @@ First of all, you will have to upload the files on Galaxy-E and then you maybe w
 
 
 >    > ## Re-sampling. 
-When the dataset contains many details, it lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example, the list of SITE of the dataset you are using are is really long and the SITES are classified into sub-sites. Your file doesn't really need be as precised and this is the reason why you have to specify you don't want the sub-sites to be considered in order to create a new  file that you will be able to use.   
+When the dataset contains many details, it lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example, the list of SITE of the dataset you are using is really long and the SITES are classified into sub-sites. Here, we will assume that your file doesn't really need be as precised and this is the reason why you have to specify you don't want the sub-sites. To create a new "down-sampled" file, you can follow these steps:   
 
 >    > 1. Search for the tool `trouver et remplacer des patterns dans des colonnes` on the file on CSV with the following  parameters.
 >    >  * Click on`"insert checks"`
->    >  * "Trouver l'expression suivante": `"(\.[0-9]+)"` which specifies that you don't want the sub-sites to be taken into                                    >          account.
+>    >  * "Trouver l'expression suivante": `"(\.[0-9]+)"` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into                                    >          account.
 >    >  * "Remplacement":`"leave it empty"`.
 >    > 3. Search for the tool `tabular to CSV`and select the file of **trouver et remplacer des patterns dans des colonnes**.
 >    
@@ -104,29 +104,29 @@ When the dataset contains many details, it lengthens the file processing time th
 # Step 2: Selectionning one specific species and showing all the data corresponding to it
 
 
-The second step of any Regional GAM data analysis is making sure to have one dataset of only one specific species that you will then be able to use. Because a graph is occurent only if it shows the occurence of one species trough the years. If you want to compare this evolution with the one of another species, you will have to superimpose the graphs on one another. 
+The second step of any Regional GAM data analysis is making sure to have one dataset of only one specific species that you will then be able to use. If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another. 
 
 
 
 > ## How many species are taken into account in this dataset
-> As the dataset is important and countains manw informations, you want to know wether the data are about only one species or  more.
+> As the dataset is quite big and countains heterogeneous informations, you want to know wether the data are about one species or more.
 > 1. Search for the tool `compter le nombre d'occurence de chaque enrégistrement`with the following parameters.
 > * "Compter les occurrences des valeurs présentes dans la(les) colonne(s)": `column 1`
 > * "Délimité par": `tabulation`.
 > * "Comment les résultats doivent t'ils être triés ?": `Avec la valeur la plus présente en premier`.
 > 2. Inspect the file by clicking on the `eye` icon to check how many species are taken into account.
-> > If there is ony one species you can't skip the following steps ang go directly convert your file using the tool `tabular  to CSV`
+> > If there is only one species you can skip the following steps and go directly to the file datatype convertion step using the tool `tabular to CSV`
 >
 >    > ### Create a new file concerning only the data of one species
->    > 1. Copy the name of the species you are interested in from the file on CSV (for example: "Pyronia tithonus").
+>    > 1. Copy the name of the species you are interested in from the CSV file (for example: "Pyronia tithonus").
 >    > 2. Search for the tool`filtrer des données dur une colonne en utilisant des expressions simples`with the following   parameters.
->    > * En utilisant la condition suivante: `"c1=='habitat2'"` replacing 'habitat2' with the name of the species (for example: `"c1=='"Pyronia tithonus"'"`  instead of c1=='habitat2')  
+>    > * En utilisant la condition suivante: `"c1=='habitat2'"` replacing 'habitat2' with the name of the species (for example: `"c1=='"Pyronia tithonus"'"`)  
 >    > * Nombre de lignes d'en-tête à passer: `"0"`.
->    > * You can repeat this set of actions as much as is necessary changing only the name of the species taken into account.
->    > 3. Search for the tool`tabular to CSV` with the following parameters 
->    > * Choose the file you've just created 
+>    > * You can repeat this set of actions as much as necessary, changing only the name of the species taken into account.
+>    > 3. Search for the tool `tabular to CSV` with the following parameters 
+>    > * Select the file you've just created 
 >    > * Separators: `","`.
->    > 4. Repeat this last operation on all the differents files on different species. 
+>    > 4. Repeat this last operation on all files if you want to work on different species. 
 >    
 >
 
@@ -134,7 +134,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 
  # Step 3: Displaying the occurence of the chosen species through the years
  
-Now that you have a file containing all the data on the species you chose, this step is goint to explain to you what you can do with it and how useful it can be. The main goal of this step is basically to create a material that can be used to generate charts.  What you could also do, for example, would be to compare the evolution of various species trough the years in the same site. You would have to superpose the different graphs on one another. The charts have the benefit of being very visual and to be easier to interpret than a dataset.
+Now you have a file containing all the data on the species of interest. The main goal of this step is basically to create a material that can be used to generate charts. What you could also do, for example, would be to compare the evolution of various species through the years in the same site. You would have to superpose the different graphs on one another.
 >
 
 > ### {% icon hands_on %} Hands-on: Phenology
