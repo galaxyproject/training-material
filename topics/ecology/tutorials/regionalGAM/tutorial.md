@@ -136,16 +136,17 @@ The second step of any Regional GAM data analysis is making sure to have one dat
  
 Now that you have a file containing all the data on the species you chose, this step is goint to explain to you what you can do with it and how useful it can be. The main goal of this step is basically to create a material that can be used to generate charts.  What you could also do, for example, would be to compare the evolution of various species trough the years in the same site. You would have to superpose the different graphs on one another. The charts have the benefit of being very visual and to be easier to interpret than a dataset.
 >
-> ### Create a flight curve 
+
+> ### {% icon hands_on %} Hands-on: Phenology
 
 > 1. Search for the tool `flight curve`
 > * Select the file on CSV with the data on one species
 >
 > Based on the flight curve, you can create a line chart which shows the occurence of the species through the years on a very visual material 
 
-![Flight curve chart](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20Regional%20GAM.png)
+![Flight curve chart](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20Regional%20GAM.png "This shows the occurrence of Ardea alba")
 
-If you want to access the chart on an interactive interface, you can use click on the following link: [Chart on Galaxy](http://openstack-192-168-100-19.genouest.org/plugins/visualizations/charts/saved?id=e85a3be143d5905b)
+If you want to access the chart on an interactive interface, you can click on the following link: [Chart on Galaxy](http://openstack-192-168-100-19.genouest.org/plugins/visualizations/charts/saved?id=417e33144b294c21)
 >
 >    > ### {% icon tip %} Visualiser 
 >    > 1. Select `Charts`
@@ -159,7 +160,7 @@ If you want to access the chart on an interactive interface, you can use click o
 >    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 >
 >
-> ### Abundance per year and per site 
+> ### {% icon hands_on %} Hands-on: Abundance per year and per site
 >
 > 1. Look for the tool `Abundance index` with the following parameters:
 > * "Fichier de comptage": onespecies dataset on CSV.  
@@ -182,8 +183,9 @@ If you want to access the chart on an interactive interface, you can use click o
 
 The expected temporal trend allows you to have an overview of the evolution of a species in a certain type of environment in the futur.
 
-![Expected temporal trend](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Expected%20temporal%20trend.png)
+![Expected temporal trend](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Expected%20temporal%20trend.png "This shows the expected evolution of Ardea alba")
 
+> ### {% icon hands_on %} Hands-on: Expected temporal trend
 >    > 1. Look for the tool `Expected temporal trend` with the the following parameters: 
 >    > * "Fichier tabulé, produit par l'outil ab_index": `output` of **abundance index**.
 >    
