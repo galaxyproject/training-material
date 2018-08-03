@@ -68,6 +68,9 @@ Here you'll have to chose the occurrences you want to use for the rest of your m
 >    > If you type 30 km, you'll end up with all the occurrences on the map which are at minimum 30km from each other.
 
 To have better idea about the robustness of you species distrbution model, it would be better at this step, to don't select the entire set of data occurrences, but repeat the complete Wallace workflow on occurences subgroups, one by one.
+
+Because we want to work on the data from the US we'll select all the occurrences there with the first option:`Select Occurrences On Map`  
+
 ## Obtain Environmental Data
 
 The `WorldClim Bioclims` module will provide a raster with environmental variations from online sources. The [Bioclimatic variables](http://www.worldclim.org/bioclim) are describing temperature and precipitations variations. This will later be associated with the occurrences data.
