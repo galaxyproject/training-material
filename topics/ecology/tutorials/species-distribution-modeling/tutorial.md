@@ -104,9 +104,9 @@ Partitioning data allows to divide a data set into subsets (ie bins), then make 
 
 ## Build and Evaluate Niche Model
 
-Wallace can now build different models using either: 1) the presence-only approach BIOCLIM (Module BIOCLIM); or 2) the presence-background algorithm Maxent (Module Maxent). To evaluate these models, Wallace determines the ability to predict localities that are held out of the training ones (the ones who are used to construct models) and provide evaluation metrics as the AUC mean. One often used threshold is 0,75 to consider a model accurate. The closer to 1 the better.
+Wallace can now build different models using either: 1) the presence-only approach BIOCLIM (Module BIOCLIM); or 2) the presence-background algorithm Maxent (Module Maxent). To evaluate these models, Wallace determines the ability to predict localities that are held out of the training ones (the ones who are used to construct models) and provide evaluation metrics as the AUC mean. One often used AUC threshold is 0,75 to consider a model accurate. The closer to 1 the better.
 
 ## Visualize Model Results
 
 After the precedent step you can now model your theoretical niche.
-first with `BIOCLIM Envelope Plots`you can make a chart and choose the parameters of your interest and see how the data respond and you can also adapt the threshold for more accuracy 
+first with `BIOCLIM Envelope Plots`you can make a chart and choose the parameters of interest and see how the data responds adapting the threshold for more accuracy 
