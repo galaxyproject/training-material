@@ -9,7 +9,7 @@ tutorial_name: species distribution modeling
 
 Species Modeling Distribution can help understand the distribution of a species depending of environmental parameters such as temperature and precipitation. It can also help understand the impact of climate change on the repartition of some species. This is done by associating data occurrences of a species with environmental data.
 
-The goal of this study is to model a theorical ecological niche and predict futur repartition using Species Modeling Distribution through the use of Wallace interactive environment on Galaxy. We'll use the data occurrences of Chrysemys Picta (Painted turtle) from the tool `Get species occurrences data and taxref informations` in Galaxy-E applied on the North America region.   
+The goal of this study is to model a theorical ecological niche and predict future repartition using Species Modeling Distribution through the use of Wallace interactive environment on Galaxy. We'll use the data occurrences of US *Chrysemys Picta* (Painted turtle) from the North America region.   
 
 # Step 1: Loading a dataset
 
@@ -25,12 +25,17 @@ You now have a file with about `9508` occurrences
 
 Because you only need informations about occurrences and their location: 
 > use the tool `Couper des colonnes d'un jeu de données tabulé` 
-> then in "Couper les colonnes" type `"c1,c2,c3"`
+> then in "Couper les colonnes" type `"c1,c2,c3,c44"`
+
+TODO question: For what stand c1, c2, c3, c44
+answer: c1 is the species name and c2 &c3 are respectively longitude an latitude corresponding to each occurrences of the file. The fourth column contain country code to have a possibility to easily filter occurences by countries.
+
 
 Then using the tool `Tabular to CSV` on this new file to have the right format to use in Wallace.
 
-TODO question: For what stand c1, c2,c3
-answer: c1 is the species name and c2 &c3 are respectively longitude an latitude correspoinding to each occurrences of the file
+Finally, we want to keep only occurence records from US. To do that, we will use a tool to filter dataset on the fourth column. Can you find a way to do that alone ?
+
+TODO tips/answer: Using the "Filtrer des données sur une colonne en utilisant des expressions simples", you can enter the following condition ```c4=='US'``` specifying that we need to don't consider the first line as it's a header.
 
 # Step 2: Using Wallace
 
