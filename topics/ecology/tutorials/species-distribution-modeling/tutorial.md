@@ -21,7 +21,7 @@ In this study the datasets are all imported from the tool `Get species occurrenc
 >    > * Fill the "Scientific name" with `"Chrysemys Picta"`
 >    > * Choose the data source `"Gbif"` and set the number of occurrences on `"10000"` 
 >    > * Click on "Execute"
-You now have a file with about 9508 occurrences
+You now have a file with about `9508` occurrences
 
 Because you only need informations about occurrences and their location: 
 > use the tool `Couper des colonnes d'un jeu de données tabulé` 
@@ -42,13 +42,13 @@ With this you can either upload file you've loaded earlier from Galaxy-E data or
 
 > 1. Upload data from Galaxy-E
 >    > * Check `Galaxy History User`
->    > * Select the correct csv file
+>    > * Select the correct csv file with your "Chrysemys Picta" occurrences informations 
 > ### or
 > 2. If you want to upload data from Wallace
 >    > * Check `Query Database`
->    > * Select the databank of your interest between Gbif, VertNet or BISON 
->    > * Type the name of the wanted species
->    > * And then set the number of occurrences
+>    > * Select the `Gbif` databank 
+>    > * Type "Chrysemys Picta"
+>    > * And then set the number of occurrences to `"10000"` 
 
 You now have your data for the next step.
 
