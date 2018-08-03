@@ -104,7 +104,7 @@ Partitioning data allows to divide a data set into subsets (ie bins), then make 
 
 ## Build and Evaluate Niche Model
 
-Wallace can now test different models on the occurrences and see if the model is accurate. The AUC mean represent all the model tested on the data and to know if it's suitable you have too look at the AUCmean. The threshold is 0,75 to consider a model accurate. The closer to 1 the better.
+Wallace can now build different models using either: 1) the presence-only approach BIOCLIM (Module BIOCLIM); or 2) the presence-background algorithm Maxent (Module Maxent). To evaluate these models, Wallace determines the ability to predict localities that are held out of the training ones (the ones who are used to construct models) and provide evaluation metrics as the AUC mean. One often used threshold is 0,75 to consider a model accurate. The closer to 1 the better.
 
 ## Visualize Model Results
 
