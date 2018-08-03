@@ -8,26 +8,26 @@ tutorial_name: Regional GAM
 {:.no_toc}
 
 
-This tutorial is on regional GAM data analysis, it will explain to you how to use different tools on Galaxy-E allowing you to deal with the dataset containing informations on the occurence of various species per site and per days through a couple of years.
-After a certain numbers of steps, you will be able to extract the data on a single species and show its occurence through the years. The goal of this exercise is to be able to create abundance trend over time and biodiversity indicators based on the dataset. You could for example try to predict the occurence of one specific species in a certain type of environnement using the prediction model of climate evolution. Based on charts that you will generate, you could try to explain the evolution of a species with environmental data (temperatures changing, modifications of the environmental conditions).
-You will basically learn how to create a file on the base of which you can create a visual material that can be quite easily understood and therefore be efficient for a large audience.
+This tutorial will show how to study species phenology through the computation of abundance index and trends. It will explain you how to use different [regionalGAM](https://github.com/RetoSchmucki/regionalGAM) tools on Galaxy-E allowing you to deal with datasets containing occurences informations for various species per site and per date through a couple of years.
+After a certain numbers of steps, you will be able to extract single species data and study related phenology through the years. The goal of this exercise is to be able to create abundance trend over time and biodiversity indicators. You could for example try to predict the occurences of one specific species in a certain type of environnement using the prediction model of climate evolution. Based on charts that you will generate, you could try to explain the evolution of a species with environmental data (temperatures variations, modifications of the environmental conditions).
+You will basically learn how to create a file on the basis of which you can create a visual material that can be quite easily understood and therefore be efficient for a large audience.
 
 
 > ### Agenda
 > In this tutorial, we will cover:
 1. Pre-processing
 > {:pre-processing}
-2. Selectionning one specific species and show all the data corresponding to it
-> {:selectionning one specific species and show all te data corresponding to it}
-3. Show the occurence of the chosen species through the years
-> {:show the occurence of the chosen species through the years}
+2. Selectionning one specific species and show all corresponding data
+> {:selectionning one specific species and show all corresponding data}
+3. Displaying the occurence of the chosen species through the years
+> {:Displaying the occurence of the chosen species through the years}
 4. Conclusion 
 > {:conclusion}
 
 # Step 1: Pre-processing
 
-The goal of the first step is to upload and prepare the file so that it will be usable for the regional GAM analysis.
-First of all, you will have to upload the files on Galaxy-E and then you maybe will have to use some specific tools to format them in order to be able to use them.
+The goal of the first step is to upload and prepare the file so that it will be usable for the *regional GAM* analysis.
+First of all, you will have to upload the files on Galaxy-E and then you maybe will have to use some specific formating tools to be able to use *regional GAM* tools.
 
 >  ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -36,13 +36,13 @@ First of all, you will have to upload the files on Galaxy-E and then you maybe w
 >    library named `regional GAM data tutorial`
 >
 >    ```
->    Unispecies dataset on CSV:
+>    CSV dataset with only one species:
 >    https://zenodo.org/record/1324204/files/regional%20GAM%20data.csv?download=1
 >
->    Unispecies dataset on RData:
+>    RData dataset with only one species:
 >    https://zenodo.org/record/1324204/files/gatekeeper_CM%20.RData?download=1csv
 >
->    Multispecies dataset on CSV: 
+>    CSV dataset with several species: 
 >    https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv?download=1
 >    ```
 >
@@ -57,7 +57,7 @@ First of all, you will have to upload the files on Galaxy-E and then you maybe w
 >
 > ### {% icon comment %} Comment
 >
-> ⚠️ Please note that the file must contain the headers "SITES","SPECIES","YEAR", "MONTH","DAY","COUNT", that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
+> ⚠️ Please note that the file must contain a header corresponding to: ```"SITES","SPECIES","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
 > 
 >  Note also that the first file mentionned above is on the RData format and if you choose to use it, you will have to process this binary file to obtain an appropriate CSV dataset. To do so, you can use the following tools:
 >   > * Search for the tool `RData binary file reader`with the following parameters:
@@ -132,7 +132,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 
 
 
- # Step 3: Show the occurrence of the chosen species through the years
+ # Step 3: Displaying the occurence of the chosen species through the years
  
 Now that you have a file containing all the data on the species you chose, this step is goint to explain to you what you can do with it and how useful it can be. The main goal of this step is basically to create a material that can be used to generate charts.  What you could also do, for example, would be to compare the evolution of various species trough the years in the same site. You would have to superpose the different graphs on one another. The charts have the benefit of being very visual and to be easier to interpret than a dataset.
 >
