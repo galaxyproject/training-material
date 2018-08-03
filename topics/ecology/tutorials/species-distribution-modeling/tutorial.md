@@ -9,7 +9,7 @@ tutorial_name: species distribution modeling
 
 Species Modeling Distribution can help understand the distribution of a species depending of environmental parameters such as temperature and precipitation. It can also help understand the impact of climate change on the repartition of some species. This is done by associating data occurrences of a species with environmental data.
 
-The goal of this study is to model a theorical ecological niche using Species Modeling Distribution through the use of Wallace interactive environment on Galaxy.    
+The goal of this study is to model a theorical ecological niche and predict futur repartition using Species Modeling Distribution through the use of Wallace interactive environment on Galaxy. We'll use the data occurrences of Chrysemys Picta (Painted turtle) from the tool `Get species occurrences data and taxref informations` in Galaxy-E applied on the North America region.   
 
 # Step 1: Loading a dataset
 
@@ -18,11 +18,19 @@ In this study the datasets are all imported from the tool `Get species occurrenc
 >    > ### {% icon tip %} Tip: Importing data set from a data bank
 
 >    > * Go into "upload files" (top left panel) then "Get species occurrences data and taxref informations"
->    > * Fill the scientific name of the species you want 
->    > * Choose the data source and the number of occurrences needed
+>    > * Fill the "Scientific name" with `"Chrysemys Picta"`
+>    > * Choose the data source `"Gbif"` and set the number of occurrences on `"10000"` 
 >    > * Click on "Execute"
+You now have a file with about 9508 occurrences
 
-Then using the tool `Tabular to CSV` on the new file to have the right format to use in Wallace.
+Because you only need informations about occurrences and their location: 
+> use the tool `Couper des colonnes d'un jeu de données tabulé` 
+> then in "Couper les colonnes" type `"c1,c2,c3"`
+
+Then using the tool `Tabular to CSV` on this new file to have the right format to use in Wallace.
+
+TODO question: For what stand c1, c2,c3
+answer: c1 is the species name and c2 &c3 are respectively longitude an latitude correspoinding to each occurrences of the file
 
 # Step 2: Using Wallace
 
