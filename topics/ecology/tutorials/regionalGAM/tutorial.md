@@ -144,7 +144,7 @@ Now that you have a file containing all the data on the species you chose, this 
 >
 > Based on the flight curve, you can create a line chart which shows the occurence of the species through the years on a very visual material 
 
-![Flight curve chart](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20Regional%20GAM.png "This shows the occurrence of Ardea alba")
+![Phenology chart](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20regional%20GAM.png "This shows the occurrence of Ardea alba and Bombycilla garrulus")
 
 If you want to access the chart on an interactive interface, you can click on the following link: [Chart on Galaxy](http://openstack-192-168-100-19.genouest.org/plugins/visualizations/charts/saved?id=417e33144b294c21)
 >
