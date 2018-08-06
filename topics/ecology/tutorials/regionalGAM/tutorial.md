@@ -45,7 +45,7 @@ First of all, you will have to upload the files on Galaxy-E and then you maybe w
 >    CSV dataset with several species: 
 >    https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv?download=1
 >    ```
->
+>   
 > ### {% icon tip %} Tip: Importing data via links
 >    >
 >    > * Copy the link location
@@ -94,23 +94,26 @@ First of all, you will have to upload the files on Galaxy-E and then you maybe w
 >    >    </details>
 >    {: .question}
 
+{: .hands_on}
+
 >    > ## Re-sampling. 
 When the dataset contains many details, it lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example, the list of SITE of the dataset you are using is really long and the SITES are classified into sub-sites. Here, we will assume that your file doesn't really need be as precise and this is the reason why you have to specify you don't want the sub-sites. To create a new "down-sampled" file, you can follow these steps:   
 
+> ### {% icon hands_on %} Hands-on: hiding some informations
 >    > 1. Search for the tool `trouver et remplacer des patterns dans des colonnes` on the file on CSV with the following  parameters.
 >    >  * Click on`"insert checks"`
 >    >  * "Trouver l'expression suivante": `"(\.[0-9]+)"` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
 >    >  * "Remplacement":`"leave it empty"`.
 >    > 3. Search for the tool `tabular to CSV`and select the file of **trouver et remplacer des patterns dans des colonnes**.
 >    
->
-# Step 2: Selectionning one specific species and showing all the data corresponding to it
+{: .hands_on}
 
+# Step 2: Selectionning one specific species and showing all the data corresponding to it
 
 The second step of any Regional GAM data analysis is making sure to have one dataset of only one specific species that you will then be able to use. If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another. 
 
-
-> ## How many species are taken into account in this dataset
+> ### {% icon hands_on %} Hands-on: How many species are taken into account in this dataset
+>
 > As the dataset is quite big and countains heterogeneous informations, you want to know wether the data are about one species or more.
 > 1. Search for the tool `compter le nombre d'occurence de chaque enrégistrement`with the following parameters.
 > * "Compter les occurrences des valeurs présentes dans la(les) colonne(s)": `column 1`
@@ -146,6 +149,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >    >    </details>
 >    {: .question}
 
+{: .hands_on}
 
 
  # Step 3: Displaying the occurence of the chosen species through the years
@@ -157,8 +161,8 @@ Now you have a file containing all the data on the species of interest. The main
 
 This step will allow you the show the phenology of a species and then to create charts representing it. In the second part, you will learn that it is possible to show the phenology of various species on a single chart allowing to compare them and analyse them more easily. 
 
-> 1. Search for the tool `flight curve`
-> * Select the file on CSV with the data on one species
+> 1. Search for the tool `flight curve` with the following parameters: 
+> * "Fichier de comptage": `output` from **flight curve**.
 >
 > 🔹 Based on the flight curve, you can create a line chart which shows the occurence of the species through the years on a very visual material 
 
@@ -211,8 +215,8 @@ If you want to access the chart on an interactive interface, you can click on th
 > ### {% icon hands_on %} Hands-on: Abundance per year and per site
 >
 > 1. Look for the tool `Abundance index` with the following parameters:
-> * "Fichier de comptage": onespecies dataset on CSV.  
-> * "Flight curve output": flight curved obtained .
+> * "Fichier de comptage": `output` from **tabular to CSV**.  
+> * "Flight curve output": `output` from **flight curve**.
 
 
 > 🔹 Based on the abundance index, we can create a chart showing the anual trend abundance of a certain species per site. 
@@ -235,7 +239,7 @@ The expected temporal trend allows you to have an overview of the evolution of a
 
 > ### {% icon hands_on %} Hands-on: Expected temporal trend
 >    > 1. Look for the tool `Expected temporal trend` with the the following parameters: 
->    > * "Fichier tabulé, produit par l'outil ab_index": `output` of **abundance index**.
+>    > * "Fichier tabulé, produit par l'outil ab_index": `output` from **abundance index**.
 >    
 > ⚠️ Please note that sometimes the expected temporal trend can't be done on dataset. If you want this action to work, the occurences on your dataset must lie between the month of April and the end of the month of September.
 
@@ -246,11 +250,11 @@ Note also that you will obtain two files resulting of the action above. The firs
 The point of doing a linear regression is to determinate if the year has an influence on the abundance of a species. 
 
 >    > 1. Look for the tool `linear regression` with the following parameters.
->    > * "Fichier produit par l'outil glmmpql/Expected temporal trend": `output 2` of **temporal trend**. 
->    > * "Fichier produit par l'outil ab_index": `output` of **abundance index**.
+>    > * "Fichier produit par l'outil glmmpql/Expected temporal trend": `output 2` from **temporal trend**. 
+>    > * "Fichier produit par l'outil ab_index": `output` from **abundance index**.
  
 # Conclusions  
 
 {:.no_toc}
 
-In this tutorial, you have analyzed regional GAM data to extract useful informations in order to be able to show different tendencies of a chosen species. Therefore, you are now able to treat the dataset so that it shows only the data concerning one specific species of your choice. From there, you can show the occurrence of this species through the years first on a dataset and then on a visual chart. You have also learned how to represent on a single chart the occurences of various species. Afterwards, we have shown you how to create a dataset containing the informations on the abundance of a species per year and per site. Based on which you can henceforth visually represent the annual abundance trend on a chart. Thereafter, you have the possibility of showing the expected temporal trend, based on which you will be able to try predicting the future evolution a given species. The last part of this tutorial has shown you how to calculate the linear regression allowing you to determinate wether the year has an influence on the abundance of a species or wether it has not. 
+In this tutorial, you have analyzed regional GAM data to extract useful informations in order to be able to show different tendencies of a chosen species. Therefore, you are now able to treat the dataset so that it shows only the data concerning one specific species of your choice. From there, you can show the occurrence of this species through the years first on a dataset and then on a visual chart. You have also learned how to represent on a single chart the occurences of various species. Afterwards, we have shown you how to create a dataset containing the informations on the abundance of a species per year and per site. Based on which you can henceforth visually represent the annual abundance trend on a chart. Thereafter, you have the possibility of showing the expected temporal trend, based on which you will be able to try predicting the future evolution a given species. The last part of this tutorial has shown you how to calculate the linear regression allowing you to determinate wether the year has an influence on the abundance of a species or not. 
