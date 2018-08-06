@@ -105,6 +105,20 @@ When the dataset contains many details, it lengthens the file processing time th
 >    >  * "Trouver l'expression suivante": `"(\.[0-9]+)"` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
 >    >  * "Remplacement":`"leave it empty"`.
 >    > 3. Search for the tool `tabular to CSV`and select the file of **trouver et remplacer des patterns dans des colonnes**.
+
+ > ### {% icon question %} Questions
+>   >
+>    > 1. What is the point of hiding data from the dataset ?
+>    > 2. In which specific case you decide to hide informations ? 
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li> Hiding informations you have decided not to take into account can be very usefull because it shortens the file processing time. </li>
+>    >    <li> It must be done only if the dataset contains very precise informations and if you have decided it doesn't need to be. In this case you can do a set of actions in order to allow your dataset not to show all its sub-classes. </li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
 >    
 {: .hands_on}
 
