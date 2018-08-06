@@ -188,6 +188,7 @@ If you want to access the chart on an interactive interface, you can click on th
 > ⚠️ Please note that it is possible to show the occurences of more than one species on a single chart. If you are interested in doing so, you should follow the tip below.
 
  > ### {% icon tip %} Visualiser 
+ 
 >    > 1. Select `Charts`
 >    > 2. Give it a proper name
 >    > 3. Select a visualization: "line chart (NVD 3) 
@@ -252,6 +253,8 @@ The point of doing a linear regression is to determinate if the year has an infl
 >    > 1. Look for the tool `linear regression` with the following parameters.
 >    > * "Fichier produit par l'outil glmmpql/Expected temporal trend": `output 2` from **temporal trend**. 
 >    > * "Fichier produit par l'outil ab_index": `output` from **abundance index**.
+
+{: .hands_on}
  
 # Conclusions  
 
