@@ -115,7 +115,7 @@ When the dataset contains many details, it lengthens the file processing time th
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
 >    >    <li> Hiding informations you have decided not to take into account can be very usefull because it shortens the file processing time. </li>
->    >    <li> It must be done only if the dataset contains very precise informations and if you have decided it doesn't need to be. In this case you can do a set of actions in order to allow your dataset not to show all its sub-classes. </li>
+>    >    <li> It must be done only if the dataset contains very detailed informations and if you have decided it doesn't need to be. In this case you can do a set of actions in order to allow your dataset not to show all its sub-classes. </li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
