@@ -63,7 +63,7 @@ First of all, you will have to upload the files on Galaxy-E and then you maybe w
 >   > * Search for the tool `RData binary file reader`with the following parameters:
 >   >      * "Rdata binary file to explore": "dataset on RData" 
 >   > * Search for the tool `RData parser` with the following parameters:
->   >      * "Rdata file to explore": "dataset on RData"
+>   >      * "Rdata file to explore": `"dataset on RData"`
 >   >      * "File with .Rdata content details": file of **`RData binary file reader`**
 >   >      * "Select which attribute(s) you want to extract": select everything but "trend"
 >   >      * ⚠️ Please note that the tool `RData parser` creates separated files, each of them containing one column. The file with the "TREND" header can be let aside as we don't need it for what will follow.
@@ -133,7 +133,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >   >    <details>
 >   >    <summary>Click to view answers</summary>
 >   >    <ol type="1">
->   >    1. The dataset contains informations on 23 different species. 
+>   >    1. The dataset contains informations on 2 different species. 
 >    >    </details>
 
 
@@ -227,9 +227,11 @@ The expected temporal trend allows you to have an overview of the evolution of a
 >    
 > ⚠️ Please note that sometimes the expected temporal trend can't be done on dataset. If you want this action to work, the occurences on your dataset must lie between the month of April and the end of the month of September.
 
+Note also that wou will obtain two files resulting of the action above. The first will be the graph and the second will contains the values of "x".
+
 > ### Linear regression 
 
-The point of doing a linear regression is to determinate if the year has an influence on the abundnce of a species. 
+The point of doing a linear regression is to determinate if the year has an influence on the abundance of a species. 
 
 >    > 1. Look for the tool `linear regression` with the following parameters.
 >    > * "Fichier produit par l'outil glmmpql/Expected temporal trend": `output 2` of **temporal trend**. 
@@ -239,4 +241,4 @@ The point of doing a linear regression is to determinate if the year has an infl
 
 {:.no_toc}
 
-In this tutorial, we have analyzed regional GAM data to extract useful informations in order to be able to show different tendencies of a chosen species. 
+In this tutorial, you have analyzed regional GAM data to extract useful informations in order to be able to show different tendencies of a chosen species. Therefore, you are now able to treat the dataset so that it shows only the data concerning one specific species of your choice. From there, you can show the occurrence of this species through the years first on a dataset and then on a visual chart. You have also learned how to represent on a single chart the occurences of various species. Afterwards, we have shown you how to create a dataset containing the informations on the abundance of a species per year and per site. Based on which you can henceforth visually represent the annual abundance trend on a chart. Thereafter you have the possibility of showing the expected temporal trend which you will be able to try predicting the future evolution a given species. The last part of this tutorial has shown you how to calculate the linear regression allowing you to determinate wether the year has an influence on the abundance of a species or wether it has not. 
