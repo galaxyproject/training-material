@@ -217,14 +217,14 @@ If you want to access the chart on an interactive interface, you can click on th
 >
 > ### Abundance per year and per site
 
-
+This will allow you to create a file showing the abundance per year of a chosen species in a certain site. Based on this file you will then learn how to represent this abundance on a chart. 
 >
 > 1. Look for the tool `Abundance index` with the following parameters:
 > * "Fichier de comptage": `output` from **tabular to CSV**.  
 > * "Flight curve output": `output` from **flight curve**.
 
 
-> 🔹 Based on the abundance index, we can create a chart showing the anual trend abundance of a certain species per site. 
+> 🔹 Based on the abundance index, we can create a chart showing the annual abundance trend of a certain species per site. 
 >    > 1. Select `"Charts"`
 >    > 2. Give it a proper name
 >    > 3. Select a visualization: "Bar diagram (NVD 3)" 
