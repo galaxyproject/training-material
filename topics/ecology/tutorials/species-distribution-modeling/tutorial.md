@@ -111,8 +111,8 @@ Partitioning data allows to divide a data set into subsets (ie bins), then make 
 >    > 1. `Block (k=4)` divide the area in four and put equally into four bins, the different occurrences.
 >    > 2. `Checkerboard (k=2)` uses two bins according to the position of the occurence on the grid.
 >    > 3. `Checkerboard (k=4)` uses four bins according to the position of the occurence on the grid. This require an aggregation factor, which is the size of a second grid put on a first one.
-
->    > * For exemple: if you use a factor 4, the grids size will be 4x4 "insert image from muscarella & al"
+>    >    >
+>    >    > * For exemple: if you use a factor 4, the grids size will be 4x4 "insert image from muscarella & al"
 
 > For both of these technics the number of occurrences into each bin may vary.
  
