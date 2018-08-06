@@ -77,7 +77,9 @@ The raster is composed of environmental information. Each layer of the raster co
 >    > * Use `WorldClim Bioclims` module
 >    > * Load your own raster from your Galaxy-E history by checking the box `Galaxy History User`
 
-Here we use the `WorldClim Bioclims` module.
+Here we use the `WorldClim Bioclims` module with the lowest resolution `10 arcmin`.
+>    > nb: the occurrences situated where there is no environmental data are removed
+
 After loading the environmental data, you can go to the next point.
 
 ## Process environnemental Data
@@ -127,5 +129,25 @@ First with `BIOCLIM Envelope Plots`you can make a chart and choose the parameter
 
 With our data we can see that when we make a chart to simutate an ecological niche using `bio1` as y axis and `bio12` as x axis, with a threshol of `0,75`, the optimum environement parameter for this species is between `5°C` and `15°C` for an annual precipitation between aproximatively `700mm` and `1250mm`.
 
-flag: insert photo of map prediction
+You can either select `no threshold` to have a gradient of predicted presence or use, like in this study, `minimum training presence` to have a map with the predicted presence and predicted absence.
+flag: insert photo of map prediction.
+
+## Projet
+
+Wallace can also apply the model you've juste created on a specified zone, here the US, to another zone and create a map of suitability.
+
+We'll aply the concept on a part of the Canada.
+Flag: insert photo
+
+To go further, you can test your model on a specified zone, years from now.
+You need to choose a `GCM` (global circulation model). They are model made to predict atmospheric fluctuation and then study climate change. Each one is different and use parameters like ocean atmosphere and other.
+
+Here using different model you can see the evolution of the predicted presence of `Chrysemys Picta` in Canada in 2050.
+
+For exemple we can use the model [HadGEM2-ES](https://portal.enes.org/models/earthsystem-models/metoffice-hadley-centre/hadgem2-es) (Earth System), a model based on earth circulation, and try it with differents RCP scenarios. RCP are scernarios about the amout of greenhouse gases emitted in the near futur, this allows us to have differents predicted presence models.
+Flag: insert two photos of 4,5 & 8,5
+
+You can see here a brief list of some of the [Global Circulation Model](http://www.ipcc-data.org/sim/gcm_monthly/SRES_AR4/index.html)
+
+# Conclusion
 
