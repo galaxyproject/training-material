@@ -83,9 +83,9 @@ Here we use the `WorldClim Bioclims` module with the lowest resolution `10 arcmi
 
 After loading the environmental data, you can go to the next point.
 
-## Process environnemental Data
+## Process environmental Data
 
-Wallace will now associate environnmental data and occurrences data to make an area for your model.
+Wallace will now associate environmental data and occurrences data to make an area for your model.
 > * First: `Choose Background Extent` creates a buffer zone around the occurrences. You can choose the size of the buffer zone by choosing the distance on `Study region buffer distance` parameter. This allows you to control the area you'll be working with and on which a map of suitability will be made.
 
 This is why you have to know what type of background extent you want to use.
