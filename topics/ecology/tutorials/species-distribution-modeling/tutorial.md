@@ -30,12 +30,11 @@ Because you only need informations about occurrences and their location:
 TODO question: For what stand c1, c2, c3, c44
 answer: c1 is the species name and c2 &c3 are respectively longitude an latitude corresponding to each occurrences of the file. The fourth column contain country code to have a possibility to easily filter occurences by countries.
 
-
-Then using the tool `Tabular to CSV` on this new file to have the right format to use in Wallace.
-
-Finally, we want to keep only occurence records from US. To do that, we will use a tool to filter dataset on the fourth column. Can you find a way to do that alone ?
+Then, as we want to keep only occurence records from US, we will use a tool to filter dataset on the fourth column. Can you find a way to do that alone ?
 
 TODO tips/answer: Using the "Filtrer des données sur une colonne en utilisant des expressions simples", you can enter the following condition ```c4=='US'``` specifying that we need to skip the first line as it's a header.
+
+Finally, use the tool `Tabular to CSV` on this new file to have the right format to use in Wallace.
 
 # Step 2: Using Wallace
 
