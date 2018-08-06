@@ -7,9 +7,9 @@ tutorial_name: Regional GAM
 # Introduction
 {:.no_toc}
 
-⚠️ You might be willing to follow this tutorial if you want to learn how to deal with a file which is on RData forat:.
+⚠️ You might be willing to follow this tutorial if you want to learn how to deal with a file which is on RData format.
 
-❗Please be aware that this tutorial is only a complement to [refence_tutorial on regionalGAM](training-material/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md) and that therefore there are some missing parts. 
+❗Please be aware that this tutorial is only a complement to [the refence_tutorial on regionalGAM](training-material/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md) and that therefore there are some missing parts. 
 Follow the steps bellow and then when indicated, you will be redirected to the complete tutorial. 
 
 This tutorial will show how to study species phenology through the computation of abundance index and trends. It will explain you how to use different [regionalGAM](https://github.com/RetoSchmucki/regionalGAM) tools on Galaxy-E allowing you to deal with datasets containing occurences informations for various species per site and per date through a couple of years.
@@ -40,14 +40,8 @@ First of all, you will have to upload the files on Galaxy-E and then you might h
 >    library named `regional GAM data tutorial`
 >
 >    ```
->    CSV dataset with only one species:
->    https://zenodo.org/record/1324204/files/regional%20GAM%20data.csv?download=1
->
 >    RData dataset with only one species:
 >    https://zenodo.org/record/1324204/files/gatekeeper_CM%20.RData?download=1csv
->
->    CSV dataset with several species: 
->    https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv?download=1
 >    ```
 >   
 > ### {% icon tip %} Tip: Importing data via links
@@ -63,9 +57,7 @@ First of all, you will have to upload the files on Galaxy-E and then you might h
 >
 > ⚠️ <a name="inputdatawarning"></a>Please note that the file must contain a header corresponding to: ```"SITES","SPECIES","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
 >
-> ❗If the dataset you have uploaded is on CSV format, you can skip the following part and directly go to ## Re-sampling.
->
-> ❗However, if you are dealing with a dataset on the RData format (the second of the links listed above), you will have to process this binary file to obtain an appropriate CSV dataset. To do so, you can use the following tools:
+> ❗As the dataset you have just uploaded on the RData format, you will have to process this binary file to obtain an appropriate CSV dataset. To do so, you can use the following tools:
 >   > * Search for the tool `RData binary file reader`with the following parameters:
 >   >      * "Rdata binary file to explore": "dataset on RData" 
 >   > * Search for the tool `RData parser` with the following parameters:
