@@ -35,7 +35,7 @@ Then using the tool `Tabular to CSV` on this new file to have the right format t
 
 Finally, we want to keep only occurence records from US. To do that, we will use a tool to filter dataset on the fourth column. Can you find a way to do that alone ?
 
-TODO tips/answer: Using the "Filtrer des données sur une colonne en utilisant des expressions simples", you can enter the following condition ```c4=='US'``` specifying that we need to don't consider the first line as it's a header.
+TODO tips/answer: Using the "Filtrer des données sur une colonne en utilisant des expressions simples", you can enter the following condition ```c4=='US'``` specifying that we need to skip the first line as it's a header.
 
 # Step 2: Using Wallace
 
