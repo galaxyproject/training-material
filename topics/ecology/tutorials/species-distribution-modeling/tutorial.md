@@ -18,7 +18,7 @@ In this study the datasets are all imported from the tool `Get species occurrenc
 >    > ### {% icon tip %} Tip: Importing data set from a data bank
 
 >    > * Go into the "upload files" tool section (top left panel) then select the "Get species occurrences data and taxref informations" tool
->    > * Fill the "Scientific name" with `Chrysemys Picta`
+>    > * Fill the "Scientific name" with `Chrysemys picta`
 >    > * Choose the data source `Gbif` and set the number of occurrences on `10000` 
 >    > * Click on "Execute"
 You now have a file with about `9508` occurrences
