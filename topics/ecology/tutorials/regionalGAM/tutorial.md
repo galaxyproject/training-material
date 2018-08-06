@@ -227,7 +227,7 @@ The expected temporal trend allows you to have an overview of the evolution of a
 >    
 > ⚠️ Please note that sometimes the expected temporal trend can't be done on dataset. If you want this action to work, the occurences on your dataset must lie between the month of April and the end of the month of September.
 
-Note also that wou will obtain two files resulting of the action above. The first will be the graph and the second will contains the values of "x".
+Note also that you will obtain two files resulting of the action above. The first will be the graph and the second will contains the values of "x".
 
 > ### Linear regression 
 
