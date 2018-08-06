@@ -50,7 +50,7 @@ First of all, you will have to upload the files on Galaxy-E and then you might h
 >    >
 >    > * Copy the link location
 >    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
+>    > * Select **Paste/Fetch data**
 >    > * Paste the link into the text field
 >    > * Press **Start** and **Close** the window
 >    {: .tip}
@@ -59,7 +59,7 @@ First of all, you will have to upload the files on Galaxy-E and then you might h
 >
 > ⚠️ <a name="inputdatawarning"></a>Please note that the file must contain a header corresponding to: ```"SITES","SPECIES","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
 >
-> ❗If the dataset you have upladed is on CSV format, you can skip the following part and directly go to ## Re-sampling.
+> ❗If the dataset you have uploaded is on CSV format, you can skip the following part and directly go to ## Re-sampling.
 >
 > ❗However, if you are dealing with a dataset on the RData format (the second of the links listed above), you will have to process this binary file to obtain an appropriate CSV dataset. To do so, you can use the following tools:
 >   > * Search for the tool `RData binary file reader`with the following parameters:
