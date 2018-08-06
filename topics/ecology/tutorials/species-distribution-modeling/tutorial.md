@@ -94,21 +94,26 @@ This is why you have to know what type of background extent you want to use.
 
 Then, to associate your occurrences to the environmental data, you'll have to choose the number of points to sample. This will cross
 
+For our study we made a `Minimum convex polygon` background extent with a `"buffer area"` of `1 degree` and use `100000` backgound points. 
+
 ## Partition Occurrence Data
 
 Partitioning data allows to divide a data set into subsets (ie bins), then make a model on each of all the groups but one and test it on the last one (assuming that all the groups are independent). You'll have two options: 
 
 * `Non-spatial Partition`, is a type of partition used when there is no biais due to space, time or sampling method
->    > 1. `Jakknife (k=n)` consider that each occurrence in the dataset is equal to a bin. This is usually used when you have a dataset with no known biais.
+>    > 1. `Jakknife (k=n)` consider that each occurrence in the dataset is equal to a bin. This is usually used when you have a small dataset with no known biais.
 >    > 2. `Random k-fold` partition the data randomly in a number of bins set by the user with the option `Number of Folds`
 
 * `Spatial Partition`, when there could be biais due to time, space or sampling method
->    > 1. `Block (k=4)` divide the area in four an put equally into four bins, the different occurrences.
+>    > 1. `Block (k=4)` divide the area in four and put equally into four bins, the different occurrences.
 >    > 2. `Checkboard (k=2)` uses two bins according to the position of the occurence on the grid.
->    > 3. `Checkboard (k=4)` uses four bins according to the position of the occurence on the grid.
->
+>    > 3. `Checkboard (k=4)` uses four bins according to the position of the occurence on the grid. This require an aggregation factor, which is the size of a second grid put on a first one.
+
+>    > * For exemple: if you use a factor 4, the grids size will be 4x4
+
 > For both of these technics the number of occurrences into each bin may vary.
-> ⚠️ 
+ 
+flag : `Use spatial partition` on these data choose `"Cherkboard 2 (k=4)"` and an aggregation factor of `6`
 
 ## Build and Evaluate Niche Model
 
