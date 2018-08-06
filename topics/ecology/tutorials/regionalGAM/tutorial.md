@@ -136,7 +136,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 > 2. Inspect the file by clicking on the `eye` icon to check how many species are taken into account.
 > > If there is only one species you can skip the following steps and go directly to the file datatype convertion step using the tool `tabular to CSV`
 >
->    > ### Create a new file concerning only the data of one species
+>    > ### Creating a new file concerning only the data of one species
 >    > 1. Copy the name of the species you are interested in from the CSV file (for example: "Pyronia tithonus").
 >    > 2. Search for the tool`filtrer des données dur une colonne en utilisant des expressions simples`with the following   parameters.
 >    > * En utilisant la condition suivante: `"c1=='habitat2'"` replacing 'habitat2' with the name of the species (for example: `"c1=='"Pyronia tithonus"'"`)  
