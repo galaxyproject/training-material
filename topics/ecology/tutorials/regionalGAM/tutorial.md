@@ -27,7 +27,7 @@ You will basically learn how to create a file on the basis of which you can crea
 # Step 1: Pre-processing
 
 The goal of the first step is to upload and prepare the file so that it will be usable for the *regional GAM* analysis.
-First of all, you will have to upload the files on Galaxy-E and then you maybe will have to use some specific formating tools to be able to use *regional GAM* tools.
+First of all, you will have to upload the files on Galaxy-E and then you might have to use some specific formating tools to be able to use *regional GAM* tools.
 
 >  ### {% icon hands_on %} Hands-on: Data upload
 >
