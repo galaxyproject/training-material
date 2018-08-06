@@ -59,7 +59,7 @@ First of all, you will have to upload the files on Galaxy-E and then you maybe w
 >
 > ⚠️ Please note that the file must contain a header corresponding to: ```"SITES","SPECIES","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
 >
-> ❗If the dataset you upladed is on CSV format, you can skip the following part and directly go to ## Re-sampling.
+> ❗If the dataset you have upladed is on CSV format, you can skip the following part and directly go to ## Re-sampling.
 >
 > ❗However, if you are dealing with a dataset on the RData format (the second of the links listed above), you will have to process this binary file to obtain an appropriate CSV dataset. To do so, you can use the following tools:
 >   > * Search for the tool `RData binary file reader`with the following parameters:
@@ -79,16 +79,20 @@ First of all, you will have to upload the files on Galaxy-E and then you maybe w
 >   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` pasting the file containing 5 columns with the one headed by "COUNT". 
 >   >  
 >   > {: .comment}
->
->   > ### {% icon question %} Questions
->   >
->   > 1. Why do you need to use `Coller deux jeux de données l'un à côté de l'autre` 
->   >
->   >    <details>
->   >    <summary>Click to view answers</summary>
->   >    <ol type="1">
->   >    1. Because you want to create a single dataset which countains all the data on a chosen species. You decided to upload a dataset on RData format and therefore you had to use the tools `RData binary file reader` and `RData parser`. This last tool treats the file and allows you to open it on Galaxy-E but it creates as many files as there are columns (when RData object is composed from a unique data table). This is the reason why you had to carry out on a set of actions ending by the creation of one complete file. 
+
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. In which specific case do you have to proceed to a particular set of actions on your dataset in order to be able to use it ?
+>    > 2. Why do you need to use `Coller deux jeux de données l'un à côté de l'autre`? 
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>You only have to do these actions when you are using a dataset on the Rdata format. </li>
+>    >    <li>Because you want to create a single dataset which countains all the data on a chosen species. You decided to upload a dataset on RData format and therefore you had to use the tools `RData binary file reader` and `RData parser`. This last tool treats the file and allows you to open it on Galaxy-E but it creates as many files as there are columns (when RData object is composed from a unique data table). This is the reason why you had to carry out on a set of actions ending by the creation of one complete file.</li>
+>    >    </ol>
 >    >    </details>
+>    {: .question}
 
 >    > ## Re-sampling. 
 When the dataset contains many details, it lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example, the list of SITE of the dataset you are using is really long and the SITES are classified into sub-sites. Here, we will assume that your file doesn't really need be as precise and this is the reason why you have to specify you don't want the sub-sites. To create a new "down-sampled" file, you can follow these steps:   
@@ -130,14 +134,17 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >
 >   > ### {% icon question %} Questions
 >   >
->   > 1. How many species does your dataset take into account ?(CSV dataset with several species)
->   > 2. What are their names ?
->   >    <details>
->   >    <summary>Click to view answers</summary>
->   >    <ol type="1">
->   >    1. The dataset contains informations on 2 different species.
->   >    2. Their names are "Pyronia tithonus" and	"Aglais io".
+>    > 1. How many species does your dataset take into account ?(CSV dataset with several species)
+>    > 2. What are their names ? 
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>The dataset contains informations on 2 different species. </li>
+>    >    <li>Their names are "Pyronia tithonus" and	"Aglais io".</li>
+>    >    </ol>
 >    >    </details>
+>    {: .question}
 
 
 
@@ -148,10 +155,12 @@ Now you have a file containing all the data on the species of interest. The main
 
 > ### {% icon hands_on %} Hands-on: Phenology
 
+This step will allow you the show the phenology of a species and then to create charts representing it. In the second part, you will learn that it is possible to show the phenology of various species on a single chart allowing to compare them and analyse them more easily. 
+
 > 1. Search for the tool `flight curve`
 > * Select the file on CSV with the data on one species
 >
-> Based on the flight curve, you can create a line chart which shows the occurence of the species through the years on a very visual material 
+> 🔹 Based on the flight curve, you can create a line chart which shows the occurence of the species through the years on a very visual material 
 
 ![Phenology chart](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20regional%20GAM.png "This shows the occurrence of Ardea alba and Bombycilla garrulus")
 
@@ -206,7 +215,7 @@ If you want to access the chart on an interactive interface, you can click on th
 > * "Flight curve output": flight curved obtained .
 
 
-> Based on the abundance index, we can create a chart showing the anual trend abundance of a certain species per site. 
+> 🔹 Based on the abundance index, we can create a chart showing the anual trend abundance of a certain species per site. 
 >    > 1. Select `"Charts"`
 >    > 2. Give it a proper name
 >    > 3. Select a visualization: "Bar diagram (NVD 3)" 
