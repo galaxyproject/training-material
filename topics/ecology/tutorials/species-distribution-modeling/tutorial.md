@@ -90,9 +90,9 @@ Wallace will now associate environmental data and occurrences data to make an ar
 
 This is why you have to know what type of background extent you want to use.
 >    > `Bounding box` will define an area whit occurrences centered
-
+>    > 
 >    > `Minimum convex polygon` will make an area considering the repartition of your occurrences
-
+>    > 
 >    > `Point buffers` will use occurrences localities to build a buffer zone aroud each of them
 
 Then, to associate your occurrences to the environmental data, you'll have to choose the number of points to sample. This will cross
