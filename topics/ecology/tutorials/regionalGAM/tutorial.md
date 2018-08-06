@@ -68,8 +68,8 @@ First of all, you will have to upload the files on Galaxy-E and then you maybe w
 >   >      * "Select which attribute(s) you want to extract": select everything but "trend"
 >   >      * ⚠️ Please note that the tool `RData parser` creates separated files, each of them containing one column. The file with the "TREND" header can be let aside as we don't need it for what will follow.
 >   > * Search for the tool `Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data     required with the following parameters:
->   >      * "Coller":  file of **RData parser** headed with "SPECIES"
->   >      * "et": file of **RData parser** with headed with "SITE"
+>   >      * "Coller":  outut of **RData parser** headed with "SPECIES"
+>   >      * "et": output of **RData parser** with headed with "SITE"
 >   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` as many times as there are separated files in order to create a final dataset with all the columns. First you must paste 2 columns together, then you must paste this last file with a third column and do this action again and again until your final file countains all the columns. 
 >   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` pasting the file containing 2 columns with the one headed by "YEAR".
 >   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre`pasting the file containing 3 columns with the one headed by "MONTH". 
