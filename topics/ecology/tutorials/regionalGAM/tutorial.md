@@ -1,5 +1,5 @@
 ---
-layout: tutorial hands on
+layout: tutorial_hands_on
 topic_name: ecology
 tutorial_name: Regional GAM
 ---
