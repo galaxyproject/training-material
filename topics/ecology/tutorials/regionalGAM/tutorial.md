@@ -101,9 +101,9 @@ When the dataset contains many details, it lengthens the file processing time th
 
 > ### {% icon hands_on %} Hands-on: hiding some informations
 >    > 1. Search for the tool `trouver et remplacer des patterns dans des colonnes` on the file on CSV with the following  parameters.
->    >  * Click on`"insert checks"`
->    >  * "Trouver l'expression suivante": `"(\.[0-9]+)"` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
->    >  * "Remplacement":`"leave it empty"`.
+>    >  * Click on`insert checks`
+>    >  * "Trouver l'expression suivante": `(\.[0-9]+)` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
+>    >  * "Remplacement":`leave it empty`.
 >    > 3. Search for the tool `tabular to CSV`and select the ouptut from **trouver et remplacer des patterns dans des colonnes**.
 >    
 {: .hands_on}
@@ -117,17 +117,17 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 > As the dataset is quite big and countains heterogeneous informations, you want to know wether the data are about one species or more.
 > 1. Search for the tool `compter le nombre d'occurence de chaque enrégistrement`with the following parameters:
 > * "Sur le jeu de données": `output`from **tabular to CSV**
-> * "Compter les occurrences des valeurs présentes dans la(les) colonne(s)": `"column 1"`
+> * "Compter les occurrences des valeurs présentes dans la(les) colonne(s)": `column 1`
 > * "Délimité par": `tabulation`.
-> * "Comment les résultats doivent t'ils être triés ?": `"Avec la valeur la plus présente en premier"`.
+> * "Comment les résultats doivent t'ils être triés ?": `Avec la valeur la plus présente en premier`.
 > 2. Inspect the file by clicking on the `eye` icon to check how many species are taken into account.
 > > If there is only one species you can skip the following steps and go directly to the file datatype convertion step using the tool `tabular to CSV`
 >
 >    > ### Creating a new file concerning only the data of one species
 >    > 1. Copy the name of the species you are interested in from the CSV file (for example: "Pyronia tithonus").
 >    > 2. Search for the tool`filtrer des données dur une colonne en utilisant des expressions simples`with the following   parameters.
->    > * En utilisant la condition suivante: `"c1=='habitat2'"` replacing 'habitat2' with the name of the species (for example: `"c1=='"Pyronia tithonus"'"`)  
->    > * Nombre de lignes d'en-tête à passer: `"1"`.
+>    > * En utilisant la condition suivante: `c1=='habitat2'` replacing 'habitat2' with the name of the species (for example: `c1=='"Pyronia tithonus"'`)  
+>    > * Nombre de lignes d'en-tête à passer: `1`.
 >    > * You can repeat this set of actions as much as necessary, changing only the name of the species taken into account.
 >    > 3. Search for the tool `tabular to CSV` with the following parameters 
 >    > * Select the file you've just created 
@@ -176,11 +176,11 @@ If you want to access the chart on an interactive interface, you can click on th
 >    > 2. Give it a proper name
 >    > 3. Select a visualization: "line chart (NVD 3) 
 >    > 4. Select data 
->    > * "Data point labels": `"Column 1"`
->    > * "Values for x-axis": `"Column 2"`
->    > * "Values for y-axis": `"Column 6"`
->    > * "X-Axis label": `"nm values"`  
->    > * Y-Axis label: `"Year"`
+>    > * "Data point labels": `Column 1`
+>    > * "Values for x-axis": `Column 2`
+>    > * "Values for y-axis": `Column 6`
+>    > * "X-Axis label": `nm values`  
+>    > * Y-Axis label: `Year`
 >    > 8. Click on {% icon tip %} `Visualize`
 >    > 9. Click on {% icon tip %} `save this visualization`if you are willing
 >    > 5. Visualize
@@ -194,22 +194,22 @@ If you want to access the chart on an interactive interface, you can click on th
 >    > 2. Give it a proper name
 >    > 3. Select a visualization: "line chart (NVD 3) 
 >    > 4. Select data 
->    > * "Provide a label": `"The name of the species 1"` 
+>    > * "Provide a label": `The name of the species 1` 
 >    > * "Pick a series color": Choose a color
->    > * "Data point labels": `"Column corresponding to the name of the species 1"` 
->    > * "Values for x-axis": `"Column corresponding to the year of the species 1"`
->    > * "Values for y-axis": `"Column corresponding to nm of the species 1"`
+>    > * "Data point labels": `Column corresponding to the name of the species 1` 
+>    > * "Values for x-axis": `Column corresponding to the year of the species 1`
+>    > * "Values for y-axis": `Column corresponding to nm of the species 1`
 >    > 5. Insert data series:
->    > * "Provide a label": `"The name of the species 2"` 
+>    > * "Provide a label": `The name of the species 2` 
 >    > * "Pick a series color": Choose a different color
->    > * "Data point labels": `"Column corresponding to the name of the species 2"` 
->    > * "Values for x-axis": `"Column corresponding to the year of the species 2"`
->    > * "Values for y-axis": `"Column nm of the species 2"`
+>    > * "Data point labels": `Column corresponding to the name of the species 2` 
+>    > * "Values for x-axis": `Column corresponding to the year of the species 2`
+>    > * "Values for y-axis": `Column nm of the species 2`
 >    > 6. You may repeat "Insert data series" as many times as needed depending on the number of different species you want represent
 >    > 7. Click on {% icon tip %} `Customize`
->    > * "X-Axis label": `"nm values"`  
->    > * Y-Axis label: `"Year"`
->    > * "Use multi-panels": click on `"No"`(or you will have three different charts)
+>    > * "X-Axis label": `nm values`  
+>    > * Y-Axis label: `Year`
+>    > * "Use multi-panels": click on `No`(or you will have three different charts)
 >    > 8. Click on {% icon tip %} `Visualize`
 >    > 9. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 
@@ -226,13 +226,13 @@ This will allow you to create a file showing the abundance per year of a chosen 
 
 
 > 🔹 Based on the abundance index, we can create a chart showing the annual abundance trend of a certain species per site. 
->    > 1. Select `"Charts"`
+>    > 1. Select `Charts`
 >    > 2. Give it a proper name
 >    > 3. Select a visualization: "Bar diagram (NVD 3)" 
 >    > 4. Select data 
->    > * "Data point labels": `"Column 1"` 
->    > * "Values for x-axis": `"Column 3"`
->    > * "Values for y-axis": `"Column 4"`
+>    > * "Data point labels": `Column 1` 
+>    > * "Values for x-axis": `Column 3`
+>    > * "Values for y-axis": `Column 4`
 >    > 5. Visualize
 >    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 
