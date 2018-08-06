@@ -52,7 +52,7 @@ You now have your occurence records on Wallace!
 
 ## Process occurrence data
 
-Here you'll have to chose the occurrences you want to use for the rest of your model. To do so, you have three options
+Here you'll have to chose the occurrences you want to use for the rest of your model. To do so, you have 4 options
 
 > * Option 1: `Select Occurrences On Map`
 > With this, you have to select your occurrence on the map by delimiting a geographic area you want to use.
@@ -64,6 +64,8 @@ Here you'll have to chose the occurrences you want to use for the rest of your m
 > * Option 3: `Spacial thin`
 > This can allow you to select occurrences by setting a minimum distance (in km) between the different occurrences. For exemple:
 >    > If you type 30 km, you'll end up with all the occurrences on the map which are at minimum 30km from each other.
+
+> * Option 4: skip this step and consider all records.
 
 Because we want to work on the data from the US we'll select all the occurrences there with the first option:`Select Occurrences On Map`  
 
