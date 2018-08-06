@@ -26,8 +26,8 @@ You will basically learn how to create a file on the basis of which you can crea
 
 # Step 1: Pre-processing
 
-The goal of the first step is to upload and prepare the file so that it will be usable for the *regional GAM* analysis.
-First of all, you will have to upload the files on Galaxy-E and then you might have to use some specific formating tools to be able to use *regional GAM* tools.
+The goal of the first step is to upload and prepare the file so that it will be usable for the *regional GAM* analysis (See [this warning](#inputdatawarning) for more information about the input file.
+First of all, you will have to upload the files on Galaxy-E and then you might have to use some data handling tools to be able to use *regional GAM* tools.
 
 >  ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -50,16 +50,16 @@ First of all, you will have to upload the files on Galaxy-E and then you might h
 >    >
 >    > * Copy the link location
 >    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
+>    > * Select **Paste/Fetch data**
 >    > * Paste the link into the text field
 >    > * Press **Start** and **Close** the window
 >    {: .tip}
 >
 > ### {% icon comment %} Comment
 >
-> ⚠️ Please note that the file must contain a header corresponding to: ```"SITES","SPECIES","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
+> ⚠️ <a name="inputdatawarning"></a>Please note that the file must contain a header corresponding to: ```"SITES","SPECIES","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
 >
-> ❗If the dataset you have upladed is on CSV format, you can skip the following part and directly go to ## Re-sampling.
+> ❗If the dataset you have uploaded is on CSV format, you can skip the following part and directly go to ## Re-sampling.
 >
 > ❗However, if you are dealing with a dataset on the RData format (the second of the links listed above), you will have to process this binary file to obtain an appropriate CSV dataset. To do so, you can use the following tools:
 >   > * Search for the tool `RData binary file reader`with the following parameters:
@@ -105,20 +105,6 @@ When the dataset contains many details, it lengthens the file processing time th
 >    >  * "Trouver l'expression suivante": `"(\.[0-9]+)"` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
 >    >  * "Remplacement":`"leave it empty"`.
 >    > 3. Search for the tool `tabular to CSV`and select the file of **trouver et remplacer des patterns dans des colonnes**.
-
- > ### {% icon question %} Questions
->   >
->    > 1. What is the point of hiding data from the dataset ?
->    > 2. In which specific case you decide to hide informations ? 
->    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li> Hiding informations you have decided not to take into account can be very usefull because it shortens the file processing time. </li>
->    >    <li> It must be done only if the dataset contains very detailed informations and if you have decided it doesn't need to be. In this case you can do a set of actions in order to allow your dataset not to show all its sub-classes. </li>
->    >    </ol>
->    >    </details>
->    {: .question}
 >    
 {: .hands_on}
 
