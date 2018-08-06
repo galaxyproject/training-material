@@ -58,8 +58,10 @@ First of all, you will have to upload the files on Galaxy-E and then you maybe w
 > ### {% icon comment %} Comment
 >
 > ⚠️ Please note that the file must contain a header corresponding to: ```"SITES","SPECIES","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
-> 
->  Note also that the first file mentionned above is on the RData format and if you choose to use it, you will have to process this binary file to obtain an appropriate CSV dataset. To do so, you can use the following tools:
+>
+> ❗If the dataset you upladed is on CSV format, you can skip the following part and directly go to ## Re-sampling.
+>
+> ❗However, if you are dealing with a dataset on the RData format (the second of the links listed above), you will have to process this binary file to obtain an appropriate CSV dataset. To do so, you can use the following tools:
 >   > * Search for the tool `RData binary file reader`with the following parameters:
 >   >      * "Rdata binary file to explore": "dataset on RData" 
 >   > * Search for the tool `RData parser` with the following parameters:
@@ -72,9 +74,9 @@ First of all, you will have to upload the files on Galaxy-E and then you maybe w
 >   >      * "et": output of **RData parser** with headed with "SITE"
 >   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` as many times as there are separated files in order to create a final dataset with all the columns. First you must paste 2 columns together, then you must paste this last file with a third column and do this action again and again until your final file countains all the columns. 
 >   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` pasting the file containing 2 columns with the one headed by "YEAR".
->   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre`pasting the file containing 3 columns with the one headed by "MONTH". 
->   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre`pasting the file containing 4 columns with the one headed by "DAY".
->   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre`pasting the file you containing 5 with the one headed by "COUNT". 
+>   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` pasting the file containing 3 columns with the one headed by "MONTH". 
+>   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` pasting the file containing 4 columns with the one headed by "DAY".
+>   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` pasting the file containing 5 columns with the one headed by "COUNT". 
 >   >  
 >   > {: .comment}
 >
@@ -85,7 +87,7 @@ First of all, you will have to upload the files on Galaxy-E and then you maybe w
 >   >    <details>
 >   >    <summary>Click to view answers</summary>
 >   >    <ol type="1">
->   >    1. Because you want to create a single dataset which countains all the data on a species. You decided to upload a dataset on RData and therefore you had to use `RData binary file reader` and `RData parser`. This last tool treats the file and allows you to open it on Galaxy-E but it creates as many files as there are columns (when RData object is composed from a unique data table). This is the reason why you had to carry out on a set of actions ending by the creation of one complete file. 
+>   >    1. Because you want to create a single dataset which countains all the data on a chosen species. You decided to upload a dataset on RData format and therefore you had to use the tools `RData binary file reader` and `RData parser`. This last tool treats the file and allows you to open it on Galaxy-E but it creates as many files as there are columns (when RData object is composed from a unique data table). This is the reason why you had to carry out on a set of actions ending by the creation of one complete file. 
 >    >    </details>
 
 >    > ## Re-sampling. 
@@ -129,11 +131,12 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >   > ### {% icon question %} Questions
 >   >
 >   > 1. How many species does your dataset take into account ?(CSV dataset with several species)
->   >
+>   > 2. What are their names ?
 >   >    <details>
 >   >    <summary>Click to view answers</summary>
 >   >    <ol type="1">
->   >    1. The dataset contains informations on 2 different species. 
+>   >    1. The dataset contains informations on 2 different species.
+>   >    2. Their names are "Pyronia tithonus" and	"Aglais io".
 >    >    </details>
 
 
