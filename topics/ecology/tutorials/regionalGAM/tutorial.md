@@ -117,7 +117,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >    > 1. Copy the name of the species you are interested in from the CSV file (for example: "Pyronia tithonus").
 >    > 2. Search for the tool`filtrer des données dur une colonne en utilisant des expressions simples`with the following   parameters.
 >    > * En utilisant la condition suivante: `"c1=='habitat2'"` replacing 'habitat2' with the name of the species (for example: `"c1=='"Pyronia tithonus"'"`)  
->    > * Nombre de lignes d'en-tête à passer: `"0"`.
+>    > * Nombre de lignes d'en-tête à passer: `"1"`.
 >    > * You can repeat this set of actions as much as necessary, changing only the name of the species taken into account.
 >    > 3. Search for the tool `tabular to CSV` with the following parameters 
 >    > * Select the file you've just created 
@@ -128,12 +128,12 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >
 >   > ### {% icon question %} Questions
 >   >
->   > 1. How many species does your dataset take into account ?
+>   > 1. How many species does your dataset take into account ?(CSV dataset with several species)
 >   >
 >   >    <details>
 >   >    <summary>Click to view answers</summary>
 >   >    <ol type="1">
->   >    1. Because you want to create a single dataset which countains all the data on a species. You decided to upload a dataset on RData and therefore you had to use `RData binary file reader` and `RData parser`. This last tool treats the file and allows you to open it on Galaxy-E but it creates as many files as there are columns (when RData object is composed from a unique data table). This is the reason why you had to carry out on a set of actions ending by the creation of one complete file. 
+>   >    1. The dataset contains informations on 23 different species. 
 >    >    </details>
 
 
