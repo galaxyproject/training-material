@@ -7,9 +7,9 @@ tutorial_name: species distribution modeling
 # Introduction
 {:.no_toc}
 
-Species Modeling Distribution can help understand the distribution of a species depending of environmental parameters such as temperature and precipitation. It can also help understand the impact of climate change on the repartition of some species. This is done by associating data occurrences of a species with environmental data.
+Species Distribution Modeling can help understand the distribution of a species depending of environmental parameters such as temperature and precipitation. It can also help understand the impact of climate change on the repartition of some species. This is done by associating data occurrences of a species with environmental data.
 
-The goal of this study is to model a theorical ecological niche and predict futur repartition using Species Modeling Distribution through the use of Wallace interactive environment on Galaxy. We'll use the data occurrences of Chrysemys Picta (Painted turtle) from the tool `Get species occurrences data and taxref informations` in Galaxy-E applied on the North America region.   
+The goal of this study is to model a theorical ecological niche and predict future repartition using Species Distribution Modeling through the use of Wallace interactive environment on Galaxy. We'll use the data occurrences of US *Chrysemys Picta* (Painted turtle) from the North America region.   
 
 # Step 1: Loading a dataset
 
@@ -25,32 +25,31 @@ You now have a file with about `9508` occurrences
 
 Because you only need informations about occurrences and their location: 
 > use the tool `Couper des colonnes d'un jeu de données tabulé` 
-> then in "Couper les colonnes" type `"c1,c2,c3"`
+> then in "Couper les colonnes" type `"c1,c2,c3,c44"`
+
+TODO question: For what stand c1, c2, c3, c44
+answer: c1 is the species name and c2 &c3 are respectively longitude an latitude corresponding to each occurrences of the file. The fourth column contain country code to have a possibility to easily filter occurences by countries.
+
 
 Then using the tool `Tabular to CSV` on this new file to have the right format to use in Wallace.
 
-TODO question: For what stand c1, c2,c3
-answer: c1 is the species name and c2 &c3 are respectively longitude an latitude correspoinding to each occurrences of the file
+Finally, we want to keep only occurence records from US. To do that, we will use a tool to filter dataset on the fourth column. Can you find a way to do that alone ?
+
+TODO tips/answer: Using the "Filtrer des données sur une colonne en utilisant des expressions simples", you can enter the following condition ```c4=='US'``` specifying that we need to don't consider the first line as it's a header.
 
 # Step 2: Using Wallace
 
-[Wallace](https://wallaceecomod.github.io/) ([source code](https://github.com/wallaceEcoMod/wallace), [CRAN page](https://cran.r-project.org/web/packages/wallace/index.html)) is a R Shiny app integrated into Galaxy as an interactive environment which can simulate a species modeling distribution.
+[Wallace](https://wallaceecomod.github.io/) ([source code](https://github.com/wallaceEcoMod/wallace), [CRAN page](https://cran.r-project.org/web/packages/wallace/index.html)) is a R Shiny app integrated into Galaxy as an interactive environment which can model a species distribution.
 
 ## Obtain occurrence data
 
-With this you can either upload file you've loaded earlier from Galaxy-E data or you can upload  data directly from Wallace
+With this you can either upload file you've loaded earlier from Galaxy-E data or you can upload  data directly from Wallace. Here you will select data previously imported and filtered on your Galaxy history.
 
 > 1. Upload data from Galaxy-E
 >    > * Check `Galaxy History User`
->    > * Select the correct csv file with your "Chrysemys Picta" occurrences informations 
-> ### or
-> 2. If you want to upload data from Wallace
->    > * Check `Query Database`
->    > * Select the `Gbif` databank 
->    > * Type "Chrysemys Picta"
->    > * And then set the number of occurrences to `"10000"` 
+>    > * Select the correct csv file with your *Chrysemys Picta* occurrences informations 
 
-You now have your data for the next step.
+You now have your occurence records on Wallace!
 
 ## Process occurrence data
 
@@ -67,14 +66,12 @@ Here you'll have to chose the occurrences you want to use for the rest of your m
 > This can allow you to select occurrences by setting a minimum distance (in km) between the different occurrences. For exemple:
 >    > If you type 30 km, you'll end up with all the occurrences on the map which are at minimum 30km from each other.
 
-To have better idea about the robustness of you species distrbution model, it would be better at this step, to don't select the entire set of data occurrences, but repeat the complete Wallace workflow on occurences subgroups, one by one.
-
 Because we want to work on the data from the US we'll select all the occurrences there with the first option:`Select Occurrences On Map`  
 
 ## Obtain Environmental Data
 
 The `WorldClim Bioclims` module will provide a raster with environmental variations from online sources. The [Bioclimatic variables](http://www.worldclim.org/bioclim) are describing temperature and precipitations variations. This will later be associated with the occurrences data.
-The raster is composed of environmental information. Each layer of the raster contain a climatic variable; going from BIO1 = Anual mean temperature, to BIO19 = Precipitation of Coldest Quarter.
+The raster is composed of environmental information. Each layer of the raster contains a climatic variable; going from BIO1 = Anual mean temperature, to BIO19 = Precipitation of Coldest Quarter.
 
 > To load these data you can either:
 >    > * Use `WorldClim Bioclims` module
@@ -86,7 +83,7 @@ After loading the environmental data, you can go to the next point.
 ## Process environnemental Data
 
 Wallace will now associate environnmental data and occurrences data to make an area for your model.
-> * First: `Choose Background Extent` make a buffer zone around the occurrences. You can chosse the size of the buffer zone by choosing the distance in `Study region buffer distance`. This allows you to control the area you'll be working with and on which a map of suitability will be made.
+> * First: `Choose Background Extent` creates a buffer zone around the occurrences. You can choose the size of the buffer zone by choosing the distance on `Study region buffer distance` parameter. This allows you to control the area you'll be working with and on which a map of suitability will be made.
 
 This is why you have to know what type of background extent you want to use.
 >    > `Bounding box` will define an area whit occurrences centered
