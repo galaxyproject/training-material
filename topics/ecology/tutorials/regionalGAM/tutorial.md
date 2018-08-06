@@ -104,7 +104,7 @@ When the dataset contains many details, it lengthens the file processing time th
 >    >  * Click on`"insert checks"`
 >    >  * "Trouver l'expression suivante": `"(\.[0-9]+)"` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
 >    >  * "Remplacement":`"leave it empty"`.
->    > 3. Search for the tool `tabular to CSV`and select the file of **trouver et remplacer des patterns dans des colonnes**.
+>    > 3. Search for the tool `tabular to CSV`and select the ouptut from **trouver et remplacer des patterns dans des colonnes**.
 >    
 {: .hands_on}
 
@@ -115,10 +115,11 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 > ### {% icon hands_on %} Hands-on: How many species are taken into account in this dataset
 >
 > As the dataset is quite big and countains heterogeneous informations, you want to know wether the data are about one species or more.
-> 1. Search for the tool `compter le nombre d'occurence de chaque enrégistrement`with the following parameters.
-> * "Compter les occurrences des valeurs présentes dans la(les) colonne(s)": `column 1`
+> 1. Search for the tool `compter le nombre d'occurence de chaque enrégistrement`with the following parameters:
+> * "Sur le jeu de données": `output`from **tabular to CSV**
+> * "Compter les occurrences des valeurs présentes dans la(les) colonne(s)": `"column 1"`
 > * "Délimité par": `tabulation`.
-> * "Comment les résultats doivent t'ils être triés ?": `Avec la valeur la plus présente en premier`.
+> * "Comment les résultats doivent t'ils être triés ?": `"Avec la valeur la plus présente en premier"`.
 > 2. Inspect the file by clicking on the `eye` icon to check how many species are taken into account.
 > > If there is only one species you can skip the following steps and go directly to the file datatype convertion step using the tool `tabular to CSV`
 >
