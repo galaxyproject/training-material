@@ -9,7 +9,7 @@ tutorial_name: Regional GAM
 
 
 This tutorial will show how to study species phenology through the computation of abundance index and trends. It will explain you how to use different [regionalGAM](https://github.com/RetoSchmucki/regionalGAM) tools on Galaxy-E allowing you to deal with datasets containing occurences informations for various species per site and per date through a couple of years.
-After a certain numbers of steps, you will be able to extract single species data and study related phenology through the years. The goal of this exercise is to be able to create abundance trend over time and biodiversity indicators. You could for example try to predict the occurences of one specific species in a certain type of environnement using the prediction model of climate evolution. Based on charts that you will generate, you could try to explain the evolution of a species with environmental data (temperatures variations, modifications of the environmental conditions).
+After a certain numbers of steps, you will be able to extract single species data and study related phenology through the years. The goal of this exercise is to be able to create abundance trend over time and biodiversity indicators. Following these indicators allow to follow trends in terms of population dynamics. You could for example try to predict the occurences of one specific species in a certain type of environnement using the prediction model of climate evolution. Based on charts that you will generate, you could try to explain the evolution of a species with environmental data (temperatures variations, modifications of the environmental conditions).
 You will basically learn how to create a file on the basis of which you can create a visual material that can be quite easily understood and therefore be efficient for a large audience.
 
 
@@ -225,9 +225,13 @@ If you want to access the chart on an interactive interface, you can click on th
 >    > * "Use multi-panels": click on `"No"`(or you will have three different charts)
 >    > 8. Click on {% icon tip %} `Visualize`
 >    > 9. Click on {% icon tip %} `save this visualization`if you are willing to keep it
+
+{: .hands_on}
 >
 >
-> ### {% icon hands_on %} Hands-on: Abundance per year and per site
+> ### Abundance per year and per site
+
+
 >
 > 1. Look for the tool `Abundance index` with the following parameters:
 > * "Fichier de comptage": `output` from **tabular to CSV**.  
@@ -245,6 +249,7 @@ If you want to access the chart on an interactive interface, you can click on th
 >    > 5. Visualize
 >    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 
+{: .hands_on}
 
 > ### Expected temporal trend
 
