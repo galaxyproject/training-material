@@ -18,14 +18,14 @@ In this study the datasets are all imported from the tool `Get species occurrenc
 >    > ### {% icon tip %} Tip: Importing data set from a data bank
 
 >    > * Go into "upload files" (top left panel) then "Get species occurrences data and taxref informations"
->    > * Fill the "Scientific name" with `"Chrysemys Picta"`
->    > * Choose the data source `"Gbif"` and set the number of occurrences on `"10000"` 
+>    > * Fill the "Scientific name" with `Chrysemys Picta`
+>    > * Choose the data source `Gbif` and set the number of occurrences on `10000` 
 >    > * Click on "Execute"
 You now have a file with about `9508` occurrences
 
 Because you only need informations about occurrences and their location: 
 > use the tool `Couper des colonnes d'un jeu de données tabulé` 
-> then in "Couper les colonnes" type `"c1,c2,c3,c44"`
+> then in "Couper les colonnes" type `c1,c2,c3,c44`
 
 TODO question: For what stand c1, c2, c3, c44
 answer: c1 is the species name and c2 &c3 are respectively longitude an latitude corresponding to each occurrences of the file. The fourth column contain country code to have a possibility to easily filter occurences by countries.
@@ -94,7 +94,7 @@ This is why you have to know what type of background extent you want to use.
 
 Then, to associate your occurrences to the environmental data, you'll have to choose the number of points to sample. This will cross
 
-For our study we made a `Minimum convex polygon` background extent with a `"buffer area"` of `1 degree` and use `100000` backgound points. 
+For our study we made a `Minimum convex polygon` background extent with a `buffer area` of `1 degree` and use `100000` backgound points. 
 
 ## Partition Occurrence Data
 
@@ -106,14 +106,14 @@ Partitioning data allows to divide a data set into subsets (ie bins), then make 
 
 * `Spatial Partition`, when there could be biais due to time, space or sampling method
 >    > 1. `Block (k=4)` divide the area in four and put equally into four bins, the different occurrences.
->    > 2. `Checkboard (k=2)` uses two bins according to the position of the occurence on the grid.
->    > 3. `Checkboard (k=4)` uses four bins according to the position of the occurence on the grid. This require an aggregation factor, which is the size of a second grid put on a first one.
+>    > 2. `Checkerboard (k=2)` uses two bins according to the position of the occurence on the grid.
+>    > 3. `Checkerboard (k=4)` uses four bins according to the position of the occurence on the grid. This require an aggregation factor, which is the size of a second grid put on a first one.
 
->    > * For exemple: if you use a factor 4, the grids size will be 4x4
+>    > * For exemple: if you use a factor 4, the grids size will be 4x4 "insert image from muscarella & al"
 
 > For both of these technics the number of occurrences into each bin may vary.
  
-flag : `Use spatial partition` on these data choose `"Cherkboard 2 (k=4)"` and an aggregation factor of `6`
+flag : `Use spatial partition` on these data choose `Checkerboard 2 (k=4)` and an aggregation factor of `6`
 
 ## Build and Evaluate Niche Model
 
@@ -122,4 +122,10 @@ Wallace can now build different models using either: 1) the presence-only approa
 ## Visualize Model Results
 
 After the precedent step you can now model your theoretical niche.
-first with `BIOCLIM Envelope Plots`you can make a chart and choose the parameters of interest and see how the data responds adapting the threshold for more accuracy 
+
+First with `BIOCLIM Envelope Plots`you can make a chart and choose the parameters of interest and see how the data responds adapting the threshold for more accuracy.
+
+With our data we can see that when we make a chart to simutate an ecological niche using `bio1` as y axis and `bio12` as x axis, with a threshol of `0,75`, the optimum environement parameter for this species is between `5°C` and `15°C` for an annual precipitation between aproximatively `700mm` and `1250mm`.
+
+flag: insert photo of map prediction
+
