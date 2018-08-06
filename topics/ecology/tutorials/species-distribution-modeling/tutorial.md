@@ -132,7 +132,7 @@ With our data we can see that when we make a chart to simutate an ecological nic
 You can either select `no threshold` to have a gradient of predicted presence or use, like in this study, `minimum training presence` to have a map with the predicted presence and predicted absence.
 flag: insert photo of map prediction.
 
-## Projet
+## Project Model
 
 Wallace can also apply the model you've juste created on a specified zone, here the US, to another zone and create a map of suitability.
 
