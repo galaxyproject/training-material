@@ -162,6 +162,7 @@ Now you have a file containing all the data on the species of interest. The main
 
 This step will allow you the show the phenology of a species and then to create charts representing it. In the second part, you will learn that it is possible to show the phenology of various species on a single chart allowing to compare them and analyse them more easily. 
 
+
 > 1. Search for the tool `flight curve` with the following parameters: 
 > * "Fichier de comptage": `output` from **flight curve**.
 >
@@ -175,7 +176,9 @@ If you want to access the chart on an interactive interface, you can click on th
 >    > 1. Select `Charts`
 >    > 2. Give it a proper name
 >    > 3. Select a visualization: "line chart (NVD 3) 
->    > 4. Select data 
+>    > 4. Select data:
+>    > * "Provide a label": `The name of the species`
+>    > * "Pick a series color": Choose a color for the line 
 >    > * "Data point labels": `Column 1`
 >    > * "Values for x-axis": `Column 2`
 >    > * "Values for y-axis": `Column 6`
