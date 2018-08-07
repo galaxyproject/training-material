@@ -113,9 +113,6 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 
 {: .hands_on}
 
-❗❗ Now that you have done the specific steps with your multispecies dataset, you can follow this link and directly go to 
-
-
+❗❗ Now that you have done the steps specific to a multispecies dataset, you will be redirected to the reference tutorial on regionalGAM. To do so, you can click on the link below:
 [Step 2 - Displaying the occurrence of a chosen species through the years of the reference tutorial on RegionalGAM](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md#displayingtheoccurrenceofthespecies) 
 
- https://github.com/usegalaxy-eu/website/blob/master/index-metagenomics.md#tutorials
