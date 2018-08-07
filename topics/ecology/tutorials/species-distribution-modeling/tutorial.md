@@ -21,7 +21,7 @@ In this study the datasets are all imported from the tool `Get species occurrenc
 >    > * Fill the "Scientific name" with `Chrysemys picta`
 >    > * Choose the data source `gbif` and set the number of occurrences on `10000` 
 >    > * Click on "Execute"
-You now have a file with about `9563` occurrences
+You now have a file with about `9562` occurrences
 
 Because you only need informations about occurrences and their location: 
 > use the tool `Couper des colonnes d'un jeu de données tabulé` 
