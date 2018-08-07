@@ -51,6 +51,7 @@ First of all, you will have to upload the files on Galaxy-E and then you might h
 > ### {% icon comment %} Comment
 >
 > ⚠️ <a name="inputdatawarning"></a>Please note that the file must contain a header corresponding to: ```"SITES","SPECIES","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
+
 > {: .comment}
 
 >    > ## <a name="resampling"></a> Re-sampling.  
@@ -61,9 +62,8 @@ When the dataset contains many details, it lengthens the file processing time th
 >    > 1. Use the `CSV to tabular` tool to first create a tabular file from your csv one (with only one species). This is a mandatory step as further tools are only working on tabular files!
 >    > 2. Search for the tool `trouver et remplacer des patterns dans des colonnes` on the file on CSV with the following  parameters.
 >    >    >  * Select the input file & the column with the SITE header.
->    >    >  * Click on`"insert checks"`
->    
->    >    >  * "Trouver l'expression suivante": `"(\.[0-9]+)"` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
+>    >    >  * Click on `insert checks`
+>    >    >  * "Trouver l'expression suivante": `(\.[0-9]+)` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
 >    >    >  * "Remplacement": leave it empty.
 
 >   > ### {% icon question %} Questions
@@ -78,11 +78,25 @@ When the dataset contains many details, it lengthens the file processing time th
 >    >    </details>
 >    {: .question}
 
->    > 3. Now you can regenerate a CSV file using the `tabular to CSV` tool on the ouptut from **trouver et remplacer des patterns dans des colonnes**.
+# Step 2: Making sure your dataset concerns only one species 
+ 
+The second step of any Regional GAM data analysis is making sure to have one dataset of only one specific species that you will then be able to use. If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another. 
+
+> ### {% icon hands_on %} Hands-on: How many species are taken into account in this dataset
+>
+> As the dataset is quite big and may countain heterogeneous informations, you want to know wether the data are about one species or more. 
+> 1. Search for the tool `compter le nombre d'occurence de chaque enrégistrement`with the following parameters:
+> * "Sur le jeu de données": `output`from **tabular to CSV**
+> * "Compter les occurrences des valeurs présentes dans la(les) colonne(s)": `column 1`
+> * "Délimité par": `tabulation`.
+> * "Comment les résultats doivent t'ils être triés ?": `Avec la valeur la plus présente en premier`.
+> 2. Inspect the file by clicking on the `eye` icon to check how many species are taken into account.
+> 3. Now you can regenerate a CSV file using the `tabular to CSV` tool on the ouptut from **trouver et remplacer des patterns dans des colonnes**.
 
 {: .hands_on}
 
-# Step 2: <a name="displayingtheoccurrenceofthespecies"></a> Displaying the occurrence of the chosen species through the years  
+
+# Step 3: <a name="displayingtheoccurrenceofthespecies"></a> Displaying the occurrence of the chosen species through the years  
  
  
 Now you have a file containing all the data on the species of interest. The main goal of this step is basically to create a material that can be used to generate charts. What you could also do, for example, would be to compare the evolution of various species through the years in the same site. You would have to superpose the different graphs on one another.
@@ -112,13 +126,58 @@ If you want to access the chart on an interactive interface, you can click on th
 >    > * "Data point labels": `Column 1`
 >    > * "Values for x-axis": `Column 2`
 >    > * "Values for y-axis": `Column 6`
->    > * "X-Axis label": `Year`  
+>    > * "X-Axis label": `Year`
+>    > * "Y-Axis label": `nm values`
+>    > 8. Click on {% icon tip %} `Visualize`
+>    > 9. Click on {% icon tip %} `save this visualization`if you are willing
+>    > 5. Visualize
+>    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
+>
+>
+> ### {% icon comment %} Comment
+>
+> ⚠️ Please note, that if you want your chart to be more precise and to specify that the x-axis coresponds to "Week and year", it is possible. In order to do so, follow the tip below:
+>    > ### {% icon tip %} Tip: Creating a new column of the dataset containing the week and the year 
+First you wan to know how many years are taken into account in your dataset.
+>    > 1.Search for the tool `Compter le nombre d'occurrences de chaque enregistrement` with the following parameters 
+>    > * "Sur le jeu de données": `output` from **trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières**.
+>    > * "Select": `Column 3` (the on headed with `SITE`)
+>    > * "Délimité par": `Tabulation`.
+>    > * "Comment les résultats doivent t'ils être triés ?": `Par les valeurs comptées`.
+>    > 2. Inspect the file by clicking on the `eye` icon to check how many species are taken into account.
+>    > 3. Search for the tool`Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières` with the following parmeters:
+>    > * "Selectionner les cellules à partir de": `output` from **flight curve**.
+>    > * "la colonne": `Column 2` (corresponding to the one headed with `YEAR`)
+>    > * Click on `Insert check`:
+>    > * "Trouver l'expression suivante": `(2003)`
+>    > * "Remplacement": `-2003` 
+>    > 4. Repeat `Insert check` with as many years as your dataset contains (for this specific dataset it is 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, and 2012.
+>    > 5. Inspect the file by clicking on the `eye` icon to check if all the years are now written with a "-" before the digits. 
+>    > 6. Search for the tool `Merger des colonnes ensemble` with the following parameters:
+>    > * "Selection du jeu de données": `output` from **Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières**.
+>    > * "Merger les colonnes": `Column 3`(corresponding to the one headed with `WEEK`)
+>    > * "avec les colonnes": `Column 2`(corresponding to the one headed with `YEAR`)
+
+With the `output` from **Merger des colonnes ensemble** you can now generate a new chart which will have a x-axis corresponding to your column `Column "week""year"`.
+>    > ### {% icon tip %} Visualiser 
+>    > 1. Select `Charts`
+>    > 2. Give it a proper name
+>    > 3. Select a visualization: "line chart (NVD 3) 
+>    > 4. Select data:
+>    > * "Provide a label": `The name of the species`
+>    > * "Pick a series color": Choose a color for the line 
+>    > * "Data point labels": `Column 1`
+>    > * "Values for x-axis": `Column 7`
+>    > * "Values for y-axis": `Column 6`
+>    > * "X-Axis label": `Week and Year`
 >    > * Y-Axis label: `nm values`
 >    > 8. Click on {% icon tip %} `Visualize`
 >    > 9. Click on {% icon tip %} `save this visualization`if you are willing
 >    > 5. Visualize
 >    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 >
+> {: .comment}
+
 > ⚠️ Please note that it is possible to show the occurrences of more than one species on a single chart. If you are interested in doing so, you should click here : [Various species chart explanations](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Multispecies_tutorial.md#variousoccurencesonasinglechartexplanations)
 
  
