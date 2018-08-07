@@ -174,7 +174,7 @@ You need to choose a `GCM` (global circulation model). They are model made to pr
 
 Here using different model you can see the evolution of the predicted presence of `Chrysemys Picta` in Canada in 2050.
 
-For exemple we can use the model [CCSM4](http://www.cesm.ucar.edu/models/ccsm4.0/), a US model based on earth circulation. We can try it with differents RCP scenarios, wich are scernarios about the amout of greenhouse gases emitted in the near futur. This allows us to have differents predicted presence models.
+For exemple we can use the model [CCSM4](http://www.cesm.ucar.edu/models/ccsm4.0/), a US model based on earth circulation. We can try it with differents RCP scenarios, wich are scernarios about the amout of greenhouse gases emitted in the near futur. This allows us to have differents predicted presence models. Once again, we will use the `Minimum Training Presence` threshold.
 
 ![CCM4 with a 2.6 RCP](https://raw.githubusercontent.com/emichn/training-material/patch-1/topics/ecology/tutorials/species-distribution-modeling/Images/GCM_CCSM4_RCP_2.6.png "CCM4 with a 2.6 RCP")
 
