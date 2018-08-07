@@ -81,7 +81,7 @@ When the dataset contains many details, it lengthens the file processing time th
 {: .hands_on}
 
 
- # Step 2: Displaying the occurence of the chosen species through the years 
+ # Step 2: Displaying the occurence of the chosen species through the years{:target="_blank"} 
  
 Now you have a file containing all the data on the species of interest. The main goal of this step is basically to create a material that can be used to generate charts. What you could also do, for example, would be to compare the evolution of various species through the years in the same site. You would have to superpose the different graphs on one another.
 >
