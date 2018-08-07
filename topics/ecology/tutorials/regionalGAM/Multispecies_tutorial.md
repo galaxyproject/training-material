@@ -36,7 +36,7 @@ First of all, you will have to upload the files on Galaxy-E and then you might h
 >  ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial and give it a proper name.
-> 2. Import the following files from [Zenodo](https://zenodo.org/record/1324204#.W2BmRn7fNE4) or from a data
+> 2. Import the following file from [Zenodo](https://zenodo.org/record/1324204#.W2BmRn7fNE4) or from a data
 >    library named `regional GAM data tutorial`
 >
 >    ```
