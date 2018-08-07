@@ -160,7 +160,7 @@ First with `BIOCLIM Envelope Plots`you can make a chart and choose the parameter
 
 With our data we can see that when we make a chart to simutate an ecological niche using `bio1` as y axis and `bio12` as x axis, with a threshol of `0,75`, the optimum environment parameter for this species is between `5°C` and `15°C` for an annual precipitation (on the graph, values are *10) between aproximatively `700mm` and `1250mm`.
 
-You can either select `no threshold` to have a gradient of predicted presence or use, like in this study, `minimum training presence` to have a map with the predicted presence and predicted absence.
+Then with `Map Prediction`, you can either select `no threshold` to have a gradient of predicted presence or use, like in this study, `minimum training presence` to have a map with the predicted presence and predicted absence.
 flag: insert photo of map prediction.
 
 ## Project Model
