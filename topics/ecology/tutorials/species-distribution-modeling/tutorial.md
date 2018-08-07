@@ -28,6 +28,7 @@ Because you only need informations about occurrences and their location:
 > then in "Couper les colonnes" type `c1,c2,c3,c44`
 
 >    > ### {% icon question %} Questions
+>    >
 >    > 1. For what stand c1, c2, c3, c44 ?
 >    >
 >    >    <details>
@@ -39,6 +40,7 @@ Because you only need informations about occurrences and their location:
 >    {: .question}
 
 Then, as we want to keep only occurence records from US, we will use a tool to filter dataset on the fourth column. Can you find a way to do that alone ?
+
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
@@ -63,7 +65,18 @@ With this you can either upload file you've loaded earlier from Galaxy-E data or
 
 You now have your occurence records on Wallace!
 
-TODO question: One point appears near the African continent. Can you propose a reason ? Is this an error? Which ID is it?
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. One point appears near the African continent. Can you propose a reason ? Is this an error? Which ID is it?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>It's likely an error where the coordinates were not filled. It proprely have a country code and an ID: 6783.</li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+
 
 ## Process occurrence data
 
@@ -110,7 +123,7 @@ This is why you have to know what type of background extent you want to use.
 >    > 
 >    > `Point buffers` will use occurrences localities to build a buffer zone aroud each of them
 
-Then, to associate your occurrences to the environmental data, you'll have to choose the number of points to sample. This will cross
+Then, to associate your occurrences to the environmental data, you'll have to choose the number of points to sample.
 
 For our study we made a `Minimum convex polygon` background extent with a `buffer area` of `1 degree` and use `100000` backgound points. 
 
@@ -163,6 +176,6 @@ Here using different model you can see the evolution of the predicted presence o
 For exemple we can use the model [CCSM4](http://www.cesm.ucar.edu/models/ccsm4.0/), a US model based on earth circulation. We can try it with differents RCP scenarios, wich are scernarios about the amout of greenhouse gases emitted in the near futur. This allows us to have differents predicted presence models.
 Flag: insert two photos of 4,5 & 8,5
 
-You can see here the list of the different [Global Circulation Model](https://fr.wikipedia.org/wiki/Mod%C3%A8le_de_circulation_g%C3%A9n%C3%A9rale)
+You can see here the list of the different [Global Circulation Model](https://fr.wikipedia.org/wiki/Mod%C3%A8le_de_circulation_g%C3%A9n%C3%A9rale#Les_mod%C3%A8les_climatiques_du_CMIP)
 
 # Conclusion
