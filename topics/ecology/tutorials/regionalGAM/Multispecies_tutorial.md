@@ -116,6 +116,6 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 ❗❗ Now that you have done the specific steps with your multispecies dataset, you can follow this link and directly go to 
 
 
-[Step 2 - Displaying the occurrence of a chosen species through the years](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md#step) 
+[Step 2 - Displaying the occurrence of a chosen species through the years](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md#Step) 
 
  https://github.com/usegalaxy-eu/website/blob/master/index-metagenomics.md#tutorials
