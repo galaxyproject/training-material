@@ -9,7 +9,7 @@ tutorial_name: species distribution modeling
 
 Species Distribution Modeling can help understand the distribution of a species depending of environmental parameters such as temperature and precipitation. It can also help understand the impact of climate change on the repartition of some species. This is done by associating data occurrences of a species with environmental data.
 
-The goal of this study is to model a theorical ecological niche and predict future repartition using Species Distribution Modeling through the use of Wallace interactive environment on Galaxy. We'll use the data occurrences of US *Chrysemys Picta* (Painted turtle) from the North America region.   
+The goal of this study is to model a theorical ecological niche and predict future repartition using Species Distribution Modeling through the use of Wallace interactive environment on Galaxy. We'll use the data occurrences of US *Chrysemys Picta* ([Painted turtle](https://fr.wikipedia.org/wiki/Tortue_peinte)) from the North America region.   
 
 # Step 1: Loading a dataset
 
@@ -17,8 +17,8 @@ In this study the datasets are all imported from the tool `Get species occurrenc
 
 >    > ### {% icon tip %} Tip: Importing data set from a data bank
 
->    > * Go into "upload files" (top left panel) then "Get species occurrences data and taxref informations"
->    > * Fill the "Scientific name" with `Chrysemys Picta`
+>    > * Go into the "upload files" tool section (top left panel) then select the "Get species occurrences data and taxref informations" tool
+>    > * Fill the "Scientific name" with `Chrysemys picta`
 >    > * Choose the data source `Gbif` and set the number of occurrences on `10000` 
 >    > * Click on "Execute"
 You now have a file with about `9508` occurrences
@@ -30,12 +30,11 @@ Because you only need informations about occurrences and their location:
 TODO question: For what stand c1, c2, c3, c44
 answer: c1 is the species name and c2 &c3 are respectively longitude an latitude corresponding to each occurrences of the file. The fourth column contain country code to have a possibility to easily filter occurences by countries.
 
+Then, as we want to keep only occurence records from US, we will use a tool to filter dataset on the fourth column. Can you find a way to do that alone ?
 
-Then using the tool `Tabular to CSV` on this new file to have the right format to use in Wallace.
+TODO tips/answer: Using the "Filtrer des données sur une colonne en utilisant des expressions simples", you can enter the following condition ```c4=='US'``` specifying that we need to skip the first line as it's a header.
 
-Finally, we want to keep only occurence records from US. To do that, we will use a tool to filter dataset on the fourth column. Can you find a way to do that alone ?
-
-TODO tips/answer: Using the "Filtrer des données sur une colonne en utilisant des expressions simples", you can enter the following condition ```c4=='US'``` specifying that we need to don't consider the first line as it's a header.
+Finally, use the tool `Tabular to CSV` on this new file to have the right format to use in Wallace.
 
 # Step 2: Using Wallace
 
@@ -51,9 +50,11 @@ With this you can either upload file you've loaded earlier from Galaxy-E data or
 
 You now have your occurence records on Wallace!
 
+TODO question: One point appears near the African continent. Can you propose a reason ? Is this an error? Which ID is it?
+
 ## Process occurrence data
 
-Here you'll have to chose the occurrences you want to use for the rest of your model. To do so, you have three options
+Here you'll have to chose the occurrences you want to use for the rest of your model. To do so, you have 4 options
 
 > * Option 1: `Select Occurrences On Map`
 > With this, you have to select your occurrence on the map by delimiting a geographic area you want to use.
@@ -65,6 +66,8 @@ Here you'll have to chose the occurrences you want to use for the rest of your m
 > * Option 3: `Spacial thin`
 > This can allow you to select occurrences by setting a minimum distance (in km) between the different occurrences. For exemple:
 >    > If you type 30 km, you'll end up with all the occurrences on the map which are at minimum 30km from each other.
+
+> * Option 4: skip this step and consider all records.
 
 Because we want to work on the data from the US we'll select all the occurrences there with the first option:`Select Occurrences On Map`  
 
@@ -82,16 +85,16 @@ Here we use the `WorldClim Bioclims` module with the lowest resolution `10 arcmi
 
 After loading the environmental data, you can go to the next point.
 
-## Process environnemental Data
+## Process environmental Data
 
-Wallace will now associate environnmental data and occurrences data to make an area for your model.
+Wallace will now associate environmental data and occurrences data to make an area for your model.
 > * First: `Choose Background Extent` creates a buffer zone around the occurrences. You can choose the size of the buffer zone by choosing the distance on `Study region buffer distance` parameter. This allows you to control the area you'll be working with and on which a map of suitability will be made.
 
 This is why you have to know what type of background extent you want to use.
 >    > `Bounding box` will define an area whit occurrences centered
-
+>    > 
 >    > `Minimum convex polygon` will make an area considering the repartition of your occurrences
-
+>    > 
 >    > `Point buffers` will use occurrences localities to build a buffer zone aroud each of them
 
 Then, to associate your occurrences to the environmental data, you'll have to choose the number of points to sample. This will cross
@@ -110,8 +113,8 @@ Partitioning data allows to divide a data set into subsets (ie bins), then make 
 >    > 1. `Block (k=4)` divide the area in four and put equally into four bins, the different occurrences.
 >    > 2. `Checkerboard (k=2)` uses two bins according to the position of the occurence on the grid.
 >    > 3. `Checkerboard (k=4)` uses four bins according to the position of the occurence on the grid. This require an aggregation factor, which is the size of a second grid put on a first one.
-
->    > * For exemple: if you use a factor 4, the grids size will be 4x4 "insert image from muscarella & al"
+>    >    >
+>    >    > * For exemple: if you use a factor 4, the grids size will be 4x4 "insert image from muscarella & al"
 
 > For both of these technics the number of occurrences into each bin may vary.
  
