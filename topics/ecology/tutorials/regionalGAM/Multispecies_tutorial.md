@@ -118,7 +118,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 [Step 2 - Displaying the occurrence of a chosen species through the years of the reference tutorial on RegionalGAM](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md#displayingtheoccurrenceofthespecies) 
 
 > 
-> ### {% icon hands_on %} Hands-on: <a name="variousoccurencesonasinglechart"></a> Add various occurences on a single chart
+> ### {% icon hands_on %} Hands-on: <a name="variousoccurencesonasinglechartexplanations"></a> Add various occurences on a single chart
 
 >    > 1. Click on: {% icon tip %} Visualiser  
 >    > 2. Select `Charts`
