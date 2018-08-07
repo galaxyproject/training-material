@@ -21,7 +21,7 @@ In this study the datasets are all imported from the tool `Get species occurrenc
 >    > * Fill the "Scientific name" with `Chrysemys picta`
 >    > * Choose the data source `gbif` and set the number of occurrences on `10000` 
 >    > * Click on "Execute"
-You now have a file with about `9563` occurrences
+You now have a file with about `9562` occurrences
 
 Because you only need informations about occurrences and their location: 
 > use the tool `Couper des colonnes d'un jeu de données tabulé` 
@@ -158,23 +158,23 @@ After the precedent step you can now model your theoretical niche.
 
 First with `BIOCLIM Envelope Plots`you can make a chart and choose the parameters of interest and see how the data responds adapting the threshold for more accuracy.
 
-With our data we can see that when we make a chart to simutate an ecological niche using `bio1` as y axis and `bio12` as x axis, with a threshol of `0,75`, the optimum environement parameter for this species is between `5°C` and `15°C` for an annual precipitation between aproximatively `700mm` and `1250mm`.
+With our data we can see that when we make a chart to simutate an ecological niche using `bio1` as y axis and `bio12` as x axis, with a threshol of `0,75`, the optimum environment parameter for this species is between `5°C` and `15°C` for an annual precipitation (on the graph, values are *10) between aproximatively `700mm` and `1250mm`.
 
-You can either select `no threshold` to have a gradient of predicted presence or use, like in this study, `minimum training presence` to have a map with the predicted presence and predicted absence.
+Then with `Map Prediction`, you can either select `no threshold` to have a gradient of predicted presence or use, like in this study, `minimum training presence` to have a map with the predicted presence and predicted absence.
 flag: insert photo of map prediction.
 
 ## Project Model
 
 Wallace can also apply the model you've juste created on a specified zone, here the US, to another zone and create a map of suitability.
 
-We'll aply the concept on a part of the Canada. Select `Project to New Extent` then draw a polygone around a part of Canada and use `Minimum Training Presence`. 
+We'll apply the concept on a part of the Canada. Select `Project to New Extent` then draw a polygone around a part of Canada and use `Minimum Training Presence`. 
 
-To go further, you can test your model on a specified zone, years from now.
-You need to choose a `GCM` (global circulation model). They are model made to predict atmospheric fluctuation and then study climate change. Each one is different and use parameters like ocean atmosphere and other.
+To go further, you can test your model on a specified zone, years from now, selecting `Project to New Time`.
+You need to choose a `GCM` (global circulation model). They are model made to predict atmospheric fluctuation and then study climate change. Each one is different and use parameters like ocean atmosphere and others.
 
 Here using different model you can see the evolution of the predicted presence of `Chrysemys Picta` in Canada in 2050.
 
-For exemple we can use the model [CCSM4](http://www.cesm.ucar.edu/models/ccsm4.0/), a US model based on earth circulation. We can try it with differents RCP scenarios, wich are scernarios about the amout of greenhouse gases emitted in the near futur. This allows us to have differents predicted presence models.
+For exemple we can use the model [CCSM4](http://www.cesm.ucar.edu/models/ccsm4.0/), a US model based on earth circulation. We can try it with differents RCP scenarios, wich are scernarios about the amout of greenhouse gases emitted in the near futur. This allows us to have differents predicted presence models. Once again, we will use the `Minimum Training Presence` threshold.
 
 ![CCM4 with a 2.6 RCP](https://raw.githubusercontent.com/emichn/training-material/patch-1/topics/ecology/tutorials/species-distribution-modeling/Images/GCM_CCSM4_RCP_2.6.png "CCM4 with a 2.6 RCP")
 
