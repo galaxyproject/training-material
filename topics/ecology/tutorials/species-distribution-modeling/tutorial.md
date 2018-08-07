@@ -176,6 +176,6 @@ Here using different model you can see the evolution of the predicted presence o
 For exemple we can use the model [CCSM4](http://www.cesm.ucar.edu/models/ccsm4.0/), a US model based on earth circulation. We can try it with differents RCP scenarios, wich are scernarios about the amout of greenhouse gases emitted in the near futur. This allows us to have differents predicted presence models.
 Flag: insert two photos of 4,5 & 8,5
 
-You can see here the list of the different [Global Circulation Model](https://fr.wikipedia.org/wiki/Mod%C3%A8le_de_circulation_g%C3%A9n%C3%A9rale#Les_mod%C3%A8les_climatiques_du_CMIP)
+You can see here the list of the different [Global Circulation Model](https://en.wikipedia.org/wiki/General_circulation_model#Atmospheric_and_oceanic_models)
 
 # Conclusion
