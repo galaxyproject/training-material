@@ -98,7 +98,7 @@ This step will allow you the show the phenology of a species and then to create 
 >
 > 🔹 Based on the flight curve, you can create a line chart which shows the occurence of the species through the years on a very visual material 
 
-![Phenology chart](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20regional%20GAM.png "This shows the occurrence of Ardea alba and Bombycilla garrulus")
+![Phenology chart](hhttps://raw.githubusercontent.com/Claraurf/training-material/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20Ardea%20Alba.png "This shows the occurrence of Ardea alba")
 
 If you want to access the chart on an interactive interface, you can click on the following link: [Chart on Galaxy](http://openstack-192-168-100-19.genouest.org/plugins/visualizations/charts/saved?id=417e33144b294c21)
 >
