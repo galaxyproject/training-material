@@ -38,12 +38,6 @@ First of all, you will have to upload the files on Galaxy-E and then you might h
 >    ```
 >    CSV dataset with only one species:
 >    https://zenodo.org/record/1324204/files/regional%20GAM%20data.csv?download=1
->
->    RData dataset with only one species:
->    https://zenodo.org/record/1324204/files/gatekeeper_CM%20.RData?download=1csv
->
->    CSV dataset with several species: 
->    https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv?download=1
 >    ```
 >   
 > ### {% icon tip %} Tip: Importing data via links
@@ -58,43 +52,6 @@ First of all, you will have to upload the files on Galaxy-E and then you might h
 > ### {% icon comment %} Comment
 >
 > ⚠️ <a name="inputdatawarning"></a>Please note that the file must contain a header corresponding to: ```"SITES","SPECIES","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
->
-> ❗If the dataset you have uploaded is on CSV format, you can skip the following part and directly go to [the resampling section](#resampling).
->
-> ❗However, if you are dealing with a dataset on the RData format (the second of the links listed above), you will have to process this binary file to obtain an appropriate CSV dataset. To do so, you can use the following tools:
->   > * Search for the tool `RData binary file reader`with the following parameters:
->   >      * "Rdata binary file to explore": "dataset on RData" 
->   > * Search for the tool `RData parser` with the following parameters:
->   >      * "Rdata file to explore": `"dataset on RData"`
->   >      * "File with .Rdata content details": file of **`RData binary file reader`**
->   >      * "Select which attribute(s) you want to extract": select everything but "trend"
->   >      * ⚠️ Please note that the tool `RData parser` creates separated files, each of them containing one column. The file with the "TREND" header can be let aside as we don't need it for what will follow.
->   > * Search for the tool `Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data     required with the following parameters:
->   >      * "Coller":  outut from **RData parser** headed with "SPECIES"
->   >      * "et": output from **RData parser** with headed with "SITE"
->   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` as many times as there are separated files in order to create a final dataset with all the columns. First you must paste 2 columns together, then you must paste this last file with a third column and do this action again and again until your final file countains all the columns. 
->   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` pasting the file containing 2 columns with the one headed by "YEAR".
->   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` pasting the file containing 3 columns with the one headed by "MONTH". 
->   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` pasting the file containing 4 columns with the one headed by "DAY".
->   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` pasting the file containing 5 columns with the one headed by "COUNT". 
->   >  
->   > {: .comment}
-
->    > ### {% icon question %} Questions
->    >
->    > 1. In which specific case do you have to proceed to a particular set of actions on your dataset in order to be able to use it ?
->    > 2. Why do you need to use `Coller deux jeux de données l'un à côté de l'autre`? 
->    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>You only have to do these actions when you are using a dataset on the Rdata format. </li>
->    >    <li>Because you want to create a single dataset which countains all the data on a chosen species. You decided to upload a dataset on RData format and therefore you had to use the tools `RData binary file reader` and `RData parser`. This last tool treats the file and allows you to open it on Galaxy-E but it creates as many files as there are columns (when RData object is composed from a unique data table). This is the reason why you had to carry out on a set of actions ending by the creation of one complete file.</li>
->    >    </ol>
->    >    </details>
->    {: .question}
-
-{: .hands_on}
 
 >    > ## <a name="resampling"></a>Re-sampling.  
 When the dataset contains many details, it lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example, the list of SITE (look at the column with header `SITE)`  of the dataset you are using is really long and the SITES are classified into sub-sites. Here, we will assume that your file doesn't really need be as precise and this is the reason why you have to specify you don't want the sub-sites. To create a new "down-sampled" file, you can follow these steps:   
@@ -120,52 +77,8 @@ When the dataset contains many details, it lengthens the file processing time th
 
 {: .hands_on}
 
-# Step 2: Selectionning one specific species and showing all the data corresponding to it
 
-The second step of any Regional GAM data analysis is making sure to have one dataset of only one species that you will then be able to use. If you want to treat several species; you have to, for now, execute the regionalGAM workflow on each species related dataset and then merge / concatenate results, for example to create a graph showing abundance evolution by years of all the species.  
-
-> ### {% icon hands_on %} Hands-on: How many species are taken into account in this dataset
->
-As the dataset is quite big and contains heterogeneous informations, you want to know wether the data are about one species or more.
-> 1. Search for the tool `compter le nombre d'occurence de chaque enrégistrement`with the following parameters:
-> * "Sur le jeu de données": `output`from **tabular to CSV**.
-> * "Compter les occurrences des valeurs présentes dans la(les) colonne(s)": `column 1`
-> * "Délimité par": `tabulation`.
-> * "Comment les résultats doivent t'ils être triés ?": `Avec la valeur la plus présente en premier`.
-> 2. Inspect the file by clicking on the `eye` icon to check how many species are taken into account.
-> > If there is only one species you can skip the following steps and go directly to the file datatype convertion step using the tool `tabular to CSV`
->
->    > ### Creating a new file concerning only the data of one species
->    > 1. Copy the name of the species you are interested in from the CSV file (for example: "Pyronia tithonus").
->    > 2. Search for the tool`filtrer des données dur une colonne en utilisant des expressions simples`with the following   parameters.
->    > * En utilisant la condition suivante: `c1=='habitat2'` replacing 'habitat2' with the name of the species (for example: `c1=='"Pyronia tithonus"'`)  
->    > * Nombre de lignes d'en-tête à passer: `1`.
->    > * You can repeat this set of actions as much as necessary, changing only the name of the species taken into account.
->    > 3. Search for the tool `tabular to CSV` with the following parameters 
->    > * Select the file you've just created 
->    > * Separators: `","`.
->    > 4. Repeat this last operation on all files if you want to work on different species. 
->    
->   > {: .comment}
->
->   > ### {% icon question %} Questions
->   >
->    > 1. How many species does your dataset take into account ?(CSV dataset with several species)
->    > 2. What are their names ? 
->    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The dataset contains informations on 2 different species. </li>
->    >    <li>Their names are "Pyronia tithonus" and	"Aglais io".</li>
->    >    </ol>
->    >    </details>
->    {: .question}
-
-{: .hands_on}
-
-
- # Step 3: Displaying the occurence of the chosen species through the years
+ # Step 2: Displaying the occurence of the chosen species through the years
  
 Now you have a file containing all the data on the species of interest. The main goal of this step is basically to create a material that can be used to generate charts. What you could also do, for example, would be to compare the evolution of various species through the years in the same site. You would have to superpose the different graphs on one another.
 >
