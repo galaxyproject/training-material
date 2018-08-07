@@ -59,7 +59,7 @@ First of all, you will have to upload the files on Galaxy-E and then you might h
 >
 > ⚠️ <a name="inputdatawarning"></a>Please note that the file must contain a header corresponding to: ```"SITES","SPECIES","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
 >
-> ❗If the dataset you have uploaded is on CSV format, you can skip the following part and directly go to ## Re-sampling.
+> ❗If the dataset you have uploaded is on CSV format, you can skip the following part and directly go to [the resampling section](#resampling).
 >
 > ❗However, if you are dealing with a dataset on the RData format (the second of the links listed above), you will have to process this binary file to obtain an appropriate CSV dataset. To do so, you can use the following tools:
 >   > * Search for the tool `RData binary file reader`with the following parameters:
@@ -96,27 +96,39 @@ First of all, you will have to upload the files on Galaxy-E and then you might h
 
 {: .hands_on}
 
->    > ## Re-sampling. 
-When the dataset contains many details, it lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example, the list of SITE of the dataset you are using is really long and the SITES are classified into sub-sites. Here, we will assume that your file doesn't really need be as precise and this is the reason why you have to specify you don't want the sub-sites. To create a new "down-sampled" file, you can follow these steps:   
+>    > ## <a name="resampling"></a>Re-sampling.  
+When the dataset contains many details, it lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example, the list of SITE (look at the column with header `SITE)`  of the dataset you are using is really long and the SITES are classified into sub-sites. Here, we will assume that your file doesn't really need be as precise and this is the reason why you have to specify you don't want the sub-sites. To create a new "down-sampled" file, you can follow these steps:   
 
 > ### {% icon hands_on %} Hands-on: hiding some informations
->    > 1. Search for the tool `trouver et remplacer des patterns dans des colonnes` on the file on CSV with the following  parameters.
->    >  * Click on`insert checks`
->    >  * "Trouver l'expression suivante": `(\.[0-9]+)` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
->    >  * "Remplacement":`leave it empty`.
->    > 3. Search for the tool `tabular to CSV`and select the ouptut from **trouver et remplacer des patterns dans des colonnes**.
+
+>    > 1. Use the `CSV to tabular` tool to first create a tabular file from your csv one (with only one species). This is a mandatory step as further tools are only working on tabular files!
+>    > 2. Search for the tool `trouver et remplacer des patterns dans des colonnes` on the file on CSV with the following  parameters.
+>    >    >  * Select the input file & the column with the SITE header.
+>    >    >  * Click on`"insert checks"`
 >    
+>    >    >  * "Trouver l'expression suivante": `"(\.[0-9]+)"` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
+>    >    >  * "Remplacement": leave it empty.
+>    >    > ### {% icon question %} Questions After having successfully deleted the sub-sites informations, can you look at the original dataset and this new one and say how many sites you had, and you have now? You will maybe need to use tools like `Compter le nombre d'occurrences de chaque enregistrement`
+>    >    >    <details>
+>    >    >    <summary>Click to view answers</summary>
+>    >    >    <ol type="1">
+>    >    >    <li>The dataset contains 6 sites now against 1144 before "down-sampling". </li>
+>    >    >    </ol>
+>    >    >    </details>
+>    {: .question}
+>    > 3. Now you can regenerate a CSV file using the `tabular to CSV` tool on the ouptut from **trouver et remplacer des patterns dans des colonnes**.
+
 {: .hands_on}
 
 # Step 2: Selectionning one specific species and showing all the data corresponding to it
 
-The second step of any Regional GAM data analysis is making sure to have one dataset of only one specific species that you will then be able to use. If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another. 
+The second step of any Regional GAM data analysis is making sure to have one dataset of only one species that you will then be able to use. If you want to treat several species; you have to, for now, execute the regionalGAM workflow on each species related dataset and then merge / concatenate results, for example to create a graph showing abundance evolution by years of all the species.  
 
 > ### {% icon hands_on %} Hands-on: How many species are taken into account in this dataset
 >
-> As the dataset is quite big and countains heterogeneous informations, you want to know wether the data are about one species or more.
+As the dataset is quite big and contains heterogeneous informations, you want to know wether the data are about one species or more.
 > 1. Search for the tool `compter le nombre d'occurence de chaque enrégistrement`with the following parameters:
-> * "Sur le jeu de données": `output`from **tabular to CSV**
+> * "Sur le jeu de données": `output`from **tabular to CSV**.
 > * "Compter les occurrences des valeurs présentes dans la(les) colonne(s)": `column 1`
 > * "Délimité par": `tabulation`.
 > * "Comment les résultats doivent t'ils être triés ?": `Avec la valeur la plus présente en premier`.
