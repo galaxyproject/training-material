@@ -12,6 +12,11 @@ This tutorial will show how to study species phenology through the computation o
 After a certain numbers of steps, you will be able to extract single species data and study related phenology through the years. The goal of this exercise is to be able to create abundance trend over time and biodiversity indicators. Following these indicators allow to follow trends in terms of population dynamics. You could for example try to predict the occurences of one specific species in a certain type of environnement using the prediction model of climate evolution. Based on charts that you will generate, you could try to explain the evolution of a species with environmental data (temperatures variations, modifications of the environmental conditions).
 You will basically learn how to create a file on the basis of which you can create a visual material that can be quite easily understood and therefore be efficient for a large audience.
 
+> ### {% icon comment %} Comment
+>
+> ⚠️ Please note that there are two other tutorials on regionalGAM, one is specific to [a dataset on RData](training-material/topics/ecology/tutorials/regionalGAM/Rdata_tutorial.md) and the other explains you how to deal with [a multispecies dataset](training-material/topics/ecology/tutorials/regionalGAM/Multispecies_tutorial.md). If you are interested in learning more about these specific cases, do not hesitate to do these to tutorials. 
+> {: .comment}
+
 
 > ### Agenda
 > In this tutorial, we will cover:
@@ -50,6 +55,7 @@ First of all, you will have to upload the files on Galaxy-E and then you might h
 > ### {% icon comment %} Comment
 >
 > ⚠️ <a name="inputdatawarning"></a>Please note that the file must contain a header corresponding to: ```"SITES","SPECIES","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
+> {: .comment}
 
 >    > ## <a name="resampling"></a> Re-sampling.  
 When the dataset contains many details, it lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example, the list of SITE (look at the column with header `SITE)`  of the dataset you are using is really long and the SITES are classified into sub-sites. Here, we will assume that your file doesn't really need be as precise and this is the reason why you have to specify you don't want the sub-sites. To create a new "down-sampled" file, you can follow these steps:   
