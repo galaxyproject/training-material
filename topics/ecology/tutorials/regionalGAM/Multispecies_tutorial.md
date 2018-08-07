@@ -141,8 +141,8 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >    > * "Values for y-axis": `Column nm of the species 2`
 >    > 7. You may repeat "Insert data series" as many times as needed depending on the number of different species you want represent
 >    > 8. Click on {% icon tip %} `Customize`
->    > * "X-Axis label": `nm values`  
->    > * Y-Axis label: `Year`
+>    > * "X-Axis label": `Year`  
+>    > * Y-Axis label: `nm values`
 >    > * "Use multi-panels": click on `No`(or you will have three different charts)
 >    > 9. Click on {% icon tip %} `Visualize`
 >    > 10. Click on {% icon tip %} `save this visualization`if you are willing to keep it
