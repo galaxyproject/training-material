@@ -140,7 +140,9 @@ Partitioning data allows to divide a data set into subsets (ie bins), then make 
 >    > 2. `Checkerboard (k=2)` uses two bins according to the position of the occurence on the grid.
 >    > 3. `Checkerboard (k=4)` uses four bins according to the position of the occurence on the grid. This require an aggregation factor, which is the size of a second grid put on a first one.
 >    >    >
->    >    > * For exemple: if you use a factor 4, the grids size will be 4x4 "insert image from muscarella & al"
+>    >    > * For exemple: if you use a factor 4, the grids size will be 4x4 
+
+![Checkerboard 2](https://raw.githubusercontent.com/emichn/training-material/patch-1/topics/ecology/tutorials/species-distribution-modeling/Images/Checkerboard.png "ENMeval: An R package for conducting spatially independent evaluations and estimating optimal model complexity for MAXENT ecological niche models. Muscarella et al., © 2014. British Ecological Society, Methods in Ecology and Evolution, 5, 1198–1205")
 
 > For both of these technics the number of occurrences into each bin may vary.
  
@@ -165,8 +167,7 @@ flag: insert photo of map prediction.
 
 Wallace can also apply the model you've juste created on a specified zone, here the US, to another zone and create a map of suitability.
 
-We'll aply the concept on a part of the Canada.
-Flag: insert photo
+We'll aply the concept on a part of the Canada. Flag 
 
 To go further, you can test your model on a specified zone, years from now.
 You need to choose a `GCM` (global circulation model). They are model made to predict atmospheric fluctuation and then study climate change. Each one is different and use parameters like ocean atmosphere and other.
