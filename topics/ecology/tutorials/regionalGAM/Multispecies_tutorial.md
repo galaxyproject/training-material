@@ -117,3 +117,32 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 ❗❗ Now that you have done the steps specific to a multispecies dataset, you will be redirected to the reference tutorial on regionalGAM. In order to go further on regionalGAM analysis, start the tutorial from the second step. To do so, you can click here:
 [Step 2 - Displaying the occurrence of a chosen species through the years of the reference tutorial on RegionalGAM](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md#displayingtheoccurrenceofthespecies) 
 
+> 
+> ### {% icon hands_on %} Hands-on: <a name="variousoccurencesonasinglechart"></a> Add various occurences on a single chart
+
+>    > 1. Click on: {% icon tip %} Visualiser  
+>    > 2. Select `Charts`
+>    > 3. Give it a proper name
+>    > 4. Select a visualization: "line chart (NVD 3) 
+>    > 5. Select data 
+>    > * "Provide a label": `The name of the species 1` 
+>    > * "Pick a series color": Choose a color
+>    > * "Data point labels": `Column corresponding to the name of the species 1` 
+>    > * "Values for x-axis": `Column corresponding to the year of the species 1`
+>    > * "Values for y-axis": `Column corresponding to nm of the species 1`
+>    > 6. Insert data series:
+>    > * "Provide a label": `The name of the species 2` 
+>    > * "Pick a series color": Choose a different color
+>    > * "Data point labels": `Column corresponding to the name of the species 2` 
+>    > * "Values for x-axis": `Column corresponding to the year of the species 2`
+>    > * "Values for y-axis": `Column nm of the species 2`
+>    > 7. You may repeat "Insert data series" as many times as needed depending on the number of different species you want represent
+>    > 8. Click on {% icon tip %} `Customize`
+>    > * "X-Axis label": `nm values`  
+>    > * Y-Axis label: `Year`
+>    > * "Use multi-panels": click on `No`(or you will have three different charts)
+>    > 9. Click on {% icon tip %} `Visualize`
+>    > 10. Click on {% icon tip %} `save this visualization`if you are willing to keep it
+
+{: .hands_on}
+
