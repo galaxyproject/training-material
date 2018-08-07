@@ -27,12 +27,25 @@ Because you only need informations about occurrences and their location:
 > use the tool `Couper des colonnes d'un jeu de données tabulé` 
 > then in "Couper les colonnes" type `c1,c2,c3,c44`
 
-TODO question: For what stand c1, c2, c3, c44
-answer: c1 is the species name and c2 &c3 are respectively longitude an latitude corresponding to each occurrences of the file. The fourth column contain country code to have a possibility to easily filter occurences by countries.
+>    > ### {% icon question %} Questions
+>    > 1. For what stand c1, c2, c3, c44 ?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>c1 is the species name and c2 &c3 are respectively longitude an latitude corresponding to each occurrences of the file. The fourth column contain country code to have a possibility to easily filter occurences by countries.</li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
 
 Then, as we want to keep only occurence records from US, we will use a tool to filter dataset on the fourth column. Can you find a way to do that alone ?
-
-TODO tips/answer: Using the "Filtrer des données sur une colonne en utilisant des expressions simples", you can enter the following condition ```c4=='US'``` specifying that we need to skip the first line as it's a header.
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>Using the "Filtrer des données sur une colonne en utilisant des expressions simples", you can enter the following condition ```c4=='US'``` specifying that we need to skip the first line as it's a header.</li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
 
 Finally, use the tool `Tabular to CSV` on this new file to have the right format to use in Wallace.
 
