@@ -116,4 +116,4 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 ❗❗ Now that you have done the specific steps with your multispecies dataset, you can follow this link and directly go to 
 
 
-[Step 2 - Displaying the occurrence of a chosen species through the years](training-material/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md ){:target="_blank"}
+[Step 2 - Displaying the occurrence of a chosen species through the years](training-material/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md ) {:target="_blank"}
