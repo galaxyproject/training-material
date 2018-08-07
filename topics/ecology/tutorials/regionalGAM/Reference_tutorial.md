@@ -7,7 +7,6 @@ tutorial_name: Regional GAM
 # Introduction
 {:.no_toc}
 
-
 This tutorial will show how to study species phenology through the computation of abundance index and trends. It will explain you how to use different [regionalGAM](https://github.com/RetoSchmucki/regionalGAM) tools on Galaxy-E allowing you to deal with datasets containing occurences informations for various species per site and per date through a couple of years.
 After a certain numbers of steps, you will be able to extract single species data and study related phenology through the years. The goal of this exercise is to be able to create abundance trend over time and biodiversity indicators. Following these indicators allow to follow trends in terms of population dynamics. You could for example try to predict the occurences of one specific species in a certain type of environnement using the prediction model of climate evolution. Based on charts that you will generate, you could try to explain the evolution of a species with environmental data (temperatures variations, modifications of the environmental conditions).
 You will basically learn how to create a file on the basis of which you can create a visual material that can be quite easily understood and therefore be efficient for a large audience.
@@ -35,7 +34,7 @@ First of all, you will have to upload the files on Galaxy-E and then you might h
 >  ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial and give it a proper name.
-> 2. Import the following files from [Zenodo](https://zenodo.org/record/1324204#.W2BmRn7fNE4) or from a data
+> 2. Import the following file from [Zenodo](https://zenodo.org/record/1324204#.W2BmRn7fNE4) or from a data
 >    library named `regional GAM data tutorial`
 >
 >    ```
