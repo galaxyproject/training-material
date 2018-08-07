@@ -50,6 +50,8 @@ With this you can either upload file you've loaded earlier from Galaxy-E data or
 
 You now have your occurence records on Wallace!
 
+TODO question: One point appears near the African continent. Can you propose a reason ? Is this an error? Which ID is it?
+
 ## Process occurrence data
 
 Here you'll have to chose the occurrences you want to use for the rest of your model. To do so, you have 4 options
