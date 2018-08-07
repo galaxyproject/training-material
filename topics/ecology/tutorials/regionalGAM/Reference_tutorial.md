@@ -65,14 +65,19 @@ When the dataset contains many details, it lengthens the file processing time th
 >    
 >    >    >  * "Trouver l'expression suivante": `"(\.[0-9]+)"` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
 >    >    >  * "Remplacement": leave it empty.
->    >    > ### {% icon question %} Questions After having successfully deleted the sub-sites informations, can you look at the original dataset and this new one and say how many sites you had, and you have now? You will maybe need to use tools like `Compter le nombre d'occurrences de chaque enregistrement`
->    >    >    <details>
->    >    >    <summary>Click to view answers</summary>
->    >    >    <ol type="1">
->    >    >    <li>The dataset contains 6 sites now against 1144 before "down-sampling". </li>
->    >    >    </ol>
->    >    >    </details>
+
+>   > ### {% icon question %} Questions
+>   >
+>    > 1. After having successfully deleted the sub-sites informations, can you look at the original dataset and this new one and say how many sites you had, and you have now? You will maybe need to use tools like `Compter le nombre d'occurrences de chaque enregistrement`?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>The dataset contains 6 sites now against 1144 before "down-sampling". </li>
+>    >    </ol>
+>    >    </details>
 >    {: .question}
+
 >    > 3. Now you can regenerate a CSV file using the `tabular to CSV` tool on the ouptut from **trouver et remplacer des patterns dans des colonnes**.
 
 {: .hands_on}
