@@ -142,7 +142,7 @@ Partitioning data allows to divide a data set into subsets (ie bins), then make 
 >    >    >
 >    >    > * For exemple: if you use a factor 4, the grids size will be 4x4 
 
-![Checkerboard 2](https://raw.githubusercontent.com/emichn/training-material/patch-1/topics/ecology/tutorials/species-distribution-modeling/Images/Checkerboard.png "ENMeval: An R package for conducting spatially independent evaluations and estimating optimal model complexity for MAXENT ecological niche models. Muscarella et al., © 2014. British Ecological Society, Methods in Ecology and Evolution, 5, 1198–1205")
+![Checkerboard 2](https://raw.githubusercontent.com/emichn/training-material/patch-1/topics/ecology/tutorials/species-distribution-modeling/Images/Checkerboard.png "doi:10.0.4.87/2041-210X.12261")
 
 > For both of these technics the number of occurrences into each bin may vary.
  
