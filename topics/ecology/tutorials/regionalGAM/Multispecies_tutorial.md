@@ -117,8 +117,11 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 ❗❗ Now that you have done the steps specific to a multispecies dataset, you will be redirected to the reference tutorial on regionalGAM. In order to go further on regionalGAM analysis, start the tutorial from the second step. To do so, you can click here:
 [Step 2 - Displaying the occurrence of a chosen species through the years of the reference tutorial on RegionalGAM](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md#displayingtheoccurrenceofthespecies) 
 
-> 
-> ### {% icon hands_on %} Hands-on: <a name="variousoccurrencesonasinglechartexplanations"></a> Add various occurrences on a single chart
+> # Step 3:  <a name="variousoccurrencesonasinglechartexplanations"></a>Creating a chart showing more than one occurrence 
+
+![Phenology chart](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20regional%20GAM.png "This shows the occurrence of Ardea alba and Bombycilla garrulus")
+
+> ### {% icon hands_on %} Hands-on: Add various occurrences on a single chart
 
 >    > 1. Click on: {% icon tip %} Visualiser  
 >    > 2. Select `Charts`
