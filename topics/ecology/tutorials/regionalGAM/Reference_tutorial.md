@@ -112,8 +112,8 @@ If you want to access the chart on an interactive interface, you can click on th
 >    > * "Data point labels": `Column 1`
 >    > * "Values for x-axis": `Column 2`
 >    > * "Values for y-axis": `Column 6`
->    > * "X-Axis label": `nm values`  
->    > * Y-Axis label: `Year`
+>    > * "X-Axis label": `Year`  
+>    > * Y-Axis label: `nm values`
 >    > 8. Click on {% icon tip %} `Visualize`
 >    > 9. Click on {% icon tip %} `save this visualization`if you are willing
 >    > 5. Visualize
