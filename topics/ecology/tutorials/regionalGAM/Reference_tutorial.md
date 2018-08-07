@@ -119,7 +119,7 @@ If you want to access the chart on an interactive interface, you can click on th
 >    > 5. Visualize
 >    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 >
-> ⚠️ Please note that it is possible to show the occurences of more than one species on a single chart. If you are interested in doing so, you should click here : [Various species chart](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Multispecies_tutorial.md#variousoccurencesonasinglechart)
+> ⚠️ Please note that it is possible to show the occurences of more than one species on a single chart. If you are interested in doing so, you should click here : [Various species chart explanations](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Multispecies_tutorial.md#variousoccurencesonasinglechartexplanations)
 
  
 >
