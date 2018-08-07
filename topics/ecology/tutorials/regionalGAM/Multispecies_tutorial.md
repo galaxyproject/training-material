@@ -149,5 +149,5 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 
 {: .hands_on}
 
-❗❗To complete this tutorial, please go back to [Abundance per year and per site](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md#Abundanceindex)
+❗❗Now that you have accomplished this part, please go back to [Abundance per year and per site from reference tutorial on regionalGAM](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md#Abundanceindex) in order to have the final steps.
 
