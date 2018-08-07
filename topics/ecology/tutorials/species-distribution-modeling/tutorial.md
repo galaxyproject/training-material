@@ -169,7 +169,7 @@ Wallace can also apply the model you've juste created on a specified zone, here 
 
 We'll apply the concept on a part of the Canada. Select `Project to New Extent` then draw a polygone around a part of Canada and use `Minimum Training Presence`. 
 
-To go further, you can test your model on a specified zone, years from now.
+To go further, you can test your model on a specified zone, years from now, selecting `Project to New Time`.
 You need to choose a `GCM` (global circulation model). They are model made to predict atmospheric fluctuation and then study climate change. Each one is different and use parameters like ocean atmosphere and other.
 
 Here using different model you can see the evolution of the predicted presence of `Chrysemys Picta` in Canada in 2050.
