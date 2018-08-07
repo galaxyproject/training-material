@@ -51,7 +51,7 @@ First of all, you will have to upload the files on Galaxy-E and then you might h
 >
 > ⚠️ <a name="inputdatawarning"></a>Please note that the file must contain a header corresponding to: ```"SITES","SPECIES","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
 
->    > ## <a name="resampling"></a>Re-sampling.  
+>    > ## <a name="resampling"></a> Re-sampling.  
 When the dataset contains many details, it lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example, the list of SITE (look at the column with header `SITE)`  of the dataset you are using is really long and the SITES are classified into sub-sites. Here, we will assume that your file doesn't really need be as precise and this is the reason why you have to specify you don't want the sub-sites. To create a new "down-sampled" file, you can follow these steps:   
 
 > ### {% icon hands_on %} Hands-on: hiding some informations
