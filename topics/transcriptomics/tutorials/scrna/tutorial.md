@@ -129,6 +129,27 @@ When the sequence is mapped against a reference genome, we can then see which ge
 >  | Gene Blue | 2 |
 {: .details}
 
+
+> ### {% icon question %} Question
+>
+> 1. Are UMIs specific to genes? i.e. Can the same UMI map to different genes?
+> 2. Can the same UMI map to different mRNA molecules of the same gene?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. The same UMI can tag transcripts of different genes. UMIs are just 'added randomness' that help reduce amplification bias, but they are not unique to any particular gene.
+> > 2. Yes, UMIs are not precise but work on a probabalistic level. In most cases, two transcripts of the same gene will be tagged by different UMIs. In rarer (but still prevalent) cases, the same UMI will capture different transcripts of the same gene.
+
+
+are added to each cell
+> >
+> > If CellA has 10 times more GeneX sequences than CellB, then we know that CellA and CellB differ at GeneX - which might suggest a causative source of variation for any change in function between CellA and CellB (or cells in the same cluster as CellA, and cells in the same cluster as CellB)
+> >
+> {: .solution}
+{: .question}
+
+
+
 ### Barcoding Format
 
 We now know the role of UMIs and cell barcodes, but how do we handle them in the analysis?
@@ -149,49 +170,49 @@ These are reads that all map to ENSDARG00000019692. In [Cell, UMI] format:
 
 -->
 
- * The Forward reads:
+The Forward reads:
 
-> @J00182:75:HTKJNBBXX:2:1115:8501:46961 1:N:0:ATCACG
-> GGAAGAACCAGATTTTTTTTTTTTTTTTTT
-> +
-> AAFFFJJJJJJJFFFJJJJJJJJJJJJJJJ
-> 
-> @J00182:75:HTKJNBBXX:2:1203:25022:13763 1:N:0:ATCACG
-> GTCCCAGGTAACTTTTTTTTTTTTTTTTTT
-> +
-> AAFFFJJJJJJJJFFJJJJJJJJJFJ<FF-
-> 
-> @J00182:75:HTKJNBBXX:2:2222:13301:35690 1:N:0:ATCACG
-> GTCCCAGGTAACTTTTTTTTTTTTTTTTTT
-> +
-> AAFFFJJJJJJJ<AFJJJJJFFJJFJJJFF
-> 
-> @J00182:75:HTKJNBBXX:2:1114:12469:11073 1:N:0:ATCACG
-> CGGCGTGGTAACTTTTTTTTTTTTTTTTCC
-> +
-> AAFFFJJJJJJJFAFFJJJJJJJJF---<F
+    @J00182:75:HTKJNBBXX:2:1115:8501:46961 1:N:0:ATCACG
+    GGAAGAACCAGATTTTTTTTTTTTTTTTTT
+    +
+    AAFFFJJJJJJJFFFJJJJJJJJJJJJJJJ
+    
+    @J00182:75:HTKJNBBXX:2:1203:25022:13763 1:N:0:ATCACG
+    GTCCCAGGTAACTTTTTTTTTTTTTTTTTT
+    +
+    AAFFFJJJJJJJJFFJJJJJJJJJFJ<FF-
+    
+    @J00182:75:HTKJNBBXX:2:2222:13301:35690 1:N:0:ATCACG
+    GTCCCAGGTAACTTTTTTTTTTTTTTTTTT
+    +
+    AAFFFJJJJJJJ<AFJJJJJFFJJFJJJFF
+    
+    @J00182:75:HTKJNBBXX:2:1114:12469:11073 1:N:0:ATCACG
+    CGGCGTGGTAACTTTTTTTTTTTTTTTTCC
+    +
+    AAFFFJJJJJJJFAFFJJJJJJJJF---<F
 
- * The Reverse reads:
+The Reverse reads:
 
-> @J00182:75:HTKJNBBXX:2:1115:8501:46961 2:N:0:ATCACG
-> GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA
-> +
-> A<<A-777F<AA<AJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
-> 
-> @J00182:75:HTKJNBBXX:2:1203:25022:13763 2:N:0:ATCACG
-> GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT
-> +
-> ---<----<A---77-7A-FJ<JJFFJJ<JJAJ7<-FAFFJJFF<FFJJFFAJFA-AFFFJFFFFFJAJJ
-> 
-> @J00182:75:HTKJNBBXX:2:2222:13301:35690 2:N:0:ATCACG
-> CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
-> +
-> <<A-77--77F<----7AFJ-A--FJJJFAJF-AFAJAJ<JFJ<JJJFFJJJFJJJJJAAFJJJFJJJF-
-> 
-> @J00182:75:HTKJNBBXX:2:1114:12469:11073 2:N:0:ATCACG
-> ATCCACTTATTGCAAAGCAGAGGACATTGAGTCTCACCTTTTGTCCAGGTCTTCCAATTTCACCCTGCAA
-> +
-> A-77AA-7FF<7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
+    @J00182:75:HTKJNBBXX:2:1115:8501:46961 2:N:0:ATCACG
+    GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA
+    +
+    A<<A-777F<AA<AJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
+    
+    @J00182:75:HTKJNBBXX:2:1203:25022:13763 2:N:0:ATCACG
+    GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT
+    +
+    ---<----<A---77-7A-FJ<JJFFJJ<JJAJ7<-FAFFJJFF<FFJJFFAJFA-AFFFJFFFFFJAJJ
+    
+    @J00182:75:HTKJNBBXX:2:2222:13301:35690 2:N:0:ATCACG
+    CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
+    +
+    <<A-77--77F<----7AFJ-A--FJJJFAJF-AFAJAJ<JFJ<JJJFFJJJFJJJJJAAFJJJFJJJF-
+    
+    @J00182:75:HTKJNBBXX:2:1114:12469:11073 2:N:0:ATCACG
+    ATCCACTTATTGCAAAGCAGAGGACATTGAGTCTCACCTTTTGTCCAGGTCTTCCAATTTCACCCTGCAA
+    +
+    A-77AA-7FF<7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 
 As shown in image 1, the barcode is on the forward read and sequence is on the reverse read. The barcode consists of the 6bp UMI followed by the 6bp cell barcode (followed by the poly-T tail). The sequence is 70 bp long as contains the information that we wish to map. 
 
@@ -231,50 +252,129 @@ A: We take the barcode information from the forward reads, and stick it into the
 
 i.e. 
 
-> @J00182:75:HTKJNBBXX:2:1115:8501:46961 2:N:0:ATCACG ACCAGA_GGAAGA
-> GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA
-> +
-> A<<A-777F<AA<AJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
-> 
-> @J00182:75:HTKJNBBXX:2:1203:25022:13763 2:N:0:ATCACG GGTAAC_GTCCCA
-> GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT
-> +
-> ---<----<A---77-7A-FJ<JJFFJJ<JJAJ7<-FAFFJJFF<FFJJFFAJFA-AFFFJFFFFFJAJJ
-> 
-> @J00182:75:HTKJNBBXX:2:2222:13301:35690 2:N:0:ATCACG GGTAAC_GTCCCA
-> CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
-> +
-> <<A-77--77F<----7AFJ-A--FJJJFAJF-AFAJAJ<JFJ<JJJFFJJJFJJJJJAAFJJJFJJJF-
-> 
-> @J00182:75:HTKJNBBXX:2:1114:12469:11073 2:N:0:ATCACG GGTAAC_CGGCGT
-> ATCCACTTATTGCAAAGCAGAGGACATTGAGTCTCACCTTTTGTCCAGGTCTTCCAATTTCACCCTGCAA
-> +
-> A-77AA-7FF<7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
+    @J00182:75:HTKJNBBXX:2:1115:8501:46961 2:N:0:ATCACG ACCAGA_GGAAGA
+    GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA
+    +
+    A<<A-777F<AA<AJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
+    
+    @J00182:75:HTKJNBBXX:2:1203:25022:13763 2:N:0:ATCACG GGTAAC_GTCCCA
+    GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT
+    +
+    ---<----<A---77-7A-FJ<JJFFJJ<JJAJ7<-FAFFJJFF<FFJJFFAJFA-AFFFJFFFFFJAJJ
+    
+    @J00182:75:HTKJNBBXX:2:2222:13301:35690 2:N:0:ATCACG GGTAAC_GTCCCA
+    CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
+    +
+    <<A-77--77F<----7AFJ-A--FJJJFAJF-AFAJAJ<JFJ<JJJFFJJJFJJJJJAAFJJJFJJJF-
+    
+    @J00182:75:HTKJNBBXX:2:1114:12469:11073 2:N:0:ATCACG GGTAAC_CGGCGT
+    ATCCACTTATTGCAAAGCAGAGGACATTGAGTCTCACCTTTTGTCCAGGTCTTCCAATTTCACCCTGCAA
+    +
+    A-77AA-7FF<7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 
 where we have added CellBarcode_UMI to the headers of each read. We can now throw away our forward reads, as they have no more useful information within them and proceed to the mapping stage.
 
 
+# Barcode Extraction
+
+TODO!
 
 # Mapping
 
+Mapping is a relatively straightforward process:
 
+ 1. Select your genome
+ 2. Select your GTF file
+ 3. Run MultiQC on the resulting STAR log
 
+The FASTQ data was generated from sequencing Zebra working with Zebrafish data, so to perform the alignment we will need to gather all data relevant to that genome. We will use the latest version (DanRerv10).
 
+> ### {% icon Hands-on %} Performing the Alignment
+>
+> 1. Obtain the GTF file and import it into our history.
+>   - This file contains all the gene, exon, intron, and other regions of interest that we will use to annotate our reads, should our reads align to any of the regions specified in this file.
+>   - *"Shared Data"* → *"Data Libraries"* → *"Genomes + Annotations"* → *"Annotations"* → "Dario_Rerio_v10.gtf (danRer10)" → Click
+>   - *"to History"*
+> 
+> 2. Select **RNA-STAR** {%icon tool %} with the following parameters:
+>   - *"Single End"*: Our input FASTQ has sequencing data from only a single read
+>   - *"RNA-Seq FASTQ/FASTA file"*: Of the FASTQ files output by UMI_tools extract, select the one with the sequencing reads intact.
+>   - *"Custom or built-in reference"*: `Use a built-in index`
+>   - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
+>   - *"Select reference genome"*: The FASTQ data was generated from sequencing zebrafish, so select `DanRer10`
+>   - *"Gene model (gff3,gtf) file for splice junctions"*: Select the GTF file we imported into our history
+>   - Execute
 
+This should take a minute or two depending on your position in the queue. Once your output files are green, proceed to the next step.
 
+> ### {% icon Hands-on %} Performing the QC on the Alignment
+> 
+> Let us examine how well our alignment went.
+> 
+> 1. Select **MultiQC** {%icon tool %} with the following parameters:
+>  - *"Results"* → *"1: Results"* → *"Which tool was used to generate logs?"*: `STAR`
+>  - *"STAR output"* → *"1: STAR output"* → *"Type of STAR output?"*: `Log`
+>  - *"STAR log output"* : Select the file that ends in " log"
+>  - Execute
+>
+> 2. Once green, click on the "MultiQC on data : Webpage" eye symbol.
+>
+> > ### {% icon question %} Question
+> > 
+> > 1. What percentage of our reads are uniquely mapped? How many millions of reads is this percentage?
+> > 2. What percentage of our reads are mapped to more than one locus?
+> > 3. Is our overall mapping 'good' ?
+> >
+> >
+> > > ### {% icon solution %} Solution
+> > > 
+> > > 1. 73.5% or 8.3 million reads were successfully mapped
+> > > 2. 11.3% are multiply mapped, and 2.2% were mapped to too many loci
+> > >   - Multiply mapped means that a read was aligned to more than one gene
+> > >   - Mapped to too many loci means that a read was aligned to 10 or more loci, and should be ignored.
+> > > 3. It depends on how good the sequencing protocol is, and how many reads in total were mapped.
+> > >   - 90% is amazing, reserved for bulk RNA-seq which typically has high coverage
+> > >   - 70% is weak for bulk RNA-seq, but good for single-cell RNA-seq
+> > >   - 6 million mapped reads should be enough to generate a downstream analysis from.
+> > >
+> > {: .solution}
+> {: .question}
+{: .hands_on}
 
+# Quantification
 
+> ### {% icon comment %} Recap of previous stages
+>
+> 1. *Barcode Extraction*:
+>  Here we used `umi_tools extract` on our input forward and reverse FASTQ files, and extracted the umi and cell barcode from the forward read *sequence*, and placed it into the *header* of both forward and reverse FASTQ files. i.e. FASTQ files → Modified FASTQ files
+> 2. *Mapping*
+>  We took the sequencing data from the reverse FASTQ file (with modified headers) and aligned it to the Zebrafish genome, using annotations presented in the GTF file for that genome. i.e. Modified FASTQ file (reverse) → BAM file
+>
 
+We now have a BAM file of our aligned reads, with cell and UMI barcodes embedded in the read headers. We also have the chromosome and base-pair positions of where these reads are aligned.
 
+> ### {% icon Hands-on %} We can confirm this by peeking into the BAM file
+>
+> 1. Click on the eye symbol of the BAM output from STAR.
+> 2. There are many header lines that begin with '@' which we are not interested in. 
+> 3. Do a Ctrl+F search for `@co` and then look at the lines directly below it.
+> 
+> One such read is given as so:
+>
+>    J00182:75:HTKJNBBXX:2:1121:9729:45889_GACGAA_GTGGTC	16	chr1	2030	3	70M	*	0	0	AGAGGTTCCAATATTCCCATGAAATTGAGATTTTGTAAAAGAGTGAAGTGTGGTTACTTTCACTGAGAGG	JJJJJJJJJJJJJJJJJJJJJJJJFJJJJJAJJJJJJJJJJFJFJFFJJJJJJJJJJJJFF7AJA-77<A	NH:i:2 HI:i:1 AS:i:64 nM:i:2
+>   
+> 
 
+The fields of the BAM file can be better explained at section 1.4 of [the SAM specification](https://samtools.github.io/hts-specs/SAMv1.pdf), but we will summarize the main fields of interest here:
 
-
-
-
-
-
-
-
+ * `J00182..._GACGAA_GCGGTC`: The *readname* appended by an underscore '_', the cell barcode, another '_', and then the UMI barcode.
+ * `16`: The FLAG value, which can be explained in the SAM specification, or more interactively [here](https://broadinstitute.github.io/picard/explain-flags.html).
+> ### {% icon question %} What does the FLAG value of 16 tell us about this read?
+> > ### {% icon solution %} Solution
+>
+> The read aligns to the reverse strand
+ * `chr1` `2030`: The position and base-pair of alignment of the first base of the sequence.
+ * We next have a series of quality fields, as well as the `sequence
 
 
 
