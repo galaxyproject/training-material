@@ -147,10 +147,9 @@ You need to choose a `GCM` (global circulation model). They are model made to pr
 
 Here using different model you can see the evolution of the predicted presence of `Chrysemys Picta` in Canada in 2050.
 
-For exemple we can use the model [HadGEM2-ES](https://portal.enes.org/models/earthsystem-models/metoffice-hadley-centre/hadgem2-es) (Earth System), a model based on earth circulation, and try it with differents RCP scenarios. RCP are scernarios about the amout of greenhouse gases emitted in the near futur, this allows us to have differents predicted presence models.
+For exemple we can use the model [CCSM4](http://www.cesm.ucar.edu/models/ccsm4.0/), a US model based on earth circulation. We can try it with differents RCP scenarios, wich are scernarios about the amout of greenhouse gases emitted in the near futur. This allows us to have differents predicted presence models.
 Flag: insert two photos of 4,5 & 8,5
 
-You can see here a brief list of some of the [Global Circulation Model](http://www.ipcc-data.org/sim/gcm_monthly/SRES_AR4/index.html)
+You can see here the list of the different [Global Circulation Model](https://fr.wikipedia.org/wiki/Mod%C3%A8le_de_circulation_g%C3%A9n%C3%A9rale)
 
 # Conclusion
-
