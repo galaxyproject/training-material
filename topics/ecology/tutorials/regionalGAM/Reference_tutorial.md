@@ -119,34 +119,9 @@ If you want to access the chart on an interactive interface, you can click on th
 >    > 5. Visualize
 >    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 >
-> ⚠️ Please note that it is possible to show the occurences of more than one species on a single chart. If you are interested in doing so, you should follow the tip below.
+> ⚠️ Please note that it is possible to show the occurences of more than one species on a single chart. If you are interested in doing so, you should click here : [Various species chart](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Multispecies_tutorial.md#variousoccurencesonasinglechart)
 
- > ### {% icon tip %} Visualiser 
  
->    > 1. Select `Charts`
->    > 2. Give it a proper name
->    > 3. Select a visualization: "line chart (NVD 3) 
->    > 4. Select data 
->    > * "Provide a label": `The name of the species 1` 
->    > * "Pick a series color": Choose a color
->    > * "Data point labels": `Column corresponding to the name of the species 1` 
->    > * "Values for x-axis": `Column corresponding to the year of the species 1`
->    > * "Values for y-axis": `Column corresponding to nm of the species 1`
->    > 5. Insert data series:
->    > * "Provide a label": `The name of the species 2` 
->    > * "Pick a series color": Choose a different color
->    > * "Data point labels": `Column corresponding to the name of the species 2` 
->    > * "Values for x-axis": `Column corresponding to the year of the species 2`
->    > * "Values for y-axis": `Column nm of the species 2`
->    > 6. You may repeat "Insert data series" as many times as needed depending on the number of different species you want represent
->    > 7. Click on {% icon tip %} `Customize`
->    > * "X-Axis label": `nm values`  
->    > * Y-Axis label: `Year`
->    > * "Use multi-panels": click on `No`(or you will have three different charts)
->    > 8. Click on {% icon tip %} `Visualize`
->    > 9. Click on {% icon tip %} `save this visualization`if you are willing to keep it
-
-{: .hands_on}
 >
 >
 > ### Abundance per year and per site
