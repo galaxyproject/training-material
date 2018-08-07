@@ -167,7 +167,7 @@ flag: insert photo of map prediction.
 
 Wallace can also apply the model you've juste created on a specified zone, here the US, to another zone and create a map of suitability.
 
-We'll aply the concept on a part of the Canada. Flag 
+We'll aply the concept on a part of the Canada. Select `Project to New Extent` then draw a polygone around a part of Canada and use `Minimum Training Presence`. 
 
 To go further, you can test your model on a specified zone, years from now.
 You need to choose a `GCM` (global circulation model). They are model made to predict atmospheric fluctuation and then study climate change. Each one is different and use parameters like ocean atmosphere and other.
