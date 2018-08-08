@@ -191,7 +191,7 @@ First, use the `Genome annotation statistics` that will compute some general sta
 
 Just as we did for the genome at the beginning, we can use BUSCO to check the quality of this first Maker annotation. Instead of looking for known genes in the genome sequence, this time it will analyse the predicted genes.
 
-First we need to compute all the protein sequences correspoding to the genes predicted by Maker. Then, BUSCO will look for known protein sequences in this predicted set.
+First we need to compute all the transcript sequences corresponding to the genes predicted by Maker. Then, BUSCO will look for known transcript sequences in this predicted set.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -200,8 +200,6 @@ First we need to compute all the protein sequences correspoding to the genes pre
 >    - *"Reference Genome"*: `select the genome sequence from your history`
 >        - *"Select fasta outputs"*:
 >           - `fasta file with spliced exons for each GFF transcript (-w exons.fa)`
->           - `fasta file with spliced CDS for each GFF transcript (-x cds.fa)`
->           - `protein fasta file with the translation of CDS for each record (-y pep.fa)`
 >    - *"full GFF attribute preservation (all attributes are shown)"*: `Yes`
 >    - *"decode url encoded characters within attributes"*: `Yes`
 >    - *"warn about duplicate transcript IDs and other potential problems with the given GFF/GTF records"*: `Yes`
@@ -310,15 +308,13 @@ Do we get a better result from Maker after this second run? Let's run the same t
 >    - *"Reference Genome"*: `select the genome sequence from your history`
 >        - *"Select fasta outputs"*:
 >           - `fasta file with spliced exons for each GFF transcript (-w exons.fa)`
->           - `fasta file with spliced CDS for each GFF transcript (-x cds.fa)`
->           - `protein fasta file with the translation of CDS for each record (-y pep.fa)`
 >    - *"full GFF attribute preservation (all attributes are shown)"*: `Yes`
 >    - *"decode url encoded characters within attributes"*: `Yes`
 >    - *"warn about duplicate transcript IDs and other potential problems with the given GFF/GTF records"*: `Yes`
 >
 {: .hands_on}
 
-Now run BUSCO with the predicted protein sequences: (TODO protein or exons or cds?)
+Now run BUSCO with the predicted transcript sequences:
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
