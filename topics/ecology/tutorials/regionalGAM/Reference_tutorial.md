@@ -134,7 +134,7 @@ If you want to access the chart on an interactive interface, you can click on th
 >    > * "Data point labels": `Column 1`
 >    > * "Values for x-axis": `Column 2`
 >    > * "Values for y-axis": `Column 6`
->    > 6 6. Click on {% icon tip %} Customize:
+>    > 6. Click on {% icon tip %} Customize:
 >    > * "X-Axis label": `Year`
 >    > * "Y-Axis label": `nm values`
 >    > 7. Click on {% icon tip %} `Visualize`
