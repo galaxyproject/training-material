@@ -167,7 +167,7 @@ First of all, you have to know how many years are taken into account in your dat
 
 With the `output` from **Merger des colonnes ensemble** you can now generate a new chart which will have a x-axis corresponding to your column `Column "week""year"`.
 >    > ### {% icon tip %} Visualiser
->    > 1. Click on the `output` from **Merger des colonnes ensemble**
+>    > With the  `output` from **flight curve**.
 >    > 2. Select `Charts`
 >    > 3. Give it a proper name
 >    > 4. Select a visualization: "line chart (NVD 3) 
@@ -197,7 +197,7 @@ This will allow you to create a file showing the abundance per year of a chosen 
 > * "Flight curve output": `output` from **flight curve**.
 
 
-> 🔹 Based on the abundance index, we can create a chart showing the annual abundance trend of a certain species per site. 
+> 🔹 Based on the  `output` from **abundance index**, we can create a chart showing the annual abundance trend of a certain species per site. 
 >    > 1. Select `Charts`
 >    > 2. Give it a proper name
 >    > 3. Select a visualization: "Bar diagram (NVD 3)" 
