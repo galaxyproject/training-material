@@ -131,7 +131,7 @@ If you want to access the chart on an interactive interface, you can click on th
 >    > 1. Click on the `Output` dataset from **flight curve** 
 >    > 2. Click on the "Visualize" button then select `Charts` 
 >    > 3. Give it a proper name
->    > 4. Select a visualization: "line chart (NVD 3) 
+>    > 4. Select a visualization: "line chart (NVD 3)" 
 >    > 5. Click on {% icon tip %} Select data:
 >    > * "Provide a label": `The name of the species`
 >    > * "Pick a series color": Choose a color for the line 
