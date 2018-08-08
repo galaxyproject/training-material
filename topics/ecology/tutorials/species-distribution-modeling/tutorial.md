@@ -188,6 +188,8 @@ We’ve been able through Galaxy-E, to load a dataset of occurrences used in the
 
 # References
 
+[Wallace](https://github.com/wallaceEcoMod/wallace/blob/master/README.md) plateforme and package 
+
 Guissan, A. et *al.*, Predicting species distributions for conservation decisions. Ecology Letters, 16, 1424–1435  (2013).
 
 Booth, T. H. et *al.*, BIOCLIM: the first species distribution modelling package, its early applicationsand relevance to most current MAXENT studies. Diversity and Distributions, 20, 1–9 (2014).
@@ -195,3 +197,4 @@ Booth, T. H. et *al.*, BIOCLIM: the first species distribution modelling package
 Muscarella, R. et *al.*, ENMeval: An R package for conducting spatially independent evaluations and estimating optimal model complexity for MAXENT ecological niche models. British Ecological Society, Methods in Ecology and Evolution, 5, 1198–1205 (2014).
 
 [Here](http://www.ipcc-data.org/guidelines/pages/gcm_guide.html) for informations on Global Circulation Model(GCM), how it's done what is taken in consideration and more.
+
