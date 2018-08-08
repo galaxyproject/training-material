@@ -125,7 +125,7 @@ This step will allow you the show the phenology of a species and then to create 
 
 ![Phenology chart](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20Pyronia%20tithonus.png?raw=true "This shows the occurrence of Pyronia tithonus")
 
-If you want to access the chart on an interactive interface, you can click on the following link: [Chart on Galaxy](http://openstack-192-168-100-19.genouest.org/plugins/visualizations/charts/show?dataset_id=1ef9e9d9c9ae8c66)
+If you want to access the chart on an interactive interface, you can click on the following link: [Chart on Galaxy](http://openstack-192-168-100-19.genouest.org/u/clara_urfer/v/chart-tuto-ref-regionalgam)
 >
 >    > ### {% icon tip %} Visualiser. 
 >    > 1. With the `Output` from **flight curve** 
