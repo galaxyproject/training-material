@@ -21,12 +21,6 @@ You will basically learn how to create a file on the basis of which you can crea
 > In this tutorial, we will cover:
 1. Pre-processing
 > {:pre-processing}
-2. Selectionning one specific species and show all corresponding data
-> {:selectionning one specific species and show all corresponding data}
-3. Displaying the occurence of the chosen species through the years
-> {:Displaying the occurence of the chosen species through the years}
-4. Conclusion 
-> {:conclusion}
 
 # Step 1: Pre-processing
 
@@ -95,5 +89,5 @@ First of all, you will have to upload the file on Galaxy-E and then you might ha
 
 {: .hands_on}
 
-❗❗ Now that you have done the steps specific to a RData dataset, you will be redirected to the reference tutorial on regionalGAM. In order to go further on regionalGAM analysis, start the tutorial from #Re-sampling. To do so, you can click here:
+❗❗ Now that you have done the steps specific to a RData dataset, you will be redirected to the reference tutorial on regionalGAM. In order to go further on regionalGAM analysis, start the tutorial from the fisrt step. To do so, you can click here:
 [Re-sampling of the reference tutorial on RegionalGAM](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md#resampling) 
