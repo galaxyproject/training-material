@@ -100,6 +100,10 @@ The second step of any Regional GAM data analysis is making sure to have a datas
 > 2. Inspect the file by clicking on the `eye` icon to check that the dataset is on one species only.
 > 3. Now you can regenerate a CSV file using the `tabular to CSV` tool on the ouptut from **trouver et remplacer des patterns dans des colonnes**.
 
+> ### {% icon comment %} Comment
+
+❗In case the dataset contains informations on more than on species, you follow the multispecies tutorial on regionalGAM which is a complement to this one from the second step. If you are interested in doing so, please click on the following link: [Selectionning one specific species](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Multispecies_tutorial.md#selectionningonespecificspecies)
+
 {: .hands_on}
 
 
