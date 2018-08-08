@@ -13,7 +13,7 @@ You will basically learn how to create a file on the basis of which you can crea
 
 > ### {% icon comment %} Comment
 >
-> ⚠️ Please note that there are two other tutorials on regionalGAM, one is specific to [a dataset on RData](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Rdata_tutorial.md) and the other explains you how to deal with [a multispecies dataset](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Multispecies_tutorial.md). If you are interested in learning more about these specific cases, do not hesitate to follow these two tutorials in complement. 
+> ⚠️ Please note that there are two other tutorials on regionalGAM, one is specific to [the use of RData input dataset](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Rdata_tutorial.md) and the other explains you how to deal with [a multispecies dataset](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Multispecies_tutorial.md). If you are interested in learning more about these specific cases, do not hesitate to follow these two tutorials in complement. 
 
 > {: .comment}
 
@@ -28,7 +28,7 @@ You will basically learn how to create a file on the basis of which you can crea
 
 # Step 1: Pre-processing
 
-The goal of the first step is to upload and prepare the file so that it will be usable for the *regional GAM* analysis (See [this warning](#inputdatawarning) for more information about the input file.
+The goal of the first step is to upload and prepare the file so that it will be usable for the *regional GAM* analysis (See [this warning](#inputdatawarning) for more information about the input file).
 First of all, you will have to upload the files on Galaxy-E and then you might have to use some data handling tools to be able to use *regional GAM* tools.
 
 >  ### {% icon hands_on %} Hands-on: Data upload
@@ -128,10 +128,10 @@ This step will allow you the show the phenology of a species and then to create 
 If you want to access the chart on an interactive interface, you can click on the following link: [Chart on Galaxy](http://openstack-192-168-100-19.genouest.org/plugins/visualizations/charts/saved?id=d413a19dec13d11e)
 >
 >    > ### {% icon tip %} Visualiser. 
->    > 1. With the `Output` from **flight curve** 
->    > 2. Select `Charts` 
+>    > 1. Click on the `Output` dataset from **flight curve** 
+>    > 2. Click on the "Visualize" button then select `Charts` 
 >    > 3. Give it a proper name
->    > 4. Select a visualization: "line chart (NVD 3) 
+>    > 4. Select a visualization: "line chart (NVD 3)" 
 >    > 5. Click on {% icon tip %} Select data:
 >    > * "Provide a label": `The name of the species`
 >    > * "Pick a series color": Choose a color for the line 
