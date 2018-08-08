@@ -145,23 +145,23 @@ If you want to access the chart on an interactive interface, you can click on th
 >
 > ⚠️ Please note, that if you want your chart to be more precise and to specify that the x-axis coresponds to "Week and year", it is possible. In order to do so, follow the tip below:
 >    > ### {% icon tip %} Tip: Creating a new column of the dataset containing the week and the year 
-First you wan to know how many years are taken into account in your dataset.
+First of all, you have to know how many years are taken into account in your dataset.
 >    > 1.Search for the tool `Compter le nombre d'occurrences de chaque enregistrement` with the following parameters 
 >    > * "Sur le jeu de données": `output` from **trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières**.
 >    > * "Select": `Column 3` (the on headed with `SITE`)
 >    > * "Délimité par": `Tabulation`.
 >    > * "Comment les résultats doivent t'ils être triés ?": `Par les valeurs comptées`.
->    > 2. Inspect the file by clicking on the `eye` icon to check how many species are taken into account.
+>    > 2. Inspect the file by clicking on the `eye` icon to check how many years are taken into account.
 >    > 3. Search for the tool`Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières` with the following parmeters:
 >    > * "Selectionner les cellules à partir de": `output` from **flight curve**.
 >    > * "la colonne": `Column 2` (corresponding to the one headed with `YEAR`)
 >    > * Click on `Insert check`:
->    > * "Trouver l'expression suivante": `(2003)`
->    > * "Remplacement": `-2003` 
->    > 4. Repeat `Insert check` with as many years as your dataset contains (for this specific dataset it is 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, and 2012.
+>    >   * "Trouver l'expression suivante": `(2003)`
+>    >   * "Remplacement": `-2003` 
+>    > 4. Repeat `Insert check` with as many years as your dataset contains (for this specific dataset it is 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, and 2012).
 >    > 5. Inspect the file by clicking on the `eye` icon to check if all the years are now written with a "-" before the digits. 
 >    > 6. Search for the tool `Merger des colonnes ensemble` with the following parameters:
->    > * "Selection du jeu de données": `output` from **Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières**.
+>    > * "Selection du jeu de données": `output` from the last **Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières**.
 >    > * "Merger les colonnes": `Column 3`(corresponding to the one headed with `WEEK`)
 >    > * "avec les colonnes": `Column 2`(corresponding to the one headed with `YEAR`)
 
