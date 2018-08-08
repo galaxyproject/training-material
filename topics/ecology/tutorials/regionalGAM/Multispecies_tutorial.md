@@ -24,7 +24,7 @@ You will basically learn how to create a file on the basis of which you can crea
 2. Selectionning one specific species and show all corresponding data
 > {:selectionning one specific species and show all corresponding data}
 3. Creating a chart showing more than one occurrence
-> {:creating a cart showing more than one occurrence}
+> {:creating a chart showing more than one occurrence}
 
 # Step 1: Pre-processing
 
