@@ -102,7 +102,7 @@ The second step of any Regional GAM data analysis is making sure to have a datas
 
 > ### {% icon comment %} Comment
 
-❗In case the dataset contains informations on more than on species, you follow the multispecies tutorial on regionalGAM which is a complement to this one from the second step. If you are interested in doing so, please click on the following link: [Selectionning one specific species](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Multispecies_tutorial.md#selectionningonespecificspecies)
+❗In case the dataset contains informations on more than on species, you can follow the multispecies tutorial on regionalGAM which is a complement to this one from the second step. If you are interested in doing so, please click on the following link: [Selectionning one specific species](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Multispecies_tutorial.md#selectionningonespecificspecies)
 
 {: .hands_on}
 
