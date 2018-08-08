@@ -47,7 +47,7 @@ First of all, you will have to upload the file on Galaxy-E and then you might ha
 > ### {% icon tip %} Tip: Importing data via links
 >    > 1. Search for the tool `Téléverser un ou plusieurs fichiers de votre ordinateur ou d'un serveur distant`
 >    > 2. To import the dataset, you have two options:
->    > * If you have uploaded the file, drop the file in the box provided for that purpose.
+>    > * If you have uploaded the file on your computer, drop it in the box provided for that purpose.
 >    >    * Press **Start** and **Close** the window
 >    > * If you have copied the link location:
 >    >    * Select **Paste/Fetch data**
