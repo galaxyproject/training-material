@@ -45,12 +45,15 @@ First of all, you will have to upload the files on Galaxy-E and then you might h
 >    ```
 >   
 > ### {% icon tip %} Tip: Importing data via links
->    >
->    > * Copy the link location
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch data**
->    > * Paste the link into the text field
->    > * Press **Start** and **Close** the window
+>    > 1. Search for the tool `Téléverser un ou plusieurs fichiers de votre ordinateur ou d'un serveur distant`
+>    > 2. To import the dataset, you have two options:
+>    > * If you have uploaded the file, drop the file in the box provided for that purpose.
+>    >    * Press **Start** and **Close** the window
+>    > * If you have copied the link location:
+>    >    * Select **Paste/Fetch data**
+>    >    * Paste the link into the text field
+>    >    * Choose the type: CSV
+>    >    * Press **Start** and **Close** the window
 >    {: .tip}
 >
 > ### {% icon comment %} Comment
