@@ -52,6 +52,7 @@ First of all, you will have to upload the files on Galaxy-E and then you might h
 >    >    * Paste the link into the text field
 >    >    * Choose the type: CSV
 >    >    * Press **Start** and **Close** the window
+
 >    {: .tip}
 
 > ### {% icon comment %} Comment
