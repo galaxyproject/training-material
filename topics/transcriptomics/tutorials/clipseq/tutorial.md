@@ -7,16 +7,15 @@ tutorial_name: clipseq
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
+The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a study published by *Nostrand et al.* (2016, http://dx.doi.org/10.1038/nmeth.3810). The dataset contains the first biological replicate of RBFOX2 CLIP-seq and the input control experiment (fastq files). The data was changed and downsampled to reduce data processing time, thus the datasets does not correspond to the original data pulled from *Nostrand et al.* (2016, http://dx.doi.org/10.1038/nmeth.3810). Also included is a text file (.txt) encompassing the chromosome sizes of hg19 obtained from UCSC (http://hgdownload.cse.ucsc.edu/goldenPath/hg19/bigZips/hg19.chrom.sizes) and a genome annotation (.gtf) file taken from Ensembl (http://ftp.ensemblorg.ebi.ac.uk/pub/release-74/gtf/homo_sapiens/).
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+**Table 1**: Metadata for CLIP-seq experiments in this tutorial. PE: paired-end.
 
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+| Cellular state | Datatype | Description | Replicate | ENCODE Accession | Library type | Read length | Stranded? |
+| ---            | ---      | :-:     | :-:       | ---           | :-:          | :-:         | :-:       |
+| HepG2            | eCLIP | RBFOX2   | 1         | ENCSR987FTF     | PE           | 175-300          | Yes        |
+| HepG2            | eCLIP | input   | 1         | ENCSR799EKA     | PE           | 175-300          | Yes        |
+
 
 > ### Agenda
 >
@@ -27,25 +26,15 @@ and technical) key concepts they will learn.
 >
 {: .agenda}
 
-# Title for your first section
+# Finding Binding Motifs for RBFOX2
 
-Give some background about what the trainees will be doing in the section.
+RBFOX2 is a relevant development and tissue-specific splicing factor with a very conserved motif: `TGCATG`. We therefore want to process and validate the data to find this conserved motif and in the process identify the function of RBFOX2 as well as describe the function of the targeted RNA.
 
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
-
-## Get data
+## Step 1: Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
->
-> 1. Import the following files from [Zenodo](https://zenodo.org/record/1327423) or from a data
+> 1. Create and name a new history for this tutorial.
+> 2. Import the following files from [Zenodo](https://zenodo.org/record/1327423) or from a data
 >    library named `TODO` if available (ask your instructor)
 >
 >    ```
@@ -56,9 +45,6 @@ have fun!
 >    https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/RBFOX2-204-INPUT_S2_R1.fastq
 >    https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/RBFOX2-204-INPUT_S2_R2.fastq
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
@@ -71,6 +57,9 @@ have fun!
 >    > By default, Galaxy uses the url as the name, so please rename them to something more pleasing.
 >    {: .tip}
 >
+>    ![upload](../../images/upload_data_page.png "Data can be imported directly with links.")
+>
+>   ![data](../../images/clipseq_data_uploaded.png "Imported datasets will appear in the history panel.")
 >    > ### {% icon tip %} Tip: Importing data from a data library
 >    >
 >    > * Go into "Shared data" (top panel) then "Data libraries"
@@ -82,169 +71,57 @@ have fun!
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+# Step 2: Quality Control
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+As for any NGS data analysis, CLIP-seq data must be quality controlled before being aligned to a reference genome. For more detailed information on NGS quality control, check out the tutorial [here]({{site.baseurl}}/topics/sequence-analysis).
 
-![Alternative text](../../images/image_name "Legend of the image")
+## Report with **FastQC**
 
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
+> ### {% icon hands_on %} Hands-on: Quality control with FastQC
 >
-> But to describe more details, it is possible to use the detail boxes which are expandable
+> 1. **FastQC** {% icon tool %}: Run the tool **FastQC** on each FASTQ file to assess the quality of the raw data. An explanation of the results can be found on the [FastQC web page](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 >
-{: .details}
-
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **Unzip Collection**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Unzip Collection** {% icon tool %} with the following parameters:
->    - {% icon param-collection %} *"Input Paired Dataset"*: `output` (Input dataset collection)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
+>    > ### {% icon tip %} Tip: Running a tool on multiple data files
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    > You can run this tool - and many other tools - on all the FASTQ files at once!
+>    > To do this, first select the "Multiple datasets" icon (two stacked pages) under the "Input FASTQ file" heading in the **FASTQC** Tool Form, then shift+click to select multiple FASTQ files.
+>    {: .tip}
 >
+>   Check the **Sequence Duplication Levels** plot.   
+>
+>   ![fastqbefore](../../images/clipseq_duplication_level_1.png "Sequence duplication levels <b>before</b> de-duplication.")
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. What does the y-axis represent in Figure 3?
+>    > 2. What is the meaning of the read and blue line?
+>    > 3. What does the headline of Figure 3 tell you?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > 1. PCR duplication occur naturally in any NGS experiment during the PCR amplification of the genetic material. CLIP-Seq is prone to many PCR duplicates because of the sparse material that is obtained during a CLIP-Seq experiment resulting in many occasions in high PCR cycles. The y-axis in Figure 3 represents the portion of reads with the specific duplication level. An exact sequence match is needed to detect a duplicated read. More information can be found here: http://www.cureffi.org/2012/12/11/how-pcr-duplicates-arise-in-next-generation-sequencing/ .
+>    > > 2. The blue line shows the duplication levels distribution of the full sequence set. The red line depicts an ideal curve after a de-duplication step (duplicates filtered out). Spikes in the red line come from different duplication levels in the original data (blue line).
+>    > > 3. The headline states an expected value of reads that would remain after duplicated reads would be filtered out. A high percentage suggest, that no de-duplication step is needed. This should also correspond with the red line.
+>    > {: .solution }
+>    {: .question}
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+# Step 2: Removal of Adapters, Barcodes and Unique Molecular Identifiers (UMIs)
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+It is often necessary to remove adapter and barcodes sequences as well as UMIs. <br/>
+**Adapters** (or primers) are needed for PCR amplification and sequencing in a standard NGS protocol. Unfortunately, it might happen during the sequencing that the machine does not stop at the read end and sequences through the adapter as well. That is why, we need to check if our reads contain those sequences which we are then cutting out.<br/>
+**Barcodes** on the other hand are especially designed for a read library and intentionally sequenced. Sometimes experiments are sequenced at the same time which is called **multiplexing**. Multiplexing allows for a better data normalization and comparison. The barcodes are then used to divide the un-multiplexed data set into the individual read libraries. (**Note: Our data is already de-multiplexed, i.e., we do not have to take barcode seqeunces into account.**)<br/>
+**UMIs** are similar to barcodes but these sequences are unique for each read. UMIs were introduced since iCLIP to deal with the high duplication levels of a CLIP experiment. Because each read contain an UMI, PCR duplicates of that read also contain the same UMI, which makes it possible to fuse all reads with the same UMI.
 
-## Sub-step with **FastQC**
+## Removal of Adapter Sequences with **Cutadapt**
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **FastQC** {% icon tool %} with the following parameters:
->    - {% icon param-collection %} *"Short read data from your current history"*: `output` (Input dataset collection)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+In this task we are going to remove two 3' and two 5' adapters from the reads (Note: The eCLIP protocol uses more adapter sequences, for more information take a look [here](http://dx.doi.org/10.1038/nmeth.3810)). Because **Cutadapt** can only process one site of the read pair, we have to trigger **Cutadapt** twice.
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
+> ### {% icon hands_on %} Hands-on: Adapter Removal
 >
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Unzip Collection**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Unzip Collection** {% icon tool %} with the following parameters:
->    - {% icon param-collection %} *"Input Paired Dataset"*: `output` (Input dataset collection)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **FastQC**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **FastQC** {% icon tool %} with the following parameters:
->    - {% icon param-collection %} *"Short read data from your current history"*: `output` (Input dataset collection)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Cutadapt**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Cutadapt** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Fastq file to trim"*: `forward` (output of **Unzip Collection** {% icon tool %})
+> 1. **Cutadapt (v. 1.6)** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Fastq file to trim"*: `R1`
 >    - *"Track Paired Reads"*: `Yes`
+>    - {% icon param-file %} *"Paired fastq file (NOT trimmed)"*: `R2`
 >    - In *"3' Adapters"*:
 >        - Click on *"Insert 3' Adapters"*:
 >        - In *"1: 3' Adapters"*:
@@ -263,51 +140,22 @@ A big step can have several subsections or sub steps:
 >        - In *"2: 5' (Front) Adapters"*:
 >            - *"Source"*: `Enter custom sequence`
 >                - *"Enter custom 5' adapter sequence"*: `CTTCCGATCTTGGTCCT`
->    - *"Maximum error rate"*: `"0.1"`
->    - *"Do not allow indels (Use ONLY with anchored 5' (front) adapters)."*: `Yes`
->    - *"Match times"*: `"1"`
 >    - *"Minimum overlap length"*: `"5"`
->    - *"Match Read Wildcards"*: `Yes`
 >    - *"Output filtering options"*: `Set Filters`
 >        - *"Minimum length"*: `10`
 >    - *"Additional output options"*: `Default`
 >    - *"Additional modifications to reads"*: `Set Modification Options`
 >        - *"Cut bases from reads before adapter trimming"*: `-5`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
+>    > ### {% icon comment %} Why do we remove 5 bp from the first read?
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    > In eCLIP it can happen that the sequencing goes over the first read into the UMI, which is at the 3' end of the first read. The UMI is 5 bp long in our data. To make sure our first read in the read pair does not contain the UMI, we simply remove the last 5 bp from it. The UMI that we actually need for the de-duplication is located on the 5' end of our second read in the read pair.
+> {: .comment}
 >
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Cutadapt**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Cutadapt** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Fastq file to trim"*: `forward` (output of **Unzip Collection** {% icon tool %})
+> 1. **Cutadapt (v. 1.6)** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Fastq file to trim"*: `R2`
 >    - *"Track Paired Reads"*: `Yes`
+>    - {% icon param-file %} *"Paired fastq file (NOT trimmed)"*: `R1`
 >    - In *"3' Adapters"*:
 >        - Click on *"Insert 3' Adapters"*:
 >        - In *"1: 3' Adapters"*:
@@ -326,341 +174,87 @@ A big step can have several subsections or sub steps:
 >        - In *"2: 5' (Front) Adapters"*:
 >            - *"Source"*: `Enter custom sequence`
 >                - *"Enter custom 5' adapter sequence"*: `CTTCCGATCTTGGTCCT`
->    - *"Maximum error rate"*: `"0.1"`
->    - *"Do not allow indels (Use ONLY with anchored 5' (front) adapters)."*: `Yes`
->    - *"Match times"*: `"1"`
 >    - *"Minimum overlap length"*: `"5"`
->    - *"Match Read Wildcards"*: `Yes`
->    - *"Output filtering options"*: `Set Filters`
->        - *"Minimum length"*: `10`
->    - *"Additional output options"*: `Default`
->    - *"Additional modifications to reads"*: `Set Modification Options`
->        - *"Cut bases from reads before adapter trimming"*: `-5`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Cutadapt**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Cutadapt** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Fastq file to trim"*: `paired_output` (output of **Cutadapt** {% icon tool %})
->    - *"Track Paired Reads"*: `Yes`
->    - In *"3' Adapters"*:
->        - Click on *"Insert 3' Adapters"*:
->        - In *"1: 3' Adapters"*:
->            - *"Source"*: `Enter custom sequence`
->                - *"Enter custom 3' adapter sequence"*: `AACTTGTAGATCGGA`
->        - Click on *"Insert 3' Adapters"*:
->        - In *"2: 3' Adapters"*:
->            - *"Source"*: `Enter custom sequence`
->                - *"Enter custom 3' adapter sequence"*: `AGGACCAAGATCGGA`
->    - In *"5' (Front) Adapters"*:
->        - Click on *"Insert 5' (Front) Adapters"*:
->        - In *"1: 5' (Front) Adapters"*:
->            - *"Source"*: `Enter custom sequence`
->                - *"Enter custom 5' adapter sequence"*: `CTTCCGATCTACAAGTT`
->        - Click on *"Insert 5' (Front) Adapters"*:
->        - In *"2: 5' (Front) Adapters"*:
->            - *"Source"*: `Enter custom sequence`
->                - *"Enter custom 5' adapter sequence"*: `CTTCCGATCTTGGTCCT`
->    - *"Maximum error rate"*: `"0.1"`
->    - *"Do not allow indels (Use ONLY with anchored 5' (front) adapters)."*: `Yes`
->    - *"Match times"*: `"1"`
->    - *"Minimum overlap length"*: `"5"`
->    - *"Match Read Wildcards"*: `Yes`
 >    - *"Output filtering options"*: `Set Filters`
 >        - *"Minimum length"*: `10`
 >    - *"Additional output options"*: `Default`
 >    - *"Additional modifications to reads"*: `No Read Modifications`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
+>    > ### {% icon comment %} Do the Same thing for the input control data set.
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > If you processed the RBFOX2 fastq dataset then do the same thing for input control data set or *vice verca*.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Removal of UMIs with **UMI-tools extract**
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+In this task we are going to remove the 5 bp UMI in the 5' end of the second read.
 
-## Sub-step with **Cutadapt**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Cutadapt** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Fastq file to trim"*: `paired_output` (output of **Cutadapt** {% icon tool %})
->    - *"Track Paired Reads"*: `Yes`
->    - In *"3' Adapters"*:
->        - Click on *"Insert 3' Adapters"*:
->        - In *"1: 3' Adapters"*:
->            - *"Source"*: `Enter custom sequence`
->                - *"Enter custom 3' adapter sequence"*: `AACTTGTAGATCGGA`
->        - Click on *"Insert 3' Adapters"*:
->        - In *"2: 3' Adapters"*:
->            - *"Source"*: `Enter custom sequence`
->                - *"Enter custom 3' adapter sequence"*: `AGGACCAAGATCGGA`
->    - In *"5' (Front) Adapters"*:
->        - Click on *"Insert 5' (Front) Adapters"*:
->        - In *"1: 5' (Front) Adapters"*:
->            - *"Source"*: `Enter custom sequence`
->                - *"Enter custom 5' adapter sequence"*: `CTTCCGATCTACAAGTT`
->        - Click on *"Insert 5' (Front) Adapters"*:
->        - In *"2: 5' (Front) Adapters"*:
->            - *"Source"*: `Enter custom sequence`
->                - *"Enter custom 5' adapter sequence"*: `CTTCCGATCTTGGTCCT`
->    - *"Maximum error rate"*: `"0.1"`
->    - *"Do not allow indels (Use ONLY with anchored 5' (front) adapters)."*: `Yes`
->    - *"Match times"*: `"1"`
->    - *"Minimum overlap length"*: `"5"`
->    - *"Match Read Wildcards"*: `Yes`
->    - *"Output filtering options"*: `Set Filters`
->        - *"Minimum length"*: `10`
->    - *"Additional output options"*: `Default`
->    - *"Additional modifications to reads"*: `No Read Modifications`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **UMI-tools extract**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: UMI Removal
 >
 > 1. **UMI-tools extract** {% icon tool %} with the following parameters:
 >    - *"Library type"*: `Paired-end`
->        - *"Barcode on both reads?"*: `Barcode on first read only`
+>     - {% icon param-file %} *"Reads in FASTQ format"*: `R1 from Cutadapt output`
+>     - {% icon param-file %} *"Reads in FASTQ format"*: `R2 from Cutadapt output`
+>     - *"Barcode on both reads?"*: `Barcode on first read only`
 >    - *"Use Known Barcodes?"*: `No`
->    - *"Method to extract barcodes"*: ``
+>    - *"Method to extract barcodes"*: `String`
 >    - *"Barcode pattern for first read"*: `"NNNNN"`
 >    - *"Is the barcode at the 5' end?"*: `Yes`
 >    - *"Output log?"*: `Yes`
 >    - *"Enable quality filter?"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
+>    > ### {% icon comment %} Do the Same thing for the input control data set.
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > If you processed the RBFOX2 fastq dataset then do the same thing for input control data set or *vice verca*.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+# Step 3: Aligning Reads to a Reference Genome
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+To determine where DNA fragments originated in the genome, the sequenced reads must be aligned to a reference genome. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way, however, this can take a couple of weeks.
+Nowadays, there are many read alignment programs, `STAR` is one of them that works well with CLIP-Seq data, for more information read  [here](doi:10.1093/bioinformatics/bts635). STAR is able to use genome as well as transcriptome data. This ability is handy, since CLIP-Seq generetas transcriptome data, thus, we have to take RNA processing steps like splicing events into account.
 
-## Sub-step with **UMI-tools extract**
+## Aligning with **RNA STAR**
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **UMI-tools extract** {% icon tool %} with the following parameters:
->    - *"Library type"*: `Paired-end`
->        - *"Barcode on both reads?"*: `Barcode on first read only`
->    - *"Use Known Barcodes?"*: `No`
->    - *"Method to extract barcodes"*: ``
->    - *"Barcode pattern for first read"*: `"NNNNN"`
->    - *"Is the barcode at the 5' end?"*: `Yes`
->    - *"Output log?"*: `Yes`
->    - *"Enable quality filter?"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **RNA STAR**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Alignment
 >
 > 1. **RNA STAR** {% icon tool %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as individual datasets)`
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >        - *"Reference genome with or without an annotation"*: `use genome reference with builtin gene-model`
 >            - *"Select reference genome"*: `Homo sapiens (hg19+GRCh37.75)`
->    - *"Count number of reads per gene"*: `Yes`
->    - *"Would you like to set output parameters (formatting and filtering)?"*: `Yes`
->        - *"Extra SAM attributes to include"*: `All`
->        - *"Include strand field flag XS"*: `Yes -- and reads with inconsistent and/or non-canonical introns are filtered out`
->        - *"Would you like to set additional output parameters (formatting and filtering)?"*: `Yes`
+>    - *"Count number of reads per gene"*: `No`
+>    - *"Would you like to set output parameters (formatting and filtering)?"*: `No`
 >    - *"Other parameters (seed, alignment, limits and chimeric alignment)"*: `Extended parameter list`
 >        - In *"Alignment parameters"*:
 >            - *"Use end-to-end read alignments, with no soft-clipping?"*: `Yes`
 >        - *"Would you like to set chimeric alignment parameters?"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
+>    > ### {% icon comment %} Soft-Clipping vs Hard-Clipping
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Clipping is a way to deal with low quality bases during the alignment step. In **Soft-Clipping** the bases at the 5' and 3 end of the read are not part of the alignment. In **Hard-Clipping** the bases at the 5' and 3' end of the read are not part of the alignment **and** will be completely removed from the read sequence in the BAM file.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Can you think of a reason why we disabled the soft-clipping?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. In eCLIP the crosslinking position should be at the beginning of the second read. If we would enable soft-clipping, we would add potential bases with low quality at the end of our second reads that would blur our crosslinking position and we would lose precision to detect potential binding regions of RBFOX2.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **RNA STAR**
+# Step 4: De-Duplication
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **RNA STAR** {% icon tool %} with the following parameters:
->    - *"Single-end or paired-end reads"*: `Paired-end (as individual datasets)`
->    - *"Custom or built-in reference genome"*: `Use a built-in index`
->        - *"Reference genome with or without an annotation"*: `use genome reference with builtin gene-model`
->            - *"Select reference genome"*: `Homo sapiens (hg19+GRCh37.75)`
->    - *"Count number of reads per gene"*: `Yes`
->    - *"Would you like to set output parameters (formatting and filtering)?"*: `Yes`
->        - *"Extra SAM attributes to include"*: `All`
->        - *"Include strand field flag XS"*: `Yes -- and reads with inconsistent and/or non-canonical introns are filtered out`
->        - *"Would you like to set additional output parameters (formatting and filtering)?"*: `Yes`
->    - *"Other parameters (seed, alignment, limits and chimeric alignment)"*: `Extended parameter list`
->        - In *"Alignment parameters"*:
->            - *"Use end-to-end read alignments, with no soft-clipping?"*: `Yes`
->        - *"Would you like to set chimeric alignment parameters?"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+More information on **UMI-tools** can be found [here](10.1101/gr.209601.116).
 
 ## Sub-step with **UMI-tools deduplicate**
 
@@ -710,6 +304,42 @@ A big step can have several subsections or sub steps:
 > {: .solution}
 >
 {: .question}
+
+## Sub-step with **FastQC**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **FastQC** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Short read data from your current history"*: `output` (output of **UMI-tools deduplicate** {% icon tool %})
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+# Step 5: Second Quality Control
 
 ## Sub-step with **multiBamSummary**
 
@@ -786,89 +416,6 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **UMI-tools deduplicate**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **UMI-tools deduplicate** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Reads to deduplicate in SAM or BAM format"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
->    - *""*: ``
->    - *"Separator between read id and UMI."*: `"_"`
->    - *"Tag which contains UMI."*: `""`
->    - *"Method used to identify PCR duplicates within reads."*: ``
->    - *"Edit distance threshold"*: `"1"`
->    - *"BAM is paired end"*: `Yes`
->    - *"Spliced reads are unique"*: `Yes`
->    - *"Soft clip threshold"*: `"4"`
->    - *"Use the read length as as a criterion when deduping"*: `Yes`
->    - *"Consider all alignments to a single contig together"*: `Yes`
->    - *"Only consider a random selection of the reads"*: `"1.0"`
->    - *"Only consider a single chromosome"*: `Yes`
->    - *"Deduplicate per contig"*: `Yes`
->    - *"Deduplicate per gene"*: `Yes`
->    - *"Deduplicate by this gene tag"*: `""`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **FastQC**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **FastQC** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Short read data from your current history"*: `output` (output of **UMI-tools deduplicate** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
 ## Sub-step with **plotCorrelation**
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -909,39 +456,7 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **FastQC**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **FastQC** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Short read data from your current history"*: `output` (output of **UMI-tools deduplicate** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+# Step 6: Peakcalling
 
 ## Sub-step with **PEAKachu**
 
@@ -1547,9 +1062,9 @@ A big step can have several subsections or sub steps:
 
 ## Re-arrange
 
-To create the template, each step of the workflow had its own subsection. 
+To create the template, each step of the workflow had its own subsection.
 
-***TODO***: *Re-arrange the generated subsections into sections or other subsections. 
+***TODO***: *Re-arrange the generated subsections into sections or other subsections.
 Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
