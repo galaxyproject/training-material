@@ -184,4 +184,6 @@ You can see here the list of the different [Global Circulation Model](https://en
 
 # Conclusion
 
-We’ve been able through Galaxy-E, to load a dataset of occurrences used in the shiny app Wallace and model the repartition of Chrysemys Picta (painted turtle) with the Species Distribution Modeling (SDM) method. It allowed us to visualize it’s ecological niche and how climate change can influence it’s futur repartition on North America. The project saved can help for futur similar studies.
+We’ve been able through Galaxy-E, to load a dataset of occurrences used in the shiny app Wallace and model the repartition of *Chrysemys picta* (Painted turtle) with the Species Distribution Modeling (SDM) method. It allowed us to visualize it’s ecological niche and how climate change can influence it’s futur repartition on North America. The project saved can help for futur similar studies.
+
+# References
