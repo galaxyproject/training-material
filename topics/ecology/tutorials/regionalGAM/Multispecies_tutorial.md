@@ -94,7 +94,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >    > 3. Search for the tool `tabular to CSV` with the following parameters 
 >    > * Select the `output` from **filtrer des données dur une colonne en utilisant des expressions simples**
 >    > * Separators: `","`.
->    > 4. Repeat `tabular to CSV` on all the different `outputs`from **filtrer des données dur une colonne en utilisant des expressions simples** that you have.
+>    > 4. Repeat `tabular to CSV` on all the different `outputs`from **filtrer des données sur une colonne en utilisant des expressions simples** that you have.
 >    
 >   > {: .comment}
 >
