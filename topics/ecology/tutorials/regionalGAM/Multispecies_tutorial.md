@@ -83,18 +83,17 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 > * "Délimité par": `tabulation`.
 > * "Comment les résultats doivent t'ils être triés ?": `Avec la valeur la plus présente en premier`.
 > 2. Inspect the file by clicking on the `eye` icon to check how many species are taken into account.
-> > If there is only one species you can skip the following steps and go directly to the file datatype convertion step using the tool `tabular to CSV`
->
+
 >    > ### Creating a new file concerning only the data of one species
->    > 1. Copy the name of the species you are interested in from the CSV file (for example: "Pyronia tithonus").
->    > 2. Search for the tool`filtrer des données dur une colonne en utilisant des expressions simples`with the following   parameters.
->    > * En utilisant la condition suivante: `c1=='habitat2'` replacing 'habitat2' with the name of the species (for example: `c1=='"Pyronia tithonus"'`)  
+>    > 1. Copy the name of the species you are interested in from the CSV file (for example: "Aglais io").
+>    > 2. Search for the tool`filtrer des données dur une colonne en utilisant des expressions simples` with the following   parameters.
+>    > * En utilisant la condition suivante: `c1=='habitat2'` replacing 'habitat2' with the name of the species (for example: `c1='"Aglais io"''`)  
 >    > * Nombre de lignes d'en-tête à passer: `1`.
->    > * You can repeat this set of actions as much as necessary, changing only the name of the species taken into account.
+>    > * You can repeat this set of actions as much as necessary, changing only the name of the species taken into account.  By doing this, you will obtain separated dataset, each of them concerning a different species.
 >    > 3. Search for the tool `tabular to CSV` with the following parameters 
->    > * Select the file you've just created 
+>    > * Select the `output` from **filtrer des données dur une colonne en utilisant des expressions simples**
 >    > * Separators: `","`.
->    > 4. Repeat this last operation on all files if you want to work on different species. 
+>    > 4. Repeat `tabular to CSV` on the all the different `outputs`**filtrer des données dur une colonne en utilisant des expressions simples** that you have.
 >    
 >   > {: .comment}
 >
