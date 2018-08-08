@@ -119,6 +119,8 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 
 # Step 3:  <a name="variousoccurrencesonasinglechartexplanations"></a>Creating a chart showing more than one occurrence 
 
+It can sometimes be interesting to have the occurrences of various species reprensented on the same chart.
+
 ![Phenology chart](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20regional%20GAM.png "This shows the occurrence of Ardea alba and Bombycilla garrulus")
 
 > ### {% icon hands_on %} Hands-on: Add various occurrences on a single chart
