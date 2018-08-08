@@ -115,7 +115,7 @@ This step will allow you the show the phenology of a species and then to create 
 
 
 > 1. Search for the tool `flight curve` with the following parameters: 
-> * "Fichier de comptage": `output` from **ftabular to CSV**.
+> * "Fichier de comptage": `output` from **tabular to CSV**.
 >
 > 🔹 Based on the `output` from **flight curve**, you can create a line chart which shows the occurence of the species through the years on a very visual material 
 
@@ -124,7 +124,7 @@ This step will allow you the show the phenology of a species and then to create 
 If you want to access the chart on an interactive interface, you can click on the following link: [Chart on Galaxy](http://openstack-192-168-100-19.genouest.org/plugins/visualizations/charts/saved?id=1e8ab44153008be8)
 >
 >    > ### {% icon tip %} Visualiser. 
->    > 1. Click on the `Output` from **flight curve** 
+>    > 1. With the `Output` from **flight curve** 
 >    > 2. Select `Charts` 
 >    > 3. Give it a proper name
 >    > 4. Select a visualization: "line chart (NVD 3) 
@@ -146,7 +146,7 @@ If you want to access the chart on an interactive interface, you can click on th
 > ⚠️ Please note, that if you want your chart to be more precise and to specify that the x-axis coresponds to "Week and year", it is possible. In order to do so, follow the tip below:
 >    > ### {% icon tip %} Tip: Creating a new column of the dataset containing the week and the year 
 First of all, you have to know how many years are taken into account in your dataset.
->    > 1.Search for the tool `Compter le nombre d'occurrences de chaque enregistrement` with the following parameters 
+>    > 1. Search for the tool `Compter le nombre d'occurrences de chaque enregistrement` with the following parameters 
 >    > * "Sur le jeu de données": `output` from **trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières**.
 >    > * "Select": `Column 3` (the on headed with `SITE`)
 >    > * "Délimité par": `Tabulation`.
@@ -167,7 +167,7 @@ First of all, you have to know how many years are taken into account in your dat
 
 With the `output` from **Merger des colonnes ensemble** you can now generate a new chart which will have a x-axis corresponding to your column `Column "week""year"`.
 >    > ### {% icon tip %} Visualiser
->    > With the  `output` from **flight curve**.
+>    > 1. With the  `output` from **flight curve**.
 >    > 2. Select `Charts`
 >    > 3. Give it a proper name
 >    > 4. Select a visualization: "line chart (NVD 3) 
