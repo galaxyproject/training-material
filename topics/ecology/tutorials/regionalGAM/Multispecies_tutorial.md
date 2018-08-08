@@ -92,7 +92,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >    > * Nombre de lignes d'en-tête à passer: `1`.
 >    > * You can repeat this set of actions as much as necessary, changing only the name of the species taken into account.  By doing this, you will obtain separated dataset, each of them concerning a different species.
 >    > 3. Search for the tool `tabular to CSV` with the following parameters 
->    > * Select the `output` from **filtrer des données dur une colonne en utilisant des expressions simples**
+>    > * Select the `output` from **filtrer des données sur une colonne en utilisant des expressions simples**
 >    > * Separators: `","`.
 >    > 4. Repeat `tabular to CSV` on all the different `outputs`from **filtrer des données sur une colonne en utilisant des expressions simples** that you have.
 >    
