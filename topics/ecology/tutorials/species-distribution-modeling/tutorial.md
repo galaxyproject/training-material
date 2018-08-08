@@ -146,7 +146,7 @@ Partitioning data allows to divide a data set into subsets (ie bins), then make 
 
 > For both of these technics the number of occurrences into each bin may vary.
  
-flag : `Use spatial partition` on these data choose `Checkerboard 2 (k=4)` and an aggregation factor of `6`
+ `Use spatial partition` on these data choose `Checkerboard 2 (k=4)` and an aggregation factor of `6`
 
 ## Build and Evaluate Niche Model
 
@@ -158,10 +158,10 @@ After the precedent step you can now model your theoretical niche.
 
 First with `BIOCLIM Envelope Plots`you can make a chart and choose the parameters of interest and see how the data responds adapting the threshold for more accuracy.
 
-With our data we can see that when we make a chart to simutate an ecological niche using `bio1` as y axis and `bio12` as x axis, with a threshol of `0,75`, the optimum environment parameter for this species is between `5°C` and `15°C` for an annual precipitation (on the graph, values are *10) between aproximatively `700mm` and `1250mm`.
+With our data we can see that when we make a chart to simutate an ecological niche using `bio1` as y axis and `bio12` as x axis, with a threshol of `0,75`, the optimum environment parameter for this species is between `5°C` and `15°C`(on the graph, values are *10), for an annual precipitation between aproximatively `700mm` and `1250mm`.
 
 Then with `Map Prediction`, you can either select `no threshold` to have a gradient of predicted presence or use, like in this study, `minimum training presence` to have a map with the predicted presence and predicted absence.
-flag: insert photo of map prediction.
+
 
 ## Project Model
 
@@ -183,3 +183,5 @@ For exemple we can use the model [CCSM4](http://www.cesm.ucar.edu/models/ccsm4.0
 You can see here the list of the different [Global Circulation Model](https://en.wikipedia.org/wiki/General_circulation_model#Atmospheric_and_oceanic_models)
 
 # Conclusion
+
+We’ve been able through Galaxy-E, to load a dataset of occurrences used in the shiny app Wallace and model the repartition of Chrysemys Picta (painted turtle) with the Species Distribution Modeling (SDM) method. It allowed us to visualize it’s ecological niche and how climate change can influence it’s futur repartition on North America. The project saved can help for futur similar studies.
