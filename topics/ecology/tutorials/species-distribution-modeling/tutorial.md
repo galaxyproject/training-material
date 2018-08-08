@@ -9,7 +9,7 @@ tutorial_name: species distribution modeling
 
 Species Distribution Modeling can help understand the distribution of a species depending of environmental parameters such as temperature and precipitation. It can also help understand the impact of climate change on the repartition of some species. This is done by associating data occurrences of a species with environmental data.
 
-The goal of this study is to model a theorical ecological niche and predict future repartition using Species Distribution Modeling through the use of Wallace interactive environment on Galaxy. We'll use the data occurrences of US *Chrysemys Picta* ([Painted turtle](https://fr.wikipedia.org/wiki/Tortue_peinte)) from the North America region.   
+The goal of this study is to model a theorical ecological niche and predict future repartition using Species Distribution Modeling through the use of Wallace interactive environment on Galaxy. We'll use the data occurrences of US *Chrysemys picta* ([Painted turtle](https://fr.wikipedia.org/wiki/Tortue_peinte)) from the North America region.   
 
 # Step 1: Loading a dataset
 
