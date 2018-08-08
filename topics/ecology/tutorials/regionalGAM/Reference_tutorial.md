@@ -20,8 +20,10 @@ You will basically learn how to create a file on the basis of which you can crea
 > In this tutorial, we will cover:
 1. Pre-processing
 > {:pre-processing}
-2. Displaying the occurence of the chosen species through the years
-> {:Displaying the occurence of the chosen species through the years} 
+2. Making sure the dataset concerns only one species
+> {:Making sure the dataset concerns only one species} 
+3. Displaying the occurrence of the chosen species through the years
+> {:Displaying the occurence of the chosen species through the years}
 
 # Step 1: Pre-processing
 
@@ -78,9 +80,9 @@ When the dataset contains many details, it lengthens the file processing time th
 >    >    </details>
 >    {: .question}
 
-# Step 2: Making sure your dataset concerns only one species 
+# Step 2: Making sure the dataset concerns only one species 
  
-The second step of any Regional GAM data analysis is making sure to have one dataset of only one specific species that you will then be able to use. If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another. 
+The second step of any Regional GAM data analysis is making sure to have a dataset of only one specific species that you will then be able to use. If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another. 
 
 > ### {% icon hands_on %} Hands-on: How many species are taken into account in this dataset
 >
