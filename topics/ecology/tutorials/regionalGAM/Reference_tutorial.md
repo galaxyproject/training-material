@@ -128,8 +128,8 @@ This step will allow you the show the phenology of a species and then to create 
 If you want to access the chart on an interactive interface, you can click on the following link: [Chart on Galaxy](http://openstack-192-168-100-19.genouest.org/plugins/visualizations/charts/saved?id=1e8ab44153008be8)
 >
 >    > ### {% icon tip %} Visualiser. 
->    > 1. With the `Output` from **flight curve** 
->    > 2. Select `Charts` 
+>    > 1. Click on the `Output` dataset from **flight curve** 
+>    > 2. Click on the "Visualize" button then select `Charts` 
 >    > 3. Give it a proper name
 >    > 4. Select a visualization: "line chart (NVD 3) 
 >    > 5. Click on {% icon tip %} Select data:
