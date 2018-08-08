@@ -140,7 +140,7 @@ It can sometimes be interesting to have the occurrences of various species repre
 >    > * "Pick a series color": Choose a different color
 >    > * "Data point labels": `Column corresponding to the name of the species 2` 
 >    > * "Values for x-axis": `Column corresponding to the year of the species 2`
->    > * "Values for y-axis": `Column nm of the species 2`
+>    > * "Values for y-axis": `Column corresponding to nm of the species 2`
 >    > 7. You may repeat "Insert data series" as many times as needed depending on the number of different species you want represent
 >    > 8. Click on {% icon tip %} `Customize`
 >    > * "X-Axis label": `Year`  
