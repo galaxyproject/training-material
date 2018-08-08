@@ -42,14 +42,17 @@ First of all, you will have to upload the files on Galaxy-E and then you might h
 >    ```
 >   
 > ### {% icon tip %} Tip: Importing data via links
->    >
->    > * Copy the link location
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch data**
->    > * Paste the link into the text field
->    > * Press **Start** and **Close** the window
+>    > 1. Search for the tool `Téléverser un ou plusieurs fichiers de votre ordinateur ou d'un serveur distant`
+>    > 2. To import the dataset, you have two options:
+>    > * If you have uploaded the file, drop the file in the box provided for that purpose.
+>    >    * Press **Start** and **Close** the window
+>    > * If you have copied the link location:
+>    >    * Select **Paste/Fetch data**
+>    >    * Paste the link into the text field
+>    >    * Choose the type: CSV
+>    >    * Press **Start** and **Close** the window
 >    {: .tip}
->
+
 > ### {% icon comment %} Comment
 >
 > ⚠️ <a name="inputdatawarning"></a>Please note that the file must contain a header corresponding to: ```"SITES","SPECIES","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
