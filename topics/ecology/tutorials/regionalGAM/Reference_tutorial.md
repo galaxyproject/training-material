@@ -14,6 +14,7 @@ You will basically learn how to create a file on the basis of which you can crea
 > ### {% icon comment %} Comment
 >
 > ⚠️ Please note that there are two other tutorials on regionalGAM, one is specific to [a dataset on RData](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Rdata_tutorial.md) and the other explains you how to deal with [a multispecies dataset](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Multispecies_tutorial.md). If you are interested in learning more about these specific cases, do not hesitate to do these to tutorials. 
+
 > {: .comment}
 
 > ### Agenda
