@@ -23,10 +23,8 @@ You will basically learn how to create a file on the basis of which you can crea
 > {:pre-processing}
 2. Selectionning one specific species and show all corresponding data
 > {:selectionning one specific species and show all corresponding data}
-3. Displaying the occurence of the chosen species through the years
-> {:Displaying the occurence of the chosen species through the years}
-4. Conclusion 
-> {:conclusion}
+3. Creating a chart showing more than one occurrence
+> {:creating a cart showing more than one occurrence}
 
 # Step 1: Pre-processing
 
@@ -119,7 +117,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 ❗❗ Now that you have done the steps specific to a multispecies dataset, you will be redirected to the reference tutorial on regionalGAM. In order to go further on regionalGAM analysis, start the tutorial from the second step. To do so, you can click here:
 [Step 2 - Displaying the occurrence of a chosen species through the years of the reference tutorial on RegionalGAM](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md#displayingtheoccurrenceofthespecies) 
 
-> # Step 3:  <a name="variousoccurrencesonasinglechartexplanations"></a>Creating a chart showing more than one occurrence 
+# Step 3:  <a name="variousoccurrencesonasinglechartexplanations"></a>Creating a chart showing more than one occurrence 
 
 ![Phenology chart](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20regional%20GAM.png "This shows the occurrence of Ardea alba and Bombycilla garrulus")
 
@@ -151,5 +149,4 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 
 {: .hands_on}
 
-❗❗Now that you have accomplished this part, please go back to [Abundance per year and per site from reference tutorial on regionalGAM](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md#Abundanceindex) in order to have the final steps.
-
+❗❗Now that you have accomplished this part, please go back to tu reference tutorial in order to accomplish the final steps. To do so, please click here: [Abundance per year and per site from reference tutorial on regionalGAM](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md#Abundanceindex) 
