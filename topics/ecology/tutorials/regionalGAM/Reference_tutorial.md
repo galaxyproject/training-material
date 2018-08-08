@@ -97,7 +97,7 @@ The second step of any Regional GAM data analysis is making sure to have a datas
 > * "Compter les occurrences des valeurs présentes dans la(les) colonne(s)": `column 1`
 > * "Délimité par": `tabulation`.
 > * "Comment les résultats doivent t'ils être triés ?": `Avec la valeur la plus présente en premier`.
-> 2. Inspect the file by clicking on the `eye` icon to check how many species are taken into account.
+> 2. Inspect the file by clicking on the `eye` icon to check that the dataset is on one species only.
 > 3. Now you can regenerate a CSV file using the `tabular to CSV` tool on the ouptut from **trouver et remplacer des patterns dans des colonnes**.
 
 {: .hands_on}
@@ -115,9 +115,9 @@ This step will allow you the show the phenology of a species and then to create 
 
 
 > 1. Search for the tool `flight curve` with the following parameters: 
-> * "Fichier de comptage": `output` from **flight curve**.
+> * "Fichier de comptage": `output` from **ftabular to CSV**.
 >
-> 🔹 Based on `Output` from **flight curve**, you can create a line chart which shows the occurence of the species through the years on a very visual material 
+> 🔹 Based on the `output` from **flight curve**, you can create a line chart which shows the occurence of the species through the years on a very visual material 
 
 ![Phenology chart](https://raw.githubusercontent.com/Claraurf/training-material/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20Ardea%20Alba.png "This shows the occurrence of Ardea alba")
 
