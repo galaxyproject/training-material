@@ -89,5 +89,5 @@ First of all, you will have to upload the file on Galaxy-E and then you might ha
 
 {: .hands_on}
 
-❗❗ Now that you have done the steps specific to a RData dataset, you will be redirected to the reference tutorial on regionalGAM. In order to go further on regionalGAM analysis, start the tutorial from the fisrt step. To do so, you can click here:
+❗❗ Now that you have done the steps specific to a RData dataset, you will be redirected in order to go further on regionalGAM analysis, start the reference tutorial from the fisrt step. To do so, you can click here:
 [Re-sampling of the reference tutorial on RegionalGAM](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md#resampling) 
