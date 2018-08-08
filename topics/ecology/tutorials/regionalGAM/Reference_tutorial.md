@@ -139,8 +139,6 @@ If you want to access the chart on an interactive interface, you can click on th
 >    > * "Y-Axis label": `nm values`
 >    > 7. Click on {% icon tip %} `Visualize`
 >    > 8. Click on {% icon tip %} `save this visualization`if you are willing
->    > 9. Visualize
->    > 10. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 >
 >
 > ### {% icon comment %} Comment
