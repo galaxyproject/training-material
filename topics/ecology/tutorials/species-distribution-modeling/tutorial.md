@@ -187,3 +187,11 @@ You can see here the list of the different [Global Circulation Model](https://en
 We’ve been able through Galaxy-E, to load a dataset of occurrences used in the shiny app Wallace and model the repartition of *Chrysemys picta* (Painted turtle) with the Species Distribution Modeling (SDM) method. It allowed us to visualize it’s ecological niche and how climate change can influence it’s futur repartition on North America. The project saved can help for futur similar studies.
 
 # References
+
+Guissan, A. et *al.*, Predicting species distributions for conservation decisions. Ecology Letters, 16, 1424–1435  (2013).
+
+Booth, T. H. et *al.*, BIOCLIM: the first species distribution modelling package, its early applicationsand relevance to most current MAXENT studies. Diversity and Distributions, 20, 1–9 (2014).
+
+Muscarella, R. et *al.*, ENMeval: An R package for conducting spatially independent evaluations and estimating optimal model complexity for MAXENT ecological niche models. British Ecological Society, Methods in Ecology and Evolution, 5, 1198–1205 (2014).
+
+[Here](http://www.ipcc-data.org/guidelines/pages/gcm_guide.html) for informations on Global Circulation Model(GCM), how it's done what is taken in consideration and more.
