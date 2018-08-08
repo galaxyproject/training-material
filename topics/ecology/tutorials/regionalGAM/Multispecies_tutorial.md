@@ -71,7 +71,7 @@ When the dataset contains many details, it lengthens the file processing time th
 >    
 {: .hands_on}
 
-# Step 2: Selectionning one specific species and showing all the data corresponding to it
+# Step 2: <a name="selectionningonespecificspecies"></a> Selectionning one specific species and showing all the data corresponding to it
 
 The second step of any Regional GAM data analysis is making sure to have one dataset of only one specific species that you will then be able to use. If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another. 
 
