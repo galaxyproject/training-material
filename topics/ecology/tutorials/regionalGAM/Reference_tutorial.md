@@ -110,28 +110,30 @@ This step will allow you the show the phenology of a species and then to create 
 > 1. Search for the tool `flight curve` with the following parameters: 
 > * "Fichier de comptage": `output` from **flight curve**.
 >
-> 🔹 Based on the flight curve, you can create a line chart which shows the occurence of the species through the years on a very visual material 
+> 🔹 Based on `Output` from **flight curve**, you can create a line chart which shows the occurence of the species through the years on a very visual material 
 
 ![Phenology chart](https://raw.githubusercontent.com/Claraurf/training-material/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20Ardea%20Alba.png "This shows the occurrence of Ardea alba")
 
 If you want to access the chart on an interactive interface, you can click on the following link: [Chart on Galaxy](http://openstack-192-168-100-19.genouest.org/plugins/visualizations/charts/saved?id=1e8ab44153008be8)
 >
->    > ### {% icon tip %} Visualiser 
->    > 1. Select `Charts`
->    > 2. Give it a proper name
->    > 3. Select a visualization: "line chart (NVD 3) 
->    > 4. Select data:
+>    > ### {% icon tip %} Visualiser. 
+>    > 1. Click on the `Output` from **flight curve** 
+>    > 2. Select `Charts` 
+>    > 3. Give it a proper name
+>    > 4. Select a visualization: "line chart (NVD 3) 
+>    > 5. Click on {% icon tip %} Select data:
 >    > * "Provide a label": `The name of the species`
 >    > * "Pick a series color": Choose a color for the line 
 >    > * "Data point labels": `Column 1`
 >    > * "Values for x-axis": `Column 2`
 >    > * "Values for y-axis": `Column 6`
+>    > 6 6. Click on {% icon tip %} Customize:
 >    > * "X-Axis label": `Year`
 >    > * "Y-Axis label": `nm values`
->    > 8. Click on {% icon tip %} `Visualize`
->    > 9. Click on {% icon tip %} `save this visualization`if you are willing
->    > 5. Visualize
->    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
+>    > 7. Click on {% icon tip %} `Visualize`
+>    > 8. Click on {% icon tip %} `save this visualization`if you are willing
+>    > 9. Visualize
+>    > 10. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 >
 >
 > ### {% icon comment %} Comment
@@ -159,23 +161,23 @@ First you wan to know how many years are taken into account in your dataset.
 >    > * "avec les colonnes": `Column 2`(corresponding to the one headed with `YEAR`)
 
 With the `output` from **Merger des colonnes ensemble** you can now generate a new chart which will have a x-axis corresponding to your column `Column "week""year"`.
->    > ### {% icon tip %} Visualiser 
->    > 1. Select `Charts`
->    > 2. Give it a proper name
->    > 3. Select a visualization: "line chart (NVD 3) 
->    > 4. Select data:
+>    > ### {% icon tip %} Visualiser
+>    > 1. Click on the `output` from **Merger des colonnes ensemble**
+>    > 2. Select `Charts`
+>    > 3. Give it a proper name
+>    > 4. Select a visualization: "line chart (NVD 3) 
+>    > 5. Click on {% icon tip %} Select data:
 >    > * "Provide a label": `The name of the species`
 >    > * "Pick a series color": Choose a color for the line 
 >    > * "Data point labels": `Column 1`
 >    > * "Values for x-axis": `Column 7`
 >    > * "Values for y-axis": `Column 6`
+>    > 6. Click on {% icon tip %} Customize:
 >    > * "X-Axis label": `Week and Year`
 >    > * Y-Axis label: `nm values`
->    > 8. Click on {% icon tip %} `Visualize`
->    > 9. Click on {% icon tip %} `save this visualization`if you are willing
->    > 5. Visualize
->    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
->
+>    > 7. Click on {% icon tip %} `Visualize`
+>    > 8. Click on {% icon tip %} `save this visualization`if you are willing to save to chart.
+>   
 > {: .comment}
 
 > ⚠️ Please note that it is possible to show the occurrences of more than one species on a single chart. If you are interested in doing so, you should click here : [Various species chart explanations](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Multispecies_tutorial.md#variousoccurencesonasinglechartexplanations)
