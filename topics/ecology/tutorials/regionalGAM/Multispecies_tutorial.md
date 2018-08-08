@@ -87,7 +87,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 
 >    > ### Creating a new file concerning only the data of one species
 >    > 1. Copy the name of the species you are interested in from the CSV file (for example: "Aglais io").
->    > 2. Search for the tool`filtrer des données dur une colonne en utilisant des expressions simples` with the following   parameters.
+>    > 2. Search for the tool`filtrer des données sur une colonne en utilisant des expressions simples` with the following   parameters.
 >    > * En utilisant la condition suivante: `c1=='habitat2'` replacing 'habitat2' with the name of the species (for example: `c1='"Aglais io"''`)  
 >    > * Nombre de lignes d'en-tête à passer: `1`.
 >    > * You can repeat this set of actions as much as necessary, changing only the name of the species taken into account.  By doing this, you will obtain separated dataset, each of them concerning a different species.
