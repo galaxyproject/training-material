@@ -7,12 +7,42 @@ tutorial_name: formation_of_super-structures_on_xi
 # Introduction
 {:.no_toc}
 
-This exercise uses the published data from [Chen-Yu Wang et al., 2018](https://www.cell.com/cell/fulltext/S0092-8674(18)30584-1).
-The goal of this research is to investigate the mechanism by which the SMCHD1 gene shapes the Xi (inactive X chromosome) and represses the gene expression.
+Within a cell nucleus, the DNA is tightly-packed and the chromatin is spatially distributed with different levels and scales of organizations.
 
-To this end, several ChIP-seq experiments were performed on both wild-type and SMCHD1 gene knockdown samples to study the SMCHD1 effect. It include ChIP-seq data for H3K27me3, H3K4me3 histone marks and the CTCF transcription factor which will be used in the upcoming tutorial to present a step by step ChIP-seq data analysis.
+At the smallest scale, DNA is packaged into units called nucleosomes, made of eight histone proteins. 
 
-During the following steps, the corresponding 'input' samples, for which the same treatment as the ChIP-seq samples was done except for the immunoprecipitation step, are also used along with the 'ChIP-seq' samples to identify the potential sequencing bias and help for differential analysis.
+At a larger scales than nucleosomes, DNA is forming loops. DNA elements elements that would be otherwise be separated by large distances can interact. The corresponding self-interacting (or self-associating) domains are found in many organisms: they are called Topologically Associating Domains (TADs) in mammalian cells. Mammalian chromosomes are also partitioned into two spatial compartments, labelled "A" and "B", where regions in compartment A tend to interact preferentially with A compartment-associated regions than B compartment-associated ones. Similarly, regions in compartment B tend to associate with other B compartment-associated regions.
+
+In mammals, the X chromosome inactivation (XCI) balances the dosage of X-linked genes between females and males. The genes on the inactive X (Xi) chromosome are not expressed. 
+
+Some changes in the histone modifications could be involved. For example, the H3K4m3 is adding 3 methyl-group of the 4th Lysine in the histone 3 amino-acid. This modification is known to activate the transcription on nearby genes by opening the chromatine. The H3K27me3 on the other hand is inactivating the transcription of the nearby genes:
+
+![Fadloun et al, 2013](../../images/formation_of_super-structures_on_xi/histone_modifications.jpg "Source: Fadloun et al, 2013")
+
+More H3K27me3 and less H3K4m3 on the Xi could explain a lower expression of the genes there. 
+
+It has been also observed that the Xi adopts a distinct conformation without evident compartments or TAD. Cohesins, condensins and CCCTC-binding factor (CTCF) play key roles in chromosomal architectures and TAD formation, other potential cause of the repression of the expression of the genes on Xi.
+
+The structural-maintenance-of-chromosomes hinge domain containing 1 (SMCHD1) has been found enriched on the Xi. It may be the potential actor in the shape of Xi and the change in gene expression there.
+
+[Wang et al. (2018)](https://www.cell.com/cell/fulltext/S0092-8674(18)30584-1) investigates the mechanism by which the SMCHD1 gene shapes the Xi and represses the expression of the genes on Xi in mouse.
+
+Their idea was to identify the differences could be observed between the Xi and activated X chromosome, on both wild-type and SMCHD1 gene knockdown samples to study the SMCHD1 effect. 
+In different experiments, they targetted histones with H3K27me3 or H3K4me3 and CTCF using ChIP-seq experiments:
+
+![ChIP-seq workflow](../../images/formation_of_super-structures_on_xi/Chromatin_immunoprecipitation_sequencing.jpg "Source: http://e.biohackers.net/ChIP-seq")
+
+They obtained sequences corresponding to portion of DNA linked to histones with H3K27me3, H3K4me3 or CTCF are found. Using this information, they could identify if there is differences in the H3K27me3, H3K4me3 and CTCF between the X (active or inactive) chromosomes and the potentially influenced genes.
+
+In the upcoming tutorial, we will reproduce the analysis of the ChIP-seq data step by step:
+
+- CTCF with 2 replicates: `wt_CTCF_rep1` and `wt_CTCF_rep2`
+- H3K4me3 with 2 replicates: `wt_H3K4me3_rep1` and `wt_H3K4me3_rep2`
+- H3K27me3 with 2 replicates: `wt_H3K27me3_rep1` and `wt_H3K27me3_rep2`
+- 'input' with 2 replicates: `wt_input_rep1` and `wt_input_rep2`
+
+    In 'input' samples, the same treatment as the ChIP-seq samples was done except for the immunoprecipitation step.
+    They are also used along with the 'ChIP-seq' samples to identify the potential sequencing bias and help for differential analysis.
 
 
 > ### Agenda
@@ -24,13 +54,19 @@ During the following steps, the corresponding 'input' samples, for which the sam
 
 # Step 1: Quality control and treatment of the sequences
 
-The first step of any ChIP-Seq data analysis is quality control of the raw sequencing data. The provided files for this step were already sub-sampled in the interest of saving time.
+The first step of any ChIP-Seq data analysis is quality control of the raw sequencing data. 
 
-> ### {% icon hands_on %} Hands-on: Quality control
+For the saving time, we will do it only on the data of one sample `wt_H3K4me3_rep1` that has been down-sampled.
+
+> ### {% icon hands_on %} Hands-on: Import the data
 >
 > 1. Create a new history for this tutorial and give it a proper name
-> 2. Import `wt_H3K4me3_read1.fastq.gz` (link in [Zenodo](https://zenodo.org/record/1324070/files/wt_H3K4me3_read1.fastq.gz)) and `wt_H3K4me3_read2.fastq.gz` (link in [Zenodo](https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz)) from
- [Zenodo](https://zenodo.org/) or from the data library into the history
+> 2. Import `wt_H3K4me3_read1.fastq.gz` and `wt_H3K4me3_read2.fastq.gz` from [Zenodo](https://zenodo.org/record/1324070) from the data library (ask your instructor)
+>
+>    ```
+>    https://zenodo.org/record/1324070/files/wt_H3K4me3_read1.fastq.gz
+>    https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
+>    ```
 >
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
@@ -56,8 +92,8 @@ The first step of any ChIP-Seq data analysis is quality control of the raw seque
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
->
-> 3. Inspect the file by clicking on the `eye` icon
+> 4. Rename the files `wt_H3K4me3_read1` and `wt_H3K4me3_read2`
+> 3. Inspect the first file by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -70,74 +106,244 @@ The first step of any ChIP-Seq data analysis is quality control of the raw seque
 >    > {: .solution }
 >    {: .question}
 >
-> 4. Run **FastQC** {% icon tool %} with
->    - "Short read data from your current history" to the imported files
->    -  "Execute"
->
->    Inspect the generated files
 {: .hands_on}
 
-It is often necessary to trim sequenced read, for example, to get rid of bases that were sequenced with high uncertainty (= low quality bases).
+During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis, ultimately leading to a misinterpretation of the data.
+
+Sequence quality control is therefore an essential first step in your analysis. We use here similar tools as described in ["Quality control" tutorial]({{site.baseurl}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
-> 1. Run **Trim Galore!** {% icon tool %} with
->    - "Is this library paired- or single-end?" to `Paired-end`
->    - "Reads in FASTQ format" to the imported files
->    - "Trim Galore! advanced settings" to `Full parameter list`
->    - "Trim low-quality ends from reads" to `15`
->    - "Overlap with adapter sequence required to trim a sequence" to `3`
->    - "Execute"
->
->    > ### {% icon tip %} Tip: Importing data from a data library
->    >
->    > If your FASTQ files cannot be selected, you might check whether their format is FASTQ with Sanger-scaled quality values (`fastqsanger`). You can edit the data type by clicking on the `pencil` symbol.
->    {: .tip}
->
-{: .hands_on}
-# Step 2: Mapping of the reads
-
-In order to figure where the sequenced DNA fragments originated from in the genome, the short reads must be aligned to the reference genome. This is equivalent to solving a jigsaw puzzles, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way may, however, take a couple of weeks.
-
-### Running Bowtie2
-
-Nowadays, there are many read alignment programs for shotgun sequenced DNA, Bowtie2 (http://bowtie-bio.sourceforge.net/bowtie2/index.shtml) is one of them.
-
-> ### {% icon hands_on %} Hands-on: Mapping
->
-> 1. **Bowtie2** {% icon tool %} with
->    - "Is this single or paired library" to `Paired-end`
->    - "FASTA/Q file" to the Trim Galore! output with the trimmed reads
->    - "Will you select a reference genome from your history or use a built-in index?" to `Use a built-in genome index`
->    - "Select reference genome" to `Mouse (Mus musculus): mm10`
->    - "Save the bowtie2 mapping statistics to the history" to `Yes`
->    - "Execute"
+> 1. Run **FastQC** {% icon tool %} with the following parameters
+>    - {% icon param-files %} *"Short read data from your current history"*: `wt_H3K4me3_read1` and `wt_H3K4me3_read2` (Input datasets selected with **Multiple datasets**)
+> 2. Inspect the generated HTML files
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. How many reads where mapped?
+>    > 1. How is the quality of the reads in `wt_H3K4me3_read1`?
+>    > 2. And in `wt_H3K4me3_read2`?
+>    > 3. What should we do if the quality of the reads is not good?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. This information can be accessed from `mapping stats`. You can see the mapping statistics once the alignment is completed. 43719 (90.27%) aligned concordantly exactly 1 time and 
->    3340 (6.90%) aligned concordantly >1 times.
+>    > > 1. The reads in `wt_H3K4me3_read1` are of good quality:
+>    > >     - There is 50,000 sequences, all of 51 bp
+>    > >     - The "Per base sequence quality" is not decreasing too much at the end of the sequences
+>    > >
+>    > >        ![Per base sequence quality for read1](../../images/formation_of_super-structures_on_xi/read1_per_base_sequence_quality.png "Per base sequence quality")
+>    > >
+>    > >     - The mean quality score over the reads is quite high
+>    > >
+>    > >        ![Per sequence quality scores for read1](../../images/formation_of_super-structures_on_xi/read1_per_sequence_quality_scores.png "Per sequence quality scores")
+>    > >
+>    > >     - Homogeneous percentage of the bases
+>    > >
+>    > >        ![Per base sequence content for read1](../../images/formation_of_super-structures_on_xi/read1_per base_sequence_content.png "Per base sequence content")
+>    > >
+>    > >     - No N in the reads
+>    > >
+>    > >        ![Per base N content for read1](../../images/formation_of_super-structures_on_xi/read1_per_base_n_content.png "Per base N content")
+>    > >
+>    > >     - No duplicated sequences
+>    > >
+>    > >        ![Sequence Duplication Levels for read1](../../images/formation_of_super-structures_on_xi/read1_sequence_duplication_levels.png "Sequence Duplication Levels")
+>    > >
+>    > >     - No more known adapters
+>    > >
+>    > >        ![Adapter Content for read1](../../images/formation_of_super-structures_on_xi/read1_adapter_content.png "Adapter Content")
+>    > >  
+>    > > 2. The reads in `wt_H3K4me3_read1` are a bit worst:
+>    > >
+>    > >     - The "Per base sequence quality" is decreasing more at the end of the sequences, but it stays correct
+>    > >
+>    > >        ![Per base sequence quality for read2](../../images/formation_of_super-structures_on_xi/read1_per_base_sequence_quality.png "Per base sequence quality")
+>    > >
+>    > >     - The sequence `NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN` is over represented
+>    > >
+>    > >     Despite these small things, the overall quality of the reads is really good.
+>    > > 
+>    > > 3. If the quality of the reads is not good, we should:
+>    > >    1. Check what is wrong and think about it: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biaised percentage of bases in HiC data)
+>    > >    2. Ask the sequencing facility about it
+>    > >    3. Perform some quality treatment (in a reasonable way to not loose too much information) with some trimming or removal of bad reads
+>    > >
 >    > {: .solution }
 >    {: .question}
 >
 {: .hands_on}
 
-The read alignment step with bowtie2 resulted in a compressed, binary file (BAM) that is not human-readable. It's like the zipped version of a text file.
+It is often necessary to trim sequenced read, for example, to get rid of bases that were sequenced with high uncertainty (= low quality bases).
 
-We will show you two ways to inspect the file:
+> ### {% icon question %} Questions
+>
+> What is the relation between `wt_H3K4me3_read1` and `wt_H3K4me3_read2`?
+>
+> > ### {% icon solution %} Solution
+> > The ChIP-seq data for `wt_H3K4me3_rep1` has been sequenced using paired-end sequencing. 
+> >
+> > The paired-end sequencing is based on the idea that the initial DNA fragments (longer than the actual read length) is sequenced on both its ends. This approach results in two reads per fragment, with the first read in forward orientation and the second read in reverse-complement orientation.
+> > 
+> > With paired-end sequencing, more of each fragment is covered than with single-end sequencing (only forward orientation sequenced), given that the read length is the same but twice more reads are generated for the same fragments
+> >
+> > ```
+> >     ------>
+> >       ------>
+> >         ------>
+> >           ------>
+> >
+> >     ----------------------------- [fragment]
+> >
+> >     ------>         <------
+> >       ------>         <------
+> >         ------>         <------
+> >           ------>         <------
+> > ```
+> > 
+> > The paired-end sequencing generates then 2 files:
+> > - One file with the sequences corresponding to foward orientation of all the fragments
+> > - One file with the sequences corresponding to reverse orientation of all the fragments
+> >
+> > Here `wt_H3K4me3_read1` corresponds to the forward reads and `wt_H3K4me3_read2` to the reverse reads.
+> {: .solution }
+{: .question}
 
-1. Visualization using a Genome Browser
-2. Converting the binary format into its text file equivalent
+> ### {% icon hands_on %} Hands-on: Quality control
+>
+> 1. Run **Trim Galore!** {% icon tool %} with the following parameters
+>    - *"Is this library paired- or single-end?"*: `Paired-end`
+>       - {% icon param-file %} *"Reads in FASTQ format"*: `wt_H3K4me3_read1` (Input dataset)
+>       - {% icon param-file %} *"Reads in FASTQ format"*: `wt_H3K4me3_read2` (Input dataset)
+> 
+>       The order is important here!
+>
+>       > ### {% icon tip %} Tip: Not selectable files?
+>       >
+>       > If your FASTQ files cannot be selected, you might check whether their format is FASTQ with Sanger-scaled quality values (`fastqsanger`). You can edit the data type by clicking on the `pencil` symbol.
+>      {: .tip}
+>
+>    - *"Trim Galore! advanced settings"*: `Full parameter list`
+>       - *"Trim low-quality ends from reads in addition to adapter removal"*: `15`
+>       - *"Overlap with adapter sequence required to trim a sequence"*: `3`
+>       - *"Generate a report file"*: `Yes`
+>
+> 2. Inspect the generated txt file (`report file`)
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. In the forward reads, how many bp has been remove because of bad quality?
+>    > 2. And in the reverse reads?
+>    > 3. How many sequence pairs have been removed because at least one read was shorter than the length cutoff?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > 1. 32,198 bp (1.3%) (first `Quality-trimmed:`)
+>    > > 2. 116,414 bp (4.6%) (second `Quality-trimmed:`). It is not a surprise: we saw that the quality was dropping more at the end of the sequences for the reverse reads thant for the forward reads.
+>    > > 3. 1569 (3.14%) sequences (last line of the file)
+>    > {: .solution }
+>    {: .question}
+{: .hands_on}
+
+# Step 2: Mapping of the reads
+
+With ChiP sequencing, we obtain sequences corresponding to portion of DNA linked to histones with H3K4me3. As H3K4me3 opens the chromatime, nearby genes are more transcribed. It would be interesting to know if there is a difference in the quantity of DNA impacted by H3K4me3 and the impacted genes between active and inactive X chromosome.
+
+We first need to figure where the sequenced DNA fragments originated from in the genome. The short reads must be aligned to a reference genome and then identify the binding sites.
+
+This is equivalent to solving a jigsaw puzzles, but unfortunately, not all pieces are unique.
+
+In principle, we could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way may, however, take a couple of weeks. And we do not really care about exact base to base correspondence (**alignment**). We are more interesting on "where did my reads come from?", an approach called **mapping**.
+
+## Running Bowtie2
+
+Nowadays, there are many read alignment programs for shotgun sequenced DNA. We will use here [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml).
+
+To map the reads, we need a reference genome.
+
+> ### {% icon question %} Questions
+>
+> 1. What is a reference genome?
+> 2. For human, several possible reference genomes are available: hg18, hg19, hg38, etc. What do they correspond to?
+> 2. Which reference genome should we use?
+>
+> > ### {% icon solution %} Solution
+> > 1. A reference genome (or reference assembly) is a DNA sequence assembled by different lab as a representative example of a species' DNA sequence. As they are often assembled from the sequencing of the DNA from different donors, they do not accurately represent the set of genes of any single person but a mosaic of different DNA sequences from each donor.
+> > 2. As the cost of DNA sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are builts and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different versions released (named build)
+> > 3. Wang et al. (2018) did ChIP-seq on mouse. So we should use the mouse reference genome. We will use mm10 (the latest build).
+> {: .solution }
+{: .question}
+
+> ### {% icon hands_on %} Hands-on: Mapping
+>
+> 1. **Bowtie2** {% icon tool %} with
+>    - *"Is this single or paired library"*: `Paired-end`
+>        - {% icon param-file %} *"FASTA/Q file #1"*: `trimmed reads pair 1` (output of **Trim Galore!** {% icon tool %})
+>        - {% icon param-file %} *"FASTA/Q file #2"*: `trimmed reads pair 2` (output of **Trim Galore!** {% icon tool %})
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a built-in genome index`
+>        - *"Select reference genome"*: `Mouse (Mus musculus): mm10`
+>    - *"Save the bowtie2 mapping statistics to the history"*: `Yes`
+>
+> 2. Inspect the mapping stats
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > How many reads where mapped? Uniquely or several times?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > The overall alignment rate is 98.64%. This score is quite high. If you have less than 70-80%, you should investigate the origin: contamination, etc.
+>    > >
+>    > > 43719 (90.27%) reads have been aligned concordantly exactly 1 time and 3340 (6.90%) aligned concordantly >1 times. The latter ones correspond to multiple mapped reads. Allowing for multiple  mapped reads increases the number of usable reads and the sensitivity of peak detection;
+however, the number of false positives may also increase. Here the number of uniquely mapped reads is sufficient to analyze to remove the multi-mapped reads.
+>    > {: .solution }
+>    {: .question}
+>
+{: .hands_on}
+
+The output of Bowtie2 is a BAM file (Binary Alignment Map), a compressed, binary file storing the sequences mapped to a reference sequence.
+
+## Inspection of a BAM file
+
+> ### {% icon hands_on %} Hands-on: Conversion into a SAM file
+>
+> 1. Inspect the {% icon param-file %} `aligned reads (BAM)` file (output of **Bowtie2** {% icon tool %})
+>
+{: .hands_on}
+
+A [BAM file](https://en.wikipedia.org/wiki/SAM_(file_format)) (or a SAM file, the non compressed version) consists:
+
+- A header section with the chromosome names and lengths (the lines starting with the `@` symbol)
+- An alignment section consisting of a table with 11 mandatory fields, as well as a variable number of optional fields:
+
+    Col | Field | Type | Brief Description
+    --- | --- | --- | ---
+    1 | QNAME | String | Query template NAME
+    2 | FLAG | Integer | bitwise FLAG
+    3 | RNAME | String | References sequence NAME
+    4 | POS | Integer | 1- based leftmost mapping POSition
+    5 | MAPQ | Integer | MAPping Quality
+    6 | CIGAR | String | CIGAR String
+    7 | RNEXT | String | Ref. name of the mate/next read
+    8 | PNEXT | Integer | Position of the mate/next read
+    9 | TLEN | Integer | observed Template LENgth
+    10 | SEQ | String | segment SEQuence
+    11 | QUAL | String | ASCII of Phred-scaled base QUALity+33 
+
+> ### {% icon question %} Questions
+>
+> 1. Which information do you find in a SAM/BAM file?
+> 2. What is the additional information compared to a FASTQ file?
+>
+> > ### {% icon solution %} Solution
+> > 1. Sequences and quality information, like a FASTQ
+> > 2. Mapping information, Location of the read on the chromosome, Mapping quality, etc
+> {: .solution }
+{: .question}
 
 ## Visualization using a Genome Browser
 
 > ### {% icon hands_on %} Hands-on: Visualization of the reads in IGV
 >
-> 1. Click on the `display with IGV local` to load the reads into the IGV browser
-> 2. Zoom at the start of chromosome X (or `chr2:91,053,413-91,055,345`)
+> 1. Install [IGV](https://software.broadinstitute.org/software/igv/download) (if not already installed)
+> 1. Expand the {% icon param-file %} `aligned reads (BAM)` file (output of **Bowtie2** {% icon tool %})
+> 1. Click on the `local` in `display with IGV` to load the reads into the IGV browser
+> 2. Zoom on the chromosome 2 (`chr2:91,053,413-91,055,345`)
 {: .hands_on}
 
 The reads have a direction: they are mapped to the forward or reverse strand, respectively. When hovering over a read, extra information is displayed
@@ -155,125 +361,96 @@ The reads have a direction: they are mapped to the forward or reverse strand, re
 > Because the number of reads over a region can be quite large, the IGV browser by default only allows to see the reads that fall into a small window. This behaviour can be changed in the IGV from `view > Preferences > Alignments`.
 {: .comment}
 
-
-## Inspection of the SAM format
-
-As mentioned above, you can convert the binary BAM file into a simple (but large!) text file, which is called a [SAM](https://en.wikipedia.org/wiki/SAM_(file_format)) (Sequence Alignment Map) file.
-
-> ### {% icon hands_on %} Hands-on: Conversion into a SAM file
->
-> 1. **BAM-to-SAM** {% icon tool %} with
->    - "BAM File to Convert" to the file generated by Bowtie2
->    - "Header options" to `Include header in SAM output`
->    - "Execute"
->
-> 2. Inspect the file by clicking on `eye` icon
->
-{: .hands_on}
-
-A SAM file is a file with
-
-- A header with the chromosome names and lengths
-- A file content as a tabular file with the location and other information of each read found in the FASTQ file and the mapping information
-
-> ### {% icon question %} Questions
->
-> 1. Which information do you find in a SAM/BAM file? What is the additional information compared to a FASTQ file.
->
-> > ### {% icon solution %} Solution
-> > 1. Sequences and Quality information, like FASTQ
-> > 2. Mapping information; Location of the read on the chromosome; Mapping quality ...
-> > 3. For more information please see [https://en.wikipedia.org/wiki/SAM_(file_format)](https://en.wikipedia.org/wiki/SAM_(file_format))
-> {: .solution }
-{: .question}
-
 # Step 3: ChIP-seq Quality Control
 
 We already checked the quality of the raw sequencing reads in the first step.
-Now we would like to test the quality of the ChIP-seq preparation, to know if your ChIP-seq samples are more enriched than the control (input) samples.
+Now we would like to test the quality of the ChIP-seq preparation, to know if our ChIP-seq samples are more enriched than the control (input) samples.
 
 ## Correlation between samples
 
-To assess the similarity between the replicates of the ChIP and the input, respectively, it is a common technique to calculate the correlation of
-read counts on different regions for all different samples.
-We expect that the replicates of the ChIP-seq experiments should be clustered more closely to each other than the replicates of the input sample.
-That is, because the input samples should not have enriched regions included - remember the immuno-precipitation step was skiped during the sample preparation.
+To assess the similarity between the replicates of the ChIP and the input, respectively, it is a common technique to calculate the correlation of read counts on different regions for all different samples.
+We expect that the replicates of the ChIP-seq experiments should be clustered more closely to each other than the replicates of the input sample. That is, because the input samples should not have enriched regions included - remember the immuno-precipitation step was skiped during the sample preparation.
 
-To compute the correlation between the samples we are going to to use the QC modules of deepTools (http://deeptools.readthedocs.io/), a software package for the QC, processing and analysis of NGS data. Before computing the correlation a time consuming step is required, which is to compute the read coverage over a large number of regions from each of the inputed BAM files. For this we will use the tool **multiBamSummary** {% icon tool %}.
+To compute the correlation between the samples we are going to to use the QC modules of [deepTools](http://deeptools.readthedocs.io/), a software package for the QC, processing and analysis of NGS data. Before computing the correlation a time consuming step is required, which is to compute the read coverage (number of unique reads mapped at a given nucleotide) over a large number of regions from each of the inputed BAM files. For this we will use the tool **multiBamSummary** {% icon tool %}. Then, we use **plotCorrelation** {% icon tool %} from deepTools to compute and visualize the sample correlation. This is a fast process that allows to quickly try different color combinations and outputs.
 
-Since in this tutorial we are interested in assessing H3K4me3, H3K27me3 and CTCF ChIP samples,  the previous steps (quality control and mapping) needs to be run on all the replicates of ChIP samples as well as the input samples.
-To save time, we have already done that and you can now work directly on the BAM files of the provided 8 samples. For simplicity, the files include only the ChrX.
+Since in this tutorial we are interested in assessing H3K4me3, H3K27me3 and CTCF ChIP samples, the previous steps (quality control and mapping) needs to be run on all the replicates of ChIP samples as well as the input samples. To save time, we have already done that and you can now work directly on the BAM files of the provided 8 samples. For simplicity, the files include only the ChrX.
 
 > ### {% icon hands_on %} Hands-on: Correlation between samples
 >
 > 1. Create a new history
 > 2. Import the 8 BAM files from [Zenodo](https://zenodo.org/record/1324070) or from the data library into the history
->    - [`wt_CTCF_rep1.bam`](https://zenodo.org/record/1324070/files/wt_CTCF_rep1.bam)
->    - [`wt_CTCF_rep2.bam`](https://zenodo.org/record/1324070/files/wt_CTCF_rep2.bam)
->    - [`wt_H3K4me3_rep1.bam`](https://zenodo.org/record/1324070/files/wt_H3K4me3_rep1.bam)
->    - [`wt_H3K4me3_rep2.bam`](https://zenodo.org/record/1324070/files/wt_H3K4me3_rep2.bam)
->    - [`wt_H3K27me3_rep1.bam`](https://zenodo.org/record/1324070/files/wt_H3K27me3_rep1.bam)
->    - [`wt_H3K27me3_rep2.bam`](https://zenodo.org/record/1324070/files/wt_H3K27me3_rep2.bam)
->    - [`wt_input_rep1.bam`](https://zenodo.org/record/1324070/files/wt_input_rep1.bam)
->    - [`wt_input_rep2.bam`](https://zenodo.org/record/1324070/files/wt_input_rep2.bam)
 >
-> 3. **multiBamSummary** {% icon tool %} with
->    - "Sample order matters" to `No`
->    - "Bam file" to the 8 imported BAM files
->    - "Choose computation mode" to `Bins`
->    - "Bin size in bp" to `1000`
+>    ```
+>    https://zenodo.org/record/1324070/files/wt_CTCF_rep1.bam
+>    https://zenodo.org/record/1324070/files/wt_CTCF_rep2.bam
+>    https://zenodo.org/record/1324070/files/wt_H3K4me3_rep1.bam
+>    https://zenodo.org/record/1324070/files/wt_H3K4me3_rep2.bam
+>    https://zenodo.org/record/1324070/files/wt_H3K27me3_rep1.bam
+>    https://zenodo.org/record/1324070/files/wt_H3K27me3_rep2.bam
+>    https://zenodo.org/record/1324070/files/wt_input_rep1.bam
+>    https://zenodo.org/record/1324070/files/wt_input_rep2.bam
+>    ```
+>
+> 3. Rename the files
+> 3. **multiBamSummary** {% icon tool %} with the following parameters
+>    - *"Sample order matters"*: `No`
+>       - {% icon param-files %} *"BAM/CRAM file"*: the 8 imported BAM files
+>    - *"Choose computation mode"*: `Bins`
+>       - *"Bin size in bp"*: `1000`
 >       
->       This corresponds to the length of the fragments that were sequenced; it is not the read length!
+>           This corresponds to the length of the fragments that were sequenced; it is not the read length!
 >
->    - "Distance between bins" to `500` (to reduce the computation time for the tutorial)
->    - "Region of the genome to limit the operation to" to `chrX`
->    - "Execute"
+>       - *"Distance between bins"*: `500`
+>
+>           It reduces the computation time for the tutorial
+>
+>    - *"Region of the genome to limit the operation to"*: `chrX`
 >  
->    Using these parameters, the tool will take bins of 1000 bp separated by 500. For each bin the overlapping reads in each sample will be computed
+>    Using these parameters, the tool will take bins of 1000 bp separated by 500 bp on the chromosome X. For each bin the overlapping reads in each sample will be computed and stored into a matrix.
 >
-> 4. **plotCorrelation** {% icon tool %} with
->    - "Matrix file from the multiBamSummary tool" to the generated multiBamSummary output
->    - Correlation method `Pearson`
+> 4. **plotCorrelation** {% icon tool %} with the following parameters
+>    - {% icon param-files %} *"Matrix file from the multiBamSummary tool"*: `correlation matrix`(output of **multiBamSummary** {% icon tool %})
+>    - *"Correlation method"*: `Pearson`
 >    
->    To compute and visualize the sample correlation we use plotCorrelation from deepTools. This is a fast process that allows the user to quickly try different color combinations and outputs. Feel free to try different parameters.
->    
+>    Feel free to try different parameters for the configuration of the plot (colors, title, etc)
+>
 {: .hands_on}
 
 > ### {% icon question %} Questions
 >
 > ![Output for plotCorrelation with the correlation scores between the 8 samples](../../images/formation_of_super-structures_on_xi/plotCorrelation.png "Correlation scores between the 8 samples")
 >
-> 1. How are your samples clustered? Does that correspond to your expectations?
+> How are your samples clustered? Does that correspond to your expectations?
 >
 > > ### {% icon solution %} Solution
-> >  As one could expect, the input replicates cluster together and the ChIP replicates cluster together.
+> > As one could expect, the input replicates cluster together and the ChIP replicates cluster together. It confirms that the immuno-precipitation step worked on our ChIP replicates.
+> >
+> > We also see that the replicates are clustered together: it is also a good sign that the different experiments (H3K4me3, H3K27me3 or CTCF) seem meaningful.
+> >
 > {: .solution }
 {: .question}
 
-> ### {% icon comment %} Comments
-> More information on these two tools can be found at the [deepTools documentation page](https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html).
-{: .comment}
-
 ## IP strength estimation
 
-To evaluate the quality of the immuno-precipitation step, we can compute the IP strength. It determines how well the signal in the ChIP-seq sample can be differentiated from the background distribution of reads in the control sample. To do that we take the data from the `rep1` of the `wt_H3K4me3` ChIP-seq sample and compare it with its corresponding input sample.
+To evaluate the quality of the immuno-precipitation step, we can compute the IP strength. It determines how well the signal in the ChIP-seq sample can be differentiated from the background distribution of reads in the control sample ('input'). After all, around 90% of all DNA fragments in a ChIP experiment will represent the genomic background.
 
-> ### {% icon comment %} Comments
-> For more information on how the IP strength is estimated, you can check the [deepTools documentation page](https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html).
-{: .comment}
+To do that we take the data from the `rep1` of the `wt_H3K4me3` ChIP-seq sample and compare it with its corresponding input sample, using **plotFingerprint** {% icon tool %} of deepTools.
+
+Similar to **multiBamSummary** {% icon tool %}, **plotFingerprint** {% icon tool %} randomly samples genome regions (bins) of a specified length and sums the per-base coverage in the indexed BAM files that overlap with those regions. These coverage values are then sorted according to their rank and the cumulative sum of read counts is plotted.
 
 > ### {% icon hands_on %} Hands-on: IP strength estimation
 >
-> 1. **plotFingerprint** {% icon tool %} with
->    - "Sample order matters" to `No`
->    - "Bam file" to `wt_input_rep1`and `wt_H3K4me3_rep1`
->    - "Region of the genome to limit the operation to" to `ChrX`
->    - "Show advanced options" to `Yes`
->    - "Number of samples" to `10000`
->    - "Execute"
+> 1. **plotFingerprint** {% icon tool %} with the following parameters
+>    - *"Sample order matters"*: `No`
+>       - {% icon param-files %} *"BAM/CRAM file"*: `wt_input_rep1` and `wt_H3K4me3_rep1`
+>    - *"Region of the genome to limit the operation to"*: `chrX`
+>    - *"Show advanced options"*: `Yes`
+>       - *"Number of samples"*: `10000`
 {: .hands_on}
 
-The plotFingerprint tool generates a fingerprint plot. You need to intepret it to know the IP strength. The [deepTools documentation](https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html) explains it clearly:
+The plotFingerprint tool generates a fingerprint plot. You need to intepret it to know the IP strength.
+
+An ideal 'input' with perfect uniform distribution of reads along the genome (i.e. without enrichments in open chromatin) and infinite sequencing coverage should generate a straight diagonal line. A very specific and strong ChIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank. This means that a big chunk of reads from the ChIP sample is located in few bins which corresponds to high, narrow enrichments typically seen for transcription factors.
 
 ![A guide to interpret a fingerprint plot](../../images/estrogen-receptor-binding-site-identification/QC_fingerprint.png "How to interpret a fingerprint plot? Image extracted from the deepTools documentation")
 
@@ -281,228 +458,405 @@ The plotFingerprint tool generates a fingerprint plot. You need to intepret it t
 >
 > ![Output for plotFingerprint with the fingerprint plot to estimate the IP strength](../../images/formation_of_super-structures_on_xi/plotFingerPrint.png "Fingerprint plot for the first replicates to estimate the IP strength")
 >
-> 1. What do you think about the quality of the IP for this experiment?
+> What do you think about the quality of the IP for this experiment?
 >
 > > ### {% icon solution %} Solution
-> >  There is a obvious signal between H3K4me3 and input.
+> > There is clear distinction between H3K4me3 and the input.
 > >
-> >  Almost 25% of the chromosome X is not sequenced at all.
+> > A small percentage of the genome contain a very large fraction of the reads (>70%, point of change in the blue curve) 
+> > 
+> > The curves start to rise around 0.25. It means that almost 25% of the chromosome X is not sequenced at all.
 > {: .solution }
 {: .question}
 
 > ### {% icon hands_on %} (Optional) Hands-on: IP strength estimation (other samples)
 >
-> 1. Run the same analysis on the other ChIP-seq data along with their corresponding input and compare the output
+> Run the same analysis on the other ChIP-seq data along with their corresponding input and compare the output
 {: .hands_on}
 
 
-# Step 4: Normalization
-One of the goals in ChIP-seq data analysis is finding regions on the genome which are enriched for the ChIP data of interest (regions with significantly higher read coverage for the ChIP data comparing to its corresponding input). However, to reach a reliable comparison the data needs to be normalized to remove any technical bias.
-In the following exercise we would like to know where the H3K4me3 binding sites are. For this we need
-to extract which parts of the genome have been enriched (more reads mapped) within the samples that underwent immunoprecipitation.
+## GC bias assessment
 
-For the normalization we have two options.
+An ideal sample should show a uniform distribution of sequenced reads across the genome, i.e. all regions of the genome should have similar numbers of reads, regardless of their base-pair composition. In reality, the DNA polymerases used for PCR-based amplifications during the library preparation of the sequencing protocols prefer GC-rich regions. This will influence the outcome of the sequencing as there will be more reads for GC-rich regions just because of the DNA polymerase's preference. We need to check that our samples do not have more reads from regions of the genome with high GC.
+
+> ### {% icon comment %} Comments
+> GC bias was for many years a big problem, but recent advances in sample preparation have solved this problem to a degree that you can skip this step more often.
+{: .comment}
+
+> ### {% icon question %} Questions
+>
+> To GC biais, we only use the input file. Why?
+>
+> > ### {% icon solution %} Solution
+> > We only want to assess the bias induced by the PCR-based protocols. This is not possible with the ChIP samples, as the enriched regions (binding sites) can have a potential GC enrichment on their own.
+> {: .solution }
+{: .question}
+
+To estimate any possible GC biais, we use **computeGCbias** {% icon tool %}. This tool first calculates the expected GC profile by counting the number of DNA fragments of a fixed size per GC fraction where GC fraction is defined as the number of G's or C's in a genome region of a given length. The result is basically a histogram depicting the frequency of DNA fragments for each type of genome region with a GC fraction between 0 to 100 percent. This will be different for each reference genome, but is independent of the actual sequencing experiment. The profile of the expected DNA fragment distribution is then compared to the observed GC profile, which is generated by counting the number of sequenced reads per GC fraction. In an ideal experiment, the observed GC profile would, of course, look like the expected profile.
+
+> ### {% icon hands_on %} Hands-on: GC bias assessment
+>
+> 1. **computeGCbias** {% icon tool %} with the following paramaters
+>    - {% icon param-file %} *"BAM file"*: `wt_input_rep1`
+>    - *"Reference genome"*: `locally cached`
+>       - *"Using reference genome"*: `Mouse (Mus Musculus): mm10 Full`
+>    - *"Effective genome size"*: `GRCm38/mm10 (2308125349)`
+>    - *"Region of the genome to limit the operation to"* to `chrX`
+>
+{: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> Is there any GC bias?
+>
+> ![Output for computeGCbias with the GC bias estimation](../../images/estrogen-receptor-binding-site-identification/computeGCBias_output.png "Estimation of the GC bias for the input sample for the Patient 1")
+>
+> > ### {% icon solution %} Solution
+> > There is no significantly more reads in the GC-rich regions.
+> {: .solution }
+{: .question}
+
+# Step 4: Normalization
+
+One of the goals in ChIP-seq data analysis is finding regions on the genome which are enriched for the ChIP data of interest (regions with significantly higher read coverage for the ChIP data comparing to its corresponding input). In the following exercise we would like to know where the H3K4me3 sites are. For this we need to extract which parts of the genome have been enriched (i.e. more reads mapped) within the samples that underwent immunoprecipitation. However, to reach a reliable comparison the data needs to be normalized to remove any technical bias. For the normalization we have two steps:
 
 1. Normalization by sequencing depth
 2. Normalization by input file
 
+To learn how to do the normalization, we will take the `wt_H3K4me3_rep1` sample as ChIP data and `wt_input_rep1` as input.
 
 ## Generation of coverage files normalized by sequencing depth
 
-We first need to make the samples comparable. Indeed, the different samples have usually a different sequencing depth, i.e. a different number of reads.
-These differences can bias the interpretation of the number of reads mapped to a specific genome region.
+> ### {% icon hands_on %} Hands-on: Estimation of the sequencing depth
+>
+> 1. **IdxStats** {% icon tool %} with the following parameters
+>    - {% icon param-files %} *"BAM file"*: `wt_H3K4me3_rep1.bam` and `wt_input_rep1.bam`
+>
+> > ### {% icon question %} Questions
+> >
+> > 1. What is the output of **IdxStats** {% icon tool %}?
+> > 2. How many reads has been mapped on chrX for the input and for the ChIP-seq samples?
+> > 3. Why are the number of reads different? And what could be the impact of this difference?
+> >
+> > > ### {% icon solution %} Solution
+> > > 1. This tool generates a table with 4 columns:  reference sequence identifier, reference sequence length, number of mapped reads and number of placed but unmapped reads. Here it estimates how many reads mapped to which chromosome. Furthermore, it tells the chromosome lengths and naming convention (with or without 'chr' in the beginning)
+> > 2. 1,204,821 for ChIP-seq samples and 1,893,595 for the input
+> > 3. The number of reads can be different because of  different sequencing depth. It can bias the interpretation of the number of reads mapped to a specific genome region and the identification of the H3K4me3 sites. Specially here, as the number of reads for the input is higher than the ChIP data less regions could be identified having a significantly higher read coverage for the ChIP data comparing to the corresponding input.
+> > {: .solution }
+> {: .question}
+{: .hands_on}
+
+The different samples have usually a different sequencing depth, i.e. a different number of reads. These differences can bias the interpretation of the number of reads mapped to a specific genome region. We first need to make the samples comparable by normalizing the coverage by the sequencing depth.
+
+We are using **bamCoverage** {% icon tool %}. Given a BAM file, this tool generates coverages by first calculating all the number of reads (either extended to match the fragment length or not) that overlap each bin in the genome and then normalizing with various options. It produces a coverage file where for each bin the number of overlapping reads (possibly normalized) is noted.
 
 > ### {% icon hands_on %} Hands-on: Coverage file normalization
 >
-> 1. **IdxStats** {% icon tool %} with
->    - "BAM file" to "Multiple datasets": `wt_H3K4me3_rep1.bam` and `wt_input_rep1.bam`
+> 1. **bamCoverage** {% icon tool %} with the following parameters
+>    - {% icon param-files %} *"BAM file"*: `wt_H3K4me3_rep1.bam` and `wt_input_rep1.bam`
+>    - *"Bin size in bases"*: `25`
+>    - *"Scaling/Normalization method"*: `Normalize coverage to 1x`
+>       - *"Effective genome size"*: `GRCm38/mm10 (2308125349)`
+>    - *"Coverage file format"*: `bedgraph`
+>    - *"Region of the genome to limit the operation to"*: `chrX`
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. What is the output of this tool?
->    > 2. How many reads has been mapped on chrX for the input and for the ChIP-seq samples?
+>    > 1. What is a `bedgraph` file?
+>    > 2. Which regions have the highest coverage in ChIP data and in the input?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. This tool estimates how many reads mapped to which chromosome. Furthermore, it tells the chromosome lengths and naming convention (with or without 'chr' in the beginning)
->    > > 2. 1,204,821 for ChIP-seq samples and 1,893,595 for the input
+>    > > 1. It is a tabular file with 4 columns: chrom, chromStart, chromEnd and a data value (coverage)
+>    > > 2. We can run **Sort** {% icon tool %} on the 4th column in descending order to get the regions with the highest (normalized) coverage. For `wt_H3K4me3_rep1`, the regions between 152,233,400 and 152,233,800 are the most covered. For `wt_input_rep1`, between 143,483,000 and 143,483,100 (smaller regions).
 >    > {: .solution }
 >    {: .question}
 >
-> 2. **deeptools-bamCoverage** {% icon tool %} with
->    - "BAM file" to "Multiple datasets": `wt_H3K4me3_rep1.bam` and `wt_input_rep1.bam`
->    - "Bin size in bases" to `25`
->    - "Scaling/Normalization method" to `Normalize coverage to 1x`
->    - "Effective genome size" to `GRCm38/mm10 (2308125349)`
->    - "Coverage file format" to `bedgraph`
+> 2. **bamCoverage** {% icon tool %} with the same parameters but
+>    - *"Coverage file format"*: `bigWig`
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. What are the different columns of a `bedgraph` file?
+>    > What is a `bigWig` file?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. chrom, chromStart, chromEnd and a data value
+>    > > A `bigWig` file is a compressed `bedgraph` file. Similar in relation as BAM to SAM, but this time just for coverage data. This means bigWig and bedgraph files are much smaller than BAM or SAM files (no sequence or quality information).
 >    > {: .solution }
 >    {: .question}
 >
-> 3. **bamCoverage** {% icon tool %} with the same parameters but to generate a `bigWig` output file
-> 4. **IGV** {% icon tool %} to inspect both signal coverages (input and ChIP samples) in IGV
->
->    > ### {% icon question %} Questions
->    >
->    > 1. What is a bigWig file?
->    >
->    > > ### {% icon solution %} Solution
->    > > A bigWig file is a compressed bedgraph file. Similar in relation as BAm to SAM, but this time just for coverage data. This means bigWig and bedgraph
->    > > files are much smaller than BAM or SAM files.
->    > {: .solution }
->    {: .question}
+> 3. **IGV** {% icon tool %} to inspect both signal coverages (input and ChIP samples) in IGV
 >
 {: .hands_on}
 
-## Generation of input-normalized coverage files and their visualization
+> ### {% icon question %} Questions
+> 
+> If you zoom to `chrX:151,385,260-152,426,526`, what do you observe? 
+>
+> ![Output of bamCoverage](../../images/formation_of_super-structures_on_xi/bamcoverage_igv.png "bamCoverage for wt_H3K4me3_rep1 and wt_input_rep1 on chrX:151,385,260-152,426,526")
+>
+> > ### {% icon solution %} Solution
+> > The track with the coverage for the input (`wt_input_rep1`) seems quite homogeneous. On the other hand, for `wt_H3K4me3_rep1`, we can observe some clear peaks at the beginning of the genes.
+> {: .solution }
+{: .question}
 
-To extract only the information induced by the immunoprecipitation, we normalize for each patient the coverage file for the sample that underwent immunoprecipitation by the coverage file for the input sample. Here we use the tool bamCompare which compare 2 BAM files while caring for sequencing depth normalization.
+## Generation of input-normalized coverage files
+
+To extract only the information induced by the immunoprecipitation, we normalize for each patient the coverage file for the sample that underwent immunoprecipitation by the coverage file for the input sample. Here we use the tool **bamCompare** {% icon tool %} which compare 2 BAM files while caring for sequencing depth normalization.
 
 > ### {% icon hands_on %} Hands-on: Generation of input-normalized coverage files
 >
-> 1. **bamCompare** {% icon tool %} with
->    - "First BAM file (e.g. treated sample)" to `wt_H3K4me3_rep1.bam`
->    - "Second BAM file (e.g. control sample)" to `wt_input_rep1.bam`
->    - "Bin size in bases" to `50`
->    - "How to compare the two files" to `Compute log2 of the number of reads ratio`
->    - "Coverage file format" to `bedgraph`
->    - "Region of the genome to limit the operation to" to `chrX` (to reduce the computation time for the tutorial)
+> 1. **bamCompare** {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"First BAM file (e.g. treated sample)"*: `wt_H3K4me3_rep1.bam`
+>    - {% icon param-file %} *"Second BAM file (e.g. control sample)"*: `wt_input_rep1.bam`
+>    - *"Bin size in bases"*: `50`
+>    - *"How to compare the two files"*: `Compute log2 of the number of reads ratio`
+>    - *"Coverage file format"*: `bedgraph`
+>    - *"Region of the genome to limit the operation to"*: `chrX`
 >
->      > ### {% icon question %} Questions
->      >
->      > 1. What does mean a positive or a negative value in the 4th column?
->      >
->      > > ### {% icon solution %} Solution
->      > > 1. The 4th column contains the log2 of the number of reads ratio between the ChIP-seq sample and the input sample. A positive value means that the coverage on the portion is more important in the ChIP-seq sample than in the input sample
->      > {: .solution }
->      {: .question}
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. What does mean a positive or a negative value in the 4th column?
+>    > 2. Which regions have the highest coverage in the ChIP data? and the lowest? 
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > 1. The 4th column contains the log2 of the number of reads ratio between the ChIP-seq sample and the input sample. A positive value means that the coverage on the portion is more important in the ChIP-seq sample than in the input sample
+>    > > 2. The highest: 152,233,800-152,233,850 (consistent with the most covered regions in `wt_H3K4me3_rep1` given by **bamCoverage** {% icon tool %}). The lowest: 169,916,600-169,916,650
+>    > {: .solution }
+>    {: .question}
 >
-> 2. **bamCompare** {% icon tool %} with the same parameters but to generate a `bigWig` output file
+> 2. **bamCompare** {% icon tool %} with the same parameters but:
+>    - *"Coverage file format"*: `bigWig`
+>
 > 3. **IGV** {% icon tool %} to inspect the log2 ratio
->
->    Remember that the bigWig file contains only the signal on chromosome X!
 >
 {: .hands_on}
 
+> ### {% icon question %} Questions
+> 
+> How could you interpret the new track if you zoom to `chrX:151,385,260-152,426,526`? 
+>
+> ![Output of bamCoverage](../../images/formation_of_super-structures_on_xi/bamcompare_igv.png "bamCoverage for wt_H3K4me3_rep1 and wt_input_rep1 on chrX:151,385,260-152,426,526")
+>
+> > ### {% icon solution %} Solution
+> > The new track is the difference between the first (`wt_H3K4me3_rep1`) track and the second track (`wt_input_rep1`)
+> {: .solution }
+{: .question}
+
 # Step 5: Detecting enriched regions (peak calling)
 
-We can also call the enriched regions, or peaks, found in the ChIP-seq samples.
+We could see in the ChIP data some enriched regions, some peaks. We now would like to call these regions to obtain their coordinates, using **MACS2 callpeak** {% icon tool %}
 
 > ### {% icon hands_on %} Hands-on: Peak calling
 >
-> 1. **MACS2 callpeak** {% icon tool %} with
->    - "ChIP-Seq Treatment File" to `wt_H3K4me3_rep1.bam`
->    - "ChIP-Seq Control File" to `wt_input_rep1.bam`
->    - "Format of Input Files" to `Paired-end BAM`
->    - "Effective genome size" to `M.musculus(1.87e9)`
->    - "Outputs" to `Summary page (html)`
+> 1. **MACS2 callpeak** {% icon tool %} with the following parameters
+>    - *"Are you pooling Treatment Files?"*: `No`
+>       - {% icon param-file %} *"ChIP-Seq Treatment File"*: `wt_H3K4me3_rep1.bam`
+>    - *"Do you have a Control File?"*: `Yes`
+>       - *"Are you pooling Treatment Files?"*: `No`
+>           - {% icon param-file %} *"ChIP-Seq Treatment File"*: `wt_input_rep1.bam`
+>    - *"Format of Input Files"*: `Paired-end BAM`
+>    - *"Effective genome size"*: `M.musculus (1.87e9)`
+>    - *"Outputs"*: `Summary page (html)`
 >
 >    > ### {% icon comment %} Comments
 >    > The advanced options may be adjusted, depending of the samples.
 >    > If your ChIP-seq experiment targets regions of broad enrichment, *e.g.* non-punctuate histone modifications, select calling of broad regions.
 >    > If your sample has a low duplication rate (*e.g.* below 10%), you might keep all duplicate reads (tags). Otherwise, you might use the 'auto' option to estimate the maximal allowed number of duplicated reads per genomic location.
 >    {: .comment}
+> 
+> 2. Inspect the {% icon param-file %} `(narrow Peaks)` file (output of **MACS2 callpeak** {% icon tool %})
 >
-> 2. **IGV** {% icon tool %} to inspect with the signal coverage and log2 ratio tracks
+>    > ### {% icon question %} Questions
+>    >
+>    > Which type of file was generated? What does it include?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > **MACS2 callpeak** {% icon tool %} has generated a BED file with the coordinates of the identified peaks: chromosome, start, stop, name, integer score, strand, fold-change, -log10pvalue, -log10qvalue, relative summit position to peak start
+>    > {: .solution }
+>    {: .question}
+>
+> 3. **IGV** {% icon tool %} to inspect with the signal coverage and log2 ratio tracks
 >
 {: .hands_on}
+
+> ### {% icon question %} Questions
+> 
+> 1. How many peaks have been identified in `chrX:151,385,260-152,426,526` based on IGV?
+>
+>    ![Output of MACS2](../../images/formation_of_super-structures_on_xi/macs2_igv.png "Peaks for wt_H3K4me3_rep1 and wt_input_rep1 on chrX:151,385,260-152,426,526")
+>
+> 2. What are the fold change of the peaks identified in `chrX:151,385,260-152,426,526`? Hint: using the BED file
+> 3. How many peaks have been identified on the full chromosome X? How many peaks have a fold change > 50?
+>
+> > ### {% icon solution %} Solution
+> > 1. We can see 11 peaks (track below the genes). 
+> > 2. Using **Filter** {% icon tool %} with `c2>151385260 and c3<152426526`, we found that the 11 peaks have a fold change 3.81927 and 162.06572
+> > 4. On the 656 peaks on the full chromosome (number of lines of the original BED file) there are 252 peaks with FC>50 (using **Filter** {% icon tool %} with `c7>50`)
+> {: .solution } 
+{: .question}
 
 The called peak regions can be filtered by, *e.g.* fold change, FDR and region length for further downstream analysis.
 
-# Step 6: Plot the signal on the peaks between samples
+# Step 6: Plot the signal between samples
 
-Plotting your region of interest will involve using two tools from the **deepTools** suite.
-+ computeMatrix : Computes the signal on given regions, using the bigwig coverage files from different samples.
-+ plotHeatmap : Plots heatMap of the signals using the computeMatrix output.
+We normalized our data and identied the peaks. We would like now to visualize scores associated with genomic regions, for example ChIP enrichment values around the TSS of genes. And we would like to compare it with another sample (CTCF).
 
-Optionally, you can also use `plotProfile`to create a profile plot using to computeMatrix output.
+Since we already generated the required files for the H3K4me3 sample, let's make them only for the CTCF sample:
 
-## computeMatrix
-
-> ### {% icon hands_on %} Hands-on: Visualization of the coverage
->
-> 1. **UCSC Main** {% icon tool %} with
->    - "assembly" to `mm10`
->    - "track" to `RefSeq genes`
->    - "region" to `position` with `chrX`
->    - "output format" to `BED`
->    - "Send output to" to `Galaxy`
->    - "Get output"
->    - "Send query to Galaxy"
->
-> 2. **computeMatrix** {% icon tool %} with
->    - "Regions to plot" to the imported UCSC file
->    - "Score file" to the bigwig file generated by bamCompare
->    - "computeMatrix has two main output options" to `scale-regions`
->
->       This option stretches or shrinks all regions in the BED file (here: genes) to the same length (bp) as indicated by the user
->
->    - "Show advanced options" to `yes`
->    - "Convert missing values to 0?" to `Yes`
->    - "Execute"
->
->    This tool prepares a file with scores per genomic region, which is required as input for the next tool.
+> ### {% icon hands_on %} Hands-on: Prepare the peaks and data for CTCF
+> 
+> 1. **bamCompare** {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"First BAM file (e.g. treated sample)"*: `wt_CTCF_rep1.bam`
+>    - {% icon param-file %} *"Second BAM file (e.g. control sample)"*: `wt_input_rep1.bam`
+>    - *"Bin size in bases"*: `50`
+>    - *"How to compare the two files"*: `Compute log2 of the number of reads ratio`
+>    - *"Coverage file format"*: `bigwig`
+>    - *"Region of the genome to limit the operation to"*: `chrX`
+> 2. Rename the output of **bamCompare** {% icon tool %} with the name of the sample
+> 3. **MACS2 callpeak** {% icon tool %} with the following parameters
+>    - *"Are you pooling Treatment Files?"*: `No`
+>       - {% icon param-file %} *"ChIP-Seq Treatment File"*: `wt_CTCF_rep1.bam`
+>    - *"Do you have a Control File?"*: `Yes`
+>       - *"Are you pooling Treatment Files?"*: `No`
+>           - {% icon param-file %} *"ChIP-Seq Treatment File"*: `wt_input_rep1.bam`
+>    - *"Format of Input Files"*: `Paired-end BAM`
+>    - *"Effective genome size"*: `M.musculus (1.87e9)`
 >
 {: .hands_on}
 
-## plotHeatmap
+We can now concatenate the MACS2 outputs with the location of the peaks (concatenate the files and merge the overlapping regions) to obtain one BED file corresponding to the coordinates of the interesting regions to plot.
 
-> ### {% icon hands_on %} Hands-on: Visualization of the coverage
-> 3. **plotHeatmap** {% icon tool %} with
->    - "Matrix file from the computeMatrix tool" to the generated matrix
->    - "Show advanced options" to `yes`
->    - "Did you compute the matrix with more than one groups of regions?" to the correct setting
->    - "Execute"
+> ### {% icon hands_on %} Hands-on: Prepare the peak coordinates
+> 
+> 1. **Concatenate two datasets into one dataset** {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"Concatenate"*: output of **MACS2 callpeak** {% icon tool %} for `wt_CTCF_rep1`
+>    - {% icon param-file %} *"with"*: output of **MACS2 callpeak** {% icon tool %} for `wt_H3K4me3_rep1`
+> 2. **SortBED** {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"Sort the following bed,bedgraph,gff,vcf file"*: output of **Concatenate** {% icon tool %}
+> 3. **MergeBED** {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"Sort the following bed,bedgraph,gff,vcf file"*: output of **SortBED** {% icon tool %}
 >
 {: .hands_on}
+
+Now, plotting the peaks will involve using two tools:
+- **computeMatrix** {% icon tool %}: it computes the signal on given regions, using the `bigwig` coverage files from different samples.
+- **plotHeatmap** {% icon tool %}: it plots heatMap of the signals using the **computeMatrix** {% icon tool %} output.
+
+Optionally, we can also use **plotProfile** {% icon tool %} to create a profile plot using to **computeMatrix** {% icon tool %} output.
+
+> ### {% icon hands_on %} Hands-on: Plot the heatmap
+> 
+> 1. **computeMatrix** {% icon tool %} with the same parameters but:
+>    - *"Select regions"*: 
+>       - {% icon param-file %} *"Regions to plot"*: output of **MergeBED** {% icon tool %}
+>    - *"Sample order matters"*: `No`
+>       - {% icon param-files %} *"Score file"*: the 2 `bigwig` files generated by **bamCompare** {% icon tool %} and renamed
+>    - *"computeMatrix has two main output options"*: `reference-point`
+>       - *"The reference point for the plotting"*: `center of region`
+>       - *"Distance upstream of the start site of the regions defined in the region file"*: `3000`
+>       - *"Distance downstream of the end site of the given regions"*: `3000`
+> 2. **plotHeatmap** {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: `Matrix` (output of **computeMatrix** {% icon tool %})
+>    - *"Show advanced options"*: `yes`
+>       - *"Reference point label"*: select the right label
+>       - *"Did you compute the matrix with more than one groups of regions?"*: `No, I used only one group`
+>           - *"Clustering algorithm"*: `Kmeans clustering`
+>           - *"Number of clusters to compute"*: `2`
+{: .hands_on}
+
+It should generate an heatmap similar to:
+
+![Output of plotHeatmap for 2 samples](../../images/formation_of_super-structures_on_xi/peak_heatmap_1.png "Scores around the peaks for wt_H3K4me3_rep1 and wt_input_rep1")
+
+When we look at this graph, it seems that less but larger peaks are found for `H3K4me3_rep1` and that only few peaks are shared.
+
+> ### {% icon question %} Questions
+> 
+> 1. How many peaks have been found for `CTCF_rep1` and for `H3K4me3_rep1`?
+> 2. What are the mean width of the peaks for `CTCF_rep1` and for `H3K4me3_rep1`?
+> 3. How many peaks are specific to `CTCF_rep1` or `H3K4me3_rep1`?
+>
+> > ### {% icon solution %} Solution
+> > 1. 656 peaks for `H3K4me3_rep1` and 2,688 for `CTCF_rep1` (number of lines in the **MACS2 callpeak** {% icon tool %} BED file)
+> > 2. 1630.77 bp for `H3K4me3_rep1` and 404.55 for `CTCF_rep1` (**Compute** {% icon tool %} with `c3-c2` and then **Datamash** {% icon tool %} with `Mean` on `Column:11`)
+> > 3. 443 peaks (over 656) are specific to `H3K4me3_rep1` and 2,464 (over 2,688) to `CTCF_rep1` (**Intersect intervals** {% icon tool %}). Around 220 peaks are then overlapping.
+> {: .solution }
+{: .question}
+
+We only analyzed 2 samples, but we could the same of all the 6 samples:
+
+> ### {% icon hands_on %} (Optional) Hands-on: Plot the heatmap for all the samples
+> 
+> 1. **bamCompare** {% icon tool %} for each combination input - ChIP data:
+>     1. `wt_CTCF_rep1` - `wt_input_rep1` (already done)
+>     2. `wt_H3K4me3_rep1` - `wt_input_rep1` (already done)
+>     3. `wt_H3K27me3_rep1` - `wt_input_rep1`
+>     4. `wt_CTCF_rep2` - `wt_input_rep2`
+>     5. `wt_H3K4me3_rep2` - `wt_input_rep2`
+>     6. `wt_H3K27me3_rep2` - `wt_input_rep2`
+> 2. Rename the outputs of **bamCompare** {% icon tool %} with the name of the ChIP data
+> 3. **MACS2 callpeak** {% icon tool %} for each combination input - ChIP data
+> 4. **Concatenate datasets tail-to-head** {% icon tool %} with the following parameters
+>     - {% icon param-file %} *"Concatenate Dataset"*: one output of **MACS2 callpeak** {% icon tool %}
+>     - Click *"Insert Dataset"* and {% icon param-file %} *"Select"* one other output of **MACS2 callpeak** {% icon tool %}
+>     - Redo for the 6 outputs of **MACS2 callpeak** {% icon tool %}
+> 5. **SortBED** {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"Sort the following bed,bedgraph,gff,vcf file"*: output of **Concatenate** {% icon tool %}
+> 6. **MergeBED** {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"Sort the following bed,bedgraph,gff,vcf file"*: output of **SortBED** {% icon tool %}
+> 7. **computeMatrix** {% icon tool %} with the same parameters but:
+>    - *"Select regions"*: 
+>       - {% icon param-file %} *"Regions to plot"*: output of **MergeBED** {% icon tool %}
+>    - *"Sample order matters"*: `No`
+>       - {% icon param-files %} *"Score file"*: the 6 `bigwig` files generated by **bamCompare** {% icon tool %} and renamed
+>    - *"computeMatrix has two main output options"*: `reference-point`
+>       - *"The reference point for the plotting"*: `center of region`
+>       - *"Distance upstream of the start site of the regions defined in the region file"*: `3000`
+>       - *"Distance downstream of the end site of the given regions"*: `3000`
+> 8. **plotHeatmap** {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: `Matrix` (output of **computeMatrix** {% icon tool %})
+>    - *"Show advanced options"*: `yes`
+>       - *"Reference point label"*: select the right label
+>       - *"Did you compute the matrix with more than one groups of regions?"*: `No, I used only one group`
+>           - *"Clustering algorithm"*: `Kmeans clustering`
+>           - *"Number of clusters to compute"*: `2`
+{: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> 1. How many peaks are found for the different samples?
+> 2. How are the peaks?
+>
+>    ![Output of plotHeatmap for all samples](../../images/formation_of_super-structures_on_xi/peak_heatmap_all.png "Scores around the peaks for all samples")
+> 
+> 3. How could be interpreted the peaks and read coverage in the `chrX:151,385,260-152,426,526` region?
+> 
+>    ![Coverage and peaks for the replicate 1](../../images/formation_of_super-structures_on_xi/rep1_igv.png "Coverage and peaks for the replicate 1")
+>
+> > ### {% icon solution %} Solution
+> > 1. Found peaks (number of lines in **MACS2 callpeak** {% icon tool %} outputs):
+> >
+> >     Target | Rep 1 | Rep 2
+> >     --- | --- | ---
+> >     CTCF | 2,688 | 2,062
+> >     H3K4me3 | 656 | 717
+> >     H3K27me3 | 221 | 76
+> >
+> >    The tendencies are similar for both replicates: more peaks for CTCF, less for H3K4me3 and only few for H3K27me3.
+> >
+> > 2. As observed with the 2 samples, the peaks for H3K4me3 are wider than for CTCF. We also observe that the peaks found with one replicate are found with the other replicate.
+> > 3. The H3K4me3 sample has clear and large regions in which the read coverage are enriched. H3K4me3 is one of the least abundant histone modifications. It is highly enriched at active promoters near transcription start sites (TSS) and positively correlated with transcription.
+> >    
+> >    For H3K27me3, the coverage is more homogeneous. A gene is a broad domain of H3K27me3 enrichment across its body of genes corresponds to a gene with a transcription inhibited by H3K27me3. We can also identified some "bivalent" genes: gene with a peak around the TSS for H3K27me3(e.g. region_208 for gene Gpr173) but also H3K4me3. We also observe some H3K27me3-depleted regions sharply demarcated, with boundaries coinciding with gene borders (e.g. Kdm5c). This is a chromatin signature reminiscent of genes that escape XCI.
+> >    
+> >    To reproduce, run **bamCoverage** {% icon tool %}, **IGV** {% icon tool %} and **MACS2 callpeak** {% icon tool %} outputs.
+> {: .solution }
+{: .question}
 
 # Conclusion
 {:.no_toc}
 
-![Summary of the different steps of the tutorial and the generated files](../../images/estrogen-receptor-binding-site-identification/tutorial-scheme.png "Different steps of the tutorials with the generated files")
+Along this tutorial, we learn how to extract peaks and coverage information from raw data of ChIP experiments:
 
+![Workflow to extract peaks and coverage information from raw data of ChIP experiments](../../images/formation_of_super-structures_on_xi/tutorial-scheme.png "Workflow to extract peaks and coverage information from raw data of ChIP experiments")
 
-# Additional exercise (if you have finished all above)
-
-## Plotting heatmap from multiple samples with clustering
-
-> ### {% icon hands_on %} Hands-on: plotting multiple samples
-> The goal is to visualize more than a sample on the heatmap. To this end, we ask you to generate a matrix which includes 2 different samples (H3K4me3, CTCF). Since You have already generated the required files for the H3K4me3 sample, let's make them only for the CTCF sample.
-> 1. Run **bamCompare** {% icon tool %} with  same parameters as above, for the first replicate of CTCF:
->   - "First BAM file (e.g. treated sample)" to `wt_CTCF_rep1.bam`
->   - "Second BAM file (e.g. control sample)" to `wt_input_rep1.bam`
->   - save as a `bigwig` file.
->
-> 2. Perform peak calling again using treatment file : `wt_CTCF_rep1.bam` and control `wt_input_rep1.bam`, using macs2 parameters same as above.
->
-> 3. Concatenate the MACS2 outputs (summits in BED) from `CTCF` and `H3K4me3` using `Operate on Genomic Intervals` --> `Concatenate`
->
-> 4. Sort the output `Operate on Genomic Intervals` --> `sortBED`
->
-> 5. Merge the overlapping intervals using `Operate on Genomic Intervals` --> `MergeBED`
->
-> 6. **computeMatrix** {% icon tool %} with the same parameters but:
->    - Regions to plot : select the merged bed from above
->    - Score file: bigwig files from bamCompare for both H3K4me3 and CTCF samples.
->    - Output option : `reference-point`
->    - The reference point for the plotting: `center of region`
->    - Distance upstream of the start site of the regions defined in the region file : `3000`
->    - Distance downstream of the end site of the given regions: `3000`
->
->    With this option, it considers only those genomic positions before (downstream) and/or after (upstream) a reference point (*e.g.* TSS, which corresponds to the annotated gene start in our case)
->
-> 7. **plotHeatmap** {% icon tool %} with
->    - "Matrix file from the computeMatrix tool" to the generated matrix
->    - "Show advanced options" to `yes`
->    - Choose the right label for `Reference point label`.
->    - "Did you compute the matrix with more than one groups of regions?" to `No, I used only one group`
->    - "Clustering algorithm" to `Kmeans clustering`
->    - "Number of clusters to compute" to `2`
-> Inspect the output
->
-{: .hands_on}
+This information can be then related to the biology to answer the original question. We tried then to relate the observed differences of peak and read coverage between H3K27me3 and H3K4me3 to the known biology. We could go even further in the analysis to reproduce the results of the original paper (e.g. by looking at the bivalent genes, identifying the differences between Xa and Xi).
