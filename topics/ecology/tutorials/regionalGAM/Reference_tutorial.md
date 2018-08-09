@@ -217,7 +217,7 @@ This will allow you to create a file showing the abundance per year of a chosen 
 
 The expected temporal trend allows you to have an overview of the evolution of a species in a certain type of environment in the futur.
 
-![Expected temporal trend](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Expected%20temporal%20trend.png "This shows the expected evolution of Ardea alba")
+![Expected temporal trend](https://raw.githubusercontent.com/Claraurf/training-material/ecology/topics/ecology/tutorials/regionalGAM/Images/Expected%20temporal%20trend.png "This shows the expected evolution of Ardea alba")
 
 > ### {% icon hands_on %} Hands-on: Expected temporal trend
 >    > 1. Look for the tool `Expected temporal trend` with the the following parameters: 
