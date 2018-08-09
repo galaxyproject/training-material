@@ -125,8 +125,25 @@ It can sometimes be interesting to have the occurrences of various species repre
 
 > ### {% icon hands_on %} Hands-on: Add various occurrences on a single chart
 
-First of all, you will have to combine the different `outputs` from  each **flight curve** (each of them containing the data on one species) in order to have a single dataset with all the species you wish to appear on your chart. 
+First of all, you will have to combine the different `outputs` from  each **flight curve** (each of them containing the data on one species) in order to have a single dataset with all the species you wish to appear on your chart. If you want to do so, please follow the tip below: 
 
+> ### {% icon tip %} Tip: Creating a file comporting all the data on various species
+>    > 1. Search for the tool `Coller deux jeux de données l'un à côté de l'autre` with the following parameters:
+>    > * "Coller": `the output` from **merger des colonnes** (with the data concerning species 1)
+>    > * "et": `the output` from **merger des colonnes** (with the data concerning species 2)
+>    > * "Délimité par": tabulation 
+
+> ### {% icon comment %} Comment
+❗ Note that you can repeat `Coller deux jeux de données l'un à côté de l'autre` with as many files as you want (each of them concerning a different species). In order to do so you will have to do as explained below:
+>    > * Search for the tool `Coller deux jeux de données l'un à côté de l'autre` with the following parameters:
+>    >    * "Coller": the `output` from **Coller deux jeux de données l'un à côté de l'autre** (with the data concerning species 1 and 2)
+>    >    * "et": `the output` from **merger des colonnes** (with the data concerning species 3)
+>    >    * "Délimité par": tabulation 
+>    > * Repeat `Coller deux jeux de données l'un à côté de l'autre` with `the output` from **Coller deux jeux de données l'un à côté de l'autre** (with the data concerning species 1, 2 and 3) and with `the output` from **merger des colonnes** (with the data concerning species 4)
+>   > {: .comment}
+
+> ### {% icon tip %} Tip: Generating a multispecies chart
+>    > Click on the last `output` from **Coller deux jeux de données l'un à côté de l'autre**
 >    > 1. Click on: {% icon tip %} Visualiser  
 >    > 2. Select `Charts`
 >    > 3. Give it a proper name
@@ -135,17 +152,17 @@ First of all, you will have to combine the different `outputs` from  each **flig
 >    > * "Provide a label": `The name of the species 1` 
 >    > * "Pick a series color": Choose a color
 >    > * "Data point labels": `Column corresponding to the name of the species 1` 
->    > * "Values for x-axis": `Column corresponding to the year of the species 1`
+>    > * "Values for x-axis": `Column corresponding to the "week and year" of the species 1`
 >    > * "Values for y-axis": `Column corresponding to nm of the species 1`
 >    > 6. Insert data series:
 >    > * "Provide a label": `The name of the species 2` 
 >    > * "Pick a series color": Choose a different color
 >    > * "Data point labels": `Column corresponding to the name of the species 2` 
->    > * "Values for x-axis": `Column corresponding to the year of the species 2`
+>    > * "Values for x-axis": `Column corresponding to the "week and year" of the species 2`
 >    > * "Values for y-axis": `Column corresponding to nm of the species 2`
->    > 7. You may repeat "Insert data series" as many times as needed depending on the number of different species you want represent
+>    > 7. You may repeat "Insert data series" as many times as needed depending on the number of different species you want to represent on your chart.
 >    > 8. Click on {% icon tip %} `Customize`
->    > * "X-Axis label": `Year`  
+>    > * "X-Axis label": `Week and Year`  
 >    > * Y-Axis label: `nm values`
 >    > * "Use multi-panels": click on `No`(or you will have separated charts, one for each species)
 >    > 9. Click on {% icon tip %} `Visualize`
