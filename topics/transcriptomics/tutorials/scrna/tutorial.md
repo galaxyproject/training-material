@@ -373,14 +373,60 @@ The fields of the BAM file can be better explained at section 1.4 of [the SAM sp
 > > ### {% icon solution %} Solution
 >
 > The read aligns to the reverse strand
+
  * `chr1` `2030`: The position and base-pair of alignment of the first base of the sequence.
- * We next have a series of quality fields, as well as the `sequence
+ * We next have a series of quality fields, as well as the `sequence` and `sequence_quality`
+ * `NH`: The number of hits for  this read. If it is multiply mapped, then the number of multiples will be shown (here `2`)
+ * `HI`: Whic *r*
+h number this particular read is in the series of (potentially) multi-mapped reads (here `1`, not neccesarily meaning the first or 'better' )
+ * `nM`: The number of mismatches in the alignment of this read to the reference (here `2`)
+
+This fields will be important later when we wish to filter our BAM for good quality reads.
+
+Notice that we are missing one crucial piece of information in our BAM file: the name of the gene.
+Once we have the name of the gene for a specific read, we can tally how many of those reads fall into that gene and generate a count matrix.
+
+Unfortunately, *`STAR`* can only annotate and count reads at the gene-level and not the gene-cell level, i.e. if 2 different cells have reads of 5 and 6 respectively at GeneA, STAR will simply say that there are 11 reads at GeneA without regard to the cells.
+
+## Counting with FeatureCounts
+
+FeatureCounts is a tool which answers the simple question: "How many reads bisect GeneX?"
+It is more qualitative that STAR however, since it is capable of counting not just at the Read level, but at the UMI level, such that 10 duplicate reads at GeneA will be counted only once. It also has the added benefit of being able to count at the individual cell level, providing a mechanism to produce our count matrices. 
+
+> ### {% icon Hands-on %} Quantification assist via FeatureCounts
+> 
+> Let us annotate our BAM file with desired gene tags.
+> 
+> 1. Select **Featurecounts** {%icon tool %} with the following parameters:
+>  - *"Alignment File"*: The output BAM/Alignment file from FeatureCounts
+>  - *"Specify strand information"*:`Unstranded`
+>  - *"Gene annotation file"* : Select our GTF file from early in our history
+>  - *"Advanced Options"* → *"Annotates the alignment file with 'XS:Z:'-tags to described per read or read-pair the corresponding assigned feature(s)"*:`Yes`
+>
+> 2. Once green, click on the "Feature Counts: Alignment File" eye symbol.
+>  - Here we can see now that we have an extra `XT:Z` tag with the name of our gene appended.
+>  - This tag will be the basis of the row names in our count matrix.
 
 
+## Counting Genes / Cell
 
-In a sense, we can say that the forward read is effectively not useful at all for mapping, it only holds information as to where each read came from via the barcodes. How can we extract this information and 
+With all the relevant data now in our BAM file, we can actually perform the counting via `UMI-tools count`.
 
+> ### {% icon Hands-on %} Final Quantification
+> 
+> Here we will 
+> 
+> 1. Select **Featurecounts** {%icon tool %} with the following parameters:
+>  - *"Alignment File"*: The output BAM/Alignment file from FeatureCounts
+>  - *"Specify strand information"*:`Unstranded`
+>  - *"Gene annotation file"* : Select our GTF file from early in our history
+>  - *"Advanced Options"* → *"Annotates the alignment file with 'XS:Z:'-tags to described per read or read-pair the corresponding assigned feature(s)"*:`Yes`
+>
+> 2. Once green, click on the "Feature Counts: Alignment File" eye symbol.
+>  - Here we can see now that we have an extra `XT:Z` tag with the name of our gene appended.
+>  - This tag will be the basis of the row names in our count matrix.
 
+ 
 
 We can decode this for each of our 4 reads
 
@@ -402,103 +448,6 @@ When
 
 FASTQ data output from scRNA sequencers are batch-specific, meaning that sequences from individual cells are not demultiplexed into individual FASTQ files, but are
 
-Introduction about this part
-
-## Subpart 1
-
-Short introduction about this subpart.
-
-<!--
-{% icon hands_on %} will render the hands_on icon as specified in
-_config.yml in the root of this repository.
--->
-
-> ### {% icon hands_on %} Hands-on: Data upload and organization
->
-> 1. Step1
-> 2. Step2
->
->    > ### {% icon comment %} Comments
->    > A comment
->    {: .comment}
->
->    > ### {% icon tip %}Tip: A tip
->    >
->    > * Step1
->    > * Step2
->    {: .tip}
-{: .hands_on}
-
-## Subpart 2
-
-Short introduction about this subpart.
-
-> ### {% icon hands_on %} Hands-on: Data upload
->
-> 1. Step1
-> 2. Step2
->
->    > ### {% icon question %} Question
->    >
->    > Question?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > Answer to question
->    > >
->    > {: .solution}
->    >
->    {: .question}
-{: .hands_on}
-
-Some blabla
-> ### {% icon hands_on %} Hands-on: Data upload
->
-> 1. Step1
-> 2. **My Tool** {% icon tool %} with the following parameters
->   - *"param1"*: the file `myfile`
->   - *"param2"*: `42`
->   - *"param3"*: `Yes`
->
-> 3. **My Tool** {% icon tool %} with the following parameters
->   - {% icon param-text %} *"My text parameter"*: `my value`
->   - {% icon param-file %} *"My input file"*: `my file`
->   - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
->   - {% icon param-select %} *"My select menu"*: `my choice`
->   - {% icon param-check %} *"My check box"*: `yes`
->
->    > ### {% icon question %} Questions
->    >
->    > 1. Question1?
->    > 2. Question2?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > 1. Answer for question1
->    > > 2. Answer for question2
->    > >
->    > {: .solution}
->    >
->    {: .question}
->
-> 3. Step3
-{: .hands_on}
-
-# Part 2
-
-Short introduction about this subpart.
-
-> ### {% icon comment %} Comment
->
-> Do you want to learn more about the principles behind mapping? Follow our [training](../../NGS-mapping)
-{: .comment}
-
-
-> ### {% icon details %} More details on the ....
->
-> Add more details in Markdown. By default the box is collapsed. And is expanded when clicked
->
-{: .details}
 
 # Conclusion
 {:.no_toc}
