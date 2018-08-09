@@ -118,7 +118,7 @@ Now you have a file containing all the data on the species of interest. The main
 This step will allow you the show the phenology of a species and then to create charts representing it. In the second part, you will learn that it is possible to show the phenology of various species on a single chart allowing to compare them and analyse them more easily. 
 
 
-> 1. Search for the tool `flight curve` with the following parameters: 
+> 1. Search for the tool `flight curve` and execute it specifying the following parameters: 
 > * "Fichier de comptage": `output` from **tabular to CSV**.
 >
 > 🔹 Based on the `output` from **flight curve**, you can create a line chart which shows the occurence of the species through the years on a very visual material 
