@@ -170,7 +170,7 @@ First of all, you have to know how many years are taken into account in your dat
 
 With the `output` from **Merger des colonnes ensemble** you can now generate a new chart which will have a x-axis corresponding to your column `Column "week""year"`.
 >    > ### {% icon tip %} Visualiser
->    > 1. With the  `output` from **flight curve**.
+>    > 1. With the  `output` from **Merger des colonnes ensemble**.
 >    > 2. Select `Charts`
 >    > 3. Give it a proper name
 >    > 4. Select a visualization: "line chart (NVD 3) 
