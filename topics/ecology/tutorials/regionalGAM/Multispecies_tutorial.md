@@ -117,15 +117,13 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 ❗❗ Now that you have done the steps specific to a multispecies dataset, you will be redirected to the reference tutorial on regionalGAM. In order to go further on regionalGAM analysis, start the tutorial from the second step. To do so, you can click here:
 [Step 2 - Displaying the occurrence of a chosen species through the years of the reference tutorial on RegionalGAM](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md#displayingtheoccurrenceofthespecies).
 
-If you want to access the chart on an interactive interface, you can click on the following link: [Chart on Galaxy](http://openstack-192-168-100-19.genouest.org/plugins/visualizations/charts/saved?id=d413a19dec13d11e)
-
 # Step 3:  <a name="variousoccurrencesonasinglechartexplanations"></a>Creating a chart showing more than one occurrence 
 
 It can sometimes be interesting to have the occurrences of various species reprensented on the same chart.
-
+The example below shows you what a unispecies phenology chart looks like. 
 ![Phenology chart](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20Pyronia%20tithonus.png?raw=true "This shows the occurrence of Pyronia tithonus"). 
 
-This shows what a unispecies phenology chart looks like. 
+If you want to access the chart on an interactive interface, you can click on the following link: [Chart on Galaxy](http://openstack-192-168-100-19.genouest.org/plugins/visualizations/charts/saved?id=d413a19dec13d11e).
 
 > ### {% icon hands_on %} Hands-on: Add various occurrences on a single chart
 
