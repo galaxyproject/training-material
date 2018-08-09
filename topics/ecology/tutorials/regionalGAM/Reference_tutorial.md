@@ -118,7 +118,7 @@ Now you have a file containing all the data on the species of interest. The main
 This step will allow you the show the phenology of a species and then to create charts representing it. In the second part, you will learn that it is possible to show the phenology of various species on a single chart allowing to compare them and analyse them more easily. 
 
 
-> 1. Search for the tool `flight curve` with the following parameters: 
+> 1. Search for the tool `flight curve` and execute it specifying the following parameters: 
 > * "Fichier de comptage": `output` from **tabular to CSV**.
 >
 > 🔹 Based on the `output` from **flight curve**, you can create a line chart which shows the occurence of the species through the years on a very visual material 
@@ -156,12 +156,12 @@ First of all, you have to know how many years are taken into account in your dat
 >    > * "Délimité par": `Tabulation`.
 >    > * "Comment les résultats doivent t'ils être triés ?": `Par les valeurs comptées`.
 >    > 2. Inspect the file by clicking on the `eye` icon to check how many years are taken into account.
->    > 3. Search for the tool`Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières` with the following parmeters:
+>    > 3. Search for the tool`Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières` with the following parameters:
 >    > * "Selectionner les cellules à partir de": `output` from **flight curve**.
 >    > * "la colonne": `Column 2` (corresponding to the one headed with `YEAR`)
 >    > * Click on `Insert check`:
->    >   * "Trouver l'expression suivante": `^2`
->    >   * "Remplacement": `-2` 
+>    >   * "Trouver l'expression suivante": `(20[0-9][0-9])`
+>    >   * "Remplacement": `-\1` 
 >    > 5. Inspect the file by clicking on the `eye` icon to check if all the years are now written with a "-" before the digits. 
 >    > 6. Search for the tool `Merger des colonnes ensemble` with the following parameters:
 >    > * "Selection du jeu de données": `output` from the last **Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières**.
@@ -170,7 +170,7 @@ First of all, you have to know how many years are taken into account in your dat
 
 With the `output` from **Merger des colonnes ensemble** you can now generate a new chart which will have a x-axis corresponding to your column `Column "week""year"`.
 >    > ### {% icon tip %} Visualiser
->    > 1. With the  `output` from **flight curve**.
+>    > 1. With the  `output` from **Merger des colonnes ensemble**.
 >    > 2. Select `Charts`
 >    > 3. Give it a proper name
 >    > 4. Select a visualization: "line chart (NVD 3) 
