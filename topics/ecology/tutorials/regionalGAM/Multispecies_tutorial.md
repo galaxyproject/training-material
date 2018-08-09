@@ -121,7 +121,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 
 It can sometimes be interesting to have the occurrences of various species reprensented on the same chart.
 The example below shows you what a unispecies phenology chart looks like. 
-![Phenology chart](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20Pyronia%20tithonus.png?raw=true "This shows the occurrence of Pyronia tithonus"). 
+![Phenology chart](https://raw.githubusercontent.com/Claraurf/training-material/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20chart%20.png "This shows the occurrence of Pyronia tithonus"). 
 
 If you want to access the chart on an interactive interface, you can click on the following link: [Chart on Galaxy](http://openstack-192-168-100-19.genouest.org/plugins/visualizations/charts/saved?id=d413a19dec13d11e).
 
