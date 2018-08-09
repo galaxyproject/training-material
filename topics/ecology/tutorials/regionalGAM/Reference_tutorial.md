@@ -160,9 +160,8 @@ First of all, you have to know how many years are taken into account in your dat
 >    > * "Selectionner les cellules à partir de": `output` from **flight curve**.
 >    > * "la colonne": `Column 2` (corresponding to the one headed with `YEAR`)
 >    > * Click on `Insert check`:
->    >   * "Trouver l'expression suivante": `(2003)`
->    >   * "Remplacement": `-2003` 
->    > 4. Repeat `Insert check` with as many years as your dataset contains (for this specific dataset it is 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, and 2012).
+>    >   * "Trouver l'expression suivante": `^2`
+>    >   * "Remplacement": `-2` 
 >    > 5. Inspect the file by clicking on the `eye` icon to check if all the years are now written with a "-" before the digits. 
 >    > 6. Search for the tool `Merger des colonnes ensemble` with the following parameters:
 >    > * "Selection du jeu de données": `output` from the last **Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières**.
