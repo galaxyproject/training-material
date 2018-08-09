@@ -125,6 +125,8 @@ It can sometimes be interesting to have the occurrences of various species repre
 
 > ### {% icon hands_on %} Hands-on: Add various occurrences on a single chart
 
+First of all, you will have to combine the different `outputs` from  each **flight curve** (each of them containing the data on one species) in order to have a single dataset with all the species you wish to appear on your chart. 
+
 >    > 1. Click on: {% icon tip %} Visualiser  
 >    > 2. Select `Charts`
 >    > 3. Give it a proper name
