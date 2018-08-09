@@ -141,7 +141,7 @@ First of all, you will have to combine the different `outputs` from  each **flig
 >    >    * "Coller": the `output` from **Coller deux jeux de données l'un à côté de l'autre** (with the dataset concerning species 1 and 2)
 >    >    * "et": `the output` from **merger des colonnes** (with the dataset concerning species 3)
 >    >    * "Délimité par": tabulation 
->    > * Repeat `Coller deux jeux de données l'un à côté de l'autre` with `the output` from **Coller deux jeux de données l'un à côté de l'autre** (with the data concerning species 1, 2 and 3) and with `the output` from **merger des colonnes** (with the dataset concerning species 4)
+>    > * Repeat `Coller deux jeux de données l'un à côté de l'autre` with `the output` from **Coller deux jeux de données l'un à côté de l'autre** (with the data concerning species 1, 2 and 3) and with `the output` from **merger des colonnes** (with the dataset concerning species 4).
 >   > {: .comment}
 
 > ### {% icon tip %} Tip: Generating a multispecies chart
