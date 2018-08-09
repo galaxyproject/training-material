@@ -156,7 +156,7 @@ First of all, you have to know how many years are taken into account in your dat
 >    > * "Délimité par": `Tabulation`.
 >    > * "Comment les résultats doivent t'ils être triés ?": `Par les valeurs comptées`.
 >    > 2. Inspect the file by clicking on the `eye` icon to check how many years are taken into account.
->    > 3. Search for the tool`Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières` with the following parmeters:
+>    > 3. Search for the tool`Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières` with the following parameters:
 >    > * "Selectionner les cellules à partir de": `output` from **flight curve**.
 >    > * "la colonne": `Column 2` (corresponding to the one headed with `YEAR`)
 >    > * Click on `Insert check`:
