@@ -115,8 +115,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 {: .hands_on}
 
 ❗❗ Now that you have done the steps specific to a multispecies dataset, you will be redirected to the reference tutorial on regionalGAM. In order to go further on regionalGAM analysis, start the tutorial from the second step. To do so, you can click here:
-[Step 2 - Displaying the occurrence of a chosen species through the years of the reference tutorial on RegionalGAM](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md#displayingtheoccurrenceofthespecies) 
-This shows you how an unispecies chart looks like.
+[Step 2 - Displaying the occurrence of a chosen species through the years of the reference tutorial on RegionalGAM](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md#displayingtheoccurrenceofthespecies).
 
 If you want to access the chart on an interactive interface, you can click on the following link: [Chart on Galaxy](http://openstack-192-168-100-19.genouest.org/plugins/visualizations/charts/saved?id=d413a19dec13d11e)
 
@@ -124,7 +123,9 @@ If you want to access the chart on an interactive interface, you can click on th
 
 It can sometimes be interesting to have the occurrences of various species reprensented on the same chart.
 
-![Phenology chart](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20Pyronia%20tithonus.png?raw=true "This shows the occurrence of Pyronia tithonus")
+![Phenology chart](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20Pyronia%20tithonus.png?raw=true "This shows the occurrence of Pyronia tithonus"). 
+
+This shows what a unispecies phenology chart looks like. 
 
 > ### {% icon hands_on %} Hands-on: Add various occurrences on a single chart
 
