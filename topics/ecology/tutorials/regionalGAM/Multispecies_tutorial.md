@@ -129,17 +129,17 @@ First of all, you will have to combine the different `outputs` from  each **flig
 
 > ### {% icon tip %} Tip: Creating a file comporting all the data on various species
 >    > 1. Search for the tool `Coller deux jeux de données l'un à côté de l'autre` with the following parameters:
->    > * "Coller": `the output` from **merger des colonnes** (with the data concerning species 1)
->    > * "et": `the output` from **merger des colonnes** (with the data concerning species 2)
+>    > * "Coller": `the output` from **merger des colonnes** (with the dataset concerning species 1)
+>    > * "et": `the output` from **merger des colonnes** (with the dataset concerning species 2)
 >    > * "Délimité par": tabulation 
 
 > ### {% icon comment %} Comment
 ❗ Note that you can repeat `Coller deux jeux de données l'un à côté de l'autre` with as many files as you want (each of them concerning a different species). In order to do so you will have to do as explained below:
 >    > * Search for the tool `Coller deux jeux de données l'un à côté de l'autre` with the following parameters:
->    >    * "Coller": the `output` from **Coller deux jeux de données l'un à côté de l'autre** (with the data concerning species 1 and 2)
->    >    * "et": `the output` from **merger des colonnes** (with the data concerning species 3)
+>    >    * "Coller": the `output` from **Coller deux jeux de données l'un à côté de l'autre** (with the dataset concerning species 1 and 2)
+>    >    * "et": `the output` from **merger des colonnes** (with the dataset concerning species 3)
 >    >    * "Délimité par": tabulation 
->    > * Repeat `Coller deux jeux de données l'un à côté de l'autre` with `the output` from **Coller deux jeux de données l'un à côté de l'autre** (with the data concerning species 1, 2 and 3) and with `the output` from **merger des colonnes** (with the data concerning species 4)
+>    > * Repeat `Coller deux jeux de données l'un à côté de l'autre` with `the output` from **Coller deux jeux de données l'un à côté de l'autre** (with the data concerning species 1, 2 and 3) and with `the output` from **merger des colonnes** (with the dataset concerning species 4)
 >   > {: .comment}
 
 > ### {% icon tip %} Tip: Generating a multispecies chart
