@@ -9,7 +9,7 @@ tutorial_name: species distribution modeling
 
 Species Distribution Modeling (SDM) can help understand the distribution of a species depending on its environment. It can also attempt to quantify the impact of climate change on the species habitat, direct conservation efforts and predict invasive species distributions. This is done by associating data of species occurences (observations) with a set of environmental data (such as temperature and precipitation).
 
-The goal of this tutorial is to model a theorical ecological niche and predict species distribution in a future climate scneario by using SDM with the Wallace interactive environment on Galaxy. We'll use the data occurrences of US *Chrysemys Picta* ([Painted turtle](https://fr.wikipedia.org/wiki/Tortue_peinte)) from the North America region.
+The goal of this tutorial is to model a theorical ecological niche and predict species distribution in a future climate scneario by using SDM with the Wallace interactive environment on Galaxy. We'll use the data occurrences of US *Chrysemys picta* ([Painted turtle](https://fr.wikipedia.org/wiki/Tortue_peinte)) from the North America region.
 
 # Step 1: Loading a dataset
 
@@ -46,7 +46,7 @@ Then, as we want to keep only occurence records from US, we will use a tool to f
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>Using the "Filtrer des données sur une colonne en utilisant des expressions simples", you can enter the following condition ```c4=='United States'```. You should specify the following field as 1 in order to skip the first line (it is a header line).</li>
+>    >    <li>Using the "Filtrer des données sur une colonne en utilisant des expressions simples", you can enter the following condition ```c4=='US'```. You should specify the following field as 1 in order to skip the first line (it is a header line).</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -147,7 +147,7 @@ Partitioning data allows to divide a data set into subsets (ie bins), then make 
 
 > For both of these technics the number of occurrences into each bin may vary.
 
-flag : `Use spatial partition` on these data choose `Checkerboard 2 (k=4)` and an aggregation factor of `6`
+`Use spatial partition` on these data choose `Checkerboard 2 (k=4)` and an aggregation factor of `6`
 
 
 ## Build and Evaluate Niche Model
