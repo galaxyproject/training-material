@@ -28,7 +28,7 @@ The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a stud
 
 # Finding Binding Motifs for RBFOX2
 
-RBFOX2 is a relevant development and tissue-specific splicing factor with a very conserved motif: `TGCATG`. We therefore want to process and validate the data to find this conserved motif and in the process identify the function of RBFOX2 as well as describe the function of the targeted RNA.
+RBFOX2 is a relevant development and tissue-specific splicing factor with a very conserved motif `TGCATG`, binding mainly in introns. We therefore want to process and validate the data to find this conserved motif and in the process identify the function of RBFOX2 as well as describe the function of the targeted RNA.
 
 ## Step 1: Get data
 
@@ -87,7 +87,7 @@ As for any NGS data analysis, CLIP-seq data must be quality controlled before be
 >    > To do this, first select the "Multiple datasets" icon (two stacked pages) under the "Input FASTQ file" heading in the **FASTQC** Tool Form, then shift+click to select multiple FASTQ files.
 >    {: .tip}
 >
->   Check the **Sequence Duplication Levels** plot.   
+> 2. Check the **Sequence Duplication Levels** plot.   
 >
 >   ![fastqbefore](../../images/clipseq_duplication_level_1.png "Sequence duplication levels <b>before</b> de-duplication.")
 >
@@ -105,7 +105,7 @@ As for any NGS data analysis, CLIP-seq data must be quality controlled before be
 >    {: .question}
 {: .hands_on}
 
-# Step 2: Removal of Adapters, Barcodes and Unique Molecular Identifiers (UMIs)
+# Step 3: Removal of Adapters, Barcodes and Unique Molecular Identifiers (UMIs)
 
 It is often necessary to remove adapter and barcodes sequences as well as UMIs. <br/>
 **Adapters** (or primers) are needed for PCR amplification and sequencing in a standard NGS protocol. Unfortunately, it might happen during the sequencing that the machine does not stop at the read end and sequences through the adapter as well. That is why, we need to check if our reads contain those sequences which we are then cutting out.<br/>
@@ -119,9 +119,9 @@ In this task we are going to remove two 3' and two 5' adapters from the reads (N
 > ### {% icon hands_on %} Hands-on: Adapter Removal
 >
 > 1. **Cutadapt (v. 1.6)** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Fastq file to trim"*: `R1`
+>    - {% icon param-file %} *"Fastq file to trim"*: `fastq R1`
 >    - *"Track Paired Reads"*: `Yes`
->    - {% icon param-file %} *"Paired fastq file (NOT trimmed)"*: `R2`
+>    - {% icon param-file %} *"Paired fastq file (NOT trimmed)"*: `fastq R2`
 >    - In *"3' Adapters"*:
 >        - Click on *"Insert 3' Adapters"*:
 >        - In *"1: 3' Adapters"*:
@@ -140,7 +140,7 @@ In this task we are going to remove two 3' and two 5' adapters from the reads (N
 >        - In *"2: 5' (Front) Adapters"*:
 >            - *"Source"*: `Enter custom sequence`
 >                - *"Enter custom 5' adapter sequence"*: `CTTCCGATCTTGGTCCT`
->    - *"Minimum overlap length"*: `"5"`
+>    - *"Minimum overlap length"*: `5`
 >    - *"Output filtering options"*: `Set Filters`
 >        - *"Minimum length"*: `10`
 >    - *"Additional output options"*: `Default`
@@ -153,9 +153,9 @@ In this task we are going to remove two 3' and two 5' adapters from the reads (N
 > {: .comment}
 >
 > 1. **Cutadapt (v. 1.6)** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Fastq file to trim"*: `R2`
+>    - {% icon param-file %} *"Fastq file to trim"*: `fastq R2` (output from the **first** **Cutadapt** call {% icon tool %})
 >    - *"Track Paired Reads"*: `Yes`
->    - {% icon param-file %} *"Paired fastq file (NOT trimmed)"*: `R1`
+>    - {% icon param-file %} *"Paired fastq file (NOT trimmed)"*: `fastq R1` (output from the **first** **Cutadapt** call {% icon tool %})
 >    - In *"3' Adapters"*:
 >        - Click on *"Insert 3' Adapters"*:
 >        - In *"1: 3' Adapters"*:
@@ -174,7 +174,7 @@ In this task we are going to remove two 3' and two 5' adapters from the reads (N
 >        - In *"2: 5' (Front) Adapters"*:
 >            - *"Source"*: `Enter custom sequence`
 >                - *"Enter custom 5' adapter sequence"*: `CTTCCGATCTTGGTCCT`
->    - *"Minimum overlap length"*: `"5"`
+>    - *"Minimum overlap length"*: `5`
 >    - *"Output filtering options"*: `Set Filters`
 >        - *"Minimum length"*: `10`
 >    - *"Additional output options"*: `Default`
@@ -195,12 +195,12 @@ In this task we are going to remove the 5 bp UMI in the 5' end of the second rea
 >
 > 1. **UMI-tools extract** {% icon tool %} with the following parameters:
 >    - *"Library type"*: `Paired-end`
->     - {% icon param-file %} *"Reads in FASTQ format"*: `R1 from Cutadapt output`
->     - {% icon param-file %} *"Reads in FASTQ format"*: `R2 from Cutadapt output`
+>     - {% icon param-file %} *"Reads in FASTQ format"*: `fastq R1` (output from the **second** **Cutadapt** call {% icon tool %})
+>     - {% icon param-file %} *"Reads in FASTQ format"*: `fastq R2`  (output from the **second** **Cutadapt** call {% icon tool %})
 >     - *"Barcode on both reads?"*: `Barcode on first read only`
 >    - *"Use Known Barcodes?"*: `No`
 >    - *"Method to extract barcodes"*: `String`
->    - *"Barcode pattern for first read"*: `"NNNNN"`
+>    - *"Barcode pattern for first read"*: `NNNNN`
 >    - *"Is the barcode at the 5' end?"*: `Yes`
 >    - *"Output log?"*: `Yes`
 >    - *"Enable quality filter?"*: `No`
@@ -212,7 +212,7 @@ In this task we are going to remove the 5 bp UMI in the 5' end of the second rea
 >
 {: .hands_on}
 
-# Step 3: Aligning Reads to a Reference Genome
+# Step 4: Aligning Reads to a Reference Genome
 
 To determine where DNA fragments originated in the genome, the sequenced reads must be aligned to a reference genome. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way, however, this can take a couple of weeks.
 Nowadays, there are many read alignment programs, `STAR` is one of them that works well with CLIP-Seq data, for more information read  [here](doi:10.1093/bioinformatics/bts635). STAR is able to use genome as well as transcriptome data. This ability is handy, since CLIP-Seq generetas transcriptome data, thus, we have to take RNA processing steps like splicing events into account.
@@ -223,6 +223,8 @@ Nowadays, there are many read alignment programs, `STAR` is one of them that wor
 >
 > 1. **RNA STAR** {% icon tool %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as individual datasets)`
+>     - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, forward reads"*: `fastq R2` (output from **UMI-tools extract** {% icon tool %})
+>     - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, reverse reads"*: `fastq R1` (output from **UMI-tools extract** {% icon tool %})
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >        - *"Reference genome with or without an annotation"*: `use genome reference with builtin gene-model`
 >            - *"Select reference genome"*: `Homo sapiens (hg19+GRCh37.75)`
@@ -233,9 +235,19 @@ Nowadays, there are many read alignment programs, `STAR` is one of them that wor
 >            - *"Use end-to-end read alignments, with no soft-clipping?"*: `Yes`
 >        - *"Would you like to set chimeric alignment parameters?"*: `No`
 >
+>    > ### {% icon comment %} Note: We have used switched R1 and R2 as forward and reverse reads!
+>    >
+>    > We need to do that because the eCLIP read library is organized in a way such that the first mate (R1) is in reverse and the second mate (R2) in forward orientation.
+>    {: .comment}
+>
 >    > ### {% icon comment %} Soft-Clipping vs Hard-Clipping
 >    >
 >    > Clipping is a way to deal with low quality bases during the alignment step. In **Soft-Clipping** the bases at the 5' and 3 end of the read are not part of the alignment. In **Hard-Clipping** the bases at the 5' and 3' end of the read are not part of the alignment **and** will be completely removed from the read sequence in the BAM file.
+>    {: .comment}
+>
+>    > ### {% icon comment %} Do the Same thing for the input control data set.
+>    >
+>    > If you processed the RBFOX2 fastq dataset then do the same thing for input control data set or *vice verca*.
 >    {: .comment}
 >
 {: .hands_on}
@@ -252,813 +264,326 @@ Nowadays, there are many read alignment programs, `STAR` is one of them that wor
 >
 {: .question}
 
-# Step 4: De-Duplication
+# Step 5: De-Duplication
 
-More information on **UMI-tools** can be found [here](10.1101/gr.209601.116).
+Lets return to the UMIs which we extracted in step three. Since we have mapped the reads to our reference genome, we can now identify which reads might be duplicated or not. The `UMI-tools` will help us again in this matter. More information on `UMI-tools` can be found [here](10.1101/gr.209601.116).
 
-## Sub-step with **UMI-tools deduplicate**
+## De-duplication with **UMI-tools deduplicate**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: De-Duplication
 >
 > 1. **UMI-tools deduplicate** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Reads to deduplicate in SAM or BAM format"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
->    - *""*: ``
->    - *"Separator between read id and UMI."*: `"_"`
->    - *"Tag which contains UMI."*: `""`
->    - *"Method used to identify PCR duplicates within reads."*: ``
->    - *"Edit distance threshold"*: `"1"`
+>    - {% icon param-file %} *"Reads to deduplicate in SAM or BAM format"*: `bam` (output of **RNA STAR** {% icon tool %})
+>    - *"extract_umi_method"*: `Read ID`
+>    - *"Separator between read id and UMI."*: `_`
+>    - *"Method used to identify PCR duplicates within reads."*: `Identify clusters based on hamming distance and resolve networks by using the node counts`
+>    - *"Edit distance threshold"*: `1`
 >    - *"BAM is paired end"*: `Yes`
->    - *"Spliced reads are unique"*: `Yes`
->    - *"Soft clip threshold"*: `"4"`
->    - *"Use the read length as as a criterion when deduping"*: `Yes`
->    - *"Consider all alignments to a single contig together"*: `Yes`
->    - *"Only consider a random selection of the reads"*: `"1.0"`
->    - *"Only consider a single chromosome"*: `Yes`
->    - *"Deduplicate per contig"*: `Yes`
->    - *"Deduplicate per gene"*: `Yes`
->    - *"Deduplicate by this gene tag"*: `""`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
+>    > ### {% icon comment %} What is the purpose of the method we have chosen for the de-duplication?
+>    > `UMI-tools deduplication` has several methods. The method we have picked is called the  **adjacency** method. For detailed information have a look [here](10.1101/gr.209601.116). For a brief explanation: the method fuses reads together when they have the same coordinates and the same UMI. However, sequencing errors can occur in the UMI. Thus, in the **adjacency** method we fuse also UMIs that differ in a maximal number of characters and where we identify a lot of copies, i.e., the method creates clusters of nodes, a node for each individual UMI, and fuses these nodes based on the hamming distance and read counts.
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+>    > ### {% icon comment %} Do the Same thing for the input control data set.
+>    >
+>    > If you processed the RBFOX2 bam file then do the same thing for the input control bam or *vice verca*.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why are we doing the de-duplication after the read mapping?
+> 2. What is the edit distance threshold?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Because we need the coordinates of the reads to see if some reads have the same coordinates and the same UMI which suggests potential read duplicates.
+> > 2. `UMI-tools dedulication` uses the hamming distance between UMIs to detect sequencing errors in the UMIs. A hamming distance of 1 means, that two UMIs are the same if they differ in maximal one character. If two characters are different, then these are two disparate UMIs.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **FastQC**
+## Quality check of the de-duplication with **FastQC**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: De-duplication quality control
 >
 > 1. **FastQC** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Short read data from your current history"*: `output` (output of **UMI-tools deduplicate** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+>    - {% icon param-file %} *"Short read data from your current history"*: `bam` (output of **UMI-tools deduplicate** {% icon tool %})
+> 2. View the **Sequence Duplication Levels** plot.
+> ![fastqafter](../../images/clipseq_duplication_level_2.png "Sequence duplication levels <b>before</b> de-duplication.")
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What can you see, if you compare the duplication levels to our first quality control in step two?
+> 2. Why are the duplication levels still high?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
+> > 1. We have reduced the duplication level.
+> > 2. The duplication levels are still high, because we don't have the full data sets (reads are missing).
 > {: .solution}
 >
 {: .question}
 
-# Step 5: Second Quality Control
+# Step 6: Second Quality Control
 
-## Sub-step with **multiBamSummary**
+In this section we check the quality of our mapped reads and see if our samples are correlated or not. It is actually not really necessary for our data sets, because of the small sample size. However, for bigger analyses it is wise to check if some samples may encompass major quality problems.
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **multiBamSummary** {% icon tool %} with the following parameters:
->    - *"Sample order matters"*: `No`
->    - *"Choose computation mode"*: `Bins`
->    - *"Region of the genome to limit the operation to"*: `""`
->    - *"Show advanced options"*: `no`
->    - *"Save raw counts (coverages) to file"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+## Check the read coverage with **plotFingerprint**
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **plotFingerprint**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Check the read coverage
 >
 > 1. **plotFingerprint** {% icon tool %} with the following parameters:
 >    - *"Sample order matters"*: `No`
->    - *"Region of the genome to limit the operation to"*: `""`
->    - *"Show advanced options"*: `no`
+>    - *"Bam file"*: `both bam files` (output of **UMI-tools deduplicate** {% icon tool %})
+>    - *"Show advanced options"*: `yes`
+>     - *"Bin size in bases"*: `100`
 >    - *"Show advanced output settings"*: `no`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 2. View the output image.
+> ![fingerprint](../../images/clipseq_fingerprint.png "Sequence duplication levels <b>before</b> de-duplication.")
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+>    > 1. What does this graph represent?
+>    > 2. How do (or should) input datasets differ from IP datasets?
+>    > 3. What do you think about the quality of the IP for this experiment?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
+> > 1. It shows us how good the CLIP Signal compared to the control signal is. Now be careful, CLIP-Seq experiments involve either a total RNA control or a negative control with another protein that unspecifically binds RNA (e.g., IgG). An ideal total RNA control (input control) like ours with perfect uniform distribution of reads along the genome/transcriptome (i.e. without enrichments) and infinite sequencing coverage should generate a straighter diagonal line. On the other hand, a very specific and strong CLIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank. Yet, a negative control often has the same sharp slope at the end as a CLIP experiment but often depicts a straighter diagonal line in the beginning like the input control.
+> > 2. We expect that the control (input) has a different more straighter diagonal slope than the CLIP experiment.
+> > 3. Both the CLIP experiment and the control are closely related. IT is maybe wise to check the correlation of the two samples further.
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **plotCorrelation**
+For additional information on how to interpret **plotFingerprint** plots, read the information [here](https://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background).
 
-> ### {% icon hands_on %} Hands-on: Task description
+## Correlation between Samples
+
+We have seen that our input control and our CLIP experiment might be strongly correlated, meaning, that our potential RBFOX2 binding regions are not truly enrichment when comparing to a our control.
+We are therefore going to further check the correlation between our control and CLIP experiment.  
+
+> ### {% icon hands_on %} Hands-on: Assessing correlation between samples
 >
-> 1. **plotCorrelation** {% icon tool %} with the following parameters:
+> 1. **multiBamSummary** {% icon tool %} with the following parameters:
+>    - *"Sample order matters"*: `No`
+>    - *"Bam file"*: `both bam files` (output of **UMI-tools deduplicate** {% icon tool %})
+>    - *"Choose computation mode"*: `Bins`
+>     - *"Bin size in bp"*: `1000`
+>    - *"Show advanced options"*: `no`
+> 2. **plotCorrelation** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Matrix file from the multiBamSummary tool"*: `outFile` (output of **multiBamSummary** {% icon tool %})
->    - *"Correlation method"*: ``
+>    - *"Correlation method"*: `Spearman`
 >    - *"Plotting type"*: `Heatmap`
 >    - *"Skip zeros"*: `Yes`
->    - *"Image file format"*: ``
->    - *"Remove regions with very large counts"*: `Yes`
->    - *"Save the matrix of values underlying the heatmap"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+>    - *"Image file format"*: `png`
+> 3. View the output image.
+> ![correlation](../../images/clipseq_correlation.png "Sequence duplication levels <b>before</b> de-duplication.")
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why do we want to skip zeros in plotCorrelation?
+> 2. What happens if the Spearman correlation method is replaced by the Pearson method?
+> 3. What does the corelation tell you about our data?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
+> > 1. Large areas of zeros would lead to a correlation of these areas. The information we would get out of this computation would be meaningless.
+> > 2. The clusters would be different.
+> > 3. Despite the result of `plotFingerprint`, we see that the correlation between our experiment and control is not nearly as significant as we thought.
 > {: .solution}
 >
 {: .question}
 
-# Step 6: Peakcalling
+# Step 7: Peakcalling
 
-## Sub-step with **PEAKachu**
+Peakcalling is one of the most important steps in the data anaylsis of CLIP-Seq, next to mapping. There exist a variety of peakcallers, each with different underlying assumptions and parameters. It is up to you to find the best suited method and set of parameters, that is why, it is difficult (nearly impossible) to find a generic solution for every data set. We are going to use `PEAKachu` to find possible binding motifs for our data. `PEAKachu` is able to incorporate control data in contrast to other peakcallers like `Piranha`, thus allowing to find binding regions that are significantly enriched in comparison to our control (input) data.
 
-> ### {% icon hands_on %} Hands-on: Task description
+## Peackcalling with **PEAKachu**
+
+> ### {% icon hands_on %} Hands-on: Peakcalling
 >
 > 1. **PEAKachu** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Experiment Libraries"*: `output` (output of **UMI-tools deduplicate** {% icon tool %})
->    - {% icon param-file %} *"Control Libraries"*: `output` (output of **UMI-tools deduplicate** {% icon tool %})
->    - *"Pairwise Replicates"*: `Yes`
+>    - {% icon param-file %} *"Experiment Libraries"*: `bam RBFOX2` (output of **UMI-tools deduplicate** {% icon tool %})
+>    - {% icon param-file %} *"Control Libraries"*: `bam INPUT` (output of **UMI-tools deduplicate** {% icon tool %})
+>    - *"Pairwise Replicates"*: `No`
 >    - *"Paired End"*: `Yes`
 >    - *"Maximum Insert Size"*: `"200"`
->    - *"Features"*: `""`
->    - *"Sub-Features"*: `""`
 >    - *"Select Mode"*: `Adaptive`
 >        - *"Normalisation Method."*: `DESeq2`
 >    - *"Mad Multiplier"*: `"0.0"`
 >    - *"Fold Change Threshold"*: `"2.0"`
 >    - *"Adjusted p-value Threshold"*: `"0.05"`
+> 2. Take a look at the MA plot of **PEAKachu**.
+> ![ma](../../images/clipseq_ma_plot.png "Sequence duplication levels <b>before</b> de-duplication.")
+{: .hands_on}
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
+>    > ### {% icon comment %} Adjusted p-value Threshold
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > P-values are calculated by DESeq2. A low p-value represent a significantly enriched binding region. Since we are doing thousands of independent hypothesis testings, we have to correct for significant p-values that happen just by chance. DESeq2 uses the Benjamini-Hochberg procedure as a correction. For more information read [here](http://www.biostathandbook.com/multiplecomparisons.html).
+>    {: .comment}
+>
+>    > ### {% icon comment %} Fold-Change Threshold
+>    >
+>    > The fold-hange is calculated by DESeq2 and is actually a log2 fold-change, falsely declared as a fold-change on galaxy.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why have we set the log2 fold-change threshold to 2.0?
+> 2. Take a look into the peak output file of PEAKachu. Why aren't there any p-values?
+> 3. Is the log2 fold-change alone a good measurement to validate our peaks. Maybe the MA plot helps you to figure out the question?
+> 4. What does the MA plot tell you?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
+> > 1. Because we want significantly enriched binding regions, we basically search for peaks that are at least four times higher in our CLIP experiment than in our control.
+> > 2. PEAKachu works mainly with replicated data, because DESeq2 calculates only p-values for data sets where the experiment and control have at least two replicates. This feature makes statistically sense, because data sets without replicates are not representative enough to make general assumptions, but for the purpose of demonstration we are going to ignore this fact.
+> > 3. Yes and no. A significant fold-change with high read counts (read coverage) might be enough to validate a peak. However some peaks can also be covered by very few reads and still have a high fold-change, e.g., log2(4/1). It is for you to decide if a fold-change like log2(4/1) is enough evidence that the binding region is significantly enriched.
+> > 4. MA stands for M (log ratio) and A (mean average). It shows you the general trend of the log2 fold-change in dependence of the average mean of the expression rate of the peaks. Points in straight diagonal line symbolize the behavior of the logarithm which is often visible for low expressed peaks, because one read can change the fold-change quite drastically. The blue lines depict the normalization constants. Read dots are significant peaks.
 > {: .solution}
 >
 {: .question}
+
+# Step 8: Peak Analysis
+
+In this last step, we are going to analyze the peaks that we obtained from the previous step. This should give a small glimpse of what someone might be interested in. Therefore we want to answer in this step the following questions:
+1) Which sequential motifs are potentially conserved in our binding regions, i.e., what are potential binding motifs of RBFOX2? 2) Which RNAs does RBFOX2 preferentially bind and what are their biological function?
+
+## Motif detection with **MEME-ChIP**
+
+> ### {% icon hands_on %} Hands-on: Motif detection
+>
+> 1. **Text reformatting** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"File to process"*: `tabular` (output of **PEAKachu** {% icon tool %})
+>    - *"AWK Program"*: `NR>1{\nif ($3 < $4) {\n   print $1,$3,$4,\"clip_peak_\"NR-1,$9,$5;\n}\nelse {\n   print $1,$4,$3,\"clip_peak_\"NR-1,$9,$5;\n}\n}`
+> 2. **SlopBed** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"BED/VCF/GFF file"*: `bed` (output of **Text reformatting** {% icon tool %})
+>    - *"Genome file"*: `hg19_chr_sizes.txt` (file from your history)
+>    - *"Choose what you want to do"*: `Increase the BED/GFF/VCF entry by the same number base pairs in each direction.`
+>        - *"Number of base pairs"*: `20`
+> 3. **Extract Genomic DNA** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Fetch sequences for intervals in"*: `bed` (output of **SlopBed** {% icon tool %})
+>    - *"Interpret features when possible"*: `Yes`
+>    - *"Choose the source for the reference genome"*: `locally cached`
+>        - *"Using reference genome"*: `hg19`
+>    - *"Select output format"*: `fasta`
+> 4. **MEME-ChIP** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Primary sequences"*: `fasta` (output of **Extract Genomic DNA** {% icon tool %})
+>    - *"Sequence alphabet"*: `DNA`
+>    - *"Options Configuration"*: `Advanced`
+>        - *"Limit of sequences to pass to MEME"*: `100`
+>        - *"Should subsampling be random?"*: `Yes`
+>            - *"Seed for the randomized selection of sequences"*: `123`
+>        - *"E-value threshold for including motifs"*: `0.05`
+>        - *"Search given strand only"*: `Yes`
+>        - *"What is the expected motif site distribution?"*: `Zero or one occurances per sequence`
+>        - *"Minimum motif width"*: `5`
+>        - *"Maximum motif width"*: `20`
+>        - *"Maximum number of motifs to find"*: `20`
+>        - *"Stop DREME searching after reaching this E-value threshold"*: `0.05`
+>        - *"Stop DREME searching after finding this many motifs"*: `5`
+>    - *"I certify that I am not using this tool for commercial purposes."*: `Yes`
+> 5. View the **MEME-ChIP** html.
+>
+> ![motif](../../images/clipseq_motif.png "Sequence duplication levels <b>before</b> de-duplication.")
+{: .hands_on}
+>
+>    > ### {% icon comment %} MEME and DREME
+>    >
+>    > **MEME** and **DREME** are two motif finding tools that MEME-ChIP uses. More information about theses tools can be found [here](http://meme-suite.org/).
+>    {: .comment}
+>
+{: .hands_on}
+>
+> ### {% icon question %} Questions
+>
+> 1. What is the purpose of SlopBED?
+> 2. What is the meaning of the E-value?
+> 3. What does the sequence plots in the **MEME-ChIP** html mean?
+> 4. Click on the link under the column **Discovery/​Enrichment Program** for two of the motifs one from **MEME** and one from **DREME**. What is the site-count for the most significant motif? How many sequences have we checked for **MEME** and for **DREME**? What is the fraction of sequences that covered that motif? (MEME-ChIP version 4.11.2)
+> 5. Have we found the motif `TGCATG`?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. **PEAKachu** might underestimate the length of the binding regions, because the actually binding concentrates on the crosslinking site that is one nucleotide long. Thus, we extend the peaks from **PEAKachu** by 20 bp at each site. A true conserved binding motif will not be affected by it, if we make the region to wide.
+> > 2. The E-value represents the expected number of times we would find our sequence motif in a database (peak file), just by chance. This means, that a small E-value correspond to a very significant motif, because the expected number we would find that motif in our peakfile just by chance is very low. Other sequences like repeats will have a high E-value on the other hand.  
+> > 3. The x-axis of the sequence plots represents the nucleotide position of the motif. The y-axis stands for the total information (uncertainty) of each position and thus stands for the probability that the nucleotide at a certain position is the specific letter (for DNA: T,C,G,A). Bigger letters stand for a higher probability. For more information read [here](https://en.wikipedia.org/wiki/Sequence_logo).
+> > 4. For the result with MEME-ChIP version 4.11.2. **MEME** site count: 37, total sequences: 100, fraction: 37%. **DREME** site count: 103, total sequences: 247, fraction: 41.7%.
+> > 5. Yes.
+> {: .solution}
+>
+{: .question}
+
+## Functional analysis with **RNA Centric Annotation System**
+
+> ### {% icon hands_on %} Hands-on: Functional analysis
+>
+> 1. **RNA Centric Annotation System (v. 1.1.1)** {% icon tool %} with the following parameters:
+>    - *"Genome Version"*: `hg19`
+>    - {% icon param-file %} *"Target regions in BED format"*: `bed` (output of **SlopBed** {% icon tool %})
+>    - {% icon param-file %} *"Reference annotation in ENSEMBL GTF format"*: `Homo_sapiens.GRCh37.74.gtf` (file from your history)
+>    - *"Run annotation."*: `Yes`
+>    - *"Run GO term enrichment"*: `Yes`
+>    - *"Run gene set enrichment"*: `No`
+>    - *"Run motif search"*: `No`
+>    - *"Downsampling (N)"*: `"0"`
+> 2. View the output html of **RNA Centric Annotation System**
+{: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> 1. What is the main target region of RBFOX2 (e.g., cds, exon, 5' UTR)? Does this confirm the literature.
+> 2. From which cellular compartments do the targets come from?
+> 3. Where does RBFOX2 mainly bind around the intron-exon boundaries and total transcript?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Introns and transcripts. Yes.
+> > 2. Actin filaments, actin cytoskeleton, cell projection part etc.
+> > 3. Around the exon-intron boundaries more at the 3' ends of transcripts.
+> {: .solution}
+>
+{: .question}
+
+# Additional Step
+
+Sometimes it is wise to take a look at individual peaks; maybe to check the peakcalling algorithm or the general quality of the read coverage of the called peaks. For this we take the de-duplicated reads in step 5 and the called peaks in step 7 to take a deeper look inside our data.
 
 ## Sub-step with **Extract alignment ends**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Extract alignment ends** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Alignments in SAM or BAM format"*: `output` (output of **UMI-tools deduplicate** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Text reformatting**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Text reformatting** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `peak_tables` (output of **PEAKachu** {% icon tool %})
->    - *"AWK Program"*: `"NR>1{\nif ($3 < $4) {\n   print $1,$3,$4,\"clip_peak_\"NR-1,$9,$5;\n}\nelse {\n   print $1,$4,$3,\"clip_peak_\"NR-1,$9,$5;\n}\n}"`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SortBED**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **SortBED** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sort the following BED file"*: `alignment_ends` (output of **Extract alignment ends** {% icon tool %})
->    - *"Sort by"*: ``
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Get crosslinked nucleotides**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Get crosslinked nucleotides** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Alignments in BED format"*: `alignment_ends` (output of **Extract alignment ends** {% icon tool %})
->    - *"Set position one nt downstream of 3'-end as crosslinked nucleotide"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SlopBed**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **SlopBed** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"BED/VCF/GFF file"*: `outfile` (output of **Text reformatting** {% icon tool %})
->    - *"Genome file"*: `Genome file from your history`
->    - *"Define -l and -r as a fraction of the feature’s length"*: `Yes`
->    - *"Define -l and -r based on strand"*: `Yes`
->    - *"Choose what you want to do"*: `Increase the BED/GFF/VCF entry by the same number base pairs in each direction.`
->        - *"Number of base pairs"*: `20`
->    - *"Print the header from the A file prior to results"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Create a BedGraph of genome coverage**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Create a BedGraph of genome coverage** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"The BAM or BED file from which coverage should be computed"*: `output` (output of **SortBED** {% icon tool %})
->    - *"Report regions with zero coverage"*: `Yes`
->    - *"Treat split/spliced BAM or BED12 entries as distinct BED intervals when computing coverage."*: `Yes`
->    - *"Calculate coverage based on"*: ``
->    - *"Scale the coverage by a constant factor"*: `""`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Text reformatting**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Text reformatting** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `crosslinking_coordinates` (output of **Get crosslinked nucleotides** {% icon tool %})
->    - *"AWK Program"*: `"$2!=0"`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Text reformatting**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Text reformatting** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `output` (output of **SlopBed** {% icon tool %})
->    - *"AWK Program"*: `"{print $0}"`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Extract Genomic DNA**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Extract Genomic DNA** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Fetch sequences for intervals in"*: `output` (output of **SlopBed** {% icon tool %})
->    - *"Interpret features when possible"*: ``
->    - *"Choose the source for the reference genome"*: `locally cached`
->        - *"Using reference genome"*: ``
->    - *"Select output format"*: ``
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Wig/BedGraph-to-bigWig**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Convert"*: `output` (output of **Create a BedGraph of genome coverage** {% icon tool %})
+>    - {% icon param-file %} *"Alignments in SAM or BAM format"*: `bam` (output of **UMI-tools deduplicate** {% icon tool %})
+> 2. **SortBED** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Sort the following BED file"*: `bed` (output of **Extract alignment ends** {% icon tool %})
+>    - *"Sort by"*: `chromosome, then by start position (asc)`
+> 3. **Create a BedGraph of genome coverage** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"The BAM or BED file from which coverage should be computed"*: `bed` (output of **SortBED** {% icon tool %})
+>    - *"Report regions with zero coverage"*: `No`
+>    - *"Treat split/spliced BAM or BED12 entries as distinct BED intervals when computing coverage."*: `No`
+>    - *"Calculate coverage based on"*: `both strands combined`
+> 4. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Convert"*: `bedgraph` (output of **Create a BedGraph of genome coverage** {% icon tool %})
 >    - *"Converter settings to use"*: `Default`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
+>    > ### {% icon comment %} Do the Same thing for the input control data set.
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > If you processed the RBFOX2 bam dataset then do the same thing for input control data set or *vice verca*.
 >    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SortBED**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **SortBED** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sort the following BED file"*: `outfile` (output of **Text reformatting** {% icon tool %})
->    - *"Sort by"*: ``
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **RNA Centric Annotation System**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **RNA Centric Annotation System** {% icon tool %} with the following parameters:
->    - *"Genome Version"*: ``
->    - {% icon param-file %} *"Target regions in BED format"*: `outfile` (output of **Text reformatting** {% icon tool %})
->    - {% icon param-file %} *"Reference annotation in ENSEMBL GTF format"*: `output` (Input dataset)
->    - *"Run annotation."*: `Yes`
->    - *"Run GO term enrichment"*: `Yes`
->    - *"Run gene set enrichment"*: `No`
->    - *"Run motif search"*: `Yes`
->    - *"Downsampling (N)"*: `"0"`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **MEME-ChIP**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **MEME-ChIP** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Primary sequences"*: `output` (output of **Extract Genomic DNA** {% icon tool %})
->    - *"Sequence alphabet"*: ``
->    - *"Options Configuration"*: `Advanced`
->        - *"Limit of sequences to pass to MEME"*: `100`
->        - *"Should subsampling be random?"*: `Yes`
->            - *"Seed for the randomized selection of sequences"*: `123`
->        - *"maximum size of a sequence before it is cut down to a centered section"*: `0`
->        - *"Search given strand only"*: `Yes`
->        - *"What is the expected motif site distribution?"*: `Zero or one occurances per sequence`
->        - *"Minimum motif width"*: `5`
->        - *"Maximum motif width"*: `20`
->        - *"Maximum number of motifs to find"*: `20`
->        - *"Stop DREME searching after finding this many motifs"*: `5`
->    - *"I certify that I am not using this tool for commercial purposes."*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Create a BedGraph of genome coverage**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Create a BedGraph of genome coverage** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"The BAM or BED file from which coverage should be computed"*: `output` (output of **SortBED** {% icon tool %})
->    - *"Report regions with zero coverage"*: `Yes`
->    - *"Treat split/spliced BAM or BED12 entries as distinct BED intervals when computing coverage."*: `Yes`
->    - *"Calculate coverage based on"*: ``
->    - *"Scale the coverage by a constant factor"*: `""`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Wig/BedGraph-to-bigWig**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Convert"*: `output` (output of **Create a BedGraph of genome coverage** {% icon tool %})
->    - *"Converter settings to use"*: `Default`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
 
 ## Re-arrange
 
