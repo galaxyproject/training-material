@@ -181,7 +181,7 @@ With the `output` from **Merger des colonnes ensemble** you can now generate a n
 >    > * "Values for x-axis": `Column 7`
 >    > * "Values for y-axis": `Column 6`
 >    > 6. Click on {% icon tip %} Customize:
->    > * "X-Axis label": `Week and Year`
+>    > * "X-Axis label": `Week-Year`
 >    > * Y-Axis label: `nm values`
 >    > 7. Click on {% icon tip %} `Visualize`
 >    > 8. Click on {% icon tip %} `save this visualization`if you are willing to save to chart.
