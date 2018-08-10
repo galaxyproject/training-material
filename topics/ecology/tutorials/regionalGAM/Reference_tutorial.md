@@ -213,7 +213,7 @@ This will allow you to create a file showing the abundance per year of a chosen 
 
 >   > ### {% icon question %} Questions
 >   >
->    > 1. What do you think about this visualization? Maybe not so good? Search a way to display the content of the file using charts in a more accurate manner... To do so, you can use tools like **Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières**, **Merger des colonnes ensemble** and **Trier des données de manière ascendante ou descendante **
+>    > 1. What do you think about this visualization? Maybe not so good? Search a way to display the content of the file using charts in a more accurate manner... To do so, you can use tools like **Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières**, **Merger des colonnes ensemble** and **Trier les données dans un ordre ascendant ou descendant**
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
