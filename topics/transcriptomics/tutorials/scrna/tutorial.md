@@ -414,24 +414,288 @@ With all the relevant data now in our BAM file, we can actually perform the coun
 
 > ### {% icon Hands-on %} Final Quantification
 > 
-> Here we will 
+> Select **UMI-tools counts** {%icon tool %} with the following parameters:
+>  - *"Sorted BAM file"*: The FeatureCounts Alignment file (this is already sorted)
+>  - *"Bam is paired-end"*:`No`
+>  - *"Umi Extract Method"*:`Barcodes are contained at the end of the read separated by a delimiter`
+>  - *"Method to identify group of reads"*:`Unique`
+>  - *"Extra Parameters"*:
+>    - *"Deduplicate per gene."*:`XT`
+>    - *"Group reads only if they have the same cell barcode."*:`Yes`
+>  - *"Prepend a label to all column headers"*:`No modifications`
+>  
+
+The important parameters to take note of were those given in the *Extra Parameters* where we have specified that each of the reads with a `XT:Z` tag in the BAM file will be counted on a per cell basis. Reads sharing the same UMI and cell Barcodes will be de-duplicated into a single count, reducing PCR duplicate bias from the analysis.
+
+Once the output file is green, we can now peek at the dataset and see how many cells and genes/features we have. To do this, it is actually better to look at the file summary by clicking on the title of the file instead of the eye symbol.
+
+<!-- image of file summary -->
+
+Here we can see that we have ~ 23,000 lines corresponding to the number of genes in our dataset. If we scroll to the right we can see that we have ~ 200 columns corresponding to the number of cells.
+
+This in itself completes the generation of a single count matrix, with the emphasis on the word *single* due to the unforgettable fact that we often deal in multiple batches of sequencing data, and not just a single batch.
+
+
+# Multiple Batches
+
+Handling more than one batch of sequencing data is rather trivial when we take into account our main goals and requirements:
+
+  1. For each batch, convert FASTQ reads from into a count matrix.
+  2. Merge all count matrices into a single count matrix
+
+<!-- image of this process -->
+
+The first step requires us to merely run the same workflow on each of our batches, using the exact same inputs except for the FASTQ paired data.
+
+The second step requires a minimal level of interaction from us; namely using a merge tool and selecting our matrices. 
+
+## Merging our Matrices
+
+Before we begin, we must consider that each of our matrices are not equal.
+
+ e.g. Batch1 has at least 1 cell that maps to GeneA, whereas Batch2 has no mention of GeneA
+
+This can be resolved by performing a "Full Join" (as described [here](http://www.sql-join.com/sql-join-types/)) where GeneA is inserted into Batch2 as a gene with 0 counts:
+
+ | Batch1 | C1 | C2 | C3 |
+ |--------|----|----|----|
+ | GeneA  | 3  | 0  | 1  |
+
+       + (Full Join) +
+
+ | Batch2 | C1 | C2 | C3 |
+ |--------|----|----|----|
+ | GeneX  | 10 | 2  | 7  |
+
+      =
+
+ | Full   | B1_C1 | B1_C2 | B1_C3 | B_C1 | B_C2 | B_C3 |
+ |--------|----|----|----|----|----|----|
+ | GeneA  | 3  | 0  | 1  | 0  | 0  |  0 |
+ | GeneX  | 0  | 0  | 0  | 10 | 2  |  7 |
+
+
+> ### {% icon question %} Why have the column headers changed in the Full matrix?
+> > ### {% icon solution %} Solution
+> >
+> > Although the cell headers in each batch matrix is the same, **the cells they label are NOT the same** and need to be relabelled in the final matrix to tell us which batch they originated from.
+> >
+> > ### {% icon question %} Why are the cell labels the same in each of the batch matrices if they are labelling completely different cells?
+> > > ### {% icon solution %} Solution
+> > > 
+> > > The reason the cell headers are the same is because the cells use the **same barcodes**, due to fact that the same barcodes are used across different batches.
+> > {.solution}
+> {.question}
+> {.solution}
+{.question}
+
+Let us now merge our matrices from different batches.
+
+> ### {% icon Hands-on %} Table Merge
 > 
-> 1. Select **Featurecounts** {%icon tool %} with the following parameters:
->  - *"Alignment File"*: The output BAM/Alignment file from FeatureCounts
->  - *"Specify strand information"*:`Unstranded`
->  - *"Gene annotation file"* : Select our GTF file from early in our history
->  - *"Advanced Options"* → *"Annotates the alignment file with 'XS:Z:'-tags to described per read or read-pair the corresponding assigned feature(s)"*:`Yes`
->
-> 2. Once green, click on the "Feature Counts: Alignment File" eye symbol.
->  - Here we can see now that we have an extra `XT:Z` tag with the name of our gene appended.
->  - This tag will be the basis of the row names in our count matrix.
+> Select **Column Join on Collections** {%icon tool %} with the following parameters:
+>  - *"Tabular Files"*: Select each of the matrices that you wish to join
+>  - *"Identifier column"*:`1`
+>  - *"Number of Header lines in each item"*:`1`
+>  - *"Keep original column header":`Yes`
+>  - *"Fill character"*:`0`
+{.hands-on}
+
+The identifier column refers to the gene names are checked for 1:1 correspondence between matrices so that the merge does not concatenate the wrong rows between matrices. The Fill character provides a default value of 0 for cases where a Gene appears only in one of the matrices as per our example earlier.
+
+Once the merge is complete, we can now peek at our full combined matrix by once again clicking on the file name to see a small summary. Here we can see that we now have ~30,000 genes and over 1500 cells.
+
+**Or do we?**
+
+We have applied the same cell barcodes to each batch, but not all batches use the same barcodes to select their cells. 
+
+ e.g. Batch1 might only use cell barcodes 1-50 in the barcodes file, and Batch2 might only user cell barcodes 51-100 in the barcodes file.
+ 
+> ### {% icon question %} Why would different sets of the same barcodes be used on different batches?
+> > ### {% icon solution %}
+> >
+> > To answer this, we need to talk about Plates, Batches, and Cross-Contamination
+> > 
+
+
+# Plates, Batches, and Cross-contamination
+
+Plates are NxM arrays. In some or most of the slots of these arrays, a single cell is contained. We say 'some' or 'most' instead of 'all', because not all the slots are filled. The reason for this will become clear momentarily.
+
+Plates are divided into different sequencing lanes. These lanes demarcate evenly-sized rectangular regions on a plate containing different non-overlapping sets of slots on the same plate. All slots within a given lane are sequenced at the same time, and because of this characteristic, all cells that fill the slots of a given lane are said to be of the same Batch. From hereon we will refer to sequencing lanes as Batches. 
+
+There are 3 main variables that can dictate the library preperation setup:
+
+ 1. The number of available cell barcodes
+ 2. The number of slots on a plate
+ 3. The number of slots in a batch
+ 
+Main contending questions:
+  * How large is each batch?
+  * How many batches on a plate?
+  * Should each batch use the same barcodes?
+  
+### Batch Sizes
+
+ * The size of each batch depends on:
+    * The number of barcodes that can be uniquely given to each slot in sequencing lane for that batch.
+    * The number of lanes that can be sequenced at the same time.
+    
+ * The number of barcodes depends on:
+    * The size of the barcode
+    * The edit distance between adjacent
+    
+### Examples
+
+For each of these examples, we will consider our experiment to have the following setup:
+   * Barcodes:
+      * 24 unique:
+          AAA ACC AGG TTT TAA TCC
+          ATT CCC CAA TGG NAA NCC
+          CGG CTT GGG NGG NTT ANN
+          GAA GCC GTT CNN GNN TNN
+      * Edit distance of 2 
+        * Instead of AAA, AAC, AAG, we have AAA, ACC, AGG
+        * Without this requirement we could have 4^3 = 64 unique barcodes, but would be less protected against sequencing errors.
+        
+   * Lanes:
+     * Each lane will have 12 slots
+     * No more than 2 lanes can be sequenced at the same time.
+   
+    
+* e.g.1 
+
+We have a single plate with a single lane
+
+    | x x x |    <- AAA ACC AGT
+    | x x x |       ATT CCC CAA
+    | x x x |       CGG CTT GGG
+    | x x x |       GAA GCC GTT
+
+Half of the barcodes can be used for that lane, and the other half we can ignore.
+
+
+* e.g.2 
+
+We have a single plate with 2 lanes
+
+    | x x x : x x x | <- AAA ACC AGG : TTT TAA TCC
+    | x x x : x x x |    ATT CCC CAA : TGG NAA NCC
+    | x x x : x x x |    CGG CTT GGG : NGG NTT ANN
+    | x x x : x x x |    GAA GCC GTT : CNN GNN TNN
+
+Here we use all barcodes since these lanes will be sequenced at the same time. 
+
+* e.g.3
+
+
+
+
+We have 4 lanes on our plate. 2 lanes can be sequenced at the same time. 1 lane has 9 slots. We have 18 barcodes. In total, this is 4 * 9 = 36 slots. 
 
  
 
-We can decode this for each of our 4 reads
+### Cell Barcodes
+
+The number of cell barcodes sets the *minimum size of each batch*. If we have only 10 barcodes, then only 10 cells can be uniquely labelled without us having to start reusing barcodes on different cells
+
+> ### {% icon question %} Why would be bad to reuse the same barcodes in a batch?
+> > ### {% icon solution %}
+> >
+> > Because we would not know which cell some reads came from. If CellA uses barcode ACCTG and CellB also uses barcode ACCTG, then any reads that are sequenced with ACCTG in their barcodes could come from either CellA or CellB, making it very amgiguous when it comes to counting that read.
+> {.solution}
+{.question}
+
+There are now two cases:
+
+  1. Number of barcodes = Number of slots in a sequencing lane
+  2. Number of barcodes = N * Number of slots in a sequencing lane
+  
+
+In the first case, we have a setup that looks like this:
 
 
-As before, we 
+1) Plate with a single lane
+   9 filled slots, requires 9 barcodes
+
+
+
+2) Plate with two lanes, 18 filled slots.
+   If both lanes are sequenced at the same time, then we need 18 barcodes.
+   If each lane is sequenced individually, then we only need 9 barcodes and can re-use the same set in each lane.
+
+
+   However, given that these plates are in such close proximity to one another, we must be *very* careful during library preparation to not allow cross-contamination to occur:
+   
+   * Consider two adjacent slots in different lanes who share the same barcode. 
+   * If the genetic material in each slot strays across lanes, it could contribute to the genetic material of its neighbours who might share the same barcodes and complicate the analysis.
+   
+   * It would be more sensible to leave some buffer space between these two lanes to reduce this issue:
+   
+    | x x x : . . . |  Batch1
+    | x x x : . . . |
+    | x x x : . . . |
+    | x x x : . . . |
+
+    | x x x : . . . |  Batch2
+    | x x x : . . . |
+    | x x x : . . . |
+    | x x x : . . . |
+
+   * We would however have to compromise on time and cost.
+
+
+   
+3) Plate with four lanes, 18 filled slots.
+
+
+    | x x x : . . . : x x x : . . . |
+    | x x x : . . . : x x x : . . . |
+    | x x x : . . . : x x x : . . . |
+    | x x x : . . . : x x x : . . . |
+    
+  * Here we can sequence two lanes at the same time, with a reduced risk of cross contamination, provided we have 18 barcodes.
+  
+  * We can improve upon this design once more:
+
+    | x x x : . . . : . . . : x x x |
+    | x x x : . . . : . . . : x x x |
+    | x x x : . . . : . . . : x x x |
+    | x x x : . . . : . . . : x x x |
+
+  * Now we have two whole lanes between each sequenced lane, reducing the risk of cross-contamination.
+  * If two lanes are sequenced at a time, and we assign barcodes to both lanes (i.e. the one with filled slots and also the one that is empty) 
+  
+  
+   
+
+
+
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+
+and all slots within a single
+
+
+
+Plates are divided into different lanes. These lanes are what are sequenced as one
+
+
+> >  e.g. Plate1 might a 10x10 array that could hold 100 cells, but the plate can only be sequenced 50 cells at a time. This effectively means that there are 2 Batches on Plate1. An analysis with 10 batches would therefore use 5 plates.
+> >
+
+
+In order to reduce cross-contamination during library preparation,
+
+
 
 
 
