@@ -211,6 +211,18 @@ This will allow you to create a file showing the abundance per year of a chosen 
 >    > 5. Visualize
 >    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 
+>   > ### {% icon question %} Questions
+>   >
+>    > 1. What do you think about this visualization? Maybe not so good? Search a way to display the content of the file using charts in a more accurate manner... To do so, you can use tools like **Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières**, **Merger des colonnes ensemble** and **Trier les données dans un ordre ascendant ou descendant**
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>You can use the **Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières** tool to first replace `(20[0-9][0-9])` on the column 3 by `-\1` then on the result of this tool execution, replace `"` by nothing on the column 1. Furthermore, you can merge column 1 and column 3 of the resulting dataset. Finally, you can sort the new dataset by column 1 (alphabetical/ascending) and column 3 (alphabetical/ascending). </li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+
 {: .hands_on}
 
 > ### Expected temporal trend
