@@ -9,7 +9,7 @@ tutorial_name: species distribution modeling
 
 Species Distribution Modeling (SDM) can help understand the distribution of a species depending on its environment. It can also attempt to quantify the impact of climate change on the species habitat, direct conservation efforts and predict invasive species distributions. This is done by associating data of species occurences (observations) with a set of environmental data (such as temperature and precipitation).
 
-The goal of this tutorial is to model a theorical ecological niche and predict species distribution in a future climate scneario by using SDM with the Wallace interactive environment on Galaxy. We'll use the data occurrences of US *Chrysemys picta* ([Painted turtle](https://fr.wikipedia.org/wiki/Tortue_peinte)) from the North America region.
+The goal of this tutorial is to model a theorical ecological niche and predict species distribution in a future climate scneario by using SDM with the Wallace interactive environment on Galaxy. We'll use the data occurrences of US *Chrysemys picta* ([Painted turtle](https://en.wikipedia.org/wiki/Painted_turtle)) from the North America region.
 
 # Step 1: Loading a dataset
 
@@ -190,7 +190,7 @@ We’ve been able through Galaxy-E, to load a dataset of occurrences used in the
 
 # References
 
-[Wallace](https://github.com/wallaceEcoMod/wallace/blob/master/README.md) plateforme and package 
+About [Wallace](https://wallaceecomod.github.io/) 
 
 Guissan, A. et *al.*, Predicting species distributions for conservation decisions. Ecology Letters, 16, 1424–1435  (2013).
 
