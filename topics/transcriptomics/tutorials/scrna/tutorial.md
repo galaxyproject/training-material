@@ -514,17 +514,75 @@ We have applied the same cell barcodes to each batch, but not all batches use th
 > ### {% icon question %} Why would different sets of the same barcodes be used on different batches?
 > > ### {% icon solution %}
 > >
-> > To answer this, we need to talk about Plates, Batches, and Cross-Contamination
+> > To answer this, see the *Plates, Batches, and Cross-Contamination* section
 > > 
+
+
+### Cell Barcodes
+
+The number of cell barcodes sets the *minimum size of each batch*. If we have only 10 barcodes, then only 10 cells can be uniquely labelled without us having to start reusing barcodes on different cells
+
+> ### {% icon question %} Why would it be bad to reuse the same barcodes in a batch?
+> > ### {% icon solution %}
+> >
+> > Because we would not know which cell some reads came from. If CellA uses barcode ACCTG and CellB also uses barcode ACCTG, then any reads that are sequenced with ACCTG in their barcodes could come from either CellA or CellB, making it very amgiguous when it comes to counting that read.
+> {.solution}
+{.question}
+
+How many available barcodes are there?
+
+This depends on two factors:
+   * The size of the barcode
+   * The edit distance between adjacent barcodes
+   
+Barcodes are typically limited to the 4 main nucleotide bases A,C,T,G. Barcodes also tend to span 4-10 bases, since longer barcodes tend to be more subjectable to sequencing errors.
+
+ * Barcodes that are 4bp long have 4^4 = 256 unique barcodes to choose from.
+ * Barcodes that are 10bp long have 4^10 = 1,048,576 unique barcodes to choose from. 
+ 
+ Again, the shorter the better to reduce the number of sequencing errors, but at the cost of being able to sequence less in a single batch.
+ 
+#### Reducing sequencing errors in barcodes
+
+Single base-pair sequencing errors are the most prevalent type of sequencing error, but these can be catered for when selecting barcodes, by specifying an *edit distance* between adjacent barcodes.
+
+e.g. For barcodes of length 3: 
+   * Instead of : AAA AAC AAG AAT ACA ACC ... etc, (edit distance of 1)
+   * We can use : AAA ACC AGG ATT CAA CCC ... etc, (edit distance of 2)
+   
+This will reduce the number of barcodes that we can select however:
+
+  * For barcodes of length *N*:
+    * An edit distance of 1 provides 4^N possible barcodes.
+    * An edit distance of 2 provides 4^(N-1) possible barcodes.
+    * An edit distance of *E* provides 4^(N-E) possible barcodes, where 0 < E < N
 
 
 # Plates, Batches, and Cross-contamination
 
-Plates are NxM arrays. In some or most of the slots of these arrays, a single cell is contained. We say 'some' or 'most' instead of 'all', because not all the slots are filled. The reason for this will become clear momentarily.
+Plates are *N*x*M* arrays. In some or most of the slots of these arrays, a single cell is contained. We say 'some' or 'most' instead of 'all', because not all the slots are filled. The reason for this will become clear momentarily.
 
-Plates are divided into different sequencing lanes. These lanes demarcate evenly-sized rectangular regions on a plate containing different non-overlapping sets of slots on the same plate. All slots within a given lane are sequenced at the same time, and because of this characteristic, all cells that fill the slots of a given lane are said to be of the same Batch. From hereon we will refer to sequencing lanes as Batches. 
+    | . . . . . . . . . |  <- Plate: N=9, M=6, 54 slots
+    | . . . . . . . . . |
+    | . . . . . . . . . |
+    | . . . . . . . . . |
+    | . . . . . . . . . |
+    | . . . . . . . . . |
+    
 
-There are 3 main variables that can dictate the library preperation setup:
+Plates are divided into different sequencing lanes. These lanes demarcate evenly-sized *n*x*m* rectangular regions on a plate containing different non-overlapping sets of slots on the same plate. 
+
+    | . . . : . . . : . . . |  <- Plate: N=9, M=6, 54 slots
+    | . . . : . . . : . . . |     3 lanes: n=3,m=6, 18 slots per lane/batch
+    | . . . : . . . : . . . |
+    | . . . : . . . : . . . |
+    | . . . : . . . : . . . |
+    | . . . : . . . : . . . |
+
+
+All slots within a given lane are sequenced at the same time, and because of this characteristic, all cells that fill the slots of a given lane are said to be of the same Batch. From hereon we will refer to sequencing lanes as Batches. 
+
+There are 3 main variables that can dictate the library preparation setup:
 
  1. The number of available cell barcodes
  2. The number of slots on a plate
@@ -534,36 +592,27 @@ Main contending questions:
   * How large is each batch?
   * How many batches on a plate?
   * Should each batch use the same barcodes?
-  
-### Batch Sizes
 
- * The size of each batch depends on:
-    * The number of barcodes that can be uniquely given to each slot in sequencing lane for that batch.
-    * The number of lanes that can be sequenced at the same time.
+
+To answer these questions, consider the following illustrative examples:
     
- * The number of barcodes depends on:
-    * The size of the barcode
-    * The edit distance between adjacent
-    
-### Examples
+#### Examples
 
 For each of these examples, we will consider our experiment to have the following setup:
    * Barcodes:
-      * 24 unique:
+      * 24 unique, with an edit distance of 2:
+      
           AAA ACC AGG TTT TAA TCC
           ATT CCC CAA TGG NAA NCC
           CGG CTT GGG NGG NTT ANN
           GAA GCC GTT CNN GNN TNN
-      * Edit distance of 2 
-        * Instead of AAA, AAC, AAG, we have AAA, ACC, AGG
-        * Without this requirement we could have 4^3 = 64 unique barcodes, but would be less protected against sequencing errors.
-        
+                  
    * Lanes:
      * Each lane will have 12 slots
      * No more than 2 lanes can be sequenced at the same time.
    
     
-* e.g.1 
+ * e.g.1 
 
 We have a single plate with a single lane
 
@@ -575,7 +624,7 @@ We have a single plate with a single lane
 Half of the barcodes can be used for that lane, and the other half we can ignore.
 
 
-* e.g.2 
+ * e.g.2 
 
 We have a single plate with 2 lanes
 
@@ -586,88 +635,50 @@ We have a single plate with 2 lanes
 
 Here we use all barcodes since these lanes will be sequenced at the same time. 
 
-* e.g.3
+ * e.g.3
+
+We have a single plate with 2 lanes, but only one lane in the plate is used and the other lane is empty.
+
+    | x x x : . . . | <- AAA ACC AGG : TTT TAA TCC
+    | x x x : . . . |    ATT CCC CAA : TGG NAA NCC
+    | x x x : . . . |    CGG CTT GGG : NGG NTT ANN
+    | x x x : . . . |    GAA GCC GTT : CNN GNN TNN
 
 
+Here we use all barcodes.
 
+> ### {% icon question %} Why use all barcodes? Why leave an empty lane?
+> > ### {% icon solution %} Solution
+>
+> > Cross-contamination. If we see any reads in the Plate which contain barcodes {TTT,TAA,TCC, etc} then we know that some contamination has occured *because there should be no cells there*. One reason is that the second lane was not completely cleaned before being used. 
 
-We have 4 lanes on our plate. 2 lanes can be sequenced at the same time. 1 lane has 9 slots. We have 18 barcodes. In total, this is 4 * 9 = 36 slots. 
+ * e.g.4
 
- 
+We have a two plates with 2 lanes, but only one lane in each plate is used and the other lane is empty.
 
-### Cell Barcodes
+    | x x x : . . . | P1 <- AAA ACC AGG : TTT TAA TCC
+    | x x x : . . . |       ATT CCC CAA : TGG NAA NCC
+    | x x x : . . . |       CGG CTT GGG : NGG NTT ANN
+    | x x x : . . . |       GAA GCC GTT : CNN GNN TNN
 
-The number of cell barcodes sets the *minimum size of each batch*. If we have only 10 barcodes, then only 10 cells can be uniquely labelled without us having to start reusing barcodes on different cells
+    | . . . : x x x | P2 <- AAA ACC AGG : TTT TAA TCC
+    | . . . : x x x |       ATT CCC CAA : TGG NAA NCC
+    | . . . : x x x |       CGG CTT GGG : NGG NTT ANN
+    | . . . : x x x |       GAA GCC GTT : CNN GNN TNN
 
-> ### {% icon question %} Why would be bad to reuse the same barcodes in a batch?
-> > ### {% icon solution %}
-> >
-> > Because we would not know which cell some reads came from. If CellA uses barcode ACCTG and CellB also uses barcode ACCTG, then any reads that are sequenced with ACCTG in their barcodes could come from either CellA or CellB, making it very amgiguous when it comes to counting that read.
-> {.solution}
-{.question}
+Here we again use all barcodes for both plates, but each plate uses a different subset of the barcodes for the filled slots. i.e. They use different sets of 'Real' and 'Fake' barcodes.
+
+> ### {% icon question %} Why alternate the barcodes between plates? The full set of barcodes does not change, so why not keep the same format?
+> > ### {% icon solution %} Solution
+>
+> > Again, cross-contamination. Plate2 will be loaded after Plate1 (and perhaps Plate2 and Plate1 will use the same plate!) If we see any reads in Plate2 that should not be there, we can now surmize where they came from. We also have the added benefit of protecting the cells Plate2 from those that may have been used in Plate1, since they are in completely different positions across plates.
+
 
 There are now two cases:
 
   1. Number of barcodes = Number of slots in a sequencing lane
   2. Number of barcodes = N * Number of slots in a sequencing lane
   
-
-In the first case, we have a setup that looks like this:
-
-
-1) Plate with a single lane
-   9 filled slots, requires 9 barcodes
-
-
-
-2) Plate with two lanes, 18 filled slots.
-   If both lanes are sequenced at the same time, then we need 18 barcodes.
-   If each lane is sequenced individually, then we only need 9 barcodes and can re-use the same set in each lane.
-
-
-   However, given that these plates are in such close proximity to one another, we must be *very* careful during library preparation to not allow cross-contamination to occur:
-   
-   * Consider two adjacent slots in different lanes who share the same barcode. 
-   * If the genetic material in each slot strays across lanes, it could contribute to the genetic material of its neighbours who might share the same barcodes and complicate the analysis.
-   
-   * It would be more sensible to leave some buffer space between these two lanes to reduce this issue:
-   
-    | x x x : . . . |  Batch1
-    | x x x : . . . |
-    | x x x : . . . |
-    | x x x : . . . |
-
-    | x x x : . . . |  Batch2
-    | x x x : . . . |
-    | x x x : . . . |
-    | x x x : . . . |
-
-   * We would however have to compromise on time and cost.
-
-
-   
-3) Plate with four lanes, 18 filled slots.
-
-
-    | x x x : . . . : x x x : . . . |
-    | x x x : . . . : x x x : . . . |
-    | x x x : . . . : x x x : . . . |
-    | x x x : . . . : x x x : . . . |
-    
-  * Here we can sequence two lanes at the same time, with a reduced risk of cross contamination, provided we have 18 barcodes.
-  
-  * We can improve upon this design once more:
-
-    | x x x : . . . : . . . : x x x |
-    | x x x : . . . : . . . : x x x |
-    | x x x : . . . : . . . : x x x |
-    | x x x : . . . : . . . : x x x |
-
-  * Now we have two whole lanes between each sequenced lane, reducing the risk of cross-contamination.
-  * If two lanes are sequenced at a time, and we assign barcodes to both lanes (i.e. the one with filled slots and also the one that is empty) 
-  
-  
-   
 
 
 
