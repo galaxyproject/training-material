@@ -826,28 +826,102 @@ Thankfully, Galaxy provides a tool for checking for cross-contamination in any e
  1. A full list of barcodes
  2. Which barcodes apply to which batches
  3. Which batches apply to which plates.
+ 
+Since we the plating protocol we are using is that designed by the Freiburg MPI Grün lab, we will follow their structure.
+
+* Barcodes:
+
+These are each 8bp long, with an edit distance of 2, and there 192 of them.
+
+    001-006 | AACACC AACCTC AACGAG AACTGG AAGCAC AAGCCA
+    007-012 | AAGGTG AAGTGC ACAAGC ACAGAC ACAGGA ACAGTG
+       .
+       .
+    180-186 | TTACGC TTCACC TTCCAG TTCGAC TTCTCG TTGCAC
+    187-192 | TTGCGA TTGCTG TTGGAG TTGGCA TTGGTC TTGTGC
+ 
+ * Plates:
+ 
+Here we have 8 batches spread out over 2 plates, with alternate barcode striping.
+          
+      Plate 1  +-------+-------+-------+-------+
+               |  B1   |  B2   |  B3   |  B4   |
+               +-------+-------+-------+-------+
+                001-096 097-192 001-096 097-192
+      
+      Plate 2  +-------+-------+-------+-------+
+               |  B5   |  B6   |  B7   |  B8   |
+               +-------+-------+-------+-------+
+                001-096 097-192 001-096 097-192
+                
+This plating protocol can be reformatted as:
+
+    [Barcodes → Batches]
+    001-096: B1 , B3 , B5 , B7
+    097-192: B2 , B2 , B6 , B8
+
+    [Plates → Batches]
+    1: B1 , B2 , B3 , B4
+    2: B5 , B6 , B7 , B8
+
+This format allows for many variable setups (see *Help* section of *Cross-contamination Barcode Filter* tool)
 
 > ### {% icon Hands-on %} Hands On
 > 
 > Select **Cross-contamination Barcode Filter** {%icon tool %} with the following parameters:
->  - *"Tabular Files"*: Select each of the matrices that you wish to join
->  - *"Identifier column"*:`1`
->  - *"Number of Header lines in each item"*:`1`
->  - *"Keep original column header":`Yes`
->  - *"Fill character"*:`0`
+>  - *"Input Matrix"*: (Here we select the merged matrices from the Column Join tool)
+>  - *"Complete Barcodes"*: (The barcodes file)
+>  - *"Plate Protocol"*:`Custom`
+>    -*"Under 'Barcode Format'"*:
+>      -Select `+ Insert Barcode Format`
+>        -*"1: Barcode Format"*:
+>          -*"Barcode Range: Start"*:`1`
+>          -*"Barcode Range: End"*:`96`
+>          -*"Batches utilizing this Range"*:`1,3,5,7`
+>      -Select `+ Insert Barcode Format`
+>        -*"2: Barcode Format"*:
+>          -*"Barcode Range: Start"*:`97`
+>          -*"Barcode Range: End"*:`192`
+>          -*"Batches utilizing this Range"*:`2,4,6,8`
+>    -*"Under 'Plate Format'"*:
+>      -Select `+ Insert Plate Format`
+>        -*"1: Plate Format"*:
+>          -*"Plate Number"*:`1`
+>          -*"Batches within this Plate Number"*:`1,2,3,4`
+>        -*"2: Plate Format"*:
+>          -*"Plate Number"*:`2`
+>          -*"Batches within this Plate Number"*:`5,6,7,8`
+>
 {.hands-on}
  
- 
- 
- 
- 
- 
+The plot that follows tells us everything we need to know about each of our batches. Each batch is essentially tested against the full set of barcodes in order to assert that only the desired or 'Real' barcodes have been sequenced.
 
+ ![Contamination Plots](../../images/scrna_crosscontamination.gif) "The Pre-filter and Post-filter plots")
 
+In the pre-filter plot, we can see how only half of the sequences in each batch map to half the barcodes. This shows very little cross-contamination, and shows that our data is real. 
 
+The post-filter plot essentially removes the false barcodes from each batch and retains only the 'Real' barcodes.
 
+> ### {% icon question %} Question
+>
+> The count matrix that is output from this tool has only half the number of cells as the original input count matrix. Why is this?
+>
+> > ### {% icon solution %} Solution
+> >
+> > Because only half the barcodes in each batch were real. The *UMI-tools extract* took the entire barcodes file to filter against each batch, and the *UMI-tools count* also took the entire barcodes file to count against each batch. 
+> >
+> > Naturally, each batch produced 192 cells, even though 96 were real. As a result of joining each of these matrices we ended up with a count-matrix of $$8 * 192 = 1536$$ cells. The cross-contamination tool removes the false barcodes (50% in each batch), resulting in 768 cells.
+> >
+> {: .solution}
+>
+{: .question}
 
+With this, we now have a count-matrix that can be used for further downstream analyis.
+
+Factoid: We can convert the number of UMIs to the number of molecules using a transformation script.
+ 
 # Conclusion
 {:.no_toc}
 
-Conclusion about the technical key points. And then relation between the techniques and the biological question to end with a global view.
+In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our reads and into the read headers, in order to preserve them during mapping. We have discovered how these barcoded reads are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against reads that are PCR duplicates. Finally, we have learned how to combine seperate batch data as well as being able to check and correct against cross-contamination.
+
