@@ -277,7 +277,48 @@ where we have added CellBarcode_UMI to the headers of each read. We can now thro
 
 # Barcode Extraction
 
+Here:Talk about whether direct barcodes or used, or clustered within edit distances, and the plots that can be used to estimate these.
 TODO!
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **UMI-tools extract** {% icon tool %} with the following parameters:
+>    - *"Library type"*: `Paired-end Dataset Collection`
+>        - {% icon param-collection %} *"Reads in FASTQ format"*: `output` (Input dataset collection)
+>        - *"Barcode on both reads?"*: `Barcode on first read only`
+>    - *"Use Known Barcodes?"*: `Yes`
+>        - {% icon param-file %} *"Barcode File"*: `output` (Input dataset)
+>    - *"Barcode pattern for first read"*: `NNNNNNCCCCCC`
+>    - *"Enable quality filter?"*: `No`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
 
 # Mapping
 
@@ -297,13 +338,23 @@ The FASTQ data was generated from sequencing Zebra working with Zebrafish data, 
 >   - *"to History"*
 > 
 > 2. Select **RNA-STAR** {%icon tool %} with the following parameters:
->   - *"Single End"*: Our input FASTQ has sequencing data from only a single read
->   - *"RNA-Seq FASTQ/FASTA file"*: Of the FASTQ files output by UMI_tools extract, select the one with the sequencing reads intact.
->   - *"Custom or built-in reference"*: `Use a built-in index`
->   - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
->   - *"Select reference genome"*: The FASTQ data was generated from sequencing zebrafish, so select `DanRer10`
->   - *"Gene model (gff3,gtf) file for splice junctions"*: Select the GTF file we imported into our history
->   - Execute
+>    - *"Single-end or paired-end reads"*: `Single-end`
+>        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file"*: `out2` (output of **UMI-tools extract** {% icon tool %}. Of the FASTQ files output by UMI_tools extract, select the one with the sequencing reads intact.)
+>    - *"Custom or built-in reference genome"*: `Use a built-in index`
+>        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
+>            - {% icon param-file %} *"Select reference genome"*: `DanRer10` (Zebrafish)
+>            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `output` (Input dataset. Select the GTF file we imported into our history)
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
 
 This should take a minute or two depending on your position in the queue. Once your output files are green, proceed to the next step.
 
@@ -377,8 +428,7 @@ The fields of the BAM file can be better explained at section 1.4 of [the SAM sp
  * `chr1` `2030`: The position and base-pair of alignment of the first base of the sequence.
  * We next have a series of quality fields, as well as the `sequence` and `sequence_quality`
  * `NH`: The number of hits for  this read. If it is multiply mapped, then the number of multiples will be shown (here `2`)
- * `HI`: Whic *r*
-h number this particular read is in the series of (potentially) multi-mapped reads (here `1`, not neccesarily meaning the first or 'better' )
+ * `HI`: Which number this particular read is in the series of (potentially) multi-mapped reads (here `1`, not neccesarily meaning the first or 'better' )
  * `nM`: The number of mismatches in the alignment of this read to the reference (here `2`)
 
 This fields will be important later when we wish to filter our BAM for good quality reads.
@@ -398,14 +448,96 @@ It is more qualitative that STAR however, since it is capable of counting not ju
 > Let us annotate our BAM file with desired gene tags.
 > 
 > 1. Select **Featurecounts** {%icon tool %} with the following parameters:
->  - *"Alignment File"*: The output BAM/Alignment file from FeatureCounts
->  - *"Specify strand information"*:`Unstranded`
->  - *"Gene annotation file"* : Select our GTF file from early in our history
->  - *"Advanced Options"* → *"Annotates the alignment file with 'XS:Z:'-tags to described per read or read-pair the corresponding assigned feature(s)"*:`Yes`
+>  - {% icon param-file %} *"Alignment file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
+>    - *"Gene annotation file"*: `in your history`
+>        - {% icon param-file %} *"Gene annotation file"*: `output` (Input dataset) (The GTF file we imported earlier))
+>    - *"Specify strand information"*:`Unstranded`
+>    - In *"Advanced options"*:
+>        - *"Count multi-mapping reads/fragments"*: `Disabled; multi-mapping reads are excluded (default)`
+>        - *"Exon-exon junctions"*: `Yes`
+>        - *"Annotates the alignment file with 'XS:Z:'-tags to described per read or read-pair the corresponding assigned feature(s)."*: `Yes`
 >
 > 2. Once green, click on the "Feature Counts: Alignment File" eye symbol.
 >  - Here we can see now that we have an extra `XT:Z` tag with the name of our gene appended.
 >  - This tag will be the basis of the row names in our count matrix.
+
+
+## Quality Control
+
+If we perform counting on the Alignment file we just generated with *FeatureCounts* we will be counting all the reads in the BAM file, but this may not be desireable if we still wish to select only high quality reads.
+
+The main filtering steps performed on our reads so far have been relatively silent due to the 'default' parameters used.
+ * *UMI-tools Extract* - Filters reads for those only with matching barcodes given by our barcodes file.
+ * *RNA-STAR* - As seen in the log, we lose 10% of our reads for being too short or being multiply mapped.
+
+
+### Further QC
+
+Another filtering measure we can apply is to keep reads that we are confident about, e.g those with a minimum number of mismatches to the reference within an acceptable range. 
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Filter** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"BAM dataset(s) to filter"*: `output_bam` (output of **featureCounts** {% icon tool %})
+>    - In *"Condition"*:
+>        - Click on *"Insert Condition"*:
+>        - In *"1: Condition"*:
+>            - In *"Filter"*:
+>                - Click on *"Insert Filter"*:
+>                - In *"1: Filter"*:
+>                    - *"Select BAM property to filter on"*: `alignmentFlag`
+>                        - *"Filter on this alignment flag"*: `0`
+>        - Click on *"Insert Condition"*:
+>        - In *"2: Condition"*:
+>            - In *"Filter"*:
+>                - Click on *"Insert Filter"*:
+>                - In *"1: Filter"*:
+>                    - *"Select BAM property to filter on"*: `alignmentFlag`
+>                        - *"Filter on this alignment flag"*: `16`
+>        - Click on *"Insert Condition"*:
+>        - In *"3: Condition"*:
+>            - In *"Filter"*:
+>                - Click on *"Insert Filter"*:
+>                - In *"1: Filter"*:
+>                    - *"Select BAM property to filter on"*: `tag`
+>                        - *"Filter on a particular tag"*: `nM:<3`
+>        - Click on *"Insert Condition"*:
+>        - In *"4: Condition"*:
+>            - In *"Filter"*:
+>                - Click on *"Insert Filter"*:
+>                - In *"1: Filter"*:
+>                    - *"Select BAM property to filter on"*: `tag`
+>                        - *"Filter on a particular tag"*: `NH:<2`
+>    - *"Would you like to set rules?"*: `Yes`
+>        - *"Enter rules here"*: `(1 | 2) & 3 & 4`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
 
 
 ## Counting Genes / Cell
@@ -415,15 +547,28 @@ With all the relevant data now in our BAM file, we can actually perform the coun
 > ### {% icon Hands-on %} Final Quantification
 > 
 > Select **UMI-tools counts** {%icon tool %} with the following parameters:
->  - *"Sorted BAM file"*: The FeatureCounts Alignment file (this is already sorted)
->  - *"Bam is paired-end"*:`No`
->  - *"Umi Extract Method"*:`Barcodes are contained at the end of the read separated by a delimiter`
->  - *"Method to identify group of reads"*:`Unique`
->  - *"Extra Parameters"*:
->    - *"Deduplicate per gene."*:`XT`
->    - *"Group reads only if they have the same cell barcode."*:`Yes`
+>    - {% icon param-file %} *"Sorted BAM file"*: `out_file1` (output of **Filter** {% icon tool %})
+>    - *"Umi Extract Method"*: `Barcodes are contained at the end of the read seperated by a delimiter`
+>    - *"Method to identify group of reads"*: `Unique`
+>    - *"Prepend a label to all column headers"*: `Dataset Name`
+>    - *"Bam is paired-end"*:`No`
+>    - *"Method to identify group of reads"*:`Unique`
+>    - *"Extra Parameters"*:
+>       - *"Deduplicate per gene."*:`XT`
+>       - *"Group reads only if they have the same cell barcode."*:`Yes`
 >  - *"Prepend a label to all column headers"*:`No modifications`
->  
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
 
 The important parameters to take note of were those given in the *Extra Parameters* where we have specified that each of the reads with a `XT:Z` tag in the BAM file will be counted on a per cell basis. Reads sharing the same UMI and cell Barcodes will be de-duplicated into a single count, reducing PCR duplicate bias from the analysis.
 
@@ -507,7 +652,7 @@ Once the merge is complete, we can now peek at our full combined matrix by once 
 
 **Or do we?**
 
-We have applied the same cell barcodes to each batch, but not all batches use the same barcodes to select their cells. 
+We have applied the same cell barcodes to each batch, but not all batches neccesarily use the same barcodes to select their cells. 
 
  e.g. Batch1 might only use cell barcodes 1-50 in the barcodes file, and Batch2 might only user cell barcodes 51-100 in the barcodes file.
  
@@ -518,7 +663,7 @@ We have applied the same cell barcodes to each batch, but not all batches use th
 > > 
 
 
-### Cell Barcodes
+### Another Look At Cell Barcodes
 
 The number of cell barcodes sets the *minimum size of each batch*. If we have only 10 barcodes, then only 10 cells can be uniquely labelled without us having to start reusing barcodes on different cells
 
@@ -560,7 +705,7 @@ This will reduce the number of barcodes that we can select however:
 
 # Plates, Batches, and Cross-contamination
 
-Plates are *N*x*M* arrays. In some or most of the slots of these arrays, a single cell is contained. We say 'some' or 'most' instead of 'all', because not all the slots are filled. The reason for this will become clear momentarily.
+Plates are *N*x*M* arrays. The way these slot are filled depends entirely on the protocol, but usually not all slots are filled. The reason for this will become clear momentarily.
 
     | . . . . . . . . . |  <- Plate: N=9, M=6, 54 slots
     | . . . . . . . . . |
@@ -572,8 +717,8 @@ Plates are *N*x*M* arrays. In some or most of the slots of these arrays, a singl
 
 Plates are divided into different sequencing lanes. These lanes demarcate evenly-sized *n*x*m* rectangular regions on a plate containing different non-overlapping sets of slots on the same plate. 
 
-    | . . . : . . . : . . . |  <- Plate: N=9, M=6, 54 slots
-    | . . . : . . . : . . . |     3 lanes: n=3,m=6, 18 slots per lane/batch
+    | . . . : . . . : . . . |  <---   Plate: N=9, M=6, 54 slots
+    | . . . : . . . : . . . |       3 lanes: n=3,m=6, 18 slots per lane/batch
     | . . . : . . . : . . . |
     | . . . : . . . : . . . |
     | . . . : . . . : . . . |
@@ -589,11 +734,10 @@ There are 3 main variables that can dictate the library preparation setup:
  3. The number of slots in a batch
  
 Main contending questions:
-  * How large is each batch?
-  * How many batches on a plate?
-  * Should each batch use the same barcodes?
-
-
+ * How large is each batch?
+ * How many batches on a plate?
+ * Should each batch use the same barcodes?
+ 
 To answer these questions, consider the following illustrative examples:
     
 #### Examples
@@ -610,6 +754,7 @@ For each of these examples, we will consider our experiment to have the followin
    * Lanes:
      * Each lane will have 12 slots
      * No more than 2 lanes can be sequenced at the same time.
+       (e.g. if we have 4 lanes, on a plate, then half the plate will be sequenced in a run, and the other half in another run)
    
     
  * e.g.1 
@@ -671,57 +816,35 @@ Here we again use all barcodes for both plates, but each plate uses a different 
 > ### {% icon question %} Why alternate the barcodes between plates? The full set of barcodes does not change, so why not keep the same format?
 > > ### {% icon solution %} Solution
 >
-> > Again, cross-contamination. Plate2 will be loaded after Plate1 (and perhaps Plate2 and Plate1 will use the same plate!) If we see any reads in Plate2 that should not be there, we can now surmize where they came from. We also have the added benefit of protecting the cells Plate2 from those that may have been used in Plate1, since they are in completely different positions across plates.
+> > Again, the answer is to reduce cross-contamination. Plate2 will be loaded after Plate1 (and perhaps Plate2 and Plate1 will use the same plate!) If we see any reads in Plate2 that should not be there, we can now surmise where they came from. We also have the added benefit of protecting the cells Plate2 from those that may have been used in Plate1, since they are in completely different positions across plates.
 
 
-There are now two cases:
+## Controlling against Cross-Contamination
 
-  1. Number of barcodes = Number of slots in a sequencing lane
-  2. Number of barcodes = N * Number of slots in a sequencing lane
-  
+Thankfully, Galaxy provides a tool for checking for cross-contamination in any experimental setup. It only needs the following information:
 
+ 1. A full list of barcodes
+ 2. Which barcodes apply to which batches
+ 3. Which batches apply to which plates.
 
-
-
-
+> ### {% icon Hands-on %} Hands On
+> 
+> Select **Cross-contamination Barcode Filter** {%icon tool %} with the following parameters:
+>  - *"Tabular Files"*: Select each of the matrices that you wish to join
+>  - *"Identifier column"*:`1`
+>  - *"Number of Header lines in each item"*:`1`
+>  - *"Keep original column header":`Yes`
+>  - *"Fill character"*:`0`
+{.hands-on}
  
  
  
  
+ 
+ 
 
 
 
-
-
-and all slots within a single
-
-
-
-Plates are divided into different lanes. These lanes are what are sequenced as one
-
-
-> >  e.g. Plate1 might a 10x10 array that could hold 100 cells, but the plate can only be sequenced 50 cells at a time. This effectively means that there are 2 Batches on Plate1. An analysis with 10 batches would therefore use 5 plates.
-> >
-
-
-In order to reduce cross-contamination during library preparation,
-
-
-
-
-
-
-The read primers are added to each cell before amplification and sequencing
-
-The use of 
-
-
-When 
-
-
-
-
-FASTQ data output from scRNA sequencers are batch-specific, meaning that sequences from individual cells are not demultiplexed into individual FASTQ files, but are
 
 
 # Conclusion
