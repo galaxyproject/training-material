@@ -330,7 +330,7 @@ Mapping is a relatively straightforward process:
 
 The FASTQ data was generated from sequencing Zebra working with Zebrafish data, so to perform the alignment we will need to gather all data relevant to that genome. We will use the latest version (DanRerv10).
 
-> ### {% icon Hands-on %} Performing the Alignment
+> ### {% icon hands_on %} Performing the Alignment
 >
 > 1. Obtain the GTF file and import it into our history.
 >   - This file contains all the gene, exon, intron, and other regions of interest that we will use to annotate our reads, should our reads align to any of the regions specified in this file.
@@ -358,7 +358,7 @@ The FASTQ data was generated from sequencing Zebra working with Zebrafish data, 
 
 This should take a minute or two depending on your position in the queue. Once your output files are green, proceed to the next step.
 
-> ### {% icon Hands-on %} Performing the QC on the Alignment
+> ### {% icon hands_on %} Performing the QC on the Alignment
 > 
 > Let us examine how well our alignment went.
 > 
@@ -404,7 +404,7 @@ This should take a minute or two depending on your position in the queue. Once y
 
 We now have a BAM file of our aligned reads, with cell and UMI barcodes embedded in the read headers. We also have the chromosome and base-pair positions of where these reads are aligned.
 
-> ### {% icon Hands-on %} We can confirm this by peeking into the BAM file
+> ### {% icon hands_on %} We can confirm this by peeking into the BAM file
 >
 > 1. Click on the eye symbol of the BAM output from STAR.
 > 2. There are many header lines that begin with '@' which we are not interested in. 
@@ -443,7 +443,7 @@ Unfortunately, *`STAR`* can only annotate and count reads at the gene-level and 
 FeatureCounts is a tool which answers the simple question: "How many reads bisect GeneX?"
 It is more qualitative that STAR however, since it is capable of counting not just at the Read level, but at the UMI level, such that 10 duplicate reads at GeneA will be counted only once. It also has the added benefit of being able to count at the individual cell level, providing a mechanism to produce our count matrices. 
 
-> ### {% icon Hands-on %} Quantification assist via FeatureCounts
+> ### {% icon hands_on %} Quantification assist via FeatureCounts
 > 
 > Let us annotate our BAM file with desired gene tags.
 > 
@@ -544,7 +544,7 @@ Another filtering measure we can apply is to keep reads that we are confident ab
 
 With all the relevant data now in our BAM file, we can actually perform the counting via `UMI-tools count`.
 
-> ### {% icon Hands-on %} Final Quantification
+> ### {% icon hands_on %} Final Quantification
 > 
 > Select **UMI-tools counts** {%icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Sorted BAM file"*: `out_file1` (output of **Filter** {% icon tool %})
@@ -636,7 +636,7 @@ This can be resolved by performing a "Full Join" (as described [here](http://www
 
 Let us now merge our matrices from different batches.
 
-> ### {% icon Hands-on %} Table Merge
+> ### {% icon hands_on %} Table Merge
 > 
 > Select **Column Join on Collections** {%icon tool %} with the following parameters:
 >  - *"Tabular Files"*: Select each of the matrices that you wish to join
@@ -866,7 +866,7 @@ This plating protocol can be reformatted as:
 
 This format allows for many variable setups (see *Help* section of *Cross-contamination Barcode Filter* tool)
 
-> ### {% icon Hands-on %} Hands On
+> ### {% icon hands_on %} Hands On
 > 
 > Select **Cross-contamination Barcode Filter** {%icon tool %} with the following parameters:
 >  - *"Input Matrix"*: (Here we select the merged matrices from the Column Join tool)
