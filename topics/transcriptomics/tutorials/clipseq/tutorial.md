@@ -7,7 +7,7 @@ tutorial_name: clipseq
 # Introduction
 {:.no_toc}
 
-The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a study published by *Nostrand et al.* (2016, http://dx.doi.org/10.1038/nmeth.3810). The dataset contains the first biological replicate of RBFOX2 CLIP-seq and the input control experiment (fastq files). The data was changed and downsampled to reduce data processing time, thus the datasets does not correspond to the original data pulled from *Nostrand et al.* (2016, http://dx.doi.org/10.1038/nmeth.3810). Also included is a text file (.txt) encompassing the chromosome sizes of hg19 obtained from UCSC (http://hgdownload.cse.ucsc.edu/goldenPath/hg19/bigZips/hg19.chrom.sizes) and a genome annotation (.gtf) file taken from Ensembl (http://ftp.ensemblorg.ebi.ac.uk/pub/release-74/gtf/homo_sapiens/).
+The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a study published by *Nostrand et al.* (2016, http://dx.doi.org/10.1038/nmeth.3810). The dataset contains the first biological replicate of RBFOX2 CLIP-seq and the input control experiment (fastq files). The data was changed and downsampled to reduce data processing time, consequently the data does not correspond to the original source pulled from *Nostrand et al.* (2016, http://dx.doi.org/10.1038/nmeth.3810). Also included is a text file (.txt) encompassing the chromosome sizes of hg19 obtained from UCSC (http://hgdownload.cse.ucsc.edu/goldenPath/hg19/bigZips/hg19.chrom.sizes) and a genome annotation (.gtf) file taken from Ensembl (http://ftp.ensemblorg.ebi.ac.uk/pub/release-74/gtf/homo_sapiens/).
 
 **Table 1**: Metadata for CLIP-seq experiments in this tutorial. PE: paired-end.
 
@@ -28,14 +28,13 @@ The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a stud
 
 # Finding Binding Motifs for RBFOX2
 
-RBFOX2 is a relevant development and tissue-specific splicing factor with a very conserved motif `TGCATG`, binding mainly in introns. We therefore want to process and validate the data to find this conserved motif and in the process identify the function of RBFOX2 as well as describe the function of the targeted RNA.
+RBFOX2 is a relevant development and tissue-specific splicing factor with the conserved motif `TGCATG`. It binds mainly in introns. We therefore want to process and validate the data to find this conserved motif and in the process identify the function of RBFOX2 as well as describe the function of the targeted RNA.
 
 ## Step 1: Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 > 1. Create and name a new history for this tutorial.
-> 2. Import the following files from [Zenodo](https://zenodo.org/record/1327423) or from a data
->    library named `TODO` if available (ask your instructor)
+> 2. Import the following files from [Zenodo](https://zenodo.org/record/1327423).
 >
 >    ```
 >    https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/hg19_chr_sizes.txt
@@ -60,14 +59,6 @@ RBFOX2 is a relevant development and tissue-specific splicing factor with a very
 >    ![upload](../../images/upload_data_page.png "Data can be imported directly with links.")
 >
 >   ![data](../../images/clipseq_data_uploaded.png "Imported datasets will appear in the history panel.")
->    > ### {% icon tip %} Tip: Importing data from a data library
->    >
->    > * Go into "Shared data" (top panel) then "Data libraries"
->    > * Click on "Training data" and then "Transcriptomics"
->    > * Select interesting file
->    > * Click on "Import selected datasets into history"
->    > * Import in a new history
->    {: .tip}
 >
 {: .hands_on}
 
@@ -79,12 +70,12 @@ As for any NGS data analysis, CLIP-seq data must be quality controlled before be
 
 > ### {% icon hands_on %} Hands-on: Quality control with FastQC
 >
-> 1. **FastQC** {% icon tool %}: Run the tool **FastQC** on each FASTQ file to assess the quality of the raw data. An explanation of the results can be found on the [FastQC web page](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
+> 1. **FastQC** {% icon tool %}: Run the tool **FastQC** on each fastq file to assess the quality of the raw data. An explanation of the results can be found on the [FastQC web page](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 >
 >    > ### {% icon tip %} Tip: Running a tool on multiple data files
 >    >
->    > You can run this tool - and many other tools - on all the FASTQ files at once!
->    > To do this, first select the "Multiple datasets" icon (two stacked pages) under the "Input FASTQ file" heading in the **FASTQC** Tool Form, then shift+click to select multiple FASTQ files.
+>    > You can run this tool - and many other tools - on all the fastq files at once!
+>    > To do this, first select the "Multiple datasets" icon (two stacked pages) under the "Input FASTQ file" heading in the **FASTQC** Tool Form, then shift+click to select multiple fastq files.
 >    {: .tip}
 >
 > 2. Check the **Sequence Duplication Levels** plot.   
@@ -94,13 +85,13 @@ As for any NGS data analysis, CLIP-seq data must be quality controlled before be
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. What does the y-axis represent in Figure 3?
->    > 2. What is the meaning of the read and blue line?
+>    > 2. What is the meaning of the red and blue line?
 >    > 3. What does the headline of Figure 3 tell you?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. PCR duplication occur naturally in any NGS experiment during the PCR amplification of the genetic material. CLIP-Seq is prone to many PCR duplicates because of the sparse material that is obtained during a CLIP-Seq experiment resulting in many occasions in high PCR cycles. The y-axis in Figure 3 represents the portion of reads with the specific duplication level. An exact sequence match is needed to detect a duplicated read. More information can be found here: http://www.cureffi.org/2012/12/11/how-pcr-duplicates-arise-in-next-generation-sequencing/ .
->    > > 2. The blue line shows the duplication levels distribution of the full sequence set. The red line depicts an ideal curve after a de-duplication step (duplicates filtered out). Spikes in the red line come from different duplication levels in the original data (blue line).
->    > > 3. The headline states an expected value of reads that would remain after duplicated reads would be filtered out. A high percentage suggest, that no de-duplication step is needed. This should also correspond with the red line.
+>    > > 1. PCR duplications occur naturally in any NGS experiment during the PCR amplification of the genetic material. CLIP-Seq is prone to many PCR duplicates because of the sparse material that is obtained during a CLIP-Seq experiment resulting in high PCR cycles in many occasions. The y-axis in Figure 3 represents the portion of reads with the specific duplication level. An exact sequence match is needed to detect a duplicated read. More information can be found here: http://www.cureffi.org/2012/12/11/how-pcr-duplicates-arise-in-next-generation-sequencing/ .
+>    > > 2. The blue line shows the duplication level distribution of the full sequence set. The red line depicts an ideal curve after a de-duplication step (duplicates are filtered out). Spikes in the red line come from different duplication levels in the original data (blue line).
+>    > > 3. The headline states an expected value of reads that would remain after a de-duplication step. A high percentage suggest, that no de-duplication step is needed. This should also correspond with the red line.
 >    > {: .solution }
 >    {: .question}
 {: .hands_on}
@@ -109,12 +100,12 @@ As for any NGS data analysis, CLIP-seq data must be quality controlled before be
 
 It is often necessary to remove adapter and barcodes sequences as well as UMIs. <br/>
 **Adapters** (or primers) are needed for PCR amplification and sequencing in a standard NGS protocol. Unfortunately, it might happen during the sequencing that the machine does not stop at the read end and sequences through the adapter as well. That is why, we need to check if our reads contain those sequences which we are then cutting out.<br/>
-**Barcodes** on the other hand are especially designed for a read library and intentionally sequenced. Sometimes experiments are sequenced at the same time which is called **multiplexing**. Multiplexing allows for a better data normalization and comparison. The barcodes are then used to divide the un-multiplexed data set into the individual read libraries. (**Note: Our data is already de-multiplexed, i.e., we do not have to take barcode seqeunces into account.**)<br/>
+**Barcodes** on the other hand are especially designed for a read library and intentionally sequenced. Sometimes experiments are sequenced at the same time which is called **multiplexing**. Multiplexing allows for a better data normalisation and comparison. The barcodes are then used to divide the un-multiplexed data set into the individual read libraries. (**Note: Our data is already de-multiplexed, i.e., we do not have to take barcode sequences into account.**)<br/>
 **UMIs** are similar to barcodes but these sequences are unique for each read. UMIs were introduced since iCLIP to deal with the high duplication levels of a CLIP experiment. Because each read contain an UMI, PCR duplicates of that read also contain the same UMI, which makes it possible to fuse all reads with the same UMI.
 
 ## Removal of Adapter Sequences with **Cutadapt**
 
-In this task we are going to remove two 3' and two 5' adapters from the reads (Note: The eCLIP protocol uses more adapter sequences, for more information take a look [here](http://dx.doi.org/10.1038/nmeth.3810)). Because **Cutadapt** can only process one site of the read pair, we have to trigger **Cutadapt** twice.
+In this task we are going to remove two 3' and two 5' adapters from the reads (Note: The eCLIP protocol uses more adapter sequences, for more information take a look [here](http://dx.doi.org/10.1038/nmeth.3810)). Because **Cutadapt** can only process one site of the read pair, we have to trigger **Cutadapt** twice, i.e., for the forward and the reverse pair.
 
 > ### {% icon hands_on %} Hands-on: Adapter Removal
 >
@@ -180,23 +171,23 @@ In this task we are going to remove two 3' and two 5' adapters from the reads (N
 >    - *"Additional output options"*: `Default`
 >    - *"Additional modifications to reads"*: `No Read Modifications`
 >
->    > ### {% icon comment %} Do the Same thing for the input control data set.
+>    > ### {% icon comment %} Do the same thing for the input control data set.
 >    >
->    > If you processed the RBFOX2 fastq dataset then do the same thing for input control data set or *vice verca*.
+>    > If you processed the RBFOX2 fastq dataset then do the same thing for the input control dataset or *vice verca*.
 >    {: .comment}
 >
 {: .hands_on}
 
 ## Removal of UMIs with **UMI-tools extract**
 
-In this task we are going to remove the 5 bp UMI in the 5' end of the second read.
+In this task we are going to remove the UMI at the 5' end of the second read.
 
 > ### {% icon hands_on %} Hands-on: UMI Removal
 >
 > 1. **UMI-tools extract** {% icon tool %} with the following parameters:
 >    - *"Library type"*: `Paired-end`
->     - {% icon param-file %} *"Reads in FASTQ format"*: `fastq R1` (output from the **second** **Cutadapt** call {% icon tool %})
->     - {% icon param-file %} *"Reads in FASTQ format"*: `fastq R2`  (output from the **second** **Cutadapt** call {% icon tool %})
+>     - {% icon param-file %} *"Reads in FASTQ format"*: `fastq R2` (output from the **second** **Cutadapt** call {% icon tool %})
+>     - {% icon param-file %} *"Reads in FASTQ format"*: `fastq R1`  (output from the **second** **Cutadapt** call {% icon tool %})
 >     - *"Barcode on both reads?"*: `Barcode on first read only`
 >    - *"Use Known Barcodes?"*: `No`
 >    - *"Method to extract barcodes"*: `String`
@@ -205,17 +196,16 @@ In this task we are going to remove the 5 bp UMI in the 5' end of the second rea
 >    - *"Output log?"*: `Yes`
 >    - *"Enable quality filter?"*: `No`
 >
->    > ### {% icon comment %} Do the Same thing for the input control data set.
+>    > ### {% icon comment %} Do the same thing for the input control data set.
 >    >
->    > If you processed the RBFOX2 fastq dataset then do the same thing for input control data set or *vice verca*.
+>    > If you processed the RBFOX2 fastq dataset then do the same thing for the input control dataset or *vice verca*.
 >    {: .comment}
 >
 {: .hands_on}
 
 # Step 4: Aligning Reads to a Reference Genome
 
-To determine where DNA fragments originated in the genome, the sequenced reads must be aligned to a reference genome. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way, however, this can take a couple of weeks.
-Nowadays, there are many read alignment programs, `STAR` is one of them that works well with CLIP-Seq data, for more information read  [here](doi:10.1093/bioinformatics/bts635). STAR is able to use genome as well as transcriptome data. This ability is handy, since CLIP-Seq generetas transcriptome data, thus, we have to take RNA processing steps like splicing events into account.
+To determine where DNA fragments originated in the genome, the sequenced reads must be aligned to a reference genome. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. However, this can take a couple of weeks. Nowadays, there are many read alignment programs. `STAR` is one of them that works well with CLIP-Seq data, for more information read  [here](doi:10.1093/bioinformatics/bts635). `STAR` is able to use genome as well as transcriptome data. This ability is handy, since CLIP-Seq generates transcriptome data, consequently we have to take RNA processing steps like splicing events into account.
 
 ## Aligning with **RNA STAR**
 
@@ -235,19 +225,19 @@ Nowadays, there are many read alignment programs, `STAR` is one of them that wor
 >            - *"Use end-to-end read alignments, with no soft-clipping?"*: `Yes`
 >        - *"Would you like to set chimeric alignment parameters?"*: `No`
 >
->    > ### {% icon comment %} Note: We have used switched R1 and R2 as forward and reverse reads!
+>    > ### {% icon comment %} Note: We have switched R1 and R2 as forward and reverse reads!
 >    >
->    > We need to do that because the eCLIP read library is organized in a way such that the first mate (R1) is in reverse and the second mate (R2) in forward orientation.
+>    > We need to do that because the eCLIP read library is organised in a way such that the first mate (R1) is in reverse and the second mate (R2) in forward orientation.
 >    {: .comment}
 >
 >    > ### {% icon comment %} Soft-Clipping vs Hard-Clipping
 >    >
->    > Clipping is a way to deal with low quality bases during the alignment step. In **Soft-Clipping** the bases at the 5' and 3 end of the read are not part of the alignment. In **Hard-Clipping** the bases at the 5' and 3' end of the read are not part of the alignment **and** will be completely removed from the read sequence in the BAM file.
+>    > Clipping is a way to deal with low quality bases during the alignment step. In **Soft-Clipping** the bases at the 5' and 3' end of the read are not part of the alignment. In **Hard-Clipping** the bases at the 5' and 3' end of the read are not part of the alignment **and** will be completely removed from the read sequence in the BAM file.
 >    {: .comment}
 >
->    > ### {% icon comment %} Do the Same thing for the input control data set.
+>    > ### {% icon comment %} Do the same thing for the input control data set.
 >    >
->    > If you processed the RBFOX2 fastq dataset then do the same thing for input control data set or *vice verca*.
+>    > If you processed the RBFOX2 fastq dataset then do the same thing for the input control dataset or *vice verca*.
 >    {: .comment}
 >
 {: .hands_on}
@@ -285,7 +275,7 @@ Lets return to the UMIs which we extracted in step three. Since we have mapped t
 >    >
 >    {: .comment}
 >
->    > ### {% icon comment %} Do the Same thing for the input control data set.
+>    > ### {% icon comment %} Do the same thing for the input control data set.
 >    >
 >    > If you processed the RBFOX2 bam file then do the same thing for the input control bam or *vice verca*.
 >    {: .comment}
@@ -299,7 +289,7 @@ Lets return to the UMIs which we extracted in step three. Since we have mapped t
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Because we need the coordinates of the reads to see if some reads have the same coordinates and the same UMI which suggests potential read duplicates.
+> > 1. Because we need the coordinates of the reads to see if some reads have the same coordinates and the same UMI.
 > > 2. `UMI-tools dedulication` uses the hamming distance between UMIs to detect sequencing errors in the UMIs. A hamming distance of 1 means, that two UMIs are the same if they differ in maximal one character. If two characters are different, then these are two disparate UMIs.
 > >
 > {: .solution}
@@ -313,7 +303,7 @@ Lets return to the UMIs which we extracted in step three. Since we have mapped t
 > 1. **FastQC** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Short read data from your current history"*: `bam` (output of **UMI-tools deduplicate** {% icon tool %})
 > 2. View the **Sequence Duplication Levels** plot.
-> ![fastqafter](../../images/clipseq_duplication_level_2.png "Sequence duplication levels <b>before</b> de-duplication.")
+> ![fastqafter](../../images/clipseq_duplication_level_2.png "Sequence duplication levels <b>after</b> de-duplication.")
 {: .hands_on}
 
 > ### {% icon question %} Questions
@@ -323,7 +313,7 @@ Lets return to the UMIs which we extracted in step three. Since we have mapped t
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. We have reduced the duplication level.
+> > 1. We have reduced the duplication levels.
 > > 2. The duplication levels are still high, because we don't have the full data sets (reads are missing).
 > {: .solution}
 >
@@ -344,21 +334,21 @@ In this section we check the quality of our mapped reads and see if our samples 
 >     - *"Bin size in bases"*: `100`
 >    - *"Show advanced output settings"*: `no`
 > 2. View the output image.
-> ![fingerprint](../../images/clipseq_fingerprint.png "Sequence duplication levels <b>before</b> de-duplication.")
+> ![fingerprint](../../images/clipseq_fingerprint.png "Graph of IP strength from <b>plotFingerprint</b>..")
 >
 {: .hands_on}
 
 > ### {% icon question %} Questions
 >
 >    > 1. What does this graph represent?
->    > 2. How do (or should) input datasets differ from IP datasets?
->    > 3. What do you think about the quality of the IP for this experiment?
+>    > 2. How do (or should) input datasets differ from CLIP datasets?
+>    > 3. What do you think about the quality of the CLIP experiment?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. It shows us how good the CLIP Signal compared to the control signal is. Now be careful, CLIP-Seq experiments involve either a total RNA control or a negative control with another protein that unspecifically binds RNA (e.g., IgG). An ideal total RNA control (input control) like ours with perfect uniform distribution of reads along the genome/transcriptome (i.e. without enrichments) and infinite sequencing coverage should generate a straighter diagonal line. On the other hand, a very specific and strong CLIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank. Yet, a negative control often has the same sharp slope at the end as a CLIP experiment but often depicts a straighter diagonal line in the beginning like the input control.
-> > 2. We expect that the control (input) has a different more straighter diagonal slope than the CLIP experiment.
-> > 3. Both the CLIP experiment and the control are closely related. IT is maybe wise to check the correlation of the two samples further.
+> > 1. It shows us how good the CLIP Signal compared to the control signal is. Now be careful, CLIP-Seq experiments involve either a total RNA control or a negative control with another protein that unspecifically binds RNA (e.g., IgG). An ideal total RNA control (input control) like ours with perfect uniform distribution of reads along the genome/transcriptome (i.e. without enrichments) and infinite sequencing coverage should generate a straighter, diagonal line. On the other hand, a very specific and strong CLIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank. Yet, a negative control often has the same sharp slope at the end as a CLIP experiment but often depicts a straighter, diagonal line in the beginning like the input control.
+> > 2. We expect that the control (input) has a different, more straighter, diagonal slope than the CLIP experiment.
+> > 3. Both the CLIP experiment and the control are closely related. It is maybe wise to check the correlation of the two samples.
 > {: .solution}
 >
 {: .question}
@@ -385,14 +375,14 @@ We are therefore going to further check the correlation between our control and 
 >    - *"Skip zeros"*: `Yes`
 >    - *"Image file format"*: `png`
 > 3. View the output image.
-> ![correlation](../../images/clipseq_correlation.png "Sequence duplication levels <b>before</b> de-duplication.")
+> ![correlation](../../images/clipseq_correlation.png "Heatmap of correlation matrix generated by <b>plotCorrelation</b>.")
 {: .hands_on}
 
 > ### {% icon question %} Questions
 >
 > 1. Why do we want to skip zeros in plotCorrelation?
 > 2. What happens if the Spearman correlation method is replaced by the Pearson method?
-> 3. What does the corelation tell you about our data?
+> 3. What does the correlation tell you about our data?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -405,7 +395,7 @@ We are therefore going to further check the correlation between our control and 
 
 # Step 7: Peakcalling
 
-Peakcalling is one of the most important steps in the data anaylsis of CLIP-Seq, next to mapping. There exist a variety of peakcallers, each with different underlying assumptions and parameters. It is up to you to find the best suited method and set of parameters, that is why, it is difficult (nearly impossible) to find a generic solution for every data set. We are going to use `PEAKachu` to find possible binding motifs for our data. `PEAKachu` is able to incorporate control data in contrast to other peakcallers like `Piranha`, thus allowing to find binding regions that are significantly enriched in comparison to our control (input) data.
+Peakcalling is one of the most important steps in the data analysis of CLIP-Seq, next to mapping. There exist a variety of peakcallers, each with different underlying assumptions and parameters. It is up to you to find the best suited method and set of parameters, that is why, it is difficult (nearly impossible) to find a generic solution for every data set. We are going to use `PEAKachu` to find possible binding motifs for our data. `PEAKachu` is able to incorporate control data in contrast to other peakcallers like `Piranha`, thus allowing to find binding regions that are significantly enriched in comparison to our control (input) data.
 
 ## Peackcalling with **PEAKachu**
 
@@ -413,7 +403,7 @@ Peakcalling is one of the most important steps in the data anaylsis of CLIP-Seq,
 >
 > 1. **PEAKachu** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Experiment Libraries"*: `bam RBFOX2` (output of **UMI-tools deduplicate** {% icon tool %})
->    - {% icon param-file %} *"Control Libraries"*: `bam INPUT` (output of **UMI-tools deduplicate** {% icon tool %})
+>    - {% icon param-file %} *"Control Libraries"*: `bam Input` (output of **UMI-tools deduplicate** {% icon tool %})
 >    - *"Pairwise Replicates"*: `No`
 >    - *"Paired End"*: `Yes`
 >    - *"Maximum Insert Size"*: `"200"`
@@ -423,7 +413,7 @@ Peakcalling is one of the most important steps in the data anaylsis of CLIP-Seq,
 >    - *"Fold Change Threshold"*: `"2.0"`
 >    - *"Adjusted p-value Threshold"*: `"0.05"`
 > 2. Take a look at the MA plot of **PEAKachu**.
-> ![ma](../../images/clipseq_ma_plot.png "Sequence duplication levels <b>before</b> de-duplication.")
+> ![ma](../../images/clipseq_ma_plot.png "MA plot of <b>PEAKachu</b>.")
 {: .hands_on}
 >
 >    > ### {% icon comment %} Adjusted p-value Threshold
@@ -433,7 +423,7 @@ Peakcalling is one of the most important steps in the data anaylsis of CLIP-Seq,
 >
 >    > ### {% icon comment %} Fold-Change Threshold
 >    >
->    > The fold-hange is calculated by DESeq2 and is actually a log2 fold-change, falsely declared as a fold-change on galaxy.
+>    > The fold-hange is calculated by DESeq2 and is actually a log2 fold-change.
 >    {: .comment}
 >
 {: .hands_on}
@@ -442,22 +432,22 @@ Peakcalling is one of the most important steps in the data anaylsis of CLIP-Seq,
 >
 > 1. Why have we set the log2 fold-change threshold to 2.0?
 > 2. Take a look into the peak output file of PEAKachu. Why aren't there any p-values?
-> 3. Is the log2 fold-change alone a good measurement to validate our peaks. Maybe the MA plot helps you to figure out the question?
+> 3. Is the log2 fold-change alone a good measurement to validate our peaks. Maybe the MA plot helps you to figure out this question?
 > 4. What does the MA plot tell you?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. Because we want significantly enriched binding regions, we basically search for peaks that are at least four times higher in our CLIP experiment than in our control.
 > > 2. PEAKachu works mainly with replicated data, because DESeq2 calculates only p-values for data sets where the experiment and control have at least two replicates. This feature makes statistically sense, because data sets without replicates are not representative enough to make general assumptions, but for the purpose of demonstration we are going to ignore this fact.
-> > 3. Yes and no. A significant fold-change with high read counts (read coverage) might be enough to validate a peak. However some peaks can also be covered by very few reads and still have a high fold-change, e.g., log2(4/1). It is for you to decide if a fold-change like log2(4/1) is enough evidence that the binding region is significantly enriched.
-> > 4. MA stands for M (log ratio) and A (mean average). It shows you the general trend of the log2 fold-change in dependence of the average mean of the expression rate of the peaks. Points in straight diagonal line symbolize the behavior of the logarithm which is often visible for low expressed peaks, because one read can change the fold-change quite drastically. The blue lines depict the normalization constants. Read dots are significant peaks.
+> > 3. Yes and no. A significant fold-change with high read counts (read coverage) might be enough to validate a peak. However, some peaks can also be covered by very few reads and still have a high fold-change, e.g., log2(4/1). It is for you to decide if a fold-change like log2(4/1) is enough evidence that the binding region is significantly enriched.
+> > 4. MA stands for M (log ratio) and A (mean average). It shows you the general trend of the log2 fold-change in dependence of the average mean of the expression rate of the peaks. Points in a straight, diagonal line symbolise the behavior of the logarithm which is often visible for low expressed peaks, because one read can change the fold-change quite drastically. The blue lines depict the normalisation constants. Read dots are significant peaks.
 > {: .solution}
 >
 {: .question}
 
 # Step 8: Peak Analysis
 
-In this last step, we are going to analyze the peaks that we obtained from the previous step. This should give a small glimpse of what someone might be interested in. Therefore we want to answer in this step the following questions:
+In this last step, we are going to analyse the peaks that we obtained from the previous step. This should give you a small glimpse of what someone might be interested in. Therefore we want to answer in this step the following questions:
 1) Which sequential motifs are potentially conserved in our binding regions, i.e., what are potential binding motifs of RBFOX2? 2) Which RNAs does RBFOX2 preferentially bind and what are their biological function?
 
 ## Motif detection with **MEME-ChIP**
@@ -496,7 +486,7 @@ In this last step, we are going to analyze the peaks that we obtained from the p
 >    - *"I certify that I am not using this tool for commercial purposes."*: `Yes`
 > 5. View the **MEME-ChIP** html.
 >
-> ![motif](../../images/clipseq_motif.png "Sequence duplication levels <b>before</b> de-duplication.")
+> ![motif](../../images/clipseq_motif.png "Plot of a sequence motif.")
 {: .hands_on}
 >
 >    > ### {% icon comment %} MEME and DREME
@@ -519,7 +509,7 @@ In this last step, we are going to analyze the peaks that we obtained from the p
 > > 1. **PEAKachu** might underestimate the length of the binding regions, because the actually binding concentrates on the crosslinking site that is one nucleotide long. Thus, we extend the peaks from **PEAKachu** by 20 bp at each site. A true conserved binding motif will not be affected by it, if we make the region to wide.
 > > 2. The E-value represents the expected number of times we would find our sequence motif in a database (peak file), just by chance. This means, that a small E-value correspond to a very significant motif, because the expected number we would find that motif in our peakfile just by chance is very low. Other sequences like repeats will have a high E-value on the other hand.  
 > > 3. The x-axis of the sequence plots represents the nucleotide position of the motif. The y-axis stands for the total information (uncertainty) of each position and thus stands for the probability that the nucleotide at a certain position is the specific letter (for DNA: T,C,G,A). Bigger letters stand for a higher probability. For more information read [here](https://en.wikipedia.org/wiki/Sequence_logo).
-> > 4. For the result with MEME-ChIP version 4.11.2. **MEME** site count: 37, total sequences: 100, fraction: 37%. **DREME** site count: 103, total sequences: 247, fraction: 41.7%.
+> > 4. For the result with MEME-ChIP version 4.11.2: **MEME** site count = 37, total sequences = 100, fraction = 37%; **DREME** site count = 103, total sequences = 247, fraction = 41.7%.
 > > 5. Yes.
 > {: .solution}
 >
@@ -580,20 +570,31 @@ Sometimes it is wise to take a look at individual peaks; maybe to check the peak
 >
 >    > ### {% icon comment %} Do the Same thing for the input control data set.
 >    >
->    > If you processed the RBFOX2 bam dataset then do the same thing for input control data set or *vice verca*.
+>    > If you processed the RBFOX2 bam dataset then do the same thing for the input control dataset or *vice verca*.
 >    {: .comment}
 >
 {: .hands_on}
 
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
-
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+In this tutorial you imported raw eCLIP data, evaluated the quality of the read library before the read processing, removed adapter sequences and unique molecular identifier from the reads, aligned the reads to a reference genome, de-duplicated the read library, analysed the quality of the de-dupliation and read mapping, found significantly enriched regions (peaks) for the protein RBFOX2 and finally scrutinised the peaks on potential conserved motifs and target RNAs. In addition, you took a short glimpse on the quality of the peak calling. Keep in mind, the read library for CLIP-Seq data might have different formats for different protocols (e.g, PAR-CLIP). However, the overall analysis you learned in this tutorial stays nearly the same.
+
+# Remark to Workflow
+{:.no_toc}
+
+In order to use the workflow linked to this tutorial, you have to create two lists of dataset pairs; one for you control and one for your CLIP experiment.
+
+>    > ### {% icon tip %} Tip: Creating a list of dataset pairs.
+>    >
+>    > * Click on the check box icon in the history.
+>    > ![builddatasetpairs1](../../images/clipseq_build_list_data_set_pairs_1.png "Select data sets for your list of data set pairs.")
+>    > * Select the data files for your experiment (or control).
+>    > * Select **For all selected...** below the check box icon.
+>    > * Select **Build List of Dataset Paris**
+>    > * In the new window, if you see no files and a warning, then select **Clear filters**. After that, organise the files into forward-reverse pairs.
+>    > ![builddatasetpairs2](../../images/clipseq_build_list_data_set_pairs_2.png "Organise the data sets into pairs.")
+>    >
+>    >  ![builddatasetpairs3](../../images/clipseq_build_list_data_set_pairs_3.png "Result after organising the data sets into pairs.")
+>    > * Give the list a name and click on the button **Create list**.
+>    {: .tip}
