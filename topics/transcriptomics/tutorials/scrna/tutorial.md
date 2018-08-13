@@ -4,6 +4,41 @@ topic_name: transcriptomics
 tutorial_name: scrna
 ---
 
+<style>
+blockquote img {
+  width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.tutorial table { 
+  width:unset;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.tutorial table thead th {
+  border-bottom: 2px solid #777; 
+  text-align: left;
+}
+
+.tutorial table td:first-child, .tutorial table th:first-child  {
+  border-right: 2px solid #777; 
+  font-weight: bold;
+  text-align: left;
+}
+
+.tutorial table td:not(first-child), .tutorial table th:not(first-child) {
+  text-align: center;
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+}
+
+</style>
+
+
+
+
 # Introduction
 {:.no_toc}
 
@@ -30,9 +65,9 @@ The size of these FASTQ files are typically in the gigabyte range and are somewh
 
 ## CelSeq2
 
-The CelSeq2 protocol is a paired-end protocol, meaning that the primers contain strand-specific information. In this case; Read1 contains the barcoding information followed by the polyT tail of the messenger RNA, and Read2 contains the actual sequence. Here, Read1 is regarded as the 'forward' strand and Read2 as the 'reverse' strand, though this is more a convention when dealing with paired-end data rather than an indication of the actual strand orientation.
+The CelSeq2 protocol is a paired-end protocol, meaning that two primers bind to opposite strands in order to sequence. Each primer has a specific role. In this case; *Read1* contains the barcoding information followed by the polyT tail of the messenger RNA, and *Read2* contains the actual sequence. Here, Read1 is regarded as the 'forward' strand and Read2 as the 'reverse' strand, though this is more a convention when dealing with paired-end data rather than an indication of the actual strand orientation.
 
- ![CelSeq2 Scheme](../../images/celseq2_schema.png "Read1 encapsulates the barcodes, and Read2 the mRNA sequence" )
+ ![CelSeq2 Scheme](../../images/celseq2_schema.png "Read1 encapsulates the barcodes, and Read2 the mRNA sequence")
 
 
 ## Barcodes
@@ -52,7 +87,7 @@ When the sequence is mapped against a reference genome, we can then see which ge
 > >
 > > If our sequence codes for a *GeneX* which is a gene of interest, we may want to know which cells express GeneX more than others.
 > >
-> > If CellA has 10 times more GeneX sequences than CellB, then we know that CellA and CellB differ at GeneX - which might suggest a causative source of variation for any change in function between CellA and CellB (or cells in the same cluster as CellA, and cells in the same cluster as CellB)
+> > If *CellA* has 10 times more *GeneX* sequences than *CellB*, then we know that *CellA* and *CellB* differ at *GeneX* - which might suggest a causative source of variation for any change in function between *CellA* and *CellB* (or cells in the same cluster as *CellA*, and cells in the same cluster as *CellB*).
 > >
 > {: .solution}
 {: .question}
@@ -60,8 +95,9 @@ When the sequence is mapped against a reference genome, we can then see which ge
 
 > ### {% icon question %} Question
 >
-> Barcoding the cell makes sense, but why do we need to barcode the transcript too?  
-> Can we not infer which gene the sequence originates from by simply mapping it against the reference genome?
+> Barcoding the cell makes sense, but why do we need to barcode the transcript too?
+> 
+> i.e. Can we not infer which gene the sequence originates from by simply mapping it against the reference genome?
 > 
 > > ### {% icon solution %} Solution
 > >
@@ -74,13 +110,14 @@ When the sequence is mapped against a reference genome, we can then see which ge
 > {: .solution}
 {: .question}
 
-> ### {% icon details %} UMIs: Mitigating duplicate transcript counts:
+> ### {% icon details %} Mitigating duplicate transcript counts with UMIs:
 >
 > One of the major issues with sequencing is that the read fragments require amplification before they can be sequenced. A gene with a single mRNA transcript will not be detected by most sequencers, so it needs to be duplicated 100-1000x times for the sequencer to 'see' it.
 >
 > Amplification is an imprecise process however, since some reads are amplified more than others, and subsequent amplification can lead to these over-amplified reads being over-amplified even more, leading to an exponential bias of some reads over others.
 >
->  ![Amplification Bias](../../images/scrna_amplif_errors.png "A cell with two reads from different trascripts being amplified unevenly" )
+> 
+> ![Amplification Bias](../../images/scrna_amplif_errors.png "A cell with two reads from different trascripts being amplified unevenly")
 >
 > Consider the above example where two reads from different transcripts are amplified unevenly. The resulting frequency table would look like so:
 >
@@ -88,11 +125,10 @@ When the sequence is mapped against a reference genome, we can then see which ge
 >  |--|------------------|
 >  | Gene Red | 5 |
 >  | Gene Blue | 0 |
->  
-> But the truth is entirely different (i.e. Gene Red should have 1 count, and Gene Blue should also have 1 count).  
-> How do we correct for this bias?
+>
 > 
-> ### UMIs to the rescue
+> But the truth is entirely different (i.e. Gene Red should have 1 count, and Gene Blue should also have 1 count). How do we correct for this bias?
+>
 > 
 > **Unique Molecular Identifiers** (or *UMIs*) constitute the second portion of a barcode, where their role is to *uniquely* count reads such that amplicons of the same read are only counted once, e.g:
 > 
@@ -127,26 +163,35 @@ When the sequence is mapped against a reference genome, we can then see which ge
 >  |--|----------------|
 >  | Gene Red | 2 |
 >  | Gene Blue | 2 |
+>
+>
+> > ### {% icon question %} Question
+> >
+> > 1. Are UMIs specific to genes? i.e. Can the same UMI map to different genes?
+> > 2. Can the same UMI map to different mRNA molecules of the same gene?
+> > 
+> > > ### {% icon solution %} Solution
+> > >
+> > > 1. No. The same UMI can tag transcripts of different genes. UMIs are not universal tags, they are just 'added randomness' that help reduce amplification bias -- not unique to any particular gene.
+> > > 2. Yes, UMIs are not precise but operate probabilistically. In most cases, two transcripts of the same gene will be tagged by different UMIs. In rarer (but still prevalent) cases, the same UMI will capture different transcripts of the same gene.
+> > >  * One helpful way to think about how quantification is performed is to observe the following heirarchy of data `Cell Barcode → Gene → UMI`
+> > >
+> > >   e.g.
+> > > 
+> > >  | BC:Cell | BC:UMI | Maps to Gene |
+> > >  |------|-----|------|
+> > >  | AAAT | TCA | Slx1 |
+> > >  | AAAT | GTG | Slx2 |
+> > >  | AAAT | TCA | Gh13 |
+> > >  | TTAA | TCA | Slx1 |
+> > >  | TTAA | CCC | Atp3 |
+> > >
+> > > If UMIs were unique to a gene, then the `TCA` UMI barcode would not have reads that map to both *Slx1* and *Gh13* in the same cell (`AAAT`).
+> > >
+> > {: .solution}
+> >
+> {: .question}
 {: .details}
-
-
-> ### {% icon question %} Question
->
-> 1. Are UMIs specific to genes? i.e. Can the same UMI map to different genes?
-> 2. Can the same UMI map to different mRNA molecules of the same gene?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. The same UMI can tag transcripts of different genes. UMIs are just 'added randomness' that help reduce amplification bias, but they are not unique to any particular gene.
-> > 2. Yes, UMIs are not precise but work on a probabalistic level. In most cases, two transcripts of the same gene will be tagged by different UMIs. In rarer (but still prevalent) cases, the same UMI will capture different transcripts of the same gene.
-
-
-are added to each cell
-> >
-> > If CellA has 10 times more GeneX sequences than CellB, then we know that CellA and CellB differ at GeneX - which might suggest a causative source of variation for any change in function between CellA and CellB (or cells in the same cluster as CellA, and cells in the same cluster as CellB)
-> >
-> {: .solution}
-{: .question}
 
 
 
@@ -154,7 +199,7 @@ are added to each cell
 
 We now know the role of UMIs and cell barcodes, but how do we handle them in the analysis?
 
-Let us look at 4 example sequences:
+Let us look at 4 example sequences in some paired-end FASTQ data:
 
 <!-- 
 
@@ -170,85 +215,127 @@ These are reads that all map to ENSDARG00000019692. In [Cell, UMI] format:
 
 -->
 
-The Forward reads:
+ * Forward reads:
 
-    @J00182:75:HTKJNBBXX:2:1115:8501:46961 1:N:0:ATCACG
-    GGAAGAACCAGATTTTTTTTTTTTTTTTTT
-    +
-    AAFFFJJJJJJJFFFJJJJJJJJJJJJJJJ
-    
-    @J00182:75:HTKJNBBXX:2:1203:25022:13763 1:N:0:ATCACG
-    GTCCCAGGTAACTTTTTTTTTTTTTTTTTT
-    +
-    AAFFFJJJJJJJJFFJJJJJJJJJFJ<FF-
-    
-    @J00182:75:HTKJNBBXX:2:2222:13301:35690 1:N:0:ATCACG
-    GTCCCAGGTAACTTTTTTTTTTTTTTTTTT
-    +
-    AAFFFJJJJJJJ<AFJJJJJFFJJFJJJFF
-    
-    @J00182:75:HTKJNBBXX:2:1114:12469:11073 1:N:0:ATCACG
-    CGGCGTGGTAACTTTTTTTTTTTTTTTTCC
-    +
-    AAFFFJJJJJJJFAFFJJJJJJJJF---<F
+        @J00182:75:HTKJNBBXX:2:1115:8501:46961 1:N:0:ATCACG
+        GGAAGAACCAGATTTTTTTTTTTTTTTTTT
+        +
+        AAFFFJJJJJJJFFFJJJJJJJJJJJJJJJ
+        
+        @J00182:75:HTKJNBBXX:2:1203:25022:13763 1:N:0:ATCACG
+        GTCCCAGGTAACTTTTTTTTTTTTTTTTTT
+        +
+        AAFFFJJJJJJJJFFJJJJJJJJJFJ<FF-
+        
+        @J00182:75:HTKJNBBXX:2:2222:13301:35690 1:N:0:ATCACG
+        GTCCCAGGTAACTTTTTTTTTTTTTTTTTT
+        +
+        AAFFFJJJJJJJ<AFJJJJJFFJJFJJJFF
+        
+        @J00182:75:HTKJNBBXX:2:1114:12469:11073 1:N:0:ATCACG
+        CGGCGTGGTAACTTTTTTTTTTTTTTTTCC
+        +
+        AAFFFJJJJJJJFAFFJJJJJJJJF---<F
 
-The Reverse reads:
+ * Reverse reads:
 
-    @J00182:75:HTKJNBBXX:2:1115:8501:46961 2:N:0:ATCACG
-    GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA
-    +
-    A<<A-777F<AA<AJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
-    
-    @J00182:75:HTKJNBBXX:2:1203:25022:13763 2:N:0:ATCACG
-    GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT
-    +
-    ---<----<A---77-7A-FJ<JJFFJJ<JJAJ7<-FAFFJJFF<FFJJFFAJFA-AFFFJFFFFFJAJJ
-    
-    @J00182:75:HTKJNBBXX:2:2222:13301:35690 2:N:0:ATCACG
-    CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
-    +
-    <<A-77--77F<----7AFJ-A--FJJJFAJF-AFAJAJ<JFJ<JJJFFJJJFJJJJJAAFJJJFJJJF-
-    
-    @J00182:75:HTKJNBBXX:2:1114:12469:11073 2:N:0:ATCACG
-    ATCCACTTATTGCAAAGCAGAGGACATTGAGTCTCACCTTTTGTCCAGGTCTTCCAATTTCACCCTGCAA
-    +
-    A-77AA-7FF<7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
+        @J00182:75:HTKJNBBXX:2:1115:8501:46961 2:N:0:ATCACG
+        GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA
+        +
+        A<<A-777F<AA<AJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
+        
+        @J00182:75:HTKJNBBXX:2:1203:25022:13763 2:N:0:ATCACG
+        GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT
+        +
+        ---<----<A---77-7A-FJ<JJFFJJ<JJAJ7<-FAFFJJFF<FFJJFFAJFA-AFFFJFFFFFJAJJ
+        
+        @J00182:75:HTKJNBBXX:2:2222:13301:35690 2:N:0:ATCACG
+        CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
+        +
+        <<A-77--77F<----7AFJ-A--FJJJFAJF-AFAJAJ<JFJ<JJJFFJJJFJJJJJAAFJJJFJJJF-
+        
+        @J00182:75:HTKJNBBXX:2:1114:12469:11073 2:N:0:ATCACG
+        ATCCACTTATTGCAAAGCAGAGGACATTGAGTCTCACCTTTTGTCCAGGTCTTCCAATTTCACCCTGCAA
+        +
+            A-77AA-7FF<7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 
-As shown in image 1, the barcode is on the forward read and sequence is on the reverse read. The barcode consists of the 6bp UMI followed by the 6bp cell barcode (followed by the poly-T tail). The sequence is 70 bp long as contains the information that we wish to map. 
+As shown in [CelSeq2 Primer Figure](#figure-1), the barcode is on the Forward read and sequence is on the Reverse read. The barcode consists of the 6bp UMI followed by the 6bp cell barcode (completed by the poly-T tail). The sequence is 70 bp long and contains the information that we wish to map. 
 
-Mini Exercise:
-Q: How do we know the barcoding format of reads?
-A: Usually you are explicitly told, as well being given a list of cell barcodes to use. Most cell barcodes have an edit distance >= 2 between them in order to correct against 1bp read errors.
-Q: How do we verify the barcode format of our reads?
-A: Look at the FASTQC
- We can see that the distribution of the first 6bp has far more variability than the following 6bp which seems to have less variation. From this we can deduce where the boundaries of our barcodes are.
- SQ: Which side is the cell barcode? Which side the UMI?
- We expect to see more genes than cells, with an absolute maximum of 4**6 UMIs in a given cell. So the left side is the UMIs since there appears to be more of an even distribution, and the right side is the CB since there the variation seems more spiky.
- 
+> ### {% icon question %} Question
+>
+> How do we find out the barcoding format of the reads?
+>
+> > ### {% icon solution %} Solution
+> >
+> > Usually you are explicitly told, as well being given a list of cell barcodes to use. Most cell barcodes have an edit distance >= 2 between them in order to correct against 1bp read errors.
+> >
+> >
+> {: .solution}
+{: .question}
+
+#### Verifying the Barcode Format
+
+We can actually see where the barcodes are by looking at the distribution of bases in a FastQC plot.
+
+ ![FastQC Plot](../../images/scrna_barcodes_fastq.png "FastQC plot of Forward read")
+
+Here we can see three distinct regions along the x-axis:
+
+ * 1 - 6 bp: smooth, relatively constant bases.
+ * 7 - 12 bp: noisy, highly varied distribution of bases.
+ * 13 - 30bp: T-dominated region
+
+The 1 - 12bp region is our barcode region, and the T-dominated region is the poly-T tail that trails the end of mRNA in our [Forward read](#figure-1), 
+
+We can see that the distribution of the first 6bp is relatively more even than the following 6bp which seems to have more extreme variation. 
+
+> ### {% icon question %} Question
+>
+> We have located our barcodes in the first 12bp, but with two different profiles. Which side is the cell barcode and which side the UMI?
+> > 
+> > ### {% icon solution %} Solution
+> > 
+> >  We expect to see more genes than cells, so the left side is the UMIs since there appears to be more of an even distribution, and the right side is the CB since the more extreme variation is caused by a fewer number of distinct samples.
+> >
+> {: .solution}
+{: .question}
+
 
 ### Uniting Barcodes with Sequence
 
 In a sense, we have a disparity in our data: the reverse reads contain the sequences we wish to map, but not the barcodes; the forward reads contain the barcode, but not the sequence. For the forward and reverse reads given above, the information that we really want from both can be summarized in this table:
 
-| Read | Cell | UMI | Sequence |
-|------|------|-----|----------|
-| @J00182:75:HTKJNBBXX:2:1115:8501:46961  | ACCAGA | GGAAGA | GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA |
-| @J00182:75:HTKJNBBXX:2:1203:25022:13763 | GGTAAC | GTCCCA | GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT |
-| @J00182:75:HTKJNBBXX:2:2222:13301:35690 | GGTAAC | GTCCCA | CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA |
-| @J00182:75:HTKJNBBXX:2:1114:12469:11073 | GGTAAC | CGGCGT | ATCCACTTATTGCAAAGCAGAGGACATTGAGTCTCACCTTTTGTCCAGGTCTTCCAATTTCACCCTGCAA |
+ | Read | Cell | UMI | Sequence |
+ |------|------|-----|----------|
+ | @J00182:75:HTKJNBBXX:2:1115:8501:46961  | ACCAGA | GGAAGA | GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA |
+ | @J00182:75:HTKJNBBXX:2:1203:25022:13763 | GGTAAC | GTCCCA | GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT |
+ | @J00182:75:HTKJNBBXX:2:2222:13301:35690 | GGTAAC | GTCCCA | CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA |
+ | @J00182:75:HTKJNBBXX:2:1114:12469:11073 | GGTAAC | CGGCGT | ATCCACTTATTGCAAAGCAGAGGACATTGAGTCTCACCTTTTGTCCAGGTCTTCCAATTTCACCCTGCAA |
 
-Mini Exercise:
-Q: Which of these reads are duplicates?
-Q: Which of these reads come from the same cell?
-Q: How many cells in total are depicted here? How many UMIs?
+> ### {% icon question %} Question
+> 
+> Provided that these reads all map to the same gene:
+>
+> 1. Which of these reads come from the same cell?
+> 2. Which of these reads are duplicates?
+>
+> > ### {% icon solution %} Solution
+> > 
+> > 1. Reads `@J00182:75:HTKJNBBXX:2:1203:25022:13763`, `@J00182:75:HTKJNBBXX:2:2222:13301:35690`, and `@J00182:75:HTKJNBBXX:2:1114:12469:11073` all have the cell barcode `GGTAAC`.
+> > 
+> > 2. Reads `@J00182:75:HTKJNBBXX:2:1203:25022:13763` and `@J00182:75:HTKJNBBXX:2:2222:13301:35690` both have the same cell barcode and same UMI. They are not direct duplicates of each other. since their sequences look different but they do stem from the same read as evidenced by the overlap:
+> >
+> >          13763:   GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT
+> >          35690:                        CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
+> >
+> {: .solution}
+{: .question}
 
-Exercise: These four reads all actually map to same gene. Which gene is it?
- - Take 1 sequence, use BLAT
+### Coupling our Data Sources
 
+How should we couple these two source of information into a single location without impacting the data content?
 
-Q: How should we couple these two source of information into a single location without impacting the data content?
-
-A: We take the barcode information from the forward reads, and stick it into the *header* of the reverse reads. That way we can align our sequence to the reference and still keep the barcode information assosciated with the reads.
+For this we need to take the barcode information from the Forward reads, and stick it into the *header* of the Reverse reads. That way we can align our sequence to the reference and still keep the barcode information assosciated with the reads.
 
 i.e. 
 
@@ -272,8 +359,7 @@ i.e.
     +
     A-77AA-7FF<7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 
-where we have added CellBarcode_UMI to the headers of each read. We can now throw away our forward reads, as they have no more useful information within them and proceed to the mapping stage.
-
+Here we have added `CellBarcode_UMIBarcode` format to the header of each read in our Reverse reads. We now have alll our useful data in a single FastQ file. We can now effectively throw away our Forward reads, as they have no more useful information within them and proceed to the mapping stage.
 
 # Barcode Extraction
 
@@ -317,7 +403,6 @@ TODO!
 > {: .solution}
 >
 {: .question}
-
 
 
 # Mapping
@@ -379,13 +464,13 @@ This should take a minute or two depending on your position in the queue. Once y
 > >
 > > > ### {% icon solution %} Solution
 > > > 
-> > > 1. 73.5% or 8.3 million reads were successfully mapped
-> > > 2. 11.3% are multiply mapped, and 2.2% were mapped to too many loci
+> > > 1. `73.5%` or 8.3 million reads were successfully mapped
+> > > 2. `11.3%` are multiply mapped, and `2.2%` were mapped to too many loci
 > > >   - Multiply mapped means that a read was aligned to more than one gene
 > > >   - Mapped to too many loci means that a read was aligned to 10 or more loci, and should be ignored.
 > > > 3. It depends on how good the sequencing protocol is, and how many reads in total were mapped.
-> > >   - 90% is amazing, reserved for bulk RNA-seq which typically has high coverage
-> > >   - 70% is weak for bulk RNA-seq, but good for single-cell RNA-seq
+> > >   - `90%` is amazing, reserved for bulk RNA-seq which typically has high coverage
+> > >   - `70%` is weak for bulk RNA-seq, but good for single-cell RNA-seq
 > > >   - 6 million mapped reads should be enough to generate a downstream analysis from.
 > > >
 > > {: .solution}
@@ -396,37 +481,36 @@ This should take a minute or two depending on your position in the queue. Once y
 
 > ### {% icon comment %} Recap of previous stages
 >
-> 1. *Barcode Extraction*:
->  Here we used `umi_tools extract` on our input forward and reverse FASTQ files, and extracted the umi and cell barcode from the forward read *sequence*, and placed it into the *header* of both forward and reverse FASTQ files. i.e. FASTQ files → Modified FASTQ files
-> 2. *Mapping*
->  We took the sequencing data from the reverse FASTQ file (with modified headers) and aligned it to the Zebrafish genome, using annotations presented in the GTF file for that genome. i.e. Modified FASTQ file (reverse) → BAM file
+> 1. *Barcode Extraction*:  
+>   Here we used `umi_tools extract` on our input forward and reverse FASTQ files, and extracted the umi and cell barcode from the forward read *sequence*, and placed it into the *header* of both forward and reverse FASTQ files. i.e. FASTQ files → Modified FASTQ files  
+> 2. *Mapping*:  
+>   We took the sequencing data from the reverse FASTQ file (with modified headers) and aligned it to the Zebrafish genome, using annotations presented in the GTF file for that genome. i.e. Modified FASTQ file (reverse) → BAM file
 >
 
-We now have a BAM file of our aligned reads, with cell and UMI barcodes embedded in the read headers. We also have the chromosome and base-pair positions of where these reads are aligned.
+We now have a BAM file of our aligned reads, with cell and UMI barcodes embedded in the read headers. We also have the chromosome and base-pair positions of where these reads are aligned. The can be confirmed by peeking into the BAM file:
 
-> ### {% icon hands_on %} We can confirm this by peeking into the BAM file
+> ### {% icon hands_on %} Hands-on: Confirming the Alignment Data
 >
-> 1. Click on the eye symbol of the BAM output from STAR.
-> 2. There are many header lines that begin with '@' which we are not interested in. 
-> 3. Do a Ctrl+F search for `@co` and then look at the lines directly below it.
-> 
-> One such read is given as so:
+>  1. Click on the eye symbol of the BAM output from STAR.
+>  2. There are many header lines that begin with `@` which we are not interested in. 
+>  3. Do a Ctrl+F search for `@co` and then look at the lines directly below it.  
+>     One such read is given as so:
 >
->    J00182:75:HTKJNBBXX:2:1121:9729:45889_GACGAA_GTGGTC	16	chr1	2030	3	70M	*	0	0	AGAGGTTCCAATATTCCCATGAAATTGAGATTTTGTAAAAGAGTGAAGTGTGGTTACTTTCACTGAGAGG	JJJJJJJJJJJJJJJJJJJJJJJJFJJJJJAJJJJJJJJJJFJFJFFJJJJJJJJJJJJFF7AJA-77<A	NH:i:2 HI:i:1 AS:i:64 nM:i:2
->   
+>  `J00182:75:HTKJNBBXX:2:1121:9729:45889_GACGAA_GTGGTC	16	chr1	2030	3	70M	*	0	0	AGAGGTTCCAATATTCCCATGAAATTGAGATTTTGTAAAAGAGTGAAGTGTGGTTACTTTCACTGAGAGG	JJJJJJJJJJJJJJJJJJJJJJJJFJJJJJAJJJJJJJJJJFJFJFFJJJJJJJJJJJJFF7AJA-77<A	NH:i:2 HI:i:1 AS:i:64 nM:i:2`
 > 
 
 The fields of the BAM file can be better explained at section 1.4 of [the SAM specification](https://samtools.github.io/hts-specs/SAMv1.pdf), but we will summarize the main fields of interest here:
 
  * `J00182..._GACGAA_GCGGTC`: The *readname* appended by an underscore '_', the cell barcode, another '_', and then the UMI barcode.
- * `16`: The FLAG value, which can be explained in the SAM specification, or more interactively [here](https://broadinstitute.github.io/picard/explain-flags.html).
-> ### {% icon question %} What does the FLAG value of 16 tell us about this read?
+ * `16`: The FLAG value
+> #### {% icon question %} What does the FLAG value of 16 tell us about this read?
+> We can interactively see what the different FLAG values mean in the SAM specification [here](https://broadinstitute.github.io/picard/explain-flags.html)
 > > ### {% icon solution %} Solution
->
-> The read aligns to the reverse strand
-
+> > The read aligns to the reverse strand
+> {: .solution}
+{: .question}
  * `chr1` `2030`: The position and base-pair of alignment of the first base of the sequence.
- * We next have a series of quality fields, as well as the `sequence` and `sequence_quality`
+ * (We next have a series of quality fields, as well as the `sequence` and `sequence_quality`)
  * `NH`: The number of hits for  this read. If it is multiply mapped, then the number of multiples will be shown (here `2`)
  * `HI`: Which number this particular read is in the series of (potentially) multi-mapped reads (here `1`, not neccesarily meaning the first or 'better' )
  * `nM`: The number of mismatches in the alignment of this read to the reference (here `2`)
@@ -436,7 +520,15 @@ This fields will be important later when we wish to filter our BAM for good qual
 Notice that we are missing one crucial piece of information in our BAM file: the name of the gene.
 Once we have the name of the gene for a specific read, we can tally how many of those reads fall into that gene and generate a count matrix.
 
-Unfortunately, *`STAR`* can only annotate and count reads at the gene-level and not the gene-cell level, i.e. if 2 different cells have reads of 5 and 6 respectively at GeneA, STAR will simply say that there are 11 reads at GeneA without regard to the cells.
+Unfortunately, *`STAR`* can only annotate and count reads at the gene-level and not the gene-cell level, e.g. if 2 different cells have reads of 5 and 6 respectively at GeneA, STAR will simply say that there are 11 reads at GeneA without regard to the cells.
+
+    Ideally:                   What STAR outputs:
+    +-------+----+----+         +-------+-------+
+    |       | C1 | C2 |         |       | Total |
+    +-------+----+----+         +-------+-------+
+    | GeneA | 10 |  2 |         | GeneA |  12   |
+    +-------+----+----+         +-------+-------+
+
 
 ## Counting with FeatureCounts
 
@@ -594,7 +686,7 @@ The first step requires us to merely run the same workflow on each of our batche
 
 The second step requires a minimal level of interaction from us; namely using a merge tool and selecting our matrices. 
 
-## Merging our Matrices
+### Merging Matrices
 
 Before we begin, we must consider that each of our matrices are not equal.
 
@@ -602,49 +694,56 @@ Before we begin, we must consider that each of our matrices are not equal.
 
 This can be resolved by performing a "Full Join" (as described [here](http://www.sql-join.com/sql-join-types/)) where GeneA is inserted into Batch2 as a gene with 0 counts:
 
- | Batch1 | C1 | C2 | C3 |
- |--------|----|----|----|
- | GeneA  | 3  | 0  | 1  |
+        +--------+----+----+----+                     +--------+----+----+----+
+        | B1     | C1 | C2 | C3 |                     | B2     | C1 | C2 | C3 |
+        |--------+----+----+----+   + (Full Join) +   |--------|----|----|----|
+        | GeneA  | 3  | 0  | 1  |                     | GeneX  | 10 | 2  | 7  |
+        +--------+----+----+----+                     +--------+----+----+----+
 
-       + (Full Join) +
-
- | Batch2 | C1 | C2 | C3 |
- |--------|----|----|----|
- | GeneX  | 10 | 2  | 7  |
-
-      =
-
- | Full   | B1_C1 | B1_C2 | B1_C3 | B_C1 | B_C2 | B_C3 |
- |--------|----|----|----|----|----|----|
- | GeneA  | 3  | 0  | 1  | 0  | 0  |  0 |
- | GeneX  | 0  | 0  | 0  | 10 | 2  |  7 |
+           +--------+-------+-------+-------+-------+-------+-------+
+      =    | Full   | B1_C1 | B1_C2 | B1_C3 | B2_C1 | B2_C2 | B2_C3 |
+           +--------+-------+-------+-------+-------+-------+-------+
+           | GeneA  |   3   |   0   |   1   |    0  |   0   |    0  |
+           | GeneX  |   0   |   0   |   0   |   10  |   2   |    7  |
+           +--------+-------+-------+-------+-------+-------+-------+
 
 
-> ### {% icon question %} Why have the column headers changed in the Full matrix?
+> ### {% icon question %} Question
+>
+> Why have the column headers changed in the Full matrix?
+> 
 > > ### {% icon solution %} Solution
 > >
 > > Although the cell headers in each batch matrix is the same, **the cells they label are NOT the same** and need to be relabelled in the final matrix to tell us which batch they originated from.
 > >
-> > ### {% icon question %} Why are the cell labels the same in each of the batch matrices if they are labelling completely different cells?
-> > > ### {% icon solution %} Solution
-> > > 
-> > > The reason the cell headers are the same is because the cells use the **same barcodes**, due to fact that the same barcodes are used across different batches.
-> > {.solution}
-> {.question}
-> {.solution}
-{.question}
+> {: .solution}
+>
+{: .question}
+
+
+> ### {% icon question %} Follow-Up Question
+> 
+> Why are the cell labels in B1 and B2 the same, if they are labelling completely different cells?
+> 
+> > ### {% icon solution %} Solution
+> > 
+> > The reason the cell headers are the same is because the cells use the **same barcodes**, due to fact that the same barcodes are used across different batches.
+> >
+> {: .solution}
+{: .question}
 
 Let us now merge our matrices from different batches.
 
-> ### {% icon hands_on %} Table Merge
+> ### {% icon hands_on %} Hands-On: Table Merge
 > 
 > Select **Column Join on Collections** {%icon tool %} with the following parameters:
->  - *"Tabular Files"*: Select each of the matrices that you wish to join
->  - *"Identifier column"*:`1`
->  - *"Number of Header lines in each item"*:`1`
->  - *"Keep original column header":`Yes`
->  - *"Fill character"*:`0`
-{.hands-on}
+> - *"Tabular Files"*: (Select each of the matrices that you wish to join)  
+> - *"Identifier column"*:`1`  
+> - *"Number of Header lines in each item"*:`1`  
+> - *"Keep original column header"*:`Yes`  
+> - *"Fill character"*:`0`  
+>
+{: .hands-on}
 
 The identifier column refers to the gene names are checked for 1:1 correspondence between matrices so that the merge does not concatenate the wrong rows between matrices. The Fill character provides a default value of 0 for cases where a Gene appears only in one of the matrices as per our example earlier.
 
@@ -654,53 +753,54 @@ Once the merge is complete, we can now peek at our full combined matrix by once 
 
 We have applied the same cell barcodes to each batch, but not all batches neccesarily use the same barcodes to select their cells. 
 
- e.g. Batch1 might only use cell barcodes 1-50 in the barcodes file, and Batch2 might only user cell barcodes 51-100 in the barcodes file.
+For example, Batch1 might only use cell barcodes 1-50 in the barcodes file, and Batch2 might only user cell barcodes 51-100 in the barcodes file.
  
-> ### {% icon question %} Why would different sets of the same barcodes be used on different batches?
-> > ### {% icon solution %}
-> >
-> > To answer this, see the *Plates, Batches, and Cross-Contamination* section
-> > 
-
+But then why would different sets of the same barcodes be used on different batches? To answer this, see the *Plates, Batches, and Cross-Contamination* section
 
 ### Another Look At Cell Barcodes
 
 The number of cell barcodes sets the *minimum size of each batch*. If we have only 10 barcodes, then only 10 cells can be uniquely labelled without us having to start reusing barcodes on different cells
 
-> ### {% icon question %} Why would it be bad to reuse the same barcodes in a batch?
-> > ### {% icon solution %}
+> ### {% icon question %} Question
+>
+> Why would it be bad practice to reuse the same barcodes in a batch?
+>
+> > ### {% icon solution %} Solution
 > >
-> > Because we would not know which cell some reads came from. If CellA uses barcode ACCTG and CellB also uses barcode ACCTG, then any reads that are sequenced with ACCTG in their barcodes could come from either CellA or CellB, making it very amgiguous when it comes to counting that read.
-> {.solution}
-{.question}
+> > We would not know which cell some reads came from. If CellA uses barcode ACCTG and CellB also uses barcode ACCTG, then any reads that are sequenced with ACCTG in their barcodes could come from either CellA or CellB, making it very amgiguous when it comes to counting that read.
+> >
+> {: .solution}
+>
+{: .question}
 
-How many available barcodes are there?
 
-This depends on two factors:
-   * The size of the barcode
-   * The edit distance between adjacent barcodes
+#### How many available barcodes are there?
+
+Barcodes are typically limited to the 4 main nucleotide bases A,C,T, and G. The number of available barcodes depends on two factors:
+
+ 1. The size of the barcode
+ 2. The edit distance between adjacent barcodes
+ 
+##### Barcode Size: Theoretical Limit
    
-Barcodes are typically limited to the 4 main nucleotide bases A,C,T,G. Barcodes also tend to span 4-10 bases, since longer barcodes tend to be more subjectable to sequencing errors.
+For the first, this means that for a barcode $$N$$ bases long, there will $$4^N$$ barcodes available. Typically barcodes tend to span 4-10 bases ($$4^4 = 256$$ to $$4^{10} = 1048576$$), since longer barcodes tend to be more subjectable to sequencing errors.
 
- * Barcodes that are 4bp long have 4^4 = 256 unique barcodes to choose from.
- * Barcodes that are 10bp long have 4^10 = 1,048,576 unique barcodes to choose from. 
+The true number of barcodes used is actually smaller than $$4^N$$ due to the measures used to space barcodes apart from one another to reduce sequencing errors.
  
- Again, the shorter the better to reduce the number of sequencing errors, but at the cost of being able to sequence less in a single batch.
- 
-#### Reducing sequencing errors in barcodes
+#### Edit Distance: Reducing Sequencing Errors in Barcodes
 
 Single base-pair sequencing errors are the most prevalent type of sequencing error, but these can be catered for when selecting barcodes, by specifying an *edit distance* between adjacent barcodes.
 
-e.g. For barcodes of length 3: 
-   * Instead of : AAA AAC AAG AAT ACA ACC ... etc, (edit distance of 1)
-   * We can use : AAA ACC AGG ATT CAA CCC ... etc, (edit distance of 2)
+e.g. For barcodes of length 3:
+   * Instead of : `AAA AAC AAG AAT ACA ACC` ... etc, (edit distance of `1`)
+   * We select : `AAA ACC AGG ATT CAA CCC` ... etc, (edit distance of `2`)
    
 This will reduce the number of barcodes that we can select however:
 
   * For barcodes of length *N*:
-    * An edit distance of 1 provides 4^N possible barcodes.
-    * An edit distance of 2 provides 4^(N-1) possible barcodes.
-    * An edit distance of *E* provides 4^(N-E) possible barcodes, where 0 < E < N
+    * An edit distance of `1` provides $$4^N$$ possible barcodes.
+    * An edit distance of `2` provides $$4^{N-1}$$ possible barcodes.
+    * An edit distance of `E` provides $$4^{N-E}$$ possible barcodes, where $$0 < E < N$$
 
 
 # Plates, Batches, and Cross-contamination
@@ -755,6 +855,9 @@ For each of these examples, we will consider our experiment to have the followin
      * Each lane will have 12 slots
      * No more than 2 lanes can be sequenced at the same time.
        (e.g. if we have 4 lanes, on a plate, then half the plate will be sequenced in a run, and the other half in another run)
+   
+   
+   - TODO: TALK ABOUT THE DIFFERENCE BETWEEN LEAVING A LANE EMPTY and USING FALSE BARCODES, SAME BENEFIT BUT REDUCED COST OF DOUBLE SEQUENCING
    
     
  * e.g.1 
