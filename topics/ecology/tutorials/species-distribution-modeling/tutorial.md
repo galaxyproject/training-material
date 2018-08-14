@@ -105,7 +105,7 @@ The raster is composed of environmental information. Each layer of the raster co
 
 > To load these data you can either:
 >    > * Use `WorldClim Bioclims` module
->    > * Load your own raster from your Galaxy-E history by checking the box `Galaxy History User`
+>    > * Load your own raster from your Galaxy-E history by checking the box `Galaxy History User`, the file must be in GeoTIFF format.
 
 Here we use the `WorldClim Bioclims` module with the lowest resolution `10 arcmin`.
 >    > nb: the occurrences situated where there is no environmental data are removed
