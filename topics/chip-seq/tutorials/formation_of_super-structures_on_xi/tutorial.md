@@ -4,12 +4,14 @@ layout: tutorial_hands_on
 title: "Formation of the Super-Structures on the Inactive X"
 zenodo_link: "https://doi.org/10.5281/zenodo.1321974"
 questions:
-    - How is raw ChIP-seq data processed and analyzed?
-    - What are the binding sites of the Estrogen receptor?
+    - How is a raw set of ChIP-seq data processed and analyzed?
+    - Where are the enriched regions for H3K27me3, H3K4me3 and CTCF on the chrX?
+    - Histone modification?
 objectives:
-    - Inspect read quality with FastQC
-    - Map reads with Bowtie2
-    - Assess the quality of an ChIP-seq experiments
+    - Inspect the read quality
+    - Trim low quality bases
+    - Map reads on a reference genome
+    - Assess the quality of a ChIP-seq experiment
     - Extract coverage files
     - Call enriched regions or peaks
 time_estimation: "3h"
