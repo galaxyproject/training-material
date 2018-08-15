@@ -25,34 +25,43 @@ $bg-color: $dark-blue;
 $menu-color: $dark-blue;
 
 // colors tutorial boxes
-$overview-color: $dark-blue;
-$agenda-color: $blue;
-$keypoints-color: $dark-blue;
-$tip-color: $purple;
-$warning-color: $red;
-$comment-color: $orange;
-$handson-color: $green;
-$question-color: $blue;
-$solution-color: $light-blue;
-$details-color: $mid-gray;
-$feedback-color: $green;
+$overview-color: #8A9AD0;
+$agenda-color: #86D486;
+$keypoints-color: #FFA1A1;
+$tip-color: #FFE19E;
+$warning-color: #de8875;
+$comment-color: #ffecc1;
+$handson-color: #dfe5f9;
+$question-color: #8A9AD0;
+$solution-color: #B8C3EA;
+$details-color: #9d9d9d;
+$feedback-color: #86D486;
 
 
-
-@mixin tutorial-box ($bg-color, $color: $white) {
-    margin-top: $tutorial-box-spacing;
-    padding: 0 $tutorial-box-spacing $tutorial-box-spacing;
+@mixin tutorial-box ($bg-color, $color: rgba(255,255,255,.75)) {
+    margin-top: 3 * $tutorial-box-spacing;
+    padding: $tutorial-box-spacing $tutorial-box-spacing - 0.11rem $tutorial-box-spacing;
     border: 1px solid $bg-color;
-    border-top: none;
-
+    box-shadow: 3px 3px $bg-color;
     & > h3 {
         font-size: $font-size + 3;
-        margin-top: 0;
         margin-left: -$tutorial-box-spacing;
         margin-right: -$tutorial-box-spacing;
-        padding: $tutorial-box-spacing / 2;
+        margin-top: -3.30rem;
+        padding-top: $tutorial-box-spacing / 2;
+        padding-bottom: $tutorial-box-spacing / 2;
+        padding-left: $tutorial-box-spacing;
+        padding-right: $tutorial-box-spacing;
         background-color: $bg-color;
         color: $color;
+        vertical-align: 1em;
+        float: left;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+
+        .fa {
+            padding-right: $tutorial-box-spacing / 5;
+        }
     }
 }
 
@@ -167,7 +176,7 @@ footer {
         }
 
         &.tip {
-            @include tutorial-box($tip-color);
+            @include tutorial-box($tip-color, $gray);
         }
 
         &.question {
@@ -179,11 +188,11 @@ footer {
         }
 
         &.comment {
-            @include tutorial-box($comment-color);
+            @include tutorial-box($comment-color, $gray);
         }
 
         &.hands_on {
-            @include tutorial-box($handson-color);
+            @include tutorial-box($handson-color, $gray);
         }
 
         &.key_points {
@@ -208,7 +217,7 @@ footer {
     }
 
     .fold-unfold {
-        margin-left: 5px;
+        margin-left: $tutorial-box-spacing;
     }
 }
 
