@@ -212,6 +212,46 @@ We also strongly recommend you read and follow [Software Carpentry's](https://so
 
 In [issues](https://github.com/galaxyproject/training-material/issues), you will find lists of issues to fix and features to implement (with the ["newcomer-friendly"]({{ site.github_repository }}/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Anewcomer-friendly) label for example). Feel free to work on them!
 
+### Tutorial editors
+
+A great way to help out the project is to test/edit existing tutorials. Pick a tutorial and check the contents. Does everything work as expected? Are there things that could be improved?
+
+Below is a checklist of things to look out for to help you get started. If you feel confident in making changes yourself, please open a pull request, otherwise please file an issue with any problems you run into or suggestions for improvements.
+
+*Basic*
+- **Test** the tutorial on a running Galaxy instance
+   - For example usegalaxy.org, usegalaxy.eu, usegalaxy.org.au
+   - Report any issues you run into
+- **Language** editing
+  - Fix spelling and grammar mistakes
+  - Simplify the English (to make it more accessible)
+
+*Intermediate*
+- **Metadata**
+  - Are the objectives, keypoints and time estimate filled in?
+  - Do they fit with the contents of the tutorial?
+- **Content**
+  - Is there enough background information provided in the introduction section?
+  - **Question boxes**
+    - Add questions or question boxes where you think they might be useful (make people think about results they got, test their understanding, etc)
+    - Check that answers are still up-to-date
+  - **Screenshots and Videos**
+    - Make sure there ia also a textual description of the image/video contents
+    - Does the screenshot add value to the tutorial or can it be removed?
+
+*Advanced*
+- **Workflows**
+  - Add a workflow definition file `.ga` if none is present
+  - Check that the existing workflow is up-to-date with the tutorial contents
+  - Enable [workflow testing](https://github.com/usegalaxy-eu/workflow-testing)
+- **Tours**
+  - Add a tour if none exists
+  - Run the existing tour and check that it is up-to-date with the tutorial contents
+- **Datasets**
+  - Check that all datasets used in the tutorial are present in Zenodo
+  - Add a data-library.yaml file if none exists
+
+
 # Other Questions
 
 ## Are there any upcoming events focused on Galaxy Training?
