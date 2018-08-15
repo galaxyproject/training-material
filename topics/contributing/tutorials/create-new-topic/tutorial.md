@@ -93,11 +93,11 @@ When we structured the repository, we decided to use as topics the categories th
 >    >
 >    > In which topic will you put the new tutorial?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    >
->    >    > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is placed in 2 categories (bottom): "Next Gen Mappers", and "Sequence Analysis".
->    >    > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
->    >    {: .solution}
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is placed in 2 categories (bottom): "Next Gen Mappers", and "Sequence Analysis".
+>    > > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
+>    > {: .solution}
 >    {: .question}
 {: .hands_on}
 
@@ -107,10 +107,10 @@ In this tutorial, we want to add a new topic called about "my-favorite-topic".
 
 Once the topic name has been chosen, we can create it.
 
-> ### {% icon hands_on %} Hands-on: Copy the required files
+> ### {% icon hands_on %} Hands-on: Create all the required files and folders structures automatically
 >
 > 1. Open a terminal
-> 2. Run (by adpating the information between the quotes)
+> 2. Run (by adapting the information between the quotes)
 >
 >    ```
 >    $ python bin/setup_training_content.py \

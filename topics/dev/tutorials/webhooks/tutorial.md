@@ -27,6 +27,7 @@ The key `activate` gives you control per-webhook to activate or deactivate it.
 >         - workflow
 >       activate: true
 >    ```
+{: .hands_on}
 
 
 The next step is to define HTML/JS part which will control the part of the Galaxy UI. We create a new PHDComicsAppView view extended from Backbone.
@@ -98,6 +99,7 @@ calls an REST endpoint defined by use in the next step. The return value of this
 >            new PHDComicsAppView();
 >        });
 >    ```
+{: .hands_on}
 
 
 The following hands-on will define an API endpoint that is called from the JS code of your webhook.
@@ -160,6 +162,7 @@ entire user-object, including histories and datasets.
 >
 >        return {'success': not error, 'error': error, 'src': comic_src}
 >   ```
+{: .hands_on}
 
 
 To make your webhook appealing you can also add custom CSS which you can use in your HTML/JS code.
@@ -237,6 +240,7 @@ To make your webhook appealing you can also add custom CSS which you can use in 
 >            100% { transform: rotate(360deg); }
 >        }
 >    ```
+{: .hands_on}
 
 
 Please make sure you have activated webhooks in your `config/galaxy.ini` file by setting the `webhooks_dir` to the path in which your `phdcomics` folder is located.
@@ -245,6 +249,7 @@ Please make sure you have activated webhooks in your `config/galaxy.ini` file by
 >
 > 1. Submit one tool and see if your webhook is working on the tool-submit page.
 >
+{: .hands_on}
 
 
 If successful it should look like this:

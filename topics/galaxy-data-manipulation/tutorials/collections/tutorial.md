@@ -7,7 +7,7 @@ tutorial_name: collections
 Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you've got hundreds - it becomes very annoying. In Galaxy we have introduced **Dataset collections** that allow you to combine numerous datasets in a single entity that can be easily manipulated.
 
 # Getting data
-[Here](https://usegalaxy.org/library/list#folders/Fab5f788f07073c11) is a history containing a few datasets we will be practicing with (as always with Galaxy tutorial you can upload your own data and play with it instead of the provided datasets):
+[Here](https://usegalaxy.org/library/list#folders/Fab5f788f07073c11) is a history containing a few datasets we will be practicing with (as with any Galaxy tutorial, you can upload your own data and play with it instead of the provided datasets):
 
 - `M117-bl_1` - family 117, mother, 1-st (**F**) read from **blood**
 - `M117-bl_2` - family 117, mother, 2-nd (**R**) read from **blood**
@@ -27,7 +27,7 @@ Right click (or Ctrl-click) on [this link](https://usegalaxy.org/library/list#fo
 ![Data in Galaxy library](../../images/grab_data.png)
 {: .img-responsive}
 
-Select all datasets and click **to History** button. This will import all datasets into a history. Follow the direction and will see a screen like this:
+Select all datasets, click **to History** button, and select **as Datasets**. In the pop-up window, either select a history or create a new one. This will import all datasets into a history. The screen will look like this:
 
 ![manyDatasets](../../images/manyDatasets.png)
 {: .img-responsive}
@@ -49,12 +49,12 @@ The following wizard will appear:
 ![collectionCreation](../../images/collectionCreation.png)
 {: .img-responsive}
 
-In this case Galaxy automatically assigned pairs using the `_1` and `_2` endings of dataset names. Let's however pretend that this did not happen. Click on **Unpair all** (highlighted in red in the figure above) link and then on **Clear** link (highlighted in blue in the figure above). The interface will change into its virgin state:
+In this case Galaxy automatically assigned pairs using the `_1` and `_2` endings of dataset names. Let's however pretend that this did not happen. Click on **Unpair all** (highlighted in red in the figure above) link and then on **Clear** link (highlighted in blue in the figure above). The interface will change into its unpaired state:
 
 ![collectionCreationClean](../../images/collectionCreationClean.png)
 {: .img-responsive}
 
-Hopefully you remember that we have paired-end data in this scenario. Datasets containing the first (forward) and the second (reverse) read are differentiated by having `_1` and `_2` in the filename. We can use this feature in dataset collection wizard to pair our datasets.  Type `_1` in the left **Filter this list** text box and `_2` in the right:
+These datasets contain paired-end reads. Datasets containing the first (forward) and the second (reverse) read are differentiated by having `_1` and `_2` in the filename. We can use this feature in dataset collection wizard to pair our datasets.  Type `_1` in the left **Filter this list** text box and `_2` in the right:
 
 ![1and2](../../images/1and2.png)
 {: .img-responsive}
@@ -80,12 +80,12 @@ and create the collection by clicking **Create list**. A new item will appear in
 
 ## Using collections
 
-By now we see that a collection can be used to bundle a large number of items into a single history item. This means that many Galaxy tools will be able to process all datasets in a collection transparently to you. Let's try to map these datasets to human genome using `bwa-mem` mapper:
+By now we see that a collection can be used to bundle a large number of items into a single history item. This means that many Galaxy tools will be able to process all datasets in a collection transparently to you. Let's try to map these datasets to human genome using `bwa-mem` mapper. In the Tools pane on the left, use the `search-tools` to find `bwa-mem`. Click on `Map with BWA-MEM` in the search list.
 
 ![bwa_mem_collection_readGroups](../../images/bwa_mem_collection_readGroups.png)
 {: .img-responsive}
 
-Here is what you need to do:
+In the middle pane, provide the following parameters for `Map with BWA-MEM`:
 
 - set **Using reference genome** to `hg38` (red outline);
 - set **Single or Paired-end reads** to `Paired collection` (blue outline);
@@ -168,7 +168,7 @@ This will generate another BAM dataset containing only 5% of the original reads 
 ![browserLinks](../../images/browserLinks.png)
 {: .img-responsive}
 
-Click the **Human hg38** link in the **display with IGV** line as highlighted above (to learn more about displaying Galaxy data in IGV with this [movie](https://vimeo.com/123442619#t=4m16s)). Below is an example generated with IGV on these data. In this screenshot reads are colored by read group (four distinct colors). A yellow inset displays additional information about a single read. One can see that this read corresponds to read group `M117-bl`.
+Click the **Human hg38** link in the **display with IGV** line as highlighted above (learn more about displaying Galaxy data in IGV with this [movie](https://vimeo.com/123442619#t=4m16s)). Below is an example generated with IGV on these data. In this screenshot, reads are colored by read group (four distinct colors). A yellow inset displays additional information about a single read. One can see that this read corresponds to read group `M117-bl`.
 
 ![igv](../../images/igv.png)
 {: .img-responsive}

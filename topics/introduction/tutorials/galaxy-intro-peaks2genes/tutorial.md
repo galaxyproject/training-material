@@ -76,7 +76,7 @@ Let's start with a fresh history.
 > 1. Download the list of peak regions (the file [`GSE37268_mof3.out.hpeak.txt.gz`](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE37268&format=file&file=GSE37268%5Fmof3%2Eout%2Ehpeak%2Etxt%2Egz)) from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer
 > 2. Click on the upload button in the upper left ot the interface
 >
->    ![Upload icon](../../../galaxy-ui/images/upload_button.png)
+>    ![Upload icon](../../../galaxy-data-manipulation/images/upload_button.png)
 >
 > 3. Press **Choose local file** and search for your file on your computer
 > 4. Select `interval` as **Type**
@@ -237,10 +237,10 @@ As we directly see, the peak file lacks `chr` before any chromosome number. But 
 >    > 1. How are the chromosomes named?
 >    > 2. How are the chromosomes X and Y named?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. The chromosomes are just given by their number. In the gene file from UCSC, they started with `chr`
->    >    > 2. The chromosomes X and Y are names 20 and 21
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. The chromosomes are just given by their number. In the gene file from UCSC, they started with `chr`
+>    > > 2. The chromosomes X and Y are names 20 and 21
+>    > {: .solution }
 >    {: .question}
 {: .hands_on}
 
@@ -368,9 +368,9 @@ We will regroup the table by chromosome and count the number of genes with peaks
 >    >
 >    > Which chromosome contained the highest number of target genes?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > The result varies with different settings. If you followed step by step, it should be chromosome 7 with 1675 genes.
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > The result varies with different settings. If you followed step by step, it should be chromosome 7 with 1675 genes.
+>    > {: .solution }
 >    {: .question}
 >
 {: .hands_on}
@@ -582,9 +582,9 @@ Congratulations! You should have a file with all the unique gene names and a cou
 >
 > The list of unique genes is not sorted. Try to sort it on your own!
 >
->    > ### {% icon solution %} Solution
->    > You can use the tool "Sort data in ascending or descending order" on column 2 and a numerical sort.
->    {: .solution }
+> > ### {% icon solution %} Solution
+> > You can use the tool "Sort data in ascending or descending order" on column 2 and a numerical sort.
+> {: .solution }
 {: .question}
 
 

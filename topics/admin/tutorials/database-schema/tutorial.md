@@ -113,7 +113,7 @@ There is nothing in the database that results from direct manipulation of the ta
 >    ```sh
 >       tail -f log
 >    ```
-
+{: .hands_on}
 
 ## Important tables
 
@@ -131,6 +131,7 @@ There is nothing in the database that results from direct manipulation of the ta
 >    ```sql
 >       \dt
 >    ```
+{: .hands_on}
 
 
 Enter `q` to exit the view results page, and space to see the next results page.
@@ -142,6 +143,7 @@ Enter `q` to exit the view results page, and space to see the next results page.
 >    ```sql
 >        select * from galaxy_user;
 >    ```
+{: .hands_on}
 
 As described in Björn’s introduction, an Admin user is already pre-set (email: ‘admin@galaxy.org’, password: ‘admin’). Now let’s add (i.e. register) a new user via the Galaxy website. And check the database:
 
@@ -150,6 +152,7 @@ As described in Björn’s introduction, an Admin user is already pre-set (email
 >    ```sql
 >        select * from galaxy_user;
 >    ```
+{: .hands_on}
 
 ### Table “job”
 
@@ -158,6 +161,7 @@ As described in Björn’s introduction, an Admin user is already pre-set (email
 >    ```sql
 >        select * from job;
 >    ```
+{: .hands_on}
 
 Run a few jobs on the galaxy website (e.g _upload file_ a simple table and _add column_ with ‘Iterate’ no and yes) and check the database again:
 
@@ -166,6 +170,7 @@ Run a few jobs on the galaxy website (e.g _upload file_ a simple table and _add 
 >    ```sql
 >        select * from job \x\g\x
 >    ```
+{: .hands_on}
 
 ### Table “job_parameter”
 
@@ -174,6 +179,7 @@ Run a few jobs on the galaxy website (e.g _upload file_ a simple table and _add 
 >   ```sql
 >       select * from job_parameter;
 >   ```
+{: .hands_on}
 
 
 ### Table “history”
@@ -183,6 +189,7 @@ Run a few jobs on the galaxy website (e.g _upload file_ a simple table and _add 
 >   ```sql
 >       select * from history;
 >   ```
+{: .hands_on}
 
 Give your current history a name and check the database again.
 
@@ -194,6 +201,7 @@ Give your current history a name and check the database again.
 >   ```sql
 >       select * from dataset;
 >   ```
+{: .hands_on}
 
 ### Table “history_dataset_association”
 
@@ -202,6 +210,7 @@ Give your current history a name and check the database again.
 >   ```sql
 >       select * from history_dataset_association;
 >   ```
+{: .hands_on}
 
 
 ## More (hands-on) Examples, not covered by the reports app
@@ -216,7 +225,7 @@ Depending on your local needs, some queries are missing, like:
 
 You can add the numbers per month from the reports, or:
 
-
+> ### {% icon hands_on %} Hands-on
 >   ```sql
 >       select j.id, j.create_time from job j limit 5;
 >   ```
@@ -233,7 +242,7 @@ You can add the numbers per month from the reports, or:
 >           and j.tool_id='upload1';`
 >   ```
 >
->...and now include the user
+>   ...and now include the user
 >
 >   ```sql
 >        select count(j.id) from job j, galaxy_user u
@@ -250,6 +259,7 @@ You can add the numbers per month from the reports, or:
 >           and j.tool_id='upload1'
 >           GROUP BY u.email;
 >   ```
+{: .hands_on}
 
 ### Jobs per tool of a certain version
 
@@ -258,6 +268,7 @@ all the users who have used the broken version, without alerting users who never
 
 The following example is from the development server at the FMI
 
+> ### {% icon hands_on %} Hands-on: 
 >   ```sql
 >       select distinct(j.tool_version) from job j
 >           where j.tool_id = 'qAlign';
@@ -275,6 +286,7 @@ The following example is from the development server at the FMI
 >           and j.tool_id = 'qAlign'
 >           and j.tool_version = '1.0.4quasr';
 >   ```
+{: .hands_on}
 
 
 ## All users running a job using a certain parameter
@@ -295,9 +307,11 @@ The following example is from the development server at the FMI
 >           and j.user_id = u.id;
 >   ```
 >
+{: .hands_on}
 
 ## Close PostgreSQL client and quit docker
 
+> ### {% icon hands_on %} Hands-on: 
 >   Close the PostgreSQL client
 >
 >   ```sql
@@ -310,6 +324,7 @@ The following example is from the development server at the FMI
 >       exit
 >       exit
 >   ```
+{: .hands_on}
 
 ## Other Topics
 
@@ -328,6 +343,7 @@ https://docs.google.com/presentation/d/1l4DD0IaJjuvk1zAT1Sjv26bLyrSOg3VUm7rD-TQl
 
 To run SchemaSpy in your container you’ll need to get it, and also install some required software packages.
 
+> ### {% icon hands_on %} Hands-on: Schema Spy
 >   ```sh
 >   wget http://downloads.sourceforge.net/project/schemaspy/schemaspy/SchemaSpy%205.0.0/schemaSpy_5.0.0.jar
 >   apt-get update
@@ -340,6 +356,7 @@ To run SchemaSpy in your container you’ll need to get it, and also install som
 >   java -jar schemaSpy_5.0.0.jar -t pgsql -db galaxy -u galaxy -host localhost -s public -dp /usr/share/java/postgresql-jdbc4-9.2.jar -o SpyOut
 >   ```
 >
+{: .hands_on}
 
 The SpyOut directory will contain the generated reports and diagrams, anchored at index.html.
 

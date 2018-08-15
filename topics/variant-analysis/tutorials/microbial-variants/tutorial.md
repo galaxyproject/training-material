@@ -88,7 +88,7 @@ We have an annotated reference and so will use it in this case.
 > ### {% icon hands_on %} Hands-on: Run Snippy
 >
 > 1. **Snippy** {% icon tool %} with the following parameters
->   - "Reference File" to the `wildtype.gbk` file
+>   - "Reference File" to the `wildtype.gbk` file (if the genbank file is not selectable, make sure to change its datatype to 'genbank')
 >   - "Single or Paired-end reads" to `Paired`
 >   - "Select first set of reads" to `mutant_R1.fastq`
 >   - "Select second set of reads" to `mutant_R2.fastq`
@@ -219,10 +219,10 @@ A new file will be created in your history, this contains the JBrowse interactiv
 >     > 1. What is the correct codon at this position?
 >     > 2. What is the mutation found here?
 >     >
->     >    > ### {% icon solution %} Solution
->     >    > 1. The correct codon at this position is TGT, coding for the amino acid Cysteine (middle row of the amino acid translations).
->     >    > 2. The mutation of T → A turns this triplet into TGA, a stop codon.
->     >    {: .solution}
+>     > > ### {% icon solution %} Solution
+>     > > 1. The correct codon at this position is TGT, coding for the amino acid Cysteine (middle row of the amino acid translations).
+>     > > 2. The mutation of T → A turns this triplet into TGA, a stop codon.
+>     > {: .solution}
 >     {: .question}
 >
 {: .hands_on}
