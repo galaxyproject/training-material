@@ -7,7 +7,7 @@ tutorial_name: clipseq
 # Introduction
 {:.no_toc}
 
-The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a study published by *Nostrand et al.* (2016, http://dx.doi.org/10.1038/nmeth.3810). The dataset contains the first biological replicate of RBFOX2 CLIP-seq and the input control experiment (fastq files). The data was changed and downsampled to reduce data processing time, consequently the data does not correspond to the original source pulled from *Nostrand et al.* (2016, http://dx.doi.org/10.1038/nmeth.3810). Also included is a text file (.txt) encompassing the chromosome sizes of hg19 obtained from UCSC (http://hgdownload.cse.ucsc.edu/goldenPath/hg19/bigZips/hg19.chrom.sizes) and a genome annotation (.gtf) file taken from Ensembl (http://ftp.ensemblorg.ebi.ac.uk/pub/release-74/gtf/homo_sapiens/).
+The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a study published by *Nostrand et al.* (2016, [url](https://doi.org/10.1038/nmeth.3810)). The dataset contains the first biological replicate of RBFOX2 CLIP-seq and the input control experiment (fastq files). The data was changed and downsampled to reduce data processing time, consequently the data does not correspond to the original source pulled from *Nostrand et al.* (2016, [url](https://doi.org/10.1038/nmeth.3810)). Also included is a text file (.txt) encompassing the chromosome sizes of hg19 obtained from [UCSC](http://hgdownload.cse.ucsc.edu/goldenPath/hg19/bigZips/hg19.chrom.sizes) and a genome annotation (.gtf) file taken from [Ensembl](http://ftp.ensemblorg.ebi.ac.uk/pub/release-74/gtf/homo_sapiens/).
 
 **Table 1**: Metadata for CLIP-seq experiments in this tutorial. PE: paired-end.
 
@@ -28,7 +28,7 @@ The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a stud
 
 # Finding Binding Motifs for RBFOX2
 
-RBFOX2 is a relevant development and tissue-specific splicing factor with the conserved motif `TGCATG`. It binds mainly in introns. We therefore want to process and validate the data to find this conserved motif and in the process identify the function of RBFOX2 as well as describe the function of the targeted RNA.
+RBFOX2 is a relevant development and tissue-specific splicing factor with the conserved motif `TGCATG`. It binds mainly in introns. We therefore want to process and validate the data from human liver cancer cells (HepG2) to find this conserved motif and in the process identify the function of RBFOX2 as well as describe the function of the targeted RNA.
 
 ## Step 1: Get data
 
@@ -103,9 +103,9 @@ It is often necessary to remove adapter and barcodes sequences as well as UMIs. 
 **Barcodes** on the other hand are especially designed for a read library and intentionally sequenced. Sometimes experiments are sequenced at the same time which is called **multiplexing**. Multiplexing allows for a better data normalisation and comparison. The barcodes are then used to divide the un-multiplexed data set into the individual read libraries. (**Note: Our data is already de-multiplexed, i.e., we do not have to take barcode sequences into account.**)<br/>
 **UMIs** are similar to barcodes but these sequences are unique for each read. UMIs were introduced since iCLIP to deal with the high duplication levels of a CLIP experiment. Because each read contain an UMI, PCR duplicates of that read also contain the same UMI, which makes it possible to fuse all reads with the same UMI.
 
-## Removal of Adapter Sequences with **Cutadapt**
+## Removal of adapter sequences with **Cutadapt**
 
-In this task we are going to remove two 3' and two 5' adapters from the reads (Note: The eCLIP protocol uses more adapter sequences, for more information take a look [here](http://dx.doi.org/10.1038/nmeth.3810)). Because **Cutadapt** can only process one site of the read pair, we have to trigger **Cutadapt** twice, i.e., for the forward and the reverse pair.
+In this task we are going to remove two 3' and two 5' adapters from the reads (Note: The eCLIP protocol uses more adapter sequences, for more information take a look [here](https://doi.org/10.1038/nmeth.3810)). Because **Cutadapt** can only process one site of the read pair, we have to trigger **Cutadapt** twice, i.e., for the forward and the reverse pair.
 
 > ### {% icon hands_on %} Hands-on: Adapter Removal
 >
@@ -205,7 +205,7 @@ In this task we are going to remove the UMI at the 5' end of the second read.
 
 # Step 4: Aligning Reads to a Reference Genome
 
-To determine where DNA fragments originated in the genome, the sequenced reads must be aligned to a reference genome. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. However, this can take a couple of weeks. Nowadays, there are many read alignment programs. `STAR` is one of them that works well with CLIP-Seq data, for more information read  [here](doi:10.1093/bioinformatics/bts635). `STAR` is able to use genome as well as transcriptome data. This ability is handy, since CLIP-Seq generates transcriptome data, consequently we have to take RNA processing steps like splicing events into account.
+To determine where DNA fragments originated in the genome, the sequenced reads must be aligned to a reference genome. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. However, this can take a couple of weeks. Nowadays, there are many read alignment programs. `STAR` is one of them that works well with CLIP-Seq data, for more information read  [here](https://doi.org/10.1093/bioinformatics/bts635). `STAR` is able to use genome as well as transcriptome data. This ability is handy, since CLIP-Seq generates transcriptome data, consequently we have to take RNA processing steps like splicing events into account.
 
 ## Aligning with **RNA STAR**
 
@@ -256,7 +256,7 @@ To determine where DNA fragments originated in the genome, the sequenced reads m
 
 # Step 5: De-Duplication
 
-Lets return to the UMIs which we extracted in step three. Since we have mapped the reads to our reference genome, we can now identify which reads might be duplicated or not. The `UMI-tools` will help us again in this matter. More information on `UMI-tools` can be found [here](10.1101/gr.209601.116).
+Lets return to the UMIs which we extracted in step three. Since we have mapped the reads to our reference genome, we can now identify which reads might be duplicated or not. The `UMI-tools` will help us again in this matter. More information on `UMI-tools` can be found [here](https://doi.org/10.1101/gr.209601.116).
 
 ## De-duplication with **UMI-tools deduplicate**
 
@@ -271,7 +271,7 @@ Lets return to the UMIs which we extracted in step three. Since we have mapped t
 >    - *"BAM is paired end"*: `Yes`
 >
 >    > ### {% icon comment %} What is the purpose of the method we have chosen for the de-duplication?
->    > `UMI-tools deduplication` has several methods. The method we have picked is called the  **adjacency** method. For detailed information have a look [here](10.1101/gr.209601.116). For a brief explanation: the method fuses reads together when they have the same coordinates and the same UMI. However, sequencing errors can occur in the UMI. Thus, in the **adjacency** method we fuse also UMIs that differ in a maximal number of characters and where we identify a lot of copies, i.e., the method creates clusters of nodes, a node for each individual UMI, and fuses these nodes based on the hamming distance and read counts.
+>    > `UMI-tools deduplication` has several methods. The method we have picked is called the  **adjacency** method. For detailed information have a look [here](https://doi.org/10.1101/gr.209601.116). For a brief explanation: the method fuses reads together when they have the same coordinates and the same UMI. However, sequencing errors can occur in the UMI. Thus, in the **adjacency** method we fuse also UMIs that differ in a maximal number of characters and where we identify a lot of copies, i.e., the method creates clusters of nodes, a node for each individual UMI, and fuses these nodes based on the hamming distance and read counts.
 >    >
 >    {: .comment}
 >
@@ -550,7 +550,7 @@ In this last step, we are going to analyse the peaks that we obtained from the p
 
 Sometimes it is wise to take a look at individual peaks; maybe to check the peakcalling algorithm or the general quality of the read coverage of the called peaks. For this we take the de-duplicated reads in step 5 and the called peaks in step 7 to take a deeper look inside our data.
 
-## Sub-step with **Extract alignment ends**
+## Generating bigWig files of the alignment ends
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -575,10 +575,39 @@ Sometimes it is wise to take a look at individual peaks; maybe to check the peak
 >
 {: .hands_on}
 
+## Inspection of peaks and aligned data with IGV
+
+This is an alternative to Trackster, [IGV](http://software.broadinstitute.org/software/igv/). For more information about IGV see [here]({{site.baseurl}}/topics/introduction/tutorials/igv-introduction/tutorial.html).
+
+> ### {% icon hands_on %} Hands-on: IGV
+>
+> 1. Open IGV on your local computer.
+> 2. Choose as a reference genome **hg19**.
+> 3. Download and drag-and-drop the following files from galaxy into IGV:
+>     - **peaks_annotations.gff** of PEAKachu {% icon tool %}
+>     - **CLIP.bigWig** of Wig/BedGraph-to-bigWig {% icon tool %}
+>     - **INPUT.bigWig** of Wig/BedGraph-to-bigWig {% icon tool %}
+> 4. Inspect the peaks (e.g., <b>chr11:peak_2</b> chr11:2152602-2152742)
+> ![igv_peak](../../images/clipseq_peak_igv.png "Inspection of a peak in IGV.")
+{: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> 1. What are the ideal conditions that PEAKachu {% icon tool %} will call a peak.
+> 2. What are the challenges a peackcaller has to face? What defines a peak (significantly enriched region)?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. High read coverage in the region for the CLIP experiment and low read coverage in the region for the input control.
+> > 2. As simply explained in the previous answer, a peak (significantly binding region) should be significantly enriched in the CLIP experiment and not in the input control. However, the difficulty is to find out if two adjacent peaks are two distinct peaks or just one big peak. Furthermore, very small bumps can also be just an artifact of a way bigger peak. In addition, a high read coverage in the CLIP experiment and not in the input control does not necessarily mean that we have an enriched region. The significance depends on the background (noise) of our data. A good normalisation is therefore crucial.
+> {: .solution}
+>
+{: .question}
+
 # Conclusion
 {:.no_toc}
 
-In this tutorial you imported raw eCLIP data, evaluated the quality of the read library before the read processing, removed adapter sequences and unique molecular identifier from the reads, aligned the reads to a reference genome, de-duplicated the read library, analysed the quality of the de-dupliation and read mapping, found significantly enriched regions (peaks) for the protein RBFOX2 and finally scrutinised the peaks on potential conserved motifs and target RNAs. In addition, you took a short glimpse on the quality of the peak calling. Keep in mind, the read library for CLIP-Seq data might have different formats for different protocols (e.g, PAR-CLIP). However, the overall analysis you learned in this tutorial stays nearly the same.
+In this tutorial you imported raw eCLIP data, evaluated the quality of the read library before the read processing, removed adapter sequences and unique molecular identifier from the reads, aligned the reads to a reference genome, de-duplicated the read library, analysed the quality of the de-duplication and read mapping, found significantly enriched regions (peaks) for the protein RBFOX2 and finally scrutinised the peaks on potential conserved motifs and target RNAs. In addition, you took a short glimpse on the quality of the peak calling. Keep in mind, the read library for CLIP-Seq data might have different formats for different protocols (e.g, PAR-CLIP). However, the overall analysis you learned in this tutorial stays nearly the same.
 
 # Remark to Workflow
 {:.no_toc}
