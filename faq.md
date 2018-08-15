@@ -212,7 +212,7 @@ We also strongly recommend you read and follow [Software Carpentry's](https://so
 
 In [issues](https://github.com/galaxyproject/training-material/issues), you will find lists of issues to fix and features to implement (with the ["newcomer-friendly"]({{ site.github_repository }}/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Anewcomer-friendly) label for example). Feel free to work on them!
 
-### Tutorial editors
+### Check Existing Tutorials
 
 A great way to help out the project is to test/edit existing tutorials. Pick a tutorial and check the contents. Does everything work as expected? Are there things that could be improved?
 
@@ -250,6 +250,11 @@ Below is a checklist of things to look out for to help you get started. If you f
 - **Datasets**
   - Check that all datasets used in the tutorial are present in Zenodo
   - Add a data-library.yaml file if none exists
+
+
+### Review Pull requests
+
+Another great way to help out the project is by reviewing [open pull requests](https://github.com/galaxyproject/training-material/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc). You can use the above checklist as a guide for your review. Some documentation about how to add your review in the GitHub interface can be found [here](https://help.github.com/articles/about-pull-request-reviews/)
 
 
 # Other Questions
