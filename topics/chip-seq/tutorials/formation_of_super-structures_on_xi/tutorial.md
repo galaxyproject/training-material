@@ -197,40 +197,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 
 It is often necessary to trim sequenced read, for example, to get rid of bases that were sequenced with high uncertainty (= low quality bases).
 
-> ### {% icon question %} Questions
->
-> What is the relation between `wt_H3K4me3_read1` and `wt_H3K4me3_read2`?
->
-> > ### {% icon solution %} Solution
-> > The ChIP-seq data for `wt_H3K4me3_rep1` has been sequenced using paired-end sequencing. 
-> >
-> > The paired-end sequencing is based on the idea that the initial DNA fragments (longer than the actual read length) is sequenced on both its ends. This approach results in two reads per fragment, with the first read in forward orientation and the second read in reverse-complement orientation.
-> > 
-> > With paired-end sequencing, more of each fragment is covered than with single-end sequencing (only forward orientation sequenced), given that the read length is the same but twice more reads are generated for the same fragments
-> >
-> > ```
-> >     ------>
-> >       ------>
-> >         ------>
-> >           ------>
-> >
-> >     ----------------------------- [fragment]
-> >
-> >     ------>         <------
-> >       ------>         <------
-> >         ------>         <------
-> >           ------>         <------
-> > ```
-> > 
-> > The paired-end sequencing generates then 2 files:
-> > - One file with the sequences corresponding to foward orientation of all the fragments
-> > - One file with the sequences corresponding to reverse orientation of all the fragments
-> >
-> > Here `wt_H3K4me3_read1` corresponds to the forward reads and `wt_H3K4me3_read2` to the reverse reads.
-> {: .solution }
-{: .question}
-
-> ### {% icon hands_on %} Hands-on: Quality control
+> ### {% icon hands_on %} Hands-on: Trimming low quality bases
 >
 > 1. Run **Trim Galore!** {% icon tool %} with the following parameters
 >    - *"Is this library paired- or single-end?"*: `Paired-end`
