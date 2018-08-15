@@ -74,7 +74,7 @@ The second part of this tutorial will deal with multiple batches, and a differen
 
 ## Data upload and organization
 
-The size of scRNA FASTQ files are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expediate the analysis by using a smaller subset of actual batch data. This data is available at [`Zenodo`](https://link.this) where the example FASTQ paired batch files are hosted, as well as a GTF and barcodes file for the *Dario Rerio* genome version danRer10.
+The size of scRNA FASTQ files are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expediate the analysis by using a smaller subset of actual batch data. This data is available at [`Zenodo`](https://link.this) where the example FASTQ paired batch files are hosted, as well as a barcodes file and GTF file for the *Mus Musculus* genome version mm10.
 
 The batch files are the first of the set of multiple batches, and originate from the first sequencing plate. We will explain this more in detail later, but for now we should make note of this when renaming our files in step 6 of the hands-on below.
 
@@ -85,7 +85,7 @@ The batch files are the first of the set of multiple batches, and originate from
 > 1. Select *Paste/Fetch Data*
 > 1. Copy each link for the reads (.R1.fastq, .R2.fastq), annotation (.GTF), and barcode (.tab) files, and paste each link into a separate text field
 >    - Set the datatype of the read (.fastq) files to **fastq**
->    - Set the datatype of the annotation (.tab) file to **tabular** and assign the Genome as **danRer10**
+>    - Set the datatype of the annotation (.tab) file to **tabular** and assign the Genome as **mm10**
 > 1. Click *Start*
 > 1. Build a *Dataset pair* for the two FASTQ files
 >    - Click the *Operations on multiple datasets* check box at the top of the history panel
@@ -93,7 +93,7 @@ The batch files are the first of the set of multiple batches, and originate from
 >    - Click *For all selected...* and choose *Build dataset list*
 >    - Ensure that the forward read is the R1 sample, and the reverse read is the R2 sample.
 >      - Click 'Swap' otherwise.
->    - Set the name of the pair to something meaningful appended with '_P1_B1' to denote that our data originates from Plate1 and Batch1 (e.g. 'DanRer_P1_B1')
+>    - Set the name of the pair to something meaningful appended with '_P1_B1' to denote that our data originates from Plate1 and Batch1 (e.g. 'MMus_P1_B1')
 >    - Click *Hide original elements?*
 >    - Click *Create list*
 >
@@ -380,11 +380,11 @@ These can be encoded into the sequences of our paired-end data by any means. In 
 
 As shown in [CelSeq2 Primer Figure](#CelSeq2 Scheme), we have the following encoding:
  * Forward Read:
-    * 1-6bp: UMI Barcode
-    * 7-12bp: Cell Barcode
-    * 13→bp: Poly-T tail
+    * 01-06bp: UMI Barcode
+    * 07-12bp: Cell Barcode
+    * 13-30bp: Poly-T tail
  * Reverse Read:
-    * 1-70bp: mRNA sequence
+    * 01-70bp: mRNA sequence
 
 The encoding of the barcodes on the first read can actually be seen by examining the distribution of bases in a FastQC plot.
 
@@ -409,19 +409,19 @@ The encoding of the barcodes on the first read can actually be seen by examining
 
 Here we can see the three distinct regions along the x-axis that correspond to our expected CelSeq2 Schema:
 
- * 1 - 6 bp: smooth, relatively constant bases.
- * 7 - 12 bp: noisy, highly varied distribution of bases.
- * 13 - 30bp: T-dominated region
+ * 01 - 06 bp: smooth, relatively constant bases.
+ * 07 - 12 bp: noisy, highly varied distribution of bases.
+ * 13 - 30b p: T-dominated region
 
 We can see that the distribution of the first 6bp is relatively more even than the following 6bp which seems to have more extreme variation. 
 
 > ### {% icon question %} Question
 >
-> Why is the UMI barcode base distribution smoother than the Cell barcode base distribution?
+> Why is this the case? Why is the UMI barcode base distribution smoother than the Cell barcode base distribution?
 > > 
 > > ### {% icon solution %} Solution
 > > 
-> > There are far more UMIs than cells. Cells are designed and selected with a specified edit distance greatly limiting their availability in the data. UMIs are not so well-curated -- i.e it is possible to encounter the same UMI in the same cell multiple times. The more extreme variation in the 7-12bp region is simply caused by a fewer number of samples.
+> > There are far more UMIs than cells. Cell barcodes are designed and selected with a specified edit distance, greatly limiting their availability in the data. UMIs are not so well-curated -- i.e it is possible to encounter the same UMI in the same cell multiple times. The more extreme variation in the 7-12bp region is simply caused by a fewer number of samples.
 > >
 > {: .solution}
 {: .question}
@@ -507,14 +507,17 @@ We should now be able to see the following reads:
 >        TTTTTTTTTTTTTTTTTT
 >        +
 >        FFFJJJJJJJJJJJJJJJ
+
 >        @J00182:75:HTKJNBBXX:2:1203:25022:13763_GGTAAC_GTCCCA 1:N:0:ATCACG
 >        TTTTTTTTTTTTTTTTTT
 >        +
 >        JFFJJJJJJJJJFJ<FF-
+
 >        @J00182:75:HTKJNBBXX:2:2222:13301:35690_GGTAAC_GTCCCA 1:N:0:ATCACG
 >        TTTTTTTTTTTTTTTTTT
 >        +
 >        <AFJJJJJFFJJFJJJFF
+
 >        @J00182:75:HTKJNBBXX:2:1114:12469:11073_GGTAAC_CGGCGT 1:N:0:ATCACG
 >        TTTTTTTTTTTTTTTTCC
 >        +
@@ -526,14 +529,17 @@ We should now be able to see the following reads:
 >        GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA
 >        +
 >        A<<A-777F<AA<AJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
+
 >        @J00182:75:HTKJNBBXX:2:1203:25022:13763_GGTAAC_GTCCCA 2:N:0:ATCACG
 >        GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT
 >        +
 >        ---<----<A---77-7A-FJ<JJFFJJ<JJAJ7<-FAFFJJFF<FFJJFFAJFA-AFFFJFFFFFJAJJ
+
 >        @J00182:75:HTKJNBBXX:2:2222:13301:35690_GGTAAC_GTCCCA 2:N:0:ATCACG
 >        CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
 >        +
 >        <<A-77--77F<----7AFJ-A--FJJJFAJF-AFAJAJ<JFJ<JJJFFJJJFJJJJJAAFJJJFJJJF-
+
 >        @J00182:75:HTKJNBBXX:2:1114:12469:11073_GGTAAC_CGGCGT 2:N:0:ATCACG
 >        ATCCACTTATTGCAAAGCAGAGGACATTGAGTCTCACCTTTTGTCCAGGTCTTCCAATTTCACCCTGCAA
 >        +
@@ -544,108 +550,145 @@ We should now be able to see the following reads:
 
 > ### {% icon question %} Question
 >
-> 1. Compare the Forward/Read1 and Reverse/Read2 reads to those prior the extraction. What has changed? What has been removed, and what has been added and where?
+> 1. Compare the Forward/Read1 and Reverse/Read2 reads to those prior the extraction. What has happened to the header and sequence of each read?
 > 2. Are the Forward reads useful at all?
 >
 > > ### {% icon solution %} Solution
 > >
-> > We can see TODO
+> > 1. Comparison:
+> >   * Forward:
+> >      * Sequence: The `cell` and `umi` sections of the sequence have been removed, leaving behind only the PolyT tail.
+> >      * Header: The `cell` and `umi` sections of the sequence have been added as `cell_umi` barcode in the header
+> >   * Reverse:
+> >      * Sequence: Has not changed.
+> >      * Header: The `cell` and `umi` sections of the sequence from the Forward (note: **NOT** Reverse) reads have been added to the header.
 > >
+> > 2. With the inclusion of the cell and umi barcodes into the header of our sequence data, we now have all our useful data in the Reverse reads. We can now effectively throw away our Forward reads, as they have no more useful information within them.
+> {: .solution}
+{: .question}
+
+
+#### Barcode Extraction
+
+Let us now repeat the same barcode extraction on our batch data.
+
+> ### {% icon hands_on %} Hands-on: True
+>
+> 1. Switch back to the relevant History
+>   - Click the *View all histories* icon
+>   - Locate the history with our paired data set, barcodes, and annotation file
+>   - Click the *Switch to* button above the appropriate history.
+>    > ### {% icon comment %} Comment
+>    >
+>    > This time we will only be looking for *specific* cell barcodes, which we will ensure by providing the barcodes file.
+>    {: .comment}
+> 2. **UMI-tools extract** {% icon tool %} with the following parameters:
+>    - *"Library type"*: `Paired-end Dataset Collection`
+>        - {% icon param-collection %} *"Reads in FASTQ format"*: `output` (Our paired set)
+>        - *"Barcode on both reads?"*: `Barcode on first read only`
+>    - *"Use Known Barcodes?"*: `Yes`
+>        - {% icon param-file %} *"Barcode File"*: `output` (Input dataset)
+>    - *"Barcode pattern for first read"*: `NNNNNNCCCCCC`
+>    - *"Enable quality filter?"*: `No`
+>
+
+<!--- TODO: maybe talk about this later, it's not really required, and is more about predicting 
+> ### {% icon details %} Details: Filtering for Wanted Cell Barcodes
+>
+> **UMI-tools** provides many ways to select for barcodes:
+>  1. 
+> 
+> 
+-->
+
+As before, we can verify that the desired umi and cell barcodes have been extracted from the sequence of the Forward reads and inserted into the header of the Reverse reads.
+
+> ### {% icon question %} Question
+> 
+> 1. Why are input and output FASTQ file sizes so different?
+> 2. How many reads were filtered out, and why?
+>
+> > ### {% icon solution %} Solution
 > >
+> > 1. The input FASTQ files contained reads from all barcodes, including those with sequencing errors, resulting in a larger pool of detected barcodes than those desired. (e.g. Cell barcode 'AAATTT' could have single basepair sequencing errors that could modify it into 'ATATTT' or 'AAACTT', etc).
+> > 2. This information is included in the Log file of **UMI-tools extract** which contains all the parameters used to run, as well as *INFO* lines that indicate how many reads were read, and how many output. In this case: XXXX reads.
+> {: .solution}
+{: .question}
 
 
-Here we have added `CellBarcode_UMIBarcode` format to the header of each read in our Reverse reads. We now have alll our useful data in a single FASTQ file. We can now effectively throw away our Forward reads, as they have no more useful information within them and proceed to the mapping stage.
+# Mapping / Alignment
 
-
-
-Here info box
-Here:Talk about whether direct barcodes or used, or clustered within edit distances, and the plots that can be used to estimate these.
-TODO!
-
-
-
-# Mapping
+In their raw state, FASTQ files do not tell us very much. The sequences they signify align to genes in a genome, and it is these genes that we are interested in.
 
 Mapping is a relatively straightforward process:
 
  1. Select your genome
- 2. Select your GTF file
- 3. Run STAR
- 3. Run MultiQC on the resulting STAR log
+ 2. Select your gene annotation file
+ 3. Run the alignment program
+ 3. Run MultiQC on the resulting log
 
-The FASTQ data was generated from working with Zebrafish data, so to perform the alignment we will need to gather all data relevant to that genome. We will use the latest version (DanRerv10).
+The FASTQ data was sequenced from mouse data, so to perform the alignment we will need to gather all data relevant to that genome. We will use the latest version (mm10).
 
-> ### {% icon hands_on %} Performing the Alignment
+The annotation GTF file must match the genome version used, since both use physical coordinates. Each GTF contains all the gene, exon, intron, and other regions of interest that we will use to annotate our reads, should our reads align to any of the regions specified in this file.
+
+For alignment, we will use RNA-STAR for performance and splice-awareness.
+
+
+> ### {% icon hands_on %} Hands-on: Performing the Alignment
 >
 > 1. Obtain the GTF file and import it into our history.
->   - This file contains all the gene, exon, intron, and other regions of interest that we will use to annotate our reads, should our reads align to any of the regions specified in this file.
->   - *"Shared Data"* → *"Data Libraries"* → *"Genomes + Annotations"* → *"Annotations"* → "Dario_Rerio_v10.gtf (danRer10)" → Click
->   - *"to History"*
-> 
-> 2. Select **RNA-STAR** {%icon tool %} with the following parameters:
+>   - Click on the [Zenodo](https://link.here) link and import the **Mus_musculus.GRCm38.87.gtf_(mm10)** GTF file
+> 2. **RNA-STAR** {%icon tool %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Single-end`
 >        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file"*: `out2` (output of **UMI-tools extract** {% icon tool %}. Of the FASTQ files output by UMI_tools extract, select the one with the sequencing reads intact.)
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
->            - {% icon param-file %} *"Select reference genome"*: `DanRer10` (Zebrafish)
+>            - {% icon param-file %} *"Select reference genome"*: `Mus Musculus (mm10)` (Mouse)
 >            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `output` (Input dataset. Select the GTF file we imported into our history)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 3. **MultiQC** {%icon tool %} with the following parameters:
+>    - *"Results"*:
+>      - *"1: Results"*:
+>        - *"Which tool was used to generate logs?"*:`STAR`
+>        - *"STAR output"* → *"1: STAR output"* → *"Type of STAR output?"*:`Log`
+>        - *"STAR log output"* :(Select the file that ends in "log")
+> 4. Click on the {% icon galaxy-eye %} symbol on the MultiQC Webpage
 >
 {: .hands_on}
 
-This should take a minute or two depending on your position in the queue. Once your output files are green, proceed to the next step.
+The purpose of MultiQC is to observe how well our reads were mapped against the reference genome. Many reads are discarded due to being of too low quality, or having ambiguous sequence content that can map them to multiple locations.
 
-> ### {% icon hands_on %} Performing the QC on the Alignment
+> ### {% icon question %} Question
 > 
-> Let us examine how well our alignment went.
-> 
-> 1. Select **MultiQC** {%icon tool %} with the following parameters:
->  - *"Results"* → *"1: Results"* → *"Which tool was used to generate logs?"*: `STAR`
->  - *"STAR output"* → *"1: STAR output"* → *"Type of STAR output?"*: `Log`
->  - *"STAR log output"* : Select the file that ends in " log"
->  - Execute
+> 1. What percentage of our reads are uniquely mapped? How many millions of reads is this percentage?
+> 2. What percentage of our reads are mapped to more than one locus?
+> 3. Is our overall mapping 'good' ?
 >
-> 2. Once green, click on the "MultiQC on data : Webpage" eye symbol.
 >
-> > ### {% icon question %} Question
+> > ### {% icon solution %} Solution
 > > 
-> > 1. What percentage of our reads are uniquely mapped? How many millions of reads is this percentage?
-> > 2. What percentage of our reads are mapped to more than one locus?
-> > 3. Is our overall mapping 'good' ?
+> > 1. `73.5%` or 8.3 million reads were successfully mapped
+> > 2. `11.3%` are multiply mapped, and `2.2%` were mapped to too many loci
+> >   - Multiply mapped means that a read was aligned to more than one gene
+> >   - Mapped to too many loci means that a read was aligned to 10 or more loci, and should be ignored.
+> > 3. It depends on how good the sequencing protocol is, and how many reads in total were mapped.
+> >   - `90%` is amazing, reserved for bulk RNA-seq which typically has high coverage
+> >   - `70%` is weak for bulk RNA-seq, but good for single-cell RNA-seq
+> >   - 6 million mapped reads should be enough to generate a downstream analysis from.
 > >
-> >
-> > > ### {% icon solution %} Solution
-> > > 
-> > > 1. `73.5%` or 8.3 million reads were successfully mapped
-> > > 2. `11.3%` are multiply mapped, and `2.2%` were mapped to too many loci
-> > >   - Multiply mapped means that a read was aligned to more than one gene
-> > >   - Mapped to too many loci means that a read was aligned to 10 or more loci, and should be ignored.
-> > > 3. It depends on how good the sequencing protocol is, and how many reads in total were mapped.
-> > >   - `90%` is amazing, reserved for bulk RNA-seq which typically has high coverage
-> > >   - `70%` is weak for bulk RNA-seq, but good for single-cell RNA-seq
-> > >   - 6 million mapped reads should be enough to generate a downstream analysis from.
-> > >
-> > {: .solution}
-> {: .question}
-{: .hands_on}
+> {: .solution}
+{: .question}
 
-# Quantification
+
+# Filtering
 
 > ### {% icon comment %} Recap of previous stages
 >
 > 1. *Barcode Extraction*:  
 >   Here we used `umi_tools extract` on our input forward and reverse FASTQ files, and extracted the umi and cell barcode from the forward read *sequence*, and placed it into the *header* of both forward and reverse FASTQ files. i.e. FASTQ files → Modified FASTQ files  
 > 2. *Mapping*:  
->   We took the sequencing data from the reverse FASTQ file (with modified headers) and aligned it to the Zebrafish genome, using annotations presented in the GTF file for that genome. i.e. Modified FASTQ file (reverse) → BAM file
->
+>   We took the sequencing data from the reverse FASTQ file (with modified headers) and aligned it to the mouse genome, using annotations presented in the GTF file for that genome. i.e. Modified FASTQ file (reverse) → BAM file
+
+### Confirming Reads in the BAM file
 
 We now have a BAM file of our aligned reads, with cell and UMI barcodes embedded in the read headers. We also have the chromosome and base-pair positions of where these reads are aligned. The can be confirmed by peeking into the BAM file:
 
@@ -675,55 +718,14 @@ The fields of the BAM file can be better explained at section 1.4 of [the SAM sp
  * `HI`: Which number this particular read is in the series of (potentially) multi-mapped reads (here `1`, not neccesarily meaning the first or 'better' )
  * `nM`: The number of mismatches in the alignment of this read to the reference (here `2`)
 
-This fields will be important later when we wish to filter our BAM for good quality reads.
 
-Notice that we are missing one crucial piece of information in our BAM file: the name of the gene.
-Once we have the name of the gene for a specific read, we can tally how many of those reads fall into that gene and generate a count matrix.
+### Filtering the BAM File
 
-Unfortunately, *`STAR`* can only annotate and count reads at the gene-level and not the gene-cell level, e.g. if 2 different cells have reads of 5 and 6 respectively at GeneA, STAR will simply say that there are 11 reads at GeneA without regard to the cells.
-
-    Ideally:                   What STAR outputs:
-    +-------+----+----+         +-------+-------+
-    |       | C1 | C2 |         |       | Total |
-    +-------+----+----+         +-------+-------+
-    | GeneA | 10 |  2 |         | GeneA |  12   |
-    +-------+----+----+         +-------+-------+
-
-
-## Counting with FeatureCounts
-
-FeatureCounts is a tool which answers the simple question: "How many reads bisect GeneX?"
-It is more qualitative that STAR however, since it is capable of counting not just at the Read level, but at the UMI level, such that 10 duplicate reads at GeneA will be counted only once. It also has the added benefit of being able to count at the individual cell level, providing a mechanism to produce our count matrices. 
-
-> ### {% icon hands_on %} Quantification assist via FeatureCounts
-> 
-> Let us annotate our BAM file with desired gene tags.
-> 
-> 1. Select **Featurecounts** {%icon tool %} with the following parameters:
->  - {% icon param-file %} *"Alignment file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
->    - *"Gene annotation file"*: `in your history`
->        - {% icon param-file %} *"Gene annotation file"*: `output` (Input dataset) (The GTF file we imported earlier))
->    - *"Specify strand information"*:`Unstranded`
->    - In *"Advanced options"*:
->        - *"Count multi-mapping reads/fragments"*: `Disabled; multi-mapping reads are excluded (default)`
->        - *"Exon-exon junctions"*: `Yes`
->        - *"Annotates the alignment file with 'XS:Z:'-tags to described per read or read-pair the corresponding assigned feature(s)."*: `Yes`
->
-> 2. Once green, click on the "Feature Counts: Alignment File" eye symbol.
->  - Here we can see now that we have an extra `XT:Z` tag with the name of our gene appended.
->  - This tag will be the basis of the row names in our count matrix.
-
-
-## Quality Control
-
-If we perform counting on the Alignment file we just generated with *FeatureCounts* we will be counting all the reads in the BAM file, but this may not be desireable if we still wish to select only high quality reads.
+If we perform counting on the current BAM file we will be counting all reads, even the undesireable ones such as those that did not align so optimally.
 
 The main filtering steps performed on our reads so far have been relatively silent due to the 'default' parameters used.
  * *UMI-tools Extract* - Filters reads for those only with matching barcodes given by our barcodes file.
  * *RNA-STAR* - As seen in the log, we lose 10% of our reads for being too short or being multiply mapped.
-
-
-### Further QC
 
 Another filtering measure we can apply is to keep reads that we are confident about, e.g those with a minimum number of mismatches to the reference within an acceptable range. 
 
@@ -763,42 +765,78 @@ Another filtering measure we can apply is to keep reads that we are confident ab
 >    - *"Would you like to set rules?"*: `Yes`
 >        - *"Enter rules here"*: `(1 | 2) & 3 & 4`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+# Quantification 
+
+Once we have the name of the gene for a specific read, we can tally how many of those reads fall into that gene and generate a count matrix.
+
+Tallying reads is performed by two commonly-used tools:
+ 1. RNA-STAR
+ 2. FeatureCounts
+
+**RNA-STAR** indeed has the recent ability to count reads as it maps them. **FeatureCounts** performs the same task, but it is more qualitative than **RNA-STAR** since it is capable of counting not just at the Read level, but also at the UMI level, such that 10 duplicate reads at GeneA will be counted only once. 
+
+Unfortunately, both are limited to counting without being able to distinguish between different cells. 
+
+e.g. If we consider the number of reads that align to *GeneA*, the output given by these two tools is as follows:
+
+ | (reads) | RNA STAR | FeatureCounts |
+ |---------|----------|---------------|
+ | GeneA   |   12     |    12         |
+ 
+
+But what we actually require is:
+
+ | (reads) | C1 | C2 |
+ |---------|----|----|
+ | GeneA   | 10 |  2 |
+
+or more specifically:
+
+ | (umis) | C1 | C2 |
+ |--------|----|----|
+ | GeneA  | 2  |  1 |
 
 
+In order to obtain this desired format, we must use **UMI-tools count** to perform the tallying. However, this tool is dependent on **FeatureCounts** to annotate our reads with the one crucial piece of information that is missing from our BAM file: the name of the gene.
+
+> ### {% icon tip %} Tip: Verifying missing gene name
+>
+> You can check this yourself by examining the {% icon galaxy-eye %} of the STAR Alignment file
+{: .comment}
+
+## Annotating Gene name with FeatureCounts
+
+
+> ### {% icon hands_on %} Hands-on: Quantification assist via FeatureCounts
+> 
+> Let us annotate our BAM file with desired gene tags.
+> 
+> 1. **FeatureCounts** {%icon tool %} with the following parameters:
+>  - {% icon param-file %} *"Alignment file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
+>    - *"Gene annotation file"*: `in your history`
+>        - {% icon param-file %} *"Gene annotation file"*: `output` (Input dataset) (The GTF file we imported earlier))
+>    - *"Specify strand information"*:`Unstranded`
+>    - In *"Advanced options"*:
+>        - *"Count multi-mapping reads/fragments"*: `Disabled; multi-mapping reads are excluded (default)`
+>        - *"Exon-exon junctions"*: `Yes`
+>        - *"Annotates the alignment file with 'XS:Z:'-tags to described per read or read-pair the corresponding assigned feature(s)."*: `Yes`
+>
+> 2. Examine the output BAM file
+>  - Click on the {% icon galaxy-eye %} for the "Feature Counts: Alignment File"
+>  - Scroll down past the header lines
+>  - Scroll horizontally to the tags, observe the new `XT` tag.
+
+The `XS` and `XT` tags in the BAM file will now form the basis for which we will tally reads.
+With all the relevant data now in our BAM file, we can actually perform the counting via `UMI-tools count`.
 
 ## Counting Genes / Cell
 
-With all the relevant data now in our BAM file, we can actually perform the counting via `UMI-tools count`.
-
-> ### {% icon hands_on %} Final Quantification
+> ### {% icon hands_on %} Hands-on: Final Quantification
 > 
-> Select **UMI-tools counts** {%icon tool %} with the following parameters:
+> **UMI-tools counts** {%icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Sorted BAM file"*: `out_file1` (output of **Filter** {% icon tool %})
 >    - *"Umi Extract Method"*: `Barcodes are contained at the end of the read seperated by a delimiter`
 >    - *"Method to identify group of reads"*: `Unique`
@@ -810,27 +848,43 @@ With all the relevant data now in our BAM file, we can actually perform the coun
 >       - *"Group reads only if they have the same cell barcode."*:`Yes`
 >  - *"Prepend a label to all column headers"*:`No modifications`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
 
 The important parameters to take note of were those given in the *Extra Parameters* where we have specified that each of the reads with a `XT:Z` tag in the BAM file will be counted on a per cell basis. Reads sharing the same UMI and cell Barcodes will be de-duplicated into a single count, reducing PCR duplicate bias from the analysis.
 
-Once the output file is green, we can now peek at the dataset and see how many cells and genes/features we have. To do this, it is actually better to look at the file summary by clicking on the title of the file instead of the eye symbol.
+At this stage, we now have a tabular file containing genes/features as rows, and cell labels as headers.
 
-<!-- image of file summary -->
+> ### {% icon question %} Question
+> 
+> 1. How many genes do we have in the matrix?
+> 2. How many cells?
+>
+> > ### {% icon solution %} Solution
+> >
+> > This information can be seen without having to directly observe the file by simply clicking on the name of the file (**NOT** the {% icon galaxy-eye %} symbol). The number of columns can be seen by scrolling the file preview window completely to the right.
+> >
+> > 1. ~23,000 lines 
+> > 2. 192 columns (not including the first column of gene names)
+> >
+> {: .solution}
+{: .question}
 
-Here we can see that we have ~ 23,000 lines corresponding to the number of genes in our dataset. If we scroll to the right we can see that we have ~ 200 columns corresponding to the number of cells.
+The generation of a single count matrix is now complete, with the emphasis on the word *single* due to the fact that we often deal in multiple batches of sequencing data.
 
-This in itself completes the generation of a single count matrix, with the emphasis on the word *single* due to the unforgettable fact that we often deal in multiple batches of sequencing data, and not just a single batch.
+
+> ### {% icon comment %} Recap of previous stages
+>
+> 1. *Barcode Extraction*:  
+>   Here we used `umi_tools extract` on our input forward and reverse FASTQ files, and extracted the umi and cell barcode from the forward read *sequence*, and placed it into the *header* of both forward and reverse FASTQ files. i.e. FASTQ files → Modified FASTQ files  
+> 2. *Mapping*:  
+>   We took the sequencing data from the reverse FASTQ file (with modified headers) and aligned it to the mouse genome, using annotations presented in the GTF file for that genome. i.e. Modified FASTQ file (reverse) → BAM file
+> 3. *Quality Filtering*:  
+>  Reads with aligment mismatches greater than 2 were discarded, and only non multi-mapped reads that mapped to the forward or reverse strand were kept
+> 4. *Quantification*:  
+>  Gene tags were added to our alignment file, and reads were grouped according those sharing the same gene tag, with further reduction performed by collapsing all reads sharing the same cell and UMI barcode to be counted only once.
+
+This concludes the first part of the tutorial which focused on the transformation of raw FASTQ data from a single batch into a count matrix. The second part of this tutorial guides us through the handling of multiple batches, and the challenges faced with different library preperation setups.
 
 
 # Multiple Batches
@@ -894,7 +948,7 @@ This can be resolved by performing a "Full Join" (as described [here](http://www
 
 Let us now merge our matrices from different batches.
 
-> ### {% icon hands_on %} Hands-On: Table Merge
+> ### {% icon hands_on %} Hands-on: Table Merge
 > 
 > Select **Column Join on Collections** {%icon tool %} with the following parameters:
 > - *"Tabular Files"*: (Select each of the matrices that you wish to join)  
@@ -1133,7 +1187,7 @@ This plating protocol can be reformatted as:
 
 This format allows for many variable setups (see *Help* section of *Cross-contamination Barcode Filter* tool)
 
-> ### {% icon hands_on %} Hands-On: Barcode Filtering
+> ### {% icon hands_on %} Hands-on: Barcode Filtering
 > 
 > Select **Cross-contamination Barcode Filter** {%icon tool %} with the following parameters:
 >  - *"Input Matrix"*:(Here we select the merged matrices from the Column Join tool)
