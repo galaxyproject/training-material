@@ -231,12 +231,12 @@ Below is a checklist of things to look out for to help you get started. If you f
   - Are the objectives, keypoints and time estimate filled in?
   - Do they fit with the contents of the tutorial?
 - **Content**
-  - Is there enough background information provided in the introduction section?
+  - Is there enough background information provided in the introduction section and throughout the tutorial?
   - **Question boxes**
     - Add questions or question boxes where you think they might be useful (make people think about results they got, test their understanding, etc)
     - Check that answers are still up-to-date
   - **Screenshots and Videos**
-    - Make sure there ia also a textual description of the image/video contents
+    - Make sure there is also a textual description of the image/video contents
     - Does the screenshot add value to the tutorial or can it be removed?
 
 *Advanced*
