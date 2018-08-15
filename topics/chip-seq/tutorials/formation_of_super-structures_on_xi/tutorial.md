@@ -79,7 +79,7 @@ The first step of any ChIP-Seq data analysis is quality control of the raw seque
 
 It is often necessary to trim sequenced read, for example, to get rid of bases that were sequenced with high uncertainty (= low quality bases).
 
-> ### {% icon hands_on %} Hands-on: Quality control
+> ### {% icon hands_on %} Hands-on: Trimming low quality bases
 >
 > 1. Run **Trim Galore!** {% icon tool %} with
 >    - "Is this library paired- or single-end?" to `Paired-end`
