@@ -220,7 +220,7 @@ Below is a checklist of things to look out for to help you get started. If you f
 
 *Basic*
 - **Test** the tutorial on a running Galaxy instance
-   - For example usegalaxy.org, usegalaxy.eu, usegalaxy.org.au
+   - For example [Galaxy Main](https://usegalaxy.org), [Galaxy Europe](https://usegalaxy.eu), or [Galaxy Australia](https://usegalaxy.org.au)
    - Report any issues you run into
 - **Language** editing
   - Fix spelling and grammar mistakes
