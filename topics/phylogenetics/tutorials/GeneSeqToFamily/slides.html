@@ -1,12 +1,14 @@
 ---
-layout: introduction_slides
-topic_name: GeneSeqToFamily
+layout: tutorial_slides
+topic_name: phylogenetics
 tutorial_name: GeneSeqToFamily
 logo: "GTN"
 ---
+GeneSeqToFamily
 
-# GeneSeqToFamily:
 Discovery and Visualisation of Homologous Genes and Gene Families Using Galaxy
+
+<small>[*Thanki et al., GigaScience, 2018*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5863215/)</small>
 
 ---
 
@@ -39,7 +41,7 @@ Discovery and Visualisation of Homologous Genes and Gene Families Using Galaxy
 	- TreeBeST
 
 
-<small>[*Zang and Mortazavi, Nature, 2012*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4138050/)</small>
+<small>[*Vilella et al., Genome Research, 2009*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2652215/)</small>
 
 ---
 
@@ -76,7 +78,7 @@ Slide notes
 
 ### GeneSeqToFamily
 
-- Inputs
+#### .left[Inputs]
 	- CDS
 	- GFF3/JSON
 	- Species Tree
@@ -85,19 +87,20 @@ Slide notes
 
 ### GeneSeqToFamily Preparation
 
-- Inputs
+#### .left[Inputs]
 	- CDS
 	- GFF3/JSON
 
-Outputs
+#### .left[Outputs]
 	- Formatted CDS
 	- SQLite (containing gene features)
 
+.center[.image-75[![](../../images/GSTF/gstf_prep.png)]]
 ---
 
 ### GeneSeqToFamily Workflow
 
-- Steps
+#### .left[Steps]
 	- Translation
 	- Pre-clustering Alignment
 	- Cluster Generation
@@ -113,32 +116,35 @@ Outputs
 
 - Translates CDS into Protein sequences using Transeq
 
+.center[.image-75[![](../../images/GSTF/gstf_translate.png)]]
+
 ---
 
 ### GeneSeqToFamily Workflow - Pre-clustering Alignment
 
+#### .left[BLASTP]
 - Uses BLAST to create BLAST database
 - Run BLASTP for protein sequences against the database
-- Default Parameters: -seg no -max_hsps_per_subject 1 -use_sw_tback -num_threads 1
-BLAST Parser
-- BLAST parser converts 12/24 column BLAST result into 3 column input for hcluster_sg
-- Query - Hit - Score
-- Score is calculated by MIN(100, ROUND(-LOG10(evalue)/2))
 
+#### .left[BLAST Parser]
+- BLAST parser converts 12/24 column BLAST result into 3 column input for hcluster_sg
+
+.center[.image-75[![](../../images/GSTF/gstf_preclustering.png)]]
 
 ---
 
 ### GeneSeqToFamily Workflow - Cluster Generation
 
 - Clusters are generated using hcluster_sg tool 
-- The following command line arguments: -m 750 -w 0 -s 0.34 -O
 
+.center[.image-75[![](../../images/GSTF/gstf_clustering.png)]]
 ---
 
 ### GeneSeqToFamily Workflow - Cluster Alignment
 
 - Multiple Sequence Alignemnt for each cluster is generated using T-Coffee with Muscle or MAFFT
 
+.center[.image-75[![](../../images/GSTF/gstf_clusteraln.png)]]
 ---
 
 ### GeneSeqToFamily Workflow - Build GeneTree
@@ -146,18 +152,24 @@ BLAST Parser
 - GeneTrees for each cluster is generated using TreeBeST 
 - TreeBeST uses nucleotide sequence alignment, which is generated using Tranalign with input CDS and T-Coffee alignemnt.
 
+.center[.image-75[![](../../images/GSTF/gstf_tree.png)]]
 ---
 
 ### GeneSeqToFamily Workflow - Gene Alignments and Family Aggregator
 
 - Gene Alignments and Family Aggregator (GAFA) aggregates output of TreeBeST, T-Coffee and SQLite from GeneSeqToFamily Preparation
 
+.center[.image-75[![](../../images/GSTF/gstf_gafa.png)]]
 ---
 
 ### GeneSeqToFamily Workflow - Visualisation
 
 - Final results can be visualised within Galaxy using Aequatus Plugin.
 
+.center[.image-75[![](../../images/GSTF/gstf_viz.png)]]
 ---
+- Final results can be visualised within Galaxy using Aequatus Plugin.
 
-.image-25[![](../images/ecker_2012.jpg)]
+.center[![](../../images/GSTF/gstf_result.png)]
+
+
