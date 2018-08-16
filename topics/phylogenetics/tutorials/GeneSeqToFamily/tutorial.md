@@ -74,11 +74,11 @@ In this tutorial we will cover all these steps one-by-one, which makes GeneSeqTo
 To convert uploaded data into the format acceptable by GeneSeqToFamily workflow:
 
 ## GeneSeqToFamily preparation 
-GeneSeqToFamily preparation is an open-source tool that converts genomic information in GFF/JSON format to SQLite format for easy access during the workflow, it also adds species information in Fasta header.
+**GeneSeqToFamily preparation** is an open-source tool that converts genomic information in GFF/JSON format to SQLite format for easy access during the workflow, it also adds species information in Fasta header.
 
 > ### {% icon hands_on %} Hands-on: GeneSeqToFamily preparation : Run GeneSeqToFamily preparation on the imported GFF/JSON and Fasta files
 >
-> 1. GeneSeqToFamily preparation {% icon tool %}
+> 1. **GeneSeqToFamily preparation** {% icon tool %}
 >	> * Select JSON and/or GFFs files
 >	> * Add specific species name (in-case of GFFs)
 >	> * Select All Fasta Files 
@@ -95,11 +95,11 @@ GeneSeqToFamily preparation is an open-source tool that converts genomic informa
 
 # CDS Translation
 
-We use Transeq to convert a CDS to protein sequences in order to run BLASTP and find protein clusters. However, since downstream tools in the pipeline, such as TreeBeST, require nucleotide sequences to generate a gene tree, the protein sequences cannot be directly used as workflow input and are instead generated with Transeq.
+We use **Transeq** to convert a CDS to protein sequences in order to run BLASTP and find protein clusters. However, since downstream tools in the pipeline, such as TreeBeST, require nucleotide sequences to generate a gene tree, the protein sequences cannot be directly used as workflow input and are instead generated with Transeq.
 
 > ### {% icon hands_on %} Hands-on: Transeq
 >
-> 1. Transeq {% icon tool %}
+> 1. **Transeq** {% icon tool %}
 >	> * Frame(s) to translate: 1
 >	> * Code to use: Standard
 >	> * Remove all 'X' and '*' characters from the right end of the translation
@@ -114,13 +114,13 @@ We use Transeq to convert a CDS to protein sequences in order to run BLASTP and 
 
 # Preclustering alignment
 
-We are using BLASTP to run over the set of sequences against the database of the same input, as is the case with BLAST-all, in order to form clusters of related sequences.
+We are using **BLASTP** to run over the set of sequences against the database of the same input, as is the case with BLAST-all, in order to form clusters of related sequences.
 
 ## Create BLAST Database
 
 > ### {% icon hands_on %} Hands-on: makeblastdb
 >
-> 1. NCBI BLAST+ makeblastdb {% icon tool %}
+> 1. **NCBI BLAST+ makeblastdb** {% icon tool %}
 >	> * Molecule type of input: protein
 >	> * Input FASTA files(s):
 >	> * Run tool
@@ -130,7 +130,7 @@ We are using BLASTP to run over the set of sequences against the database of the
 
 > ### {% icon hands_on %} Hands-on: BLASTP : Run BLASTP
 >
-> 1. NCBI BLAST+ blastp {% icon tool %}
+> 1. **NCBI BLAST+ blastp** {% icon tool %}
 >	> * Protein query sequence(s): translated sequences
 >	> * Subject database / sequence(s): BLAST database from your history
 >	> * Protein BLAST database
@@ -149,14 +149,14 @@ We are using BLASTP to run over the set of sequences against the database of the
 
 ## BLAST parser
 
-BLAST parser is a small Galaxy tool to convert the BLAST output into the input format required by hcluster_sg. 
+**BLAST parser** is a small Galaxy tool to convert the BLAST output into the input format required by hcluster_sg. 
 It takes the BLAST 12 or 25-column output as input and generates a 3-column tabular file, comprising the BLAST query, the hit result, and the edge weight. 
 
 The weight value is simply calculated as minus log10 of the BLAST e-value divided by 2, replacing this with 100 if this value is greater than 100. It also removes the self-matching BLAST results and lets the user filter out non-Reciprocal Best Hits (if selected).
 
 > ### {% icon hands_on %} Hands-on: BLAST Parser 
 >
-> 1. BLAST parser tool {% icon tool %}
+> 1. **BLAST parser** {% icon tool %}
 >	> * Reciprocal results: Yes
 >	> * Run tool
 {: .hands_on}
@@ -165,11 +165,11 @@ The weight value is simply calculated as minus log10 of the BLAST e-value divide
 
 ## Generate clusters with hcluster_sg
 
-hcluster_sg performs clustering for sparse graphs. It reads an input file that describes the similarity between 2 sequences, and iterates through the process of grouping 2 nearest nodes at each iteration. hcluster_sg outputs a single list of gene clusters.
+**hcluster_sg** performs clustering for sparse graphs. It reads an input file that describes the similarity between 2 sequences, and iterates through the process of grouping 2 nearest nodes at each iteration. hcluster_sg outputs a single list of gene clusters.
 
 > ### {% icon hands_on %} Hands-on: hcluster_sg 
 >
-> 1. hcluster_sg {% icon tool %}
+> 1. **hcluster_sg** {% icon tool %}
 >	> * Only find single-linkage clusters: No
 >	> * Minimum edge density between a join: 0.34
 >	> * Maximum size: 500
@@ -178,11 +178,11 @@ hcluster_sg performs clustering for sparse graphs. It reads an input file that d
 
 ## Parse generated clusters with hcluster_sg parser
 
-hcluster_sg parser tool creates collection of files each containing sequence IDs for cluster.
+**hcluster_sg parser** tool creates collection of files each containing sequence IDs for cluster.
 
 > ### {% icon hands_on %} Hands-on: hcluster_sg parser
 >
-> 2. hcluster_sg parser {% icon tool %}
+> 2. **hcluster_sg parser** {% icon tool %}
 >	> * Minimum number of cluster elements: 3
 >	> * Maximum number of cluster elements: 200
 >	> * Run tool
@@ -194,11 +194,11 @@ hcluster_sg parser tool creates collection of files each containing sequence IDs
 {: .hands_on}
 
 ## Filter by FASTA IDs
-Filter by FASTA IDs is used to create separate FASTA files using the sequence IDs listed in each gene cluster.
+**Filter by FASTA IDs** is used to create separate FASTA files using the sequence IDs listed in each gene cluster.
 
 > ### {% icon hands_on %} Hands-on: hcluster_sg parser
 >
-> 1. filter_by_fasta_id {% icon tool %}
+> 1. **Filter by FASTA IDs** {% icon tool %}
 >	> * FASTA sequences
 >	> * List of IDs to extract sequences for
 >	> * Remove duplicate sequences: yes
@@ -209,11 +209,11 @@ Filter by FASTA IDs is used to create separate FASTA files using the sequence ID
 
 ## Multiple Sequence Alignment using T-Coffee
 
-T-Coffee is a Multiple Sequence Alignment package, it can align both nucleotide and protein sequences. We use it to align the protein sequences in each cluster generated by hcluster_sg.
+**T-Coffee** is a Multiple Sequence Alignment package, it can align both nucleotide and protein sequences. We use it to align the protein sequences in each cluster generated by hcluster_sg.
 
 > ### {% icon hands_on %} Hands-on: T-Coffee 
 >
-> 1. T-Coffee {% icon tool %}
+> 1. **T-Coffe** {% icon tool %}
 >	> * Filter FASTA input?: Yes
 >	> * Multiple Sequence Alignment Methods: clustalw_msa
 >	> * Output formats: fasta_aln
@@ -224,11 +224,11 @@ T-Coffee is a Multiple Sequence Alignment package, it can align both nucleotide 
 
 ## Tranalign
 
-Tranalign is a tool that reads a set of nucleotide sequences and a corresponding aligned set of protein sequences and returns a set of aligned nucleotide sequences. Here, we use it to generate CDS alignments of gene sequences using the protein alignments produced by T-Coffee.
+**Tranalign** is a tool that reads a set of nucleotide sequences and a corresponding aligned set of protein sequences and returns a set of aligned nucleotide sequences. Here, we use it to generate CDS alignments of gene sequences using the protein alignments produced by T-Coffee.
 
 > ### {% icon hands_on %} Hands-on: Tranalign
 >
-> 1. Tranalign {% icon tool %}
+> 1. **Tranalign** {% icon tool %}
 >	> * Nucleic sequences: FASTA sequences generated from GeneSeqToFamily preparation
 >	> * Protein sequences: Alignment generated from T-Coffee
 >	> * Code to use: standard
@@ -243,11 +243,11 @@ Tranalign is a tool that reads a set of nucleotide sequences and a corresponding
 
 ## TreeBeST "best"
 
-TreeBeST (Tree Building guided by Species Tree) is a tool to generate, manipulate, and display phylogenetic trees and can be used to build gene trees based on a known species tree.
+**TreeBeST** (Tree Building guided by Species Tree) is a tool to generate, manipulate, and display phylogenetic trees and can be used to build gene trees based on a known species tree.
 
 > ### {% icon hands_on %} Hands-on: TreeBeST best
 >
-> 1. TreeBeST best {% icon tool %}
+> 1. **TreeBeST best** {% icon tool %}
 >	> * Species file in Newick format: Select input species file
 >	> * CDS alignment: FASTA alignment generated from Tranalign 
 >	> * Run tool
@@ -257,11 +257,11 @@ TreeBeST (Tree Building guided by Species Tree) is a tool to generate, manipulat
 
 ## Gene Align and Family Aggregator 
 
-Gene alignment and family aggregator (GAFA) is a Galaxy tool that generates a single SQLite database containing the gene trees and MSAs, along with gene features, in order to provide a reusable, persistent data store for visualization of synteny information with Aequatus.
+**Gene alignment and family aggregator (GAFA)** is a Galaxy tool that generates a single SQLite database containing the gene trees and MSAs, along with gene features, in order to provide a reusable, persistent data store for visualization of synteny information with Aequatus.
 
 > ### {% icon hands_on %} Hands-on: Gene Align and Family Aggregator 
 >
-> 1. Gene Align and Family Aggregator {% icon tool %}
+> 1. **Gene Align and Family Aggregator** {% icon tool %}
 >	> * Gene tree: GeneTrees generated from TreeBeST best
 >	> * Protein alignments: Alignments generated from T-Coffee
 >	> * Gene features: Gene features SQLite generated from GeneSeqToFamily preparation
@@ -278,8 +278,15 @@ The SQLite database generated by the GAFA tool can be rendered using a new visua
 >
 > 1. Aequatus visualisation Plugin {% icon tool %}
 >	> * Click on Result generated by previous step
->	> * Choose GeneTree from side panel
->	> * Visualise different GeneTrees
+>	> * Click on **graph** icon
+>	> * If its open various open to visualise from choose **Aequatus**
+>	> ### {% icon tip %} Tip
+>	>
+>	> * Change GeneTree from side panel
+>	> * Change visual controls
+>	> * Change filter options
+>	> * Change guide tree
+>	{: .tip}
 {: .hands_on}
 
 
