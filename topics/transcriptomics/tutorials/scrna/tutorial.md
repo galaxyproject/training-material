@@ -72,7 +72,7 @@ The second part of this tutorial will deal with multiple batches, and a differen
 
 # Single Batch Processing
 
-## Data upload and organization
+### Data upload and organization
 
 The size of scRNA FASTQ files are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expediate the analysis by using a smaller subset of actual batch data. This data is available at [`Zenodo`](https://link.this) where the example FASTQ paired batch files are hosted, as well as a barcodes file and GTF file for the *Mus Musculus* genome version mm10.
 
@@ -99,47 +99,7 @@ The batch files are the first of the set of multiple batches, and originate from
 >
 {: .hands_on}
 
-## Barcode Determination and Extraction
-
-## Mapping
-
-## Quantification
-
-# Multiple Batch Processing
-
-## Data upload and organization
-
-The count matrix we have generated in the previous section is too sparse to perform any reasonable analysis upon, and constitutes data only of a single batch. Here we will use more populated count matrices from multiple batches, under the assumption that we now know how to generate each individual one of them using the steps provided in the previous section. This data is available at [`Zenodo`](https://link.this).
-
-Once again, file naming is important, and so we will rename our matrix files appropriately to the plate and batch they are supposed to originate from.
-
-> ### {% icon hands_on %} Hands-on: Data upload and organization
->
-> 1. Create a new history and name it something meaningful (*e.g.* scRNA-seq multiple-batch tutorial)
-> 1. Open the Data Upload Manager by selecting *Get Data* from the Tool Panel and clicking *Upload File*
-> 1. Select *Paste/Fetch Data*
-> 1. Copy each link for the matrices (cm.p1b1.tab, cm.p1b2.tab, ..., cm.p2b8.tab, etc..), and paste each link into a separate text field
->    - Set the datatype of the tabular (.tab) files to **tabular**
-> 1. Click *Start*
-> 1. Rename a matrix
->    - Click on {% icon galaxy-pencil %} of the *cm.p1b1.tab* file
->    - Set the Name field to something meaningul appended with "_P1_B1" (e.g. 'multibatch_P1_B1')
->    - Click *Save*
-> 1. Repeat for all matrices
->    - **Pay attention to the Plate number which changes after Batch 4**
->
-{: .hands_on}
-
-
-## Merging Count Matrices
-
-## Cross-contamination
-
-
-
-<!-- Here be clear waters -->
-
-## What are Barcodes?
+## Understanding Barcodes
 
 Barcodes are small random oligonucleotides that are inserted into the captured sequence at a specific point, and provide two pieces of information about the sequence:
   
@@ -301,7 +261,7 @@ These are reads that all map to ENSDARG00000019692. In [Cell, UMI] format:
 4: 11073 -- GGTAAC, CGGCGT -> diff umi, same cell
 -->
 
-### Our 4 Reads of Interest
+### Our Four Reads of Interest
 
 Let us examine these reads four reads of interest which we have just sub-selected using their headers:
 
@@ -507,17 +467,17 @@ We should now be able to see the following reads:
 >        TTTTTTTTTTTTTTTTTT
 >        +
 >        FFFJJJJJJJJJJJJJJJ
-
+>
 >        @J00182:75:HTKJNBBXX:2:1203:25022:13763_GGTAAC_GTCCCA 1:N:0:ATCACG
 >        TTTTTTTTTTTTTTTTTT
 >        +
 >        JFFJJJJJJJJJFJ<FF-
-
+>
 >        @J00182:75:HTKJNBBXX:2:2222:13301:35690_GGTAAC_GTCCCA 1:N:0:ATCACG
 >        TTTTTTTTTTTTTTTTTT
 >        +
 >        <AFJJJJJFFJJFJJJFF
-
+>
 >        @J00182:75:HTKJNBBXX:2:1114:12469:11073_GGTAAC_CGGCGT 1:N:0:ATCACG
 >        TTTTTTTTTTTTTTTTCC
 >        +
@@ -529,17 +489,17 @@ We should now be able to see the following reads:
 >        GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA
 >        +
 >        A<<A-777F<AA<AJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
-
+>
 >        @J00182:75:HTKJNBBXX:2:1203:25022:13763_GGTAAC_GTCCCA 2:N:0:ATCACG
 >        GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT
 >        +
 >        ---<----<A---77-7A-FJ<JJFFJJ<JJAJ7<-FAFFJJFF<FFJJFFAJFA-AFFFJFFFFFJAJJ
-
+>
 >        @J00182:75:HTKJNBBXX:2:2222:13301:35690_GGTAAC_GTCCCA 2:N:0:ATCACG
 >        CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
 >        +
 >        <<A-77--77F<----7AFJ-A--FJJJFAJF-AFAJAJ<JFJ<JJJFFJJJFJJJJJAAFJJJFJJJF-
-
+>
 >        @J00182:75:HTKJNBBXX:2:1114:12469:11073_GGTAAC_CGGCGT 2:N:0:ATCACG
 >        ATCCACTTATTGCAAAGCAGAGGACATTGAGTCTCACCTTTTGTCCAGGTCTTCCAATTTCACCCTGCAA
 >        +
@@ -556,13 +516,12 @@ We should now be able to see the following reads:
 > > ### {% icon solution %} Solution
 > >
 > > 1. Comparison:
-> >   * Forward:
-> >      * Sequence: The `cell` and `umi` sections of the sequence have been removed, leaving behind only the PolyT tail.
-> >      * Header: The `cell` and `umi` sections of the sequence have been added as `cell_umi` barcode in the header
-> >   * Reverse:
-> >      * Sequence: Has not changed.
-> >      * Header: The `cell` and `umi` sections of the sequence from the Forward (note: **NOT** Reverse) reads have been added to the header.
-> >
+> >    * Forward:
+> >       * Sequence: The `cell` and `umi` sections of the sequence have been removed, leaving behind only the PolyT tail.
+> >       * Header: The `cell` and `umi` sections of the sequence have been added as `cell_umi` barcode in the header
+> >    * Reverse:
+> >       * Sequence: Has not changed.
+> >       * Header: The `cell` and `umi` sections of the sequence from the Forward (note: **NOT** Reverse) reads have been added to the header.
 > > 2. With the inclusion of the cell and umi barcodes into the header of our sequence data, we now have all our useful data in the Reverse reads. We can now effectively throw away our Forward reads, as they have no more useful information within them.
 > {: .solution}
 {: .question}
@@ -570,18 +529,14 @@ We should now be able to see the following reads:
 
 #### Barcode Extraction
 
-Let us now repeat the same barcode extraction on our batch data.
+Let us now repeat the same barcode extraction on our batch data. This time we will only be looking for *specific* cell barcodes, which we will ensure by providing the barcodes file.
 
-> ### {% icon hands_on %} Hands-on: True
+> ### {% icon hands_on %} Hands-on: Barcode Extraction
 >
 > 1. Switch back to the relevant History
 >   - Click the *View all histories* icon
 >   - Locate the history with our paired data set, barcodes, and annotation file
 >   - Click the *Switch to* button above the appropriate history.
->    > ### {% icon comment %} Comment
->    >
->    > This time we will only be looking for *specific* cell barcodes, which we will ensure by providing the barcodes file.
->    {: .comment}
 > 2. **UMI-tools extract** {% icon tool %} with the following parameters:
 >    - *"Library type"*: `Paired-end Dataset Collection`
 >        - {% icon param-collection %} *"Reads in FASTQ format"*: `output` (Our paired set)
@@ -591,6 +546,7 @@ Let us now repeat the same barcode extraction on our batch data.
 >    - *"Barcode pattern for first read"*: `NNNNNNCCCCCC`
 >    - *"Enable quality filter?"*: `No`
 >
+{: .hands_on}
 
 <!--- TODO: maybe talk about this later, it's not really required, and is more about predicting 
 > ### {% icon details %} Details: Filtering for Wanted Cell Barcodes
@@ -610,13 +566,13 @@ As before, we can verify that the desired umi and cell barcodes have been extrac
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The input FASTQ files contained reads from all barcodes, including those with sequencing errors, resulting in a larger pool of detected barcodes than those desired. (e.g. Cell barcode 'AAATTT' could have single basepair sequencing errors that could modify it into 'ATATTT' or 'AAACTT', etc).
+> > 1. The input FASTQ files contained reads from all barcodes, including those with sequencing errors, resulting in a larger pool of detected barcodes than those desired. (e.g. Cell barcode `AAATTT` could have single basepair sequencing errors that could modify it into `ATATTT` or `AAACTT`, etc).
 > > 2. This information is included in the Log file of **UMI-tools extract** which contains all the parameters used to run, as well as *INFO* lines that indicate how many reads were read, and how many output. In this case: XXXX reads.
 > {: .solution}
 {: .question}
 
 
-# Mapping / Alignment
+## Mapping / Alignment
 
 In their raw state, FASTQ files do not tell us very much. The sequences they signify align to genes in a genome, and it is these genes that we are interested in.
 
@@ -637,20 +593,22 @@ For alignment, we will use RNA-STAR for performance and splice-awareness.
 > ### {% icon hands_on %} Hands-on: Performing the Alignment
 >
 > 1. Obtain the GTF file and import it into our history.
->   - Click on the [Zenodo](https://link.here) link and import the **Mus_musculus.GRCm38.87.gtf_(mm10)** GTF file
+>   - Click on the [Zenodo](https://link.here) link and import the **Mus_musculus.GRCm38.87.gtf (mm10)** GTF file
 > 2. **RNA-STAR** {%icon tool %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Single-end`
->        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file"*: `out2` (output of **UMI-tools extract** {% icon tool %}. Of the FASTQ files output by UMI_tools extract, select the one with the sequencing reads intact.)
+>        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file"*: `out2` (output of **UMI-tools extract** {% icon tool %})
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
 >            - {% icon param-file %} *"Select reference genome"*: `Mus Musculus (mm10)` (Mouse)
->            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `output` (Input dataset. Select the GTF file we imported into our history)
+>            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `output` (Select the GTF file we imported into our history)
 > 3. **MultiQC** {%icon tool %} with the following parameters:
 >    - *"Results"*:
 >      - *"1: Results"*:
 >        - *"Which tool was used to generate logs?"*:`STAR`
->        - *"STAR output"* → *"1: STAR output"* → *"Type of STAR output?"*:`Log`
->        - *"STAR log output"* :(Select the file that ends in "log")
+>        - *"STAR output"*:
+>           - *"1: STAR output"*
+>              - *"Type of STAR output?"*:`Log`
+>        - *"STAR log output"* :(Select the STAR output file that ends in "log")
 > 4. Click on the {% icon galaxy-eye %} symbol on the MultiQC Webpage
 >
 {: .hands_on}
@@ -679,16 +637,16 @@ The purpose of MultiQC is to observe how well our reads were mapped against the 
 {: .question}
 
 
-# Filtering
+### Filtering
 
-> ### {% icon comment %} Recap of previous stages
+> #### {% icon comment %} Recap of previous stages
 >
 > 1. *Barcode Extraction*:  
 >   Here we used `umi_tools extract` on our input forward and reverse FASTQ files, and extracted the umi and cell barcode from the forward read *sequence*, and placed it into the *header* of both forward and reverse FASTQ files. i.e. FASTQ files → Modified FASTQ files  
 > 2. *Mapping*:  
 >   We took the sequencing data from the reverse FASTQ file (with modified headers) and aligned it to the mouse genome, using annotations presented in the GTF file for that genome. i.e. Modified FASTQ file (reverse) → BAM file
 
-### Confirming Reads in the BAM file
+#### Confirming Reads in the BAM file
 
 We now have a BAM file of our aligned reads, with cell and UMI barcodes embedded in the read headers. We also have the chromosome and base-pair positions of where these reads are aligned. The can be confirmed by peeking into the BAM file:
 
@@ -698,13 +656,14 @@ We now have a BAM file of our aligned reads, with cell and UMI barcodes embedded
 >  2. There are many header lines that begin with `@` which we are not interested in. 
 >  3. Do a Ctrl+F search for `@co` and then look at the lines directly below it.  
 >     One such read is given as so:
->
->  `J00182:75:HTKJNBBXX:2:1121:9729:45889_GACGAA_GTGGTC	16	chr1	2030	3	70M	*	0	0	AGAGGTTCCAATATTCCCATGAAATTGAGATTTTGTAAAAGAGTGAAGTGTGGTTACTTTCACTGAGAGG	JJJJJJJJJJJJJJJJJJJJJJJJFJJJJJAJJJJJJJJJJFJFJFFJJJJJJJJJJJJFF7AJA-77<A	NH:i:2 HI:i:1 AS:i:64 nM:i:2`
 > 
+>         J00182:75:HTKJNBBXX:2:1121:9729:45889_GACGAA_GTGGTC	16	chr1	2030	3	70M	*	0	0	AGAGGTTCCAATATTCCCATGAAATTGAGATTTTGTAAAAGAGTGAAGTGTGGTTACTTTCACTGAGAGG	JJJJJJJJJJJJJJJJJJJJJJJJFJJJJJAJJJJJJJJJJFJFJFFJJJJJJJJJJJJFF7AJA-77<A	NH:i:2 HI:i:1 AS:i:64 nM:i:2
+>
+{: .hands_on}
 
 The fields of the BAM file can be better explained at section 1.4 of [the SAM specification](https://samtools.github.io/hts-specs/SAMv1.pdf), but we will summarize the main fields of interest here:
 
- * `J00182..._GACGAA_GCGGTC`: The *readname* appended by an underscore '_', the cell barcode, another '_', and then the UMI barcode.
+ * `J00182..._GACGAA_GCGGTC`: The *readname* appended by `_`, the cell barcode, another `_`, and then the UMI barcode.
  * `16`: The FLAG value
 > #### {% icon question %} What does the FLAG value of 16 tell us about this read?
 > We can interactively see what the different FLAG values mean in the SAM specification [here](https://broadinstitute.github.io/picard/explain-flags.html)
@@ -713,13 +672,13 @@ The fields of the BAM file can be better explained at section 1.4 of [the SAM sp
 > {: .solution}
 {: .question}
  * `chr1` `2030`: The position and base-pair of alignment of the first base of the sequence.
- * (We next have a series of quality fields, as well as the `sequence` and `sequence_quality`)
- * `NH`: The number of hits for  this read. If it is multiply mapped, then the number of multiples will be shown (here `2`)
- * `HI`: Which number this particular read is in the series of (potentially) multi-mapped reads (here `1`, not neccesarily meaning the first or 'better' )
- * `nM`: The number of mismatches in the alignment of this read to the reference (here `2`)
+ * A series of quality fields, with the main contributors being  the sequence and sequence quality strings.
+ * `NH`: The number of hits for  this read. If it is multiply mapped, then the number of multiples will be shown (here `2`).
+ * `HI`: Which number this particular read is in the series of (potentially) multi-mapped reads (here `1`, not neccesarily meaning the first or 'better').
+ * `nM`: The number of mismatches in the alignment of this read to the reference (here `2`).
 
 
-### Filtering the BAM File
+#### Filtering the BAM File
 
 If we perform counting on the current BAM file we will be counting all reads, even the undesireable ones such as those that did not align so optimally.
 
@@ -768,7 +727,7 @@ Another filtering measure we can apply is to keep reads that we are confident ab
 {: .hands_on}
 
 
-# Quantification 
+## Quantification 
 
 Once we have the name of the gene for a specific read, we can tally how many of those reads fall into that gene and generate a count matrix.
 
@@ -780,34 +739,36 @@ Tallying reads is performed by two commonly-used tools:
 
 Unfortunately, both are limited to counting without being able to distinguish between different cells. 
 
-e.g. If we consider the number of reads that align to *GeneA*, the output given by these two tools is as follows:
-
- | (reads) | RNA STAR | FeatureCounts |
- |---------|----------|---------------|
- | GeneA   |   12     |    12         |
- 
-
-But what we actually require is:
-
- | (reads) | C1 | C2 |
- |---------|----|----|
- | GeneA   | 10 |  2 |
-
-or more specifically:
-
- | (umis) | C1 | C2 |
- |--------|----|----|
- | GeneA  | 2  |  1 |
+> ### {% icon details %} Example
+>
+> e.g. If we consider the number of reads that align to *GeneA*, the output given by these two tools is as follows:
+>
+> | (reads) | RNA STAR | FeatureCounts |
+> |---------|----------|---------------|
+> | GeneA   |   12     |    12         |
+> 
+>
+> But what we actually require is:
+>
+> | (reads) | C1 | C2 |
+> |---------|----|----|
+> | GeneA   | 10 |  2 |
+>
+> or more specifically:
+>
+> | (umis) | C1 | C2 |
+> |--------|----|----|
+> | GeneA  | 2  |  1 |
+{: .details}
 
 
 In order to obtain this desired format, we must use **UMI-tools count** to perform the tallying. However, this tool is dependent on **FeatureCounts** to annotate our reads with the one crucial piece of information that is missing from our BAM file: the name of the gene.
 
 > ### {% icon tip %} Tip: Verifying missing gene name
->
 > You can check this yourself by examining the {% icon galaxy-eye %} of the STAR Alignment file
 {: .comment}
 
-## Annotating Gene name with FeatureCounts
+### Annotating Gene name with FeatureCounts
 
 
 > ### {% icon hands_on %} Hands-on: Quantification assist via FeatureCounts
@@ -828,11 +789,18 @@ In order to obtain this desired format, we must use **UMI-tools count** to perfo
 >  - Click on the {% icon galaxy-eye %} for the "Feature Counts: Alignment File"
 >  - Scroll down past the header lines
 >  - Scroll horizontally to the tags, observe the new `XT` tag.
+{: .hands_on}
 
 The `XS` and `XT` tags in the BAM file will now form the basis for which we will tally reads.
 With all the relevant data now in our BAM file, we can actually perform the counting via `UMI-tools count`.
 
-## Counting Genes / Cell
+> ### {% icon tip %} Tip: Verifying added gene name
+> You can once again check this yourself by examining the {% icon galaxy-eye %} of the STAR Alignment file
+{: .comment}
+
+
+
+### Counting Genes / Cell
 
 > ### {% icon hands_on %} Hands-on: Final Quantification
 > 
@@ -883,6 +851,7 @@ The generation of a single count matrix is now complete, with the emphasis on th
 >  Reads with aligment mismatches greater than 2 were discarded, and only non multi-mapped reads that mapped to the forward or reverse strand were kept
 > 4. *Quantification*:  
 >  Gene tags were added to our alignment file, and reads were grouped according those sharing the same gene tag, with further reduction performed by collapsing all reads sharing the same cell and UMI barcode to be counted only once.
+{: .comment}
 
 This concludes the first part of the tutorial which focused on the transformation of raw FASTQ data from a single batch into a count matrix. The second part of this tutorial guides us through the handling of multiple batches, and the challenges faced with different library preperation setups.
 
@@ -894,57 +863,65 @@ Handling more than one batch of sequencing data is rather trivial when we take i
   1. For each batch, convert FASTQ reads from into a count matrix.
   2. Merge all count matrices into a single count matrix
 
-<!-- image of this process -->
+The first step requires us to merely run the same workflow on each of our batches, using the exact same inputs except for the FASTQ paired data. The second step requires a minimal level of interaction from us; namely using a merge tool and selecting our matrices. 
 
-The first step requires us to merely run the same workflow on each of our batches, using the exact same inputs except for the FASTQ paired data.
 
-The second step requires a minimal level of interaction from us; namely using a merge tool and selecting our matrices. 
+### Data upload and organization
 
-### Merging Matrices
+The count matrix we have generated in the previous section is too sparse to perform any reasonable analysis upon, and constitutes data only of a single batch. Here we will use more populated count matrices from multiple batches, under the assumption that we now know how to generate each individual one of them using the steps provided in the previous section. This data is available at [`Zenodo`](https://link.this).
 
-Before we begin, we must consider that each of our matrices are not equal.
+Once again, file naming is important, and so we will rename our matrix files appropriately to the plate and batch they are supposed to originate from.
 
- e.g. Batch1 has at least 1 cell that maps to GeneA, whereas Batch2 has no mention of GeneA
+> ### {% icon hands_on %} Hands-on: Data upload and organization
+>
+> 1. Create a new history and name it something meaningful (*e.g.* scRNA-seq multiple-batch tutorial)
+> 1. Open the Data Upload Manager by selecting *Get Data* from the Tool Panel and clicking *Upload File*
+> 1. Select *Paste/Fetch Data*
+> 1. Copy each link for the matrices (cm.p1b1.tab, cm.p1b2.tab, ..., cm.p2b8.tab, etc..), and paste each link into a separate text field
+>    - Set the datatype of the tabular (.tab) files to **tabular**
+> 1. Click *Start*
+> 1. Rename a matrix
+>    - Click on {% icon galaxy-pencil %} of the *cm.p1b1.tab* file
+>    - Set the Name field to something meaningul appended with "_P1_B1" (e.g. 'multibatch_P1_B1')
+>    - Click *Save*
+> 1. Repeat for all matrices
+>    - **Pay attention to the Plate number which changes after Batch 4**
+>
+{: .hands_on}
+
+## Merging Count Matrices
+
+Before we begin, we must consider that our matrices are not equal -- e.g. Batch1 has at least 1 cell that maps to GeneA, whereas Batch2 has no mention of GeneA.
 
 This can be resolved by performing a "Full Join" (as described [here](http://www.sql-join.com/sql-join-types/)) where GeneA is inserted into Batch2 as a gene with 0 counts:
 
-        +--------+----+----+----+                     +--------+----+----+----+
-        | B1     | C1 | C2 | C3 |                     | B2     | C1 | C2 | C3 |
-        |--------+----+----+----+   + (Full Join) +   |--------|----|----|----|
-        | GeneA  | 3  | 0  | 1  |                     | GeneX  | 10 | 2  | 7  |
-        +--------+----+----+----+                     +--------+----+----+----+
+          B1     | C1 | C2 | C3 |                       B2     | C1 | C2 | C3 |
+         --------+----+----+----|   + (Full Join) +    --------+----+----+----|
+          GeneA  | 3  | 0  | 1  |                       GeneM  |  0 | 3  | 2  |
+          GeneM  | 2  | 2  | 1  |                       GeneX  | 10 | 2  | 7  |
 
-           +--------+-------+-------+-------+-------+-------+-------+
-      =    | Full   | B1_C1 | B1_C2 | B1_C3 | B2_C1 | B2_C2 | B2_C3 |
-           +--------+-------+-------+-------+-------+-------+-------+
-           | GeneA  |   3   |   0   |   1   |    0  |   0   |    0  |
-           | GeneX  |   0   |   0   |   0   |   10  |   2   |    7  |
-           +--------+-------+-------+-------+-------+-------+-------+
+
+      =      Full   | B1_C1 | B1_C2 | B1_C3 | B2_C1 | B2_C2 | B2_C3 |
+            --------+-------+-------+-------+-------+-------+-------|
+             GeneA  |   3   |   0   |   1   |    0  |   0   |    0  | ← Exists in B1
+             GeneM  |   2   |   2   |   1   |    0  |   3   |    2  | ← Common in Both
+             GeneX  |   0   |   0   |   0   |   10  |   2   |    7  | ← Exists in B2
+
 
 
 > ### {% icon question %} Question
 >
-> Why have the column headers changed in the Full matrix?
+> 1. Why have the column headers changed in the Full matrix?
+> 2. Why are the cell labels in B1 and B2 the same, if they are labelling completely different cells?
 > 
 > > ### {% icon solution %} Solution
 > >
-> > Although the cell headers in each batch matrix is the same, **the cells they label are NOT the same** and need to be relabelled in the final matrix to tell us which batch they originated from.
-> >
-> {: .solution}
->
-{: .question}
-
-
-> ### {% icon question %} Follow-Up Question
-> 
-> Why are the cell labels in B1 and B2 the same, if they are labelling completely different cells?
-> 
-> > ### {% icon solution %} Solution
-> > 
-> > The reason the cell headers are the same is because the cells use the **same barcodes**, due to fact that the same barcodes are used across different batches.
+> > 1. Although the cell headers in each batch matrix is the same, **the cells they label are NOT the same** and need to be relabelled in the final matrix to tell us which batch they originated from.
+> > 2. The reason the cell headers are the same is because the cells use the **same barcodes**, due to fact that the same barcodes are used across different batches.
 > >
 > {: .solution}
 {: .question}
+
 
 Let us now merge our matrices from different batches.
 
@@ -957,21 +934,44 @@ Let us now merge our matrices from different batches.
 > - *"Keep original column header"*:`Yes`  
 > - *"Fill character"*:`0`  
 >
-{: .hands-on}
+{: .hands_on}
 
-The identifier column refers to the gene names are checked for 1:1 correspondence between matrices so that the merge does not concatenate the wrong rows between matrices. The Fill character provides a default value of 0 for cases where a Gene appears only in one of the matrices as per our example earlier.
+The identifier column refers to the column where the gene names are listed. A 1:1 correspondence between matrices is checked, so that the merge does not concatenate the wrong rows between matrices. The *Fill character* provides a default value of 0 for cases where a Gene appears only in one of the matrices as per our example earlier.
 
 Once the merge is complete, we can now peek at our full combined matrix by once again clicking on the file name to see a small summary. Here we can see that we now have ~30,000 genes and over 1500 cells.
 
 **Or do we?**
 
-We have applied the same cell barcodes to each batch, but not all batches neccesarily use the same barcodes to select their cells. 
-
-For example, Batch1 might only use cell barcodes 1-50 in the barcodes file, and Batch2 might only user cell barcodes 51-100 in the barcodes file.
+It is true that we have applied the same cell barcodes to each batch -- but -- **not all batches neccesarily use the same barcodes** to select their cells. For example, Batch1 might only use cell barcodes 1-50 in the barcodes file, and Batch2 might only use cell barcodes 51-100 in the barcodes file.
  
-But then why would different sets of the same barcodes be used on different batches? To answer this, see the *Plates, Batches, and Cross-Contamination* section
+We must thus question why different sets of the same superset of barcodes be used on different batches? To answer this, we must understand some of the technicalities of the library preparation.
 
-### Another Look At Cell Barcodes
+## Understanding Plates and Batches
+
+Plates are $$N \times M$$ arrays or wells that cells are sorted into and then individually amplified and sequenced. The way these slot are filled depends entirely on the protocol, but usually not all slots are filled. The reason for this will become clear momentarily.
+
+     | . . . . . . . . . |  <- Plate: N=9, M=6        | . . . : . . . : . . . |  <---   Plate: N=9, M=6, 3 lanes
+     | . . . . . . . . . |            54 slots        | . . . : . . . : . . . |                54 slots
+     | . . . . . . . . . |                            | . . . : . . . : . . . |          Lane: n=3, m=6
+     | . . . . . . . . . |                            | . . . : . . . : . . . |                18 slots per lane
+     | . . . . . . . . . |                            | . . . : . . . : . . . |
+     | . . . . . . . . . |                            | . . . : . . . : . . . |
+    
+
+Plates are divided into different sequencing *lanes*. These lanes demarcate evenly-sized $$n\times m$$ rectangular regions on a plate containing different non-overlapping sets of slots on the same plate. 
+
+All slots within a given lane are sequenced at the same time, and because of this characteristic, all cells that fill the slots of a given lane are said to be of the same *batch* (where lanes and batches are usually interchangeable terms).
+
+There are three main variables that can dictate the library preparation setup:
+
+ 1. Number of available cell barcodes
+ 1. Number of slots on a plate
+ 1. Number of slots in a lane/batch
+
+ 
+The last two can be explained by exploring different example plating arrangements of the sequencer, and the first can be explained via a better understanding of how cell barcodes are generated.
+ 
+#### A Closer Look at Cell Barcodes
 
 The number of cell barcodes sets the *minimum size of each batch*. If we have only 10 barcodes, then only 10 cells can be uniquely labelled without us having to start reusing barcodes on different cells
 
@@ -981,168 +981,155 @@ The number of cell barcodes sets the *minimum size of each batch*. If we have on
 >
 > > ### {% icon solution %} Solution
 > >
-> > We would not know which cell some reads came from. If CellA uses barcode ACCTG and CellB also uses barcode ACCTG, then any reads that are sequenced with ACCTG in their barcodes could come from either CellA or CellB, making it very amgiguous when it comes to counting that read.
+> > We would not know which cell some reads came from. If CellA uses barcode `ACCTG` and CellB also uses barcode `ACCTG`, then any reads that are sequenced with `ACCTG` in their barcodes could come from either CellA or CellB, making it very amgiguous when it comes to counting that read.
 > >
 > {: .solution}
->
 {: .question}
 
-
-#### How many available barcodes are there?
-
-Barcodes are typically limited to the 4 main nucleotide bases A,C,T, and G. The number of available barcodes depends on two factors:
-
- 1. The size of the barcode
- 2. The edit distance between adjacent barcodes
- 
-##### Barcode Size: Theoretical Limit
-   
-For the first, this means that for a barcode $$N$$ bases long, there will $$4^N$$ barcodes available. Typically barcodes tend to span 4-10 bases ($$4^4 = 256$$ to $$4^{10} = 1048576$$), since longer barcodes tend to be more subjectable to sequencing errors.
-
-The true number of barcodes used is actually smaller than $$4^N$$ due to the measures used to space barcodes apart from one another to reduce sequencing errors.
- 
-#### Edit Distance: Reducing Sequencing Errors in Barcodes
-
-Single base-pair sequencing errors are the most prevalent type of sequencing error, but these can be catered for when selecting barcodes, by specifying an *edit distance* between adjacent barcodes.
-
-e.g. For barcodes of length 3:
-   * Instead of : `AAA AAC AAG AAT ACA ACC` ... etc, (edit distance of `1`)
-   * We select : `AAA ACC AGG ATT CAA CCC` ... etc, (edit distance of `2`)
-   
-This will reduce the number of barcodes that we can select however:
-
-  * For barcodes of length *N*:
-    * An edit distance of `1` provides $$4^N$$ possible barcodes.
-    * An edit distance of `2` provides $$4^{N-1}$$ possible barcodes.
-    * An edit distance of `E` provides $$4^{N-E}$$ possible barcodes, where $$0 < E < N$$
+The availability of barcodes and the number of cells they can label is a design choice, where the technician must balance two opposing forces: barcode size vs sequencing errors.
 
 
-# Plates, Batches, and Cross-contamination
+> ### {% icon details %} Details: How many available barcodes are there?
+>
+> Barcodes are typically limited to the 4 main nucleotide bases {A,C,T,G}. The number of available barcodes depends on two factors:
+> 
+>  1. The size of the barcode
+>  2. The edit distance between adjacent barcodes
+>
+> 
+> #### Barcode Size: Theoretical Limit
+> 
+> For the first, this means that for a barcode $$N$$ bases long, there will $$4^N$$ barcodes available. Typically barcodes tend to span 4-10 bases ($$4^4 = 256$$ to $$4^{10} = 1048576$$), since longer barcodes tend to be more subjectable to sequencing errors.
+> 
+> The true number of barcodes used is actually smaller than $$4^N$$ due to the measures used to space barcodes apart from one another to reduce sequencing errors.
+> 
+>
+> #### Edit Distance: Reducing Sequencing Errors in Barcodes
+> 
+> Single base-pair sequencing errors are the most prevalent type of sequencing error, but these can be catered for when selecting barcodes, by specifying an *edit distance* between adjacent barcodes.
+> 
+> e.g. For barcodes of length 3:
+>    * Instead of : `AAA AAC AAG AAT ACA ACC` ... etc, (edit distance of `1`)
+>    * We select : `AAA ACC AGG ATT CAA CCC` ... etc, (edit distance of `2`)
+> 
+> This will reduce the number of barcodes that we can select however:
+> 
+>   * For barcodes of length *N*:
+>     * An edit distance of `1` provides $$4^N$$ possible barcodes.
+>     * An edit distance of `2` provides $$4^{N-1}$$ possible barcodes.
+>     * An edit distance of `E` provides $$4^{N-E}$$ possible barcodes, where $$0 < E < N$$
+{: .details}
 
-Plates are *N*x*M* arrays. The way these slot are filled depends entirely on the protocol, but usually not all slots are filled. The reason for this will become clear momentarily.
 
-     | . . . . . . . . . |  <- Plate: N=9, M=6, 54 slots
-     | . . . . . . . . . |
-     | . . . . . . . . . |
-     | . . . . . . . . . |
-     | . . . . . . . . . |
-     | . . . . . . . . . |
-    
+#### Examples of different plating strategies
 
-Plates are divided into different sequencing lanes. These lanes demarcate evenly-sized *n*x*m* rectangular regions on a plate containing different non-overlapping sets of slots on the same plate. 
-
-    | . . . : . . . : . . . |  <---   Plate: N=9, M=6, 54 slots
-    | . . . : . . . : . . . |       3 lanes: n=3,m=6, 18 slots per lane/batch
-    | . . . : . . . : . . . |
-    | . . . : . . . : . . . |
-    | . . . : . . . : . . . |
-    | . . . : . . . : . . . |
-
-
-All slots within a given lane are sequenced at the same time, and because of this characteristic, all cells that fill the slots of a given lane are said to be of the same Batch. From hereon we will refer to sequencing lanes as Batches. 
-
-There are 3 main variables that can dictate the library preparation setup:
-
- 1. The number of available cell barcodes
- 2. The number of slots on a plate
- 3. The number of slots in a batch
- 
-Main contending questions:
+The main contending questions are:
  * How large is each batch?
  * How many batches on a plate?
  * Should each batch use the same barcodes?
  
-To answer these questions, consider the following illustrative examples:
+A technician always has to balance quality against cost, and this is illustrated in the following examples:
+
     
-#### Examples
-
-For each of these examples, we will consider our experiment to have the following setup:
-   * Barcodes:
-      * 24 unique, with an edit distance of 2:
-      
-          AAA ACC AGG TTT TAA TCC
-          ATT CCC CAA TGG NAA NCC
-          CGG CTT GGG NGG NTT ANN
-          GAA GCC GTT CNN GNN TNN
-                  
-   * Lanes:
-     * Each lane will have 12 slots
-     * No more than 2 lanes can be sequenced at the same time.
-       (e.g. if we have 4 lanes, on a plate, then half the plate will be sequenced in a run, and the other half in another run)
-   
-   
-   - TODO: TALK ABOUT THE DIFFERENCE BETWEEN LEAVING A LANE EMPTY and USING FALSE BARCODES, SAME BENEFIT BUT REDUCED COST OF DOUBLE SEQUENCING
-   
-    
- * e.g.1 
-
-We have a single plate with a single lane
-
-    | x x x |    <- AAA ACC AGT
-    | x x x |       ATT CCC CAA
-    | x x x |       CGG CTT GGG
-    | x x x |       GAA GCC GTT
-
-Half of the barcodes can be used for that lane, and the other half we can ignore.
-
-
- * e.g.2 
-
-We have a single plate with 2 lanes
-
-    | x x x : x x x | <- AAA ACC AGG : TTT TAA TCC
-    | x x x : x x x |    ATT CCC CAA : TGG NAA NCC
-    | x x x : x x x |    CGG CTT GGG : NGG NTT ANN
-    | x x x : x x x |    GAA GCC GTT : CNN GNN TNN
-
-Here we use all barcodes since these lanes will be sequenced at the same time. 
-
- * e.g.3
-
-We have a single plate with 2 lanes, but only one lane in the plate is used and the other lane is empty.
-
-    | x x x : . . . | <- AAA ACC AGG : TTT TAA TCC
-    | x x x : . . . |    ATT CCC CAA : TGG NAA NCC
-    | x x x : . . . |    CGG CTT GGG : NGG NTT ANN
-    | x x x : . . . |    GAA GCC GTT : CNN GNN TNN
-
-
-Here we use all barcodes.
-
-> ### {% icon question %} Why use all barcodes? Why leave an empty lane?
-> > ### {% icon solution %} Solution
+> ### {% icon details %} Details: Plating, Batches, and Barcodes
+> 
+> For each of these examples, we will consider our experiment to have the following setup:
+>    * Barcodes:
+>       * 24 unique, with an edit distance of 2:
+>         
+>             AAA ACC AGG TTT TAA TCC
+>             ATT CCC CAA TGG NAA NCC
+>             CGG CTT GGG NGG NTT ANN
+>             GAA GCC GTT CNN GNN TNN
+>                   
+>    * Lanes:
+>      * Each lane will have 12 slots
+>      * No more than 2 lanes can be sequenced at the same time.
+>        (e.g. if we have 4 lanes, on a plate, then half the plate will be sequenced in a run, and the other half in another run)
+>    
+>      
+> ###### Examples
+> 
+>  * e.g.1: A single plate with a single batch
+> 
+>           | 1 1 1 |    <- AAA ACC AGT      Half of the barcodes can be
+>           | 1 1 1 |       ATT CCC CAA      used for that lane, and the
+>           | 1 1 1 |       CGG CTT GGG      other half we can ignore.
+>           | 1 1 1 |       GAA GCC GTT
+> 
+> 
+>  * e.g.2: A single plate with 2 batches
+> 
+>         | 1 1 1 : 2 2 2 | <- AAA ACC AGG : TTT TAA TCC      Here we use all barcodes
+>         | 1 1 1 : 2 2 2 |    ATT CCC CAA : TGG NAA NCC      since these lanes will be
+>         | 1 1 1 : 2 2 2 |    CGG CTT GGG : NGG NTT ANN      sequenced at the same time 
+>         | 1 1 1 : 2 2 2 |    GAA GCC GTT : CNN GNN TNN
+> 
+> 
+>  * e.g.3: A single plate with 2 lanes, but only one lane on the plate is used and the other lane is empty.
+> 
+>         | 1 1 1 : . . . | <- AAA ACC AGG : ttt taa tcc      All barcodes remain 
+>         | 1 1 1 : . . . |    ATT CCC CAA : tgg naa ncc      in use.
+>         | 1 1 1 : . . . |    CGG CTT GGG : ngg ntt ann
+>         | 1 1 1 : . . . |    GAA GCC GTT : cnn gnn tnn
+>
+> 
+> > ### {% icon question %} Question
+> > Why use all barcodes? Why leave an empty lane?
+> > > ### {% icon solution %} Solution
+> > >
+> > > Cross-contamination. If we see any reads in the Plate which contain barcodes {TTT,TAA,TCC, etc} then we know that some contamination has occured *because there should be no cells there*. One reason is that the second lane was not completely cleaned before being used. 
+> > {: .solution}
+> {: .question}
+> 
+>  * e.g.4: Two plates with 2 lanes, but only one lane in each plate is used and the other lane is empty.
+> 
+> Here we have repeated previous example, but with an extra plate. In the first plate, the first half of the barcodes are used, and in the second plate, the second half of the barcodes are used.
+> 
+>         | 1 1 1 : . . . | P1 <- AAA ACC AGG : ttt taa tcc
+>         | 1 1 1 : . . . |       ATT CCC CAA : tgg naa ncc
+>         | 1 1 1 : . . . |       CGG CTT GGG : ngg ntt ann
+>         | 1 1 1 : . . . |       GAA GCC GTT : cnn gnn tnn
+>     
+>         | . . . : 2 2 2 | P2 <- aaa acc agg : TTT TAA TCC
+>         | . . . : 2 2 2 |       att ccc caa : TGG NAA NCC
+>         | . . . : 2 2 2 |       cgg ctt ggg : NGG NTT ANN
+>         | . . . : 2 2 2 |       gaa gcc gtt : CNN GNN TNN
+>     
+> 
+> > ### {% icon question %} Question
+> > Why alternate the barcodes between plates? The full set of barcodes does not change, so why not keep the same format?
+> > > ### {% icon solution %} Solution
+> > >
+> > > Again, the answer is to reduce cross-contamination. Plate2 will be loaded after Plate1 (and perhaps Plate2 and Plate1 will use the same plate!) If we see any reads in Plate2 that should not be there, we can now surmise where they came from. We also have the added benefit of protecting the cells in Plate2 from those that may have been used in Plate1, since they are in completely different positions across plates.
+> > {: .solution}
+> {: .question}
+> 
+>  * e.g.5: A single plate with 2 lanes, with both lanes filled, but all barcodes are applied to each lane
+>  
+>         | 1 1 1 : 2 2 2 | <- AAA ACC AGG ttt taa tcc : aaa acc agg TTT TAA TCC
+>         | 1 1 1 : 2 2 2 |    ATT CCC CAA tgg naa ncc : att ccc caa TGG NAA NCC
+>         | 1 1 1 : 2 2 2 |    CGG CTT GGG ngg ntt ann : cgg ctt ggg NGG NTT ANN
+>         | 1 1 1 : 2 2 2 |    GAA GCC GTT cnn gnn tnn : gaa gcc gtt CNN GNN TNN
+> 
+> > ### {% icon question %} Question
 > >
-> > Cross-contamination. If we see any reads in the Plate which contain barcodes {TTT,TAA,TCC, etc} then we know that some contamination has occured *because there should be no cells there*. One reason is that the second lane was not completely cleaned before being used. 
-> {: .solution}
-{: .question}
-
- * e.g.4
-
-We have a two plates with 2 lanes, but only one lane in each plate is used and the other lane is empty.
-
-    | x x x : . . . | P1 <- AAA ACC AGG : TTT TAA TCC
-    | x x x : . . . |       ATT CCC CAA : TGG NAA NCC
-    | x x x : . . . |       CGG CTT GGG : NGG NTT ANN
-    | x x x : . . . |       GAA GCC GTT : CNN GNN TNN
-
-    | . . . : x x x | P2 <- AAA ACC AGG : TTT TAA TCC
-    | . . . : x x x |       ATT CCC CAA : TGG NAA NCC
-    | . . . : x x x |       CGG CTT GGG : NGG NTT ANN
-    | . . . : x x x |       GAA GCC GTT : CNN GNN TNN
-
-Here we again use all barcodes for both plates, but each plate uses a different subset of the barcodes for the filled slots. i.e. They use different sets of 'Real' and 'Fake' barcodes.
-
-> ### {% icon question %} Why alternate the barcodes between plates? The full set of barcodes does not change, so why not keep the same format?
-> > ### {% icon solution %} Solution
-> >
-> > Again, the answer is to reduce cross-contamination. Plate2 will be loaded after Plate1 (and perhaps Plate2 and Plate1 will use the same plate!) If we see any reads in Plate2 that should not be there, we can now surmise where they came from. We also have the added benefit of protecting the cells Plate2 from those that may have been used in Plate1, since they are in completely different positions across plates.
-> {: .solution}
-{: .question}
-
+> > 1. Why apply the full set of barcodes to each lane, when only half will actually label?
+> > 2. What benefit does this serve, instead of seperating them over different plates as in the previous example?
+> > 
+> > > ### {% icon solution %} Solution
+> > >
+> > > 1. This setup is actually the same as example 4, but with the two plates merged. Here we can check for cross-contamination in each lane by measuring the real cell labels against the false barcodes. If in lane 1, we detect a significant number of reads with cell barcodes of `TAA` or `ANN`, we can assume that some cross-contamination has occurred since we should not be able to detect these barcodes in that lane. The converse is also true of lane 2.
+> > > 2. We have the benefit of detecting cross-contamination with the same advantages as example 4, but with the cost advantage of sequencing two batches at the same time.
+> > >
+> > {: .solution}
+> {: .question}
+> 
+{: .details}
 
 ## Controlling against Cross-Contamination
 
-Thankfully, Galaxy provides a tool for checking for cross-contamination in any experimental setup. It only needs the following information:
+There are multiple possible ways to configure a plate for sequencing multiple batches. Thankfully, Galaxy provides a tool that caters for this, and checks for cross-contamination in any experimental setup. It requires only the following information:
 
  1. A full list of barcodes
  2. Which barcodes apply to which batches
@@ -1150,78 +1137,81 @@ Thankfully, Galaxy provides a tool for checking for cross-contamination in any e
  
 Since we the plating protocol we are using is that designed by the Freiburg MPI Grün lab, we will follow their structure.
 
-* Barcodes:
+> ### {% icon details %} Details: MPI plating protocol
+> 
+>  * Barcodes:
+>     * These are each 8bp long, with an edit distance of 2, and there 192 of them.
+> 
+>           001-006 | AACACC AACCTC AACGAG AACTGG AAGCAC AAGCCA
+>           007-012 | AAGGTG AAGTGC ACAAGC ACAGAC ACAGGA ACAGTG
+>              .
+>              .
+>           180-186 | TTACGC TTCACC TTCCAG TTCGAC TTCTCG TTGCAC
+>           187-192 | TTGCGA TTGCTG TTGGAG TTGGCA TTGGTC TTGTGC
+>  
+>  * Plates:
+>     * Here we have 8 batches spread out over 2 plates, with alternate barcode striping.
+>           
+>           Plate 1  +-------+-------+-------+-------+
+>                    |  B1   |  B2   |  B3   |  B4   |
+>                    +-------+-------+-------+-------+
+>                     001-096 097-192 001-096 097-192
+>         
+>           Plate 2  +-------+-------+-------+-------+
+>                    |  B5   |  B6   |  B7   |  B8   |
+>                    +-------+-------+-------+-------+
+>                     001-096 097-192 001-096 097-192
+{: .details}
 
-These are each 8bp long, with an edit distance of 2, and there 192 of them.
-
-    001-006 | AACACC AACCTC AACGAG AACTGG AAGCAC AAGCCA
-    007-012 | AAGGTG AAGTGC ACAAGC ACAGAC ACAGGA ACAGTG
-       .
-       .
-    180-186 | TTACGC TTCACC TTCCAG TTCGAC TTCTCG TTGCAC
-    187-192 | TTGCGA TTGCTG TTGGAG TTGGCA TTGGTC TTGTGC
- 
- * Plates:
- 
-Here we have 8 batches spread out over 2 plates, with alternate barcode striping.
-          
-      Plate 1  +-------+-------+-------+-------+
-               |  B1   |  B2   |  B3   |  B4   |
-               +-------+-------+-------+-------+
-                001-096 097-192 001-096 097-192
-      
-      Plate 2  +-------+-------+-------+-------+
-               |  B5   |  B6   |  B7   |  B8   |
-               +-------+-------+-------+-------+
-                001-096 097-192 001-096 097-192
-                
-This plating protocol can be reformatted as:
+This plating protocol can be converted into a more textual format, which allows for many variable setups (see *Help* section of *Cross-contamination Barcode Filter* tool).
 
     [Barcodes → Batches]
     001-096: B1 , B3 , B5 , B7
     097-192: B2 , B2 , B6 , B8
 
     [Plates → Batches]
-    1: B1 , B2 , B3 , B4
-    2: B5 , B6 , B7 , B8
+     1: B1 , B2 , B3 , B4
+     2: B5 , B6 , B7 , B8
 
-This format allows for many variable setups (see *Help* section of *Cross-contamination Barcode Filter* tool)
+Let us now apply this protocol to our count matrix, and look for any cross-contamination.
 
 > ### {% icon hands_on %} Hands-on: Barcode Filtering
 > 
 > Select **Cross-contamination Barcode Filter** {%icon tool %} with the following parameters:
->  - *"Input Matrix"*:(Here we select the merged matrices from the Column Join tool)
->  - *"Complete Barcodes"*:(The barcodes file)
+>  - *"Input Matrix"*:`output` (merged matrices from the Column Join tool)
+>  - *"Complete Barcodes"*:(barcodes file)
 >  - *"Plate Protocol"*:`Custom`
->    -*"Under 'Barcode Format'"*:
->      -Select `+ Insert Barcode Format`
->        -*"1: Barcode Format"*:
->          -*"Barcode Range: Start"*:`1`
->          -*"Barcode Range: End"*:`96`
->          -*"Batches utilizing this Range"*:`1,3,5,7`
->      -Select `+ Insert Barcode Format`
->        -*"2: Barcode Format"*:
->          -*"Barcode Range: Start"*:`97`
->          -*"Barcode Range: End"*:`192`
->          -*"Batches utilizing this Range"*:`2,4,6,8`
->    -*"Under 'Plate Format'"*:
->      -Select `+ Insert Plate Format`
->        -*"1: Plate Format"*:
->          -*"Plate Number"*:`1`
->          -*"Batches within this Plate Number"*:`1,2,3,4`
->        -*"2: Plate Format"*:
->          -*"Plate Number"*:`2`
->          -*"Batches within this Plate Number"*:`5,6,7,8`
+>     - *"Under 'Barcode Format'"*:
+>        - Select `+ Insert Barcode Format`:
+>           - *"1: Barcode Format"*:
+>              - *"Barcode Range: Start"*:`1`
+>              - *"Barcode Range: End"*:`96`
+>              - *"Batches utilizing this Range"*:`1,3,5,7`
+>        - Select `+ Insert Barcode Format`:
+>           - *"2: Barcode Format"*:
+>              - *"Barcode Range: Start"*:`97`
+>              - *"Barcode Range: End"*:`192`
+>              - *"Batches utilizing this Range"*:`2,4,6,8`
+>     - *"Under 'Plate Format'"*:
+>        - Select `+ Insert Plate Format`:
+>           - *"1: Plate Format"*:
+>              - *"Plate Number"*:`1`
+>              - *"Batches within this Plate Number"*:`1,2,3,4`
+>           - *"2: Plate Format"*:
+>              - *"Plate Number"*:`2`
+>              - *"Batches within this Plate Number"*:`5,6,7,8`
 >
-{.hands-on}
+{: .hands_on}
  
 The plot that follows tells us everything we need to know about each of our batches. Each batch is essentially tested against the full set of barcodes in order to assert that only the desired or 'Real' barcodes have been sequenced.
 
- ![Contamination Plots](../../images/scrna_crosscontamination.gif) "The Pre-filter and Post-filter plots")
-
-In the pre-filter plot, we can see how only half of the sequences in each batch map to half the barcodes. This shows very little cross-contamination, and shows that our data is real. 
-
-The post-filter plot essentially removes the false barcodes from each batch and retains only the 'Real' barcodes.
+> ### {% icon details %} Details: Cross-contamination Plot Explained
+>
+>  ![Contamination Plots](../../images/scrna_crosscontamination.gif "The Pre-filter and Post-filter plots")
+> 
+>  1. In the pre-filter plot, we can see how only half of the sequences in each batch map to half the barcodes. This shows very little cross-contamination, and proves that our data is real. 
+>  2. The post-filter plot essentially removes the false barcodes from each batch and retains only the 'Real' barcodes.
+{: .details}
 
 > ### {% icon question %} Question
 >
@@ -1231,18 +1221,21 @@ The post-filter plot essentially removes the false barcodes from each batch and 
 > >
 > > Because only half the barcodes in each batch were real. The *UMI-tools extract* took the entire barcodes file to filter against each batch, and the *UMI-tools count* also took the entire barcodes file to count against each batch. 
 > >
-> > Naturally, each batch produced 192 cells, even though 96 were real. As a result of joining each of these matrices we ended up with a count-matrix of $$8 * 192 = 1536$$ cells. The cross-contamination tool removes the false barcodes (50% in each batch), resulting in 768 cells.
+> > Naturally, each batch produced 192 cells, even though 96 were real. As a result of joining each of these matrices we ended up with a count-matrix of $$8 * 192 = 1536$$ cells. The cross-contamination tool removes the false barcodes (50% in each batch), resulting in $$768$$ cells.
 > >
 > {: .solution}
->
 {: .question}
 
-With this, we now have a count-matrix that can be used for further downstream analyis.
+With this, we now have a count-matrix that can be used for further downstream analyis. 
 
+<!-- 
 Factoid: We can convert the number of UMIs to the number of molecules using a transformation script.
+-->
  
 # Conclusion
 {:.no_toc}
 
 In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our reads and into the read headers, in order to preserve them during mapping. We have discovered how these barcoded reads are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against reads that are PCR duplicates. Finally, we have learned how to combine seperate batch data as well as being able to check and correct against cross-contamination.
+
+ ![Overview](../../images/scrna_workflow.svg "An overview of the entire workflow")
 
