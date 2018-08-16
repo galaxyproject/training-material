@@ -186,10 +186,10 @@ Strait chlorophyll maximum layer (7m depth, 65° 43.44″ N, 168° 57.42″ W). 
 
 <h2 id="data-upload">Data upload</h2>
 
-<p>There are a many ways how you can upload your data. Three among these are:</p>
+<p>There are three ways to upload your data.</p>
 
 <ul>
-  <li>Upload the files from your computer</li>
+  <li>Upload/Import the files from your computer</li>
   <li>Using a direct link</li>
   <li>Import from the data library if your instance provides the files</li>
 </ul>
@@ -244,7 +244,7 @@ Strait chlorophyll maximum layer (7m depth, 65° 43.44″ N, 168° 57.42″ W). 
 <h2 id="match-peptide-sequences">Match peptide sequences</h2>
 
 <p>The search database labelled <code class="highlighter-rouge">FASTA_Bering_Strait_Trimmed_metapeptides_cRAP.FASTA</code> is the input database that
-will be used to match MS/MS to peptide sequences via a sequence database search. It is a small excerpt of the original database, which was constructed based on a metagenomic screening of the sea water samples (see <a href="https://www.ncbi.nlm.nih.gov/pubmed/27396978">May et al. (2016)</a>). The full original database can be accessed from <a href="https://noble.gs.washington.edu/proj/metapeptide/data/metapeptides_BSt.fasta">here</a>. A contaminant database was added.</p>
+will be used to match MS/MS to peptide sequences via a sequence database search. It is a small excerpt of the original database, which was constructed based on a metagenomic screening of the sea water samples (see <a href="https://www.ncbi.nlm.nih.gov/pubmed/27396978">May et al. (2016)</a>). The full original database can be accessed from <a href="https://noble.gs.washington.edu/proj/metapeptide/data/metapeptides_BSt.fasta">here</a>. The contaminant database (cRAP) was merged with the original database.</p>
 
 <p>For this, the sequence database-searching program called <a href="https://compomics.github.io/projects/searchgui.html">SearchGUI</a> will be used.
 The created dataset collection of the three <em>MGF files</em> in the history is used as the MS/MS input.</p>
@@ -279,14 +279,14 @@ The created dataset collection of the three <em>MGF files</em> in the history is
       <p>Section <strong>Search Engine Options</strong>:</p>
 
       <ul>
-        <li><strong>B-Search Engines</strong>: <code class="highlighter-rouge">X!Tandem</code></li>
+        <li><strong>Search Engines</strong>: <code class="highlighter-rouge">X!Tandem</code></li>
       </ul>
 
       <blockquote class="comment">
         <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
         <p>The section <strong>Search Engine Options</strong> contains a selection of sequence database searching
-programs that are available in SearchGUI. Any combination of these programs can be used for
+algorithms that are available in SearchGUI. Any combination of these programs can be used for
 generating PSMs from MS/MS data. For the purpose of this tutorial, <strong>X!Tandem</strong> we will be used.</p>
       </blockquote>
 
@@ -396,8 +396,8 @@ in the PeptideShaker parameters. Most relevant for this tutorial is the PSM repo
 
 <figure id="figure-1"><img src="../../images/psm_report.png" alt="Display of the PSM report tabular file" title="The PSM report" /><figcaption><span class="figcaption-prefix">Figure 1:</span> The PSM report</figcaption></figure>
 
-<p>Scrolling at the bottom to the left will show the sequence for the PSM that matched to these
-metapeptide entries. Column 3 is the sequence matched for each PSM entry. Every PSM is a
+<p>Scrolling towards left will show the sequence for the PSM that matched to these
+metapeptide entries. Column 3 is the sequence matched for each PSM entry. Every identified PSM is a
 new row in the tabular output.</p>
 
 <p>In the following steps of this tutorial, selected portions of this output will be extracted and used for
@@ -421,7 +421,7 @@ proteins and provides a fast matching algorithm for peptides.</p>
   <h3 id="tip-tip-unipept"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Unipept</h3>
 
   <p>Users can access UniPept via a <a href="https://unipept.ugent.be">web page</a> and paste peptide
-sequences into the search form to retrieve protein information. But we`ll use a Galaxy
+sequences into the search form to retrieve protein information. But we`ll use the Galaxy
 <em>Unipept</em> tool to automate the process. The <em>Unipept</em> tool sends the peptide list to the
 UniPept REST API service, then transforms the results into datasets that can be further analyzed
 or operated on within Galaxy.</p>
@@ -728,7 +728,7 @@ community based on expressed microbial proteome.</p>
 This allows to get an insight of the <strong>biological process</strong>, the <strong>molecular function</strong> and the <strong>cellular component</strong> related to the sample data.</p>
 
 <blockquote class="comment">
-  <h3 id="comment-gene-ontology-consortium"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Gene Ontology Consortium</h3>
+  <h3 id="comment-gene-ontology-go-consortium"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Gene Ontology (GO) Consortium</h3>
 
   <p>The <a href="http://www.geneontology.org/">Gene Ontology Consortium</a> provides with its Ontology a framework for the model of biology.
 The GO defines concepts/classes used to describe gene function, and relationships between these concepts. It classifies functions along three aspects:</p>
@@ -1093,7 +1093,7 @@ ORDER BY  bering_peptides desc,bering_psms desc
 
 </blockquote>
 
-<p>With these three resulting files the functional analysis of this tutorial is finished. Each record contains the name of a GO term, the amount of peptides related to it and the amount of PSMs for these peptides.</p>
+<p>With these three output files the functional analysis of this tutorial is finished. Each record contains the name of a GO term, the amount of peptides related to it and the amount of PSMs for these peptides.</p>
 
 <blockquote class="comment">
   <h3 id="comment-references"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> References</h3>
