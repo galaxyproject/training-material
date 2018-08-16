@@ -73,7 +73,7 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 ## Match peptide sequences
 
 The search database labelled `FASTA_Bering_Strait_Trimmed_metapeptides_cRAP.FASTA` is the input database that
-will be used to match MS/MS to peptide sequences via a sequence database search. It is a small excerpt of the original database, which was constructed based on a metagenomic screening of the sea water samples (see [May et al. (2016)](https://www.ncbi.nlm.nih.gov/pubmed/27396978)). The full original database can be accessed from [here](https://noble.gs.washington.edu/proj/metapeptide/data/metapeptides_BSt.fasta). The contaminant database(cRAP) was merged with the original database.
+will be used to match MS/MS to peptide sequences via a sequence database search. It is a small excerpt of the original database, which was constructed based on a metagenomic screening of the sea water samples (see [May et al. (2016)](https://www.ncbi.nlm.nih.gov/pubmed/27396978)). The full original database can be accessed from [here](https://noble.gs.washington.edu/proj/metapeptide/data/metapeptides_BSt.fasta). The contaminant database (cRAP) was merged with the original database.
 
 For this, the sequence database-searching program called [SearchGUI](https://compomics.github.io/projects/searchgui.html) will be used.
 The created dataset collection of the three *MGF files* in the history is used as the MS/MS input.
@@ -100,7 +100,7 @@ The created dataset collection of the three *MGF files* in the history is used a
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > This section **Search Engine Options** contains a selection of sequence database searching
+>    > The section **Search Engine Options** contains a selection of sequence database searching
 >    > algorithms that are available in SearchGUI. Any combination of these programs can be used for
 >    > generating PSMs from MS/MS data. For the purpose of this tutorial, **X!Tandem** we will be used.
 >    {: .comment}
@@ -434,7 +434,7 @@ community based on expressed microbial proteome.
 In the following chapter, a functional analysis will be performed using the **UniPept** application `pept2prot` in order to match the list of peptides with the correlated Gene Ontology terms.
 This allows to get an insight of the **biological process**, the **molecular function** and the **cellular component** related to the sample data.
 
-> ### {% icon comment %} Gene Ontology(GO) Consortium
+> ### {% icon comment %} Gene Ontology (GO) Consortium
 >
 > The [Gene Ontology Consortium](http://www.geneontology.org/) provides with its Ontology a framework for the model of biology.
 > The GO defines concepts/classes used to describe gene function, and relationships between these concepts. It classifies functions along three aspects:
