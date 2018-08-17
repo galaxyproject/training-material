@@ -2,6 +2,25 @@
 layout: tutorial_hands_on
 topic_name: genome-annotation
 tutorial_name: genome-annotation
+
+title: "Genome Annotation"
+type: "tutorial"
+name: "genome-annotation"
+zenodo_link: "https://doi.org/10.5281/zenodo.1250793"
+galaxy_tour: no
+hands_on: yes
+slides: no
+workflows: no
+tags:
+  - prokaryote
+questions:
+objectives:
+time_estimation: "1h/1d"
+key_points:
+contributors:
+  - joachimwolff
+  - erxleben
+  - bgruening
 ---
 
 # Introduction

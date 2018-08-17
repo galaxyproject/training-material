@@ -2,6 +2,28 @@
 layout: tutorial_hands_on
 topic_name: variant-analysis
 tutorial_name: dunovo
+
+title: "Calling very rare variants"
+type: "tutorial"
+name: "dunovo"
+zenodo_link: ""
+workflows: no
+galaxy_tour: no
+hands_on: yes
+slides: no
+questions:
+  - "What frequency of variants is so low that it is obscured by sequencing error rate?"
+  - "What are the different types of consensus sequences produced from duplex sequencing?"
+objectives:
+  - "Processing raw duplex sequencing data into consensus sequences"
+  - "Find rare variants without relying on diploid assumptions"
+time_estimation: "3 hr"
+key_points:
+  - "Diploid variant calling relies on assumptions that rare variant calling cannot make"
+  - "Duplex consensus sequences are usually most accurate, but sometimes you must rely on single-strand consensus sequences instead."
+contributors:
+  - nekrut
+  - NickSto
 ---
 
 # Introduction

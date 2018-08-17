@@ -2,6 +2,17 @@
 layout: tutorial_hands_on
 topic_name: dev
 tutorial_name: data-source-integration
+
+title: "Data source integration"
+type: "tutorial"
+name: "data-source-integration"
+enable: "false"
+hands_on: yes
+slides: no
+questions:
+objectives:
+time_estimation: "1h/1d"
+key_points:
 ---
 
 # Data Source Integration

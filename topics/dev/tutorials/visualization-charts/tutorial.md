@@ -2,6 +2,25 @@
 layout: tutorial_hands_on
 topic_name: dev
 tutorial_name: visualization-charts
+
+title: "Visualizations: charts plugins"
+type: "tutorial"
+name: "visualization-charts"
+hands_on: yes
+slides: yes
+questions:
+  - "How can I make a custom plugin for Charts?"
+objectives:
+  - "Learn how to add custom javascript plugins to the Galaxy Charts framework"
+time_estimation: "1h"
+key_points:
+  - "Charts is a pluggable extension system for JS-only visualisations"
+  - "With only 3 files we can integrate any JS-only visualizations into Galaxy"
+contributors:
+  - shiltemann
+  - yhoogstrate
+  - bgruening
+  - guerler
 ---
 
 ## Introduction

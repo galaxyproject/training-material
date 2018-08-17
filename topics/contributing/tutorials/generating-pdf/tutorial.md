@@ -2,6 +2,21 @@
 layout: tutorial_hands_on
 topic_name: contributing
 tutorial_name: generating-pdf
+
+title: "Generating PDF artefacts of the website"
+type: "tutorial"
+name: "generating-pdf"
+hands_on: yes
+slides: no
+questions:
+  - "How to generate PDF of the different tutorials and slides?"
+objectives:
+  - "Generating PDFs"
+time_estimation: "10min"
+key_points:
+  - "PDFs can be easily generated for the different tutorials to share with learnees or to keep a fixed version of a tutorial"
+contributors:
+  - bebatut
 ---
 
 # Introduction

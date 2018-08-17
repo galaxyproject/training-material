@@ -2,6 +2,22 @@
 layout: tutorial_hands_on
 topic_name: contributing
 tutorial_name: create-new-topic
+
+title: "Including a new topic"
+type: "tutorial"
+name: "create-new-topic"
+hands_on: yes
+slides: no
+questions:
+  - "How to include a new topic?"
+objectives:
+  - "Create a new topic"
+  - "Set up the metadata for a topic"
+time_estimation: "30min"
+key_points:
+  - "A new topic can be easily added for new tutorials"
+contributors:
+  - bebatut
 ---
 
 # Introduction

@@ -2,6 +2,39 @@
 layout: tutorial_hands_on
 topic_name: introduction
 tutorial_name: galaxy-intro-peaks2genes
+
+title: "From peaks to genes"
+type: "tutorial"
+name: "galaxy-intro-peaks2genes"
+zenodo_link: "https://doi.org/10.5281/zenodo.1025585"
+galaxy_tour: no
+hands_on: yes
+slides: no
+workflows: no
+questions:
+  - "How to use Galaxy?"
+  - "How to get from peak regions to a list of gene names?"
+objectives:
+  - "Familiarize yourself with the basics of Galaxy"
+  - "Learn how to obtain data from external sources"
+  - "Learn how to run tools"
+  - "Learn how histories work"
+  - "Learn how to create a workflow"
+  - "Learn how to share your work"
+time_estimation: "3h"
+key_points:
+  - "Galaxy provides an easy-to-use graphical user interface for often complex commandline tools"
+  - "Galaxy keeps a full record of your analysis in a history"
+  - "Workflows enable you to repeat your analysis on different data"
+  - "Galaxy can connect to external sources for data import and visualization purposes"
+  - "Galaxy provides ways to share your results and methods with others"
+contributors:
+  - pajanne
+  - blankclemens
+  - bebatut
+  - bgruening
+  - nsoranzo
+  - dyusuf
 ---
 
 # Introduction

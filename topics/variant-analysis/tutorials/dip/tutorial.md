@@ -2,6 +2,28 @@
 layout: tutorial_hands_on
 topic_name: variant-analysis
 tutorial_name: dip
+
+title: "Calling variants in diploid systems"
+type: "tutorial"
+name: "dip"
+zenodo_link: ""
+workflows: no
+galaxy_tour: no
+hands_on: yes
+slides: no
+questions:
+  - "How to find variable sites in diploid genomes?"
+objectives:
+  - "Using Galaxy's main site we will see how to call variants in human genome."
+time_estimation: "1-1.5h"
+key_points:
+  - "Variants versus Genotypes"
+  - "Bayesian approach to variant calling"
+  - "Freebayes calls variant using haplotype windows"
+  - "SNPEff allows functional annotation of variants"
+  - "Gemini is a flexible system for analyzing variation patterns"
+contributors:
+  - nekrut
 ---
 
 <!-- Scripts below are necessary for rendering formulas used in this tutorial -->

@@ -2,6 +2,22 @@
 layout: tutorial_hands_on
 topic_name: introduction
 tutorial_name: galaxy-intro-vis
+
+title: "Visualization"
+type: "tutorial"
+name: "galaxy-intro-vis"
+enable: "false"
+zenodo_link: ""
+galaxy_tour: no
+hands_on: yes
+slides: no
+workflows: no
+questions:
+objectives:
+time_estimation:
+key_points:
+contributors:
+  - shiltemann
 ---
 
 # Using the Integrative Genomics Viewer

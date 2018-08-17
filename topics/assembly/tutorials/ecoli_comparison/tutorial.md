@@ -2,6 +2,38 @@
 layout: tutorial_hands_on
 topic_name: assembly
 tutorial_name: ecoli_comparison
+
+title: "Making sense of a newly assembled genome"
+type: "tutorial"
+name: "ecoli_comparison"
+zenodo_link: "https://doi.org/10.5281/zenodo.1306128"
+galaxy_tour: no
+hands_on: yes
+slides: no
+workflows: no
+requirements:
+  -
+    title: "Unicycler Assembly"
+    type: "internal"
+    link: "/assembly/tutorials/unicycler-assembly/tutorial.html"
+tags:
+  - prokaryote
+questions:
+  - "I just assembled a genome. How does it compare with already sequenced genomes?"
+  - "How do I find rearranged, inserted, or deleted regions?"
+objectives:
+  - "Identification of the most closely related genome to my new assembly"
+  - "Perform sequence comparison to locate rearrangements"
+  - "Identify genes located in deletions"
+time_estimation: "3-4h"
+key_points:
+  - "We learned how to download large sets of completed genomes from NCBI"
+  - "We learned how to use Galaxy's rule-based collection builder"
+  - "We learned how to use a combination of Galaxy tools to create complex views of genome comparisons"
+  - "We learned about idiosyncrasies of data formats and how to deal with them using Galaxy tools"
+contributors:
+  - nekrut
+  - delphine-l
 ---
 
 > ### Outline of this tutorial

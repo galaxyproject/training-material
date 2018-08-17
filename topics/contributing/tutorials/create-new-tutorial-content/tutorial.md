@@ -2,6 +2,27 @@
 layout: tutorial_hands_on
 topic_name: contributing
 tutorial_name: create-new-tutorial-content
+
+title: "Creating a new tutorial - Writing content in Markdown"
+type: "tutorial"
+name: "create-new-tutorial-content"
+hands_on: yes
+slides: no
+questions:
+  - "How to write a tutorial with hands-on?"
+  - "What are the different boxes?"
+  - "How can I add a caption to an image?"
+objectives:
+  - "Create hands-on"
+  - "Use the different boxes"
+time_estimation: "15min"
+key_points:
+  - "You can highlight questions, tools and hints with a special syntax"
+  - "Self-learning can be done by questions and hidden answers"
+contributors:
+  - bebatut
+  - bgruening
+  - shiltemann
 ---
 
 # Introduction

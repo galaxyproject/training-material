@@ -2,6 +2,29 @@
 layout: tutorial_hands_on
 topic_name: introduction
 tutorial_name: galaxy-intro-strands
+
+title: "Introduction to Genomics and Galaxy"
+type: "tutorial"
+name: "galaxy-intro-strands"
+zenodo_link: ""
+workflows: no
+galaxy_tour: no
+hands_on: yes
+slides: no
+questions:
+  - "Do genes on opposite strands ever overlap?  If so, how often?"
+objectives:
+  - "Learn some of the basic concepts of genomics and bioinformatics"
+  - "Familiarize yourself with the basics of Galaxy"
+time_estimation: "2.5h"
+key_points:
+  - "Galaxy provides an easy-to-use graphical user interface for often complex command-line tools"
+  - "Galaxy keeps a full record of your analysis in a history"
+  - "Workflows enable you to repeat your analysis on different data"
+  - "Galaxy can connect to external sources for data import and visualization purposes"
+  - "Galaxy provides ways to share your results and methods with others"
+contributors:
+  - tnabtaf
 ---
 
 # Introduction to Galaxy

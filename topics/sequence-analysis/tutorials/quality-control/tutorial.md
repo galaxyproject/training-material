@@ -2,6 +2,33 @@
 layout: tutorial_hands_on
 topic_name: sequence-analysis
 tutorial_name: quality-control
+
+title: "Quality Control"
+type: "tutorial"
+name: "quality-control"
+zenodo_link: "https://doi.org/10.5281/zenodo.61771"
+galaxy_tour: yes
+hands_on: yes
+slides: yes
+workflows: yes
+questions:
+  - How to control quality of NGS data?
+  - What are the quality parameters to check for each dataset?
+  - How to improve the quality of a sequence dataset?
+objectives:
+  - Manipulate FastQ files
+  - Control quality from a FastQ file
+  - Use FastQC tool
+  - Understand FastQC output
+  - Use tools for quality correction
+requirements:
+time_estimation: "1h"
+key_points:
+  - Run quality control on every dataset before running any other bioinformatics analysis
+  - Take care of the parameters used to improve the sequence quality
+  - Re-run FastQC to check the impact of the quality control
+contributors:
+  - bebatut
 ---
 
 # Introduction

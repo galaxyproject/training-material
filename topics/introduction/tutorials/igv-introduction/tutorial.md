@@ -2,6 +2,23 @@
 layout: tutorial_hands_on
 topic_name: introduction
 tutorial_name: igv-introduction
+
+title: "IGV Introduction"
+type: "tutorial"
+name: "igv-introduction"
+zenodo_link: ""
+workflows: no
+galaxy_tour: no
+hands_on: yes
+slides: no
+questions:
+objectives:
+time_estimation: "1h/1d"
+key_points:
+contributors:
+  - nekrut
+  - joachimwolff
+  - pajanne
 ---
 
 # Using the Integrative Genomics Viewer

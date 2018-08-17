@@ -2,6 +2,26 @@
 layout: tutorial_hands_on
 topic_name: contributing
 tutorial_name: create-new-tutorial
+
+title: "Creating a new tutorial"
+type: "tutorial"
+name: "create-new-tutorial"
+hands_on: yes
+slides: no
+questions:
+  - "How to integrate a new tutorial?"
+  - "How to make a tutorial robust and reproducible?"
+objectives:
+  - "Create a tutorial from scratch"
+  - "Link a tutorial to a topic"
+  - "Create hands-on"
+  - "Add technical support for a tutorial"
+time_estimation: "15min"
+key_points:
+  - "Finding good training datasets is hard!"
+  - "Creating a new tutorial involves several steps: some are mandatory, some can be skipped even if they are recommended"
+contributors:
+  - bebatut
 ---
 
 # Introduction

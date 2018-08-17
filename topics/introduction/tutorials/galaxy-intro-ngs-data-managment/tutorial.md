@@ -2,6 +2,23 @@
 layout: tutorial_hands_on
 topic_name: introduction
 tutorial_name: galaxy-intro-ngs-data-managment
+
+title: "NGS data logistics"
+type: "tutorial"
+name: "galaxy-intro-ngs-data-managment"
+zenodo_link: ""
+workflows: no
+galaxy_tour: no
+hands_on: yes
+slides: no
+questions:
+  - "How to manipulate and process NGS data"
+objectives:
+  - "Learn about Fastq, SAM, and BAM."
+time_estimation: "30 min"
+key_points:
+contributors:
+  - nekrut
 ---
 
 In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with Fastq format produced by most sequencing machines and will finish with SAM/BAM format representing mapped reads. The cover image above shows a screen dump of a SAM dataset.

@@ -26,6 +26,7 @@ module Jekyll
 
       for intro_slide in intro_slides do
         page = interesting[intro_slide]
+        #puts "int> #{page.data}"
         page_obj = page.data.dup
         page_obj['slides'] = true
         page_obj['type'] = 'introduction'
@@ -35,10 +36,11 @@ module Jekyll
       for folder in tutorial_folders do
         # Discover resources
         resources = Dir.glob("#{folder}/*").map{ |a| a.split('/')[-1] }
+        #puts "fol> #{folder} #{resources}"
 
         # First pull out all of the things in 'interesting' that are in the
         # folder we're currently examining
-        known_pages = interesting.select{|a| a.include?(folder)}
+        known_pages = interesting.select{|a| a.include?(folder + '/')}
         # Next we'll look for the specific page keys. Should not encounter multiple.
         tutorial_page_keys = known_pages.keys.select{|a| a.include?('tutorial.html')}
         slides_page_keys   = known_pages.keys.select{|a| a.include?('slides.html')}
@@ -54,6 +56,11 @@ module Jekyll
           page = interesting[tutorial_page_keys[0]]
         end
 
+        if page == false then
+          puts "Error? No tutorial OR slides found in #{folder}. We saw #{known_pages.keys}"
+          next
+        end
+
         page_obj = page.data.dup
         page_obj['slides'] = resources.include?('slides.html')
         page_obj['hands-on'] = resources.include?('tutorial.md')
@@ -64,9 +71,6 @@ module Jekyll
         relevant_pages.push(page_obj)
       end
 
-      for page in relevant_pages do
-        puts "> #{page}"
-      end
       relevant_pages
     end
   end

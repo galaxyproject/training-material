@@ -2,6 +2,28 @@
 layout: tutorial_hands_on
 topic_name: contributing
 tutorial_name: create-new-tutorial-metadata
+
+title: "Creating a new tutorial - Defining metadata"
+type: "tutorial"
+name: "create-new-tutorial-metadata"
+hands_on: yes
+slides: no
+questions:
+  - "What does Metadata in GTN means?"
+  - "Which kind of metadata can I annotate?"
+  - "For what is metadata used?"
+objectives:
+  - "Adding metadata for a tutorial"
+  - "Defining learning objectives"
+time_estimation: "15min"
+key_points:
+  - "Metadata are useful to find the tutorial and generate the webpage"
+  - "Learning objectives, time estimation and other pedagogic metadata are helpful for the instructors"
+  - "Learning objectives and other pedagogic metadata should be filled before starting developing the tutorial to know where to go"
+contributors:
+  - bebatut
+  - bgruening
+  - shiltemann
 ---
 
 The `metadata.yaml` file is a file located in the topic directory. It describes the metadata related to a topic and its material.

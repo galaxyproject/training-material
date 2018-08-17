@@ -2,6 +2,29 @@
 layout: tutorial_hands_on
 topic_name: admin
 tutorial_name: ansible
+
+title: "Ansible"
+type: "tutorial"
+name: "ansible"
+zenodo_link: ""
+hands_on: yes
+slides: no
+questions:
+  - Why Ansible?
+  - How and when to use Ansible?
+  - How to write a role?
+  - How to leverage community build roles?
+objectives:
+  - Learn Ansible basics
+  - Write a simple role
+  - Install a role from Ansible Galaxy
+time_estimation: "60m"
+key_points:
+  - Ansible lets you do system administration at scale
+  - Many system administration, software installation, and software management tasks are already available as ansible tasks or roles
+contributors:
+  - erasche
+  - shiltemann
 ---
 
 # Overview

@@ -2,6 +2,23 @@
 layout: tutorial_hands_on
 topic_name: transcriptomics
 tutorial_name: rb-rnaseq
+
+title: "Reference-based RNAseq data analysis (long)"
+type: "tutorial"
+name: "rb-rnaseq"
+zenodo_link: ""
+workflows: no
+galaxy_tour: no
+hands_on: yes
+slides: no
+questions:
+  - "How to perform analysis of RNAseq data when reference genome is available?"
+objectives:
+  - "Learns basic concepts of RNAseq analysis"
+time_estimation: "1h"
+key_points:
+contributors:
+  - nekrut
 ---
 
 # RNAseq: Reference-based
