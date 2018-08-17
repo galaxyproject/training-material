@@ -6,11 +6,12 @@ module Jekyll
     end
 
     def topic_filter(pages, topic_name)
-      relevant_pages = []
+      resource_intro = []
+      resource_pages = []
 
       # Must provide a topic name.
       if topic_name.nil? then
-        return relevant_pages
+        return []
       end
 
       interesting = {}
@@ -43,7 +44,7 @@ module Jekyll
         page_obj = page.data.dup
         page_obj['slides'] = true
         page_obj['type'] = 'introduction'
-        relevant_pages.push(page_obj)
+        resource_intro.push(page_obj)
       end
 
       for folder in tutorial_folders do
@@ -81,15 +82,16 @@ module Jekyll
         page_obj['tours'] = resources.include?('tours')
         page_obj['type'] = 'tutorial'
 
-        relevant_pages.push(page_obj)
+        resource_pages.push(page_obj)
       end
 
-      if relevant_pages.length == 0 then
+      resource_pages = resource_intro + resource_pages.sort_by{ |k| k["title"] }
+
+      if resource_pages.length == 0 then
         puts "Error? Could not find any relevant pages for #{topic_name}"
       end
 
-      sorted = relevant_pages.sort_by{ |k| k["title"] }
-      sorted
+      resource_pages
     end
   end
 end
