@@ -29,7 +29,41 @@ This tutorial will explain the data importation, the first step before analyze y
 
 # Individual files VS zip file
 
-TODO
+For the older of us, the Workflow4Metabolomics LC-MS workflow used require some zip file as input.
+
+But now, the W4M team recommend to import the files and process the first steps individually.
+
+See the explanation below: 
+
+> ### {% icon warning %} The zip file: the old fashion, not recommended system
+> Files are nested in folders for their groups within a zip file
+>
+> - PROS:
+>   - The folders set the group of the files for **xcms.groupChromPeaks**
+>   - Only one import and one step  
+> - CONS:
+>   - **xcms.findChromPeaks** is limited to 6 CPUs
+>   - The files aren't integrated into the history and can't be visualized
+>
+> ![Zip method](../../images/tutorial-lcms-data-single-vs-zip-zip.png)
+>
+{: .warning-box}
+
+> ### {% icon tip %} The single files system: recommended
+> Files are uploaded individually (grouped in Dataset collection) and processed in parallel
+>
+> - PROS:
+>   - One xcmsSet job is launch for each input file. It is highly parallelizable
+>   - The files are completely integrated in Galaxy and can be visualized
+>   - A better transparency
+> - CONS:
+>   - The **xcms.findChromPeaks** outputs have to be merged (**Merger**) before using **xcms.groupChromPeaks**
+>   - A sampleMetadata file must be used to set the groups (but you need one for some further steps anyway)
+>
+> ![Single method](../../images/tutorial-lcms-data-single-vs-zip-single.png)
+>
+{: .tip}
+
 
 # Obtaining data
 
@@ -40,11 +74,15 @@ In this tutorial we use 4 datasets from the Sacurine study
 > - **Objective**: inﬂuence of age, body mass index, and gender on the urine metabolome
 > - **Cohort**: 183 employees from CEA
 > - **LC-HRMS**: LTQ-Orbitrap (negative ionization mode)
+>
+> For further informations, please see this [dedicated page](http://workflow4metabolomics.org/dataset_sacurine) and the [publication](https://pubs.acs.org/doi/10.1021/acs.jproteome.5b00354)
 {: .tip}
 
 > ### {% icon hands_on %} Hands-on: Obtaining our data
 >
 > The Toy Dataset is available in Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1346742.svg)](https://doi.org/10.5281/zenodo.1346742)
+>
+> It is composed of 4 datasets among the 240 from the whole [Sacurine dataset ](http://workflow4metabolomics.org/dataset_sacurine)
 >
 > Download all of them
 {: .hands_on}
@@ -215,7 +253,7 @@ In this tutorial we use 4 datasets from the Sacurine study
 >  - {% icon param-files %}  *"RData file"*: the `raw.raw.xset.RData` Data Collection
 >  - {% icon param-file %}   *"Sample metadata file"*: `sacuri_sampleMetadata.tsv`
 >
-> 4. **xcms.findChromPeaks (xcmsSet)** {% icon tool %} with the following parameters
+> 4. **xcms.groupChromPeaks (group)** {% icon tool %} with the following parameters
 >  - {% icon param-file %}  *"RData file"*: `xset.merged.RData`
 >
 > When the **xcms.findChromPeaks Merger** step is done, you can observe that we now have a dataset called `xset.merged.RData` in the history. It's no longer a Dataset Collection.
