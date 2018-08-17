@@ -1,3 +1,5 @@
+#! /bin/bash
+
 # Script to install a tutorial to a running Galaxy instance
 #
 # usage: install_tutorial.sh <topic_name> <galaxy_url> <admin_api_key>
@@ -8,20 +10,47 @@
 #    pip install ephemeris -U
 #
 
-topic=$1
+tutorial=$1
 galaxy_url=$2
 api_key=$3
 
 # install tools
-shed-install -g ${galaxy_url} -a ${api_key} -t ${topic}/tools.yaml
+echo "Installing Tools.."
+if [ -f ${tutorial}/tools.yaml ]
+then
+    shed-tools install -g ${galaxy_url} -a ${api_key} -t ${tutorial}/tools.yaml
+else
+    echo "No tools to install (no file named tools.yaml present)"
+fi
 
 # install data libraries
-setup-data-libraries -g ${galaxy_url} -a ${api_key} -i ${topic}/data_libraries.yaml
+echo "Populating Data Libraries"
+if [ -f ${tutorial}/data-library.yaml ]
+then
+    setup-data-libraries -g ${galaxy_url} -a ${api_key} -i ${tutorial}/data-library.yaml
+else
+    echo "No data library to install (no file named data-libraries.yaml present)"
+fi
+
+# install reference data
+echo "Installing reference data"
+if [ -f ${tutorial}/data-manager.yaml ]
+then
+    run-data-managers -g ${galaxy_url} -a ${api_key} --config ${tutorial}/data-manager.yaml
+
+else
+    echo "No reference data to install (no file named data-manager.yaml present)"
+fi
 
 # install workflows
-workflow-install -g ${galaxy_url} -a ${api_key} -w ${topic}/workflows/
+echo "Installing workflows"
+if [ -d ${tutorial}/workflows ]
+then
+    workflow-install --publish_workflows -g ${galaxy_url} -a ${api_key} -w ${tutorial}/workflows/
 
-# run data managers
-run-data-managers -g ${galaxy_url} -a ${api_key} --config ${topic}/data_manager.yaml
+else
+    echo "No workflows to install (no directory named workflow present)"
+fi
+
 
 # install tours --> not possible via API yet

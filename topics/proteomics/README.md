@@ -7,6 +7,7 @@ topic | features
 [Peptide and Protein ID](tutorials/proteinID_SG_PS.md) | [:book:](tutorials/proteinID_SG_PS.md)
 [Protein Quantitation by Stable Isotope Labelling (SIL)](tutorials/proteinQuant_SIL.md) | [:book:](tutorials/proteinQuant_SIL.md)
 [Label-free versus Labelled - How to Choose Your Quantitation Method](tutorials/labelfree_vs_labelled.md)| [:book:](tutorials/labelfree_vs_labelled.md)
+[Metaproteomics](tutorials/metaproteomics/tutorial.md)| [:book:](tutorials/metaproteomics/tutorial.md)
 
 The Galaxy community offers many different ways of training. The table above lists all available training features of a specific topic to give you a fast and comprehensive overview.
 

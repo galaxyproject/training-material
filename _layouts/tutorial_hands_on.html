@@ -30,7 +30,7 @@ layout: base
                         </a>
                     </li>
 
-                    {% if tutorial.slides == "yes" %}
+                    {% if tutorial.slides == true or tutorial.slides == "yes" %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/slides.html" title="Slides for this tutorial">
                             {% icon slides %} Associated slides
@@ -65,18 +65,18 @@ layout: base
                         {% endif %}
                     {% endif %}
 
-                    {% if topic.docker_image and topic.docker_image != "" or instances[topic.name].supported and instances[topic.name]['tutorials'][tutorial.name].supported %}
+                    {% if topic.docker_image or instances[topic.name].supported and instances[topic.name]['tutorials'][tutorial.name].supported %}
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
                                 {% icon instances %} Galaxy Instances
                             </a>
                             <div class="dropdown-menu">
-                                {% if topic.docker_image and topic.docker_image != "" %}
+                                {% if topic.docker_image %}
                                     <a class="dropdown-item" href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/docker" title="Docker image for this tutorial">
                                         {% icon docker_image %} Docker image
                                     </a>
                                 {% endif %}
-                                {% if topic.docker_image and topic.docker_image != "" and instances[topic.name].supported and instances[topic.name]['tutorials'][tutorial.name].supported %}
+                                {% if topic.docker_image and instances[topic.name].supported and instances[topic.name]['tutorials'][tutorial.name].supported %}
                                     <div class="dropdown-divider"></div>
                                 {% endif %}
                                 {% if instances[topic.name]['tutorials'][tutorial.name].supported %}
@@ -119,7 +119,7 @@ layout: base
                     {% include help.html %}
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/tutorial.md">
+                        <a class="nav-link" href="{{ site.github_repository }}/edit/master/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/tutorial.md">
                             {% icon github %} Edit
                         </a>
                     </li>
@@ -196,11 +196,34 @@ layout: base
         <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="{{ site.baseurl }}/topics/{{ topic.name }}#references">here</a>.</p>
         {% endif %}
 
+        {% if topic.name == "contributing" %}
+        <blockquote class="agenda">
+            <h3>Developing GTN training material</h3>
+            This tutorial is part of a series to develop GTN training material, feel free to also look at:
+            {% assign topic = site.data[page.topic_name] %}
+            <ol>
+            {% for material in topic.material %}
+             {% if material.enable != "false" and material.name != page.tutorial_name %}
+              {% if material.type == "introduction" %}
+            <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.name }}.html">{{ material.title }}</a></li>
+             {% elsif material.type == "tutorial" %}
+              {% if material.hands_on %}
+            <li><a href="{{ site.baseurl }}/topics/{{ topic.name  }}/tutorials/{{ material.name }}/tutorial.html">{{ material.title }}</a></li>
+              {% elsif material.slides %}
+            <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/slides.html">{{ material.title }}</a></li>
+               {% endif %}
+              {% endif %}
+             {% endif %}
+            {% endfor %}
+             </ol>
+        </blockquote>
+        {% endif %}
+
         <h3>{% icon congratulations %} Congratulations on successfully completing this tutorial!</h3>
 
         <hr>
 
-        <blockquote class="overview">
+        <blockquote class="feedback">
             <h3>{% icon feedback %} Help us improve this content!</h3>
             Please take a moment to fill in the Galaxy Training Network
             <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>.

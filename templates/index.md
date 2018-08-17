@@ -1,4 +1,4 @@
 ---
 layout: topic
-topic_name: <your_topic>
+topic_name: your_topic
 ---
