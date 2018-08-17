@@ -252,7 +252,8 @@ To learn how to add new content, check out our [series of tutorials on creating 
 
 {% assign topic = site.data["contributing"] %}
 <ol>
-{% for material in topic.material %}
+{% assign topic_material = site.pages | topic_filter:page.topic_name %}
+{% for material in topic_material %}
  {% if material.enable != "false" and material.name != page.tutorial_name %}
   {% if material.type == "introduction" %}
 <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.name }}.html">{{ material.title }}</a></li>

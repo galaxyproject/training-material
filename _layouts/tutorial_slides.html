@@ -3,7 +3,8 @@ layout: base_slides
 ---
 
 {% assign topic = site.data[page.topic_name] %}
-{% for tuto in topic.material %}
+{% assign topic_material = site.pages | topic_filter:page.topic_name %}
+{% for tuto in topic_material %}
     {% if tuto.name == page.tutorial_name %}
         {% assign tutorial = tuto %}
         {% assign title = tutorial.title %}

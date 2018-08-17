@@ -3,13 +3,9 @@ layout: base
 ---
 
 {% assign topic = site.data[page.topic_name] %}
-{% for tuto in topic.material %}
-    {% if tuto.name == page.tutorial_name %}
-        {% assign tutorial = tuto %}
-    {% endif %}
-{% endfor %}
 {% assign contributors = site.data['contributors'] %}
 {% assign instances = site.data['instances'] %}
+{% assign topic_material = site.pages | topic_filter:page.topic_name %}
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -30,15 +26,15 @@ layout: base
                         </a>
                     </li>
 
-                    {% if tutorial.slides == true or tutorial.slides == "yes" %}
+                    {% if page.slides == true or page.slides == "yes" %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/slides.html" title="Slides for this tutorial">
+                        <a class="nav-link" href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ page.name }}/slides.html" title="Slides for this tutorial">
                             {% icon slides %} Associated slides
                         </a>
                     </li>
                     {% else %}
                         {% assign intro_link = false %}
-                        {% for material in topic.material %}
+                        {% for material in topic_material %}
                             {% if material.enable != "false" %}
                                 {% if material.type == "introduction" %}
                                     {% assign intro_link = true %}
@@ -51,7 +47,7 @@ layout: base
                                     {% icon slides %} Introduction slides
                                 </a>
                                 <div class="dropdown-menu">
-                                    {% for material in topic.material %}
+                                    {% for material in topic_material %}
                                         {% if material.enable != "false" %}
                                             {% if material.type == "introduction" %}
                                                 <a class="dropdown-item" href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.name }}.html">
@@ -65,7 +61,7 @@ layout: base
                         {% endif %}
                     {% endif %}
 
-                    {% if topic.docker_image or instances[topic.name].supported and instances[topic.name]['tutorials'][tutorial.name].supported %}
+                    {% if topic.docker_image or instances[topic.name].supported and instances[topic.name]['tutorials'][page.name].supported %}
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
                                 {% icon instances %} Galaxy Instances
@@ -76,11 +72,11 @@ layout: base
                                         {% icon docker_image %} Docker image
                                     </a>
                                 {% endif %}
-                                {% if topic.docker_image and instances[topic.name].supported and instances[topic.name]['tutorials'][tutorial.name].supported %}
+                                {% if topic.docker_image and instances[topic.name].supported and instances[topic.name]['tutorials'][page.name].supported %}
                                     <div class="dropdown-divider"></div>
                                 {% endif %}
-                                {% if instances[topic.name]['tutorials'][tutorial.name].supported %}
-                                    {% for inst in instances[topic.name]['tutorials'][tutorial.name]['instances'] %}
+                                {% if instances[topic.name]['tutorials'][page.name].supported %}
+                                    {% for inst in instances[topic.name]['tutorials'][page.name]['instances'] %}
                                         {% if inst[1].supported %}
                                         <a class="dropdown-item" href="{{ inst[1].url }}" title="{{ inst[0] }}">
                                             {{ inst[0] }}
@@ -92,17 +88,17 @@ layout: base
                         </li>
                     {% endif %}
 
-                    {% if tutorial.tutorial_galaxy_instance %}
+                    {% if page.tutorial_galaxy_instance %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ tutorial.tutorial_galaxy_instance }}" title="Galaxy instance for this tutorial">
+                        <a class="nav-link" href="{{ page.tutorial_galaxy_instance }}" title="Galaxy instance for this tutorial">
                             {% icon galaxy_instance %} Galaxy instance
                         </a>
                     </li>
                     {% endif %}
 
-                    {% if tutorial.zenodo_link != "" %}
+                    {% if page.zenodo_link != "" %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ tutorial.zenodo_link }}" title="Links to data">
+                        <a class="nav-link" href="{{ page.zenodo_link }}" title="Links to data">
                             {% icon zenodo_link %} Input Dataset
                         </a>
                     </li>
@@ -119,7 +115,7 @@ layout: base
                     {% include _includes/help.html %}
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ site.github_repository }}/edit/master/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/tutorial.md">
+                        <a class="nav-link" href="{{ site.github_repository }}/edit/master/topics/{{ topic.name }}/tutorials/{{ page.name }}/tutorial.md">
                             {% icon github %} Edit
                         </a>
                     </li>
@@ -131,7 +127,7 @@ layout: base
 
 <div class="container main-content">
     <section class="tutorial">
-        <h1>{{ tutorial.title }}</h1>
+        <h1>{{ page.title }}</h1>
 
         <blockquote class="overview">
             <h3>Overview</h3>
@@ -150,7 +146,7 @@ layout: base
             {% endfor %}
             </ul>
 
-            {% if topic.requirements or tutorial.requirements %}
+            {% if topic.requirements or page.requirements %}
             <strong>{% icon requirements %} Requirements</strong>
             <ul>
             {% for requirement in topic.requirements %}
@@ -162,7 +158,7 @@ layout: base
                     {% endif %}
                 </li>
             {% endfor %}
-            {% for requirement in tutorial.requirements %}
+            {% for requirement in page.requirements %}
                 <li>
                     {% if requirement.type == "internal" %}
                     <a href="{{ site.baseurl }}/topics/{{ requirement.link }}">{{ requirement.title }}</a>
@@ -179,12 +175,12 @@ layout: base
 
         {{ content }}
 
-        {% if tutorial.key_points %}
+        {% if page.key_points %}
         <blockquote class="key_points">
             <h3>{% icon keypoints %} Key points</h3>
 
             <ul>
-                {% for key_point in tutorial.key_points %}
+                {% for key_point in page.key_points %}
                 <li>{{ key_point }}</li>
                 {% endfor %}
             </ul>
@@ -202,7 +198,7 @@ layout: base
             This tutorial is part of a series to develop GTN training material, feel free to also look at:
             {% assign topic = site.data[page.topic_name] %}
             <ol>
-            {% for material in topic.material %}
+            {% for material in topic_material %}
              {% if material.enable != "false" and material.name != page.tutorial_name %}
               {% if material.type == "introduction" %}
             <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.name }}.html">{{ material.title }}</a></li>
@@ -233,8 +229,9 @@ layout: base
     </section>
 </div>
 
-{% if tutorial.contributors %}
-{% capture contributors %}{% for contributor in tutorial.contributors %}, {{contributors[contributor].name }}{% endfor %}{% endcapture %}
+{% if page.contributors %}
+{% assign contrib = page.contributors | sort %}
+{% capture contributors %}{% for contributor in contrib %}, {{contributors[contributor].name }}{% endfor %}{% endcapture %}
 {% endif %}
 <footer>
     <div class="container">
@@ -245,7 +242,7 @@ layout: base
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/tutorial.md">GitHub</a>.
+            <a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ page.name }}/tutorial.md">GitHub</a>.
         </p>
     </div>
 </footer>

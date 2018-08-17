@@ -7,10 +7,11 @@ layout: base_slides
 ---
 
 {% assign topic = site.data[page.topic_name] %}
+{% assign topic_material = site.pages | topic_filter:page.topic_name %}
 
 ## Related tutorials
 
-{% for material in topic.material %}
+{% for material in topic_material %}
     {% if material.type == "tutorial" %}
         {% if material.hands_on == "yes" %}
 - [{{ material.title }}]({{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/tutorial.html")

@@ -2,9 +2,10 @@
 <html>
 
 {% assign topic = site.data[page.topic_name] %}
+{% assign topic_material = site.pages | topic_filter:page.topic_name %}
 {% assign title = topic.title %}
 {% if page.tutorial_name %}
-  {% for tuto in topic.material %}
+  {% for tuto in topic_material %}
     {% if tuto.name == page.tutorial_name %}
         {% assign tutorial = tuto %}
         {% assign title = tutorial.title %}
