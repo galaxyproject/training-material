@@ -10,7 +10,6 @@ zenodo_link: "https://doi.org/10.5281/zenodo.165147"
 galaxy_tour: yes
 hands_on: yes
 slides: no
-workflows: yes
 questions:
   - "What is the effect of normal variation in the gut microbiome on host health?"
 objectives:

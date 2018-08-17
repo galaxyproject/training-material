@@ -10,7 +10,6 @@ zenodo_link: "https://doi.org/10.5281/zenodo.1219888"
 galaxy_tour: yes
 hands_on: yes
 slides: no
-workflows: yes
 questions:
   - "How to analyze RAD sequencing data for a genetic map study?"
 objectives:

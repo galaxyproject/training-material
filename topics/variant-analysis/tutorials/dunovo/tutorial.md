@@ -7,7 +7,10 @@ title: "Calling very rare variants"
 type: "tutorial"
 name: "dunovo"
 zenodo_link: ""
+<<<<<<< HEAD
 workflows: no
+=======
+>>>>>>> remove workflow yes/no
 galaxy_tour: no
 hands_on: yes
 slides: no

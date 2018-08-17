@@ -10,7 +10,6 @@ zenodo_link: "https://doi.org/10.5281/zenodo.1098033"
 galaxy_tour: yes
 hands_on: yes
 slides: no
-workflows: yes
 questions:
   - "What is mapping-by-sequencing?"
   - "How can it help you identify the causative mutation in phenotypic mutants isolated from genetic screens?"

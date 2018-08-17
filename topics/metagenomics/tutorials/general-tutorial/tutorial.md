@@ -10,7 +10,6 @@ zenodo_link: "https://doi.org/10.5281/zenodo.815875"
 galaxy_tour: yes
 hands_on: yes
 slides: no
-workflows: yes
 questions:
   - "How to analyze metagenomics data?"
   - "What information can be extracted of metagenomics data?"

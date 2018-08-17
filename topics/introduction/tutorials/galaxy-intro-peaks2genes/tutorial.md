@@ -10,7 +10,6 @@ zenodo_link: "https://doi.org/10.5281/zenodo.1025585"
 galaxy_tour: no
 hands_on: yes
 slides: no
-workflows: no
 questions:
   - "How to use Galaxy?"
   - "How to get from peak regions to a list of gene names?"

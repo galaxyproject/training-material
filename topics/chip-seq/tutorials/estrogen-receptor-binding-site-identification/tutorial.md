@@ -10,7 +10,6 @@ zenodo_link: "https://doi.org/10.5281/zenodo.892432"
 galaxy_tour: yes
 hands_on: yes
 slides: no
-workflows: yes
 questions:
   - How is raw ChIP-seq data processed and analyzed?
   - What are the binding sites of the Estrogen receptor?

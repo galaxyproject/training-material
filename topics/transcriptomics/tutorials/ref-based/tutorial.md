@@ -10,7 +10,6 @@ zenodo_link: "https://zenodo.org/record/1185122"
 galaxy_tour: yes
 hands_on: yes
 slides: no
-workflows: yes
 questions:
   - "What are the effects of Pasilla (PS) gene depletion on splicing events?"
   - "How to analyze RNA sequencing data using a reference genome?"

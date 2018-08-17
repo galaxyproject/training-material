@@ -10,7 +10,6 @@ zenodo_link: "https://zenodo.org/record/546301"
 galaxy_tour: yes
 hands_on: yes
 slides: no
-workflows: yes
 questions:
   - "How to convert LC-MS/MS raw files?"
   - "How to identify peptides?"

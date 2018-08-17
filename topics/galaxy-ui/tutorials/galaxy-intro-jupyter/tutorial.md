@@ -7,7 +7,6 @@ title: "Jupyter: Use Jupyter notebooks in Galaxy"
 type: "tutorial"
 name: "galaxy-intro-jupyter"
 zenodo_link: "https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts"
-workflows: no
 galaxy_tour: no
 hands_on: yes
 slides: no

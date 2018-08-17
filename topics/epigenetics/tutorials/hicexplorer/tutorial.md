@@ -10,7 +10,6 @@ zenodo_link: "https://doi.org/10.5281/zenodo.1183661"
 galaxy_tour: yes
 hands_on: yes
 slides: no
-workflows: yes
 edam_ontology: ""
 questions:
   - "Why is a Hi-C analysis useful?"

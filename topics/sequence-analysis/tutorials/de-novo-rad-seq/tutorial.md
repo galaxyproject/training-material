@@ -10,7 +10,6 @@ zenodo_link: "https://doi.org/10.5281/zenodo.1134547"
 galaxy_tour: no
 hands_on: yes
 slides: no
-workflows: yes
 questions:
   - "How to analyze RAD sequencing data without a reference genome for a population genomics study?"
 objectives:

@@ -11,7 +11,6 @@ zenodo_link: ""
 galaxy_tour: yes
 hands_on: yes
 slides: no
-workflows: yes
 questions:
   - "How to download protein FASTA databases of a certain organism?"
   - "How to download a contaminant database?"

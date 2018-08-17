@@ -10,7 +10,6 @@ zenodo_link: "https://doi.org/10.5281/zenodo.582600"
 galaxy_tour: yes
 slides: yes
 hands_on: yes
-workflows: yes
 questions:
   - "How do we perform a very basic genome assembly from short read data?"
 objectives:

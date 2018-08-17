@@ -10,7 +10,6 @@ zenodo_link: "https://zenodo.org/record/519260"
 galaxy_tour: no
 hands_on: yes
 slides: no
-workflows: yes
 questions:
   - "How to predict cellular protein localization based upon GO-terms?"
   - "How to combine multiple localization predictions?"

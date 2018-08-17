@@ -10,7 +10,6 @@ zenodo_link: "https://zenodo.org/record/826906"
 galaxy_tour: no
 hands_on: yes
 slides: no
-workflows: yes
 questions:
   - "What small RNAs are expressed?"
   - "What RNA features have significantly different numbers of small RNAs targeting them between two conditions?"

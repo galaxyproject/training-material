@@ -7,7 +7,6 @@ title: "IGV Introduction"
 type: "tutorial"
 name: "igv-introduction"
 zenodo_link: ""
-workflows: no
 galaxy_tour: no
 hands_on: yes
 slides: no

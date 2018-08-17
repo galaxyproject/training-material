@@ -7,7 +7,6 @@ title: "Collections: Rule Based Uploader"
 type: "tutorial"
 name: "upload-rules"
 zenodo_link: ""
-workflows: no
 galaxy_tour: no
 hands_on: yes
 slides: no

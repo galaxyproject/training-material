@@ -10,7 +10,6 @@ zenodo_link: "https://doi.org/10.5281/zenodo.197100"
 galaxy_tour: yes
 hands_on: yes
 slides: no
-workflows: no
 edam_ontology: "topic_3169"
 questions:
   - How is raw ChIP-seq data processed and analyzed?

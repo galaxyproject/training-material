@@ -10,7 +10,6 @@ zenodo_link: "https://doi.org/10.5281/zenodo.582600"
 galaxy_tour: yes
 hands_on: yes
 slides: no
-workflows: yes
 tags:
   - prokaryote
 questions:

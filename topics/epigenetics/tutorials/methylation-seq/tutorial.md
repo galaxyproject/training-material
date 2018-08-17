@@ -10,7 +10,6 @@ zenodo_link: "https://zenodo.org/record/557099"
 galaxy_tour: yes
 hands_on: yes
 slides: no
-workflows: yes
 edam_ontology: "topic_3173"
 questions:
   - "What is methylation and why it cannot be recognised by a normal NGS procedure?"

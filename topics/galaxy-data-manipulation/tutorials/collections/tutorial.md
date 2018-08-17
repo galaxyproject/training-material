@@ -7,7 +7,6 @@ title: "Collections: Using dataset collection"
 type: "tutorial"
 name: "collections"
 zenodo_link: ""
-workflows: no
 galaxy_tour: no
 hands_on: yes
 slides: no

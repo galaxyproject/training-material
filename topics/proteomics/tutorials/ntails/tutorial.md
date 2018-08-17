@@ -11,7 +11,6 @@ zenodo_link: ""
 galaxy_tour: no
 hands_on: yes
 slides: no
-workflows: yes
 questions:
   - "How can protein N-termini be enriched for LC-MS/MS?"
   - "How to analyze the LC-MS/MS data?"

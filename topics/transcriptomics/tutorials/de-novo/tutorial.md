@@ -10,7 +10,6 @@ zenodo_link: "https://zenodo.org/record/254485#.WKODmRIrKRu"
 galaxy_tour: yes
 hands_on: yes
 slides: no
-workflows: yes
 questions:
   - "What genes are differentially expressed between G1E cells and megakaryocytes?"
   - "How can we generate a transcriptome de novo from RNA sequencing data?"

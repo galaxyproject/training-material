@@ -7,7 +7,6 @@ title: "Calling variants in diploid systems"
 type: "tutorial"
 name: "dip"
 zenodo_link: ""
-workflows: no
 galaxy_tour: no
 hands_on: yes
 slides: no

@@ -10,7 +10,6 @@ zenodo_link: "https://zenodo.org/record/1051552"
 galaxy_tour: yes
 hands_on: yes
 slides: no
-workflows: no
 questions:
   - "What are MS1 features?"
   - "How to quantify based on MS1 features?"

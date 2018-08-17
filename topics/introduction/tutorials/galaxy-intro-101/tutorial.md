@@ -10,7 +10,6 @@ zenodo_link: ""
 galaxy_tour: no
 hands_on: yes
 slides: no
-workflows: no
 questions:
   - "Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?"
 objectives:
