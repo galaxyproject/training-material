@@ -7,10 +7,15 @@ tutorial_name: lcms-data-import
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
-
 This tutorial will explain the data importation, the first step before analyze your data with the Workflow4Metabolomics Galaxy Instance.
 
+> ### {% icon comment %} Comments
+> Note that this tutorial is written for the new version of the xcms wrapper for xcms 3.0
+>
+> Those wrappers aren't yet available in the [workflow4metabolomics](https://galaxy.workflow4metabolomics.org/) production instance nor in [usegalaxy.eu](https://usegalaxy.eu/)
+>
+> We hope to release them in September 2018.
+{: .comment}
 
 > ### Agenda
 >
@@ -21,123 +26,115 @@ This tutorial will explain the data importation, the first step before analyze y
 >
 {: .agenda}
 
-# Import the LC-MS data in Galaxy
 
+# Obtaining data
 
+In this tutorial we use 4 datasets from the Sacurine study
 
-## ImportThe "Raw" datain "DataSet Collection"
+> ### {% icon tip %} Background: The Sacurine dataset
+> Summary:
+> - **Objective**: inﬂuence of age, body mass index, and gender on the urine metabolome
+> - **Cohort**: 183 employees from CEA
+> - **LC-HRMS**: LTQ-Orbitrap (negative ionization mode)
+{: .tip}
 
-
-
-## ImportThe SampleMetadata Sheet
-
-
-
-# How to use those datain the First steps
-
-
-
-<!--
-{% icon hands_on %} will render the hands_on icon as specified in
-_config.yml in the root of this repository.
--->
-
-> ### {% icon hands_on %} Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Obtaining our data
 >
-> 1. Step1
-> 2. Step2
+> The Toy Dataset is available in Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1346742.svg)](https://doi.org/10.5281/zenodo.1346742)
 >
->    > ### {% icon comment %} Comments
->    > A comment
->    {: .comment}
+> Download all of them
+{: .hands_on}
+
+# Import the "Raw" data in "DataSet Collection"
+
+> ### {% icon tip %} Tip: Format
+> The format (and datatype) allowed
+> * mzxml
+> * mzml
+> * mzdata
+> * netcdf
+{: .tip}
+>
+> ### {% icon warning %} Warning: Be careful about ...
+> We will assume that each individual file is **less than 2Go**.
+>
+> Otherwise, you will have the use the FTP method which will be describe **soon** in an other tutorial.
+{: .warning-box}
+>
+> ### {% icon hands_on %} Hands-on: Obtaining our data
+>
+> 1. Click on the **Upload button** at top-right of the tool panel.
+> > ![Click on the Upload button](../../images/tutorial-lcms-data-import-raw-01.png)
+>
+> 2. Click on the **Collection** tab in the upload window.
+> > ![Click on the Upload button](../../images/tutorial-lcms-data-import-raw-02.png)
+>
+> 3. Drag and Drop your "raw data" .mzXML within the upload window.
+> > /!\ You should get displayed in yellow "Drop files here"
+> > ![Click on the Upload button](../../images/tutorial-lcms-data-import-raw-03.png)
+>
+>    > ### {% icon warning %} Warning: Be careful about ...
+>    > Do not include your SampleMetadata file, just raw files
+>    {: .warning-box}
+>
+> 4. [optional] Select the datatype in the **File Type** drop list
 >
 >    > ### {% icon tip %} Tip: A tip
->    >
->    > * Step1
->    > * Step2
+>    > To save time during the upload phase, please select the correct "File Type".
+>    > That way Galaxy will not have to guess the type for each file
 >    {: .tip}
+> > ![Click on the Upload button](../../images/tutorial-lcms-data-import-raw-04.png)
+>
+> 5. **Start** the upload itself
+> > ![Click on the Upload button](../../images/tutorial-lcms-data-import-raw-05.png)
+>
+> 6. Please **wait**
+> > You can observe the Status bar and the dataset which are arriving in the history panel in background.
+> >
+> > This step can take hours depending of your Internet connection and the load of the W4M server.
+> > ![Click on the Upload button](../../images/tutorial-lcms-data-import-raw-06.png)
+>
+> 7. As soon as the **Build** button is available, click on it
+> > ![Click on the Upload button](../../images/tutorial-lcms-data-import-raw-07.png)
+>
+> 8. Name your future Dataset Collection
+> > ![Click on the Upload button](../../images/tutorial-lcms-data-import-raw-08.png)
+>
+> 9. Done
+> > As you can see the original dataset have been hidden to make room for the Dataset Collection with its 4 individuals datasets.
+> >
+> > The aim of the Dataset Collections is to use them as a sort of Dataset to not have to feed the tools with numerous individual datasets.
+> > ![Click on the Upload button](../../images/tutorial-lcms-data-import-raw-09.png)
+> > If you click on the Dataset Collection name, the nested datasets are shown.
+> > ![Click on the Upload button](../../images/tutorial-lcms-data-import-raw-10.png)
+>
 {: .hands_on}
 
-## Subpart 2
-
-Short introduction about this subpart.
-
-> ### {% icon hands_on %} Hands-on: Data upload
+> ### {% icon tip %} Tip: A tip
 >
-> 1. Step1
-> 2. Step2
+> If you miss the build step, don't panic.
 >
->    > ### {% icon question %} Question
+> Because for example, the upload phase was too long.
+>
+>    > ### {% icon solution %} Solution
 >    >
->    > Question?
+>    > You can still build a Dataset Collection:
+>    > 1. From your history panel
+>    > 2. Click on the Tick button above your Datasets
+>    > 3. Choose in the list **Build Dataset List**
+>    > 4. Name your future Dataset Collection
+>    > 5. Done!
 >    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > Answer to question
->    > >
->    > {: .solution}
->    >
->    {: .question}
-{: .hands_on}
+>    {: .solution}
+{: .tip}
 
-Some blabla
-> ### {% icon hands_on %} Hands-on: Data upload
->
-> 1. Step1
-> 2. **My Tool** {% icon tool %} with the following parameters
->   - *"param1"*: the file `myfile`
->   - *"param2"*: `42`
->   - *"param3"*: `Yes`
->
-> 3. **My Tool** {% icon tool %} with the following parameters
->   - {% icon param-text %} *"My text parameter"*: `my value`
->   - {% icon param-file %} *"My input file"*: `my file`
->   - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
->   - {% icon param-select %} *"My select menu"*: `my choice`
->   - {% icon param-check %} *"My check box"*: `yes`
->
->    > ### {% icon question %} Questions
->    >
->    > 1. Question1?
->    > 2. Question2?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > 1. Answer for question1
->    > > 2. Answer for question2
->    > >
->    > {: .solution}
->    >
->    {: .question}
->
-> 3. Step3
-{: .hands_on}
-
-> ### {% icon warning %} Warning: Be careful about ...
->
-> Add more details in Markdown.
->
-{: .warning-box}
-
-# Part 2
-
-Short introduction about this subpart.
-
-> ### {% icon comment %} Comment
->
-> Do you want to learn more about the principles behind mapping? Follow our [training](../../NGS-mapping)
-{: .comment}
+# Import the SampleMetadata sheet
 
 
 
-> ### {% icon details %} Background: More details on the ....
->
-> Add more details in Markdown. By default the box is collapsed. And is expanded when clicked
->
-{: .details}
+# How to use those datain the first steps
+
 
 
 # Conclusion
 {:.no_toc}
-
-Conclusion about the technical key points. And then relation between the techniques and the biological question to end with a global view.
