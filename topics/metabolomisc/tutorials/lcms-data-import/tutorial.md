@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: templates
-tutorial_name: tutorial1
+topic_name: metabolomics
+tutorial_name: lcms-data-import
 ---
 
 # Introduction
@@ -9,9 +9,8 @@ tutorial_name: tutorial1
 
 <!-- This is a comment. -->
 
-General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
+This tutorial will explain the data importation, the first step before analyze your data with the Workflow4Metabolomics Galaxy Instance.
 
-**Please follow our [tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
 > ### Agenda
 >
@@ -22,13 +21,21 @@ General introduction about the topic and then an introduction of the tutorial (t
 >
 {: .agenda}
 
-# Part 1
+# Import the LC-MS data in Galaxy
 
-Introduction about this part
 
-## Subpart 1
 
-Short introduction about this subpart.
+## ImportThe "Raw" datain "DataSet Collection"
+
+
+
+## ImportThe SampleMetadata Sheet
+
+
+
+# How to use those datain the First steps
+
+
 
 <!--
 {% icon hands_on %} will render the hands_on icon as specified in
