@@ -7,6 +7,7 @@ layout: base
 {% assign topic = site.data[page.topic_name] %}
 {% assign contributors = site.data['contributors'] %}
 {% assign instances = site.data['instances'] %}
+{% assign topic_material = site.pages | topic_filter:page.topic_name %}
 
 <div class="container main-content">
     <section>
@@ -48,7 +49,7 @@ layout: base
                 {% endif %}
             </tr>
 
-            {% for material in topic.material %}
+            {% for material in topic_material %}
                 {% if material.enable == nil or material.enable == true %}
                         <script type="application/ld+json">
                             {% include _includes/material.jsonld content=material %}
@@ -88,6 +89,7 @@ layout: base
                                 </a>
                                 {% endif %}
                             </td>
+
 
                             <td>
                                 {% if material.hands_on == "external" %}
@@ -189,7 +191,7 @@ layout: base
 
         <!-- get list of unique contributors for all materials in the topic -->
         {% assign contributors_list = "" | split: ',' %}
-        {% for material in topic.material %}
+        {% for material in topic_material %}
             {% for c in material.contributors %}
                 {% if contributors_list contains c %}
                 {% else %}
