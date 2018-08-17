@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: variant-analysis
-tutorial_name: microbial-variants
 
 title: "Microbial Variant Calling"
-name: "microbial-variants"
 zenodo_link: "https://doi.org/10.5281/zenodo.582600"
 tags:
   - prokaryote

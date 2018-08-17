@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: dev
-tutorial_name: data-source-integration
 
 title: "Data source integration"
-name: "data-source-integration"
 enable: "false"
 questions:
 objectives:

@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: admin
-tutorial_name: connect-to-compute-cluster
 
 title: "Connecting Galaxy to a compute cluster"
-name: "connect-to-compute-cluster"
 zenodo_link: ""
 questions:
   - How to connect Galaxy to a compute cluster?

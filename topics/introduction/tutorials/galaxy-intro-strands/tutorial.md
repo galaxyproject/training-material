@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: introduction
-tutorial_name: galaxy-intro-strands
 
 title: "Introduction to Genomics and Galaxy"
-name: "galaxy-intro-strands"
 zenodo_link: ""
 questions:
   - "Do genes on opposite strands ever overlap?  If so, how often?"

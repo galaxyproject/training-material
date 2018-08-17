@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: galaxy-ui
-tutorial_name: history
 
 title: "Histories: Understanding Galaxy history system"
-name: "history"
 zenodo_link: ""
 questions:
   - "How do Galaxy histories work?"

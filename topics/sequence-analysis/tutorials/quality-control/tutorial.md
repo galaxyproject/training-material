@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: sequence-analysis
-tutorial_name: quality-control
 
 title: "Quality Control"
-name: "quality-control"
 zenodo_link: "https://doi.org/10.5281/zenodo.61771"
 questions:
   - How to control quality of NGS data?

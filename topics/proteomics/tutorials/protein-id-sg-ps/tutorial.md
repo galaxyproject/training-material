@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: proteomics
-tutorial_name: protein-id-sg-ps
 
 title: "Peptide and Protein ID using SearchGUI and PeptideShaker"
-name: "protein-id-sg-ps"
 zenodo_link: "https://zenodo.org/record/546301"
 questions:
   - "How to convert LC-MS/MS raw files?"

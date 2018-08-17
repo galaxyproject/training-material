@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: transcriptomics
-tutorial_name: de-novo
 
 title: "De novo transcriptome reconstruction with RNA-Seq"
-name: "de-novo"
 zenodo_link: "https://zenodo.org/record/254485#.WKODmRIrKRu"
 questions:
   - "What genes are differentially expressed between G1E cells and megakaryocytes?"

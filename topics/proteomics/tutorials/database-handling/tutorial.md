@@ -1,11 +1,8 @@
 ---
 layout: tutorial_hands_on
-topic_name: proteomics
-tutorial_name: database-handling
 
 title: "Protein FASTA Database Handling"
 edam_ontology: "topic_0121"
-name: "database-handling"
 zenodo_link: ""
 questions:
   - "How to download protein FASTA databases of a certain organism?"

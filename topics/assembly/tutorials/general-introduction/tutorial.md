@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: assembly
-tutorial_name: general-introduction
 
 title: "Introduction to Genome Assembly"
-name: "general-introduction"
 zenodo_link: "https://doi.org/10.5281/zenodo.582600"
 questions:
   - "How do we perform a very basic genome assembly from short read data?"

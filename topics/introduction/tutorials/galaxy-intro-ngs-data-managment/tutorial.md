@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: introduction
-tutorial_name: galaxy-intro-ngs-data-managment
 
 title: "NGS data logistics"
-name: "galaxy-intro-ngs-data-managment"
 zenodo_link: ""
 questions:
   - "How to manipulate and process NGS data"

@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: variant-analysis
-tutorial_name: dunovo
 
 title: "Calling very rare variants"
-name: "dunovo"
 zenodo_link: ""
 <<<<<<< HEAD
 galaxy_tour: no

@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: transcriptomics
-tutorial_name: ref-based
 
 title: "Reference-based RNA-Seq data analysis"
-name: "ref-based"
 zenodo_link: "https://zenodo.org/record/1185122"
 questions:
   - "What are the effects of Pasilla (PS) gene depletion on splicing events?"

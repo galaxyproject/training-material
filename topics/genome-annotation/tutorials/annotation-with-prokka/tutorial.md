@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: genome-annotation
-tutorial_name: "annotation-with-prokka"
 
 title: "Genome annotation with Prokka"
-name: "annotation-with-prokka"
 zenodo_link: "https://doi.org/10.5281/zenodo.1156405"
 tags:
   - prokaryote

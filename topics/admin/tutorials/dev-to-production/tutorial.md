@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: admin
-tutorial_name: dev-to-production
 
 title: "Move from dev instance to production instance"
-name: "dev-to-production"
 zenodo_link: ""
 hands_on: "github"
 enable: "false"

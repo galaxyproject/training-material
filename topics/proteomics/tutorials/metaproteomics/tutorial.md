@@ -1,11 +1,8 @@
 ---
 layout: tutorial_hands_on
-topic_name: proteomics
-tutorial_name: metaproteomics
 
 title: "Metaproteomics tutorial"
 edam_ontology: "topic_0121"
-name: "metaproteomics"
 zenodo_link: "https://doi.org/10.5281/zenodo.839701"
 questions:
   - "How can I match metaproteomic mass spectrometry data to peptide sequences derived from shotgun metagenomic data?"

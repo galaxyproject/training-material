@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: variant-analysis
-tutorial_name: non-dip
 
 title: "Calling variants in non-diploid systems"
-name: "non-dip"
 zenodo_link: "https://doi.org/10.5281/zenodo.1251112"
 tags:
   - prokaryote

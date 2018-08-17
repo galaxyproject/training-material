@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: epigenetics
-tutorial_name: hicexplorer
 
 title: "Hi-C analysis of Drosophila melanogaster cells using HiCExplorer"
-name: "hicexplorer"
 zenodo_link: "https://doi.org/10.5281/zenodo.1183661"
 edam_ontology: ""
 questions:

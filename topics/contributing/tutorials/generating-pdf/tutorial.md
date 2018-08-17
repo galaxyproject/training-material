@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: generating-pdf
 
 title: "Generating PDF artefacts of the website"
-name: "generating-pdf"
 questions:
   - "How to generate PDF of the different tutorials and slides?"
 objectives:

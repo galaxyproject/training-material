@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: variant-analysis
-tutorial_name: dip
 
 title: "Calling variants in diploid systems"
-name: "dip"
 zenodo_link: ""
 questions:
   - "How to find variable sites in diploid genomes?"

@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: introduction
-tutorial_name: galaxy-intro-vis
 
 title: "Visualization"
-name: "galaxy-intro-vis"
 enable: "false"
 zenodo_link: ""
 questions:

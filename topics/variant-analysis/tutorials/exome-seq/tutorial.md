@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: variant-analysis
-tutorial_name: exome-seq
 
 title: "Exome sequencing data analysis"
-name: "exome-seq"
 zenodo_link: "https://doi.org/10.5281/zenodo.60520"
 questions:
   - "How to identify the genetic variation with the use of exome sequencing?"

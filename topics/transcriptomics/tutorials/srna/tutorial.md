@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: transcriptomics
-tutorial_name: srna
 
 title: "Differential abundance testing of small RNAs"
-name: "srna"
 zenodo_link: "https://zenodo.org/record/826906"
 questions:
   - "What small RNAs are expressed?"

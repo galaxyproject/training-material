@@ -1,11 +1,8 @@
 ---
 layout: tutorial_hands_on
-topic_name: proteomics
-tutorial_name: ntails
 
 title: "Detection and quantitation of N-termini (degradomics) via N-TAILS"
 edam_ontology: "topic_0121"
-name: "ntails"
 zenodo_link: ""
 questions:
   - "How can protein N-termini be enriched for LC-MS/MS?"

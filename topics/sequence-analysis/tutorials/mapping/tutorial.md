@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: sequence-analysis
-tutorial_name: mapping
 
 title: "Mapping"
-name: "mapping"
 zenodo_link: "https://doi.org/10.5281/zenodo.61771"
 questions:
   - What two things are crucial for a correct mapping?

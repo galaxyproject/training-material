@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: dev
-tutorial_name: visualization-generic
 
 title: "Visualizations: generic plugins"
-name: "visualization-generic"
 questions:
   - "How can visualization plugins benefit science?"
 objectives:

@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: proteomics
-tutorial_name: secretome-prediction
 
 title: "Secretome Prediction"
-name: "secretome-prediction"
 zenodo_link: "https://zenodo.org/record/519260"
 questions:
   - "How to predict cellular protein localization based upon GO-terms?"

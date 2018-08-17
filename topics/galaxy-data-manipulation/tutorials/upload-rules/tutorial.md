@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: galaxy-data-manipulation
-tutorial_name: upload-rules
 
 title: "Collections: Rule Based Uploader"
-name: "upload-rules"
 zenodo_link: ""
 questions:
   - "How to use the rule based uploader to create complex collections"

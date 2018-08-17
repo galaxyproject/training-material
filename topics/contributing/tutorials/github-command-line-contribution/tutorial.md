@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: github-command-line-contribution
 
 title: "Contributing with GitHub via command-line"
-name: "github-command-line-contribution"
 questions:
   - "How can I contribute to an open-source project with GitHub?"
   - "What is the GitHub flow?"

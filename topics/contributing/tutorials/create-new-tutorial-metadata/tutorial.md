@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: create-new-tutorial-metadata
 
 title: "Creating a new tutorial - Defining metadata"
-name: "create-new-tutorial-metadata"
 questions:
   - "What does Metadata in GTN means?"
   - "Which kind of metadata can I annotate?"

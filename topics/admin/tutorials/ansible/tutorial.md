@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: admin
-tutorial_name: ansible
 
 title: "Ansible"
-name: "ansible"
 zenodo_link: ""
 questions:
   - Why Ansible?

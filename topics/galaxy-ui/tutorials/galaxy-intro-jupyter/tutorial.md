@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: galaxy-ui
-tutorial_name: galaxy-intro-jupyter
 
 title: "Jupyter: Use Jupyter notebooks in Galaxy"
-name: "galaxy-intro-jupyter"
 zenodo_link: "https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts"
 questions:
   - "How to use a Jupyter Notebook in Galaxy"

@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: create-new-tutorial
 
 title: "Creating a new tutorial"
-name: "create-new-tutorial"
 questions:
   - "How to integrate a new tutorial?"
   - "How to make a tutorial robust and reproducible?"

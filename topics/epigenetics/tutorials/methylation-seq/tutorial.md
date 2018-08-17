@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: epigenetics
-tutorial_name: methylation-seq
 
 title: "DNA Methylation data analysis"
-name: "methylation-seq"
 zenodo_link: "https://zenodo.org/record/557099"
 edam_ontology: "topic_3173"
 questions:

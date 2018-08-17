@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: assembly
-tutorial_name: unicycler-assembly
 
 title: "Unicycler Assembly"
-name: "unicycler-assembly"
 zenodo_link: "https://doi.org/10.5281/zenodo.940733"
 tags:
   - prokaryote

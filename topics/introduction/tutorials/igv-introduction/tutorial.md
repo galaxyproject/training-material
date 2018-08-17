@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: introduction
-tutorial_name: igv-introduction
 
 title: "IGV Introduction"
-name: "igv-introduction"
 zenodo_link: ""
 questions:
 objectives:

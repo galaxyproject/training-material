@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: sequence-analysis
-tutorial_name: de-novo-rad-seq
 
 title: "RAD-Seq de-novo data analysis"
-name: "de-novo-rad-seq"
 zenodo_link: "https://doi.org/10.5281/zenodo.1134547"
 questions:
   - "How to analyze RAD sequencing data without a reference genome for a population genomics study?"

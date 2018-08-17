@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: introduction
-tutorial_name: galaxy-intro-peaks2genes
 
 title: "From peaks to genes"
-name: "galaxy-intro-peaks2genes"
 zenodo_link: "https://doi.org/10.5281/zenodo.1025585"
 questions:
   - "How to use Galaxy?"

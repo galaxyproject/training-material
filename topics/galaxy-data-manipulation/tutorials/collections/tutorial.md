@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: galaxy-data-manipulation
-tutorial_name: collections
 
 title: "Collections: Using dataset collection"
-name: "collections"
 zenodo_link: ""
 questions:
   - "How to manipulate large numbers of datasets at once?"

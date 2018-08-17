@@ -1,11 +1,8 @@
 ---
 layout: tutorial_hands_on
-topic_name: variant-analysis
-tutorial_name: diploid-variant-calling
 
 title: "Variant calling: Diploid case"
 enable: "false"
-name: "diploid-variant-calling"
 zenodo_link: ""
 questions:
   - "What is the pipeline of the processes for variant calling and processing it?"

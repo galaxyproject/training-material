@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: chip-seq
-tutorial_name: tal1-binding-site-identification
 
 title: "Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)"
-name: "tal1-binding-site-identification"
 zenodo_link: "https://doi.org/10.5281/zenodo.197100"
 edam_ontology: "topic_3169"
 questions:

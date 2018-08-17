@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: proteomics
-tutorial_name: labelfree-vs-labelled
 
 title: "Label-free versus Labelled - How to Choose Your Quantitation Method"
-name: "labelfree-vs-labelled"
 zenodo_link: ""
 questions:
   - "What are benefits and drawbacks of different quantitation methods?"

@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: dev
-tutorial_name: visualization-charts
 
 title: "Visualizations: charts plugins"
-name: "visualization-charts"
 questions:
   - "How can I make a custom plugin for Charts?"
 objectives:

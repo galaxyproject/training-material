@@ -1,10 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: dev
-tutorial_name: webhooks
 
 title: "Galaxy Webhooks"
-name: "webhooks"
 questions:
   - "What are Galaxy Webhooks?"
   - "How to create them?"
