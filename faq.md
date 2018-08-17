@@ -120,7 +120,7 @@ We will address your issues and/or assess your change proposal as promptly as we
 
 If you would like to get involved in the project but are unsure where to start, there are some easy ways to contribute which will also help you familiarize yourself with the project.
 
-### Checking existing tutorials
+### 1. Checking existing tutorials
 
 A great way to help out the project is to test/edit existing tutorials. Pick a tutorial and check the contents. Does everything work as expected? Are there things that could be improved?
 
@@ -154,15 +154,16 @@ Below is a checklist of things to look out for to help you get started. If you f
   - Enable [workflow testing](https://github.com/usegalaxy-eu/workflow-testing)
 - **Tours**
   - Add a tour if none exists
-  - Run the existing tour and check that it is up-to-date with the tutorial contents
+  - [Run the existing tour](#how-can-i-test-an-interactive-tour) and check that it is up-to-date with the tutorial contents
 - **Datasets**
   - Check that all datasets used in the tutorial are present in Zenodo
   - Add a data-library.yaml file if none exists
 
 
-### Reviewing pull requests
+### 2. Reviewing pull requests
 
 Another great way to help out the project is by reviewing [open pull requests](https://github.com/galaxyproject/training-material/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc). You can use the above checklist as a guide for your review. Some documentation about how to add your review in the GitHub interface can be found [here](https://help.github.com/articles/about-pull-request-reviews/)
+
 
 ## How can I give feedback?
 
@@ -173,6 +174,18 @@ For global feedbacks, you can open an [issue on GitHub]({{ site.github_repositor
 ## How can I report mistakes or errors?
 
 The easiest way to start contributing is to [file an issue]({{ site.github_repository }}/issues/new) to tell us about a problem such as a typo, spelling mistake, or a factual error. You can then introduce yourself and meet some of our community members.
+
+
+## How can I test an Interactive Tour?
+
+Perhaps you've been asked to review an interactive tour, or maybe you just want to try one out. The easiest way to run an interactive tour is to use the [Tour builder](https://tailordev.fr/blog/2017/07/19/the-galaxy-tour-builder-extension/) browser extension.
+
+1. Install the Tour Builder extension to your browser ([Chrome Web Store](https://chrome.google.com/webstore/detail/galaxy-tour-builder/mdfbapknmcpnbmggahhaegehbbbmhmgg), [Firefox add-on](https://addons.mozilla.org/en-US/firefox/addon/galaxy-tour-builder/), [Opera add-on](https://addons.opera.com/en/extensions/details/galaxy-tour-builder/)).
+2. Navigate to a Galaxy instance supporting the tutorial. To find which Galaxy instances support each tutorial, please see the dropdown menu next to the tutorial on the training website. Using one of the usegalaxy.\* instances ([Galaxy Main](https://usegalaxy.org), [Galaxy Europe](https://usegalaxy.eu), or [Galaxy Australia](https://usegalaxy.org.au)
+) is usually a good bet.
+3. Start the Tour Builder plugin by clicking on the icon in your browser menu bar
+4. Copy the contents of the `tour.yaml` file into the Tour builder editor window
+5. Click `Save` and then `Run`
 
 ## How can I fix mistakes or expand an existing tutorial using the GitHub interface?
 
