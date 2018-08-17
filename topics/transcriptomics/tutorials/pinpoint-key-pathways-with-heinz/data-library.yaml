@@ -1,19 +1,32 @@
 ---
-libraries:
-    - name: Dental caries positive datasets
-      files:
-          - url: https://zenodo.org/record/800651/files/F3D0_R1.fastq
-            file_type: "fastq"
-          - url: https://zenodo.org/record/800651/files/F3D0_R2.fastq
-            file_type: "fastq"
-
-    - name: Dental caries negative datasets
-      files:
-          - url: https://zenodo.org/record/800651/files/HMP_MOCK.v35.fasta
-            file_type: "fasta"
-          - url: https://zenodo.org/record/800651/files/silva.v4.fasta
-            file_type: "fasta"
-          - url: https://zenodo.org/record/800651/files/trainset9_032012.pds.fasta
-            file_type: "fasta"
-          - url: https://zenodo.org/record/800651/files/trainset9_032012.pds.tax
-            file_type: "mothur.seq.taxonomy"
+destination:
+    description: A dataset to demonstrate Heinz
+    name: Dental Caries Dataset
+    synopsis: Dental Caries Dataset
+    type: library
+items:
+    # Each item in the items array with a 'name' tag is a subfolder. Anything with a 'src' tag in the array is a file.
+    # If there is a subfolder, it requires 'description' and 'items' tag as well as the name.
+    - name: CP
+      description: "Description of sub folder and contents"
+      items:
+        - ext: fastqsanger
+          info: https://doi.org/10.5281/zenodo.582600
+          src: url
+          url: https://zenodo.org/api/files/287966da-5411-4f79-8cfb-0ffa84d0d6cc/mutant_R2.fastq
+        - ext: fastqsanger
+          info: https://doi.org/10.5281/zenodo.582600
+          src: url
+          url: https://zenodo.org/api/files/287966da-5411-4f79-8cfb-0ffa84d0d6cc/mutant_R1.fastq
+items:
+    - name: CN
+      description: "Description of sub folder and contents"
+      items:
+        - ext: fastqsanger
+          info: https://doi.org/10.5281/zenodo.582600
+          src: url
+          url: https://zenodo.org/api/files/287966da-5411-4f79-8cfb-0ffa84d0d6cc/mutant_R2.fastq
+        - ext: fastqsanger
+          info: https://doi.org/10.5281/zenodo.582600
+          src: url
+          url: https://zenodo.org/api/files/287966da-5411-4f79-8cfb-0ffa84d0d6cc/mutant_R1.fastq

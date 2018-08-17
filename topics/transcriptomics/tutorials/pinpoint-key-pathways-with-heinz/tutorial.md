@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: transcriptomics
-tutorial_name: heinz-optimal-subnetwork
+tutorial_name: pinpoint-key-pathways-with-heinz
 ---
 
 # Overview
@@ -59,14 +59,60 @@ After knowing what our input data are like, let's get them into Galaxy history:
 > 2. **Import DC Dataset.** The data for this course may be available from a shared library (Option 1) in Galaxy
 > (confirm with your instructor). If not, you can upload them into Galaxy yourself (Option 2).
 > - Option 1: From data library:
->   - Navigate to the shared data library, you should find 36 files.
+>   - Navigate to the shared data library, you should find one directory named "Dental Caries Dataset" with two sub folders in it.
 > - Option 2: From your Zenodo:
->   - Data is available from Zenodo here: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg)](https://doi.org/10.5281/zenodo.800651)
->   - In the file upload menu choose the `Paste/Fetch data` option and enter the following urls to import the file from Zenodo to Galaxy directly.
+>   - Data is available from Zenodo here: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1344105.svg)](https://doi.org/10.5281/zenodo.1344105)
+>   - In the file upload menu choose the `Paste/Fetch data` option and enter the URLs to import these files from remote servers to Galaxy directly.
+>   - To make things easy, do click the tag `Collection` in the file upload menu before choose the `Paste/Fetch data` option; in this way, we can organize these files into dataset lists. We need to create two dataset list (one for CP and one for CN), so we need to do the upload twice. First, copy and paste the following URLs (Dental Caries Dataset (Disease)), then click `start`, after the files uploaded (everything turns green), click `build`, then give a sensible name, here we use `CP`, finally click `Create list`. Redo this for the Dental Caries Dataset (Healthy) with a data list name `CN`.
 >    <details>
->    <summary> Click to view Zenodo URLs</summary>
+>    <summary>Click to view Zenodo URLs for Dental Caries Dataset (Disease)</summary>
 >    <pre>
-> https://zenodo.org/record/800651/files/F3D0_R1.fastq
+> https://zenodo.org/record/1344105/files/F3D0_R1.fastq
+> https://zenodo.org/record/800651/files/F3D0_R2.fastq
+> https://zenodo.org/record/800651/files/F3D141_R1.fastq
+> https://zenodo.org/record/800651/files/F3D141_R2.fastq
+> https://zenodo.org/record/800651/files/F3D142_R1.fastq
+> https://zenodo.org/record/800651/files/F3D142_R2.fastq
+> https://zenodo.org/record/800651/files/F3D143_R1.fastq
+> https://zenodo.org/record/800651/files/F3D143_R2.fastq
+> https://zenodo.org/record/800651/files/F3D144_R1.fastq
+> https://zenodo.org/record/800651/files/F3D144_R2.fastq
+> https://zenodo.org/record/800651/files/F3D145_R1.fastq
+> https://zenodo.org/record/800651/files/F3D145_R2.fastq
+> https://zenodo.org/record/800651/files/F3D146_R1.fastq
+> https://zenodo.org/record/800651/files/F3D146_R2.fastq
+> https://zenodo.org/record/800651/files/F3D147_R1.fastq
+> https://zenodo.org/record/800651/files/F3D147_R2.fastq
+> https://zenodo.org/record/800651/files/F3D148_R1.fastq
+> https://zenodo.org/record/800651/files/F3D148_R2.fastq
+> https://zenodo.org/record/800651/files/F3D149_R1.fastq
+> https://zenodo.org/record/800651/files/F3D149_R2.fastq
+> https://zenodo.org/record/800651/files/F3D150_R1.fastq
+> https://zenodo.org/record/800651/files/F3D150_R2.fastq
+> https://zenodo.org/record/800651/files/F3D1_R1.fastq
+> https://zenodo.org/record/800651/files/F3D1_R2.fastq
+> https://zenodo.org/record/800651/files/F3D2_R1.fastq
+> https://zenodo.org/record/800651/files/F3D2_R2.fastq
+> https://zenodo.org/record/800651/files/F3D3_R1.fastq
+> https://zenodo.org/record/800651/files/F3D3_R2.fastq
+> https://zenodo.org/record/800651/files/F3D5_R1.fastq
+> https://zenodo.org/record/800651/files/F3D5_R2.fastq
+> https://zenodo.org/record/800651/files/F3D6_R1.fastq
+> https://zenodo.org/record/800651/files/F3D6_R2.fastq
+> https://zenodo.org/record/800651/files/F3D7_R1.fastq
+> https://zenodo.org/record/800651/files/F3D7_R2.fastq
+> https://zenodo.org/record/800651/files/F3D8_R1.fastq
+> https://zenodo.org/record/800651/files/F3D8_R2.fastq
+> https://zenodo.org/record/800651/files/F3D9_R1.fastq
+> https://zenodo.org/record/800651/files/F3D9_R2.fastq
+> https://zenodo.org/record/800651/files/Mock_R1.fastq
+> https://zenodo.org/record/800651/files/Mock_R2.fastq
+>    </pre>
+>    </details>
+>    <details>
+>    <summary>Click to view Zenodo URLs for Dental Caries Dataset (Healthy)</summary>
+>    <pre>
+> https://zenodo.org/record/1344105/files/F3D0_R1.fastq
 > https://zenodo.org/record/800651/files/F3D0_R2.fastq
 > https://zenodo.org/record/800651/files/F3D141_R1.fastq
 > https://zenodo.org/record/800651/files/F3D141_R2.fastq
@@ -110,7 +156,7 @@ After knowing what our input data are like, let's get them into Galaxy history:
 >    </details>
 {: .hands_on}
 
-Now that's a lot of files to manage. Luckily Galaxy can make life a bit easier by allowing us to create
+If you don't use `Collection` in the file upload menu. You will have a lot of files to manage. Luckily Galaxy can make life a bit easier by allowing us to create
 *dataset collections*. This enables us to easily run tools on multiple datasets at once. Let's
 create a collection now:
 
