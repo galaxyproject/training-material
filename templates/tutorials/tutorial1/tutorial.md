@@ -4,7 +4,6 @@ topic_name: templates
 tutorial_name: tutorial1
 
 title: "Tutorial Title"
-type: "tutorial"
 name: "tutorial1"
 zenodo_link: ""
 questions:

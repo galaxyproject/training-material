@@ -4,7 +4,6 @@ topic_name: admin
 tutorial_name: connect-to-compute-cluster
 
 title: "Connecting Galaxy to a compute cluster"
-type: "tutorial"
 name: "connect-to-compute-cluster"
 zenodo_link: ""
 questions:

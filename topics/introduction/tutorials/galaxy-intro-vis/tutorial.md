@@ -4,7 +4,6 @@ topic_name: introduction
 tutorial_name: galaxy-intro-vis
 
 title: "Visualization"
-type: "tutorial"
 name: "galaxy-intro-vis"
 enable: "false"
 zenodo_link: ""

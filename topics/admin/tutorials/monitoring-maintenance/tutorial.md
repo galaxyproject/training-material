@@ -4,7 +4,6 @@ topic_name: admin
 tutorial_name: monitoring-maintenance
 
 title: "Server Monitoring and Maintenance"
-type: "tutorial"
 name: "monitoring-maintenance"
 zenodo_link: ""
 questions:

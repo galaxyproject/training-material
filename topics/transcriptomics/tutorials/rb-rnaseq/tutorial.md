@@ -4,7 +4,6 @@ topic_name: transcriptomics
 tutorial_name: rb-rnaseq
 
 title: "Reference-based RNAseq data analysis (long)"
-type: "tutorial"
 name: "rb-rnaseq"
 zenodo_link: ""
 questions:

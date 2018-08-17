@@ -4,7 +4,6 @@ topic_name: proteomics
 tutorial_name: ntails
 
 title: "Detection and quantitation of N-termini (degradomics) via N-TAILS"
-type: "tutorial"
 edam_ontology: "topic_0121"
 name: "ntails"
 zenodo_link: ""

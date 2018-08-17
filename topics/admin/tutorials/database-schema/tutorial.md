@@ -4,7 +4,6 @@ topic_name: admin
 tutorial_name: database-schema
 
 title: "Galaxy Database schema"
-type: "tutorial"
 name: "database-schema"
 zenodo_link: ""
 questions:

@@ -4,7 +4,6 @@ topic_name: assembly
 tutorial_name: general-introduction
 
 title: "Introduction to Genome Assembly"
-type: "tutorial"
 name: "general-introduction"
 zenodo_link: "https://doi.org/10.5281/zenodo.582600"
 questions:

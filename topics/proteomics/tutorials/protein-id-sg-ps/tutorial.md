@@ -4,7 +4,6 @@ topic_name: proteomics
 tutorial_name: protein-id-sg-ps
 
 title: "Peptide and Protein ID using SearchGUI and PeptideShaker"
-type: "tutorial"
 name: "protein-id-sg-ps"
 zenodo_link: "https://zenodo.org/record/546301"
 questions:

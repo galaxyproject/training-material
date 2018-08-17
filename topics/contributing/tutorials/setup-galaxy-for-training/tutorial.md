@@ -4,7 +4,6 @@ topic_name: contributing
 tutorial_name: setup-galaxy-for-training
 
 title: Set up a Galaxy for Training
-type: tutorial
 name: setup-galaxy-for-training
 time_estimation: 2h
 questions:

@@ -4,7 +4,6 @@ topic_name: sequence-analysis
 tutorial_name: ref-based-rad-seq
 
 title: "RAD-Seq Reference-based data analysis"
-type: "tutorial"
 name: "ref-based-rad-seq"
 zenodo_link: "https://doi.org/10.5281/zenodo.1134547"
 questions:

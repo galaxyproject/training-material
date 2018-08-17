@@ -4,7 +4,6 @@ topic_name: genome-annotation
 tutorial_name: genome-annotation
 
 title: "Genome Annotation"
-type: "tutorial"
 name: "genome-annotation"
 zenodo_link: "https://doi.org/10.5281/zenodo.1250793"
 tags:

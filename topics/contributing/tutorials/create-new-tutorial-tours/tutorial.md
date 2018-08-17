@@ -4,7 +4,6 @@ topic_name: contributing
 tutorial_name: create-new-tutorial-tours
 
 title: "Creating a new tutorial - Creating Interactive Galaxy Tours"
-type: "tutorial"
 name: "create-new-tutorial-tours"
 questions:
   - "What is a Interactive Galaxy Tour?"

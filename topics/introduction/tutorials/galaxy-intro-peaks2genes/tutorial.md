@@ -4,7 +4,6 @@ topic_name: introduction
 tutorial_name: galaxy-intro-peaks2genes
 
 title: "From peaks to genes"
-type: "tutorial"
 name: "galaxy-intro-peaks2genes"
 zenodo_link: "https://doi.org/10.5281/zenodo.1025585"
 questions:

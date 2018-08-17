@@ -4,7 +4,6 @@ topic_name: sequence-analysis
 tutorial_name: de-novo-rad-seq
 
 title: "RAD-Seq de-novo data analysis"
-type: "tutorial"
 name: "de-novo-rad-seq"
 zenodo_link: "https://doi.org/10.5281/zenodo.1134547"
 questions:

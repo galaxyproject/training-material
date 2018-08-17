@@ -4,7 +4,6 @@ topic_name: statistics
 tutorial_name: iwtomics
 
 title: "Interval-Wise Testing for omics data"
-type: "tutorial"
 name: "iwtomics"
 zenodo_link: "https://doi.org/10.5281/zenodo.1184682"
 questions:

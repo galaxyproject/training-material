@@ -4,7 +4,6 @@ topic_name: variant-analysis
 tutorial_name: diploid-variant-calling
 
 title: "Variant calling: Diploid case"
-type: "tutorial"
 enable: "false"
 name: "diploid-variant-calling"
 zenodo_link: ""

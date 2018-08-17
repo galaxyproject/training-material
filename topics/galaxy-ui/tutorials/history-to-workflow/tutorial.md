@@ -4,7 +4,6 @@ topic_name: galaxy-ui
 tutorial_name: history-to-workflow
 
 title: "Workflows: Extracting Workflows from Histories"
-type: "tutorial"
 name: "history-to-workflow"
 zenodo_link: ""
 questions:

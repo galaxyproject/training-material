@@ -4,7 +4,6 @@ topic_name: contributing
 tutorial_name: generating-pdf
 
 title: "Generating PDF artefacts of the website"
-type: "tutorial"
 name: "generating-pdf"
 questions:
   - "How to generate PDF of the different tutorials and slides?"

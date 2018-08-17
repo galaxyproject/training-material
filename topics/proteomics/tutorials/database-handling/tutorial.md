@@ -4,7 +4,6 @@ topic_name: proteomics
 tutorial_name: database-handling
 
 title: "Protein FASTA Database Handling"
-type: "tutorial"
 edam_ontology: "topic_0121"
 name: "database-handling"
 zenodo_link: ""

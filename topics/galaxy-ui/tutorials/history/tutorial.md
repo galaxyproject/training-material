@@ -4,7 +4,6 @@ topic_name: galaxy-ui
 tutorial_name: history
 
 title: "Histories: Understanding Galaxy history system"
-type: "tutorial"
 name: "history"
 zenodo_link: ""
 questions:

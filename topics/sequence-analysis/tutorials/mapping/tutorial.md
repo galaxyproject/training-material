@@ -4,7 +4,6 @@ topic_name: sequence-analysis
 tutorial_name: mapping
 
 title: "Mapping"
-type: "tutorial"
 name: "mapping"
 zenodo_link: "https://doi.org/10.5281/zenodo.61771"
 questions:

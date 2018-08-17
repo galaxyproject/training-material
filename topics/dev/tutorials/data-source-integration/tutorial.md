@@ -4,7 +4,6 @@ topic_name: dev
 tutorial_name: data-source-integration
 
 title: "Data source integration"
-type: "tutorial"
 name: "data-source-integration"
 enable: "false"
 questions:

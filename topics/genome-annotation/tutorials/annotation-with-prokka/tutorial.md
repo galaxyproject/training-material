@@ -4,7 +4,6 @@ topic_name: genome-annotation
 tutorial_name: "annotation-with-prokka"
 
 title: "Genome annotation with Prokka"
-type: "tutorial"
 name: "annotation-with-prokka"
 zenodo_link: "https://doi.org/10.5281/zenodo.1156405"
 tags:

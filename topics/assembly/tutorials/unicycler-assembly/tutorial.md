@@ -4,7 +4,6 @@ topic_name: assembly
 tutorial_name: unicycler-assembly
 
 title: "Unicycler Assembly"
-type: "tutorial"
 name: "unicycler-assembly"
 zenodo_link: "https://doi.org/10.5281/zenodo.940733"
 tags:

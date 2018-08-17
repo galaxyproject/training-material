@@ -4,7 +4,6 @@ topic_name: contributing
 tutorial_name: create-new-tutorial
 
 title: "Creating a new tutorial"
-type: "tutorial"
 name: "create-new-tutorial"
 questions:
   - "How to integrate a new tutorial?"

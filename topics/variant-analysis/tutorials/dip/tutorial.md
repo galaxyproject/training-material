@@ -4,7 +4,6 @@ topic_name: variant-analysis
 tutorial_name: dip
 
 title: "Calling variants in diploid systems"
-type: "tutorial"
 name: "dip"
 zenodo_link: ""
 questions:

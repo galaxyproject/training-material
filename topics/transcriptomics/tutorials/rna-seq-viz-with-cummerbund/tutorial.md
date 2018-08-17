@@ -4,7 +4,6 @@ topic_name: transcriptomics
 tutorial_name: rna-seq-viz-with-cummerbund
 
 title: "Visualization of RNA-Seq results with CummeRbund"
-type: "tutorial"
 name: "rna-seq-viz-with-cummerbund"
 zenodo_link: "https://zenodo.org/record/1001880"
 questions:

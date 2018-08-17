@@ -4,7 +4,6 @@ topic_name: introduction
 tutorial_name: igv-introduction
 
 title: "IGV Introduction"
-type: "tutorial"
 name: "igv-introduction"
 zenodo_link: ""
 questions:

@@ -4,7 +4,6 @@ topic_name: introduction
 tutorial_name: galaxy-intro-ngs-data-managment
 
 title: "NGS data logistics"
-type: "tutorial"
 name: "galaxy-intro-ngs-data-managment"
 zenodo_link: ""
 questions:

@@ -4,7 +4,6 @@ topic_name: assembly
 tutorial_name: ecoli_comparison
 
 title: "Making sense of a newly assembled genome"
-type: "tutorial"
 name: "ecoli_comparison"
 zenodo_link: "https://doi.org/10.5281/zenodo.1306128"
 requirements:

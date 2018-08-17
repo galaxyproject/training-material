@@ -4,7 +4,6 @@ topic_name: proteomics
 tutorial_name: protein-id-oms
 
 title: "Peptide and Protein ID using OpenMS tools"
-type: "tutorial"
 name: "protein-id-oms"
 zenodo_link: "https://zenodo.org/record/546301"
 questions:

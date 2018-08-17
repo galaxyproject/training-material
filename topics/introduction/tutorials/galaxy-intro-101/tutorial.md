@@ -4,7 +4,6 @@ topic_name: introduction
 tutorial_name: galaxy-intro-101
 
 title: "Galaxy 101"
-type: "tutorial"
 name: "galaxy-intro-101"
 zenodo_link: ""
 questions:

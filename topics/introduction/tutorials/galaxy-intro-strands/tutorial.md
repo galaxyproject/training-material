@@ -4,7 +4,6 @@ topic_name: introduction
 tutorial_name: galaxy-intro-strands
 
 title: "Introduction to Genomics and Galaxy"
-type: "tutorial"
 name: "galaxy-intro-strands"
 zenodo_link: ""
 questions:

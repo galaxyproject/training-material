@@ -4,7 +4,6 @@ topic_name: transcriptomics
 tutorial_name: de-novo
 
 title: "De novo transcriptome reconstruction with RNA-Seq"
-type: "tutorial"
 name: "de-novo"
 zenodo_link: "https://zenodo.org/record/254485#.WKODmRIrKRu"
 questions:

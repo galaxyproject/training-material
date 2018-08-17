@@ -4,7 +4,6 @@ topic_name: admin
 tutorial_name: ansible
 
 title: "Ansible"
-type: "tutorial"
 name: "ansible"
 zenodo_link: ""
 questions:

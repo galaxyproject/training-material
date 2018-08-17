@@ -4,7 +4,6 @@ topic_name: contributing
 tutorial_name: running-jekyll
 
 title: "Running the Galaxy Training material website locally"
-type: "tutorial"
 name: "running-jekyll"
 questions:
   - "How to setup the infrastructure to build training webpages?"

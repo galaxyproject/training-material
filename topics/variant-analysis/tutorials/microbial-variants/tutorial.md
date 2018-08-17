@@ -4,7 +4,6 @@ topic_name: variant-analysis
 tutorial_name: microbial-variants
 
 title: "Microbial Variant Calling"
-type: "tutorial"
 name: "microbial-variants"
 zenodo_link: "https://doi.org/10.5281/zenodo.582600"
 tags:

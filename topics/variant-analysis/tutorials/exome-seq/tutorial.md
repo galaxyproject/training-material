@@ -4,7 +4,6 @@ topic_name: variant-analysis
 tutorial_name: exome-seq
 
 title: "Exome sequencing data analysis"
-type: "tutorial"
 name: "exome-seq"
 zenodo_link: "https://doi.org/10.5281/zenodo.60520"
 questions:

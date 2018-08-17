@@ -4,7 +4,6 @@ topic_name: dev
 tutorial_name: visualization-generic
 
 title: "Visualizations: generic plugins"
-type: "tutorial"
 name: "visualization-generic"
 questions:
   - "How can visualization plugins benefit science?"

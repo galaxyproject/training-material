@@ -4,7 +4,6 @@ topic_name: contributing
 tutorial_name: create-new-tutorial-metadata
 
 title: "Creating a new tutorial - Defining metadata"
-type: "tutorial"
 name: "create-new-tutorial-metadata"
 questions:
   - "What does Metadata in GTN means?"
@@ -36,10 +35,9 @@ The `metadata.yaml` file is a file located in the topic directory. It describes 
 
 # Make topic aware of a tutorial
 
-To make a tutorial appear within a topic, we need to add metadata for the tutorial in the topic's `metadata.yaml` file:
+To make a tutorial appear within a topic, we need to add metadata for the tutorial to its header:
 
 - `title`: title of the tutorial (it will appear on the tutorial page and the topic page)
-- `type: "tutorial"`
 - `name`: name of the tutorial (name of the subdirectory where the files related to the tutorial will be stored)
 - `enable`: `false` to hide your tutorial from the topic page
 - `hands_on`(`yes` or `no`): says if the tutorial includes hands-on sections in the `tutorial.md`

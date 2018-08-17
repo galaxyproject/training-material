@@ -4,7 +4,6 @@ topic_name: chip-seq
 tutorial_name: estrogen-receptor-binding-site-identification
 
 title: "Identification of the binding sites of the Estrogen receptor"
-type: "tutorial"
 name: "estrogen-receptor-binding-site-identification"
 zenodo_link: "https://doi.org/10.5281/zenodo.892432"
 questions:

@@ -4,7 +4,6 @@ topic_name: variant-analysis
 tutorial_name: dunovo
 
 title: "Calling very rare variants"
-type: "tutorial"
 name: "dunovo"
 zenodo_link: ""
 <<<<<<< HEAD

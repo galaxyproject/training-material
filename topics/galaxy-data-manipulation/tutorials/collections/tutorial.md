@@ -4,7 +4,6 @@ topic_name: galaxy-data-manipulation
 tutorial_name: collections
 
 title: "Collections: Using dataset collection"
-type: "tutorial"
 name: "collections"
 zenodo_link: ""
 questions:

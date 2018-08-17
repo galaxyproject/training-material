@@ -4,7 +4,6 @@ topic_name: assembly
 tutorial_name: debruijn-graph-assembly
 
 title: "De Bruijn Graph Assembly"
-type: "tutorial"
 name: "debruijn-graph-assembly"
 zenodo_link: "https://doi.org/10.5281/zenodo.582600"
 questions:

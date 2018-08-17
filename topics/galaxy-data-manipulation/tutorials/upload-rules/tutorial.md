@@ -4,7 +4,6 @@ topic_name: galaxy-data-manipulation
 tutorial_name: upload-rules
 
 title: "Collections: Rule Based Uploader"
-type: "tutorial"
 name: "upload-rules"
 zenodo_link: ""
 questions:

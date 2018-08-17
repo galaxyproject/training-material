@@ -4,7 +4,6 @@ topic_name: sequence-analysis
 tutorial_name: genetic-map-rad-seq
 
 title: "RAD-Seq to construct genetic maps"
-type: "tutorial"
 name: "genetic-map-rad-seq"
 zenodo_link: "https://doi.org/10.5281/zenodo.1219888"
 questions:

@@ -4,7 +4,6 @@ topic_name: metagenomics
 tutorial_name: general-tutorial
 
 title: "Analyses of metagenomics data - The global picture"
-type: "tutorial"
 name: "general-tutorial"
 zenodo_link: "https://doi.org/10.5281/zenodo.815875"
 questions:

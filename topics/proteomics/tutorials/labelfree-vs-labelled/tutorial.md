@@ -4,7 +4,6 @@ topic_name: proteomics
 tutorial_name: labelfree-vs-labelled
 
 title: "Label-free versus Labelled - How to Choose Your Quantitation Method"
-type: "tutorial"
 name: "labelfree-vs-labelled"
 zenodo_link: ""
 questions:

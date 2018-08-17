@@ -4,7 +4,6 @@ topic_name: metagenomics
 tutorial_name: mothur-miseq-sop
 
 title: "16S Microbial Analysis with Mothur"
-type: "tutorial"
 name: "mothur-miseq-sop"
 zenodo_link: "https://doi.org/10.5281/zenodo.165147"
 questions:

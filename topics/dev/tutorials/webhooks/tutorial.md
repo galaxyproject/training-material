@@ -4,7 +4,6 @@ topic_name: dev
 tutorial_name: webhooks
 
 title: "Galaxy Webhooks"
-type: "tutorial"
 name: "webhooks"
 questions:
   - "What are Galaxy Webhooks?"

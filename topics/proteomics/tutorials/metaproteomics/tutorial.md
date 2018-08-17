@@ -4,7 +4,6 @@ topic_name: proteomics
 tutorial_name: metaproteomics
 
 title: "Metaproteomics tutorial"
-type: "tutorial"
 edam_ontology: "topic_0121"
 name: "metaproteomics"
 zenodo_link: "https://doi.org/10.5281/zenodo.839701"

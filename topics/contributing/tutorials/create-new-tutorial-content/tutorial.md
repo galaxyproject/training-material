@@ -4,7 +4,6 @@ topic_name: contributing
 tutorial_name: create-new-tutorial-content
 
 title: "Creating a new tutorial - Writing content in Markdown"
-type: "tutorial"
 name: "create-new-tutorial-content"
 questions:
   - "How to write a tutorial with hands-on?"
