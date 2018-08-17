@@ -21,6 +21,11 @@ module Jekyll
         if not page.url.include?('/topics/') then next end
 
         if page_parts.length > 3 and page_parts[2] == topic_name
+          # Automate the tutorial-name thing. This writes back to the shared
+          # data structure.
+          page.data['topic_name'] = page_parts[2]
+          page.data['tutorial_name'] = page_parts[4]
+          # And then store in our interesting stuff
           key = page.url.sub(/^\//, '')
           interesting[key] = page
         end
@@ -36,11 +41,9 @@ module Jekyll
 
       intro_slides = Dir.glob("topics/#{topic_name}/slides/*")
       tutorial_folders = Dir.glob("topics/#{topic_name}/tutorials/*").sort
-      puts "=> #{topic_name}"
 
       for intro_slide in intro_slides do
         page = interesting[intro_slide]
-        #puts "int> #{page.data}"
         page_obj = page.data.dup
         page_obj['slides'] = true
         page_obj['type'] = 'introduction'
@@ -50,7 +53,6 @@ module Jekyll
       for folder in tutorial_folders do
         # Discover resources
         resources = Dir.glob("#{folder}/*").map{ |a| a.split('/')[-1] }
-        #puts "fol> #{folder} #{resources}"
 
         # First pull out all of the things in 'interesting' that are in the
         # folder we're currently examining
@@ -77,7 +79,7 @@ module Jekyll
 
         page_obj = page.data.dup
         page_obj['slides'] = resources.include?('slides.html')
-        page_obj['hands-on'] = resources.include?('tutorial.md')
+        page_obj['hands_on'] = resources.include?('tutorial.md') or resources.include?('tutorial.html')
         page_obj['workflows'] = resources.include?('workflows')
         page_obj['tours'] = resources.include?('tours')
         page_obj['type'] = 'tutorial'
