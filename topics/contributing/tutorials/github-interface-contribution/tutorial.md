@@ -6,7 +6,6 @@ tutorial_name: github-interface-contribution
 title: "Contributing with GitHub via its interface"
 type: "tutorial"
 name: "github-interface-contribution"
-hands_on: yes
 slides: no
 questions:
   - "How can I contribute to an open-source project with GitHub and its interface"

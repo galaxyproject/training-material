@@ -7,7 +7,6 @@ title: "Collections: Rule Based Uploader"
 type: "tutorial"
 name: "upload-rules"
 zenodo_link: ""
-hands_on: yes
 slides: no
 questions:
   - "How to use the rule based uploader to create complex collections"

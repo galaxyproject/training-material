@@ -6,7 +6,6 @@ tutorial_name: running-jekyll
 title: "Running the Galaxy Training material website locally"
 type: "tutorial"
 name: "running-jekyll"
-hands_on: yes
 slides: no
 questions:
   - "How to setup the infrastructure to build training webpages?"

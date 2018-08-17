@@ -7,7 +7,6 @@ title: "RAD-Seq to construct genetic maps"
 type: "tutorial"
 name: "genetic-map-rad-seq"
 zenodo_link: "https://doi.org/10.5281/zenodo.1219888"
-hands_on: yes
 slides: no
 questions:
   - "How to analyze RAD sequencing data for a genetic map study?"

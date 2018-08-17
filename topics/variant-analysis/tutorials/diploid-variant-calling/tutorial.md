@@ -8,7 +8,6 @@ type: "tutorial"
 enable: "false"
 name: "diploid-variant-calling"
 zenodo_link: ""
-hands_on: yes
 slides: no
 questions:
   - "What is the pipeline of the processes for variant calling and processing it?"

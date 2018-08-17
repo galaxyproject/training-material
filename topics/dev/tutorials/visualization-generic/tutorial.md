@@ -6,7 +6,6 @@ tutorial_name: visualization-generic
 title: "Visualizations: generic plugins"
 type: "tutorial"
 name: "visualization-generic"
-hands_on: yes
 slides: yes
 questions:
   - "How can visualization plugins benefit science?"

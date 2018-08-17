@@ -7,15 +7,7 @@ title: "Calling very rare variants"
 type: "tutorial"
 name: "dunovo"
 zenodo_link: ""
-<<<<<<< HEAD
-<<<<<<< HEAD
-workflows: no
-=======
->>>>>>> remove workflow yes/no
 galaxy_tour: no
-=======
->>>>>>> remove tour yes/no
-hands_on: yes
 slides: no
 questions:
   - "What frequency of variants is so low that it is obscured by sequencing error rate?"

@@ -7,7 +7,6 @@ title: "16S Microbial Analysis with Mothur"
 type: "tutorial"
 name: "mothur-miseq-sop"
 zenodo_link: "https://doi.org/10.5281/zenodo.165147"
-hands_on: yes
 slides: no
 questions:
   - "What is the effect of normal variation in the gut microbiome on host health?"

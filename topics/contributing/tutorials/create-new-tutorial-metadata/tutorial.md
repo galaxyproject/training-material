@@ -6,7 +6,6 @@ tutorial_name: create-new-tutorial-metadata
 title: "Creating a new tutorial - Defining metadata"
 type: "tutorial"
 name: "create-new-tutorial-metadata"
-hands_on: yes
 slides: no
 questions:
   - "What does Metadata in GTN means?"

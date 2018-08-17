@@ -7,7 +7,6 @@ title: "Histories: Understanding Galaxy history system"
 type: "tutorial"
 name: "history"
 zenodo_link: ""
-hands_on: yes
 slides: no
 questions:
   - "How do Galaxy histories work?"

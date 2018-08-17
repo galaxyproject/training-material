@@ -7,7 +7,6 @@ title: "Differential abundance testing of small RNAs"
 type: "tutorial"
 name: "srna"
 zenodo_link: "https://zenodo.org/record/826906"
-hands_on: yes
 slides: no
 questions:
   - "What small RNAs are expressed?"

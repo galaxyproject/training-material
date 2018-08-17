@@ -8,7 +8,6 @@ type: "tutorial"
 name: "galaxy-intro-vis"
 enable: "false"
 zenodo_link: ""
-hands_on: yes
 slides: no
 questions:
 objectives:

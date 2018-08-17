@@ -7,7 +7,6 @@ title: "Galaxy Database schema"
 type: "tutorial"
 name: "database-schema"
 zenodo_link: ""
-hands_on: yes
 slides: no
 questions:
   - "Running a production Galaxy server, you some times end up in with a situation, where you manually need to interact with the Galaxy database: how do you do that"

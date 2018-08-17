@@ -6,7 +6,6 @@ tutorial_name: github-command-line-contribution
 title: "Contributing with GitHub via command-line"
 type: "tutorial"
 name: "github-command-line-contribution"
-hands_on: yes
 slides: yes
 questions:
   - "How can I contribute to an open-source project with GitHub?"

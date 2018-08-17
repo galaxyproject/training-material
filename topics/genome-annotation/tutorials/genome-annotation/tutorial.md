@@ -7,7 +7,6 @@ title: "Genome Annotation"
 type: "tutorial"
 name: "genome-annotation"
 zenodo_link: "https://doi.org/10.5281/zenodo.1250793"
-hands_on: yes
 slides: no
 tags:
   - prokaryote

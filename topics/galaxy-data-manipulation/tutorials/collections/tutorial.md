@@ -7,7 +7,6 @@ title: "Collections: Using dataset collection"
 type: "tutorial"
 name: "collections"
 zenodo_link: ""
-hands_on: yes
 slides: no
 questions:
   - "How to manipulate large numbers of datasets at once?"

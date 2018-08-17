@@ -6,7 +6,6 @@ tutorial_name: create-new-topic
 title: "Including a new topic"
 type: "tutorial"
 name: "create-new-topic"
-hands_on: yes
 slides: no
 questions:
   - "How to include a new topic?"

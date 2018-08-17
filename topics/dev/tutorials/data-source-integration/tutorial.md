@@ -7,7 +7,6 @@ title: "Data source integration"
 type: "tutorial"
 name: "data-source-integration"
 enable: "false"
-hands_on: yes
 slides: no
 questions:
 objectives:

@@ -7,7 +7,6 @@ title: "Genome annotation with Prokka"
 type: "tutorial"
 name: "annotation-with-prokka"
 zenodo_link: "https://doi.org/10.5281/zenodo.1156405"
-hands_on: yes
 slides: yes
 tags:
   - prokaryote

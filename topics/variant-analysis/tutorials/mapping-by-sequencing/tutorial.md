@@ -7,7 +7,6 @@ title: "Mapping and molecular identification of phenotype-causing mutations"
 type: "tutorial"
 name: "mapping-by-sequencing"
 zenodo_link: "https://doi.org/10.5281/zenodo.1098033"
-hands_on: yes
 slides: no
 questions:
   - "What is mapping-by-sequencing?"

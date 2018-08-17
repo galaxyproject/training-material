@@ -6,7 +6,6 @@ tutorial_name: create-new-tutorial
 title: "Creating a new tutorial"
 type: "tutorial"
 name: "create-new-tutorial"
-hands_on: yes
 slides: no
 questions:
   - "How to integrate a new tutorial?"

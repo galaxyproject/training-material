@@ -6,7 +6,6 @@ tutorial_name: visualization-charts
 title: "Visualizations: charts plugins"
 type: "tutorial"
 name: "visualization-charts"
-hands_on: yes
 slides: yes
 questions:
   - "How can I make a custom plugin for Charts?"

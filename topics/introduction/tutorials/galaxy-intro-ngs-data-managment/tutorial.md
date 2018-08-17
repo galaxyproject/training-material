@@ -7,7 +7,6 @@ title: "NGS data logistics"
 type: "tutorial"
 name: "galaxy-intro-ngs-data-managment"
 zenodo_link: ""
-hands_on: yes
 slides: no
 questions:
   - "How to manipulate and process NGS data"

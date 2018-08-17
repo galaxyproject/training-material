@@ -6,7 +6,6 @@ tutorial_name: webhooks
 title: "Galaxy Webhooks"
 type: "tutorial"
 name: "webhooks"
-hands_on: yes
 slides: yes
 questions:
   - "What are Galaxy Webhooks?"

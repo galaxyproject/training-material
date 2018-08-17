@@ -8,7 +8,6 @@ type: "tutorial"
 edam_ontology: "topic_0121"
 name: "ntails"
 zenodo_link: ""
-hands_on: yes
 slides: no
 questions:
   - "How can protein N-termini be enriched for LC-MS/MS?"
