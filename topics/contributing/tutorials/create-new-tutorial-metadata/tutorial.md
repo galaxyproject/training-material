@@ -35,23 +35,14 @@ The `metadata.yaml` file is a file located in the topic directory. It describes 
 To make a tutorial appear within a topic, we need to add metadata for the tutorial to its header:
 
 - `title`: title of the tutorial (it will appear on the tutorial page and the topic page)
-- `name`: name of the tutorial (name of the subdirectory where the files related to the tutorial will be stored)
-- `enable`: `false` to hide your tutorial from the topic page
-- `hands_on`(`yes` or `no`): says if the tutorial includes hands-on sections in the `tutorial.md`
-- `slides` (`yes` or `no`): says if slides are available for this material
+- `enable`: `false` to hide your tutorial from the topic page (optional)
 
 > ### {% icon hands_on %} Hands-on: Fill the basic metadata
 >
-> 1. Open the `metadata.yaml` of `sequence-analysis` topic (`/topics/sequence-analysis/metadata.yaml`)
-> 2. Update the tutorial information in the `material` section:
+> 1. Update the tutorial information in the header section of your tutorial:
 >
 >     ```
->     -
->       title: "Similarity search with BLAST"
->       type: "tutorial"
->       name: "similarity-search"
->       hands_on: yes
->       slides: no
+>     title: "Similarity search with BLAST"
 >     ```
 >
 {: .hands_on}
@@ -63,8 +54,6 @@ This information is used to automatically make the tutorial available on the web
 After the definitining the tutorial in the topic metadata, we will also add some information about the technical support available for the tutorial:
 
 - `zenodo_link`: link on Zenodo to the input data for the tutorial
-- `workflows` (`yes` or `no`): says if a workflow is available for this material (in the `workflows` subdirectory)
-- `galaxy_tour`(`yes` or `no`): says if an interactive tour is available for the tutorial (in the `tours` subdirectory)
 
 
 > ### {% icon hands_on %} Hands-on: Fill the technical metadata
@@ -72,14 +61,12 @@ After the definitining the tutorial in the topic metadata, we will also add some
 > 2. Add in the `material` section after `slides: no` the new tutorial:
 >
 >     ```
->       zenodo_link: ""
->       workflows: no
->       galaxy_tour: no
+>     zenodo_link: ""
 >     ```
 >
 {: .hands_on}
 
-This information is used to display the data, workflow and tour links from the topic and tutorial page. They are also used to check which information are missing for the tutorials.
+This information is used to display the data from the topic and tutorial page. They are also used to check which information are missing for the tutorials.
 
 # Pedagogical support
 
