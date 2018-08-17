@@ -1,5 +1,10 @@
 module Jekyll
   module TopicFilter
+    def topic_count(resources)
+      # Count lines in the table except introduction slides
+      resources.select{ |a| a['type'] != 'introduction' }.length
+    end
+
     def topic_filter(pages, topic_name)
       relevant_pages = []
 
