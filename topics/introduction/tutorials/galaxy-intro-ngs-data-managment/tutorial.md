@@ -7,7 +7,6 @@ title: "NGS data logistics"
 type: "tutorial"
 name: "galaxy-intro-ngs-data-managment"
 zenodo_link: ""
-galaxy_tour: no
 hands_on: yes
 slides: no
 questions:

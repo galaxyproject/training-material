@@ -7,7 +7,6 @@ title: "Hi-C analysis of Drosophila melanogaster cells using HiCExplorer"
 type: "tutorial"
 name: "hicexplorer"
 zenodo_link: "https://doi.org/10.5281/zenodo.1183661"
-galaxy_tour: yes
 hands_on: yes
 slides: no
 edam_ontology: ""

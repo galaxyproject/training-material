@@ -7,7 +7,6 @@ title: "Workflows: Extracting Workflows from Histories"
 type: "tutorial"
 name: "history-to-workflow"
 zenodo_link: ""
-galaxy_tour: no
 hands_on: yes
 slides: no
 questions:

@@ -7,7 +7,6 @@ title: "Reference-based RNA-Seq data analysis"
 type: "tutorial"
 name: "ref-based"
 zenodo_link: "https://zenodo.org/record/1185122"
-galaxy_tour: yes
 hands_on: yes
 slides: no
 questions:

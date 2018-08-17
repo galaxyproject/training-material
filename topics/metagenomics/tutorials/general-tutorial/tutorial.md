@@ -7,7 +7,6 @@ title: "Analyses of metagenomics data - The global picture"
 type: "tutorial"
 name: "general-tutorial"
 zenodo_link: "https://doi.org/10.5281/zenodo.815875"
-galaxy_tour: yes
 hands_on: yes
 slides: no
 questions:

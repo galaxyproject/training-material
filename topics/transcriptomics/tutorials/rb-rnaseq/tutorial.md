@@ -7,7 +7,6 @@ title: "Reference-based RNAseq data analysis (long)"
 type: "tutorial"
 name: "rb-rnaseq"
 zenodo_link: ""
-galaxy_tour: no
 hands_on: yes
 slides: no
 questions:

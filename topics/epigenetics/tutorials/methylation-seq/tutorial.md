@@ -7,7 +7,6 @@ title: "DNA Methylation data analysis"
 type: "tutorial"
 name: "methylation-seq"
 zenodo_link: "https://zenodo.org/record/557099"
-galaxy_tour: yes
 hands_on: yes
 slides: no
 edam_ontology: "topic_3173"

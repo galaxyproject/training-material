@@ -8,7 +8,6 @@ type: "tutorial"
 edam_ontology: "topic_0121"
 name: "database-handling"
 zenodo_link: ""
-galaxy_tour: yes
 hands_on: yes
 slides: no
 questions:

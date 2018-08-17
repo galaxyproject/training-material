@@ -8,7 +8,6 @@ type: "tutorial"
 enable: "false"
 name: "diploid-variant-calling"
 zenodo_link: ""
-galaxy_tour: no
 hands_on: yes
 slides: no
 questions:

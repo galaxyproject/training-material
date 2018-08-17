@@ -7,7 +7,6 @@ title: "Galaxy 101"
 type: "tutorial"
 name: "galaxy-intro-101"
 zenodo_link: ""
-galaxy_tour: no
 hands_on: yes
 slides: no
 questions:

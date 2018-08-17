@@ -7,7 +7,6 @@ title: "Quality Control"
 type: "tutorial"
 name: "quality-control"
 zenodo_link: "https://doi.org/10.5281/zenodo.61771"
-galaxy_tour: yes
 hands_on: yes
 slides: yes
 questions:

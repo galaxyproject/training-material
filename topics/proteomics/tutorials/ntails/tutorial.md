@@ -8,7 +8,6 @@ type: "tutorial"
 edam_ontology: "topic_0121"
 name: "ntails"
 zenodo_link: ""
-galaxy_tour: no
 hands_on: yes
 slides: no
 questions:

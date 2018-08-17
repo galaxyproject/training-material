@@ -7,7 +7,6 @@ title: "Peptide and Protein ID using SearchGUI and PeptideShaker"
 type: "tutorial"
 name: "protein-id-sg-ps"
 zenodo_link: "https://zenodo.org/record/546301"
-galaxy_tour: yes
 hands_on: yes
 slides: no
 questions:

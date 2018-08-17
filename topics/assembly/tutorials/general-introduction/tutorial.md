@@ -7,7 +7,6 @@ title: "Introduction to Genome Assembly"
 type: "tutorial"
 name: "general-introduction"
 zenodo_link: "https://doi.org/10.5281/zenodo.582600"
-galaxy_tour: yes
 slides: yes
 hands_on: yes
 questions:

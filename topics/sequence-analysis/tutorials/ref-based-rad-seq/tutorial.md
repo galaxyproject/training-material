@@ -7,7 +7,6 @@ title: "RAD-Seq Reference-based data analysis"
 type: "tutorial"
 name: "ref-based-rad-seq"
 zenodo_link: "https://doi.org/10.5281/zenodo.1134547"
-galaxy_tour: yes
 hands_on: yes
 slides: no
 questions:
