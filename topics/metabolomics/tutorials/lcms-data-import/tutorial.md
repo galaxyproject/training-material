@@ -178,9 +178,51 @@ In this tutorial we use 4 datasets from the Sacurine study
 >
 {: .hands_on}
 
-# How to use those datain the first steps
+# How to use those data in the first steps
 
+> ### {% icon tip %} The workflow
+>
+> > ![The workflow](../../images/tutorial-lcms-data-import-run-workflow.png)
+> We will only play the step framed in blue
+>
+> Again, thanks to the Dataset collection, we will not have to run 4 times **MSnBase.readMSData** and 4 times **xcms.findChromPeaks (xcmsSet)**. Galaxy will manage that for us.
+>
+> See the "[Individual files VS zip file](#individual-files-vs-zip-file)" section for explanation about the Dataset collections and their interest
+{: .tip}
 
+> ### {% icon hands_on %} Hands-on: Run the first steps
+>
+> 1. **MSnBase.readMSData** {% icon tool %} with the following parameters
+>  - Click on the **Dataset Collection** (folder) button
+> > ![The Dataset Collection button](../../images/tutorial-lcms-data-import-run-01.png)
+>  - {% icon param-file %}   *"File(s) from your history containing your chromatograms"*: the `raw` Data Collection
+>
+> 2. **xcms.findChromPeaks (xcmsSet)** {% icon tool %} with the following parameters
+>  - Click on the **Dataset Collection** button
+>  - {% icon param-files %}  *"RData file"*: the `raw.raw.RData` Data Collection
+>  - {% icon param-select %} *"Extraction method for peaks detection"*: `CentWave`
+>  - {% icon param-text %}   *"Min,Max peak width in seconds"*: `10,35`
+>
+> 3. **xcms.findChromPeaks Merger** {% icon tool %} with the following parameters
+>    > ### {% icon tip %} Tip: Why this step?
+>    > For the next step of the workflow, groupChromPeaks and adjustRtime, we need one RData.
+>    >
+>    > To merge all our RData which are nested in the Dataset Collection called something like `raw.xset.RData`, we will use a tool named **xcms.find ChromPeaks Merger**
+>    >
+>    > This tool will also take the SampleMetadata `sampleMetadata.tsv`to map the classes to the samples: Samples, QC, Blank
+>    {: .tip}
+>  - Click on the **Dataset Collection** button
+>  - {% icon param-files %}  *"RData file"*: the `raw.raw.xset.RData` Data Collection
+>  - {% icon param-file %}   *"Sample metadata file"*: `sacuri_sampleMetadata.tsv`
+>
+> 4. **xcms.findChromPeaks (xcmsSet)** {% icon tool %} with the following parameters
+>  - {% icon param-file %}  *"RData file"*: `xset.merged.RData`
+>
+> When the **xcms.findChromPeaks Merger** step is done, you can observe that we now have a dataset called `xset.merged.RData` in the history. It's no longer a Dataset Collection.
+>
+> From now, we will deal with regular datasets for the further steps.
+>
+{: .hands_on}
 
 # Conclusion
 {:.no_toc}
