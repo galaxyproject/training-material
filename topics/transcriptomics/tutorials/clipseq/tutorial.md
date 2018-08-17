@@ -440,7 +440,7 @@ calling
 >   >
 >   >   > ### {% icon solution %} Solution
 >   >   >
->   >   > 1. If we would **decrease** the log2 fold-change threshold then we would get more peaks. However, we would also increase the number of false positives, i.e., peaks that are **not** significantly enriched.</br>
+>   >   > 1. If we would **decrease** the log2 fold-change threshold then we would get more peaks. However, we would also increase the number of false positives, i.e., peaks that are **not** significantly enriched.<br/>
 If we would **increase** the log2 fold-change threshold, then we would decrease the number of peaks and possible false positives. However, we would also increase the number of false negatives, i.e., we would lose potentially interesting binding sites.
 >   >   > 2. PEAKachu works mainly with replicated data, because DESeq2 calculates only p-values for data sets where the experiment and control have at least two replicates. This feature makes statistically sense, because data sets without replicates are not representative enough to make general assumptions, but for the purpose of demonstration we are going to ignore this fact.
 >   >   > 3. Yes and no. A significant fold-change with high read counts (read coverage) might be enough to validate a peak. However, some peaks can also be covered by very few reads and still have a high fold-change, e.g., log2(4/1). It is for you to decide if a fold-change like log2(4/1) is enough evidence that the binding region is significantly enriched.
@@ -589,7 +589,7 @@ We will first generate coverage files that gives us a better visualization for o
 
 ## Inspection of peaks and aligned data with IGV
 
-Next we are going to use the generated bigWig files of our alignment ends and the peaks we obtained from `PEAKachu` and investigate the read coverage of our called peaks with [IGV](http://software.broadinstitute.org/software/igv/). This is an alternative to Trackster. For more information about IGV follow the  [tutorial]({{site.baseurl}}/topics/introduction/tutorials/igv-introduction/tutorial.html).</br>
+Next we are going to use the generated bigWig files of our alignment ends and the peaks we obtained from `PEAKachu` and investigate the read coverage of our called peaks with [IGV](http://software.broadinstitute.org/software/igv/). This is an alternative to Trackster. For more information about IGV follow the  [tutorial]({{site.baseurl}}/topics/introduction/tutorials/igv-introduction/tutorial.html).<br/>
 
 **Try to answer the questions for this hands-on.** It will give you an idea why it would be wise to inspect the read coverage of the peaks.
 
