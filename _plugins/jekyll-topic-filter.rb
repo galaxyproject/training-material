@@ -24,7 +24,12 @@ module Jekyll
           # Automate the tutorial-name thing. This writes back to the shared
           # data structure.
           page.data['topic_name'] = page_parts[2]
-          page.data['tutorial_name'] = page_parts[4]
+          # Slides are one directory level shorter and re-use name for their identity.
+          if page_parts[3] == 'slides' then
+            page.data['tutorial_name'] = page_parts[4].sub(/\.html$/, '')
+          else
+            page.data['tutorial_name'] = page_parts[4]
+          end
           # And then store in our interesting stuff
           key = page.url.sub(/^\//, '')
           interesting[key] = page
@@ -78,8 +83,13 @@ module Jekyll
         end
 
         page_obj = page.data.dup
-        page_obj['slides'] = resources.include?('slides.html')
-        page_obj['hands_on'] = resources.include?('tutorial.md') or resources.include?('tutorial.html')
+        # Only override hands-on if it isn't set. Otherwise it could be a `hands_on: external`
+        if not page_obj.has_key?("hands_on") then
+          page_obj['hands_on'] = resources.include?('tutorial.md') or resources.include?('tutorial.html')
+        end
+        if not page_obj.has_key?("slides") then
+          page_obj['slides'] = resources.include?('slides.html')
+        end
         page_obj['workflows'] = resources.include?('workflows')
         page_obj['tours'] = resources.include?('tours')
         page_obj['type'] = 'tutorial'
