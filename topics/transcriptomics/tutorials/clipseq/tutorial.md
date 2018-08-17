@@ -1,4 +1,4 @@
-FASTQ---
+---
 layout: tutorial_hands_on
 topic_name: transcriptomics
 tutorial_name: clipseq
@@ -137,13 +137,7 @@ In this task we are going to remove two 3' and two 5' adapters from the reads (N
 >    - *"Additional output options"*: `Default`
 >    - *"Additional modifications to reads"*: `Set Modification Options`
 >        - *"Cut bases from reads before adapter trimming"*: `-5`
->
->    > ### {% icon comment %} Why do we remove 5 bp from the first read?
->    >
->    > In eCLIP it can happen that the sequencing goes over the first read into the UMI, which is at the 3' end of the first read. The UMI is 5 bp long in our data. To make sure our first read in the read pair does not contain the UMI, we simply remove the last 5 bp from it. The UMI that we actually need for the de-duplication is located on the 5' end of our second read in the read pair.
-> {: .comment}
->
-> 1. **Cutadapt (v. 1.6)** {% icon tool %} with the following parameters:
+> 2. **Cutadapt (v. 1.6)** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Fastq file to trim"*: `FASTQ R2` (output from the **first** **Cutadapt** call {% icon tool %})
 >    - *"Track Paired Reads"*: `Yes`
 >    - {% icon param-file %} *"Paired fastq file (NOT trimmed)"*: `FASTQ R1` (output from the **first** **Cutadapt** call {% icon tool %})
@@ -171,10 +165,14 @@ In this task we are going to remove two 3' and two 5' adapters from the reads (N
 >    - *"Additional output options"*: `Default`
 >    - *"Additional modifications to reads"*: `No Read Modifications`
 >
+>   > ### {% icon comment %} Why do we remove 5 bp from the first read?
+>   > In eCLIP it can happen that the sequencing goes over the first read into the UMI, which is at the 3' end of the first read. The UMI is 5 bp long in our data. To make sure our first read in the read pair does not contain the UMI, we simply remove the last 5 bp from it. The UMI that we actually need for the de-duplication is located on the 5' end of our second read in the read pair.
+>   {: .comment}
+>
 >    > ### {% icon comment %} Do the same thing for the input control data set.
 >    >
 >    > If you processed the RBFOX2 FASTQ dataset then do the same thing for the input control dataset or *vice verca*.
->    {: .comment}
+>   {: .comment}
 >
 {: .hands_on}
 
@@ -196,19 +194,18 @@ In this task we are going to remove the UMI at the 5' end of the second read. We
 >    - *"Output log?"*: `Yes`
 >    - *"Enable quality filter?"*: `No`
 >
->    > ### {% icon comment %} Do the same thing for the input control data set.
->    >
->    > If you processed the RBFOX2 FASTQ dataset then do the same thing for the input control dataset or *vice verca*.
+>   > ### {% icon comment %} Do the same thing for the input control data set.
+>   >
+>   > If you processed the RBFOX2 FASTQ dataset then do the same thing for the input control dataset or *vice verca*.
 > {: .comment}
 >
->  > ### {% icon question %} Questions
->  >
->  > 1. What is the meaning of the barcode pattern?
->  >
->  >  > ### {% icon solution %} Solution
->  >  > 1. The symbol "N" defines our UMI. The symbol "X" are nucleotides that we would reattach to our read. It is important to note, that the UMI can be encompassed by an in-line barcode, that is why we need two distinct symbols "N" and "X".
-> > {: .solution }
-> {: .question}
+>   > ### {% icon question %} Questions
+>   > 1. What is the meaning of the barcode pattern?
+>   >
+>   >   > ### {% icon solution %} Solution
+>   >   > 1. The symbol "N" defines our UMI. The symbol "X" are nucleotides that we would reattach to our read. It is important to note, that the UMI can be encompassed by an in-line barcode, that is why we need two distinct symbols "N" and "X".
+>   > {: .solution }
+>   {: .question}
 >
 {: .hands_on}
 
@@ -234,29 +231,29 @@ To determine where DNA fragments originated in the genome, the sequenced reads m
 >            - *"Use end-to-end read alignments, with no soft-clipping?"*: `Yes`
 >        - *"Would you like to set chimeric alignment parameters?"*: `No`
 >
->    > ### {% icon comment %} Note: We have switched R1 and R2 as forward and reverse reads!
->    >
->    > We need to do that because the eCLIP read library is organised in a way such that the first mate (R1) is in reverse and the second mate (R2) in forward orientation.
->    {: .comment}
+>   > ### {% icon comment %} Note: We have switched R1 and R2 as forward and reverse reads!
+>   >
+>   > We need to do that because the eCLIP read library is organised in a way such that the first mate (R1) is in reverse and the second mate (R2) in forward orientation.
+> {: .comment}
 >
->    > ### {% icon comment %} Soft-Clipping vs Hard-Clipping
->    >
->    > Clipping is a way to deal with low quality bases during the alignment step. In **Soft-Clipping** the bases at the 5' and 3' end of the read are not part of the alignment. In **Hard-Clipping** the bases at the 5' and 3' end of the read are not part of the alignment **and** will be completely removed from the read sequence in the BAM file.
->    {: .comment}
+>   > ### {% icon comment %} Soft-Clipping vs Hard-Clipping
+>   >
+>   > Clipping is a way to deal with low quality bases during the alignment step. In **Soft-Clipping** the bases at the 5' and 3' end of the read are not part of the alignment. In **Hard-Clipping** the bases at the 5' and 3' end of the read are not part of the alignment **and** will be completely removed from the read sequence in the BAM file.
+> {: .comment}
 >
->    > ### {% icon comment %} Do the same thing for the input control data set.
->    >
->    > If you processed the RBFOX2 FASTQ dataset then do the same thing for the input control dataset or *vice verca*.
->    {: .comment}
+>   > ### {% icon comment %} Do the same thing for the input control data set.
+>   >
+>   > If you processed the RBFOX2 FASTQ dataset then do the same thing for the input control dataset or *vice verca*.
+> {: .comment}
 >
-> ### {% icon question %} Questions
->
-> 1. Can you think of a reason why we disabled the soft-clipping?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. In eCLIP the cross linking position should be at the beginning of the second read. If we would enable soft-clipping, we would add potential bases with low quality at the end of our second reads that would blur our cross linking position and we would lose precision to detect potential binding regions of RBFOX2.
-> > {: .solution}
+>   > ### {% icon question %} Questions
+>   >
+>   > 1. Can you think of a reason why we disabled the soft-clipping?
+>   >
+>   >   > ### {% icon solution %} Solution
+>   >   >
+>   >   > 1. In eCLIP the cross linking position should be at the beginning of the second read. If we would enable soft-clipping, we would add potential bases with low quality at the end of our second reads that would blur our cross linking position and we would lose precision to detect potential binding regions of RBFOX2.
+>   > {: .solution}
 > {: .question}
 >
 {: .hands_on}
@@ -277,27 +274,28 @@ Lets return to the UMIs which we extracted in step three. Since we have mapped t
 >    - *"Edit distance threshold"*: `1`
 >    - *"BAM is paired end"*: `Yes`
 >
->    > ### {% icon comment %} What is the purpose of the method we have chosen for the de-duplication?
->    > `UMI-tools deduplication` has several methods. The method we have picked is called the  **adjacency** method. For detailed information have a look at method descriptions of   [UMI-tools](https://doi.org/10.1101/gr.209601.116). For a brief explanation: the method fuses reads together when they have the same coordinates and the same UMI. However, sequencing errors can occur in the UMI. Thus, in the **adjacency** method we fuse also UMIs that differ in a maximal number of characters and where we identify a lot of copies, i.e., the method creates clusters of nodes, a node for each individual UMI, and fuses these nodes based on the [hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) and read counts.
->    >
->    {: .comment}
+>   > ### {% icon comment %} What is the purpose of the method we have chosen for the de-duplication?
+>   >
+>   > `UMI-tools deduplication` has several methods. The method we have picked is called the  **adjacency** method. For detailed information have a look at method descriptions of   [UMI-tools](https://doi.org/10.1101/gr.209601.116). For a brief explanation: the method fuses reads together when they have the same coordinates and the same UMI. However, sequencing errors can occur in the UMI. Thus, in the **adjacency** method we fuse also UMIs that differ in a maximal number of characters and where we identify a lot of copies, i.e., the method creates clusters of nodes, a node for each individual UMI, and fuses these nodes based on the [hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) and read counts.
+> {: .comment}
 >
->    > ### {% icon comment %} Do the same thing for the input control data set.
->    >
->    > If you processed the RBFOX2 bam file then do the same thing for the input control bam or *vice verca*.
->    {: .comment}
+>   > ### {% icon comment %} Do the same thing for the input control data set.
+>   >
+>   > If you processed the RBFOX2 bam file then do the same thing for the input control bam or *vice verca*.
+> {: .comment}
 >
-> ### {% icon question %} Questions
->
-> 1. Why are we doing the de-duplication after the read mapping?
-> 2. What is the edit distance threshold?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Because we need the coordinates of the reads to see if some reads have the same coordinates and the same UMI.
-> > 2. `UMI-tools dedulication` uses the hamming distance between UMIs to detect sequencing errors in the UMIs. A hamming distance of 1 means, that two UMIs are the same if they differ in maximal one character. If two characters are different, then these are two disparate UMIs.
-> > {: .solution}
+>   > ### {% icon question %} Questions
+>   >
+>   > 1. Why are we doing the de-duplication after the read mapping?
+>   > 2. What is the edit distance threshold?
+>   >
+>   >   > ### {% icon solution %} Solution
+>   >   >
+>   >   > 1. Because we need the coordinates of the reads to see if some reads have the same coordinates and the same UMI.
+>   >   > 2. `UMI-tools dedulication` uses the hamming distance between UMIs to detect sequencing errors in the UMIs. A hamming distance of 1 means, that two UMIs are the same if they differ in maximal one character. If two characters are different, then these are two disparate UMIs.
+>   > {: .solution}
 > {: .question}
+>
 {: .hands_on}
 
 ## Quality check of the de-duplication with **FastQC**
@@ -309,17 +307,18 @@ Lets return to the UMIs which we extracted in step three. Since we have mapped t
 > 2. View the **Sequence Duplication Levels** plot.
 > ![fastqafter](../../images/clipseq_duplication_level_2.png "Sequence duplication levels <b>after</b> de-duplication.")
 >
-> ### {% icon question %} Questions
->
-> 1. What can you see, if you compare the duplication levels to our first quality control in step two?
-> 2. Why are the duplication levels still high?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. We have reduced the duplication levels.
-> > 2. The duplication levels are still high, because we don't have the full data sets (reads are missing).
-> > {: .solution}
+>   > ### {% icon question %} Questions
+>   >
+>   > 1. What can you see, if you compare the duplication levels to our first quality control in step two?
+>   > 2. Why are the duplication levels still high?
+>   >
+>   >   > ### {% icon solution %} Solution
+>   >   >
+>   >   > 1. We have reduced the duplication levels.
+>   >   > 2. The duplication levels are still high, because we don't have the full data sets (reads are missing).
+>   > {: .solution}
 > {: .question}
+>
 {: .hands_on}
 
 # Step 6: Second Quality Control
@@ -341,22 +340,23 @@ In this section we check the quality of our mapped reads and see if our samples 
 >
 >    {: .comment}
 >
->    > ### {% icon comment %} What does this graph represent, especially for CLIP-Seq data?
->    >
->    > It shows us how good the CLIP Signal compared to the control signal is. Now be careful, CLIP-Seq experiments involve either a total RNA control or a negative control with another protein that unspecifically binds RNA (e.g., IgG). An ideal total RNA control (input control) like ours with perfect uniform distribution of reads along the genome/transcriptome (i.e. without enrichments) and infinite sequencing coverage should generate a straighter, diagonal line. On the other hand, a very specific and strong CLIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank. Yet, a negative control often has the same sharp slope at the end as a CLIP experiment but often depicts a straighter, diagonal line in the beginning like the input control.
->    {: .comment}
+>   > ### {% icon comment %} What does this graph represent, especially for CLIP-Seq data?
+>   >
+>   > It shows us how good the CLIP Signal compared to the control signal is. Now be careful, CLIP-Seq experiments involve either a total RNA control or a negative control with another protein that unspecifically binds RNA (e.g., IgG). An ideal total RNA control (input control) like ours with perfect uniform distribution of reads along the genome/transcriptome (i.e. without enrichments) and infinite sequencing coverage should generate a straighter, diagonal line. On the other hand, a very specific and strong CLIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank. Yet, a negative control often has the same sharp slope at the end as a CLIP experiment but often depicts a straighter, diagonal line in the beginning like the input control.
+> {: .comment}
 >
-> ### {% icon question %} Questions
->
->    > 1. How do (or should) input datasets differ from CLIP datasets?
->    > 2. What do you think about the quality of the CLIP experiment?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. We expect that the control (input) has a different, more straighter, diagonal slope than the CLIP experiment.
-> > 2. Both the CLIP experiment and the control are closely related. It is maybe wise to check the correlation of the two samples.
-> > {: .solution}
+>   > ### {% icon question %} Questions
+>   >
+>   > 1. How do (or should) input datasets differ from CLIP datasets?
+>   > 2. What do you think about the quality of the CLIP experiment?
+>   >
+>   >   > ### {% icon solution %} Solution
+>   >   >
+>   >   > 1. We expect that the control (input) has a different, more straighter, diagonal slope than the CLIP experiment.
+>   >   > 2. Both the CLIP experiment and the control are closely related. It is maybe wise to check the correlation of the two samples.
+>   > {: .solution}
 > {: .question}
+>
 {: .hands_on}
 
 For additional information on how to interpret **plotFingerprint** plots, read the information [here](https://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background).
@@ -383,19 +383,20 @@ We are therefore going to further check the correlation between our control and 
 > 3. View the output image.
 > ![correlation](../../images/clipseq_correlation.png "Heatmap of correlation matrix generated by <b>plotCorrelation</b>. The y-axis shows you on the left site the histogram of the clustering. The colored scale depicts the correlation value. Like  `plotFingerprint`, `multiBamSummary` randomly samples genome regions (bins) of a specified length and sums the per-base coverage that overlap with those regions. The correlation between these bins is then calculated for each pair of samples. An ideal plot would result in two disparate clusters: one for the biological replicates of your CLIP-Seq experiment and one for the replicates of your control. A bad plot would happen if your control and CLIP-Seq experiment end up in one cluster, which means that they are closely related and something went wrong in the laboratory.")
 >
-> ### {% icon question %} Questions
->
-> 1. Why do we want to skip zeros in plotCorrelation?
-> 2. What happens if the Spearman correlation method is replaced by the Pearson method?
-> 3. What does the correlation tell you about our data?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Large areas of zeros would lead to a correlation of these areas. The information we would get out of this computation would be meaningless.
-> > 2. The clusters would be different.
-> > 3. Despite the result of `plotFingerprint`, we see that the correlation between our experiment and control is not nearly as significant as we thought.
-> > {: .solution}
+>   > ### {% icon question %} Questions
+>   >
+>   > 1. Why do we want to skip zeros in plotCorrelation?
+>   > 2. What happens if the Spearman correlation method is replaced by the Pearson method?
+>   > 3. What does the correlation tell you about our data?
+>   >
+>   >   > ### {% icon solution %} Solution
+>   >   >
+>   >   > 1. Large areas of zeros would lead to a correlation of these areas. The information we would get out of this computation would be meaningless.
+>   >   > 2. The clusters would be different.
+>   >   > 3. Despite the result of `plotFingerprint`, we see that the correlation between our experiment and control is not nearly as significant as we thought.
+>   > {: .solution}
 > {: .question}
+>
 {: .hands_on}
 
 # Step 7: Peak Calling
@@ -421,30 +422,31 @@ calling
 > 2. Take a look at the MA plot of **PEAKachu**.
 > ![ma](../../images/clipseq_ma_plot.png "MA plot of <b>PEAKachu</b>.  MA stands for M (log ratio) and A (mean average). It shows you the general trend of the log2 fold-change in dependence of the average mean of the expression rate of the peaks. Points in a straight, diagonal line symbolise the behavior of the logarithm which is often visible for low expressed peaks, because one read can change the fold-change quite drastically. The blue lines depict the normalisation constants. Read dots are significant peaks. It is hard to tell what a good MA plot would look like. Even a small number of significant peaks can be enough, depending on the biological question you ask.")
 >
->    > ### {% icon comment %} Adjusted p-value Threshold
->    >
->    > P-values are calculated by DESeq2. A low p-value represent a significantly enriched binding region. Since we are doing thousands of independent hypothesis testings, we have to correct for significant p-values that happen just by chance. DESeq2 uses the Benjamini-Hochberg procedure as a correction. For more information read [here](http://www.biostathandbook.com/multiplecomparisons.html).
->    {: .comment}
+>   > ### {% icon comment %} Adjusted p-value Threshold
+>   >
+>   > P-values are calculated by DESeq2. A low p-value represent a significantly enriched binding region. Since we are doing thousands of independent hypothesis testings, we have to correct for significant p-values that happen just by chance. DESeq2 uses the Benjamini-Hochberg procedure as a correction. For more information read [here](http://www.biostathandbook.com/multiplecomparisons.html).
+> {: .comment}
 >
->    > ### {% icon comment %} Fold-Change Threshold
->    >
->    > The fold-change is calculated by DESeq2 and is actually a log2 fold-change. Because we want significantly enriched binding regions, we basically search for peaks that are at least four times higher in our CLIP experiment than in our control.
->    {: .comment}
+>   > ### {% icon comment %} Fold-Change Threshold
+>   >
+>   > The fold-change is calculated by DESeq2 and is actually a log2 fold-change. Because we want significantly enriched binding regions, we basically search for peaks that are at least four times higher in our CLIP experiment than in our control.
+> {: .comment}
 >
-> ### {% icon question %} Questions
->
-> 1. What happens if we decrease or increase the log2 fold-change threshold of 2.0?
-> 2. Take a look into the peak output file of PEAKachu. Why aren't there any p-values?
-> 3. Is the log2 fold-change alone a good measurement to validate our peaks? Maybe the MA plot helps you to figure out this question?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. If we would **decrease** the log2 fold-change threshold then we would get more peaks. However, we would also increase the number of false positives, i.e., peaks that are **not** significantly enriched.</br>
+>   > ### {% icon question %} Questions
+>   >
+>   > 1. What happens if we decrease or increase the log2 fold-change threshold of 2.0?
+>   > 2. Take a look into the peak output file of PEAKachu. Why aren't there any p-values?
+>   > 3. Is the log2 fold-change alone a good measurement to validate our peaks? Maybe the MA plot helps you to figure out this question?
+>   >
+>   >   > ### {% icon solution %} Solution
+>   >   >
+>   >   > 1. If we would **decrease** the log2 fold-change threshold then we would get more peaks. However, we would also increase the number of false positives, i.e., peaks that are **not** significantly enriched.</br>
 If we would **increase** the log2 fold-change threshold, then we would decrease the number of peaks and possible false positives. However, we would also increase the number of false negatives, i.e., we would lose potentially interesting binding sites.
-> > 2. PEAKachu works mainly with replicated data, because DESeq2 calculates only p-values for data sets where the experiment and control have at least two replicates. This feature makes statistically sense, because data sets without replicates are not representative enough to make general assumptions, but for the purpose of demonstration we are going to ignore this fact.
-> > 3. Yes and no. A significant fold-change with high read counts (read coverage) might be enough to validate a peak. However, some peaks can also be covered by very few reads and still have a high fold-change, e.g., log2(4/1). It is for you to decide if a fold-change like log2(4/1) is enough evidence that the binding region is significantly enriched.
-> > {: .solution}
+>   >   > 2. PEAKachu works mainly with replicated data, because DESeq2 calculates only p-values for data sets where the experiment and control have at least two replicates. This feature makes statistically sense, because data sets without replicates are not representative enough to make general assumptions, but for the purpose of demonstration we are going to ignore this fact.
+>   >   > 3. Yes and no. A significant fold-change with high read counts (read coverage) might be enough to validate a peak. However, some peaks can also be covered by very few reads and still have a high fold-change, e.g., log2(4/1). It is for you to decide if a fold-change like log2(4/1) is enough evidence that the binding region is significantly enriched.
+>   > {: .solution}
 > {: .question}
+>
 {: .hands_on}
 
 # Step 8: Peak Analysis
@@ -492,32 +494,33 @@ Lets first find out which sequence motifs RBFOX2 might preferentially bind to.
 >
 > ![motif](../../images/clipseq_motif.png "Plot of a sequence motif. The x-axis of the sequence plots represents the nucleotide position of the motif. The y-axis stands for the total information (uncertainty) of each position and thus stands for the probability that the nucleotide at a certain position is the specific letter (for DNA: T,C,G,A). Bigger letters stand for a higher probability. For more information read [here](https://en.wikipedia.org/wiki/Sequence_logo).")
 >
->    > ### {% icon comment %} MEME and DREME
->    >
->    > **MEME** and **DREME** are two motif finding tools that MEME-ChIP uses. More information about theses tools can be found [here](http://meme-suite.org/).
->    {: .comment}
+>   > ### {% icon comment %} MEME and DREME
+>   >
+>   > **MEME** and **DREME** are two motif finding tools that MEME-ChIP uses. More information about theses tools can be found [here](http://meme-suite.org/).
+> {: .comment}
 >
->    > ### {% icon comment %} What is the purpose of SlopBED?
->    >
->    > **PEAKachu** might underestimate the length of the binding regions, because the actually protein-RNA-binding concentrates on the cross linking site that is one nucleotide long. Thus, we extend the peaks from **PEAKachu** by 20 bp at each site. A true conserved binding motif will not be affected by it, if we make the region to wide.
->    {: .comment}
+>   > ### {% icon comment %} What is the purpose of SlopBED?
+>   >
+>   > **PEAKachu** might underestimate the length of the binding regions, because the actually protein-RNA-binding concentrates on the cross linking site that is one nucleotide long. Thus, we extend the peaks from **PEAKachu** by 20 bp at each site. A true conserved binding motif will not be affected by it, if we make the region to wide.
+> {: .comment}
 >
->    > ### {% icon comment %} What is the meaning of the E-value?
->    >
->    > The E-value represents the expected number of times we would find our sequence motif in a database (peak file), just by chance. This means, that a small E-value correspond to a very significant motif, because the expected number we would find that motif in our peak file just by chance is very low. Other sequences like repeats will have a high E-value on the other hand.
->    {: .comment}
+>   > ### {% icon comment %} What is the meaning of the E-value?
+>   >
+>   > The E-value represents the expected number of times we would find our sequence motif in a database (peak file), just by chance. This means, that a small E-value correspond to a very significant motif, because the expected number we would find that motif in our peak file just by chance is very low. Other sequences like repeats will have a high E-value on the other hand.
+> {: .comment}
 >
-> ### {% icon question %} Questions
->
-> 1. Click on the link under the column **Discovery/​Enrichment Program** for two of the motifs one from **MEME** and one from **DREME**. What is the site-count for the most significant motif? How many sequences have we checked for **MEME** and for **DREME**? What is the fraction of sequences that covered that motif? (MEME-ChIP version 4.11.2)
-> 2. Have we found the motif `TGCATG`?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. For the result with MEME-ChIP version 4.11.2: **MEME** site count = 37, total sequences = 100, fraction = 37%; **DREME** site count = 103, total sequences = 247, fraction = 41.7%.
-> > 2. Yes.
-> > {: .solution}
+>   > ### {% icon question %} Questions
+>   >
+>   > 1. Click on the link under the column **Discovery/​Enrichment Program** for two of the motifs one from **MEME** and one from **DREME**. What is the site-count for the most significant motif? How many sequences have we checked for **MEME** and for **DREME**? What is the fraction of sequences that covered that motif? (MEME-ChIP version 4.11.2)
+>   > 2. Have we found the motif `TGCATG`?
+>   >
+>   >   > ### {% icon solution %} Solution
+>   >   >
+>   >   > 1. For the result with MEME-ChIP version 4.11.2: **MEME** site count = 37, total sequences = 100, fraction = 37%; **DREME** site count = 103, total sequences = 247, fraction = 41.7%.
+>   >   > 2. Yes.
+>   > {: .solution}
 > {: .question}
+>
 {: .hands_on}
 
 ## Functional analysis with **RNA Centric Annotation System**
@@ -537,19 +540,20 @@ Lets move to the next step and find out where these motifs might come from, i.e.
 >    - *"Downsampling (N)"*: `"0"`
 > 2. View the output html of **RNA Centric Annotation System**
 >
-> ### {% icon question %} Questions
->
-> 1. What is the main target region of RBFOX2 (e.g., cds, exon, 5' UTR)? Does this confirm the literature.
-> 2. From which cellular compartments do the targets come from?
-> 3. Where does RBFOX2 mainly bind around the intron-exon boundaries and total transcript?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Introns and transcripts. Yes.
-> > 2. Actin filaments, actin cytoskeleton, cell projection part etc.
-> > 3. Around the exon-intron boundaries more at the 3' ends of transcripts.
-> > {: .solution}
+>   > ### {% icon question %} Questions
+>   >
+>   > 1. What is the main target region of RBFOX2 (e.g., cds, exon, 5' UTR)? Does this confirm the literature.
+>   > 2. From which cellular compartments do the targets come from?
+>   > 3. Where does RBFOX2 mainly bind around the intron-exon boundaries and total transcript?
+>   >
+>   >   > ### {% icon solution %} Solution
+>   >   >
+>   >   > 1. Introns and transcripts. Yes.
+>   >   > 2. Actin filaments, actin cytoskeleton, cell projection part etc.
+>   >   > 3. Around the exon-intron boundaries more at the 3' ends of transcripts.
+>   > {: .solution}
 > {: .question}
+>
 {: .hands_on}
 
 # Additional Step
@@ -576,10 +580,10 @@ We will first generate coverage files that gives us a better visualization for o
 >    - {% icon param-file %} *"Convert"*: `bedgraph` (output of **Create a BedGraph of genome coverage** {% icon tool %})
 >    - *"Converter settings to use"*: `Default`
 >
->    > ### {% icon comment %} Do the Same thing for the input control data set.
->    >
->    > If you processed the RBFOX2 bam dataset then do the same thing for the input control dataset or *vice verca*.
->    {: .comment}
+>   > ### {% icon comment %} Do the Same thing for the input control data set.
+>   >
+>   > If you processed the RBFOX2 bam dataset then do the same thing for the input control dataset or *vice verca*.
+> {: .comment}
 >
 {: .hands_on}
 
@@ -600,19 +604,20 @@ Next we are going to use the generated bigWig files of our alignment ends and th
 > 4. Inspect the peaks (e.g., <b>chr11:peak_2</b> chr11:2152602-2152742)
 > ![igv_peak](../../images/clipseq_peak_igv.png "Inspection of a peak in IGV.")
 >
-> ### {% icon question %} Questions
->
-> 1. What are the ideal conditions that PEAKachu {% icon tool %} will call a peak.
-> 2. What are the challenges a peak caller has to face? What defines a peak (significantly enriched region)?
-> 3. Imagine you find a region that should be definitely be a peak but your peak caller does not spot it. What can you do?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. High read coverage in the region for the CLIP experiment and low read coverage in the region for the input control.
-> > 2. As simply explained in the previous answer, a peak (significantly binding region) should be significantly enriched in the CLIP experiment and not in the input control. However, the difficulty is to find out if two adjacent peaks are two distinct peaks or just one big peak. Furthermore, very small bumps can also be just an artifact of a way bigger peak. In addition, a high read coverage in the CLIP experiment and not in the input control does not necessarily mean that we have an enriched region. The significance depends on the background (noise) of our data. A good normalisation is therefore crucial.
-> > 3. From question two you might know now, that this is not an easy question. Every peak caller has different parameters that can be optimised for your type of problem. If you find a spot that you think should be certainly a peak, than play around with the parameters and options of the peak caller, or switch to another algorithm.
-> > {: .solution}
+>   > ### {% icon question %} Questions
+>   >
+>   > 1. What are the ideal conditions that PEAKachu {% icon tool %} will call a peak.
+>   > 2. What are the challenges a peak caller has to face? What defines a peak (significantly enriched region)?
+>   > 3. Imagine you find a region that should be definitely be a peak but your peak caller does not spot it. What can you do?
+>   >
+>   >   > ### {% icon solution %} Solution
+>   >   >
+>   >   > 1. High read coverage in the region for the CLIP experiment and low read coverage in the region for the input control.
+>   >   > 2. As simply explained in the previous answer, a peak (significantly binding region) should be significantly enriched in the CLIP experiment and not in the input control. However, the difficulty is to find out if two adjacent peaks are two distinct peaks or just one big peak. Furthermore, very small bumps can also be just an artifact of a way bigger peak. In addition, a high read coverage in the CLIP experiment and not in the input control does not necessarily mean that we have an enriched region. The significance depends on the background (noise) of our data. A good normalisation is therefore crucial.
+>   >   > 3. From question two you might know now, that this is not an easy question. Every peak caller has different parameters that can be optimised for your type of problem. If you find a spot that you think should be certainly a peak, than play around with the parameters and options of the peak caller, or switch to another algorithm.
+>   > {: .solution}
 > {: .question}
+>
 {: .hands_on}
 
 # Conclusion
