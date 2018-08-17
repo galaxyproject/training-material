@@ -185,7 +185,7 @@ Perhaps you've been asked to review an interactive tour, or maybe you just want 
 ) is usually a good bet.
 3. Start the Tour Builder plugin by clicking on the icon in your browser menu bar
 4. Copy the contents of the `tour.yaml` file into the Tour builder editor window
-5. Click `Save` and then
+5. Click `Save` and then `Run`
 
 ## How can I fix mistakes or expand an existing tutorial using the GitHub interface?
 
