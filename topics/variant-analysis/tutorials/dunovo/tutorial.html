@@ -139,14 +139,18 @@
             <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
             <ul>
             
-            <li>What is frequency of variants is so low that it is obscured by sequencing error rate?</li>
+            <li>What frequency of variants is so low that it is obscured by sequencing error rate?</li>
+            
+            <li>What are the different types of consensus sequences produced from duplex sequencing?</li>
             
             </ul>
 
             <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
             <ul>
             
-            <li>Learn about duplex sequencing and analysis of duplex reads</li>
+            <li>Processing raw duplex sequencing data into consensus sequences</li>
+            
+            <li>Find rare variants without relying on diploid assumptions</li>
             
             </ul>
 
@@ -176,295 +180,582 @@
             </ul>
             
 
-            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hr</p>
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 3 hr</p>
         </blockquote>
 
-        <p>This page explains how to perform discovery of low frequency variants from duplex sequencing data. As an example we use the <em>ABL1</em> dataset published by <a href="https://www.ncbi.nlm.nih.gov/pubmed/25849638">Schmitt and colleagues</a> (SRA accession <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR1799908">SRR1799908</a>).</p>
+        <h1 id="introduction">Introduction</h1>
 
-<h1 id="background">Background</h1>
+<p>This page explains how to perform discovery of low frequency variants from duplex sequencing data. As an example we use the <em>ABL1</em> dataset published by <a href="https://www.ncbi.nlm.nih.gov/pubmed/25849638">Schmitt and colleagues</a> (SRA accession <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR1799908">SRR1799908</a>).</p>
 
-<p>Calling low frequency variants from next generation sequencing (NGS) data is challenging due to significant amount of noise characteristic of these technologies. <a href="http://www.pnas.org/content/109/36/14508.short">Duplex sequencing</a> (DS) was designed to address this problem by increasing sequencing accuracy by over four orders of magnitude. DS uses randomly generated barcodes to uniquely tag each molecule in a sample. The tagged fragments are then PCR amplified prior to the preparation of a sequencing library, creating fragment families characterized by unique combination of barcodes at both 5’ and 3’ ends:</p>
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
 
-<blockquote>
-  <p><a href="http://www.pnas.org/content/109/36/14508#F1"><img src="../../images/ds.png" alt="duplex"></a></p>
+<ol id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a>    <ol>
+      <li><a href="#background" id="markdown-toc-background">Background</a></li>
+      <li><a href="#how-to-use-this-tutorial" id="markdown-toc-how-to-use-this-tutorial">How to use this tutorial</a></li>
+    </ol>
+  </li>
+  <li><a href="#generating-consensus-sequences" id="markdown-toc-generating-consensus-sequences">Generating consensus sequences</a>    <ol>
+      <li><a href="#getting-data-in-and-assessing-quality" id="markdown-toc-getting-data-in-and-assessing-quality">Getting data in and assessing quality</a></li>
+      <li><a href="#processing-reads-into-duplex-consensus-sequences-with-du-novo" id="markdown-toc-processing-reads-into-duplex-consensus-sequences-with-du-novo">Processing reads into duplex consensus sequences with Du Novo</a></li>
+      <li><a href="#filtering-consensuses" id="markdown-toc-filtering-consensuses">Filtering consensuses</a></li>
+    </ol>
+  </li>
+  <li><a href="#calling-variants-with-duplex-consensus-sequences" id="markdown-toc-calling-variants-with-duplex-consensus-sequences">Calling variants with duplex consensus sequences</a>    <ol>
+      <li><a href="#mapping-the-reads" id="markdown-toc-mapping-the-reads">Mapping the reads</a></li>
+      <li><a href="#calling-the-variants" id="markdown-toc-calling-the-variants">Calling the variants</a></li>
+      <li><a href="#results" id="markdown-toc-results">Results</a></li>
+    </ol>
+  </li>
+  <li><a href="#calling-variants-with-single-strand-consensus-sequences" id="markdown-toc-calling-variants-with-single-strand-consensus-sequences">Calling variants with single strand consensus sequences</a>    <ol>
+      <li><a href="#re-running-analyses-with-workflows" id="markdown-toc-re-running-analyses-with-workflows">Re-running analyses with workflows</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
 
-  <p>The logic of duplex sequencing. From <a href="http://www.pnas.org/content/109/36/14508.short">Schmitt:2012</a>.</p>
 </blockquote>
 
-<p>The computational analysis of DS data (Part <code class="highlighter-rouge">C</code> in the figure above) produces two kinds of output:</p>
+<h2 id="background">Background</h2>
 
-<ul>
-  <li>Single Strand Consensus Sequences (SSCS; panel <code class="highlighter-rouge">iv</code> in the figure above);</li>
-  <li>Duplex Consensus Sequences (DCS; panel <code class="highlighter-rouge">v</code> in the figure above).</li>
-</ul>
+<h3 id="finding-rare-variants">Finding rare variants</h3>
 
-<p>The DCSs have the ultimate accuracy, yet the SSCSs can also be very useful when ampliconic DNA is used as an input to a DS experiment. Let us illustrate the utility of SSCSs with the following example. Suppose one is interested in quantifying variants in a virus that has a very low titer in body fluids. Since DS procedure requires a substantial amount of starting DNA (between <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4271547/">between 0.2 and 3 micrograms</a>) the virus needs to be enriched. This can be done, for example, with a PCR designed to amplify the entire genome of the virus. Yet the problem is that during the amplification heterologous strands will almost certainly realign to some extent forming heteroduplex molecules:</p>
+<p>Most popular variant callers focus on the common case of sequencing a diploid individual to find heterozygous and homozygous variants. This is a well-studied problem with its own challenges, but at least you can expect your variants to be present in either 100%, 50%, or 0% of your sample DNA. If you observe a variant present in 99%, 56%, or 2% of the reads at a site, you can probably assume the allele is actually present at 100%, 50%, or 0%, respectively, in your sample.</p>
 
-<blockquote>
-  <p><img src="../../images/het.png" alt="hd"></p>
+<p>But in this tutorial, we’re looking for <strong>rare variants</strong>. So our true frequency might actually be 13%, 1%, or even 0.4%. The challenge then becomes distinguishing these situations from sequencing errors. Next-generation sequencers produce noise at this level, making it challenging to make this distinction in data produced with standard resequencing methods.</p>
 
-  <p>Heteroduplex formation in ampliconic templates. Image by Barbara Arbeithuber from <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1039-4">Stoler:2016</a>. Here there are two distinct types of viral genomes: carrying <code class="highlighter-rouge">A</code> and <code class="highlighter-rouge">G</code>. Because the population of genomes is enriched via PCR, heteroduplex formation takes place, skewing frequency estimates performed using DCSs.</p>
+<h3 id="duplex-sequencing">Duplex sequencing</h3>
+
+<p><a href="http://www.pnas.org/content/109/36/14508.short">Duplex sequencing</a> is a method that addresses the problem of distinguishing sequencing signal from noise. It can increase sequencing accuracy by over four orders of magnitude. Duplex sequencing uses randomly generated oligomers to uniquely tag each fragment in a sample after random shearing. The tagged fragments are then PCR amplified prior to sequencing, so that many reads can be obtained from each original molecule. The tags in each read can then be used to identify which original fragment the read came from. Identifying multiple reads from each fragment allows building a consensus of the original sequence of the fragment, eliminating errors.</p>
+
+<p>The key to duplex sequencing, as opposed to other types of consensus-based methods (<a href="https://www.nature.com/articles/nrg.2017.117">review here</a>), is that both ends of the original fragment are tagged such that its strands can be distinguished. Knowing which strand each read comes from allows us to recognize errors even in the first round of PCR.</p>
+
+<p>Processing the raw reads into consensus sequences consists of four main steps:</p>
+<ol>
+  <li>Group reads by their tags.</li>
+  <li>Align reads in the same tag group.</li>
+  <li>Build single-strand consensus sequences (<strong>SSCS</strong>) of reads coming from the same original strand.</li>
+  <li>Build duplex consensus sequences (<strong>DCS</strong>) from pairs of SSCS.</li>
+</ol>
+
+<p>Du Novo is a tool which can carry out these steps. Unlike most other such tools, it can do so without the use of a reference sequence, and it can correct for errors in the tags which can contribute to data loss.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-terminology"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Terminology</h3>
+
+  <p>Du Novo processes the tags from each fragment by concatenating them into a single <strong>barcode</strong>.</p>
+
+  <ul>
+    <li>For a standard protocol with two 12bp tags, this results in a 24bp barcode which identifies each family.</li>
+  </ul>
+
 </blockquote>
 
-<p>In the image above there are two alleles: green (A) and red (G). After PCR a fraction of molecules are in heteroduplex state. If this PCR-derived DNA is now used as the starting material for a DS experiment, the heteroduplex molecules will manifest themselves as having an <code class="highlighter-rouge">N</code> base at this site (because <em>Du Novo</em> interprets disagreements as <code class="highlighter-rouge">N</code>s during consensus generation). So, DSCs produced from this dataset will have <code class="highlighter-rouge">A</code>, <code class="highlighter-rouge">G</code>, and <code class="highlighter-rouge">N</code> at the polymorphic site. Yet, SSCSs will only have <code class="highlighter-rouge">A</code> and <code class="highlighter-rouge">G</code>. Thus SSCS will give a more accurate estimate of the allele frequency at this site in this particular case. In <em>Du Novo</em> SSCSs are generated when the <strong>Output single-strand consensus sequences</strong> option of <strong>Du Novo: Make consensus reads</strong> tool is set to <code class="highlighter-rouge">Yes</code> (see <a href="#generating-duplex-consensus-sequences-dcs">here</a>).</p>
+<p><a href="http://www.pnas.org/content/109/36/14508.short">Schmitt <em>et al.</em> 2012</a> provides this overview of the whole method:
+<img src="../../images/ds.png" alt="duplex" /></p>
+
+<p><strong>Figure 1:</strong> The logic of duplex sequencing. The computational process is shown in part <strong>C</strong>.</p>
+
+<h3 id="the-value-of-single-strand-consensus-sequences">The value of single-strand consensus sequences</h3>
+
+<p>The DCSs have the ultimate accuracy, yet the SSCSs can also be very useful when ampliconic DNA is used as an input to a duplex experiment. Let us illustrate the utility of SSCSs with the following example. Suppose one is interested in quantifying variants in a virus that has a very low titer in body fluids. Since the duplex procedure requires a substantial amount of starting DNA (between <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4271547/">between 0.2 and 3 micrograms</a>) the virus needs to be enriched. This can be done, for example, with a PCR designed to amplify the entire genome of the virus. Yet the problem is that during the amplification heterologous strands will almost certainly realign to some extent forming heteroduplex molecules:</p>
+
+<p><img src="../../images/het.png" alt="hd" height="444px" width="605px" /></p>
+
+<p><strong>Figure 2:</strong> Heteroduplex formation in ampliconic templates. Image by Barbara Arbeithuber from <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1039-4">Stoler <em>et al.</em> 2016</a>. Here there are two distinct types of viral genomes: carrying <code class="highlighter-rouge">A</code> and <code class="highlighter-rouge">G</code>. Because the population of genomes is enriched via PCR, heteroduplex formation takes place, skewing frequency estimates performed using DCSs.</p>
+
+<p>In the image above there are two alleles: green (<code class="highlighter-rouge">A</code>) and red (<code class="highlighter-rouge">G</code>). After PCR a fraction of molecules are in heteroduplex state. If this PCR-derived DNA is now used as the starting material for a DS experiment, the heteroduplex molecules will manifest themselves as having an <code class="highlighter-rouge">N</code> base at this site (because Du Novo interprets disagreements as <code class="highlighter-rouge">N</code>s during consensus generation). So, DSCs produced from this dataset will have <code class="highlighter-rouge">A</code>, <code class="highlighter-rouge">G</code>, and <code class="highlighter-rouge">N</code> at the polymorphic site. Yet, SSCSs will only have <code class="highlighter-rouge">A</code> and <code class="highlighter-rouge">G</code>. Thus SSCS will give a more accurate estimate of the allele frequency at this site in this particular case. In Du Novo SSCSs are generated when the <i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Output single-strand consensus sequences</em> option of <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Du Novo: Make consensus reads</strong> tool is set to <code class="highlighter-rouge">Yes</code> (see <a href="#making-consensus-sequences">below</a>).</p>
 
 <h2 id="how-to-use-this-tutorial">How to use this tutorial</h2>
 
-<p>The entire analysis described here is accessible as a <a href="https://usegalaxy.org/u/aun1/h/duplex-analysis-abl1">Galaxy history</a> (by clicking on this link you can create your own copy and play with it).</p>
+<p>The entire analysis described here is accessible as a <a href="https://usegalaxy.org/u/nstoler/h/du-novo-gtn-tutorial">Galaxy history</a> that you can copy and play with.</p>
 
-<p>This analysis (and consequently the Galaxy’s history) can be divided into three parts</p>
-<ol>
-  <li>Consensus generation from initial sequencing reads;</li>
-  <li>Analysis of Duplex Consensus Sequences (DCS);</li>
-  <li>Analysis of Single Strand Consensus Sequences (SSCS):</li>
-</ol>
-
-<blockquote>
-  <p><img src="../../images/steps.png" alt="steps"></p>
-
-  <p>Analysis outline</p>
+<blockquote class="tip">
+  <h3 id="tip-tip-running-the-tools"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Running the tools</h3>
+  <ul>
+    <li>Leave all parameters on their default settings, unless instructed otherwise.
+      <blockquote class="comment">
+        <h3 id="comment-helping-du-novo"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Helping Du Novo</h3>
+        <p>But if you’d like to help improve Du Novo, consider checking <code class="highlighter-rouge">Yes</code> under <i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Send usage data</em>.</p>
+      </blockquote>
+    </li>
+  </ul>
 </blockquote>
 
-<h1 id="start-generating-consensus-sequences">Start: Generating consensus sequences</h1>
+<p>This analysis can be divided into three parts:</p>
+<ol>
+  <li><a href="#generating-consensus-sequences">Generating consensus sequences</a></li>
+  <li><a href="#calling-variants-with-duplex-consensus-sequences">Calling variants with duplex consensus sequences</a></li>
+  <li><a href="#calling-variants-with-single-strand-consensus-sequences">Calling variants with single strand consensus sequences</a></li>
+</ol>
 
-<p>The starting point of the analyses are sequencing reads (usually in <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq</a> format) produced from a duplex sequencing library.</p>
+<p>Here are the steps, displayed as the Galaxy history you’ll end up with if you follow the instructions:</p>
+<ul>
+  <li>Note: Galaxy histories show the first step at the bottom!</li>
+</ul>
+
+<p><img src="../../images/history-dunovo.png" alt="steps" /></p>
+
+<p><strong>Figure 3:</strong> Analysis outline</p>
+
+<h1 id="generating-consensus-sequences">Generating consensus sequences</h1>
+
+<p>The starting point of the analysis is sequencing reads (in <a href="https://en.wikipedia.org/wiki/FASTQ_format">FASTQ</a> format) produced from a duplex sequencing library.</p>
 
 <h2 id="getting-data-in-and-assessing-quality">Getting data in and assessing quality</h2>
 
-<p>We uploaded <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/">Schmitt:2015</a>) data directly from SRA as shown in <a href="https://vimeo.com/121187220">this screencast</a>. This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse) to obtain the following plots:</p>
+<p>We uploaded the <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/">Schmitt <em>et al.</em> 2015</a> data directly from SRA as shown in <a href="https://vimeo.com/121187220">this screencast</a>.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-importing-the-raw-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Importing the raw data</h3>
+
+  <p>You can obtain the reads from this dataset by copying <a href="https://usegalaxy.org/u/nstoler/h/srr1799908---schmitt-2015">this history</a>.</p>
+  <ol>
+    <li>Make sure you’re logged into <a href="https://usegalaxy.org">Galaxy</a>.</li>
+    <li>Go to <a href="https://usegalaxy.org/u/nstoler/h/srr1799908---schmitt-2015">the history</a>.</li>
+    <li>Click on <strong>Import history</strong> in the upper right.</li>
+  </ol>
+
+  <p>Or, if you’d like to use a different Galaxy instance, you can import it:</p>
+  <ol>
+    <li>Click on the gear icon at the top of the <strong>History</strong> pane.</li>
+    <li>Click on “Import from File” at the bottom of the menu.</li>
+    <li>Enter this link in the box under <strong>Archived History URL</strong>:<br />
+<code class="highlighter-rouge">https://usegalaxy.org/history/export_archive?id=7ac09d1db287dbba</code></li>
+  </ol>
+</blockquote>
+
+<p>This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>FastQC</strong> <a href="../../../../topics/sequence-analysis/tutorials/quality-control/tutorial.html#quality-check">here</a>.</p>
+
+<p>This gave us the following plots:</p>
 
 <table>
-  <thead>
-    <tr>
-      <th style="text-align: left"> </th>
-      <th style="text-align: left"> </th>
-    </tr>
-  </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><img src="../../images/abl1-f-qc.png" alt="Quality scores across all bases: foward"></td>
-      <td style="text-align: left"><img src="../../images/abl1-r-qc.png" alt="Quality scores across all bases: reverse"></td>
-    </tr>
-    <tr>
-      <td style="text-align: left">
-<strong>A</strong>. Forward</td>
-      <td style="text-align: left">
-<strong>B</strong>. Reverse</td>
+      <td><img src="../../images/abl1-f-qc.png" alt="Quality scores across all bases: foward" /></td>
+      <td><img src="../../images/abl1-r-qc.png" alt="Quality scores across all bases: reverse" /></td>
     </tr>
   </tbody>
 </table>
 
+<p><strong>Figure 4:</strong> FastQC assessment of the quality of the raw reads. <strong>Left:</strong> Forward reads. <strong>Right:</strong> Reverse reads.</p>
+
 <p>One can see that these data are of excellent quality and no additional processing is required before we can start the actual analysis.</p>
 
-<h2 id="generating-duplex-consensus-sequences-dcs">Generating Duplex Consensus Sequences (DCS)</h2>
+<h2 id="processing-reads-into-duplex-consensus-sequences-with-du-novo">Processing reads into duplex consensus sequences with Du Novo</h2>
 
-<p>From tool section <strong>NGS: Du Novo</strong> we ran:</p>
+<p>Now we are ready to collapse the raw reads into duplex consensus sequences.</p>
 
-<ol>
-  <li>
-<strong>Make families</strong> (<code class="highlighter-rouge">Tag length = 12</code>; <code class="highlighter-rouge">Invariant sequence length = 5</code>)</li>
-  <li>
-<strong>Align families</strong> (This is <strong>the most</strong> time consuming step of the workflow. It may take multiple days to run. The <em>ABL1</em> example took 34 hours and 7 minutes to finish. )</li>
-  <li>
-<strong>Make consensus reads</strong> (<code class="highlighter-rouge">Minimum reads per family = 3</code>; <code class="highlighter-rouge">Minimum base quality = 20</code>; <code class="highlighter-rouge">FASTQ format = Sanger</code> ; <code class="highlighter-rouge">Output single-strand consensus sequences = Yes</code> <img class="emoji" title=":point_left:" alt=":point_left:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f448.png" height="20" width="20"> This is particularly important as explained below; also see the following image)</li>
-</ol>
+<blockquote class="tip">
+  <h3 id="tip-tip-finding-du-novo"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Finding Du Novo</h3>
+  <ul>
+    <li>The tools in this portion of the tutorial can all be found in the <strong>NGS: Du Novo</strong> section.</li>
+  </ul>
+</blockquote>
 
-<p>This is the exact image of the <strong>Make consensus reads</strong> interface:</p>
+<h3 id="sorting-reads-into-families">Sorting reads into families</h3>
 
-<blockquote>
-  <p><img src="../../images/makeCons.png" alt="Make consesni"></p>
+<p>The <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Du Novo: Make families</strong> tool will separate the 12bp tags from each read pair and concatenate them into a 24bp barcode. Then it will use the barcodes to sort the reads into families that all descend from the same original fragment.</p>
 
-  <p>Making DCS and SSCS. <strong>Note</strong> that <strong>Output single-strand consensus sequences</strong> is set to <code class="highlighter-rouge">Yes</code>. <a href="#background">Above</a> we explained why single-strand consensus sequences (SSCS) may be important in some applications. <a href="#analysis-of-single-strand-consensus-data">Below</a> we show how they can be used.</p>
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-sorting-reads-into-families"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Sorting reads into families</h3>
+
+  <p>Run <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Du Novo: Make families</strong> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Sequencing reads, mate 1</em>: <code class="highlighter-rouge">1: SRR1799908_forward</code></li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Sequencing reads, mate 2</em>: <code class="highlighter-rouge">2: SRR1799908_reverse</code></li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Tag length</em>: <code class="highlighter-rouge">12</code></li>
+  </ul>
+
+  <p>Output: <code class="highlighter-rouge">7: Du Novo: Make families on data 2 and data 1</code></p>
+</blockquote>
+
+<h3 id="correcting-barcodes">Correcting barcodes</h3>
+
+<p>The grouping reads based on barcode relies on exact barcode matches. Any PCR or sequencing error in the barcode sequence will prevent the affected reads from being joined with their other family members.</p>
+
+<p>Du Novo includes a tool which can correct most of these errors and recover the affected reads. This can increase the final yield of duplex consensus reads by up to 11% (Stoler <em>et al.</em> 2018, in preparation).</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-correcting-barcodes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Correcting barcodes</h3>
+
+  <p>Run <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Du Novo: Correct barcodes</strong> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Input reads</em>: <code class="highlighter-rouge">7: Du Novo: Make families on data 2 and data 1</code></li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Maximum differences</em>: <code class="highlighter-rouge">3</code></li>
+  </ul>
+
+  <p>Output: <code class="highlighter-rouge">8: Du Novo: Correct barcodes on data 7</code></p>
+</blockquote>
+
+<h3 id="aligning-families">Aligning families</h3>
+
+<p>After grouping reads that came from the same original fragment, we need to align them with each other. This next tool will perform a multiple sequence alignment on each family.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-analysis-bottleneck"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Analysis bottleneck</h3>
+  <p>This is by far the most time-consuming step.</p>
+
+  <p>On this dataset, it took 2 hours to complete when run on <a href="https://usegalaxy.org/">Galaxy Main</a>.</p>
+  <ul>
+    <li>At the time, Galaxy allocated 6 cores to the job.</li>
+  </ul>
+</blockquote>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-aligning-families"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Aligning families</h3>
+
+  <p>Run <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Du Novo: Align families</strong> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Input reads</em>: <code class="highlighter-rouge">8: Du Novo: Correct barcodes on data 7</code></li>
+    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Multiple sequence aligner</em>: <code class="highlighter-rouge">Kalign2</code></li>
+  </ul>
+
+  <p>Output: <code class="highlighter-rouge">9: Du Novo: Align families on data 8</code></p>
+</blockquote>
+
+<h3 id="making-consensus-sequences">Making consensus sequences</h3>
+
+<p>Now, we need to collapse the aligned reads into consensus sequences. This next tool will process each group of aligned reads that came from the same single-stranded family into a consensus. Then it will align the consensus sequences from the two strands of each original molecule, and call a consensus between them.</p>
+
+<p>Normally, the tool only produces the final double-stranded consensus sequences. But we will make use of the single-stranded consensus sequences <a href="#calling-variants-with-single-strand-consensus-sequences">later</a>, so we’ll tell it to keep those as well.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-making-consensus-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Making consensus sequences</h3>
+
+  <p>Run <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Du Novo: Make consensus reads</strong> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Aligned input reads</em>: <code class="highlighter-rouge">9: Du Novo: Align families on data 8</code></li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Minimum reads for a consensus sequence</em>: <code class="highlighter-rouge">3</code></li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Consensus % threshold</em>: <code class="highlighter-rouge">0.7</code></li>
+    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Output format</em>: <code class="highlighter-rouge">FASTQ</code></li>
+    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Output single-strand consensus sequences as well</em>: <code class="highlighter-rouge">Yes</code></li>
+  </ul>
+
+  <p>Outputs:</p>
+  <ul>
+    <li><code class="highlighter-rouge">10: Du Novo: Make consensus reads on data 9 (mate 1)</code></li>
+    <li><code class="highlighter-rouge">11: Du Novo: Make consensus reads on data 9 (mate 2)</code></li>
+    <li><code class="highlighter-rouge">12: Du Novo: Make consensus reads on data 9 (SSCS mate 1)</code></li>
+    <li><code class="highlighter-rouge">13: Du Novo: Make consensus reads on data 9 (SSCS mate 2)</code></li>
+  </ul>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-setting-output-formats"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Setting output formats</h3>
+
+  <p>You may have to set the datatype of the outputs from <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Du Novo: Make consensus reads</strong> tool.</p>
+
+  <p>Versions below 2.16 only set the datatype to <code class="highlighter-rouge">fastq</code>, not the more specific <code class="highlighter-rouge">fastqsanger</code>. Many tools (like <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Map with BWA-MEM</strong>) won’t accept FASTQ input without it specifying what subtype it is.</p>
+
+  <ol>
+    <li>In your history, click on the pencil icon next to the dataset name.</li>
+    <li>Click on the <strong>Datatypes</strong> tab.</li>
+    <li>In the <strong>Change datatype</strong> pane, click on the dropdown where it says <code class="highlighter-rouge">fastq</code>.</li>
+    <li>Enter <code class="highlighter-rouge">fastqsanger</code>, then click the <strong>Change datatype</strong> button in the upper right of the pane.</li>
+  </ol>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-where-do-the-fastq-quality-scores-come-from"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Where do the FASTQ quality scores come from?</h3>
+
+  <p>There is no easy way to assign a PHRED score to a consensus base derived from many duplex reads.</p>
+
+  <p>So Du Novo does not attempt to give a meaningful score. It assigns the same arbitrary score to all bases.</p>
+  <ul>
+    <li>It produces FASTQ for compatibility, but the output contains no more information than a FASTA file.</li>
+  </ul>
+
+  <p>You may have noticed the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Output PHRED score</em> parameter in the <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Du Novo: Make consensus reads</strong> tool. This allows you to specify which score to assign to (all) the bases.</p>
+
 </blockquote>
 
 <h2 id="filtering-consensuses">Filtering consensuses</h2>
 
-<p>The <em>Du Novo</em> algorithm occasionally inserts<code class="highlighter-rouge">N</code>and/or <a href="https://en.wikipedia.org/wiki/Nucleic_acid_notation">IUPAC notations</a> at sites where a definitive base cannot be identified according to the major rule consensus. We however do not want such bases when we call variants. The tool <strong>Sequence Content Trimmer</strong> will help with filtering these out. Here are the parameters we used:</p>
+<p>You may have realized that when calling a “consensus” between two sequences, if the two disagree on a base, there’s no way to know which is correct. So in these situations, Du Novo uses the <a href="https://en.wikipedia.org/wiki/Nucleic_acid_notation">IUPAC ambiguity letter</a> for the two different bases (e.g. <code class="highlighter-rouge">W</code> = <code class="highlighter-rouge">A</code> or <code class="highlighter-rouge">T</code>). Also, when calling single-stranded consensus sequences, if there aren’t enough high-quality bases to call a position (<a href="#-hands-on-making-consensus-sequences">above</a>, we set this threshold to 70%), it gives an <code class="highlighter-rouge">N</code>.</p>
 
-<blockquote>
-  <p><img src="../../images/contentTrimmer.png" alt="ContentTrimmer"></p>
+<p>This information could be useful for some analyses, but not for our variant calling. The tool <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Sequence Content Trimmer</strong> will help with filtering these out. With the settings below, it will move along the read, tracking the frequency of ambiguous (non-ACGT) bases in a 10bp window. If it sees more than 2 ambiguous bases in a window, it will remove the rest of the read, starting with the first offending base in the window. We’ll also tell it to remove entirely any read pair containing a read that got trimmed to less than 50bp.</p>
 
-  <p>Sequence Content Trimmer settings . Where:<br>- <code class="highlighter-rouge">Paired reads = Paired</code> (because DCSs are reported as forward and reverse)<br>- <code class="highlighter-rouge">Bases to filter on = NRYSWKMBDHV</code> (all ambiguous nucleotides)<br>- <code class="highlighter-rouge">Frequency threshold = 0.2</code> (A window /see the next parameter below/ cannot have more than 20% of ambiguous bases)<br>- <code class="highlighter-rouge">Size of the window = 10</code> (Size of the window)<br>- <code class="highlighter-rouge">Invert filter bases = No</code><br>- <code class="highlighter-rouge">Set a minimum read length = 50</code> (We do not want <em>very</em> short reads)</p>
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-filtering-the-consensus-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filtering the consensus sequences</h3>
+
+  <p>Run <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Sequence Content Trimmer</strong> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Paired reads?</em>: <code class="highlighter-rouge">Paired</code></li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Input reads (mate 1)</em>: <code class="highlighter-rouge">10: Du Novo: Make consensus reads on data 9 (mate 1)</code></li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Input reads (mate 2)</em>: <code class="highlighter-rouge">11: Du Novo: Make consensus reads on data 9 (mate 2)</code></li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Bases to filter on</em>: <code class="highlighter-rouge">ACGT</code></li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Frequency threshold</em>: <code class="highlighter-rouge">0.2</code></li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Size of the window</em>: <code class="highlighter-rouge">10</code></li>
+    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Invert filter bases</em>: <code class="highlighter-rouge">Yes</code></li>
+    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Set a minimum read length</em>: <code class="highlighter-rouge">Yes</code></li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Minimum read length</em>: <code class="highlighter-rouge">50</code></li>
+  </ul>
+
+  <p>Outputs:</p>
+  <ul>
+    <li><code class="highlighter-rouge">14: Sequence Content Trimmer on data 10 and data 11</code></li>
+    <li><code class="highlighter-rouge">15: Sequence Content Trimmer on data 10 and data 11</code></li>
+  </ul>
 </blockquote>
 
-<h2 id="generating-fastq">Generating fastq</h2>
+<h1 id="calling-variants-with-duplex-consensus-sequences">Calling variants with duplex consensus sequences</h1>
 
-<p><a href="#filtering-consensuses">The previous step</a> filters forward and reverse DCSs and reports them in <a href="https://en.wikipedia.org/wiki/FASTA_format">FASTA</a> format. Yet the downstream tools require <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq</a> format. To address this we convert FASTA into fastq using <strong>Combine FASTA and QUAL</strong> from tool section <strong>NGS: QC and manipulation</strong>. In this case the quality values are filled in with the maximum allowed value of 93 (essentially we fake them here), which is fine as we will not rely on quality scores in the rest of the analysis.</p>
+<p>At this point we have trimmed DCSs. We can now proceed to call variants. This involves aligning the variants against the reference genome, then counting variants.</p>
 
-<blockquote>
-  <p><img src="../../images/combineFandQ.png" alt="ContentTrimmer"></p>
+<p>We’re not specifically interested in the reference sequence, since all we care about is sequence content of the consensus reads. But we’ll be using the reference sequence to figure out where all the reads come from. This lets us stack them on top of each other, with equivalent bases lined up in columns. Then we can step through each column, count how many times we see each base, and and compile a list of variants.</p>
 
-  <p>Combine FASTA and QUAL. <strong>Note</strong> that here two datasets (#8 and #9) are selected simultaneously because we clicked the multiple datasets button the left of the <strong>FASTA File</strong> dropdown:<br> <img src="../../images/multiDataset.png" alt="MultipleDataset icon"></p>
-</blockquote>
+<h2 id="mapping-the-reads">Mapping the reads</h2>
 
-<h2 id="calling-variants">Calling variants</h2>
+<h3 id="align-against-the-genome-with-bwa-mem">Align against the genome with BWA-MEM</h3>
 
-<p>At this point we have trimmed DCSs in fastq format. We can now proceed to calling variants. This involves the following steps:</p>
+<p>Here, we’ll use <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Map with BWA-MEM</strong> to map the DCS reads to the human reference genome.</p>
 
-<ol>
-  <li><a href="#align-against-genome-with-bwa-and-bwa-mem">Align against reference genome</a></li>
-  <li>
-<a href="#merging">Merge results of multiple mappers</a> <img class="emoji" title=":point_left:" alt=":point_left:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f448.png" height="20" width="20"> This step is only useful if one uses multiple mappers (which we do here to show concordance. But this is not strictly necessary.)</li>
-  <li><a href="#left-aligning-indels">Left aligning indels</a></li>
-  <li><a href="#tabulating-the-differences">Tabulate the differences</a></li>
-</ol>
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-align-with-bwa-mem"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Align with BWA-MEM</h3>
 
-<h3 id="align-against-genome-with-bwa-and-bwa-mem">Align against genome with <strong>BWA</strong> and <strong>BWA-MEM</strong>
-</h3>
+  <p>Run <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Map with BWA-MEM</strong> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Using reference genome?</em>: <code class="highlighter-rouge">Human (Homo sapiens) (b38): hg38</code></li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Select first set of reads</em>: <code class="highlighter-rouge">14: Sequence Content Trimmer on data 10 and data 11</code></li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Select second set of reads</em>: <code class="highlighter-rouge">15: Sequence Content Trimmer on data 10 and data 11</code></li>
+  </ul>
 
-<p>Here we use two mappers for added reliability (this is not necessary in most situations as long as you use the right mapper for input data). To differentiate between results produced by each mapper we assign readgroups (this is done by clicking on <strong>Set read groups information</strong> dropdown). For example, for <strong>BWA-MEM</strong> you would set parameters like this:</p>
-
-<blockquote>
-  <p><img src="../../images/bwa-mem.png" alt="BWA-MEM input and parameters"></p>
-
-  <p>Running BWA-MEM. <strong>Note</strong> that we are comparing DCSs against human genome version <code class="highlighter-rouge">hg38</code>, use forward and reverse DCSs are the <code class="highlighter-rouge">first</code> and <code class="highlighter-rouge">second</code> set of reads. Readgroup <strong>SM</strong> and <strong>ID</strong> tags are set <code class="highlighter-rouge">bwa-mem</code>.</p>
-</blockquote>
-
-<p>We then repeat essentially the same with <strong>BWA</strong>:</p>
-
-<blockquote>
-  <p><img src="../../images/bwa.png" alt="BWA input and parameters"></p>
-
-  <p>Running BWA. <strong>Note</strong> here we use <code class="highlighter-rouge">bwa</code> as the readgroup <strong>ID</strong> and <strong>SM</strong> tags.</p>
-</blockquote>
-
-<h3 id="merging">Merging</h3>
-
-<p>Since we have used two mappers - we have two BAM datasets. Yet because we have set readgroups we can now merge them into a single BAM dataset. This is because the individual reads will be labelled with readgroups (you will see how it will help later). To merge we use <strong>MergeSamFiles</strong> from tool section <strong>NGS: Picard</strong>:</p>
-
-<blockquote>
-  <p><img src="../../images/mergeSamFiles.png" alt="MergeSamFiles input and parameters"></p>
-
-  <p>Merging BAM datasets.</p>
+  <p>Output: <code class="highlighter-rouge">16: Map with BWA-MEM on data 15 and data 14 (mapped reads in BAM format)</code></p>
 </blockquote>
 
 <h3 id="left-aligning-indels">Left Aligning indels</h3>
 
-<p>To normalize the positional distribution of indels we use <strong>Left Align</strong> utility (<strong>NGS: Variant Analysis</strong>) from <a href="https://github.com/ekg/freebayes#indels">FreeBayes</a> package. This is necessary to avoid erroneous polymorphisms flanking regions with indels (e.g., in low complexity loci):</p>
+<p>To normalize the positional distribution of indels we use the <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>BamLeftAlign</strong> utility from the <a href="https://github.com/ekg/freebayes#indels">FreeBayes</a> package. You can find it in the <strong>NGS: Variant Analysis</strong> section. This is necessary to avoid erroneous polymorphisms flanking regions with indels (e.g., in low complexity loci):</p>
 
-<blockquote>
-  <p><img src="../../images/leftAlign.png" alt="Left Aligh input and parameters"></p>
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-left-align-indels"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Left-align indels</h3>
 
-  <p>Left aligning indels. <strong>Note</strong> here we use <code class="highlighter-rouge">hg38</code> as well. Obviously, one must use the same genome built you have aligned against with <strong>BWA-MEM</strong> and <strong>BWA</strong>.</p>
+  <p>Run <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>BamLeftAlign</strong> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Select alignment file in BAM format</em>: <code class="highlighter-rouge">16: Map with BWA-MEM on data 15 and data 14 (mapped reads in BAM format)</code></li>
+    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Using reference genome</em>: <code class="highlighter-rouge">Human (Homo sapiens): hg38</code>
+      <ul>
+        <li>The same genome we aligned to.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>Output: <code class="highlighter-rouge">17: BamLeftAlign on data 16 (alignments)</code></p>
 </blockquote>
 
-<h3 id="tabulating-the-differences">Tabulating the differences</h3>
+<h2 id="calling-the-variants">Calling the variants</h2>
 
-<p>To identify sites containing variants we use <strong>Naive Variant Caller (NVC)</strong> (tool section <strong>NGS: Variant Analysis</strong>) which produces a simple count of differences given coverage and base quality per site (remember that our qualities were “faked” during the conversion from FASTA to fastq and cannot be used here). So in the case of <em>ABL1</em> we set parameters as follow:</p>
+<p>Now we’ll use our aligned consensus reads to find variants.</p>
 
-<blockquote>
-  <p><img src="../../images/nvc.png" alt="Naive Variant Caller (NVC) input and parameters"></p>
+<p>Normally, in a diploid resequencing experiment, you would call variants relative to the reference. So, you’d report sites which are different from the reference (and whether they’re hetero- or homozygous).</p>
 
-  <p>Finding variants with NVC. Here:<br>- <code class="highlighter-rouge">Using reference genome = hg38</code> (As mentioned above, needs to be set to the same genome one have mapped against.)<br>- <code class="highlighter-rouge">Restrict to regions: Chromosome = chr9</code> (<em>ABL1</em> is on chromosome 9. We set this to prevent <strong>NVC</strong> from wandering across the genome to save time.)<br>- <code class="highlighter-rouge">Minimum number of reads needed to consider a REF/ALT = 0</code> (Trying to maximize the number of sites. We can filter later.)<br>- <code class="highlighter-rouge">Minimum base quality = 20</code> (This default and is irrelevant because of “faking” quality scores during the conversion from FASTA to fastq).<br>- <code class="highlighter-rouge">Minimum mapping quality = 20</code> (This is helpful because it prevents reads mapping to multiple locations from being included in the tabulation. Such reads will have mapping quality of 0.)<br>- <code class="highlighter-rouge">Ploidy = 1</code> (Ploidy is irrelevant here as it is a mixture of multiple genomes)<br>- <code class="highlighter-rouge">Only write out positions with possible alternate alleles = No</code> (We can filter later)<br>- <code class="highlighter-rouge">Report counts by strand = Yes</code> (This will be helpful to gauge the strand bias).</p>
+<p>In our case, we’re interested in <em>rare</em> variants. So what we’ll report is the sites where there is more than one allele, and what the frequency is of the less-common allele (the <strong>minor allele</strong>). This has the potential to include every small sequencing error (even though we’re using duplex, there still are errors). So to reduce the noise, we’ll set a lower threshold at 1% minor allele frequency (<strong>MAF</strong>).</p>
+
+<h3 id="finding-variants-in-the-alignment">Finding variants in the alignment</h3>
+
+<p>To identify sites containing variants we use the <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Naive Variant Caller (NVC)</strong> tool from the <strong>NGS: Variant Analysis</strong> section. This reads the alignment and counts the number of bases of each type at each site.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-count-the-variants"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Count the variants</h3>
+
+  <p>Run <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Naive Variant Caller (NVC)</strong> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>BAM file</em>: <code class="highlighter-rouge">17: BamLeftAlign on data 16 (alignments)</code></li>
+    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Using reference genome</em>: <code class="highlighter-rouge">hg38</code>
+      <ul>
+        <li>The same genome we aligned to.</li>
+      </ul>
+    </li>
+    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Insert Restrict to regions</em>: Click to add a region.</li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Chromosome</em>: <code class="highlighter-rouge">chr9</code>
+      <ul>
+        <li><em>ABL1</em> is on chr9. Restricting it to this region saves some processing time.</li>
+      </ul>
+    </li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Minimum base quality</em>: <code class="highlighter-rouge">0</code>
+      <ul>
+        <li>In our case, base quality <a href="#-where-do-the-fastq-quality-scores-come-from">isn’t meaningful</a>, so we set the threshold to 0.</li>
+      </ul>
+    </li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Minimum mapping quality</em>: <code class="highlighter-rouge">20</code></li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Ploidy</em>: <code class="highlighter-rouge">1</code>
+      <ul>
+        <li>Ploidy is irrelevant here as it is a mixture of multiple genomes.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>Output: <code class="highlighter-rouge">18: Naive Variant Caller (NVC) on data 17</code></p>
 </blockquote>
 
-<p>The <strong>NVC</strong> generates a <a href="https://en.wikipedia.org/wiki/Variant_Call_Format">VCF</a> file that can be viewed at genome browsers such as <a href="https://www.broadinstitute.org/igv/">IGV</a>. Yet one rarely finds variants by looking at genome browsers. The next step is to generate a tab-delimited dataset of nucleotide counts using <strong>Variant Annotator</strong> from tool section <strong>NGS: Variant Analysis</strong>. We ran it with the following parameters:</p>
+<p>The <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Naive Variant Caller (NVC)</strong> generates a <a href="https://en.wikipedia.org/wiki/Variant_Call_Format">VCF</a> file that can be viewed at genome browsers such as <a href="https://www.broadinstitute.org/igv/">IGV</a>. Yet one rarely finds variants by looking at genome browsers. We’ll want to use tools to search for variants that fit our criteria.</p>
 
-<blockquote>
-  <p><img src="../../images/va.png" alt="Variant Annotator input and parameters"></p>
+<h3 id="finding-minor-alleles">Finding minor alleles</h3>
 
-  <p>Annotating variable sites. Here <code class="highlighter-rouge">Coverage threshold = 10</code> (To reduce noise) and <code class="highlighter-rouge">Output stranded base counts = Yes</code> (to see strand bias)</p>
+<p>Now we’ll want to parse the VCF produced by the NVC, determine what the major and minor allele is at each site, and calculate their frequencies. The <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Variant Annotator</strong> from the <strong>NGS: Variant Analysis</strong> section can do this.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-read-the-variants-file"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Read the variants file</h3>
+
+  <p>Run <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Variant Annotator</strong> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Input variants from Naive Variants Detector</em>: <code class="highlighter-rouge">18: Naive Variant Caller (NVC) on data 17</code></li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Minor allele frequency threshold</em>: <code class="highlighter-rouge">0</code></li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Coverage threshold</em>: <code class="highlighter-rouge">10</code></li>
+    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Output stranded base counts</em>: <code class="highlighter-rouge">Yes</code>
+      <ul>
+        <li>To be able to filter for strand bias.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>Output: <code class="highlighter-rouge">19: Variant Annotator on data 18</code></p>
 </blockquote>
 
-<p>There are 3,264 lines in the output, which is clearly too much. Using <strong>Filter</strong> tool (tool section <strong>Filter and Sort</strong>) with expression <code class="highlighter-rouge">c16 &gt;= 0.01</code>(because column 16 contains minor allele frequency - MAF - and we are interested in those sites where MAF &gt;= 1%):</p>
+<h3 id="filtering-out-the-noise">Filtering out the noise</h3>
 
-<blockquote>
-  <p><img src="../../images/filter.png" alt="Filter and Sort input and parameters"></p>
+<p>Now we have a file containing the base counts for every site covered by at least 10 reads. We’d like to filter through this data to find sites with a reasonable chance of being a real variant, not sequencing error.</p>
 
-  <p>Filtering variable sites.</p>
+<p>The <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Variant Annotator</strong> produces a simple tab-delimited file, with one site per line. We can use the <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Filter</strong> tool from the <strong>Filter and Sort</strong> section to process this kind of file. We’ll use the filter <code class="highlighter-rouge">c16 &gt;= 0.01</code> to remove lines where the value in column 16 is less than 0.01. Column 16 contains the minor allele frequency, so this will remove all sites with a MAF less than 1%.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-filter-the-raw-variants-list"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter the raw variants list</h3>
+
+  <p>Run <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Filter</strong> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Filter</em>: <code class="highlighter-rouge">19: Variant Annotator on data 18</code></li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>With following condition</em>: <code class="highlighter-rouge">c16 &gt;= 0.01</code></li>
+    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Number of header lines to skip</em>: <code class="highlighter-rouge">1</code></li>
+  </ul>
+
+  <p>Output: <code class="highlighter-rouge">20: Filter on data 19</code></p>
 </blockquote>
 
-<p>will get that number to only 4 (showing just some of the columns):</p>
+<h2 id="results">Results</h2>
+
+<p>Now we’re down to just two sites:</p>
 
 <table>
   <thead>
     <tr>
-      <th style="text-align: left">Mapper</th>
-      <th style="text-align: right">Position (chr9)</th>
+      <th style="text-align: left">Position (chr9)</th>
       <th style="text-align: center">Major allele</th>
       <th style="text-align: center">Minor allele</th>
-      <th style="text-align: right">MAF</th>
+      <th style="text-align: center">MAF</th>
+    </tr>
+    <tr>
+      <th style="text-align: left">Column 3</th>
+      <th style="text-align: center">Column 14</th>
+      <th style="text-align: center">Column 15</th>
+      <th style="text-align: center">Column 16</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">bwa</td>
-      <td style="text-align: right">130,872,141</td>
+      <td style="text-align: left">130,872,141</td>
       <td style="text-align: center">G</td>
       <td style="text-align: center">A</td>
-      <td style="text-align: right">0.013</td>
+      <td style="text-align: center">0.01259</td>
     </tr>
     <tr>
-      <td style="text-align: left">bwa-mem</td>
-      <td style="text-align: right">130,872,141</td>
-      <td style="text-align: center">G</td>
-      <td style="text-align: center">A</td>
-      <td style="text-align: right">0.013</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">bwa</td>
-      <td style="text-align: right">130,880,141</td>
+      <td style="text-align: left">130,880,141</td>
       <td style="text-align: center">A</td>
       <td style="text-align: center">G</td>
-      <td style="text-align: right">0.479</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">bwa-mem</td>
-      <td style="text-align: right">130,880,141</td>
-      <td style="text-align: center">A</td>
-      <td style="text-align: center">G</td>
-      <td style="text-align: right">0.479</td>
+      <td style="text-align: center">0.47764</td>
     </tr>
   </tbody>
 </table>
 
-<p>We can see that results of both mappers agree very well. The reason we see these numbers grouped by mappers is because we have set the readgroups while <a href="#align-against-genome-with-bwa-and-bwa-mem">mapping</a>.</p>
+<p>The polymorphism we are interested in (and the one reported by <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/">Schmitt <em>et al.</em> 2015</a>) is at the position 130,872,141 and has a frequency of 1.3%. The other site (position 130,880,141) is a known common variant <a href="https://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?type=rs&amp;rs=rs2227985">rs2227985</a>, which is heterozygous in this sample.</p>
 
-<p>The polymorphism we are interested in (and the one reported by [Schmitt:2015] (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/)) is at the position 130,872,141 and has a frequency of 1.3%. The other site (position 130,880,141) is a known common variant <a href="https://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?type=rs&amp;rs=rs2227985">rs2227985</a>, which is heterozygous in this sample.</p>
+<h1 id="calling-variants-with-single-strand-consensus-sequences">Calling variants with single strand consensus sequences</h1>
 
-<h1 id="analysis-of-single-strand-consensus-data">Analysis of single strand consensus data</h1>
-
-<p>SSCSs are generated when the <strong>Output single-strand consensus sequences</strong> option of <strong>Du Novo: Make consensus reads</strong> tool is set to <code class="highlighter-rouge">Yes</code> (see <a href="#generating-duplex-consensus-sequences-dcs">here</a>). Analysis of SSCS data follows almost exactly the same trajectory. The only difference is that these <strong>do not</strong> come as forward and reverse. Instead <em>Du Novo</em> generates a single dataset. With this dataset we go through all the same steps:</p>
+<p>Analysis of SSCS data follows the exact same trajectory:</p>
 
 <ul>
   <li><a href="#filtering-consensuses">Filtering consensuses</a></li>
-  <li><a href="#generating-fastq">Generating fastq</a></li>
-  <li>
-<a href="#calling-variants">Calling variants</a>
- 	- <a href="#align-against-genome-with-bwa-and-bwa-mem">Aligning against genome</a> (here the difference is that one needs to choose a single end option and use a single dataset as input)
- 	- <a href="#merging">Merging</a>
- 	- <a href="#left-aligning-indels">Left aligning indels</a>
- 	- <a href="#tabulating-the-differences">Tabulating the differences</a>
-</li>
+  <li><a href="#calling-variants">Calling variants</a><br />
+ 	- <a href="#align-against-the-genome-with-bwa-mem">Aligning against genome</a><br />
+ 	- <a href="#left-aligning-indels">Left aligning indels</a><br />
+ 	- <a href="#tabulating-the-differences">Tabulating the differences</a></li>
 </ul>
 
-<h2 id="repeating-this-analysis-using-workflows">Repeating this analysis using workflows</h2>
+<blockquote class="tip">
+  <h3 id="tip-tip-re-running-with-the-same-settings"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Re-running with the same settings</h3>
 
-<p>The analysis described above can be rerun using a workflow. Workflow combined all steps into a single entity that only needs to be executed once. We provide two different workflows:</p>
+  <p>There’s a shortcut to avoid setting every parameter the second time you run a tool.</p>
 
-<ul>
-  <li>
-<em>Du Novo</em> analysis from reads (import from <a href="https://usegalaxy.org/u/aun1/w/duplex-analysis-from-reads">here</a>). This workflow uses fastq reads as input. It should be used if you analyze data for first time.</li>
-  <li>
-<em>Du Novo</em> analysis from aligned families (import from <a href="https://usegalaxy.org/u/aun1/w/copy-of-duplex-analysis-from-reads">here</a>). This workflow starts with aligned families. It should be used for re-analysis of already generated DCS and SSCS data.</li>
-</ul>
-
-<blockquote>
-  <p><a href="https://usegalaxy.org/u/aun1/w/duplex-analysis-from-reads"><img src="../../images/fromReads.png" alt="Workflow du Novo analysis from reads"></a></p>
-
-  <p>Starting from Reads</p>
+  <ol>
+    <li>In your history, click on an output of the first run to expand it.</li>
+    <li>Click on the button with the circular “re-run” arrows.</li>
+    <li>Now the parameters will all be the same as the last run. All you have to do is change the input file(s).</li>
+  </ol>
 </blockquote>
 
-<blockquote>
-  <p><a href="https://usegalaxy.org/u/aun1/w/copy-of-duplex-analysis-from-reads"><img src="../../images/fromDCS.png" alt="Workflow du Novo analysis from DCS/SSCS data"></a></p>
+<h2 id="re-running-analyses-with-workflows">Re-running analyses with workflows</h2>
 
-  <p>Starting from DCS/SSCS data</p>
+<p>Instead of manually re-running all the tools in the variant calling section, you can use a <strong>workflow</strong> to automatically run the same tools, but on the SSCS reads. Workflows let you run a chain of tools on different input data with a single click of a button. You can find more information on using workflows <a href="../../../introduction/tutorials/galaxy-intro-101/tutorial.html#run-workflow-on-different-data">here</a>.</p>
+
+<p>We’ve prepared two workflows which split the above analysis into two steps:</p>
+
+<ol>
+  <li><a href="https://usegalaxy.org/u/nstoler/w/du-novo-gtn-tutorial">Using Du Novo</a> to create consensus sequencs from raw reads.
+    <ul>
+      <li>This will generate trimmed DCS and SSCS files from raw sequencing data.</li>
+      <li>This does not include the FastQC step. You should always run FastQC on your raw reads first, to check the quality of your sequencing run before proceeding with the analysis.</li>
+    </ul>
+  </li>
+  <li><a href="https://usegalaxy.org/u/nstoler/w/copy-of-du-novo-gtn-tutorial">Calling variants</a> from consensus sequences.
+    <ul>
+      <li>This takes a pair of FASTQ files and calls variants using them.</li>
+      <li>If you’d like variants from both DCS and SSCS, you’ll have to run this twice, once on each.</li>
+      <li><strong>N.B.</strong> Remember that this workflow is designed for the above <em>ABL1</em> analysis. If you want to use it for any other dataset, you’ll have to change the relevant options.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>You can use the variant calling workflow to call variants using the SSCS instead of the DCS.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-helping-du-novo-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Helping Du Novo</h3>
+  <p>The <i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Send usage data</em> option is left off in the above workflows.</p>
+  <ul>
+    <li>We want to make sure you only share data knowingly.</li>
+  </ul>
+
+  <p>But again, if you’d like to help improve Du Novo, consider turning it on.</p>
 </blockquote>
 
-<h2 id="if-things-dont-work">If things don’t work…</h2>
+<p><strong>Workflow: Making consensus sequences</strong></p>
+
+<p><a href="https://usegalaxy.org/u/nstoler/w/du-novo-gtn-tutorial"><img src="../../images/workflow-dunovo.png" alt="Du Novo workflow" /></a></p>
+
+<p><strong>Workflow: Variant calling</strong></p>
+
+<p><a href="https://usegalaxy.org/u/nstoler/w/copy-of-du-novo-gtn-tutorial"><img src="../../images/workflow-dunovo-variant-calling.png" alt="Variant calling workflow" /></a></p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>You should now understand duplex sequencing, rare variants, and be able to process the former to find the latter.</p>
+
+<h3 id="if-things-dont-work">If things don’t work…</h3>
 <p>…you need to complain. Use <a href="https://usegalaxy.org/biostar/biostar_redirect">Galaxy’s BioStar Channel</a> to do this.</p>
 
 
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+            <ul>
+                
+                <li>Diploid variant calling relies on assumptions that rare variant calling cannot make</li>
+                
+                <li>Duplex consensus sequences are usually most accurate, but sometimes you must rely on single-strand consensus sequences instead.</li>
+                
+            </ul>
+        </blockquote>
         
 
         
@@ -474,14 +765,12 @@
 
         
 
-        <h3>
-<i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
 
         <hr>
 
         <blockquote class="feedback">
-            <h3>
-<i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Help us improve this content!</h3>
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Help us improve this content!</h3>
             Please take a moment to fill in the Galaxy Training Network
             <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>.
             Your feedback helps us improve this tutorial and will be considered
@@ -496,7 +785,7 @@
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anton Nekrutenko)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anton Nekrutenko, Nick Stoler)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
