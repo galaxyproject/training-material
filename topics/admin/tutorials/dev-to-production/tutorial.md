@@ -9,7 +9,6 @@ name: "dev-to-production"
 zenodo_link: ""
 hands_on: "github"
 enable: "false"
-slides: no
 questions:
 objectives:
 time_estimation: "1d/3h/6h"

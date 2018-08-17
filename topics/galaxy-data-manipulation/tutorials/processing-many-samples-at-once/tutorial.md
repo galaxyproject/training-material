@@ -7,7 +7,6 @@ title: "Collections: Multisample Analysis"
 type: "tutorial"
 name: "processing-many-samples-at-once"
 zenodo_link: ""
-slides: no
 questions:
 objectives:
 time_estimation: "1h/1d"

@@ -7,7 +7,6 @@ title: "Reference-based RNAseq data analysis (long)"
 type: "tutorial"
 name: "rb-rnaseq"
 zenodo_link: ""
-slides: no
 questions:
   - "How to perform analysis of RNAseq data when reference genome is available?"
 objectives:

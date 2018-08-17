@@ -7,7 +7,6 @@ title: "Unicycler Assembly"
 type: "tutorial"
 name: "unicycler-assembly"
 zenodo_link: "https://doi.org/10.5281/zenodo.940733"
-slides: yes
 tags:
   - prokaryote
 questions:

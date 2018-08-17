@@ -7,7 +7,6 @@ title: "Analyses of metagenomics data - The global picture"
 type: "tutorial"
 name: "general-tutorial"
 zenodo_link: "https://doi.org/10.5281/zenodo.815875"
-slides: no
 questions:
   - "How to analyze metagenomics data?"
   - "What information can be extracted of metagenomics data?"

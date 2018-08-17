@@ -6,7 +6,6 @@ tutorial_name: create-new-tutorial-tours
 title: "Creating a new tutorial - Creating Interactive Galaxy Tours"
 type: "tutorial"
 name: "create-new-tutorial-tours"
-slides: no
 questions:
   - "What is a Interactive Galaxy Tour?"
   - "How can we create an Interactive Tour?"

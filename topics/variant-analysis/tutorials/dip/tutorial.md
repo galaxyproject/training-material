@@ -7,7 +7,6 @@ title: "Calling variants in diploid systems"
 type: "tutorial"
 name: "dip"
 zenodo_link: ""
-slides: no
 questions:
   - "How to find variable sites in diploid genomes?"
 objectives:

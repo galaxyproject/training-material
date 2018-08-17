@@ -6,7 +6,6 @@ tutorial_name: create-new-tutorial-technical
 title: "Creating a new tutorial - Defining the technical infrastructure"
 type: "tutorial"
 name: "create-new-tutorial-technical"
-slides: no
 questions:
   - "How can we define the technical infrastructure for a tutorial?"
   - "How to define the tools needed for a tutorial?"

@@ -7,7 +7,6 @@ title: "Mapping"
 type: "tutorial"
 name: "mapping"
 zenodo_link: "https://doi.org/10.5281/zenodo.61771"
-slides: yes
 questions:
   - What two things are crucial for a correct mapping?
   - What is BAM?

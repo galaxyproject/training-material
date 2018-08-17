@@ -7,7 +7,6 @@ title: "Making sense of a newly assembled genome"
 type: "tutorial"
 name: "ecoli_comparison"
 zenodo_link: "https://doi.org/10.5281/zenodo.1306128"
-slides: no
 requirements:
   -
     title: "Unicycler Assembly"

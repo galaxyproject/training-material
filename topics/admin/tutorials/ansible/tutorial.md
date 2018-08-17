@@ -7,7 +7,6 @@ title: "Ansible"
 type: "tutorial"
 name: "ansible"
 zenodo_link: ""
-slides: no
 questions:
   - Why Ansible?
   - How and when to use Ansible?

@@ -7,7 +7,6 @@ title: "Label-free versus Labelled - How to Choose Your Quantitation Method"
 type: "tutorial"
 name: "labelfree-vs-labelled"
 zenodo_link: ""
-slides: no
 questions:
   - "What are benefits and drawbacks of different quantitation methods?"
   - "How to choose which quantitation method bests suits my need?"

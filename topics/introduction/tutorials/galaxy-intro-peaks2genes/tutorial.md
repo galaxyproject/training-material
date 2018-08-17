@@ -7,7 +7,6 @@ title: "From peaks to genes"
 type: "tutorial"
 name: "galaxy-intro-peaks2genes"
 zenodo_link: "https://doi.org/10.5281/zenodo.1025585"
-slides: no
 questions:
   - "How to use Galaxy?"
   - "How to get from peak regions to a list of gene names?"

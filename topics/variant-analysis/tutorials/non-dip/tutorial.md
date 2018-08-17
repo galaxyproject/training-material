@@ -7,7 +7,6 @@ title: "Calling variants in non-diploid systems"
 type: "tutorial"
 name: "non-dip"
 zenodo_link: "https://doi.org/10.5281/zenodo.1251112"
-slides: no
 tags:
   - prokaryote
 questions:

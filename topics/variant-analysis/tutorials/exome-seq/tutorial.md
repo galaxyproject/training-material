@@ -7,7 +7,6 @@ title: "Exome sequencing data analysis"
 type: "tutorial"
 name: "exome-seq"
 zenodo_link: "https://doi.org/10.5281/zenodo.60520"
-slides: no
 questions:
   - "How to identify the genetic variation with the use of exome sequencing?"
   - "What is the pipeline of the process of finding genetic variation which caused the disease?"

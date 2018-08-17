@@ -8,7 +8,6 @@ type: "tutorial"
 edam_ontology: "topic_0121"
 name: "database-handling"
 zenodo_link: ""
-slides: no
 questions:
   - "How to download protein FASTA databases of a certain organism?"
   - "How to download a contaminant database?"

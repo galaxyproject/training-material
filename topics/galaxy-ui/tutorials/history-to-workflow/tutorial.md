@@ -7,7 +7,6 @@ title: "Workflows: Extracting Workflows from Histories"
 type: "tutorial"
 name: "history-to-workflow"
 zenodo_link: ""
-slides: no
 questions:
   - "What is a workflow?"
   - "How can I create a workflow based on my analysis history?"

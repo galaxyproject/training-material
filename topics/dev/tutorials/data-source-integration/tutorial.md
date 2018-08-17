@@ -7,7 +7,6 @@ title: "Data source integration"
 type: "tutorial"
 name: "data-source-integration"
 enable: "false"
-slides: no
 questions:
 objectives:
 time_estimation: "1h/1d"

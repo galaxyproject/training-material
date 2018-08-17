@@ -8,7 +8,6 @@ type: "tutorial"
 name: "galaxy-intro-vis"
 enable: "false"
 zenodo_link: ""
-slides: no
 questions:
 objectives:
 time_estimation:

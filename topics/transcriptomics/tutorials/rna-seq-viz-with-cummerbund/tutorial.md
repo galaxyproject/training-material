@@ -7,7 +7,6 @@ title: "Visualization of RNA-Seq results with CummeRbund"
 type: "tutorial"
 name: "rna-seq-viz-with-cummerbund"
 zenodo_link: "https://zenodo.org/record/1001880"
-slides: yes
 questions:
   - "How are RNA-Seq results stored?"
   - "Why are visualization techniques needed?"

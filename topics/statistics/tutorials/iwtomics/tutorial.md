@@ -7,7 +7,6 @@ title: "Interval-Wise Testing for omics data"
 type: "tutorial"
 name: "iwtomics"
 zenodo_link: "https://doi.org/10.5281/zenodo.1184682"
-slides: no
 questions:
   - "How to visualize high-resolution omics data in different groups of genomic regions?"
   - "How to evaluate differences in high-resolution omics data between groups of genomic regions?"

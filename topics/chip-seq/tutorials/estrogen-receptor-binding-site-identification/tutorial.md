@@ -7,7 +7,6 @@ title: "Identification of the binding sites of the Estrogen receptor"
 type: "tutorial"
 name: "estrogen-receptor-binding-site-identification"
 zenodo_link: "https://doi.org/10.5281/zenodo.892432"
-slides: no
 questions:
   - How is raw ChIP-seq data processed and analyzed?
   - What are the binding sites of the Estrogen receptor?

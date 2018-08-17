@@ -7,7 +7,6 @@ title: "Identification of the binding sites of the T-cell acute lymphocytic leuk
 type: "tutorial"
 name: "tal1-binding-site-identification"
 zenodo_link: "https://doi.org/10.5281/zenodo.197100"
-slides: no
 edam_ontology: "topic_3169"
 questions:
   - How is raw ChIP-seq data processed and analyzed?

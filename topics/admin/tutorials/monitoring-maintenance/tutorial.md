@@ -7,7 +7,6 @@ title: "Server Monitoring and Maintenance"
 type: "tutorial"
 name: "monitoring-maintenance"
 zenodo_link: ""
-slides: yes
 questions:
   - How to monitor a Galaxy service?
   - What are the best practices to maintain a Galaxy server?

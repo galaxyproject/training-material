@@ -6,7 +6,6 @@ tutorial_name: setup-galaxy-for-training
 title: Set up a Galaxy for Training
 type: tutorial
 name: setup-galaxy-for-training
-slides: no
 time_estimation: 2h
 questions:
   - How do I prepare my Galaxy instance to support a training module?
