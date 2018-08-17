@@ -1,0 +1,363 @@
+id: rbfox2-binding-site-identification-and-analyis
+name: >-
+  Identification and analysis of the binding sites of the tissue-specific
+  splicing factor RBFOX2 in human liver cancer cells (HepG2).
+description: >-
+  RBFOX2 is a relevant development and tissue-specific splicing factor with
+  the conserved motif "TGCATG". It binds mainly in introns. We therefore want
+  to process and validate the data from a study published by
+  <a href="http://dx.doi.org/10.1038/nmeth.3810">Nostrand et al.
+  (2016)</a>) to find this conserved motif and in the process identify the
+  function of RBFOX2 as well as describe the function of the targeted RNA.
+title_default: protein-id
+steps:
+  - title: Introduction
+    content: >-
+      RBFOX2 is a relevant development and tissue-specific splicing factor with
+      the conserved motif "TGCATG". It binds mainly in introns. We therefore want
+      to process and validate the data from a study published by
+      <a href="http://dx.doi.org/10.1038/nmeth.3810">Nostrand et al.
+      (2016)</a>) to find this conserved motif and in the process identify the
+      function of RBFOX2 as well as describe the function of the targeted RNA.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      The eCLIP data provided here is a subset of the eCLIP data of RBFOX2.
+      The dataset contains the first biological replicate of RBFOX2 CLIP-seq
+      and the input control experiment (fastq files). The data was changed and
+      downsampled to reduce data processing time, consequently the data does
+      not correspond to the original source pulled from
+      <a href="http://dx.doi.org/10.1038/nmeth.3810">Nostrand et al.
+      (2016)</a>. Also included is a text file (.txt) encompassing the
+      chromosome sizes of hg19 obtained from
+      <a href="http://hgdownload.cse.ucsc.edu/goldenPath/hg19/bigZips/hg19.chrom.sizes">UCSC</a>
+      and a genome annotation (.gtf) file taken from
+      <a href="http://ftp.ensemblorg.ebi.ac.uk/pub/release-74/gtf/homo_sapiens/">Ensembl</a>.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analysis by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Importing data via links
+    content: >-
+      Import the CLIP-Seq raw data (*.fastq) from <a
+      href="https://zenodo.org/record/1327423">Zenodo</a>.
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Load the datasets into your history from <a
+      href="https://zenodo.org/record/1327423">Zenodo</a>
+    placement: right
+    textinsert: >-
+      https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/hg19_chr_sizes.txt
+
+      https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/Homo_sapiens.GRCh37.74.gtf
+
+      https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/RBFOX2-204-CLIP_S1_R1_RBFOX2.fastq
+
+      https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/RBFOX2-204-CLIP_S1_R2_RBFOX2.fastq
+
+      https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/RBFOX2-204-INPUT_S2_R1.fastq
+
+      https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/RBFOX2-204-INPUT_S2_R2.fastq
+
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the input data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded datasets is in the history, but its name corresponds to the
+      link. We want to rename them to somthing more meaningful, e.g.
+      'RBFOX2-204-CLIP_S1_R1_RBFOX2'. <br><br>  <ul>
+        <li>Click on the pencil icon beside the file to "Edit Attributes".</li>
+        <li>Change the "<b>Name:</b>" accordingly.</li>
+        <li>Click "Save".</li>
+      </ul>
+    position: left
+  - title: Quality control
+    element: '#tool-search-query'
+    content: Search for FastQC tool.
+    placement: right
+    textinsert: FastQC
+  - title: Quality control
+    element: '#tool-search'
+    content: Click on the "FastQC" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.69"]
+        .tool-old-link
+  - title: Quality control
+    element: '#tool-search'
+    content: >-
+      Run the tool FastQC on all FASTQ files to assess the quality of the raw
+      data. An explanation of the results can be found on the <a
+      href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC
+      web page</a>
+    position: right
+  - title: Questions
+    content: |-
+      <ul>
+        <li>Check the FastQC webpage output, 'Sequence duplication levels' figure. What does the y-axis represent?</li>
+        <li>What is the meaning of the red and blue line?</li>
+        <li>What does the headline tell you?</li>
+      </ul>
+    backdrop: false
+  - title: Removal of adapter sequences
+    content: >-
+      It is often necessary to remove adapter and barcodes sequences as well as
+      UMIs. Adapters (or primers) are needed for PCR amplification and
+      sequencing in a standard NGS protocol. Unfortunately, it might happen
+      during the sequencing that the machine does not stop at the read end and
+      sequences through the adapter as well. That is why, we need to check if
+      our reads contain those sequences which we are then cutting out.
+    backdrop: true
+  - title: Removal of adapter sequences
+    element: '#tool-search-query'
+    content: Search for Cutadapt tool.
+    placement: right
+    textinsert: Cutadapt
+  - title: Removal of adapter sequences
+    element: '#tool-search'
+    content: Click on the "Cutadapt" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Flparsons%2Fcutadapt%2Fcutadapt%2F1.16.1"]
+        .tool-old-link
+  - title: Removal of adapter sequences
+    element: '#tool-search'
+    content: |-
+      Execute the tool with (for v. 1.6) : <ul>
+        <li><b>Fastq file to trim:</b> fastq R1 </li>
+        <li><b>Track Paired Reads:</b> Yes </li>
+        <li><b>Paired fastq file (NOT trimmed):</b> fastq R2 </li>
+        <li><b>Enter the following 3' Adapters as:</b></li>
+          Enter custom sequence: <ul>
+            <li>1: AACTTGTAGATCGGA </li>
+            <li>2: AGGACCAAGATCGGA </li>
+          </ul>
+        <li><b>Enter the following 5' (Front) Adapters as:</b></li>
+        <li><b>5' (Front) Adapters</b></li>
+          Enter custom sequence: <ul>
+            <li>CTTCCGATCTACAAGTT </li>
+            <li>CTTCCGATCTTGGTCCT </li>
+          </ul>
+        <li><b>Minimum overlap length:</b> 5 </li>
+        <li><b>Output filtering options:</b> Set Filters </li>
+          <ul><li><b>Minimum length:</b> 10 </li></ul>
+        <li><b>Additional output options:</b> Default </li>
+        <li><b>Additional modifications to reads:</b> Set Modification Options </li>
+          <ul><li><b>Cut bases from reads before adapter trimming:</b> -5 </li></ul>
+      </ul>
+    position: right
+  - title: Questions
+    content: |-
+      <ul>
+        <li><b>Why do we remove 5 bp from the first read?</b></li>
+        <li>In eCLIP it can happen that the sequencing goes over the first read
+        into the UMI, which is at the 3' end of the first read. The UMI is 5 bp
+        long in our data. To make sure our first read in the read pair does not
+        contain the UMI, we simply remove the last 5 bp from it. The UMI that we
+        actually need for the de-duplication is located on the 5' end of our
+        second read in the read pair.</li>
+      </ul>
+    backdrop: false
+  - title: Removal of adapter sequences for the second mate R2
+    element: '#tool-search-query'
+    content: Search for Cutadapt tool.
+    placement: right
+    textinsert: Cutadapt
+  - title: Removal of adapter sequences
+    element: '#tool-search'
+    content: Click on the "Cutadapt" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Flparsons%2Fcutadapt%2Fcutadapt%2F1.16.1"]
+        .tool-old-link
+  - title: Removal of adapter sequences
+    element: '#tool-search'
+    content: |-
+      Execute the tool with (for v. 1.6): <ul>
+        <li><b>Fastq file to trim:</b> fastq R2 </li>
+        <li><b>Track Paired Reads:</b> Yes </li>
+        <li><b>Paired fastq file (NOT trimmed):</b> fastq R1 </li>
+        <li><b>Enter the following 3' Adapters as:</b></li>
+          Enter custom sequence: <ul>
+            <li>1: AACTTGTAGATCGGA </li>
+            <li>2: AGGACCAAGATCGGA </li>
+          </ul>
+        <li><b>Enter the following 5' (Front) Adapters as:</b></li>
+        <li><b>5' (Front) Adapters</b></li>
+          Enter custom sequence: <ul>
+            <li>CTTCCGATCTACAAGTT </li>
+            <li>CTTCCGATCTTGGTCCT </li>
+          </ul>
+        <li><b>Minimum overlap length:</b> 5 </li>
+        <li><b>Output filtering options:</b> Set Filters </li>
+          <ul><li><b>Minimum length:</b> 10 </li></ul>
+        <li><b>Additional output options:</b> Default </li>
+        <li><b>Additional modifications to reads:</b> No Read Modifications </li>
+      </ul>
+    position: right
+  - title: Do the same thing for the input control
+    content: |-
+      If you processed the RBFOX2 fastq dataset then do the same thing for
+      the input control dataset or <i>vice verca</i>.
+    backdrop: false
+  - title: Removal of UMIs
+    content: >-
+      UMIs are similar to barcodes but these sequences are unique for each read.
+      UMIs were introduced since iCLIP to deal with the high duplication levels
+      of a CLIP experiment. Because each read contain an UMI, PCR duplicates of
+      that read also contain the same UMI, which makes it possible to fuse all
+      reads with the same UMI.
+    backdrop: true
+  - title: Removal of UMIs
+    element: '#tool-search-query'
+    content: Search for UMI-tools extract tool.
+    placement: right
+    textinsert: UMI-tools extract
+  - title: Removal of UMIs
+    element: '#tool-search'
+    content: Click on the "UMI-tools extract" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fumi_tools_extract%2Fumi_tools_extract%2F0.5.3.2"]
+        .tool-old-link
+  - title: Removal of UMIs
+    element: '#tool-search'
+    content: |-
+      Execute the tool with: <ul>
+      <li><b>Library type:</b> Paired-end </li>
+      <li><b>Reads in FASTQ format:</b> fastq R2 (output from the second Cutadapt call) </li>
+      <li><b>Reads in FASTQ format:</b> fastq R1 (output from the second Cutadapt call) </li>
+      <li><b>Barcode on both reads?:</b> Barcode on first read only </li>
+      <li><b>Use Known Barcodes?:</b> No </li>
+      <li><b>Method to extract barcodes:</b> String </li>
+      <li><b>Barcode pattern for first read:</b> NNNNN </li>
+      <li><b>Is the barcode at the 5' end?:</b> Yes </li>
+      <li><b>Output log?:</b> Yes </li>
+      <li><b>Enable quality filter?:</b> No </li>
+      </ul>
+    position: right
+  - title: Do the same thing for the input control
+    content: |-
+      If you processed the RBFOX2 fastq dataset then do the same thing for
+      the input control dataset or <i>vice verca</i>.
+    backdrop: false
+  - title: Barcodes
+    content: |-
+      Barcodes are especially designed for a read library and intentionally
+      sequenced. Sometimes experiments are sequenced at the same time which
+      is called multiplexing. Multiplexing allows for a better data
+      normalisation and comparison. The barcodes are then used to divide
+      the un-multiplexed data set into the individual read libraries.
+      Our data is already de-multiplexed, i.e., we do not have to take
+      barcode sequences into account.
+    backdrop: false
+  - title: Aligning Reads to a Reference Genome
+    content: >-
+      To determine where DNA fragments originated in the genome, the sequenced
+      Nowadays, there are many read alignment programs. "STAR" is one of them
+      that works well with CLIP-Seq data, for more information read
+      <a href="http://doi:10.1093/bioinformatics/bts635">here</a>.
+      "STAR" is able to use genome as well as transcriptome data. This ability
+      is handy, since CLIP-Seq generates transcriptome data, consequently we
+      have to take RNA processing steps like splicing events into account.
+    backdrop: true
+  - title: Aligning with RNA STAR
+    element: '#tool-search-query'
+    content: Search for RNA STAR tool.
+    placement: right
+    textinsert: RNA STAR
+  - title: Aligning with RNA STAR
+    element: '#tool-search'
+    content: Click on the "RNA STAR" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Frgrnastar%2Frna_star%2F2.6.0b-1"]
+        .tool-old-link
+  - title: Aligning with RNA STAR
+    element: '#tool-search'
+    content: |-
+      Execute the tool with: <ul>
+      <li><b>Single-end or paired-end reads</b> Paired-end (as individual datasets) </li>
+      <li><b>RNA-Seq FASTQ/FASTA file, forward reads</b> fastq R2 (output from UMI-tools extract) </li>
+      <li><b>RNA-Seq FASTQ/FASTA file, reverse reads</b> fastq R1 (output from UMI-tools extract) </li>
+      <li><b>Custom or built-in reference genome</b> Use a built-in index </li>
+        <ul>
+          <li><b>Reference genome with or without an annotation</b> use genome reference with builtin gene-model </li>
+          <li><b>Select reference genome</b> Homo sapiens (hg19+GRCh37.75) </li>
+        </ul>
+      <li><b>Count number of reads per gene</b> No </li>
+      <li><b>Would you like to set output parameters (formatting and filtering)?</b> No </li>
+      <li><b>Other parameters (seed, alignment, limits and chimeric alignment)</b> Extended parameter list </li>
+        <ul>
+          <li><b>Alignment parameters</b></li>
+            <ul><li><b>Use end-to-end read alignments, with no soft-clipping?</b> Yes </li></ul>
+          <li><b>Would you like to set chimeric alignment parameters?</b> No </li>
+        </ul>
+    position: right
+  - title: Do the same thing for the input control
+    content: |-
+      If you processed the RBFOX2 fastq dataset then do the same thing for
+      the input control dataset or <i>vice verca</i>.
+    backdrop: false
+
+
+
+
+
+
+
+  - title: Conclusion
+    content: >-
+      In this exercise you imported raw Illumina sequencing data, evaluated the
+      quality before and after you trimmed reads with low confidence scores,
+      aligned the trimmed reads, identified TAL1 peaks relative to the negative
+      control (background), and visualized the aligned reads and TAL1 peaks
+      relative to gene structures and positions. Additional, you assessed the
+      “goodness” of the experiments by looking at metrics such as GC bias and IP
+      enrichment.
+    backdrop: true
+  - title: Key points
+    content: |-
+      <ul>
+        <li>Sophisticated analysis of ChIP-seq data is possible using tools hosted by Galaxy.</li>
+        <li>Genomic dataset analyses require multiple methods of quality assessment to ensure that the data are appropriate for answering the biology question of interest.</li>
+        <li>By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced.</li>
+      </ul>
+    backdrop: true

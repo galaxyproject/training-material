@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: your_topic
-tutorial_name: your_tutorial_name
+topic_name: templates
+tutorial_name: tutorial1
 ---
 
 # Introduction
@@ -44,7 +44,7 @@ _config.yml in the root of this repository.
 >    > A comment
 >    {: .comment}
 >
->    > ### {% icon tip %}Tip: A tip
+>    > ### {% icon tip %} Tip: A tip
 >    >
 >    > * Step1
 >    > * Step2
@@ -106,6 +106,12 @@ Some blabla
 > 3. Step3
 {: .hands_on}
 
+> ### {% icon warning %} Warning: Be careful about ...
+>
+> Add more details in Markdown.
+>
+{: .warning-box}
+
 # Part 2
 
 Short introduction about this subpart.
@@ -116,11 +122,13 @@ Short introduction about this subpart.
 {: .comment}
 
 
-> ### {% icon details %} More details on the ....
+
+> ### {% icon details %} Background: More details on the ....
 >
 > Add more details in Markdown. By default the box is collapsed. And is expanded when clicked
 >
 {: .details}
+
 
 # Conclusion
 {:.no_toc}
