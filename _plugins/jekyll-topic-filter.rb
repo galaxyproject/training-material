@@ -3,9 +3,17 @@ module Jekyll
     def topic_filter(pages, topic_name)
       relevant_pages = []
 
+      # Must provide a topic name.
+      if topic_name.nil? then
+        return relevant_pages
+      end
+
       interesting = {}
       for page in pages do
         page_parts = page.url.split('/')
+        # Skip anything outside of topics.
+        if not page.url.include?('/topics/') then next end
+
         if page_parts.length > 3 and page_parts[2] == topic_name
           key = page.url.sub(/^\//, '')
           interesting[key] = page
@@ -21,7 +29,7 @@ module Jekyll
       # make the object complete.
 
       intro_slides = Dir.glob("topics/#{topic_name}/slides/*")
-      tutorial_folders = Dir.glob("topics/#{topic_name}/tutorials/*")
+      tutorial_folders = Dir.glob("topics/#{topic_name}/tutorials/*").sort
       puts "=> #{topic_name}"
 
       for intro_slide in intro_slides do
@@ -71,7 +79,12 @@ module Jekyll
         relevant_pages.push(page_obj)
       end
 
-      relevant_pages
+      if relevant_pages.length == 0 then
+        puts "Error? Could not find any relevant pages for #{topic_name}"
+      end
+
+      sorted = relevant_pages.sort_by{ |k| k["title"] }
+      sorted
     end
   end
 end

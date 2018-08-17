@@ -165,7 +165,8 @@ layout: base
         <h2 id="maintainers">Maintainers</h2>
         <p>This material is maintained by:</p>
         <ul>
-        {% for maintainer in topic.maintainers %}
+        {% assign maintainers = topic.maintainers | sorted %}
+        {% for maintainer in maintainers %}
             <li>
                 <a href="{{ site.baseurl }}/hall-of-fame#{{ maintainer }}">{{ contributors[maintainer].name }}</a>
                 {% if contributors[maintainer].maintainer_contact %}
@@ -201,7 +202,8 @@ layout: base
         {% endfor %}
 
         <ul>
-        {% for username in contributors_list %}
+        {% assign contributors_list_sorted = contributors_list | sorted %}
+        {% for username in contributors_list_sorted %}
             {% assign contributor = contributors[username] %}
             <li>
                 <a href="{{ site.baseurl }}/hall-of-fame#{{ username }}">{% if contributor.name %}{{ contributor.name }}{% else %}{{ username }}{% endif %}</a>
