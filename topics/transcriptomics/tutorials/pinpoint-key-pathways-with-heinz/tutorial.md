@@ -156,8 +156,7 @@ After knowing what our input data are like, let's get them into Galaxy history:
 >    </details>
 {: .hands_on}
 
-If you don't use `Collection` in the file upload menu. You will have a lot of files to manage. Luckily Galaxy can make life a bit easier by allowing us to create
-*dataset collections*. This enables us to easily run tools on multiple datasets at once. Let's
+If you don't use `Collection` in the file upload menu, you will have a lot of files to manage. Luckily Galaxy can make life a bit easier by allowing us to manually create *dataset collections*. This enables us to easily run tools on multiple datasets at once. Let's
 create a collection now:
 
 > ### {% icon hands_on %} Hands-on: Organizing our data into a collection
@@ -180,15 +179,73 @@ create a collection now:
 {: .hands_on}
 
 
-# Differential Expression Analysis
+# Differential Expression Analysis (DEA) by DESeq2
 
-## Reducing sequencing and PCR errors
+## What is differential expression analysis?
 
-The first thing we want to do is combine our forward and reverse reads for each sample. This is done
-using the `make.contigs` command, which requires the paired collection as input. This command will extract
-the sequence and quality score data from your fastq files, create the reverse complement of the reverse
-read and then join the reads into contigs. Then we will combine all samples into a single fasta file,
-remembering which reads came from which samples using a *group* file.
+> ### {% icon comment %} According to [EBI](https://www.ebi.ac.uk/training/online/course/functional-genomics-ii-common-technologies-and-data-analysis-methods/differential-gene)
+> Differential expression analysis means taking the normalised read count data and performing statistical analysis to discover quantitative changes in expression levels between experimental groups. For example, we use statistical testing to decide whether, for a given gene, an observed difference in read counts is significant, that is, whether it is greater than what would be expected just due to natural random variation.
+{: .comment}
+
+In principle, DEA is a causal analysis, which falls with Rung 2 --- intervention, according to Judea Pearl's theory. Back to our datasets --- CP and CN, they are from two experimental groups. By DEA, we hope to pinpoint the candidate genes that incur dental caries, from which we will reply on Heinz to infer the related pathways.
+
+## Which tools are available for DEA?
+
+There are a few canned tools commonly used for DEA, like [Limma](https://bioconductor.org/packages/release/bioc/html/limma.html) and [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html), here in this tutorial, we use DESeq2 for DEA.
+
+
+## Conduct differential expression analysis
+
+> ### {% icon hands_on %} Hands-on: DEA via DESeq2
+>
+> - **DESeq2** {% icon tool %} with the following parameters
+>   - "Specify a factor name" to `dental_caries` (in "1: Factor")
+>   - "Specify a factor level" to `CP`, "Counts file(s)" to `CP` by clicking the "Dataset collections" icon (in "1: Factor level")
+>   - "Specify a factor level" to `CN`, "Counts file(s)" to `CN` by clicking the "Dataset collections" icon (in "2: Factor level")
+>   - "Visualising the analysis results" to `No` 
+>   - Leave all other parameters to the default settings <br><br>
+>
+{: .hands_on}
+
+After the analysis is finished, view the file now, it should look something like this:
+
+```
+GeneID  Base mean   log2(FC)	        StdErr	            Wald-Stats	        P-value	                P-adj
+K15661  55.0733128361562    2.49892393773464	0.508475451930939	4.91454194739384	8.89902710599613e-07	0.00491938218419466
+K15666  48.4532561772761    2.22805029428311	0.493391718412049	4.51578372951607	6.30830206230236e-06	0.00820667379798327
+K10213  25.1966742274619    -2.45624670858868	0.550895251183889	-4.45864563782342	8.24791475064012e-06	0.00820667379798327
+K03732  563.63634258472 -1.41961721984814	0.316992240900184	-4.47839737596338	7.52055094378821e-06	0.00820667379798327
+K01792  112.923146882195    -1.26925892659617	0.285732234964578	-4.44212717810268	8.90738834802815e-06	0.00820667379798327
+```
+
+# Fit a BUM model (a mixture model)
+
+Statistically speaking, p-values are uniformly distributed under the null hypothesis; therefore, under alternative hypothesis, the noise component will be adequately modeled by a uniform distribution. With this knowledge, we can fit a mixture model (BUM model) to the p-values, as the figure below shows.
+
+![p-values are fitted to a mixture model](../../images/bum.jpeg)
+
+> ### {% icon hands_on %} Hands-on: extract p-values from DESeq2 output
+>
+> - **cut** {% icon tool %} with the following parameters
+>   - "Cut columns" to `c6` (in "1: Factor")
+>   - "Delimited by" to `TAB`
+>   - "From" to the output of **DESeq2** <br><br>
+>
+{: .hands_on}
+
+> ### {% icon hands_on %} Hands-on: fit the BUM model
+>
+> - **Fit a BUM model** {% icon tool %} with the following parameters
+>   - "Input file" to the output of **cut** <br><br>
+>
+{: .hands_on}
+
+# Pinpoint the key pathways with Heinz
+
+## Calcualte a score
+
+## Run Heinz
+
 
 > ### {% icon comment %} Algorithm details
 > We have a very simple algorithm to do this. First, we align the pairs of sequences. Next, we look
