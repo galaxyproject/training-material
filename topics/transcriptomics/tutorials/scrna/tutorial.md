@@ -74,7 +74,7 @@ The second part of this tutorial will deal with multiple batches, and a differen
 
 ### Data upload and organization
 
-The size of scRNA FASTQ files are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expediate the analysis by using a smaller subset of actual batch data. This data is available at [`Zenodo`](https://link.this) where the example FASTQ paired batch files are hosted, as well as a barcodes file and GTF file for the *Mus Musculus* genome version mm10.
+The size of scRNA FASTQ files are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expediate the analysis by using a smaller subset of actual batch data. This data is available at [`Zenodo`](https://zenodo.org/record/1345635) where the example FASTQ paired batch files are hosted, as well as a barcodes file and GTF file for the *Mus Musculus* genome version mm10.
 
 The batch files are the first of the set of multiple batches, and originate from the first sequencing plate. We will explain this more in detail later, but for now we should make note of this when renaming our files in step 6 of the hands-on below.
 
@@ -83,9 +83,9 @@ The batch files are the first of the set of multiple batches, and originate from
 > 1. Create a new history and name it something meaningful (*e.g.* scRNA-seq single batch tutorial)
 > 1. Open the Data Upload Manager by selecting *Get Data* from the Tool Panel and clicking *Upload File*
 > 1. Select *Paste/Fetch Data*
-> 1. Copy each link for the reads (.R1.fastq, .R2.fastq), annotation (.GTF), and barcode (.tab) files, and paste each link into a separate text field
->    - Set the datatype of the read (.fastq) files to **fastq**
->    - Set the datatype of the annotation (.tab) file to **tabular** and assign the Genome as **mm10**
+> 1. Copy each link for the reads (`SRR5683689_1.fastq.gz`, `SRR5683689_1.fastq.gz`), annotation (`Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf`), and barcode (`celseq_barcodes.192.tabular`) files, and paste each link into a separate text field
+>    - Set the datatype of the read (.fastq.gz) files to **fastq.gz**
+>    - Set the datatype of the annotation (.gtf) file to **tabular** and assign the Genome as **mm10**
 > 1. Click *Start*
 > 1. Build a *Dataset pair* for the two FASTQ files
 >    - Click the *Operations on multiple datasets* check box at the top of the history panel
@@ -593,7 +593,7 @@ For alignment, we will use RNA-STAR for performance and splice-awareness.
 > ### {% icon hands_on %} Hands-on: Performing the Alignment
 >
 > 1. Obtain the GTF file and import it into our history.
->   - Click on the [Zenodo](https://link.here) link and import the **Mus_musculus.GRCm38.87.gtf (mm10)** GTF file
+>   - Click on the [Zenodo](https://zenodo.org/record/1345635) link and import the **Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf (mm10)** GTF file if not already present
 > 2. **RNA-STAR** {%icon tool %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Single-end`
 >        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file"*: `out2` (output of **UMI-tools extract** {% icon tool %})
@@ -877,11 +877,11 @@ Once again, file naming is important, and so we will rename our matrix files app
 > 1. Create a new history and name it something meaningful (*e.g.* scRNA-seq multiple-batch tutorial)
 > 1. Open the Data Upload Manager by selecting *Get Data* from the Tool Panel and clicking *Upload File*
 > 1. Select *Paste/Fetch Data*
-> 1. Copy each link for the matrices (cm.p1b1.tab, cm.p1b2.tab, ..., cm.p2b8.tab, etc..), and paste each link into a separate text field
->    - Set the datatype of the tabular (.tab) files to **tabular**
+> 1. Copy each link for the four matrices (`P1_B1.tabular`, `P1_B2.tabular`, etc.), and paste each link into a separate text field
+>    - Set the datatype of the tabular files to **tabular**
 > 1. Click *Start*
 > 1. Rename a matrix
->    - Click on {% icon galaxy-pencil %} of the *cm.p1b1.tab* file
+>    - Click on {% icon galaxy-pencil %} of the *`P1_B1.tabular`* file
 >    - Set the Name field to something meaningul appended with "_P1_B1" (e.g. 'multibatch_P1_B1')
 >    - Click *Save*
 > 1. Repeat for all matrices
@@ -1186,22 +1186,25 @@ Let us now apply this protocol to our count matrix, and look for any cross-conta
 >           - *"1: Barcode Format"*:
 >              - *"Barcode Range: Start"*:`1`
 >              - *"Barcode Range: End"*:`96`
->              - *"Batches utilizing this Range"*:`1,3,5,7`
+>              - *"Batches utilizing this Range"*:`2,4`
 >        - Select `+ Insert Barcode Format`:
 >           - *"2: Barcode Format"*:
 >              - *"Barcode Range: Start"*:`97`
 >              - *"Barcode Range: End"*:`192`
->              - *"Batches utilizing this Range"*:`2,4,6,8`
+>              - *"Batches utilizing this Range"*:`1,3`
 >     - *"Under 'Plate Format'"*:
 >        - Select `+ Insert Plate Format`:
 >           - *"1: Plate Format"*:
 >              - *"Plate Number"*:`1`
->              - *"Batches within this Plate Number"*:`1,2,3,4`
+>              - *"Batches within this Plate Number"*:`1,2`
 >           - *"2: Plate Format"*:
 >              - *"Plate Number"*:`2`
->              - *"Batches within this Plate Number"*:`5,6,7,8`
+>              - *"Batches within this Plate Number"*:`3,4`
+>  - Expand the *"Advanced"* section:
+>     - *"RegEx to extract Plate, Batch, and Barcodes from headers"*:`.*P(\\d)_B(\\d)_([ACTG]+)`
 >
 {: .hands_on}
+
  
 The plot that follows tells us everything we need to know about each of our batches. Each batch is essentially tested against the full set of barcodes in order to assert that only the desired or 'Real' barcodes have been sequenced.
 
