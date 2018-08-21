@@ -2,6 +2,7 @@
 JEKYLL=jekyll
 PORT?=4000
 HOST?=localhost
+INCREMENTAL?=""
 CHROME=google-chrome-stable
 TUTORIALS=$(shell find _site/training-material -name 'tutorial.html' | sed 's/_site\/training-material\///')
 SLIDES=$(shell find _site/training-material -name 'slides.html' | sed 's/_site\/training-material\///')
@@ -48,7 +49,7 @@ install: clean ## install dependencies
 .PHONY: install
 
 serve: ## run a local server}
-	${JEKYLL} serve -d _site/training-material -P ${PORT} -H ${HOST}
+	${JEKYLL} serve -d _site/training-material -P ${PORT} -H ${HOST} `[ "${INCREMENTAL}" != "" ] && echo '--incremental'`
 .PHONY: serve
 
 detached-serve: clean ## run a local server in detached mode
