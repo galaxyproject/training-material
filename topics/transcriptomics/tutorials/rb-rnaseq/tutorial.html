@@ -543,7 +543,7 @@ to test for differential gene expression.</p>
 <h4 id="loading-the-data-and-create-dataset-collections">Loading the data and create dataset collections</h4>
 
 <blockquote>
-  <p>Go to the <a href="https://usegalaxy.org/library/list#folders/Ff4ce53393dae30ee">data library</a> and select all fastq files. Then Click <code class="highlighter-rouge">to History</code> button:</p>
+  <p>Go to the data library (ask your instructor) and select all fastq files. Then Click <code class="highlighter-rouge">to History</code> button:</p>
 
   <p><img src="../../images/rnaseq_library.png" alt="Data libraries" /></p>
 
@@ -637,7 +637,7 @@ The <code class="highlighter-rouge">htseq-count</code> script of the HTSeq suite
   <table>
     <tbody>
       <tr>
-        <td>Select <strong>htseq-count</strong> from <strong>NGS: RNA analysis</strong> section on the left side of the menu. Set parameters as shown below. The red arrow points that to enable <code class="highlighter-rouge">htseq-count</code> to see collections, you need to select the ‘folder’ button. In the case of this particular Galaxy <a href="https://usegalaxy.org/u/aun1/h/rna-seq-tutorial">history</a> we will need to run <code class="highlighter-rouge">htseq-count</code> twice. Once on TopHat alignemnts for collection <strong>c1</strong> (dataset #37; shown below) and then on alignments for collection <strong>c2</strong> (dataset # 57).</td>
+        <td>Select <strong>htseq-count</strong> from <strong>NGS: RNA analysis</strong> section on the left side of the menu. Set parameters as shown below. The red arrow points that to enable <code class="highlighter-rouge">htseq-count</code> to see collections, you need to select the ‘folder’ button. In the case of this particular Galaxy history we will need to run <code class="highlighter-rouge">htseq-count</code> twice. Once on TopHat alignemnts for collection <strong>c1</strong> (dataset #37; shown below) and then on alignments for collection <strong>c2</strong> (dataset # 57).</td>
         <td> </td>
       </tr>
       <tr>
@@ -647,7 +647,7 @@ The <code class="highlighter-rouge">htseq-count</code> script of the HTSeq suite
     </tbody>
   </table>
 
-  <p>This will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b5d1e80eae6d363142/display/?preview=True">read counts per gene</a>.</p>
+  <p>This will generate read counts per gene.</p>
 </blockquote>
 
 <h4 id="normalizing-read-counts-and-computing-differential-expression-with-deseq2">Normalizing read counts and computing differential expression with <code class="highlighter-rouge">DESeq2</code></h4>
@@ -670,11 +670,11 @@ The <code class="highlighter-rouge">htseq-count</code> script of the HTSeq suite
 
   <p><img src="../../images/deseq2_interface.png" alt="DESeq2 parameters" /></p>
 
-  <p>This will produce <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b5d648fe21c36ac662/display/?preview=True">output</a> as shown below. The columns are: (<strong>1</strong>) gene identifier, (<strong>2</strong>) mean normalised counts, averaged over all samples from both conditions, (<strong>3</strong>) logarithm (base 2) of the fold change, (<strong>4</strong>) the standard error estimate for the log2 fold change estimate, (<strong>5</strong>) <a href="https://en.wikipedia.org/wiki/Wald_test">Wald test</a> statistic, (<strong>6</strong>) p value for the statistical significance of this change, and (<strong>7</strong>) <em>p</em>-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate (<a href="https://en.wikipedia.org/wiki/False_discovery_rate">FDR</a>). There is only one gene with significant change in gene expression between conditions: <code class="highlighter-rouge">CG1803-RC</code> with <em>p</em>-value = 1.6x10<sup>-05</sup></p>
+  <p>This will produce output as shown below. The columns are: (<strong>1</strong>) gene identifier, (<strong>2</strong>) mean normalised counts, averaged over all samples from both conditions, (<strong>3</strong>) logarithm (base 2) of the fold change, (<strong>4</strong>) the standard error estimate for the log2 fold change estimate, (<strong>5</strong>) <a href="https://en.wikipedia.org/wiki/Wald_test">Wald test</a> statistic, (<strong>6</strong>) p value for the statistical significance of this change, and (<strong>7</strong>) <em>p</em>-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate (<a href="https://en.wikipedia.org/wiki/False_discovery_rate">FDR</a>). There is only one gene with significant change in gene expression between conditions: <code class="highlighter-rouge">CG1803-RC</code> with <em>p</em>-value = 1.6x10<sup>-05</sup></p>
 
   <p><img src="../../images/deseq2_output.png" alt="DESeq2 output" /></p>
 
-  <p>In addition to the <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b5d648fe21c36ac662/display/?preview=True">list of genes</a> DESeq2 outputs a graphical summary of the result. It includes a number of plots that should be used to evaluate the quality of the experiment. The histogram of <em>p</em>-values below shows that in our sample there is in fact just one instance of a significant <em>p</em>-value:</p>
+  <p>In addition to the list of genes DESeq2 outputs a graphical summary of the result. It includes a number of plots that should be used to evaluate the quality of the experiment. The histogram of <em>p</em>-values below shows that in our sample there is in fact just one instance of a significant <em>p</em>-value:</p>
 
   <p><img src="../../images/p_val_hist.png" alt="p values histogram" /></p>
 

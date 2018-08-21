@@ -473,7 +473,7 @@
 
 <h2 id="filtering-consensuses">Filtering consensuses</h2>
 
-<p>You may have realized that when calling a “consensus” between two sequences, if the two disagree on a base, there’s no way to know which is correct. So in these situations, Du Novo uses the <a href="https://en.wikipedia.org/wiki/Nucleic_acid_notation">IUPAC ambiguity letter</a> for the two different bases (e.g. <code class="highlighter-rouge">W</code> = <code class="highlighter-rouge">A</code> or <code class="highlighter-rouge">T</code>). Also, when calling single-stranded consensus sequences, if there aren’t enough high-quality bases to call a position (<a href="#-hands-on-making-consensus-sequences">above</a>, we set this threshold to 70%), it gives an <code class="highlighter-rouge">N</code>.</p>
+<p>You may have realized that when calling a “consensus” between two sequences, if the two disagree on a base, there’s no way to know which is correct. So in these situations, Du Novo uses the <a href="https://en.wikipedia.org/wiki/Nucleic_acid_notation">IUPAC ambiguity letter</a> for the two different bases (e.g. <code class="highlighter-rouge">W</code> = <code class="highlighter-rouge">A</code> or <code class="highlighter-rouge">T</code>). Also, when calling single-stranded consensus sequences, if there aren’t enough high-quality bases to call a position (in the <a href="#hands_on-hands-on-making-consensus-sequences">above hands-on</a>, we set this threshold to 70%), it gives an <code class="highlighter-rouge">N</code>.</p>
 
 <p>This information could be useful for some analyses, but not for our variant calling. The tool <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Sequence Content Trimmer</strong> will help with filtering these out. With the settings below, it will move along the read, tracking the frequency of ambiguous (non-ACGT) bases in a 10bp window. If it sees more than 2 ambiguous bases in a window, it will remove the rest of the read, starting with the first offending base in the window. We’ll also tell it to remove entirely any read pair containing a read that got trimmed to less than 50bp.</p>
 
@@ -576,7 +576,7 @@
     </li>
     <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Minimum base quality</em>: <code class="highlighter-rouge">0</code>
       <ul>
-        <li>In our case, base quality <a href="#-where-do-the-fastq-quality-scores-come-from">isn’t meaningful</a>, so we set the threshold to 0.</li>
+        <li>In our case, base quality <a href="#details-where-do-the-fastq-quality-scores-come-from">isn’t meaningful</a>, so we set the threshold to 0.</li>
       </ul>
     </li>
     <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Minimum mapping quality</em>: <code class="highlighter-rouge">20</code></li>
@@ -676,10 +676,10 @@
 
 <ul>
   <li><a href="#filtering-consensuses">Filtering consensuses</a></li>
-  <li><a href="#calling-variants">Calling variants</a><br />
+  <li><a href="#mapping-the-reads">Mapping the reads</a><br />
  	- <a href="#align-against-the-genome-with-bwa-mem">Aligning against genome</a><br />
- 	- <a href="#left-aligning-indels">Left aligning indels</a><br />
- 	- <a href="#tabulating-the-differences">Tabulating the differences</a></li>
+ 	- <a href="#left-aligning-indels">Left aligning indels</a></li>
+  <li><a href="#calling-the-variants">Calling the variants</a></li>
 </ul>
 
 <blockquote class="tip">
