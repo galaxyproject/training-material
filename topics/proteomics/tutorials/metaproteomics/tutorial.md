@@ -691,8 +691,8 @@ With these three output files the functional analysis of this tutorial is finish
 >
 > - [Unipept](https://www.ncbi.nlm.nih.gov/pubmed/28552653)
 >
-> - [Galaxy-P Metaproteomics instance] (z.umn.edu/metaproteomicsgateway)
+> - [Galaxy-P Metaproteomics instance](http://z.umn.edu/metaproteomicsgateway)
 >
-> - [Metaproteomics video](z.umn.edu/mpvideo2018)
+> - [Metaproteomics video](http://z.umn.edu/mpvideo2018)
 {: .comment}
 
