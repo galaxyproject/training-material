@@ -258,15 +258,15 @@ GEMINI database is queried using the versatile SQL language (more on SQL [here](
 >
 >     ![GEMINI query](../../images/gemini_query1.png)
 >  
-> As we can see from [output](https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True) there are 21 variants that are not annotated in dbSNP
+> As we can see from output there are 21 variants that are not annotated in dbSNP
 >
 {: .hands_on}
 
 > ### {% icon hands_on %} Find variants in POLRMT gene
 >
-> The query `SELECT * FROM variants WHERE filter is NULL and gene = 'POLRMT'` will produce [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5a0bb5b2cc0695697/display/?preview=True) with very large number of columns. To restrict the number of columns to a manageable set let's use this command: `SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT'` (column definitions can be found [here](https://gemini.readthedocs.org/en/latest/content/database_schema.html))
+> The query `SELECT * FROM variants WHERE filter is NULL and gene = 'POLRMT'` will produce output with very large number of columns. To restrict the number of columns to a manageable set let's use this command: `SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT'` (column definitions can be found [here](https://gemini.readthedocs.org/en/latest/content/database_schema.html))
 
-[Output](https://usegalaxy.org/datasets/bbd44e69cb8906b540d65297cd1d26bb/display/?preview=True) shows variants found within the *POLRMT* gene.
+Output shows variants found within the *POLRMT* gene.
 
 ### Querying genotypes
 
@@ -292,10 +292,10 @@ GEMINI database is queried using the versatile SQL language (more on SQL [here](
 > >    - Type `SELECT * from variants` into **The query to be issued to the database**
 > >    - Type `gt_types.HG002_NA24385_son <> HOM_REF` into **Restrictions to apply to genotype values**
 > >
-> >    Here is an [example](../../images/gemini_query2.png). It will generate [this output](https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True)
+> >    Here is an [example](../../images/gemini_query2.png). It will generate this output
 > >
-> > 2. Typing the same expression `SELECT * from variants` into **The query to be issued to the database** and `(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)` into **Restrictions to apply to genotype values** will generate [this output](https://usegalaxy.org/datasets/bbd44e69cb8906b5aab445b3cd632ba7/display/?preview=True).
-> > 3. Typing `SELECT gts.HG002_NA24385_son, gts.HG003_NA24149_father from variants` into **The query to be issued to the database** and `(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)` into **Restrictions to apply to genotype values** will generate [this output](https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be21ed02/display/?preview=True).
+> > 2. Typing the same expression `SELECT * from variants` into **The query to be issued to the database** and `(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)` into **Restrictions to apply to genotype values** will generate this output.
+> > 3. Typing `SELECT gts.HG002_NA24385_son, gts.HG003_NA24149_father from variants` into **The query to be issued to the database** and `(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)` into **Restrictions to apply to genotype values** will generate this output.
 > {: .solution }
 {: .question}
 
@@ -309,7 +309,7 @@ Wildcards simply writing SQL expressions when searching across multiple terms. T
 >
 > > ### {% icon solution %} Solution
 > >
-> > Type `SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants` into **The query to be issued to the database** and `(gt_types).(*).(==HET).(all)` into **Restrictions to apply to genotype values**. Here we use wildcards for the query (`(gts.*)` = get genotypes for **all** samples) and genotype filtering (`(gt_types).(*).(==HET).(all)`, the [all operator](https://gemini.readthedocs.org/en/latest/content/querying.html#the-all-operator) implies that want results for **all** afftected individuals). It will generate [this output](https://usegalaxy.org/datasets/bbd44e69cb8906b5819e1404b5e127d1/display/?preview=True).
+> > Type `SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants` into **The query to be issued to the database** and `(gt_types).(*).(==HET).(all)` into **Restrictions to apply to genotype values**. Here we use wildcards for the query (`(gts.*)` = get genotypes for **all** samples) and genotype filtering (`(gt_types).(*).(==HET).(all)`, the [all operator](https://gemini.readthedocs.org/en/latest/content/querying.html#the-all-operator) implies that want results for **all** afftected individuals). It will generate this output.
 > >
 > {: .solution }
 {: .question}
