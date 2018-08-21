@@ -49,7 +49,7 @@ layout: base
             </tr>
 
             {% for material in topic.material %}
-                {% if material.enable != "false" %}
+                {% if material.enable == nil or material.enable == true %}
                         <script type="application/ld+json">
                             {% include material.jsonld content=material %}
                         </script>
