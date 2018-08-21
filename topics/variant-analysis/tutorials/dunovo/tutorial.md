@@ -3,11 +3,6 @@ layout: tutorial_hands_on
 
 title: "Calling very rare variants"
 zenodo_link: ""
-<<<<<<< HEAD
-galaxy_tour: no
-slides: no
-=======
->>>>>>> remove slides
 questions:
   - "What frequency of variants is so low that it is obscured by sequencing error rate?"
   - "What are the different types of consensus sequences produced from duplex sequencing?"

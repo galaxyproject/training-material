@@ -1,7 +1,29 @@
 ---
 layout: tutorial_hands_on
-topic_name: transcriptomics
-tutorial_name: clipseq
+
+title: CLIP-Seq data analysis from pre-processing to motif detection
+zenodo_link: https://zenodo.org/record/1327423
+questions:
+  - How is raw CLIP-Seq data processed and analysed?
+  - How do I find binding motifs and targets for a protein (e.g., RBFOX2)?
+objectives:
+  - Remove Adapters, Barcodes and Unique Molecular Identifiers (UMIs) from the reads
+  - Align trimmed reads with STAR
+  - De-duplicate the read library
+  - Inspect the read mapping and de-duplication quality
+  - Perform peak calling with PEAKachu
+  - Analyse the peaks and find potential binding motifs and targets
+  - Check the quality of the peak calling
+time_estimation: 6h
+key_points:
+  - Sophisticated analysis of CLIP-Seq data is possible using tools hosted by Galaxy.
+  - Analysis of the datasets needs multiple methods to assess the quality of the data and to answer the biological question of interest.
+  - CLIP-Seq data varies from protocol to protocol, thus flexible changes to the data anylsis are required which is supported by Galaxy.
+  - By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced.
+contributors:
+  - Florian-H-Lab
+  - dmaticzka
+  - bebatut
 ---
 
 # Introduction
