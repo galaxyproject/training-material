@@ -18,9 +18,137 @@ requirements:
 maintainers:
   - bebatut
   - malloryfreeberg
+<<<<<<< HEAD
   - mblue9
 
 
+=======
+  - moheydarian
+  - erxleben
+  - pavanvidem
+  - blankclemens
+- title: Differential abundance testing of small RNAs
+  type: tutorial
+  name: srna
+  zenodo_link: https://zenodo.org/record/826906
+  galaxy_tour: false
+  hands_on: true
+  slides: false
+  workflows: true
+  questions:
+  - What small RNAs are expressed?
+  - What RNA features have significantly different numbers of small RNAs targeting
+    them between two conditions?
+  objectives:
+  - Process small RNA-seq datasets to determine quality and reproducibility.
+  - Filter out contaminants (e.g. rRNA reads) in small RNA-seq datasets.
+  - Differentiate between subclasses of small RNAs based on their characteristics.
+  - Identify differently abundant small RNAs and their targets.
+  time_estimation: 3h
+  key_points:
+  - Analysis of small RNAs is complex due to the diversity of small RNA subclasses.
+  - Both alignment to references and transcript quantification approaches are useful
+    for small RNA-seq analyses.
+  contributors:
+  - malloryfreeberg
+- title: Visualization of RNA-Seq results with CummeRbund
+  type: tutorial
+  name: rna-seq-viz-with-cummerbund
+  zenodo_link: https://zenodo.org/record/1001880
+  galaxy_tour: false
+  hands_on: true
+  slides: true
+  workflows: true
+  questions:
+  - How are RNA-Seq results stored?
+  - Why are visualization techniques needed?
+  - How to select our desired subjects for differential gene expression analysis?
+  objectives:
+  - Manage RNA-Seq results
+  - Extract the desired subject for differential gene expression analysis
+  - Visualize information
+  time_estimation: 1h
+  key_points:
+  - Extract informations from a SQLite CuffDiff database
+  - Filter and sort results to highlight differential expressed genes of interest
+  - Generate publication-ready visualizations for RNA-Seq analysis results
+  contributors:
+  - bagnacan
+- title: Reference-based RNAseq data analysis (long)
+  type: tutorial
+  name: rb-rnaseq
+  zenodo_link: ''
+  workflows: false
+  galaxy_tour: false
+  hands_on: true
+  slides: false
+  questions:
+  - How to perform analysis of RNAseq data when reference genome is available?
+  objectives:
+  - Learns basic concepts of RNAseq analysis
+  time_estimation: 1h
+  key_points: null
+  contributors:
+  - nekrut
+- title: Preprocessing of single-cell data
+  name: scrna_preprocessing
+  type: tutorial
+  zenodo_link: https://zenodo.org/record/1345635
+  hands_on: true
+  slides: false
+  workflows: true
+  galaxy_tour: false
+  questions:
+    - How do we separate reads from seperate cells?
+    - How do we reduce PCR bias?
+    - How do we verify a barcode format?
+    - How do we check for cross-contamination?
+  objectives:
+    - Demultiplex FASTQ data via UMI-tools
+    - Understand and validate the extraction of UMIs and Cell-Barcodes
+    - Obtain an overview of general alignment and quantification techniques
+    - Generate a count matrix for downstream scRNA analysis
+  time_estimation: 1h
+  key_points:
+    - Verifying the distribution of barcodes via a FASTQC plot
+    - Relocating barcodes into headers
+    - Merging matrices from different batches together
+    - Removing unwanted barcodes
+  contributors:
+    - mtekman
+- title: CLIP-Seq data analysis from pre-processing to motif detection
+  name: clipseq
+  type: tutorial
+  zenodo_link: https://zenodo.org/record/1327423
+  hands_on: true
+  slides: false
+  workflows: true
+  galaxy_tour: false
+  questions:
+  - How is raw CLIP-Seq data processed and analysed?
+  - How do I find binding motifs and targets for a protein (e.g., RBFOX2)?
+  objectives:
+  - Remove Adapters, Barcodes and Unique Molecular Identifiers (UMIs) from the reads
+  - Align trimmed reads with STAR
+  - De-duplicate the read library
+  - Inspect the read mapping and de-duplication quality
+  - Perform peak calling with PEAKachu
+  - Analyse the peaks and find potential binding motifs and targets
+  - Check the quality of the peak calling
+  time_estimation: 6h
+  key_points:
+  - Sophisticated analysis of CLIP-Seq data is possible using tools hosted by Galaxy.
+  - Analysis of the datasets needs multiple methods to assess the quality of the data and to answer the biological question of interest.
+  - CLIP-Seq data varies from protocol to protocol, thus flexible changes to the data anylsis are required which is supported by Galaxy.
+  - By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced.
+  contributors:
+  - Florian-H-Lab
+  - dmaticzka
+  - bebatut
+maintainers:
+- bebatut
+- malloryfreeberg
+>>>>>>> fix to foldername
 references:
   -
     authors: "Shirley Pepke et al"
