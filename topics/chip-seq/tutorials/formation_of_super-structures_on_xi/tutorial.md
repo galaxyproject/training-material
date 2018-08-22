@@ -21,13 +21,13 @@ Some changes in the histone modifications could be involved. For example, the H3
 
 More H3K27me3 and less H3K4m3 on the Xi could explain a lower expression of the genes there.
 
-It has been also observed that the Xi adopts a distinct conformation without evident compartments or TAD. Cohesins, condensins and CCCTC-binding factor (CTCF) play key roles in chromosomal architectures and TAD formation, other potential cause of the repression of the expression of the genes on Xi.
+It has been also observed that the Xi adopts a distinct conformation without evident compartments or TAD. Cohesins, condensins and CCCTC-binding factor (CTCF) play key roles in chromosomal architectures and TAD formation which are other potential cause of the repression of the expression of the genes on Xi.
 
 The structural-maintenance-of-chromosomes hinge domain containing 1 (SMCHD1) has been found enriched on the Xi. It may be the potential actor in the shape of Xi and the change in gene expression there.
 
 [Wang et al. (2018)](https://www.cell.com/cell/fulltext/S0092-8674(18)30584-1) investigates the mechanism by which the SMCHD1 gene shapes the Xi and represses the expression of the genes on Xi in mouse.
 
-Their idea was to identify the differences could be observed between the Xi and activated X chromosome, on both wild-type and SMCHD1 gene knockdown samples to study the SMCHD1 effect.
+Their idea was to identify the differences which could be observed between the Xi and activated X chromosome, on both wild-type and SMCHD1 gene knockdown samples to study the SMCHD1 effect.
 In different experiments, they targetted histones with H3K27me3 or H3K4me3 and CTCF using ChIP-seq experiments:
 
 ![ChIP-seq workflow](../../images/formation_of_super-structures_on_xi/Chromatin_immunoprecipitation_sequencing.jpg "Source: http://e.biohackers.net/ChIP-seq")
@@ -600,7 +600,7 @@ We are using **bamCoverage** {% icon tool %}. Given a BAM file, this tool genera
 
 ## Generation of input-normalized coverage files
 
-To extract only the information induced by the immunoprecipitation, we normalize for each patient the coverage file for the sample that underwent immunoprecipitation by the coverage file for the input sample. Here we use the tool **bamCompare** {% icon tool %} which compare 2 BAM files while caring for sequencing depth normalization.
+To extract only the information induced by the immunoprecipitation, we normalize the coverage file for the sample that underwent immunoprecipitation by the coverage file for the input sample. Here we use the tool **bamCompare** {% icon tool %} which compare 2 BAM files while caring for sequencing depth normalization.
 
 > ### {% icon hands_on %} Hands-on: Generation of input-normalized coverage files
 >
