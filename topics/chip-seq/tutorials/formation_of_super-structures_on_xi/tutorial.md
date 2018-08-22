@@ -35,7 +35,11 @@ Within a cell nucleus, the DNA is tightly-packed and the chromatin is spatially 
 
 At the smallest scale, DNA is packaged into units called nucleosomes, made of eight histone proteins. 
 
-At a larger scales than nucleosomes, DNA is forming loops. DNA elements elements that would be otherwise be separated by large distances can interact. The corresponding self-interacting (or self-associating) domains are found in many organisms: they are called Topologically Associating Domains (TADs) in mammalian cells. Mammalian chromosomes are also partitioned into two spatial compartments, labelled "A" and "B", where regions in compartment A tend to interact preferentially with A compartment-associated regions than B compartment-associated ones. Similarly, regions in compartment B tend to associate with other B compartment-associated regions.
+On a larger scale than nucleosomes, DNA is forming loops. DNA elements that would be otherwise separated by large distances can interact. The corresponding self-interacting (or self-associating) domains are found in many organisms: they are called Topologically Associating Domains (TADs) in mammalian cells. Mammalian chromosomes are also partitioned into two spatial compartments, labelled "A" and "B", where regions in compartment A tend to interact preferentially with A compartment-associated regions than B compartment-associated ones. Similarly, regions in compartment B tend to associate with other B compartment-associated regions.
+
+> ### {% icon tip %} Tip: Learn more on chromosome conformation
+> To learn more about chromosome conformation and TADs, you can follow our [HiC tutorial]({{site.baseurl}}/topics/epigenetics/tutorials/hicexplorer/tutorial.html)
+{: .tip}
 
 In mammals, the X chromosome inactivation (XCI) balances the dosage of X-linked genes between females and males. The genes on the inactive X (Xi) chromosome are not expressed. 
 
@@ -45,18 +49,18 @@ Some changes in the histone modifications could be involved. For example, the H3
 
 More H3K27me3 and less H3K4m3 on the Xi could explain a lower expression of the genes there. 
 
-It has been also observed that the Xi adopts a distinct conformation without evident compartments or TAD. Cohesins, condensins and CCCTC-binding factor (CTCF) play key roles in chromosomal architectures and TAD formation, other potential cause of the repression of the expression of the genes on Xi.
+It has been also observed that the Xi adopts a distinct conformation without evident compartments or TAD. Cohesins, condensins and CCCTC-binding factor (CTCF) play key roles in chromosomal architectures and TAD formation which are other potential cause of the repression of the expression of the genes on Xi.
 
 The structural-maintenance-of-chromosomes hinge domain containing 1 (SMCHD1) has been found enriched on the Xi. It may be the potential actor in the shape of Xi and the change in gene expression there.
 
 [Wang et al. (2018)](https://www.cell.com/cell/fulltext/S0092-8674(18)30584-1) investigates the mechanism by which the SMCHD1 gene shapes the Xi and represses the expression of the genes on Xi in mouse.
 
-Their idea was to identify the differences could be observed between the Xi and activated X chromosome, on both wild-type and SMCHD1 gene knockdown samples to study the SMCHD1 effect. 
+Their idea was to identify the differences between the Xi and activated X chromosome, on both wild-type and SMCHD1 gene knockdown samples to study the SMCHD1 effect. 
 In different experiments, they targetted histones with H3K27me3 or H3K4me3 and CTCF using ChIP-seq experiments:
 
 ![ChIP-seq workflow](../../images/formation_of_super-structures_on_xi/Chromatin_immunoprecipitation_sequencing.jpg "Source: http://e.biohackers.net/ChIP-seq")
 
-They obtained sequences corresponding to portion of DNA linked to histones with H3K27me3, H3K4me3 or CTCF are found. Using this information, they could identify if there is differences in the H3K27me3, H3K4me3 and CTCF between the X (active or inactive) chromosomes and the potentially influenced genes.
+They obtained sequences corresponding to portion of DNA linked to histones with H3K27me3, H3K4me3 or CTCF are found. Using this information, they could identify if there are differences in the H3K27me3, H3K4me3 and CTCF between the X (active or inactive) chromosomes and the potentially influenced genes.
 
 In the upcoming tutorial, we will reproduce the analysis of the ChIP-seq data step by step:
 
@@ -80,7 +84,7 @@ In the upcoming tutorial, we will reproduce the analysis of the ChIP-seq data st
 
 The first step of any ChIP-Seq data analysis is quality control of the raw sequencing data. 
 
-For the saving time, we will do it only on the data of one sample `wt_H3K4me3_rep1` that has been down-sampled.
+To save time, we will do it only on the data of one sample `wt_H3K4me3_rep1` that has been down-sampled. keep in mind that with real data this should be done on all samples.
 
 > ### {% icon hands_on %} Hands-on: Import the data
 >
@@ -92,47 +96,19 @@ For the saving time, we will do it only on the data of one sample `wt_H3K4me3_re
 >    https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
 >    ```
 >
->    > ### {% icon tip %} Tip: Importing data via links
->    >
->    > * Copy the link location
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > * Paste the link into the text field
->    > * Press **Start** and **Close** the window
->    > * Click on the `pencil` icon once the file is imported
->    > * If format is not `fastqsanger`:
->    > > * Click on **Datatype** in the middle panel
->    > > * Select `fastqsanger` as **New Type**
->    {: .tip}
->
->    > ### {% icon tip %} Tip: Importing data from a data library
->    >
->    > * Go into "Shared data" (top panel) then "Data libraries"
->    > * Click on "Training data" and then "Analyses of ChIP-Seq data"
->    > * Select interesting files
->    > * Click on "Import selected datasets into history"
->    > * Import in the history
->    {: .tip}
+>    {% include snippets/import_via_link.md %}
+>    {% include snippets/import_from_data_library.md %}
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
 > 4. Rename the files `wt_H3K4me3_read1` and `wt_H3K4me3_read2`
 > 3. Inspect the first file by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
 >
->    > ### {% icon question %} Questions
->    >
->    > 1. How are the DNA sequences stored?
->    > 2. What are the other entries?
->    >
->    > > ### {% icon solution %} Solution
->    > > 1. The DNA sequences are stored in the second line of every 4-line group
->    > > 2. This file is called a [FastQ file](https://en.wikipedia.org/wiki/FASTQ_format). It stores sequence information and quality information. Each sequence is represented by a group of 4 lines with the 1st line being the sequence id, the second the sequence of nucleotides, the third a transition line and the last one a sequence of quality score for each nucleotide.
->    > {: .solution }
->    {: .question}
->
 {: .hands_on}
 
-During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis, ultimately leading to a misinterpretation of the data.
+{% include topics/sequence-analysis/tutorials/quality-control/fastq_question.md %}
+
+During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis abd can lead to a misinterpretation of the data.
 
 Sequence quality control is therefore an essential first step in your analysis. We use here similar tools as described in ["Quality control" tutorial]({{site.baseurl}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
 
@@ -195,7 +171,9 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >
 {: .hands_on}
 
-It is often necessary to trim sequenced read, for example, to get rid of bases that were sequenced with high uncertainty (= low quality bases).
+It is often necessary to trim sequenced read, for example, to get rid of bases that were sequenced with high uncertainty (= low quality bases) at the read ends.
+
+{% include topics/sequence-analysis/tutorials/quality-control/paired_end_question.md forward="wt_H3K4me3_read1" reverse="wt_H3K4me3_read2" %}
 
 > ### {% icon hands_on %} Hands-on: Trimming low quality bases
 >
@@ -220,8 +198,8 @@ It is often necessary to trim sequenced read, for example, to get rid of bases t
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. In the forward reads, how many bp has been remove because of bad quality?
->    > 2. And in the reverse reads?
+>    > 1. How many basepairs has been removed from the forwards reads because of bad quality?
+>    > 2. And from the reverse reads?
 >    > 3. How many sequence pairs have been removed because at least one read was shorter than the length cutoff?
 >    >
 >    > > ### {% icon solution %} Solution
@@ -236,30 +214,14 @@ It is often necessary to trim sequenced read, for example, to get rid of bases t
 
 With ChiP sequencing, we obtain sequences corresponding to portion of DNA linked to histones with H3K4me3. As H3K4me3 opens the chromatime, nearby genes are more transcribed. It would be interesting to know if there is a difference in the quantity of DNA impacted by H3K4me3 and the impacted genes between active and inactive X chromosome.
 
-We first need to figure where the sequenced DNA fragments originated from in the genome. The short reads must be aligned to a reference genome and then identify the binding sites.
-
-This is equivalent to solving a jigsaw puzzles, but unfortunately, not all pieces are unique.
-
-In principle, we could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way may, however, take a couple of weeks. And we do not really care about exact base to base correspondence (**alignment**). We are more interesting on "where did my reads come from?", an approach called **mapping**.
+{% include topics/sequence-analysis/tutorials/mapping/mapping_explanation.md
+    to_identify="binding sites"
+    mapper="Bowtie2"
+    mapper_link="http://bowtie-bio.sourceforge.net/bowtie2/index.shtml"
+    answer_3="Wang et al. (2018) did ChIP-seq on mouse. So we should use the mouse reference genome. We will use mm10 (the latest build)"
+%}
 
 ## Running Bowtie2
-
-Nowadays, there are many read alignment programs for shotgun sequenced DNA. We will use here [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml).
-
-To map the reads, we need a reference genome.
-
-> ### {% icon question %} Questions
->
-> 1. What is a reference genome?
-> 2. For human, several possible reference genomes are available: hg18, hg19, hg38, etc. What do they correspond to?
-> 2. Which reference genome should we use?
->
-> > ### {% icon solution %} Solution
-> > 1. A reference genome (or reference assembly) is a DNA sequence assembled by different lab as a representative example of a species' DNA sequence. As they are often assembled from the sequencing of the DNA from different donors, they do not accurately represent the set of genes of any single person but a mosaic of different DNA sequences from each donor.
-> > 2. As the cost of DNA sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are builts and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different versions released (named build)
-> > 3. Wang et al. (2018) did ChIP-seq on mouse. So we should use the mouse reference genome. We will use mm10 (the latest build).
-> {: .solution }
-{: .question}
 
 > ### {% icon hands_on %} Hands-on: Mapping
 >
@@ -278,7 +240,7 @@ To map the reads, we need a reference genome.
 >    > How many reads where mapped? Uniquely or several times?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > The overall alignment rate is 98.64%. This score is quite high. If you have less than 70-80%, you should investigate the origin: contamination, etc.
+>    > > The overall alignment rate is 98.64%. This score is quite high. If you have less than 70-80%, you should investigate the cause: contamination, etc.
 >    > >
 >    > > 43719 (90.27%) reads have been aligned concordantly exactly 1 time and 3340 (6.90%) aligned concordantly >1 times. The latter ones correspond to multiple mapped reads. Allowing for multiple  mapped reads increases the number of usable reads and the sensitivity of peak detection;
 however, the number of false positives may also increase. Here the number of uniquely mapped reads is sufficient to analyze to remove the multi-mapped reads.
@@ -287,70 +249,15 @@ however, the number of false positives may also increase. Here the number of uni
 >
 {: .hands_on}
 
-The output of Bowtie2 is a BAM file (Binary Alignment Map), a compressed, binary file storing the sequences mapped to a reference sequence.
+The output of Bowtie2 is a BAM file.
 
 ## Inspection of a BAM file
 
-> ### {% icon hands_on %} Hands-on: Conversion into a SAM file
->
-> 1. Inspect the {% icon param-file %} `aligned reads (BAM)` file (output of **Bowtie2** {% icon tool %})
->
-{: .hands_on}
-
-A [BAM file](https://en.wikipedia.org/wiki/SAM_(file_format)) (or a SAM file, the non compressed version) consists:
-
-- A header section with the chromosome names and lengths (the lines starting with the `@` symbol)
-- An alignment section consisting of a table with 11 mandatory fields, as well as a variable number of optional fields:
-
-    Col | Field | Type | Brief Description
-    --- | --- | --- | ---
-    1 | QNAME | String | Query template NAME
-    2 | FLAG | Integer | bitwise FLAG
-    3 | RNAME | String | References sequence NAME
-    4 | POS | Integer | 1- based leftmost mapping POSition
-    5 | MAPQ | Integer | MAPping Quality
-    6 | CIGAR | String | CIGAR String
-    7 | RNEXT | String | Ref. name of the mate/next read
-    8 | PNEXT | Integer | Position of the mate/next read
-    9 | TLEN | Integer | observed Template LENgth
-    10 | SEQ | String | segment SEQuence
-    11 | QUAL | String | ASCII of Phred-scaled base QUALity+33 
-
-> ### {% icon question %} Questions
->
-> 1. Which information do you find in a SAM/BAM file?
-> 2. What is the additional information compared to a FASTQ file?
->
-> > ### {% icon solution %} Solution
-> > 1. Sequences and quality information, like a FASTQ
-> > 2. Mapping information, Location of the read on the chromosome, Mapping quality, etc
-> {: .solution }
-{: .question}
+{% include topics/sequence-analysis/tutorials/mapping/bam_explanation.md mapper="Bowtie2" %}
 
 ## Visualization using a Genome Browser
 
-> ### {% icon hands_on %} Hands-on: Visualization of the reads in IGV
->
-> 1. Install [IGV](https://software.broadinstitute.org/software/igv/download) (if not already installed)
-> 1. Expand the {% icon param-file %} `aligned reads (BAM)` file (output of **Bowtie2** {% icon tool %})
-> 1. Click on the `local` in `display with IGV` to load the reads into the IGV browser
-> 2. Zoom on the chromosome 2 (`chr2:91,053,413-91,055,345`)
-{: .hands_on}
-
-The reads have a direction: they are mapped to the forward or reverse strand, respectively. When hovering over a read, extra information is displayed
-
-> ### {% icon question %} Questions
->
-> 1. Some reads have colored lines included. What is this?
->
-> > ### {% icon solution %} Solution
-> > 1. Try to zoom in in one of those lines and you will see the answer!
-> {: .solution }
-{: .question}
-
-> ### {% icon comment %} Comments
-> Because the number of reads over a region can be quite large, the IGV browser by default only allows to see the reads that fall into a small window. This behaviour can be changed in the IGV from `view > Preferences > Alignments`.
-{: .comment}
+{% include topics/sequence-analysis/tutorials/mapping/igv.md tool="Bowtie2" region_to_zoom="chr2:91,053,413-91,055,345" %}
 
 # Step 3: ChIP-seq Quality Control
 
