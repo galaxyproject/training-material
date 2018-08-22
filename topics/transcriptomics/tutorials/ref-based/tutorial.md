@@ -4,34 +4,47 @@ layout: tutorial_hands_on
 title: "Reference-based RNA-Seq data analysis"
 zenodo_link: "https://zenodo.org/record/1185122"
 questions:
-  - "What are the effects of Pasilla (PS) gene depletion on splicing events?"
-  - "How to analyze RNA sequencing data using a reference genome?"
+    - What are the effects of Pasilla (PS) gene depletion on splicing events?
+    - How to analyze RNA sequencing data using a reference genome?
 objectives:
-  - "Analysis of RNA sequencing data using a reference genome"
-  - "Analysis of differentially expressed genes"
-  - "Identification of functional enrichment among differentially expressed genes"
-time_estimation: "1d"
+    - Apply proper mapper for RNA-sequencing data using a reference genome
+    - Understand the process to identify differentially expressed genes
+    - Apply a functional enrichment tool on differentially expressed genes
+time_estimation: 1d
 key_points:
-  - "Using a spliced mapping tool for eukaryotic RNA seq data"
-  - "Running a differential gene expression with taking care of the factors to study"
-  - "Running a differential exon usage with taking care of the factors to study"
+    - A spliced mapping tool should be used on eukaryotic RNA seq data
+    - Numerous factors should be taken into account when running a differential gene expression
 contributors:
-  - bebatut
-  - malloryfreeberg
-  - moheydarian
-  - erxleben
-  - pavanvidem
-  - blankclemens
+    - bebatut
+    - malloryfreeberg
+    - moheydarian
+    - erxleben
+    - pavanvidem
+    - blankclemens
+    - mblue9
 ---
 
 # Introduction
 {:.no_toc}
 
-In the study of [Brooks *et al.* 2011](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3032923/), the *Pasilla* (*PS*) gene, which is the *Drosophila* homologue of the mammalian splicing regulators Nova-1 and Nova-2 proteins, was depleted in *Drosophila melanogaster* by RNA interference (RNAi). The authors wanted to identify exons regulated by the *Pasilla* gene using RNA sequencing data.
+RNA-Seq is used to analyze the continuously changing cellular transcriptome, the set of all RNA molecules in one cell or a population of cells. Specifically, RNA-Seq facilitates the ability to look at alternative gene spliced transcripts, post-transcriptional modifications, gene fusion, mutations/SNPs and changes in gene expression over time, or differences in gene expression in different groups or treatments
 
-Total RNA was isolated and used to prepare either single-end or paired-end RNA-seq libraries for treated (PS depleted) and untreated samples. These libraries were sequenced to obtain RNA-seq reads for each sample. The effects of *Pasilla* gene depletion on splicing events could then be analyzed by comparison of the RNA-seq data for the treated and the untreated samples.
+In the study of [Brooks *et al.* 2011](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3032923/), the authors wanted to identify exons regulated by the *Pasilla* gene (the *Drosophila* homologue of the mammalian splicing regulators Nova-1 and Nova-2 proteins) using RNA sequencing data. They depleted the *Pasilla* (*PS*) gene in *Drosophila melanogaster* by RNA interference (RNAi). 
 
-In a reference-based RNA-seq data analysis the reads are aligned (or mapped) against a reference genome. This significantly improves the ability to reconstruct transcripts and identify differences in expression between conditions. The genome of *Drosophila melanogaster* is known and assembled and it can be used as the reference genome in this analysis. Note that new versions of reference genomes may be released if the assembly improves, and the latest version of the *Drosophila melanogaster* reference genome assembly is Release 6 [(dm6)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4383921/).
+Total RNA was then isolated and used to prepare both single-end and paired-end RNA-seq libraries for treated (PS depleted) and untreated samples. These libraries were sequenced to obtain RNA-seq reads for each sample. The RNA-seq data for the treated and the untreated samples can be then compared to identify the effects of *Pasilla* gene depletion on splicing events.
+
+In this tutorial, we will reproduce the analysis of the RNA-Seq data step by step.
+
+The original data is available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508).
+
+In this tutorial we will use the first 7 samples:
+
+- 4 untreated samples: [GSM461176](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461176), [GSM461177](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461177), [GSM461178](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461178), [GSM461182](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461182)
+- 3 treated samples (*Pasilla* gene depleted by RNAi): [GSM461179](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461179), [GSM461180](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461180), [GSM461181](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461181)
+
+Each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Moreover, two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment.
+
+The raw RNA-seq reads have been extracted from the Sequence Read Archive (SRA) files and converted into FASTQ files. In the first part of this tutorial we will use the files for 2 of the 7 samples, to demonstrate analysis of FASTQs. Optionally later you can import the FASTQs for the other 5 samples.
 
 > ### Agenda
 >
@@ -45,17 +58,6 @@ In a reference-based RNA-seq data analysis the reads are aligned (or mapped) aga
 # Pretreatments
 
 ## Data upload
-
-The original data is available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508).
-
-In this tutorial we will use the first 7 samples:
-
-- 4 untreated samples: [GSM461176](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461176), [GSM461177](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461177), [GSM461178](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461178), [GSM461182](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461182)
-- 3 treated samples (*Pasilla* gene depleted by RNAi): [GSM461179](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461179), [GSM461180](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461180), [GSM461181](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461181)
-
-Each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Moreover, two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment.
-
-The raw RNA-seq reads have been extracted from the Sequence Read Archive (SRA) files and converted into FASTQ files. In the first part of this tutorial we will use the files for 2 of the 7 samples, to demonstrate analysis of FASTQs. Optionally later you can import the FASTQs for the other 5 samples.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -75,11 +77,17 @@ The raw RNA-seq reads have been extracted from the Sequence Read Archive (SRA) f
 >       {% include snippets/import_from_data_library.md %}
 >
 >    > ### {% icon comment %} Comment
->    > Note that these are the full files for the samples and ~1.5Gb each so it may take some minutes to import. (For a quicker run-through of the FASTQ steps a small subset of each FASTQ file (~5Mb) can be found here https://zenodo.org/record/290221).
+>    > Note that these are the full files for the samples and ~1.5Gb each so it may take some minutes to import.
+>    >
+>    >For a quicker run-through of the FASTQ steps a small subset of each FASTQ file (~5Mb) can be found here https://zenodo.org/record/290221
 >    {: .comment}
 >
-> 3. Click the pencil button on each dataset in the history and rename the file according to the sample id (e.g. `GSM461177_1`) 
-> 4. Check that the datatype is `fastqsanger` (e.g. **not** `fastq`).
+> 3. Rename each dataset according to the sample id (e.g. `GSM461177_1`)
+> 
+>    {% include snippets/rename_dataset.md %}
+>
+> 4. Check that the datatype is `fastqsanger` (e.g. **not** `fastq`)
+>
 >    If the datatype is not `fastqsanger`, please change the datatype to `fastqsanger`
 >
 >    {% include snippets/change_datatype.md datatype="fastqsanger" %}
@@ -90,25 +98,24 @@ The raw RNA-seq reads have been extracted from the Sequence Read Archive (SRA) f
 >
 {: .hands_on}
 
+{% include topics/sequence-analysis/tutorials/quality-control/fastq_question.md %}
+
 The reads are raw data from the sequencing machine without any pretreatments. They need to be assessed for their quality.
 
 ## Quality control
 
-For quality control we will use similar tools as described in [NGS-QC tutorial]({{site.baseurl}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
+During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis abd can lead to a misinterpretation of the data.
+
+Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in ["Quality control" tutorial]({{site.baseurl}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
-> 1. **FastQC** {% icon tool %}: Run FastQC on the FASTQ files to assess the quality of the reads
->       - "Short read data from your current history"
->           - Click on "Multiple datasets"
->           - Select all the FASTQ datasets
+> 1. **FastQC** {% icon tool %} with the following parameters
+>       - {% icon param-files %} *"Short read data from your current history"*: input datasets selected with **Multiple datasets**
 >
->       > ### {% icon tip %} Tip
->       >
->       > You can select several files by keeping the CTRL (or COMMAND) key pressed and clicking on the files of interest
->       {: .tip}
+>    {% include snippets/select_multiple_datasets.md %}
 >
-> 2. Inspect the webpage output from FastQC for the `GSM461177` sample
+> 2. Inspect the webpage output of **FastQC** {% icon tool %} for the `GSM461177` sample
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -122,53 +129,120 @@ For quality control we will use similar tools as described in [NGS-QC tutorial](
 >    >
 >    {: .question}
 >
-> 3. **MultiQC** {% icon tool %}: Run MultiQC to aggregate the FastQC reports
->      - "Which tool was used generate logs?" to `FastQC`
->      - "Type of FastQC output?" to `Raw data`
->      - "FastQC output" to the generated `Raw data` files (multiple datasets)
+> 3. **MultiQC** {% icon tool %} with the following parameters to aggregate the FastQC reports
+>      - In *"Results"*
+>        - *"Which tool was used generate logs?"*: `FastQC`
+>        - In *"FastQC output"*
+>           - *"Type of FastQC output?"*: `Raw data`
+>           - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of **FastQC** {% icon tool %})
 >
 > 4. Inspect the webpage output from MultiQC for each FASTQ
 >
 >    > ### {% icon question %} Questions
 >    >
->    > What do you think of the quality of the sequences?
+>    > 1. What do you think of the quality of the sequences?
+>    > 2. What should we do?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > Everything seems ok for 3 of the files but for GSM461180_2 the quality decreases quite a lot at the end of the sequences
+>    > > 1. Everything seems ok for 3 of the files but for `GSM461180_2` the quality decreases quite a lot at the end of the sequences:
+>    > >     - The `GSM461177` have 10.3 millions of sequences and `GSM461180` 12.3 millions
+>    > >     - All except `GSM461180_2` has a high proportion of duplicated reads (expected in RNA-Seq data)
+>    > > 
+>    > >        ![Sequence Counts](../../images/ref-based/fastqc_sequence_counts_plot.png "Sequence Counts")
+>    > > 
+>    > >     - The "Per base sequence quality" is globally good with a slight decrease at the end of the sequences. For `GSM461180_2`, the decrease is quite big.
+>    > > 
+>    > >        ![Sequence Quality](../../images/ref-based/fastqc_per_base_sequence_quality_plot.png "Sequence Quality")
 >    > >
->    > {: .solution}
->    >
->    {: .question}
->
-> 2. **Trim Galore** {% icon tool %}: Trim low quality sequences by running Trim Galore! with
->      - "Is this library paired- or single-end?" to `Paired-end`
->      - First "Reads in FASTQ format" to both `_1` fastqsanger datasets (multiple datasets)
->      - Second "Reads in FASTQ format" to both `_2` fastqsanger datasets (multiple datasets)
->
->    > ### {% icon question %} Questions
->    >
->    > Why do we run Trim Galore only once on a paired-end dataset and not twice, once for each dataset?
->    >
->    > > ### {% icon solution %} Solution
+>    > >     - The mean quality score over the reads is quite high, but the distribution is slightly different for `GSM461180_2`
 >    > >
->    > > Trim Galore can remove sequences if they become too short during the trimming process. For paired-end files Trim Galore removes entire sequence pairs if one (or both) of the two reads became shorter than the set length cutoff. Reads of a read-pair that are longer than a given threshold but for which the partner read has become too short can optionally be written out to single-end files. This ensures that the information of a read pair is not lost entirely if only one read is of good quality.
+>    > >        ![Per Sequence Quality Scores](../../images/ref-based/fastqc_per_sequence_quality_scores_plot.png "Per Sequence Quality Scores")
+>    > >
+>    > >     - Reads are not really following a normal distribution of GC content, except `GSM461180_2`
+>    > >
+>    > >        ![Per Sequence GC Content](../../images/ref-based/fastqc_per_sequence_gc_content_plot.png "Per Sequence GC Content")
+>    > >
+>    > >     - Few N in the reads
+>    > >
+>    > >        ![Per base N content](../../images/ref-based/fastqc_per_base_n_content_plot.png "Per base N content")
+>    > >
+>    > >     - Duplicated sequences: >10 to >500
+>    > >
+>    > >        ![Sequence Duplication Levels](../../images/ref-based/fastqc_sequence_duplication_levels_plot.png "Sequence Duplication Levels")
+>    > >     - Almost no known adapters and overrepresented sequences
+>    > >
+>    > > 2. If the quality of the reads is not good, we should:
+>    > >    1. Check what is wrong and think about it: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biaised percentage of bases in HiC data)
+>    > >    2. Ask the sequencing facility about it
+>    > >    3. Perform some quality treatment (in a reasonable way to not loose too much information) with some trimming or removal of bad reads
 >    > >
 >    > {: .solution}
 >    {: .question}
 >
 {: .hands_on}
 
-As the genome of *Drosophila melanogaster* is known and assembled, we can use this information and map the sequences to this genome to identify the effects of the *Pasilla* gene depletion on splicing events.
+We should trim sequenced read to get rid of bases that were sequenced with high uncertainty (= low quality bases) at the read ends but also remove the reads of overall bad quality.
+
+{% include topics/sequence-analysis/tutorials/quality-control/paired_end_question.md forward="GSM461177_1" reverse="GSM461177_2" %}
+
+> ### {% icon hands_on %} Hands-on: Quality control
+>
+> 1. **Cutadapt** {% icon tool %} with the following parameters to trim low quality sequences
+>    - *"Single-end or Paired-end reads?"*: `Paired-end`
+>       - {% icon param-files %} *"FASTQ/A file #1"*: both `_1` fastqsanger datasets (multiple datasets)
+>       - {% icon param-files %} *"FASTQ/A file #2"*: both `_2` fastqsanger datasets (multiple datasets)
+>
+>      The order is important here!
+>
+>      {% include topics/sequence-analysis/tutorials/quality-control/trimming_question.md %}
+>
+>    - In *"Filter Options"*
+>       - *"Minimum length"*: `20`
+>    - In *"Read Modification Options"*
+>       - *"Quality cutoff"*: `20`
+>    - In *"Output Options"*
+>       - *"Report"*: `Yes`
+>
+> 2. Inspect the generated txt files (`Report`)
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. How many basepairs has been removed from the forwards reads because of bad quality? And from the reverse reads?
+>    > 2. How many sequence pairs have been removed because at least one read was shorter than the length cutoff?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > 1. For `GSM461177`, 5,072,810 bp has been trimmed for the forward reads (read 1) and 8,648,619 bp on the reverse (read 2) because of quality. For `GSM461180`, 10,224,537 bp on forward and 51,746,850 bp on the reverse. It is not a surprise: we saw that the quality was dropping more at the end of the sequences for the reverse reads that for the forward reads, specially for `GSM461180_2`
+>    > > 2. 147,810 (1.4%) reads were too short for `GSM461177` and 1,101,875 (9%) for `GSM461180`.
+>    > {: .solution }
+>    {: .question}
+{: .hands_on}
 
 # Mapping
 
-To make sense of the reads we need to determine to which genes they belong. The first step is to determine their positions within the *Drosophila melanogaster* genome. This process is known as aligning or 'mapping' the reads to a reference.
+To make sense of the reads we need to figure out where the sequenced DNA fragments originated from in the genome to then determine to which genes they belong. 
+
+This process is known as aligning or 'mapping' the reads to a reference. This is equivalent to solving a jigsaw puzzles, but unfortunately, not all pieces are unique.
 
 > ### {% icon comment %} Comment
 >
 > Do you want to learn more about the principles behind mapping? Follow our [training]({{site.baseurl}}/topics/sequence-analysis/)
 {: .comment}
+
+As the genome of *Drosophila melanogaster* is known and assembled, we can use this information and map the sequences to this genome to identify which genes are affected by  the *Pasilla* gene depletion.
+
+> ### {% icon question %} Questions
+>
+> 1. What is a reference genome?
+> 2. For model organisms, several possible reference genomes are available (e.g. hg18, hg19, hg38 for human). What do they correspond to?
+> 2. Which reference genome should we use?
+>
+> > ### {% icon solution %} Solution
+> > 1. A reference genome (or reference assembly) is a DNA sequence assembled as a representative example of a species' DNA sequence. As they are often assembled from the sequencing of the DNA from different donors, they do not accurately represent the set of genes of any single person but a mosaic of different DNA sequences from each donor.
+> > 2. As the cost of DNA sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are builts and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different versions released (named build)
+> > 3. The genome of *Drosophila melanogaster* is known and assembled and it can be used as the reference genome in this analysis. Note that new versions of reference genomes may be released if the assembly improves, and the latest version of the *Drosophila melanogaster* reference genome assembly is Release 6 [(dm6)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4383921/).
+> {: .solution }
+{: .question}
 
 With eukaryotic transcriptomes most reads originate from processed mRNAs lacking introns, therefore they cannot be simply mapped back to the genome as we normally do for DNA data. Instead the reads must be separated into two categories:
 
@@ -216,40 +290,54 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using STAR.
 > ### {% icon hands_on %} Hands-on: Spliced mapping
 >
 > 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDGP6.87.gtf`) from the Shared Data library if available or from [Zenodo](https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.gtf) into your current Galaxy history
->    - Rename the dataset if necessary
->    - Verify that the datatype is `gtf` and not `gff` and that the datatype is `dm6`
+>    
+>    ```
+>    https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.gtf
+>    ```
 >
-> 2. **RNA STAR** {% icon tool %}: Map your reads on the reference genome with
->    - "Single-end or paired-end reads" to `Paired-end (as individual datasets)`
->    - "RNA-Seq FASTQ/FASTA file, forward reads" to the generated `trimmed reads pair 1` files (multiple datasets)
->    - "RNA-Seq FASTQ/FASTA file, reverse reads" to the generated `trimmed reads pair 2` files (multiple datasets)
->    - "Custom or built-in reference genome" to `Use a built-in index`
->    - "Reference genome with or without an annotation" to `use genome reference without builtin gene-model`
->    - "Select reference genome" to `Drosophila Melanogaster (dm6)`
->    - "Gene model (gff3,gtf) file for splice junctions" to the imported `Drosophila_melanogaster.BDGP6.87.gtf`
->    - "Length of the genomic sequence around annotated junctions" to `36`
+>    1. Rename the dataset if necessary
+>    2. Verify that the datatype is `gtf` and not `gff` and that the datatype is `dm6`
 >
->        This parameter should be length of reads - 1
+> 2. **RNA STAR** {% icon tool %} with the following parameters to map your reads on the reference genome:
+>    - *"Single-end or paired-end reads"*: `Paired-end (as individual datasets)`
+>       - {% icon param-files %} *"RNA-Seq FASTQ/FASTA file, forward reads"*: the `Read 1 Output` (outputs of **Cutadapt** {% icon tool %})
+>       - {% icon param-files %} *"RNA-Seq FASTQ/FASTA file, reverse reads"*: the `Read 2 Output` (outputs of **Cutadapt** {% icon tool %})
+>    - *"Custom or built-in reference genome"*: `Use a built-in index`
+>       - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
+>           - *"Select reference genome"*: `Drosophila Melanogaster (dm6)`
+>           - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: the imported `Drosophila_melanogaster.BDGP6.87.gtf`
+>           - *"Length of the genomic sequence around annotated junctions"*: `36`
 >
-> 3. **MultiQC** {% icon tool %}: Aggregate the STAR logs with
->      - "Which tool was used generate logs?" to `STAR`
->      - "Type of FastQC output?" to `Log`
->      - "STAR log output" to the generated `log` files (multiple datasets)
+>               This parameter should be length of reads - 1
+>
+> 3. **MultiQC** {% icon tool %} to aggregate the STAR logs
+>      - In *"Results"*
+>        - *"Which tool was used generate logs?"*: `STAR`
+>        - In *"STAR output"*
+>           - *"Type of STAR output?"*: `Log`
+>           - {% icon param-files %} *"STAR output"*: `log` files (output of **RNA STAR** {% icon tool %})
 >
 >    > ### {% icon question %} Question
 >    >
->    > Which percentage of reads mapped exactly once for both samples?
+>    > 1. Which percentage of reads mapped exactly once for both samples?
+>    > 2. What are the other available statistics?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > More than 83% for GSM461177 and more than 78% for GSM461180
+>    > > 1. More than 83% for GSM461177 and more than 79% for GSM461180
+>    > > 2. We also have access to the number and percentage of reads that are mapped at several location, mapped at too many different location, not mapped because too short.
 >    > >
+>    > >    ![STAR Alignment Scores](../../images/ref-based/star_alignment_plot.png "Alignment scores")
+>    > >
+>    > >    We could have been probably more strict in the minimal read length to avoid these unmapped reads because of length.
 >    > {: .solution}
 >    >
 >    {: .question}
 {: .hands_on}
 
 **STAR** generates a BAM file with the mapped reads.
+
+{% include topics/sequence-analysis/tutorials/mapping/bam_explanation.md mapper="RNA STAR" %}
 
 > ### {% icon question %} Question
 >
@@ -272,13 +360,10 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 
 > ### {% icon hands_on %} Hands-on: Inspection of mapping results
 >
-> 1. **IGV** {% icon tool %}: Visualize the aligned reads for `GSM461177`
->     - Click on the STAR BAM name in your history to expand it.
->     - Towards the bottom of the history item, find the line starting with `Display with IGV`
->
->        This is followed by 2 links:
->        - option 1: `local`. Select this option if you already have IGV installed on your machine
->        - option 2: `D. melanogaster (dm6)`. This will download and launch IGV on your local machine
+> 1. Install [IGV](https://software.broadinstitute.org/software/igv/download) (if not already installed)
+> 2. Start IGV locally
+> 3. Expand the {% icon param-file %} `mapped.bam` file (output of **RNA STAR** {% icon tool %}) for `GSM461177`
+> 4. Click on the `local` in `display with IGV` to load the reads into the IGV browser
 >
 >    > ### {% icon comment %} Comments
 >    >
@@ -348,8 +433,6 @@ After the mapping, we have the information on where the reads are located on the
 To identify exons that are regulated by the *Pasilla* gene, we need to identify genes and exons which are differentially expressed between samples with PS gene depletion (treated) and control (untreated) samples.
 In this tutorial, we will then analyze the differential gene expression and also the differential exon usage.
 
-Did the mapping exercise work for you? Great! :tada:
-
 # Analysis of the differential gene expression
 
 We will first investigate the differential gene expression to identify which genes are impacted by the *Pasilla* gene depletion.
@@ -359,6 +442,29 @@ We will first investigate the differential gene expression to identify which gen
 To compare the expression of single genes between different conditions (*e.g.* with or without PS depletion), an essential first step is to quantify the number of reads per gene.
 
 ![Counting the number of reads per annotated gene](../../images/gene_counting.png "Counting the number of reads per annotated gene")
+
+> ### {% icon question %} Question
+>
+> In the previous image, 
+>
+> 1. How many reads are found for the different exons? 
+> 2. How many reads are found for the different genes? 
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Number of reads per exons
+> >
+> >     Exon | Number of reads
+> >     --- | ---
+> >     gene1 - exon1 | 3
+> >     gene1 - exon2 | 2
+> >     gene2 - exon1 | 3
+> >     gene2 - exon2 | 4
+> >     gene2 - exon3 | 3
+> >
+> > 2. The gene1 has 4 reads, not 5 (gene1 - exon1 + gene1 - exon2) because of the splicing of the last read. Gene2: 6 (3 spliced reads)
+> {: .solution}
+{: .question}
 
 Two main tools could be used for that: [HTSeq-count](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ([Anders et al, Bioinformatics, 2015](https://academic.oup.com/bioinformatics/article/31/2/166/2366196)) or featureCounts ([Liao et al, Bioinformatics, 2014](https://academic.oup.com/bioinformatics/article/31/2/166/2366196)). FeatureCounts is considerably faster and requires far less computational resources so we will use it here.
 
@@ -391,16 +497,16 @@ Another option is to estimate these parameters with a tool called **Infer Experi
 
 > ### {% icon hands_on %} Hands-on: Determining the library strandness
 > 
-> 1. **Convert GTF to BED12** {% icon tool %}: First convert the GTF file to BED:
->    - "GTF File to convert" to `Drosophila_melanogaster.BDGP6.87.gtf`
+> 1. **Convert GTF to BED12** {% icon tool %} to convert the GTF file to BED:
+>    - {% icon param-file %} *"GTF File to convert"*: `Drosophila_melanogaster.BDGP6.87.gtf`
 >   
-> 2. **Infer Experiment** {% icon tool %}: Determine the library strandness with:
->    - "Input .bam file" to the STAR-generated `BAM` files (multiple datasets)
->    - "Reference gene model" to the BED12 file from the the step above
->    - "Number of reads sampled from SAM/BAM file (default = 200000)" to `200000`
+> 2. **Infer Experiment** {% icon tool %} to determine the library strandness with:
+>    - {% icon param-files %} *"Input .bam file"*: `mapped.bam` files (outputs of **RNA STAR** {% icon tool %})
+>    - {% icon param-file %} *"Reference gene model"*: BED12 file (output **Convert GTF to BED12** {% icon tool %})
+>    - *"Number of reads sampled from SAM/BAM file (default = 200000)"*: `200000`
 {: .hands_on}
 
-The Infer Experiment tool generates one file with information on:
+**Infer Experiment** {% icon tool %} tool generates one file with information on:
 - Paired-end or single-end library
 - Fraction of reads failed to determine
 - 2 lines
@@ -420,8 +526,18 @@ If the two "Fraction of reads explained by" numbers are close to each other, we 
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Fraction of reads explained by "1++,1--,2+-,2-+": 0.4648 - Fraction of reads explained by "1+-,1-+,2++,2--": 0.4388
-> > 2. The library seems to be of the type unstranded for both samples.
+> > 1. Results for `GSM46177`:
+> > 
+> >    ```
+> >    This is PairEnd Data
+> >    Fraction of reads failed to determine: 0.0963
+> >    Fraction of reads explained by "1++,1--,2+-,2-+": 0.4649
+> >    Fraction of reads explained by "1+-,1-+,2++,2--": 0.4388
+> >    ```
+> > 
+> >    so 46.46% of the reads are SF and 43.88% SR.
+> >
+> > 2. Similar statistics are found for `GSM461180`, so the library seems to be of the type unstranded for both samples.
 > {: .solution}
 {: .question}
 
@@ -444,32 +560,41 @@ We now run **featureCounts** to count the number of reads per annotated gene.
 
 > ### {% icon hands_on %} Hands-on: Counting the number of reads per annotated gene
 >
-> 1. **featureCounts** {% icon tool %}: Count the number of reads per gene using **featureCounts** with
->    - "Alignment file" to the STAR-generated `BAM` files (multiple datasets)
->    - "Specify strand information" to `Unstranded`
->    - "Gene annotation file" to `in your history`
->    - "Gene annotation file" to `Drosophila_melanogaster.BDGP6.87.gtf`
->    - "Output format" to `Gene-ID "\t" read-count (MultiQC/DESeq2/edgeR/limma-voom compatible)`
->    - Click on "Options for paired-end reads"
->    - "Count fragments instead of reads" to `Enabled; fragments (or templates) will be counted instead of reads`
->    - Click on "Advanced options"
->    - "GFF feature type filter" to `exon`
->    - "GFF gene identifier" to `gene_id`
->    - "Allow read to contribute to multiple features" to `No`
->    - "Count multi-mapping reads/fragments" to `Disabled; multi-mapping reads are excluded (default)`
->    - "Minimum mapping quality per read" to `10`
+> 1. **featureCounts** {% icon tool %} to count the number of reads per gene:
+>    - {% icon param-files %} *"Alignment file"*: `mapped.bam` files (outputs of **RNA STAR** {% icon tool %})
+>    - *"Specify strand information"*: `Unstranded`
+>    - *"Gene annotation file"*: `in your history`
+>       - {% icon param-file %} *"Gene annotation file"*: `Drosophila_melanogaster.BDGP6.87.gtf`
+>    - *"Output format"*: `Gene-ID "\t" read-count (MultiQC/DESeq2/edgeR/limma-voom compatible)`
+>    - *"Create gene-length file"*: `Yes`
+>    - In *"Options for paired-end reads"*:
+>       - *"Count fragments instead of reads"*: `Enabled; fragments (or templates) will be counted instead of reads`
+>    - In *"Advanced options"*:
+>       - *"GFF feature type filter"*: `exon`
+>       - *"GFF gene identifier"*: `gene_id`
+>       - *"Allow read to contribute to multiple features"*: `No`
+>       - *"Count multi-mapping reads/fragments"*: `Disabled; multi-mapping reads are excluded (default)`
+>       - *"Minimum mapping quality per read"*: `10`
 >
-> 2. **MultiQC** {% icon tool %}: Aggregate the FastQC report with
->      - "Which tool was used generate logs?" to `featureCounts`
->      - "Output of FeatureCounts" to the generated `summary` files (multiple datasets)
+> 2. **MultiQC** {% icon tool %} to aggregate the report
+>     - In *"Results"*:
+>       - *"Which tool was used generate logs?"*: `featureCounts`
+>           - {% icon param-files %} *"Output of FeatureCounts"*: `summary` files (outputs of **featureCounts** {% icon tool %})
 >
 >    > ### {% icon question %} Question
 >    >
->    > How many reads have been assigned to a gene?
+>    > 1. How many reads have been assigned to a gene?
+>    > 2. When should we be worried about the assignment rate? What should we do?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > Around 70% of the reads have been assigned to genes: this quantity is good enough. If the percentage is below 50%, you should investigate where your reads are mapping (with IGV) and check that the annotation corresponds to the correct reference genome version.
+>    > > 1. Around 70% of the reads have been assigned to genes: this quantity is good enough. 
+>    > >
+>    > >    ![featureCounts assignment](../../images/ref-based/featureCounts_assignment_plot.png "Assignments with featureCounts")
+>    > >    
+>    > >    Some reads are not assigned because multi-mapped and other assigned to no features or ambiguous ones.
+>    > > 
+>    > > 2. If the percentage is below 50%, you should investigate where your reads are mapping (inside genes or not, with IGV) and check that the annotation corresponds to the correct reference genome version.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -486,7 +611,7 @@ The main output of **featureCounts** is a table.
 > > ### {% icon solution %} Solution
 > >
 > > 1. The table has two columns: the gene id and the number of reads (or fragments in the case of paired-end reads) mapped to the gene
-> > 2. To display the most abundantly detected feature, we need to sort the table of counts. This can be done using the Sort tool, by sorting the table on the second column in descending order. This reveals that FBgn0000556 is the feature with the most counts (around 128,814 in GSM461177 and 126,933 in GSM461180).
+> > 2. To display the most abundantly detected feature, we need to sort the table of counts. This can be done using the **Sort** {% icon tool %} tool, by sorting the table on the second column in descending order. This reveals that FBgn0000556 is the feature with the most counts (around 128,741 in `GSM461177` and 127,416 in `GSM461180`).
 > >
 > {: .solution}
 {: .question}
@@ -560,19 +685,7 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 > ### {% icon hands_on %} Hands-on: Determine differentially expressed features
 >
 > 1. Create a new history
-> 2. Import the seven count files 
->    - From the Shared Data library (if available) 
->    - Or alternatively, from [Zenodo](https://zenodo.org/record/1185122) by pasting the links below:
->    ```
->    https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts
->    https://zenodo.org/record/1185122/files/GSM461177_untreat_paired.counts
->    https://zenodo.org/record/1185122/files/GSM461178_untreat_paired.counts
->    https://zenodo.org/record/1185122/files/GSM461179_treat_single.counts
->    https://zenodo.org/record/1185122/files/GSM461180_treat_paired.counts
->    https://zenodo.org/record/1185122/files/GSM461181_treat_paired.counts
->    https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
->    ```
->    and rename the Zenodo datasets to:
+> 2. Import the seven count files from [Zenodo](https://zenodo.org/record/1185122) or the Shared Data library (if available): 
 >
 >    - `GSM461176_untreat_single.counts`
 >    - `GSM461177_untreat_paired.counts`
@@ -582,26 +695,40 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 >    - `GSM461181_treat_paired.counts`
 >    - `GSM461182_untreat_single.counts`
 >
-> 3. **DESeq2** {% icon tool %}: Run **DESeq2** with:
->    - For "1: Factor"
->       - "Specify a factor name" to `Treatment`
->       - "1: Factor level"
->           - "Specify a factor level" to `treated`
->           - "Counts file(s)" to the 3 gene count files (multiple datasets) with `treated` in name
->       - "2: Factor level"
->           - "Specify a factor level" to `untreated`
->           - "Counts file(s)" to the 4 gene count files (multiple datasets) with `untreated` in name
->    - Click on "Insert Factor" (not on "Insert Factor level")
->    - For "2: Factor"
->       - "Specify a factor name" to `Sequencing`
->       - "1: Factor level"
->           - "Specify a factor level" to `PE`
->           - "Counts file(s)" to the generated count files (multiple datasets) with `paired` in name
->       - "2: Factor level"
->           - "Specify a factor level" to `SE`
->           - "Counts file(s)" to the generated count files (multiple datasets) with `single` in name
->    - "Files have header?" to `No`
->    - "Output normalized counts table" to `Yes`
+>    ```
+>    https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts
+>    https://zenodo.org/record/1185122/files/GSM461177_untreat_paired.counts
+>    https://zenodo.org/record/1185122/files/GSM461178_untreat_paired.counts
+>    https://zenodo.org/record/1185122/files/GSM461179_treat_single.counts
+>    https://zenodo.org/record/1185122/files/GSM461180_treat_paired.counts
+>    https://zenodo.org/record/1185122/files/GSM461181_treat_paired.counts
+>    https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
+>    ```
+> 
+> 3. Rename the datasets (if needed)
+> 4. **DESeq2** {% icon tool %} with the following parameters
+>    - In *"Factor"*:
+>       - In "1: Factor"
+>           - *"Specify a factor name"*: `Treatment`
+>           - In *"Factor level"*:
+>               - In *"1: Factor level"*:
+>                   - *"Specify a factor level"*: `treated`
+>                   - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `treated` in their name
+>               - In *"2: Factor level"*:
+>                   - *"Specify a factor level"*: `untreated`
+>                   - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `untreated` in their name
+>       - Click on *"Insert Factor"* (not on "Insert Factor level")
+>       - In "2: Factor"
+>           - "Specify a factor name" to `Sequencing`
+>           - In *"Factor level"*:
+>               - In *"1: Factor level"*:
+>                   - *"Specify a factor level"*: `PE`
+>                   - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `paired` in their name
+>               - In *"2: Factor level"*:
+>                   - *"Specify a factor level"*: `SE`
+>                   - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `single` in their name
+>    - *"Files have header?"*: `No`
+>    - *"Output normalized counts table"*: `Yes`
 {: .hands_on}
 
 **DESeq2** generated 3 outputs
@@ -611,31 +738,36 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 
     1. Histogram of *p*-values for all tests
     2. [MA plot](https://en.wikipedia.org/wiki/MA_plot): global view of the relationship between the expression change of conditions (log ratios, M), the average expression strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene expression. The genes that passed the significance threshold (adjusted p-value < 0.1) are colored in red.
-    3. Principal Component Analysis ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) of the first two dimensions.
+    3. Principal component plot of the samples ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) with the first two dimensions.
 
-        Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.
+        It shows the samples in the 2D plane spanned by their first two principal components. Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.
 
         > ### {% icon question %} Questions
         >
+        > ![DESeq PCA](../../images/ref-based/deseq2_pca.png "Principal component plot of the samples")
+        >
         > 1. What is the first dimension (PC1) separating?
         > 2. And the second dimension (PC2)?
+        > 3. What can we conclude about the DESeq design (factors, levels) we choose?
         >
         > > ### {% icon solution %} Solution
         > >
         > > 1. The first dimension is separating the treated samples from the untreated sample
         > > 2. The second dimension is separating the single-end datasets from the paired-end datasets
+        > > 3. The datasets are grouped following the levels of the two factors. No hidden effect seems to be present on the data. If there is unwanted variation present in the data (e.g. batch effects) it is always recommend to correct for this, which can be accommodated in DESeq2 by including in the design any known batch variables
         > {: .solution}
         {: .question}
 
-
-    4. Heatmap of the sample-to-sample distance matrix: overview over similarities and dissimilarities between samples
+    4. Heatmap of the sample-to-sample distance matrix (with clustering): overview over similarities and dissimilarities between samples
 
         > ### {% icon question %} Questions
+        >
+        > ![Heatmap of the sample-to-sample distances](../../images/ref-based/deseq2_sample_sample_distance_heatmap.png "Heatmap of the sample-to-sample distances")
         >
         > How are the samples grouped?
         >
         > > ### {% icon solution %} Solution
-        > > They are first grouped by the treatment (the first factor) and secondly by the library type (the second factor).
+        > > They are first grouped by the treatment (the first factor) and secondly by the library type (the second factor), as in the PCA plot.
         > >
         > {: .solution}
         {: .question}
@@ -664,18 +796,20 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 
 ## Visualization of the differentially expressed genes
 
-We would like now to create a heatmap of the normalized counts for each sample for the most differentially expressed genes.
+We would like now to extract the most differentially expressed because of the treatment. and then visualize them using an heatmap of the normalized counts and also the z-score for each sample.
 
 We proceed in several steps
 - Extract the most differentially expressed genes using the DESeq2 summary file
 - Extract the normalized counts for these genes for each sample, using the normalized count file generated by DESeq2
 - Plot the heatmap of the normalized counts
+- Compute the Z score of the normalized counts
+- Plot the heatmap of the Z score of the genes
 
 > ### {% icon hands_on %} Hands-on: Extract the most differentially expressed genes
 >
-> 1. **Filter** {% icon tool %}: Extract genes with a significant change in gene expression (adjusted *p*-value below 0.05) between treated and untreated samples, using the Filter data on any column using simple expressions tool
->    - "Filter" to the DESeq2 result file
->    - "With following condition" to `c7<0.05`
+> 1. **Filter** {% icon tool %} to extract genes with a significant change in gene expression (adjusted *p*-value below 0.05) between treated and untreated samples
+>    - {% icon param-file %} *"Filter"*: the `DESeq2 result file`
+>    - *"With following condition"*: `c7<0.05`
 >
 >    > ### {% icon question %} Question
 >    >
@@ -695,9 +829,9 @@ We proceed in several steps
 >
 >    The generated file contains too many genes to get a meaningful heatmap. So we will take only the genes with an absolute fold change > 2
 >
-> 2. **Filter** {% icon tool %}: Extract genes with an abs(log<sub>2</sub>FC) > 1 (FC stands for "fold change")
->    - "Filter" to the differentially expressed genes
->    - "With following condition" to `abs(c3)>1`
+> 2. **Filter** {% icon tool %} to extract genes with an $$abs(log_{2} FC) > 1$$ (FC stands for "fold change")
+>    - {% icon param-file %} *"Filter"*: the differentially expressed genes (output of **Filter** {% icon tool %})
+>    - *"With following condition"*: `abs(c3)>1`
 >
 >    > ### {% icon question %} Question
 >    >
@@ -710,51 +844,30 @@ We proceed in several steps
 >    > {: .solution}
 >    {: .question}
 >
->    The number of genes is still too high, so we will take only the 10 most up-regulated and 10 most down-regulated genes
->
-> 3. **Sort** {% icon tool %}: Sort the genes by log<sub>2</sub>FC
->    - "Sort Dataset" to the differentially expressed genes with abs(FC) > 2
->    - "on column" to `3`
->    - "with flavor" to `Numerical sort`
->    - "everything in" to `Descending order`
->
-> 4. **Select first lines** {% icon tool %}: Extract the 10 most up-regulated genes
->    - "File to select" to the sorted DE genes with abs(FC) > 2
->    - "Operation" to `Keep first lines`
->    - "Number of lines" to `10`
->
-> 4. **Select last lines** {% icon tool %}: Extract the 10 most down-regulated genes
->    - "Text file" to the sorted DE genes with abs(FC) > 2
->    - "Operation" to `Keep first lines`
->    - "Number of lines" to `10`
->
-> 5. **Concatenate datasets** {% icon tool %}: Concatenated the 10 most up-regulated genes with the 10 most down-regulated genes
->    - "Datasets to concatenate" to the 10 most up-regulated genes and to the 10 most down-regulated genes
->
 {: .hands_on}
 
-We now have a table with 20 lines corresponding to the most differentially expressed genes. And for each of the gene, we have its id, its mean normalized counts (averaged over all samples from both conditions), its log<sub>2</sub>FC and other information.
+We now have a table with 130 lines corresponding to the most differentially expressed genes. And for each of the gene, we have its id, its mean normalized counts (averaged over all samples from both conditions), its $$log_{2} FC$$ and other information.
 
-We could plot the log<sub>2</sub>FC for the different genes, but here we would like to look at a heatmap of expression for these genes in the different samples. So we need to extract the normalized counts for these genes.
+We could plot the $$log_{2} FC$$ for the different genes, but here we would like to look at a heatmap of expression for these genes in the different samples. So we need to extract the normalized counts for these genes.
 
-We will join the normalized count table generated by DESeq with the table we just generated, to conserve only the lines corresponding to the 20 most differentially expressed genes.
+We will join the normalized count table generated by DESeq with the table we just generated, to conserve only the lines corresponding to the most differentially expressed genes.
 
 > ### {% icon hands_on %} Hands-on: Extract the normalized counts of the 20 most differentially expressed genes
 >
-> 1. **Join two Datasets** {% icon tool %}: Join the two files
->    - "Join" to the normalized count table generated by DESeq2
->    - "using column" to `1`
->    - "with" to the concatenated file with 10 most up-regulated genes and the 10 most down-regulated genes
->    - "and column" to `1`
->    - "Keep lines of first input that do not join with second input" to `No`
->    - "Keep the header lines" to `Yes`
+> 1. **Join two Datasets** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Join"*: the `Normalized counts` file (output of **DESeq2** {% icon tool %})
+>    - *"using column"*: `Column: 1`
+>    - {% icon param-file %} *"with"*: most differentially expressed genes (output of the last **Filter** {% icon tool %})
+>    - *"and column"*: `Column: 1`
+>    - *"Keep lines of first input that do not join with second input"*: `No`
+>    - *"Keep the header lines"*: `Yes`
 >
->    The generated file has more columns than we need for the heatmap. In addition to the columns with mean normalized counts, there is the log<sub>2</sub>FC and other information. We need to remove the extra columns.
+>    The generated file has more columns than we need for the heatmap. In addition to the columns with mean normalized counts, there is the $$log_{2} FC$$ and other information. We need to remove the extra columns.
 >
-> 2. **Cut** {% icon tool %}: Extract the columns with the gene ids and normalized counts
->    - "Cut columns" to `c1-c8`
->    - "Delimited by" to `Tab`
->    - "From" the joined dataset
+> 2. **Cut** {% icon tool %} to extract the columns with the gene ids and normalized counts
+>    - *"Cut columns"*: `c1-c8`
+>    - *"Delimited by"*: `Tab`
+>    - {% icon param-file %} *"From"*: the joined dataset (output of **Join two Datasets** {% icon tool %})
 >
 {: .hands_on}
 
@@ -762,29 +875,30 @@ We now have a table with 20 lines (the most differentially expressed genes) and 
 
 > ### {% icon hands_on %} Hands-on: Plot the heatmap of the normalized counts of these genes for the samples
 >
-> 1. **heatmap2** {% icon tool %}: Plot the heatmap with
->    - "Input should have column headers" to the generated table
->    - "Advanced - log transformation" to `Log2(value) transform my data`
->    - "Enable data clustering" to `Yes`
->    - "Coloring groups" to "Blue to white to red"
+> 1. **heatmap2** {% icon tool %} to plot the heatmap
+>    - {% icon param-file %} *"Input should have column headers"*: the generated table (output of **Cut** {% icon tool %})
+>    - *"Advanced - log transformation"*: `Log2(value) transform my data`
+>    - *"Enable data clustering"*: `Yes`
+>    - *"Labeling columns and rows"*: `Label columns and not rows`
+>    - *"Coloring groups"*: `Blue to white to red`
 >
 {: .hands_on}
 
 You should obtain something similar to:
 
-![Heatmap with the normalized counts for the most differentially expressed genes](../../images/ref_based_most_de_gene_heatmap.png "Normalized counts for the most differentially expressed genes")
+![Heatmap with the normalized counts for the most differentially expressed genes](../../images/ref-based/heatmap2_normalized_counts.png "Normalized counts for the most differentially expressed genes")
 
 > ### {% icon question %} Questions
 >
-> 1. Do you observe anything in the clustering of the samples?
-> 2. What changes if we regenerate the heatmap and select `Plot the data as it is` in "Advanced - log transformation"?
+> 1. Do you observe anything in the clustering of the samples and the genes?
+> 2. What changes if we regenerate the heatmap and select `Plot the data as it is` in *"Advanced - log transformation"*?
 > 3. Can you generate a heatmap of normalized counts for all up-regulated genes with absolute fold change > 2?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The samples are clustering by treatment. The genes are also clustering based on the counts, 2 genes (FBgn0026562, FBgn00003360) with very large counts cluster away from the other genes.
+> > 1. The samples are clustering by treatment.
 > > 2. The scale changes and the differences between the genes are not visible anymore.
-> > 3. Extract the genes with logFC > 1 (filter for genes with c3>1 on the summary of the differentially expressed genes) and run heatmap2 on the generated table.
+> > 3. Extract the genes with $$abs(log_{2} FC$$) > 1 (filter for genes with `abs(c3)>1` on the summary of the differentially expressed genes) and run **heatmap2** {% icon tool %} on the generated table.
 > {: .solution}
 {: .question}
 
@@ -805,46 +919,40 @@ goseq needs 2 files as inputs:
 > ### {% icon hands_on %} Hands-on: Prepare the datasets for GOSeq
 >
 > 1. **Compute** {% icon tool %} with
->    - "Add expression" to `bool(c7<0.05)`
->    - "as a new column to" to DESeq2 results file
+>    - *"Add expression"*: `bool(c7<0.05)`
+>    - {% icon param-file %} *"as a new column to"*: the `DESeq2 result file`
 >
 > 2. **Cut** {% icon tool %} with
->    - "Cut columns" to `c1,c8`
->    - "Delimited by" to `Tab`
->    - "From" to the previously generated file
+>    - *"Cut columns"*: `c1,c8`
+>    - *"Delimited by"*: `Tab`
+>    - {% icon param-file %} *"From"*: the output of the **Compute** {% icon tool %}
 >
 > 3. **Change Case** {% icon tool %} with
->    - "From" to the previously generated file
->    - "Change case of columns" to `c1`
->    - "Delimited by" to `Tab`
->    - "To" to `Upper case`
+>    - {% icon param-file %} *"From"*: the output of the previous **Cut** {% icon tool %}
+>    - *"Change case of columns"*: `c1`
+>    - *"Delimited by"*: `Tab`
+>    - *"To"*: `Upper case`
 >
->    We just generated the first input for goseq
->
->  To generate the second input for goseq, the gene lengths, we can use featureCounts again.
-
-> 4. **featureCounts** with 
->    - Click the rerun button on one of the featureCounts files already generated in the history and change
->    - "Create gene-length file" to `Yes`
+>    We just generated the first input for goseq. We need as second input for goseq, the gene lengths. We can use there the gene length generated by **featureCounts** {% icon tool %} and reformate it a bit.
 >
 > 5. **Change Case** {% icon tool %} with
->    - "From" to the previously generated file
->    - "Change case of columns" to `c1`
->    - "Delimited by" to `Tab`
->    - "To" to `Upper case`
+>    - {% icon param-file %} *"From"*: the `feature lengths` (output of **featureCounts** {% icon tool %}) 
+>    - *"Change case of columns"*: `c1`
+>    - *"Delimited by"*: `Tab`
+>    - *"To"*: `Upper case`
 {: .hands_on}
 
-We have now the two required files for goseq.
+We have now the two required input files for goseq.
 
 > ### {% icon hands_on %} Hands-on: Perform GO analysis
 >
 > 1. **goseq** {% icon tool %} with
->    - "Differentially expressed genes file" to first file generated on previous step
->    - "Gene lengths file" to second file generated on previous step
->    - "Gene categories" to `Get categories`
->    - "Select a genome to use" to `Fruit fly (dm6)`
->    - "Select Gene ID format" to `Ensembl Gene ID`
->    - "Select one or more categories" to `GO: Cellular Component`, `GO: Biological Process`, `GO: Molecular Function`
+>    - *"Differentially expressed genes file"*: first file generated by **Change Case** {% icon tool %} on previous step
+>    - *"Gene lengths file"*:  second file generated by **Change Case** {% icon tool %} on previous step
+>    - *"Gene categories"*:  `Get categories`
+>       - *"Select a genome to use"*:  `Fruit fly (dm6)`
+>       - *"Select Gene ID format"*:  `Ensembl Gene ID`
+>       - *"Select one or more categories"*: `GO: Cellular Component`, `GO: Biological Process`, `GO: Molecular Function`
 >
 {: .hands_on}
 
@@ -887,18 +995,18 @@ This step is similar to the step of [counting the number of reads per annotated 
 > ### {% icon hands_on %} Hands-on: Counting the number of reads per exon
 >
 > 1. **DEXSeq-Count** {% icon tool %}: Use the **DEXSeq-Count** to prepare the *Drosophila* annotations to extract only exons with corresponding gene ids
->     - "Mode of operation" to `Prepare annotation`
->     - "GTF file" to `Drosophila_melanogaster.BDGP6.87.gtf`
+>     - *"Mode of operation"*: `Prepare annotation`
+>       - {% icon param-file %} *"GTF file"*: `Drosophila_melanogaster.BDGP6.87.gtf`
 >
 >    The output is again a GTF file that is ready to be used for counting
 >
 > 2. **DEXSeq-Count** {% icon tool %}: Count reads using **DEXSeq-Count** with
->     - "Mode of operation" to `Count reads`
->     - "Input bam file" to the STAR-generated `BAM` files (multiple datasets)
->     - "DEXSeq compatible GTF file" to the previously generated GTF file
->     - "Is library paired end?" to `Yes`
->     - "Is library strand specific?" to `No`
->     - "Skip all reads with alignment quality lower than the given minimum value" to `10`
+>     - *"Mode of operation"*: `Count reads`
+>       - {% icon param-files %} *"Input bam file"*: the `BAM` files generated by **RNA STAR** {% icon tool %}
+>       - {% icon param-file %} *"DEXSeq compatible GTF file"*: the GTF file generated by **DEXSeq-Count** {% icon tool %}
+>       - *"Is library paired end?"*: `Yes`
+>       - *"Is library strand specific?*: `No`
+>       - *"Skip all reads with alignment quality lower than the given minimum value"*:  `10`
 >
 {: .hands_on}
 
@@ -930,7 +1038,8 @@ As for DESeq2, in the previous step, we counted only reads that mapped to exons 
 > ### {% icon hands_on %} Hands-on:
 >
 > 1. Create a new history
-> 2. Import the seven exon count files and the annotation GTF file from [Zenodo](https://doi.org/10.5281/zenodo.1185122) or the data library
+> 2. Import the seven count files from [Zenodo](https://zenodo.org/record/1185122) or the Shared Data library (if available): 
+>
 >    - `Drosophila_melanogaster.BDGP6.87.dexseq.gtf`
 >    - `GSM461176_untreat_single.exon.counts`
 >    - `GSM461177_untreat_paired.exon.counts`
@@ -940,20 +1049,39 @@ As for DESeq2, in the previous step, we counted only reads that mapped to exons 
 >    - `GSM461181_treat_paired.exon.counts`
 >    - `GSM461182_untreat_single.exon.counts`
 >
+>    ```
+>    https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.dexseq.gtf
+>    https://zenodo.org/record/1185122/files/GSM461176_untreat_single.exon.counts
+>    https://zenodo.org/record/1185122/files/GSM461177_untreat_paired.exon.counts
+>    https://zenodo.org/record/1185122/files/GSM461178_untreat_paired.exon.counts
+>    https://zenodo.org/record/1185122/files/GSM461179_treat_single.exon.counts
+>    https://zenodo.org/record/1185122/files/GSM461180_treat_paired.exon.counts
+>    https://zenodo.org/record/1185122/files/GSM461181_treat_paired.exon.counts
+>    https://zenodo.org/record/1185122/files/GSM461182_untreat_single.exon.counts
+>    ```
+>
 > 3. **DEXSeq** {% icon tool %}: Run **DEXSeq** with
->    - "GTF file created from DEXSeq-Count tool" to `Drosophila_melanogaster.BDGP6.87.dexseq.gtf`
->    - For "1: Factor"
->       - "Specify a factor name" to `condition`
->       - "Specify a factor level" to `treated`
->       - "Count file for factor level 1" to the exon count files (multiple datasets) with `treated` in name
->       - "Specify a factor level" to `untreated`
->       - "Count file for factor level 2" to the exon count files (multiple datasets) with `untreated` in name
->    - For "2: Factor"
->       - "Specify a factor name" to `sequencing`
->       - "Specify a factor level" to `pe`
->       - "Count file for factor level 1" to the exon count files (multiple datasets) with `paired` in name
->       - "Specify a factor level" to `se`
->       - "Count file for factor level 2" to the exon count files (multiple datasets) with `single` in name
+>    - {% icon param-file %} *"GTF file created from DEXSeq-Count tool"*: `Drosophila_melanogaster.BDGP6.87.dexseq.gtf`
+>    - In *"Factor"*:
+>       - In "1: Factor"
+>           - *"Specify a factor name"*: `condition`
+>           - In *"Factor level"*:
+>               - In *"1: Factor level"*:
+>                   - *"Specify a factor level"*: `treated`
+>                   - {% icon param-files %} *"Counts file(s)"*: the 3 exon count files with `treated` in their name
+>               - In *"2: Factor level"*:
+>                   - *"Specify a factor level"*: `untreated`
+>                   - {% icon param-files %} *"Counts file(s)"*: the 4 exon count files with `untreated` in their name
+>       - Click on *"Insert Factor"* (not on "Insert Factor level")
+>       - In "2: Factor"
+>           - "Specify a factor name" to `sequencing`
+>           - In *"Factor level"*:
+>               - In *"1: Factor level"*:
+>                   - *"Specify a factor level"*: `PE`
+>                   - {% icon param-files %} *"Counts file(s)"*: the 4 exon count files with `paired` in their name
+>               - In *"2: Factor level"*:
+>                   - *"Specify a factor level"*: `SE`
+>                   - {% icon param-files %} *"Counts file(s)"*: the 3 exon count files with `single` in their name
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -977,7 +1105,7 @@ Similarly to DESeq2, DEXSeq generates a table with:
 
 > ### {% icon hands_on %} Hands-on:
 >
-> 1. **Filter** {% icon tool %}: Run **Filter** to extract exons with a significant differential usage (adjusted *p*-value equal or below 0.05) between treated and untreated samples
+> 1. **Filter** {% icon tool %} to extract exons with a significant differential usage (adjusted *p*-value equal or below 0.05) between treated and untreated samples
 >
 >    > ### {% icon question %} Question
 >    >
@@ -991,18 +1119,9 @@ Similarly to DESeq2, DEXSeq generates a table with:
 >    {: .question}
 {: .hands_on}
 
-# Annotation of the result tables with gene information
-
-Unfortunately, in the process of counting, we lose all the information of the gene except its gene identifier. In order to get the information back to our final counting tables, we can use a tool to make the correspondance between identifier and annotation.
-
-> ### {% icon hands_on %} Hands-on:
->
-> 1. **Annotate DE(X)Seq result** {% icon tool %}: Run **Annotate DE(X)Seq result** on a counting table (from DESeq or DEXSeq) using the `Drosophila_melanogaster.BDGP5.78.gtf` as annotation file
-{: .hands_on}
-
 # Conclusion
 {:.no_toc}
 
 In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up or downregulated by depletion of the *Pasilla* gene and which genes are regulated by the *Pasilla* gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be summarized with the following scheme:
 
-![Summary of the analysis pipeline used](../../images/rna_quantification.png "Summary of the analysis pipeline used")
+![Summary of the analysis pipeline used](../../images/ref-based/tutorial-scheme.png "Summary of the analysis pipeline used")
