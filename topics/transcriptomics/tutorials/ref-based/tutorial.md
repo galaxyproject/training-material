@@ -40,55 +40,30 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this RNA-seq exercise
-> 2. Import the FASTQ file pairs for
+> 2. Import the FASTQ file pairs from [Zenodo](https://doi.org/10.5281/zenodo.1185122) or a data library:
 >       - `GSM461177` (untreated): `GSM461177_1` and `GSM461177_2`
 >       - `GSM461180` (treated): `GSM461180_1` and `GSM461180_2`
 >
->       To import the files, there are two options:
->       - Option 1: From a shared data library if available (ask your instructor)
->       - Option 2: From [Zenodo](https://doi.org/10.5281/zenodo.1185122)
+>       ```
+>       https://zenodo.org/record/1185122/files/GSM461177_1.fastqsanger
+>       https://zenodo.org/record/1185122/files/GSM461177_2.fastqsanger
+>       https://zenodo.org/record/1185122/files/GSM461180_1.fastqsanger
+>       https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
+>       ```
 >
->           > ### {% icon tip %} Tip: Importing data via links
->           >
->           > * Copy the link location
->           > * Open the Galaxy Upload Manager
->           > * Select **Paste/Fetch Data**
->           > * Paste the link into the text field
->           > * Press **Start**
->           {: .tip}
->
->           You can directly paste:
->
->           ```
->           https://zenodo.org/record/1185122/files/GSM461177_1.fastqsanger
->           https://zenodo.org/record/1185122/files/GSM461177_2.fastqsanger
->           https://zenodo.org/record/1185122/files/GSM461180_1.fastqsanger
->           https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
->           ```
+>       {% include snippets/import_via_link.md %}
+>       {% include snippets/import_from_data_library.md %}
 >
 > 3. Rename the datasets according to the samples
 > 4. Check that the datatype is `fastqsanger` (**not** `fastq`).
 >    If the datatype is `fastq`, please change the file type to `fastqsanger`
 >
->    > ### {% icon tip %} Tip: Changing the datatype
->    > * Click on the pencil button displayed in your dataset in the history
->    > * Choose **Datatype** on the top
->    > * Select `fastqsanger`
->    > * Press **Save**
->    {: .tip}
+>    {% include snippets/change_datatype.md datatype="fastqsanger" %}
 >
 > 5. Add to each database a tag corresponding to the name of the sample (`#GSM461177` or `#GSM461180`)
 >
->    > ### {% icon tip %} Tip: Adding a tag
->    > * Click on the dataset
->    > * Click on <i class="fa fa-tags"></i> **Edit dataset tags**
->    > * Add the tag starting with `#`
->    >
->    >     The tags starting with `#` will be automatically propagated to the outputs of tools using this dataset.
->    >
->    > * Check that the tag is apparing below the dataset name
->    >
->    {: .tip}
+>    {% include snippets/add_tag.md %}
+>
 {: .hands_on}
 
 The sequences are raw data from the sequencing machine, without any pretreatments. They need to be assessed for their quality.

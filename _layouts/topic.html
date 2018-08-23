@@ -2,7 +2,7 @@
 layout: base
 ---
 
-{% include default-header.html %}
+{% include _includes/default-header.html %}
 
 {% assign topic = site.data[page.topic_name] %}
 {% assign contributors = site.data['contributors'] %}
@@ -51,7 +51,7 @@ layout: base
             {% for material in topic.material %}
                 {% if material.enable == nil or material.enable == true %}
                         <script type="application/ld+json">
-                            {% include material.jsonld content=material %}
+                            {% include _includes/material.jsonld content=material %}
                         </script>
                     <tr>
                         <td>
@@ -223,4 +223,4 @@ layout: base
     </section>
 </div>
 
-{% include default-footer.html %}
+{% include _includes/default-footer.html %}
