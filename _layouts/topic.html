@@ -49,7 +49,7 @@ layout: base
             </tr>
 
             {% for material in topic.material %}
-                {% if material.enable != "false" %}
+                {% if material.enable == nil or material.enable == true %}
                         <script type="application/ld+json">
                             {% include material.jsonld content=material %}
                         </script>
@@ -107,7 +107,7 @@ layout: base
 
                             {% if topic.type == "use" %}
                                 <td>
-                                    {% if material.zenodo_link != "" %}
+                                    {% if material.zenodo_link != nil and material.zenodo_link != "" %}
                                     <a href="{{ material.zenodo_link }}">
                                       {% icon zenodo_link %}
                                     </a>

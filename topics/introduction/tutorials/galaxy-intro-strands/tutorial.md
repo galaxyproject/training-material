@@ -79,7 +79,7 @@ To answer this question we need to know where genes start and stop on human chro
 It turns out that for this particular question (and for many others), most **Galaxy** instances can help us find this information.
 
 > ### {% icon hands_on %} Hands-on: Log in to Galaxy
-> In your web browser, *go to* **[your Galaxy instance](#-requirements)** and *log in or register*.
+> In your web browser, *go to* **your Galaxy instance** and *log in or register*.
 {: .hands_on}
 
 The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle panel will show the home page, tool forms, and dataset content.
