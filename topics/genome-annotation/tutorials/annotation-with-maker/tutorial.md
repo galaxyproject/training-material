@@ -69,7 +69,7 @@ have fun!
 >    > ### {% icon tip %} Tip: Importing data from a data library
 >    >
 >    > * Go into "Shared data" (top panel) then "Data libraries"
->    > * Click on "Training data" and then "Analyses of metagenomics data"
+>    > * Click on "Training data" and then "Genome annotation with Maker"
 >    > * Select interesting file
 >    > * Click on "Import selected datasets into history"
 >    > * Import in a new history
@@ -80,13 +80,18 @@ have fun!
 
 # Genome quality evaluation
 
-The quality of a genome annotation is highly dependent on the quality of the genome sequences. It is impossible to obtain a god quality annotation with a poorly assembled genome sequence. Annotation tools will have trouble finding genes if the genome sequence is highly fragmented, if it contains chimeric sequences, or if there are a lot of sequencing errors.
+The quality of a genome annotation is highly dependent on the quality of the genome sequences. It is impossible to obtain a good quality annotation with a poorly assembled genome sequence. Annotation tools will have trouble finding genes if the genome sequence is highly fragmented, if it contains chimeric sequences, or if there are a lot of sequencing errors.
 
-Before running the full annotation process, it is a good idea first to evaluate the quality of the sequence. It will give you a good idea what you can expect from it at the end of the annotation.
+Before running the full annotation process, it is a good idea first to evaluate the quality of the sequence. It will give you a good idea of what you can expect from it at the end of the annotation.
 
 First have a look at the basic statistics: scaffold number compared to expected chromosome numbers, N50, ...
 
-TODO => Fasta Statistics?
+> ### {% icon hands_on %} Hands-on: Get genome sequence statistics
+>
+> 1. **Fasta Statistics** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Sequences to analyse"*: select the genome sequence from your history
+>
+{: .hands_on}
 
 These statistics are useful to detect obvious problems in the genome assembly, but it gives no information about the quality of the sequence content. We want to know if the genome sequence contains all the genes we expect to find in the considered species, and if their sequence are correct.
 
@@ -95,7 +100,7 @@ These statistics are useful to detect obvious problems in the genome assembly, b
 We will first run this tool on the genome sequence to evaluate its quality.
 
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Run Busco on the genome
 >
 > 1. **Busco** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: select the genome sequence from your history
@@ -136,7 +141,7 @@ Maker blablabla
 
 For this first round, we configure Maker to construct gene models only by aligning ESTs and proteins to the genome. This will produce a first draft annotation that we will improve in the steps.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: First draft annotation with Maker
 >
 > 1. **Maker** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select the genome sequence from your history
@@ -164,7 +169,7 @@ We need now to evaluate this first annotation produced by Maker.
 
 First, use the `Genome annotation statistics` that will compute some general statistics on the annotation.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Get annotation statistics
 >
 > 1. **Genome annotation statistics** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotation to analyse"*: `final annotation` (output of **Maker** {% icon tool %})
@@ -172,26 +177,12 @@ First, use the `Genome annotation statistics` that will compute some general sta
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
->
-> 1. How many genes where predicted by Maker?
-> 2. What is the medium length of these genes?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. I don't know, I should check. TODO
-> > 2. I don't know, I should check. TODO
-> >
-> {: .solution}
->
-{: .question}
-
 
 ## Busco
 
-Just as we did for the genome at the beginning, we can use BUSCO to check the quality of this first Maker annotation. Instead of looking for known genes in the genome sequence, this time it will analyse the predicted genes.
+Just as we did for the genome at the beginning, we can use BUSCO to check the quality of this first Maker annotation. Instead of looking for known genes in the genome sequence, BUSCO will look for known transcript sequences of the genes predicted by Maker.
 
-First we need to compute all the transcript sequences corresponding to the genes predicted by Maker. Then, BUSCO will look for known transcript sequences in this predicted set.
+First we need to compute all the transcript sequences from the Maker annotation.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -206,7 +197,7 @@ First we need to compute all the transcript sequences corresponding to the genes
 >
 {: .hands_on}
 
-Now run BUSCO with the predicted protein sequences: (TODO protein or exons or cds?)
+Now run BUSCO with the predicted transcript sequences:
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -217,7 +208,23 @@ Now run BUSCO with the predicted protein sequences: (TODO protein or exons or cd
 >
 {: .hands_on}
 
-Time to improve this draft annotation!
+> ### {% icon question %} Questions
+>
+> 1. How many genes where predicted by Maker?
+> 2. What is the medium length of these genes?
+> 2. How do the BUSCO statistics compare to the ones at the genome level?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. I don't know, I should check. TODO
+> > 2. I don't know, I should check. TODO
+> > 3. I don't know, I should check. TODO
+> >
+> {: .solution}
+>
+{: .question}
+
+Let's see now how this first draft can be improved.
 
 # Ab-initio predictors first training
 
@@ -230,7 +237,7 @@ Today we will use two of the most widely used ab-initio predictors SNAP and Augu
 > 1. **Train SNAP** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select the genome sequence from your history
 >    - {% icon param-file %} *"Maker annotation to use for training"*: `final annotation` (output of **Maker** {% icon tool %})
->    - *"Number of gene model to use for training"*: `"1000"`
+>    - *"Number of gene model to use for training"*: `"1000"` ***TODO should we reduce it with our small genome?***
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -262,7 +269,7 @@ We need now to run a new round of Maker. As the evidences were already aligned o
 This time, enable ab-initio gene prediction, and input the output of **Train SNAP** {% icon tool %} and **Train Augustus** {% icon tool %} tools.
 We also disable infering gene predictions directly from all ESTs and proteins: now we want Maker to infer gene predictions by reconciliating evidence alignments *and* ab-initio gene predictions.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Second draft annotation with Maker
 >
 > 1. **Maker** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select the genome sequence from your history
@@ -291,7 +298,7 @@ We also disable infering gene predictions directly from all ESTs and proteins: n
 
 Do we get a better result from Maker after this second run? Let's run the same tools as after the first run, and compare the results.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Get annotation statistics
 >
 > 1. **Genome annotation statistics** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotation to analyse"*: `final annotation` (output of **Maker** {% icon tool %} second run)
@@ -365,7 +372,7 @@ To get better results, we are going to perform a second training of SNAP and Aug
 
 Let's run the final round of Maker, in the same way as we did for the second run.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Final annotation with Maker
 >
 > 1. **Maker** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select the genome sequence from your history
@@ -394,7 +401,7 @@ Let's run the final round of Maker, in the same way as we did for the second run
 
 Do we get a better result from Maker after this third run? Let's run the same tools as after the first and second run, and compare the results.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Get annotation statistics
 >
 > 1. **Genome annotation statistics** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotation to analyse"*: `final annotation` (output of **Maker** {% icon tool %} second run)
@@ -419,7 +426,7 @@ Do we get a better result from Maker after this third run? Let's run the same to
 >
 {: .hands_on}
 
-Now run BUSCO with the predicted protein sequences: (TODO protein or exons or cds?)
+Now run BUSCO with the predicted transcript sequences:
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
