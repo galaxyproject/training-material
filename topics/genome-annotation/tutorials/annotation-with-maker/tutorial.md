@@ -29,47 +29,40 @@ and technical) key concepts they will learn.
 
 # Data upload
 
-Give some background about what the trainees will be doing in the section.
+To annotate a genome using Maker, you need the following files:
 
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
+- The genome sequence in fasta format
+- A set of transcripts or EST sequences, preferably from the same organism.
+- A set of protein sequences, usually from closely related species or from a curated sequence database like UniProt/SwissProt.
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
+ Maker will align the transcript and protein sequences on the genome sequence to determine gene positions.
 
 ## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Import the following files from [Zenodo]() or from a data
->    library named `TODO` if available (ask your instructor)
+> 1. Create and name a new history for this tutorial.
+> 2. Import the following files from [Zenodo](https://doi.org/10.5281/zenodo.1402567) or from a data
+>    library named `GTN - Material` if available (ask your instructor)
 >
 >    ```
->    
+>    https://zenodo.org/api/files/e0af11ec-289f-4f38-8f19-c821a34d140a/S_pombe_chrIII.fa
+>    https://zenodo.org/api/files/e0af11ec-289f-4f38-8f19-c821a34d140a/S_pombe_genome.fna
+>    https://zenodo.org/api/files/e0af11ec-289f-4f38-8f19-c821a34d140a/S_pombe_trinity_assembly.fasta
+>    https://zenodo.org/api/files/e0af11ec-289f-4f38-8f19-c821a34d140a/Swissprot_no_S_pombe.fasta
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
 >
->    ***TODO***: *Remove the useless files (if added)*
+>    {% include snippets/import_via_link.md %}
 >
->    > ### {% icon tip %} Tip: Importing data via links
->    >
->    > * Copy the link location
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > * Paste the link into the text field
->    > * Press **Start**
->    >
->    > By default, Galaxy uses the url as the name, so please rename them to something more pleasing.
+>    By default, Galaxy uses the url as the name, so please rename them to something more pleasing.
 >    {: .tip}
+>
+>    ![upload](../../images/upload_data_page.png "Data can be imported directly with links.")
 >
 >    > ### {% icon tip %} Tip: Importing data from a data library
 >    >
 >    > * Go into "Shared data" (top panel) then "Data libraries"
->    > * Click on "Training data" and then "Genome annotation with Maker"
+>    > * Click on "GTN - Material", then "Genome Annotation" and then "Genome annotation with Maker"
 >    > * Select interesting file
 >    > * Click on "Import selected datasets into history"
 >    > * Import in a new history
@@ -77,6 +70,14 @@ have fun!
 >
 {: .hands_on}
 
+You have four datasets:
+
+- `S_pombe_trinity_assembly.fasta` contains the EST sequences
+- `Swissprot_no_S_pombe.fasta` contanis the protein sequences from SwissProt
+- `S_pombe_genome.fna` contains the full genome sequence
+- `S_pombe_chrIII.fa` contains only a fraction of the full genome sequence, ie the chromosome III
+
+For the rest of this tutorial, you need to choose between `S_pombe_chrIII.fa` and `S_pombe_genome.fna`: if you don't have time constraint, use the full genome (`S_pombe_genome.fna`): it will take more time computing, but results will be closer to real-life data. If you want to get results faster, use the chromosome III (`S_pombe_chrIII.fa`). In the rest of this tutorial, we will refer to the file you choose as the genome.
 
 # Genome quality evaluation
 
