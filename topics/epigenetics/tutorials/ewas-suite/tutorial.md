@@ -1,13 +1,28 @@
 ---
 layout: tutorial_hands_on
-topic_name: epigenetics
-tutorial_name: ewas-suite
+
+title: "EWAS data analysis of 450k data"
+zenodo_link: "https://zenodo.org/record/1251211#.WwREQ1Mvz-Y"
+enable: "false"
+questions:
+  - "What is a epigenome-wide association studies?"
+  - "Why is a EWAS analysis useful?"
+  - "Why 450k data?"
+objectives:
+  - "Learn how to perform reproducible EWAS analysis"
+key_points:
+  - "EWAS analyse changes in dna methylation in cohorts of different individuals effected by diseases"
+  - "DNA methylation changes can be triggered by environment (i.e. sun exposure, diet) and effect the way how our cells works and in long term cause cancer"
+contributors:
+  - kpbioteam
+  - kpoterlowicz
+
 ---
 
 # Introduction
 {:.no_toc}
 
-The field of cancer genomics has demonstrated the power of massively parallel sequencing techniques to inform on the genes and specific alterations that drive tumor onset and progression. Although large comprehensive sequence data sets continue to be made increasingly available, data analysis remains an ongoing challenge, particularly for laboratories lacking dedicated resources and bioinformatics expertise. To address this, we have provide training based on  Galaxy tools ewas suite that represent many popular algorithms for detecting somatic genetic alterations from cancer genome and exome data.  
+The field of cancer genomics has demonstrated the power of massively parallel sequencing techniques to inform on the genes and specific alterations that drive tumor onset and progression. Although large comprehensive sequence data sets continue to be made increasingly available, data analysis remains an ongoing challenge, particularly for laboratories lacking dedicated resources and bioinformatics expertise. To address this, we have provide training based on  Galaxy tools ewas suite that represent many popular algorithms for detecting somatic genetic alterations from cancer genome and exome data.
 
 ![epimechanism](../../images/Epigenetic_mechanisms.jpg "How epigenetics mechanism can effect health (adapted from https://commonfund.nih.gov/epigenomics/figure)")
 
@@ -24,7 +39,7 @@ The Infinium Methylation Assay 450k uses two different bead types to detect chan
 Accession  | Sensitivity | Treatment
 --- | ---  | ---
 GSM1588704 | baseline    | pre-treatment
-GSM1588705 | baseline    | pre-treatment 
+GSM1588705 | baseline    | pre-treatment
 GSM1588706 | resistant   | BRAFi
 GSM1588707 | resistant   | BRAFi
 
@@ -32,7 +47,7 @@ GSM1588707 | resistant   | BRAFi
 >
 > 1. TOC
 > {:toc}
-> 
+>
 {: .agenda}
 
 # 450K Array Data Upload
@@ -51,7 +66,7 @@ The first step of EWAS data anylalysis is raw methylation data loading (intensit
 >    - `GSM1588705_8795207119_R05C02_Grn.idat`
 >    - `GSM1588706_8795207135_R02C02_Grn.idat`
 >    - `GSM1588707_8795207119_R06C02_Grn.idat`
-> 
+>
 >    ```
 >    https://zenodo.org/record/1185122/files/GSM1588704_8795207135_R01C02_Red.idat
 >    https://zenodo.org/record/1185122/files/GSM1588705_8795207119_R05C02_Red.idat
@@ -69,10 +84,10 @@ The first step of EWAS data anylalysis is raw methylation data loading (intensit
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
 >    > * Paste the link into the text field
->    > * Press **Start**    
+>    > * Press **Start**
 >    {: .tip}
 >
-> 3. Run **minfi read450k** {% icon tool %} with the following parameters 
+> 3. Run **minfi read450k** {% icon tool %} with the following parameters
 >     - {% icon param-files %} *"red files"*: `GSM1588704_8795207135_R01C02_Red.idat`, `GSM1588705_8795207119_R05C02_Red.idat`,`GSM1588706_8795207135_R02C02_Red.idat`,`GSM1588707_8795207119_R06C02_Red.idat`
 >     - {% icon param-files %} *"green files"*: `GSM1588704_8795207135_R01C02_Grn.idat`,`GSM1588705_8795207119_R05C02_Grn.idat`, `GSM1588706_8795207135_R02C02_Grn.idat`,`GSM1588707_8795207119_R06C02_Grn.idat`
 > 4. Inspect generated set of data
@@ -81,16 +96,16 @@ The first step of EWAS data anylalysis is raw methylation data loading (intensit
 > ### {% icon question %} Questions
 >
 > How are the Green and Red signals are stored?
->	
-> > ### {% icon solution %} Solution 
->    > Green and Red micro arrays are builded up into `RGChannelSet` 
+>
+> > ### {% icon solution %} Solution
+>    > Green and Red micro arrays are builded up into `RGChannelSet`
 > {: .solution}
 >
-{: .question}  
+{: .question}
 
 # Preprocessing and  Quality Assessment
 
-Preprocessing and data quality assurance is an important step in Infinium Methylation Assay analysis. 
+Preprocessing and data quality assurance is an important step in Infinium Methylation Assay analysis.
 
 `RGChannelSet` represents two color data with a green and a red channel and can be converted into methylated and unmethylated signals assigned to `MethylSet` or into Beta values build in `RatioSet`. User can convert from `RGChannelSet` into `MethylSet` using the **minfi mset** {% icon tool %} or compute Beta values using **minfi set** {% icon tool %}. The **minfi qc** {% icon tool %} tool extracts and plots the quality control data frame with two columns mMed and uMed which are the medians of `MethylSet` signals (Meth and Unmeth).Comparing them against one another allows user to detect and remove low-quality samples.
 
@@ -98,13 +113,13 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 > 1. Run **minfi mset** {% icon tool %} to create `MethylSet` object
 > 2. Run **minfi qc** {% icon tool %} to estimate sample-specific quality control
 > 3. Run **minfi rset** {% icon tool %} to convert methylation data from the `MethylSet` to ratios
-> 4. Run **minfi maptogenome** {% icon tool %} to map ratio data to the genome 
+> 4. Run **minfi maptogenome** {% icon tool %} to map ratio data to the genome
 >
 > > ### {% icon tip %} Tip: Preprocess and Normalize data
 > > If your files require normalisation, you might prefer to use other of preprocessing tools provided in EWAS suite i.e. **minfi ppfun** {% icon tool %} or **minfi ppquantile**  {% icon tool %} look for recomendation at (ref).
 > >
 > {: .tip}
-> 
+>
 {: .hands_on}
 
 ![Quality Control](../../images/qcplot.png "Quality control plot")
@@ -143,11 +158,11 @@ The main goal of the EWAS suite is to simplify the way differentially methylated
 >
 >       This is recommended when sample sizes are small <10
 >
-> 3. Run **minfi dmr** {% icon tool %} 
+> 3. Run **minfi dmr** {% icon tool %}
 >    - {% icon param-file %} *"Input set"*:`GenomicRatioSet`
 >    - {% icon param-file %} *"Phenotype Table"*:`phenotypeTable.txt`
 >    - *"factor1"*: `sensitive`
->    - *"factor2"*: `resistant` 
+>    - *"factor2"*: `resistant`
 >    - *"maxGap Size"*:`250`
 >    - *"coef Size"*:`2`
 >    - *"Cutoff Size"*:`0.1`
@@ -165,9 +180,9 @@ The main goal of the EWAS suite is to simplify the way differentially methylated
 ![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
 
 > ### {% icon tip %} Tip: Phenotype table
-> Phenotype table can be in diffrent size with diffrent arguments only second column is required to contain phenotype covariate information for each sample. 
+> Phenotype table can be in diffrent size with diffrent arguments only second column is required to contain phenotype covariate information for each sample.
 {: .tip}
-  
+
 > ### {% icon question %} Questions
 > How are we define phenotype covariate?
 > > ### {% icon solution %} Solution
@@ -183,13 +198,13 @@ In addition to downstream analysis users can annotate the differentially methyla
 > 1. Run **chipeakanno annopeaks** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"Differentialy methylated data"*: output of **minfi dmp** {% icon tool %}
 >   - *"bindingType"*: `StartSite`
->   - *"bindingRegionStart"*:`-5000` 
+>   - *"bindingRegionStart"*:`-5000`
 >   - *"bindingRegionEnd"*:`3000`
 >   - *"Additional Column of Score"*:`8`
 >
 >        Position of column of score optional value if it is required
 >
-> 2. **Cut** {% icon tool %} with the following parameters to cut "gene_name" column from table of annotated peaks and then get a list of geenes 
+> 2. **Cut** {% icon tool %} with the following parameters to cut "gene_name" column from table of annotated peaks and then get a list of geenes
 >   - *"Cut columns"*: `c16`
 >   - *"Delimited by"*: `Tab`
 >   - {% icon param-file %} *"From"*: output of **chipeakanno annopeaks** {% icon tool %}
@@ -212,7 +227,7 @@ In addition to downstream analysis users can annotate the differentially methyla
 ![Functional annotations](../../images/funcann.jpg "Results of GO enrichments analysis for DMPs")
 
 ID  | Description | pvalue | qvalue | geneID | Count
---- | ---  | --- | --- | --- | --- 
+--- | ---  | --- | --- | --- | ---
 GO:0048732 | gland development  | 1.38E-58 | 4.23E-55 | PTGS2 / KCNC1 / FZD1 /SLC22A18 /SLC22A3 (...) | 372
 GO:1901652 | response to peptide | 3.99E-57 | 8.13E-54 | SULF1/ LAMA5/ MED1 /CFLAR/ MSX2 (...) | 359
 GO:0048545 | response to steroid hormone | 1.38EE-54 | 2.11E-51 | HDAC9/ RAB10/ CFLAR/ WDTC1 (...) | 394
@@ -220,5 +235,5 @@ GO:0048545 | response to steroid hormone | 1.38EE-54 | 2.11E-51 | HDAC9/ RAB10/ 
 # Conclusion
 {:.no_toc}
 
-Epigenetic aberrations which involve DNA modifications give researchers an interest to identify novel non-genetic factors responsible for complex human phenotypes such as height, weight, and disease. To identify methylation changes researchers need to perform complicated and  time consuming computational analysis. Here, the EWAS suite becomes a solution for this inconvenience and provides a simplified downstream analysis available as ready to run pipline in supplementary materials. 
+Epigenetic aberrations which involve DNA modifications give researchers an interest to identify novel non-genetic factors responsible for complex human phenotypes such as height, weight, and disease. To identify methylation changes researchers need to perform complicated and  time consuming computational analysis. Here, the EWAS suite becomes a solution for this inconvenience and provides a simplified downstream analysis available as ready to run pipline in supplementary materials.
 
