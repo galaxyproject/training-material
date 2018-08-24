@@ -1,7 +1,26 @@
 ---
 layout: tutorial_hands_on
-topic_name: statistics
-tutorial_name: machinelearning
+
+title: "Basics of machine learning"
+questions:
+  - "What is machine learning?"
+  - "Why is it useful?"
+  - "What are its different approaches?"
+objectives:
+  - "Provide the basics of machine learning and its variants."
+  - "Learn how to make predictions using the training and test data."
+  - "Classify data using a Galaxy workflow."
+requirements:
+time_estimation: "1/2h"
+key_points:
+  - "Machine learning algorithms learn features from data."
+  - "It is used for multiple tasks like classification, regression, clustering and so on."
+  - "For the classification task, data is divided into training and test sets."
+  - "Each data sample in training and test sets has a category/class."
+  - "Many learning tasks can be performed on datasets using Galaxy tools for machine learning."
+contributors:
+  - anuprulez
+
 ---
 
 # Introduction
@@ -36,7 +55,7 @@ The data used in this tutorial is available at [EpistasisLab](https://github.com
 > ### {% icon hands_on %} Hands-on: Get the data
 > 1. Create a new history in Galaxy.
 > 2. Download and import the following dataset in the history:
->     
+>
 >    ```
 >    https://github.com/EpistasisLab/penn-ml-benchmarks/blob/master/datasets/classification/titanic/titanic.tsv.gz
 >    ```
@@ -48,9 +67,9 @@ The data used in this tutorial is available at [EpistasisLab](https://github.com
 > 1. Select an input dataset tool.
 > 2. Connect it to a machine learning tool (Support vector machine) present in the "statistics" tool collection in Galaxy.
 > 3. Update the parameters of the tools according to the uploaded dataset.
->    
-> ![Dataset](images/workflow.png) 
-> 
+>
+> ![Dataset](images/workflow.png)
+>
 > ![Update tool parameters](images/runwf.png)
 
 {: .hands_on}
@@ -61,11 +80,11 @@ The data used in this tutorial is available at [EpistasisLab](https://github.com
 
 > ### {% icon hands_on %} Hands-on: Execute the workflow
 >    * Click on the "Run workflow" button (shown in the previous image) to execute the workflow. The following image shows the resulting dataset.
-> 
+>
 > ![Successful execution of a workflow](images/afterexecution.png)
 {: .hands_on}
 
 > ### {% icon tip %} Additional resources:
 >
 > Read more about **machine learning using scikit-learn** [here](http://scikit-learn.org/stable/).
-{:.tip}  
+{:.tip}
