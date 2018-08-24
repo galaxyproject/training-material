@@ -49,11 +49,11 @@ install: clean ## install dependencies
 .PHONY: install
 
 serve: ## run a local server}
-	${JEKYLL} serve -d _site/training-material -P ${PORT} -H ${HOST} `[ "${INCREMENTAL}" != "" ] && echo '--incremental'`
+	${JEKYLL} serve -d _site/training-material -P ${PORT} -H ${HOST} ${INCREMENTAL}
 .PHONY: serve
 
 detached-serve: clean ## run a local server in detached mode
-	${JEKYLL} serve --detach -d _site/training-material -P ${PORT} -H ${HOST}
+	${JEKYLL} serve --detach -d _site/training-material -P ${PORT} -H ${HOST} ${INCREMENTAL}
 .PHONY: detached-serve
 
 build: clean ## build files but do not run a server
