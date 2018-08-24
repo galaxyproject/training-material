@@ -1,7 +1,22 @@
 ---
 layout: tutorial_hands_on
-topic_name: phylogenetics
-tutorial_name: GeneSeqToFamily
+title: "GeneSeqToFamily"
+zenodo_link: "https://doi.org/10.5281/zenodo.1346135"
+questions:
+    - "How to find gene families?"
+    - "How to visualize discovered gene families?"
+objectives:
+    - "Load data into Galaxy"
+    - "Find Gene Families"
+    - "View discovered Gene Families in Aequatus"
+requirements:
+time_estimation: "4h"
+key_points:
+    - "Ensembl Compara GeneTrees pipeline is a useful workflow to find a gene families."
+    - "Aequatus can be used to visualize the Gene Families."
+contributors: 
+    - anilthanki
+    - nsoranzo
 ---
 
 # Introduction
