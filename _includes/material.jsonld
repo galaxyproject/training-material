@@ -3,7 +3,9 @@
     "@context": "http://schema.org",
     "@type": "CreativeWork",
     "name": "{{material.title}}",
-
+    "accessModeSufficient": "visual",
+    "accessibilityControl": "fullMouseControl",
+    "accessibilityFeature": ["alternativeText", "tableOfContents"],
     {% if material.zenodo_link or material.workflows %}
         "mentions": [
             {% if material.zenodo_link and material.zenodo_link != ''%}
@@ -25,6 +27,22 @@
             {% endif %}
         ],
     {% endif %}
+    "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "students"
+    },
+    "inLanguage": {
+        "@type": "Language",
+        "name": "English",
+        "alternateName": "en"
+    },
+    "interactivityType": "mixed",
+    "isAccessibleForFree": true,
+    "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+    {% if material.time_estimation %}
+    "timeRequired": "PT{{ material.time_estimation }}",
+    {% endif %}
+
     "contributor": [
         {% for contributor in material.contributors %}
             {% if forloop.last == true %}
@@ -40,7 +58,6 @@
             {% endif %}
         {% endfor %}
     ],
-
     {% if material.type == "introduction" %}
             "url": "{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html",
     {% elsif  material.type == "tutorial" %}
@@ -52,13 +69,15 @@
             {% elsif material.hands_on %}
                 "url": "{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/tutorial.html",
             {% endif %}
-            {% if material.slide or material.galaxy_tour %}
+            {% if material.slides or material.galaxy_tour %}
                 "hasPart": [
                     {% if material.slides %}
                          {
                             "@type": "CreativeWork",
                             "url": "{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html",
-                            "name": "Slides for {{material.title}}"
+                            "name": "Slides for {{material.title}}",
+                            "learningResourceType": "slides",
+                            "interactivityType": "expositive"
                           }
                         {% if material.galaxy_tour %}
                         ,
@@ -68,7 +87,9 @@
                          {
                             "@type": "CreativeWork",
                             "url": "{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/tours/",
-                            "name": "Galaxy Tour for {{material.title}}"
+                            "name": "Galaxy Tour for {{material.title}}",
+                            "interactivityType": "active",
+                            "learningResourceType": "interactive-tour"
                           }
                     {% endif %}
                 ],
