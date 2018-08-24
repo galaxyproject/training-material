@@ -1,7 +1,21 @@
 ---
 layout: tutorial_hands_on
-topic_name: variant-analysis
-tutorial_name: mapping-by-sequencing
+
+title: "Mapping and molecular identification of phenotype-causing mutations"
+zenodo_link: "https://doi.org/10.5281/zenodo.1098033"
+questions:
+  - "What is mapping-by-sequencing?"
+  - "How can it help you identify the causative mutation in phenotypic mutants isolated from genetic screens?"
+objectives:
+  - "Use joint variant calling and extraction to facilitate variant comparison across samples"
+  - "Perform variant linkage analyses for phenotypically selected recombinant progeny"
+  - "Filter, annotate and report lists of variants"
+time_estimation: "2h"
+key_points:
+  - "Mapping-by-sequencing is a powerful method for the molecular identification of mutations"
+  - "The MiModD suite of tools bundles most of the functionality required to perform mapping-by-sequencing analyses with Galaxy"
+contributors:
+  - wm75
 ---
 
 # Introduction

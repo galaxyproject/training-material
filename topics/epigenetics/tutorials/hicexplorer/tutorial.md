@@ -1,7 +1,23 @@
 ---
 layout: tutorial_hands_on
-topic_name: epigenetics
-tutorial_name: hicexplorer
+
+title: "Hi-C analysis of Drosophila melanogaster cells using HiCExplorer"
+zenodo_link: "https://doi.org/10.5281/zenodo.1183661"
+edam_ontology: ""
+questions:
+  - "Why is a Hi-C analysis useful?"
+  - "What is 'chromosome conformation capture'?"
+  - "What are main steps in order to generate and plot a Hi-C contact matrix?"
+time_estimation: "1h"
+key_points:
+  - "Hi-C helps to investigate the 3D structure of the genome and to uncover folding principles of chromatin."
+  - "In order to build a Hi-C contact matrix the reads have to be mapped to the reference genome."
+  - "Based on a contact matrix open and closed chromatin (A/B compartments) and topological associating domains (TADs) can be computed."
+contributors:
+  - joachimwolff
+  - fidelram
+  - vivekbhr
+  - polkhe
 ---
 
 # Introduction

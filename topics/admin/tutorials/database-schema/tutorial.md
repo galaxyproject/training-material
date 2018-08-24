@@ -1,7 +1,23 @@
 ---
 layout: tutorial_hands_on
-topic_name: admin
-tutorial_name: database-schema
+
+title: "Galaxy Database schema"
+zenodo_link: ""
+questions:
+  - "Running a production Galaxy server, you some times end up in with a situation, where you manually need to interact with the Galaxy database: how do you do that"
+  - "How to extract usage information, which can not be gathered using the given report tools"
+  - "How to move from MySQL to PostgreSQL"
+  - "Is there ever a need to manually change the contents of a table"
+objectives:
+  - "Learn some of the design concepts of the Galaxy database"
+  - "Extract information from the Galaxy database"
+  - "Get to know SchemaSpy"
+time_estimation: "2h"
+key_points:
+  - "Be careful, when you interact with the Galaxy database. And make sure you always have a backup!"
+contributors:
+  - hrhotz
+  - bgruening
 ---
 
 Galaxy Database Schema

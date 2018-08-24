@@ -1,7 +1,24 @@
 ---
 layout: tutorial_hands_on
-topic_name: variant-analysis
-tutorial_name: diploid-variant-calling
+
+title: "Variant calling: Diploid case"
+enable: "false"
+zenodo_link: ""
+questions:
+  - "What is the pipeline of the processes for variant calling and processing it?"
+objectives:
+  - "Identification of the genetic variation using the variant calling"
+  - "Using FreeBayes calls for variants generating"
+  - "Quering with GEMINI"
+time_estimation: "1d/3h/6h"
+key_points:
+  - "The modern variant callers attempt to assign a reliability estimate for each genotype call. This is done using Bayes reasoning."
+  - "FreeBayes variant caller looks at a haplotype window"
+  - "After variants have been annotated and post-processed one can manipulate the data with GEMINI queries"
+contributors:
+  - bebatut
+  - torhou
+  - nekrut
 ---
 
 > Much of Galaxy-related features described in this section have been developed by Björn Grüning (@bgruening) and configured by Dave Bouvier (@davebx).

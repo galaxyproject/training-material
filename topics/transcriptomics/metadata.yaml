@@ -5,215 +5,75 @@ title: Transcriptomics
 summary: Training material for all kinds of transcriptomics analysis.
 docker_image: null
 requirements:
-- title: Galaxy introduction
-  type: internal
-  link: /introduction/
-- title: Quality control
-  type: internal
-  link: /sequence-analysis/
-material:
-- title: Introduction to Transcriptomics
-  type: introduction
-  name: introduction
-  slides: true
-  contributors:
-  - bebatut
-  - erxleben
-  - mwolfien
-- title: De novo transcriptome reconstruction with RNA-Seq
-  type: tutorial
-  name: de-novo
-  zenodo_link: https://zenodo.org/record/254485#.WKODmRIrKRu
-  galaxy_tour: true
-  hands_on: true
-  slides: false
-  workflows: true
-  questions:
-  - What genes are differentially expressed between G1E cells and megakaryocytes?
-  - How can we generate a transcriptome de novo from RNA sequencing data?
-  objectives:
-  - Analysis of RNA sequencing data using a reference genome
-  - Reconstruction of transcripts without reference transcriptome (de novo)
-  - Analysis of differentially expressed genes
-  time_estimation: 6h
-  key_points:
-  - De novo transcriptome reconstruction is the ideal approach for identifying differentially
-    expressed known and novel transcripts.
-  - Differential gene expression testing is improved with the use of replicate experiments
-    and deep sequence coverage.
-  - Visualizing data on a genome browser is a great way to display interesting patterns
-    of differential expression.
-  contributors:
-  - malloryfreeberg
-  - moheydarian
-- title: Reference-based RNA-Seq data analysis
-  type: tutorial
-  name: ref-based
-  zenodo_link: https://zenodo.org/record/1185122
-  galaxy_tour: true
-  hands_on: true
-  slides: false
-  workflows: true
-  questions:
-  - What are the effects of Pasilla (PS) gene depletion on splicing events?
-  - How to analyze RNA sequencing data using a reference genome?
-  objectives:
-  - Analysis of RNA sequencing data using a reference genome
-  - Analysis of differentially expressed genes
-  - Identification of functional enrichment among differentially expressed genes
-  time_estimation: 1d
-  key_points:
-  - Using a spliced mapping tool for eukaryotic RNA seq data
-  - Running a differential gene expression with taking care of the factors to study
-  - Running a differential exon usage with taking care of the factors to study
-  contributors:
-  - bebatut
-  - malloryfreeberg
-  - moheydarian
-  - erxleben
-  - pavanvidem
-  - blankclemens
-- title: Differential abundance testing of small RNAs
-  type: tutorial
-  name: srna
-  zenodo_link: https://zenodo.org/record/826906
-  galaxy_tour: false
-  hands_on: true
-  slides: false
-  workflows: true
-  questions:
-  - What small RNAs are expressed?
-  - What RNA features have significantly different numbers of small RNAs targeting
-    them between two conditions?
-  objectives:
-  - Process small RNA-seq datasets to determine quality and reproducibility.
-  - Filter out contaminants (e.g. rRNA reads) in small RNA-seq datasets.
-  - Differentiate between subclasses of small RNAs based on their characteristics.
-  - Identify differently abundant small RNAs and their targets.
-  time_estimation: 3h
-  key_points:
-  - Analysis of small RNAs is complex due to the diversity of small RNA subclasses.
-  - Both alignment to references and transcript quantification approaches are useful
-    for small RNA-seq analyses.
-  contributors:
-  - malloryfreeberg
-- title: Visualization of RNA-Seq results with CummeRbund
-  type: tutorial
-  name: rna-seq-viz-with-cummerbund
-  zenodo_link: https://zenodo.org/record/1001880
-  galaxy_tour: false
-  hands_on: true
-  slides: true
-  workflows: true
-  questions:
-  - How are RNA-Seq results stored?
-  - Why are visualization techniques needed?
-  - How to select our desired subjects for differential gene expression analysis?
-  objectives:
-  - Manage RNA-Seq results
-  - Extract the desired subject for differential gene expression analysis
-  - Visualize information
-  time_estimation: 1h
-  key_points:
-  - Extract informations from a SQLite CuffDiff database
-  - Filter and sort results to highlight differential expressed genes of interest
-  - Generate publication-ready visualizations for RNA-Seq analysis results
-  contributors:
-  - bagnacan
-- title: Reference-based RNAseq data analysis (long)
-  type: tutorial
-  name: rb-rnaseq
-  zenodo_link: ''
-  workflows: false
-  galaxy_tour: false
-  hands_on: true
-  slides: false
-  questions:
-  - How to perform analysis of RNAseq data when reference genome is available?
-  objectives:
-  - Learns basic concepts of RNAseq analysis
-  time_estimation: 1h
-  key_points: null
-  contributors:
-  - nekrut
-- title: CLIP-Seq data analysis from pre-processing to motif detection
-  name: clipseq
-  type: tutorial
-  zenodo_link: https://zenodo.org/record/1327423
-  hands_on: true
-  slides: false
-  workflows: true
-  galaxy_tour: false
-  questions:
-  - How is raw CLIP-Seq data processed and analysed?
-  - How do I find binding motifs and targets for a protein (e.g., RBFOX2)?
-  objectives:
-  - Remove Adapters, Barcodes and Unique Molecular Identifiers (UMIs) from the reads
-  - Align trimmed reads with STAR
-  - De-duplicate the read library
-  - Inspect the read mapping and de-duplication quality
-  - Perform peak calling with PEAKachu
-  - Analyse the peaks and find potential binding motifs and targets
-  - Check the quality of the peak calling
-  time_estimation: 6h
-  key_points:
-  - Sophisticated analysis of CLIP-Seq data is possible using tools hosted by Galaxy.
-  - Analysis of the datasets needs multiple methods to assess the quality of the data and to answer the biological question of interest.
-  - CLIP-Seq data varies from protocol to protocol, thus flexible changes to the data anylsis are required which is supported by Galaxy.
-  - By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced.
-  contributors:
-  - Florian-H-Lab
-  - dmaticzka
-  - bebatut
+  -
+    title: "Galaxy introduction"
+    type: "internal"
+    link: "/introduction/"
+  -
+    title: "Quality control"
+    type: "internal"
+    link: "/sequence-analysis/"
+
 maintainers:
-- bebatut
-- malloryfreeberg
+  - bebatut
+  - malloryfreeberg
+
 references:
-- authors: Shirley Pepke et al
-  title: Computation for ChIP-seq and RNA-seq studies
-  link: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4121056/
-  summary: ''
-- authors: Paul L. Auer & R. W. Doerge
-  title: Statistical Design and Analysis of RNA Sequencing Data
-  link: http://www.genetics.org/content/185/2/405
-  summary: Insights into proper planning of your RNA-seq run! To read before any RNA-seq
-    experiment!
-- authors: Ian Korf
-  title: 'Genomics: the state of the art in RNA-seq analysis'
-  link: https://www.ncbi.nlm.nih.gov/pubmed/24296473
-  summary: A refreshingly honest view on the non-trivial aspects of RNA-seq analysis
-- authors: "Marie-Agn\xE8s Dillies et al"
-  title: A comprehensive evaluation of normalization methods for Illumina high-throughput
-    RNA sequencing data analysis
-  link: http://bib.oxfordjournals.org/content/14/6/671
-  summary: Systematic comparison of seven representative normalization methods for
-    the differential analysis of RNA-seq data (Total Count, Upper Quartile, Median
-    (Med), DESeq, edgeR, Quantile and Reads Per Kilobase per Million mapped reads
-    (RPKM) normalization)
-- authors: Franck  Rapaport et al
-  title: Comprehensive evaluation of differential gene expression analysis methods
-    for RNA-seq data
-  link: https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-9-r95
-  summary: Evaluation of methods for differential gene expression analysis
-- authors: Charlotte Soneson & Mauro Delorenzi
-  title: A comparison of methods for differential expression analysis of RNA-seq data
-  link: http://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-91
-  summary: ''
-- authors: Adam Roberts et al
-  title: Improving RNA-Seq expression estimates by correcting for fragment bias
-  link: https://genomebiology.biomedcentral.com/articles/10.1186/gb-2011-12-3-r22
-  summary: ''
-- authors: Manuel Garber et al
-  title: Computational methods for transcriptome annotation and quantification using
-    RNA-seq
-  link: http://www.nature.com/nmeth/journal/v8/n6/abs/nmeth.1613.html
-  summary: Classical paper about the computational aspects of RNA-seq data analysis
-- authors: Cole Trapnell et al
-  title: Differential gene and transcript expression analysis of RNA-seq experiments
-    with TopHat and Cufflinks
-  link: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3334321/
-  summary: ''
-- authors: Zhong Wang et al
-  title: 'RNA-Seq: a revolutionary tool for transcriptomics'
-  link: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2949280/
-  summary: ''
+  - 
+    authors: Shirley Pepke et al
+    title: Computation for ChIP-seq and RNA-seq studies
+    link: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4121056/
+    summary: ''
+  - 
+    authors: Paul L. Auer & R. W. Doerge
+    title: Statistical Design and Analysis of RNA Sequencing Data
+    link: http://www.genetics.org/content/185/2/405
+    summary: Insights into proper planning of your RNA-seq run! To read before any RNA-seq
+      experiment!
+  - 
+    authors: Ian Korf
+    title: 'Genomics: the state of the art in RNA-seq analysis'
+    link: https://www.ncbi.nlm.nih.gov/pubmed/24296473
+    summary: A refreshingly honest view on the non-trivial aspects of RNA-seq analysis
+  - 
+    authors: "Marie-Agn\xE8s Dillies et al"
+    title: A comprehensive evaluation of normalization methods for Illumina high-throughput
+      RNA sequencing data analysis
+    link: http://bib.oxfordjournals.org/content/14/6/671
+    summary: Systematic comparison of seven representative normalization methods for
+      the differential analysis of RNA-seq data (Total Count, Upper Quartile, Median
+      (Med), DESeq, edgeR, Quantile and Reads Per Kilobase per Million mapped reads
+      (RPKM) normalization)
+  - 
+    authors: Franck  Rapaport et al
+    title: Comprehensive evaluation of differential gene expression analysis methods
+      for RNA-seq data
+    link: https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-9-r95
+    summary: Evaluation of methods for differential gene expression analysis
+  - 
+    authors: Charlotte Soneson & Mauro Delorenzi
+    title: A comparison of methods for differential expression analysis of RNA-seq data
+    link: http://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-91
+    summary: ''
+  - 
+    authors: Adam Roberts et al
+    title: Improving RNA-Seq expression estimates by correcting for fragment bias
+    link: https://genomebiology.biomedcentral.com/articles/10.1186/gb-2011-12-3-r22
+    summary: ''
+  - 
+    authors: Manuel Garber et al
+    title: Computational methods for transcriptome annotation and quantification using
+      RNA-seq
+    link: http://www.nature.com/nmeth/journal/v8/n6/abs/nmeth.1613.html
+    summary: Classical paper about the computational aspects of RNA-seq data analysis
+  - 
+    authors: Cole Trapnell et al
+    title: Differential gene and transcript expression analysis of RNA-seq experiments
+      with TopHat and Cufflinks
+    link: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3334321/
+    summary: ''
+  - 
+    authors: Zhong Wang et al
+    title: 'RNA-Seq: a revolutionary tool for transcriptomics'
+    link: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2949280/
+    summary: ''

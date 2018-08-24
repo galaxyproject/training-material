@@ -1,7 +1,22 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: create-new-tutorial-content
+
+title: "Creating a new tutorial - Writing content in Markdown"
+questions:
+  - "How to write a tutorial with hands-on?"
+  - "What are the different boxes?"
+  - "How can I add a caption to an image?"
+objectives:
+  - "Create hands-on"
+  - "Use the different boxes"
+time_estimation: "15min"
+key_points:
+  - "You can highlight questions, tools and hints with a special syntax"
+  - "Self-learning can be done by questions and hidden answers"
+contributors:
+  - bebatut
+  - bgruening
+  - shiltemann
 ---
 
 # Introduction
@@ -58,21 +73,61 @@ blabla
 The `tutorial.md` needs to start with some metadata at the top:
 
 - `layout: tutorial_hands_on`: keep the default
-- `topic_name: training`: replace 'training' the name of the topic
-- `tutorial_name: create-new-tutorial`: replace 'create-new-tutorial' with the `name` of tutorial that you used in the topic level metadata
+- `title`: title of the tutorial (it will appear on the tutorial page and the topic page)
+- `enable`: `false` to hide your tutorial from the topic page (optional)
+- `zenodo_link`: link on Zenodo to the input data for the tutorial
 
-These metadata are there to help the templating system linking between the tutorial's file and the global [metadata]({{site.baseurl}}/topics/contributing/tutorials/create-new-tutorial-metadata/tutorial.html).
-If this is not correctly defined, the tutorial will not be shown on the website.
-
-> ### {% icon hands_on %} Hands-on: Fix the top metadata
+> ### {% icon hands_on %} Hands-on: Fill the basic metadata
 >
-> 1. Change the `tutorial_name` and the `topic_name` to fit to the ones defined in the metadata
-> 2. (Optional) Build the website locally by following the [Jekyll tutorial]({{ site.baseurl }}/topics/contributing/tutorials/running-jekyll/tutorial.html) and check that the tutorial is reachable
+> 1. Update the tutorial information in the header section of your tutorial:
+>
+>     ```
+>     title: "Similarity search with BLAST"
+>     ```
+> 2. Add
+>
+>     ```
+>     zenodo_link: ""
+>     ```
+>
 {: .hands_on}
+
+This information is used to display the data from the topic and tutorial page. They are also used to check which information are missing for the tutorials.
+
+We also define metadata related to the pedagogical content of the tutorial, which will appear in the top ("Overview" box) and bottom of the online tutorial:
+
+- `requirements`: list of resources that the reader of the material should be familiar with before starting this training:
+    - `title`
+    - `link`: relative for internal (inside training material) requirement or full for external requirement)
+    - `type`: the type of link (`internal` or `external`)
+- `time_estimation`: an estimation of the time needed to complete the hands-on
+- `questions`: list of questions that will be addressed in the tutorial
+- `objectives`: list of learning objectives for the tutorial
+
+    A learning objective is a single sentence describing what a learner will be able to do once they have done the tutorial
+
+- `key_points`: list of take-home messages
+
+    This information will appear at the end of the tutorial
+
+For this category of metadata, we have taken inspiration from what Software Carpentry has done and particularly what they described in their [Instructor training](https://swcarpentry.github.io/instructor-training/).
+
+> ### {% icon hands_on %} Hands-on: Fill out the pedagogical metadata
+>
+> 1. Define 2 questions that will be addressed during the tutorial and add them to the metadata
+> 2. Define 2 learning objectives for the tutorial and add them to the metadata
+{: .hands_on}
+
+> ### {% icon comment %} When filling the pedagogical metadata
+> We recommend that you fill out the *questions* and the *learning objectives* before starting writing the tutorial content. You can still refine them afterwards, but it will help to guide you in developing your tutorial, and gives you some time to think beforehand on what topics are worth being covered.
+>
+> For the take-home messages, it is easier to define them once the tutorial is written and you identified the issues.
+{: .comment}
+
 
 # Content
 
-The tutorial's content is written directly after the short section of metadata. This is written in Markdown, a simple markup language.
+The tutorial's content is written directly after the section of metadata. This is written in Markdown, a simple markup language.
 
 > ### {% icon tip %} Tip: Markdown
 >
