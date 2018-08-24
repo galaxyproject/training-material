@@ -4,14 +4,9 @@
 {% assign topic = site.data[page.topic_name] %}
 {% assign topic_material = site.pages | topic_filter:page.topic_name %}
 {% assign title = topic.title %}
-{% if page.tutorial_name %}
-  {% for tuto in topic_material %}
-    {% if tuto.name == page.tutorial_name %}
-        {% assign tutorial = tuto %}
-        {% assign title = tutorial.title %}
-    {% endif %}
-  {% endfor %}
-{% endif %}
+
+{% assign tutorial = page %}
+{% assign title = tutorial.title %}
 {% assign contributors = site.data['contributors'] %}
 
   <head>
@@ -49,19 +44,19 @@ class: center, middle, inverse
 
   Before diving into this slide deck, we recommend you to have a look at:
 
-  {% for requirement in page.requirements %}
+  {% for requirement in topic.requirements %}
     {% if requirement.type == "internal" %}
-  - [{{ requirement.title }}]({{ site.baseurl }}/topics/{{ requirement.link }})
-    {% elsif material.type == "external" %}
+  - [{{ requirement.title }}]({{ site.baseurl }}{{ requirement.link }})
+    {% elsif requirement.type == "external" %}
   - [{{ requirement.title }}]({{ requirement.link }})
     {% endif %}
   {% endfor %}
 
-  {% if page.tutorial_name %}
+  {% if tutorial.requirements %}
     {% for requirement in tutorial.requirements %}
       {% if requirement.type == "internal" %}
-  - [{{ requirement.title }}]({{ site.baseurl }}/topics/{{ requirement.link }})
-      {% elsif material.type == "external" %}
+  - [{{ requirement.title }}]({{ site.baseurl }}{{ requirement.link }})
+      {% elsif requirement.type == "external" %}
   - [{{ requirement.title }}]({{ requirement.link }})
       {% endif %}
     {% endfor %}
