@@ -1,7 +1,17 @@
 ---
 layout: tutorial_hands_on
-topic_name: variant-analysis
-tutorial_name: snpeff-variant-analysis
+title: "Variant Analysis with SNPEff and Jupyter Interactive environments"
+type: "tutorial"
+name: "snpeff-variants"
+zenodo_link: ""
+questions:
+    - " "
+objectives:
+    - " "
+time_estimation: "1 d"
+key_points:
+contributors:
+    - Delphine-L
 ---
 
 # Introduction

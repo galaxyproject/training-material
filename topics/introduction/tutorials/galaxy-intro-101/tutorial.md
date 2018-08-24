@@ -1,7 +1,31 @@
 ---
 layout: tutorial_hands_on
-topic_name: introduction
-tutorial_name: galaxy-intro-101
+
+title: "Galaxy 101"
+zenodo_link: ""
+questions:
+  - "Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?"
+objectives:
+  - "Familiarize yourself with the basics of Galaxy"
+  - "Learn how to obtain data from external sources"
+  - "Learn how to run tools"
+  - "Learn how histories work"
+  - "Learn how to create a workflow"
+  - "Learn how to share your work"
+time_estimation: "1-1.5h"
+key_points:
+  - "Galaxy provides an easy-to-use graphical user interface for often complex command-line tools"
+  - "Galaxy keeps a full record of your analysis in a history"
+  - "Workflows enable you to repeat your analysis on different data"
+  - "Galaxy can connect to external sources for data import and visualization purposes"
+  - "Galaxy provides ways to share your results and methods with others"
+contributors:
+  - shiltemann
+  - nsoranzo
+  - blankclemens
+  - nekrut
+  - bgruening
+  - pajanne
 ---
 
 # 101 Introduction
@@ -152,6 +176,15 @@ Let's remind ourselves that our objective is to find which exon contains the mos
 >    ![Contents of the `Join` output dataset](../../images/101_joined.png)
 >
 >    Remember that variations are possible due to using different versions of UCSC databases, as long as you have similar looking columns you did everything right :)
+>
+> > ### {% icon tip %} Tip: If things don't work...
+> >
+> > Did the Join tool error with a memory failure? Or is this step executing for a long time? Most likely a setting was missed when extracting the data from the UCSC Table Browser. Try again, double checking that:
+> >
+> >  * For both SNP and EXON: **region** is actually changed to `position` with value `chr22`
+> >  * For EXON: **Create one BED record per** `Coding Exons` is selected (*not* `Whole Gene` as for the SNP data)
+> >  * Carefully inspect remaining Table Browser settings if these two most common reasons for problems are Ok in your query
+> {: .tip}
 >
 {: .hands_on}
 
@@ -418,7 +451,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 
 > ### {% icon comment %} Comment
 > Because most intermediate steps of the workflow were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, we can unhide all hidden datasets by selecting `Unhide Hidden Datasets` from the history options menu.
-{: .Comment}
+{: .comment}
 
 > ### {% icon question %} Questions
 > Which exon had the highest number of repeats? How many repeats were there?

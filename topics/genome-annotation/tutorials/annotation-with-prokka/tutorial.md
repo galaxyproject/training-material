@@ -1,7 +1,25 @@
 ---
 layout: tutorial_hands_on
-topic_name: genome-annotation
-tutorial_name: "annotation-with-prokka"
+
+title: "Genome annotation with Prokka"
+zenodo_link: "https://doi.org/10.5281/zenodo.1156405"
+tags:
+  - prokaryote
+questions:
+  - "How to annotate a bacterial genome?"
+  - "How to visualize annoted genomic features?"
+objectives:
+  - "Load genome into Galaxy"
+  - "Annotate genome with Prokka"
+  - "View annotations in JBrowse"
+time_estimation: "1h"
+key_points:
+  - "Prokka is a useful tool to annotate a bacterial genome."
+  - "JBrowse can be used to inspect the annotation of a genome."
+contributors:
+  - annasyme
+  - tseemann
+  - slugger70
 ---
 
 # Introduction
