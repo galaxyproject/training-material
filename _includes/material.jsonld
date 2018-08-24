@@ -19,7 +19,7 @@
             {% if material.workflows %}
                 {
                     "@type": "Thing",
-                    "url": "{{ site.github_repository  }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/workflows/",
+                    "url": "{{ site.github_repository  }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/workflows/",
                     "name": "Workflow for {{material.title}} tutorial"
                 }
             {% endif %}
@@ -36,52 +36,52 @@
                 {
                     "@type": "Person",
                     "name": "{{contributor}}"
-                },                
+                },
             {% endif %}
         {% endfor %}
     ],
 
     {% if material.type == "introduction" %}
-            "url": "{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.name }}.html",
+            "url": "{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html",
     {% elsif  material.type == "tutorial" %}
         {% if material.hands_on %}
             {% if material.hands_on == "external" %}
                 "url": "{{ material.hands_on_url }}",
             {% elsif material.hands_on == "github" %}
-                "url": "{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/tutorial.md",
+                "url": "{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/tutorial.md",
             {% elsif material.hands_on %}
-                "url": "{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/tutorial.html",
+                "url": "{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/tutorial.html",
             {% endif %}
             {% if material.slide or material.galaxy_tour %}
                 "hasPart": [
                     {% if material.slides %}
                          {
                             "@type": "CreativeWork",
-                            "url": "{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.name }}.html",
+                            "url": "{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html",
                             "name": "Slides for {{material.title}}"
-                          }            
+                          }
                         {% if material.galaxy_tour %}
                         ,
-                        {% endif %}                          
+                        {% endif %}
                     {% endif %}
                     {% if material.galaxy_tour %}
                          {
                             "@type": "CreativeWork",
-                            "url": "{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/tours/",
+                            "url": "{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/tours/",
                             "name": "Galaxy Tour for {{material.title}}"
-                          }              
+                          }
                     {% endif %}
                 ],
             {% endif %}
         {% elsif material.slides %}
-                "url": "{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.name }}.html",
-                {% if material.galaxy_tour %}        
+                "url": "{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html",
+                {% if material.galaxy_tour %}
                       "hasPart": {
                         "@type": "CreativeWork",
-                        "url": "{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/tours/",
+                        "url": "{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/tours/",
                         "name": "Galaxy Tour for {{material.title}}"
                       },
-                {% endif %}                
+                {% endif %}
         {% endif %}
     {% endif %}
     "learningResourceType": "{{material.type}}"

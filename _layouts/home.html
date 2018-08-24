@@ -2,7 +2,7 @@
 layout: base
 ---
 
-{% include default-header.html %}
+{% include _includes/default-header.html %}
 {% assign contributors = site.data['contributors'] %}
 
 {% assign sorted_topics = "" | split: "," %}
@@ -37,17 +37,7 @@ layout: base
                     {% for topic in sorted_topics %}
                         {% if topic[1].type == "use" %}
                         <tr>
-                            {% assign tutorial_number=0 %}
-                            {% assign introduction=0 %}
-                            {% for tuto in topic[1].material %}
-                                {% if tuto.type == "tutorial" %}
-                                    {% assign tutorial_number=tutorial_number | plus:1 %}
-                                {% endif %}
-                                {% if tuto.type == "introduction" %}
-                                    {% assign introduction=introduction | plus:1 %}
-                                {% endif %}
-                            {% endfor %}
-
+                            {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
                             <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
                             <td>{{ tutorial_number }}</td>
                         </tr>
@@ -69,17 +59,7 @@ layout: base
                     {% for topic in sorted_topics %}
                         {% if topic[1].type == "basics" %}
                         <tr>
-                            {% assign tutorial_number=0 %}
-                            {% assign introduction=0 %}
-                            {% for tuto in topic[1].material %}
-                                {% if tuto.type == "tutorial" %}
-                                    {% assign tutorial_number=tutorial_number | plus:1 %}
-                                {% endif %}
-                                {% if tuto.type == "introduction" %}
-                                    {% assign introduction=introduction | plus:1 %}
-                                {% endif %}
-                            {% endfor %}
-
+                            {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
                             <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
                             <td>{{ tutorial_number }}</td>
                         </tr>
@@ -100,17 +80,7 @@ layout: base
                     {% for topic in sorted_topics %}
                         {% if topic[1].type == "admin-dev" %}
                         <tr>
-                            {% assign tutorial_number=0 %}
-                            {% assign introduction=0 %}
-                            {% for tuto in topic[1].material %}
-                                {% if tuto.type == "tutorial" %}
-                                    {% assign tutorial_number=tutorial_number | plus:1 %}
-                                {% endif %}
-                                {% if tuto.type == "introduction" %}
-                                    {% assign introduction=introduction | plus:1 %}
-                                {% endif %}
-                            {% endfor %}
-
+                            {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
                             <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
                             <td>{{ tutorial_number }}</td>
                         </tr>
@@ -139,17 +109,7 @@ layout: base
                     {% for topic in sorted_topics %}
                         {% if topic[1].type == "instructors" %}
                         <tr>
-                            {% assign tutorial_number=0 %}
-                            {% assign introduction=0 %}
-                            {% for tuto in topic[1].material %}
-                                {% if tuto.type == "tutorial" %}
-                                    {% assign tutorial_number=tutorial_number | plus:1 %}
-                                {% endif %}
-                                {% if tuto.type == "introduction" %}
-                                    {% assign introduction=introduction | plus:1 %}
-                                {% endif %}
-                            {% endfor %}
-
+                            {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
                             <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
                             <td>{{ tutorial_number }}</td>
                         </tr>
@@ -238,4 +198,4 @@ layout: base
     </section>
 </div>
 
-{% include default-footer.html %}
+{% include _includes/default-footer.html %}

@@ -2,15 +2,11 @@
 <html>
 
 {% assign topic = site.data[page.topic_name] %}
+{% assign topic_material = site.pages | topic_filter:page.topic_name %}
 {% assign title = topic.title %}
-{% if page.tutorial_name %}
-  {% for tuto in topic.material %}
-    {% if tuto.name == page.tutorial_name %}
-        {% assign tutorial = tuto %}
-        {% assign title = tutorial.title %}
-    {% endif %}
-  {% endfor %}
-{% endif %}
+
+{% assign tutorial = page %}
+{% assign title = tutorial.title %}
 {% assign contributors = site.data['contributors'] %}
 
   <head>
@@ -41,7 +37,7 @@ class: center, middle, inverse
 
 # {{ title }}
 
-{% if topic.requirements %}
+{% if topic.requirements or page.requirements %}
 ---
 
   ## Requirements
@@ -50,17 +46,17 @@ class: center, middle, inverse
 
   {% for requirement in topic.requirements %}
     {% if requirement.type == "internal" %}
-  - [{{ requirement.title }}]({{ site.baseurl }}/topics/{{ requirement.link }})
-    {% elsif material.type == "external" %}
+  - [{{ requirement.title }}]({{ site.baseurl }}{{ requirement.link }})
+    {% elsif requirement.type == "external" %}
   - [{{ requirement.title }}]({{ requirement.link }})
     {% endif %}
   {% endfor %}
 
-  {% if page.tutorial_name %}
+  {% if tutorial.requirements %}
     {% for requirement in tutorial.requirements %}
       {% if requirement.type == "internal" %}
-  - [{{ requirement.title }}]({{ site.baseurl }}/topics/{{ requirement.link }})
-      {% elsif material.type == "external" %}
+  - [{{ requirement.title }}]({{ site.baseurl }}{{ requirement.link }})
+      {% elsif requirement.type == "external" %}
   - [{{ requirement.title }}]({{ requirement.link }})
       {% endif %}
     {% endfor %}
@@ -83,10 +79,8 @@ This material is the result of a collaborative work. Thanks the [Galaxy Training
 <img src="{{ page.logo }}" alt="page logo" style="height: 40px;"/>
 {% endif %}
 
-{% if page.layout == "tutorial_slides" %}
-.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html)]
-{% elsif page.layout == "introduction_slides" %}
-.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/master/topics/{{ topic.name }}/slides/{{ page.name }})]
+{% if page.layout == "base_slides" %}
+.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/master{{ page.url }})]
 {% endif %}
     </textarea>
     <script src="{{ "/assets/js/remark-latest.min.js" | prepend: site.baseurl }}" type="text/javascript">

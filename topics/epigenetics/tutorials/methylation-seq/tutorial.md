@@ -1,7 +1,24 @@
 ---
 layout: tutorial_hands_on
-topic_name: epigenetics
-tutorial_name: methylation-seq
+
+title: "DNA Methylation data analysis"
+zenodo_link: "https://zenodo.org/record/557099"
+edam_ontology: "topic_3173"
+questions:
+  - "What is methylation and why it cannot be recognised by a normal NGS procedure?"
+  - "Can a different methylation influence the expression of a gene? How?"
+  - "Which tools you can use to analyse methylation data?"
+objectives:
+  - "Learn how to analyse methylation data"
+  - "Get a first intuition what are common pitfalls."
+time_estimation: "3h"
+key_points:
+  - "The output of a methylation NGS is having a different distribution of the four bases. This is caused by the bisulfite treatment of the DNA."
+  - "If there is a different level of methylation in the loci of a gene this can be a hint that something is wrong."
+  - "To get useful results you need -- data, data and data!"
+contributors:
+  - joachimwolff
+  - dpryan79
 ---
 
 > ### Agenda

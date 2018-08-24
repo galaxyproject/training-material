@@ -1,7 +1,18 @@
 ---
 layout: tutorial_hands_on
-topic_name: sequence-analysis
-tutorial_name: genetic-map-rad-seq
+
+title: "RAD-Seq to construct genetic maps"
+zenodo_link: "https://doi.org/10.5281/zenodo.1219888"
+questions:
+  - "How to analyze RAD sequencing data for a genetic map study?"
+objectives:
+  - "SNP calling from RAD sequencing data"
+  - "Find and correct haplotypes"
+  - "Create input files for genetic map building software"
+time_estimation: "1/2d"
+key_points:
+contributors:
+  - yvanlebras
 ---
 
 # Introduction

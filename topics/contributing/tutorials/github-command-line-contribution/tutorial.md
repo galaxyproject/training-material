@@ -1,7 +1,28 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: github-command-line-contribution
+
+title: "Contributing with GitHub via command-line"
+questions:
+  - "How can I contribute to an open-source project with GitHub?"
+  - "What is the GitHub flow?"
+objectives:
+  - "Fork a repository on GitHub"
+  - "Clone a remote repository locally"
+  - "Create a branch"
+  - "Commit changes"
+  - "Push changes to a remote repository"
+  - "Create a pull request"
+  - "Update a pull request"
+time_estimation: "30min"
+key_points:
+  - "Work on your fork"
+  - "1 branch = 1 feature"
+  - "1 pull request = 1 branch"
+  - "Be careful of the branch you're working on"
+  - "Check the automated tests"
+contributors:
+  - cmonjeau
+  - bebatut
 ---
 
 # Introduction

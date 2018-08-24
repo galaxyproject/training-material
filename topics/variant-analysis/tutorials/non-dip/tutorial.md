@@ -1,7 +1,22 @@
 ---
 layout: tutorial_hands_on
-topic_name: variant-analysis
-tutorial_name: non-dip
+
+title: "Calling variants in non-diploid systems"
+zenodo_link: "https://doi.org/10.5281/zenodo.1251112"
+tags:
+  - prokaryote
+questions:
+  - "How does frequency of mitochondrial polymorphisms change from mother to child?"
+objectives:
+  - "Using Galaxy's main site we will see how to call variants in bacteria, viruses, and organelles."
+time_estimation: "1-1.5h"
+key_points:
+  - "Variation in human mitochondria is a proxy for other haploid systems."
+  - "Nucleotide variants in haploid systems may have any frequency between 0 and 1."
+  - "Distinguishing true variants from noise is not easy and requires accounting <br> for strand bias and read placement bias."
+  - "FreeBayes can be effectively used to call variants in haploid systems."
+contributors:
+  - nekrut
 ---
 
 # Introduction
