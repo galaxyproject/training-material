@@ -1,3 +1,23 @@
+---
+title: "LC-MS data preprocessing"
+type: "tutorial"
+edam_ontology: "operation_3215"
+questions:
+- Which format are allowed?
+- What contain the raw files?
+- What are the different steps and the main parameters of XCMS?
+objectives:
+- Use the XCMS workflow
+- Extract the peaks from the raw files
+- Align the metabolites through the different samples
+- Normalize the retention time drift
+requirements:
+time_estimation: "2h"
+key_points:
+- Run the XCMS worlflow to extract peaks from your raw data
+- Check the data to set correctly the XCMS parameters
+---
+
 # Introduction
 
 General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
