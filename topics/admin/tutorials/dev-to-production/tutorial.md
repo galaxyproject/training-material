@@ -1,7 +1,16 @@
 ---
 layout: tutorial_hands_on
-topic_name: admin
-tutorial_name: dev-to-production
+
+title: "Move from dev instance to production instance"
+zenodo_link: ""
+hands_on: "github"
+enable: "false"
+questions:
+objectives:
+time_estimation: "1d/3h/6h"
+key_points:
+contributors:
+  - hrhotz
 ---
 
 Move from dev instance to production instance
@@ -27,8 +36,8 @@ Move from dev instance to production instance
 # Introduction
 
 In this tutorial you will learn to install and configure a galaxy instance.
-The basic installation instructions are suitable for developpement only.
-For setting up a Galaxy for a multi-user production environment additonal steps are necessary.
+The basic installation instructions are suitable for development only.
+For setting up a Galaxy for a multi-user production environment additional steps are necessary.
 After a basic installation, this tutorial present the main steps for moving from a basic installation to a production environment.
 
 <img src="../../images/scheme-dev_to_production.png" alt="Flowchart of the processes of configuring galaxy for a production environment. After the basic installation the developer settings should be disabled. The next steps are to switch to a database server and use proxy server. A compute cluster should be used. The following would be to clean up database and rotate log files. Check the local data and enable upload via FTP and the galaxy instance is ready for the production." style="width: 600px;"/>
@@ -56,24 +65,24 @@ Galaxy's server will start printing its output to your terminal. To stop the Gal
 
 ## Access Galaxy over the network
 In the basic installation Galaxy is bind to the loopback interface.
-To bind Galaxy to any avalaible network interface edit the config/galaxy.ini file and change the host setting to:
+To bind Galaxy to any available network interface edit the config/galaxy.ini file and change the host setting to:
 
 	host = 0.0.0.0
 
 ## What did you just installed ?
 The galaxy you have just installed is configured with the following:
 
-- [SQLite](https://www.sqlite.org/): a servless database.
+- [SQLite](https://www.sqlite.org/): a serverless database.
 - A built-in HTTP server, written in Python.
 
 The tools are run locally and the galaxy server itself run in a single process.
 
-## Usefull things to know ...
+## Useful things to know ...
 
 - The command: git clone -b release_16.07 https://github.com/galaxyproject/galaxy.git
 
 *We use the "-b" option to clone a specific branch of the repository.
-In the example above we clone the branch release_16.07 because the lastest release is 16.07.
+In the example above we clone the branch release_16.07 because the latest release is 16.07.
 A new version of Galaxy is released every 3 months.
 It is strongly encouraged to run this tutorial with the latest release.
 See the [GitHub](https://github.com/galaxyproject/galaxy) repository to get the latest one.*
@@ -90,8 +99,8 @@ Next, you will configure your Galaxy server for production.
 The first thing to do is to disable the developer settings.
 
 # Disable developer settings.
-As previously mentionned the basic installation is for development only.
-A set of option are usefull for development but become irrelevant for production:
+As previously mentioned the basic installation is for development only.
+A set of option are useful for development but become irrelevant for production:
 
 - debug:
 
@@ -167,7 +176,7 @@ Some blabla
 
 # Conclusion
 
-Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.
+Conclusion about the technical key points. And then relation between the techniques and the biological question to end with a global view.
 
 :grey_exclamation: ***Key Points***
 

@@ -2,11 +2,12 @@
 layout: base
 ---
 
-{% include default-header.html %}
+{% include _includes/default-header.html %}
 
 {% assign topic = site.data[page.topic_name] %}
 {% assign contributors = site.data['contributors'] %}
 {% assign instances = site.data['instances'] %}
+{% assign topic_material = site.pages | topic_filter:page.topic_name %}
 
 <div class="container main-content">
     <section>
@@ -48,11 +49,11 @@ layout: base
                 {% endif %}
             </tr>
 
-            {% for material in topic.material %}
-                {% if material.enable != "false" %}
+            {% for material in topic_material %}
+                {% if material.enable == nil or material.enable == true %}
                         <script type="application/ld+json">
-                            {% include material.jsonld content=material %}
-                        </script>  
+                            {% include _includes/material.jsonld content=material %}
+                        </script>
                     <tr>
                         <td>
                             {{ material.title }}
@@ -67,7 +68,7 @@ layout: base
                         {% if material.type == "introduction" %}
                             <td>
                                 {% if material.slides %}
-                                <a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.name }}.html">
+                                <a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html">
                                   {% icon slides %}
                                 </a>
                                 {% endif %}
@@ -83,11 +84,12 @@ layout: base
                         {% elsif material.type == "tutorial" %}
                             <td>
                                 {% if material.slides %}
-                                <a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/slides.html">
+                                <a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/slides.html">
                                   {% icon slides %}
                                 </a>
                                 {% endif %}
                             </td>
+
 
                             <td>
                                 {% if material.hands_on == "external" %}
@@ -95,11 +97,11 @@ layout: base
                                   {% icon tutorial %}
                                 </a>
                                 {% elsif material.hands_on == "github" %}
-                                <a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/tutorial.md">
+                                <a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/tutorial.md">
                                   {% icon tutorial %}
                                 </a>
                                 {% elsif material.hands_on %}
-                                <a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/tutorial.html">
+                                <a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/tutorial.html">
                                   {% icon tutorial %}
                                 </a>
                                 {% endif %}
@@ -107,7 +109,7 @@ layout: base
 
                             {% if topic.type == "use" %}
                                 <td>
-                                    {% if material.zenodo_link != "" %}
+                                    {% if material.zenodo_link != nil and material.zenodo_link != "" %}
                                     <a href="{{ material.zenodo_link }}">
                                       {% icon zenodo_link %}
                                     </a>
@@ -115,14 +117,14 @@ layout: base
                                 </td>
                                 <td>
                                     {% if material.workflows %}
-                                        <a href="{{ site.github_repository  }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/workflows/" title="{{ workflow.title }}" alt="{{ material.title }} workflows">
+                                        <a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/workflows/" title="{{ workflow.title }}" alt="{{ material.title }} workflows">
                                             {% icon workflow %}
                                         </a>
                                     {% endif %}
                                 </td>
                                 <td>
-                                    {% if material.galaxy_tour %}
-                                    <a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/tours/">
+                                    {% if material.tours %}
+                                    <a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/tours/">
                                         {% icon interactive_tour %}
                                     </a>
                                     {% endif %}
@@ -130,12 +132,12 @@ layout: base
                             {% endif %}
                             {% if instances[topic.name].supported %}
                                 <td>
-                                {% if instances[topic.name]['tutorials'][material.name].supported %}
+                                {% if instances[topic.name]['tutorials'][material.tutorial_name].supported %}
                                     <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
                                         {% icon instances %}
                                     </a>
                                     <ul class="dropdown-menu">
-                                    {% for inst in instances[topic.name]['tutorials'][material.name]['instances'] %}
+                                    {% for inst in instances[topic.name]['tutorials'][material.tutorial_name]['instances'] %}
                                         {% if inst[1].supported %}
                                         <a class="dropdown-item" href="{{ inst[1].url }}" title="{{ inst[0] }}">
                                             {{ inst[0] }}
@@ -153,9 +155,9 @@ layout: base
         </table>
 
         <h2 id="docker_image">Galaxy instances</h2>
-        <p>You can also a public Galaxy instance which has been tested for the availability of the used tools. They are listed along with the tutorials above.</p>
+        <p>You can use a public Galaxy instance which has been tested for the availability of the used tools. They are listed along with the tutorials above.</p>
         {% if topic.docker_image and topic.docker_image != "" %}
-            <p>You can also use for these tutorials the dedicated Docker image:</p>
+            <p>You can also use the following Docker image for these tutorials:</p>
             <pre><code>docker run -d -p 8080:80 {{ topic.docker_image }}</code></pre>
             <p>It will launch a flavored Galaxy instance available on <a href="http://localhost:8080">http://localhost:8080</a>.</p>
         {% endif %}
@@ -163,18 +165,26 @@ layout: base
         <h2 id="maintainers">Maintainers</h2>
         <p>This material is maintained by:</p>
         <ul>
-        {% for maintainer in topic.maintainers %}
+        {% assign maintainers = topic.maintainers | sorted %}
+        {% for maintainer in maintainers %}
             <li>
                 <a href="{{ site.baseurl }}/hall-of-fame#{{ maintainer }}">{{ contributors[maintainer].name }}</a>
-                {% if contributors[maintainer].email and contributors[maintainer].email != "" %}
-                    (<a href="mailto:{{ contributors[maintainer].email }}">{{ contributors[maintainer].email }}</a>)
+                {% if contributors[maintainer].maintainer_contact %}
+                    {% if contributors[maintainer].maintainer_contact == 'email' %}
+                    (<a href="mailto:{{ contributors[maintainer].email }}">Contact {% icon email %}</a> )
+                    {% elsif contributors[maintainer].maintainer_contact == 'gitter' %}
+                    (<a href="https://gitter.im/{{ contributors[maintainer].gitter }}">Contact {% icon gitter %}</a> )
+                    {% else %}
+                    (<a href="{{ contributors[maintainer].maintainer_contact }}">Contact</a>)
+                    {% endif %}
+
                 {% endif %}
             </li>
         {% endfor %}
         </ul>
 
         <p>
-            <em>For any question related to this topic and the content, you can contact them.</em>
+            <em>For any question related to this topic and the content, you can contact them or visit our <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter channel</a>.</em>
         </p>
 
         <h2 id="contributors">Contributors</h2>
@@ -182,7 +192,7 @@ layout: base
 
         <!-- get list of unique contributors for all materials in the topic -->
         {% assign contributors_list = "" | split: ',' %}
-        {% for material in topic.material %}
+        {% for material in topic_material %}
             {% for c in material.contributors %}
                 {% if contributors_list contains c %}
                 {% else %}
@@ -192,10 +202,11 @@ layout: base
         {% endfor %}
 
         <ul>
-        {% for username in contributors_list %}
+        {% assign contributors_list_sorted = contributors_list | sorted %}
+        {% for username in contributors_list_sorted %}
             {% assign contributor = contributors[username] %}
             <li>
-                <a href="{{ site.baseurl }}/hall-of-fame#{{ username }}"> {{ contributor.name }}</a>
+                <a href="{{ site.baseurl }}/hall-of-fame#{{ username }}">{% if contributor.name %}{{ contributor.name }}{% else %}{{ username }}{% endif %}</a>
             </li>
         {% endfor %}
         </ul>
@@ -216,4 +227,4 @@ layout: base
     </section>
 </div>
 
-{% include default-footer.html %}
+{% include _includes/default-footer.html %}

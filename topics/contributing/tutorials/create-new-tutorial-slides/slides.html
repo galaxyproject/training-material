@@ -1,0 +1,353 @@
+---
+layout: tutorial_slides
+logo: "GTN"
+
+title: "Creating a new tutorial - Slides"
+questions:
+  - "How to format slides?"
+  - "How do we add presenter notes?"
+  - "How to use the features of the slide show tool?"
+  - "What sort of content should be included in slides?"
+objectives:
+  - "Create a new set of slides"
+  - "Add presenter comments"
+time_estimation: "???"
+key_points:
+  - "Slides are often presented before the hands-on portion, provide relevant background information"
+  - "Provide examples that are relevant to your audience"
+contributors:
+  - erasche
+  - bebatut
+  - shiltemann
+---
+
+# Slides
+
+- Introduce a subject
+- Quick overview
+- Not too much text
+- Images are Nice
+
+---
+
+
+
+## Content
+
+- Background information for the tutorial. E.g.:
+  - Motivation behind why X is useful
+  - Conepts needed to get most out of tutorial
+- Examples relevant to audience
+  - Avoid: "here is a feature to add link type tracks"
+  - Try for: "If you want to visualise SVs in cancer, ... this link type tracks are useful"
+  - Try for: Using examples from existing papers
+
+---
+
+
+## Formatting: Basic
+
+.pull-left[
+<span style="font-size: 35px;font-family: 'Yanone Kaffeesatz';font-weight: normal;text-align: center;">Slide Title</span>
+
+A list
+
+- Item 1
+- Item 2
+
+and numbered list
+
+1. Item
+2. Item
+
+Some text with a [link](https://example.com/) and an image:
+
+![Description of the image](/training-material/assets/images/GTN-60px.png)
+]
+
+.pull-right[
+```markdown
+### Slide Title
+
+A list
+
+- Item 1
+- Item 2
+
+and numbered list
+
+1. Item
+2. Item
+
+Some text with a [link](https://example.com/) and an image:
+
+![Description of the image](/training-material/assets/images/GTN-60px.png)
+---
+```
+]
+
+Slides begin with a title `### ...` and should end with a `---`
+
+???
+It's standard markdown. There is less need to follow semantic heading guidelines (not skipping levels).
+
+Slides should begin with a header and end with `---`
+
+---
+
+
+
+### Formatting: Alignment
+
+.left[Left-aligned text]
+.center[Centered text]
+.right[Right-aligned text]
+.left[![Left-aligned image](/training-material/assets/images/GTN-60px.png)]
+.center[![Centered image](/training-material/assets/images/GTN-60px.png)]
+.right[![Right-aligned image](/training-material/assets/images/GTN-60px.png)]
+
+```markdown
+.left[Left-aligned text]
+.center[Centered text]
+.right[Right-aligned text]
+.left[![Left-aligned image](/training-material/assets/images/GTN-60px.png)]
+.center[![Centered image](/training-material/assets/images/GTN-60px.png)]
+.right[![Right-aligned image](/training-material/assets/images/GTN-60px.png)]
+```
+
+???
+Alignment is not too complex, just css classes being applied to contents.
+
+---
+
+
+
+### Formatting: Incremental Text
+
+1. Item
+
+--
+
+2. Appears
+
+--
+
+
+Just separate every item with two dashes (`--`)
+
+```markdown
+1. Item
+
+--
+
+2. Appears
+```
+
+---
+
+
+
+### Formatting: Images
+
+.pull-left[
+Demo:
+
+10%
+
+.image-10[ ![](/training-material/assets/images/GTN-60px.png) ]
+
+50%
+
+.image-50[ ![](/training-material/assets/images/GTN-60px.png) ]
+
+]
+.pull-right[
+Source:
+
+```markdown
+10%
+.image-10[
+  ![](/training-material/assets/images/GTN-60px.png)
+]
+
+50%
+.image-50[
+  ![](/training-material/assets/images/GTN-60px.png)
+]
+```
+]
+
+
+There are [other CSS classes available](https://github.com/galaxyproject/training-material/blob/master/assets/css/slides.css#L67) for other sizes
+---
+
+
+
+### Formatting: Tables
+
+.pull-left[
+Demo:
+
+column1    | column2      | column3
+---        | ---          | ---
+aaaaaaaaaa | bbbb         | cccc
+dddd       | eeeeeeeeeeee | ffff
+gggg       | hhhh         | iiiiiiiiii
+]
+
+.pull-right[
+Source:
+
+```markdown
+column1    | column2      | column3
+---        | ---          | ---
+aaaaaaaaaa | bbbb         | cccc
+dddd       | eeeeeeeeeeee | ffff
+gggg       | hhhh         | iiiiiiiiii
+```
+]
+
+By default, tables are left-aligned with text left-aligned.
+
+???
+The tables do not need to be aligned, we just did that in this slide for legibility / clarity.
+
+---
+
+
+
+### Formatting: Tables with Aligned Text
+
+Different alignments for the individual columns can be controlled with the `:` character
+
+.pull-left[
+Demo:
+
+| Tables       | Are      | Cool          |
+|:-------------|:--------:|--------------:|
+| left-aligned | centered | right-aligned |
+| row2         | row2     | row2          |
+
+]
+
+.pull-right[
+Source:
+```markdown
+| Tables       | Are      | Cool          |
+|:-------------|:--------:|--------------:|
+| left-aligned | centered | right-aligned |
+| row2         | row2     | row2          |
+```
+]
+
+---
+
+
+
+### Formatting: Footnotes
+
+Content with footnotes
+
+Source:
+```markdown
+.footnote[Normal footnote with plenty of text]
+```
+
+Demo:
+
+.footnote[Normal footnote with plenty of text]
+
+---
+
+
+
+### Formatting: Two Columns
+
+This is achived with the `.pull-left` and `.pull-right` classes.
+
+```markdown
+.pull-left[
+Some text, as many text as we want.....
+
+or even table
+
+column1 | column2 | column3
+--- | --- | ---
+row1 | r1c2 | r1c3
+row2 | r2c2 | r2c3
+row3 | r3c2 | r3c3
+]
+
+.pull-right[ ![](/training-material/assets/images/GTN-60px.png) ]
+```
+
+Will be rendered as:
+---
+
+
+
+### Formatting: Two Columns
+
+.pull-left[
+Some text, as many text as we want.....
+
+or even table
+
+column1 | column2 | column3
+--- | --- | ---
+row1 | r1c2 | r1c3
+row2 | r2c2 | r2c3
+row3 | r3c2 | r3c3
+]
+
+.pull-right[
+![](/training-material/assets/images/GTN-60px.png)
+]
+
+---
+
+
+
+## Presenter Notes
+
+Allows you to:
+
+- See the next slide before the audience
+- See notes you have made on your slides
+
+![Image showing presenter mode](../../images/presenter-mode.png)
+
+---
+
+
+
+### Presenter Notes: Formatting
+
+```
+### My Slide
+
+???
+Things written below the ??? are only shown in the
+presenter view. Press `p` to bring this up
+
+---
+```
+
+???
+Things written below the ??? are only shown in the
+presenter view. Press `p` to bring this up
+
+---
+
+
+
+## Shortcut Keys
+
+- <kbd>?</kbd> activates help
+- <kbd>Escape</kbd> leaves help
+- <kbd>p</kbd> activates presenter mode
+- <kbd>f</kbd> activates full screen mode
+
+???
+The key to close the help isn't shown in the keyboard shortcuts so participants
+may need to be informed about this.

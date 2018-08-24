@@ -1,7 +1,21 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: create-new-tutorial-tours
+
+title: "Creating a new tutorial - Creating Interactive Galaxy Tours"
+questions:
+  - "What is a Interactive Galaxy Tour?"
+  - "How can we create an Interactive Tour?"
+objectives:
+  - "Creating a Galaxy tour from scratch"
+  - "Deploying and running a tour"
+time_estimation: "15min"
+key_points:
+  - "The Interactive Tours are a good training object for self-learning at its own speed"
+  - "It is now easy to create an Interactive Tour and test it"
+contributors:
+  - bebatut
+  - bgruening
+  - shiltemann
 ---
 
 # Introduction
@@ -10,7 +24,7 @@ tutorial_name: create-new-tutorial-tours
 Galaxy is a great solution to train the bioinformatics concepts:
 
 - numerous bioinformatics tools are available (almost 5,000 in the ToolShed)
-- it can be used by people without amy computer science skills
+- it can be used by people without any computer science skills
 - it trains to use technology, outlining available resources and efforts that have made them accessible to researchers
 - it is scalable
 
@@ -74,7 +88,7 @@ steps:
     `content` | Text that is shown to the user
     `element` | [JQuery Selector](https://api.jquery.com/category/selectors/) of the element you want to describe / click
     `placement` | Placement of the text box relative to the selected element
-    `preclick` or `postclick` | Elements that recieve a click() event before (`preclick`) or after (`postclick`) the step is shown
+    `preclick` or `postclick` | Elements that receive a click() event before (`preclick`) or after (`postclick`) the step is shown
     `textinsert` | Text to insert if element is a text box (e.g. tool search or upload)
     `backdrop` | `true/false`:  Show a dark backdrop behind the popover and its element, highlighting the current step
 
@@ -112,19 +126,3 @@ We can now create easily a Galaxy Interactive Tour and test it on the fly.
 
 # Conclusion
 {:.no_toc}
-
-> ### Developing GTN training material
->
-> This tutorial is part of a series to develop GTN training material, feel free to also look at:
->
-> 1. [Setting up the tutorial infrastructure](../running-jekyll/tutorial.html)
-> 1. [Writing content in markdown](../create-new-tutorial-content/tutorial.html)
-> 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
-> 1. [Creating a new topic](../create-new-topic/tutorial.html)
-> 1. [Generating PDF handouts](../generating-pdf/tutorial.html)
-> 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
-> 1. [Defining technical requirements for a tutorial](../create-new-tutorial-technical/tutorial.html)
-> 1. [Setting up Galaxy for training](../setup-galaxy-for-training/tutorial.html)
-> 1. [Submitting the new tutorial to the GitHub repository](../github-command-line-contribution/slides.html)
-> 1. [Good practices for teaching](../good-practices/slides.html)
-{: .agenda}

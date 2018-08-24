@@ -1,12 +1,27 @@
 ---
 layout: tutorial_hands_on
-topic_name: admin
-tutorial_name: monitoring-maintenance
+
+title: "Server Monitoring and Maintenance"
+zenodo_link: ""
+questions:
+  - How to monitor a Galaxy service?
+  - What are the best practices to maintain a Galaxy server?
+objectives:
+  - Learn about different monitoring strategies.
+  - Setup and start the Galaxy reports app.
+time_estimation: "1h"
+key_points:
+  - Galaxy supports pluggable monitoring extensions.
+  - Use grafana or the reports webapp to monitor your service.
+contributors:
+  - natefoo
+  - bgruening
+  - slugger70
 ---
 
 # Monitoring and maintenance
 
-## Runing the Reports Application
+## Running the Reports Application
 
 ### Section 1 - Configure reports
 

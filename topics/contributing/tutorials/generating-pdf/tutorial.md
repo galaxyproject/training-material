@@ -1,7 +1,16 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: generating-pdf
+
+title: "Generating PDF artefacts of the website"
+questions:
+  - "How to generate PDF of the different tutorials and slides?"
+objectives:
+  - "Generating PDFs"
+time_estimation: "10min"
+key_points:
+  - "PDFs can be easily generated for the different tutorials to share with learnees or to keep a fixed version of a tutorial"
+contributors:
+  - bebatut
 ---
 
 # Introduction
@@ -24,7 +33,7 @@ To generate the PDFs, a command `make pdf` is given. This command:
 
 - Launches a detached Jekyll server to serve the website
 - Generates the PDFs of the tutorials by calling Chrome via command line
-- Generates the PDFs of the slide decks by calling decktage
+- Generates the PDFs of the slide decks by calling decktape
 
 > ### {% icon hands_on %} Hands-on: Checking the website generation locally
 >
@@ -38,19 +47,3 @@ To generate the PDFs, a command `make pdf` is given. This command:
 
 # Conclusion
 {:.no_toc}
-
-> ### Developing GTN training material
->
-> This tutorial is part of a series to develop GTN training material, feel free to also look at:
->
-> 1. [Setting up the tutorial infrastructure](../running-jekyll/tutorial.html)
-> 1. [Writing content in markdown](../create-new-tutorial-content/tutorial.html)
-> 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
-> 1. [Creating a new topic](../create-new-topic/tutorial.html)
-> 1. [Generating PDF handouts](../generating-pdf/tutorial.html)
-> 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
-> 1. [Defining technical requirements for a tutorial](../create-new-tutorial-technical/tutorial.html)
-> 1. [Setting up Galaxy for training](../setup-galaxy-for-training/tutorial.html)
-> 1. [Submitting the new tutorial to the GitHub repository](../github-command-line-contribution/slides.html)
-> 1. [Good practices for teaching](../good-practices/slides.html)
-{: .agenda}

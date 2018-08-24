@@ -6,7 +6,7 @@
 # to run image:
 #    docker run -p "8080:80" -t <your_tag>
 
-FROM bgruening/galaxy-stable
+FROM quay.io/shiltemann/galaxy-metagenomics
 
 MAINTAINER Galaxy Training Material
 

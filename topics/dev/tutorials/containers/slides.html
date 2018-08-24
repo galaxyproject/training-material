@@ -1,8 +1,32 @@
 ---
 layout: tutorial_slides
-topic_name: dev
-tutorial_name: containers
 logo: "GTN"
+
+title: "Tool Dependencies and Containers"
+hands_on: "external"
+hands_on_url: "http://planemo.readthedocs.io/en/latest/writing_standalone.html"
+questions:
+  - "What are the advantages of running my Galaxy tool inside of a container?"
+  - "How does Galaxy find a container to run my tool in?"
+  - "What are BioContainers and how are they related to Galaxy?"
+objectives:
+  - "Explore the differences between containerizing Galaxy and tool execution."
+  - "Discuss the advantages of containerizing tools."
+  - "Learn to build best practice tools ready to be containerized."
+time_estimation: "45m"
+requirements:
+  -
+    title: "Tool development and integration into Galaxy"
+    type: "internal"
+    link: "/topics/dev/tutorials/tool-integration/slides.html"
+key_points:
+  - "It is becoming easier, more advantageous, and more common for Galaxy admins to run all tools within their own container."
+  - "You can explicitly define a container for your tool - but it is easier and more reproducible to let Galaxy find or build one using your tool's best practice requirements."
+  - "The Galaxy community will infrastructure to automatically build and/or publish containers for your tool as long as it defines best practice Conda dependencies."
+  - "Planemo makes it easy to test your tool inside of containers."
+contributors:
+  - jmchilton
+  - bgruening
 ---
 
 ## Planemo
@@ -134,7 +158,7 @@ into
 
 ```
 <requirements>
-    <container type="docker">dukegcb/seqtk</container>
+    <container type="docker">quay.io/biocontainers/seqtk:1.2--1</container>
     <requirement type="package" version="1.2">seqtk</requirement>
 </requirements>
 ```
@@ -195,7 +219,7 @@ Planemo will check if such a container has been published with the `--biocontain
 $ planemo lint --biocontainers seqtk_seq.xml
 ...
 Applying linter biocontainer_registered... CHECK
-.. INFO: BioContainer best-practice container found [quay.io/biocontainers/seqtk:1.2--0].
+.. INFO: BioContainer best-practice container found [quay.io/biocontainers/seqtk:1.2--1].
 ```
 
 ???
@@ -228,7 +252,7 @@ $ planemo test --biocontainers seqtk_seq.xml
 ...
 [galaxy.tools.deps.containers] Checking with container resolver [ExplicitDockerContainerResolver[]] found description [None]
 [galaxy.tools.deps.containers] Checking with container resolver [CachedMulledDockerContainerResolver[namespace=None]] found description [None]
-[galaxy.tools.deps.containers] Checking with container resolver [MulledDockerContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=quay.io/biocontainers/seqtk:1.2--0,type=docker]]
+[galaxy.tools.deps.containers] Checking with container resolver [MulledDockerContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=quay.io/biocontainers/seqtk:1.2--1,type=docker]]
 [galaxy.jobs.command_factory] Built script [/tmp/tmpw8_UQm/job_working_directory/000/2/tool_script.sh] for tool command [seqtk seq -a '/tmp/tmpw8_UQm/files/000/dataset_1.dat' > '/tmp/tmpw8_UQm/files/000/dataset_2.dat']
 ...
 ok
@@ -240,7 +264,7 @@ Ran 1 test in 11.926s
 OK
 ```]
 
-The important line here is - `Checking with container resolver [MulledDockerContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=quay.io/biocontainers/seqtk:1.2--0,type=docker]]`.
+The important line here is - `Checking with container resolver [MulledDockerContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=quay.io/biocontainers/seqtk:1.2--1,type=docker]]`.
 
 ---
 
@@ -266,7 +290,7 @@ All Bioconda packages are built into minimal containers.
 This setup allows the same binaries to be used within the container or on traditional/HPC resources.
 Without any extra work by tool authors, Galaxy can automatically find or build “the correct” container for a best-practice tool.
 
-Over 2,300 containers already published.
+Over 4,000 containers already published.
 
 ---
 
@@ -383,16 +407,6 @@ Explain the different parts.
 
 ---
 
-## Warning - New Stuff
-
-Only Galaxy's development branch uses this newer mulled v2 hashing, 17.01 and 17.05 used
-an older v1 hash.
-
-When using Planemo commands that setup Galaxy, please be sure to add
-`--galaxy_branch dev` to the Planemo argument list.
-
----
-
 class: left
 
 ## The Planemo `mull` command (1 / 2)
@@ -490,13 +504,13 @@ bwa_and_samtools[0]: passed
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+### {% icon hands_on %} Hands-on
 
 ![](../../images/exercise.png)
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+### {% icon hands_on %} Hands-on
 
 #### The Goal
 
@@ -506,7 +520,7 @@ bwa_and_samtools[0]: passed
 
 class: left
 
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+### {% icon hands_on %} Hands-on
 
 #### Steps
 
@@ -520,10 +534,6 @@ $ docker images # verify the container was built
 $ # use docker run to verify the container has samtools and bwa.
 $ planemo test --biocontainers bwa_and_samtools.xml
 ```
-
-???
-
-TODO: This requires dev branch.
 
 ---
 

@@ -1,9 +1,27 @@
 ---
 layout: tutorial_slides
-topic_name: dev
-tutorial_name: interactive-environments
 logo: "GTN"
 
+title: "Galaxy Interactive Environments"
+questions:
+  - "What are Galaxy Interactive Environments (GIEs)?"
+  - "How to enable GIEs in Galaxy?"
+  - "How to develop your own GIE?"
+objectives:
+  - "Implement a Hello-World Galaxy Interactive Environment"
+requirements:
+  -
+    title: "Docker basics"
+    type: "external"
+    link: ""
+time_estimation: "1.5h"
+key_points:
+  - "Interactive Environments offer access to third-party applications within Galaxy"
+  - "Interactive Environments run in a docker images for sandboxing and easy dependency management"
+contributors:
+  - shiltemann
+  - bgruening
+  - erasche
 ---
 
 # Interactive Environments
@@ -25,7 +43,7 @@ logo: "GTN"
 ### Who should use IEs?
 
 - Everyone!
-- Programing Environments for Bioinformaticians and Data Scientists
+- Programming Environments for Bioinformaticians and Data Scientists
   - Jupyter
   - Rstudio
 - Visualization IEs are great for life scientists
@@ -274,7 +292,7 @@ image = hello-ie
   - Loads configuration from `ini` file
   - launches docker container,
   - builds a URL to the correct endpoint through Galaxy NodeJS proxy
-  - set environment variable `CUSTOM` to be passed to containter
+  - set environment variable `CUSTOM` to be passed to container
   - attach dataset selected by user (`hda`)
 
 ```mako
@@ -330,7 +348,7 @@ requirejs(['interactive_environments', 'plugin/helloworld'], function(){
 ```
 
 ---
-Lastly we must write the `load_notebook` function, `static/hs/helloworld.js`
+Lastly we must write the `load_notebook` function, `static/js/helloworld.js`
 
 ```javascript
 function load_notebook(url){

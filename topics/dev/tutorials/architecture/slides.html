@@ -1,8 +1,26 @@
 ---
 layout: tutorial_slides
-topic_name: dev
-tutorial_name: architecture
 logo: "GTN"
+
+title: "Galaxy Code Architecture"
+questions:
+  - "How is the Galaxy code structured?"
+  - "What do the various other projects related to Galaxy do?"
+  - "What happens when I start Galaxy?"
+objectives:
+  - "Explore various aspects of the Galaxy codebase."
+  - "Understand the various top-level files and modules in Galaxy."
+  - "Understand how dependencies work in Galaxy's frontend and backend."
+time_estimation: "2.5h"
+requirements:
+key_points:
+  - "Galaxy runs out of the box and fetches all needed dependencies."
+  - "Running Galaxy in production requires work configuration."
+  - "The architecture is designed to be pluggable and extendable."
+  - "Learn more about different Galaxy aspects in our [development section](/topics/dev/)."
+contributors:
+  - jmchilton
+  - bgruening
 ---
 layout: true
 name: left-aligned
@@ -121,7 +139,7 @@ Build Galaxy framework dependencies as Python wheels
 
 [galaxyproject/**planemo** ](https://github.com/galaxyproject/planemo)
 
-Commande line utilities to assist in the development of Galaxy tools.
+Command-line utilities to assist in the development of Galaxy tools.
 Linting, testing, deploying to ToolSheds...
 
 *The best practice approach for Galaxy tool development!*
@@ -235,7 +253,7 @@ can be adapted to many different technologies.
 
 ???
 
-If the chief architectual principle guiding the frontend is a fast and accessible
+If the chief architectural principle guiding the frontend is a fast and accessible
 experience for the bench scientist, perhaps for the backend it is allowing
 deployment on many different platforms and a different scales.
 
@@ -280,7 +298,7 @@ class: white
 
 ???
 
-Admin things, Reports and Tool Shed Webapp
+Admin things, Reports and Tool Shed Web app
 
 ---
 
@@ -293,7 +311,7 @@ Admin things, Reports and Tool Shed Webapp
 ### WSGI
 
 - Python interface for web servers defined by PEP 333 - https://www.python.org/dev/peps/pep-0333/.
-- Galaxy moving from Paster to uwsgi to host the application.
+- Galaxy moving from Paster to uWSGI to host the application.
   - https://bitbucket.org/ianb/paste
   - https://uwsgi-docs.readthedocs.io/
 
@@ -571,7 +589,7 @@ All in `config/plugins/visualizations`:
 
 - `csg` - Chemical structure viewer
 - `graphviz` - Visualize graph data using [cytoscape.js](http://www.cytoscape.org/)
-- `charts` - A more elobrate builds on more Galaxy abstractions.
+- `charts` - A more elaborate builds on more Galaxy abstractions.
 - `trackster` - Genome browser, deeply tied to Galaxy internals.
 
 ---

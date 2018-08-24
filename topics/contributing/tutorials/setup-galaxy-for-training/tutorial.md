@@ -1,7 +1,22 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: setup-galaxy-for-training
+
+title: Set up a Galaxy for Training
+time_estimation: 2h
+questions:
+  - How do I prepare my Galaxy instance to support a training module?
+  - How can I generate a Docker Galaxy instance for my topic?
+objectives:
+  - Use ephemeris to install the training requirements to a Galaxy instance
+  - Create a docker image for a training topic
+key_points:
+  - Technical requirements have been defined for all the training materials
+  - Ephemeris can be used to automatically install these requirements to an existing Galaxy
+  - Convenience scripts are provided in the training material repository allow for easy installation
+  - Docker images can easily be created per topic
+contributors:
+  - shiltemann
+  - bebatut
 ---
 
 # Introduction
@@ -9,16 +24,16 @@ tutorial_name: setup-galaxy-for-training
 
 In this tutorial, you will learn how to provision your Galaxy instance to support training modules from the GTN repository.
 
-Tutorials in this repo are all supplemented with files describing the technical requirements to run them. This makes it easy to automate installation of tutorial requirements.
+Tutorials in this repository are all supplemented with files describing the technical requirements to run them. This makes it easy to automate installation of tutorial requirements.
   - `tools.yaml`: describes the Tool Shed tools used in the tutorial
   - `data-library.yaml`: describes the input datasets
   - `data-manager.yaml`: describes the reference data required by tools
   - `workflows` folder: contains one or more workflows with all steps in the tutorial
   - `tours` folder: contains one or more yaml files describing interactive tours
 
-For more information about how to create these files, please see our module on [specifying the technical requirements for your tutorial]({{ site.baseurl }}/topics/contributing/create-new-tutorial-technical/).
+> For more information about how to create these files, please see our module on [specifying the technical requirements for your tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html).
 
-For just the list of ephemeris commands needed for installation, skip to the [Quickstart section](#Quickstart) at the end of this tutorial.
+For just the list of Ephemeris commands needed for installation, skip to the [Quickstart section](#Quickstart) at the end of this tutorial.
 
 > ### Agenda
 >
@@ -93,7 +108,7 @@ In order to install the tutorial requirements, we will need the API key of an ad
 
 ## Install Ephemeris
 
-To install to training requirements to our Galaxy, we will use ephemeris, let's install it now:
+To install to training requirements to our Galaxy, we will use Ephemeris, let's install it now:
 
 
 > ### {% icon hands_on %} Hands-on: Install Ephemeris
@@ -112,7 +127,7 @@ To install to training requirements to our Galaxy, we will use ephemeris, let's 
 
 We have created a small bash script to automatically install all the tutorial requirements to an existing Galaxy, it's located in this repository under: [`bin/install_tutorial_requirements.sh`]({{ site.github_repository }}/tree/master/bin/install_tutorial_requirements.sh)
 
-In this example we will install the requirements for the [*Reference-based RNASeq*]({{ site.baseurl }}/topics/transcriptomics/ref-based/tutorial.md) tutorial to the Galaxy instance running on localhost.
+In this example we will install the requirements for the [*Reference-based RNASeq*]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html) tutorial to the Galaxy instance running on localhost.
 
 
 > ### {% icon hands_on %} Hands-on: Install a tutorial
@@ -183,7 +198,7 @@ shed-tools install -g <Galaxy url> -a <API key> -t topics/<topic>/tutorials/<tut
 # create data library with input datasets
 setup-data-libraries -g <Galaxy url> -a <API key> -i topic/<topic>/tutorial/<tutorial>/data-library.yaml
 
-# install refefernce data
+# install reference data
 run-data-managers -g <Galaxy url> -a <API key> --config topic/<topic>/tutorial/<tutorial>/data-manager.yaml
 
 # install workflows
@@ -193,23 +208,5 @@ workflow-install --publish-workflows -g <Galaxy url> -a <API key> -w topics/<top
 copy the contents of the "tours" directory for the tutorial to Galaxy's "config/plugins/tours/"
 ```
 
-
-
 # Conclusion
 {:.no_toc}
-
-> ### Developing GTN training material
->
-> This tutorial is part of a series to develop GTN training material, feel free to also look at:
->
-> 1. [Setting up the tutorial infrastructure](../running-jekyll/tutorial.html)
-> 1. [Writing content in markdown](../create-new-tutorial-content/tutorial.html)
-> 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
-> 1. [Creating a new topic](../create-new-topic/tutorial.html)
-> 1. [Generating PDF handouts](../generate-pdf/tutorial.html)
-> 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
-> 1. [Defining technical requirements for a tutorial](../create-new-tutorial-technical/tutorial.html)
-> 1. [Setting up Galaxy for training](../setup-galaxy-for-training/tutorial.html)
-> 1. [Submitting the new tutorial to the GitHub repository](../github-command-line-contribution/slides.html)
-> 1. [Good practices for teaching](../good-practices/slides.html)
-{: .agenda}

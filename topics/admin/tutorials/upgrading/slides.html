@@ -1,8 +1,24 @@
 ---
 layout: tutorial_slides
-topic_name: admin
-tutorial_name: upgrading
 logo: "GTN"
+
+title: "Upgrading Galaxy"
+zenodo_link: ""
+questions:
+  - What is the release cycle of Galaxy?
+  - What do I need to do before updating my Galaxy server?
+  - How to upgrade Galaxy to a new release?
+objectives:
+  - Identify the challenges involved in the Galaxy upgrade process.
+  - Complete the upgrade to a new release.
+time_estimation: "1h"
+key_points:
+  - Galaxy release notes contain important information about a new release.
+  - Backup of the database is essential when database migrations are necessary.
+contributors:
+  - martenson
+  - afgane
+  - nsoranzo
 ---
 
 # Release Cycle
@@ -30,6 +46,11 @@ Two scenarios:
 2. Changes committed to a local branch (or to a fork)
 
 The latter is probably better in case of large changes.
+
+---
+# Another possibility
+
+If you want to keep your configurations and other local changes under version control, you can move these files/folders outside of Galaxy and into their own repository. You can then use symbolic links to place the files where Galaxy expects them. A good case for this could be dynamic runners, galaxy.yml files, job_conf.xml, etc.
 
 ---
 class: left

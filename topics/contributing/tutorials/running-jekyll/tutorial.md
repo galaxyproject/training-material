@@ -1,7 +1,20 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: running-jekyll
+
+title: "Running the Galaxy Training material website locally"
+questions:
+  - "How to setup the infrastructure to build training webpages?"
+objectives:
+  - "Installing packages needed for rendering the webpage"
+  - "Running the GTN material website locally"
+  - "Tracking changes to the content live in the webbrowser"
+time_estimation: "15min"
+key_points:
+  - "Checking the generated website can be done locally"
+contributors:
+  - bebatut
+  - bgruening
+  - shiltemann
 ---
 
 # Introduction
@@ -33,10 +46,10 @@ This step has to be done once.
 > 1. Navigate to the `training-material/` folder with `cd`
 > 3. Set up the conda environment
 >     
->     It will install some needed tools (ruby, nodejs, etc) in a protected environment, without interferring with the existing tools or versions.
+>     It will install some needed tools (ruby, nodejs, etc) in a protected environment, without interfering with the existing tools or versions.
 >
 >     1. Install conda (if not already installed): `make install-conda`
->     2. Add conda to the path: `export PATH="$HOME/miniconda/bin:$PATH"`
+>     2. Add conda to the path: `export PATH="$HOME/miniconda3/bin:$PATH"`
 >     3. Create conda environment: `make create-env`
 > 
 > 4. Activate the conda environment: `source activate galaxy_training_material`
@@ -62,7 +75,7 @@ Once Jekyll and its modules are installed in our conda environment, we can check
 
 With `make serve`, a local Jekyll server will run in background. It will check the changes and regenerate the website accordingly. You may need to reload the page to see the changes (and sometimes to wait 1-2 minutes).
 
-# Stoping the server
+# Stopping the server
 
 Once you are done, you can stop the server and cleaning your repository.
 
@@ -75,19 +88,3 @@ Once you are done, you can stop the server and cleaning your repository.
 
 # Conclusion
 {:.no_toc}
-
-> ### Developing GTN training material
->
-> This tutorial is part of a series to develop GTN training material, feel free to also look at:
->
-> 1. [Setting up the tutorial infrastructure](../running-jekyll/tutorial.html)
-> 1. [Writing content in markdown](../create-new-tutorial-content/tutorial.html)
-> 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
-> 1. [Creating a new topic](../create-new-topic/tutorial.html)
-> 1. [Generating PDF handouts](../generating-pdf/tutorial.html)
-> 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
-> 1. [Defining technical requirements for a tutorial](../create-new-tutorial-technical/tutorial.html)
-> 1. [Setting up Galaxy for training](../setup-galaxy-for-training/tutorial.html)
-> 1. [Submitting the new tutorial to the GitHub repository](../github-command-line-contribution/slides.html)
-> 1. [Good practices for teaching](../good-practices/slides.html)
-{: .agenda}

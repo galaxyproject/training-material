@@ -1,8 +1,26 @@
 ---
 layout: tutorial_slides
-topic_name: "admin"
-tutorial_name: galaxy-docker
 logo: "GTN"
+
+title: "Docker and Galaxy"
+zenodo_link: ""
+questions:
+  - "Why Docker? What is it?"
+  - "How to use Docker?"
+  - "How to integrate Galaxy in Docker to facilitate its deployment?"
+objectives:
+  - "Docker basics"
+  - "Galaxy Docker image (usage)"
+  - "Galaxy Docker (internals)"
+  - "Galaxy flavours"
+time_estimation: "1d/3h/6h"
+key_points:
+  - "Use Docker"
+  - "Integrate your tools into Galaxy"
+  - "Use Galaxy inside Docker to have a flavoured Galaxy instance"
+contributors:
+  - bebatut
+  - bgruening
 ---
 
 ### Preparation
@@ -37,7 +55,7 @@ variety of different tools and visualisations
 - Different packaging
 - Conflict between tools or versions
 
-<i class="fa fa-long-arrow-right"></i> Impact on usuability and reproducibility
+<i class="fa fa-long-arrow-right"></i> Impact on usability and reproducibility
 
 ---
 
@@ -131,7 +149,7 @@ Similar resource isolation and allocation benefits
   - All of which can amount to tens of GBs
 - Container: application and all of its dependencies
   - Share the kernel with other containers
-  - Rnning as isolated processes in user space on the host operating system
+  - Running as isolated processes in user space on the host operating system
 
 ---
 
@@ -164,7 +182,7 @@ Client: to talk with Docker
 Image:
 - recipe that tell how to build your container
 - A filesystem and parameters to use at runtime
-- snapshot of the content of a container: it doesn’t have state and never changes once built
+- snapshot of the content of a container: it doesn't have state and never changes once built
 
 Container
 - a running instance of an image
@@ -544,7 +562,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 7179e85085ef        docker/whalesay     "/bin/sh -c 'while tr"   12 minutes ago      Up 2 seconds                            agitated_lovelace
 $
 $ docker ps -a
-CONTAINER ID        IMAGE                  COMMAND                  CREATED             STATUS                          PORTS               NAMES
+CONTAINER ID        IMAGE                  COMMAND                  CREATED             STATUS                        PORTS               NAMES
 7de97f8dd5eb        docker/whalesay        "/bin/bash"              4 minutes ago       Exited (0) About a minute ago                       trusting_swanson
 9218bbee9c48        docker/whalesay        "/bin/bash"              5 minutes ago       Exited (0) 4 minutes ago                            evil_swirles
 7179e85085ef        docker/whalesay        "/bin/sh -c 'while tr"   13 minutes ago      Up 55 seconds                                       agitated_lovelace
@@ -590,7 +608,7 @@ Need a Dockerfile. I will describe it later. Here it is just to give you a broad
 
 ---
 
-### <i class="fa fa-pencil"></i> Hands on! (1)
+### {% icon hands_on %} Hands on! (1)
 
 Play with `quay.io/biocontainers/samtools:1.3--1`:
 
@@ -604,7 +622,7 @@ Play with `quay.io/biocontainers/samtools:1.3--1`:
 
 ---
 
-### <i class="fa fa-pencil"></i> Hands on! (2)
+### {% icon hands_on %} Hands on! (2)
 
 Play with `quay.io/biocontainers/samtools:1.3--1`:
 
@@ -686,7 +704,7 @@ https://bgruening.github.io/docker-galaxy-stable/
 
 ---
 
-### <i class="fa fa-pencil"></i> Hands on!
+### {% icon hands_on %} Hands on!
 
 Launch a Galaxy Docker Container and try to
 
@@ -769,7 +787,7 @@ tools:
 
 ---
 
-### <i class="fa fa-pencil"></i> Hands on!
+### {% icon hands_on %} Hands on!
 
 Create a Galaxy Flavour
 
