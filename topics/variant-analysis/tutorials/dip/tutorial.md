@@ -1,7 +1,21 @@
 ---
 layout: tutorial_hands_on
-topic_name: variant-analysis
-tutorial_name: dip
+
+title: "Calling variants in diploid systems"
+zenodo_link: ""
+questions:
+  - "How to find variable sites in diploid genomes?"
+objectives:
+  - "Using Galaxy's main site we will see how to call variants in human genome."
+time_estimation: "1-1.5h"
+key_points:
+  - "Variants versus Genotypes"
+  - "Bayesian approach to variant calling"
+  - "Freebayes calls variant using haplotype windows"
+  - "SNPEff allows functional annotation of variants"
+  - "Gemini is a flexible system for analyzing variation patterns"
+contributors:
+  - nekrut
 ---
 
 <!-- Scripts below are necessary for rendering formulas used in this tutorial -->
@@ -144,7 +158,7 @@ This makes it highly unlikely that **AA** is a true genotype of this individual.
 
 [FreeBayes](https://github.com/ekg/freebayes) is an open source variant caller that has been battle-tested by the 1000 Genomes community and is extensively used today (also see [bcbio](https://bcbio.wordpress.com/)). It has a number of features that simplify variant discovery workflows. These include (from FreeBayes github page):
 
-* **Indel realignment is accomplished internally** using a read-independent method, and issues resulting from discordant alignments are dramatically reducedy through the direct detection of haplotypes;
+* **Indel realignment is accomplished internally** using a read-independent method, and issues resulting from discordant alignments are dramatically reduced through the direct detection of haplotypes;
 * **The need for base quality recalibration is avoided** through the direct detection of haplotypes. Sequencing platform errors tend to cluster (e.g. at the ends of reads), and generate unique, non-repeating haplotypes at a given locus;
 * **Variant quality recalibration is avoided** by incorporating a number of metrics, such as read placement bias and allele balance, directly into the Bayesian model;
 * **Ability to incorporate non-diploid cases** such as pooled datasets or data from polyploid samples.
@@ -273,7 +287,7 @@ The first step is to convert a VCF file we would like to analyze into a GEMINI d
 >
 >![gemini_db_info tool to observe sqlite database](../../images/gemini_db_info.png)
 >
->This produce a list of [all tables and fields](https://github.com/nekrut/galaxy/wiki/datasets/gemini_tables.txt) in the database.
+>This produces a list of [all tables and fields](https://github.com/nekrut/galaxy/wiki/datasets/gemini_tables.txt) in the database.
 >
 {: .hands_on}
 
@@ -283,7 +297,7 @@ GEMINI database is queried using the versatile SQL language (more on SQL [here](
 
 The examples below are taken from "[Intro to Gemini](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)" tutorial. For extensive documentation see "[Querying GEMINI](https://gemini.readthedocs.org/en/latest/content/querying.html)".
 
-> ### Are there "novel" varinats that are not annotated in dbSNP database?
+> ### Are there "novel" variants that are not annotated in dbSNP database?
 >
 >
 >To answer this question we will type the following query:
@@ -296,7 +310,7 @@ The examples below are taken from "[Intro to Gemini](https://s3.amazonaws.com/ge
 >
 >![GEMINI query overview](../../images/gemini_query1.png)
 >
->As we can see from [output (Click this link to see it)](https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True) there are 21 variants that are not annotated in dbSNP.
+>As we can see from output there are 21 variants that are not annotated in dbSNP.
 >
 {: .question}
 
@@ -308,7 +322,7 @@ The examples below are taken from "[Intro to Gemini](https://s3.amazonaws.com/ge
 >SELECT * FROM variants WHERE filter is NULL and gene = 'POLRMT'
 >```
 >
->The above query will produce [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5a0bb5b2cc0695697/display/?preview=True) with very large number of columns. To restrict the number of columns to a manageable set let's use this command (you may need to scroll sideways):
+>The above query will produce output with very large number of columns. To restrict the number of columns to a manageable set let's use this command (you may need to scroll sideways):
 >
 >```
 >SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT'
@@ -316,7 +330,7 @@ The examples below are taken from "[Intro to Gemini](https://s3.amazonaws.com/ge
 >
 >(column definitions can be found [here](https://gemini.readthedocs.org/en/latest/content/database_schema.html))
 >
->[Output](https://usegalaxy.org/datasets/bbd44e69cb8906b540d65297cd1d26bb/display/?preview=True) shows varinats found within the *POLRMT* gene.
+>Output shows varinats found within the *POLRMT* gene.
 >
 {: .question}
 
@@ -347,7 +361,7 @@ GEMINI provides access to genotype, sequencing depth, genotype quality, and geno
 >
 >![GEMINI queries](../../images/gemini_query2.png)
 >
->This produce [a list of sites](https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True)
+>This produce a list of sites
 >
 {: .question}
 
@@ -368,7 +382,7 @@ GEMINI provides access to genotype, sequencing depth, genotype quality, and geno
 >
 >into **Restrictions to apply to genotype values**.
 >
->This will produce the following [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5aab445b3cd632ba7/display/?preview=True)
+>This will produce the following output
 >
 {: .question}
 
@@ -387,13 +401,13 @@ GEMINI provides access to genotype, sequencing depth, genotype quality, and geno
 >(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)
 >```
 >
->into **Restrictions to apply to genotype values**. Output will look like [this](https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be21ed02/display/?preview=True).
+>into **Restrictions to apply to genotype values**. Output will look like this.
 >
 {: .question}
 
 ### Using wildcards
 
-Wilcards simply writing SQL expressions when searching across multiple terms. The syntax for genotype filter wilcards is
+Wildcards simply writing SQL expressions when searching across multiple terms. The syntax for genotype filter wildcards is
 
 ```
 (COLUMN).(SAMPLE_WILDCARD).(SAMPLE_WILDCARD_RULE).(RULE_ENFORCEMENT)
@@ -423,7 +437,7 @@ Let's try a few examples.
 >
 > * `(gt_types).(*).(==HET).(all)`
 >
->the [all operator](https://gemini.readthedocs.org/en/latest/content/querying.html#the-all-operator) implies that want results for **all** afftected individuals). Output will look like [this](https://usegalaxy.org/datasets/bbd44e69cb8906b5819e1404b5e127d1/display/?preview=True).
+>the [all operator](https://gemini.readthedocs.org/en/latest/content/querying.html#the-all-operator) implies that want results for **all** afftected individuals). Output will look like this.
 >
 {: .question}
 

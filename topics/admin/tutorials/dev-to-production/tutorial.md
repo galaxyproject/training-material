@@ -1,7 +1,16 @@
 ---
 layout: tutorial_hands_on
-topic_name: admin
-tutorial_name: dev-to-production
+
+title: "Move from dev instance to production instance"
+zenodo_link: ""
+hands_on: "github"
+enable: "false"
+questions:
+objectives:
+time_estimation: "1d/3h/6h"
+key_points:
+contributors:
+  - hrhotz
 ---
 
 Move from dev instance to production instance

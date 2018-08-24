@@ -1,7 +1,32 @@
 ---
 layout: tutorial_hands_on
-topic_name: introduction
-tutorial_name: galaxy-intro-peaks2genes
+
+title: "From peaks to genes"
+zenodo_link: "https://doi.org/10.5281/zenodo.1025585"
+questions:
+  - "How to use Galaxy?"
+  - "How to get from peak regions to a list of gene names?"
+objectives:
+  - "Familiarize yourself with the basics of Galaxy"
+  - "Learn how to obtain data from external sources"
+  - "Learn how to run tools"
+  - "Learn how histories work"
+  - "Learn how to create a workflow"
+  - "Learn how to share your work"
+time_estimation: "3h"
+key_points:
+  - "Galaxy provides an easy-to-use graphical user interface for often complex commandline tools"
+  - "Galaxy keeps a full record of your analysis in a history"
+  - "Workflows enable you to repeat your analysis on different data"
+  - "Galaxy can connect to external sources for data import and visualization purposes"
+  - "Galaxy provides ways to share your results and methods with others"
+contributors:
+  - pajanne
+  - blankclemens
+  - bebatut
+  - bgruening
+  - nsoranzo
+  - dyusuf
 ---
 
 # Introduction
@@ -76,7 +101,7 @@ Let's start with a fresh history.
 > 1. Download the list of peak regions (the file [`GSE37268_mof3.out.hpeak.txt.gz`](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE37268&format=file&file=GSE37268%5Fmof3%2Eout%2Ehpeak%2Etxt%2Egz)) from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer
 > 2. Click on the upload button in the upper left ot the interface
 >
->    ![Upload icon](../../images/upload_button.png)
+>    ![Upload icon](../../../galaxy-data-manipulation/images/upload_button.png)
 >
 > 3. Press **Choose local file** and search for your file on your computer
 > 4. Select `interval` as **Type**
@@ -123,7 +148,7 @@ Galaxy will automatically unpack the file.
 > 3. Click on the {% icon galaxy-pencil %} (pencil) icon (**Edit attributes**) in your dataset in the history
 >
 >    A form to edit dataset attributes is displayed in the middle panel
-> 
+>
 > 4. Search for `mm9` in **Database/Build** attribute and select `Mouse July 2007 (NCBI37/mm9)`
 > 5. Click on **Save** on the top
 >
@@ -138,7 +163,7 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 >
 >     ![UCSC Main tool in tools section](../../images/101_01.png)
 >
-> 2. Click on `UCSC Main` {% icon tool %}  
+> 2. Click on `UCSC Main` {% icon tool %}
 >
 >     You will be taken to the **UCSC table browser**, which looks something like this:
 >
@@ -237,10 +262,10 @@ As we directly see, the peak file lacks `chr` before any chromosome number. But 
 >    > 1. How are the chromosomes named?
 >    > 2. How are the chromosomes X and Y named?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. The chromosomes are just given by their number. In the gene file from UCSC, they started with `chr`
->    >    > 2. The chromosomes X and Y are names 20 and 21
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. The chromosomes are just given by their number. In the gene file from UCSC, they started with `chr`
+>    > > 2. The chromosomes X and Y are names 20 and 21
+>    > {: .solution }
 >    {: .question}
 {: .hands_on}
 
@@ -270,7 +295,7 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 >    > ### {% icon tip %} Tip: Rerunning a tool
 >    >
->    > * Expand the dataset information 
+>    > * Expand the dataset information
 >    > * Press the {% icon galaxy-refresh %} icon (**Run this job again**)
 >    {: .tip}
 >
@@ -284,7 +309,7 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 >    Have we been successful?
 >
->    We have quite some files now and should take care that we don't loose track. 
+>    We have quite some files now and should take care that we don't loose track.
 >
 > 5. Rename the file to something more handy, e.g. `Peak regions`
 {: .hands_on}
@@ -368,9 +393,9 @@ We will regroup the table by chromosome and count the number of genes with peaks
 >    >
 >    > Which chromosome contained the highest number of target genes?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > The result varies with different settings. If you followed step by step, it should be chromosome 7 with 1675 genes.
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > The result varies with different settings. If you followed step by step, it should be chromosome 7 with 1675 genes.
+>    > {: .solution }
 >    {: .question}
 >
 {: .hands_on}
@@ -582,9 +607,9 @@ Congratulations! You should have a file with all the unique gene names and a cou
 >
 > The list of unique genes is not sorted. Try to sort it on your own!
 >
->    > ### {% icon solution %} Solution
->    > You can use the tool "Sort data in ascending or descending order" on column 2 and a numerical sort.
->    {: .solution }
+> > ### {% icon solution %} Solution
+> > You can use the tool "Sort data in ascending or descending order" on column 2 and a numerical sort.
+> {: .solution }
 {: .question}
 
 

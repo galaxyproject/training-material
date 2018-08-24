@@ -1,7 +1,24 @@
 ---
 layout: tutorial_hands_on
-topic_name: epigenetics
-tutorial_name: methylation-seq
+
+title: "DNA Methylation data analysis"
+zenodo_link: "https://zenodo.org/record/557099"
+edam_ontology: "topic_3173"
+questions:
+  - "What is methylation and why it cannot be recognised by a normal NGS procedure?"
+  - "Can a different methylation influence the expression of a gene? How?"
+  - "Which tools you can use to analyse methylation data?"
+objectives:
+  - "Learn how to analyse methylation data"
+  - "Get a first intuition what are common pitfalls."
+time_estimation: "3h"
+key_points:
+  - "The output of a methylation NGS is having a different distribution of the four bases. This is caused by the bisulfite treatment of the DNA."
+  - "If there is a different level of methylation in the loci of a gene this can be a hint that something is wrong."
+  - "To get useful results you need -- data, data and data!"
+contributors:
+  - joachimwolff
+  - dpryan79
 ---
 
 > ### Agenda
@@ -52,14 +69,14 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >
 >    > ### {% icon question %} Questions
 >    >
->    > - Note the GC distribution and percentage of "T" and "C". Why is this so weird?
->    > - Is everything as expected?
+>    > 1. Note the GC distribution and percentage of "T" and "C". Why is this so weird?
+>    > 2. Is everything as expected?
 >    >
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. The attentive audience of the theory part knows: Every C-meth stays a C and every normal C becomes a T during the bisulfite conversion. 
->    >    > 2. Yes it is. Always be careful and have the specific characteristics of your data in mind during the interpretation of FastQC results.
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. The attentive audience of the theory part knows: Every C-meth stays a C and every normal C becomes a T during the bisulfite conversion. 
+>    > > 2. Yes it is. Always be careful and have the specific characteristics of your data in mind during the interpretation of FastQC results.
+>    > {: .solution }
 >    {: .question}
 >
 {: .hands_on}
@@ -77,12 +94,11 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >
 >    > ### {% icon question %} Questions
 >    >
->    > -  Why we need other alignment tools for bisulfite sequencing data?
+>    > Why we need other alignment tools for bisulfite sequencing data?
 >    >
->    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. You may have noticed that all the C's are C-meth's and a T can be a T or a C. A mapper for methylation data needs to find out what is what.
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > You may have noticed that all the C's are C-meth's and a T can be a T or a C. A mapper for methylation data needs to find out what is what.
+>    > {: .solution }
 >    {: .question}
 >
 {: .hands_on}
@@ -103,15 +119,13 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >
 >    > ### {% icon question %} Questions
 >    >
->    > - Consider the `original top strand` output. Is there a methylation bias?
->    > - If we would trim, what would be the start and the end positions?
+>    > 1. Consider the `original top strand` output. Is there a methylation bias?
+>    > 2. If we would trim, what would be the start and the end positions?
 >    >
->    >
->    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. The distribution of the methylation is more or less equal. Only at the start and the end we could trim a bit but a +- 5% variation is acceptable. 
->    >    > 2. To trim the reads we would include for the first strand only the positions 0 to 145, for the second 6 to 149.
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. The distribution of the methylation is more or less equal. Only at the start and the end we could trim a bit but a +- 5% variation is acceptable. 
+>    > > 2. To trim the reads we would include for the first strand only the positions 0 to 145, for the second 6 to 149.
+>    > {: .solution }
 >    {: .question}
 >
 >
@@ -144,13 +158,14 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >
 > 1. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters: 
 >    - Use the result of MethylDackel to transform it to a bigWig file.
->    > ### {% icon tip %} Tip: Database edit
->    >
->    > It can happen that you can not select the correct input file. In this case you have to add meta information about the used genome to the file.
->    > * Click on the pencil of the correct history item. 
->    > * Change `Database/Build:` to the genome you used.
->    > * In our case the correct genome is `Human Dec. 2013 (GRCh38/hg38) (hg38)`.
->    {: .tip}
+>
+>      > ### {% icon tip %} Tip: Database edit
+>      >
+>      > It can happen that you can not select the correct input file. In this case you have to add meta information about the used genome to the file.
+>      > * Click on the pencil of the correct history item. 
+>      > * Change `Database/Build:` to the genome you used.
+>      > * In our case the correct genome is `Human Dec. 2013 (GRCh38/hg38) (hg38)`.
+>      {: .tip}
 >
 > 2. **computeMatrix** {% icon tool %} with the following parameters:
 >    - Use the file `CpGIslands.bed`as `Regions to plot` and the in the previous step created bigwig file as the `score file`.
@@ -169,12 +184,11 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >
 >    > ### {% icon question %} Questions
 >    >
->    > - The execution fails. Do you have an idea why?
+>    > The execution fails. Do you have an idea why?
 >    >
->    >  
->    >    > ### {% icon solution %} Solution
->    >    > 1. A conversion to bigWig would fail right now, probably with some error message like `hashMustFindVal: '1' not found`. The reason is the source of the reference genome which was used. There is ensembl and UCSC as sources which differ in naming the chromosomes. Ensembl is using just numbers e.g. 1 for chromosome one. UCSC is using chr1 for the same. Be careful with this especially if you have data from different sources. We need to convert this.
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > A conversion to bigWig would fail right now, probably with some error message like `hashMustFindVal: '1' not found`. The reason is the source of the reference genome which was used. There is ensembl and UCSC as sources which differ in naming the chromosomes. Ensembl is using just numbers e.g. 1 for chromosome one. UCSC is using chr1 for the same. Be careful with this especially if you have data from different sources. We need to convert this.
+>    > {: .solution }
 >    {: .question}
 >
 >    > ### {% icon tip %} Tip: UCSC - Ensembl convert
@@ -207,13 +221,11 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >
 >    > ### {% icon question %} Questions
 >    >
->    > - Have a look at the produced pdf document. What is the data showing?
+>    > Have a look at the produced pdf document. What is the data showing?
 >    >
->    >
->    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. It shows the distribution of DMR differences, DMR length in nucleotides and number CpGs, DMR differences vs. q-values, mean methylation group 1 vs. mean methylation group 2 and DMR length in nucleotides vs. length in CpGs
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > It shows the distribution of DMR differences, DMR length in nucleotides and number CpGs, DMR differences vs. q-values, mean methylation group 1 vs. mean methylation group 2 and DMR length in nucleotides vs. length in CpGs
+>    > {: .solution }
 >    {: .question}
 >
 >

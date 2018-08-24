@@ -1,7 +1,22 @@
 ---
 layout: tutorial_hands_on
-topic_name: introduction
-tutorial_name: galaxy-intro-strands
+
+title: "Introduction to Genomics and Galaxy"
+zenodo_link: ""
+questions:
+  - "Do genes on opposite strands ever overlap?  If so, how often?"
+objectives:
+  - "Learn some of the basic concepts of genomics and bioinformatics"
+  - "Familiarize yourself with the basics of Galaxy"
+time_estimation: "2.5h"
+key_points:
+  - "Galaxy provides an easy-to-use graphical user interface for often complex command-line tools"
+  - "Galaxy keeps a full record of your analysis in a history"
+  - "Workflows enable you to repeat your analysis on different data"
+  - "Galaxy can connect to external sources for data import and visualization purposes"
+  - "Galaxy provides ways to share your results and methods with others"
+contributors:
+  - tnabtaf
 ---
 
 # Introduction to Galaxy
@@ -79,7 +94,7 @@ To answer this question we need to know where genes start and stop on human chro
 It turns out that for this particular question (and for many others), most **Galaxy** instances can help us find this information.
 
 > ### {% icon hands_on %} Hands-on: Log in to Galaxy
-> In your web browser, *go to* **[your Galaxy instance](#-requirements)** and *log in or register*.
+> In your web browser, *go to* **your Galaxy instance** and *log in or register*.
 {: .hands_on}
 
 The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle panel will show the home page, tool forms, and dataset content.
@@ -97,7 +112,7 @@ The Galaxy interface consists of three main parts. The available tools are liste
 
 ## Get data into Galaxy
 
-There are [many ways to get data into a Galaxy instance]({{ site.baseurl }}//topics/introduction/tutorials/galaxy-intro-get-data/slides.html). We are going to use the **Get Data** toolbox in the **Tools** panel on the left.
+There are [many ways to get data into a Galaxy instance]({{ site.baseurl }}//topics/galaxy-data-manipulation/tutorials/get-data/slides.html). We are going to use the **Get Data** toolbox in the **Tools** panel on the left.
 
 > ### {% icon hands_on %} Hands-on: Open **Get Data** toolbox
 >
@@ -106,7 +121,7 @@ There are [many ways to get data into a Galaxy instance]({{ site.baseurl }}//top
 >
 {: .hands_on}
 
-The **Get Data** toolbox contains a list of data sources that this Galaxy instance can get data directly from.  **Upload file** is quite useful for getting data from your computer or from the web (see the [Getting data into Galaxy slides]({{ site.baseurl }}//topics/introduction/tutorials/galaxy-intro-get-data/slides.html)).  Today we are going to use the **UCSC Main table browser**.
+The **Get Data** toolbox contains a list of data sources that this Galaxy instance can get data directly from.  **Upload file** is quite useful for getting data from your computer or from the web (see the [Getting data into Galaxy slides]({{ site.baseurl }}//topics/galaxy-data-manipulation/tutorials/get-data/slides.html)).  Today we are going to use the **UCSC Main table browser**.
 
 ### Get genes
 
@@ -485,7 +500,7 @@ Let's refine our question slightly
 
 ## Walk through the workflow tutorial
 
-Run the [Create a reusable workflow from a history](../galaxy-intro-history-to-workflow/tutorial.html) tutorial for how to do this, *and then come back here to run your newly created workflow with the exon data.*
+Run the [Create a reusable workflow from a history]({{ site.baseurl }}/topics/galaxy-ui/tutorials/history-to-workflow/tutorial.html) tutorial for how to do this, *and then come back here to run your newly created workflow with the exon data.*
 
 ## Rerun analysis with exon data
 
