@@ -1,7 +1,27 @@
 ---
 layout: tutorial_hands_on
-topic_name: introduction
-tutorial_name: galaxy-intro-short
+
+title: "A short introduction to Galaxy"
+questions:
+  - "How to get started in Galaxy"
+objectives:
+  - "Learn how to upload a file"
+  - "Learn how to use a tool"
+  - "Learn how to view results"
+  - "Learn how to view histories"
+time_estimation: "30 min"
+key_points:
+  - "The Galaxy interface has tools on the left, viewing pane in the middle, and a history of your data analysis on the right."
+  - "You can create a new history for each analysis. All your histories are saved."
+  - "To get data into Galaxy, you can upload a file by pasting in a web address. There are other ways to get data into Galaxy (not covered in this tutorial): you can upload a file from your computer, and you can import an entire history."
+  - "Choose a tool and change any settings for your analysis."
+  - "Run the tool. The output files will be saved at the top of your history."
+  - "View the output files by clicking on the eye icon."
+  - "View all your histories and move files between them. Switch to a different history."
+  - "Log out of your Galaxy server. When you log back in (to the same server), your histories will all be there."
+contributors:
+  - annasyme
+
 ---
 
 # Overview
@@ -22,17 +42,17 @@ tutorial_name: galaxy-intro-short
 > ### {% icon hands_on %} Hands-on: Log in to Galaxy
 > 1. Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)
 > 2. Browse to your Galaxy instance
-> 3. Log in or register 
+> 3. Log in or register
 >
 > ![login](../../images/galaxy-login.png)
-> 
+>
 >   > ### {% icon comment %} Different Galaxy servers
 >   >  This is an image of Galaxy Australia, located at [www.usegalaxy.org.au](https://usegalaxy.org.au/)
 >   >
 >   > The particular Galaxy server that you are using may look slightly different and have a different web address:
 >   > - The main Galaxy server is [www.usegalaxy.org](https://usegalaxy.org/)
 >   > - The European Galaxy server is [www.usegalaxy.eu](https://usegalaxy.eu/)
->   > 
+>   >
 >   > You can also find more possible Galaxy servers at the top of this tutorial in **Galaxy instances**
 >   {: .comment}
 {: .hands_on}
@@ -71,13 +91,13 @@ Your "Tools" are in the panel at the left.
 > 1. Go to the **Tools** panel (on the left)
 > 2. Click **Get Data** (at the top of the list)
 > 3. Click **Upload File**
-> 
+>
 >    This brings up a box:
-> 
+>
 >    ![filebox](../../images/upload-box.png){:width="500px"}
 >
 > 3. Click **Paste/Fetch data**
-> 4. Paste in the address of a file: 
+> 4. Paste in the address of a file:
 >
 >    ```
 >    https://zenodo.org/record/582600/files/mutant_R1.fastq
@@ -85,7 +105,7 @@ Your "Tools" are in the panel at the left.
 >
 > 5. Click **Start**
 > 6. Click **Close**
-> 
+>
 {: .hands_on}
 
 Your uploaded file is now in your current history.
@@ -143,7 +163,7 @@ We will look at the output file called *FastQC on data 1: Webpage*.
 
 > ### {% icon hands_on %} Hands-on: View results
 > * Click on the {% icon galaxy-eye %} (eye) icon next to the output file.
->    
+>
 >    The information is displayed in the centre panel
 >
 >    ![fastqc-out](../../images/fastqc-out.png){:width="620px"}
@@ -169,7 +189,7 @@ Let's run a tool to filter out lower-quality reads from our FASTQ file.
 
 
 > ### {% icon hands_on %} Hands-on: Run another tool
-> 1. Type **Filter by quality** 
+> 1. Type **Filter by quality**
 > 2. Click on the tool **Filter by quality** {% icon tool %}
 > 3. Set the following parameters:
 >    - *"Library to filter"*: the input FASTQ file
@@ -185,11 +205,11 @@ After the tool has run, the output file will appear at the top of your History p
 
 What are the results from this filtering tool?
 
-We could click on the eye icon to view the contents of this output file, but it will not be very informative - we will just see a list of reads. 
+We could click on the eye icon to view the contents of this output file, but it will not be very informative - we will just see a list of reads.
 
 > ### {% icon hands_on %} Hands-on: Get metadata about a file
 > 1. Click on the output file name in the History panel
->    
+>
 >    This expands the information about the file.
 >
 >    ![filter1](../../images/filter-fastq1.png)
@@ -211,7 +231,7 @@ We have now decided that our input reads have to be filtered to an even higher s
 
 > ### {% icon hands_on %} Hands-on: Re-run the tool
 > 1. Click on the {% icon galaxy-refresh %} (refresh) icon (**Run this job again**) of Filter output
-> 
+>
 >    ![rerun](../../images/rerun.png)
 >
 >    This brings up the tool interface in the centre panel.
@@ -238,9 +258,9 @@ Let's create a new history.
 
 > ### {% icon hands_on %} Hands-on: New history
 > 1. Click on the {% icon galaxy-gear %} (gear) icon (**History options**) in the History panel
-> 
+>
 >    ![cog](../../images/cog.png)
-> 
+>
 > 2. Select **Create New**
 > 3. Name your history, *e.g.* "Next-analysis"
 > 4. Press <kbd>Enter</kbd>
@@ -254,19 +274,19 @@ Where is your first history, called "my-analysis"?
 
 > ### {% icon hands_on %} Hands-on: View histories
 > 1. Click on the **View all histories** ({% icon galaxy-columns %} icon) at the top right of your history
-> 
+>
 >    ![view-hist](../../images/view-hist.png)
-> 
+>
 >    A new page will appear with all your histories displayed here.
-> 
+>
 > 2. Drag a file into your new history
 >    1. Click on the FASTQ file in "my-analysis" history
 >    2. Drag it into the "Next-analysis" history
-> 
+>
 >    This makes a copy of the file in the new history
 >
 > 3. Click on **Analyze Data** in the top panel to go back to your analysis window
-> 
+>
 > ![view-all-hist](../../images/view-all-hist.png)
 >
 {: .hands_on}
@@ -278,4 +298,4 @@ You can go back into the "View all histories" page and "Switch to" a different h
 # Conclusion
 {:.no_toc}
 
-{% icon trophy %} Well done! You have completed the short introduction to Galaxy, where you named the history, uploaded a file, used a tool, and viewed results. Additional tutorials are available for a more in-depth introduction to Galaxy's features.  
+{% icon trophy %} Well done! You have completed the short introduction to Galaxy, where you named the history, uploaded a file, used a tool, and viewed results. Additional tutorials are available for a more in-depth introduction to Galaxy's features.
