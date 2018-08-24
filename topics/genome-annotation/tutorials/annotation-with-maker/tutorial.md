@@ -83,9 +83,7 @@ For the rest of this tutorial, you need to choose between `S_pombe_chrIII.fa` an
 
 The quality of a genome annotation is highly dependent on the quality of the genome sequences. It is impossible to obtain a good quality annotation with a poorly assembled genome sequence. Annotation tools will have trouble finding genes if the genome sequence is highly fragmented, if it contains chimeric sequences, or if there are a lot of sequencing errors.
 
-Before running the full annotation process, it is a good idea first to evaluate the quality of the sequence. It will give you a good idea of what you can expect from it at the end of the annotation.
-
-First have a look at the basic statistics: scaffold number compared to expected chromosome numbers, N50, ...
+Before running the full annotation process, you need first to evaluate the quality of the sequence. It will give you a good idea of what you can expect from it at the end of the annotation.
 
 > ### {% icon hands_on %} Hands-on: Get genome sequence statistics
 >
@@ -94,9 +92,15 @@ First have a look at the basic statistics: scaffold number compared to expected 
 >
 {: .hands_on}
 
+Have a look at the statistics:
+
+- `num_seq`: the number of contigs (or scaffold or chromosomes), compare it to expected chromosome numbers
+- `len_min`, `len_max`, `len_N50`, `len_mean`, `len_median`: the distribution of contig sizes
+- `num_bp_not_N`: the number of bases that are not N, it should be as close as possible to the total number of bases (`num_bp`)
+
 These statistics are useful to detect obvious problems in the genome assembly, but it gives no information about the quality of the sequence content. We want to know if the genome sequence contains all the genes we expect to find in the considered species, and if their sequence are correct.
 
-[BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to answer this question: by comparing genomes from various more or less related species, the authors were able to determine sets of genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, ...). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequences genome from the corresponding clade. Using this data, BUSCO is able to evaluate the number of genes found in a genome sequence or a set of (predicted) transcript or protein sequences.
+[BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to answer this question: by comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, ...). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a genome sequence or a set of (predicted) transcript or protein sequences. This is a good evluation of the "completeness" of the genome or annotation.
 
 We will first run this tool on the genome sequence to evaluate its quality.
 
@@ -121,26 +125,30 @@ BUSCO produces three output datasets
 - A full table: lists all the BUSCOs that were searched for, with the corresponding status (was it found in the genome? how many times? where?)
 - A table of missing BUSCOs: this is the list of all genes that were not found in the genome
 
+>    ![BUSCO genome summary](../../images/busco_genome_summary.png "BUSCO short summary. Here BUSCO searched for 290 genes in a genome, and found 282 of them complete (269 in single-copy, and 13 duplicated). 5 where found but are fragmented, and 3 were not found at all.")
+
 > ### {% icon question %} Questions
 >
-> 1. Are the BUSCO results good for our genome?
+> 1. Do you think the genome quality is good enough for performing the annotation?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Most of the BUSCO genes are found as complete single copy, which means that our genome have a good quality as it contains most of the expected content.
+> > 1. The genome consists of the exepected 4 chromosomes sequences, with very few N, which is the ideal case. Most of the BUSCO genes are found as complete single copy, and very few are fragmented, which means that our genome have a good quality as it contains most of the expected content. That's a very good material to perform an annotation.
 > >
 > {: .solution}
 >
 {: .question}
 
+> ### {% icon comment %} Comment
+>
+> If you chose to use only the chromosome III sequence (`S_pombe_chrIII.fa`), the statistics will be different. The genome size will be lower, with only 1 chromosome. The BUSCO result will also show a lot of missing genes: it is expected as all the BUSCO genes that are not on the chromosome III cannot be found by the tool. Keep it in mind when comparing these results with the other BUSCO results later.
+{: .comment}
 
 # First Maker annotation round
 
 ## Maker
 
-Maker blablabla
-
-For this first round, we configure Maker to construct gene models only by aligning ESTs and proteins to the genome. This will produce a first draft annotation that we will improve in the steps.
+For this first round, we configure Maker to construct gene models only by aligning ESTs and proteins to the genome. This will produce a first draft annotation that we will improve in the next steps.
 
 > ### {% icon hands_on %} Hands-on: First draft annotation with Maker
 >
@@ -160,13 +168,13 @@ For this first round, we configure Maker to construct gene models only by aligni
 
 Maker produces three gff datasets:
 
-- the final annotation: the gene models produced by Maker
-- the evidences: the alignement of all the data Maker used to construct the final annotation (ESTs and proteins that we used)
+- the evidences: the alignements of all the data Maker used to construct the final annotation (ESTs and proteins that we used)
+- the final annotation: the final consensus gene models produced by Maker
 - a gff containing both the final annotation and the evidences
 
 ## Annotation statistics
 
-We need now to evaluate this first annotation produced by Maker.
+We need now to evaluate this first draft annotation produced by Maker.
 
 First, use the `Genome annotation statistics` that will compute some general statistics on the annotation.
 
@@ -174,6 +182,8 @@ First, use the `Genome annotation statistics` that will compute some general sta
 >
 > 1. **Genome annotation statistics** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotation to analyse"*: `final annotation` (output of **Maker** {% icon tool %})
+>    - *"Reference genome"*: `Use a genome from history`
+>        - {% icon param-file %} *"Corresponding genome sequence"*: select the genome sequence from your history
 >
 >
 {: .hands_on}
@@ -181,7 +191,7 @@ First, use the `Genome annotation statistics` that will compute some general sta
 
 ## Busco
 
-Just as we did for the genome at the beginning, we can use BUSCO to check the quality of this first Maker annotation. Instead of looking for known genes in the genome sequence, BUSCO will look for known transcript sequences of the genes predicted by Maker.
+Just as we did for the genome at the beginning, we can use BUSCO to check the quality of this first Maker annotation. Instead of looking for known genes in the genome sequence, BUSCO will inspect the transcript sequences of the genes predicted by Maker.
 
 First we need to compute all the transcript sequences from the Maker annotation.
 
@@ -211,15 +221,15 @@ Now run BUSCO with the predicted transcript sequences:
 
 > ### {% icon question %} Questions
 >
-> 1. How many genes where predicted by Maker?
+> 1. How many genes and transcripts where predicted by Maker?
 > 2. What is the medium length of these genes?
-> 2. How do the BUSCO statistics compare to the ones at the genome level?
+> 3. How do the BUSCO statistics compare to the ones at the genome level?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. I don't know, I should check. TODO
-> > 2. I don't know, I should check. TODO
-> > 3. I don't know, I should check. TODO
+> > 1. 713 genes, 752 transcripts for the full genome (***TODO*** check with chrIII)
+> > 2. 993 bp for the full genome (***TODO*** check with chrIII)
+> > 3. 40 complete single-copy, 6 duplicated, 9 fragmented, 235 missing for the full genome (***TODO*** check with chrIII). This is far from what BUSCO found in the genome sequence, which means the quality of this first draft is not very good.
 > >
 > {: .solution}
 >
@@ -303,6 +313,8 @@ Do we get a better result from Maker after this second run? Let's run the same t
 >
 > 1. **Genome annotation statistics** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotation to analyse"*: `final annotation` (output of **Maker** {% icon tool %} second run)
+>    - *"Reference genome"*: `Use a genome from history`
+>        - {% icon param-file %} *"Corresponding genome sequence"*: select the genome sequence from your history
 >
 >
 {: .hands_on}
@@ -406,6 +418,8 @@ Do we get a better result from Maker after this third run? Let's run the same to
 >
 > 1. **Genome annotation statistics** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotation to analyse"*: `final annotation` (output of **Maker** {% icon tool %} second run)
+>    - *"Reference genome"*: `Use a genome from history`
+>        - {% icon param-file %} *"Corresponding genome sequence"*: select the genome sequence from your history
 >
 >
 {: .hands_on}
