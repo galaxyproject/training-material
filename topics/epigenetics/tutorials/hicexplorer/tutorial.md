@@ -1,7 +1,23 @@
 ---
 layout: tutorial_hands_on
-topic_name: epigenetics
-tutorial_name: hicexplorer
+
+title: "Hi-C analysis of Drosophila melanogaster cells using HiCExplorer"
+zenodo_link: "https://doi.org/10.5281/zenodo.1183661"
+edam_ontology: ""
+questions:
+  - "Why is a Hi-C analysis useful?"
+  - "What is 'chromosome conformation capture'?"
+  - "What are main steps in order to generate and plot a Hi-C contact matrix?"
+time_estimation: "1h"
+key_points:
+  - "Hi-C helps to investigate the 3D structure of the genome and to uncover folding principles of chromatin."
+  - "In order to build a Hi-C contact matrix the reads have to be mapped to the reference genome."
+  - "Based on a contact matrix open and closed chromatin (A/B compartments) and topological associating domains (TADs) can be computed."
+contributors:
+  - joachimwolff
+  - fidelram
+  - vivekbhr
+  - polkhe
 ---
 
 # Introduction
@@ -21,16 +37,12 @@ After a corrected Hi-C matrix is created other tools can be used to visualize it
 >
 > In this tutorial, we will deal with:
 >
-> 1. Mapping Hi-C data
-> 2. Create a contact matrix
-> 3. Learn how to correct a contact matrix
-> 4. Visualize a contact matrix
-> 5. Compute and visualize topological associating domains (TADs)
+> 1. TOC
 > {:toc}
 >
 {: .agenda}
 
-## Data upload
+# Data upload
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -39,22 +51,28 @@ After a corrected Hi-C matrix is created other tools can be used to visualize it
 >
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
->    > * Copy the link location
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > Below are the links to the read files that can be copied and pasted in the upload manager.
+>    > 1. Copy the link location
+>    > 2. Open the Galaxy Upload Manager
+>    > 3. Select **Paste/Fetch Data**
 >    >
->    > ```
->    > https://zenodo.org/record/1183661/files/HiC_S2_1p_10min_lowU_R1.fastq.gz
->    > https://zenodo.org/record/1183661/files/HiC_S2_1p_10min_lowU_R2.fastq.gz
->    > ```
+>    >    Below are the links to the read files that can be copied and pasted in the upload manager.
 >    >
->    > * Paste the links into the text field
->    > * Press **Start**
+>    >    ```
+>    >    https://zenodo.org/record/1183661/files/HiC_S2_1p_10min_lowU_R1.fastq.gz
+>    >    https://zenodo.org/record/1183661/files/HiC_S2_1p_10min_lowU_R2.fastq.gz
+>    >    ```
+>    >
+>    > 4. Paste the links into the text field
+>    > 5. Press **Start**
 >    {: .tip}
 >
 > 3. Rename the data set to something meaningful, e.g. `HiC_S2_1p_10min_lowU_R1` and `HiC_S2_1p_10min_lowU_R2`.
 > By default, when data is imported via its link, Galaxy names it with its URL.
+>
+> > ### {% icon tip %} Tip: Get data from public sources
+> > HiCExplorer needs as input the forward and reverse strand of a pair end read which are mapped independently. A usual start point for a typical analysis is the given GSE number of a publication, e.g. GSE63525 for Rao 2014. To get the actual data, go to [NCBI](https://www.ncbi.nlm.nih.gov/geo/) and search for the [GSE number](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE63525). In the section 'Samples' the GSM numbers of all samples are given. Select the correct one for you, and go to the [European Nucleotide Archive](https://www.ebi.ac.uk/ena) and enter the GSM number. Select a matching result e.g. [SRX764936](https://www.ebi.ac.uk/ena/data/view/SRX764936) and download the data given in the row 'FASTQ files (FTP)' the forward and reverse strand.
+> > It is important to have the forward and reverse strand individual as a FASTQ file and to map it individually, HiCExplorer can not work with interleaved files. 
+> {: .tip}
 >
 {: .hands_on}
 

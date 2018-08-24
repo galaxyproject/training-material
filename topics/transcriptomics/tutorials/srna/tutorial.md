@@ -1,7 +1,22 @@
 ---
 layout: tutorial_hands_on
-topic_name: transcriptomics
-tutorial_name: srna
+
+title: "Differential abundance testing of small RNAs"
+zenodo_link: "https://zenodo.org/record/826906"
+questions:
+  - "What small RNAs are expressed?"
+  - "What RNA features have significantly different numbers of small RNAs targeting them between two conditions?"
+objectives:
+  - "Process small RNA-seq datasets to determine quality and reproducibility."
+  - "Filter out contaminants (e.g. rRNA reads) in small RNA-seq datasets."
+  - "Differentiate between subclasses of small RNAs based on their characteristics."
+  - "Identify differently abundant small RNAs and their targets."
+time_estimation: "3h"
+key_points:
+  - "Analysis of small RNAs is complex due to the diversity of small RNA subclasses."
+  - "Both alignment to references and transcript quantification approaches are useful for small RNA-seq analyses."
+contributors:
+  - malloryfreeberg
 ---
 
 # Introduction
@@ -68,16 +83,16 @@ Read quality scores (phred scores) in FASTQ-formatted data can be encoded by one
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. What quality score encoding scheme is being used for each sample?
->    > 1. What is the read length for each sample?
->    > 1. What does the base/read quality look like for each sample?
->    > 1. Are there any adaptors present in these reads? Which one(s)?
+>    > 2. What is the read length for each sample?
+>    > 3. What does the base/read quality look like for each sample?
+>    > 4. Are there any adaptors present in these reads? Which one(s)?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. All samples use the Illumina 1.9 quality encoding scheme, so we do **not** need to convert. 
->    >    > 2. All samples have a read length of 50 nt. 
->    >    > 3. The base quality across the entire length of the reads is good (phred score > 28 for the most part). 
->    >    > 4. Yes, the "Illumina Universal Adapter" is present. 
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. All samples use the Illumina 1.9 quality encoding scheme, so we do **not** need to convert. 
+>    > > 2. All samples have a read length of 50 nt. 
+>    > > 3. The base quality across the entire length of the reads is good (phred score > 28 for the most part). 
+>    > > 4. Yes, the "Illumina Universal Adapter" is present. 
+>    > {: .solution }
 >    {: .question}
 >
 >    ![The output of FastQC as a boxplot](../../images/sRNA/Fig5a_fastqc_result_stats_boxplot.png)
@@ -126,12 +141,12 @@ sRNA-seq library preparation involves adding an artificial adaptor sequence to b
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. What is the read length?
->    > 1. Are there any adaptors present in these reads? Which one(s)?
+>    > 2. Are there any adaptors present in these reads? Which one(s)?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. The read lengths range from 12 to 50 nt after trimming.
->    >    > 2. No, Illumina Universal Adaptors are no longer present. No other adapters are present.
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. The read lengths range from 12 to 50 nt after trimming.
+>    > > 2. No, Illumina Universal Adaptors are no longer present. No other adapters are present.
+>    > {: .solution }
 >    {: .question}
 >
 > ![FastQC output after trimming](../../images/sRNA/Fig8a_fastqc_post_trimming_result.png)
@@ -141,7 +156,7 @@ sRNA-seq library preparation involves adding an artificial adaptor sequence to b
 
 An interesting thing to note from our `FastQC` results is the *Sequence Length Distribution* results. While many RNA-seq experiments have normal distribution of read lengths, an unusual spike at 22nt is observed in our data. This spike represents the large set of endogenous siRNAs that occur in the cell line used in this study, and is actually confirmation that our dataset captures the biological molecule we are interested in.
 
-Now that we have converted to *fastqsanger* format and trimmed our reads of the Illumina Universal Adaptors, we will align our trimmed reads to reference *Drosophila* rRNA and miRNA sequences (dm3) to remove these artifacts. Interestingly, *Drosophila* have a short 2S rRNA sequence that is 30nt long and typically co-migrates with sRNA populations during gel electrophoresis. rRNAs make up a very large proportion of all non-coding RNAs, and thus need to be removed. Oftentimes, experimental approaches can be utilized to deplete or avoid capture of rRNAs, but these methods are not always 100% efficient. We also want to remove any miRNA sequences, as these are not relevant to our analysis. After removing rRNA and miRNA reads, we will analyze the remaining reads as siRNA and piRNA sequences.
+Now that we have converted to *fastqsanger* format and trimmed our reads of the Illumina Universal Adaptors, we will align our trimmed reads to reference *Drosophila* rRNA and miRNA sequences (dm3) to remove these artifacts. Interestingly, *Drosophila* have a short 2S rRNA sequence that is 30nt long and typically co-migrates with sRNA populations during gel electrophoresis. rRNAs make up a very large proportion of all non-coding RNAs, and thus need to be removed. Oftentimes, experimental approaches can be utilized to deplete or avoid capture of rRNAs, but these methods are not always 100% efficient. We also want to remove any miRNA sequences, as these are not relevant to our analysis. After removing rRNA and miRNA reads, we will analyze the remaining reads, which may be siRNA or piRNA sequences.
 
 ## Hierarchical read alignment to remove rRNA/miRNA reads
 
@@ -216,9 +231,9 @@ In *Drosophila*, non-miRNA small RNAs are typically divided into two major group
 >
 >       ![Manipulate FASTQ input and parameters](../../images/sRNA/Fig12a_Manipulate_Fastq_siRNA_tool_form.png)
 >
->    The regular expression in the **Match by** parameter tells the tool to identify sequences that are length 12-19 or 23-50 (inclusive), and the **Miscellaneous Manipulation Type** parameter tells the tool to remove these sequences. What remains are sequences of length 20-22nt. We will now repeat these steps to identify 23-29nt piRNA sequences.
+>    The regular expression in the **Match by** parameter tells the tool to identify sequences that are length 12-19 or 23-50 (inclusive), and the **Miscellaneous Manipulation Type** parameter tells the tool to remove these sequences. What remains are sequences of length 20-22nt. We will now repeat these steps to identify sequences in the size-range of piRNAs (23-29nt).
 >
-> 1. **Manipulate FASTQ** {% icon tool %}: Run `Manipulate FASTQ` on each collection of non-r/miRNA reads to identify piRNAs (23-29nt) using the following parameters.
+> 1. **Manipulate FASTQ** {% icon tool %}: Run `Manipulate FASTQ` on each collection of non-r/miRNA reads to identify sequences in the size-range of piRNAs (23-29nt) using the following parameters.
 >    - **FASTQ File**: Click the "Dataset collection" tab and then select the blank RNAi sRNA-seq dataset of non-r/miRNA FASTQ files
 >    - **Match Reads**: Click "Insert Match Reads"
 >    - **Match Reads by**: Set to "Sequence Content"
@@ -235,7 +250,7 @@ In *Drosophila*, non-miRNA small RNAs are typically divided into two major group
 >
 >       ![FastQC result on both collections](../../images/sRNA/Fig13_FastQC_piRNA_siRNA_result_Blank_rep1.png)
 >
-> We see in the above image (for Blank RNAi, replicate 3) that we have ~32k reads that are 20-22nt long in our Reads_20-22_nt_length_siRNAs file and ~16k reads that are 23-29nt long in our Reads_23-29_nt_length_piRNAs file, as expected. Given that we had ~268k trimmed reads in the Blank RNAi replicate 3 file, siRNAs represent ~12.1% of the reads and piRNAs represent ~6.2% of the reads in this experiment.
+> We see in the above image (for Blank RNAi, replicate 3) that we have ~32k reads that are 20-22nt long in our Reads_20-22_nt_length_siRNAs file and ~16k reads that are 23-29nt long in our Reads_23-29_nt_length_piRNAs file, as expected. Given that we had ~268k trimmed reads in the Blank RNAi replicate 3 file, siRNAs represent ~12.1% of the reads and piRNAs represent ~6.2% of the reads in this experiment. There is no distinct peak in the piRNA range (you can find the example of the real piRNA profile in Figure 1 from [Colin D. Malone et al, 2009](http://dx.doi.org/10.1016/j.cell.2009.03.040).
 >
 {: .hands_on}
 

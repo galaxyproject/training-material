@@ -1,7 +1,26 @@
 ---
 layout: tutorial_hands_on
-topic_name: your_topic
-tutorial_name: your_tutorial_name
+topic_name: templates
+tutorial_name: tutorial1
+
+title: "Tutorial Title"
+name: "tutorial1"
+zenodo_link: ""
+questions:
+  - "Question 1"
+  - "Question 2"
+objectives:
+  - "Learning objective 1"
+  - "Learning objective 2"
+  - ".."
+time_estimation: "1d/3h/6h"
+key_points:
+  - "Take home message 1"
+  - "Take-home message 2"
+  - "..."
+contributors:
+  - contributor1
+  - contributor2
 ---
 
 # Introduction
@@ -10,6 +29,8 @@ tutorial_name: your_tutorial_name
 <!-- This is a comment. -->
 
 General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
+
+**Please follow our [tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
 > ### Agenda
 >
@@ -42,7 +63,7 @@ _config.yml in the root of this repository.
 >    > A comment
 >    {: .comment}
 >
->    > ### {% icon tip %}Tip: A tip
+>    > ### {% icon tip %} Tip: A tip
 >    >
 >    > * Step1
 >    > * Step2
@@ -62,11 +83,11 @@ Short introduction about this subpart.
 >    >
 >    > Question?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    >
->    >    > Answer to question
->    >    >
->    >    {: .solution}
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > Answer to question
+>    > >
+>    > {: .solution}
 >    >
 >    {: .question}
 {: .hands_on}
@@ -92,17 +113,23 @@ Some blabla
 >    > 1. Question1?
 >    > 2. Question2?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    >
->    >    > 1. Answer for question1
->    >    > 2. Answer for question2
->    >    >
->    >    {: .solution}
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 1. Answer for question1
+>    > > 2. Answer for question2
+>    > >
+>    > {: .solution}
 >    >
 >    {: .question}
 >
 > 3. Step3
 {: .hands_on}
+
+> ### {% icon warning %} Warning: Be careful about ...
+>
+> Add more details in Markdown.
+>
+{: .warning-box}
 
 # Part 2
 
@@ -114,11 +141,13 @@ Short introduction about this subpart.
 {: .comment}
 
 
-> ### {% icon details %} More details on the ....
+
+> ### {% icon details %} Background: More details on the ....
 >
 > Add more details in Markdown. By default the box is collapsed. And is expanded when clicked
 >
 {: .details}
+
 
 # Conclusion
 {:.no_toc}
