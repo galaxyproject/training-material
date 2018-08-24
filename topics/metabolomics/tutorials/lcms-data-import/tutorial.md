@@ -1,7 +1,20 @@
 ---
 layout: tutorial_hands_on
-topic_name: metabolomics
-tutorial_name: lcms-data-import
+title: LC-MS - Data Import
+name: lcms-data-import
+zenodo_link: 'https://doi.org/10.5281/zenodo.1346742'
+questions:
+    - How to import the "Raw" data in "DataSet Collection?
+    - How to import the SampleMetadata Sheet?
+    - How to use those data in the first steps of the W4M LC-MS workflow?
+objectives:
+    - How to import your data in Galaxy and how to deal with the datasets through the first steps of the LC-MS workflow
+time_estimation: 30min
+key_points:
+    - "You know how to import your data in Galaxy and deal with the datasets through the first steps"
+    - "From now, just do science!"
+contributors:
+    - lecorguille
 ---
 
 # Introduction
