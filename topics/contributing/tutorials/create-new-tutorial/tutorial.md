@@ -1,7 +1,21 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: create-new-tutorial
+
+title: "Creating a new tutorial"
+questions:
+  - "How to integrate a new tutorial?"
+  - "How to make a tutorial robust and reproducible?"
+objectives:
+  - "Create a tutorial from scratch"
+  - "Link a tutorial to a topic"
+  - "Create hands-on"
+  - "Add technical support for a tutorial"
+time_estimation: "15min"
+key_points:
+  - "Finding good training datasets is hard!"
+  - "Creating a new tutorial involves several steps: some are mandatory, some can be skipped even if they are recommended"
+contributors:
+  - bebatut
 ---
 
 # Introduction
@@ -126,15 +140,6 @@ The most important file is the `tutorial.md` where the content of the tutorial i
 > 2. Check if the tutorial has been correctly added at [http://localhost:4000/training-material/](http://localhost:4000/training-material/)
 {: .hands_on}
 
-# Add metadata
-
-To make the topic aware of this new tutorial, some metadata about the tutorial has been added in the topic's `metadata.yaml` file. This metadata includes some technological and pedagogical support for the training. Once this is filled out, you can run the Galaxy Training Material website locally to check that the new tutorial is accessible.
-
-> ### {% icon hands_on %} Hands-on: Add metadata
->
-> 1. Check out and run our [metadata tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-metadata/tutorial.html)
-{: .hands_on}
-
 # A toy dataset
 
 Our tutorials try to follow the "learn by doing" approach; they combine both theoretical and practical sections. The practical sections (or hands-on) are supposed to be done on Galaxy.
@@ -178,7 +183,7 @@ We would then develop the tutorial and test it on this toy dataset. Once we were
 > 12. Fill out any remaining information
 > 13. Click on **Publish**
 > 14. Copy the DOI link in the new page
-> 15. Paste the link in `zenodo_link` in the tutorial section of the `metadata.yaml` file
+> 15. Paste the link in `zenodo_link` in the tutorial header
 {: .hands_on}
 
 # Write the tutorial
@@ -212,7 +217,6 @@ The technical support are different files:
 >    - (Recommended) Generate the `tools.yaml`
 >    - (Recommended) Generate the `data-library.yaml`
 >    - (Optional) Create an interactive tour
-> 2. Update the `metadata.yaml` file given the technical support added
 {: .hands_on}
 
 # Add slides (optional)
@@ -222,7 +226,6 @@ Sometimes, you may want to have slides to support a tutorial and introduce it du
 > ### {% icon hands_on %} Hands-on: Add slides
 >
 > 1. Create a slide deck in `slides.html` following the [Slide tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-slides/slides.html)
-> 2. Update the `metadata.yaml` file by putting `yes` in `slides`
 {: .hands_on}
 
 # Conclusion

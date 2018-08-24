@@ -1,7 +1,23 @@
 ---
 layout: tutorial_hands_on
-topic_name: galaxy-ui
-tutorial_name: history
+
+title: "Histories: Understanding Galaxy history system"
+zenodo_link: ""
+questions:
+  - "How do Galaxy histories work?"
+objectives:
+  - "Gain understanding on navigating and manipulating histories"
+time_estimation: "30 min"
+key_points:
+  - "In Galaxy, data is stored in datasets and organized in histories"
+  - "The right pane shows the current history. It displays the name of the history, the tags and annotations assigned to it, and the size of the data in it"
+  - "The datasets are shown differently depending on their status: queued, running, ok, error, or paused"
+  - "The summary view for each dataset can be expanded to show additional information"
+  - "Datasets deleted are hidden from history. They can be restored to the history, or permanently deleted from the server, or purged. Purged files cannot be restored"
+  - "Histories can also be deleted and purged, similar to datasets"
+  - "Datasets can be organized into collections within a history with search and multi-select. Jobs applied to collections use the same settings for each dataset in the collection"
+contributors:
+  - nekrut
 ---
 
 When data is uploaded from your computer or analysis is done on existing data using Galaxy, each output from those steps

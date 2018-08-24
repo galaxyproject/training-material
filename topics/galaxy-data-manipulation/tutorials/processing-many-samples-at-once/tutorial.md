@@ -1,7 +1,15 @@
 ---
 layout: tutorial_hands_on
-topic_name: galaxy-data-manipulation
-tutorial_name: processing-many-samples-at-once
+
+title: "Collections: Multisample Analysis"
+zenodo_link: ""
+questions:
+objectives:
+time_estimation: "1h/1d"
+key_points:
+contributors:
+  - nekrut
+  - pajanne
 ---
 
 > ### Agenda

@@ -1,7 +1,21 @@
 ---
 layout: tutorial_hands_on
-topic_name: galaxy-ui
-tutorial_name: galaxy-intro-jupyter
+
+title: "Jupyter: Use Jupyter notebooks in Galaxy"
+zenodo_link: "https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts"
+questions:
+  - "How to use a Jupyter Notebook in Galaxy"
+objectives:
+  - "Learn about the Jupyter Interactive Environment"
+time_estimation: "30 min"
+key_points:
+  - "Start Jupyter from the Visualize tab or from a dataset"
+  - "Install Libraries with pip or Conda"
+  - "Use get() to import datasets from your history to the notebook"
+  - "Use put() to export datasets from the notebook to your history"
+  - "Save your notebook into your history"
+contributors:
+  - Delphine-L
 ---
 
 # Introduction

@@ -1,7 +1,38 @@
 ---
 layout: tutorial_hands_on
-topic_name: chip-seq
-tutorial_name: tal1-binding-site-identification
+
+title: "Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)"
+zenodo_link: "https://doi.org/10.5281/zenodo.197100"
+edam_ontology: "topic_3169"
+questions:
+  - How is raw ChIP-seq data processed and analyzed?
+  - What are the binding sites of Tal1?
+  - Which genes are regulated by Tal1?
+objectives:
+  - Inspect read quality with FastQC
+  - Perform read trimming with Trimmomatic
+  - Align trimmed reads with BWA
+  - Assess quality and reproducibility of experiments
+  - Identify Tal1 binding sites with MACS2
+  - Determine unique/common Tal1 binding sites from G1E and Megakaryocytes
+  - Identify unique/common Tal1 peaks occupying gene promoters
+  - Visually inspect Tal1 peaks with Trackster
+requirements:
+  -
+    title: "Trackster"
+    type: "external"
+    link: "https://wiki.galaxyproject.org/Learn/Visualization"
+time_estimation: "3h"
+key_points:
+  - Sophisticated analysis of ChIP-seq data is possible using tools hosted by Galaxy.
+  - Genomic dataset analyses require multiple methods of quality assessment to ensure that the data are appropriate for answering the biology question of interest.
+  - By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced.
+contributors:
+  - malloryfreeberg
+  - moheydarian
+  - vivekbhr
+  - joachimwolff
+  - erxleben
 ---
 
 # Introduction

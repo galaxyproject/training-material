@@ -1,7 +1,21 @@
 ---
 layout: tutorial_hands_on
-topic_name: sequence-analysis
-tutorial_name: mapping
+
+title: "Mapping"
+zenodo_link: "https://doi.org/10.5281/zenodo.61771"
+questions:
+  - What two things are crucial for a correct mapping?
+  - What is BAM?
+objectives:
+  - You will learn what mapping is
+  - A genome browser is shown that helps you to understand your data
+time_estimation: "1h"
+key_points:
+  - Know your data!
+  - Mapping is not trivial
+  - There are many mapping algorithms, it depends on your data which one to choose
+contributors:
+  - joachimwolff
 ---
 
 # Introduction to next generation sequencing data mapping

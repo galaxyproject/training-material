@@ -1,7 +1,18 @@
 ---
 layout: tutorial_hands_on
-topic_name: sequence-analysis
-tutorial_name: ref-based-rad-seq
+
+title: "RAD-Seq Reference-based data analysis"
+zenodo_link: "https://doi.org/10.5281/zenodo.1134547"
+questions:
+  - "How to analyze RAD sequencing data using a reference genome for a population genomics study?"
+objectives:
+  - "Analysis of RAD sequencing data using a reference genome"
+  - "SNP calling from RAD sequencing data"
+  - "Calculate population genomics statistics from RAD sequencing data"
+time_estimation: "1/2d"
+key_points:
+contributors:
+  - yvanlebras
 ---
 
 # Introduction

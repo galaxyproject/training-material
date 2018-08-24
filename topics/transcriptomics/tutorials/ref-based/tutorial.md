@@ -1,7 +1,27 @@
 ---
 layout: tutorial_hands_on
-topic_name: transcriptomics
-tutorial_name: ref-based
+
+title: "Reference-based RNA-Seq data analysis"
+zenodo_link: "https://zenodo.org/record/1185122"
+questions:
+  - "What are the effects of Pasilla (PS) gene depletion on splicing events?"
+  - "How to analyze RNA sequencing data using a reference genome?"
+objectives:
+  - "Analysis of RNA sequencing data using a reference genome"
+  - "Analysis of differentially expressed genes"
+  - "Identification of functional enrichment among differentially expressed genes"
+time_estimation: "1d"
+key_points:
+  - "Using a spliced mapping tool for eukaryotic RNA seq data"
+  - "Running a differential gene expression with taking care of the factors to study"
+  - "Running a differential exon usage with taking care of the factors to study"
+contributors:
+  - bebatut
+  - malloryfreeberg
+  - moheydarian
+  - erxleben
+  - pavanvidem
+  - blankclemens
 ---
 
 # Introduction

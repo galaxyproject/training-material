@@ -1,7 +1,27 @@
 ---
 layout: tutorial_hands_on
-topic_name: assembly
-tutorial_name: unicycler-assembly
+
+title: "Unicycler Assembly"
+zenodo_link: "https://doi.org/10.5281/zenodo.940733"
+tags:
+  - prokaryote
+questions:
+  - "I have short reads and long reads. How do I assemble a genome?"
+objectives:
+  - "Perform Quality Control on your reads"
+  - "Perform a Small genome Assembly with Unicycler"
+  - "Evaluate the Quality of the Assembly with Quast"
+  - "Annotate the assembly with Prokka"
+time_estimation: "4h"
+key_points:
+  - "We learned about the strategies used by assemblers for hybrid assemblies"
+  - "We performed an hybrid assembly of a bacterial genome and its annotation"
+  - "Unicycler is a pipeline bases on Spades and Pilon dedicated to hybrid assembly of Small genomes"
+  - "Combination of short and long reads helped us produce an almost perfect assembly"
+contributors:
+  - nekrut
+  - delphine-l
+  - slugger70
 ---
 
 # The goal: *E. coli* C-1 assembly
