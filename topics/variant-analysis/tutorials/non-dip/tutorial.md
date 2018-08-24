@@ -9,7 +9,7 @@ questions:
   - "How does frequency of mitochondrial polymorphisms change from mother to child?"
 objectives:
   - "Using Galaxy's main site we will see how to call variants in bacteria, viruses, and organelles."
-time_estimation: "1-1.5h"
+time_estimation: "90M"
 key_points:
   - "Variation in human mitochondria is a proxy for other haploid systems."
   - "Nucleotide variants in haploid systems may have any frequency between 0 and 1."

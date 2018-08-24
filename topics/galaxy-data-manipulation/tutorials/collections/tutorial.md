@@ -7,7 +7,7 @@ questions:
   - "How to manipulate large numbers of datasets at once?"
 objectives:
   - "Understand and master dataset collections"
-time_estimation: "30 min"
+time_estimation: "30M"
 key_points:
   - "Jobs running on data collections use the same settings for each dataset in the collection."
   - "For example, FASTQ files can be combined into lists of dataset pairs. Each pair is made up of the forward reads dataset and the reverse reads dataset."

@@ -8,7 +8,7 @@ questions:
 objectives:
   - "assemble some paired end reads using Velvet"
   - "examine the output of the assembly."
-time_estimation: "30 minutes"
+time_estimation: "30M"
 key_points:
   - "We assembled some Illumina fastq reads into contigs using a short read assembler called Velvet"
   - "We showed what effect one of the key assembly parameters, the k-mer size, has on the assembly"

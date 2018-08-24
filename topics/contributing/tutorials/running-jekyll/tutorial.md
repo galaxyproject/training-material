@@ -8,7 +8,7 @@ objectives:
   - "Installing packages needed for rendering the webpage"
   - "Running the GTN material website locally"
   - "Tracking changes to the content live in the webbrowser"
-time_estimation: "15min"
+time_estimation: "15M"
 key_points:
   - "Checking the generated website can be done locally"
 contributors:

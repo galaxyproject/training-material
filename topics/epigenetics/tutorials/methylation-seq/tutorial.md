@@ -11,7 +11,7 @@ questions:
 objectives:
   - "Learn how to analyse methylation data"
   - "Get a first intuition what are common pitfalls."
-time_estimation: "3h"
+time_estimation: "3H"
 key_points:
   - "The output of a methylation NGS is having a different distribution of the four bases. This is caused by the bisulfite treatment of the DNA."
   - "If there is a different level of methylation in the loci of a gene this can be a hint that something is wrong."

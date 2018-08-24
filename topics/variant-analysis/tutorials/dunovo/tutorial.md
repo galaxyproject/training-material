@@ -9,7 +9,7 @@ questions:
 objectives:
   - "Processing raw duplex sequencing data into consensus sequences"
   - "Find rare variants without relying on diploid assumptions"
-time_estimation: "3 hr"
+time_estimation: "3H"
 key_points:
   - "Diploid variant calling relies on assumptions that rare variant calling cannot make"
   - "Duplex consensus sequences are usually most accurate, but sometimes you must rely on single-strand consensus sequences instead."

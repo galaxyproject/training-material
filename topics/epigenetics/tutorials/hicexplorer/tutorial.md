@@ -8,7 +8,7 @@ questions:
   - "Why is a Hi-C analysis useful?"
   - "What is 'chromosome conformation capture'?"
   - "What are main steps in order to generate and plot a Hi-C contact matrix?"
-time_estimation: "1h"
+time_estimation: "1H"
 key_points:
   - "Hi-C helps to investigate the 3D structure of the genome and to uncover folding principles of chromatin."
   - "In order to build a Hi-C contact matrix the reads have to be mapped to the reference genome."

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Set up a Galaxy for Training
-time_estimation: 2h
+time_estimation: "2H"
 questions:
   - How do I prepare my Galaxy instance to support a training module?
   - How can I generate a Docker Galaxy instance for my topic?

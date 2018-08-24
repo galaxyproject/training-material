@@ -12,7 +12,7 @@ objectives:
   - Learn Ansible basics
   - Write a simple role
   - Install a role from Ansible Galaxy
-time_estimation: "60m"
+time_estimation: "60M"
 key_points:
   - Ansible lets you do system administration at scale
   - Many system administration, software installation, and software management tasks are already available as ansible tasks or roles

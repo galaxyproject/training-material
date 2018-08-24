@@ -10,7 +10,7 @@ objectives:
   - "Link a tutorial to a topic"
   - "Create hands-on"
   - "Add technical support for a tutorial"
-time_estimation: "15min"
+time_estimation: "15M"
 key_points:
   - "Finding good training datasets is hard!"
   - "Creating a new tutorial involves several steps: some are mandatory, some can be skipped even if they are recommended"

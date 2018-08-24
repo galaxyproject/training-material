@@ -10,7 +10,7 @@ questions:
   - "How can I perform functional analysis on this metaproteomics data?"
 objectives:
   - "A taxonomy and functional analysis of metaproteomic mass spectrometry data."
-time_estimation: "2h"
+time_estimation: "2H"
 key_points:
   - "Use dataset collections"
   - "With SearchGUI and PeptideShaker you can gain access to multiple search engines"

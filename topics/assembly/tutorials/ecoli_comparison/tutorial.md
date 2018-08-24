@@ -17,7 +17,7 @@ objectives:
   - "Identification of the most closely related genome to my new assembly"
   - "Perform sequence comparison to locate rearrangements"
   - "Identify genes located in deletions"
-time_estimation: "3-4h"
+time_estimation: "4H"
 key_points:
   - "We learned how to download large sets of completed genomes from NCBI"
   - "We learned how to use Galaxy's rule-based collection builder"

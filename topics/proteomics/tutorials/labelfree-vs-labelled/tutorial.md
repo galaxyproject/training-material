@@ -8,7 +8,7 @@ questions:
   - "How to choose which quantitation method bests suits my need?"
 objectives:
   - "Choose your quantitation method."
-time_estimation: "15min"
+time_estimation: "15M"
 key_points:
   - "Label-free and labelled methods are not better or worse *per se*."
   - "Different scientific question call for different quantitation methods."
