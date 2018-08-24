@@ -103,10 +103,6 @@
                                             
                                         
                                     
-                                        
-                                            
-                                        
-                                    
                                 </div>
                             </li>
                         
@@ -184,7 +180,9 @@
 
             
 
+            
             <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 15min</p>
+            
         </blockquote>
 
         <h1 class="no_toc" id="introduction">Introduction</h1>
@@ -259,25 +257,78 @@ blabla
 
 <ul>
   <li><code class="highlighter-rouge">layout: tutorial_hands_on</code>: keep the default</li>
-  <li><code class="highlighter-rouge">topic_name: training</code>: replace ‘training’ the name of the topic</li>
-  <li><code class="highlighter-rouge">tutorial_name: create-new-tutorial</code>: replace ‘create-new-tutorial’ with the <code class="highlighter-rouge">name</code> of tutorial that you used in the topic level metadata</li>
+  <li><code class="highlighter-rouge">title</code>: title of the tutorial (it will appear on the tutorial page and the topic page)</li>
+  <li><code class="highlighter-rouge">enable</code>: <code class="highlighter-rouge">false</code> to hide your tutorial from the topic page (optional)</li>
+  <li><code class="highlighter-rouge">zenodo_link</code>: link on Zenodo to the input data for the tutorial</li>
 </ul>
 
-<p>These metadata are there to help the templating system linking between the tutorial’s file and the global <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-metadata/tutorial.html">metadata</a>.
-If this is not correctly defined, the tutorial will not be shown on the website.</p>
-
 <blockquote class="hands_on">
-  <h3 id="hands_on-hands-on-fix-the-top-metadata"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Fix the top metadata</h3>
+  <h3 id="hands_on-hands-on-fill-the-basic-metadata"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Fill the basic metadata</h3>
 
   <ol>
-    <li>Change the <code class="highlighter-rouge">tutorial_name</code> and the <code class="highlighter-rouge">topic_name</code> to fit to the ones defined in the metadata</li>
-    <li>(Optional) Build the website locally by following the <a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Jekyll tutorial</a> and check that the tutorial is reachable</li>
+    <li>
+      <p>Update the tutorial information in the header section of your tutorial:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> title: "Similarity search with BLAST"
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Add</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> zenodo_link: ""
+</code></pre></div>      </div>
+    </li>
   </ol>
+
+</blockquote>
+
+<p>This information is used to display the data from the topic and tutorial page. They are also used to check which information are missing for the tutorials.</p>
+
+<p>We also define metadata related to the pedagogical content of the tutorial, which will appear in the top (“Overview” box) and bottom of the online tutorial:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">requirements</code>: list of resources that the reader of the material should be familiar with before starting this training:
+    <ul>
+      <li><code class="highlighter-rouge">title</code></li>
+      <li><code class="highlighter-rouge">link</code>: relative for internal (inside training material) requirement or full for external requirement)</li>
+      <li><code class="highlighter-rouge">type</code>: the type of link (<code class="highlighter-rouge">internal</code> or <code class="highlighter-rouge">external</code>)</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">time_estimation</code>: an estimation of the time needed to complete the hands-on</li>
+  <li><code class="highlighter-rouge">questions</code>: list of questions that will be addressed in the tutorial</li>
+  <li>
+    <p><code class="highlighter-rouge">objectives</code>: list of learning objectives for the tutorial</p>
+
+    <p>A learning objective is a single sentence describing what a learner will be able to do once they have done the tutorial</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">key_points</code>: list of take-home messages</p>
+
+    <p>This information will appear at the end of the tutorial</p>
+  </li>
+</ul>
+
+<p>For this category of metadata, we have taken inspiration from what Software Carpentry has done and particularly what they described in their <a href="https://swcarpentry.github.io/instructor-training/">Instructor training</a>.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-fill-out-the-pedagogical-metadata"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Fill out the pedagogical metadata</h3>
+
+  <ol>
+    <li>Define 2 questions that will be addressed during the tutorial and add them to the metadata</li>
+    <li>Define 2 learning objectives for the tutorial and add them to the metadata</li>
+  </ol>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-when-filling-the-pedagogical-metadata"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> When filling the pedagogical metadata</h3>
+  <p>We recommend that you fill out the <em>questions</em> and the <em>learning objectives</em> before starting writing the tutorial content. You can still refine them afterwards, but it will help to guide you in developing your tutorial, and gives you some time to think beforehand on what topics are worth being covered.</p>
+
+  <p>For the take-home messages, it is easier to define them once the tutorial is written and you identified the issues.</p>
 </blockquote>
 
 <h1 id="content">Content</h1>
 
-<p>The tutorial’s content is written directly after the short section of metadata. This is written in Markdown, a simple markup language.</p>
+<p>The tutorial’s content is written directly after the section of metadata. This is written in Markdown, a simple markup language.</p>
 
 <blockquote class="tip">
   <h3 id="tip-tip-markdown"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Markdown</h3>
@@ -683,14 +734,6 @@ With well chosen wrong answers, MCQs can do much more than just measure how much
              
               
               
-            <li><a href="/training-material/topics/contributing/tutorials/github-interface-contribution/tutorial.html">Contributing with GitHub via its interface</a></li>
-              
-              
-             
-            
-             
-              
-              
             <li><a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">Contributing with GitHub via command-line</a></li>
               
               
@@ -699,17 +742,15 @@ With well chosen wrong answers, MCQs can do much more than just measure how much
              
               
               
+            <li><a href="/training-material/topics/contributing/tutorials/github-interface-contribution/tutorial.html">Contributing with GitHub via its interface</a></li>
+              
+              
+             
+            
+             
+              
+              
             <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html">Creating a new tutorial</a></li>
-              
-              
-             
-            
-             
-            
-             
-              
-              
-            <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-metadata/tutorial.html">Creating a new tutorial - Defining metadata</a></li>
               
               
              
@@ -741,15 +782,7 @@ With well chosen wrong answers, MCQs can do much more than just measure how much
              
               
               
-            <li><a href="/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html">Including a new topic</a></li>
-              
-              
-             
-            
-             
-              
-              
-            <li><a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Running the Galaxy Training material website locally</a></li>
+            <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">Creating a new tutorial - Writing content in Markdown</a></li>
               
               
              
@@ -767,6 +800,22 @@ With well chosen wrong answers, MCQs can do much more than just measure how much
               
             <li><a href="/training-material/topics/contributing/tutorials/good-practices/slides.html">Good practices to run a workshop</a></li>
                
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html">Including a new topic</a></li>
+              
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Running the Galaxy Training material website locally</a></li>
+              
               
              
             
