@@ -1,7 +1,23 @@
 ---
 layout: tutorial_hands_on
-topic_name: proteomics
-tutorial_name: protein-id-sg-ps
+
+title: "Peptide and Protein ID using SearchGUI and PeptideShaker"
+zenodo_link: "https://zenodo.org/record/546301"
+questions:
+  - "How to convert LC-MS/MS raw files?"
+  - "How to identify peptides?"
+  - "How to identify proteins?"
+  - "How to evaluate the results?"
+objectives:
+  - "Protein identification from LC-MS/MS raw files."
+time_estimation: "45min"
+key_points:
+  - "LC-MS/MS raw files have to be locally converted to mgf/mzML prior to further analysis on most Galaxy servers."
+  - "SearchGUI can be used for running several peptide search engines at once."
+  - "PeptideShaker can be used to combine and evaluate the results, and to perform protein inference."
+contributors:
+  - stortebecker
+  - bgruening
 ---
 
 # Introduction

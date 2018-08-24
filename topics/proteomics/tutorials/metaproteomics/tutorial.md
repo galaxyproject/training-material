@@ -1,7 +1,25 @@
 ---
 layout: tutorial_hands_on
-topic_name: proteomics
-tutorial_name: metaproteomics
+
+title: "Metaproteomics tutorial"
+edam_ontology: "topic_0121"
+zenodo_link: "https://doi.org/10.5281/zenodo.839701"
+questions:
+  - "How can I match metaproteomic mass spectrometry data to peptide sequences derived from shotgun metagenomic data?"
+  - "How can I perform taxonomy analysis and visualize metaproteomics data?"
+  - "How can I perform functional analysis on this metaproteomics data?"
+objectives:
+  - "A taxonomy and functional analysis of metaproteomic mass spectrometry data."
+time_estimation: "2h"
+key_points:
+  - "Use dataset collections"
+  - "With SearchGUI and PeptideShaker you can gain access to multiple search engines"
+  - "Learning the basics of SQL queries can pay off"
+contributors:
+  - timothygriffin
+  - pratikdjagtap
+  - jj-umn
+  - blankclemens
 ---
 
 # Introduction
@@ -691,8 +709,8 @@ With these three output files the functional analysis of this tutorial is finish
 >
 > - [Unipept](https://www.ncbi.nlm.nih.gov/pubmed/28552653)
 >
-> - [Galaxy-P Metaproteomics instance] (z.umn.edu/metaproteomicsgateway)
+> - [Galaxy-P Metaproteomics instance](http://z.umn.edu/metaproteomicsgateway)
 >
-> - [Metaproteomics video](z.umn.edu/mpvideo2018)
+> - [Metaproteomics video](http://z.umn.edu/mpvideo2018)
 {: .comment}
 

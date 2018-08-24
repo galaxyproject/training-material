@@ -1,7 +1,30 @@
 ---
 layout: tutorial_hands_on
-topic_name: statistics
-tutorial_name: iwtomics
+
+title: "Interval-Wise Testing for omics data"
+zenodo_link: "https://doi.org/10.5281/zenodo.1184682"
+questions:
+  - "How to visualize high-resolution omics data in different groups of genomic regions?"
+  - "How to evaluate differences in high-resolution omics data between groups of genomic regions?"
+  - "How to detect locations and scales at which the significant effects unfold?"
+objectives:
+  - "Pre-process high-resolution omics data"
+  - "Create pointwise boxplots corresponding to different groups of genomic regions"
+  - "Perform the Interval-Wise Testing between two groups of genomic regions"
+  - "Visualize and inspect test results"
+  - "Detect relevant locations and scales"
+requirements:
+time_estimation: "1h"
+key_points:
+  - "High-resolution omics data can be represented as curves along the genome"
+  - "IWTomics permits to visualize these data"
+  - "The Interval-Wise Testing detects statistically significant differences between pairs of genomic regions"
+  - "The Interval-Wise Testing corrects p-values taking into consideration the ordered nature of measurements along the genome"
+  - "Locations and scales do not need to be specified at the outset, indeed IWTomics permits to detect them"
+contributors:
+  - marziacremona
+  - fabio-cumbo
+
 ---
 
 # Introduction

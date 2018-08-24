@@ -1,7 +1,25 @@
 ---
 layout: tutorial_hands_on
-topic_name: proteomics
-tutorial_name: database-handling
+
+title: "Protein FASTA Database Handling"
+edam_ontology: "topic_0121"
+zenodo_link: ""
+questions:
+  - "How to download protein FASTA databases of a certain organism?"
+  - "How to download a contaminant database?"
+  - "How to create a decoy database?"
+  - "How to combine databases?"
+objectives:
+  - "Creation of a protein FASTA database ready for use with database search algorithms."
+time_estimation: "30min"
+key_points:
+  - "There are several types of Uniprot databases."
+  - "Search databases should always include possible contaminants."
+  - "For analyzing cell culture or organic samples, search databases should include mycoplasma databases."
+  - "Some peptide search engines depend on decoys to calculate the FDR."
+contributors:
+  - stortebecker
+  - bgruening
 ---
 
 # Introduction

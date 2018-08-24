@@ -1,7 +1,17 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: create-new-topic
+
+title: "Including a new topic"
+questions:
+  - "How to include a new topic?"
+objectives:
+  - "Create a new topic"
+  - "Set up the metadata for a topic"
+time_estimation: "30min"
+key_points:
+  - "A new topic can be easily added for new tutorials"
+contributors:
+  - bebatut
 ---
 
 # Introduction
@@ -145,10 +155,6 @@ Several metadata are defined in `metadata.yaml` file in your topic folder to :
 
     If no Docker image exists for this topic, let this information empty
 
-- `material`: the list of the tutorials for the topic
-
-    To add a new tutorial, [check out our tutorial to serve the website locally]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial/tutorial.html)
-
 - `maintainers`: GitHub username of people maintaining the topic
 
 > ### {% icon hands_on %} Hands-on: Add the new topic to the website
@@ -166,4 +172,4 @@ Several metadata are defined in `metadata.yaml` file in your topic folder to :
 # Conclusion
 {:.no_toc}
 
-We just created a new topic. We can now fill it with new tutorials.
+We just created a new topic. We can now fill it by [creating new tutorials]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial/tutorial.html)
