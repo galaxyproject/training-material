@@ -1,7 +1,23 @@
 ---
 layout: tutorial_hands_on
-topic_name: proteomics
-tutorial_name: protein-id-oms
+
+title: "Peptide and Protein ID using OpenMS tools"
+zenodo_link: "https://zenodo.org/record/546301"
+questions:
+  - "How to convert LC-MS/MS raw files?"
+  - "How to identify peptides?"
+  - "How to identify proteins?"
+  - "How to evaluate the results?"
+objectives:
+  - "Protein identification from LC-MS/MS raw files."
+time_estimation: "45min"
+key_points:
+  - "LC-MS/MS raw files have to be converted to mzML before using GalaxyP on most GalaxyP servers."
+  - "OpenMS provides many tools for proteomic analysis and guarantees compatibility by using open file formats."
+  - "OpenMS provides several thirdparty search engines and Fido for protein inference."
+contributors:
+  - stortebecker
+  - bgruening
 ---
 
 # Introduction

@@ -1,7 +1,28 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: create-new-tutorial-technical
+
+title: "Creating a new tutorial - Defining the technical infrastructure"
+questions:
+  - "How can we define the technical infrastructure for a tutorial?"
+  - "How to define the tools needed for a tutorial?"
+  - "How to add the needed data directly in an instance?"
+  - "How to add the workflows related to a tutorial?"
+  - "How can we check the technical infrastructure is working?"
+  - "How can we make an existing Galaxy instance able to run a tutorial?"
+objectives:
+  - "Extracting the technical description for a tutorial"
+  - "Populating an existing instance with the needed tools, data and workflows for a tutorial"
+  - "Creating a Galaxy Docker flavor with the needed tools, data and workflows for a tutorial"
+  - "Testing the Galaxy Docker flavor of a tutorial"
+time_estimation: "30min"
+key_points:
+  - "Tools, data and workflows can be easily integrated in a Docker flavor to have a useful technical support for a tutorial"
+  - "A Galaxy Docker flavor is a great support for training"
+  - "A Galaxy Docker flavor can be deployed 'anywhere' and is scalable"
+contributors:
+  - bebatut
+  - bgruening
+  - shiltemann
 ---
 
 # Building a Galaxy instance specifically for your training

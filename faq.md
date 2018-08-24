@@ -252,15 +252,16 @@ To learn how to add new content, check out our [series of tutorials on creating 
 
 {% assign topic = site.data["contributing"] %}
 <ol>
-{% for material in topic.material %}
- {% if material.enable != "false" and material.name != page.tutorial_name %}
+{% assign topic_material = site.pages | topic_filter:'contributing' %}
+{% for material in topic_material %}
+ {% if material.enable != "false" %}
   {% if material.type == "introduction" %}
-<li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.name }}.html">{{ material.title }}</a></li>
+<li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html">{{ material.title }}</a></li>
  {% elsif material.type == "tutorial" %}
   {% if material.hands_on %}
-<li><a href="{{ site.baseurl }}/topics/{{ topic.name  }}/tutorials/{{ material.name }}/tutorial.html">{{ material.title }}</a></li>
+<li><a href="{{ site.baseurl }}/topics/{{ topic.name  }}/tutorials/{{ material.tutorial_name }}/tutorial.html">{{ material.title }}</a></li>
   {% elsif material.slides %}
-<li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/slides.html">{{ material.title }}</a></li>
+<li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/slides.html">{{ material.title }}</a></li>
    {% endif %}
   {% endif %}
  {% endif %}

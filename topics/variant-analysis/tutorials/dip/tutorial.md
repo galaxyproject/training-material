@@ -1,7 +1,21 @@
 ---
 layout: tutorial_hands_on
-topic_name: variant-analysis
-tutorial_name: dip
+
+title: "Calling variants in diploid systems"
+zenodo_link: ""
+questions:
+  - "How to find variable sites in diploid genomes?"
+objectives:
+  - "Using Galaxy's main site we will see how to call variants in human genome."
+time_estimation: "1-1.5h"
+key_points:
+  - "Variants versus Genotypes"
+  - "Bayesian approach to variant calling"
+  - "Freebayes calls variant using haplotype windows"
+  - "SNPEff allows functional annotation of variants"
+  - "Gemini is a flexible system for analyzing variation patterns"
+contributors:
+  - nekrut
 ---
 
 <!-- Scripts below are necessary for rendering formulas used in this tutorial -->
@@ -296,7 +310,7 @@ The examples below are taken from "[Intro to Gemini](https://s3.amazonaws.com/ge
 >
 >![GEMINI query overview](../../images/gemini_query1.png)
 >
->As we can see from [output (Click this link to see it)](https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True) there are 21 variants that are not annotated in dbSNP.
+>As we can see from output there are 21 variants that are not annotated in dbSNP.
 >
 {: .question}
 
@@ -308,7 +322,7 @@ The examples below are taken from "[Intro to Gemini](https://s3.amazonaws.com/ge
 >SELECT * FROM variants WHERE filter is NULL and gene = 'POLRMT'
 >```
 >
->The above query will produce [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5a0bb5b2cc0695697/display/?preview=True) with very large number of columns. To restrict the number of columns to a manageable set let's use this command (you may need to scroll sideways):
+>The above query will produce output with very large number of columns. To restrict the number of columns to a manageable set let's use this command (you may need to scroll sideways):
 >
 >```
 >SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT'
@@ -316,7 +330,7 @@ The examples below are taken from "[Intro to Gemini](https://s3.amazonaws.com/ge
 >
 >(column definitions can be found [here](https://gemini.readthedocs.org/en/latest/content/database_schema.html))
 >
->[Output](https://usegalaxy.org/datasets/bbd44e69cb8906b540d65297cd1d26bb/display/?preview=True) shows varinats found within the *POLRMT* gene.
+>Output shows varinats found within the *POLRMT* gene.
 >
 {: .question}
 
@@ -347,7 +361,7 @@ GEMINI provides access to genotype, sequencing depth, genotype quality, and geno
 >
 >![GEMINI queries](../../images/gemini_query2.png)
 >
->This produce [a list of sites](https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True)
+>This produce a list of sites
 >
 {: .question}
 
@@ -368,7 +382,7 @@ GEMINI provides access to genotype, sequencing depth, genotype quality, and geno
 >
 >into **Restrictions to apply to genotype values**.
 >
->This will produce the following [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5aab445b3cd632ba7/display/?preview=True)
+>This will produce the following output
 >
 {: .question}
 
@@ -387,7 +401,7 @@ GEMINI provides access to genotype, sequencing depth, genotype quality, and geno
 >(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)
 >```
 >
->into **Restrictions to apply to genotype values**. Output will look like [this](https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be21ed02/display/?preview=True).
+>into **Restrictions to apply to genotype values**. Output will look like this.
 >
 {: .question}
 
@@ -423,7 +437,7 @@ Let's try a few examples.
 >
 > * `(gt_types).(*).(==HET).(all)`
 >
->the [all operator](https://gemini.readthedocs.org/en/latest/content/querying.html#the-all-operator) implies that want results for **all** afftected individuals). Output will look like [this](https://usegalaxy.org/datasets/bbd44e69cb8906b5819e1404b5e127d1/display/?preview=True).
+>the [all operator](https://gemini.readthedocs.org/en/latest/content/querying.html#the-all-operator) implies that want results for **all** afftected individuals). Output will look like this.
 >
 {: .question}
 

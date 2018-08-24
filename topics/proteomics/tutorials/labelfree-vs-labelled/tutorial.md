@@ -1,7 +1,21 @@
 ---
 layout: tutorial_hands_on
-topic_name: proteomics
-tutorial_name: labelfree-vs-labelled
+
+title: "Label-free versus Labelled - How to Choose Your Quantitation Method"
+zenodo_link: ""
+questions:
+  - "What are benefits and drawbacks of different quantitation methods?"
+  - "How to choose which quantitation method bests suits my need?"
+objectives:
+  - "Choose your quantitation method."
+time_estimation: "15min"
+key_points:
+  - "Label-free and labelled methods are not better or worse *per se*."
+  - "Different scientific question call for different quantitation methods."
+  - "Be wise in choosing the right method before starting your LC-MS/MS runs."
+contributors:
+  - stortebecker
+  - bgruening
 ---
 
 # Purpose

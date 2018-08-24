@@ -1,7 +1,22 @@
 ---
 layout: tutorial_hands_on
-topic_name: introduction
-tutorial_name: galaxy-intro-strands
+
+title: "Introduction to Genomics and Galaxy"
+zenodo_link: ""
+questions:
+  - "Do genes on opposite strands ever overlap?  If so, how often?"
+objectives:
+  - "Learn some of the basic concepts of genomics and bioinformatics"
+  - "Familiarize yourself with the basics of Galaxy"
+time_estimation: "2.5h"
+key_points:
+  - "Galaxy provides an easy-to-use graphical user interface for often complex command-line tools"
+  - "Galaxy keeps a full record of your analysis in a history"
+  - "Workflows enable you to repeat your analysis on different data"
+  - "Galaxy can connect to external sources for data import and visualization purposes"
+  - "Galaxy provides ways to share your results and methods with others"
+contributors:
+  - tnabtaf
 ---
 
 # Introduction to Galaxy
@@ -79,7 +94,7 @@ To answer this question we need to know where genes start and stop on human chro
 It turns out that for this particular question (and for many others), most **Galaxy** instances can help us find this information.
 
 > ### {% icon hands_on %} Hands-on: Log in to Galaxy
-> In your web browser, *go to* **[your Galaxy instance](#-requirements)** and *log in or register*.
+> In your web browser, *go to* **your Galaxy instance** and *log in or register*.
 {: .hands_on}
 
 The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle panel will show the home page, tool forms, and dataset content.
