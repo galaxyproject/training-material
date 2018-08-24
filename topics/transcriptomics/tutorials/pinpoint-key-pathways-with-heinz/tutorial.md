@@ -1,7 +1,21 @@
 ---
 layout: tutorial_hands_on
-topic_name: transcriptomics
-tutorial_name: pinpoint-key-pathways-with-heinz
+
+title: "Pinpoint key pathways of dental caries using Heinz"
+zenodo_link: "https://doi.org/10.5281/zenodo.1344105"
+questions:
+    - "Which pathways are potentially contributing to dental caries?"
+objectives:
+    - "Analyze metatranscriptomics data using the Heinz in Galaxy to pinpoint the optimal scoring subnetwork."
+time_estimation: "1-2h"
+key_points:
+    - "Analyzing differential expression for (meta)transcriptomics data."
+    - "Validating the p-value distribution of the differential expression analysis."
+    - "Finding the most differentially expressed network in a gene functional network using Heinz."
+    - "Analyzing the pinpointed network."
+contributors:
+    - cicozhang
+    - Sanne Abeln
 ---
 
 # Overview

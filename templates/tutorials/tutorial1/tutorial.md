@@ -2,6 +2,25 @@
 layout: tutorial_hands_on
 topic_name: templates
 tutorial_name: tutorial1
+
+title: "Tutorial Title"
+name: "tutorial1"
+zenodo_link: ""
+questions:
+  - "Question 1"
+  - "Question 2"
+objectives:
+  - "Learning objective 1"
+  - "Learning objective 2"
+  - ".."
+time_estimation: "1d/3h/6h"
+key_points:
+  - "Take home message 1"
+  - "Take-home message 2"
+  - "..."
+contributors:
+  - contributor1
+  - contributor2
 ---
 
 # Introduction

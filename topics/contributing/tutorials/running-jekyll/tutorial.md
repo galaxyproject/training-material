@@ -1,7 +1,20 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: running-jekyll
+
+title: "Running the Galaxy Training material website locally"
+questions:
+  - "How to setup the infrastructure to build training webpages?"
+objectives:
+  - "Installing packages needed for rendering the webpage"
+  - "Running the GTN material website locally"
+  - "Tracking changes to the content live in the webbrowser"
+time_estimation: "15min"
+key_points:
+  - "Checking the generated website can be done locally"
+contributors:
+  - bebatut
+  - bgruening
+  - shiltemann
 ---
 
 # Introduction

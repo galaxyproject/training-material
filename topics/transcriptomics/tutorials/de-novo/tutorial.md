@@ -1,7 +1,23 @@
 ---
 layout: tutorial_hands_on
-topic_name: transcriptomics
-tutorial_name: de-novo
+
+title: "De novo transcriptome reconstruction with RNA-Seq"
+zenodo_link: "https://zenodo.org/record/254485#.WKODmRIrKRu"
+questions:
+  - "What genes are differentially expressed between G1E cells and megakaryocytes?"
+  - "How can we generate a transcriptome de novo from RNA sequencing data?"
+objectives:
+  - "Analysis of RNA sequencing data using a reference genome"
+  - "Reconstruction of transcripts without reference transcriptome (de novo)"
+  - "Analysis of differentially expressed genes"
+time_estimation: "6h"
+key_points:
+  - "De novo transcriptome reconstruction is the ideal approach for identifying differentially expressed known and novel transcripts."
+  - "Differential gene expression testing is improved with the use of replicate experiments and deep sequence coverage."
+  - "Visualizing data on a genome browser is a great way to display interesting patterns of differential expression."
+contributors:
+  - malloryfreeberg
+  - moheydarian
 ---
 
 # Introduction

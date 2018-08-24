@@ -1,7 +1,28 @@
 ---
 layout: tutorial_hands_on
-topic_name: chip-seq
-tutorial_name: estrogen-receptor-binding-site-identification
+
+title: "Identification of the binding sites of the Estrogen receptor"
+zenodo_link: "https://doi.org/10.5281/zenodo.892432"
+questions:
+  - How is raw ChIP-seq data processed and analyzed?
+  - What are the binding sites of the Estrogen receptor?
+objectives:
+  - Inspect read quality with FastQC
+  - Map reads with Bowtie2
+  - Assess the quality of an ChIP-seq experiments
+  - Extract coverage files
+  - Call enriched regions or peaks
+time_estimation: "3h"
+key_points:
+  - ChIP-seq data requires multiple methods of quality assessment to ensure that the data is of high quality.
+  - Multiple normalization methods exists depending on the availability of input data.
+  - Heatmaps containing all genes of an organism can be easily plotted given a BED file and a coverage file.
+contributors:
+  - friedue
+  - erxleben
+  - bebatut
+  - vivekbhr
+  - fidelram
 ---
 
 # Introduction

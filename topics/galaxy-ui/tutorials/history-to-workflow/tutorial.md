@@ -1,7 +1,23 @@
 ---
 layout: tutorial_hands_on
-topic_name: galaxy-ui
-tutorial_name: history-to-workflow
+
+title: "Workflows: Extracting Workflows from Histories"
+zenodo_link: ""
+questions:
+  - "What is a workflow?"
+  - "How can I create a workflow based on my analysis history?"
+objectives:
+  - "Learn how to extract a workflow from a Galaxy history"
+  - "Learn how to change a workflow using the workflow editor"
+time_estimation: "30m"
+key_points:
+  - "Workflows allow you to easily repeat your analyses on different input datasets"
+  - "Workflows can be automatically extracted from your analysis history"
+  - "You can perform your analysis manually once, then automatically extract the recipe for repeating this analysis on other datasets"
+  - "Workflows capture all the tools and parameter settings needed to perform an analysis"
+  - "Workflows can be edited or created from scratch using the workflow editor"
+contributors:
+  - tnabtaf
 ---
 
 # Create a reusable workflow from a history
