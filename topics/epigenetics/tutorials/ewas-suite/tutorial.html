@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+    </head>
+    <body>
+        
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/epigenetics" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Epigenetics
+                        </a>
+                    </li>
+
+                    
+                        
+                        
+                        
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    
+                                        
+                                            
+                                                <a class="dropdown-item" href="/training-material/topics/epigenetics/slides/introduction.html">
+                                                    Introduction to DNA Methylation data analysis
+                                                </a>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                </div>
+                            </li>
+                        
+                    
+
+                    
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+                                <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">instances</span> Galaxy Instances
+                            </a>
+                            <div class="dropdown-menu">
+                                
+                                    <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/epigenetics/docker" title="Docker image for this tutorial">
+                                        <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+                                    </a>
+                                
+                                
+                                
+                            </div>
+                        </li>
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://zenodo.org/record/1251211#.WwREQ1Mvz-Y" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/epigenetics#references" title="References">
+                            <i class="fa fa-book" aria-hidden="true"></i><span class="visually-hidden">references</span> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Gitter
+        </a>
+        <a class="dropdown-item" href="https://biostar.usegalaxy.org/" title="Ask on Biostars">
+            Biostars
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/epigenetics/tutorials/ewas-suite/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>EWAS data analysis of 450k data</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>What is a epigenome-wide association studies?</li>
+            
+            <li>Why is a EWAS analysis useful?</li>
+            
+            <li>Why 450k data?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>Learn how to perform reproducible EWAS analysis</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+                <li>
+                    
+                    <a href="/training-material/introduction/">Galaxy introduction</a>
+                    
+                </li>
+            
+                <li>
+                    
+                    <a href="/training-material/sequence-analysis/">Quality control</a>
+                    
+                </li>
+            
+                <li>
+                    
+                    <a href="/training-material/sequence-analysis/">Mapping</a>
+                    
+                </li>
+            
+            
+            </ul>
+            
+
+            
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>The field of cancer genomics has demonstrated the power of massively parallel sequencing techniques to inform on the genes and specific alterations that drive tumor onset and progression. Although large comprehensive sequence data sets continue to be made increasingly available, data analysis remains an ongoing challenge, particularly for laboratories lacking dedicated resources and bioinformatics expertise. To address this, we have provide training based on  Galaxy tools ewas suite that represent many popular algorithms for detecting somatic genetic alterations from cancer genome and exome data.</p>
+
+<figure id="figure-1"><img src="../../images/Epigenetic_mechanisms.jpg" alt="epimechanism" title="How epigenetics mechanism can effect health (adapted from https://commonfund.nih.gov/epigenomics/figure)" /><figcaption><span class="figcaption-prefix">Figure 1:</span> How epigenetics mechanism can effect health (adapted from https://commonfund.nih.gov/epigenomics/figure)</figcaption></figure>
+
+<p>This exercise uses the dataset from the Cell publication by Hugo, Willy, et al., 2015 (DOI: 10.1016/j.cell.2015.07.061). The goal of this article was to identify differentially methylated regions and positions associated with treatment resistant melanomas.</p>
+
+<p>To this end, Illumina 450K Methylation array was performed in melanoma tumors from example patient pre and post MAPKi and BRAFi treatment with  different outcomes (sensitive and resistant). For each sample there is raw green and red colour arrays containing the summarized bead information generated bythe Illumina 450k scanner, i.e. there are 8 files in total:</p>
+
+<p>The Infinium Methylation Assay 450k uses two different bead types to detect changes in DNA methylation levels. In the figure we can see M - methylated and U - unmethylated bead types. In our study unmethylated and methylated bead signals are reported as green and red colors respectively.</p>
+
+<figure id="figure-2"><img src="../../images/methylationassay.png" alt="methassay" title="Infinium Methylation Assay Overview (adapted from https://emea.illumina.com/science/technology/beadarray-technology/infinium-methylation-assay.html?langsel=/gb/)" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Infinium Methylation Assay Overview (adapted from https://emea.illumina.com/science/technology/beadarray-technology/infinium-methylation-assay.html?langsel=/gb/)</figcaption></figure>
+
+<table>
+  <thead>
+    <tr>
+      <th>Accession</th>
+      <th>Sensitivity</th>
+      <th>Treatment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GSM1588704</td>
+      <td>baseline</td>
+      <td>pre-treatment</td>
+    </tr>
+    <tr>
+      <td>GSM1588705</td>
+      <td>baseline</td>
+      <td>pre-treatment</td>
+    </tr>
+    <tr>
+      <td>GSM1588706</td>
+      <td>resistant</td>
+      <td>BRAFi</td>
+    </tr>
+    <tr>
+      <td>GSM1588707</td>
+      <td>resistant</td>
+      <td>BRAFi</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+<ol id="markdown-toc">
+  <li><a href="#450k-array-data-upload" id="markdown-toc-450k-array-data-upload">450K Array Data Upload</a></li>
+  <li><a href="#preprocessing-and--quality-assessment" id="markdown-toc-preprocessing-and--quality-assessment">Preprocessing and  Quality Assessment</a></li>
+  <li><a href="#removing-probes-affected-by-genetic-variation" id="markdown-toc-removing-probes-affected-by-genetic-variation">Removing probes affected by genetic variation</a></li>
+  <li><a href="#dmps-and-dmrs-identification" id="markdown-toc-dmps-and-dmrs-identification">DMPs and DMRs Identification</a></li>
+  <li><a href="#annotation-and-visualization" id="markdown-toc-annotation-and-visualization">Annotation and Visualization</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="450k-array-data-upload">450K Array Data Upload</h1>
+
+<p>The first step of EWAS data anylalysis is raw methylation data loading (intensity information files  for each two color micro array)</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-data-loading"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data Loading</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial and give it a proper name</li>
+    <li>Import the following IDAT files from <a href="https://zenodo.org/record/1251211#.WwREQ1Mvz-Y">Zenodo</a> or from the data library (ask your instructor)
+      <ul>
+        <li><code class="highlighter-rouge">GSM1588704_8795207135_R01C02_Red.idat</code></li>
+        <li><code class="highlighter-rouge">GSM1588705_8795207119_R05C02_Red.idat</code></li>
+        <li><code class="highlighter-rouge">GSM1588706_8795207135_R02C02_Red.idat</code></li>
+        <li><code class="highlighter-rouge">GSM1588707_8795207119_R06C02_Red.idat</code></li>
+        <li><code class="highlighter-rouge">GSM1588704_8795207135_R01C02_Grn.idat</code></li>
+        <li><code class="highlighter-rouge">GSM1588705_8795207119_R05C02_Grn.idat</code></li>
+        <li><code class="highlighter-rouge">GSM1588706_8795207135_R02C02_Grn.idat</code></li>
+        <li><code class="highlighter-rouge">GSM1588707_8795207119_R06C02_Grn.idat</code></li>
+      </ul>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1185122/files/GSM1588704_8795207135_R01C02_Red.idat
+https://zenodo.org/record/1185122/files/GSM1588705_8795207119_R05C02_Red.idat
+https://zenodo.org/record/1185122/files/GSM1588706_8795207135_R02C02_Red.idat
+https://zenodo.org/record/1185122/files/GSM1588707_8795207119_R06C02_Red.idat
+https://zenodo.org/record/1185122/files/GSM1588704_8795207135_R01C02_Grn.idat
+https://zenodo.org/record/1185122/files/GSM1588705_8795207119_R05C02_Grn.idat
+https://zenodo.org/record/1185122/files/GSM1588706_8795207135_R02C02_Grn.idat
+https://zenodo.org/record/1185122/files/GSM1588707_8795207119_R06C02_Grn.idat
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link locations</li>
+          <li>Open the Galaxy Upload Manager</li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>Paste the link into the text field</li>
+          <li>Press <strong>Start</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>Run <strong>minfi read450k</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“red files”</em>: <code class="highlighter-rouge">GSM1588704_8795207135_R01C02_Red.idat</code>, <code class="highlighter-rouge">GSM1588705_8795207119_R05C02_Red.idat</code>,<code class="highlighter-rouge">GSM1588706_8795207135_R02C02_Red.idat</code>,<code class="highlighter-rouge">GSM1588707_8795207119_R06C02_Red.idat</code></li>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“green files”</em>: <code class="highlighter-rouge">GSM1588704_8795207135_R01C02_Grn.idat</code>,<code class="highlighter-rouge">GSM1588705_8795207119_R05C02_Grn.idat</code>, <code class="highlighter-rouge">GSM1588706_8795207135_R02C02_Grn.idat</code>,<code class="highlighter-rouge">GSM1588707_8795207119_R06C02_Grn.idat</code></li>
+      </ul>
+    </li>
+    <li>Inspect generated set of data</li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>How are the Green and Red signals are stored?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>Green and Red micro arrays are builded up into <code class="highlighter-rouge">RGChannelSet</code></p>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="preprocessing-and--quality-assessment">Preprocessing and  Quality Assessment</h1>
+
+<p>Preprocessing and data quality assurance is an important step in Infinium Methylation Assay analysis.</p>
+
+<p><code class="highlighter-rouge">RGChannelSet</code> represents two color data with a green and a red channel and can be converted into methylated and unmethylated signals assigned to <code class="highlighter-rouge">MethylSet</code> or into Beta values build in <code class="highlighter-rouge">RatioSet</code>. User can convert from <code class="highlighter-rouge">RGChannelSet</code> into <code class="highlighter-rouge">MethylSet</code> using the <strong>minfi mset</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> or compute Beta values using <strong>minfi set</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. The <strong>minfi qc</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool extracts and plots the quality control data frame with two columns mMed and uMed which are the medians of <code class="highlighter-rouge">MethylSet</code> signals (Meth and Unmeth).Comparing them against one another allows user to detect and remove low-quality samples.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-preprocessing"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Preprocessing</h3>
+  <ol>
+    <li>Run <strong>minfi mset</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to create <code class="highlighter-rouge">MethylSet</code> object</li>
+    <li>Run <strong>minfi qc</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to estimate sample-specific quality control</li>
+    <li>Run <strong>minfi rset</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to convert methylation data from the <code class="highlighter-rouge">MethylSet</code> to ratios</li>
+    <li>Run <strong>minfi maptogenome</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to map ratio data to the genome</li>
+  </ol>
+
+  <blockquote class="tip">
+    <h3 id="tip-tip-preprocess-and-normalize-data"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Preprocess and Normalize data</h3>
+    <p>If your files require normalisation, you might prefer to use other of preprocessing tools provided in EWAS suite i.e. <strong>minfi ppfun</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> or <strong>minfi ppquantile</strong>  <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> look for recomendation at (ref).</p>
+
+  </blockquote>
+
+</blockquote>
+
+<figure id="figure-3"><img src="../../images/qcplot.png" alt="Quality Control" title="Quality control plot" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Quality control plot</figcaption></figure>
+
+<h1 id="removing-probes-affected-by-genetic-variation">Removing probes affected by genetic variation</h1>
+
+<p>Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect DNA measurements and interfere results from downstream analysis.</p>
+
+<p>Hansen, J. P. 2014 highly recommende to remove the probes that contain either a SNP at the metylated loci interrogation or at the single nucleotide extension</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-removing-probes-affected-by-genetic-variation"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Removing probes affected by genetic variation</h3>
+  <ol>
+    <li>Run <strong>minfi dropsnp</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to remove the probes that contain either a SNP at the metylated loci interrogation or at the single nucleotide extension</li>
+  </ol>
+</blockquote>
+
+<h1 id="dmps-and-dmrs-identification">DMPs and DMRs Identification</h1>
+
+<p>The main goal of the EWAS suite is to simplify the way differentially methylated loci sites are detected. The EWAS suite contains <strong>minfi dmp</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool detecting differentially methylated positions (DMPs) with respect to a phenotype covariate, and more complex <strong>minfi dmr</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> solution for finding differentially methylated regions (DMRs). Genomic regions that are differentially methylated between two conditions can be tracked using a bumphunting algorithm. The algorithm first implements a t-statistic at each methylated loci location, with optional smoothing, then groups probes into clusters with a maximum location gap and a cutoff size to refer the lowest possible value of genomic profile hunted by our tool.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-dmps-and-dmrs-identification"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: DMPs and DMRs Identification</h3>
+
+  <ol>
+    <li>
+      <p>Import <code class="highlighter-rouge">phenotypeTable.txt</code> from <a href="https://zenodo.org/record/1251211#.WwREQ1Mvz-Y">Zenodo</a> or data library</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1251211/files/phenotypeTable.txt?download=1
+</code></pre></div>      </div>
+    </li>
+    <li>Run <strong>minfi dmp</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input set”</em>:<code class="highlighter-rouge">GenomicRatioSet</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Phenotype Table”</em>:<code class="highlighter-rouge">phenotypeTable.txt</code></li>
+        <li><em>“Phenotype Type”</em>:<code class="highlighter-rouge">categorical</code></li>
+        <li>
+          <p><em>“qCutoff Size”</em>:<code class="highlighter-rouge">0.5</code></p>
+
+          <p>DMPs with an FDR q-value greater than this will not be returned</p>
+        </li>
+        <li>
+          <p><em>“Variance Shrinkage”</em>:<code class="highlighter-rouge"> TRUE</code></p>
+
+          <p>This is recommended when sample sizes are small &lt;10</p>
+        </li>
+      </ul>
+    </li>
+    <li>Run <strong>minfi dmr</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input set”</em>:<code class="highlighter-rouge">GenomicRatioSet</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Phenotype Table”</em>:<code class="highlighter-rouge">phenotypeTable.txt</code></li>
+        <li><em>“factor1”</em>: <code class="highlighter-rouge">sensitive</code></li>
+        <li><em>“factor2”</em>: <code class="highlighter-rouge">resistant</code></li>
+        <li><em>“maxGap Size”</em>:<code class="highlighter-rouge">250</code></li>
+        <li><em>“coef Size”</em>:<code class="highlighter-rouge">2</code></li>
+        <li><em>“Cutoff Size”</em>:<code class="highlighter-rouge">0.1</code></li>
+        <li><em>“nullMethod”</em>:<code class="highlighter-rouge">permutation</code></li>
+        <li><em>“verbose”</em>:<code class="highlighter-rouge">TRUE</code></li>
+      </ul>
+    </li>
+    <li>Click on the <strong>minfi dmr</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> output in your history to expand it</li>
+    <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (pencil) icon displayed in your dataset in the history</li>
+    <li>Set Database/Build to <code class="highlighter-rouge">Human Feb. 2009 (GRCh37/hg19) (hg19)</code></li>
+    <li>Press <strong>Save</strong></li>
+    <li>Click on <code class="highlighter-rouge">display at UCSC</code> towards the bottom of the history item
+ This will launch UCSC Genome Browser with your Custom Track</li>
+  </ol>
+</blockquote>
+
+<figure id="figure-4"><img src="../../images/ucsc.png" alt="Display at UCSC" title="UCSC genome track showing differentialy methylated regions located on chromosome 6" /><figcaption><span class="figcaption-prefix">Figure 4:</span> UCSC genome track showing differentialy methylated regions located on chromosome 6</figcaption></figure>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-phenotype-table"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Phenotype table</h3>
+  <p>Phenotype table can be in diffrent size with diffrent arguments only second column is required to contain phenotype covariate information for each sample.</p>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <p>How are we define phenotype covariate?</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>Phenotype covariate is the set of observable characteristics of an individual resulting from the gene-environment interactions</p>
+  </blockquote>
+</blockquote>
+
+<h1 id="annotation-and-visualization">Annotation and Visualization</h1>
+
+<p>In addition to downstream analysis users can annotate the differentially methylated loci to the promoter regions of genes with gene function description, and relationships between these concepts.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on--annotate-differentially-methylated-position"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:  Annotate Differentially Methylated Position</h3>
+  <ol>
+    <li>Run <strong>chipeakanno annopeaks</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Differentialy methylated data”</em>: output of <strong>minfi dmp</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“bindingType”</em>: <code class="highlighter-rouge">StartSite</code></li>
+        <li><em>“bindingRegionStart”</em>:<code class="highlighter-rouge">-5000</code></li>
+        <li><em>“bindingRegionEnd”</em>:<code class="highlighter-rouge">3000</code></li>
+        <li>
+          <p><em>“Additional Column of Score”</em>:<code class="highlighter-rouge">8</code></p>
+
+          <p>Position of column of score optional value if it is required</p>
+        </li>
+      </ul>
+    </li>
+    <li><strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to cut “gene_name” column from table of annotated peaks and then get a list of geenes
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c16</code></li>
+        <li><em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>chipeakanno annopeaks</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><strong>Remove beginning</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> of <code class="highlighter-rouge">Gene List</code> with the following parameter
+      <ul>
+        <li><em>“Remove first”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: output of <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><strong>clusterProfiler bitr</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameter to convert the list of genes to list of entrez ID
+      <ul>
+        <li><em>“Input Type Gene ID”</em>: <code class="highlighter-rouge">SYMBOL</code></li>
+        <li><em>“Output Type Gene ID”</em>: <code class="highlighter-rouge">ENTREZID</code></li>
+      </ul>
+    </li>
+    <li><strong>clusterProfiler go</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to run a GO Enrichment Analysis</li>
+  </ol>
+
+  <blockquote class="tip">
+    <h3 id="tip-tip-biological-id-translator"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Biological id translator</h3>
+    <p>No matter what ID we need, this tool allows various conversions suitable for different databases and annotations.</p>
+  </blockquote>
+</blockquote>
+
+<figure id="figure-5"><img src="../../images/funcann.jpg" alt="Functional annotations" title="Results of GO enrichments analysis for DMPs" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Results of GO enrichments analysis for DMPs</figcaption></figure>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Description</th>
+      <th>pvalue</th>
+      <th>qvalue</th>
+      <th>geneID</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GO:0048732</td>
+      <td>gland development</td>
+      <td>1.38E-58</td>
+      <td>4.23E-55</td>
+      <td>PTGS2 / KCNC1 / FZD1 /SLC22A18 /SLC22A3 (…)</td>
+      <td>372</td>
+    </tr>
+    <tr>
+      <td>GO:1901652</td>
+      <td>response to peptide</td>
+      <td>3.99E-57</td>
+      <td>8.13E-54</td>
+      <td>SULF1/ LAMA5/ MED1 /CFLAR/ MSX2 (…)</td>
+      <td>359</td>
+    </tr>
+    <tr>
+      <td>GO:0048545</td>
+      <td>response to steroid hormone</td>
+      <td>1.38EE-54</td>
+      <td>2.11E-51</td>
+      <td>HDAC9/ RAB10/ CFLAR/ WDTC1 (…)</td>
+      <td>394</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>Epigenetic aberrations which involve DNA modifications give researchers an interest to identify novel non-genetic factors responsible for complex human phenotypes such as height, weight, and disease. To identify methylation changes researchers need to perform complicated and  time consuming computational analysis. Here, the EWAS suite becomes a solution for this inconvenience and provides a simplified downstream analysis available as ready to run pipline in supplementary materials.</p>
+
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+            <ul>
+                
+                <li>EWAS analyse changes in dna methylation in cohorts of different individuals effected by diseases</li>
+                
+                <li>DNA methylation changes can be triggered by environment (i.e. sun exposure, diet) and effect the way how our cells works and in long term cause cancer</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+        <h1>Useful literature</h1>
+        <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/epigenetics#references">here</a>.</p>
+        
+
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        <hr>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Help us improve this content!</h3>
+            Please take a moment to fill in the Galaxy Training Network
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>.
+            Your feedback helps us improve this tutorial and will be considered
+            in future revisions.
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Katarzyna Murat, Krzysztof Poterlowicz)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/epigenetics/tutorials/ewas-suite/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>

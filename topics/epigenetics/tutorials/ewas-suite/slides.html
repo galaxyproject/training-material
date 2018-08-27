@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css" id="theme">
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/epigenetics" title="Return to topic page"><i class="fa fa-level-up" aria-hidden="true"></i></a>
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;">
+
+</span></div>
+
+---
+
+# 
+
+
+---
+
+  ## Requirements
+
+  Before diving into this slide deck, we recommend you to have a look at:
+
+  
+    
+  - [Galaxy introduction](/training-material/introduction/)
+    
+  
+    
+  - [Quality control](/training-material/sequence-analysis/)
+    
+  
+    
+  - [Mapping](/training-material/sequence-analysis/)
+    
+  
+
+  
+
+
+---
+
+
+
+
+
+
+### <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20"> Questions
+
+
+
+---
+
+
+
+## EWAS Epigenome-Wide Association Studies Introduction
+
+---
+
+# What is the topic?
+Epigenome-wide association studies (EWAS) analyse genome-wide activity of epigenetic marks in  cohorts of different individuals to find associations between epigenetic variation and phenotype.
+
+---
+
+## Overview
+
+- Applications of EWAS
+- The Data (450k what is it?)
+- The Analysis
+- Integrative Approach
+---
+## Applications
+- **Population Studies**
+   - EWAS studies are the solution to explore gene-environment interactions on big scale
+- **Clinical**
+   - Genetic epidemiology is widely used in many progressive and incurable diseases i.e. cancers, autoimmune and neurological disorders
+
+.image-75[ ![](../../images/Epigenetic_mechanisms.jpg)]
+
+<small>[*National Institutes of Health, 2005*](http://commonfund.nih.gov/epigenomics/figure.aspx)</small>
+
+---
+### 450k Data
+<small>One of the most common techniques used in EWAS studies is the Infinium Methylation Assay quantifying the DNA methylation level of over 450 thousand loci, providing high accuracy with low input DNA requirements.</small>
+
+.image-40[![](../../images/methylationassay.png)]
+
+<small>[*Illumina, 2018*](https://emea.illumina.com/)</small>
+
+<small>The Infinium Methylation Assay 450k uses two different bead types to detect changes in  DNA  methylation levels. In the figure we can see M - methylated and U - unmethylated bead types. Depending on the probe design, the bead signals are reported in different colors green or red.</small>
+---
+## The Analysis
+.image-90[![](../../images/ewaschart1.png)]
+
+<small>The analysis combines 6 main steps: 
+ 1. Raw intensity data loading (.idat files) 
+ 2. Preprocessing and optional normalization 
+ 3. Quality assessment and control  step
+ 4. Single nucleotide polymorphism finding and removal
+ 5. Differentially methylated positions (DMP)  and regions (DMR) finding with respect to a phenotype covariate
+ 6. Functional annotation and graphical representation
+</small>
+.image-30[![](../../images/ewaschart2.png)]
+---
+## Integrative Approach
+Methylation patterns obtained from 450k data are compatibile with other platforms (gene expression, microRNA profiling) and thus become one of the most comprehensive solution to invastigate epigenome.
+
+---
+## Summary
+Epigenetic aberrations which involve DNA modifications give researchers an interest to identify novel non-genetic factors responsible for complex human phenotypes such as height, weight, and disease. To identify methylation changes researchers need to perform complicated and  time consuming computational analysis.
+
+Here, the EWAS suite becomes a solution  for this inconvenience and provides a simplified downstream analysis  including preprocessing, quality evaluation and differentially methylated regions detection in one complex set of tools developed and published under the Galaxy platform. Ready to be integrated with existing resources and reused in multiple ways.   
+
+
+---
+
+
+
+
+---
+
+## Thank you!
+
+This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors !
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;">
+
+
+
+    </textarea>
+    <script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false,}});
+      var hljs = remark.highlighter.engine;
+    </script>
+  </body>
+</html>
