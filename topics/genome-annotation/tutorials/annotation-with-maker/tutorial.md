@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: Genome annotation with Maker
 name: annotation-with-maker
 type: tutorial
-zenodo_link: https://doi.org/10.5281/zenodo.1402567
+zenodo_link: https://doi.org/10.5281/zenodo.1404209
 tags:
   - eukaryote
 questions:
@@ -62,7 +62,7 @@ To annotate a genome using Maker, you need the following files:
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create and name a new history for this tutorial.
-> 2. Import the following files from [Zenodo](https://doi.org/10.5281/zenodo.1402567) or from a data
+> 2. Import the following files from [Zenodo](https://doi.org/10.5281/zenodo.1404209) or from a data
 >    library named `GTN - Material` if available (ask your instructor)
 >
 >    ```
