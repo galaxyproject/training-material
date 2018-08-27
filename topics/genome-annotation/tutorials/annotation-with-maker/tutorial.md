@@ -186,11 +186,11 @@ For this first round, we configure Maker to construct gene models only by aligni
 >
 {: .hands_on}
 
-Maker produces three gff datasets:
+Maker produces three GFF3 datasets:
 
-- the evidences: the alignements of all the data Maker used to construct the final annotation (ESTs and proteins that we used)
-- the final annotation: the final consensus gene models produced by Maker
-- a gff containing both the final annotation and the evidences
+- The final annotation: the final consensus gene models produced by Maker
+- The evidences: the alignements of all the data Maker used to construct the final annotation (ESTs and proteins that we used)
+- A GFF3 file containing both the final annotation and the evidences
 
 ## Annotation statistics
 
@@ -247,21 +247,24 @@ Now run BUSCO with the predicted transcript sequences:
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 713 genes, 752 transcripts for the full genome (***TODO*** check with chrIII)
-> > 2. 993 bp for the full genome (***TODO*** check with chrIII)
-> > 3. 40 complete single-copy, 6 duplicated, 9 fragmented, 235 missing for the full genome (***TODO*** check with chrIII). This is far from what BUSCO found in the genome sequence, which means the quality of this first draft is not very good.
+> > 1. 713 genes, 752 transcripts for the full genome (501 and 531 if using chromosome III)
+> > 2. 993 bp for the full genome (981 bp if using chromosome III)
+> > 3. 40 complete single-copy, 6 duplicated, 9 fragmented, 235 missing for the full genome (45, 2, 7 and 236 if using chromosome III). This is far from what BUSCO found in the genome sequence, which means the quality of this first draft is not very good.
 > >
 > {: .solution}
 >
 {: .question}
 
-Let's see now how this first draft can be improved.
+
+The statistics are not really satisfactory at this stage, but it's normal: Maker only used the EST and protein evidences to guess the gene positions. Let's see now how this first draft can be improved.
 
 # Ab-initio predictors first training
 
 Maker can use several ab-initio predictors to annotate a genome. "Ab-initio" means that these predictors are able to predict the structure of genes in a genome based only on its sequence and on a species-specific statistical model. They don't use any evidence (e.g. EST or proteins) to predict genes, but they need to be trained with a set of already predicted genes.
 
-Today we will use two of the most widely used ab-initio predictors SNAP and Augustus. Before using it within Maker, we need to train them with the first annotation draft we produced in the previous steps. We know the quality of this draft is not perfect, but only the best scoring genes (ie the ones having the strongest evidences) will be retained to train the predictors.
+Maker is able to use the EST and protein evidences, and to combine them with the result of several ab-initio predictors to predict consensus gene models. It allows to detect genes in regions where no EST or protein align, and also to refine gene structures in regions where there is EST and/or proteins evidences and ab-initio predictions.
+
+We will use two of the most widely used ab-initio predictors SNAP and Augustus. Before using it within Maker, we need to train them with the first annotation draft we produced in the previous steps. We know the quality of this draft is not perfect, but only the best scoring genes (ie the ones having the strongest evidences) will be retained to train the predictors.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -368,10 +371,12 @@ Now run BUSCO with the predicted transcript sequences:
 > ### {% icon question %} Questions
 >
 > 1. How do the second annotation compare to the previous one? Did the ab-initio predictors training improve the results?
+> 2. How do you explain these changes?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Oh yes, better, because of x and y ***TODO***
+> > 1. The annotation looks much better: 253 complete single-copy instead of 40, 5,036 genes instead of 713.
+> > 2. Using ab-initio predictors allowed to find much more genes in regions where EST or protein alignments were not sufficient to predict genes.
 > >
 > {: .solution}
 >
@@ -380,7 +385,7 @@ Now run BUSCO with the predicted transcript sequences:
 
 # Ab-initio predictors second training
 
-To get better results, we are going to perform a second training of SNAP and Augustus, and then run Maker for a third (final) time. Experience shows that no more than two rounds of training is needed to get the best results from the ab-initio predictors. ***TODO: ref + put it at the end?***
+To get better results, we are going to perform a second training of SNAP and Augustus, and then run Maker for a third (final) time.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -484,10 +489,11 @@ Now run BUSCO with the predicted transcript sequences:
 >
 {: .question}
 
+Experience shows that no more than two rounds of training is needed to get the best results from the ab-initio predictors. You can try to retrain Augustus and SNAP, but you will probably notice very few changes. We will keep the final annotation we obtained for the rest of this tutorial.
 
 ## Improving gene naming
 
-We want to keep the results of the third Maker run. If you look at the content of the `final annotation` dataset, you will notice that the gene names are very long, complicated, and not very readable. That's because Maker assign them automatic names based on the way it computed each gene model. We are now going to automatically assign more readable names.
+If you look at the content of the `final annotation` dataset, you will notice that the gene names are long, complicated, and not very readable. That's because Maker assign them automatic names based on the way it computed each gene model. We are now going to automatically assign more readable names.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -503,7 +509,7 @@ We want to keep the results of the third Maker run. If you look at the content o
 >
 {: .hands_on}
 
-Look at the generated dataset, it should be much more readable.
+Look at the generated dataset, it should be much more readable, and ready for an official release.
 
 
 ## Visualising the results
