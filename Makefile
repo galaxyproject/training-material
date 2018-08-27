@@ -46,15 +46,15 @@ install: clean ## install dependencies
 .PHONY: install
 
 serve: ## run a local server}
-	${JEKYLL} serve -d _site/training-material
+	${JEKYLL} serve --strict_front_matter -d _site/training-material
 .PHONY: serve
 
 detached-serve: clean ## run a local server in detached mode
-	${JEKYLL} serve --detach -d _site/training-material
+	${JEKYLL} serve --strict_front_matter --detach -d _site/training-material
 .PHONY: detached-serve
 
 build: clean ## build files but do not run a server
-	${JEKYLL} build -d _site/training-material
+	${JEKYLL} build --strict_front_matter -d _site/training-material
 .PHONY: build
 
 check-html: build ## validate HTML
