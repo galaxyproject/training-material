@@ -77,6 +77,12 @@
                             "url": "{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html",
                             "name": "Slides for {{material.title}}",
                             "learningResourceType": "slides",
+                            {% if material.type and material.objectives %}
+                            "description": "The objectives of this {{material.type}} are: \n- {{material.objectives | join: "\n-" }}",
+                            {% endif %}
+                            {% if material.tags %}
+                            "keywords": "{{material.tags | join: ", "}}"
+                            {% endif %}
                             "interactivityType": "expositive"
                           }
                         {% if material.galaxy_tour %}
@@ -89,6 +95,12 @@
                             "url": "{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/tours/",
                             "name": "Galaxy Tour for {{material.title}}",
                             "interactivityType": "active",
+                            {% if material.type and material.objectives %}
+                            "description": "The objectives of this {{material.type}} are: \n- {{material.objectives | join: "\n-" }}",
+                            {% endif %}
+                            {% if material.tags %}
+                            "keywords": "{{material.tags | join: ", "}}"
+                            {% endif %}
                             "learningResourceType": "interactive-tour"
                           }
                     {% endif %}
@@ -100,10 +112,18 @@
                       "hasPart": {
                         "@type": "CreativeWork",
                         "url": "{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/tours/",
+                        {% if material.type and material.objectives %}
+                        "description": "The objectives of this {{material.type}} are: \n- {{material.objectives | join: "\n-" }}",
+                        {% endif %}
+                        {% if material.tags %}
+                        "keywords": "{{material.tags | join: ", "}}"
+                        {% endif %}
                         "name": "Galaxy Tour for {{material.title}}"
                       },
                 {% endif %}
         {% endif %}
     {% endif %}
-    "learningResourceType": "{{material.type}}"
+    "learningResourceType": "{{material.type}}",
+    "description": "The questions this {{material.type}} addresses are:\n{{material.questions | join: "\n-"}}\nThe objectives are:\n{{material.objectives | join: "\n-"}}\nThe keypoints are:\n{{material.keypoints | join: "\n-"}}",
+    "keywords": "{{material.tags | join: ", "}}"
 }
