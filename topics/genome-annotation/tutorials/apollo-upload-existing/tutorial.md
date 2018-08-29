@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 topic_name: genome-annotation
 tutorial_name: apollo-upload-existing
+title: “Upload Existing Genome into Apollo”
 ---
 
 # Introduction
