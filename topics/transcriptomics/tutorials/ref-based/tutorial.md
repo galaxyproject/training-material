@@ -10,7 +10,7 @@ objectives:
   - "Analysis of RNA sequencing data using a reference genome"
   - "Analysis of differentially expressed genes"
   - "Identification of functional enrichment among differentially expressed genes"
-time_estimation: "24H"
+time_estimation: "8H"
 key_points:
   - "Using a spliced mapping tool for eukaryotic RNA seq data"
   - "Running a differential gene expression with taking care of the factors to study"

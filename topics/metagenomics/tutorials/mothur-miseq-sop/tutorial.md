@@ -7,7 +7,7 @@ questions:
   - "What is the effect of normal variation in the gut microbiome on host health?"
 objectives:
   - "Analyze of 16S rRNA sequencing data using the Mothur toolsuite in Galaxy"
-time_estimation: "4h"
+time_estimation: "4H"
 key_points:
   - "16S rRNA gene sequencing analysis results depend on the many algorithms used and their settings"
   - "Quality control and cleaning of your data is a crucial step in order to obtain optimal results"
