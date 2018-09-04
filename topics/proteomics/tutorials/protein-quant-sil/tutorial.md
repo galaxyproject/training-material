@@ -1,7 +1,25 @@
 ---
 layout: tutorial_hands_on
-topic_name: proteomics
-tutorial_name: protein-quant-sil
+
+title: "Peptide and Protein Quantification via Stable Isotope Labelling (SIL)"
+zenodo_link: "https://zenodo.org/record/1051552"
+questions:
+  - "What are MS1 features?"
+  - "How to quantify based on MS1 features?"
+  - "How to map MS1 features to MS2 identifications?"
+  - "How to evaluate and optimize the results?"
+objectives:
+  - "MS1 feature quantitation and mapping of quantitations to peptide and protein IDs."
+time_estimation: "1h"
+key_points:
+  - "Peptides labelled with stable isotopes result in multiple parallel MS1 ion traces."
+  - "MS1 features can be used for relative protein quantitation."
+  - "Quantitations have to be mapped to PSMs."
+  - "PSM quantitations can be used to calculate protein quantitations."
+  - "Proper quantitation and mapping needs careful evaluation and optimization."
+contributors:
+  - stortebecker
+  - bgruening
 ---
 
 # Introduction

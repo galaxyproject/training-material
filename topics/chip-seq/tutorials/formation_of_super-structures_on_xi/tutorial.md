@@ -1,7 +1,31 @@
 ---
 layout: tutorial_hands_on
-topic_name: chip-seq
-tutorial_name: formation_of_super-structures_on_xi
+
+title: "Formation of the Super-Structures on the Inactive X"
+zenodo_link: "https://doi.org/10.5281/zenodo.1321974"
+questions:
+    - How is a raw set of ChIP-seq data processed and analyzed?
+    - Where are the enriched regions for H3K27me3, H3K4me3 and CTCF on the chrX?
+    - Histone modification?
+objectives:
+    - Inspect the read quality
+    - Trim low quality bases
+    - Map reads on a reference genome
+    - Assess the quality of a ChIP-seq experiment
+    - Extract coverage files
+    - Call enriched regions or peaks
+time_estimation: "3h"
+key_points:
+    - ChIP-seq data requires multiple methods of quality assessment to ensure that the data is of high quality.
+    - Multiple normalization methods exists depending on the availability of input data.
+    - Heatmaps containing all genes of an organism can be easily plotted given a BED file and a coverage file.
+contributors:
+    - friedue
+    - erxleben
+    - bebatut
+    - vivekbhr
+    - fidelram
+    - LeilyR
 ---
 
 # Introduction
@@ -31,7 +55,7 @@ The structural-maintenance-of-chromosomes hinge domain containing 1 (SMCHD1) has
 
 [Wang et al. (2018)](https://www.cell.com/cell/fulltext/S0092-8674(18)30584-1) investigates the mechanism by which the SMCHD1 gene shapes the Xi and represses the expression of the genes on Xi in mouse.
 
-Their idea was to identify the differences between the Xi and activated X chromosome, on both wild-type and SMCHD1 gene knockdown samples to study the SMCHD1 effect.
+Their idea was to identify the differences which could be observed between the Xi and activated X chromosome, on both wild-type and SMCHD1 gene knockdown samples to study the SMCHD1 effect.
 In different experiments, they targetted histones with H3K27me3 or H3K4me3 and CTCF using ChIP-seq experiments:
 
 ![ChIP-seq workflow](../../images/formation_of_super-structures_on_xi/Chromatin_immunoprecipitation_sequencing.jpg "Source: http://e.biohackers.net/ChIP-seq")
@@ -151,7 +175,7 @@ It is often necessary to trim sequenced read, for example, to get rid of bases t
 
 {% include topics/sequence-analysis/tutorials/quality-control/paired_end_question.md forward="wt_H3K4me3_read1" reverse="wt_H3K4me3_read2" %}
 
-> ### {% icon hands_on %} Hands-on: Quality control
+> ### {% icon hands_on %} Hands-on: Trimming low quality bases
 >
 > 1. Run **Trim Galore!** {% icon tool %} with the following parameters
 >    - *"Is this library paired- or single-end?"*: `Paired-end`
@@ -432,7 +456,7 @@ We are using **bamCoverage** {% icon tool %}. Given a BAM file, this tool genera
 
 ## Generation of input-normalized coverage files
 
-To extract only the information induced by the immunoprecipitation, we normalize for each patient the coverage file for the sample that underwent immunoprecipitation by the coverage file for the input sample. Here we use the tool **bamCompare** {% icon tool %} which compare 2 BAM files while caring for sequencing depth normalization.
+To extract only the information induced by the immunoprecipitation, we normalize the coverage file for the sample that underwent immunoprecipitation by the coverage file for the input sample. Here we use the tool **bamCompare** {% icon tool %} which compare 2 BAM files while caring for sequencing depth normalization.
 
 > ### {% icon hands_on %} Hands-on: Generation of input-normalized coverage files
 >

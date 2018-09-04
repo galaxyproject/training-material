@@ -1,7 +1,26 @@
 ---
 layout: tutorial_hands_on
-topic_name: variant-analysis
-tutorial_name: microbial-variants
+
+title: "Microbial Variant Calling"
+zenodo_link: "https://doi.org/10.5281/zenodo.582600"
+tags:
+  - prokaryote
+questions:
+  - "How do we detect differences between a set of reads from a microorganism and a reference genome"
+objectives:
+  - "Find variants between a reference genome and a set of reads"
+  - "Visualise the SNP in context of the reads aligned to the genome"
+  - "Determine the effect of those variants on genomic features"
+  - "Understand if the SNP is potentially affecting the phenotype"
+time_estimation: "45 min"
+key_points:
+  - "We used a tool called Snippy to call variants between our reads and our reference genome."
+  - "As our reference genome had annotations, we could see what effect the changes have on the features as annotated in the reference and therefore make inferences on the possible changes to the phenotype."
+  - "We used the JBrowse genome browser to visualise what these changes look like."
+contributors:
+  - annasyme
+  - slugger70
+  - tseemann
 ---
 
 # Introduction

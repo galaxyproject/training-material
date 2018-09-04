@@ -1,7 +1,22 @@
 ---
 layout: tutorial_hands_on
-topic_name: transcriptomics
-tutorial_name: srna
+
+title: "Differential abundance testing of small RNAs"
+zenodo_link: "https://zenodo.org/record/826906"
+questions:
+  - "What small RNAs are expressed?"
+  - "What RNA features have significantly different numbers of small RNAs targeting them between two conditions?"
+objectives:
+  - "Process small RNA-seq datasets to determine quality and reproducibility."
+  - "Filter out contaminants (e.g. rRNA reads) in small RNA-seq datasets."
+  - "Differentiate between subclasses of small RNAs based on their characteristics."
+  - "Identify differently abundant small RNAs and their targets."
+time_estimation: "3h"
+key_points:
+  - "Analysis of small RNAs is complex due to the diversity of small RNA subclasses."
+  - "Both alignment to references and transcript quantification approaches are useful for small RNA-seq analyses."
+contributors:
+  - malloryfreeberg
 ---
 
 # Introduction
