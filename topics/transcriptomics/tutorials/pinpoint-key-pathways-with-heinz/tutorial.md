@@ -78,51 +78,49 @@ After knowing what our input data are like, let's get them into Galaxy history:
 >   - Data is available from Zenodo here: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1344105.svg)](https://doi.org/10.5281/zenodo.1344105)
 >   - In the file upload menu choose the `Paste/Fetch data` option and enter the URLs to import these files from remote servers to Galaxy directly.
 >   - To make things easy, do click the tag `Collection` in the file upload menu before choose the `Paste/Fetch data` option; in this way, we can organize these files into dataset lists. We need to create two dataset list (one for CP and one for CN), so we need to do the upload twice. First, copy and paste the following URLs (Dental Caries Dataset (Disease)), then click `start`, after the files uploaded (everything turns green), click `build`, then give a sensible name, here we use `CP`, finally click `Create list`. Redo this for the Dental Caries Dataset (Healthy) with a data list name `CN`.
->    <details>
->    <summary>Click to view Zenodo URLs for Dental Caries Dataset (Disease, CP)</summary>
->    <pre>
-> https://zenodo.org/record/1344105/files/2241_CP_DZ_PairTo_2242.txt
-> https://zenodo.org/record/1344105/files/2126_CP_MZ_PairTo_2125.txt
-> https://zenodo.org/record/1344105/files/2991_CP_DZ_PairTo_2992.txt
-> https://zenodo.org/record/1344105/files/2931_CP_DZ_PairTo_2930.txt
-> https://zenodo.org/record/1344105/files/2284_CP_DZ_PairTo_2283.txt
-> https://zenodo.org/record/1344105/files/2125_CP_MZ_PairTo_2126.txt
-> https://zenodo.org/record/1344105/files/4131_CP_DZ_PairTo_4132.txt
-> https://zenodo.org/record/1344105/files/2954_CP_DZ_PairTo_2955.txt
-> https://zenodo.org/record/1344105/files/2170_CP_MZ_PairTo_2169.txt
-> https://zenodo.org/record/1344105/files/2955_CP_DZ_PairTo_2954.txt
-> https://zenodo.org/record/1344105/files/2011_CP_DZ_PairTo_2012.txt
-> https://zenodo.org/record/1344105/files/2012_CP_DZ_PairTo_2011.txt
-> https://zenodo.org/record/1344105/files/2269_CP_DZ_PairTo_2270.txt
-> https://zenodo.org/record/1344105/files/3215_CP_MZ_PairTo_3214.txt
-> https://zenodo.org/record/1344105/files/2354_CP_DZ_PairTo_2355.txt
-> https://zenodo.org/record/1344105/files/3306_CP_DZ_PairTo_3307.txt
-> https://zenodo.org/record/1344105/files/2061_CP_DZ_PairTo_2062.txt
-> https://zenodo.org/record/1344105/files/2355_CP_DZ_PairTo_2354.txt
-> https://zenodo.org/record/1344105/files/2242_CP_DZ_PairTo_2241.txt
->    </pre>
->    </details>
->    <details>
->    <summary>Click to view Zenodo URLs for Dental Caries Dataset (Healthy, CN)</summary>
->    <pre>
-> https://zenodo.org/record/1344105/files/2310_CN_DZ_PairTo_2309.txt
-> https://zenodo.org/record/1344105/files/2062_CN_DZ_PairTo_2061.txt
-> https://zenodo.org/record/1344105/files/2191_CN_MZ_PairTo_2192.txt
-> https://zenodo.org/record/1344105/files/2052_CN_MZ_PairTo_2051.txt
-> https://zenodo.org/record/1344105/files/2051_CN_MZ_PairTo_2052.txt
-> https://zenodo.org/record/1344105/files/2192_CN_MZ_PairTo_2191.txt
-> https://zenodo.org/record/1344105/files/2234_CN_DZ_PairTo_2233.txt
-> https://zenodo.org/record/1344105/files/2233_CN_DZ_PairTo_2234.txt
-> https://zenodo.org/record/1344105/files/2270_CN_DZ_PairTo_2269.txt
-> https://zenodo.org/record/1344105/files/2225_CN_MZ_PairTo_2226.txt
-> https://zenodo.org/record/1344105/files/4132_CN_DZ_PairTo_4131.txt
-> https://zenodo.org/record/1344105/files/2309_CN_DZ_PairTo_2310.txt
-> https://zenodo.org/record/1344105/files/2992_CN_DZ_PairTo_2991.txt
-> https://zenodo.org/record/1344105/files/3214_CN_MZ_PairTo_3215.txt
-> https://zenodo.org/record/1344105/files/2169_CN_MZ_PairTo_2170.txt
-> https://zenodo.org/record/1344105/files/2930_CN_DZ_PairTo_2931.txt
-> https://zenodo.org/record/1344105/files/3307_CN_DZ_PairTo_3306.txt
->    </details>
+>
+> > ### {% icon details %} View list of Zenodo URLs for Dental Caries Dataset (Disease, CP)
+> > https://zenodo.org/record/1344105/files/2241_CP_DZ_PairTo_2242.txt
+> > https://zenodo.org/record/1344105/files/2126_CP_MZ_PairTo_2125.txt
+> > hhttps://zenodo.org/record/1344105/files/2991_CP_DZ_PairTo_2992.txt
+> > https://zenodo.org/record/1344105/files/2931_CP_DZ_PairTo_2930.txt
+> > https://zenodo.org/record/1344105/files/2284_CP_DZ_PairTo_2283.txt
+> > https://zenodo.org/record/1344105/files/2125_CP_MZ_PairTo_2126.txt
+> > https://zenodo.org/record/1344105/files/4131_CP_DZ_PairTo_4132.txt
+> > https://zenodo.org/record/1344105/files/2954_CP_DZ_PairTo_2955.txt
+> > https://zenodo.org/record/1344105/files/2170_CP_MZ_PairTo_2169.txt
+> > https://zenodo.org/record/1344105/files/2955_CP_DZ_PairTo_2954.txt
+> > https://zenodo.org/record/1344105/files/2011_CP_DZ_PairTo_2012.txt
+> > https://zenodo.org/record/1344105/files/2012_CP_DZ_PairTo_2011.txt
+> > https://zenodo.org/record/1344105/files/2269_CP_DZ_PairTo_2270.txt
+> > https://zenodo.org/record/1344105/files/3215_CP_MZ_PairTo_3214.txt
+> > https://zenodo.org/record/1344105/files/2354_CP_DZ_PairTo_2355.txt
+> > https://zenodo.org/record/1344105/files/3306_CP_DZ_PairTo_3307.txt
+> > https://zenodo.org/record/1344105/files/2061_CP_DZ_PairTo_2062.txt
+> > https://zenodo.org/record/1344105/files/2355_CP_DZ_PairTo_2354.txt
+> > https://zenodo.org/record/1344105/files/2242_CP_DZ_PairTo_2241.txt
+> {: .details}
+>
+> > ### {% icon details %} View list of Zenodo URLs for Dental Caries Dataset (Healthy, CN)</summary>
+> > https://zenodo.org/record/1344105/files/2310_CN_DZ_PairTo_2309.txt
+> > https://zenodo.org/record/1344105/files/2062_CN_DZ_PairTo_2061.txt
+> > https://zenodo.org/record/1344105/files/2191_CN_MZ_PairTo_2192.txt
+> > https://zenodo.org/record/1344105/files/2052_CN_MZ_PairTo_2051.txt
+> > https://zenodo.org/record/1344105/files/2051_CN_MZ_PairTo_2052.txt
+> > https://zenodo.org/record/1344105/files/2192_CN_MZ_PairTo_2191.txt
+> > https://zenodo.org/record/1344105/files/2234_CN_DZ_PairTo_2233.txt
+> > https://zenodo.org/record/1344105/files/2233_CN_DZ_PairTo_2234.txt
+> > https://zenodo.org/record/1344105/files/2270_CN_DZ_PairTo_2269.txt
+> > https://zenodo.org/record/1344105/files/2225_CN_MZ_PairTo_2226.txt
+> > https://zenodo.org/record/1344105/files/4132_CN_DZ_PairTo_4131.txt
+> > https://zenodo.org/record/1344105/files/2309_CN_DZ_PairTo_2310.txt
+> > https://zenodo.org/record/1344105/files/2992_CN_DZ_PairTo_2991.txt
+> > https://zenodo.org/record/1344105/files/3214_CN_MZ_PairTo_3215.txt
+> > https://zenodo.org/record/1344105/files/2169_CN_MZ_PairTo_2170.txt
+> > https://zenodo.org/record/1344105/files/2930_CN_DZ_PairTo_2931.txt
+> > https://zenodo.org/record/1344105/files/3307_CN_DZ_PairTo_3306.txt
+> {: .details}
+>
 {: .hands_on}
 
 If you don't use `Collection` in the file upload menu, you will have a lot of files to manage. Luckily Galaxy can make life a bit easier by allowing us to manually create *dataset collections*. This enables us to easily run tools on multiple datasets at once. Let's
@@ -171,7 +169,7 @@ There are a few canned tools commonly used for DEA, like [Limma](https://biocond
 >   - "Specify a factor name" to `dental_caries` (in "1: Factor")
 >   - "Specify a factor level" to `CP`, "Counts file(s)" to `CP` by clicking the "Dataset collections" icon (in "1: Factor level")
 >   - "Specify a factor level" to `CN`, "Counts file(s)" to `CN` by clicking the "Dataset collections" icon (in "2: Factor level")
->   - "Visualising the analysis results" to `No` 
+>   - "Visualising the analysis results" to `No`
 >   - Leave all other parameters to the default settings <br><br>
 >
 {: .hands_on}
