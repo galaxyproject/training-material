@@ -123,6 +123,18 @@ After knowing what our input data are like, let's get them into Galaxy history:
 >      {: .details}
 >    - Name this collection: `CN`
 >
+>    > ### {% icon question %} Question
+>    >
+>    > How many samples do you have in your disease collection (CP)? How many healthy samples (CN)?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > You should have 19 samples in the disease collection (CP), and 17 in the negative collection (CN).
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
+>
 {: .hands_on}
 
 > ### {% icon tip %} Tip: Creating a collection from files already in your history
