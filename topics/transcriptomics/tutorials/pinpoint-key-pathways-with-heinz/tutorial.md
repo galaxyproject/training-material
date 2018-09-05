@@ -64,11 +64,7 @@ After knowing what our input data are like, let's get them into Galaxy history:
 >
 > 1. Make sure you have an empty Galaxy history. Give it a sensible name.
 >
->    > ### {% icon tip %} Starting a new history
->    >
->    > * Click the **gear icon** at the top of the history panel
->    > * Select the option **Create New** from the menu
->    {: .tip}
+>    {% include snippets/history_create_new.md %}
 >
 > 2. **Import DC Dataset.** The data for this course may be available from a shared library (Option 1) in Galaxy
 > (confirm with your instructor). If not, you can upload them into Galaxy yourself (Option 2).
@@ -101,7 +97,7 @@ After knowing what our input data are like, let's get them into Galaxy history:
 > > https://zenodo.org/record/1344105/files/2242_CP_DZ_PairTo_2241.txt
 > {: .details}
 >
-> > ### {% icon details %} View list of Zenodo URLs for Dental Caries Dataset (Healthy, CN)</summary>
+> > ### {% icon details %} View list of Zenodo URLs for Dental Caries Dataset (Healthy, CN)
 > > https://zenodo.org/record/1344105/files/2310_CN_DZ_PairTo_2309.txt
 > > https://zenodo.org/record/1344105/files/2062_CN_DZ_PairTo_2061.txt
 > > https://zenodo.org/record/1344105/files/2191_CN_MZ_PairTo_2192.txt
