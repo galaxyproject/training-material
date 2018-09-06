@@ -201,9 +201,9 @@ K01792  112.923146882195    -1.26925892659617	0.285732234964578	-4.4421271781026
 
 # Fit a BUM model (a mixture model)
 
-Statistically speaking, p-values are uniformly distributed under the null hypothesis; therefore, under alternative hypothesis, the noise component will be adequately modeled by a uniform distribution. With this knowledge, we can fit a mixture model (BUM model) to the p-values, as the figure below shows.
+Statistically speaking, p-values are uniformly distributed under the null hypothesis; therefore, under alternative hypothesis, the noise component will be adequately modeled by a uniform distribution. With this knowledge, we can fit these p-values to a mixture model (BUM model), as the figure below shows.
 
-![p-values are fitted to a mixture model](../../images/bum.jpeg)
+![p-values are fitted to a mixture model](../../images/bum.jpeg){:width="50%"}
 
 > ### {% icon hands_on %} Hands-on: extract p-values from DESeq2 output
 >
@@ -223,7 +223,54 @@ Statistically speaking, p-values are uniformly distributed under the null hypoth
 
 # Pinpoint the key pathways with Heinz
 
-## Calcualte a score
+Heinz is an algorithm in searching an optimal subnetwork from a bigger network. You may wonder what the networks are here. Through the previous steps, we have got a list of identities, that is a list of gene IDs with p-values, which form the nodes of 'the bigger network', the relations between the nodes, which are the edges, need to be obtained from a background network, which represents a pathway relation databases, such as [Reactome](https://reactome.org/) and [STRING](https://string-db.org/). In this tutorial, we only use a small sample background network for demonstration purposes. The background network is represented as edges in a txt file where each line denotes an edge:
+
+```
+ACTR1B	ACVR2B
+ZSWIM9	FOXP3
+LGALS4	PRKX
+NPTX1	CIAO1
+```
+
+You also need to upload this txt file (hereafter we call it edge file) into the Galaxy instance you are using. 
+
+> ### {% icon details %} View the Zenodo URL for edge file
+> ```
+> https://zenodo.org/record/1344105/files/edge.txt
+> ```
+{: .details}
+
+
+## Calculate Heinz scores
+
+Before running Heinz to pinpoint the key pathways, we need to calculate a Heinz score for each node, using the BUM model parameters we obtained in the previous step; meanwhile, we also need to specify an FDR value.
+
+> ### {% icon comment %} What is FDR value?
+> FDR is short for false discovery rate, which is a method of conceptualizing the rate of type I errors in null hypothesis testing when conducting multiple comparisons, if you are interested, view the detail in [Wikipedia](https://en.wikipedia.org/wiki/False_discovery_rate).
+{: .comment}
+
+In our case, the higher a FDR value is, the more positive nodes (regarding the Heinz scores) we get, which means it may include a lot of false positive nodes. For different datasets and problems, we probably need different FDR values. Here we set FDR to 0.11.
+
+
+> ### {% icon hands_on %} Hands-on: calculate Heinz scores
+>
+> - **Calculate a Heinz score** {% icon tool %} with the following parameters
+>   - "A node file with p-values" to the output of **cut** (a different **cut**, see below)
+>   - "FDR value" to 0.11
+>   - "Choose your input type for BUM parameters" to "The output file of BUM model"
+>   - "Output file of BUM model as input: lambda on the first line and alpha, the second" to the output of **Fit a BUM model** <br><br>
+{: .hands_on}
+
+In the user interface of the tool "Calculate a Heinz score", we see that "A node file with p-values" is needed. In the previous steps, we have done **cut** once, where we only extract one column --- p-value column. Here we need to do another **cut**, but this time, we need to extract two columns.
+
+> ### {% icon hands_on %} Hands-on: extract geneID and p-values from DESeq2 output
+>
+> - **cut** {% icon tool %} with the following parameters
+>   - "Cut columns" to `c1,c6` (in "1: Factor")
+>   - "Delimited by" to `TAB`
+>   - "From" to the output of **DESeq2** <br><br>
+>
+{: .hands_on}
 
 ## Run Heinz
 
