@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 title: LC-MS - Data Import
 name: lcms-data-import
 zenodo_link: 'https://doi.org/10.5281/zenodo.1346742'
+enable: false
 questions:
     - How to import the "Raw" data in "DataSet Collection?
     - How to import the SampleMetadata Sheet?
