@@ -93,7 +93,7 @@ The second step of any Regional GAM data analysis is making sure to have a datas
 >
 > As the dataset is quite big and may countain heterogeneous informations, you want to know wether the data are about one species or more. 
 > 1. Search for the tool `compter le nombre d'occurence de chaque enrégistrement`with the following parameters:
-> * "Sur le jeu de données": `output`from **tabular to CSV**
+> * "Sur le jeu de données": `output`from **CSV to Tabular**
 > * "Compter les occurrences des valeurs présentes dans la(les) colonne(s)": `column 1`
 > * "Délimité par": `tabulation`.
 > * "Comment les résultats doivent t'ils être triés ?": `Avec la valeur la plus présente en premier`.
