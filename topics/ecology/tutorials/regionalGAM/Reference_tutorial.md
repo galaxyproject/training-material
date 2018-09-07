@@ -80,7 +80,7 @@ When the dataset contains many details, it lengthens the file processing time th
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>The dataset contains 6 sites now against 1144 before "down-sampling". </li>
+>    >    <li>The dataset contains 5 sites now against 1143 before "down-sampling". </li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
