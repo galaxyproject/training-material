@@ -152,7 +152,7 @@ If you want to access the chart on an interactive interface, you can click on th
 First of all, you have to know how many years are taken into account in your dataset.
 >    > 1. Search for the tool `Compter le nombre d'occurrences de chaque enregistrement` with the following parameters 
 >    > * "Sur le jeu de données": `output` from **trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières**.
->    > * "Select": `Column 3` (the on headed with `SITE`)
+>    > * "Select": `Column 3` (the on headed with `YEAR`)
 >    > * "Délimité par": `Tabulation`.
 >    > * "Comment les résultats doivent t'ils être triés ?": `Par les valeurs comptées`.
 >    > 2. Inspect the file by clicking on the `eye` icon to check how many years are taken into account.
