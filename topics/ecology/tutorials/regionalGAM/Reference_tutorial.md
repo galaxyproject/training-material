@@ -263,7 +263,9 @@ The point of doing a linear regression is to determinate if the year has an infl
 >    > * "Fichier produit par l'outil glmmpql/Expected temporal trend": `output 2` from **temporal trend**. 
 >    > * "Fichier produit par l'outil ab_index": `output` from **abundance index**.
 
-You can then execute the ** Linear regression ajusted ** tool to take into account autocorrelation of model residuals .
+You can then execute the **Linear regression ajusted** tool to take into account autocorrelation of model residuals .
+
+Finally, a global trend (over years) can be displayed using the **Trend** tool.
 
 {: .hands_on}
  
