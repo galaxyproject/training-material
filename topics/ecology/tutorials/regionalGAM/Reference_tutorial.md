@@ -29,11 +29,11 @@ You will basically learn how to create a file on the basis of which you can crea
 # Step 1: Pre-processing
 
 The goal of the first step is to upload and prepare the file so that it will be usable for the *regional GAM* analysis (See [this warning](#inputdatawarning) for more information about the input file).
-First of all, you will have to upload the files on Galaxy-E and then you might have to use some data handling tools to be able to use *regional GAM* tools.
+First of all, you will have to upload the files on [Galaxy-E](https://openstack-192-168-100-19.genouest.org) and then you might have to use some data handling tools to be able to use *regional GAM* tools.
 
 >  ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this tutorial and give it a proper name.
+> 1. Create a new history for this tutorial and give it a proper name as `Tuto training regionalGAM`.
 > 2. Import the following file from [Zenodo](https://zenodo.org/record/1324204#.W2BmRn7fNE4) or from a data
 >    library named `regional GAM data tutorial`
 >
@@ -45,13 +45,10 @@ First of all, you will have to upload the files on Galaxy-E and then you might h
 > ### {% icon tip %} Tip: Importing data via links
 >    > 1. Search for the tool `Téléverser un ou plusieurs fichiers de votre ordinateur ou d'un serveur distant`
 >    > 2. To import the dataset, you have two options:
->    > * If you have uploaded the file on your computer, drop it in the box provided for that purpose.
->    >    * Press **Start** and **Close** the window
->    > * If you have copied the link location:
->    >    * Select **Paste/Fetch data**
->    >    * Paste the link into the text field
->    >    * Choose the type: CSV
->    >    * Press **Start** and **Close** the window
+>    > * Select **Paste/Fetch data**
+>    > * Paste the link into the text field
+>    > * Choose the type: CSV
+>    > * Press **Start** and **Close** the window
 
 >    {: .tip}
 
@@ -62,7 +59,7 @@ First of all, you will have to upload the files on Galaxy-E and then you might h
 > {: .comment}
 
 >    > ## <a name="resampling"></a> Re-sampling.  
-When the dataset contains many details, it lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example, the list of SITE (look at the column with header `SITE)`  of the dataset you are using is really long and the SITES are classified into sub-sites. Here, we will assume that your file doesn't really need be as precise and this is the reason why you have to specify you don't want the sub-sites. To create a new "down-sampled" file, you can follow these steps:   
+When the dataset contains many details, it lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example, the list of SITE (look at the column with header `SITE)` of the dataset you are using is really long and the SITES are classified into sub-sites (like ESBMS.12, ESBMS.28,ESBMS.55,...). Here, we will assume that your file doesn't really need be as precise and this is the reason why you have to specify you don't want the sub-sites. To create a new "down-sampled" file (so delete the ---.12, ---.28 mentions), you can follow these steps:   
 
 > ### {% icon hands_on %} Hands-on: hiding some informations
 
@@ -92,13 +89,13 @@ The second step of any Regional GAM data analysis is making sure to have a datas
 > ### {% icon hands_on %} Hands-on: How many species are taken into account in this dataset
 >
 > As the dataset is quite big and may countain heterogeneous informations, you want to know wether the data are about one species or more. 
-> 1. Search for the tool `compter le nombre d'occurence de chaque enrégistrement`with the following parameters:
+> 1. Search for the tool `compter le nombre d'occurence de chaque enregistrement` with the following parameters:
 > * "Sur le jeu de données": `output`from **CSV to Tabular**
 > * "Compter les occurrences des valeurs présentes dans la(les) colonne(s)": `column 1`
 > * "Délimité par": `tabulation`.
 > * "Comment les résultats doivent t'ils être triés ?": `Avec la valeur la plus présente en premier`.
 > 2. Inspect the file by clicking on the `eye` icon to check that the dataset is on one species only.
-> 3. Now you can regenerate a CSV file using the `tabular to CSV` tool on the ouptut from **trouver et remplacer des patterns dans des colonnes**.
+> 3. Now, as regionalGAM tools use CSV files as input, you can regenerate a CSV file using the `tabular to CSV` tool on the output from **trouver et remplacer des patterns dans des colonnes**. Please, tag your new dataset with an explicit tag as "Count and/or rename this dataset like "Counting file".
 
 > ### {% icon comment %} Comment
 
@@ -115,23 +112,24 @@ Now you have a file containing all the data on the species of interest. The main
 
 > ### {% icon hands_on %} Hands-on: Phenology
 
-This step will allow you the show the phenology of a species and then to create charts representing it. In the second part, you will learn that it is possible to show the phenology of various species on a single chart allowing to compare them and analyse them more easily. 
+This step will allow you to compute and display the phenology of a species. In the second part, you will learn that it is possible to show the phenology of various species on a single chart allowing to compare them and analyse them more easily. 
 
 
 > 1. Search for the tool `flight curve` and execute it specifying the following parameters: 
 > * "Fichier de comptage": `output` from **tabular to CSV**.
 >
-> 🔹 Based on the `output` from **flight curve**, you can create a line chart which shows the occurence of the species through the years on a very visual material 
+> 🔹 Based on the `output` from **flight curve**, you can create a line chart which shows species occurences through the years on a very visual material 
+
 
 ![Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20chart%20.png "This shows the occurrence of Pyronia tithonus")
 
-If you want to access the chart on an interactive interface, you can click on the following link: [Chart on Galaxy](http://openstack-192-168-100-19.genouest.org/plugins/visualizations/charts/saved?id=d413a19dec13d11e)
+If you want to access the chart on an interactive interface, you can click on the following link: [Chart on Galaxy-E](https://openstack-192-168-100-19.genouest.org/u/ylebras/v/pyronia-tithonus-phenology-2)
 >
->    > ### {% icon tip %} Visualiser. 
->    > 1. Click on the `Output` dataset from **flight curve** 
+>    > ### {% icon tip %} Visualization. 
+>    > 1. Click on the name of output dataset from **flight curve** (something like `Flight curve on data 6`) to expand dataset related details and options
 >    > 2. Click on the "Visualize" button then select `Charts` 
->    > 3. Give it a proper name
->    > 4. Select a visualization: "line chart (NVD 3)" 
+>    > 3. Give it a proper name like `Pyronia tithonus phenology`
+>    > 4. Select a visualization type: "line chart (NVD 3)" 
 >    > 5. Click on {% icon tip %} Select data:
 >    > * "Provide a label": `The name of the species`
 >    > * "Pick a series color": Choose a color for the line 
@@ -145,9 +143,10 @@ If you want to access the chart on an interactive interface, you can click on th
 >    > 8. Click on {% icon tip %} `save this visualization`if you are willing
 >
 >
-> ### {% icon comment %} Comment
+> ### {% icon comment %} Comments
 >
-> ⚠️ Please note, that if you want your chart to be more precise and to specify that the x-axis coresponds to "Week and year", it is possible. In order to do so, follow the tip below:
+> ⚠️ Please note, that if you want to create a "stacked" visualization, overlapping each year, you can use several executions (one execution by year) of the `Filtrer des données sur une colonne en utilisant des expressions simples` tool specifying the year you want on the `condition suivante` parameter, `c2==2004` for 2004, then `c2==2005` for 2005, etc... then you can paste all resulting files side by side using one or several executions of the `Coller deux jeux de données l'un à côté de l'autre` tool so you can specify on the "Select Data" tab of visualization, several Data series (one by year).
+> ⚠️ Please note, that if you want your chart to be more precise and to specify that the x-axis corresponds to "Week and year", it is possible. In order to do so, follow the tip below:
 >    > ### {% icon tip %} Tip: Creating a new column of the dataset containing the week and the year 
 First of all, you have to know how many years are taken into account in your dataset.
 >    > 1. Search for the tool `Compter le nombre d'occurrences de chaque enregistrement` with the following parameters 
@@ -173,21 +172,22 @@ With the `output` from **Merger des colonnes ensemble** you can now generate a n
 >    > 1. With the  `output` from **Merger des colonnes ensemble**.
 >    > 2. Select `Charts`
 >    > 3. Give it a proper name
->    > 4. Select a visualization: "line chart (NVD 3) 
+>    > 4. Select a visualization type: "line chart (NVD 3) 
 >    > 5. Click on {% icon tip %} Select data:
->    > * "Provide a label": `The name of the species`
+>    > * "Provide a label": The name of the species like `Pyronia tithonus`
 >    > * "Pick a series color": Choose a color for the line 
->    > * "Data point labels": `Column 1`
->    > * "Values for x-axis": `Column 7`
->    > * "Values for y-axis": `Column 6`
+>    > * "Data point labels": `Column 6` (the nm column) or another one
+>    > * "Values for x-axis": `Column 7` (the "week-year" column)
+>    > * "Values for y-axis": `Column 6` (the nm column)
 >    > 6. Click on {% icon tip %} Customize:
 >    > * "X-Axis label": `Week-Year`
 >    > * Y-Axis label: `nm values`
 >    > 7. Click on {% icon tip %} `Visualize`
->    > 8. Click on {% icon tip %} `save this visualization`if you are willing to save to chart.
+>    > 8. Click on {% icon tip %} `save this visualization` if you are willing to save to chart. You will obtain something like [that](https://openstack-192-168-100-19.genouest.org/u/ylebras/v/pyronia-tithonus-phenology-week-year)
 >   
 > {: .comment}
 
+> ⚠️ Please note, that if you want to create a "stacked" visualization, overlapping each year, you cn use the same "tip" than at the previous step.
 > ⚠️ Please note that it is possible to show the occurrences of more than one species on a single chart. If you are interested in doing so, you should click here : [Various species chart explanations](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Multispecies_tutorial.md#variousoccurencesonasinglechartexplanations)
 
  
@@ -196,32 +196,48 @@ With the `output` from **Merger des colonnes ensemble** you can now generate a n
 This will allow you to create a file showing the abundance per year of a chosen species in a certain site. Based on this file you will then learn how to represent this abundance on a chart. 
 >
 > 1. Look for the tool `Abundance index` with the following parameters:
-> * "Fichier de comptage": `output` from **tabular to CSV**.  
+> * "Fichier de comptage": `output` from **tabular to CSV** (normally renamed "Counting file" and/or tagged "Count").  
 > * "Flight curve output": `output` from **flight curve**.
 
 
 > 🔹 Based on the  `output` from **abundance index**, we can create a chart showing the annual abundance trend of a certain species per site. 
 >    > 1. Select `Charts`
->    > 2. Give it a proper name
->    > 3. Select a visualization: "Bar diagram (NVD 3)" 
+>    > 2. Give it a proper name (`Pyronia tithonus abundance index ` for example)
+>    > 3. Select a visualization type: "Bar diagram (NVD 3)" 
 >    > 4. Select data 
 >    > * "Data point labels": `Column 1` 
 >    > * "Values for x-axis": `Column 3`
 >    > * "Values for y-axis": `Column 4`
+>    > 5. Customize 
+>    > * "X-Axis label": `Year`
+>    > * "Y-Axis label": `regional_gam`
 >    > 5. Visualize
 >    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 
 >   > ### {% icon question %} Questions
 >   >
->    > 1. What do you think about this visualization? Maybe not so good? Search a way to display the content of the file using charts in a more accurate manner... To do so, you can use tools like **Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières**, **Merger des colonnes ensemble** and **Trier les données dans un ordre ascendant ou descendant**
+>    > 1. What do you think about this visualization? Maybe not so good? Search a way to display the content of the file using charts in a more accurate manner... To do so, you can use tools like **Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières**, **Merger des colonnes ensemble**, **Supprimer les premières lignes d'un fichier** , and **Trier les données dans un ordre ascendant ou descendant**
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>You can use the **Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières** tool to first replace `(20[0-9][0-9])` on the column 3 by `-\1` then on the result of this tool execution, replace `"` by nothing on the column 1. Furthermore, you can merge column 1 and column 3 of the resulting dataset. Finally, you can sort the new dataset by column 1 (alphabetical/ascending) and column 3 (alphabetical/ascending). </li>
+>    >    <li>You can use the **Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières** tool to first replace `(20[0-9][0-9])` on the column 3 (the "YEAR" one) by `-\1` then on the result of this tool execution, replace `"` by nothing on the column 1. Furthermore, you can merge column 1 and column 3 of the resulting dataset. Finally, after deleting the first line (the header) with **Supprimer les premières lignes d'un fichier**, you can sort the new dataset by column 1 (alphabetical/ascending) and column 3 (alphabetical/ascending). </li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
+> 🔹 Based on the  new dataset, we can display a better chart showing the annual abundance trend of a certain species per site. 
+>    > 1. Select `Charts`
+>    > 2. Give it a proper name (`Pyronia tithonus abundance index ` for example)
+>    > 3. Select a visualization type: "Bar diagram (NVD 3)" 
+>    > 4. Select data 
+>    > * "Data point labels": `Column 6` 
+>    > * "Values for x-axis": `Column 6`
+>    > * "Values for y-axis": `Column 4`
+>    > 5. Customize 
+>    > * "X-Axis label": `Site-Year`
+>    > * "Y-Axis label": `regional_gam`
+>    > 5. Visualize
+>    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 
 {: .hands_on}
 
@@ -246,6 +262,8 @@ The point of doing a linear regression is to determinate if the year has an infl
 >    > 1. Look for the tool `linear regression` with the following parameters.
 >    > * "Fichier produit par l'outil glmmpql/Expected temporal trend": `output 2` from **temporal trend**. 
 >    > * "Fichier produit par l'outil ab_index": `output` from **abundance index**.
+
+You can then execute the ** Linear regression ajusted ** tool to take into account autocorrelation of model residuals .
 
 {: .hands_on}
  
