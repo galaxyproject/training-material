@@ -35,9 +35,6 @@ scheme to sum up the pipeline used during the tutorial. The idea is to
 give to trainees insight into the content of the tutorial and the (theoretical
 and technical) key concepts they will learn.
 
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
-
 > ### Agenda
 >
 > In this tutorial, we will cover:
@@ -62,35 +59,28 @@ To annotate a genome using Maker, you need the following files:
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create and name a new history for this tutorial.
-> 2. Import the following files from [Zenodo](https://doi.org/10.5281/zenodo.1404209) or from a data
->    library named `GTN - Material` if available (ask your instructor)
+> 2. Import the following files from [Zenodo](https://doi.org/10.5281/zenodo.1404209) or from the shared data library
 >
 >    ```
->    https://zenodo.org/api/files/e0af11ec-289f-4f38-8f19-c821a34d140a/S_pombe_chrIII.fa
->    https://zenodo.org/api/files/e0af11ec-289f-4f38-8f19-c821a34d140a/S_pombe_genome.fna
->    https://zenodo.org/api/files/e0af11ec-289f-4f38-8f19-c821a34d140a/S_pombe_trinity_assembly.fasta
->    https://zenodo.org/api/files/e0af11ec-289f-4f38-8f19-c821a34d140a/Swissprot_no_S_pombe.fasta
+>    https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/augustus_training_1.tar.gz
+>    https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/augustus_training_2.tar.gz
+>    https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/S_pombe_chrIII.fasta
+>    https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/S_pombe_genome.fasta
+>    https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/S_pombe_trinity_assembly.fasta
+>    https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/Swissprot_no_S_pombe.fasta
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
+>    {% include snippets/import_from_data_library.md %}
 >
->    By default, Galaxy uses the url as the name, so please rename them to something more pleasing.
->    {: .tip}
+> 3. Rename the datasets
+> 4. Check that the datatype for `augustus_training_1.tar.gz` an `augustus_training_2.tar.gz` are set to `augsutus`
 >
->    ![upload](../../images/upload_data_page.png "Data can be imported directly with links.")
->
->    > ### {% icon tip %} Tip: Importing data from a data library
->    >
->    > * Go into "Shared data" (top panel) then "Data libraries"
->    > * Click on "GTN - Material", then "Genome Annotation" and then "Genome annotation with Maker"
->    > * Select interesting file
->    > * Click on "Import selected datasets into history"
->    > * Import in a new history
->    {: .tip}
+>    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
 
-You have four datasets:
+You have four main datasets:
 
 - `S_pombe_trinity_assembly.fasta` contains the EST sequences
 - `Swissprot_no_S_pombe.fasta` contanis the protein sequences from SwissProt
@@ -98,6 +88,8 @@ You have four datasets:
 - `S_pombe_chrIII.fa` contains only a fraction of the full genome sequence, ie the chromosome III
 
 For the rest of this tutorial, you need to choose between `S_pombe_chrIII.fa` and `S_pombe_genome.fna`: if you don't have time constraint, use the full genome (`S_pombe_genome.fna`): it will take more time computing, but results will be closer to real-life data. If you want to get results faster, use the chromosome III (`S_pombe_chrIII.fa`). In the rest of this tutorial, we will refer to the file you choose as the genome.
+
+The two other datasets (`augustus_training_1.tar.gz` an `augustus_training_2.tar.gz`) will be used later in the tutorial.
 
 # Genome quality evaluation
 
@@ -118,7 +110,7 @@ Have a look at the statistics:
 - `len_min`, `len_max`, `len_N50`, `len_mean`, `len_median`: the distribution of contig sizes
 - `num_bp_not_N`: the number of bases that are not N, it should be as close as possible to the total number of bases (`num_bp`)
 
-These statistics are useful to detect obvious problems in the genome assembly, but it gives no information about the quality of the sequence content. We want to know if the genome sequence contains all the genes we expect to find in the considered species, and if their sequence are correct.
+These statistics are useful to detect obvious problems in the genome assembly, but it gives no information about the quality of the sequence content. We want to evaluate if the genome sequence contains all the genes we expect to find in the considered species, and if their sequence are correct.
 
 [BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to answer this question: by comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, ...). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a genome sequence or a set of (predicted) transcript or protein sequences. This is a good evluation of the "completeness" of the genome or annotation.
 
@@ -174,15 +166,23 @@ For this first round, we configure Maker to construct gene models only by aligni
 >
 > 1. **Maker** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select the genome sequence from your history
+>    - *"Re-annotate using an existing Maker annotation"*: `No`
 >    - *"Organism type"*: `Eukaryotic`
 >    - In *"EST evidences (for best results provide at least one of these)"*:
 >        - *"Infer gene predictions directly from all ESTs"*: `Yes`
+>        - {% icon param-file %} *"ESTs or assembled cDNA"*: `S_pombe_trinity_assembly.fasta`
 >    - In *"Protein evidences (for best results provide at least one of these)"*:
 >        - *"Infer gene predictions directly from all protein alignments"*: `Yes`
+>        - {% icon param-file %} *"Protein sequences"*: `Swissprot_no_S_pombe.fasta`
+>    - In *"Ab-initio gene prediction"*:
+>        - *"Prediction with Augustus"*: `Don't use Augustus to predict genes`
 >    - In *"Repeat masking"*:
->        - *"Enable repeat masking with RepeatMasker"*: `No`
+>        - *"Repeat library source"*: `Disable repeat masking (not recommended)`
 >
->    ***TODO***: *Check repeatmasking option*
+>    > ### {% icon comment %} Comment
+>    >
+>    > For this tutorial repeat masking is disabled, which is not the recommended setting. When doing a real-life annotation, you should either provide your own repeats library, or use [RepBase](https://www.girinst.org/repbase/). As RepBase is not free to use, you will need to download manually the RepBaseRepeatMaskerEdition file and upload the enclosed EMBL format file (`RMRBSeqs.embl`) to use with Maker.
+>    {: .comment}
 >
 {: .hands_on}
 
@@ -247,9 +247,10 @@ Now run BUSCO with the predicted transcript sequences:
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 713 genes, 752 transcripts for the full genome (501 and 531 if using chromosome III)
-> > 2. 993 bp for the full genome (981 bp if using chromosome III)
-> > 3. 40 complete single-copy, 6 duplicated, 9 fragmented, 235 missing for the full genome (45, 2, 7 and 236 if using chromosome III). This is far from what BUSCO found in the genome sequence, which means the quality of this first draft is not very good.
+> > These numbers are for the full genome only (not the chromosome III).
+> > 1. 713 genes, 752 transcripts
+> > 2. 993 bp
+> > 3. 40 complete single-copy, 6 duplicated, 9 fragmented, 235 missing. This is far from what BUSCO found in the genome sequence, which means the quality of this first draft is not very good.
 > >
 > {: .solution}
 >
@@ -262,21 +263,15 @@ The statistics are not really satisfactory at this stage, but it's normal: Maker
 
 Maker can use several ab-initio predictors to annotate a genome. "Ab-initio" means that these predictors are able to predict the structure of genes in a genome based only on its sequence and on a species-specific statistical model. They don't use any evidence (e.g. EST or proteins) to predict genes, but they need to be trained with a set of already predicted genes.
 
-Maker is able to use the EST and protein evidences, and to combine them with the result of several ab-initio predictors to predict consensus gene models. It allows to detect genes in regions where no EST or protein align, and also to refine gene structures in regions where there is EST and/or proteins evidences and ab-initio predictions.
+Maker is able to use the EST and protein evidences, and to combine them with the result of several ab-initio predictors to predict consensus gene models. It allows to detect genes in regions where no EST or protein align, and also to refine gene structures in regions where there are EST and/or protein evidences and ab-initio predictions.
 
-We will use two of the most widely used ab-initio predictors SNAP and Augustus. Before using it within Maker, we need to train them with the first annotation draft we produced in the previous steps. We know the quality of this draft is not perfect, but only the best scoring genes (ie the ones having the strongest evidences) will be retained to train the predictors.
+We will use two of the most widely used ab-initio predictors: SNAP and Augustus. Before using it within Maker, we need to train them with the first annotation draft we produced in the previous steps. We know the quality of this draft is not perfect, but only the best scoring genes (ie the ones having the strongest evidences) will be retained to train the predictors.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Train SNAP** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select the genome sequence from your history
 >    - {% icon param-file %} *"Maker annotation to use for training"*: `final annotation` (output of **Maker** {% icon tool %})
->    - *"Number of gene model to use for training"*: `"1000"` ***TODO should we reduce it with our small genome?***
->
->    > ### {% icon comment %} Comment
->    >
->    > The parameter "Number of gene model to use for training" set to `"1000"` means that SNAP will be trained on the 1000 best-scoring genes.
->    {: .comment}
 >
 {: .hands_on}
 
@@ -291,16 +286,16 @@ Augustus is trained in a very similar way.
 >
 {: .hands_on}
 
-The Augustus training usually take around 2 hours to complete, to continue this tutorial without waiting for the result, you can get it from Zenodo. ***TODO***
-
 Both SNAP and Augustus produce a statistical model representing the observed general structure of genes in the analysed genome. Maker will use these models to create a new annotation for our genome.
+
+The Augustus training usually take around 2 hours to complete, to continue this tutorial without waiting for the result, you can use the file `augustus_training_1.tar.gz` imported from Zenodo.
 
 # Second Maker annotation round
 
 ## Maker
 
-We need now to run a new round of Maker. As the evidences were already aligned on the genome on the first run, we can reuse these alignments.
-This time, enable ab-initio gene prediction, and input the output of **Train SNAP** {% icon tool %} and **Train Augustus** {% icon tool %} tools.
+We need now to run a new round of Maker. As the evidences were already aligned on the genome on the first run, we can reuse these alignments as is.
+But this time, enable ab-initio gene prediction, and input the output of **Train SNAP** {% icon tool %} and **Train Augustus** {% icon tool %} tools.
 We also disable infering gene predictions directly from all ESTs and proteins: now we want Maker to infer gene predictions by reconciliating evidence alignments *and* ab-initio gene predictions.
 
 > ### {% icon hands_on %} Hands-on: Second draft annotation with Maker
@@ -309,7 +304,7 @@ We also disable infering gene predictions directly from all ESTs and proteins: n
 >    - {% icon param-file %} *"Genome to annotate"*: select the genome sequence from your history
 >    - *"Organism type"*: `Eukaryotic`
 >    - *"Re-annotate using an existing Maker annotation"*: `Yes`
->        - *"Previous Maker annotation"*: `evidences` (output of the previous **Maker** {% icon tool %} run)
+>        - {% icon param-file %} *"Previous Maker annotation"*: `evidences` (output of the previous **Maker** {% icon tool %} run)
 >        - *"Re-use ESTs"*: `Yes`
 >        - *"Re-use alternate organism ESTs"*: `Yes`
 >        - *"Re-use protein alignments"*: `Yes`
@@ -321,9 +316,9 @@ We also disable infering gene predictions directly from all ESTs and proteins: n
 >    - In *"Ab-initio gene prediction"*:
 >        - *"SNAP model"*: `snap model` (output of **Train SNAP** {% icon tool %})
 >        - *"Prediction with Augustus"*: `Run Augustus with a custom prediction model`
->        - *"Augustus model"*: `augustus model` (output of **Train Augustus** {% icon tool %})
+>            - {% icon param-file %} *"Augustus model"*: `augustus model` (output of **Train Augustus** {% icon tool %})
 >    - In *"Repeat masking"*:
->        - *"Enable repeat masking with RepeatMasker"*: `No`
+>        - *"Repeat library source"*: `Disable repeat masking (not recommended)`
 >
 {: .hands_on}
 
@@ -404,6 +399,8 @@ To get better results, we are going to perform a second training of SNAP and Aug
 >
 {: .hands_on}
 
+The Augustus training usually take around 2 hours to complete, to continue this tutorial without waiting for the result, you can use the file `augustus_training_2.tar.gz` imported from Zenodo.
+
 # Third (last) Maker annotation round
 
 ## Maker
@@ -416,7 +413,7 @@ Let's run the final round of Maker, in the same way as we did for the second run
 >    - {% icon param-file %} *"Genome to annotate"*: select the genome sequence from your history
 >    - *"Organism type"*: `Eukaryotic`
 >    - *"Re-annotate using an existing Maker annotation"*: `Yes`
->        - *"Previous Maker annotation"*: `evidences` (output of the previous second **Maker** {% icon tool %} run)
+>        - {% icon param-file %} *"Previous Maker annotation"*: `evidences` (output of the previous second **Maker** {% icon tool %} run)
 >        - *"Re-use ESTs"*: `Yes`
 >        - *"Re-use alternate organism ESTs"*: `Yes`
 >        - *"Re-use protein alignments"*: `Yes`
@@ -426,11 +423,11 @@ Let's run the final round of Maker, in the same way as we did for the second run
 >    - In *"Protein evidences (for best results provide at least one of these)"*:
 >        - *"Infer gene predictions directly from all protein alignments"*: `No`
 >    - In *"Ab-initio gene prediction"*:
->        - *"SNAP model"*: `snap model` (output of **Train SNAP** {% icon tool %})
+>        - {% icon param-file %} *"SNAP model"*: `snap model` (output of **Train SNAP** {% icon tool %})
 >        - *"Prediction with Augustus"*: `Run Augustus with a custom prediction model`
->        - *"Augustus model"*: `augustus model` (output of **Train Augustus** {% icon tool %})
+>        - {% icon param-file %} *"Augustus model"*: `augustus model` (output of **Train Augustus** {% icon tool %})
 >    - In *"Repeat masking"*:
->        - *"Enable repeat masking with RepeatMasker"*: `No`
+>        - *"Repeat library source"*: `Disable repeat masking (not recommended)`
 >
 {: .hands_on}
 
@@ -479,11 +476,13 @@ Now run BUSCO with the predicted transcript sequences:
 
 > ### {% icon question %} Questions
 >
-> 1. How do the second annotation compare to the previous ones? Did the second ab-initio predictors training improve the results?
+> 1. How do you explain the evolution of the gene number?
+> 2. How do the third annotation compare to the previous ones? Did the second ab-initio predictors training improve the results?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Oh yes, a little better, because of x and y ***TODO***
+> > 1. We now get 4,767 genes instead of 5,036 after the preivous round. But you'll notice that the average gene length have increased from 1,562 to 1,658. It means that in this third round, Maker was able to merge some genes that were considered separate beforehand.
+> > 2. The annotation looks a little better: BUSCO found 256 complete single-copy instead of 253, 5,036 genes instead of 713. Genes are also longer, and have more exons, which means Maker was able to predict genes with more complex structure.
 > >
 > {: .solution}
 >
@@ -504,7 +503,7 @@ If you look at the content of the `final annotation` dataset, you will notice th
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > You can replace `TEST` by anything you like, usually an uppercase short prefix.
+>    > Genes will be renamed to look like: `TEST001234`. You can replace `TEST` by anything you like, usually an uppercase short prefix.
 >    {: .comment}
 >
 {: .hands_on}
@@ -520,19 +519,18 @@ With Galaxy, you can visualize the annotation you have generated using JBrowse. 
 >
 > 1. **JBrowse** {% icon tool %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
->    - *"Select the reference genome"*: select the genome sequence from your history
->    - *"Produce Standalone Instance"*: `Yes`
->    - *"Genetic Code"*: ``
->    - Insert a *"Track Group"*:
+>        - {% icon param-file %} *"Select the reference genome"*: select the genome sequence from your history
+>    - *"JBrowse-in-Galaxy Action"*: `New JBrowse Instance`
+>    - In *"Track Group"*:
+>        - Click on *"Insert Track Group"*:
 >        - In *"1: Track Group"*:
 >            - *"Track Category"*: `Maker annotation`
->            - Insert an *"Annotation Track"*:
+>            - In *"Annotation Track"*:
+>                - Click on *"Insert Annotation Track"*:
 >                - In *"1: Annotation Track"*:
 >                    - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
->                    - *"GFF/GFF3/BED Track Data"*: select the final annotation of each Maker run
+>                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the final annotation of each **Maker** {% icon tool %} run
 >                    - *"This is match/match_part data"*: `No`
->                    - *"Index this track"*: `No`
->    - *""*: `""`
 >
 {: .hands_on}
 
@@ -554,5 +552,13 @@ With Galaxy, you can visualize the annotation you have generated using JBrowse. 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+Congratulations, you finished this tutorial! You learned how to annotate an eukaryotic genome using Maker, how to evaluate the quality of the annotation, and how to visualize it using the JBrowse genome browser.
+
+***TODO overview image of the pipeline used***
+
+
+## What's next?
+
+After generating your annotation, you will probably want to automatically assign functional annotation to each predicted gene model. You can do it by using Blast, InterProScan, or Blast2GO for example.
+
+An automatic annotation of an eukaryotic genome is rarely perfect. If you inspect some predicted genes, you will probably find some mistakes made by Maker, e.g. wrong exon/intron limits, splitted genes, or merged genes. Setting up a manual curation project using [Apollo](http://genomearchitect.org/) helps a lot to manually fix these errors.
