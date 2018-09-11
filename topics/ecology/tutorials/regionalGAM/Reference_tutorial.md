@@ -50,7 +50,7 @@ First of all, you will have to upload the files on [Galaxy-E](https://openstack-
 >    > 2. To import the dataset:
 >    > * Select **Paste/Fetch data**
 >    > * Paste the link into the text field
->    > * Choose the type: CSV
+>    > * Galaxy will normally automatically find the right format, here CSV, so you don't have to specify it
 >    > * Press **Start** and **Close** the window
 
 >    {: .tip}
