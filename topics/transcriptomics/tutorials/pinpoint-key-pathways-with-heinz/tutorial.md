@@ -39,10 +39,13 @@ in Galaxy.
 > reference data versions or stochastic processes in the algorithms.
 {: .comment}
 
+In this tutorial, we will reproduce Heinz workflow step by step; here is a picture of the whole workflow we are going to make.
+
+![Heinz workflow](../../images/heinz-workflow.png)
 
 # Obtaining and preparing data
 
-In this tutorial we use KO ([KEGG Orthology](https://www.genome.jp/kegg/ko.html)) count data as the input of our workflow, the upstream operations that transform the raw sequence data to KO counts are not included in this tutorial, but can still be done using Galaxy. All data needed for this tutorial are available from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1344105.svg)](https://doi.org/10.5281/zenodo.1344105)
+We use KO ([KEGG Orthology](https://www.genome.jp/kegg/ko.html)) count data as the starting point, so the upstream operations that transform the raw sequence data to KO counts are not included in this tutorial, which can still be done within Galaxy. All data needed for this tutorial are available from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1344105.svg)](https://doi.org/10.5281/zenodo.1344105)
 
 ## Understanding our input data
 
@@ -183,6 +186,7 @@ There are a few canned tools commonly used for DEA, like [Limma](https://biocond
 >   - "Specify a factor name" to `dental_caries` (in "1: Factor")
 >   - "Specify a factor level" to `CP`, "Counts file(s)" to `CP` by clicking the "Dataset collections" icon (in "1: Factor level")
 >   - "Specify a factor level" to `CN`, "Counts file(s)" to `CN` by clicking the "Dataset collections" icon (in "2: Factor level")
+>   - "Files have header" to `No`
 >   - "Visualising the analysis results" to `No`
 >   - Leave all other parameters to the default settings <br><br>
 >
@@ -280,11 +284,18 @@ After getting Heinz scores, let's run Heinz program to find the optimal subnetwo
 >
 > - **Identify optimal scoring subnetwork** {% icon tool %} with the following parameters
 >   - "File containing Heinz scores" to the output of **Calculate a Heinz score**
->   - "Edge file" to the edge file just uploaded <br><br>
+>   - "Edge file" to the edge file uploaded <br><br>
 >
 {: .hands_on}
 
-It might takes a few minutes to get the result. (For some tasks, it might take a few hours to get a result in practice)
+It usually takes a few minutes to get the result. (For some tasks, it might take a few hours to get a result in practice)
+
+> ### {% icon tip %} Tip: running time of the program
+>
+> * Graph problem is way more complicated than we thought.
+> * It might take much longer time for some complicated datasets.
+> * We can use multiple CPUs to accelerate the computation (for now, this function is not available in Galaxy yet), but, to use that, you can install Heinz directly via [Bioconda](https://anaconda.org/bioconda/heinz) in a Linux environment.
+{: .tip}
 
 ## Visualize the output: visualize the optimal subnetwork
 
@@ -297,3 +308,7 @@ we are going to use in Galaxy, you may consider using eXamine plugin in Cytoscap
 >   - "Heinz output file" to the output of **Identify optimal scoring subnetwork** <br><br>
 >
 {: .hands_on}
+
+# Save the history into a workflow
+
+At the end of the tutorial, you may save all of your correct operations into a workflow, which you can reuse for different datasets next time.
