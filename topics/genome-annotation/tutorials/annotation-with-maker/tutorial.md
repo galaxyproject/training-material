@@ -9,7 +9,7 @@ tags:
   - eukaryote
 questions:
   - How to annotate an eukaryotic genome?
-  - How to evaluate and visualize annotated genomic fearures?
+  - How to evaluate and visualize annotated genomic features?
 objectives:
   - Load genome into Galaxy
   - Annotate genome with Maker
@@ -74,7 +74,7 @@ To annotate a genome using Maker, you need the following files:
 >    {% include snippets/import_from_data_library.md %}
 >
 > 3. Rename the datasets
-> 4. Check that the datatype for `augustus_training_1.tar.gz` an `augustus_training_2.tar.gz` are set to `augsutus`
+> 4. Check that the datatype for `augustus_training_1.tar.gz` an `augustus_training_2.tar.gz` are set to `augustus`
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
@@ -84,10 +84,10 @@ You have four main datasets:
 
 - `S_pombe_trinity_assembly.fasta` contains the EST sequences
 - `Swissprot_no_S_pombe.fasta` contanis the protein sequences from SwissProt
-- `S_pombe_genome.fna` contains the full genome sequence
-- `S_pombe_chrIII.fa` contains only a fraction of the full genome sequence, ie the chromosome III
+- `S_pombe_genome.fasta` contains the full genome sequence
+- `S_pombe_chrIII.fasta` contains only a fraction of the full genome sequence, ie the chromosome III
 
-For the rest of this tutorial, you need to choose between `S_pombe_chrIII.fa` and `S_pombe_genome.fna`: if you don't have time constraint, use the full genome (`S_pombe_genome.fna`): it will take more time computing, but results will be closer to real-life data. If you want to get results faster, use the chromosome III (`S_pombe_chrIII.fa`). In the rest of this tutorial, we will refer to the file you choose as the genome.
+For the rest of this tutorial, you need to choose between `S_pombe_chrIII.fasta` and `S_pombe_genome.fasta`: if you don't have time constraint, use the full genome (`S_pombe_genome.fasta`): it will take more time computing, but results will be closer to real-life data. If you want to get results faster, use the chromosome III (`S_pombe_chrIII.fasta`). In the rest of this tutorial, we will refer to the file you choose as the genome.
 
 The two other datasets (`augustus_training_1.tar.gz` an `augustus_training_2.tar.gz`) will be used later in the tutorial.
 
@@ -153,7 +153,7 @@ BUSCO produces three output datasets
 
 > ### {% icon comment %} Comment
 >
-> If you chose to use only the chromosome III sequence (`S_pombe_chrIII.fa`), the statistics will be different. The genome size will be lower, with only 1 chromosome. The BUSCO result will also show a lot of missing genes: it is expected as all the BUSCO genes that are not on the chromosome III cannot be found by the tool. Keep it in mind when comparing these results with the other BUSCO results later.
+> If you chose to use only the chromosome III sequence (`S_pombe_chrIII.fasta`), the statistics will be different. The genome size will be lower, with only 1 chromosome. The BUSCO result will also show a lot of missing genes: it is expected as all the BUSCO genes that are not on the chromosome III cannot be found by the tool. Keep it in mind when comparing these results with the other BUSCO results later.
 {: .comment}
 
 # First Maker annotation round
@@ -439,7 +439,7 @@ Do we get a better result from Maker after this third run? Let's run the same to
 > ### {% icon hands_on %} Hands-on: Get annotation statistics
 >
 > 1. **Genome annotation statistics** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotation to analyse"*: `final annotation` (output of **Maker** {% icon tool %} second run)
+>    - {% icon param-file %} *"Annotation to analyse"*: `final annotation` (output of **Maker** {% icon tool %} third run)
 >    - *"Reference genome"*: `Use a genome from history`
 >        - {% icon param-file %} *"Corresponding genome sequence"*: select the genome sequence from your history
 >
@@ -451,7 +451,7 @@ Do we get a better result from Maker after this third run? Let's run the same to
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **gffread** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input GFF3 or GTF feature file"*: `final annotation` (output of **Maker** {% icon tool %} second run)
+>    - {% icon param-file %} *"Input GFF3 or GTF feature file"*: `final annotation` (output of **Maker** {% icon tool %} third run)
 >    - *"Reference Genome"*: `select the genome sequence from your history`
 >        - *"Select fasta outputs"*:
 >           - `fasta file with spliced exons for each GFF transcript (-w exons.fa)`
@@ -488,7 +488,7 @@ Now run BUSCO with the predicted transcript sequences:
 >
 {: .question}
 
-Experience shows that no more than two rounds of training is needed to get the best results from the ab-initio predictors. You can try to retrain Augustus and SNAP, but you will probably notice very few changes. We will keep the final annotation we obtained for the rest of this tutorial.
+Usually no more than two rounds of training is needed to get the best results from the ab-initio predictors. You can try to retrain Augustus and SNAP, but you will probably notice very few changes. We will keep the final annotation we obtained for the rest of this tutorial.
 
 ## Improving gene naming
 
@@ -534,28 +534,55 @@ With Galaxy, you can visualize the annotation you have generated using JBrowse. 
 >
 {: .hands_on}
 
-***TODO Go to region XXX for example***
+Enable the three different tracks on the left side of JBrowse, then navigate along the genome and compare the three different annotations. You should see how Maker progressively produced more complex gene models.
 
 > ### {% icon question %} Questions
 >
-> 1. How do the three annotations compare in the genome browser? Is it consistent with the annotation statistics and BUSCO results you obtained before?
+> Navigate to the sequence named `NC_003421.2` (NCBI identifier for Chromosome III), between positions `41800` and `45200`.
+> ![JBrowse navigation](../../images/jbrowse_navigate.png "Navigating to the given sequence and positions.")
+> 1. How did the annotation improved in this region after each Maker round?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. TODO
+> > 1. At the end of the first round, no gene model was predicted by Maker in this region, because not enough EST or protein could be aligned there.
+> > After the second round, Maker was able to predict a first gene model with no intron. Notice the name of the model beginning with `snap_masked`: it means that Maker used mainly a gene prediction from SNAP to construct this gene model.
+> > After the third round, there are two gene models, more complex as they contain introns. Training Augustus and SNAP allowed to refine the gene structures and to detect a new gene.
 > >
 > {: .solution}
 >
 {: .question}
 
+### More visualisation
+
+You might want to understand how a specific gene model was predicted by Maker. You can easily visualise the evidences used by Maker (EST ailgnements, protein aligments, ab-initio predictions, ...) by using JBrowse too.
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **JBrowse** {% icon tool %} with the following parameters:
+>    - *"Reference genome to display"*: `Use a genome from history`
+>        - {% icon param-file %} *"Select the reference genome"*: select the genome sequence from your history
+>    - *"JBrowse-in-Galaxy Action"*: `Update existing JBrowse Instance`
+>    - *"Previous JBrowse Instance"*: select the result from the previous **JBrowse** {% icon tool %} run
+>    - In *"Track Group"*:
+>        - Click on *"Insert Track Group"*:
+>        - In *"1: Track Group"*:
+>            - *"Track Category"*: `Maker evidences`
+>            - In *"Annotation Track"*:
+>                - Click on *"Insert Annotation Track"*:
+>                - In *"1: Annotation Track"*:
+>                    - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
+>                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the "evidences" output of each **Maker** {% icon tool %} run
+>                    - *"This is match/match_part data"*: `Yes`
+>                        - *"Match Part Feature Type"*: Leave empty
+>
+{: .hands_on}
+
+You will now see three new tracks displaying all the evidences used by Maker to generate consensus gene models.
 
 # Conclusion
 {:.no_toc}
 
 Congratulations, you finished this tutorial! You learned how to annotate an eukaryotic genome using Maker, how to evaluate the quality of the annotation, and how to visualize it using the JBrowse genome browser.
-
-***TODO overview image of the pipeline used***
-
 
 ## What's next?
 
