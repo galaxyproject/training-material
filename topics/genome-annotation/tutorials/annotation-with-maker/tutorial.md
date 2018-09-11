@@ -27,13 +27,21 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
+Genome annotation of eukaryotes is a little mote complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+In this tutorial we will use a software tool called Maker to annotate the genome sequence of a small eukaryote: Schizosaccharomyces pombe (a yeast).
+
+Maker is able to annotate both prokaryotes and eukaryotes. It works by aligning as many evidences as possible along the genome sequence, and then reconciliating all these signals to determine probable gene structures.
+
+The evidences can be transcript or protein sequences from the same (or closely related) organism. These sequences can come from public databases (like NR or GenBank) or from your own experimental data (transcriptome assembly from an RNASeq experiment for example). Maker is also able to take into account repeated elements.
+
+Maker uses ab-initio predictors (like [Augustus](http://bioinf.uni-greifswald.de/augustus/) or [SNAP](https://github.com/KorfLab/SNAP)) to improve its predictions: these software tools are able to make gene structure predictions by analysing only the genome sequence with a statistical model.
+
+In this tutorial you will learn how to perform a genome annotation, and how to evaluate its quality. You will see how training ab-initio predictors is an important step to produce good results. Finally, you will learn how to use the [JBrowse](http://jbrowse.org/) genome browser to visualise the results.
+
+More information about Maker can be found [here](http://www.yandell-lab.org/software/maker.html).
+
+This tutorial was inspired by the MAKER Tutorial for [WGS Assembly and Annotation Winter School 2018 ](http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018), don't hesitate to consult it for more information on Maker, and on how to run it with command line.
 
 > ### Agenda
 >
@@ -490,7 +498,7 @@ Now run BUSCO with the predicted transcript sequences:
 
 Usually no more than two rounds of training is needed to get the best results from the ab-initio predictors. You can try to retrain Augustus and SNAP, but you will probably notice very few changes. We will keep the final annotation we obtained for the rest of this tutorial.
 
-## Improving gene naming
+# Improving gene naming
 
 If you look at the content of the `final annotation` dataset, you will notice that the gene names are long, complicated, and not very readable. That's because Maker assign them automatic names based on the way it computed each gene model. We are now going to automatically assign more readable names.
 
@@ -511,7 +519,7 @@ If you look at the content of the `final annotation` dataset, you will notice th
 Look at the generated dataset, it should be much more readable, and ready for an official release.
 
 
-## Visualising the results
+# Visualising the results
 
 With Galaxy, you can visualize the annotation you have generated using JBrowse. This allows you to navigate along the chromosomes of the genome and see the structure of each predicted gene.
 
@@ -552,7 +560,7 @@ Enable the three different tracks on the left side of JBrowse, then navigate alo
 >
 {: .question}
 
-### More visualisation
+## More visualisation
 
 You might want to understand how a specific gene model was predicted by Maker. You can easily visualise the evidences used by Maker (EST ailgnements, protein aligments, ab-initio predictions, ...) by using JBrowse too.
 
@@ -584,7 +592,7 @@ You will now see three new tracks displaying all the evidences used by Maker to 
 
 Congratulations, you finished this tutorial! You learned how to annotate an eukaryotic genome using Maker, how to evaluate the quality of the annotation, and how to visualize it using the JBrowse genome browser.
 
-## What's next?
+# What's next?
 
 After generating your annotation, you will probably want to automatically assign functional annotation to each predicted gene model. You can do it by using Blast, InterProScan, or Blast2GO for example.
 
