@@ -118,7 +118,7 @@ This step will allow you to compute and display the phenology of a species. In t
 
 
 > 1. Search for the tool `flight curve` on the "Phenology & Abundance Index tool section" and execute it specifying the following parameters: 
-> * "Count file": output file you jus generated with the **tabular to CSV** tool.
+> * "Count file": output file you just generated with the **tabular to CSV** tool.
 >
 > 🔹 Based on the `output` from **flight curve**, you can create a line chart which shows species occurences through the years on a very visual material 
 
@@ -133,7 +133,7 @@ If you want to access the chart on an interactive interface, you can click on th
 >    > 3. Give it a proper name like `Pyronia tithonus phenology`
 >    > 4. Select a visualization type: "line chart (NVD 3)" 
 >    > 5. Click on {% icon tip %} Select data:
->    > * "Provide a label": `The name of the species`
+>    > * "Provide a label": For example the name of the species, `Pyronia tithonus` here
 >    > * "Pick a series color": Choose a color for the line 
 >    > * "Data point labels": `Column 1`
 >    > * "Values for x-axis": `Column 2`
@@ -147,31 +147,31 @@ If you want to access the chart on an interactive interface, you can click on th
 >
 > ### {% icon comment %} Comments
 >
-> ⚠️ Please note, that if you want to create a "stacked" visualization, overlapping each year, you can use several executions (one execution by year) of the `Filtrer des données sur une colonne en utilisant des expressions simples` tool specifying the year you want on the `condition suivante` parameter, `c2==2004` for 2004, then `c2==2005` for 2005, etc... then you can paste all resulting files side by side using one or several executions of the `Coller deux jeux de données l'un à côté de l'autre` tool so you can specify on the "Select Data" tab of visualization, several Data series (one by year).
+> ⚠️ Please note, that if you want to create a "stacked" visualization, overlapping each year, you can use several executions (one execution by year) of the `Filter data on any column using simple expressions` tool specifying the year you want on the `With following condition` parameter, `c2==2003` for 2003, then `c2==2004` for 2004, etc... then you can paste all resulting files side by side using one or several executions of the `Paste two files side by side` tool so you can specify on the "Select Data" tab of visualization, several Data series (one by year).
 > ⚠️ Please note, that if you want your chart to be more precise and to specify that the x-axis corresponds to "Week and year", it is possible. In order to do so, follow the tip below:
 >    > ### {% icon tip %} Tip: Creating a new column of the dataset containing the week and the year 
 First of all, you have to know how many years are taken into account in your dataset.
->    > 1. Search for the tool `Compter le nombre d'occurrences de chaque enregistrement` with the following parameters 
->    > * "Sur le jeu de données": `output` from **trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières**.
+>    > 1. Search for the tool `Count occurrences of each record` with the following parameters 
+>    > * "from dataset": output from **Replace Text in a specific column**.
 >    > * "Select": `Column 3` (the on headed with `YEAR`)
->    > * "Délimité par": `Tabulation`.
->    > * "Comment les résultats doivent t'ils être triés ?": `Par les valeurs comptées`.
+>    > * "Delimited by": `Tab`.
+>    > * "How should the results be sorted?": `By the values being counted`.
 >    > 2. Inspect the file by clicking on the `eye` icon to check how many years are taken into account.
->    > 3. Search for the tool`Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières` with the following parameters:
->    > * "Selectionner les cellules à partir de": `output` from **flight curve**.
->    > * "la colonne": `Column 2` (corresponding to the one headed with `YEAR`)
+>    > 3. Use the `Replace Text in a specific column` tool with the following parameters:
+>    > * "File to process": output file from **flight curve**.
+>    > * "in column": `Column 2` (corresponding to the one headed with `YEAR`)
 >    > * Click on `Insert check`:
->    >   * "Trouver l'expression suivante": `(20[0-9][0-9])`
->    >   * "Remplacement": `-\1` 
+>    >   * "Find pattern": `(20[0-9][0-9])`
+>    >   * "Replace with": `-\1` 
 >    > 5. Inspect the file by clicking on the `eye` icon to check if all the years are now written with a "-" before the digits. 
->    > 6. Search for the tool `Merger des colonnes ensemble` with the following parameters:
->    > * "Selection du jeu de données": `output` from the last **Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières**.
->    > * "Merger les colonnes": `Column 3`(corresponding to the one headed with `WEEK`)
->    > * "avec les colonnes": `Column 2`(corresponding to the one headed with `YEAR`)
+>    > 6. Search for the tool `Merge Columns together` with the following parameters:
+>    > * "Select data": output from the last **Replace Text in a specific column**.
+>    > * "Merge column": `Column 3`(corresponding to the one headed with `WEEK`)
+>    > * "with column": `Column 2`(corresponding to the one headed with `YEAR`)
 
-With the `output` from **Merger des colonnes ensemble** you can now generate a new chart which will have a x-axis corresponding to your column `Column "week""year"`.
->    > ### {% icon tip %} Visualiser
->    > 1. With the  `output` from **Merger des colonnes ensemble**.
+With the `output` from **Merge Columns together** you can now generate a new chart which will have a x-axis corresponding to your column `Column "week""year"`.
+>    > ### {% icon tip %} Visualize
+>    > 1. With the  `output` from **Merge Columns together**.
 >    > 2. Select `Charts`
 >    > 3. Give it a proper name
 >    > 4. Select a visualization type: "line chart (NVD 3) 
@@ -198,11 +198,11 @@ With the `output` from **Merger des colonnes ensemble** you can now generate a n
 This will allow you to create a file showing the abundance per year of a chosen species in a certain site. Based on this file you will then learn how to represent this abundance on a chart. 
 >
 > 1. Look for the tool `Abundance index` with the following parameters:
-> * "Fichier de comptage": `output` from **tabular to CSV** (normally renamed "Counting file" and/or tagged "Count").  
+> * "Count file": `output` from **tabular to CSV** (normally renamed "Counting file" and/or tagged "Count").  
 > * "Flight curve output": `output` from **flight curve**.
 
 
-> 🔹 Based on the  `output` from **abundance index**, we can create a chart showing the annual abundance trend of a certain species per site. 
+> 🔹 Based on the  output from **abundance index**, we can create a chart showing the annual abundance trend of a certain species per site. 
 >    > 1. Select `Charts`
 >    > 2. Give it a proper name (`Pyronia tithonus abundance index ` for example)
 >    > 3. Select a visualization type: "Bar diagram (NVD 3)" 
@@ -218,12 +218,12 @@ This will allow you to create a file showing the abundance per year of a chosen 
 
 >   > ### {% icon question %} Questions
 >   >
->    > 1. What do you think about this visualization? Maybe not so good? Search a way to display the content of the file using charts in a more accurate manner... To do so, you can use tools like **Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières**, **Merger des colonnes ensemble**, **Supprimer les premières lignes d'un fichier** , and **Trier les données dans un ordre ascendant ou descendant**
+>    > 1. What do you think about this visualization? Maybe not so good? Search a way to display the content of the file using charts in a more accurate manner... To do so, you can use tools like **Replace Text in a specific column**, **Merge Columns together**, **Remove beginning of a file** , and **Sort data in ascending or descending order**
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>You can use the **Trouver et Remplacer des patterns dans des colonnes en utilisant des expressions régulières** tool to first replace `(20[0-9][0-9])` on the column 3 (the "YEAR" one) by `-\1` then on the result of this tool execution, replace `"` by nothing on the column 1. Furthermore, you can merge column 1 and column 3 of the resulting dataset. Finally, after deleting the first line (the header) with **Supprimer les premières lignes d'un fichier**, you can sort the new dataset by column 1 (alphabetical/ascending) and column 3 (alphabetical/ascending). </li>
+>    >    <li>You can use the **Replace Text in a specific column** tool to first replace `(20[0-9][0-9])` on the column 3 (the "YEAR" one) by `-\1` then on the result of this tool execution, replace `"` by nothing on the column 1. Furthermore, you can merge column 1 and column 3 of the resulting dataset. Finally, after deleting the first line (the header) with **Remove beginning of a file**, you can sort the new dataset by column 1 (alphabetical/ascending) and column 3 (alphabetical/ascending). </li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -249,7 +249,7 @@ The expected temporal trend allows you to have an overview of the evolution of a
 
 > ### {% icon hands_on %} Hands-on: Expected temporal trend
 >    > 1. Look for the tool `Expected temporal trend` with the the following parameters: 
->    > * "Fichier tabulé, produit par l'outil ab_index": `output` from **abundance index**.
+>    > * "Tabular file generated by the ab_index tool": output from **abundance index**.
 >    
 ![Expected temporal trend](https://raw.githubusercontent.com/Claraurf/training-material/ecology/topics/ecology/tutorials/regionalGAM/Images/Expected%20temporal%20trend.png "This shows the expected evolution of Aglais io")
 
