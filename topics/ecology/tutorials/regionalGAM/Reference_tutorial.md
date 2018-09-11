@@ -43,7 +43,7 @@ First of all, you will have to upload the files on [Galaxy-E](https://openstack-
 >    ```
 >   
 > ### {% icon tip %} Tip: Importing data via links
->    > 1. Search for the tool `Téléverser un ou plusieurs fichiers de votre ordinateur ou d'un serveur distant`
+>    > 1. Click on the [upload button](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/upload.PNG "Galaxy upload access button")
 >    > 2. To import the dataset, you have two options:
 >    > * Select **Paste/Fetch data**
 >    > * Paste the link into the text field
