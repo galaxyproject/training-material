@@ -67,15 +67,14 @@ When the dataset contains many details, it lengthens the file processing time th
 > ### {% icon hands_on %} Hands-on: hiding some informations
 
 >    > 1. Use the `CSV to tabular` tool to first create a tabular file from your csv one (with only one species). This is a mandatory step as further tools are only working on tabular files!
->    > 2. Search for the tool `trouver et remplacer des patterns dans des colonnes` on the file on CSV with the following  parameters.
->    >  * Select the input file & the column with the SITE header.
->    >  * Click on `insert checks`
->    >  * "Trouver l'expression suivante": `(\.[0-9]+)` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
->    >  * "Remplacement": leave it empty.
+>    > 2. Search for the tool `Replace Text in a specific column` on the tabular file with the following  parameters.
+>    >  * Select the input file & the column with the `SITE` header.
+>    >  * "Find pattern": `(\.[0-9]+)` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
+>    >  * "Replace with": leave it empty.
 
 >   > ### {% icon question %} Questions
 >   >
->    > 1. After having successfully deleted the sub-sites informations, can you look at the original dataset and this new one and say how many sites you had, and you have now? You will maybe need to use tools like `Compter le nombre d'occurrences de chaque enregistrement`?
+>    > 1. After having successfully deleted the sub-sites informations, can you look at the original dataset and this new one and say how many sites you had, and you have now? You will maybe need to use tools like `Count occurrences of each record`?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
@@ -92,13 +91,13 @@ The second step of any Regional GAM data analysis is making sure to have a datas
 > ### {% icon hands_on %} Hands-on: How many species are taken into account in this dataset
 >
 > As the dataset is quite big and may countain heterogeneous informations, you want to know wether the data are about one species or more. 
-> 1. Search for the tool `compter le nombre d'occurence de chaque enregistrement` with the following parameters:
-> * "Sur le jeu de données": `output`from **CSV to Tabular**
-> * "Compter les occurrences des valeurs présentes dans la(les) colonne(s)": `column 1`
-> * "Délimité par": `tabulation`.
-> * "Comment les résultats doivent t'ils être triés ?": `Avec la valeur la plus présente en premier`.
+> 1. Search for the tool `Count occurrences of each record` with the following parameters:
+> * "from dataset": `output` from **CSV to Tabular**
+> * "Count occurrences of values in column(s)": Specify the `SPECIES` column, normally `column 1`
+> * "Delimited by": `Tab`.
+> * "How should the results be sorted?": `With the most common values first`.
 > 2. Inspect the file by clicking on the `eye` icon to check that the dataset is on one species only.
-> 3. Now, as regionalGAM tools use CSV files as input, you can regenerate a CSV file using the `tabular to CSV` tool on the output from **trouver et remplacer des patterns dans des colonnes**. Please, tag your new dataset with an explicit tag as "Count and/or rename this dataset like "Counting file".
+> 3. Now, as regionalGAM tools use CSV files as input, you can regenerate a CSV file using the `tabular to CSV` tool on the output from **Replace Text in a specific column**. Please, tag your new dataset with an explicit tag as "Count" and/or rename this dataset like "Count file".
 
 > ### {% icon comment %} Comment
 
@@ -118,8 +117,8 @@ Now you have a file containing all the data on the species of interest. The main
 This step will allow you to compute and display the phenology of a species. In the second part, you will learn that it is possible to show the phenology of various species on a single chart allowing to compare them and analyse them more easily. 
 
 
-> 1. Search for the tool `flight curve` and execute it specifying the following parameters: 
-> * "Fichier de comptage": `output` from **tabular to CSV**.
+> 1. Search for the tool `flight curve` on the "Phenology & Abundance Index tool section" and execute it specifying the following parameters: 
+> * "Count file": output file you jus generated with the **tabular to CSV** tool.
 >
 > 🔹 Based on the `output` from **flight curve**, you can create a line chart which shows species occurences through the years on a very visual material 
 
