@@ -982,6 +982,7 @@ To identify categories significantly enriched/unenriched below some p-value cuto
 > {: .solution}
 {: .question}
 
+{% comment %}
 # Inference of the differential exon usage
 
 Next, we would like to know the differential exon usage between treated (PS depleted) and untreated samples using RNA-seq exon counts. We will rework the mapping results we generated previously.
@@ -1118,6 +1119,8 @@ Similarly to DESeq2, DEXSeq generates a table with:
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}
+
+{% endcomment %}
 
 # Conclusion
 {:.no_toc}
