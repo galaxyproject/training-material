@@ -143,8 +143,6 @@ This step will allow you to compute and display the phenology of a species. In t
 >
 > ### {% icon comment %} Comments
 >
-> ⚠️ Please note, that if you want to create a "stacked" visualization, overlapping each year, you can use several executions (one execution by year) of the `Filter data on any column using simple expressions` tool specifying the year you want on the `With following condition` parameter, `c2==2003` for 2003, then `c2==2004` for 2004, etc... then you can paste all resulting files side by side using one or several executions of the `Paste two files side by side` tool so you can specify on the "Select Data" tab of visualization, several Data series (one by year). !!WARNING!! The use of this `Paste two files side by side` tool must be done carefully as in case of differences in term of number of lines between datasets to paste, it will mix informations from columns. Here, as we are working on temporal series over years, and as some years have 365 days, others 366, and as in this case, phenology is not centered on winter, we can delete informations from the 366 days of some years without any problems so we will have the same number of lines between datasets to paste side by side. To do so, use the `Select first lines from a dataset` tool to select first 366 lines from filtered datasets. As it will be of interest to reuse this combination of tools in a next tutorial step, you can create a workflow that you can named something like `Phenology "stacked" visualization creation`.
->
 > ⚠️ Please note, that if you want your chart to be more precise and to specify that the x-axis corresponds to "Week and year", it is possible. In order to do so, follow the tip below:
 >    > ### {% icon tip %} Tip: Creating a new column of the dataset containing the week and the year 
 First of all, you have to know how many years are taken into account in your dataset.
@@ -189,24 +187,12 @@ With the `output` from **Remove beginning of a file** you can now generate a new
 
 
 ![Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia%20tithonus%20phenology%20explicit%20ID.png "This shows the occurrence of Pyronia tithonus")
+>
+>
+> ⚠️ Please note, that if you want to create a "stacked" visualization, overlapping each year, you can use several executions (one execution by year) of the `Filter data on any column using simple expressions` tool specifying the year you want on the `With following condition` parameter, `c2==2003` for 2003, then `c2==2004` for 2004, etc... then you can paste all resulting files side by side using one or several executions of the `Paste two files side by side` tool so you can specify on the "Select Data" tab of visualization, several Data series (one by year). !!WARNING!! The use of this `Paste two files side by side` tool must be done carefully as in case of differences in term of number of lines between datasets to paste, it will mix informations from columns. Here, as we are working on temporal series over years, and as some years have 365 days, others 366, and as in this case, phenology is not centered on winter, we can delete informations from the 366 days of some years without any problems so we will have the same number of lines between datasets to paste side by side. To do so, use the `Select first lines from a dataset` tool to select first 366 lines from filtered datasets. As it will be of interest to reuse this combination of tools in a next tutorial step, you can create a workflow that you can named something like `Phenology "stacked" visualization creation`.
+>
 
-
-
-> ⚠️ Please note, that if you want to create a "stacked" visualization, overlapping each year, you can use the same "tip" than at the previous visualization step, using several executions (one execution by year) of the `Filter data on any column using simple expressions` tool specifying the year you want on the `With following condition` parameter, `'2003' in str(c2)` for 2003, then `'2004' in str(c2)` for 2004, etc... then you can select the first 366 lines from each filtered files with `Select first lines from a dataset` tool and paste all resulting files side by side using one or several executions of the `Paste two files side by side` tool so you will have the possibility to specify on the "Select Data" tab of visualization, several Data series (one by year).. Finally use the **Remove beginning of a file** tool to remove the first line, a mandatory step to avoid header to be part of the visualization
-
->   > ### {% icon question %} Questions
->   >
->    > 1. Do you understand why we don't use `c2==2004` regular expression here? 
->    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The second column content of the output dataset from `Merge Columns` execution is something like `-year` and not just `year`. </li>
->    >    </ol>
->    >    </details>
->    {: .question}
-
-With the `output` from **Remove beginning of a file** you can now generate a new 'stacked' chart which will have a x-axis corresponding to your column `Column "week""year"`.
+With the `output` from **Remove beginning of a file** you can now generate a new 'stacked' chart which will have a x-axis corresponding to your column `"week"`.
 >    > ### {% icon tip %} Visualize
 >    > 1. With the output from **Remove beginning of a file**.
 >    > 2. Select `Charts`
@@ -216,16 +202,64 @@ With the `output` from **Remove beginning of a file** you can now generate a new
 >    > * "Provide a label": This can be here the year, `2003`
 >    > * "Pick a series color": Choose a color for the line 
 >    > * "Data point labels": `Column 6` (the 2003 nm column) or another one
->    > * "Values for x-axis": `Column 7` (the 2003 "week-year" column)
+>    > * "Values for x-axis": `Column 3` (the 2003 "week" column)
 >    > * "Values for y-axis": `Column 6` (the 2003 nm column)
 >    > 6. Insert a new Data Series, choose a different color and specify:
 >    > * "Provide a label": This can be here the year, `2004`
 >    > * "Pick a series color": Choose a color for the line 
->    > * "Data point labels": `Column 13` (the 2004 nm column) or another one
->    > * "Values for x-axis": `Column 14` (the 2004 "week-year" column)
->    > * "Values for y-axis": `Column 13` (the 2004 nm column)
->    > 7. On {% icon tip %} "change settings", specify:
->    > * "X-Axis label": `Week-Year`
+>    > * "Data point labels": `Column 12` (the 2004 nm column) or another one
+>    > * "Values for x-axis": `Column 9` (the 2004 "week" column)
+>    > * "Values for y-axis": `Column 12` (the 2004 nm column)
+>    > 7. Insert a new Data Series, choose a different color and specify:
+>    > * "Provide a label": This can be here the year, `2005`
+>    > * "Pick a series color": Choose a color for the line 
+>    > * "Data point labels": `Column 18` (the 2005 nm column) or another one
+>    > * "Values for x-axis": `Column 15` (the 2005 "week" column)
+>    > * "Values for y-axis": `Column 18` (the 2005 nm column)
+>    > 8. Insert a new Data Series, choose a different color and specify:
+>    > * "Provide a label": This can be here the year, `2006`
+>    > * "Pick a series color": Choose a color for the line 
+>    > * "Data point labels": `Column 24` (the 2006 nm column) or another one
+>    > * "Values for x-axis": `Column 21` (the 2006 "week" column)
+>    > * "Values for y-axis": `Column 24` (the 2006 nm column)
+>    > 9. Insert a new Data Series, choose a different color and specify:
+>    > * "Provide a label": This can be here the year, `2007`
+>    > * "Pick a series color": Choose a color for the line 
+>    > * "Data point labels": `Column 30` (the 2007 nm column) or another one
+>    > * "Values for x-axis": `Column 27` (the 2007 "week" column)
+>    > * "Values for y-axis": `Column 30` (the 2007 nm column)
+>    > 10. Insert a new Data Series, choose a different color and specify:
+>    > * "Provide a label": This can be here the year, `2008`
+>    > * "Pick a series color": Choose a color for the line 
+>    > * "Data point labels": `Column 36` (the 2008 nm column) or another one
+>    > * "Values for x-axis": `Column 33` (the 2008 "week" column)
+>    > * "Values for y-axis": `Column 36` (the 2008 nm column)
+>    > 11. Insert a new Data Series, choose a different color and specify:
+>    > * "Provide a label": This can be here the year, `2009`
+>    > * "Pick a series color": Choose a color for the line 
+>    > * "Data point labels": `Column 42` (the 2009 nm column) or another one
+>    > * "Values for x-axis": `Column 39` (the 2009 "week" column)
+>    > * "Values for y-axis": `Column 42` (the 2009 nm column)
+>    > 12. Insert a new Data Series, choose a different color and specify:
+>    > * "Provide a label": This can be here the year, `2010`
+>    > * "Pick a series color": Choose a color for the line 
+>    > * "Data point labels": `Column 48` (the 2010 nm column) or another one
+>    > * "Values for x-axis": `Column 45` (the 2010 "week" column)
+>    > * "Values for y-axis": `Column 48` (the 2010 nm column)
+>    > 7. Insert a new Data Series, choose a different color and specify:
+>    > * "Provide a label": This can be here the year, `2011`
+>    > * "Pick a series color": Choose a color for the line 
+>    > * "Data point labels": `Column 54` (the 2011 nm column) or another one
+>    > * "Values for x-axis": `Column 51` (the 2011 "week" column)
+>    > * "Values for y-axis": `Column 54` (the 2011 nm column)
+>    > 8. Insert a new Data Series, choose a different color and specify:
+>    > * "Provide a label": This can be here the year, `2012`
+>    > * "Pick a series color": Choose a color for the line 
+>    > * "Data point labels": `Column 60` (the 2012 nm column) or another one
+>    > * "Values for x-axis": `Column 57` (the 2012 "week" column)
+>    > * "Values for y-axis": `Column 60` (the 2012 nm column)
+>    > 14. On {% icon tip %} "change settings", specify:
+>    > * "X-Axis label": `Week`
 >    > * "Y-Axis label": `nm values`
 >    > * "Use multi-panels": `No`
 >    > 7. Click on {% icon tip %} `Visualize`
@@ -233,7 +267,7 @@ With the `output` from **Remove beginning of a file** you can now generate a new
 >   
 
 
-![Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia%20tithonus%20phenology%20stacked.png "This shows the occurrence of Pyronia tithonus")
+![Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia_tithonus_phenology_stacked_explicit_ID.png "This shows the occurrence of Pyronia tithonus")
 
 
 
