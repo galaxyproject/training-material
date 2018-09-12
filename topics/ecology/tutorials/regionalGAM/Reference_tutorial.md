@@ -122,9 +122,6 @@ This step will allow you to compute and display the phenology of a species. In t
 >
 > 🔹 Based on the `output` from **flight curve**, you can create a line chart which shows species occurences through the years on a very visual material 
 
-
-![Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Phenology%20chart%20.png "This shows the occurrence of Pyronia tithonus")
-
 If you want to access the chart on an interactive interface, you can click on the following link: [Chart on Galaxy-E](https://openstack-192-168-100-19.genouest.org/u/ylebras/v/pyronia-tithonus-phenology-2)
 >
 >    > ### {% icon tip %} Visualization. 
@@ -191,6 +188,11 @@ With the `output` from **Remove beginning of a file** you can now generate a new
 >   
 > {: .comment}
 
+
+![Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia tithonus%20phenology%20explicit%20ID.png "This shows the occurrence of Pyronia tithonus")
+
+
+
 > ⚠️ Please note, that if you want to create a "stacked" visualization, overlapping each year, you can use the same "tip" than at the previous visualization step, using several executions (one execution by year) of the `Filter data on any column using simple expressions` tool specifying the year you want on the `With following condition` parameter, `'2003' in str(c2)` for 2003, then `'2004' in str(c2)` for 2004, etc... then you can paste all resulting files side by side using one or several executions of the `Paste two files side by side` tool so you will have the possibility to specify on the "Select Data" tab of visualization, several Data series (one by year).. Finally use the **Remove beginning of a file** tool to remove the first line, a mandatory step to avoid header to be part of the visualization
 
 >   > ### {% icon question %} Questions
@@ -230,6 +232,10 @@ With the `output` from **Remove beginning of a file** you can now generate a new
 >    > 7. Click on {% icon tip %} `Visualize`
 >    > 8. Click on {% icon tip %} `save this visualization` if you are willing to save to chart.
 >   
+
+
+![Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia tithonus%20phenology%20stacked.png "This shows the occurrence of Pyronia tithonus")
+
 
 
 > ⚠️ Please note that it is possible to show the occurrences of more than one species on a single chart. If you are interested in doing so, you should click here : [Various species chart explanations](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Multispecies_tutorial.md#variousoccurencesonasinglechartexplanations)
@@ -283,6 +289,9 @@ This will allow you to create a file showing the abundance per year of a chosen 
 >    > 5. Visualize
 >    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 
+![Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia tithonus%20Abundance%20index%20explicit%20ID.png "This shows the occurrence of Pyronia tithonus")
+
+
 > 🔹 If you choose to create a stacked visualization, we can now display a better chart showing the annual abundance trend of a certain species per site. 
 >    > 1. Select `Charts` from the last execution of **Remove beginning of a file**
 >    > 2. Select a visualization type: "Bar diagram (NVD 3)" 
@@ -317,6 +326,7 @@ This will allow you to create a file showing the abundance per year of a chosen 
 >    > * "Values for x-axis": `Column 23` (the 2004 YEAR column)
 >    > * "Values for y-axis": `Column 24` (the 2004 regional_gam column)
 
+![Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia tithonus%20Abundance%20index%20stackedD.png "This shows the occurrence of Pyronia tithonus")
 
 
 >    > 5. Customize 
