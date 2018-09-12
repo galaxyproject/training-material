@@ -69,8 +69,8 @@ When the dataset contains many details, it lengthens the file processing time th
 >    > 1. Use the `CSV to tabular` tool to first create a tabular file from your csv one (with only one species). This is a mandatory step as further tools are only working on tabular files!
 >    > 2. Search for the tool `Column Regex Find And Replace` on the tabular file with the following  parameters.
 >    >  * Select the input file & the column with the `SITE` header.
->    >  * "Find pattern": `(\.[0-9]+)` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
->    >  * "Replace with": leave it empty.
+>    >  * "Find Regex": `(\.[0-9]+)` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
+>    >  * "Replacement": leave it empty.
 
 >   > ### {% icon question %} Questions
 >   >
