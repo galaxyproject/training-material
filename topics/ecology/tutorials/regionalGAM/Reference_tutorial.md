@@ -122,7 +122,6 @@ This step will allow you to compute and display the phenology of a species. In t
 >
 > 🔹 Based on the `output` from **flight curve**, you can create a line chart which shows species occurences through the years on a very visual material 
 
-If you want to access the chart on an interactive interface, you can click on the following link: [Chart on Galaxy-E](https://openstack-192-168-100-19.genouest.org/u/ylebras/v/pyronia-tithonus-phenology-2)
 >
 >    > ### {% icon tip %} Visualization. 
 >    > 1. Click on the name of output dataset from **flight curve** (something like `Flight curve on data 6`) to expand dataset related details and options
