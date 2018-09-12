@@ -267,10 +267,9 @@ With the `output` from **Remove beginning of a file** you can now generate a new
 >   
 
 
-![Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia_tithonus_phenology_stacked_explicit_ID.png "This shows the occurrence of Pyronia tithonus")
-
-
-
+![Stacked Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia_tithonus_phenology_stacked_explicit_ID.png "This shows the occurrence of Pyronia tithonus")
+>
+>
 > ⚠️ Please note that it is possible to show the occurrences of more than one species on a single chart. If you are interested in doing so, you should click here : [Various species chart explanations](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Multispecies_tutorial.md#variousoccurencesonasinglechartexplanations)
 
  
