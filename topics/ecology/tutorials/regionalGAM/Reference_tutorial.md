@@ -67,7 +67,7 @@ When the dataset contains many details, it lengthens the file processing time th
 > ### {% icon hands_on %} Hands-on: hiding some informations
 
 >    > 1. Use the `CSV to tabular` tool to first create a tabular file from your csv one (with only one species). This is a mandatory step as further tools are only working on tabular files!
->    > 2. Search for the tool `Replace Text in a specific column` on the tabular file with the following  parameters.
+>    > 2. Search for the tool `Column Regex Find And Replace` on the tabular file with the following  parameters.
 >    >  * Select the input file & the column with the `SITE` header.
 >    >  * "Find pattern": `(\.[0-9]+)` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
 >    >  * "Replace with": leave it empty.
@@ -97,7 +97,7 @@ The second step of any Regional GAM data analysis is making sure to have a datas
 > * "Delimited by": `Tab`.
 > * "How should the results be sorted?": `With the most common values first`.
 > 2. Inspect the file by clicking on the `eye` icon to check that the dataset is on one species only.
-> 3. Now, as regionalGAM tools use CSV files as input, you can regenerate a CSV file using the `tabular to CSV` tool on the output from **Replace Text in a specific column**. Please, tag your new dataset with an explicit tag as "Count" and/or rename this dataset like "Count file".
+> 3. Now, as regionalGAM tools use CSV files as input, you can regenerate a CSV file using the `tabular to CSV` tool on the output from **Column Regex Find And Replace**. Please, tag your new dataset with an explicit tag as "Count" and/or rename this dataset like "Count file".
 
 > ### {% icon comment %} Comment
 
@@ -152,12 +152,12 @@ If you want to access the chart on an interactive interface, you can click on th
 >    > ### {% icon tip %} Tip: Creating a new column of the dataset containing the week and the year 
 First of all, you have to know how many years are taken into account in your dataset.
 >    > 1. Search for the tool `Count occurrences of each record` with the following parameters 
->    > * "from dataset": output from **Replace Text in a specific column**.
+>    > * "from dataset": output from **Column Regex Find And Replace**.
 >    > * "Select": `Column 3` (the on headed with `YEAR`)
 >    > * "Delimited by": `Tab`.
 >    > * "How should the results be sorted?": `By the values being counted`.
 >    > 2. Inspect the file by clicking on the `eye` icon to check how many years are taken into account.
->    > 3. Use the `Replace Text in a specific column` tool with the following parameters:
+>    > 3. Use the `Column Regex Find And Replace` tool with the following parameters:
 >    > * "File to process": output file from **flight curve**.
 >    > * "in column": `Column 2` (corresponding to the one headed with `YEAR`)
 >    > * Click on `Insert check`:
@@ -165,7 +165,7 @@ First of all, you have to know how many years are taken into account in your dat
 >    >   * "Replace with": `-\1` 
 >    > 5. Inspect the file by clicking on the `eye` icon to check if all the years are now written with a "-" before the digits. 
 >    > 6. Search for the tool `Merge Columns together` with the following parameters:
->    > * "Select data": output from the last **Replace Text in a specific column**.
+>    > * "Select data": output from the last **Column Regex Find And Replace**.
 >    > * "Merge column": `Column 3`(corresponding to the one headed with `WEEK`)
 >    > * "with column": `Column 2`(corresponding to the one headed with `YEAR`)
 
@@ -218,12 +218,12 @@ This will allow you to create a file showing the abundance per year of a chosen 
 
 >   > ### {% icon question %} Questions
 >   >
->    > 1. What do you think about this visualization? Maybe not so good? Search a way to display the content of the file using charts in a more accurate manner... To do so, you can use tools like **Replace Text in a specific column**, **Merge Columns together**, **Remove beginning of a file** , and **Sort data in ascending or descending order**
+>    > 1. What do you think about this visualization? Maybe not so good? Search a way to display the content of the file using charts in a more accurate manner... To do so, you can use tools like **Column Regex Find And Replace**, **Merge Columns together**, **Remove beginning of a file** , and **Sort data in ascending or descending order**
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>You can use the **Replace Text in a specific column** tool to first replace `(20[0-9][0-9])` on the column 3 (the "YEAR" one) by `-\1` then on the result of this tool execution, replace `"` by nothing on the column 1. Furthermore, you can merge column 1 and column 3 of the resulting dataset. Finally, after deleting the first line (the header) with **Remove beginning of a file**, you can sort the new dataset by column 1 (alphabetical/ascending) and column 3 (alphabetical/ascending). </li>
+>    >    <li>You can use the **Column Regex Find And Replace** tool to first replace `(20[0-9][0-9])` on the column 3 (the "YEAR" one) by `-\1` then on the result of this tool execution, replace `"` by nothing on the column 1. Furthermore, you can merge column 1 and column 3 of the resulting dataset. Finally, after deleting the first line (the header) with **Remove beginning of a file**, you can sort the new dataset by column 1 (alphabetical/ascending) and column 3 (alphabetical/ascending). </li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
