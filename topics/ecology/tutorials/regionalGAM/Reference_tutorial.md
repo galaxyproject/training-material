@@ -17,10 +17,8 @@ You will basically learn how to create a file on the basis of which you can crea
 > In this tutorial, we will cover:
 1. Pre-processing
 > {:pre-processing}
-2. Making sure the dataset concerns only one species
-> {:Making sure the dataset concerns only one species} 
-3. Displaying the occurrence of the chosen species through the years
-> {:Displaying the occurence of the chosen species through the years}
+2. Analyze phenology of a species through the years
+> {:Analyze phenology of a species through the years}
 
 # Step 1: Pre-processing
 
@@ -80,7 +78,7 @@ When the dataset contains many details, it lengthens the file processing time th
 >    >    </details>
 >    {: .question}
 
-# Step 2: Making sure the dataset concerns only one species 
+> ### Making sure the dataset concerns only one species 
  
 The second step of any Regional GAM data analysis is making sure to have a dataset of only one specific species that you will then be able to use. If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another. 
 
@@ -102,13 +100,13 @@ The second step of any Regional GAM data analysis is making sure to have a datas
 {: .hands_on}
 
 
-# Step 3: <a name="displayingtheoccurrenceofthespecies"></a> Displaying the occurrence of the chosen species through the years  
+# Step 2: <a name="analyzepheno"></a> Analyze phenology of a species through the years  
  
  
-Now you have a file containing all the data on the species of interest. The main goal of this step is basically to create a material that can be used to generate charts. What you could also do, for example, would be to compare the evolution of various species through the years in the same site. You would have to superpose the different graphs on one another.
+Now you have a file containing all the data on the species of interest. The main goal of this step is to treat phenology related informations and create a material that can be used to generate charts. What you could also do, for example, would be to compare the phenology through the years and sites.
 >
 
-> ### {% icon hands_on %} Hands-on: Phenology
+> ## {% icon hands_on %} Hands-on: Phenology
 
 This step will allow you to compute and display the phenology of a species. In the second part, you will learn that it is possible to show the phenology of various species on a single chart allowing to compare them and analyse them more easily. 
 
@@ -268,9 +266,9 @@ With the `output` from **Remove beginning of a file** you can now generate a new
 >
 
  
-> ###  <a name="Abundanceindex"></a>Abundance per year and per site
+> ##  <a name="Abundanceindex"></a>Compute Abundance Index across sites and years
 
-This will allow you to create a file showing the abundance per year of a chosen species in a certain site. Based on this file you will then learn how to represent this abundance on a chart. 
+This will allow you to create a file showing the abundance index per year of a chosen species in a certain site. Based on this file you will then learn how to represent this abundance on a chart. 
 >
 > 1. Look for the tool `Abundance index` with the following parameters:
 > * "Count file": `output` from **tabular to CSV** (normally renamed "Counting file" and/or tagged "Count").  
@@ -363,7 +361,7 @@ This will allow you to create a file showing the abundance per year of a chosen 
 >    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 {: .hands_on}
 
-> ### Expected temporal trend
+> ## Compute a collated index for each year and estimates the temporal trend
 
 The expected temporal trend allows you to have an overview of the evolution of a species in a certain type of environment in the futur.
 
@@ -377,7 +375,7 @@ The expected temporal trend allows you to have an overview of the evolution of a
 
 Note also that you will obtain two files resulting of the action above. The first one will be the graph and the second one will contains the values of "x".
 
-> ### Linear regression 
+> ## Model temporal trend with a simple linear regression 
 
 The point of doing a linear regression is to determinate if the year has an influence on the abundance of a species. 
 
@@ -385,9 +383,9 @@ The point of doing a linear regression is to determinate if the year has an infl
 >    > * "Fichier produit par l'outil glmmpql/Expected temporal trend": `output 2` from **temporal trend**. 
 >    > * "Fichier produit par l'outil ab_index": `output` from **abundance index**.
 
-You can then execute the **Linear regression ajusted** tool to take into account autocorrelation of model residuals .
+You can then execute the **Linear regression ajusted** tool to take into account autocorrelation of model residuals.
 
-Finally, a global trend (over years) can be compute and displayed using the **Plot abundance with trend line** tool.
+Finally, a global trend (over years) can be computed and displayed using the **Plot abundance with trend line** tool.
 
 {: .hands_on}
  
