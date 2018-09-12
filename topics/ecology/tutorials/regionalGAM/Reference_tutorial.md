@@ -149,8 +149,8 @@ This step will allow you to compute and display the phenology of a species. In t
 >    > ### {% icon tip %} Tip: Creating a new column of the dataset containing the week and the year 
 First of all, you have to know how many years are taken into account in your dataset.
 >    > 1. Search for the tool `Count occurrences of each record` with the following parameters 
->    > * "from dataset": output from **Column Regex Find And Replace**.
->    > * "Select": `Column 3` (the on headed with `YEAR`)
+>    > * "from dataset": output from **Flight curve**.
+>    > * "Select": `Column 2` (the on headed with `YEAR`)
 >    > * "Delimited by": `Tab`.
 >    > * "How should the results be sorted?": `By the values being counted`.
 >    > 2. Inspect the file by clicking on the `eye` icon to check how many years are taken into account.
