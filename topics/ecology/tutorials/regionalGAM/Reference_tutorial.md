@@ -189,7 +189,7 @@ With the `output` from **Remove beginning of a file** you can now generate a new
 > {: .comment}
 
 
-![Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia tithonus%20phenology%20explicit%20ID.png "This shows the occurrence of Pyronia tithonus")
+![Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia%20tithonus%20phenology%20explicit%20ID.png "This shows the occurrence of Pyronia tithonus")
 
 
 
@@ -234,7 +234,7 @@ With the `output` from **Remove beginning of a file** you can now generate a new
 >   
 
 
-![Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia tithonus%20phenology%20stacked.png "This shows the occurrence of Pyronia tithonus")
+![Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia%20tithonus%20phenology%20stacked.png "This shows the occurrence of Pyronia tithonus")
 
 
 
@@ -289,7 +289,7 @@ This will allow you to create a file showing the abundance per year of a chosen 
 >    > 5. Visualize
 >    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 
-![Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia tithonus%20Abundance%20index%20explicit%20ID.png "This shows the occurrence of Pyronia tithonus")
+![Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia%20tithonus%20Abundance%20index%20explicit%20ID.png "This shows the occurrence of Pyronia tithonus")
 
 
 > 🔹 If you choose to create a stacked visualization, we can now display a better chart showing the annual abundance trend of a certain species per site. 
@@ -326,7 +326,7 @@ This will allow you to create a file showing the abundance per year of a chosen 
 >    > * "Values for x-axis": `Column 23` (the 2004 YEAR column)
 >    > * "Values for y-axis": `Column 24` (the 2004 regional_gam column)
 
-![Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia tithonus%20Abundance%20index%20stackedD.png "This shows the occurrence of Pyronia tithonus")
+![Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia%20tithonus%20Abundance%20index%20stackedD.png "This shows the occurrence of Pyronia tithonus")
 
 
 >    > 5. Customize 
