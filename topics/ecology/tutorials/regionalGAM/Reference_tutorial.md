@@ -168,8 +168,9 @@ First of all, you have to know how many years are taken into account in your dat
 >    > * "Select data": output from the last **Column Regex Find And Replace**.
 >    > * "Merge column": `Column 3`(corresponding to the one headed with `WEEK`)
 >    > * "with column": `Column 2`(corresponding to the one headed with `YEAR`)
+>    > 7. Use the **Remove beginning of a file** tool to remove first line, a mandatory step to avoid header to be part of the visualization
 
-With the `output` from **Merge Columns together** you can now generate a new chart which will have a x-axis corresponding to your column `Column "week""year"`.
+With the `output` from **Remove beginning of a file** you can now generate a new chart which will have a x-axis corresponding to your column `Column "week""year"`.
 >    > ### {% icon tip %} Visualize
 >    > 1. With the  `output` from **Merge Columns together**.
 >    > 2. Select `Charts`
@@ -189,7 +190,7 @@ With the `output` from **Merge Columns together** you can now generate a new cha
 >   
 > {: .comment}
 
-> ⚠️ Please note, that if you want to create a "stacked" visualization, overlapping each year, you can use the same "tip" than at the previous visualization step, using several executions (one execution by year) of the `Filter data on any column using simple expressions` tool specifying the year you want on the `With following condition` parameter, `'2003' in str(c2)` for 2003, then `'2004' in str(c2)` for 2004, etc... then you can paste all resulting files side by side using one or several executions of the `Paste two files side by side` tool so you can specify on the "Select Data" tab of visualization, several Data series (one by year)..
+> ⚠️ Please note, that if you want to create a "stacked" visualization, overlapping each year, you can use the same "tip" than at the previous visualization step, using several executions (one execution by year) of the `Filter data on any column using simple expressions` tool specifying the year you want on the `With following condition` parameter, `'2003' in str(c2)` for 2003, then `'2004' in str(c2)` for 2004, etc... then you can paste all resulting files side by side using one or several executions of the `Paste two files side by side` tool so you will have the possibility to specify on the "Select Data" tab of visualization, several Data series (one by year).. Finally use the **Remove beginning of a file** tool to remove the first line, a mandatory step to avoid header to be part of the visualization
 
 >   > ### {% icon question %} Questions
 >   >
@@ -203,9 +204,9 @@ With the `output` from **Merge Columns together** you can now generate a new cha
 >    >    </details>
 >    {: .question}
 
-With the `output` from **Paste two files side by side** you can now generate a new 'stacked' chart which will have a x-axis corresponding to your column `Column "week""year"`.
+With the `output` from **Remove beginning of a file** you can now generate a new 'stacked' chart which will have a x-axis corresponding to your column `Column "week""year"`.
 >    > ### {% icon tip %} Visualize
->    > 1. With the  `output` from **Merge Columns together**.
+>    > 1. With the output from **Remove beginning of a file**.
 >    > 2. Select `Charts`
 >    > 3. Select a visualization type: "line chart (NVD 3)
 >    > 4. Give it a proper name like `Pyronia tithonus phenology` 
@@ -258,7 +259,7 @@ This will allow you to create a file showing the abundance per year of a chosen 
 
 >   > ### {% icon question %} Questions
 >   >
->    > 1. What do you think about this visualization? Maybe not so good? Search a way to display the content of the file using charts in a more accurate manner... To do so, you can apply approaches used before on this tutotrial using tools like **Column Regex Find And Replace**, **Merge Columns together**, **Remove beginning of a file**, and **Sort data in ascending or descending order** on one hand to create a new column of more explicit identifiers (ie `Site-Year`) and/or  **Filter data on any column using simple expressions**, **Paste two files side by side** on another hand to create a stacked visualization.
+>    > 1. What do you think about this visualization? Maybe not so good? Search a way to display the content of the file using charts in a more accurate manner... To do so, you can apply approaches used before on this tutotrial using tools like **Column Regex Find And Replace**, **Merge Columns together**, **Remove beginning of a file**, and **Sort data in ascending or descending order** on one hand to create a new column of more explicit identifiers (ie `Site-Year`) and/or  **Filter data on any column using simple expressions**, **Paste two files side by side**, **Remove beginning of a file** on another hand to create a stacked visualization.
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
@@ -282,7 +283,7 @@ This will allow you to create a file showing the abundance per year of a chosen 
 >    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 
 > 🔹 If you choose to create a stacked visualization, we can now display a better chart showing the annual abundance trend of a certain species per site. 
->    > 1. Select `Charts` from the last execution of **Paste two files side by side**
+>    > 1. Select `Charts` from the last execution of **Remove beginning of a file**
 >    > 2. Select a visualization type: "Bar diagram (NVD 3)" 
 >    > 3. Give it a proper name (`Pyronia tithonus abundance index` for example)
 >    > 4. Select data
