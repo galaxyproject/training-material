@@ -183,7 +183,7 @@ With the `output` from **Remove beginning of a file** you can now generate a new
 >    > * "X-Axis label": `Week-Year`
 >    > * "Y-Axis label": `nm values`
 >    > 7. Click on {% icon tip %} `Visualize`
->    > 8. Click on {% icon tip %} `save this visualization` if you are willing to save to chart. You will obtain something like [that](https://openstack-192-168-100-19.genouest.org/u/ylebras/v/pyronia-tithonus-phenology-week-year)
+>    > 8. Click on {% icon tip %} `save this visualization` if you are willing to save to chart.
 >   
 > {: .comment}
 
