@@ -130,15 +130,15 @@ If you want to access the chart on an interactive interface, you can click on th
 >    > ### {% icon tip %} Visualization. 
 >    > 1. Click on the name of output dataset from **flight curve** (something like `Flight curve on data 6`) to expand dataset related details and options
 >    > 2. Click on the "Visualize" button then select `Charts` 
->    > 3. Give it a proper name like `Pyronia tithonus phenology`
->    > 4. Select a visualization type: "line chart (NVD 3)" 
->    > 5. Click on {% icon tip %} Select data:
+>    > 3. Select a visualization type: "line chart (NVD 3)"
+>    > 4. Give it a proper name like `Pyronia tithonus phenology` 
+>    > 5. On {% icon tip %} "Select data" area, specify:
 >    > * "Provide a label": For example the name of the species, `Pyronia tithonus` here
 >    > * "Pick a series color": Choose a color for the line 
 >    > * "Data point labels": `Column 1`
 >    > * "Values for x-axis": `Column 2`
 >    > * "Values for y-axis": `Column 6`
->    > 6. Click on {% icon tip %} Customize:
+>    > 6. On {% icon tip %} "change settings", specify:
 >    > * "X-Axis label": `Year`
 >    > * "Y-Axis label": `nm values`
 >    > 7. Click on {% icon tip %} `Visualize`
@@ -147,7 +147,7 @@ If you want to access the chart on an interactive interface, you can click on th
 >
 > ### {% icon comment %} Comments
 >
-> ⚠️ Please note, that if you want to create a "stacked" visualization, overlapping each year, you can use several executions (one execution by year) of the `Filter data on any column using simple expressions` tool specifying the year you want on the `With following condition` parameter, `c2==2003` for 2003, then `c2==2004` for 2004, etc... then you can paste all resulting files side by side using one or several executions of the `Paste two files side by side` tool so you can specify on the "Select Data" tab of visualization, several Data series (one by year).
+> ⚠️ Please note, that if you want to create a "stacked" visualization, overlapping each year, you can use several executions (one execution by year) of the `Filter data on any column using simple expressions` tool specifying the year you want on the `With following condition` parameter, `c2==2003` for 2003, then `c2==2004` for 2004, etc... then you can paste all resulting files side by side using one or several executions of the `Paste two files side by side` tool so you can specify on the "Select Data" tab of visualization, several Data series (one by year). AS it will be of interest to reuse this combination of 3 tools in a next tutorial step, you can create a workflow that you can named something like `Phenology "stacked" visualization creation`
 > ⚠️ Please note, that if you want your chart to be more precise and to specify that the x-axis corresponds to "Week and year", it is possible. In order to do so, follow the tip below:
 >    > ### {% icon tip %} Tip: Creating a new column of the dataset containing the week and the year 
 First of all, you have to know how many years are taken into account in your dataset.
@@ -173,23 +173,63 @@ With the `output` from **Merge Columns together** you can now generate a new cha
 >    > ### {% icon tip %} Visualize
 >    > 1. With the  `output` from **Merge Columns together**.
 >    > 2. Select `Charts`
->    > 3. Give it a proper name
->    > 4. Select a visualization type: "line chart (NVD 3) 
->    > 5. Click on {% icon tip %} Select data:
->    > * "Provide a label": The name of the species like `Pyronia tithonus`
+>    > 3. Select a visualization type: "line chart (NVD 3)
+>    > 4. Give it a proper name like `Pyronia tithonus phenology` 
+>    > 5. On {% icon tip %} "Select data" area, specify:
+>    > * "Provide a label": This can be `Pyronia tithonus on several years`
 >    > * "Pick a series color": Choose a color for the line 
 >    > * "Data point labels": `Column 6` (the nm column) or another one
 >    > * "Values for x-axis": `Column 7` (the "week-year" column)
 >    > * "Values for y-axis": `Column 6` (the nm column)
->    > 6. Click on {% icon tip %} Customize:
+>    > 6. On {% icon tip %} "change settings", specify:
 >    > * "X-Axis label": `Week-Year`
->    > * Y-Axis label: `nm values`
+>    > * "Y-Axis label": `nm values`
 >    > 7. Click on {% icon tip %} `Visualize`
 >    > 8. Click on {% icon tip %} `save this visualization` if you are willing to save to chart. You will obtain something like [that](https://openstack-192-168-100-19.genouest.org/u/ylebras/v/pyronia-tithonus-phenology-week-year)
 >   
 > {: .comment}
 
-> ⚠️ Please note, that if you want to create a "stacked" visualization, overlapping each year, you cn use the same "tip" than at the previous step.
+> ⚠️ Please note, that if you want to create a "stacked" visualization, overlapping each year, you can use the same "tip" than at the previous visualization step, using several executions (one execution by year) of the `Filter data on any column using simple expressions` tool specifying the year you want on the `With following condition` parameter, `'2003' in str(c2)` for 2003, then `'2004' in str(c2)` for 2004, etc... then you can paste all resulting files side by side using one or several executions of the `Paste two files side by side` tool so you can specify on the "Select Data" tab of visualization, several Data series (one by year)..
+
+>   > ### {% icon question %} Questions
+>   >
+>    > 1. Do you understand why we don't use `c2==2004` regular expression here? 
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>The second column content of the output dataset from `Merge Columns` execution is something like `-year` and not just `year`. </li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+
+With the `output` from **Paste two files side by side** you can now generate a new 'stacked' chart which will have a x-axis corresponding to your column `Column "week""year"`.
+>    > ### {% icon tip %} Visualize
+>    > 1. With the  `output` from **Merge Columns together**.
+>    > 2. Select `Charts`
+>    > 3. Select a visualization type: "line chart (NVD 3)
+>    > 4. Give it a proper name like `Pyronia tithonus phenology` 
+>    > 5. On {% icon tip %} "Select data" area, specify:
+>    > * "Provide a label": This can be here the year, `2003`
+>    > * "Pick a series color": Choose a color for the line 
+>    > * "Data point labels": `Column 6` (the 2003 nm column) or another one
+>    > * "Values for x-axis": `Column 7` (the 2003 "week-year" column)
+>    > * "Values for y-axis": `Column 6` (the 2003 nm column)
+>    > 6. Insert a new Data Series, choose a different color and specify:
+>    > * "Provide a label": This can be here the year, `2004`
+>    > * "Pick a series color": Choose a color for the line 
+>    > * "Data point labels": `Column 13` (the 2004 nm column) or another one
+>    > * "Values for x-axis": `Column 14` (the 2004 "week-year" column)
+>    > * "Values for y-axis": `Column 13` (the 2004 nm column)
+>    > 7. On {% icon tip %} "change settings", specify:
+>    > * "X-Axis label": `Week-Year`
+>    > * "Y-Axis label": `nm values`
+>    > * "Use multi-panels": `No`
+>    > 7. Click on {% icon tip %} `Visualize`
+>    > 8. Click on {% icon tip %} `save this visualization` if you are willing to save to chart.
+>   
+
+
 > ⚠️ Please note that it is possible to show the occurrences of more than one species on a single chart. If you are interested in doing so, you should click here : [Various species chart explanations](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Multispecies_tutorial.md#variousoccurencesonasinglechartexplanations)
 
  
@@ -218,7 +258,7 @@ This will allow you to create a file showing the abundance per year of a chosen 
 
 >   > ### {% icon question %} Questions
 >   >
->    > 1. What do you think about this visualization? Maybe not so good? Search a way to display the content of the file using charts in a more accurate manner... To do so, you can use tools like **Column Regex Find And Replace**, **Merge Columns together**, **Remove beginning of a file** , and **Sort data in ascending or descending order**
+>    > 1. What do you think about this visualization? Maybe not so good? Search a way to display the content of the file using charts in a more accurate manner... To do so, you can apply approaches used before on this tutotrial using tools like **Column Regex Find And Replace**, **Merge Columns together**, **Remove beginning of a file**, and **Sort data in ascending or descending order** on one hand to create a new column of more explicit identifiers (ie `Site-Year`) and/or  **Filter data on any column using simple expressions**, **Paste two files side by side** on another hand to create a stacked visualization.
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
@@ -227,10 +267,10 @@ This will allow you to create a file showing the abundance per year of a chosen 
 >    >    </ol>
 >    >    </details>
 >    {: .question}
-> 🔹 Based on the  new dataset, we can display a better chart showing the annual abundance trend of a certain species per site. 
->    > 1. Select `Charts`
->    > 2. Give it a proper name (`Pyronia tithonus abundance index ` for example)
->    > 3. Select a visualization type: "Bar diagram (NVD 3)" 
+> 🔹 If you choose to create a new column of more explicit identifiers (`Site-Year`), we can now display a better chart showing the annual abundance trend of a certain species per site. 
+>    > 1. Select `Charts` from the **Sort data in ascending or descending order** execution
+>    > 2. Select a visualization type: "Bar diagram (NVD 3)" 
+>    > 3. Give it a proper name (`Pyronia tithonus abundance index` for example)
 >    > 4. Select data 
 >    > * "Data point labels": `Column 6` 
 >    > * "Values for x-axis": `Column 6`
@@ -241,6 +281,47 @@ This will allow you to create a file showing the abundance per year of a chosen 
 >    > 5. Visualize
 >    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 
+> 🔹 If you choose to create a stacked visualization, we can now display a better chart showing the annual abundance trend of a certain species per site. 
+>    > 1. Select `Charts` from the last execution of **Paste two files side by side**
+>    > 2. Select a visualization type: "Bar diagram (NVD 3)" 
+>    > 3. Give it a proper name (`Pyronia tithonus abundance index` for example)
+>    > 4. Select data
+>    > * "Provide a label": This can be here the site, `UKBMS`
+>    > * "Data point labels": `Column 5` (the UKBMS prop_pheno_sampled column)
+>    > * "Values for x-axis": `Column 3` (the UKBMS YEAR column)
+>    > * "Values for y-axis": `Column 4` (the UKBMS regional_gam column)
+>    > 5. Insert a new Data Series, choose a different color and specify:
+>    > * "Provide a label": This can be here the site, `NLBMS`
+>    > * "Pick a series color": Choose a color for the line 
+>    > * "Data point labels": `Column 10` (the NLBMS prop_pheno_sampled column)
+>    > * "Values for x-axis": `Column 8` (the NLBMS YEAR column)
+>    > * "Values for y-axis": `Column 9` (the NLBMS regional_gam column)
+>    > 6. Insert a new Data Series, choose a different color and specify:
+>    > * "Provide a label": This can be here the site, `ESBMS`
+>    > * "Pick a series color": Choose a color for the line 
+>    > * "Data point labels": `Column 15` (the ESBMS prop_pheno_sampled column)
+>    > * "Values for x-axis": `Column 13` (the ESBMS YEAR column)
+>    > * "Values for y-axis": `Column 14` (the ESBMS regional_gam column)
+>    > 7. Insert a new Data Series, choose a different color and specify:
+>    > * "Provide a label": This can be here the site, `FRBMS`
+>    > * "Pick a series color": Choose a color for the line 
+>    > * "Data point labels": `Column 20` (the FRBMS prop_pheno_sampled column)
+>    > * "Values for x-axis": `Column 18` (the FRBMS YEAR column)
+>    > * "Values for y-axis": `Column 19` (the FRBMS regional_gam column)
+>    > 8. Insert a new Data Series, choose a different color and specify:
+>    > * "Provide a label": This can be here the site, `DEBMS`
+>    > * "Pick a series color": Choose a color for the line 
+>    > * "Data point labels": `Column 25` (the 2004 prop_pheno_sampled column)
+>    > * "Values for x-axis": `Column 23` (the 2004 YEAR column)
+>    > * "Values for y-axis": `Column 24` (the 2004 regional_gam column)
+
+
+
+>    > 5. Customize 
+>    > * "X-Axis label": `Site-Year`
+>    > * "Y-Axis label": `regional_gam`
+>    > 5. Visualize
+>    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 {: .hands_on}
 
 > ### Expected temporal trend
@@ -261,13 +342,13 @@ Note also that you will obtain two files resulting of the action above. The firs
 
 The point of doing a linear regression is to determinate if the year has an influence on the abundance of a species. 
 
->    > 1. Look for the tool `linear regression` with the following parameters.
+>    > 1. Look for the tool `Model temporal trend with a simple linear regression` with the following parameters.
 >    > * "Fichier produit par l'outil glmmpql/Expected temporal trend": `output 2` from **temporal trend**. 
 >    > * "Fichier produit par l'outil ab_index": `output` from **abundance index**.
 
 You can then execute the **Linear regression ajusted** tool to take into account autocorrelation of model residuals .
 
-Finally, a global trend (over years) can be displayed using the **Trend** tool.
+Finally, a global trend (over years) can be compute and displayed using the **Plot abundance with trend line** tool.
 
 {: .hands_on}
  
