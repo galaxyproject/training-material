@@ -10,7 +10,7 @@ FROM
 
 MAINTAINER Galaxy Training Material
 
-ENV GALAXY_CONFIG_BRAND "GTN: ChIP-Seq"
+ENV GALAXY_CONFIG_BRAND "GTN: Ecology"
 
 # copy the tutorials directory for your topic
 ADD topics/ecology/tutorials/ /tutorials/
