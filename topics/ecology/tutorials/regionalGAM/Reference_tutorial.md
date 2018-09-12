@@ -11,10 +11,6 @@ This tutorial will show how to study species phenology through the computation o
 After a certain numbers of steps, you will be able to extract single species data and study related phenology through the years. The goal of this exercise is to be able to create abundance trend over time and biodiversity indicators. Following these indicators allow to follow trends in terms of population dynamics. You could for example try to predict the occurences of one specific species in a certain type of environnement using the prediction model of climate evolution. Based on charts that you will generate, you could try to explain the evolution of a species with environmental data (temperatures variations, modifications of the environmental conditions).
 You will basically learn how to create a file on the basis of which you can create a visual material that can be quite easily understood and therefore be efficient for a large audience.
 
-> ### {% icon comment %} Comment
->
-> ⚠️ Please note that there are two other tutorials on regionalGAM, one is specific to [the use of RData input dataset](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Rdata_tutorial.md) and the other explains you how to deal with [a multispecies dataset](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Multispecies_tutorial.md). If you are interested in learning more about these specific cases, do not hesitate to follow these two tutorials in complement. 
-
 > {: .comment}
 
 > ### Agenda
@@ -270,7 +266,6 @@ With the `output` from **Remove beginning of a file** you can now generate a new
 ![Stacked Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia_tithonus_phenology_stacked_explicit_ID.png "This shows the occurrence of Pyronia tithonus")
 >
 >
-> ⚠️ Please note that it is possible to show the occurrences of more than one species on a single chart. If you are interested in doing so, you should click here : [Various species chart explanations](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Multispecies_tutorial.md#variousoccurencesonasinglechartexplanations)
 
  
 > ###  <a name="Abundanceindex"></a>Abundance per year and per site
