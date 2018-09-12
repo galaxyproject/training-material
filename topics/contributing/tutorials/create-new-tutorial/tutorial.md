@@ -125,7 +125,7 @@ The most important file is the `tutorial.md` where the content of the tutorial i
 > 1. Run (by adapting the information between the quotes)
 >
 >    ```
->    $ python bin/setup_training_content.py \
+>    $ planemo training_init \
 >             --topic_name "my-topic" \
 >             --tutorial_name "my-new-tutorial" \
 >             --tutorial_title "Title of the tutorial" \
@@ -214,7 +214,6 @@ The technical support are different files:
 >
 > 1. Add some technical support for the tutorial following the [tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html)
 >    - Add the workflow
->    - (Recommended) Generate the `tools.yaml`
 >    - (Recommended) Generate the `data-library.yaml`
 >    - (Optional) Create an interactive tour
 {: .hands_on}
@@ -240,3 +239,28 @@ To develop a new tutorial:
 5. Write the tutorial
 6. Add some technical support (recommended)
 7. Add slides (optional)
+
+For the next times, you can make it quicker.
+
+> ### {% icon hands_on %} Hands-on: Generation of a tutorial
+>
+> 1. Determine the topic
+> 2. Create your workflow on a running Galaxy instance
+> 3. Create a Zenodo record with the input data
+> 4. Generate the skeleton of your tutorial
+>
+>    ```
+>    $ planemo training_init \
+>             --topic_name "my-topic" \
+>             --tutorial_name "my-new-tutorial" \
+>             --tutorial_title "Title of the tutorial" \
+>             --galaxy_url "URL to Galaxy instance in which you created the workflow" \
+>             --galaxy_api_key "Your API key on the Galaxy instance" \
+>             --workflow_id "ID of the workflow on the Galaxy instance" \
+>             --zenodo_link "URL to the Zenodo record"
+>    ```
+>
+> 5. Fill the remaining metadata in the `tutorial.md`
+> 6. Fill the content of the `tutorial.md`
+> 7. Check it using Jekyll
+{: .hands_on}
