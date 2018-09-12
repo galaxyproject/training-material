@@ -320,7 +320,7 @@ This will allow you to create a file showing the abundance per year of a chosen 
 
 
 >    > 5. Customize 
->    > * "X-Axis label": `Site-Year`
+>    > * "X-Axis label": `Year`
 >    > * "Y-Axis label": `regional_gam`
 >    > 5. Visualize
 >    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
