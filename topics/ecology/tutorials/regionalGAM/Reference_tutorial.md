@@ -167,7 +167,7 @@ First of all, you have to know how many years are taken into account in your dat
 >    > * "with column": `Column 2`(corresponding to the one headed with `YEAR`)
 >    > 7. Use the **Remove beginning of a file** tool to remove first line, a mandatory step to avoid header to be part of the visualization
 
-With the `output` from **Remove beginning of a file** you can now generate a new chart which will have a x-axis corresponding to your column `Column "week""year"`.
+With the `output` from **Remove beginning of a file** you can now generate a new chart which will have a x-axis corresponding to your column `"week""year"`.
 >    > ### {% icon tip %} Visualize
 >    > 1. With the  `output` from **Remove beginning of a file**.
 >    > 2. Select `Charts`
