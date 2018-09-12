@@ -1,72 +1,389 @@
 ---
+install_repository_dependencies: true
+install_resolver_dependencies: true
+install_tool_dependencies: false
+
 tools:
-    - name: deeptools_plot_fingerprint
-      owner: bgruening
-      revision: f8fc4e5aff9d
-      tool_panel_section_label: Identification of the binding sites of the Estrogen receptor
-      tool_shed_url: https://toolshed.g2.bx.psu.edu
-    - name: deeptools_plot_heatmap
-      owner: bgruening
-      revision: 512155688d98
-      tool_panel_section_label: Identification of the binding sites of the Estrogen receptor
-      tool_shed_url: https://toolshed.g2.bx.psu.edu
-    - name: deeptools_bam_compare
-      owner: bgruening
-      revision: a1ca9bccc7f2
-      tool_panel_section_label: Identification of the binding sites of the Estrogen receptor
-      tool_shed_url: https://toolshed.g2.bx.psu.edu
-    - name: deeptools_compute_matrix
-      owner: bgruening
-      revision: fd1275e01605
-      tool_panel_section_label: Identification of the binding sites of the Estrogen receptor
-      tool_shed_url: https://toolshed.g2.bx.psu.edu
-    - name: macs2
-      owner: iuc
-      revision: f5d67c722d67
-      tool_panel_section_label: Identification of the binding sites of the Estrogen receptor
-      tool_shed_url: https://toolshed.g2.bx.psu.edu
-    - name: deeptools_bam_coverage
-      owner: bgruening
-      revision: 5d11599b8a7d
-      tool_panel_section_label: Identification of the binding sites of the Estrogen receptor
-      tool_shed_url: https://toolshed.g2.bx.psu.edu
-    - name: deeptools_plot_correlation
-      owner: bgruening
-      revision: f264afa9fa6f
-      tool_panel_section_label: Identification of the binding sites of the Estrogen receptor
-      tool_shed_url: https://toolshed.g2.bx.psu.edu
-    - name: deeptools_multi_bam_summary
-      owner: bgruening
-      revision: 2d466b530754
-      tool_panel_section_label: Identification of the binding sites of the Estrogen receptor
-      tool_shed_url: https://toolshed.g2.bx.psu.edu
-    - name: samtools_idxstats
-      owner: devteam
-      revision: 88b8c2916784
-      tool_panel_section_label: Identification of the binding sites of the Estrogen receptor
-      tool_shed_url: https://toolshed.g2.bx.psu.edu
-    - name: deeptools_compute_gc_bias
-      owner: bgruening
-      revision: 29fcfd36e90a
-      tool_panel_section_label: Identification of the binding sites of the Estrogen receptor
-      tool_shed_url: https://toolshed.g2.bx.psu.edu
-    - name: trim_galore
-      owner: bgruening
-      revision: 1bf4789584dc
-      tool_panel_section_label: Identification of the binding sites of the Estrogen receptor
-      tool_shed_url: https://toolshed.g2.bx.psu.edu
-    - name: fastqc
-      owner: devteam
-      revision: 9337dd1fbc66
-      tool_panel_section_label: Identification of the binding sites of the Estrogen receptor
-      tool_shed_url: https://toolshed.g2.bx.psu.edu
-    - name: bowtie2
-      owner: devteam
-      revision: 8ccbdbe9a695
-      tool_panel_section_label: Identification of the binding sites of the Estrogen receptor
-      tool_shed_url: https://toolshed.g2.bx.psu.edu
-    - name: bam_to_sam
-      owner: devteam
-      revision: f57df915aa10
-      tool_panel_section_label: Identification of the binding sites of the Estrogen receptor
-      tool_shed_url: https://toolshed.g2.bx.psu.edu
+  - name: 'collapse_collections'
+    owner: 'nml'
+    tool_panel_section_label: 'Collection Operations'
+
+  - name: dwt_var_perfeature
+    owner: devteam
+    tool_panel_section_label: Statistics
+
+  - name: transformation
+    owner: ethevenot
+    tool_panel_section_label: Statistics
+
+  - name: anova
+    owner: lecorguille
+    tool_panel_section_label: Statistics
+
+  - name: heatmap
+    owner: ethevenot
+    tool_panel_section_label: Statistics
+
+  - name: univariate
+    owner: ethevenot
+    tool_panel_section_label: Statistics
+
+  - name: multivariate
+    owner: ethevenot
+    tool_panel_section_label: Statistics
+
+  - name: biosigner
+    owner: ethevenot
+    tool_panel_section_label: Statistics
+
+  - name: lcmsmatching
+    owner: prog
+    tool_panel_section_label: Annotation
+
+  - name: add_input_name_as_column
+    owner: mvdbeek
+    tool_panel_section_label: Text Manipulation
+
+  - name: text_processing
+    owner: bgruening
+    tool_panel_section_label: Text Manipulation
+
+  - name: column_maker
+    owner: devteam
+    tool_panel_section_label: Text Manipulation
+
+  - name: prinseq
+    owner: iuc
+    tool_panel_section_label: Text Manipulation
+  
+ 
+  - name: split_file_on_column
+    owner: bgruening
+    tool_panel_section_label: Text Manipulation
+  
+  - name: merge_cols
+    owner: devteam
+    tool_panel_section_label: Text Manipulation
+  
+  - name: coverage
+    owner: devteam
+    tool_panel_section_label: Text Manipulation
+ 
+  - name: regex_replace
+    owner: kellrott
+    tool_panel_section_label: Text Manipulation
+
+  - name: merge
+    owner: devteam
+    tool_panel_section_label: Text Manipulation
+
+  - name: intersect
+    owner: devteam
+    tool_panel_section_label: Text Manipulation
+
+  - name: join
+    owner: devteam
+    tool_panel_section_label: Text Manipulation
+
+  - name: subtract
+    owner: devteam
+    tool_panel_section_label: Text Manipulation
+
+  - name: subtract_query
+    owner: devteam
+    tool_panel_section_label: Text Manipulation
+
+  - name: unique
+    owner: bgruening
+    tool_panel_section_label: Text Manipulation
+
+  - name: reshape2_melt
+    owner: iuc
+    tool_panel_section_label: Text Manipulation
+
+  - name: reshape2_cast
+    owner: iuc
+    tool_panel_section_label: Text Manipulation
+
+  - name: add_value
+    owner: devteam
+    tool_panel_section_label: Text Manipulation
+
+  - name: jq
+    owner: iuc
+    tool_panel_section_label: Text Manipulation
+
+  - name: tables_arithmetic_operations
+    owner: devteam
+    tool_panel_section_label: Text Manipulation
+
+  - name: flanking_features
+    owner: devteam
+    tool_panel_section_label: Text Manipulation
+
+  - name: cluster
+    owner: devteam
+    tool_panel_section_label: Text Manipulation
+
+  - name: get_flanks
+    owner: devteam
+    tool_panel_section_label: Text Manipulation
+
+  - name: complement
+    owner: devteam
+    tool_panel_section_label: Text Manipulation
+
+  - name: basecoverage
+    owner: devteam
+    tool_panel_section_label: Text Manipulation
+
+  - name: dna_filtering
+    owner: devteam
+    tool_panel_section_label: Text Manipulation
+
+  - name: column_order_header_sort
+    owner: iuc
+    tool_panel_section_label: Text Manipulation
+
+  - name: column_remove_by_header
+    owner: iuc
+    tool_panel_section_label: Text Manipulation
+
+  - name: metagenomeseq_normalization
+    owner: iuc
+    tool_panel_section_label: Text Manipulation
+
+  - name: gff3_rebase
+    owner: iuc
+    tool_panel_section_label: Text Manipulation
+
+  - name: column_arrange_by_header
+    owner: bgruening
+    tool_panel_section_label: Filter and Sort
+
+  - name: seq_filter_by_id
+    owner: peterjc
+    tool_panel_section_label: Filter and Sort
+
+  - name: find_in_reference
+    owner: jjohnson
+    tool_panel_section_label: Filter and Sort
+
+  - name: sample_seqs
+    owner: peterjc
+    tool_panel_section_label: Filter and Sort
+
+  - name: suite_datamash
+    owner: iuc
+    tool_panel_section_label: Join, Subtract and Group
+
+  - name: collection_column_join
+    owner: iuc
+    tool_panel_section_label: Join, Subtract and Group
+
+  - name: numeric_clustering
+    owner: bgruening
+    tool_panel_section_label: Statistics
+
+  - name: seq_composition
+    owner: peterjc
+    tool_panel_section_label: Statistics
+
+  - name: t_test_two_samples
+    owner: devteam
+    tool_panel_section_label: Statistics
+
+  - name: plot_from_lda
+    owner: devteam
+    tool_panel_section_label: Statistics
+
+  - name: mine
+    owner: devteam
+    tool_panel_section_label: Statistics
+
+  - name: lda_analysis
+    owner: devteam
+    tool_panel_section_label: Statistics
+
+  - name: generate_pc_lda_matrix
+    owner: devteam
+    tool_panel_section_label: Statistics
+
+  - name: count_gff_features
+    owner: devteam
+    tool_panel_section_label: Statistics
+
+  - name: correlation
+    owner: devteam
+    tool_panel_section_label: Statistics
+
+  - name: venn_list
+    owner: peterjc
+    tool_panel_section_label: Graph/Display Data
+
+  - name: scatterplot
+    owner: devteam
+    tool_panel_section_label: Graph/Display Data
+
+  - name: histogram
+    owner: devteam
+    tool_panel_section_label: Graph/Display Data
+
+  - name: gmaj
+    owner: devteam
+    tool_panel_section_label: Graph/Display Data
+
+  - name: xy_plot
+    owner: devteam
+    tool_panel_section_label: Graph/Display Data
+
+  - name: draw_stacked_barplots
+    owner: devteam
+    tool_panel_section_label: Graph / Display Data
+
+  - name: ggplot2_pca
+    owner: iuc
+    tool_panel_section_label: Graph/Display Data
+
+  - name: pygenometracks
+    owner: iuc
+    tool_panel_section_label: Graph/Display Data
+
+  - name: ggplot2_heatmap
+    owner: iuc
+    tool_panel_section_label: Graph/Display Data
+
+  - name: ggplot2_violin
+    owner: iuc
+    tool_panel_section_label: Graph/Display Data
+
+  - name: ggplot2_heatmap2
+    owner: iuc
+    tool_panel_section_label: Graph/Display Data
+
+  - name: ggplot2_point
+    owner: iuc
+    tool_panel_section_label: Graph/Display Data
+
+  - name: ggplot2_histogram
+    owner: iuc
+    tool_panel_section_label: Graph/Display Data
+
+  - name: tsne
+    owner: iuc
+    tool_panel_section_label: Graph/Display Data
+
+  - name: best_regression_subsets
+    owner: devteam
+    tool_panel_section_label: Statistics
+
+  - name: principal_component_analysis
+    owner: devteam
+    tool_panel_section_label: Statistics
+
+  - name: kernel_principal_component_analysis
+    owner: devteam
+    tool_panel_section_label: Statistics
+
+  - name: kernel_canonical_correlation_analysis
+    owner: devteam
+    tool_panel_section_label: Statistics
+
+  - name: canonical_correlation_analysis
+    owner: devteam
+    tool_panel_section_label: Statistics
+
+  - name: sklearn_svm_classifier
+    owner: bgruening
+    tool_panel_section_label: Statistics
+
+  - name: sklearn_sample_generator
+    owner: bgruening
+    tool_panel_section_label: Statistics
+
+  - name: sklearn_searchcv
+    owner: bgruening
+    tool_panel_section_label: Statistics
+
+  - name: sklearn_build_pipeline
+    owner: bgruening
+    tool_panel_section_label: Statistics
+
+  - name: sklearn_pairwise_metrics
+    owner: bgruening
+    tool_panel_section_label: Statistics
+
+  - name: sklearn_nn_classifier
+    owner: bgruening
+    tool_panel_section_label: Statistics
+
+  - name: sklearn_numeric_clustering
+    owner: bgruening
+    tool_panel_section_label: Statistics
+
+  - name: sklearn_ensemble
+    owner: bgruening
+    tool_panel_section_label: Statistics
+
+  - name: sklearn_feature_selection
+    owner: bgruening
+    tool_panel_section_label: Statistics
+
+  - name: sklearn_data_preprocess
+    owner: bgruening
+    tool_panel_section_label: Statistics
+
+  - name: sklearn_clf_metrics
+    owner: bgruening
+    tool_panel_section_label: Statistics
+
+  - name: sklearn_regression_metrics
+    owner: bgruening
+    tool_panel_section_label: Statistics
+
+  - name: sklearn_discriminant_classifier
+    owner: bgruening
+    tool_panel_section_label: Statistics
+
+  - name: sklearn_generalized_linear
+    owner: bgruening
+    tool_panel_section_label: Statistics
+
+  - name: sklearn_model_validation
+    owner: bgruening
+    tool_panel_section_label: Statistics
+
+  - name: scipy_sparse
+    owner: bgruening
+    tool_panel_section_label: Statistics
+
+  - name: sklearn_suite
+    owner: bgruening
+    tool_panel_section_label: Statistics
+
+
+  - name: regex_find_replace
+    owner: galaxyp
+    tool_panel_section_label: Text Manipulation
+    
+   
+
+  - name: csv_to_tabular
+    owner: mnhn65mo
+    tool_panel_section_label: File Conversion
+    
+
+  - name: tabular_to_csv
+    owner: mnhn65mo
+    tool_panel_section_label: File Conversion
+    
+
+  - name: rdata_handler
+    owner: mnhn65mo
+    tool_panel_section_label: File conversion
+    
+
+  - name: regionalgam
+    owner: mnhn65mo
+    tool_panel_section_label: Phenology & Abundance Index
+    
