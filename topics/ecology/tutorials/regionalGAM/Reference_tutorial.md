@@ -127,9 +127,9 @@ This step will allow you to compute and display the phenology of a species. In t
 >    > 1. Click on the name of output dataset from **flight curve** (something like `Flight curve on data 6`) to expand dataset related details and options
 >    > 2. Click on the "Visualize" button then select `Charts` 
 >    > 3. Select a visualization type: "line chart (NVD 3)"
->    > 4. Give it a proper name like `Pyronia tithonus phenology` 
+>    > 4. Give it a proper name like `Pyronia tithonus phenology raw simple vizu` 
 >    > 5. On {% icon tip %} "Select data" area, specify:
->    > * "Provide a label": For example the name of the species, `Pyronia tithonus` here
+>    > * "Provide a label": For example `Pyronia tithonus phenology from 2003 to 2012`
 >    > * "Pick a series color": Choose a color for the line 
 >    > * "Data point labels": `Column 1`
 >    > * "Values for x-axis": `Column 2`
@@ -172,9 +172,9 @@ With the `output` from **Remove beginning of a file** you can now generate a new
 >    > 1. With the  `output` from **Remove beginning of a file**.
 >    > 2. Select `Charts`
 >    > 3. Select a visualization type: "line chart (NVD 3)
->    > 4. Give it a proper name like `Pyronia tithonus phenology` 
+>    > 4. Give it a proper name like `Pyronia tithonus phenology simple vizu` 
 >    > 5. On {% icon tip %} "Select data" area, specify:
->    > * "Provide a label": This can be `Pyronia tithonus on several years`
+>    > * "Provide a label": This can be `Pyronia tithonus phenology from 2003 to 2012`
 >    > * "Pick a series color": Choose a color for the line 
 >    > * "Data point labels": `Column 6` (the nm column) or another one
 >    > * "Values for x-axis": `Column 7` (the "week-year" column)
