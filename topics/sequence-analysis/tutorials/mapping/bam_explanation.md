@@ -2,8 +2,8 @@ A BAM ([Binary Alignment Map](https://en.wikipedia.org/wiki/SAM_(file_format))) 
 
 > ### {% icon hands_on %} Hands-on: Conversion into a SAM file
 >
-> 1. Inspect the {% icon param-file %} output of **{{ include.mapper }}** {% icon tool %})
->
+> 1. **BAM-to-SAM** {% icon tool %}
+> > BAM File to Convert (output of **{{ include.mapper }}** {% icon tool %})
 {: .hands_on}
 
 A BAM file (or a SAM file, the non compressed version) consists of:

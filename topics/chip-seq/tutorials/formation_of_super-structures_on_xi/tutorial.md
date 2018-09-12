@@ -4,9 +4,9 @@ layout: tutorial_hands_on
 title: "Formation of the Super-Structures on the Inactive X"
 zenodo_link: "https://doi.org/10.5281/zenodo.1321974"
 questions:
+    - Histone modification?
     - How is a raw set of ChIP-seq data processed and analyzed?
     - Where are the enriched regions for H3K27me3, H3K4me3 and CTCF on the chrX?
-    - Histone modification?
 objectives:
     - Inspect the read quality
     - Trim low quality bases
@@ -43,7 +43,7 @@ On a larger scale than nucleosomes, DNA is forming loops. DNA elements that woul
 
 In mammals, the X chromosome inactivation (XCI) balances the dosage of X-linked genes between females and males. The genes on the inactive X (Xi) chromosome are not expressed.
 
-Some changes in the histone modifications could be involved. For example, the H3K4m3 is adding 3 methyl-group of the 4th Lysine in the histone 3 amino-acid. This modification is known to activate the transcription on nearby genes by opening the chromatine. The H3K27me3 on the other hand is inactivating the transcription of the nearby genes:
+Binding certain proteins to each of the eight histone proteins may modify the chromatine structure and may result in changes in trascription level. For example, the H3K4m3 is adding 3 methyl-group of the 4th Lysine in the histone 3 amino-acid. This modification is known to activate the transcription on nearby genes by opening the chromatine. The H3K27me3 on the other hand is inactivating the transcription of the nearby genes:
 
 ![Fadloun et al, 2013](../../images/formation_of_super-structures_on_xi/histone_modifications.jpg "Source: Fadloun et al, 2013")
 
@@ -60,7 +60,7 @@ In different experiments, they targetted histones with H3K27me3 or H3K4me3 and C
 
 ![ChIP-seq workflow](../../images/formation_of_super-structures_on_xi/Chromatin_immunoprecipitation_sequencing.jpg "Source: http://e.biohackers.net/ChIP-seq")
 
-They obtained sequences corresponding to portion of DNA linked to histones with H3K27me3, H3K4me3 or CTCF are found. Using this information, they could identify if there are differences in the H3K27me3, H3K4me3 and CTCF between the X (active or inactive) chromosomes and the potentially influenced genes.
+They obtained sequences corresponding to portion of DNA linked to histones with H3K27me3, H3K4me3 or CTCF. Using this information, they could identify if there are differences in the H3K27me3, H3K4me3 and CTCF between the X (active or inactive) chromosomes and the potentially influenced genes.
 
 In the upcoming tutorial, we will reproduce the analysis of the ChIP-seq data step by step:
 
@@ -89,7 +89,7 @@ To save time, we will do it only on the data of one sample `wt_H3K4me3_rep1` tha
 > ### {% icon hands_on %} Hands-on: Import the data
 >
 > 1. Create a new history for this tutorial and give it a proper name
-> 2. Import `wt_H3K4me3_read1.fastq.gz` and `wt_H3K4me3_read2.fastq.gz` from [Zenodo](https://zenodo.org/record/1324070) from the data library (ask your instructor)
+> 2. Import `wt_H3K4me3_read1.fastq.gz` and `wt_H3K4me3_read2.fastq.gz` from [Zenodo](https://zenodo.org/record/1324070) or from the data library (ask your instructor)
 >
 >    ```
 >    https://zenodo.org/record/1324070/files/wt_H3K4me3_read1.fastq.gz
@@ -108,7 +108,7 @@ To save time, we will do it only on the data of one sample `wt_H3K4me3_rep1` tha
 
 {% include topics/sequence-analysis/tutorials/quality-control/fastq_question.md %}
 
-During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis abd can lead to a misinterpretation of the data.
+During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data.
 
 Sequence quality control is therefore an essential first step in your analysis. We use here similar tools as described in ["Quality control" tutorial]({{site.baseurl}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
 
@@ -243,7 +243,7 @@ With ChiP sequencing, we obtain sequences corresponding to portion of DNA linked
 >    > > The overall alignment rate is 98.64%. This score is quite high. If you have less than 70-80%, you should investigate the cause: contamination, etc.
 >    > >
 >    > > 43719 (90.27%) reads have been aligned concordantly exactly 1 time and 3340 (6.90%) aligned concordantly >1 times. The latter ones correspond to multiple mapped reads. Allowing for multiple  mapped reads increases the number of usable reads and the sensitivity of peak detection;
-however, the number of false positives may also increase. Here the number of uniquely mapped reads is sufficient to analyze to remove the multi-mapped reads.
+however, the number of false positives may also increase. 
 >    > {: .solution }
 >    {: .question}
 >
@@ -323,18 +323,18 @@ Since in this tutorial we are interested in assessing H3K4me3, H3K27me3 and CTCF
 > > ### {% icon solution %} Solution
 > > As one could expect, the input replicates cluster together and the ChIP replicates cluster together. It confirms that the immuno-precipitation step worked on our ChIP replicates.
 > >
-> > We also see that the replicates are clustered together: it is also a good sign that the different experiments (H3K4me3, H3K27me3 or CTCF) seem meaningful.
+> > Moreover, for each sample, there is a high correlation between the two replicates which confirms the validity of the experiments. 
 > >
 > {: .solution }
 {: .question}
 
 ## IP strength estimation
 
-To evaluate the quality of the immuno-precipitation step, we can compute the IP strength. It determines how well the signal in the ChIP-seq sample can be differentiated from the background distribution of reads in the control sample ('input'). After all, around 90% of all DNA fragments in a ChIP experiment will represent the genomic background.
+To evaluate the quality of the immuno-precipitation(IP) step, we can compute the IP strength. It determines how well the signal in the ChIP-seq sample can be differentiated from the background distribution of reads in the control sample ('input'). After all, around 90% of all DNA fragments in a ChIP experiment will represent the genomic background.
 
 To do that we take the data from the `rep1` of the `wt_H3K4me3` ChIP-seq sample and compare it with its corresponding input sample, using **plotFingerprint** {% icon tool %} of deepTools.
 
-Similar to **multiBamSummary** {% icon tool %}, **plotFingerprint** {% icon tool %} randomly samples genome regions (bins) of a specified length and sums the per-base coverage in the indexed BAM files that overlap with those regions. These coverage values are then sorted according to their rank and the cumulative sum of read counts is plotted.
+Similar to **multiBamSummary** {% icon tool %}, **plotFingerprint** {% icon tool %} randomly samples genome regions of a specified length (bins) and sums the per-base coverage in the indexed BAM files that overlap with those regions. These coverage values are then sorted according to their rank and the cumulative sum of read counts is plotted.
 
 > ### {% icon hands_on %} Hands-on: IP strength estimation
 >
