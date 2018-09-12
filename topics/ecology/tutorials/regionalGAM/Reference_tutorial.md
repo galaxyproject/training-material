@@ -172,7 +172,7 @@ First of all, you have to know how many years are taken into account in your dat
 
 With the `output` from **Remove beginning of a file** you can now generate a new chart which will have a x-axis corresponding to your column `Column "week""year"`.
 >    > ### {% icon tip %} Visualize
->    > 1. With the  `output` from **Merge Columns together**.
+>    > 1. With the  `output` from **Remove beginning of a file**.
 >    > 2. Select `Charts`
 >    > 3. Select a visualization type: "line chart (NVD 3)
 >    > 4. Give it a proper name like `Pyronia tithonus phenology` 
