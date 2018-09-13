@@ -100,60 +100,61 @@ Now that we know what our input data is, let's get it into our Galaxy history:
 >
 > 2. **Import Sample Data.** The data for this course may be available from a shared library in Galaxy
 > (ask your instructor). If this is not the case, you can upload it yourself.
-> - Option 1: From data library:
->   - Navigate to the shared data library, you should find 20 pairs of fastq files; 19 from the mice,
-> and one pair from the mock community.
-> - Option 2: From your Zenodo:
->   - Data is available from Zenodo here: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg)](https://doi.org/10.5281/zenodo.800651)
->   - In the file upload menu choose the `Paste/Fetch data` option and enter the following urls to import the file from Zenodo to Galaxy directly
->    > ### {% icon solution %} Solution
->    > ```
->    > https://zenodo.org/record/800651/files/F3D0_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D0_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D141_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D141_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D142_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D142_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D143_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D143_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D144_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D144_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D145_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D145_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D146_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D146_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D147_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D147_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D148_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D148_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D149_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D149_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D150_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D150_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D1_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D1_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D2_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D2_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D3_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D3_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D5_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D5_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D6_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D6_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D7_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D7_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D8_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D8_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D9_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D9_R2.fastq
->    > https://zenodo.org/record/800651/files/Mock_R1.fastq
->    > https://zenodo.org/record/800651/files/Mock_R2.fastq
->    > ```
->    {: .solution }
+>   - Option 1: From data library:
+>     - Navigate to the shared data library, you should find 20 pairs of fastq files; 19 from the mice,
+>       and one pair from the mock community.
+>     - Option 2: From your Zenodo:
+>       - Data is available from Zenodo here: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg)](https://doi.org/10.5281/zenodo.800651)
+>       - In the file upload menu choose the `Paste/Fetch data` option and enter the following urls to import the file from Zenodo to Galaxy directly
+>
+>       > ### {% icon solution %} List of Zenodo URLs
+>       > ```
+>       > https://zenodo.org/record/800651/files/F3D0_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D0_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D141_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D141_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D142_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D142_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D143_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D143_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D144_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D144_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D145_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D145_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D146_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D146_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D147_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D147_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D148_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D148_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D149_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D149_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D150_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D150_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D1_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D1_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D2_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D2_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D3_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D3_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D5_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D5_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D6_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D6_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D7_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D7_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D8_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D8_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D9_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D9_R2.fastq
+>       > https://zenodo.org/record/800651/files/Mock_R1.fastq
+>       > https://zenodo.org/record/800651/files/Mock_R2.fastq
+>       > ```
+>       {: .solution }
 > <br>
 >
 > 3. **Import Reference Data.**  Go back to the data library and import the following reference
-> datasets, or import them from Zenodo:
+> datasets
 >  - `silva.v4.fasta`
 >  - `HMP_MOCK.v35.fasta`
 >  - `mouse.dpw.metadata`
@@ -161,7 +162,9 @@ Now that we know what our input data is, let's get it into our Galaxy history:
 >  - `trainset9_032012.pds.fasta`
 >  - `trainset9_032012.pds.tax`
 >
->    > ### {% icon solution %} Solution
+>    Or import them from Zenodo:
+>
+>    > ### {% icon solution %} List of Zenodo URLs
 >    > ```
 >    > https://zenodo.org/record/800651/files/HMP_MOCK.v35.fasta
 >    > https://zenodo.org/record/800651/files/mouse.dpw.metadata
@@ -314,13 +317,13 @@ The following tool will remove any sequences with ambiguous bases (`maxambig` pa
 > >
 > > How many reads were removed in this screening step? (Hint: run the summary.seqs tool again)
 > >
-> >    > ### {% icon solution %} Solution
-> >    > 23,488.
-> >    > 
-> >    > This can be determined by looking at the number of lines in bad.accnos output of screen.seqs
-> >    > or by comparing the total number of seqs between of the summary log before and after this screening
-> >    > step
-> >    {: .solution }
+> > > ### {% icon solution %} Solution
+> > > 23,488.
+> > >
+> > > This can be determined by looking at the number of lines in bad.accnos output of screen.seqs
+> > > or by comparing the total number of seqs between of the summary log before and after this screening
+> > > step
+> > {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -341,11 +344,12 @@ times, we'll unique our sequences using the `unique.seqs` command:
 > >
 > > How many sequences were unique? how many duplicates were removed?
 > >
-> >    > ### {% icon solution %} Solution
-> >    > 16,426 unique sequences and 112,446 duplicates.
-> >    >
-> >    > This can be determined from the number of lines in the fasta (or names) output, compared to the
-> >    > number of lines in the fasta file before this step.
+> > > ### {% icon solution %} Solution
+> > > 16,426 unique sequences and 112,446 duplicates.
+> > >
+> > > This can be determined from the number of lines in the fasta (or names) output, compared to the
+> > > number of lines in the fasta file before this step.
+> > {: .solution}
 > {: .question}
 {: .hands_on}
 
@@ -496,7 +500,7 @@ columns. Because we've perhaps created some redundancy across our sequences by t
 > >  How many duplicate sequences did our filter step produce?
 > >
 > > > ### {% icon solution %} Solution
-> > > 3. The number of unique sequences was reduced from 16298 to 16295
+> > > 3: The number of unique sequences was reduced from 16298 to 16295
 > > {: .solution }
 > {: .question}
 {: .hands_on}
@@ -520,7 +524,7 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 > >
 > >  How many unique sequences are we left with after this clustering of highly similar sequences?
 > > > ### {% icon solution %} Solution
-> > > 5720. This is the number of lines in the fasta output
+> > > 5720: This is the number of lines in the fasta output
 > > {: .solution }
 > {: .question}
 {: .hands_on}
@@ -610,18 +614,18 @@ Let's go ahead and classify those sequences using the Bayesian classifier with t
 > > 1. How many unique (representative) sequences were removed in this step?
 > > 2. How many sequences in total?
 > >
-> >    > ### {% icon solution %} Solution
-> >    > 20 representative sequences were removed.
-> >    >
-> >    > The fasta file output from Remove.seqs had 2281 sequences while the fasta output from Remove.lineages
-> >    > contained 2261 sequences.
-> >    >
-> >    > 162 total sequences were removed.
-> >    >
-> >    > If you run summary.seqs with the count table, you will see that we now have 2261 unique sequences
-> >    > representing a total of 117,929 total sequences (down from 118,091 before). This means 162 of our
-> >    > sequences were in represented by these 20 representative sequences.
-> >    {: .solution }
+> > > ### {% icon solution %} Solution
+> > > 20 representative sequences were removed.
+> > >
+> > > The fasta file output from Remove.seqs had 2281 sequences while the fasta output from Remove.lineages
+> > > contained 2261 sequences.
+> > >
+> > > 162 total sequences were removed.
+> > >
+> > > If you run summary.seqs with the count table, you will see that we now have 2261 unique sequences
+> > > representing a total of 117,929 total sequences (down from 118,091 before). This means 162 of our
+> > > sequences were in represented by these 20 representative sequences.
+> > {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -746,8 +750,7 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 > >
 > >  How many OTUs were identified in our mock community?
 > > > ### {% icon solution %} Solution
-> > > 34.
-> > > Open the shared file or OTU list and look at the header line. You will see a column for each OTU
+> > > 34: Open the shared file or OTU list and look at the header line. You will see a column for each OTU
 > > {: .solution }
 > {: .question}
 {: .hands_on}
@@ -866,9 +869,7 @@ sequences (100%) were classified as being members of the Alistipes.
 >
 > > ### {% icon solution %} Solution
 > > Examine the tax.summary file.
-> {: .solution }
->
-> > ### {% icon solution %} Solution
+> >
 > > Samples F3D141, F3D142,  F3D144, F3D145, F3D2. This answer can be found by
 > > examining the tax.summary output and finding the columns with nonzero
 > > values for the line of Staphylococcus

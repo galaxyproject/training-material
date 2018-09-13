@@ -68,16 +68,16 @@ Read quality scores (phred scores) in FASTQ-formatted data can be encoded by one
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. What quality score encoding scheme is being used for each sample?
->    > 1. What is the read length for each sample?
->    > 1. What does the base/read quality look like for each sample?
->    > 1. Are there any adaptors present in these reads? Which one(s)?
+>    > 2. What is the read length for each sample?
+>    > 3. What does the base/read quality look like for each sample?
+>    > 4. Are there any adaptors present in these reads? Which one(s)?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. All samples use the Illumina 1.9 quality encoding scheme, so we do **not** need to convert. 
->    >    > 2. All samples have a read length of 50 nt. 
->    >    > 3. The base quality across the entire length of the reads is good (phred score > 28 for the most part). 
->    >    > 4. Yes, the "Illumina Universal Adapter" is present. 
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. All samples use the Illumina 1.9 quality encoding scheme, so we do **not** need to convert. 
+>    > > 2. All samples have a read length of 50 nt. 
+>    > > 3. The base quality across the entire length of the reads is good (phred score > 28 for the most part). 
+>    > > 4. Yes, the "Illumina Universal Adapter" is present. 
+>    > {: .solution }
 >    {: .question}
 >
 >    ![The output of FastQC as a boxplot](../../images/sRNA/Fig5a_fastqc_result_stats_boxplot.png)
@@ -126,12 +126,12 @@ sRNA-seq library preparation involves adding an artificial adaptor sequence to b
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. What is the read length?
->    > 1. Are there any adaptors present in these reads? Which one(s)?
+>    > 2. Are there any adaptors present in these reads? Which one(s)?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. The read lengths range from 12 to 50 nt after trimming.
->    >    > 2. No, Illumina Universal Adaptors are no longer present. No other adapters are present.
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. The read lengths range from 12 to 50 nt after trimming.
+>    > > 2. No, Illumina Universal Adaptors are no longer present. No other adapters are present.
+>    > {: .solution }
 >    {: .question}
 >
 > ![FastQC output after trimming](../../images/sRNA/Fig8a_fastqc_post_trimming_result.png)

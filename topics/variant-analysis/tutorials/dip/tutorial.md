@@ -144,7 +144,7 @@ This makes it highly unlikely that **AA** is a true genotype of this individual.
 
 [FreeBayes](https://github.com/ekg/freebayes) is an open source variant caller that has been battle-tested by the 1000 Genomes community and is extensively used today (also see [bcbio](https://bcbio.wordpress.com/)). It has a number of features that simplify variant discovery workflows. These include (from FreeBayes github page):
 
-* **Indel realignment is accomplished internally** using a read-independent method, and issues resulting from discordant alignments are dramatically reducedy through the direct detection of haplotypes;
+* **Indel realignment is accomplished internally** using a read-independent method, and issues resulting from discordant alignments are dramatically reduced through the direct detection of haplotypes;
 * **The need for base quality recalibration is avoided** through the direct detection of haplotypes. Sequencing platform errors tend to cluster (e.g. at the ends of reads), and generate unique, non-repeating haplotypes at a given locus;
 * **Variant quality recalibration is avoided** by incorporating a number of metrics, such as read placement bias and allele balance, directly into the Bayesian model;
 * **Ability to incorporate non-diploid cases** such as pooled datasets or data from polyploid samples.
@@ -273,7 +273,7 @@ The first step is to convert a VCF file we would like to analyze into a GEMINI d
 >
 >![gemini_db_info tool to observe sqlite database](../../images/gemini_db_info.png)
 >
->This produce a list of [all tables and fields](https://github.com/nekrut/galaxy/wiki/datasets/gemini_tables.txt) in the database.
+>This produces a list of [all tables and fields](https://github.com/nekrut/galaxy/wiki/datasets/gemini_tables.txt) in the database.
 >
 {: .hands_on}
 
@@ -283,7 +283,7 @@ GEMINI database is queried using the versatile SQL language (more on SQL [here](
 
 The examples below are taken from "[Intro to Gemini](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)" tutorial. For extensive documentation see "[Querying GEMINI](https://gemini.readthedocs.org/en/latest/content/querying.html)".
 
-> ### Are there "novel" varinats that are not annotated in dbSNP database?
+> ### Are there "novel" variants that are not annotated in dbSNP database?
 >
 >
 >To answer this question we will type the following query:
@@ -393,7 +393,7 @@ GEMINI provides access to genotype, sequencing depth, genotype quality, and geno
 
 ### Using wildcards
 
-Wilcards simply writing SQL expressions when searching across multiple terms. The syntax for genotype filter wilcards is
+Wildcards simply writing SQL expressions when searching across multiple terms. The syntax for genotype filter wildcards is
 
 ```
 (COLUMN).(SAMPLE_WILDCARD).(SAMPLE_WILDCARD_RULE).(RULE_ENFORCEMENT)

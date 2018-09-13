@@ -316,7 +316,7 @@ Here is what to do to load the data:
 >
 >![RNASeq data in history](../../images/rnaseq_data_in_history.png)
 >
->Twelve datasets make a lot of clicking necessary. To avoid this annoyance we will combine them into two collections - **c1** and **c2** as shown in the video below. Also, see this [tutorial]({{site.baseurl}}/topics/introduction/tutorials/processing-many-samples-at-once/tutorial.html) for yet another explanation of dataset collections.
+>Twelve datasets make a lot of clicking necessary. To avoid this annoyance we will combine them into two collections - **c1** and **c2** as shown in the video below. Also, see this [tutorial]({{site.baseurl}}/topics/galaxy-data-manipulation/tutorials/processing-many-samples-at-once/tutorial.html) for yet another explanation of dataset collections.
 > <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/163625221" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 >
 

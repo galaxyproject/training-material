@@ -139,7 +139,7 @@ To make the topic aware of this new tutorial, some metadata about the tutorial h
 
 Our tutorials try to follow the "learn by doing" approach; they combine both theoretical and practical sections. The practical sections (or hands-on) are supposed to be done on Galaxy.
 
-The first task is to select some data to use the hands-on sections. The selected data must be informative enough to illustrate the meaning of using a tool or a given technique, but not too big to require long waiting times for its processing during a workshop. Typically, the selected data should be the informative subset of a full real-life dataset.
+The first task is to select some data to use for the Hands-on sections. The selected data must be informative enough to illustrate the meaning of using a tool or a given technique, but not too big to require long waiting times for processing during a workshop. Upload and download of files into and out of Galaxy is usually quick, but the time taken for a tool to run can be long. Tool run times of no more than 10-15 mins are recommended. Typically, the selected data should be the informative subset of a full real-life dataset.
 
 For example, we could generate a small dataset by
 

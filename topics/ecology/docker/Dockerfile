@@ -1,4 +1,5 @@
 # Galaxy - ecology training material
+
 #
 # to build the docker image, go to root of training repo and
 #    docker build -t <your_tag> -f topics/<your_topic>/docker/Dockerfile .
@@ -6,7 +7,7 @@
 # to run image:
 #    docker run -p "8080:80" -t <your_tag>
 
-FROM 
+FROM bgruening/galaxy-stable
 
 MAINTAINER Galaxy Training Material
 

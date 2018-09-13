@@ -80,19 +80,19 @@ Suppose you have **A** samples with a variant in a population. You are performin
 > 1. What is the probability of a having a real polymorphism **A** given our observation of variants in reads **B**? In other words what is the probability of A given **B**? Or, as stated in the original [blog](https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/): "given that we are in region **B** what is the probability that we are in the region **AB**?"
 > 2. Now, let's ask an opposite question. Given a true polymorphism **A** what are the chances that we do detect it (i.e., find ourselves in **AB**)?
 >
->    > ### {% icon solution %} Solution
->    > 1. $$P(A|B) = \frac{\vert AB \vert}{|B|}$$
->    >
->    >    Dividing by $$\vert U \vert$$: $$P(A \vert B) = \frac{\frac{\vert AB \vert}{\vert U \vert}}{\frac{\vert B \vert}{\vert U \vert}}$$
->    >
->    >    Because we know that $$P(AB) = \frac{\vert AB \vert}{\vert U \vert}$$ and $$P(B) = \frac{\vert B \vert}{\vert U \vert}$$, we can rewrite the equation in the previous bullet point as $$P(A \vert B) = \frac{P(AB)}{P(B)}$$
->    >
->    > 2. It will be $$P(B \vert A) = \frac{P(AB)}{P(A)}$$.
->    >
->    >    So, because we know that $$P(A \vert B) = \frac{P(AB)}{P(B)}$$ and we just reasoned that $$P(B \vert A) = \frac{P(AB)}{P(A)}$$, we can say that $$P(A \vert B)P(B) = P(B \vert A)P(A)$$ leading us to the Bayes formula $$P(A \vert B) = \frac{P(B \vert A)P(A)}{P(B)}$$.
->    >
->    >    Translating this into "genomics terms" the probability of having a genotype G given reads R is: $$P(G \vert R) = \frac{P(R \vert G)P(G)}{P(R)}$$. Because in a given calculation of $$P(G \vert R)$$ reads are fixed we can re-write the Bayes formula in the following way $$P(G \vert R) \sim P(R \vert G)P(G)$$ with $$P(R)$$ becoming a constant.
->    {: .solution }
+> > ### {% icon solution %} Solution
+> > 1. $$P(A|B) = \frac{\vert AB \vert}{|B|}$$
+> >
+> >    Dividing by $$\vert U \vert$$: $$P(A \vert B) = \frac{\frac{\vert AB \vert}{\vert U \vert}}{\frac{\vert B \vert}{\vert U \vert}}$$
+> >
+> >    Because we know that $$P(AB) = \frac{\vert AB \vert}{\vert U \vert}$$ and $$P(B) = \frac{\vert B \vert}{\vert U \vert}$$, we can rewrite the equation in the previous bullet point as $$P(A \vert B) = \frac{P(AB)}{P(B)}$$
+> >
+> > 2. It will be $$P(B \vert A) = \frac{P(AB)}{P(A)}$$.
+> >
+> >    So, because we know that $$P(A \vert B) = \frac{P(AB)}{P(B)}$$ and we just reasoned that $$P(B \vert A) = \frac{P(AB)}{P(A)}$$, we can say that $$P(A \vert B)P(B) = P(B \vert A)P(A)$$ leading us to the Bayes formula $$P(A \vert B) = \frac{P(B \vert A)P(A)}{P(B)}$$.
+> >
+> >    Translating this into "genomics terms" the probability of having a genotype G given reads R is: $$P(G \vert R) = \frac{P(R \vert G)P(G)}{P(R)}$$. Because in a given calculation of $$P(G \vert R)$$ reads are fixed we can re-write the Bayes formula in the following way $$P(G \vert R) \sim P(R \vert G)P(G)$$ with $$P(R)$$ becoming a constant.
+> {: .solution }
 {: .question}
 
 :exclamation: This leaves us with the need to estimate two things:
@@ -286,17 +286,17 @@ GEMINI database is queried using the versatile SQL language (more on SQL [here](
 > 2. At how many sites both father and son have non reference alleles?
 > 3. List genotypes for father and son where they have non-reference alleles.
 >
->    > ### {% icon solution %} Solution
->    > 1. To answer this question we will use two fields of GEMINI_query interface:
->    >
->    >    - Type `SELECT * from variants` into **The query to be issued to the database**
->    >    - Type `gt_types.HG002_NA24385_son <> HOM_REF` into **Restrictions to apply to genotype values**
->    >
->    >    Here is an [example](../../images/gemini_query2.png). It will generate [this output](https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True)
->    >
->    > 2. Typing the same expression `SELECT * from variants` into **The query to be issued to the database** and `(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)` into **Restrictions to apply to genotype values** will generate [this output](https://usegalaxy.org/datasets/bbd44e69cb8906b5aab445b3cd632ba7/display/?preview=True).
->    > 3. Typing `SELECT gts.HG002_NA24385_son, gts.HG003_NA24149_father from variants` into **The query to be issued to the database** and `(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)` into **Restrictions to apply to genotype values** will generate [this output](https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be21ed02/display/?preview=True).
->    {: .solution }
+> > ### {% icon solution %} Solution
+> > 1. To answer this question we will use two fields of GEMINI_query interface:
+> >
+> >    - Type `SELECT * from variants` into **The query to be issued to the database**
+> >    - Type `gt_types.HG002_NA24385_son <> HOM_REF` into **Restrictions to apply to genotype values**
+> >
+> >    Here is an [example](../../images/gemini_query2.png). It will generate [this output](https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True)
+> >
+> > 2. Typing the same expression `SELECT * from variants` into **The query to be issued to the database** and `(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)` into **Restrictions to apply to genotype values** will generate [this output](https://usegalaxy.org/datasets/bbd44e69cb8906b5aab445b3cd632ba7/display/?preview=True).
+> > 3. Typing `SELECT gts.HG002_NA24385_son, gts.HG003_NA24149_father from variants` into **The query to be issued to the database** and `(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)` into **Restrictions to apply to genotype values** will generate [this output](https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be21ed02/display/?preview=True).
+> {: .solution }
 {: .question}
 
 ### Using wildcards
@@ -307,11 +307,11 @@ Wildcards simply writing SQL expressions when searching across multiple terms. T
 >
 > At which variants are every sample heterozygous?
 >
->    > ### {% icon solution %} Solution
->    >
->    > Type `SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants` into **The query to be issued to the database** and `(gt_types).(*).(==HET).(all)` into **Restrictions to apply to genotype values**. Here we use wildcards for the query (`(gts.*)` = get genotypes for **all** samples) and genotype filtering (`(gt_types).(*).(==HET).(all)`, the [all operator](https://gemini.readthedocs.org/en/latest/content/querying.html#the-all-operator) implies that want results for **all** afftected individuals). It will generate [this output](https://usegalaxy.org/datasets/bbd44e69cb8906b5819e1404b5e127d1/display/?preview=True).
->    >
->    {: .solution }
+> > ### {% icon solution %} Solution
+> >
+> > Type `SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants` into **The query to be issued to the database** and `(gt_types).(*).(==HET).(all)` into **Restrictions to apply to genotype values**. Here we use wildcards for the query (`(gts.*)` = get genotypes for **all** samples) and genotype filtering (`(gt_types).(*).(==HET).(all)`, the [all operator](https://gemini.readthedocs.org/en/latest/content/querying.html#the-all-operator) implies that want results for **all** afftected individuals). It will generate [this output](https://usegalaxy.org/datasets/bbd44e69cb8906b5819e1404b5e127d1/display/?preview=True).
+> >
+> {: .solution }
 {: .question}
 
 # Going further

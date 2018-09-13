@@ -68,6 +68,7 @@ The OpenMS suite provides several tools (FeatureFinders) for MS1 feature detecti
 >   > When using SILAC-KR or dimethyl-labelling and trypsin digestion, exactly one labelled amino acid per peptide is expected. The only labelled amino acids are lysine (K) and arginine (R) and trypsin cuts after each of them. However, a small percentage of missed cleavage normally occur also in those datasets. Setting **Maximum number of missed cleavages due to incomplete digestion** to `1` will be sufficient to deal with most missed cleavages.
 >   >
 >   > When using other enzymes (e.g. Lys-C) or other labels (e.g. <sup>18</sup>O), several labelled amino acids per peptide are expected. You can search for those features by increasing the parameter **Maximum number of missed cleavages due to incomplete digestion**.
+>   {: .comment}
 {: .hands_on}
 
 # Peptide and Protein Identification
@@ -166,11 +167,11 @@ Comment lines in the beginning of a `tabular` file may sometimes cause errors, t
 >   > 2. What might have been the mixing ratio of the input dataset?
 >   > 3. In the histogram, there is a second local maximum at about FC 0. What might that mean?
 >   >
->   >  > ### {% icon solution %} Solution
->   >  > 1.    With the above parameters, you should have quantified 818 peptides and 407 proteins.
->   >  > 2. In the histogram, you see that the peak of the density curve is between -1.1 and -1.2. In the summary statistics, you can see that the mean protein ratio was -0.98. An FC of -1 indicates that the unlabelled proteins were twice as abundant as their heavy-labelled counterparts. Indeed, the mixing ratio of the dataset was 2 parts light labelled HEK cell lysate and 1 part heavy labelled HEK cell lysate.
->   >  > 3. Some proteins were quantified with an FC close to 0. These may stem from incomplete SILAC labelling. Even after two weeks of cell culture in SILAC medium, some proteins with a very low turnover rate may remain unlabelled.
->   >  {: .solution }
+>   > > ### {% icon solution %} Solution
+>   > > 1.    With the above parameters, you should have quantified 818 peptides and 407 proteins.
+>   > > 2. In the histogram, you see that the peak of the density curve is between -1.1 and -1.2. In the summary statistics, you can see that the mean protein ratio was -0.98. An FC of -1 indicates that the unlabelled proteins were twice as abundant as their heavy-labelled counterparts. Indeed, the mixing ratio of the dataset was 2 parts light labelled HEK cell lysate and 1 part heavy labelled HEK cell lysate.
+>   > > 3. Some proteins were quantified with an FC close to 0. These may stem from incomplete SILAC labelling. Even after two weeks of cell culture in SILAC medium, some proteins with a very low turnover rate may remain unlabelled.
+>   > {: .solution }
 >   {: .question}
 {: .hands_on}
 
@@ -182,7 +183,7 @@ Basic TOPPView tutorials are available as [videos](https://www.openms.de/getting
 
 For the optimization of tool parameters, it is recommended not to work with a complete LC-MS/MS run. Instead, we will use ***FileFilter*** to extract a small *RT-slice* of our input dataset, i.e. a fraction of the original dataset that was measured during a short period of time. Reducing the test data reduces the time needed for analysis and facilitates visual examination of the data.
 
-Using Galaxy Workflows enables us to quickly re-run a full analysis with changed parameters. To learn about Galaxy Workflows, consult this [tutorial]({{site.baseurl}}/topics/introduction/tutorials/galaxy-intro-history-to-workflow/tutorial.html).
+Using Galaxy Workflows enables us to quickly re-run a full analysis with changed parameters. To learn about Galaxy Workflows, consult this [tutorial]({{site.baseurl}}/topics/galaxy-ui/tutorials/history-to-workflow/tutorial.html).
 
 **Cave:** Be aware that only very small parts of your dataset can be checked by visual examination. To minimize biases, try to look at the same areas / features of each result file.
 
@@ -282,11 +283,11 @@ Two problems typically disturb correct peptide quantitation:
 > 3. How many features could not be mapped to a peptide identification? (Click on the ProteinQuantifier output and look at the tool's infobox.)
 > 1. Which problems are most prominent in the test dataset?
 >
->  > ### {% icon solution %} Solution
->  > 1. 1,395 peptide IDs could not be mapped to a feature.
->  > 2. 1,898 features, corresponding to 949 consensus features could not be mapped to a peptide identification.
->  > 3. The mapping of peptide IDs to features seems to have worked mostly fine. The main problems seem to be (1) missing peptide identifications, (2) missing features where a peptide was identified and (3) features that span a shorter RT range than the corresponding peptide's elution peak.
->  {: .solution }
+> > ### {% icon solution %} Solution
+> > 1. 1,395 peptide IDs could not be mapped to a feature.
+> > 2. 1,898 features, corresponding to 949 consensus features could not be mapped to a peptide identification.
+> > 3. The mapping of peptide IDs to features seems to have worked mostly fine. The main problems seem to be (1) missing peptide identifications, (2) missing features where a peptide was identified and (3) features that span a shorter RT range than the corresponding peptide's elution peak.
+> {: .solution }
 {: .question}
 
 ## Optimization of Quantitation Results
@@ -309,8 +310,8 @@ In the test dataset, several peptides were identified, but not quantified. Some 
 >   > ### {% icon question %} Question
 >   > 1. Which parameter improved the number of quantified proteins?
 >   >
->   >  > ### {% icon solution %} Solution
->   >  > 1. Both changes led to more quantified proteins. Increasing the isotope range led to 26 \% more protein quantitations, increasing the RT tolerance led to 7 \% more protein quantitations.
->   >  {: .solution }
+>   > > ### {% icon solution %} Solution
+>   > > 1. Both changes led to more quantified proteins. Increasing the isotope range led to 26 \% more protein quantitations, increasing the RT tolerance led to 7 \% more protein quantitations.
+>   > {: .solution }
 >   {: .question}
 {: .hands_on}
