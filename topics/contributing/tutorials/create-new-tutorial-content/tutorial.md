@@ -148,9 +148,9 @@ The tutorial's content is written directly after the section of metadata. This i
 > Check [this cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) to learn more how to use Markdown.
 {: .tip}
 
-The Markdown content is then transformed into a user friendly webpage throughout a templating system. With this approach, there is no need to add the name of every tutorial each time, since they are automatically added based on the tutorial's metadata.
+The Markdown content is then transformed into a user friendly webpage through a templating system. With this approach, there is no need to add the name of every tutorial each time, since they are automatically added based on the tutorial's metadata.
 
-To help developing the tutorial, we recommend to create a workflow of the different steps of the tutorial inside Galaxy first and then you can create the structure of the tutorial:
+To help developing the tutorial, we recommend to create a workflow of the different steps of the tutorial inside Galaxy first, and then you can create the structure of the tutorial automatically from that:
 
 > ### {% icon hands_on %} Hands-on: Create the structure of the tutorial from a workflow
 >
@@ -172,44 +172,52 @@ To help developing the tutorial, we recommend to create a workflow of the differ
 >             --galaxy_url "URL to Galaxy instance in which you created the workflow" \
 >             --galaxy_api_key "Your API key on the Galaxy instance" \
 >             --workflow_id "ID of the workflow on the Galaxy instance" \
->             --zenodo_link "URL to the Zenodo record (Optional)" 
+>             --zenodo_link "URL to the Zenodo record (Optional)"
 >    ```
-> 
+>
 >    > ### {% icon comment %} Using a local worklfow
->    > It is also possible to download the workflow locally (with the `.ga` extension), and then running the previous command with `--workflow PATH/to/the/ga/file` and without `--galaxy_url`, `--galaxy_api_key` and `--workflow_id`
+>    > It is also possible to download the workflow locally (with the `.ga` extension), and then run a slightly different command:
+>    >
+>    > ```
+>    > $ planemo training_generate_from_wf \
+>    >          --topic_name "my-topic" \
+>    >          --tutorial_name "my-new-tutorial" \
+>    >          -- workflow PATH/to/the/file.ga \
+>    >          --zenodo_link "URL to the Zenodo record (Optional)"
+>    > ```
 >    {: .comment}
 >
 > 5. Inspect the generated `tutorial.md`
 {: .hands_on}
 
-The generated tutorial follows the structure:
+The generated tutorial is structured with:
 
-- An introduction, to bring an overview of the tutorial with its use cases, data, and methods
-- Multiple sections, representing the big steps of the analysis, complete with their hands-on parts (practicing is an important part of the learning process)
+- An introduction, to give an overview of the tutorial with its use cases, data, and methods
+- Multiple sections representing the steps of the analysis, complete with automatically generated hands-on blocks, as practicing is a vital part of the learning process
 - A conclusion to summarize what has been done in the tutorial (with a graphic)
 
-> ### {% icon hands_on %} Hands-on: Fill  the structure of the tutorial
+> ### {% icon hands_on %} Hands-on: Filling out the structure of the tutorial
 >
-> 1. Fill the "Introduction" with a general introduction of the tutorial and a small description of the dataset (goals)
+> 1. Fill out the "Introduction" with a general introduction of the tutorial and a small description of the dataset (goals)
 > 2. Rename/restructure the sections with several levels and more explication
 > 3. Add some theory about the tool used to introduce each section
 > 4. Add a small conclusion and relate the results to the original question
 >
 {: .hands_on}
 
-> ### {% icon comment %} Adding images with caption
+> ### {% icon comment %} Adding images with captions
 > To add an image in Markdown file, we need to use the markdown syntax for this: `![](../../images/image.png)`.
-> 
-> We have also added a small plugin to add a caption for each image:
-> 
+>
+> We have also added a small plugin to handle captions for each image:
+>
 > ![This figure shows an example of an image with a caption](../../images/image_caption_screenshot.png "Example of an image with a caption")
-> 
+>
 > The prefix "Figure 1." is automatically added before its caption. This is done with the following Markdown syntax:
-> 
+>
 > ```markdown
 > ![A textual description of the image](../images/image.png "This is my super caption")
 > ```
-> 
+>
 > We can also cross-reference images inside our Markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (changing `nb` with the image's number).
 {: .comment}
 
@@ -219,15 +227,15 @@ The generated tutorial follows the structure:
 > Mathematical expressions can be written in LaTeX, and are automtaically rendered with [MathJax](https://www.mathjax.org/).
 >
 > Surround your math expression with two `$` signs (like in LaTeX math blocks):
-> 
+>
 > - inline expressions, *e.g.* `$$ 5 + 5 $$` will be rendered as $$ 5 + 5 $$
 > - block expressions, *e.g.* `$$ 5 + 5 $$` will be rendered in its own line block as
-> 
+>
 >    $$ 5 + 5 $$
-> 
+>
 > Dollar signs are therefore *reserved characters* for instructing the templating system to open/close LaTeX math blocks. If you want to use a `$` within your expression, you will need to *escape* it: `$$ a + 3\$ = 5\$ $$` will be rendered as: $$ a + 3\$ = 5\$ $$
-> 
-> 
+>
+>
 > LaTeX code that uses the pipe symbol `|` in inline math statements may lead to a line being recognized as a table line by the templating system.
 > This can be avoided by using the `\vert` command instead of `|`
 {: .comment}
@@ -256,17 +264,17 @@ This box at the top of each tutorial is automatically generated using the metada
 >
 > **{% icon question %} Questions**
 > - Which biological questions are addressed by the tutorial?
-> - Which bioinformatics techniques is important to know for this type of data?
+> - Which bioinformatics techniques are important to know for this type of data?
 >
 > **{% icon objectives %} Objectives**
 > - The learning objectives are the goals of the tutorial
 > - They will be informed by your audience and will communicate to them and to yourself what you should focus on during the course
-> - They are single sentence describing what a learner will be able to do once they have done the tutorial
-> - You can use the Bloom's Taxonomy to write effective learning objectives
+> - They are single sentences describing what a learner should be able to do once they have done completed tutorial
+> - You can use Bloom's Taxonomy to write effective learning objectives
 >
 > {% icon requirements %} Requirements
 > - [Galaxy introduction]({{ site.baseurl }}/topics/introduction/)
-> 
+>
 > {% icon time %} Time estimation: '1H'
 >
 {: .overview}
@@ -284,7 +292,7 @@ This box at the top of each tutorial is automatically generated using the metada
 >    > > The take-home messages are not added to this box but into the last box of the tutorial
 >    > {: .solution}
 >    {: .question}
-> 
+>
 {: .hands_on}
 
 ## **Agenda** box
