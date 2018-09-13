@@ -39,7 +39,7 @@ First of all, you will have to upload the files on [Galaxy-E](https://openstack-
 > ### {% icon tip %} Tip: Importing data via links
 >    > 1. Click on the Upload button: 
 >    > 
->    > ![upload button](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/upload.PNG "Galaxy upload access button")
+>    > ![upload button](Images/upload.PNG "Galaxy upload access button")
 >    > 
 >    > 2. To import the dataset:
 >    > * Select **Paste/Fetch data**
@@ -95,7 +95,7 @@ The second step of any Regional GAM data analysis is making sure to have a datas
 
 > ### {% icon comment %} Comment
 
-❗In case the dataset contains informations one more than on species, you can follow the multispecies tutorial on regionalGAM which is a complement to this one from the second step. If you are interested in doing so, please click on the following link: [Selectionning one specific species](https://github.com/Claraurf/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Multispecies_tutorial.md#selectionningonespecificspecies)
+❗In case the dataset contains informations one more than on species, you can follow the multispecies tutorial on regionalGAM which is a complement to this one from the second step. If you are interested in doing so, please click on the following link: [Selectionning one specific species](Multispecies_tutorial.md#selectionningonespecificspecies)
 
 {: .hands_on}
 
@@ -180,7 +180,7 @@ With the `output` from **Remove beginning of a file** you can now generate a new
 > {: .comment}
 
 
-![Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia%20tithonus%20phenology%20explicit%20ID.png "This shows the occurrence of Pyronia tithonus")
+![Phenology chart](Images/Pyronia%20tithonus%20phenology%20explicit%20ID.png "This shows the occurrence of Pyronia tithonus")
 >
 >
 > ⚠️ Please note, that if you want to create a "stacked" visualization, overlapping each year, you can use several executions (one execution by year) of the `Filter data on any column using simple expressions` tool specifying the year you want on the `With following condition` parameter, `c2==2003` for 2003, then `c2==2004` for 2004, etc... then you can paste all resulting files side by side using one or several executions of the `Paste two files side by side` tool so you can specify on the "Select Data" tab of visualization, several Data series (one by year). !!WARNING!! The use of this `Paste two files side by side` tool must be done carefully as in case of differences in term of number of lines between datasets to paste, it will mix informations from columns. Here, as we are working on temporal series over years, and as some years have 365 days, others 366, and as in this case, phenology is not centered on winter, we can delete informations from the 366 days of some years without any problems so we will have the same number of lines between datasets to paste side by side. To do so, use the `Select first lines from a dataset` tool to select first 366 lines from filtered datasets. As it will be of interest to reuse this combination of tools in a next tutorial step, you can create a workflow that you can named something like `Phenology "stacked" visualization creation`.
@@ -261,7 +261,7 @@ With the `output` from **Remove beginning of a file** you can now generate a new
 >   
 
 
-![Stacked Phenology chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia_tithonus_phenology_stacked_explicit_ID.png "This shows the occurrence of Pyronia tithonus")
+![Stacked Phenology chart](Images/Pyronia_tithonus_phenology_stacked_explicit_ID.png "This shows the occurrence of Pyronia tithonus")
 >
 >
 
@@ -314,7 +314,7 @@ This will allow you to create a file showing the abundance index per year of a c
 >    > 5. Visualize
 >    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 
-![Abundance index chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia%20tithonus%20Abundance%20index%20explicit%20ID.png "This shows the occurrence of Pyronia tithonus")
+![Abundance index chart](Images/Pyronia%20tithonus%20Abundance%20index%20explicit%20ID.png "This shows the occurrence of Pyronia tithonus")
 
 
 > 🔹 If you choose to create a stacked visualization, we can now display a better chart showing the annual abundance trend of a certain species per site. 
@@ -351,7 +351,7 @@ This will allow you to create a file showing the abundance index per year of a c
 >    > * "Values for x-axis": `Column 23` (the 2004 YEAR column)
 >    > * "Values for y-axis": `Column 24` (the 2004 regional_gam column)
 
-![Abundance index chart](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/Pyronia%20tithonus%20Abundance%20index%20stacked.png "This shows the occurrence of Pyronia tithonus")
+![Abundance index chart](Images/Pyronia%20tithonus%20Abundance%20index%20stacked.png "This shows the occurrence of Pyronia tithonus")
 
 
 >    > 5. Customize 
@@ -369,7 +369,7 @@ The expected temporal trend allows you to have an overview of the evolution of a
 >    > 1. Look for the tool `Expected temporal trend` with the the following parameters: 
 >    > * "Tabular file generated by the ab_index tool": output from **abundance index**.
 >    
-![Expected temporal trend](https://raw.githubusercontent.com/Claraurf/training-material/ecology/topics/ecology/tutorials/regionalGAM/Images/Expected%20temporal%20trend.png "This shows the expected evolution of Abundance")
+![Expected temporal trend](Images/Expected%20temporal%20trend.png "This shows the expected evolution of Abundance")
 
 > ⚠️ Please note that sometimes the expected temporal trend can't be done on dataset. If you want this action to work, the occurences on your dataset must lie between the month of April and the end of the month of September.
 
@@ -396,9 +396,9 @@ Here we apply the same approach than at the previous step with addition of a cor
 
 Finally, a global trend (over years) can be computed and displayed using the **Plot abundance with trend line** tool selecting outputs from **abundance index** and **Linear regression ajusted for autocorrelation in the residuals** or **Model temporal trend with a simple linear regression**.
 
-![Simple expected temporal trend](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/trend_simple.png "This shows the expected evolution of Abundance")
+![Simple expected temporal trend](Images/trend_simple.png "This shows the expected evolution of Abundance")
 
-![Adjusted expected temporal trend](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/trend_adjusted.png "This shows the expected evolution of adjsuted Abundance")
+![Adjusted expected temporal trend](trend_adjusted.png "This shows the expected evolution of adjsuted Abundance")
 
 
 {: .hands_on}
