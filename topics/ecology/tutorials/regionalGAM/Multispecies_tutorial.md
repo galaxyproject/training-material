@@ -80,28 +80,26 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 >
 > As the dataset is quite big and countains heterogeneous informations, you want to know wether the data are about one species or more.
 > 1. Search for the tool `Count occurrences of each record`with the following parameters:
-> * "from dataset": `output`from **tabular to CSV**
+> * "from dataset": `output`from **Column Regex Find And Replace**
 > * "Count occurrences of values in column(s)": Specify the `SPECIES` column, normally `column 1`
 > * "Delimited by": `Tab`.
 > * "How should the results be sorted?": `With the most common values first`.
 > 2. Inspect the file by clicking on the `eye` icon to check how many species are taken into account.
 
 >    > ### Creating a new file concerning only the data of one species
->    > 1. Copy the name of the species you are interested in from the CSV file (for example: "Aglais io").
->    > 2. Search for the tool`Filter data on any column using simple expressions` with the following   parameters.
->    > * With following condition: `c1=='habitat2'` replacing 'habitat2' with the name of the species (for example: `c1='"Aglais io"''`)  
+>    > 1. Copy the name of the species you are interested in (for example: "Aglais io").
+>    > 2. Use `Filter data on any column using simple expressions` tool on **Column Regex Find And Replace** output with the following parameters.
+>    > * With following condition: `c1=='"Aglais io"'` or (another species name)  
 >    > * Number of header lines to skip: `1`.
 >    > * You can repeat this set of actions as much as necessary, changing only the name of the species taken into account.  By doing this, you will obtain separated dataset, each of them concerning a different species.
->    > 3. Search for the tool `tabular to CSV` with the following parameters 
->    > * Select the `output` from **Filter data on any column using simple expressions**
->    > * Separators: `","`.
->    > 4. Repeat `tabular to CSV` on all the different `outputs`from **Filter data on any column using simple expressions** that you have.
+> 3. Now, as regionalGAM tools use CSV files as input, you can regenerate a CSV file using the `tabular to CSV` tool on the output from **Filter data on any column using simple expressions**. Please, tag your new dataset with an explicit tags as "Count" and "Aglais io" and/or rename this dataset like "Aglais io count file".
+>    > 4. Repeat `tabular to CSV` executions on all the different `outputs` from **Filter data on any column using simple expressions** that you have, one by species.
 >    
 >   > {: .comment}
 >
 >   > ### {% icon question %} Questions
 >   >
->    > 1. How many species does your dataset take into account ?
+>    > 1. How many species does your initial dataset take into account ?
 >    > 2. What are their names ? 
 >    >
 >    >    <details>
@@ -115,7 +113,7 @@ The second step of any Regional GAM data analysis is making sure to have one dat
 
 {: .hands_on}
 
-❗❗ Now that you have done the steps specific to a multispecies dataset, you will be redirected to the reference tutorial on regionalGAM. In order to go further on regionalGAM analysis, start the tutorial from the second step. To do so, you can click here:
+❗❗ Now that you have done the steps dedicated to a multispecies dataset, you will be redirected to the reference tutorial on regionalGAM. In order to go further on regionalGAM analysis, start the tutorial from the second step. To do so, you can click here:
 [Step 2 - Displaying the occurrence of a chosen species through the years of the reference tutorial on RegionalGAM](Reference_tutorial.md#displayingtheoccurrenceofthespecies).
 
 # Step 3:  <a name="variousoccurrencesonasinglechartexplanations"></a>Creating a chart showing more than one occurrence 
