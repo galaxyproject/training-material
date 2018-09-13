@@ -70,8 +70,6 @@ When the dataset contains many details, it lengthens the file processing time th
 >    >  * Select the input file & the column with the `SITE` header.
 >    >  * "Trouver l'expression suivante": `(\.[0-9]+)` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
 >    >  * "Remplacement":`leave it empty`.
->    > 3. Now, as regionalGAM tools use CSV files as input, you can regenerate a CSV file using the `tabular to CSV` tool on the output from **Column Regex Find And Replace**. Please, tag your new dataset with an explicit tag as "Count" and/or rename this dataset like "Count file".
->    
 {: .hands_on}
 
 # Step 2: <a name="selectionningonespecificspecies"></a> Selectionning one specific species and showing all the data corresponding to it
