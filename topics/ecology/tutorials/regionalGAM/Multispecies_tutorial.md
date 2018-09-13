@@ -157,6 +157,7 @@ First of all, you have to know how many years are taken into account in your dat
 >    > * "Paste": `the output` from **merger des colonnes** (with the dataset concerning species 1)
 >    > * "and": `the output` from **merger des colonnes** (with the dataset concerning species 2)
 >    > * "Delimited by": tabulation 
+>    >❗WARNING❗ The use of this `Paste two files side by side` tool must be done carefully as in case of differences in term of number of lines between datasets to paste, it will mix informations from columns. Here, datasets have the same number of lines.
 
 > ### {% icon comment %} Comment
 ❗ Note that you can repeat `Paste two files side by side` with as many files as you want (each of them concerning a different species). In order to do so you will have to do as explained below:
@@ -170,18 +171,18 @@ First of all, you have to know how many years are taken into account in your dat
 
 > ### {% icon tip %} Tip: Generating a multispecies chart
 >    > Click on the last `output` from **Paste two files side by side**
->    > 1. Click on: {% icon tip %} Visualiser  
+>    > 1. Click on: {% icon tip %} Visualize  
 >    > 2. Select `Charts`
->    > 3. Give it a proper name
->    > 4. Select a visualization: "line chart (NVD 3) 
+>    > 3. Select a visualization: "line chart (NVD 3) 
+>    > 4. Give it a proper name like `Aglais io & Pyronia tithonus phenology`
 >    > 5. Select data 
->    > * "Provide a label": `The name of the species 1` 
+>    > * "Provide a label": The name of the first species, for example `Aglais io`
 >    > * "Pick a series color": Choose a color
 >    > * "Data point labels": `Column corresponding to the name of the species 1` 
 >    > * "Values for x-axis": `Column corresponding to the "week and year" of the species 1`
 >    > * "Values for y-axis": `Column corresponding to nm of the species 1`
 >    > 6. Insert data series:
->    > * "Provide a label": `The name of the species 2` 
+>    > * "Provide a label": he name of the second species, for example `Pyronia tithonus`
 >    > * "Pick a series color": Choose a different color
 >    > * "Data point labels": `Column corresponding to the name of the species 2` 
 >    > * "Values for x-axis": `Column corresponding to the "week and year" of the species 2`
