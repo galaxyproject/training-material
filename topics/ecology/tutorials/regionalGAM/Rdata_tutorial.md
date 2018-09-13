@@ -9,7 +9,7 @@ tutorial_name: Regional GAM
 
 ⚠️ You might be willing to follow this tutorial if you want to learn how to deal with a dataset which is on RData format.
 
-❗Please be aware that this tutorial is only a complement to [the refence_tutorial on regionalGAM](training-material/topics/ecology/tutorials/regionalGAM/Reference_tutorial.md) and that therefore there are some missing parts. 
+❗Please be aware that this tutorial is only a complement to [the reference_tutorial on regionalGAM](Reference_tutorial.md) and that therefore there are some missing parts. 
 Follow the steps bellow and then when indicated, you will be redirected to the complete tutorial. 
 
 This tutorial will show how to study species phenology through the computation of abundance index and trends. It will explain you how to use different [regionalGAM](https://github.com/RetoSchmucki/regionalGAM) tools on Galaxy-E allowing you to deal with datasets containing occurences informations for various species per site and per date through a couple of years.
@@ -39,15 +39,15 @@ First of all, you will have to upload the file on Galaxy-E and then you might ha
 >    ```
 >   
 > ### {% icon tip %} Tip: Importing data via links
->    > 1. Search for the tool `Téléverser un ou plusieurs fichiers de votre ordinateur ou d'un serveur distant`
->    > 2. To import the dataset, you have two options:
->    > * If you have uploaded the file on your computer, drop it in the box provided for that purpose.
->    >    * Press **Start** and **Close** the window
->    > * If you have copied the link location:
->    >    * Select **Paste/Fetch data**
->    >    * Paste the link into the text field
->    >    * Press **Start** and **Close** the window
->    {: .tip}
+>    > 1. Click on the Upload button: 
+>    > 
+>    > ![upload button](Images/upload.PNG "Galaxy upload access button")
+>    > 
+>    > 2. To import the dataset:
+>    > * Select **Paste/Fetch data**
+>    > * Paste the link into the text field
+>    > * Galaxy will normally automagically find the right format, here RData, so you don't have to specify it
+>    > * Press **Start** and **Close** the window
 >
 > ### {% icon comment %} Comment
 >
@@ -62,21 +62,21 @@ First of all, you will have to upload the file on Galaxy-E and then you might ha
 >   >      * "File with .Rdata content details": file of **`RData binary file reader`**
 >   >      * "Select which attribute(s) you want to extract": select everything but "trend"
 >   >      * ⚠️ Please note that the tool `RData parser` creates separated files, each of them containing one column. The file with the "TREND" header can be let aside as we don't need it for what will follow.
->   > * Search for the tool `Coller deux jeux de données l'un à côté de l'autre` to create a file comporting all the data     required with the following parameters:
->   >      * "Coller":  outut from **RData parser** headed with "SPECIES"
->   >      * "et": output from **RData parser** with headed with "SITE"
->   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` as many times as there are separated files in order to create a final dataset with all the columns. First you must paste 2 columns together, then you must paste this last file with a third column and do this action again and again until your final file countains all the columns. 
->   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` pasting the file containing 2 columns with the one headed by "YEAR".
->   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` pasting the file containing 3 columns with the one headed by "MONTH". 
->   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` pasting the file containing 4 columns with the one headed by "DAY".
->   >      * Repeat `Coller deux jeux de données l'un à côté de l'autre` pasting the file containing 5 columns with the one headed by "COUNT". 
+>   > * Search for the tool `Paste two files side by side` to create a file comporting all the data required with the following parameters:
+>   >      * "paste":  outut from **RData parser** headed with "SPECIES"
+>   >      * "and": output from **RData parser** with headed with "SITE"
+>   >      * Repeat `Paste two files side by side` as many times as there are separated files in order to create a final dataset with all the columns. First you must paste 2 columns together, then you must paste this last file with a third column and do this action again and again until your final file countains all the columns. 
+>   >      * Repeat `Paste two files side by side` pasting the file containing 2 columns with the one headed by "YEAR".
+>   >      * Repeat `Paste two files side by side` pasting the file containing 3 columns with the one headed by "MONTH". 
+>   >      * Repeat `Paste two files side by side` pasting the file containing 4 columns with the one headed by "DAY".
+>   >      * Repeat `Paste two files side by side` pasting the file containing 5 columns with the one headed by "COUNT". 
 >   >  
 >   > {: .comment}
 
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. In which specific case do you have to proceed to a particular set of actions on your dataset in order to be able to use it ?
->    > 2. Why do you need to use `Coller deux jeux de données l'un à côté de l'autre`? 
+>    > 2. Why do you need to use `Paste two files side by side`? 
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
