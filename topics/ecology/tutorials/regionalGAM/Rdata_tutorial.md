@@ -72,7 +72,7 @@ First of all, you will have to upload the file on Galaxy-E and then you might ha
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
 >    >    <li> You can do that using the `Paste two files side by side tool` with the following parameters:
->    >      <ul><li> "paste":  outut from **RData parser** headed with "SPECIES"</ul>
+>    >      <ul><li> "paste":  output from **RData parser** headed with "SPECIES"</ul>
 >    >      <ul><li> "and": output from **RData parser** with headed with "SITE"</ul>
 >    >      Repeating `Paste two files side by side` executions as many times as there are separated files in order to create a final dataset with all the columns. First you must paste 2 columns together, then you must paste this last file with a third column and do this action again and again until your final file countains all the columns. 
 >    >    <li> Repeat `Paste two files side by side` pasting the file containing 2 columns with the one headed by "YEAR".
