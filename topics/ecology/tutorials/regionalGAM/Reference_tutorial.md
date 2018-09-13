@@ -398,7 +398,7 @@ Finally, a global trend (over years) can be computed and displayed using the **P
 
 ![Simple expected temporal trend](Images/trend_simple.png "This shows the expected evolution of Abundance")
 
-![Adjusted expected temporal trend](trend_adjusted.png "This shows the expected evolution of adjsuted Abundance")
+![Adjusted expected temporal trend](Images/trend_adjusted.png "This shows the expected evolution of adjsuted Abundance")
 
 
 {: .hands_on}
