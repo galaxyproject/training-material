@@ -23,13 +23,13 @@ You will basically learn how to create a file on the basis of which you can crea
 # Step 1: Pre-processing
 
 The goal of the first step is to upload and prepare the file so that it will be usable for the *regional GAM* analysis (See [this warning](#inputdatawarning) for more information about the input file).
-First of all, you will have to upload the files on [Galaxy-E](https://openstack-192-168-100-19.genouest.org) and then you might have to use some data handling tools to be able to use *regional GAM* tools.
+First of all, you need to use a Galaxy instance with related regionalGAM tools. You can deploy your own local instance through Docker as a  Galaxy flavour or use our [Galaxy-E test instance](https://openstack-192-168-100-96.genouest.org/). 
+After uploading input files, you might have to use some data handling tools to be able to use *regional GAM* tools.
 
 >  ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial and give it a proper name as `Tuto training regionalGAM`.
-> 2. Import the following file from [Zenodo](https://zenodo.org/record/1324204#.W2BmRn7fNE4) or from a data
->    library named `regional GAM data tutorial`
+> 2. Import the following file from [Zenodo](https://zenodo.org/record/1324204#.W2BmRn7fNE4).
 >
 >    ```
 >    CSV dataset with only one species:
