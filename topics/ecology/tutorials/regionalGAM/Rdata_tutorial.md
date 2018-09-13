@@ -61,28 +61,27 @@ First of all, you will have to upload the file on Galaxy-E and then you might ha
 >   >      * "Rdata file to explore": `"dataset on RData"`
 >   >      * "File with .Rdata content details": file of **`RData binary file reader`**
 >   >      * "Select which attribute(s) you want to extract": select everything but "trend"
->   >      * ⚠️ Please note that the tool `RData parser` creates separated files, each of them containing one column. The file with the "TREND" header can be let aside as we don't need it for what will follow.
->   > * Search for the tool `Paste two files side by side` to create a file comporting all the data required with the following parameters:
+>   >      * Finally, select the `Yes` option for the `Bind variables in a single tabular when its possible` tool parameter
+>   >      * ⚠️ Please note that if the tool `RData parser` don't succeed to create a single tabular file, it will generate separate files, each of them containing one column. The file with the "TREND" header can be let aside as we don't need it for what will follow.
+
+
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. If Rdata parser fail to generate a single unified tabular file, can you propose a way to regenerate such a dataset ?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li> You can do that using the `Paste two files side by side tool` with the following parameters:
 >   >      * "paste":  outut from **RData parser** headed with "SPECIES"
 >   >      * "and": output from **RData parser** with headed with "SITE"
->   >      * Repeat `Paste two files side by side` as many times as there are separated files in order to create a final dataset with all the columns. First you must paste 2 columns together, then you must paste this last file with a third column and do this action again and again until your final file countains all the columns. 
+>   >      Repeating `Paste two files side by side` executions as many times as there are separated files in order to create a final dataset with all the columns. First you must paste 2 columns together, then you must paste this last file with a third column and do this action again and again until your final file countains all the columns. 
 >   >      * Repeat `Paste two files side by side` pasting the file containing 2 columns with the one headed by "YEAR".
 >   >      * Repeat `Paste two files side by side` pasting the file containing 3 columns with the one headed by "MONTH". 
 >   >      * Repeat `Paste two files side by side` pasting the file containing 4 columns with the one headed by "DAY".
 >   >      * Repeat `Paste two files side by side` pasting the file containing 5 columns with the one headed by "COUNT". 
 >   >  
->   > {: .comment}
-
->    > ### {% icon question %} Questions
->    >
->    > 1. In which specific case do you have to proceed to a particular set of actions on your dataset in order to be able to use it ?
->    > 2. Why do you need to use `Paste two files side by side`? 
->    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>You only have to do these actions when you are using a dataset on the Rdata format. </li>
->    >    <li>Because you want to create a single dataset which countains all the data on a chosen species. You decided to upload a dataset on RData format and therefore you had to use the tools `RData binary file reader` and `RData parser`. This last tool treats the file and allows you to open it on Galaxy-E but it creates as many files as there are columns (when RData object is composed from a unique data table). This is the reason why you had to carry out on a set of actions ending by the creation of one complete file.</li>
+>   > {: .comment}</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
