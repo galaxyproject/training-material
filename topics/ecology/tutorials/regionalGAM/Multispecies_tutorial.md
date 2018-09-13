@@ -126,6 +126,32 @@ The example below shows you what a unispecies phenology chart looks like.
 
 First of all, you will have to combine the different `outputs` from  each **flight curve** (each of them containing the data on one species) in order to have a single dataset with all the species you wish to appear on your chart. If you want to do so, please follow the tip below: 
 
+>    > ### If not made through the reference tutorial, run the `flight curve` tool specifying the following parameters: 
+>    > * "Count file": count files you just generated.
+>    > ### {% icon tip %} Tip: If you have several species, here 2, note that you can run **flight curve** simultaneously on the 2 count files using the `Multiple dataset` option for the `Count file` parameter. You can use this option for further parallel tool executions
+![Multiple dataset option](Images/Multiple_dataset_option.PNG "This shows the Multiple dataset option").
+>    >
+>    > ### {% icon tip %} Tip: Creating a new column of the dataset containing the week and the year 
+First of all, you have to know how many years are taken into account in your dataset.
+>    > 1. Search for the tool `Count occurrences of each record` with the following parameters 
+>    > * "from dataset": output from **Flight curve**.
+>    > * "Select": `Column 2` (the on headed with `YEAR`)
+>    > * "Delimited by": `Tab`.
+>    > * "How should the results be sorted?": `By the values being counted`.
+>    > 2. Inspect the file by clicking on the `eye` icon to check how many years are taken into account.
+>    > 3. Use the `Column Regex Find And Replace` tool with the following parameters:
+>    > * "File to process": output file from **flight curve**.
+>    > * "in column": `Column 2` (corresponding to the one headed with `YEAR`)
+>    > * Click on `Insert check`:
+>    >   * "Find pattern": `(20[0-9][0-9])`
+>    >   * "Replace with": `-\1` 
+>    > 5. Inspect the file by clicking on the `eye` icon to check if all the years are now written with a "-" before the digits. 
+>    > 6. Search for the tool `Merge Columns together` with the following parameters:
+>    > * "Select data": output from the last **Column Regex Find And Replace**.
+>    > * "Merge column": `Column 3`(corresponding to the one headed with `WEEK`)
+>    > * "with column": `Column 2`(corresponding to the one headed with `YEAR`)
+>    > 7. Use the **Remove beginning of a file** tool to remove first line, a mandatory step to avoid header to be part of the visualization
+
 > ### {% icon tip %} Tip: Creating a file comporting all the data on various species
 >    > 1. Search for the tool `Paste two files side by side` with the following parameters:
 >    > * "Paste": `the output` from **merger des colonnes** (with the dataset concerning species 1)
@@ -133,8 +159,8 @@ First of all, you will have to combine the different `outputs` from  each **flig
 >    > * "Delimited by": tabulation 
 
 > ### {% icon comment %} Comment
-❗ Note that you can repeat `Coller deux jeux de données l'un à côté de l'autre` with as many files as you want (each of them concerning a different species). In order to do so you will have to do as explained below:
->    > * Search for the tool `Coller deux jeux de données l'un à côté de l'autre` with the following parameters:
+❗ Note that you can repeat `Paste two files side by side` with as many files as you want (each of them concerning a different species). In order to do so you will have to do as explained below:
+>    > * Search for the tool `Paste two files side by side` with the following parameters:
 >    >    * "Coller": the `output` from **Paste two files side by side** (with the dataset concerning species 1 and 2)
 >    >    * "et": `the output` from **Merge Columns together** (with the dataset concerning species 3)
 >    >    * "Délimité par": tabulation 
