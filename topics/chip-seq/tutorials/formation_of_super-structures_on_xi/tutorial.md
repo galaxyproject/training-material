@@ -35,7 +35,7 @@ Within a cell nucleus, the DNA is tightly-packed and the chromatin is spatially 
 
 At the smallest scale, DNA is packaged into units called nucleosomes, made of eight histone proteins.
 
-On a larger scale than nucleosomes, DNA is forming loops. DNA elements that would be otherwise separated by large distances can interact. The corresponding self-interacting (or self-associating) domains are found in many organisms: they are called Topologically Associating Domains (TADs) in mammalian cells. Mammalian chromosomes are also partitioned into two spatial compartments, labelled "A" and "B", where regions in compartment A tend to interact preferentially with A compartment-associated regions than B compartment-associated ones. Similarly, regions in compartment B tend to associate with other B compartment-associated regions.
+On a larger scale than nucleosomes, DNA is forming loops. DNA elements that would be otherwise separated by large distances can interact. The corresponding self-interacting (or self-associating) domains are found in many organisms: they are called Topologically Associating Domains (TADs) in mammalian cells. Mammalian chromosomes are also partitioned into two spatial compartments, labeled "A" and "B", where regions in compartment A tend to interact preferentially with A compartment-associated regions than B compartment-associated ones. Similarly, regions in compartment B tend to associate with other B compartment-associated regions.
 
 > ### {% icon tip %} Tip: Learn more on chromosome conformation
 > To learn more about chromosome conformation and TADs, you can follow our [HiC tutorial]({{site.baseurl}}/topics/epigenetics/tutorials/hicexplorer/tutorial.html)
@@ -43,26 +43,26 @@ On a larger scale than nucleosomes, DNA is forming loops. DNA elements that woul
 
 In mammals, the X chromosome inactivation (XCI) balances the dosage of X-linked genes between females and males. The genes on the inactive X (Xi) chromosome are not expressed.
 
-Binding certain proteins to each of the eight histone proteins may modify the chromatine structure and may result in changes in trascription level. For example, the H3K4m3 is adding 3 methyl-group of the 4th Lysine in the histone 3 amino-acid. This modification is known to activate the transcription on nearby genes by opening the chromatine. The H3K27me3 on the other hand is inactivating the transcription of the nearby genes:
+Binding certain proteins to each of the eight histone proteins may modify the chromatin structure and may result in changes in transcription level. For example, the H3K4m3 is adding 3 methyl-group of the 4th Lysine in the histone 3 amino-acid. This modification is known to activate the transcription on nearby genes by opening the chromatin. The H3K27me3 on the other hand is inactivating the transcription of the nearby genes:
 
 ![Fadloun et al, 2013](../../images/formation_of_super-structures_on_xi/histone_modifications.jpg "Source: Fadloun et al, 2013")
 
 More H3K27me3 and less H3K4m3 on the Xi could explain a lower expression of the genes there.
 
-It has been also observed that the Xi adopts a distinct conformation without evident compartments or TAD. Cohesins, condensins and CCCTC-binding factor (CTCF) play key roles in chromosomal architectures and TAD formation which are other potential cause of the repression of the expression of the genes on Xi.
+It has been also observed that the Xi adopts a distinct conformation without evident compartments or TAD. cohesins, condensins and CCCTC-binding factor (CTCF) play key roles in chromosomal architectures and TAD formation which are other potential cause of the repression of the expression of the genes on Xi.
 
 The structural-maintenance-of-chromosomes hinge domain containing 1 (SMCHD1) has been found enriched on the Xi. It may be the potential actor in the shape of Xi and the change in gene expression there.
 
 [Wang et al. (2018)](https://www.cell.com/cell/fulltext/S0092-8674(18)30584-1) investigates the mechanism by which the SMCHD1 gene shapes the Xi and represses the expression of the genes on Xi in mouse.
 
 Their idea was to identify the differences which could be observed between the Xi and activated X chromosome, on both wild-type and SMCHD1 gene knockdown samples to study the SMCHD1 effect.
-In different experiments, they targetted histones with H3K27me3 or H3K4me3 and CTCF using ChIP-seq experiments:
+In different experiments, they targeted histones with H3K27me3 or H3K4me3 and CTCF using ChIP-seq experiments.
 
 ![ChIP-seq workflow](../../images/formation_of_super-structures_on_xi/Chromatin_immunoprecipitation_sequencing.jpg "Source: http://e.biohackers.net/ChIP-seq")
 
-They obtained sequences corresponding to portion of DNA linked to histones with H3K27me3, H3K4me3 or CTCF. Using this information, they could identify if there are differences in the H3K27me3, H3K4me3 and CTCF between the X (active or inactive) chromosomes and the potentially influenced genes.
+They obtained sequences corresponding to a portion of DNA linked to histones with H3K27me3, H3K4me3 or CTCF. Using this information, they could identify if there are differences in the H3K27me3, H3K4me3 and CTCF between the X (active or inactive) chromosomes and the potentially influenced genes.
 
-In the upcoming tutorial, we will reproduce the analysis of the ChIP-seq data step by step:
+In the upcoming tutorial, we will only use the wild type data from [Wang et al. (2018)](https://www.cell.com/cell/fulltext/S0092-8674(18)30584-1) and analyze the ChIP-seq data step by step:
 
 - CTCF with 2 replicates: `wt_CTCF_rep1` and `wt_CTCF_rep2`
 - H3K4me3 with 2 replicates: `wt_H3K4me3_rep1` and `wt_H3K4me3_rep2`
@@ -151,7 +151,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    > >
 >    > >        ![Adapter Content for read1](../../images/formation_of_super-structures_on_xi/read1_adapter_content.png "Adapter Content")
 >    > >  
->    > > 2. The reads in `wt_H3K4me3_read1` are a bit worst:
+>    > > 2. The reads in `wt_H3K4me3_read2` are a bit worse:
 >    > >
 >    > >     - The "Per base sequence quality" is decreasing more at the end of the sequences, but it stays correct
 >    > >
@@ -243,7 +243,7 @@ With ChiP sequencing, we obtain sequences corresponding to portion of DNA linked
 >    > > The overall alignment rate is 98.64%. This score is quite high. If you have less than 70-80%, you should investigate the cause: contamination, etc.
 >    > >
 >    > > 43719 (90.27%) reads have been aligned concordantly exactly 1 time and 3340 (6.90%) aligned concordantly >1 times. The latter ones correspond to multiple mapped reads. Allowing for multiple  mapped reads increases the number of usable reads and the sensitivity of peak detection;
-however, the number of false positives may also increase. 
+however, the number of false positives may also increase.
 >    > {: .solution }
 >    {: .question}
 >
@@ -323,7 +323,7 @@ Since in this tutorial we are interested in assessing H3K4me3, H3K27me3 and CTCF
 > > ### {% icon solution %} Solution
 > > As one could expect, the input replicates cluster together and the ChIP replicates cluster together. It confirms that the immuno-precipitation step worked on our ChIP replicates.
 > >
-> > Moreover, for each sample, there is a high correlation between the two replicates which confirms the validity of the experiments. 
+> > Moreover, for each sample, there is a high correlation between the two replicates which confirms the validity of the experiments.
 > >
 > {: .solution }
 {: .question}
@@ -423,7 +423,7 @@ We are using **bamCoverage** {% icon tool %}. Given a BAM file, this tool genera
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 1. It is a tabular file with 4 columns: chrom, chromStart, chromEnd and a data value (coverage)
->    > > 2. We can run **Sort** {% icon tool %} on the 4th column in descending order to get the regions with the highest (normalized) coverage. For `wt_H3K4me3_rep1`, the regions between 152,233,400 and 152,233,800 are the most covered. For `wt_input_rep1`, between 143,483,000 and 143,483,100 (smaller regions).
+>    > > 2. We can run **Sort** {% icon tool %} on the 4th column in descending order to get the regions with the highest (normalized) coverage. For `wt_H3K4me3_rep1`, the regions between 152,233,600	and 152,233,625	 are the most covered. For `wt_input_rep1`, between 143,483,000 and 143,483,100.
 >    > {: .solution }
 >    {: .question}
 >
@@ -470,11 +470,11 @@ To extract only the information induced by the immunoprecipitation, we normalize
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. What does mean a positive or a negative value in the 4th column?
+>    > 1. What does a positive value or a negative value mean in the 4th column?
 >    > 2. Which regions have the highest coverage in the ChIP data? and the lowest?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. The 4th column contains the log2 of the number of reads ratio between the ChIP-seq sample and the input sample. A positive value means that the coverage on the portion is more important in the ChIP-seq sample than in the input sample
+>    > > 1. The 4th column contains the log2 of the number of reads ratio between the ChIP-seq sample and the input sample. A positive value means that the coverage on this portion of genome is higher in the ChIP-seq sample than in the input sample
 >    > > 2. The highest: 152,233,800-152,233,850 (consistent with the most covered regions in `wt_H3K4me3_rep1` given by **bamCoverage** {% icon tool %}). The lowest: 169,916,600-169,916,650
 >    > {: .solution }
 >    {: .question}
@@ -493,13 +493,13 @@ To extract only the information induced by the immunoprecipitation, we normalize
 > ![Output of bamCoverage](../../images/formation_of_super-structures_on_xi/bamcompare_igv.png "bamCoverage for wt_H3K4me3_rep1 and wt_input_rep1 on chrX:151,385,260-152,426,526")
 >
 > > ### {% icon solution %} Solution
-> > The new track is the difference between the first (`wt_H3K4me3_rep1`) track and the second track (`wt_input_rep1`)
+> > The new track is the difference between the first track (`wt_H3K4me3_rep1`) and the second track (`wt_input_rep1`)
 > {: .solution }
 {: .question}
 
 # Step 5: Detecting enriched regions (peak calling)
 
-We could see in the ChIP data some enriched regions, some peaks. We now would like to call these regions to obtain their coordinates, using **MACS2 callpeak** {% icon tool %}
+We could see in the ChIP data some enriched regions (peaks). We now would like to call these regions to obtain their coordinates, using **MACS2 callpeak** {% icon tool %}
 
 > ### {% icon hands_on %} Hands-on: Peak calling
 >
@@ -523,10 +523,10 @@ We could see in the ChIP data some enriched regions, some peaks. We now would li
 >
 >    > ### {% icon question %} Questions
 >    >
->    > Which type of file was generated? What does it include?
+>    > Which type of files were generated? What do they include?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > **MACS2 callpeak** {% icon tool %} has generated a BED file with the coordinates of the identified peaks: chromosome, start, stop, name, integer score, strand, fold-change, -log10pvalue, -log10qvalue, relative summit position to peak start
+>    > > **MACS2 callpeak** {% icon tool %} has generated a bed file with the coordinates of the identified peaks: chromosome, start, stop, name, integer score, strand, fold-change, -log10pvalue, -log10qvalue and relative summit position to peak start, as well as a html report which contains links to additional bed and xls files.
 >    > {: .solution }
 >    {: .question}
 >
@@ -545,7 +545,7 @@ We could see in the ChIP data some enriched regions, some peaks. We now would li
 >
 > > ### {% icon solution %} Solution
 > > 1. We can see 11 peaks (track below the genes).
-> > 2. Using **Filter** {% icon tool %} with `c2>151385260 and c3<152426526`, we found that the 11 peaks have a fold change 3.81927 and 162.06572
+> > 2. Using **Filter** {% icon tool %} with `c2>151385260 and c3<152426526`, we found that the 11 peaks with fold changes between 3.81927 and 162.06572
 > > 4. On the 656 peaks on the full chromosome (number of lines of the original BED file) there are 252 peaks with FC>50 (using **Filter** {% icon tool %} with `c7>50`)
 > {: .solution }
 {: .question}
@@ -554,7 +554,7 @@ The called peak regions can be filtered by, *e.g.* fold change, FDR and region l
 
 # Step 6: Plot the signal between samples
 
-We normalized our data and identied the peaks. We would like now to visualize scores associated with genomic regions, for example ChIP enrichment values around the TSS of genes. And we would like to compare it with another sample (CTCF).
+So far, we have normalized the data and identified peaks. Now, we would like to visualize scores associated with certain genomic regions, for example ChIP enrichment values around the TSS of genes. Moreover, we would like to compare the enrichment of several ChIP samples (e.g. CTCF and H3K4me3 )on the regions of interest.
 
 Since we already generated the required files for the H3K4me3 sample, let's make them only for the CTCF sample:
 
@@ -593,15 +593,15 @@ We can now concatenate the MACS2 outputs with the location of the peaks (concate
 >
 {: .hands_on}
 
-Now, plotting the peaks will involve using two tools:
+To plot the the peaks score on the region generated above (MergeBED output) two tools from the [deepTools](http://deeptools.readthedocs.io/) package are used:
 - **computeMatrix** {% icon tool %}: it computes the signal on given regions, using the `bigwig` coverage files from different samples.
 - **plotHeatmap** {% icon tool %}: it plots heatMap of the signals using the **computeMatrix** {% icon tool %} output.
 
-Optionally, we can also use **plotProfile** {% icon tool %} to create a profile plot using to **computeMatrix** {% icon tool %} output.
+Optionally, we can also use **plotProfile** {% icon tool %} to create a profile plot from **computeMatrix** {% icon tool %} output.
 
 > ### {% icon hands_on %} Hands-on: Plot the heatmap
 >
-> 1. **computeMatrix** {% icon tool %} with the same parameters but:
+> 1. **computeMatrix** {% icon tool %} with the following parameters:
 >    - *"Select regions"*:
 >       - {% icon param-file %} *"Regions to plot"*: output of **MergeBED** {% icon tool %}
 >    - *"Sample order matters"*: `No`
@@ -638,7 +638,7 @@ When we look at this graph, it seems that less but larger peaks are found for `H
 > {: .solution }
 {: .question}
 
-We only analyzed 2 samples, but we could the same of all the 6 samples:
+So far, we have only analyzed 2 samples, but we can do the same for all the 6 samples:
 
 > ### {% icon hands_on %} (Optional) Hands-on: Plot the heatmap for all the samples
 >
