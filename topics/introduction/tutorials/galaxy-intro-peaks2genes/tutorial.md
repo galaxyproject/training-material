@@ -309,9 +309,9 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 >    Have we been successful?
 >
->    We have quite some files now and should take care that we don't loose track.
+>    We have quite some files now and should take care that we don't lose track.
 >
-> 5. Rename the file to something more handy, e.g. `Peak regions`
+> 5. Rename the file to something more recognizable, e.g. `Peak regions`
 {: .hands_on}
 
 ## Analysis
@@ -588,14 +588,14 @@ It's time to reuse the workflow we created earlier.
 {: .hands_on}
 
 We used our workflow to rerun our analysis with the peak summits. The **Group** tool again produced a list containing the amount of genes found in each chromosome.
-But woudln't it be more interesting to know about the amount of peaks in each unique gene? Let's rerun the workflow with different settings!
+But wouldn't it be more interesting to know about the amount of peaks in each unique gene? Let's rerun the workflow with different settings!
 
 > ### {% icon hands_on %} Hands-on: Run a workflow with changed settings
 > 1. Open the workflow menu (top menu bar)
 > 2. Find the workflow you made in the previous section, and select the option **Run**
 > 3. Choose as inputs our imported gene BED file and the result of the **Cut** tool
 > 4. Click on the title of the Group tool to expand the options.
-> 5. Change the following settings by clicking at the {% icon galaxy-pencil %} (pencil) icon on the left:
+> 5. Change the following settings by clicking on the {% icon galaxy-pencil %} (pencil) icon on the left:
 >     - **Group by column**: `7`
 >     - **Operation -> On column**: `7`
 > 6. Click **Run workflow**
