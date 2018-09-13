@@ -396,9 +396,10 @@ Here we apply the same approach than at the previous step with addition of a cor
 
 Finally, a global trend (over years) can be computed and displayed using the **Plot abundance with trend line** tool selecting outputs from **abundance index** and **Linear regression ajusted for autocorrelation in the residuals** or **Model temporal trend with a simple linear regression**.
 
-![Simple expected temporal trend](https://raw.githubusercontent.com/Claraurf/training-material/ecology/topics/ecology/tutorials/regionalGAM/Images/trend_simple.png "This shows the expected evolution of Abundance")
+![Simple expected temporal trend](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/trend_simple.png "This shows the expected evolution of Abundance")
 
-![Adjusted expected temporal trend](https://raw.githubusercontent.com/Claraurf/training-material/ecology/topics/ecology/tutorials/regionalGAM/Images/trend_adjusted.png "This shows the expected evolution of adjsuted Abundance")
+![Adjusted expected temporal trend](https://github.com/yvanlebras/training-material/blob/ecology/topics/ecology/tutorials/regionalGAM/Images/trend_adjusted.png "This shows the expected evolution of adjsuted Abundance")
+
 
 {: .hands_on}
  
