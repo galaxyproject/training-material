@@ -63,25 +63,24 @@ First of all, you will have to upload the file on Galaxy-E and then you might ha
 >   >      * "Select which attribute(s) you want to extract": select everything but "trend"
 >   >      * Finally, select the `Yes` option for the `Bind variables in a single tabular when its possible` tool parameter
 >   >      * ⚠️ Please note that if the tool `RData parser` don't succeed to create a single tabular file, it will generate separate files, each of them containing one column. The file with the "TREND" header can be let aside as we don't need it for what will follow.
-
-
+>    >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. If Rdata parser fail to generate a single unified tabular file, can you propose a way to regenerate such a dataset ?
+>    > 1. If Rdata parser fails to generate a single unified tabular file, can you propose a way to regenerate such a dataset ?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
 >    >    <li> You can do that using the `Paste two files side by side tool` with the following parameters:
->   >      * "paste":  outut from **RData parser** headed with "SPECIES"
->   >      * "and": output from **RData parser** with headed with "SITE"
->   >      Repeating `Paste two files side by side` executions as many times as there are separated files in order to create a final dataset with all the columns. First you must paste 2 columns together, then you must paste this last file with a third column and do this action again and again until your final file countains all the columns. 
->   >      * Repeat `Paste two files side by side` pasting the file containing 2 columns with the one headed by "YEAR".
->   >      * Repeat `Paste two files side by side` pasting the file containing 3 columns with the one headed by "MONTH". 
->   >      * Repeat `Paste two files side by side` pasting the file containing 4 columns with the one headed by "DAY".
->   >      * Repeat `Paste two files side by side` pasting the file containing 5 columns with the one headed by "COUNT". 
->   >  
->   > {: .comment}</li>
+>    >      <ul><li> "paste":  outut from **RData parser** headed with "SPECIES"</ul>
+>    >      <ul><li> "and": output from **RData parser** with headed with "SITE"</ul>
+>    >      Repeating `Paste two files side by side` executions as many times as there are separated files in order to create a final dataset with all the columns. First you must paste 2 columns together, then you must paste this last file with a third column and do this action again and again until your final file countains all the columns. 
+>    >    <li> Repeat `Paste two files side by side` pasting the file containing 2 columns with the one headed by "YEAR".
+>    >    <li> Repeat `Paste two files side by side` pasting the file containing 3 columns with the one headed by "MONTH". 
+>    >    <li> Repeat `Paste two files side by side` pasting the file containing 4 columns with the one headed by "DAY".
+>    >    <li> Repeat `Paste two files side by side` pasting the file containing 5 columns with the one headed by "COUNT". 
+>    >  
+>    > {: .comment}</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
