@@ -26,21 +26,26 @@ layout: base
                         </a>
                     </li>
 
-                    {% if page.slides == true or page.slides == "yes" %}
+                    {% assign intro_link = false %}
+                    {% assign associated_slides = false %}
+                    {% for material in topic_material %}
+                        {% if material.enable != "false" %}
+                            {% if material.slides and material.tutorial_name == page.tutorial_name %}
+                                {% assign associated_slides = true %}
+                            {% endif %}
+                            {% if material.type == "introduction" %}
+                                {% assign intro_link = true %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if associated_slides %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html" title="Slides for this tutorial">
                             {% icon slides %} Associated slides
                         </a>
                     </li>
                     {% else %}
-                        {% assign intro_link = false %}
-                        {% for material in topic_material %}
-                            {% if material.enable != "false" %}
-                                {% if material.type == "introduction" %}
-                                    {% assign intro_link = true %}
-                                {% endif %}
-                            {% endif %}
-                        {% endfor %}
                         {% if intro_link %}
                             <li class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
