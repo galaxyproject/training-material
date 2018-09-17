@@ -1,0 +1,1550 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+    </head>
+    <body>
+        
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/chip-seq" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> ChIP-Seq data analysis
+                        </a>
+                    </li>
+
+                    
+                        
+                        
+                        
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    
+                                        
+                                            
+                                                <a class="dropdown-item" href="/training-material/topics/chip-seq/slides/introduction.html">
+                                                    Introduction to ChIP-Seq data analysis
+                                                </a>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                </div>
+                            </li>
+                        
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://doi.org/10.5281/zenodo.1321974" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/chip-seq#references" title="References">
+                            <i class="fa fa-book" aria-hidden="true"></i><span class="visually-hidden">references</span> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Gitter
+        </a>
+        <a class="dropdown-item" href="https://biostar.usegalaxy.org/" title="Ask on Biostars">
+            Biostars
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/chip-seq/tutorials/formation_of_super-structures_on_xi/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Formation of the Super-Structures on the Inactive X</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>Histone modification?</li>
+            
+            <li>How is a raw set of ChIP-seq data processed and analyzed?</li>
+            
+            <li>Where are the enriched regions for H3K27me3, H3K4me3 and CTCF on the chrX?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>Inspect the read quality</li>
+            
+            <li>Trim low quality bases</li>
+            
+            <li>Map reads on a reference genome</li>
+            
+            <li>Assess the quality of a ChIP-seq experiment</li>
+            
+            <li>Extract coverage files</li>
+            
+            <li>Call enriched regions or peaks</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+                <li>
+                    
+                    <a href="/training-material/topics/introduction/">Galaxy introduction</a>
+                    
+                </li>
+            
+                <li>
+                    
+                    <a href="/training-material/topics/sequence-analysis/">Quality control</a>
+                    
+                </li>
+            
+                <li>
+                    
+                    <a href="/training-material/topics/sequence-analysis/">Mapping</a>
+                    
+                </li>
+            
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 3h</p>
+            
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Within a cell nucleus, the DNA is tightly-packed and the chromatin is spatially distributed with different levels and scales of organizations.</p>
+
+<p>At the smallest scale, DNA is packaged into units called nucleosomes, made of eight histone proteins.</p>
+
+<p>On a larger scale than nucleosomes, DNA is forming loops. DNA elements that would be otherwise separated by large distances can interact. The corresponding self-interacting (or self-associating) domains are found in many organisms: they are called Topologically Associating Domains (TADs) in mammalian cells. Mammalian chromosomes are also partitioned into two spatial compartments, labeled “A” and “B”, where regions in compartment A tend to interact preferentially with A compartment-associated regions than B compartment-associated ones. Similarly, regions in compartment B tend to associate with other B compartment-associated regions.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-learn-more-on-chromosome-conformation"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Learn more on chromosome conformation</h3>
+  <p>To learn more about chromosome conformation and TADs, you can follow our <a href="/training-material/topics/epigenetics/tutorials/hicexplorer/tutorial.html">HiC tutorial</a></p>
+</blockquote>
+
+<p>In mammals, the X chromosome inactivation (XCI) balances the dosage of X-linked genes between females and males. The genes on the inactive X (Xi) chromosome are not expressed.</p>
+
+<p>Binding certain proteins to each of the eight histone proteins may modify the chromatin structure and may result in changes in transcription level. For example, the H3K4m3 is adding 3 methyl-group of the 4th Lysine in the histone 3 amino-acid. This modification is known to activate the transcription on nearby genes by opening the chromatin. The H3K27me3 on the other hand is inactivating the transcription of the nearby genes:</p>
+
+<figure id="figure-1"><img src="../../images/formation_of_super-structures_on_xi/histone_modifications.jpg" alt="Fadloun et al, 2013" title="Source: Fadloun et al, 2013" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Source: Fadloun et al, 2013</figcaption></figure>
+
+<p>More H3K27me3 and less H3K4m3 on the Xi could explain a lower expression of the genes there.</p>
+
+<p>It has been also observed that the Xi adopts a distinct conformation without evident compartments or TAD. cohesins, condensins and CCCTC-binding factor (CTCF) play key roles in chromosomal architectures and TAD formation which are other potential cause of the repression of the expression of the genes on Xi.</p>
+
+<p>The structural-maintenance-of-chromosomes hinge domain containing 1 (SMCHD1) has been found enriched on the Xi. It may be the potential actor in the shape of Xi and the change in gene expression there.</p>
+
+<p><a href="https://www.cell.com/cell/fulltext/S0092-8674(18)30584-1">Wang et al. (2018)</a> investigates the mechanism by which the SMCHD1 gene shapes the Xi and represses the expression of the genes on Xi in mouse.</p>
+
+<p>Their idea was to identify the differences which could be observed between the Xi and activated X chromosome, on both wild-type and SMCHD1 gene knockdown samples to study the SMCHD1 effect.
+In different experiments, they targeted histones with H3K27me3 or H3K4me3 and CTCF using ChIP-seq experiments.</p>
+
+<figure id="figure-2"><img src="../../images/formation_of_super-structures_on_xi/Chromatin_immunoprecipitation_sequencing.jpg" alt="ChIP-seq workflow" title="Source: http://e.biohackers.net/ChIP-seq" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Source: http://e.biohackers.net/ChIP-seq</figcaption></figure>
+
+<p>They obtained sequences corresponding to a portion of DNA linked to histones with H3K27me3, H3K4me3 or CTCF. Using this information, they could identify if there are differences in the H3K27me3, H3K4me3 and CTCF between the X (active or inactive) chromosomes and the potentially influenced genes.</p>
+
+<p>In the upcoming tutorial, we will only use the wild type data from <a href="https://www.cell.com/cell/fulltext/S0092-8674(18)30584-1">Wang et al. (2018)</a> and analyze the ChIP-seq data step by step:</p>
+
+<ul>
+  <li>CTCF with 2 replicates: <code class="highlighter-rouge">wt_CTCF_rep1</code> and <code class="highlighter-rouge">wt_CTCF_rep2</code></li>
+  <li>H3K4me3 with 2 replicates: <code class="highlighter-rouge">wt_H3K4me3_rep1</code> and <code class="highlighter-rouge">wt_H3K4me3_rep2</code></li>
+  <li>H3K27me3 with 2 replicates: <code class="highlighter-rouge">wt_H3K27me3_rep1</code> and <code class="highlighter-rouge">wt_H3K27me3_rep2</code></li>
+  <li>
+    <p>‘input’ with 2 replicates: <code class="highlighter-rouge">wt_input_rep1</code> and <code class="highlighter-rouge">wt_input_rep2</code></p>
+
+    <p>In ‘input’ samples, the same treatment as the ChIP-seq samples was done except for the immunoprecipitation step.
+  They are also used along with the ‘ChIP-seq’ samples to identify the potential sequencing bias and help for differential analysis.</p>
+  </li>
+</ul>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+<ol id="markdown-toc">
+  <li><a href="#step-1-quality-control-and-treatment-of-the-sequences" id="markdown-toc-step-1-quality-control-and-treatment-of-the-sequences">Step 1: Quality control and treatment of the sequences</a></li>
+  <li><a href="#step-2-mapping-of-the-reads" id="markdown-toc-step-2-mapping-of-the-reads">Step 2: Mapping of the reads</a>    <ol>
+      <li><a href="#running-bowtie2" id="markdown-toc-running-bowtie2">Running Bowtie2</a></li>
+      <li><a href="#inspection-of-a-bam-file" id="markdown-toc-inspection-of-a-bam-file">Inspection of a BAM file</a></li>
+      <li><a href="#visualization-using-a-genome-browser" id="markdown-toc-visualization-using-a-genome-browser">Visualization using a Genome Browser</a></li>
+    </ol>
+  </li>
+  <li><a href="#step-3-chip-seq-quality-control" id="markdown-toc-step-3-chip-seq-quality-control">Step 3: ChIP-seq Quality Control</a>    <ol>
+      <li><a href="#correlation-between-samples" id="markdown-toc-correlation-between-samples">Correlation between samples</a></li>
+      <li><a href="#ip-strength-estimation" id="markdown-toc-ip-strength-estimation">IP strength estimation</a></li>
+    </ol>
+  </li>
+  <li><a href="#step-4-normalization" id="markdown-toc-step-4-normalization">Step 4: Normalization</a>    <ol>
+      <li><a href="#generation-of-coverage-files-normalized-by-sequencing-depth" id="markdown-toc-generation-of-coverage-files-normalized-by-sequencing-depth">Generation of coverage files normalized by sequencing depth</a></li>
+      <li><a href="#generation-of-input-normalized-coverage-files" id="markdown-toc-generation-of-input-normalized-coverage-files">Generation of input-normalized coverage files</a></li>
+    </ol>
+  </li>
+  <li><a href="#step-5-detecting-enriched-regions-peak-calling" id="markdown-toc-step-5-detecting-enriched-regions-peak-calling">Step 5: Detecting enriched regions (peak calling)</a></li>
+  <li><a href="#step-6-plot-the-signal-between-samples" id="markdown-toc-step-6-plot-the-signal-between-samples">Step 6: Plot the signal between samples</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="step-1-quality-control-and-treatment-of-the-sequences">Step 1: Quality control and treatment of the sequences</h1>
+
+<p>The first step of any ChIP-Seq data analysis is quality control of the raw sequencing data.</p>
+
+<p>To save time, we will do it only on the data of one sample <code class="highlighter-rouge">wt_H3K4me3_rep1</code> that has been down-sampled. keep in mind that with real data this should be done on all samples.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-import-the-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Import the data</h3>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial and give it a proper name</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-create-a-new-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Create a new history</h3>
+
+        <ol>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Click on <strong>Create New</strong></li>
+        </ol>
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-rename-an-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Rename an history</h3>
+
+        <ol>
+          <li>Click on <strong>Unnamed history</strong> (or the name of the history) (<strong>Click to rename history</strong>) on the top of your history</li>
+          <li>Write the new name</li>
+          <li>Type on <kbd>Enter</kbd></li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p>Import <code class="highlighter-rouge">wt_H3K4me3_read1.fastq.gz</code> and <code class="highlighter-rouge">wt_H3K4me3_read2.fastq.gz</code> from <a href="https://zenodo.org/record/1324070">Zenodo</a> or from the data library (ask your instructor)</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1324070/files/wt_H3K4me3_read1.fastq.gz
+https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>Open the Galaxy Upload Manager</li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>Paste the link into the text field</li>
+          <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <ul>
+          <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>
+          <li>Find the correct folder (ask your instructor)</li>
+          <li>Select interesting files</li>
+          <li>Click on <strong>Import selected datasets into history</strong></li>
+          <li>Import in the history</li>
+        </ul>
+      </blockquote>
+
+      <p>As default, Galaxy takes the link as name, so rename them.</p>
+    </li>
+    <li>
+      <p>Rename the files <code class="highlighter-rouge">wt_H3K4me3_read1</code> and <code class="highlighter-rouge">wt_H3K4me3_read2</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-rename-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Rename a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> button displayed on each dataset in the history</li>
+          <li>Change the <strong>Name</strong> attribute</li>
+          <li>Press <strong>Save</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Inspect the first file by clicking on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon (<strong>View data</strong>)</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How are the DNA sequences stored?</li>
+    <li>What are the other entries of the file?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>The DNA sequences are stored in a FastQ file, in the second line of every 4-line group</li>
+      <li>This file format is called <a href="https://en.wikipedia.org/wiki/FASTQ_format">FastQ format</a>. It stores sequence information and quality information. Each sequence is represented by a group of 4 lines with the 1st line being the sequence id, the second the sequence of nucleotides, the third a transition line and the last one a sequence of quality score for each nucleotide.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<p>During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data.</p>
+
+<p>Sequence quality control is therefore an essential first step in your analysis. We use here similar tools as described in <a href="/training-material/topics/sequence-analysis">“Quality control” tutorial</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> and <a href="https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/">Trim Galore</a>.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-quality-control"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality control</h3>
+
+  <ol>
+    <li>Run <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: <code class="highlighter-rouge">wt_H3K4me3_read1</code> and <code class="highlighter-rouge">wt_H3K4me3_read2</code> (Input datasets selected with <strong>Multiple datasets</strong>)</li>
+      </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-select-multiple-datasets"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Select multiple datasets</h3>
+
+        <ol>
+          <li>Click on <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>
+          <li>Select several files by keeping the CTRL (or COMMAND) key pressed and clicking on the files of interest</li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p>Inspect the generated HTML files</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>How is the quality of the reads in <code class="highlighter-rouge">wt_H3K4me3_read1</code>?</li>
+          <li>And in <code class="highlighter-rouge">wt_H3K4me3_read2</code>?</li>
+          <li>What should we do if the quality of the reads is not good?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <ol>
+            <li>The reads in <code class="highlighter-rouge">wt_H3K4me3_read1</code> are of good quality:
+              <ul>
+                <li>There is 50,000 sequences, all of 51 bp</li>
+                <li>
+                  <p>The “Per base sequence quality” is not decreasing too much at the end of the sequences</p>
+
+                  <figure id="figure-3"><img src="../../images/formation_of_super-structures_on_xi/read1_per_base_sequence_quality.png" alt="Per base sequence quality for read1" title="Per base sequence quality" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Per base sequence quality</figcaption></figure>
+                </li>
+                <li>
+                  <p>The mean quality score over the reads is quite high</p>
+
+                  <figure id="figure-4"><img src="../../images/formation_of_super-structures_on_xi/read1_per_sequence_quality_scores.png" alt="Per sequence quality scores for read1" title="Per sequence quality scores" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Per sequence quality scores</figcaption></figure>
+                </li>
+                <li>
+                  <p>Homogeneous percentage of the bases</p>
+
+                  <figure id="figure-5"><img src="../../images/formation_of_super-structures_on_xi/read1_per base_sequence_content.png" alt="Per base sequence content for read1" title="Per base sequence content" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Per base sequence content</figcaption></figure>
+                </li>
+                <li>
+                  <p>No N in the reads</p>
+
+                  <figure id="figure-6"><img src="../../images/formation_of_super-structures_on_xi/read1_per_base_n_content.png" alt="Per base N content for read1" title="Per base N content" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Per base N content</figcaption></figure>
+                </li>
+                <li>
+                  <p>No duplicated sequences</p>
+
+                  <figure id="figure-7"><img src="../../images/formation_of_super-structures_on_xi/read1_sequence_duplication_levels.png" alt="Sequence Duplication Levels for read1" title="Sequence Duplication Levels" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Sequence Duplication Levels</figcaption></figure>
+                </li>
+                <li>
+                  <p>No more known adapters</p>
+
+                  <figure id="figure-8"><img src="../../images/formation_of_super-structures_on_xi/read1_adapter_content.png" alt="Adapter Content for read1" title="Adapter Content" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Adapter Content</figcaption></figure>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>The reads in <code class="highlighter-rouge">wt_H3K4me3_read2</code> are a bit worse:</p>
+
+              <ul>
+                <li>
+                  <p>The “Per base sequence quality” is decreasing more at the end of the sequences, but it stays correct</p>
+
+                  <figure id="figure-9"><img src="../../images/formation_of_super-structures_on_xi/read1_per_base_sequence_quality.png" alt="Per base sequence quality for read2" title="Per base sequence quality" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Per base sequence quality</figcaption></figure>
+                </li>
+                <li>
+                  <p>The sequence <code class="highlighter-rouge">NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN</code> is over represented</p>
+                </li>
+              </ul>
+
+              <p>Despite these small things, the overall quality of the reads is really good.</p>
+            </li>
+            <li>If the quality of the reads is not good, we should:
+              <ol>
+                <li>Check what is wrong and think about it: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biaised percentage of bases in HiC data)</li>
+                <li>Ask the sequencing facility about it</li>
+                <li>Perform some quality treatment (in a reasonable way to not loose too much information) with some trimming or removal of bad reads</li>
+              </ol>
+            </li>
+          </ol>
+
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>It is often necessary to trim sequenced read, for example, to get rid of bases that were sequenced with high uncertainty (= low quality bases) at the read ends.</p>
+
+<blockquote class="question">
+  <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>What is the relation between <code class="highlighter-rouge">wt_H3K4me3_read1</code> and <code class="highlighter-rouge">wt_H3K4me3_read2</code> ?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The data has been sequenced using paired-end sequencing.</p>
+
+    <p>The paired-end sequencing is based on the idea that the initial DNA fragments (longer than the actual read length) is sequenced from both sides. This approach results in two reads per fragment, with the first read in forward orientation and the second read in reverse-complement orientation. The distance between both reads is known. Thus, it can be used as an additional piece of infromation to improve the read mapping.</p>
+
+    <p>With paired-end sequencing, each fragment is more covered than with single-end sequencing (only forward orientation sequenced):</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ------&gt;
+      ------&gt;
+        ------&gt;
+          ------&gt;
+
+    ----------------------------- [fragment]
+
+    ------&gt;         &lt;------
+      ------&gt;         &lt;------
+        ------&gt;         &lt;------
+          ------&gt;         &lt;------
+</code></pre></div>    </div>
+
+    <p>The paired-end sequencing generates then 2 files:</p>
+    <ul>
+      <li>One file with the sequences corresponding to foward orientation of all the fragments</li>
+      <li>One file with the sequences corresponding to reverse orientation of all the fragments</li>
+    </ul>
+
+    <p>Here <code class="highlighter-rouge">wt_H3K4me3_read1</code> corresponds to the forward reads and <code class="highlighter-rouge">wt_H3K4me3_read2</code> to the reverse reads.</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-trimming-low-quality-bases"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Trimming low quality bases</h3>
+
+  <ol>
+    <li>Run <strong>Trim Galore!</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><em>“Is this library paired- or single-end?”</em>: <code class="highlighter-rouge">Paired-end</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reads in FASTQ format”</em>: <code class="highlighter-rouge">wt_H3K4me3_read1</code> (Input dataset)</li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reads in FASTQ format”</em>: <code class="highlighter-rouge">wt_H3K4me3_read2</code> (Input dataset)</li>
+          </ul>
+
+          <p>The order is important here!</p>
+
+          <blockquote class="tip">
+            <h3 id="tip-tip-not-selectable-files"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Not selectable files?</h3>
+
+            <p>If your FASTQ files cannot be selected, you might check whether their format is FASTQ with Sanger-scaled quality values (<code class="highlighter-rouge">fastqsanger</code>). You can edit the data type by clicking on the <code class="highlighter-rouge">pencil</code> symbol.</p>
+          </blockquote>
+        </li>
+        <li><em>“Trim Galore! advanced settings”</em>: <code class="highlighter-rouge">Full parameter list</code>
+          <ul>
+            <li><em>“Trim low-quality ends from reads in addition to adapter removal”</em>: <code class="highlighter-rouge">15</code></li>
+            <li><em>“Overlap with adapter sequence required to trim a sequence”</em>: <code class="highlighter-rouge">3</code></li>
+            <li><em>“Generate a report file”</em>: <code class="highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect the generated txt file (<code class="highlighter-rouge">report file</code>)</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>How many basepairs has been removed from the forwards reads because of bad quality?</li>
+          <li>And from the reverse reads?</li>
+          <li>How many sequence pairs have been removed because at least one read was shorter than the length cutoff?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <ol>
+            <li>32,198 bp (1.3%) (first <code class="highlighter-rouge">Quality-trimmed:</code>)</li>
+            <li>116,414 bp (4.6%) (second <code class="highlighter-rouge">Quality-trimmed:</code>). It is not a surprise: we saw that the quality was dropping more at the end of the sequences for the reverse reads thant for the forward reads.</li>
+            <li>1569 (3.14%) sequences (last line of the file)</li>
+          </ol>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="step-2-mapping-of-the-reads">Step 2: Mapping of the reads</h1>
+
+<p>With ChiP sequencing, we obtain sequences corresponding to portion of DNA linked to histones with H3K4me3. As H3K4me3 opens the chromatime, nearby genes are more transcribed. It would be interesting to know if there is a difference in the quantity of DNA impacted by H3K4me3 and the impacted genes between active and inactive X chromosome.</p>
+
+<p>We first need to figure out where the sequenced DNA fragments originated from in the genome. The reads must be aligned to a reference genome to identify the binding sites.</p>
+
+<p>This is equivalent to solving a jigsaw puzzles, but unfortunately, not all pieces are unique.</p>
+
+<p>In principle, we could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way may, however, take a couple of weeks. And we do not really care about the exact base to base correspondence (<strong>alignment</strong>). What we are really interested in is “where these reads came from”. This approach is called <strong>mapping</strong>.</p>
+
+<p>Nowadays, there are many mapping programs for shotgun sequenced DNA. We will use <a href="http://bowtie-bio.sourceforge.net/bowtie2/index.shtml">Bowtie2</a>.</p>
+
+<p>We need a reference genome on which we map the reads.</p>
+
+<blockquote class="question">
+  <h3 id="question-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>What is a reference genome?</li>
+    <li>For human, several possible reference genomes are available: hg18, hg19, hg38, etc. What do they correspond to?</li>
+    <li>Which reference genome should we use?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>A reference genome (or reference assembly) is a DNA sequence assembled as a representative example of a species’ DNA sequence. As they are often assembled from the sequencing of the DNA from different donors, they do not accurately represent the set of genes of any single person but a mosaic of different DNA sequences from each donor.</li>
+      <li>As the cost of DNA sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are builts and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different versions released (called build)</li>
+      <li>Wang et al. (2018) did ChIP-seq on mouse. So we should use the mouse reference genome. We will use mm10 (the latest build)</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h2 id="running-bowtie2">Running Bowtie2</h2>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-mapping"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Mapping</h3>
+
+  <ol>
+    <li><strong>Bowtie2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <ul>
+        <li><em>“Is this single or paired library”</em>: <code class="highlighter-rouge">Paired-end</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file #1”</em>: <code class="highlighter-rouge">trimmed reads pair 1</code> (output of <strong>Trim Galore!</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file #2”</em>: <code class="highlighter-rouge">trimmed reads pair 2</code> (output of <strong>Trim Galore!</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="highlighter-rouge">Use a built-in genome index</code>
+          <ul>
+            <li><em>“Select reference genome”</em>: <code class="highlighter-rouge">Mouse (Mus musculus): mm10</code></li>
+          </ul>
+        </li>
+        <li><em>“Save the bowtie2 mapping statistics to the history”</em>: <code class="highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect the mapping stats</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>How many reads where mapped? Uniquely or several times?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>The overall alignment rate is 98.64%. This score is quite high. If you have less than 70-80%, you should investigate the cause: contamination, etc.</p>
+
+          <p>43719 (90.27%) reads have been aligned concordantly exactly 1 time and 3340 (6.90%) aligned concordantly &gt;1 times. The latter ones correspond to multiple mapped reads. Allowing for multiple  mapped reads increases the number of usable reads and the sensitivity of peak detection;
+however, the number of false positives may also increase.</p>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The output of Bowtie2 is a BAM file.</p>
+
+<h2 id="inspection-of-a-bam-file">Inspection of a BAM file</h2>
+
+<p>A BAM (<a href="https://en.wikipedia.org/wiki/SAM_(file_format)">Binary Alignment Map</a>) file is a compressed, binary file storing the sequences mapped to a reference sequence.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-inspect-a-bamsam-file"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Inspect a BAM/SAM file</h3>
+
+  <ol>
+    <li>Inspect the <i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> output of <strong>Bowtie2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+  </ol>
+
+</blockquote>
+
+<p>A BAM file (or a SAM file, the non compressed version) consists of:</p>
+
+<ul>
+  <li>A header section with the chromosome names and lengths (the lines starting with the <code class="highlighter-rouge">@</code> symbol)</li>
+  <li>
+    <p>An alignment section consisting of a table with 11 mandatory fields, as well as a variable number of optional fields:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Col</th>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Brief Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>QNAME</td>
+          <td>String</td>
+          <td>Query template NAME</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>FLAG</td>
+          <td>Integer</td>
+          <td>bitwise FLAG</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>RNAME</td>
+          <td>String</td>
+          <td>References sequence NAME</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>POS</td>
+          <td>Integer</td>
+          <td>1- based leftmost mapping POSition</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>MAPQ</td>
+          <td>Integer</td>
+          <td>MAPping Quality</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>CIGAR</td>
+          <td>String</td>
+          <td>CIGAR String</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>RNEXT</td>
+          <td>String</td>
+          <td>Ref. name of the mate/next read</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>PNEXT</td>
+          <td>Integer</td>
+          <td>Position of the mate/next read</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>TLEN</td>
+          <td>Integer</td>
+          <td>observed Template LENgth</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>SEQ</td>
+          <td>String</td>
+          <td>segment SEQuence</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>QUAL</td>
+          <td>String</td>
+          <td>ASCII of Phred-scaled base QUALity+33</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<blockquote class="question">
+  <h3 id="question-questions-6"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Which information do you find in a SAM/BAM file?</li>
+    <li>What is the additional information compared to a FASTQ file?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>Sequences and quality information, like a FASTQ</li>
+      <li>Mapping information, Location of the read on the chromosome, Mapping quality, etc</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h2 id="visualization-using-a-genome-browser">Visualization using a Genome Browser</h2>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-visualization-of-the-reads-in-igv"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualization of the reads in IGV</h3>
+
+  <ol>
+    <li>Install <a href="https://software.broadinstitute.org/software/igv/download">IGV</a> (if not already installed)</li>
+    <li>Expand the <i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> output of <strong>Bowtie2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+    <li>Click on the <code class="highlighter-rouge">local</code> in <code class="highlighter-rouge">display with IGV</code> to load the reads into the IGV browser</li>
+    <li>Zoom on the <code class="highlighter-rouge">chr2:91,053,413-91,055,345</code></li>
+  </ol>
+</blockquote>
+
+<p>The reads have a direction: they are mapped to the forward or reverse strand, respectively. When hovering over a read, extra information is displayed</p>
+
+<blockquote class="question">
+  <h3 id="question-questions-7"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Some reads have colored lines included. What is this?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>Try to zoom in on one of the colored lines to see the answer!</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
+  <p>Because the number of reads over a region can be quite large, the IGV browser by default only allows to see the reads that fall into a small window. This behaviour can be changed in the IGV from <code class="highlighter-rouge">view &gt; Preferences &gt; Alignments</code>.</p>
+</blockquote>
+
+<h1 id="step-3-chip-seq-quality-control">Step 3: ChIP-seq Quality Control</h1>
+
+<p>We already checked the quality of the raw sequencing reads in the first step.
+Now we would like to test the quality of the ChIP-seq preparation, to know if our ChIP-seq samples are more enriched than the control (input) samples.</p>
+
+<h2 id="correlation-between-samples">Correlation between samples</h2>
+
+<p>To assess the similarity between the replicates of the ChIP and the input, respectively, it is a common technique to calculate the correlation of read counts on different regions for all different samples.
+We expect that the replicates of the ChIP-seq experiments should be clustered more closely to each other than the replicates of the input sample. That is, because the input samples should not have enriched regions included - remember the immuno-precipitation step was skiped during the sample preparation.</p>
+
+<p>To compute the correlation between the samples we are going to to use the QC modules of <a href="http://deeptools.readthedocs.io/">deepTools</a>, a software package for the QC, processing and analysis of NGS data. Before computing the correlation a time consuming step is required, which is to compute the read coverage (number of unique reads mapped at a given nucleotide) over a large number of regions from each of the inputed BAM files. For this we will use the tool <strong>multiBamSummary</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. Then, we use <strong>plotCorrelation</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> from deepTools to compute and visualize the sample correlation. This is a fast process that allows to quickly try different color combinations and outputs.</p>
+
+<p>Since in this tutorial we are interested in assessing H3K4me3, H3K27me3 and CTCF ChIP samples, the previous steps (quality control and mapping) needs to be run on all the replicates of ChIP samples as well as the input samples. To save time, we have already done that and you can now work directly on the BAM files of the provided 8 samples. For simplicity, the files include only the ChrX.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-correlation-between-samples"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Correlation between samples</h3>
+
+  <ol>
+    <li>Create a new history</li>
+    <li>
+      <p>Import the 8 BAM files from <a href="https://zenodo.org/record/1324070">Zenodo</a> or from the data library into the history</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1324070/files/wt_CTCF_rep1.bam
+https://zenodo.org/record/1324070/files/wt_CTCF_rep2.bam
+https://zenodo.org/record/1324070/files/wt_H3K4me3_rep1.bam
+https://zenodo.org/record/1324070/files/wt_H3K4me3_rep2.bam
+https://zenodo.org/record/1324070/files/wt_H3K27me3_rep1.bam
+https://zenodo.org/record/1324070/files/wt_H3K27me3_rep2.bam
+https://zenodo.org/record/1324070/files/wt_input_rep1.bam
+https://zenodo.org/record/1324070/files/wt_input_rep2.bam
+</code></pre></div>      </div>
+    </li>
+    <li>Rename the files</li>
+    <li><strong>multiBamSummary</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><em>“Sample order matters”</em>: <code class="highlighter-rouge">No</code>
+          <ul>
+            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“BAM/CRAM file”</em>: the 8 imported BAM files</li>
+          </ul>
+        </li>
+        <li><em>“Choose computation mode”</em>: <code class="highlighter-rouge">Bins</code>
+          <ul>
+            <li>
+              <p><em>“Bin size in bp”</em>: <code class="highlighter-rouge">1000</code></p>
+
+              <p>This corresponds to the length of the fragments that were sequenced; it is not the read length!</p>
+            </li>
+            <li>
+              <p><em>“Distance between bins”</em>: <code class="highlighter-rouge">500</code></p>
+
+              <p>It reduces the computation time for the tutorial</p>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Region of the genome to limit the operation to”</em>: <code class="highlighter-rouge">chrX</code></li>
+      </ul>
+
+      <p>Using these parameters, the tool will take bins of 1000 bp separated by 500 bp on the chromosome X. For each bin the overlapping reads in each sample will be computed and stored into a matrix.</p>
+    </li>
+    <li><strong>plotCorrelation</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Matrix file from the multiBamSummary tool”</em>: <code class="highlighter-rouge">correlation matrix</code>(output of <strong>multiBamSummary</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Correlation method”</em>: <code class="highlighter-rouge">Pearson</code></li>
+      </ul>
+
+      <p>Feel free to try different parameters for the configuration of the plot (colors, title, etc)</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-8"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <figure id="figure-10"><img src="../../images/formation_of_super-structures_on_xi/plotCorrelation.png" alt="Output for plotCorrelation with the correlation scores between the 8 samples" title="Correlation scores between the 8 samples" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Correlation scores between the 8 samples</figcaption></figure>
+
+  <p>How are your samples clustered? Does that correspond to your expectations?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-8"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>As one could expect, the input replicates cluster together and the ChIP replicates cluster together. It confirms that the immuno-precipitation step worked on our ChIP replicates.</p>
+
+    <p>Moreover, for each sample, there is a high correlation between the two replicates which confirms the validity of the experiments.</p>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="ip-strength-estimation">IP strength estimation</h2>
+
+<p>To evaluate the quality of the immuno-precipitation(IP) step, we can compute the IP strength. It determines how well the signal in the ChIP-seq sample can be differentiated from the background distribution of reads in the control sample (‘input’). After all, around 90% of all DNA fragments in a ChIP experiment will represent the genomic background.</p>
+
+<p>To do that we take the data from the <code class="highlighter-rouge">rep1</code> of the <code class="highlighter-rouge">wt_H3K4me3</code> ChIP-seq sample and compare it with its corresponding input sample, using <strong>plotFingerprint</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> of deepTools.</p>
+
+<p>Similar to <strong>multiBamSummary</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, <strong>plotFingerprint</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> randomly samples genome regions of a specified length (bins) and sums the per-base coverage in the indexed BAM files that overlap with those regions. These coverage values are then sorted according to their rank and the cumulative sum of read counts is plotted.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-ip-strength-estimation"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: IP strength estimation</h3>
+
+  <ol>
+    <li><strong>plotFingerprint</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><em>“Sample order matters”</em>: <code class="highlighter-rouge">No</code>
+          <ul>
+            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“BAM/CRAM file”</em>: <code class="highlighter-rouge">wt_input_rep1</code> and <code class="highlighter-rouge">wt_H3K4me3_rep1</code></li>
+          </ul>
+        </li>
+        <li><em>“Region of the genome to limit the operation to”</em>: <code class="highlighter-rouge">chrX</code></li>
+        <li><em>“Show advanced options”</em>: <code class="highlighter-rouge">Yes</code>
+          <ul>
+            <li><em>“Number of samples”</em>: <code class="highlighter-rouge">10000</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>The plotFingerprint tool generates a fingerprint plot. You need to intepret it to know the IP strength.</p>
+
+<p>An ideal ‘input’ with perfect uniform distribution of reads along the genome (i.e. without enrichments in open chromatin) and infinite sequencing coverage should generate a straight diagonal line. A very specific and strong ChIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank. This means that a big chunk of reads from the ChIP sample is located in few bins which corresponds to high, narrow enrichments typically seen for transcription factors.</p>
+
+<figure id="figure-11"><img src="../../images/estrogen-receptor-binding-site-identification/QC_fingerprint.png" alt="A guide to interpret a fingerprint plot" title="How to interpret a fingerprint plot? Image extracted from the deepTools documentation" /><figcaption><span class="figcaption-prefix">Figure 11:</span> How to interpret a fingerprint plot? Image extracted from the deepTools documentation</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions-9"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <figure id="figure-12"><img src="../../images/formation_of_super-structures_on_xi/plotFingerPrint.png" alt="Output for plotFingerprint with the fingerprint plot to estimate the IP strength" title="Fingerprint plot for the first replicates to estimate the IP strength" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Fingerprint plot for the first replicates to estimate the IP strength</figcaption></figure>
+
+  <p>What do you think about the quality of the IP for this experiment?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-9"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>There is clear distinction between H3K4me3 and the input.</p>
+
+    <p>A small percentage of the genome contain a very large fraction of the reads (&gt;70%, point of change in the blue curve)</p>
+
+    <p>The curves start to rise around 0.25. It means that almost 25% of the chromosome X is not sequenced at all.</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-optional-hands-on-ip-strength-estimation-other-samples"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> (Optional) Hands-on: IP strength estimation (other samples)</h3>
+
+  <p>Run the same analysis on the other ChIP-seq data along with their corresponding input and compare the output</p>
+</blockquote>
+
+<h1 id="step-4-normalization">Step 4: Normalization</h1>
+
+<p>One of the goals in ChIP-seq data analysis is finding regions on the genome which are enriched for the ChIP data of interest (regions with significantly higher read coverage for the ChIP data comparing to its corresponding input). In the following exercise we would like to know where the H3K4me3 sites are. For this we need to extract which parts of the genome have been enriched (i.e. more reads mapped) within the samples that underwent immunoprecipitation. However, to reach a reliable comparison the data needs to be normalized to remove any technical bias. For the normalization we have two steps:</p>
+
+<ol>
+  <li>Normalization by sequencing depth</li>
+  <li>Normalization by input file</li>
+</ol>
+
+<p>To learn how to do the normalization, we will take the <code class="highlighter-rouge">wt_H3K4me3_rep1</code> sample as ChIP data and <code class="highlighter-rouge">wt_input_rep1</code> as input.</p>
+
+<h2 id="generation-of-coverage-files-normalized-by-sequencing-depth">Generation of coverage files normalized by sequencing depth</h2>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-estimation-of-the-sequencing-depth"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Estimation of the sequencing depth</h3>
+
+  <ol>
+    <li><strong>IdxStats</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“BAM file”</em>: <code class="highlighter-rouge">wt_H3K4me3_rep1.bam</code> and <code class="highlighter-rouge">wt_input_rep1.bam</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="question">
+    <h3 id="question-questions-10"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+    <ol>
+      <li>What is the output of <strong>IdxStats</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>?</li>
+      <li>How many reads has been mapped on chrX for the input and for the ChIP-seq samples?</li>
+      <li>Why are the number of reads different? And what could be the impact of this difference?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution-10"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <ol>
+        <li>This tool generates a table with 4 columns:  reference sequence identifier, reference sequence length, number of mapped reads and number of placed but unmapped reads. Here it estimates how many reads mapped to which chromosome. Furthermore, it tells the chromosome lengths and naming convention (with or without ‘chr’ in the beginning)</li>
+        <li>1,204,821 for ChIP-seq samples and 1,893,595 for the input</li>
+        <li>The number of reads can be different because of  different sequencing depth. It can bias the interpretation of the number of reads mapped to a specific genome region and the identification of the H3K4me3 sites. Specially here, as the number of reads for the input is higher than the ChIP data less regions could be identified having a significantly higher read coverage for the ChIP data comparing to the corresponding input.</li>
+      </ol>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<p>The different samples have usually a different sequencing depth, i.e. a different number of reads. These differences can bias the interpretation of the number of reads mapped to a specific genome region. We first need to make the samples comparable by normalizing the coverage by the sequencing depth.</p>
+
+<p>We are using <strong>bamCoverage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. Given a BAM file, this tool generates coverages by first calculating all the number of reads (either extended to match the fragment length or not) that overlap each bin in the genome and then normalizing with various options. It produces a coverage file where for each bin the number of overlapping reads (possibly normalized) is noted.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-coverage-file-normalization"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Coverage file normalization</h3>
+
+  <ol>
+    <li><strong>bamCoverage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“BAM file”</em>: <code class="highlighter-rouge">wt_H3K4me3_rep1.bam</code> and <code class="highlighter-rouge">wt_input_rep1.bam</code></li>
+        <li><em>“Bin size in bases”</em>: <code class="highlighter-rouge">25</code></li>
+        <li><em>“Scaling/Normalization method”</em>: <code class="highlighter-rouge">Normalize coverage to 1x</code>
+          <ul>
+            <li><em>“Effective genome size”</em>: <code class="highlighter-rouge">GRCm38/mm10 (2308125349)</code></li>
+          </ul>
+        </li>
+        <li><em>“Coverage file format”</em>: <code class="highlighter-rouge">bedgraph</code></li>
+        <li><em>“Region of the genome to limit the operation to”</em>: <code class="highlighter-rouge">chrX</code></li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="question-questions-11"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>What is a <code class="highlighter-rouge">bedgraph</code> file?</li>
+          <li>Which regions have the highest coverage in ChIP data and in the input?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-11"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <ol>
+            <li>It is a tabular file with 4 columns: chrom, chromStart, chromEnd and a data value (coverage)</li>
+            <li>We can run <strong>Sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the 4th column in descending order to get the regions with the highest (normalized) coverage. For <code class="highlighter-rouge">wt_H3K4me3_rep1</code>, the regions between 152,233,600	and 152,233,625	 are the most covered. For <code class="highlighter-rouge">wt_input_rep1</code>, between 143,483,000 and 143,483,100.</li>
+          </ol>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li><strong>bamCoverage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the same parameters but
+      <ul>
+        <li><em>“Coverage file format”</em>: <code class="highlighter-rouge">bigWig</code></li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="question-questions-12"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>What is a <code class="highlighter-rouge">bigWig</code> file?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-12"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>A <code class="highlighter-rouge">bigWig</code> file is a compressed <code class="highlighter-rouge">bedgraph</code> file. Similar in relation as BAM to SAM, but this time just for coverage data. This means bigWig and bedgraph files are much smaller than BAM or SAM files (no sequence or quality information).</p>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li><strong>IGV</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to inspect both signal coverages (input and ChIP samples) in IGV</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-13"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>If you zoom to <code class="highlighter-rouge">chrX:151,385,260-152,426,526</code>, what do you observe?</p>
+
+  <figure id="figure-13"><img src="../../images/formation_of_super-structures_on_xi/bamcoverage_igv.png" alt="Output of bamCoverage" title="bamCoverage for wt_H3K4me3_rep1 and wt_input_rep1 on chrX:151,385,260-152,426,526" /><figcaption><span class="figcaption-prefix">Figure 13:</span> bamCoverage for wt_H3K4me3_rep1 and wt_input_rep1 on chrX:151,385,260-152,426,526</figcaption></figure>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-13"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The track with the coverage for the input (<code class="highlighter-rouge">wt_input_rep1</code>) seems quite homogeneous. On the other hand, for <code class="highlighter-rouge">wt_H3K4me3_rep1</code>, we can observe some clear peaks at the beginning of the genes.</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="generation-of-input-normalized-coverage-files">Generation of input-normalized coverage files</h2>
+
+<p>To extract only the information induced by the immunoprecipitation, we normalize the coverage file for the sample that underwent immunoprecipitation by the coverage file for the input sample. Here we use the tool <strong>bamCompare</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> which compare 2 BAM files while caring for sequencing depth normalization.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-generation-of-input-normalized-coverage-files"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generation of input-normalized coverage files</h3>
+
+  <ol>
+    <li><strong>bamCompare</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“First BAM file (e.g. treated sample)”</em>: <code class="highlighter-rouge">wt_H3K4me3_rep1.bam</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second BAM file (e.g. control sample)”</em>: <code class="highlighter-rouge">wt_input_rep1.bam</code></li>
+        <li><em>“Bin size in bases”</em>: <code class="highlighter-rouge">50</code></li>
+        <li><em>“How to compare the two files”</em>: <code class="highlighter-rouge">Compute log2 of the number of reads ratio</code></li>
+        <li><em>“Coverage file format”</em>: <code class="highlighter-rouge">bedgraph</code></li>
+        <li><em>“Region of the genome to limit the operation to”</em>: <code class="highlighter-rouge">chrX</code></li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="question-questions-14"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>What does a positive value or a negative value mean in the 4th column?</li>
+          <li>Which regions have the highest coverage in the ChIP data? and the lowest?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-14"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <ol>
+            <li>The 4th column contains the log2 of the number of reads ratio between the ChIP-seq sample and the input sample. A positive value means that the coverage on this portion of genome is higher in the ChIP-seq sample than in the input sample</li>
+            <li>The highest: 152,233,800-152,233,850 (consistent with the most covered regions in <code class="highlighter-rouge">wt_H3K4me3_rep1</code> given by <strong>bamCoverage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>). The lowest: 169,916,600-169,916,650</li>
+          </ol>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li><strong>bamCompare</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the same parameters but:
+      <ul>
+        <li><em>“Coverage file format”</em>: <code class="highlighter-rouge">bigWig</code></li>
+      </ul>
+    </li>
+    <li><strong>IGV</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to inspect the log2 ratio</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-15"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>How could you interpret the new track if you zoom to <code class="highlighter-rouge">chrX:151,385,260-152,426,526</code>?</p>
+
+  <figure id="figure-14"><img src="../../images/formation_of_super-structures_on_xi/bamcompare_igv.png" alt="Output of bamCoverage" title="bamCoverage for wt_H3K4me3_rep1 and wt_input_rep1 on chrX:151,385,260-152,426,526" /><figcaption><span class="figcaption-prefix">Figure 14:</span> bamCoverage for wt_H3K4me3_rep1 and wt_input_rep1 on chrX:151,385,260-152,426,526</figcaption></figure>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-15"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The new track is the difference between the first track (<code class="highlighter-rouge">wt_H3K4me3_rep1</code>) and the second track (<code class="highlighter-rouge">wt_input_rep1</code>)</p>
+  </blockquote>
+</blockquote>
+
+<h1 id="step-5-detecting-enriched-regions-peak-calling">Step 5: Detecting enriched regions (peak calling)</h1>
+
+<p>We could see in the ChIP data some enriched regions (peaks). We now would like to call these regions to obtain their coordinates, using <strong>MACS2 callpeak</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-peak-calling"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Peak calling</h3>
+
+  <ol>
+    <li><strong>MACS2 callpeak</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><em>“Are you pooling Treatment Files?”</em>: <code class="highlighter-rouge">No</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“ChIP-Seq Treatment File”</em>: <code class="highlighter-rouge">wt_H3K4me3_rep1.bam</code></li>
+          </ul>
+        </li>
+        <li><em>“Do you have a Control File?”</em>: <code class="highlighter-rouge">Yes</code>
+          <ul>
+            <li><em>“Are you pooling Treatment Files?”</em>: <code class="highlighter-rouge">No</code>
+              <ul>
+                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“ChIP-Seq Treatment File”</em>: <code class="highlighter-rouge">wt_input_rep1.bam</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Format of Input Files”</em>: <code class="highlighter-rouge">Paired-end BAM</code></li>
+        <li><em>“Effective genome size”</em>: <code class="highlighter-rouge">M.musculus (1.87e9)</code></li>
+        <li><em>“Outputs”</em>: <code class="highlighter-rouge">Summary page (html)</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comments-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
+        <p>The advanced options may be adjusted, depending of the samples.
+If your ChIP-seq experiment targets regions of broad enrichment, <em>e.g.</em> non-punctuate histone modifications, select calling of broad regions.
+If your sample has a low duplication rate (<em>e.g.</em> below 10%), you might keep all duplicate reads (tags). Otherwise, you might use the ‘auto’ option to estimate the maximal allowed number of duplicated reads per genomic location.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Inspect the <i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <code class="highlighter-rouge">(narrow Peaks)</code> file (output of <strong>MACS2 callpeak</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-16"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>Which type of files were generated? What do they include?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-16"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p><strong>MACS2 callpeak</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> has generated a bed file with the coordinates of the identified peaks: chromosome, start, stop, name, integer score, strand, fold-change, -log10pvalue, -log10qvalue and relative summit position to peak start, as well as a html report which contains links to additional bed and xls files.</p>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li><strong>IGV</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to inspect with the signal coverage and log2 ratio tracks</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-17"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>
+      <p>How many peaks have been identified in <code class="highlighter-rouge">chrX:151,385,260-152,426,526</code> based on IGV?</p>
+
+      <figure id="figure-15"><img src="../../images/formation_of_super-structures_on_xi/macs2_igv.png" alt="Output of MACS2" title="Peaks for wt_H3K4me3_rep1 and wt_input_rep1 on chrX:151,385,260-152,426,526" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Peaks for wt_H3K4me3_rep1 and wt_input_rep1 on chrX:151,385,260-152,426,526</figcaption></figure>
+    </li>
+    <li>What are the fold change of the peaks identified in <code class="highlighter-rouge">chrX:151,385,260-152,426,526</code>? Hint: using the BED file</li>
+    <li>How many peaks have been identified on the full chromosome X? How many peaks have a fold change &gt; 50?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-17"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>We can see 11 peaks (track below the genes).</li>
+      <li>Using <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with <code class="highlighter-rouge">c2&gt;151385260 and c3&lt;152426526</code>, we found that the 11 peaks with fold changes between 3.81927 and 162.06572</li>
+      <li>On the 656 peaks on the full chromosome (number of lines of the original BED file) there are 252 peaks with FC&gt;50 (using <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with <code class="highlighter-rouge">c7&gt;50</code>)</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<p>The called peak regions can be filtered by, <em>e.g.</em> fold change, FDR and region length for further downstream analysis.</p>
+
+<h1 id="step-6-plot-the-signal-between-samples">Step 6: Plot the signal between samples</h1>
+
+<p>So far, we have normalized the data and identified peaks. Now, we would like to visualize scores associated with certain genomic regions, for example ChIP enrichment values around the TSS of genes. Moreover, we would like to compare the enrichment of several ChIP samples (e.g. CTCF and H3K4me3 )on the regions of interest.</p>
+
+<p>Since we already generated the required files for the H3K4me3 sample, let’s make them only for the CTCF sample:</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-prepare-the-peaks-and-data-for-ctcf"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Prepare the peaks and data for CTCF</h3>
+
+  <ol>
+    <li><strong>bamCompare</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“First BAM file (e.g. treated sample)”</em>: <code class="highlighter-rouge">wt_CTCF_rep1.bam</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second BAM file (e.g. control sample)”</em>: <code class="highlighter-rouge">wt_input_rep1.bam</code></li>
+        <li><em>“Bin size in bases”</em>: <code class="highlighter-rouge">50</code></li>
+        <li><em>“How to compare the two files”</em>: <code class="highlighter-rouge">Compute log2 of the number of reads ratio</code></li>
+        <li><em>“Coverage file format”</em>: <code class="highlighter-rouge">bigwig</code></li>
+        <li><em>“Region of the genome to limit the operation to”</em>: <code class="highlighter-rouge">chrX</code></li>
+      </ul>
+    </li>
+    <li>Rename the output of <strong>bamCompare</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the name of the sample</li>
+    <li><strong>MACS2 callpeak</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><em>“Are you pooling Treatment Files?”</em>: <code class="highlighter-rouge">No</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“ChIP-Seq Treatment File”</em>: <code class="highlighter-rouge">wt_CTCF_rep1.bam</code></li>
+          </ul>
+        </li>
+        <li><em>“Do you have a Control File?”</em>: <code class="highlighter-rouge">Yes</code>
+          <ul>
+            <li><em>“Are you pooling Treatment Files?”</em>: <code class="highlighter-rouge">No</code>
+              <ul>
+                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“ChIP-Seq Treatment File”</em>: <code class="highlighter-rouge">wt_input_rep1.bam</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Format of Input Files”</em>: <code class="highlighter-rouge">Paired-end BAM</code></li>
+        <li><em>“Effective genome size”</em>: <code class="highlighter-rouge">M.musculus (1.87e9)</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>We can now concatenate the MACS2 outputs with the location of the peaks (concatenate the files and merge the overlapping regions) to obtain one BED file corresponding to the coordinates of the interesting regions to plot.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-prepare-the-peak-coordinates"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Prepare the peak coordinates</h3>
+
+  <ol>
+    <li><strong>Concatenate two datasets into one dataset</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate”</em>: output of <strong>MACS2 callpeak</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for <code class="highlighter-rouge">wt_CTCF_rep1</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“with”</em>: output of <strong>MACS2 callpeak</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for <code class="highlighter-rouge">wt_H3K4me3_rep1</code></li>
+      </ul>
+    </li>
+    <li><strong>SortBED</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort the following bed,bedgraph,gff,vcf file”</em>: output of <strong>Concatenate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><strong>MergeBED</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort the following bed,bedgraph,gff,vcf file”</em>: output of <strong>SortBED</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>To plot the the peaks score on the region generated above (MergeBED output) two tools from the <a href="http://deeptools.readthedocs.io/">deepTools</a> package are used:</p>
+<ul>
+  <li><strong>computeMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: it computes the signal on given regions, using the <code class="highlighter-rouge">bigwig</code> coverage files from different samples.</li>
+  <li><strong>plotHeatmap</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: it plots heatMap of the signals using the <strong>computeMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> output.</li>
+</ul>
+
+<p>Optionally, we can also use <strong>plotProfile</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to create a profile plot from <strong>computeMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> output.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-plot-the-heatmap"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot the heatmap</h3>
+
+  <ol>
+    <li><strong>computeMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Select regions”</em>:
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Regions to plot”</em>: output of <strong>MergeBED</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          </ul>
+        </li>
+        <li><em>“Sample order matters”</em>: <code class="highlighter-rouge">No</code>
+          <ul>
+            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Score file”</em>: the 2 <code class="highlighter-rouge">bigwig</code> files generated by <strong>bamCompare</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and renamed</li>
+          </ul>
+        </li>
+        <li><em>“computeMatrix has two main output options”</em>: <code class="highlighter-rouge">reference-point</code>
+          <ul>
+            <li><em>“The reference point for the plotting”</em>: <code class="highlighter-rouge">center of region</code></li>
+            <li><em>“Distance upstream of the start site of the regions defined in the region file”</em>: <code class="highlighter-rouge">3000</code></li>
+            <li><em>“Distance downstream of the end site of the given regions”</em>: <code class="highlighter-rouge">3000</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>plotHeatmap</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Matrix file from the computeMatrix tool”</em>: <code class="highlighter-rouge">Matrix</code> (output of <strong>computeMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Show advanced options”</em>: <code class="highlighter-rouge">yes</code>
+          <ul>
+            <li><em>“Reference point label”</em>: select the right label</li>
+            <li><em>“Did you compute the matrix with more than one groups of regions?”</em>: <code class="highlighter-rouge">No, I used only one group</code>
+              <ul>
+                <li><em>“Clustering algorithm”</em>: <code class="highlighter-rouge">Kmeans clustering</code></li>
+                <li><em>“Number of clusters to compute”</em>: <code class="highlighter-rouge">2</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>It should generate an heatmap similar to:</p>
+
+<figure id="figure-16"><img src="../../images/formation_of_super-structures_on_xi/peak_heatmap_1.png" alt="Output of plotHeatmap for 2 samples" title="Scores around the peaks for wt_H3K4me3_rep1 and wt_input_rep1" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Scores around the peaks for wt_H3K4me3_rep1 and wt_input_rep1</figcaption></figure>
+
+<p>When we look at this graph, it seems that less but larger peaks are found for <code class="highlighter-rouge">H3K4me3_rep1</code> and that only few peaks are shared.</p>
+
+<blockquote class="question">
+  <h3 id="question-questions-18"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many peaks have been found for <code class="highlighter-rouge">CTCF_rep1</code> and for <code class="highlighter-rouge">H3K4me3_rep1</code>?</li>
+    <li>What are the mean width of the peaks for <code class="highlighter-rouge">CTCF_rep1</code> and for <code class="highlighter-rouge">H3K4me3_rep1</code>?</li>
+    <li>How many peaks are specific to <code class="highlighter-rouge">CTCF_rep1</code> or <code class="highlighter-rouge">H3K4me3_rep1</code>?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-18"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>656 peaks for <code class="highlighter-rouge">H3K4me3_rep1</code> and 2,688 for <code class="highlighter-rouge">CTCF_rep1</code> (number of lines in the <strong>MACS2 callpeak</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> BED file)</li>
+      <li>1630.77 bp for <code class="highlighter-rouge">H3K4me3_rep1</code> and 404.55 for <code class="highlighter-rouge">CTCF_rep1</code> (<strong>Compute</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with <code class="highlighter-rouge">c3-c2</code> and then <strong>Datamash</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with <code class="highlighter-rouge">Mean</code> on <code class="highlighter-rouge">Column:11</code>)</li>
+      <li>443 peaks (over 656) are specific to <code class="highlighter-rouge">H3K4me3_rep1</code> and 2,464 (over 2,688) to <code class="highlighter-rouge">CTCF_rep1</code> (<strong>Intersect intervals</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>). Around 220 peaks are then overlapping.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<p>So far, we have only analyzed 2 samples, but we can do the same for all the 6 samples:</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-optional-hands-on-plot-the-heatmap-for-all-the-samples"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> (Optional) Hands-on: Plot the heatmap for all the samples</h3>
+
+  <ol>
+    <li><strong>bamCompare</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for each combination input - ChIP data:
+      <ol>
+        <li><code class="highlighter-rouge">wt_CTCF_rep1</code> - <code class="highlighter-rouge">wt_input_rep1</code> (already done)</li>
+        <li><code class="highlighter-rouge">wt_H3K4me3_rep1</code> - <code class="highlighter-rouge">wt_input_rep1</code> (already done)</li>
+        <li><code class="highlighter-rouge">wt_H3K27me3_rep1</code> - <code class="highlighter-rouge">wt_input_rep1</code></li>
+        <li><code class="highlighter-rouge">wt_CTCF_rep2</code> - <code class="highlighter-rouge">wt_input_rep2</code></li>
+        <li><code class="highlighter-rouge">wt_H3K4me3_rep2</code> - <code class="highlighter-rouge">wt_input_rep2</code></li>
+        <li><code class="highlighter-rouge">wt_H3K27me3_rep2</code> - <code class="highlighter-rouge">wt_input_rep2</code></li>
+      </ol>
+    </li>
+    <li>Rename the outputs of <strong>bamCompare</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the name of the ChIP data</li>
+    <li><strong>MACS2 callpeak</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for each combination input - ChIP data</li>
+    <li><strong>Concatenate datasets tail-to-head</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate Dataset”</em>: one output of <strong>MACS2 callpeak</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>Click <em>“Insert Dataset”</em> and <i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select”</em> one other output of <strong>MACS2 callpeak</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>Redo for the 6 outputs of <strong>MACS2 callpeak</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><strong>SortBED</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort the following bed,bedgraph,gff,vcf file”</em>: output of <strong>Concatenate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><strong>MergeBED</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort the following bed,bedgraph,gff,vcf file”</em>: output of <strong>SortBED</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><strong>computeMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the same parameters but:
+      <ul>
+        <li><em>“Select regions”</em>:
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Regions to plot”</em>: output of <strong>MergeBED</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          </ul>
+        </li>
+        <li><em>“Sample order matters”</em>: <code class="highlighter-rouge">No</code>
+          <ul>
+            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Score file”</em>: the 6 <code class="highlighter-rouge">bigwig</code> files generated by <strong>bamCompare</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and renamed</li>
+          </ul>
+        </li>
+        <li><em>“computeMatrix has two main output options”</em>: <code class="highlighter-rouge">reference-point</code>
+          <ul>
+            <li><em>“The reference point for the plotting”</em>: <code class="highlighter-rouge">center of region</code></li>
+            <li><em>“Distance upstream of the start site of the regions defined in the region file”</em>: <code class="highlighter-rouge">3000</code></li>
+            <li><em>“Distance downstream of the end site of the given regions”</em>: <code class="highlighter-rouge">3000</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>plotHeatmap</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Matrix file from the computeMatrix tool”</em>: <code class="highlighter-rouge">Matrix</code> (output of <strong>computeMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Show advanced options”</em>: <code class="highlighter-rouge">yes</code>
+          <ul>
+            <li><em>“Reference point label”</em>: select the right label</li>
+            <li><em>“Did you compute the matrix with more than one groups of regions?”</em>: <code class="highlighter-rouge">No, I used only one group</code>
+              <ul>
+                <li><em>“Clustering algorithm”</em>: <code class="highlighter-rouge">Kmeans clustering</code></li>
+                <li><em>“Number of clusters to compute”</em>: <code class="highlighter-rouge">2</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-19"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many peaks are found for the different samples?</li>
+    <li>
+      <p>How are the peaks?</p>
+
+      <figure id="figure-17"><img src="../../images/formation_of_super-structures_on_xi/peak_heatmap_all.png" alt="Output of plotHeatmap for all samples" title="Scores around the peaks for all samples" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Scores around the peaks for all samples</figcaption></figure>
+    </li>
+    <li>
+      <p>How could be interpreted the peaks and read coverage in the <code class="highlighter-rouge">chrX:151,385,260-152,426,526</code> region?</p>
+
+      <figure id="figure-18"><img src="../../images/formation_of_super-structures_on_xi/rep1_igv.png" alt="Coverage and peaks for the replicate 1" title="Coverage and peaks for the replicate 1" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Coverage and peaks for the replicate 1</figcaption></figure>
+    </li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-19"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>
+        <p>Found peaks (number of lines in <strong>MACS2 callpeak</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> outputs):</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Target</th>
+              <th>Rep 1</th>
+              <th>Rep 2</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CTCF</td>
+              <td>2,688</td>
+              <td>2,062</td>
+            </tr>
+            <tr>
+              <td>H3K4me3</td>
+              <td>656</td>
+              <td>717</td>
+            </tr>
+            <tr>
+              <td>H3K27me3</td>
+              <td>221</td>
+              <td>76</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>The tendencies are similar for both replicates: more peaks for CTCF, less for H3K4me3 and only few for H3K27me3.</p>
+      </li>
+      <li>As observed with the 2 samples, the peaks for H3K4me3 are wider than for CTCF. We also observe that the peaks found with one replicate are found with the other replicate.</li>
+      <li>
+        <p>The H3K4me3 sample has clear and large regions in which the read coverage are enriched. H3K4me3 is one of the least abundant histone modifications. It is highly enriched at active promoters near transcription start sites (TSS) and positively correlated with transcription.</p>
+
+        <p>For H3K27me3, the coverage is more homogeneous. A gene is a broad domain of H3K27me3 enrichment across its body of genes corresponds to a gene with a transcription inhibited by H3K27me3. We can also identified some “bivalent” genes: gene with a peak around the TSS for H3K27me3(e.g. region_208 for gene Gpr173) but also H3K4me3. We also observe some H3K27me3-depleted regions sharply demarcated, with boundaries coinciding with gene borders (e.g. Kdm5c). This is a chromatin signature reminiscent of genes that escape XCI.</p>
+
+        <p>To reproduce, run <strong>bamCoverage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, <strong>IGV</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and <strong>MACS2 callpeak</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> outputs.</p>
+      </li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>Along this tutorial, we learn how to extract peaks and coverage information from raw data of ChIP experiments:</p>
+
+<figure id="figure-19"><img src="../../images/formation_of_super-structures_on_xi/tutorial-scheme.png" alt="Workflow to extract peaks and coverage information from raw data of ChIP experiments" title="Workflow to extract peaks and coverage information from raw data of ChIP experiments" /><figcaption><span class="figcaption-prefix">Figure 19:</span> Workflow to extract peaks and coverage information from raw data of ChIP experiments</figcaption></figure>
+
+<p>This information can be then related to the biology to answer the original question. We tried then to relate the observed differences of peak and read coverage between H3K27me3 and H3K4me3 to the known biology. We could go even further in the analysis to reproduce the results of the original paper (e.g. by looking at the bivalent genes, identifying the differences between Xa and Xi).</p>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+            <ul>
+                
+                <li>ChIP-seq data requires multiple methods of quality assessment to ensure that the data is of high quality.</li>
+                
+                <li>Multiple normalization methods exists depending on the availability of input data.</li>
+                
+                <li>Heatmaps containing all genes of an organism can be easily plotted given a BED file and a coverage file.</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+        <h1>Useful literature</h1>
+        <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/chip-seq#references">here</a>.</p>
+        
+
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+        <hr>
+        <br>
+
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Formation of the Super-Structures on the Inactive X (ChIP-Seq data analysis)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Formation of the Super-Structures on the Inactive X (ChIP-Seq data analysis)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Leily Rabbani, Bérénice Batut, Anika Erxleben, Fidel Ramirez, Friederike Dündar, Vivek Bhardwaj)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/chip-seq/tutorials/formation_of_super-structures_on_xi/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>

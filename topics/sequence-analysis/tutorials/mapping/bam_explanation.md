@@ -1,6 +1,6 @@
 A BAM ([Binary Alignment Map](https://en.wikipedia.org/wiki/SAM_(file_format))) file is a compressed, binary file storing the sequences mapped to a reference sequence. 
 
-> ### {% icon hands_on %} Hands-on: Conversion into a SAM file
+> ### {% icon hands_on %} Hands-on: Inspect a BAM/SAM file
 >
 > 1. Inspect the {% icon param-file %} output of **{{ include.mapper }}** {% icon tool %})
 >
