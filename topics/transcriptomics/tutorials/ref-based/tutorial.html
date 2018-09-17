@@ -473,7 +473,7 @@
 
 <p>During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis abd can lead to a misinterpretation of the data.</p>
 
-<p>Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in <a href="/training-material/topics/sequence-analysis">“Quality control” tutorial</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> and <a href="https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/">Trim Galore</a>.</p>
+<p>Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in <a href="/training-material/topics/sequence-analysis">“Quality control” tutorial</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> and <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a>.</p>
 
 <blockquote class="hands_on">
   <h3 id="hands_on-hands-on-quality-control"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality control</h3>
@@ -581,7 +581,7 @@
               <ol>
                 <li>Check what is wrong and think about it: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biaised percentage of bases in HiC data)</li>
                 <li>Ask the sequencing facility about it</li>
-                <li>Perform some quality treatment (in a reasonable way to not loose too much information) with some trimming or removal of bad reads</li>
+                <li>Perform some quality treatment (in a reasonable way to not lose too much information) with some trimming or removal of bad reads</li>
               </ol>
             </li>
           </ol>
@@ -644,20 +644,6 @@
           </ul>
 
           <p>The order is important here!</p>
-
-          <blockquote class="question">
-
-            <h3 id="question-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-
-            <p>Why do we run the trimming tool only once on a paired-end dataset and not twice, once for each dataset?</p>
-
-            <blockquote class="solution">
-              <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
-              <p>The tool can remove sequences if they become too short during the trimming process. For paired-end files it removes entire sequence pairs if one (or both) of the two reads became shorter than the set length cutoff. Reads of a read-pair that are longer than a given threshold but for which the partner read has become too short can optionally be written out to single-end files. This ensures that the information of a read pair is not lost entirely if only one read is of good quality.</p>
-
-            </blockquote>
-          </blockquote>
         </li>
         <li>In <em>“Filter Options”</em>
           <ul>
@@ -673,6 +659,20 @@
           <ul>
             <li><em>“Report”</em>: <code class="highlighter-rouge">Yes</code></li>
           </ul>
+
+          <blockquote class="question">
+
+            <h3 id="question-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+            <p>Why do we run the trimming tool only once on a paired-end dataset and not twice, once for each dataset?</p>
+
+            <blockquote class="solution">
+              <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+              <p>The tool can remove sequences if they become too short during the trimming process. For paired-end files it removes entire sequence pairs if one (or both) of the two reads became shorter than the set length cutoff. Reads of a read-pair that are longer than a given threshold but for which the partner read has become too short can optionally be written out to single-end files. This ensures that the information of a read pair is not lost entirely if only one read is of good quality.</p>
+
+            </blockquote>
+          </blockquote>
         </li>
       </ul>
     </li>
@@ -701,9 +701,9 @@
 
 <h1 id="mapping">Mapping</h1>
 
-<p>To make sense of the reads we need to figure out where the sequenced DNA fragments originated from in the genome to then determine to which genes they belong.</p>
+<p>To make sense of the reads, we need to first figure out where the sequenced DNA fragments originated from in the genome, so we can then determine to which genes they belong.</p>
 
-<p>This process is known as aligning or ‘mapping’ the reads to a reference. This is equivalent to solving a jigsaw puzzles, but unfortunately, not all pieces are unique.</p>
+<p>This process is known as aligning or ‘mapping’ the reads to a reference. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique.</p>
 
 <blockquote class="comment">
   <h3 id="comment-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
@@ -711,14 +711,14 @@
   <p>Do you want to learn more about the principles behind mapping? Follow our <a href="/training-material/topics/sequence-analysis/">training</a></p>
 </blockquote>
 
-<p>As the genome of <em>Drosophila melanogaster</em> is known and assembled, we can use this information and map the sequences to this genome to identify which genes are affected by  the <em>Pasilla</em> gene depletion.</p>
+<p>As the genome of <em>Drosophila melanogaster</em> is known and assembled, we can use this information and map the sequences to this genome, to identify which genes are affected by  the <em>Pasilla</em> gene depletion.</p>
 
 <blockquote class="question">
   <h3 id="question-questions-6"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>What is a reference genome?</li>
-    <li>For model organisms, several possible reference genomes are available (e.g. hg18, hg19, hg38 for human). What do they correspond to?</li>
+    <li>For model organisms, several possible reference genomes are available (e.g. hg19 and hg38 for human). What do they correspond to?</li>
     <li>Which reference genome should we use?</li>
   </ol>
 
@@ -746,7 +746,7 @@
 <figure id="figure-8"><img src="../../images/splice_aware_alignment.png" alt="Splice-aware alignment" title="Principle of spliced mappers: (1) identification of the reads spanning a single exon, (2) identification of the splicing junctions on the unmapped reads" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Principle of spliced mappers: (1) identification of the reads spanning a single exon, (2) identification of the splicing junctions on the unmapped reads</figcaption></figure>
 
 <blockquote class="details">
-  <h3 id="details-more-details-on-the-difference-spliced-mappers"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> More details on the difference spliced mappers</h3>
+  <h3 id="details-more-details-on-the-different-spliced-mappers"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> More details on the different spliced mappers</h3>
 
   <p>Several spliced mappers have been developed over the year with the explosion of RNA-seq data.</p>
 
@@ -837,7 +837,7 @@
         <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
         <ol>
-          <li>Which percentage of reads mapped exactly once for both samples?</li>
+          <li>What percentage of reads mapped exactly once for both samples?</li>
           <li>What are the other available statistics?</li>
         </ol>
 
