@@ -106,7 +106,7 @@ The reads are raw data from the sequencing machine without any pretreatments. Th
 
 During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis abd can lead to a misinterpretation of the data.
 
-Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in ["Quality control" tutorial]({{site.baseurl}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
+Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in ["Quality control" tutorial]({{site.baseurl}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html).
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
@@ -175,7 +175,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    > > 2. If the quality of the reads is not good, we should:
 >    > >    1. Check what is wrong and think about it: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biaised percentage of bases in HiC data)
 >    > >    2. Ask the sequencing facility about it
->    > >    3. Perform some quality treatment (in a reasonable way to not loose too much information) with some trimming or removal of bad reads
+>    > >    3. Perform some quality treatment (in a reasonable way to not lose too much information) with some trimming or removal of bad reads
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -195,14 +195,14 @@ We should trim sequenced read to get rid of bases that were sequenced with high 
 >
 >      The order is important here!
 >
->      {% include topics/sequence-analysis/tutorials/quality-control/trimming_question.md %}
->
 >    - In *"Filter Options"*
 >       - *"Minimum length"*: `20`
 >    - In *"Read Modification Options"*
 >       - *"Quality cutoff"*: `20`
 >    - In *"Output Options"*
 >       - *"Report"*: `Yes`
+>
+>      {% include topics/sequence-analysis/tutorials/quality-control/trimming_question.md %}
 >
 > 2. Inspect the generated txt files (`Report`)
 >
@@ -220,21 +220,21 @@ We should trim sequenced read to get rid of bases that were sequenced with high 
 
 # Mapping
 
-To make sense of the reads we need to figure out where the sequenced DNA fragments originated from in the genome to then determine to which genes they belong. 
+To make sense of the reads, we need to first figure out where the sequenced DNA fragments originated from in the genome, so we can then determine to which genes they belong. 
 
-This process is known as aligning or 'mapping' the reads to a reference. This is equivalent to solving a jigsaw puzzles, but unfortunately, not all pieces are unique.
+This process is known as aligning or 'mapping' the reads to a reference. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique.
 
 > ### {% icon comment %} Comment
 >
 > Do you want to learn more about the principles behind mapping? Follow our [training]({{site.baseurl}}/topics/sequence-analysis/)
 {: .comment}
 
-As the genome of *Drosophila melanogaster* is known and assembled, we can use this information and map the sequences to this genome to identify which genes are affected by  the *Pasilla* gene depletion.
+As the genome of *Drosophila melanogaster* is known and assembled, we can use this information and map the sequences to this genome, to identify which genes are affected by  the *Pasilla* gene depletion.
 
 > ### {% icon question %} Questions
 >
 > 1. What is a reference genome?
-> 2. For model organisms, several possible reference genomes are available (e.g. hg18, hg19, hg38 for human). What do they correspond to?
+> 2. For model organisms, several possible reference genomes are available (e.g. hg19 and hg38 for human). What do they correspond to?
 > 2. Which reference genome should we use?
 >
 > > ### {% icon solution %} Solution
@@ -255,7 +255,7 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 
 ![Splice-aware alignment](../../images/splice_aware_alignment.png "Principle of spliced mappers: (1) identification of the reads spanning a single exon, (2) identification of the splicing junctions on the unmapped reads")
 
-> ### {% icon details %} More details on the difference spliced mappers
+> ### {% icon details %} More details on the different spliced mappers
 > 
 > Several spliced mappers have been developed over the year with the explosion of RNA-seq data.
 > 
@@ -319,7 +319,7 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using STAR.
 >
 >    > ### {% icon question %} Question
 >    >
->    > 1. Which percentage of reads mapped exactly once for both samples?
+>    > 1. What percentage of reads mapped exactly once for both samples?
 >    > 2. What are the other available statistics?
 >    >
 >    > > ### {% icon solution %} Solution
