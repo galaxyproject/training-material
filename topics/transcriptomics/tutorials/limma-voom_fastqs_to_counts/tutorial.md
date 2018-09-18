@@ -111,6 +111,7 @@ In order to get these files into Galaxy, we will want to do a few things:
 >            - Click `Apply`, and you should see your new column definitions listed
 >
 >        - **Specify the file type**. Select *"Type"*: `fastqsanger.gz`
+>        - **Specify the genome**. Select *"Genome"*: `mm10`
 >        - **Name the collection**. For *"Name"* enter: `fastqs`
 >        - Click `Upload`
 >        - You should see a collection (list) called `fastqs` in your history containing all 12 FASTQ files, like below.
@@ -127,6 +128,7 @@ If your data is not accessible by URL, for example, if your fastq files are loca
 > - Click **Choose Local Files** and locate the files you want to upload
 >     - *"Collection Type"*: `List`
 >     - *"File Type"*: `fastqsanger.gz`
+>     - *"Genome"*: `mm10`
 > - In the pop up that appears: 
 >     - *"Name"*: `fastqs`
 >     - Click `Create list`
