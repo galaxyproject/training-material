@@ -62,7 +62,25 @@ Read sequences are usually stored in compressed (gzipped) FASTQ files. Before th
 
 If you are sequencing your own data, the sequencing facility will almost always provide FASTQ.gz files which you can upload into Galaxy. If your FASTQs are provided through Galaxy's Shared Data, you can easily import them into a history. For publicly available sequence data, such as from GEO/SRA/ENA, Galaxy's Rule-Based Uploader can be used to import the files from URLs, saving on the need to download to your computer and upload into Galaxy. For more information on the Rule-Based Uploader see the tutorial [here](http://galaxyproject.github.io/training-material/topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial.html).
 
-The raw reads used in this tutorial were obtained from SRA from the link given in GEO for the the mouse mammary gland dataset (Fu et al. 2015) (e.g `ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534`). For the purpose of this tutorial we are going to be working with a small part of the fastq files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. The small fastqs files are available in [Figshare](https://figshare.com/s/f5d63d8c265a05618137) and the links to the fastqs are provided below. We are going to import the files into a Collection. Using Galaxy Collections helps keep the datasets organised and tidy in the history. Collections also make it easier to maintain the sample names through tools and workflows. If you are not familiar with collections, see the [Galaxy Collections tutorial](http://galaxyproject.github.io/training-material/topics/galaxy-data-manipulation/tutorials/collections/tutorial.html). 
+The raw reads used in this tutorial were obtained from SRA from the link given in GEO for the the mouse mammary gland dataset (Fu et al. 2015) (e.g `ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534`). For the purpose of this tutorial we are going to be working with a small part of the fastq files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. The small fastqs files are available in [Figshare](https://figshare.com/s/f5d63d8c265a05618137) and the links to the fastqs are provided below. We are going to import the files into a Collection. Using Galaxy Collections helps keep the datasets organised and tidy in the history. Collections also make it easier to maintain the sample names through tools and workflows. If you are not familiar with collections, see the [Galaxy Collections tutorial](http://galaxyproject.github.io/training-material/topics/galaxy-data-manipulation/tutorials/collections/tutorial.html).
+
+The sample information (sample ID, Group) and link to the FASTQ file (URL) are in the grey box below.
+
+```
+SampleID	Group	URL
+MCL1-DL	basallactate	https://ndownloader.figshare.com/files/5053573?private_link=f5d63d8c265a05618137 
+MCL1-DK	basallactate	https://ndownloader.figshare.com/files/5053570?private_link=f5d63d8c265a05618137 
+MCL1-DJ	basalpregnant	https://ndownloader.figshare.com/files/5053567?private_link=f5d63d8c265a05618137 
+MCL1-DI	basalpregnant	https://ndownloader.figshare.com/files/5053564?private_link=f5d63d8c265a05618137 
+MCL1-DH	basalvirgin	https://ndownloader.figshare.com/files/5053561?private_link=f5d63d8c265a05618137 
+MCL1-DG	basalvirgin	https://ndownloader.figshare.com/files/5053558?private_link=f5d63d8c265a05618137 
+MCL1-LF	luminalvirgin	https://ndownloader.figshare.com/files/5053555?private_link=f5d63d8c265a05618137 
+MCL1-LE	luminalvirgin	https://ndownloader.figshare.com/files/5053588?private_link=f5d63d8c265a05618137 
+MCL1-LD	luminalpregnant	https://ndownloader.figshare.com/files/5053579?private_link=f5d63d8c265a05618137 
+MCL1-LC	luminalpregnant	https://ndownloader.figshare.com/files/5053582?private_link=f5d63d8c265a05618137 
+MCL1-LB	luminalvirgin	https://ndownloader.figshare.com/files/5053585?private_link=f5d63d8c265a05618137 
+MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_link=f5d63d8c265a05618137   
+```
 
 In order to get these files into Galaxy, we will want to do a few things:
 
@@ -81,21 +99,7 @@ In order to get these files into Galaxy, we will want to do a few things:
 >        - *"Load tabular data from"*: `Pasted Table`
 >    - Paste the table below
 >    - Click **Build**
->    ```
-> SampleID	Group	URL
-> MCL1-DL	basallactate	https://ndownloader.figshare.com/files/5053573?private_link=f5d63d8c265a05618137 
-> MCL1-DK	basallactate	https://ndownloader.figshare.com/files/5053570?private_link=f5d63d8c265a05618137 
-> MCL1-DJ	basalpregnant	https://ndownloader.figshare.com/files/5053567?private_link=f5d63d8c265a05618137 
-> MCL1-DI	basalpregnant	https://ndownloader.figshare.com/files/5053564?private_link=f5d63d8c265a05618137 
-> MCL1-DH	basalvirgin	https://ndownloader.figshare.com/files/5053561?private_link=f5d63d8c265a05618137 
-> MCL1-DG	basalvirgin	https://ndownloader.figshare.com/files/5053558?private_link=f5d63d8c265a05618137 
-> MCL1-LF	luminalvirgin	https://ndownloader.figshare.com/files/5053555?private_link=f5d63d8c265a05618137 
-> MCL1-LE	luminalvirgin	https://ndownloader.figshare.com/files/5053588?private_link=f5d63d8c265a05618137 
-> MCL1-LD	luminalpregnant	https://ndownloader.figshare.com/files/5053579?private_link=f5d63d8c265a05618137 
-> MCL1-LC	luminalpregnant	https://ndownloader.figshare.com/files/5053582?private_link=f5d63d8c265a05618137 
-> MCL1-LB	luminalvirgin	https://ndownloader.figshare.com/files/5053585?private_link=f5d63d8c265a05618137 
-> MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_link=f5d63d8c265a05618137   
->    ```
+>
 >    - In the `rules editor` that pops up:
 >
 >        - **Remove the header**. From the **Filter** menu select `First or Last N Rows`
@@ -152,48 +156,39 @@ If your fastqs are located in Shared Data, you can import them into your history
 >     - Click `Create list`
 {: .tip}
 
+Take a look at one of the FASTQ files to see what it contains.
+
+> ### {% icon tip %} Tip: FASTQ format
+> If you are not familiar with FASTQ format, see the tutorial [here](https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html)
+{: .tip}
+
 > ### {% icon hands_on %} Hands-on: Take a look at FASTQ format
 >
 > 1. Click on the collection name (`fastqs`)
->
 > 2. Click on the eye icon of one of the FASTQ files to have a look at what it contains
 >
->    > ### {% icon question %} Questions
->    >
->    > What is FASTQ format?
->    >
->    > > ### {% icon tip %} Tip: FASTQ format
->    > > If you are not familiar with FASTQ format, see the tutorial [here](https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html)
->    > {: .tip}
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > TODO
->    > >
->    > {: .solution}
->    >
->    {: .question}
 >
 {: .hands_on}
 
 ## Check raw reads
 
-During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis abd can lead to a misinterpretation of the data. Every base sequence gets a quality score from the sequencer and this information is present in the FASTQ file. quality score of 30 corresponds to a 1 in 1000 chance of an incorrect base call. (A quality score of 10 is a 1 in 10 chance of an incorrect base call.) To look at the overall distribution of quality scores across the reads, we can use FastQC.
+During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. Every base sequence gets a quality score from the sequencer and this information is present in the FASTQ file. A quality score of 30 corresponds to a 1 in 1000 chance of an incorrect base call (a quality score of 10 is a 1 in 10 chance of an incorrect base call). To look at the overall distribution of quality scores across the reads, we can use FastQC.
 
-Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in ["Quality control" tutorial]({{site.baseurl}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html). 
+Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the ["Quality control" tutorial]({{site.baseurl}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html).
 
 > ### {% icon hands_on %} Hands-on: Check raw reads with **FastQC**
 >
 > 1. **FastQC** {% icon tool %} with the following parameters:
 >    - {% icon param-collection %} *"Short read data from your current history"*: `fastqs` (Input dataset collection)
->
-> 2. Inspect the WebPage output of **FastQC** {% icon tool %} for the MCL1-DL sample
+> 2. Inspect the WebPage output of **FastQC** {% icon tool %} for the `MCL1-DL` sample by clicking on the eye icon
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. What do you think of the results?
+>    > What is the read length?
 >    >
 >    > > ### {% icon solution %} Solution
+>    > >
+>    > > The read length is 100 bp
 >    > >
 >    > {: .solution}
 >    >
@@ -201,7 +196,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >
 {: .hands_on}
 
-We can look at the FastQC report for each sample but that is quite a few reports. That would be 12 reports for this dataset and if you had more samples it could be a lot more. However, luckily, there is a very useful tool called MultiQC that enables summarising of QC information for multiple samples into a single report.
+The FastQC report contains a lot of information and we can look at the report for each sample. However, that is quite a few reports, 12 for this dataset. If you had more samples it could be a lot more. Luckily, there is a very useful tool called MultiQC that can summarise QC information for multiple samples into a single report.
 
 > ### {% icon hands_on %} Hands-on: Aggregate FastQC data with **MultiQC**
 >
@@ -213,20 +208,34 @@ We can look at the FastQC report for each sample but that is quite a few reports
 >           - {% icon param-collection %} *"FastQC output"*: `Raw data` files (output of **FastQC** {% icon tool %})
 >
 > 2. Inspect the webpage output from MultiQC
->
->    > ### {% icon question %} Questions
->    >
->    > 1. What do you think of the quality of the sequences?
->    > 2. What should we do?
->    >
->    > > ### {% icon solution %} Solution
->    > > TO DO add info what data looks like
->    > {: .solution}
->    {: .question}
->
 {: .hands_on}
 
-We will trim the reads to remove the Illumina adapter.
+Note that this is the results for just 1000 reads. The results for the full dataset are shown below (most of the plots look similar to the small fastqs).
+
+![General Statistics](../../images/limma-voom_f2c/fastqc_table.png "General Statistics")
+![Sequence Counts](../../images/limma-voom_f2c/fastqc_sequence_counts_plot.png "Sequence Counts")
+![Sequence Quality](../../images/limma-voom_f2c/fastqc_per_base_sequence_quality_plot.png "Sequence Quality")
+![Per Sequence Quality Scores](../../images/limma-voom_f2c/fastqc_per_sequence_quality_scores_plot.png "Per Sequence Quality Scores")
+![Per Sequence GC Content](../../images/limma-voom_f2c/fastqc_per_sequence_gc_content_plot.png "Per Sequence GC Content")
+![Per base N content](../../images/limma-voom_f2c/fastqc_per_base_n_content_plot.png "Per base N content")
+![Sequence Duplication Levels](../../images/limma-voom_f2c/fastqc_sequence_duplication_levels_plot.png "Sequence Duplication Levels")
+![Adapter Content](../../images/limma-voom_f2c/fastqc_adapter_content_plot.png "Adapter Content")
+
+See the [ref-based tutorial](http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html) for more information on FastQC plots.
+
+> ### {% icon question %} Questions
+>
+> What do you think of the overall quality of the sequences?
+>
+> > ### {% icon solution %} Solution
+> > Overall, the samples look pretty good. The main things to note are 
+> > * The base quality is high in all samples. 
+> > * Some Illumina adapter has been detected. 
+> > * Some duplication in RNA-seq can be normal due to the presence of highly expressed genes. However, for some reason `MCL1-LE` and `MCL1-LF` have higher numbers of duplicates detected than the other samples.
+> {: .solution}
+{: .question}
+
+We will use Cutadapt to trim the reads to remove the Illumina adapter and any low quality bases at the ends. We will discard any sequences that are too short (< 20bp) after trimming. The [Cutadapt website](https://cutadapt.readthedocs.io/en/stable/guide.html#illumina-truseq) provides the sequence we can use `AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC` to trim the Illumina adapter. We will also output the Cutadapt report for summarising with MultiQC.
 
 ## Trim reads
 
@@ -251,7 +260,7 @@ We will trim the reads to remove the Illumina adapter.
 >
 {: .hands_on}
 
-Let's take a look at the fastqs again now that they've been trimmed.
+We can take a look at the FASTQs again now that they've been trimmed.
 
 ## Check trimmed reads
 
@@ -269,11 +278,12 @@ Let's take a look at the fastqs again now that they've been trimmed.
 
 > ### {% icon question %} Questions
 >
-> What do you think of the quality of the sequences now?
+> What differences can you see after trimming?
 >
 > > ### {% icon solution %} Solution
 > >
-> > The sequences look better now. Note that we can see we now have sequences of different lengths.
+> > No adapter is detected now. 
+> > The sequences are no longer all 100bp, we now have sequences of different lengths.
 > >
 > {: .solution}
 >
@@ -281,7 +291,7 @@ Let's take a look at the fastqs again now that they've been trimmed.
 
 # Mapping
 
-Now that we have prepared our reads, we can align the reads for our 12 samples. There is an existing reference genome for mouse and we will map the reads to that. The current version of the mouse reference genome is `mm10/GRCm38`. Here we will use [HISAT2](https://ccb.jhu.edu/software/hisat2/index.shtml), the descendent of widely-used TopHat, to align the reads, but alternative mappers could be used, such as STAR. See the [RNA-seq ref-based tutorial](http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#Mapping) for more information on RNA-seq mappers. There are often numerous mapping parameters that we can specify, but usually the default mapping parameters are fine. However, library type (paired-end vs single-end) and library strandedness (stranded vs unstranded) require some different settings when mapping and counting, so they are two important pieces of information to know about samples. The mouse data comprises unstranded, single-end reads (100bp) so we will specify that where necessary. If we had paired-end data or stranded data, we would specify that. HISAT2 can output a mapping summary file that tells what proportion of reads mapped to the reference genome. Summary files for multiple samples can be summarised with MultiQC. As we’re only using a subset of 1000 reads per sample, aligning should just take a minute or so. To run the full samples from this dataset would take longer.
+Now that we have prepared our reads, we can align the reads for our 12 samples. There is an existing reference genome for mouse and we will map the reads to that. The current version of the mouse reference genome is `mm10/GRCm38`. Here we will use [HISAT2](https://ccb.jhu.edu/software/hisat2/index.shtml), the descendent of widely-used TopHat, to align the reads, but alternative mappers could be used, such as STAR. See the [RNA-seq ref-based tutorial](http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#Mapping) for more information on RNA-seq mappers. There are often numerous mapping parameters that we can specify, but usually the default mapping parameters are fine. However, library type (paired-end vs single-end) and library strandedness (stranded vs unstranded) require some different settings when mapping and counting, so they are two important pieces of information to know about samples. The mouse data comprises unstranded, single-end reads so we will specify that where necessary. If we had paired-end data or stranded data, we would specify that. HISAT2 can output a mapping summary file that tells what proportion of reads mapped to the reference genome. Summary files for multiple samples can be summarised with MultiQC. As we’re only using a subset of 1000 reads per sample, aligning should just take a minute or so. To run the full samples from this dataset would take longer.
 
 ## Map reads to reference genome
 
@@ -310,20 +320,15 @@ Now that we have prepared our reads, we can align the reads for our 12 samples. 
 > ### {% icon hands_on %} Hands-on: Take a look at BAM format
 >
 > 1. Click on the collection name (`HISAT2 on collection N: aligned reads (BAM)`)
->
 > 2. Click on the eye icon of one of the BAM files to have a look at what it contains
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > What is BAM format?
 >    >
->    > > ### {% icon tip %} Tip: BAM format
->    > > If you are not familiar with BAM format, see the tutorial [here](http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#%20Pretreatments)
->    > {: .tip}
->    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > TODO
+>    > > See the answer in the [ref-based tutorial](http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#%20Pretreatments)
 >    > >
 >    > {: .solution}
 >    >
@@ -345,31 +350,17 @@ An important metric to check is the percentage of reads mapped to the reference 
 
 > ### {% icon question %} Questions
 >
-> 1. What % reads mapped?
+> What do you think of the results? What % reads mapped? 
 >
 > > ### {% icon solution %} Solution
 > >
-> > TODO 
+> > The mapping rate looks good as over 90% of reads mapped in all samples.
 > >
 > {: .solution}
 >
 {: .question}
 
-maybe omit this question?:
-
-> ### {% icon question %} Questions
->
-> 1. What happens if you align the fastq files allowing multi-mapping reads (set unique = FALSE), and allowing for up to 6 “best” locations to be reported (nBestLocations = 6). Use MultiQC to the proportion of reads mapped.
->
-> > ### {% icon solution %} Solution
-> >
-> > More reads are mapped resulting from specifying the less stringent criteria. By default, alignment is performed with unique=TRUE. If a read can be aligned to two or more locations, Rsubread will attempt to select the best location using a number of criteria. Only reads that have a unique best location are reported as being aligned. Keeping this default is recommended, as it avoids spurious signal from non-uniquely mapped reads derived from, e.g., repeat regions.
-> >
-> {: .solution}
->
-{: .question}
-
-It is also good to visualise the read alignments in the BAM file, for example using IGV, see the tutorial [here](http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#%20Pretreatments).
+It is also good to visualise the read alignments in the BAM file, for example using IGV, see the [ref-based tutorial](http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#%20Pretreatments).
 
 ## Check strandedness
 
@@ -393,14 +384,13 @@ As far as is known, this data is unstranded, but as a sanity check you can check
 tool %})
 {: .hands_on}
 
-
 > ### {% icon question %} Questions
 >
-> 1. Do you think the data is stranded or unstranded?
+> Do you think the data is stranded or unstranded?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. TODO Answer for question1
+> > It is unstranded as approximately equal numbers of reads have aligned to the sense and antisense strands.
 > >
 > {: .solution}
 >
@@ -426,11 +416,11 @@ Duplicate reads are usually kept in RNA-seq differential expression analysis but
 
 > ### {% icon question %} Questions
 >
-> 1. What are the % of duplicate reads in the samples?
+> What are the % of duplicate reads in the samples?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. TODO Answer for question1
+> > The results are similar to what we saw with FastQC. Most of the samples have ~50-60% duplicates but 2 samples, `MCL1-LE` and `MCL1-LF` have a higher number of duplicates (~70%).
 > >
 > {: .solution}
 >
@@ -457,11 +447,11 @@ You can check the numbers of reads mapped to each chromosome with the **Samtools
 
 > ### {% icon question %} Questions
 >
-> 1. What do you think of the chromosome mappings?
+> What do you think of the chromosome mappings?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. TODO Answer for question1
+> > Some of the samples have very high mapping on chromosome 5. What is going on there?
 > >
 > {: .solution}
 >
@@ -469,7 +459,7 @@ You can check the numbers of reads mapped to each chromosome with the **Samtools
 
 ## Check coverage across gene bodies (5'-3')
 
-The coverage of reads along gene bodies can be assessed to check if there is any bias in coverage. For example, a bias towards the 3' end of genes could indicate degradation of the RNA. Alternatively, a 3' bias could indicate that the data is from a 3' assay (e.g. oligodT-primed, 3'RNA-seq). You can use the RSeQC Gene bedy coverage tool to assess gene body coverage.
+The coverage of reads along gene bodies can be assessed to check if there is any bias in coverage. For example, a bias towards the 3' end of genes could indicate degradation of the RNA. Alternatively, a 3' bias could indicate that the data is from a 3' assay (e.g. oligodT-primed, 3'RNA-seq). You can use the RSeQC Gene body coverage tool to assess gene body coverage.
 
 > ### {% icon hands_on %} Hands-on: Check coverage of genes with **Gene Body Coverage (BAM)**
 >
@@ -484,18 +474,18 @@ The coverage of reads along gene bodies can be assessed to check if there is any
 >                   - Click on *"Insert RSeQC output"*:
 >                   - In *"1: RSeQC output"*:
 >                       - *"Type of RSeQC output?"*: `gene_body_coverage`
->                           - {% icon param-collection %} *"RSeQC gene_body_coverage output"*: `outputtxt` (output of **Gene Body Converage (
+>                           - {% icon param-collection %} *"RSeQC gene_body_coverage output"*: `outputtxt` (output of **Gene Body Coverage (
 BAM)** {% icon tool %})
 >
 {: .hands_on}
 
 > ### {% icon question %} Questions
 >
-> 1. What do you think of the gene body coverage in these samples?
+> What do you think of the gene body coverage in these samples?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
+> > It looks good, no bias in coverage towards 5' or 3' ends.
 > >
 > {: .solution}
 >
@@ -508,7 +498,7 @@ BAM)** {% icon tool %})
 > 1. **Read Distribution** {% icon tool %} with the following parameters:
 >    - {% icon param-collection %} *"Input .bam/.sam file"*: `output_alignments` (output of **MultiQC2** {% icon tool %})
 >    - {% icon param-file %} *"Reference gene model"*: `output` (Input dataset)
-> 2. **MultiC* {% icon tool %} with the following parameters:
+> 2. **MultiQC* {% icon tool %} with the following parameters:
 >       - In *"1: Results"*:
 >           - *"Which tool was used generate logs?"*: `RSeQC`
 >               - In *"RSeQC output"*:
@@ -522,11 +512,11 @@ icon tool %})
 
 > ### {% icon question %} Questions
 >
-> 1. What do you think of the read distribution?
+> What do you think of the read distribution?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
+> > It looks good, most of the reads have mapped to exons (which is what we'll be counting) and not many to introns or intergenic regions. The samples have pretty consistent read distribution, albeit with slightly higher numbers of reads mapping to CDS exons for `MCL1-LC` and `MCL1-LD`, and `MCL1-LE` and `MCL1-LF` have more reads mapping to CDS exons than the other samples.
 > >
 > {: .solution}
 >
@@ -562,20 +552,19 @@ The statistics of the read mapping are output as a file from featureCounts. Mult
 
 featureCounts reports the numbers of unassigned reads and the reasons why they are not assigned (eg. ambiguity, multi-mapping, secondary alignment, mapping quality, fragment length, chimera, read duplicate, non-junction and so on), in addition to the number of successfully assigned reads for each library.
 
-In this example we have kept many of the default settings, which have been optimised to work well under a variety of situations. The default setting for featureCounts is that it only keeps reads that uniquely map to the reference genome. For testing differential expression of genes, this is what we want, as the reads are unambigously assigned to one place in the genome, allowing for easier interpretation of the results. Understanding all the different parameters you can change involves doing a lot of reading about the aligner that you are using, and can take a lot of time to understand! Today we won’t be going into the details of the parameters you can change, but you can get more information from looking at the tool help.
-
 > ### {% icon question %} Questions
 >
-> Redo the counting over genes allowing for multimapping reads (specify countMultiMappingReads = TRUE). Check the stats. How do they differ?
+> How many reads are assigned to exons?
 >
 > > ### {% icon solution %} Solution
 > >
-> > TODO 
+> > ~60-70% of reads are assigned to exons. This is a fairly typical number for RNA-seq.
 > >
 > {: .solution}
 > 
 {: .question}
 
+In this example we have kept many of the default settings, which have been optimised to work well under a variety of situations. The default setting for featureCounts is that it only keeps reads that uniquely map to the reference genome. For testing differential expression of genes, this is what we want, as the reads are unambigously assigned to one place in the genome, allowing for easier interpretation of the results. Understanding all the different parameters you can change involves doing a lot of reading about the aligner that you are using, and can take a lot of time to understand! Today we won’t be going into the details of the parameters you can change, but you can get more information from looking at the tool help.
 
 The counts for the samples are output as tabular files. Take a look at one. The numbers in the first column of the counts file represent the Entrez gene identifiers for each gene, while the second column contains the counts for each gene for the sample.
 
@@ -650,7 +639,7 @@ tool %})
 > >                    - Click on *"Insert RSeQC output"*:
 > >                    - In *"1: RSeQC output"*:
 > >                        - *"Type of RSeQC output?"*: `gene_body_coverage`
-> >                            - {% icon param-collection %} *"RSeQC gene_body_coverage output"*: `outputtxt` (output of **Gene Body Converage (
+> >                            - {% icon param-collection %} *"RSeQC gene_body_coverage output"*: `outputtxt` (output of **Gene Body Coverage (
 BAM)** {% icon tool %})
 > >        - Click on *"Insert Results"*:
 > >        - In *"8: Results"*:
@@ -689,6 +678,7 @@ icon tool %})
 
 You can now extract a workflow from the steps that have been performed, as shown in the [Galaxy Peaks to Genes tutorial](https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html#extracting-workflow). This is a way to help keep a record of the steps performed. It also enables efficient rerunning of a multi-step analysis, such as RNA-seq.
 
+![fastq to counts Workflow](../../images/limma-voom_f2c/workflow.png "FASTQ to counts Workflow")
 
 # Conclusion
 {:.no_toc}
