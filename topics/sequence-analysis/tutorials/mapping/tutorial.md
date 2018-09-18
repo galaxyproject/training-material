@@ -23,13 +23,13 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Sequencing is producing a collection of sequences without genomic context. We do not know to which part of the genome the sequences correspond to. Map the reads of an experiment to a reference genome is a key step in modern genomic data analysis. With the mapping the reads are assigned to a specific location in the genome and insights like the expression level of genes can be gained.
+Sequencing produces a collection of sequences without genomic context. We do not know to which part of the genome the sequences correspond to. Mapping the reads of an experiment to a reference genome is a key step in modern genomic data analysis. With the mapping the reads are assigned to a specific location in the genome and insights like the expression level of genes can be gained.
 
-As the short reads do not come with position information, that is, we do not know what part of the genome they came from. We need to use the sequence of the read itself to find the corresponding region in the reference sequence. But the reference sequence can be quite long (~3 billion bases for human), making it a daunting task to find a matching region. Since our reads are short, there may be several, equally likely places in the reference sequence from which they could have been read. This is especially true for repetitive regions.
+The short reads do not come with position information, so we do not know what part of the genome they came from. We need to use the sequence of the read itself to find the corresponding region in the reference sequence. But the reference sequence can be quite long (~3 billion bases for human), making it a daunting task to find a matching region. Since our reads are short, there may be several, equally likely places in the reference sequence from which they could have been read. This is especially true for repetitive regions.
 
 In principle, we could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. We would need to do that for each of the millions of reads in our sequencing data. Aligning millions of short sequences this way may, however, take a couple of weeks. And we do not really care about the exact base to base correspondence (alignment). What we are really interested in is "where these reads came from". This approach is called **mapping**.
 
-In the following we will process a dataset with the mapper **Bowtie2** and we will visualize the data with the software **IGV**.
+In the following we will process a dataset with the mapper **Bowtie2** and we will visualize the data with the program **IGV**.
 
 > ### Agenda
 >
@@ -67,7 +67,7 @@ In the following we will process a dataset with the mapper **Bowtie2** and we wi
 >
 {: .hands_on}
 
-We just imported in Galaxy FastQ files corresponding to paired-end data as we could get directly from a sequencing facility.
+We just imported in Galaxy FASTQ files corresponding to paired-end data as we could get directly from a sequencing facility.
 
 During sequencing, errors are introduced, such as incorrect nucleotides being called. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. The first step for any type of sequencing data is to check their quality. 
 
@@ -131,15 +131,15 @@ Currently, there are over 60 different mappers, and their number is growing. In 
 > 
 {: .hands_on}
 
-Checking the mapping statistics is an important step to do before continuying any analyses. There are several potential sources for errors in mapping, including (but not limited to):
+Checking the mapping statistics is an important step to do before continuing any analyses. There are several potential sources for errors in mapping, including (but not limited to):
 
-- **Polymerase Chain Reaction artifacts (PCR artifacts)**: Many HTS methods involve one or multiple PCR steps. PCR errors will show as mismatches in the alignment, and especially errors in early PCR rounds will show up in multiple reads, falsely suggesting genetic variation in the sample. A related error would be PCR duplicates, where the same read pair occurs multiple times, skewing coverage calculations in the alignment.
+- **Polymerase Chain Reaction (PCR) artifacts**: Many HTS methods involve one or multiple PCR steps. PCR errors will show as mismatches in the alignment, and especially errors in early PCR rounds will show up in multiple reads, falsely suggesting genetic variation in the sample. A related error would be PCR duplicates, where the same read pair occurs multiple times, skewing coverage calculations in the alignment.
 - **Sequencing errors**: The sequencing machine can make an erroneous call, either for physical reasons (e.g. oil on an Illumina slide), or due to properties of the sequenced DNA (e.g., homopolymers). As sequencing errors are often random, they can be filtered out as singleton reads during variant calling.
 - **Mapping errors**: The mapping algorithm can map a read to the wrong location in the reference. This often happens around repeats or other low-complexity regions.
 
 So if the mapping statistics are not good, you should investigate the cause of these errors before going further in your analyses.
 
-After that, you should have a look at the reads and inspect the BAM file in which is stored where the reads have been mapped.
+After that, you should have a look at the reads and inspect the BAM file where the read mappings are stored.
 
 # Inspection of a BAM file
 
@@ -167,7 +167,7 @@ So the BAM file integrates many information for each read, in particular the qua
 >    > > ### {% icon solution %} Solution
 >    > > 1. There are ~21,900 mismatches for ~4,753,900 bases mapped so ~$$5 x 10^{-3}$$ mismatches per mapped bases
 >    > > 2. The error rate is the proportion of mismatches per mapped bases, so the ratio computed right before
->    > > 3. The average quality is the mean quality score of the mapping. It is a Phred score, as the one used in the FastQ file for each nucleotide. But here the score is not per nucleotide, but per read. And it represents the probability of mapping quality
+>    > > 3. The average quality is the mean quality score of the mapping. It is a Phred score, as the one used in the FASTQ file for each nucleotide. But here the score is not per nucleotide, but per read. And it represents the probability of mapping quality
 >    > > 4. The insert size is the distance between the two reads in the pairs.
 >    > > 5. To get the info:
 >    > >      1. **Filter BAM datasets on a variety of attributes** {% icon tool %} with a filter to keep only the reads with a mapping quality >= 20
