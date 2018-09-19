@@ -54,9 +54,7 @@ GMOD is a collection open source software for maintaining Model Organism Databas
 
 ### 1. Artemis
 
-Artemis, the first genome browser discussed here, is not actually a GMOD project. Artemis was an older, desktop-based genome browser. You had to install the software on your computer in order to run it. All of the other genome browsers observed here are web-based. Artemis allows for annotation, but those annotations were only stored on your local device.
-
-<!-- CAPTION PICTURE? -->
+Artemis, the first genome browser discussed here, is not actually a GMOD project. Artemis was an older, desktop-based genome browser. You had to install the software on your computer in order to run it. All of the other genome browsers observed here are web-based. Artemis allows for annotation, but those annotations were only stored on your local device. Artemis featured a three-pane view consisting of a high-level overview of the genome, a DNA-level view, and a list of all the features in the genome.
 
 ![](../../images/getting-started-with-apollo-screenshots/(2) Artemis.png)
 
@@ -64,15 +62,11 @@ Artemis, the first genome browser discussed here, is not actually a GMOD project
 
 One of the earlier genome browsers, Grows did *not* support annotation. Think of it like the old Yahoo-maps. Instead of just clicking and dragging the map, you had to click where you wanted to go, wait a few seconds, and the new map would be displayed. It makes the process tedious.
 
-<!-- CAPTION PICTURE? -->
-
 ![](../../images/getting-started-with-apollo-screenshots/(3) GBrowse from GMOD Wiki.png)
 
 ### 3. JBrowse
 
 JBrowse is used in Galaxy workflows for genome visualization. JBrowse is a more modern re-implementation of GBrowse. JBrowse is much more like Google Maps (or any other current web map service; you click and drag and can quickly browse around the genome, turning evidence tracks on and off where relevant. Many labs have deployed JBrowse instances to help showcase their annotation efforts to the community, and to make their data accessible. FlyBase has produced a demo in JBrowse, displaying *Drosophila melanogaster*. Note that JBrowse is a **_static_** visualization tool. You cannot make any changes to the data, and you cannot make annotations and save them. It is a “Read Only” view of genomes and annotations.
-
-<!-- CAPTION PICTURE? -->
 
 ![](../../images/getting-started-with-apollo-screenshots/(4) JBrowse.png)
 
@@ -93,11 +87,17 @@ There are three file formats to be aware of during genome annotation.
 
 The sequence contained in a FASTA file may be DNA, RNA, or protein sequences; they may contain unspecified bases (N/Y/X) or gaps (-). Within a FASTA file, each sequence begins with a “>,” which is immediately followed by the “FASTA ID.” Some sequences have a “description” after *any whitespace character*, such as the given example.
 
+![](../../images/getting-started-with-apollo-screenshots/(6) FASTA Sequence Example.png)
+
 ### 2. GFF3
 
 The eukaryotic gene model captures a lot of information about the biological process behind producing proteins from DNA, such as mRNAs, transcription, and alternative splicing. GFF3 files thus have to encode these complex, hierarchical, parent-child relationships. Characteristics of GFF3 files, such as the tab separated, key-value pairs, allot simplicity and ease of use.
 
-<!-- INSERT GFF3 PICTURES. CAPTION VISUAL REPRESENTATION AS SUCH. -->
+![](../../images/getting-started-with-apollo-screenshots/(7) GFF3.png)
+
+![](../../images/getting-started-with-apollo-screenshots/(8) GFF3 Visually.png "A visual representation of a GFF3 file.")
+
+<!-- HOW TO PHYSICALL CAPTION SECOND PICTURE, NOT JUST HOVER TEXT --> 
 
 At the top level is a “gene” (3rd column) spanning from 1000 to 9000, on the forward strand (7th column), with an ID of gene00001 and a Name of EDEN.
 
@@ -131,6 +131,21 @@ GenBank files are a fixed-width format which displays a “flat” gene model an
 ![](../../images/getting-started-with-apollo-screenshots/(13) Compare/Contrast File Formats.png)
 
 # Annotation Within Apollo
+
+Continuing on to actually using Apollo, this section will go through an example annotation. Additionally, characteristics of the program will be described to assist in the navigation of the program and allow greater ease of use. There are two primary components to annotation:
+
+1. Structural annotation, which consists of locations of genomic features, such as genes and terminators. Several gene callers will identify possible genes in the phage genome. Putative genes in Apollo will be annotated based on these results.
+2. Functional annotation, which entails identifying possible gene functions base on multiple sources of evidence.
+
+<!-- LINK STRUCTURAL AND FUNCTIONAL TUTORIALS UPON COMPLETION. -->
+
+## Apollo in Galaxy - General Use
+
+The CPT developed a tool called JBrowse-in-Galaxy (JiG), which allows the building of JBrowse instances within Galaxy; this contrasts with how JBrowse instances are traditionally configured, through a complex and annual process at the command line. 
+
+![](../../images/getting-started-with-apollo-screenshots/(14) JBrowse in Galaxy.png)
+
+The CPT uses JBrowse as a tool for displaying the results of a bioinformatic analysis in a standardized way; instead of having to digest and understand 20+ different report formats, images, output files, tables, etc., all of our analysis is presented as easy-to-grasp features in evidence tracks. As its input, Apollo takes complete JBrowse instances. To view any data in Apollo, a JBrowse instance needs to be configured first. On the far left side of the Galaxy web page is a “Tools” column with a search bar. Search “JBrowse genome browser,” and click on the synonymous link underneath “CPT: Genomic Viz.”
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
