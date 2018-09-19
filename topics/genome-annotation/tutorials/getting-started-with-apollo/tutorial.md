@@ -128,7 +128,7 @@ GenBank files are a fixed-width format which displays a “flat” gene model an
 
 ![](../../images/getting-started-with-apollo-screenshots/(12) GenBank Sequence Data P22.png)
 
-![](../../images/getting-started-with-apollo-screenshots/(13) Compare/Contrast File Formats.png)
+![](../../images/getting-started-with-apollo-screenshots/(13) Compare and Contrast File Formats.png)
 
 # Annotation Within Apollo
 
@@ -146,6 +146,10 @@ The CPT developed a tool called JBrowse-in-Galaxy (JiG), which allows the buildi
 ![](../../images/getting-started-with-apollo-screenshots/(14) JBrowse in Galaxy.png)
 
 The CPT uses JBrowse as a tool for displaying the results of a bioinformatic analysis in a standardized way; instead of having to digest and understand 20+ different report formats, images, output files, tables, etc., all of our analysis is presented as easy-to-grasp features in evidence tracks. As its input, Apollo takes complete JBrowse instances. To view any data in Apollo, a JBrowse instance needs to be configured first. On the far left side of the Galaxy web page is a “Tools” column with a search bar. Search “JBrowse genome browser,” and click on the synonymous link underneath “CPT: Genomic Viz.”
+
+![](../../images/getting-started-with-apollo-screenshots/(15) JBrowse Instance Setup.png)
+
+It is vital that the correct files are elected for the steps in the tool, otherwise the tool will not run. 
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
