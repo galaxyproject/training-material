@@ -29,7 +29,7 @@ contributors:
 
 <!-- This is a comment. -->
 
-This tutorial is based on [Ryan R. Wick et al.: 'Completing bacterial genome assemblies with multiplex MinION sequencing'](https://doi: 10.1099/mgen.0.000132).
+This tutorial is based on [Ryan R. Wick et al.: 'Completing bacterial genome assemblies with multiplex MinION sequencing'](https://doi.org/10.1099/mgen.0.000132).
 
 General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
 
