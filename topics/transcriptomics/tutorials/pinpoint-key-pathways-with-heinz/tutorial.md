@@ -21,8 +21,8 @@ contributors:
 # Overview
 {:.no_toc}
 
-In this tutorial we will perform a network analysis by reproducing part of the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171) using [Heinz](https://github.com/ls-cwi/heinz)
-in Galaxy.
+In this tutorial we will perform a network analysis using [Heinz](https://github.com/ls-cwi/heinz) in Galaxy. The data come from the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171), and we will reproduce some of the computational steps from the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171) with simplified data and parameters, so that we can go through everything in this
+tutorial within 2 hours.
 
 > ### Agenda
 >
@@ -39,17 +39,17 @@ in Galaxy.
 > reference data versions or stochastic processes in the algorithms.
 {: .comment}
 
-In this tutorial, we will reproduce Heinz workflow step by step; here is a picture of the whole workflow we are going to make.
+In this tutorial, we will create a Heinz workflow step by step, as the picture below shows.
 
 ![Heinz workflow](../../images/heinz-workflow.png)
 
 # Obtaining and preparing data
 
-We use KO ([KEGG Orthology](https://www.genome.jp/kegg/ko.html)) count data as the starting point, so the upstream operations that transform the raw sequence data to KO counts are not included in this tutorial, which can still be done within Galaxy. All data needed for this tutorial are available from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1344105.svg)](https://doi.org/10.5281/zenodo.1344105)
+The study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171) includes the computation steps starting from the raw RNAseq datasets. The operations that processed raw data into the interpreted data are beyond the scope of this tutorial. To learn that, please refer to the relevant topics in the Galaxy training material. In this tutorial, we start with the interpreted data, which are KO ([KEGG Orthology](https://www.genome.jp/kegg/ko.html)) count data. All the data needed for this tutorial are available from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1344105.svg)](https://doi.org/10.5281/zenodo.1344105)
 
 ## Understanding our input data
 
-The dental caries (DC) dataset we are using in this tutorial came from an experiment that comprised of supragingival plaque samples collected from all dental surfaces of 36 individuals who had either a caries-positive (n = 19) or a caries-negative (n = 17) oral health profile. Each of the 36 samples was sequenced, pre-processed and
+According to the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171), the dental caries (DC) dataset in this tutorial came from an experiment that comprised of supragingival plaque samples collected from all dental surfaces of 36 individuals who had either a caries-positive (disease) or a caries-negative (health) oral profile. Each of the 36 samples was sequenced, pre-processed and
 transformed into KO counts. We will use these count data as the starting point to performance the network analysis.
 
 > ### {% icon comment %} Dataset details
@@ -136,16 +136,24 @@ After knowing what our input data are like, let's get them into Galaxy history:
 >    > >
 >    > {: .solution}
 >    >
+>    > How many columns in each file? What are these columns?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > There are two columns, one is the KO IDs, the other is the count.
+>    > >
+>    > {: .solution}
+>    >
 >    {: .question}
 >
 {: .hands_on}
 
 > ### {% icon tip %} Tip: Creating a collection from files already in your history
-> If you forgot use the `Collection` tab in the file upload menu, you will have a lot of files to manage. Luckily Galaxy can make life a bit easier by allowing us to manually create *dataset collections*. This enables us to easily run tools on multiple datasets at once. Expand the box below to see how to do that.
->
+> *Dataset collections* enables us to easily run tools on multiple datasets at once, you probably have done that in the file upload menu using the 
+> `Collection` tab. If not, you can still create *dataset collections* manually. 
 > > ### {% icon hands_on %} Manually organizing our data into a collection
 > >
-> > If you have all your datasets in your history, but they are not organized into a collection yet, you can follow these steps to create a collection:
+> > If you have all the datasets in the history, but they are not organized into a collection yet, you can follow these steps to create a collection:
 > >
 > > 1. Click on the **checkmark icon** at top of your history.
 > >   ![Checkmark icon in history menu](../../../../shared/images/history_menu_buttons2.png)
@@ -167,11 +175,11 @@ After knowing what our input data are like, let's get them into Galaxy history:
 
 ## What is differential expression analysis?
 
-> ### {% icon comment %} According to [EBI](https://www.ebi.ac.uk/training/online/course/functional-genomics-ii-common-technologies-and-data-analysis-methods/differential-gene)
-> Differential expression analysis means taking the normalised read count data and performing statistical analysis to discover quantitative changes in expression levels between experimental groups. For example, we use statistical testing to decide whether, for a given gene, an observed difference in read counts is significant, that is, whether it is greater than what would be expected just due to natural random variation.
+> ### {% icon comment %}
+> The definition of differential expression analysis given by [EBI](https://www.ebi.ac.uk/training/online/course/functional-genomics-ii-common-technologies-and-data-analysis-methods/differential-gene) means taking the normalised read count data and performing statistical analysis to discover quantitative changes in expression levels between experimental groups. For example, we use statistical testing to decide whether, for a given gene, an observed difference in read counts is significant, that is, whether it is greater than what would be expected just due to natural random variation.
 {: .comment}
 
-In principle, DEA is a causal analysis, which falls with Rung 2 --- intervention, according to Judea Pearl's theory. Back to our datasets --- CP and CN, they are from two experimental groups. By DEA, we hope to pinpoint the candidate genes that incur dental caries, from which we will reply on Heinz to infer the related pathways.
+In principle, DEA is a causal analysis, which falls into Rung 2 --- intervention, according to Judea Pearl. Back to our datasets --- CP and CN, they are from two experimental groups. By DEA, we hope to pinpoint the candidate genes that lead to dental caries, from which we will reply on Heinz to infer the related pathways.
 
 ## Which tools are available for DEA?
 
