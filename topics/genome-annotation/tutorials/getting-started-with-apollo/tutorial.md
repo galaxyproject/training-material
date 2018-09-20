@@ -141,6 +141,8 @@ Continuing on to actually using Apollo, this section will go through an example 
 
 ## Apollo in Galaxy - General Use
 
+### JBrowse in Galaxy
+
 The CPT developed a tool called JBrowse-in-Galaxy (JiG), which allows the building of JBrowse instances within Galaxy; this contrasts with how JBrowse instances are traditionally configured, through a complex and annual process at the command line. 
 
 ![](../../images/getting-started-with-apollo-screenshots/(14) JBrowse in Galaxy.png)
@@ -149,7 +151,28 @@ The CPT uses JBrowse as a tool for displaying the results of a bioinformatic ana
 
 ![](../../images/getting-started-with-apollo-screenshots/(15) JBrowse Instance Setup.png)
 
-It is vital that the correct files are elected for the steps in the tool, otherwise the tool will not run. 
+It is vital that the correct files are elected for the steps in the tool, otherwise the tool will not run. Once you’v created a JBrowse instance, it will appear in the history column on the left side of the Galaxy page. To see the JBrowse instance, click on the corresponding eyeball {% icon solution %} symbol; clicking on the JBrowse instance step will reveal more details and options. If desired, clicking on the floppy disk symbol will save the JBrowse instance to the local device. This is typically unnecessary, as it should stay within the Galaxy history.
+
+![](../../images/getting-started-with-apollo-screenshots/(16.5) JBrowse Instance Within Galaxy.png)
+
+### Moving Data From Galaxy to Apollo
+
+With a complete JBrowse instance, data can now begin being channeled to Apollo. Data is built up in Galaxy in the form of a JBrowse instance, which is then pushed to the Apollo service in the *Create or Update Organism* step. Once annotations have been made on the organism’s genome in Apollo, the updated set of annotations can be exported into Galaxy, and then re-analyzed for another update in Apollo with the new results.
+
+![](../../images/getting-started-with-apollo-screenshots/(16) Apollo Galaxy JBrowse general workflow.png “General Apollo/JiG/Galaxy workflow”)
+
+**Create or Update Organism** is a tool that allows for the creation/updating of an organism in Apollo with new data from Galaxy in the form of a JBrowse instance. This tool can be found using the search function in the Tools column in Galaxy, underneath “CPT: Apollo.”
+
+![](../../images/getting-started-with-apollo-screenshots/(17) Create or Update Organism.png)
+
+> ### {% icon tip %} Note that…
+> * Like with the JBrowse Instance tool, if the fields are not filled correctly, the tool will *not* run, or will run *incorrectly*.
+> * You **_must_** fill out the Organism Common Name. If the phage is “Petty,” it is recommended that
+>    > 1. If possible, the FASTA file header reads *>Petty* (and nothing else), and
+>    > 2. “Petty” is typed into the Organism Common name field in this tool.
+{: .tip}
+
+
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
