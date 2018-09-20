@@ -179,14 +179,16 @@ After knowing what our input data are like, let's get them into Galaxy history:
 > The definition of differential expression analysis given by [EBI](https://www.ebi.ac.uk/training/online/course/functional-genomics-ii-common-technologies-and-data-analysis-methods/differential-gene) means taking the normalised read count data and performing statistical analysis to discover quantitative changes in expression levels between experimental groups. For example, we use statistical testing to decide whether, for a given gene, an observed difference in read counts is significant, that is, whether it is greater than what would be expected just due to natural random variation.
 {: .comment}
 
-In principle, DEA is a causal analysis, which falls into Rung 2 --- intervention, according to Judea Pearl. Back to our datasets --- CP and CN, they are from two experimental groups. By DEA, we hope to pinpoint the candidate genes that lead to dental caries, from which we will reply on Heinz to infer the related pathways.
+In principle, DEA is a causal analysis; but in reality, it is hampered by the complexity of experimental situation and measurement. Back to our datasets --- CP and CN, they are from two experimental groups. By DEA, we hope to pinpoint the candidate genes relevant to dental caries first, then we will use Heinz to infer the related pathways.
 
 ## Which tools are available for DEA?
 
-There are a few canned tools commonly used for DEA, like [Limma](https://bioconductor.org/packages/release/bioc/html/limma.html) and [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html), here in this tutorial, we use DESeq2 for DEA.
+There are a few canned tools commonly used for DEA, like [Limma](https://bioconductor.org/packages/release/bioc/html/limma.html) and [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html). If you are interested, you may look up the pros and cons for each tool. Here we use DESeq2. 
 
 
 ## Conduct differential expression analysis
+
+After learning about differential expression analysis, let's get some hands-on experience.
 
 > ### {% icon hands_on %} Hands-on: DEA via DESeq2
 >
@@ -200,7 +202,7 @@ There are a few canned tools commonly used for DEA, like [Limma](https://biocond
 >
 {: .hands_on}
 
-After the analysis is finished, view the file now, it should look something like this:
+It usually takes 10 - 15 minutes to finish DESseq2. After the analysis is finished, have a look at the file, it should look like something this:
 
 ```
 GeneID  Base mean   log2(FC)	        StdErr	            Wald-Stats	        P-value	                P-adj
@@ -211,11 +213,14 @@ K03732  563.63634258472 -1.41961721984814	0.316992240900184	-4.47839737596338	7.
 K01792  112.923146882195    -1.26925892659617	0.285732234964578	-4.44212717810268	8.90738834802815e-06	0.00820667379798327
 ```
 
+
 # Fit a BUM model (a mixture model)
 
-Statistically speaking, p-values are uniformly distributed under the null hypothesis; therefore, under alternative hypothesis, the noise component will be adequately modeled by a uniform distribution. With this knowledge, we can fit these p-values to a mixture model (BUM model), as the figure below shows.
+From a statistical point of view, p-values are uniformly distributed under null hypothesis; in other words, under alternative hypothesis, the noise component (which holds under null hypothesis) will be adequately modeled by a uniform distribution. With this knowledge, we can fit these p-values to a mixture model (BUM model), as the figure below shows.
 
 ![p-values are fitted to a mixture model](../../images/bum.jpeg){:width="50%"}
+
+Before fitting to BUM model in Galaxy, we need to prepare the input data for the tool **Fit a BUM model**, that's a file that only contains p-values.
 
 > ### {% icon hands_on %} Hands-on: extract p-values from DESeq2 output
 >
@@ -226,6 +231,8 @@ Statistically speaking, p-values are uniformly distributed under the null hypoth
 >
 {: .hands_on}
 
+Then we can **Fit a BUM model** now. 
+
 > ### {% icon hands_on %} Hands-on: fit the BUM model
 >
 > - **Fit a BUM model** {% icon tool %} with the following parameters
@@ -234,6 +241,8 @@ Statistically speaking, p-values are uniformly distributed under the null hypoth
 {: .hands_on}
 
 # Pinpoint the key pathways with Heinz
+
+After getting the parameters of the BUM model from last step, we will use Heinz to pinpoint the key pathways. Before we continue, let's figure out what Heinz is actually doing.
 
 Heinz is an algorithm in searching an optimal subnetwork from a bigger network. You may wonder what the networks are here. Through the previous steps, we have got a list of identities, that is a list of gene IDs with p-values, which form the nodes of 'the bigger network', the relations between the nodes, that is the edges, need to be obtained from a background network, which represents a pathway relation databases, such as [Reactome](https://reactome.org/) and [STRING](https://string-db.org/). In this tutorial, we only use a small sample background network for demonstration purposes. The background network is represented as edges in a txt file where each line denotes an edge as follows:
 
@@ -255,7 +264,7 @@ Upload this edge file (hereafter we call it edge file) into the Galaxy instance.
 
 ## Calculate Heinz scores
 
-Before running Heinz to pinpoint the key pathways, we need to calculate a Heinz score for each node, using the BUM model parameters we obtained in the previous step; meanwhile, we also need to specify an FDR value.
+As the first step, we need to calculate a Heinz score for each node, using the BUM model parameters we obtained; meanwhile, we also need to specify an FDR value as input.
 
 > ### {% icon comment %} What is FDR value?
 > FDR is short for false discovery rate, which is a method of conceptualizing the rate of type I errors in null hypothesis testing when conducting multiple comparisons, if you are interested, view the detail in [Wikipedia](https://en.wikipedia.org/wiki/False_discovery_rate).
@@ -263,17 +272,19 @@ Before running Heinz to pinpoint the key pathways, we need to calculate a Heinz 
 
 In our case, the higher a FDR value is, the more positive nodes (regarding the Heinz scores) we get, which means it may include a lot of false positive nodes. For different datasets and problems, we probably need different FDR values. Here we set FDR to 0.11.
 
+Similar to **Fit a BUM model**, we also need to prepare the input data for the tool **Calculate a Heinz score**.
 
-> ### {% icon hands_on %} Hands-on: calculate Heinz scores
+> ### {% icon question %} Question
 >
-> - **Calculate a Heinz score** {% icon tool %} with the following parameters
->   - "A node file with p-values" to the output of **cut** (a different **cut**, see below)
->   - "FDR value" to 0.11
->   - "Choose your input type for BUM parameters" to "The output file of BUM model"
->   - "Output file of BUM model as input: lambda on the first line and alpha, the second" to the output of **Fit a BUM model** <br><br>
-{: .hands_on}
+> What is the requirement of the input data format for **Calculate a Heinz score**?
+>
+> > ### {% icon solution %} Solution
+> >
+> > In the user interface of the tool "Calculate a Heinz score", we see that "A node file with p-values" is needed. It should contain two columns delimited by tab, one is KO ID; the other, p-value.
+> >
+> {: .solution}
 
-In the user interface of the tool "Calculate a Heinz score", we see that "A node file with p-values" is needed. In the previous steps, we have done **cut** once, where we only extract one column --- p-value column. Here we need to do another **cut**, but this time, we need to extract two columns.
+{: .question}
 
 > ### {% icon hands_on %} Hands-on: extract geneID and p-values from DESeq2 output
 >
@@ -282,6 +293,15 @@ In the user interface of the tool "Calculate a Heinz score", we see that "A node
 >   - "Delimited by" to `TAB`
 >   - "From" to the output of **DESeq2** <br><br>
 >
+{: .hands_on}
+
+> ### {% icon hands_on %} Hands-on: calculate Heinz scores
+>
+> - **Calculate a Heinz score** {% icon tool %} with the following parameters
+>   - "A node file with p-values" to the output of **cut** (a different **cut**, see below)
+>   - "FDR value" to 0.11
+>   - "Choose your input type for BUM parameters" to "The output file of BUM model"
+>   - "Output file of BUM model as input: lambda on the first line and alpha, the second" to the output of **Fit a BUM model** <br><br>
 {: .hands_on}
 
 ## Run Heinz: pinpoint the optimal subnetwork
@@ -296,7 +316,7 @@ After getting Heinz scores, let's run Heinz program to find the optimal subnetwo
 >
 {: .hands_on}
 
-It usually takes a few minutes to get the result. (For some tasks, it might take a few hours to get a result in practice)
+It usually takes a few minutes to get the result, but mind you, for some tasks, it might take a few hours to get a result in practice.
 
 > ### {% icon tip %} Tip: running time of the program
 >
@@ -307,8 +327,8 @@ It usually takes a few minutes to get the result. (For some tasks, it might take
 
 ## Visualize the output: visualize the optimal subnetwork
 
-The result we got from last step is not very human readable, therefore we need to visualize the output in the form of graphs. Except the tool
-we are going to use in Galaxy, you may consider using eXamine plugin in Cytoscape for a richer visualization.
+The result we got from last step is not very human readable, therefore we need to visualize the output into graphs. Except the tool
+we will use in Galaxy, you may consider using eXamine plugin in Cytoscape for a richer visualization.
 
 > ### {% icon hands_on %} Hands-on: visualize the optimal subnetwork
 >
@@ -319,4 +339,6 @@ we are going to use in Galaxy, you may consider using eXamine plugin in Cytoscap
 
 # Save the history into a workflow
 
-At the end of the tutorial, you may save all of your correct operations into a workflow, which you can reuse for different datasets next time.
+Congrats! You have finished all the tools in Heinz workflow! 
+
+At the end of the tutorial, as a self-practice, you may save all of your correct operations into a workflow, which you can reuse for different datasets next time.
