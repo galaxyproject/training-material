@@ -2,7 +2,7 @@ A BAM ([Binary Alignment Map](https://en.wikipedia.org/wiki/SAM_(file_format))) 
 
 > ### {% icon hands_on %} Hands-on: Inspect a BAM/SAM file
 >
-> 1. Inspect the {% icon param-file %} output of **{{ include.mapper }}** {% icon tool %})
+> 1. Inspect the {% icon param-file %} output of **{{ include.mapper }}** {% icon tool %}
 >
 {: .hands_on}
 
