@@ -568,8 +568,8 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
   <blockquote class="solution">
     <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
-      <li>A reference genome (or reference assembly) is a DNA sequence assembled as a representative example of a species’ DNA sequence. As they are often assembled from the sequencing of the DNA from different donors, they do not accurately represent the set of genes of any single person but a mosaic of different DNA sequences from each donor.</li>
-      <li>As the cost of DNA sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are builts and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different versions released (called build)</li>
+      <li>A reference genome (or reference assembly) is a set of nucleic acid sequences assembled as a representative example of a species’ genetic material. As they are often assembled from the sequencing of different individuals, they do not accurately represent the set of genes of any single organism but a mosaic of different nucleic acid sequences from each individual.</li>
+      <li>As the cost of DNA sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are builts and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different versions released (named build)</li>
       <li>Wang et al. (2018) did ChIP-seq on mouse. So we should use the mouse reference genome. We will use mm10 (the latest build)</li>
     </ol>
   </blockquote>
@@ -628,7 +628,7 @@ however, the number of false positives may also increase.</p>
   <h3 id="hands_on-hands-on-inspect-a-bamsam-file"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Inspect a BAM/SAM file</h3>
 
   <ol>
-    <li>Inspect the <i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> output of <strong>Bowtie2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li>Inspect the <i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> output of <strong>Bowtie2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
   </ol>
 
 </blockquote>
@@ -745,6 +745,7 @@ however, the number of false positives may also increase.</p>
 
   <ol>
     <li>Install <a href="https://software.broadinstitute.org/software/igv/download">IGV</a> (if not already installed)</li>
+    <li>Launch IGV on your computer</li>
     <li>Expand the <i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> output of <strong>Bowtie2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
     <li>Click on the <code class="highlighter-rouge">local</code> in <code class="highlighter-rouge">display with IGV</code> to load the reads into the IGV browser</li>
     <li>Zoom on the <code class="highlighter-rouge">chr2:91,053,413-91,055,345</code></li>
@@ -756,17 +757,32 @@ however, the number of false positives may also increase.</p>
 <blockquote class="question">
   <h3 id="question-questions-7"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-  <p>Some reads have colored lines included. What is this?</p>
+  <ol>
+    <li>What could it mean if a bar in the coverage view is colored?</li>
+    <li>What could be the reason why a read is white instead of grey?</li>
+  </ol>
 
   <blockquote class="solution">
     <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <p>Try to zoom in on one of the colored lines to see the answer!</p>
+    <ol>
+      <li>If a nucleotide differs from the reference sequence in more than 20% of quality weighted reads, IGV colors the bar in proportion to the read count of each base.</li>
+      <li>They have a mapping quality equal to zero. Interpretation of this mapping quality depends on the mapping aligner as some commonly used aligners use this convention to mark a read with multiple alignments. In such a case, the read also maps to another location with equally good placement. It is also possible the read could not be uniquely placed but the other placements do not necessarily give equally good quality hits.</li>
+    </ol>
   </blockquote>
 </blockquote>
 
-<blockquote class="comment">
-  <h3 id="comment-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
-  <p>Because the number of reads over a region can be quite large, the IGV browser by default only allows to see the reads that fall into a small window. This behaviour can be changed in the IGV from <code class="highlighter-rouge">view &gt; Preferences &gt; Alignments</code>.</p>
+<blockquote class="tip">
+  <h3 id="tip-tips-for-igv"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tips for IGV</h3>
+  <ol>
+    <li>Because the number of reads over a region can be quite large, the IGV browser by default only allows to see the reads that fall into a small window. This behaviour can be changed in the IGV from <code class="highlighter-rouge">view &gt; Preferences &gt; Alignments</code>.</li>
+    <li>
+      <p>If the genome of your interest is not there check if it is available via <strong>More…</strong>. If this is not the case, you can add it manually via the menu <strong>Genomes</strong> -&gt; <strong>Load Genome from…</strong></p>
+
+      <p><img src="../../images/igv_select_genome.png" alt="Select genome in IGV" title="Select genome in IGV" /></p>
+    </li>
+  </ol>
+
+  <p>A general description of the user interface of the IGV browser is available here: <a href="/training-material/topics/introduction/tutorials/igv-introduction/tutorial.html">IGV Browser description</a></p>
 </blockquote>
 
 <h1 id="step-3-chip-seq-quality-control">Step 3: ChIP-seq Quality Control</h1>
@@ -1119,7 +1135,7 @@ https://zenodo.org/record/1324070/files/wt_input_rep2.bam
       </ul>
 
       <blockquote class="comment">
-        <h3 id="comment-comments-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
+        <h3 id="comment-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
         <p>The advanced options may be adjusted, depending of the samples.
 If your ChIP-seq experiment targets regions of broad enrichment, <em>e.g.</em> non-punctuate histone modifications, select calling of broad regions.
 If your sample has a low duplication rate (<em>e.g.</em> below 10%), you might keep all duplicate reads (tags). Otherwise, you might use the ‘auto’ option to estimate the maximal allowed number of duplicated reads per genomic location.</p>
