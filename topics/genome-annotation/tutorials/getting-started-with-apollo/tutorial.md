@@ -4,7 +4,7 @@ topic_name: genome_annotation
 tutorial_name: getting_started_with_apollo
 ---
 
-# Introduction
+# Getting Started With Apollo
 {:.no_toc}
 
 The Center for Phage Technology Galaxy program is an instance of the Galaxy Project, and provides a web interface for bioinformatics tools. Apollo, a genome browser, can be accessed through Galaxy in order to create, edit, and annotate genomes.
