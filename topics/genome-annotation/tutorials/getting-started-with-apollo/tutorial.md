@@ -212,6 +212,8 @@ Additionally, zooming down to the single gene level can greatly assist in focusi
 
 At that level, comparison of the three gene models may occur to determine possible genes. Only one gene in the *MetaGeneAnnotator* track has an annotated Shine-Dalgarno (SD) sequence; the CPT filters all SD sequences to ensure only the high-quality sequences are visible. If an undesirable feature has been created/annotated, right-clicking on the feature will display many options; select “Delete.”
 
+All changes made will be instantaneously and immediately saved.
+
 ## Workflows
 
 There are a couple of workflows that will need to be run as a apart of the annotation process within Apollo. The first will cover structural annotation (genes, terminators, tRNAs), and the second will cover function annotation (BLAST, InterProScan, other protein databases).
