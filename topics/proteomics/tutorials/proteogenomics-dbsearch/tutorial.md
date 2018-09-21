@@ -1,12 +1,8 @@
 ---
 layout: tutorial_hands_on
 
-title: "Proteogenomics tutorial"
-edam_ontology: "topic_0121"
+title: "Proteogenomics: Database Search"
 zenodo_link: "https://doi.org/10.5281/zenodo.1302055"
-questions:
-  - "How to perform sequence database searching using the FASTA file with the MS data to identify peptides corresponding to novel proteoforms?"
-  
 objectives:
   - "A proteogenomic data analysis of mass spectrometry data to identify and visualize variant peptides."
 time_estimation: "15 mins"
@@ -22,14 +18,19 @@ contributors:
 ---
 
 # Introduction
+{: .no_toc}
 
 In this tutorial, we perform proteogenomic database searching using the Mass Spectrometry data. The inputs for performing the proteogenomic database searching are the peaklist MGF files and the FASTA database file. The FASTA database is obtained by running the first workflow “Uniprot_cRAP_SAV_indel_translatedbed.FASTA”. The second workflow focuses on performing database search of the peak list files (MGFs).
 <img src="../../images/second_workflow.png" width=100%>
+
+
 > ### Agenda
 >
 > In this tutorial, we will deal with:
->
 > 1. TOC
+> {:toc}
+>
+
 > - _Pretreatments / Data upload_
 
 > - _Database searching using SearchGUI and Peptide Shaker_
@@ -38,15 +39,17 @@ In this tutorial, we perform proteogenomic database searching using the Mass Spe
 
 > - _Performing Blast-P analysis for obtaining novel proteoforms_
 
+{: .agenda}
+
 # Pretreatments
+{: .no_toc}
 
-
-### Hands-on: Data upload and organization
+> ### {% icon hands_on %} Hands-on: data upload and organization
 >
 > 1. Create a new history and name it something meaningful (e.g. *Proteogenomics DB search*)
 > 2. Import the three MGF MS/MS files and the FASTA sequence file from Zenodo.[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1302055.svg)](https://doi.org/10.5281/zenodo.1302055)
 >
->>       Tip: Importing data via links
+>    > ### {% icon tip %} Tip: Importing data via links
 >>          * Copy the link location
 >>          * Open the Galaxy Upload Manager
 >>          * Select "Paste/Fetch Data"
@@ -54,6 +57,9 @@ In this tutorial, we perform proteogenomic database searching using the Mass Spe
 >>          * Press Start. As default, Galaxy takes the link as name.
 >>
 >>       **Comments**:Rename the datasets to a more descriptive name
+>    {: .tip}
+>
+
 >
 >
 > 3. Build a **Dataset list** for the three MGF files
@@ -64,7 +70,7 @@ In this tutorial, we perform proteogenomic database searching using the Mass Spe
 >    - Ensure the three control samples are the only ones selected, and enter a name for the new collection (e.g. *MGF files*)
 >    - Click **Create list** and exit by clicking again the dataset operations icon
 >
-
+{: .hands_on}
 
 # Analysis
 
@@ -77,13 +83,13 @@ For this, the sequence database-searching program called [SearchGUI](https://com
 
 #### SearchGUI
 
-### Hands-on: SearchGUI
+> ### {% icon hands_on %} Hands-on: SearchGUI
 >
 > 1. **SearchGUI**: Run **SearchGUI** with:
 >    - **Protein Database**: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA`(or however you named the `FASTA` file)
 >    - **Input Peak lists (mgf)**: `MGF files` dataset collection.
 >
->    >>     Tip: Select dataset collections as input
+>    > ### {% icon tip %} Tip: Tip: Select dataset collections as input
 >    >
 >    > * Click the **Dataset collection** icon on the left of the input field:
 >    >
@@ -95,7 +101,7 @@ For this, the sequence database-searching program called [SearchGUI](https://com
 >
 >    - **B-Search Engines**: `X!Tandem`
 >
->>      **Comments**:
+> > ### {% icon comment %} Comment:
 >>    The section **Search Engine Options** contains a selection of sequence database searching
 >>    programs that are available in SearchGUI. Any combination of these programs can be used for
 >>    generating PSMs from MS/MS data. For the purpose of this tutorial, **X!Tandem** we will be
@@ -120,9 +126,10 @@ For this, the sequence database-searching program called [SearchGUI](https://com
 >    - **Fixed Modifications**: `Carbamidomethylation of C, ITRAQ-4Plex of K, ITRAQ-4Plex of Ntermini`
 >    - **Variable modifications**: `Oxidation of M, ITRAQ-4Plex of Y`
 >
->>       ### Tip: Search for options
+>    > ### {% icon tip %} Tip: Search for options
 >>       * For selection lists, typing the first few letters in the window will filter the
 >>         available options.
+>    {: .tip}
 >
 >    Section **Advanced Options**:
 >    - **X!Tandem Options**: `Advanced`
@@ -140,12 +147,16 @@ For this, the sequence database-searching program called [SearchGUI](https://com
 Once the database search is completed, the SearchGUI tool will output a file (called a
 SearchGUI archive file) that will serve as an input for the next section, PeptideShaker.
 
->>    ### Comment
+
+> > ### {% icon comment %} Comment:
 >>    Note that sequence databases used for proteogenomics are usually much larger than
 >>    the excerpt used in this tutorial. When using large databases, the peptide identification
 >>    step can take much more time for computation. In proteogenomics, choosing the optimal
 >>    database is a crucial step of your workflow.
 >>
+> {: .comment}
+>
+{: .hands_on}
 
 
 
