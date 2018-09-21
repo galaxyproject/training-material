@@ -42,6 +42,7 @@ In this tutorial, we perform proteogenomic database searching using the Mass Spe
 {: .agenda}
 
 # Pretreatments
+
 {: .no_toc}
 
 > ### {% icon hands_on %} Hands-on: data upload and organization
