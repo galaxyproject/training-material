@@ -324,7 +324,7 @@ pip <span class="nb">install </span>ephemeris
     <li>
       <p>Run the script to install the RNASeq tutorial</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bin/install_tutorial_requirements.sh topics/transcriptomics/tutorials/ref-based <span class="nt">-g</span> http://localhost:8080 <span class="nt">-a</span> &lt;api key&gt;
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bin/install_tutorial_requirements.sh topics/transcriptomics/tutorials/ref-based http://localhost:8080 &lt;api key&gt;
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -365,26 +365,26 @@ pip <span class="nb">install </span>ephemeris
 <span class="nb">cd</span> &lt;training-materials repo root&gt;
 
 <span class="c"># install single tutorial</span>
-bin/install_tutorial_requirements.sh &lt;Galaxy url&gt; &lt;API key&gt; topics/&lt;yourtopic&gt;/tutorial/&lt;yourtutorial
+bin/install_tutorial_requirements.sh topics/&lt;yourtopic&gt;/tutorials/&lt;yourtutorial&gt; &lt;Galaxy URL&gt; &lt;API key&gt;
 
 <span class="c"># install entire topic</span>
-bin/install_topic_requirements.sh &lt;Galaxy url&gt; &lt;API key&gt; topics/&lt;yourtopic&gt;
+bin/install_topic_requirements.sh topics/&lt;yourtopic&gt; &lt;Galaxy URL&gt; &lt;API key&gt;
 
 </code></pre></div></div>
 
 <p>Using ephemeris directly:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># install tools
-shed-tools install -g &lt;Galaxy url&gt; -a &lt;API key&gt; -t topics/&lt;topic&gt;/tutorials/&lt;tutorial&gt;/tools.yaml
+shed-tools install -g &lt;Galaxy URL&gt; -a &lt;API key&gt; -t topics/&lt;topic&gt;/tutorials/&lt;tutorial&gt;/tools.yaml
 
 # create data library with input datasets
-setup-data-libraries -g &lt;Galaxy url&gt; -a &lt;API key&gt; -i topic/&lt;topic&gt;/tutorial/&lt;tutorial&gt;/data-library.yaml
+setup-data-libraries -g &lt;Galaxy URL&gt; -a &lt;API key&gt; -i topic/&lt;topic&gt;/tutorial/&lt;tutorial&gt;/data-library.yaml
 
 # install reference data
-run-data-managers -g &lt;Galaxy url&gt; -a &lt;API key&gt; --config topic/&lt;topic&gt;/tutorial/&lt;tutorial&gt;/data-manager.yaml
+run-data-managers -g &lt;Galaxy URL&gt; -a &lt;API key&gt; --config topic/&lt;topic&gt;/tutorial/&lt;tutorial&gt;/data-manager.yaml
 
 # install workflows
-workflow-install --publish-workflows -g &lt;Galaxy url&gt; -a &lt;API key&gt; -w topics/&lt;topic&gt;/tutorials/&lt;tutorial&gt;/workflows
+workflow-install --publish-workflows -g &lt;Galaxy URL&gt; -a &lt;API key&gt; -w topics/&lt;topic&gt;/tutorials/&lt;tutorial&gt;/workflows
 
 # install tours
 copy the contents of the "tours" directory for the tutorial to Galaxy's "config/plugins/tours/"
