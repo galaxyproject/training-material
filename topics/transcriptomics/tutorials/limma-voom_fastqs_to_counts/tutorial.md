@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: Limma-voom (FASTQs to counts)
 zenodo_link: "https://figshare.com/s/f5d63d8c265a05618137"
+enable: "false"
 questions:
 - How to convert RNA-seq reads into counts before performing differential expression?
 - How to perform quality control of RNA-seq data?
