@@ -21,7 +21,7 @@ contributors:
 # Overview
 {:.no_toc}
 
-In this tutorial we will perform a network analysis using [Heinz](https://github.com/ls-cwi/heinz) in Galaxy. The data come from the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171), and we will reproduce some of the computational steps from the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171) with simplified data and parameters, so that we can go through everything in this
+In this tutorial, we will perform a network analysis using [Heinz](https://github.com/ls-cwi/heinz) in Galaxy. The data come from the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171), and we will reproduce some of the computational steps from the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171) with simplified data and parameters so that we can go through everything in this
 tutorial within 2 hours.
 
 > ### Agenda
@@ -35,7 +35,7 @@ tutorial within 2 hours.
 
 
 > ### {% icon comment %} Note
-> Your results may be slightly different from the ones presented in this tutorial due to differing tool or
+> Your results may be slightly different from the ones presented in this tutorial due to the tool versions or
 > reference data versions or stochastic processes in the algorithms.
 {: .comment}
 
@@ -45,12 +45,12 @@ In this tutorial, we will create a Heinz workflow step by step, as the picture b
 
 # Obtaining and preparing data
 
-The study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171) includes the computation steps starting from the raw RNAseq datasets. The operations that processed raw data into the interpreted data are beyond the scope of this tutorial. To learn that, please refer to the relevant topics in the Galaxy training material. In this tutorial, we start with the interpreted data, which are KO ([KEGG Orthology](https://www.genome.jp/kegg/ko.html)) count data. All the data needed for this tutorial are available from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1344105.svg)](https://doi.org/10.5281/zenodo.1344105)
+The study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171) includes the computation steps starting from the raw RNAseq datasets. The operations that processed raw data into the interpreted data are beyond the scope of this tutorial. To learn that, please refer to the relevant topics in the Galaxy training material. In this tutorial, we start with the interpreted data, which are KO ([KEGG Orthology](https://www.genome.jp/kegg/ko.html)) count data. All the data needed for this tutorial are available from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1344105.svg)](https://doi.org/10.5281/zenodo.1344105).
 
 ## Understanding our input data
 
-According to the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171), the dental caries (DC) dataset in this tutorial came from an experiment that comprised of supragingival plaque samples collected from all dental surfaces of 36 individuals who had either a caries-positive (disease) or a caries-negative (health) oral profile. Each of the 36 samples was sequenced, pre-processed and
-transformed into KO counts. We will use these count data as the starting point to performance the network analysis.
+According to the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171), dental caries (DC) dataset in this tutorial came from an experiment that comprised of supragingival plaque samples collected from all dental surfaces of 36 individuals who had either a caries-positive (disease) or a caries-negative (health) oral profile. Each of the 36 samples was sequenced, pre-processed and
+transformed into KO counts. We will use these count data as the starting point to perform the network analysis.
 
 > ### {% icon comment %} Dataset details
 > The count data of the 36 samples are separated into 36 files, organized into two folders: 'CP' (caries-positive)
@@ -179,11 +179,11 @@ After knowing what our input data are like, let's get them into Galaxy history:
 > The definition of differential expression analysis given by [EBI](https://www.ebi.ac.uk/training/online/course/functional-genomics-ii-common-technologies-and-data-analysis-methods/differential-gene) means taking the normalised read count data and performing statistical analysis to discover quantitative changes in expression levels between experimental groups. For example, we use statistical testing to decide whether, for a given gene, an observed difference in read counts is significant, that is, whether it is greater than what would be expected just due to natural random variation.
 {: .comment}
 
-In principle, DEA is a causal analysis; but in reality, it is hampered by the complexity of experimental situation and measurement. Back to our datasets --- CP and CN, they are from two experimental groups. By DEA, we hope to pinpoint the candidate genes relevant to dental caries first, then we will use Heinz to infer the related pathways.
+In principle, DEA is a causal analysis; but in reality, it is hampered by the complexity of the experimental situation and measurement. Back to our datasets --- CP and CN, they are from two experimental groups. By DEA, we hope to pinpoint the candidate genes relevant to dental caries first, then we will use Heinz to infer the related pathways.
 
 ## Which tools are available for DEA?
 
-There are a few canned tools commonly used for DEA, like [Limma](https://bioconductor.org/packages/release/bioc/html/limma.html) and [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html). If you are interested, you may look up the pros and cons for each tool. Here we use DESeq2. 
+There are a few canned tools commonly used for DEA, like [Limma](https://bioconductor.org/packages/release/bioc/html/limma.html) and [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html). If you are interested, you may look up the pros and cons of each tool. Here we use DESeq2. 
 
 
 ## Conduct differential expression analysis
@@ -242,7 +242,7 @@ Then we can **Fit a BUM model** now.
 
 # Pinpoint the key pathways with Heinz
 
-After getting the parameters of the BUM model from last step, we will use Heinz to pinpoint the key pathways. Before we continue, let's figure out what Heinz is actually doing.
+After getting the parameters of the BUM model from the last step, we will use Heinz to pinpoint the key pathways. Before we continue, let's figure out what Heinz is actually doing.
 
 Heinz is an algorithm in searching an optimal subnetwork from a bigger network. You may wonder what the networks are here. Through the previous steps, we have got a list of identities, that is a list of gene IDs with p-values, which form the nodes of 'the bigger network', the relations between the nodes, that is the edges, need to be obtained from a background network, which represents a pathway relation databases, such as [Reactome](https://reactome.org/) and [STRING](https://string-db.org/). In this tutorial, we only use a small sample background network for demonstration purposes. The background network is represented as edges in a txt file where each line denotes an edge as follows:
 
@@ -270,7 +270,7 @@ As the first step, we need to calculate a Heinz score for each node, using the B
 > FDR is short for false discovery rate, which is a method of conceptualizing the rate of type I errors in null hypothesis testing when conducting multiple comparisons, if you are interested, view the detail in [Wikipedia](https://en.wikipedia.org/wiki/False_discovery_rate).
 {: .comment}
 
-In our case, the higher a FDR value is, the more positive nodes (regarding the Heinz scores) we get, which means it may include a lot of false positive nodes. For different datasets and problems, we probably need different FDR values. Here we set FDR to 0.11.
+In our case, the higher an FDR value is, the more positive nodes (regarding the Heinz scores) we get, which means it may include a lot of false positive nodes. For different datasets and problems, we probably need different FDR values. Here we set FDR to 0.11.
 
 Similar to **Fit a BUM model**, we also need to prepare the input data for the tool **Calculate a Heinz score**.
 
@@ -318,16 +318,16 @@ After getting Heinz scores, let's run Heinz program to find the optimal subnetwo
 
 It usually takes a few minutes to get the result, but mind you, for some tasks, it might take a few hours to get a result in practice.
 
-> ### {% icon tip %} Tip: running time of the program
+> ### {% icon tip %} Tip: the running time of the program
 >
 > * Graph problem is way more complicated than we thought.
-> * It might take much longer time for some complicated datasets.
+> * It might take a much longer time for some complicated datasets.
 > * We can use multiple CPUs to accelerate the computation (for now, this function is not available in Galaxy yet), but, to use that, you can install Heinz directly via [Bioconda](https://anaconda.org/bioconda/heinz) in a Linux environment.
 {: .tip}
 
 ## Visualize the output: visualize the optimal subnetwork
 
-The result we got from last step is not very human readable, therefore we need to visualize the output into graphs. Except the tool
+The result we got from the last step is not very human readable. Therefore we need to visualize the output by making it into graphs. Except the tool
 we will use in Galaxy, you may consider using eXamine plugin in Cytoscape for a richer visualization.
 
 > ### {% icon hands_on %} Hands-on: visualize the optimal subnetwork
