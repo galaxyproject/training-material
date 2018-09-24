@@ -1,17 +1,14 @@
 ---
 layout: tutorial_hands_on
 
-title: "Proteogenomics tutorial"
-edam_ontology: "topic_0121"
+title: "Proteogenomics: Novel peptide analysis"
 zenodo_link: "https://doi.org/10.5281/zenodo.1302055"
-questions:
-  - "How to assign and visualize the genomic localization of these identified novel proteoforms?"
 objectives:
-  - "A proteogenomic data analysis of mass spectrometry data to identify and visualize variant peptides."
+  - "How to assign and visualize the genomic localization of these identified novel proteoforms?"
 time_estimation: "30 mins"
 key_points:
-  
   - "Learning how to visualize proteomic data and to perform its genomic allocation"
+  
 contributors:
   - subinamehta
   - timothygriffin
@@ -21,6 +18,7 @@ contributors:
 ---
 
 # Introduction
+{: .no_toc}
 
 The third and the last workflow in the proteogenomics tutorial is to identifying the "**Novel peptides**" using BlastP and to localize the peptides to its genomic coordinates. Inputs from both workflow 1 and 2 will be used in this workflow.
 
@@ -29,8 +27,8 @@ The third and the last workflow in the proteogenomics tutorial is to identifying
 ### Agenda
 >
 > In this tutorial, we will deal with:
->
-
+> 1. TOC
+> {:toc}
 > - _Inputs required_
 >
 > - _Interactive visualization of the Peptides_
@@ -44,6 +42,7 @@ The third and the last workflow in the proteogenomics tutorial is to identifying
 >>            - Tabular file â€“ â€œPeptideShaker_PSMâ€
 >>            - Mz to sqlite
 >>            - Genomic mapping sqlite
+{: .agenda}
 
 > All the files to run this workflow can be obtained from the second workflow output.Once the tabular output is generated,
 > we convert this tabular report into a FASTA file. This can be achieved by using the Tabular to FASTA convertion tool.
@@ -54,6 +53,8 @@ Once Blast-P search is performed, it provides with a tabular output containing â
 # Analysis
 
 ### Query tabular (Extract "Novel peptides" after BlastP)
+> ### {% icon hands_on %} Hands-on:Query Tabular
+
 1. **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
 >
 >    - (a)**Database Table**: Click on `+ Insert Database Table`:
@@ -106,8 +107,11 @@ Once Blast-P search is performed, it provides with a tabular output containing â
 >
 > 2. Click **Execute** and inspect the query results file after it turned green.
 >
+{: .hands_on}
 
 ### Query tabular (Distinct Peptides from the list of "Novel peptides")
+> ### {% icon hands_on %} Hands-on:Query Tabular
+
 1. **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
 >
 >    - (a)**Database Table**: Click on `+ Insert Database Table`:
@@ -132,9 +136,14 @@ Once Blast-P search is performed, it provides with a tabular output containing â
 >
 > 2. Click **Execute** and inspect the query results file after it turned green.
 >
+{: .hands_on}
 
-### MVP
 
+### Multiomics Visualization Platform (MVP):
+
+The Multiomics Visualization Platform is a galaxy visualization plugin that allows the user to browse the selected proteomics data. It uses the SQlite database which allows the data to be filtered and aggregated in a user defined manner. It allows various features such as; the PSM can be displayed with a lorikeet spectral view, the selected peptide can be displayed in a protein view and an IGV browser is also available for the selected protein. The step by step guide shown below will provide a walkthrough on how to use this plugin.
+
+> ### {% icon hands_on %} Hands-on: Guide to MVP
 > The spectra belonging to these "Novel peptides" can be viewed using MVP,this can be achieved by selecting the output from the mz to sqlite tool.
 > Here is a step by step proteogenomic view of the "Novel peptides" obtained from running this workflow:
 
@@ -199,6 +208,8 @@ Once Blast-P search is performed, it provides with a tabular output containing â
 > <img src="../../images/tracks_align.png" width=70%>
 >
 >
+{: .hands_on}
+
 The next tool in the workflow is the Peptide genomic coordinate tool which takes the "novel peptides" as the input along with the mztosqlite file and the genomic mapping sqlite file (obtained during creation of the database). This tool helps create a bed file with the genomic coordinate information of the peptides based on the sqlite files.
 
 ### Peptide genomic Coordinate
@@ -206,7 +217,9 @@ Gets genomic coordinate of peptides based on the information in mzsqlite and gen
 loads two sqlite databases (mzsqlite and genomic mapping sqlite files) and calculates the genomic coordinates of the
 peptides provided as input. This outputs bed file for peptides.
 >
-> 1. Peptide genomic Coordinate
+> ### {% icon hands_on %} Hands-on: Peptide genomic Coordinate
+
+> 1. Run Peptide genomic Coordinate {% icon tool %} with the following parameters:
 >       - **Input**: `Peptide list file`, `mzsqlite sqlite DB file`, and `genomic mapping sqlite DB file`
 >       - **Output**: `Tabular BED file with all the columns`
 > <img src="../../images/pep_gen_cor.png" width=100%>
@@ -217,12 +230,14 @@ peptides provided as input. This outputs bed file for peptides.
 > <img src="../../images/Output_PGC.png" width=50%>
 >  2. Click **Execute** and inspect the query results file after it turned green.
 >
+{: .hands_on}
 
 ### Peppointer
 
 Given chromosomal locations of peptides in a BED file, PepPointer classifies them as CDS, UTR, exon, intron, or intergene.
 
-> 1. Peppointer
+> ### {% icon hands_on %} Hands-on: Peppointer
+1. Run Peppointer {% icon tool %} with the following parameters:
 >      - **Choose the source of the GTF file** - `Locally Installed`
 >              - **GTF file with the genome of interest** - `Mus_Musculus_GRCm38.90_Ensembl_GTF`
 >      - **Input** - `Bed file from Peptide genomic coordinate tool`
@@ -230,6 +245,8 @@ Given chromosomal locations of peptides in a BED file, PepPointer classifies the
 >  This tool provides a bed output with the classification of the genomic location of the peptides.
 > <img src="../../images/Output_PP.png" width=50%>
 > 2. Click **Execute** and inspect the query results file after it turned green.
+
+{: .hands_on}
 
 The final tool for this workflow generates a tabular output that summarizes the information after running these workflows. The final summary output consists of the Peptide sequence, the spectra associated with the peptides, the protein accession number, chromosome number, Start and Stop of the genomic coordinate, the annotation, the genomic coordinate entry for viewing in Integrative Genomics Viewer (IGV), MVP or UCSC genome browser and the URL for viewing it on UCSC genome browser. This summary is created with the help of the query tabular tool.
 
@@ -273,9 +290,12 @@ GROUP BY psm.Sequence`
 >
 <img src="../../images/final_summary.png" width=80%>
 
+{: .hands_on}
+
 This completes the proteogenomics workflow analysis. This training workflow uses mouse data. For any other organism the data, tool paramters and the workflow will need to be modified accordingly.
 
 This workflow is also available at [Proteogenomics gateway](z.umn.edu/proteogenomicsgateway).
 
 This workflow was developed by the Galaxy-P team at the University of Minnesota.
 For more information about Galaxy-P or our ongoing work, please visit us at www.galaxyp.org
+
