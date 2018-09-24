@@ -95,7 +95,7 @@ You have four main datasets:
 - `S_pombe_genome.fasta` contains the full genome sequence
 - `S_pombe_chrIII.fasta` contains only a fraction of the full genome sequence, ie the chromosome III
 
-For the rest of this tutorial, you need to choose between `S_pombe_chrIII.fasta` and `S_pombe_genome.fasta`: if you don't have time constraint, use the full genome (`S_pombe_genome.fasta`): it will take more time computing, but results will be closer to real-life data. If you want to get results faster, use the chromosome III (`S_pombe_chrIII.fasta`). In the rest of this tutorial, we will refer to the file you choose as the genome.
+For the rest of this tutorial, you need to choose between `S_pombe_chrIII.fasta` and `S_pombe_genome.fasta`. If you have time, use the full genome (`S_pombe_genome.fasta`), it will take more computing time, but the results will be closer to real-life data. If you want to get results faster, use the chromosome III (`S_pombe_chrIII.fasta`). In the rest of this tutorial, we will refer to the file you choose as `the genome`.
 
 The two other datasets (`augustus_training_1.tar.gz` an `augustus_training_2.tar.gz`) will be used later in the tutorial.
 
@@ -373,7 +373,7 @@ Now run BUSCO with the predicted transcript sequences:
 
 > ### {% icon question %} Questions
 >
-> 1. How do the second annotation compare to the previous one? Did the ab-initio predictors training improve the results?
+> 1. How does the second annotation compare to the previous one? Did the ab-initio predictors training improve the results?
 > 2. How do you explain these changes?
 >
 > > ### {% icon solution %} Solution
