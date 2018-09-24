@@ -86,7 +86,7 @@ For this, the sequence database-searching program called [SearchGUI](https://com
 
 > ### {% icon hands_on %} Hands-on: SearchGUI
 >
-> 1. **SearchGUI**: Run **SearchGUI** with:
+> 1. **SearchGUI** {% icon hands_on %}: Run **SearchGUI** with:
 >    - **Protein Database**: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA`(or however you named the `FASTA` file)
 >    - **Input Peak lists (mgf)**: `MGF files` dataset collection.
 >
@@ -182,26 +182,27 @@ outputs.
 >>
 
 
- ###  Hands-on: PeptideShaker
+ > ### {% icon hands_on %} Hands-on: PeptideShaker
 >
-> 1. **PeptideShaker** : Run **PeptideShaker** with:
+> 1. **PeptideShaker** {% icon hands_on %}: Run **PeptideShaker** with:
 >   - **Compressed SearchGUI results**: The SearchGUI archive file
 >   - **Specify Advanced PeptideShaker Processing Options**: `Default Processing Options`
 >   - **Specify Advanced Filtering Options**: `Default Filtering Options`
 >   - **Include the protein sequences in mzIdentML**: `No`
 >   - **Output options**: Select the `PSM Report` (Peptide-Spectral Match) and the `Certificate of Analysis`
 >
->>     ###  Comment
+> > ### {% icon comment %} Comment:
 >>
 >>     The **Certificate of Analysis** provides details on all the parameters
 >>     used by both SearchGUI and PeptideShaker in the analysis. This can be downloaded from the
 >>     Galaxy instance to your local computer in a text file if desired.
->
+
+> {: .comment}
 >
 > 2. Click **Execute** and inspect the resulting files after they turned green with the **View data** icon:
 >     ![View data button]<img src="../../images/view_icon.png" width=15%>
 >
-
+{: .hands_on}
 
 
 A number of new items will appear in your history, each corresponding to the outputs selected
@@ -218,10 +219,10 @@ A number of new items will appear in your History, each corresponding to the out
 The mzidentml output from the Peptide shaker is converted into an sqlite database file by using the mz to sqlite tool. This sqlite output is used to open the Multi-omics visualization platform, wherein you can view the spectra of the peptides using Lorikeet parameters. To open the MVP viewer, click on the “Visualize in MVP Application” icon ( this will pop-open the interactive multi-omics viewer in a new window/tab)
 
 
-### Hands-on: mz to sqlite: extract mzidentml ans associated proteomics datasets into a sqlite db
+> ### {% icon hands_on %}Hands-on: mz to sqlite: extract mzidentml ans associated proteomics datasets into a sqlite db
 
 >
-> 1. **mz to sqlite** : Run **mz to sqlite** with:
+> 1. **mz to sqlite** {% icon hands_on %} : Run **mz to sqlite** with:
 >
 >    - **Proteomics identification files**: Click on `PeptideShaker_mzidentml`:
 >    - **Proteomics Spectrum files**: `Mo_Tai_MGFs`
@@ -230,6 +231,8 @@ The mzidentml output from the Peptide shaker is converted into an sqlite databas
 Click **Execute**
 <img src="../../images/mz2sqlite.png" width=30%>
 
+{: .hands_on}
+
 The next step is to remove known peptides from the list of PSM's that we acquired from the Peptide Shaker results. For that we need to perform some text manipulation steps to extract list of known peptides from the UniProt and cRAP database.
 
 ### Merged Uniprot and cRAP database
@@ -237,25 +240,31 @@ The file named "Trimmed_ref_500_Uniprot_cRAP.fasta" is the trimmed version of Un
 
 This Fasta file will be subjected to few text manipulation steps in order to get the tabular file for the known peptides. The first step is to convert this FASTA file to tabular in order to proceed with text manipulation.
 
-###  Hands-on: FASTA to Tabular
+> ### {% icon hands_on %}  Hands-on: FASTA to Tabular
+
 Convert these sequences:
 
+FASTA to Tabular {% icon tool %} with the following parameters:
 > **Data input 'input' (fasta)**: `Trimmed_ref_500_Uniprot_cRAP.fasta`
 > **How many columns to divide title string into?**: `2`
 > **How many title characters to keep?**: `0`
+
+{: .hands_on}
 
 The resultant tabular file will go through a series of text manipulation steps.
 
 
 ### Text Manipulation steps
 
-> 1. **Cut**
+> ### {% icon hands_on %} Hands-on: Text Manipulation
+
+> 1. **Cut** {% icon hands_on %}
 >    - **Cut Columns**: `c1`
 >    - **Delimited by**: `Tab`
 
  Upon completion of this step you will have extracted C1 (column 1) from the input tabular file
 
-> 2. **Convert**
+> 2. **Convert** {% icon hands_on %}
 >   - **Convert all**: `Whitespaces`
 >   - **in Dataset** : `Data input 'input' (txt)`
 >   - **Strip leading and trailing whitespaces**: `Yes`
@@ -263,23 +272,24 @@ The resultant tabular file will go through a series of text manipulation steps.
 
 This step will convert all the white spaces into different tabular column.
 
-> 3. **Cut**
+> 3. **Cut** {% icon hands_on %}
 >    - **Cut Columns**: `c2`
 >    - **Delimited by**: `Pipe`
 
 This step will extract information in column2 separated by Pipe (|)
 
-> 4. **Convert**
+> 4. **Convert** {% icon hands_on %}
 >   - **Convert all**: `Dots`
 >   - **in Dataset** : `Data input 'input' (txt)`
 >   - **Strip leading and trailing whitespaces**: `Yes`
 >   - **Condense consecutive delimiters in one TAB**: `Yes`
 This step will convert all the dots into different tabular column.
 
-> 5. **Group**
+> 5. **Group** {% icon hands_on %}
 >   - **Select data**: `input from above`
 >   - **Group by column**: `1`
 
+{: .hands_on}
 
 Now that we have the list of known peptides, the query tabular tool is used to move these reference pepides from the PSM report.
 
@@ -382,6 +392,8 @@ Now that we have the list of known peptides, the query tabular tool is used to m
 >
 >     ![Query Tabular output showing the peptides]
 >
+{: .hands_on}
+
 **The output from this step is that the resultant peptides would be those which doesn't belong in the Uniprot or cRAP database.The query tabular tool is used again to create a tabular output containing peptides ready for Blast P analysis.**
 >
 > ### {% icon hands_on %} Hands-on: Query Tabular
@@ -413,22 +425,33 @@ Now that we have the list of known peptides, the query tabular tool is used to m
 >    - **include query result column headers**: `Yes`
 >
 > 2. Click **Execute** and inspect the query results file after it turned green.<img src="../../QT_output.png" width=60%>
+{: .hands_on}
 
 ### Tabular to FASTA
+> ### {% icon hands_on %} Hands-on: Tabular to FASTA
+1. **Tabular to FASTA** {% icon tool %}: Run **Tabular to FASTA** with:
 
 > **Title column**: `1`
 >
 > **Sequence Column**:`2`
 
+{: .hands_on}
 
 Now that we have the FASTA file, this is going to be subjected to BLAST-P analysis
 
 ### BLASTP (Basic Local Alignment Search Tool- proteins)
 
+> ### {% icon details %} BLASTP
 BLAST[https://blast.ncbi.nlm.nih.gov/Blast.cgi] is a web based tool used to compare biological sequences. BlastP, matches protein sequences against a protein database. More specifically, it looks at the amino acid sequence of proteins and can detect and evaluate the amount of differences between say, an experimentally derived sequence and all known amino acid sequences from a database. It can then find the most similar sequences and allow for identification of known proteins or for identification of potential peptides associated with novel proteoforms.
+
+{: .details}
 
 BlastP search is carried out with the PSM report (output from PeptideShaker). Before, BlastP analysis the “Peptides_for_Blast-P_analysis” is first converted from Tabular format to FASTA file format which can be easily read by the BlastP algorithm. This is done with the help of “Tabular to FASTA” conversion tool.
 The short BlastP uses parameters for short peptide sequences (8-30 aas). Please use the rerun option to look at the parameters used.
+
+> ### {% icon hands_on %} Hands-on: NCBI BLAST+ blastp
+
+1. **NCBI BLAST+ blastp** {% icon tool %}: Run **BLASTP** with:
 
 >   **Protein query sequence(s)**: `Data input 'query' (fasta)`
 >   **Subject database/sequences**: `Locally installed BLAST database`
@@ -463,16 +486,22 @@ The short BlastP uses parameters for short peptide sequences (8-30 aas). Please 
 >   **Should the query and subject defline(s) be parsed?**: `No`
 >
 >   **Restrict search of database to a given set of ID's**:`No restriction`
->
+> ### {% icon details %}
 >>       This feature provides a means to exclude ID's from a BLAST database search.
 >>       The expectation values in the BLAST results are based upon the sequences actually
 >>       searched, and not on the underlying database. Note this cannot be used when
 >>       comparing against a FASTA file.
->
+> {: .details}
 >   **Minimum query coverage per hsp (percentage, 0 to 100)**: `0`
 >
 >   **Compute locally optimal Smith-Waterman alignments**:`No`
 
-Once BlastP search is performed, it provides with a tabular output containing peptides corresponding to novel proteoforms termed as “Novel peptides”. Now this output is further processed by comparing the novel peptide output with the PSM report for selecting only distinct peptides which pass these criteria.
+{: .hands_on}
 
-To continue processing this data, proceed to workflow 3 for **"Novel Peptide"** analysis.
+Once BlastP search is performed, it provides with a tabular output containing peptides corresponding to novel proteoforms termed as “Novel peptides”. Now this output is further processed by comparing the novel peptide output with the PSM report for selecting only distinct peptides which pass these criteria. This could be achieved by proceeding to the novel peptide analysis tutorial.
+
+### What's next?
+
+Please look at the following tutorials in this proteogenomics series:
+- [Proteogenomics database search]({{ site.baseurl }}/topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.html)
+- [Proteogenomics novel peptide analysis]({{ site.baseurl }}/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/tutorial.html)
