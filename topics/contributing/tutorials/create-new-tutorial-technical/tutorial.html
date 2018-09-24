@@ -231,7 +231,6 @@
   <ol>
     <li>Download the workflow for the tutorial</li>
     <li>Save it in the <code class="highlighter-rouge">workflow</code> directory of the tutorial</li>
-    <li>Set <code class="highlighter-rouge">workflow</code> to <code class="highlighter-rouge">yes</code> in the appropriate section of the topic’s <code class="highlighter-rouge">metadata.yaml</code>.</li>
   </ol>
 </blockquote>
 
@@ -297,35 +296,43 @@
 
 <p>These datasets are described in the <code class="highlighter-rouge">data-library.yaml</code> files:</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">libraries</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Name of the tutorial</span>
-      <span class="na">files</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="na">url</span><span class="pi">:</span> <span class="s2">"</span><span class="s">https://raw.githubusercontent.com/bgruening/galaxytools/master/tools/rna_tools/sortmerna/test-data/read_small.fasta"</span>
-          <span class="na">file_type</span><span class="pi">:</span> <span class="s">fasta</span>
-        <span class="pi">-</span> <span class="na">url</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
-          <span class="na">file_type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">destination</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">library</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">GTN - Material</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="s">Galaxy Training Network Material</span>
+  <span class="na">synopsis</span><span class="pi">:</span> <span class="s">Galaxy Training Network Material. See https://training.galaxyproject.org</span>
+<span class="na">items</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Title of the topic</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="s">Summary of the topic</span>
+  <span class="na">items</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Title of the tutorial</span>
+    <span class="na">items</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">DOI:</span><span class="nv"> </span><span class="s">10.5281/zenodo....'</span>
+      <span class="na">description</span><span class="pi">:</span> <span class="s">latest</span>
+      <span class="na">items</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">info</span><span class="pi">:</span> <span class="s">https://doi.org/10.5281/zenodo....</span>
+        <span class="na">url</span><span class="pi">:</span> <span class="s">https://zenodo.org/api/files/URL/to/the/input/file</span>
+        <span class="na">ext</span><span class="pi">:</span> <span class="s">galaxy-datatype</span>
+        <span class="na">src</span><span class="pi">:</span> <span class="s">url</span>
 </code></pre></div></div>
-
-<p>where:</p>
-
-<ul>
-  <li><code class="highlighter-rouge">name</code>: name of the tutorial, i.e. where to put the data in the data libraries</li>
-  <li><code class="highlighter-rouge">files</code>: list of the files to download
-    <ul>
-      <li><code class="highlighter-rouge">url</code>: URL to the input file</li>
-      <li><code class="highlighter-rouge">file-type</code>: type of the input file</li>
-    </ul>
-  </li>
-</ul>
-
-<p>The URL must refer to the URL of the files in <a href="https://zenodo.org">Zenodo</a>, do not just link to the overview page.</p>
 
 <blockquote class="hands_on">
   <h3 id="hands_on-hands-on-creating-the-data-libraryyaml"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating the <code class="highlighter-rouge">data-library.yaml</code></h3>
 
   <ol>
-    <li>Add the input files from your Zenodo dataset to the <code class="highlighter-rouge">data-library.yaml</code> file</li>
-    <li>Add the link to Zenodo in the <code class="highlighter-rouge">metadata.yaml</code> file</li>
+    <li>Copy the Zenodo link</li>
+    <li>
+      <p>Generate the <code class="highlighter-rouge">data-library.yaml</code> file and update the tutorial metadata with the link:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo training_fill_data_library \
+         --topic_name "my-topic" \
+         --tutorial_name "my-new-tutorial" \
+         --zenodo_link "URL to the Zenodo record" 
+</code></pre></div>      </div>
+    </li>
+    <li>Check that the <code class="highlighter-rouge">data-library.yaml</code> has been generated (or updated)</li>
+    <li>Check tha the Zenodo link is in the metadata at the top of the <code class="highlighter-rouge">tutorial.md</code></li>
   </ol>
 </blockquote>
 

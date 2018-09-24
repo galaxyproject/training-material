@@ -319,7 +319,7 @@ It may require some knowledge that you may not have or do not have the time to l
     <li>
       <p>Run (by adapting the information between the quotes)</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ python bin/setup_training_content.py \
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo training_init \
          --topic_name "my-topic" \
          --tutorial_name "my-new-tutorial" \
          --tutorial_title "Title of the tutorial" \
@@ -431,7 +431,6 @@ So be careful when you start your upload that all your needed files are ready.</
     <li>Add some technical support for the tutorial following the <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html">tutorial</a>
       <ul>
         <li>Add the workflow</li>
-        <li>(Recommended) Generate the <code class="highlighter-rouge">tools.yaml</code></li>
         <li>(Recommended) Generate the <code class="highlighter-rouge">data-library.yaml</code></li>
         <li>(Optional) Create an interactive tour</li>
       </ul>
@@ -464,6 +463,34 @@ So be careful when you start your upload that all your needed files are ready.</
   <li>Add some technical support (recommended)</li>
   <li>Add slides (optional)</li>
 </ol>
+
+<p>For the next times, you can make it quicker.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-generation-of-a-tutorial"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generation of a tutorial</h3>
+
+  <ol>
+    <li>Determine the topic</li>
+    <li>Create your workflow on a running Galaxy instance</li>
+    <li>Create a Zenodo record with the input data</li>
+    <li>
+      <p>Generate the skeleton of your tutorial</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo training_init \
+         --topic_name "my-topic" \
+         --tutorial_name "my-new-tutorial" \
+         --tutorial_title "Title of the tutorial" \
+         --galaxy_url "URL to Galaxy instance in which you created the workflow" \
+         --galaxy_api_key "Your API key on the Galaxy instance" \
+         --workflow_id "ID of the workflow on the Galaxy instance" \
+         --zenodo_link "URL to the Zenodo record"
+</code></pre></div>      </div>
+    </li>
+    <li>Fill the remaining metadata in the <code class="highlighter-rouge">tutorial.md</code></li>
+    <li>Fill the content of the <code class="highlighter-rouge">tutorial.md</code></li>
+    <li>Check it using Jekyll</li>
+  </ol>
+</blockquote>
 
 
         
