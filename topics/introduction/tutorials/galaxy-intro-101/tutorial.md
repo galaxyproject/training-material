@@ -76,7 +76,7 @@ We are now ready to perform our analysis, but first we need to get some data int
 
 > ### {% icon hands_on %} Hands-on: Data upload from UCSC
 >
-> 1. In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
+> 1. **UCSC Main** {% icon tool %}: In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
 >
 >     ![`UCSC Main table browser` menu entry](../../images/101_01.png)
 >
@@ -84,18 +84,16 @@ We are now ready to perform our analysis, but first we need to get some data int
 >
 >     ![`UCSC table browser` tool, first screen for exons](../../images/101_02.png)
 >
->     > ### {% icon comment %} Settings
->     >
->     >- **clade** should be set to `Mammal`
->     >- **genome** should be set to `Human`
->     >- **assembly** should be set to `Dec. 2013 (GRCh38/hg38)`
->     >- **group** should be set to `Genes and Gene Predictions`
->     >- **track** should be set to `GENCODE v24`
->     >- **table** should be set to `knownGene`
->     >- **region** should be changed to `position` with value `chr22`
->     >- **output format** should be changed to `BED - browser extensible data`
->     >- **Send output to** should have the option `Galaxy` checked
->     {: .comment}
+>     Now set the following parameters:
+>     - *"clade"*: `Mammal`
+>     - *"genome"*: `Human`
+>     - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
+>     - *"group"*: `Genes and Gene Predictions`
+>     - *"track"*: `GENCODE v24`
+>     - *"table"*: `knownGene`
+>     - {% icon param-text %} *"region"* should be changed to `position` with value `chr22`
+>     - *"output format"* should be changed to `BED - browser extensible data`
+>     - {% icon param-check %} *"Send output to"* should have the option `Galaxy` checked
 >
 > 2. Click on the **get output** button and you will see the next screen:
 >
@@ -119,7 +117,7 @@ We are now ready to perform our analysis, but first we need to get some data int
 > 4. Let's rename our dataset to something more recognizable.
 >    - Click on the **pencil icon** to edit the dataset attributes.
 >    - In the next screen change the name of the dataset to `Exons`.
->    - Click the **Save** button at the bottom of the screen.
+>    - Click the **Save** button.
 >
 >    Your history should now look something like this:
 >
@@ -131,21 +129,22 @@ We are now ready to perform our analysis, but first we need to get some data int
 Now we have information about the exon locations, but our question was which exon contains the largest number of SNPs, so let's get some information about SNP locations from UCSC as well:
 
 > ### {% icon hands_on %} Hands-on: SNP information
-> 1. **UCSC Main** {% icon tool %}: Return to the UCSC tool `UCSC Main - table browser`
->
-> 2. Change the setting in **group** to `Variation` and again **region** to `position` with value `chr22`
+> 1. **UCSC Main** {% icon tool %}: Open again the `UCSC Main - table browser` tool and set the following parameters:
+>    - *"group"* should be changed to `Variation`
+>    - {% icon param-text %} *"region"* should be changed again to `position` with value `chr22`
+>    - *"output format"* should be changed again to `BED - browser extensible data`
 >
 >    ![`UCSC table browser` tool, first screen for SNPs](../../images/101_06.png)
 >
->    The **track** setting shows the version of the SNP database to get. In this example it is version 150, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.
+>    The *"track"* setting shows the version of the SNP database to get. In this example it is version 150, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.
 >
-> 3. Click on the **get output** button to find a menu similar to this:
+> 2. Click on the **get output** button to find a form similar to this:
 >
 >    ![`UCSC table browser` tool, second screen for SNPs](../../images/101_07.png)
 >
->    Make sure that **Create one BED record per** is set to `Whole Gene` (Whole Gene here really means Whole Feature), and click on **Send query to Galaxy**. You will get your second item in your analysis history.
+>    Make sure that *"Create one BED record per"* is set to `Whole Gene` (Whole Gene here really means Whole Feature), and click on **Send query to Galaxy**. You will get your second item in your analysis history.
 >
-> 4. Now **rename** your new dataset to `SNPs` so we can easily remember what the file contains.
+> 3. Now **rename** your new dataset to `SNPs` so we can easily remember what the file contains.
 {: .hands_on}
 
 # Analysis
@@ -163,7 +162,7 @@ Let's remind ourselves that our objective is to find which exon contains the mos
 >
 > 1. **Join** {% icon tool %}: Enter the word `join` in the search bar of the tool panel, and select the tool named `Join - the intervals of two datasets side-by-side`
 >
-> 2. Select the `Exons` dataset as the first dataset, and the `SNPs` dataset as the second dataset, and make sure **return** is set to `INNER JOIN` so that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)
+> 2. Select the `Exons` dataset as the first dataset, and the `SNPs` dataset as the second dataset, and make sure *"return"* is set to `INNER JOIN` so that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)
 >
 >    ![Settings for the `Join` tool](../../images/101_11.png)
 >
@@ -181,9 +180,9 @@ Let's remind ourselves that our objective is to find which exon contains the mos
 > >
 > > Did the Join tool error with a memory failure? Or is this step executing for a long time? Most likely a setting was missed when extracting the data from the UCSC Table Browser. Try again, double checking that:
 > >
-> >  * For both SNP and EXON: **region** is actually changed to `position` with value `chr22`
-> >  * For EXON: **Create one BED record per** `Coding Exons` is selected (*not* `Whole Gene` as for the SNP data)
-> >  * Carefully inspect remaining Table Browser settings if these two most common reasons for problems are Ok in your query
+> >  * For both SNP and EXON: *"region"* is actually changed to `position` with value `chr22`
+> >  * For EXON: *"Create one BED record per"* `Coding Exons` is selected (*not* `Whole Gene` as for the SNP data)
+> >  * Carefully inspect the remaining Table Browser settings if these two most common reasons for problems were correct in your tool executions
 > {: .tip}
 >
 {: .hands_on}
@@ -204,14 +203,12 @@ We've just seen how to count the number of SNPs in each exon, so let's do this f
 >
 >    ![Settings for the `Group` tool](../../images/101_13.png)
 >
->     > ### {% icon comment %} Settings
->     >
->     > - **Select data**: select the output dataset from the `Join` tool
->     > - **Group by column**: `Column: 4` (the column with the exon IDs)
->     > - **Insert Operation**: click on this button, then set **Type** to `Count` and set **On column** to `Column: 4`
->     {: .comment}
+>    Now set the following parameters:
+>    - *"Select data"*: select the output dataset from the `Join` tool
+>    - *"Group by column"*: `Column: 4` (the column with the exon IDs)
+>    - *"Insert Operation"*: click on this button, then set *"Type"* to `Count` and set *"On column"* to `Column: 4`
 >
-> 2. Make sure your screen looks like the image above and click **Execute** to perform the grouping. Your output dataset will look something like this:
+> 2. Make sure your screen looks like the image above and click **Execute** to perform the grouping. Your new output dataset will look something like this:
 >
 >    ![Contents of the `Group` output dataset](../../images/101_14.png)
 >
@@ -222,12 +219,12 @@ This file contains only two columns. The first contains the exon IDs, and the se
 > ### {% icon question %} Question
 > How many exons are there in total in your file?
 >
-> *Hint: Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above*.
+> *Hint: Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image below*.
 {: .question}
 
 ## Sort the exons by SNPs count
 
-Now we have a list of all exons and the number of SNPs they contain, but we would like to know which exons has the *highest number* of SNPs. We can do this by sorting the file on the second column.
+Now we have a list of all exons and the number of SNPs they contain, but we would like to know which exon has the *highest number* of SNPs. We can do this by sorting the file on the second column.
 
 > ### {% icon hands_on %} Hands-on: Sorting
 >
@@ -235,7 +232,7 @@ Now we have a list of all exons and the number of SNPs they contain, but we woul
 >
 > 2. Make sure that the output of the `Group` tool from the previous step is selected as input
 >
-> 3. Set the **on column** parameter to `Column: 2`, by default it will select a numerical sort in descending order, which is exactly what we want in this case.
+> 3. Set the *"on column"* parameter to `Column: 2`, by default it will select a numerical sort in descending order, which is exactly what we want in this case.
 >
 >    ![Settings for the `Sort` tool](../../images/101_15.png)
 >
@@ -261,7 +258,7 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 >
 > 1. **Select first** {% icon tool %}: Open the tool `Select first - lines from a dataset`
 >
-> 2. Set **Select first** to `5`
+> 2. Set *"Select first"* to `5`
 >
 > 3. Make sure that the output of the `Sort` tool from the previous step is selected as input
 >
@@ -427,9 +424,9 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    ![Drag and drop of `Exons` dataset in the history overview](../../images/101_copydataset.png)
 >
 > 3. We wanted to know something about the repetitive elements per exon. We get this data from UCSC.
->    - **assembly** should be set to `Dec. 2013 (GRCh38/hg38)`
->    - **group** parameter should be `Repeats`
->    - **position** should be `chr22`
+>    - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
+>    - *"group"* parameter should be changed to `Repeats`
+>    - *"position"*: `chr22`
 >    - leave the rest of the settings to the defaults
 >
 >    Click on **get output** and then **Send query to Galaxy** on the next screen.
