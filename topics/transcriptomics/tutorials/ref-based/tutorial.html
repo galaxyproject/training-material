@@ -467,8 +467,8 @@
   <blockquote class="solution">
     <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
-      <li>The DNA sequences are stored in a FastQ file, in the second line of every 4-line group</li>
-      <li>This file format is called <a href="https://en.wikipedia.org/wiki/FASTQ_format">FastQ format</a>. It stores sequence information and quality information. Each sequence is represented by a group of 4 lines with the 1st line being the sequence id, the second the sequence of nucleotides, the third a transition line and the last one a sequence of quality score for each nucleotide.</li>
+      <li>The DNA sequences are stored in a FASTQ file, in the second line of every 4-line group</li>
+      <li>This file format is called <a href="https://en.wikipedia.org/wiki/FASTQ_format">FASTQ format</a>. It stores sequence information and quality information. Each sequence is represented by a group of 4 lines with the 1st line being the sequence id, the second the sequence of nucleotides, the third a transition line and the last one a sequence of quality score for each nucleotide.</li>
     </ol>
   </blockquote>
 </blockquote>
@@ -477,9 +477,9 @@
 
 <h2 id="quality-control">Quality control</h2>
 
-<p>During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis abd can lead to a misinterpretation of the data.</p>
+<p>During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data.</p>
 
-<p>Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in <a href="/training-material/topics/sequence-analysis">“Quality control” tutorial</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> and <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a>.</p>
+<p>Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the <a href="/training-material/topics/sequence-analysis">“Quality control” training</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> and <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a>.</p>
 
 <blockquote class="hands_on">
   <h3 id="hands_on-hands-on-quality-control"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality control</h3>
@@ -610,7 +610,7 @@
     <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <p>The data has been sequenced using paired-end sequencing.</p>
 
-    <p>The paired-end sequencing is based on the idea that the initial DNA fragments (longer than the actual read length) is sequenced from both sides. This approach results in two reads per fragment, with the first read in forward orientation and the second read in reverse-complement orientation. The distance between both reads is known. Thus, it can be used as an additional piece of infromation to improve the read mapping.</p>
+    <p>The paired-end sequencing is based on the idea that the initial DNA fragments (longer than the actual read length) is sequenced from both sides. This approach results in two reads per fragment, with the first read in forward orientation and the second read in reverse-complement orientation. The distance between both reads is known. Thus, it can be used as an additional piece of information to improve the read mapping.</p>
 
     <p>With paired-end sequencing, each fragment is more covered than with single-end sequencing (only forward orientation sequenced):</p>
 
@@ -629,7 +629,7 @@
 
     <p>The paired-end sequencing generates then 2 files:</p>
     <ul>
-      <li>One file with the sequences corresponding to foward orientation of all the fragments</li>
+      <li>One file with the sequences corresponding to forward orientation of all the fragments</li>
       <li>One file with the sequences corresponding to reverse orientation of all the fragments</li>
     </ul>
 
@@ -714,26 +714,26 @@
 <blockquote class="comment">
   <h3 id="comment-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-  <p>Do you want to learn more about the principles behind mapping? Follow our <a href="/training-material/topics/sequence-analysis/">training</a></p>
+  <p>Do you want to learn more about the principles behind mapping? Follow our <a href="/training-material/topics/sequence-analysis/">training</a>.</p>
 </blockquote>
 
-<p>As the genome of <em>Drosophila melanogaster</em> is known and assembled, we can use this information and map the sequences to this genome, to identify which genes are affected by  the <em>Pasilla</em> gene depletion.</p>
+<p>As a reference genome for <em>Drosophila melanogaster</em> is available, we can map the sequences to this genome in order to identify which genes are affected by  the <em>Pasilla</em> gene depletion.</p>
 
 <blockquote class="question">
   <h3 id="question-questions-6"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>What is a reference genome?</li>
-    <li>For model organisms, several possible reference genomes are available (e.g. hg19 and hg38 for human). What do they correspond to?</li>
+    <li>For each model organism, several possible reference genomes may be available (e.g. hg19 and hg38 for human). What do they correspond to?</li>
     <li>Which reference genome should we use?</li>
   </ol>
 
   <blockquote class="solution">
     <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
-      <li>A reference genome (or reference assembly) is a DNA sequence assembled as a representative example of a species’ DNA sequence. As they are often assembled from the sequencing of the DNA from different donors, they do not accurately represent the set of genes of any single person but a mosaic of different DNA sequences from each donor.</li>
-      <li>As the cost of DNA sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are builts and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different versions released (named build)</li>
-      <li>The genome of <em>Drosophila melanogaster</em> is known and assembled and it can be used as the reference genome in this analysis. Note that new versions of reference genomes may be released if the assembly improves, and the latest version of the <em>Drosophila melanogaster</em> reference genome assembly is Release 6 <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4383921/">(dm6)</a>.</li>
+      <li>A reference genome (or reference assembly) is a set of nucleic acid sequences assembled as a representative example of a species’ genetic material. As they are often assembled from the sequencing of different individuals, they do not accurately represent the set of genes of any single organism but a mosaic of different nucleic acid sequences from each individual.</li>
+      <li>As the cost of DNA sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are builts and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different versions released (named build).</li>
+      <li>The genome of <em>Drosophila melanogaster</em> is known and assembled and it can be used as the reference genome in this analysis. Note that new versions of reference genomes may be released if the assembly improves, for this tutorial we are going to use the Release 6 of the <em>Drosophila melanogaster</em> reference genome assembly <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4383921/">(dm6)</a>.</li>
     </ol>
   </blockquote>
 </blockquote>
@@ -796,7 +796,7 @@
 
       <ol>
         <li>Rename the dataset if necessary</li>
-        <li>Verify that the datatype is <code class="highlighter-rouge">gtf</code> and not <code class="highlighter-rouge">gff</code> and that the datatype is <code class="highlighter-rouge">dm6</code></li>
+        <li>Verify that the datatype is <code class="highlighter-rouge">gtf</code> and not <code class="highlighter-rouge">gff</code>, and that the database is <code class="highlighter-rouge">dm6</code></li>
       </ol>
     </li>
     <li><strong>RNA STAR</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to map your reads on the reference genome:
@@ -1104,11 +1104,11 @@ installed on your machine. However, the questions in this section can also be an
 <blockquote class="comment">
   <h3 id="comment-comment-3"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-  <p>The quantification depends on both the reference genome (the fasta file) and its associated annotations (the GTF file). It is extremely important to use an annotation file that corresponds to the same version of the reference genome you used for the mapping (e.g. <code class="highlighter-rouge">dm6</code> here), as the chromosomal coordinates of genes are usually different amongst different reference genome versions.</p>
+  <p>The quantification depends on both the reference genome (the FASTA file) and its associated annotations (the GTF file). It is extremely important to use an annotation file that corresponds to the same version of the reference genome you used for the mapping (e.g. <code class="highlighter-rouge">dm6</code> here), as the chromosomal coordinates of genes are usually different amongst different reference genome versions.</p>
 </blockquote>
 
 <p>To identify exons that are regulated by the <em>Pasilla</em> gene, we need to identify genes and exons which are differentially expressed between samples with PS gene depletion (treated) and control (untreated) samples.
-In this tutorial, we will then analyze the differential gene expression and also the differential exon usage.</p>
+We will then analyze the differential gene expression and also the differential exon usage.</p>
 
 <h1 id="analysis-of-the-differential-gene-expression">Analysis of the differential gene expression</h1>
 
@@ -1185,7 +1185,7 @@ In this tutorial, we will then analyze the differential gene expression and also
 
 <figure id="figure-17"><img src="../../images/dna_rna.png" alt="Relationship between DNA and RNA orientation" title="Relationship between DNA and RNA orientation" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Relationship between DNA and RNA orientation</figcaption></figure>
 
-<p>During a typical RNA-seq experiment the information about strandedness is lost after both strands of cDNA are synthesized, size selected, and converted into sequencing library. However, this information can be quite useful for the read counting.</p>
+<p>During a typical RNA-seq experiment the information about strandedness is lost after both strands of cDNA are synthesized, size selected, and converted into a sequencing library. However, this information can be quite useful for the read counting.</p>
 
 <p>Some library preparation protocols create so called <em>stranded</em> RNA-seq libraries that preserve the strand information (an excellent overview in <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3005310/">Levin et al, Nat Meth, 2010</a>). The implication of stranded RNA-seq is that you can distinguish whether the reads are derived from forward or reverse-encoded transcripts:</p>
 
@@ -1563,13 +1563,13 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
                     <li>In <em>“1: Factor level”</em>:
                       <ul>
                         <li><em>“Specify a factor level”</em>: <code class="highlighter-rouge">treated</code></li>
-                        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Counts file(s)”</em>: the 3 gene count files with <code class="highlighter-rouge">treated</code> in their name</li>
+                        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Counts file(s)”</em>: the 3 gene count files with <code class="highlighter-rouge">treat</code> in their name</li>
                       </ul>
                     </li>
                     <li>In <em>“2: Factor level”</em>:
                       <ul>
                         <li><em>“Specify a factor level”</em>: <code class="highlighter-rouge">untreated</code></li>
-                        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Counts file(s)”</em>: the 4 gene count files with <code class="highlighter-rouge">untreated</code> in their name</li>
+                        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Counts file(s)”</em>: the 4 gene count files with <code class="highlighter-rouge">untreat</code> in their name</li>
                       </ul>
                     </li>
                   </ul>
@@ -1695,9 +1695,9 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
 
 <h2 id="visualization-of-the-differentially-expressed-genes">Visualization of the differentially expressed genes</h2>
 
-<p>We would like now to extract the most differentially expressed because of the treatment. and then visualize them using an heatmap of the normalized counts and also the z-score for each sample.</p>
+<p>Now we would like to extract the most differentially expressed genes due to the treatment, and then visualize them using an heatmap of the normalized counts and also the z-score for each sample.</p>
 
-<p>We proceed in several steps</p>
+<p>We proceed in several steps:</p>
 <ul>
   <li>Extract the most differentially expressed genes using the DESeq2 summary file</li>
   <li>Extract the normalized counts for these genes for each sample, using the normalized count file generated by DESeq2</li>
@@ -1710,7 +1710,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
   <h3 id="hands_on-hands-on-extract-the-most-differentially-expressed-genes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract the most differentially expressed genes</h3>
 
   <ol>
-    <li><strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract genes with a significant change in gene expression (adjusted <em>p</em>-value below 0.05) between treated and untreated samples
+    <li><strong>Filter</strong> (data on any column using simple expressions) <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract genes with a significant change in gene expression (adjusted <em>p</em>-value below 0.05) between treated and untreated samples
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: the <code class="highlighter-rouge">DESeq2 result file</code></li>
         <li><em>“With following condition”</em>: <code class="highlighter-rouge">c7&lt;0.05</code></li>
@@ -1751,7 +1751,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
         <blockquote class="solution">
           <h3 id="solution-solution-19"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-          <p>11.92% (130) of the differentially expressed genes</p>
+          <p>130, the 11.92% of the significantly differentially expressed genes.</p>
 
         </blockquote>
       </blockquote>
@@ -1793,7 +1793,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
 
 </blockquote>
 
-<p>We now have a table with 20 lines (the most differentially expressed genes) and the normalized counts for these genes in the 7 samples.</p>
+<p>We now have a table with 130 lines (the most differentially expressed genes) and the normalized counts for these genes in the 7 samples.</p>
 
 <blockquote class="hands_on">
   <h3 id="hands_on-hands-on-plot-the-heatmap-of-the-normalized-counts-of-these-genes-for-the-samples"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot the heatmap of the normalized counts of these genes for the samples</h3>
@@ -1821,8 +1821,8 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
 
   <ol>
     <li>Do you observe anything in the clustering of the samples and the genes?</li>
-    <li>What changes if we regenerate the heatmap and select <code class="highlighter-rouge">Plot the data as it is</code> in <em>“Advanced - log transformation”</em>?</li>
-    <li>Can you generate a heatmap of normalized counts for all up-regulated genes with absolute fold change &gt; 2?</li>
+    <li>What changes if you regenerate the heatmap and select <code class="highlighter-rouge">Plot the data as it is</code> in <em>“Advanced - log transformation”</em>?</li>
+    <li>How could you generate a heatmap of normalized counts for all up-regulated genes with absolute fold change &gt; 2?</li>
   </ol>
 
   <blockquote class="solution">
@@ -1842,7 +1842,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
 
 <p><a href="http://www.geneontology.org/">Gene Ontology (GO)</a> analysis is widely used to reduce complexity and highlight biological processes in genome-wide expression studies. However, standard methods give biased results on RNA-seq data due to over-detection of differential expression for long and highly-expressed transcripts.</p>
 
-<p><a href="https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf">goseq tool</a> provides methods for performing GO analysis of RNA-seq data, taking length bias into account. The methods and software used by goseq are equally applicable to other category based tests of RNA-seq data, such as KEGG pathway analysis.</p>
+<p>The <a href="https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf">goseq</a> tool provides methods for performing GO analysis of RNA-seq data, taking length bias into account. The methods and software used by goseq are equally applicable to other category based tests of RNA-seq data, such as KEGG pathway analysis.</p>
 
 <p>goseq needs 2 files as inputs:</p>
 <ul>

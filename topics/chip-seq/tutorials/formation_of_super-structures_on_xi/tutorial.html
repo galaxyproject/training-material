@@ -339,8 +339,8 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
   <blockquote class="solution">
     <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
-      <li>The DNA sequences are stored in a FastQ file, in the second line of every 4-line group</li>
-      <li>This file format is called <a href="https://en.wikipedia.org/wiki/FASTQ_format">FastQ format</a>. It stores sequence information and quality information. Each sequence is represented by a group of 4 lines with the 1st line being the sequence id, the second the sequence of nucleotides, the third a transition line and the last one a sequence of quality score for each nucleotide.</li>
+      <li>The DNA sequences are stored in a FASTQ file, in the second line of every 4-line group</li>
+      <li>This file format is called <a href="https://en.wikipedia.org/wiki/FASTQ_format">FASTQ format</a>. It stores sequence information and quality information. Each sequence is represented by a group of 4 lines with the 1st line being the sequence id, the second the sequence of nucleotides, the third a transition line and the last one a sequence of quality score for each nucleotide.</li>
     </ol>
   </blockquote>
 </blockquote>
@@ -461,7 +461,7 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
     <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <p>The data has been sequenced using paired-end sequencing.</p>
 
-    <p>The paired-end sequencing is based on the idea that the initial DNA fragments (longer than the actual read length) is sequenced from both sides. This approach results in two reads per fragment, with the first read in forward orientation and the second read in reverse-complement orientation. The distance between both reads is known. Thus, it can be used as an additional piece of infromation to improve the read mapping.</p>
+    <p>The paired-end sequencing is based on the idea that the initial DNA fragments (longer than the actual read length) is sequenced from both sides. This approach results in two reads per fragment, with the first read in forward orientation and the second read in reverse-complement orientation. The distance between both reads is known. Thus, it can be used as an additional piece of information to improve the read mapping.</p>
 
     <p>With paired-end sequencing, each fragment is more covered than with single-end sequencing (only forward orientation sequenced):</p>
 
@@ -480,7 +480,7 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
 
     <p>The paired-end sequencing generates then 2 files:</p>
     <ul>
-      <li>One file with the sequences corresponding to foward orientation of all the fragments</li>
+      <li>One file with the sequences corresponding to forward orientation of all the fragments</li>
       <li>One file with the sequences corresponding to reverse orientation of all the fragments</li>
     </ul>
 
@@ -554,14 +554,12 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
 
 <p>Nowadays, there are many mapping programs for shotgun sequenced DNA. We will use <a href="http://bowtie-bio.sourceforge.net/bowtie2/index.shtml">Bowtie2</a>.</p>
 
-<p>We need a reference genome on which we map the reads.</p>
-
 <blockquote class="question">
   <h3 id="question-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>What is a reference genome?</li>
-    <li>For human, several possible reference genomes are available: hg18, hg19, hg38, etc. What do they correspond to?</li>
+    <li>For each model organism, several possible reference genomes may be available (e.g. hg19 and hg38 for human). What do they correspond to?</li>
     <li>Which reference genome should we use?</li>
   </ol>
 
@@ -569,7 +567,7 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
     <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
       <li>A reference genome (or reference assembly) is a set of nucleic acid sequences assembled as a representative example of a species’ genetic material. As they are often assembled from the sequencing of different individuals, they do not accurately represent the set of genes of any single organism but a mosaic of different nucleic acid sequences from each individual.</li>
-      <li>As the cost of DNA sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are builts and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different versions released (named build)</li>
+      <li>As the cost of DNA sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are builts and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different versions released (named build).</li>
       <li>Wang et al. (2018) did ChIP-seq on mouse. So we should use the mouse reference genome. We will use mm10 (the latest build)</li>
     </ol>
   </blockquote>
