@@ -1,0 +1,1108 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+    </head>
+    <body>
+        
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/genome-annotation" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Genome Annotation
+                        </a>
+                    </li>
+
+                    
+                    
+                    
+
+                    
+                        
+                    
+
+                    
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+                                <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">instances</span> Galaxy Instances
+                            </a>
+                            <div class="dropdown-menu">
+                                
+                                    <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/genome-annotation/docker" title="Docker image for this tutorial">
+                                        <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+                                    </a>
+                                
+                                
+                                
+                            </div>
+                        </li>
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://doi.org/10.5281/zenodo.1404209" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Gitter
+        </a>
+        <a class="dropdown-item" href="https://biostar.usegalaxy.org/" title="Ask on Biostars">
+            Biostars
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Genome annotation with Maker</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>How to annotate an eukaryotic genome?</li>
+            
+            <li>How to evaluate and visualize annotated genomic features?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>Load genome into Galaxy</li>
+            
+            <li>Annotate genome with Maker</li>
+            
+            <li>Evaluate annotation quality with BUSCO</li>
+            
+            <li>View annotations in JBrowse</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+                <li>
+                    
+                    <a href="/training-material/topics/introduction/">Galaxy introduction</a>
+                    
+                </li>
+            
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1d</p>
+            
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Genome annotation of eukaryotes is a little mote complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.</p>
+
+<p>In this tutorial we will use a software tool called Maker to annotate the genome sequence of a small eukaryote: Schizosaccharomyces pombe (a yeast).</p>
+
+<p>Maker is able to annotate both prokaryotes and eukaryotes. It works by aligning as many evidences as possible along the genome sequence, and then reconciliating all these signals to determine probable gene structures.</p>
+
+<p>The evidences can be transcript or protein sequences from the same (or closely related) organism. These sequences can come from public databases (like NR or GenBank) or from your own experimental data (transcriptome assembly from an RNASeq experiment for example). Maker is also able to take into account repeated elements.</p>
+
+<p>Maker uses ab-initio predictors (like <a href="http://bioinf.uni-greifswald.de/augustus/">Augustus</a> or <a href="https://github.com/KorfLab/SNAP">SNAP</a>) to improve its predictions: these software tools are able to make gene structure predictions by analysing only the genome sequence with a statistical model.</p>
+
+<p>In this tutorial you will learn how to perform a genome annotation, and how to evaluate its quality. You will see how training ab-initio predictors is an important step to produce good results. Finally, you will learn how to use the <a href="http://jbrowse.org/">JBrowse</a> genome browser to visualise the results.</p>
+
+<p>More information about Maker can be found <a href="http://www.yandell-lab.org/software/maker.html">here</a>.</p>
+
+<p>This tutorial was inspired by the MAKER Tutorial for <a href="http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018">WGS Assembly and Annotation Winter School 2018 </a>, don’t hesitate to consult it for more information on Maker, and on how to run it with command line.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a>    <ol>
+      <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+    </ol>
+  </li>
+  <li><a href="#genome-quality-evaluation" id="markdown-toc-genome-quality-evaluation">Genome quality evaluation</a></li>
+  <li><a href="#first-maker-annotation-round" id="markdown-toc-first-maker-annotation-round">First Maker annotation round</a>    <ol>
+      <li><a href="#maker" id="markdown-toc-maker">Maker</a></li>
+      <li><a href="#annotation-statistics" id="markdown-toc-annotation-statistics">Annotation statistics</a></li>
+      <li><a href="#busco" id="markdown-toc-busco">Busco</a></li>
+    </ol>
+  </li>
+  <li><a href="#ab-initio-predictors-first-training" id="markdown-toc-ab-initio-predictors-first-training">Ab-initio predictors first training</a></li>
+  <li><a href="#second-maker-annotation-round" id="markdown-toc-second-maker-annotation-round">Second Maker annotation round</a>    <ol>
+      <li><a href="#maker-1" id="markdown-toc-maker-1">Maker</a></li>
+      <li><a href="#annotation-statistics-1" id="markdown-toc-annotation-statistics-1">Annotation statistics</a></li>
+      <li><a href="#busco-1" id="markdown-toc-busco-1">Busco</a></li>
+    </ol>
+  </li>
+  <li><a href="#ab-initio-predictors-second-training" id="markdown-toc-ab-initio-predictors-second-training">Ab-initio predictors second training</a></li>
+  <li><a href="#third-last-maker-annotation-round" id="markdown-toc-third-last-maker-annotation-round">Third (last) Maker annotation round</a>    <ol>
+      <li><a href="#maker-2" id="markdown-toc-maker-2">Maker</a></li>
+      <li><a href="#annotation-statistics-2" id="markdown-toc-annotation-statistics-2">Annotation statistics</a></li>
+      <li><a href="#busco-2" id="markdown-toc-busco-2">Busco</a></li>
+    </ol>
+  </li>
+  <li><a href="#improving-gene-naming" id="markdown-toc-improving-gene-naming">Improving gene naming</a></li>
+  <li><a href="#visualising-the-results" id="markdown-toc-visualising-the-results">Visualising the results</a>    <ol>
+      <li><a href="#more-visualisation" id="markdown-toc-more-visualisation">More visualisation</a></li>
+    </ol>
+  </li>
+  <li><a href="#whats-next" id="markdown-toc-whats-next">What’s next?</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="data-upload">Data upload</h1>
+
+<p>To annotate a genome using Maker, you need the following files:</p>
+
+<ul>
+  <li>The genome sequence in fasta format</li>
+  <li>A set of transcripts or EST sequences, preferably from the same organism.</li>
+  <li>A set of protein sequences, usually from closely related species or from a curated sequence database like UniProt/SwissProt.</li>
+</ul>
+
+<p>Maker will align the transcript and protein sequences on the genome sequence to determine gene positions.</p>
+
+<h2 id="get-data">Get data</h2>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create and name a new history for this tutorial.</li>
+    <li>
+      <p>Import the following files from <a href="https://doi.org/10.5281/zenodo.1404209">Zenodo</a> or from the shared data library</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/augustus_training_1.tar.gz
+https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/augustus_training_2.tar.gz
+https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/S_pombe_chrIII.fasta
+https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/S_pombe_genome.fasta
+https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/S_pombe_trinity_assembly.fasta
+https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/Swissprot_no_S_pombe.fasta
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>Open the Galaxy Upload Manager</li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>Paste the link into the text field</li>
+          <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <ul>
+          <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>
+          <li>Find the correct folder (ask your instructor)</li>
+          <li>Select interesting files</li>
+          <li>Click on <strong>Import selected datasets into history</strong></li>
+          <li>Import in the history</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>Rename the datasets</li>
+    <li>
+      <p>Check that the datatype for <code class="highlighter-rouge">augustus_training_1.tar.gz</code> an <code class="highlighter-rouge">augustus_training_2.tar.gz</code> are set to <code class="highlighter-rouge">augustus</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the pencil button displayed in your dataset in the history</li>
+          <li>Choose <strong>Datatype</strong> on the top</li>
+          <li>Select <code class="highlighter-rouge">augustus</code></li>
+          <li>Press <strong>Save</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>You have four main datasets:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">S_pombe_trinity_assembly.fasta</code> contains the EST sequences</li>
+  <li><code class="highlighter-rouge">Swissprot_no_S_pombe.fasta</code> contanis the protein sequences from SwissProt</li>
+  <li><code class="highlighter-rouge">S_pombe_genome.fasta</code> contains the full genome sequence</li>
+  <li><code class="highlighter-rouge">S_pombe_chrIII.fasta</code> contains only a fraction of the full genome sequence, ie the chromosome III</li>
+</ul>
+
+<p>For the rest of this tutorial, you need to choose between <code class="highlighter-rouge">S_pombe_chrIII.fasta</code> and <code class="highlighter-rouge">S_pombe_genome.fasta</code>. If you have time, use the full genome (<code class="highlighter-rouge">S_pombe_genome.fasta</code>), it will take more computing time, but the results will be closer to real-life data. If you want to get results faster, use the chromosome III (<code class="highlighter-rouge">S_pombe_chrIII.fasta</code>). In the rest of this tutorial, we will refer to the file you choose as <code class="highlighter-rouge">the genome</code>.</p>
+
+<p>The two other datasets (<code class="highlighter-rouge">augustus_training_1.tar.gz</code> an <code class="highlighter-rouge">augustus_training_2.tar.gz</code>) will be used later in the tutorial.</p>
+
+<h1 id="genome-quality-evaluation">Genome quality evaluation</h1>
+
+<p>The quality of a genome annotation is highly dependent on the quality of the genome sequences. It is impossible to obtain a good quality annotation with a poorly assembled genome sequence. Annotation tools will have trouble finding genes if the genome sequence is highly fragmented, if it contains chimeric sequences, or if there are a lot of sequencing errors.</p>
+
+<p>Before running the full annotation process, you need first to evaluate the quality of the sequence. It will give you a good idea of what you can expect from it at the end of the annotation.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-get-genome-sequence-statistics"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get genome sequence statistics</h3>
+
+  <ol>
+    <li><strong>Fasta Statistics</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: select the genome sequence from your history</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Have a look at the statistics:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">num_seq</code>: the number of contigs (or scaffold or chromosomes), compare it to expected chromosome numbers</li>
+  <li><code class="highlighter-rouge">len_min</code>, <code class="highlighter-rouge">len_max</code>, <code class="highlighter-rouge">len_N50</code>, <code class="highlighter-rouge">len_mean</code>, <code class="highlighter-rouge">len_median</code>: the distribution of contig sizes</li>
+  <li><code class="highlighter-rouge">num_bp_not_N</code>: the number of bases that are not N, it should be as close as possible to the total number of bases (<code class="highlighter-rouge">num_bp</code>)</li>
+</ul>
+
+<p>These statistics are useful to detect obvious problems in the genome assembly, but it gives no information about the quality of the sequence content. We want to evaluate if the genome sequence contains all the genes we expect to find in the considered species, and if their sequence are correct.</p>
+
+<p><a href="http://busco.ezlab.org/">BUSCO</a> (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to answer this question: by comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, …). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a genome sequence or a set of (predicted) transcript or protein sequences. This is a good evluation of the “completeness” of the genome or annotation.</p>
+
+<p>We will first run this tool on the genome sequence to evaluate its quality.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-run-busco-on-the-genome"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run Busco on the genome</h3>
+
+  <ol>
+    <li><strong>Busco</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: select the genome sequence from your history</li>
+        <li><em>“Mode”</em>: <code class="highlighter-rouge">Genome</code></li>
+        <li><em>“Lineage”</em>: <code class="highlighter-rouge">fungi_odb9</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>We select fungi_odb9 as the genome we will annotate is a fungi. It is usually better to select the most specific lineage for the species you study. Large lineages (like Metazoa) will consist of fewer genes, but with a strong support. More specific lineages (like Hymenoptera) will have more genes, but with a weaker support (has they are found in fewer genomes).</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>BUSCO produces three output datasets</p>
+
+<ul>
+  <li>A short summary: summarizes the results of BUSCO (see below)</li>
+  <li>A full table: lists all the BUSCOs that were searched for, with the corresponding status (was it found in the genome? how many times? where?)</li>
+  <li>A table of missing BUSCOs: this is the list of all genes that were not found in the genome</li>
+</ul>
+
+<blockquote>
+  <figure id="figure-1"><img src="../../images/busco_genome_summary.png" alt="BUSCO genome summary" title="BUSCO short summary. Here BUSCO searched for 290 genes in a genome, and found 282 of them complete (269 in single-copy, and 13 duplicated). 5 where found but are fragmented, and 3 were not found at all." /><figcaption><span class="figcaption-prefix">Figure 1:</span> BUSCO short summary. Here BUSCO searched for 290 genes in a genome, and found 282 of them complete (269 in single-copy, and 13 duplicated). 5 where found but are fragmented, and 3 were not found at all.</figcaption></figure>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Do you think the genome quality is good enough for performing the annotation?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>The genome consists of the exepected 4 chromosomes sequences, with very few N, which is the ideal case. Most of the BUSCO genes are found as complete single copy, and very few are fragmented, which means that our genome have a good quality as it contains most of the expected content. That’s a very good material to perform an annotation.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+  <p>If you chose to use only the chromosome III sequence (<code class="highlighter-rouge">S_pombe_chrIII.fasta</code>), the statistics will be different. The genome size will be lower, with only 1 chromosome. The BUSCO result will also show a lot of missing genes: it is expected as all the BUSCO genes that are not on the chromosome III cannot be found by the tool. Keep it in mind when comparing these results with the other BUSCO results later.</p>
+</blockquote>
+
+<h1 id="first-maker-annotation-round">First Maker annotation round</h1>
+
+<h2 id="maker">Maker</h2>
+
+<p>For this first round, we configure Maker to construct gene models only by aligning ESTs and proteins to the genome. This will produce a first draft annotation that we will improve in the next steps.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-first-draft-annotation-with-maker"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: First draft annotation with Maker</h3>
+
+  <ol>
+    <li><strong>Maker</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select the genome sequence from your history</li>
+        <li><em>“Re-annotate using an existing Maker annotation”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><em>“Organism type”</em>: <code class="highlighter-rouge">Eukaryotic</code></li>
+        <li>In <em>“EST evidences (for best results provide at least one of these)”</em>:
+          <ul>
+            <li><em>“Infer gene predictions directly from all ESTs”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“ESTs or assembled cDNA”</em>: <code class="highlighter-rouge">S_pombe_trinity_assembly.fasta</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Protein evidences (for best results provide at least one of these)”</em>:
+          <ul>
+            <li><em>“Infer gene predictions directly from all protein alignments”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein sequences”</em>: <code class="highlighter-rouge">Swissprot_no_S_pombe.fasta</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Ab-initio gene prediction”</em>:
+          <ul>
+            <li><em>“Prediction with Augustus”</em>: <code class="highlighter-rouge">Don't use Augustus to predict genes</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Repeat masking”</em>:
+          <ul>
+            <li><em>“Repeat library source”</em>: <code class="highlighter-rouge">Disable repeat masking (not recommended)</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-2"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>For this tutorial repeat masking is disabled, which is not the recommended setting. When doing a real-life annotation, you should either provide your own repeats library, or use <a href="https://www.girinst.org/repbase/">RepBase</a>. As RepBase is not free to use, you will need to download manually the RepBaseRepeatMaskerEdition file and upload the enclosed EMBL format file (<code class="highlighter-rouge">RMRBSeqs.embl</code>) to use with Maker.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Maker produces three GFF3 datasets:</p>
+
+<ul>
+  <li>The final annotation: the final consensus gene models produced by Maker</li>
+  <li>The evidences: the alignements of all the data Maker used to construct the final annotation (ESTs and proteins that we used)</li>
+  <li>A GFF3 file containing both the final annotation and the evidences</li>
+</ul>
+
+<h2 id="annotation-statistics">Annotation statistics</h2>
+
+<p>We need now to evaluate this first draft annotation produced by Maker.</p>
+
+<p>First, use the <code class="highlighter-rouge">Genome annotation statistics</code> that will compute some general statistics on the annotation.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-get-annotation-statistics"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get annotation statistics</h3>
+
+  <ol>
+    <li><strong>Genome annotation statistics</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotation to analyse”</em>: <code class="highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Reference genome”</em>: <code class="highlighter-rouge">Use a genome from history</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Corresponding genome sequence”</em>: select the genome sequence from your history</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="busco">Busco</h2>
+
+<p>Just as we did for the genome at the beginning, we can use BUSCO to check the quality of this first Maker annotation. Instead of looking for known genes in the genome sequence, BUSCO will inspect the transcript sequences of the genes predicted by Maker.</p>
+
+<p>First we need to compute all the transcript sequences from the Maker annotation.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-extract-transcript-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract transcript sequences</h3>
+
+  <ol>
+    <li><strong>gffread</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input GFF3 or GTF feature file”</em>: <code class="highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Reference Genome”</em>: <code class="highlighter-rouge">select the genome sequence from your history</code>
+          <ul>
+            <li><em>“Select fasta outputs”</em>:
+              <ul>
+                <li><code class="highlighter-rouge">fasta file with spliced exons for each GFF transcript (-w exons.fa)</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“full GFF attribute preservation (all attributes are shown)”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“decode url encoded characters within attributes”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“warn about duplicate transcript IDs and other potential problems with the given GFF/GTF records”</em>: <code class="highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Now run BUSCO with the predicted transcript sequences:</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-run-busco"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run BUSCO</h3>
+
+  <ol>
+    <li><strong>Busco</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="highlighter-rouge">output_exons</code> (output of <strong>gffread</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Mode”</em>: <code class="highlighter-rouge">Transcriptome</code></li>
+        <li><em>“Lineage”</em>: <code class="highlighter-rouge">fungi_odb9</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many genes and transcripts where predicted by Maker?</li>
+    <li>What is the medium length of these genes?</li>
+    <li>How do the BUSCO statistics compare to the ones at the genome level?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>These numbers are for the full genome only (not the chromosome III).</p>
+    <ol>
+      <li>713 genes, 752 transcripts</li>
+      <li>993 bp</li>
+      <li>40 complete single-copy, 6 duplicated, 9 fragmented, 235 missing. This is far from what BUSCO found in the genome sequence, which means the quality of this first draft is not very good.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>The statistics are not really satisfactory at this stage, but it’s normal: Maker only used the EST and protein evidences to guess the gene positions. Let’s see now how this first draft can be improved.</p>
+
+<h1 id="ab-initio-predictors-first-training">Ab-initio predictors first training</h1>
+
+<p>Maker can use several ab-initio predictors to annotate a genome. “Ab-initio” means that these predictors are able to predict the structure of genes in a genome based only on its sequence and on a species-specific statistical model. They don’t use any evidence (e.g. EST or proteins) to predict genes, but they need to be trained with a set of already predicted genes.</p>
+
+<p>Maker is able to use the EST and protein evidences, and to combine them with the result of several ab-initio predictors to predict consensus gene models. It allows to detect genes in regions where no EST or protein align, and also to refine gene structures in regions where there are EST and/or protein evidences and ab-initio predictions.</p>
+
+<p>We will use two of the most widely used ab-initio predictors: SNAP and Augustus. Before using it within Maker, we need to train them with the first annotation draft we produced in the previous steps. We know the quality of this draft is not perfect, but only the best scoring genes (ie the ones having the strongest evidences) will be retained to train the predictors.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-train-snap"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Train SNAP</h3>
+
+  <ol>
+    <li><strong>Train SNAP</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select the genome sequence from your history</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Maker annotation to use for training”</em>: <code class="highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Augustus is trained in a very similar way.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-train-augustus"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Train Augustus</h3>
+
+  <ol>
+    <li><strong>Train Augustus</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select the genome sequence from your history</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotation to use for training”</em>: <code class="highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Both SNAP and Augustus produce a statistical model representing the observed general structure of genes in the analysed genome. Maker will use these models to create a new annotation for our genome.</p>
+
+<p>The Augustus training usually take around 2 hours to complete, to continue this tutorial without waiting for the result, you can use the file <code class="highlighter-rouge">augustus_training_1.tar.gz</code> imported from Zenodo.</p>
+
+<h1 id="second-maker-annotation-round">Second Maker annotation round</h1>
+
+<h2 id="maker-1">Maker</h2>
+
+<p>We need now to run a new round of Maker. As the evidences were already aligned on the genome on the first run, we can reuse these alignments as is.
+But this time, enable ab-initio gene prediction, and input the output of <strong>Train SNAP</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and <strong>Train Augustus</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tools.
+We also disable infering gene predictions directly from all ESTs and proteins: now we want Maker to infer gene predictions by reconciliating evidence alignments <em>and</em> ab-initio gene predictions.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-second-draft-annotation-with-maker"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Second draft annotation with Maker</h3>
+
+  <ol>
+    <li><strong>Maker</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select the genome sequence from your history</li>
+        <li><em>“Organism type”</em>: <code class="highlighter-rouge">Eukaryotic</code></li>
+        <li><em>“Re-annotate using an existing Maker annotation”</em>: <code class="highlighter-rouge">Yes</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Previous Maker annotation”</em>: <code class="highlighter-rouge">evidences</code> (output of the previous <strong>Maker</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run)</li>
+            <li><em>“Re-use ESTs”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Re-use alternate organism ESTs”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Re-use protein alignments”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Re-use repeats”</em>: <code class="highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+        <li>In <em>“EST evidences (for best results provide at least one of these)”</em>:
+          <ul>
+            <li><em>“Infer gene predictions directly from all ESTs”</em>: <code class="highlighter-rouge">No</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Protein evidences (for best results provide at least one of these)”</em>:
+          <ul>
+            <li><em>“Infer gene predictions directly from all protein alignments”</em>: <code class="highlighter-rouge">No</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Ab-initio gene prediction”</em>:
+          <ul>
+            <li><em>“SNAP model”</em>: <code class="highlighter-rouge">snap model</code> (output of <strong>Train SNAP</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Prediction with Augustus”</em>: <code class="highlighter-rouge">Run Augustus with a custom prediction model</code>
+              <ul>
+                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Augustus model”</em>: <code class="highlighter-rouge">augustus model</code> (output of <strong>Train Augustus</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“Repeat masking”</em>:
+          <ul>
+            <li><em>“Repeat library source”</em>: <code class="highlighter-rouge">Disable repeat masking (not recommended)</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="annotation-statistics-1">Annotation statistics</h2>
+
+<p>Do we get a better result from Maker after this second run? Let’s run the same tools as after the first run, and compare the results.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-get-annotation-statistics-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get annotation statistics</h3>
+
+  <ol>
+    <li><strong>Genome annotation statistics</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotation to analyse”</em>: <code class="highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> second run)</li>
+        <li><em>“Reference genome”</em>: <code class="highlighter-rouge">Use a genome from history</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Corresponding genome sequence”</em>: select the genome sequence from your history</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="busco-1">Busco</h2>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-extract-transcript-sequences-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract transcript sequences</h3>
+
+  <ol>
+    <li><strong>gffread</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input GFF3 or GTF feature file”</em>: <code class="highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> second run)</li>
+        <li><em>“Reference Genome”</em>: <code class="highlighter-rouge">select the genome sequence from your history</code>
+          <ul>
+            <li><em>“Select fasta outputs”</em>:
+              <ul>
+                <li><code class="highlighter-rouge">fasta file with spliced exons for each GFF transcript (-w exons.fa)</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“full GFF attribute preservation (all attributes are shown)”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“decode url encoded characters within attributes”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“warn about duplicate transcript IDs and other potential problems with the given GFF/GTF records”</em>: <code class="highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Now run BUSCO with the predicted transcript sequences:</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-run-busco-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run BUSCO</h3>
+
+  <ol>
+    <li><strong>Busco</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="highlighter-rouge">output_exons</code> (output of <strong>gffread</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Mode”</em>: <code class="highlighter-rouge">Transcriptome</code></li>
+        <li><em>“Lineage”</em>: <code class="highlighter-rouge">fungi_odb9</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How does the second annotation compare to the previous one? Did the ab-initio predictors training improve the results?</li>
+    <li>How do you explain these changes?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>The annotation looks much better: 253 complete single-copy instead of 40, 5,036 genes instead of 713.</li>
+      <li>Using ab-initio predictors allowed to find much more genes in regions where EST or protein alignments were not sufficient to predict genes.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="ab-initio-predictors-second-training">Ab-initio predictors second training</h1>
+
+<p>To get better results, we are going to perform a second training of SNAP and Augustus, and then run Maker for a third (final) time.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-train-snap-and-augustus"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Train SNAP and Augustus</h3>
+
+  <ol>
+    <li><strong>Train SNAP</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select the genome sequence from your history</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Maker annotation to use for training”</em>: <code class="highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, second run)</li>
+        <li><em>“Number of gene model to use for training”</em>: <code class="highlighter-rouge">"1000"</code></li>
+      </ul>
+    </li>
+    <li><strong>Train Augustus</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select the genome sequence from your history</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotation to use for training”</em>: <code class="highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, second run)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The Augustus training usually take around 2 hours to complete, to continue this tutorial without waiting for the result, you can use the file <code class="highlighter-rouge">augustus_training_2.tar.gz</code> imported from Zenodo.</p>
+
+<h1 id="third-last-maker-annotation-round">Third (last) Maker annotation round</h1>
+
+<h2 id="maker-2">Maker</h2>
+
+<p>Let’s run the final round of Maker, in the same way as we did for the second run.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-final-annotation-with-maker"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Final annotation with Maker</h3>
+
+  <ol>
+    <li><strong>Maker</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select the genome sequence from your history</li>
+        <li><em>“Organism type”</em>: <code class="highlighter-rouge">Eukaryotic</code></li>
+        <li><em>“Re-annotate using an existing Maker annotation”</em>: <code class="highlighter-rouge">Yes</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Previous Maker annotation”</em>: <code class="highlighter-rouge">evidences</code> (output of the previous second <strong>Maker</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run)</li>
+            <li><em>“Re-use ESTs”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Re-use alternate organism ESTs”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Re-use protein alignments”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Re-use repeats”</em>: <code class="highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+        <li>In <em>“EST evidences (for best results provide at least one of these)”</em>:
+          <ul>
+            <li><em>“Infer gene predictions directly from all ESTs”</em>: <code class="highlighter-rouge">No</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Protein evidences (for best results provide at least one of these)”</em>:
+          <ul>
+            <li><em>“Infer gene predictions directly from all protein alignments”</em>: <code class="highlighter-rouge">No</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Ab-initio gene prediction”</em>:
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SNAP model”</em>: <code class="highlighter-rouge">snap model</code> (output of <strong>Train SNAP</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Prediction with Augustus”</em>: <code class="highlighter-rouge">Run Augustus with a custom prediction model</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Augustus model”</em>: <code class="highlighter-rouge">augustus model</code> (output of <strong>Train Augustus</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li>In <em>“Repeat masking”</em>:
+          <ul>
+            <li><em>“Repeat library source”</em>: <code class="highlighter-rouge">Disable repeat masking (not recommended)</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="annotation-statistics-2">Annotation statistics</h2>
+
+<p>Do we get a better result from Maker after this third run? Let’s run the same tools as after the first and second run, and compare the results.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-get-annotation-statistics-2"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get annotation statistics</h3>
+
+  <ol>
+    <li><strong>Genome annotation statistics</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotation to analyse”</em>: <code class="highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> third run)</li>
+        <li><em>“Reference genome”</em>: <code class="highlighter-rouge">Use a genome from history</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Corresponding genome sequence”</em>: select the genome sequence from your history</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="busco-2">Busco</h2>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-extract-transcript-sequences-2"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract transcript sequences</h3>
+
+  <ol>
+    <li><strong>gffread</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input GFF3 or GTF feature file”</em>: <code class="highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> third run)</li>
+        <li><em>“Reference Genome”</em>: <code class="highlighter-rouge">select the genome sequence from your history</code>
+          <ul>
+            <li><em>“Select fasta outputs”</em>:
+              <ul>
+                <li><code class="highlighter-rouge">fasta file with spliced exons for each GFF transcript (-w exons.fa)</code></li>
+                <li><code class="highlighter-rouge">fasta file with spliced CDS for each GFF transcript (-x cds.fa)</code></li>
+                <li><code class="highlighter-rouge">protein fasta file with the translation of CDS for each record (-y pep.fa)</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“full GFF attribute preservation (all attributes are shown)”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“decode url encoded characters within attributes”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“warn about duplicate transcript IDs and other potential problems with the given GFF/GTF records”</em>: <code class="highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Now run BUSCO with the predicted transcript sequences:</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-run-busco-2"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run BUSCO</h3>
+
+  <ol>
+    <li><strong>Busco</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="highlighter-rouge">output_exons</code> (output of <strong>gffread</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Mode”</em>: <code class="highlighter-rouge">Transcriptome</code></li>
+        <li><em>“Lineage”</em>: <code class="highlighter-rouge">fungi_odb9</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How do you explain the evolution of the gene number?</li>
+    <li>How do the third annotation compare to the previous ones? Did the second ab-initio predictors training improve the results?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>We now get 4,767 genes instead of 5,036 after the second round. But you’ll notice that the average gene length have increased from 1,562 to 1,658. It means that in this third round, Maker was able to merge some genes that were considered separate beforehand.</li>
+      <li>The annotation looks better: BUSCO found 256 complete single-copy instead of 253, and genes are longer, and have more exons. It means Maker was able to predict genes with more complex structure.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Usually no more than two rounds of training is needed to get the best results from the ab-initio predictors. You can try to retrain Augustus and SNAP, but you will probably notice very few changes. We will keep the final annotation we obtained for the rest of this tutorial.</p>
+
+<h1 id="improving-gene-naming">Improving gene naming</h1>
+
+<p>If you look at the content of the <code class="highlighter-rouge">final annotation</code> dataset, you will notice that the gene names are long, complicated, and not very readable. That’s because Maker assign them automatic names based on the way it computed each gene model. We are now going to automatically assign more readable names.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-change-gene-names"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Change gene names</h3>
+
+  <ol>
+    <li><strong>Map annotation ids</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Maker annotation where to change ids”</em>: <code class="highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Prefix for ids”</em>: <code class="highlighter-rouge">"TEST_"</code></li>
+        <li><em>“Justify numeric ids to this length”</em>: <code class="highlighter-rouge">"6"</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-3"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>Genes will be renamed to look like: <code class="highlighter-rouge">TEST_001234</code>. You can replace <code class="highlighter-rouge">TEST_</code> by anything you like, usually an uppercase short prefix.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Look at the generated dataset, it should be much more readable, and ready for an official release.</p>
+
+<h1 id="visualising-the-results">Visualising the results</h1>
+
+<p>With Galaxy, you can visualize the annotation you have generated using JBrowse. This allows you to navigate along the chromosomes of the genome and see the structure of each predicted gene.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-visualize-annotations-in-jbrowse"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize annotations in JBrowse</h3>
+
+  <ol>
+    <li><strong>JBrowse</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Reference genome to display”</em>: <code class="highlighter-rouge">Use a genome from history</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference genome”</em>: select the genome sequence from your history</li>
+          </ul>
+        </li>
+        <li><em>“JBrowse-in-Galaxy Action”</em>: <code class="highlighter-rouge">New JBrowse Instance</code></li>
+        <li>In <em>“Track Group”</em>:
+          <ul>
+            <li>Click on <em>“Insert Track Group”</em>:</li>
+            <li>In <em>“1: Track Group”</em>:
+              <ul>
+                <li><em>“Track Category”</em>: <code class="highlighter-rouge">Maker annotation</code></li>
+                <li>In <em>“Annotation Track”</em>:
+                  <ul>
+                    <li>Click on <em>“Insert Annotation Track”</em>:</li>
+                    <li>In <em>“1: Annotation Track”</em>:
+                      <ul>
+                        <li><em>“Track Type”</em>: <code class="highlighter-rouge">GFF/GFF3/BED/GBK Features</code></li>
+                        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“GFF/GFF3/BED Track Data”</em>: select the final annotation of each <strong>Maker</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
+                        <li><em>“This is match/match_part data”</em>: <code class="highlighter-rouge">No</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Enable the three different tracks on the left side of JBrowse, then navigate along the genome and compare the three different annotations. You should see how Maker progressively produced more complex gene models.</p>
+
+<blockquote class="question">
+  <h3 id="question-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Navigate to the sequence named <code class="highlighter-rouge">NC_003421.2</code> (NCBI identifier for Chromosome III), between positions <code class="highlighter-rouge">41800</code> and <code class="highlighter-rouge">45200</code>.</p>
+  <figure id="figure-2"><img src="../../images/jbrowse_navigate.png" alt="JBrowse navigation" title="Navigating to the given sequence and positions." /><figcaption><span class="figcaption-prefix">Figure 2:</span> Navigating to the given sequence and positions.</figcaption></figure>
+  <ol>
+    <li>How did the annotation improved in this region after each Maker round?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>At the end of the first round, no gene model was predicted by Maker in this region, because not enough EST or protein could be aligned there.
+After the second round, Maker was able to predict a first gene model with no intron. Notice the name of the model beginning with <code class="highlighter-rouge">snap_masked</code>: it means that Maker used mainly a gene prediction from SNAP to construct this gene model.
+After the third round, there are two gene models, more complex as they contain introns. Training Augustus and SNAP allowed to refine the gene structures and to detect a new gene.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="more-visualisation">More visualisation</h2>
+
+<p>You might want to understand how a specific gene model was predicted by Maker. You can easily visualise the evidences used by Maker (EST ailgnements, protein aligments, ab-initio predictions, …) by using JBrowse too.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-visualize-evidences-in-jbrowse"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize evidences in JBrowse</h3>
+
+  <ol>
+    <li><strong>JBrowse</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Reference genome to display”</em>: <code class="highlighter-rouge">Use a genome from history</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference genome”</em>: select the genome sequence from your history</li>
+          </ul>
+        </li>
+        <li><em>“JBrowse-in-Galaxy Action”</em>: <code class="highlighter-rouge">Update existing JBrowse Instance</code></li>
+        <li><em>“Previous JBrowse Instance”</em>: select the result from the previous <strong>JBrowse</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
+        <li>In <em>“Track Group”</em>:
+          <ul>
+            <li>Click on <em>“Insert Track Group”</em>:</li>
+            <li>In <em>“1: Track Group”</em>:
+              <ul>
+                <li><em>“Track Category”</em>: <code class="highlighter-rouge">Maker evidences</code></li>
+                <li>In <em>“Annotation Track”</em>:
+                  <ul>
+                    <li>Click on <em>“Insert Annotation Track”</em>:</li>
+                    <li>In <em>“1: Annotation Track”</em>:
+                      <ul>
+                        <li><em>“Track Type”</em>: <code class="highlighter-rouge">GFF/GFF3/BED/GBK Features</code></li>
+                        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“GFF/GFF3/BED Track Data”</em>: select the “evidences” output of each <strong>Maker</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
+                        <li><em>“This is match/match_part data”</em>: <code class="highlighter-rouge">Yes</code>
+                          <ul>
+                            <li><em>“Match Part Feature Type”</em>: Leave empty</li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>You will now see three new tracks displaying all the evidences used by Maker to generate consensus gene models.</p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>Congratulations, you finished this tutorial! You learned how to annotate an eukaryotic genome using Maker, how to evaluate the quality of the annotation, and how to visualize it using the JBrowse genome browser.</p>
+
+<h1 id="whats-next">What’s next?</h1>
+
+<p>After generating your annotation, you will probably want to automatically assign functional annotation to each predicted gene model. You can do it by using Blast, InterProScan, or Blast2GO for example.</p>
+
+<p>An automatic annotation of an eukaryotic genome is rarely perfect. If you inspect some predicted genes, you will probably find some mistakes made by Maker, e.g. wrong exon/intron limits, splitted genes, or merged genes. Setting up a manual curation project using <a href="http://genomearchitect.org/">Apollo</a> helps a lot to manually fix these errors.</p>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+            <ul>
+                
+                <li>Maker allows to annotate a eukaryotic genome.</li>
+                
+                <li>BUSCO and JBrowse allow to inspect the quality of an annotation.</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+        <hr>
+        <br>
+
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Genome annotation with Maker (Genome Annotation)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Genome annotation with Maker (Genome Annotation)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anthony Bretaudeau)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>
