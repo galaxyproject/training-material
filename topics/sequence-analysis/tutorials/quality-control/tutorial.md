@@ -300,38 +300,39 @@ The sequences should be treated to reduce bias in downstream analyis. In general
     - beginning/end of sequence
     - removing adapters
 
-To accomplish this task we use the [Trim Galore!](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/) tool. This tool is a wrapper for the [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) tool that enhances sequence quality by automating adapter trimming as well as quality control.
+To accomplish this task we use [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) tool that enhances sequence quality by automating adapter trimming as well as quality control.
 
 > ### {% icon hands_on %} Hands-on: Improvement of sequence quality
 >
-> 1. Run **Trim Galore!** {% icon tool %} with the following parameters
->    - *"Is this library paired- or single-end?"*: `Single-end`
+> 1. Run **Cutadapt** {% icon tool %} with the following parameters
+>    - *"Single-end or Paired-end reads?"*: `Single-end`
 >       - {% icon param-file %} *"Reads in FASTQ format"*: `reads_1` (Input dataset)
 >
 >          > ### {% icon tip %} Tip: Files not selectable?
 >          > If your FASTQ files cannot be selected, you might check whether their format is FASTQ with Sanger-scaled quality values (`fastqsanger`). You can edit the data type by clicking on the pencil symbol.
 >          {: .tip}
 >
->       - *"Adapter sequence to be trimmed"*: `Automatic detection`
+>       - In *Read 1 Options*
 >
->          If you know which adapter sequence was used during library preparation, provide its sequence. Otherwise use the option for automatic detection and trimming of adapter sequences.
+>          If you know which adapter sequences were used during library preparation, provide their sequences there.
 >
->    - *"Trim Galore! advanced settings"*: `Full parameter list`
->       - *"Trim low-quality ends from reads in addition to adapter removal (Enter phred quality score threshold)"*: 20
->         
->          To time low-quality ends (below 20) from reads in addition to adapter removal
+>    - In *"Adapter Options"*
+>       - *"Minimum overlap length"*: `3`
 >
->       - *"Overlap with adapter sequence required to trim a sequence"*: `5`
->   
->          The default value "1" is too stringent, and on average 25% of reads will be trimmed. Please set it to 5 bases to loosen the required overlap
+>    - In *"Filter Options"*
+>       - *"Minimum length"*: `20`
 >
->       - *"Discard reads that became shorter than length N"*: `20`
+>           To remove reads shorter than 20 bp
 >
->          To remove reads shorter than 20 bp
+>    - In *"Filter Options"*
+>       - *"Quality cutoff"*: `20`
 >
->       - *"Generate a report file"*: `Yes`
+>           To trim low-quality 3' ends (below 20) from reads in addition to adapter removal
 >
-> 2. Inspect the generated txt file (`report file`)
+>    - In *"Output Options"*
+>       - *"Report"*: `Yes`
+>
+> 2. Inspect the generated txt file (`Report`)
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -340,9 +341,9 @@ To accomplish this task we use the [Trim Galore!](https://www.bioinformatics.bab
 >    > 3. How many sequence pairs have been removed because they were too short?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. 251 reads with adapters
->    > > 2. 44,164 bp (1.3%) (`Quality-trimmed:`)
->    > > 3. 334 sequences (last line of the file)
+>    > > 1. 0 reads with adapters
+>    > > 2. 44,164 bp (1.2%) (`Quality-trimmed:`)
+>    > > 3. 322 sequences
 >    > {: .solution }
 >    {: .question}
 > 
@@ -437,7 +438,7 @@ Let's first have a look at the quality of our reads!
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > 1. The quality of the sequences seems worse for the reverse reads than for the forward reads: lower mean quality of the sequences and stronger decrease at the end (mean value below 28). Lower-quality reverse reads .
->    > > 2. We should trim the end of the sequences and filter them with **Trim Galore!** {% icon tool %}
+>    > > 2. We should trim the end of the sequences and filter them with **Cutadapt** {% icon tool %}
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -447,44 +448,36 @@ Let's first have a look at the quality of our reads!
 It is usual that the quality of the sequences is worse for the reverse than for the forward reads. It makes it even important to treat the forward and reverse reads together.
 
 > ### {% icon hands_on %} Hands-on: Assessing the quality of paired-end dat
-> 1. **Trim Galore!** {% icon tool %} with the following parameters
->    - *"Is this library paired- or single-end?"*: `Paired-end`
->       - {% icon param-file %} *"Reads in FASTQ format"*: `reads_1` (Input dataset)
->       - {% icon param-file %} *"Reads in FASTQ format"*: `reads_2` (Input dataset)
+> 1. **Cutadapt** {% icon tool %} with the following parameters
+>    - *"Single-end or Paired-end reads?"*: `Paired-end`
+>       - {% icon param-file %} *"FASTQ/A file #1"*: `reads_1` (Input dataset)
+>       - {% icon param-file %} *"FASTQ/A file #2"*: `reads_2` (Input dataset)
 >
->            The order is important here!
+>          The order is important here!
 >
->       - *"Adapter sequence to be trimmed"*: `Automatic detection`
+>       - In *Read 1 Options* or *Read 2 Options*
 >
->          If you know which adapter sequence was used during library preparation, provide its sequence. Otherwise use the option for automatic detection and trimming of adapter sequences.
+>          If you know which adapter sequences were used during library preparation, provide their sequences there.
 >
->    - *"Trim Galore! advanced settings"*: `Full parameter list`
->       - *"Trim low-quality ends from reads in addition to adapter removal (Enter phred quality score threshold)"*: 20
->         
->          To trom low-quality ends (below 20) from reads in addition to adapter removal
+>    - In *"Adapter Options"*
+>       - *"Minimum overlap length"*: `3`
+>    - In *"Filter Options"*
+>       - *"Minimum length"*: `20`
+>    - In *"Filter Options"*
+>       - *"Quality cutoff"*: `20`
+>    - In *"Output Options"*
+>       - *"Report"*: `Yes`
 >
->       - *"Overlap with adapter sequence required to trim a sequence"*: `5`
->   
->          The default value "1" is too stringent, and on average 25% of reads will be trimmed. Please set it to 5 bases to loosen the required overlap
->
->       - *"Discard reads that became shorter than length N"*: `20`
->
->          To remove reads shorter than 20 bp
->
->       - *"Generate a report file"*: `Yes`
->
-> 2. Inspect the generated txt file (`report file`)
+> 2. Inspect the generated txt file (`Report`)
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. How many reads have been found with adapters for the both files?
->    > 2. How many basepairs has been removed from the reads because of bad quality?
->    > 3. How many sequence pairs have been removed because they were too short?
+>    > 1. How many basepairs has been removed from the reads because of bad quality?
+>    > 2. How many sequence pairs have been removed because they were too short?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. 251 reads with adapters for the forward reads (as seen before), and 229 for the reverse reads
->    > > 2. 44,164 bp (1.3%) (`Quality-trimmed:`) for the forward reads and 138,638 bp for the reverse reads.
->    > > 3. 1392 sequences have been removed because at least one read was shorter than the length cutoff (334 when only the forward reads were analyzed).
+>    > > 1. 44,164 bp (`Quality-trimmed:`) for the forward reads and 138,638 bp for the reverse reads.
+>    > > 2. 1,376 sequences have been removed because at least one read was shorter than the length cutoff (334 when only the forward reads were analyzed).
 >    > {: .solution }
 >    {: .question}
 {: .hands_on}
@@ -495,4 +488,4 @@ It is usual that the quality of the sequences is worse for the reverse than for 
 In this tutorial we checked the quality of two FASTQ files to ensure that their data looks good before inferring any further information. This step is the usual first step for analyses such as RNA-Seq, ChIP-Seq, or any other OMIC analysis relying on NGS data. Quality control steps are similar for any type of sequencing data:
 
 - Quality assessment with a tool like **FastQC** {% icon tool %}
-- Trimming and filtering with a tool like **Trim Galore!** {% icon tool %}
+- Trimming and filtering with a tool like **Cutadapt** {% icon tool %}
