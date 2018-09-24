@@ -3,7 +3,6 @@ layout: tutorial_hands_on
 title: LC-MS - Data Import
 name: lcms-data-import
 zenodo_link: 'https://doi.org/10.5281/zenodo.1346742'
-enable: false
 questions:
     - How to import the "Raw" data in "DataSet Collection?
     - How to import the SampleMetadata Sheet?
@@ -47,7 +46,7 @@ For the older of us, the Workflow4Metabolomics LC-MS workflow used require some 
 
 But now, the W4M team recommend to import the files and process the first steps individually.
 
-See the explanation below: 
+See the explanation below:
 
 > ### {% icon warning %} The zip file: the old fashion, not recommended system
 > Files are nested in folders for their groups within a zip file
