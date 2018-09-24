@@ -29,7 +29,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-During sequencing, the sequencer is sequencing each fragment of the library and generating a short sequence, also called a **read**: a succession of nucleotides.
+During sequencing, the nucleotide bases in a DNA or RNA sample (library) are determined by the sequencer. For each fragment in the library, a short sequence is generated, also called a **read**, which is simply a succession of nucleotides
 
 Modern sequencing technologies can generate a massive number of sequence reads in a single experiment. However, no sequencing technology is perfect, and each instrument will generate different types and amounts of error, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. 
 
@@ -71,7 +71,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >
 {: .hands_on}
 
-We just imported a file into Galaxy. This file is similar the data we could get directly from a sequencing facility: a FASTQ file.
+We just imported a file into Galaxy. This file is similar the data we could get directly from a sequencing facility: a [FASTQ file](https://en.wikipedia.org/wiki/FASTQ_format).
 
 > ### {% icon hands_on %} Hands-on: Inspect the FASTQ file
 >
@@ -103,7 +103,7 @@ It means that the fragment named `SRR031716.1` corresponds to the DNA sequence `
 
 But what does this quality mean?
 
-The quality for each sequence is a string of characters, one for each base of the nucleic sequence, used to characterize the probability of mis-indentification of each base. The score is encoded using the ASCII character table (with some historical differences):
+The quality for each sequence is a string of characters, one for each base of the nucleic sequence, used to characterize the probability of mis-indentification of each base. The score is encoded using the ASCII character table (with [some historical differences](https://en.wikipedia.org/wiki/FASTQ_format#Encoding)):
 
 ```
  SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS.....................................................  Sanger
@@ -146,6 +146,10 @@ Phred Quality Score | Probability of incorrect base call | Base call accuracy
 > {: .solution }
 {: .question}
 
+> ### {% icon comment %} Comment
+> The current lllumina (1.8+) uses Sanger format (Phred+33). If you are working with older datasets you may encounter the older scoring schemes. **FastQC** {% icon tool %}, the tool we will use in the next step, can be used to try to determine what type of quality encoding is used (through assessing the range of Phred values seen in the FASTQ). 
+{: .comment}
+
 When looking at the file in Galaxy, it looks like most the nucleotides have a high score (`I` corresponding to a score 40). Is it true for all sequences? And along the full sequence length?
 
 # Assess the Read Quality
@@ -169,12 +173,14 @@ On the x-axis are the base position in the read, and on the y-axis quality score
 
 > ### {% icon question %} Questions
 >
-> 1. How is the mean score changing along the sequence?
-> 2. Is this tendency represent all sequences?
+> 1. Which Phred encoding is used in the FASTQ file for these sequences?
+> 2. How is the mean score changing along the sequence?
+> 3. Is this tendency represent all sequences?
 >
 > > ### {% icon solution %} Solution
-> > 1. The mean score over the sequence is droping at the end of the sequences. It is usual: the sequencers are incorporating more errored nucleotides at the end. But the score stays good: over 28.
-> > 2. The box plots are getting wider at the end of the sequences. It means a lot of sequences have their score dropping at the end of the sequence. At after 31 nucleotides, more than 10% of the sequences have scores below 20.
+> > 1. The Phred score are encoded using `Sanger / Illumina 1.9` (`Encoding` in the top table)
+> > 2. The mean score over the sequence is droping at the end of the sequences. It is usual: the sequencers are incorporating more errored nucleotides at the end. But the score stays good: over 28.
+> > 3. The box plots are getting wider at the end of the sequences. It means a lot of sequences have their score dropping at the end of the sequence. At after 31 nucleotides, more than 10% of the sequences have scores below 20.
 > >
 > {: .solution }
 {: .question}
