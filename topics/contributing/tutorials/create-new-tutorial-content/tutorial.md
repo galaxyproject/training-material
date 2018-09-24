@@ -224,9 +224,9 @@ The generated tutorial is structured with:
 
 > ### {% icon comment %} Writing mathematical expressions
 >
-> Mathematical expressions can be written in LaTeX, and are automtaically rendered with [MathJax](https://www.mathjax.org/).
+> Mathematical expressions can be written in LaTeX, and are automatically rendered with [MathJax](https://www.mathjax.org/).
 >
-> Surround your math expression with two `$` signs (like in LaTeX math blocks):
+> Surround your math expression with two `$` signs on each side (like in LaTeX math blocks):
 >
 > - inline expressions, *e.g.* `$$ 5 + 5 $$` will be rendered as $$ 5 + 5 $$
 > - block expressions, *e.g.* `$$ 5 + 5 $$` will be rendered in its own line block as
@@ -357,7 +357,7 @@ For consistency please use:
 
 - {% raw %}`{% icon hands_on %}`{% endraw %} emoji to define that is an hands-on
 - Short imperative sentences to make it easy to identify the tasks
-- Name of the tool in bold with the {% raw %}`{% icon tool %}`{% endraw %} emoji to make it easy to identify a Galaxy tool
+- Name of the tool in bold followed by {% raw %}`{% icon tool %}`{% endraw %} emoji to make it easy to identify a Galaxy tool
 - Parameters for the tool as a sublist
 
 This will be rendered like:
