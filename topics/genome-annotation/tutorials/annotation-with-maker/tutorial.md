@@ -84,7 +84,7 @@ To annotate a genome using Maker, you need the following files:
 > 3. Rename the datasets
 > 4. Check that the datatype for `augustus_training_1.tar.gz` an `augustus_training_2.tar.gz` are set to `augustus`
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% include snippets/change_datatype.md datatype="augustus" %}
 >
 {: .hands_on}
 
@@ -489,8 +489,8 @@ Now run BUSCO with the predicted transcript sequences:
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. We now get 4,767 genes instead of 5,036 after the preivous round. But you'll notice that the average gene length have increased from 1,562 to 1,658. It means that in this third round, Maker was able to merge some genes that were considered separate beforehand.
-> > 2. The annotation looks a little better: BUSCO found 256 complete single-copy instead of 253, 5,036 genes instead of 713. Genes are also longer, and have more exons, which means Maker was able to predict genes with more complex structure.
+> > 1. We now get 4,767 genes instead of 5,036 after the second round. But you'll notice that the average gene length have increased from 1,562 to 1,658. It means that in this third round, Maker was able to merge some genes that were considered separate beforehand.
+> > 2. The annotation looks better: BUSCO found 256 complete single-copy instead of 253, and genes are longer, and have more exons. It means Maker was able to predict genes with more complex structure.
 > >
 > {: .solution}
 >
@@ -506,12 +506,12 @@ If you look at the content of the `final annotation` dataset, you will notice th
 >
 > 1. **Map annotation ids** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Maker annotation where to change ids"*: `final annotation` (output of **Maker** {% icon tool %})
->    - *"Prefix for ids"*: `"TEST"`
+>    - *"Prefix for ids"*: `"TEST_"`
 >    - *"Justify numeric ids to this length"*: `"6"`
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > Genes will be renamed to look like: `TEST001234`. You can replace `TEST` by anything you like, usually an uppercase short prefix.
+>    > Genes will be renamed to look like: `TEST_001234`. You can replace `TEST_` by anything you like, usually an uppercase short prefix.
 >    {: .comment}
 >
 {: .hands_on}
