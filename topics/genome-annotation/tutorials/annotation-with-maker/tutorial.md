@@ -223,7 +223,7 @@ Just as we did for the genome at the beginning, we can use BUSCO to check the qu
 
 First we need to compute all the transcript sequences from the Maker annotation.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Extract transcript sequences
 >
 > 1. **gffread** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input GFF3 or GTF feature file"*: `final annotation` (output of **Maker** {% icon tool %})
@@ -238,7 +238,7 @@ First we need to compute all the transcript sequences from the Maker annotation.
 
 Now run BUSCO with the predicted transcript sequences:
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Run BUSCO
 >
 > 1. **Busco** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `output_exons` (output of **gffread** {% icon tool %})
@@ -275,7 +275,7 @@ Maker is able to use the EST and protein evidences, and to combine them with the
 
 We will use two of the most widely used ab-initio predictors: SNAP and Augustus. Before using it within Maker, we need to train them with the first annotation draft we produced in the previous steps. We know the quality of this draft is not perfect, but only the best scoring genes (ie the ones having the strongest evidences) will be retained to train the predictors.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Train SNAP
 >
 > 1. **Train SNAP** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select the genome sequence from your history
@@ -286,7 +286,7 @@ We will use two of the most widely used ab-initio predictors: SNAP and Augustus.
 
 Augustus is trained in a very similar way.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Train Augustus
 >
 > 1. **Train Augustus** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select the genome sequence from your history
@@ -347,7 +347,7 @@ Do we get a better result from Maker after this second run? Let's run the same t
 
 ## Busco
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Extract transcript sequences
 >
 > 1. **gffread** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input GFF3 or GTF feature file"*: `final annotation` (output of **Maker** {% icon tool %} second run)
@@ -362,7 +362,7 @@ Do we get a better result from Maker after this second run? Let's run the same t
 
 Now run BUSCO with the predicted transcript sequences:
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Run BUSCO
 >
 > 1. **Busco** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `output_exons` (output of **gffread** {% icon tool %})
@@ -390,18 +390,14 @@ Now run BUSCO with the predicted transcript sequences:
 
 To get better results, we are going to perform a second training of SNAP and Augustus, and then run Maker for a third (final) time.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Train SNAP and Augustus
 >
 > 1. **Train SNAP** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select the genome sequence from your history
 >    - {% icon param-file %} *"Maker annotation to use for training"*: `final annotation` (output of **Maker** {% icon tool %}, second run)
 >    - *"Number of gene model to use for training"*: `"1000"`
 >
-{: .hands_on}
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Train Augustus** {% icon tool %} with the following parameters:
+> 2. **Train Augustus** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select the genome sequence from your history
 >    - {% icon param-file %} *"Annotation to use for training"*: `final annotation` (output of **Maker** {% icon tool %}, second run)
 >
@@ -456,7 +452,7 @@ Do we get a better result from Maker after this third run? Let's run the same to
 
 ## Busco
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Extract transcript sequences
 >
 > 1. **gffread** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input GFF3 or GTF feature file"*: `final annotation` (output of **Maker** {% icon tool %} third run)
@@ -473,7 +469,7 @@ Do we get a better result from Maker after this third run? Let's run the same to
 
 Now run BUSCO with the predicted transcript sequences:
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Run BUSCO
 >
 > 1. **Busco** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `output_exons` (output of **gffread** {% icon tool %})
@@ -502,7 +498,7 @@ Usually no more than two rounds of training is needed to get the best results fr
 
 If you look at the content of the `final annotation` dataset, you will notice that the gene names are long, complicated, and not very readable. That's because Maker assign them automatic names based on the way it computed each gene model. We are now going to automatically assign more readable names.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Change gene names
 >
 > 1. **Map annotation ids** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Maker annotation where to change ids"*: `final annotation` (output of **Maker** {% icon tool %})
@@ -523,7 +519,7 @@ Look at the generated dataset, it should be much more readable, and ready for an
 
 With Galaxy, you can visualize the annotation you have generated using JBrowse. This allows you to navigate along the chromosomes of the genome and see the structure of each predicted gene.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Visualize annotations in JBrowse
 >
 > 1. **JBrowse** {% icon tool %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
@@ -564,7 +560,7 @@ Enable the three different tracks on the left side of JBrowse, then navigate alo
 
 You might want to understand how a specific gene model was predicted by Maker. You can easily visualise the evidences used by Maker (EST ailgnements, protein aligments, ab-initio predictions, ...) by using JBrowse too.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Visualize evidences in JBrowse
 >
 > 1. **JBrowse** {% icon tool %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
