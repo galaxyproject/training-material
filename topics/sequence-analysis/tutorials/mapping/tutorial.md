@@ -87,7 +87,9 @@ Read mapping is the process to align the reads on a reference genomes. A mapper 
 
 ![Explanation of mapping](../../images/mapping/mapping.png "Illustration of the mapping process. The input consists of a set of reads and a reference genome. It the middle, it gives the results of mapping: the locations of the reads on the reference genome. The first read is aligned at position 100 and the alignment has two mismatches. The second read is aligned at position 114. It is a local alignment with clippings on the left and on the right. The third read is aligned at position 123. It consists of a 2-base insertion and a 1-base deletion.")
 
-{% include topics/sequence-analysis/tutorials/mapping/ref_genome_explanation.md answer_3="This data comes from ChIP-seq of mices, so we will use mm10 (*Mus musculus*)"%}
+We need a reference genome to map the reads on.
+
+{% include topics/sequence-analysis/tutorials/mapping/ref_genome_explanation.md answer_3="This data comes from ChIP-seq of mices, so we will use mm10 (*Mus musculus*)."%}
 
 Currently, there are over 60 different mappers, and their number is growing. In this tutorial, we will use Bowtie2 in order to map sequencing reads from 
 
