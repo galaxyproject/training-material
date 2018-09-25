@@ -20,260 +20,137 @@ contributors:
 # Introduction
 {:.no_toc}
 
-This tutorial will explain the data importation, the first step before analyze your data with the Workflow4Metabolomics Galaxy Instance.
+**TODO** Explain why metabolomics, what do you want to do
 
-> ### {% icon comment %} Comments
-> Note that this tutorial is written for the new version of the xcms wrapper for xcms 3.0
->
-> Those wrappers aren't yet available in the [workflow4metabolomics](https://galaxy.workflow4metabolomics.org/) production instance nor in [usegalaxy.eu](https://usegalaxy.eu/)
->
-> We hope to release them in September 2018.
-{: .comment}
+To illustrate this approach, we will use data from [Thévenot et al, 2015](https://pubs.acs.org/doi/10.1021/acs.jproteome.5b00354). The objectives of this paper was to analyze the inﬂuence of age, body mass index, and gender on the urine metabolome. To do that, the authors collected samples from 183 employees from CEA and did 
+LC-HRMS LTQ-Orbitrap (negative ionization mode) (**TODO** explain the terms).
+
+To analyze these data, we will the follow the [LC-MS workflow](http://workflow4metabolomics.org/the-lc-ms-workflow), developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/). **TODO** Introduce with one or two sentence the workflow (explanation of the meaning of LC-MS, the big steps, etc). This workflow take as input **TODO** and perform several steps: pre-processing, statistics, and annotation.
 
 > ### Agenda
 >
-> In this tutorial, we will deal with:
+> In this tutorial, we will go into each of the steps:
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
 
+# Data upload
 
-# Individual files VS zip file
+Until recently, the LC-MS workflow required some zip files (with files nested in folders) as input. But now, the W4M team recommend to import individually the files into dataset collections and process them in parallel. But, we will see that the **xcms.findChromPeaks** outputs have to be merged (**Merger**) before using **xcms.groupChromPeaks** and a sampleMetadata file must be used to set the groups (but you need one for some further steps anyway).
 
-For the older of us, the Workflow4Metabolomics LC-MS workflow used require some zip file as input.
+The data are available in [Zenodo]({{ page.zenodo_link }}). It is composed of 4 datasets among the 240 (**TODO**: why 240 for 183 employees?) from the whole Sacurine dataset.
 
-But now, the W4M team recommend to import the files and process the first steps individually.
-
-See the explanation below:
-
-> ### {% icon warning %} The zip file: the old fashion, not recommended system
-> Files are nested in folders for their groups within a zip file
+> ### {% icon hands_on %} Hands-on: Data upload
 >
-> - PROS:
->   - The folders set the group of the files for **xcms.groupChromPeaks**
->   - Only one import and one step  
-> - CONS:
->   - **xcms.findChromPeaks** is limited to 6 CPUs
->   - The files aren't integrated into the history and can't be visualized
+> 1. Create a new history for this RNA-seq exercise
+> 2. Import the 4 mzXML files from [Zenodo](https://doi.org/10.5281/zenodo.1185122) or a data library inside a collection:
 >
-> ![Zip method](../../images/tutorial-lcms-data-single-vs-zip-zip.png)
+>    ```
+>    https://zenodo.org/record/1346742/files/Blanc12.mzXML
+>    https://zenodo.org/record/1346742/files/Blanc17.mzXML
+>    https://zenodo.org/record/1346742/files/HU_neg_099.mzXML
+>    https://zenodo.org/record/1346742/files/HU_neg_178.mzXML
+>    ```
 >
-{: .warning-box}
-
-> ### {% icon tip %} The single files system: recommended
-> Files are uploaded individually (grouped in Dataset collection) and processed in parallel
+>    {% include snippets/import_via_link.md collection=true %}
+>    {% include snippets/import_from_data_library.md %}
 >
-> - PROS:
->   - One xcmsSet job is launch for each input file. It is highly parallelizable
->   - The files are completely integrated in Galaxy and can be visualized
->   - A better transparency
-> - CONS:
->   - The **xcms.findChromPeaks** outputs have to be merged (**Merger**) before using **xcms.groupChromPeaks**
->   - A sampleMetadata file must be used to set the groups (but you need one for some further steps anyway)
+>    > ### {% icon comment %} Format of the files
+>    > The files there are in mzxml format (**TODO**: explain the format). The other possible formats for metabolomics data are: mzml, mzdata, netcdf (**TODO**: explain the differences with the previous format)
+>    {: .comment}
 >
-> ![Single method](../../images/tutorial-lcms-data-single-vs-zip-single.png)
+>    > ### {% icon comment %} Files bigger than 2Go
+>    > If your files are bigger than 2Go, you need to import them into Galaxy using the FTP method.
+>       {: .comment}
 >
-{: .tip}
-
-
-# Obtaining data
-
-In this tutorial we use 4 datasets from the Sacurine study
-
-> ### {% icon tip %} Background: The Sacurine dataset
-> Summary:
-> - **Objective**: inﬂuence of age, body mass index, and gender on the urine metabolome
-> - **Cohort**: 183 employees from CEA
-> - **LC-HRMS**: LTQ-Orbitrap (negative ionization mode)
+>    The aim of the Dataset Collections is to use them as a sort of Dataset to not have to feed the tools with numerous individual datasets. If you miss the build step, don't panic.
 >
-> For further informations, please see this [dedicated page](http://workflow4metabolomics.org/dataset_sacurine) and the [publication](https://pubs.acs.org/doi/10.1021/acs.jproteome.5b00354)
-{: .tip}
-
-> ### {% icon hands_on %} Hands-on: Obtaining our data
+>    {% include snippets/create_dataset_collection.md %}
+> 
+> 3. Click on the collection to inspect the nested datasets
+> 4. Check that the datatype of the files in the collection is `mzxml`
 >
-> The Toy Dataset is available in Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1346742.svg)](https://doi.org/10.5281/zenodo.1346742)
+>    If the datatype is not `mzxml`, please change the datatype to `mzxml`
 >
-> It is composed of 4 datasets among the 240 from the whole [Sacurine dataset ](http://workflow4metabolomics.org/dataset_sacurine)
->
-> Download all of them
-{: .hands_on}
-
-# Import the "Raw" data in "DataSet Collection"
-
-> ### {% icon tip %} Tip: Format
-> The format (and datatype) allowed
-> * mzxml
-> * mzml
-> * mzdata
-> * netcdf
-{: .tip}
->
-> ### {% icon warning %} Warning: Be careful about ...
-> We will assume that each individual file is **less than 2Go**.
->
-> Otherwise, you will have the use the FTP method which will be describe **soon** in an other tutorial.
-{: .warning-box}
->
-> ### {% icon hands_on %} Hands-on:
->
-> 1. Click on the **Upload button** at top-right of the tool panel.
-> > ![Click on the Upload button](../../images/tutorial-lcms-data-import-raw-01.png)
->
-> 2. Click on the **Collection** tab in the upload window.
-> > ![Click on the Collection tab](../../images/tutorial-lcms-data-import-raw-02.png)
->
-> 3. Drag and Drop your "raw data" .mzXML within the upload window.
-> > /!\ You should get displayed in yellow "Drop files here"
-> > ![Drag and Drop](../../images/tutorial-lcms-data-import-raw-03.png)
->
->    > ### {% icon warning %} Warning: Be careful about ...
->    > Do not include your SampleMetadata file, just raw files
->    {: .warning-box}
->
-> 4. [optional] Select the datatype in the **File Type** drop list
->
->    > ### {% icon tip %} Tip: A tip
->    > To save time during the upload phase, please select the correct "File Type".
->    > That way Galaxy will not have to guess the type for each file
->    {: .tip}
-> > ![Select the datatype](../../images/tutorial-lcms-data-import-raw-04.png)
->
-> 5. **Start** the upload itself
-> > ![Start button](../../images/tutorial-lcms-data-import-raw-05.png)
->
-> 6. Please **wait**
-> > You can observe the Status bar and the dataset which are arriving in the history panel in background.
-> >
-> > This step can take hours depending of your Internet connection and the load of the W4M server.
-> > ![Upload in progress](../../images/tutorial-lcms-data-import-raw-06.png)
->
-> 7. As soon as the **Build** button is available, click on it
-> > ![Build button](../../images/tutorial-lcms-data-import-raw-07.png)
->
-> 8. Name your future Dataset Collection
-> > ![Name](../../images/tutorial-lcms-data-import-raw-08.png)
->
-> 9. Done
-> > As you can see the original dataset have been hidden to make room for the Dataset Collection with its 4 individuals datasets.
-> >
-> > The aim of the Dataset Collections is to use them as a sort of Dataset to not have to feed the tools with numerous individual datasets.
-> > ![Dataset Collections in the history](../../images/tutorial-lcms-data-import-raw-09.png)
-> > If you click on the Dataset Collection name, the nested datasets are shown.
-> > ![nested datasets](../../images/tutorial-lcms-data-import-raw-10.png)
+>    {% include snippets/change_datatype.md datatype="mzxml" %}
 >
 {: .hands_on}
 
-> ### {% icon tip %} Tip: A tip
->
-> If you miss the build step, don't panic.
->
-> Because for example, the upload phase was too long.
->
->    > ### {% icon solution %} Solution
->    >
->    > You can still build a Dataset Collection:
->    > 1. From your history panel
->    > 2. Click on the Tick button above your Datasets
->    > 3. Choose in the list **Build Dataset List**
->    > 4. Name your future Dataset Collection
->    > 5. Done!
->    >
->    {: .solution}
-{: .tip}
+We also need to import the metadata file. This file contains for each of your raw files their metadata:
+- class which will be used during the preprocessing steps
+- number of batch which will be useful for a batch correction step
+- different experimental conditions which can be used for the statistics
 
-# Import the SampleMetadata sheet
+samples | class | sampleType | subset | full | injectionOrder | batch | osmolality | sampling | age | bmi | gender
+--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+HU_neg_099 | bio | sample | 1 | 1 | 83 | ne1 | 923 | 4 | 23 | 21.3 | Male
+HU_neg_178 | bio | sample | 0 | 1 | 153 | ne1 | 958 | 7 | 33 | 26.57 | Female
+HU_neg_199 | bio | sample | 1 | 1 | 1 | ne2 | 945 | 9 | 55 | 25.3 | Female
+Blanc12 | blank | blank | 1 | 1 | 120 | ne1 | NA | NA | NA | NA | NA
+Blanc17 | blank | blank | 0 | 1 | 173 | ne1 | NA | NA | NA | NA | NA
 
-> ### {% icon tip %} The Sample Metadata sheet
->
-> This file contains for each of your raw files their metadata.
-> - class which will be used during the preprocessing steps
-> - number of batch which will be useful for a batch correction step
-> - and different experimental conditions which can be used for the statistics
->
-> > samples | class | sampleType | subset | full | injectionOrder | batch | osmolality | sampling | age | bmi | gender
-> > --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
-> > HU_neg_099 | bio | sample | 1 | 1 | 83 | ne1 | 923 | 4 | 23 | 21.3 | Male
-> > HU_neg_178 | bio | sample | 0 | 1 | 153 | ne1 | 958 | 7 | 33 | 26.57 | Female
-> > HU_neg_199 | bio | sample | 1 | 1 | 1 | ne2 | 945 | 9 | 55 | 25.3 | Female
-> > Blanc12 | blank | blank | 1 | 1 | 120 | ne1 | NA | NA | NA | NA | NA
-> > Blanc17 | blank | blank | 0 | 1 | 173 | ne1 | NA | NA | NA | NA | NA
->
->    > ### {% icon warning %} Warning: Be careful about ...
->    > Microsoft Office Excel files are not allowed.
->    > Only file based on text are accepted: .tsv, .csv, .tab, .txt, …
->    {: .warning-box}
->
-{: .tip}
+> ### {% icon comment %} Warning: Be careful about ...
+> Microsoft Office Excel files are not allowed.
+> Only file based on text are accepted: .tsv, .csv, .tab, .txt, …
+{: .comment}
 
-> ### {% icon hands_on %} Hands-on:
+> ### {% icon hands_on %} Hands-on: Metadata upload
 >
-> 1. Click on the **Upload button** at top-right of the tool panel.
-> > ![Click on the Upload button](../../images/tutorial-lcms-data-import-raw-01.png)
+> 1. Import the metadata file from [Zenodo](https://doi.org/10.5281/zenodo.1185122) or a data library inside a collection
 >
-> 2. This time we will stay on the **Regular** tab
-> > It doesn't need to be nested in a Dataset Collection.
-> > ![Regular tab](../../images/tutorial-lcms-data-import-samplemetadata-01.png)
+>       ```
+>       https://zenodo.org/record/1346742/files/sacuri_sampleMetadata.tsv
+>       ```
 >
-> 3. Drag and Drop your SampleMetadata file .tsv (in my case) within the upload window.
-> > /!\ You should get displayed in yellow "Drop files here"
-> > ![Drag and Drop](../../images/tutorial-lcms-data-import-samplemetadata-02.png)
->
-> 4. **Start**
-> > ![Start button](../../images/tutorial-lcms-data-import-samplemetadata-03.png)
->
-> 5. Done
-> > You can now see your SampleMetadata in the history panel.
-> > ![SampleMetadata in the history](../../images/tutorial-lcms-data-import-samplemetadata-04.png)
+>       {% include snippets/import_via_link.md%}
+>       {% include snippets/import_from_data_library.md %}
 >
 {: .hands_on}
 
-# How to use those data in the first steps
+# Preprocessing with XCMS
 
-> ### {% icon tip %} The workflow
->
-> > ![The workflow](../../images/tutorial-lcms-data-import-run-workflow.png)
-> We will only play the step framed in blue
->
-> Again, thanks to the Dataset collection, we will not have to run 4 times **MSnBase.readMSData** and 4 times **xcms.findChromPeaks (xcmsSet)**. Galaxy will manage that for us.
->
-> See the "[Individual files VS zip file](#individual-files-vs-zip-file)" section for explanation about the Dataset collections and their interest
-{: .tip}
+The first step of the workflow is the pre-processing of the raw data with XCMS.  
 
-> ### {% icon hands_on %} Hands-on: Run the first steps
+XCMS is a free software dedicated to pre-processing any types of mass spectrometry acquisition files from low to high resolution including FT-MS data coupled with different kind of chromatography (liquid or gaz). This software is used worldwide by a majority of specialists of metabolomic using mass spectrometry methods.
+
+This software is based on different algorithms that have been published and is maintained on the R repository [5,6,7].
+
+XCMS is able to read files with open format as mzXML and netCDF which are independent of the constructors' formats.
+
+It is composed of R functions able to extract, filter, align, fill gap and annotate isotopes, adducts and fragments. This set of functions gives a modularity particularly well adapted to defined workflows which is one of the key points of Galaxy:
+
+![Preprocessing of the raw data with XCMS (in blue)](../../images/tutorial-lcms-data-import-run-workflow.png)
+
+We will not have to run these steps 4 times on each datasets, thanks to the Dataset collection
+
+> ### {% icon hands_on %} Hands-on: Preprocessing with XCMS
 >
-> 1. **MSnBase.readMSData** {% icon tool %} with the following parameters
->  - Click on the **Dataset Collection** (folder) button
-> > ![The Dataset Collection button](../../images/tutorial-lcms-data-import-run-01.png)
->  - {% icon param-file %}   *"File(s) from your history containing your chromatograms"*: the `raw` Data Collection
+> 1. **MSnbase readMSData** {% icon tool %} with the following parameters
+>    - {% icon param-collection %} *"File(s) from your history containing your chromatograms"*: the input data collection selected with **Dataset collection** ({% icon param-collection %}) 
 >
-> 2. **xcms.findChromPeaks (xcmsSet)** {% icon tool %} with the following parameters
->  - Click on the **Dataset Collection** button
->  - {% icon param-files %}  *"RData file"*: the `raw.raw.RData` Data Collection
->  - {% icon param-select %} *"Extraction method for peaks detection"*: `CentWave`
->  - {% icon param-text %}   *"Min,Max peak width in seconds"*: `10,35`
+> 2. **xcms findChromPeaks (xcmsSet)** {% icon tool %} with the following parameters
+>    - {% icon param-collection %} *"RData file"*: the `raw.raw.RData` Data Collection
+>    - {% icon param-select %} *"Extraction method for peaks detection"*: `CentWave`
+>    - {% icon param-text %} *"Min,Max peak width in seconds"*: `10,35`
 >
-> 3. **xcms.findChromPeaks Merger** {% icon tool %} with the following parameters
->    > ### {% icon tip %} Tip: Why this step?
->    > For the next step of the workflow, groupChromPeaks and adjustRtime, we need one RData.
->    >
->    > To merge all our RData which are nested in the Dataset Collection called something like `raw.xset.RData`, we will use a tool named **xcms.find ChromPeaks Merger**
->    >
->    > This tool will also take the SampleMetadata `sampleMetadata.tsv`to map the classes to the samples: Samples, QC, Blank
->    {: .tip}
->  - Click on the **Dataset Collection** button
->  - {% icon param-files %}  *"RData file"*: the `raw.raw.xset.RData` Data Collection
->  - {% icon param-file %}   *"Sample metadata file"*: `sacuri_sampleMetadata.tsv`
+>    In the next step of the workflow, **xcms.groupChromPeaks** {% icon tool %} and **xcms.adjustRtime** {% icon tool %} need one RData file. To merge all our RData which are nested in the Dataset Collection called something like `raw.xset.RData`, we will use a tool named **xcms.find ChromPeaks Merger** {% icon tool %}. This tool will also take the SampleMetadata `sampleMetadata.tsv` to map the classes to the samples: Samples, QC, Blank
+>
+> 3. **xcms findChromPeaks Merger** {% icon tool %} with the following parameters
+>    - {% icon param-collection %} *"RData file"*: the `raw.raw.xset.RData` Data Collection (output of **xcms findChromPeaks (xcmsSet)** {% icon tool %})
+>    - {% icon param-file %} *"Sample metadata file"*: the imported metadata file
+>   
+>    When the **xcms findChromPeaks Merger** step is done, you can observe that we now have a dataset called `xset.merged.RData` in the history. It's no longer a Dataset Collection.
 >
 > 4. **xcms.groupChromPeaks (group)** {% icon tool %} with the following parameters
->  - {% icon param-file %}  *"RData file"*: `xset.merged.RData`
->
-> When the **xcms.findChromPeaks Merger** step is done, you can observe that we now have a dataset called `xset.merged.RData` in the history. It's no longer a Dataset Collection.
->
-> From now, we will deal with regular datasets for the further steps.
+>     - {% icon param-file %} *"RData file"*: `xset.merged.RData` (output of **xcms findChromPeaks Merger** {% icon tool %})
 >
 {: .hands_on}
+
+**TODO** some explanation about the observed outputs (+ question boxes?)
 
 # Conclusion
 {:.no_toc}
+
+**TODO**: recap of the different steps and why these steps
