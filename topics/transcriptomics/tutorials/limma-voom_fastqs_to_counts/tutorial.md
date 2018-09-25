@@ -24,8 +24,8 @@ key_points:
 - The Galaxy Rule Uploader, Collections and Workflows can help make analysis more efficient and easier
 contributors:
 - mblue9
-- Belinda Phipson
-- Harriet Dashnow
+- bphipson
+- hdashnow
 
 ---
 

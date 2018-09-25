@@ -17,11 +17,11 @@ key_points:
   - "DE results can be interactively explored with limma-voom via Glimma"
 contributors:
   - mblue9
-  - Belinda Phipson
+  - bphipson
   - Anna Trigos
-  - Matt Ritchie
-  - Harriet Dashnow
-  - Charity Law
+  - mritchie
+  - hdashnow
+  - charitylaw
 ---
 
 # Introduction
