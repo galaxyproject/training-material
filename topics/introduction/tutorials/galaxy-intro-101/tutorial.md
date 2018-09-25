@@ -115,9 +115,9 @@ We are now ready to perform our analysis, but first we need to get some data int
 >    Each line represents an exon, the first three columns are the genomic location, and the fourth column contains the name of the exon.
 >
 > 4. Let's rename our dataset to something more recognizable.
->    - Click on the **pencil icon** to edit the dataset attributes.
->    - In the next screen change the name of the dataset to `Exons`.
->    - Click the **Save** button.
+>    - Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
+>    - In the central panel, change the **Name** field to `Exons`
+>    - Click the **Save** button
 >
 >    Your history should now look something like this:
 >
@@ -292,7 +292,7 @@ A good way to learn about these exons is to look at their genomic surrounding. T
 
 > ### {% icon hands_on %} Hands-on: UCSC genome browser
 >
-> 1. First, check that the **database** of your latest history dataset is `hg38`. If not, click on the pencil icon and modify the **Database/Build:** field to `Human Dec. 2013 (GRCh38/hg38) (hg38)`.
+> 1. First, check that the **database** of your latest history dataset is `hg38`. If not, click on the {% icon galaxy-pencil %} pencil icon and modify the **Database/Build:** field to `Human Dec. 2013 (GRCh38/hg38) (hg38)`.
 >
 >    ![Modify the database of the `Compare two Datasets` output dataset](../../images/101_20.png)
 >
