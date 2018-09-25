@@ -22,12 +22,12 @@ layout: true
 class: center, middle, inverse
 
 <div class="my-header"><span>
-<a href="{{ site.baseurl }}/topics/{{ topic.name }}" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+<a href="{{ site.baseurl }}/topics{{ topic.name }}" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
 </span></div>
 
 <div class="my-footer"><span>
 {% if page.logo == "GTN" %}
-<img src="{{ site.baseurl }}/{{ site.small_logo }}" alt="Galaxy Training Network" style="height: 40px;"/>
+<img src="{{ site.baseurl }}/topics{{ site.small_logo }}" alt="Galaxy Training Network" style="height: 40px;"/>
 {% else %}
 <img src="{{ page.logo }}" alt="page logo" style="height: 40px;"/>
 {% endif %}
@@ -46,7 +46,7 @@ class: center, middle, inverse
 
   {% for requirement in topic.requirements %}
     {% if requirement.type == "internal" %}
-  - [{{ requirement.title }}]({{ site.baseurl }}{{ requirement.link }})
+  - [{{ requirement.title }}]({{ site.baseurl }}/topics{{ requirement.link }})
     {% elsif requirement.type == "external" %}
   - [{{ requirement.title }}]({{ requirement.link }})
     {% endif %}
