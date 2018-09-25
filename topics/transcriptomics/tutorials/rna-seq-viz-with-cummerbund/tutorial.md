@@ -100,7 +100,29 @@ For this tutorial, we are interested in CuffDiff's tested transcripts for differ
 >    > * Inspect the content of the file on the middle
 >    {: .tip}
 >
-> Each entry represents a differentially expressed gene, but not all are significant. We want to keep only those that are reported as significant differentially expressed.
+> Each entry is a differentially expressed gene, which is described in terms of the following attributes.
+>
+> - *test_id*: A unique identifier describing the transcript being tested
+> - *gene_id*: The identifier of the gene being tested
+> - *gene*: The name of the gene being tested
+> - *locus*: The genomic coordinates of the gene transcript being tested
+> - *sample_1*: Label of the 1st sample
+> - *sample_2*: Label of the 2nd sample
+> - *status*: The test's status:
+>   - "OK" if test successful
+>   - "NOTEST" if not enough alignments for testing
+>   - "LOWDATA" if too complex or shallowly sequenced
+>   - "HIDATA" if too many fragments in locus
+>   - "FAIL" if a numerical exception prevented testing
+> - *value_1*: The gene's FPKM in sample_1
+> - *value_2*: The gene's FPKM in sample_2
+> - *log2(fold_change)*: The log<sub>2</sub> of the fold change (sample_1/sample_2). This reports the expression difference between condition one (sample_1) and condition two (sample_2)
+> - *test_stat*: The test statistic's value, used to determine the significance of the observed change in FPKM
+> - *p_value*: The uncorrected p-value of the test statistic
+> - *q_value*: The False-discovery-rate-adjusted p-value of the test statistic
+> - *significant*: "yes" or "no", depending on whether the p_value is greater then the FDR after Benjamini-Hochberg correction for multiple-testing. This tells whether the difference between the expression levels in condition one (sample_1) and condition two (sample_2) is significant
+>
+> We want to keep only those the *significant differentially expressed* genes.
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -116,9 +138,9 @@ For this tutorial, we are interested in CuffDiff's tested transcripts for differ
 
 # Filtering and sorting
 
-We now want to first highlight the most significant differentially expressed genes in our analysis, and then obtain informative visualizations.
+We now want to highlight those gene transcripts whose expression difference, the log<sub>2</sub>(fold_change), is both high and significant.
 
-> ### {% icon hands_on %} Hands-on: Extract CuffDiff's most significant differentially expressed genes
+> ### {% icon hands_on %} Hands-on: Extract CuffDiff's significant differentially expressed genes
 >
 > 1. **Filter** {% icon tool %} with the following parameters
 >   - "Filter" to the extracted table from the previous step
@@ -146,23 +168,23 @@ We now want to first highlight the most significant differentially expressed gen
 >    > ### {% icon question %} Questions
 >    > 1. Since the start of our filtering process, how many records now represent the significant subset for extracting informations?
 >    > 2. What does this shrinking of the number of lines represent?
+>    > 3. Which gene has the highest (significant) expression difference between smple_1 and sample_2?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 1. Click on the boxes in your history, their small preview higlights the number of lines: from ~140,000 to 219
 >    > > 2. This process represents a necessary step to gather insights on the biological meaning of our samples in our analyses: putting the original raw RNA-Seq result data into context, cutting down the less-meaningful records to focus on what is needed to go from data to information
+>    > > 3. NDUFV1
 >    > {: .solution }
 >    {: .question}
 {: .hands_on}
 
 # CummeRbund
 
-With CummeRbund we can visualize our RNA-Seq results of interest.
+CummeRbund generates two outputs:
+- The plot, which visualizes our RNA-Seq results of interest
+- The R script that is responsible for generating the plot
 
-CummeRbund generates always two outputs:
-- the plot
-- the R script responsible for generating the plot
-
-We are interested in visualizing all expression values of all transcripts relative to the most significant differentially expressed gene we found in the previous section.
+In this section we will parametrize CummeRbund to visualize the expression profile of those gene transcripts whose log<sub>2</sub>(fold_change) is both high and significant.
 
 > ### {% icon hands_on %} Hands-on: Visualization
 >
