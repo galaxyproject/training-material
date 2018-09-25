@@ -431,7 +431,7 @@
 
   <ol>
     <li>
-      <p>In the tool menu, navigate to <code class="highlighter-rouge">Get Data -&gt; UCSC Main - table browser</code></p>
+      <p><strong>UCSC Main</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: In the tool menu, navigate to <code class="highlighter-rouge">Get Data -&gt; UCSC Main - table browser</code></p>
 
       <p><img src="../../images/101_01.png" alt="`UCSC Main table browser` menu entry"></p>
 
@@ -439,39 +439,35 @@
 
       <p><img src="../../images/101_02.png" alt="`UCSC table browser` tool, first screen for exons"></p>
 
-      <blockquote class="comment">
-        <h3 id="comment-settings">
-<i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Settings</h3>
-
-        <ul>
-          <li>
-<strong>clade</strong> should be set to <code class="highlighter-rouge">Mammal</code>
+      <p>Now set the following parameters:</p>
+      <ul>
+        <li>
+<em>“clade”</em>: <code class="highlighter-rouge">Mammal</code>
 </li>
-          <li>
-<strong>genome</strong> should be set to <code class="highlighter-rouge">Human</code>
+        <li>
+<em>“genome”</em>: <code class="highlighter-rouge">Human</code>
 </li>
-          <li>
-<strong>assembly</strong> should be set to <code class="highlighter-rouge">Dec. 2013 (GRCh38/hg38)</code>
+        <li>
+<em>“assembly”</em>: <code class="highlighter-rouge">Dec. 2013 (GRCh38/hg38)</code>
 </li>
-          <li>
-<strong>group</strong> should be set to <code class="highlighter-rouge">Genes and Gene Predictions</code>
+        <li>
+<em>“group”</em>: <code class="highlighter-rouge">Genes and Gene Predictions</code>
 </li>
-          <li>
-<strong>track</strong> should be set to <code class="highlighter-rouge">GENCODE v24</code>
+        <li>
+<em>“track”</em>: <code class="highlighter-rouge">GENCODE v24</code>
 </li>
-          <li>
-<strong>table</strong> should be set to <code class="highlighter-rouge">knownGene</code>
+        <li>
+<em>“table”</em>: <code class="highlighter-rouge">knownGene</code>
 </li>
-          <li>
-<strong>region</strong> should be changed to <code class="highlighter-rouge">position</code> with value <code class="highlighter-rouge">chr22</code>
+        <li>
+<i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“region”</em> should be changed to <code class="highlighter-rouge">position</code> with value <code class="highlighter-rouge">chr22</code>
 </li>
-          <li>
-<strong>output format</strong> should be changed to <code class="highlighter-rouge">BED - browser extensible data</code>
+        <li>
+<em>“output format”</em> should be changed to <code class="highlighter-rouge">BED - browser extensible data</code>
 </li>
-          <li>
-<strong>Send output to</strong> should have the option <code class="highlighter-rouge">Galaxy</code> checked</li>
-        </ul>
-      </blockquote>
+        <li>
+<i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Send output to”</em> should have the option <code class="highlighter-rouge">Galaxy</code> checked</li>
+      </ul>
     </li>
     <li>
       <p>Click on the <strong>get output</strong> button and you will see the next screen:</p>
@@ -501,7 +497,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
       <ul>
         <li>Click on the <strong>pencil icon</strong> to edit the dataset attributes.</li>
         <li>In the next screen change the name of the dataset to <code class="highlighter-rouge">Exons</code>.</li>
-        <li>Click the <strong>Save</strong> button at the bottom of the screen.</li>
+        <li>Click the <strong>Save</strong> button.</li>
       </ul>
 
       <p>Your history should now look something like this:</p>
@@ -520,25 +516,31 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: SNP information</h3>
   <ol>
     <li>
-      <p><strong>UCSC Main</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Return to the UCSC tool <code class="highlighter-rouge">UCSC Main - table browser</code></p>
-    </li>
-    <li>
-      <p>Change the setting in <strong>group</strong> to <code class="highlighter-rouge">Variation</code> and again <strong>region</strong> to <code class="highlighter-rouge">position</code> with value <code class="highlighter-rouge">chr22</code></p>
+<strong>UCSC Main</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Open again the <code class="highlighter-rouge">UCSC Main - table browser</code> tool and set the following parameters:
+      <ul>
+        <li>
+<em>“group”</em> should be changed to <code class="highlighter-rouge">Variation</code>
+</li>
+        <li>
+<i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“region”</em> should be changed again to <code class="highlighter-rouge">position</code> with value <code class="highlighter-rouge">chr22</code>
+</li>
+        <li>
+<em>“output format”</em> should be changed again to <code class="highlighter-rouge">BED - browser extensible data</code>
+</li>
+      </ul>
 
       <p><img src="../../images/101_06.png" alt="`UCSC table browser` tool, first screen for SNPs"></p>
 
-      <p>The <strong>track</strong> setting shows the version of the SNP database to get. In this example it is version 150, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.</p>
+      <p>The <em>“track”</em> setting shows the version of the SNP database to get. In this example it is version 150, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.</p>
     </li>
     <li>
-      <p>Click on the <strong>get output</strong> button to find a menu similar to this:</p>
+      <p>Click on the <strong>get output</strong> button to find a form similar to this:</p>
 
       <p><img src="../../images/101_07.png" alt="`UCSC table browser` tool, second screen for SNPs"></p>
 
-      <p>Make sure that <strong>Create one BED record per</strong> is set to <code class="highlighter-rouge">Whole Gene</code> (Whole Gene here really means Whole Feature), and click on <strong>Send query to Galaxy</strong>. You will get your second item in your analysis history.</p>
+      <p>Make sure that <em>“Create one BED record per”</em> is set to <code class="highlighter-rouge">Whole Gene</code> (Whole Gene here really means Whole Feature), and click on <strong>Send query to Galaxy</strong>. You will get your second item in your analysis history.</p>
     </li>
-    <li>
-      <p>Now <strong>rename</strong> your new dataset to <code class="highlighter-rouge">SNPs</code> so we can easily remember what the file contains.</p>
-    </li>
+    <li>Now <strong>rename</strong> your new dataset to <code class="highlighter-rouge">SNPs</code> so we can easily remember what the file contains.</li>
   </ol>
 </blockquote>
 
@@ -564,7 +566,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
       <p><strong>Join</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Enter the word <code class="highlighter-rouge">join</code> in the search bar of the tool panel, and select the tool named <code class="highlighter-rouge">Join - the intervals of two datasets side-by-side</code></p>
     </li>
     <li>
-      <p>Select the <code class="highlighter-rouge">Exons</code> dataset as the first dataset, and the <code class="highlighter-rouge">SNPs</code> dataset as the second dataset, and make sure <strong>return</strong> is set to <code class="highlighter-rouge">INNER JOIN</code> so that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)</p>
+      <p>Select the <code class="highlighter-rouge">Exons</code> dataset as the first dataset, and the <code class="highlighter-rouge">SNPs</code> dataset as the second dataset, and make sure <em>“return”</em> is set to <code class="highlighter-rouge">INNER JOIN</code> so that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)</p>
 
       <p><img src="../../images/101_11.png" alt="Settings for the `Join` tool"></p>
 
@@ -590,10 +592,10 @@ the gray (preparing/queued) and yellow (running) states to become green (success
     <p>Did the Join tool error with a memory failure? Or is this step executing for a long time? Most likely a setting was missed when extracting the data from the UCSC Table Browser. Try again, double checking that:</p>
 
     <ul>
-      <li>For both SNP and EXON: <strong>region</strong> is actually changed to <code class="highlighter-rouge">position</code> with value <code class="highlighter-rouge">chr22</code>
+      <li>For both SNP and EXON: <em>“region”</em> is actually changed to <code class="highlighter-rouge">position</code> with value <code class="highlighter-rouge">chr22</code>
 </li>
-      <li>For EXON: <strong>Create one BED record per</strong> <code class="highlighter-rouge">Coding Exons</code> is selected (<em>not</em> <code class="highlighter-rouge">Whole Gene</code> as for the SNP data)</li>
-      <li>Carefully inspect remaining Table Browser settings if these two most common reasons for problems are Ok in your query</li>
+      <li>For EXON: <em>“Create one BED record per”</em> <code class="highlighter-rouge">Coding Exons</code> is selected (<em>not</em> <code class="highlighter-rouge">Whole Gene</code> as for the SNP data)</li>
+      <li>Carefully inspect the remaining Table Browser settings if these two most common reasons for problems were correct in your tool executions</li>
     </ul>
   </blockquote>
 
@@ -620,23 +622,19 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
       <p><img src="../../images/101_13.png" alt="Settings for the `Group` tool"></p>
 
-      <blockquote class="comment">
-        <h3 id="comment-settings-1">
-<i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Settings</h3>
-
-        <ul>
-          <li>
-<strong>Select data</strong>: select the output dataset from the <code class="highlighter-rouge">Join</code> tool</li>
-          <li>
-<strong>Group by column</strong>: <code class="highlighter-rouge">Column: 4</code> (the column with the exon IDs)</li>
-          <li>
-<strong>Insert Operation</strong>: click on this button, then set <strong>Type</strong> to <code class="highlighter-rouge">Count</code> and set <strong>On column</strong> to <code class="highlighter-rouge">Column: 4</code>
+      <p>Now set the following parameters:</p>
+      <ul>
+        <li>
+<em>“Select data”</em>: select the output dataset from the <code class="highlighter-rouge">Join</code> tool</li>
+        <li>
+<em>“Group by column”</em>: <code class="highlighter-rouge">Column: 4</code> (the column with the exon IDs)</li>
+        <li>
+<em>“Insert Operation”</em>: click on this button, then set <em>“Type”</em> to <code class="highlighter-rouge">Count</code> and set <em>“On column”</em> to <code class="highlighter-rouge">Column: 4</code>
 </li>
-        </ul>
-      </blockquote>
+      </ul>
     </li>
     <li>
-      <p>Make sure your screen looks like the image above and click <strong>Execute</strong> to perform the grouping. Your output dataset will look something like this:</p>
+      <p>Make sure your screen looks like the image above and click <strong>Execute</strong> to perform the grouping. Your new output dataset will look something like this:</p>
 
       <p><img src="../../images/101_14.png" alt="Contents of the `Group` output dataset"></p>
     </li>
@@ -651,12 +649,12 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 <i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
   <p>How many exons are there in total in your file?</p>
 
-  <p><em>Hint: Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above</em>.</p>
+  <p><em>Hint: Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image below</em>.</p>
 </blockquote>
 
 <h2 id="sort-the-exons-by-snps-count">Sort the exons by SNPs count</h2>
 
-<p>Now we have a list of all exons and the number of SNPs they contain, but we would like to know which exons has the <em>highest number</em> of SNPs. We can do this by sorting the file on the second column.</p>
+<p>Now we have a list of all exons and the number of SNPs they contain, but we would like to know which exon has the <em>highest number</em> of SNPs. We can do this by sorting the file on the second column.</p>
 
 <blockquote class="hands_on">
   <h3 id="hands_on-hands-on-sorting">
@@ -670,7 +668,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
       <p>Make sure that the output of the <code class="highlighter-rouge">Group</code> tool from the previous step is selected as input</p>
     </li>
     <li>
-      <p>Set the <strong>on column</strong> parameter to <code class="highlighter-rouge">Column: 2</code>, by default it will select a numerical sort in descending order, which is exactly what we want in this case.</p>
+      <p>Set the <em>“on column”</em> parameter to <code class="highlighter-rouge">Column: 2</code>, by default it will select a numerical sort in descending order, which is exactly what we want in this case.</p>
 
       <p><img src="../../images/101_15.png" alt="Settings for the `Sort` tool"></p>
     </li>
@@ -705,7 +703,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
       <p><strong>Select first</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Open the tool <code class="highlighter-rouge">Select first - lines from a dataset</code></p>
     </li>
     <li>
-      <p>Set <strong>Select first</strong> to <code class="highlighter-rouge">5</code></p>
+      <p>Set <em>“Select first”</em> to <code class="highlighter-rouge">5</code></p>
     </li>
     <li>
       <p>Make sure that the output of the <code class="highlighter-rouge">Sort</code> tool from the previous step is selected as input</p>
@@ -925,13 +923,13 @@ the gray (preparing/queued) and yellow (running) states to become green (success
     <li>We wanted to know something about the repetitive elements per exon. We get this data from UCSC.
       <ul>
         <li>
-<strong>assembly</strong> should be set to <code class="highlighter-rouge">Dec. 2013 (GRCh38/hg38)</code>
+<em>“assembly”</em>: <code class="highlighter-rouge">Dec. 2013 (GRCh38/hg38)</code>
 </li>
         <li>
-<strong>group</strong> parameter should be <code class="highlighter-rouge">Repeats</code>
+<em>“group”</em> parameter should be changed to <code class="highlighter-rouge">Repeats</code>
 </li>
         <li>
-<strong>position</strong> should be <code class="highlighter-rouge">chr22</code>
+<em>“position”</em>: <code class="highlighter-rouge">chr22</code>
 </li>
         <li>leave the rest of the settings to the defaults</li>
       </ul>
