@@ -56,25 +56,25 @@ GMOD is a collection open source software for maintaining Model Organism Databas
 
 Artemis, the first genome browser discussed here, is not actually a GMOD project. Artemis was an older, desktop-based genome browser. You had to install the software on your computer in order to run it. All of the other genome browsers observed here are web-based. Artemis allows for annotation, but those annotations were only stored on your local device. Artemis featured a three-pane view consisting of a high-level overview of the genome, a DNA-level view, and a list of all the features in the genome.
 
-![](../../images/getting-started-with-apollo-screenshots/(2)_Artemis.png)
+![](../../images/getting-started-with-apollo-screenshots/2_artemis.png)
 
 ### 2. GBrowse
 
 One of the earlier genome browsers, Grows did *not* support annotation. Think of it like the old Yahoo-maps. Instead of just clicking and dragging the map, you had to click where you wanted to go, wait a few seconds, and the new map would be displayed. It makes the process tedious.
 
-![](../../images/getting-started-with-apollo-screenshots/(3)_GBrowse_from_GMOD_Wiki.png)
+![](../../images/getting-started-with-apollo-screenshots/3_gbrowse_from_gmod_wiki.png)
 
 ### 3. JBrowse
 
 JBrowse is used in Galaxy workflows for genome visualization. JBrowse is a more modern re-implementation of GBrowse. JBrowse is much more like Google Maps (or any other current web map service; you click and drag and can quickly browse around the genome, turning evidence tracks on and off where relevant. Many labs have deployed JBrowse instances to help showcase their annotation efforts to the community, and to make their data accessible. FlyBase has produced a demo in JBrowse, displaying *Drosophila melanogaster*. Note that JBrowse is a **_static_** visualization tool. You cannot make any changes to the data, and you cannot make annotations and save them. It is a “Read Only” view of genomes and annotations.
 
-![](../../images/getting-started-with-apollo-screenshots/(4)_JBrowse.png)
+![](../../images/getting-started-with-apollo-screenshots/4_jbrowse.png)
 
 ### 4. Apollo
 
 Apollo takes JBrowse one step further and adds support for community annotation; it provides a “Read+Write” view of genomes. You can create new annotations on new gene features, and these are shared with everyone who has access to the Apollo server. From a computer perspective, Apollo embeds a copy of JBrowse. For the annotation workflow, we will use both Apollo and JBrowse.
 
-![](../../images/getting-started-with-apollo-screenshots/(5)_Compare_and_Contrast_Browsers.png)
+![](../../images/getting-started-with-apollo-screenshots/5_compare_and_contrast_browsers.png)
 
 ## Genome File Formats
 
@@ -87,15 +87,15 @@ There are three file formats to be aware of during genome annotation.
 
 The sequence contained in a FASTA file may be DNA, RNA, or protein sequences; they may contain unspecified bases (N/Y/X) or gaps (-). Within a FASTA file, each sequence begins with a “>,” which is immediately followed by the “FASTA ID.” Some sequences have a “description” after *any whitespace character*, such as the given example.
 
-![](../../images/getting-started-with-apollo-screenshots/(6)_FASTA_Sequence_Example.png)
+![](../../images/getting-started-with-apollo-screenshots/6_fasta_sequence_example.png)
 
 ### 2. GFF3
 
 The eukaryotic gene model captures a lot of information about the biological process behind producing proteins from DNA, such as mRNAs, transcription, and alternative splicing. GFF3 files thus have to encode these complex, hierarchical, parent-child relationships. Characteristics of GFF3 files, such as the tab separated, key-value pairs, allot simplicity and ease of use.
 
-![](../../images/getting-started-with-apollo-screenshots/(7)_GFF3.png)
+![](../../images/gettingstarted-with-apollo-screenshots/7_gff3.png)
 
-![](../../images/getting-started-with-apollo-screenshots/(8)_GFF3_Visually.png "A visual representation of a GFF3 file.")
+![](../../images/getting-started-with-apollo-screenshots/8_gff3_visually.png "A visual representation of a GFF3 file.")
 
 At the top level is a “gene” (3rd column) spanning from 1000 to 9000, on the forward strand (7th column), with an ID of gene00001 and a Name of EDEN.
 
@@ -116,17 +116,17 @@ GenBank files are a fixed-width format which displays a “flat” gene model an
 >    > 3. Annotation set version (1, from VERSION BK000583.1)
 >    > 4. References
 
-![](../../images/getting-started-with-apollo-screenshots/(10)_GenBank_Header_P22.png)
+![](../../images/getting-started-with-apollo-screenshots/10_genbank_header_p22.png)
 
 > * The feature table (starting with FEATURES) usually begins with a “source” type feature, which contains information about the chromosome/genome. Features consist of a feature type key on the left, and key-value pairs on the right formatted as */key=“Value…”
 
-![](../../images/getting-started-with-apollo-screenshots/(11)_GenBank_Features_P22.png)
+![](../../images/getting-started-with-apollo-screenshots/11_genbank_features_p22.png)
 
 > * The sequence data, which is displayed as six separated columns of ten characters each, with the sequence index annotated on the left.
 
-![](../../images/getting-started-with-apollo-screenshots/(12)_GenBank_Sequence_Data_P22.png)
+![](../../images/getting-started-with-apollo-screenshots/12_genbank_sequence_data_p22.png)
 
-![](../../images/getting-started-with-apollo-screenshots/(13)_Compare_and_Contrast_File_Formats.png)
+![](../../images/getting-started-with-apollo-screenshots/13_compare_and_contrast_file_formats.png)
 
 # Annotation Within Apollo
 
@@ -143,30 +143,30 @@ Continuing on to actually using Apollo, this section will go through an example 
 
 The CPT developed a tool called JBrowse-in-Galaxy (JiG), which allows the building of JBrowse instances within Galaxy; this contrasts with how JBrowse instances are traditionally configured, through a complex and annual process at the command line. 
 
-![](../../images/getting-started-with-apollo-screenshots/(14)_JBrowse_in_Galaxy.png)
+![](../../images/getting-started-with-apollo-screenshots/14_jbrowse_in_galaxy.png)
 
 The CPT uses JBrowse as a tool for displaying the results of a bioinformatic analysis in a standardized way; instead of having to digest and understand 20+ different report formats, images, output files, tables, etc., all of our analysis is presented as easy-to-grasp features in evidence tracks. As its input, Apollo takes complete JBrowse instances. To view any data in Apollo, a JBrowse instance needs to be configured first. On the far left side of the Galaxy web page is a “Tools” column with a search bar. Search “JBrowse genome browser,” and click on the synonymous link underneath “CPT: Genomic Viz.”
 
-![](../../images/getting-started-with-apollo-screenshots/(15)_JBrowse_Instance_Setup.png)
+![](../../images/getting-started-with-apollo-screenshots/15_jbrowse_instance_setup.png)
 
 It is vital that the correct files are elected for the steps in the tool, otherwise the tool will not run. Once you’v created a JBrowse instance, it will appear in the history column on the left side of the Galaxy page. To see the JBrowse instance, click on the corresponding eyeball {% icon solution %} symbol; clicking on the JBrowse instance step will reveal more details and options. If desired, clicking on the floppy disk symbol will save the JBrowse instance to the local device. This is typically unnecessary, as it should stay within the Galaxy history.
 
-![](../../images/getting-started-with-apollo-screenshots/(16.5)_JBrowse_Instance_Within_Galaxy.png)
+![](../../images/getting-started-with-apollo-screenshots/16_jbrowse_instance_within_galaxy.png)
 
 ### 2. Moving Data From Galaxy to Apollo
 
 With a complete JBrowse instance, data can now begin being channeled to Apollo. Data is built up in Galaxy in the form of a JBrowse instance, which is then pushed to the Apollo service in the *Create or Update Organism* step. Once annotations have been made on the organism’s genome in Apollo, the updated set of annotations can be exported into Galaxy, and then re-analyzed for another update in Apollo with the new results.
 
-![](../../images/getting-started-with-apollo-screenshots/(16)_Apollo_Galaxy_JBrowse_general_workflow.png "General Apollo/JiG/Galaxy workflow")
+![](../../images/getting-started-with-apollo-screenshots/17_apollo_galaxy_jbrowse_general_workflow.png "General Apollo/JiG/Galaxy workflow")
 
 **Create or Update Organism** is a tool that allows for the creation/updating of an organism in Apollo with new data from Galaxy in the form of a JBrowse instance. This tool can be found using the search function in the Tools column in Galaxy, underneath “CPT: Apollo.”
 
-![](../../images/getting-started-with-apollo-screenshots/(17)_Create_or_Update_Organism.png)
+![](../../images/getting-started-with-apollo-screenshots/18_create_or_update_organism.png)
 
 > ### {% icon tip %} Note that…
-> You **_must_** fill out the Organism Common Name. If the phage is “Petty,” it is recommended that
->    > * If possible, the FASTA file header reads *>Petty* (and nothing else), and
->    > * “Petty” is typed into the Organism Common name field in this tool.
+> You **_must_** fill out the Organism Common Name. If the phage is “P22,” it is recommended that
+>    > * If possible, the FASTA file header reads *>P22* (and nothing else), and
+>    > * “P22” is typed into the Organism Common name field in this tool.
 > Like with the JBrowse Instance tool, if the fields are not filled correctly, the tool will *not* run, or will run *incorrectly*.
 {: .tip}
 
@@ -174,37 +174,41 @@ Executing this step will transfer data to Apollo and produce a JSON (JavaScript 
 
 ### Navigating Through Apollo
 
-![](../../images/getting-started-with-apollo-screenshots/(20)_JBrowse_Embedded_in_Apollo.png)
+![](../../images/getting-started-with-apollo-screenshots/19_jbrowse_embedded_in_apollo.png)
 
-As depicted above, Apollo will present a two-pane display. On the left is an embedded JBrowse instance, and on the right is the Apollo annotator panel. JBrowse as embedded in Apollo is *slightly* different than a norma JBrowse; however, the movement controls are all the same:
+As depicted above, Apollo will present a two-pane display, surrounded by the Galaxy Tools and History columns on the left and right, respectively. On the left is an embedded JBrowse instance, and on the right is the Apollo annotator panel. JBrowse as embedded in Apollo is *slightly* different than a normal JBrowse; however, the movement controls are all the same:
 > * the magnifying glasses will zoom in (+)/out (-) of the genome and its data.
 > * the arrow icons will move upstream/downstream along the genome.
 > * clicking/dragging on the red outlined box on the genome ruler (light grey box toward the top of the page, 0bp; 12,500 bp; 25,000 bp; etc.) will move to specific regions.
 > * clicking/dragging anywhere else on the genome ruler will allow movement and zooming into that specific region.
 
-The menu bar at the top has useful options, some that aren’t available in “standard” JBrowse:
-> * **View** offers helpful adjustments to observing the genome within Apollo
->    > * “Color by CDS frame” is a popular option during annotation. It colors each coding sequence based on which reading frame it is in.
->    > * “Show Track label” allows ease in annotation by removing the track’s labeling at the far left of the embedded JBrowse window. This allows for annotation of small features near the end of the genome, which would otherwise be hidden by the track label (E.G. “User-created annotations).
+> ### {% icon tip %} Enhance Viewing Experience
+> The menu bar at the top has useful options, some that aren’t available in “standard” JBrowse. **View** offers helpful adjustments to observing the genome within Apollo
+> * “Color by CDS frame” is a popular option during annotation. It colors each coding sequence based on which reading frame it is in.
+> * “Show Track label” allows ease in annotation by removing the track’s labeling at the far left of the embedded JBrowse window. This allows for annotation of small features near the end of the genome, which would otherwise be hidden by the track label (E.G. “User-created annotations).
+{: .tip}
 
 The pale yellow track that is visible is the User Created Annotations track. The annotated genes exist here; gene features will be added to this track and edited, thus this track will *always* be visible.
 
-In the Apollo panel on the right, there is a drop-down menu called the Genome Selector, and it will list all organisms available to the account in use. For a wider screen, selecting the arrow in the top left corner of the Apollo panel will close it.
+In the Apollo panel on the right, there is a drop-down menu called the Genome Selector, and it will list all organisms available to the account in use.
 
-![](../../images/getting-started-with-apollo-screenshots/(19)_Genome_Selector.png)
+![](../../images/getting-started-with-apollo-screenshots/20_genome_selector.png)![](../../images/getting-started-with-apollo/21_genome_selector_options.png)
 
 Apollo uses the concept of ‘Organisms’ with ‘reference sequences’ below it. Each organism can have one or more reference sequences. In higher order organisms, those often correspond to multiple to multiple chromosomes. For phage uses they are most often used to correspond to different assemblies of the genome. For the sake of the course, **only organisms with a single reference sequence will be worked on.**
 
-On the left side of the embedded JBrowse instance titled “Available Tracks;” this contains the evidence tracks currently available to the account in use. Evidence tracks will appear upon the execution of structural and functional workflows.
-The first evidence tracks to be used will be those from the structural workflow; these gene call tracks are *GeneMarkS*, *MetaGeneAnnotator*, and *Glimmer3*. Selecting these will yield predicted genes, albeit an overwhelming amount to observe all at once. This can be combated by collapsing the Apollo portion of the interface and the “Tools” column to minimize distraction.
+On the left side of the embedded JBrowse instance is a checklist-like column titled “Available Tracks;” this contains the evidence tracks currently available to the account in use. Evidence tracks will appear upon the execution of structural and functional workflows.
+The first evidence tracks to be used will be those from the structural workflow; these gene call tracks are *GeneMarkS*, *MetaGeneAnnotator*, and *Glimmer3*. Selecting these will yield predicted genes.
+
+![](../../images/getting-started-with-apollo-screenshots/22_zoomed_out_gene_tracks.png)
 
 <!-- LINK STRUCTURAL AND FUNCTIONAL WORKFLOW TUTORIALS UPON COMPLETION. -->
 
-![](../../images/getting-started-with-apollo-screenshots/(22)_Zoomed_Out_Gene_Tracks.png)
+> ### {% icon tip %} Maximizing Screen Space
+> Having the gene tracks on in combination with the Apollo panel and the Galaxy columns can be overwhelming and distracting from the annotation. Selecting the arrow in the top left corner of the Apollo panel will close it. There are the same kind of arrows in the bottom right corner of the History column and in the bottom left corner of the Tools column; clicking on these will collapse the columns and further expand the annotation screen. 
+> The Available Tracks column can be shrunken by clicking and dragging the right edge of the columnAdditionally, zooming down to the single gene level can greatly assist in focusing on annotation. 
+{: .tip}
 
-Additionally, zooming down to the single gene level can greatly assist in focusing on annotation. 
-
-![](../../images/getting-started-with-apollo-screenshots/(23)_Zoomed_In_Gene_Tracks.png)
+![](../../images/getting-started-with-apollo-screenshots/23_zoomed_in_gene_tracks.png)
 
 > ### {% icon tip %} Note that…
 > The examples above already have genes called in the User Created Annotations track; the phage P22 genome was previously annotated and received from NCBI GenBank. This **_will not_** be the case for a novel phage genome.

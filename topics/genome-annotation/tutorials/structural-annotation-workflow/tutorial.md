@@ -19,6 +19,17 @@ A genome is ready to be annotated within Apollo! To begin, the process of execut
 
 <!-- BICH464 prerequisites discuss downloading the FASTA file from the Student Genomes Google Drive folder. -->
 
+If it is a novel phage that has not been named yet, decide on a name for the phage. Access CPT Galaxy ([CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy)) to upload the FASTA file containing the desired phage genome. There are two methods to upload a FASTA file to Galaxy.
+> 1. On the right side of the screen is a column titled “History;” it should be an empty, unnamed history containing only a blue box with a message. Click on the “… load your own data…” hyperlink.
+
+![](../../images/structural-annotation-workflow-screenshots/(01)_New_History_Option.png)
+
+> 2. On the left side of the screen is a column titled “Tools.” In the top right-hand corner of that column is an “upload” symbol. Click on that.
+
+![](../../images/structural-annotation-workflow-screenshots/(0)_Upload_File.png)
+
+
+
 # Part 1
 
 Introduction about this part
