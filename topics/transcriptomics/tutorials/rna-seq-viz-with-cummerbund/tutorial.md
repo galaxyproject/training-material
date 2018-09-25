@@ -184,7 +184,7 @@ CummeRbund generates two outputs:
 - The plot, which visualizes our RNA-Seq results of interest
 - The R script that is responsible for generating the plot
 
-In this section we will parametrize CummeRbund to visualize the expression profile of those gene transcripts whose log<sub>2</sub>(fold_change) is both high and significant.
+In this section we will parametrize CummeRbund to visualize the expression profile of those gene transcripts (isoforms) whose log<sub>2</sub>(fold_change) is both high and significant.
 
 > ### {% icon hands_on %} Hands-on: Visualization
 >
@@ -199,13 +199,13 @@ In this section we will parametrize CummeRbund to visualize the expression profi
 > ![Expression plot_form](../../images/cummerbund-expression-plot-form.png)
 {: .hands_on}
 
-Our first CummeRbund plot is the "Expression Plot":
+The input data used to create the visualization comprise 3 conditions: *hits7* (Patient 1), *hits8* (Patient 2), and *hits9* (Control).  
+
+Our first CummeRbund plot is the "Expression Plot" of the isoforms of gene NDUFV1, which shows the expression differences of isoforms NM_001166102 and NM_007103 among the three conditions. Error bars capture the variability of the distribution of FPKM values: the broader the distribution of FPKM values, the larger the corresponding error bar.
 
 ![Expression plot](../../images/cummerbund-expression-plot.png)
 
-The Expression Plot represents the expression of all isoforms of a single gene (NDUFV1) with replicate FPKMs exposed.
-
-Our plot has a modest number of isoforms, and is therefore already readable. However, in case of 5 or 6 isoforms, the plot can look very busy. We can therefore change the visualization type by selecting another type of plot.
+Our plot has a modest number of isoforms, and is therefore easy to read. However, with a high number of isoforms and expression variability among different conditions, the plot can look very busy. We can therefore change the visualization type by selecting another type of plot. Let's change visualization.
 
 > ### {% icon hands_on %} Hands-on: Visualization
 >
@@ -219,17 +219,22 @@ Our plot has a modest number of isoforms, and is therefore already readable. How
 
 ![Expression bar plot](../../images/cummerbund-expression-bar-plot.png)
 
-Expression Bar Plot of a single gene (NDUFV1) with replicate FPKMs exposed.
+The Expression Bar Plot of gene NDUFV1's replicates NM_001166102 and NM_007103, shows the expression changes across the three aforementioned conditions.
 
 > ### {% icon comment %} Comment
 >
 > These plots are shown also in [this](https://vimeo.com/channels/884356/128265982) Galaxy video tutorial.
+{: .comment}
+
+
+
+> ### {% icon comment %} Comment
 >
-> Would you like to obtain more sophisticated visualization of your RNA-Seq analysis results? Select different CummeRbund plot options, and look at their parametrizations according to the filtering and sorting operations we performed
+> For more sophisticated visualizations of your RNA-Seq analisys results, try selecting different CummeRbund plot options and parametrizations. Have a look also at CummeRbund's [manual](http://compbio.mit.edu/cummeRbund/manual_2_0.html). Alternatively, you can modify a plot's style by changing CummeRbund's R output! CummeRbund's R outputs are *ggplot* objects. Look [here](https://github.com/tidyverse/ggplot2) to learn how to change fonts, colors, error bars, and more.
 {: .comment}
 
 # Conclusion
 {:.no_toc}
 
-Visualization tools help researchers making sense of data, providing a bird's-eye view of the underlying analysis results.
+Visualization tools help researchers making sense of data, providing a bird's-eye view of the underlying analysis results.  
 In this tutorial we overviewed the advantages of visualizing RNA-Seq results with CummeRbund, and gained insights on CuffDiff's big-data output by plotting informations relative to the most significant differentially expressed genes in our RNA-Seq analysis.
