@@ -115,9 +115,9 @@ We are now ready to perform our analysis, but first we need to get some data int
 >    Each line represents an exon, the first three columns are the genomic location, and the fourth column contains the name of the exon.
 >
 > 4. Let's rename our dataset to something more recognizable.
->    - Click on the **pencil icon** to edit the dataset attributes.
->    - In the next screen change the name of the dataset to `Exons`.
->    - Click the **Save** button.
+>    - Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
+>    - In the central panel, change the **Name** field to `Exons`
+>    - Click the **Save** button
 >
 >    Your history should now look something like this:
 >
@@ -219,7 +219,10 @@ This file contains only two columns. The first contains the exon IDs, and the se
 > ### {% icon question %} Question
 > How many exons are there in total in your file?
 >
-> *Hint: Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image below*.
+>    > > ### {% icon solution %} Solution
+>    > > Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image below. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information.
+>    > >
+>    > {: .solution }
 {: .question}
 
 ## Sort the exons by SNPs count
@@ -292,7 +295,7 @@ A good way to learn about these exons is to look at their genomic surrounding. T
 
 > ### {% icon hands_on %} Hands-on: UCSC genome browser
 >
-> 1. First, check that the **database** of your latest history dataset is `hg38`. If not, click on the pencil icon and modify the **Database/Build:** field to `Human Dec. 2013 (GRCh38/hg38) (hg38)`.
+> 1. First, check that the **database** of your latest history dataset is `hg38`. If not, click on the {% icon galaxy-pencil %} pencil icon and modify the **Database/Build:** field to `Human Dec. 2013 (GRCh38/hg38) (hg38)`.
 >
 >    ![Modify the database of the `Compare two Datasets` output dataset](../../images/101_20.png)
 >
@@ -377,7 +380,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >    > If you click on this asterisk for any of the output datasets, then *only* files with an asterisk will be shown, and all outputs without an asterisk will be hidden. (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown.)
 >    {: .tip}
 >
-> 3. **Click the asterisk** next to `out_file1` in the `Select First` and `Compare two Datasets` tools.
+> 3. Click the **asterisk** next to `out_file1` in the `Select First` and `Compare two Datasets` tools.
 >
 >    Now, when we run the workflow, we will only see the final two outputs, i.e. the table with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser. Once you have done this, you will notice that the **minimap** at the bottom-right corner of your screen will have a colour-coded view of your workflow, with orange boxes representing a tool with an output that will be shown.
 >
