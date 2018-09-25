@@ -175,11 +175,11 @@ On the x-axis are the base position in the read, and on the y-axis quality score
 >
 > 1. Which Phred encoding is used in the FASTQ file for these sequences?
 > 2. How is the mean score changing along the sequence?
-> 3. Is this tendency represent all sequences?
+> 3. Is this tendency seen in all sequences?
 >
 > > ### {% icon solution %} Solution
-> > 1. The Phred score are encoded using `Sanger / Illumina 1.9` (`Encoding` in the top table)
-> > 2. The mean score over the sequence is droping at the end of the sequences. It is usual: the sequencers are incorporating more errored nucleotides at the end. But the score stays good: over 28.
+> > 1. The Phred scores are encoded using `Sanger / Illumina 1.9` (`Encoding` in the top table)
+> > 2. The mean score over the sequence is dropping at the end of the sequences. It is usual: the sequencers are incorporating more errored nucleotides at the end. But the score stays good: over 28.
 > > 3. The box plots are getting wider at the end of the sequences. It means a lot of sequences have their score dropping at the end of the sequence. At after 31 nucleotides, more than 10% of the sequences have scores below 20.
 > >
 > {: .solution }
