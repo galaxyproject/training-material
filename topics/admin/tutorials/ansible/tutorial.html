@@ -192,7 +192,7 @@
 
         <h1 class="no_toc" id="overview">Overview</h1>
 
-<p>In this tutorial we have briefly cover what ansible is and how to understand what it does. This guide is not meant to make you an expert on ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Or maybe to contribute to the <a href="https://github.com/galaxyproject?q=ansible">Galaxyproject Ansible roles</a></p>
+<p>In this tutorial we have briefly cover what Ansible is and how to understand what it does. This guide is not meant to make you an expert on Ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Or maybe to contribute to the <a href="https://github.com/galaxyproject?q=ansible">Galaxyproject Ansible roles</a>.</p>
 
 <p>This will be a very practical training with emphasis on looking at examples from modules and becoming self sufficient.</p>
 
@@ -231,7 +231,7 @@
 
 <h1 id="what-is-ansible">What is Ansible?</h1>
 
-<p>Ansible runs commands on local or remote computers. It can move files around, create files from templates, and run command line tools. Primarily used for system administration tasks at scale. It has a push model rather than a pull model like puppet. If you’ve used puppet, ansible doesn’t evaluate what changes need to be made and make those, it just runs through all of commands every time.</p>
+<p>Ansible runs commands on local or remote computers. It can move files around, create files from templates, and run command line tools. Primarily used for system administration tasks at scale. It has a push model rather than a pull model like puppet. If you’ve used Puppet, Ansible doesn’t evaluate what changes need to be made and make those, it just runs through all of commands every time.</p>
 
 <p>Some terms that you should know first:</p>
 
@@ -245,27 +245,27 @@
   <tbody>
     <tr>
       <td>hosts files</td>
-      <td>Not <code class="highlighter-rouge">/etc/hosts</code>, instead this is an ansible specific file that defines groups of hosts</td>
+      <td>An Ansible-specific file that defines groups of hosts (not be confused with <code class="highlighter-rouge">/etc/hosts</code>).</td>
     </tr>
     <tr>
-      <td>ansible module</td>
-      <td>A piece of python code that converts some parameters into an invocation. An example would be the <code class="highlighter-rouge">exec</code> module which converts parameters like <code class="highlighter-rouge">command: ls</code> into a command line that is executed.</td>
+      <td>Ansible module</td>
+      <td>A piece of Python code that converts some parameters into an invocation. An example would be the <code class="highlighter-rouge">command</code> module which converts parameters like <code class="highlighter-rouge">command: ls</code> into a command line that is executed. There are pre-built modules for just about everything.</td>
     </tr>
     <tr>
-      <td>tasks</td>
-      <td>Yaml file(s) that contain a list of ansible modules that should be executed and the configuration for these modules. There are pre-built modules for just about everything</td>
+      <td>task</td>
+      <td>A call to an Ansible module that should be executed and the configuration for this module.</td>
     </tr>
     <tr>
       <td>role</td>
-      <td>A folder containing some tasks, templates, files, and default values for variables. People share roles on <a href="https://galaxy.ansible.com/">“Ansible Galaxy”</a></td>
+      <td>A folder containing some tasks, templates, files, and default values for variables. People share roles on <a href="https://galaxy.ansible.com/">“Ansible Galaxy”</a>.</td>
     </tr>
     <tr>
       <td>playbook</td>
-      <td>a yaml file listing a set of roles that should be applied to a group of hosts</td>
+      <td>a YAML file listing a set of tasks and/or roles that should be applied to a group of hosts.</td>
     </tr>
     <tr>
       <td>vault</td>
-      <td>An encrypted yaml file. You put your secrets here and then you can use them in tasks/roles/playbooks.</td>
+      <td>An encrypted YAML file. You put your secrets here and then you can use them in tasks/roles/playbooks.</td>
     </tr>
   </tbody>
 </table>
@@ -282,11 +282,11 @@
 <span class="err">db_1.fqdn.edu</span> <span class="py">ansible_user</span><span class="p">=</span><span class="s">root</span>
 </code></pre></div></div>
 
-<p>Here we’ve defined two groups of computers, <code class="highlighter-rouge">webservers</code> and <code class="highlighter-rouge">databases</code>. You can use <code class="highlighter-rouge">ansible_user</code> to specify which user to connect with.</p>
+<p>Here we’ve defined two groups of computers, <code class="highlighter-rouge">webservers</code> and <code class="highlighter-rouge">databases</code>. <code class="highlighter-rouge">ansible_user</code> is used to specify which user to connect with.</p>
 
 <blockquote class="tip">
   <h3 id="tip-ansible-inventory-documentation"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Ansible Inventory Documentation</h3>
-  <p>For more advanced features of the hosts file or “inventory”, check out <a href="https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html">the official documentation on this topic</a></p>
+  <p>For more advanced features of the hosts file or “inventory”, check out <a href="https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html">the official documentation on this topic</a>.</p>
 </blockquote>
 
 <h2 id="roles">Roles</h2>
@@ -321,27 +321,27 @@
   <tbody>
     <tr>
       <td>defaults</td>
-      <td>Default variables values go here (e.g. “version of software to install”)</td>
+      <td>Default variables values go here (e.g. “version of software to install”).</td>
     </tr>
     <tr>
       <td>files</td>
-      <td>These are files which should be copied as-is over to the remote location</td>
+      <td>These are files which should be copied as-is over to the remote location.</td>
     </tr>
     <tr>
       <td>handlers</td>
-      <td>This is for restarting processes usually</td>
+      <td>This is for restarting processes usually.</td>
     </tr>
     <tr>
       <td>meta</td>
-      <td>Only needed if you publish your role to ansible galaxy</td>
+      <td>Only needed if you publish your role to Ansible Galaxy.</td>
     </tr>
     <tr>
       <td>tasks</td>
-      <td><strong>Always start reading here</strong>. This is the most important file and the best place to start when trying to understand what an unfamiliar module does. Anything that is loaded will be referenced here, e.g. variables to load, handlers, files, templates.</td>
+      <td><strong>Always start reading here</strong>. This is the most important folder and the best place to start when trying to understand what an unfamiliar role does. Anything that is loaded will be referenced here, e.g. variables to load, handlers, files, templates.</td>
     </tr>
     <tr>
       <td>templates</td>
-      <td>Files that are templated out with variables before being copied</td>
+      <td>Files that are templated out with variables before being copied.</td>
     </tr>
   </tbody>
 </table>
@@ -349,12 +349,12 @@
 <blockquote class="tip">
   <h3 id="tip-ansible-role-documentation"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Ansible Role Documentation</h3>
 
-  <p>For more information check out <a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html">the official documentation on this topic</a></p>
+  <p>For more information check out <a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html">the official documentation on this topic</a>.</p>
 </blockquote>
 
 <h2 id="modules-and-tasks">Modules and Tasks</h2>
 
-<p>Your <code class="highlighter-rouge">tasks/main.yml</code> file calls multiple Ansible modules to accomplish its goal. A tasks file looks like:</p>
+<p>A <code class="highlighter-rouge">tasks/main.yml</code> file calls multiple Ansible modules to accomplish its goal. A typical tasks file looks like:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install CernVM-FS client (yum)</span>
@@ -372,7 +372,7 @@
 
 <p>Here we have two tasks. Each has a <code class="highlighter-rouge">name</code> that will be shown to the person running the playbook.</p>
 
-<p>The first invokes the <code class="highlighter-rouge">yum</code> module with the arguments <code class="highlighter-rouge">name: cvmfs, state: ...</code>. This will use yum to install the package named <code class="highlighter-rouge">cvmfs</code>. The state parameter uses a jinja2 template to evaluate the value of the variable <code class="highlighter-rouge">cvmfs_upgrade_client</code>. We can <a href="https://github.com/galaxyproject/ansible-cvmfs/search?q=cvmfs_upgrade_client&amp;unscoped_q=cvmfs_upgrade_client">grep through</a> the repository and see that <code class="highlighter-rouge">defaults/main.yml</code> sets that to <code class="highlighter-rouge">false</code> by default. We can override this if we need, we’ll come back to that later. The first task also has a <code class="highlighter-rouge">when</code> condition to ensure it only runs on RHEL family machines, so RedHat or CentOS. It is better to use the <a href="http://docs.ansible.com/ansible/latest/package_module.html"><code class="highlighter-rouge">package</code></a> module which will be OS-generic.</p>
+<p>The first invokes the <code class="highlighter-rouge">yum</code> module with the arguments <code class="highlighter-rouge">name: cvmfs, state: ...</code>. This will use yum to install the package named <code class="highlighter-rouge">cvmfs</code>. The state parameter uses a <a href="http://jinja.pocoo.org/">Jinja2</a> template to evaluate the value of the variable <code class="highlighter-rouge">cvmfs_upgrade_client</code>. We can <a href="https://github.com/galaxyproject/ansible-cvmfs/search?q=cvmfs_upgrade_client&amp;unscoped_q=cvmfs_upgrade_client">grep through</a> the repository and see that <code class="highlighter-rouge">defaults/main.yml</code> sets that to <code class="highlighter-rouge">false</code> by default. We can override this if we need, we’ll come back to that later. The first task also has a <code class="highlighter-rouge">when</code> condition to ensure it only runs on RHEL family machines, so RedHat or CentOS. It is better to use the OS-generic <a href="http://docs.ansible.com/ansible/latest/package_module.html"><code class="highlighter-rouge">package</code></a> module, if possible.</p>
 
 <p>The second invokes the <a href="http://docs.ansible.com/ansible/latest/service_module.html"><code class="highlighter-rouge">service</code></a> module. The arguments to this one are quite legible and the functionality can be inferred from the names for the most part: The service <code class="highlighter-rouge">name: autofs</code> will be <code class="highlighter-rouge">enabled</code> and its <code class="highlighter-rouge">state</code> should be <code class="highlighter-rouge">started</code>.</p>
 
@@ -409,7 +409,7 @@
 <blockquote class="tip">
   <h3 id="tip-ansible-playbook-documentation"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Ansible Playbook Documentation</h3>
 
-  <p>For more information check out <a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html">the official documentation on this topic</a></p>
+  <p>For more information check out <a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html">the official documentation on this topic</a>.</p>
 </blockquote>
 
 <h3 id="philosophies">Philosophies</h3>
@@ -450,7 +450,7 @@
 
 <h2 id="vaults">Vaults</h2>
 
-<p><a href="https://docs.ansible.com/ansible/latest/user_guide/vault.html"><code class="highlighter-rouge">ansible-vault</code></a> is a super useful tool that lets you encrypt secrets for your group using a pre-shared key. This allows you to commit ALL of your ansible playbooks and variables to source control, without the concern of leaking secrets. E.g. <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/secret_group_vars/all.yml">UseGalaxy.eu</a>’s vault file. The encrypted version is not very interesting to look at, but it is mostly to show that we confidently place an encrypted copy of our secrets online, under configuration management. This has made our life a lot easier.</p>
+<p><a href="https://docs.ansible.com/ansible/latest/user_guide/vault.html"><code class="highlighter-rouge">ansible-vault</code></a> is a super useful tool that lets you encrypt secrets for your group using a pre-shared key. This allows you to commit ALL of your Ansible playbooks and variables to source control, without the concern of leaking secrets. E.g. <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/secret_group_vars/all.yml">UseGalaxy.eu</a>’s vault file. The encrypted version is not very interesting to look at, but it is mostly to show that we confidently place an encrypted copy of our secrets online, under configuration management. This has made our life a lot easier.</p>
 
 <h1 id="your-first-playbook-and-first-role">Your First Playbook and First Role</h1>
 
@@ -466,7 +466,7 @@ Ansible provides some flags which can help you identify changes before they’re
     <dt><strong><code class="highlighter-rouge">--diff</code></strong></dt>
     <dd>This will show the difference whenever a file is changed.</dd>
     <dt><strong><code class="highlighter-rouge">--check</code></strong></dt>
-    <dd>Will do a dry-run of the playbook, attempting to show you which tasks will execute, which files will be updated. Not all actions can be predicted because commands are not run, if a downstream task depends on the result of a command execution task, ansible has no way of knowing whether or not it will execute</dd>
+    <dd>Will do a dry-run of the playbook, attempting to show you which tasks will execute, which files will be updated. Not all actions can be predicted because commands are not run, if a downstream task depends on the result of a command execution task, Ansible has no way of knowing whether or not it will execute.</dd>
   </dl>
 
   <p>In this tutorial we will write to files in <code class="highlighter-rouge">/tmp</code> as that is a <em>relatively</em> safe thing to do. The training material community does not have the resources to test this tutorial across all of the platforms you might want to run it on. Additionally we do not want to be responsible if you accidentally cause permanent damage by following this tutorial.</p>
@@ -480,7 +480,7 @@ Ansible provides some flags which can help you identify changes before they’re
 
   <ol>
     <li>
-      <p><a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Install ansible.</a></p>
+      <p><a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Install Ansible.</a></p>
     </li>
     <li>
       <p>Create an empty directory and <code class="highlighter-rouge">cd</code> into it</p>
@@ -511,7 +511,7 @@ your.host
       <p>Create the roles directory, your role, and the tasks folder: <code class="highlighter-rouge">mkdir -p roles/my-role/tasks/</code></p>
     </li>
     <li>
-      <p>Create a yaml file in that directory, <code class="highlighter-rouge">roles/my-role/tasks/main.yml</code> and open it for editing</p>
+      <p>Create a YAML file in that directory, <code class="highlighter-rouge">roles/my-role/tasks/main.yml</code> and open it for editing</p>
     </li>
     <li>
       <p>Define a <code class="highlighter-rouge">copy</code> task like below:</p>
@@ -527,7 +527,7 @@ your.host
 
       <blockquote class="tip">
         <h3 id="tip-ansible-module-documentation"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Ansible Module Documentation</h3>
-        <p>You can usually find a module that will represent most commands you will run at the linux cli. Usually by searching the internet for “ansible $do-some-action” e.g. “ansible copy file to server” or “ansible restart service.” If you cannot find a module that does it, there is the <a href="http://docs.ansible.com/ansible/latest/command_module.html"><code class="highlighter-rouge">command</code></a> module, but this should be avoided if possible. Expect to have a browser session with 10-30 different ansible module documentation tabs if you work with ansible regularly, no one remembers what arguments are available to this or that module.</p>
+        <p>You can usually find a module that will represent most commands you will run at the linux cli. Usually by searching the internet for “ansible $do-some-action” e.g. “ansible copy file to server” or “ansible restart service.” If you cannot find a module that does it, there is the <a href="http://docs.ansible.com/ansible/latest/command_module.html"><code class="highlighter-rouge">command</code></a> module, but this should be avoided if possible. Expect to have a browser session with 10-30 different Ansible module documentation tabs if you work with Ansible regularly, no one remembers what arguments are available to every module.</p>
 
       </blockquote>
     </li>
@@ -576,7 +576,7 @@ your.host
         <li>Localhost: <code class="highlighter-rouge">ansible-playbook -i hosts -c local playbook.yml</code></li>
       </ul>
 
-      <p>Even local users can run the ‘real remote host’ command, ansible will just issue a warning. Running with <code class="highlighter-rouge">-c local</code> silences this warning.</p>
+      <p>Even local users can run the ‘real remote host’ command, Ansible will just issue a warning. Running with <code class="highlighter-rouge">-c local</code> silences this warning.</p>
 
       <blockquote class="question">
         <h3 id="question-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -612,13 +612,13 @@ localhost                  : ok=2    changed=1    unreachable=0    failed=0
 <p>Now that you’ve done this, here are some starting points for exploration:</p>
 
 <ul>
-  <li>Add more hosts, watch as ansible executes over all of them in parallel.</li>
-  <li>Identify a task you do regularly, e.g. restarting a service. Find the ansible service module and add that to your playbook.</li>
+  <li>Add more hosts, watch as Ansible executes over all of them in parallel.</li>
+  <li>Identify a task you do regularly, e.g. restarting a service. Find the Ansible service module and add that to your playbook.</li>
 </ul>
 
 <blockquote class="tip">
   <h3 id="tip-too-many-cows"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Too Many Cows?</h3>
-  <p>If you’ve installed the <code class="highlighter-rouge">cowsay</code> tool, ansible (for some reason) will take advantage of that to output a lot of the output with cowsay. To disable this you can <code class="highlighter-rouge">export ANSIBLE_NOCOWS=1</code> (Remember that exporting will only last as long as the current invocation of your terminal does, so consider adding this to your user profile if you wish to keep cowsay installed and still have legible output.)</p>
+  <p>If you’ve installed the <code class="highlighter-rouge">cowsay</code> tool, Ansible (for some reason) will take advantage of that to output a lot of the output with cowsay. To disable this you can <code class="highlighter-rouge">export ANSIBLE_NOCOWS=1</code> (Remember that exporting will only last as long as the current invocation of your terminal does, so consider adding this to your user profile if you wish to keep cowsay installed and still have legible output.)</p>
 
   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ________________
 &lt; PLAY [my_hosts] &gt;
@@ -674,7 +674,7 @@ ok: [localhost]
 
           <ol>
             <li>
-              <p>The OS name is stored in <code class="highlighter-rouge">ansible_distribution</code>. We saw <code class="highlighter-rouge">ansible_os_family</code> used above in the ansible-cvmfs role. You can use these variables if you are writing a generic role but packages or commands are named different on different operating systems.</p>
+              <p>The OS name is stored in <code class="highlighter-rouge">ansible_distribution</code>. We saw <code class="highlighter-rouge">ansible_os_family</code> used above in the <code class="highlighter-rouge">ansible-cvmfs</code> role. You can use these variables if you are writing a generic role but packages or commands are named different on different operating systems.</p>
             </li>
             <li>
               <p>Ansible stores network information in quite a few places, sometimes one place is more convenient or more correct to use:</p>
@@ -816,7 +816,7 @@ PLAY RECAP **********************************************
 localhost                  : ok=3    changed=1    unreachable=0    failed=0
 </code></pre></div>          </div>
 
-          <p>Here you can see that the api_key value will be changed. Despite ansible reporting <code class="highlighter-rouge">changed=1</code>, no changes have actually been applied to the system.</p>
+          <p>Here you can see that the api_key value will be changed. Despite Ansible reporting <code class="highlighter-rouge">changed=1</code>, no changes have actually been applied to the system.</p>
         </blockquote>
       </blockquote>
     </li>
@@ -828,16 +828,16 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0
 
 <h1 id="ansible-galaxy">Ansible Galaxy</h1>
 
-<p>Now that you’ve built a small role, you can imagine that building real roles that manage the full installation of a piece of software are not simple things. Ansible Galaxy is the answer here. Many roles for common administration tasks and software installation + setup are readily available on ansible-galaxy.</p>
+<p>Now that you’ve built a small role, you can imagine that building real roles that manage the full installation of a piece of software are not simple things. Ansible Galaxy is the answer here. Many roles for common administration tasks, and software installation and setup are readily available on Ansible Galaxy.</p>
 
 <p><strong>Warning</strong>: This will install git on the remote machine.</p>
 
 <blockquote class="hands_on">
-  <h3 id="hands_on-hands-on-installing-a-module-from-ansible-galaxy"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing a module from ansible-galaxy</h3>
+  <h3 id="hands_on-hands-on-installing-a-module-using-ansible-galaxy"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing a module using ansible-galaxy</h3>
 
   <ol>
     <li>
-      <p>Run the command <code class="highlighter-rouge">ansible-galaxy install -p roles geerlingguy.git</code></p>
+      <p>Run the command <code class="highlighter-rouge">ansible-galaxy install -p roles/ geerlingguy.git</code></p>
 
       <p>This will install the new role into your <code class="highlighter-rouge">roles</code> folder, alongside your own role.</p>
     </li>
@@ -858,7 +858,7 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0
           <p>Since you have been running the playbook as a non-root user (or at least you should have been!), the step to install a package fails.
 The solution to this is to set <code class="highlighter-rouge">become: true</code>. Edit your playbook.yml and add <code class="highlighter-rouge">become: true</code> just below <code class="highlighter-rouge">hosts: my_hosts</code>.</p>
 
-          <p><code class="highlighter-rouge">become</code> causes ansible to attempt to become a different user (using sudo/su/whatever is appropriate), by default this is <code class="highlighter-rouge">root</code>. If you want to become a different user, just set <code class="highlighter-rouge">become_user</code>. Beware, the user should be able to privilege escalate without a password prompt. Otherwise when you execute the playbook you should set <code class="highlighter-rouge">--ask-become-pass</code>, using the privilege escalation password for that host.</p>
+          <p><code class="highlighter-rouge">become</code> causes Ansible to attempt to become a different user (using sudo/su/whatever is appropriate), by default this is <code class="highlighter-rouge">root</code>. If you want to become a different user, just set <code class="highlighter-rouge">become_user</code>. Beware, the user should be able to privilege escalate without a password prompt. Otherwise when you execute the playbook you should set <code class="highlighter-rouge">--ask-become-pass</code>, using the privilege escalation password for that host.</p>
 
           <blockquote class="tip">
             <h3 id="tip-ansible-become"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Ansible Become</h3>
@@ -899,7 +899,7 @@ The solution to this is to set <code class="highlighter-rouge">become: true</cod
 
 <h2 id="with-items">With Items</h2>
 
-<p>Duplicating tasks ten times to install ten packages isn’t efficient, so ansible provides <code class="highlighter-rouge">with_items</code> construct</p>
+<p>Duplicating tasks ten times to install ten packages is not efficient, so Ansible provides <code class="highlighter-rouge">with_items</code> construct</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install stuff</span>
   <span class="na">package</span><span class="pi">:</span>
@@ -917,8 +917,7 @@ The solution to this is to set <code class="highlighter-rouge">become: true</cod
 
 <p>Doing something only when a task is in the “changed” state is a common pattern. This is often used for reloading a service when some configuration files have changed.</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Copy configuration file</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Copy configuration file</span>
   <span class="na">copy</span><span class="pi">:</span>
     <span class="na">src</span><span class="pi">:</span> <span class="s">main.conf</span>
     <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/etc/service/main.conf</span>
