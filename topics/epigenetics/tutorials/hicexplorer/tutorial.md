@@ -91,7 +91,7 @@ We have used the HiCExplorer successfully with bwa, bowtie2 and hisat2. In this 
 >
 > 1. **Map with BWA-MEM 0.7.17.1** {% icon tool %}: Run Map with BWA-MEM on both strands `HiC_S2_1p_10min_lowU_R1` and `HiC_S2_1p_10min_lowU_R2` with:
 >    - "Will you select a reference genome from your history or use a built-in index?" to `Use a built-in index`
->    - "Using reference genome" to `dm6`
+>    - "Using reference genome" to `dm3`
 >    - "Single or Paired-end reads?" to `Single`
 >    - Set multiple data sets
 >    - "Select fastq dataset" to `HiC_S2_1p_10min_lowU_R1`and `HiC_S2_1p_10min_lowU_R2`
@@ -148,11 +148,12 @@ A 10kb bin matrix is too large to plot, it's better to reduce the resolution. We
 > 2. Rename the output to `1 MB contact matrix`.
 >
 > 3. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix on the output from hicMergeMatrixBins `1 MB contact matrix` adjusting the parameters:
->    - "Plot title" to `Hi-C matrix for dm6`
+>    - "Plot title" to `Hi-C matrix for dm3`
 >    - "Remove masked bins from the matrix" to `True`
 >    - "Plot the log1p of the matrix values: `True`
->    - "Chromosomes to include (and order to plot in)" to `chr2L`
+>    - "Chromosomes to include (and order to plot in)"
 >    ![Chromoses to include](../../images/hicPlotMatrix_option.png)
+>    - "+ Insert Chromosomes to include (and order to plot in):" to `chr2L`
 >    - "+ Insert Chromosomes to include (and order to plot in):" to `chr2R`
 >    - "+ Insert Chromosomes to include (and order to plot in):" to `chr3L`
 >    - "+ Insert Chromosomes to include (and order to plot in):" to `chr3R`
@@ -181,11 +182,11 @@ Matrix correction works in two steps: first a histogram containing the sum of co
 > 1. **hicCorrectMatrix** {% icon tool %}: Run hicCorrectMatrix on the output from hicBuildMatrix `10 kb contact matrix` adjusting the parameters:
 >    - "Mode" to `Diagnostic plot`
 >    - "Include chromosomes" to 
->    - "+ Insert Chromosomes to include (and order to plot in):" to `chr2L`
->    - "+ Insert Chromosomes to include (and order to plot in):" to `chr2R`
->    - "+ Insert Chromosomes to include (and order to plot in):" to `chr3L`
->    - "+ Insert Chromosomes to include (and order to plot in):" to `chr3R`
->    - "+ Insert Chromosomes to include (and order to plot in):" to `chrX`
+>    - "+ Insert Include chromosomes:" to `chr2L`
+>    - "+ Insert Include chromosomes:" to `chr2R`
+>    - "+ Insert Include chromosomes:" to `chr3L`
+>    - "+ Insert Include chromosomes:" to `chr3R`
+>    - "+ Insert Include chromosomes:" to `chrX`
 >
 {: .hands_on}
 
@@ -200,11 +201,12 @@ In our case the distribution describes the counts per bin of a genomic distance.
 >    - "Normalize each chromosome separately" to `True`
 >    - "Remove bins of low coverage" to `-1.6`
 >    - "Remove bins of large coverage" to `1.8`
->    - "Chromosomes to include (and order to plot in)" to `chr2L`
->    - "+ Insert Chromosomes to include (and order to plot in):" to `chr2R`
->    - "+ Insert Chromosomes to include (and order to plot in):" to `chr3L`
->    - "+ Insert Chromosomes to include (and order to plot in):" to `chr3R`
->    - "+ Insert Chromosomes to include (and order to plot in):" to `chrX`
+>    - "Include chromosomes" to
+>    - "+ Insert Include chromosomes:" to `chr2L`
+>    - "+ Insert Include chromosomes:" to `chr2R`
+>    - "+ Insert Include chromosomes:" to `chr3L`
+>    - "+ Insert Include chromosomes:" to `chr3R`
+>    - "+ Insert Include chromosomes:" to `chrX`
 >
 > 2. Rename the corrected matrix to `10 kb corrected contact matrix`.
 >
@@ -226,7 +228,7 @@ We can now plot chromosome 2L with the corrected matrix.
 > ### {% icon hands_on %} Hands-on: Plotting the corrected Hi-C matrix
 >
 > 1. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix on `10 kb corrected contact matrix` adjusting the parameters:
->    - "Plot title" to `Hi-C matrix for dm6`
+>    - "Plot title" to `Hi-C matrix for dm3`
 >    - "Plot per chromosome" to `False`
 >    - "Plot only this region" to `chr2L`
 >    - "Plot the log1p of the matrix values" to `True`
@@ -271,16 +273,24 @@ As an output we get the boundaries, domains and scores separated files. We will 
 
 # Integrating Hi-C and other data
 
-We can plot the TADs for a given chromosomal region. For this we will use [hicPlotTADs](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html). But before make sure to import [gene track file](https://zenodo.org/record/1176070/files/dm6_genes.bed) in .bed format from [Zenodo](https://doi.org/10.5281/zenodo.1176070).
+We can plot the TADs for a given chromosomal region. For this we will use [hicPlotTADs](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html). 
 
-For the next step we need can add additional data tracks. Please load `dm6_genes.bed`, `H3K27me3.bw`, `H3K36me3.bw` and `H4K16ac.bw` to your history.
+> ### {% icon hands_on %} Hands-on: Import additional data
+>
+> Make sure to import the following files from [Zenodo](https://doi.org/10.5281/zenodo.1183661) into your history:
+> - [gene track file](https://zenodo.org/record/1183661/files/dm3_genes.bed) 
+> - [H3K27me3.bw](https://zenodo.org/record/1183661/files/H3K27me3.bw)
+> - [H3K36me3.bw](https://zenodo.org/record/1183661/files/H3K36me3.bw)
+> - [H4K16ac.bw](https://zenodo.org/record/1183661/files/H4K16ac.bw)
+>
+{: .hands_on}
 
 > ### {% icon hands_on %} Hands-on: Plotting TADs
 >
 > 1. **hicPlotTADs** {% icon tool %}: Run hicPlotTADs adjusting the parameters:
 >    - "Region of the genome to limit the operation" to `chr2L:14500000-16500000`
 >    - 1: "Choose style of the track" to `TAD visualization`
->         - "Plot title" to `HiC dm6 chr2L:14500000-16500000`
+>         - "Plot title" to `HiC dm3 chr2L:14500000-16500000`
 >         - "Matrix to compute on." to the corrected matrix from hicCorrectMatrix step
 >         - "Depth" to `750000`
 >         - "Width" to `4`
@@ -314,28 +324,28 @@ For the next step we need can add additional data tracks. Please load `dm6_genes
 >
 >    - 5: "+Insert Include tracks in your plot"
 >        - "Choose style of the track" to `Gene track`
->        - "Plot title" to `dm6 genes`
+>        - "Plot title" to `dm3 genes`
 >        - "Track file bedgraph format" the imported .bed file
 >        - "Color of track" to a color of your choice
 >        - "Width" to `3`
 >        - "Type" to `genes`
 >        - "Gene rows" to `15`
 >
->    - 6: "+Insert Include tracks in your plot" (optional)
+>    - 6: "+Insert Include tracks in your plot"
 >        - "Choose style of the track" to `Bigwig track`
 >        - "Plot title" to `H3K36me3`
 >        - "Track file bigwig format" to `H3K36me3`
 >        - "Color of track" to a color of your choice
 >        - "Width" to `1.5`
 >
->    - 7: "+Insert Include tracks in your plot" (optional)
+>    - 7: "+Insert Include tracks in your plot"
 >        - "Choose style of the track" to `Bigwig track`
 >        - "Plot title" to `H3K27me3`
 >        - "Track file bigwig format" to `H3K27me3`
 >        - "Color of track" to a color of your choice
 >        - "Width" to `1.5`
 >
->    - 8: "+Insert Include tracks in your plot" (optional)
+>    - 8: "+Insert Include tracks in your plot"
 >        - "Choose style of the track" to `Bigwig track`
 >        - "Plot title" to `H4K16ac`
 >        - "Track file bigwig format" to `H4K16ac`
