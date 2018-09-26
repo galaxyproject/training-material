@@ -18,6 +18,7 @@ contributors:
   - fidelram
   - vivekbhr
   - polkhe
+  - scholtalbers
 ---
 
 # Introduction
@@ -68,7 +69,8 @@ After a corrected Hi-C matrix is created other tools can be used to visualize it
 >
 > 3. Rename the data set to something meaningful, e.g. `HiC_S2_1p_10min_lowU_R1` and `HiC_S2_1p_10min_lowU_R2`.
 > By default, when data is imported via its link, Galaxy names it with its URL.
->
+> 4. (optional) Add the tags `#R1` and `#R2` to the corresponding datasets
+> 
 > > ### {% icon tip %} Tip: Get data from public sources
 > > HiCExplorer needs as input the forward and reverse strand of a pair end read which are mapped independently. A usual start point for a typical analysis is the given GSE number of a publication, e.g. GSE63525 for Rao 2014. To get the actual data, go to [NCBI](https://www.ncbi.nlm.nih.gov/geo/) and search for the [GSE number](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE63525). In the section 'Samples' the GSM numbers of all samples are given. Select the correct one for you, and go to the [European Nucleotide Archive](https://www.ebi.ac.uk/ena) and enter the GSM number. Select a matching result e.g. [SRX764936](https://www.ebi.ac.uk/ena/data/view/SRX764936) and download the data given in the row 'FASTQ files (FTP)' the forward and reverse strand.
 > > It is important to have the forward and reverse strand individual as a FASTQ file and to map it individually, HiCExplorer can not work with interleaved files. 
@@ -87,17 +89,18 @@ We have used the HiCExplorer successfully with bwa, bowtie2 and hisat2. In this 
 
 > ### {% icon hands_on %} Hands-on: Mapping reads
 >
-> 1. **Map with BWA-MEM 0.8.0** {% icon tool %}: Run Map with BWA-MEM on both strands `HiC_S2_1p_10min_lowU_R1` and `HiC_S2_1p_10min_lowU_R2` with:
+> 1. **Map with BWA-MEM 0.7.17.1** {% icon tool %}: Run Map with BWA-MEM on both strands `HiC_S2_1p_10min_lowU_R1` and `HiC_S2_1p_10min_lowU_R2` with:
 >    - "Will you select a reference genome from your history or use a built-in index?" to `Use a built-in index`
->    - "Select a reference genome" to `dm3`
->    - "Is this library mate-paired?" to `Single-end or interleaved paired-end`
+>    - "Using reference genome" to `dm6`
+>    - "Single or Paired-end reads?" to `Single`
 >    - Set multiple data sets
->    - "FASTQ file" to `HiC_S2_1p_10min_lowU_R1`and `HiC_S2_1p_10min_lowU_R2`
->    - "BWA settings to use" to `Full parameter List`
->    - "Gap extension penalty (-E)" to `50`
->    - "Penalty for clipping (-L)" to `0`
+>    - "Select fastq dataset" to `HiC_S2_1p_10min_lowU_R1`and `HiC_S2_1p_10min_lowU_R2`
+>    - "Select analysis mode" to `5. Full list of options`
+>    - "Gap extension penalties (..) (-E)" to `50`
+>    - "Penalties for 5'-end and 3'-end clipping (-L)" to `0`
 >
-> 2. Rename the output of the tool according to the corresponding files: `R1.sam` and `R2.sam`
+> 2. (optional) Rename the output of the tool according to the corresponding files: `R1` and `R2`. Note: if you
+>    added the tags `#R1` and `#R2` you can identify the datasets with those.
 >
 {: .hands_on}
 
@@ -109,9 +112,9 @@ For this step we will use [hicBuildMatrix](http://hicexplorer.readthedocs.io/en/
 
 > ### {% icon hands_on %} Hands-on: hicBuildMatrix
 >
-> 1. **hicBuildMatrix** {% icon tool %}: Run hicBuildMatrix on the `R1.sam` and `R2.sam` from previous step with modifying the following parameters:
->    - "1: Sam/Bam files to process" to `R1.sam`
->    - "2: Sam/Bam files to process" to `R2.sam`
+> 1. **hicBuildMatrix** {% icon tool %}: Run hicBuildMatrix on the `R1` and `R2` from previous step with modifying the following parameters:
+>    - "1: Sam/Bam files to process" to `R1`
+>    - "2: Sam/Bam files to process" to `R2`
 >    - "Choose to use a restriction cut file or a bin size" to `Bin size`
 >    - "Bin size in bp" to `10000`
 >    - "Sequence of the restriction site" to `GATC`
@@ -145,10 +148,11 @@ A 10kb bin matrix is too large to plot, it's better to reduce the resolution. We
 > 2. Rename the output to `1 MB contact matrix`.
 >
 > 3. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix on the output from hicMergeMatrixBins `1 MB contact matrix` adjusting the parameters:
->    - "Plot title" to `Hi-C matrix for dm3`
+>    - "Plot title" to `Hi-C matrix for dm6`
 >    - "Remove masked bins from the matrix" to `True`
 >    - "Plot the log1p of the matrix values: `True`
 >    - "Chromosomes to include (and order to plot in)" to `chr2L`
+>    ![Chromoses to include](../../images/hicPlotMatrix_option.png)
 >    - "+ Insert Chromosomes to include (and order to plot in):" to `chr2R`
 >    - "+ Insert Chromosomes to include (and order to plot in):" to `chr3L`
 >    - "+ Insert Chromosomes to include (and order to plot in):" to `chr3R`
@@ -175,8 +179,9 @@ Matrix correction works in two steps: first a histogram containing the sum of co
 > ### {% icon hands_on %} Hands-on: Matrix diagnostic
 > 
 > 1. **hicCorrectMatrix** {% icon tool %}: Run hicCorrectMatrix on the output from hicBuildMatrix `10 kb contact matrix` adjusting the parameters:
->    - "Range restriction (in bp)" to `Diagnostic plot`
->    - "Chromosomes to include (and order to plot in)" to `chr2L`
+>    - "Mode" to `Diagnostic plot`
+>    - "Include chromosomes" to 
+>    - "+ Insert Chromosomes to include (and order to plot in):" to `chr2L`
 >    - "+ Insert Chromosomes to include (and order to plot in):" to `chr2R`
 >    - "+ Insert Chromosomes to include (and order to plot in):" to `chr3L`
 >    - "+ Insert Chromosomes to include (and order to plot in):" to `chr3R`
@@ -190,8 +195,8 @@ In our case the distribution describes the counts per bin of a genomic distance.
 
 > ### {% icon hands_on %} Hands-on: Matrix correction
 >
-> 1. **hicCorrectMatrix** {% icon tool %}: Run hicCorrectMatrix on the original matrix `10 kb contact matrix` adjusting the parameters:
->    - "Range restriction (in bp)" to `Correct matrix`
+> 1. **hicCorrectMatrix** {% icon tool %}: Rerun hicCorrectMatrix on the original matrix `10 kb contact matrix` adjusting the parameters:
+>    - "Mode" to `Correct matrix`
 >    - "Normalize each chromosome separately" to `True`
 >    - "Remove bins of low coverage" to `-1.6`
 >    - "Remove bins of large coverage" to `1.8`
@@ -221,7 +226,7 @@ We can now plot chromosome 2L with the corrected matrix.
 > ### {% icon hands_on %} Hands-on: Plotting the corrected Hi-C matrix
 >
 > 1. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix on `10 kb corrected contact matrix` adjusting the parameters:
->    - "Plot title" to `Hi-C matrix for dm3`
+>    - "Plot title" to `Hi-C matrix for dm6`
 >    - "Plot per chromosome" to `False`
 >    - "Plot only this region" to `chr2L`
 >    - "Plot the log1p of the matrix values" to `True`
@@ -268,75 +273,74 @@ As an output we get the boundaries, domains and scores separated files. We will 
 
 We can plot the TADs for a given chromosomal region. For this we will use [hicPlotTADs](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html). But before make sure to import [gene track file](https://zenodo.org/record/1176070/files/dm6_genes.bed) in .bed format from [Zenodo](https://doi.org/10.5281/zenodo.1176070).
 
-For the next step we need additional data tracks. Please load `dm3_genes.bed`, `H3K27me3.bw`, `H3K36me3.bw` and `H4K16ac.bw` to your history.
+For the next step we need can add additional data tracks. Please load `dm6_genes.bed`, `H3K27me3.bw`, `H3K36me3.bw` and `H4K16ac.bw` to your history.
 
 > ### {% icon hands_on %} Hands-on: Plotting TADs
 >
 > 1. **hicPlotTADs** {% icon tool %}: Run hicPlotTADs adjusting the parameters:
 >    - "Region of the genome to limit the operation" to `chr2L:14500000-16500000`
->    - "Choose style of the track" to `TAD visualization`
->         - "Plot title" to `HiC dm3 chr2L:14500000-16500000`
+>    - 1: "Choose style of the track" to `TAD visualization`
+>         - "Plot title" to `HiC dm6 chr2L:14500000-16500000`
 >         - "Matrix to compute on." to the corrected matrix from hicCorrectMatrix step
 >         - "Depth" to `750000`
 >         - "Width" to `4`
 >         - "Boundaries file" to `hicFindTads on data XX: TAD domains`
 >         - "Show x labels" to `Yes`
 >
->    - "+Insert Include tracks in your plot"
+>    - 2: "+Insert Include tracks in your plot"
 >        - "Choose style of the track" to `Bedgraph matrix track`
 >        - "Plot title" to `TAD separation score`
 >        - "Track file bedgraph format" to `hicFindTads on data XX: TAD information in bm file`
 >        - "Width" to `4`
 >        - "Set type to lines" to 'True'
 >
->
->    - "+Insert Include tracks in your plot"
+>    - 3: "+Insert Include tracks in your plot"
 >        - "Choose style of the track" to `Bigwig track`
 >        - "Plot title" to `PC1`
 >        - "Track file bigwig format" the first computed `hicPCA` result
+>        - "Color of track" to a color of your choice
 >        - "Minimum value" to `-0.03`
 >        - "Maximum value" to `0.03`
 >        - "Width" to `1.5`
->        - "Color of track" to a color of your choice
 >
->    - "+Insert Include tracks in your plot"
+>    - 4: "+Insert Include tracks in your plot"
 >        - "Choose style of the track" to `Bigwig track`
 >        - "Plot title" to `PC2`
 >        - "Track file bigwig format" the second computed `hicPCA` result
+>        - "Color of track" to a color of your choice
 >        - "Minimum value" to `-0.03`
 >        - "Maximum value" to `0.03`
 >        - "Width" to `1.5`
->        - "Color of track" to a color of your choice
 >
->    - "+Insert Include tracks in your plot"
->        - "Choose style of the track" to `Bigwig track`
->        - "Plot title" to `H3K36me3`
->        - "Track file bigwig format" to `H3K36me3`
->        - "Width" to `1.5`
->        - "Color of track" to a color of your choice
->
->    - "+Insert Include tracks in your plot"
->        - "Choose style of the track" to `Bigwig track`
->        - "Plot title" to `H3K27me3`
->        - "Track file bigwig format" to `H3K27me3`
->        - "Width" to `1.5`
->        - "Color of track" to a color of your choice
->
->    - "+Insert Include tracks in your plot"
->        - "Choose style of the track" to `Bigwig track`
->        - "Plot title" to `H4K16ac`
->        - "Track file bigwig format" to `H4K16ac`
->        - "Width" to `1.5`
->        - "Color of track" to a color of your choice
->
->    - "+Insert Include tracks in your plot"
+>    - 5: "+Insert Include tracks in your plot"
 >        - "Choose style of the track" to `Gene track`
->        - "Plot title" to `dm3 genes`
+>        - "Plot title" to `dm6 genes`
 >        - "Track file bedgraph format" the imported .bed file
+>        - "Color of track" to a color of your choice
 >        - "Width" to `3`
 >        - "Type" to `genes`
 >        - "Gene rows" to `15`
+>
+>    - 6: "+Insert Include tracks in your plot" (optional)
+>        - "Choose style of the track" to `Bigwig track`
+>        - "Plot title" to `H3K36me3`
+>        - "Track file bigwig format" to `H3K36me3`
 >        - "Color of track" to a color of your choice
+>        - "Width" to `1.5`
+>
+>    - 7: "+Insert Include tracks in your plot" (optional)
+>        - "Choose style of the track" to `Bigwig track`
+>        - "Plot title" to `H3K27me3`
+>        - "Track file bigwig format" to `H3K27me3`
+>        - "Color of track" to a color of your choice
+>        - "Width" to `1.5`
+>
+>    - 8: "+Insert Include tracks in your plot" (optional)
+>        - "Choose style of the track" to `Bigwig track`
+>        - "Plot title" to `H4K16ac`
+>        - "Track file bigwig format" to `H4K16ac`
+>        - "Color of track" to a color of your choice
+>        - "Width" to `1.5`
 >
 {: .hands_on}
 
