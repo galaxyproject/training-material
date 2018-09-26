@@ -59,7 +59,7 @@ In this tutorial, we perform proteogenomic database searching using the Mass Spe
 >
 > 3. Build a **Dataset list** for the three MGF files
 >    - Click the **Operations on multiple datasets** check box at the top of the history panel
->       ![Operations on multiple datasets button](../../images/dataset_list.png){:height="140px" width="150px"}
+>       ![Operations on multiple datasets button](../../images/dataset_list.png){:width="20%"}
 >    - Check the three boxes next to the MGF files
 >    - Click **For all selected...** and choose **Build dataset list**
 >    - Ensure the three control samples are the only ones selected, and enter a name for the new collection (e.g. *MGF files*)
@@ -196,7 +196,7 @@ outputs.
 > {: .comment}
 >
 > 2. Click **Execute** and inspect the resulting files after they turned green with the **View data** icon:
->    ![View data button](../../images/view_icon.png){:height="36px" width="80px"}
+>    ![View data button](../../images/view_icon.png){:width="8%"}
 >
 {: .hands_on}
 
@@ -229,7 +229,7 @@ This tool extracts mzidentml and its associated proteomics datasets into a sqlit
 Click **Execute**
 >
 >
-![mz2sqlite](../../images/mz2sqlite.png){:height="236px" width="190px"}
+![mz2sqlite](../../images/mz2sqlite.png){:width="30%"}
 
 {: .hands_on}
 
