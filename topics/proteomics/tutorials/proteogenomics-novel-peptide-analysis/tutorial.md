@@ -22,40 +22,43 @@ contributors:
 
 The third and the last workflow in the proteogenomics tutorial is to identifying the "**Novel peptides**" using BlastP and to localize the peptides to its genomic coordinates. Inputs from both workflow 1 and 2 will be used in this workflow.
 
-<img src="../../images/Third_workflow.png" width=100%>
+![Workflow](../../images/Third_workflow.png) 
 
-### Agenda
+> ### Agenda
 >
 > In this tutorial, we will deal with:
 > 1. TOC
 > {:toc}
-> - _Inputs required_
 >
-> - _Interactive visualization of the Peptides_
->
-> - _Classification of "Novel Peptides"_
->
-> - _Summary of Identified "Novel peptides"_
->
->>      The inputs for this workflow are:
->>            - Tabular file – “Peptides from BlastP analysis”
->>            - Tabular file – “PeptideShaker_PSM”
->>            - Mz to sqlite
->>            - Genomic mapping sqlite
 {: .agenda}
 
-> All the files to run this workflow can be obtained from the second workflow output.Once the tabular output is generated,
+# Pretreatments
+
+{: .no_toc}
+
+> ### {% icon hands_on %} Hands-on: data organization
+>
+>
+>>    The inputs for this workflow are:
+>>    - Tabular file – “Peptides from BlastP analysis”
+>>    - Tabular file – “PeptideShaker_PSM”
+>>    - Mz to sqlite
+>>    - Genomic mapping sqlite
+
+
+> All the files to run this workflow can be obtained from the second workflow output. Once the tabular output is generated,
 > we convert this tabular report into a FASTA file. This can be achieved by using the Tabular to FASTA convertion tool.
 
 
-Once Blast-P search is performed, it provides with a tabular output containing “Novel peptides”. Now this output is further processed by comparing the Novel Peptide output with the PSM report for selecting only distinct peptides which meet the criteria.
+Once Blast-P search is performed, it provides a tabular output containing “**Novel peptides**”. Now this output is further processed by comparing the Novel Peptide output with the PSM report for selecting only distinct peptides which meet the criteria.
 
 # Analysis
 
-### Query tabular (Extract "Novel peptides" after BlastP)
-> ### {% icon hands_on %} Hands-on:Query Tabular
+#### Query Tabular
 
-1. **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
+> ### {% icon hands_on %} Hands-on: Query Tabular
+>
+> **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
 >
 >    - (a)**Database Table**: Click on `+ Insert Database Table`:
 >
@@ -68,14 +71,17 @@ Once Blast-P search is performed, it provides with a tabular output containing �
 >    - **Only load the columns you have named into database**: `Yes`
 >
 >    Section **Table Index**:
+>   
 >    - **Table Index**: `No`
 >    - **Index on Columns**: `id`
 >
->     - (c) **Database Table**: Click on `+ Insert Database Table`:
+>    - (c) **Database Table**: Click on `+ Insert Database Table`:
+>
 >    Section **Filter Dataset Input**
->      - **Filter Tabular input lines**
->      - **Filter by**:  `skip leading lines`
->      - **Skip lines**: `1`
+>
+>    - **Filter Tabular input lines**
+>    - **Filter by**:  `skip leading lines`
+>    - **Skip lines**: `1`
 >
 >
 >    Section **Table Options**:
@@ -88,12 +94,12 @@ Once Blast-P search is performed, it provides with a tabular output containing �
 >
 >    - **Save the sqlite database in your history**: `No`
 >
->        > ### {% icon tip %} Tip
->        >
->        > * **Query Tabular** can also use an existing SQLite database. Activating `Save the sqlite database in your history`
->        > will store the created database in the history, allowing to reuse it directly.
->        >
->        {: .tip}
+>    > ### {% icon tip %} Tip
+>    >
+>    > **Query Tabular** can also use an existing SQLite database. Activating `Save the sqlite database in your history`
+>    > will store the created database in the history, allowing to reuse it directly.
+>    >
+>    {: .tip}
 >
 >    - **SQL Query to generate tabular output**:
 >
@@ -101,25 +107,29 @@ Once Blast-P search is performed, it provides with a tabular output containing �
 >>       FROM psm join blast on psm.Sequence = blast.qseqid
 >>       WHERE blast.pident < 100 OR blast.gapopen >= 1 OR blast.length < blast.qlen
 >>       ORDER BY psm.Sequence, psm.ID
-
+>
 >
 >    - **include query result column headers**: `Yes`
 >
-> 2. Click **Execute** and inspect the query results file after it turned green.
+>   Click **Execute** and inspect the query results file after it turned green.
 >
 {: .hands_on}
 
-### Query tabular (Distinct Peptides from the list of "Novel peptides")
-> ### {% icon hands_on %} Hands-on:Query Tabular
 
-1. **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
+
+#### Query Tabular
+
+> ### {% icon hands_on %} Hands-on: Query Tabular
+>
+>   **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
 >
 >    - (a)**Database Table**: Click on `+ Insert Database Table`:
 >
 >    Section **Filter Dataset Input**
+>
 >    - **Filter Tabular input lines**
->      - Filter by:  `skip leading lines`
->      - Skip lines: `1`
+>    - Filter by:  `skip leading lines`
+>    - Skip lines: `1`
 >
 >    Section **Table Options**:
 >
@@ -134,7 +144,7 @@ Once Blast-P search is performed, it provides with a tabular output containing �
 >
 >    - **include query result column headers**: `Yes`
 >
-> 2. Click **Execute** and inspect the query results file after it turned green.
+>  Click **Execute** and inspect the query results file after it turned green.
 >
 {: .hands_on}
 
@@ -145,72 +155,79 @@ The Multiomics Visualization Platform is a galaxy visualization plugin that allo
 
 > ### {% icon hands_on %} Hands-on: Guide to MVP
 > The spectra belonging to these "Novel peptides" can be viewed using MVP,this can be achieved by selecting the output from the mz to sqlite tool.
-> Here is a step by step proteogenomic view of the "Novel peptides" obtained from running this workflow:
-
+> Here is a step by step guide to obtain the proteogenomic view of the "Novel peptides".
+> 
+>
 > 1) Click on the “Visualize in MVP application”, it will open up a new window for MVP.
-> <img src="../../images/mz2sqlite.png" width=20%>
+>
+> ![mz to sqlite](../../images/mz2sqlite.png){:width="20%"}
 >
 > 2) Click on “Load from Galaxy”.
-> <img src="../../images/load_from_Galaxy.png" width=50%>
+>
+> ![load from galaxy](../../images/load_from_Galaxy.png){:width="50%"}
 >
 > 3) Select “Novel Peptides” from the right hand side.
-> <img src="../../images/novel_peptides_view.png" width=50%>
+>
+> ![novel peptides view](../../images/novel_peptides_view.png){:width="50%"}
 >
 > 4) Select any peptide, For eg: ESSREALVEPTSESPRPALAR, and then click on “Selected Peptide PSMs”.
-> <img src="../../images/select_pep_PSM.png" width=50%>
+>
+> ![select_pep_PSM](../../images/select_pep_PSM.png){:width="50%"}
 >
 > 5) If you scroll down, the PSM associated with the peptide will be displayed. By clicking on the PSM, the Lorikeet
 > values will be shown. The Lorikeet visualization is interactive, i.e the user can change the values or select any
 > parameter and click on Update button to view these changes.
 >
-> <img src="../../images/Psm.png" width=40%>
+> ![PSM](../../images/Psm.png){:width="40%"}
 >
-> <img src="../../images/lorikeet.png" width=70%>
+> ![lorikeet](../../images/lorikeet.png){:width="70%"}
 >
 >
 > 6) For a Protein centric view, click on “View in Protein” , it will open up all the proteins associate with the
 > peptides. For eg: Select the “ESSREALVEPTSESPRPALAR” peptide and click on the first protein. The chromosome location
 > of the peptide will be displayed.
 >
-> <img src="../../images/view_in_prot.png" width=30%>
+> ![view in protein](../../images/view_in_prot.png){:width="30%"}
 >
 > Once you click on protein it will show the list of proteins the belongs to the peptides.
 >
-> <img src="../../images/select_protein.png" width=60%>
->
+> ![select protein](../../images/select_protein.png){:width="60%"}
 >
 > Once you select the protein that you want to visualize you can click on the protein view.
 >
->
-> <img src="../../images/PRoteinview.png" width=50%>
+> ![protein view](../../images/PRoteinview.png){:width="50%"}
 >
 >
 > 7) Clicking on the arrow marks will open up the IGV(js) visualization tool, where-in the genomic localization of the
 > peptide will be displayed.
 >
-> <img src="../../images/select_IGV.png" width=80%>
+> ![select IGV](../../images/select_IGV.png){:width="80%"}
 >
 >
 > 8) To add tracks to your IGV viewer, click on “Add Track”. This will open up a list of tracks that are compatible
 > to view in your IGV viewer. For eg. Select the “Pep_gen_coordinate.bed” file and then click on “Load Track”.
 > This will open up the bed will below the nucleotide sequence.
-> <img src="../../images/track_load.png" width=40%>
+>
+> ![track load](../../images/track_load.png){:width="40%"}
 >
 > 9) By clicking the wheel, you can select the “three frame translate” which will show the three frame translated
 > region of your sequence.
-> <img src="../../images/IGV_viewer.png" width=40%>
+>
+> ![IGV viewer](../../images/IGV_viewer.png){:width="40%"}
 >
 >
 > 10) The IGV is inbuilt in the MVP viewer and is very interactive, you could also load more tracks such as the aligned
 > proBAM file (from HISAT) or the identified probam file (one of the input file).
 > MVP has many useful features beyond those covered in this workshop and is under active development.
 >
-> <img src="../../images/tracks_align.png" width=70%>
+> ![tracks align](../../images/tracks_align.png){:width="70%"}
 >
 >
 {: .hands_on}
 
 The next tool in the workflow is the Peptide genomic coordinate tool which takes the "novel peptides" as the input along with the mztosqlite file and the genomic mapping sqlite file (obtained during creation of the database). This tool helps create a bed file with the genomic coordinate information of the peptides based on the sqlite files.
+
+
 
 ### Peptide genomic Coordinate
 Gets genomic coordinate of peptides based on the information in mzsqlite and genomic mapping sqlite files. This program
@@ -218,42 +235,57 @@ loads two sqlite databases (mzsqlite and genomic mapping sqlite files) and calcu
 peptides provided as input. This outputs bed file for peptides.
 >
 > ### {% icon hands_on %} Hands-on: Peptide genomic Coordinate
-
-> 1. Run Peptide genomic Coordinate {% icon tool %} with the following parameters:
->       - **Input**: `Peptide list file`, `mzsqlite sqlite DB file`, and `genomic mapping sqlite DB file`
->       - **Output**: `Tabular BED file with all the columns`
-> <img src="../../images/pep_gen_cor.png" width=100%>
 >
-> mzsqlite file from: https://toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.0
-> genome mapping sqlite file from: https://toolshed.g2.bx.psu.edu/view/galaxyp/translate_bed/038ecf54cbec
+> 1. Run **Peptide genomic Coordinate** {% icon tool %} with the following parameters:
+>    - **Input**: `Peptide list file`, `mzsqlite sqlite DB file`, and `genomic mapping sqlite DB file`
 >
-> <img src="../../images/Output_PGC.png" width=50%>
->  2. Click **Execute** and inspect the query results file after it turned green.
+>    - **Output**: `Tabular BED file with all the columns`
+>
+> ![pep gen cor](../../images/pep_gen_cor.png){:width="100%"}
+>
+> - The mzsqlite tool can be downloaded from Toolshed - [mz to sqlite](https://toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.0)
+> - The genome mapping sqlite tool can be downloaded from Toolshed - [Translate bed](https://toolshed.g2.bx.psu.edu/view/galaxyp/translate_bed/038ecf54cbec)
+>
+> ![Output PGC](../../images/Output_PGC.png){:width="50%"}
+>
+>
+>  Click **Execute** and inspect the resulting files
 >
 {: .hands_on}
+
+
 
 ### Peppointer
 
 Given chromosomal locations of peptides in a BED file, PepPointer classifies them as CDS, UTR, exon, intron, or intergene.
-
+>
 > ### {% icon hands_on %} Hands-on: Peppointer
-1. Run Peppointer {% icon tool %} with the following parameters:
->      - **Choose the source of the GTF file** - `Locally Installed`
->              - **GTF file with the genome of interest** - `Mus_Musculus_GRCm38.90_Ensembl_GTF`
->      - **Input** - `Bed file from Peptide genomic coordinate tool`
-> <img src="../../images/Peppointer.png" width=80%>
+>
+> 1. Run Peppointer {% icon tool %} with the following parameters:
+>   - **Choose the source of the GTF file** - `Locally Installed`
+>    - **GTF file with the genome of interest** - `Mus_Musculus_GRCm38.90_Ensembl_GTF`
+>   - **Input** - `Bed file from Peptide genomic coordinate tool`
+>
+> ![PP](../../images/Peppointer.png){:width="80%"}
+>
 >  This tool provides a bed output with the classification of the genomic location of the peptides.
-> <img src="../../images/Output_PP.png" width=50%>
-> 2. Click **Execute** and inspect the query results file after it turned green.
-
+> ![Output PP](../../images/Output_PP.png){:width="50%"}
+>
+>
+>   Click **Execute** and inspect the query results file after it turned green.
+>
 {: .hands_on}
 
 The final tool for this workflow generates a tabular output that summarizes the information after running these workflows. The final summary output consists of the Peptide sequence, the spectra associated with the peptides, the protein accession number, chromosome number, Start and Stop of the genomic coordinate, the annotation, the genomic coordinate entry for viewing in Integrative Genomics Viewer (IGV), MVP or UCSC genome browser and the URL for viewing it on UCSC genome browser. This summary is created with the help of the query tabular tool.
 
 
-### Query tabular( Final Summary)
 
-1. **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
+
+### Final Summary Output
+>
+> ### {% icon hands_on %} Hands-on: Query Tabular
+>
+>  1. **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
 >
 >    - (a)**Database Table**: Click on `+ Insert Database Table`:
 >
@@ -265,11 +297,13 @@ The final tool for this workflow generates a tabular output that summarizes the 
 >    - **Only load the columns you have named into database**: `No`
 >
 >
->     - (b) **Database Table**: Click on `+ Insert Database Table`:
+>    - (b) **Database Table**: Click on `+ Insert Database Table`:
+>
 >    Section **Filter Dataset Input**
->      - **Filter Tabular input lines**
->      - **Filter by**:  `skip leading lines`
->      - **Skip lines**: `1`
+>    - **Filter Tabular input lines**
+>    - **Filter by**:  `skip leading lines`
+>    - **Skip lines**: `1`
+>
 >    Section **Table Options**:
 >
 >    - **Specify Name for Table**: `psm`
@@ -279,17 +313,18 @@ The final tool for this workflow generates a tabular output that summarizes the 
 >
 >    - **SQL Query to generate tabular output**:
 >
->>       `SELECT psm.Sequence as PeptideSequence, count(psm.Sequence) as SpectralCount, psm.Proteins as  Proteins,bed_pep_pointer.chrom as Chromosome, bed_pep_pointer.start as Start, bed_pep_pointer.end as End, bed_pep_pointer.strand as Strand, bed_pep_pointer.annot as Annotation, bed_pep_pointer.chrom||':'||bed_pep_pointer.start||'-'||bed_pep_pointer.end as GenomeCoordinate,'https://genome.ucsc.edu/cgi-bin/hgTracks?db=mm10&position='||bed_pep_pointer.chrom||'%3A'||bed_pep_pointer.start||'-'||bed_pep_pointer.end as UCSC_Genome_Browser
+>>    `SELECT psm.Sequence as PeptideSequence, count(psm.Sequence) as SpectralCount, psm.Proteins as  Proteins,bed_pep_pointer.chrom as Chromosome, bed_pep_pointer.start as Start, bed_pep_pointer.end as End,  bed_pep_pointer.strand as Strand, bed_pep_pointer.annot as Annotation, bed_pep_pointer.chrom||':'||bed_pep_pointer.start||'-'||bed_pep_pointer.end as GenomeCoordinate,'https://genome.ucsc.edu/cgi-bin/hgTracks?db=mm10&position='||bed_pep_pointer.chrom||'%3A'||bed_pep_pointer.start||'-'||bed_pep_pointer.end as UCSC_Genome_Browser
 FROM psm
 INNER JOIN bed_pep_pointer on bed_pep_pointer.peptide = psm.Sequence
 GROUP BY psm.Sequence`
 >
+>
 >    - **include query result column headers**: `Yes`
 >
-> 2. Click **Execute** and inspect the query results file after it turned green. If everything went well, it should look similiar:
+>  Click **Execute** and inspect the query results file after it turned green. If everything went well, it should look similiar:
 >
-<img src="../../images/final_summary.png" width=80%>
-
+>![Final Summary](../../images/final_summary.png){:width="80%"}
+>
 {: .hands_on}
 
 This completes the proteogenomics workflow analysis. This training workflow uses mouse data. For any other organism the data, tool paramters and the workflow will need to be modified accordingly.
@@ -297,5 +332,5 @@ This completes the proteogenomics workflow analysis. This training workflow uses
 This workflow is also available at [Proteogenomics gateway](z.umn.edu/proteogenomicsgateway).
 
 This workflow was developed by the Galaxy-P team at the University of Minnesota.
-For more information about Galaxy-P or our ongoing work, please visit us at www.galaxyp.org
+For more information about Galaxy-P or our ongoing work, please visit us at [www.galaxyp.org](www.galaxyp.org)
 
