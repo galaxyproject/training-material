@@ -323,7 +323,7 @@ GROUP BY psm.Sequence`
 >
 >  Click **Execute** and inspect the query results file after it turned green. If everything went well, it should look similiar:
 >
->![Final Summary](../../images/final_summary.png){:width="80%"}
+>![Final Summary](../../images/final_summary.png){:width="100%"}
 >
 {: .hands_on}
 
