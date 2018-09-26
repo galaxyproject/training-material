@@ -14,6 +14,7 @@
     <title>{{ title | strip_html }}</title>
     <link rel="stylesheet" href="{{ "/assets/css/slides.css" | prepend: site.baseurl }}">
     <link rel="stylesheet" href="{{ "/assets/css/font-awesome.css" | prepend: site.baseurl }}" id="theme">
+    <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon" />
   </head>
   <body>
     <textarea id="source">
@@ -22,12 +23,12 @@ layout: true
 class: center, middle, inverse
 
 <div class="my-header"><span>
-<a href="{{ site.baseurl }}/topics{{ topic.name }}" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+<a href="{{ site.baseurl }}/topics/{{ topic.name }}" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
 </span></div>
 
 <div class="my-footer"><span>
 {% if page.logo == "GTN" %}
-<img src="{{ site.baseurl }}/topics{{ site.small_logo }}" alt="Galaxy Training Network" style="height: 40px;"/>
+<img src="{{ site.baseurl }}/{{ site.small_logo }}" alt="Galaxy Training Network" style="height: 40px;"/>
 {% else %}
 <img src="{{ page.logo }}" alt="page logo" style="height: 40px;"/>
 {% endif %}
