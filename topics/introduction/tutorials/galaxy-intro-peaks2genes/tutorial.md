@@ -32,9 +32,9 @@ contributors:
 # Introduction
 {:.no_toc}
 
-We stumbled upon a paper [Li et al., Cell Stem Cell 2012](https://www.ncbi.nlm.nih.gov/pubmed/22862943) that contains the analysis of possible target genes of an interesting protein in mice. The targets were obtained by ChIP-seq and the raw data is available through [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
-The list of genes however is neither in the supplement of the paper nor part of the GEO submission.
-The closest thing we could find is a list of the regions where the signal is significantly enriched (so called *peaks*):
+We stumbled upon a paper [Li et al., Cell Stem Cell 2012](https://www.ncbi.nlm.nih.gov/pubmed/22862943) called *"The histone acetyltransferase MOF is a key regulator of the embryonic stem cell core transcriptional network"*. The paper contains the analysis of possible target genes of an interesting protein called Mof. The targets were obtained by ChIP-seq in mice and the raw data is available through [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
+However, the list of genes is neither in the supplement of the paper, nor part of the GEO submission.
+The closest thing we could find is a file in GEO containing a list of the regions where the signal is significantly enriched (so called *peaks*):
 
 1 | 3660676 | 3661050 | 375 | 210 | 62.0876250438913 | -2.00329386666667
 1 | 3661326 | 3661500 | 175 | 102 | 28.2950833625942 | -0.695557142857143
