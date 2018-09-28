@@ -411,7 +411,7 @@ We would like to classify the sequences using a training set, which is again is 
 >   - "taxonomy" to `trainset16_022016.pds.tax` from your history
 >   - "count" to the count table from `Pre.cluster`
 >
-> This step may take a couple of minutes, now may be a good time to grab a cup of tea :coffee:
+> This step may take a couple of minutes, now may be a good time to grab a cup of tea/coffee.
 >
 {: .hands_on}
 
@@ -599,7 +599,7 @@ In this tutorial, we use the second approach with MetaPhlAn2. This tools is usin
 >    - "Database with clade-specific marker genes" to `locally cached`
 >    - "Cached database with clade-specific marker genes" to `MetaPhlAn2 clade-specific marker genes`
 >
-> This step may take a couple of minutes :coffee:
+> This step may take a couple of minutes.
 {: .hands_on}
 
 3 files are generated:
