@@ -317,9 +317,9 @@ In order to convert the chromosome names we have therefore two things to do:
 ## Analysis
 
 Our goal is to compare the 2 region files (the genes file and the peak file from the publication)
-to know which peaks are related to which genes. If you only want to know which peaks are located **inside** genes you
+to know which peaks are related to which genes. If you only want to know which peaks are located **inside** genes (within the gene body) you
 can skip the next step. Otherwise, it might be reasonable to include the **promoter** region of the genes into the comparison, e.g. because
-you want to include transcriptions factors in ChIP-seq experiments. There is no strict definition for promoter region but 2kb upstream of the Transcription Start Site (start of region) is commonly used. We'll use the **Get Flanks** tool to get regions 2kb bases upstream of the start of the gene to 10kb bases downstream of the start (12kb in length). To do this we tell the Get Flanks tool we want regions upstream of the start, with an offset of 10kb, that are 12kb in length, as shown in the diagram below.
+you want to include transcriptions factors in ChIP-seq experiments. There is no strict definition for promoter region but 2kb upstream of the TSS (start of region) is commonly used. We'll use the **Get Flanks** tool to get regions 2kb bases upstream of the start of the gene to 10kb bases downstream of the start (12kb in length). To do this we tell the Get Flanks tool we want regions upstream of the start, with an offset of 10kb, that are 12kb in length, as shown in the diagram below.
 
 ![Get Flanks](../../images/intro_get_flanks.png)
 
