@@ -1,0 +1,372 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "Database Handling Tutorial Workflow", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.2.0", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Protein Database Downloader", 
+            "outputs": [
+                {
+                    "name": "output_database", 
+                    "type": "fasta"
+                }
+            ], 
+            "position": {
+                "left": 221, 
+                "top": 372
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput_database": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_database"
+                }, 
+                "RenameDatasetActionoutput_database": {
+                    "action_arguments": {
+                        "newname": "Main database"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "output_database"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.2.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "b39347891609", 
+                "name": "dbbuilder", 
+                "owner": "galaxyp", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"source\": \"{\\\"set\\\": \\\"+keyword%3a1185\\\", \\\"from\\\": \\\"uniprot\\\", \\\"taxon\\\": \\\"9606\\\", \\\"reviewed\\\": \\\"+reviewed%3Ayes\\\", \\\"__current_case__\\\": 0, \\\"include_isoform\\\": \\\"false\\\"}\", \"__rerun_remap_job_id__\": null, \"__page__\": 0}", 
+            "tool_version": "0.2.0", 
+            "type": "tool", 
+            "uuid": "7f5ca5fe-79b5-4e25-9121-0e4349c2185a", 
+            "workflow_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.2.0", 
+            "id": 1, 
+            "input_connections": {}, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Protein Database Downloader", 
+            "outputs": [
+                {
+                    "name": "output_database", 
+                    "type": "fasta"
+                }
+            ], 
+            "position": {
+                "left": 221, 
+                "top": 492
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput_database": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_database"
+                }, 
+                "RenameDatasetActionoutput_database": {
+                    "action_arguments": {
+                        "newname": "cRAP database"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "output_database"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.2.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "b39347891609", 
+                "name": "dbbuilder", 
+                "owner": "galaxyp", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"source\": \"{\\\"from\\\": \\\"cRAP\\\", \\\"__current_case__\\\": 1}\", \"__rerun_remap_job_id__\": null, \"__page__\": 0}", 
+            "tool_version": "0.2.0", 
+            "type": "tool", 
+            "uuid": "defc442e-f1e5-40da-b702-4e55e1a9107e", 
+            "workflow_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.0", 
+            "id": 2, 
+            "input_connections": {
+                "input": {
+                    "id": 1, 
+                    "output_name": "output_database"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FASTA-to-Tabular", 
+                    "name": "input"
+                }
+            ], 
+            "label": null, 
+            "name": "FASTA-to-Tabular", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 508, 
+                "top": 443
+            }, 
+            "post_job_actions": {
+                "DeleteIntermediatesActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "DeleteIntermediatesAction", 
+                    "output_name": "output"
+                }, 
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "7e801ab2b70e", 
+                "name": "fasta_to_tabular", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"keep_first\": \"\\\"0\\\"\", \"__rerun_remap_job_id__\": null, \"descr_columns\": \"\\\"1\\\"\", \"__page__\": 0}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "uuid": "911f4ecd-57cf-4d2d-8d1f-40597493b75a", 
+            "workflow_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0", 
+            "id": 3, 
+            "input_connections": {
+                "input": {
+                    "id": 2, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Add column", 
+                    "name": "input"
+                }
+            ], 
+            "label": null, 
+            "name": "Add column", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 728, 
+                "top": 477
+            }, 
+            "post_job_actions": {
+                "DeleteIntermediatesActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "DeleteIntermediatesAction", 
+                    "output_name": "out_file1"
+                }, 
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "745871c0b055", 
+                "name": "add_value", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": 0, \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"exp\": \"\\\"CONTAMINANT\\\"\", \"iterate\": \"\\\"no\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "uuid": "1fe09bbb-ba83-448f-8dfd-1b7270441c42", 
+            "workflow_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.0", 
+            "id": 4, 
+            "input_connections": {
+                "input": {
+                    "id": 3, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Tabular-to-FASTA", 
+                    "name": "input"
+                }
+            ], 
+            "label": null, 
+            "name": "Tabular-to-FASTA", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "fasta"
+                }
+            ], 
+            "position": {
+                "left": 912, 
+                "top": 507
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }, 
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "tagged cRAP database"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "0b4e36026794", 
+                "name": "tabular_to_fasta", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"title_col\": \"[\\\"1\\\", \\\"3\\\"]\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"seq_col\": \"\\\"2\\\"\"}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "uuid": "1bd7f1b9-4974-4cd5-b9a1-91787e503ecf", 
+            "workflow_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.0", 
+            "id": 5, 
+            "input_connections": {
+                "inputs_0|input": {
+                    "id": 0, 
+                    "output_name": "output_database"
+                }, 
+                "inputs_1|input": {
+                    "id": 4, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "FASTA Merge Files and Filter Unique Sequences", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "fasta"
+                }
+            ], 
+            "position": {
+                "left": 1131, 
+                "top": 333
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Main database (cRAP added)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "2904d46167da", 
+                "name": "fasta_merge_files_and_filter_unique_sequences", 
+                "owner": "galaxyp", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"inputs\": \"[{\\\"__index__\\\": 0, \\\"input\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}, {\\\"__index__\\\": 1, \\\"input\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}]\", \"__rerun_remap_job_id__\": null, \"__page__\": 0}", 
+            "tool_version": "1.0", 
+            "type": "tool", 
+            "uuid": "6fbc2008-7b04-49af-af2f-01c55ff09e59", 
+            "workflow_outputs": [
+                {
+                    "label": "", 
+                    "output_name": "output", 
+                    "uuid": "bb1f67d0-6e5e-462e-9802-f354706a1531"
+                }
+            ]
+        }, 
+        "6": {
+            "annotation": "", 
+            "content_id": "DecoyDatabase", 
+            "id": 6, 
+            "input_connections": {
+                "param_in": {
+                    "id": 5, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool DecoyDatabase", 
+                    "name": "param_in"
+                }
+            ], 
+            "label": null, 
+            "name": "DecoyDatabase", 
+            "outputs": [
+                {
+                    "name": "param_out", 
+                    "type": "fasta"
+                }
+            ], 
+            "position": {
+                "left": 1438, 
+                "top": 355.5
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionparam_out": {
+                    "action_arguments": {
+                        "newname": "Main database with decoys (cRAP added)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "param_out"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "DecoyDatabase", 
+            "tool_state": "{\"__page__\": 0, \"param_append\": \"\\\"true\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"param_method\": \"\\\"reverse\\\"\", \"param_decoy_string\": \"\\\"DECOY_\\\"\", \"param_decoy_string_position\": \"\\\"prefix\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "2.1.0", 
+            "type": "tool", 
+            "uuid": "a96cde43-cd29-4683-8f32-fe8603b2e682", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "param_out", 
+                    "uuid": "9f464e59-daa0-4013-b266-4b7eae387507"
+                }
+            ]
+        }
+    }, 
+    "uuid": "4226528a-b119-4086-88d2-ec3d211d3e84"
+}
