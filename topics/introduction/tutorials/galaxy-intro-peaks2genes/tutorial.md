@@ -27,6 +27,7 @@ contributors:
   - bgruening
   - nsoranzo
   - dyusuf
+  - sarah-peter
 ---
 
 # Introduction
