@@ -362,6 +362,17 @@ you want to include transcriptions factors in ChIP-seq experiments. There is no 
 
 The output is regions that start from 2kb upstream of the TSS and include 10kb downstream. For input regions on the positive strand e.g. `chr1 134212701 134230065` this gives `chr1 134210701 134222701`. For regions on the negative strand e.g. `chr1 8349819 9289958` this gives `chr1  9279958 9291958`.
 
+You might have noticed that the UCSC file is in `BED` format and has a database associated to it. That's what we want for our peak file as well.
+
+> ### {% icon hands_on %} Hands-on: Change format and database
+>
+> 1. Click on the {% icon galaxy-pencil %} (pencil) icon in the history entry of our peak region file
+> 2. Switch to the **Convert** tab
+> 3. Select `Convert Genomic Intervals to BED`
+> 4. Press **Convert datatype**
+> 5. Check that the "Database/Build" is `mm9` (the database build for mice used in the paper)
+{: .hands_on}
+
 It's time to find the overlapping intervals (finally!). To do that, we want to extract the genes which overlap/intersect with our peaks.
 
 > ### {% icon hands_on %} Hands-on: Find Overlaps
@@ -373,7 +384,7 @@ It's time to find the overlapping intervals (finally!). To do that, we want to e
 >     - *"for at least"*: `1`
 >
 >    > ### {% icon comment %} Comments
->    > The order of the inputs is important! We want to end up with a list of genes, so the corresponding dataset needs to be the first input.
+>    > The order of the inputs is important! We want to end up with a list of **genes**, so the corresponding dataset with the gene information needs to be the first input (`Promoter regions`).
 >    {: .comment}
 >    ![Genes overlapping peaks](../../images/intro_overlapping_genes.png)
 {: .hands_on}
