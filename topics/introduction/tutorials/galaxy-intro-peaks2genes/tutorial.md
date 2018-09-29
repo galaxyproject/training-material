@@ -151,6 +151,12 @@ Galaxy will automatically unpack the file.
 >
 > 4. Search for `mm9` in **Database/Build** attribute and select `Mouse July 2007 (NCBI37/mm9)`
 > 5. Click on **Save** on the top
+> 6. Add a tag called `peaks` to the dataset to make it easier to track in the history
+>    {% include snippets/add_tag.md %}
+>
+>    The dataset should now look like below in the history
+>
+>    ![Peaks file](../../images/input_tagged_file.png){: width="250px" height="300px"}
 >
 {: .hands_on}
 
@@ -190,6 +196,7 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 > 6. Click on the **Send Query to Galaxy** button
 > 7. Wait for the upload to finish
 > 8. Rename our dataset ({% icon galaxy-pencil %} (pencil) icon) to something more recognizable (`Genes`)
+> 9. Add a tag called `genes` to the dataset to make it easier to track in the history
 >
 {: .hands_on}
 
