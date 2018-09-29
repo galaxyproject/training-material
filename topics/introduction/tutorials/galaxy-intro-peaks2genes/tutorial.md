@@ -358,17 +358,6 @@ you want to include transcriptions factors in ChIP-seq experiments. There is no 
 > 3. Rename your dataset to reflect your findings
 {: .hands_on}
 
-You might have noticed that the UCSC file is in `BED` format and has a database associated to it. That's what we want for our peak file as well
-
-> ### {% icon hands_on %} Hands-on: Change format and database
->
-> 1. Click on the {% icon galaxy-pencil %} (pencil) icon in the history entry of our peak region file
-> 2. Switch to the **Convert** tab
-> 3. Select `Convert Genomic Intervals to BED`
-> 4. Press **Convert datatype**
-> 5. Check that the "Database/Build" is `mm9` (the database build for mice used in the paper)
-{: .hands_on}
-
 It's time to find the overlapping intervals (finally!). To do that, we want to extract the genes which overlap/intersect with our peaks.
 
 > ### {% icon hands_on %} Hands-on: Find Overlaps
@@ -376,7 +365,7 @@ It's time to find the overlapping intervals (finally!). To do that, we want to e
 > 1. **Intersect** {% icon tool %}: Run **Intersect the intervals of two datasets** with the following settings:
 >     - *"Return"*: `Overlapping Intervals`
 >     - *"of"*: the UCSC file with promoter regions
->     - *"that intersect"*: our converted peak region file
+>     - *"that intersect"*: our peak region file
 >     - *"for at least"*: `1`
 >
 >    > ### {% icon comment %} Comments
@@ -450,7 +439,6 @@ Galaxy makes this very simple with the `Extract workflow` option. This means tha
 >    Since we did some steps which where specific to our custom peak file, we might want to exclude:
 >    - **Select last** {% icon tool %}
 >    - all **Replace Text** {% icon tool %} steps
->    - **Convert Genomic Intervals to strict BED** {% icon tool %}
 >    - **Get flanks** {% icon tool %}
 >
 > 5. Rename the workflow to something descriptive, e.g. `From peaks to genes`
