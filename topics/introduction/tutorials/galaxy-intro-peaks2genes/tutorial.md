@@ -133,11 +133,11 @@ Galaxy will automatically unpack the file.
 > * Press **Start**
 {: .tip}
 
-> ### {% icon hands_on %} Hands-on: Inspect and edit attribute of a file
+> ### {% icon hands_on %} Hands-on: Inspect and edit attributes of a file
 >
 > 1. Click on the file in the history panel
 >
->    Some meta-information (e.g. format, reference database) about the file and the header of the file are then displayed:
+>    Some meta-information (e.g. format, reference database) about the file and the header of the file are then displayed, along with the number of lines in the file (48,647):
 >
 >    ![Expanded file in history](../../images/input_expanded_file.png)
 >
@@ -149,7 +149,7 @@ Galaxy will automatically unpack the file.
 >
 >    A form to edit dataset attributes is displayed in the middle panel
 >
-> 4. Search for `mm9` in **Database/Build** attribute and select `Mouse July 2007 (NCBI37/mm9)`
+> 4. Search for `mm9` in **Database/Build** attribute and select `Mouse July 2007 (NCBI37/mm9)` (the paper tells us the peaks are from `mm9`)
 > 5. Click on **Save** on the top
 > 6. Add a tag called `peaks` to the dataset to make it easier to track in the history
 >    {% include snippets/add_tag.md %}
@@ -215,6 +215,8 @@ Now we collected all the data we need to start our analysis.
 
 # Part 1: Naive approach
 
+We will first use a "naive" approach to try to identify the genes that the peak regions are associated with. We will identify genes that overlap at least 1bp with the peak regions.
+
 ## File preparation
 
 Let's have a look at our files to see what we actually have here.
@@ -252,12 +254,12 @@ By looking at the HPeak manual we can find out that the columns contain the foll
  - not relevant
 
 In order to compare the two files, we have to make sure that the chromosome names follow the same format.
-As we directly see, the peak file lacks `chr` before any chromosome number. But what happens with chromosome 20 and 21? Will it be X and Y instead? Let's check:
+As we can see, the peak file lacks `chr` before any chromosome number. But what happens with chromosome 20 and 21? Will it be X and Y instead? Let's check:
 
 > ### {% icon hands_on %} Hands-on: View end of file
 >
 > 1. Search for **Select last** {% icon tool %} tool and run **Select last lines from a dataset (tail)** with the following settings:
->     - *"Text file"*: our peak file `GSE37268_mof3.out.hpeak.txt`
+>     - *"Text file"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz`
 >     - *"Operation"*: `Keep last lines`
 >     - *"Number of lines"*: Choose a value, e.g. `100`
 > 2. Click **Execute**
@@ -284,7 +286,7 @@ In order to convert the chromosome names we have therefore two things to do:
 > ### {% icon hands_on %} Hands-on: Adjust chromosome names
 >
 > 1. **Replace Text** {% icon tool %}: Run **Replace Text in a specific column** with the following settings:
->     - *"File to process"*: our peak file `GSE37268_mof3.out.hpeak.txt`
+>     - *"File to process"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz`
 >     - *"in column"*: `Column:1`
 >     - *"Find pattern"*: `[0-9]+`
 >
@@ -355,8 +357,10 @@ you want to include transcriptions factors in ChIP-seq experiments. There is no 
 >    >    ![Show/Hide Scratchbook](../../images/intro_scratchbook_show_hide.png)
 >    {: .tip}
 >
-> 3. Rename your dataset to reflect your findings
+> 3. Rename your dataset to reflect your findings (`Promoter regions`)
 {: .hands_on}
+
+The output is regions that start from 2kb upstream of the TSS and include 10kb downstream. For input regions on the positive strand e.g. `chr1 134212701 134230065` this gives `chr1 134210701 134222701`. For regions on the negative strand e.g. `chr1 8349819 9289958` this gives `chr1  9279958 9291958`.
 
 It's time to find the overlapping intervals (finally!). To do that, we want to extract the genes which overlap/intersect with our peaks.
 
@@ -364,18 +368,17 @@ It's time to find the overlapping intervals (finally!). To do that, we want to e
 >
 > 1. **Intersect** {% icon tool %}: Run **Intersect the intervals of two datasets** with the following settings:
 >     - *"Return"*: `Overlapping Intervals`
->     - *"of"*: the UCSC file with promoter regions
->     - *"that intersect"*: our peak region file
+>     - *"of"*: the UCSC file with promoter regions (`Promoter regions`)
+>     - *"that intersect"*: our peak region file from **Replace** (`Peak regions`)
 >     - *"for at least"*: `1`
 >
 >    > ### {% icon comment %} Comments
 >    > The order of the inputs is important! We want to end up with a list of genes, so the corresponding dataset needs to be the first input.
 >    {: .comment}
+>    ![Genes overlapping peaks](../../images/intro_overlapping_genes.png)
 {: .hands_on}
 
-We now have the list of genes (column 4) overlapping with the peak regions, similar to shown below.
-
-![Genes overlapping peaks](../../images/intro_overlapping_genes.png)
+We now have the list of genes (column 4) overlapping with the peak regions, similar to shown above.
 
 To get a better overview of the genes we obtained, we want to look at their distribution across the different chromosomes.
 We will group the table by chromosome and count the number of genes with peaks on each chromosome
@@ -407,7 +410,7 @@ Since we have some nice data, let's draw a barchart out of it!
 
 > ### {% icon hands_on %} Hands-on: Draw barchart
 >
-> 1. Click on {% icon galaxy-barchart %} (visualize) icon at the latest history item
+> 1. Click on {% icon galaxy-barchart %} (visualize) icon on the output from the **Group** tool
 > 2. Select `Bar diagram`
 > 3. Choose a title at **Provide a title**, e.g. `Gene counts per chromosome`
 > 4. Switch to the **Select data** tab and play around with the settings
@@ -485,7 +488,7 @@ Now it's time to reuse our workflow for a more sophisticated approach.
 
 # Part 2: More sophisticated approach
 
-In part 1 we used an overlap definition of 1 bp (default setting). In order to get a more meaningful definition, we now want to use the information of the position of the peak summit and check for overlap of the summits with genes.
+In part 1 we used an overlap definition of 1 bp (default setting) to identify genes associated with the peak regions. However, the peaks could be broad, so instead, in order to get a more meaningful definition, we could identify the genes that overlap where most of the reads are concentrated, the **peak summit**. We will use the information on the position of the peak summit contained in the original peak file and check for overlap of the summits with genes.
 
 ## Preparation
 
@@ -511,11 +514,11 @@ We need to generate a new BED file from the original peak file that contains the
 >
 > 1. **Compute** {% icon tool %}: Run **Compute an expression on every row** with the following settings:
 >   - *"Add expression"*: `c2+c5`
->   - *"as a new column to"*: our peak file
+>   - *"as a new column to"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz`
 >   - *"Round result?"*: `YES`
 > 2. **Compute an expression on every row** {% icon tool %}: rerun this tool on the last result with:
 >   - *"Add expression"*: `c8+1`
->   - *"as a new column to"*: the result from step 1
+>   - *"as a new column to"*: the **Compute** result from step 1
 >   - *"Round result?"*: `YES`
 >
 {: .hands_on}
@@ -530,7 +533,10 @@ Now we cut out just the chromosome plus the start and end of the summit:
 >
 >    The output from **Cut** will be in `tabular` format.
 >
-> 2. Change the format to `interval` since that's what the tool **Intersect** expects.
+> 2. Change the format to `interval` (use the {% icon galaxy-pencil %}) since that's what the tool **Intersect** expects.
+>    The output should look like below:
+>
+>    ![Peak summits](../../images/intro_summits.png)
 {: .hands_on}
 
 ## Get gene names
@@ -571,7 +577,9 @@ The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
-> 2. Inspect the file content to check if it contains gene names
+> 2. Inspect the file content to check if it contains gene names.
+>    It should look similar to below:
+>    ![Gene names](../../images/intro_gene_names.png)
 >
 {: .hands_on}
 
