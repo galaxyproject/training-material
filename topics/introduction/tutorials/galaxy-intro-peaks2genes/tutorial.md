@@ -377,9 +377,12 @@ It's time to find the overlapping intervals (finally!). To do that, we want to e
 >    {: .comment}
 {: .hands_on}
 
-We now have the list of genes (column 4) overlapping with the peak regions.
+We now have the list of genes (column 4) overlapping with the peak regions, similar to shown below.
+
+![Genes overlapping peaks](../../images/intro_overlapping_genes.png)
+
 To get a better overview of the genes we obtained, we want to look at their distribution across the different chromosomes.
-We will regroup the table by chromosome and count the number of genes with peaks on each chromosome
+We will group the table by chromosome and count the number of genes with peaks on each chromosome
 
 > ### {% icon hands_on %} Hands-on: Count genes on different chromosomes
 >
@@ -500,7 +503,7 @@ The history is now empty, but we need our peak file again. Before we upload it t
 >
 >       You should see both of your histories side-by-side now
 >
-> 2. Use drag-and-drop with your mouse to copy the edited peak file (after the replace steps) but still in interval format, which contains the summit information, to your new history.
+> 2. Use drag-and-drop with your mouse to copy the edited peak file (after the replace steps), which contains the summit information, to your new history.
 > 3. Click on **Analyze Data** in the top panel to go back to your analysis window
 >
 {: .hands_on}
@@ -557,6 +560,8 @@ The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
 >    > * Paste the link into the text field
+>    > * Select "Type": `bed`
+>    > * Select "Genome": `mm9`
 >    > * Press **Start**
 >    {: .tip}
 >
