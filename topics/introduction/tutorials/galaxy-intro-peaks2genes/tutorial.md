@@ -362,7 +362,7 @@ you want to include transcriptions factors in ChIP-seq experiments. There is no 
 
 The output is regions that start from 2kb upstream of the TSS and include 10kb downstream. For input regions on the positive strand e.g. `chr1 134212701 134230065` this gives `chr1 134210701 134222701`. For regions on the negative strand e.g. `chr1 8349819 9289958` this gives `chr1  9279958 9291958`.
 
-You might have noticed that the UCSC file is in `BED` format and has a database associated to it. That's what we want for our peak file as well.
+You might have noticed that the UCSC file is in `BED` format and has a database associated to it. That's what we want for our peak file as well. The **Intersect** tool we will use can automatically convert interval files to BED format but we'll convert our interval file explicitly here to show how this can be achieved with Galaxy.
 
 > ### {% icon hands_on %} Hands-on: Change format and database
 >
@@ -453,6 +453,7 @@ Galaxy makes this very simple with the `Extract workflow` option. This means tha
 >    Since we did some steps which where specific to our custom peak file, we might want to exclude:
 >    - **Select last** {% icon tool %}
 >    - all **Replace Text** {% icon tool %} steps
+>    - **Convert Genomic Intervals to BED**
 >    - **Get flanks** {% icon tool %}
 >
 > 5. Rename the workflow to something descriptive, e.g. `From peaks to genes`
