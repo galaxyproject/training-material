@@ -409,7 +409,7 @@ We will group the table by chromosome and count the number of genes with peaks o
 >    > Which chromosome contained the highest number of target genes?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > The result varies with different settings. If you followed step by step, it should be chromosome 11 with 1990 genes.
+>    > > The result varies with different settings, for example, the annotation may change due to updates at UCSC. If you followed step by step, with the same annotation, it should be chromosome 7 with 1675 genes.
 >    > {: .solution }
 >    {: .question}
 >
