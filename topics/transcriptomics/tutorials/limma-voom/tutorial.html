@@ -247,6 +247,7 @@
       <li><a href="#heatmap-of-top-genes-can-be-auto-generated" id="markdown-toc-heatmap-of-top-genes-can-be-auto-generated">Heatmap of top genes can be auto-generated</a></li>
       <li><a href="#stripcharts-of-top-genes" id="markdown-toc-stripcharts-of-top-genes">Stripcharts of top genes</a></li>
       <li><a href="#interactive-plots-glimma" id="markdown-toc-interactive-plots-glimma">Interactive plots (Glimma)</a></li>
+      <li><a href="#gene-ontology-testing-with-goseq" id="markdown-toc-gene-ontology-testing-with-goseq">Gene Ontology testing with <strong>goseq</strong></a></li>
       <li><a href="#create-heatmap-of-custom-genes" id="markdown-toc-create-heatmap-of-custom-genes">Create heatmap of custom genes</a></li>
     </ol>
   </li>
@@ -800,11 +801,151 @@ How does the number of differentially expressed genes in the luminal cells compa
 
 </blockquote>
 
+<h2 id="gene-ontology-testing-with-goseq">Gene Ontology testing with <strong>goseq</strong></h2>
+
+<p>We have identified genes that are differentially expressed. We would like to know if there are biological categories that are enriched among the differentially expressed genes.</p>
+
+<p><a href="http://www.geneontology.org/">Gene Ontology (GO)</a> analysis is widely used to reduce complexity and highlight biological processes in genome-wide expression studies. However, standard methods give biased results on RNA-seq data due to over-detection of differential expression for long and highly-expressed transcripts.</p>
+
+<p><a href="https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf">goseq tool</a> provides methods for performing GO analysis of RNA-seq data, taking length bias into account. The methods and software used by goseq are equally applicable to other category based tests of RNA-seq data, such as KEGG pathway analysis.</p>
+
+<p>goseq needs 2 files as inputs:</p>
+<ul>
+  <li>A tabular file with the differentially expressed genes from all genes assayed in the RNA-seq experiment with 2 columns:
+    <ul>
+      <li>the Gene IDs (unique within the file)</li>
+      <li>True (differentially expressed) or False (not differentially expressed)</li>
+    </ul>
+  </li>
+  <li>A file with information about the length of a gene to correct for potential length bias in differentially expressed genes</li>
+</ul>
+
+<p>We will call genes differentially expressed if they have an adjusted P value below 0.01 and a fold-change of 1.5 (log2FC of 0.58) as in the Fu paper. We will add a column that gives these genes the value “True” and all other genes tested for differential expression the value “False”.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-prepare-the-datasets-for-goseq"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Prepare the datasets for GOSeq</h3>
+
+  <ol>
+    <li><strong>Compute</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <ul>
+        <li><em>“Add expression”</em>: <code class="highlighter-rouge">bool(c8&lt;0.01) and bool(abs(c4)&gt;0.58)</code> <em>(adj.P.value)</em></li>
+        <li><i class="fa fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“as a new column to”</em>: the <code class="highlighter-rouge">limma-voom Tables</code></li>
+      </ul>
+    </li>
+    <li><strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c1,c9</code></li>
+        <li><em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: the output of the <strong>Compute</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+
+      <p>We just generated the differentially expressed information for goseq. We need as second input for goseq, the gene lengths. We can use the gene lengths from the original table we imported from GEO (<code class="highlighter-rouge">seqdata</code>). But if we didn’t have that we could use a tool like <strong>featureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to output a gene lengths file.
+The original file with gene lengths contains all &gt;20k genes, but we only want the ~15k we have in our differentially expressed genes file after filtering low counts, and in the same order. So we will join the two tables, keeping only the information for genes present in the differentially expressed genes file. We can then cut out the columns we need for the 2 inputs (gene id, length) (gene id, DE status) and as a bonus they will both be sorted in the same order, what we need for goseq.</p>
+    </li>
+    <li><strong>Join two Datasets</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <ul>
+        <li><em>“Join”</em>: output of the <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step above</li>
+        <li><em>“using column”</em>: <code class="highlighter-rouge">Column: 1</code></li>
+        <li><em>“with”</em> the GEO counts file <code class="highlighter-rouge">seqdata</code></li>
+        <li><em>“and column”</em>: <code class="highlighter-rouge">Column: 1</code></li>
+        <li><em>“Keep lines of first input that do not join with second input”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><em>“Keep the header lines”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: the GEO counts file <code class="highlighter-rouge">seqdata</code></li>
+      </ul>
+    </li>
+    <li><strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c1,c2</code> (the gene ids and lengths)</li>
+        <li><em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: the output of the <strong>Join</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>Add a tag <code class="highlighter-rouge">lengths</code></li>
+      </ul>
+    </li>
+    <li><strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c1,c16</code> (the gene ids and DE status)</li>
+        <li><em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: the output of the <strong>Join</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>Add a tag <code class="highlighter-rouge">DE_status</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>We now have the two required input files for goseq.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-perform-go-analysis"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Perform GO analysis</h3>
+
+  <ol>
+    <li><strong>goseq</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <ul>
+        <li><em>“Differentially expressed genes file”</em>: <code class="highlighter-rouge">DE_status</code> output from <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Gene lengths file”</em>: <code class="highlighter-rouge">lengths</code> output from <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Gene categories”</em>:  <code class="highlighter-rouge">Get categories</code>
+          <ul>
+            <li><em>“Select a genome to use”</em>:  <code class="highlighter-rouge">Mouse(mm10)</code></li>
+            <li><em>“Select Gene ID format”</em>:  <code class="highlighter-rouge">Entrez Gene ID</code></li>
+            <li><em>“Select one or more categories”</em>: <code class="highlighter-rouge">GO: Cellular Component</code>, <code class="highlighter-rouge">GO: Biological Process</code>, <code class="highlighter-rouge">GO: Molecular Function</code></li>
+          </ul>
+        </li>
+        <li><em>“Output Options”</em>
+          <ul>
+            <li><em>“Output Top GO terms plot?”</em> <code class="highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>goseq generates a big table with the following columns for each GO term:</p>
+<ol>
+  <li><code class="highlighter-rouge">category</code>: GO category</li>
+  <li><code class="highlighter-rouge">over_rep_pval</code>: <em>p</em>-value for over representation of the term in the differentially expressed genes</li>
+  <li><code class="highlighter-rouge">under_rep_pval</code>: <em>p</em>-value for under representation of the term in the differentially expressed genes</li>
+  <li><code class="highlighter-rouge">numDEInCat</code>: number of differentially expressed genes in this category</li>
+  <li><code class="highlighter-rouge">numInCat</code>: number of genes in this category</li>
+  <li><code class="highlighter-rouge">term</code>: detail of the term</li>
+  <li><code class="highlighter-rouge">ontology</code>: MF (Molecular Function - molecular activities of gene products), CC (Cellular Component - where gene products are active), BP (Biological Process - pathways and larger processes made up of the activities of multiple gene products)</li>
+  <li><code class="highlighter-rouge">p.adjust.over_represented</code>: <em>p</em>-value for over representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure</li>
+  <li><code class="highlighter-rouge">p.adjust.under_represented</code>: <em>p</em>-value for over representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure</li>
+</ol>
+
+<p>To identify categories significantly enriched/unenriched below some p-value cutoff, it is necessary to use the adjusted <em>p</em>-value.</p>
+
+<p>A plot of the top 10 over-represented GO terms (by adjusted <em>p</em>-value) can be output from the goseq tool to help visualise results.</p>
+
+<p>Basal pregnant vs lactate top 10 GO terms</p>
+
+<figure id="figure-5"><img src="../../images/limma-voom/basal_top_GO.png" alt="Basal Plot" title="Basal top 10 GO terms" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Basal top 10 GO terms</figcaption></figure>
+
+<p>Luminal pregnant vs lactate top 10 GO terms</p>
+
+<figure id="figure-6"><img src="../../images/limma-voom/luminal_top_GO.png" alt="Luminal Plot" title="Luminal top 10 GO terms" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Luminal top 10 GO terms</figcaption></figure>
+
+<p>The Fu paper also used goseq and found enrichment in the luminal cells for general metabolic processes, lipid biosynthesis and transport proteins, and enrichment for cell contractility genes in the basal cells.</p>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Take a look at the top 10 GO plots for the luminal and basal contrast. How do they compare to what the authors found?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-10"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>The top 10 GO terms seem to describe similar processes to what the authors found.</p>
+
+  </blockquote>
+</blockquote>
+
 <h2 id="create-heatmap-of-custom-genes">Create heatmap of custom genes</h2>
 
-<p>The auto-generated heatmaps above will give you a quick view of expression of the top genes by adj. P value. However, note that the top genes by adj. P value may happen to be all upregulated or all downregulated, and you may wish to instead create a heatmap that includes the top most differentially up-regulated <em>and</em> down-regulated genes. You could do this as shown in the ref-based tutorial. You may also want to create a heatmap for a set of genes of interest, such as the 31 genes from the original paper using this dataset, Fig. 6b below. These 31 genes include the authors’ main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors, identified as differentially expressed in this dataset in luminal pregnant vs lactate by the authors. We will recreate the heatmap to show the steps. It also serves as a sanity check, to check that our results look similar to what was shown in the paper.</p>
+<p>You may want to create a heatmap for a set of genes of interest, such as the 31 genes from the original paper using this dataset, Fig. 6b below. These 31 genes include the authors’ main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors, identified as differentially expressed in this dataset in luminal pregnant vs lactate by the authors. We will recreate the heatmap to show the steps. It also serves as a sanity check, to check that our results look similar to what was shown in the paper.</p>
 
-<figure id="figure-5"><img src="../../images/limma-voom/fu_heatmap.png" alt="Fu heatmap" title="Fu et al, Nat Cell Biol 2015" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Fu et al, Nat Cell Biol 2015</figcaption></figure>
+<figure id="figure-7"><img src="../../images/limma-voom/fu_heatmap.png" alt="Fu heatmap" title="Fu et al, Nat Cell Biol 2015" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Fu et al, Nat Cell Biol 2015</figcaption></figure>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GeneID
 Mcl1
@@ -850,6 +991,7 @@ Cxcl1
         <li>Use the pencil to rename the file to <code class="highlighter-rouge">heatmap genes</code></li>
       </ul>
     </li>
+    <li>Rerun limma-voom selecting <em>“Output Normalised Counts Table?”</em>: <code class="highlighter-rouge">Yes</code></li>
     <li><strong>Join two Datasets</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: the <code class="highlighter-rouge">heatmap genes</code> file</li>
@@ -869,7 +1011,7 @@ Cxcl1
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: the joined dataset (output of <strong>Join two Datasets</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
 
-      <p>The genes are in rows and the samples in columns, we will transpose to have genes in columns and samples in rows as in the Figure in the paper.</p>
+      <p>The genes are in rows and the samples in columns, we could leave the genes in rows but we will transpose to have genes in columns and samples in rows as in the Figure in the paper.</p>
     </li>
     <li><strong>Transpose</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to have samples in rows and genes in columns
       <ul>
@@ -896,7 +1038,7 @@ Cxcl1
         <li><em>“Enable data clustering”</em>: <code class="highlighter-rouge">No</code></li>
         <li><em>“Labeling columns and rows”</em>: <code class="highlighter-rouge">Label my columns and rows</code></li>
         <li><em>“Coloring groups”</em>: <code class="highlighter-rouge">Blue to white to red</code></li>
-        <li><em>“Data scaling”</em>: <code class="highlighter-rouge">Scale my data by column</code></li>
+        <li><em>“Data scaling”</em>: <code class="highlighter-rouge">Scale my data by column</code> (scale genes)</li>
       </ul>
     </li>
   </ol>
@@ -910,7 +1052,7 @@ Cxcl1
     <p>How does the heatmap compare to the one from the Fu paper Fig 6 (above)?</p>
 
     <blockquote class="solution">
-      <h3 id="solution-solution-10"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <h3 id="solution-solution-11"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
       <p><img src="../../images/limma-voom/fu_heatmap_regenerated.png" alt="Fu heatmap regenerated" /></p>
 
