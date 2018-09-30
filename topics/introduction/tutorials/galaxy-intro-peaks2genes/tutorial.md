@@ -33,9 +33,9 @@ contributors:
 # Introduction
 {:.no_toc}
 
-We stumbled upon a paper [Li et al., Cell Stem Cell 2012](https://www.ncbi.nlm.nih.gov/pubmed/22862943) that contains the analysis of possible target genes of an interesting protein in mice. The targets were obtained by ChIP-seq and the raw data is available through [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
-The list of genes however is neither in the supplement of the paper nor part of the GEO submission.
-The closest thing we could find is a list of the regions where the signal is significantly enriched (so called *peaks*):
+We stumbled upon a paper [Li et al., Cell Stem Cell 2012](https://www.ncbi.nlm.nih.gov/pubmed/22862943) called *"The histone acetyltransferase MOF is a key regulator of the embryonic stem cell core transcriptional network"*. The paper contains the analysis of possible target genes of an interesting protein called Mof. The targets were obtained by ChIP-seq in mice and the raw data is available through [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
+However, the list of genes is neither in the supplement of the paper, nor part of the GEO submission.
+The closest thing we could find is a file in GEO containing a list of the regions where the signal is significantly enriched (so called *peaks*):
 
 1 | 3660676 | 3661050 | 375 | 210 | 62.0876250438913 | -2.00329386666667
 1 | 3661326 | 3661500 | 175 | 102 | 28.2950833625942 | -0.695557142857143
@@ -134,11 +134,11 @@ Galaxy will automatically unpack the file.
 > * Press **Start**
 {: .tip}
 
-> ### {% icon hands_on %} Hands-on: Inspect and edit attribute of a file
+> ### {% icon hands_on %} Hands-on: Inspect and edit attributes of a file
 >
 > 1. Click on the file in the history panel
 >
->    Some meta-information (e.g. format, reference database) about the file and the header of the file are then displayed:
+>    Some meta-information (e.g. format, reference database) about the file and the header of the file are then displayed, along with the number of lines in the file (48,647):
 >
 >    ![Expanded file in history](../../images/input_expanded_file.png)
 >
@@ -150,8 +150,14 @@ Galaxy will automatically unpack the file.
 >
 >    A form to edit dataset attributes is displayed in the middle panel
 >
-> 4. Search for `mm9` in **Database/Build** attribute and select `Mouse July 2007 (NCBI37/mm9)`
+> 4. Search for `mm9` in **Database/Build** attribute and select `Mouse July 2007 (NCBI37/mm9)` (the paper tells us the peaks are from `mm9`)
 > 5. Click on **Save** on the top
+> 6. Add a tag called `peaks` to the dataset to make it easier to track in the history
+>    {% include snippets/add_tag.md %}
+>
+>    The dataset should now look like below in the history
+>
+>    ![Peaks file](../../images/input_tagged_file.png){: width="250px" height="300px"}
 >
 {: .hands_on}
 
@@ -191,6 +197,7 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 > 6. Click on the **Send Query to Galaxy** button
 > 7. Wait for the upload to finish
 > 8. Rename our dataset ({% icon galaxy-pencil %} (pencil) icon) to something more recognizable (`Genes`)
+> 9. Add a tag called `genes` to the dataset to make it easier to track in the history
 >
 {: .hands_on}
 
@@ -208,6 +215,8 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 Now we collected all the data we need to start our analysis.
 
 # Part 1: Naive approach
+
+We will first use a "naive" approach to try to identify the genes that the peak regions are associated with. We will identify genes that overlap at least 1bp with the peak regions.
 
 ## File preparation
 
@@ -246,12 +255,12 @@ By looking at the HPeak manual we can find out that the columns contain the foll
  - not relevant
 
 In order to compare the two files, we have to make sure that the chromosome names follow the same format.
-As we directly see, the peak file lacks `chr` before any chromosome number. But what happens with chromosome 20 and 21? Will it be X and Y instead? Let's check:
+As we can see, the peak file lacks `chr` before any chromosome number. But what happens with chromosome 20 and 21? Will it be X and Y instead? Let's check:
 
 > ### {% icon hands_on %} Hands-on: View end of file
 >
 > 1. Search for **Select last** {% icon tool %} tool and run **Select last lines from a dataset (tail)** with the following settings:
->     - *"Text file"*: our peak file `GSE37268_mof3.out.hpeak.txt`
+>     - *"Text file"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz`
 >     - *"Operation"*: `Keep last lines`
 >     - *"Number of lines"*: Choose a value, e.g. `100`
 > 2. Click **Execute**
@@ -278,7 +287,7 @@ In order to convert the chromosome names we have therefore two things to do:
 > ### {% icon hands_on %} Hands-on: Adjust chromosome names
 >
 > 1. **Replace Text** {% icon tool %}: Run **Replace Text in a specific column** with the following settings:
->     - *"File to process"*: our peak file `GSE37268_mof3.out.hpeak.txt`
+>     - *"File to process"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz`
 >     - *"in column"*: `Column:1`
 >     - *"Find pattern"*: `[0-9]+`
 >
@@ -317,10 +326,12 @@ In order to convert the chromosome names we have therefore two things to do:
 
 ## Analysis
 
-Our goal is still to compare the 2 region files (the genes file and the peak file from the publication)
-to know which peaks are related to which genes. If you really only want to know which peaks are located **inside** genes you
-can skip the next step. Otherwise, it might be reasonable to include the promoter region into the comparison, e.g. because
-you want to include Transcriptions factors in ChIP-seq experiments.
+Our goal is to compare the 2 region files (the genes file and the peak file from the publication)
+to know which peaks are related to which genes. If you only want to know which peaks are located **inside** genes (within the gene body) you
+can skip the next step. Otherwise, it might be reasonable to include the **promoter** region of the genes into the comparison, e.g. because
+you want to include transcriptions factors in ChIP-seq experiments. There is no strict definition for promoter region but 2kb upstream of the TSS (start of region) is commonly used. We'll use the **Get Flanks** tool to get regions 2kb bases upstream of the start of the gene to 10kb bases downstream of the start (12kb in length). To do this we tell the Get Flanks tool we want regions upstream of the start, with an offset of 10kb, that are 12kb in length, as shown in the diagram below.
+
+![Get Flanks](../../images/intro_get_flanks.png)
 
 > ### {% icon hands_on %} Hands-on: Add promoter region to gene records
 >
@@ -347,10 +358,12 @@ you want to include Transcriptions factors in ChIP-seq experiments.
 >    >    ![Show/Hide Scratchbook](../../images/intro_scratchbook_show_hide.png)
 >    {: .tip}
 >
-> 3. Rename your dataset to reflect your findings
+> 3. Rename your dataset to reflect your findings (`Promoter regions`)
 {: .hands_on}
 
-You might have noticed that the UCSC file is in `BED` format and has a database associated to it. That's what we want for our peak file as well
+The output is regions that start from 2kb upstream of the TSS and include 10kb downstream. For input regions on the positive strand e.g. `chr1 134212701 134230065` this gives `chr1 134210701 134222701`. For regions on the negative strand e.g. `chr1 8349819 9289958` this gives `chr1  9279958 9291958`.
+
+You might have noticed that the UCSC file is in `BED` format and has a database associated to it. That's what we want for our peak file as well. The **Intersect** tool we will use can automatically convert interval files to BED format but we'll convert our interval file explicitly here to show how this can be achieved with Galaxy.
 
 > ### {% icon hands_on %} Hands-on: Change format and database
 >
@@ -367,18 +380,20 @@ It's time to find the overlapping intervals (finally!). To do that, we want to e
 >
 > 1. **Intersect** {% icon tool %}: Run **Intersect the intervals of two datasets** with the following settings:
 >     - *"Return"*: `Overlapping Intervals`
->     - *"of"*: the UCSC file with promoter regions
->     - *"that intersect"*: our converted peak region file
+>     - *"of"*: the UCSC file with promoter regions (`Promoter regions`)
+>     - *"that intersect"*: our peak region file from **Replace** (`Peak regions`)
 >     - *"for at least"*: `1`
 >
 >    > ### {% icon comment %} Comments
->    > The order of the inputs is important! We want to end up with a list of genes, so the corresponding dataset needs to be the first input.
+>    > The order of the inputs is important! We want to end up with a list of **genes**, so the corresponding dataset with the gene information needs to be the first input (`Promoter regions`).
 >    {: .comment}
+>    ![Genes overlapping peaks](../../images/intro_overlapping_genes.png)
 {: .hands_on}
 
-We now have the list of genes (column 4) overlapping with the peak regions.
+We now have the list of genes (column 4) overlapping with the peak regions, similar to shown above.
+
 To get a better overview of the genes we obtained, we want to look at their distribution across the different chromosomes.
-We will regroup the table by chromosome and count the number of genes with peaks on each chromosome
+We will group the table by chromosome and count the number of genes with peaks on each chromosome
 
 > ### {% icon hands_on %} Hands-on: Count genes on different chromosomes
 >
@@ -395,7 +410,7 @@ We will regroup the table by chromosome and count the number of genes with peaks
 >    > Which chromosome contained the highest number of target genes?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > The result varies with different settings. If you followed step by step, it should be chromosome 7 with 1675 genes.
+>    > > The result varies with different settings, for example, the annotation may change due to updates at UCSC. If you followed step by step, with the same annotation, it should be chromosome 7 with 1675 genes. Note that for reproducibility, you should keep all input data used because Galaxy can store all parameters but inputs may change e.g. the annotation from UCSC.
 >    > {: .solution }
 >    {: .question}
 >
@@ -407,7 +422,7 @@ Since we have some nice data, let's draw a barchart out of it!
 
 > ### {% icon hands_on %} Hands-on: Draw barchart
 >
-> 1. Click on {% icon galaxy-barchart %} (visualize) icon at the latest history item
+> 1. Click on {% icon galaxy-barchart %} (visualize) icon on the output from the **Group** tool
 > 2. Select `Bar diagram`
 > 3. Choose a title at **Provide a title**, e.g. `Gene counts per chromosome`
 > 4. Switch to the **Select data** tab and play around with the settings
@@ -439,7 +454,7 @@ Galaxy makes this very simple with the `Extract workflow` option. This means tha
 >    Since we did some steps which where specific to our custom peak file, we might want to exclude:
 >    - **Select last** {% icon tool %}
 >    - all **Replace Text** {% icon tool %} steps
->    - **Convert Genomic Intervals to strict BED** {% icon tool %}
+>    - **Convert Genomic Intervals to BED**
 >    - **Get flanks** {% icon tool %}
 >
 > 5. Rename the workflow to something descriptive, e.g. `From peaks to genes`
@@ -486,7 +501,7 @@ Now it's time to reuse our workflow for a more sophisticated approach.
 
 # Part 2: More sophisticated approach
 
-In part 1 we used an overlap definition of 1 bp (default setting). In order to get a more meaningful definition, we now want to use the information of the position of the peak summit and check for overlap of the summits with genes.
+In part 1 we used an overlap definition of 1 bp (default setting) to identify genes associated with the peak regions. However, the peaks could be broad, so instead, in order to get a more meaningful definition, we could identify the genes that overlap where most of the reads are concentrated, the **peak summit**. We will use the information on the position of the peak summit contained in the original peak file and check for overlap of the summits with genes.
 
 ## Preparation
 
@@ -499,7 +514,7 @@ The history is now empty, but we need our peak file again. Before we upload it t
 >
 >       You should see both of your histories side-by-side now
 >
-> 2. Use drag-and-drop with your mouse to copy the edited peak file (after the replace steps) but still in interval format, which contains the summit information, to your new history.
+> 2. Use drag-and-drop with your mouse to copy the edited peak file (after the replace steps), which contains the summit information, to your new history.
 > 3. Click on **Analyze Data** in the top panel to go back to your analysis window
 >
 {: .hands_on}
@@ -512,11 +527,11 @@ We need to generate a new BED file from the original peak file that contains the
 >
 > 1. **Compute** {% icon tool %}: Run **Compute an expression on every row** with the following settings:
 >   - *"Add expression"*: `c2+c5`
->   - *"as a new column to"*: our peak file
+>   - *"as a new column to"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz`
 >   - *"Round result?"*: `YES`
 > 2. **Compute an expression on every row** {% icon tool %}: rerun this tool on the last result with:
 >   - *"Add expression"*: `c8+1`
->   - *"as a new column to"*: the result from step 1
+>   - *"as a new column to"*: the **Compute** result from step 1
 >   - *"Round result?"*: `YES`
 >
 {: .hands_on}
@@ -531,7 +546,10 @@ Now we cut out just the chromosome plus the start and end of the summit:
 >
 >    The output from **Cut** will be in `tabular` format.
 >
-> 2. Change the format to `interval` since that's what the tool **Intersect** expects.
+> 2. Change the format to `interval` (use the {% icon galaxy-pencil %}) since that's what the tool **Intersect** expects.
+>    The output should look like below:
+>
+>    ![Peak summits](../../images/intro_summits.png)
 {: .hands_on}
 
 ## Get gene names
@@ -556,6 +574,8 @@ The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
 >    > * Paste the link into the text field
+>    > * Select "Type": `bed`
+>    > * Select "Genome": `mm9`
 >    > * Press **Start**
 >    {: .tip}
 >
@@ -570,7 +590,9 @@ The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
-> 2. Inspect the file content to check if it contains gene names
+> 2. Inspect the file content to check if it contains gene names.
+>    It should look similar to below:
+>    ![Gene names](../../images/intro_gene_names.png)
 >
 {: .hands_on}
 
