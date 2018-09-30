@@ -313,9 +313,9 @@
 
         <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>We stumbled upon a paper <a href="https://www.ncbi.nlm.nih.gov/pubmed/22862943">Li et al., Cell Stem Cell 2012</a> that contains the analysis of possible target genes of an interesting protein in mice. The targets were obtained by ChIP-seq and the raw data is available through <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268">GEO</a>.
-The list of genes however is neither in the supplement of the paper nor part of the GEO submission.
-The closest thing we could find is a list of the regions where the signal is significantly enriched (so called <em>peaks</em>):</p>
+<p>We stumbled upon a paper <a href="https://www.ncbi.nlm.nih.gov/pubmed/22862943">Li et al., Cell Stem Cell 2012</a> called <em>“The histone acetyltransferase MOF is a key regulator of the embryonic stem cell core transcriptional network”</em>. The paper contains the analysis of possible target genes of an interesting protein called Mof. The targets were obtained by ChIP-seq in mice and the raw data is available through <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268">GEO</a>.
+However, the list of genes is neither in the supplement of the paper, nor part of the GEO submission.
+The closest thing we could find is a file in GEO containing a list of the regions where the signal is significantly enriched (so called <em>peaks</em>):</p>
 
 <table>
   <tbody>
@@ -506,13 +506,13 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 </blockquote>
 
 <blockquote class="hands_on">
-  <h3 id="hands_on-hands-on-inspect-and-edit-attribute-of-a-file"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Inspect and edit attribute of a file</h3>
+  <h3 id="hands_on-hands-on-inspect-and-edit-attributes-of-a-file"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Inspect and edit attributes of a file</h3>
 
   <ol>
     <li>
       <p>Click on the file in the history panel</p>
 
-      <p>Some meta-information (e.g. format, reference database) about the file and the header of the file are then displayed:</p>
+      <p>Some meta-information (e.g. format, reference database) about the file and the header of the file are then displayed, along with the number of lines in the file (48,647):</p>
 
       <p><img src="../../images/input_expanded_file.png" alt="Expanded file in history" /></p>
     </li>
@@ -526,8 +526,29 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
       <p>A form to edit dataset attributes is displayed in the middle panel</p>
     </li>
-    <li>Search for <code class="highlighter-rouge">mm9</code> in <strong>Database/Build</strong> attribute and select <code class="highlighter-rouge">Mouse July 2007 (NCBI37/mm9)</code></li>
+    <li>Search for <code class="highlighter-rouge">mm9</code> in <strong>Database/Build</strong> attribute and select <code class="highlighter-rouge">Mouse July 2007 (NCBI37/mm9)</code> (the paper tells us the peaks are from <code class="highlighter-rouge">mm9</code>)</li>
     <li>Click on <strong>Save</strong> on the top</li>
+    <li>Add a tag called <code class="highlighter-rouge">peaks</code> to the dataset to make it easier to track in the history
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-adding-a-tag"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Adding a tag</h3>
+        <ul>
+          <li>Click on the dataset</li>
+          <li>Click on <i class="fa fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> <strong>Edit dataset tags</strong></li>
+          <li>
+            <p>Add the tag starting with <code class="highlighter-rouge">#</code></p>
+
+            <p>The tags starting with <code class="highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
+          </li>
+          <li>Check that the tag is apparing below the dataset name</li>
+        </ul>
+
+      </blockquote>
+
+      <p>The dataset should now look like below in the history</p>
+
+      <p><img src="../../images/input_tagged_file.png" alt="Peaks file" width="250px" height="300px" /></p>
+    </li>
   </ol>
 
 </blockquote>
@@ -575,6 +596,7 @@ we also need a list of genes in mice, which we can obtain from UCSC.</p>
     <li>Click on the <strong>Send Query to Galaxy</strong> button</li>
     <li>Wait for the upload to finish</li>
     <li>Rename our dataset (<i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (pencil) icon) to something more recognizable (<code class="highlighter-rouge">Genes</code>)</li>
+    <li>Add a tag called <code class="highlighter-rouge">genes</code> to the dataset to make it easier to track in the history</li>
   </ol>
 
 </blockquote>
@@ -596,6 +618,8 @@ we also need a list of genes in mice, which we can obtain from UCSC.</p>
 <p>Now we collected all the data we need to start our analysis.</p>
 
 <h1 id="part-1-naive-approach">Part 1: Naive approach</h1>
+
+<p>We will first use a “naive” approach to try to identify the genes that the peak regions are associated with. We will identify genes that overlap at least 1bp with the peak regions.</p>
 
 <h2 id="file-preparation">File preparation</h2>
 
@@ -643,7 +667,7 @@ we also need a list of genes in mice, which we can obtain from UCSC.</p>
 </ul>
 
 <p>In order to compare the two files, we have to make sure that the chromosome names follow the same format.
-As we directly see, the peak file lacks <code class="highlighter-rouge">chr</code> before any chromosome number. But what happens with chromosome 20 and 21? Will it be X and Y instead? Let’s check:</p>
+As we can see, the peak file lacks <code class="highlighter-rouge">chr</code> before any chromosome number. But what happens with chromosome 20 and 21? Will it be X and Y instead? Let’s check:</p>
 
 <blockquote class="hands_on">
   <h3 id="hands_on-hands-on-view-end-of-file"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: View end of file</h3>
@@ -651,7 +675,7 @@ As we directly see, the peak file lacks <code class="highlighter-rouge">chr</cod
   <ol>
     <li>Search for <strong>Select last</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool and run <strong>Select last lines from a dataset (tail)</strong> with the following settings:
       <ul>
-        <li><em>“Text file”</em>: our peak file <code class="highlighter-rouge">GSE37268_mof3.out.hpeak.txt</code></li>
+        <li><em>“Text file”</em>: our peak file <code class="highlighter-rouge">GSE37268_mof3.out.hpeak.txt.gz</code></li>
         <li><em>“Operation”</em>: <code class="highlighter-rouge">Keep last lines</code></li>
         <li><em>“Number of lines”</em>: Choose a value, e.g. <code class="highlighter-rouge">100</code></li>
       </ul>
@@ -694,7 +718,7 @@ As we directly see, the peak file lacks <code class="highlighter-rouge">chr</cod
   <ol>
     <li><strong>Replace Text</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <strong>Replace Text in a specific column</strong> with the following settings:
       <ul>
-        <li><em>“File to process”</em>: our peak file <code class="highlighter-rouge">GSE37268_mof3.out.hpeak.txt</code></li>
+        <li><em>“File to process”</em>: our peak file <code class="highlighter-rouge">GSE37268_mof3.out.hpeak.txt.gz</code></li>
         <li><em>“in column”</em>: <code class="highlighter-rouge">Column:1</code></li>
         <li>
           <p><em>“Find pattern”</em>: <code class="highlighter-rouge">[0-9]+</code></p>
@@ -746,10 +770,12 @@ As we directly see, the peak file lacks <code class="highlighter-rouge">chr</cod
 
 <h2 id="analysis">Analysis</h2>
 
-<p>Our goal is still to compare the 2 region files (the genes file and the peak file from the publication)
-to know which peaks are related to which genes. If you really only want to know which peaks are located <strong>inside</strong> genes you
-can skip the next step. Otherwise, it might be reasonable to include the promoter region into the comparison, e.g. because
-you want to include Transcriptions factors in ChIP-seq experiments.</p>
+<p>Our goal is to compare the 2 region files (the genes file and the peak file from the publication)
+to know which peaks are related to which genes. If you only want to know which peaks are located <strong>inside</strong> genes (within the gene body) you
+can skip the next step. Otherwise, it might be reasonable to include the <strong>promoter</strong> region of the genes into the comparison, e.g. because
+you want to include transcriptions factors in ChIP-seq experiments. There is no strict definition for promoter region but 2kb upstream of the TSS (start of region) is commonly used. We’ll use the <strong>Get Flanks</strong> tool to get regions 2kb bases upstream of the start of the gene to 10kb bases downstream of the start (12kb in length). To do this we tell the Get Flanks tool we want regions upstream of the start, with an offset of 10kb, that are 12kb in length, as shown in the diagram below.</p>
+
+<p><img src="../../images/intro_get_flanks.png" alt="Get Flanks" /></p>
 
 <blockquote class="hands_on">
   <h3 id="hands_on-hands-on-add-promoter-region-to-gene-records"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add promoter region to gene records</h3>
@@ -787,11 +813,13 @@ you want to include Transcriptions factors in ChIP-seq experiments.</p>
         </ul>
       </blockquote>
     </li>
-    <li>Rename your dataset to reflect your findings</li>
+    <li>Rename your dataset to reflect your findings (<code class="highlighter-rouge">Promoter regions</code>)</li>
   </ol>
 </blockquote>
 
-<p>You might have noticed that the UCSC file is in <code class="highlighter-rouge">BED</code> format and has a database associated to it. That’s what we want for our peak file as well</p>
+<p>The output is regions that start from 2kb upstream of the TSS and include 10kb downstream. For input regions on the positive strand e.g. <code class="highlighter-rouge">chr1 134212701 134230065</code> this gives <code class="highlighter-rouge">chr1 134210701 134222701</code>. For regions on the negative strand e.g. <code class="highlighter-rouge">chr1 8349819 9289958</code> this gives <code class="highlighter-rouge">chr1  9279958 9291958</code>.</p>
+
+<p>You might have noticed that the UCSC file is in <code class="highlighter-rouge">BED</code> format and has a database associated to it. That’s what we want for our peak file as well. The <strong>Intersect</strong> tool we will use can automatically convert interval files to BED format but we’ll convert our interval file explicitly here to show how this can be achieved with Galaxy.</p>
 
 <blockquote class="hands_on">
   <h3 id="hands_on-hands-on-change-format-and-database"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Change format and database</h3>
@@ -814,22 +842,24 @@ you want to include Transcriptions factors in ChIP-seq experiments.</p>
     <li><strong>Intersect</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <strong>Intersect the intervals of two datasets</strong> with the following settings:
       <ul>
         <li><em>“Return”</em>: <code class="highlighter-rouge">Overlapping Intervals</code></li>
-        <li><em>“of”</em>: the UCSC file with promoter regions</li>
-        <li><em>“that intersect”</em>: our converted peak region file</li>
+        <li><em>“of”</em>: the UCSC file with promoter regions (<code class="highlighter-rouge">Promoter regions</code>)</li>
+        <li><em>“that intersect”</em>: our peak region file from <strong>Replace</strong> (<code class="highlighter-rouge">Peak regions</code>)</li>
         <li><em>“for at least”</em>: <code class="highlighter-rouge">1</code></li>
       </ul>
 
       <blockquote class="comment">
         <h3 id="comment-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
-        <p>The order of the inputs is important! We want to end up with a list of genes, so the corresponding dataset needs to be the first input.</p>
+        <p>The order of the inputs is important! We want to end up with a list of <strong>genes</strong>, so the corresponding dataset with the gene information needs to be the first input (<code class="highlighter-rouge">Promoter regions</code>).</p>
       </blockquote>
+      <p><img src="../../images/intro_overlapping_genes.png" alt="Genes overlapping peaks" /></p>
     </li>
   </ol>
 </blockquote>
 
-<p>We now have the list of genes (column 4) overlapping with the peak regions.
-To get a better overview of the genes we obtained, we want to look at their distribution across the different chromosomes.
-We will regroup the table by chromosome and count the number of genes with peaks on each chromosome</p>
+<p>We now have the list of genes (column 4) overlapping with the peak regions, similar to shown above.</p>
+
+<p>To get a better overview of the genes we obtained, we want to look at their distribution across the different chromosomes.
+We will group the table by chromosome and count the number of genes with peaks on each chromosome</p>
 
 <blockquote class="hands_on">
   <h3 id="hands_on-hands-on-count-genes-on-different-chromosomes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Count genes on different chromosomes</h3>
@@ -855,7 +885,7 @@ We will regroup the table by chromosome and count the number of genes with peaks
 
         <blockquote class="solution">
           <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-          <p>The result varies with different settings. If you followed step by step, it should be chromosome 7 with 1675 genes.</p>
+          <p>The result varies with different settings, for example, the annotation may change due to updates at UCSC. If you followed step by step, with the same annotation, it should be chromosome 7 with 1675 genes. Note that for reproducibility, you should keep all input data used because Galaxy can store all parameters but inputs may change e.g. the annotation from UCSC.</p>
         </blockquote>
       </blockquote>
     </li>
@@ -871,7 +901,7 @@ We will regroup the table by chromosome and count the number of genes with peaks
   <h3 id="hands_on-hands-on-draw-barchart"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Draw barchart</h3>
 
   <ol>
-    <li>Click on <i class="fa fa-bar-chart" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> (visualize) icon at the latest history item</li>
+    <li>Click on <i class="fa fa-bar-chart" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> (visualize) icon on the output from the <strong>Group</strong> tool</li>
     <li>Select <code class="highlighter-rouge">Bar diagram</code></li>
     <li>Choose a title at <strong>Provide a title</strong>, e.g. <code class="highlighter-rouge">Gene counts per chromosome</code></li>
     <li>Switch to the <strong>Select data</strong> tab and play around with the settings</li>
@@ -910,7 +940,7 @@ Wouldn’t it be nice to just convert this history into a workflow that we’ll 
       <ul>
         <li><strong>Select last</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li>all <strong>Replace Text</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> steps</li>
-        <li><strong>Convert Genomic Intervals to strict BED</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><strong>Convert Genomic Intervals to BED</strong></li>
         <li><strong>Get flanks</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
@@ -965,7 +995,7 @@ Wouldn’t it be nice to just convert this history into a workflow that we’ll 
 
 <h1 id="part-2-more-sophisticated-approach">Part 2: More sophisticated approach</h1>
 
-<p>In part 1 we used an overlap definition of 1 bp (default setting). In order to get a more meaningful definition, we now want to use the information of the position of the peak summit and check for overlap of the summits with genes.</p>
+<p>In part 1 we used an overlap definition of 1 bp (default setting) to identify genes associated with the peak regions. However, the peaks could be broad, so instead, in order to get a more meaningful definition, we could identify the genes that overlap where most of the reads are concentrated, the <strong>peak summit</strong>. We will use the information on the position of the peak summit contained in the original peak file and check for overlap of the summits with genes.</p>
 
 <h2 id="preparation">Preparation</h2>
 
@@ -981,7 +1011,7 @@ The history is now empty, but we need our peak file again. Before we upload it t
 
       <p>You should see both of your histories side-by-side now</p>
     </li>
-    <li>Use drag-and-drop with your mouse to copy the edited peak file (after the replace steps) but still in interval format, which contains the summit information, to your new history.</li>
+    <li>Use drag-and-drop with your mouse to copy the edited peak file (after the replace steps), which contains the summit information, to your new history.</li>
     <li>Click on <strong>Analyze Data</strong> in the top panel to go back to your analysis window</li>
   </ol>
 
@@ -998,14 +1028,14 @@ The history is now empty, but we need our peak file again. Before we upload it t
     <li><strong>Compute</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <strong>Compute an expression on every row</strong> with the following settings:
       <ul>
         <li><em>“Add expression”</em>: <code class="highlighter-rouge">c2+c5</code></li>
-        <li><em>“as a new column to”</em>: our peak file</li>
+        <li><em>“as a new column to”</em>: our peak file <code class="highlighter-rouge">GSE37268_mof3.out.hpeak.txt.gz</code></li>
         <li><em>“Round result?”</em>: <code class="highlighter-rouge">YES</code></li>
       </ul>
     </li>
     <li><strong>Compute an expression on every row</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: rerun this tool on the last result with:
       <ul>
         <li><em>“Add expression”</em>: <code class="highlighter-rouge">c8+1</code></li>
-        <li><em>“as a new column to”</em>: the result from step 1</li>
+        <li><em>“as a new column to”</em>: the <strong>Compute</strong> result from step 1</li>
         <li><em>“Round result?”</em>: <code class="highlighter-rouge">YES</code></li>
       </ul>
     </li>
@@ -1027,7 +1057,12 @@ The history is now empty, but we need our peak file again. Before we upload it t
 
       <p>The output from <strong>Cut</strong> will be in <code class="highlighter-rouge">tabular</code> format.</p>
     </li>
-    <li>Change the format to <code class="highlighter-rouge">interval</code> since that’s what the tool <strong>Intersect</strong> expects.</li>
+    <li>
+      <p>Change the format to <code class="highlighter-rouge">interval</code> (use the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span>) since that’s what the tool <strong>Intersect</strong> expects.
+The output should look like below:</p>
+
+      <p><img src="../../images/intro_summits.png" alt="Peak summits" /></p>
+    </li>
   </ol>
 </blockquote>
 
@@ -1058,6 +1093,8 @@ The history is now empty, but we need our peak file again. Before we upload it t
           <li>Open the Galaxy Upload Manager</li>
           <li>Select <strong>Paste/Fetch Data</strong></li>
           <li>Paste the link into the text field</li>
+          <li>Select “Type”: <code class="highlighter-rouge">bed</code></li>
+          <li>Select “Genome”: <code class="highlighter-rouge">mm9</code></li>
           <li>Press <strong>Start</strong></li>
         </ul>
       </blockquote>
@@ -1077,7 +1114,9 @@ The history is now empty, but we need our peak file again. Before we upload it t
       <p>As default, Galaxy takes the link as name, so rename them.</p>
     </li>
     <li>
-      <p>Inspect the file content to check if it contains gene names</p>
+      <p>Inspect the file content to check if it contains gene names.
+It should look similar to below:
+<img src="../../images/intro_gene_names.png" alt="Gene names" /></p>
     </li>
   </ol>
 
