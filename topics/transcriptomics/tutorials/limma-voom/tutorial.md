@@ -470,9 +470,110 @@ clicking on the corresponding gene in the plot.
 >    {: .question}
 >
 
+## Gene Ontology testing with **goseq**
+
+We have identified genes that are differentially expressed. We would like to know if there are biological categories that are enriched among the differentially expressed genes.
+
+[Gene Ontology (GO)](http://www.geneontology.org/) analysis is widely used to reduce complexity and highlight biological processes in genome-wide expression studies. However, standard methods give biased results on RNA-seq data due to over-detection of differential expression for long and highly-expressed transcripts.
+
+[goseq tool](https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf) provides methods for performing GO analysis of RNA-seq data, taking length bias into account. The methods and software used by goseq are equally applicable to other category based tests of RNA-seq data, such as KEGG pathway analysis.
+
+goseq needs 2 files as inputs:
+- A tabular file with the differentially expressed genes from all genes assayed in the RNA-seq experiment with 2 columns:
+    - the Gene IDs (unique within the file)
+    - True (differentially expressed) or False (not differentially expressed)
+- A file with information about the length of a gene to correct for potential length bias in differentially expressed genes
+
+We will call genes differentially expressed if they have an adjusted P value below 0.01 and a fold-change of 1.5 (log2FC of 0.58) as in the Fu paper. We will add a column that gives these genes the value "True" and all other genes tested for differential expression the value "False".
+
+> ### {% icon hands_on %} Hands-on: Prepare the datasets for GOSeq
+>
+> 1. **Compute** {% icon tool %} with
+>    - *"Add expression"*: `bool(c8<0.01) and bool(abs(c4)>0.58)` *(adj.P.value)*
+>    - {% icon param-collection %} *"as a new column to"*: the `limma-voom Tables`
+> 2. **Cut** {% icon tool %} with
+>    - *"Cut columns"*: `c1,c9`
+>    - *"Delimited by"*: `Tab`
+>    - {% icon param-file %} *"From"*: the output of the **Compute** {% icon tool %}
+>
+>    We just generated the differentially expressed information for goseq. We need as second input for goseq, the gene lengths. We can use the gene lengths from the original table we imported from GEO (`seqdata`). But if we didn't have that we could use a tool like **featureCounts** {% icon tool %} to output a gene lengths file.
+>    The original file with gene lengths contains all >20k genes, but we only want the ~15k we have in our differentially expressed genes file after filtering low counts, and in the same order. So we will join the two tables, keeping only the information for genes present in the differentially expressed genes file. We can then cut out the columns we need for the 2 inputs (gene id, length) (gene id, DE status) and as a bonus they will both be sorted in the same order, what we need for goseq.
+> 1. **Join two Datasets** {% icon tool %} with
+>    - *"Join"*: output of the **Cut** {% icon tool %} step above
+>    - *"using column"*: `Column: 1`
+>    - *"with"* the GEO counts file `seqdata`
+>    - *"and column"*: `Column: 1`
+>    - *"Keep lines of first input that do not join with second input"*: `No`
+>    - *"Keep the header lines"*: `No`
+>    - *"Delimited by"*: `Tab`
+>    - {% icon param-file %} *"From"*: the GEO counts file `seqdata`
+> 2. **Cut** {% icon tool %} with
+>    - *"Cut columns"*: `c1,c2` (the gene ids and lengths)
+>    - *"Delimited by"*: `Tab`
+>    - {% icon param-file %} *"From"*: the output of the **Join** {% icon tool %}
+>    - Add a tag `lengths`
+> 3. **Cut** {% icon tool %} with
+>    - *"Cut columns"*: `c1,c16` (the gene ids and DE status)
+>    - *"Delimited by"*: `Tab`
+>    - {% icon param-file %} *"From"*: the output of the **Join** {% icon tool %}
+>    - Add a tag `DE_status`
+{: .hands_on}
+
+We now have the two required input files for goseq.
+
+> ### {% icon hands_on %} Hands-on: Perform GO analysis
+>
+> 1. **goseq** {% icon tool %} with
+>    - *"Differentially expressed genes file"*: `DE_status` output from **Cut** {% icon tool %}
+>    - *"Gene lengths file"*: `lengths` output from **Cut** {% icon tool %}
+>    - *"Gene categories"*:  `Get categories`
+>       - *"Select a genome to use"*:  `Mouse(mm10)`
+>       - *"Select Gene ID format"*:  `Entrez Gene ID`
+>       - *"Select one or more categories"*: `GO: Cellular Component`, `GO: Biological Process`, `GO: Molecular Function`
+>    - *"Output Options"*
+>        - *"Output Top GO terms plot?"* `Yes`
+>
+{: .hands_on}
+
+goseq generates a big table with the following columns for each GO term:
+1. `category`: GO category
+2. `over_rep_pval`: *p*-value for over representation of the term in the differentially expressed genes
+3. `under_rep_pval`: *p*-value for under representation of the term in the differentially expressed genes
+4. `numDEInCat`: number of differentially expressed genes in this category
+5. `numInCat`: number of genes in this category
+6. `term`: detail of the term
+7. `ontology`: MF (Molecular Function - molecular activities of gene products), CC (Cellular Component - where gene products are active), BP (Biological Process - pathways and larger processes made up of the activities of multiple gene products)
+8. `p.adjust.over_represented`: *p*-value for over representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure
+9. `p.adjust.under_represented`: *p*-value for over representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure
+
+To identify categories significantly enriched/unenriched below some p-value cutoff, it is necessary to use the adjusted *p*-value.
+
+A plot of the top 10 over-represented GO terms (by adjusted *p*-value) can be output from the goseq tool to help visualise results.
+
+Basal pregnant vs lactate top 10 GO terms
+
+![Basal Plot](../../images/limma-voom/basal_top_GO.png "Basal top 10 GO terms")
+
+Luminal pregnant vs lactate top 10 GO terms
+
+![Luminal Plot](../../images/limma-voom/luminal_top_GO.png "Luminal top 10 GO terms")
+
+The Fu paper also used goseq and found enrichment in the luminal cells for general metabolic processes, lipid biosynthesis and transport proteins, and enrichment for cell contractility genes in the basal cells.
+
+> ### {% icon question %} Questions
+>
+> Take a look at the top 10 GO plots for the luminal and basal contrast. How do they compare to what the authors found?
+>
+> > ### {% icon solution %} Solution
+> >
+> > The top 10 GO terms seem to describe similar processes to what the authors found.
+> >
+> {: .solution}
+{: .question}
+
 ## Create heatmap of custom genes
 
-The auto-generated heatmaps above will give you a quick view of expression of the top genes by adj. P value. However, note that the top genes by adj. P value may happen to be all upregulated or all downregulated, and you may wish to instead create a heatmap that includes the top most differentially up-regulated *and* down-regulated genes. You could do this as shown in the ref-based tutorial. You may also want to create a heatmap for a set of genes of interest, such as the 31 genes from the original paper using this dataset, Fig. 6b below. These 31 genes include the authors' main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors, identified as differentially expressed in this dataset in luminal pregnant vs lactate by the authors. We will recreate the heatmap to show the steps. It also serves as a sanity check, to check that our results look similar to what was shown in the paper.
+You may want to create a heatmap for a set of genes of interest, such as the 31 genes from the original paper using this dataset, Fig. 6b below. These 31 genes include the authors' main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors, identified as differentially expressed in this dataset in luminal pregnant vs lactate by the authors. We will recreate the heatmap to show the steps. It also serves as a sanity check, to check that our results look similar to what was shown in the paper.
 
 ![Fu heatmap](../../images/limma-voom/fu_heatmap.png "Fu et al, Nat Cell Biol 2015")
 
@@ -516,8 +617,8 @@ Cxcl1
 >    - Paste the information above (the 31 gene symbols and header) into the Galaxy Data Uploader Paste/Fetch box 
 >    - Set File Type to `tabular`
 >    - Use the pencil to rename the file to `heatmap genes`
->
-> 2. **Join two Datasets** {% icon tool %} with the following parameters:
+> 2. Rerun limma-voom selecting *"Output Normalised Counts Table?"*: `Yes`
+> 3. **Join two Datasets** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Join"*: the `heatmap genes` file
 >    - *"using column"*: `Column: 1`
 >    - {% icon param-file %} *"with"*: `normcounts` file (output of **limma-voom** {% icon tool %})
@@ -527,14 +628,14 @@ Cxcl1
 >
 >    The generated file has more columns than we need for the heatmap. In addition to the columns with mean normalized counts, there is the $$log_{2} FC$$ and other information. We need to remove the extra columns.
 >
-> 3. **Cut** {% icon tool %} to extract the columns with the gene ids and normalized counts
+> 4. **Cut** {% icon tool %} to extract the columns with the gene ids and normalized counts
 >    - *"Cut columns"*: `c1,c5-c16`
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: the joined dataset (output of **Join two Datasets** {% icon tool %})
 >
->    The genes are in rows and the samples in columns, we will transpose to have genes in columns and samples in rows as in the Figure in the paper.
-> 
-> 4. **Transpose** {% icon tool %} to have samples in rows and genes in columns
+>    The genes are in rows and the samples in columns, we could leave the genes in rows but we will transpose to have genes in columns and samples in rows as in the Figure in the paper.
+>
+> 5. **Transpose** {% icon tool %} to have samples in rows and genes in columns
 >    - *"Input tabular dataset"*:
 >        - {% icon param-file %} *"From"*: the `Cut` dataset (output of **Cut** {% icon tool %})
 {: .hands_on}
@@ -549,7 +650,7 @@ We now have a table with the 31 genes in columns and the 12 samples in rows.
 >    - *"Enable data clustering"*: `No`
 >    - *"Labeling columns and rows"*: `Label my columns and rows`
 >    - *"Coloring groups"*: `Blue to white to red`
->    - *"Data scaling"*: `Scale my data by column`
+>    - *"Data scaling"*: `Scale my data by column` (scale genes)
 >
 {: .hands_on}
 
