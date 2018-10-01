@@ -211,6 +211,7 @@ Here, we will use the OpenMS tool [ConsensusID](http://ftp.mi.fu-berlin.de/pub/O
 > 5. Run ***IDMerger*** {% icon tool %} with two **Input files [...]**:
 >   - the output of **IDScoreSwitcher** based on **XTandemAdapter**
 >   - the output of **IDScoreSwitcher** based on **MSGFPlusAdapter**
+>   - **Reduce collections** set to `reduce collections by aggregating single files of multiple collections`
 > 6. Run ***ConsensusID*** {% icon tool %}.
 > 1. Run ***PeptideIndexer*** {% icon tool %} with
 >   - the FASTA protein database as **Input sequence database in FASTA format**, and
