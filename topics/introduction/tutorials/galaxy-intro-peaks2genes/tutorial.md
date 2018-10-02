@@ -108,17 +108,25 @@ Let's start with a fresh history.
 > 4. Select `interval` as **Type**
 > 5. Press **Start**
 > 6. Press **Close**
-> 7. Wait for the upload to finish
+> 7. Wait for the upload to finish. Galaxy will automatically unpack the file.
 >
-{: .hands_on}
-
-Galaxy will automatically unpack the file.
-
-> ### {% icon comment %} Comment
-> After this you will see your first history item in Galaxy’s right pane. It will go through
+>  After this you will see your first history item in Galaxy’s right pane. It will go through
 > the gray (preparing/queued) and yellow (running) states to become green (success):
 >
 > ![History section](../../images/intro_01.png)
+>
+{: .hands_on}
+
+
+> ### {% icon comment %} Interval file format
+> **Interval** format is a Galaxy format for representing genomic intervals. It is tab-separated, but has the added requirement that three of the columns must be:
+> - chromosome ID
+> - start position (0-based)
+> - end position (end-exclusive)
+>
+> An optional strand column can also be specified, and an initial header row can be used to label the columns, which do not have to be in any special order. Unlike BED format (see below) arbitrary additional columns can also be present.
+>
+> You can find more information about formats that can be used in Galaxy at the [Galaxy Data Formats page](https://usegalaxy.org/static/formatHelp.html).
 {: .comment}
 
 
@@ -212,7 +220,7 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 > You can find more information about it at [UCSC](https://genome.ucsc.edu/FAQ/FAQformat#format1) including a description of the optional fields.
 {: .comment}
 
-Now we collected all the data we need to start our analysis.
+Now we have collected all the data we need to start our analysis.
 
 # Part 1: Naive approach
 
