@@ -139,7 +139,6 @@ The most common method of peptide and protein False Discovery Rate (FDR) calcula
 
 > ### {% icon hands_on %} Hands-on: Creating a Decoy Database
 > 1. Run **DecoyDatabase**  {% icon tool %} on the merged database.
-> 2. Set the flag (-append) to `Yes` and execute.
 >
 >  > ### {% icon tip %} Tip: Decoy tags
 >  > The string you enter as a decoy tag will be added as a prefix or suffix (your choice) to the description of each decoy protein entry. Thus you can see from which entry in the target database the decoy was computed.
