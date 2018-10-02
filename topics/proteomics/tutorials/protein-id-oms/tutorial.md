@@ -170,9 +170,8 @@ It also enables you to check for contaminations in your samples.
 > ### {% icon hands_on %} Hands-On: Analysis of Contaminants
 >
 > 1. Run ***TextExporter*** {% icon tool %} to convert the idXML output to a human-readable tabular file.
-> 1. Run ***Select*** {% icon tool %} to select all lines **Matching** the pattern "CONTAMINANT".
-> 3. Run ***Select*** {% icon tool %} to select all lines that **NOT Matching** the pattern "HUMAN".
-> 2. Remove all bovine and mycoplasma proteins from your list by running ***Select*** {% icon tool %}. Select only those lines **NOT Matching** match the pattern "HUMAN".
+> 2. Run ***Select lines that match an expression*** {% icon tool %} on the TextExporter output to select all lines **Matching** the pattern "CONTAMINANT".
+> 3. Remove all non human proteins (e.g. bovine) from your TextExporter list by running ***Select lines that match an expression*** {% icon tool %} only those lines **Matching** the pattern "HUMAN".
 >
 >   > ### {% icon question %} Questions
 >   > 1. Which contaminants did you identify? Where do these contaminations likely come from?
