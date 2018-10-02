@@ -108,17 +108,25 @@ Let's start with a fresh history.
 > 4. Select `interval` as **Type**
 > 5. Press **Start**
 > 6. Press **Close**
-> 7. Wait for the upload to finish
+> 7. Wait for the upload to finish. Galaxy will automatically unpack the file.
 >
-{: .hands_on}
-
-Galaxy will automatically unpack the file.
-
-> ### {% icon comment %} Comment
-> After this you will see your first history item in Galaxy’s right pane. It will go through
+>  After this you will see your first history item in Galaxy’s right pane. It will go through
 > the gray (preparing/queued) and yellow (running) states to become green (success):
 >
 > ![History section](../../images/intro_01.png)
+>
+{: .hands_on}
+
+
+> ### {% icon comment %} Interval file format
+> **Interval** format is a Galaxy format for representing genomic intervals. It is tab-separated, but has the added requirement that three of the columns must be:
+> - chromosome ID
+> - start position (0-based)
+> - end position (end-exclusive)
+>
+> An optional strand column can also be specified, and an initial header row can be used to label the columns, which do not have to be in any special order. Unlike BED format (see below) arbitrary additional columns can also be present.
+>
+> You can find more information about formats that can be used in Galaxy at the [Galaxy Data Formats page](https://usegalaxy.org/static/formatHelp.html).
 {: .comment}
 
 
@@ -212,7 +220,7 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 > You can find more information about it at [UCSC](https://genome.ucsc.edu/FAQ/FAQformat#format1) including a description of the optional fields.
 {: .comment}
 
-Now we collected all the data we need to start our analysis.
+Now we have collected all the data we need to start our analysis.
 
 # Part 1: Naive approach
 
@@ -372,6 +380,7 @@ You might have noticed that the UCSC file is in `BED` format and has a database 
 > 3. Select `Convert Genomic Intervals to BED`
 > 4. Press **Convert datatype**
 > 5. Check that the "Database/Build" is `mm9` (the database build for mice used in the paper)
+> 6. Again rename the file to something more recognizable, e.g. `Peak regions BED`
 {: .hands_on}
 
 It's time to find the overlapping intervals (finally!). To do that, we want to extract the genes which overlap/intersect with our peaks.
@@ -381,7 +390,7 @@ It's time to find the overlapping intervals (finally!). To do that, we want to e
 > 1. **Intersect** {% icon tool %}: Run **Intersect the intervals of two datasets** with the following settings:
 >     - *"Return"*: `Overlapping Intervals`
 >     - *"of"*: the UCSC file with promoter regions (`Promoter regions`)
->     - *"that intersect"*: our peak region file from **Replace** (`Peak regions`)
+>     - *"that intersect"*: our peak region file from **Replace** (`Peak regions BED`)
 >     - *"for at least"*: `1`
 >
 >    > ### {% icon comment %} Comments
@@ -527,7 +536,7 @@ We need to generate a new BED file from the original peak file that contains the
 >
 > 1. **Compute** {% icon tool %}: Run **Compute an expression on every row** with the following settings:
 >   - *"Add expression"*: `c2+c5`
->   - *"as a new column to"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz`
+>   - *"as a new column to"*: our peak file `Peak regions` (the interval format file)
 >   - *"Round result?"*: `YES`
 > 2. **Compute an expression on every row** {% icon tool %}: rerun this tool on the last result with:
 >   - *"Add expression"*: `c8+1`
@@ -549,7 +558,7 @@ Now we cut out just the chromosome plus the start and end of the summit:
 > 2. Change the format to `interval` (use the {% icon galaxy-pencil %}) since that's what the tool **Intersect** expects.
 >    The output should look like below:
 >
->    ![Peak summits](../../images/intro_summits.png)
+>    ![Peak summits](../../images/intro_summits.png){: width="200px"}
 {: .hands_on}
 
 ## Get gene names
