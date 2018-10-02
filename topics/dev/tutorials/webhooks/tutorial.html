@@ -263,15 +263,15 @@ entire user-object, including histories and datasets.</p>
     <span class="n">comic_src</span> <span class="o">=</span> <span class="s">''</span>
 
     <span class="k">try</span><span class="p">:</span>
-        <span class="c"># Third-party dependencies</span>
-        <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Third-party dependencies
+</span>        <span class="k">try</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
         <span class="k">except</span> <span class="nb">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
             <span class="k">return</span> <span class="p">{</span><span class="s">'success'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s">'error'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
 
-        <span class="c"># Get latest id</span>
-        <span class="k">if</span> <span class="s">'latest_id'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">webhook</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="c1"># Get latest id
+</span>        <span class="k">if</span> <span class="s">'latest_id'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">webhook</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="n">url</span> <span class="o">=</span> <span class="s">'https://phdcomics.com/gradfeed.php'</span>
             <span class="n">content</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
             <span class="n">soap</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>

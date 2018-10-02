@@ -476,19 +476,28 @@ The closest thing we could find is a file in GEO containing a list of the region
     <li>Select <code class="highlighter-rouge">interval</code> as <strong>Type</strong></li>
     <li>Press <strong>Start</strong></li>
     <li>Press <strong>Close</strong></li>
-    <li>Wait for the upload to finish</li>
+    <li>Wait for the upload to finish. Galaxy will automatically unpack the file.</li>
   </ol>
 
-</blockquote>
-
-<p>Galaxy will automatically unpack the file.</p>
-
-<blockquote class="comment">
-  <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
   <p>After this you will see your first history item in Galaxy’s right pane. It will go through
 the gray (preparing/queued) and yellow (running) states to become green (success):</p>
 
   <p><img src="../../images/intro_01.png" alt="History section" /></p>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-interval-file-format"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Interval file format</h3>
+  <p><strong>Interval</strong> format is a Galaxy format for representing genomic intervals. It is tab-separated, but has the added requirement that three of the columns must be:</p>
+  <ul>
+    <li>chromosome ID</li>
+    <li>start position (0-based)</li>
+    <li>end position (end-exclusive)</li>
+  </ul>
+
+  <p>An optional strand column can also be specified, and an initial header row can be used to label the columns, which do not have to be in any special order. Unlike BED format (see below) arbitrary additional columns can also be present.</p>
+
+  <p>You can find more information about formats that can be used in Galaxy at the <a href="https://usegalaxy.org/static/formatHelp.html">Galaxy Data Formats page</a>.</p>
 </blockquote>
 
 <blockquote class="tip">
@@ -616,7 +625,7 @@ we also need a list of genes in mice, which we can obtain from UCSC.</p>
   <p>You can find more information about it at <a href="https://genome.ucsc.edu/FAQ/FAQformat#format1">UCSC</a> including a description of the optional fields.</p>
 </blockquote>
 
-<p>Now we collected all the data we need to start our analysis.</p>
+<p>Now we have collected all the data we need to start our analysis.</p>
 
 <h1 id="part-1-naive-approach">Part 1: Naive approach</h1>
 
@@ -831,6 +840,7 @@ you want to include transcriptions factors in ChIP-seq experiments. There is no 
     <li>Select <code class="highlighter-rouge">Convert Genomic Intervals to BED</code></li>
     <li>Press <strong>Convert datatype</strong></li>
     <li>Check that the “Database/Build” is <code class="highlighter-rouge">mm9</code> (the database build for mice used in the paper)</li>
+    <li>Again rename the file to something more recognizable, e.g. <code class="highlighter-rouge">Peak regions BED</code></li>
   </ol>
 </blockquote>
 
@@ -844,7 +854,7 @@ you want to include transcriptions factors in ChIP-seq experiments. There is no 
       <ul>
         <li><em>“Return”</em>: <code class="highlighter-rouge">Overlapping Intervals</code></li>
         <li><em>“of”</em>: the UCSC file with promoter regions (<code class="highlighter-rouge">Promoter regions</code>)</li>
-        <li><em>“that intersect”</em>: our peak region file from <strong>Replace</strong> (<code class="highlighter-rouge">Peak regions</code>)</li>
+        <li><em>“that intersect”</em>: our peak region file from <strong>Replace</strong> (<code class="highlighter-rouge">Peak regions BED</code>)</li>
         <li><em>“for at least”</em>: <code class="highlighter-rouge">1</code></li>
       </ul>
 
@@ -1029,7 +1039,7 @@ The history is now empty, but we need our peak file again. Before we upload it t
     <li><strong>Compute</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <strong>Compute an expression on every row</strong> with the following settings:
       <ul>
         <li><em>“Add expression”</em>: <code class="highlighter-rouge">c2+c5</code></li>
-        <li><em>“as a new column to”</em>: our peak file <code class="highlighter-rouge">GSE37268_mof3.out.hpeak.txt.gz</code></li>
+        <li><em>“as a new column to”</em>: our peak file <code class="highlighter-rouge">Peak regions</code> (the interval format file)</li>
         <li><em>“Round result?”</em>: <code class="highlighter-rouge">YES</code></li>
       </ul>
     </li>
@@ -1062,7 +1072,7 @@ The history is now empty, but we need our peak file again. Before we upload it t
       <p>Change the format to <code class="highlighter-rouge">interval</code> (use the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span>) since that’s what the tool <strong>Intersect</strong> expects.
 The output should look like below:</p>
 
-      <p><img src="../../images/intro_summits.png" alt="Peak summits" /></p>
+      <p><img src="../../images/intro_summits.png" alt="Peak summits" width="200px" /></p>
     </li>
   </ol>
 </blockquote>

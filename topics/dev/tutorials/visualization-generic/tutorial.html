@@ -336,8 +336,8 @@ bam file and its index share the same prefix, as expected by samtools and pysam.
 
 <p>We can create this symlink as follows in our mako template:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## Ensure BAI index is symlinked</span>
-<span class="n">bai_target</span> <span class="o">=</span> <span class="n">hda</span><span class="o">.</span><span class="n">file_name</span><span class="o">+</span><span class="s">'.bai'</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## Ensure BAI index is symlinked
+</span><span class="n">bai_target</span> <span class="o">=</span> <span class="n">hda</span><span class="o">.</span><span class="n">file_name</span><span class="o">+</span><span class="s">'.bai'</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">bai_target</span><span class="p">):</span>
@@ -347,8 +347,8 @@ bam file and its index share the same prefix, as expected by samtools and pysam.
 <p>Now the BAM file has a <code class="highlighter-rouge">.bai</code> file with the same prefix, and we can run the <code class="highlighter-rouge">idxstats</code>
 as follows:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## Extract idxstats</span>
-<span class="kn">import</span> <span class="nn">pysam</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## Extract idxstats
+</span><span class="kn">import</span> <span class="nn">pysam</span>
 <span class="n">bam_idxstats_data</span> <span class="o">=</span> <span class="n">pysam</span><span class="o">.</span><span class="n">idxstats</span><span class="p">(</span><span class="n">hda</span><span class="o">.</span><span class="n">file_name</span><span class="p">)</span>
 </code></pre></div></div>
 
