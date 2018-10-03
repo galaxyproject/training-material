@@ -309,7 +309,6 @@ Similar to **Fit a BUM model**, we also need to prepare the input data for the t
 > > It should contain two columns delimited by tab, one is KO ID; the other, p-value.
 > >
 > {: .solution}
-
 {: .question}
 
 > ### {% icon hands_on %} Hands-on: extract geneID and p-values from DESeq2 output
