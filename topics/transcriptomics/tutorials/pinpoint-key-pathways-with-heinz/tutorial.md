@@ -49,16 +49,16 @@ The study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/167
 steps starting from the raw RNAseq datasets. The operations that processed raw data into the interpreted data are
 beyond the scope of this tutorial. To learn that, please refer to the relevant topics in the Galaxy training
 material. In this tutorial, we start with the interpreted data, which are KO
-([KEGG Orthology](https://www.genome.jp/kegg/ko.html)) count data. All the data needed for this tutorial are available
-from Zenodo.
+([KEGG Orthology](https://www.genome.jp/kegg/ko.html)) count data. All the data needed for this tutorial are
+available from Zenodo.
 
 ## Understanding our input data
 
-According to the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171), dental caries (DC)
-dataset in this tutorial came from an experiment that comprised of supragingival plaque samples collected from all dental
-surfaces of 36 individuals who had either a caries-positive (disease) or a caries-negative (health) oral profile.
-Each of the 36 samples was sequenced, pre-processed and transformed into KO counts. We will use these count data as the
-starting point to perform the network analysis.
+According to the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171),
+dental caries (DC) dataset in this tutorial came from an experiment that comprised of supragingival plaque
+samples collected from all dental surfaces of 36 individuals who had either a caries-positive (disease) or
+a caries-negative (health) oral profile. Each of the 36 samples was sequenced, pre-processed and transformed
+into KO counts. We will use these count data as the starting point to perform the network analysis.
 
 > ### {% icon comment %} Dataset details
 > The count data of the 36 samples are separated into 36 files, organized into two groups:
@@ -151,13 +151,14 @@ After knowing what our input data are like, let's get them into Galaxy history:
 
 > ### {% icon tip %} Tip: Creating a collection from files already in your history
 >
-> *Dataset collections* enables us to easily run tools on multiple datasets at once, you probably have
-> done that in the file upload menu using the `Collection` tab. If not, you can still create
+> *Dataset collections* enables us to easily run tools on multiple datasets at once, you probably
+> have done that in the file upload menu using the `Collection` tab. If not, you can still create
 > *dataset collections* manually.
 >
 > > ### {% icon hands_on %} Manually organizing our data into a collection
 > >
-> > If you have all the datasets in the history, but they are not organized into a collection yet, you can follow these steps to create a collection:
+> > If you have all the datasets in the history, but they are not organized into a collection yet,
+> > you can follow these steps to create a collection:
 > >
 > > 1. Click on the **checkmark icon** at top of your history.
 > >   ![Checkmark icon in history menu](../../../../shared/images/history_menu_buttons2.png)
@@ -175,26 +176,33 @@ After knowing what our input data are like, let's get them into Galaxy history:
 > {: .details}
 {: .tip}
 
+
+
 # Differential Expression Analysis (DEA) by DESeq2
 
 ## What is differential expression analysis?
 
-> ### {% icon comment %}
-> The definition of differential expression analysis given by [EBI](https://www.ebi.ac.uk/training/online/course/functional-genomics-ii-common-technologies-and-data-analysis-methods/differential-gene)
-means taking the normalised read count data and performing statistical analysis to discover quantitative
-changes in expression levels between experimental groups. For example, we use statistical testing to decide
-whether, for a given gene, an observed difference in read counts is significant, that is, whether it is greater
-than what would be expected just due to natural random variation.
+> ### {% icon comment %} A defintion
+>
+> The definition of differential expression analysis given by
+> [EBI](https://www.ebi.ac.uk/training/online/course/functional-genomics-ii-common-technologies-and-data-analysis-methods/differential-gene)
+> means taking the normalised read count data and performing statistical analysis to discover quantitative
+> changes in expression levels between experimental groups. For example, we use statistical testing to decide
+> whether, for a given gene, an observed difference in read counts is significant, that is, whether it is greater
+> than what would be expected just due to natural random variation.
+>
 {: .comment}
 
 In principle, DEA is a causal analysis; but in reality, it is hampered by the complexity of the experimental
-situation and measurement. Back to our datasets --- CP and CN, they are from two experimental groups. By DEA,
+situation and measurement. Back to our datasets, CP and CN, they are from two experimental groups. By DEA,
 we hope to pinpoint the candidate genes relevant to dental caries first, then we will use Heinz to infer the
 related pathways.
 
 ## Which tools are available for DEA?
 
-There are a few canned tools commonly used for DEA, like [Limma](https://bioconductor.org/packages/release/bioc/html/limma.html) and [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html). If you are interested, you may look up the pros and cons of each tool. Here we use DESeq2.
+There are a few canned tools commonly used for DEA, like [Limma](https://bioconductor.org/packages/release/bioc/html/limma.html)
+and [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html). If you are interested, you
+may look up the pros and cons of each tool. Here we use DESeq2.
 
 
 ## Conduct differential expression analysis
@@ -227,15 +235,15 @@ K01792  112.923146882195    -1.26925892659617	0.285732234964578	-4.4421271781026
 
 # Fit a BUM model (a mixture model)
 
-From a statistical point of view, p-values are uniformly distributed under null hypothesis; in other words, under
-alternative hypothesis, the noise component (which holds under null hypothesis) will be adequately modeled by a
-uniform distribution. With this knowledge, we can fit these p-values to a mixture model (BUM model), as the figure
-below shows.
+From a statistical point of view, p-values are uniformly distributed under null hypothesis; in other words,
+under alternative hypothesis, the noise component (which holds under null hypothesis) will be adequately
+modeled by a uniform distribution. With this knowledge, we can fit these p-values to a mixture model
+(BUM model), as the figure below shows.
 
 ![p-values are fitted to a mixture model](../../images/bum.jpeg){:width="50%"}
 
-Before fitting to BUM model in Galaxy, we need to prepare the input data for the tool **Fit a BUM model**,
-that's a file that only contains p-values.
+Before fitting to BUM model in Galaxy, we need to prepare the input data for the tool
+**Fit a BUM model**, that's a file that only contains p-values.
 
 > ### {% icon hands_on %} Hands-on: extract p-values from DESeq2 output
 >
@@ -257,15 +265,16 @@ Then we can **Fit a BUM model** now.
 
 # Pinpoint the key pathways with Heinz
 
-After getting the parameters of the BUM model from the last step, we will use Heinz to pinpoint the key pathways.
-Before we continue, let's figure out what Heinz is actually doing.
+After getting the parameters of the BUM model from the last step, we will use Heinz to pinpoint
+the key pathways. Before we continue, let's figure out what Heinz is actually doing.
 
-Heinz is an algorithm in searching an optimal subnetwork from a bigger network. You may wonder what the networks are here.
-Through the previous steps, we have got a list of identities, that is a list of gene IDs with p-values, which form the nodes
- of 'the bigger network', the relations between the nodes, that is the edges, need to be obtained from a background network,
-which represents a pathway relation databases, such as [Reactome](https://reactome.org/) and [STRING](https://string-db.org/).
-In this tutorial, we only use a small sample background network for demonstration purposes. The background network is
-represented as edges in a txt file where each line denotes an edge as follows:
+Heinz is an algorithm in searching an optimal subnetwork from a bigger network. You may wonder what
+the networks are here. Through the previous steps, we have got a list of identities, that is a list
+of gene IDs with p-values, which form the nodes  of 'the bigger network', the relations between the
+nodes, that is the edges, need to be obtained from a background network, which represents a pathway
+relation databases, such as [Reactome](https://reactome.org/) and [STRING](https://string-db.org/).
+In this tutorial, we only use a small sample background network for demonstration purposes. The
+background network is represented as edges in a txt file where each line denotes an edge as follows:
 
 ```
 ACTR1B	ACVR2B
@@ -285,19 +294,23 @@ Upload this edge file (hereafter we call it edge file) into the Galaxy instance.
 
 ## Calculate Heinz scores
 
-As the first step, we need to calculate a Heinz score for each node, using the BUM model parameters we obtained; meanwhile,
-we also need to specify an FDR value as input.
+As the first step, we need to calculate a Heinz score for each node, using the BUM model parameters
+we obtained; meanwhile, we also need to specify an FDR value as input.
 
 > ### {% icon comment %} What is FDR value?
-> FDR is short for false discovery rate, which is a method of conceptualizing the rate of type I errors in null hypothesis
-> testing when conducting multiple comparisons, if you are interested, view the detail in [Wikipedia](https://en.wikipedia.org/wiki/False_discovery_rate).
+>
+> FDR is short for false discovery rate, which is a method of conceptualizing the rate of type I errors
+> in null hypothesis testing when conducting multiple comparisons, if you are interested, view the detail
+> in [Wikipedia](https://en.wikipedia.org/wiki/False_discovery_rate).
+>
 {: .comment}
 
-In our case, the higher an FDR value is, the more positive nodes (regarding the Heinz scores) we get, which means it may
-include a lot of false positive nodes. For different datasets and problems, we probably need different FDR values.
-Here we set FDR to 0.11.
+In our case, the higher an FDR value is, the more positive nodes (regarding the Heinz scores) we get,
+which means it may include a lot of false positive nodes. For different datasets and problems, we
+probably need different FDR values. Here we set FDR to 0.11.
 
-Similar to **Fit a BUM model**, we also need to prepare the input data for the tool **Calculate a Heinz score**.
+Similar to **Fit a BUM model**, we also need to prepare the input data for the tool
+**Calculate a Heinz score**.
 
 > ### {% icon question %} Question
 >
