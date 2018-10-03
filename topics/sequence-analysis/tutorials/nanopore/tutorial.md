@@ -8,12 +8,13 @@ name: "tutorial1"
 zenodo_link: ""
 questions:
   - "How do I assemble a genome with Nanopore data?"
-  - "How do I get more information about the antimicrobial resistance genes"
+  - "How do I get more information about the antimicrobial resistance genes?"
 objectives:
   - "Perform Quality control on your reads"
-  - "Perform a genome assembly with Unicycler"
+  - "Perform a genome assembly with Minimap2/Miniasm/Racon"
   - "Visualize the assemblies using Bandage"
   - "Perform a scan for antimicrobial resistance genes with Staramr"
+  - "Retrieve information about the DNA structure with PlasFlow"
 time_estimation: "3h"
 key_points:
   - "Take home message 1"
