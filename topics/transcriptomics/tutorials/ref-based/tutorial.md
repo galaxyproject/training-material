@@ -31,7 +31,7 @@ contributors:
 
 RNA-Seq is used to analyze the continuously changing cellular transcriptome, the set of all RNA molecules in one cell or a population of cells. Specifically, RNA-Seq facilitates the ability to look at alternative gene spliced transcripts, post-transcriptional modifications, gene fusion, mutations/SNPs and changes in gene expression over time, or differences in gene expression in different groups or treatments
 
-In the study of [Brooks *et al.* 2011](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3032923/), the authors wanted to identify exons regulated by the *Pasilla* gene (the *Drosophila* homologue of the mammalian splicing regulators Nova-1 and Nova-2 proteins) using RNA sequencing data. They depleted the *Pasilla* (*PS*) gene in *Drosophila melanogaster* by RNA interference (RNAi). 
+In the study of [Brooks *et al.* 2011](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3032923/), the authors wanted to identify exons regulated by the *Pasilla* gene (the *Drosophila* homologue of the mammalian splicing regulators Nova-1 and Nova-2 proteins) using RNA sequencing data. They depleted the *Pasilla* (*PS*) gene in *Drosophila melanogaster* by RNA interference (RNAi).
 
 Total RNA was then isolated and used to prepare both single-end and paired-end RNA-seq libraries for treated (PS depleted) and untreated samples. These libraries were sequenced to obtain RNA-seq reads for each sample. The RNA-seq data for the treated and the untreated samples can be then compared to identify the effects of *Pasilla* gene depletion on splicing events.
 
@@ -85,12 +85,10 @@ The raw RNA-seq reads have been extracted from the Sequence Read Archive (SRA) f
 >    {: .comment}
 >
 > 3. Rename each dataset according to the sample id (e.g. `GSM461177_1`)
-> 
+>
 >    {% include snippets/rename_dataset.md %}
 >
-> 4. Check that the datatype is `fastqsanger` (e.g. **not** `fastq`)
->
->    If the datatype is not `fastqsanger`, please change the datatype to `fastqsanger`
+> 4. Check that the datatype is `fastqsanger` (e.g. **not** `fastq`). If it is not, please change the datatype to `fastqsanger`.
 >
 >    {% include snippets/change_datatype.md datatype="fastqsanger" %}
 >
@@ -112,7 +110,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
-> 1. **FastQC** {% icon tool %} with the following parameters
+> 1. **FastQC** {% icon tool %} with the following parameters:
 >       - {% icon param-files %} *"Short read data from your current history"*: input datasets selected with **Multiple datasets**
 >
 >    {% include snippets/select_multiple_datasets.md %}
@@ -125,13 +123,13 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > The read length is 37 bp
+>    > > The read length is 37 bp.
 >    > >
 >    > {: .solution}
 >    >
 >    {: .question}
 >
-> 3. **MultiQC** {% icon tool %} with the following parameters to aggregate the FastQC reports
+> 3. **MultiQC** {% icon tool %} with the following parameters to aggregate the FastQC reports:
 >      - In *"Results"*
 >        - *"Which tool was used generate logs?"*: `FastQC`
 >        - In *"FastQC output"*
@@ -147,14 +145,14 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. Everything seems ok for 3 of the files but for `GSM461180_2` the quality decreases quite a lot at the end of the sequences:
+>    > > 1. Everything seems OK for 3 of the files, but for `GSM461180_2` the quality decreases quite a lot at the end of the sequences:
 >    > >     - The `GSM461177` have 10.3 millions of sequences and `GSM461180` 12.3 millions
->    > >     - All except `GSM461180_2` has a high proportion of duplicated reads (expected in RNA-Seq data)
->    > > 
+>    > >     - All except `GSM461180_2` have a high proportion of duplicated reads (expected in RNA-Seq data)
+>    > >
 >    > >        ![Sequence Counts](../../images/ref-based/fastqc_sequence_counts_plot.png "Sequence Counts")
->    > > 
->    > >     - The "Per base sequence quality" is globally good with a slight decrease at the end of the sequences. For `GSM461180_2`, the decrease is quite big.
->    > > 
+>    > >
+>    > >     - The "Per base sequence quality" is globally good with a slight decrease at the end of the sequences. For `GSM461180_2`, the decrease is quite large.
+>    > >
 >    > >        ![Sequence Quality](../../images/ref-based/fastqc_per_base_sequence_quality_plot.png "Sequence Quality")
 >    > >
 >    > >     - The mean quality score over the reads is quite high, but the distribution is slightly different for `GSM461180_2`
@@ -190,7 +188,7 @@ We should trim sequenced read to get rid of bases that were sequenced with high 
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
-> 1. **Cutadapt** {% icon tool %} with the following parameters to trim low quality sequences
+> 1. **Cutadapt** {% icon tool %} with the following parameters to trim low quality sequences:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end`
 >       - {% icon param-files %} *"FASTQ/A file #1"*: both `_1` fastqsanger datasets (multiple datasets)
 >       - {% icon param-files %} *"FASTQ/A file #2"*: both `_2` fastqsanger datasets (multiple datasets)
@@ -214,7 +212,7 @@ We should trim sequenced read to get rid of bases that were sequenced with high 
 >    > 2. How many sequence pairs have been removed because at least one read was shorter than the length cutoff?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. For `GSM461177`, 5,072,810 bp has been trimmed for the forward reads (read 1) and 8,648,619 bp on the reverse (read 2) because of quality. For `GSM461180`, 10,224,537 bp on forward and 51,746,850 bp on the reverse. It is not a surprise: we saw that the quality was dropping more at the end of the sequences for the reverse reads that for the forward reads, specially for `GSM461180_2`
+>    > > 1. For `GSM461177`, 5,072,810 bp has been trimmed for the forward reads (read 1) and 8,648,619 bp on the reverse (read 2) because of quality. For `GSM461180`, 10,224,537 bp on forward and 51,746,850 bp on the reverse. It is not a surprise: we saw that at the end of the sequences the quality was dropping more for the reverse reads than for the forward reads, specially for `GSM461180_2`.
 >    > > 2. 147,810 (1.4%) reads were too short for `GSM461177` and 1,101,875 (9%) for `GSM461180`.
 >    > {: .solution }
 >    {: .question}
@@ -222,7 +220,7 @@ We should trim sequenced read to get rid of bases that were sequenced with high 
 
 # Mapping
 
-To make sense of the reads, we need to first figure out where the sequenced DNA fragments originated from in the genome, so we can then determine to which genes they belong. 
+To make sense of the reads, we need to first figure out where the sequenced DNA fragments originated from in the genome, so we can then determine to which genes they belong.
 
 This process is known as aligning or 'mapping' the reads to a reference. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique.
 
@@ -237,8 +235,8 @@ As a reference genome for *Drosophila melanogaster* is available, we can map the
 
 With eukaryotic transcriptomes most reads originate from processed mRNAs lacking introns, therefore they cannot be simply mapped back to the genome as we normally do for DNA data. Instead the reads must be separated into two categories:
 
-- Reads that map entirely within exons
-- Reads that cannot be mapped within an exon across their entire length because they span two or more exons
+- Reads that can be mapped entirely within an exon
+- Reads spanning two or more exons
 
 ![Five types of RNA-seq reads](../../images/five_type_rna_seq_reads.png "The five types of RNA-seq reads (Figure 1a from Kim et al, Nat Methods, 2015)")
 
@@ -247,9 +245,9 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 ![Splice-aware alignment](../../images/splice_aware_alignment.png "Principle of spliced mappers: (1) identification of the reads spanning a single exon, (2) identification of the splicing junctions on the unmapped reads")
 
 > ### {% icon details %} More details on the different spliced mappers
-> 
+>
 > Several spliced mappers have been developed over the year with the explosion of RNA-seq data.
-> 
+>
 > [TopHat](https://ccb.jhu.edu/software/tophat/index.shtml) ([Trapnell et al, Bioinformatics, 2009](https://academic.oup.com/bioinformatics/article/25/9/1105/203994)) was one of the first tools designed specifically to address this problem. In TopHat reads are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that initially unmapped (IUM). "Piles" of reads representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions.
 >
 >    ![TopHat](../../images/tophat.png "TopHat (Trapnell et al, Bioinformatics, 2009)")
@@ -261,9 +259,9 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 > To further optimize and speed up spliced read alignment Kim et al ([Nat Methods, 2015](https://www.nature.com/articles/nmeth.3317)) developed [HISAT](https://ccb.jhu.edu/software/hisat2/index.shtml). It uses a set of [FM-indices](https://en.wikipedia.org/wiki/FM-index) consisting one global genome-wide index and a collection of ~48,000 local overlapping 42 kb indices (~55,000 56 kb indices in HISAT2). This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:
 >
 >    ![Hierarchical Graph FM index in HISAT/HISAT2](../../images/hisat.png "Hierarchical Graph FM index in HiSat/HiSat2 (Kim et al, Nat Methods, 2015)")
-> 
+>
 > A part of the read (blue arrow) is first mapped to the genome using the global FM index. HISAT then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (**a**) it succeeds and this read is aligned as it completely resides within an exon. In (**b**) the extension hits a mismatch. Now HISAT takes advantage of the local FM index overlapping this location to find the appropriate mapping for the remainder of this read (green arrow). The (**c**) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow).
-> 
+>
 > [STAR aligner](https://github.com/alexdobin/STAR) is a fast alternative for mapping RNA-seq reads against a reference genome utilizing an uncompressed [suffix array](https://en.wikipedia.org/wiki/Suffix_array). It operates in two stages [Dobin et al, Bioinformatics, 2013](https://academic.oup.com/bioinformatics/article/29/1/15/272537). In the first stage it performs seed search:
 >
 >    ![STAR's seed search](../../images/star.png "STAR's seed search (Dobin et al, Bioinformatics, 2013)")
@@ -281,7 +279,7 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using STAR.
 > ### {% icon hands_on %} Hands-on: Spliced mapping
 >
 > 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDGP6.87.gtf`) from the Shared Data library if available or from [Zenodo](https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.gtf) into your current Galaxy history
->    
+>
 >    ```
 >    https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.gtf
 >    ```
@@ -301,7 +299,7 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using STAR.
 >
 >               This parameter should be length of reads - 1
 >
-> 3. **MultiQC** {% icon tool %} to aggregate the STAR logs
+> 3. **MultiQC** {% icon tool %} to aggregate the STAR logs:
 >      - In *"Results"*
 >        - *"Which tool was used generate logs?"*: `STAR`
 >        - In *"STAR output"*
@@ -401,7 +399,7 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > 1. The coverage for each alignment track is plotted as a red bar graph. Arcs represent observed splice junctions, *i.e.*, reads spanning introns
->    > > 2. The numbers refer to the number of observed junction reads. 
+>    > > 2. The numbers refer to the number of observed junction reads.
 >    > > 3. The different groups of linked boxes on the bottom represent the different transcripts from the genes at this location, that are present in the GTF file.
 >    > >
 >    > {: .solution}
@@ -421,7 +419,7 @@ After the mapping, we have the information on where the reads are located on the
 > The quantification depends on both the reference genome (the FASTA file) and its associated annotations (the GTF file). It is extremely important to use an annotation file that corresponds to the same version of the reference genome you used for the mapping (e.g. `dm6` here), as the chromosomal coordinates of genes are usually different amongst different reference genome versions.
 {: .comment}
 
-To identify exons that are regulated by the *Pasilla* gene, we need to identify genes and exons which are differentially expressed between samples with PS gene depletion (treated) and control (untreated) samples.
+In order to identify exons that are regulated by the *Pasilla* gene, we need to identify genes and exons which are differentially expressed between samples with PS gene depletion (treated) and control (untreated) samples.
 We will then analyze the differential gene expression and also the differential exon usage.
 
 # Analysis of the differential gene expression
@@ -436,10 +434,10 @@ To compare the expression of single genes between different conditions (*e.g.* w
 
 > ### {% icon question %} Question
 >
-> In the previous image, 
+> In the previous image,
 >
-> 1. How many reads are found for the different exons? 
-> 2. How many reads are found for the different genes? 
+> 1. How many reads are found for the different exons?
+> 2. How many reads are found for the different genes?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -457,7 +455,7 @@ To compare the expression of single genes between different conditions (*e.g.* w
 > {: .solution}
 {: .question}
 
-Two main tools could be used for that: [HTSeq-count](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ([Anders et al, Bioinformatics, 2015](https://academic.oup.com/bioinformatics/article/31/2/166/2366196)) or featureCounts ([Liao et al, Bioinformatics, 2014](https://academic.oup.com/bioinformatics/article/31/2/166/2366196)). FeatureCounts is considerably faster and requires far less computational resources so we will use it here.
+Two main tools could be used for that: [HTSeq-count](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ([Anders et al, Bioinformatics, 2015](https://academic.oup.com/bioinformatics/article/31/2/166/2366196)) or featureCounts ([Liao et al, Bioinformatics, 2014](https://academic.oup.com/bioinformatics/article/31/2/166/2366196)). FeatureCounts is considerably faster and requires far less computational resources, so we will use it here.
 
 In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be given to featureCounts: for example the strandness.
 
@@ -471,7 +469,7 @@ During a typical RNA-seq experiment the information about strandedness is lost a
 
 Some library preparation protocols create so called *stranded* RNA-seq libraries that preserve the strand information (an excellent overview in [Levin et al, Nat Meth, 2010](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3005310/)). The implication of stranded RNA-seq is that you can distinguish whether the reads are derived from forward or reverse-encoded transcripts:
 
-![Stranded RNAseq data look like this](../../images/stranded_result.png "What does stranded RNA-seq data look like (image from GATC Biotech)")
+![Stranded RNAseq data look like this](../../images/stranded_result.png "Non-stranded vs. strand-specific RNA-seq read alignment (image from GATC Biotech)")
 
 Depending on the approach, and whether one performs single-end or paired-end sequencing, there are multiple possibilities on how to interpret the results of the mapping of these reads to the genome:
 
@@ -487,7 +485,7 @@ This information should be provided with your FASTQ files, ask your sequencing f
 Another option is to estimate these parameters with a tool called **Infer Experiment** from the [RSeQC](https://www.ncbi.nlm.nih.gov/pubmed/22743226) tool suite. This tool takes the output of your mappings (BAM files), selects a subsample of your reads and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how reads are stranded.
 
 > ### {% icon hands_on %} Hands-on: Determining the library strandness
-> 
+>
 > 1. **Convert GTF to BED12** {% icon tool %} to convert the GTF file to BED:
 >    - {% icon param-file %} *"GTF File to convert"*: `Drosophila_melanogaster.BDGP6.87.gtf`
 >
@@ -518,14 +516,14 @@ If the two "Fraction of reads explained by" numbers are close to each other, we 
 > > ### {% icon solution %} Solution
 > >
 > > 1. Results for `GSM46177`:
-> > 
+> >
 > >    ```
 > >    This is PairEnd Data
 > >    Fraction of reads failed to determine: 0.0963
 > >    Fraction of reads explained by "1++,1--,2+-,2-+": 0.4649
 > >    Fraction of reads explained by "1+-,1-+,2++,2--": 0.4388
 > >    ```
-> > 
+> >
 > >    so 46.46% of the reads are SF and 43.88% SR.
 > >
 > > 2. Similar statistics are found for `GSM461180`, so the library seems to be of the type unstranded for both samples.
@@ -567,7 +565,7 @@ We now run **featureCounts** to count the number of reads per annotated gene.
 >       - *"Count multi-mapping reads/fragments"*: `Disabled; multi-mapping reads are excluded (default)`
 >       - *"Minimum mapping quality per read"*: `10`
 >
-> 2. **MultiQC** {% icon tool %} to aggregate the report
+> 2. **MultiQC** {% icon tool %} to aggregate the report:
 >     - In *"Results"*:
 >       - *"Which tool was used generate logs?"*: `featureCounts`
 >           - {% icon param-files %} *"Output of FeatureCounts"*: `summary` files (outputs of **featureCounts** {% icon tool %})
@@ -579,12 +577,12 @@ We now run **featureCounts** to count the number of reads per annotated gene.
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. Around 70% of the reads have been assigned to genes: this quantity is good enough. 
+>    > > 1. Around 70% of the reads have been assigned to genes: this quantity is good enough.
 >    > >
 >    > >    ![featureCounts assignment](../../images/ref-based/featureCounts_assignment_plot.png "Assignments with featureCounts")
 >    > >
 >    > >    Some reads are not assigned because multi-mapped and other assigned to no features or ambiguous ones.
->    > > 
+>    > >
 >    > > 2. If the percentage is below 50%, you should investigate where your reads are mapping (inside genes or not, with IGV) and check that the annotation corresponds to the correct reference genome version.
 >    > >
 >    > {: .solution}
@@ -592,7 +590,9 @@ We now run **featureCounts** to count the number of reads per annotated gene.
 >
 {: .hands_on}
 
-The main output of **featureCounts** is a table. 
+The **feature length** output datasets generated by featureCounts will be needed later on when we will run the **goseq** tool.
+
+The main output of **featureCounts** is a table.
 
 > ### {% icon question %} Question
 >
@@ -613,28 +613,28 @@ Comparing output is easier if we can view more than one dataset simultaneously. 
 up a collection of datasets that will be shown on the screen together.
 
 > ### {% icon hands_on %} (Optional) View the sorted featureCounts using the Scratchbook
-> 
+>
 > 1. The **Scratchbook** is enabled by clicking the nine-blocks icon seen on the right of the Galaxy top menubar:
->    
+>
 >    ![scratchbook icon](../../images/ref-based/menubarWithScratchbook.png "Menu bar with Scratchbook icon")
 >
 > 2. When the Scratchbook is **enabled** datasets being viewed are added to the Scratchbook:
 >
 >    ![scratchbook icon enabled](../../images/ref-based/menubarWithScratchbookEnabled.png "Menu bar with Scratchbook icon enabled")
-> 
-> 3. **Click the eye icon** to view one of the **sorted featureCounts**. Instead of occupying the entire middle bar the dataset view is now shown an overlay:
+>
+> 3. Click the {% icon galaxy-eye %} (eye) icon to view one of the **sorted featureCounts**. Instead of occupying the entire middle bar the dataset view is now shown an overlay:
 >
 >    ![scratchbook one dataset shown](../../images/ref-based/scratchbookOneDataset.png "Scratchbook showing one dataset overlay")
-> 
-> 4. When a dataset is shown **click in the main interface** to prepare to select another dataset. The interface now shows that there is one saved view in the Scratchbook: 
+>
+> 4. When a dataset is shown **click in the main interface** to prepare to select another dataset. The interface now shows that there is one saved view in the Scratchbook:
 >
 >    ![scratchbook one saved view](../../images/ref-based/scratchbookOneSavedView.png "Menu bar with one saved dataset view in Scratchbook")
->  
-> 5. Next **click the eye icon** on the **second sorted featureCounts**. The two datasets can now be seen side by side.
+>
+> 5. Next click the {% icon galaxy-eye %} (eye) icon on the **second sorted featureCounts**. The two datasets can now be seen side by side:
 >
 >    ![scratchbook two datasets shown](../../images/ref-based/scratchbookTwoDatasetsShown.png "Scratchbook showing two side by side datasets")
 >
-> 6. To **leave** Scratchbook selection mode click on the **Scratchbook icon** again. Your saved view will still remain for future viewing
+> 6. To **leave** Scratchbook selection mode, click on the **Scratchbook icon** again. Your saved view will still remain for future viewing:
 >
 >    ![scratchbook disabled datasets saved](../../images/ref-based/scratchbookDisabledWithSavedDatasets.png "Scratchbook disabled with two datasets saved")
 >
@@ -709,7 +709,7 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 > ### {% icon hands_on %} Hands-on: Determine differentially expressed features
 >
 > 1. Create a new history
-> 2. Import the seven count files from [Zenodo](https://zenodo.org/record/1185122) or the Shared Data library (if available): 
+> 2. Import the seven count files from [Zenodo](https://zenodo.org/record/1185122) or the Shared Data library (if available):
 >
 >    - `GSM461176_untreat_single.counts`
 >    - `GSM461177_untreat_paired.counts`
@@ -728,9 +728,9 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 >    https://zenodo.org/record/1185122/files/GSM461181_treat_paired.counts
 >    https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
 >    ```
-> 
+>
 > 3. Rename the datasets (if needed)
-> 4. **DESeq2** {% icon tool %} with the following parameters
+> 4. **DESeq2** {% icon tool %} with the following parameters:
 >    - In *"Factor"*:
 >       - In "1: Factor"
 >           - *"Specify a factor name"*: `Treatment`
@@ -831,7 +831,7 @@ We proceed in several steps:
 
 > ### {% icon hands_on %} Hands-on: Extract the most differentially expressed genes
 >
-> 1. **Filter** (data on any column using simple expressions) {% icon tool %} to extract genes with a significant change in gene expression (adjusted *p*-value below 0.05) between treated and untreated samples
+> 1. **Filter** (data on any column using simple expressions) {% icon tool %} to extract genes with a significant change in gene expression (adjusted *p*-value below 0.05) between treated and untreated samples:
 >    - {% icon param-file %} *"Filter"*: the `DESeq2 result file`
 >    - *"With following condition"*: `c7<0.05`
 >
@@ -853,7 +853,7 @@ We proceed in several steps:
 >
 >    The generated file contains too many genes to get a meaningful heatmap. So we will take only the genes with an absolute fold change > 2
 >
-> 2. **Filter** {% icon tool %} to extract genes with an $$abs(log_{2} FC) > 1$$ (FC stands for "fold change")
+> 2. **Filter** {% icon tool %} to extract genes with an $$abs(log_{2} FC) > 1$$ (FC stands for "fold change"):
 >    - {% icon param-file %} *"Filter"*: the differentially expressed genes (output of **Filter** {% icon tool %})
 >    - *"With following condition"*: `abs(c3)>1`
 >
@@ -900,7 +900,7 @@ We will join the normalized count table generated by DESeq with the table we jus
 >
 >    The generated file has more columns than we need for the heatmap. In addition to the columns with mean normalized counts, there is the $$log_{2} FC$$ and other information. We need to remove the extra columns.
 >
-> 4. **Cut** {% icon tool %} to extract the columns with the gene ids and normalized counts
+> 4. **Cut** {% icon tool %} to extract the columns with the gene ids and normalized counts:
 >    - *"Cut columns"*: `c1-c8`
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: the joined dataset (output of **Join two Datasets** {% icon tool %})
@@ -911,7 +911,7 @@ We now have a table with 130 lines (the most differentially expressed genes) and
 
 > ### {% icon hands_on %} Hands-on: Plot the heatmap of the normalized counts of these genes for the samples
 >
-> 1. **heatmap2** {% icon tool %} to plot the heatmap
+> 1. **heatmap2** {% icon tool %} to plot the heatmap:
 >    - {% icon param-file %} *"Input should have column headers"*: the generated table (output of **Cut** {% icon tool %})
 >    - *"Advanced - log transformation"*: `Log2(value) transform my data`
 >    - *"Enable data clustering"*: `Yes`
@@ -972,7 +972,7 @@ goseq needs 2 files as inputs:
 >    We just generated the first input for goseq. We need as second input for goseq, the gene lengths. We can use there the gene length generated by **featureCounts** {% icon tool %} and reformate it a bit.
 >
 > 5. **Change Case** {% icon tool %} with
->    - {% icon param-file %} *"From"*: the `feature lengths` (output of **featureCounts** {% icon tool %}) 
+>    - {% icon param-file %} *"From"*: the `feature lengths` (output of **featureCounts** {% icon tool %})
 >    - *"Change case of columns"*: `c1`
 >    - *"Delimited by"*: `Tab`
 >    - *"To"*: `Upper case`
@@ -1075,7 +1075,7 @@ As for DESeq2, in the previous step, we counted only reads that mapped to exons 
 > ### {% icon hands_on %} Hands-on:
 >
 > 1. Create a new history
-> 2. Import the seven count files from [Zenodo](https://zenodo.org/record/1185122) or the Shared Data library (if available): 
+> 2. Import the seven count files from [Zenodo](https://zenodo.org/record/1185122) or the Shared Data library (if available):
 >
 >    - `Drosophila_melanogaster.BDGP6.87.dexseq.gtf`
 >    - `GSM461176_untreat_single.exon.counts`

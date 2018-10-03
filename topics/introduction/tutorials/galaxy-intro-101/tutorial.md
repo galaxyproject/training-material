@@ -52,7 +52,7 @@ Suppose you get the following question:
 
 You are thinking "Wow! This is a simple question... I know where to find the data, at the [UCSC Genome Browser](https://genome.ucsc.edu/), but how do I actually compute this?" There is really a straightforward way of answering this question and it is called **Galaxy**. So let's try it...
 
-Browse to your Galaxy instance and log in or register. The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle pane will show the home page, a tool form or some dataset content.
+Browse to your Galaxy instance and log in or register. The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the central panel will show the home page, a tool form or some dataset content.
 
 ![Galaxy interface](../../images/galaxy_interface.png)
 
@@ -102,13 +102,13 @@ We are now ready to perform our analysis, but first we need to get some data int
 >    Change **Create one BED record per** to `Coding Exons` and then click on the **Send query to Galaxy** button.
 >
 >     > ### {% icon comment %} Comment
->     > After this you will see your first history item in Galaxy's right pane. It will go through
+>     > After this you will see your first history item in Galaxy's right panel. It will go through
 >     > the gray (preparing/queued) and yellow (running) states to become green (success):
 >     >
 >     > ![`UCSC Main on Human: knownGene` dataset is green](../../images/101_04.png)
 >     {: .comment}
 >
-> 3. When the dataset is green, click on the **eye icon** to **view the contents** of the file. It should look something like this:
+> 3. When the dataset is green, click on the {% icon galaxy-eye %} (eye) icon to **view the contents** of the file. It should look something like this:
 >
 >    ![Contents of the `UCSC Main on Human: knownGene` dataset](../../images/101_exons.png)
 >
@@ -170,7 +170,7 @@ Let's remind ourselves that our objective is to find which exon contains the mos
 >    > **Note:** if you scroll down on this page, you will find the help of the tool.
 >    {: .comment}
 >
-> 3. Click the **Execute** button and view the resulting file (with the eye icon). If everything went okay, you should see a file that looks similar to this:
+> 3. Click the **Execute** button and view the resulting file (with the {% icon galaxy-eye %} (eye) icon). If everything went okay, you should see a file that looks similar to this:
 >
 >    ![Contents of the `Join` output dataset](../../images/101_joined.png)
 >
@@ -312,15 +312,15 @@ UCSC provides a large number of tracks that can help you get a sense of your gen
 
 # Galaxy management
 
-In Galaxy your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc.) in the **Options** menu on the top of the history pane (gear symbol):
+In Galaxy your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc.) in the **Options** menu on the top of the history panel (gear symbol):
 
 ![History options menu](../../images/history_options_menu.png)
 
-If you create a new history, your current history does not disappear. If you would like to list all of your histories just choose `Saved Histories` from the history menu and you will see a list of all your histories in the center pane:
+If you create a new history, your current history does not disappear. If you would like to list all of your histories just choose `Saved Histories` from the history menu and you will see a list of all your histories in the central panel:
 
 ![`Saved Histories` list](../../images/101_23.png)
 
-An alternative overview of your histories can be accessed by clicking on the **View all histories** button at top of your history pane (window icon).
+An alternative overview of your histories can be accessed by clicking on the **View all histories** button at top of your history panel (window icon).
 
 ![Overview of histories with their datasets](../../images/101_history-overview.png)
 
@@ -342,7 +342,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >
 >    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
 >
->    The center pane will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
+>    The central panel will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
 >
 >    ![Selection of steps for `Extract Workflow` from history](../../images/101_25.png)
 >
@@ -422,7 +422,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 > 1. Create a **new history** (gear icon) and give it a name.
 >
-> 2. We will need the list of exons again. We don't have to get this from UCSC again, we can just **copy** it from our previous history. The easiest way to do this is to go to the history overview (window icon at top of history pane). Here you can just drag and drop datasets from one history to another.
+> 2. We will need the list of exons again. We don't have to get this from UCSC again, we can just **copy** it from our previous history. The easiest way to do this is to go to the history overview (window icon at top of history panel). Here you can just drag and drop datasets from one history to another.
 >
 >    ![Drag and drop of `Exons` dataset in the history overview](../../images/101_copydataset.png)
 >
@@ -438,7 +438,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    ![`Run` option in the workflow menu](../../images/101_37.png)
 >
->    The center pane will change to allow you to configure and launch the workflow.
+>    The central panel will change to allow you to configure and launch the workflow.
 >
 > 5. Select appropriate datasets for the inputs as shown below, then scroll down and click `Run workflow`.
 >
@@ -461,7 +461,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 
 One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
-To share a history, click on the gear symbol in the history pane and select `Share or Publish`. On this page you can do 3 things:
+To share a history, click on the gear symbol in the history panel and select `Share or Publish`. On this page you can do 3 things:
 
 1. **Make History Accessible via Link**. This generates a link that you can give out to others. Anybody with this link will be able to view your history.
 2. **Make History Accessible and Publish**. This will not only create a link, but will also publish your history. This means your history will be listed under `Shared Data → Histories` in the top menu.

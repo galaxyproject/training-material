@@ -65,7 +65,7 @@ The goal of this exercise is to **turn this list of genomic regions into a list 
 >    ![Login or Register on the top panel](../../images/login_register.png)
 {: .hands_on}
 
-The Galaxy interface consist of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle pane will show the tools and datasets.
+The Galaxy interface consist of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the central panel will show the tools and datasets.
 
 ![Galaxy interface](../../images/galaxy_interface.png "The Galaxy interface")
 
@@ -152,11 +152,11 @@ Let's start with a fresh history.
 >
 > 2. Click on the {% icon galaxy-eye %} (eye) icon (**View data**) in your dataset in the history
 >
->    The content of the file is displayed in the middle panel
+>    The content of the file is displayed in the central panel
 >
 > 3. Click on the {% icon galaxy-pencil %} (pencil) icon (**Edit attributes**) in your dataset in the history
 >
->    A form to edit dataset attributes is displayed in the middle panel
+>    A form to edit dataset attributes is displayed in the central panel
 >
 > 4. Search for `mm9` in **Database/Build** attribute and select `Mouse July 2007 (NCBI37/mm9)` (the paper tells us the peaks are from `mm9`)
 > 5. Click on **Save** on the top
@@ -456,7 +456,7 @@ Galaxy makes this very simple with the `Extract workflow` option. This means tha
 >
 >    ![Extracting workflow in history menu](../../images/history_menu_extract_workflow.png)
 >
->    The center panel will change and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
+>    The central panel will change and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
 >
 > 4. **Uncheck** any steps that shouldn't be included in the workflow
 >

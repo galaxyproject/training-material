@@ -245,7 +245,7 @@ Now we can visualize this dataset to discover generalities:
 > ### {% icon hands_on %} Hands-on: Graphing alignment data
 > 1. Expand random subset of alignment data generated on the previous step by clicking on it.
 > 2. You will see "chart" button (![Chart icon](../../images/bar-chart-o.png)). Click on it.
-> 3. In the center pane you will see a list of visualizations. Select **Scatter plot (NVD3)**
+> 3. In the central panel you will see a list of visualizations. Select **Scatter plot (NVD3)**
 > 4. Click **Select data** button (![Disks](../../images/disks.png))
 > 5. Set **Values for x-axis** to `Column: 3` (alignment identity)
 > 6. Set **Values for y-axis** to `Column: 4` (alignment length)
@@ -299,7 +299,7 @@ The dataset generated above lists each *E. coli* genome accession only once and 
 > ### {% icon hands_on %} Hands-on: Graphing aggregated data
 > 1. Expand the aggregated data generated on the previous step by clicking on it.
 > 2. You will see "chart" button (![Chart icon](../../images/bar-chart-o.png)). Click on it.
-> 3. In the center pane you will see a list of visualizations. Select **Scatter plot (NVD3)**
+> 3. In the central panel you will see a list of visualizations. Select **Scatter plot (NVD3)**
 > 4. Click **Select data** button (![Disks](../../images/disks.png))
 > 5. Set **Data point labels** to `Column: 1` (Accession number of each *E. coli* genome)
 > 5. Set **Values for x-axis** to `Column: 2` (# of alignment blocks)

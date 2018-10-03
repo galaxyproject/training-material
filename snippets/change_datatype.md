@@ -1,8 +1,8 @@
 >
 >    > ### {% icon tip %} Tip: Changing the datatype
->    > * Click on the pencil button displayed in your dataset in the history
->    > * Choose **Datatype** on the top
+>    > * Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
+>    > * In the central panel, click on the **Datatypes** tab on the top
 >    > * Select `{{ include.datatype }}`
->    > * Press **Save**
+>    > * Click the **Change datatype** button
 >    {: .tip}
 >

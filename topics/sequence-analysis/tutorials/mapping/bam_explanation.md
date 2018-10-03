@@ -8,7 +8,7 @@ A BAM ([Binary Alignment Map](https://en.wikipedia.org/wiki/SAM_(file_format))) 
 
 A BAM file (or a SAM file, the non compressed version) consists of:
 
-- A header section with the chromosome names and lengths (the lines starting with the `@SQ` symbol) along with other metadata (also starting an `@`)
+- A header section (the lines starting with `@`) containing metadata, in particular the chromosome names and lengths (lines starting with the `@SQ` symbol)
 - An alignment section consisting of a table with 11 mandatory fields, as well as a variable number of optional fields:
 
     Col | Field | Type | Brief Description

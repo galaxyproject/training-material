@@ -98,7 +98,7 @@ By now we see that a collection can be used to bundle a large number of items in
 ![bwa_mem_collection_readGroups](../../images/bwa_mem_collection_readGroups.png)
 {: .img-responsive}
 
-In the middle pane, provide the following parameters for `Map with BWA-MEM`:
+In the central panel, provide the following parameters for `Map with BWA-MEM`:
 
 - set **Using reference genome** to `hg38` (red outline);
 - set **Single or Paired-end reads** to `Paired collection` (blue outline);

@@ -69,7 +69,7 @@ In the following we will process a dataset with the mapper **Bowtie2** and we wi
 
 We just imported in Galaxy FASTQ files corresponding to paired-end data as we could get directly from a sequencing facility.
 
-During sequencing, errors are introduced, such as incorrect nucleotides being called. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. The first step for any type of sequencing data is to check their quality. 
+During sequencing, errors are introduced, such as incorrect nucleotides being called. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. The first step for any type of sequencing data is to check their quality.
 
 > ### {% icon comment %} Check the Quality control tutorial
 > The [quality control](../quality-control/tutorial.html) tutorial is explaining this step. We will not going into the details here, in particular for the parameters.
@@ -78,7 +78,7 @@ During sequencing, errors are introduced, such as incorrect nucleotides being ca
 > ### {% icon hands_on %} Hands-on: Quality control
 > 1. **FastQC** {% icon tool %} on both datasets
 > 2. **MultiQC** {% icon tool %} on the outputs of **FastQC** {% icon tool %}
-> 3. **Trim Galore!** {% icon tool %} on the paired-end datasets 
+> 3. **Trim Galore!** {% icon tool %} on the paired-end datasets
 {: .hands_on}
 
 # Map reads on a reference genome
@@ -91,7 +91,7 @@ We need a reference genome to map the reads on.
 
 {% include topics/sequence-analysis/tutorials/mapping/ref_genome_explanation.md answer_3="This data comes from ChIP-seq of mices, so we will use mm10 (*Mus musculus*)."%}
 
-Currently, there are over 60 different mappers, and their number is growing. In this tutorial, we will use Bowtie2 in order to map sequencing reads from 
+Currently, there are over 60 different mappers, and their number is growing. In this tutorial, we will use [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/), a fast and memory-efficient open-source tool particularly good at aligning sequencing reads of about 50 up to 1,000s of bases to relatively long genomes.
 
 > ### {% icon hands_on %} Hands-on: Mapping with Bowtie2
 > 1. **Bowtie2** {% icon tool %} with the following parameters
@@ -105,13 +105,13 @@ Currently, there are over 60 different mappers, and their number is growing. In 
 >     - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a built-in genome index`
 >       - *"Select reference genome"*: `Mouse (Mus musculus): mm10`
 >     - *"Select analysis mode"*: `Default setting only`
->       
+>
 >         You should have a look at the non default parameters and try to understand them. They can have an impact on the mapping and improving it.
 >
 >     - *"Save the bowtie2 mapping statistics to the history"*: `Yes`
 >
-> 2. Inspect the `mapping stats` file (click on the {% icon galaxy-eye %})
->    
+> 2. Inspect the `mapping stats` file by clicking on the {% icon galaxy-eye %} (eye) icon
+>
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. What information is provided here?
@@ -130,7 +130,7 @@ Currently, there are over 60 different mappers, and their number is growing. In 
 >    > >     - the rest are not mapped at all
 >    >  {: .solution }
 >    {: .question}
-> 
+>
 {: .hands_on}
 
 Checking the mapping statistics is an important step to do before continuing any analyses. There are several potential sources for errors in mapping, including (but not limited to):
@@ -155,12 +155,12 @@ So the BAM file integrates many information for each read, in particular the qua
 >    - *"Use reference sequence"*: `Use reference`
 >       - *"Choose a reference sequence for GC depth"*: `Locally cached`
 >           - *"Using genome"*: `Mouse (Mus musculus): mm10 Full`
-> 
+>
 > 2. Inspect the {% icon param-file %} `Stats` file
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. Which proportion of mismatches are in the mapped reads when aligned to the reference genome? 
+>    > 1. Which proportion of mismatches are in the mapped reads when aligned to the reference genome?
 >    > 2. What does the error rate represent?
 >    > 3. What is the average quality? How is it represented?
 >    > 4. What is the insert size average?
@@ -173,8 +173,8 @@ So the BAM file integrates many information for each read, in particular the qua
 >    > > 4. The insert size is the distance between the two reads in the pairs.
 >    > > 5. To get the info:
 >    > >      1. **Filter BAM datasets on a variety of attributes** {% icon tool %} with a filter to keep only the reads with a mapping quality >= 20
->    > >      2. **Stats generate statistics for BAM dataset** {% icon tool %} on the output of **Filter** 
->    > >    
+>    > >      2. **Stats generate statistics for BAM dataset** {% icon tool %} on the output of **Filter**
+>    > >
 >    > >    Before filtering: 95,412 reads - After filtering: 89,664 reads
 >    >  {: .solution }
 >    {: .question}
