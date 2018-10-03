@@ -35,16 +35,16 @@ The third and the last workflow in the proteogenomics tutorial is to identifying
 # Pretreatments
 
 {: .no_toc}
-
-> ### {% icon hands_on %} Hands-on: data organization
+>
+ > ### {% icon hands_on %} Hands-on: data organization
 >
 >
 >>    The inputs for this workflow are:
->>    - Tabular file – “Peptides from BlastP analysis”
->>    - Tabular file – “PeptideShaker_PSM”
->>    - Mz to sqlite
->>    - Genomic mapping sqlite
-
+>>    - **Tabular file** – “**Peptides from BlastP analysis**”
+>>    - **Tabular file** – “**PeptideShaker_PSM**”
+>>    - **Mz to sqlite**
+>>    - **Genomic mapping sqlite**
+{: .hands_on}
 
 > All the files to run this workflow can be obtained from the second workflow output. Once the tabular output is generated,
 > we convert this tabular report into a FASTA file. This can be achieved by using the Tabular to FASTA convertion tool.
