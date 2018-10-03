@@ -42,4 +42,29 @@ Generally, the annotation process is a synthesis between the understanding of ph
 
 # Making the Best Prediction
 
-The [Center for Phage Technology](https://cpt.tamu.edu/) integrates as many data sources as is feasible. Please contact the CPT IT staff (cpt@tamu.edu) if there is another data source needed that is not appearing not currently available in Apollo
+The [Center for Phage Technology](https://cpt.tamu.edu/) integrates as many data sources as is feasible. Please contact the [CPT](https://cpt.tamu.edu) IT staff (cpt@tamu.edu) if there is another data source needed that is not appearing not currently available in Apollo, and the [CPT](https://cpt.tamu.edu) can work on adding that to the Phage Annotation Pipeline (PAP).
+
+### Gene Calls
+
+The [CPT’s](https://cpt.tamu.edu) PAP integrates gene calls from numerous sources, specifically *MetaGeneAnnotator* and *Glimmer3*. These gene callers are generally very accurate; however, should they fail to find a gene, SixPack is a reliable gene caller.
+
+![](../../images/annotation-in-apollo-screenshots/2_gene_calls.png)
+
+> ### {% icon tip %} Note that…
+> Gene calling is part of structurally annotating a genome in Apollo. For more information on structural annotation and gene calling, please look at [these] [tutorials].
+> <!-- LINK TUTORIALS UPON COMPLETION -->
+{: .tip}
+
+### BLAST
+
+1. NT (Nucleotide) database
+
+Megablast is run against a copy of NCBI’s NT database. Hovering over a hit segment will show where in the target genome the region aligns.
+
+![](../../images/annotation-in-apollo-screenshots/3_blast_nt.png)
+
+2. NR (non-redundant) protein database
+
+BLASTp is run against three database:
+> * [CPT’s](https://cpt.tamu.edu) Canonical Phage database
+> * TrEMBL
