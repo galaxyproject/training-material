@@ -42,15 +42,15 @@ In this tutorial, we will create a Heinz workflow step by step, as the picture b
 
 ![Heinz workflow](../../images/heinz-workflow.png)
 
-# Obtaining and preparing data
+# Obtaining and preparing data  [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1344105.svg)](https://doi.org/10.5281/zenodo.1344105)
+
 
 The study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171) includes the computation
 steps starting from the raw RNAseq datasets. The operations that processed raw data into the interpreted data are
-beyond the scope of this tutorial. To learn that, please refer to the relevant topics in the Galaxy training material.
-In this tutorial, we start with the interpreted data, which are KO ([KEGG Orthology](https://www.genome.jp/kegg/ko.html))
-count data. All the data needed for this tutorial are available from Zenodo.
-
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1344105.svg)](https://doi.org/10.5281/zenodo.1344105).
+beyond the scope of this tutorial. To learn that, please refer to the relevant topics in the Galaxy training
+material. In this tutorial, we start with the interpreted data, which are KO
+([KEGG Orthology](https://www.genome.jp/kegg/ko.html)) count data. All the data needed for this tutorial are available
+from Zenodo.
 
 ## Understanding our input data
 
