@@ -15,7 +15,7 @@ key_points:
     - "Analyzing the pinpointed network."
 contributors:
     - cicozhang
-    - SanneAbeln
+    - sanneabeln
 ---
 
 # Overview
