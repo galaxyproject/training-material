@@ -64,12 +64,8 @@ In this tutorial we use metagenomic nanopore data, but similar pipelines can be 
 {: .tip}
 
 ## Understanding our input data
-In this tutorial we are interested in understanding the effect of normal variation in the gut microbiome on host health.
-To that end, fresh feces from mice were collected on a daily basis for 365 days post weaning. During the first 150 days
-post weaning (dpw), nothing was done to our mice except allow them to eat, get fat, and be merry. We were curious whether
-the rapid change in weight observed during the first 10 dpw affected the stability microbiome compared to the microbiome
-observed between days 140 and 150. We will address this question in this tutorial using a combination of OTU, phylotype,
-and phylogenetic methods.
+In this tutorial we are interested in determing the antimicrobial resistance genes.
+DATA INFORMATION
 
 ![Experiment setup](../../images/experiment_setup.png)
 
