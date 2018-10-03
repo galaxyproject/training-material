@@ -26,21 +26,26 @@ layout: base
                         </a>
                     </li>
 
-                    {% if page.slides == true or page.slides == "yes" %}
+                    {% assign intro_link = false %}
+                    {% assign associated_slides = false %}
+                    {% for material in topic_material %}
+                        {% if material.enable != "false" %}
+                            {% if material.slides and material.tutorial_name == page.tutorial_name %}
+                                {% assign associated_slides = true %}
+                            {% endif %}
+                            {% if material.type == "introduction" %}
+                                {% assign intro_link = true %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if associated_slides %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html" title="Slides for this tutorial">
                             {% icon slides %} Associated slides
                         </a>
                     </li>
                     {% else %}
-                        {% assign intro_link = false %}
-                        {% for material in topic_material %}
-                            {% if material.enable != "false" %}
-                                {% if material.type == "introduction" %}
-                                    {% assign intro_link = true %}
-                                {% endif %}
-                            {% endif %}
-                        {% endfor %}
                         {% if intro_link %}
                             <li class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
@@ -152,7 +157,7 @@ layout: base
             {% for requirement in topic.requirements %}
                 <li>
                     {% if requirement.type == "internal" %}
-                    <a href="{{ site.baseurl }}{{ requirement.link }}">{{ requirement.title }}</a>
+                    <a href="{{ site.baseurl }}/topics{{ requirement.link }}">{{ requirement.title }}</a>
                     {% elsif requirement.type == "external" %}
                     <a href="{{ requirement.link }}">{{ requirement.title }}</a>
                     {% endif %}
@@ -161,7 +166,7 @@ layout: base
             {% for requirement in page.requirements %}
                 <li>
                     {% if requirement.type == "internal" %}
-                    <a href="{{ site.baseurl }}{{ requirement.link }}">{{ requirement.title }}</a>
+                    <a href="{{ site.baseurl }}/topics{{ requirement.link }}">{{ requirement.title }}</a>
                     {% elsif requirement.type == "external" %}
                     <a href="{{ requirement.link }}">{{ requirement.title }}</a>
                     {% endif %}
@@ -218,15 +223,15 @@ layout: base
         {% endif %}
 
         <h3>{% icon congratulations %} Congratulations on successfully completing this tutorial!</h3>
-
         <hr>
+        <br>
+
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833={{ page.title }} ({{ topic.title }})">Loading...
+        </iframe>
 
         <blockquote class="feedback">
-            <h3>{% icon feedback %} Help us improve this content!</h3>
-            Please take a moment to fill in the Galaxy Training Network
-            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>.
-            Your feedback helps us improve this tutorial and will be considered
-            in future revisions.
+            <h3>{% icon feedback %} Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262={{ page.title }} ({{ topic.title }})">Feedback Form</a>.</p>
         </blockquote>
     </section>
 </div>
