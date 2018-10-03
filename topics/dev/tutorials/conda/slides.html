@@ -32,12 +32,12 @@ layout: true
 class: center, middle, inverse
 
 <div class="my-header"><span>
-<a href="/training-material/topics/dev" title="Return to topic page"><i class="fa fa-level-up" aria-hidden="true"></i></a>
+<a href="/training-material/topics/dev" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
 </span></div>
 
 <div class="my-footer"><span>
 
-<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;">
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
 
 </span></div>
 
@@ -74,7 +74,7 @@ class: center, middle, inverse
 
 
 
-### <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20"> Questions
+### &lt;i class=&quot;fa fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
 
 
 - How can I connect tools to applications and libraries?
@@ -93,7 +93,7 @@ class: center, middle, inverse
 ---
 
 
-### <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20"> Objectives
+### &lt;i class=&quot;fa fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
 
 
 - Learn to use existing Conda recipes to enable best practice tool dependency management in Galaxy.
@@ -108,7 +108,7 @@ class: center, middle, inverse
 
 ## Planemo
 
-These slides mirror the section on "Dependencies and Conda" in the [Planemo Documentation](https://planemo.readthedocs.io/en/latest/writing_advanced.html#dependencies-and-conda).
+These slides mirror the section on &quot;Dependencies and Conda&quot; in the [Planemo Documentation](https://planemo.readthedocs.io/en/latest/writing_advanced.html#dependencies-and-conda).
 
 ---
 
@@ -146,9 +146,9 @@ class: left, enlarge120
 The `--requirement seqtk@1.2` gets translated into the following Galaxy tool XML:
 
 ```xml
-<requirements>
-    <requirement type="package" version="1.2">seqtk</requirement>
-</requirements>
+&lt;requirements&gt;
+    &lt;requirement type=&quot;package&quot; version=&quot;1.2&quot;&gt;seqtk&lt;/requirement&gt;
+&lt;/requirements&gt;
 ```
 
 ---
@@ -163,7 +163,7 @@ The `--requirement seqtk@1.2` gets translated into the following Galaxy tool XML
   any tools may use multiple Conda recipes.
 - There are few different ways to populate Applications and Libraries
   on the right - we will talk about Conda which is what we consider the
-  "community best practice".
+  &quot;community best practice&quot;.
 
 ---
 
@@ -177,7 +177,7 @@ Package, dependency and environment management
 
 class: enlarge120
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br> Conda Terminology
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Conda Terminology
 
 Conda **recipes** build **packages** that are published to **channels**.
 
@@ -185,7 +185,7 @@ Conda **recipes** build **packages** that are published to **channels**.
 
 class: enlarge120
 
-### .image-25[![](../../../../shared/images/conda_logo.png)] <br> Conda Key Features for Galaxy
+### .image-25[![](../../../../shared/images/conda_logo.png)] &lt;br /&gt; Conda Key Features for Galaxy
 
 - No compilation at install time - *binaries* with their dependencies, libraries...
 
@@ -212,7 +212,7 @@ Compared with the Tool Shed dependency management (`tool_dependencies.xml`), Bio
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br> Conda Distributions
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Conda Distributions
 
 ```
 
@@ -224,19 +224,19 @@ Compared with the Tool Shed dependency management (`tool_dependencies.xml`), Bio
 
 class: enlarge120
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br> Best Practice Channels
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Best Practice Channels
 
 - Packages through channels within Continuum.
 
 - Conda channels searched by Galaxy for packages
     - iuc
-    - bioconda
     - conda-forge
+    - bioconda
     - defaults
 
-<br>
-<br>
-<br>
+&lt;br/&gt;
+&lt;br/&gt;
+&lt;br/&gt;
 
 .footnote[If you are interested in Natural Language Processing or Cheminformatics you may be asking if these channels can still work for your tools. Despite the name [Bioconda](https://bioconda.github.io/) - it is really more about community and a set of best practices than about bioinformatics purity - many diverse packages have been integrated.]
 
@@ -244,7 +244,7 @@ class: enlarge120
 
 class: left, enlarge120
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br> Install and Configure
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Install and Configure
 
 ```bash
 $ planemo conda_init
@@ -261,7 +261,7 @@ This has already been done on [Planemo machine](https://github.com/galaxyproject
 
 class: enlarge120
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br> Quickstart
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Quickstart
 #### Using Conda outside Planemo
 
 - Install a package
@@ -287,8 +287,7 @@ class: enlarge150
 
 ## Conda and Galaxy
 
-Galaxy now automatically installs Conda when first launched and will use [Bioconda](https://bioconda.github.io/) and other channels
-for package resolution.
+Galaxy now automatically installs Conda when first launched and will use [Bioconda](https://bioconda.github.io/) and other channels for package resolution.
 
 ---
 
@@ -330,7 +329,7 @@ class: left
 
 .enlarge120[Planemo can check if the requirements of a tool are available in best practice Conda channels using the `--conda_requirements` flag of `planemo lint`.]
 
-<br>
+&lt;br&gt;
 
 ```bash
 $ planemo lint --conda_requirements seqtk_seq.xml
@@ -340,7 +339,7 @@ Applying linter requirements_in_conda... CHECK
 .. INFO: Requirement [seqtk@1.2] matches target in best practice Conda channel [bioconda].
 ```
 
-<br>
+&lt;br&gt;
 
 .enlarge120[*Notice Planemo indicates this tool is available and shows the channel it is available in.*]
 
@@ -385,7 +384,13 @@ class: enlarge120
 ### The Planemo `conda_env` command
 
 .reduce70[```sh
-$ . |<in.fa>
+$ . &lt;(planemo conda_env seqtk_seq.xml)
+Deactivate environment with conda_env_deactivate
+(seqtk_seq) $ which seqtk
+/home/planemo/miniconda2/envs/jobdepsiJClEUfecc6d406196737781ff4456ec60975c137e04884e4f4b05dc68192f7cec4656/bin/seqtk
+(seqtk_seq) $ seqtk seq
+
+Usage:   seqtk seq [options] &lt;in.fq&gt;|&lt;in.fa&gt;
 
 Options: -q INT    mask bases with quality lower than INT [0]
          -X INT    mask bases with quality higher than INT [255]
@@ -425,7 +430,7 @@ INFO  [galaxy.tools.actions] Flushed transaction for job Job[id=2,tool_id=seqtk_
 INFO  [galaxy.jobs.handler] (2) Job dispatched
 DEBUG [galaxy.tools.deps] Using dependency seqtk version 1.2 of type conda
 DEBUG [galaxy.tools.deps] Using dependency seqtk version 1.2 of type conda
-INFO  [galaxy.jobs.command_factory] Built script [/tmp/tmpLvKwta/job_working_directory/000/2/tool_script.sh] for tool command [[ "$CONDA_DEFAULT_ENV" = "/Users/john/miniconda2/envs/__seqtk@1.2" ] || . /Users/john/miniconda2/bin/activate '/Users/john/miniconda2/envs/__seqtk@1.2' &gt;conda_activate.log 2&gt;&amp;1 ; seqtk seq -a '/tmp/tmpLvKwta/files/000/dataset_1.dat' &gt; '/tmp/tmpLvKwta/files/000/dataset_2.dat']
+INFO  [galaxy.jobs.command_factory] Built script [/tmp/tmpLvKwta/job_working_directory/000/2/tool_script.sh] for tool command [[ &quot;$CONDA_DEFAULT_ENV&quot; = &quot;/Users/john/miniconda2/envs/__seqtk@1.2&quot; ] || . /Users/john/miniconda2/bin/activate '/Users/john/miniconda2/envs/__seqtk@1.2' &gt;conda_activate.log 2&gt;&amp;1 ; seqtk seq -a '/tmp/tmpLvKwta/files/000/dataset_1.dat' &gt; '/tmp/tmpLvKwta/files/000/dataset_2.dat']
 DEBUG [galaxy.tools.deps] Using dependency samtools version None of type conda
 DEBUG [galaxy.tools.deps] Using dependency samtools version None of type conda
 ok
@@ -447,20 +452,20 @@ The following line indicates the seqtk package was found:
 ]
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on
+### &lt;i class=&quot;fa fa-pencil&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;hands_on&lt;/span&gt; Hands-on
 
 ![](../../images/exercise.png)
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on
+### &lt;i class=&quot;fa fa-pencil&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;hands_on&lt;/span&gt; Hands-on
 
 #### The Goal
 - Use the Planemo commands `conda_install`, `conda_env`, and `test` to practice the Galaxy tool dependency development lifecycle.
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on
+### &lt;i class=&quot;fa fa-pencil&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;hands_on&lt;/span&gt; Hands-on
 
 #### Steps
 
@@ -477,7 +482,7 @@ $ cd seqtk_example
 $ planemo conda_install seqtk_seq.xml
 ```
 ```bash
-$ . &lt;(planemo conda_env seqtk_seq.xml)
+$ . &amp;lt;(planemo conda_env seqtk_seq.xml)
 ```
 ```bash
 $ planemo test seqtk_seq.xml
@@ -514,7 +519,7 @@ seqtk                        r75                           0  bioconda
 Alternatively, `conda` can be used directly:
 
 ```sh
-$ $HOME/miniconda3/bin/conda search -c iuc -c bioconda -c conda-forge seqtk
+$ $HOME/miniconda3/bin/conda search -c iuc -c conda-forge -c bioconda seqtk
 ```
 
 ---
@@ -539,13 +544,13 @@ only one that will be used by Galaxy by default.
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on
+### &lt;i class=&quot;fa fa-pencil&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;hands_on&lt;/span&gt; Hands-on
 
 ![](../../images/exercise.png)
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on
+### &lt;i class=&quot;fa fa-pencil&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;hands_on&lt;/span&gt; Hands-on
 
 #### The Goal
 - Find the correct package and version for a tool in a best practice channel.
@@ -553,7 +558,7 @@ only one that will be used by Galaxy by default.
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on
+### &lt;i class=&quot;fa fa-pencil&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;hands_on&lt;/span&gt; Hands-on
 
 #### Steps
 
@@ -574,17 +579,17 @@ pear.xml              test-data
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br> Writing a Conda Recipe
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe
 
 If searching best practice channels fails, you may need to build a Conda recipe.
 
-.footnote[[Documentation about how to write conda recipes from scratch](https://conda.pydata.org/docs/build_tutorials/pkgs2.html) <br> [Bioconda guidelines](https://bioconda.github.io/guidelines.html)]
+.footnote[[Documentation about how to write conda recipes from scratch](https://conda.pydata.org/docs/build_tutorials/pkgs2.html) &lt;br/&gt; [Bioconda guidelines](https://bioconda.github.io/guidelines.html)]
 
 ---
 
 class: left
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br> Writing a Conda Recipe - The Files
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - The Files
 
 A Conda recipe is defined by a directory, the two most important files in this directory are:
 
@@ -595,14 +600,14 @@ A Conda recipe is defined by a directory, the two most important files in this d
 
 class: left
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br> Writing a Conda Recipe - `meta.yaml`
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - `meta.yaml`
 
 `meta.yaml` contains basic metadata about the recipe.
 
 ```yaml
 package:
   name: bwa
-  version: "0.7.15"
+  version: &quot;0.7.15&quot;
 about:
   home: http://bio-bwa.sourceforge.net
   license: MIT
@@ -618,7 +623,7 @@ source:
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br> Writing a Conda Recipe - `requirements`
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - `requirements`
 
 ```yaml
 requirements:
@@ -631,14 +636,14 @@ requirements:
     - zlib
     - bowtie2
 ```
-<small>
+&lt;small&gt;
 - `build`: requirements needed during the build step (here compilation)
 - `run`: requirements needed at runtime
-</small>
+&lt;/small&gt;
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br> Writing a Conda Recipe - Preprocessing Selectors
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - Preprocessing Selectors
 
 - Evaluated as Python expressions - feel free to use `and`, `or`, etc.
 - Other common selectors include `py2k`, `py3k`.
@@ -662,10 +667,10 @@ build:
 
 class: left
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br> Writing a Conda Recipe - Tests
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - Tests
 
-<br>
-<br>
+&lt;br/&gt;
+&lt;br/&gt;
 
 `meta.yaml` should contain simple tests. These are commands executed at the end of `conda build` and expected to return `0` on success.
 
@@ -685,7 +690,7 @@ test:
 ```yaml
 test:
   commands:
-    - '$R -e "library(''xcms'')"'
+    - '$R -e &quot;library(''xcms'')&quot;'
 ```
 
 Please note that the Conda tests run inside the runtime environment and not in the build environment.
@@ -694,15 +699,13 @@ Please note that the Conda tests run inside the runtime environment and not in t
 
 ---
 
-From Bioconda Guidelines:
+From the [Bioconda Guidelines](https://bioconda.github.io/guidelines.html):
 
-&gt; An adequate test must be included in the recipe. An "adequate" test depends on the recipe, but must be able to detect a successful installation. While many packages may ship their own test suite (unit tests or otherwise), including these in the recipe is not recommended since it may timeout the build system on CircleCI. We especially want to avoid including any kind of test data in the repository.
-
-https://bioconda.github.io/guidelines.html
+&gt; An adequate test must be included in the recipe. An &quot;adequate&quot; test depends on the recipe, but must be able to detect a successful installation. While many packages may ship their own test suite (unit tests or otherwise), including these in the recipe is not recommended since it may timeout the build system on CircleCI. We especially want to avoid including any kind of test data in the repository.
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br> Writing a Conda Recipe - `build.sh`
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - `build.sh`
 
 ```bash
 #!/bin/bash
@@ -716,38 +719,38 @@ make install
 mkdir -p $PREFIX/bin
 cp *.py $PREFIX/bin
 ```
-<small>
+&lt;small&gt;
 - `$PREFIX` is a variable defined by conda when building the package.
 - `$PREFIX` usually contains `bin/`, `lib/`, and `include/` that are filled with the package files.
 - `$PREFIX` will be loaded in the user environment at runtime: `PATH`, `LD_LIBRARY_PATH`, `PYTHONPATH`, ...
-</small>
+&lt;/small&gt;
 
 .footnote[[http://training.galaxyproject.org/training-material/topics/dev/tutorials/conda_sys/slides.html](/training-material/topics/dev/tutorials/conda_sys/slides.html)]
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br> Writing a Conda Recipe - Skeletons
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - Skeletons
 
 ```bash
-$ conda skeleton pypi <packagename>
+$ conda skeleton pypi &lt;packagename&gt;
 ```
 ```bash
-$ conda skeleton cran <packagename>
+$ conda skeleton cran &lt;packagename&gt;
 ```
 ```bash
-$ bioconductor_skeleton.py <packagename>
+$ bioconductor_skeleton.py &lt;packagename&gt;
 ```
 ```bash
-$ conda skeleton cpan <packagename>`
+$ conda skeleton cpan &lt;packagename&gt;`
 ```
 
-These generate pre-filled recipes <small>(not guaranteed to work out of the box)</small> for specific programming environments.
+These generate pre-filled recipes &lt;small&gt;(not guaranteed to work out of the box)&lt;/small&gt; for specific programming environments.
 
 .footnote[[Building conda packages with conda skeleton](https://conda.pydata.org/docs/build_tutorials/pkgs.html)]
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br> Writing a Conda Recipe - Building
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - Building
 
 Once the recipe is ready to go, the `conda build` command can be used to build it.
 
@@ -762,7 +765,7 @@ $ $HOME/miniconda3/bin/conda build .
 5. (Provides the .tar.bz2 path)
 
 
-.footnote[If miniconda wasn't configured with `planemo conda_init`, you may have <br> to run `conda install conda-build` before using the above command.]
+.footnote[If miniconda wasn't configured with `planemo conda_init`, you may have &lt;br/&gt; to run `conda install conda-build` before using the above command.]
 
 
 ---
@@ -784,7 +787,7 @@ $ $HOME/miniconda3/bin/conda build .
 - Clone your fork:
 
   ```bash
-  $ git clone https://github.com/ <myuser> /bioconda-recipes
+  $ git clone https://github.com/ &lt;myuser&gt; /bioconda-recipes
   ```
 
 - Create a new branch `package`
@@ -837,13 +840,13 @@ cache.
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on
+### &lt;i class=&quot;fa fa-pencil&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;hands_on&lt;/span&gt; Hands-on
 
 ![](../../images/exercise.png)
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on
+### &lt;i class=&quot;fa fa-pencil&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;hands_on&lt;/span&gt; Hands-on
 
 #### The Goal
 - Implement and test a local Conda recipe.
@@ -853,7 +856,7 @@ cache.
 
 class: left
 
-### <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on
+### &lt;i class=&quot;fa fa-pencil&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;hands_on&lt;/span&gt; Hands-on
 
 #### Before
 
@@ -871,7 +874,7 @@ This directory contains the outline of a tool for [fleeqtk](https://github.com/j
 
 class: left
 
-### <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on
+### &lt;i class=&quot;fa fa-pencil&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;hands_on&lt;/span&gt; Hands-on
 
 #### Steps
 
@@ -895,8 +898,8 @@ class: left
 ```yaml
 
 
-{% set name = "seqtk" %}
-{% set version = "1.15.1" %}
+{% set name = &quot;seqtk&quot; %}
+{% set version = &quot;1.15.1&quot; %}
 
 package:
   name: {{ name }}
@@ -920,20 +923,20 @@ CONDA_PY:
   - 27
   - 35
   - 36
-CONDA_HTSLIB: "1.7"
-CONDA_BOOST: "1.64"
-CONDA_R: "3.4.1"
-CONDA_PERL: "5.22.0"
-CONDA_NPY: "112"
-CONDA_NCURSES: "5.9"
-CONDA_GSL: "1.16"
-CONDA_GMP: "5.1"
-CONDA_HDF5: "1.8.17"
-MACOSX_DEPLOYMENT_TARGET: "10.9"
-CONDA_ZLIB: "1.2.11"
-CONDA_BZIP2: "1.0"
-CONDA_XZ: "5.2"
-CONDA_BAMTOOLS: "2.4.1"
+CONDA_HTSLIB: &quot;1.7&quot;
+CONDA_BOOST: &quot;1.64&quot;
+CONDA_R: &quot;3.4.1&quot;
+CONDA_PERL: &quot;5.22.0&quot;
+CONDA_NPY: &quot;112&quot;
+CONDA_NCURSES: &quot;5.9&quot;
+CONDA_GSL: &quot;1.16&quot;
+CONDA_GMP: &quot;5.1&quot;
+CONDA_HDF5: &quot;1.8.17&quot;
+MACOSX_DEPLOYMENT_TARGET: &quot;10.9&quot;
+CONDA_ZLIB: &quot;1.2.11&quot;
+CONDA_BZIP2: &quot;1.0&quot;
+CONDA_XZ: &quot;5.2&quot;
+CONDA_BAMTOOLS: &quot;2.4.1&quot;
 ```
 
 .footnote[.center[https://github.com/bioconda/bioconda-recipes/blob/master/scripts/env_matrix.yml ]]
@@ -983,7 +986,7 @@ class: left
 For PyPI packages
 
 ```sh
-conda skeleton pypi <package_name>
+conda skeleton pypi &lt;package_name&gt;
 ```
 
 - Builds likely correct `build.sh` and `meta.yaml`.
@@ -998,14 +1001,14 @@ conda skeleton pypi <package_name>
 #!/bin/bash
 # Remove gcc statements that do not work on older compilers for CentOS5
 # support
-sed -i'' -e 's/"-Wno-error=declaration-after-statement",//g' setup.py
-sed -i'' -e 's/"-Wno-error=declaration-after-statement"//g' setup.py
+sed -i'' -e 's/&quot;-Wno-error=declaration-after-statement&quot;,//g' setup.py
+sed -i'' -e 's/&quot;-Wno-error=declaration-after-statement&quot;//g' setup.py
 # linking htslib, see:
 # https://pysam.readthedocs.org/en/latest/installation.html#external
 # https://github.com/pysam-developers/pysam/blob/v0.9.0/setup.py#L79
-export CFLAGS="-I$PREFIX/include"
-export CPPFLAGS="-I$PREFIX/include"
-export LDFLAGS="-L$PREFIX/lib"
+export CFLAGS=&quot;-I$PREFIX/include&quot;
+export CPPFLAGS=&quot;-I$PREFIX/include&quot;
+export LDFLAGS=&quot;-L$PREFIX/lib&quot;
 
 export HTSLIB_LIBRARY_DIR=$PREFIX/lib
 export HTSLIB_INCLUDE_DIR=$PREFIX/include
@@ -1067,7 +1070,7 @@ test:
 For CRAN packages
 
 ```sh
-conda skeleton cran <packagename>
+conda skeleton cran &lt;packagename&gt;
 ```
 
 - Builds likely correct `build.sh` and `meta.yaml`.
@@ -1100,7 +1103,7 @@ class: reduce70
 package:
   name: r-locfit
   # Note that conda versions cannot contain -, so any -'s in the version have been replaced with _'s.
-  version: "1.5_9.1"
+  version: &quot;1.5_9.1&quot;
 
 source:
   url: https://cran.r-project.org/src/contrib/locfit_1.5-9.1.tar.gz
@@ -1124,7 +1127,7 @@ requirements:
 
 test:
   commands:
-    - $R -e "library('locfit')"
+    - $R -e &quot;library('locfit')&quot;
 
 about:
   home: https://cran.rstudio.com/web/packages/locfit/index.html
@@ -1136,7 +1139,7 @@ about:
 
 ## Java
 
-- New recipes should use the `openjdk` package from [conda-forge](https://github.com/conda-forge/openjdk-feedstock).
+- Recipes should use the `openjdk` package from [conda-forge](https://github.com/conda-forge/openjdk-feedstock).
 - Add a wrapper script if the software is typically called via `java -jar`.
 - JAR files should go in `$PREFIX/share/$PKG_NAME-$PKG_VERSION-$PKG_BUILDNUM`
 - A wrapper script should be placed here as well, and symlinked to $PREFIX/bin.
@@ -1158,7 +1161,7 @@ cp -R * $outdir/
 cp $RECIPE_DIR/peptide-shaker.py $outdir/peptide-shaker
 ls -l $outdir
 ln -s $outdir/peptide-shaker $PREFIX/bin
-chmod 0755 "${PREFIX}/bin/peptide-shaker"
+chmod 0755 &quot;${PREFIX}/bin/peptide-shaker&quot;
 ```
 
 ---
@@ -1196,7 +1199,7 @@ test:
 For CPAN packages
 
 ```sh
-conda skeleton cpan <packagename>
+conda skeleton cpan &lt;packagename&gt;
 ```
 
 - Builds likely correct `build.sh` and `meta.yaml`.
@@ -1211,7 +1214,7 @@ class: reduce70
 ```yaml
 package:
   name: perl-module-build
-  version: "0.4214"
+  version: &quot;0.4214&quot;
 
 source:
   fn: Module-Build-0.4214.tar.gz
@@ -1301,7 +1304,7 @@ $ circleci build
 ---
 
 
-### <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20"> Key points
+### &lt;i class=&quot;fa fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
 
 
 - Conda and Bioconda are Galaxy best practices for connecting Galaxy tools to underlying applications and libraries.
@@ -1326,7 +1329,7 @@ $ circleci build
 This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors  (Nicola Soranzo, John Chilton, Björn Grüning, Hervé Ménager) !
 
 
-</packagename></packagename></package_name></myuser></packagename></packagename></packagename></packagename></in.fa><img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;">
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
 
 
 

@@ -32,12 +32,12 @@ layout: true
 class: center, middle, inverse
 
 <div class="my-header"><span>
-<a href="/training-material/topics/dev" title="Return to topic page"><i class="fa fa-level-up" aria-hidden="true"></i></a>
+<a href="/training-material/topics/dev" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
 </span></div>
 
 <div class="my-footer"><span>
 
-<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;">
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
 
 </span></div>
 
@@ -54,7 +54,7 @@ class: center, middle, inverse
 
 
 
-### <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20"> Questions
+### &lt;i class=&quot;fa fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
 
 
 - How is the Galaxy code structured?
@@ -67,7 +67,7 @@ class: center, middle, inverse
 ---
 
 
-### <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20"> Objectives
+### &lt;i class=&quot;fa fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
 
 
 - Explore various aspects of the Galaxy codebase.
@@ -153,7 +153,7 @@ CloudLaunch web application to make it easy to launch images on a cloud, drives 
 
 [galaxyproject/**tools-iuc** ](https://github.com/galaxyproject/tools-iuc)
 
-Galaxy tools maintained by the *IUC* ("Intergalactic Utilities Commission").
+Galaxy tools maintained by the *IUC* (&quot;Intergalactic Utilities Commission&quot;).
 
 A variety of tools, generally of high quality including many of the core tools for Galaxy main.
 
@@ -320,7 +320,7 @@ deployment on many different platforms and a different scales.
 ### A Plugin Driven Backend but...
 
 Galaxy has long been guided by the principle that cloning it and calling
-the `run.sh` should "just work" and should work quickly.
+the `run.sh` should &quot;just work&quot; and should work quickly.
 
 So by default Galaxy does not require:
 
@@ -475,8 +475,8 @@ def handle_request(self, environ, start_response):
 - `lib/galaxy/webapps/galaxy/controllers/api/`
 - Exposed method take `trans` and request parameters and return a JSON response.
 - Ideally these are *thin*
-  - Focused on "web things" - adapting parameters and responses and move
-    "business logic" to components not bound to web functionality.
+  - Focused on &quot;web things&quot; - adapting parameters and responses and move
+    &quot;business logic&quot; to components not bound to web functionality.
 
 ---
 
@@ -496,7 +496,7 @@ def handle_request(self, environ, start_response):
 ### Galaxy Models
 
 - Database interactions powered by SQLAlchemy - https://www.sqlalchemy.org/.
-- Galaxy doesn't think in terms "rows" but "objects".
+- Galaxy doesn't think in terms &quot;rows&quot; but &quot;objects&quot;.
 - Classes for Galaxy model objects in `lib/galaxy/model/__init__.py`.
 - Classes mapped to tables in `lib/galaxy/model/mapping.py`
   - Describes table definitions and relationships.
@@ -509,7 +509,7 @@ def handle_request(self, environ, start_response):
 
 ### Galaxy Model Migrations
 
-- A migration describes a linear list of database "diff"s to
+- A migration describes a linear list of database &quot;diff&quot;s to
   end up with the current Galaxy model.
 - Allow the schema to be migrated forward automatically.
 - Powered by sqlalchemy-migrate - https://sqlalchemy-migrate.readthedocs.io/en/latest/.
@@ -576,7 +576,7 @@ Slides for datatypes, example of meta data definitions...
 
 - Job is placed into the database and picked up by the job handler.
 - Job handler (`JobHandler`) watches the job and transitions job's state - common startup and finishing.
-- Job mapper (`JobRunnerMapper`) decides the "destination" for a job.
+- Job mapper (`JobRunnerMapper`) decides the &quot;destination&quot; for a job.
 - Job runner (e.g. `DrammaJobRunner`) actual runs the job and provides an interface for checking status.
 
 ---
@@ -619,22 +619,22 @@ Adding new visualizations to a Galaxy instance
 class: reduce70
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
-
-<visualization name="Charts">
-    <data_sources>
-        <data_source>
-            <model_class>HistoryDatasetAssociation</model_class>
-            <test type="isinstance" test_attr="datatype" result_type="datatype">tabular.Tabular</test>
-            <test type="isinstance" test_attr="datatype" result_type="datatype">tabular.CSV</test>
-            <to_param param_attr="id">dataset_id</to_param>
-        </data_source>
-    </data_sources>
-    <params>
-        <param type="dataset" var_name_in_template="hda" required="true">dataset_id
-    </params>
-    <entry_point entry_point_type="mako">charts.mako</entry_point>
-</visualization>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE visualization SYSTEM &quot;../../visualization.dtd&quot;&gt;
+&lt;visualization name=&quot;Charts&quot;&gt;
+    &lt;data_sources&gt;
+        &lt;data_source&gt;
+            &lt;model_class&gt;HistoryDatasetAssociation&lt;/model_class&gt;
+            &lt;test type=&quot;isinstance&quot; test_attr=&quot;datatype&quot; result_type=&quot;datatype&quot;&gt;tabular.Tabular&lt;/test&gt;
+            &lt;test type=&quot;isinstance&quot; test_attr=&quot;datatype&quot; result_type=&quot;datatype&quot;&gt;tabular.CSV&lt;/test&gt;
+            &lt;to_param param_attr=&quot;id&quot;&gt;dataset_id&lt;/to_param&gt;
+        &lt;/data_source&gt;
+    &lt;/data_sources&gt;
+    &lt;params&gt;
+        &lt;param type=&quot;dataset&quot; var_name_in_template=&quot;hda&quot; required=&quot;true&quot;&gt;dataset_id&lt;/param&gt;
+    &lt;/params&gt;
+    &lt;entry_point entry_point_type=&quot;mako&quot;&gt;charts.mako&lt;/entry_point&gt;
+&lt;/visualization&gt;
 ```
 
 ---
@@ -712,8 +712,8 @@ template: left-aligned
 ### Client Directories
 
 - Source stylesheets and JavaScript in `client/galaxy/{style|scripts}`
-- "Packed" scripts served by Galaxy stored in `static/{style|scripts}`
-  - webpack builds these "compiled" artifacts
+- &quot;Packed&quot; scripts served by Galaxy stored in `static/{style|scripts}`
+  - webpack builds these &quot;compiled&quot; artifacts
 
 Upshot - modify files in `client` and rebuild with `make client` before
 deployment.
@@ -813,8 +813,8 @@ class: white
 
 ### webpack in Galaxy
 
-- Turns Galaxy modules into an "app".
-- Builds two bundles currently - a common set of libraries and an analysis "app".
+- Turns Galaxy modules into an &quot;app&quot;.
+- Builds two bundles currently - a common set of libraries and an analysis &quot;app&quot;.
 - https://github.com/galaxyproject/galaxy/issues/1041
 - https://github.com/galaxyproject/galaxy/pull/1144
 
@@ -828,7 +828,7 @@ class: white
 ### Webhooks in Galaxy
 
 Webhooks is a system in Galaxy which can be used to write small JS and/or Python functions to change predefined locations in the Galaxy client.
-<br><br>
+&lt;br&gt;&lt;br&gt;
 In short: A plugin infrastructure for the Galaxy UI
 
 
@@ -847,7 +847,7 @@ At the header menu: Enabling the overlay search, link to communities ...
 ---
 
 ### Webhook tool/workflow example
-<br><br>
+&lt;br&gt;&lt;br&gt;
 ![](../../images/webhook_tool.png)
 
 Shown after tool or workflow execution. Comics, citations, support ...
@@ -887,7 +887,7 @@ template: left-aligned
 
 - Check for existing virtual environment, if it doesn't exist check for `virtualenv`.
 - If `virtualenv` exists, use it. Otherwise download it as a script and setup a virtual environment using it.
-- `. "$GALAXY_VIRTUAL_ENV/bin/activate"`
+- `. &quot;$GALAXY_VIRTUAL_ENV/bin/activate&quot;`
 - Upgrade to latest `pip` to allow use of binary wheels.
 - `pip install -r requirements.txt --index-url https://wheels.galaxyproject.org/simple`
 - Install dozens of dependencies.
@@ -1009,7 +1009,7 @@ INFO:galaxy.config:Logging at '10' level to 'stdout'
 galaxy.queue_worker INFO 2016-06-23 19:11:51,925 Initializing main Galaxy Queue Worker on sqlalchemy+sqlite:///./database/control.sqlite?isolation_level=IMMEDIATE
 tool_shed.tool_shed_registry DEBUG 2016-06-23 19:11:51,951 Loading references to tool sheds from ./config/tool_sheds_conf.xml.sample
 tool_shed.tool_shed_registry DEBUG 2016-06-23 19:11:51,951 Loaded reference to tool shed: Galaxy Main Tool Shed
-galaxy.app DEBUG 2016-06-23 19:11:51,956 Using "galaxy.ini" config file:
+galaxy.app DEBUG 2016-06-23 19:11:51,956 Using &quot;galaxy.ini&quot; config file:
 /home/john/workspace/galaxy-clean/config/galaxy.ini.sample
 ```]
 
@@ -1488,7 +1488,7 @@ This used to be an important detail - but uWSGI makes things a lot easier.
 ---
 
 
-### <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20"> Key points
+### &lt;i class=&quot;fa fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
 
 
 - Galaxy runs out of the box and fetches all needed dependencies.
@@ -1509,7 +1509,7 @@ This used to be an important detail - but uWSGI makes things a lot easier.
 This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors  (John Chilton, Björn Grüning) !
 
 
-<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;">
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
 
 
 

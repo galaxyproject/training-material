@@ -32,12 +32,12 @@ layout: true
 class: center, middle, inverse
 
 <div class="my-header"><span>
-<a href="/training-material/topics/admin" title="Return to topic page"><i class="fa fa-level-up" aria-hidden="true"></i></a>
+<a href="/training-material/topics/admin" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
 </span></div>
 
 <div class="my-footer"><span>
 
-<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;">
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
 
 </span></div>
 
@@ -54,7 +54,7 @@ class: center, middle, inverse
 
 
 
-### <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20"> Questions
+### &lt;i class=&quot;fa fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
 
 
 - Why Docker? What is it?
@@ -67,7 +67,7 @@ class: center, middle, inverse
 ---
 
 
-### <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20"> Objectives
+### &lt;i class=&quot;fa fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
 
 
 - Docker basics
@@ -101,7 +101,7 @@ variety of different tools and visualisations
 
 ---
 
-## Why Docker? <br>What is it?
+## Why Docker? &lt;br&gt;What is it?
 
 ![](../../images/docker_whale.png)
 
@@ -114,7 +114,7 @@ variety of different tools and visualisations
 - Different packaging
 - Conflict between tools or versions
 
-<i class="fa fa-long-arrow-right"></i> Impact on usability and reproducibility
+&lt;i class=&quot;fa fa-long-arrow-right&quot;&gt;&lt;/i&gt; Impact on usability and reproducibility
 
 ---
 
@@ -295,7 +295,7 @@ This message shows that your installation appears to be working correctly.
 
 To generate this message, Docker took the following steps:
  1. The Docker client contacted the Docker daemon.
- 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+ 2. The Docker daemon pulled the &quot;hello-world&quot; image from the Docker Hub.
  3. The Docker daemon created a new container from that image which runs the
     executable that produces the output you are currently reading.
  4. The Docker daemon streamed that output to the Docker client, which sent it
@@ -338,7 +338,7 @@ Status: Downloaded newer image for docker/whalesay:latest
                     ##        .
               ## ## ##       ==
            ## ## ## ##      ===
-       /""""""""""""""""___/ ===
+       /&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;___/ ===
   ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
        \______ o          __/
         \    \        __/
@@ -401,7 +401,7 @@ root@7de97f8dd5eb:/cowsay# cowsay Galaxy
                     ##        .
               ## ## ##       ==
            ## ## ## ##      ===
-       /""""""""""""""""___/ ===
+       /&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;___/ ===
   ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
        \______ o          __/
         \    \        __/
@@ -417,11 +417,11 @@ root@7de97f8dd5eb:/cowsay#
 $ docker run -i -t
     -p 8080:80 -p 8021:21 -p 9002:9002
     --privileged=true
-    -e "NONUSE=reports"
-    -e "GALAXY_CONFIG_ADMIN_USERS=albert@einstein.gov"
-    -e "GALAXY_CONFIG_MASTER_API_KEY=83D4jaba7330aDKHkakjGa937"
-    -e "GALAXY_CONFIG_BRAND='My own Galaxy flavour'"
-    -e "GALAXY_LOGGING=full"
+    -e &quot;NONUSE=reports&quot;
+    -e &quot;GALAXY_CONFIG_ADMIN_USERS=albert@einstein.gov&quot;
+    -e &quot;GALAXY_CONFIG_MASTER_API_KEY=83D4jaba7330aDKHkakjGa937&quot;
+    -e &quot;GALAXY_CONFIG_BRAND='My own Galaxy flavour'&quot;
+    -e &quot;GALAXY_LOGGING=full&quot;
 
     quay.io/bgruening/galaxy
 ```
@@ -447,7 +447,7 @@ $ more data/cowsay
                     ##        .
               ## ## ##       ==
            ## ## ## ##      ===
-       /""""""""""""""""___/ ===
+       /&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;___/ ===
   ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
        \______ o          __/
         \    \        __/
@@ -458,7 +458,7 @@ ChangeLog  INSTALL  LICENSE  MANIFEST  README  Wrap.pm.diff  cows  cowsay  cowsa
 root@f4fa8ed32ef8:/cowsay# cowsay Hello Galaxy &gt; cowsay2
 ```
 
-Can we access the `cowsay` file inside the container? <br>And the `cowsay2` file outside the container?
+Can we access the `cowsay` file inside the container? &lt;br&gt;And the `cowsay2` file outside the container?
 
 ---
 
@@ -529,7 +529,7 @@ cowsay_Galaxy   cowsay_Galaxy2
 
 ---
 
-### Execution of commands <br>inside a running container
+### Execution of commands &lt;br&gt;inside a running container
 
 ![](../../images/docker_concept_exec.png)
 
@@ -542,7 +542,7 @@ Run a command in a running container
 ### `docker exec`
 
 ```sh
-$ docker run -d docker/whalesay /bin/sh -c "while true; do sleep 1; done"
+$ docker run -d docker/whalesay /bin/sh -c &quot;while true; do sleep 1; done&quot;
 7179e85085ef14634f8b50f908a255707743dec0a5d1fd7fb3cd9036334d5177
 $ docker exec 7179e85085ef14634f8b50f908a255707743dec0a5d1fd7fb3cd9036334d5177 \
 cowsay Galaxy
@@ -555,7 +555,7 @@ cowsay Galaxy
                     ##        .
               ## ## ##       ==
            ## ## ## ##      ===
-       /""""""""""""""""___/ ===
+       /&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;___/ ===
   ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
        \______ o          __/
         \    \        __/
@@ -598,7 +598,7 @@ cowsay Galaxy
                     ##        .
               ## ## ##       ==
            ## ## ## ##      ===
-       /""""""""""""""""___/ ===
+       /&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;___/ ===
   ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
        \______ o          __/
         \    \        __/
@@ -618,27 +618,27 @@ cowsay Galaxy
 ```sh
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
-7179e85085ef        docker/whalesay     "/bin/sh -c 'while tr"   12 minutes ago      Up 2 seconds                            agitated_lovelace
+7179e85085ef        docker/whalesay     &quot;/bin/sh -c 'while tr&quot;   12 minutes ago      Up 2 seconds                            agitated_lovelace
 $
 $ docker ps -a
 CONTAINER ID        IMAGE                  COMMAND                  CREATED             STATUS                        PORTS               NAMES
-7de97f8dd5eb        docker/whalesay        "/bin/bash"              4 minutes ago       Exited (0) About a minute ago                       trusting_swanson
-9218bbee9c48        docker/whalesay        "/bin/bash"              5 minutes ago       Exited (0) 4 minutes ago                            evil_swirles
-7179e85085ef        docker/whalesay        "/bin/sh -c 'while tr"   13 minutes ago      Up 55 seconds                                       agitated_lovelace
-ad275579c454        ubuntu                 "/bin/sh -c 'while tr"   15 minutes ago      Exited (137) 13 minutes ago                         condescending_mestorf
-66179c4d16da        ubuntu                 "/bin/bash"              About an hour ago   Exited (130) 15 minutes ago                         determined_pasteur
-27386c8b69b3        ubuntu                 "/bin/sh"                About an hour ago   Exited (0) About an hour ago                        lonely_ramanujan
-4cfefa19e6fa        docker/whalesay        "/bin/bash"              About an hour ago   Exited (0) About an hour ago                        thirsty_chandrasekhar
-82687eb94ab9        docker/whalesay        "cowsay Galaxy"          2 hours ago         Exited (0) 2 hours ago                              fervent_babbage
-6dbabb9384ad        tmp-bioconda-builder   "/usr/local/bin/tini "   8 days ago          Exited (0) 7 days ago                               tender_bhaskara
-5d6f09b94727        tmp-bioconda-builder   "/usr/local/bin/tini "   8 days ago          Exited (0) 8 days ago                               jolly_brattain
-4e6f38b4c34c        tmp-bioconda-builder   "/usr/local/bin/tini "   8 days ago          Created                                             angry_colden
-b3e6c7412a75        tmp-bioconda-builder   "/usr/local/bin/tini "   8 days ago          Created                                             desperate_visvesvaraya
-1ec56c9e37f8        tmp-bioconda-builder   "/usr/local/bin/tini "   8 days ago          Created                                             hopeful_khorana
-2b129d00eb10        tmp-bioconda-builder   "/usr/local/bin/tini "   8 days ago          Created                                             gigantic_ptolemy
-da45ab698f58        fb77c13d04c0           "/usr/local/bin/tini "   13 days ago         Exited (0) 13 days ago                              jovial_yalow
-48dc3ed4e173        fb77c13d04c0           "/usr/local/bin/tini "   13 days ago         Created                                             focused_ritchie
-e9195b6512dd        a2107450fdf2           "/usr/local/bin/tini "   2 weeks ago         Created                                             thirsty_bardeen
+7de97f8dd5eb        docker/whalesay        &quot;/bin/bash&quot;              4 minutes ago       Exited (0) About a minute ago                       trusting_swanson
+9218bbee9c48        docker/whalesay        &quot;/bin/bash&quot;              5 minutes ago       Exited (0) 4 minutes ago                            evil_swirles
+7179e85085ef        docker/whalesay        &quot;/bin/sh -c 'while tr&quot;   13 minutes ago      Up 55 seconds                                       agitated_lovelace
+ad275579c454        ubuntu                 &quot;/bin/sh -c 'while tr&quot;   15 minutes ago      Exited (137) 13 minutes ago                         condescending_mestorf
+66179c4d16da        ubuntu                 &quot;/bin/bash&quot;              About an hour ago   Exited (130) 15 minutes ago                         determined_pasteur
+27386c8b69b3        ubuntu                 &quot;/bin/sh&quot;                About an hour ago   Exited (0) About an hour ago                        lonely_ramanujan
+4cfefa19e6fa        docker/whalesay        &quot;/bin/bash&quot;              About an hour ago   Exited (0) About an hour ago                        thirsty_chandrasekhar
+82687eb94ab9        docker/whalesay        &quot;cowsay Galaxy&quot;          2 hours ago         Exited (0) 2 hours ago                              fervent_babbage
+6dbabb9384ad        tmp-bioconda-builder   &quot;/usr/local/bin/tini &quot;   8 days ago          Exited (0) 7 days ago                               tender_bhaskara
+5d6f09b94727        tmp-bioconda-builder   &quot;/usr/local/bin/tini &quot;   8 days ago          Exited (0) 8 days ago                               jolly_brattain
+4e6f38b4c34c        tmp-bioconda-builder   &quot;/usr/local/bin/tini &quot;   8 days ago          Created                                             angry_colden
+b3e6c7412a75        tmp-bioconda-builder   &quot;/usr/local/bin/tini &quot;   8 days ago          Created                                             desperate_visvesvaraya
+1ec56c9e37f8        tmp-bioconda-builder   &quot;/usr/local/bin/tini &quot;   8 days ago          Created                                             hopeful_khorana
+2b129d00eb10        tmp-bioconda-builder   &quot;/usr/local/bin/tini &quot;   8 days ago          Created                                             gigantic_ptolemy
+da45ab698f58        fb77c13d04c0           &quot;/usr/local/bin/tini &quot;   13 days ago         Exited (0) 13 days ago                              jovial_yalow
+48dc3ed4e173        fb77c13d04c0           &quot;/usr/local/bin/tini &quot;   13 days ago         Created                                             focused_ritchie
+e9195b6512dd        a2107450fdf2           &quot;/usr/local/bin/tini &quot;   2 weeks ago         Created                                             thirsty_bardeen
 ```
 
 Note: Name of containers and id
@@ -667,7 +667,7 @@ Need a Dockerfile. I will describe it later. Here it is just to give you a broad
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands on! (1)
+### &lt;i class=&quot;fa fa-pencil&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;hands_on&lt;/span&gt; Hands on! (1)
 
 Play with `quay.io/biocontainers/samtools:1.3--1`:
 
@@ -681,7 +681,7 @@ Play with `quay.io/biocontainers/samtools:1.3--1`:
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands on! (2)
+### &lt;i class=&quot;fa fa-pencil&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;hands_on&lt;/span&gt; Hands on! (2)
 
 Play with `quay.io/biocontainers/samtools:1.3--1`:
 
@@ -763,7 +763,7 @@ https://bgruening.github.io/docker-galaxy-stable/
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands on!
+### &lt;i class=&quot;fa fa-pencil&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;hands_on&lt;/span&gt; Hands on!
 
 Launch a Galaxy Docker Container and try to
 
@@ -778,7 +778,7 @@ Launch a Galaxy Docker Container and try to
 
 ---
 
-### Galaxy + SLURM = <i class="fa fa-heart" aria-hidden="true"></i>
+### Galaxy + SLURM = &lt;i class=&quot;fa fa-heart&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
 
 https://github.com/bgruening/docker-galaxy-stable/tree/dev/docs/Running_jobs_outside_of_the_container.md
 
@@ -846,7 +846,7 @@ tools:
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands on!
+### &lt;i class=&quot;fa fa-pencil&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;hands_on&lt;/span&gt; Hands on!
 
 Create a Galaxy Flavour
 
@@ -862,7 +862,7 @@ https://github.com/galaxyFlavorsGenerators/galaxyFlavorGenerator
 ---
 
 
-### <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20"> Key points
+### &lt;i class=&quot;fa fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
 
 
 - Use Docker
@@ -881,7 +881,7 @@ https://github.com/galaxyFlavorsGenerators/galaxyFlavorGenerator
 This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors  (Bérénice Batut, Björn Grüning) !
 
 
-<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;">
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
 
 
 
