@@ -25,7 +25,7 @@ In this tutorial, we will perform a network analysis using [Heinz](https://githu
 
 > ### Agenda
 >
-> In this tutorial, we will:
+> In this tutorial, we will cover:
 >
 > 1. TOC
 > {:toc}
