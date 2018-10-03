@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: templates
-tutorial_name: tutorial1
+topic_name: sequence-analysis
+tutorial_name: nanopore
 
 title: "Nanopore sequence analysis"
 name: "tutorial1"
@@ -21,15 +21,13 @@ key_points:
   - "Take-home message 2"
   - "..."
 contributors:
-  - contributor1
-  - contributor2
+  - willemdek11
+  - shiltemann
 ---
 # Overview
 {:.no_toc}
 
-In this tutorial we will perform the
-[Standard Operating Procedure (SOP) for MiSeq data](https://www.mothur.org/wiki/MiSeq_SOP), developed by the
-creators of the Mothur software package, the [Schloss lab](http://www.schlosslab.org/), within Galaxy.
+In this tutorial we will perform an assembly of nanopore data and show some of the possible analysis tools. The assembly is performed with Minimap2, Miniasm and Racon. The analysis is done with Nanoplot, Bandage and PlasFlow.
 
 > ### Agenda
 >
@@ -42,9 +40,6 @@ creators of the Mothur software package, the [Schloss lab](http://www.schlosslab
 
 
 > ### {% icon comment %} Note
-> Each of the Mothur tools in Galaxy contains a link to the mothur wiki in the help section. Here you can find
-> more details about all the inputs, outputs and parameters for the tool.
-> <br><br>
 > Your results may deviate slightly from the ones presented in this tutorial due to differing tool or
 > reference data versions or stochastic processes in the algorithms.
 {: .comment}
@@ -52,10 +47,10 @@ creators of the Mothur software package, the [Schloss lab](http://www.schlosslab
 
 # Obtaining and preparing data
 
-In this tutorial we use 16S rRNA data, but similar pipelines can be used for WGS data.
+In this tutorial we use metagenomic nanopore data, but similar pipelines can be used for Illumina data.
 
-> ### {% icon tip %} Background: The 16S ribosomal RNA gene
-> ![The 16S ribosomal RNA gene](../../images/16S_gene.png) <br><br>
+> ### {% icon tip %} Background: Nanopore sequencing
+> ![How nanopore sequencing works](../../images/nanopore_seqeunce_analysis/seqeunce_method.jpg) <br><br>
 >
 > The 16S rRNA gene has several properties that make it ideally suited for our purposes
 >
