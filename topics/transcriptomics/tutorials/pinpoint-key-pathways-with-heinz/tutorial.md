@@ -21,6 +21,14 @@ contributors:
 # Overview
 {:.no_toc}
 
+The human microbiome plays a key role in health and disease. Thanks to comparative metatranscriptomics,
+the cellular functions that are deregulated by the microbiome in disease can now be computationally
+explored. Unlike gene-centric approaches, pathway-based methods provide a systemic view of such
+functions; however, they typically consider each pathway in isolation and in its entirety.
+They can therefore overlook the key differences that (i) span multiple pathways, (ii) contain
+bidirectionally deregulated components, (iii) are confined to a pathway region. To capture these
+properties, computational methods that reach beyond the scope of predefined pathways are needed.
+
 In this tutorial, we will perform a network analysis using [Heinz](https://github.com/ls-cwi/heinz) in Galaxy. The data comes from the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171), and we will reproduce some of the computational steps from this study with simplified data and parameters to speed up the analysis for the purposes of this tutorial.
 
 > ### Agenda
