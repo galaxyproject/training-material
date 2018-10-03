@@ -477,4 +477,4 @@ To share a history, click on the gear symbol in the history pane and select `Sha
 # Conclusion
 {:.no_toc}
 
-:tada: Well done! :clap: You have just performed your first analysis in Galaxy. You also created a workflow from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.
+{% icon trophy %} Well done! You have just performed your first analysis in Galaxy. You also created a workflow from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.

@@ -38,7 +38,6 @@ install: clean ## install dependencies
 	gem install bundler
 	gem install pkg-config -v "~> 1.1"
 	gem install nokogiri -v '1.8.2' -- --use-system-libraries --with-xml=$(CONDA_PREFIX)/lib
-	gem install jemoji
 	gem install jekyll
 	gem install jekyll-feed
 	gem install html-proofer

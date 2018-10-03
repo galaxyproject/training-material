@@ -364,7 +364,7 @@ function load_notebook(url){
 
 ### Hello World Example
 
-- The only thing missing now is the GIE (Docker :whale:) container itself
+- The only thing missing now is the GIE (Docker) container itself
 - Container typically consists of:
   - Dockerfile
   - Proxy configuration (e.g. nginx)
@@ -373,7 +373,6 @@ function load_notebook(url){
   - The actual application for the users (here: simple python process which serves
     directory contents of `/import` folder of container)
 
-.footnote[ :whale:]
 ---
 
 ```dockerfile
@@ -407,7 +406,6 @@ RUN mkdir /import
 [..]
 ```
 
-.footnote[ :whale:]
 ---
 
 (continued)
@@ -425,7 +423,6 @@ EXPOSE 80
 CMD /startup.sh
 ```
 
-.footnote[ :whale:]
 ---
 
 - Proxy configuration (nginx)
@@ -446,7 +443,6 @@ server {
 }
 ```
 
-.footnote[ :whale:]
 ---
 
 - Create the `startup.sh` file which starts our directory listing service
@@ -471,7 +467,6 @@ cd /import/ && python -mSimpleHTTPServer &
 nginx -g 'daemon off;'
 ```
 
-.footnote[ :whale:]
 ---
 
 - Lastly, the script to monitor traffic and shut down if user is no longer connected, `monitor_traffic.sh`
@@ -486,7 +481,7 @@ while true; do
     fi
 done
 ```
-.footnote[ :whale:]
+
 ---
 
 ### Hello World Example

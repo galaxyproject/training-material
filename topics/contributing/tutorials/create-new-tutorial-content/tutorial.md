@@ -355,9 +355,9 @@ We find that having users walk through the tutorial, doing all of the steps is i
 
 For consistency please use:
 
-- {% raw %}`{% icon hands_on %}`{% endraw %} emoji to define that is an hands-on
+- {% raw %}`{% icon hands_on %}`{% endraw %} icon to define that is an hands-on
 - Short imperative sentences to make it easy to identify the tasks
-- Name of the tool in bold followed by {% raw %}`{% icon tool %}`{% endraw %} emoji to make it easy to identify a Galaxy tool
+- Name of the tool in bold followed by {% raw %}`{% icon tool %}`{% endraw %} icon to make it easy to identify a Galaxy tool
 - Parameters for the tool as a sublist
 
 This will be rendered like:

@@ -544,7 +544,7 @@ Your history should now have two datasets: one describing entire genes, and one 
 
 ### Rerun the analysis, this time on exons.
 
-When you did the *History to Workflow* tutorial you created a new workflow that was then added to your list of defined workflows.  
+When you did the *History to Workflow* tutorial you created a new workflow that was then added to your list of defined workflows.
 
 > ### {% icon hands_on %} Run the workflow on the exon data.
 >
@@ -573,7 +573,7 @@ Probably.  Note that we can no longer say what percentage of *genes* overlap.  W
 # Conclusion
 {: .no_toc}
 
-:tada: Well done! :clap: You have just performed your first analysis in Galaxy.
+{% icon trophy %} Well done! You have just performed your first analysis in Galaxy.
 
 
 # What next?

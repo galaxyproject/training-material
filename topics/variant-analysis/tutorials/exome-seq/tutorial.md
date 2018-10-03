@@ -168,7 +168,7 @@ substitution events) smaller than the length of a short-read sequencing alignmen
 >
 {: .hands_on}
 
-:+1::tada: **Congratulations!** :tada::+1:
+{% icon trophy %} **Congratulations!**
 You have created you first VCF file, one of most complicated
 file formats in bioinformatics. In such a file your called variants are stored
 with one variant per line (+header lines).
