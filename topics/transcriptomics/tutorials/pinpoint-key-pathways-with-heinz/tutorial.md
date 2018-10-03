@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Pinpoint key pathways of dental caries using Heinz"
+title: "Metaproteomics: Pinpoint key pathways using Heinz"
 zenodo_link: "https://doi.org/10.5281/zenodo.1344105"
 questions:
     - "Which pathways are potentially contributing to dental caries?"
