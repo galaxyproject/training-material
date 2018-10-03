@@ -76,5 +76,3 @@ This workflow includes multiple computationally-intensive steps. With high serve
 Once all the datasets and tools have completed, then functional annotation within Apollo my begin.
 
 <!-- LINK ANNOTATION INFORMATIONAL UPON COMPLETION. -->
-
-Conclusion about the technical key points. And then relation between the techniques and the biological question to end with a global view.
