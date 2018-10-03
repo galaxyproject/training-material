@@ -222,9 +222,9 @@ The mzidentml output from the Peptide shaker is converted into an sqlite databas
 
 
  > ### {% icon hands_on %} Hands-on: mz to sqlite: 
-
-This tool extracts mzidentml and its associated proteomics datasets into a sqlite db
-
+>
+>This tool extracts mzidentml and its associated proteomics datasets into a sqlite db
+>
 >
 > 1. {% icon hands_on %} Run **mz to sqlite** with:
 >
@@ -232,11 +232,11 @@ This tool extracts mzidentml and its associated proteomics datasets into a sqlit
 >    - **Proteomics Spectrum files**: `Mo_Tai_MGFs`
 >    - **Proteomics Search Database Fasta**: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA`
 >
-Click **Execute**
+> Click **Execute**
 >
 >
-![mz2sqlite](../../images/mz2sqlite.png){:width="30%"}
-
+>![mz2sqlite](../../images/mz2sqlite.png){:width="20%"}
+>
 {: .hands_on}
 
 The next step is to remove known peptides from the list of PSM's that we acquired from the Peptide Shaker results. For that we need to perform some text manipulation steps to extract list of known peptides from the UniProt and cRAP database.
