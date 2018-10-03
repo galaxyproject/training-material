@@ -248,14 +248,14 @@ The file named "Trimmed_ref_500_Uniprot_cRAP.fasta" is the trimmed version of Un
 This Fasta file will be subjected to few text manipulation steps in order to get the tabular file for the known peptides. The first step is to convert this FASTA file to tabular in order to proceed with text manipulation.
 
  > ### {% icon hands_on %}  Hands-on: FASTA to Tabular
-
-Convert these sequences:
-
- Run **FASTA to Tabular** {% icon tool %} with the following parameters:
+>
+>Convert these sequences:
+>
+> Run **FASTA to Tabular** {% icon tool %} with the following parameters:
 > - **Data input 'input' (fasta)**: `Trimmed_ref_500_Uniprot_cRAP.fasta`
 > - **How many columns to divide title string into?**: `2`
 > - **How many title characters to keep?**: `0`
-
+>
 {: .hands_on}
 
 The resultant tabular file will go through a series of text manipulation steps.
