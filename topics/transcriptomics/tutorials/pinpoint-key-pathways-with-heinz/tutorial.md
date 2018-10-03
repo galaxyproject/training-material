@@ -136,22 +136,15 @@ After knowing what our input data are like, let's get them into Galaxy history:
 >
 >    > ### {% icon question %} Question
 >    >
->    > How many samples do you have in your disease collection (CP)? How many healthy samples (CN)?
+>    > 1. How many samples do you have in your disease collection (CP)? How many healthy samples (CN)?
+>    > 2. How many columns in each file? What are these columns?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > You should have 19 samples in the disease collection (CP), and 17 in the negative collection (CN).
+>    > > 1. You should have 19 samples in the disease collection (CP), and 17 in the negative collection (CN).
+>    > > 2. There are two columns, one is the KO IDs, the other is the count.
 >    > >
 >    > {: .solution}
->    >
->    > How many columns in each file? What are these columns?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > There are two columns, one is the KO IDs, the other is the count.
->    > >
->    > {: .solution}
->    >
 >    {: .question}
 >
 {: .hands_on}
