@@ -30,81 +30,96 @@ install-conda: ## install Miniconda
 .PHONY: install-conda
 
 create-env: ## create conda environment
-	${CONDA} env create -f environment.yml
+	if ${CONDA} env list | grep '^galaxy_training_material'; then \
+	    ${CONDA} env update -f environment.yml; \
+	else \
+	    ${CONDA} env create -f environment.yml; \
+	fi
 .PHONY: create-env	
 
+ACTIVATE_ENV=. $(dir ${CONDA})activate galaxy_training_material
+
 install: clean ## install dependencies
-	npm install decktape
-	gem install bundler
-	gem install pkg-config -v "~> 1.1"
-	gem install nokogiri -v '1.8.2' -- --use-system-libraries --with-xml=$(CONDA_PREFIX)/lib
-	gem install jekyll
-	gem install jekyll-feed
-	gem install html-proofer
-	gem install awesome_bot
+	( $(ACTIVATE_ENV) && \
+	  npm install decktape && \
+	  gem install awesome_bot bundler html-proofer jekyll jekyll-feed pkg-config:'~> 1.1' && \
+	  gem install nokogiri:'1.8.2' -- --use-system-libraries --with-xml=$(CONDA_PREFIX)/lib \
+	)
 .PHONY: install
 
 serve: ## run a local server}
-	${JEKYLL} serve --strict_front_matter -d _site/training-material
+	( $(ACTIVATE_ENV) && \
+	  ${JEKYLL} serve --strict_front_matter -d _site/training-material \
+	)
 .PHONY: serve
 
 detached-serve: clean ## run a local server in detached mode
-	${JEKYLL} serve --strict_front_matter --detach -d _site/training-material
+	( $(ACTIVATE_ENV) && \
+	  ${JEKYLL} serve --strict_front_matter --detach -d _site/training-material \
+	)
 .PHONY: detached-serve
 
 build: clean ## build files but do not run a server
-	${JEKYLL} build --strict_front_matter -d _site/training-material
+	( $(ACTIVATE_ENV) && \
+	  ${JEKYLL} build --strict_front_matter -d _site/training-material \
+	)
 .PHONY: build
 
 check-html: build ## validate HTML
-	htmlproofer \
-          --assume-extension \
-          --http-status-ignore 405,503,999 \
-          --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
-          --url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
-          --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
-          --allow-hash-href \
-        ./_site
+	( $(ACTIVATE_ENV) && \
+	  htmlproofer \
+	      --assume-extension \
+	      --http-status-ignore 405,503,999 \
+	      --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
+	      --url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
+	      --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
+	      --allow-hash-href \
+	      ./_site \
+	)
 .PHONY: check-html
 
 check-slides: build  ## check the markdown-formatted links in slides
-	find _site -path "**/slides*.html" \
-        | xargs -L 1 -I '{}' sh -c \
-        "awesome_bot \
-           --allow 405 \
-           --allow-redirect \
-           --white-list localhost,127.0.0.1,fqdn,vimeo.com,drmaa.com \
-           --allow-ssl \
-           --allow-dupe \
-           --skip-save-results \
-         -f {}"
+	( $(ACTIVATE_ENV) && \
+	  find _site -path "**/slides*.html" \
+	      | xargs -L 1 -I '{}' sh -c "awesome_bot \
+	          --allow 405 \
+	          --allow-redirect \
+	          --white-list localhost,127.0.0.1,fqdn,vimeo.com,drmaa.com \
+	          --allow-ssl \
+	          --allow-dupe \
+	          --skip-save-results \
+	          -f {}" \
+	)
 .PHONY: check-slides
 
 check-yaml: ## lint yaml files
-	find . -path "**/*.yaml" | xargs -L 1 -I '{}' sh -c "yamllint {}"
+	( $(ACTIVATE_ENV) && \
+	  find . -path "**/*.yaml" | xargs -L 1 -I '{}' sh -c "yamllint {}" \
+	)
 .PHONY: check-yaml
 
 check: check-yaml check-html check-slides  ## run all checks
 .PHONY: check
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
-	htmlproofer \
-          --assume-extension \
-          --http-status-ignore 405,503,999 \
-          --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
-          --file-ignore "/.*\/files\/.*/" \
-          --allow-hash-href \
-        .
-	find . -path "**/slides*.html" \
-        | xargs -L 1 -I '{}' sh -c \
-        "awesome_bot \
-           --allow 405 \
-           --allow-redirect \
-           --white-list localhost,127.0.0.1,fqdn,vimeo.com,drmaa.com \
-           --allow-ssl \
-           --allow-dupe \
-           --skip-save-results \
-       -f {}"
+	( $(ACTIVATE_ENV) && \
+	  htmlproofer \
+	      --assume-extension \
+	      --http-status-ignore 405,503,999 \
+	      --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
+	      --file-ignore "/.*\/files\/.*/" \
+	      --allow-hash-href \
+	      . && \
+	  find . -path "**/slides*.html" \
+	      | xargs -L 1 -I '{}' sh -c "awesome_bot \
+	          --allow 405 \
+	          --allow-redirect \
+	          --white-list localhost,127.0.0.1,fqdn,vimeo.com,drmaa.com \
+	          --allow-ssl \
+	          --allow-dupe \
+	          --skip-save-results \
+	          -f {}" \
+	)
 .PHONY: check-links-gh-pages
 
 pdf: detached-serve ## generate the PDF of the tutorials and slides

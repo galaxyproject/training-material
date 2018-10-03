@@ -43,21 +43,19 @@ This step has to be done once.
 > ### {% icon hands_on %} Hands-on: Install the requirements
 >
 > 1. Open a Terminal
-> 1. Navigate to the `training-material/` folder with `cd`
+> 2. Navigate to the `training-material/` folder with `cd`
 > 3. Set up the conda environment
->     
+>
 >     It will install some needed tools (ruby, nodejs, etc) in a protected environment, without interfering with the existing tools or versions.
 >
 >     1. Install conda (if not already installed): `make install-conda`
->     2. Add conda to the path: `export PATH="$HOME/miniconda3/bin:$PATH"`
->     3. Create conda environment: `make create-env`
-> 
-> 4. Activate the conda environment: `source activate galaxy_training_material`
-> 5. Install Jekyll and related modules using [RubyGems](https://rubygems.org/pages/download): `make install`
+>     2. Create the `galaxy_training_material` conda environment: `make create-env`
+>
+> 4. Install Jekyll and related modules into the conda environment: `make install`
 {: .hands_on}
 
 > ### {% icon tip %} Troubleshooting
-> If you encounter an error about libxml2 on linux, please try installing `libxml2-dev`, e.g. by the command `sudo apt-get install libxml2-dev`, and re-run `make install`
+> If you encounter an error about libxml2 on Linux, please try to install `libxml2-dev` (executing `sudo apt install libxml2-dev`) if on Debian/Ubuntu or `libxml2-devel` (executing `sudo yum install libxml2-devel`) if on Fedora/RedHat/CentOS, and re-run `make install` .
 {: .tip}
 
 
