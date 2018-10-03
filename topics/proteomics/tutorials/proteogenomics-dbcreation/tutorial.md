@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Proteogenomics: Database Creation"
+title: "Proteogenomics 1: Database Creation"
 zenodo_link: "https://doi.org/10.5281/zenodo.1302055"
 objectives:
   - "Generating a customized Protein sequence database with variants, indels, splice junctions and known sequences."

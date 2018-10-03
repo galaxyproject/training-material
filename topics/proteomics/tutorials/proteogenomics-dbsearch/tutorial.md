@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Proteogenomics: Database Search"
+title: "Proteogenomics 2: Database Search"
 zenodo_link: "https://doi.org/10.5281/zenodo.1302055"
 objectives:
   - "A proteogenomic data analysis of mass spectrometry data to identify and visualize variant peptides."
@@ -215,7 +215,7 @@ A number of new items will appear in your History, each corresponding to the out
 The mzidentml output from the Peptide shaker is converted into an sqlite database file by using the mz to sqlite tool. This sqlite output is used to open the Multi-omics visualization platform, wherein you can view the spectra of the peptides using Lorikeet parameters. To open the MVP viewer, click on the “Visualize in MVP Application” icon ( this will pop-open the interactive multi-omics viewer in a new window/tab)
 
 
-> ### {% icon hands_on %} Hands-on: mz to sqlite: 
+> ### {% icon hands_on %} Hands-on: mz to sqlite:
 
 This tool extracts mzidentml and its associated proteomics datasets into a sqlite db
 
@@ -382,10 +382,10 @@ Now that we have the list of known peptides, the query tabular tool is used to m
 >
 >    - **Save the sqlite database in your history**: `No`
 >
-> > ### {% icon tip %}Tip: 
->>    **Query Tabular** can also use an existing SQLite database. 
+> > ### {% icon tip %}Tip:
+>>    **Query Tabular** can also use an existing SQLite database.
 >>    Activating `Save the sqlite database in your history`
->>    will store the generated database in the history, allowing to reuse it directly. 
+>>    will store the generated database in the history, allowing to reuse it directly.
 > {: .tip}
 >
 >
@@ -401,7 +401,7 @@ Now that we have the list of known peptides, the query tabular tool is used to m
 >
 >    - **include query result column headers**: `Yes`
 >
-> Click **Execute** and inspect the query results file after it turned green. 
+> Click **Execute** and inspect the query results file after it turned green.
 >
 {: .hands_on}
 

@@ -1,14 +1,14 @@
 ---
 layout: tutorial_hands_on
 
-title: "Proteogenomics: Novel peptide analysis"
+title: "Proteogenomics 3: Novel peptide analysis"
 zenodo_link: "https://doi.org/10.5281/zenodo.1302055"
 objectives:
   - "How to assign and visualize the genomic localization of these identified novel proteoforms?"
 time_estimation: "30 mins"
 key_points:
   - "Learning how to visualize proteomic data and to perform its genomic allocation"
-  
+
 contributors:
   - subinamehta
   - timothygriffin
@@ -22,7 +22,7 @@ contributors:
 
 The third and the last workflow in the proteogenomics tutorial is to identifying the "**Novel peptides**" using BlastP and to localize the peptides to its genomic coordinates. Inputs from both workflow 1 and 2 will be used in this workflow.
 
-![Workflow](../../images/Third_workflow.png) 
+![Workflow](../../images/Third_workflow.png)
 
 > ### Agenda
 >
@@ -71,7 +71,7 @@ Once Blast-P search is performed, it provides a tabular output containing “**N
 >    - **Only load the columns you have named into database**: `Yes`
 >
 >    Section **Table Index**:
->   
+>
 >    - **Table Index**: `No`
 >    - **Index on Columns**: `id`
 >
@@ -156,7 +156,7 @@ The Multiomics Visualization Platform is a galaxy visualization plugin that allo
 > ### {% icon hands_on %} Hands-on: Guide to MVP
 > The spectra belonging to these "Novel peptides" can be viewed using MVP,this can be achieved by selecting the output from the mz to sqlite tool.
 > Here is a step by step guide to obtain the proteogenomic view of the "Novel peptides".
-> 
+>
 >
 > 1) Click on the “Visualize in MVP application”, it will open up a new window for MVP.
 >
