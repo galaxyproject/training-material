@@ -14,6 +14,18 @@
     <title>{{ title | strip_html }}</title>
     <link rel="stylesheet" href="{{ "/assets/css/slides.css" | prepend: site.baseurl }}">
     <link rel="stylesheet" href="{{ "/assets/css/font-awesome.css" | prepend: site.baseurl }}" id="theme">
+    <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon" />
+
+    {% assign topic = site.data[page.topic_name] %}
+    {% assign og_title = topic.title %}
+    {% if page.title %}
+        {% assign og_title = page.title %}
+    {% endif %}
+    {% assign og_desc = topic.summary %}
+    <meta name="description" content="{{ og_desc | strip_html | truncate: 60}}" />
+    <meta property="og:title" content="Galaxy Training: {{ og_title | truncate: 60}}" />
+    <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}" />
+    <meta property="og:image" content="{{ "/assets/images/GTNLogo1000.png" | prepend: site.baseurl }}" />
   </head>
   <body>
     <textarea id="source">
@@ -46,7 +58,7 @@ class: center, middle, inverse
 
   {% for requirement in topic.requirements %}
     {% if requirement.type == "internal" %}
-  - [{{ requirement.title }}]({{ site.baseurl }}{{ requirement.link }})
+  - [{{ requirement.title }}]({{ site.baseurl }}/topics{{ requirement.link }})
     {% elsif requirement.type == "external" %}
   - [{{ requirement.title }}]({{ requirement.link }})
     {% endif %}

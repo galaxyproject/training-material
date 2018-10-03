@@ -22,6 +22,7 @@ contributors:
     - pavanvidem
     - blankclemens
     - mblue9
+    - nsoranzo
 ---
 
 # Introduction
@@ -104,9 +105,9 @@ The reads are raw data from the sequencing machine without any pretreatments. Th
 
 ## Quality control
 
-During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis abd can lead to a misinterpretation of the data.
+During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data.
 
-Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in ["Quality control" tutorial]({{site.baseurl}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html).
+Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the ["Quality control" training]({{site.baseurl}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html).
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
@@ -226,23 +227,12 @@ This process is known as aligning or 'mapping' the reads to a reference. This is
 
 > ### {% icon comment %} Comment
 >
-> Do you want to learn more about the principles behind mapping? Follow our [training]({{site.baseurl}}/topics/sequence-analysis/)
+> Do you want to learn more about the principles behind mapping? Follow our [training]({{site.baseurl}}/topics/sequence-analysis/).
 {: .comment}
 
-As the genome of *Drosophila melanogaster* is known and assembled, we can use this information and map the sequences to this genome, to identify which genes are affected by  the *Pasilla* gene depletion.
+As a reference genome for *Drosophila melanogaster* is available, we can map the sequences to this genome in order to identify which genes are affected by  the *Pasilla* gene depletion.
 
-> ### {% icon question %} Questions
->
-> 1. What is a reference genome?
-> 2. For model organisms, several possible reference genomes are available (e.g. hg19 and hg38 for human). What do they correspond to?
-> 2. Which reference genome should we use?
->
-> > ### {% icon solution %} Solution
-> > 1. A reference genome (or reference assembly) is a DNA sequence assembled as a representative example of a species' DNA sequence. As they are often assembled from the sequencing of the DNA from different donors, they do not accurately represent the set of genes of any single person but a mosaic of different DNA sequences from each donor.
-> > 2. As the cost of DNA sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are builts and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different versions released (named build)
-> > 3. The genome of *Drosophila melanogaster* is known and assembled and it can be used as the reference genome in this analysis. Note that new versions of reference genomes may be released if the assembly improves, and the latest version of the *Drosophila melanogaster* reference genome assembly is Release 6 [(dm6)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4383921/).
-> {: .solution }
-{: .question}
+{% include topics/sequence-analysis/tutorials/mapping/ref_genome_explanation.md answer_3="The genome of *Drosophila melanogaster* is known and assembled and it can be used as the reference genome in this analysis. Note that new versions of reference genomes may be released if the assembly improves, for this tutorial we are going to use the Release 6 of the *Drosophila melanogaster* reference genome assembly [(dm6)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4383921/)."%}
 
 With eukaryotic transcriptomes most reads originate from processed mRNAs lacking introns, therefore they cannot be simply mapped back to the genome as we normally do for DNA data. Instead the reads must be separated into two categories:
 
@@ -290,13 +280,13 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using STAR.
 > ### {% icon hands_on %} Hands-on: Spliced mapping
 >
 > 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDGP6.87.gtf`) from the Shared Data library if available or from [Zenodo](https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.gtf) into your current Galaxy history
->    
+>
 >    ```
 >    https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.gtf
 >    ```
 >
 >    1. Rename the dataset if necessary
->    2. Verify that the datatype is `gtf` and not `gff` and that the datatype is `dm6`
+>    2. Verify that the datatype is `gtf` and not `gff`, and that the database is `dm6`
 >
 > 2. **RNA STAR** {% icon tool %} with the following parameters to map your reads on the reference genome:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as individual datasets)`
@@ -427,11 +417,11 @@ After the mapping, we have the information on where the reads are located on the
 
 > ### {% icon comment %} Comment
 >
-> The quantification depends on both the reference genome (the fasta file) and its associated annotations (the GTF file). It is extremely important to use an annotation file that corresponds to the same version of the reference genome you used for the mapping (e.g. `dm6` here), as the chromosomal coordinates of genes are usually different amongst different reference genome versions.
+> The quantification depends on both the reference genome (the FASTA file) and its associated annotations (the GTF file). It is extremely important to use an annotation file that corresponds to the same version of the reference genome you used for the mapping (e.g. `dm6` here), as the chromosomal coordinates of genes are usually different amongst different reference genome versions.
 {: .comment}
 
 To identify exons that are regulated by the *Pasilla* gene, we need to identify genes and exons which are differentially expressed between samples with PS gene depletion (treated) and control (untreated) samples.
-In this tutorial, we will then analyze the differential gene expression and also the differential exon usage.
+We will then analyze the differential gene expression and also the differential exon usage.
 
 # Analysis of the differential gene expression
 
@@ -476,7 +466,7 @@ RNAs that are typically targeted in RNA-seq experiments are single stranded (*e.
 
 ![Relationship between DNA and RNA orientation](../../images/dna_rna.png "Relationship between DNA and RNA orientation")
 
-During a typical RNA-seq experiment the information about strandedness is lost after both strands of cDNA are synthesized, size selected, and converted into sequencing library. However, this information can be quite useful for the read counting.
+During a typical RNA-seq experiment the information about strandedness is lost after both strands of cDNA are synthesized, size selected, and converted into a sequencing library. However, this information can be quite useful for the read counting.
 
 Some library preparation protocols create so called *stranded* RNA-seq libraries that preserve the strand information (an excellent overview in [Levin et al, Nat Meth, 2010](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3005310/)). The implication of stranded RNA-seq is that you can distinguish whether the reads are derived from forward or reverse-encoded transcripts:
 
@@ -499,7 +489,7 @@ Another option is to estimate these parameters with a tool called **Infer Experi
 > 
 > 1. **Convert GTF to BED12** {% icon tool %} to convert the GTF file to BED:
 >    - {% icon param-file %} *"GTF File to convert"*: `Drosophila_melanogaster.BDGP6.87.gtf`
->   
+>
 > 2. **Infer Experiment** {% icon tool %} to determine the library strandness with:
 >    - {% icon param-files %} *"Input .bam file"*: `mapped.bam` files (outputs of **RNA STAR** {% icon tool %})
 >    - {% icon param-file %} *"Reference gene model"*: BED12 file (output **Convert GTF to BED12** {% icon tool %})
@@ -591,7 +581,7 @@ We now run **featureCounts** to count the number of reads per annotated gene.
 >    > > 1. Around 70% of the reads have been assigned to genes: this quantity is good enough. 
 >    > >
 >    > >    ![featureCounts assignment](../../images/ref-based/featureCounts_assignment_plot.png "Assignments with featureCounts")
->    > >    
+>    > >
 >    > >    Some reads are not assigned because multi-mapped and other assigned to no features or ambiguous ones.
 >    > > 
 >    > > 2. If the percentage is below 50%, you should investigate where your reads are mapping (inside genes or not, with IGV) and check that the annotation corresponds to the correct reference genome version.
@@ -713,10 +703,10 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 >           - In *"Factor level"*:
 >               - In *"1: Factor level"*:
 >                   - *"Specify a factor level"*: `treated`
->                   - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `treated` in their name
+>                   - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `treat` in their name
 >               - In *"2: Factor level"*:
 >                   - *"Specify a factor level"*: `untreated`
->                   - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `untreated` in their name
+>                   - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `untreat` in their name
 >       - Click on *"Insert Factor"* (not on "Insert Factor level")
 >       - In "2: Factor"
 >           - "Specify a factor name" to `Sequencing`
@@ -796,9 +786,9 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 
 ## Visualization of the differentially expressed genes
 
-We would like now to extract the most differentially expressed because of the treatment. and then visualize them using an heatmap of the normalized counts and also the z-score for each sample.
+Now we would like to extract the most differentially expressed genes due to the treatment, and then visualize them using an heatmap of the normalized counts and also the z-score for each sample.
 
-We proceed in several steps
+We proceed in several steps:
 - Extract the most differentially expressed genes using the DESeq2 summary file
 - Extract the normalized counts for these genes for each sample, using the normalized count file generated by DESeq2
 - Plot the heatmap of the normalized counts
@@ -807,7 +797,7 @@ We proceed in several steps
 
 > ### {% icon hands_on %} Hands-on: Extract the most differentially expressed genes
 >
-> 1. **Filter** {% icon tool %} to extract genes with a significant change in gene expression (adjusted *p*-value below 0.05) between treated and untreated samples
+> 1. **Filter** (data on any column using simple expressions) {% icon tool %} to extract genes with a significant change in gene expression (adjusted *p*-value below 0.05) between treated and untreated samples
 >    - {% icon param-file %} *"Filter"*: the `DESeq2 result file`
 >    - *"With following condition"*: `c7<0.05`
 >
@@ -839,7 +829,7 @@ We proceed in several steps
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 11.92% (130) of the differentially expressed genes
+>    > > 130, the 11.92% of the significantly differentially expressed genes.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -852,7 +842,7 @@ We could plot the $$log_{2} FC$$ for the different genes, but here we would like
 
 We will join the normalized count table generated by DESeq with the table we just generated, to conserve only the lines corresponding to the most differentially expressed genes.
 
-> ### {% icon hands_on %} Hands-on: Extract the normalized counts of the 20 most differentially expressed genes
+> ### {% icon hands_on %} Hands-on: Extract the normalized counts of the most differentially expressed genes
 >
 > 1. **Join two Datasets** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Join"*: the `Normalized counts` file (output of **DESeq2** {% icon tool %})
@@ -871,7 +861,7 @@ We will join the normalized count table generated by DESeq with the table we jus
 >
 {: .hands_on}
 
-We now have a table with 20 lines (the most differentially expressed genes) and the normalized counts for these genes in the 7 samples.
+We now have a table with 130 lines (the most differentially expressed genes) and the normalized counts for these genes in the 7 samples.
 
 > ### {% icon hands_on %} Hands-on: Plot the heatmap of the normalized counts of these genes for the samples
 >
@@ -891,8 +881,8 @@ You should obtain something similar to:
 > ### {% icon question %} Questions
 >
 > 1. Do you observe anything in the clustering of the samples and the genes?
-> 2. What changes if we regenerate the heatmap and select `Plot the data as it is` in *"Advanced - log transformation"*?
-> 3. Can you generate a heatmap of normalized counts for all up-regulated genes with absolute fold change > 2?
+> 2. What changes if you regenerate the heatmap and select `Plot the data as it is` in *"Advanced - log transformation"*?
+> 3. How could you generate a heatmap of normalized counts for all up-regulated genes with absolute fold change > 2?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -908,7 +898,7 @@ We have extracted genes that are differentially expressed in treated (PS gene-de
 
 [Gene Ontology (GO)](http://www.geneontology.org/) analysis is widely used to reduce complexity and highlight biological processes in genome-wide expression studies. However, standard methods give biased results on RNA-seq data due to over-detection of differential expression for long and highly-expressed transcripts.
 
-[goseq tool](https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf) provides methods for performing GO analysis of RNA-seq data, taking length bias into account. The methods and software used by goseq are equally applicable to other category based tests of RNA-seq data, such as KEGG pathway analysis.
+The [goseq](https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf) tool provides methods for performing GO analysis of RNA-seq data, taking length bias into account. The methods and software used by goseq are equally applicable to other category based tests of RNA-seq data, such as KEGG pathway analysis.
 
 goseq needs 2 files as inputs:
 - A tabular file with the differentially expressed genes from all genes assayed in the RNA-seq experiment with 2 columns:

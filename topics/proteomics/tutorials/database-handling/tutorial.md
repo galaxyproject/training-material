@@ -25,7 +25,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-In mass spectrometry based proteomics experiments, peptides are assigned to experimentally acquired tandem mass spectra (MS2) by a method called as peptide-spectral matching. Peptide spectral matching is commonly achieved by using search algorithms to match the MS2 spectra to theoretical spectra. The theoretical spectra are generated from theoritical digestion of proteins in the FASTA database. Ideally, the protein FASTA databases will contain all proteins of the organism under investigation.
+In mass spectrometry based proteomics experiments, peptides are assigned to experimentally acquired tandem mass spectra (MS2) by a method called peptide-spectral matching. Peptide spectral matching is commonly achieved by using search algorithms to match the acquired MS2 spectra to theoretical spectra. The theoretical spectra are generated from an in silico digestion and fragmentation of proteins in the FASTA database. Ideally, the protein FASTA databases will contain all proteins of the organism under investigation.
 
 > ### Agenda
 >
@@ -73,8 +73,8 @@ In this tutorial, we will explore **Protein Database Downloader** {% icon tool %
 
 # Contaminant databases
 
-In proteomic samples, some protein contaminants are commonly present. These protein contamianants are introduced into sample during sample preparation. The source of these contamiants could be an experimenter or contaminated cell culture. In order to avoid misidentification of spectra derived from contaminants, protein sequences of common laboratory contaminants are added to the database. This has two benefits:
-1. Contamination can be observed, heavily contaminated samples can be excluded from analysis.
+In proteomic samples, some protein contaminants are commonly present. These protein contaminants are introduced into the sample during sample preparation, either from contaminated samples (e.g. mycoplasma in cell culture), chemicals or the experimenter in person. In order to avoid misidentification of spectra derived from contaminants, protein sequences of common laboratory contaminants are added to the database. This has two benefits:
+1. The degree of contamination can be observed, heavily contaminated samples can be excluded from analysis.
 2. Contaminant peptides cannot be misassigned to similar peptides in the database reducing the risk of identifying false positives.
 
 A widely used database for common contaminants is the **c**ommon **R**epository of **A**dventitious **P**roteins (cRAP). When using samples generated in cell cultures, it is furthermore recommended to include _Mycoplasma_ proteomes in the search database. _Mycoplasma_ infections are very common in cell culture and often go unnoticed ([Drexler and Uphoff, Cytotechnology, 2002](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3463982/)).
@@ -109,7 +109,7 @@ A widely used database for common contaminants is the **c**ommon **R**epository 
 >
 > 1. Use **Protein Database Downloader** {% icon tool %} to download the six mycoplasma databases. We will merge them to the main database in the next part of the tutorial.
 > 2. Run **FASTA Merge Files and Filter Unique Sequences** {% icon tool %} to combine all mycoplasma databases into a single one.
-> 3. Tag each entry in the combined database with the string "MYCOPLASMA_CONTAMINANT" by using **FASTA-to-Tabular** {% icon tool %}, **Add column** :wrench: and **Tabular-to-FASTA** :wrench:, as explained [above](#contaminant-databases).
+> 3. Tag each entry in the combined database with the string "MYCOPLASMA_CONTAMINANT" by using **FASTA-to-Tabular** {% icon tool %}, **Add column** {% icon tool %} and **Tabular-to-FASTA** {% icon tool %}, as explained [above](#contaminant-databases).
 > 4. Rename the **Tabular-to-FASTA** {% icon tool %} output to "Tagged Mycoplasma database".
 >
 >  > ### {% icon comment %} Comment
@@ -125,6 +125,7 @@ Depending on the search algorithm in use,  you might need to merge all FASTA ent
 > ### {% icon hands_on %} Hands-on: Merging databases
 >
 > 1. Run **FASTA Merge Files and Filter Unique Sequences** {% icon tool %} on the main database and the tagged cRAP database.
+    - Set `How are sequences judged to be unique?` to 'Accession Only'.
 >
 > 2. **Optional**: Merging mycoplasma databases
 >
@@ -138,7 +139,6 @@ The most common method of peptide and protein False Discovery Rate (FDR) calcula
 
 > ### {% icon hands_on %} Hands-on: Creating a Decoy Database
 > 1. Run **DecoyDatabase**  {% icon tool %} on the merged database.
-> 2. Set the flag (-append) to `Yes` and execute.
 >
 >  > ### {% icon tip %} Tip: Decoy tags
 >  > The string you enter as a decoy tag will be added as a prefix or suffix (your choice) to the description of each decoy protein entry. Thus you can see from which entry in the target database the decoy was computed.
@@ -153,7 +153,7 @@ The most common method of peptide and protein False Discovery Rate (FDR) calcula
 # Concluding remarks
 {:.no_toc}
 
-In order to keep your proteins databases up-to-date, it is recommended to create a workflow out of the hands-on sections (to learn about workflows see [this tutorial]({{site.baseurl}}/topics/introduction/tutorials/galaxy-intro-101/tutorial.html)). You might also want to combine the mycoplasma databases to a single file, which you then easily can add to each of your main databases.
+In order to keep your protein databases up-to-date, it is recommended to create a workflow out of the hands-on sections (to learn about workflows see [this tutorial]({{site.baseurl}}/topics/introduction/tutorials/galaxy-intro-101/tutorial.html)). You might also want to combine the mycoplasma databases to a single file, which you then easily can add to each of your main databases.
 
 Often you may not want to use the most recent database for reasons of reproducibility. If so, you can transfer the final database of this tutorial into other histories to work with it.
 
