@@ -5,7 +5,7 @@ tutorial_name: nanopore
 
 title: "Nanopore sequence analysis"
 name: "tutorial1"
-zenodo_link: ""
+zenodo_link: "https://doi.org/10.5281/zenodo.1443246"
 questions:
   - "How do I assemble a genome with Nanopore data?"
   - "How do I get more information about the antimicrobial resistance genes?"
