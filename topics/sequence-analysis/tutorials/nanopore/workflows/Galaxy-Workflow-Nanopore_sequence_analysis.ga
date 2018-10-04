@@ -1,0 +1,554 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "Nanopore_sequence_analysis", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "RB01.fasta"
+                }
+            ], 
+            "label": "RB01.fasta", 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 10, 
+                "top": 10
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"RB01.fasta\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "91c19fb4-063d-4a4f-a5ac-d9f5aba0c9ce", 
+            "workflow_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.12", 
+            "errors": null, 
+            "id": 1, 
+            "input_connections": {
+                "fastq_input|fastq_input1": {
+                    "id": 0, 
+                    "output_name": "output"
+                }, 
+                "reference_source|ref_file": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Map with minimap2", 
+            "outputs": [
+                {
+                    "name": "alignment_output", 
+                    "type": "bam"
+                }
+            ], 
+            "position": {
+                "left": 230, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.12", 
+            "tool_shed_repository": {
+                "changeset_revision": "17e61517c166", 
+                "name": "minimap2", 
+                "owner": "iuc", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"alignment_options\": \"{\\\"A\\\": \\\"\\\", \\\"B\\\": \\\"\\\", \\\"E\\\": \\\"\\\", \\\"-O2\\\": \\\"\\\", \\\"O\\\": \\\"\\\", \\\"s\\\": \\\"\\\", \\\"u\\\": null, \\\"z\\\": \\\"\\\", \\\"E2\\\": \\\"\\\"}\", \"analysis_type_selector\": \"\\\"ava-ont\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"io_options\": \"{\\\"eqx\\\": \\\"false\\\", \\\"output_format\\\": \\\"paf\\\", \\\"L\\\": \\\"false\\\", \\\"Q\\\": \\\"false\\\", \\\"Y\\\": \\\"false\\\", \\\"cs\\\": null, \\\"K\\\": \\\"\\\"}\", \"mapping_options\": \"{\\\"g\\\": \\\"\\\", \\\"G\\\": \\\"\\\", \\\"F\\\": \\\"\\\", \\\"min_occ_floor\\\": \\\"\\\", \\\"f\\\": \\\"\\\", \\\"m\\\": \\\"\\\", \\\"n\\\": \\\"\\\", \\\"p\\\": \\\"\\\", \\\"r\\\": \\\"\\\", \\\"X\\\": \\\"false\\\", \\\"N\\\": \\\"\\\"}\", \"fastq_input\": \"{\\\"__current_case__\\\": 1, \\\"fastq_input_selector\\\": \\\"single\\\", \\\"fastq_input1\\\": null}\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"__current_case__\\\": 1}\", \"indexing_options\": \"{\\\"I\\\": \\\"\\\", \\\"H\\\": \\\"false\\\", \\\"k\\\": \\\"\\\", \\\"w\\\": \\\"\\\"}\", \"chromInfo\": \"\\\"/home/willlem/NanoGalaxy/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "2.12", 
+            "type": "tool", 
+            "uuid": "d9154bc9-fcfe-4028-adf7-21d9c4ee45df", 
+            "workflow_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.13.0", 
+            "errors": null, 
+            "id": 2, 
+            "input_connections": {
+                "reads|files": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "NanoPlot", 
+            "outputs": [
+                {
+                    "name": "output_html", 
+                    "type": "html"
+                }, 
+                {
+                    "name": "nanostats", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "nanostats_post_filtering", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "read_length", 
+                    "type": "png"
+                }, 
+                {
+                    "name": "log_read_length", 
+                    "type": "png"
+                }
+            ], 
+            "position": {
+                "left": 230, 
+                "top": 130
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.13.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "db1eeffba23e", 
+                "name": "nanoplot", 
+                "owner": "iuc", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"filter\": \"{\\\"downsample\\\": \\\"\\\", \\\"minlength\\\": \\\"\\\", \\\"loglength\\\": \\\"false\\\", \\\"readtype\\\": null, \\\"percentqual\\\": \\\"false\\\", \\\"barcoded\\\": \\\"false\\\", \\\"drop_outliers\\\": \\\"false\\\", \\\"minqual\\\": \\\"\\\", \\\"maxlength\\\": \\\"\\\", \\\"alength\\\": \\\"false\\\"}\", \"reads\": \"{\\\"files\\\": null, \\\"type\\\": \\\"fasta\\\", \\\"__current_case__\\\": 1}\", \"customization\": \"{\\\"color\\\": null, \\\"plots\\\": null, \\\"noN50\\\": \\\"false\\\", \\\"N50\\\": \\\"false\\\", \\\"format\\\": \\\"png\\\"}\", \"chromInfo\": \"\\\"/home/willlem/NanoGalaxy/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.13.0", 
+            "type": "tool", 
+            "uuid": "61c41655-2c5b-4ddc-9e2f-98fc3816f1db", 
+            "workflow_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/erasmus-medical-center/miniasm/miniasm/0.2.0", 
+            "errors": null, 
+            "id": 3, 
+            "input_connections": {
+                "paf": {
+                    "id": 1, 
+                    "output_name": "alignment_output"
+                }, 
+                "readFile": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "miniasm", 
+            "outputs": [
+                {
+                    "name": "gfa", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 450, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/erasmus-medical-center/miniasm/miniasm/0.2.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "f0a2f5a9b637", 
+                "name": "miniasm", 
+                "owner": "erasmus-medical-center", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"graph\": \"{\\\"maxGapDiff\\\": \\\"1000\\\", \\\"finalDropRatio\\\": \\\"0.8\\\", \\\"maxBubDist\\\": \\\"50000\\\", \\\"nRounds\\\": \\\"3\\\", \\\"minUtgSize\\\": \\\"4\\\"}\", \"__rerun_remap_job_id__\": null, \"overlapping\": \"{\\\"intThres\\\": \\\"0.08\\\", \\\"minOvlp\\\": \\\"1000\\\", \\\"maxHang\\\": \\\"1000\\\"}\", \"readFile\": \"null\", \"paf\": \"null\", \"preselection\": \"{\\\"minSpan\\\": \\\"1000\\\", \\\"minIden\\\": \\\"0.05\\\", \\\"minCov\\\": \\\"3\\\", \\\"minMatch\\\": \\\"100\\\"}\", \"chromInfo\": \"\\\"/home/willlem/NanoGalaxy/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "0.2.0", 
+            "type": "tool", 
+            "uuid": "a7a59c7f-0e4b-4923-9724-b82408d8fd74", 
+            "workflow_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/erasmus-medical-center/gfa_to_fa/gfa_to_fa/0.1.0", 
+            "errors": null, 
+            "id": 4, 
+            "input_connections": {
+                "in_gfa": {
+                    "id": 3, 
+                    "output_name": "gfa"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "GFA to Fasta", 
+            "outputs": [
+                {
+                    "name": "out_fa", 
+                    "type": "fasta"
+                }
+            ], 
+            "position": {
+                "left": 670, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/erasmus-medical-center/gfa_to_fa/gfa_to_fa/0.1.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "a54fa2c9503f", 
+                "name": "gfa_to_fa", 
+                "owner": "erasmus-medical-center", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/home/willlem/NanoGalaxy/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"in_gfa\": \"null\"}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "9941805e-24a6-433a-9ed8-8123bf6c3228", 
+            "workflow_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy0", 
+            "errors": null, 
+            "id": 5, 
+            "input_connections": {
+                "input_file": {
+                    "id": 3, 
+                    "output_name": "gfa"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Bandage Image", 
+            "outputs": [
+                {
+                    "name": "outfile", 
+                    "type": "jpg"
+                }
+            ], 
+            "position": {
+                "left": 670, 
+                "top": 130
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy0", 
+            "tool_shed_repository": {
+                "changeset_revision": "067592b6b312", 
+                "name": "bandage", 
+                "owner": "iuc", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"input_file\": \"null\", \"output_format\": \"\\\"jpg\\\"\", \"height\": \"\\\"1000\\\"\", \"width\": \"\\\"1000\\\"\", \"chromInfo\": \"\\\"/home/willlem/NanoGalaxy/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null}", 
+            "tool_version": "0.8.1+galaxy0", 
+            "type": "tool", 
+            "uuid": "3ad7ea48-2b02-4315-ad11-2c9e6a229d85", 
+            "workflow_outputs": []
+        }, 
+        "6": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.12", 
+            "errors": null, 
+            "id": 6, 
+            "input_connections": {
+                "fastq_input|fastq_input1": {
+                    "id": 0, 
+                    "output_name": "output"
+                }, 
+                "reference_source|ref_file": {
+                    "id": 4, 
+                    "output_name": "out_fa"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Map with minimap2", 
+            "outputs": [
+                {
+                    "name": "alignment_output", 
+                    "type": "bam"
+                }
+            ], 
+            "position": {
+                "left": 890, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.12", 
+            "tool_shed_repository": {
+                "changeset_revision": "17e61517c166", 
+                "name": "minimap2", 
+                "owner": "iuc", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"alignment_options\": \"{\\\"A\\\": \\\"\\\", \\\"B\\\": \\\"\\\", \\\"E\\\": \\\"\\\", \\\"-O2\\\": \\\"\\\", \\\"O\\\": \\\"\\\", \\\"s\\\": \\\"\\\", \\\"u\\\": null, \\\"z\\\": \\\"\\\", \\\"E2\\\": \\\"\\\"}\", \"analysis_type_selector\": \"\\\"map-pb\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"io_options\": \"{\\\"eqx\\\": \\\"false\\\", \\\"output_format\\\": \\\"paf\\\", \\\"L\\\": \\\"false\\\", \\\"Q\\\": \\\"false\\\", \\\"Y\\\": \\\"false\\\", \\\"cs\\\": null, \\\"K\\\": \\\"\\\"}\", \"mapping_options\": \"{\\\"g\\\": \\\"\\\", \\\"G\\\": \\\"\\\", \\\"F\\\": \\\"\\\", \\\"min_occ_floor\\\": \\\"\\\", \\\"f\\\": \\\"\\\", \\\"m\\\": \\\"\\\", \\\"n\\\": \\\"\\\", \\\"p\\\": \\\"\\\", \\\"r\\\": \\\"\\\", \\\"X\\\": \\\"false\\\", \\\"N\\\": \\\"\\\"}\", \"fastq_input\": \"{\\\"__current_case__\\\": 1, \\\"fastq_input_selector\\\": \\\"single\\\", \\\"fastq_input1\\\": null}\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"__current_case__\\\": 1}\", \"indexing_options\": \"{\\\"I\\\": \\\"\\\", \\\"H\\\": \\\"false\\\", \\\"k\\\": \\\"\\\", \\\"w\\\": \\\"\\\"}\", \"chromInfo\": \"\\\"/home/willlem/NanoGalaxy/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "2.12", 
+            "type": "tool", 
+            "uuid": "0a4a7421-a078-434b-b781-7341dd619216", 
+            "workflow_outputs": []
+        }, 
+        "7": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.3.1.1", 
+            "errors": null, 
+            "id": 7, 
+            "input_connections": {
+                "corrected_reads": {
+                    "id": 4, 
+                    "output_name": "out_fa"
+                }, 
+                "overlaps": {
+                    "id": 6, 
+                    "output_name": "alignment_output"
+                }, 
+                "reads": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Racon", 
+            "outputs": [
+                {
+                    "name": "consensus", 
+                    "type": "fasta"
+                }
+            ], 
+            "position": {
+                "left": 1110, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.3.1.1", 
+            "tool_shed_repository": {
+                "changeset_revision": "aa39b19ca11e", 
+                "name": "racon", 
+                "owner": "bgruening", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"overlaps\": \"null\", \"__page__\": null, \"e\": \"\\\"0.3\\\"\", \"g\": \"\\\"-8\\\"\", \"f\": \"\\\"false\\\"\", \"corrected_reads\": \"null\", \"__rerun_remap_job_id__\": null, \"m\": \"\\\"5\\\"\", \"q\": \"\\\"10.0\\\"\", \"reads\": \"null\", \"u\": \"\\\"false\\\"\", \"w\": \"\\\"500\\\"\", \"x\": \"\\\"-4\\\"\", \"chromInfo\": \"\\\"/home/willlem/NanoGalaxy/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.3.1.1", 
+            "type": "tool", 
+            "uuid": "cc690527-4f19-44f0-b9a6-4d1eee8c5372", 
+            "workflow_outputs": []
+        }, 
+        "8": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.2.2", 
+            "errors": null, 
+            "id": 8, 
+            "input_connections": {
+                "genomes": {
+                    "id": 7, 
+                    "output_name": "consensus"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "staramr", 
+            "outputs": [
+                {
+                    "name": "blast_hits", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "summary", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "resfinder", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "pointfinder", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "settings", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "excel", 
+                    "type": "xlsx"
+                }
+            ], 
+            "position": {
+                "left": 1330, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.2.2", 
+            "tool_shed_repository": {
+                "changeset_revision": "9047a1d3d8ea", 
+                "name": "staramr", 
+                "owner": "nml", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"use_pointfinder\": \"{\\\"enable\\\": \\\"false\\\", \\\"__current_case__\\\": 1}\", \"__rerun_remap_job_id__\": null, \"genomes\": \"null\", \"chromInfo\": \"\\\"/home/willlem/NanoGalaxy/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"advanced\": \"{\\\"pid_threshold\\\": \\\"98.0\\\", \\\"exclude_resistance_phenotypes\\\": \\\"false\\\", \\\"exclude_negatives\\\": \\\"false\\\", \\\"plength_resfinder\\\": \\\"60.0\\\", \\\"plength_pointfinder\\\": \\\"95.0\\\", \\\"report_all_blast\\\": \\\"false\\\"}\"}", 
+            "tool_version": "0.2.2", 
+            "type": "tool", 
+            "uuid": "edf119fb-bc7a-4fc9-81db-d8a0d3981eb6", 
+            "workflow_outputs": []
+        }, 
+        "9": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/plasflow/PlasFlow/1.0", 
+            "errors": null, 
+            "id": 9, 
+            "input_connections": {
+                "readFile": {
+                    "id": 7, 
+                    "output_name": "consensus"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "PlasFlow", 
+            "outputs": [
+                {
+                    "name": "probability_table", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "chromosomes", 
+                    "type": "fasta"
+                }, 
+                {
+                    "name": "plasmids", 
+                    "type": "fasta"
+                }, 
+                {
+                    "name": "unclassified", 
+                    "type": "fasta"
+                }
+            ], 
+            "position": {
+                "left": 1330, 
+                "top": 130
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/plasflow/PlasFlow/1.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "bda6012394f7", 
+                "name": "plasflow", 
+                "owner": "iuc", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"threshold\": \"\\\"0.7\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/home/willlem/NanoGalaxy/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"readFile\": \"null\"}", 
+            "tool_version": "1.0", 
+            "type": "tool", 
+            "uuid": "a132c66f-449d-4b6a-90dc-a0a58e5fe745", 
+            "workflow_outputs": []
+        }, 
+        "10": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.13.0", 
+            "errors": null, 
+            "id": 10, 
+            "input_connections": {
+                "reads|files": {
+                    "id": 7, 
+                    "output_name": "consensus"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "NanoPlot", 
+            "outputs": [
+                {
+                    "name": "output_html", 
+                    "type": "html"
+                }, 
+                {
+                    "name": "nanostats", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "nanostats_post_filtering", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "read_length", 
+                    "type": "png"
+                }, 
+                {
+                    "name": "log_read_length", 
+                    "type": "png"
+                }
+            ], 
+            "position": {
+                "left": 1330, 
+                "top": 250
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.13.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "db1eeffba23e", 
+                "name": "nanoplot", 
+                "owner": "iuc", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"filter\": \"{\\\"downsample\\\": \\\"\\\", \\\"minlength\\\": \\\"\\\", \\\"loglength\\\": \\\"false\\\", \\\"readtype\\\": null, \\\"percentqual\\\": \\\"false\\\", \\\"barcoded\\\": \\\"false\\\", \\\"drop_outliers\\\": \\\"false\\\", \\\"minqual\\\": \\\"\\\", \\\"maxlength\\\": \\\"\\\", \\\"alength\\\": \\\"false\\\"}\", \"reads\": \"{\\\"files\\\": null, \\\"type\\\": \\\"fasta\\\", \\\"__current_case__\\\": 1}\", \"customization\": \"{\\\"color\\\": null, \\\"plots\\\": null, \\\"noN50\\\": \\\"false\\\", \\\"N50\\\": \\\"false\\\", \\\"format\\\": \\\"png\\\"}\", \"chromInfo\": \"\\\"/home/willlem/NanoGalaxy/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.13.0", 
+            "type": "tool", 
+            "uuid": "39f3dbd1-6fc2-49fb-bc93-8b897bcd36f1", 
+            "workflow_outputs": []
+        }, 
+        "11": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/saskia-hiltemann/ireport/iReport/1.1", 
+            "errors": null, 
+            "id": 11, 
+            "input_connections": {
+                "tabs_0|content_0|filetype|item": {
+                    "id": 2, 
+                    "output_name": "output_html"
+                }, 
+                "tabs_1|content_0|filetype|item": {
+                    "id": 5, 
+                    "output_name": "outfile"
+                }, 
+                "tabs_2|content_0|filetype|item": {
+                    "id": 10, 
+                    "output_name": "output_html"
+                }, 
+                "tabs_3|content_0|filetype|item": {
+                    "id": 8, 
+                    "output_name": "resfinder"
+                }, 
+                "tabs_4|content_0|filetype|item": {
+                    "id": 9, 
+                    "output_name": "probability_table"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "iReport", 
+            "outputs": [
+                {
+                    "name": "report", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 1550, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/saskia-hiltemann/ireport/iReport/1.1", 
+            "tool_shed_repository": {
+                "changeset_revision": "7300ed4c1481", 
+                "name": "ireport", 
+                "owner": "saskia-hiltemann", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"tabs\": \"[{\\\"content\\\": [{\\\"__index__\\\": 0, \\\"filetype\\\": {\\\"break\\\": \\\"false\\\", \\\"itemtype\\\": \\\"htmlfile\\\", \\\"height\\\": \\\"350\\\", \\\"ireport\\\": \\\"false\\\", \\\"item\\\": null, \\\"__current_case__\\\": 2}}], \\\"__index__\\\": 0, \\\"tabtitle\\\": \\\"Imported Data Stats\\\"}, {\\\"content\\\": [{\\\"__index__\\\": 0, \\\"filetype\\\": {\\\"__current_case__\\\": 4, \\\"itemtype\\\": \\\"image\\\", \\\"align\\\": \\\"none\\\", \\\"zoomlevel\\\": \\\"250\\\", \\\"item\\\": null, \\\"zoomenable\\\": \\\"true\\\", \\\"break\\\": \\\"false\\\"}}], \\\"__index__\\\": 1, \\\"tabtitle\\\": \\\"de novo assembly graph\\\"}, {\\\"content\\\": [{\\\"__index__\\\": 0, \\\"filetype\\\": {\\\"break\\\": \\\"false\\\", \\\"itemtype\\\": \\\"htmlfile\\\", \\\"height\\\": \\\"350\\\", \\\"ireport\\\": \\\"false\\\", \\\"item\\\": null, \\\"__current_case__\\\": 2}}], \\\"__index__\\\": 2, \\\"tabtitle\\\": \\\"Assembly Data stats\\\"}, {\\\"content\\\": [{\\\"__index__\\\": 0, \\\"filetype\\\": {\\\"minh\\\": \\\"0\\\", \\\"collink\\\": {\\\"columnhyperlink\\\": \\\"N\\\", \\\"__current_case__\\\": 1}, \\\"itemtype\\\": \\\"table\\\", \\\"fancy\\\": \\\"true\\\", \\\"break\\\": \\\"false\\\", \\\"item\\\": null, \\\"__current_case__\\\": 5, \\\"minw\\\": \\\"0\\\"}}], \\\"__index__\\\": 3, \\\"tabtitle\\\": \\\"Antimicrobial resistance genes\\\"}, {\\\"content\\\": [{\\\"__index__\\\": 0, \\\"filetype\\\": {\\\"minh\\\": \\\"0\\\", \\\"collink\\\": {\\\"columnhyperlink\\\": \\\"N\\\", \\\"__current_case__\\\": 1}, \\\"itemtype\\\": \\\"table\\\", \\\"fancy\\\": \\\"true\\\", \\\"break\\\": \\\"false\\\", \\\"item\\\": null, \\\"__current_case__\\\": 5, \\\"minw\\\": \\\"0\\\"}}], \\\"__index__\\\": 4, \\\"tabtitle\\\": \\\"Prediction of plasmid sequences in metagenomic assemblies\\\"}]\", \"coverimage\": \"\\\"\\\"\", \"label\": \"\\\"PRIMUL Report\\\"\", \"minwidth\": \"\\\"1200\\\"\", \"proxy\": \"\\\"galaxy\\\"\", \"chromInfo\": \"\\\"/home/willlem/NanoGalaxy/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"localhost\": \"\\\"https://bioinf-galaxian.erasmusmc.nl/galaxy\\\"\"}", 
+            "tool_version": "1.1", 
+            "type": "tool", 
+            "uuid": "74684bcf-91a5-4cdc-b6a1-b16b877201db", 
+            "workflow_outputs": []
+        }
+    }, 
+    "tags": [], 
+    "uuid": "cbdc1275-e4b1-47df-a1d7-8f9a0ffeb04f"
+}
