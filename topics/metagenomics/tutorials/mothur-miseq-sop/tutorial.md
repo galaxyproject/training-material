@@ -666,7 +666,7 @@ you to see how well your curation is going, and whether something is wrong with 
 >
 > **Why sequence a mock community?**
 >
-> In a mock community, we know exactly which sequences we expect to find, and at which proportions.
+> In a mock community, we know exactly which sequences/organisms we expect to find, and at which proportions.
 > Therefore, we can use such an artificial sample to assess the error rates of our sequencing and
 > analysis pipeline.
 >   - Did we miss any of the sequences we know to be present in the sample (false negatives)?
@@ -674,7 +674,7 @@ you to see how well your curation is going, and whether something is wrong with 
 >   - Were we able to accurately detect their relative abundances?
 >
 > If our workflow performed well on the mock sample, we have more confidence in the accuracy of the
-> results of the rest of our samples.
+> results on the rest of our samples.
 >
 > **Example**
 >
