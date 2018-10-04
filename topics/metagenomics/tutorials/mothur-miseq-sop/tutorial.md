@@ -656,10 +656,34 @@ community, that is, a sample of which you know the exact composition. This is so
 every 95 samples we sequence. You should too because it will help you gauge your error rates and allow
 you to see how well your curation is going, and whether something is wrong with your sequencing setup.
 
-> ### {% icon comment %} Definition
+> ### {% icon tip %} Background: Mock communities
 >
-> **Mock community:** A defined mixture of microbial cells and/or viruses or nucleic acid molecules created
-> *in vitro* to simulate the composition of a microbiome sample or the nucleic acid isolated therefrom.
+> **What is a mock community?**
+>
+> A mock community is an artificially constructed sample; a defined mixture of microbial cells and/or
+> viruses or nucleic acid molecules created *in vitro* to simulate the composition of a microbiome
+> sample or the nucleic acid isolated therefrom.
+>
+> **Why sequence a mock community?**
+>
+> In a mock community, we know exactly which sequences we expect to find, and at which proportions.
+> Therefore, we can use such an artificial sample to assess the error rates of our analysis pipeline.
+> Did we miss any of the sequences we know to be present in the sample (false negatives)? Do we find any
+> sequences that were not present in the sample (false positives)? Were we able to accurately detect
+> their relative abundances?
+>
+> If our workflow performed well on the mock sample, we have more confidence in the accuracy of the
+> results of the rest of our samples.
+>
+> For example, consider this images from [Fouhy et al.](https://dx.doi.org/10.1186%2Fs12866-016-0738-z)
+>
+> ![example results of mock community sequencing to assess error rates](../../images/mock_community.jpg "Example of usage of a mock community to assess accuracy. On the left is the expected result given that we know the exact composition of the mock sample. This was then used to assess the accuracy of different combinations of sequencing platform and primer set (choice of V-region)")
+>
+>
+> **Further reading**
+>
+> - [Next generation sequencing data of a defined microbial mock community](https://dx.doi.org/10.1038%2Fsdata.2016.81)
+> - [16S rRNA gene sequencing of mock microbial populations- impact of DNA extraction method, primer choice and sequencing platform](https://dx.doi.org/10.1186%2Fs12866-016-0738-z)
 >
 {: .comment}
 
