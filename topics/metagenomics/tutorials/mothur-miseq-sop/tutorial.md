@@ -679,9 +679,9 @@ you to see how well your curation is going, and whether something is wrong with 
 > **Example**
 >
 > As an example, consider the following image from [Fouhy et al.](https://dx.doi.org/10.1186%2Fs12866-016-0738-z).
-> A mock community sample was sequences on different combinations of sequencer and primer sets (V-regions).
-> Since we know the expected outcome, we can assess the accuracy of each pipeline. The same can be done for
-> different settings of the *in-silico*  analysis pipline.
+> A mock community sample was sequenced for different combinations of sequencer and primer sets (V-regions).
+> Since we know the expected outcome, we can assess the accuracy of each pipeline. A similar approach can be used to
+> assess different parameter settings of the *in-silico*  analysis pipline.
 >
 > ![example results of mock community sequencing to assess error rates](../../images/mock_community.jpg "Example of usage of a mock community to assess accuracy. On the left is the expected result given that we know the exact composition of the mock sample. This was then used to assess the accuracy of different combinations of sequencing platform and primer set (choice of V-region)")
 >
