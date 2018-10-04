@@ -667,15 +667,21 @@ you to see how well your curation is going, and whether something is wrong with 
 > **Why sequence a mock community?**
 >
 > In a mock community, we know exactly which sequences we expect to find, and at which proportions.
-> Therefore, we can use such an artificial sample to assess the error rates of our analysis pipeline.
-> Did we miss any of the sequences we know to be present in the sample (false negatives)? Do we find any
-> sequences that were not present in the sample (false positives)? Were we able to accurately detect
-> their relative abundances?
+> Therefore, we can use such an artificial sample to assess the error rates of our sequencing and
+> analysis pipeline.
+>   - Did we miss any of the sequences we know to be present in the sample (false negatives)?
+>   - Do we find any sequences that were not present in the sample (false positives)?
+>   - Were we able to accurately detect their relative abundances?
 >
 > If our workflow performed well on the mock sample, we have more confidence in the accuracy of the
 > results of the rest of our samples.
 >
-> For example, consider this images from [Fouhy et al.](https://dx.doi.org/10.1186%2Fs12866-016-0738-z)
+> **Example**
+>
+> As an example, consider the following image from [Fouhy et al.](https://dx.doi.org/10.1186%2Fs12866-016-0738-z).
+> A mock community sample was sequences on different combinations of sequencer and primer sets (V-regions).
+> Since we know the expected outcome, we can assess the accuracy of each pipeline. The same can be done for
+> different settings of the *in-silico*  analysis pipline.
 >
 > ![example results of mock community sequencing to assess error rates](../../images/mock_community.jpg "Example of usage of a mock community to assess accuracy. On the left is the expected result given that we know the exact composition of the mock sample. This was then used to assess the accuracy of different combinations of sequencing platform and primer set (choice of V-region)")
 >
