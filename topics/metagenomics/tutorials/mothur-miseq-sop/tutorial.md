@@ -691,7 +691,7 @@ you to see how well your curation is going, and whether something is wrong with 
 > - [Next generation sequencing data of a defined microbial mock community](https://dx.doi.org/10.1038%2Fsdata.2016.81)
 > - [16S rRNA gene sequencing of mock microbial populations- impact of DNA extraction method, primer choice and sequencing platform](https://dx.doi.org/10.1186%2Fs12866-016-0738-z)
 >
-{: .comment}
+{: .tip}
 
 Our mock community is composed of genomic DNA from 21 bacterial strains. So in a perfect world, this is
 exactly what we would expect the analysis to produce as a result.
