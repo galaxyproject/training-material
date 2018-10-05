@@ -43,11 +43,11 @@ layout: base
                 <th>Workflows</th>
                 <th>Galaxy tour</th>
                 {% endif %}
-                <th>For Trainers</th>
 
                 {% if instances[topic.name].supported %}
                 <th>Galaxy instances</th>
                 {% endif %}
+                <th>For Trainers</th>
             </tr>
 
             {% for material in topic_material %}
@@ -131,13 +131,6 @@ layout: base
                                     {% endif %}
                                 </td>
                             {% endif %}
-                            <td>
-                                {% if material.trainer_experiences %}
-                                <a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/trainer-experiences/">
-                                    {% icon teaching %}
-                                </a>
-                                {% endif %}
-                            </td>
                             {% if instances[topic.name].supported %}
                                 <td>
                                 {% if instances[topic.name]['tutorials'][material.tutorial_name].supported %}
@@ -156,6 +149,13 @@ layout: base
                                 {% endif %}
                                 </td>
                             {% endif %}
+                            <td>
+                                {% if material.trainer_experiences %}
+                                <a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/trainer-experiences/">
+                                    {% icon teaching %}
+                                </a>
+                                {% endif %}
+                            </td>
                         {% endif %}
                     </tr>
                 {% endif %}

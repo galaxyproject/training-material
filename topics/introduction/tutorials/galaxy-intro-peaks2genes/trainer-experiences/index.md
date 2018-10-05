@@ -1,3 +1,3 @@
 ---
-layout: training_post_mortem_list
+layout: training_experience_list
 ---

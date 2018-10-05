@@ -98,7 +98,7 @@ module Jekyll
         # for the things we're interested in.
         tutorial_page_keys = known_pages.keys.select{|a| a.include?('tutorial.html')}
         slides_page_keys   = known_pages.keys.select{|a| a.include?('slides.html')}
-        postmortem_keys    = known_pages.keys.select{|a| a.include?('trainer-experiences')}.select{|a| ! a.end_with?('/')}
+        experiences_keys    = known_pages.keys.select{|a| a.include?('trainer-experiences')}.select{|a| ! a.end_with?('/')}
 
         # We'll handle slides first and have hands-on override.
         page = false
@@ -145,10 +145,10 @@ module Jekyll
         # make it future proof.
         page_obj['type'] = 'tutorial'
 
-        if postmortem_keys.length > 0 then
-          page_obj['post_mortems'] = postmortem_keys
+        if experiences_keys.length > 0 then
+          page_obj['trainer_experiences'] = experiences_keys
         else
-          page_obj['post_mortems'] = nil
+          page_obj['trainer_experiences'] = nil
         end
 
         resource_pages.push(page_obj)

@@ -59,15 +59,15 @@ layout: base
                 </tr>
             </thead>
             <tbody>
-            {% for post_mortem_key in tutorial[0].post_mortems %}
+            {% for trainer_experiences_key in tutorial[0].trainer_experiences %}
                 <tr>
-                    {% assign post_mortem = site.pages | page_by_key:post_mortem_key %}
-                    {% assign pm_parts = post_mortem.url | split:'/' %}
-                    {% assign pm_date_parts = pm_parts[6] | split:'-' %}
-                    <td><a href="{{ post_mortem.url  | prepend: site.baseurl }}">{{ post_mortem.title }}</a></td>
-                    <td>{{ pm_date_parts[0] }}-{{ pm_date_parts[1] }}-{{ pm_date_parts[2] }}</td>
+                    {% assign trainer_experiences = site.pages | page_by_key:trainer_experiences_key %}
+                    {% assign te_parts = trainer_experiences.url | split:'/' %}
+                    {% assign te_date_parts = te_parts[6] | split:'-' %}
+                    <td><a href="{{ trainer_experiences.url  | prepend: site.baseurl }}">{{ trainer_experiences.title }}</a></td>
+                    <td>{{ te_date_parts[0] }}-{{ te_date_parts[1] }}-{{ te_date_parts[2] }}</td>
                     <td>
-                        {% capture contributors %}{% for contributor in post_mortem.contributors %}, {{contributors[contributor].name }}{% endfor %}{% endcapture %}
+                        {% capture contributors %}{% for contributor in trainer_experiences.contributors %}, {{contributors[contributor].name }}{% endfor %}{% endcapture %}
                         {{ contributors | remove_first: ', ' }}
                     </td>
                 </tr>
