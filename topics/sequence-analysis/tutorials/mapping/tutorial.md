@@ -61,7 +61,7 @@ In the following we will process a dataset with the mapper **Bowtie2** and we wi
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
-> 4. Rename the files to `reads_1` and `reads_2`
+> 3. Rename the files to `reads_1` and `reads_2`
 >
 >    {% include snippets/rename_dataset.md %}
 >
