@@ -43,6 +43,7 @@ layout: base
                 <th>Workflows</th>
                 <th>Galaxy tour</th>
                 {% endif %}
+                <th>For Trainers</th>
 
                 {% if instances[topic.name].supported %}
                 <th>Galaxy instances</th>
@@ -130,6 +131,13 @@ layout: base
                                     {% endif %}
                                 </td>
                             {% endif %}
+                            <td>
+                                {% if material.post_mortems %}
+                                <a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/post-mortems/">
+                                    {% icon teaching %}
+                                </a>
+                                {% endif %}
+                            </td>
                             {% if instances[topic.name].supported %}
                                 <td>
                                 {% if instances[topic.name]['tutorials'][material.tutorial_name].supported %}

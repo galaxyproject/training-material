@@ -1,0 +1,110 @@
+---
+layout: base
+---
+
+{% assign url_parts = page.url | split:'/' %}
+{% assign topic_name = url_parts[2] %}
+{% assign tutorial_name = url_parts[4] %}
+
+{% assign topic = site.data[topic_name] %}
+{% assign contributors = site.data['contributors'] %}
+{% assign instances = site.data['instances'] %}
+{% assign topic_material = site.pages | topic_filter:topic_name %}
+{% assign tutorial = topic_material | where:"tutorial_name",tutorial_name %}
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ site.baseurl }}/">
+                <img src="{{ site.baseurl }}/{{ site.small_logo }}" height="30" alt="Galaxy Training Network logo">
+                {{ site.title }}
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ site.baseurl }}/topics/{{ topic.name }}" title="Go back to list of tutorials">
+                            {% icon topic %} {{ topic.title }}
+                        </a>
+                    </li>
+
+                    {% include _includes/help.html %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ site.github_repository }}/edit/master/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/tutorial.md">
+                            {% icon github %} Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>{{ page.title }}</h1>
+
+        {{ content }}
+
+        <table class="table table-responsive table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Authors</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for post_mortem_key in tutorial[0].post_mortems %}
+                <tr>
+                    {% assign post_mortem = site.pages | page_by_key:post_mortem_key %}
+                    {% assign pm_parts = post_mortem.url | split:'/' %}
+                    {% assign pm_date_parts = pm_parts[6] | split:'-' %}
+                    <td><a href="{{ post_mortem.url  | prepend: site.baseurl }}">{{ post_mortem.title }}</a></td>
+                    <td>{{ pm_date_parts[0] }}-{{ pm_date_parts[1] }}-{{ pm_date_parts[2] }}</td>
+                    <td>
+                        {% capture contributors %}{% for contributor in post_mortem.contributors %}, {{contributors[contributor].name }}{% endfor %}{% endcapture %}
+                        {{ contributors | remove_first: ', ' }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {% if topic.name == "contributing" %}
+        <blockquote class="agenda">
+            <h3>Developing GTN training material</h3>
+            This tutorial is part of a series to develop GTN training material, feel free to also look at:
+            {% assign topic = site.data[page.topic_name] %}
+            <ol>
+            {% for material in topic_material %}
+             {% if material.enable != "false" %}
+              {% if material.type == "introduction" %}
+            <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html">{{ material.title }}</a></li>
+             {% elsif material.type == "tutorial" %}
+              {% if material.hands_on %}
+            <li><a href="{{ site.baseurl }}/topics/{{ topic.name  }}/tutorials/{{ material.tutorial_name }}/tutorial.html">{{ material.title }}</a></li>
+              {% elsif material.slides %}
+            <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/slides.html">{{ material.title }}</a></li>
+               {% endif %}
+              {% endif %}
+             {% endif %}
+            {% endfor %}
+             </ol>
+        </blockquote>
+        {% endif %}
+    </section>
+</div>
+
+<footer>
+    <div class="container">
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>

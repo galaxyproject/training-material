@@ -1,0 +1,107 @@
+---
+layout: base
+---
+
+{% assign url_parts = page.url | split:'/' %}
+{% assign topic_name = url_parts[2] %}
+{% assign tutorial_name = url_parts[4] %}
+
+{% assign topic = site.data[topic_name] %}
+{% assign contributors = site.data['contributors'] %}
+{% assign instances = site.data['instances'] %}
+{% assign topic_material = site.pages | topic_filter:topic_name %}
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ site.baseurl }}/">
+                <img src="{{ site.baseurl }}/{{ site.small_logo }}" height="30" alt="Galaxy Training Network logo">
+                {{ site.title }}
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../post-mortems/" title="Go back to list of post mortems">
+                            {% icon topic %} Post Mortems
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ site.baseurl }}/topics/{{ topic.name }}" title="Go back to list of tutorials">
+                            {% icon topic %} {{ topic.title }}
+                        </a>
+                    </li>
+
+                    {% include _includes/help.html %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ site.github_repository }}/edit/master/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/tutorial.md">
+                            {% icon github %} Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>{{ page.title }}</h1>
+
+        {{ content }}
+
+        <h2>Authors</h2>
+        {% if page.contributors %}
+        <ul>
+            {% for contributor in page.contributors %}
+            <li>{{ contributors[contributor].name }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if topic.name == "contributing" %}
+        <blockquote class="agenda">
+            <h3>Developing GTN training material</h3>
+            This tutorial is part of a series to develop GTN training material, feel free to also look at:
+            {% assign topic = site.data[page.topic_name] %}
+            <ol>
+            {% for material in topic_material %}
+             {% if material.enable != "false" %}
+              {% if material.type == "introduction" %}
+            <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html">{{ material.title }}</a></li>
+             {% elsif material.type == "tutorial" %}
+              {% if material.hands_on %}
+            <li><a href="{{ site.baseurl }}/topics/{{ topic.name  }}/tutorials/{{ material.tutorial_name }}/tutorial.html">{{ material.title }}</a></li>
+              {% elsif material.slides %}
+            <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/slides.html">{{ material.title }}</a></li>
+               {% endif %}
+              {% endif %}
+             {% endif %}
+            {% endfor %}
+             </ol>
+        </blockquote>
+        {% endif %}
+    </section>
+</div>
+
+{% if page.contributors %}
+{% assign contrib = page.contributors | sort %}
+{% capture contributors %}{% for contributor in contrib %}, {{contributors[contributor].name }}{% endfor %}{% endcapture %}
+{% endif %}
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="{{ site.baseurl }}/hall-of-fame">contributors</a> ({{ contributors | remove_first: ', ' }})!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
