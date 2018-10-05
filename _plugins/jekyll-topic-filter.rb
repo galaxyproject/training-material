@@ -5,6 +5,15 @@ module Jekyll
       resources.select{ |a| a['type'] != 'introduction' }.length
     end
 
+    def page_by_key(pages, key)
+
+      for page in pages do
+        if page.url == "/#{key}" then
+          return page
+        end
+      end
+    end
+
     def topic_filter(pages, topic_name)
       # Arrays that will store all introduction slides and tutorials we discover.
       resource_intro = []
@@ -89,6 +98,7 @@ module Jekyll
         # for the things we're interested in.
         tutorial_page_keys = known_pages.keys.select{|a| a.include?('tutorial.html')}
         slides_page_keys   = known_pages.keys.select{|a| a.include?('slides.html')}
+        postmortem_keys    = known_pages.keys.select{|a| a.include?('post-mortems')}.select{|a| ! a.end_with?('/')}
 
         # We'll handle slides first and have hands-on override.
         page = false
@@ -134,6 +144,12 @@ module Jekyll
         # than tutorial>` in topics/*/tutorials/*/tutorial.md but that doesn't
         # make it future proof.
         page_obj['type'] = 'tutorial'
+
+        if postmortem_keys.length > 0 then
+          page_obj['post_mortems'] = postmortem_keys
+        else
+          page_obj['post_mortems'] = nil
+        end
 
         resource_pages.push(page_obj)
       end
