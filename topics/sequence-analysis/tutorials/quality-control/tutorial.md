@@ -324,7 +324,7 @@ To accomplish this task we use [Cutadapt](https://cutadapt.readthedocs.io/en/sta
 >
 >           To remove reads shorter than 20 bp
 >
->    - In *"Filter Options"*
+>    - In *"Read Modification Options"*
 >       - *"Quality cutoff"*: `20`
 >
 >           To trim low-quality 3' ends (below 20) from reads in addition to adapter removal
