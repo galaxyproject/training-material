@@ -60,7 +60,7 @@ We will be using the same data that we used in the introductory tutorial, so if 
 >
 > 3. Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the ![Pencil icon](../../images/edit_file.png) icon next to the relevant history entry.
 >
-> Click on the View Data button (the ![Eye icon](../../images/eye.png)) next to one of the FASTQ sequence files.
+> Click on the {% icon galaxy-eye %} (eye) icon next to one of the FASTQ sequence files.
 >
 >    > ### {% icon question %} Questions
 >    >

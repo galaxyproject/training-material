@@ -56,27 +56,21 @@ We will now import the data that we will use for the tutorial.
 >    > * Select **Paste/Fetch Data**
 >    > * Paste the link into the text field
 >    > * Change the data-type to **fastqsanger**
->    > * Press **Start**    
+>    > * Press **Start**
 >    {: .tip}
 >
 > 3. Change the name of the files to `mutant_R1` and `mutant_R2`.
 >
 >    As a default, Galaxy uses the link as the name of the new dataset. It also does not link the dataset to a database or a reference genome.
 >
->    > ### {% icon tip %} Tip: Changing the name of a dataset
->    >
->    > * Click on **Edit attributes** ![Pencil icon](../../images/edit_file.png) icon next to the relevant history entry
->    > * Change the **Name** in `Attributes` panel
->    {: .tip}
->
->    ![Imported datasets will appear in the history panel](../../images/starting_history.png "Imported datasets in the history panel")
+>    {% include snippets/rename_dataset.md %}
 >
 > 4. Inspect the content of a file.
 >
 >    > ### {% icon tip %} Tip: Inspecting the content of a dataset
 >    >
->    > * Click on **View Data** (the ![Eye icon](../../images/eye.png)) icon next to the relevant history entry
->    > * View the content of the file in the middle panel
+>    > * Click on the {% icon galaxy-eye %} (eye) icon next to the relevant history entry
+>    > * View the content of the file in the central panel
 >    {: .tip}
 >
 >    > ### {% icon question %} Questions

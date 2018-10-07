@@ -164,7 +164,7 @@ We will look at the output file called *FastQC on data 1: Webpage*.
 > ### {% icon hands_on %} Hands-on: View results
 > * Click on the {% icon galaxy-eye %} (eye) icon next to the output file.
 >
->    The information is displayed in the centre panel
+>    The information is displayed in the central panel
 >
 >    ![fastqc-out](../../images/fastqc-out.png){:width="620px"}
 {: .hands_on}
@@ -234,14 +234,14 @@ We have now decided that our input reads have to be filtered to an even higher s
 >
 >    ![rerun](../../images/rerun.png)
 >
->    This brings up the tool interface in the centre panel.
+>    This brings up the tool interface in the central panel.
 >
 > 2. Change the settings to something even stricter
 >
 >    For example, you might decide you want 80 percent of bases to have a quality of 36 or higher, instead of 35.
 >
 > 3. Click **Execute**
-> 4. View the results: Click on the output file name to expand the information. (*Note*: not the {% icon galaxy-eye %} icon.)
+> 4. View the results: Click on the output file name to expand the information. (*Note*: not the {% icon galaxy-eye %} (eye) icon.)
 {: .hands_on}
 
 > ### {% icon question %} Questions
