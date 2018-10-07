@@ -18,7 +18,7 @@
         
         
         <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
-        <meta property="og:title" content="Galaxy Training: Limma-voom (FASTQs to counts)" />
+        <meta property="og:title" content="Galaxy Training: RNA-Seq FASTQs to counts" />
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
@@ -151,7 +151,7 @@
 
 <div class="container main-content">
     <section class="tutorial">
-        <h1>Limma-voom (FASTQs to counts)</h1>
+        <h1>RNA-Seq FASTQs to counts</h1>
 
         <blockquote class="overview">
             <h3>Overview</h3>
@@ -159,7 +159,7 @@
             <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
             <ul>
             
-            <li>How to convert RNA-seq reads into counts before performing differential expression?</li>
+            <li>How to convert RNA-seq reads into counts?</li>
             
             <li>How to perform quality control of RNA-seq data?</li>
             
@@ -174,13 +174,13 @@
             
             <li>Understand QC steps that can be performed on RNA-seq data</li>
             
-            <li>Generate interactive reports to summarise QC information with MultiQC</li>
+            <li>Generate interactive reports to summarise QC information with **MultiQC**</li>
             
-            <li>Use the Galaxy Rule Uploader to import FASTQs from URLs</li>
+            <li>Use the Galaxy **Rule Uploader** to import FASTQs from URLs</li>
             
-            <li>Make use of Galaxy Collections for a tidy analysis</li>
+            <li>Make use of Galaxy **Collections** for a tidy analysis</li>
             
-            <li>Create a Galaxy Workflow that converts RNA-seq reads into counts</li>
+            <li>Create a Galaxy **Workflow** that converts RNA-seq reads into counts</li>
             
             </ul>
 
@@ -291,17 +291,18 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
 <p>In order to get these files into Galaxy, we will want to do a few things:</p>
 
 <ul>
-  <li>Strip the header out of the sample information (it doesn’t contain a URL Galaxy can download).</li>
-  <li>Define the SampleID column as the dataset identifier.</li>
-  <li>Define the URL column as the dataset URL (this is the location Galaxy can download the data from).</li>
-  <li>Tell Galaxy to treat these files as <code class="highlighter-rouge">fastqsanger.gz</code> files.</li>
+  <li>Strip the <em>header</em> out of the sample information (it doesn’t contain a URL Galaxy can download).</li>
+  <li>Define the file <strong>Identifier</strong> column (<code class="highlighter-rouge">SampleID</code>).</li>
+  <li>Define the <em>URL</em> column (<code class="highlighter-rouge">URL</code>) (this is the location Galaxy can download the data from).</li>
+  <li>Tell Galaxy to treat these files as <code class="highlighter-rouge">fastqsanger.gz</code> files</li>
+  <li>Tell Galaxy to treat these files as <code class="highlighter-rouge">mm10</code> files</li>
 </ul>
 
 <blockquote class="hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
 
   <ol>
-    <li>Create a new history for this tutorial</li>
+    <li>Create a new history for this tutorial e.g. <code class="highlighter-rouge">RNA-seq FASTQs to counts</code></li>
     <li>Import the files from Figshare using Galaxy’s Rule-Based Uploader.
       <ul>
         <li>Open the Galaxy Upload Manager</li>
@@ -311,9 +312,11 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
             <li><em>“Load tabular data from”</em>: <code class="highlighter-rouge">Pasted Table</code></li>
           </ul>
         </li>
-        <li>Paste the table below</li>
+        <li>Paste the table from the grey box above. <em>(You should now see below)</em></li>
         <li>
           <p>Click <strong>Build</strong></p>
+
+          <figure id="figure-2"><img src="../../images/limma-voom_f2c/rule_uploader.png" alt="Rule Uploader" title="Rule Uploader" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Rule Uploader</figcaption></figure>
         </li>
         <li>
           <p>In the <code class="highlighter-rouge">rules editor</code> that pops up:</p>
@@ -333,7 +336,7 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
                     <li><em>“List Identifier(s)”</em>: <code class="highlighter-rouge">A</code></li>
                   </ul>
                 </li>
-                <li>Repeat this again and select URL instead
+                <li>Click <code class="highlighter-rouge">Add Definition</code> button again and select URL instead
                   <ul>
                     <li><em>“URL”</em>: <code class="highlighter-rouge">C</code></li>
                   </ul>
@@ -343,15 +346,19 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
             </li>
             <li><strong>Specify the file type</strong>. Select <em>“Type”</em>: <code class="highlighter-rouge">fastqsanger.gz</code></li>
             <li><strong>Specify the genome</strong>. Select <em>“Genome”</em>: <code class="highlighter-rouge">mm10</code></li>
-            <li><strong>Name the collection</strong>. For <em>“Name”</em> enter: <code class="highlighter-rouge">fastqs</code></li>
+            <li><strong>Name the collection</strong>. For <em>“Name”</em> enter: <code class="highlighter-rouge">fastqs</code> <em>(You should now see below)</em></li>
             <li>Click <code class="highlighter-rouge">Upload</code></li>
-            <li>You should see a collection (list) called <code class="highlighter-rouge">fastqs</code> in your history containing all 12 FASTQ files, like below.</li>
           </ul>
+
+          <figure id="figure-3"><img src="../../images/limma-voom_f2c/rule_editor.png" alt="Rule Editor" title="Rule Editor" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Rule Editor</figcaption></figure>
+
+          <p>You should see a collection (list) called <code class="highlighter-rouge">fastqs</code> in your history containing all 12 FASTQ files, like below.</p>
+
+          <figure id="figure-4"><img src="../../images/limma-voom_f2c/collection.png" alt="Collection" title="Collection of FASTQs" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Collection of FASTQs</figcaption></figure>
         </li>
       </ul>
     </li>
   </ol>
-  <figure id="figure-2"><img src="../../images/limma-voom_f2c/collection.png" alt="Collection" title="Collection of FASTQs" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Collection of FASTQs</figcaption></figure>
 
 </blockquote>
 
@@ -418,9 +425,13 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
 
   <ol>
     <li>Click on the collection name (<code class="highlighter-rouge">fastqs</code>)</li>
+    <li>
+      <p>Click on the name of one of the collection elements (e.g <code class="highlighter-rouge">MCL1-DL</code>). Check that the data type is <code class="highlighter-rouge">fastqsanger.gz</code> and the database <code class="highlighter-rouge">mm10</code>.</p>
+
+      <figure id="figure-5" width="50px" height="50px"><img src="../../images/limma-voom_f2c/collection_element.png" alt="Collection Element" title="Collection Element" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Collection Element</figcaption></figure>
+    </li>
     <li>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of one of the FASTQ files to have a look at what it contains</li>
   </ol>
-
 </blockquote>
 
 <h2 id="check-raw-reads">Check raw reads</h2>
@@ -437,25 +448,34 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
       <ul>
         <li><i class="fa fa-list" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Short read data from your current history”</em>: <code class="highlighter-rouge">fastqs</code> (Input dataset collection)</li>
       </ul>
-    </li>
-    <li>
-      <p>Inspect the <code class="highlighter-rouge">Webpage</code> output of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <code class="highlighter-rouge">MCL1-DL</code> sample by clicking on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon</p>
 
-      <blockquote class="question">
-        <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-
-        <p>What is the read length?</p>
-
-        <blockquote class="solution">
-          <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
-          <p>The read length is 100 bp</p>
-
-        </blockquote>
-
+      <blockquote>
+        <figure id="figure-6" width="50px"><img src="../../images/limma-voom_f2c/run_fastqc.png" alt="FastQC Collection" title="Run FastQC on collection" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Run FastQC on collection</figcaption></figure>
       </blockquote>
     </li>
+    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <code class="highlighter-rouge">MCL1-DL</code> sample by clicking on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon</li>
   </ol>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <ol>
+    <li>What is the read length?</li>
+    <li>What base quality score encoding is used?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>The read length is 100 bp.</li>
+      <li>Sanger quality score encoding is used.
+This information can be seen at the top of the FastQC Webpage as below.</li>
+    </ol>
+
+    <figure id="figure-7" width="50px"><img src="../../images/limma-voom_f2c/fastqc_webpage.png" alt="FastQC Webpage" title="FastQC Webpage" /><figcaption><span class="figcaption-prefix">Figure 7:</span> FastQC Webpage</figcaption></figure>
+
+  </blockquote>
 
 </blockquote>
 
@@ -475,6 +495,7 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
                 <li><em>“Type of FastQC output?”</em>: <code class="highlighter-rouge">Raw data</code></li>
                 <li><i class="fa fa-list" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FastQC output”</em>: <code class="highlighter-rouge">RawData</code> files (output of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on trimmed reads)</li>
               </ul>
+              <figure id="figure-8" width="50px"><img src="../../images/limma-voom_f2c/multiqc.png" alt="MultiQC" title="Run MultiQC on collection" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Run MultiQC on collection</figcaption></figure>
             </li>
           </ul>
         </li>
@@ -488,14 +509,14 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
 
 <p>Here, most of the plots in the small FASTQs look similar to the full dataset. However, in the small FASTQs, we see less duplication, some Ns in the reads and some overrepresented sequences.</p>
 
-<figure id="figure-3"><img src="../../images/limma-voom_f2c/fastqc_table.png" alt="General Statistics" title="General Statistics" /><figcaption><span class="figcaption-prefix">Figure 3:</span> General Statistics</figcaption></figure>
-<figure id="figure-4"><img src="../../images/limma-voom_f2c/fastqc_sequence_counts_plot.png" alt="Sequence Counts" title="Sequence Counts" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Sequence Counts</figcaption></figure>
-<figure id="figure-5"><img src="../../images/limma-voom_f2c/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality" title="Sequence Quality" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Sequence Quality</figcaption></figure>
-<figure id="figure-6"><img src="../../images/limma-voom_f2c/fastqc_per_sequence_quality_scores_plot.png" alt="Per Sequence Quality Scores" title="Per Sequence Quality Scores" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Per Sequence Quality Scores</figcaption></figure>
-<figure id="figure-7"><img src="../../images/limma-voom_f2c/fastqc_per_sequence_gc_content_plot.png" alt="Per Sequence GC Content" title="Per Sequence GC Content" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Per Sequence GC Content</figcaption></figure>
-<figure id="figure-8"><img src="../../images/limma-voom_f2c/fastqc_per_base_n_content_plot.png" alt="Per base N content" title="Per base N content" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Per base N content</figcaption></figure>
-<figure id="figure-9"><img src="../../images/limma-voom_f2c/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels" title="Sequence Duplication Levels" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Sequence Duplication Levels</figcaption></figure>
-<figure id="figure-10"><img src="../../images/limma-voom_f2c/fastqc_adapter_content_plot.png" alt="Adapter Content" title="Adapter Content" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Adapter Content</figcaption></figure>
+<figure id="figure-9"><img src="../../images/limma-voom_f2c/fastqc_table.png" alt="General Statistics" title="General Statistics" /><figcaption><span class="figcaption-prefix">Figure 9:</span> General Statistics</figcaption></figure>
+<figure id="figure-10"><img src="../../images/limma-voom_f2c/fastqc_sequence_counts_plot.png" alt="Sequence Counts" title="Sequence Counts" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Sequence Counts</figcaption></figure>
+<figure id="figure-11"><img src="../../images/limma-voom_f2c/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality" title="Sequence Quality" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Sequence Quality</figcaption></figure>
+<figure id="figure-12"><img src="../../images/limma-voom_f2c/fastqc_per_sequence_quality_scores_plot.png" alt="Per Sequence Quality Scores" title="Per Sequence Quality Scores" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Per Sequence Quality Scores</figcaption></figure>
+<figure id="figure-13"><img src="../../images/limma-voom_f2c/fastqc_per_sequence_gc_content_plot.png" alt="Per Sequence GC Content" title="Per Sequence GC Content" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Per Sequence GC Content</figcaption></figure>
+<figure id="figure-14"><img src="../../images/limma-voom_f2c/fastqc_per_base_n_content_plot.png" alt="Per base N content" title="Per base N content" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Per base N content</figcaption></figure>
+<figure id="figure-15"><img src="../../images/limma-voom_f2c/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels" title="Sequence Duplication Levels" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Sequence Duplication Levels</figcaption></figure>
+<figure id="figure-16"><img src="../../images/limma-voom_f2c/fastqc_adapter_content_plot.png" alt="Adapter Content" title="Adapter Content" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Adapter Content</figcaption></figure>
 
 <p>See the <a href="http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">ref-based tutorial</a> for more information on FastQC plots.</p>
 
@@ -506,12 +527,14 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
 
   <blockquote class="solution">
     <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <p>Overall, the samples look pretty good. The main things to note are:</p>
+
+    <p>Overall, the samples look pretty good. The main things to note here are:</p>
     <ul>
-      <li>The base quality is high in all samples.</li>
-      <li>Some Illumina adapter has been detected.</li>
+      <li>The <strong>base quality</strong> is high in all samples.</li>
+      <li>Some Illumina <strong>adapter</strong> has been detected.</li>
       <li>Some duplication in RNA-seq can be normal due to the presence of highly expressed genes. However, for some reason <code class="highlighter-rouge">MCL1-LE</code> and <code class="highlighter-rouge">MCL1-LF</code> have higher numbers of duplicates detected than the other samples.</li>
     </ul>
+
   </blockquote>
 </blockquote>
 
@@ -598,32 +621,21 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
         </li>
       </ul>
     </li>
+    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
   </ol>
 </blockquote>
 
-<blockquote class="question">
-  <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+<p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-  <p>What differences can you see after trimming?</p>
+<figure id="figure-17"><img src="../../images/limma-voom_f2c/post_cutadapt_adapter_content.png" alt="Adapter Content post-trimming" title="Adapter Content post-trimming" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Adapter Content post-trimming</figcaption></figure>
+<figure id="figure-18"><img src="../../images/limma-voom_f2c/post_cutadapt_fastqc_sequence_length_distribution_plot.png" alt="Sequence Length post-trimming" title="Sequence Length post-trimming" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Sequence Length post-trimming</figcaption></figure>
 
-  <blockquote class="solution">
-    <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+<p>After trimming we can see that:</p>
 
-    <ul>
-      <li>No adapter is detected now.</li>
-      <li>
-        <p>The sequences are no longer detected to be all the same length (100bp), we now have sequences of different lengths detected.</p>
-
-        <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
-      </li>
-    </ul>
-
-    <figure id="figure-11"><img src="../../images/limma-voom_f2c/post_cutadapt_adapter_content.png" alt="Adapter Content post-trimming" title="Adapter Content post-trimming" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Adapter Content post-trimming</figcaption></figure>
-    <figure id="figure-12"><img src="../../images/limma-voom_f2c/post_cutadapt_fastqc_sequence_length_distribution_plot.png" alt="Sequence Length post-trimming" title="Sequence Length post-trimming" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Sequence Length post-trimming</figcaption></figure>
-
-  </blockquote>
-
-</blockquote>
+<ul>
+  <li>No adapter is detected now.</li>
+  <li>The reads are no longer all the same length, we now have sequences of different lengths detected.</li>
+</ul>
 
 <h1 id="mapping">Mapping</h1>
 
@@ -694,12 +706,12 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
       <p>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of one of the BAM files to have a look at what it contains.</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
         <p>What is BAM format?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <p>See the answer in the <a href="http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#%20Pretreatments">ref-based tutorial</a></p>
 
@@ -718,42 +730,40 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
 <blockquote class="hands_on">
   <h3 id="hands_on-hands-on-aggregate-the-hisat2-summary-files-with-multiqc"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Aggregate the HISAT2 summary files with <strong>MultiQC</strong></h3>
 
-  <p><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to aggregate the HISAT2 summary files</p>
-  <ul>
-    <li>In <em>“Results”</em>
+  <ol>
+    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to aggregate the HISAT2 summary files
       <ul>
-        <li><em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">HISAT2</code></li>
-        <li><i class="fa fa-list" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Output of HISAT2”</em>: <code class="highlighter-rouge">Mapping summary</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li>In <em>“Results”</em>
+          <ul>
+            <li><em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">HISAT2</code></li>
+            <li><i class="fa fa-list" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Output of HISAT2”</em>: <code class="highlighter-rouge">Mapping summary</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
       </ul>
     </li>
-  </ul>
-</blockquote>
-
-<blockquote class="question">
-  <h3 id="question-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-
-  <ol>
-    <li>What % reads mapped in the samples?</li>
-    <li>What do you think of the results?</li>
+    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
   </ol>
-
-  <blockquote class="solution">
-    <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <ol>
-      <li>Over 90% of reads mapped in all samples.</li>
-      <li>The mapping rate looks good (over 90% in all samples). And the vast majority of reads have mapped uniquely, they haven’t mapped to multiple locations in the reference genome.
-The MultiQC plot below shows the result from the full dataset for comparison.</li>
-    </ol>
-
-    <figure id="figure-13"><img src="../../images/limma-voom_f2c/hisat2_se_plot.png" alt="HISAT2 mapping" title="HISAT2 mapping" /><figcaption><span class="figcaption-prefix">Figure 13:</span> HISAT2 mapping</figcaption></figure>
-  </blockquote>
 </blockquote>
+
+<p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
+
+<figure id="figure-19"><img src="../../images/limma-voom_f2c/hisat2_se_plot.png" alt="HISAT2 mapping" title="HISAT2 mapping" /><figcaption><span class="figcaption-prefix">Figure 19:</span> HISAT2 mapping</figcaption></figure>
+
+<p>Over 90% of reads have mapped in all samples, a good mapping rate. And the vast majority of reads have mapped uniquely, they haven’t mapped to multiple locations in the reference genome.</p>
 
 <p>It is also good practice to visualise the read alignments in the BAM file, for example using IGV, see the <a href="http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#%20Pretreatments">ref-based tutorial</a>.</p>
 
+<blockquote class="tip">
+  <h3 id="tip-tip-downloading-a-collection"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Downloading a collection</h3>
+
+  <p>To download a collection of datasets (e.g. the collection of BAM files) click on the floppy icon as shown below. This will download a tar file containing all the datasets in the collection.</p>
+
+  <figure id="figure-20"><img src="../../images/limma-voom_f2c/collection_download.png" alt="Downloading collection" title="Downloading a collection" /><figcaption><span class="figcaption-prefix">Figure 20:</span> Downloading a collection</figcaption></figure>
+</blockquote>
+
 <h2 id="check-strandness">Check strandness</h2>
 
-<p>As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to “guess” the strandness, as explained in the <a href="http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">RNA-seq ref-based tutorial</a>. This is done through comparing the “strandness of reads” with the “strandness of transcripts”. For this tool, and many of the other RSeQC tools, a reference bed file of genes (<code class="highlighter-rouge">reference genes</code>) is required. RSeQC provides some reference BED files for model organisms. Alternatively, you can provide your own BED file of reference genes, for example from UCSC (see the <a href="https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html">Peaks to Genes tutorial</a>. Or the <strong>GTF2Bed12</strong> tool can be used to convert a GTF into a BED file.</p>
+<p>As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to “guess” the strandness, as explained in the <a href="http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">RNA-seq ref-based tutorial</a>. This is done through comparing the “strandness of reads” with the “strandness of transcripts”. For this tool, and many of the other RSeQC tools, a reference bed file of genes (<code class="highlighter-rouge">reference genes</code>) is required. RSeQC provides some reference BED files for model organisms. Alternatively, you can provide your own BED file of reference genes, for example from UCSC (see the <a href="https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html">Peaks to Genes tutorial</a>. Or the <strong>Convert GTF to BED12</strong> tool can be used to convert a GTF into a BED file.</p>
 
 <blockquote>
 
@@ -807,21 +817,23 @@ The MultiQC plot below shows the result from the full dataset for comparison.</l
         </li>
       </ul>
     </li>
+    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
   </ol>
 </blockquote>
 
+<p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
+
+<figure id="figure-21"><img src="../../images/limma-voom_f2c/rseqc_infer_experiment_plot.png" alt="Infer Experiment" title="Infer Experiment" /><figcaption><span class="figcaption-prefix">Figure 21:</span> Infer Experiment</figcaption></figure>
+
 <blockquote class="question">
-  <h3 id="question-questions-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <p>Do you think the data is stranded or unstranded?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>It is unstranded as approximately equal numbers of reads have aligned to the sense and antisense strands.
-The MultiQC plot below shows the result from the full dataset for comparison.</p>
-
-    <figure id="figure-14"><img src="../../images/limma-voom_f2c/rseqc_infer_experiment_plot.png" alt="Infer Experiment" title="Infer Experiment" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Infer Experiment</figcaption></figure>
+    <p>It is unstranded as approximately equal numbers of reads have aligned to the sense and antisense strands.</p>
 
   </blockquote>
 
@@ -829,7 +841,7 @@ The MultiQC plot below shows the result from the full dataset for comparison.</p
 
 <h2 id="check-duplicate-reads">Check duplicate reads</h2>
 
-<p>Duplicate reads are usually kept in RNA-seq differential expression analysis as they can come from highly-expressed genes but it is still a good metric to check. A high percentage of duplicates can indicate a problem with the sample, for example, a low complexity library with not many transcripts, due to not enough RNA used as input. FastQC gives us an idea of duplicates in the reads before mapping (note that it just takes a sample of the data). We can assess the numbers of duplicates in all mapped reads using the <strong>Picard MarkDuplicates</strong> tool. Picard considers duplicates to be reads that map to the same location, based on the start position of where the read maps.</p>
+<p>Duplicate reads are usually kept in RNA-seq differential expression analysis as they can come from highly-expressed genes but it is still a good metric to check. A high percentage of duplicates can indicate a problem with the sample, for example, PCR amplification of a low complexity library (not many transcripts) due to not enough RNA used as input. FastQC gives us an idea of duplicates in the reads before mapping (note that it just takes a sample of the data). We can assess the numbers of duplicates in all mapped reads using the <strong>Picard MarkDuplicates</strong> tool. Picard considers duplicates to be reads that map to the same location, based on the start position of where the read maps.</p>
 
 <blockquote class="hands_on">
   <h3 id="hands_on-hands-on-check-duplicate-reads-with-markduplicates"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check duplicate reads with <strong>MarkDuplicates</strong></h3>
@@ -863,22 +875,23 @@ The MultiQC plot below shows the result from the full dataset for comparison.</p
         </li>
       </ul>
     </li>
+    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
   </ol>
 </blockquote>
 
+<p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
+
+<figure id="figure-22"><img src="../../images/limma-voom_f2c/picard_deduplication.png" alt="MarkDups metrics" title="MarkDups metrics" /><figcaption><span class="figcaption-prefix">Figure 22:</span> MarkDups metrics</figcaption></figure>
+
 <blockquote class="question">
-  <h3 id="question-questions-6"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <p>Which two samples have the most duplicates detected?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <p><code class="highlighter-rouge">MCL1-LE</code> and <code class="highlighter-rouge">MCL1-LF</code> have the highest number of duplicates in mapped reads compared to the other samples, similar to what we saw in the raw reads with FastQC.</p>
-
-    <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
-
-    <figure id="figure-15"><img src="../../images/limma-voom_f2c/picard_deduplication.png" alt="MarkDups metrics" title="MarkDups metrics" /><figcaption><span class="figcaption-prefix">Figure 15:</span> MarkDups metrics</figcaption></figure>
 
   </blockquote>
 
@@ -923,12 +936,17 @@ The MultiQC plot below shows the result from the full dataset for comparison.</p
         </li>
       </ul>
     </li>
+    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
   </ol>
-
 </blockquote>
 
+<p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
+
+<figure id="figure-23"><img src="../../images/limma-voom_f2c/samtools-idxstats-mapped-reads-plot.png" alt="IdxStats chromsome mappings" title="IdxStats Chromosome Mappings" /><figcaption><span class="figcaption-prefix">Figure 23:</span> IdxStats Chromosome Mappings</figcaption></figure>
+<figure id="figure-24"><img src="../../images/limma-voom_f2c/samtools-idxstats-xy-plot.png" alt="IdxStats XY " title="IdxStats X/Y Mappings" /><figcaption><span class="figcaption-prefix">Figure 24:</span> IdxStats X/Y Mappings</figcaption></figure>
+
 <blockquote class="question">
-  <h3 id="question-questions-7"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>What do you think of the chromosome mappings?</li>
@@ -936,18 +954,12 @@ The MultiQC plot below shows the result from the full dataset for comparison.</p
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>Some of the samples have very high mapping on chromosome 5. What is going on there?
-The MultiQC plot below shows the result from the full dataset for comparison.</li>
+      <li>Some of the samples have very high mapping on chromosome 5. What is going on there?</li>
+      <li>The samples appear to be all female as there are few reads mapping to the Y chromosome. As this is a experiment studying virgin, pregnant and lactating mice if we saw large numbers of reads mapping to the Y chromosome in a sample it would be unexpected and a probable cause for concern.</li>
     </ol>
-    <figure id="figure-16"><img src="../../images/limma-voom_f2c/samtools-idxstats-mapped-reads-plot.png" alt="IdxStats chromsome mappings" title="IdxStats Chromosome Mappings" /><figcaption><span class="figcaption-prefix">Figure 16:</span> IdxStats Chromosome Mappings</figcaption></figure>
-    <ol>
-      <li>The samples appear to be all female as there are few reads mapping to the Y chromosome. As this is a experiment studying virgin, pregnant and lactating mice if we saw large numbers of reads mapping to the Y chromosome in a sample it would be unexpected and a probable cause for concern.
-The MultiQC plot below shows the result from the full dataset for comparison.</li>
-    </ol>
-    <figure id="figure-17"><img src="../../images/limma-voom_f2c/samtools-idxstats-xy-plot.png" alt="IdxStats XY " title="IdxStats X/Y Mappings" /><figcaption><span class="figcaption-prefix">Figure 17:</span> IdxStats X/Y Mappings</figcaption></figure>
 
   </blockquote>
 
@@ -998,25 +1010,27 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
         </li>
       </ul>
     </li>
+    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
   </ol>
 
 </blockquote>
 
+<p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
+
+<figure id="figure-25"><img src="../../images/limma-voom_f2c/rseqc_gene_body_coverage_plot.png" alt="Gene Body Coverage" title="Gene Body Coverage" /><figcaption><span class="figcaption-prefix">Figure 25:</span> Gene Body Coverage</figcaption></figure>
+
+<p>The plot below from the RSeQC website shows what samples with 3’biased coverage would look like.</p>
+<figure id="figure-26"><img src="../../images/limma-voom_f2c/genebodycoverage.png" alt="Gene Body Coverage comparison" title="Gene Body Coverage comparison" /><figcaption><span class="figcaption-prefix">Figure 26:</span> Gene Body Coverage comparison</figcaption></figure>
+
 <blockquote class="question">
-  <h3 id="question-questions-8"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-6"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <p>What do you think of the coverage across gene bodies in these samples?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-8"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>It looks good. This plot looks a bit noisy in the small FASTQs but it still shows there’s pretty even coverage from 5’ to 3’ ends with no obvious bias in all the samples.
-The MultiQC plot below shows the result from the full dataset for comparison.</p>
-
-    <figure id="figure-18"><img src="../../images/limma-voom_f2c/rseqc_gene_body_coverage_plot.png" alt="Gene Body Coverage" title="Gene Body Coverage" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Gene Body Coverage</figcaption></figure>
-
-    <p>The plot below from the RSeQC website shows what samples with 3’biased coverage would look like.</p>
-    <figure id="figure-19"><img src="../../images/limma-voom_f2c/genebodycoverage.png" alt="Gene Body Coverage comparison" title="Gene Body Coverage comparison" /><figcaption><span class="figcaption-prefix">Figure 19:</span> Gene Body Coverage comparison</figcaption></figure>
+    <p>It looks good. This plot looks a bit noisy in the small FASTQs but it still shows there’s pretty even coverage from 5’ to 3’ ends with no obvious bias in all the samples.</p>
 
   </blockquote>
 
@@ -1062,22 +1076,24 @@ The MultiQC plot below shows the result from the full dataset for comparison.</p
         </li>
       </ul>
     </li>
+    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
   </ol>
 
 </blockquote>
 
+<p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
+
+<p><a href="../../images/limma-voom_f2c/rseqc_read_distribution_plot.png" title="Read Distribution">Read Distribution</a></p>
+
 <blockquote class="question">
-  <h3 id="question-questions-9"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-7"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <p>What do you think of the read distribution?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-9"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>It looks good, most of the reads have mapped to exons and not many to introns or intergenic regions. The samples have pretty consistent read distribution, albeit with slightly higher numbers of reads mapping to CDS exons for <code class="highlighter-rouge">MCL1-LC</code> and <code class="highlighter-rouge">MCL1-LD</code>, and <code class="highlighter-rouge">MCL1-LE</code> and <code class="highlighter-rouge">MCL1-LF</code> have more reads mapping to CDS exons than the other samples.
-The MultiQC plot below shows the result from the full dataset for comparison.</p>
-
-    <figure id="figure-20"><img src="../../images/limma-voom_f2c/rseqc_read_distribution_plot.png" alt="Read Distribution" title="Read Distribution" /><figcaption><span class="figcaption-prefix">Figure 20:</span> Read Distribution</figcaption></figure>
+    <p>It looks good, most of the reads have mapped to exons and not many to introns or intergenic regions. The samples have pretty consistent read distribution, albeit with slightly higher numbers of reads mapping to CDS exons for <code class="highlighter-rouge">MCL1-LC</code> and <code class="highlighter-rouge">MCL1-LD</code>, and <code class="highlighter-rouge">MCL1-LE</code> and <code class="highlighter-rouge">MCL1-LF</code> have more reads mapping to CDS exons than the other samples.</p>
 
   </blockquote>
 
@@ -1139,28 +1155,34 @@ The MultiQC plot below shows the result from the full dataset for comparison.</p
 <blockquote class="hands_on">
   <h3 id="hands_on-hands-on-assess-reads-mapped-to-genes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Assess reads mapped to genes</h3>
 
-  <p><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
-  <ul>
-    <li><em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">featureCounts</code>
+  <ol>
+    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-list" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Output of FeatureCounts”</em>: <code class="highlighter-rouge">featureCounts summary</code> (output of <strong>featureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">featureCounts</code>
+          <ul>
+            <li><i class="fa fa-list" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Output of FeatureCounts”</em>: <code class="highlighter-rouge">featureCounts summary</code> (output of <strong>featureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
       </ul>
     </li>
-  </ul>
+    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
+  </ol>
 </blockquote>
 
+<p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
+
+<figure id="figure-27"><img src="../../images/limma-voom_f2c/featureCounts_assignment_plot.png" alt="featureCounts assignments" title="featureCounts assignments" /><figcaption><span class="figcaption-prefix">Figure 27:</span> featureCounts assignments</figcaption></figure>
+
 <blockquote class="question">
-  <h3 id="question-questions-10"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-8"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <p>What % reads are assigned to exons?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-10"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-8"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>~60-70% of reads are assigned to exons. This is a fairly typical number for RNA-seq.
-The MultiQC plot below shows the result from the full dataset for comparison.</p>
+    <p>~60-70% of reads are assigned to exons. This is a fairly typical number for RNA-seq.</p>
 
-    <figure id="figure-21"><img src="../../images/limma-voom_f2c/featureCounts_assignment_plot.png" alt="featureCounts assignments" title="featureCounts assignments" /><figcaption><span class="figcaption-prefix">Figure 21:</span> featureCounts assignments</figcaption></figure>
   </blockquote>
 
 </blockquote>
@@ -1186,16 +1208,16 @@ The MultiQC plot below shows the result from the full dataset for comparison.</p
 
 <p>Take a look at the output (the output for the full dataset is shown below).</p>
 
-<figure id="figure-22"><img src="../../images/limma-voom_f2c/count_matrix.png" alt="Count matrix" title="Count matrix" /><figcaption><span class="figcaption-prefix">Figure 22:</span> Count matrix</figcaption></figure>
+<figure id="figure-28"><img src="../../images/limma-voom_f2c/count_matrix.png" alt="Count matrix" title="Count matrix" /><figcaption><span class="figcaption-prefix">Figure 28:</span> Count matrix</figcaption></figure>
 
 <p>Now it is easier to see the counts for a gene across all samples. The accompanying limma-voom tutorial shows how gene information (symbols etc) can be added to a count matrix.</p>
 
 <h1 id="generating-an-interactive-qc-summary-report">Generating an interactive QC summary report</h1>
 
-<p>So far we have run MultiQC on one step at a time, which generates multiple reports for the analysis. However, it would be more convenient to have a single report containing all the QC information for the analysis.</p>
+<p>So far we have run MultiQC on one step at a time which generates multiple reports for the analysis. However, it would be more convenient to have a single report containing all the QC information for the analysis. This can be easily achieved in Galaxy with the MultiQC tool.</p>
 
 <blockquote class="question">
-  <h3 id="question-questions-11"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-9"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <p>Can you create a MultiQC report that summarises all the QC information into a single report?</p>
 
@@ -1205,11 +1227,11 @@ The MultiQC plot below shows the result from the full dataset for comparison.</p
   </ul>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-11"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-9"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <p>MultiQC summary of all programs used (screenshot from the full dataset).</p>
 
-    <figure id="figure-23"><img src="../../images/limma-voom_f2c/multiqc_summary.png" alt="MultiQC Summary" title="MultiQC Summary" /><figcaption><span class="figcaption-prefix">Figure 23:</span> MultiQC Summary</figcaption></figure>
+    <figure id="figure-29"><img src="../../images/limma-voom_f2c/multiqc_summary.png" alt="MultiQC Summary" title="MultiQC Summary" /><figcaption><span class="figcaption-prefix">Figure 29:</span> MultiQC Summary</figcaption></figure>
 
     <p><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
     <ul>
@@ -1374,13 +1396,17 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
 
 </blockquote>
 
+<p>The MultiQC report can be downloaded by clicking on the floppy disk icon on the dataset in the history as shown below.</p>
+
+<figure id="figure-30"><img src="../../images/limma-voom_f2c/multiqc_download.png" alt="MultiQC download" title="Download MultiQC report" /><figcaption><span class="figcaption-prefix">Figure 30:</span> Download MultiQC report</figcaption></figure>
+
 <blockquote class="question">
-  <h3 id="question-questions-12"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-10"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <p>Can you think of any other QCs that could be performed on RNA-seq reads?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-12"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-10"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <p>The reads could be checked for:</p>
     <ul>
@@ -1398,7 +1424,7 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
 
 <p>You can now extract a workflow from the steps that have been performed, as shown in the <a href="https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html#extracting-workflow">Peaks to Genes tutorial</a>. This is a way to help keep a record of the steps performed. It also enables efficient rerunning of a multi-step analysis, such as RNA-seq.</p>
 
-<figure id="figure-24"><img src="../../images/limma-voom_f2c/workflow.png" alt="fastq to counts Workflow" title="FASTQ to counts Workflow" /><figcaption><span class="figcaption-prefix">Figure 24:</span> FASTQ to counts Workflow</figcaption></figure>
+<figure id="figure-31"><img src="../../images/limma-voom_f2c/workflow.png" alt="fastq to counts Workflow" title="FASTQ to counts Workflow" /><figcaption><span class="figcaption-prefix">Figure 31:</span> FASTQ to counts Workflow</figcaption></figure>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
@@ -1436,12 +1462,12 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
         <hr>
         <br>
 
-        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Limma-voom (FASTQs to counts) (Transcriptomics)">Loading...
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=RNA-Seq FASTQs to counts (Transcriptomics)">Loading...
         </iframe>
 
         <blockquote class="feedback">
             <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
-            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Limma-voom (FASTQs to counts) (Transcriptomics)">Feedback Form</a>.</p>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=RNA-Seq FASTQs to counts (Transcriptomics)">Feedback Form</a>.</p>
         </blockquote>
     </section>
 </div>
