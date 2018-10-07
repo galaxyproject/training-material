@@ -267,25 +267,25 @@
 
 <p>Read sequences are usually stored in compressed (gzipped) FASTQ files. Before the differential expression analysis can proceed, these reads must be aligned to the reference genome and counted into annotated genes. Mapping reads to the genome is a very important task, and many different aligners are available, such as HISAT2 (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4655817/">Kim, Langmead, and Salzberg, 2015</a>), STAR (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3530905/">Dobin et al. 2013</a>) and Subread (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3664803/">Liao, Smyth, and Shi 2013</a>]). Most mapping tasks require larger computers than an average laptop, so usually read mapping is done on a server in a linux-like environment, requiring some programming knowledge. However, Galaxy enables you to do this mapping without needing to know programming and if you don’t have access to a server you can try to use one of the publically available Galaxies e.g. <a href="https://usegalaxy.org">usegalaxy.org</a>, <a href="https://usegalaxy.eu">usegalaxy.eu</a>, <a href="https://usegalaxy.org.au/">usegalaxy.org.au</a>.</p>
 
-<p>If you are sequencing your own data, the sequencing facility will almost always provide FASTQ.gz files which you can upload into Galaxy. If your FASTQs are provided through Galaxy’s Shared Data, you can easily import them into a history. For publicly available sequence data, such as from GEO/SRA/ENA, Galaxy’s Rule-Based Uploader can be used to import the files from URLs, saving on the need to download to your computer and upload into Galaxy. For more information on the Rule-Based Uploader see the tutorial <a href="http://galaxyproject.github.io/training-material/topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial.html">here</a>.</p>
+<p>If you are sequencing your own data, the sequencing facility will almost always provide compressed FASTQ files which you can upload into Galaxy. If your FASTQs are provided through Galaxy’s Shared Data, you can easily import them into a history. For publicly available sequence data, such as from GEO/SRA/ENA, Galaxy’s Rule-Based Uploader can be used to import the files from URLs, saving on the need to download to your computer and upload into Galaxy. For more information on the Rule-Based Uploader see the tutorial <a href="http://galaxyproject.github.io/training-material/topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial.html">here</a>.</p>
 
 <p>The raw reads used in this tutorial were obtained from SRA from the link given in GEO for the the mouse mammary gland dataset (Fu et al. 2015) (e.g <code class="highlighter-rouge">ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534</code>). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. Some results for the full dataset will be shown for comparison. The small FASTQ files are available in <a href="https://figshare.com/s/f5d63d8c265a05618137">Figshare</a> and the links to the FASTQ files are provided below. We are going to import the files into a Collection. Using Galaxy Collections helps keep the datasets organised and tidy in the history. Collections also make it easier to maintain the sample names through tools and workflows. If you are not familiar with collections, see the <a href="http://galaxyproject.github.io/training-material/topics/galaxy-data-manipulation/tutorials/collections/tutorial.html">Galaxy Collections tutorial</a>.</p>
 
 <p>The sample information (sample ID, Group) and link to the FASTQ file (URL) are in the grey box below.</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SampleID	Group	URL
-MCL1-DL	basallactate	https://ndownloader.figshare.com/files/5053573?private_link=f5d63d8c265a05618137 
-MCL1-DK	basallactate	https://ndownloader.figshare.com/files/5053570?private_link=f5d63d8c265a05618137 
-MCL1-DJ	basalpregnant	https://ndownloader.figshare.com/files/5053567?private_link=f5d63d8c265a05618137 
-MCL1-DI	basalpregnant	https://ndownloader.figshare.com/files/5053564?private_link=f5d63d8c265a05618137 
-MCL1-DH	basalvirgin	https://ndownloader.figshare.com/files/5053561?private_link=f5d63d8c265a05618137 
-MCL1-DG	basalvirgin	https://ndownloader.figshare.com/files/5053558?private_link=f5d63d8c265a05618137 
-MCL1-LF	luminalvirgin	https://ndownloader.figshare.com/files/5053555?private_link=f5d63d8c265a05618137 
-MCL1-LE	luminalvirgin	https://ndownloader.figshare.com/files/5053588?private_link=f5d63d8c265a05618137 
-MCL1-LD	luminalpregnant	https://ndownloader.figshare.com/files/5053579?private_link=f5d63d8c265a05618137 
-MCL1-LC	luminalpregnant	https://ndownloader.figshare.com/files/5053582?private_link=f5d63d8c265a05618137 
-MCL1-LB	luminalvirgin	https://ndownloader.figshare.com/files/5053585?private_link=f5d63d8c265a05618137 
-MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_link=f5d63d8c265a05618137   
+MCL1-DL	basallactate	https://ndownloader.figshare.com/files/5053573?private_link=f5d63d8c265a05618137
+MCL1-DK	basallactate	https://ndownloader.figshare.com/files/5053570?private_link=f5d63d8c265a05618137
+MCL1-DJ	basalpregnant	https://ndownloader.figshare.com/files/5053567?private_link=f5d63d8c265a05618137
+MCL1-DI	basalpregnant	https://ndownloader.figshare.com/files/5053564?private_link=f5d63d8c265a05618137
+MCL1-DH	basalvirgin	https://ndownloader.figshare.com/files/5053561?private_link=f5d63d8c265a05618137
+MCL1-DG	basalvirgin	https://ndownloader.figshare.com/files/5053558?private_link=f5d63d8c265a05618137
+MCL1-LF	luminalvirgin	https://ndownloader.figshare.com/files/5053555?private_link=f5d63d8c265a05618137
+MCL1-LE	luminalvirgin	https://ndownloader.figshare.com/files/5053588?private_link=f5d63d8c265a05618137
+MCL1-LD	luminalpregnant	https://ndownloader.figshare.com/files/5053579?private_link=f5d63d8c265a05618137
+MCL1-LC	luminalpregnant	https://ndownloader.figshare.com/files/5053582?private_link=f5d63d8c265a05618137
+MCL1-LB	luminalvirgin	https://ndownloader.figshare.com/files/5053585?private_link=f5d63d8c265a05618137
+MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_link=f5d63d8c265a05618137
 </code></pre></div></div>
 
 <p>In order to get these files into Galaxy, we will want to do a few things:</p>
@@ -418,7 +418,7 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
 
   <ol>
     <li>Click on the collection name (<code class="highlighter-rouge">fastqs</code>)</li>
-    <li>Click on the eye icon of one of the FASTQ files to have a look at what it contains</li>
+    <li>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of one of the FASTQ files to have a look at what it contains</li>
   </ol>
 
 </blockquote>
@@ -439,7 +439,7 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
       </ul>
     </li>
     <li>
-      <p>Inspect the <code class="highlighter-rouge">Webpage</code> output of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <code class="highlighter-rouge">MCL1-DL</code> sample by clicking on the eye icon</p>
+      <p>Inspect the <code class="highlighter-rouge">Webpage</code> output of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <code class="highlighter-rouge">MCL1-DL</code> sample by clicking on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon</p>
 
       <blockquote class="question">
         <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -506,7 +506,7 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
 
   <blockquote class="solution">
     <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <p>Overall, the samples look pretty good. The main things to note are</p>
+    <p>Overall, the samples look pretty good. The main things to note are:</p>
     <ul>
       <li>The base quality is high in all samples.</li>
       <li>Some Illumina adapter has been detected.</li>
@@ -691,7 +691,7 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
   <ol>
     <li>Click on the collection name (<code class="highlighter-rouge">HISAT2 on collection N: aligned reads (BAM)</code>)</li>
     <li>
-      <p>Click on the eye icon of one of the BAM files to have a look at what it contains.</p>
+      <p>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of one of the BAM files to have a look at what it contains.</p>
 
       <blockquote class="question">
         <h3 id="question-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1382,7 +1382,7 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
   <blockquote class="solution">
     <h3 id="solution-solution-12"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>The reads could be checked for</p>
+    <p>The reads could be checked for:</p>
     <ul>
       <li>Ribosomal contamination</li>
       <li>Contamination with other species e.g. bacteria</li>

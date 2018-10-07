@@ -351,6 +351,7 @@
   </li>
   <li><a href="#analysis-of-the-differential-gene-expression" id="markdown-toc-analysis-of-the-differential-gene-expression">Analysis of the differential gene expression</a>    <ol>
       <li><a href="#count-the-number-of-reads-per-annotated-gene" id="markdown-toc-count-the-number-of-reads-per-annotated-gene">Count the number of reads per annotated gene</a></li>
+      <li><a href="#viewing-datasets-side-by-side-using-the-scratchbook" id="markdown-toc-viewing-datasets-side-by-side-using-the-scratchbook">Viewing datasets side by side using the Scratchbook</a></li>
       <li><a href="#identification-of-the-differentially-expressed-features" id="markdown-toc-identification-of-the-differentially-expressed-features">Identification of the differentially expressed features</a></li>
       <li><a href="#visualization-of-the-differentially-expressed-genes" id="markdown-toc-visualization-of-the-differentially-expressed-genes">Visualization of the differentially expressed genes</a></li>
       <li><a href="#analysis-of-functional-enrichment-among-the-differentially-expressed-genes" id="markdown-toc-analysis-of-functional-enrichment-among-the-differentially-expressed-genes">Analysis of functional enrichment among the differentially expressed genes</a></li>
@@ -364,7 +365,7 @@
 
 <h2 id="data-upload">Data upload</h2>
 
-<blockquote>
+<blockquote class="hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
 
   <ol>
@@ -427,26 +428,17 @@
         </ul>
       </blockquote>
     </li>
-  </ol>
-
-</blockquote>
-
-<blockquote class="hands_on">
-
-  <ol>
     <li>
-      <p>Check that the datatype is <code class="highlighter-rouge">fastqsanger</code> (e.g. <strong>not</strong> <code class="highlighter-rouge">fastq</code>)</p>
-
-      <p>If the datatype is not <code class="highlighter-rouge">fastqsanger</code>, please change the datatype to <code class="highlighter-rouge">fastqsanger</code></p>
+      <p>Check that the datatype is <code class="highlighter-rouge">fastqsanger</code> (e.g. <strong>not</strong> <code class="highlighter-rouge">fastq</code>). If it is not, please change the datatype to <code class="highlighter-rouge">fastqsanger</code>.</p>
 
       <blockquote class="tip">
 
         <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
         <ul>
-          <li>Click on the pencil button displayed in your dataset in the history</li>
-          <li>Choose <strong>Datatype</strong> on the top</li>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <strong>Datatypes</strong> tab on the top</li>
           <li>Select <code class="highlighter-rouge">fastqsanger</code></li>
-          <li>Press <strong>Save</strong></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
       </blockquote>
     </li>
@@ -484,7 +476,7 @@
   <blockquote class="solution">
     <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
-      <li>The DNA sequences are stored in a FASTQ file, in the second line of every 4-line group</li>
+      <li>The DNA sequences are stored in a FASTQ file, in the second line of every 4-line group.</li>
       <li>This file format is called <a href="https://en.wikipedia.org/wiki/FASTQ_format">FASTQ format</a>. It stores sequence information and quality information. Each sequence is represented by a group of 4 lines with the 1st line being the sequence id, the second the sequence of nucleotides, the third a transition line and the last one a sequence of quality score for each nucleotide.</li>
     </ol>
   </blockquote>
@@ -502,7 +494,7 @@
   <h3 id="hands_on-hands-on-quality-control"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality control</h3>
 
   <ol>
-    <li><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+    <li><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: input datasets selected with <strong>Multiple datasets</strong></li>
       </ul>
@@ -528,13 +520,13 @@
         <blockquote class="solution">
           <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-          <p>The read length is 37 bp</p>
+          <p>The read length is 37 bp.</p>
 
         </blockquote>
 
       </blockquote>
     </li>
-    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to aggregate the FastQC reports
+    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to aggregate the FastQC reports:
       <ul>
         <li>In <em>“Results”</em>
           <ul>
@@ -564,16 +556,16 @@
           <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <ol>
-            <li>Everything seems ok for 3 of the files but for <code class="highlighter-rouge">GSM461180_2</code> the quality decreases quite a lot at the end of the sequences:
+            <li>Everything seems OK for 3 of the files, but for <code class="highlighter-rouge">GSM461180_2</code> the quality decreases quite a lot at the end of the sequences:
               <ul>
                 <li>The <code class="highlighter-rouge">GSM461177</code> have 10.3 millions of sequences and <code class="highlighter-rouge">GSM461180</code> 12.3 millions</li>
                 <li>
-                  <p>All except <code class="highlighter-rouge">GSM461180_2</code> has a high proportion of duplicated reads (expected in RNA-Seq data)</p>
+                  <p>All except <code class="highlighter-rouge">GSM461180_2</code> have a high proportion of duplicated reads (expected in RNA-Seq data)</p>
 
                   <figure id="figure-1"><img src="../../images/ref-based/fastqc_sequence_counts_plot.png" alt="Sequence Counts" title="Sequence Counts" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Sequence Counts</figcaption></figure>
                 </li>
                 <li>
-                  <p>The “Per base sequence quality” is globally good with a slight decrease at the end of the sequences. For <code class="highlighter-rouge">GSM461180_2</code>, the decrease is quite big.</p>
+                  <p>The “Per base sequence quality” is globally good with a slight decrease at the end of the sequences. For <code class="highlighter-rouge">GSM461180_2</code>, the decrease is quite large.</p>
 
                   <figure id="figure-2"><img src="../../images/ref-based/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality" title="Sequence Quality" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Sequence Quality</figcaption></figure>
                 </li>
@@ -658,7 +650,7 @@
   <h3 id="hands_on-hands-on-quality-control-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality control</h3>
 
   <ol>
-    <li><strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to trim low quality sequences
+    <li><strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to trim low quality sequences:
       <ul>
         <li><em>“Single-end or Paired-end reads?”</em>: <code class="highlighter-rouge">Paired-end</code>
           <ul>
@@ -713,7 +705,7 @@
         <blockquote class="solution">
           <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <ol>
-            <li>For <code class="highlighter-rouge">GSM461177</code>, 5,072,810 bp has been trimmed for the forward reads (read 1) and 8,648,619 bp on the reverse (read 2) because of quality. For <code class="highlighter-rouge">GSM461180</code>, 10,224,537 bp on forward and 51,746,850 bp on the reverse. It is not a surprise: we saw that the quality was dropping more at the end of the sequences for the reverse reads that for the forward reads, specially for <code class="highlighter-rouge">GSM461180_2</code></li>
+            <li>For <code class="highlighter-rouge">GSM461177</code>, 5,072,810 bp has been trimmed for the forward reads (read 1) and 8,648,619 bp on the reverse (read 2) because of quality. For <code class="highlighter-rouge">GSM461180</code>, 10,224,537 bp on forward and 51,746,850 bp on the reverse. It is not a surprise: we saw that at the end of the sequences the quality was dropping more for the reverse reads than for the forward reads, specially for <code class="highlighter-rouge">GSM461180_2</code>.</li>
             <li>147,810 (1.4%) reads were too short for <code class="highlighter-rouge">GSM461177</code> and 1,101,875 (9%) for <code class="highlighter-rouge">GSM461180</code>.</li>
           </ol>
         </blockquote>
@@ -741,15 +733,15 @@
 
   <ol>
     <li>What is a reference genome?</li>
-    <li>For each model organism, several possible reference genomes may be available (e.g. hg19 and hg38 for human). What do they correspond to?</li>
+    <li>For each model organism, several possible reference genomes may be available (e.g. <code class="highlighter-rouge">hg19</code> and <code class="highlighter-rouge">hg38</code> for human). What do they correspond to?</li>
     <li>Which reference genome should we use?</li>
   </ol>
 
   <blockquote class="solution">
     <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
-      <li>A reference genome (or reference assembly) is a set of nucleic acid sequences assembled as a representative example of a species’ genetic material. As they are often assembled from the sequencing of different individuals, they do not accurately represent the set of genes of any single organism but a mosaic of different nucleic acid sequences from each individual.</li>
-      <li>As the cost of DNA sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are builts and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different versions released (named build).</li>
+      <li>A reference genome (or reference assembly) is a set of nucleic acid sequences assembled as a representative example of a species’ genetic material. As they are often assembled from the sequencing of different individuals, they do not accurately represent the set of genes of any single organism, but a mosaic of different nucleic acid sequences from each individual.</li>
+      <li>As the cost of DNA sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are builts and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different released versions (called “builds”).</li>
       <li>The genome of <em>Drosophila melanogaster</em> is known and assembled and it can be used as the reference genome in this analysis. Note that new versions of reference genomes may be released if the assembly improves, for this tutorial we are going to use the Release 6 of the <em>Drosophila melanogaster</em> reference genome assembly <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4383921/">(dm6)</a>.</li>
     </ol>
   </blockquote>
@@ -758,8 +750,8 @@
 <p>With eukaryotic transcriptomes most reads originate from processed mRNAs lacking introns, therefore they cannot be simply mapped back to the genome as we normally do for DNA data. Instead the reads must be separated into two categories:</p>
 
 <ul>
-  <li>Reads that map entirely within exons</li>
-  <li>Reads that cannot be mapped within an exon across their entire length because they span two or more exons</li>
+  <li>Reads that can be mapped entirely within an exon</li>
+  <li>Reads spanning two or more exons</li>
 </ul>
 
 <figure id="figure-7"><img src="../../images/five_type_rna_seq_reads.png" alt="Five types of RNA-seq reads" title="The five types of RNA-seq reads (Figure 1a from Kim et al, Nat Methods, 2015)" /><figcaption><span class="figcaption-prefix">Figure 7:</span> The five types of RNA-seq reads (Figure 1a from Kim et al, Nat Methods, 2015)</figcaption></figure>
@@ -841,7 +833,7 @@
         </li>
       </ul>
     </li>
-    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to aggregate the STAR logs
+    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to aggregate the STAR logs:
       <ul>
         <li>In <em>“Results”</em>
           <ul>
@@ -900,7 +892,7 @@
 <p>A BAM file (or a SAM file, the non compressed version) consists of:</p>
 
 <ul>
-  <li>A header section with the chromosome names and lengths (the lines starting with the <code class="highlighter-rouge">@</code> symbol)</li>
+  <li>A header section (the lines starting with <code class="highlighter-rouge">@</code>) containing metadata, in particular the chromosome names and lengths (lines starting with the <code class="highlighter-rouge">@SQ</code> symbol)</li>
   <li>
     <p>An alignment section consisting of a table with 11 mandatory fields, as well as a variable number of optional fields:</p>
 
@@ -1124,7 +1116,7 @@ installed on your machine. However, the questions in this section can also be an
   <p>The quantification depends on both the reference genome (the FASTA file) and its associated annotations (the GTF file). It is extremely important to use an annotation file that corresponds to the same version of the reference genome you used for the mapping (e.g. <code class="highlighter-rouge">dm6</code> here), as the chromosomal coordinates of genes are usually different amongst different reference genome versions.</p>
 </blockquote>
 
-<p>To identify exons that are regulated by the <em>Pasilla</em> gene, we need to identify genes and exons which are differentially expressed between samples with PS gene depletion (treated) and control (untreated) samples.
+<p>In order to identify exons that are regulated by the <em>Pasilla</em> gene, we need to identify genes and exons which are differentially expressed between samples with PS gene depletion (treated) and control (untreated) samples.
 We will then analyze the differential gene expression and also the differential exon usage.</p>
 
 <h1 id="analysis-of-the-differential-gene-expression">Analysis of the differential gene expression</h1>
@@ -1192,7 +1184,7 @@ We will then analyze the differential gene expression and also the differential 
   </blockquote>
 </blockquote>
 
-<p>Two main tools could be used for that: <a href="http://htseq.readthedocs.io/en/release_0.9.1/count.html">HTSeq-count</a> (<a href="https://academic.oup.com/bioinformatics/article/31/2/166/2366196">Anders et al, Bioinformatics, 2015</a>) or featureCounts (<a href="https://academic.oup.com/bioinformatics/article/31/2/166/2366196">Liao et al, Bioinformatics, 2014</a>). FeatureCounts is considerably faster and requires far less computational resources so we will use it here.</p>
+<p>Two main tools could be used for that: <a href="http://htseq.readthedocs.io/en/release_0.9.1/count.html">HTSeq-count</a> (<a href="https://academic.oup.com/bioinformatics/article/31/2/166/2366196">Anders et al, Bioinformatics, 2015</a>) or featureCounts (<a href="https://academic.oup.com/bioinformatics/article/31/2/166/2366196">Liao et al, Bioinformatics, 2014</a>). FeatureCounts is considerably faster and requires far less computational resources, so we will use it here.</p>
 
 <p>In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be given to featureCounts: for example the strandness.</p>
 
@@ -1206,7 +1198,7 @@ We will then analyze the differential gene expression and also the differential 
 
 <p>Some library preparation protocols create so called <em>stranded</em> RNA-seq libraries that preserve the strand information (an excellent overview in <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3005310/">Levin et al, Nat Meth, 2010</a>). The implication of stranded RNA-seq is that you can distinguish whether the reads are derived from forward or reverse-encoded transcripts:</p>
 
-<figure id="figure-18"><img src="../../images/stranded_result.png" alt="Stranded RNAseq data look like this" title="What does stranded RNA-seq data look like (image from GATC Biotech)" /><figcaption><span class="figcaption-prefix">Figure 18:</span> What does stranded RNA-seq data look like (image from GATC Biotech)</figcaption></figure>
+<figure id="figure-18"><img src="../../images/stranded_result.png" alt="Stranded RNAseq data look like this" title="Non-stranded vs. strand-specific RNA-seq read alignment (image from GATC Biotech)" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Non-stranded vs. strand-specific RNA-seq read alignment (image from GATC Biotech)</figcaption></figure>
 
 <p>Depending on the approach, and whether one performs single-end or paired-end sequencing, there are multiple possibilities on how to interpret the results of the mapping of these reads to the genome:</p>
 
@@ -1392,7 +1384,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.4388
         </li>
       </ul>
     </li>
-    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to aggregate the report
+    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to aggregate the report:
       <ul>
         <li>In <em>“Results”</em>:
           <ul>
@@ -1436,6 +1428,8 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.4388
 
 </blockquote>
 
+<p>The <strong>feature length</strong> output datasets generated by featureCounts will be needed later on when we will run the <strong>goseq</strong> tool.</p>
+
 <p>The main output of <strong>featureCounts</strong> is a table.</p>
 
 <blockquote class="question">
@@ -1455,6 +1449,49 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.4388
     </ol>
 
   </blockquote>
+</blockquote>
+
+<h2 id="viewing-datasets-side-by-side-using-the-scratchbook">Viewing datasets side by side using the Scratchbook</h2>
+
+<p>Comparing output is easier if we can view more than one dataset simultaneously. The Scratchbook allows us to build
+up a collection of datasets that will be shown on the screen together.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-optional-view-the-sorted-featurecounts-using-the-scratchbook"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> (Optional) View the sorted featureCounts using the Scratchbook</h3>
+
+  <ol>
+    <li>
+      <p>The <strong>Scratchbook</strong> is enabled by clicking the nine-blocks icon seen on the right of the Galaxy top menubar:</p>
+
+      <figure id="figure-21"><img src="../../images/ref-based/menubarWithScratchbook.png" alt="scratchbook icon" title="Menu bar with Scratchbook icon" /><figcaption><span class="figcaption-prefix">Figure 21:</span> Menu bar with Scratchbook icon</figcaption></figure>
+    </li>
+    <li>
+      <p>When the Scratchbook is <strong>enabled</strong> datasets being viewed are added to the Scratchbook:</p>
+
+      <figure id="figure-22"><img src="../../images/ref-based/menubarWithScratchbookEnabled.png" alt="scratchbook icon enabled" title="Menu bar with Scratchbook icon enabled" /><figcaption><span class="figcaption-prefix">Figure 22:</span> Menu bar with Scratchbook icon enabled</figcaption></figure>
+    </li>
+    <li>
+      <p>Click the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon to view one of the <strong>sorted featureCounts</strong>. Instead of occupying the entire middle bar the dataset view is now shown an overlay:</p>
+
+      <figure id="figure-23"><img src="../../images/ref-based/scratchbookOneDataset.png" alt="scratchbook one dataset shown" title="Scratchbook showing one dataset overlay" /><figcaption><span class="figcaption-prefix">Figure 23:</span> Scratchbook showing one dataset overlay</figcaption></figure>
+    </li>
+    <li>
+      <p>When a dataset is shown <strong>click in the main interface</strong> to prepare to select another dataset. The interface now shows that there is one saved view in the Scratchbook:</p>
+
+      <figure id="figure-24"><img src="../../images/ref-based/scratchbookOneSavedView.png" alt="scratchbook one saved view" title="Menu bar with one saved dataset view in Scratchbook" /><figcaption><span class="figcaption-prefix">Figure 24:</span> Menu bar with one saved dataset view in Scratchbook</figcaption></figure>
+    </li>
+    <li>
+      <p>Next click the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon on the <strong>second sorted featureCounts</strong>. The two datasets can now be seen side by side:</p>
+
+      <figure id="figure-25"><img src="../../images/ref-based/scratchbookTwoDatasetsShown.png" alt="scratchbook two datasets shown" title="Scratchbook showing two side by side datasets" /><figcaption><span class="figcaption-prefix">Figure 25:</span> Scratchbook showing two side by side datasets</figcaption></figure>
+    </li>
+    <li>
+      <p>To <strong>leave</strong> Scratchbook selection mode, click on the <strong>Scratchbook icon</strong> again. Your saved view will still remain for future viewing:</p>
+
+      <figure id="figure-26"><img src="../../images/ref-based/scratchbookDisabledWithSavedDatasets.png" alt="scratchbook disabled datasets saved" title="Scratchbook disabled with two datasets saved" /><figcaption><span class="figcaption-prefix">Figure 26:</span> Scratchbook disabled with two datasets saved</figcaption></figure>
+    </li>
+  </ol>
+
 </blockquote>
 
 <h2 id="identification-of-the-differentially-expressed-features">Identification of the differentially expressed features</h2>
@@ -1568,7 +1605,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
 </code></pre></div>      </div>
     </li>
     <li>Rename the datasets (if needed)</li>
-    <li><strong>DESeq2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+    <li><strong>DESeq2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li>In <em>“Factor”</em>:
           <ul>
@@ -1642,7 +1679,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
         <blockquote class="question">
           <h3 id="question-questions-8"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-          <figure id="figure-21"><img src="../../images/ref-based/deseq2_pca.png" alt="DESeq PCA" title="Principal component plot of the samples" /><figcaption><span class="figcaption-prefix">Figure 21:</span> Principal component plot of the samples</figcaption></figure>
+          <figure id="figure-27"><img src="../../images/ref-based/deseq2_pca.png" alt="DESeq PCA" title="Principal component plot of the samples" /><figcaption><span class="figcaption-prefix">Figure 27:</span> Principal component plot of the samples</figcaption></figure>
 
           <ol>
             <li>What is the first dimension (PC1) separating?</li>
@@ -1667,7 +1704,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
         <blockquote class="question">
           <h3 id="question-questions-9"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-          <figure id="figure-22"><img src="../../images/ref-based/deseq2_sample_sample_distance_heatmap.png" alt="Heatmap of the sample-to-sample distances" title="Heatmap of the sample-to-sample distances" /><figcaption><span class="figcaption-prefix">Figure 22:</span> Heatmap of the sample-to-sample distances</figcaption></figure>
+          <figure id="figure-28"><img src="../../images/ref-based/deseq2_sample_sample_distance_heatmap.png" alt="Heatmap of the sample-to-sample distances" title="Heatmap of the sample-to-sample distances" /><figcaption><span class="figcaption-prefix">Figure 28:</span> Heatmap of the sample-to-sample distances</figcaption></figure>
 
           <p>How are the samples grouped?</p>
 
@@ -1727,7 +1764,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
   <h3 id="hands_on-hands-on-extract-the-most-differentially-expressed-genes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract the most differentially expressed genes</h3>
 
   <ol>
-    <li><strong>Filter</strong> (data on any column using simple expressions) <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract genes with a significant change in gene expression (adjusted <em>p</em>-value below 0.05) between treated and untreated samples
+    <li><strong>Filter</strong> (data on any column using simple expressions) <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract genes with a significant change in gene expression (adjusted <em>p</em>-value below 0.05) between treated and untreated samples:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: the <code class="highlighter-rouge">DESeq2 result file</code></li>
         <li><em>“With following condition”</em>: <code class="highlighter-rouge">c7&lt;0.05</code></li>
@@ -1754,7 +1791,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
 
       <p>The generated file contains too many genes to get a meaningful heatmap. So we will take only the genes with an absolute fold change &gt; 2</p>
     </li>
-    <li><strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract genes with an <script type="math/tex">abs(log_{2} FC) > 1</script> (FC stands for “fold change”)
+    <li><strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract genes with an <script type="math/tex">abs(log_{2} FC) > 1</script> (FC stands for “fold change”):
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: the differentially expressed genes (output of <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“With following condition”</em>: <code class="highlighter-rouge">abs(c3)&gt;1</code></li>
@@ -1787,6 +1824,22 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
   <h3 id="hands_on-hands-on-extract-the-normalized-counts-of-the-most-differentially-expressed-genes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract the normalized counts of the most differentially expressed genes</h3>
 
   <ol>
+    <li><strong>Create a Pasted Entry</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> from the header line of the <strong>Filter</strong> output:
+      <ul>
+        <li>Copy the header of the final <strong>Filter</strong> output</li>
+        <li>Using the <strong>Upload</strong> tool select <strong>Paste/Fetch data</strong> and paste the copied data</li>
+        <li>Set the <em>Type</em> to <strong>tabular</strong> and select <strong>Start</strong> to upload a new <strong>Pasted Entry</strong></li>
+      </ul>
+    </li>
+    <li><strong>Concatenate datasets</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to add this header line to the <strong>Filter</strong> output:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> select the <code class="highlighter-rouge">Pasted entry</code> dataset</li>
+        <li><code class="highlighter-rouge">+ Insert Dataset</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> select the final <strong>Filter</strong> output</li>
+      </ul>
+
+      <p>This ensures that the table of most differentially expressed genes has a header line and can be used in the next step.</p>
+    </li>
     <li><strong>Join two Datasets</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: the <code class="highlighter-rouge">Normalized counts</code> file (output of <strong>DESeq2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1799,7 +1852,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
 
       <p>The generated file has more columns than we need for the heatmap. In addition to the columns with mean normalized counts, there is the <script type="math/tex">log_{2} FC</script> and other information. We need to remove the extra columns.</p>
     </li>
-    <li><strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract the columns with the gene ids and normalized counts
+    <li><strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract the columns with the gene ids and normalized counts:
       <ul>
         <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c1-c8</code></li>
         <li><em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
@@ -1816,7 +1869,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
   <h3 id="hands_on-hands-on-plot-the-heatmap-of-the-normalized-counts-of-these-genes-for-the-samples"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot the heatmap of the normalized counts of these genes for the samples</h3>
 
   <ol>
-    <li><strong>heatmap2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to plot the heatmap
+    <li><strong>heatmap2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to plot the heatmap:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input should have column headers”</em>: the generated table (output of <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Advanced - log transformation”</em>: <code class="highlighter-rouge">Log2(value) transform my data</code></li>
@@ -1831,7 +1884,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
 
 <p>You should obtain something similar to:</p>
 
-<figure id="figure-23"><img src="../../images/ref-based/heatmap2_normalized_counts.png" alt="Heatmap with the normalized counts for the most differentially expressed genes" title="Normalized counts for the most differentially expressed genes" /><figcaption><span class="figcaption-prefix">Figure 23:</span> Normalized counts for the most differentially expressed genes</figcaption></figure>
+<figure id="figure-29"><img src="../../images/ref-based/heatmap2_normalized_counts.png" alt="Heatmap with the normalized counts for the most differentially expressed genes" title="Normalized counts for the most differentially expressed genes" /><figcaption><span class="figcaption-prefix">Figure 29:</span> Normalized counts for the most differentially expressed genes</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-10"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1971,7 +2024,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
 
 <p>In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up or downregulated by depletion of the <em>Pasilla</em> gene and which genes are regulated by the <em>Pasilla</em> gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be summarized with the following scheme:</p>
 
-<figure id="figure-24"><img src="../../images/ref-based/tutorial-scheme.png" alt="Summary of the analysis pipeline used" title="Summary of the analysis pipeline used" /><figcaption><span class="figcaption-prefix">Figure 24:</span> Summary of the analysis pipeline used</figcaption></figure>
+<figure id="figure-30"><img src="../../images/ref-based/tutorial-scheme.png" alt="Summary of the analysis pipeline used" title="Summary of the analysis pipeline used" /><figcaption><span class="figcaption-prefix">Figure 30:</span> Summary of the analysis pipeline used</figcaption></figure>
 
 
         
@@ -2015,7 +2068,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Bérénice Batut, Clemens Blank, Anika Erxleben, Mallory Freeberg, Maria Doyle, Mo Heydarian, Nicola Soranzo, Pavankumar Videm)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Bérénice Batut, Clemens Blank, Anika Erxleben, Mallory Freeberg, Maria Doyle, Mo Heydarian, Nicola Soranzo, Pavankumar Videm, Peter van Heusden)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on

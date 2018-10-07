@@ -255,7 +255,7 @@ In different experiments, they targeted histones with H3K27me3 or H3K4me3 and CT
 
 <p>To save time, we will do it only on the data of one sample <code class="highlighter-rouge">wt_H3K4me3_rep1</code> that has been down-sampled. keep in mind that with real data this should be done on all samples.</p>
 
-<blockquote>
+<blockquote class="hands_on">
   <h3 id="hands_on-hands-on-import-the-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Import the data</h3>
 
   <ol>
@@ -331,14 +331,9 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
         </ul>
       </blockquote>
     </li>
-  </ol>
-
-</blockquote>
-
-<blockquote class="hands_on">
-
-  <ol>
-    <li>Inspect the first file by clicking on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon (<strong>View data</strong>)</li>
+    <li>
+      <p>Inspect the first file by clicking on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon (<strong>View data</strong>)</p>
+    </li>
   </ol>
 
 </blockquote>
@@ -354,7 +349,7 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
   <blockquote class="solution">
     <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
-      <li>The DNA sequences are stored in a FASTQ file, in the second line of every 4-line group</li>
+      <li>The DNA sequences are stored in a FASTQ file, in the second line of every 4-line group.</li>
       <li>This file format is called <a href="https://en.wikipedia.org/wiki/FASTQ_format">FASTQ format</a>. It stores sequence information and quality information. Each sequence is represented by a group of 4 lines with the 1st line being the sequence id, the second the sequence of nucleotides, the third a transition line and the last one a sequence of quality score for each nucleotide.</li>
     </ol>
   </blockquote>
@@ -574,15 +569,15 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
 
   <ol>
     <li>What is a reference genome?</li>
-    <li>For each model organism, several possible reference genomes may be available (e.g. hg19 and hg38 for human). What do they correspond to?</li>
+    <li>For each model organism, several possible reference genomes may be available (e.g. <code class="highlighter-rouge">hg19</code> and <code class="highlighter-rouge">hg38</code> for human). What do they correspond to?</li>
     <li>Which reference genome should we use?</li>
   </ol>
 
   <blockquote class="solution">
     <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
-      <li>A reference genome (or reference assembly) is a set of nucleic acid sequences assembled as a representative example of a species’ genetic material. As they are often assembled from the sequencing of different individuals, they do not accurately represent the set of genes of any single organism but a mosaic of different nucleic acid sequences from each individual.</li>
-      <li>As the cost of DNA sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are builts and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different versions released (named build).</li>
+      <li>A reference genome (or reference assembly) is a set of nucleic acid sequences assembled as a representative example of a species’ genetic material. As they are often assembled from the sequencing of different individuals, they do not accurately represent the set of genes of any single organism, but a mosaic of different nucleic acid sequences from each individual.</li>
+      <li>As the cost of DNA sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are builts and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different released versions (called “builds”).</li>
       <li>Wang et al. (2018) did ChIP-seq on mouse. So we should use the mouse reference genome. We will use mm10 (the latest build)</li>
     </ol>
   </blockquote>
@@ -649,7 +644,7 @@ however, the number of false positives may also increase.</p>
 <p>A BAM file (or a SAM file, the non compressed version) consists of:</p>
 
 <ul>
-  <li>A header section with the chromosome names and lengths (the lines starting with the <code class="highlighter-rouge">@</code> symbol)</li>
+  <li>A header section (the lines starting with <code class="highlighter-rouge">@</code>) containing metadata, in particular the chromosome names and lengths (lines starting with the <code class="highlighter-rouge">@SQ</code> symbol)</li>
   <li>
     <p>An alignment section consisting of a table with 11 mandatory fields, as well as a variable number of optional fields:</p>
 
