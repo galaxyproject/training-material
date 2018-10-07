@@ -1,20 +1,20 @@
 ---
 layout: tutorial_hands_on
 
-title: Limma-voom (FASTQs to counts)
+title: RNA-Seq FASTQs to counts
 zenodo_link: "https://figshare.com/s/f5d63d8c265a05618137"
 enable: "false"
 questions:
-- How to convert RNA-seq reads into counts before performing differential expression?
+- How to convert RNA-seq reads into counts?
 - How to perform quality control of RNA-seq data?
 - How to do this analysis efficiently in Galaxy?
 objectives:
 - Learn how RNA-seq reads are converted into counts
 - Understand QC steps that can be performed on RNA-seq data
-- Generate interactive reports to summarise QC information with MultiQC
-- Use the Galaxy Rule Uploader to import FASTQs from URLs
-- Make use of Galaxy Collections for a tidy analysis
-- Create a Galaxy Workflow that converts RNA-seq reads into counts
+- Generate interactive reports to summarise QC information with **MultiQC**
+- Use the Galaxy **Rule Uploader** to import FASTQs from URLs
+- Make use of Galaxy **Collections** for a tidy analysis
+- Create a Galaxy **Workflow** that converts RNA-seq reads into counts
 time_estimation: '2h'
 key_points:
 - In RNA-seq, reads (FASTQs) are mapped to a reference genome with a spliced aligner (e.g HISAT2, STAR)
@@ -88,21 +88,24 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
 
 In order to get these files into Galaxy, we will want to do a few things:
 
-* Strip the header out of the sample information (it doesn’t contain a URL Galaxy can download).
-* Define the SampleID column as the dataset identifier.
-* Define the URL column as the dataset URL (this is the location Galaxy can download the data from).
-* Tell Galaxy to treat these files as `fastqsanger.gz` files.
+* Strip the *header* out of the sample information (it doesn’t contain a URL Galaxy can download).
+* Define the file **Identifier** column (`SampleID`).
+* Define the *URL* column (`URL`) (this is the location Galaxy can download the data from).
+* Tell Galaxy to treat these files as `fastqsanger.gz` files
+* Tell Galaxy to treat these files as `mm10` files
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this tutorial
+> 1. Create a new history for this tutorial e.g. `RNA-seq FASTQs to counts`
 > 2. Import the files from Figshare using Galaxy's Rule-Based Uploader.
 >    - Open the Galaxy Upload Manager
 >    - Click the tab **Rule-based**
 >        - *"Upload data as"*: `Collection(s)`
 >        - *"Load tabular data from"*: `Pasted Table`
->    - Paste the table below
+>    - Paste the table from the grey box above. *(You should now see below)*
 >    - Click **Build**
+>
+>       ![Rule Uploader](../../images/limma-voom_f2c/rule_uploader.png "Rule Uploader")
 >
 >    - In the `rules editor` that pops up:
 >
@@ -114,16 +117,20 @@ In order to get these files into Galaxy, we will want to do a few things:
 >        - **Define the Identifier and URL columns**. From the **Rules** menu select `Add / Modify Column Definitions`
 >            - Click `Add Definition` button and select List Identifier(s)
 >                - *"List Identifier(s)"*: `A`
->            - Repeat this again and select URL instead
+>            - Click `Add Definition` button again and select URL instead
 >                - *"URL"*: `C`
 >            - Click `Apply`, and you should see your new column definitions listed
 >
 >        - **Specify the file type**. Select *"Type"*: `fastqsanger.gz`
 >        - **Specify the genome**. Select *"Genome"*: `mm10`
->        - **Name the collection**. For *"Name"* enter: `fastqs`
+>        - **Name the collection**. For *"Name"* enter: `fastqs` *(You should now see below)*
 >        - Click `Upload`
->        - You should see a collection (list) called `fastqs` in your history containing all 12 FASTQ files, like below.
-> ![Collection](../../images/limma-voom_f2c/collection.png "Collection of FASTQs")
+>
+>        ![Rule Editor](../../images/limma-voom_f2c/rule_editor.png "Rule Editor")
+>
+>        You should see a collection (list) called `fastqs` in your history containing all 12 FASTQ files, like below.
+>
+>        ![Collection](../../images/limma-voom_f2c/collection.png "Collection of FASTQs")
 >
 {: .hands_on}
 
@@ -169,10 +176,13 @@ Take a look at one of the FASTQ files to see what it contains.
 > ### {% icon hands_on %} Hands-on: Take a look at FASTQ format
 >
 > 1. Click on the collection name (`fastqs`)
-> 2. Click on the {% icon galaxy-eye %} (eye) icon of one of the FASTQ files to have a look at what it contains
+> 2. Click on the name of one of the collection elements (e.g `MCL1-DL`). Check that the data type is `fastqsanger.gz` and the database `mm10`.
 >
+>    ![Collection Element](../../images/limma-voom_f2c/collection_element.png "Collection Element"){: width="50px" height="50px"}
 >
+> 3. Click on the {% icon galaxy-eye %} (eye) icon of one of the FASTQ files to have a look at what it contains
 {: .hands_on}
+
 
 ## Check raw reads
 
@@ -184,21 +194,27 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >
 > 1. **FastQC** {% icon tool %} with the following parameters:
 >    - {% icon param-collection %} *"Short read data from your current history"*: `fastqs` (Input dataset collection)
+>
+>    > ![FastQC Collection](../../images/limma-voom_f2c/run_fastqc.png "Run FastQC on collection"){: width="50px"}
+>
 > 2. Inspect the `Webpage` output of **FastQC** {% icon tool %} for the `MCL1-DL` sample by clicking on the {% icon galaxy-eye %} (eye) icon
->
->    > ### {% icon question %} Questions
->    >
->    > What is the read length?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > The read length is 100 bp
->    > >
->    > {: .solution}
->    >
->    {: .question}
->
 {: .hands_on}
+
+> ### {% icon question %} Questions
+> 1. What is the read length?
+> 2. What base quality score encoding is used?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. The read length is 100 bp.
+> > 2. Sanger quality score encoding is used.
+> > This information can be seen at the top of the FastQC Webpage as below.
+> >
+> > ![FastQC Webpage](../../images/limma-voom_f2c/fastqc_webpage.png "FastQC Webpage"){: width="50px"}
+> >
+> {: .solution}
+>
+{: .question}
 
 The FastQC report contains a lot of information and we can look at the report for each sample. However, that is quite a few reports, 12 for this dataset. If you had more samples it could be a lot more. Luckily, there is a very useful tool called MultiQC that can summarise QC information for multiple samples into a single report.
 
@@ -210,6 +226,7 @@ The FastQC report contains a lot of information and we can look at the report fo
 >        - In *"FastQC output"*
 >           - *"Type of FastQC output?"*: `Raw data`
 >           - {% icon param-collection %} *"FastQC output"*: `RawData` files (output of **FastQC** {% icon tool %} on trimmed reads)
+>           ![MultiQC](../../images/limma-voom_f2c/multiqc.png "Run MultiQC on collection"){: width="50px"}
 > 2. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
 
@@ -233,10 +250,12 @@ See the [ref-based tutorial](http://galaxyproject.github.io/training-material/to
 > What do you think of the overall quality of the sequences?
 >
 > > ### {% icon solution %} Solution
-> > Overall, the samples look pretty good. The main things to note are:
-> > * The base quality is high in all samples.
-> > * Some Illumina adapter has been detected.
+> >
+> > Overall, the samples look pretty good. The main things to note here are:
+> > * The **base quality** is high in all samples.
+> > * Some Illumina **adapter** has been detected.
 > > * Some duplication in RNA-seq can be normal due to the presence of highly expressed genes. However, for some reason `MCL1-LE` and `MCL1-LF` have higher numbers of duplicates detected than the other samples.
+> >
 > {: .solution}
 {: .question}
 
@@ -279,26 +298,18 @@ We can take a look at the FASTQs again now that they've been trimmed.
 >        - In *"FastQC output"*
 >           - *"Type of FastQC output?"*: `Raw data`
 >           - {% icon param-collection %} *"FastQC output"*: `RawData` files (output of **FastQC** {% icon tool %})
+> 3. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
 
-> ### {% icon question %} Questions
->
-> What differences can you see after trimming?
->
-> > ### {% icon solution %} Solution
-> >
-> > * No adapter is detected now.
-> > * The sequences are no longer detected to be all the same length (100bp), we now have sequences of different lengths detected.
-> >
-> >    The MultiQC plot below shows the result from the full dataset for comparison.
-> >
-> >
-> > ![Adapter Content post-trimming](../../images/limma-voom_f2c/post_cutadapt_adapter_content.png "Adapter Content post-trimming")
-> > ![Sequence Length post-trimming](../../images/limma-voom_f2c/post_cutadapt_fastqc_sequence_length_distribution_plot.png "Sequence Length post-trimming")
-> >
-> {: .solution}
->
-{: .question}
+The MultiQC plot below shows the result from the full dataset for comparison.
+
+![Adapter Content post-trimming](../../images/limma-voom_f2c/post_cutadapt_adapter_content.png "Adapter Content post-trimming")
+![Sequence Length post-trimming](../../images/limma-voom_f2c/post_cutadapt_fastqc_sequence_length_distribution_plot.png "Sequence Length post-trimming")
+
+After trimming we can see that:
+
+* No adapter is detected now.
+* The reads are no longer all the same length, we now have sequences of different lengths detected.
 
 # Mapping
 
@@ -361,31 +372,31 @@ An important metric to check is the percentage of reads mapped to the reference 
 
 > ### {% icon hands_on %} Hands-on: Aggregate the HISAT2 summary files with **MultiQC**
 >
-> **MultiQC** {% icon tool %} with the following parameters to aggregate the HISAT2 summary files
+> 1. **MultiQC** {% icon tool %} with the following parameters to aggregate the HISAT2 summary files
 >    - In *"Results"*
 >        - *"Which tool was used generate logs?"*: `HISAT2`
 >        - {% icon param-collection %} *"Output of HISAT2"*: `Mapping summary` (output of **HISAT2** {% icon tool %})
+> 2. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
 
-> ### {% icon question %} Questions
->
-> 1. What % reads mapped in the samples?
-> 2. What do you think of the results?
->
-> > ### {% icon solution %} Solution
-> > 1. Over 90% of reads mapped in all samples.
-> > 2. The mapping rate looks good (over 90% in all samples). And the vast majority of reads have mapped uniquely, they haven't mapped to multiple locations in the reference genome.
-> > The MultiQC plot below shows the result from the full dataset for comparison.
-> >
-> > ![HISAT2 mapping](../../images/limma-voom_f2c/hisat2_se_plot.png "HISAT2 mapping")
-> {: .solution}
-{: .question}
+The MultiQC plot below shows the result from the full dataset for comparison.
+
+![HISAT2 mapping](../../images/limma-voom_f2c/hisat2_se_plot.png "HISAT2 mapping")
+
+Over 90% of reads have mapped in all samples, a good mapping rate. And the vast majority of reads have mapped uniquely, they haven't mapped to multiple locations in the reference genome.
 
 It is also good practice to visualise the read alignments in the BAM file, for example using IGV, see the [ref-based tutorial](http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#%20Pretreatments).
 
+> ### {% icon tip %} Tip: Downloading a collection
+>
+> To download a collection of datasets (e.g. the collection of BAM files) click on the floppy icon as shown below. This will download a tar file containing all the datasets in the collection.
+>
+> ![Downloading collection](../../images/limma-voom_f2c/collection_download.png "Downloading a collection")
+{: .tip}
+
 ## Check strandness
 
-As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to "guess" the strandness, as explained in the [RNA-seq ref-based tutorial](http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html). This is done through comparing the “strandness of reads” with the “strandness of transcripts”. For this tool, and many of the other RSeQC tools, a reference bed file of genes (`reference genes`) is required. RSeQC provides some reference BED files for model organisms. Alternatively, you can provide your own BED file of reference genes, for example from UCSC (see the [Peaks to Genes tutorial](https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html). Or the **GTF2Bed12** tool can be used to convert a GTF into a BED file.
+As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to "guess" the strandness, as explained in the [RNA-seq ref-based tutorial](http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html). This is done through comparing the “strandness of reads” with the “strandness of transcripts”. For this tool, and many of the other RSeQC tools, a reference bed file of genes (`reference genes`) is required. RSeQC provides some reference BED files for model organisms. Alternatively, you can provide your own BED file of reference genes, for example from UCSC (see the [Peaks to Genes tutorial](https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html). Or the **Convert GTF to BED12** tool can be used to convert a GTF into a BED file.
 
 {% include snippets/import_via_link.md %}
 
@@ -402,7 +413,12 @@ As far as we know this data is unstranded, but as a sanity check you can check t
 >                   - In *"1: RSeQC output"*:
 >                       - *"Type of RSeQC output?"*: `infer_experiment`
 >                           - {% icon param-collection %} *"RSeQC infer_experiment output"*: `Infer Experiment output` (output of **Infer Experiment** {% icon tool %})
+> 3. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
+
+The MultiQC plot below shows the result from the full dataset for comparison.
+
+![Infer Experiment](../../images/limma-voom_f2c/rseqc_infer_experiment_plot.png "Infer Experiment")
 
 > ### {% icon question %} Questions
 >
@@ -411,9 +427,6 @@ As far as we know this data is unstranded, but as a sanity check you can check t
 > > ### {% icon solution %} Solution
 > >
 > > It is unstranded as approximately equal numbers of reads have aligned to the sense and antisense strands.
-> > The MultiQC plot below shows the result from the full dataset for comparison.
-> >
-> > ![Infer Experiment](../../images/limma-voom_f2c/rseqc_infer_experiment_plot.png "Infer Experiment")
 > >
 > {: .solution}
 >
@@ -421,7 +434,7 @@ As far as we know this data is unstranded, but as a sanity check you can check t
 
 ## Check duplicate reads
 
-Duplicate reads are usually kept in RNA-seq differential expression analysis as they can come from highly-expressed genes but it is still a good metric to check. A high percentage of duplicates can indicate a problem with the sample, for example, a low complexity library with not many transcripts, due to not enough RNA used as input. FastQC gives us an idea of duplicates in the reads before mapping (note that it just takes a sample of the data). We can assess the numbers of duplicates in all mapped reads using the **Picard MarkDuplicates** tool. Picard considers duplicates to be reads that map to the same location, based on the start position of where the read maps.
+Duplicate reads are usually kept in RNA-seq differential expression analysis as they can come from highly-expressed genes but it is still a good metric to check. A high percentage of duplicates can indicate a problem with the sample, for example, PCR amplification of a low complexity library (not many transcripts) due to not enough RNA used as input. FastQC gives us an idea of duplicates in the reads before mapping (note that it just takes a sample of the data). We can assess the numbers of duplicates in all mapped reads using the **Picard MarkDuplicates** tool. Picard considers duplicates to be reads that map to the same location, based on the start position of where the read maps.
 
 > ### {% icon hands_on %} Hands-on: Check duplicate reads with **MarkDuplicates**
 >
@@ -435,7 +448,12 @@ Duplicate reads are usually kept in RNA-seq differential expression analysis as 
 >                   - In *"1: Picard output"*:
 >                       - *"Type of Picard output?"*: `Markdups`
 >                       - {% icon param-collection %} *"Picard output"*: `MarkDuplicate metrics` (output of **MarkDuplicates** {% icon tool %})
+> 3. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
+
+The MultiQC plot below shows the result from the full dataset for comparison.
+
+![MarkDups metrics](../../images/limma-voom_f2c/picard_deduplication.png "MarkDups metrics")
 
 > ### {% icon question %} Questions
 >
@@ -444,10 +462,6 @@ Duplicate reads are usually kept in RNA-seq differential expression analysis as 
 > > ### {% icon solution %} Solution
 > >
 > > `MCL1-LE` and `MCL1-LF` have the highest number of duplicates in mapped reads compared to the other samples, similar to what we saw in the raw reads with FastQC.
-> >
-> > The MultiQC plot below shows the result from the full dataset for comparison.
-> >
-> > ![MarkDups metrics](../../images/limma-voom_f2c/picard_deduplication.png "MarkDups metrics")
 > >
 > {: .solution}
 >
@@ -469,8 +483,13 @@ You can check the numbers of reads mapped to each chromosome with the **Samtools
 >                   - In *"1: Samtools output"*:
 >                      - *"Type of Samtools output?"*: `idxstats`
 >                           - {% icon param-collection %} *"Samtools idxstats output"*: `IdxStats output` (output of **IdxStats** {% icon tool %})
->
+> 3. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
+
+The MultiQC plot below shows the result from the full dataset for comparison.
+
+![IdxStats chromsome mappings](../../images/limma-voom_f2c/samtools-idxstats-mapped-reads-plot.png "IdxStats Chromosome Mappings")
+![IdxStats XY ](../../images/limma-voom_f2c/samtools-idxstats-xy-plot.png "IdxStats X/Y Mappings")
 
 > ### {% icon question %} Questions
 >
@@ -480,11 +499,7 @@ You can check the numbers of reads mapped to each chromosome with the **Samtools
 > > ### {% icon solution %} Solution
 > >
 > > 1. Some of the samples have very high mapping on chromosome 5. What is going on there?
-> > The MultiQC plot below shows the result from the full dataset for comparison.
-> > ![IdxStats chromsome mappings](../../images/limma-voom_f2c/samtools-idxstats-mapped-reads-plot.png "IdxStats Chromosome Mappings")
 > > 2. The samples appear to be all female as there are few reads mapping to the Y chromosome. As this is a experiment studying virgin, pregnant and lactating mice if we saw large numbers of reads mapping to the Y chromosome in a sample it would be unexpected and a probable cause for concern.
-> > The MultiQC plot below shows the result from the full dataset for comparison.
-> > ![IdxStats XY ](../../images/limma-voom_f2c/samtools-idxstats-xy-plot.png "IdxStats X/Y Mappings")
 > >
 > {: .solution}
 >
@@ -509,8 +524,16 @@ The coverage of reads along gene bodies can be assessed to check if there is any
 >                       - *"Type of RSeQC output?"*: `gene_body_coverage`
 >                           - {% icon param-collection %} *"RSeQC gene_body_coverage output"*: `Gene Body Coverage (BAM) (text)` (output of **Gene Body Coverage (
 BAM)** {% icon tool %})
+> 3. Inspect the `Webpage` output from MultiQC
 >
 {: .hands_on}
+
+The MultiQC plot below shows the result from the full dataset for comparison.
+
+![Gene Body Coverage](../../images/limma-voom_f2c/rseqc_gene_body_coverage_plot.png "Gene Body Coverage")
+
+The plot below from the RSeQC website shows what samples with 3'biased coverage would look like.
+![Gene Body Coverage comparison](../../images/limma-voom_f2c/genebodycoverage.png "Gene Body Coverage comparison")
 
 > ### {% icon question %} Questions
 >
@@ -519,16 +542,11 @@ BAM)** {% icon tool %})
 > > ### {% icon solution %} Solution
 > >
 > > It looks good. This plot looks a bit noisy in the small FASTQs but it still shows there's pretty even coverage from 5' to 3' ends with no obvious bias in all the samples.
-> > The MultiQC plot below shows the result from the full dataset for comparison.
-> >
-> > ![Gene Body Coverage](../../images/limma-voom_f2c/rseqc_gene_body_coverage_plot.png "Gene Body Coverage")
-> >
-> > The plot below from the RSeQC website shows what samples with 3'biased coverage would look like.
-> > ![Gene Body Coverage comparison](../../images/limma-voom_f2c/genebodycoverage.png "Gene Body Coverage comparison")
 > >
 > {: .solution}
 >
 {: .question}
+
 
 ## Check distribution of reads across features (exons, introns, intergenic..)
 
@@ -547,8 +565,13 @@ We can also check the distribution of reads across known gene features, such as 
 >                   - In *"1: RSeQC output"*:
 >                       - *"Type of RSeQC output?"*: `read_distribution`
 >                           - {% icon param-collection %} *"RSeQC read_distribution output"*: `Read Distribution output` (output of **Read Distribution** {% icon tool %})
+> 3. Inspect the `Webpage` output from MultiQC
 >
 {: .hands_on}
+
+The MultiQC plot below shows the result from the full dataset for comparison.
+
+[Read Distribution](../../images/limma-voom_f2c/rseqc_read_distribution_plot.png "Read Distribution")
 
 > ### {% icon question %} Questions
 >
@@ -557,9 +580,6 @@ We can also check the distribution of reads across known gene features, such as 
 > > ### {% icon solution %} Solution
 > >
 > > It looks good, most of the reads have mapped to exons and not many to introns or intergenic regions. The samples have pretty consistent read distribution, albeit with slightly higher numbers of reads mapping to CDS exons for `MCL1-LC` and `MCL1-LD`, and `MCL1-LE` and `MCL1-LF` have more reads mapping to CDS exons than the other samples.
-> > The MultiQC plot below shows the result from the full dataset for comparison.
-> >
-> > ![Read Distribution](../../images/limma-voom_f2c/rseqc_read_distribution_plot.png "Read Distribution")
 > >
 > {: .solution}
 >
@@ -601,11 +621,15 @@ featureCounts reports the numbers of unassigned reads and the reasons why they a
 
 > ### {% icon hands_on %} Hands-on: Assess reads mapped to genes
 >
-> **MultiQC** {% icon tool %} with the following parameters:
+> 1. **MultiQC** {% icon tool %} with the following parameters:
 >    - *"Which tool was used generate logs?"*: `featureCounts`
 >        - {% icon param-collection %} *"Output of FeatureCounts"*: `featureCounts summary` (output of **featureCounts** {% icon tool %})
+> 2. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
 
+The MultiQC plot below shows the result from the full dataset for comparison.
+
+![featureCounts assignments](../../images/limma-voom_f2c/featureCounts_assignment_plot.png "featureCounts assignments")
 
 > ### {% icon question %} Questions
 >
@@ -614,9 +638,7 @@ featureCounts reports the numbers of unassigned reads and the reasons why they a
 > > ### {% icon solution %} Solution
 > >
 > > ~60-70% of reads are assigned to exons. This is a fairly typical number for RNA-seq.
-> > The MultiQC plot below shows the result from the full dataset for comparison.
 > >
-> > ![featureCounts assignments](../../images/limma-voom_f2c/featureCounts_assignment_plot.png "featureCounts assignments")
 > {: .solution}
 >
 {: .question}
@@ -645,7 +667,7 @@ Now it is easier to see the counts for a gene across all samples. The accompanyi
 
 # Generating an interactive QC summary report
 
-So far we have run MultiQC on one step at a time, which generates multiple reports for the analysis. However, it would be more convenient to have a single report containing all the QC information for the analysis.
+So far we have run MultiQC on one step at a time which generates multiple reports for the analysis. However, it would be more convenient to have a single report containing all the QC information for the analysis. This can be easily achieved in Galaxy with the MultiQC tool.
 
 > ### {% icon question %} Questions
 >
@@ -721,6 +743,11 @@ BAM)** {% icon tool %})
 > {: .solution}
 >
 {: .question}
+
+
+The MultiQC report can be downloaded by clicking on the floppy disk icon on the dataset in the history as shown below.
+
+![MultiQC download](../../images/limma-voom_f2c/multiqc_download.png "Download MultiQC report")
 
 > ### {% icon question %} Questions
 >
