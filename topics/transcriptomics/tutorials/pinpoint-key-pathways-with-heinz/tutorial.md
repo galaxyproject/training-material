@@ -63,6 +63,14 @@ material. In this tutorial, we start with the interpreted data, which are KO
 ([KEGG Orthology](https://www.genome.jp/kegg/ko.html)) count data. All the data needed for this tutorial are
 available from Zenodo.
 
+> ### {% icon tip %} Background: What is KO?
+>
+> KOs are organism-independent identifiers that group together proteins of similar biochemical functions.
+> It is a term specific to [KEGG](https://www.genome.jp/kegg/) database. It is a group concept, similar to the concept "pathway", which
+> includes a bunch of molecules and their interactions.
+>
+{: .tip}
+
 ## Understanding our input data
 
 According to the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171),
@@ -254,6 +262,18 @@ modeled by a uniform distribution. With this knowledge, we can fit these p-value
 (BUM model), as the figure below shows.
 
 ![p-values are fitted to a mixture model](../../images/bum.jpeg){:width="50%"}
+
+> ### {% icon tip %} Why do we need a mixture model?
+>
+> To avoid making this tutorial sound like a math class, let's focus on the philosophy of using a statistical model.
+> In the graph above, we have visualized the p-values; those bins have some shapes; by viewing the figure, it
+> is possible for us to cherrypick the data points (KO) with mesh eyes, but it must be tedious and boring, nobody wants to
+> spend a few days on doing this. In this situation, computers come into play; however, unlike humans, computers cannot understand the graph but
+> mathematical formulas, that's why we need to fix the data into a statistical model (denoted by the red curve and blue line in the graph),
+> which computers can understand easily.
+>
+{: .tip}
+
 
 Before fitting to BUM model in Galaxy, we need to prepare the input data for the tool
 **Fit a BUM model**, that's a file that only contains p-values.
