@@ -18,7 +18,7 @@
         
         
         <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
-        <meta property="og:title" content="Galaxy Training: RNA-Seq FASTQs to counts" />
+        <meta property="og:title" content="Galaxy Training: RNA-Seq reads to counts" />
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
@@ -151,7 +151,7 @@
 
 <div class="container main-content">
     <section class="tutorial">
-        <h1>RNA-Seq FASTQs to counts</h1>
+        <h1>RNA-Seq reads to counts</h1>
 
         <blockquote class="overview">
             <h3>Overview</h3>
@@ -174,13 +174,13 @@
             
             <li>Understand QC steps that can be performed on RNA-seq data</li>
             
-            <li>Generate interactive reports to summarise QC information with **MultiQC**</li>
+            <li>Generate interactive reports to summarise QC information with MultiQC</li>
             
-            <li>Use the Galaxy **Rule Uploader** to import FASTQs from URLs</li>
+            <li>Use the Galaxy Rule-based Uploader to import FASTQs from URLs</li>
             
-            <li>Make use of Galaxy **Collections** for a tidy analysis</li>
+            <li>Make use of Galaxy Collections for a tidy analysis</li>
             
-            <li>Create a Galaxy **Workflow** that converts RNA-seq reads into counts</li>
+            <li>Create a Galaxy Workflow that converts RNA-seq reads into counts</li>
             
             </ul>
 
@@ -205,7 +205,7 @@
             
 
             
-            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2h</p>
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 3h</p>
             
         </blockquote>
 
@@ -267,11 +267,11 @@
 
 <p>Read sequences are usually stored in compressed (gzipped) FASTQ files. Before the differential expression analysis can proceed, these reads must be aligned to the reference genome and counted into annotated genes. Mapping reads to the genome is a very important task, and many different aligners are available, such as HISAT2 (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4655817/">Kim, Langmead, and Salzberg, 2015</a>), STAR (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3530905/">Dobin et al. 2013</a>) and Subread (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3664803/">Liao, Smyth, and Shi 2013</a>]). Most mapping tasks require larger computers than an average laptop, so usually read mapping is done on a server in a linux-like environment, requiring some programming knowledge. However, Galaxy enables you to do this mapping without needing to know programming and if you don’t have access to a server you can try to use one of the publically available Galaxies e.g. <a href="https://usegalaxy.org">usegalaxy.org</a>, <a href="https://usegalaxy.eu">usegalaxy.eu</a>, <a href="https://usegalaxy.org.au/">usegalaxy.org.au</a>.</p>
 
-<p>If you are sequencing your own data, the sequencing facility will almost always provide compressed FASTQ files which you can upload into Galaxy. If your FASTQs are provided through Galaxy’s Shared Data, you can easily import them into a history. For publicly available sequence data, such as from GEO/SRA/ENA, Galaxy’s Rule-Based Uploader can be used to import the files from URLs, saving on the need to download to your computer and upload into Galaxy. For more information on the Rule-Based Uploader see the tutorial <a href="http://galaxyproject.github.io/training-material/topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial.html">here</a>.</p>
+<p>If you are sequencing your own data, the sequencing facility will almost always provide compressed FASTQ files which you can upload into Galaxy. If your FASTQs are provided through Galaxy’s Shared Data, you can easily import them into a history. For publicly available sequence data, such as from GEO/SRA/ENA, Galaxy’s Rule-based Uploader can be used to import the files from URLs, saving on the need to download to your computer and upload into Galaxy.</p>
 
-<p>The raw reads used in this tutorial were obtained from SRA from the link given in GEO for the the mouse mammary gland dataset (Fu et al. 2015) (e.g <code class="highlighter-rouge">ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534</code>). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. Some results for the full dataset will be shown for comparison. The small FASTQ files are available in <a href="https://figshare.com/s/f5d63d8c265a05618137">Figshare</a> and the links to the FASTQ files are provided below. We are going to import the files into a Collection. Using Galaxy Collections helps keep the datasets organised and tidy in the history. Collections also make it easier to maintain the sample names through tools and workflows. If you are not familiar with collections, see the <a href="http://galaxyproject.github.io/training-material/topics/galaxy-data-manipulation/tutorials/collections/tutorial.html">Galaxy Collections tutorial</a>.</p>
+<p>The raw reads used in this tutorial were obtained from SRA from the link given in GEO for the the mouse mammary gland dataset (Fu et al. 2015) (e.g <code class="highlighter-rouge">ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534</code>). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. If working with your own data you would use the full data and some results for the full mouse dataset will be shown for comparison. The small FASTQ files are available in <a href="https://figshare.com/s/f5d63d8c265a05618137">Figshare</a> and the links to the FASTQ files are provided below. We are going to import the files into a Collection. Using Galaxy Collections helps keep the datasets organised and tidy in the history. Collections also make it easier to maintain the sample names through tools and workflows. If you are not familiar with collections, see the <a href="/training-material/topics/galaxy-data-manipulation/tutorials/collections/tutorial.html">Galaxy Collections tutorial</a>.</p>
 
-<p>The sample information (sample ID, Group) and link to the FASTQ file (URL) are in the grey box below.</p>
+<p>The sample information (sample ID, Group) and link to the FASTQ file (URL) are in the grey box below. To generate a file like this to import data from SRA/ENA see the <a href="/training-material/topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial.html">Galaxy Rule-based Uploader tutorial</a>.</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SampleID	Group	URL
 MCL1-DL	basallactate	https://ndownloader.figshare.com/files/5053573?private_link=f5d63d8c265a05618137
@@ -293,7 +293,7 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
 <ul>
   <li>Strip the <em>header</em> out of the sample information (it doesn’t contain a URL Galaxy can download).</li>
   <li>Define the file <strong>Identifier</strong> column (<code class="highlighter-rouge">SampleID</code>).</li>
-  <li>Define the <em>URL</em> column (<code class="highlighter-rouge">URL</code>) (this is the location Galaxy can download the data from).</li>
+  <li>Define the <strong>URL</strong> column (<code class="highlighter-rouge">URL</code>) (this is the location Galaxy can download the data from).</li>
   <li>Tell Galaxy to treat these files as <code class="highlighter-rouge">fastqsanger.gz</code> files</li>
   <li>Tell Galaxy to treat these files as <code class="highlighter-rouge">mm10</code> files</li>
 </ul>
@@ -302,8 +302,8 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
   <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
 
   <ol>
-    <li>Create a new history for this tutorial e.g. <code class="highlighter-rouge">RNA-seq FASTQs to counts</code></li>
-    <li>Import the files from Figshare using Galaxy’s Rule-Based Uploader.
+    <li>Create a new history for this tutorial e.g. <code class="highlighter-rouge">RNA-seq reads to counts</code></li>
+    <li>Import the files from Figshare using Galaxy’s Rule-based Uploader.
       <ul>
         <li>Open the Galaxy Upload Manager</li>
         <li>Click the tab <strong>Rule-based</strong>
@@ -316,7 +316,7 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
         <li>
           <p>Click <strong>Build</strong></p>
 
-          <figure id="figure-2"><img src="../../images/limma-voom_f2c/rule_uploader.png" alt="Rule Uploader" title="Rule Uploader" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Rule Uploader</figcaption></figure>
+          <figure id="figure-2"><img src="../../images/limma-voom_f2c/rule_uploader.png" alt="Rule-based Uploader" title="Rule-based Uploader" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Rule-based Uploader</figcaption></figure>
         </li>
         <li>
           <p>In the <code class="highlighter-rouge">rules editor</code> that pops up:</p>
@@ -350,7 +350,7 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
             <li>Click <code class="highlighter-rouge">Upload</code></li>
           </ul>
 
-          <figure id="figure-3"><img src="../../images/limma-voom_f2c/rule_editor.png" alt="Rule Editor" title="Rule Editor" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Rule Editor</figcaption></figure>
+          <figure id="figure-3"><img src="../../images/limma-voom_f2c/rule_editor.png" alt="Rules Editor" title="Rules Editor" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Rules Editor</figcaption></figure>
 
           <p>You should see a collection (list) called <code class="highlighter-rouge">fastqs</code> in your history containing all 12 FASTQ files, like below.</p>
 
@@ -417,7 +417,7 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
 
 <blockquote class="tip">
   <h3 id="tip-tip-fastq-format"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: FASTQ format</h3>
-  <p>If you are not familiar with FASTQ format, see the tutorial <a href="https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html">here</a></p>
+  <p>If you are not familiar with FASTQ format, see the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control tutorial</a></p>
 </blockquote>
 
 <blockquote class="hands_on">
@@ -518,7 +518,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 <figure id="figure-15"><img src="../../images/limma-voom_f2c/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels" title="Sequence Duplication Levels" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Sequence Duplication Levels</figcaption></figure>
 <figure id="figure-16"><img src="../../images/limma-voom_f2c/fastqc_adapter_content_plot.png" alt="Adapter Content" title="Adapter Content" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Adapter Content</figcaption></figure>
 
-<p>See the <a href="http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">ref-based tutorial</a> for more information on FastQC plots.</p>
+<p>See the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control tutorial</a> for more information on FastQC plots.</p>
 
 <blockquote class="question">
   <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -593,7 +593,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 </blockquote>
 
-<p>We can take a look at the FASTQs again now that they’ve been trimmed.</p>
+<p>We can take a look at the reads again now that they’ve been trimmed.</p>
 
 <h2 id="check-trimmed-reads">Check trimmed reads</h2>
 
@@ -639,7 +639,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <h1 id="mapping">Mapping</h1>
 
-<p>Now that we have prepared our reads, we can align the reads for our 12 samples. There is an existing reference genome for mouse and we will map the reads to that. The current version of the mouse reference genome is <code class="highlighter-rouge">mm10/GRCm38</code>. Here we will use <a href="https://ccb.jhu.edu/software/hisat2/index.shtml">HISAT2</a>, the descendent of widely-used TopHat, to align the reads, but alternative mappers could be used, such as STAR. See the <a href="http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#Mapping">RNA-seq ref-based tutorial</a> for more information on RNA-seq mappers. There are often numerous mapping parameters that we can specify, but usually the default mapping parameters are fine. However, library type (paired-end vs single-end) and library strandness (stranded vs unstranded) require some different settings when mapping and counting, so they are two important pieces of information to know about samples. The mouse data comprises unstranded, single-end reads so we will specify that where necessary. If we had paired-end data or stranded data, we would specify that. HISAT2 can output a mapping summary file that tells what proportion of reads mapped to the reference genome. Summary files for multiple samples can be summarised with MultiQC. As we’re only using a subset of 1000 reads per sample, aligning should just take a minute or so. To run the full samples from this dataset would take longer.</p>
+<p>Now that we have prepared our reads, we can align the reads for our 12 samples. There is an existing reference genome for mouse and we will map the reads to that. The current version of the mouse reference genome is <code class="highlighter-rouge">mm10/GRCm38</code>. Here we will use <a href="https://ccb.jhu.edu/software/hisat2/index.shtml">HISAT2</a>, the descendent of widely-used TopHat, to align the reads, but alternative mappers could be used, such as STAR. See the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#Mapping">RNA-seq ref-based tutorial</a> for more information on RNA-seq mappers. There are often numerous mapping parameters that we can specify, but usually the default mapping parameters are fine. However, library type (paired-end vs single-end) and library strandness (stranded vs unstranded) require some different settings when mapping and counting, so they are two important pieces of information to know about samples. The mouse data comprises unstranded, single-end reads so we will specify that where necessary. If we had paired-end data or stranded data, we would specify that. HISAT2 can output a mapping summary file that tells what proportion of reads mapped to the reference genome. Summary files for multiple samples can be summarised with MultiQC. As we’re only using a subset of 1000 reads per sample, aligning should just take a minute or so. To run the full samples from this dataset would take longer.</p>
 
 <h2 id="map-reads-to-reference-genome">Map reads to reference genome</h2>
 
@@ -713,7 +713,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
         <blockquote class="solution">
           <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-          <p>See the answer in the <a href="http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#%20Pretreatments">ref-based tutorial</a></p>
+          <p>See the answer in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#%20Pretreatments">RNA-seq ref-based tutorial</a></p>
 
         </blockquote>
 
@@ -751,19 +751,19 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>Over 90% of reads have mapped in all samples, a good mapping rate. And the vast majority of reads have mapped uniquely, they haven’t mapped to multiple locations in the reference genome.</p>
 
-<p>It is also good practice to visualise the read alignments in the BAM file, for example using IGV, see the <a href="http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#%20Pretreatments">ref-based tutorial</a>.</p>
+<p>It is also good practice to visualise the read alignments in the BAM file, for example using IGV, see the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#%20Pretreatments">RNA-seq ref-based tutorial</a>.</p>
 
 <blockquote class="tip">
   <h3 id="tip-tip-downloading-a-collection"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Downloading a collection</h3>
 
-  <p>To download a collection of datasets (e.g. the collection of BAM files) click on the floppy icon as shown below. This will download a tar file containing all the datasets in the collection.</p>
+  <p>To download a collection of datasets (e.g. the collection of BAM files) click on the floppy icon as shown below. This will download a tar file containing all the datasets in the collection. Note that for BAM files the .bai indexes (required for IGV) will be included automatically in the download.</p>
 
   <figure id="figure-20"><img src="../../images/limma-voom_f2c/collection_download.png" alt="Downloading collection" title="Downloading a collection" /><figcaption><span class="figcaption-prefix">Figure 20:</span> Downloading a collection</figcaption></figure>
 </blockquote>
 
 <h2 id="check-strandness">Check strandness</h2>
 
-<p>As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to “guess” the strandness, as explained in the <a href="http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">RNA-seq ref-based tutorial</a>. This is done through comparing the “strandness of reads” with the “strandness of transcripts”. For this tool, and many of the other RSeQC tools, a reference bed file of genes (<code class="highlighter-rouge">reference genes</code>) is required. RSeQC provides some reference BED files for model organisms. Alternatively, you can provide your own BED file of reference genes, for example from UCSC (see the <a href="https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html">Peaks to Genes tutorial</a>. Or the <strong>Convert GTF to BED12</strong> tool can be used to convert a GTF into a BED file.</p>
+<p>As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to “guess” the strandness, as explained in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">RNA-seq ref-based tutorial</a>. This is done through comparing the “strandness of reads” with the “strandness of transcripts”. For this tool, and many of the other RSeQC tools, a reference bed file of genes (<code class="highlighter-rouge">reference genes</code>) is required. RSeQC provides some reference BED files for model organisms. You can import the RSeQC mm10 RefSeq BED file from the link <code class="highlighter-rouge">https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download</code> (and rename to <code class="highlighter-rouge">reference genes</code>) or import a file from Shared data if provided. Alternatively, you can provide your own BED file of reference genes, for example from UCSC (see the <a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html">Peaks to Genes tutorial</a>. Or the <strong>Convert GTF to BED12</strong> tool can be used to convert a GTF into a BED file.</p>
 
 <blockquote>
 
@@ -1083,7 +1083,7 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<p><a href="../../images/limma-voom_f2c/rseqc_read_distribution_plot.png" title="Read Distribution">Read Distribution</a></p>
+<figure id="figure-27"><img src="../../images/limma-voom_f2c/rseqc_read_distribution_plot.png" alt="Read Distribution" title="Read Distribution" /><figcaption><span class="figcaption-prefix">Figure 27:</span> Read Distribution</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-7"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1171,7 +1171,7 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-27"><img src="../../images/limma-voom_f2c/featureCounts_assignment_plot.png" alt="featureCounts assignments" title="featureCounts assignments" /><figcaption><span class="figcaption-prefix">Figure 27:</span> featureCounts assignments</figcaption></figure>
+<figure id="figure-28"><img src="../../images/limma-voom_f2c/featureCounts_assignment_plot.png" alt="featureCounts assignments" title="featureCounts assignments" /><figcaption><span class="figcaption-prefix">Figure 28:</span> featureCounts assignments</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-8"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1208,7 +1208,7 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
 
 <p>Take a look at the output (the output for the full dataset is shown below).</p>
 
-<figure id="figure-28"><img src="../../images/limma-voom_f2c/count_matrix.png" alt="Count matrix" title="Count matrix" /><figcaption><span class="figcaption-prefix">Figure 28:</span> Count matrix</figcaption></figure>
+<figure id="figure-29"><img src="../../images/limma-voom_f2c/count_matrix.png" alt="Count matrix" title="Count matrix" /><figcaption><span class="figcaption-prefix">Figure 29:</span> Count matrix</figcaption></figure>
 
 <p>Now it is easier to see the counts for a gene across all samples. The accompanying limma-voom tutorial shows how gene information (symbols etc) can be added to a count matrix.</p>
 
@@ -1231,7 +1231,7 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
 
     <p>MultiQC summary of all programs used (screenshot from the full dataset).</p>
 
-    <figure id="figure-29"><img src="../../images/limma-voom_f2c/multiqc_summary.png" alt="MultiQC Summary" title="MultiQC Summary" /><figcaption><span class="figcaption-prefix">Figure 29:</span> MultiQC Summary</figcaption></figure>
+    <figure id="figure-30"><img src="../../images/limma-voom_f2c/multiqc_summary.png" alt="MultiQC Summary" title="MultiQC Summary" /><figcaption><span class="figcaption-prefix">Figure 30:</span> MultiQC Summary</figcaption></figure>
 
     <p><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
     <ul>
@@ -1398,7 +1398,7 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
 
 <p>The MultiQC report can be downloaded by clicking on the floppy disk icon on the dataset in the history as shown below.</p>
 
-<figure id="figure-30"><img src="../../images/limma-voom_f2c/multiqc_download.png" alt="MultiQC download" title="Download MultiQC report" /><figcaption><span class="figcaption-prefix">Figure 30:</span> Download MultiQC report</figcaption></figure>
+<figure id="figure-31"><img src="../../images/limma-voom_f2c/multiqc_download.png" alt="MultiQC download" title="Download MultiQC report" /><figcaption><span class="figcaption-prefix">Figure 31:</span> Download MultiQC report</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-10"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1422,9 +1422,9 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
 
 <h1 id="creating-a-workflow-of-the-analysis">Creating a workflow of the analysis</h1>
 
-<p>You can now extract a workflow from the steps that have been performed, as shown in the <a href="https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html#extracting-workflow">Peaks to Genes tutorial</a>. This is a way to help keep a record of the steps performed. It also enables efficient rerunning of a multi-step analysis, such as RNA-seq.</p>
+<p>You can now extract a workflow from the steps that have been performed, as shown in the <a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html#extracting-workflow">Peaks to Genes tutorial</a>. This is a way to help keep a record of the steps performed. It also enables efficient rerunning of a multi-step analysis, such as RNA-seq.</p>
 
-<figure id="figure-31"><img src="../../images/limma-voom_f2c/workflow.png" alt="fastq to counts Workflow" title="FASTQ to counts Workflow" /><figcaption><span class="figcaption-prefix">Figure 31:</span> FASTQ to counts Workflow</figcaption></figure>
+<figure id="figure-32"><img src="../../images/limma-voom_f2c/workflow.png" alt="fastq to counts Workflow" title="FASTQ to counts Workflow" /><figcaption><span class="figcaption-prefix">Figure 32:</span> FASTQ to counts Workflow</figcaption></figure>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
@@ -1445,7 +1445,7 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
                 
                 <li>MultiQC can be used to create a nice summary report of QC information</li>
                 
-                <li>The Galaxy Rule Uploader, Collections and Workflows can help make analysis more efficient and easier</li>
+                <li>The Galaxy Rule-based Uploader, Collections and Workflows can help make analysis more efficient and easier</li>
                 
             </ul>
         </blockquote>
@@ -1462,12 +1462,12 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
         <hr>
         <br>
 
-        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=RNA-Seq FASTQs to counts (Transcriptomics)">Loading...
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=RNA-Seq reads to counts (Transcriptomics)">Loading...
         </iframe>
 
         <blockquote class="feedback">
             <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
-            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=RNA-Seq FASTQs to counts (Transcriptomics)">Feedback Form</a>.</p>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=RNA-Seq reads to counts (Transcriptomics)">Feedback Form</a>.</p>
         </blockquote>
     </section>
 </div>
