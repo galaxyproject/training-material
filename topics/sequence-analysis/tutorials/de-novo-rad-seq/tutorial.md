@@ -71,13 +71,7 @@ We will look at the first run SRR034310 out of seven which includes 16 samples f
 >    >    * Press **Save**
 >    {: .tip}
 >
->    As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.
->
->    > ### {% icon comment %} Comments
->    > - Add the "stickleback" custom build from the Fasta reference genome file
->    > - Edit the "Database/Build" to select "stickleback"
->    > - Rename the datasets according to the samples
->    {: .comment}
+>    As default, Galaxy takes the link as name.
 {: .hands_on}
 
 The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be demultiplexed. To do so, we can use the Process Radtags tool from STACKS.
@@ -91,7 +85,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 > 1. **Process Radtags** {% icon tool %}: Run `Stacks: process radtags` on FastQ file to demultiplex the reads
 >  - Single-end or paired-end reads files: Single-end files
 >  - singles-end reads infile(s): SRR034310.fastq(.gz)
->  - Barcode file: Barcode fileBarcodes_SRR034310.tabular
+>  - Barcode file: Barcodes_SRR034310.tabular
 >  - Number of enzymes: One
 >  - Enzyme: sbfI
 >  - Capture discarded reads to a file: Yes
