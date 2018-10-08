@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-title: RNA-seq differential expression with Limma-voom
+title: RNA-seq counts to differentially expressed genes
 zenodo_link: "https://figshare.com/s/f5d63d8c265a05618137"
 enable: "false"
 questions:
@@ -13,9 +13,9 @@ objectives:
   - "Visualisation and interactive exploration of count data"
 time_estimation: "3h"
 key_points:
-  - "Use limma-voom tool to perform differential expression and output useful plots"
+  - "The limma-voom tool can be used to perform differential expression and output useful plots"
   - "Multiple comparisons can be input and compared"
-  - "DE results can be interactively explored with limma-voom via Glimma"
+  - "Results can be interactively explored with limma-voom via Glimma"
 contributors:
   - mblue9
   - bphipson
@@ -38,7 +38,7 @@ The data for this tutorial comes from a Nature Cell Biology paper, [EGF-mediated
 
 This study examined the expression profiles of basal stem-cell enriched cells (B) and committed luminal cells (L) in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status. Note that two biological replicates are used here, two independent sorts of cells from the mammary glands of virgin, pregnant or lactating mice, however three replicates is usually recommended as a minimum requirement for RNA-seq. In this tutorial we will use the GEO counts file as a starting point for our analysis. Alternatively, you could create a count matrix from the raw sequence reads, as demonstrated in the [RNA-seq FASTQs to counts tutorial](https://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/limma-voom_fastqs_to_counts/tutorial.html). The GEO count file was generated from aligning the reads to the mouse `mm10` genome with the [Rsubread](https://www.biorxiv.org/content/early/2018/08/15/377762) aligner, followed by counting reads mapped to RefSeq genes with [featureCounts](https://academic.oup.com/bioinformatics/article/30/7/923/232889) (Liao, Smyth, and Shi 2014), see the [Fu paper](https://www.nature.com/articles/ncb3117) for details.
 
-We will use **limma-voom** for identifying differentially expressed genes here. Other popular alternatives are edgeR and DESeq2. Limma-voom can be comparable to DESeq2 in terms of precision, accuracy and sensitivity [Costa-Silva, Domingues and Lopes 2017](https://www.ncbi.nlm.nih.gov/pubmed/29267363) and, due to its speed, it's particularly recommended for large-scale datasets with 100s of samples [Chen, Lun, Smyth 2016](https://f1000research.com/articles/5-1438/v2).
+We will use **limma-voom** for identifying differentially expressed genes here. Other popular alternatives are edgeR and DESeq2. Limma-voom has been shown to be perform well in terms of precision, accuracy and sensitivity [Costa-Silva, Domingues and Lopes 2017](https://www.ncbi.nlm.nih.gov/pubmed/29267363) and, due to its speed, it's particularly recommended for large-scale datasets with 100s of samples [Chen, Lun, Smyth 2016](https://f1000research.com/articles/5-1438/v2).
 
 This is a Galaxy tutorial based on material from the [COMBINE R RNAseq workshop](http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html), first taught [here](http://combine-australia.github.io/2016-05-11-RNAseq/).
 
@@ -58,9 +58,9 @@ This is a Galaxy tutorial based on material from the [COMBINE R RNAseq workshop]
 
 We will use three files for this analysis:
 
- * Count matrix (genes in rows, samples in columns)
- * Sample information file (sample id, group)
- * Gene annotation file (gene id, symbol, description)
+ * **Count matrix** (genes in rows, samples in columns)
+ * **Sample information** file (sample id, group)
+ * **Gene annotation** file (gene id, symbol, description)
 
 ## Import data
 
@@ -102,11 +102,11 @@ We will use three files for this analysis:
 {: .hands_on}
 
 
-Let’s take a look at the data. The `seqdata` file contains information about genes (one gene per row), the first column has the Entrez gene id, the second has the gene length and the remaining columns contain information about the number of reads aligning to the gene in each experimental sample. There are two replicates for each cell type and time point (detailed sample info can be found in file “GSE60450_series_matrix.txt” from the GEO website). The first few lines of the seqdata file are shown below.
+Let’s take a look at the data. The `seqdata` file contains information about genes (one gene per row), the first column has the Entrez gene id, the second has the gene length and the remaining columns contain information about the number of reads aligning to the gene in each experimental sample. There are two replicates for each cell type and time point (detailed sample info can be found in file “GSE60450_series_matrix.txt” from the GEO website). The first few rows and columns of the seqdata file are shown below.
 
 ![seqdata file](../../images/limma-voom/seqdata.png "Count file (before formatting)")
 
-The sampleinfo file contains basic information about the samples that we will need for the analysis today. See below.
+The sample information file contains basic information about the samples that we will need for the analysis today. See below.
 
 ![sampleinfo file](../../images/limma-voom/sampleinfo.png "Sample information file (before formatting)")
 
@@ -130,9 +130,9 @@ Let’s create a new file, `countdata`, that contains only the counts for the 12
 >    ![countdata file](../../images/limma-voom/countdata.png "Count file (after formatting)")
 {: .hands_on}
 
-Let’s create a new file, `factordata`, that contains the groups information that we need for the limma-voom tool. We'll combine the cell type and mouse status columns in the sampleinfo file to make a column with the 6 group names e.g. we'll combine the CellType `basal` with the Status `pregnant` to make the group name `basalpregnant`.
+Let’s create a new file, `factordata`, that contains the groups information that we need for the limma-voom tool. We'll combine the cell type and mouse status columns in the sample information file to make a column with the 6 group names e.g. we'll combine the CellType `basal` with the Status `pregnant` to make the group name `basalpregnant`.
 
-> ### {% icon hands_on %} Hands-on: Format the sampleinfo data
+> ### {% icon hands_on %} Hands-on: Format the sample information file
 >
 > 1. **Merge Columns** {% icon tool %}: Run **Merge Columns together** with the following settings:
 >      - *"Select data"*: `sampleinfo`
@@ -179,8 +179,14 @@ There are a few ways to filter out lowly expressed genes. When there are biologi
 
 > ### {% icon details %} More details on filtering
 >
-> The limma tool uses the `cpm` function from the edgeR library (M D Robinson, McCarthy, and Smyth 2010) to generate the CPM values which can then be filtered. Note that by converting to CPMs we are normalising for the different sequencing depths for each sample. A CPM of 0.5 is used as it corresponds to a count of 10-15 for the library sizes in this data set. If the count is any smaller, it is considered to be very low, indicating that the associated gene is not expressed in that sample. A requirement for expression in two or more libraries is used as each group contains two replicates. This ensures that a gene will be retained if it is only expressed in one group. Smaller CPM thresholds are usually appropriate for larger libraries. As a general rule, a good threshold can be chosen by identifying the CPM that corresponds to a count of 10, which in this case is about 0.5. You should filter with CPMs rather than filtering on the counts directly, as the latter does not account for differences in library sizes between samples.
+> The limma tool uses the `cpm` function from the edgeR package [Robinson, McCarthy, and Smyth 2010](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2796818/) to generate the CPM values which can then be filtered. Note that by converting to CPMs we are normalizing for the different sequencing depths for each sample. A CPM of 0.5 is used as it corresponds to a count of 10-15 for the library sizes in this data set. If the count is any smaller, it is considered to be very low, indicating that the associated gene is not expressed in that sample. A requirement for expression in two or more libraries is used as each group contains two replicates. This ensures that a gene will be retained if it is only expressed in one group. Smaller CPM thresholds are usually appropriate for larger libraries. As a general rule, a good threshold can be chosen by identifying the CPM that corresponds to a count of 10, which in this case is about 0.5. You should filter with CPMs rather than filtering on the counts directly, as the latter does not account for differences in library sizes between samples.
 {: .details}
+
+## Normalization for composition bias
+
+Normalization of RNA-seq is typically performed in order to eliminate composition biases between libraries, for example, if there are a few highly expressed gene dominating in some samples. By default, TMM normalization [Robinson and Oshlack 2010](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2864565/) is performed by the limma-voom tool (this can be changed under **Advanced Option**), using the edgeR `calcNormFactors` function. TMM stands for trimmed mean of M values and it uses a weighted trimmed mean of the log expression ratios to scale the counts for the samples.
+
+![TMM normalization](../../images/limma-voom/TMM.png "TMM normalization")
 
 ## Specify Contrast(s) of interest
 
@@ -211,12 +217,16 @@ Since we are interested in differences between groups, we need to specify which 
 >              - `Heatmaps (top DE genes)`
 >              - `Stripcharts (top DE genes)`
 >          - *"Output Library information file?"*: `Yes`
-> 2. Inspect the Report produced by clicking on the {% icon galaxy-eye %} (eye) icon
+> 2. Inspect the `Report` produced by clicking on the {% icon galaxy-eye %} (eye) icon
 {: .hands_on}
 
 # Quality Control of count data
 
-Before we check out the differentially expressed genes, we can look at a few different plots to check that the data is good quality, and that the samples are as we would expect.
+Before we check out the differentially expressed genes, we can look at the report information to check that the data is good quality and that the samples are as we would expect.
+
+First scroll down the report to take a look at the summary and additional information near the bottom. It should look similar to below. You can check that the correct samples have been assigned to the correct groups, what settings were used (e.g. filters, normalisation method) and also how many genes were filtered out due to low expression.
+
+![Report summary](../../images/limma-voom/report_summary.png)
 
 >    > ### {% icon question %} Question
 >    >
@@ -224,16 +234,16 @@ Before we check out the differentially expressed genes, we can look at a few dif
 >    >
 >    >    > ### {% icon solution %} Solution
 >    >    >
->    >    > 11375 genes were filtered out as insignificant as they were without more than 0.5 CPM in at least 2 samples. This can be seen in the report as shown below.
->    >    >
->    >    >   ![Filtered counts](../../images/limma-voom/filtcounts.png){: width="750px"}
+>    >    > 11375 genes were filtered out as insignificant as they were without more than 0.5 CPM in at least 2 samples.
 >    >    >
 >    >    {: .solution}
 >    {: .question}
 
+Next we'll take a look at the plots in the report. 
+
 ## Density plots
 
-Density plots can be output if filter on low counts is applied. These plots allow comparison of the counts distributions before and after filtering. The samples are coloured by the groups. Count data is not normally distributed, so if we want to examine the distributions of the raw counts we need to log the counts. We typically check the distribution of the read counts on the log2 scale. A CPM value of 1 is equivalent to a log-CPM value of 0 and the CPM we used of 0.5 is equivalent to a log-CPM of -1. It can be seen in the before filtering plot below that a large proportion of genes within each sample are not expressed or lowly-expressed and our filter of CPM of 0.5 (in at least 2 samples) removes a lot of these uninformative genes.
+Density plots can be output if filtersam on low counts is applied. These plots allow comparison of the counts distributions before and after filtering. The samples are coloured by the groups. Count data is not normally distributed, so if we want to examine the distributions of the raw counts we need to log the counts. We typically check the distribution of the read counts on the log2 scale. A CPM value of 1 is equivalent to a log-CPM value of 0 and the CPM we used of 0.5 is equivalent to a log-CPM of -1. It can be seen in the before filtering plot below that a large proportion of genes within each sample are not expressed or lowly-expressed and our filter of CPM of 0.5 (in at least 2 samples) removes a lot of these uninformative genes.
 
 ![Density Plots](../../images/limma-voom/densityplots.png "Density Plots")
 
@@ -252,31 +262,31 @@ From the plots we can see that 0.5 CPM is equivalent to ~10 counts in each of th
 
 ## Box plots
 
-By default, TMM normalization is performed to eliminate composition biases between libraries (Mark D Robinson and Oshlack 2010). This generates a set of normalization factors, where the product of these factors and the library sizes defines the effective library size. The edgeR `calcNormFactors` function calculates the normalization factors between libraries. TMM normalisation (and most scaling normalisation methods) scale relative to one sample. The normalization factors multiply to unity across all libraries. A normalization factor below one indicates that the library size will be scaled down, as there is more suppression (i.e., composition bias) in that library relative to the other libraries. This is also equivalent to scaling the counts upwards in that sample. Conversely, a factor above one scales up the library size and is equivalent to downscaling the counts. We can see the normalisation factors for these samples in the Library Size Information file we selected to output below.
-
-![Library Info file](../../images/limma-voom/libinfo.png "Library information file"){: width="600px"}
-
-> ### {% icon question %} Question
->
-> Which sample has the largest normalisation factor? Which sample has the smallest?
->    > ### {% icon solution %} Solution
->    >
->    > MCL1.LA has the largest normalisation factor and MCL1.LE the smallest.
->    >
->    {: .solution}
-{: .question}
-
 We can also use boxplots to check the distributions. From the boxplots generated by the limma-voom tool we can see that overall the distributions are not identical but still not very different. If a sample is really far above or below the blue horizontal line we may need to investigate that sample further.
 
 ![Box Plots](../../images/limma-voom/boxplots.png "Box Plots")
 
 > ### {% icon question %} Question
 >
-> Compare the box plots before and after TMM normalisation. Can you see any differences? 
+> Compare the box plots before and after TMM normalization. Can you see any differences? 
 >
 >    > ### {% icon solution %} Solution
 >    >
->    > After the normalisation more of the samples are closer to the median horizontal line.
+>    > After the normalization more of the samples are closer to the median horizontal line.
+>    >
+>    {: .solution}
+{: .question}
+
+The TMM normalization generates normalization factors, where the product of these factors and the library sizes defines the effective library size. TMM normalization (and most scaling normalization methods) scale relative to one sample. The normalization factors multiply to unity across all libraries. A normalization factor below one indicates that the library size will be scaled down, as there is more suppression (i.e., composition bias) in that library relative to the other libraries. This is also equivalent to scaling the counts upwards in that sample. Conversely, a factor above one scales up the library size and is equivalent to downscaling the counts. We can see the normalization factors for these samples in the Library Size Information file below that we selected to output.
+
+![Library Info file](../../images/limma-voom/libinfo.png "Library information file"){: width="600px"}
+
+> ### {% icon question %} Question
+>
+> Which sample has the largest normalization factor? Which sample has the smallest?
+>    > ### {% icon solution %} Solution
+>    >
+>    > MCL1.LA has the largest normalization factor and MCL1.LE the smallest.
 >    >
 >    {: .solution}
 {: .question}
@@ -284,11 +294,11 @@ We can also use boxplots to check the distributions. From the boxplots generated
 It is considered good practice to make MD plots for all the samples as a quality check, as described in the edgeR workflow article [here](https://f1000research.com/articles/5-1438/v2). These plots allow expression profiles of individual samples to be explored more closely. An MD plot shows the log-fold change between a sample against the average expression across all the other samples. This visualisation can help you see if there are genes highly upregulated or downregulated in a sample.
 If we look at mean difference plots for these samples, we should be able to see the composition bias problem. The mean-difference plots show average expression (mean: x-axis) against log-fold-changes (difference: y-axis). 
 
-Take a look at the MD plots for the two samples MCL1.LA and MCL1.LE. What do you notice about these samples?
+Let's take a look at the MD plots for the two samples MCL1.LA and MCL1.LE that had the largest and smallest normalizaion factors.
 
-The MD plots on the left below show the counts normalised for library size and the plots on the right show the counts after the TMM normalisation has been applied. MCL1.LA had the largest normalisation factor and was above the median line in the unnormalised by TMM box plots. MCL1.LE had the smallest normalisation factor and was below the median line in the box plots. These MD plots help show the composition bias problem has been addressed.
-![MD Plot LA](../../images/limma-voom/mdsampleLA.png "MD Plot for MCL1.LA")
-![MD Plot LE](../../images/limma-voom/mdsampleLE.png "MD Plot for MCL1.LE")
+The MD plots on the left below show the counts normalized for library size and the plots on the right show the counts after the TMM normalization has been applied. MCL1.LA had the largest normalization factor and was above the median line in the unnormalized by TMM box plots. MCL1.LE had the smallest normalization factor and was below the median line in the box plots. These MD plots help show the composition bias problem has been addressed.
+![MD Plot LA](../../images/limma-voom/mdsampleLA.png "MD Plot for MCL1.LA before and after TMM normalisation")
+![MD Plot LE](../../images/limma-voom/mdsampleLE.png "MD Plot for MCL1.LE before and after TMM normalisation")
 
 
 ## Multidimensional scaling plot
@@ -310,7 +320,7 @@ Look at the MDS plot coloured by group. Do you notice something strange going on
 
 > ### {% icon hands_on %} Hands-on: Use the Rerun button to redo steps
 >
-> 1. Import the correct sampleinfo file from `https://ndownloader.figshare.com/files/5999832?private_link=1d788fd384d33e913a2a`
+> 1. Import the correct sample information file from `https://ndownloader.figshare.com/files/5999832?private_link=1d788fd384d33e913a2a`
 > 2. Use the Rerun button in the History to redo the Merge and Cut steps on the correct sample information file.
 >
 {: .hands_on}
@@ -421,7 +431,7 @@ Before following up on the DE genes with further lab work, it is recommended to 
 
 ## Stripcharts of top genes
 
-Stripcharts showing the normalised expression of top genes by groups can be auto-generated.
+Stripcharts showing the normalized expression of top genes by groups can be auto-generated.
 
 ![Stripchart Plot](../../images/limma-voom/stripcharts.png "Stripcharts of top genes"){: width="950px"}
 
@@ -437,9 +447,7 @@ An interactive version of the mean-difference plots is possible via the [Glimma]
 > `Egf` was a gene identifed as very highly expressed in the Fu paper and confirmed with qRT-PCR, see Fig. 6c from the paper below.
 > ![Fu EGF gene](../../images/limma-voom/fu_egf.png "Fu et al, Nat Cell Biol 2015")
 >
-> 1. Search for `Egf` in the Glimma interactive table.
->
->  You should see something similar to below.
+> Search for `Egf` in the Glimma interactive table. You should see something similar to below.
 >
 > ![Glimma EGF gene](../../images/limma-voom/glimma_egf.png "Glimma EGF gene")
 >
@@ -546,13 +554,9 @@ To identify categories significantly enriched/unenriched below some p-value cuto
 
 A plot of the top 10 over-represented GO terms (by adjusted *p*-value) can be output from the goseq tool to help visualise results.
 
-Basal pregnant vs lactate top 10 GO terms
+![Basal Plot](../../images/limma-voom/basal_top_GO.png "Basal pregnant vs lactate top 10 GO terms")
 
-![Basal Plot](../../images/limma-voom/basal_top_GO.png "Basal top 10 GO terms")
-
-Luminal pregnant vs lactate top 10 GO terms
-
-![Luminal Plot](../../images/limma-voom/luminal_top_GO.png "Luminal top 10 GO terms")
+![Luminal Plot](../../images/limma-voom/luminal_top_GO.png "Luminal pregnant vs lactate top 10 GO terms")
 
 The Fu paper also used goseq and found enrichment in the luminal cells for general metabolic processes, lipid biosynthesis and transport proteins, and enrichment for cell contractility genes in the basal cells.
 
@@ -613,7 +617,7 @@ Cxcl1
 >    - Paste the information above (the 31 gene symbols and header) into the Galaxy Data Uploader Paste/Fetch box 
 >    - Set File Type to `tabular`
 >    - Use the {% icon galaxy-pencil %} (pencil) icon to rename the file to `heatmap genes`
-> 2. Rerun limma-voom selecting *"Output Normalised Counts Table?"*: `Yes`
+> 2. Rerun limma-voom selecting *"Output Normalized Counts Table?"*: `Yes`
 > 3. **Join two Datasets** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Join"*: the `heatmap genes` file
 >    - *"using column"*: `Column: 1`
