@@ -121,19 +121,6 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 > You can use the `Charts` functionality through the Visualize button reachable on the `Radtags logs` file you just generated.
 >
 > If like me you don't have payed attention to the organization of you file for the graphical representation you obtain a non optimal bars diagram with a not intelligent X-axis ordering. There is a lot of different manner to fix this. You can use a copy/paste "bidouille" or you can use Galaxy tools to manipulate the `radtags logs` file to generate a better graph. For example, you can use `Select lines that match an expression` tool to select rows then use the `Concatenate datasets tail-to-head` tool to reorganize these lines in a new file.
->
-> And you obtain a file like this one, ready to generate a beautiful and smart bar stacked!
->
-> ![The result of sorting](../../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif_view.PNG)
->
-> ![The chart on the sorted file](../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG)
->
-> Using filter like `clean data, remove any read with an uncalled base` has here few impact:
->
-> 2. **Process Radtags** {% icon tool %}: Re-Run `Stacks: process radtags` on FastQ file playing with parameters
->   - In `advanced options`, activate the `Discard reads with low quality scores` option and play with the score limit (default (nolimit) vs 20 vs 10 for example) and examine the change in reads retained.
->   - Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
->
 > Then we generate a graphical display of the changes:
 >
 > First we cut the interesting lines of each `result.log with Stacks: process radtags`
@@ -143,7 +130,11 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >
 > Alternatively just copy/paste these lines on the Galaxy upload tool using Paste/fetch data section and modifying the File header by sample and filename by Score 10 / Score 20 and noscorelimit for example... Before Starting the upload, you can select the `Convert spaces to tabs` option through the `Upload configuration` wheel. If you did not pay attention to the order you can just sort the file using the first column.
 {: .hands_on}
-
+>
+You can use the `Charts` functionality through the Visualize button to plot the data.
+>
+> And you obtain a file like this one, ready to generate a beautiful and smart bar stacked!
+>
 ```
 quality	Retained Reads	Low Quality	Ambiguous Barcodes	Ambiguous RAD-Tag	Total
 20	2980543		5158988		626265		129493		8895289
@@ -151,11 +142,11 @@ quality	Retained Reads	Low Quality	Ambiguous Barcodes	Ambiguous RAD-Tag	Total
 nolimit	8139531		0		626265		129493		8895289
 ```
 
-You can use the `Charts` functionality through the Visualize button to plot the data.
-
-
-![The bar diagram](../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG)
-
+>
+> ![The result of sorting](../../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif_view.PNG)
+>
+> ![The chart on the sorted file](../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG)
+>
 Using a filter like `clean data, remove any read with an uncalled base` has only little impact:
 
 The demultiplexed sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.
