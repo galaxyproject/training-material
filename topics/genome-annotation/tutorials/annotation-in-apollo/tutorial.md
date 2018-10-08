@@ -34,7 +34,7 @@ Generally, the annotation process is a synthesis between the understanding of ph
 > * Comments -> *Apply any free-text comments here.* (Could be something like **the e-value(s)** between the annotated gene and homologs or notes to one’s self.)
 
 > ### {% icon tip %} Note that…
-> Calling genes is [covered in another tutorial](LINK TO TUTORIAL)
+> Calling genes is [covered in another tutorial.](LINK TO TUTORIAL)
 {: .tip}
 
 To annotate a gene that has been called, right click on the gene in the pale yellow  User-Created Annotations track, and select “Edit information (alt-click).”
@@ -73,9 +73,7 @@ Many of the protein prediction tracks yield multiple homologs for the same gene.
 
 ![](../../images/annotation-in-apollo-screenshots/12_track_right_click.png)
 
-A screen will pop up, containing many details about the homolog.
-
-![](../../images/annotation-in-apollo/13_homolog_details.png)
+The details presented will vary from BLAST results to InterProScan results.
 
 ### Gene Calls
 
@@ -90,6 +88,15 @@ The [CPT’s](https://cpt.tamu.edu) PAP integrates gene calls from numerous sour
 
 ### BLAST
 
+BLAST is an acronym standing for Basic Local Alignment Search Tool. Different variations of BLAST exist to search different kinds of sequences. BLAST breaks down the input sequence (called the query) into *k*-mers an compares these to sequences in the database; default *k*-mers are currently 6 for BLASTp (protein database) and 28 for BLASTn (nucleotide sequence database). Matching *k*-mers are then extended to the left and right until the score drops below a threshold, *T*. Sometimes the extended coverage encompasses the entire sequence, and other times the alignment is broken up into homologous segments that are separated by low similarity regions. Alignments with high similarity are referred to as a *high-scoring pair* (HSP); this may be the entire sequence pair, or only part of the query.
+
+Although BLAST is accessible through the [NCBI website](https://blast.ncbi.nlm.nih.gov/Blast.cgi), the databases detailed below are those that are available to an annotator in Apollo. In Apollo, right-clicking on a hit and selecting ‘View Details’ will yield a summary of the details about the protein.
+
+![](../../images/annotation-in-apollo-screenshots/13_blast_homolog_details.png)
+
+> * Score = *E-value*; the lower the score, the better the alignment with the query. This is also reflected in the intensity of the feature in the track.
+> * Description = may be informative, but this depends on the quality of the annotation in the protein record. In the above example, the accession number is underlined; this same information can be found in the Description portion. Searching the accession number in [NCBI BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi) will yield much more information about the protein, including the paper which this protein was originally identified.
+
 ##### 1. NT (Nucleotide) database
 
 Megablast is run against a copy of NCBI’s NT database. Hovering over a hit segment will show where in the target genome the region aligns.
@@ -101,13 +108,15 @@ Megablast is run against a copy of NCBI’s NT database. Hovering over a hit seg
 BLASTp is run against three database:
 
 > * [CPT’s](https://cpt.tamu.edu) Canonical Phage database
-> * TrEMBL
-> * SwissProt
+> * TrEMBL (from UniProt)
+> * SwissProt (from UniProt)
 > * nr
 
 These databases can offer insight into possible names and functionalities for proteins. An example from TrEMBL can be seen below.
 
 ![](../../images/annotation-in-apollo-screenshots/4_blast_trembl.png)
+
+Apollo details similarities between the query/novel protein and the homologs by the saturation of the color of the evidence tracks. The more saturated the color of the track, the greater the similarity between the two proteins. 
 
 ### Phage Analyses
 
@@ -151,6 +160,12 @@ The rest of these functions can be found underneath the Functional Annotation po
 
 InterProScan is an extremely useful domain finder. It is hosted by [EMBL-EBI](https://www.ebi.ac.uk/)(European Molecular Biology Laboratory - European Bioinformatics Institute) and integrated into [UniProt](https://www.uniprot.org/) (a freely accessible database of protein sequence and functional information, of which many entries are derived from genome sequencing projects); InterProScan searches a protein sequence against the member databases and detects similarity to conserved domains. It integrates 14 other conserved domain databases to assign a single [InterPro](https://www.ebi.ac.uk/interpro/) ID to related domains. Hits from InterProScan predict protein function based on conserved domains (**beware of domain swapping!**)
 
+These conserved domain hits will be more sparse than BLAST hits and often only align to a portion of the protein. Right clicking on a feature from the InterProScan evidence track and selecting ‘View Details’ will yield a summary of that feature.
+
+![](../../images/annotation-in-apollo-screenshots/14_interproscan_homolog_details.png)
+
+If the domain hit is part of IntePro, there will be a “Dbxref” entry. Searching either the name or Dbxref fields in Google will find the domain entry in either the member database or InterPro. The Score for these conserved domain searches is a probability or a quality score, and its calculation varies between databases. This tool, among all other tools food in Apollo, have been pre-calibrated to show results the authors think are significant, so the annotator does not need to evaluate this value.
+
 ##### 2. TMHMM (Transmembrane hidden Markov model)
 
 Here, TMHMM is run over the genome to pick out genes that contain likely transmembrane domains (TMDs). TMHMM data is used in a number of other tracks and analyses as well.
@@ -161,7 +176,7 @@ There are three variations of the TMHMM track - *Inside Probability, Membrane Pr
 
 ##### 3. Terminators
 
-Terminators are produced from TransTermHP.
+Terminators are produced from [TransTermHP.](http://transterm.ccb.jhu.edu/) TransTermHP find rho-independent transcription terminators in bacterial genomes. Each terminator found by the program is assigned a confidence value that estimates its probability of being a true terminator.
 
 > ### {% icon tip %} Note that…
 > This track can be found underneath the “Sequence Analysis” section of the Structural Annotation portion all of the tracks.
