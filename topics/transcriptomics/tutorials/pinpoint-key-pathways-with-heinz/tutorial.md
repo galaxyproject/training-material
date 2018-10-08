@@ -29,7 +29,10 @@ They can therefore overlook the key differences that (i) span multiple pathways,
 bidirectionally deregulated components, (iii) are confined to a pathway region. To capture these
 properties, computational methods that reach beyond the scope of predefined pathways are needed.
 
-In this tutorial, we will perform a network analysis using [Heinz](https://github.com/ls-cwi/heinz) in Galaxy. The data comes from the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171), and we will reproduce some of the computational steps from this study with simplified data and parameters to speed up the analysis for the purposes of this tutorial.
+In this tutorial, we will perform a network analysis using [Heinz](https://github.com/ls-cwi/heinz)
+in Galaxy. The data comes from the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171),
+and we will reproduce some of the computational steps from this study with simplified data and
+parameters to speed up the analysis for the purposes of this tutorial.
 
 > ### Agenda
 >
@@ -213,18 +216,20 @@ and [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html). I
 may look up the pros and cons of each tool. Here we use DESeq2.
 
 
-## Conduct differential expression analysis
+## Perform Differential Expression Analysis (DEA)
 
 After learning about differential expression analysis, let's get some hands-on experience.
 
 > ### {% icon hands_on %} Hands-on: DEA via DESeq2
 >
 > - **DESeq2** {% icon tool %} with the following parameters
->   - "Specify a factor name" to `dental_caries` (in "1: Factor")
->   - "Specify a factor level" to `CP`, "Counts file(s)" to `CP` by clicking the "Dataset collections" icon (in "1: Factor level")
->   - "Specify a factor level" to `CN`, "Counts file(s)" to `CN` by clicking the "Dataset collections" icon (in "2: Factor level")
->   - "Files have header" to `No`
->   - "Visualising the analysis results" to `No`
+>   - *"Specify a factor name"*: `dental_caries` (under `1: Factor`)
+>   - *"Specify a factor level"*: to `CP` (under `1: Factor level`)
+>       - {% icon param-files %} *"Counts file(s)"*: `CP` (collection)
+>   - *"Specify a factor level"*: `CN` (under `2: Factor level`)
+>       - {% icon param-files %} *"Counts file(s)"*: `CN` (collection)
+>   - *"Files have header"*: `No`
+>   - *"Visualising the analysis results"*: `No`
 >   - Leave all other parameters to the default settings <br><br>
 >
 {: .hands_on}
