@@ -91,8 +91,6 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >  - Capture discarded reads to a file: Yes
 >  - Output format: fastq
 >
-> As we are exporting demultiplexed reads in data collections, you have hidden datasets on your history. These datasets are in fact symlinks on the data collections and are by default hidden on the history. If you want to see these datasets, you can click on the `hidden` statement just under the history name.
->
 > > ### {% icon question %} Questions
 > >
 > > 1. How many reads where on the original dataset?
