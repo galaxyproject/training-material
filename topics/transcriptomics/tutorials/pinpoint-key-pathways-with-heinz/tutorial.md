@@ -260,19 +260,19 @@ Before fitting to BUM model in Galaxy, we need to prepare the input data for the
 
 > ### {% icon hands_on %} Hands-on: extract p-values from DESeq2 output
 >
-> - **cut** {% icon tool %} with the following parameters
->   - "Cut columns" to `c6` (in "1: Factor")
->   - "Delimited by" to `TAB`
->   - "From" to the output of **DESeq2** <br><br>
+> - **cut** columns from a table {% icon tool %} with the following parameters:
+>   - *"Cut columns"*: `c6`
+>   - *"Delimited by"*: to `TAB`
+>   - *"From"*: to the output of **DESeq2**
 >
 {: .hands_on}
 
-Then we can **Fit a BUM model** now.
+Now we can **Fit a BUM model**:
 
 > ### {% icon hands_on %} Hands-on: fit the BUM model
 >
 > - **Fit a BUM model** {% icon tool %} with the following parameters
->   - "Input file" to the output of **cut** <br><br>
+>   - *"Input file"*: the output of **cut**
 >
 {: .hands_on}
 
@@ -281,10 +281,10 @@ Then we can **Fit a BUM model** now.
 After getting the parameters of the BUM model from the last step, we will use Heinz to pinpoint
 the key pathways. Before we continue, let's figure out what Heinz is actually doing.
 
-Heinz is an algorithm in searching an optimal subnetwork from a bigger network. You may wonder what
+Heinz is an algorithm for searching an optimal subnetwork from a bigger network. You may wonder what
 the networks are here. Through the previous steps, we have got a list of identities, that is a list
 of gene IDs with p-values, which form the nodes  of 'the bigger network', the relations between the
-nodes, that is the edges, need to be obtained from a background network, which represents a pathway
+nodes, that is the edges, needs to be obtained from a background network, which represents a pathway
 relation databases, such as [Reactome](https://reactome.org/) and [STRING](https://string-db.org/).
 In this tutorial, we only use a small sample background network for demonstration purposes. The
 background network is represented as edges in a txt file where each line denotes an edge as follows:
@@ -298,11 +298,17 @@ NPTX1	CIAO1
 
 Upload this edge file (hereafter we call it edge file) into the Galaxy instance.
 
-> ### {% icon details %} View the Zenodo URL for edge file
-> ```
-> https://zenodo.org/record/1344105/files/edge.txt
-> ```
-{: .details}
+> ### {% icon hands_on %} Upload edge file
+>
+> 1. **Upload the edge file from Zenodo**
+>    - Open the upload menu
+>    - Choose **Paste/Fetch data** option
+>    - Paste the url into the box:
+>      ```
+>      https://zenodo.org/record/1344105/files/edge.txt
+>      ```
+>    - Click **Start**
+{: .hands_on}
 
 
 ## Calculate Heinz scores
@@ -339,20 +345,20 @@ Similar to **Fit a BUM model**, we also need to prepare the input data for the t
 
 > ### {% icon hands_on %} Hands-on: extract geneID and p-values from DESeq2 output
 >
-> - **cut** {% icon tool %} with the following parameters
->   - "Cut columns" to `c1,c6` (in "1: Factor")
->   - "Delimited by" to `TAB`
->   - "From" to the output of **DESeq2** <br><br>
+> - **cut** columns from a table {% icon tool %} with the following parameters
+>   - *"Cut columns"*: `c1,c6`
+>   - *"Delimited by"*: `TAB`
+>   - *"From"*: the output of **DESeq2**
 >
 {: .hands_on}
 
 > ### {% icon hands_on %} Hands-on: calculate Heinz scores
 >
 > - **Calculate a Heinz score** {% icon tool %} with the following parameters
->   - "A node file with p-values" to the output of **cut** (a different **cut**, see below)
->   - "FDR value" to 0.11
->   - "Choose your input type for BUM parameters" to "The output file of BUM model"
->   - "Output file of BUM model as input: lambda on the first line and alpha, the second" to the output of **Fit a BUM model** <br><br>
+>   - *"A node file with p-values"*: the output of the previous **cut** step
+>   - *"FDR value"*: to 0.11
+>   - *"Choose your input type for BUM parameters"*: `The output file of BUM model`
+>   - *"Output file of BUM model as input: lambda on the first line and alpha, the second"*: the output of **Fit a BUM model**
 {: .hands_on}
 
 ## Run Heinz: pinpoint the optimal subnetwork
@@ -362,8 +368,8 @@ After getting Heinz scores, let's run Heinz program to find the optimal subnetwo
 > ### {% icon hands_on %} Hands-on: pinpoint the optimal subnetwork
 >
 > - **Identify optimal scoring subnetwork** {% icon tool %} with the following parameters
->   - "File containing Heinz scores" to the output of **Calculate a Heinz score**
->   - "Edge file" to the edge file uploaded <br><br>
+>   - *"File containing Heinz scores"*: the output of **Calculate a Heinz score**
+>   - *"Edge file"*: the edge file uploaded
 >
 {: .hands_on}
 
@@ -385,8 +391,8 @@ visualization.
 
 > ### {% icon hands_on %} Hands-on: visualize the optimal subnetwork
 >
-> - **Visualize** {% icon tool %} with the following parameters
->   - "Heinz output file" to the output of **Identify optimal scoring subnetwork** <br><br>
+> - **Visualize** the optimal scoring subnetwork {% icon tool %} with the following parameters
+>   - *"Heinz output file"*: the output of **Identify optimal scoring subnetwork**
 >
 {: .hands_on}
 
