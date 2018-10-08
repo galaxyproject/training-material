@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: RNA-Seq FASTQs to counts
+title: RNA-Seq reads to counts
 zenodo_link: "https://figshare.com/s/f5d63d8c265a05618137"
 enable: "false"
 questions:
@@ -96,7 +96,7 @@ In order to get these files into Galaxy, we will want to do a few things:
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this tutorial e.g. `RNA-seq FASTQs to counts`
+> 1. Create a new history for this tutorial e.g. `RNA-seq reads to counts`
 > 2. Import the files from Figshare using Galaxy's Rule-Based Uploader.
 >    - Open the Galaxy Upload Manager
 >    - Click the tab **Rule-based**
@@ -284,7 +284,7 @@ We will use Cutadapt to trim the reads to remove the Illumina adapter and any lo
 >
 {: .hands_on}
 
-We can take a look at the FASTQs again now that they've been trimmed.
+We can take a look at the reads again now that they've been trimmed.
 
 ## Check trimmed reads
 
