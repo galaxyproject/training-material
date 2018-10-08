@@ -11,11 +11,11 @@ questions:
 objectives:
 - Learn how RNA-seq reads are converted into counts
 - Understand QC steps that can be performed on RNA-seq data
-- Generate interactive reports to summarise QC information with **MultiQC**
-- Use the Galaxy **Rule Uploader** to import FASTQs from URLs
-- Make use of Galaxy **Collections** for a tidy analysis
-- Create a Galaxy **Workflow** that converts RNA-seq reads into counts
-time_estimation: '2h'
+- Generate interactive reports to summarise QC information with MultiQC
+- Use the Galaxy Rule Uploader to import FASTQs from URLs
+- Make use of Galaxy Collections for a tidy analysis
+- Create a Galaxy Workflow that converts RNA-seq reads into counts
+time_estimation: '3h'
 key_points:
 - In RNA-seq, reads (FASTQs) are mapped to a reference genome with a spliced aligner (e.g HISAT2, STAR)
 - The aligned reads (BAMs) can then be converted to counts (e.g featureCounts, HTSeq)
@@ -64,11 +64,11 @@ This is a Galaxy tutorial based on material from the [COMBINE R RNAseq workshop]
 
 Read sequences are usually stored in compressed (gzipped) FASTQ files. Before the differential expression analysis can proceed, these reads must be aligned to the reference genome and counted into annotated genes. Mapping reads to the genome is a very important task, and many different aligners are available, such as HISAT2 ([Kim, Langmead, and Salzberg, 2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4655817/)), STAR ([Dobin et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3530905/)) and Subread ([Liao, Smyth, and Shi 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3664803/)]). Most mapping tasks require larger computers than an average laptop, so usually read mapping is done on a server in a linux-like environment, requiring some programming knowledge. However, Galaxy enables you to do this mapping without needing to know programming and if you don't have access to a server you can try to use one of the publically available Galaxies e.g. [usegalaxy.org](https://usegalaxy.org), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au/).
 
-If you are sequencing your own data, the sequencing facility will almost always provide compressed FASTQ files which you can upload into Galaxy. If your FASTQs are provided through Galaxy's Shared Data, you can easily import them into a history. For publicly available sequence data, such as from GEO/SRA/ENA, Galaxy's Rule-Based Uploader can be used to import the files from URLs, saving on the need to download to your computer and upload into Galaxy. For more information on the Rule-Based Uploader see the tutorial [here](http://galaxyproject.github.io/training-material/topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial.html).
+If you are sequencing your own data, the sequencing facility will almost always provide compressed FASTQ files which you can upload into Galaxy. If your FASTQs are provided through Galaxy's Shared Data, you can easily import them into a history. For publicly available sequence data, such as from GEO/SRA/ENA, Galaxy's Rule-Based Uploader can be used to import the files from URLs, saving on the need to download to your computer and upload into Galaxy.
 
-The raw reads used in this tutorial were obtained from SRA from the link given in GEO for the the mouse mammary gland dataset (Fu et al. 2015) (e.g `ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534`). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. Some results for the full dataset will be shown for comparison. The small FASTQ files are available in [Figshare](https://figshare.com/s/f5d63d8c265a05618137) and the links to the FASTQ files are provided below. We are going to import the files into a Collection. Using Galaxy Collections helps keep the datasets organised and tidy in the history. Collections also make it easier to maintain the sample names through tools and workflows. If you are not familiar with collections, see the [Galaxy Collections tutorial](http://galaxyproject.github.io/training-material/topics/galaxy-data-manipulation/tutorials/collections/tutorial.html).
+The raw reads used in this tutorial were obtained from SRA from the link given in GEO for the the mouse mammary gland dataset (Fu et al. 2015) (e.g `ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534`). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. If working with your own data you would use the full data and some results for the full mouse dataset will be shown for comparison. The small FASTQ files are available in [Figshare](https://figshare.com/s/f5d63d8c265a05618137) and the links to the FASTQ files are provided below. We are going to import the files into a Collection. Using Galaxy Collections helps keep the datasets organised and tidy in the history. Collections also make it easier to maintain the sample names through tools and workflows. If you are not familiar with collections, see the [Galaxy Collections tutorial](http://galaxyproject.github.io/training-material/topics/galaxy-data-manipulation/tutorials/collections/tutorial.html).
 
-The sample information (sample ID, Group) and link to the FASTQ file (URL) are in the grey box below.
+The sample information (sample ID, Group) and link to the FASTQ file (URL) are in the grey box below. To generate a file like this to import data from SRA/ENA see the [Galaxy Rule-Based Uploader tutorial](http://galaxyproject.github.io/training-material/topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial.html).
 
 ```
 SampleID	Group	URL
@@ -90,7 +90,7 @@ In order to get these files into Galaxy, we will want to do a few things:
 
 * Strip the *header* out of the sample information (it doesn’t contain a URL Galaxy can download).
 * Define the file **Identifier** column (`SampleID`).
-* Define the *URL* column (`URL`) (this is the location Galaxy can download the data from).
+* Define the **URL** column (`URL`) (this is the location Galaxy can download the data from).
 * Tell Galaxy to treat these files as `fastqsanger.gz` files
 * Tell Galaxy to treat these files as `mm10` files
 
@@ -170,7 +170,7 @@ If your FASTQ files are located in Shared Data, you can import them into your hi
 Take a look at one of the FASTQ files to see what it contains.
 
 > ### {% icon tip %} Tip: FASTQ format
-> If you are not familiar with FASTQ format, see the tutorial [here](https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html)
+> If you are not familiar with FASTQ format, see the [Quality Control tutorial](http://galaxyproject.github.io/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html)
 {: .tip}
 
 > ### {% icon hands_on %} Hands-on: Take a look at FASTQ format
@@ -243,7 +243,7 @@ Here, most of the plots in the small FASTQs look similar to the full dataset. Ho
 ![Sequence Duplication Levels](../../images/limma-voom_f2c/fastqc_sequence_duplication_levels_plot.png "Sequence Duplication Levels")
 ![Adapter Content](../../images/limma-voom_f2c/fastqc_adapter_content_plot.png "Adapter Content")
 
-See the [ref-based tutorial](http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html) for more information on FastQC plots.
+See the [Quality Control tutorial](http://galaxyproject.github.io/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html) for more information on FastQC plots.
 
 > ### {% icon question %} Questions
 >
@@ -358,7 +358,7 @@ Now that we have prepared our reads, we can align the reads for our 12 samples. 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > See the answer in the [ref-based tutorial](http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#%20Pretreatments)
+>    > > See the answer in the [RNA-seq ref-based tutorial](http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#%20Pretreatments)
 >    > >
 >    > {: .solution}
 >    >
@@ -385,18 +385,18 @@ The MultiQC plot below shows the result from the full dataset for comparison.
 
 Over 90% of reads have mapped in all samples, a good mapping rate. And the vast majority of reads have mapped uniquely, they haven't mapped to multiple locations in the reference genome.
 
-It is also good practice to visualise the read alignments in the BAM file, for example using IGV, see the [ref-based tutorial](http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#%20Pretreatments).
+It is also good practice to visualise the read alignments in the BAM file, for example using IGV, see the [RNA-seq ref-based tutorial](http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#%20Pretreatments).
 
 > ### {% icon tip %} Tip: Downloading a collection
 >
-> To download a collection of datasets (e.g. the collection of BAM files) click on the floppy icon as shown below. This will download a tar file containing all the datasets in the collection.
+> To download a collection of datasets (e.g. the collection of BAM files) click on the floppy icon as shown below. This will download a tar file containing all the datasets in the collection. Note that for BAM files the .bai indexes (required for IGV) will be included automatically in the download.
 >
 > ![Downloading collection](../../images/limma-voom_f2c/collection_download.png "Downloading a collection")
 {: .tip}
 
 ## Check strandness
 
-As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to "guess" the strandness, as explained in the [RNA-seq ref-based tutorial](http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html). This is done through comparing the “strandness of reads” with the “strandness of transcripts”. For this tool, and many of the other RSeQC tools, a reference bed file of genes (`reference genes`) is required. RSeQC provides some reference BED files for model organisms. Alternatively, you can provide your own BED file of reference genes, for example from UCSC (see the [Peaks to Genes tutorial](https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html). Or the **Convert GTF to BED12** tool can be used to convert a GTF into a BED file.
+As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to "guess" the strandness, as explained in the [RNA-seq ref-based tutorial](http://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html). This is done through comparing the "strandness of reads" with the "strandness of transcripts". For this tool, and many of the other RSeQC tools, a reference bed file of genes (`reference genes`) is required. RSeQC provides some reference BED files for model organisms. You can import the RSeQC mm10 RefSeq BED file from the link `https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download` (and rename to `reference genes`) or import a file from Shared data if provided. Alternatively, you can provide your own BED file of reference genes, for example from UCSC (see the [Peaks to Genes tutorial](https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html). Or the **Convert GTF to BED12** tool can be used to convert a GTF into a BED file.
 
 {% include snippets/import_via_link.md %}
 
@@ -571,7 +571,7 @@ We can also check the distribution of reads across known gene features, such as 
 
 The MultiQC plot below shows the result from the full dataset for comparison.
 
-[Read Distribution](../../images/limma-voom_f2c/rseqc_read_distribution_plot.png "Read Distribution")
+![Read Distribution](../../images/limma-voom_f2c/rseqc_read_distribution_plot.png "Read Distribution")
 
 > ### {% icon question %} Questions
 >
