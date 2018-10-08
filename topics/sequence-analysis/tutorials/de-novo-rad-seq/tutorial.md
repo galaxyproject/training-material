@@ -98,7 +98,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 > > 1. How many reads where on the original dataset?
 > > 2. How many are kept?
 > > 3. Can you try to explain the reason why we loose a lot of reads here?
-> > 4. What kind of infiormation this result gives concerning the upcoming data analysis and the barcodes design in general ?
+> > 4. What kind of information this result gives concerning the upcoming data analysis and the barcodes design in general ?
 > >
 > > > ### {% icon solution %} Solution
 > > > 1. 8895289 total reads
