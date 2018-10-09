@@ -29,8 +29,9 @@ They can therefore overlook the key differences that (i) span multiple pathways,
 bidirectionally deregulated components, (iii) are confined to a pathway region. To capture these
 properties, computational methods that reach beyond the scope of predefined pathways are needed.
 
-In this tutorial, we will perform a network analysis using [Heinz](https://github.com/ls-cwi/heinz)
-in Galaxy. The data comes from the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171),
+In this tutorial, we will perform a network analysis using Heinz ([GitHub](https://github.com/ls-cwi/heinz),
+[publication](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2718639/)) in Galaxy. The data comes from
+the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171),
 and we will reproduce some of the computational steps from this study with simplified data and
 parameters to speed up the analysis for the purposes of this tutorial.
 
