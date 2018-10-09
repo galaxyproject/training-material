@@ -204,12 +204,14 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >
 > > ### {% icon question %} Question
 > >
-> > 1. What is the maximum value of FST at any SNP?
-> > 2. How many SNPs reach this FST value?
+> > 1. What is the maximum value of FST' at any SNP?
+> > 2. What is the meaning of this FST' value compared a a classical FST one?
+> > 3. How many SNPs reach this FST' value?
 > >
 > > > ### {% icon solution %} Solution
-> > > 1. 0.75
-> > > 2. 3500
+> > > 1. 1
+> > > 2. FST’ is a haplotype measure of FST that is scaled to the theoretical maximum FST value at this locus. Depending on how many haplotypes there are, it may not be possible to reach an FST of 1, so this method will scale the value to 1
+> > > 2. 114
 > > {: .solution }
 > {: .question}
 {: .hands_on}
