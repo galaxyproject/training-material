@@ -97,6 +97,10 @@ Although BLAST is accessible through the [NCBI website](https://blast.ncbi.nlm.n
 > * Score = *E-value*; the lower the score, the better the alignment with the query. This is also reflected in the intensity of the feature in the track.
 > * Description = may be informative, but this depends on the quality of the annotation in the protein record. In the above example, the accession number is underlined; this same information can be found in the Description portion. Searching the accession number in [NCBI BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi) will yield much more information about the protein, including the paper which this protein was originally identified.
 
+> ### {% icon tip %} Note that…
+> In practice, an E-value of less than 1e-3 or 1e-5 are considered relevant, **if that hit covers most or all of the protein!**
+{: .tip}
+
 ##### 1. NT (Nucleotide) database
 
 Megablast is run against a copy of NCBI’s NT database. Hovering over a hit segment will show where in the target genome the region aligns.
