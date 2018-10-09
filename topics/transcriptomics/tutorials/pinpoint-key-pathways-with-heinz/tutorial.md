@@ -406,7 +406,17 @@ It usually takes a few minutes to get the result, but mind you, for some tasks, 
 
 ## Visualize the output: visualize the optimal subnetwork
 
-The result we got from the last step is not very human readable, isn't it? It is a little painful to understand the Heinz result directly. Therefore we need to visualize the output by making it into graphs. Except the tool we will use in Galaxy, you may consider using eXamine plugin in Cytoscape for a richer
+The result we got from the last step is not very human readable, isn't it? It is a little painful to understand the Heinz result directly. Therefore we need to visualize the output by making it into graphs.
+
+> ### {% icon hands_on %} Hands-on: visualize the optimal subnetwork
+>
+> - **Visualize** the optimal scoring subnetwork {% icon tool %} with the following parameters
+>   - *"Heinz output file"*: the output of **Identify optimal scoring subnetwork**
+>
+{: .hands_on}
+
+
+In addition to this tool we used in Galaxy, you may consider using eXamine plugin in Cytoscape for a richer
 visualization. In this tutorial, you probably get a similar graph to the following:
 
 ![p-values are fitted to a mixture model](../../images/Heinz_visualisation.png){:width="30%"}
@@ -422,14 +432,9 @@ visualization. In this tutorial, you probably get a similar graph to the followi
 > {: .solution}
 {: .question}
 
+
 In real practice, after this step, we need to make sense of the graph to see whether we could get some insight, where our human intelligence will flourish.
 
-> ### {% icon hands_on %} Hands-on: visualize the optimal subnetwork
->
-> - **Visualize** the optimal scoring subnetwork {% icon tool %} with the following parameters
->   - *"Heinz output file"*: the output of **Identify optimal scoring subnetwork**
->
-{: .hands_on}
 
 # Save the history into a workflow
 
