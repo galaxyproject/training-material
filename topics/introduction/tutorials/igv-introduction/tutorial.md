@@ -5,7 +5,7 @@ title: "IGV Introduction"
 zenodo_link: ""
 questions:
 objectives:
-time_estimation: "2H"
+time_estimation: "1h/1d"
 key_points:
 contributors:
   - nekrut
