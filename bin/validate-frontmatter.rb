@@ -9,9 +9,19 @@ slides_required_keys = ['layout', 'logo', 'title', 'contributors']
 # Any error messages
 errs = []
 
+def skip_disabled(data)
+  # If there's an 'enable' key and it is one flavor of 'false', then, exit
+  # immediately without testing.
+  if data.key?('enable') && (data['enable'].downcase == 'false' || data['enable'] == false) then
+    puts "#{fn} skipped (disabled)"
+    exit 0
+  end
+end
+
 # Handle tutorials
 if fn.include?('tutorial.md') then
   data = YAML.load_file(fn)
+  skip_disabled(data)
 
   # Check for required keys
   tutorial_required_keys.each{ |x|
@@ -35,6 +45,7 @@ if fn.include?('tutorial.md') then
 
 elsif fn.include?('slides.html') then
   data = YAML.load_file(fn)
+  skip_disabled(data)
 
   # Check for required keys
   slides_required_keys.each{ |x|
@@ -52,10 +63,13 @@ else
   exit 0
 end
 
+
+# If we had no errors, validated successfully
 if errs.length == 0 then
   puts "#{fn} validated succesfully"
   exit 0
 else
+  # Otherwise, print errors and exit non-zero
   puts "#{fn} has errors"
   errs.each {|x| puts "  #{x}" }
   exit 1
