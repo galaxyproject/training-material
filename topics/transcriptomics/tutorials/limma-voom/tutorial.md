@@ -30,13 +30,13 @@ contributors:
 
 Measuring gene expression on a genome-wide scale has become common practice over the last two decades or so, with microarrays predominantly used pre-2008. With the advent of next generation sequencing technology in 2008, an increasing number of scientists use this technology to measure and understand changes in gene expression in often complex systems. As sequencing costs have decreased, using RNA-Seq to simultaneously measure the expression of tens of thousands of genes for multiple samples has never been easier. The cost of these experiments has now moved from generating the data to storing and analysing it.
 
-There are many steps involved in analysing an RNA-Seq experiment. Analysing an RNA-seq experiment begins with sequencing reads. These are aligned to a reference genome, then the number of reads mapped to each gene can be counted. This results in a table of counts, which is what we perform statistical analyses on to determine differentially expressed genes and pathways. The purpose of this tutorial is to demonstrate how to perform differential expression on count data with **limma-voom**. How to generate counts from the raw data (FASTQs) is covered in an accompanying tutorial limma-voom (FASTQs to counts).
+There are many steps involved in analysing an RNA-Seq experiment. Analysing an RNA-seq experiment begins with sequencing reads. These are aligned to a reference genome, then the number of reads mapped to each gene can be counted. This results in a table of counts, which is what we perform statistical analyses on to determine differentially expressed genes and pathways. The purpose of this tutorial is to demonstrate how to perform differential expression on count data with **limma-voom**. How to generate counts from reads (FASTQs) is covered in the accompanying tutorial [RNA-seq reads to counts]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom_fastqs_to_counts/tutorial.html).
 
 ## Mouse mammary gland dataset
 
 The data for this tutorial comes from a Nature Cell Biology paper, [EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival](https://www.ncbi.nlm.nih.gov/pubmed/25730472)), Fu et al. 2015. Both the raw data (sequence reads) and processed data (counts) can be downloaded from Gene Expression Omnibus database (GEO) under accession number [GSE60450](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE60450).
 
-This study examined the expression profiles of basal stem-cell enriched cells (B) and committed luminal cells (L) in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status. Note that two biological replicates are used here, two independent sorts of cells from the mammary glands of virgin, pregnant or lactating mice, however three replicates is usually recommended as a minimum requirement for RNA-seq. In this tutorial we will use the GEO counts file as a starting point for our analysis. Alternatively, you could create a count matrix from the raw sequence reads, as demonstrated in the [RNA-seq FASTQs to counts tutorial](https://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/limma-voom_fastqs_to_counts/tutorial.html). The GEO count file was generated from aligning the reads to the mouse `mm10` genome with the [Rsubread](https://www.biorxiv.org/content/early/2018/08/15/377762) aligner, followed by counting reads mapped to RefSeq genes with [featureCounts](https://academic.oup.com/bioinformatics/article/30/7/923/232889) (Liao, Smyth, and Shi 2014), see the [Fu paper](https://www.nature.com/articles/ncb3117) for details.
+This study examined the expression profiles of basal stem-cell enriched cells (B) and committed luminal cells (L) in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status. Note that two biological replicates are used here, two independent sorts of cells from the mammary glands of virgin, pregnant or lactating mice, however three replicates is usually recommended as a minimum requirement for RNA-seq. In this tutorial we will use the GEO counts file as a starting point for our analysis. Alternatively, you could create a count matrix from the raw sequence reads, as demonstrated in the [RNA-seq reads to counts tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom_fastqs_to_counts/tutorial.html). The GEO count file was generated from aligning the reads to the mouse `mm10` genome with the [Rsubread](https://www.biorxiv.org/content/early/2018/08/15/377762) aligner, followed by counting reads mapped to RefSeq genes with [featureCounts](https://academic.oup.com/bioinformatics/article/30/7/923/232889) (Liao, Smyth, and Shi 2014), see the [Fu paper](https://www.nature.com/articles/ncb3117) for details.
 
 We will use **limma-voom** for identifying differentially expressed genes here. Other popular alternatives are edgeR and DESeq2. Limma-voom has been shown to be perform well in terms of precision, accuracy and sensitivity [Costa-Silva, Domingues and Lopes 2017](https://www.ncbi.nlm.nih.gov/pubmed/29267363) and, due to its speed, it's particularly recommended for large-scale datasets with 100s of samples [Chen, Lun, Smyth 2016](https://f1000research.com/articles/5-1438/v2).
 
@@ -66,7 +66,7 @@ We will use three files for this analysis:
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq differential expression with limma-voom`
+> 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq with limma-voom`
 > 2. Import the mammary gland counts table and the associated sample information file.
 >
 >       To import the files, there are two options:
@@ -106,7 +106,7 @@ Let’s take a look at the data. The `seqdata` file contains information about g
 
 ![seqdata file](../../images/limma-voom/seqdata.png "Count file (before formatting)")
 
-The sample information file contains basic information about the samples that we will need for the analysis today. See below.
+The sample information file contains basic information about the samples that we will need for the analysis. See below.
 
 ![sampleinfo file](../../images/limma-voom/sampleinfo.png "Sample information file (before formatting)")
 
@@ -130,7 +130,7 @@ Let’s create a new file, `countdata`, that contains only the counts for the 12
 >    ![countdata file](../../images/limma-voom/countdata.png "Count file (after formatting)")
 {: .hands_on}
 
-Let’s create a new file, `factordata`, that contains the groups information that we need for the limma-voom tool. We'll combine the cell type and mouse status columns in the sample information file to make a column with the 6 group names e.g. we'll combine the CellType `basal` with the Status `pregnant` to make the group name `basalpregnant`.
+Next, let's create a new file, `factordata`, that contains the groups information that we need for the limma-voom tool. We'll combine the cell type and mouse status columns in the sample information file to make a column with the 6 group names e.g. we'll combine the CellType `basal` with the Status `pregnant` to make the group name `basalpregnant`.
 
 > ### {% icon hands_on %} Hands-on: Format the sample information file
 >
@@ -184,9 +184,9 @@ There are a few ways to filter out lowly expressed genes. When there are biologi
 
 ## Normalization for composition bias
 
-Normalization of RNA-seq is typically performed in order to eliminate composition biases between libraries, for example, if there are a few highly expressed gene dominating in some samples. By default, TMM normalization [Robinson and Oshlack 2010](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2864565/) is performed by the limma-voom tool (this can be changed under **Advanced Option**), using the edgeR `calcNormFactors` function. TMM stands for trimmed mean of M values and it uses a weighted trimmed mean of the log expression ratios to scale the counts for the samples.
+Normalization of RNA-seq is typically performed in order to eliminate composition biases between libraries, for example, if there are a few highly expressed genes dominating the read counts in some samples. By default, TMM normalization [(Robinson and Oshlack 2010)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2864565/) is performed by the limma-voom tool (this can be changed under **Advanced Option**), using the edgeR `calcNormFactors` function. TMM stands for trimmed mean of M values and it uses a weighted trimmed mean of the log expression ratios to scale the counts for the samples. See the figure from the TMM paper below.
 
-![TMM normalization](../../images/limma-voom/TMM.png "TMM normalization")
+![TMM normalization](../../images/limma-voom/TMM.png "TMM normalization (Robinson and Oshlack 2010)")
 
 ## Specify Contrast(s) of interest
 
@@ -224,7 +224,7 @@ Since we are interested in differences between groups, we need to specify which 
 
 Before we check out the differentially expressed genes, we can look at the report information to check that the data is good quality and that the samples are as we would expect.
 
-First scroll down the report to take a look at the summary and additional information near the bottom. It should look similar to below. You can check that the correct samples have been assigned to the correct groups, what settings were used (e.g. filters, normalisation method) and also how many genes were filtered out due to low expression.
+First scroll down the report to take a look at the summary and additional information near the bottom. It should look similar to below. Here you can check that the correct samples have been assigned to the correct groups, what settings were used (e.g. filters, normalisation method) and also how many genes were filtered out due to low expression.
 
 ![Report summary](../../images/limma-voom/report_summary.png)
 
@@ -243,15 +243,15 @@ Next we'll take a look at the plots in the report.
 
 ## Density plots
 
-Density plots can be output if filtersam on low counts is applied. These plots allow comparison of the counts distributions before and after filtering. The samples are coloured by the groups. Count data is not normally distributed, so if we want to examine the distributions of the raw counts we need to log the counts. We typically check the distribution of the read counts on the log2 scale. A CPM value of 1 is equivalent to a log-CPM value of 0 and the CPM we used of 0.5 is equivalent to a log-CPM of -1. It can be seen in the before filtering plot below that a large proportion of genes within each sample are not expressed or lowly-expressed and our filter of CPM of 0.5 (in at least 2 samples) removes a lot of these uninformative genes.
+Density plots can be output if *Filter lowly exxpressed genes* is applied. These plots allow comparison of the counts distributions before and after filtering. The samples are coloured by the groups. Count data is not normally distributed, so if we want to examine the distributions of the raw counts we need to log the counts. We typically check the distribution of the read counts on the log2 scale. A CPM value of 1 is equivalent to a log-CPM value of 0 and the CPM we used of 0.5 is equivalent to a log-CPM of -1. It can be seen in the before filtering plot below that a large proportion of genes within each sample are not expressed or lowly-expressed and our filter of CPM of 0.5 (in at least 2 samples) removes a lot of these uninformative genes.
 
 ![Density Plots](../../images/limma-voom/densityplots.png "Density Plots")
 
-We can have a look more closely to see whether our threshold of 0.5 does indeed correspond to a count of about 10-15 in each sample with the CpmsVsCounts plots. The plot for two of the samples is shown below.
+We can have a look more closely to see whether our threshold of 0.5 CPM does indeed correspond to a count of about 10-15 reads in each sample with the CpmsVsCounts plots. The plot for two of the samples is shown below.
  
 ![CPM threshold Plots](../../images/limma-voom/cpmsvscounts.png "CPM vs Raw Counts Plots")
 
-From the plots we can see that 0.5 CPM is equivalent to ~10 counts in each of the 12 samples, so 0.5 seems to be an appropriate threshold for this dataset. These samples all have sequencing depth of 20-30 million (see the library information file) so a CPM value of 0.5 here is ~10 counts.
+From the plots we can see that 0.5 CPM is equivalent to ~10 counts in each of the 12 samples, so 0.5 seems to be an appropriate threshold for this dataset. These samples all have sequencing depth of 20-30 million (see the library information file) so a CPM value of 0.5 here can be calculated to be ~10 counts.
 
 > ### {% icon tip %} Tip
 >
@@ -262,7 +262,7 @@ From the plots we can see that 0.5 CPM is equivalent to ~10 counts in each of th
 
 ## Box plots
 
-We can also use boxplots to check the distributions. From the boxplots generated by the limma-voom tool we can see that overall the distributions are not identical but still not very different. If a sample is really far above or below the blue horizontal line we may need to investigate that sample further.
+We can also use box plots to check the distributions of counts in the samples. Box plots can be selected to be output by the limma-voom tool if normalisation is applied (TMM is applied by default). With the box plots for these samples we can see that overall the distributions are not identical but still not very different. If a sample is really far above or below the blue horizontal line we may need to investigate that sample further.
 
 ![Box Plots](../../images/limma-voom/boxplots.png "Box Plots")
 
@@ -291,10 +291,9 @@ The TMM normalization generates normalization factors, where the product of thes
 >    {: .solution}
 {: .question}
 
-It is considered good practice to make MD plots for all the samples as a quality check, as described in the edgeR workflow article [here](https://f1000research.com/articles/5-1438/v2). These plots allow expression profiles of individual samples to be explored more closely. An MD plot shows the log-fold change between a sample against the average expression across all the other samples. This visualisation can help you see if there are genes highly upregulated or downregulated in a sample.
-If we look at mean difference plots for these samples, we should be able to see the composition bias problem. The mean-difference plots show average expression (mean: x-axis) against log-fold-changes (difference: y-axis). 
+It is considered good practice to make MD plots for all the samples as a quality check, as described in the [edgeR workflow article](https://f1000research.com/articles/5-1438/v2). These plots allow expression profiles of individual samples to be explored more closely. An MD plot shows the log-fold change between a sample against the average expression across all the other samples. This visualisation can help you see if there are genes highly upregulated or downregulated in a sample. If we look at mean difference plots for these samples, we should be able to see the composition bias problem. The mean-difference plots show average expression (mean: x-axis) against log-fold-changes (difference: y-axis).
 
-Let's take a look at the MD plots for the two samples MCL1.LA and MCL1.LE that had the largest and smallest normalizaion factors.
+Let's take a look at the MD plots for the two samples MCL1.LA and MCL1.LE that had the largest and smallest normalization factors.
 
 The MD plots on the left below show the counts normalized for library size and the plots on the right show the counts after the TMM normalization has been applied. MCL1.LA had the largest normalization factor and was above the median line in the unnormalized by TMM box plots. MCL1.LE had the smallest normalization factor and was below the median line in the box plots. These MD plots help show the composition bias problem has been addressed.
 ![MD Plot LA](../../images/limma-voom/mdsampleLA.png "MD Plot for MCL1.LA before and after TMM normalisation")
@@ -303,7 +302,7 @@ The MD plots on the left below show the counts normalized for library size and t
 
 ## Multidimensional scaling plot
 
-By far, one of the most important plots we make when we analyse RNA-Seq data are MDS plots. An MDS plot is a visualisation of a principal components analysis, which determines the greatest sources of variation in the data. A principal components analysis is an example of an unsupervised analysis, where we don’t need to specify the groups. If your experiment is well controlled and has worked well, what we hope to see is that the greatest sources of variation in the data are the treatments/groups we are interested in. It is also an incredibly useful tool for quality control and checking for outliers. With this tool a scree plot is also produced that shows how much variation is atributed to each dimension. If there was a batch effect for example, you may see high values for additional dimensions.
+By far, one of the most important plots we make when we analyse RNA-Seq data are MDS plots. An MDS plot is a visualisation of a principal components analysis, which determines the greatest sources of variation in the data. A principal components analysis is an example of an unsupervised analysis, where we don’t need to specify the groups. If your experiment is well controlled and has worked well, what we hope to see is that the greatest sources of variation in the data are the treatments/groups we are interested in. It is also an incredibly useful tool for quality control and checking for outliers. With this limma tool a scree plot is also produced that shows how much variation is attributed to each dimension. If there was a batch effect for example, you may see high values for additional dimensions. The limma tool plots the first two dimensions as a default (1 vs 2), however you can also plot additional dimensions 2 vs 3 and 3 vs 4 using under **Output Options** Additional Plots `MDS Extra`.
 
 ![MDS Plot](../../images/limma-voom/mdsscree.png "MDS Plot")
 
@@ -312,8 +311,6 @@ By far, one of the most important plots we make when we analyse RNA-Seq data are
 > The distance between each pair of samples in the MDS plot is calculated as the leading fold change, defined as the root-mean-square of the largest 500 log2-fold changes between that pair of samples. Replicate samples from the same group cluster together in the plot, while samples from different groups form separate clusters. This indicates that the differences between groups are larger than those within groups, i.e., differential expression is greater than the variance and can be detected. In the MDS plot, the distance between basal samples on the left and luminal cells on the right is about 6 units, corresponding to a leading fold change of about 64-fold (2^6 = 64) between basal and luminal. The expression differences between virgin, pregnant and lactating are greater for luminal cells than for basal.
 >
 > Clustering in the MDS plot can be used to motivate changes to the analysis in light of potential batch effects. For example, imagine that the first replicate of each group was prepared at a separate time from the second replicate. If the MDS plot showed separation of samples by time, it might be worthwhile including time in the downstream analysis to account for the time-based effect.
->
-> This tool plots the first two dimensions as a default (1 vs 2), however you can also plot additional dimensions 2 vs 3 and 3 vs 4 using under **Output Options** Additional Plots.
 {: .details}
 
 Look at the MDS plot coloured by group. Do you notice something strange going on with the samples? Two samples don't appear to be in the right place. They have been mixed up! Redo the limma-voom analysis with the correct information.
@@ -403,7 +400,7 @@ The MD Plot highlighted genes are significant at FDR of 0.05 and exhibit log2-fo
 
 # Testing relative to a threshold (TREAT)
 
-When there is a lot of differential expression, sometimes we may want to cut-off on a fold change threshold as well as a p-value threshold so that we follow up on the most biologically significant genes. However, it is not recommended to simply rank by p-value and then discard genes with small logFC’s, as this has been shown to increase the false discovery rate. In other words, you are not controlling the false discovery rate at 5% any more. There is a function called `treat` in limma that performs this style of analysis correctly (McCarthy and Smyth 2009). Treat will simply take a user-specified log fold change cut-off and recalculate the moderated t-statistics and p-values with the new information about logFC. There are thousands of genes differentially expressed in this `basalpregnant-basallactate` comparison, so let's rerun the analysis applying TREAT and similar thresholds to what was used in the Fu paper: an adjusted P value of 0.01 (1% false discovery rate) and a log-fold-change cutoff of 0.58 (equivalent to a 1.5-fold change).
+When there is a lot of differential expression, sometimes we may want to cut-off on a fold change threshold as well as a p-value threshold so that we follow up on the most biologically significant genes. However, it is not recommended to simply rank by p-value and then discard genes with small logFC’s, as this has been shown to increase the false discovery rate. In other words, you are not controlling the false discovery rate at 5% any more. There is a function called `treat` in limma that performs this style of analysis correctly (McCarthy and Smyth 2009). TREAT will simply take a user-specified log fold change cut-off and recalculate the moderated t-statistics and p-values with the new information about logFC. There are thousands of genes differentially expressed in this `basalpregnant-basallactate` comparison, so let's rerun the analysis applying TREAT and similar thresholds to what was used in the Fu paper: an adjusted P value of 0.01 (1% false discovery rate) and a log-fold-change cutoff of 0.58 (equivalent to a 1.5-fold change).
 
 > ### {% icon hands_on %} Hands-on: Testing relative to a threshold (TREAT)
 >
@@ -415,7 +412,7 @@ When there is a lot of differential expression, sometimes we may want to cut-off
 > 2. Inspect the `Report`
 {: .hands_on}
 
-We can see that much fewer genes are now identified as differentially expressed and highlighted in the MD plot.
+We can see that much fewer genes are now highlighted in the MD plot and identified as differentially expressed.
 
 ![TREAT MDVol Plot](../../images/limma-voom/TREAT_mdvolplot_basalpregnant-basallactate.png "TREAT MD and Volcano plots")
 
@@ -427,18 +424,20 @@ Before following up on the DE genes with further lab work, it is recommended to 
 
 ## Heatmap of top genes
 
+Heatmaps showing the normalized expression of top genes from the contrast by *samples* can be auto-generated.
+
 ![Heatmap](../../images/limma-voom/heatmap.png "Heatmap of top genes")
 
 ## Stripcharts of top genes
 
-Stripcharts showing the normalized expression of top genes by groups can be auto-generated.
+Stripcharts showing the normalized expression of top genes from the contrast by *groups* can be auto-generated.
 
 ![Stripchart Plot](../../images/limma-voom/stripcharts.png "Stripcharts of top genes"){: width="950px"}
 
 
 ## Interactive plots (Glimma)
 
-An interactive version of the mean-difference plots is possible via the [Glimma](https://github.com/Shians/Glimma) package, if a gene annotation file is provided to the limma tool. A link to a html page is generated in the limma report that allows the user to search for their favourite gene. The plot shows a two-panel interactive MD plot. The left plot shows the log-fold-change vs average expression. The right plot shows the expression levels of a particular gene of each sample. Hovering over points on left plot will plot expression level for corresponding gene, clicking on points will fix the expression plot to gene. Clicking on rows on the table has the same effect as clicking on the corresponding gene in the plot.
+An interactive version of the mean-difference plots is possible via the [Glimma](https://github.com/Shians/Glimma) package, if a gene annotation file is provided to the limma tool. A link to a html page is generated in the limma report that allows the user to search for their favourite gene. The plot shows a two-panel interactive MD plot. The left plot shows the log-fold-change vs average expression. The right plot shows the expression levels of a particular gene of each sample by groups (similar to the stripcharts). Hovering over points on left plot will plot expression level for corresponding gene, clicking on points will fix the expression plot to gene. Clicking on rows on the table has the same effect as clicking on the corresponding gene in the plot.
 
 <iframe src="../../images/limma-voom/glimma/MD-Plot.html" width="100%" height="1000"></iframe>
 
@@ -451,11 +450,11 @@ An interactive version of the mean-difference plots is possible via the [Glimma]
 >
 > ![Glimma EGF gene](../../images/limma-voom/glimma_egf.png "Glimma EGF gene")
 >
-> `Egf` is not identified as differentially expressed in the basal cells (see the Adj.PValue) but in this plot showing the Expression levels of all samples, notice that we can see it is highly expressed in the luminallactate group.
+> `Egf` is not identified as differentially expressed in the basal cells (see the Adj.PValue) but in the plot showing the Expression levels of all samples, notice that we can see it is highly expressed in the luminallactate group.
 {: .hands_on}
 
 
-Multiple contrasts can be run with the limma tool. For example, we can compare the pregnant and lactate conditions for both the basal and luminal cells. Let's rerun the limma-voom TREAT analysis (adj.P <0.01 and lfc=0.58), this time including an additional contrast `luminalpregnant - luminallactate`. We can then see how the number of differentially expressed genes in the luminal cells compares to the basal cells.
+Multiple contrasts can be run with the limma tool. For example, we can compare the pregnant and lactating conditions for both the basal and luminal cells. So let's rerun the limma-voom TREAT analysis (adj.P <0.01 and lfc=0.58), this time including the additional contrast `luminalpregnant - luminallactate`. We can then see how the number of differentially expressed genes in the luminal cells compares to the basal cells.
 
 > ### {% icon hands_on %} Hands-on: Run multiple contrasts
 >
@@ -483,27 +482,29 @@ We have identified genes that are differentially expressed. We would like to kno
 [goseq tool](https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf) provides methods for performing GO analysis of RNA-seq data, taking length bias into account. The methods and software used by goseq are equally applicable to other category based tests of RNA-seq data, such as KEGG pathway analysis.
 
 goseq needs 2 files as inputs:
-- A tabular file with the differentially expressed genes from all genes assayed in the RNA-seq experiment with 2 columns:
+- a **differentially expressed genes** file. Information for all genes tested for differential expression (all genes after filtering lowly expressed). This file should have 2 columns:
     - the Gene IDs (unique within the file)
     - True (differentially expressed) or False (not differentially expressed)
-- A file with information about the length of a gene to correct for potential length bias in differentially expressed genes
+- a **gene lengths** file. Information to correct for potential length bias in differentially expressed genes. This file should have 2 columns:
+    - the Gene IDs (unique within the file)
+    - the gene lengths
 
-We will call genes differentially expressed if they have an adjusted P value below 0.01 and a fold-change of 1.5 (log2FC of 0.58) as in the Fu paper. We will add a column that gives these genes the value "True" and all other genes tested for differential expression the value "False".
+We will use the table of differentially expressed results output from the limma-voom tool and call genes differentially expressed if they have an adjusted P value below 0.01 and a fold-change of 1.5 (log2FC of 0.58) as in the Fu paper. We can use the gene lengths from the original table we imported from GEO (`seqdata`). But if we didn't have that we could use a tool like **featureCounts** {% icon tool %} to output a gene lengths file. The original file with gene lengths contains all >20k genes, but we only want the ~15k we have in our differentially expressed genes file after filtering low counts, and in the same order. So we will join the lengths file with the differentially expressed genes file, keeping only the lengths information for genes present in the differentially expressed genes file. We can then cut out the columns we need for the two inputs (gene id, length) (gene id, DE status) and as a bonus they will both be sorted in the same order, what we need for goseq.
 
-> ### {% icon hands_on %} Hands-on: Prepare the datasets for GOSeq
+To generate the two input files we will use:
+* **Compute** to add a column to the limma-voom table that gives genes meeting our adjP and fold-change thresholds the value "True" and all other genes the value "False"
+* **Join two Datasets** (matching on gene ids) to add the gene lengths information
+* **Cut** to extract the two columns with the differentially expressed genes information
+* **Cut** to extract the two columns with the gene lengths information
+
+
+> ### {% icon hands_on %} Hands-on: Prepare the two inputs for GOSeq
 >
 > 1. **Compute** {% icon tool %} with
 >    - *"Add expression"*: `bool(c8<0.01) and bool(abs(c4)>0.58)`
 >    - {% icon param-collection %} *"as a new column to"*: the `limma-voom Tables`
-> 2. **Cut** {% icon tool %} with
->    - *"Cut columns"*: `c1,c9`
->    - *"Delimited by"*: `Tab`
->    - {% icon param-file %} *"From"*: the output of the **Compute** {% icon tool %}
->
->    We just generated the differentially expressed information for goseq. We need as second input for goseq, the gene lengths. We can use the gene lengths from the original table we imported from GEO (`seqdata`). But if we didn't have that we could use a tool like **featureCounts** {% icon tool %} to output a gene lengths file.
->    The original file with gene lengths contains all >20k genes, but we only want the ~15k we have in our differentially expressed genes file after filtering low counts, and in the same order. So we will join the two tables, keeping only the information for genes present in the differentially expressed genes file. We can then cut out the columns we need for the 2 inputs (gene id, length) (gene id, DE status) and as a bonus they will both be sorted in the same order, what we need for goseq.
-> 1. **Join two Datasets** {% icon tool %} with
->    - *"Join"*: output of the **Cut** {% icon tool %} step above
+> 2. **Join two Datasets** {% icon tool %} with
+>    - *"Join"*: output of the **Compute** {% icon tool %} step above
 >    - *"using column"*: `Column: 1`
 >    - *"with"* the GEO counts file `seqdata`
 >    - *"and column"*: `Column: 1`
@@ -511,16 +512,16 @@ We will call genes differentially expressed if they have an adjusted P value bel
 >    - *"Keep the header lines"*: `No`
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: the GEO counts file `seqdata`
-> 2. **Cut** {% icon tool %} with
->    - *"Cut columns"*: `c1,c2` (the gene ids and lengths)
->    - *"Delimited by"*: `Tab`
->    - {% icon param-file %} *"From"*: the output of the **Join** {% icon tool %}
->    - Add a tag `lengths`
 > 3. **Cut** {% icon tool %} with
->    - *"Cut columns"*: `c1,c16` (the gene ids and DE status)
+>    - *"Cut columns"*: `c1,c9` (the gene ids and DE status)
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: the output of the **Join** {% icon tool %}
->    - Add a tag `DE_status`
+>    - Rename to `goseq DE status`
+> 4. **Cut** {% icon tool %} with
+>    - *"Cut columns"*: `c1,c11` (the gene ids and lengths)
+>    - *"Delimited by"*: `Tab`
+>    - {% icon param-file %} *"From"*: the output of the **Join** {% icon tool %}
+>    - Rename to `goseq gene lengths`
 {: .hands_on}
 
 We now have the two required input files for goseq.
@@ -528,15 +529,14 @@ We now have the two required input files for goseq.
 > ### {% icon hands_on %} Hands-on: Perform GO analysis
 >
 > 1. **goseq** {% icon tool %} with
->    - *"Differentially expressed genes file"*: `DE_status` output from **Cut** {% icon tool %}
->    - *"Gene lengths file"*: `lengths` output from **Cut** {% icon tool %}
+>    - *"Differentially expressed genes file"*: `goseq DE status`
+>    - *"Gene lengths file"*: `goseq gene lengths`
 >    - *"Gene categories"*:  `Get categories`
 >       - *"Select a genome to use"*:  `Mouse(mm10)`
 >       - *"Select Gene ID format"*:  `Entrez Gene ID`
 >       - *"Select one or more categories"*: `GO: Cellular Component`, `GO: Biological Process`, `GO: Molecular Function`
 >    - *"Output Options"*
 >        - *"Output Top GO terms plot?"* `Yes`
->
 {: .hands_on}
 
 goseq generates a big table with the following columns for each GO term:
@@ -554,9 +554,9 @@ To identify categories significantly enriched/unenriched below some p-value cuto
 
 A plot of the top 10 over-represented GO terms (by adjusted *p*-value) can be output from the goseq tool to help visualise results.
 
-![Basal Plot](../../images/limma-voom/basal_top_GO.png "Basal pregnant vs lactate top 10 GO terms")
+![Basal Plot](../../images/limma-voom/basal_top_GO.png "Basal pregnant vs lactating top 10 GO terms")
 
-![Luminal Plot](../../images/limma-voom/luminal_top_GO.png "Luminal pregnant vs lactate top 10 GO terms")
+![Luminal Plot](../../images/limma-voom/luminal_top_GO.png "Luminal pregnant vs lactating top 10 GO terms")
 
 The Fu paper also used goseq and found enrichment in the luminal cells for general metabolic processes, lipid biosynthesis and transport proteins, and enrichment for cell contractility genes in the basal cells.
 
@@ -573,7 +573,7 @@ The Fu paper also used goseq and found enrichment in the luminal cells for gener
 
 ## Create heatmap of custom genes
 
-You may want to create a heatmap for a set of genes of interest, such as the 31 genes from the original paper using this dataset, Fig. 6b below. These 31 genes include the authors' main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors, identified as differentially expressed in this dataset in luminal pregnant vs lactate by the authors. We will recreate the heatmap to show the steps. It also serves as a sanity check, to check that our results look similar to what was shown in the paper.
+You may want to create a heatmap for a set of genes of interest, such as the 31 genes from the original paper using this dataset, Fig. 6b below. These 31 genes include the authors' main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors, identified as differentially expressed in this dataset in luminal pregnant vs lactating by the authors. We will recreate the heatmap to show the steps. It also serves as a sanity check, to check that our results look similar to what was shown in the paper.
 
 ![Fu heatmap](../../images/limma-voom/fu_heatmap.png "Fu et al, Nat Cell Biol 2015")
 
