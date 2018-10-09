@@ -237,16 +237,7 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
         </ul>
       </blockquote>
 
-      <p>As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.</p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comments-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
-        <ul>
-          <li>Add the “stickleback” custom build from the Fasta reference genome file</li>
-          <li>Edit the “Database/Build” to select “stickleback”</li>
-          <li>Rename the datasets according to the samples</li>
-        </ul>
-      </blockquote>
+      <p>As default, Galaxy takes the link as name.</p>
     </li>
   </ol>
 </blockquote>
@@ -265,86 +256,52 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
       <ul>
         <li>Single-end or paired-end reads files: Single-end files</li>
         <li>singles-end reads infile(s): SRR034310.fastq(.gz)</li>
-        <li>Barcode file: Barcode fileBarcodes_SRR034310.tabular</li>
+        <li>Barcode file: Barcodes_SRR034310.tabular</li>
         <li>Number of enzymes: One</li>
         <li>Enzyme: sbfI</li>
         <li>Capture discarded reads to a file: Yes</li>
         <li>Output format: fastq</li>
       </ul>
+
+      <blockquote class="question">
+        <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>How many reads where on the original dataset?</li>
+          <li>How many are kept?</li>
+          <li>Can you try to explain the reason why we loose a lot of reads here?</li>
+          <li>What kind of information does this result give concerning the upcoming data analysis and the barcodes design in general?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>The informations can be found in the results log file:</p>
+
+          <ol>
+            <li>8895289 total reads</li>
+            <li>8139531 retained reads</li>
+            <li>There are no sequences filtered because of low quality. This is because radtags didn’t apply quality related filtering since the corresponding advanced option (Discard reads with low quality scores) has not been enabled. So here, all not retained sequences are removed because of an ambiguous barcode (626265) or an ambiguous RAD-Tag (129493). This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This strategy is often used to avoid having too much sequences beginning with the exact same nucleotide sequence which may cause Illumina related issues during sequencing and cluster analysis</li>
+            <li>Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!</li>
+          </ol>
+
+          <p>In addition to the overall statistics the numbers of retained and removed reads are also given for each bar code sequence.</p>
+        </blockquote>
+      </blockquote>
     </li>
-  </ol>
-
-  <p>As we are exporting demultiplexed reads in data collections, you have hidden datasets on your history. These datasets are in fact symlinks on the data collections and are by default hidden on the history. If you want to see these datasets, you can click on the <code class="highlighter-rouge">hidden</code> statement just under the history name.</p>
-
-  <blockquote class="question">
-    <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-
-    <ol>
-      <li>How many reads where on the original dataset?</li>
-      <li>How many are kept?</li>
-      <li>Can you try to explain the reason why we loose a lot of reads here?</li>
-      <li>What kind of infiormation this result gives concerning the upcoming data analysis and the barcodes design in general ?</li>
-    </ol>
-
-    <blockquote class="solution">
-      <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-      <ol>
-        <li>8895289 total reads</li>
-        <li>8139531 retained reads</li>
-        <li>Exploring the <code class="highlighter-rouge">results.log</code> file allows you to see that there is no sequences filtered for low quality statement. As we don’t specify the corresponding advanced option, Process radtags didn’t apply quality related filtering. So here, all not retained sequences are not recorded because of an ambiguous barcode or an ambiguous RAD-Tag. This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This is something often used to avoid having too much sequences beginning with the exact same nucleotides sequences and thus Illumina related issues during sequencing and clusters analysis</li>
-        <li>Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!</li>
-      </ol>
-    </blockquote>
-  </blockquote>
-
-  <ol>
     <li><strong>Process Radtags</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Re-Run <code class="highlighter-rouge">Stacks: process radtags</code> on FastQ file playing with parameters</li>
   </ol>
 
   <p>In <code class="highlighter-rouge">advanced options</code>, after activation of the <code class="highlighter-rouge">Discard reads with low quality scores</code> option, play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3’ end of reads.</p>
 
-  <blockquote class="solution">
-    <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <p>The informations can be found in the results log file:</p>
-
-    <ol>
-      <li>8895289 total reads</li>
-      <li>8139531 retained reads</li>
-      <li>There are no sequences filtered because of low quality. This is because radtags didn’t apply quality related filtering since the corresponding advanced option (Discard reads with low quality scores) has not been enabled. So here, all not retained sequences are removed because of an ambiguous barcode (626265) or an ambiguous RAD-Tag (129493). This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This strategy is often used to avoid having too much sequences beginning with the exact same nucleotide sequence which may cause Illumina related issues during sequencing and cluster analysis</li>
-      <li>Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!</li>
-    </ol>
-
-    <p>In addition to the overall statistics the numbers of retained and removed reads are also given for each bar code sequence.</p>
-  </blockquote>
 </blockquote>
-
-<p>In order to obtain results of higher quality we will play with the advanced options:</p>
 
 <blockquote class="hands_on">
   <h3 id="hands_on-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <p>You can use the <code class="highlighter-rouge">Charts</code> functionality through the Visualize button reachable on the <code class="highlighter-rouge">Radtags logs</code> file you just generated.</p>
 
-  <p>If like me you don’t have payed attention to the organization of you file for the graphical representation you obtain a non optimal bars diagram with a not intelligent X-axis ordering. There is a lot of different manner to fix this. You can use the copy/paste “bidouille” like seen previously, or you can use Galaxy tools to manipulate the <code class="highlighter-rouge">radtags logs</code> (did you change the filename from <code class="highlighter-rouge">pasted entry</code> to another label ?) file to generate a better graph. For example, you can use <code class="highlighter-rouge">Select lines that match an expression</code> tool to select rows then use the <code class="highlighter-rouge">Concatenate datasets tail-to-head</code> tool to reorganize these lines in a new file… OR, as I made, you can just sort the file using the first column.</p>
-
-  <p>And you obtain a file like this one, ready to generate a beautiful and smart bar diagram!</p>
-
-  <p><img src="../../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif_view.PNG" alt="The result of sorting" /></p>
-
-  <p><img src="../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG" alt="The chart on the sorted file" /></p>
-
-  <p>Using filter like <code class="highlighter-rouge">clean data, remove any read with an uncalled base</code> has here few impact:</p>
-
-  <ol>
-    <li><strong>Process Radtags</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Re-Run <code class="highlighter-rouge">Stacks: process radtags</code> on FastQ file playing with parameters
-      <ul>
-        <li>In <code class="highlighter-rouge">advanced options</code>, activate the <code class="highlighter-rouge">Discard reads with low quality scores</code> option and play with the score limit (default (nolimit) vs 20 vs 10 for example) and examine the change in reads retained.</li>
-        <li>Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3’ end of reads.</li>
-      </ul>
-    </li>
-  </ol>
-
-  <p>Then we generate a graphical display of the changes:</p>
+  <p>If like me you don’t have payed attention to the organization of you file for the graphical representation you obtain a non optimal bars diagram with a not intelligent X-axis ordering. There is a lot of different manner to fix this. You can use a copy/paste “bidouille” or you can use Galaxy tools to manipulate the <code class="highlighter-rouge">radtags logs</code> file to generate a better graph. For example, you can use <code class="highlighter-rouge">Select lines that match an expression</code> tool to select rows then use the <code class="highlighter-rouge">Concatenate datasets tail-to-head</code> tool to reorganize these lines in a new file.
+Then we generate a graphical display of the changes:</p>
 
   <p>First we cut the interesting lines of each <code class="highlighter-rouge">result.log with Stacks: process radtags</code></p>
 
@@ -356,15 +313,17 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
   <p>Alternatively just copy/paste these lines on the Galaxy upload tool using Paste/fetch data section and modifying the File header by sample and filename by Score 10 / Score 20 and noscorelimit for example… Before Starting the upload, you can select the <code class="highlighter-rouge">Convert spaces to tabs</code> option through the <code class="highlighter-rouge">Upload configuration</code> wheel. If you did not pay attention to the order you can just sort the file using the first column.</p>
 </blockquote>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>quality	Retained Reads	Low Quality	Ambiguous Barcodes	Ambiguous RAD-Tag	Total
-20	2980543		5158988		626265		129493		8895289
-10	7373160		766371		626265		129493		8895289
-nolimit	8139531		0		626265		129493		8895289
-</code></pre></div></div>
-
 <p>You can use the <code class="highlighter-rouge">Charts</code> functionality through the Visualize button to plot the data.</p>
 
-<p><img src="../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG" alt="The bar diagram" /></p>
+<p>And you obtain a file like this one, ready to generate a beautiful and smart bar stacked!</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#	Retained Reads	Low Quality	Ambiguous Barcodes	Ambiguous RAD-Tag	Total
+NoScoreLimit	8139531		0		626265		129493		8895289
+Score10	7373160		766371		626265		129493		8895289
+Score20	2980543		5158988		626265		129493		8895289
+</code></pre></div></div>
+
+<p><img src="../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG" alt="The chart on the sorted file" /></p>
 
 <p>Using a filter like <code class="highlighter-rouge">clean data, remove any read with an uncalled base</code> has only little impact:</p>
 
@@ -389,7 +348,7 @@ nolimit	8139531		0		626265		129493		8895289
         </ol>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <p>The read length is 32 bp</p>
         </blockquote>
       </blockquote>
@@ -434,24 +393,29 @@ nolimit	8139531		0		626265		129493		8895289
 
   <p><img src="../../images/RAD4_Population_Genomics/denovo/populations_log.png" alt="The output of the populations tool" /></p>
 
-  <p>Now look at the output in the file <code class="highlighter-rouge">batch_1.sumstats</code> nammed <code class="highlighter-rouge">SNP and Haplotype-based F statistics with Stacks: populations ...</code> on your history. This file is also reachable on the data collection nammed <code class="highlighter-rouge">Full output from denovo_map .....</code> with his original name <code class="highlighter-rouge">batch_1.sumstats</code>. There are a large number of statistics calculated at each SNP, so use Galaxy tools like filter, cut, and sort to focus on some.</p>
+  <p>Now look at the output in the file <code class="highlighter-rouge">batch_1.sumstats</code> nammed <code class="highlighter-rouge">SNP and Haplotype-based F statistics with Stacks: populations ...</code> on your history. There are a large number of statistics calculated at each SNP, so use Galaxy tools like filter, cut, and sort to focus on some.</p>
 
   <blockquote class="question">
     <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
     <ol>
-      <li>What is the maximum value of FST at any SNP?</li>
-      <li>How many SNPs reach this FST value?</li>
+      <li>What is the maximum value of FST’ at any SNP? Don’t hesitate to look at the <a href="http://catchenlab.life.illinois.edu/stacks/manual/#files">STACKS manual</a></li>
+      <li>What is the meaning of this FST’ value compared a a classical FST one?</li>
+      <li>How many SNPs reach this FST’ value?</li>
     </ol>
 
     <blockquote class="solution">
-      <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
       <ol>
-        <li>0.75</li>
-        <li>3500</li>
+        <li>1</li>
+        <li>FST’ is a haplotype measure of FST that is scaled to the theoretical maximum FST value at this locus. Depending on how many haplotypes there are, it may not be possible to reach an FST of 1, so this method will scale the value to 1</li>
+        <li>114</li>
       </ol>
     </blockquote>
   </blockquote>
+</blockquote>
+<blockquote>
+  <p>You can now for xample filter this dataset to only keep FST’=1 loci for further analysis…</p>
 </blockquote>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
