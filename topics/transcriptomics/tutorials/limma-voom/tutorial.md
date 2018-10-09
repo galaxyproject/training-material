@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-title: RNA-seq counts to differentially expressed genes
+title: RNA-seq counts to genes
 zenodo_link: "https://figshare.com/s/f5d63d8c265a05618137"
 enable: "false"
 questions:
@@ -69,28 +69,30 @@ We will use three files for this analysis:
 > 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq with limma-voom`
 > 2. Import the mammary gland counts table and the associated sample information file.
 >
->       To import the files, there are two options:
->       - Option 1: From a shared data library if available (ask your instructor)
->       - Option 2: From [Figshare](https://figshare.com/s/1d788fd384d33e913a2a)
+>     To import the files, there are two options:
+>     - Option 1: From a shared data library if available (ask your instructor)
+>     - Option 2: From [Figshare](https://figshare.com/s/1d788fd384d33e913a2a)
 >
->           > ### {% icon tip %} Tip: Importing data via links
->           >
->           > * Copy the link location
->           > * Open the Galaxy Upload Manager
->           > * Select **Paste/Fetch Data**
->           > * Paste the link into the text field
->           > * Press **Start**    
->           {: .tip}
+>         > ### {% icon tip %} Tip: Importing data via links
+>         >
+>         > * Copy the link location
+>         > * Open the Galaxy Upload Manager
+>         > * Select **Paste/Fetch Data**
+>         > * Paste the link into the text field
+>         > * Press **Start**
+>         {: .tip}
 >           
->           You can directly paste:
+>         - You can paste both links below into the **Paste/Fetch** box:
 >
 >           ```
->           https://ndownloader.figshare.com/files/5057929?private_link=1d788fd384d33e913a2a
->           https://ndownloader.figshare.com/files/5999829?private_link=1d788fd384d33e913a2a
+>       https://ndownloader.figshare.com/files/5057929?private_link=1d788fd384d33e913a2a
+>       https://ndownloader.figshare.com/files/5999829?private_link=1d788fd384d33e913a2a
 >           ```
 >
-> 3. Rename the counts dataset as `seqdata` and the sample information dataset as `sampleinfo` using the {% icon galaxy-pencil %} (pencil) icon.
-> 4. Check that the datatype is `tabular`.
+>         - Select *"Genome"*: `mm10`
+>
+> 2. Rename the counts dataset as `seqdata` and the sample information dataset as `sampleinfo` using the {% icon galaxy-pencil %} (pencil) icon.
+> 3. Check that the datatype is `tabular`.
 >    If the datatype is not `tabular`, please change the file type to `tabular`.
 >
 >    > ### {% icon tip %} Tip: Changing the datatype
@@ -106,31 +108,28 @@ Let’s take a look at the data. The `seqdata` file contains information about g
 
 ![seqdata file](../../images/limma-voom/seqdata.png "Count file (before formatting)")
 
-The sample information file contains basic information about the samples that we will need for the analysis. See below.
+The `sampleinfo` file contains basic information about the samples that we will need for the analysis. See below.
 
 ![sampleinfo file](../../images/limma-voom/sampleinfo.png "Sample information file (before formatting)")
 
 ## Format the data
 
-Let’s create a new file, `countdata`, that contains only the counts for the 12 samples i.e. we'll remove the gene length column. The sample names are also pretty long so we’ll shorten these to contain only the relevant information about each sample.
+Let’s create a new file, `countdata`, that contains only the counts for the 12 samples i.e. we'll remove the gene length column with the **Cut columns from a table (cut)** tool. The sample names are also pretty long so we'll use the **Replace Text in entire line** tool to shorten these to contain only the relevant information about each sample.
 
 > ### {% icon hands_on %} Hands-on: Format the counts data
 >
-> 1. **Cut** {% icon tool %}: Run **Cut columns from a table** with the following settings:
+> 1. **Cut** {% icon tool %}: Run **Cut columns from a table (cut)** with the following settings:
 >      - *"File to cut"*: `seqdata`
 >      - *"Operation"*: `Discard`
 >      - *"List of fields"*: Select `Column:2`
->
 > 2. **Replace Text** {% icon tool %}: Run **Replace Text in entire line** with the following settings:
->      - *"File to process"*: `Cut on data N`
+>      - *"File to process"*: output of **Cut** {% icon tool %}
 >      - *"Find pattern"*: `_B[A-Z0-9_]+`
->
 > 3. Rename file as `countdata` using the {% icon galaxy-pencil %} (pencil) icon. The file should look like below.
->
 >    ![countdata file](../../images/limma-voom/countdata.png "Count file (after formatting)")
 {: .hands_on}
 
-Next, let's create a new file, `factordata`, that contains the groups information that we need for the limma-voom tool. We'll combine the cell type and mouse status columns in the sample information file to make a column with the 6 group names e.g. we'll combine the CellType `basal` with the Status `pregnant` to make the group name `basalpregnant`.
+Next, let's create a new file, `factordata`, that contains the groups information that we need for the limma-voom tool. We'll combine the cell type and mouse status to make 6 groups e.g. we'll combine the CellType `basal` with the Status `pregnant` for the group `basalpregnant`. We'll use the **Merge Columns** tool to combine the cell type and mouse status columns in the sample information file, making a column with the 6 group names.
 
 > ### {% icon hands_on %} Hands-on: Format the sample information file
 >
@@ -138,14 +137,11 @@ Next, let's create a new file, `factordata`, that contains the groups informatio
 >      - *"Select data"*: `sampleinfo`
 >      - *"Merge column"*: `Column: 3`
 >      - *"with column"*: `Column: 4`
->
-> 2. **Cut** {% icon tool %}: Run **Cut columns from a table** with the following settings:
->      - *"File to cut"*: `Merge on data N` (from above)
+> 2. **Cut** {% icon tool %}: Run **Cut columns from a table (cut)** with the following settings:
+>      - *"File to cut"*: output of **Merge Columns** {% icon tool %}
 >      - *"Operation"*: `Keep`
 >      - *"List of fields"*: Select `Column:2` and `Column:5`
->
 > 3. Rename file as `factordata` using the {% icon galaxy-pencil %} (pencil) icon. The file should look like below.
->
 >    ![factordata file](../../images/limma-voom/factordata.png "Sample information file (after formatting)")
 {: .hands_on}
 
@@ -165,7 +161,6 @@ Optionally, gene annotations can be provided to the limma-voom tool and if provi
 >          - `SYMBOL`
 >          - `GENENAME`
 > 2. Rename file as `annodata` using the {% icon galaxy-pencil %} (pencil) icon. The file should look like below.
->
 >    ![annodata file](../../images/limma-voom/annodata.png "Gene annotation file")
 {: .hands_on}
 
@@ -184,7 +179,7 @@ There are a few ways to filter out lowly expressed genes. When there are biologi
 
 ## Normalization for composition bias
 
-Normalization of RNA-seq is typically performed in order to eliminate composition biases between libraries, for example, if there are a few highly expressed genes dominating the read counts in some samples. By default, TMM normalization [(Robinson and Oshlack 2010)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2864565/) is performed by the limma-voom tool (this can be changed under **Advanced Option**), using the edgeR `calcNormFactors` function. TMM stands for trimmed mean of M values and it uses a weighted trimmed mean of the log expression ratios to scale the counts for the samples. See the figure from the TMM paper below.
+In addition to normalizing for different sequencing depths, normalizing to eliminate composition biases between libraries is typically performed. Composition biases can occur, for example, if there are a few highly expressed genes dominating the read counts in some samples. By default, TMM normalization [(Robinson and Oshlack 2010)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2864565/) is performed by the limma-voom tool (this can be changed under **Advanced Options**), using the edgeR `calcNormFactors` function. TMM stands for trimmed mean of M values and it uses a weighted trimmed mean of the log expression ratios to scale the counts for the samples. See the figure from the TMM paper below.
 
 ![TMM normalization](../../images/limma-voom/TMM.png "TMM normalization (Robinson and Oshlack 2010)")
 
@@ -207,16 +202,6 @@ Since we are interested in differences between groups, we need to specify which 
 >          - *"Filter on CPM or Count values?"*: `CPM`
 >          - *"Minimum CPM"*: `0.5`
 >          - *"Minimum Samples"*: `2`
->      - **Output Options**
->          - *"Additional Plots"* tick:
->              - `Density Plots`
->              - `CpmsVsCounts Plots`
->              - `Box Plots`
->              - `MDS Extra`
->              - `MD Plots for individual samples`
->              - `Heatmaps (top DE genes)`
->              - `Stripcharts (top DE genes)`
->          - *"Output Library information file?"*: `Yes`
 > 2. Inspect the `Report` produced by clicking on the {% icon galaxy-eye %} (eye) icon
 {: .hands_on}
 
@@ -224,7 +209,56 @@ Since we are interested in differences between groups, we need to specify which 
 
 Before we check out the differentially expressed genes, we can look at the report information to check that the data is good quality and that the samples are as we would expect.
 
-First scroll down the report to take a look at the summary and additional information near the bottom. It should look similar to below. Here you can check that the correct samples have been assigned to the correct groups, what settings were used (e.g. filters, normalisation method) and also how many genes were filtered out due to low expression.
+## Multidimensional scaling plot
+
+By far, one of the most important plots we make when we analyse RNA-Seq data are MDS plots. An MDS plot is a visualisation of a principal components analysis, which determines the greatest sources of variation in the data. A principal components analysis is an example of an unsupervised analysis, where we don’t need to specify the groups. If your experiment is well controlled and has worked well, what we hope to see is that the greatest sources of variation in the data are the treatments/groups we are interested in. It is also an incredibly useful tool for quality control and checking for outliers. With this limma tool a scree plot is also produced that shows how much variation is attributed to each dimension. If there was a batch effect for example, you may see high values for additional dimensions. The limma tool plots the first two dimensions as a default (1 vs 2), however you can also plot additional dimensions 2 vs 3 and 3 vs 4 using under **Output Options** Additional Plots `MDS Extra`.
+
+![MDS Plot](../../images/limma-voom/mdsscree.png "MDS Plot")
+
+> ### {% icon details %} More details on MDS plots
+>
+> The distance between each pair of samples in the MDS plot is calculated as the leading fold change, defined as the root-mean-square of the largest 500 log2-fold changes between that pair of samples. Replicate samples from the same group cluster together in the plot, while samples from different groups form separate clusters. This indicates that the differences between groups are larger than those within groups, i.e., differential expression is greater than the variance and can be detected. In the MDS plot, the distance between basal samples on the left and luminal cells on the right is about 6 units, corresponding to a leading fold change of about 64-fold (2^6 = 64) between basal and luminal. The expression differences between virgin, pregnant and lactating are greater for luminal cells than for basal.
+>
+> Clustering in the MDS plot can be used to motivate changes to the analysis in light of potential batch effects. For example, imagine that the first replicate of each group was prepared at a separate time from the second replicate. If the MDS plot showed separation of samples by time, it might be worthwhile including time in the downstream analysis to account for the time-based effect.
+{: .details}
+
+Look at the MDS plot coloured by group. Do you notice something strange going on with the samples? Two samples don't appear to be in the right place. It turns out that they have been mislabelled! Redo the limma-voom analysis with the correct sample information.
+
+> ### {% icon hands_on %} Hands-on: Use the Rerun button to redo steps
+>
+> 1. Import the correct sample information file from `https://ndownloader.figshare.com/files/5999832?private_link=1d788fd384d33e913a2a`
+> 2. Use the Rerun button in the History to redo the **Merge Columns** and **Cut** steps on the correct sample information file.
+> 3. Delete the incorrect sample information datasets to avoid any confusion.
+> 4. Rerun **limma** as before with the correct `sampleinfo` file and adding the following settings:
+>      - **Output Options**
+>          - *"Additional Plots"* tick:
+>              - `Density Plots (if filtering)`
+>              - `CpmsVsCounts Plots (if filtering on cpms)`
+>              - `Box Plots (if normalising)`
+>              - `MDS Extra (Dims 2vs3 and 3vs4)`
+>              - `MD Plots for individual samples`
+>              - `Heatmaps (top DE genes)`
+>              - `Stripcharts (top DE genes)`
+>          - *"Output Library information file?"*: `Yes`
+{: .hands_on}
+
+In the `Report` you should then see the correct MDS plot as below.
+
+![MDS Plot](../../images/limma-voom/mdsscree_corr.png "MDS Plot (correct samples)")
+
+> ### {% icon question %} Question
+>
+> What is the greatest source of variation in the data (i.e. what does dimension 1 represent)?
+> What is the second greatest source of variation in the data?
+>
+>    > ### {% icon solution %} Solution
+>    >
+>    > Dimension 1 represents the variation due to cell type, basal vs luminal. Dimension 2 represents the variation due to the stages, virgin, pregnant or lactating.
+>    >
+>    {: .solution}
+{: .question}
+
+Next, scroll down the report to take a look at the **Additional information** and **Summary of experimental data** sections near the bottom. It should look similar to below. Here you can check that the correct samples have been assigned to the correct groups, what settings were used (e.g. filters, normalisation method) and also how many genes were filtered out due to low expression.
 
 ![Report summary](../../images/limma-voom/report_summary.png)
 
@@ -239,15 +273,18 @@ First scroll down the report to take a look at the summary and additional inform
 >    >    {: .solution}
 >    {: .question}
 
-Next we'll take a look at the plots in the report. 
 
 ## Density plots
 
-Density plots can be output if *Filter lowly exxpressed genes* is applied. These plots allow comparison of the counts distributions before and after filtering. The samples are coloured by the groups. Count data is not normally distributed, so if we want to examine the distributions of the raw counts we need to log the counts. We typically check the distribution of the read counts on the log2 scale. A CPM value of 1 is equivalent to a log-CPM value of 0 and the CPM we used of 0.5 is equivalent to a log-CPM of -1. It can be seen in the before filtering plot below that a large proportion of genes within each sample are not expressed or lowly-expressed and our filter of CPM of 0.5 (in at least 2 samples) removes a lot of these uninformative genes.
+Density plots can be output in the report (and as a PDF) if *Filter lowly expressed genes* is applied. These plots allow comparison of the counts distributions before and after filtering. The samples are coloured by the groups. Count data is not normally distributed, so if we want to examine the distributions of the raw counts we need to log the counts. We typically check the distribution of the read counts on the log2 scale. A CPM value of 1 is equivalent to a log-CPM value of 0 and the CPM we used of 0.5 is equivalent to a log-CPM of -1. It can be seen in the before filtering plot below that a large proportion of genes within each sample are not expressed or lowly-expressed and our filter of CPM of 0.5 (in at least 2 samples) removes a lot of these uninformative genes.
 
 ![Density Plots](../../images/limma-voom/densityplots.png "Density Plots")
 
 We can have a look more closely to see whether our threshold of 0.5 CPM does indeed correspond to a count of about 10-15 reads in each sample with the CpmsVsCounts plots. The plot for two of the samples is shown below.
+
+The report provides links to PDFs of plots shown in the report and also to the rest of the additional plots selected.
+
+![Report Outputs](../../images/limma-voom/report_plots.png "Report outputs")
  
 ![CPM threshold Plots](../../images/limma-voom/cpmsvscounts.png "CPM vs Raw Counts Plots")
 
@@ -277,9 +314,9 @@ We can also use box plots to check the distributions of counts in the samples. B
 >    {: .solution}
 {: .question}
 
-The TMM normalization generates normalization factors, where the product of these factors and the library sizes defines the effective library size. TMM normalization (and most scaling normalization methods) scale relative to one sample. The normalization factors multiply to unity across all libraries. A normalization factor below one indicates that the library size will be scaled down, as there is more suppression (i.e., composition bias) in that library relative to the other libraries. This is also equivalent to scaling the counts upwards in that sample. Conversely, a factor above one scales up the library size and is equivalent to downscaling the counts. We can see the normalization factors for these samples in the Library Size Information file below that we selected to output.
+The TMM normalization generates normalization factors, where the product of these factors and the library sizes defines the effective library size. TMM normalization (and most scaling normalization methods) scale relative to one sample. The normalization factors multiply to unity across all libraries. A normalization factor below one indicates that the library size will be scaled down, as there is more suppression (i.e., composition bias) in that library relative to the other libraries. This is also equivalent to scaling the counts upwards in that sample. Conversely, a factor above one scales up the library size and is equivalent to downscaling the counts. We can see the normalization factors for these samples in the `Library information` file that we selected to output. Click on the {% icon galaxy-eye %} (eye) icon to view.
 
-![Library Info file](../../images/limma-voom/libinfo.png "Library information file"){: width="600px"}
+![Library Info file](../../images/limma-voom/libinfo.png "Library information file")
 
 > ### {% icon question %} Question
 >
@@ -300,57 +337,9 @@ The MD plots on the left below show the counts normalized for library size and t
 ![MD Plot LE](../../images/limma-voom/mdsampleLE.png "MD Plot for MCL1.LE before and after TMM normalisation")
 
 
-## Multidimensional scaling plot
-
-By far, one of the most important plots we make when we analyse RNA-Seq data are MDS plots. An MDS plot is a visualisation of a principal components analysis, which determines the greatest sources of variation in the data. A principal components analysis is an example of an unsupervised analysis, where we don’t need to specify the groups. If your experiment is well controlled and has worked well, what we hope to see is that the greatest sources of variation in the data are the treatments/groups we are interested in. It is also an incredibly useful tool for quality control and checking for outliers. With this limma tool a scree plot is also produced that shows how much variation is attributed to each dimension. If there was a batch effect for example, you may see high values for additional dimensions. The limma tool plots the first two dimensions as a default (1 vs 2), however you can also plot additional dimensions 2 vs 3 and 3 vs 4 using under **Output Options** Additional Plots `MDS Extra`.
-
-![MDS Plot](../../images/limma-voom/mdsscree.png "MDS Plot")
-
-> ### {% icon details %} More details on MDS plots
->
-> The distance between each pair of samples in the MDS plot is calculated as the leading fold change, defined as the root-mean-square of the largest 500 log2-fold changes between that pair of samples. Replicate samples from the same group cluster together in the plot, while samples from different groups form separate clusters. This indicates that the differences between groups are larger than those within groups, i.e., differential expression is greater than the variance and can be detected. In the MDS plot, the distance between basal samples on the left and luminal cells on the right is about 6 units, corresponding to a leading fold change of about 64-fold (2^6 = 64) between basal and luminal. The expression differences between virgin, pregnant and lactating are greater for luminal cells than for basal.
->
-> Clustering in the MDS plot can be used to motivate changes to the analysis in light of potential batch effects. For example, imagine that the first replicate of each group was prepared at a separate time from the second replicate. If the MDS plot showed separation of samples by time, it might be worthwhile including time in the downstream analysis to account for the time-based effect.
-{: .details}
-
-Look at the MDS plot coloured by group. Do you notice something strange going on with the samples? Two samples don't appear to be in the right place. They have been mixed up! Redo the limma-voom analysis with the correct information.
-
-> ### {% icon hands_on %} Hands-on: Use the Rerun button to redo steps
->
-> 1. Import the correct sample information file from `https://ndownloader.figshare.com/files/5999832?private_link=1d788fd384d33e913a2a`
-> 2. Use the Rerun button in the History to redo the Merge and Cut steps on the correct sample information file.
->
-{: .hands_on}
-
-You should then see the correct MDS plot as below.
-
-![MDS Plot](../../images/limma-voom/mdsscree_corr.png "MDS Plot (correct samples)")
-
-> ### {% icon hands_on %} Hands-on: Testing relative to a threshold (TREAT)
->
-> 1. **limma** {% icon tool %}: Rerun **limma** with the following settings:
->      - *"**Advanced Options**"*
->          - *"Minimum Log2 Fold Change"*: `0.58`
->          - *"P-Value Adjusted Threshold"*: `0.01`
->          - *"Test significance relative to a fold-change threshold (TREAT)"*: `Yes`
-> 2. Inspect the `Report`
-{: .hands_on}
-
-> ### {% icon question %} Question
->
-> What is the greatest source of variation in the data (i.e. what does dimension 1 represent)?
-> What is the second greatest source of variation in the data?
->
->    > ### {% icon solution %} Solution
->    >
->    > Dimension 1 represents the variation due to cell type, basal vs luminal. Dimension 2 represents the variation due to the stages, virgin, pregnant or lactating.
->    >
->    {: .solution}
-{: .question}
-
 ## Voom variance plot 
 
-This plot can tell us if we’ve filtered the low counts adequately and if there is a lot of variation in our data.
+This plot show the mean-variance relationship of the genes in the dataset. It can help us see if we’ve filtered the low counts adequately and if there is a lot of variation in our data.
 
 ![Voom Plot](../../images/limma-voom/voomplot.png "Voom Plot")
 
@@ -404,7 +393,7 @@ When there is a lot of differential expression, sometimes we may want to cut-off
 
 > ### {% icon hands_on %} Hands-on: Testing relative to a threshold (TREAT)
 >
-> 1. **limma** {% icon tool %}: Rerun the `limma` tool with the same settings as before and add lfc=0.58 (1.5 fold) and TREAT.
+> 1. **limma** {% icon tool %}: Rerun **limma** with the following settings:
 >      - *"**Advanced Options**"*
 >          - *"Minimum Log2 Fold Change"*: `0.58`
 >          - *"P-Value Adjusted Threshold"*: `0.01`
@@ -418,7 +407,7 @@ We can see that much fewer genes are now highlighted in the MD plot and identifi
 
 ![TREAT DE counts](../../images/limma-voom/TREATdecounts.png "TREAT differentially expressed genes"){: width="400px"}
 
-Before following up on the DE genes with further lab work, it is recommended to have a look at the expression levels of the individual samples for the genes of interest. Heatmaps of the top genes can be generated to show the expression levels across the samples and stripcharts can be used to view the expression of the top genes across the groups. This tool can generate these charts automatically for the top genes. The number of top genes is 10 by default, and the user can specify the number of top genes to view (up to 100) under **Advanced Options**. 
+Before following up on the DE genes with further lab work, it is recommended to have a look at the expression levels of the individual samples for the genes of interest. Heatmaps of the top genes can be generated to show the expression levels across the samples and stripcharts can be used to view the expression of the top genes across the groups. This tool can generate these charts automatically for the top genes. The number of top genes is 10 by default, and the user can specify the number of top genes to view (up to 100) under **Advanced Options**.
 
 # Visualising results
 
@@ -653,7 +642,6 @@ We now have a table with the 31 genes in columns and the 12 samples in rows.
 >    - *"Data scaling"*: `Scale my data by column` (scale genes)
 >    You should see a heatmap like below.
 >    ![Fu heatmap regenerated](../../images/limma-voom/fu_heatmap_regenerated.png "Fu heatmap regenerated")
->
 {: .hands_on}
 
 >    > ### {% icon question %} Question
@@ -670,4 +658,4 @@ We now have a table with the 31 genes in columns and the 12 samples in rows.
 # Conclusion
 {:.no_toc}
 
-In this tutorial we have seen how counts files can be converted into differentially expressed genes with limma-voom. This followed on from the accompanying tutorial, limma-voom fastq to counts, that showed how to generate counts from the raw FASTQ data for this dataset. In this part we have learnt ways to visualise the count data and QC checks that can be performed, to help assess the quality and results. We have also reproduced results similar to what the authors found in the original paper using this dataset. For further reading on analysis of RNA-seq count data and the methods used here, see the articles; [RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR](https://f1000research.com/articles/5-1408/v2) (Law et al. 2016) and [From reads to genes to pathways: differential expression analysis of RNA-Seq experiments using Rsubread and the edgeR quasi-likelihood pipeline](https://f1000research.com/articles/5-1438/v2) (Chen, Lun, Smyth 2016).
+In this tutorial we have seen how counts files can be converted into differentially expressed genes with limma-voom. This follows on from the accompanying tutorial, RNA-seq reads to counts, that showed how to generate counts from the raw reads (FASTQ) data for this dataset. In this part we have learnt ways to visualise the count data and QC checks that can be performed to help assess the quality and results. We have also reproduced results similar to what the authors found in the original paper with this dataset. For further reading on analysis of RNA-seq count data and the methods used here, see the articles; [RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR](https://f1000research.com/articles/5-1408/v2) (Law et al. 2016) and [From reads to genes to pathways: differential expression analysis of RNA-Seq experiments using Rsubread and the edgeR quasi-likelihood pipeline](https://f1000research.com/articles/5-1438/v2) (Chen, Lun, Smyth 2016).
