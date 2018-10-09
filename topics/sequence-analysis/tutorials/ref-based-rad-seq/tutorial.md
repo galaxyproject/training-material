@@ -265,15 +265,18 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 >
 > > ### {% icon question %} Question
 > >
-> > 1. What is the maximum value of FST at any SNP?
-> > 2. How many SNPs reach this FST value?
+> > 1. What is the maximum value of FST' at any SNP? Don't hesitate to look at the [STACKS manual](http://catchenlab.life.illinois.edu/stacks/manual/#files)
+> > 2. What is the meaning of this FST' value compared a a classical FST one?
+> > 3. How many SNPs reach this FST' value?
 > >
 > > > ### {% icon solution %} Solution
-> > > - 0.75
-> > > - 3500
+> > > 1. 1
+> > > 2. FST’ is a haplotype measure of FST that is scaled to the theoretical maximum FST value at this locus. Depending on how many haplotypes there are, it may not be possible to reach an FST of 1, so this method will scale the value to 1
+> > > 2. 78
 > > {: .solution }
 > {: .question}
-> TODO: There is no column named `FST`, but one named `Fst'` (column 30). I find larger values than 0.75 in my results (e.g. 1.00.
+{: .hands_on}
+> You can now for example filter this dataset to only keep FST'=1 loci for further analysis...
 {: .hands_on}
 
 
