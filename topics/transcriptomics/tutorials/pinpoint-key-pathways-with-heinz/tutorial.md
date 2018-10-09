@@ -63,11 +63,12 @@ material. In this tutorial, we start with the interpreted data, which are KO
 ([KEGG Orthology](https://www.genome.jp/kegg/ko.html)) count data. All the data needed for this tutorial are
 available from Zenodo.
 
-> ### {% icon tip %} Background: What is KO?
+> ### {% icon tip %} Background: What is KO count?
 >
 > KOs are organism-independent identifiers that group together proteins of similar biochemical functions.
 > It is a term specific to [KEGG](https://www.genome.jp/kegg/) database. It is a group concept, similar to the concept "pathway", which
-> includes a bunch of molecules and their interactions.
+> includes a bunch of molecules and their interactions. Take a random line in our dataset, "K01369 7" as an example, the first column represents the KO ID,
+> and the second column --- the numeric value is the KO counts. If we understand it by the face value, it is 7 protein molecules that are counted from our dataset as this KO "K01369"; but we usually mingle proteins with genes because we often assume that each protein corresponds to a gene, so it is can be understood as 7 genes. Now we are working on the microbial RNAseq data, and the assumption is also used subconsciously.
 >
 {: .tip}
 
@@ -91,7 +92,7 @@ After knowing what our input data are like, let's get them into Galaxy history:
 
 > ### {% icon hands_on %} Hands-on: Obtaining our data
 >
-> 1. Make sure you have an empty Galaxy history. Give it a sensible name.
+> 1. Make sure we have an empty Galaxy history. Give it a sensible name.
 >
 >    {% include snippets/history_create_new.md %}
 >
@@ -155,7 +156,7 @@ After knowing what our input data are like, let's get them into Galaxy history:
 >
 >    > ### {% icon question %} Question
 >    >
->    > 1. How many samples do you have in your disease collection (CP)? How many healthy samples (CN)?
+>    > 1. How many samples do you have in our disease collection (CP)? How many healthy samples (CN)?
 >    > 2. How many columns in each file? What are these columns?
 >    >
 >    > > ### {% icon solution %} Solution
@@ -405,9 +406,23 @@ It usually takes a few minutes to get the result, but mind you, for some tasks, 
 
 ## Visualize the output: visualize the optimal subnetwork
 
-The result we got from the last step is not very human readable. Therefore we need to visualize the output by making it
-into graphs. Except the tool we will use in Galaxy, you may consider using eXamine plugin in Cytoscape for a richer
-visualization.
+The result we got from the last step is not very human readable, isn't it? It is a little painful to understand the Heinz result directly. Therefore we need to visualize the output by making it into graphs. Except the tool we will use in Galaxy, you may consider using eXamine plugin in Cytoscape for a richer
+visualization. In this tutorial, you probably get a similar graph to the following:
+
+![p-values are fitted to a mixture model](../../images/Heinz_visualisation.png){:width="30%"}
+
+> ### {% icon question %} Question
+>
+> According to the figure above, Why are some shapes are round, others square?
+>
+> > ### {% icon solution %} Solution
+> >
+> > Round shape corresponds to positive Heinz score; square shape corresponds to negative Heinz score.
+> >
+> {: .solution}
+{: .question}
+
+In real practice, after this step, we need to make sense of the graph to see whether we could get some insight, where our human intelligence will flourish.
 
 > ### {% icon hands_on %} Hands-on: visualize the optimal subnetwork
 >
@@ -418,7 +433,7 @@ visualization.
 
 # Save the history into a workflow
 
-Congrats! You have finished all the tools in Heinz workflow!
-
-At the end of the tutorial, as a self-practice, you may save all of your correct operations into a workflow,
+At the end of the tutorial, as a self-practice, you may save all of your correct operations into a workflow in Galaxy,
 which you can reuse for different datasets next time.
+
+Congrats! You have finished all the tools in Heinz workflow! You have successfully run each tool and understood how it works. In real research, running these tools are only part of the efforts, we still need to invest a huge amount of intelligence in making sense of the results and converting them to knowledge, which is fraught with uncertainties and confounders, where perhaps luck will come into play. So good luck!
