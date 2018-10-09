@@ -357,9 +357,7 @@ we obtained; meanwhile, we also need to specify an FDR value as input.
 >
 {: .tip}
 
-In our case, the higher an FDR value is, the more positive nodes (regarding the Heinz scores) we get,
-which means it may include a lot of false positive nodes. For different datasets and problems, we
-probably need different FDR values. Here we set FDR to 0.11.
+For different datasets and problems, we probably need to pick up an FDR value separately. Here we set FDR to 0.11.
 
 Similar to **Fit a BUM model**, we also need to prepare the input data for the tool
 **Calculate a Heinz score**.
