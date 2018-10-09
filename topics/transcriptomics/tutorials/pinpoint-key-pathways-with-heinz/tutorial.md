@@ -49,9 +49,10 @@ parameters to speed up the analysis for the purposes of this tutorial.
 > reference data versions or stochastic processes in the algorithms.
 {: .comment}
 
-In this tutorial, we will create a Heinz workflow step by step, as the picture below shows.
+In this tutorial, we will run the Heinz workflow step by step to understand how each step works. To get an overview of what this workflow does
+and what kind of calculation is involved, view the flowchart below.
 
-![Heinz workflow](../../images/heinz-workflow.png)
+![Heinz flowchart](../../images/flowchart-heinz.png)
 
 # Obtaining and preparing data  [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1344105.svg)](https://doi.org/10.5281/zenodo.1344105)
 
@@ -243,7 +244,7 @@ After learning about differential expression analysis, let's get some hands-on e
 >
 {: .hands_on}
 
-It takes about 10 minutes to finish DESseq2. After the analysis is finished, have a look at the file, it should look like something this:
+It takes a few minutes to finish DESseq2. After the analysis is finished, have a look at the file, it should look like something this:
 
 ```
 GeneID  Base mean   log2(FC)	        StdErr	            Wald-Stats	        P-value	                P-adj
@@ -406,7 +407,7 @@ It usually takes a few minutes to get the result, but mind you, for some tasks, 
 
 ## Visualize the output: visualize the optimal subnetwork
 
-The result we got from the last step is not very human readable, isn't it? It is a little painful to understand the Heinz result directly. Therefore we need to visualize the output by making it into graphs.
+The result we got from the last step is not very human readable, isn't it? It is a little painful to understand the Heinz result directly. Therefore we need to visualize the output by making it into graphs. 
 
 > ### {% icon hands_on %} Hands-on: visualize the optimal subnetwork
 >
@@ -415,9 +416,7 @@ The result we got from the last step is not very human readable, isn't it? It is
 >
 {: .hands_on}
 
-
-In addition to this tool we used in Galaxy, you may consider using eXamine plugin in Cytoscape for a richer
-visualization. In this tutorial, you probably get a similar graph to the following:
+In this tutorial, you probably get a similar graph to the following:
 
 ![p-values are fitted to a mixture model](../../images/Heinz_visualisation.png){:width="30%"}
 
@@ -433,12 +432,19 @@ visualization. In this tutorial, you probably get a similar graph to the followi
 {: .question}
 
 
-In real practice, after this step, we need to make sense of the graph to see whether we could get some insight, where our human intelligence will flourish.
+Except the tool we will use in Galaxy, you may consider using eXamine plugin in Cytoscape for a richer visualization, if we use the original data from the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171), perform all of these steps and visualize the result by eXamine, we can get a visualization as follows:
+
+![metaModules Result](../../images/metaModules.png){:width="60%"}
+
+If you interested, you may try to make sense of the result yourself by combining information from other bioinformatics services and literature.
 
 
 # Save the history into a workflow
 
 At the end of the tutorial, as a self-practice, you may save all of your correct operations into a workflow in Galaxy,
 which you can reuse for different datasets next time.
+
+![Heinz workflow](../../images/heinz-workflow.png)
+
 
 Congrats! You have finished all the tools in Heinz workflow! You have successfully run each tool and understood how it works. In real research, running these tools are only part of the efforts, we still need to invest a huge amount of intelligence in making sense of the results and converting them to knowledge, which is fraught with uncertainties and confounders, where perhaps luck will come into play. So good luck!
