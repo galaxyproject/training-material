@@ -358,7 +358,7 @@ Now that we have prepared our reads, we can align the reads for our 12 samples. 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > See the answer in the [RNA-seq ref-based tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html#%20Pretreatments)
+>    > > See the answer in the [RNA-seq ref-based tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html#pretreatments)
 >    > >
 >    > {: .solution}
 >    >
@@ -385,7 +385,7 @@ The MultiQC plot below shows the result from the full dataset for comparison.
 
 Over 90% of reads have mapped in all samples, a good mapping rate. And the vast majority of reads have mapped uniquely, they haven't mapped to multiple locations in the reference genome.
 
-It is also good practice to visualise the read alignments in the BAM file, for example using IGV, see the [RNA-seq ref-based tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html#%20Pretreatments).
+It is also good practice to visualise the read alignments in the BAM file, for example using IGV, see the [RNA-seq ref-based tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html#pretreatments).
 
 > ### {% icon tip %} Tip: Downloading a collection
 >
