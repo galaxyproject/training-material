@@ -6,10 +6,13 @@ fn = ARGV[0]
 tutorial_required_keys = ['layout', 'title', 'time_estimation', 'contributors']
 slides_required_keys = ['layout', 'logo', 'title', 'contributors']
 
+# Contributors
+CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
+
 # Any error messages
 errs = []
 
-def skip_disabled(data)
+def skip_disabled(data, fn)
   # If there's an 'enable' key and it is one flavor of 'false', then, exit
   # immediately without testing.
   if data.key?('enable') && (data['enable'].downcase == 'false' || data['enable'] == false) then
@@ -18,10 +21,21 @@ def skip_disabled(data)
   end
 end
 
+def check_contributors(data)
+  errs = []
+  data['contributors'].each{ |x|
+    if not CONTRIBUTORS.key?(x) then
+      errs.push("Unknown contributor #{x}, please add to CONTRIBUTORS.yaml")
+    end
+  }
+
+  return errs
+end
+
 # Handle tutorials
 if fn.include?('tutorial.md') then
   data = YAML.load_file(fn)
-  skip_disabled(data)
+  skip_disabled(data, fn)
 
   # Check for required keys
   tutorial_required_keys.each{ |x|
@@ -43,9 +57,11 @@ if fn.include?('tutorial.md') then
     end
   end
 
+  # Check contributors
+  errs = errs.concat(check_contributors(data))
 elsif fn.include?('slides.html') then
   data = YAML.load_file(fn)
-  skip_disabled(data)
+  skip_disabled(data, fn)
 
   # Check for required keys
   slides_required_keys.each{ |x|
@@ -58,6 +74,9 @@ elsif fn.include?('slides.html') then
   if not ['base_slides', 'tutorial_slides'].include?(data['layout']) then
     errs.push("layout should be 'base_slides', not '#{data['layout']}'")
   end
+
+  # Check contributors
+  errs = errs.concat(check_contributors(data))
 else
   puts "No validation available for filetype"
   exit 0
