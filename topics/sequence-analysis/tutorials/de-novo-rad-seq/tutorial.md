@@ -130,20 +130,20 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >
 > Alternatively just copy/paste these lines on the Galaxy upload tool using Paste/fetch data section and modifying the File header by sample and filename by Score 10 / Score 20 and noscorelimit for example... Before Starting the upload, you can select the `Convert spaces to tabs` option through the `Upload configuration` wheel. If you did not pay attention to the order you can just sort the file using the first column.
 {: .hands_on}
->
+
 You can use the `Charts` functionality through the Visualize button to plot the data.
->
-> And you obtain a file like this one, ready to generate a beautiful and smart bar stacked!
->
+
+And you obtain a file like this one, ready to generate a beautiful and smart bar stacked!
+
 ```
 #	Retained Reads	Low Quality	Ambiguous Barcodes	Ambiguous RAD-Tag	Total
 NoScoreLimit	8139531		0		626265		129493		8895289
 Score10	7373160		766371		626265		129493		8895289
 Score20	2980543		5158988		626265		129493		8895289
 ```
->
-> ![The chart on the sorted file](../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG)
->
+
+![The chart on the sorted file](../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG)
+
 Using a filter like `clean data, remove any read with an uncalled base` has only little impact:
 
 The demultiplexed sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.
