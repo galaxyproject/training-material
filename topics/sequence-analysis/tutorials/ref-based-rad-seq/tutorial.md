@@ -93,7 +93,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 > 1. **Process Radtags** {% icon tool %}: Run `Stacks: process radtags` on FastQ file to demultiplex the reads
 >  - Single-end or paired-end reads files: Single-end files
 >  - singles-end reads infile(s): SRR034310.fastq(.gz)
->  - Barcode file: Barcode fileBarcodes_SRR034310.tabular
+>  - Barcode file: Barcodes_SRR034310.tabular
 >  - Number of enzymes: One
 >  - Enzyme: sbfI
 >  - Capture discarded reads to a file: Yes
