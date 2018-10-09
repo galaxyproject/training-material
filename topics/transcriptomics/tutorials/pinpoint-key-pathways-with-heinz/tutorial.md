@@ -408,7 +408,7 @@ It usually takes a few minutes to get the result, but mind you, for some tasks, 
 
 ## Visualize the output: visualize the optimal subnetwork
 
-The result we got from the last step is not very human readable, isn't it? It is a little painful to understand the Heinz result directly. Therefore we need to visualize the output by making it into graphs. 
+The result we got from the last step is not very human readable, isn't it? It is a little painful to understand the Heinz result directly. Therefore we need to visualize the output by making it into graphs.
 
 > ### {% icon hands_on %} Hands-on: visualize the optimal subnetwork
 >
@@ -438,7 +438,6 @@ Except the tool we will use in Galaxy, you may consider using eXamine plugin in 
 ![metaModules Result](../../images/metaModules.png){:width="60%"}
 
 If you interested, you may try to make sense of the result yourself. To pinpoint the key pathways relevant to the subnetwork, we probably need to combine information from other bioinformatics services and literature.
-graph
 
 # Save the history into a workflow
 
