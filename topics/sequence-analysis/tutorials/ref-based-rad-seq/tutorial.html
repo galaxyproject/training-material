@@ -267,7 +267,7 @@ https://zenodo.org/record/1134547/files/Reference_genome_11_chromosomes.fasta
       <ul>
         <li>Single-end or paired-end reads files: Single-end files</li>
         <li>singles-end reads infile(s): SRR034310.fastq(.gz)</li>
-        <li>Barcode file: Barcode fileBarcodes_SRR034310.tabular</li>
+        <li>Barcode file: Barcodes_SRR034310.tabular</li>
         <li>Number of enzymes: One</li>
         <li>Enzyme: sbfI</li>
         <li>Capture discarded reads to a file: Yes</li>
@@ -338,10 +338,9 @@ nolimit	8139531		0		626265		129493		8895289
 
 <p><img src="../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG" alt="The bar diagram" /></p>
 
-<p>Using a filter like <code class="highlighter-rouge">clean data, remove any read with an uncalled base</code> has only little impact:</p>
+<p>Based on the dataset with score quality of 10, using a filter like <code class="highlighter-rouge">clean data, remove any read with an uncalled base</code> has only little impact:</p>
 
-<p>TODO with which parameter combination the results have been determined?
-<img src="../../images/RAD4_Population_Genomics/Process_radtags_out_parameter2.png" alt="The output of clean tool" /></p>
+<p><img src="../../images/RAD4_Population_Genomics/Process_radtags_out_parameter2.png" alt="The output of clean tool" /></p>
 
 <p>The demultiplexed sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.</p>
 
@@ -477,19 +476,21 @@ TODO: Would be nice to have some specific informations to look for in the files.
     <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
     <ol>
-      <li>What is the maximum value of FST at any SNP?</li>
-      <li>How many SNPs reach this FST value?</li>
+      <li>What is the maximum value of FST’ at any SNP? Don’t hesitate to look at the <a href="http://catchenlab.life.illinois.edu/stacks/manual/#files">STACKS manual</a></li>
+      <li>What is the meaning of this FST’ value compared a a classical FST one?</li>
+      <li>How many SNPs reach this FST’ value?</li>
     </ol>
 
     <blockquote class="solution">
       <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-      <ul>
-        <li>0.75</li>
-        <li>3500</li>
-      </ul>
+      <ol>
+        <li>1</li>
+        <li>FST’ is a haplotype measure of FST that is scaled to the theoretical maximum FST value at this locus. Depending on how many haplotypes there are, it may not be possible to reach an FST of 1, so this method will scale the value to 1</li>
+        <li>78</li>
+      </ol>
     </blockquote>
   </blockquote>
-  <p>TODO: There is no column named <code class="highlighter-rouge">FST</code>, but one named <code class="highlighter-rouge">Fst'</code> (column 30). I find larger values than 0.75 in my results (e.g. 1.00.</p>
+  <p>You can now for example filter this dataset to only keep FST’=1 loci for further analysis…</p>
 </blockquote>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
