@@ -151,9 +151,8 @@ You can use the `Charts` functionality through the Visualize button to plot the 
 
 ![The bar diagram](../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG)
 
-Using a filter like `clean data, remove any read with an uncalled base` has only little impact:
+Based on the dataset with score quality of 10, using a filter like `clean data, remove any read with an uncalled base` has only little impact:
 
-TODO with which parameter combination the results have been determined?
 ![The output of clean tool](../../images/RAD4_Population_Genomics/Process_radtags_out_parameter2.png)
 
 The demultiplexed sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.
