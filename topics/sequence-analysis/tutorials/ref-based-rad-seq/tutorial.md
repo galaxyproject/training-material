@@ -274,7 +274,6 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 > > > 2. 78
 > > {: .solution }
 > {: .question}
-{: .hands_on}
 > You can now for example filter this dataset to only keep FST'=1 loci for further analysis...
 {: .hands_on}
 
