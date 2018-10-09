@@ -76,9 +76,9 @@ We will look at the first run SRR034310 out of seven which includes 16 samples f
 >    As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.
 >
 >    > ### {% icon comment %} Comments
->    > - Add the "stickleback" custom build from the Fasta reference genome file
->    > - Edit the "Database/Build" to select "stickleback"
->    > - Rename the datasets according to the samples
+>    > - Add the "stickleback" custom build from the Fasta reference genome file from the User/custom builds menu
+>    > - Edit the dataset "Database/Build" to select "stickleback"
+>    > - Rename datasets according to samples
 >    {: .comment}
 {: .hands_on}
 
