@@ -7,7 +7,7 @@ questions:
   - "How to use the rule based uploader to create complex collections"
 objectives:
   - "Learn about the Rule Based Uploader"
-time_estimation: "30 min"
+time_estimation: "30M"
 key_points:
 contributors:
   - jmchilton

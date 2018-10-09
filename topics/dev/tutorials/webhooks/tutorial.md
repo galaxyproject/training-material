@@ -9,7 +9,7 @@ objectives:
   - "Discover what Galaxy Webhooks are"
   - "Be able to create Webhooks"
   - "Be able to add a Galaxy Webhook in a Galaxy instance"
-time_estimation: "1h"
+time_estimation: "1H"
 key_points:
   - "A Galaxy Webhook provides an easy way to customize the Galaxy UI with plugins"
   - "Right now there are 4 entry points: tool, workflow, masthead, history-menu"

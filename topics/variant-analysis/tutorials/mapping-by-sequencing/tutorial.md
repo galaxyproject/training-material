@@ -10,7 +10,7 @@ objectives:
   - "Use joint variant calling and extraction to facilitate variant comparison across samples"
   - "Perform variant linkage analyses for phenotypically selected recombinant progeny"
   - "Filter, annotate and report lists of variants"
-time_estimation: "2h"
+time_estimation: "2H"
 key_points:
   - "Mapping-by-sequencing is a powerful method for the molecular identification of mutations"
   - "The MiModD suite of tools bundles most of the functionality required to perform mapping-by-sequencing analyses with Galaxy"

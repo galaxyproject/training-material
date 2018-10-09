@@ -14,7 +14,7 @@ objectives:
   - Perform peak calling with PEAKachu
   - Analyse the peaks and find potential binding motifs and targets
   - Check the quality of the peak calling
-time_estimation: 6h
+time_estimation: "6H"
 key_points:
   - Sophisticated analysis of CLIP-Seq data is possible using tools hosted by Galaxy.
   - Analysis of the datasets needs multiple methods to assess the quality of the data and to answer the biological question of interest.

@@ -6,7 +6,7 @@ questions:
   - "How to generate PDF of the different tutorials and slides?"
 objectives:
   - "Generating PDFs"
-time_estimation: "10min"
+time_estimation: "10M"
 key_points:
   - "PDFs can be easily generated for the different tutorials to share with learnees or to keep a fixed version of a tutorial"
 contributors:

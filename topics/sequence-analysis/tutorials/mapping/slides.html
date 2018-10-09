@@ -10,7 +10,7 @@ questions:
 objectives:
   - You will learn what mapping is
   - A genome browser is shown that helps you to understand your data
-time_estimation: "1h"
+time_estimation: "1H"
 key_points:
   - Know your data!
   - Mapping is not trivial

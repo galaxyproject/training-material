@@ -12,7 +12,7 @@ objectives:
   - "Visualise the SNP in context of the reads aligned to the genome"
   - "Determine the effect of those variants on genomic features"
   - "Understand if the SNP is potentially affecting the phenotype"
-time_estimation: "45 min"
+time_estimation: "45M"
 key_points:
   - "We used a tool called Snippy to call variants between our reads and our reference genome."
   - "As our reference genome had annotations, we could see what effect the changes have on the features as annotated in the reference and therefore make inferences on the possible changes to the phenotype."

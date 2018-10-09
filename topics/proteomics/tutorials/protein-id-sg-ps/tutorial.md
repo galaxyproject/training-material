@@ -10,7 +10,7 @@ questions:
   - "How to evaluate the results?"
 objectives:
   - "Protein identification from LC-MS/MS raw files."
-time_estimation: "45min"
+time_estimation: "45M"
 key_points:
   - "LC-MS/MS raw files have to be locally converted to mgf/mzML prior to further analysis on most Galaxy servers."
   - "SearchGUI can be used for running several peptide search engines at once."

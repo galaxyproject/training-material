@@ -10,7 +10,7 @@ questions:
   - "How to evaluate and optimize the results?"
 objectives:
   - "MS1 feature quantitation and mapping of quantitations to peptide and protein IDs."
-time_estimation: "1h"
+time_estimation: "1H"
 key_points:
   - "Peptides labelled with stable isotopes result in multiple parallel MS1 ion traces."
   - "MS1 features can be used for relative protein quantitation."

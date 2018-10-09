@@ -9,7 +9,7 @@ questions:
 objectives:
   - "Learn how to extract a workflow from a Galaxy history"
   - "Learn how to change a workflow using the workflow editor"
-time_estimation: "30m"
+time_estimation: "30M"
 key_points:
   - "Workflows allow you to easily repeat your analyses on different input datasets"
   - "Workflows can be automatically extracted from your analysis history"

@@ -11,7 +11,7 @@ questions:
   - "How to combine databases?"
 objectives:
   - "Creation of a protein FASTA database ready for use with database search algorithms."
-time_estimation: "30min"
+time_estimation: "30M"
 key_points:
   - "There are several types of Uniprot databases."
   - "Search databases should always include possible contaminants."

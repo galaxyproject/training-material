@@ -7,7 +7,7 @@ questions:
 objectives:
   - "Create a new topic"
   - "Set up the metadata for a topic"
-time_estimation: "30min"
+time_estimation: "30M"
 key_points:
   - "A new topic can be easily added for new tutorials"
 contributors:

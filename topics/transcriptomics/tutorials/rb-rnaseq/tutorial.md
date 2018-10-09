@@ -7,7 +7,7 @@ questions:
   - "How to perform analysis of RNAseq data when reference genome is available?"
 objectives:
   - "Learns basic concepts of RNAseq analysis"
-time_estimation: "1h"
+time_estimation: "1H"
 key_points:
 contributors:
   - nekrut

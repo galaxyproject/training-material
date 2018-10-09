@@ -8,7 +8,7 @@ questions:
 objectives:
   - "Creating a Galaxy tour from scratch"
   - "Deploying and running a tour"
-time_estimation: "15min"
+time_estimation: "15M"
 key_points:
   - "The Interactive Tours are a good training object for self-learning at its own speed"
   - "It is now easy to create an Interactive Tour and test it"

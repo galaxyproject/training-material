@@ -7,7 +7,7 @@ questions:
   - "How to use a Jupyter Notebook in Galaxy"
 objectives:
   - "Learn about the Jupyter Interactive Environment"
-time_estimation: "30 min"
+time_estimation: "30M"
 key_points:
   - "Start Jupyter from the Visualize tab or from a dataset"
   - "Install Libraries with pip or Conda"

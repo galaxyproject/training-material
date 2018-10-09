@@ -12,7 +12,7 @@ requirements:
     title: "Javascript knowledge"
     type: "external"
     link: ""
-time_estimation: "1.5h"
+time_estimation: "90M"
 key_points:
   - "Visualizations require a different way of thinking: server and client side; downloading files rather than system level access"
   - "Interactivity is what makes visualizations different from static tools"

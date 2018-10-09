@@ -9,7 +9,7 @@ questions:
 objectives:
   - "Create hands-on"
   - "Use the different boxes"
-time_estimation: "15min"
+time_estimation: "15M"
 key_points:
   - "You can highlight questions, tools and hints with a special syntax"
   - "Self-learning can be done by questions and hidden answers"

@@ -10,7 +10,7 @@ questions:
   - "How to evaluate the results?"
 objectives:
   - "Protein identification from LC-MS/MS raw files."
-time_estimation: "45min"
+time_estimation: "45M"
 key_points:
   - "LC-MS/MS raw files have to be converted to mzML before using GalaxyP on most GalaxyP servers."
   - "OpenMS provides many tools for proteomic analysis and guarantees compatibility by using open file formats."

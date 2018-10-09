@@ -11,7 +11,7 @@ objectives:
   - "Manage RNA-Seq results"
   - "Extract the desired subject for differential gene expression analysis"
   - "Visualize information"
-time_estimation: "1h"
+time_estimation: "1H"
 key_points:
   - "Extract informations from a SQLite CuffDiff database"
   - "Filter and sort results to highlight differential expressed genes of interest"

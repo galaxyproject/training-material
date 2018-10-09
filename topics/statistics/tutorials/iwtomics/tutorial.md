@@ -14,7 +14,7 @@ objectives:
   - "Visualize and inspect test results"
   - "Detect relevant locations and scales"
 requirements:
-time_estimation: "1h"
+time_estimation: "1H"
 key_points:
   - "High-resolution omics data can be represented as curves along the genome"
   - "IWTomics permits to visualize these data"

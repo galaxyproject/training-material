@@ -12,7 +12,7 @@ objectives:
   - Assess the quality of an ChIP-seq experiments
   - Extract coverage files
   - Call enriched regions or peaks
-time_estimation: "3h"
+time_estimation: "3H"
 key_points:
   - ChIP-seq data requires multiple methods of quality assessment to ensure that the data is of high quality.
   - Multiple normalization methods exists depending on the availability of input data.

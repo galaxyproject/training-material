@@ -7,7 +7,7 @@ questions:
   - "How do Galaxy histories work?"
 objectives:
   - "Gain understanding on navigating and manipulating histories"
-time_estimation: "30 min"
+time_estimation: "30M"
 key_points:
   - "In Galaxy, data is stored in datasets and organized in histories"
   - "The right pane shows the current history. It displays the name of the history, the tags and annotations assigned to it, and the size of the data in it"

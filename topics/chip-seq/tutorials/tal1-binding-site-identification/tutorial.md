@@ -22,7 +22,7 @@ requirements:
     title: "Trackster"
     type: "external"
     link: "https://wiki.galaxyproject.org/Learn/Visualization"
-time_estimation: "3h"
+time_estimation: "3H"
 key_points:
   - Sophisticated analysis of ChIP-seq data is possible using tools hosted by Galaxy.
   - Genomic dataset analyses require multiple methods of quality assessment to ensure that the data are appropriate for answering the biology question of interest.

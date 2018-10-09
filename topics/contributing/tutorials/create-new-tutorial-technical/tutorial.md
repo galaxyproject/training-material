@@ -14,7 +14,7 @@ objectives:
   - "Populating an existing instance with the needed tools, data and workflows for a tutorial"
   - "Creating a Galaxy Docker flavor with the needed tools, data and workflows for a tutorial"
   - "Testing the Galaxy Docker flavor of a tutorial"
-time_estimation: "30min"
+time_estimation: "30M"
 key_points:
   - "Tools, data and workflows can be easily integrated in a Docker flavor to have a useful technical support for a tutorial"
   - "A Galaxy Docker flavor is a great support for training"

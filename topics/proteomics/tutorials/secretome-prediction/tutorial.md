@@ -10,7 +10,7 @@ objectives:
   - "Predict proteins in the cellular secretome by using GO-terms."
   - "Predict proteins in the cellular secretome by using WolfPSORT."
   - "Combine the results of both predictions."
-time_estimation: "30min"
+time_estimation: "30M"
 key_points:
   - "The cellular secretome contains more than the classically secreted proteins."
   - "Localization predictions by multiple different algorithms can improve sensitivity and/or specificity."
