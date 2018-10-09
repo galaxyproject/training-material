@@ -197,7 +197,7 @@
             
 
             
-            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 6h</p>
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 6H</p>
             
         </blockquote>
 
@@ -305,17 +305,9 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
       </blockquote>
     </li>
     <li>
-      <p><strong>Trimmomatic</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Trim off the low quality bases from the ends of the reads to increase mapping efficiency. Run <code class="highlighter-rouge">Trimmomatic</code> on each pair of forward and reverse reads with the following settings:</p>
+      <p><strong>Trimmomatic</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Trim off the low quality bases from the ends of the reads to increase mapping efficiency. Run <code class="highlighter-rouge">Trimmomatic</code> on each pair of forward and reverse reads.</p>
 
-      <ul>
-        <li><em>“Single-end or paired-end reads?”</em>: <code class="highlighter-rouge">Paired-end (two separate input files)</code>
-          <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTQ file (R1/first of pair)”</em>: <code class="highlighter-rouge">G1E forward read (R1)</code></li>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTQ file (R2/second of pair)”</em>: <code class="highlighter-rouge">G1E reverse read (R1)</code></li>
-          </ul>
-        </li>
-        <li><em>“Perform initial ILLUMINACLIP step?”</em>: <code class="highlighter-rouge">No</code></li>
-      </ul>
+      <p><img src="../../images/trimmomatic.png" alt="Trimmomatic tool input" /></p>
     </li>
     <li>
       <p><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Re-run <code class="highlighter-rouge">FastQC</code> on trimmed reads and inspect the differences.</p>
@@ -433,36 +425,20 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
   <h3 id="hands_on-hands-on-spliced-mapping"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Spliced mapping</h3>
 
   <ol>
-    <li><strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="highlighter-rouge">HISAT2</code> on one forward/reverse read pair and modify the following settings:
+    <li><strong>HISAT</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="highlighter-rouge">HISAT</code> on one forward/reverse read pair and modify the following settings:
       <ul>
-        <li><em>“Source for the reference genome”</em>: <code class="highlighter-rouge">Use a built-in genome</code>
-          <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select a reference genome”</em>: <code class="highlighter-rouge">Mouse (Mus Musculus): mm10</code></li>
-          </ul>
-        </li>
-        <li><em>“Single-end or paired-end reads?”</em>: <code class="highlighter-rouge">Paired-end</code>
-          <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file #1”</em>: trimmed G1E forward read (R1)</li>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file #2”</em>: trimmed G1E reverse read (R1)</li>
-            <li><em>“Specify strand information”</em>: <code class="highlighter-rouge">Forward(FR)</code></li>
-          </ul>
-        </li>
-        <li><em>“Advanced options”</em>
-          <ul>
-            <li><em>“Spliced alignment options”</em>
-              <ul>
-                <li><em>“Penalty for non-canonical splice sites”</em>: ‘3’</li>
-                <li><em>“Penalty function for long introns with canonical splice sites”</em>: ‘Constant [f(x) = B]’’</li>
-                <li><em>“Constant term (B)”</em>: ‘0.0’</li>
-                <li><em>“Penalty function for long introns with non-canonical splice sites”</em>: ‘Constant [f(x) = B]’’</li>
-                <li><em>“Transcriptome assembly reporting”</em>: ‘Report alignments tailored for transcript assemblers including StringTie’</li>
-              </ul>
-            </li>
-          </ul>
+        <li><strong>Single end or paired reads?</strong>: Individual paired-end reads</li>
+        <li><strong>Source for the reference genome to align against</strong>: Use a built-in genome &gt; Mouse (Mus Musculus): mm10</li>
+        <li><strong>Spliced alignment parameters</strong>: Specify spliced alignment parameters</li>
+        <li><strong>Specify strand-specific information</strong>: First Strand (R/RF)</li>
+        <li>
+          <p><strong>Transcriptome assembly reporting</strong>: Report alignments tailored for transcript assemblers including StringTie.</p>
+
+          <p><img src="../../images/hisat_tool_form.png" alt="HISAT tool input and parameters" /></p>
         </li>
       </ul>
     </li>
-    <li><strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="highlighter-rouge">HISAT2</code> on the remaining forward/reverse read pairs with the same parameters.</li>
+    <li><strong>HISAT</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="highlighter-rouge">HISAT</code> on the remaining forward/reverse read pairs with the same parameters.</li>
   </ol>
 
 </blockquote>
@@ -474,14 +450,13 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
   <h3 id="hands_on-hands-on-transcriptome-reconstruction"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Transcriptome reconstruction</h3>
 
   <ol>
-    <li><strong>Stringtie</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="highlighter-rouge">Stringtie</code> on the <code class="highlighter-rouge">HISAT2</code> alignments using the default parameters.
+    <li><strong>Stringtie</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="highlighter-rouge">Stringtie</code> on the <code class="highlighter-rouge">HISAT</code> alignments using the default parameters.
       <ul>
-        <li>Use batch mode to run all four samples from one tool form.</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify strand information”</em>: <code class="highlighter-rouge">Forward (FR)</code></li>
+        <li>Use batch mode to run all four samples from one tool form.
+<img src="../../images/Stringtie.png" alt="Stringtie input and parameters" /></li>
       </ul>
     </li>
   </ol>
-
 </blockquote>
 
 <h1 id="transcriptome-assembly">Transcriptome assembly</h1>
@@ -494,27 +469,16 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
   <ol>
     <li><strong>Stringtie-merge</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="highlighter-rouge">Stringtie-merge</code> on the <code class="highlighter-rouge">Stringtie</code> assembled transcripts along with the RefSeq annotation file we imported earlier.
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input_gtf”</em>: <code class="highlighter-rouge">all four </code>Stringtie<code class="highlighter-rouge"> assemblies</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“guide_gff”</em>: <code class="highlighter-rouge">RefSeq GTF mm10</code></li>
+        <li>Use batch mode to inlcude all four <code class="highlighter-rouge">Stringtie</code> assemblies as “input_gtf”.</li>
+        <li>Select the “RefSeq GTF mm10” file as the “guide_gff”.
+<img src="../../images/stringtiemergetf.png" alt="Stringtie-merge input and parameters" /></li>
       </ul>
     </li>
     <li><strong>GFFCompare</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="highlighter-rouge">GFFCompare</code> on the <code class="highlighter-rouge">Stringtie-merge</code> generated transcriptome along with the RefSeq annotation file.
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF inputs for comparison”</em>: <code class="highlighter-rouge">output of Stringtie-merge</code></li>
-        <li><em>“Use Reference Annotation”</em>: <code class="highlighter-rouge">Yes</code>
-          <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference Annotation”</em>: <code class="highlighter-rouge">RefSeq GTF mm10</code></li>
-          </ul>
-        </li>
-        <li><em>“Use Sequence Data”</em>: <code class="highlighter-rouge">Yes</code>
-          <ul>
-            <li><em>“Choose the source for the reference list”</em>: <code class="highlighter-rouge">Locally cached</code>
-              <ul>
-                <li><em>“Using reference genome”</em>: ‘Mouse (Mus Musculus): mm10’</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
+        <li>Select the output of <code class="highlighter-rouge">Stringtie-merge</code> as the GTF input.</li>
+        <li>Select “Yes” under <code class="highlighter-rouge">Use Reference Annotation" and select the "RefSeq GTF mm10" file as the "Reference Annotation".</code>
+<img src="../../images/GFFComparetf.png" alt="GFFCompare input and parameters" /></li>
       </ul>
     </li>
   </ol>
@@ -597,21 +561,18 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 
   <ol>
     <li>
-      <p><strong>FeatureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="highlighter-rouge">FeatureCounts</code> on the aligned reads (<code class="highlighter-rouge">HISAT2</code> output) using the <code class="highlighter-rouge">GFFCompare</code> transcriptome database as the annotation file.</p>
+      <p><strong>FeatureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="highlighter-rouge">FeatureCounts</code> on the aligned reads (<code class="highlighter-rouge">HISAT</code> output) using the <code class="highlighter-rouge">GFFCompare</code> transcriptome database as the annotation file.</p>
 
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Alignment file”</em>: <code class="highlighter-rouge">four HISAT2 aligned read files</code></li>
-        <li><em>“Specify strand information”</em>: <code class="highlighter-rouge">Stranded (Forward)</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene annotation file”</em>: <code class="highlighter-rouge">in your history</code>
-          <ul>
-            <li><em>“Gene annotation file”</em>: <code class="highlighter-rouge">the annotated transcripts GTF file output by GFFCompare</code></li>
-          </ul>
-        </li>
-        <li><em>“Advanced options”</em>
-          <ul>
-            <li><em>“GFF gene identifier”</em>: <code class="highlighter-rouge">transcript_id</code></li>
-          </ul>
-        </li>
+        <li>Using the batch mode for input selection, choose the four <code class="highlighter-rouge">HISAT</code> aligned read files</li>
+        <li><strong>Gene annotation file</strong>:  in your history, then select the <code class="highlighter-rouge">annotated transcripts</code> GTF file output by <code class="highlighter-rouge">GFFCompare</code> (this specifies the “union” mode)</li>
+        <li>Expand <strong>Options for paired end reads</strong></li>
+        <li><strong>Orientation of the two read from the same pair</strong>: Reverse, Forward (rf)</li>
+        <li>Expand <strong>Advanced options</strong></li>
+        <li><strong>GFF gene identifier</strong>: enter “transcript_id”</li>
+        <li><strong>Strand specificity of the protocol</strong>: select “Stranded (reverse)”
+<img src="../../images/featurecountsA.png" alt="FeatureCounts input and parameters" />
+<img src="../../images/featurecountsB.png" alt="FeatureCounts advanced parameters" /></li>
       </ul>
     </li>
   </ol>
@@ -636,19 +597,9 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
   <ol>
     <li><strong>DESeq2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="highlighter-rouge">DESeq2</code> with the following parameters:
       <ul>
-        <li><em>“1: Factor”</em>
-          <ul>
-            <li><em>“1: Factor level”</em>: <code class="highlighter-rouge">G1E</code>
-              <ul>
-                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Counts file(s)”</em>: <code class="highlighter-rouge">featureCount files corresponding to the two G1E replicates</code></li>
-              </ul>
-            </li>
-            <li><em>“2: Factor level”</em>: <code class="highlighter-rouge">Mega</code>
-              <ul>
-                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Counts file(s)”</em>: <code class="highlighter-rouge">featureCount files corresponding to the two Mega replicates</code></li>
-              </ul>
-            </li>
-          </ul>
+        <li>Specify “G1E” as the first factor level (condition) and select the count files corresponding to the two replicates</li>
+        <li>
+          <p>Specify “Mega” as the second factor level (condition) and select the count files corresponding to the two replicates</p>
 
           <blockquote class="comment">
             <h3 id="comment-comment-3"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
@@ -656,12 +607,12 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
             <p>You can select several files by holding down the CTRL (or COMMAND) key and clicking on the desired files</p>
           </blockquote>
         </li>
-        <li><em>“Visualising the analysis results”</em>: Yes</li>
-        <li><em>“Output normalized counts table”</em>: Yes</li>
+        <li><strong>Visualising the analysis results</strong>: Yes</li>
+        <li><strong>Output normalized counts table</strong>: Yes
+<img src="../../images/deseq2tf.png" alt="DESeq2 input and parameters" /></li>
       </ul>
     </li>
   </ol>
-
 </blockquote>
 
 <p>The first output of <code class="highlighter-rouge">DESeq2</code> is a tabular file. The columns are:</p>
@@ -761,15 +712,13 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
   <h3 id="hands_on-hands-on-converting-aligned-read-files-to-bigwig-format"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Converting aligned read files to bigWig format</h3>
 
   <ol>
-    <li><strong>bamCoverage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="highlighter-rouge">bamCoverage</code> on all four aligned read files (<code class="highlighter-rouge">HISAT2</code> output) with the following parameters:
+    <li><strong>bamCoverage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="highlighter-rouge">bamCoverage</code> on all four aligned read files (<code class="highlighter-rouge">HISAT</code> output) with the following parameters:
       <ul>
-        <li><em>“Bin size in bases”</em>: ‘1’</li>
-        <li><em>“Effective genome size”</em>: ‘mm9 (2150570000)’’</li>
-        <li><em>“Advanced options”</em>
-          <ul>
-            <li><em>“Only include reads originating from fragments from the forward or reverse strand”</em>: ‘forward’</li>
-          </ul>
-        </li>
+        <li><strong>Bin size in bases</strong>: 1</li>
+        <li><strong>Effective genome size</strong>: mm9 (2150570000)</li>
+        <li>Expand the <strong>Advanced options</strong></li>
+        <li><strong>Only include reads originating from fragments from the forward or reverse strand</strong>: forward
+<img src="../../images/bamCoverage_forward.png" alt="bamCoverage input and parameters" /></li>
       </ul>
     </li>
     <li>
@@ -777,7 +726,8 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
     </li>
     <li><strong>bamCoverage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat Step 1 except changing the following parameter:
       <ul>
-        <li><em>“Only include reads originating from fragments from the forward or reverse strand”</em>: ‘reverse’</li>
+        <li><strong>Only include reads originating from fragments from the forward or reverse strand</strong>: reverse
+<img src="../../images/bamCoverage_reverse.png" alt="bamCoverage input and reverse parameter" /></li>
       </ul>
     </li>
     <li><strong>Rename</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the MINUS strand.</li>
@@ -857,6 +807,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 <p>In this tutorial, we have analyzed RNA sequencing data to extract useful information, such as which genes are expressed in the G1E and megakaryocyte cellular states and which of these genes are differentially expressed between the two cellular states. In addition, we identified unannotated genes that are expressed in a cell-state dependent manner and at a locus with relevance to differentiation and development. To identify these transcripts, we analyzed RNA sequence datasets using a de novo transcriptome reconstruction RNA-seq data analysis approach. This approach can be summed up with the following scheme:</p>
 
 <p><img src="../../images/schematic_for_RNAseq_de_novo_tutorial.png" alt="RNAseq de novo tutorial workflow" /></p>
+
 
 
         
