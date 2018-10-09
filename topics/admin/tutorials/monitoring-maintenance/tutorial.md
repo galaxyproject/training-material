@@ -9,7 +9,7 @@ questions:
 objectives:
   - Learn about different monitoring strategies.
   - Setup and start the Galaxy reports app.
-time_estimation: "1H"
+time_estimation: "1h"
 key_points:
   - Galaxy supports pluggable monitoring extensions.
   - Use grafana or the reports webapp to monitor your service.
