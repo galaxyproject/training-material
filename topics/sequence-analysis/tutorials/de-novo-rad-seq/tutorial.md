@@ -200,11 +200,11 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >
 >    ![The output of the populations tool](../../images/RAD4_Population_Genomics/denovo/populations_log.png)
 >
-> Now look at the output in the file `batch_1.sumstats` nammed `SNP and Haplotype-based F statistics with Stacks: populations ...` on your history. This file is also reachable on the data collection nammed `Full output from denovo_map .....` with his original name `batch_1.sumstats`. There are a large number of statistics calculated at each SNP, so use Galaxy tools like filter, cut, and sort to focus on some.
+> Now look at the output in the file `batch_1.sumstats` nammed `SNP and Haplotype-based F statistics with Stacks: populations ...` on your history. There are a large number of statistics calculated at each SNP, so use Galaxy tools like filter, cut, and sort to focus on some.
 >
 > > ### {% icon question %} Question
 > >
-> > 1. What is the maximum value of FST' at any SNP?
+> > 1. What is the maximum value of FST' at any SNP? Don't hesitate to look at the [STACKS manual](http://catchenlab.life.illinois.edu/stacks/manual/#files)
 > > 2. What is the meaning of this FST' value compared a a classical FST one?
 > > 3. How many SNPs reach this FST' value?
 > >
@@ -215,6 +215,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 > > {: .solution }
 > {: .question}
 {: .hands_on}
+> You can now for xample filter this dataset to only keep FST'=1 loci for further analysis...
 
 # Conclusion
 {:.no_toc}
