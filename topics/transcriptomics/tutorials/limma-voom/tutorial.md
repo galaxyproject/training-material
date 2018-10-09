@@ -211,7 +211,7 @@ Before we check out the differentially expressed genes, we can look at the repor
 
 ## Multidimensional scaling plot
 
-By far, one of the most important plots we make when we analyse RNA-Seq data are MDS plots. An MDS plot is a visualisation of a principal components analysis, which determines the greatest sources of variation in the data. A principal components analysis is an example of an unsupervised analysis, where we don’t need to specify the groups. If your experiment is well controlled and has worked well, what we hope to see is that the greatest sources of variation in the data are the treatments/groups we are interested in. It is also an incredibly useful tool for quality control and checking for outliers. With this limma tool a scree plot is also produced that shows how much variation is attributed to each dimension. If there was a batch effect for example, you may see high values for additional dimensions. The limma tool plots the first two dimensions as a default (1 vs 2), however you can also plot additional dimensions 2 vs 3 and 3 vs 4 using under **Output Options** Additional Plots `MDS Extra`.
+By far, one of the most important plots we make when we analyse RNA-Seq data are MDS plots. An MDS plot is a visualisation of a principal components analysis, which determines the greatest sources of variation in the data. A principal components analysis is an example of an unsupervised analysis, where we don’t need to specify the groups. If your experiment is well controlled and has worked well, what we hope to see is that the greatest sources of variation in the data are the treatments/groups we are interested in. It is also an incredibly useful tool for quality control and checking for outliers. This Galaxy limma tool outputs an MDS plot by default in the `Report` and a link is also provided to a PDF version (`MDSPlot_CellTypeStatus.pdf`). a scree plot is also produced that shows how much variation is attributed to each dimension. If there was a batch effect for example, you may see high values for additional dimensions. The limma tool plots the first two dimensions by default (1 vs 2), however you can also plot additional dimensions 2 vs 3 and 3 vs 4 using under **Output Options** Additional Plots `MDS Extra` These are displayed in the `Report` along with a link to a PDF version (`MDSPlot_extra.pdf`).
 
 ![MDS Plot](../../images/limma-voom/mdsscree.png "MDS Plot")
 
@@ -222,7 +222,20 @@ By far, one of the most important plots we make when we analyse RNA-Seq data are
 > Clustering in the MDS plot can be used to motivate changes to the analysis in light of potential batch effects. For example, imagine that the first replicate of each group was prepared at a separate time from the second replicate. If the MDS plot showed separation of samples by time, it might be worthwhile including time in the downstream analysis to account for the time-based effect.
 {: .details}
 
-Look at the MDS plot coloured by group. Do you notice something strange going on with the samples? Two samples don't appear to be in the right place. It turns out that they have been mislabelled! Redo the limma-voom analysis with the correct sample information.
+Take a look at the MDS plot coloured by group.
+
+> ### {% icon question %} Question
+>
+> Do you notice anything about the samples in this plot?
+>
+>    > ### {% icon solution %} Solution
+>    >
+>    > Two samples don't appear to be in the right place.
+>    >
+>    {: .solution}
+{: .question}
+
+It turns out that there has been a mix-up with two samples, they have been mislabelled! We need to redo the limma-voom analysis with the correct sample information.
 
 > ### {% icon hands_on %} Hands-on: Use the Rerun button to redo steps
 >
@@ -260,7 +273,7 @@ In the `Report` you should then see the correct MDS plot as below.
 
 Next, scroll down the report to take a look at the **Additional information** and **Summary of experimental data** sections near the bottom. It should look similar to below. Here you can check that the correct samples have been assigned to the correct groups, what settings were used (e.g. filters, normalisation method) and also how many genes were filtered out due to low expression.
 
-![Report summary](../../images/limma-voom/report_summary.png)
+![Report summary](../../images/limma-voom/report_summary.png){: width="600px"}
 
 >    > ### {% icon question %} Question
 >    >
@@ -276,30 +289,30 @@ Next, scroll down the report to take a look at the **Additional information** an
 
 ## Density plots
 
-Density plots can be output in the report (and as a PDF) if *Filter lowly expressed genes* is applied. These plots allow comparison of the counts distributions before and after filtering. The samples are coloured by the groups. Count data is not normally distributed, so if we want to examine the distributions of the raw counts we need to log the counts. We typically check the distribution of the read counts on the log2 scale. A CPM value of 1 is equivalent to a log-CPM value of 0 and the CPM we used of 0.5 is equivalent to a log-CPM of -1. It can be seen in the before filtering plot below that a large proportion of genes within each sample are not expressed or lowly-expressed and our filter of CPM of 0.5 (in at least 2 samples) removes a lot of these uninformative genes.
+Density plots can be output in the `Report` if *Filter lowly expressed genes* is applied. A link is also provided in the `Report` to a PDF version (`DensityPlots.pdf`). These plots allow comparison of the counts distributions before and after filtering. The samples are coloured by the groups. Count data is not normally distributed, so if we want to examine the distributions of the raw counts we need to log the counts. We typically check the distribution of the read counts on the log2 scale. A CPM value of 1 is equivalent to a log-CPM value of 0 and the CPM we used of 0.5 is equivalent to a log-CPM of -1. It can be seen in the before filtering plot below that a large proportion of genes within each sample are not expressed or lowly-expressed and our filter of CPM of 0.5 (in at least 2 samples) removes a lot of these uninformative genes.
 
 ![Density Plots](../../images/limma-voom/densityplots.png "Density Plots")
 
-We can have a look more closely to see whether our threshold of 0.5 CPM does indeed correspond to a count of about 10-15 reads in each sample with the CpmsVsCounts plots. The plot for two of the samples is shown below.
+We can have a look more closely to see whether our threshold of 0.5 CPM does indeed correspond to a count of about 10-15 reads in each sample with the plots of CPM versus raw counts.
 
-The report provides links to PDFs of plots shown in the report and also to the rest of the additional plots selected.
+The report provides links to PDFs of plots shown in the report and also to the rest of the additional plots selected to be output.
 
 ![Report Outputs](../../images/limma-voom/report_plots.png "Report outputs")
  
-![CPM threshold Plots](../../images/limma-voom/cpmsvscounts.png "CPM vs Raw Counts Plots")
+Click on the `CpmPlots.pdf` link in the `Report`. You should see 12 plots, one for each sample. Two of the plots are shown below. From the plots we can see that 0.5 CPM is equivalent to ~10 counts in each of the 12 samples, so 0.5 seems to be an appropriate threshold for this dataset. These samples all have sequencing depth of 20-30 million (see the `Library information` file) so a CPM value of 0.5 would be ~10 counts.
 
-From the plots we can see that 0.5 CPM is equivalent to ~10 counts in each of the 12 samples, so 0.5 seems to be an appropriate threshold for this dataset. These samples all have sequencing depth of 20-30 million (see the library information file) so a CPM value of 0.5 here can be calculated to be ~10 counts.
+![CPM threshold Plots](../../images/limma-voom/cpmsvscounts.png "CPM vs Raw Counts Plots")
 
 > ### {% icon tip %} Tip
 >
- * A threshold of 1 CPM in at least minimum group sample size is a good rule of thumb for samples with about 10 million reads. For larger library sizes increase the CPM theshold and for smaller library sizes decrease it. Check the CpmsVsCounts plots to see if the selected threshold looks appropriate for the samples (equivalent to ~10 reads).
+> * A threshold of 1 CPM in at least minimum group sample size is a good rule of thumb for samples with about 10 million reads. For larger library sizes increase the CPM theshold and for smaller library sizes decrease it. Check the CpmsPlots to see if the selected threshold looks appropriate for the samples (equivalent to ~10 reads).
 >
 {: .tip}
 
 
 ## Box plots
 
-We can also use box plots to check the distributions of counts in the samples. Box plots can be selected to be output by the limma-voom tool if normalisation is applied (TMM is applied by default). With the box plots for these samples we can see that overall the distributions are not identical but still not very different. If a sample is really far above or below the blue horizontal line we may need to investigate that sample further.
+We can also use box plots to check the distributions of counts in the samples. Box plots can be selected to be output by the limma-voom tool if normalisation is applied (TMM is applied by default). The plots are output in the `Report` and a link is also provided to a PDF version (`BoxPlots.pdf`). With the box plots for these samples we can see that overall the distributions are not identical but still not very different. If a sample is really far above or below the blue horizontal line we may need to investigate that sample further.
 
 ![Box Plots](../../images/limma-voom/boxplots.png "Box Plots")
 
@@ -328,18 +341,17 @@ The TMM normalization generates normalization factors, where the product of thes
 >    {: .solution}
 {: .question}
 
-It is considered good practice to make MD plots for all the samples as a quality check, as described in the [edgeR workflow article](https://f1000research.com/articles/5-1438/v2). These plots allow expression profiles of individual samples to be explored more closely. An MD plot shows the log-fold change between a sample against the average expression across all the other samples. This visualisation can help you see if there are genes highly upregulated or downregulated in a sample. If we look at mean difference plots for these samples, we should be able to see the composition bias problem. The mean-difference plots show average expression (mean: x-axis) against log-fold-changes (difference: y-axis).
+## MD plots for samples
 
-Let's take a look at the MD plots for the two samples MCL1.LA and MCL1.LE that had the largest and smallest normalization factors.
+It is considered good practice to make mean-difference (MD) plots for all the samples as a quality check, as described in this [edgeR workflow article](https://f1000research.com/articles/5-1438/v2). These plots allow expression profiles of individual samples to be explored more closely. An MD plot shows the log-fold change between a sample against the average expression across all the other samples. This visualisation can help you see if there are genes highly upregulated or downregulated in a sample. If we look at mean difference plots for these samples, we should be able to see the composition bias problem. The mean-difference plots show average expression (mean: x-axis) against log-fold-changes (difference: y-axis).
 
-The MD plots on the left below show the counts normalized for library size and the plots on the right show the counts after the TMM normalization has been applied. MCL1.LA had the largest normalization factor and was above the median line in the unnormalized by TMM box plots. MCL1.LE had the smallest normalization factor and was below the median line in the box plots. These MD plots help show the composition bias problem has been addressed.
-![MD Plot LA](../../images/limma-voom/mdsampleLA.png "MD Plot for MCL1.LA before and after TMM normalisation")
-![MD Plot LE](../../images/limma-voom/mdsampleLE.png "MD Plot for MCL1.LE before and after TMM normalisation")
-
+Click on the `MDPlots_Samples.pdf` link in the `Report`. You shoud see 12 MD plots, one for each sample. Let's take a look at the plots for the two samples MCL1.LA and MCL1.LE that had the largest and smallest normalization factors. The MD plots on the left below show the counts normalized for library size and the plots on the right show the counts after the TMM normalization has been applied. MCL1.LA had the largest normalization factor and was above the median line in the unnormalized by TMM box plots. MCL1.LE had the smallest normalization factor and was below the median line in the box plots. These MD plots help show the composition bias problem has been addressed.
+![MD Plot LA](../../images/limma-voom/mdsampleLA.png "MD Plots for MCL1.LA before and after TMM normalisation")
+![MD Plot LE](../../images/limma-voom/mdsampleLE.png "MD Plots for MCL1.LE before and after TMM normalisation")
 
 ## Voom variance plot 
 
-This plot show the mean-variance relationship of the genes in the dataset. It can help us see if we’ve filtered the low counts adequately and if there is a lot of variation in our data.
+This plot is displayed in the `Report` along with a link to a PDF version (`VoomPlot.pdf`). It shows the mean-variance relationship of the genes in the dataset. It can help show if low counts have been filtered adequately and if there is a lot of variation in our data.
 
 ![Voom Plot](../../images/limma-voom/voomplot.png "Voom Plot")
 
@@ -362,19 +374,19 @@ This plot show the mean-variance relationship of the genes in the dataset. It ca
 
 ## MD and Volcano plots
 
-Genome-wide plots that are useful for checking DE results are MD plots (or MA plots) and Volcano plots. There are functions in limma for generating these plots and they are used by this tool.
+Genome-wide plots that are useful for checking DE results are MD plots (or MA plots) and Volcano plots. There are functions in limma for generating these plots and they are used by this tool. These plots are output by default and shown in the report along with a link to PDF versions (`MDPlot_basalpregnant-basallactate.pdf` and `VolcanoPlot_basalpregnant-basallactate.pdf`).
 
 ![MDVol Plot](../../images/limma-voom/mdvolplot_basalpregnant-basallactate.png "MD Plot and Volcano Plot")
 
-The MD Plot highlighted genes are significant at FDR of 0.05 and exhibit log2-fold-change of at least 0. These thresholds can be change by the user under **Advanced Options**. 
+The MD Plot highlighted genes are significant at an adjusted p-value (adj.P) threshold of 0.05 and exhibit log2-fold-change (lfc) of at least 0. These thresholds can be change by the user under **Advanced Options**.
 
 > ### {% icon question %} Question
 >
-> How many genes are differentially expressed at the default thresholds of FDR=0.05 and lfc=0?
+> How many genes are differentially expressed at the default thresholds of adj.P=0.05 and lfc=0?
 >
 >    > ### {% icon solution %} Solution
 >    >
->    > The number of DE genes at these FDR and lfc thresholds is shown in the table in the report as below.
+>    > The number of DE genes at these adj.P and lfc thresholds is shown in the table in the report as below.
 >    >
 >    > ![DE counts](../../images/limma-voom/decounts.png){: width="500px"}
 >    >
@@ -382,7 +394,7 @@ The MD Plot highlighted genes are significant at FDR of 0.05 and exhibit log2-fo
 {: .question}
 
 
-> ### {% icon comment %} Comment
+> ### {% icon comment %} Comment on adjusted P value
 >
 > **A note about deciding how many genes are significant**: In order to decide which genes are differentially expressed, we usually take a cut-off (e.g. 0.05 or 0.01) on the adjusted p-value, NOT the raw p-value. This is because we are testing many genes (more than 15000 genes here), and the chances of finding differentially expressed genes is very high when you do that many tests. Hence we need to control the false discovery rate, which is the adjusted p-value column in the results table. What this means is that, if we choose an adjusted p-value cut-off of 0.05, and if 100 genes are significant at a 5% false discovery rate, we are willing to accept that 5 will be false positives.
 {: .comment}
@@ -407,26 +419,28 @@ We can see that much fewer genes are now highlighted in the MD plot and identifi
 
 ![TREAT DE counts](../../images/limma-voom/TREATdecounts.png "TREAT differentially expressed genes"){: width="400px"}
 
-Before following up on the DE genes with further lab work, it is recommended to have a look at the expression levels of the individual samples for the genes of interest. Heatmaps of the top genes can be generated to show the expression levels across the samples and stripcharts can be used to view the expression of the top genes across the groups. This tool can generate these charts automatically for the top genes. The number of top genes is 10 by default, and the user can specify the number of top genes to view (up to 100) under **Advanced Options**.
-
 # Visualising results
+
+Before following up on the DE genes with further lab work, it is recommended to have a look at the expression levels of the individual samples for the genes of interest. The Galaxy limma tool can auto-generate heatmaps of the top genes to show the expression levels across the *samples*. It can also generate stripcharts to view the expression of the top genes across the *groups*. This enables a quick view of the expression of the top differentially expressed genes. The number of top genes is 10 by default and the user can specify the number of top genes to view (up to 100) under **Advanced Options**.
 
 ## Heatmap of top genes
 
-Heatmaps showing the normalized expression of top genes from the contrast by *samples* can be auto-generated.
+Click on the `Heatmap_basalpregnant-basallactate.pdf` link in the `Report`. You should see a plot like below.
 
 ![Heatmap](../../images/limma-voom/heatmap.png "Heatmap of top genes")
 
 ## Stripcharts of top genes
 
-Stripcharts showing the normalized expression of top genes from the contrast by *groups* can be auto-generated.
+Click on the `Stripcharts_basalpregnant-basallactate.pdf` link in the `Report`. You should see 10 plots, one for each top gene. Four are shown below.
 
 ![Stripchart Plot](../../images/limma-voom/stripcharts.png "Stripcharts of top genes"){: width="950px"}
 
 
 ## Interactive plots (Glimma)
 
-An interactive version of the mean-difference plots is possible via the [Glimma](https://github.com/Shians/Glimma) package, if a gene annotation file is provided to the limma tool. A link to a html page is generated in the limma report that allows the user to search for their favourite gene. The plot shows a two-panel interactive MD plot. The left plot shows the log-fold-change vs average expression. The right plot shows the expression levels of a particular gene of each sample by groups (similar to the stripcharts). Hovering over points on left plot will plot expression level for corresponding gene, clicking on points will fix the expression plot to gene. Clicking on rows on the table has the same effect as clicking on the corresponding gene in the plot.
+An interactive version of the mean-difference plots is possible via the [Glimma](https://github.com/Shians/Glimma) package if a gene annotation file is provided to the limma tool. A link to a html page is generated in the limma report that allows the user to search for their favourite gene.
+
+Click on the `Glimma_MDPlot_basalpregnant-basallactate.html` link in the `Report`. You should see a two-panel interactive MD plot like below. The left plot shows the log-fold-change vs average expression. The right plot shows the expression levels of a particular gene of each sample by groups (similar to the stripcharts). Hovering over points on left plot will plot expression level for corresponding gene, clicking on points will fix the expression plot to gene. Clicking on rows on the table has the same effect as clicking on the corresponding gene in the plot.
 
 <iframe src="../../images/limma-voom/glimma/MD-Plot.html" width="100%" height="1000"></iframe>
 
@@ -441,7 +455,6 @@ An interactive version of the mean-difference plots is possible via the [Glimma]
 >
 > `Egf` is not identified as differentially expressed in the basal cells (see the Adj.PValue) but in the plot showing the Expression levels of all samples, notice that we can see it is highly expressed in the luminallactate group.
 {: .hands_on}
-
 
 Multiple contrasts can be run with the limma tool. For example, we can compare the pregnant and lactating conditions for both the basal and luminal cells. So let's rerun the limma-voom TREAT analysis (adj.P <0.01 and lfc=0.58), this time including the additional contrast `luminalpregnant - luminallactate`. We can then see how the number of differentially expressed genes in the luminal cells compares to the basal cells.
 
@@ -461,6 +474,7 @@ Multiple contrasts can be run with the limma tool. For example, we can compare t
 > ![Fu DE genes](../../images/limma-voom/fu_degenes.png "Fu et al, Nat Cell Biol 2015")
 {: .hands_on}
 
+The table of differentially expressed genes is output as a link in the `Report` (limma-voom_basalpregnant-basallactate.pdf`) and also in the history (`DE tables`).
 
 ## Gene Ontology testing with **goseq**
 
@@ -481,10 +495,10 @@ goseq needs 2 files as inputs:
 We will use the table of differentially expressed results output from the limma-voom tool and call genes differentially expressed if they have an adjusted P value below 0.01 and a fold-change of 1.5 (log2FC of 0.58) as in the Fu paper. We can use the gene lengths from the original table we imported from GEO (`seqdata`). But if we didn't have that we could use a tool like **featureCounts** {% icon tool %} to output a gene lengths file. The original file with gene lengths contains all >20k genes, but we only want the ~15k we have in our differentially expressed genes file after filtering low counts, and in the same order. So we will join the lengths file with the differentially expressed genes file, keeping only the lengths information for genes present in the differentially expressed genes file. We can then cut out the columns we need for the two inputs (gene id, length) (gene id, DE status) and as a bonus they will both be sorted in the same order, what we need for goseq.
 
 To generate the two input files we will use:
-* **Compute** to add a column to the limma-voom table that gives genes meeting our adjP and fold-change thresholds the value "True" and all other genes the value "False"
-* **Join two Datasets** (matching on gene ids) to add the gene lengths information
-* **Cut** to extract the two columns with the differentially expressed genes information
-* **Cut** to extract the two columns with the gene lengths information
+* **Compute** to add a column to the limma-voom table that gives genes meeting our adj.P and lfc thresholds the value "True" and all other genes the value "False"
+* **Join two Datasets** to add the gene lengths information to the differentially expressed genes, matching on gene ids
+* **Cut** to extract the two columns for the differentially expressed genes information
+* **Cut** to extract the two columns for the gene lengths information
 
 
 > ### {% icon hands_on %} Hands-on: Prepare the two inputs for GOSeq
@@ -564,7 +578,7 @@ The Fu paper also used goseq and found enrichment in the luminal cells for gener
 
 You may want to create a heatmap for a set of genes of interest, such as the 31 genes from the original paper using this dataset, Fig. 6b below. These 31 genes include the authors' main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors, identified as differentially expressed in this dataset in luminal pregnant vs lactating by the authors. We will recreate the heatmap to show the steps. It also serves as a sanity check, to check that our results look similar to what was shown in the paper.
 
-![Fu heatmap](../../images/limma-voom/fu_heatmap.png "Fu et al, Nat Cell Biol 2015")
+![Fu heatmap](../../images/limma-voom/fu_heatmap.png "Fu et al, Nat Cell Biol 2015"){: width="200px"}
 
 ```
 GeneID
@@ -631,7 +645,7 @@ Cxcl1
 
 We now have a table with the 31 genes in columns and the 12 samples in rows.
 
-> ### {% icon hands_on %} Hands-on: Plot the heatmap of the genes of interest for the samples
+> ### {% icon hands_on %} Hands-on: Plot the heatmap of custom genes
 >
 > 1. **heatmap2** {% icon tool %} to plot the heatmap
 >    - {% icon param-file %} *"Input should have column headers"*: the generated table (output of **Transpose** {% icon tool %})
@@ -640,20 +654,22 @@ We now have a table with the 31 genes in columns and the 12 samples in rows.
 >    - *"Labeling columns and rows"*: `Label my columns and rows`
 >    - *"Coloring groups"*: `Blue to white to red`
 >    - *"Data scaling"*: `Scale my data by column` (scale genes)
->    You should see a heatmap like below.
->    ![Fu heatmap regenerated](../../images/limma-voom/fu_heatmap_regenerated.png "Fu heatmap regenerated")
 {: .hands_on}
 
->    > ### {% icon question %} Question
+You should see a heatmap like below.
+
+![Fu heatmap regenerated](../../images/limma-voom/fu_heatmap_regenerated.png "Fu heatmap regenerated"){: width="50px"}
+
+> ### {% icon question %} Question
+>
+> How does the heatmap compare to the one from the Fu paper Fig 6 (above)?
+>
+>    > ### {% icon solution %} Solution
 >    >
->    > How does the heatmap compare to the one from the Fu paper Fig 6 (above)?
+>    > The heatmap looks similar to the heatmap in the paper, which is reassuring.
 >    >
->    >    > ### {% icon solution %} Solution
->    >    >
->    >    > The heatmap looks similar to the heatmap in the paper, which is reassuring.
->    >    >
->    >    {: .solution}
->    {: .question}
+>    {: .solution}
+{: .question}
 
 # Conclusion
 {:.no_toc}
