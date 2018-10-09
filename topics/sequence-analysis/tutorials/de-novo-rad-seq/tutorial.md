@@ -91,24 +91,24 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >  - Capture discarded reads to a file: Yes
 >  - Output format: fastq
 >
-> > ### {% icon question %} Questions
-> >
-> > 1. How many reads where on the original dataset?
-> > 2. How many are kept?
-> > 3. Can you try to explain the reason why we loose a lot of reads here?
-> > 4. What kind of information this result gives concerning the upcoming data analysis and the barcodes design in general ?
-> >
-> > > ### {% icon solution %} Solution
-> > > The informations can be found in the results log file:
-> > >
-> > >  1. 8895289 total reads
-> > >  2. 8139531 retained reads
-> > >  3. There are no sequences filtered because of low quality. This is because radtags didn't apply quality related filtering since the corresponding advanced option (Discard reads with low quality scores) has not been enabled. So here, all not retained sequences are removed because of an ambiguous barcode (626265) or an ambiguous RAD-Tag (129493). This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This strategy is often used to avoid having too much sequences beginning with the exact same nucleotide sequence which may cause Illumina related issues during sequencing and cluster analysis
-> > >  4. Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!
-> > >
-> > > In addition to the overall statistics the numbers of retained and removed reads are also given for each bar code sequence.
-> > {: .solution}
-> {: .question}
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. How many reads where on the original dataset?
+>    > 2. How many are kept?
+>    > 3. Can you try to explain the reason why we loose a lot of reads here?
+>    > 4. What kind of information does this result give concerning the upcoming data analysis and the barcodes design in general?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > The informations can be found in the results log file:
+>    > >
+>    > >  1. 8895289 total reads
+>    > >  2. 8139531 retained reads
+>    > >  3. There are no sequences filtered because of low quality. This is because radtags didn't apply quality related filtering since the corresponding advanced option (Discard reads with low quality scores) has not been enabled. So here, all not retained sequences are removed because of an ambiguous barcode (626265) or an ambiguous RAD-Tag (129493). This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This strategy is often used to avoid having too much sequences beginning with the exact same nucleotide sequence which may cause Illumina related issues during sequencing and cluster analysis
+>    > >  4. Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!
+>    > >
+>    > > In addition to the overall statistics the numbers of retained and removed reads are also given for each bar code sequence.
+>    > {: .solution}
+>    {: .question}
 >
 > 2. **Process Radtags** {% icon tool %}: Re-Run `Stacks: process radtags` on FastQ file playing with parameters
 >
