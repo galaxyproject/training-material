@@ -86,7 +86,7 @@ check-html-internal: build ## validate HTML (internal links only)
 	      --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
 	      --url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
 	      --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
-		  --disable-external \
+	      --disable-external \
 	      --allow-hash-href \
 	      ./_site \
 	)
