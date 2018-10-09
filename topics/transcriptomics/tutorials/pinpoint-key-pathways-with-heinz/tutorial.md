@@ -243,7 +243,7 @@ After learning about differential expression analysis, let's get some hands-on e
 >
 {: .hands_on}
 
-It usually takes 10 - 15 minutes to finish DESseq2. After the analysis is finished, have a look at the file, it should look like something this:
+It takes about 10 minutes to finish DESseq2. After the analysis is finished, have a look at the file, it should look like something this:
 
 ```
 GeneID  Base mean   log2(FC)	        StdErr	            Wald-Stats	        P-value	                P-adj
