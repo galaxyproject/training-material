@@ -76,28 +76,15 @@ Although a local basecaller script was used during the run, there was still a sm
 
 ![Experiment setup](../../images/experiment_setup.png)
 
-To make this tutorial easier to execute, we are providing only part of the data - you are given the flow files for one
-animal at 10 time points (5 early and 5 late). In order to assess the error rate of our analysis pipeline and experimental
-setup, we additionally resequenced a mock community composed of genomic DNA from 21 bacterial strains.
+To make this tutorial easier to execute, we are providing only one MDR pasmid-bearing strain - you are given the file below.
 
 > ### {% icon comment %} Dataset details
-> Because of the large size of the original dataset (3.9 GB) you are given 20 of the 362 pairs of fastq
-> files. For example, you will see two files: `F3D0_S188_L001_R1_001.fastq`, and
-> `F3D0_S188_L001_R2_001.fastq`
+> Because of the large size of the original datasets (1.15 GB) you are given 1 of the 12 plasmids
+> files.
 > <br><br>
-> These two files correspond to Female 3 on Day 0 (F3D0) (i.e. the day of weaning). The first file
-> (and all those with R1 in the name) correspond to the forward reads, while the second (and all
-> those with R2 in the name) correspond to the reverse reads.
-> <br><br>
-> These sequences are 250 bp and overlap in the V4 region of the 16S rRNA gene; this region is about
-> 253 bp long. Looking at the datasets, you will see 22 fastq files, representing 10 time points from
-> Female 3 and 1 mock community. You will also see `HMP_MOCK.v35.fasta` which contains the sequences used
-> in the mock community that were sequenced in fasta format.
+> This sequence file is 51 MB of nanopore sequences. The 10026 reads found in this file contain 49190798 nucleotides.
+> As mentioned before nanopore sequences are long reads and this is confirmed by a mean read length of 4906.3.
 {: .comment}
-
-<!-- note: mothur seems to have forgotten day 4 in their SOP example data, therefore this description and results
-in this document differ slightly from the description on their website -->
-
 
 ## Importing the data into Galaxy
 
@@ -116,118 +103,18 @@ Now that we know what our input data is, let's get it into our Galaxy history:
 > 2. **Import Sample Data.** The data for this course may be available from a shared library in Galaxy
 > (ask your instructor). If this is not the case, you can upload it yourself.
 >   - Option 1: From data library:
->     - Navigate to the shared data library, you should find 20 pairs of fastq files; 19 from the mice,
->       and one pair from the mock community.
+>     - Navigate to the shared data library, you should find the fasta file.
 >     - Option 2: From your Zenodo:
->       - Data is available from Zenodo here: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg)](https://doi.org/10.5281/zenodo.800651)
+>       - Data is available from Zenodo here: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1443246.svg)](https://doi.org/10.5281/zenodo.1443246)
 >       - In the file upload menu choose the `Paste/Fetch data` option and enter the following urls to import the file from Zenodo to Galaxy directly
 >
 >       > ### {% icon solution %} List of Zenodo URLs
 >       > ```
->       > https://zenodo.org/record/800651/files/F3D0_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D0_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D141_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D141_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D142_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D142_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D143_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D143_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D144_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D144_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D145_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D145_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D146_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D146_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D147_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D147_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D148_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D148_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D149_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D149_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D150_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D150_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D1_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D1_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D2_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D2_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D3_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D3_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D5_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D5_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D6_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D6_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D7_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D7_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D8_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D8_R2.fastq
->       > https://zenodo.org/record/800651/files/F3D9_R1.fastq
->       > https://zenodo.org/record/800651/files/F3D9_R2.fastq
->       > https://zenodo.org/record/800651/files/Mock_R1.fastq
->       > https://zenodo.org/record/800651/files/Mock_R2.fastq
+>       > https://zenodo.org/record/1443246/files/RB01.fasta
 >       > ```
 >       {: .solution }
 > <br>
 >
-> 3. **Import Reference Data.**  Go back to the data library and import the following reference
-> datasets
->  - `silva.v4.fasta`
->  - `HMP_MOCK.v35.fasta`
->  - `mouse.dpw.metadata`
->  - `mouse.time.design`
->  - `trainset9_032012.pds.fasta`
->  - `trainset9_032012.pds.tax`
->
->    Or import them from Zenodo:
->
->    > ### {% icon solution %} List of Zenodo URLs
->    > ```
->    > https://zenodo.org/record/800651/files/HMP_MOCK.v35.fasta
->    > https://zenodo.org/record/800651/files/mouse.dpw.metadata
->    > https://zenodo.org/record/800651/files/mouse.time.design
->    > https://zenodo.org/record/800651/files/silva.v4.fasta
->    > https://zenodo.org/record/800651/files/trainset9_032012.pds.fasta
->    > https://zenodo.org/record/800651/files/trainset9_032012.pds.tax
->    > ```
->    {: .solution }
-{: .hands_on}
-
-Now that's a lot of files to manage. Luckily Galaxy can make life a bit easier by allowing us to create
-*dataset collections*. This enables us to easily run tools on multiple datasets at once. Let's
-create a collection now:
-
-> ### {% icon hands_on %} Hands-on: Organizing our data into a collection
->
-> Since we have paired-end data, each sample consist of two separate fastq files, one containing the
-> forward reads, and one containing the reverse reads. We can recognize the pairing from the file names,
-> which will differ only by `_R1` or `_R2` in the filename. We can tell Galaxy about this paired naming
-> convention, so that our tools will know which files belong together.
->
-> 1. Click on the **checkmark icon** at top of your history.
->   ![Checkmark icon in history menu](../../../../shared/images/history_menu_buttons2.png)
->
-> 2. Select all the fastq files (40 in total), then click on **for all selected..** and select
->   **Build List of Dataset Pairs** from the dropdown menu.
-> 3. In the next dialog window you can create the list of pairs. By default Galaxy will look for pairs
->   of files that differ only by a `_1` and `_2` part in their names. In our case however, these
->   should be `_R1` and `_R2`. Please change these values accordingly. You should now see a list of
->   pairs suggested by Galaxy,
->   ![List of suggested paired datasets](../../images/create_collection.png) <br><br>
->
-> 4. Examine the pairings, if it looks good, you can click on **auto-pair** to create the suggested
->   pairs.
->   ![The result of pairing](../../images/create_collection2.png) <br><br>
->   The middle segment is the name for each pair. You can change these names by clicking on them. These
->   names will be used as sample names in the downstream analysis so always make sure they are
->   informative.
->   **Important:** Make sure these sample names contain only alphanumeric characters. If you've
->   imported the data from Zenodo, the sample names will default to the full url, please change these
->   values to only their last part, e.g. `F3D0`, `F3D5` etc.
->
-> 5. Once you are happy with your pairings, enter a name for your new collection at the bottom right of
->   the screen. Then click the **Create List** button. A new dataset collection item will now appear in
->   your history.
-{: .hands_on}
-
 
 # Quality Control
 
