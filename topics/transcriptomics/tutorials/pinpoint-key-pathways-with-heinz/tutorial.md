@@ -301,7 +301,8 @@ Now we can **Fit a BUM model**:
 # Pinpoint the key pathways with Heinz
 
 After getting the parameters of the BUM model from the last step, we will use Heinz to pinpoint
-the key pathways. Before we continue, let's figure out what Heinz is actually doing.
+the optimal subnetwork. Then we could look for the key pathways relevant to the subnetwork.
+Before we continue, let's figure out what Heinz is actually doing.
 
 Heinz is an algorithm for searching an optimal subnetwork from a bigger network. You may wonder what
 the networks are here. Through the previous steps, we have got a list of identities, that is a list
@@ -436,8 +437,8 @@ Except the tool we will use in Galaxy, you may consider using eXamine plugin in 
 
 ![metaModules Result](../../images/metaModules.png){:width="60%"}
 
-If you interested, you may try to make sense of the result yourself by combining information from other bioinformatics services and literature.
-
+If you interested, you may try to make sense of the result yourself. To pinpoint the key pathways relevant to the subnetwork, we probably need to combine information from other bioinformatics services and literature.
+graph
 
 # Save the history into a workflow
 
