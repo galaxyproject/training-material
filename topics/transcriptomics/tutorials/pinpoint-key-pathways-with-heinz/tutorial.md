@@ -348,6 +348,15 @@ we obtained; meanwhile, we also need to specify an FDR value as input.
 >
 {: .comment}
 
+> ### {% icon tip %} How to understand Heinz score?
+>
+> To figure out this score without reading the formula, we can understand Heinz score in this way. FDR is involved in calculating a p-value threshold
+> and any KO whose p-value is below this threshold is regarded as significant, which means the Heinz is positive (another calculation in the formula). If we pick a higher FDR value, then we will have a higher p-value threshold, and more KOs are probably regarded as significant. In this situation, we probably have
+> many false positive (those regarded as significant are actually not) on one hand; on the other hand, Heinz will deliver a bigger subnetwork, which might be
+> exhausting to analyze. Therefore, we need to properly pick up an FDR value.
+>
+{: .tip}
+
 In our case, the higher an FDR value is, the more positive nodes (regarding the Heinz scores) we get,
 which means it may include a lot of false positive nodes. For different datasets and problems, we
 probably need different FDR values. Here we set FDR to 0.11.
