@@ -1,11 +1,10 @@
 ---
 layout: tutorial_hands_on
 
-title: "Pinpoint key pathways from transcriptomics data using Heinz"
+title: "Pinpoint key pathways using Heinz"
 zenodo_link: "https://doi.org/10.5281/zenodo.1344105"
 tags:
   - metatranscriptomics
-  - transcriptomics
   - network analysis
 questions:
     - "Which pathways are potentially contributing to dental caries?"
