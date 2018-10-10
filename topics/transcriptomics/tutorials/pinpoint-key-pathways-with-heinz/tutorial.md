@@ -45,10 +45,8 @@ parameters to speed up the analysis for the purposes of this tutorial.
 {: .agenda}
 
 
-> ### {% icon comment %} Note
-> Your results may be slightly different from the ones presented in this tutorial due to the tool versions or
-> reference data versions or stochastic processes in the algorithms.
-{: .comment}
+{% include snippets/warning_results_may_vary.md %}
+
 
 In this tutorial, we will run the Heinz workflow step by step to understand how each step works. To get an overview of what this workflow does
 and what kind of calculation is involved, view the flowchart below.
