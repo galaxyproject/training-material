@@ -7,7 +7,7 @@ questions:
   - "How to use a Jupyter Notebook in Galaxy"
 objectives:
   - "Learn about the Jupyter Interactive Environment"
-time_estimation: "30M"
+time_estimation: "30m"
 key_points:
   - "Start Jupyter from the Visualize tab or from a dataset"
   - "Install Libraries with pip or Conda"
@@ -15,7 +15,7 @@ key_points:
   - "Use put() to export datasets from the notebook to your history"
   - "Save your notebook into your history"
 contributors:
-  - Delphine-L
+  - delphine-l
 ---
 
 # Introduction

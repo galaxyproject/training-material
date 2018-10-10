@@ -9,7 +9,7 @@ objectives:
   - "Learn how to use a tool"
   - "Learn how to view results"
   - "Learn how to view histories"
-time_estimation: "30 min"
+time_estimation: "30m"
 key_points:
   - "The Galaxy interface has tools on the left, viewing pane in the middle, and a history of your data analysis on the right."
   - "You can create a new history for each analysis. All your histories are saved."

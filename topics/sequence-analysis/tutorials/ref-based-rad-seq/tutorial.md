@@ -9,7 +9,7 @@ objectives:
   - "Analysis of RAD sequencing data using a reference genome"
   - "SNP calling from RAD sequencing data"
   - "Calculate population genomics statistics from RAD sequencing data"
-time_estimation: "12H"
+time_estimation: "8h"
 key_points:
 contributors:
   - yvanlebras

@@ -7,7 +7,7 @@ hands_on: "github"
 enable: "false"
 questions:
 objectives:
-time_estimation: "1H"
+time_estimation: "1h"
 key_points:
 contributors:
   - hrhotz

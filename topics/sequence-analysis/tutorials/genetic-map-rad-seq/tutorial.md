@@ -9,7 +9,7 @@ objectives:
   - "SNP calling from RAD sequencing data"
   - "Find and correct haplotypes"
   - "Create input files for genetic map building software"
-time_estimation: "12H"
+time_estimation: "8h"
 key_points:
 contributors:
   - yvanlebras

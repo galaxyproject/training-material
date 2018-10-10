@@ -6,6 +6,9 @@ enable: "false"
 questions:
 objectives:
 time_estimation: "10M"
+contributors:
+ - bebatut
+ - shiltemann
 key_points:
 ---
 
