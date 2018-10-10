@@ -88,7 +88,7 @@ The sequences are raw sequences from the sequencing machine, without any pretrea
 
 For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3journal.org/content/1/3/171.full) .
 
-> ### {% icon hands_on %} Hands-on:
+> ### {% icon hands_on %} Hands-on: Demultiplexing reads
 >
 > 1. **Process Radtags** {% icon tool %}: Run `Stacks: process radtags` on FastQ file to demultiplex the reads
 >  - Single-end or paired-end reads files: Single-end files
@@ -98,37 +98,38 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >  - Enzyme: sbfI
 >  - Capture discarded reads to a file: Yes
 >  - Output format: fastq
-{: .hands_on}
-
-> ### {% icon question %} Questions
 >
-> 1. How many reads were on the original dataset?
-> 2. How many are kept?
-> 3. Can you try to explain the reason why we loose a lot of reads here?
-> 4. What kind of information this result gives concerning the upcoming data analysis and the barcodes design in general ?
->
-> > ### {% icon solution %} Solution
-> > The informations can be found in the results log file:
-> >
-> > 1. 8895289 total reads
-> > 2. 8139531 retained reads
-> > 3. There are no sequences filtered because of low quality. This is because radtags didn't apply quality related filtering since the corresponding advanced option (Discard reads with low quality scores) has not been enabled. So here, all not retained sequences are removed because of an ambiguous barcode (626265) or an ambiguous RAD-Tag (129493). This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This strategy is often used to avoid having too much sequences beginning with the exact same nucleotide sequence which may cause Illumina related issues during sequencing and cluster analysis
-> > 4. Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!
-> >
-> > In addition to the overall statistics the numbers of retained and removed reads are also given for each bar code sequence.
-> {: .solution }
-{: .question}
-
-In order to obtain results of higher quality we will play with the advanced options:
-
-> ### {% icon hands_on %} Hands-on:
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. How many reads where on the original dataset?
+>    > 2. How many are kept?
+>    > 3. Can you try to explain the reason why we loose a lot of reads here?
+>    > 4. What kind of information does this result give concerning the upcoming data analysis and the barcodes design in general?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > The informations can be found in the results log file:
+>    > >
+>    > >  1. 8895289 total reads
+>    > >  2. 8139531 retained reads
+>    > >  3. There are no sequences filtered because of low quality. This is because radtags didn't apply quality related filtering since the corresponding advanced option (Discard reads with low quality scores) has not been enabled. So here, all not retained sequences are removed because of an ambiguous barcode (626265) or an ambiguous RAD-Tag (129493). This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This strategy is often used to avoid having too much sequences beginning with the exact same nucleotide sequence which may cause Illumina related issues during sequencing and cluster analysis
+>    > >  4. Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!
+>    > >
+>    > > In addition to the overall statistics the numbers of retained and removed reads are also given for each bar code sequence.
+>    > {: .solution}
+>    {: .question}
 >
 > 2. **Process Radtags** {% icon tool %}: Re-Run `Stacks: process radtags` on FastQ file playing with parameters
->   - In `advanced options`, activate the `Discard reads with low quality scores` option and play with the score limit (default (nolimit) vs 20 vs 10 for example) and examine the change in reads retained.
->   - Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
 >
+> In `advanced options`, after activation of the `Discard reads with low quality scores` option, play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
+>
+{: .hands_on}
+
+> ### {% icon hands_on %} Hands-on
+>
+> You can use the `Charts` functionality through the Visualize button reachable on the `Radtags logs` file you just generated.
+>
+> If like me you don't have payed attention to the organization of you file for the graphical representation you obtain a non optimal bars diagram with a not intelligent X-axis ordering. There is a lot of different manner to fix this. You can use a copy/paste "bidouille" or you can use Galaxy tools to manipulate the `radtags logs` file to generate a better graph. For example, you can use `Select lines that match an expression` tool to select rows then use the `Concatenate datasets tail-to-head` tool to reorganize these lines in a new file.
 > Then we generate a graphical display of the changes:
->
 >
 > First we cut the interesting lines of each `result.log with Stacks: process radtags`
 >
@@ -136,34 +137,32 @@ In order to obtain results of higher quality we will play with the advanced opti
 > 4. **Concatenate datasets tail-to-head** on the resulting data sets
 >
 > Alternatively just copy/paste these lines on the Galaxy upload tool using Paste/fetch data section and modifying the File header by sample and filename by Score 10 / Score 20 and noscorelimit for example... Before Starting the upload, you can select the `Convert spaces to tabs` option through the `Upload configuration` wheel. If you did not pay attention to the order you can just sort the file using the first column.
->
-> ```
-> quality	Retained Reads	Low Quality	Ambiguous Barcodes	Ambiguous RAD-Tag	Total
-> 20	2980543		5158988		626265		129493		8895289
-> 10	7373160		766371		626265		129493		8895289
-> nolimit	8139531		0		626265		129493		8895289
-> ```
 {: .hands_on}
-
 
 You can use the `Charts` functionality through the Visualize button to plot the data.
 
+And you obtain a file like this one, ready to generate a beautiful and smart bar stacked!
 
-![The bar diagram](../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG)
+```
+#	Retained Reads	Low Quality	Ambiguous Barcodes	Ambiguous RAD-Tag	Total
+NoScoreLimit	8139531		0		626265		129493		8895289
+Score10	7373160		766371		626265		129493		8895289
+Score20	2980543		5158988		626265		129493		8895289
+```
 
-Based on the dataset with score quality of 10, using a filter like `clean data, remove any read with an uncalled base` has only little impact:
+![The chart on the sorted file](../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG)
 
-![The output of clean tool](../../images/RAD4_Population_Genomics/Process_radtags_out_parameter2.png)
+Using a filter like `clean data, remove any read with an uncalled base` has only little impact:
 
 The demultiplexed sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.
 
 ## Quality control
 
-For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.baseurl}}/topics/sequence-analysis/): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
+For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.baseurl}}/topics/sequence-analysis/tutorials/quality-control/tutorial.html): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
-> 1. **FastQC** {% icon tool %}: Run FastQC on FastQ files to control the quality of the reads
+> 1. **FastQC** {% icon tool %}: Run FastQC on FastQ files to control the quality of the reads. Warning! Don't forget you are working on data collections....
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -171,7 +170,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > The read length is 32 bp
->    > {: .solution}
+>    > {: .solution }
 >    {: .question}
 {: .hands_on}
 
@@ -179,14 +178,11 @@ Note the quality drop at bases 5-10 which are the cut site of the RADSeq
 protocol (TGCAGG). This is caused by the extremely uneven distribution the
 sequencer observes TGCAGG in lockstep on all spots/clusters, i.e. all clusters
 light up at the same time. Therefore the sequencer can not be sure that each
-spot/cluster is correct which is expressed by the lower quality score. Usually
-PhiX is added to reduce this problem, but in the publication it is not stated
-if and to which extent this was done here.
+spot/cluster is correct which is expressed by the lower quality score. Usually, to reduce this problem, 
+PhiX is added, OR, as it is the case here, samples with heterogeneous barcodes lengths are mixed.
 Still, approximately ~99% of the cases match nucleotide expected for the cut
 site sequence.
-TODO the question now is: is that to be expected? Can we refer some document here?
-Also note that the nucleotide distribution of the inidices (bases 1-4) is
-slightly skewed.
+
 
 
 As there is a draft genome for *Gasterosteus aculeatus*, we can use this information and map the sequences on this genome to identify polymorphism.
