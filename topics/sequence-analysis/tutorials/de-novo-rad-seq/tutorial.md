@@ -140,9 +140,9 @@ And you obtain a file like this one, ready to generate a beautiful and smart bar
 
 ```
 #		Retained Reads	Low Quality	Ambiguous Barcodes	Ambiguous RAD-Tag	Total
-Lowquality	8139531		0		626265		129493		8895289
-Score10		7373160		766371		626265		129493		8895289
-Score20		2980543		5158988		626265		129493		8895289
+Lowquality	8139531		0		626265			129493		8895289
+Score10		7373160		766371		626265			129493		8895289
+Score20		2980543		5158988		626265			129493		8895289
 ```
 
 ![The chart on the sorted file](../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG)
