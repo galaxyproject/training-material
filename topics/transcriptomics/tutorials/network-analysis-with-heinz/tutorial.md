@@ -1,18 +1,23 @@
 ---
 layout: tutorial_hands_on
 
-title: "Metatranscriptomics: Pinpoint key pathways using Heinz"
+title: "Pinpoint key pathways from transcriptomics data using Heinz"
 zenodo_link: "https://doi.org/10.5281/zenodo.1344105"
+tags:
+  - metatranscriptomics
+  - transcriptomics
+  - network analysis
 questions:
     - "Which pathways are potentially contributing to dental caries?"
 objectives:
-    - "Analyze metatranscriptomics data using Heinz in Galaxy to pinpoint the optimal scoring subnetwork."
+    - "Network Analysis of metatranscriptomics data using Heinz in Galaxy to pinpoint the optimal scoring subnetwork."
 time_estimation: "1H 30M"
 key_points:
-    - "Analyzing differential expression for (meta)transcriptomics data."
-    - "Validating the p-value distribution of the differential expression analysis."
-    - "Finding the most differentially expressed network in a gene functional network using Heinz."
-    - "Analyzing the pinpointed network."
+    - "Using Heinz do the network analysis based on the (meta)transcriptomics data."
+    - "Extracting the signals hidden in the p-value distribution of the differential expression analysis."
+    - "Visualizing the pinpointed subnetwork helps us understand the result better"
+    - "Heinz helps narrow down the scope to find the key pathways"
+    - "Multiple CPUs will accelerate the computation especially for the complex datasets"
 contributors:
     - cicozhang
     - sanneabeln
@@ -442,11 +447,12 @@ In this tutorial, you probably get a similar graph to the following:
 {: .question}
 
 
-Except the tool we will use in Galaxy, you may consider using eXamine plugin in Cytoscape for a richer visualization, if we use the original data from the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171), perform all of these steps and visualize the result by eXamine, we can get a visualization as follows:
+In addition to the tool we will use in Galaxy, you may consider using eXamine plugin in Cytoscape for a richer visualization, if we use the original data from the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171), perform all of these steps and visualize the result by eXamine, we can get a visualization as follows:
 
 ![metaModules Result](../../images/metaModules.png){:width="60%"}
 
-If you interested, you may try to make sense of the result yourself. To pinpoint the key pathways relevant to the subnetwork, we probably need to combine information from other bioinformatics services and literature.
+If you interested, you may try to make sense of the result yourself. To answer the question "which pathways are potentially contributing to dental caries?", we need to find the key pathways relevant to the subnetwork. To achieve that, we probably need to combine information from other bioinformatics services and literature.
+
 
 # Save the history into a workflow
 
