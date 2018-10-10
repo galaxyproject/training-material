@@ -10,7 +10,7 @@ objectives:
     - Apply proper mapper for RNA-sequencing data using a reference genome
     - Understand the process to identify differentially expressed genes
     - Apply a functional enrichment tool on differentially expressed genes
-time_estimation: 1d
+time_estimation: 8h
 key_points:
     - A spliced mapping tool should be used on eukaryotic RNA seq data
     - Numerous factors should be taken into account when running a differential gene expression
