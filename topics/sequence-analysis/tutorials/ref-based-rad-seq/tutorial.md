@@ -238,11 +238,27 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 > **Stacks: Reference map** {% icon tool %}:
 > - Select your usage: Population
 > - Files containing an individual sample from a population: Choose the mapped reads (data collection)
-> - Specify a population map: Population_map.txt
+> - Specify a population map: Population_map.txt (see comment below concerning the creation of such a file)
 > - Minimum depth of coverage: 3
 >
 >    > ### {% icon comment %} Comment
->    >
+>    > Population map will look like this:
+sample_CCCC	1
+sample_CCAA	1
+sample_CCTT	1
+sample_CCGG	1
+sample_CACA	1
+sample_CAAC	1
+sample_CATG	1
+sample_CAGT	1
+sample_CTCT	2
+sample_CTAG	2
+sample_CTTC	2
+sample_CTGA	2
+sample_GGGG	2
+sample_GGAA	2
+sample_GGTT	2
+sample_GGCC	2
 >    > If you are using a file presenting population information and individual name in a different manner than expected by STACKS, you can use Galaxy tools like `Replace Text` (for example to replace `Rabbit Slough` by a population number like `2`, `Add column` (for example to add `sample_`) or `Cut columns from a table` (to put the new `sample_` column af the first place) and finally `Regex replace` (replacing `(sample_)\t` by `\1`) to generate it...
 >    {: .comment}
 >
