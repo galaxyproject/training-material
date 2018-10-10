@@ -179,7 +179,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    > {: .solution }
 >    {: .question}
 >
-> 2. **MultiQC** {% icon tool %}: Run MultiQC on FastQCresults to better see quality information over samples. 
+> 2. **MultiQC** {% icon tool %}: Run MultiQC on FastQC results to better see quality information over samples. 
 {: .hands_on}
 
 ![MultiQC output](../../images/RAD4_Population_Genomics/multiqc.PNG)
