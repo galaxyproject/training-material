@@ -126,8 +126,10 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 > First we cut the interesting lines of each `result.log with Stacks: process radtags`
 >
 > 1. **Select lines that match an expression** applying `^R1.fq.gz` on the log files and then
-> 2. **Replace Text in entire line** on the resulting data sets finding `R1.fq.gz` and replacing with `Lowquality` or `Score10` or `Score20` depending of the case. Note that you can use the tag functionality to easily recognize each dataset and further treatments
-> 3. **Concatenate datasets tail-to-head** on the resulting data sets
+> 2. **Replace Text in entire line** on the resulting data sets finding `R1.fq.gz` and replacing with `NoScoreLimit` or `Score10` or `Score20` depending of the case
+> 3. **Select lines that match an expression** applying `File\tRetained Reads` on one of the log file to obtain you futur header
+> 4. **Replace Text in entire line** on the resulting data set finding `File` and replacing with `#` to have a best display
+> 5. **Concatenate datasets tail-to-head** on the resulting data sets stating from the header you just created
 >
 > Alternatively just copy/paste these lines on the Galaxy upload tool using Paste/fetch data section and modifying the File header by sample and filename by Score 10 / Score 20 and noscorelimit for example... Before Starting the upload, you can select the `Convert spaces to tabs` option through the `Upload configuration` wheel. If you did not pay attention to the order you can just sort the file using the first column.
 {: .hands_on}
