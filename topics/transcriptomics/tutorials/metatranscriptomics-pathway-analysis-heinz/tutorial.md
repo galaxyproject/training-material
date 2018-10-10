@@ -338,7 +338,7 @@ Upload this edge file (hereafter we call it edge file) into the Galaxy instance.
 As the first step, we need to calculate a Heinz score for each node, using the BUM model parameters
 we obtained; meanwhile, we also need to specify an FDR value as input.
 
-> ### {% icon comment %} What is FDR value?
+> ### {% icon comment %} What is an FDR value?
 >
 > FDR is short for false discovery rate, which is a method of conceptualizing the rate of type I errors
 > in null hypothesis testing when conducting multiple comparisons, if you are interested, view the detail
@@ -346,14 +346,6 @@ we obtained; meanwhile, we also need to specify an FDR value as input.
 >
 {: .comment}
 
-> ### {% icon tip %} How to understand Heinz score?
->
-> To figure out this score without reading the formula, we can understand Heinz score in this way. FDR is involved in calculating a p-value threshold
-> and any KO whose p-value is below this threshold is regarded as significant, which means the Heinz is positive (another calculation in the formula). If we pick a higher FDR value, then we will have a higher p-value threshold, and more KOs are probably regarded as significant. In this situation, we probably have
-> many false positive (those regarded as significant are actually not) on one hand; on the other hand, Heinz will deliver a bigger subnetwork, which might be
-> exhausting to analyze. Therefore, we need to properly pick up an FDR value.
->
-{: .tip}
 
 For different datasets and problems, we probably need to pick up an FDR value separately. Here we set FDR to 0.11.
 
@@ -389,6 +381,17 @@ Similar to **Fit a BUM model**, we also need to prepare the input data for the t
 >   - *"Choose your input type for BUM parameters"*: `The output file of BUM model`
 >   - *"Output file of BUM model as input: lambda on the first line and alpha, the second"*: the output of **Fit a BUM model**
 {: .hands_on}
+
+
+> ### {% icon comment %} What is the Heinz score?
+>
+> To figure out this score without reading the formula, we can understand Heinz score in this way. FDR is involved in calculating a p-value threshold
+> and any KO whose p-value is below this threshold is regarded as significant, which means the Heinz is positive (another calculation in the formula). If we pick a higher FDR value, then we will have a higher p-value threshold, and more KOs are probably regarded as significant. In this situation, we probably have
+> many false positive (those regarded as significant are actually not) on one hand; on the other hand, Heinz will deliver a bigger subnetwork, which might be
+> exhausting to analyze. Therefore, we need to properly pick up an FDR value.
+>
+{: .comment}
+
 
 ## Run Heinz: pinpoint the optimal subnetwork
 
