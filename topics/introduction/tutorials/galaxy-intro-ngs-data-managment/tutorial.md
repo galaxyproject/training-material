@@ -7,7 +7,7 @@ questions:
   - "How to manipulate and process NGS data"
 objectives:
   - "Learn about Fastq, SAM, and BAM."
-time_estimation: "30M"
+time_estimation: "30 min"
 key_points:
 contributors:
   - nekrut

@@ -8,7 +8,7 @@ objectives:
   - "Edit a file via GitHub interface"
   - "Create a pull request"
   - "Update a pull request"
-time_estimation: "20M"
+time_estimation: "20min"
 key_points:
   - "You can't add or push directly to the `master` branch, so you need to create a pull request"
   - "1 pull request = 1 branch"
