@@ -243,6 +243,8 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 >
 >    > ### {% icon comment %} Comment
 >    > Population map will look like this:
+
+```
 sample_CCCC	1
 sample_CCAA	1
 sample_CCTT	1
@@ -259,6 +261,8 @@ sample_GGGG	2
 sample_GGAA	2
 sample_GGTT	2
 sample_GGCC	2
+```
+
 >    > If you are using a file presenting population information and individual name in a different manner than expected by STACKS, you can use Galaxy tools like `Replace Text` (for example to replace `Rabbit Slough` by a population number like `2`, `Add column` (for example to add `sample_`) or `Cut columns from a table` (to put the new `sample_` column af the first place) and finally `Regex replace` (replacing `(sample_)\t` by `\1`) to generate it...
 >    {: .comment}
 >
