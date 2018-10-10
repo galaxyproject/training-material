@@ -266,11 +266,8 @@ sample_GGCC	2
 >    > If you are using a file presenting population information and individual name in a different manner than expected by STACKS, you can use Galaxy tools like `Replace Text` (for example to replace `Rabbit Slough` by a population number like `2`, `Add column` (for example to add `sample_`) or `Cut columns from a table` (to put the new `sample_` column af the first place) and finally `Regex replace` (replacing `(sample_)\t` by `\1`) to generate it...
 >    {: .comment}
 >
-> Once Stacks has completed running, investigate the output files: `Summary from Stacks ref_map.log with Stacks` and `Catalog haplotypes (*)` (snps, alleles and tags).
-> TODO: Summary from Stacks has some quite nice html output (seems preferable to the log file which is named ref_map.log .. not results.log)
+> Once Stacks has completed running, investigate the output files: `ref_map.log`, `Summary from Stacks: reference map on data...` and `Catalog (*)` (snps, alleles and tags).
 > Notice that each locus now has a chromosome/base pair specified in each of the `*tags.tsv` files and in the catalog files.
-> TODO: probably the tags summary file?
-> TODO: Would be nice to have some specific informations to look for in the files.
 {: .hands_on}
 
 # Calculate population genomics statistics
