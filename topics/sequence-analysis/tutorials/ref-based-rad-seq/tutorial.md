@@ -156,7 +156,7 @@ Score20		2980543		5158988		626265			129493			8895289
 
 ![The chart on the sorted file](../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG)
 
-Using a filter like `clean data, remove any read with an uncalled base` has only little impact:
+You can further test using a filter like `clean data, remove any read with an uncalled base` and see that here, this has only little impact on the number of retained reads.
 
 The demultiplexed sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.
 
