@@ -170,7 +170,10 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    > > The read length is 32 bp
 >    > {: .solution }
 >    {: .question}
+>
+> 2. **MultiQC** {% icon tool %}: Run MultiQC on FastQCresults to better see quality information over samples. 
 {: .hands_on}
+![MultiQC output](../../images/RAD4_Population_Genomics/multiqc.PNG)
 
 # SNP calling from radtags
 
