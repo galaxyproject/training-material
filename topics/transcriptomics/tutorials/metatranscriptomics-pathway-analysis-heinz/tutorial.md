@@ -126,7 +126,7 @@ After knowing what our input data are like, let's get them into Galaxy history:
 >      {: .details}
 >    - Click on **Start** to Upload the files
 >    - Click **Build** once upload has completed
->    - Enter **Name**: `CN`
+>    - Enter **Name**: `CP`
 >    - Click **Create list** to make the collection
 >
 > 3. **Upload control (healthy) datasets**
