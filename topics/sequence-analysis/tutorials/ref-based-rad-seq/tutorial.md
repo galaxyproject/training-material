@@ -210,8 +210,8 @@ Here we will use BWA. BWA is a fast light-weighted tool that aligns relatively s
 >
 > - Will you select a reference genome from your history or use a built-in index?: Use a genome from history and build index
 > - Use the following dataset as the reference sequence: Reference_genome_11_chromosomes.fasta
-> - Select input type: Single-end
-> - Select fastq dataset: One dataset collection containing the demultiplexed (in the following we discuss the TODO which setting we discuss?)
+> - Select input type: Single Fastq
+> - Select fastq dataset: One dataset collection containing the demultiplexed reads obtained with Process Radtag execution made with a quality score of 10 and with the `Discard reads with low quality scores` parameter set to Yes (so containing 7373160 retained reads).  
 > - Leave everything else
 {: .hands_on}
 
