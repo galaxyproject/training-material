@@ -7,10 +7,10 @@ tutorial_name: phage-comparative-genomics
 >
 > In this tutorial, we will deal with:
 >
-> * Background
->    > 1. DNA Sequence Comparisons
->    > 2. Protein Sequence Comparisons
-> * Workflow
+> 1. Background
+>    > * DNA Sequence Comparisons
+>    > * Protein Sequence Comparisons
+> 2. Workflow
 >
 {: .agenda}
 
@@ -27,11 +27,11 @@ As part of the functional workflow, BLASTp (for proteins) and BLASTn (for nucleo
 > An overview of how the [CPT](https://cpt.tamu.edu/) currently organizes and classifies genomes is provided in [this publication.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5408676/pdf/viruses-09-00070.pdf)
 {: .tip}
 
-## 1. DNA Sequence Comparisons
+### DNA Sequence Comparisons
 
 Because the triplet code that encodes protein sequences is *degenerate* (as in, there are multiple possible triplet codons for most amino acids), a DNA sequence can drift and still encode the same protein sequence by accumulation of silent mutations. This means that DNA sequences encoding similar proteins can diverge at a relatively high rate, thus DNA sequence comparisons are only particularly useful for organisms that are **closely related.** Between related organisms, DNA sequence comparisons can provide good overall [parallels, as this single analysis can demonstrate both conservation of DNA sequences and genome *synteny* (the order of genes in the genome). Additionally, high conservation of DNA sequences automatically means that proteins encoded by that sequence must also be similar. Once DNA sequence similarity drops below ≈ 30%, it is no longer very useful for comparisons.
 
-## 2. Protein Sequence Comparisons
+### Protein Sequence Comparisons
 
 Comparison of organisms by protein sequence is much more sensitive, as there is stronger pressure to conserve a protein sequence for the protein to retain its function. Phage genome organization is considered to be *modular*, meaning that individual genes or groups of genes can be shared across otherwise very different phages. It is not unusual for two phages to be very similar across the genome with only particular genes - such as phage tail fibers - being different.
 
@@ -57,4 +57,35 @@ Comparison of organisms by protein sequence is much more sensitive, as there is 
 > * From there, one can click on “start using this workflow” within the message box to be brought to the page containing all of the user’s imported workflows. Find the Phage comparative genomics workflow, click the drop-down menu, and select “Run.”
 
 ![](../../images/phage-comparative-genomics-screenshots/4_run_workflow.png)
+
+> * The parameters for the workflow will then appear. The inputs that the user needs to adjust are as follows:
+>    > * Step one will be the NR dataset (BLASTp results)
+>    > * Step two will be the NT dataset (BLASTn results)
+>    > * Step three will be the phage’s FASTA DNA sequence.
+
+![](../../images/phage-comparative-genomics-screenshots/5_workflow_parameters.png)
+
+> ### {% icon tip %} Note that…
+> The dataset numbers will be different for each user.
+{: .tip}
+
+> * Once the parameters have been adjusted accordingly, click “Run workflow” at the top or the bottom of the page to execute the workflow. A message in a green box will appear next to inform the user of a successful invocation of the phage comparative genomics workflow. From here, wait until all of the steps have completed and their datasets have turned green.
+
+![](../../images/phage-comparative-genomics-screenshots/6_successful_invocation.png)
+
+> ### {% icon comment %} Issues with Workflow
+> If the dataset turns red in the history column, click on it to expand it. Report the bug by clicking on the bug icon in the bottom left-hand corner of the expanded dataset.
+>
+> ![](../../images/phage-comparative-genomics-screenshots/7_report_bug.png)
+>
+> If it is a different problem, or this persists, contact [CPT](https://cpt.tamu.edu) IT staff (cpt@tamu.edu).
+{: .comment}
+
+Now that there have been other phages closely related to the phage in question found, the tool outputs can be determined. This workflow should have produced three new datasets in the history column: *Top BLASTn hits*, *Top BLASTp hits*, and *MIST v3*.
+
+Look at the *Top BLASTn hits* data by clicking the eye {% icon solution %} symbol. A small table will list the top 5 most similar organisms to the phage in question at the DNA level, as determined by BLASTn. If a phage in the database has high similarity **at the DNA level** to the phage in question, it is worthwhile to line up the genomes and visualize just how related they are; an easy way to do this is via a comparison method called  **dot plot**, which will visualize a pairwise comparison of the two sequences.
+
+The results of a dot plot analysis can be seen by clicking on the eye {% icon solution %} symbol in the *MIST v3* dataset. This will be the results of pairwise dot plots of the phage in question against the 5 closest-matching genomes. Phages that are related and syntenic will produce a discrete diagonal line in the dot plot. As DNA sequence similarity decreases, the line will become fainter and patchier until it is no longer visible.
+
+To determine relationships and similarity at the protein level, the *Top BLASTp hits* dataset contains a table of the top 5 most related organisms based on the number of similar proteins found by BLASTp. This tool searched through your PLASTp results against the NCBI nr database and retrieved the organisms that matched the highest number of proteins in your phage (an E-value < 1e-3). This number can be found in the last column of the table. Note that this table shows **only** the top 5 results. If the phage in question is part of a large cluster of similar phages (E.G.: T4-like phages), then T4 itself may not appear in the list; 5 other T4-like phages may be more closely related to the phage in question, and T4 may by only the 10th most related phage. The does *not* mean the phage in question is not T4-like, and it is up to the annotator to determine how the phage in question relates to other phages.
 
