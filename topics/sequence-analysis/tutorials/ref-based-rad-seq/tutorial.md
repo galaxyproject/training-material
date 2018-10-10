@@ -181,6 +181,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >
 > 2. **MultiQC** {% icon tool %}: Run MultiQC on FastQCresults to better see quality information over samples. 
 {: .hands_on}
+
 ![MultiQC output](../../images/RAD4_Population_Genomics/multiqc.PNG)
 
 Note the quality drop at bases 5-10 which are the cut site of the RADSeq
