@@ -5,7 +5,7 @@ title: "Collections: Multisample Analysis"
 zenodo_link: ""
 questions:
 objectives:
-time_estimation: "1h/1d"
+time_estimation: "1h"
 key_points:
 contributors:
   - nekrut
