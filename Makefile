@@ -35,7 +35,7 @@ create-env: ## create conda environment
 	else \
 	    ${CONDA} env create -f environment.yml; \
 	fi
-.PHONY: create-env	
+.PHONY: create-env
 
 ACTIVATE_ENV=. $(dir ${CONDA})activate galaxy_training_material
 
@@ -64,6 +64,13 @@ build: clean ## build files but do not run a server
 	  ${JEKYLL} build --strict_front_matter -d _site/training-material \
 	)
 .PHONY: build
+
+check-frontmatter: build ## Validate the frontmatter
+	( $(ACTIVATE_ENV) && \
+	  find topics/ -name tutorial.md -or -name slides.html | \
+	    xargs -n1 ruby bin/validate-frontmatter.rb \
+	)
+.PHONY: check-frontmatter
 
 check-html: build ## validate HTML
 	( $(ACTIVATE_ENV) && \

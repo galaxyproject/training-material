@@ -15,7 +15,7 @@ key_points:
   - "Use put() to export datasets from the notebook to your history"
   - "Save your notebook into your history"
 contributors:
-  - Delphine-L
+  - delphine-l
 ---
 
 # Introduction
