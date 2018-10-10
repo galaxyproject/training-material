@@ -187,9 +187,31 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 
 
 > ### {% icon hands_on %} Hands-on: Stacks: De novo map
-> **Stacks: De novo map** {% icon tool %}: Run **Stacks** selecting the population usage. Specify each individual as a sample, a population map and a minimum depth of coverage of 3.
+> **Stacks: De novo map** {% icon tool %}: Run **Stacks** selecting the population usage. Specify each individual as a sample, a population map (see comment below concerning the creation of such a file) and a minimum depth of coverage of 3.
 >
 >    ![Stacks: De novo map parameters](../../images/RAD4_Population_Genomics/denovo/denovo_in.png)
+>
+>
+>    > Population map will look like this:
+
+```
+sample_CCCC	1
+sample_CCAA	1
+sample_CCTT	1
+sample_CCGG	1
+sample_CACA	1
+sample_CAAC	1
+sample_CATG	1
+sample_CAGT	1
+sample_CTCT	2
+sample_CTAG	2
+sample_CTTC	2
+sample_CTGA	2
+sample_GGGG	2
+sample_GGAA	2
+sample_GGTT	2
+sample_GGCC	2
+```
 >
 >    > ### {% icon comment %} Comment
 >    >
