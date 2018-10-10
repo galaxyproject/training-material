@@ -12,7 +12,7 @@ objectives:
   - "Learn how histories work"
   - "Learn how to create a workflow"
   - "Learn how to share your work"
-time_estimation: "1-1.5h"
+time_estimation: "1H30M"
 key_points:
   - "Galaxy provides an easy-to-use graphical user interface for often complex command-line tools"
   - "Galaxy keeps a full record of your analysis in a history"

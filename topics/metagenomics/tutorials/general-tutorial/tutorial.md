@@ -12,7 +12,7 @@ objectives:
   - "Choosing the best approach to analyze metagenomics data"
   - "Selection of tools to analyze amplicon data or shotgun data"
   - "Visualisation of a community structure"
-time_estimation: "2h30"
+time_estimation: "2H30M"
 key_points:
   - "With amplicon data, we can extract information about the studied community structure"
   - "With shotgun data, we can extract information about the studied community structure and also the functions realised by the community"
