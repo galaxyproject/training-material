@@ -49,7 +49,7 @@ module Jekyll
       end
       data['mentions'] = mentions
 
-      if material.key?('time_estimation') then
+      if material.key?('time_estimation') and not material['time_estimation'].nil? then
         data['timeRequired'] = "PT#{material['time_estimation'].upcase}"
       end
 
