@@ -132,7 +132,7 @@ Finally, we will combine the peptide quantifications to protein quantifications.
 >
 > 1. Run ***IDMapper*** {% icon tool %} with
 >   - the output of ***IDFilter*** as **Protein/peptide identifications file**,
->   - the `consensusXML` output of ***FidoAdapter*** as **Feature map/consensus map file**, 
+>   - the `consensusXML` output of ***FeatureFinderMultiplex*** as **Feature map/consensus map file**, 
 >   - **RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features** set to `20`,
 >   - **m/z tolerance (in ppm or Da) for matching of peptide identifications and (consensus) features** set to `10`, and
 >   - **Match using RT and m/z of sub-features instead of consensus RT and m/z** set to `Yes`.

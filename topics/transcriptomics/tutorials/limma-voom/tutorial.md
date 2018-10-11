@@ -19,7 +19,7 @@ key_points:
 contributors:
   - mblue9
   - bphipson
-  - Anna Trigos
+  - annatrigos
   - mritchie
   - hdashnow
   - charitylaw
@@ -81,7 +81,7 @@ We will use three files for this analysis:
 >         > * Paste the link into the text field
 >         > * Press **Start**
 >         {: .tip}
->           
+>
 >         - You can paste both links below into the **Paste/Fetch** box:
 >
 >           ```
@@ -215,13 +215,6 @@ By far, one of the most important plots we make when we analyse RNA-Seq data are
 
 ![MDS Plot](../../images/limma-voom/mdsscree.png "MDS Plot")
 
-> ### {% icon details %} More details on MDS plots
->
-> The distance between each pair of samples in the MDS plot is calculated as the leading fold change, defined as the root-mean-square of the largest 500 log2-fold changes between that pair of samples. Replicate samples from the same group cluster together in the plot, while samples from different groups form separate clusters. This indicates that the differences between groups are larger than those within groups, i.e., differential expression is greater than the variance and can be detected. In the MDS plot, the distance between basal samples on the left and luminal cells on the right is about 6 units, corresponding to a leading fold change of about 64-fold (2^6 = 64) between basal and luminal. The expression differences between virgin, pregnant and lactating are greater for luminal cells than for basal.
->
-> Clustering in the MDS plot can be used to motivate changes to the analysis in light of potential batch effects. For example, imagine that the first replicate of each group was prepared at a separate time from the second replicate. If the MDS plot showed separation of samples by time, it might be worthwhile including time in the downstream analysis to account for the time-based effect.
-{: .details}
-
 Take a look at the MDS plot coloured by group.
 
 > ### {% icon question %} Question
@@ -259,6 +252,13 @@ In the `Report` you should then see the correct MDS plot as below.
 
 ![MDS Plot](../../images/limma-voom/mdsscree_corr.png "MDS Plot (correct samples)")
 
+> ### {% icon details %} More details on MDS plots
+>
+> The distance between each pair of samples in the MDS plot is calculated as the leading fold change, defined as the root-mean-square of the largest 500 log2-fold changes between that pair of samples. Replicate samples from the same group cluster together in the plot, while samples from different groups form separate clusters. This indicates that the differences between groups are larger than those within groups, i.e., differential expression is greater than the variance and can be detected. In the MDS plot, the distance between basal samples on the left and luminal cells on the right is about 6 units, corresponding to a leading fold change of about 64-fold (2^6 = 64) between basal and luminal. The expression differences between virgin, pregnant and lactating are greater for luminal cells than for basal.
+>
+> Clustering in the MDS plot can be used to motivate changes to the analysis in light of potential batch effects. For example, imagine that the first replicate of each group was prepared at a separate time from the second replicate. If the MDS plot showed separation of samples by time, it might be worthwhile including time in the downstream analysis to account for the time-based effect.
+{: .details}
+
 > ### {% icon question %} Question
 >
 > What is the greatest source of variation in the data (i.e. what does dimension 1 represent)?
@@ -275,17 +275,23 @@ Next, scroll down the `Report` to take a look at the **Additional information** 
 
 ![Report summary](../../images/limma-voom/report_summary.png){: width="600px"}
 
->    > ### {% icon question %} Question
+> ### {% icon question %} Question
+>
+> How many genes have been filtered out for low expression?
+>
+>    > ### {% icon solution %} Solution
 >    >
->    > How many genes have been filtered out for low expression? 
+>    > 11375 genes were filtered out as insignificant as they were without more than 0.5 CPM in at least 2 samples.
 >    >
->    >    > ### {% icon solution %} Solution
->    >    >
->    >    > 11375 genes were filtered out as insignificant as they were without more than 0.5 CPM in at least 2 samples.
->    >    >
->    >    {: .solution}
->    {: .question}
+>    {: .solution}
+{: .question}
 
+>    > ### {% icon tip %} Tip
+>    >
+>    > * A threshold of 1 CPM in at least minimum group sample size is a good rule of thumb for samples with about 10 million reads. For larger library sizes increase the CPM theshold and for smaller library sizes decrease it. Check the CpmsVsCounts plots to see if the selected threshold looks appropriate for the samples (equivalent to ~10 reads).
+>    >
+>    {: .tip}
+>
 
 ## Density plots
 
@@ -298,7 +304,7 @@ We can also have a look more closely to see whether our threshold of 0.5 CPM doe
 The `Report` provides links to PDFs of all plots shown in the `Report` and also to the rest of the additional plots selected to be output.
 
 ![Report Outputs](../../images/limma-voom/report_plots.png "Report outputs")
- 
+
 Click on the `CpmPlots.pdf` link in the `Report`. You should see 12 plots, one for each sample. Two of the plots are shown below. From these plots we can see that 0.5 CPM is equivalent to ~10 counts in each of the 12 samples, so 0.5 seems to be an appropriate threshold for this dataset (these samples all have sequencing depth of 20-30 million (see the `Library information` file below) so a CPM value of 0.5 would be ~10 counts).
 
 ![CPM threshold Plots](../../images/limma-voom/cpmsvscounts.png "CPM vs Raw Counts Plots")
@@ -318,7 +324,7 @@ We can also use box plots to check the distributions of counts in the samples. B
 
 > ### {% icon question %} Question
 >
-> Compare the box plots before and after TMM normalization. Can you see any differences? 
+> Compare the box plots before and after TMM normalisation. Can you see any differences?
 >
 >    > ### {% icon solution %} Solution
 >    >
@@ -327,6 +333,7 @@ We can also use box plots to check the distributions of counts in the samples. B
 >    {: .solution}
 {: .question}
 
+
 The TMM normalization generates normalization factors, where the product of these factors and the library sizes defines the effective library size. TMM normalization (and most scaling normalization methods) scale relative to one sample. The normalization factors multiply to unity across all libraries. A normalization factor below one indicates that the library size will be scaled down, as there is more suppression (i.e., composition bias) in that library relative to the other libraries. This is also equivalent to scaling the counts upwards in that sample. Conversely, a factor above one scales up the library size and is equivalent to downscaling the counts. We can see the normalization factors for these samples in the `Library information` file that we selected to output. Click on the {% icon galaxy-eye %} (eye) icon to view.
 
 ![Library Info file](../../images/limma-voom/libinfo.png "Library information file")
@@ -334,6 +341,7 @@ The TMM normalization generates normalization factors, where the product of thes
 > ### {% icon question %} Question
 >
 > Which sample has the largest normalization factor? Which sample has the smallest?
+>
 >    > ### {% icon solution %} Solution
 >    >
 >    > MCL1.LA has the largest normalization factor and MCL1.LE the smallest.
@@ -345,11 +353,12 @@ The TMM normalization generates normalization factors, where the product of thes
 
 It is considered good practice to make mean-difference (MD) plots for all the samples as a quality check, as described in this [edgeR workflow article](https://f1000research.com/articles/5-1438/v2). These plots allow expression profiles of individual samples to be explored more closely. An MD plot shows the log-fold change between a sample against the average expression across all the other samples. This visualisation can help you see if there are genes highly upregulated or downregulated in a sample. If we look at mean difference plots for these samples, we should be able to see the composition bias problem. The mean-difference plots show average expression (mean: x-axis) against log-fold-changes (difference: y-axis).
 
-Click on the `MDPlots_Samples.pdf` link in the `Report`. You shoud see 12 MD plots, one for each sample. Let's take a look at the plots for the two samples MCL1.LA and MCL1.LE that had the largest and smallest normalization factors. The MD plots on the left below show the counts normalized for library size and the plots on the right show the counts after the TMM normalization has been applied. MCL1.LA had the largest normalization factor and was above the median line in the unnormalized by TMM box plots. MCL1.LE had the smallest normalization factor and was below the median line in the box plots. These MD plots help show the composition bias problem has been addressed.
+Click on the `MDPlots_Samples.pdf` link in the `Report`. You should see 12 MD plots, one for each sample. Let's take a look at the plots for the two samples MCL1.LA and MCL1.LE that had the largest and smallest normalization factors. The MD plots on the left below show the counts normalized for library size and the plots on the right show the counts after the TMM normalization has been applied. MCL1.LA had the largest normalization factor and was above the median line in the unnormalized by TMM box plots. MCL1.LE had the smallest normalization factor and was below the median line in the box plots. These MD plots help show the composition bias problem has been addressed.
 ![MD Plot LA](../../images/limma-voom/mdsampleLA.png "MD Plots for MCL1.LA before and after TMM normalization")
 ![MD Plot LE](../../images/limma-voom/mdsampleLE.png "MD Plots for MCL1.LE before and after TMM normalization")
 
-## Voom variance plot 
+
+## Voom variance plot
 
 This plot is generated by the voom method and displayed in the `Report` along with a link to a PDF version (`VoomPlot.pdf`). It shows the mean-variance relationship of the genes in the dataset. It can help show if low counts have been filtered adequately and if there is a lot of variation in our data.
 
@@ -378,7 +387,8 @@ Genome-wide plots that are useful for checking differentially expressed (DE) res
 
 ![MDVol Plot](../../images/limma-voom/mdvolplot_basalpregnant-basallactate.png "MD Plot and Volcano Plot")
 
-The MD Plot highlighted genes are significant at an adjusted p-value (adj.P) threshold of 0.05 and exhibit log2-fold-change (lfc) of at least 0. These thresholds can be change by the user under **Advanced Options**.
+The MD Plot highlighted genes are significant at an adjusted p-value (adj.P) threshold of 0.05 and exhibit log2-fold-change (lfc) of at least 0. These thresholds can be changed under **Advanced Options**.
+
 
 > ### {% icon question %} Question
 >
@@ -420,6 +430,7 @@ We can see that much fewer genes are now highlighted in the MD plot and identifi
 ![TREAT MDVol Plot](../../images/limma-voom/TREAT_mdvolplot_basalpregnant-basallactate.png "TREAT MD and Volcano plots")
 
 ![TREAT DE counts](../../images/limma-voom/TREATdecounts.png "TREAT differentially expressed genes"){: width="400px"}
+
 
 # Visualising results
 
@@ -632,7 +643,7 @@ Cxcl1
 > ### {% icon hands_on %} Hands-on: Extract the normalized counts for the genes of interest
 > 1. Rerun **limma** selecting *"Output Normalized Counts Table?"*: `Yes`
 > 2. Create a file of the gene symbols of interest
->    - Paste the information above (the 31 gene symbols and header) into the Galaxy Data Uploader Paste/Fetch box 
+>    - Paste the information above (the 31 gene symbols and header) into the Galaxy Data Uploader Paste/Fetch box
 >    - Set File Type to `tabular`
 >    - Use the {% icon galaxy-pencil %} (pencil) icon to rename the file to `heatmap genes`
 > 3. **Join two Datasets** {% icon tool %} with the following parameters:

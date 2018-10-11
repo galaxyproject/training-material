@@ -10,7 +10,7 @@ objectives:
   - "Perform an optimised Velvet assembly with the Velvet Optimiser"
   - "Compare this assembly with those we did in the basic tutorial"
   - "Perform an assembly using the SPAdes assembler."
-time_estimation: "1d/3h/6h"
+time_estimation: "2h"
 key_points:
   - "We learned about how the choice of k-mer size will affect assembly outcomes"
   - "We learned about the strategies that assemblers use to make reference genomes"
@@ -58,7 +58,7 @@ We will be using the same data that we used in the introductory tutorial, so if 
 >    {: .tip}
 >
 >
-> 3. Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the ![Pencil icon](../../images/edit_file.png) icon next to the relevant history entry.
+> 3. Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the {% icon galaxy-pencil %} pencil icon icon next to the relevant history entry.
 >
 > Click on the {% icon galaxy-eye %} (eye) icon next to one of the FASTQ sequence files.
 >

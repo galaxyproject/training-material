@@ -29,10 +29,11 @@ matrix:
     - env: CHECK=site-build
       if: branch != gh-pages
     - env: CHECK=htmlproofer
+    - env: CHECK=htmlproofer-internal
   allow_failures:
     - env: CHECK=htmlproofer
     - env: CHECK=slides
-  
+
 install:
   - sudo apt-get update
   - sudo update-ca-certificates
@@ -57,9 +58,13 @@ script:
       if [ "$CHECK" == "htmlproofer" ]
       then
         make check-html
+      elif [ "$CHECK" == "htmlproofer-internal" ]
+      then
+        make check-html-internal
       elif [ "$CHECK" == "yamllint" ]
       then
         make check-yaml
+        make check-frontmatter
       elif [ "$CHECK" == "slides" ]
       then
         make check-slides
