@@ -10,7 +10,7 @@ questions:
     - "Which pathways are potentially contributing to dental caries?"
 objectives:
     - "Network Analysis of metatranscriptomics data using Heinz in Galaxy to pinpoint the optimal scoring subnetwork."
-time_estimation: "1H 30M"
+time_estimation: "1h30m"
 key_points:
     - "Using Heinz do the network analysis based on the (meta)transcriptomics data."
     - "Extracting the signals hidden in the p-value distribution of the differential expression analysis."
