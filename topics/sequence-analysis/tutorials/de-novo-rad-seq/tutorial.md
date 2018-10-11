@@ -236,8 +236,8 @@ sample_GGCC	2
 >
 > > ### {% icon question %} Question
 > >
-> > 1. What is the maximum value of FST' at any SNP? Don't hesitate to look at the [STACKS manual](http://catchenlab.life.illinois.edu/stacks/manual/#files)
-> > 2. What is the meaning of this FST' value compared a a classical FST one?
+> > 1. What is the maximum value of FST' at any SNP? Don't hesitate to look at the [STACKS manual](http://catchenlab.life.illinois.edu/stacks/manual/#files) to find where this parameter is
+> > 2. What is the meaning of this FST' value compared a a classical FST one? Once again, the [STACKS manual](http://catchenlab.life.illinois.edu/stacks/manual/#files) can help you ;)
 > > 3. How many SNPs reach this FST' value?
 > >
 > > > ### {% icon solution %} Solution
