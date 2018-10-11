@@ -191,7 +191,6 @@ After knowing what our input data are like, let's get them into Galaxy history:
 > >   **Build Dataset List** from the dropdown menu.
 > >
 > > 3. In the next dialog window, you need to give a name, here we just set it to `CP`, then click **Create list**.
-> >   ![List of suggested paired datasets](../../images/create_collection.png)
 > >
 > > 4. Hidden these selected files by clicking on **for all selected..** and selecting **Hidden datasets**.
 > >   **Note:** This step is optional, we do it here to keep Galaxy history clean.
