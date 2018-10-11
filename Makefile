@@ -116,6 +116,7 @@ check-slides: build  ## check the markdown-formatted links in slides
 check-yaml: ## lint yaml files
 	( $(ACTIVATE_ENV) && \
 	  find . -path "**/*.yaml" | xargs -L 1 -I '{}' sh -c "yamllint {}" \
+	  find . -path "**/*.yml" | xargs -L 1 -I '{}' sh -c "yamllint {}" \
 	)
 .PHONY: check-yaml
 
