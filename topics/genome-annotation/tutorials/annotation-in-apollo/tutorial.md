@@ -8,9 +8,22 @@ tutorial_name: annotation-in-apollo
 
 > ### Agenda
 >
-> 1. Prerequisites
-> 2. Making an Annotation
-> 3. Making the Best Prediction
+> * Prerequisites
+> * Making an Annotation
+> * Making the Best Prediction
+>    > * Gene Calls
+>    > * BLAST
+>    >    > 1. NT (Nucleotide) database
+>    >    > 2. NR (non-redundant) protein database
+>    > * Phage Analyses
+>    >    > 1. Candidate ISPs/OSPs
+>    >    > 2. Possible Intron Locations
+>    >    > 3. Possible Frameshifts
+>    > Sequence Analyses
+>    >    > 1. InterProScan
+>    >    > 2. TMHMM (Transmembrane hidden Markov model)
+>    >    > 3. Terminators
+>    >    > 4. tRNA and tmRNA
 >
 {: .agenda}
 
@@ -138,7 +151,7 @@ Candidate ISps and OSPs are the [CPT’s](https://cpt.tamu.edu) attempts to dete
 
 The ISP track naïvely searches the genome for every possible CDS, and then analyzes them with TMHMM. This happens in the case of a mis-called i-spanin or entirely missed i-spanin. The OSP track searches through every possible CDS which contains a lipobox as defined by the [CPT’s](https://cpt.tamu.edu). *Both* of these datasets are filtered for proximity. Co-incidence of a possible ISP gene and a possible OSP gene is a good sign, but the genomic context information will need to be taken into account in order to complete the functionality interference.
 
-##### 2. Possible Introns Locations
+##### 2. Possible Intron Locations
 
 This track analyzes BLASTp against NR data for locations where two or more called, disjointed CDSs match separate locations on the same target protein. Below is an example alignment from phage K.
 

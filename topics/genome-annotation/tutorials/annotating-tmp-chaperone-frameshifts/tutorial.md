@@ -1,28 +1,23 @@
 ---
 layout: tutorial_hands_on
-topic_name: your_topic
-tutorial_name: your_tutorial_name
+topic_name: genome-annotation
+tutorial_name: annotating_tmp_chaperone_frameshifts
 ---
 
-# Introduction
-{:.no_toc}
+# A Brief Preamble
 
-<!-- This is a comment. -->
-
-General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
+Often times, phage genomes contain overlapping gene features (E.G.: tape measure protein chaperones, occasionally spanning genes). Unfortunately, Apollo is not built to properly deal with these occurrences of overlapping gene features. However, here the [CPT](https://cpt.tamu.edu) offers a solution to allow temporary annotation that can be manually corrected (or, corrected in another program like Artemis) after the export of genome annotations from Apollo. This procedure will be necessary to properly annotate tape measure proteins (heretofore TMPs) for the two families within Caudovirales that have TMPs, Siphoviridae and Myoviridae.  
 
 > ### Agenda
 >
-> In this tutorial, we will deal with:
->
-> 1. TOC
-> {:toc}
+> * Background: Tape Measure Protein Chaperones and Frameshifting
+> 
 >
 {: .agenda}
 
-# Part 1
+# Background: Tape Measure Protein Chaperones and Frameshifts
 
-Introduction about this part
+Siphoviridae and Myoviridae are the two known families within the order Caudovirales that are double-stranded DNA bacteriophages with TMPs being a featured part of their structure and genome; Podoviridae is a family within Caudovirales as well, but they **do not** have TMPs. Within the unique tail structure of siphophages and myophages lies the tape measure protein
 
 ## Subpart 1
 

@@ -7,10 +7,12 @@ tutorial_name: phage-comparative-genomics
 >
 > In this tutorial, we will deal with:
 >
-> 1. Background
+> * Background
+>
 >    > * DNA Sequence Comparisons
->    > * Protein Sequence Comparisons
-> 2. Workflow
+>    > * Protein Sequence Comparison
+>
+> * Workflow
 >
 {: .agenda}
 
