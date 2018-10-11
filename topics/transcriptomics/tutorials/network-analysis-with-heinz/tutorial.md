@@ -10,7 +10,7 @@ questions:
     - "Which pathways are potentially contributing to dental caries?"
 objectives:
     - "Network Analysis of metatranscriptomics data using Heinz in Galaxy to pinpoint the optimal scoring subnetwork."
-time_estimation: "1H 30M"
+time_estimation: "1h30m"
 key_points:
     - "Using Heinz do the network analysis based on the (meta)transcriptomics data."
     - "Extracting the signals hidden in the p-value distribution of the differential expression analysis."
@@ -191,7 +191,6 @@ After knowing what our input data are like, let's get them into Galaxy history:
 > >   **Build Dataset List** from the dropdown menu.
 > >
 > > 3. In the next dialog window, you need to give a name, here we just set it to `CP`, then click **Create list**.
-> >   ![List of suggested paired datasets](../../images/create_collection.png)
 > >
 > > 4. Hidden these selected files by clicking on **for all selected..** and selecting **Hidden datasets**.
 > >   **Note:** This step is optional, we do it here to keep Galaxy history clean.
