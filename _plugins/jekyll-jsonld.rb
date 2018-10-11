@@ -50,7 +50,7 @@ module Jekyll
       data['mentions'] = mentions
 
       if material.key?('time_estimation') then
-        data['timeRequired'] = "PT#{material['time_estimation']}"
+        data['timeRequired'] = "PT#{material['time_estimation'].upcase}"
       end
 
       # Add contributors
