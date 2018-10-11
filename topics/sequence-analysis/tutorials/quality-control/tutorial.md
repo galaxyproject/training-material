@@ -447,7 +447,7 @@ Let's first have a look at the quality of our reads!
 
 It is usual that the quality of the sequences is worse for the reverse than for the forward reads. It makes it even important to treat the forward and reverse reads together.
 
-> ### {% icon hands_on %} Hands-on: Assessing the quality of paired-end dat
+> ### {% icon hands_on %} Hands-on: Assessing the quality of paired-end data
 > 1. **Cutadapt** {% icon tool %} with the following parameters
 >    - *"Single-end or Paired-end reads?"*: `Paired-end`
 >       - {% icon param-file %} *"FASTQ/A file #1"*: `reads_1` (Input dataset)
