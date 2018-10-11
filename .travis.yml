@@ -29,6 +29,7 @@ matrix:
     - env: CHECK=site-build
       if: branch != gh-pages
     - env: CHECK=htmlproofer
+    - env: CHECK=htmlproofer-internal
   allow_failures:
     - env: CHECK=htmlproofer
     - env: CHECK=slides
@@ -57,6 +58,9 @@ script:
       if [ "$CHECK" == "htmlproofer" ]
       then
         make check-html
+      elif [ "$CHECK" == "htmlproofer-internal" ]
+      then
+        make check-html-internal
       elif [ "$CHECK" == "yamllint" ]
       then
         make check-yaml

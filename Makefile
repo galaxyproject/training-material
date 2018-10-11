@@ -85,6 +85,20 @@ check-html: build ## validate HTML
 	)
 .PHONY: check-html
 
+check-html-internal: build ## validate HTML (internal links only)
+	( $(ACTIVATE_ENV) && \
+	  htmlproofer \
+	      --assume-extension \
+	      --http-status-ignore 405,503,999 \
+	      --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
+	      --url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
+	      --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
+	      --disable-external \
+	      --allow-hash-href \
+	      ./_site \
+	)
+.PHONY: check-html-internal
+
 check-slides: build  ## check the markdown-formatted links in slides
 	( $(ACTIVATE_ENV) && \
 	  find _site -path "**/slides*.html" \
