@@ -361,7 +361,7 @@ To accomplish this task we use [Cutadapt](https://cutadapt.readthedocs.io/en/sta
 >    {: .question}
 {: .hands_on}
 
-The quality of the previous dataset was pretty good from the beginning and we improved it with wth trimming and filtering step (in a reasonable way to not lose too much information)
+The quality of the previous dataset was pretty good from the beginning and we improved it with with trimming and filtering step (in a reasonable way to not lose too much information)
 
 > ### {% icon comment %} Bad quality sequences
 > If the quality of the reads is not good, we should always first check what is wrong and think about it: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biaised percentage of bases in HiC data).
