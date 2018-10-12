@@ -138,42 +138,48 @@ For this tutorial, we are interested in CuffDiff's tested transcripts for differ
 
 # Filtering and sorting
 
-We now want to highlight those gene transcripts whose expression difference, the log<sub>2</sub>(fold_change), is both high and significant.
+We now want to highlight those gene transcripts whose expression difference, the log<sub>2</sub>(fold_change), has been statistically assessed as both high and significant.
 
 > ### {% icon hands_on %} Hands-on: Extract CuffDiff's significant differentially expressed genes
 >
 > 1. **Filter** {% icon tool %} with the following parameters
 >   - "Filter" to the extracted table from the previous step
 >   - "With following condition" to an appropriate filter over the target column (see questions below when in doubt)
+>   - "Number of header lines to skip" to the number of rows used for the table's header
 >
 >    > ### {% icon question %} Questions
 >    > 1. What column stores the information of significance for each record?
 >    > 2. Which conditional expression has to be set to filter all records on the selected column?
->    > 3. What happened to the records in the original table?
+>    > 3. How many rows are allocated for the table's header?
+>    > 4. How many entries were originally stored in the table? And how many after the filtering operation?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 1. column 14
 >    > > 2. c14=='yes'
->    > > 3. All records whose "significant" field was set to "yes" have been retained, while the others filtered out
+>    > > 3. 1
+>    > > 4. ~140.000 (before filtering) vs. 219 (after filtering)
 >    > {: .solution }
 >    {: .question}
 >
->  Look at your data. The differential expression values are stored on column 10, we will sort (descending) all records
->  on the basis of their value at the 10th column
+>  Review the meaning of each column, and look at your data.
+>
+>  - The differential expression values are stored on column 10
+>  - The statistical score, assessing the differential expression significance, is stored on column 13
+>  We will sort all records on the basis of their Q-score (column 13) and log<sub>2</sub>(fold_change).
 >
 > 2. **Sort** {% icon tool %}: with the following parameters
->   - "Sort Dataset" to the filtered table
->   - "on column", "with flavor" and "everything in"  to the appropriate values (see above)
+>   - "Sort Dataset" to the previously filtered table
+>   - "on column", to 13
+>   - "with flavor" to "Numerical sort"
+>   - "everything in" to "Ascending order"
+>   - Click on "Insert Column selection", and parametrize the Sort tool to sort on column 10. Be careful of the sorting order!
+>   - Are there any rows allocated for the teable's header? In that case, set "Number of header lines to skip" accordingly!
 >
 >    > ### {% icon question %} Questions
->    > 1. Since the start of our filtering process, how many records now represent the significant subset for extracting informations?
->    > 2. What does this shrinking of the number of lines represent?
->    > 3. Which gene has the highest (significant) expression difference between smple_1 and sample_2?
+>    > 1. Which gene transcript has been statistically assessed as both high and significant?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. Click on the boxes in your history, their small preview higlights the number of lines: from ~140,000 to 219
->    > > 2. This process represents a necessary step to gather insights on the biological meaning of our samples in our analyses: putting the original raw RNA-Seq result data into context, cutting down the less-meaningful records to focus on what is needed to go from data to information
->    > > 3. NDUFV1
+>    > > 1 LIMCH1
 >    > {: .solution }
 >    {: .question}
 {: .hands_on}
@@ -182,19 +188,19 @@ We now want to highlight those gene transcripts whose expression difference, the
 
 CummeRbund generates two outputs:
 - The plot, which visualizes our RNA-Seq results of interest
-- The R script that is responsible for generating the plot
+- The [ggplot](http://had.co.nz/ggplot2/) object responsible for generating the plot
 
-In this section we will parametrize CummeRbund to visualize the expression profile of those gene transcripts (isoforms) whose log<sub>2</sub>(fold_change) is both high and significant.
+In this section we will parametrize CummeRbund to create different kinds of plots from our input data.
 
 > ### {% icon hands_on %} Hands-on: Visualization
 >
 > 1. **CummeRbund** {% icon tool %} with the following parameters
 >   - Click on "Insert plot"
->   - "Width" and "Height" to `800x600`
+>   - Set its "Width" and "Height" to `800` and `600` respectively
 >   - "Plot type" to `Expression Plot`
 >   - "Expression levels to plot" to `Isoforms`
 >   - "Gene ID" to `NDUFV1`
->   - Your input form parameters should look like the following. If so, click on "Execute"
+>   - Click on "Execute"
 >
 > ![Expression plot_form](../../images/cummerbund-expression-plot-form.png)
 {: .hands_on}
@@ -211,10 +217,11 @@ Our plot has a modest number of isoforms, and is therefore easy to read. However
 >
 > 1. **CummeRbund** {% icon tool %} with the following parameters
 >   - Click on "Insert plot"
->   - "Width" and "Height" to `800x600`
+>   - Set its "Width" and "Height" to `800` and `600` respectively
 >   - "Plot type" to `Expression Bar Plot`
 >   - "Expression levels to plot" to `Isoforms`
 >   - "Gene ID" to `NDUFV1`
+>   - Click on "Execute"
 {: .hands_on}
 
 ![Expression bar plot](../../images/cummerbund-expression-bar-plot.png)
@@ -226,7 +233,28 @@ The Expression Bar Plot of gene NDUFV1's replicates NM_001166102 and NM_007103, 
 > These plots are shown also in [this](https://vimeo.com/channels/884356/128265982) Galaxy video tutorial.
 {: .comment}
 
+Let's now create a heatmap to plot the expression levels of the significant differentially expressed gene isoforms obtained from our filter and sort operations.  
+As a showcase example, let's consider only the top 5 differentially expressed genes.
 
+> ### {% icon hands_on %} Hands-on: Visualization
+>
+> 1. **CummeRbund** {% icon tool %} with the following parameters
+>   - Click on "Insert plot"
+>   - Set its "Width" and "Height" to `800` and `600` respectively
+>   - "Plot type" to `Heatmap`
+>   - "Expression levels to plot" to `Isoforms`
+>   - 1st "Gene ID" to `LIMCH1`
+>   - 2nd "Gene ID" to `IFNL2`
+>   - Click on "Insert Genes" twice
+>   - 3rd "Gene ID" to `CXCL11`
+>   - 4th "Gene ID" to `NUB1`
+>   - Set "Cluster by" as "Both"
+>   - Click on "Execute"
+{: .hands_on}
+
+![Expression bar plot](../../images/cummerbund-heatmap.png)
+
+Heatmap of significant differentially expressed isoforms of genes LIMCH1, IFNL2, CXCL11, NUB1. Differences in up- and down-regulation of certain gene isoforms across Patient 1 (hits7), Patient 2 (hits8), and Control (hits9), are visible in the lower and upper part of the heatmap.
 
 > ### {% icon comment %} Comment
 >
