@@ -12,7 +12,7 @@ objectives:
     - "Network Analysis of metatranscriptomics data using Heinz in Galaxy to pinpoint the optimal scoring subnetwork."
 time_estimation: "1H 30M"
 key_points:
-    - "Using Heinz do the network analysis based on the (meta)transcriptomics data."
+    - "Using Heinz do the network analysis based on the metatranscriptomics or transcriptomics data."
     - "Extracting the signals hidden in the p-value distribution of the differential expression analysis."
     - "Visualizing the pinpointed subnetwork helps us understand the result better"
     - "Heinz helps narrow down the scope to find the key pathways"
@@ -72,7 +72,7 @@ available from Zenodo.
 > KOs are organism-independent identifiers that group together proteins of similar biochemical functions.
 > It is a term specific to [KEGG](https://www.genome.jp/kegg/) database. It is a group concept, similar to the concept "pathway", which
 > includes a bunch of molecules and their interactions. Take a random line in our dataset, "K01369 7" as an example, the first column represents the KO ID,
-> and the second column --- the numeric value is the KO counts. If we understand it by the face value, it is 7 protein molecules that are counted from our dataset as this KO "K01369"; but we usually mingle proteins with genes because we often assume that each protein corresponds to a gene, so it is can be understood as 7 genes. Now we are working on the microbial RNAseq data, and the assumption is also used subconsciously.
+> and the second column --- the numeric value is the KO counts. If we understand it by the face value, it is 7 protein molecules that are counted from our dataset as this KO "K01369"; but we usually mingle proteins with genes because we often assume that each protein corresponds to a gene, so it can be understood as 7 genes. Now we are working on the microbial RNAseq data, and the assumption is also used subconsciously.
 >
 {: .tip}
 
@@ -308,12 +308,12 @@ the optimal subnetwork. Then we could look for the key pathways relevant to the 
 Before we continue, let's figure out what Heinz is actually doing.
 
 Heinz is an algorithm for searching an optimal subnetwork from a bigger network. You may wonder what
-the networks are here. Through the previous steps, we have got a list of identities, that is a list
+the network is here. Through the previous steps, we have got a list of identities, that is a list
 of gene IDs with p-values, which form the nodes  of 'the bigger network', the relations between the
 nodes, that is the edges, needs to be obtained from a background network, which represents a pathway
 relation databases, such as [Reactome](https://reactome.org/) and [STRING](https://string-db.org/).
 In this tutorial, we only use a small sample background network for demonstration purposes. The
-background network is represented as edges in a txt file where each line denotes an edge as follows:
+background network is represented as edges in a TXT file where each line denotes an edge as follows:
 
 ```
 ACTR1B	ACVR2B
@@ -329,7 +329,7 @@ Upload this edge file (hereafter we call it edge file) into the Galaxy instance.
 > 1. **Upload the edge file from Zenodo**
 >    - Open the upload menu
 >    - Choose **Paste/Fetch data** option
->    - Paste the url into the box:
+>    - Paste the URL into the box:
 >      ```
 >      https://zenodo.org/record/1344105/files/edge.txt
 >      ```
@@ -390,9 +390,7 @@ Similar to **Fit a BUM model**, we also need to prepare the input data for the t
 > ### {% icon comment %} What is the Heinz score?
 >
 > To figure out this score without reading the formula, we can understand Heinz score in this way. FDR is involved in calculating a p-value threshold
-> and any KO whose p-value is below this threshold is regarded as significant, which means the Heinz is positive (another calculation in the formula). If we pick a higher FDR value, then we will have a higher p-value threshold, and more KOs are probably regarded as significant. In this situation, we probably have
-> many false positive (those regarded as significant are actually not) on one hand; on the other hand, Heinz will deliver a bigger subnetwork, which might be
-> exhausting to analyze. Therefore, we need to properly pick up an FDR value.
+> and any KO whose p-value is below this threshold is regarded as significant, which means the Heinz score is positive (another calculation in the formula). If we pick a higher FDR value, then we will have a higher p-value threshold, and more KOs are probably regarded as significant. In this situation, we probably have many false positive (those regarded as significant are actually not) on the one hand; on the other hand, Heinz will deliver a bigger subnetwork, which might be exhausting to analyze. Therefore, we need to pick up an FDR value properly.
 >
 {: .comment}
 
@@ -421,7 +419,7 @@ It usually takes a few minutes to get the result, but mind you, for some tasks, 
 
 ## Visualize the output: visualize the optimal subnetwork
 
-The result we got from the last step is not very human readable, isn't it? It is a little painful to understand the Heinz result directly. Therefore we need to visualize the output by making it into graphs.
+The result we got from the last step is not very human-readable, isn't it? It is a little painful to understand the Heinz result directly. Therefore we need to visualize the output by making it into graphs.
 
 > ### {% icon hands_on %} Hands-on: visualize the optimal subnetwork
 >
