@@ -98,9 +98,16 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 
 
 > ### {% icon hands_on %} Hands-On: Stacks: De novo map
-> **Stacks: De novo map** {% icon tool %}: Run Stacks selecting the Genetic map usage. Specify each parent as a sample in the appropriate box, then each of the 20 progeny and specify a CP Cross type, 3 for the Minimum number of identical raw reads required to create a stack, 3 for minimum number of identical raw reads required to create a stack in 'progeny' individuals, 3 for the number of mismatches allowed between loci when building the catalog and activate the option "remove, or break up, highly repetitive RAD-Tags in the ustacks program".
->
->    ![De novo map input](../../images/RAD2_Genetic_Map/denovomap_in.png)
+> **Stacks: De novo map** {% icon tool %}: Run Stacks selecting the Genetic map usage.
+>  - *"Select your usage"*: `Genetic map`
+>  - *"Files containing parent sequences"*: `female` and `male`
+>  - *"Files containing progeny sequences"*: all 20 progeny files
+>  - *"Cross type"*: `CP(F1 cross)`
+>  - Click on `Assembly options`
+>    - *"Minimum number of identical raw reads required to create a stack"*: `3`
+>    - *"Minimum number of identical, raw reads required to create a stack in 'progeny' individuals"*: `3`
+>    - *"Number of mismatches allowed between loci when building the catalog"*: `3`
+>    - *"Remove, or break up, highly repetitive RAD-Tags in the ustacks program"*: `Yes`
 >
 >    Once Stacks has completed running, you will see 5 new data collections and 8 datasets.
 >
