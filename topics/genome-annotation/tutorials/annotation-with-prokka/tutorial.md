@@ -67,15 +67,13 @@ Now we will run the tool called Prokka.
 > ### {% icon hands_on %} Hands-on: Annotate genome
 >
 > 1. **Prokka** {% icon tool %} with the following parameters (leave everything else unchanged)
->    - contigs to annotate: `contigs.fasta`
->    - Locus tag prefix (--locustag): P
->    - Force GenBank/ENA/DDJB compliance (--compliant): No
->    - Sequencing Centre ID (--centre): V
->    - Genus Name: Staphylococcus
->    - Species Name: aureus
->    - Use genus-specific BLAST database: No
->    - Your tool interface should look like this:
->    - ![prokka interface](images/interface.png)
+>    - {% icon param-file %} *"contigs to annotate"*: `contigs.fasta`
+>    - *"Locus tag prefix (--locustag)"*: `P`
+>    - *"Force GenBank/ENA/DDJB compliance (--compliant)"*: `No`
+>    - *"Sequencing Centre ID (--centre)"*: `V`
+>    - *"Genus Name"*: `Staphylococcus`
+>    - *"Species Name"*: `aureus`
+>    - *"Use genus-specific BLAST database"*: `No`
 >    - Click Execute
 > <br><br>
 {: .hands_on}
@@ -98,34 +96,37 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 > ### {% icon hands_on %} Hands-on: Visualize the annotation
 >
 > 1. Search for **JBrowse** {% icon tool %} and run it with the following parameters
->    - "Reference genome to display" to `Use a genome from history`
->    - "Select the reference genome" to `Prokka on data XX.fna`.
+>    - *"Reference genome to display"*: `Use a genome from history`
+>    - *"Select the reference genome"*: `Prokka on data XX.fna`.
 >
 >       This sequence will be the reference against which annotations are displayed
 >
->    - "Produce Standalone Instance" to `Yes`
->    - "Genetic Code" to `11: The Bacterial, Archaeal and Plant Plastid Code`
->    - "JBrowse-in-Galaxy Action" to `New JBrowse Instance`
->    - "Track Group"
+>    - *"Produce Standalone Instance"*: `Yes`
+>    - *"Genetic Code"*: `11: The Bacterial, Archaeal and Plant Plastid Code`
+>    - *"JBrowse-in-Galaxy Action"*: `New JBrowse Instance`
+>    - Click on `Insert Track Group`
 >    - We will now set up one track - each track is a dataset displayed underneath the reference sequence (which is displayed as nucleotides in FASTA format).
->    - We will choose to display the annotations (the Prokka.gff file).
+>      We will choose to display the annotations (the Prokka.gff file).
 >
 >       - **Track 1 - sequence reads**: Click on `Insert Track Group` and fill it with
->           - "Track Cateogry" to `gene annotations`
->           - Click on `Insert Annotation Track` and fill it with
->               - "Track Type" to `GFF/GFF3/BED/GBK Features`
->               - "GFF/GFF3/BED Track Data" to `Prokka on data XX:gff`
->               - "Track Visibility" to `On for new users`
->               - "JBrowse Track Type [Advanced]" to `Canvas Features`
+>           - *"Track Cateogry"*: `gene annotations`
+>           - Click on `Insert Annotation Track` and fill it with:
+>               - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
+>               - *"GFF/GFF3/BED Track Data"*: `Prokka on data XX:gff`
+>               - *"Track Visibility"*: `On for new users`
+>               - *"JBrowse Track Type [Advanced]"*: `Canvas Features`
 >               - Click on "JBrowse Styling Options [Advanced]"
->               - "JBrowse style.label" to `product,name,id`
->               - "Track Visibility" to `On for new users`
+>               - *"JBrowse style.label"*: `product,name,id`
+>               - *"Track Visibility"*: `On for new users`
 >               - Click Execute
->
-> A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view its contents and play with it
-> 2. Inspect the `JBrowse on data XX and data XX - Complete` file by clicking on the {% icon galaxy-eye %} (eye) icon
->
->    The JBrowse window will appear in the centre Galaxy panel.
+{: .hands_on}
+
+A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view its contents and play with it
+2. Inspect the `JBrowse on data XX and data XX - Complete` file by clicking on the {% icon galaxy-eye %} (eye) icon
+
+   The JBrowse window will appear in the centre Galaxy panel.
+
+> ### {% icon hands_on %} Hands-on: JBrowse
 >
 > 3. Display all the tracks and practice maneuvering around
 >    1. Click on the tick boxes on the left to display the tracks
