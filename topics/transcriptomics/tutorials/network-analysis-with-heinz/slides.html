@@ -282,4 +282,79 @@ It is immediately clear that the data contains many overexpressed genes, and it 
 
 ---
 
-#
+# Step 1: Construct a global network
+
+![constructing a global network](../../images/heinz/globalnetwork.png)
+
+???
+
+The first step is to construct the global KO network, in the pratical this global network is already provided. As are the processed RNAseq values per KO.
+
+---
+
+# Step 2: Annotate the network with weights
+
+![network with weights](../../images/heinz/network_heinz.png)
+
+???
+
+Next we need to convert the p-values provided by deseq for under and over- expression into weights. Where a positive weight means the KO is significantly deregulated.
+
+---
+
+# Step 3: Calculate the maximum-scoring connected subnetwork
+
+.pull-left[
+
+- Problem: given network with weights find the maximum-scoring subnetwork
+
+- NP-hard problem.
+
+- Solutions are feasible in biological networks.
+
+- An exact solver exists: Heinz [Dittrich et al., 2008].
+
+
+]
+
+.pull-right[
+
+![maximum scoring subnetwork](../../images/heinz/network_heinz2.png)
+]
+
+???
+
+Subsequently, the Heinz algorithm can find the subnetwork that is most deregulated.
+
+---
+
+# Differential Expression Analysis
+
+![differential expression analysis plot](../../images/heinz/dea.png)
+
+Each dot's (function's) change in expression has a P-value associated with it
+
+---
+
+# P-value distribution when the null hypothesis is true
+
+![distribution of p-values](../../images/heinz/histogram.png)
+
+???
+First, we need to convert the p-values to weight. Here we think about a p-value distribution on a set that has no signal. In this case we expect a uniform distribution of p-values between 0 and 1. Note that if you generate many p-values for a data set, it is always helpful to check the distribution to see if there is any signal in the data.
+
+
+---
+
+# P-value distribution: signal vs noise
+
+![Beta uniform mixture (BUM) model](../../images/heinz/bum.png "P-value histogram of 7105 KO fold changes")
+
+Noise (blue) and signal (red) in an expected P-value distribution
+Beta-uniform mixture model (mixing a beta and a uniform distribution )
+
+
+???
+If there is a significant part of the data deregulated, we expect a peak on the left hand side of the distribution, i.e. an abundance of very low p-value as compared to the uniform distribution. This figure is very helpful, as we can estimate the number of true positives in the data: the part of the peak that rises above the uniform distribution.
+
+
