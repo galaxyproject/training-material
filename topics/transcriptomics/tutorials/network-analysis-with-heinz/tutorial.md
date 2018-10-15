@@ -418,7 +418,7 @@ It usually takes a few minutes to get the result, but mind you, for some tasks, 
 
 ## Visualize the output: visualize the optimal subnetwork
 
-The result we got from the last step is not very human-readable, isn't it? It is a little painful to understand the Heinz result directly. Therefore we need to visualize the output by making it into graphs.
+The result we got from the last step is not very human-readable, is it? It is a little painful to understand the Heinz result directly. Therefore we need to visualize the output by making it into graphs.
 
 > ### {% icon hands_on %} Hands-on: visualize the optimal subnetwork
 >
@@ -457,7 +457,7 @@ Let's assume that these are the operations we always need for different datasets
 ![Heinz workflow](../../images/heinz-workflow.png)
 
 > ### {% icon hands_on %} Hands-on: Extract workflows
-> 
+>
 > 1. Delete the unwanted History items to avoid them appearing in the workflow later.
 > 2. Click on the **History options** at top right of your history.
 > 3. Select **Extract workflow**
