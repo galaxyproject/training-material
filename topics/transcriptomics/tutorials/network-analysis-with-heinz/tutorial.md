@@ -454,17 +454,18 @@ If you are interested, you may try to make sense of the result yourself. To answ
 
 Let's assume that these are the operations we always need for different datasets, to make life easier, we can save all of these operations into a workflow in Galaxy, which you can reuse for different datasets next time.
 
-![Heinz workflow](../../images/heinz-workflow.png)
-
-> ### {% icon hands_on %} Hands-on: Extract workflows
+> ### {% icon hands_on %} Hands-on: Extract the Heinz workflow
 >
-> 1. Delete the unwanted History items to avoid them appearing in the workflow later.
-> 2. Click on the **History options** at top right of your history.
-> 3. Select **Extract workflow**
-> 4. Check, give a name and create workflow.
+> 1. Extract the workflow from your history
+>
+>    {% include snippets/extract_workflow.md %}
+>
+> 2. Run the workflow on the dataset in this tutorial
 >
 {: .hands_on}
 
-As a self practice, run the newly created workflow with the dataset in this tutorial. Do you feel the convenience of running a workflow directly?
+![Heinz workflow](../../images/heinz-workflow.png)
+
+As a self practice, you ran the newly created workflow with the dataset in this tutorial. Do you feel the convenience of running a workflow directly?
 
 Congrats! You have finished all the tools in Heinz workflow! You have successfully run each tool and understood how it works. In real research, running these tools are only part of the effort, we still need to invest a huge amount of intelligence in making sense of the results and converting them to knowledge, which is fraught with uncertainties and confounders, where perhaps luck will come into play. So good luck!
