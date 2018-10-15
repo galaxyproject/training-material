@@ -83,13 +83,13 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 > ### {% icon hands_on %} Hands-on: Demultiplexing reads
 >
 > 1. **Process Radtags** {% icon tool %}: Run `Stacks: process radtags` on FastQ file to demultiplex the reads
->  - Single-end or paired-end reads files: Single-end files
->  - singles-end reads infile(s): SRR034310.fastq(.gz)
->  - Barcode file: Barcodes_SRR034310.tabular
->  - Number of enzymes: One
->  - Enzyme: sbfI
->  - Capture discarded reads to a file: Yes
->  - Output format: fastq
+>  - *"Single-end or paired-end reads files"*: `Single-end files`
+>  - {% icon param-file %} *"singles-end reads infile(s)"*: `SRR034310.fastq(.gz)`
+>  - {% icon param-file %} *"Barcode file"*: `Barcodes_SRR034310.tabular`
+>  - *"Number of enzymes"*: `One`
+>  - *"Enzyme"*: `sbfI`
+>  - *"Capture discarded reads to a file"*: `Yes`
+>  - *"Output format"*: `fastq`
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -112,7 +112,11 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >
 > 2. **Process Radtags** {% icon tool %}: Re-Run `Stacks: process radtags` on FastQ file playing with parameters
 >
-> In `advanced options`, after activation of the `Discard reads with low quality scores` option, play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
+>  - Click on `advanced options`
+>    - *"Discard reads with low quality scores"*: `Yes`
+>    - *"Set the score limit. If the average score within the sliding window drops below this value, the read is discarded (default 10)"*: `20`
+>
+> Play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
 >
 {: .hands_on}
 
@@ -177,9 +181,14 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 
 
 > ### {% icon hands_on %} Hands-on: Stacks: De novo map
-> **Stacks: De novo map** {% icon tool %}: Run **Stacks** selecting the population usage. Specify each individual as a sample, a population map and a minimum depth of coverage of 3.
->
->    ![Stacks: De novo map parameters](../../images/RAD4_Population_Genomics/denovo/denovo_in.png)
+> **Stacks: De novo map** {% icon tool %}: Run **Stacks** selecting the population usage.
+>  - *"Select your usage"*: `population`
+>  - {% icon param-file %} *"Files containing an individual sample from a population"*: `Demultiplexed reads`
+>  - {% icon param-file %} *"Specify a population map"*: `population_map`
+>  - Click on `Assembly options`
+>    - *"Minimum number of identical raw reads required to create a stack"*: `3`
+>    - *"Number of mismatches allowed between loci when building the catalog"*: `3`
+>    - *"Remove, or break up, highly repetitive RAD-Tags in the ustacks program"*: `Yes`
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -196,7 +205,12 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 
 > ### {% icon hands_on %} Hands-on: Calculate population genomics statistics
 >
-> **Stacks: populations** {% icon tool %}: Run the last step of **Stacks: De novo map** pipeline specifying data filtering options (minimum percentage of individuals in a population required to process a locus for that population: 0.75 , output options (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
+> **Stacks: populations** {% icon tool %}: Run the last step of **Stacks: De novo map** pipeline specifying data filtering options.
+>  - *"Minimum percentage of individuals in a population required to process a locus for that population"*: `0.75`
+>  - *"Output results in Variant Call Format (VCF)"*: `Yes`
+>  - *"Output haplotypes in Variant Call Format (VCF)."*: `Yes`
+>  - *"Output results in Structure Format"*: `Yes`
+>  - *"Enable SNP and haplotype-based F statistics"*: `Yes`
 >
 >    ![The output of the populations tool](../../images/RAD4_Population_Genomics/denovo/populations_log.png)
 >
