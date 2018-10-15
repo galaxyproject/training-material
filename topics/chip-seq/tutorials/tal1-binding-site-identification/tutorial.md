@@ -206,7 +206,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 >    > >    2 | Reference sequence length
 >    > >    3 | Number of mapped reads
 >    > >    4 | Number of placed but unmapped reads (typically unmapped partners of mapped reads)
->    > >   
+>    > > 
 >    > > 2. This information can be seen in column 3, e.g. for Megakaryocyte_Tal1_R1 2143352 reads are mapped.
 >    > > 3. These are parts of chromosomes that e.g. for chr1_GL456210_random do belong to chr1 but it is unclear where exactly. There entires like chrUn that are not associated with a chromosome but it is believed that they are part of the genome. 
 >    > {: .solution }
@@ -304,11 +304,12 @@ More information about **MACS2** can be found [here](https://genomebiology.biome
 > ### {% icon hands_on %} Hands-on: Determining TAL1 binding sites
 >
 > 1. **MACS2 callpeak** {% icon tool %}: Run the tool **MACS2 callpeak** with the aligned read files from the previous step as Treatment (TAL1) and Control (input).
->
->    - Select replicate **ChIP-Seq Treatment Files** for one cell type
->    - Select replicate **ChIP-Seq Control Files** for the same cell type
->
->    ![macs2](../../images/MACS2_tool_form.png "Select the appropriate control and treatment files.")
+>    - {% icon param-files %} *"ChIP-Seq Treatment File"*: Select replicate ChIP-Seq Treatment Files for one cell type
+>    - *"Do you have a Control File?"*: to 'Yes'
+>       - {% icon param-files %} *"ChIP-Seq Control File"*: Select replicate ChIP-Seq Control Files for one cell type
+>    - *"Format of Input Files"*: `Paired-end BAM`
+>    - *"Effective genome size"*: `M.musculus`
+>    - *"Additional Outputs"*: Select `Peaks as tabular file (compatible wih MultiQC)`, `Peak summits`, `Scores in bedGraph files (--bdg)`
 >
 > 2. Rename your files after **MACS2 callpeak** finishes to reflect the origin and contents.
 {: .hands_on}
