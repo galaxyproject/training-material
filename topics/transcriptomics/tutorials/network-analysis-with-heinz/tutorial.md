@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Pinpoint key pathways using Heinz"
+title: "Network analysis with Heinz"
 zenodo_link: "https://doi.org/10.5281/zenodo.1344105"
 tags:
   - metatranscriptomics
@@ -19,7 +19,6 @@ key_points:
     - "Multiple CPUs will accelerate the computation especially for the complex datasets"
 contributors:
     - cicozhang
-    - sanneabeln
 ---
 
 # Overview
@@ -453,10 +452,19 @@ If you are interested, you may try to make sense of the result yourself. To answ
 
 # Save the history into a workflow
 
-At the end of the tutorial, as a self-practice, you may save all of your correct operations into a workflow in Galaxy,
-which you can reuse for different datasets next time.
+Let's assume that these are the operations we always need for different datasets, to make life easier, we can save all of these operations into a workflow in Galaxy, which you can reuse for different datasets next time.
 
 ![Heinz workflow](../../images/heinz-workflow.png)
 
+> ### {% icon hands_on %} Hands-on: Extract workflows
+> 
+> 1. Delete the unwanted History items to avoid them appearing in the workflow later.
+> 2. Click on the **History options** at top right of your history.
+> 3. Select **Extract workflow**
+> 4. Check, give a name and create workflow.
+>
+{: .hands_on}
+
+As a self practice, run the newly created workflow with the dataset in this tutorial. Do you feel the convenience of running a workflow directly?
 
 Congrats! You have finished all the tools in Heinz workflow! You have successfully run each tool and understood how it works. In real research, running these tools are only part of the effort, we still need to invest a huge amount of intelligence in making sense of the results and converting them to knowledge, which is fraught with uncertainties and confounders, where perhaps luck will come into play. So good luck!
