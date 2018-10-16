@@ -70,7 +70,7 @@ Once Jekyll and its modules are installed in our conda environment, we can check
 > 2. Visualize at [http://localhost:4000/training-material/ ](http://localhost:4000/training-material/)
 > 3. Edit one of the tutorials:
 >    - For example, open `topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.md` in a text editor of your choice.
->    - Make some changes to the *Introdution* paragraph, and save the file.
+>    - Make some changes to the *Introduction* paragraph, and save the file.
 >    - Refresh the tutorial page in your browser until you can see the changes you made.
 >        - this may take a little bit of time; in the terminal you can monitor when the regeneration is complete
 >
