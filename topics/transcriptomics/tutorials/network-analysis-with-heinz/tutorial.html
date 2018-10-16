@@ -18,7 +18,7 @@
         
         
         <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
-        <meta property="og:title" content="Galaxy Training: Pinpoint key pathways using Heinz" />
+        <meta property="og:title" content="Galaxy Training: Network analysis with Heinz" />
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
@@ -114,7 +114,7 @@
 {
   "@context": "http://schema.org",
   "@type": "CreativeWork",
-  "name": "Pinpoint key pathways using Heinz",
+  "name": "Network analysis with Heinz",
   "accessModeSufficient": "visual",
   "accessibilityControl": "fullMouseControl",
   "accessibilityFeature": [
@@ -139,7 +139,7 @@
     {
       "@type": "Thing",
       "url": "https://doi.org/10.5281/zenodo.1344105",
-      "name": "Training data for Pinpoint key pathways using Heinz tutorial"
+      "name": "Training data for Network analysis with Heinz tutorial"
     }
   ],
   "timeRequired": "PT1H30M",
@@ -147,10 +147,6 @@
     {
       "@type": "Person",
       "name": "cicozhang"
-    },
-    {
-      "@type": "Person",
-      "name": "sanneabeln"
     }
   ],
   "keywords": "metatranscriptomics, network analysis",
@@ -159,7 +155,7 @@
 
     </script>
     <section class="tutorial">
-        <h1>Pinpoint key pathways using Heinz</h1>
+        <h1>Network analysis with Heinz</h1>
 
         <blockquote class="overview">
             <h3>Overview</h3>
@@ -277,7 +273,7 @@ available from Zenodo.</p>
   <p>KOs are organism-independent identifiers that group together proteins of similar biochemical functions.
 It is a term specific to <a href="https://www.genome.jp/kegg/">KEGG</a> database. It is a group concept, similar to the concept “pathway”, which
 includes a bunch of molecules and their interactions. Take a random line in our dataset, “K01369 7” as an example, the first column represents the KO ID,
-and the second column — the numeric value is the KO counts. If we understand it by the face value, it is 7 protein molecules that are counted from our dataset as this KO “K01369”; but we usually mingle proteins with genes because we often assume that each protein corresponds to a gene, so it is can be understood as 7 genes. Now we are working on the microbial RNAseq data, and the assumption is also used subconsciously.</p>
+and the second column — the numeric value is the KO counts. If we understand it by the face value, it is 7 protein molecules that are counted from our dataset as this KO “K01369”; but we usually mingle proteins with genes because we often assume that each protein corresponds to a gene, so it can be understood as 7 genes. Now we are working on the microbial RNAseq data, and the assumption is also used subconsciously.</p>
 
 </blockquote>
 
@@ -567,12 +563,12 @@ the optimal subnetwork. Then we could look for the key pathways relevant to the 
 Before we continue, let’s figure out what Heinz is actually doing.</p>
 
 <p>Heinz is an algorithm for searching an optimal subnetwork from a bigger network. You may wonder what
-the networks are here. Through the previous steps, we have got a list of identities, that is a list
+the network is here. Through the previous steps, we have got a list of identities, that is a list
 of gene IDs with p-values, which form the nodes  of ‘the bigger network’, the relations between the
 nodes, that is the edges, needs to be obtained from a background network, which represents a pathway
 relation databases, such as <a href="https://reactome.org/">Reactome</a> and <a href="https://string-db.org/">STRING</a>.
 In this tutorial, we only use a small sample background network for demonstration purposes. The
-background network is represented as edges in a txt file where each line denotes an edge as follows:</p>
+background network is represented as edges in a TXT file where each line denotes an edge as follows:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ACTR1B	ACVR2B
 ZSWIM9	FOXP3
@@ -590,7 +586,7 @@ NPTX1	CIAO1
       <ul>
         <li>Open the upload menu</li>
         <li>Choose <strong>Paste/Fetch data</strong> option</li>
-        <li>Paste the url into the box:
+        <li>Paste the URL into the box:
           <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1344105/files/edge.txt
 </code></pre></div>          </div>
         </li>
@@ -667,9 +663,7 @@ It should contain two columns delimited by tab, one is KO ID; the other, p-value
   <h3 id="comment-what-is-the-heinz-score"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> What is the Heinz score?</h3>
 
   <p>To figure out this score without reading the formula, we can understand Heinz score in this way. FDR is involved in calculating a p-value threshold
-and any KO whose p-value is below this threshold is regarded as significant, which means the Heinz is positive (another calculation in the formula). If we pick a higher FDR value, then we will have a higher p-value threshold, and more KOs are probably regarded as significant. In this situation, we probably have
-many false positive (those regarded as significant are actually not) on one hand; on the other hand, Heinz will deliver a bigger subnetwork, which might be
-exhausting to analyze. Therefore, we need to properly pick up an FDR value.</p>
+and any KO whose p-value is below this threshold is regarded as significant, which means the Heinz score is positive (another calculation in the formula). If we pick a higher FDR value, then we will have a higher p-value threshold, and more KOs are probably regarded as significant. In this situation, we probably have many false positive (those regarded as significant are actually not) on the one hand; on the other hand, Heinz will deliver a bigger subnetwork, which might be exhausting to analyze. Therefore, we need to pick up an FDR value properly.</p>
 
 </blockquote>
 
@@ -706,7 +700,7 @@ but, to use that, you can install Heinz directly via <a href="https://anaconda.o
 
 <h2 id="visualize-the-output-visualize-the-optimal-subnetwork">Visualize the output: visualize the optimal subnetwork</h2>
 
-<p>The result we got from the last step is not very human readable, isn’t it? It is a little painful to understand the Heinz result directly. Therefore we need to visualize the output by making it into graphs.</p>
+<p>The result we got from the last step is not very human-readable, is it? It is a little painful to understand the Heinz result directly. Therefore we need to visualize the output by making it into graphs.</p>
 
 <blockquote class="hands_on">
   <h3 id="hands_on-hands-on-visualize-the-optimal-subnetwork"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: visualize the optimal subnetwork</h3>
@@ -746,10 +740,38 @@ but, to use that, you can install Heinz directly via <a href="https://anaconda.o
 
 <h1 id="save-the-history-into-a-workflow">Save the history into a workflow</h1>
 
-<p>At the end of the tutorial, as a self-practice, you may save all of your correct operations into a workflow in Galaxy,
-which you can reuse for different datasets next time.</p>
+<p>Let’s assume that these are the operations we always need for different datasets, to make life easier, we can save all of these operations into a workflow in Galaxy, which you can reuse for different datasets next time.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-extract-the-heinz-workflow"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract the Heinz workflow</h3>
+
+  <ol>
+    <li>
+      <p>Extract the workflow from your history</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-extracting-a-workflow-from-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Extracting a workflow from history</h3>
+
+        <ol>
+          <li>Remove any failed or unwanted jobs from your history.</li>
+          <li>Click on <strong>History options</strong> (gear icon <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span>) at the top of your history panel.</li>
+          <li>Select <strong>Extract workflow</strong></li>
+          <li>Check the steps, enter a name for your workflow, and press the <strong>Create Workflow</strong> button.</li>
+        </ol>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>Run the workflow on the dataset in this tutorial</p>
+    </li>
+  </ol>
+
+</blockquote>
 
 <p><img src="../../images/heinz-workflow.png" alt="Heinz workflow" /></p>
+
+<p>As a self practice, you ran the newly created workflow with the dataset in this tutorial. Do you feel the convenience of running a workflow directly?</p>
 
 <p>Congrats! You have finished all the tools in Heinz workflow! You have successfully run each tool and understood how it works. In real research, running these tools are only part of the effort, we still need to invest a huge amount of intelligence in making sense of the results and converting them to knowledge, which is fraught with uncertainties and confounders, where perhaps luck will come into play. So good luck!</p>
 
@@ -760,7 +782,7 @@ which you can reuse for different datasets next time.</p>
 
             <ul>
                 
-                <li>Using Heinz do the network analysis based on the (meta)transcriptomics data.</li>
+                <li>Using Heinz do the network analysis based on the metatranscriptomics or transcriptomics data.</li>
                 
                 <li>Extracting the signals hidden in the p-value distribution of the differential expression analysis.</li>
                 
@@ -785,12 +807,12 @@ which you can reuse for different datasets next time.</p>
         <hr>
         <br>
 
-        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Pinpoint key pathways using Heinz (Transcriptomics)">Loading...
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Network analysis with Heinz (Transcriptomics)">Loading...
         </iframe>
 
         <blockquote class="feedback">
             <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
-            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Pinpoint key pathways using Heinz (Transcriptomics)">Feedback Form</a>.</p>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Network analysis with Heinz (Transcriptomics)">Feedback Form</a>.</p>
         </blockquote>
     </section>
 </div>
@@ -801,7 +823,7 @@ which you can reuse for different datasets next time.</p>
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Chao (Cico) Zhang, Sanne Abeln)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Chao (Cico) Zhang)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
