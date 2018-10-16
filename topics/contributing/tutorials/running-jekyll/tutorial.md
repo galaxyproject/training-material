@@ -43,6 +43,7 @@ This step has to be done once.
 > ### {% icon hands_on %} Hands-on: Install the requirements
 >
 > 1. Open a Terminal
+> 2. (If not done yet) Clone the training material GitHub repository: `git clone https://github.com/galaxyproject/training-material.git`
 > 2. Navigate to the `training-material/` folder with `cd`
 > 3. Set up the conda environment
 >
@@ -65,9 +66,13 @@ Once Jekyll and its modules are installed in our conda environment, we can check
 
 > ### {% icon hands_on %} Hands-on: Checking the website generation locally
 >
-> 1. (If not done) Activate the conda environment: `source activate galaxy_training_material`
 > 1. Run a local Jekyll server with `make serve`
 > 2. Visualize at [http://localhost:4000/training-material/ ](http://localhost:4000/training-material/)
+> 3. Edit one of the tutorials:
+>    - For example, open `topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.md` in a text editor of your choice.
+>    - Make some changes to the *Introdution* paragraph, and save the file.
+>    - Refresh the tutorial page in your browser until you can see the changes you made.
+>        - this may take a little bit of time; in the terminal you can monitor when the regeneration is complete
 >
 {: .hands_on}
 
