@@ -85,8 +85,8 @@ Once you are done, you can stop the server and cleaning your repository.
 > ### {% icon hands_on %} Hands-on: Stoping the server
 >
 > 1. Stop the server with <kbd>CTRL</kbd>-<kbd>C</kbd>
-> 2. Deactivate your conda environment with `source deactivate`
-> 3. Clean the repository: `make clean`
+> 2. Clean the repository: `make clean`
+>
 {: .hands_on}
 
 # Conclusion
