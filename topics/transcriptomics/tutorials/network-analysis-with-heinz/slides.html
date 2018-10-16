@@ -7,20 +7,21 @@ questions:
   - "What is metatranscriptomics"
   - "Which pathways are potentially contributing to dental caries?"
 objectives:
-  - "Understanding metatranscriptomics"
+  - "Learn some background knowledge about microbiome"
+  - "Understand metatranscriptomics"
   - "Familiarize yourself with KEGG terminology"
-  - "Understand home pathway analysis works"
+  - "Understand how network(pathway) analysis works"
 key_points:
   - "Analyzing differential expression for (meta)transcriptomics data"
   - "Validating the p-value distribution of the differential expression analysis"
-  - "Finding the most differentially expressed network in a gene functional network using Heinz"
-  - "Analyzing the pinpointed network"
+  - "Finding the most differentially expressed subnetwork in a gene functional network using Heinz"
+  - "Interpreting the pinpointed subnetwork"
 contributors:
-  - cicozhang
   - sanneabeln
+  - cicozhang
 ---
 
-# Metagenomics / metaproteomics
+# Metagenomics / metatranscriptomics
 
 - Sequence all DNA/RNA in a sample from a specific microbial environment
 - Get an overview of the entire microbial community
@@ -50,7 +51,7 @@ Metatranscriptomics can also reveal the functional state of the microbiome, sugg
 .footnote[[Sender et al 2016, PLoS ONE](https://doi.org/10.1371/journal.pbio.1002533)]
 
 ???
-The most common objective is to ide
+
 [*] this figure is difficult to estimate, as we need to consider when two orthologous genes can be considered different. A rough estimate would be 500~10000 species of bacteria with a median of 2000 genes.
 
 ---
@@ -94,7 +95,7 @@ The most common objective is to ide
 ![petri dish with bacterial cultures](../../images/heinz/petridish.png)
 
 - Such bacteria may not be found in current reference databases
-- The only way to get hold of each species may be through direct sequencing of environmental samples
+- The only way to obtain each species may be through direct sequencing of environmental samples
 - Purpose: find novel species, genomes, and genes
 
 
@@ -124,6 +125,13 @@ The most common objective is to ide
 ]
 ???
 For the workflow considered here we assume RNAseq of the microbiome.
+
+Puzzle analogy: think of each organism as a jigsaw puzzle
+
+- shotgun: we considers all pieces (DNA) from all puzzles (organisms); we throw the pieces in a big pile, and need to reconstruct each individual puzzle from this. It is more complex, but you get full details (functional information) about the picture on each puzzle.
+
+- amplicon: we only look at the corner pieces, these are easy to spot, and all puzzles have them. It will not tell us all the details (e.g. functional information) of the picture on the puzzle, but might be enough to tell us whether it is a landscape or a portrait or abstract art for instance (taxonomy).
+
 
 ---
 
@@ -345,7 +353,7 @@ Subsequently, the Heinz algorithm can find the subnetwork that is most deregulat
 
 ![differential expression analysis plot](../../images/heinz/dea.png)
 
-Each dot's (function's) change in expression has a P-value associated with it
+Each dot's (function's) change in expression corresponds to a P-value
 
 ---
 
@@ -397,7 +405,7 @@ From the true positives, false positives and false negatives we can calculate th
 - In this dataset, an **FDR=0.0007 corresponded to τ = 10^5**
 
 ???
-From this we can calculate the FDR, and we can use an FDR  threshold to determine which p-value should correspond the a zero weight.
+From this we can calculate the FDR, and we can use an FDR threshold to determine which p-value should correspond the a zero weight.
 
 ---
 
@@ -511,3 +519,10 @@ Also some potentially interesting novel pathways have been found.
 ???
 Lastly, it is possible to check how significant the deregulated subnetwork itself is. This goes beyond the scope of the practical work.
 
+---
+
+# Practical
+
+- Work on caries data set for a network analysis
+- Get a feel of running each tool, mentally map the parameters/options back to the method mentioned in this presentation.
+- Save all the steps into a workflow and rerun it.
