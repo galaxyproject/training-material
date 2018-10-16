@@ -10,112 +10,28 @@ Often times, phage genomes contain overlapping gene features (E.G.: tape measure
 
 > ### Agenda
 >
-> * Background: Tape Measure Protein Chaperones and Frameshifting
+> * Background: Tape Measure Protein Chaperones and Frameshifts
 > 
 >
 {: .agenda}
 
 # Background: Tape Measure Protein Chaperones and Frameshifts
 
-Siphoviridae and Myoviridae are the two known families within the order Caudovirales that are double-stranded DNA bacteriophages with TMPs being a featured part of their structure and genome; Podoviridae is a family within Caudovirales as well, but they **do not** have TMPs. Within the unique tail structure of siphophages and myophages lies the tape measure protein
+Siphoviridae and Myoviridae are the two known families within the order Caudovirales that are double-stranded DNA bacteriophages with TMPs being a featured part of their structure and genome; Podoviridae is a family within Caudovirales as well, but they **do not** have TMPs. Within the unique tail structure of siphophages and myophages lies the tape measure protein - a long, unfolded protein that determines the length of the phage tail. Upon page adsorption to the host cell, the TMP is injected out of the phage and into the cell; it creates a hole in the host cell membrane and allows the phage genome information to enter.
 
-## Subpart 1
+As part of phage progeny assembly within host cells, the TMP must refrain from folding in order to be properly packaged within the tail during this assembly process. TMP chaperones bind to majority of the unfolded TMP in order to prevent it from folding until the receptor-binding protein and tail cone have been separately assembled for attachment to the C-terminus of the TMP, and tail tube subunit protein has accumulated to begin coating the unfolded TMP in place of the chaperones. To offer an example, the image below details the assembly process of lambda page’s tail.
 
-Short introduction about this subpart.
+![](../../images/annotating-tmp-chaperone-frameshifts-screenshots/1_lambda_tail_assembly.png)
 
-<!--
-{% icon hands_on %} will render the hands_on icon as specified in
-_config.yml in the root of this repository.
--->
+Lambda’s TMP is gpH, with the TMP chaperones being gpG and gpGT. It is shown that gpG and gpGT bind to the unfolded TMP in order to prevent it from folding until other tail proteins have been translated/assembled in such a quantity that the tail is ready to be fully assembled. As the tail protein gpV is added, gpG and gpGT leave. Given what is known at the moment, in the polyprotein GT is the only time that the T subunit is seen throughout the lambda lifecycle. This is because of a *programmed translational frameshift* found in the overlapping regions between the two TMP chaperone genes within the genome.
 
-> ### {% icon hands_on %} Hands-on: Data upload
->
-> 1. Step1
-> 2. Step2
->
->    > ### {% icon comment %} Comments
->    > A comment
->    {: .comment}
->
->    > ### {% icon tip %}Tip: A tip
->    >
->    > * Step1
->    > * Step2
->    {: .tip}
-{: .hands_on}
+![](../../images/annotating-tmp-chaperone-frameshifts-screenshots/2_programmed_translational_frameshift.png)
 
-## Subpart 2
+In the above image, the section of lambda’s genome containing the code for the TMP, H ,and TMP chaperones, G and GT, is shown. Bolded in the magnified triplet codons is a **slippery sequence**; this is characteristic of many TMP chaperones, and appears to be a conserved feature in many (*but not all*) tailed bacteriophages. A **slippery sequence** allows a ribosome to shift into a different reading frame at a low frequency; in most cases, the ribosome ‘slips’ backward a single nucleotide before continuing to translate the sequence. These slippery sequences tend to follow the canonical motif of **XXXYYYZ**. Below is an image describing the known slippery sequences of other phages.
 
-Short introduction about this subpart.
+![](../../images/annotating-tmp-chaperone-frameshifts-screenshots/3_canonical_phage_slippery_sequences.png)
 
-> ### {% icon hands_on %} Hands-on: Data upload
->
-> 1. Step1
-> 2. Step2
->
->    > ### {% icon question %} Question
->    >
->    > Question?
->    >
->    >    > ### {% icon solution %} Solution
->    >    >
->    >    > Answer to question
->    >    >
->    >    {: .solution}
->    >
->    {: .question}
-{: .hands_on}
-
-Some blabla
-> ### {% icon hands_on %} Hands-on: Data upload
->
-> 1. Step1
-> 2. **My Tool** {% icon tool %} with the following parameters
->   - *"param1"*: the file `myfile`
->   - *"param2"*: `42`
->   - *"param3"*: `Yes`
->
-> 3. **My Tool** {% icon tool %} with the following parameters
->   - {% icon param-text %} *"My text parameter"*: `my value`
->   - {% icon param-file %} *"My input file"*: `my file`
->   - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
->   - {% icon param-select %} *"My select menu"*: `my choice`
->   - {% icon param-check %} *"My check box"*: `yes`
->
->    > ### {% icon question %} Questions
->    >
->    > 1. Question1?
->    > 2. Question2?
->    >
->    >    > ### {% icon solution %} Solution
->    >    >
->    >    > 1. Answer for question1
->    >    > 2. Answer for question2
->    >    >
->    >    {: .solution}
->    >
->    {: .question}
->
-> 3. Step3
-{: .hands_on}
-
-# Part 2
-
-Short introduction about this subpart.
-
-> ### {% icon comment %} Comment
->
-> Do you want to learn more about the principles behind mapping? Follow our [training](../../NGS-mapping)
+> ### {% icon comment %} A Relevant Reading
+> This image above was pulled from this paper: [Xu J, Hendrix RW, Duda RL. 2004. Conserved translational frameshift in dsDNA bacteriophage tail assembly genes. Mol Cell 16:11–21.](https://www.sciencedirect.com/science/article/pii/S1097276504005398?via%3Dihub) This article contains greater detail about these programmed translational frameshifts, as well as offers examples of frameshifts that are slightly different than the -1 programmed translational frameshifts that are being heavily described in this tutorial.
 {: .comment}
 
-
-> ### {% icon details %} More details on the ....
->
-> Add more details in Markdown. By default the box is collapsed. And is expanded when clicked
->
-{: .details}
-
-# Conclusion
-{:.no_toc}
-
-Conclusion about the technical key points. And then relation between the techniques and the biological question to end with a global view.
