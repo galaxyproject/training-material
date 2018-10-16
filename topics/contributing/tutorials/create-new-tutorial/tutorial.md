@@ -269,7 +269,7 @@ For the next times, you can make it quicker.
 >             --workflow "path/to/workflow" \
 >             --zenodo_link "URL to the Zenodo record"
 >      ```
->      You can use the example workflow file located in `topics/contributing/files/example-workflow.ga` if
+>      You can use the example workflow file located in `topics/contributing/tutorials/create-new-tutorial/workflows/example-workflow.ga` if
 >      you do not have a workflow of your own. This is the workflow belonging to the *Galaxy 101* introduction tutorial.
 >
 > 5. Fill the remaining metadata in the `tutorial.md`
