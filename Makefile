@@ -53,7 +53,7 @@ serve: ## run a local server}
 	)
 .PHONY: serve
 
-detached-serve: clean ## run a local server in detached mode
+detached-serve: install ## run a local server in detached mode
 	( $(ACTIVATE_ENV) && \
 	  ${JEKYLL} serve --strict_front_matter --detach -d _site/training-material \
 	)
