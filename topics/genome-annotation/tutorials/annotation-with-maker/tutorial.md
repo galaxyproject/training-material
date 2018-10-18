@@ -241,7 +241,7 @@ Now run BUSCO with the predicted transcript sequences:
 > ### {% icon hands_on %} Hands-on: Run BUSCO
 >
 > 1. **Busco** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `output_exons` (output of **gffread** {% icon tool %})
+>    - {% icon param-file %} *"Sequences to analyse"*: `exons` (output of **gffread** {% icon tool %})
 >    - *"Mode"*: `Transcriptome`
 >    - *"Lineage"*: `fungi_odb9`
 >
@@ -365,7 +365,7 @@ Now run BUSCO with the predicted transcript sequences:
 > ### {% icon hands_on %} Hands-on: Run BUSCO
 >
 > 1. **Busco** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `output_exons` (output of **gffread** {% icon tool %})
+>    - {% icon param-file %} *"Sequences to analyse"*: `exons` (output of **gffread** {% icon tool %})
 >    - *"Mode"*: `Transcriptome`
 >    - *"Lineage"*: `fungi_odb9`
 >
@@ -472,7 +472,7 @@ Now run BUSCO with the predicted transcript sequences:
 > ### {% icon hands_on %} Hands-on: Run BUSCO
 >
 > 1. **Busco** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `output_exons` (output of **gffread** {% icon tool %})
+>    - {% icon param-file %} *"Sequences to analyse"*: `exons` (output of **gffread** {% icon tool %})
 >    - *"Mode"*: `Transcriptome`
 >    - *"Lineage"*: `fungi_odb9`
 >
