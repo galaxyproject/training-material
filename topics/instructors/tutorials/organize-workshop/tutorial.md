@@ -140,6 +140,8 @@ These recommendations are highly inspired from the one by [The Carpentries](http
 
     In one case the training material was taught in English, but the computers were in German. Some participants could not find the "Copy link location" that was mentioned in the tutorial. If you have sections that instruct users to do things like this, make sure to check how they will see it!
 
+18. Arrange name badges for the instructors. These can help participants remember the instructor names when they talk to them.
+
 ## During the workshop
 
 ### Before the participants arrive
