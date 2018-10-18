@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: How to Use UseGalaxy.eu's Training Infrastructure as a Service for Your Training Event
+title: UseGalaxy.eu's Training Infrastructure as a Service
 time_estimation: 10m
 questions:
   - Is this service appropriate for my event?

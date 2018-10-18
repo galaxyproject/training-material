@@ -98,7 +98,7 @@ Not everyone is always outwardly enthusiastic about the course for any number of
    1. A Public Galaxy?
 
       - UseGalaxy.org? UseGalaxy.eu? .org.au? (etc.)
-      - If you run on UseGalaxy.eu, they provide special, free [Training Infrastructure](https://galaxyproject.eu/tiaas)
+      - If you run on UseGalaxy.eu, they provide free [Training Infrastructure]({{ site.baseurl }}/topics/instructors/tutorials/setup-tiaas-for-training/tutorial.html)
       - Work with the Galaxy administrator to ensure that the tools and datasets required are available
 
    2. A Private Galaxy?
