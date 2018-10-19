@@ -80,8 +80,8 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 > 1. Create a new history for this tutorial
 > 2. Import the files from [Zenodo]() or from the shared data library
 >
->    - [../../files/chrom.tab](Chromosome File)
->    - [../../files/highlights.tab](Highlights)
+>    - [Chromosome File](../../files/chrom.tab)
+>    - [Highlights](../../files/highlights.tab)
 >
 >    {% include snippets/import_via_link.md %}
 >
@@ -104,13 +104,19 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 
 > ### {% icon hands_on %} Hands-on: Circos
 >
+> We will now run the Circos tool. In terms of tool interface, it is one of the most complex extant Galaxy tools.
+>
+> > ### {% icon tip %} Tip: Interface Complexity
+> > The interface looks deceptively simple when all of the sections are collapsed, but as you start adding tracks it can be easy to get lost and become overwhelmed, so just go slowly. Do not worry if your plot does not look exactly like the expected output.
+> {: .tip}
+>
 > 1. **Circos** {% icon tool %} with the following parameters:
 >    - In *"Reference Genome and Cytogenetic Bands"*:
 >        - *"Reference Genome"*: `Karyotype`
 >            - {% icon param-file %} *"Karyotype Configuration"*: `chrom.tab`
 >    - In *"Plot Options"*:
 >        - *"Plot Format"*: `Color`
->            - *"Background Color"*: `#000000`
+>            - *"Background Color"*: `#000000` <span style="background: #000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 >    - In *"Ideogram Configuration (Genome/Chromosomes)"*:
 >        - *"Thickness"*: `0.0`
 >        - In *"Labels"*:
@@ -140,7 +146,7 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 >                                - Click on *"Insert Actions to Apply"*:
 >                                - In *"1: Actions to Apply"*:
 >                                    - *"Action"*: `Change Fill Color for all points`
->                                        - *"Fill Color"*: `#8064a2`
+>                                        - *"Fill Color"*: `#8064a2` <span style="background: #8064a2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 >                            - *"Continue flow"*: `Yes`
 >                        - Click on *"Insert Rule"*:
 >                        - In *"2: Rule"*:
@@ -153,7 +159,7 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 >                                - Click on *"Insert Actions to Apply"*:
 >                                - In *"1: Actions to Apply"*:
 >                                    - *"Action"*: `Change Fill Color for all points`
->                                        - *"Fill Color"*: `#ffff00`
+>                                        - *"Fill Color"*: `#ffff00` <span style="background: #ffff00">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 >                            - *"Continue flow"*: `Yes`
 >            - Click on *"Insert Highlight"*:
 >            - In *"3: Highlight"*:
@@ -173,7 +179,7 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 >                                - Click on *"Insert Actions to Apply"*:
 >                                - In *"1: Actions to Apply"*:
 >                                    - *"Action"*: `Change Fill Color for all points`
->                                        - *"Fill Color"*: `#8064a2`
+>                                        - *"Fill Color"*: `#8064a2` <span style="background: #8064a2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 >                            - *"Continue flow"*: `Yes`
 >                        - Click on *"Insert Rule"*:
 >                        - In *"2: Rule"*:
@@ -186,19 +192,20 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 >                                - Click on *"Insert Actions to Apply"*:
 >                                - In *"1: Actions to Apply"*:
 >                                    - *"Action"*: `Change Fill Color for all points`
->                                        - *"Fill Color"*: `#ffff00`
+>                                        - *"Fill Color"*: `#ffff00` <span style="background: #ffff00">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 2. View the output PNG file
 >
 {: .hands_on}
 
+When this has complete, your output should look similar to the following;
+
+![Circos simplified Nature ENCODE Cover](../../images/circos-encode.png "Simplified Nature Cover")
+
+<!--
+
+What question could we ask about this plot?
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
@@ -216,12 +223,7 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 {: .question}
 
 
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+-->
 
 # Conclusion
 {:.no_toc}
