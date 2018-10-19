@@ -107,7 +107,7 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 > 1. **Circos** {% icon tool %} with the following parameters:
 >    - In *"Reference Genome and Cytogenetic Bands"*:
 >        - *"Reference Genome"*: `Karyotype`
->            - {% icon param-file %} *"Karyotype Configuration"*: `output` (Input dataset)
+>            - {% icon param-file %} *"Karyotype Configuration"*: `chrom.tab`
 >    - In *"Plot Options"*:
 >        - *"Plot Format"*: `Color`
 >            - *"Background Color"*: `#000000`
@@ -121,9 +121,12 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 >            - In *"1: Highlight"*:
 >                - *"Outside Radius"*: `0.99`
 >                - *"Inside Radius"*: `0.9`
+>                - {% icon param-file %} *"Highlight Data Source"*: `highlights.tab`
 >            - Click on *"Insert Highlight"*:
 >            - In *"2: Highlight"*:
->                - {% icon param-file %} *"Highlight Data Source"*: `output` (Input dataset)
+>                - *"Outside Radius"*: `0.89`
+>                - *"Inside Radius"*: `0.8`
+>                - {% icon param-file %} *"Highlight Data Source"*: `highlights.tab`
 >                - In *"Rules"*:
 >                    - In *"Rule"*:
 >                        - Click on *"Insert Rule"*:
@@ -162,6 +165,7 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 >            - In *"3: Highlight"*:
 >                - *"Outside Radius"*: `0.79`
 >                - *"Inside Radius"*: `0.7`
+>                - {% icon param-file %} *"Highlight Data Source"*: `highlights.tab`
 >                - In *"Rules"*:
 >                    - In *"Rule"*:
 >                        - Click on *"Insert Rule"*:
