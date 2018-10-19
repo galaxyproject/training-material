@@ -2,8 +2,6 @@
 layout: tutorial_hands_on
 
 title: Genome annotation with Maker
-name: annotation-with-maker
-type: tutorial
 zenodo_link: https://doi.org/10.5281/zenodo.1404209
 tags:
   - eukaryote
