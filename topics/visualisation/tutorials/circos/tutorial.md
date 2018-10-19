@@ -147,12 +147,6 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 >                            - In *"Conditions to Apply"*:
 >                                - Click on *"Insert Conditions to Apply"*:
 >                                - In *"1: Conditions to Apply"*:
->                                    - *"Condition"*: `Based on numerical position`
->                                        - *"Greater than this base"*: `5000000.0`
->                                        - *"Less than this base"*: `5000000.0`
->                                        - *"Count 'Less than this base' from end of chromosome"*: `Yes`
->                                - Click on *"Insert Conditions to Apply"*:
->                                - In *"2: Conditions to Apply"*:
 >                                    - *"Condition"*: `Randomly`
 >                                        - *"Percentage of bins"*: `0.1`
 >                            - In *"Actions to Apply"*:
