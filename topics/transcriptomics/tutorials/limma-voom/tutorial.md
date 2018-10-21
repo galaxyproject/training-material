@@ -500,105 +500,6 @@ Note that the tables of differentially expressed genes are output as links in th
 >
 {: .tip}
 
-
-## Gene Ontology testing with **goseq**
-
-We have identified genes that are differentially expressed. We would like to know if there are biological categories that are enriched among the differentially expressed genes. To do this we will perform a Gene Ontology analysis, similar to the [RNA-seq ref-based tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html).
-
-[Gene Ontology (GO)](http://www.geneontology.org/) analysis is widely used to reduce complexity and highlight biological processes in genome-wide expression studies. However, standard methods give biased results on RNA-seq data due to over-detection of differential expression for long and highly-expressed transcripts.
-
-[goseq tool](https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf) provides methods for performing GO analysis of RNA-seq data, taking length bias into account. The methods and software used by goseq are equally applicable to other category based tests of RNA-seq data, such as KEGG pathway analysis.
-
-goseq needs 2 files as inputs:
-- a **differentially expressed genes** file. Information for all genes tested for differential expression (all genes after filtering lowly expressed). This file should have 2 columns:
-    - the Gene IDs (unique within the file)
-    - True (differentially expressed) or False (not differentially expressed)
-- a **gene lengths** file. Information to correct for potential length bias in differentially expressed genes. This file should have 2 columns:
-    - the Gene IDs (unique within the file)
-    - the gene lengths
-
-We will use the tables of differentially expressed results output from the limma-voom tool, for both the basal and luminal constrasts, and call genes differentially expressed if they have an adjusted P value below 0.01 and a fold change of 1.5 (equivalent to a $$log_{2} FC$$ of 0.58), as in the Fu paper. We can use the gene lengths from the original table we imported from GEO (`seqdata`). But if we didn't have that we could use a tool like **featureCounts** {% icon tool %} to output a gene lengths file. The original file with gene lengths contains all >20k genes, but we only want the ~15k we have in our differentially expressed genes file after filtering low counts, and in the same order. So we will join the lengths file with the differentially expressed genes file, keeping only the lengths information for genes present in the differentially expressed genes file. We can then cut out the columns we need for the two inputs (gene id, length) (gene id, DE status) and as a bonus they will both be sorted in the same order, what we need for goseq.
-
-To generate the two input files we will use:
-* **Compute** to add a column to the limma-voom table that gives genes meeting our adj.P and lfc thresholds the value "True" and all other genes the value "False". We want genes that have a lfc < -0.58 (downregulated) and lfc > 0.58 (upregulated). We could use separate filters (e.g. `bool(c4<-0.58) or bool(c4>0.58)`) or more simply, we can use the absolute (abs) value 0.58, where the minus sign is ignored.
-* **Join two Datasets** to add the gene lengths information to the differentially expressed genes, matching on gene ids
-* **Cut** to extract the two columns for the differentially expressed genes information
-* **Cut** to extract the two columns for the gene lengths information
-
-
-> ### {% icon hands_on %} Hands-on: Prepare the two inputs for GOSeq
->
-> 1. **Compute** {% icon tool %} with
->    - *"Add expression"*: `bool(c8<0.01) and bool(abs(c4)>0.58)` (adj.P < 0.01 and lfc of 0.58)
->    - {% icon param-collection %} *"as a new column to"*: the `DE tables` output of **limma** {% icon tool %} (containing both the basal and luminal contrasts)
-> 2. **Join two Datasets** {% icon tool %} with
->    - *"Join"*: output of the **Compute** {% icon tool %} step above
->    - *"using column"*: `Column: 1`
->    - {% icon param-file %} *"with"* the original GEO counts file `seqdata`
->    - *"and column"*: `Column: 1`
->    - *"Keep lines of first input that do not join with second input"*: `No`
->    - *"Keep lines of first input that are incomplete"*: `No`
->    - *"Fill empty columns"*: `No`
->    - *"Keep the header lines"*: `No`
-> 3. **Cut columns from a table** {% icon tool %} with
->    - *"Cut columns"*: `c1,c9` (the gene ids and DE status)
->    - *"Delimited by"*: `Tab`
->    - {% icon param-file %} *"From"*: the output of the **Join** {% icon tool %}
->    - Rename to `goseq DE status`
-> 4. **Cut columns from a table** {% icon tool %} with
->    - *"Cut columns"*: `c1,c11` (the gene ids and lengths)
->    - *"Delimited by"*: `Tab`
->    - {% icon param-file %} *"From"*: the output of the **Join** {% icon tool %}
->    - Rename to `goseq gene lengths`
-{: .hands_on}
-
-We now have the two required input files for goseq for both our basal and luminal contrasts.
-
-> ### {% icon hands_on %} Hands-on: Perform GO analysis
->
-> 1. **goseq** {% icon tool %} with
->    - *"Differentially expressed genes file"*: `goseq DE status`
->    - *"Gene lengths file"*: `goseq gene lengths`
->    - *"Gene categories"*:  `Get categories`
->       - *"Select a genome to use"*:  `Mouse(mm10)`
->       - *"Select Gene ID format"*:  `Entrez Gene ID`
->       - *"Select one or more categories"*: `GO: Biological Process`
->    - *"Output Options"*
->        - *"Output Top GO terms plot?"* `Yes`
-{: .hands_on}
-
-goseq generates a big table with the following columns for each GO term:
-1. `category`: GO category
-2. `over_rep_pval`: *p*-value for over representation of the term in the differentially expressed genes
-3. `under_rep_pval`: *p*-value for under representation of the term in the differentially expressed genes
-4. `numDEInCat`: number of differentially expressed genes in this category
-5. `numInCat`: number of genes in this category
-6. `term`: detail of the term
-7. `ontology`: MF (Molecular Function - molecular activities of gene products), CC (Cellular Component - where gene products are active), BP (Biological Process - pathways and larger processes made up of the activities of multiple gene products)
-8. `p.adjust.over_represented`: *p*-value for over representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure
-9. `p.adjust.under_represented`: *p*-value for over representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure
-
-To identify categories significantly enriched/unenriched below some p-value cutoff, it is necessary to use the adjusted *p*-value.
-
-A plot of the top 10 over-represented GO terms (by adjusted *p*-value) can be output from the goseq tool to help visualise results. Note that the top 10 are selected by adjusted p-value so if there are multiple terms with the same value there will be more than 10 terms in the plot. Click on the `Top over-represented GO terms plot` in the history. There should be 2 PDFs, one for each contrast, that look similar to below.
-
-![Basal Plot](../../images/limma-voom/basal_top_GO.png "Basal pregnant vs lactating top 10 GO terms")
-
-![Luminal Plot](../../images/limma-voom/luminal_top_GO.png "Luminal pregnant vs lactating top 10 GO terms")
-
-The Fu paper also used goseq and found enrichment for cell contractility genes in the basal cells and enrichment in the luminal cells for general metabolic processes, lipid biosynthesis and transport proteins, and .
-
-> ### {% icon question %} Questions
->
-> Take a look at the top 10 GO plots for the luminal and basal contrast. How do you think they compare to what the authors found?
->
-> > ### {% icon solution %} Solution
-> >
-> > The top 10 GO terms seem to describe similar processes to what the authors found.
-> >
-> {: .solution}
-{: .question}
-
 ## Create heatmap of custom genes
 
 You may want to create a heatmap for a set of genes of interest, such as the 31 genes from the original paper using this dataset, Fig. 6b below. These 31 genes include the authors' main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors, identified as differentially expressed in the luminal pregnant vs lactating cells by the authors. We will recreate the heatmap to show the steps. It also serves as a sanity check, to check that our results look similar to what was shown in the paper. For this we need the normalized counts which we can get from the limma tool.
@@ -695,6 +596,175 @@ You should see a heatmap like below.
 >    >
 >    {: .solution}
 {: .question}
+
+# Gene Set Testing
+
+We have identified genes that are differentially expressed. However, sometimes there is quite a long list of differentially expressed genes to interpret after a differential expression analysis, and it is usually infeasible to go through the list one gene at a time trying to understand it’s biological function. A common downstream procedure is gene set testing, which aims to understand which pathways/gene networks the differentially expressed genes are implicated in. There are many different gene set testing methods that can be applied and it can be useful to try several. 
+
+## Gene Ontology testing with **goseq**
+
+We would like to know if there are biological categories that are enriched among the differentially expressed genes. To do this we will perform a Gene Ontology analysis, similar to the [RNA-seq ref-based tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html).
+
+[Gene Ontology (GO)](http://www.geneontology.org/) analysis is widely used to reduce complexity and highlight biological processes in genome-wide expression studies. However, standard methods give biased results on RNA-seq data due to over-detection of differential expression for long and highly-expressed transcripts.
+
+[goseq tool](https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf) provides methods for performing GO analysis of RNA-seq data, taking length bias into account. The methods and software used by goseq are equally applicable to other category based tests of RNA-seq data, such as KEGG pathway analysis.
+
+goseq needs 2 files as inputs:
+- a **differentially expressed genes** file. Information for all genes tested for differential expression (all genes after filtering lowly expressed). This file should have 2 columns:
+    - the Gene IDs (unique within the file)
+    - True (differentially expressed) or False (not differentially expressed)
+- a **gene lengths** file. Information to correct for potential length bias in differentially expressed genes. This file should have 2 columns:
+    - the Gene IDs (unique within the file)
+    - the gene lengths
+
+We will use the tables of differentially expressed results output from the limma-voom tool, for both the basal and luminal constrasts, and call genes differentially expressed if they have an adjusted P value below 0.01 and a fold change of 1.5 (equivalent to a $$log_{2} FC$$ of 0.58), as in the Fu paper. We can use the gene lengths from the original table we imported from GEO (`seqdata`). But if we didn't have that we could use a tool like **featureCounts** {% icon tool %} to output a gene lengths file. The original file with gene lengths contains all >20k genes, but we only want the ~15k we have in our differentially expressed genes file after filtering low counts, and in the same order. So we will join the lengths file with the differentially expressed genes file, keeping only the lengths information for genes present in the differentially expressed genes file. We can then cut out the columns we need for the two inputs (gene id, length) (gene id, DE status) and as a bonus they will both be sorted in the same order, what we need for goseq.
+
+To generate the two input files we will use:
+* **Compute** to add a column to the limma-voom table that gives genes meeting our adj.P and lfc thresholds the value "True" and all other genes the value "False". We want genes that have a lfc < -0.58 (downregulated) and lfc > 0.58 (upregulated). We could use separate filters (e.g. `bool(c4<-0.58) or bool(c4>0.58)`) or more simply, we can use the absolute (abs) value 0.58, where the minus sign is ignored.
+* **Join two Datasets** to add the gene lengths information to the differentially expressed genes, matching on gene ids
+* **Cut** to extract the two columns for the differentially expressed genes information
+* **Cut** to extract the two columns for the gene lengths information
+
+
+> ### {% icon hands_on %} Hands-on: Prepare the two inputs for GOSeq
+>
+> 1. **Compute** {% icon tool %} with
+>    - *"Add expression"*: `bool(c8<0.01) and bool(abs(c4)>0.58)` (adj.P < 0.01 and lfc of 0.58)
+>    - {% icon param-collection %} *"as a new column to"*: the `DE tables` output of **limma** {% icon tool %} (containing both the basal and luminal contrasts)
+> 2. **Join two Datasets** {% icon tool %} with
+>    - *"Join"*: output of the **Compute** {% icon tool %} step above
+>    - *"using column"*: `Column: 1`
+>    - {% icon param-file %} *"with"* the original GEO counts file `seqdata`
+>    - *"and column"*: `Column: 1`
+>    - *"Keep lines of first input that do not join with second input"*: `No`
+>    - *"Keep lines of first input that are incomplete"*: `No`
+>    - *"Fill empty columns"*: `No`
+>    - *"Keep the header lines"*: `No`
+> 3. **Cut columns from a table** {% icon tool %} with
+>    - *"Cut columns"*: `c1,c9` (the gene ids and DE status)
+>    - *"Delimited by"*: `Tab`
+>    - {% icon param-file %} *"From"*: the output of the **Join** {% icon tool %}
+>    - Rename to `goseq DE status`
+> 4. **Cut columns from a table** {% icon tool %} with
+>    - *"Cut columns"*: `c1,c11` (the gene ids and lengths)
+>    - *"Delimited by"*: `Tab`
+>    - {% icon param-file %} *"From"*: the output of the **Join** {% icon tool %}
+>    - Rename to `goseq gene lengths`
+{: .hands_on}
+
+We now have the two required input files for goseq for both our basal and luminal contrasts.
+
+> ### {% icon hands_on %} Hands-on: Perform GO analysis
+>
+> 1. **goseq** {% icon tool %} with
+>    - *"Differentially expressed genes file"*: `goseq DE status`
+>    - *"Gene lengths file"*: `goseq gene lengths`
+>    - *"Gene categories"*:  `Get categories`
+>       - *"Select a genome to use"*:  `Mouse(mm10)`
+>       - *"Select Gene ID format"*:  `Entrez Gene ID`
+>       - *"Select one or more categories"*: `GO: Biological Process`
+>    - *"Output Options"*
+>        - *"Output Top GO terms plot?"* `Yes`
+{: .hands_on}
+
+goseq generates a big table with the following columns for each GO term:
+1. `category`: GO category
+2. `over_rep_pval`: *p*-value for over representation of the term in the differentially expressed genes
+3. `under_rep_pval`: *p*-value for under representation of the term in the differentially expressed genes
+4. `numDEInCat`: number of differentially expressed genes in this category
+5. `numInCat`: number of genes in this category
+6. `term`: detail of the term
+7. `ontology`: MF (Molecular Function - molecular activities of gene products), CC (Cellular Component - where gene products are active), BP (Biological Process - pathways and larger processes made up of the activities of multiple gene products)
+8. `p.adjust.over_represented`: *p*-value for over representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure
+9. `p.adjust.under_represented`: *p*-value for over representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure
+
+To identify categories significantly enriched/unenriched below some p-value cutoff, it is necessary to use the adjusted *p*-value.
+
+A plot of the top 10 over-represented GO terms (by adjusted *p*-value) can be output from the goseq tool to help visualise results. Note that the top 10 are selected by adjusted p-value so if there are multiple terms with the same value there will be more than 10 terms in the plot. Click on the `Top over-represented GO terms plot` in the history. There should be 2 PDFs, one for each contrast, that look similar to below.
+
+![Basal Plot](../../images/limma-voom/basal_top_GO.png "Basal pregnant vs lactating top 10 GO terms")
+
+![Luminal Plot](../../images/limma-voom/luminal_top_GO.png "Luminal pregnant vs lactating top 10 GO terms")
+
+The Fu paper also used goseq and found enrichment for cell contractility genes in the basal cells and enrichment in the luminal cells for general metabolic processes, lipid biosynthesis and transport proteins, and .
+
+> ### {% icon question %} Questions
+>
+> Take a look at the top 10 GO plots for the luminal and basal contrast. How do you think they compare to what the authors found?
+>
+> > ### {% icon solution %} Solution
+> >
+> > The top 10 GO terms seem to describe similar processes to what the authors found.
+> >
+> {: .solution}
+{: .question}
+
+## Gene Set Enrichment Analysis with **fgsea**
+
+Gene Set Enrichment Analysis (GSEA) [(Subramanian et al., 2005)](https://www.ncbi.nlm.nih.gov/pubmed/16199517) is a widely used method that determines whether a set of genes is enriched in a list of differentially expressed genes. If a gene set falls at either the top (over-expressed) or bottom (under-expressed) of the list it is said to be enriched. [fgsea](https://www.biorxiv.org/content/early/2016/06/20/060012) is a faster implementation of the GSEA method. fgsea requires a ranked list of genes and some gene sets to test. The MSigDb collections are commonly used for this and can be downloaded from the [Broad website](http://software.broadinstitute.org/gsea/downloads.jsp). However, these collections are only of human gene sets. If working with another species you would need to first map the genes to their human ortholgues. MSigDB versions for mouse are provided [here](http://bioinf.wehi.edu.au/software/MSigDB/index.html) so we'll use those. We'll use the [Hallmark collection](https://www.cell.com/cell-systems/fulltext/S2405-4712(15)00218-5) which contains 50 gene sets. According to MSigDB, each gene set in the hallmark collection consists of a “refined” gene set, derived from multiple “founder” sets, that conveys a specific biological state or process and displays coherent expression. The hallmarks effectively summarize most of the relevant information of the original founder sets and, by reducing both variation and redundancy, provide more refined and concise inputs for gene set enrichment analysis.
+
+> ### {% icon hands_on %} Hands-on: Perform gene set enrichment with fgsea
+>
+> 1. Import the mouse Hallmark collection of gene sets from `http://bioinf.wehi.edu.au/software/MSigDB/mouse_H_v5p2.rdata` using the Paste/Fetch upload box, 
+>    - Set the file **Type** to `rdata`
+>    - Rename file as `mouse_hallmark_sets`
+> 2. **Cut columns from a table** {% icon tool %} with
+>    - *"Cut columns"*: `c1,c6` (the Entrez gene ids and t-statistic)
+>    - *"Delimited by"*: `Tab`
+>    - {% icon param-file %} *"From"*: the `DE tables` output of the **limma** {% icon tool %}
+> 3. **Sort data in ascending or descending order** {% icon tool %} with
+>    - *"Sort Query"*: the output of the **Cut** {% icon tool %}
+>    - *"Number of header lines"*: `1`
+>    - *"Column selections"*:
+>        - *"on column": `Column: 2`
+>        - *"in": `Descending order`
+>        - *"Flavor": `Fast numeric sort (-n)`
+> 4. **fgsea** {% icon tool %} with
+>    - *"Ranked Genes"*: the output of the **Sort** {% icon tool %}
+>    - *"File has header?"*: `Yes`
+>    - {% icon param-file %} *"Gene Sets"*: `mouse_hallmark_sets`
+>    - *"Minimum Size of Gene Set"*: `15`
+>    - *"Output plots"*: `Yes`
+{: .hands_on}
+
+![fgsea Table](../../images/limma-voom/fgsea_table.png "fgsea Summary table"){: width="50%"}
+![fgsea Enrichment](../../images/limma-voom/fgsea_enrichplot.png "fgsea Enrichment plot"){: width="50%"}
+
+## Ensemble genes set enrichment analyses with **EGSEA**
+
+The ensemble of genes set enrichment analyses (EGSEA) [(Alhamdoosh et al, 2017)](https://www.ncbi.nlm.nih.gov/pubmed/27694195) is a method developed for RNA-sequencing data that combines results from multiple algorithms and calculates collective gene set scores to improve the biological relevance of the highest ranked gene sets. EGSEA has built-in gene sets from MSigDB and KEGG for human and mouse.
+
+> ### {% icon hands_on %} Hands-on: Perform ensemble gene set testing with EGSEA
+>
+> 1. Rerun **limma** selecting *"Output Filtered Counts Table?"*: `Yes`
+> 2. **Cut** {% icon tool %}: Run **Cut columns from a table (cut)** with the following settings:
+>      - *"File to cut"*: `Filtered Counts` output from **limma**
+>      - *"Operation"*: `Discard`
+>      - *"List of fields"*: Select `Column:2`, `Column:3`
+>      - Rename to `EGSEA counts`
+> 3. **Cut** {% icon tool %}: Run **Cut columns from a table (cut)** with the following settings:
+>      - *"File to cut"*: `Filtered Counts` output from **limma**
+>      - *"Operation"*: `Keep`
+>      - *"List of fields"*: Select `Column:1`, `Column:2`
+>      - Rename to `EGSEA anno`
+> 4. **EGSEA** {% icon tool %} with
+>      - *"Count Files or Matrix?*": `Single Count Matrix`
+>          - *"Count Matrix"*: Select `EGSEA counts`
+>      - *"Input factor information from file?"*: `Yes`
+>          - *"Factor File"*: Select `factordata`
+>      - *"Symbols Mapping file"*: `Yes`
+>          - *"Factor File"*: Select `EGSEA anno`
+>      - *"Contrast of Interest"*: `basalpregnant-basallactate`
+>      - *"Species"*: `mouse`
+>      - *"Gene Set Testing Methods"*: Tick `camera`, `safe`, `gage`, `zscore`, `gsva`, `globaltest`, `ora`, `ssgsea`, `padog`, `plage`, `fry`
+>      - *"MSigDB Gene Set Collections"*: `H: hallmark gene sets`
+>      - *"KEGG Pathways"*: `Metabolism` and `Signalling`
+>      - *"I certify that I am not using this tool for commercial purposes"*: `Yes`
+{: .hands_on}
+
+![EGSEA heatmaps](../../images/limma-voom/EGSEA_heatmap.png "EGSEA heatmap"){: width="50%"}
+
+![EGSEA KEGG](../../images/limma-voom/EGSEA_KEGG.png "EGSEA with KEGG pathways")
 
 # Conclusion
 {:.no_toc}
