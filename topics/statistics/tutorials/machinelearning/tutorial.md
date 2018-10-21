@@ -12,7 +12,7 @@ objectives:
   - "Learn how to make predictions using the training and test data."
   - "Classify data using a Galaxy workflow."
 requirements:
-time_estimation: "1/2h"
+time_estimation: "30M"
 key_points:
   - "Machine learning algorithms learn features from data."
   - "It is used for multiple tasks like classification, regression, clustering and so on."
@@ -45,76 +45,79 @@ The data used in this tutorial is available at [Zenodo](https://doi.org/10.5281/
 
 > ### Agenda
 >
-> Performing a machine learning task (classification) using a workflow involves the following steps:
+> Performing a machine learning task (classification) using a tool which involves the following steps:
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
 
-# Step 1: Upload dataset
+# Upload training data
 
-> ### {% icon hands_on %} Hands-on: Get the data 
-> 1. Create a new history in Galaxy.
-> 2. Download and import the following dataset ("iris_train.csv") in the history. This dataset contains information about Iris flowers and has five numerical columns. The first four columns give information about the flower's sepal and petal length and width, respectively. The fifth column gives the category of flowers (Iris-Setosa, Iris-Versicolour and Iris-Virginica) based on the sizes of sepals and petals from the other four columns. The category's information is encoded as numbers (0, 1 and 2).
+This dataset contains 9 features of breast cancer. These features include the thickness of clump, cell-size, cell-shape and so on ([more information](https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w)). The last column in the tabular data contains binary value (0 or 1) where a row (a set of features) is classified into breast cancer or not.
+
+> ### {% icon hands_on %} Hands-on: Data upload
+> 1. Download and import the following dataset in a new Galaxy history. Choose the type of data as `tabular`.
+     - `breast-w_test.tsv`
+>
 >    ```
->    https://doi.org/10.5281/zenodo.1404173
+>    https://zenodo.org/record/1468039/files/breast-w_train.tsv
 >    ```
-> ![Dataset](images/upload_1.png)
+>
+>    {% include snippets/import_via_link.md %}
+>
+>    ![Dataset](images/train_data.png)
+>
 {: .hands_on}
 
 
-# Step 2: Choose a classifier and update its parameters
+# Choose a classifier and update its parameters
 
-> ### {% icon hands_on %} Hands-on: Linear support vector machines and its parameters
-> 1. Choose "Support vector machines" tool from the "statistics" tool category.
-> 2. Update its parameters as shown in the image below. 
-> 3. Choose "train a model" as a classification task and choose the type of classifier "Linear support vector classification".
-> 4. Choose the type of data as "tabular". The first four columns of the uploaded data are the dataset and the last column as the "labels" or "targets".
+> ### {% icon hands_on %} Hands-on: **SVM Classifier (Support vector machine)** {% icon tool %}
+> 1. Choose **SVM Classifier (Support vector machine)** {% icon tool %} tool.
+> 2. Choose `train a model` as a classification task and choose the type of classifier as `linear support vector classification`.
+> 4. Choose the type of data as `tabular`.
 > 
-> ![Dataset](images/set_classifier_params_2.png)
 {: .hands_on}
 
 
-# Step 3: Execute the classifier
+# Execute the classifier
 
 > ### {% icon hands_on %} Hands-on: Execute the classifier
-> 1. Click on the "Execute" button (shown in the previous image) to execute the classifier.
-> 2. See the resulting model (new dataset) in the history. The following image shows the resulting dataset (in the history with ```h5``` format).
+> 1. Click on `execute` button to execute the classifier.
+> 2. See the resulting model (new dataset) in the history.
 > 
-> ![Dataset](images/model_3.png)
 {: .hands_on}
 
 
-# Step 4: Upload test data
+# Upload test data
 
 > ### {% icon hands_on %} Hands-on: Upload test data
-> 1. Upload the test dataset "iris_test.csv" from [Zenodo](https://doi.org/10.5281/zenodo.1404173).
-> 2. This dataset does not contain the category column. This column will be predicted in the following steps using the trained model (from step 3).
+> 1. Upload test dataset `breast-w_test.tsv` from [Zenodo](https://zenodo.org/record/1468039/files/breast-w_test.tsv).
+> 2. This dataset does not contain the target column. This column will be predicted in the following step using the trained model.
 > 
-> ![Dataset](images/test_dataset_4.png)
+> ![Dataset](images/test_data.png)
 {: .hands_on}
 
 
-# Step 5: Choose trained model to predict
+# Choose trained model to predict
 
 > ### {% icon hands_on %} Hands-on: Choose trained model to predict
-> 1. Choose "Support vector machines" tool from the "statistics" tool category.
-> 2. Set the classification task as "load a model and predict". Choose the trained model created in step 3 to predict. 
-> 3. Choose the test data from the previous step.
-> 4. Execute the tool.
+> 1. Choose **SVM Classifier (Support vector machine)** {% icon tool %} tool.
+> 2. Set the classification task as `load a model and predict`. 
+> 3. Choose the trained model. 
+> 4. Choose the test data from previous step.
+> 5. Execute the tool.
 > 
-> ![Dataset](images/test_model_5.png)
 {: .hands_on}
 
 
-# Step 6: See predictions
+# See predictions
 
 > ### {% icon hands_on %} Hands-on: See the predicted columns
-> 1. Click on "view data" link of the dataset created after executing the previous step.
-> 2. The last column shows the predicted category for each row.
+> 1. Click on `view data` link of the dataset created after executing the previous step.
+> 2. The last column of the `tabular` data shows the predicted category (target) for each row.
 > 
-> ![Dataset](images/predictions_6.png)
 {: .hands_on}
 
 
