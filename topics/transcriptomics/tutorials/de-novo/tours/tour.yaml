@@ -172,7 +172,8 @@ steps:
     placement: right
     postclick:
       - >-
-        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fpjbriggs%2Ftrimmomatic%2Ftrimmomatic%2F0.36.0"]
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fpjbriggs%2Ftrimmomatic%2Ftrimmomatic%2F0.36.5"]
+        .tool-old-link
   - title: Trimmomatic
     element: '#tool-search'
     content: Run Trimmomatic on each pair of forward and reverse reads.
@@ -236,39 +237,44 @@ steps:
       accurate and fast tool for mapping spliced reads to a genome. Another
       popular spliced aligner is <a
       href="https://ccb.jhu.edu/software/tophat/index.shtml">TopHat</a>, but we
-      will be using HISAT in this tutorial.
+      will be using HISAT2 in this tutorial.
     backdrop: true
   - title: Spliced mapping
     element: '#tool-search'
-    content: Run HISAT on one forward/reverse read pair
+    content: Run HISAT2 on one forward/reverse read pair
     position: left
   - title: Spliced mapping
     element: '#tool-search-query'
-    content: Search for HISAT tool.
+    content: Search for HISAT2 tool.
     placement: right
     textinsert: HISAT
   - title: Spliced mapping
     element: '#tool-search'
-    content: Click on the "HISAT" tool to open it
+    content: Click on the "HISAT2" tool to open it
     placement: right
     postclick:
       - >-
-        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fhisat2%2Fhisat2%2F2.0.5.2"]
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fhisat2%2Fhisat2%2F2.1.0"]
+        .tool-old-link
   - title: Spliced mapping
     element: '#tool-search'
     content: |-
       Run the tool with the following settings:
         <ul>
-          <li><b>Single end or paired reads?</b>Individual paired-end reads</li>
           <li><b>Source for the reference genome to align against:</b>Use a built-in genome > Mouse (Mus Musculus): mm10</li>
+          <li><b>Single-end or paired-end reads?</b>Paired-end</li>
           <li><b>Spliced alignment parameters:</b>Specify spliced alignment parameters</li>
-          <li><b>Specify strand-specific information:</b>First Strand (R/RF)</li>
+          <li><b>Specify strand information:</b> Forward(FR)</li>
+          <li><b>Spliced alignment options > Penalty for non-canonical splice sites:</b> 3</li>
+          <li><b>Penalty function for long introns with canonical splice sites:</b> Constant [f(x) = B]</li>
+          <li><b>Constant term (B):</b> 0.0</li>
+          <li><b>Penalty function for long introns with non-canonical splice sites:</b> Constant [f(x) = B]</li>
           <li><b>Transcriptome assembly reporting:</b>Report alignments tailored for transcript assemblers including StringTie.</li>
         </ul>
     position: left
   - title: Spliced mapping
     content: >-
-      Run HISAT on the remaining forward/reverse read pairs with the same
+      Run HISAT2 on the remaining forward/reverse read pairs with the same
       parameters.
     backdrop: true
   - title: De novo transcript reconstruction
@@ -284,7 +290,38 @@ steps:
       identification from the experimental samples. The leading tool for
       transcript reconstruction is <i>Stringtie</i>. Here, we will use
       <i>Stringtie</i> to predict transcript structures based on the reads
-      aligned by <i>HISAT</i>.
+      aligned by <i>HISAT2</i>.
+    backdrop: true
+  - title: De novo transcript reconstruction
+    element: '#tool-search-query'
+    content: Search for Stringtie tool.
+    placement: right
+    textinsert: Stringtie
+  - title: De novo transcript reconstruction
+    element: '#tool-search'
+    content: Click on the "Stringtie" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fstringtie%2Fstringtie%2F1.3.3.2"]
+        .tool-old-link
+  - title: De novo transcript reconstruction
+    element: '#tool-search'
+    content: Run Stringtie on the HISAT2 alignments using the default parameters.
+    position: left
+  - title: Transcriptome assembly
+    content: >-
+      We just generated four transcriptomes with <i>Stringtie</i> representing
+      each of the four RNA-seq libraries we are analyzing. Since these were
+      generated in the absence of a reference transcriptome, and we ultimately
+      would like to know what transcript structure corresponds to which
+      annotated transcript (if any), we have to make a transcriptome database.
+      We will use the tool <i>Stringtie - Merge</i> to combine redundant
+      transcript structures across the four samples and the RefSeq reference.
+      Once we have merged our transcript structures, we will use
+      <i>GFFcompare</i> to annotate the transcripts of our newly created
+      transcriptome so we know the relationship of each transcript to the RefSeq
+      reference.
     backdrop: true
   - title: Transcriptome reconstruction
     element: '#tool-search-query'
@@ -298,6 +335,7 @@ steps:
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fstringtie%2Fstringtie_merge%2F1.3.3"]
+        .tool-old-link
   - title: Transcriptome reconstruction
     element: '#tool-search'
     content: >-
@@ -370,20 +408,19 @@ steps:
     placement: right
     postclick:
       - >-
-        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ffeaturecounts%2Ffeaturecounts%2F1.4.6.p5"]
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ffeaturecounts%2Ffeaturecounts%2F1.6.0.6"]
+        .tool-old-link
   - title: Counting the number of reads per transcript
     element: '#tool-search'
     content: >-
       Run FeatureCounts on the aligned reads (HISAT output) using the GFFCompare
       transcriptome database as the annotation file.
         <ul>
-          <li>Using the batch mode for input selection, choose the four HISAT aligned read files</li>
+          <li>Using the batch mode for input selection, choose the four HISAT2 aligned read files</li>
+          <li><b>Specify strand information:</b> Stranded (Forward)</li>
           <li><b>Gene annotation file:</b> in your history, then select the annotated transcripts GTF file output by GFFCompare (this specifies the “union” mode)</li>
-          <li>Expand Options for paired end reads</li>
-          <li><b>Orientation of the two read from the same pair:</b> Reverse, Forward (rf)</li>
           <li>Expand <b>Advanced options</b></li>
           <li><b>GFF gene identifier:</b> enter “transcript_id”</li>
-          <li><b>Strand specificity of the protocol:</b> select “Stranded (reverse)”</li>
         </ul>
     position: left
   - title: Perform differential gene expression testing
@@ -414,7 +451,8 @@ steps:
     placement: right
     postclick:
       - >-
-        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdeseq2%2Fdeseq2%2F2.11.39"]
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdeseq2%2Fdeseq2%2F2.11.40.2"]
+        .tool-old-link
   - title: Perform differential gene expression testing
     element: '#tool-search'
     content: |-
@@ -521,7 +559,8 @@ steps:
     placement: right
     postclick:
       - >-
-        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_bam_coverage%2Fdeeptools_bam_coverage%2F2.5.1.1.0"]
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_bam_coverage%2Fdeeptools_bam_coverage%2F3.0.2.0"]
+        .tool-old-link
   - title: Converting aligned read files to bigWig format
     element: '#tool-search'
     content: >-
@@ -548,7 +587,8 @@ steps:
     placement: right
     postclick:
       - >-
-        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_bam_coverage%2Fdeeptools_bam_coverage%2F2.5.1.1.0"]
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_bam_coverage%2Fdeeptools_bam_coverage%2F3.0.2.0"]
+        .tool-old-link
   - title: Converting aligned read files to bigWig format
     element: '#tool-search'
     content: >-

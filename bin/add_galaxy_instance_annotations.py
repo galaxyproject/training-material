@@ -116,6 +116,9 @@ def check_tutorials():
         topic_dir = os.path.join("topics", topic)
         tutos_dir = os.path.join(topic_dir, "tutorials")
         instance_annot.setdefault(topic, {'supported': False, 'tutorials': {}})
+        if not os.path.exists(tutos_dir):
+            continue
+
         for tutorial in os.listdir(tutos_dir):
             # extract the tool file
             tool_filepath = os.path.join(tutos_dir, tutorial, "tools.yaml")
@@ -124,7 +127,7 @@ def check_tutorials():
             # extract the instances on which the tutorial can be run
             supported, unsupported = check_tutorial(tool_filepath, server_tools)
 
-            # Training-focused view            
+            # Training-focused view
             instance_annot[topic]['tutorials'].setdefault(tutorial, {'supported': False, 'instances': {}})
             instance_annot[topic]['tutorials'][tutorial]['instances'] = {k: {'url': v, 'supported': True} for (k, v) in supported.items()}
             instance_annot[topic]['tutorials'][tutorial]['supported'] = any(instance_annot[topic]['tutorials'][tutorial]['instances'])

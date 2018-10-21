@@ -10,7 +10,7 @@ objectives:
   - "Identification of the genetic variation using the exome sequencing"
   - "Using FreeBayes calls for variants generating"
   - "Variant analysis and GEMINI queries"
-time_estimation: "1d/3h/6h"
+time_estimation: "2h"
 key_points:
   - "With exome sequencing, one can identify genetic variation that is responsible for some diseases"
   - "Exome sequencing is the most efficient way to identify the genetic variants in all of an individual's genes"
@@ -168,7 +168,7 @@ substitution events) smaller than the length of a short-read sequencing alignmen
 >
 {: .hands_on}
 
-:+1::tada: **Congratulations!** :tada::+1:
+{% icon trophy %} **Congratulations!**
 You have created you first VCF file, one of most complicated
 file formats in bioinformatics. In such a file your called variants are stored
 with one variant per line (+header lines).
