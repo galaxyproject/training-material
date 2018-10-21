@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Basics of machine learning"
-zenodo_link: https://doi.org/10.5281/zenodo.1404173
+zenodo_link: https://zenodo.org/record/1468039#.W8zyxBRoSAo
 questions:
   - "What is machine learning?"
   - "Why is it useful?"
