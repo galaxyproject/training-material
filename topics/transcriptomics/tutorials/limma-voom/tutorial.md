@@ -739,7 +739,7 @@ fgsea outputs a table of results containing a list of pathways with P values and
 
 An enrichment plot of the each of the top pathways can also be produced, one is shown below. The barcode pattern shows where the genes in the set are found in the list of ranked genes. Most of the bars to the left indicate enrichment of the set at the top of the ranked list of genes (upregulated) and most bars towards the right indicate enrichment at the bottom of the list (downregulated). The enrichment score reflects the degree to which the genes are enriched at the top or bottom of the list.
 
-![fgsea Enrichment](../../images/limma-voom/fgsea_enrichplot3.png "fgsea Enrichment plot")
+![fgsea Enrichment](../../images/limma-voom/fgsea_enrichplot.png "fgsea Enrichment plot")
 
 ## Ensemble gene set enrichment analyses with **EGSEA**
 
