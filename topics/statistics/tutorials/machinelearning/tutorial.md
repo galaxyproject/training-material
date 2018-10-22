@@ -17,7 +17,7 @@ key_points:
   - "Machine learning algorithms learn features from data."
   - "It is used for multiple tasks like classification, regression, clustering and so on."
   - "For the classification task, data is divided into training and test sets."
-  - "Each data sample in training and test sets has a category/class."
+  - "Each data sample in training and test sets has a category/class/label."
   - "Many learning tasks can be performed on datasets using Galaxy tools for machine learning."
 contributors:
   - anuprulez
@@ -39,13 +39,11 @@ The following image shows how a classification task is performed. The complete d
 
 ![Dataset](images/prediction.png)
 
-This tutorial shows how to use machine learning modules implemented as Galaxy tools. Few machine learning tools are present in the tools collection under the header "statistics". These tools can be used to create workflows to perform a machine learning task.
-
-The data used in this tutorial is available at [Zenodo](https://doi.org/10.5281/zenodo.1404173).
+This tutorial shows how to use a machine learning module implemented as a Galaxy tool. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/1468039#.W8zyxBRoSAo).
 
 > ### Agenda
 >
-> Performing a machine learning task (classification) using a tool which involves the following steps:
+> Performing a machine learning task (classification) using a tool involves the following steps:
 >
 > 1. TOC
 > {:toc}
