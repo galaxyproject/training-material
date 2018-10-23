@@ -172,7 +172,7 @@ We now want to highlight those gene transcripts whose expression difference, the
 >   - "on column", to 13
 >   - "with flavor" to "Numerical sort"
 >   - "everything in" to "Ascending order"
->   - Click on "Insert Column selection", and parametrize the Sort tool to sort on column 10. Be careful of the sorting order!
+>   - Click on "Insert Column selection", and parameterize the Sort tool to sort on column 10. Be careful of the sorting order!
 >   - Are there any rows allocated for the table's header? In that case, set "Number of header lines to skip" accordingly!
 >
 >    > ### {% icon question %} Questions
