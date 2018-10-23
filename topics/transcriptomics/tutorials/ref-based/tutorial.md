@@ -65,18 +65,18 @@ The raw RNA-seq reads have been extracted from the Sequence Read Archive (SRA) f
 >
 > 1. Create a new history for this RNA-seq exercise
 > 2. Import the FASTQ file pairs from [Zenodo](https://doi.org/10.5281/zenodo.1185122) or a data library:
->       - `GSM461177` (untreated): `GSM461177_1` and `GSM461177_2`
->       - `GSM461180` (treated): `GSM461180_1` and `GSM461180_2`
+>   - `GSM461177` (untreated): `GSM461177_1` and `GSM461177_2`
+>   - `GSM461180` (treated): `GSM461180_1` and `GSM461180_2`
 >
->       ```
->       https://zenodo.org/record/1185122/files/GSM461177_1.fastqsanger
->       https://zenodo.org/record/1185122/files/GSM461177_2.fastqsanger
->       https://zenodo.org/record/1185122/files/GSM461180_1.fastqsanger
->       https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
->       ```
+>    ```
+>    https://zenodo.org/record/1185122/files/GSM461177_1.fastqsanger
+>    https://zenodo.org/record/1185122/files/GSM461177_2.fastqsanger
+>    https://zenodo.org/record/1185122/files/GSM461180_1.fastqsanger
+>    https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
+>    ```
 >
->       {% include snippets/import_via_link.md %}
->       {% include snippets/import_from_data_library.md %}
+>    {% include snippets/import_via_link.md %}
+>    {% include snippets/import_from_data_library.md %}
 >
 >    > ### {% icon comment %} Comment
 >    > Note that these are the full files for the samples and ~1.5Gb each so it may take some minutes to import.
