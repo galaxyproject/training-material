@@ -17,9 +17,9 @@ objectives:
   - "Retrieve information about the DNA structure with PlasFlow"
 time_estimation: "3h"
 key_points:
-  - "Take home message 1"
-  - "Take-home message 2"
-  - "..."
+  - "Nanopore sequencing is useful for reconstruction of genomes"
+  - "Antimicriobal resistance genes are detectable after fast assembly"
+  - "Minimap2, Miniasm and Racon can be used for creating a fast assembly of Nanopore sequences"
 contributors:
   - willemdek11
   - shiltemann
@@ -58,8 +58,6 @@ In this tutorial we use metagenomic nanopore data, but similar pipelines can be 
 > 2. Long-read sequencing gives the ability to span repetitive genomic regions
 > 3. Long-read sequencing makes it possible to identify large structural variation
 >
-> ![16S Variable regions](../../images/16S_variableregions.jpg)
->
 > (slide credit [Nanopore sequencing: The advantages of long reads for genome assembly](https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512 ))
 {: .tip}
 
@@ -73,8 +71,6 @@ Library preparation was performed using the Rapid Barcoding Sequencing Kit (SQK-
 To obtain high-quality short read data, paired-end (2 × 150 bp) libraries were prepared by the focused acoustic shearing method with the NEBNext Ultra DNA Library Prep Kit and the Multiplex Oligos Kit for Illumina (NEB). The libraries were quantified by employing quantitative PCR with P5-P7 primers, and they were pooled together and sequenced on the NextSeq 500 platform according to the manufacturer's protocol (Illumina).
 
 Although a local basecaller script was used during the run, there was still a small amount of reads that were not basecalled due to the generation of raw data in a rapid mode. Albacore basecalling software (v1.0.3) was used to generate fast5 files harboring the 1D DNA sequence from fast5 files with only raw data in the tmp folder. Also, the read_fast5_basecaller.py script in Albacore was used to de-multiplex the 12 samples from basecalled fast5 files (except the files in fail folder) based on the 12 barcodes in SQK-RBK001. The Poretools toolkit was utilized to extract all the DNA sequences from fast5 to fasta format among the 12 samples, respectively (Poretools, RRID:SCR_015879).
-
-![Experiment setup](../../images/experiment_setup.png)
 
 To make this tutorial easier to execute, we are providing only one MDR pasmid-bearing strain - you are given the file below.
 
@@ -118,30 +114,18 @@ Now that we know what our input data is, let's get it into our Galaxy history:
 
 # Quality Control
 
-## Reducing sequencing and PCR errors
+## NanoPlot to explore data
 
-The first thing we want to do is combine our forward and reverse reads for each sample. This is done
-using the `make.contigs` command, which requires the paired collection as input. This command will extract
-the sequence and quality score data from your fastq files, create the reverse complement of the reverse
-read and then join the reads into contigs. Then we will combine all samples into a single fasta file,
-remembering which reads came from which samples using a *group* file.
+The first thing we want to do is to understand the input data we use. This is done
+using the NanoPlot command, which requires the Nanopore sequences as input. This command will
+create several plots, statisical report and a HTML report page.
 
-> ### {% icon comment %} Algorithm details
-> We have a very simple algorithm to do this. First, we align the pairs of sequences. Next, we look
-> across the alignment and identify any positions where the two reads disagree. If one sequence has a
-> base and the other has a gap, the quality score of the base must be over 25 to be considered real. If
-> both sequences have a base at that position, then we require one of the bases to have a quality score
-> 6 or more points better than the other. If it is less than 6 points better, then we set the consensus
-> base to an N.
-{: .comment}
+# De Novo Assembly
 
-### Merging our data
+## Pairwise alignment using Minimap2
 
-#### Make contigs from paired-end reads
-
-In this experiment we used paired-end sequencing, this means sequencing was done from both ends of each
-fragment, resulting in an overlap in the middle. We will now combine these pairs of reads into *contigs*.
-
+In this experiment we used Nanopore sequencing, this means sequencing results in long reads with overlap.
+To find this overlaps Minimap2 is used.
 ![Merging into contigs](../../images/16S_merge_contigs.png)
 
 
