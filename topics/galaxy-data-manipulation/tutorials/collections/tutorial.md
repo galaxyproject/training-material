@@ -7,7 +7,7 @@ questions:
   - "How to manipulate large numbers of datasets at once?"
 objectives:
   - "Understand and master dataset collections"
-time_estimation: "30 min"
+time_estimation: "30m"
 key_points:
   - "Jobs running on data collections use the same settings for each dataset in the collection."
   - "For example, FASTQ files can be combined into lists of dataset pairs. Each pair is made up of the forward reads dataset and the reverse reads dataset."
@@ -98,7 +98,7 @@ By now we see that a collection can be used to bundle a large number of items in
 ![bwa_mem_collection_readGroups](../../images/bwa_mem_collection_readGroups.png)
 {: .img-responsive}
 
-In the middle pane, provide the following parameters for `Map with BWA-MEM`:
+In the central panel, provide the following parameters for `Map with BWA-MEM`:
 
 - set **Using reference genome** to `hg38` (red outline);
 - set **Single or Paired-end reads** to `Paired collection` (blue outline);

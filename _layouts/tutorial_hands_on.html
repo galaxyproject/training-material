@@ -131,6 +131,9 @@ layout: base
 </header>
 
 <div class="container main-content">
+    <script type="application/ld+json">
+   {% include _includes/material.jsonld material=page %}
+    </script>
     <section class="tutorial">
         <h1>{{ page.title }}</h1>
 
@@ -176,7 +179,7 @@ layout: base
             {% endif %}
 
             {% if page.time_estimation %}
-            <p><strong>{% icon time %} Time estimation:</strong> {{ page.time_estimation }}</p>
+            <p><strong>{% icon time %} Time estimation:</strong> {{ page.time_estimation | duration_to_human }}</p>
             {% endif %}
         </blockquote>
 

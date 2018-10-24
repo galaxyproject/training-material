@@ -9,7 +9,7 @@ objectives:
   - "Analysis of RAD sequencing data using a reference genome"
   - "SNP calling from RAD sequencing data"
   - "Calculate population genomics statistics from RAD sequencing data"
-time_estimation: "1/2d"
+time_estimation: "8h"
 key_points:
 contributors:
   - yvanlebras
@@ -93,7 +93,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 > 1. **Process Radtags** {% icon tool %}: Run `Stacks: process radtags` on FastQ file to demultiplex the reads
 >  - Single-end or paired-end reads files: Single-end files
 >  - singles-end reads infile(s): SRR034310.fastq(.gz)
->  - Barcode file: Barcode fileBarcodes_SRR034310.tabular
+>  - Barcode file: Barcodes_SRR034310.tabular
 >  - Number of enzymes: One
 >  - Enzyme: sbfI
 >  - Capture discarded reads to a file: Yes
@@ -151,9 +151,8 @@ You can use the `Charts` functionality through the Visualize button to plot the 
 
 ![The bar diagram](../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG)
 
-Using a filter like `clean data, remove any read with an uncalled base` has only little impact:
+Based on the dataset with score quality of 10, using a filter like `clean data, remove any read with an uncalled base` has only little impact:
 
-TODO with which parameter combination the results have been determined?
 ![The output of clean tool](../../images/RAD4_Population_Genomics/Process_radtags_out_parameter2.png)
 
 The demultiplexed sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.
@@ -265,15 +264,17 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 >
 > > ### {% icon question %} Question
 > >
-> > 1. What is the maximum value of FST at any SNP?
-> > 2. How many SNPs reach this FST value?
+> > 1. What is the maximum value of FST' at any SNP? Don't hesitate to look at the [STACKS manual](http://catchenlab.life.illinois.edu/stacks/manual/#files)
+> > 2. What is the meaning of this FST' value compared a a classical FST one?
+> > 3. How many SNPs reach this FST' value?
 > >
 > > > ### {% icon solution %} Solution
-> > > - 0.75
-> > > - 3500
+> > > 1. 1
+> > > 2. FST’ is a haplotype measure of FST that is scaled to the theoretical maximum FST value at this locus. Depending on how many haplotypes there are, it may not be possible to reach an FST of 1, so this method will scale the value to 1
+> > > 2. 78
 > > {: .solution }
 > {: .question}
-> TODO: There is no column named `FST`, but one named `Fst'` (column 30). I find larger values than 0.75 in my results (e.g. 1.00.
+> You can now for example filter this dataset to only keep FST'=1 loci for further analysis...
 {: .hands_on}
 
 
