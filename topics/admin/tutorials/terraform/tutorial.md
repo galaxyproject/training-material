@@ -22,9 +22,9 @@ contributors:
 # Overview
 {:.no_toc}
 
-In this tutorial we have briefly cover what Terraform is and how you can leverage it for your needs. This will not make you an expert on Terraform but will give you the tools you need in order to maintain your cloud infrastructure as code.
+In this tutorial we will briefly cover what Terraform is and how you can leverage it for your needs. This will not make you an expert on Terraform but will give you the tools you need in order to maintain your cloud infrastructure as code.
 
-This will be a very practical training with emphasis on looking at examples from modules and becoming self sufficient. This tutorial uses OpenStack.
+This will be a very practical training with emphasis on looking at examples from modules and becoming self sufficient. This tutorial uses the OpenStack provider for Terraform. Other Cloud providers are available, but their invocation will be different from that which is described here.
 
 > ### Agenda
 >
@@ -292,7 +292,7 @@ We should now have a keypair in our cloud!
 
 ## Adding an Instance
 
-We've now have:
+We now have:
 
 - Terraform installed
 - The OpenStack plugin intialized
@@ -542,12 +542,13 @@ You now have a running instance! We do not know the IP address so we cannot logi
 
 With this, you're done. You've launched a single VM with Terraform. The image we are using comes with:
 
-- docker
-- singularity
-- conda
-- CVMFS connected to Galaxyproject's biological databases
+- HTCondor
+- Docker
+- Singularity
+- Conda
+- CVMFS connected to Galaxyproject's biological databases and Singularity containers
 
-This is the standard image that UseGalaxy.eu uses for all of its compute nodes.
+This is very similar to the standard image that UseGalaxy.eu uses for all of its compute nodes.
 
 # Managing a Cluster of VMs
 
