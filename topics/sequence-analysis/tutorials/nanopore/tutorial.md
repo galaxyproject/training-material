@@ -1,7 +1,5 @@
 ---
 layout: tutorial_hands_on
-topic_name: sequence-analysis
-tutorial_name: nanopore
 
 title: "Nanopore sequence analysis"
 zenodo_link: "https://doi.org/10.5281/zenodo.1443246"
