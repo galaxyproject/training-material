@@ -84,7 +84,7 @@ Terraform reads all files with the extension `.tf` in your current directory. Re
 >
 > 3. Create a `providers.tf` file with the following contents:
 >
->    ```hcl
+>    ```ini
 >    provider "openstack" {}
 >    ```
 >
@@ -157,7 +157,7 @@ We will start by managing your SSH keypair for the cloud as this is an easy thin
 >
 > 2. Create a new file, `main.tf` with the following structure. In `public_key`, write the complete value of your public key that you found in the first step.
 >
->    ```hcl
+>    ```ini
 >    resource "openstack_compute_keypair_v2" "my-cloud-key" {
 >      name       = "my-key"
 >      public_key = "ssh-rsa AAAAB3Nz..."
@@ -318,7 +318,7 @@ You are now ready to launch an instance!
 >    > The documentation below notes some specific values for the `image_name`, `flavor_name`, `security_groups`, and `network` properties. These *may not be correct* for your training, instead your instructor will provide these values to you.
 >    {: .warning-box}
 >
->    ```hcl
+>    ```ini
 >    resource "openstack_compute_instance_v2" "test" {
 >      name            = "test-vm"
 >      image_name      = "denbi-centos7-j10-2e08aa4bfa33-master"
@@ -565,7 +565,7 @@ We will start by setting up the new nodes and launching them as a test:
 
 > ### {% icon hands_on %} Hands-on: Adding configuration for other nodes
 >
-> 1. Update the name of the instance you already have, `test` to `name = "central-manager"`
+> 1. Update the name of the instance you already have, `test` to `name = "central-manager"`. This will be our scheduler central manager.
 >
 >    ```
 >    resource "openstack_compute_instance_v2" "test" {
@@ -643,22 +643,350 @@ We will start by setting up the new nodes and launching them as a test:
 >      Enter a value:
 >    ```
 >
->    This time, Terraform is able to modify the `openstack_compute_instance_v2.test` resource in place, it can just update the name of the VM.
+>    This time, Terraform is able to modify the `openstack_compute_instance_v2.test` resource in place, it can just update the name of the VM. It will also create the other three requested resources.
 >
 > 5. Enter `yes` and terraform will make the requested changes
 >
+> 6. It should complete successfully
+>
+>    > ### {% icon question %} Question
+>    >
+>    > What did the output look like?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > ```
+>    > > openstack_compute_instance_v2.nfs: Creation complete after 2m55s (ID: 421f0899-f2c1-43c9-8bbe-9b0415c8f4f4)
+>    > > openstack_compute_instance_v2.exec[0]: Creation complete after 2m57s (ID: 1ae02775-a0ff-47a5-907f-513190a8548e)
+>    > > openstack_compute_instance_v2.exec[1]: Creation complete after 2m59s (ID: d339ebeb-4288-498c-9923-42fce32a3808)
+>    > >
+>    > > Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+>    > > ```
+>    > {: .solution}
+>    {: .question}
 {: .hands_on}
 
-## Cloud-init
+## `cloud-init`
 
-blah blah blah
+These VMs that we have launched currently are all absolutely identical, except for the host name. There is no specialisation. They all do nothing. We will fix that and make these machines have individual roles by booting them with metadata attached to each instance.
 
-## Login
+[`cloud-init`](https://cloud-init.io/) is used for this process, it allows for injecting files and executing commands as part of the boot process.
 
-## HTCondor
 
-## Submitting a Test Job
+> ### {% icon tip %} Tip: Other actions
+> cloud-init allows for many more actions to be executed as well, you can read about them in [the documentation](https://cloudinit.readthedocs.io/en/latest/).
+{: .tip}
+
+The `cloud-init` configuration is a YAML file. Here we can see an example of how it is used, we have a YAML array at the top level. Inside, a hash of `content`, `owner`, `path`, and `permissions`.
+
+```yaml
+#cloud-config
+write_files:
+- content: |
+    CONDOR_HOST = 127.0.0.1
+    ALLOW_WRITE = *
+    ALLOW_READ = $(ALLOW_WRITE)
+    ALLOW_NEGOTIATOR = $(ALLOW_WRITE)
+    DAEMON_LIST = COLLECTOR, MASTER, NEGOTIATOR, SCHEDD
+    FILESYSTEM_DOMAIN = denbi
+    UID_DOMAIN = denbi
+    TRUST_UID_DOMAIN = True
+    SOFT_UID_DOMAIN = True
+  owner: root:root
+  path: /etc/condor/condor_config.local
+  permissions: '0644'
+```
+
+This will create a file with the value from `content`, owned by root/group root, in `/etc/condor/condor_config.local`. So let's re-structure our `main.tf` file to have some configuration:
+
+> ### {% icon hands_on %} Hands-on: cloud-init
+>
+> 1. Edit your central-manager server and add a block like the following at the end.
+>
+>    ```
+>    user_data = <<-EOF
+>      #cloud-config
+>      write_files:
+>      - content: |
+>          CONDOR_HOST = localhost
+>          ALLOW_WRITE = *
+>          ALLOW_READ = $(ALLOW_WRITE)
+>          ALLOW_NEGOTIATOR = $(ALLOW_WRITE)
+>          DAEMON_LIST = COLLECTOR, MASTER, NEGOTIATOR, SCHEDD
+>          FILESYSTEM_DOMAIN = terraform-training
+>          UID_DOMAIN = terraform-training
+>          TRUST_UID_DOMAIN = True
+>          SOFT_UID_DOMAIN = True
+>        owner: root:root
+>        path: /etc/condor/condor_config.local
+>        permissions: '0644'
+>      - content: |
+>          /data           /etc/auto.data          nfsvers=3
+>        owner: root:root
+>        path: /etc/auto.master.d/data.autofs
+>        permissions: '0644'
+>      - content: |
+>          share  -rw,hard,intr,nosuid,quota  ${openstack_compute_instance_v2.nfs.access_ip_v4}:/data/share
+>        owner: root:root
+>        path: /etc/auto.data
+>        permissions: '0644'
+>    EOF
+>    ```
+>
+>    Near the end we see an interesting thing, `${openstack_compute_instance_v2.nfs.access_ip_v4}`, this will template the `user_data` that is passed to `cloud-init`, with the IP address of the NFS server.
+>
+> 2. Edit your NFS server and add a user data block like:
+>
+>    ```
+>    user_data = <<-EOF
+>      #cloud-config
+>      write_files:
+>      - content: |
+>          /data/share *(rw,sync)
+>        owner: root:root
+>        path: /etc/exports
+>        permissions: '0644'
+>      runcmd:
+>       - [ mkdir, -p, /data/share ]
+>       - [ chown, "centos:centos", -R, /data/share ]
+>       - [ systemctl, enable, nfs-server ]
+>       - [ systemctl, start, nfs-server ]
+>       - [ exportfs, -avr ]
+>    EOF
+>    ```
+>
+>    This will:
+>
+>    1. Make the `/data/share` directory
+>    2. Set permissions on it
+>    3. Launch the NFS service
+>    4. Export `/data/share` to the network
+>
+> 3. Edit the `exec` node and add a user data block like:
+>
+>    ```
+>    user_data = <<-EOF
+>      #cloud-config
+>      write_files:
+>      - content: |
+>          CONDOR_HOST = ${openstack_compute_instance_v2.test.access_ip_v4}
+>          ALLOW_WRITE = *
+>          ALLOW_READ = $(ALLOW_WRITE)
+>          ALLOW_ADMINISTRATOR = *
+>          ALLOW_NEGOTIATOR = $(ALLOW_ADMINISTRATOR)
+>          ALLOW_CONFIG = $(ALLOW_ADMINISTRATOR)
+>          ALLOW_DAEMON = $(ALLOW_ADMINISTRATOR)
+>          ALLOW_OWNER = $(ALLOW_ADMINISTRATOR)
+>          ALLOW_CLIENT = *
+>          DAEMON_LIST = MASTER, SCHEDD, STARTD
+>          FILESYSTEM_DOMAIN = terraform-training
+>          UID_DOMAIN = terraform-training
+>          TRUST_UID_DOMAIN = True
+>          SOFT_UID_DOMAIN = True
+>          # run with partitionable slots
+>          CLAIM_PARTITIONABLE_LEFTOVERS = True
+>          NUM_SLOTS = 1
+>          NUM_SLOTS_TYPE_1 = 1
+>          SLOT_TYPE_1 = 100%
+>          SLOT_TYPE_1_PARTITIONABLE = True
+>          ALLOW_PSLOT_PREEMPTION = False
+>          STARTD.PROPORTIONAL_SWAP_ASSIGNMENT = True
+>        owner: root:root
+>        path: /etc/condor/condor_config.local
+>        permissions: '0644'
+>      - content: |
+>          /data           /etc/auto.data          nfsvers=3
+>        owner: root:root
+>        path: /etc/auto.master.d/data.autofs
+>        permissions: '0644'
+>      - content: |
+>          share  -rw,hard,intr,nosuid,quota  ${openstack_compute_instance_v2.nfs.access_ip_v4}:/data/share
+>        owner: root:root
+>        path: /etc/auto.data
+>        permissions: '0644'
+>    EOF
+>    ```
+> 4. Compare your final configuration against [ours](./main.tf).
+>
+> 5. Run `terraform apply`
+>
+>    It will look slightly different this time:
+>
+>    ```
+>    $ terraform apply
+>    openstack_compute_keypair_v2.my-cloud-key: Refreshing state... (ID: my-key)
+>    openstack_compute_instance_v2.nfs: Refreshing state... (ID: 421f0899-f2c1-43c9-8bbe-9b0415c8f4f4)
+>    openstack_compute_instance_v2.test: Refreshing state... (ID: 7a2ed5ba-0801-49b5-bf1b-9bf9cec733fa)
+>    openstack_compute_instance_v2.exec[0]: Refreshing state... (ID: 1ae02775-a0ff-47a5-907f-513190a8548e)
+>    openstack_compute_instance_v2.exec[1]: Refreshing state... (ID: d339ebeb-4288-498c-9923-42fce32a3808)
+>
+>    An execution plan has been generated and is shown below.
+>    Resource actions are indicated with the following symbols:
+>    -/+ destroy and then create replacement
+>
+>    Terraform will perform the following actions:
+>
+>    -/+ openstack_compute_instance_v2.exec[0] (new resource required)
+>          id:                         "1ae02775-a0ff-47a5-907f-513190a8548e" => <computed> (forces new resource)
+>          access_ip_v4:               "192.52.32.255" => <computed>
+>          ...
+>          user_data:                  "" => "07d27d50dbdf12a5647d9fd12a3510861d32203c" (forces new resource)
+>
+>    ...
+>    Plan: 4 to add, 0 to change, 4 to destroy.
+>
+>    Do you want to perform these actions?
+>      Terraform will perform the actions described above.
+>      Only 'yes' will be accepted to approve.
+>
+>      Enter a value:
+>    ```
+>
+>    Here Terraform has detect that the userdata has changed. It cannot change this dynamically at runtime, only at boot time. So it decides that it must destroy and then replace that resource.
+>
+{:.hands_on}
+
+## Login / HTCondor / A Test Job
+
+We now have a running cluster! Let's log in
+
+> ### {% icon hands_on %} Hands-on: Cluster Usage
+>
+> 1. Now that we have a cluster in the cloud, let's login. Look through the output of `terraform show` to find your `central-manager` server and its IP address.
+>
+> 2. `ssh centos@<your manager ip>`
+>
+> 3. Run `condor_status` which will show you the status of your cluster.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > What does the output look like? How many executor nodes do you see?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > ```
+>    > > [centos@central-manager share]$ condor_status
+>    > > Name                   OpSys      Arch   State     Activity LoadAv Mem   ActvtyTime
+>    > >
+>    > > slot1@exec-0.novalocal LINUX      X86_64 Unclaimed Idle      0.150  991  0+00:15:28
+>    > > slot1@exec-1.novalocal LINUX      X86_64 Unclaimed Idle      0.000  991  0+00:15:32
+>    > >
+>    > >                      Machines Owner Claimed Unclaimed Matched Preempting  Drain
+>    > >
+>    > >         X86_64/LINUX        2     0       0         2       0          0      0
+>    > >
+>    > >                Total        2     0       0         2       0          0      0
+>    > > ```
+>    > {: .solution}
+>    {: .question}
+>
+> 4. Change into the `/data/share/`
+>
+> 5. Create a file, `test.job` with the following contents:
+>
+>    ```
+>    Universe = vanilla
+>    Executable = /data/share/test.sh
+>    Log = test.$(process).log
+>    Output = test.$(process).out
+>    Error = test.$(process).err
+>    request_cpus = 1
+>    Queue 10
+>    ```
+>
+> 6. Create a file `test.sh` with the following:
+>
+>    ```
+>    #!/bin/bash
+>    echo "$(hostname)"
+>    sleep 1
+>    ```
+>
+> 7. Run `condor_submit test.job`
+>
+> 8. Run `condor_q` to see the queue status. You can invoke this repeatedly to watch the queue update
+>
+> 9. Run `cat *.out` and you should see the hostnames where the jobs were run
+>
+{:.hands_on}
 
 # Tearing Everything Down
 
+> ### {% icon hands_on %} Hands-on: Cleanup
+>
+> 1. Simple delete your `main.tf` file (or rename it without the `.tf` extension)
+>
+> 2. Run `terraform apply`. Terraform will see that the resource is no longer part of your code and remove it.
+>
+>    ```
+>    openstack_compute_keypair_v2.my-cloud-key: Refreshing state... (ID: my-key)
+>    openstack_compute_instance_v2.nfs: Refreshing state... (ID: 0b58d613-48f2-49c4-9d8a-3623d17f1c93)
+>    openstack_compute_instance_v2.test: Refreshing state... (ID: e433f772-6f17-4609-aa61-053f7602533f)
+>    openstack_compute_instance_v2.exec[0]: Refreshing state... (ID: 034a4206-b0ad-4d0e-9c75-27d3966f99ac)
+>    openstack_compute_instance_v2.exec[1]: Refreshing state... (ID: fe576776-397e-4f1f-a8e7-4a9203764567)
+>
+>    An execution plan has been generated and is shown below.
+>    Resource actions are indicated with the following symbols:
+>      - destroy
+>
+>    Terraform will perform the following actions:
+>
+>      - openstack_compute_instance_v2.exec[0]
+>
+>      - openstack_compute_instance_v2.exec[1]
+>
+>      - openstack_compute_instance_v2.nfs
+>
+>      - openstack_compute_instance_v2.test
+>
+>      - openstack_compute_keypair_v2.my-cloud-key
+>
+>
+>    Plan: 0 to add, 0 to change, 5 to destroy.
+>
+>    Do you want to perform these actions?
+>      Terraform will perform the actions described above.
+>      Only 'yes' will be accepted to approve.
+>
+>      Enter a value:
+>    ```
+{: .hands_on}
+
 ## Destroy time provisioners
+
+Sometimes, immediately terminating the VM is not ideal behaviour. Especially if you're managing a cluster like HTCondor which can gracefully terminate jobs, you might want to permit that. Terraform provides 'destroy-time provisioners', code snippets that are run before the VM is destroyed. If they return successfully, destruction continues. If they exit with an error code, then destruction is halted. We can write a simple one for HTCondor like so:
+
+```bash
+set -ex
+condor_drain $(hostname) || true;
+my_ip=$(/sbin/ifconfig eth0 | grep 'inet ' | awk '{print $2}')
+# Find slots which have an address associated with us.
+slots=$(condor_status -autoformat Name State MyAddress | grep "<${my_ip}?9618" | wc -l)
+# If there are more than one slots, leave it.
+if (( slots > 1 )); then
+    exit 1;
+else
+    # Otherwise, poweroff.
+    /usr/sbin/condor_off -graceful
+    exit 0;
+fi
+```
+
+Which can be provided to your VM like:
+
+```
+provisioner "remote-exec" {
+  when = "destroy"
+
+  scripts = [
+    "prepare-restart.sh",
+  ]
+
+  connection {
+    type        = "ssh"
+    user        = "centos"
+    private_key = "${file("~/.ssh/id_rsa")}"
+  }
+}
+```
+
+Terraform will SSH in with those credentials, copy over the script in `prepare-restart.sh`, and execute it.
