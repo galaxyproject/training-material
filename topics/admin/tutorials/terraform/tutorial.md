@@ -13,7 +13,7 @@ objectives:
   - Launch and tear down a cluster with Terraform
 time_estimation: "60m"
 key_points:
-  - Terraform lets you develop implement infrastructure-as-code within your organisation
+  - Terraform lets you develop and implement infrastructure-as-code within your organisation
   - It can drastically simplify management of large numbers of VMs
 contributors:
   - erasche
@@ -22,7 +22,7 @@ contributors:
 # Overview
 {:.no_toc}
 
-In this tutorial we will briefly cover what Terraform is and how you can leverage it for your needs. This will not make you an expert on Terraform but will give you the tools you need in order to maintain your cloud infrastructure as code.
+In this tutorial we will briefly cover what [Terraform](https://www.terraform.io) is and how you can leverage it for your needs. This will not make you an expert on Terraform but will give you the tools you need in order to maintain your cloud infrastructure as code.
 
 This will be a very practical training with emphasis on looking at examples from modules and becoming self sufficient. This tutorial uses the OpenStack provider for Terraform. Other Cloud providers are available, but their invocation will be different from that which is described here.
 
@@ -67,6 +67,8 @@ Some groups use Ansible or Bash scripts in order to launch VMs. This can be a be
 
 We will start small, by managing a single VM in our cloud account. Make sure you have your OpenStack credentials available.
 
+<!-- TODO(hxr): add example DO config? -->
+
 ## Keypair
 
 Terraform reads all files with the extension `.tf` in your current directory. Resources can be in a single file, or organised across several different files. We had the best experience by separating out logical groups of resources:
@@ -87,6 +89,8 @@ Terraform reads all files with the extension `.tf` in your current directory. Re
 >    ```ini
 >    provider "openstack" {}
 >    ```
+>
+>    This specifies the configuration for the OpenStack plugin. You can either specify the configuration in the plugin, or it will automatically load the values from the normal OpenStack environment variable names.
 >
 > 4. Run `terraform init`
 >
@@ -180,7 +184,16 @@ We will start by managing your SSH keypair for the cloud as this is an easy thin
 >    > > * provider.openstack: One of 'auth_url' or 'cloud' must be specified
 >    > > ```
 >    > >
->    > > You should source your openstack credentials first, and then re-run `terraform plan`:
+>    > > You should source your openstack credentials first. This is the file which has lines like:
+>    > >
+>    > > ```bash
+>    > > export OS_AUTH_URL=https://...
+>    > > export OS_PROJECT_ID=...
+>    > > export OS_PROJECT_NAME="..."
+>    > > export OS_USER_DOMAIN_NAME="Default"
+>    > > ```
+>    > >
+>    > > You should run `source /path/to/file.sh` in your terminal, and then re-run `terraform plan`:
 >    > >
 >    > > ```
 >    > > An execution plan has been generated and is shown below.
@@ -239,8 +252,6 @@ Terraform informs us first about the different symbols used. Here it tells us th
 
 Lastly it informs us that we did not save our plan. Terraform can maintain a concept of what the remote resource's state looks like between your `terraform plan` and `terraform apply` steps. This is a more advanced feature and will not be covered today.
 
-Now that we've defined a keypair (or cannot, but have an existing one in OpenStack)
-
 > ### {% icon hands_on %} Applying our plan
 >
 > Now that you've reviewed the plan and everything looks good, we're ready to apply our changes.
@@ -285,10 +296,22 @@ Now that we've defined a keypair (or cannot, but have an existing one in OpenSta
 >
 >    Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 >    ```
+>
+>
+>    > ### {% icon tip %} Tip: "Key pair 'my-key' already exists"
+>    >
+>    > If you see an error message that says:
+>    >
+>    > ```
+>    > {"conflictingRequest": {"message": "Key pair 'my-key' already exists.", "code": 409}}
+>    > ```
+>    >
+>    > Then you already have a keypair with this name. You should update the `name = "my-key"` to use a different name.
+>    {: .tip}
+>
 {: .hands_on}
 
 We should now have a keypair in our cloud!
-
 
 ## Adding an Instance
 
@@ -323,7 +346,7 @@ You are now ready to launch an instance!
 >      name            = "test-vm"
 >      image_name      = "denbi-centos7-j10-2e08aa4bfa33-master"
 >      flavor_name     = "m1.tiny"
->      key_pair        = "${openstack_compute_keypair_v2.cloud2.name}"
+>      key_pair        = "${openstack_compute_keypair_v2.my-cloud-key.name}"
 >      security_groups = ["default"]
 >
 >      network {
@@ -807,7 +830,139 @@ This will create a file with the value from `content`, owned by root/group root,
 >        permissions: '0644'
 >    EOF
 >    ```
-> 4. Compare your final configuration against [ours](./main.tf).
+> 4. Compare your final configuration against ours:
+>
+>    > ### {% icon solution %} Final Configuration
+>    > ```
+>    > resource "openstack_compute_keypair_v2" "my-cloud-key" {
+>    >   name       = "my-key"
+>    >   public_key = "ssh-rsa AAAAB3..."
+>    > }
+>    >
+>    > resource "openstack_compute_instance_v2" "test" {
+>    >   name            = "central-manager"
+>    >   image_name      = "denbi-centos7-j10-2e08aa4bfa33-master"
+>    >   flavor_name     = "m1.tiny"
+>    >   key_pair        = "${openstack_compute_keypair_v2.my-cloud-key.name}"
+>    >   security_groups = ["default"]
+>    >
+>    >   network {
+>    >     name = "public"
+>    >   }
+>    >
+>    >   user_data = <<-EOF
+>    >     #cloud-config
+>    >     write_files:
+>    >     - content: |
+>    >         CONDOR_HOST = localhost
+>    >         ALLOW_WRITE = *
+>    >         ALLOW_READ = $(ALLOW_WRITE)
+>    >         ALLOW_NEGOTIATOR = $(ALLOW_WRITE)
+>    >         DAEMON_LIST = COLLECTOR, MASTER, NEGOTIATOR, SCHEDD
+>    >         FILESYSTEM_DOMAIN = terraform-training
+>    >         UID_DOMAIN = terraform-training
+>    >         TRUST_UID_DOMAIN = True
+>    >         SOFT_UID_DOMAIN = True
+>    >       owner: root:root
+>    >       path: /etc/condor/condor_config.local
+>    >       permissions: '0644'
+>    >     - content: |
+>    >         /data           /etc/auto.data          nfsvers=3
+>    >       owner: root:root
+>    >       path: /etc/auto.master.d/data.autofs
+>    >       permissions: '0644'
+>    >     - content: |
+>    >         share  -rw,hard,intr,nosuid,quota  ${openstack_compute_instance_v2.nfs.access_ip_v4}:/data/share
+>    >       owner: root:root
+>    >       path: /etc/auto.data
+>    >       permissions: '0644'
+>    >   EOF
+>    > }
+>    >
+>    > resource "openstack_compute_instance_v2" "nfs" {
+>    >   name            = "nfs-server"
+>    >   image_name      = "denbi-centos7-j10-2e08aa4bfa33-master"
+>    >   flavor_name     = "m1.tiny"
+>    >   key_pair        = "${openstack_compute_keypair_v2.my-cloud-key.name}"
+>    >   security_groups = ["default"]
+>    >
+>    >   network {
+>    >     name = "public"
+>    >   }
+>    >
+>    >   user_data = <<-EOF
+>    >     #cloud-config
+>    >     write_files:
+>    >     - content: |
+>    >         /data/share *(rw,sync)
+>    >       owner: root:root
+>    >       path: /etc/exports
+>    >       permissions: '0644'
+>    >     runcmd:
+>    >      - [ mkdir, -p, /data/share ]
+>    >      - [ chown, "centos:centos", -R, /data/share ]
+>    >      - [ systemctl, enable, nfs-server ]
+>    >      - [ systemctl, start, nfs-server ]
+>    >      - [ exportfs, -avr ]
+>    >   EOF
+>    > }
+>    >
+>    > resource "openstack_compute_instance_v2" "exec" {
+>    >   name            = "exec-${count.index}"
+>    >   image_name      = "denbi-centos7-j10-2e08aa4bfa33-master"
+>    >   flavor_name     = "m1.tiny"
+>    >   key_pair        = "${openstack_compute_keypair_v2.my-cloud-key.name}"
+>    >   security_groups = ["default"]
+>    >   count           = 2
+>    >
+>    >   network {
+>    >     name = "public"
+>    >   }
+>    >
+>    >   user_data = <<-EOF
+>    >     #cloud-config
+>    >     write_files:
+>    >     - content: |
+>    >         CONDOR_HOST = ${openstack_compute_instance_v2.test.access_ip_v4}
+>    >         ALLOW_WRITE = *
+>    >         ALLOW_READ = $(ALLOW_WRITE)
+>    >         ALLOW_ADMINISTRATOR = *
+>    >         ALLOW_NEGOTIATOR = $(ALLOW_ADMINISTRATOR)
+>    >         ALLOW_CONFIG = $(ALLOW_ADMINISTRATOR)
+>    >         ALLOW_DAEMON = $(ALLOW_ADMINISTRATOR)
+>    >         ALLOW_OWNER = $(ALLOW_ADMINISTRATOR)
+>    >         ALLOW_CLIENT = *
+>    >         DAEMON_LIST = MASTER, SCHEDD, STARTD
+>    >         FILESYSTEM_DOMAIN = terraform-training
+>    >         UID_DOMAIN = terraform-training
+>    >         TRUST_UID_DOMAIN = True
+>    >         SOFT_UID_DOMAIN = True
+>    >         # run with partitionable slots
+>    >         CLAIM_PARTITIONABLE_LEFTOVERS = True
+>    >         NUM_SLOTS = 1
+>    >         NUM_SLOTS_TYPE_1 = 1
+>    >         SLOT_TYPE_1 = 100%
+>    >         SLOT_TYPE_1_PARTITIONABLE = True
+>    >         ALLOW_PSLOT_PREEMPTION = False
+>    >         STARTD.PROPORTIONAL_SWAP_ASSIGNMENT = True
+>    >       owner: root:root
+>    >       path: /etc/condor/condor_config.local
+>    >       permissions: '0644'
+>    >     - content: |
+>    >         /data           /etc/auto.data          nfsvers=3
+>    >       owner: root:root
+>    >       path: /etc/auto.master.d/data.autofs
+>    >       permissions: '0644'
+>    >     - content: |
+>    >         share  -rw,hard,intr,nosuid,quota  ${openstack_compute_instance_v2.nfs.access_ip_v4}:/data/share
+>    >       owner: root:root
+>    >       path: /etc/auto.data
+>    >       permissions: '0644'
+>    >   EOF
+>    > }
+>    > ```
+>    >
+>    {: .solution}
 >
 > 5. Run `terraform apply`
 >
@@ -843,7 +998,7 @@ This will create a file with the value from `content`, owned by root/group root,
 >      Enter a value:
 >    ```
 >
->    Here Terraform has detect that the userdata has changed. It cannot change this dynamically at runtime, only at boot time. So it decides that it must destroy and then replace that resource.
+>    Here Terraform has detected that the userdata has changed. It cannot change this dynamically at runtime, only at boot time. So it decides that it must destroy and then replace that resource.
 >
 {:.hands_on}
 
@@ -858,6 +1013,8 @@ We now have a running cluster! Let's log in
 > 2. `ssh centos@<your manager ip>`
 >
 > 3. Run `condor_status` which will show you the status of your cluster.
+>
+>    After your central manager VM booted, the executor nodes booted as well. Then, using the IP address of the central manager, the executors contacted that machine, and advertised their availability to run jobs.
 >
 >    > ### {% icon question %} Question
 >    >
@@ -901,14 +1058,54 @@ We now have a running cluster! Let's log in
 >    echo "$(hostname)"
 >    sleep 1
 >    ```
+> 7. Run `chmod +x test.sh`
 >
-> 7. Run `condor_submit test.job`
+> 8. Run `condor_submit test.job`
 >
-> 8. Run `condor_q` to see the queue status. You can invoke this repeatedly to watch the queue update
+> 9. (Quickly) Run `condor_q` to see the queue status. You can invoke this repeatedly to watch the queue update.
 >
-> 9. Run `cat *.out` and you should see the hostnames where the jobs were run
+> 10. Run `cat *.out` and you should see the hostnames where the jobs were run
 >
 {:.hands_on}
+
+# Infrastructure Graph
+
+Terraform has the ability to produce a graph showing the relationship of resources in your infrastructure. We will produce a graphic for our current terraform plan:
+
+> ### {% icon hands_on %} Hands-on: Infrastructure Graph
+>
+> 1. Run:
+>
+>    ```
+>    terraform graph | dot -Tpng > graph.png
+>    ```
+>
+>    You may need the `graphviz` package installed in order to produce the graph
+>
+> 2. Open up `graph.png` in an image viewer
+>
+>    > ### {% icon question %} Question
+>    >
+>    > What did the output look like?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > ![](./graph.png)
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+This is a very simple resrouce graph:
+
+![A simple graph](./graph.png "A simple graph showing the structure of the infrastructure in this lesson")
+
+The dependencies follow the arrows, the NFS depends on the keypair being setup. The `test` machine (central manager) depends on the NFS server being available (and having an IP), the exec nodes depend on the central manager server. This is a somewhat simplified view, there are more dependencies which are not shown for simplicity (e.g. the exec nodes depend on NFS)
+
+If you have variables this can produce a more complex dependency graph:
+
+![A more complex graph showing variables](./graph2.png "A more complex graph showing variables")
+
+Once you develop complex infrastructure, these graphics become less useful. For reference, you can find [UseGalaxy.eu's infrastructure graph](https://raw.githubusercontent.com/usegalaxy-eu/infrastructure/master/graph.png) in our repository (you will need to zoom in a lot.)
 
 # Tearing Everything Down
 
@@ -991,3 +1188,7 @@ provisioner "remote-exec" {
 ```
 
 Terraform will SSH in with those credentials, copy over the script in `prepare-restart.sh`, and execute it.
+
+# UseGalaxy.eu's Terraform Usage
+
+All of [our virtual infrastructure](https://github.com/usegalaxy-eu/infrastructure/) is managed, publicly, with Terraform. We hope that this can inspire others and give people ideas of the sort of things they can accomplish with Terraform. If you have questions over the way we have done certain things, feel free to file an issue and ask us!

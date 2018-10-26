@@ -44,14 +44,19 @@ Some terms that you should know first:
 
 host files
 :    An Ansible-specific file that defines groups of hosts (not be confused with `/etc/hosts`).
+
 Ansible module
 :    A piece of Python code that converts some parameters into an invocation. An example would be the `command` module which converts parameters like `command: ls` into a command line that is executed. There are pre-built modules for just about everything.
+
 task
 :    A call to an Ansible module that should be executed and the configuration for this module.
+
 role
 :    A folder containing some tasks, templates, files, and default values for variables. People share roles on ["Ansible Galaxy"](https://galaxy.ansible.com/).
+
 playbook
 :    a YAML file listing a set of tasks and/or roles that should be applied to a group of hosts.
+
 vault
 :    An encrypted YAML file. You put your secrets here and then you can use them in tasks/roles/playbooks.
 
