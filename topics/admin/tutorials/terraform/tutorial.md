@@ -252,7 +252,7 @@ Terraform informs us first about the different symbols used. Here it tells us th
 
 Lastly it informs us that we did not save our plan. Terraform can maintain a concept of what the remote resource's state looks like between your `terraform plan` and `terraform apply` steps. This is a more advanced feature and will not be covered today.
 
-> ### {% icon hands_on %} Applying our plan
+> ### {% icon hands_on %} Hands-on: Applying our plan
 >
 > Now that you've reviewed the plan and everything looks good, we're ready to apply our changes.
 >
