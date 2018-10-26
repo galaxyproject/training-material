@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Galaxy Training!</title>
+        <title>Genome annotation with Prokka</title>
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
         <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
@@ -379,17 +379,13 @@
   <ol>
     <li><strong>Prokka</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters (leave everything else unchanged)
       <ul>
-        <li>contigs to annotate: <code class="highlighter-rouge">contigs.fasta</code></li>
-        <li>Locus tag prefix (–locustag): P</li>
-        <li>Force GenBank/ENA/DDJB compliance (–compliant): No</li>
-        <li>Sequencing Centre ID (–centre): V</li>
-        <li>Genus Name: Staphylococcus</li>
-        <li>Species Name: aureus</li>
-        <li>Use genus-specific BLAST database: No</li>
-        <li>Your tool interface should look like this:</li>
-        <li><img src="images/interface.png" alt="prokka interface" /></li>
-        <li>Click Execute
-<br /><br /></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“contigs to annotate”</em>: <code class="highlighter-rouge">contigs.fasta</code></li>
+        <li><em>“Locus tag prefix (–locustag)”</em>: <code class="highlighter-rouge">P</code></li>
+        <li><em>“Force GenBank/ENA/DDJB compliance (–compliant)”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><em>“Sequencing Centre ID (–centre)”</em>: <code class="highlighter-rouge">V</code></li>
+        <li><em>“Genus Name (–genus)”</em>: <code class="highlighter-rouge">Staphylococcus</code></li>
+        <li><em>“Species Name (–species)”</em>: <code class="highlighter-rouge">aureus</code></li>
+        <li><em>“Use genus-specific BLAST database”</em>: <code class="highlighter-rouge">No</code></li>
       </ul>
     </li>
   </ol>
@@ -403,8 +399,7 @@
   <li>The GFF and GBK files contain all of the information about the features annotated (in different formats.)</li>
   <li>The .txt file contains a summary of the number of features annotated.</li>
   <li>The .faa file contains the protein sequences of the genes annotated.</li>
-  <li>The .ffn file contains the nucleotide sequences of the genes annotated.
- <br /><br /></li>
+  <li>The .ffn file contains the nucleotide sequences of the genes annotated.</li>
 </ul>
 
 <h2 id="view-annotated-features-in-jbrowse">View annotated features in JBrowse</h2>
@@ -415,36 +410,39 @@
   <h3 id="hands_on-hands-on-visualize-the-annotation"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize the annotation</h3>
 
   <ol>
-    <li>Search for <strong>JBrowse</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and run it with the following parameters
+    <li><strong>JBrowse</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“Reference genome to display” to <code class="highlighter-rouge">Use a genome from history</code></li>
-        <li>
-          <p>“Select the reference genome” to <code class="highlighter-rouge">Prokka on data XX.fna</code>.</p>
+        <li><em>“Reference genome to display”</em>: <code class="highlighter-rouge">Use a genome from history</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference genome”</em>: <code class="highlighter-rouge">fna</code> output of <strong>Prokka</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          </ul>
 
           <p>This sequence will be the reference against which annotations are displayed</p>
         </li>
-        <li>“Produce Standalone Instance” to <code class="highlighter-rouge">Yes</code></li>
-        <li>“Genetic Code” to <code class="highlighter-rouge">11: The Bacterial, Archaeal and Plant Plastid Code</code></li>
-        <li>“JBrowse-in-Galaxy Action” to <code class="highlighter-rouge">New JBrowse Instance</code></li>
-        <li>“Track Group”</li>
-        <li>We will now set up one track - each track is a dataset displayed underneath the reference sequence (which is displayed as nucleotides in FASTA format).</li>
+        <li><em>“Produce Standalone Instance”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Genetic Code”</em>: <code class="highlighter-rouge">11: The Bacterial, Archaeal and Plant Plastid Code</code></li>
+        <li><em>“JBrowse-in-Galaxy Action”</em>: <code class="highlighter-rouge">New JBrowse Instance</code></li>
         <li>
-          <p>We will choose to display the annotations (the Prokka.gff file).</p>
+          <p>Click on <code class="highlighter-rouge">Insert Track Group</code></p>
+
+          <p>We will now set up one track - each track is a dataset displayed underneath the reference sequence (which is displayed as nucleotides in FASTA format).
+We will choose to display the annotations (the Prokka.gff file).</p>
 
           <ul>
-            <li><strong>Track 1 - sequence reads</strong>: Click on <code class="highlighter-rouge">Insert Track Group</code> and fill it with
+            <li>In <strong>1: Track Group</strong>
               <ul>
-                <li>“Track Cateogry” to <code class="highlighter-rouge">gene annotations</code></li>
-                <li>Click on <code class="highlighter-rouge">Insert Annotation Track</code> and fill it with
+                <li><em>“Track Cateogry”</em>: <code class="highlighter-rouge">gene annotations</code></li>
+                <li>Click on <code class="highlighter-rouge">Insert Annotation Track</code> and fill it with:
                   <ul>
-                    <li>“Track Type” to <code class="highlighter-rouge">GFF/GFF3/BED/GBK Features</code></li>
-                    <li>“GFF/GFF3/BED Track Data” to <code class="highlighter-rouge">Prokka on data XX:gff</code></li>
-                    <li>“Track Visibility” to <code class="highlighter-rouge">On for new users</code></li>
-                    <li>“JBrowse Track Type [Advanced]” to <code class="highlighter-rouge">Canvas Features</code></li>
-                    <li>Click on “JBrowse Styling Options [Advanced]”</li>
-                    <li>“JBrowse style.label” to <code class="highlighter-rouge">product,name,id</code></li>
-                    <li>“Track Visibility” to <code class="highlighter-rouge">On for new users</code></li>
-                    <li>Click Execute</li>
+                    <li><em>“Track Type”</em>: <code class="highlighter-rouge">GFF/GFF3/BED/GBK Features</code></li>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GFF/GFF3/BED Track Data”</em>: <code class="highlighter-rouge">gff</code> output of <strong>Prokka</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+                    <li><em>“JBrowse Track Type [Advanced]”</em>: <code class="highlighter-rouge">Canvas Features</code></li>
+                    <li>Click on “JBrowse Styling Options [Advanced]”
+                      <ul>
+                        <li><em>“JBrowse style.label”</em>: <code class="highlighter-rouge">product,name,id</code></li>
+                      </ul>
+                    </li>
+                    <li><em>“Track Visibility”</em>: <code class="highlighter-rouge">On for new users</code></li>
                   </ul>
                 </li>
               </ul>
@@ -452,18 +450,15 @@
           </ul>
         </li>
       </ul>
-    </li>
-  </ol>
 
-  <p>A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view its contents and play with it</p>
-  <ol>
+      <p>A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view its contents and play with it</p>
+    </li>
     <li>
       <p>Inspect the <code class="highlighter-rouge">JBrowse on data XX and data XX - Complete</code> file by clicking on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon</p>
 
       <p>The JBrowse window will appear in the centre Galaxy panel.</p>
     </li>
-    <li>
-      <p>Display all the tracks and practice maneuvering around</p>
+    <li>Display all the tracks and practice maneuvering around
       <ol>
         <li>Click on the tick boxes on the left to display the tracks</li>
         <li>Select contig 1 in the drop down box. You can only see one contig displayed at a time.</li>
