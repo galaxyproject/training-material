@@ -1089,7 +1089,7 @@ Terraform has the ability to produce a graph showing the relationship of resourc
 >    > What did the output look like?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > ![](./graph.png)
+>    > > ![](../../images/graph.png)
 >    > {: .solution}
 >    {: .question}
 >
@@ -1097,13 +1097,13 @@ Terraform has the ability to produce a graph showing the relationship of resourc
 
 This is a very simple resrouce graph:
 
-![A simple graph](./graph.png "A simple graph showing the structure of the infrastructure in this lesson")
+![A simple graph](../../images/graph.png "A simple graph showing the structure of the infrastructure in this lesson")
 
 The dependencies follow the arrows, the NFS depends on the keypair being setup. The `test` machine (central manager) depends on the NFS server being available (and having an IP), the exec nodes depend on the central manager server. This is a somewhat simplified view, there are more dependencies which are not shown for simplicity (e.g. the exec nodes depend on NFS)
 
 If you have variables this can produce a more complex dependency graph:
 
-![A more complex graph showing variables](./graph2.png "A more complex graph showing variables")
+![A more complex graph showing variables](../../images/graph2.png "A more complex graph showing variables")
 
 Once you develop complex infrastructure, these graphics become less useful. For reference, you can find [UseGalaxy.eu's infrastructure graph](https://raw.githubusercontent.com/usegalaxy-eu/infrastructure/master/graph.png) in our repository (you will need to zoom in a lot.)
 
