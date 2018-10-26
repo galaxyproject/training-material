@@ -212,7 +212,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 
 > ### {% icon warning %} Safety First
 >
-> Many of the things you can do with Ansible can be quite dangerous. As dangerous as normally being at the linux command line, but scaled across N machines. Be very careful with the changes you plan to make.
+> Many of the things you can do with Ansible can be quite dangerous. As dangerous as normally being at the Linux command line, but scaled across N machines. Be very careful with the changes you plan to make.
 > Ansible provides some flags which can help you identify changes before they're made to production systems:
 >
 > **`--diff`**
