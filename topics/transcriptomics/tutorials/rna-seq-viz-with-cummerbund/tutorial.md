@@ -90,7 +90,7 @@ For this tutorial, we are interested in CuffDiff's tested transcripts for differ
 > ### {% icon hands_on %} Hands-on: Extract CuffDiff results
 >
 > 1. **Extract CuffDiff** {% icon tool %} with the following parameters
->   - "Select tables to output" to `Transcript differential expression testing`
+>   - *"Select tables to output"*: `Transcript differential expression testing`
 >
 > 2. Inspect the table
 >
@@ -121,8 +121,8 @@ We now want to first highlight the most significant differentially expressed gen
 > ### {% icon hands_on %} Hands-on: Extract CuffDiff's most significant differentially expressed genes
 >
 > 1. **Filter** {% icon tool %} with the following parameters
->   - "Filter" to the extracted table from the previous step
->   - "With following condition" to an appropriate filter over the target column (see questions below when in doubt)
+>   - *"Filter"*: the extracted table from the previous step
+>   - *"With following condition"*: an appropriate filter over the target column (see questions below when in doubt)
 >
 >    > ### {% icon question %} Questions
 >    > 1. What column stores the information of significance for each record?
@@ -140,8 +140,8 @@ We now want to first highlight the most significant differentially expressed gen
 >  on the basis of their value at the 10th column
 >
 > 2. **Sort** {% icon tool %}: with the following parameters
->   - "Sort Dataset" to the filtered table
->   - "on column", "with flavor" and "everything in"  to the appropriate values (see above)
+>   - *"Sort Dataset"*: the filtered table
+>   - *"on column"*, *"with flavor"* and *"everything in"*: the appropriate values (see above)
 >
 >    > ### {% icon question %} Questions
 >    > 1. Since the start of our filtering process, how many records now represent the significant subset for extracting informations?
@@ -167,14 +167,12 @@ We are interested in visualizing all expression values of all transcripts relati
 > ### {% icon hands_on %} Hands-on: Visualization
 >
 > 1. **CummeRbund** {% icon tool %} with the following parameters
->   - Click on "Insert plot"
->   - "Width" and "Height" to `800x600`
->   - "Plot type" to `Expression Plot`
->   - "Expression levels to plot" to `Isoforms`
->   - "Gene ID" to `NDUFV1`
->   - Your input form parameters should look like the following. If so, click on "Execute"
->
-> ![Expression plot_form](../../images/cummerbund-expression-plot-form.png)
+>   - Click on *"Insert plot"*
+>   - *"Width"*: `800`
+>   - *"Height"*: `600`
+>   - *"Plot type"*: `Expression Plot`
+>     - *"Expression levels to plot"*:`Isoforms`
+>     - *"Gene ID"*: `NDUFV1`
 {: .hands_on}
 
 Our first CummeRbund plot is the "Expression Plot":
@@ -188,11 +186,12 @@ Our plot has a modest number of isoforms, and is therefore already readable. How
 > ### {% icon hands_on %} Hands-on: Visualization
 >
 > 1. **CummeRbund** {% icon tool %} with the following parameters
->   - Click on "Insert plot"
->   - "Width" and "Height" to `800x600`
->   - "Plot type" to `Expression Bar Plot`
->   - "Expression levels to plot" to `Isoforms`
->   - "Gene ID" to `NDUFV1`
+>   - Click on *"Insert plot"*
+>   - *"Width"*: `800`
+>   - *"Height"*: `600`
+>   - *"Plot type"*: `Expression Bar Plot`
+>     - *"Expression levels to plot"*:`Isoforms`
+>     - *"Gene ID"*: `NDUFV1`
 {: .hands_on}
 
 ![Expression bar plot](../../images/cummerbund-expression-bar-plot.png)
