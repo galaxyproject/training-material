@@ -1089,7 +1089,7 @@ Terraform has the ability to produce a graph showing the relationship of resourc
 >    > What did the output look like?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > ![](../../images/graph.png "A simple graph showing the structure of the infrastructure in this lesson")
+>    > > ![A simple graph](../../images/graph.png "A simple graph showing the structure of the infrastructure in this lesson")
 >    > {: .solution}
 >    {: .question}
 >
