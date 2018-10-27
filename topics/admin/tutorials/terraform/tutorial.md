@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Terraform"
+title: "Deploying a compute cluster in OpenStack via Terraform"
 zenodo_link: ""
 questions:
   - What is Terraform?
