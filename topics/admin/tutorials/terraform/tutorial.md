@@ -24,7 +24,50 @@ contributors:
 
 In this tutorial we will briefly cover what [Terraform](https://www.terraform.io) is and how you can leverage it for your needs. This will not make you an expert on Terraform but will give you the tools you need in order to maintain your cloud infrastructure as code.
 
-This will be a very practical training with emphasis on looking at examples from modules and becoming self sufficient. This tutorial uses the OpenStack provider for Terraform. Other Cloud providers are available, but their invocation will be different from that which is described here.
+Please select your Cloud Provider:
+
+<div class="provider-select">
+	<input id="prov-os" type="radio" name="provider" value="openstack" onclick="showOS()">
+	<label for="prov-os" class="select">OpenStack</label>
+	<input id="prov-do" type="radio" name="provider" value="digitalocean" onclick="showDO()">
+	<label for="prov-do" class="select">DigitalOcean</label>
+</div>
+
+<style type="text/css">
+.provider-select input[type="radio"] {
+  display: none;
+}
+
+.provider-select label {
+  padding: 1em;
+  border: 1px solid blue;
+  display: inline-block;
+}
+
+.provider-select input[type="radio"]:checked+label {
+	background: blue;
+	color: white;
+}
+
+.provider-hidden {
+	height: 0px;
+	visibility: hidden;
+	display: none;
+	padding: 0rem;
+}
+
+/*
+Maybe something like this for the case where they do not select anything?
+.openstack {
+	border-left: 2px solid red;
+}
+.digitalocean {
+	border-left: 2px solid blue;
+}
+*/
+</style>
+
+This will be a very practical training with emphasis on looking at examples from modules and becoming self sufficient. This tutorial covers OpenStack or DigitalOcean providers (based on your selection above) for Terraform. Other Cloud providers are available, but their invocation will be different from that which is described here.
 
 > ### Agenda
 >
@@ -65,9 +108,7 @@ Some groups use Ansible or Bash scripts in order to launch VMs. This can be a be
 
 # Managing a Single VM
 
-We will start small, by managing a single VM in our cloud account. Make sure you have your OpenStack credentials available.
-
-<!-- TODO(hxr): add example DO config? -->
+We will start small, by managing a single VM in our cloud account. Make sure you have your <span class="openstack">OpenStack credentials</span><span class="digitalocean">Digital Ocean Token</span> available.
 
 ## Keypair
 
@@ -89,6 +130,13 @@ Terraform reads all files with the extension `.tf` in your current directory. Re
 >    ```ini
 >    provider "openstack" {}
 >    ```
+>    {: .openstack}
+>    ```ini
+>    provider "digitalocean" {
+>      token = "e2...."
+>    }
+>    ```
+>    {: .digitalocean}
 >
 >    This specifies the configuration for the OpenStack plugin. You can either specify the configuration in the plugin, or it will automatically load the values from the normal OpenStack environment variable names.
 >
@@ -127,6 +175,33 @@ Terraform reads all files with the extension `.tf` in your current directory. Re
 >    > > rerun this command to reinitialize your working directory. If you forget, other
 >    > > commands will detect it and remind you to do so if necessary.
 >    > > ```
+>    > > {: .openstack}
+>    > > ```
+>    > > Initializing provider plugins...
+>    > > - Checking for available provider plugins on https://releases.hashicorp.com...
+>    > > - Downloading plugin for provider "digitalocean" (1.0.2)...
+>    > >
+>    > > The following providers do not have any version constraints in configuration,
+>    > > so the latest version was installed.
+>    > >
+>    > > To prevent automatic upgrades to new major versions that may contain breaking
+>    > > changes, it is recommended to add version = "..." constraints to the
+>    > > corresponding provider blocks in configuration, with the constraint strings
+>    > > suggested below.
+>    > >
+>    > > * provider.digitalocean: version = "~> 1.0"
+>    > >
+>    > > Terraform has been successfully initialized!
+>    > >
+>    > > You may now begin working with Terraform. Try running "terraform plan" to see
+>    > > any changes that are required for your infrastructure. All Terraform commands
+>    > > should now work.
+>    > >
+>    > > If you ever set or change modules or backend configuration for Terraform,
+>    > > rerun this command to reinitialize your working directory. If you forget, other
+>    > > commands will detect it and remind you to do so if necessary.
+>    > > ```
+>    > > {: .digitalocean}
 >    > >
 >    > {: .solution }
 >    {: .question}
@@ -136,6 +211,11 @@ This is the minimum to get started with Terraform, defining which providers we w
 
 1. We can load the OpenStack credentials as environment variables
 2. We can code the OpenStack credentials in the `providers.tf` file
+{: .openstack}
+
+1. We can export the DO Token as an environment variable (`export DIGITALOCEAN_TOKEN=....`)
+2. We can code the DO Token in the `providers.tf` file
+{: .digitalocean}
 
 We recommend the first option, as often Terraform plans are [made publicly available](https://github.com/usegalaxy-eu/infrastructure) in order to collaborate on them, and this prevents accidentally committing your credentials to the git repository where.
 
@@ -167,6 +247,14 @@ We will start by managing your SSH keypair for the cloud as this is an easy thin
 >      public_key = "ssh-rsa AAAAB3Nz..."
 >    }
 >    ```
+>    {: .openstack}
+>    ```ini
+>    resource "digitalocean_ssh_key" "my-cloud-key" {
+>      name       = "my-key"
+>      public_key = "ssh-rsa AAAAB3Nz..."
+>    }
+>    ```
+>    {: .digitalocean}
 >
 > 3. Run `terraform plan`
 >
@@ -177,14 +265,17 @@ We will start by managing your SSH keypair for the cloud as this is an easy thin
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > If you have not sourced your OpenStack credentials file, you will see something like the following:
+>    > > {: .openstack}
 >    > >
 >    > > ```
 >    > > Error: Error running plan: 1 error(s) occurred:
 >    > >
 >    > > * provider.openstack: One of 'auth_url' or 'cloud' must be specified
 >    > > ```
+>    > > {: .openstack}
 >    > >
 >    > > You should source your openstack credentials first. This is the file which has lines like:
+>    > > {: .openstack}
 >    > >
 >    > > ```bash
 >    > > export OS_AUTH_URL=https://...
@@ -192,8 +283,10 @@ We will start by managing your SSH keypair for the cloud as this is an easy thin
 >    > > export OS_PROJECT_NAME="..."
 >    > > export OS_USER_DOMAIN_NAME="Default"
 >    > > ```
+>    > > {: .openstack}
 >    > >
 >    > > You should run `source /path/to/file.sh` in your terminal, and then re-run `terraform plan`:
+>    > > {: .openstack}
 >    > >
 >    > > ```
 >    > > An execution plan has been generated and is shown below.
@@ -213,6 +306,24 @@ We will start by managing your SSH keypair for the cloud as this is an easy thin
 >    > >
 >    > > Plan: 1 to add, 0 to change, 0 to destroy.
 >    > > ```
+>    > > {.openstack}
+>    > > ```
+>    > > An execution plan has been generated and is shown below.
+>    > > Resource actions are indicated with the following symbols:
+>    > >   + create
+>    > >
+>    > > Terraform will perform the following actions:
+>    > >
+>    > >   + digitalocean_ssh_key.my-cloud-key:
+>    > >       fingerprint: <computed>
+>    > >       name:        "my-key"
+>    > >       public_key:  "ssh-rsa AAAAB...."
+>    > >       region:      <computed>
+>    > >
+>    > >
+>    > > Plan: 1 to add, 0 to change, 0 to destroy.
+>    > > ```
+>    > > {.digitalocean}
 >    > >
 >    > > If you see this, then everything ran successfully
 >    > >
@@ -247,6 +358,30 @@ Note: You didn't specify an "-out" parameter to save this plan, so Terraform
 can't guarantee that exactly these actions will be performed if
 "terraform apply" is subsequently run.
 ```
+{: .openstack}
+```
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  + digitalocean_ssh_key.my-cloud-key:
+      fingerprint: <computed>
+      name:        "my-key"
+      public_key:  "ssh-rsa AAAAB...."
+      region:      <computed>
+
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+------------------------------------------------------------------------
+
+Note: You didn't specify an "-out" parameter to save this plan, so Terraform
+can't guarantee that exactly these actions will be performed if
+"terraform apply" is subsequently run.
+```
+{: .digitalocean}
 
 Terraform informs us first about the different symbols used. Here it tells us that it will `+ create` a resource. Sometimes it will `- delete` or `~ update in-place`. Next it describes in detail what will be done and why. For creating a resource it does not give us much information, we will see more types of changes later.
 
@@ -282,6 +417,30 @@ Lastly it informs us that we did not save our plan. Terraform can maintain a con
 >
 >      Enter a value:
 >    ```
+>    {: .openstack}
+>    ```
+>    An execution plan has been generated and is shown below.
+>    Resource actions are indicated with the following symbols:
+>      + create
+>
+>    Terraform will perform the following actions:
+>
+>      + digitalocean_ssh_key.my-cloud-key:
+>          fingerprint: <computed>
+>          name:        "my-key"
+>          public_key:  "ssh-rsa AAAAB...."
+>          region:      <computed>
+>
+>
+>    Plan: 1 to add, 0 to change, 0 to destroy.
+>
+>    Do you want to perform these actions?
+>      Terraform will perform the actions described above.
+>      Only 'yes' will be accepted to approve.
+>
+>      Enter a value:
+>    ```
+>    {: .digitalocean}
 >
 > 2. Confirm that everything looks good and enter the value 'yes', and hit enter.
 >
@@ -296,6 +455,17 @@ Lastly it informs us that we did not save our plan. Terraform can maintain a con
 >
 >    Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 >    ```
+>    {: .openstack}
+>    ```
+>    digitalocean_ssh_key.my-cloud-key: Creating...
+>      fingerprint: "" => "<computed>"
+>      name:        "" => "my-key"
+>      public_key:  "" => "ssh-rsa AAAAB3..."
+>    digitalocean_ssh_key.my-cloud-key: Creation complete after 3s (ID: my-key)
+>
+>    Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+>    ```
+>    {: .digitalocean}
 >
 >
 >    > ### {% icon tip %} Tip: "Key pair 'my-key' already exists"
@@ -305,6 +475,11 @@ Lastly it informs us that we did not save our plan. Terraform can maintain a con
 >    > ```
 >    > {"conflictingRequest": {"message": "Key pair 'my-key' already exists.", "code": 409}}
 >    > ```
+>    > {: .openstack}
+>    > ```
+>    > * digitalocean_ssh_key.my-cloud-key: Error creating SSH Key: POST https://api.digitalocean.com/v2/account/keys: 422 SSH Key is already in use on your account
+>    > ```
+>    > {: .digitalocean}
 >    >
 >    > Then you already have a keypair with this name. You should update the `name = "my-key"` to use a different name.
 >    {: .tip}
@@ -339,7 +514,7 @@ You are now ready to launch an instance!
 >
 >    > ### {% icon warning %} Warning: Correct image/flavor/network/security_group names
 >    > The documentation below notes some specific values for the `image_name`, `flavor_name`, `security_groups`, and `network` properties. These *may not be correct* for your training, instead your instructor will provide these values to you.
->    {: .warning-box}
+>    {: .warning-box .openstack}
 >
 >    ```ini
 >    resource "openstack_compute_instance_v2" "test" {
@@ -354,13 +529,32 @@ You are now ready to launch an instance!
 >      }
 >    }
 >    ```
+>    {: .openstack}
+>    ```ini
+>    resource "digitalocean_droplet" "test" {
+>      name     = "central-manager"
+>      image    = "denbi-centos7-j10-2e08aa4bfa33-master"
+>      size     = "512mb"
+>      region   = "fra1"
+>      ssh_keys = ["${digitalocean_ssh_key.my-cloud-key.fingerprint}"]
+>    }
+>    ```
+>    {: .openstack}
 >
 >    There are some important things to note, we reproduce the above configuration but with comments:
 >
 >    "openstack_compute_instance_v2" is the 'type' of a resource, 'test' is the name of this specific resource.
+>    {: .openstack}
 >    ```
 >    resource "openstack_compute_instance_v2" "test" {
 >    ```
+>    {: .openstack}
+>    "digitalocean_droplet" is the 'type' of a resource, 'test' is the name of this specific resource.
+>    {: .digitalocean}
+>    ```
+>    resource "digitalocean_droplet" "test" {
+>    ```
+>    {: .digitalocean}
 >
 >    This will become the server name
 >    ```
@@ -376,28 +570,58 @@ You are now ready to launch an instance!
 >    ```
 >      flavor_name     = "m1.tiny"
 >    ```
+>    {: .openstack}
+>    ```
+>      size            = "512mb"
+>    ```
+>    {: .digitalocean}
+>
 >
 >    This uses Terraform's knowledge of the
 >    `openstack_compute_keypair_v2.my-cloud-key` resource which you
 >    previously described. Then it accesses the `.name` attribute.
 >    This allow your to update the name at any time, and still have your
 >    resource definitions be correct.
+>    {: .openstack}
 >    ```
 >      key_pair        = "${openstack_compute_keypair_v2.my-cloud-key.name}"
 >    ```
+>    {: .openstack}
+>
+>    This uses Terraform's knowledge of the
+>    `digitalocean_ssh_key.my-cloud-key` resource which you
+>    previously described. Then it accesses the `.fingerprint` attribute.
+>    This allow your to update the name at any time, and still have your
+>    resource definitions be correct.
+>    {: .digitalocean}
+>    ```
+>      key_pair        = "${digitalocean_ssh_key.my-cloud-key.fingerprint}"
+>    ```
+>    {: .digitalocean}
 >
 >    The security group to apply. This is a comma separated list, but
 >    `default` should work for most OpenStack clouds.
+>    {: .openstack}
 >    ```
 >      security_groups = ["default"]
 >    ```
+>    {: .openstack}
 >
 >    A network that is accessible to you.
+>    {: .openstack}
 >    ```
 >      network {
 >        name = "public"
 >      }
 >    ```
+>    {: .openstack}
+>
+>    The region you want to run in
+>    {: .digitalocean}
+>    ```
+>      region   = "fra1"
+>    ```
+>    {: .digitalocean}
 >
 > 2. Run `terraform apply`. Running the `plan` step is not necessary, it is just useful to see what changes will be applied without starting the apply process.
 >
@@ -450,6 +674,51 @@ You are now ready to launch an instance!
 >
 >      Enter a value:
 >    ```
+>    {: .openstack}
+>    ```
+>    digitalocean_ssh_key.my-cloud-key: Refreshing state... (ID: 23448236)
+>
+>    An execution plan has been generated and is shown below.
+>    Resource actions are indicated with the following symbols:
+>      + create
+>
+>    Terraform will perform the following actions:
+>
+>      + digitalocean_droplet.test
+>          id:                   <computed>
+>          backups:              "false"
+>          disk:                 <computed>
+>          image:                "denbi-centos7-j10-2e08aa4bfa33-master"
+>          ipv4_address:         <computed>
+>          ipv4_address_private: <computed>
+>          ipv6:                 "false"
+>          ipv6_address:         <computed>
+>          ipv6_address_private: <computed>
+>          locked:               <computed>
+>          memory:               <computed>
+>          monitoring:           "false"
+>          name:                 "central-manager"
+>          price_hourly:         <computed>
+>          price_monthly:        <computed>
+>          private_networking:   "false"
+>          region:               "fra1"
+>          resize_disk:          "true"
+>          size:                 "512mb"
+>          ssh_keys.#:           "1"
+>          ssh_keys.1387494209:  "4a:72:2c:7e:d2:b7:f2:c4:5a:9e:bb:ca:c7:8f:d7:a3"
+>          status:               <computed>
+>          vcpus:                <computed>
+>          volume_ids.#:         <computed>
+>
+>
+>    Plan: 1 to add, 0 to change, 0 to destroy.
+>
+>    Do you want to perform these actions?
+>      Terraform will perform the actions described above.
+>      Only 'yes' will be accepted to approve.
+>    ```
+>    {: .digitalocean}
+>
 >
 > 3. If everything looks good, enter 'yes'.
 >
@@ -486,6 +755,7 @@ You are now ready to launch an instance!
 >
 >    Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 >    ```
+>    {: .openstack}
 {: .hands_on}
 
 You now have a running instance! We do not know the IP address so we cannot login yet. You can obtain that from the OpenStack dashboard, or via the `terraform show` command
@@ -533,6 +803,7 @@ You now have a running instance! We do not know the IP address so we cannot logi
 >      public_key = ssh-rsa AAAAB3...
 >      region = Freiburg
 >    ```
+>    {: .openstack}
 >
 > 2. Here we can obtain the IP address. In the above output, it is `192.52.32.231`
 >
@@ -597,6 +868,7 @@ We will start by setting up the new nodes and launching them as a test:
 >      ...
 >    }
 >    ```
+>    {: .openstack}
 >
 > 2. Add the NFS server. It is mostly the same configuration you've done before, just with a different `name` and resource name.
 >
@@ -613,6 +885,7 @@ We will start by setting up the new nodes and launching them as a test:
 >      }
 >    }
 >    ```
+>    {: .openstack}
 >
 > 3. Lastly, we'll add the execution nodes. Here we will launch two servers at once by using the `count` parameter. We can add `count` in the main portion of a Terraform resource definition and it will create that many copies of that same resource. In the case where we wish to be able to distinguish between them, we can use `${count.index}` in the name or another field to distinguish them.
 >
@@ -630,6 +903,7 @@ We will start by setting up the new nodes and launching them as a test:
 >      }
 >    }
 >    ```
+>    {: .openstack}
 >
 > 4. Run `terraform apply`
 >
@@ -666,8 +940,10 @@ We will start by setting up the new nodes and launching them as a test:
 >
 >      Enter a value:
 >    ```
+>    {: .openstack}
 >
 >    This time, Terraform is able to modify the `openstack_compute_instance_v2.test` resource in place, it can just update the name of the VM. It will also create the other three requested resources.
+>    {: .openstack}
 >
 > 5. Enter `yes` and terraform will make the requested changes
 >
@@ -686,6 +962,7 @@ We will start by setting up the new nodes and launching them as a test:
 >    > >
 >    > > Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
 >    > > ```
+>    > > {: .openstack}
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}
@@ -756,8 +1033,10 @@ This will create a file with the value from `content`, owned by root/group root,
 >        permissions: '0644'
 >    EOF
 >    ```
+>    {: .openstack}
 >
 >    Near the end we see an interesting thing, `${openstack_compute_instance_v2.nfs.access_ip_v4}`, this will template the `user_data` that is passed to `cloud-init`, with the IP address of the NFS server.
+>    {: .openstack}
 >
 > 2. Edit your NFS server and add a user data block like:
 >
@@ -830,6 +1109,8 @@ This will create a file with the value from `content`, owned by root/group root,
 >        permissions: '0644'
 >    EOF
 >    ```
+>    {: .openstack}
+>
 > 4. Compare your final configuration against ours:
 >
 >    > ### {% icon solution %} Final Configuration
@@ -961,6 +1242,7 @@ This will create a file with the value from `content`, owned by root/group root,
 >    >   EOF
 >    > }
 >    > ```
+>    > {: .openstack}
 >    >
 >    {: .solution}
 >
@@ -997,6 +1279,7 @@ This will create a file with the value from `content`, owned by root/group root,
 >
 >      Enter a value:
 >    ```
+>    {: .openstack}
 >
 >    Here Terraform has detected that the userdata has changed. It cannot change this dynamically at runtime, only at boot time. So it decides that it must destroy and then replace that resource.
 >
@@ -1147,6 +1430,7 @@ Once you develop complex infrastructure, these graphics become less useful. For 
 >
 >      Enter a value:
 >    ```
+>    {: .openstack}
 {: .hands_on}
 
 ## Destroy time provisioners
@@ -1192,3 +1476,27 @@ Terraform will SSH in with those credentials, copy over the script in `prepare-r
 # UseGalaxy.eu's Terraform Usage
 
 All of [our virtual infrastructure](https://github.com/usegalaxy-eu/infrastructure/) is managed, publicly, with Terraform. We hope that this can inspire others and give people ideas of the sort of things they can accomplish with Terraform. If you have questions over the way we have done certain things, feel free to file an issue and ask us!
+
+
+<script type="text/javascript">
+var sections_os = document.querySelectorAll(".openstack");
+var sections_do = document.querySelectorAll(".digitalocean");
+
+function showOS(){
+	Array.prototype.forEach.call(sections_os, function(el){
+		el.classList.remove("provider-hidden");
+	});
+	Array.prototype.forEach.call(sections_do, function(el){
+		el.classList.add("provider-hidden");
+	});
+}
+
+function showDO(){
+	Array.prototype.forEach.call(sections_os, function(el){
+		el.classList.add("provider-hidden");
+	});
+	Array.prototype.forEach.call(sections_do, function(el){
+		el.classList.remove("provider-hidden");
+	});
+}
+</script>
