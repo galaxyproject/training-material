@@ -138,7 +138,7 @@ Terraform reads all files with the extension `.tf` in your current directory. Re
 >    ```
 >    {: .digitalocean}
 >
->    This specifies the configuration for the OpenStack plugin. You can either specify the configuration in the plugin, or it will automatically load the values from the normal OpenStack environment variable names.
+>    This specifies the configuration for the plugin. You can either specify the configuration in the plugin, or it will automatically load the values from the normal environment variable names.
 >
 > 4. Run `terraform init`
 >
