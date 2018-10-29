@@ -50,71 +50,66 @@ This tutorial shows how to use a machine learning module implemented as a Galaxy
 >
 {: .agenda}
 
-# Upload training data
+# Upload datasets
 
-This dataset contains 9 features of breast cancer. These features include the thickness of clump, cell-size, cell-shape and so on ([more information](https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w)). The last column in the tabular data contains binary value (0 or 1) where a row (a set of features) is classified into breast cancer or not.
+Two datasets, `breast-w_train.tsv` and `breast-w_test.tsv`, are required for this tutorial. They contain 9 features of breast cancer which include the thickness of clump, cell-size, cell-shape and so on ([more information](https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w)). In addition to these features, the training dataset (`breast-w_train.tsv`) contains one more column as `target`. It has a binary value (0 or 1) for each row. `0` indicates no breast cancer and `1` indicates breast cancer. The test dataset (`breast-w_test.tsv`) does not contain the `target` column.
 
 > ### {% icon hands_on %} Hands-on: Data upload
-> 1. Download and import the following dataset in a new Galaxy history. Choose the type of data as `tabular`.
-     - `breast-w_test.tsv`
->
+>  Download and import the following datasets in a new Galaxy history: `breast-w_train.tsv` and `breast-w_test.tsv`. Choose the type of data as `tabular`.
+> 
 >    ```
 >    https://zenodo.org/record/1468039/files/breast-w_train.tsv
+>    https://zenodo.org/record/1468039/files/breast-w_test.tsv
 >    ```
->
 >    {% include snippets/import_via_link.md %}
->
 >    ![Dataset](images/train_data.png)
->
+>    ![Dataset](images/test_data.png)
 {: .hands_on}
 
 
-# Choose a classifier and update its parameters
+# Train a classifier
+In this step, `SVM (Support vector machine)` classifier is trained using `breast-w_train.tsv` dataset. The last column of this dataset assigns a category for each row. The classifier learns a mapping between each row and its category. This mapping is called a trained model. It is used to predict the categories of unseen data (`breast-w_test.tsv`).
 
-> ### {% icon hands_on %} Hands-on: **SVM Classifier (Support vector machine)** {% icon tool %}
-> 1. Choose **SVM Classifier (Support vector machine)** {% icon tool %} tool.
-> 2. Choose `train a model` as a classification task and choose the type of classifier as `linear support vector classification`.
-> 4. Choose the type of data as `tabular`.
+> ### {% icon hands_on %} Hands-on: Train a classifier
 > 
+> **SVM Classifier (Support vector machine)** {% icon tool %} with the following parameters
+> 1. {% icon param-select %} *"Select a Classification Task"*: `Train a model`
+> 2. {% icon param-select %} *"Classifier type"*: `Linear Support Vector Classification`
+> 3. {% icon param-select %} *"Select input type"*: `tabular data`
+> 4. {% icon param-file %} *"Training samples dataset"*: `breast-w_train.tsv`
+> 5. {% icon param-check %} *"Does the dataset contain header"*: `Yes`
+> 6. {% icon param-select %} *"Choose how to select data by column"*: `All columns but by column header name(s)`
+> 7. {% icon param-text %} *"Type header name(s)"*: `target`
+> 8. {% icon param-file %} *"Dataset containing class labels"*: `breast-w_train.tsv`
+> 9. {% icon param-check %} *"Does the dataset contain header"*: `Yes`
+> 10. {% icon param-select %} *"Choose how to select data by column"*: `Select columns by column header name(s)`
+> 11. {% icon param-text %} *"Select target column(s)"*: `target`
+> 12. `Execute` the classifier to train
 {: .hands_on}
 
 
-# Execute the classifier
+# Predict using a trained model
+The previous step produces a model file of type `zip`. Rename this file to `model.zip` by using `edit` dataset property. The trained model is used to predict the categories of each row in `breast-w_test.tsv` dataset.
 
-> ### {% icon hands_on %} Hands-on: Execute the classifier
-> 1. Click on `execute` button to execute the classifier.
-> 2. See the resulting model (new dataset) in the history.
+> ### {% icon hands_on %} Hands-on: Predict using a trained model
 > 
-{: .hands_on}
-
-
-# Upload test data
-
-> ### {% icon hands_on %} Hands-on: Upload test data
-> 1. Upload test dataset `breast-w_test.tsv` from [Zenodo](https://zenodo.org/record/1468039/files/breast-w_test.tsv).
-> 2. This dataset does not contain the target column. This column will be predicted in the following step using the trained model.
+> **SVM Classifier (Support vector machine)** {% icon tool %} with the following parameters
 > 
-> ![Dataset](images/test_data.png)
-{: .hands_on}
-
-
-# Choose trained model to predict
-
-> ### {% icon hands_on %} Hands-on: Choose trained model to predict
-> 1. Choose **SVM Classifier (Support vector machine)** {% icon tool %} tool.
-> 2. Set the classification task as `load a model and predict`. 
-> 3. Choose the trained model. 
-> 4. Choose the test data from previous step.
-> 5. Execute the tool.
-> 
+> 1. {% icon param-select %} *"Select a Classification Task"*: `Load a model and predict`
+> 2. {% icon param-file %} *"Models"*: `model.zip`
+> 3. {% icon param-file %} *"Data (tabular)"*: `breast-w_test.tsv`
+> 4. {% icon param-check %} *"Does the dataset contain header"*: `Yes`
+> 5. {% icon param-select %} *"Select the type of prediction"*: `Predict class labels`
+> 6. `Execute` to predict categories
 {: .hands_on}
 
 
 # See predictions
+The last column of the predicted dataset shows the category of each row. A row either gets `0` (no breast cancer) or `1` (breast cancer) as its predicted category. 
 
 > ### {% icon hands_on %} Hands-on: See the predicted columns
 > 1. Click on `view data` link of the dataset created after executing the previous step.
-> 2. The last column of the `tabular` data shows the predicted category (target) for each row.
+> 2. The last column of the `tabular` data shows the predicted category (`target`) for each row.
 > 
 {: .hands_on}
 
