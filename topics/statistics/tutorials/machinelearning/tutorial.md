@@ -71,7 +71,7 @@ The datasets required for this tutorial contain 9 features of breast cancer whic
 > 
 >    {% include snippets/import_via_link.md %}
 >
-> 3. Rename each dataset as `breast-w_train` and `breast-w_test`.
+> 3. Rename datasets to `breast-w_train` and `breast-w_test`.
 >
 >    {% include snippets/rename_dataset.md %}
 >
