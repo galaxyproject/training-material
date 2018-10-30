@@ -35,6 +35,10 @@ There are multiple ways in which machine learning can be used to perform data an
 
 ![Dataset](images/variants_ml.png)
 
+In general, machine learning can be used in multiple real-life tasks by using applying its variants as depicted in the following image
+
+![Dataset](images/usage_ml.png)
+
 The following image shows how a classification task is performed. The complete data is divided into training and test sets. The training set is used by a classifier to learn features. It results in a trained model and it is evaluated using the test set (unseen by the classifier during the training).
 
 ![Dataset](images/prediction.png)
@@ -67,10 +71,19 @@ The datasets required for this tutorial contain 9 features of breast cancer whic
 > 
 >    {% include snippets/import_via_link.md %}
 >
-> 3. Rename each dataset as `breast-w_train`, `breast-w_test` and `breast-w_targets`.
+> 3. Rename each dataset as `breast-w_train` and `breast-w_test`.
 >
 >    {% include snippets/rename_dataset.md %}
 >
+> 4. The datasets should look like these:
+>
+>    Training data (9 features and one target)
+>
+>    ![Dataset](images/train_data.png)
+>
+>    Test data (9 features and no target)
+>
+>    ![Dataset](images/test_data.png)
 {: .hands_on}
 
 
