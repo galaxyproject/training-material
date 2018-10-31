@@ -136,8 +136,6 @@ Regression is also a supervised learning task where the target is a real number 
 
 ## Data upload
 
-The datasets required for this tutorial contain 9 features of breast cancer which include the thickness of clump, cell-size, cell-shape and so on ([more information](https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w)). In addition to these features, the training dataset contains one more column as `target`. It has a binary value (0 or 1) for each row. `0` indicates no breast cancer and `1` indicates breast cancer. The test dataset does not contain the `target` column. The third dataset contains the all the samples from test dataset but also the `target` column which would be needed to create plot showing comparison between actual and predicted targets.
-
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -145,14 +143,14 @@ The datasets required for this tutorial contain 9 features of breast cancer whic
 > 2. Import the following datasets and choose the type of data as `tabular`.
 > 
 >    ```
->    https://zenodo.org/record/1401230/files/breast-w_train.tsv
->    https://zenodo.org/record/1401230/files/breast-w_test.tsv
->    https://zenodo.org/record/1401230/files/breast-w_targets.tsv
+>    https://zenodo.org/record/1475816/files/train_data.tabular
+>    https://zenodo.org/record/1475816/files/test_data.tabular
+>    https://zenodo.org/record/1475816/files/test_target.tabular
 >    ```
 > 
 >    {% include snippets/import_via_link.md %}
 >
-> 3. Rename datasets to `breast-w_train`, `breast-w_test` and `breast-w_targets`.
+> 3. Rename datasets to `train_data`, `test_data` and `test_target`.
 >
 >    {% include snippets/rename_dataset.md %}
 >
@@ -185,11 +183,11 @@ The previous step produces a model file of type `zip`. Rename this file to `mode
 
 > ### {% icon hands_on %} Hands-on: Predict using a trained model
 > 
-> **SVM Classifier (Support vector machine)** {% icon tool %} with the following parameters
+> **Gradient Boosting Regressor** {% icon tool %} with the following parameters
 > 
 > 1. {% icon param-select %} *"Select a Classification Task"*: `Load a model and predict`
 > 2. {% icon param-file %} *"Models"*: `model.zip`
-> 3. {% icon param-file %} *"Data (tabular)"*: `breast-w_test`
+> 3. {% icon param-file %} *"Data (tabular)"*: `test_data`
 > 4. {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 > 5. {% icon param-select %} *"Select the type of prediction"*: `Predict class labels`
 > 6. `Execute` to predict categories
@@ -201,7 +199,7 @@ The previous step produces a predicted file of type `tabular`. Rename this file 
 
 > ### {% icon hands_on %} Hands-on: Visualize the predictions
 > 
-> **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters
+> **Plot actual vs predicted curves and residual plots** {% icon tool %} with the following parameters
 > 
 > 1. {% icon param-file %} *"Select input data file"*: `breast-w_targets`
 > 2. {% icon param-file %} *"Select predicted data file"*: `predicted_labels`
