@@ -31,7 +31,7 @@ Supervised learning methods in machine learning have targets/classes/categories 
 ![Dataset](images/classification_1.png)
 
 
-The following image shows how a (regression) curve is fit which explains most of the data points. Here, the curve is a straight line. The regression task is to learn this curve which explains the underlying data distribution.
+The following image shows how a (regression) curve is fit which explains most of the data points. Here, the curve is a straight line. The regression task is to learn this curve which explains the underlying distribution.
 
 ![Dataset](images/regression_1.png)
 
@@ -48,7 +48,7 @@ The following image shows how a (regression) curve is fit which explains most of
 
 # Classification
 
-Classification task assigns a category/class to a sample by learning a decision boundary using a dataset. This dataset is called a training dataset and contains a class/category for each sample. The algorithm which performs this task is called a classifier. The training dataset contains "features" as columns and a mapping between these features and the target is learned for each sample. The performance of mapping is evaluated using test dataset. The test dataset contains only the feature columns and not the target column. The target column is predicted using the mapping learned on the training dataset. In this tutorial, we will use a classifier to train a model using a training dataset, predict the targets for test dataset and visualize the results using plots.
+[Classification](https://en.wikipedia.org/wiki/Statistical_classification) task assigns a category/class to a sample by learning a decision boundary using a dataset. This dataset is called a training dataset and contains a class/category for each sample. The algorithm which performs this task is called a classifier. The training dataset contains "features" as columns and a mapping between these features and the target is learned for each sample. The performance of mapping is evaluated using test dataset. The test dataset contains only the feature columns and not the target column. The target column is predicted using the mapping learned on the training dataset. In this tutorial, we will use a classifier to train a model using a training dataset, predict the targets for test dataset and visualize the results using plots.
 
 ## Data upload
 
@@ -112,7 +112,7 @@ The previous step produces a model file of type `zip`. Rename this file to `mode
 
 
 ## Visualize the predictions
-The previous step produces a predicted file of type `tabular`. Rename this file to `predicted_labels` by using `edit` dataset property. This tool will create three output files, one each for confusion matrix, precision, recall and f1-score and roc curves. These files are zipped.
+The previous step produces a predicted file of type `tabular`. Rename this file to `predicted_labels` by using `edit` dataset property. This tool will create three output files, one each for confusion matrix, precision, recall and f1-score and roc curves. These files are zipped. These files should be downloaded and unzipped to see the `html` file which contains the plot.
 
 > ### {% icon hands_on %} Hands-on: Visualize the predictions
 > 
@@ -131,7 +131,7 @@ The previous step produces a predicted file of type `tabular`. Rename this file 
 
 # Regression
 
-Regression is also a supervised learning task where the target is a real number (continuous) instead of discreet like classification. The algorithms which are used for regression tasks are called regressors. A regressor learns mapping between features of a data row and its target value. Inherently, it tries to fit a curve for the targets. This curve can be linear (straight line curve) or non-linear. 
+[Regression](https://en.wikipedia.org/wiki/Regression_analysis) is also a supervised learning task where the target is a real number (continuous) instead of discreet like classification. The algorithms which are used for regression tasks are called regressors. A regressor learns mapping between the features of a dataset row and its target value. Inherently, it tries to fit a curve for the targets. This curve can be linear (straight line curve) or non-linear.
 
 
 ## Data upload
@@ -158,7 +158,7 @@ Regression is also a supervised learning task where the target is a real number 
 
 
 ## Train a regressor
-In this step, `Gradient boosting` regressor is used for the regression task. The last column of this dataset assigns a category for each row. The classifier learns a mapping between each row and its category. This mapping is called a trained model. It is used to predict the categories of unseen data (`breast-w_test`).
+In this step, `Gradient boosting regressor` is used for the regression. This is an emsemble based [regressor](http://scikit-learn.org/stable/modules/ensemble.html#regression) which consists of weak learners (e.g. decision trees). It learns features of a training dataset (`train_data`) and maps all feature rows to respective targets. The process of mapping gives a trained model which is used to evaluate the quality of mapping. The trained model is tested on `test_data` in which the target of each row is predicted.
 
 > ### {% icon hands_on %} Hands-on: Train a classifier
 > 
@@ -166,11 +166,11 @@ In this step, `Gradient boosting` regressor is used for the regression task. The
 > 1. {% icon param-select %} *"Select a Classification Task"*: `Train a model`
 > 2. {% icon param-select %} *"Select an ensemble method"*: `Gradient Boosting Regressor`
 > 3. {% icon param-select %} *"Select input type"*: `tabular data`
-> 4. {% icon param-file %} *"Training samples dataset"*: `breast-w_train`
+> 4. {% icon param-file %} *"Training samples dataset"*: `train_data`
 > 5. {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 > 6. {% icon param-select %} *"Choose how to select data by column"*: `All columns but by column header name(s)`
 > 7. {% icon param-text %} *"Type header name(s)"*: `target`
-> 8. {% icon param-file %} *"Dataset containing class labels"*: `breast-w_train`
+> 8. {% icon param-file %} *"Dataset containing class labels"*: `train_data`
 > 9. {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 > 10. {% icon param-select %} *"Choose how to select data by column"*: `Select columns by column header name(s)`
 > 11. {% icon param-text %} *"Select target column(s)"*: `target`
@@ -179,7 +179,7 @@ In this step, `Gradient boosting` regressor is used for the regression task. The
 
 
 ## Predict using a trained model
-The previous step produces a model file of type `zip`. Rename this file to `model.zip` by using `edit` dataset property. The trained model is used to predict the categories of each row in `breast-w_test` dataset.
+The previous step produces a model file of type `zip`. Rename this file to `model.zip` by using `edit` dataset property. The trained model is used to predict the categories of each row in `test_data` dataset.
 
 > ### {% icon hands_on %} Hands-on: Predict using a trained model
 > 
@@ -195,20 +195,19 @@ The previous step produces a model file of type `zip`. Rename this file to `mode
 
 
 ## Visualize the predictions
-The previous step produces a predicted file of type `tabular`. Rename this file to `predicted_labels` by using `edit` dataset property. This tool will create three output files, one each for confusion matrix, precision, recall and f1-score and roc curves. These files are zipped.
+The previous step produces a predicted file of type `tabular`. Rename this file to `predicted_data` by using `edit` dataset property. This tool will create three output files, one each for true vs predicted values, scatter plot for true and predicted values and a residual plot. These files are zipped. These files should be downloaded and unzipped to see the `html` file which contains the plot.
 
 > ### {% icon hands_on %} Hands-on: Visualize the predictions
 > 
 > **Plot actual vs predicted curves and residual plots** {% icon tool %} with the following parameters
 > 
-> 1. {% icon param-file %} *"Select input data file"*: `breast-w_targets`
-> 2. {% icon param-file %} *"Select predicted data file"*: `predicted_labels`
-> 3. {% icon param-file %} *"Select trained model"*: `model.zip`
+> 1. {% icon param-file %} *"Select input data file"*: `test_target`
+> 2. {% icon param-file %} *"Select predicted data file"*: `predicted_data`
 > 4. `Execute` to create visualizations
 >
->    ![Dataset](images/confusion_matrix.png)
->    ![Dataset](images/precision_recall_f1.png)
->    ![Dataset](images/roc.png)
+>    ![Dataset](images/true_pred_curves.png)
+>    ![Dataset](images/true_vs_pred_scatter.png)
+>    ![Dataset](images/residual_plot.png)
 {: .hands_on}
 
 
