@@ -29,19 +29,19 @@ contributors:
 
 Machine learning uses the techniques from statistics, mathematics and computer science to make computer programs learn from data. It is one of the most popular fields of computer science and finds applications in multiple streams of data analysis like classification, regression, clustering, dimensionality reduction, density estimation and many more. Some real-life applications are spam filtering, medical diagnosis, autonomous driving, recommendation systems, facial recognition, stock prices prediction and many more. The following image shows a basic flow of any machine learning task. A user has data and it is given to a machine learning algorithm for analysis.
 
-![Dataset](images/ml_basics.png)
+>    ![data](images/ml_basics.png "Flow of a machine learning task.")
 
 There are multiple ways in which machine learning can be used to perform data analysis. They depend on the nature of data and the kind of data analysis. The following image shows the most popular ones.
 
-![Dataset](images/variants_ml.png)
+>    ![data](images/variants_ml.png "Different types of machine learning.")
 
 In general, machine learning can be used in multiple real-life tasks by using applying its variants as depicted in the following image
 
-![Dataset](images/usage_ml.png)
+>    ![data](images/usage_ml.png "Real-life usage of machine learning.")
 
 The following image shows how a classification task is performed. The complete data is divided into training and test sets. The training set is used by a classifier to learn features. It results in a trained model and it is evaluated using the test set (unseen by the classifier during the training).
 
-![Dataset](images/prediction.png)
+>    ![data](images/prediction.png "Supervised learning.")
 
 This tutorial shows how to use a machine learning module implemented as a Galaxy tool. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/1468039#.W8zyxBRoSAo).
 
@@ -77,13 +77,11 @@ The datasets required for this tutorial contain 9 features of breast cancer whic
 >
 > 4. The datasets should look like these:
 >
->    Training data (9 features and one target)
 >
->    ![Dataset](images/train_data.png)
+>    ![data](images/train_data.png "Training data with targets (9 features and one target).")
 >
->    Test data (9 features and no target)
 >
->    ![Dataset](images/test_data.png)
+>    ![data](images/test_data.png "Test data (9 features and no target).")
 {: .hands_on}
 
 
