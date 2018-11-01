@@ -42,7 +42,7 @@ ACTIVATE_ENV=. $(dir ${CONDA})activate galaxy_training_material
 install: clean ## install dependencies
 	( $(ACTIVATE_ENV) && \
 	  npm install decktape && \
-	  gem install awesome_bot bundler html-proofer jekyll jekyll-feed pkg-config:'~> 1.1' && \
+	  gem install jekyll-environment-variables awesome_bot bundler html-proofer jekyll jekyll-feed pkg-config:'~> 1.1' && \
 	  gem install nokogiri:'1.8.2' -- --use-system-libraries --with-xml=$(CONDA_PREFIX)/lib \
 	)
 .PHONY: install
