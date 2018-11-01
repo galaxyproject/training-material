@@ -4,8 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Galaxy Training!</title>
-        
+        <title>Ansible</title>
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
         <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
@@ -53,62 +52,11 @@
                     
 
                     
-                        
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
-                                    <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
-                                </a>
-                                <div class="dropdown-menu">
-                                    
-                                        
-                                            
-                                                <a class="dropdown-item" href="/training-material/topics/admin/slides/introduction.html">
-                                                    Galaxy from an administrator point of view
-                                                </a>
-                                            
-                                        
-                                    
-                                        
-                                            
-                                        
-                                    
-                                        
-                                            
-                                        
-                                    
-                                        
-                                            
-                                        
-                                    
-                                        
-                                            
-                                        
-                                    
-                                        
-                                            
-                                        
-                                    
-                                        
-                                            
-                                        
-                                    
-                                        
-                                    
-                                        
-                                            
-                                        
-                                    
-                                        
-                                            
-                                        
-                                    
-                                        
-                                            
-                                        
-                                    
-                                </div>
-                            </li>
-                        
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/admin/tutorials/ansible/slides.html" title="Slides for this tutorial">
+                            <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Associated slides
+                        </a>
+                    </li>
                     
 
                     
@@ -143,10 +91,10 @@
             FAQ
         </a>
         <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
-            Gitter
+            Chat on Gitter
         </a>
         <a class="dropdown-item" href="https://biostar.usegalaxy.org/" title="Ask on Biostars">
-            Biostars
+            Ask questions on Biostars
         </a>
     </div>
 </li>
@@ -294,40 +242,20 @@
 
 <p>Some terms that you should know first:</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Term</th>
-      <th>Usage</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>hosts files</td>
-      <td>An Ansible-specific file that defines groups of hosts (not be confused with <code class="highlighter-rouge">/etc/hosts</code>).</td>
-    </tr>
-    <tr>
-      <td>Ansible module</td>
-      <td>A piece of Python code that converts some parameters into an invocation. An example would be the <code class="highlighter-rouge">command</code> module which converts parameters like <code class="highlighter-rouge">command: ls</code> into a command line that is executed. There are pre-built modules for just about everything.</td>
-    </tr>
-    <tr>
-      <td>task</td>
-      <td>A call to an Ansible module that should be executed and the configuration for this module.</td>
-    </tr>
-    <tr>
-      <td>role</td>
-      <td>A folder containing some tasks, templates, files, and default values for variables. People share roles on <a href="https://galaxy.ansible.com/">“Ansible Galaxy”</a>.</td>
-    </tr>
-    <tr>
-      <td>playbook</td>
-      <td>a YAML file listing a set of tasks and/or roles that should be applied to a group of hosts.</td>
-    </tr>
-    <tr>
-      <td>vault</td>
-      <td>An encrypted YAML file. You put your secrets here and then you can use them in tasks/roles/playbooks.</td>
-    </tr>
-  </tbody>
-</table>
+<dl>
+  <dt>host files</dt>
+  <dd>An Ansible-specific file that defines groups of hosts (not be confused with <code class="highlighter-rouge">/etc/hosts</code>).</dd>
+  <dt>Ansible module</dt>
+  <dd>A piece of Python code that converts some parameters into an invocation. An example would be the <code class="highlighter-rouge">command</code> module which converts parameters like <code class="highlighter-rouge">command: ls</code> into a command line that is executed. There are pre-built modules for just about everything.</dd>
+  <dt>task</dt>
+  <dd>A call to an Ansible module that should be executed and the configuration for this module.</dd>
+  <dt>role</dt>
+  <dd>A folder containing some tasks, templates, files, and default values for variables. People share roles on <a href="https://galaxy.ansible.com/">“Ansible Galaxy”</a>.</dd>
+  <dt>playbook</dt>
+  <dd>a YAML file listing a set of tasks and/or roles that should be applied to a group of hosts.</dd>
+  <dt>vault</dt>
+  <dd>An encrypted YAML file. You put your secrets here and then you can use them in tasks/roles/playbooks.</dd>
+</dl>
 
 <p>Looking at each of these briefly:</p>
 
@@ -338,7 +266,7 @@
 <span class="err">web_b</span>
 
 <span class="nn">[databases]</span>
-<span class="err">db_1.fqdn.edu</span> <span class="py">ansible_user</span><span class="p">=</span><span class="s">root</span>
+<span class="err">db_1.example.org</span> <span class="py">ansible_user</span><span class="p">=</span><span class="s">root</span>
 </code></pre></div></div>
 
 <p>Here we’ve defined two groups of computers, <code class="highlighter-rouge">webservers</code> and <code class="highlighter-rouge">databases</code>. <code class="highlighter-rouge">ansible_user</code> is used to specify which user to connect with.</p>
@@ -435,32 +363,34 @@
 
 <p>The second invokes the <a href="http://docs.ansible.com/ansible/latest/service_module.html"><code class="highlighter-rouge">service</code></a> module. The arguments to this one are quite legible and the functionality can be inferred from the names for the most part: The service <code class="highlighter-rouge">name: autofs</code> will be <code class="highlighter-rouge">enabled</code> and its <code class="highlighter-rouge">state</code> should be <code class="highlighter-rouge">started</code>.</p>
 
+<p><a href="https://docs.ansible.com/ansible/latest/modules/modules_by_category.html">Many modules</a> are available for you to use.</p>
+
 <h3 id="stylistic-choices">Stylistic Choices</h3>
 
 <p>Ansible accepts two ways to format tasks:</p>
 
 <p>YAML style:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- package:
-    name: ""
-    state: ""
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">package</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
 </code></pre></div></div>
 
 <p>And an inline style.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- package name= state=
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="s">package name= state=</span>
 </code></pre></div></div>
 
 <p>Some groups prefer one style or another. You can mix both of these but you probably shouldn’t. The inline style does not require quoting of templated values.</p>
 
 <h2 id="playbooks">Playbooks</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- name: CVMFS
-  hosts: webservers
-  vars:
-    cvmfs_numfiles: 4096
-  roles:
-    - galaxyproject.cvmfs
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">CVMFS</span>
+  <span class="na">hosts</span><span class="pi">:</span> <span class="s">webservers</span>
+  <span class="na">vars</span><span class="pi">:</span>
+    <span class="na">cvmfs_numfiles</span><span class="pi">:</span> <span class="s">4096</span>
+  <span class="na">roles</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">galaxyproject.cvmfs</span>
 </code></pre></div></div>
 
 <p>This is a quite minimal playbook. It selects a <code class="highlighter-rouge">hosts</code> group named <code class="highlighter-rouge">webservers</code>, overrides the variable <code class="highlighter-rouge">cvmfs_numfiles</code>, and then says the following set of roles will be executed for this group of hosts. Ansible makes it easy to collect tasks that should apply to a group of hosts and run a playbook for all of those hosts. Some good uses of this are things like ensuring a certain set of users are installed on all of your managed machines, or using one of the package autoupdating roles to make sure your machines are up-to-date.</p>
@@ -518,7 +448,7 @@
 <blockquote class="warning-box">
   <h3 id="warning-safety-first"><i class="fa fa-warning" aria-hidden="true"></i><span class="visually-hidden">warning</span> Safety First</h3>
 
-  <p>Many of the things you can do with Ansible can be quite dangerous. As dangerous as normally being at the linux command line, but scaled across N machines. Be very careful with the changes you plan to make.
+  <p>Many of the things you can do with Ansible can be quite dangerous. As dangerous as normally being at the Linux command line, but scaled across N machines. Be very careful with the changes you plan to make.
 Ansible provides some flags which can help you identify changes before they’re made to production systems:</p>
 
   <dl>
@@ -558,8 +488,8 @@ Ansible provides some flags which can help you identify changes before they’re
         <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
         <p>The file should look like:</p>
 
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[my_hosts]
-your.host
+        <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[my_hosts]</span>
+<span class="err">your.host</span>
 </code></pre></div>        </div>
 
         <p>Remember that if you SSH in with a username different than your current local user account’s name, you will need to specify <code class="highlighter-rouge">ansible_ssh_user=remote-user-name</code></p>
@@ -575,11 +505,11 @@ your.host
     <li>
       <p>Define a <code class="highlighter-rouge">copy</code> task like below:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
-- name: Copy a file to the remote host
-  copy:
-    src: test.txt
-    dest: /tmp/test.txt
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Copy a file to the remote host</span>
+  <span class="na">copy</span><span class="pi">:</span>
+    <span class="na">src</span><span class="pi">:</span> <span class="s">test.txt</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s">/tmp/test.txt</span>
 </code></pre></div>      </div>
 
       <p>You can read about all of the parameters available to the <a href="http://docs.ansible.com/ansible/latest/copy_module.html"><code class="highlighter-rouge">copy</code></a> module on Ansible’s documentation.</p>
@@ -599,10 +529,10 @@ your.host
     <li>
       <p>Open <code class="highlighter-rouge">playbook.yml</code> for editing in the root folder. Place the following content in there:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
-- hosts: my_hosts
-  roles:
-    - my-role
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">my_hosts</span>
+  <span class="na">roles</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">my-role</span>
 </code></pre></div>      </div>
 
       <blockquote class="question">
@@ -776,8 +706,8 @@ ok: [localhost]
     <li>
       <p>Insert the following content:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
-my_role_key: deadbeefcafe
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">my_role_key</span><span class="pi">:</span> <span class="s">deadbeefcafe</span>
 </code></pre></div>      </div>
 
       <p>This will define a variable <code class="highlighter-rouge">my_role_key</code> that can then be used in templates.</p>
@@ -788,18 +718,18 @@ my_role_key: deadbeefcafe
     <li>
       <p>Insert the following content:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[example]
-api_key = {{ my_role_key }}
-listen = {{ ansible_default_ipv4.address }}
+      <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[example]</span>
+<span class="py">api_key</span> <span class="p">=</span> <span class="s">{{ my_role_key }}</span>
+<span class="py">listen</span> <span class="p">=</span> <span class="s">{{ ansible_default_ipv4.address }}</span>
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Edit <code class="highlighter-rouge">roles/my-role/tasks/main.yml</code> and append a new task to the end to template this file:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- name: Template the configuration file
-  template:
-    src: test.ini.j2
-    dest: /tmp/test.ini
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Template the configuration file</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">src</span><span class="pi">:</span> <span class="s">test.ini.j2</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s">/tmp/test.ini</span>
 </code></pre></div>      </div>
     </li>
     <li>
@@ -818,9 +748,9 @@ listen = {{ ansible_default_ipv4.address }}
 
           <p>The file should look like:</p>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[example]
-api_key = deadbeefcafe
-listen = 192.168.0.2
+          <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[example]</span>
+<span class="py">api_key</span> <span class="p">=</span> <span class="s">deadbeefcafe</span>
+<span class="py">listen</span> <span class="p">=</span> <span class="s">192.168.0.2</span>
 </code></pre></div>          </div>
 
           <p>Where the last line has the machine’s IP address.</p>
@@ -841,8 +771,8 @@ to show how a person using <code class="highlighter-rouge">my-role</code> would 
     <li>
       <p>Insert the following:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
-my_role_key: my_super_secret_api_key
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">my_role_key</span><span class="pi">:</span> <span class="s">my_super_secret_api_key</span>
 </code></pre></div>      </div>
     </li>
     <li>

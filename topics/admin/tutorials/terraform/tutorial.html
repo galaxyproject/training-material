@@ -1,0 +1,1518 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Deploying a compute cluster in OpenStack via Terraform</title>
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Deploying a compute cluster in OpenStack via Terraform" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body>
+        
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/admin" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Galaxy Server administration
+                        </a>
+                    </li>
+
+                    
+                    
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/admin/tutorials/terraform/slides.html" title="Slides for this tutorial">
+                            <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Associated slides
+                        </a>
+                    </li>
+                    
+
+                    
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+                                <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">instances</span> Galaxy Instances
+                            </a>
+                            <div class="dropdown-menu">
+                                
+                                    <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/admin/docker" title="Docker image for this tutorial">
+                                        <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+                                    </a>
+                                
+                                
+                                
+                            </div>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://biostar.usegalaxy.org/" title="Ask on Biostars">
+            Ask questions on Biostars
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/admin/tutorials/terraform/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+   
+{
+  "@context": "http://schema.org",
+  "@type": "CreativeWork",
+  "name": "Deploying a compute cluster in OpenStack via Terraform",
+  "accessModeSufficient": "visual",
+  "accessibilityControl": "fullMouseControl",
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "learningResourceType": "",
+  "url": "/topics/admin/tutorials/terraform/tutorial.html",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "",
+      "name": "Training data for Deploying a compute cluster in OpenStack via Terraform tutorial"
+    }
+  ],
+  "timeRequired": "PT60M",
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "erasche"
+    }
+  ],
+  "description": "The questions this  addresses are:\n - What is Terraform?\n - In which situations is it good/bad?\n - How to use it for managing your VM cluster\n\n\\nThe objectives are:\n - Learn Terraform basics\n - Launch a VM with Terraform\n - Launch and tear down a cluster with Terraform\n\n"
+}
+
+    </script>
+    <section class="tutorial">
+        <h1>Deploying a compute cluster in OpenStack via Terraform</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>What is Terraform?</li>
+            
+            <li>In which situations is it good/bad?</li>
+            
+            <li>How to use it for managing your VM cluster</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>Learn Terraform basics</li>
+            
+            <li>Launch a VM with Terraform</li>
+            
+            <li>Launch and tear down a cluster with Terraform</li>
+            
+            </ul>
+
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 60 minutes</p>
+            
+        </blockquote>
+
+        <h1 class="no_toc" id="overview">Overview</h1>
+
+<p>In this tutorial we will briefly cover what <a href="https://www.terraform.io">Terraform</a> is and how you can leverage it for your needs. This will not make you an expert on Terraform but will give you the tools you need in order to maintain your cloud infrastructure as code.</p>
+
+<p>This will be a very practical training with emphasis on looking at examples from modules and becoming self sufficient. This tutorial uses the OpenStack provider for Terraform. Other Cloud providers are available, but their invocation will be different from that which is described here.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+<ol id="markdown-toc">
+  <li><a href="#cattle-vs-pets" id="markdown-toc-cattle-vs-pets">Cattle vs. Pets</a></li>
+  <li><a href="#what-is-terraform" id="markdown-toc-what-is-terraform">What is Terraform?</a>    <ol>
+      <li><a href="#what-can-be-managed" id="markdown-toc-what-can-be-managed">What can be managed</a></li>
+      <li><a href="#what-should-be-managed" id="markdown-toc-what-should-be-managed">What should be managed</a></li>
+    </ol>
+  </li>
+  <li><a href="#managing-a-single-vm" id="markdown-toc-managing-a-single-vm">Managing a Single VM</a>    <ol>
+      <li><a href="#keypair" id="markdown-toc-keypair">Keypair</a></li>
+      <li><a href="#adding-an-instance" id="markdown-toc-adding-an-instance">Adding an Instance</a></li>
+    </ol>
+  </li>
+  <li><a href="#managing-a-cluster-of-vms" id="markdown-toc-managing-a-cluster-of-vms">Managing a Cluster of VMs</a>    <ol>
+      <li><a href="#configuration" id="markdown-toc-configuration">Configuration</a></li>
+      <li><a href="#cloud-init" id="markdown-toc-cloud-init"><code class="highlighter-rouge">cloud-init</code></a></li>
+      <li><a href="#login--htcondor--a-test-job" id="markdown-toc-login--htcondor--a-test-job">Login / HTCondor / A Test Job</a></li>
+    </ol>
+  </li>
+  <li><a href="#infrastructure-graph" id="markdown-toc-infrastructure-graph">Infrastructure Graph</a></li>
+  <li><a href="#tearing-everything-down" id="markdown-toc-tearing-everything-down">Tearing Everything Down</a>    <ol>
+      <li><a href="#destroy-time-provisioners" id="markdown-toc-destroy-time-provisioners">Destroy time provisioners</a></li>
+    </ol>
+  </li>
+  <li><a href="#usegalaxyeus-terraform-usage" id="markdown-toc-usegalaxyeus-terraform-usage">UseGalaxy.eu’s Terraform Usage</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="cattle-vs-pets">Cattle vs. Pets</h1>
+
+<p>For those of you with more experience as System Administrators, you may have heard the term “cattle vs. pets.”</p>
+
+<dl>
+  <dt>Pets</dt>
+  <dd>These servers are managed by hand, with admins SSHing in to make changes directly on the machine, and no log of this. If a “pet” dies, everyone is sad.</dd>
+  <dt>Cattle</dt>
+  <dd>These servers are managed in bulk, you no longer own a beloved pet but hundreds of identical ones. You stop caring if an individual server lives or dies as you have many identical ones ready to take its place, and you can easily replace them.</dd>
+</dl>
+
+<h1 id="what-is-terraform">What is Terraform?</h1>
+
+<p>Terraform is a tool you can use to “sync” your infrastructure (VMs in Clouds, DNS records, etc.) with code you have written in configuration files. This is known as <strong>infrastructure as code</strong>.
+Knowing that your infrastructure is exactly what you expect it to be can simplify your operations significantly. You can have confidence that if anything changes, any images crash or are accidentally deleted, that you can immediately re-build your infrastructure.</p>
+
+<p>UseGalaxy.eu used Terraform to migrate easily between clouds, when our old cloud shut down and our new cloud was launched. We simply updated the credentials for connecting to the cloud, and ran Terraform. It recognised that none of our existing resources were there and recreated all of them. This made life incredibly easy for us, we knew that our infrastructure would be exactly correct relative to what it looked like in the previous cloud.</p>
+
+<h2 id="what-can-be-managed">What can be managed</h2>
+
+<p>Terraform supports <a href="https://www.terraform.io/docs/providers/index.html">many providers</a>, allowing you to easily manage resources no matter where they are located. Primarily this consists of resources like virtual machines and DNS records.</p>
+
+<p>If you have VMs you are managing, whether for individual projects or for large scale infrastructure like UseGalaxy.eu, your work or research can be simpler and more reproducible if you are doing it with automation like Terraform.</p>
+
+<h2 id="what-should-be-managed">What should be managed</h2>
+
+<p>Support for certain databases and other software is available, but whether or not this is a good idea depends heavily on your workflow. UseGalaxy.eu found that managing databases and database users was not a good fit with our workflow. We launch VMs with terraform and then provision them with ansible. To then have a second step where we re-connect and provision the database with terraform was an awkward workflow, so we mostly let Ansible manage these resources.</p>
+
+<p>Some groups use Ansible or Bash scripts in order to launch VMs. This can be a better workflow for certain cases. Launching VMs that manage themselves or are automatically scaled by some external process is not a good fit. Terraform expects the resource to be there the next time, with the same ID, with the same values, and will alert you if it isn’t.</p>
+
+<h1 id="managing-a-single-vm">Managing a Single VM</h1>
+
+<p>We will start small, by managing a single VM in our cloud account. Make sure you have your OpenStack credentials available.</p>
+
+<!-- TODO(hxr): add example DO config? -->
+
+<h2 id="keypair">Keypair</h2>
+
+<p>Terraform reads all files with the extension <code class="highlighter-rouge">.tf</code> in your current directory. Resources can be in a single file, or organised across several different files. We had the best experience by separating out logical groups of resources:</p>
+
+<ul>
+  <li>DNS entries in a single file</li>
+  <li>Security groups in separate <code class="highlighter-rouge">.tf</code> files</li>
+  <li>Keypairs in a single file</li>
+  <li>Servers/Instances in individual files.</li>
+</ul>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-setting-up-terraform"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setting up Terraform</h3>
+
+  <ol>
+    <li>
+      <p><a href="https://www.terraform.io/downloads.html">Install Terraform</a></p>
+    </li>
+    <li>
+      <p>Create a new directory and go into it.</p>
+    </li>
+    <li>
+      <p>Create a <code class="highlighter-rouge">providers.tf</code> file with the following contents:</p>
+
+      <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">provider</span> <span class="err">"openstack"</span> <span class="err">{}</span>
+</code></pre></div>      </div>
+
+      <p>This specifies the configuration for the OpenStack plugin. You can either specify the configuration in the plugin, or it will automatically load the values from the normal OpenStack environment variable names.</p>
+    </li>
+    <li>
+      <p>Run <code class="highlighter-rouge">terraform init</code></p>
+
+      <blockquote class="question">
+        <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>What did the output look like?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>If this is not the first time you’ve run it, you will see Terraform download any missing providers:</p>
+
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Initializing provider plugins...
+- Checking for available provider plugins on https://releases.hashicorp.com...
+- Downloading plugin for provider "openstack" (1.10.0)...
+
+The following providers do not have any version constraints in configuration,
+so the latest version was installed.
+
+To prevent automatic upgrades to new major versions that may contain breaking
+changes, it is recommended to add version = "..." constraints to the
+corresponding provider blocks in configuration, with the constraint strings
+suggested below.
+
+* provider.openstack: version = "~&gt; 1.10"
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+</code></pre></div>          </div>
+
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>This is the minimum to get started with Terraform, defining which providers we will use and any parameters for them. We have two options now:</p>
+
+<ol>
+  <li>We can load the OpenStack credentials as environment variables</li>
+  <li>We can code the OpenStack credentials in the <code class="highlighter-rouge">providers.tf</code> file</li>
+</ol>
+
+<p>We recommend the first option, as often Terraform plans are <a href="https://github.com/usegalaxy-eu/infrastructure">made publicly available</a> in order to collaborate on them, and this prevents accidentally committing your credentials to the git repository where.</p>
+
+<p>We will start by managing your SSH keypair for the cloud as this is an easy thing to add.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-your-operating-system"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Your Operating System</h3>
+
+  <p>If you are on Windows and do not know your public key, please skip to the “Adding an Instance” section, as you probably do not have the tools installed to do this, and we cannot document how to do it. Instead you can simply reference the key by name later. We will point out this location.</p>
+
+</blockquote>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-keypairs"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Keypairs</h3>
+
+  <ol>
+    <li>
+      <p>Find the public key you will use for connecting to the your new VM. It is usually known as <code class="highlighter-rouge">id_rsa.pub</code></p>
+
+      <blockquote class="tip">
+        <h3 id="tip-no-public-key"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> No public key</h3>
+        <p>If you can find the private key file (possibly a <code class="highlighter-rouge">cloud.pem</code> file you downloaded earlier from OpenStack), then you can find the public key by running the command:</p>
+
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ssh-keygen <span class="nt">-y</span> <span class="nt">-f</span> /path/to/key.pem
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Create a new file, <code class="highlighter-rouge">main.tf</code> with the following structure. In <code class="highlighter-rouge">public_key</code>, write the complete value of your public key that you found in the first step.</p>
+
+      <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">resource</span> <span class="err">"openstack_compute_keypair_v2"</span> <span class="err">"my-cloud-key"</span> <span class="err">{</span>
+  <span class="py">name</span>       <span class="p">=</span> <span class="s">"my-key"</span>
+  <span class="py">public_key</span> <span class="p">=</span> <span class="s">"ssh-rsa AAAAB3Nz..."</span>
+<span class="err">}</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run <code class="highlighter-rouge">terraform plan</code></p>
+
+      <blockquote class="question">
+        <h3 id="question-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>What does the output look like? Did it execute successfully?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>If you have not sourced your OpenStack credentials file, you will see something like the following:</p>
+
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: Error running plan: 1 error(s) occurred:
+
+* provider.openstack: One of 'auth_url' or 'cloud' must be specified
+</code></pre></div>          </div>
+
+          <p>You should source your openstack credentials first. This is the file which has lines like:</p>
+
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">OS_AUTH_URL</span><span class="o">=</span>https://...
+<span class="nb">export </span><span class="nv">OS_PROJECT_ID</span><span class="o">=</span>...
+<span class="nb">export </span><span class="nv">OS_PROJECT_NAME</span><span class="o">=</span><span class="s2">"..."</span>
+<span class="nb">export </span><span class="nv">OS_USER_DOMAIN_NAME</span><span class="o">=</span><span class="s2">"Default"</span>
+</code></pre></div>          </div>
+
+          <p>You should run <code class="highlighter-rouge">source /path/to/file.sh</code> in your terminal, and then re-run <code class="highlighter-rouge">terraform plan</code>:</p>
+
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  + openstack_compute_keypair_v2.my-cloud-key
+      id:          &lt;computed&gt;
+      fingerprint: &lt;computed&gt;
+      name:        "my-key"
+      private_key: &lt;computed&gt;
+      public_key:  "ssh-rsa AAAAB...."
+      region:      &lt;computed&gt;
+
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+</code></pre></div>          </div>
+
+          <p>If you see this, then everything ran successfully</p>
+
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Let’s look at the output in detail:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  + openstack_compute_keypair_v2.my-cloud-key
+      id:          &lt;computed&gt;
+      fingerprint: &lt;computed&gt;
+      name:        "my-key"
+      private_key: &lt;computed&gt;
+      public_key:  "ssh-rsa AAAAB..."
+      region:      &lt;computed&gt;
+
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+------------------------------------------------------------------------
+
+Note: You didn't specify an "-out" parameter to save this plan, so Terraform
+can't guarantee that exactly these actions will be performed if
+"terraform apply" is subsequently run.
+</code></pre></div></div>
+
+<p>Terraform informs us first about the different symbols used. Here it tells us that it will <code class="highlighter-rouge">+ create</code> a resource. Sometimes it will <code class="highlighter-rouge">- delete</code> or <code class="highlighter-rouge">~ update in-place</code>. Next it describes in detail what will be done and why. For creating a resource it does not give us much information, we will see more types of changes later.</p>
+
+<p>Lastly it informs us that we did not save our plan. Terraform can maintain a concept of what the remote resource’s state looks like between your <code class="highlighter-rouge">terraform plan</code> and <code class="highlighter-rouge">terraform apply</code> steps. This is a more advanced feature and will not be covered today.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-applying-our-plan"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Applying our plan</h3>
+
+  <p>Now that you’ve reviewed the plan and everything looks good, we’re ready to apply our changes.</p>
+
+  <ol>
+    <li>
+      <p>Run <code class="highlighter-rouge">terraform apply</code>. Because we did not re-use our plan from the previous step, terraform will re-run the plan step first, and request your confirmation:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  + openstack_compute_keypair_v2.my-cloud-key
+      id:          &lt;computed&gt;
+      fingerprint: &lt;computed&gt;
+      name:        "my-key"
+      private_key: &lt;computed&gt;
+      public_key:  "" =&gt; "ssh-rsa AAAAB3..."
+      region:      &lt;computed&gt;
+
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value:
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Confirm that everything looks good and enter the value ‘yes’, and hit enter.</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openstack_compute_keypair_v2.my-cloud-key: Creating...
+  fingerprint: "" =&gt; "&lt;computed&gt;"
+  name:        "" =&gt; "my-key"
+  private_key: "" =&gt; "&lt;computed&gt;"
+  public_key:  "" =&gt; "ssh-rsa AAAAB3..."
+  region:      "" =&gt; "&lt;computed&gt;"
+openstack_compute_keypair_v2.my-cloud-key: Creation complete after 3s (ID: my-key)
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-key-pair-my-key-already-exists"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: “Key pair ‘my-key’ already exists”</h3>
+
+        <p>If you see an error message that says:</p>
+
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"conflictingRequest": {"message": "Key pair 'my-key' already exists.", "code": 409}}
+</code></pre></div>        </div>
+
+        <p>Then you already have a keypair with this name. You should update the <code class="highlighter-rouge">name = "my-key"</code> to use a different name.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>We should now have a keypair in our cloud!</p>
+
+<h2 id="adding-an-instance">Adding an Instance</h2>
+
+<p>We now have:</p>
+
+<ul>
+  <li>Terraform installed</li>
+  <li>The OpenStack plugin intialized</li>
+  <li>A keypair in OpenStack</li>
+</ul>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-doing-this-training-outside-of-a-training-event"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Doing this training outside of a training event</h3>
+  <p>If you are doing this training outside of an event, then you will likely need to do some additional steps specific to your Cloud:</p>
+
+  <ol>
+    <li>
+      <p>Identify a small image flavor that you can use for your testing.</p>
+    </li>
+    <li>
+      <p>Upload this <code class="highlighter-rouge">raw</code> format image available from <a href="https://usegalaxy.eu/static/vgcn/denbi-centos7-j10-2e08aa4bfa33-master.raw">UseGalaxy.eu</a> to your OpenStack</p>
+    </li>
+  </ol>
+
+  <p>You will need to do both of these things before you can proceed.</p>
+</blockquote>
+
+<p>You are now ready to launch an instance!</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-launching-an-instance"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Launching an Instance</h3>
+
+  <ol>
+    <li>
+      <p>Open your <code class="highlighter-rouge">main.tf</code> in your text editor and add the following.</p>
+
+      <blockquote class="warning-box">
+        <h3 id="warning-warning-correct-imageflavornetworksecurity_group-names"><i class="fa fa-warning" aria-hidden="true"></i><span class="visually-hidden">warning</span> Warning: Correct image/flavor/network/security_group names</h3>
+        <p>The documentation below notes some specific values for the <code class="highlighter-rouge">image_name</code>, <code class="highlighter-rouge">flavor_name</code>, <code class="highlighter-rouge">security_groups</code>, and <code class="highlighter-rouge">network</code> properties. These <em>may not be correct</em> for your training, instead your instructor will provide these values to you.</p>
+      </blockquote>
+
+      <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">resource</span> <span class="err">"openstack_compute_instance_v2"</span> <span class="err">"test"</span> <span class="err">{</span>
+  <span class="py">name</span>            <span class="p">=</span> <span class="s">"test-vm"</span>
+  <span class="py">image_name</span>      <span class="p">=</span> <span class="s">"denbi-centos7-j10-2e08aa4bfa33-master"</span>
+  <span class="py">flavor_name</span>     <span class="p">=</span> <span class="s">"m1.tiny"</span>
+  <span class="py">key_pair</span>        <span class="p">=</span> <span class="s">"${openstack_compute_keypair_v2.my-cloud-key.name}"</span>
+  <span class="py">security_groups</span> <span class="p">=</span> <span class="s">["default"]</span>
+
+  <span class="err">network</span> <span class="err">{</span>
+    <span class="py">name</span> <span class="p">=</span> <span class="s">"public"</span>
+  <span class="err">}</span>
+<span class="err">}</span>
+</code></pre></div>      </div>
+
+      <p>There are some important things to note, we reproduce the above configuration but with comments:</p>
+
+      <p>“openstack_compute_instance_v2” is the ‘type’ of a resource, ‘test’ is the name of this specific resource.</p>
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "openstack_compute_instance_v2" "test" {
+</code></pre></div>      </div>
+
+      <p>This will become the server name</p>
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  name            = "test-vm"
+</code></pre></div>      </div>
+
+      <p>The image which will be launched</p>
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  image_name      = "denbi-centos7-j10-2e08aa4bfa33-master"
+</code></pre></div>      </div>
+
+      <p>Which flavor</p>
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  flavor_name     = "m1.tiny"
+</code></pre></div>      </div>
+
+      <p>This uses Terraform’s knowledge of the
+<code class="highlighter-rouge">openstack_compute_keypair_v2.my-cloud-key</code> resource which you
+previously described. Then it accesses the <code class="highlighter-rouge">.name</code> attribute.
+This allow your to update the name at any time, and still have your
+resource definitions be correct.</p>
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  key_pair        = "${openstack_compute_keypair_v2.my-cloud-key.name}"
+</code></pre></div>      </div>
+
+      <p>The security group to apply. This is a comma separated list, but
+<code class="highlighter-rouge">default</code> should work for most OpenStack clouds.</p>
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  security_groups = ["default"]
+</code></pre></div>      </div>
+
+      <p>A network that is accessible to you.</p>
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  network {
+    name = "public"
+  }
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run <code class="highlighter-rouge">terraform apply</code>. Running the <code class="highlighter-rouge">plan</code> step is not necessary, it is just useful to see what changes will be applied without starting the apply process.</p>
+
+      <p>Note that first terraform “refreshes” the state of the remote resources that it already manages, before checking what changes need to be made.</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terraform apply
+openstack_compute_keypair_v2.my-cloud-key: Refreshing state... (ID: my-key)
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  + openstack_compute_instance_v2.test
+      id:                         &lt;computed&gt;
+      access_ip_v4:               &lt;computed&gt;
+      access_ip_v6:               &lt;computed&gt;
+      all_metadata.%:             &lt;computed&gt;
+      availability_zone:          &lt;computed&gt;
+      flavor_id:                  &lt;computed&gt;
+      flavor_name:                "m1.tiny"
+      force_delete:               "false"
+      image_id:                   &lt;computed&gt;
+      image_name:                 "denbi-centos7-j10-2e08aa4bfa33-master"
+      key_pair:                   "my-key"
+      name:                       "test-vm"
+      network.#:                  "1"
+      network.0.access_network:   "false"
+      network.0.fixed_ip_v4:      &lt;computed&gt;
+      network.0.fixed_ip_v6:      &lt;computed&gt;
+      network.0.floating_ip:      &lt;computed&gt;
+      network.0.mac:              &lt;computed&gt;
+      network.0.name:             "public"
+      network.0.port:             &lt;computed&gt;
+      network.0.uuid:             &lt;computed&gt;
+      power_state:                "active"
+      region:                     &lt;computed&gt;
+      security_groups.#:          "1"
+      security_groups.3814588639: "default"
+      stop_before_destroy:        "false"
+
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value:
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>If everything looks good, enter ‘yes’.</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openstack_compute_instance_v2.test: Creating...
+  access_ip_v4:               "" =&gt; "&lt;computed&gt;"
+  access_ip_v6:               "" =&gt; "&lt;computed&gt;"
+  all_metadata.%:             "" =&gt; "&lt;computed&gt;"
+  availability_zone:          "" =&gt; "&lt;computed&gt;"
+  flavor_id:                  "" =&gt; "&lt;computed&gt;"
+  flavor_name:                "" =&gt; "m1.tiny"
+  force_delete:               "" =&gt; "false"
+  image_id:                   "" =&gt; "&lt;computed&gt;"
+  image_name:                 "" =&gt; "denbi-centos7-j10-2e08aa4bfa33-master"
+  key_pair:                   "" =&gt; "my-key"
+  name:                       "" =&gt; "test-vm"
+  network.#:                  "" =&gt; "1"
+  network.0.access_network:   "" =&gt; "false"
+  network.0.fixed_ip_v4:      "" =&gt; "&lt;computed&gt;"
+  network.0.fixed_ip_v6:      "" =&gt; "&lt;computed&gt;"
+  network.0.floating_ip:      "" =&gt; "&lt;computed&gt;"
+  network.0.mac:              "" =&gt; "&lt;computed&gt;"
+  network.0.name:             "" =&gt; "public"
+  network.0.port:             "" =&gt; "&lt;computed&gt;"
+  network.0.uuid:             "" =&gt; "&lt;computed&gt;"
+  power_state:                "" =&gt; "active"
+  region:                     "" =&gt; "&lt;computed&gt;"
+  security_groups.#:          "" =&gt; "1"
+  security_groups.3814588639: "" =&gt; "default"
+  stop_before_destroy:        "" =&gt; "false"
+openstack_compute_instance_v2.test: Still creating... (10s elapsed)
+openstack_compute_instance_v2.test: Still creating... (20s elapsed)
+openstack_compute_instance_v2.test: Creation complete after 30s (ID: 7a2ed5ba-0801-49b5-bf1b-9bf9cec733fa)
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+</code></pre></div>      </div>
+    </li>
+  </ol>
+</blockquote>
+
+<p>You now have a running instance! We do not know the IP address so we cannot login yet. You can obtain that from the OpenStack dashboard, or via the <code class="highlighter-rouge">terraform show</code> command</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-terraform-show-and-logging-in"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> <code class="highlighter-rouge">terraform show</code> and logging in</h3>
+
+  <ol>
+    <li>
+      <p>Run <code class="highlighter-rouge">terraform show</code></p>
+
+      <p>The values in the following output will not match yours.</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openstack_compute_instance_v2.test:
+  id = 7a2ed5ba-0801-49b5-bf1b-9bf9cec733fa
+  access_ip_v4 = 192.52.32.231
+  access_ip_v6 =
+  all_metadata.% = 0
+  availability_zone = nova
+  flavor_id = a9a58bcf-29a3-47f4-b4c3-e71e40127833
+  flavor_name = m1.tiny
+  force_delete = false
+  image_id = 922ae172-275b-4e6a-bb9d-c7ace52fc8d4
+  image_name = denbi-centos7-j10-2e08aa4bfa33-master
+  key_pair = my-key
+  name = test-vm
+  network.# = 1
+  network.0.access_network = false
+  network.0.fixed_ip_v4 = 192.52.32.231
+  network.0.fixed_ip_v6 =
+  network.0.floating_ip =
+  network.0.mac = fa:16:3e:e6:cd:6c
+  network.0.name = public
+  network.0.port =
+  network.0.uuid = 6a68b40c-356f-4d4c-95e9-e5c72855fb35
+  power_state = active
+  region = Freiburg
+  security_groups.# = 1
+  security_groups.3814588639 = default
+  stop_before_destroy = false
+openstack_compute_keypair_v2.my-cloud-key:
+  id = my-key
+  fingerprint = 4a:72:2c:7e:d2:b7:f2:c4:5a:9e:bb:ca:c7:8f:d7:a3
+  name = my-key
+  private_key =
+  public_key = ssh-rsa AAAAB3...
+  region = Freiburg
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Here we can obtain the IP address. In the above output, it is <code class="highlighter-rouge">192.52.32.231</code></p>
+    </li>
+    <li>
+      <p>Login with <code class="highlighter-rouge">ssh</code>: <code class="highlighter-rouge">ssh centos@&lt;your-ip-address&gt;</code>. You should see something like the following:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The authenticity of host '192.52.32.231 (192.52.32.231)' can't be established.
+ECDSA key fingerprint is SHA256:oEHgotonwT3a47K0kLdsNVd/QqctBjDK7F829J0VnwQ.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '192.52.32.231' (ECDSA) to the list of known hosts.
+      _        _   _ ____ _____
+     | |      | \ | |  _ \_   _| ██      ██
+   __| | ___  |  \| | |_) || |     ██████
+  / _' |/ _ \ | . ' |  _ &lt; | |     ██████
+ | (_| |  __/_| |\  | |_) || |_  ██  ██  ██
+  \__,_|\___(_)_| \_|____/_____| ██  ██  ██
+====================================================
+Hostname..........: test-vm.novalocal
+Release...........: CentOS Linux release 7.5.1804 (Core)
+Build.............: de.NBI Generic denbi-centos7-j10-2e08aa4bfa33-master
+Build Date........: 2018-10-24T14:28:38Z
+Current user......: centos
+Load..............: 0.00 0.07 0.05 2/148 1644
+Uptime............: up 5 minutes
+====================================================
+[centos@test-vm ~]$
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>With this, you’re done. You’ve launched a single VM with Terraform. The image we are using comes with:</p>
+
+<ul>
+  <li>HTCondor</li>
+  <li>Docker</li>
+  <li>Singularity</li>
+  <li>Conda</li>
+  <li>CVMFS connected to Galaxyproject’s biological databases and Singularity containers</li>
+</ul>
+
+<p>This is very similar to the standard image that UseGalaxy.eu uses for all of its compute nodes.</p>
+
+<h1 id="managing-a-cluster-of-vms">Managing a Cluster of VMs</h1>
+
+<p>When you are done playing around with the individual VM, we’re ready to explore launching an entire cluster.</p>
+
+<ul>
+  <li>We will launch a VM to act as our HTCondor central manager</li>
+  <li>We will launch a VM to act as an NFS server for our “cluster”</li>
+  <li>We will launch two execution nodes to process jobs</li>
+</ul>
+
+<p>We use a very similar setup for our production cloud cluster that powers UseGalaxy.eu’s compute and training infrastructure.</p>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>We will start by setting up the new nodes and launching them as a test:</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-adding-configuration-for-other-nodes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Adding configuration for other nodes</h3>
+
+  <ol>
+    <li>
+      <p>Update the name of the instance you already have, <code class="highlighter-rouge">test</code> to <code class="highlighter-rouge">name = "central-manager"</code>. This will be our scheduler central manager.</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "openstack_compute_instance_v2" "test" {
+  name            = "central-manager"
+  ...
+}
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Add the NFS server. It is mostly the same configuration you’ve done before, just with a different <code class="highlighter-rouge">name</code> and resource name.</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "openstack_compute_instance_v2" "nfs" {
+  name            = "nfs-server"
+  image_name      = "denbi-centos7-j10-2e08aa4bfa33-master"
+  flavor_name     = "m1.tiny"
+  key_pair        = "${openstack_compute_keypair_v2.my-cloud-key.name}"
+  security_groups = ["default"]
+
+  network {
+    name = "public"
+  }
+}
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Lastly, we’ll add the execution nodes. Here we will launch two servers at once by using the <code class="highlighter-rouge">count</code> parameter. We can add <code class="highlighter-rouge">count</code> in the main portion of a Terraform resource definition and it will create that many copies of that same resource. In the case where we wish to be able to distinguish between them, we can use <code class="highlighter-rouge">${count.index}</code> in the name or another field to distinguish them.</p>
+
+      <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">resource</span> <span class="err">"openstack_compute_instance_v2"</span> <span class="err">"exec"</span> <span class="err">{</span>
+  <span class="py">name</span>            <span class="p">=</span> <span class="s">"exec-${count.index}"</span>
+  <span class="py">image_name</span>      <span class="p">=</span> <span class="s">"denbi-centos7-j10-2e08aa4bfa33-master"</span>
+  <span class="py">flavor_name</span>     <span class="p">=</span> <span class="s">"m1.tiny"</span>
+  <span class="py">key_pair</span>        <span class="p">=</span> <span class="s">"${openstack_compute_keypair_v2.my-cloud-key.name}"</span>
+  <span class="py">security_groups</span> <span class="p">=</span> <span class="s">["default"]</span>
+  <span class="py">count</span>           <span class="p">=</span> <span class="s">2</span>
+
+  <span class="err">network</span> <span class="err">{</span>
+    <span class="py">name</span> <span class="p">=</span> <span class="s">"public"</span>
+  <span class="err">}</span>
+<span class="err">}</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run <code class="highlighter-rouge">terraform apply</code></p>
+
+      <p>You will see something like the following:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openstack_compute_keypair_v2.my-cloud-key: Refreshing state... (ID: my-key)
+openstack_compute_instance_v2.test: Refreshing state... (ID: 7a2ed5ba-0801-49b5-bf1b-9bf9cec733fa)
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  + create
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  + openstack_compute_instance_v2.exec[0]
+      id:                         &lt;computed&gt;
+      access_ip_v4:               &lt;computed&gt;
+      access_ip_v6:               &lt;computed&gt;
+      all_metadata.%:             &lt;computed&gt;
+      availability_zone:          &lt;computed&gt;
+      ...
+
+  ~ openstack_compute_instance_v2.test
+      name:                       "test-vm" =&gt; "central-manager"
+
+
+Plan: 3 to add, 1 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value:
+</code></pre></div>      </div>
+
+      <p>This time, Terraform is able to modify the <code class="highlighter-rouge">openstack_compute_instance_v2.test</code> resource in place, it can just update the name of the VM. It will also create the other three requested resources.</p>
+    </li>
+    <li>
+      <p>Enter <code class="highlighter-rouge">yes</code> and terraform will make the requested changes</p>
+    </li>
+    <li>
+      <p>It should complete successfully</p>
+
+      <blockquote class="question">
+        <h3 id="question-question-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>What did the output look like?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openstack_compute_instance_v2.nfs: Creation complete after 2m55s (ID: 421f0899-f2c1-43c9-8bbe-9b0415c8f4f4)
+openstack_compute_instance_v2.exec[0]: Creation complete after 2m57s (ID: 1ae02775-a0ff-47a5-907f-513190a8548e)
+openstack_compute_instance_v2.exec[1]: Creation complete after 2m59s (ID: d339ebeb-4288-498c-9923-42fce32a3808)
+
+Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+</code></pre></div>          </div>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="cloud-init"><code class="highlighter-rouge">cloud-init</code></h2>
+
+<p>These VMs that we have launched currently are all absolutely identical, except for the host name. There is no specialisation. They all do nothing. We will fix that and make these machines have individual roles by booting them with metadata attached to each instance.</p>
+
+<p><a href="https://cloud-init.io/"><code class="highlighter-rouge">cloud-init</code></a> is used for this process, it allows for injecting files and executing commands as part of the boot process.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-other-actions"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Other actions</h3>
+  <p>cloud-init allows for many more actions to be executed as well, you can read about them in <a href="https://cloudinit.readthedocs.io/en/latest/">the documentation</a>.</p>
+</blockquote>
+
+<p>The <code class="highlighter-rouge">cloud-init</code> configuration is a YAML file. Here we can see an example of how it is used, we have a YAML array at the top level. Inside, a hash of <code class="highlighter-rouge">content</code>, <code class="highlighter-rouge">owner</code>, <code class="highlighter-rouge">path</code>, and <code class="highlighter-rouge">permissions</code>.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#cloud-config</span>
+<span class="na">write_files</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">content</span><span class="pi">:</span> <span class="pi">|</span>
+    <span class="no">CONDOR_HOST = 127.0.0.1</span>
+    <span class="no">ALLOW_WRITE = *</span>
+    <span class="no">ALLOW_READ = $(ALLOW_WRITE)</span>
+    <span class="no">ALLOW_NEGOTIATOR = $(ALLOW_WRITE)</span>
+    <span class="no">DAEMON_LIST = COLLECTOR, MASTER, NEGOTIATOR, SCHEDD</span>
+    <span class="no">FILESYSTEM_DOMAIN = denbi</span>
+    <span class="no">UID_DOMAIN = denbi</span>
+    <span class="no">TRUST_UID_DOMAIN = True</span>
+    <span class="no">SOFT_UID_DOMAIN = True</span>
+  <span class="na">owner</span><span class="pi">:</span> <span class="s">root:root</span>
+  <span class="na">path</span><span class="pi">:</span> <span class="s">/etc/condor/condor_config.local</span>
+  <span class="na">permissions</span><span class="pi">:</span> <span class="s1">'</span><span class="s">0644'</span>
+</code></pre></div></div>
+
+<p>This will create a file with the value from <code class="highlighter-rouge">content</code>, owned by root/group root, in <code class="highlighter-rouge">/etc/condor/condor_config.local</code>. So let’s re-structure our <code class="highlighter-rouge">main.tf</code> file to have some configuration:</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-cloud-init"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: cloud-init</h3>
+
+  <ol>
+    <li>
+      <p>Edit your central-manager server and add a block like the following at the end.</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user_data = &lt;&lt;-EOF
+  #cloud-config
+  write_files:
+  - content: |
+      CONDOR_HOST = localhost
+      ALLOW_WRITE = *
+      ALLOW_READ = $(ALLOW_WRITE)
+      ALLOW_NEGOTIATOR = $(ALLOW_WRITE)
+      DAEMON_LIST = COLLECTOR, MASTER, NEGOTIATOR, SCHEDD
+      FILESYSTEM_DOMAIN = terraform-training
+      UID_DOMAIN = terraform-training
+      TRUST_UID_DOMAIN = True
+      SOFT_UID_DOMAIN = True
+    owner: root:root
+    path: /etc/condor/condor_config.local
+    permissions: '0644'
+  - content: |
+      /data           /etc/auto.data          nfsvers=3
+    owner: root:root
+    path: /etc/auto.master.d/data.autofs
+    permissions: '0644'
+  - content: |
+      share  -rw,hard,intr,nosuid,quota  ${openstack_compute_instance_v2.nfs.access_ip_v4}:/data/share
+    owner: root:root
+    path: /etc/auto.data
+    permissions: '0644'
+EOF
+</code></pre></div>      </div>
+
+      <p>Near the end we see an interesting thing, <code class="highlighter-rouge">${openstack_compute_instance_v2.nfs.access_ip_v4}</code>, this will template the <code class="highlighter-rouge">user_data</code> that is passed to <code class="highlighter-rouge">cloud-init</code>, with the IP address of the NFS server.</p>
+    </li>
+    <li>
+      <p>Edit your NFS server and add a user data block like:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user_data = &lt;&lt;-EOF
+  #cloud-config
+  write_files:
+  - content: |
+      /data/share *(rw,sync)
+    owner: root:root
+    path: /etc/exports
+    permissions: '0644'
+  runcmd:
+   - [ mkdir, -p, /data/share ]
+   - [ chown, "centos:centos", -R, /data/share ]
+   - [ systemctl, enable, nfs-server ]
+   - [ systemctl, start, nfs-server ]
+   - [ exportfs, -avr ]
+EOF
+</code></pre></div>      </div>
+
+      <p>This will:</p>
+
+      <ol>
+        <li>Make the <code class="highlighter-rouge">/data/share</code> directory</li>
+        <li>Set permissions on it</li>
+        <li>Launch the NFS service</li>
+        <li>Export <code class="highlighter-rouge">/data/share</code> to the network</li>
+      </ol>
+    </li>
+    <li>
+      <p>Edit the <code class="highlighter-rouge">exec</code> node and add a user data block like:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user_data = &lt;&lt;-EOF
+  #cloud-config
+  write_files:
+  - content: |
+      CONDOR_HOST = ${openstack_compute_instance_v2.test.access_ip_v4}
+      ALLOW_WRITE = *
+      ALLOW_READ = $(ALLOW_WRITE)
+      ALLOW_ADMINISTRATOR = *
+      ALLOW_NEGOTIATOR = $(ALLOW_ADMINISTRATOR)
+      ALLOW_CONFIG = $(ALLOW_ADMINISTRATOR)
+      ALLOW_DAEMON = $(ALLOW_ADMINISTRATOR)
+      ALLOW_OWNER = $(ALLOW_ADMINISTRATOR)
+      ALLOW_CLIENT = *
+      DAEMON_LIST = MASTER, SCHEDD, STARTD
+      FILESYSTEM_DOMAIN = terraform-training
+      UID_DOMAIN = terraform-training
+      TRUST_UID_DOMAIN = True
+      SOFT_UID_DOMAIN = True
+      # run with partitionable slots
+      CLAIM_PARTITIONABLE_LEFTOVERS = True
+      NUM_SLOTS = 1
+      NUM_SLOTS_TYPE_1 = 1
+      SLOT_TYPE_1 = 100%
+      SLOT_TYPE_1_PARTITIONABLE = True
+      ALLOW_PSLOT_PREEMPTION = False
+      STARTD.PROPORTIONAL_SWAP_ASSIGNMENT = True
+    owner: root:root
+    path: /etc/condor/condor_config.local
+    permissions: '0644'
+  - content: |
+      /data           /etc/auto.data          nfsvers=3
+    owner: root:root
+    path: /etc/auto.master.d/data.autofs
+    permissions: '0644'
+  - content: |
+      share  -rw,hard,intr,nosuid,quota  ${openstack_compute_instance_v2.nfs.access_ip_v4}:/data/share
+    owner: root:root
+    path: /etc/auto.data
+    permissions: '0644'
+EOF
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Compare your final configuration against ours:</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-final-configuration"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Final Configuration</h3>
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "openstack_compute_keypair_v2" "my-cloud-key" {
+  name       = "my-key"
+  public_key = "ssh-rsa AAAAB3..."
+}
+
+resource "openstack_compute_instance_v2" "test" {
+  name            = "central-manager"
+  image_name      = "denbi-centos7-j10-2e08aa4bfa33-master"
+  flavor_name     = "m1.tiny"
+  key_pair        = "${openstack_compute_keypair_v2.my-cloud-key.name}"
+  security_groups = ["default"]
+
+  network {
+    name = "public"
+  }
+
+  user_data = &lt;&lt;-EOF
+    #cloud-config
+    write_files:
+    - content: |
+        CONDOR_HOST = localhost
+        ALLOW_WRITE = *
+        ALLOW_READ = $(ALLOW_WRITE)
+        ALLOW_NEGOTIATOR = $(ALLOW_WRITE)
+        DAEMON_LIST = COLLECTOR, MASTER, NEGOTIATOR, SCHEDD
+        FILESYSTEM_DOMAIN = terraform-training
+        UID_DOMAIN = terraform-training
+        TRUST_UID_DOMAIN = True
+        SOFT_UID_DOMAIN = True
+      owner: root:root
+      path: /etc/condor/condor_config.local
+      permissions: '0644'
+    - content: |
+        /data           /etc/auto.data          nfsvers=3
+      owner: root:root
+      path: /etc/auto.master.d/data.autofs
+      permissions: '0644'
+    - content: |
+        share  -rw,hard,intr,nosuid,quota  ${openstack_compute_instance_v2.nfs.access_ip_v4}:/data/share
+      owner: root:root
+      path: /etc/auto.data
+      permissions: '0644'
+  EOF
+}
+
+resource "openstack_compute_instance_v2" "nfs" {
+  name            = "nfs-server"
+  image_name      = "denbi-centos7-j10-2e08aa4bfa33-master"
+  flavor_name     = "m1.tiny"
+  key_pair        = "${openstack_compute_keypair_v2.my-cloud-key.name}"
+  security_groups = ["default"]
+
+  network {
+    name = "public"
+  }
+
+  user_data = &lt;&lt;-EOF
+    #cloud-config
+    write_files:
+    - content: |
+        /data/share *(rw,sync)
+      owner: root:root
+      path: /etc/exports
+      permissions: '0644'
+    runcmd:
+     - [ mkdir, -p, /data/share ]
+     - [ chown, "centos:centos", -R, /data/share ]
+     - [ systemctl, enable, nfs-server ]
+     - [ systemctl, start, nfs-server ]
+     - [ exportfs, -avr ]
+  EOF
+}
+
+resource "openstack_compute_instance_v2" "exec" {
+  name            = "exec-${count.index}"
+  image_name      = "denbi-centos7-j10-2e08aa4bfa33-master"
+  flavor_name     = "m1.tiny"
+  key_pair        = "${openstack_compute_keypair_v2.my-cloud-key.name}"
+  security_groups = ["default"]
+  count           = 2
+
+  network {
+    name = "public"
+  }
+
+  user_data = &lt;&lt;-EOF
+    #cloud-config
+    write_files:
+    - content: |
+        CONDOR_HOST = ${openstack_compute_instance_v2.test.access_ip_v4}
+        ALLOW_WRITE = *
+        ALLOW_READ = $(ALLOW_WRITE)
+        ALLOW_ADMINISTRATOR = *
+        ALLOW_NEGOTIATOR = $(ALLOW_ADMINISTRATOR)
+        ALLOW_CONFIG = $(ALLOW_ADMINISTRATOR)
+        ALLOW_DAEMON = $(ALLOW_ADMINISTRATOR)
+        ALLOW_OWNER = $(ALLOW_ADMINISTRATOR)
+        ALLOW_CLIENT = *
+        DAEMON_LIST = MASTER, SCHEDD, STARTD
+        FILESYSTEM_DOMAIN = terraform-training
+        UID_DOMAIN = terraform-training
+        TRUST_UID_DOMAIN = True
+        SOFT_UID_DOMAIN = True
+        # run with partitionable slots
+        CLAIM_PARTITIONABLE_LEFTOVERS = True
+        NUM_SLOTS = 1
+        NUM_SLOTS_TYPE_1 = 1
+        SLOT_TYPE_1 = 100%
+        SLOT_TYPE_1_PARTITIONABLE = True
+        ALLOW_PSLOT_PREEMPTION = False
+        STARTD.PROPORTIONAL_SWAP_ASSIGNMENT = True
+      owner: root:root
+      path: /etc/condor/condor_config.local
+      permissions: '0644'
+    - content: |
+        /data           /etc/auto.data          nfsvers=3
+      owner: root:root
+      path: /etc/auto.master.d/data.autofs
+      permissions: '0644'
+    - content: |
+        share  -rw,hard,intr,nosuid,quota  ${openstack_compute_instance_v2.nfs.access_ip_v4}:/data/share
+      owner: root:root
+      path: /etc/auto.data
+      permissions: '0644'
+  EOF
+}
+</code></pre></div>        </div>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>Run <code class="highlighter-rouge">terraform apply</code></p>
+
+      <p>It will look slightly different this time:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terraform apply
+openstack_compute_keypair_v2.my-cloud-key: Refreshing state... (ID: my-key)
+openstack_compute_instance_v2.nfs: Refreshing state... (ID: 421f0899-f2c1-43c9-8bbe-9b0415c8f4f4)
+openstack_compute_instance_v2.test: Refreshing state... (ID: 7a2ed5ba-0801-49b5-bf1b-9bf9cec733fa)
+openstack_compute_instance_v2.exec[0]: Refreshing state... (ID: 1ae02775-a0ff-47a5-907f-513190a8548e)
+openstack_compute_instance_v2.exec[1]: Refreshing state... (ID: d339ebeb-4288-498c-9923-42fce32a3808)
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+-/+ destroy and then create replacement
+
+Terraform will perform the following actions:
+
+-/+ openstack_compute_instance_v2.exec[0] (new resource required)
+      id:                         "1ae02775-a0ff-47a5-907f-513190a8548e" =&gt; &lt;computed&gt; (forces new resource)
+      access_ip_v4:               "192.52.32.255" =&gt; &lt;computed&gt;
+      ...
+      user_data:                  "" =&gt; "07d27d50dbdf12a5647d9fd12a3510861d32203c" (forces new resource)
+
+...
+Plan: 4 to add, 0 to change, 4 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value:
+</code></pre></div>      </div>
+
+      <p>Here Terraform has detected that the userdata has changed. It cannot change this dynamically at runtime, only at boot time. So it decides that it must destroy and then replace that resource.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="login--htcondor--a-test-job">Login / HTCondor / A Test Job</h2>
+
+<p>We now have a running cluster! Let’s log in</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-cluster-usage"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Cluster Usage</h3>
+
+  <ol>
+    <li>
+      <p>Now that we have a cluster in the cloud, let’s login. Look through the output of <code class="highlighter-rouge">terraform show</code> to find your <code class="highlighter-rouge">central-manager</code> server and its IP address.</p>
+    </li>
+    <li>
+      <p><code class="highlighter-rouge">ssh centos@&lt;your manager ip&gt;</code></p>
+    </li>
+    <li>
+      <p>Run <code class="highlighter-rouge">condor_status</code> which will show you the status of your cluster.</p>
+
+      <p>After your central manager VM booted, the executor nodes booted as well. Then, using the IP address of the central manager, the executors contacted that machine, and advertised their availability to run jobs.</p>
+
+      <blockquote class="question">
+        <h3 id="question-question-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>What does the output look like? How many executor nodes do you see?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[centos@central-manager share]$ condor_status
+Name                   OpSys      Arch   State     Activity LoadAv Mem   ActvtyTime
+
+slot1@exec-0.novalocal LINUX      X86_64 Unclaimed Idle      0.150  991  0+00:15:28
+slot1@exec-1.novalocal LINUX      X86_64 Unclaimed Idle      0.000  991  0+00:15:32
+
+                     Machines Owner Claimed Unclaimed Matched Preempting  Drain
+
+        X86_64/LINUX        2     0       0         2       0          0      0
+
+               Total        2     0       0         2       0          0      0
+</code></pre></div>          </div>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>Change into the <code class="highlighter-rouge">/data/share/</code></p>
+    </li>
+    <li>
+      <p>Create a file, <code class="highlighter-rouge">test.job</code> with the following contents:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Universe = vanilla
+Executable = /data/share/test.sh
+Log = test.$(process).log
+Output = test.$(process).out
+Error = test.$(process).err
+request_cpus = 1
+Queue 10
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Create a file <code class="highlighter-rouge">test.sh</code> with the following:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nb">echo</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">hostname</span><span class="k">)</span><span class="s2">"</span>
+<span class="nb">sleep </span>1
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run <code class="highlighter-rouge">chmod +x test.sh</code></p>
+    </li>
+    <li>
+      <p>Run <code class="highlighter-rouge">condor_submit test.job</code></p>
+    </li>
+    <li>
+      <p>(Quickly) Run <code class="highlighter-rouge">condor_q</code> to see the queue status. You can invoke this repeatedly to watch the queue update.</p>
+    </li>
+    <li>
+      <p>Run <code class="highlighter-rouge">cat *.out</code> and you should see the hostnames where the jobs were run</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="infrastructure-graph">Infrastructure Graph</h1>
+
+<p>Terraform has the ability to produce a graph showing the relationship of resources in your infrastructure. We will produce a graphic for our current terraform plan:</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-infrastructure-graph"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Infrastructure Graph</h3>
+
+  <ol>
+    <li>
+      <p>Run:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>terraform graph | dot -Tpng &gt; graph.png
+</code></pre></div>      </div>
+
+      <p>You may need the <code class="highlighter-rouge">graphviz</code> package installed in order to produce the graph</p>
+    </li>
+    <li>
+      <p>Open up <code class="highlighter-rouge">graph.png</code> in an image viewer</p>
+
+      <blockquote class="question">
+        <h3 id="question-question-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>What did the output look like?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <figure id="figure-1"><img src="../../images/graph.png" alt="A simple graph" title="A simple graph showing the structure of the infrastructure in this lesson" /><figcaption><span class="figcaption-prefix">Figure 1:</span> A simple graph showing the structure of the infrastructure in this lesson</figcaption></figure>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This is a very simple resrouce graph:</p>
+
+<figure id="figure-2"><img src="../../images/graph.png" alt="A simple graph" title="A simple graph showing the structure of the infrastructure in this lesson" /><figcaption><span class="figcaption-prefix">Figure 2:</span> A simple graph showing the structure of the infrastructure in this lesson</figcaption></figure>
+
+<p>The dependencies follow the arrows, the NFS depends on the keypair being setup. The <code class="highlighter-rouge">test</code> machine (central manager) depends on the NFS server being available (and having an IP), the exec nodes depend on the central manager server. This is a somewhat simplified view, there are more dependencies which are not shown for simplicity (e.g. the exec nodes depend on NFS)</p>
+
+<p>If you have variables this can produce a more complex dependency graph:</p>
+
+<figure id="figure-3"><img src="../../images/graph2.png" alt="A more complex graph showing variables" title="A more complex graph showing variables" /><figcaption><span class="figcaption-prefix">Figure 3:</span> A more complex graph showing variables</figcaption></figure>
+
+<p>Once you develop complex infrastructure, these graphics become less useful. For reference, you can find <a href="https://raw.githubusercontent.com/usegalaxy-eu/infrastructure/master/graph.png">UseGalaxy.eu’s infrastructure graph</a> in our repository (you will need to zoom in a lot.)</p>
+
+<h1 id="tearing-everything-down">Tearing Everything Down</h1>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-cleanup"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Cleanup</h3>
+
+  <ol>
+    <li>
+      <p>Simple delete your <code class="highlighter-rouge">main.tf</code> file (or rename it without the <code class="highlighter-rouge">.tf</code> extension)</p>
+    </li>
+    <li>
+      <p>Run <code class="highlighter-rouge">terraform apply</code>. Terraform will see that the resource is no longer part of your code and remove it.</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openstack_compute_keypair_v2.my-cloud-key: Refreshing state... (ID: my-key)
+openstack_compute_instance_v2.nfs: Refreshing state... (ID: 0b58d613-48f2-49c4-9d8a-3623d17f1c93)
+openstack_compute_instance_v2.test: Refreshing state... (ID: e433f772-6f17-4609-aa61-053f7602533f)
+openstack_compute_instance_v2.exec[0]: Refreshing state... (ID: 034a4206-b0ad-4d0e-9c75-27d3966f99ac)
+openstack_compute_instance_v2.exec[1]: Refreshing state... (ID: fe576776-397e-4f1f-a8e7-4a9203764567)
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  - openstack_compute_instance_v2.exec[0]
+
+  - openstack_compute_instance_v2.exec[1]
+
+  - openstack_compute_instance_v2.nfs
+
+  - openstack_compute_instance_v2.test
+
+  - openstack_compute_keypair_v2.my-cloud-key
+
+
+Plan: 0 to add, 0 to change, 5 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value:
+</code></pre></div>      </div>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="destroy-time-provisioners">Destroy time provisioners</h2>
+
+<p>Sometimes, immediately terminating the VM is not ideal behaviour. Especially if you’re managing a cluster like HTCondor which can gracefully terminate jobs, you might want to permit that. Terraform provides ‘destroy-time provisioners’, code snippets that are run before the VM is destroyed. If they return successfully, destruction continues. If they exit with an error code, then destruction is halted. We can write a simple one for HTCondor like so:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">set</span> <span class="nt">-ex</span>
+condor_drain <span class="k">$(</span><span class="nb">hostname</span><span class="k">)</span> <span class="o">||</span> <span class="nb">true</span><span class="p">;</span>
+<span class="nv">my_ip</span><span class="o">=</span><span class="k">$(</span>/sbin/ifconfig eth0 | <span class="nb">grep</span> <span class="s1">'inet '</span> | <span class="nb">awk</span> <span class="s1">'{print $2}'</span><span class="k">)</span>
+<span class="c"># Find slots which have an address associated with us.</span>
+<span class="nv">slots</span><span class="o">=</span><span class="k">$(</span>condor_status <span class="nt">-autoformat</span> Name State MyAddress | <span class="nb">grep</span> <span class="s2">"&lt;</span><span class="k">${</span><span class="nv">my_ip</span><span class="k">}</span><span class="s2">?9618"</span> | <span class="nb">wc</span> <span class="nt">-l</span><span class="k">)</span>
+<span class="c"># If there are more than one slots, leave it.</span>
+<span class="k">if</span> <span class="o">((</span> slots <span class="o">&gt;</span> 1 <span class="o">))</span><span class="p">;</span> <span class="k">then
+    </span><span class="nb">exit </span>1<span class="p">;</span>
+<span class="k">else</span>
+    <span class="c"># Otherwise, poweroff.</span>
+    /usr/sbin/condor_off <span class="nt">-graceful</span>
+    <span class="nb">exit </span>0<span class="p">;</span>
+<span class="k">fi</span>
+</code></pre></div></div>
+
+<p>Which can be provided to your VM like:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>provisioner "remote-exec" {
+  when = "destroy"
+
+  scripts = [
+    "prepare-restart.sh",
+  ]
+
+  connection {
+    type        = "ssh"
+    user        = "centos"
+    private_key = "${file("~/.ssh/id_rsa")}"
+  }
+}
+</code></pre></div></div>
+
+<p>Terraform will SSH in with those credentials, copy over the script in <code class="highlighter-rouge">prepare-restart.sh</code>, and execute it.</p>
+
+<h1 id="usegalaxyeus-terraform-usage">UseGalaxy.eu’s Terraform Usage</h1>
+
+<p>All of <a href="https://github.com/usegalaxy-eu/infrastructure/">our virtual infrastructure</a> is managed, publicly, with Terraform. We hope that this can inspire others and give people ideas of the sort of things they can accomplish with Terraform. If you have questions over the way we have done certain things, feel free to file an issue and ask us!</p>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+            <ul>
+                
+                <li>Terraform lets you develop and implement infrastructure-as-code within your organisation</li>
+                
+                <li>It can drastically simplify management of large numbers of VMs</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+        <hr>
+        <br>
+
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Deploying a compute cluster in OpenStack via Terraform (Galaxy Server administration)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Deploying a compute cluster in OpenStack via Terraform (Galaxy Server administration)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Helena Rasche)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/admin/tutorials/terraform/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>
