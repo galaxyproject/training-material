@@ -1,0 +1,201 @@
+---
+layout: base_slides
+logo: "GTN"
+
+title: "Ansible"
+contributors:
+  - erasche
+---
+
+## Configuration Management
+
+- Manages the configuration of machines
+
+- Specifies what software is installed, how it is configured
+
+---
+
+### Why Configuration Management
+
+What happened:
+
+- Precisely what changes were made?
+- Did you write them down?
+- Can you reproduce them precisely for the next machine?
+
+What if:
+
+- ... your server dies?
+- ... your VM is accidentally deleted?
+- Can you recover?
+
+---
+
+### Why Configuration Management
+
+- Reproducibility
+
+- Ensure 1000s of machines are correctly configured
+
+- Easily recover from bad situations
+
+---
+
+### Ansible
+
+- Ansible is one of many tools (Chef, Puppet, Salt, etc)
+
+- It uses a 'push' model: SSH into machine and executes commands
+
+- Very popular
+
+- Many modules for common tasks like copying files or managing users or services.
+
+---
+
+## Important Terms
+
+---
+
+### Hosts File
+
+```ini
+[webservers]
+192.168.0.1
+192.168.0.2 ansible_user=ubuntu
+
+[databases]
+db_1.example.org ansible_user=root
+```
+
+---
+
+### Ansible Module and Tasks
+
+```yaml
+---
+- copy:
+    src: foo.conf
+    dest: /etc/foo.conf
+    owner: foo
+    group: foo
+    mode: 0644
+
+- package:
+    name: ntpdate
+    state: present
+```
+
+???
+
+Tasks are module invocations with their configuration.
+
+Here is an example of invoking the `copy` module and the package module. Copy copies a file from src on the local host to destination (the remote host) and sets some attributes about the file
+
+Next we see an example of the `package` module, a generic OS package manager. It ensures that for the package named `ntpdate`, its state is `present` (i.e. installed)
+
+---
+
+### Role
+
+.pull-left[
+A collection of:
+
+- tasks
+- files
+- templates
+- variables
+- handlers
+
+]
+
+.pull-right[
+```
+.
+├── defaults
+│   └── main.yml
+├── handlers
+│   └── main.yml
+├── meta
+│   └── main.yml
+├── README.md
+├── tasks
+│   ├── apache.yml
+│   ├── main.yml
+│   └── stratumN.yml
+├── templates
+│   └── stratum1_squid.conf.j2
+├── tests
+│   ├── inventory
+│   └── test.yml
+└── vars
+    └── main.yml
+
+```
+]
+
+???
+
+**Tasks** will be executed which will usually include tasks to **copy** files from the `files` directory and **template** files from the `templates` directory over to the remote server.
+
+**variables** are defined for use in the templates and tasks, and **handlers** are used to automatically restart services when configuration changes.
+
+---
+
+### Playbook
+
+.pull-left[
+- We define a playbook which has a name
+- And applies to some group of hosts
+- We specify some additional variables
+- And then invoke some roles
+]
+
+
+.pull-right[
+```yaml
+- name: CVMFS
+  hosts: all
+  vars:
+    cvmfs_role: client
+    galaxy_cvmfs_repos_enabled: true
+  roles:
+    - geerlingguy.repo-epel
+    - galaxyproject.cvmfs
+```
+]
+
+
+---
+
+### Vault
+
+Allows encryption of files, can collaborate on ansible playbooks without worrying about accidentally sharing secrets like passwords.
+
+```
+$ANSIBLE_VAULT;1.1;AES256
+63333238633033313664633437316231323932326531386266636637353037313335613563663934
+6639666536653631363739383639633165633337393334630a353233393938646539306362633738
+61613439366435336230636561663864323765303663666239613430323534333665636665643964
+6537376666323333660a663233343565393166373665366138306661343764623561343634656463
+31636265303430623731643766346434323565663436626466353765393465376533376366356463
+```
+
+---
+
+## Ansible Philosophies
+
+- Some people write a single playbook that completely manages a machine (installing everything on a brand new machine)
+
+- Other people write playbooks for a single task (e.g. upgrading software)
+
+- Which one depends on your use case.
+---
+
+## Ansible Galaxy
+
+- Public repository of roles
+
+- Many for common software deployment (nginx, apache, postgresql)
+
+- Different "Galaxy" than the bioinformatics tool server (but ansible can be used to install that too!)

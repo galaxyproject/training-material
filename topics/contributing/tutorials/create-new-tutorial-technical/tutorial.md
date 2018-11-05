@@ -14,7 +14,7 @@ objectives:
   - "Populating an existing instance with the needed tools, data and workflows for a tutorial"
   - "Creating a Galaxy Docker flavor with the needed tools, data and workflows for a tutorial"
   - "Testing the Galaxy Docker flavor of a tutorial"
-time_estimation: "30min"
+time_estimation: "30m"
 key_points:
   - "Tools, data and workflows can be easily integrated in a Docker flavor to have a useful technical support for a tutorial"
   - "A Galaxy Docker flavor is a great support for training"
@@ -51,7 +51,6 @@ Once the tutorial is ready, we need to develop a workflow that represents the st
 >
 > 1. Download the workflow for the tutorial
 > 2. Save it in the `workflow` directory of the tutorial
-> 3. Set `workflow` to `yes` in the appropriate section of the topic's `metadata.yaml`.
 {: .hands_on}
 
 # Creating the `tools.yaml` (recommended)
@@ -111,28 +110,41 @@ The datasets needed for a tutorial can also be integrated in the Galaxy instance
 These datasets are described in the `data-library.yaml` files:
 
 ```yaml
-libraries:
-    - name: Name of the tutorial
-      files:
-        - url: "https://raw.githubusercontent.com/bgruening/galaxytools/master/tools/rna_tools/sortmerna/test-data/read_small.fasta"
-          file_type: fasta
-        - url: ""
-          file_type: ""
+---
+destination:
+  type: library
+  name: GTN - Material
+  description: Galaxy Training Network Material
+  synopsis: Galaxy Training Network Material. See https://training.galaxyproject.org
+items:
+- name: Title of the topic
+  description: Summary of the topic
+  items:
+  - name: Title of the tutorial
+    items:
+    - name: 'DOI: 10.5281/zenodo....'
+      description: latest
+      items:
+      - info: https://doi.org/10.5281/zenodo....
+        url: https://zenodo.org/api/files/URL/to/the/input/file
+        ext: galaxy-datatype
+        src: url
 ```
-
-where:
-
-- `name`: name of the tutorial, i.e. where to put the data in the data libraries
-- `files`: list of the files to download
-    - `url`: URL to the input file
-    - `file-type`: type of the input file
-
-The URL must refer to the URL of the files in [Zenodo](https://zenodo.org), do not just link to the overview page.
 
 > ### {% icon hands_on %} Hands-on: Creating the `data-library.yaml`
 >
-> 1. Add the input files from your Zenodo dataset to the `data-library.yaml` file
-> 2. Add the link to Zenodo in the `metadata.yaml` file
+> 1. Copy the Zenodo link
+> 2. Generate the `data-library.yaml` file and update the tutorial metadata with the link:
+>
+>    ```
+>    $ planemo training_fill_data_library \
+>             --topic_name "my-topic" \
+>             --tutorial_name "my-new-tutorial" \
+>             --zenodo_link "URL to the Zenodo record" 
+>    ```
+>
+> 3. Check that the `data-library.yaml` has been generated (or updated)
+> 4. Check tha the Zenodo link is in the metadata at the top of the `tutorial.md`
 {: .hands_on}
 
 # Creating the `data-manager.yaml` (optional)
