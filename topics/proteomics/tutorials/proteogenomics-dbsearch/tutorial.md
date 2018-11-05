@@ -151,36 +151,35 @@ matched peptide sequences and generates outputs that can be visualized by users 
 results. PeptideShaker has been wrapped in Galaxy to work in combination with SearchGUI
 outputs.
 
-> > ### {% icon comment %} Comment:
->>   There are a number of choices for different data files that can be generated using
->>   PeptideShaker. A compressed file can be made containing all information needed to
->>   view them results in the standalone PeptideShaker viewer. A `mzidentML` file can
->>   be generated that contains all peptide sequence matching information and can be
->>   utilized by compatible downstream software. Other outputs are focused on the inferred
->>   proteins identified from the PSMs, as well as phosphorylation reports, relevant if
->>   a phosphoproteomics experiment has been undertaken.
-> {: .comment}
+> ### {% icon comment %} Comment: File Formats
+>   There are a number of choices for different data files that can be generated using
+>   PeptideShaker. A compressed file can be made containing all information needed to
+>   view them results in the standalone PeptideShaker viewer. A `mzidentML` file can
+>   be generated that contains all peptide sequence matching information and can be
+>   utilized by compatible downstream software. Other outputs are focused on the inferred
+>   proteins identified from the PSMs, as well as phosphorylation reports, relevant if
+>   a phosphoproteomics experiment has been undertaken.
+{: .comment}
 
 
- > ### {% icon hands_on %} Hands-on: PeptideShaker
+> ### {% icon hands_on %} Hands-on: PeptideShaker
 >
 > 1. **PeptideShaker** {% icon hands_on %}: Run **PeptideShaker** with:
->   - **Compressed SearchGUI results**: The SearchGUI archive file
->   - **Specify Advanced PeptideShaker Processing Options**: `Default Processing Options`
->   - **Specify Advanced Filtering Options**: `Default Filtering Options`
->   - **Include the protein sequences in mzIdentML**: `No`
->   - **Output options**: Select the `PSM Report` (Peptide-Spectral Match) and the `Certificate of Analysis`
+>   - *"Compressed SearchGUI results"*: The SearchGUI archive file
+>   - *"Specify Advanced PeptideShaker Processing Options"*: `Default Processing Options`
+>   - *"Specify Advanced Filtering Options"*: `Default Filtering Options`
+>   - *"Include the protein sequences in mzIdentML"*: `No`
+>   - *"Output options"*: Select the `PSM Report` (Peptide-Spectral Match) and the `Certificate of Analysis`
 >
-> > ### {% icon comment %} Comment:
->>
->>    The "Certificate of Analysis" provides details on all the parameters
->>    used by both SearchGUI and PeptideShaker in the analysis. This can be downloaded from the
->>    Galaxy instance to your local computer in a text file if desired.
->>
-> {: .comment}
+>     > ### {% icon comment %} Comment: Certificate of Analysis
+>     >
+>     > The "Certificate of Analysis" provides details on all the parameters
+>     > used by both SearchGUI and PeptideShaker in the analysis. This can be downloaded from the
+>     > Galaxy instance to your local computer in a text file if desired.
+>     >
+>     {: .comment}
 >
-> 2. Click **Execute** and inspect the resulting files after they turned green with the **View data** icon:
->    ![View data button](../../images/view_icon.png){:width="8%"}
+> 2. Inspect the resulting files after they turned green with the **View data** icon
 >
 {: .hands_on}
 
