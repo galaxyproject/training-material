@@ -31,7 +31,6 @@ In this tutorial, we perform proteogenomic database searching using the Mass Spe
 > 1. TOC
 > {:toc}
 >
-
 {: .agenda}
 
 
