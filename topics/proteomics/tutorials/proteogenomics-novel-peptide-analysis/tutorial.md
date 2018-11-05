@@ -5,7 +5,7 @@ title: "Proteogenomics 3: Novel peptide analysis"
 zenodo_link: "https://doi.org/10.5281/zenodo.1302055"
 objectives:
   - "How to assign and visualize the genomic localization of these identified novel proteoforms?"
-time_estimation: "30 mins"
+time_estimation: "30m"
 key_points:
   - "Learning how to visualize proteomic data and to perform its genomic allocation"
 

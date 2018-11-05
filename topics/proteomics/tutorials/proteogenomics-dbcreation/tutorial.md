@@ -5,7 +5,7 @@ title: "Proteogenomics 1: Database Creation"
 zenodo_link: "https://doi.org/10.5281/zenodo.1302055"
 objectives:
   - "Generating a customized Protein sequence database with variants, indels, splice junctions and known sequences."
-time_estimation: "30 mins"
+time_estimation: "30m"
 key_points:
   - "Generating customized protein sequence database using RNA-seq data"
   - "Generating genomic and variant mapping files for visualization"
