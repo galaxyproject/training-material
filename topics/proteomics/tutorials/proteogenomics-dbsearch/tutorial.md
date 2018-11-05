@@ -41,32 +41,21 @@ In this tutorial, we perform proteogenomic database searching using the Mass Spe
 
 > ### {% icon hands_on %} Hands-on: data upload and organization
 >
-> 1. Create a new history and name it something meaningful (e.g. *Proteogenomics DB search*)
+> 1. Create a **new history** and name it something meaningful (e.g. *Proteogenomics DB search*)
 > 2. Import the three MGF MS/MS files and the FASTA sequence file from Zenodo.[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1302055.svg)](https://doi.org/10.5281/zenodo.1302055)
+>    ```
+>    https://zenodo.org/record/1302055/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f4.mgf
+>    https://zenodo.org/record/1302055/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f5.mgf
+>    https://zenodo.org/record/1302055/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f8.mgf
+>    https://zenodo.org/record/1302055/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f9.mgf
+>    ```
 >
+>    {% include snippets/import_via_link.md %}
 >
->> ### {% icon tip %} Tip: Importing data via links
->>
->> * Copy the link location
-> > * Open the Galaxy Upload Manager
-> > * Select "Paste/Fetch Data"
-> > * Paste the link into the text field. You can add multiple links, each on a separate line.
-> > * Press Start. As default, Galaxy takes the link as name.
-> >
-> >
->    >  > ### {% icon comment %} Comment:
->    >  > - Rename the datasets to a more descriptive name
->> {: .comment}
->>
-> {: .tip}
+> 3. Rename the datasets to something more recognizable (strip the URL prefix)
+> 4. Build a **Dataset list** for the three MGF files, name it something recognizable, for example *MGF files*
 >
-> 3. Build a **Dataset list** for the three MGF files
->    - Click the **Operations on multiple datasets** check box at the top of the history panel
->    ![Operations on multiple datasets button](../../images/dataset_list.png){:width="15%"}
->    - Check the three boxes next to the MGF files
->    - Click **For all selected...** and choose **Build dataset list**
->    - Ensure the three control samples are the only ones selected, and enter a name for the new collection (e.g. *MGF files*)
->    - Click **Create list** and exit by clicking again the dataset operations icon
+>    {% include snippets/build_list_collection.md %}
 >
 {: .hands_on}
 
