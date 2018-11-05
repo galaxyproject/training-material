@@ -73,78 +73,68 @@ For this, the sequence database-searching program called [SearchGUI](https://com
  > ### {% icon hands_on %} Hands-on: SearchGUI
 >
 > 1. **SearchGUI** {% icon hands_on %}: Run **SearchGUI** with:
->    - **Protein Database**: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA`
+>    - *"Protein Database"*: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA`
 >    						(or however you named the `FASTA` file)
->    - **Input Peak lists (mgf)**: `MGF files` dataset collection.
+>    - *"Input Peak lists (mgf)"*: `MGF files` dataset collection.
 >
->  > ### {% icon tip %} Tip: Select dataset collections as input
->  >
->  > * Click the **Dataset collection** icon on the left of the input field:
->  >
->  > * Select the appropriate dataset collection from the list
->    {: .tip}
+>      > ### {% icon tip %} Tip: Select dataset collections as input
+>      >
+>      > * Click the **Dataset collection** icon on the left of the input field:
+>      >
+>      > * Select the appropriate dataset collection from the list
+>      {: .tip}
 >
->    Section **Search Engine Options**:
+>    - Section **Search Engine Options**:
+>      - *"B-Search Engines"*: `X!Tandem`
 >
->    - **B-Search Engines**: `X!Tandem`
+>        > ### {% icon comment %} Comment:
+>        >    The section **Search Engine Options** contains a selection of sequence database searching
+>        >    programs that are available in SearchGUI. Any combination of these programs can be used for
+>        >    generating PSMs from MS/MS data. For the purpose of this tutorial, **X!Tandem** we will be
+>        >    used.
+>        {: .comment}
 >
-> > ### {% icon comment %} Comment:
->>    The section **Search Engine Options** contains a selection of sequence database searching
->>    programs that are available in SearchGUI. Any combination of these programs can be used for
->>    generating PSMs from MS/MS data. For the purpose of this tutorial, **X!Tandem** we will be
->>    used.
-> {: .comment}
+>    -  Section **Precursor Options**:
+>       - *"Enzyme"*: `Trypsin`
+>       - *"Maximum Missed Cleavages"*: `2`
+>       - *"Precursor Ion Tolerance Units"*: `Parts per million (ppm)`
+>       - *"Precursor Ion Tolerance"*:` 10`
+>       - *"Fragment Tolerance (Daltons)"*: `0.05` (this is high resolution MS/MS data)
+>       - *"Minimum charge"*:`2`
+>       - *"Maximum charge"*:`6`
+>       - *"Forward Ion"*: `b`
+>       - *"Reverse Ion"*:` y`
+>       - *"Minimum Precursor Isotope"* :`0`
+>       - *"Maximum Precursor Isotope"* :`1`
 >
+>    - Section **Protein Modification Options**:
+>      - *"Fixed Modifications"*: `Carbamidomethylation of C, ITRAQ-4Plex of K, ITRAQ-4Plex of Ntermini`
+>      - *"Variable modifications"*: `Oxidation of M, ITRAQ-4Plex of Y`
 >
->    * Section **Precursor Options**:
+>        > ### {% icon tip %} Tip: Search for options
+>        > For selection lists, typing the first few letters in the window will filter the
+>        > available options.
+>        {: .tip}
 >
->   - **Enzyme**: `Trypsin`
->   -  **Maximum Missed Cleavages**: `2`
->   -  **Precursor Ion Tolerance Units**: `Parts per million (ppm)`
->   -  **Precursor Ion Tolerance**:` 10`
->   -  **Fragment Tolerance (Daltons)**: `0.05` (this is high resolution MS/MS data)
->   -  **Minimum charge**:`2`
->   -  **Maximum charge**:`6`
->   -  **Forward Ion**: `b`
->   -  **Reverse Ion**:` y`
->   -  **Minimum Precursor Isotope** :`0`
->   -  **Maximum Precursor Isotope** :`1`
+>    - Section **Advanced Options**:
+>      - *"X!Tandem Options"*: `Advanced`
+>      - *"X!Tandem: Quick Acetyl"*: `No`
+>      - *"X!Tandem: Quick Pyrolidone"*: `No`
+>      - *"X!Tandem: Protein stP Bias"*: `No`
+>      - *"X!Tandem: Maximum Valid Expectation Value"*: `100`
 >
->
->    * Section **Protein Modification Options**:
->
->    - **Fixed Modifications**: `Carbamidomethylation of C, ITRAQ-4Plex of K, ITRAQ-4Plex of Ntermini`
->    - **Variable modifications**: `Oxidation of M, ITRAQ-4Plex of Y`
->
->    > ### {% icon tip %} Tip: Search for options
->>    For selection lists, typing the first few letters in the window will filter the
->>    available options.
->    {: .tip}
->
->    * Section **Advanced Options**:
->    - **X!Tandem Options**: `Advanced`
->    - **X!Tandem: Quick Acetyl**: `No`
->    - **X!Tandem: Quick Pyrolidone**: `No`
->    - **X!Tandem: Protein stP Bias**: `No`
->    - **X!Tandem: Maximum Valid Expectation Value**: `100`
->
->    - leave everything else as default
->
->
->  2. Click **Execute**.
->
+>    - Leave everything else as default
+>    - Click **Execute**
 >
 >
 > Once the database search is completed, the SearchGUI tool will output a file (called a
-SearchGUI archive file) that will serve as an input for the next section, PeptideShaker.
+> SearchGUI archive file) that will serve as an input for the next section, PeptideShaker.
 >
->
->> ### {% icon comment %} Comment:
->>    Note that sequence databases used for proteogenomics are usually much larger than
->>    the excerpt used in this tutorial. When using large databases, the peptide identification
->>    step can take much more time for computation. In proteogenomics, choosing the optimal
->>    database is a crucial step of your workflow.
->>
+> > ### {% icon comment %} Comment:
+> > Note that sequence databases used for proteogenomics are usually much larger than
+> > the excerpt used in this tutorial. When using large databases, the peptide identification
+> > step can take much more time for computation. In proteogenomics, choosing the optimal
+> > database is a crucial step of your workflow.
 > {: .comment}
 >
 {: .hands_on}
