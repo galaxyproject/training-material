@@ -144,7 +144,7 @@ The first TMP frameshift product will share a start with the non-frameshifted TM
 
 The second TMP chaperone frameshift product will definitely need to have the start adjusted to fit the slippery sequence motif. The end will likely also need to be modified to the correct stop codon.
 
-> ### {% icon hands_on %} Moving Boundaries - Second TMP Chaperone Product
+> ### {% icon hands_on %} Moving Boundaries - Second TMP Chaperone Frameshift Product
 >
 > 1. Click on the second TMP chaperone frameshift gene to border it in red. Hover over the left end of the gene until the cursor becomes an arrow pointing to the left.
 >
