@@ -9,16 +9,18 @@ questions:
   - "What are its different approaches?"
 objectives:
   - "Provide the basics of machine learning and its variants."
-  - "Learn how to make predictions using the training and test data."
-  - "Classify data using a Galaxy workflow."
+  - "Learn how to do classification using the training and test data."
+  - "Learn how to use Galaxy's machine learning tools."
 requirements:
 time_estimation: "30M"
 key_points:
   - "Machine learning algorithms learn features from data."
   - "It is used for multiple tasks like classification, regression, clustering and so on."
-  - "For the classification task, data is divided into training and test sets."
-  - "Each data sample in training and test sets has a category/class/label."
-  - "Many learning tasks can be performed on datasets using Galaxy tools for machine learning."
+  - "Multiple learning tasks can be performed using Galaxy's machine learning tools."
+  - "For the classification and regression tasks, data is divided into training and test sets."
+  - "Each sample/record in the training data has a category/class/label."
+  - "A machine learning algorithm learns features from the training data and do predictions on the test data."
+
 contributors:
   - anuprulez
 
@@ -31,15 +33,15 @@ Machine learning uses the techniques from statistics, mathematics and computer s
 
 >    ![data](images/ml_basics.png "Flow of a machine learning task.")
 
-There are multiple ways in which machine learning can be used to perform data analysis. They depend on the nature of data and the kind of data analysis. The following image shows the most popular ones.
+There are multiple ways in which machine learning can be used to perform data analysis. They depend on the nature of data and the kind of data analysis. The following image shows the most popular ones. In [supervised learning](https://en.wikipedia.org/wiki/Supervised_learning) techniques, the categories of data records are known beforehand. But in [unsupervised learning](https://en.wikipedia.org/wiki/Unsupervised_learning), the categories of data records are not known.
 
 >    ![data](images/variants_ml.png "Different types of machine learning.")
 
-In general, machine learning can be used in multiple real-life tasks by using applying its variants as depicted in the following image
+In general, machine learning can be used in multiple real-life tasks by using applying its variants as depicted in the following image.
 
 >    ![data](images/usage_ml.png "Real-life usage of machine learning.")
 
-The following image shows how a classification task is performed. The complete data is divided into training and test sets. The training set is used by a classifier to learn features. It results in a trained model and it is evaluated using the test set (unseen by the classifier during the training).
+The following image shows how a classification task is performed. The complete data is divided into training and test sets. The training set is used by a classifier to learn features. It results in a trained model and its robustness (of learning) is evaluated using the test set (unseen by the classifier during the training).
 
 >    ![data](images/prediction.png "Supervised learning.")
 
@@ -56,7 +58,7 @@ This tutorial shows how to use a machine learning module implemented as a Galaxy
 
 ## Data upload
 
-The datasets required for this tutorial contain 9 features of breast cancer which include the thickness of clump, cell-size, cell-shape and so on ([more information](https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w)). In addition to these features, the training dataset contains one more column as `target`. It has a binary value (0 or 1) for each row. `0` indicates no breast cancer and `1` indicates breast cancer. The test dataset does not contain the `target` column. The third dataset contains the all the samples from test dataset but also the `target` column which would be needed to create plot showing comparison between actual and predicted targets.
+The datasets required for this tutorial contain 9 features of breast cancer which include the thickness of clump, cell-size, cell-shape and so on ([more information](https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w)). In addition to these features, the training dataset contains one more column as `target`. It has a binary value (0 or 1) for each row. `0` indicates no breast cancer and `1` indicates breast cancer. The test dataset does not contain the `target` column.
 
 
 > ### {% icon hands_on %} Hands-on: Data upload
@@ -78,10 +80,10 @@ The datasets required for this tutorial contain 9 features of breast cancer whic
 > 4. The datasets should look like these:
 >
 >
->    ![data](images/train_data.png "Training data with targets (9 features and one target).")
+>    ![data](images/train_data.png "Training data (breast-w_train) with targets (9 features and one target).")
 >
 >
->    ![data](images/test_data.png "Test data (9 features and no target).")
+>    ![data](images/test_data.png "Test data (breast-w_test) (9 features and no target).")
 {: .hands_on}
 
 
