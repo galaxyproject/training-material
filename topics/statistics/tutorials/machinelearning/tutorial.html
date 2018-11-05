@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Basics of machine learning</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Statistical Analyses for omics data and machine learning ..." />
+        <meta property="og:title" content="Galaxy Training: Basics of machine learning" />
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning ..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body>
+        
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/statistics" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Statistics and machine learning
+                        </a>
+                    </li>
+
+                    
+                    
+                    
+
+                    
+                        
+                    
+
+                    
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+                                <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">instances</span> Galaxy Instances
+                            </a>
+                            <div class="dropdown-menu">
+                                
+                                    <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/statistics/docker" title="Docker image for this tutorial">
+                                        <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+                                    </a>
+                                
+                                
+                                
+                            </div>
+                        </li>
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://zenodo.org/record/1468039#.W8zyxBRoSAo" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/statistics#references" title="References">
+                            <i class="fa fa-bookmark" aria-hidden="true"></i><span class="visually-hidden">references</span> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://biostar.usegalaxy.org/" title="Ask on Biostars">
+            Ask questions on Biostars
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/statistics/tutorials/machinelearning/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+   
+{
+  "@context": "http://schema.org",
+  "@type": "CreativeWork",
+  "name": "Basics of machine learning",
+  "accessModeSufficient": "visual",
+  "accessibilityControl": "fullMouseControl",
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "learningResourceType": "",
+  "url": "/topics/statistics/tutorials/machinelearning/tutorial.html",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/record/1468039#.W8zyxBRoSAo",
+      "name": "Training data for Basics of machine learning tutorial"
+    }
+  ],
+  "timeRequired": "PT30M",
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "anuprulez"
+    }
+  ],
+  "description": "The questions this  addresses are:\n - What is machine learning?\n - Why is it useful?\n - What are its different approaches?\n\n\\nThe objectives are:\n - Provide the basics of machine learning and its variants.\n - Learn how to do classification using the training and test data.\n - Learn how to use Galaxy's machine learning tools.\n\n"
+}
+
+    </script>
+    <section class="tutorial">
+        <h1>Basics of machine learning</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>What is machine learning?</li>
+            
+            <li>Why is it useful?</li>
+            
+            <li>What are its different approaches?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>Provide the basics of machine learning and its variants.</li>
+            
+            <li>Learn how to do classification using the training and test data.</li>
+            
+            <li>Learn how to use Galaxy's machine learning tools.</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+                <li>
+                    
+                    <a href="/training-material/topics/introduction/">Galaxy introduction</a>
+                    
+                </li>
+            
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 30 minutes</p>
+            
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p><a href="https://en.wikipedia.org/wiki/Machine_learning">Machine learning</a> uses the techniques from statistics, mathematics and computer science to make computer programs learn from data. It is one of the most popular fields of computer science and finds applications in multiple streams of data analysis like <a href="https://en.wikipedia.org/wiki/Statistical_classification">classification</a>, <a href="https://en.wikipedia.org/wiki/Regression_analysis">regression</a>, <a href="https://en.wikipedia.org/wiki/Cluster_analysis">clustering</a>, <a href="https://en.wikipedia.org/wiki/Dimensionality_reduction">dimensionality reduction</a>, <a href="https://en.wikipedia.org/wiki/Density_estimation">density estimation</a> and many more. Some real-life applications are spam filtering, medical diagnosis, autonomous driving, recommendation systems, facial recognition, stock prices prediction and many more. The following image shows a basic flow of any machine learning task. A user has data and it is given to a machine learning algorithm for analysis.</p>
+
+<blockquote>
+  <figure id="figure-1"><img src="images/ml_basics.png" alt="data" title="Flow of a machine learning task." /><figcaption><span class="figcaption-prefix">Figure 1:</span> Flow of a machine learning task.</figcaption></figure>
+</blockquote>
+
+<p>There are multiple ways in which machine learning can be used to perform data analysis. They depend on the nature of data and the kind of data analysis. The following image shows the most popular ones. In <a href="https://en.wikipedia.org/wiki/Supervised_learning">supervised learning</a> techniques, the categories of data records are known beforehand. But in <a href="https://en.wikipedia.org/wiki/Unsupervised_learning">unsupervised learning</a>, the categories of data records are not known.</p>
+
+<blockquote>
+  <figure id="figure-2"><img src="images/variants_ml.png" alt="data" title="Different types of machine learning." /><figcaption><span class="figcaption-prefix">Figure 2:</span> Different types of machine learning.</figcaption></figure>
+</blockquote>
+
+<p>In general, machine learning can be used in multiple real-life tasks by using applying its variants as depicted in the following image.</p>
+
+<blockquote>
+  <figure id="figure-3"><img src="images/usage_ml.png" alt="data" title="Real-life usage of machine learning." /><figcaption><span class="figcaption-prefix">Figure 3:</span> Real-life usage of machine learning.</figcaption></figure>
+</blockquote>
+
+<p>The following image shows how a classification task is performed. The complete data is divided into training and test sets. The training set is used by a classifier to learn features. It results in a trained model and its robustness (of learning) is evaluated using the test set (unseen by the classifier during the training).</p>
+
+<blockquote>
+  <figure id="figure-4"><img src="images/prediction.png" alt="data" title="Supervised learning." /><figcaption><span class="figcaption-prefix">Figure 4:</span> Supervised learning.</figcaption></figure>
+</blockquote>
+
+<p>This tutorial shows how to use a machine learning module implemented as a Galaxy tool. The data used in this tutorial is available at <a href="https://zenodo.org/record/1468039#.W8zyxBRoSAo">Zenodo</a>.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>Performing a machine learning task (classification) using a tool involves the following steps:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
+  <li><a href="#train-a-classifier" id="markdown-toc-train-a-classifier">Train a classifier</a></li>
+  <li><a href="#predict-using-a-trained-model" id="markdown-toc-predict-using-a-trained-model">Predict using a trained model</a></li>
+  <li><a href="#see-predictions" id="markdown-toc-see-predictions">See predictions</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="data-upload">Data upload</h2>
+
+<p>The datasets required for this tutorial contain 9 features of breast cancer which include the thickness of clump, cell-size, cell-shape and so on (<a href="https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w">more information</a>). In addition to these features, the training dataset contains one more column as <code class="highlighter-rouge">target</code>. It has a binary value (0 or 1) for each row. <code class="highlighter-rouge">0</code> indicates no breast cancer and <code class="highlighter-rouge">1</code> indicates breast cancer. The test dataset does not contain the <code class="highlighter-rouge">target</code> column.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import the following datasets and choose the type of data as <code class="highlighter-rouge">tabular</code>.</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1401230/files/breast-w_train.tsv
+https://zenodo.org/record/1401230/files/breast-w_test.tsv
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>Open the Galaxy Upload Manager</li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>Paste the link into the text field</li>
+          <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Rename datasets to <code class="highlighter-rouge">breast-w_train</code> and <code class="highlighter-rouge">breast-w_test</code>.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-rename-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Rename a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>The datasets should look like these:</p>
+
+      <figure id="figure-5"><img src="images/train_data.png" alt="data" title="Training data (breast-w_train) with targets (9 features and one target)." /><figcaption><span class="figcaption-prefix">Figure 5:</span> Training data (breast-w_train) with targets (9 features and one target).</figcaption></figure>
+
+      <figure id="figure-6"><img src="images/test_data.png" alt="data" title="Test data (breast-w_test) (9 features and no target)." /><figcaption><span class="figcaption-prefix">Figure 6:</span> Test data (breast-w_test) (9 features and no target).</figcaption></figure>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="train-a-classifier">Train a classifier</h2>
+<p>In this step, <code class="highlighter-rouge">SVM (Support vector machine)</code> classifier is trained using <code class="highlighter-rouge">breast-w_train</code> dataset. The last column of this dataset assigns a category for each row. The classifier learns a mapping between each row and its category. This mapping is called a trained model. It is used to predict the categories of unseen data (<code class="highlighter-rouge">breast-w_test</code>).</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-train-a-classifier"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Train a classifier</h3>
+
+  <p><strong>SVM Classifier (Support vector machine)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters</p>
+  <ol>
+    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select a Classification Task”</em>: <code class="highlighter-rouge">Train a model</code></li>
+    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Classifier type”</em>: <code class="highlighter-rouge">Linear Support Vector Classification</code></li>
+    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select input type”</em>: <code class="highlighter-rouge">tabular data</code></li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training samples dataset”</em>: <code class="highlighter-rouge">breast-w_train</code></li>
+    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
+    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">All columns but by column header name(s)</code></li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="highlighter-rouge">target</code></li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset containing class labels”</em>: <code class="highlighter-rouge">breast-w_train</code></li>
+    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
+    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">Select columns by column header name(s)</code></li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Select target column(s)”</em>: <code class="highlighter-rouge">target</code></li>
+    <li><code class="highlighter-rouge">Execute</code> the classifier to train</li>
+  </ol>
+</blockquote>
+
+<h2 id="predict-using-a-trained-model">Predict using a trained model</h2>
+<p>The previous step produces a model file of type <code class="highlighter-rouge">zip</code>. Rename this file to <code class="highlighter-rouge">model.zip</code> by using <code class="highlighter-rouge">edit</code> dataset property. The trained model is used to predict the categories of each row in <code class="highlighter-rouge">breast-w_test</code> dataset.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-predict-using-a-trained-model"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Predict using a trained model</h3>
+
+  <p><strong>SVM Classifier (Support vector machine)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters</p>
+
+  <ol>
+    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select a Classification Task”</em>: <code class="highlighter-rouge">Load a model and predict</code></li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Models”</em>: <code class="highlighter-rouge">model.zip</code></li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data (tabular)”</em>: <code class="highlighter-rouge">breast-w_test</code></li>
+    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
+    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select the type of prediction”</em>: <code class="highlighter-rouge">Predict class labels</code></li>
+    <li><code class="highlighter-rouge">Execute</code> to predict categories</li>
+  </ol>
+</blockquote>
+
+<h2 id="see-predictions">See predictions</h2>
+<p>The last column of the predicted dataset shows the category of each row. A row either gets <code class="highlighter-rouge">0</code> (no breast cancer) or <code class="highlighter-rouge">1</code> (breast cancer) as its predicted category.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-see-the-predicted-column"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: See the predicted column</h3>
+  <ol>
+    <li>Click on <code class="highlighter-rouge">view data</code> link of the dataset created after executing the previous step.</li>
+    <li>The last column of the <code class="highlighter-rouge">tabular</code> data shows the predicted category (<code class="highlighter-rouge">target</code>) for each row.</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-additional-resources"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Additional resources:</h3>
+
+  <p>Read more about <strong>machine learning using scikit-learn</strong> <a href="http://scikit-learn.org/stable/">here</a>.</p>
+</blockquote>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+            <ul>
+                
+                <li>Machine learning algorithms learn features from data.</li>
+                
+                <li>It is used for multiple tasks like classification, regression, clustering and so on.</li>
+                
+                <li>Multiple learning tasks can be performed using Galaxy's machine learning tools.</li>
+                
+                <li>For the classification and regression tasks, data is divided into training and test sets.</li>
+                
+                <li>Each sample/record in the training data has a category/class/label.</li>
+                
+                <li>A machine learning algorithm learns features from the training data and do predictions on the test data.</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+        <h1>Useful literature</h1>
+        <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/statistics#references">here</a>.</p>
+        
+
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+        <hr>
+        <br>
+
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Basics of machine learning (Statistics and machine learning)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Basics of machine learning (Statistics and machine learning)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anup Kumar)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/statistics/tutorials/machinelearning/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>
