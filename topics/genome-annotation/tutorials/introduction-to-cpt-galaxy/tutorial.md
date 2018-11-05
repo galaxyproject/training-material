@@ -94,6 +94,7 @@ Each numbered entry within a history is called a *dataset*. Tool/workflow output
 Datasets can be one of four colors:
 > * Grey = the tool has been submitted but has not yet begun processing.
 > * Yellow = the tool is currently running
+> * Light Blue = the tool is paused
 > * Green = a successful execution of the tool
 > * Red = a failed execution of the tool
 
