@@ -127,7 +127,7 @@ The previous step produces a model file of type `zip`. Rename this file to `mode
 ## See predictions
 The last column of the predicted dataset shows the category of each row. A row either gets `0` (no breast cancer) or `1` (breast cancer) as its predicted category. 
 
-> ### {% icon hands_on %} Hands-on: See the predicted columns
+> ### {% icon hands_on %} Hands-on: See the predicted column
 > 1. Click on `view data` link of the dataset created after executing the previous step.
 > 2. The last column of the `tabular` data shows the predicted category (`target`) for each row.
 > 
