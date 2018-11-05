@@ -306,22 +306,21 @@ Now that we have the list of known peptides, the query tabular tool is used to m
 >
 >    - Section **Filter Dataset Input**
 >      - {% icon param-repeat %} **Insert Filter Tabular Input Lines**
->        - *"Filter by**:  `skip leading lines`
->        - *"Skip lines**: `1`
+>        - *"Filter by"*:  `skip leading lines`
+>        - *"Skip lines"*: `1`
 >      - {% icon param-repeat %} **Insert Filter Tabular Input Lines**
 >        - *"Filter by"*:  `select columns`
 >        - *"Enter column numbers to keep"*: `1,2`
 >      - {% icon param-repeat %} **Insert Filter Tabular Input Lines**
->        - **Filter Tabular input lines**
->        - **Filter by**:  `normalize list columns,replicate rows for each item in the list`
->        - **Enter column numbers to normalize**: `2`
->        - **List item delimiter in column**: `,`
+>        - *"Filter by"*:  `normalize list columns,replicate rows for each item in the list`
+>        - *"Enter column numbers to normalize"*: `2`
+>        - *"List item delimiter in column"*: `,`
 >
 >    - Section **Table Options**:
->      - **Specify Name for Table**: `prots`
->      - **Use first line as column names** : `No`
->      - **Specify Column Names (comma-separated list)**:`id,prot`
->      - **Only load the columns you have named into database**: `Yes`
+>      - *"Specify Name for Table"*: `prots`
+>      - *"Use first line as column names"* : `No`
+>      - *"Specify Column Names (comma-separated list)"*:`id,prot`
+>      - *"Only load the columns you have named into database"*: `Yes`
 >      - {% icon param-repeat %} **Table Index**:
 >        - *"Table Index"*: `No`
 >        - *"Index on Columns"*: `prot, id`
