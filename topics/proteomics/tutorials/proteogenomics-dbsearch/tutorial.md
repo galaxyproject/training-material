@@ -198,21 +198,17 @@ A number of new items will appear in your History, each corresponding to the out
 The mzidentml output from the Peptide shaker is converted into an sqlite database file by using the mz to sqlite tool. This sqlite output is used to open the Multi-omics visualization platform, wherein you can view the spectra of the peptides using Lorikeet parameters. To open the MVP viewer, click on the “Visualize in MVP Application” icon ( this will pop-open the interactive multi-omics viewer in a new window/tab)
 
 
-> ### {% icon hands_on %} Hands-on: mz to sqlite:
+> ### {% icon hands_on %} Hands-on: mz to sqlite
 >
->This tool extracts mzidentml and its associated proteomics datasets into a sqlite db
->
+> This tool extracts mzidentml and its associated proteomics datasets into a sqlite db
 >
 > 1. {% icon hands_on %} Run **mz to sqlite** with:
 >
->    - **Proteomics identification files**: Click on `PeptideShaker_mzidentml`:
->    - **Proteomics Spectrum files**: `Mo_Tai_MGFs`
->    - **Proteomics Search Database Fasta**: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA`
+>    - *"Proteomics identification files"*: Click on `PeptideShaker_mzidentml`:
+>    - *"Proteomics Spectrum files"*: `Mo_Tai_MGFs`
+>    - *"Proteomics Search Database Fasta"*: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA`
 >
-> Click **Execute**
->
->
->![mz2sqlite](../../images/mz2sqlite.png){:width="20%"}
+>    ![mz2sqlite](../../images/mz2sqlite.png){:width="20%"}
 >
 {: .hands_on}
 
@@ -224,14 +220,12 @@ The file named "Trimmed_ref_500_Uniprot_cRAP.fasta" is the trimmed version of Un
 
 This Fasta file will be subjected to few text manipulation steps in order to get the tabular file for the known peptides. The first step is to convert this FASTA file to tabular in order to proceed with text manipulation.
 
- > ### {% icon hands_on %}  Hands-on: FASTA to Tabular
+> ### {% icon hands_on %}  Hands-on: FASTA to Tabular
 >
->Convert these sequences:
->
-> Run **FASTA to Tabular** {% icon tool %} with the following parameters:
-> - **Data input 'input' (fasta)**: `Trimmed_ref_500_Uniprot_cRAP.fasta`
-> - **How many columns to divide title string into?**: `2`
-> - **How many title characters to keep?**: `0`
+> 1. Run **FASTA to Tabular** {% icon tool %} with the following parameters:
+>    - *"Data input 'input' (fasta)"*: `Trimmed_ref_500_Uniprot_cRAP.fasta`
+>    - *"How many columns to divide title string into?"*: `2`
+>    - *"How many title characters to keep?"*: `0`
 >
 {: .hands_on}
 
@@ -239,119 +233,98 @@ The resultant tabular file will go through a series of text manipulation steps.
 
 
 ### Text Manipulation steps
- >
- > ### {% icon hands_on %} Hands-on: Text Manipulation
- >
- > 1. **Cut** {% icon hands_on %}
- >    - **Cut Columns**: `c1`
- >    - **Delimited by**: `Tab`
- >
- > Upon completion of this step you will have extracted C1 (column 1) from the input tabular file
- >
- > 2. **Convert** {% icon hands_on %}
- >   - **Convert all**: `Whitespaces`
- >   - **in Dataset** : `Data input 'input' (txt)`
- >   - **Strip leading and trailing whitespaces**: `Yes`
- >   - **Condense consecutive delimiters in one TAB**: `Yes`
- >
- > This step will convert all the white spaces into different tabular column.
- >
- > 3. **Cut** {% icon hands_on %}
- >    - **Cut Columns**: `c2`
- >    - **Delimited by**: `Pipe`
- >
- > This step will extract information in column2 separated by Pipe
- >
- > 4. **Convert** {% icon hands_on %}
- >   - **Convert all**: `Dots`
- >   - **in Dataset** : `Data input 'input' (txt)`
- >   - **Strip leading and trailing whitespaces**: `Yes`
- >   - **Condense consecutive delimiters in one TAB**: `Yes`
- >
- >This step will convert all the dots into different tabular column.
- >
- > 5. **Group** {% icon hands_on %}
- >   - **Select data**: `input from above`
- >   - **Group by column**: `1`
- >
+
+
+> ### {% icon hands_on %} Hands-on: Text Manipulation
+>
+> 1. **Cut** {% icon hands_on %}
+>    - *"Cut Columns"*: `c1`
+>    - *"Delimited by"*: `Tab`
+>
+>    Upon completion of this step you will have extracted C1 (column 1) from the input tabular file
+>
+> 2. **Convert** {% icon hands_on %}
+>    - *"Convert all"*: `Whitespaces`
+>    - *"in Dataset"* : `Data input 'input' (txt)`
+>    - *"Strip leading and trailing whitespaces"*: `Yes`
+>    - *"Condense consecutive delimiters in one TAB"*: `Yes`
+>
+>    This step will convert all the white spaces into different tabular column.
+>
+> 3. **Cut** {% icon hands_on %}
+>    - *"Cut Columns"*: `c2`
+>    - *"Delimited by"*: `Pipe`
+>
+>    This step will extract information in column2 separated by Pipe
+>
+> 4. **Convert** {% icon hands_on %}
+>    - *"Convert all"*: `Dots`
+>    - *"in Dataset"* : `Data input 'input' (txt)`
+>    - *"Strip leading and trailing whitespaces"*: `Yes`
+>    - *"Condense consecutive delimiters in one TAB"*: `Yes`
+>
+>    This step will convert all the dots into different tabular column.
+>
+> 5. **Group** {% icon hands_on %}
+>    - *"Select data"*: `input from above`
+>    - *"Group by column"*: `1`
+>
 {: .hands_on}
 
 Now that we have the list of known peptides, the query tabular tool is used to move these reference pepides from the PSM report.
 
-
 #### Query Tabular
 
- > ### {% icon hands_on %} Hands-on: Query Tabular
+> ### {% icon hands_on %} Hands-on: Query Tabular
 >
->  **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
+>  1. **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
 >
->    - (a)**Database Table**: Click on `+ Insert Database Table`:
+>  - {% icon param-repeat %} **Insert Database Table** (a):
+>    - Section **Table Options**:
+>      - *"Tabular Dataset for Table"*: Uniprot
+>      - *"Use first line as column names"* : `No`
+>      - *"Specify Column Names (comma-separated list)"*:`prot`
+>      - {% icon param-repeat %} **Insert Table Index**:
+>        - *"Table Index"*: `No`
+>        - *"Index on Columns"*: `Prot`
+>  - {% icon param-repeat %} **Insert Database Table** (b):
+>    - Section **Filter Dataset Input**:
+>      - {% icon param-repeat %} **Insert Filter Tabular Input Lines**
+>        - *"Filter by"*:  `skip leading lines`
+>        - *"Skip lines"*: `1`
 >
->    Section **Table Options**:
+>    - Section **Table Options**:
+>      - *"Specify Name for Table"*: `psms`
+>      - *"Use first line as column names"* : `No`
+>      - *"Specify Column Names (comma-separated list)"*:`id,Proteins,Sequence`
+>      - *"Only load the columns you have named into database"*: `Yes`
+>      - {% icon param-repeat %} **Table Index**
+>        - *"Table Index"*: `No`
+>        - *"Index on Columns"*: `id`
 >
->    - **Tabular Dataset for Table**: Uniprot
->    - **Use first line as column names** : `No`
->    - **Specify Column Names (comma-separated list)**:`prot`
+> - {% icon param-repeat %} **Insert Database Table** (c):
 >
->    _**Table Index**_:
+>    - Section **Filter Dataset Input**
+>      - {% icon param-repeat %} **Insert Filter Tabular Input Lines**
+>        - *"Filter by**:  `skip leading lines`
+>        - *"Skip lines**: `1`
+>      - {% icon param-repeat %} **Insert Filter Tabular Input Lines**
+>        - *"Filter by"*:  `select columns`
+>        - *"Enter column numbers to keep"*: `1,2`
+>      - {% icon param-repeat %} **Insert Filter Tabular Input Lines**
+>        - **Filter Tabular input lines**
+>        - **Filter by**:  `normalize list columns,replicate rows for each item in the list`
+>        - **Enter column numbers to normalize**: `2`
+>        - **List item delimiter in column**: `,`
 >
->    - **Table Index**: `No`
->    - **Index on Columns**: `Prot`
->
->    - (b) **Database Table**: Click on `+ Insert Database Table`:
->
->    Section **Filter Dataset Input**:
->
->    - **Filter Tabular input lines**
->
->    - Filter by:  `skip leading lines`
->
->    - Skip lines: `1`
->
->    Section **Table Options**:
->
->    - **Specify Name for Table**: `psms`
->    - **Use first line as column names** : `No`
->    - **Specify Column Names (comma-separated list)**:`id,Proteins,Sequence`
->    - **Only load the columns you have named into database**: `Yes`
->
->    Section **Table Index**
->
->    - **Table Index**: `No`
->    - **Index on Columns**: `id`
->
->    - (c) **Database Table**: Click on `+ Insert Database Table`:
->
->    Section **Filter Dataset Input**
->
->    - **Filter Tabular input lines**
->    - **Filter by**:  `skip leading lines`
->    - **Skip lines**: `1`
->
->    Add another filter tabular input lines
->
->    - **Filter Tabular input lines**
->    - **Filter by**:  `select columns`
->    - **Enter column numbers to keep**: `1,2`
->
->   Add another filter tabular input lines
->
->    - **Filter Tabular input lines**
->    - **Filter by**:  `normalize list columns,replicate rows for each item in the list`
->    - **Enter column numbers to normalize**: `2`
->    - **List item delimiter in column**: `,`
->
->    Section **Table Options**:
->
->    - **Specify Name for Table**: `prots`
->    - **Use first line as column names** : `No`
->    - **Specify Column Names (comma-separated list)**:`id,prot`
->    - **Only load the columns you have named into database**: `Yes`
->
->    _**Table Index**_:
->
->    - **Table Index**: `No`
->    - **Index on Columns**: `prot, id`
+>    - Section **Table Options**:
+>      - **Specify Name for Table**: `prots`
+>      - **Use first line as column names** : `No`
+>      - **Specify Column Names (comma-separated list)**:`id,prot`
+>      - **Only load the columns you have named into database**: `Yes`
+>      - {% icon param-repeat %} **Table Index**:
+>        - *"Table Index"*: `No`
+>        - *"Index on Columns"*: `prot, id`
 >
 > > ### {% icon comment %} Comment:
 >>
