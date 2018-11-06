@@ -158,6 +158,10 @@ There are three icons in the top right-hand corner of the History panel. The ![]
 
 On the left is the current history, and all histories on the right are other histories. The **switch to** button will set that history as the current history. At the top left-hand corner is a **done** button, which will exit this view when complete. Any analyses run will be done in that history.
 
+> ### {% icon comment %} Further Reading
+> To learn more about what a user can do with histories and datasets in Galaxy, please reference [this tutorial.](https://galaxyproject.github.io/training-material/topics/galaxy-ui/tutorials/history/tutorial.html)
+{: .comment}
+
 # Workflows
 
 > ### {% icon question %} What is a Workflow?
@@ -190,6 +194,10 @@ Find the workflow of interest, select the down arrow, and click *Import.* Each w
 ![](../../images/introduction-to-cpt-galaxy-screenshots/25_import_workflow.png)
 
 The imported workflow will then become available for use under the *Workflow* menu at the top of Galaxy (to the right of *Shared Data.*)
+
+> ### {% icon comment %} Advanced Users…
+> Unable to find a specific workflow for the project/genome at hand? Read [this tutorial](https://galaxyproject.github.io/training-material/topics/galaxy-ui/tutorials/history-to-workflow/tutorial.html) for more information on building a new workflow.
+{: .comment}
 
 ## Running a Workflow
 
