@@ -4,44 +4,63 @@ layout: tutorial_hands_on
 title: Setting up molecular systems
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques is important to know for this type of data?
+- How to get started modelling a protein? 
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentence describing what a learner will be able to do once they
-  have done the tutorial
-- You can use the Bloom's Taxonomy to write effective learning objectives
-Requirements:
+- learn about the Protein Data Bank
+- learn how to setup up a model protein system (with CHARMM-GUI)
+- learn how to upload the system to Galaxy 
+requirements:
   -
     title: "Introduction to Computational chemistry"
     type: "internal"
-    link: "/computational-chemistry/index.html"
-time_estimation: 3H
+    link: "/computational-chemistry/slides/introduction.html"
+  -
+    title: "Setting up molecular systems (slides)"
+    type: "internal"
+    link: "/computational-chemistry/tutorials/setting-up-molecular-systems/slides.html"
+time_estimation: 30m
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+  - "The PDB is a key resource for finding protein structures."
+  - "Using CHARMM-GUI is one way to prepare a protein."
+  - "To get data into Galaxy you can upload a file from your computer or paste in a web address."
 contributors:
-- contributor1
-- contributor2
+  - chrisbarnettster
 
 ---
-
 
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
+In this tutorial, we'll cover the basics of molecular modelling by setting up a protein and uploading this to Galaxy.
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+To start we'll look at the PDB and find the entry for an enzyme involved in Chagas Disease. The enzyme is 1S0I, a trans-sialidase.
 
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+> ### {% icon tip %} Background: What is the PDB (Protein Data Bank) and format?
+>
+> The Protein Data Bank (PDB) format contains atomic coordinates of biomolecules and provides a standard representation for macromolecular structure data derived from X-ray diffraction and NMR studies. 
+> For example the `PDB`-file for a trans-sialadise with its substrate (PDB: [1S0I](https://www.rcsb.org/pdb/explore/explore.do?structureId=1s0i)):
+>
+> More resources:
+>
+>  -  Multiple structures are stored and can be queried at [https://www.rcsb.org/](https://www.rcsb.org/)
+>  - Documentation describing the PDB file format is available from the wwPDB at [http://www.wwpdb.org/documentation/file-format.php](http://www.wwpdb.org/documentation/file-format.php).
+{: .tip}
+
+
+> ### {% icon tip %} Background: What is Chagas Disease?
+>
+>A tropical parasitic disease caused by Trypanosoma cruzi and spread by insect vectors (mainly the kissing bug).
+>The trans-sialidase has been of interest as T. Cruzi incorporates sialic acid using this enzyme instead of a specific tranferase enzyme.
+>
+> More resources:
+>
+  - [https://en.wikipedia.org/wiki/Chagas_disease](https://en.wikipedia.org/wiki/Chagas_disease) 
+  - [https://www.cdc.gov/parasites/chagas/gen_info/detailed.html](https://www.cdc.gov/parasites/chagas/gen_info/detailed.html)
+  - [Trypanosoma cruzi Trans-sialidase: structural features and biological implications.](https://www.ncbi.nlm.nih.gov/pubmed/24264246)
+  - [Profiling Transition-State Configurations on the Trypanosoma cruzi trans-Sialidase Free-Energy Reaction Surfaces](https://pubs.acs.org/doi/full/10.1021/jp506824r)
+{: .tip}
+
+
 
 > ### Agenda
 >
@@ -52,26 +71,16 @@ and technical) key concepts they will learn.
 >
 {: .agenda}
 
-# Title for your first section
+# Trans-Sialidase PDB
 
-Give some background about what the trainees will be doing in the section.
-
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
+In this section we'll access the PDB, download the correct structure, import it and view in Galaxy.
 
 ## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
+> 2. Import the files from the [PDB](https://files.rcsb.org/download/1S0I.pdb) or from the shared data library
 >
 >    ```
 >    
@@ -160,5 +169,6 @@ Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 # Conclusion
 {:.no_toc}
 
+{% icon trophy %} Well done! You have started modelling a protein and uploaded it into Galaxy.
 Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
 pipeline used.
