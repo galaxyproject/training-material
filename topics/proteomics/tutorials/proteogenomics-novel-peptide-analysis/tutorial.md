@@ -309,8 +309,8 @@ Please look at the following tutorials in this proteogenomics series:
 - First: [Proteogenomics database creation]({{ site.baseurl }}/topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.html)
 - Second: [Proteogenomics database search]({{ site.baseurl }}/topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.html)
 
-This workflow is also available at [Proteogenomics gateway](z.umn.edu/proteogenomicsgateway).
+This workflow is also available at [Proteogenomics gateway](http://galaxyp-proteogenomics.duckdns.org/).
 
 This workflow was developed by the Galaxy-P team at the University of Minnesota.
-For more information about Galaxy-P or our ongoing work, please visit us at [www.galaxyp.org](www.galaxyp.org)
+For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](http://galaxyp.org)
 
