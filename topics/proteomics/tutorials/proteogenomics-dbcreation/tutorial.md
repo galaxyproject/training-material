@@ -220,11 +220,9 @@ Its input can include not only the alignments of raw reads used by other transcr
 >   - *"Specify strand information"*: `Unstranded`
 >   - *"Use a reference file to guide assembly?"*: `Use Reference GTF/GFF3`
 >   - *"Reference file"*: `Use file from History`
->       - *"GTF/GFF3 dataset to guide assembly"*: `Mus_musculus.GRCm38.86.gtf`
+>   - *"GTF/GFF3 dataset to guide assembly"*: `Mus_musculus.GRCm38.86.gtf`
 >   - *"Use Reference transcripts only?"*: `No`
 >   - *"Output files for differential expression?"*: `No additional output`
->   - *"Output coverage file?"*: `No`
->   - *"Advanced Options"*: `Default Parameters`
 >
 {: .hands_on}
 
@@ -271,9 +269,9 @@ The original form of this program is also distributed as part of the Cufflinks s
 > ### {% icon hands_on %} Hands-on: compare assembled transcripts against a reference annotation
 >
 > 1. **GffCompare** {% icon tool %} with the following parameters:
->   - *"GTF inputs for comparison"*`Stringtie_outut.gtf`
->   - *"Use Reference Annotation"*: `Mus_musculus.GRCm38.86.gtf`
->   - *"Reference Annotation"*: `Unstranded`
+>   - {% icon param-file %} *"GTF inputs for comparison"*`Stringtie_outut.gtf`
+>   - {% icon param-file %} *"Use Reference Annotation"*: `Mus_musculus.GRCm38.86.gtf`
+>   - {% icon param-select %} *"Reference Annotation"*: `Unstranded`
 >   - *"Ignore reference transcripts that are not overlapped by any input transfrags"*: `No`
 >   - *"Ignore input transcripts that are not overlapped by any reference transcripts"*: `No`
 >   - *"Use Sequence Data"*: `No`
@@ -286,8 +284,8 @@ The original form of this program is also distributed as part of the Cufflinks s
 
 > ### {% icon details %} GffCompare vs CuffCompare
 > A notable difference between GffCompare and CuffCompare is that when a single query GTF/GFF file is
-> given as input along with a reference annotation (-r option), GFFCompare switches into "annotation mode"
-> and it generates a .annotated.gtf file instead of the .merged.gtf produced by CuffCompare with the same
+> given as input along with a reference annotation (`-r` option), GFFCompare switches into "annotation mode"
+> and it generates a `.annotated.gtf` file instead of the `.merged.gtf` produced by CuffCompare with the same
 > parameters. This file has the same general format as CuffCompare's .merged.gtf file (with "class
 > codes" assigned to transcripts as per their relationship with the matching/overlapping reference,
 > transcript) but the original transcript IDs are preserved, so GffCompare can thus be used as a
@@ -295,8 +293,8 @@ The original form of this program is also distributed as part of the Cufflinks s
 >
 > Another important difference is that the input transcripts are no longer discarded when they
 > are found to be "intron redundant", i.e. contained within other, longer isoforms. CuffCompare
-> had the -G option to prevent collapsing of such intron redundant isoforms into their longer
-> "containers", but GffCompare has made this the default mode of operation (hence the -G option is
+> had the `-G` option to prevent collapsing of such intron redundant isoforms into their longer
+> "containers", but GffCompare has made this the default mode of operation (hence the `-G` option is
 > no longer needed and is simply ignored when given).
 >
 {: .details}
@@ -308,28 +306,25 @@ The original form of this program is also distributed as part of the Cufflinks s
 > First, we must convert the GffCompare annotated GTF file to BED format.
 >
 > 1. **Convert gffCompare annotated GTF to BED** {% icon tool %} with the following parameters:
->   - *"GTF annotated by gffCompare"*: `output from gff compare`
->   - *"filter GffCompare class_codes to convert:*:
->     - `j : Potentially novel isoform (fragment): at least one splice junction is shared with a reference transcript`
->     - `e : Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible   pre-mRNA fragment.`
->     - `i : A transfrag falling entirely within a reference intron`
->     - `p : Possible polymerase run-on fragment (within 2Kbases of a reference transcript)`
->     - `u : Unknown, intergenic transcript`
+>    - {% icon param-file %} *"GTF annotated by gffCompare"*: `output from gff compare`
+>    - {% icon param-select %} *"filter GffCompare class_codes to convert"*:
+>      - `j : Potentially novel isoform (fragment): at least one splice junction is shared with a reference transcript`
+>      - `e : Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible   pre-mRNA fragment.`
+>      - `i : A transfrag falling entirely within a reference intron`
+>      - `p : Possible polymerase run-on fragment (within 2Kbases of a reference transcript)`
+>      - `u : Unknown, intergenic transcript`
 >
 >     Next, we translate transcripts from the input BED file into protein sequences.
 >
 > 1. **Translate BED transcripts cDNA in 3frames or CDS** {% icon tool %} with the following parameters:
->   - *"A BED file with 12 columns"*: `Convert GffCompare-annotated GTF to BED`
->   - *"Source for Genomic Sequence Data"*: `Locally cached File`
->   - *"Select reference 2bit file"*: `mm10`
->   - *"BED Filtering Options"*: `default`
->   - *"Translation Options"*: `default`
->   - *"FASTA ID Options"*: `default`
+>    - {% icon param-file %} *"A BED file with 12 columns"*: `Convert GffCompare-annotated GTF to BED`
+>    - {% icon param-select %} *"Source for Genomic Sequence Data"*: `Locally cached File`
+>    - {% icon param-select %} *"Select reference 2bit file"*: `mm10`
 >
 >     Finally, we convert a BED format file of the proteins from a proteomics search database into a tabular format for the Multiomics Visualization Platform (MVP).
 >
 > 1. **bed to protein map** {% icon tool %} with the following parameters:
->   - *"A BED file with 12 columns, thickStart and thickEnd define protein coding region"*: `Translate cDNA_minus_CDS`
+>    - {% icon param-file %} *"A BED file with 12 columns, thickStart and thickEnd define protein coding region"*: `Translate cDNA_minus_CDS`
 >
 {: .hands_on}
 
@@ -353,14 +348,14 @@ along with the UniProt and cRAP databases.
 >
 > 1. **FASTA Merge Files and Filter Unique Sequences** {% icon tool %} with the following parameters:
 >   - *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
->   - *"Input FASTA File(s)"* : `Input Custom ProDB Fasta File output`
+>   - {% icon param-files %} *"Input FASTA File(s)"* : `Input Custom ProDB Fasta File output`
 >     ```
 >     1.HISAT_Output.rpkm
 >     2.HISAT_Output.snv
 >     3.HISAT_Output.indel
 >     ```
->   - *"How are sequences judged to be unique?"*: `Accession and Sequence`
->   - *"Accession Parsing Regular Expression"*: `^>([^ |]+).*$`
+>   - {% icon param-select %} *"How are sequences judged to be unique?"*: `Accession and Sequence`
+>   - {% icon param-text %} *"Accession Parsing Regular Expression"*: `^>([^ |]+).*$`
 >
 {: .hands_on}
 
@@ -382,8 +377,8 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 > ### {% icon hands_on %} Hands-on: Create Database for genomic mapping
 >
 > 1. **SQLite to tabular for SQL query** {% icon hands_on %} with the following parameters:
->   - *"SQLite Database"*: `genomic_mapping.sqlite` from CustomProDB
->   - *"Query"*:
+>   - {% icon param-file %} *"SQLite Database"*: `genomic_mapping.sqlite` from CustomProDB
+>   - {% icon param-text %} *"Query"*:
 >      ```
 >      SELECT pro_name, chr_name, cds_chr_start - 1, cds_chr_end,strand,cds_start - 1, cds_end
 >      FROM genomic_mapping
@@ -393,17 +388,17 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 >     The output is further processed so that the results are compatible with the Multiomics Visualization Platform.
 >
 > 1. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
->   - *"Select cells from"*: `genomic_mapping_sqlite' (tabular)`
->   - *"Using"*: `column 1`
->   - **Check 1**
->   - *"Find Regex"* : `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
->   - *"Replacement"*: `\1\2_\3`
->   - **Check 2**
->   - *"Find Regex"*:  `,([A-Z]\d+[A-Z])\s*`
->   - *"Replacement"*: `.\1`
->   - **Check 3**
->   - *"Find Regex"*: `^(ENS[^ |]*)\s*`
->   - *"Replacement"*: `\1`
+>    - {% icon param-file %} *"Select cells from"*: `genomic_mapping_sqlite' (tabular)`
+>    - {% icon param-select %} *"Using"*: `column 1`
+>    - {% icon param-repeat %} **Insert Check**
+>      - {% icon param-text %} *"Find Regex"* : `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
+>      - {% icon param-text %} *"Replacement"*: `\1\2_\3`
+>    - {% icon param-repeat %} **Insert Check**
+>      - {% icon param-text %} *"Find Regex"*:  `,([A-Z]\d+[A-Z])\s*`
+>      - {% icon param-text %} *"Replacement"*: `.\1`
+>    - {% icon param-repeat %} **Insert Check**
+>      - {% icon param-text %} *"Find Regex"*: `^(ENS[^ |]*)\s*`
+>      - {% icon param-text %} *"Replacement"*: `\1`
 >
 >     This tool goes line by line through the specified input file and if the text in the selected column matches a specified regular expression pattern, it replaces the text with the specified replacement.
 >
@@ -417,15 +412,15 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 >     Now, we load this tabular datasets into an SQLite database.
 >
 > 1. **Query Tabular using SQLite** {% icon tool %} with the following parameters:
->    - *"Database Table"*: Click on `+ Insert Database Table`
->    - *"Tabular Dataset for Table"*: `Genomic_Protein_map`
->    - Section **Table Options**:
->    - *"Specify Name for Table"*: `feature_cds_map`
->    - *"Specify Column Names (comma-separated list)"*: `name,chrom,start,end,strand,cds_start,cds_end`
->    - *"Only load the columns you have named into database"*: `No`
->    - Section **Table Index**:
->    - *"This is a unique index"*: `No`
->    - *"Index on columns"*: `name,cds_start,cds_end`
+>    - {% icon param-repeat %} **Insert Database Table**
+>      - {% icon param-file%} *"Tabular Dataset for Table"*: `Genomic_Protein_map`
+>      - Section **Table Options**:
+>        - {% icon param-text %} *"Specify Name for Table"*: `feature_cds_map`
+>        - {% icon param-text %} *"Specify Column Names (comma-separated list)"*: `name,chrom,start,end,strand,cds_start,cds_end`
+>        - *"Only load the columns you have named into database"*: `No`
+>        - {% icon param-repeat %} **Insert Table Index**:
+>          - *"This is a unique index"*: `No`
+>          - {% icon param-text %} *"Index on columns"*: `name,cds_start,cds_end`
 >
 > 1. Rename the output as **"genomic_mapping_sqlite"**
 >
@@ -441,8 +436,8 @@ We will repeat the process for the variant annotations
 > ### {% icon hands_on %} Hands-on: Create database for variant annotations
 >
 > 1. **SQLite to tabular** {% icon tool%} with the following parameters:
->  - *"SQLite Database"*: `variant_annotations.sqlite` from CustomProDB
->  - *"Query"*:
+>  - {% icon param-file %} *"SQLite Database"*: `variant_annotations.sqlite` from CustomProDB
+>  - {% icon param-text %} *"Query"*:
 >    ```
 >    SELECT var_pro_name,pro_name,cigar,annotation
 >    FROM variant_annotation
@@ -451,30 +446,30 @@ We will repeat the process for the variant annotations
 >    We will subject the output to text manipulation so that the results are compatible with the Multiomics Visualization Platform.
 >
 > 1. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
->  - *"Select cells from"*: `variant_annotations_sqlite' (tabular)`
->  - *"Using:"* `column 1`
->  - **Check 1**
->  - *"Find Regex"*: `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
->  - *"Replacement"*: `\1\2_\3`
->  - **Check 2**:
->  - *"Find Regex"*: `,([A-Z]\d+[A-Z])\s*`
->  - *"Replacement"*: `.\1`
->  - **Check 3**:
->  - *"Find Regex"*: `^(ENS[^ |]*)\s*`
->  - *"Replacement"*:  `\1`
+>    - {% icon param-file %} *"Select cells from"*: `variant_annotations_sqlite' (tabular)`
+>    - {% icon param-select %} *"Using:"* `column 1`
+>    - {% icon param-repeat %} **Insert Check**
+>      - {% icon param-text %} *"Find Regex"*: `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
+>      - {% icon param-text %} *"Replacement"*: `\1\2_\3`
+>    - {% icon param-repeat %} **Insert Check**:
+>      - {% icon param-text %} *"Find Regex"*: `,([A-Z]\d+[A-Z])\s*`
+>      - {% icon param-text %} *"Replacement"*: `.\1`
+>    - {% icon param-repeat %} **Insert Check**:
+>      - {% icon param-text %} *"Find Regex"*: `^(ENS[^ |]*)\s*`
+>      - {% icon param-text %} *"Replacement"*:  `\1`
 >
 >    Next, we will load this tabular dataset into an SQLite database.
 >
 > 1. **Query Tabular** {% icon tool%} with the following parameters:
->    - *"Database Table"*: Click on `+ Insert Database Table`
->    - *"Tabular Dataset for Table"*: `variant_annotation`
->    - Section **Table Options**:
->    - *"Specify Name for Table"*: `variant_annotation`
->    - *"Specify Column Names (comma-separated list)"*: `name,reference,cigar,annotation`
->    - *"Only load the columns you have named into database"*: `No`
->    - Section **Table Index**:
->    - *"This is a unique index"*: `No`
->    - *"Index on columns"*: `name,cigar`
+>    - {% icon param-repeat %} **Insert Database Table**
+>      - {% icon param-file %} *"Tabular Dataset for Table"*: `variant_annotation`
+>      - Section **Table Options**:
+>        - {% icon param-text %} *"Specify Name for Table"*: `variant_annotation`
+>        - {% icon param-text %} *"Specify Column Names (comma-separated list)"*: `name,reference,cigar,annotation`
+>        - *"Only load the columns you have named into database"*: `No`
+>      - {% icon param-repeat %} **Insert Table Index**
+>        - *"This is a unique index"*: `No`
+>        - {% icon param-text %} *"Index on columns"*: `name,cigar`
 >
 > 1. Rename the output as **"Variant_annotation_sqlitedb"**
 >
