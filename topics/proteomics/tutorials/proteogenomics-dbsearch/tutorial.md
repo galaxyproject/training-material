@@ -72,9 +72,8 @@ For this, the sequence database-searching program called [SearchGUI](https://com
 > ### {% icon hands_on %} Hands-on: SearchGUI
 >
 > 1. **SearchGUI** {% icon tool %} with the following parameters:
->    - *"Protein Database"*: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA`
->    						(or however you named the `FASTA` file)
->    - *"Input Peak lists (mgf)"*: `MGF files` dataset collection.
+>    - {% icon param-file %} *"Protein Database"*: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA` (Or however you named the `FASTA` file)
+>    - {% icon param-files %} *"Input Peak lists (mgf)"*: `MGF files` dataset collection.
 >
 >      > ### {% icon tip %} Tip: Select dataset collections as input
 >      >
@@ -84,7 +83,7 @@ For this, the sequence database-searching program called [SearchGUI](https://com
 >      {: .tip}
 >
 >    - Section **Search Engine Options**:
->      - *"B-Search Engines"*: `X!Tandem`
+>      - {% icon param-check %} *"B-Search Engines"*: `X!Tandem`
 >
 >        > ### {% icon comment %} Comment:
 >        >    The section **Search Engine Options** contains a selection of sequence database searching
@@ -93,22 +92,24 @@ For this, the sequence database-searching program called [SearchGUI](https://com
 >        >    used.
 >        {: .comment}
 >
->    -  Section **Precursor Options**:
->       - *"Enzyme"*: `Trypsin`
->       - *"Maximum Missed Cleavages"*: `2`
->       - *"Precursor Ion Tolerance Units"*: `Parts per million (ppm)`
->       - *"Precursor Ion Tolerance"*:` 10`
->       - *"Fragment Tolerance (Daltons)"*: `0.05` (this is high resolution MS/MS data)
->       - *"Minimum charge"*:`2`
->       - *"Maximum charge"*:`6`
->       - *"Forward Ion"*: `b`
->       - *"Reverse Ion"*:` y`
->       - *"Minimum Precursor Isotope"* :`0`
->       - *"Maximum Precursor Isotope"* :`1`
+>    -  Section **Protein Digestion Options**:
+>       - {% icon param-select %} *"Enzyme"*: `Trypsin`
+>       - {% icon param-text %} *"Maximum Missed Cleavages"*: `2`
+>
+>    - Section **Precursor options**:
+>       - {% icon param-select %} *"Precursor Ion Tolerance Units"*: `Parts per million (ppm)`
+>       - {% icon param-text %} *"Precursor Ion Tolerance"*:` 10`
+>       - {% icon param-text %} *"Fragment Tolerance (Daltons)"*: `0.05` (this is high resolution MS/MS data)
+>       - {% icon param-text %} *"Minimum charge"*:`2`
+>       - {% icon param-text %} *"Maximum charge"*:`6`
+>       - {% icon param-select %} *"Forward Ion"*: `b`
+>       - {% icon param-select %} *"Reverse Ion"*:` y`
+>       - {% icon param-text %} *"Minimum Precursor Isotope"* :`0`
+>       - {% icon param-text %} *"Maximum Precursor Isotope"* :`1`
 >
 >    - Section **Protein Modification Options**:
->      - *"Fixed Modifications"*: `Carbamidomethylation of C, ITRAQ-4Plex of K, ITRAQ-4Plex of Ntermini`
->      - *"Variable modifications"*: `Oxidation of M, ITRAQ-4Plex of Y`
+>      - {% icon param-select %} *"Fixed Modifications"*: `Carbamidomethylation of C, ITRAQ-4Plex of K, ITRAQ-4Plex of Ntermini`
+>      - {% icon param-select %} *"Variable modifications"*: `Oxidation of M, ITRAQ-4Plex of Y`
 >
 >        > ### {% icon tip %} Tip: Search for options
 >        > For selection lists, typing the first few letters in the window will filter the
@@ -116,11 +117,11 @@ For this, the sequence database-searching program called [SearchGUI](https://com
 >        {: .tip}
 >
 >    - Section **Advanced Options**:
->      - *"X!Tandem Options"*: `Advanced`
->      - *"X!Tandem: Quick Acetyl"*: `No`
->      - *"X!Tandem: Quick Pyrolidone"*: `No`
->      - *"X!Tandem: Protein stP Bias"*: `No`
->      - *"X!Tandem: Maximum Valid Expectation Value"*: `100`
+>      - {% icon param-select %} **"X!Tandem Options"*: `Advanced`
+>        - {% icon param-check %} **"X!Tandem: Quick Acetyl"*: `No`
+>        - {% icon param-check %} **"X!Tandem: Quick Pyrolidone"*: `No`
+>        - {% icon param-check %} **"X!Tandem: Protein stP Bias"*: `No`
+>        - {% icon param-text %} **"X!Tandem: Maximum Valid Expectation Value"*: `100`
 >
 >    - Leave everything else as default
 >    - Click **Execute**
@@ -164,11 +165,11 @@ outputs.
 > ### {% icon hands_on %} Hands-on: PeptideShaker
 >
 > 1. **PeptideShaker** {% icon tool %} with the following parameters:
->   - *"Compressed SearchGUI results"*: The SearchGUI archive file
->   - *"Specify Advanced PeptideShaker Processing Options"*: `Default Processing Options`
->   - *"Specify Advanced Filtering Options"*: `Default Filtering Options`
->   - *"Include the protein sequences in mzIdentML"*: `No`
->   - *"Output options"*: Select the `PSM Report` (Peptide-Spectral Match) and the `Certificate of Analysis`
+>   - {% icon param-file %} *"Compressed SearchGUI results"*: The SearchGUI archive file
+>   - {% icon param-select %} *"Specify Advanced PeptideShaker Processing Options"*: `Default Processing Options`
+>   - {% icon param-select %} *"Specify Advanced Filtering Options"*: `Default Filtering Options`
+>   - {% icon param-check %} *"Include the protein sequences in mzIdentML"*: `No`
+>   - {% icon param-check %} *"Output options"*: Select the `PSM Report` (Peptide-Spectral Match) and the `Certificate of Analysis`
 >
 >     > ### {% icon comment %} Comment: Certificate of Analysis
 >     >
@@ -202,9 +203,9 @@ The mzidentml output from the Peptide shaker is converted into an sqlite databas
 > This tool extracts mzidentml and its associated proteomics datasets into a sqlite db
 >
 > 1. **mz to sqlite** {% icon tool %} with the following parameters:
->    - *"Proteomics identification files"*: Click on `PeptideShaker_mzidentml`:
->    - *"Proteomics Spectrum files"*: `Mo_Tai_MGFs`
->    - *"Proteomics Search Database Fasta"*: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA`
+>    - {% icon param-file %} *"Proteomics identification files"*: `PeptideShaker_mzidentml`
+>    - {% icon param-file %} *"Proteomics Spectrum files"*: `Mo_Tai_MGFs`
+>    - {% icon param-file %} *"Proteomics Search Database Fasta"*: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA`
 >
 >    ![mz2sqlite](../../images/mz2sqlite.png){:width="20%"}
 >
@@ -223,9 +224,9 @@ This Fasta file will be subjected to few text manipulation steps in order to get
 > ### {% icon hands_on %}  Hands-on: FASTA to Tabular
 >
 > 1. Run **FASTA to Tabular** {% icon tool %} with the following parameters:
->    - *"Data input 'input' (fasta)"*: `Trimmed_ref_500_Uniprot_cRAP.fasta`
->    - *"How many columns to divide title string into?"*: `2`
->    - *"How many title characters to keep?"*: `0`
+>    - {% icon param-file %} *"Data input 'input' (fasta)"*: `Trimmed_ref_500_Uniprot_cRAP.fasta`
+>    - {% icon param-text %} *"How many columns to divide title string into?"*: `2`
+>    - {% icon param-text %} *"How many title characters to keep?"*: `0`
 >
 {: .hands_on}
 
@@ -415,24 +416,24 @@ The output FASTA file is going to be subjected to BLAST-P analysis.
 > ### {% icon hands_on %} Hands-on: NCBI BLAST+ blastp
 >
 > 1. **NCBI BLAST+ blastp** {% icon tool %}: Run **BLASTP** with:
->    - *"Protein query sequence(s)"*: `Data input 'query' (fasta)`
->    - *"Subject database/sequences"*: `Locally installed BLAST database`
->    - *"Protein Blast database"*: Select `nr_mouse_current`
->    - *"Type of BLAST"*:`blastp-short - BLASTP optimized for queries shorter than 30 residues`
->    - *"Set expectation value cutoff"*:`200000.0`
->    - *"Output format"*: `Tabular(extended 25 columns)`
->    - *"Advanced Options"*
->    - *"Filter out low complexity regions (with SEG)"*: `No`
->    - *"Scoring matrix and gap costs"*: `PAM30`
->    - *"Gap Costs"*: `Existence: 9 Extension: 1`
->    - *"Maximum hits to show"*: `1`
->    - *"Maximum number of HSPs (alignments) to keep for any single query-subject pair"*:`1`
->    - *"Word size for wordfinder algorithm"*: `2`
->    - *"Multiple hits window size"*: `40`
->    - *"Minimum score to add a word to the BLAST lookup table"*: `11`
->    - *"Composition-based statistics"*: `0 (No composition)`
->    - *"Should the query and subject defline(s) be parsed?"*: `No`
->    - *"Restrict search of database to a given set of ID's"*:`No restriction`
+>    - {% icon param-file %} *"Protein query sequence(s)"*: `Data input 'query' (fasta)`
+>    - {% icon param-select %} *"Subject database/sequences"*: `Locally installed BLAST database`
+>      - {% icon param-select %} *"Protein Blast database"*: Select `nr_mouse_current`
+>    - {% icon param-check %} *"Type of BLAST"*: `blastp-short - BLASTP optimized for queries shorter than 30 residues`
+>    - {% icon param-text %} *"Set expectation value cutoff"*:`200000.0`
+>    - {% icon param-select %} *"Output format"*: `Tabular(extended 25 columns)`
+>    - *"Advanced Options"*: `Show Advanced Options`
+>      - {% icon param-check %} *"Filter out low complexity regions (with SEG)"*: `No`
+>      - {% icon param-select %} *"Scoring matrix and gap costs"*: `PAM30`
+>        - {% icon param-select %} *"Gap Costs"*: `Existence: 9 Extension: 1`
+>      - {% icon param-text %} *"Maximum hits to show"*: `1`
+>      - {% icon param-text %} *"Maximum number of HSPs (alignments) to keep for any single query-subject pair"*:`1`
+>      - {% icon param-text %} *"Word size for wordfinder algorithm"*: `2`
+>      - {% icon param-text %} *"Multiple hits window size"*: `40`
+>      - {% icon param-text %} *"Minimum score to add a word to the BLAST lookup table"*: `11`
+>      - {% icon param-select %} *"Composition-based statistics"*: `0 (No composition)`
+>      - {% icon param-check %} *"Should the query and subject defline(s) be parsed?"*: `No`
+>      - {% icon param-select %} *"Restrict search of database to a given set of ID's"*:`No restriction`
 >
 >      > ### {% icon comment %} Comment:
 >      >
@@ -443,8 +444,8 @@ The output FASTA file is going to be subjected to BLAST-P analysis.
 >      >
 >      {: .comment}
 >
->    - *"Minimum query coverage per hsp (percentage, 0 to 100)"*: `0`
->    - *"Compute locally optimal Smith-Waterman alignments"*:`No`
+>    - {% icon param-text %} *"Minimum query coverage per hsp (percentage, 0 to 100)"*: `0`
+>    - {% icon param-check %} *"Compute locally optimal Smith-Waterman alignments"*:`No`
 >
 {: .hands_on}
 
