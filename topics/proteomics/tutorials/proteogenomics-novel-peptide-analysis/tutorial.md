@@ -3,6 +3,8 @@ layout: tutorial_hands_on
 
 title: "Proteogenomics 3: Novel peptide analysis"
 zenodo_link: "https://doi.org/10.5281/zenodo.1302055"
+questions:
+  - "A research question"
 objectives:
   - "How to assign and visualize the genomic localization of these identified novel proteoforms?"
 time_estimation: "30m"

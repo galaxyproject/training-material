@@ -3,6 +3,8 @@ layout: tutorial_hands_on
 
 title: "Proteogenomics 2: Database Search"
 zenodo_link: "https://doi.org/10.5281/zenodo.1302055"
+questions:
+  - "A research question"
 objectives:
   - "A proteogenomic data analysis of mass spectrometry data to identify and visualize variant peptides."
 time_estimation: "15m"
