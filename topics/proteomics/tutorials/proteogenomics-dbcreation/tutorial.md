@@ -79,10 +79,11 @@ The first tool in the workflow is the [**HISAT2**](http://ccb.jhu.edu/software/h
 > ### {% icon hands_on %} Hands-on: Alignment with HISAT2
 >
 >  1. **HISAT2** {% icon tool %} with the following parameters:
->    - *"Source for the reference genome"*: `Use a built-in genome` mm10
->    - *"Single-end or paired-end reads"*: `Single end`
->    - *"Input FASTQ files"*: `FASTQ_ProB_22LIST.fastqsanger`
->    - *"Specify strand information"*: `Unstranded`
+>    - {% icon param-select %} *"Source for the reference genome"*: `Use a built-in genome`
+>    - {% icon param-select %} *"Select a reference genome"*: `mm10`
+>    - {% icon param-select %} *"Single-end or paired-end reads"*: `Single end`
+>    - {% icon param-file %} *"Input FASTQ files"*: `FASTQ_ProB_22LIST.fastqsanger`
+>    - {% icon param-select %} *"Specify strand information"*: `Unstranded`
 >
 > > ### {% icon comment %} Note on strandedness
 > > Note that if your reads are from a stranded library, you need to choose the appropriate
@@ -132,12 +133,12 @@ and RO fields in the VCF output.
 > ### {% icon hands_on %} Hands-on: Variant Calling with FreeBayes
 >
 > 1. **FreeBayes** {% icon tool %} with the following parameters:
->   - *"Choose the source for the reference genome"*: `Locally cached file`
->      - *"Run in batch mode?"*: `Run Individually`
->   - *"BAM dataset:*: `HISAT_Output.BAM`
->   - *"Using reference genome"*: `mm10`
->   - *"Limit variant calling to a set of regions?"*: `Do not Limit`
->   - *"Choose parameter selection level"*: `Simple diploid calling`
+>    - {% icon param-select %} *"Choose the source for the reference genome"*: `Locally cached file`
+>      - {% icon param-check %} *"Run in batch mode?"*: `Run Individually`
+>      - {% icon param-file %}  *"BAM dataset:*: `HISAT_Output.BAM`
+>      - {% icon param-select %}  *"Using reference genome"*: `mm10`
+>    - {% icon param-select %} *"Limit variant calling to a set of regions?"*: `Do not Limit`
+>    - {% icon param-select %} *"Choose parameter selection level"*: `Simple diploid calling`
 >
 > 2. Click **Execute** and inspect the resulting files
 >
@@ -180,16 +181,16 @@ data manager to create these annotations to make them available for users.
 > ### {% icon hands_on %} Hands-on: Generate protein FASTAs from exosome or transcriptome data
 >
 > 1. **CustomProDB** {% icon tool %} with the following parameters:
->   - *"Will you select a genome annotation from your history or use a built-in annotation?"*: `Use built in genome annotation`
->   - *"Using reference genome"*: `Ensemble 89 mmusculus (GRm38.p5) (dbsnp142)`
->   - *"BAM file"*: `HISAT_Output.BAM`
->   - *"VCF file"*: `Freebayes.vcf`
->   - *"Annotate SNPs with rsid from dbSNP"*: `No`
->   - *"Annotate somatic SNPs from COSMIC (human only)"*: `No`
->   - *"Transcript Expression Cutoff (RPKM)"*: `1`
->   - *"Create a variant FASTA for short insertions and deletions"*: `Yes`
->   - *"Create SQLite files for mapping proteins to genome and summarizing variant proteins"*: `Yes`
->   - *"Create RData file of variant protein coding sequences"*: `Yes`
+>    - {% icon param-select %}  *"Will you select a genome annotation from your history or use a built-in annotation?"*: `Use built in genome annotation`
+>      - {% icon param-select %}  *"Using reference genome"*: `Ensemble 89 mmusculus (GRm38.p5) (dbsnp142)`
+>      - {% icon param-file %} *"BAM file"*: `HISAT_Output.BAM`
+>      - {% icon param-file %} *"VCF file"*: `Freebayes.vcf`
+>      - {% icon param-check %} *"Annotate SNPs with rsid from dbSNP"*: `No`
+>      - {% icon param-check %} *"Annotate somatic SNPs from COSMIC (human only)"*: `No`
+>    - {% icon param-text %} *"Transcript Expression Cutoff (RPKM)"*: `1`
+>    - {% icon param-check %} *"Create a variant FASTA for short insertions and deletions"*: `Yes`
+>    - {% icon param-check %} *"Create SQLite files for mapping proteins to genome and summarizing variant proteins"*: `Yes`
+>    - {% icon param-check %} *"Create RData file of variant protein coding sequences"*: `Yes`
 >
 {: .hands_on}
 
@@ -216,13 +217,13 @@ Its input can include not only the alignments of raw reads used by other transcr
 > ### {% icon hands_on %} Hands-on: Transcript assembly with StringTie
 >
 > 1. **StringTie** {% icon tool %} with the following parameters:
->   - *"Input mapped reads"*: `FASTQ_ProB_22LIST.BAM`
->   - *"Specify strand information"*: `Unstranded`
->   - *"Use a reference file to guide assembly?"*: `Use Reference GTF/GFF3`
->   - *"Reference file"*: `Use file from History`
->   - *"GTF/GFF3 dataset to guide assembly"*: `Mus_musculus.GRCm38.86.gtf`
->   - *"Use Reference transcripts only?"*: `No`
->   - *"Output files for differential expression?"*: `No additional output`
+>    - {% icon param-file %} *"Input mapped reads"*: `FASTQ_ProB_22LIST.BAM`
+>    - {% icon param-select %} *"Specify strand information"*: `Unstranded`
+>    - {% icon param-select %} *"Use a reference file to guide assembly?"*: `Use Reference GTF/GFF3`
+>      - {% icon param-select %} *"Reference file"*: `Use file from History`
+>      - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `Mus_musculus.GRCm38.86.gtf`
+>      - {% icon param-select %} *"Use Reference transcripts only?"*: `No`
+>      - {% icon param-select %} *"Output files for differential expression?"*: `No additional output`
 >
 {: .hands_on}
 
@@ -269,16 +270,16 @@ The original form of this program is also distributed as part of the Cufflinks s
 > ### {% icon hands_on %} Hands-on: compare assembled transcripts against a reference annotation
 >
 > 1. **GffCompare** {% icon tool %} with the following parameters:
->   - {% icon param-file %} *"GTF inputs for comparison"*`Stringtie_outut.gtf`
->   - {% icon param-file %} *"Use Reference Annotation"*: `Mus_musculus.GRCm38.86.gtf`
->   - {% icon param-select %} *"Reference Annotation"*: `Unstranded`
->   - *"Ignore reference transcripts that are not overlapped by any input transfrags"*: `No`
->   - *"Ignore input transcripts that are not overlapped by any reference transcripts"*: `No`
->   - *"Use Sequence Data"*: `No`
->   - *"discard (ignore) single-exon transcripts"*: `No`
->   - *"Max. Distance for assessing exon accuracy"*: `100`
->   - *"Max distance for transcript grouping"*: `100`
->   - *"discard intron-redundant transfrags sharing 5'"*: `No`
+>    - {% icon param-file %} *"GTF inputs for comparison"*`Stringtie_outut.gtf`
+>    - {% icon param-select %} *"Use Reference Annotation"*: `yes`
+>      - {% icon param-file %} *"Reference Annotation"*: `Mus_musculus.GRCm38.86.gtf`
+>      - {% icon param-select %} *"Ignore reference transcripts that are not overlapped by any input transfrags"*: `No`
+>      - {% icon param-select %} *"Ignore input transcripts that are not overlapped by any reference transcripts"*: `No`
+>    - {% icon param-select %} *"Use Sequence Data"*: `No`
+>    - {% icon param-select %} *"discard (ignore) single-exon transcripts"*: `No`
+>    - {% icon param-text %} *"Max. Distance for assessing exon accuracy"*: `100`
+>    - {% icon param-text %} *"Max distance for transcript grouping"*: `100`
+>    - {% icon param-select %} *"discard intron-redundant transfrags sharing 5'"*: `No`
 >
 {: .hands_on}
 
@@ -347,7 +348,7 @@ along with the UniProt and cRAP databases.
 > ### {% icon hands_on %} Hands-on
 >
 > 1. **FASTA Merge Files and Filter Unique Sequences** {% icon tool %} with the following parameters:
->   - *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
+>   - {% icon param-check %} *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
 >   - {% icon param-files %} *"Input FASTA File(s)"* : `Input Custom ProDB Fasta File output`
 >     ```
 >     1.HISAT_Output.rpkm
@@ -419,7 +420,7 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 >        - {% icon param-text %} *"Specify Column Names (comma-separated list)"*: `name,chrom,start,end,strand,cds_start,cds_end`
 >        - *"Only load the columns you have named into database"*: `No`
 >        - {% icon param-repeat %} **Insert Table Index**:
->          - *"This is a unique index"*: `No`
+>          - {% icon param-check %} *"This is a unique index"*: `No`
 >          - {% icon param-text %} *"Index on columns"*: `name,cds_start,cds_end`
 >
 > 1. Rename the output as **"genomic_mapping_sqlite"**
@@ -466,9 +467,9 @@ We will repeat the process for the variant annotations
 >      - Section **Table Options**:
 >        - {% icon param-text %} *"Specify Name for Table"*: `variant_annotation`
 >        - {% icon param-text %} *"Specify Column Names (comma-separated list)"*: `name,reference,cigar,annotation`
->        - *"Only load the columns you have named into database"*: `No`
+>        - {% icon param-check %} *"Only load the columns you have named into database"*: `No`
 >      - {% icon param-repeat %} **Insert Table Index**
->        - *"This is a unique index"*: `No`
+>        - {% icon param-check %} *"This is a unique index"*: `No`
 >        - {% icon param-text %} *"Index on columns"*: `name,cigar`
 >
 > 1. Rename the output as **"Variant_annotation_sqlitedb"**
