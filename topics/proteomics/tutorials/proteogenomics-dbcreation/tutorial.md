@@ -64,15 +64,10 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 >    https://zenodo.org/record/1302055/files/Mus_musculus.GRCm38.86.gtf
 >    ```
 >
+>    {% include snippets/import_via_link.md %}
+>
 > 3. Rename the datasets with more descriptive names (strip off the url prefixes)
 >
->    > ### {% icon tip %} Tip: Importing data via links
->    > * Copy the link location
->    > * Open the Galaxy Upload Manager
->    > * Select "Paste/Fetch Data"
->    > * Paste the link into the text field. You can add multiple links, each on a separate line.
->    > * Press "Start". By default, Galaxy uses the link as the dataset name.
->    {: .tip}
 >
 {: .hands_on}
 
