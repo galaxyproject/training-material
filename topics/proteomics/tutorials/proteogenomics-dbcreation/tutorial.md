@@ -49,7 +49,7 @@ This tutorial focuses on creating a **FASTA** database generated from RNA-seq da
 
 ![Database creation](../../images/database_creation.png)
 
-The first part of the workflow deals with creating the FASTA file containing sequences with single amino acid variants (SAVs), insertions and deletions (indels). The second part of the workflow helps in creating a FASTA file with transcript assemblies (splicing variants).
+The first part of the tutorial deals with creating the FASTA file containing sequences with single amino acid variants (SAVs), insertions and deletions (indels). The second part of the workflow helps in creating a FASTA file with transcript assemblies (splicing variants).
 
 
 # Data upload
