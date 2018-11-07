@@ -5,7 +5,7 @@
 >    > * Check all the datasets in your history you would like to include
 >    > * Click **For all selected..** and choose **Build dataset list**
 >    >
->    >   ![](../../../galaxy-data-manipulation/images/buildList.png){:width="15%"}
+>    >   ![build list collection menu item]({{site.baseurl}}/topics/galaxy-data-manipulation/images/buildList.png){:width="15%"}
 >    >
 >    > * Enter a name for your collection
 >    > * Click **Create List** to build your collection
