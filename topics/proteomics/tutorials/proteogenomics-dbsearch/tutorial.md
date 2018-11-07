@@ -59,16 +59,15 @@ In this tutorial, we perform proteogenomic database searching using the Mass Spe
 >
 {: .hands_on}
 
-# Analysis
 
-## Match peptide sequences
+# Match peptide sequences
 
 The search database labelled `Uniprot_cRAP_SAV_indel_translatedbed.FASTA` is the input database that
 will be used to match MS/MS to peptide sequences via a sequence database search.
 
 For this, the sequence database-searching program called [SearchGUI](https://compomics.github.io/projects/searchgui.html) will be used.The generated dataset collection of the three *MGF files* in the history is used as the MS/MS input. We will walk through a number of these settings in order to utilize SearchGUI on these example MGF files.
 
-### SearchGUI
+## SearchGUI
 
 > ### {% icon hands_on %} Hands-on: SearchGUI
 >
@@ -141,7 +140,7 @@ For this, the sequence database-searching program called [SearchGUI](https://com
 
 
 
-### PeptideShaker
+## PeptideShaker
 
 [PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html) is a post-processing software tool that
 processes data from the SearchGUI software tool. It serves to organize the Peptide-Spectral
@@ -193,7 +192,7 @@ new row in the tabular output.
 
 A number of new items will appear in your History, each corresponding to the outputs selected in the PeptideShaker parameters. The Peptide Shaker’s PSM report is used as an input for the BlastP analysis. Before performing BlastP analysis. The Query Tabular tool and few test manipulation tools are used to remove spectra that belongs to the reference proteins. The output tabular file “Peptides_for_Blast-P_analysis” will contain only those spectra that did not belong to any known proteins.
 
-## Create database
+# Create database
 
 The mzidentml output from the Peptide shaker is converted into an sqlite database file by using the mz to sqlite tool. This sqlite output is used to open the Multi-omics visualization platform, wherein you can view the spectra of the peptides using Lorikeet parameters. To open the MVP viewer, click on the “Visualize in MVP Application” icon ( this will pop-open the interactive multi-omics viewer in a new window/tab)
 
@@ -213,9 +212,9 @@ The mzidentml output from the Peptide shaker is converted into an sqlite databas
 
 The next step is to remove known peptides from the list of PSM's that we acquired from the Peptide Shaker results. For that we need to perform some text manipulation steps to extract list of known peptides from the UniProt and cRAP database.
 
-## Remove known peptides
+# Remove known peptides
 
-### Merged Uniprot and cRAP database
+## Merged Uniprot and cRAP database
 
 The file named "Trimmed_ref_500_Uniprot_cRAP.fasta" is the trimmed version of Uniprot and cRAP database merged Fasta files.
 
@@ -234,7 +233,7 @@ The resultant tabular file will go through a series of text manipulation steps t
 input to the Query Tabular tool.
 
 
-### Text Manipulation steps
+## Text Manipulation steps
 
 > ### {% icon hands_on %} Hands-on: Text Manipulation
 >
@@ -274,7 +273,7 @@ input to the Query Tabular tool.
 
 Now that we have the list of known peptides, the query tabular tool is used to move these reference pepides from the PSM report.
 
-### Query Tabular
+## Query Tabular
 
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
@@ -397,14 +396,12 @@ The output from this step is that the resultant peptides would be those which do
 {: .hands_on}
 
 
-## BLASTP (Basic Local Alignment Search Tool- proteins)
+# BLASTP (Basic Local Alignment Search Tool- proteins)
 
 [BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi) is a web based tool used to compare biological sequences. BlastP, matches protein sequences against a protein database. More specifically, it looks at the amino acid sequence of proteins and can detect and evaluate the amount of differences between say, an experimentally derived sequence and all known amino acid sequences from a database. It can then find the most similar sequences and allow for identification of known proteins or for identification of potential peptides associated with novel proteoforms.
 
 BlastP search is carried out with the PSM report (output from PeptideShaker). Before, BlastP analysis the “Peptides_for_Blast-P_analysis” is first converted from Tabular format to FASTA file format which can be easily read by the BlastP algorithm. This is done with the help of “Tabular to FASTA” conversion tool.
 The short BlastP uses parameters for short peptide sequences (8-30 aas). Please use the rerun option to look at the parameters used.
-
-### Tabular to FASTA
 
 > ### {% icon hands_on %} Hands-on: Tabular to FASTA
 > 1. **Tabular to FASTA** {% icon tool %}: with the following parameters:
