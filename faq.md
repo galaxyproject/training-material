@@ -38,6 +38,10 @@ The content of this website is Creative Commons Attribution 4.0 ([License]({{ si
 
 We wrote an [article](https://www.biorxiv.org/content/early/2018/04/05/225680) about our efforts.
 
+## How can I advertise the training materials on my posters?
+
+We provide some QR codes and logos in the [images folder](https://github.com/galaxyproject/training-material/tree/master/assets/images).
+
 # For Individual Learners
 
 Learning Galaxy and data analysis on your own and at your own pace?  This material is for you.
