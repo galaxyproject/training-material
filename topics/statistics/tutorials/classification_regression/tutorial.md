@@ -28,7 +28,7 @@ contributors:
 
 Supervised learning methods in machine learning have targets/classes/categories defined in the datasets. These targets can either be discreet values or real-values (continuous). When the targets are discreet, the learning task is called as classification. When the targets are real-values, the task becomes regression. Classification is assigning a distinct category to each sample in the dataset. Regression assigns a real-valued output to a sample in the dataset. In the image below, the "green" line is a boundary which separates the blue balls from the red ones. The task of a classification method is to learn this boundary which can be used to differentiate between unseen blue and red balls.
 
->    ![data](images/classification_1.png "Classification of differently colored balls.")
+>    ![data](images/classification_1.png "Classification of differently colored balls. The green line creates a boundary between two sets of balls. The balls falling on the left belong to one category and the ones falling on the right belong to another category. Using this boundary, a classifier decides which category a new ball is assigned to.")
 
 
 The following image shows how a (regression) curve is fit which explains most of the data points. Here, the curve is a straight line. The regression task is to learn this curve which explains the underlying distribution.
