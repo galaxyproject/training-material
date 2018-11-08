@@ -26,9 +26,9 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Supervised learning methods in machine learning have targets/classes/categories defined in the datasets. These targets can either be discreet values or real-values (continuous). When the targets are discreet, the learning task is called as classification. When the targets are real-values, the task becomes regression. Classification is assigning a distinct category to each sample in the dataset. Regression assigns a real-valued output to a sample in the dataset. In the image below, the "green" line is a boundary which separates the blue balls from the red ones. The task of a classification method is to learn this boundary which can be used to differentiate between unseen blue and red balls.
+Supervised learning methods in machine learning have targets/classes/categories defined in the datasets. These targets can either be discreet values or real-values (continuous). When the targets are discreet, the learning task is called as classification. When the targets are real-values, the task becomes regression. Classification is assigning a distinct category to each sample in the dataset. Regression assigns a real-valued output to a sample in the dataset. In the image below, the "green" line is a boundary which separates the blue balls from the red ones. The task of a classification method is to learn this boundary which can be used to differentiate between unseen blue and red balls. This green line is the decision boundary which determines the category of a new ball.
 
->    ![data](images/classification_1.png "Classification of differently colored balls. The green line creates a boundary between two sets of balls. The balls falling on the left belong to one category and the ones falling on the right belong to another category. A classifier learns this boundary and using it, the classifier decides to which category a new ball is assigned.")
+>    ![data](images/classification_1.png "Classification of differently colored balls. The green line creates a boundary between two sets of balls and is learned by a classifier.")
 
 
 The following image shows how a (regression) curve is fit which explains most of the data points. Here, the curve is a straight line. The regression task is to learn this curve which explains the underlying distribution.
@@ -123,9 +123,9 @@ The previous step produces a predicted file of type `tabular`. Rename this file 
 > 3. {% icon param-file %} *"Select trained model"*: `model.zip`
 > 4. `Execute` to create visualizations
 >
->    ![data](images/confusion_matrix.png "Confusion matix")
->    ![data](images/precision_recall_f1.png "Precision, recall and F1 score.")
->    ![data](images/roc.png "Receiver operator characteristics (ROC) and area under ROC (AUC).")
+>    ![data](images/confusion_matrix.png "Confusion matix of the correctly and incorrectly predicted samples. The diagonal from bottom-left to top-right shows the number of correctly predicted labels which the diagonal from top-left to bottom-right shows the number of incorrectly predicted samples.")
+>    ![data](images/precision_recall_f1.png "Precision, recall and F1 score. The scores determine the robustness of classification.")
+>    ![data](images/roc.png "Receiver operator characteristics (ROC) and area under ROC (AUC). The blue curve shows the ROC curve. When it is close to the orange curve (y = x), the classification results are not good. When it is more towards the top-left (like the blue curve shown in the plot), the classification performance is good.")
 >
 {: .hands_on}
 
@@ -206,9 +206,9 @@ The previous step produces a predicted file of type `tabular`. Rename this file 
 > 2. {% icon param-file %} *"Select predicted data file"*: `predicted_data`
 > 4. `Execute` to create visualizations
 >
->    ![data](images/true_pred_curves.png "True vs predicted targets curves.")
->    ![data](images/true_vs_pred_scatter.png "Scatter plot for true and predicted targets")
->    ![data](images/residual_plot.png "Residual plot.")
+>    ![data](images/true_pred_curves.png "True vs predicted targets curves. These curves should be close to each other for a good regression performance.")
+>    ![data](images/true_vs_pred_scatter.png "Scatter plot for true vs. predicted targets. The data points (blue) should be close to the orange curve (y = x) which shows that the true and predicted values are close.")
+>    ![data](images/residual_plot.png "Residual plot between residual (predicted - true) and predicted targets. For good regression performance, this plot should exhibit a random pattern.")
 {: .hands_on}
 
 
