@@ -209,7 +209,7 @@ Apollo uses the concept of ‘Organisms’ with ‘reference sequences’ below 
 On the left side of the embedded JBrowse instance is a checklist-like column titled “Available Tracks”. Here the evidence tracks currently available for the genome being analyzed are listed. Evidence tracks will appear upon the execution of structural and functional workflows, as well as other custom analyses.
 The first evidence tracks used will be those from the structural workflow: *GeneMarkS*, *MetaGeneAnnotator*, and *Glimmer3*. Selecting these will display predicted genes below the User-Created Annotations Track.
 
-![](../../images/getting-started-with-apollo-screenshots/22_zooomed_out_gene_tracks.png)
+![](../../images/getting-started-with-apollo-screenshots/22_zoomed_out_gene_tracks.png)
 
 ![](../../images/getting-started-with-apollo-screenshots/23_zoomed_in_gene_tracks.png)
 
