@@ -95,7 +95,7 @@ The sequence contained in a FASTA file may be DNA, RNA, or protein sequences; th
 
 ### 2. GFF3
 
-The eukaryotic gene model captures a lot of information about the biological process behind producing proteins from DNA, such as mRNAs, transcription, and alternative splicing. GFF3 files thus have to encode these complex, hierarchical, parent-child relationships. Characteristics of GFF3 files, such as the tab separated, key-value pairs, allow simplicity and ease of use.
+The eukaryotic gene model captures a lot of information about the biological process behind producing proteins from DNA, such as mRNAs, transcription, and alternative splicing. GFF3 files thus have to encode these complex, hierarchical, parent-child relationships. Characteristics of GFF3 files, such as the tab separated, key-value pairs, allow simplicity and ease of use. The top image is the text contained in a GFF3 file, and the bottom image is a visual representation of that text.
 
 ![](../../images/getting-started-with-apollo-screenshots/7_gff3.png)
 
