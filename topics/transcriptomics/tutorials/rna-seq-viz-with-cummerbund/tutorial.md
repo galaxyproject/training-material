@@ -186,12 +186,12 @@ Our plot has a modest number of isoforms, and is therefore already readable. How
 > ### {% icon hands_on %} Hands-on: Visualization
 >
 > 1. **CummeRbund** {% icon tool %} with the following parameters
->   - Click on *"Insert plot"*
->   - *"Width"*: `800`
->   - *"Height"*: `600`
->   - *"Plot type"*: `Expression Bar Plot`
->     - *"Expression levels to plot"*:`Isoforms`
->     - *"Gene ID"*: `NDUFV1`
+>    - {% icon param-repeat %} Click on *"Insert plots"*
+>      - *"Width"*: `800`
+>      - *"Height"*: `600`
+>      - *"Plot type"*: `Expression Bar Plot`
+>        - *"Expression levels to plot"*:`Isoforms`
+>        - *"Gene ID"*: `NDUFV1`
 {: .hands_on}
 
 ![Expression bar plot](../../images/cummerbund-expression-bar-plot.png)
