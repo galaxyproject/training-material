@@ -206,24 +206,26 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >    sample_GGTT	2
 >    sample_GGCC	2
 >    ```
+>    {% include snippets/create_new_file.md %}
 >
-> 2.**Stacks: De novo map** {% icon tool %}: with the following parameters:
->   - *"Select your usage"*: `Population`
->   - *"Files containing an individual sample from a population": *Specify each individual as a sample, a population map (see comment below concerning the creation of such a file) and a minimum depth of coverage of 3.
+> 2. **Stacks: De novo map** {% icon tool %}: with the following parameters:
+>    - *"Select your usage"*: `Population`
+>    - *"Files containing an individual sample from a population"*: `The demultiplexed reads (collection)`
+>    - *"Specify a population map"*: `the population map you just created`
+>    - Section **Assembly options**
+>      - *"Minimum number of identical raw reads required to create a stack"*: `3`
+>      - *"Number of mismatches allowed between loci when building the catalog"*: `3`
+>      - *"Remove, or break up, highly repetitive RAD-Tags in the ustacks program"*: `Yes`
 >
->    ![Stacks: De novo map parameters](../../images/RAD4_Population_Genomics/denovo/denovo_in.png)
->
->    Population map will look like this:
->
->
->    > ### {% icon comment %} Comment
->    >
->    > If you are using a file presenting population information and individual name in a different manner than expected by STACKS, you can use Galaxy tools like `Replace Text` (for example to replace `Rabbit Slough` by a population number like `2`, `Add column` (for example to add `sample_`) or `Cut columns from a table` (to put the new `sample_` column af the first place) and finally `Regex replace` (replacing `(sample_)\t` by `\1`) to generate it...
->    {: .comment}
->
-> Once Stacks has completed running, investigate the output files: `result.log` and `catalog.` (snps, alleles and tags).
+> 3. Once Stacks has completed running, investigate the output files: `result.log` and `catalog.` (snps, alleles and tags).
 >
 >    ![The output of de novo map](../../images/RAD4_Population_Genomics/denovo/denovo_out.png)
+>
+> > ### {% icon tip %} Tip: data formatting
+> >
+> > If you are using a file presenting population information and individual name in a different manner than expected by STACKS, you can use Galaxy tools like `Replace Text` (for example to replace `Rabbit Slough` by a population number like `2`, `Add column` (for example to add `sample_`) or `Cut columns from a table` (to put the new `sample_` column af the first place) and finally `Regex replace` (replacing `(sample_)\t` by `\1`) to generate it...
+>    {: .tip}
+>
 >
 {: .hands_on}
 
