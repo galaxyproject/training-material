@@ -233,11 +233,17 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 
 > ### {% icon hands_on %} Hands-on: Calculate population genomics statistics
 >
-> **Stacks: populations** {% icon tool %}: Run the last step of **Stacks: De novo map** pipeline specifying data filtering options (minimum percentage of individuals in a population required to process a locus for that population: 0.75 , output options (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
+> 1. **Stacks: populations** {% icon tool %} with the following parameters:
+>    - Section **Data filtering options**
+>      - *"Minimum percentage of individuals in a population required to process a locus for that population"*: `0.75`
+>    - Section **Output options** (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
+>      - *"Output results in Variant Call Format (VCF)"*: `Yes`
+>      - *"Output results in Structure Format"*: `Yes`
+>    - *"Enable SNP and haplotype-based F statistics"*: `Yes`
 >
 >    ![The output of the populations tool](../../images/RAD4_Population_Genomics/denovo/populations_log.png)
 >
-> Now look at the output in the file `batch_1.sumstats` nammed `SNP and Haplotype-based F statistics with Stacks: populations ...` on your history. There are a large number of statistics calculated at each SNP, so use Galaxy tools like filter, cut, and sort to focus on some.
+> 2. Now look at the output in the file `batch_1.sumstats` nammed `SNP and Haplotype-based F statistics with Stacks: populations ...` on your history. There are a large number of statistics calculated at each SNP, so use Galaxy tools like filter, cut, and sort to focus on some.
 >
 > > ### {% icon question %} Question
 > >
