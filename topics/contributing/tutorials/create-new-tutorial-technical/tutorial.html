@@ -216,6 +216,10 @@
     {
       "@type": "Person",
       "name": "shiltemann"
+    },
+    {
+      "@type": "Person",
+      "name": "erasche"
     }
   ],
   "description": "The questions this  addresses are:\n - How can we define the technical infrastructure for a tutorial?\n - How to define the tools needed for a tutorial?\n - How to add the needed data directly in an instance?\n - How to add the workflows related to a tutorial?\n - How can we check the technical infrastructure is working?\n - How can we make an existing Galaxy instance able to run a tutorial?\n\n\\nThe objectives are:\n - Extracting the technical description for a tutorial\n - Populating an existing instance with the needed tools, data and workflows for a tutorial\n - Creating a Galaxy Docker flavor with the needed tools, data and workflows for a tutorial\n - Testing the Galaxy Docker flavor of a tutorial\n\n"
@@ -279,8 +283,11 @@
   <p>In this tutorial, we will deal with:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#extracting-workflows" id="markdown-toc-extracting-workflows">Extracting workflows</a></li>
-  <li><a href="#creating-the-toolsyaml-recommended" id="markdown-toc-creating-the-toolsyaml-recommended">Creating the <code class="highlighter-rouge">tools.yaml</code> (recommended)</a></li>
+  <li><a href="#extracting-workflows" id="markdown-toc-extracting-workflows">Extracting workflows</a>    <ol>
+      <li><a href="#creating-the-toolsyaml-recommended" id="markdown-toc-creating-the-toolsyaml-recommended">Creating the <code class="highlighter-rouge">tools.yaml</code> (recommended)</a></li>
+      <li><a href="#testing-the-workflow-recommended" id="markdown-toc-testing-the-workflow-recommended">Testing the workflow (recommended)</a></li>
+    </ol>
+  </li>
   <li><a href="#creating-the-data-libraryyaml-recommended" id="markdown-toc-creating-the-data-libraryyaml-recommended">Creating the <code class="highlighter-rouge">data-library.yaml</code> (recommended)</a></li>
   <li><a href="#creating-the-data-manageryaml-optional" id="markdown-toc-creating-the-data-manageryaml-optional">Creating the <code class="highlighter-rouge">data-manager.yaml</code> (optional)</a></li>
   <li><a href="#creating-the-galaxy-interactive-tour-optional" id="markdown-toc-creating-the-galaxy-interactive-tour-optional">Creating the Galaxy Interactive Tour (optional)</a></li>
@@ -302,7 +309,7 @@
   </ol>
 </blockquote>
 
-<h1 id="creating-the-toolsyaml-recommended">Creating the <code class="highlighter-rouge">tools.yaml</code> (recommended)</h1>
+<h2 id="creating-the-toolsyaml-recommended">Creating the <code class="highlighter-rouge">tools.yaml</code> (recommended)</h2>
 
 <p>The first file to fill out is the <code class="highlighter-rouge">tools.yaml</code> file which contains the list of the required tools that could be installed from the ToolShed.</p>
 
@@ -358,6 +365,188 @@
   </ol>
 </blockquote>
 
+<h2 id="testing-the-workflow-recommended">Testing the workflow (recommended)</h2>
+
+<p>Workflow testing is a great way to get feedback that your tutorial can be run successfully on a given server. When you’re giving a training this can provide peace of mind, not only are the tools installed (as is indicated by the badges we provide) but they also work.</p>
+
+<p>Given the workflow you created above and have included in the tutorial folder, you’ll need to create a corresponding <code class="highlighter-rouge">-test.yml</code> file.</p>
+
+<blockquote class="hands_on">
+  <h3 id="hands_on-hands-on-creating-the--testyml-file-for-your-workflow"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating the <code class="highlighter-rouge">-test.yml</code> file for your workflow</h3>
+
+  <ol>
+    <li>
+      <p>Find the correct name for the file; if your workflow was <code class="highlighter-rouge">unicycler.ga</code>, then your test file should be <code class="highlighter-rouge">unicycler-test.yml</code>, they need to share the same prefix.</p>
+    </li>
+    <li>
+      <p>Create the following structure:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="pi">-</span> <span class="na">doc</span><span class="pi">:</span> <span class="s">Test sample data for the workflow</span>
+  <span class="na">job</span><span class="pi">:</span>
+    <span class="na">an_input_file</span><span class="pi">:</span>
+      <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
+      <span class="na">location</span><span class="pi">:</span> <span class="s">https://....</span>
+      <span class="na">filetype</span><span class="pi">:</span> <span class="s">fasta</span>
+  <span class="na">outputs</span><span class="pi">:</span>
+    <span class="na">ffn</span><span class="pi">:</span>
+      <span class="na">asserts</span><span class="pi">:</span>
+        <span class="na">has_text</span><span class="pi">:</span>
+          <span class="na">text</span><span class="pi">:</span> <span class="s2">"</span><span class="s">&gt;A"</span>
+        <span class="na">has_text</span><span class="pi">:</span>
+          <span class="na">text</span><span class="pi">:</span> <span class="s2">"</span><span class="s">&gt;B"</span>
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>You’ll need to edit the <code class="highlighter-rouge">job</code> and <code class="highlighter-rouge">outputs</code> sections according to your workflow’s inputs and outputs. Additionally you will need to edit the steps of your workflow <code class="highlighter-rouge">.ga</code> file appropriately.</p>
+
+<h3 id="inputs">Inputs</h3>
+
+<p>Your workflow <strong>must</strong> use “Data Inputs” for each input dataset. For each of these input step in the <code class="highlighter-rouge">.ga</code> file, you’ll need to do the following:</p>
+
+<ol>
+  <li>Edit the <code class="highlighter-rouge">label</code></li>
+  <li>Edit the <code class="highlighter-rouge">name</code></li>
+  <li>Edit the <code class="highlighter-rouge">inputs[0].name</code></li>
+  <li>Edit the <code class="highlighter-rouge">tool_state</code></li>
+</ol>
+
+<p>In a normal workflow you have exported from Galaxy, you’ll see something like</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"input_connections"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"patient1_ChIP_ER_good_outcome.bam"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Input dataset"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"left"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"top"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"tool_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tool_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{</span><span class="se">\"</span><span class="s2">name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">patient1_ChIP_ER_good_outcome.bam</span><span class="se">\"</span><span class="s2">}"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tool_version"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>You should synchronize the aforementioned fields so it looks like this:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"input_connections"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"good_outcome"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"good_outcome"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"good_outcome"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"left"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"top"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"tool_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tool_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{</span><span class="se">\"</span><span class="s2">name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">good_outcome</span><span class="se">\"</span><span class="s2">}"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tool_version"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>This will allow you to specify <code class="highlighter-rouge">good_outcome</code> in your job to load a file:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- doc: ...
+  job:
+    good_outcome:
+      class: File
+      location: ...
+      filetype: ...
+</code></pre></div></div>
+
+<p>The filetype should be the Galaxy datatype of your file, for example <code class="highlighter-rouge">fastqsanger</code>, <code class="highlighter-rouge">tabular</code>, <code class="highlighter-rouge">bam</code>.</p>
+
+<h3 id="outputs">Outputs</h3>
+
+<p>For the outputs the process is somewhat simpler:</p>
+
+<ol>
+  <li>Identify a step, the outputs of which you would like to test</li>
+  <li>
+    <p>Convert the relevant <code class="highlighter-rouge">outputs</code> to <code class="highlighter-rouge">workflow_outputs</code></p>
+
+    <p>In a normal workflow you see</p>
+
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"txt"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ofile"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"txt"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ofile2"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"workflow_outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+
+    <p>If you want to test the contents of <code class="highlighter-rouge">ofile</code>, you should change it to</p>
+
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"txt"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ofile"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"txt"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ofile2"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"workflow_outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="s2">"output_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ofile"</span><span class="p">,</span><span class="w"> </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_output"</span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>You can now use the label you chose (here <code class="highlighter-rouge">my_output</code>) in your test case:</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">doc</span><span class="pi">:</span>
+  <span class="na">job</span><span class="pi">:</span> <span class="s">...</span>
+  <span class="na">outputs</span><span class="pi">:</span>
+    <span class="na">my_output</span><span class="pi">:</span>
+      <span class="na">asserts</span><span class="pi">:</span>
+        <span class="na">has_text</span><span class="pi">:</span>
+          <span class="na">text</span><span class="pi">:</span> <span class="s1">'</span><span class="s">some-string'</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="running-the-tests">Running the Tests</h3>
+
+<p>You can test the file you’ve written with the following command and a recent version (&gt;=0.56.0) of planemo:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">planemo test \
+	--galaxy_url "$</span>GALAXY_URL<span class="s2">" </span><span class="se">\</span><span class="s2">
+	--galaxy_user_key "</span><span class="nv">$GALAXY_USER_KEY</span><span class="s2">" </span><span class="se">\</span><span class="s2">
+	--no_shed_install </span><span class="se">\</span><span class="s2">
+	--engine external_galaxy </span><span class="se">\</span><span class="s2">
+	workflow.ga
+</span></code></pre></div></div>
+
+<p>Planemo will autodetect that the <code class="highlighter-rouge">workflow-test.yml</code> file and load that for the testing.</p>
+
 <h1 id="creating-the-data-libraryyaml-recommended">Creating the <code class="highlighter-rouge">data-library.yaml</code> (recommended)</h1>
 
 <p>The datasets needed for a tutorial can also be integrated in the Galaxy instance inside of data libraries. These allow the datasets to be easily shared with all users of a Galaxy instance. Additionally it lets trainees avoid each re-downloading the input data.</p>
@@ -396,7 +585,7 @@
       <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo training_fill_data_library \
          --topic_name "my-topic" \
          --tutorial_name "my-new-tutorial" \
-         --zenodo_link "URL to the Zenodo record" 
+         --zenodo_link "URL to the Zenodo record"
 </code></pre></div>      </div>
     </li>
     <li>Check that the <code class="highlighter-rouge">data-library.yaml</code> has been generated (or updated)</li>
@@ -589,7 +778,7 @@ It is a great way to help users run the tutorial directly inside Galaxy. To lear
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Bérénice Batut, Björn Grüning, Saskia Hiltemann)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Bérénice Batut, Björn Grüning, Helena Rasche, Saskia Hiltemann)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
