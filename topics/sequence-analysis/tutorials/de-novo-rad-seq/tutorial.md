@@ -171,7 +171,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    > {: .solution }
 >    {: .question}
 >
-> 2. **MultiQC** {% icon tool %}: Run MultiQC on FastQC results to better see quality information over samples. 
+> 2. **MultiQC** {% icon tool %}: Run MultiQC on FastQC results to better see quality information over samples.
 {: .hands_on}
 
 ![MultiQC output](../../images/RAD4_Population_Genomics/multiqc.PNG)
@@ -191,27 +191,26 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >
 >    ![Stacks: De novo map parameters](../../images/RAD4_Population_Genomics/denovo/denovo_in.png)
 >
+>    Population map will look like this:
 >
->    > Population map will look like this:
-
-```
-sample_CCCC	1
-sample_CCAA	1
-sample_CCTT	1
-sample_CCGG	1
-sample_CACA	1
-sample_CAAC	1
-sample_CATG	1
-sample_CAGT	1
-sample_CTCT	2
-sample_CTAG	2
-sample_CTTC	2
-sample_CTGA	2
-sample_GGGG	2
-sample_GGAA	2
-sample_GGTT	2
-sample_GGCC	2
-```
+>    ```
+>    sample_CCCC	1
+>    sample_CCAA	1
+>    sample_CCTT	1
+>    sample_CCGG	1
+>    sample_CACA	1
+>    sample_CAAC	1
+>    sample_CATG	1
+>    sample_CAGT	1
+>    sample_CTCT	2
+>    sample_CTAG	2
+>    sample_CTTC	2
+>    sample_CTGA	2
+>    sample_GGGG	2
+>    sample_GGAA	2
+>    sample_GGTT	2
+>    sample_GGCC	2
+>    ```
 >
 >    > ### {% icon comment %} Comment
 >    >
