@@ -167,12 +167,12 @@ We are interested in visualizing all expression values of all transcripts relati
 > ### {% icon hands_on %} Hands-on: Visualization
 >
 > 1. **CummeRbund** {% icon tool %} with the following parameters
->   - Click on *"Insert plot"*
->   - *"Width"*: `800`
->   - *"Height"*: `600`
->   - *"Plot type"*: `Expression Plot`
->     - *"Expression levels to plot"*:`Isoforms`
->     - *"Gene ID"*: `NDUFV1`
+>    - {% icon param-repeat %}  **Insert plots**
+>      - *"Width"*: `800`
+>      - *"Height"*: `600`
+>      - *"Plot type"*: `Expression Plot`
+>        - *"Expression levels to plot"*:`Isoforms`
+>        - *"Gene ID"*: `NDUFV1`
 {: .hands_on}
 
 Our first CummeRbund plot is the "Expression Plot":
