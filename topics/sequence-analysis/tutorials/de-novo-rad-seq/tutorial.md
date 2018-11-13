@@ -44,34 +44,26 @@ We will look at the first run SRR034310 out of seven which includes 16 samples f
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this RAD-seq exercise. If you are not inspired, you can name it "STACKS RAD: population genomics without reference genome" for example...
-> 2. **Upload Reads from SRA** {% icon tool %}: Run `EBI SRA`
+> 1. Create a **new history** for this RAD-seq exercise. If you are not inspired, you can name it *STACKS RAD: population genomics without reference genome* for example...
+>    {% include snippets/create_new_history.md %}
+>
+> 2. **EBI SRA** {% icon tool %} with the following parameters:
 >    - Select the Run from the results of the search for `SRR034310` (which will present you 1 Experiment (SRX015877) and 1 Run (SRR034310)).
 >    - Click the link in the column **FASTQ files (Galaxy)** of the results table
 >    - This will redirect to the Galaxy website and start the download.
+>
 > 3. Upload remaining training data from Zenodo:
->    - Open the Galaxy Upload Manager
->    - Select **Paste/Fetch Data**
->    - Paste the following links into the text field
 >    ```
 >    https://zenodo.org/record/1134547/files/Barcode_SRR034310.txt
 >    https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
 >    ```
 >
->    > ### {% icon comment %} Comments
->    >    If you are using the [GenOuest Galaxy instance](https://galaxy.genouest.org), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> '1 Galaxy teaching folder' -> 'EnginesOn' -> 'RADseq' -> 'Stickelback population genomics' -> 'SRR034310'
->    {: .comment}
+>    {% include snippets/import_via_link.md %}
 >
->    > ### {% icon tip %} Tip:
->    >    Changing the file type `fastq` to `fastqsanger` once the data file is in your history (warning! Be cautious because there is closed datatpes as `fastqcssanger`). As we know here that the datatype is `fastqsanger`, we can directly change it through the upcoming method. Normally, you need to execute `FastQGroomer` tool to be sure to have a correct `fastqsanger` file format. And if you don't know how your quality score is encoded on raw fastQ files, please, use the `FastQC` tool to determine it!
->    >
->    >    * Click on the pencil button displayed in your dataset in the history
->    >    * Choose **Datatype** on the top
->    >    * Select `fastqsanger`
->    >    * Press **Save**
->    {: .tip}
+> 4. Make sure your fasta files are of datatype `fastqsanger`
 >
->    As default, Galaxy takes the link as name.
+>    {% include snippets/change_datatype.md%}
+>
 {: .hands_on}
 
 The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be demultiplexed. To do so, we can use the Process Radtags tool from STACKS.
@@ -193,11 +185,8 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 
 
 > ### {% icon hands_on %} Hands-on: Stacks: De novo map
-> **Stacks: De novo map** {% icon tool %}: Run **Stacks** selecting the population usage. Specify each individual as a sample, a population map (see comment below concerning the creation of such a file) and a minimum depth of coverage of 3.
 >
->    ![Stacks: De novo map parameters](../../images/RAD4_Population_Genomics/denovo/denovo_in.png)
->
->    Population map will look like this:
+> 1. First we will create a population map file with the following contents:
 >
 >    ```
 >    sample_CCCC	1
@@ -217,6 +206,15 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >    sample_GGTT	2
 >    sample_GGCC	2
 >    ```
+>
+> 2.**Stacks: De novo map** {% icon tool %}: with the following parameters:
+>   - *"Select your usage"*: `Population`
+>   - *"Files containing an individual sample from a population": *Specify each individual as a sample, a population map (see comment below concerning the creation of such a file) and a minimum depth of coverage of 3.
+>
+>    ![Stacks: De novo map parameters](../../images/RAD4_Population_Genomics/denovo/denovo_in.png)
+>
+>    Population map will look like this:
+>
 >
 >    > ### {% icon comment %} Comment
 >    >
