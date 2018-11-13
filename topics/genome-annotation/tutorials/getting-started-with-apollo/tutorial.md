@@ -87,15 +87,15 @@ There are three file formats to be aware of during genome annotation.
 
 The sequence contained in a FASTA file may be DNA, RNA, or protein sequences; they may contain unspecified bases (N/Y/X) or gaps (-). Within a FASTA file, each sequence begins with a “>,” which is immediately followed by the “FASTA ID.” Some sequences have a “description” after *any whitespace character*, such as the given example.
 
-![](../../images/getting-started-with-apollo-screenshots/6_fasta_sequence_example.png)
+![](../../images/getting-started-with-apollo-screenshots/6_fasta.png)
 
 ### 2. GFF3
 
-The eukaryotic gene model captures a lot of information about the biological process behind producing proteins from DNA, such as mRNAs, transcription, and alternative splicing. GFF3 files thus have to encode these complex, hierarchical, parent-child relationships. Characteristics of GFF3 files, such as the tab separated, key-value pairs, allot simplicity and ease of use.
+The eukaryotic gene model captures a lot of information about the biological process behind producing proteins from DNA, such as mRNAs, transcription, and alternative splicing. GFF3 files thus have to encode these complex, hierarchical, parent-child relationships. Characteristics of GFF3 files, such as the tab separated, key-value pairs, allot simplicity and ease of use. (The top image is a text representation of a GFF3 file, and the bottom image is a visual representation of the same GFF3 file.)
 
-![](../../images/gettingstarted-with-apollo-screenshots/7_gff3.png)
+![](../../images/getting-started-with-apollo-screenshots/7_gff3.png)
 
-![](../../images/getting-started-with-apollo-screenshots/8_gff3_visually.png "A visual representation of a GFF3 file.")
+![](../../images/getting-started-with-apollo-screenshots/8_gff3_visually.png)
 
 At the top level is a “gene” (3rd column) spanning from 1000 to 9000, on the forward strand (7th column), with an ID of gene00001 and a Name of EDEN.
 
@@ -192,7 +192,7 @@ The pale yellow track that is visible is the User Created Annotations track. The
 
 In the Apollo panel on the right, there is a drop-down menu called the Genome Selector, and it will list all organisms available to the account in use.
 
-![](../../images/getting-started-with-apollo-screenshots/20_genome_selector.png)![](../../images/getting-started-with-apollo/21_genome_selector_options.png)
+![](../../images/getting-started-with-apollo-screenshots/20_genome_selector.png)![](../../images/getting-started-with-apollo-screenshots/21_genome_selector_options.png)
 
 Apollo uses the concept of ‘Organisms’ with ‘reference sequences’ below it. Each organism can have one or more reference sequences. In higher order organisms, those often correspond to multiple to multiple chromosomes. For phage uses they are most often used to correspond to different assemblies of the genome. For the sake of the course, **only organisms with a single reference sequence will be worked on.**
 
