@@ -207,6 +207,8 @@ This will allow you to specify `good_outcome` in your job to load a file:
       filetype: ...
 ```
 
+The filetype should be the Galaxy datatype of your file, for example `fastqsanger`, `tabular`, `bam`.
+
 ### Outputs
 
 For the outputs the process is somewhat simpler:
