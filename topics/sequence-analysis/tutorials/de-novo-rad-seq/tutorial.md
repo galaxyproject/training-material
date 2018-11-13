@@ -82,14 +82,14 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 
 > ### {% icon hands_on %} Hands-on: Demultiplexing reads
 >
-> 1. **Process Radtags** {% icon tool %}: Run `Stacks: process radtags` on FastQ file to demultiplex the reads
->  - Single-end or paired-end reads files: Single-end files
->  - singles-end reads infile(s): SRR034310.fastq(.gz)
->  - Barcode file: Barcodes_SRR034310.tabular
->  - Number of enzymes: One
->  - Enzyme: sbfI
->  - Capture discarded reads to a file: Yes
->  - Output format: fastq
+> 1. **Process Radtags** {% icon tool %} to demultiplex the reads:
+>  - *"Single-end or paired-end reads files"*: `Single-end files`
+>  - *"singles-end reads infile(s)"*: `SRR034310.fastq(.gz)`
+>  - *"Barcode file"*: `Barcodes_SRR034310.tabular`
+>  - *"Number of enzymes"*: `One`
+>  - *"Enzyme"*: `sbfI`
+>  - *"Capture discarded reads to a file*": `Yes`
+>  - *"Output format:"* `fastq`
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -103,16 +103,22 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >    > >
 >    > >  1. 8895289 total reads
 >    > >  2. 8139531 retained reads
->    > >  3. There are no sequences filtered because of low quality. This is because radtags didn't apply quality related filtering since the corresponding advanced option (Discard reads with low quality scores) has not been enabled. So here, all not retained sequences are removed because of an ambiguous barcode (626265) or an ambiguous RAD-Tag (129493). This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This strategy is often used to avoid having too much sequences beginning with the exact same nucleotide sequence which may cause Illumina related issues during sequencing and cluster analysis
+>    > >  3. There are no sequences filtered because of low quality. This is because radtags didn't apply quality related filtering since the corresponding advanced option (Discard reads with low quality scores) has not been enabled. So here, all not retained sequences are removed because of an ambiguous barcode (`626265`) or an ambiguous RAD-Tag (`129493`). This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This strategy is often used to avoid having too much sequences beginning with the exact same nucleotide sequence which may cause Illumina related issues during sequencing and cluster analysis
 >    > >  4. Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!
 >    > >
 >    > > In addition to the overall statistics the numbers of retained and removed reads are also given for each bar code sequence.
 >    > {: .solution}
 >    {: .question}
 >
-> 2. **Process Radtags** {% icon tool %}: Re-Run `Stacks: process radtags` on FastQ file playing with parameters
+>    Next we will play around with the parameters a bit, to see the impact they have on the results.
 >
-> In `advanced options`, after activation of the `Discard reads with low quality scores` option, play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
+> 2. **Process Radtags** {% icon tool %}: Re-Run playing with parameters
+>    - Section **Advanced**
+>      - *"Discard reads with low quality scores"*: `Yes`
+>      - *"score limit"*: `20` (for example; play with this)
+>      - *"Set the size of the sliding window as a fraction of the read length, between 0 and 1"*: `0.30` (for example; play with this)
+>
+> This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
 >
 {: .hands_on}
 
