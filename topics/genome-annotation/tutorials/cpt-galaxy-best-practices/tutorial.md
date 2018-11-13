@@ -13,7 +13,7 @@ tutorial_name: cpt-galaxy-best-practices
 
 # Rationale - Maintaining Reproducible Records
 
-An important tenet of science is to maintain records to a reproducible, traceable standard. This philosophy is applicable to both lab notebooks *and* Galaxy histories. It is tempting to think that, because of the presence of a ‘history’ in Galaxy, the program has adequately maintained the user’s records and no further steps are needed to document research activities/analyses performed within the Galaxy suite. This is **incorrect.** Here, strongly recommended practices are shown to make data in Galaxy more accessible to both the current user and futures users.
+An important tenet of science is to maintain reproducible and traceable records using a standard. This philosophy is applicable to both lab notebooks *and* Galaxy histories. It is tempting to think that, because of the presence of a ‘history’ in Galaxy, the program has adequately maintained the user’s records and no further steps are needed to document research activities/analyses performed within the Galaxy suite. This is **incorrect.** Here, strongly recommended practices are shown to make data in Galaxy more accessible to both the current user and futures users.
 
 # Minimum Essential Practices
 

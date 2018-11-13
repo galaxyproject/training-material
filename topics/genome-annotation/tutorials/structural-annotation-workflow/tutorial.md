@@ -3,8 +3,6 @@ layout: tutorial_hands_on
 topic_name: genome_annotation
 tutorial_name: structural_annotation_workflow
 ---
-<!-- LINK APOLLO and FUNCTIONAL ANNOTATION WORKFLOW INFORMATION UPON COMPLETION. -->
-
 
 # Structural Annotation Workflow
 
@@ -93,7 +91,7 @@ OR
 When the genome has been opened in Apollo, each gene candidate must be examined. 
 
 > ### {% icon tip %} Working in Apollo
-> For help with navigating in Apollo to do things like show and hide evidence tracks, maximize screen space, and create features, see this [Apollo tutorial](). 
+> For help with navigating in Apollo to do things like show and hide evidence tracks, maximize screen space, and create features, see this [Apollo tutorial]({{ site.baseurl }}//topics/genome-annotation/tutorials/getting-started-with-apollo/tutorial.html). 
 {: .hands_on}
 
 Recall that the three primary gene callers are correct ~90-95% of the time. Choose the best gene to call from the evidence tracks considering the start codon, presence of a Shine-Dalgarno sequence, and genome coverage (phage have high coding density and genes often overlap). 
@@ -118,4 +116,4 @@ For example, in the image below, the light blue and dark blue tracks are a bette
 
 # Completion
 
-Once genes have been identified and called across the full length of the genome, the [functional annotation workflow]() may be executed to proceed with the prediction part of the genome annotation.
+Once genes have been identified and called across the full length of the genome, the [functional annotation workflow]({{ site.baseurl }}//topics/genome-annotation/tutorials/functional-annotation-workflow/tutorial.html) may be executed to proceed with the prediction part of the genome annotation.
