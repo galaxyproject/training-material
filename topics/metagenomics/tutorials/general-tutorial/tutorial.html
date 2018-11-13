@@ -38,6 +38,7 @@
 
 
 
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -216,6 +217,31 @@
                         </a>
                     </li>
                     
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetagenomics%2Ftutorials%2Fgeneral-tutorial%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetagenomics%2Ftutorials%2Fgeneral-tutorial%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetagenomics%2Ftutorials%2Fgeneral-tutorial%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetagenomics%2Ftutorials%2Fgeneral-tutorial%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                        </div>
+                    </li>
 
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
@@ -421,7 +447,7 @@ has been sequenced using 454 GS FLX Titanium. For the tutorial the original fast
   <li>Anguil soil: <a href="https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS386929/runs/SRR651839/results/versions/2.0">SRR651839</a></li>
 </ul>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
 
   <ol>
@@ -480,7 +506,7 @@ Project's QC results: https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samp
 <p>We will perform a multisample analysis with mothur, in order to do so, we will merge all reads into a single file,
 and create a <em>group file</em>, indicating which reads belong to which samples.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-prepare-multisample-analysis"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Prepare multisample analysis</h3>
 
   <ol>
@@ -529,7 +555,7 @@ and create a <em>group file</em>, indicating which reads belong to which samples
 duplicates of each other. Because it’s computationally wasteful to align the same thing a bazillion
 times, we’ll unique our sequences using the <code class="highlighter-rouge">Unique.seqs</code> command:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-duplicate-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove duplicate sequences</h3>
 
   <ol>
@@ -567,7 +593,7 @@ read_name7    read_name8
 ...
 </code></pre></div></div>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-count-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Count sequences</h3>
 
   <ol>
@@ -595,7 +621,7 @@ read_name7    read_name8
 
 <p>First, let’s get a feel of our data:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-summarize-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Summarize data</h3>
 
   <ol>
@@ -635,7 +661,7 @@ Furthermore, at least one read had a homopolymer stretch of 31 bases, this is li
 
 <p>The following tool will remove any sequences with ambiguous bases (<code class="highlighter-rouge">maxambig</code> parameter), homopolymer stretches of 9 or more bases (<code class="highlighter-rouge">maxhomop</code> parameter) and any reads longer than 275 bp or shorter than 225 bp.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-filter-reads-based-on-quality-and-length"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter reads based on quality and length</h3>
 
   <ol>
@@ -670,7 +696,7 @@ Furthermore, at least one read had a homopolymer stretch of 31 bases, this is li
 
 <p>Aligning our sequences to a reference helps improve OTU assignment [<a href="https://www.ncbi.nlm.nih.gov/pubmed/23018771">Schloss et. al.</a>], so we will now align our sequences to an alignment of the V4 variable region of the 16S rRNA. This alignment has been created as described in [<a href="https://mothur.org/wiki/MiSeq_SOP">mothur’s MiSeq SOP</a>] from the Silva reference database.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-align-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Align sequences</h3>
 
   <ol>
@@ -734,7 +760,7 @@ total # of seqs:    18178
 
 <p>To make sure that everything overlaps the same region we’ll re-run <code class="highlighter-rouge">Screen.seqs</code> to get sequences that start at or before position 3,080 and end at or after position 13,424.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-poorly-aligned-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove poorly aligned sequences</h3>
 
   <ol>
@@ -761,7 +787,7 @@ total # of seqs:    18178
 
 <p>Now we know our sequences overlap the same alignment coordinates, we want to make sure they <em>only</em> overlap that region. So we’ll filter the sequences to remove the overhangs at both ends. In addition, there are many columns in the alignment that only contain external gap characters (<em>i.e.</em> “.”), while columns containing only internal gap characters (i.e., “-“) are not considered. These can be pulled out without losing any information. We’ll do all this with <code class="highlighter-rouge">Filter.seqs</code>:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-filter-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter sequences</h3>
 
   <ol>
@@ -793,7 +819,7 @@ total # of seqs:    18178
 
 <p>The first thing we want to do is to further de-noise our sequences from potential sequencing errors, by pre-clustering the sequences using the <code class="highlighter-rouge">Pre.cluster</code> command, allowing for up to 2 differences between sequences. This command will split the sequences by group and then sort them by abundance and go from most abundant to least and identify sequences that differ no more than 2 nucleotides from on another. If this is the case, then they get merged. We generally recommend allowing 1 difference for every 100 basepairs of sequence:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-perform-preliminary-clustering-of-sequences-and-remove-undesired-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Perform preliminary clustering of sequences and remove undesired sequences</h3>
 
   <ol>
@@ -823,7 +849,7 @@ total # of seqs:    18178
 <!-- optional additional QC: chimera.uchime -->
 <p>We would like to classify the sequences using a training set, which is again is provided on [<a href="https://mothur.org/wiki/MiSeq_SOP">mothur’s MiSeq SOP</a>].</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-classify-the-sequences-into-phylotypes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Classify the sequences into phylotypes</h3>
 
   <ol>
@@ -875,7 +901,7 @@ SRR531818.61708-G88ZSJI01AVPPR-2    Bacteria(100);Acidobacteria(99);Acidobacteri
   <li>finally, for each cluster, a consensus classification is determined based on the classification of the individual sequences and taking their confidence scores into account</li>
 </ol>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-assign-sequences-to-otus"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Assign sequences to OTUs</h3>
 
   <ol>
@@ -897,7 +923,7 @@ SRR531818.61708-G88ZSJI01AVPPR-2    Bacteria(100);Acidobacteria(99);Acidobacteri
 
 <p>Next we want to know how many sequences are in each OTU from each group with a distance of 0.03 (97% similarity). We can do this using the <code class="highlighter-rouge">Make.shared</code> command with the 0.03 cutoff level:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-estimate-otu-abundance"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Estimate OTU abundance</h3>
 
   <ol>
@@ -915,7 +941,7 @@ SRR531818.61708-G88ZSJI01AVPPR-2    Bacteria(100);Acidobacteria(99);Acidobacteri
 
 <p>We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each OTU using the <code class="highlighter-rouge">Classify.otu</code> command:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-classify-the-otus"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Classify the OTUs</h3>
 
   <ol>
@@ -953,7 +979,7 @@ SRR531818.61708-G88ZSJI01AVPPR-2    Bacteria(100);Acidobacteria(99);Acidobacteri
 <p>We have now determined our OTUs and classified them, but looking at a long text file is not very informative.
 Let’s visualize our data using Krona:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-krona"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Krona</h3>
 
   <p>First we convert our mothur taxonomy file to a format compatible with Krona</p>
@@ -981,7 +1007,7 @@ on one of the rings in the image or playing around with some of the settings.</p
 <p>This produced a single plot for both your samples, but what if you want to compare
 the two samples?</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-per-sample-krona-plots"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Per-sample Krona plots</h3>
 
   <ol>
@@ -1015,7 +1041,7 @@ top right-hand corner after clicking on the label Acidobacteria. For anguil the 
 
 <p>To further explore the community structure, we can visualize it with dedicated tools such as Phinch.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-visualization-of-the-community-structure-with-phinch"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualization of the community structure with Phinch</h3>
 
   <ol>
@@ -1053,7 +1079,7 @@ top right-hand corner after clicking on the label Acidobacteria. For anguil the 
 
 <h2 id="data-upload">Data upload</h2>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
 
   <ol>
@@ -1085,7 +1111,7 @@ top right-hand corner after clicking on the label Acidobacteria. For anguil the 
 
 <p>In this tutorial, we use the second approach with MetaPhlAn2. This tools is using a database of ~1M unique clade-specific marker genes (not only the rRNA genes) identified from ~17,000 reference (bacterial, archeal, viral and eukaryotic) genomes.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-taxonomic-assignation-with-metaphlan2"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Taxonomic assignation with MetaPhlAn2</h3>
 
   <ol>
@@ -1148,7 +1174,7 @@ top right-hand corner after clicking on the label Acidobacteria. For anguil the 
 
 <p>Even if the output of MetaPhlAn2 is bit easier to parse than the BIOM file, we want to visualize and explore the community structure with KRONA</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-interactive-visualization-with-krona"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Interactive visualization with KRONA</h3>
 
   <ol>
@@ -1173,7 +1199,7 @@ top right-hand corner after clicking on the label Acidobacteria. For anguil the 
 
 <p>In the shotgun data, we have access to the gene sequences from the full genome. We use that to identify the genes, associate them to a function, build pathways, etc to investigate the functional part of the community.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-metabolism-function-identification"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Metabolism function identification</h3>
 
   <ol>
@@ -1238,7 +1264,7 @@ https://zenodo.org/record/815875/files/humann2_pathways_coverage.tsv
 
 <p>The RPK for the gene families are quite difficult to interpret in term of relative abundance. We decide then to normalize the values</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-normalize-the-gene-family-abundances"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Normalize the gene family abundances</h3>
 
   <ol>

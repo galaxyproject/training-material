@@ -38,6 +38,7 @@
 
 
 
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -126,6 +127,31 @@
                         </a>
                     </li>
                     
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fepigenetics%2Ftutorials%2Fewas-suite%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fepigenetics%2Ftutorials%2Fewas-suite%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fepigenetics%2Ftutorials%2Fewas-suite%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fepigenetics%2Ftutorials%2Fewas-suite%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                        </div>
+                    </li>
 
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
@@ -320,7 +346,7 @@
 
 <p>The first step of EWAS data anylalysis is raw methylation data loading (intensity information files  for each two color micro array)</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-loading"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data Loading</h3>
 
   <ol>
@@ -387,7 +413,7 @@ https://zenodo.org/record/1185122/files/GSM1588707_8795207119_R06C02_Grn.idat
 
 <p><code class="highlighter-rouge">RGChannelSet</code> represents two color data with a green and a red channel and can be converted into methylated and unmethylated signals assigned to <code class="highlighter-rouge">MethylSet</code> or into Beta values build in <code class="highlighter-rouge">RatioSet</code>. User can convert from <code class="highlighter-rouge">RGChannelSet</code> into <code class="highlighter-rouge">MethylSet</code> using the <strong>minfi mset</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> or compute Beta values using <strong>minfi set</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. The <strong>minfi qc</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool extracts and plots the quality control data frame with two columns mMed and uMed which are the medians of <code class="highlighter-rouge">MethylSet</code> signals (Meth and Unmeth).Comparing them against one another allows user to detect and remove low-quality samples.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-preprocessing"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Preprocessing</h3>
   <ol>
     <li>Run <strong>minfi mset</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to create <code class="highlighter-rouge">MethylSet</code> object</li>
@@ -412,7 +438,7 @@ https://zenodo.org/record/1185122/files/GSM1588707_8795207119_R06C02_Grn.idat
 
 <p>Hansen, J. P. 2014 highly recommende to remove the probes that contain either a SNP at the metylated loci interrogation or at the single nucleotide extension</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-removing-probes-affected-by-genetic-variation"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Removing probes affected by genetic variation</h3>
   <ol>
     <li>Run <strong>minfi dropsnp</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to remove the probes that contain either a SNP at the metylated loci interrogation or at the single nucleotide extension</li>
@@ -423,7 +449,7 @@ https://zenodo.org/record/1185122/files/GSM1588707_8795207119_R06C02_Grn.idat
 
 <p>The main goal of the EWAS suite is to simplify the way differentially methylated loci sites are detected. The EWAS suite contains <strong>minfi dmp</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool detecting differentially methylated positions (DMPs) with respect to a phenotype covariate, and more complex <strong>minfi dmr</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> solution for finding differentially methylated regions (DMRs). Genomic regions that are differentially methylated between two conditions can be tracked using a bumphunting algorithm. The algorithm first implements a t-statistic at each methylated loci location, with optional smoothing, then groups probes into clusters with a maximum location gap and a cutoff size to refer the lowest possible value of genomic profile hunted by our tool.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-dmps-and-dmrs-identification"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: DMPs and DMRs Identification</h3>
 
   <ol>
@@ -492,7 +518,7 @@ https://zenodo.org/record/1185122/files/GSM1588707_8795207119_R06C02_Grn.idat
 
 <p>In addition to downstream analysis users can annotate the differentially methylated loci to the promoter regions of genes with gene function description, and relationships between these concepts.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on--annotate-differentially-methylated-position"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:  Annotate Differentially Methylated Position</h3>
   <ol>
     <li>Run <strong>chipeakanno annopeaks</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters

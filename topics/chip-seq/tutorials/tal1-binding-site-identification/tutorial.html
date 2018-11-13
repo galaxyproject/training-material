@@ -38,6 +38,7 @@
 
 
 
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -222,6 +223,31 @@
                         </a>
                     </li>
                     
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fchip-seq%2Ftutorials%2Ftal1-binding-site-identification%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fchip-seq%2Ftutorials%2Ftal1-binding-site-identification%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fchip-seq%2Ftutorials%2Ftal1-binding-site-identification%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fchip-seq%2Ftutorials%2Ftal1-binding-site-identification%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                        </div>
+                    </li>
 
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
@@ -539,7 +565,7 @@ Input control experiments are used to identify and remove sampling bias, for exa
 
 <p>As for any NGS data analysis, ChIP-seq data must be quality controlled before being aligned to a reference genome. For more detailed information on NGS quality control, check out the tutorial <a href="/training-material/topics/sequence-analysis">here</a>.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-quality-control"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality control</h3>
 
   <ol>
@@ -619,7 +645,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
 
 <p>It is often necessary to trim a sequenced read to remove bases sequenced with high uncertainty (<em>i.e.</em> low-quality bases). In addition, artificial adaptor sequences used in library preparation protocols need to be removed before attempting to align the reads to a reference genome.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-trimming-and-clipping-reads"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Trimming and clipping reads</h3>
 
   <ol>
@@ -669,7 +695,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
 <p>To determine where DNA fragments originated from in the genome, the sequenced reads must be aligned to a reference genome. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way, however, can take a couple of weeks.
 Nowadays, there are many read alignment programs for sequenced DNA, <code class="highlighter-rouge">BWA</code> being one of them. You can read more about the BWA algorithm and tool <a href="https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/btp324">here</a>.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-aligning-reads-to-a-reference-genome"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Aligning reads to a reference genome</h3>
 
   <ol>
@@ -763,7 +789,7 @@ Examine the output (poke it in the eye!)</li>
 
 <p>We expect that the replicate samples will cluster more closely to each other than to other samples. We will be use tools from the package <strong>deepTools</strong> for the next few steps. More information on <strong>deepTools</strong> can be found <a href="https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html">here</a>.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-assessing-correlation-between-samples"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Assessing correlation between samples</h3>
 
   <p><strong>multiBamSummary</strong> splits the reference genome into bins of equal size and counts the number of reads in each bin from each sample. We set a small <strong>Bin size</strong> here because we are working with a subset of reads that align to only a fraction of the genome.</p>
@@ -818,7 +844,7 @@ Examine the output (poke it in the eye!)</li>
 
 <p>We will now evaluate the quality of the immuno-precipitation step in the ChIP-seq protocol.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-assessing-ip-strength"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Assessing IP strength</h3>
 
   <ol>
@@ -874,7 +900,7 @@ Examine the output (poke it in the eye!)</li>
 
 <p>More information about <strong>MACS2</strong> can be found <a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2008-9-9-r137">here</a>.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-determining-tal1-binding-sites"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Determining TAL1 binding sites</h3>
 
   <ol>
@@ -904,7 +930,7 @@ Examine the output (poke it in the eye!)</li>
 
 <p>First, we will reformat the peak file before we send it to Trackster, and then we will import a gene annotation file so we can visualize aligned reads and TAL1 peaks relative to gene features and positions.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-inspection-of-peaks-and-aligned-data-with-trackster"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Inspection of peaks and aligned data with Trackster</h3>
 
   <ol>
@@ -969,7 +995,7 @@ Examine the output (poke it in the eye!)</li>
 <h2 id="step-72-inspection-of-peaks-and-aligned-data-with-igv">Step 7.2: Inspection of peaks and aligned data with IGV</h2>
 <p>We show here an alternative to Trackster, <a href="http://software.broadinstitute.org/software/igv/">IGV</a>.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-igv"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: IGV</h3>
 
   <ol>
@@ -983,7 +1009,7 @@ Examine the output (poke it in the eye!)</li>
 
 <p>We have processed ChIP-seq data from two stages of hematopoiesis and have lists of TAL1 occupied sites (peaks) in both cellular states. The next analysis step is to identify TAL1 peaks that are <em>shared</em> between the two cellular states and peaks that are <em>specific</em> to either cellular state.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-identifying-unique-and-common-tal1-peaks-between-states"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Identifying unique and common TAL1 peaks between states</h3>
 
   <ol>
@@ -1038,7 +1064,7 @@ Examine the output (poke it in the eye!)</li>
 
 <p>We will generate Input normalized coverage (bigwig) files for the ChIP samples, using <strong>bamCompare</strong> tool from <strong>deepTools2</strong>. <strong>bamCompare</strong> provides multiple options to compare the two files (e.g. log2ratio, subtraction). We will use log2 ratio of the ChIP samples over Input.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-generate-input-normalized-bigwigs"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate Input-normalized bigwigs</h3>
 
   <ol>
@@ -1072,7 +1098,7 @@ Examine the output (poke it in the eye!)</li>
 
 <h3 id="computematrix">computeMatrix</h3>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-calculate-signal-matrix-on-the-macs2-output"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: calculate signal matrix on the MACS2 output</h3>
 
   <ol>
@@ -1095,7 +1121,7 @@ Examine the output (poke it in the eye!)</li>
 
 <h3 id="plotheatmap">plotHeatmap</h3>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-plot-a-heatmap-using-computemarix-output"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: plot a Heatmap using computeMarix output</h3>
 
   <ol>
@@ -1121,7 +1147,7 @@ Examine the output (poke it in the eye!)</li>
 
 <p>We will now check whether the samples have more reads from regions of the genome with high GC.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-assessing-gc-bias"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Assessing GC bias</h3>
 
   <ol>

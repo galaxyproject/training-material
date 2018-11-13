@@ -38,6 +38,7 @@
 
 
 
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -126,6 +127,31 @@
                         </a>
                     </li>
                     
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fepigenetics%2Ftutorials%2Fhicexplorer%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fepigenetics%2Ftutorials%2Fhicexplorer%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fepigenetics%2Ftutorials%2Fhicexplorer%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fepigenetics%2Ftutorials%2Fhicexplorer%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                        </div>
+                    </li>
 
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
@@ -299,7 +325,7 @@ For this the following steps are necessary to be performed:</p>
 
 <h1 id="data-upload">Data upload</h1>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
 
   <ol>
@@ -350,7 +376,7 @@ It is important to have the forward and reverse strand individual as a FASTQ fil
   <li>If bowtie2 or hisat2 are used, <code class="highlighter-rouge">--reorder</code> option and as a file format <code class="highlighter-rouge">bam_native</code> needs to be used. Regular <code class="highlighter-rouge">bam</code> files are sorted by Galaxy and can not be used as an input for HiCExplorer.</li>
 </ul>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-mapping-reads"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Mapping reads</h3>
 
   <ol>
@@ -377,7 +403,7 @@ It is important to have the forward and reverse strand individual as a FASTQ fil
 
 <p>For this step we will use <a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicBuildMatrix.html#hicbuildmatrix">hicBuildMatrix</a> tool, which builds the matrix of read counts over the bins in the genome, considering the sites around the given restriction site.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-hicbuildmatrix"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: hicBuildMatrix</h3>
 
   <ol>
@@ -416,7 +442,7 @@ A quality report is created in e.g. <code class="highlighter-rouge">hicMatrix/R1
 
 <p><a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicMergeMatrixBins.html#hicmergematrixbins">hicMergeMatrixBins</a> merges the bins into larger bins of given number (specified by –numBins). We will merge 100 bins in the original (uncorrected) matrix and then correct it. The new bin size is going to be 10.000 bp * 100 = 1.000.000 bp = 1 Mb</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-hicmergematrixbins"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: hicMergeMatrixBins</h3>
 
   <ol>
@@ -459,7 +485,7 @@ A quality report is created in e.g. <code class="highlighter-rouge">hicMatrix/R1
 
 <p>Matrix correction works in two steps: first a histogram containing the sum of contact per bin (row sum) is produced. This plot needs to be inspected to decide the best threshold for removing bins with lower number of reads. The second steps removes the low scoring bins and does the correction.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-matrix-diagnostic"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Matrix diagnostic</h3>
 
   <ol>
@@ -481,7 +507,7 @@ A quality report is created in e.g. <code class="highlighter-rouge">hicMatrix/R1
 
 <p>In our case the distribution describes the counts per bin of a genomic distance. To remove all bins with a z-score threshold less / more than X means to remove all bins which have less / more counts than X of mean of their specific distribution in units of the standard deviation. Looking at the distribution, we can select the value of -1.6 (lower end) and 1.8 (upper end) to remove. This is given by the –filterThreshold option in hicCorrectMatrix set to ‘correct matrix’ mode.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-matrix-correction"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Matrix correction</h3>
 
   <ol>
@@ -515,7 +541,7 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 
 <p>We can now plot chromosome 2L with the corrected matrix.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-plotting-the-corrected-hi-c-matrix"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plotting the corrected Hi-C matrix</h3>
 
   <ol>
@@ -543,7 +569,7 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 
 <p><a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicFindTADs.html#hicfindtads">hicFindTADs</a> tries to identify sensible parameters but those can be change to identify more stringent set of boundaries.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-finding-tads"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Finding TADs</h3>
 
   <ol>
@@ -563,7 +589,7 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 
 <p>As an output we get the boundaries, domains and scores separated files. We will use in the plot later only the TAD-score file.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-computing-a--b-compartments"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Computing A / B compartments</h3>
 
   <ol>
@@ -583,7 +609,7 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 
 <p>For the next step we need additional data tracks. Please load <code class="highlighter-rouge">dm3_genes.bed</code>, <code class="highlighter-rouge">H3K27me3.bw</code>, <code class="highlighter-rouge">H3K36me3.bw</code> and <code class="highlighter-rouge">H4K16ac.bw</code> to your history.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-plotting-tads"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plotting TADs</h3>
 
   <ol>

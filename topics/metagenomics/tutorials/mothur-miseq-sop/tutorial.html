@@ -38,6 +38,7 @@
 
 
 
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -216,6 +217,31 @@
                         </a>
                     </li>
                     
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetagenomics%2Ftutorials%2Fmothur-miseq-sop%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetagenomics%2Ftutorials%2Fmothur-miseq-sop%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetagenomics%2Ftutorials%2Fmothur-miseq-sop%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetagenomics%2Ftutorials%2Fmothur-miseq-sop%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                        </div>
+                    </li>
 
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
@@ -446,7 +472,7 @@ in this document differ slightly from the description on their website -->
 
 <p>Now that we know what our input data is, let’s get it into our Galaxy history:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-obtaining-our-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Obtaining our data</h3>
 
   <ol>
@@ -555,7 +581,7 @@ https://zenodo.org/record/800651/files/trainset9_032012.pds.tax
 <em>dataset collections</em>. This enables us to easily run tools on multiple datasets at once. Let’s
 create a collection now:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-organizing-our-data-into-a-collection"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Organizing our data into a collection</h3>
 
   <p>Since we have paired-end data, each sample consist of two separate fastq files, one containing the
@@ -623,7 +649,7 @@ fragment, resulting in an overlap in the middle. We will now combine these pairs
 
 <p><img src="../../images/16S_merge_contigs.png" alt="Merging into contigs" /></p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-combine-forward-and-reverse-reads-into-contigs"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Combine forward and reverse reads into contigs</h3>
 
   <ul>
@@ -657,7 +683,7 @@ M00967_43_000000000-A3JHG_1_1101_10051_26098    F3D0
 
 <p>Next we want to improve the quality of our data. But first, let’s get a feel of our data</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-summarize-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Summarize data</h3>
 
   <ul>
@@ -694,7 +720,7 @@ step when we run <code class="highlighter-rouge">screen.seqs</code>.</p>
 
 <p>The following tool will remove any sequences with ambiguous bases (<code class="highlighter-rouge">maxambig</code> parameter) and anything longer than 275 bp (<code class="highlighter-rouge">maxlength</code> parameter).</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-filter-reads-based-on-quality-and-length"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter reads based on quality and length</h3>
 
   <ul>
@@ -731,7 +757,7 @@ step</p>
 duplicates of each other. Because it’s computationally wasteful to align the same thing a bazillion
 times, we’ll unique our sequences using the <code class="highlighter-rouge">unique.seqs</code> command:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-duplicate-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove duplicate sequences</h3>
 
   <ul>
@@ -772,7 +798,7 @@ read_name7    read_name8
 
 <p>To reduce file sizes further and streamline analysis, we can now summarize the data in a <em>count table</em>.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-generate-count-table"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate count table</h3>
 
   <ul>
@@ -806,7 +832,7 @@ the number of duplicates of this sequence observed in each sample.</p>
 <p>We are now ready to align our sequences to the reference. This step is an important
 step to perform to improve the clustering of your OTUs <a href="https://doi.org/10.1038/ismej.2012.102">[Schloss 2013]</a></p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-align-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Align sequences</h3>
 
   <ol>
@@ -856,7 +882,7 @@ start at or before position 1968 and end at or after position 11550. We’ll als
 homopolymer length to 8 (<code class="highlighter-rouge">maxhomop</code> parameter) since there’s nothing in the database with a stretch of 9 or more of the same
 base in a row (this also could have been done in the first execution of <code class="highlighter-rouge">screen.seqs</code> above).</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-poorly-aligned-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove poorly aligned sequences</h3>
 
   <ul>
@@ -890,7 +916,7 @@ paired-end sequencing, this shouldn’t be much of an issue. In addition, there 
 columns in the alignment that only contain gap characters (i.e. “.”). These can be pulled out without
 losing any information. We’ll do all this with filter.seqs:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-filter-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter sequences</h3>
 
   <ul>
@@ -918,7 +944,7 @@ characters using <code class="highlighter-rouge">trump=.</code> and vertical gap
 columns. Because we’ve perhaps created some redundancy across our sequences by trimming the ends, we can re-run
 <code class="highlighter-rouge">unique.seqs</code>:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-re-obtain-unique-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Re-obtain unique sequences</h3>
 
   <ul>
@@ -949,7 +975,7 @@ sequences by group and then sort them by abundance and go from most abundant to 
 sequences that differ no more than 2 nucleotides from on another. If this is the case, then they get
 merged. We generally recommend allowing 1 difference for every 100 basepairs of sequence:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-perform-preliminary-clustering-of-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Perform preliminary clustering of sequences</h3>
 
   <ul>
@@ -991,7 +1017,7 @@ is flagged as chimeric in one sample, the default (<code class="highlighter-roug
 experience suggests that this is a bit aggressive since we’ve seen rare sequences get flagged as chimeric
 when they’re the most abundant sequence in another sample. This is how we do it:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-chimeric-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove chimeric sequences</h3>
 
   <ul>
@@ -1044,7 +1070,7 @@ that chloroplasts and mitochondria have no functional role in a microbial commun
 
 <p>Let’s go ahead and classify those sequences using the Bayesian classifier with the <code class="highlighter-rouge">classify.seqs</code> command:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-undesired-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove undesired sequences</h3>
 
   <ul>
@@ -1157,7 +1183,7 @@ exactly what we would expect the analysis to produce as a result.</p>
 
 <p>First, let’s extract the sequences belonging to our mock samples from our data:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-extract-mock-sample-from-our-dataset"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: extract mock sample from our dataset</h3>
 
   <ol>
@@ -1183,7 +1209,7 @@ Selected 4046 sequences from your count file
 can now use the <code class="highlighter-rouge">seq.error</code> command to measure the error rates based on our mock reference. Here we align
 the reads from our mock sample back to their known sequences, to see how many fail to match.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-assess-error-rates-based-on-a-mock-community"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Assess error rates based on a mock community</h3>
   <ul>
     <li><strong>Seq.error</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
@@ -1230,7 +1256,7 @@ separation.</p>
   <p>(Image credit: Danzeisen et al. 2013, 10.7717/peerj.237)</p>
 </blockquote>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-cluster-mock-sequences-into-otus"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Cluster mock sequences into OTUs</h3>
 
   <p>First we calculate the pairwise distances between our sequences</p>
@@ -1324,7 +1350,7 @@ our real samples.</p>
 <p>using
 the <code class="highlighter-rouge">remove.groups</code> command:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-mock-community-from-our-dataset"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove Mock community from our dataset</h3>
 
   <ul>
@@ -1353,7 +1379,7 @@ multiple processors. In an ideal world we would prefer the traditional route bec
 also think that kind of humor is funny…. In this command we use <code class="highlighter-rouge">taxlevel=4</code>, which corresponds to the level
 of <em>Order</em>. This is the approach that we  generally use in the Schloss lab.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-cluster-our-data-into-otus"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Cluster our data into OTUs</h3>
 
   <ul>
@@ -1442,7 +1468,7 @@ stability and change in community structure in these samples when comparing earl
 <p>Keep in mind that the group names have either a F or M (sex of animal) followed by a number (number of
 animal) followed by a D and a three digit number (number of days post weaning).</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-subsampling"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Subsampling</h3>
 
   <p>What we now want to do is see how many sequences we have in each sample. We’ll do this with the
@@ -1499,7 +1525,7 @@ and several diversity indices are currently available [Finotello et al. 2016].</
 curves describing the number of OTUs observed as a function of sampling effort. We’ll do this with the
 <code class="highlighter-rouge">Rarefaction.single</code> command:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-calculate-rarefaction"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Calculate Rarefaction</h3>
   <ul>
     <li><strong>Rarefaction.single</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
@@ -1531,7 +1557,7 @@ to see is the number of additional OTUs identified when adding more sequences re
 we have covered our full diversity. This information would be easier to interpret in the form of a graph.
 Let’s plot the rarefaction curve for a couple of our sequences:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-plot-rarefaction"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot Rarefaction</h3>
   <!-- the following tool is because plotting tool will not detect columns in files inside collections yet -->
   <p>First let’s make our life a little bit easier. As we only have one dataset in our collection anyways, we can
@@ -1584,7 +1610,7 @@ allowing a researcher to compare samples based on richness, but their diversity.
 OTUs, and the Inverse Simpson diversity estimate using the <code class="highlighter-rouge">Summary.single</code> command. To standardize everything,
 let’s randomly select 2440 sequences from each sample 1000 times and calculate the average:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-summarysingle"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Summary.single</h3>
 
   <ul>
@@ -1633,7 +1659,7 @@ repeated-measures ANOVA and find that there was no significant difference based 
 The default calculator in the following section is <em>thetaYC</em>, which is the <a href="http://csyue.nccu.edu.tw/2005communicationindex.pdf">Yue &amp; Clayton theta similarity
 coefficient</a></p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-beta-diversity"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Beta diversity</h3>
 
   <p>Let’s calculate. We’ll do this
@@ -1677,7 +1703,7 @@ heatmaps the red colors indicate communities that are more similar than those wi
 <p>When generating Venn diagrams we are limited by the number of samples that we can analyze simultaneously.
 Let’s take a look at the Venn diagrams for the first 4 time points of female 3 using the <code class="highlighter-rouge">venn</code> command:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-venn-diagram"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Venn diagram</h3>
 
   <!-- need to collapse collection again for group select to work -->
@@ -1715,7 +1741,7 @@ umerically rare or just had a low incidence.</p>
 <p>Next, let’s generate a dendrogram to describe the similarity of the samples to each other. We will generate a
 dendrogram using the jclass and thetayc calculators within the <code class="highlighter-rouge">tree.shared</code> command:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-tree"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Tree</h3>
 
   <ol>
@@ -1752,7 +1778,7 @@ instance we can convert our shared file to the more widely used <code class="hig
 
 <h2 id="phinch">Phinch</h2>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-phinch"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Phinch</h3>
 
   <ul>
@@ -1786,7 +1812,7 @@ where you can several interactive visualisations:</p>
 
 <p>A second tool we can use to visualize our data, is <a href="">Krona</a></p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-krona"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Krona</h3>
 
   <p>First we convert our mothur taxonomy file to a format compatible with Krona</p>
@@ -1837,7 +1863,7 @@ go into more details about statistical significance testing and population-level
 using by choosing from the <code class="highlighter-rouge">parsimony</code>, <code class="highlighter-rouge">unifrac.unweighted</code>, or <code class="highlighter-rouge">unifrac.weighted</code> commands. To run these we
 will first need to create a design file that indicates which treatment each sample belongs to.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-obtain-design-file"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Obtain design file</h3>
 
   <ul>
@@ -1883,7 +1909,7 @@ F3D9     Early
 <p>Using the <code class="highlighter-rouge">parsimony</code> command let’s look at the pairwise comparisons. Specifically, let’s focus on the
 early vs. late comparisons for each mouse:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-compare-early-vs-late"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compare Early-vs-Late</h3>
   <ul>
     <li><strong>Parsimony</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
@@ -1911,7 +1937,7 @@ Recall that this method ignores the branch length.</p>
 <p>Principal Coordinates (PCoA) uses an eigenvector-based approach to represent multidimensional
 data in as few dimensions as possible. Our data is highly dimensional (~9 dimensions).</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-pcoa"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: PCoA</h3>
 
   <ul>
@@ -1952,7 +1978,7 @@ not bad.</p>
 a user defined number of dimensions. We can run our data through NMDS with 2 dimensions with the following
 tool:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-nmds"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Nmds</h3>
 
   <ul>
@@ -2010,7 +2036,7 @@ The first analysis of molecular variance (AMOVA), tests whether the centers of t
 are more separated than the variation among samples of the same treatment. This is done using the distance
 matrices we created earlier and does not actually use ordination.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-amova"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Amova</h3>
 
   <ul>
@@ -2040,7 +2066,7 @@ for this mouse. Thus, the observed separation in early and late samples is stati
 also see whether the variation in the early samples is significantly different from the variation in the late
 samples using the <code class="highlighter-rouge">Homova</code> command:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-homova"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Homova</h3>
 
   <ul>
@@ -2066,7 +2092,7 @@ samples were less stable than the late samples.</p>
 this by measuring the correlation of the relative abundance of each OTU with the two axes in the NMDS dataset.
 We do this with the <code class="highlighter-rouge">corr.axes</code> tool:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-correlation"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Correlation</h3>
 
   <ul>
@@ -2139,7 +2165,7 @@ F3D8     8
 F3D9     9
 </code></pre></div></div>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ul>
@@ -2225,7 +2251,7 @@ as belonging to Porphyromonadaceae (top 3 OTUs), Alistipes and Lactobacillus.</p
 different groupings of samples. The first we’ll demonstrate is <code class="highlighter-rouge">metastats</code>, which is a non-parametric T-test
 that determines whether there are any OTUs that are differentially represented between the samples from early and late in this study.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-t-test"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: T-test</h3>
 
   <ul>
@@ -2266,7 +2292,7 @@ vary between you and your neighbour as well.</p>
 
 <p>Another non-parametric tool we can use as an alternative to metastats is lefse:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-lefse"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Lefse</h3>
 
   <ul>
@@ -2295,7 +2321,7 @@ late samples</p>
 <p>Finally, Mothur has an implementation of the random forest algorithm build into her as classify.rf. This will tell
 us which features (i.e. OTUs) are useful in discriminating between the two groups of samples:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-classifyrf"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Classify.rf</h3>
 
   <ul>

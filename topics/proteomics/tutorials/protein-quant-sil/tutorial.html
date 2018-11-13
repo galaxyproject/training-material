@@ -38,6 +38,7 @@
 
 
 
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -201,6 +202,31 @@
                     
 
                     <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fprotein-quant-sil%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fprotein-quant-sil%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fprotein-quant-sil%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fprotein-quant-sil%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
     </a>
@@ -345,7 +371,7 @@ Incorporation of stable isotopes results in different peptide masses on MS1 leve
 
 <p>To learn about <em>protein identification</em> in Galaxy, please consider our OpenMS-based <a href="/training-material/topics/proteomics/tutorials/protein-id-oms/tutorial.html">peptide ID tutorial</a>.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-introduction"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Introduction</h3>
   <p>In the hands-on section of this tutorial, we will use a quantitative comparison of HEK cell lysate as a test dataset. In this experiment, HEK cells were once labelled with light, once with heavy SILAC. Both cultures were lysed simultaneously and the cell lysates were mixed in a certain ratio. 
 A detailed description of the full dataset is available in the <a href="">PRIDE archive</a>.</p>
@@ -394,7 +420,7 @@ A detailed description of the full dataset is available in the <a href="">PRIDE 
 
 <p>The OpenMS suite provides several tools (FeatureFinders) for MS1 feature detection. For SIL we have to use <strong><em>FeatureFinderMultiplex</em></strong>, which does not take peptide IDs as an input.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-ms1-feature-detection"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: MS1 Feature Detection</h3>
 
   <ol>
@@ -424,7 +450,7 @@ A detailed description of the full dataset is available in the <a href="">PRIDE 
 <p>A common problem in mass spectrometry are misassigned mono-isotopic precursor peaks. Although most search engines allow for some adaptation of the monoisotopic peak, we will instead perform a recalculation of the monoisotopic peaks based on the previously identified features prior to peptide identification.
 This step facilitates mapping peptide IDs to identified features <a href="#mapping-identifications-to-features">later on</a>. To do so, we will use the OpenMS tool <strong><em>HighResPrecursorMassCorrector</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-peptide-and-protein-identification-and-conversion"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Peptide and Protein Identification and Conversion</h3>
   <ol>
     <li>Run <strong><em>HighResPrecursorMassCorrector</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
@@ -467,7 +493,7 @@ For <code class="highlighter-rouge">consensusXML</code>, IDMapper uses the conse
 
 <p>Finally, we will combine the peptide quantifications to protein quantifications.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-quant-to-id-matching"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quant to ID matching</h3>
 
   <ol>
@@ -512,7 +538,7 @@ For proteins, we added a log-transformed ratio to the output, which is saved in 
 <p>To get a quick overview of the results, you can calculate basic descriptive statistics and plot the data as a histogram.
 Comment lines in the beginning of a <code class="highlighter-rouge">tabular</code> file may sometimes cause errors, therefore we will remove them with the tool <strong><em>Select last (tail)</em></strong>.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-descriptive-statistics"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Descriptive Statistics</h3>
   <ol>
     <li>Run <strong><em>Summary Statistics</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
@@ -574,7 +600,7 @@ Basic TOPPView tutorials are available as <a href="https://www.openms.de/getting
 
 <p><strong>Cave:</strong> Be aware that only very small parts of your dataset can be checked by visual examination. To minimize biases, try to look at the same areas / features of each result file.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-reduction-and-visual-evaluation-with-toppview"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data reduction and visual evaluation with TOPPView</h3>
 
   <ol>
@@ -655,7 +681,7 @@ Basic TOPPView tutorials are available as <a href="https://www.openms.de/getting
   </li>
 </ol>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-check-a-possible-contaminant"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check a possible contaminant</h3>
   <ol>
     <li>Run <strong><em>TextExporter</em></strong> with
@@ -765,7 +791,7 @@ Also, it is recommended to optimize the tools in the order of their position in 
 
 <p>In the test dataset, several peptides were identified, but not quantified. Some of the peptides were even identified in the unlabelled, as well as in the labelled form. To optimize the feature detection, we will relax the parameters of FeatureFinderMultiplex.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-optimize-feature-detection"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Optimize Feature Detection</h3>
 
   <ol>

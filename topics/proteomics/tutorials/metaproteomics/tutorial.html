@@ -38,6 +38,7 @@
 
 
 
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -99,6 +100,31 @@
                         </a>
                     </li>
                     
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fmetaproteomics%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fmetaproteomics%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fmetaproteomics%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fmetaproteomics%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                        </div>
+                    </li>
 
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
@@ -276,7 +302,7 @@ Strait chlorophyll maximum layer (7m depth, 65° 43.44″ N, 168° 57.42″ W). 
 
 <p>In this tutorial, we will get the data from Zenodo: <a href="https://doi.org/10.5281/zenodo.839701"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.839701.svg" alt="DOI" /></a>.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload-and-organization"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload and organization</h3>
 
   <ol>
@@ -331,7 +357,7 @@ The created dataset collection of the three <em>MGF files</em> in the history is
 
 <h4 id="searchgui">SearchGUI</h4>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-searchgui"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: SearchGUI</h3>
 
   <ol>
@@ -442,7 +468,7 @@ as phosphorylation reports, relevant if a phosphoproteomics experiment has been 
 More detailed information on peptide inference using SearchGUI and PeptideShaker can be found in our tutorial on <a href="/training-material/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html">Peptide and Protein ID</a>.</p>
 </blockquote>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-peptideshaker"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: PeptideShaker</h3>
 
   <ol>
@@ -513,7 +539,7 @@ or operated on within Galaxy.</p>
 The tool <strong>Query Tabular</strong> can load tabular data (the PSM report in this case) into a SQLite data base.
 As a tabular file is being read, line filters may be applied and an SQL query can be performed.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-query-tabular"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Query Tabular</h3>
 
   <ol>
@@ -620,7 +646,7 @@ ORDER BY sequence
 We might not only be interested in all the distinct peptides, but also on how many PSMs a single peptide had.
 Therefore we can search the database for the peptides and count the occurrence without configuring the tables and columns again:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-sqlite-to-tabular"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: SQLite to tabular</h3>
 
   <ol>
@@ -656,7 +682,7 @@ ORDER BY sequence
 <p>The generated list of peptides can now be used to search via <em>Unipept</em>.
 We do a taxonomy analysis using the UniPept pept2lca function to return the taxonomic lowest common ancestor for each peptide:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-unipept"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Unipept</h3>
 
   <ol>
@@ -706,7 +732,7 @@ Instead, we can use it to use JavaScript libraries to visualize this data.</p>
 <p>The tabular <em>Unipept</em> output lists the taxonomy assignments for each peptide. To create a meaningful summary, the <strong>Query Tabular</strong> tool is
 once again used, aggregating the number of peptides and PSMs for each genus level taxonomy assignment:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-query-tabular-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Query Tabular</h3>
 
   <ol>
@@ -846,7 +872,7 @@ The GO defines concepts/classes used to describe gene function, and relationship
 <p>For this tutorial, a tabular file containing the relevant GO terms has been created. It contains the GO aspect, the ID and the name.
 It is available at Zenodo: <a href="https://doi.org/10.5281/zenodo.839701"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.839701.svg" alt="DOI" /></a>.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
 
   <ol>
@@ -892,7 +918,7 @@ An example file with all GO terms from 08.07.2017 named <code class="highlighter
 The option <code class="highlighter-rouge">retrieve extra information</code> option is set to <code class="highlighter-rouge">yes</code> so that we retrieve Gene Ontology assignments (<code class="highlighter-rouge">go_references</code>)
 for each protein.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-unipept-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Unipept</h3>
 
   <ol>
@@ -948,7 +974,7 @@ for each protein.</p>
   </li>
 </ul>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-query-tabular-2"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Query Tabular</h3>
 
   <ol>
@@ -1138,7 +1164,7 @@ ORDER BY sequence
 
 <p>With this we have combined all the data into a single database which we can now query to extract the desired information with <strong>SQLite to tabular</strong>:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-sqlite-to-tabular-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: SQLite to tabular</h3>
 
   <ol>

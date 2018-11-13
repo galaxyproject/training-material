@@ -38,6 +38,7 @@
 
 
 
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -82,6 +83,31 @@
                     
 
                     
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fdev%2Ftutorials%2Fvisualization-charts%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fdev%2Ftutorials%2Fvisualization-charts%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fdev%2Ftutorials%2Fvisualization-charts%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fdev%2Ftutorials%2Fvisualization-charts%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                        </div>
+                    </li>
 
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
@@ -244,7 +270,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 
 <p>As mentioned above we will be focusing on the <em>PV-Javascript Protein Viewer</em> in this tutorial. Now that we have learned about the underlying file format, let us continue by visiting the viewers developer site at <a href="https://biasmv.github.io/pv/">https://biasmv.github.io/pv/ </a> to get familiar with the plugin.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
@@ -279,7 +305,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 
 <p>In this section we will download the viewer and add it to a local <em>Galaxy</em> instance. All development takes place within the <em>Galaxy</em> codebase. The first thing we are going to do is to clone a <em>Galaxy</em> instance and prepare the directory structure for the new visualization plugin.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
@@ -325,7 +351,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 
 <p><img src="../../files/charts-plugins/pdb/logo.png" alt="Logo" /></p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-2"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
@@ -342,7 +368,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 
 <p>Each visualization has a configuration file named <code class="highlighter-rouge">config.js</code>. This file has conceptual similarities with a Tool’s XML-file. It allows developers to specify a variety of attributes and input parameters for their visualization. Throughout this tutorial we are going to gradually augment this file but for now we keep it simple.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-3"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
@@ -380,7 +406,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
   <li><em>targets</em>: The DOM ids of the container elements to draw into</li>
 </ul>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-4"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
@@ -401,7 +427,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 
 <p>The above wrapper does not do much yet, except requesting the minified plugin code which we downloaded earlier. In order to execute a 3rd-party plugin we need to figure out how it works. This can be done by finding a working example or documentation. Fortunately the <em>PV-Viewer</em> comes with both. Let’s take a look at the <a href="https://pv.readthedocs.io/">documentation</a>.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-5"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
@@ -420,7 +446,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 
 <p>Now that we have learned the basics on how the viewer plugin works, we can initialize and load it in <code class="highlighter-rouge">wrapper.js</code>.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-6"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
@@ -453,7 +479,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 
 <p>Now that we have completed the <em>Charts</em> plugin definition, it is time to bundle the scripts and libraries into a single module file using <a href="https://webpack.github.io"><em>webpack</em></a>. Once packed the plugin will be accessible through <em>Galaxy</em>’s user interface. Packing modules does not require restarting your <em>Galaxy</em> instance, just make sure to properly refresh your browser.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-7"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
@@ -482,7 +508,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 
 <p>In this section we will select a <code class="highlighter-rouge">PDB</code>-file from the Protein Databank and visualize it with our new plugin.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-8"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
@@ -525,7 +551,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 <p>In this section we are going to augment the visualization such that users may select different rendering modes. This is one of the major advantages of using the <em>Charts</em> framework. Similar to a Tool’s XML file, developers may specify input parameters which then will be presented to the user. The definition of Tool and Visualization input parameters are similar, however the latter is provided in <em>JavaScript</em> and not as XML.
 More information on parameters can be found in the <a href="https://docs.galaxyproject.org/en/latest/dev/schema.html">wiki</a>.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-9"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
@@ -577,7 +603,7 @@ More information on parameters can be found in the <a href="https://docs.galaxyp
 
 <p>From the <em>PV-Viewer</em> documentation we can see that there are more settings available such as e.g. ‘pointSize’, ‘lineWidth’ and ‘radius’. In this section we are going to further enhance the visualizations user interface to incorporate these input parameters</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-10"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>

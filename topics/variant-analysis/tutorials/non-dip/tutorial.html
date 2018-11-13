@@ -38,6 +38,7 @@
 
 
 
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -125,6 +126,31 @@
                         </a>
                     </li>
                     
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fvariant-analysis%2Ftutorials%2Fnon-dip%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fvariant-analysis%2Ftutorials%2Fnon-dip%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fvariant-analysis%2Ftutorials%2Fnon-dip%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fvariant-analysis%2Ftutorials%2Fnon-dip%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                        </div>
+                    </li>
 
                     <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
@@ -296,7 +322,7 @@
 
 <p>For this tutorial we have prepared a subset of data previously <a href="http://www.pnas.org/content/111/43/15474.abstract">published</a> by our group. Let’s import these data into Galaxy.</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="data-upload-from-a-galaxy-library">Data upload from a Galaxy Library</h3>
 
   <p><img src="../../images/mt_lib.png" alt="Data upload from a Galaxy Library" /></p>
@@ -319,7 +345,7 @@
 
 <p>Before proceeding with the analysis, we need to find out how good the data actually is. For this will use <code class="highlighter-rouge">FastQC</code> tool that can be found in <strong>NGS: QC and manipulation → FastQC</strong> section of Galaxy tools:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="quality-control-of-the-data">Quality Control of the data</h3>
 
   <p><img src="../../images/mt_qc.png" alt="FastQC input and dependencies" /></p>
@@ -337,7 +363,7 @@
 
 <p>Our reads are long (250 bp) and as a result we will be using <a href="https://arxiv.org/pdf/1303.3997v2.pdf">bwa mem</a> to align them against the reference genome as it has good mapping performance for longer reads (100bp and up).</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="mapping-with-bwa-mem">Mapping with <code class="highlighter-rouge">bwa mem</code></h3>
 
   <p><img src="../../images/mt_bwa_mem.png" alt="bwa mem input and parameters" /></p>
@@ -357,7 +383,7 @@
 
 <p>We can BAM dataset using <strong>NGS: Picard</strong> → <strong>MergeSAMFiles</strong> tool:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="merging-multiple-datasets-into-one">Merging multiple datasets into one</h3>
 
   <p><img src="../../images/mt_bam_merging.png" alt="MergeSAMFiles input and parameters" /></p>
@@ -375,7 +401,7 @@
 
 <p>Let’s use <strong>NGS: Picard</strong> → <strong>MarkDuplicates</strong> tool:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="de-duplicating-mapped-data">De-duplicating mapped data</h3>
 
   <p><img src="../../images/mt_dedup.png" alt="MarkDuplicates tool parameters" /></p>
@@ -431,7 +457,7 @@ GGG--CACACAGGG            Alt: G
 
 <p>Let’s perform left alignment using <strong>NGS: Variant Analysis</strong> → <strong>BamLeftAlign</strong>:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="left-aligning-indels-1">Left-aligning indels</h3>
 
   <p><img src="../../images/mt_left_align.png" alt="BamLeftAlign parameters" /></p>
@@ -443,7 +469,7 @@ GGG--CACACAGGG            Alt: G
 
 <p>Remember that we are trying to call variants in mitochondrial genome. Let focus only on the reads derived from mitochondria genome by filtering everything else out. For this we will use <strong>NGS: BamTools</strong> → <strong>Filter</strong>:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="filtering-bam-data">Filtering BAM data</h3>
 
   <p><img src="../../images/mt_filtering.png" alt="Filtering BAM datasets tool parameters" /></p>
@@ -462,7 +488,7 @@ GGG--CACACAGGG            Alt: G
 
 <p>FreeBayes is widely used for calling variants in diploid systems. However, it can also be used for calling variants in pooled samples where the number of samples is not known. This is the exact scenario we have here: in our sample we have multiple mitochondrial (or bacterial or viral) genomes but we do not know exactly how many. Thus we will use the <code class="highlighter-rouge">--pooled-continuous</code> option of FreeBayes to generate <em>frequency-based</em> variant calls as well as some other options highlighted below (the tool is in <strong>NGS: Variant Analysis</strong> → <strong>FreeBayes</strong>):</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="running-freebayes">Running <code class="highlighter-rouge">FreeBayes</code></h3>
 
   <p><img src="../../images/mt_freebayes_genome.png" alt="FreeBayes parameters" /></p>
@@ -621,7 +647,7 @@ chrM	15326	.	A	G	79542.1	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=2574;CIGAR=1X;DP=2586;DP
 </ul>
 
 <p>To perform filtering we will use <strong>NGS: VCF Manipulation</strong> → <strong>VCFfilter</strong>):</p>
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="filtering-vcf-data-1">Filtering VCF data</h3>
 
   <p><img src="../../images/mt_vcffilter.png" alt="VCFfilter parameters" /></p>
@@ -646,7 +672,7 @@ chrM	8557	.	G	C	2590.97	.	AB=0.267066;ABP=790.051;AC=2;AF=0.5;AN=4;AO=446;CIGAR=
 
 <p>VCF.IOBIO can be invoked by expanding a VCF dataset in Galaxy’s history by clicking on it:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="displaying-data-in-vcfiobio">Displaying data in VCF.IOBIO</h3>
 
   <p><img src="../../images/mt_vcf_dataset_collapsed.png" alt="VCFfilter output in history" /></p>
@@ -667,7 +693,7 @@ Clicking on this link will start indexing of VCF datasets, which is required to 
 
 <p>Similarly to VCF.BIOIO expanding a history item representing a VCF dataset will reveal an IGV link:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="displaying-data-in-igv">Displaying data in IGV</h3>
 
   <p><img src="../../images/mt_vcf_dataset_expanded.png" alt="VCFfilter output expanded" /></p>
@@ -690,7 +716,7 @@ The difference between “local” and “Human hg38” links is explained in th
 
 <p>Using <strong>NGS: VCF Manipulation</strong> → <strong>VCFtoTab-delimited</strong> on the filtered VCF dataset:</p>
 
-<blockquote class="hands_on">
+<blockquote class="notranslate hands_on">
   <h3 id="from-vcf-to-tab-delimited-data">From VCF to Tab-delimited data</h3>
 
   <p><img src="../../images/mt_vcfToTab.png" alt="VCFtoTab-delimited parameters window" /></p>
