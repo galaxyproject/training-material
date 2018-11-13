@@ -8,7 +8,7 @@ questions:
 objectives:
   - "Learn some of the basic concepts of genomics and bioinformatics"
   - "Familiarize yourself with the basics of Galaxy"
-time_estimation: "2.5h"
+time_estimation: "2H30M"
 key_points:
   - "Galaxy provides an easy-to-use graphical user interface for often complex command-line tools"
   - "Galaxy keeps a full record of your analysis in a history"

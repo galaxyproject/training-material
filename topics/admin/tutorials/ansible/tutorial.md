@@ -42,14 +42,23 @@ Ansible runs commands on local or remote computers. It can move files around, cr
 
 Some terms that you should know first:
 
-Term           | Usage
--------------- | --------
-hosts files    | An Ansible-specific file that defines groups of hosts (not be confused with `/etc/hosts`).
-Ansible module | A piece of Python code that converts some parameters into an invocation. An example would be the `command` module which converts parameters like `command: ls` into a command line that is executed. There are pre-built modules for just about everything.
-task           | A call to an Ansible module that should be executed and the configuration for this module.
-role           | A folder containing some tasks, templates, files, and default values for variables. People share roles on ["Ansible Galaxy"](https://galaxy.ansible.com/).
-playbook       | a YAML file listing a set of tasks and/or roles that should be applied to a group of hosts.
-vault          | An encrypted YAML file. You put your secrets here and then you can use them in tasks/roles/playbooks.
+host files
+:    An Ansible-specific file that defines groups of hosts (not be confused with `/etc/hosts`).
+
+Ansible module
+:    A piece of Python code that converts some parameters into an invocation. An example would be the `command` module which converts parameters like `command: ls` into a command line that is executed. There are pre-built modules for just about everything.
+
+task
+:    A call to an Ansible module that should be executed and the configuration for this module.
+
+role
+:    A folder containing some tasks, templates, files, and default values for variables. People share roles on ["Ansible Galaxy"](https://galaxy.ansible.com/).
+
+playbook
+:    a YAML file listing a set of tasks and/or roles that should be applied to a group of hosts.
+
+vault
+:    An encrypted YAML file. You put your secrets here and then you can use them in tasks/roles/playbooks.
 
 Looking at each of these briefly:
 
@@ -61,7 +70,7 @@ web_a
 web_b
 
 [databases]
-db_1.fqdn.edu ansible_user=root
+db_1.example.org ansible_user=root
 ```
 
 Here we've defined two groups of computers, `webservers` and `databases`. `ansible_user` is used to specify which user to connect with.
@@ -132,13 +141,15 @@ The first invokes the `yum` module with the arguments `name: cvmfs, state: ...`.
 
 The second invokes the [`service`](http://docs.ansible.com/ansible/latest/service_module.html) module. The arguments to this one are quite legible and the functionality can be inferred from the names for the most part: The service `name: autofs` will be `enabled` and its `state` should be `started`.
 
+[Many modules](https://docs.ansible.com/ansible/latest/modules/modules_by_category.html) are available for you to use.
+
 ### Stylistic Choices
 
 Ansible accepts two ways to format tasks:
 
 YAML style:
 
-```
+```yaml
 - package:
     name: "{{ package_name }}"
     state: "{{ package_state }}"
@@ -146,7 +157,7 @@ YAML style:
 
 And an inline style.
 
-```
+```yaml
 - package name={{ package_name }} state={{ package_state }}
 ```
 
@@ -154,7 +165,7 @@ Some groups prefer one style or another. You can mix both of these but you proba
 
 ## Playbooks
 
-```
+```yaml
 - name: CVMFS
   hosts: webservers
   vars:
@@ -201,7 +212,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 
 > ### {% icon warning %} Safety First
 >
-> Many of the things you can do with Ansible can be quite dangerous. As dangerous as normally being at the linux command line, but scaled across N machines. Be very careful with the changes you plan to make.
+> Many of the things you can do with Ansible can be quite dangerous. As dangerous as normally being at the Linux command line, but scaled across N machines. Be very careful with the changes you plan to make.
 > Ansible provides some flags which can help you identify changes before they're made to production systems:
 >
 > **`--diff`**
@@ -233,7 +244,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >    > ### {% icon solution %} Solution
 >    > The file should look like:
 >    >
->    > ```
+>    > ```ini
 >    > [my_hosts]
 >    > your.host
 >    > ```
@@ -248,7 +259,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 > 5. Define a `copy` task like below:
 >
->    ```
+>    ```yaml
 >    ---
 >    - name: Copy a file to the remote host
 >      copy:
@@ -269,7 +280,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 > 8. Open `playbook.yml` for editing in the root folder. Place the following content in there:
 >
->    ```
+>    ```yaml
 >    ---
 >    - hosts: my_hosts
 >      roles:
@@ -418,7 +429,7 @@ Templates give you greater control over the files you are deploying to the remot
 >
 > 3. Insert the following content:
 >
->    ```
+>    ```yaml
 >    ---
 >    my_role_key: deadbeefcafe
 >    ```
@@ -430,7 +441,7 @@ Templates give you greater control over the files you are deploying to the remot
 > 5. Insert the following content:
 >
 >    {% raw %}
->    ```
+>    ```ini
 >    [example]
 >    api_key = {{ my_role_key }}
 >    listen = {{ ansible_default_ipv4.address }}
@@ -439,7 +450,7 @@ Templates give you greater control over the files you are deploying to the remot
 >
 > 6. Edit `roles/my-role/tasks/main.yml` and append a new task to the end to template this file:
 >
->    ```
+>    ```yaml
 >    - name: Template the configuration file
 >      template:
 >        src: test.ini.j2
@@ -458,7 +469,7 @@ Templates give you greater control over the files you are deploying to the remot
 >    > >
 >    > > The file should look like:
 >    > >
->    > > ```
+>    > > ```ini
 >    > > [example]
 >    > > api_key = deadbeefcafe
 >    > > listen = 192.168.0.2
@@ -479,7 +490,7 @@ Templates give you greater control over the files you are deploying to the remot
 >
 > 11. Insert the following:
 >
->     ```
+>     ```yaml
 >     ---
 >     my_role_key: my_super_secret_api_key
 >     ```

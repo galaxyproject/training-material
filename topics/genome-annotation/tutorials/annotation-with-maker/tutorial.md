@@ -2,8 +2,6 @@
 layout: tutorial_hands_on
 
 title: Genome annotation with Maker
-name: annotation-with-maker
-type: tutorial
 zenodo_link: https://doi.org/10.5281/zenodo.1404209
 tags:
   - eukaryote
@@ -15,7 +13,7 @@ objectives:
   - Annotate genome with Maker
   - Evaluate annotation quality with BUSCO
   - View annotations in JBrowse
-time_estimation: 1d
+time_estimation: 8h
 key_points:
   - Maker allows to annotate a eukaryotic genome.
   - BUSCO and JBrowse allow to inspect the quality of an annotation.
@@ -241,7 +239,7 @@ Now run BUSCO with the predicted transcript sequences:
 > ### {% icon hands_on %} Hands-on: Run BUSCO
 >
 > 1. **Busco** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `output_exons` (output of **gffread** {% icon tool %})
+>    - {% icon param-file %} *"Sequences to analyse"*: `exons` (output of **gffread** {% icon tool %})
 >    - *"Mode"*: `Transcriptome`
 >    - *"Lineage"*: `fungi_odb9`
 >
@@ -365,7 +363,7 @@ Now run BUSCO with the predicted transcript sequences:
 > ### {% icon hands_on %} Hands-on: Run BUSCO
 >
 > 1. **Busco** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `output_exons` (output of **gffread** {% icon tool %})
+>    - {% icon param-file %} *"Sequences to analyse"*: `exons` (output of **gffread** {% icon tool %})
 >    - *"Mode"*: `Transcriptome`
 >    - *"Lineage"*: `fungi_odb9`
 >
@@ -472,7 +470,7 @@ Now run BUSCO with the predicted transcript sequences:
 > ### {% icon hands_on %} Hands-on: Run BUSCO
 >
 > 1. **Busco** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `output_exons` (output of **gffread** {% icon tool %})
+>    - {% icon param-file %} *"Sequences to analyse"*: `exons` (output of **gffread** {% icon tool %})
 >    - *"Mode"*: `Transcriptome`
 >    - *"Lineage"*: `fungi_odb9`
 >

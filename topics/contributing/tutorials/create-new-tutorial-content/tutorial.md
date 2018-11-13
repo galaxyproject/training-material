@@ -9,7 +9,7 @@ questions:
 objectives:
   - "Create hands-on"
   - "Use the different boxes"
-time_estimation: "15min"
+time_estimation: "15m"
 key_points:
   - "You can highlight questions, tools and hints with a special syntax"
   - "Self-learning can be done by questions and hidden answers"
@@ -393,11 +393,13 @@ The available icons are:
 > ### {% icon hands_on %} Hands-on: My Step
 >
 > 1. **My Tool** {% icon tool %} with the following parameters
->  - {% icon param-text %} *"My text parameter"*: `my value`
->  - {% icon param-file %} *"My input file"*: `my file`
->  - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
->  - {% icon param-select %} *"My select menu"*: `my choice`
->  - {% icon param-check %} *"My check box"*: `yes`
+>    - {% icon param-text %} *"My text parameter"*: `my value`
+>    - {% icon param-file %} *"My input file"*: `my file`
+>    - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
+>    - {% icon param-select %} *"My select menu"*: `my choice`
+>    - {% icon param-check %} *"My check box"*: `yes`
+>    - {% icon param-repeat %} **My repeat parameter**
+>      - *"param1"*: `42`
 {: .hands_on}
 ```
 {% endraw %}
@@ -407,11 +409,13 @@ which, when rendered, look like:
 > ### {% icon hands_on %} Hands-on: My Step
 >
 > 1. **My Tool** {% icon tool %} with the following parameters
->  - {% icon param-text %} *"My text parameter"*: `my value`
->  - {% icon param-file %} *"My input file"*: `my file`
->  - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
->  - {% icon param-select %} *"My select menu"*: `my choice`
->  - {% icon param-check %} *"My check box"*: `yes`
+>    - {% icon param-text %} *"My text parameter"*: `my value`
+>    - {% icon param-file %} *"My input file"*: `my file`
+>    - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
+>    - {% icon param-select %} *"My select menu"*: `my choice`
+>    - {% icon param-check %} *"My check box"*: `yes`
+>    - {% icon param-repeat %} **My repeat parameter**
+>      - *"param1"*: `42`
 {: .hands_on}
 
 
