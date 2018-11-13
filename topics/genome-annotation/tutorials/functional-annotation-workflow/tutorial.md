@@ -6,7 +6,7 @@ tutorial_name: functional-annotation-workflow
 
 # Functional Annotation Workflow
 
-Upon completion of the structural annotation, the genome is ready to be functionally annotated.
+This tutorial is used to run analyses for gene function prediction after the genome [structural annotation]({{ site.baseurl }}//topics/genome-annotation/tutorials/structural-annotation-workflow/tutorial.html) has been completed.
 
 > ### Agenda
 >
@@ -17,38 +17,38 @@ Upon completion of the structural annotation, the genome is ready to be function
 
 # Workflow
 
-To begin, access Galaxy ([CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy/)]; the data  must be fetched from Apollo into Galaxy. Using the search bar at the top of the Tool panel on the left, enter “Retrieve data.” Click on the hyperlink of the same name underneath CPT: Get Data, and the tool with parameters to adjust will appear. Using the *Organism* drop-down menu, select the structurally annotated phage, then click “Execute.”
+To begin the analyses in Galaxy, the genome data must be retrieved from its Apollo record. Start by accessing Galaxy ([CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy/)). It is recommended to create and name a new history. Once in the appropriate history, navigate to the [Retrieve Data tool](https://cpt.tamu.edu/galaxy/root?tool_id=edu.tamu.cpt2.webapollo.export) using the search bar at the top of the Tool panel on the left. Open the tool by clicking on the hyperlink of the same name underneath CPT: Get Data, and the parameters to adjust will load in the center pane. 
 
 ![](../../images/functional-annotation-workflow-screenshots/1_retrieve_data_tool.png)
 
-Upon execution, if everything was in the proper place, a message in a green box will appear to inform of the successful execution.
+Using the *Organism* drop-down menu, select the name of your phage, then click “Execute.” A message in a green box will appear when the retrieval has begun. Note that the following steps can be started as soon as the retrieval datasets appear in the history list (even before they turn green). 
 
 ![](../../images/functional-annotation-workflow-screenshots/2_retrieve_data_success_message.png)
 
-Now that the data has been retrieved, it is ready to be run in the functional annotation workflow. At the top of the screen, click on the “Shared Data” drop-down list and select “Workflows.”
+Next, these data will serve as the input for the functional annotation workflow. To import this workflow, click on the “Shared Data” drop-down list and select “Workflows”.
 
 ![](../../images/functional-annotation-workflow-screenshots/3_shared_data_workflow.png)
 
-In this collection of workflows, look for “PAP 201# Functional (v#.#), where # is the largest number indicating the most recent version of this workflow. Click on the drop-down menu for the most recent functional workflow, and select “Import.”
+The next page will list all the public and shared workflows developed at the CPT. The Phage Annotation Pipeline (PAP) workflows are available here. Look for the most recent Functional Annotation Workflow version labelled with the year and a version number, “PAP 201# Functional (v #.#)”. Click on the drop-down menu arrow for that most recent functional workflow, and select “Import”.
 
 ![](../../images/functional-annotation-workflow-screenshots/4_import_functional_workflow.png)
 
 > ### {% icon tip %} Note that…
-> The above image may not precisely reflect the current functional workflow. It is possible the functional annotation workflow has been updated since the creation of this page.
+> The screenshots displayed here may not precisely reflect what you see on your screen. As these are regularly updated, it is likely that the current version year or number is different. Just look for the most recent one.
 {: .tip}
 
-A message in a green box should appear, indicating a successfully imported workflow. Clicking on the “… starting using this workflow …” hyperlink will bring the user to their imported workflows on Galaxy.
+A successfully imported workflow will result in a message in a green box where you can click on the 'start using this workflow link'.
 
 ![](../../images/functional-annotation-workflow-screenshots/5_import_functional_workflow_success.png)
 
-Alternatively, clicking on “Workflows” at the top of the Galaxy page (next to the “Shared Data” drop-down menu) will direct the user to the same page. Find the functional annotation workflow that was just imported and click on the drop-down menu; select “Run.”
+Alternatively, click on the Workflows menu item at the top of the center panel of Galaxy. In this list will be all the workflows that can run from this Galaxy account. Find the functional workflow that has just been imported, click on the drop-down menu, and select “Run". 
 
 ![](../../images/functional-annotation-workflow-screenshots/6_imported_workflows_run.png)
 
-This will yield a list of parameters to run the functional annotation workflow. Specifically, it is important to ensure that datasets are associated with their counterpart in these parameters.
-> 1. Genome Sequence should contain the “#. Sequence(s) from Apollo” set (where # varies dependent on their place in the current History).
-> 2. Apollo Organism JSON File should contain the “#. Metadata from Apollo” set (where # varies dependent on their place in the current History).
-> 3. Annotation Set should contain the “#. Annotation from Apollo” set (where # varies dependent on their place in the current History).
+In the center pane, adjust the parameters to run the functional annotation workflow. Specifically, ensure that datasets are associated with their correct phage counterpart.
+> 1. Genome Sequence should contain the “#. Sequence(s) from Apollo” dataset (where # varies dependent on their place in the current History).
+> 2. Apollo Organism JSON File should contain the “#. Metadata from Apollo” dataset (where # varies dependent on their place in the current History).
+> 3. Annotation Set should contain the “#. Annotation from Apollo” dataset (where # varies dependent on their place in the current History).
 
 ![](../../images/functional-annotation-workflow-screenshots/7_workflow_parameters.png)
 
@@ -60,7 +60,7 @@ This workflow includes multiple computationally-intensive steps. With high serve
 
 > * BLAST against numerous databases
 > * InterProScan
-> * phage spanning search tools
+> * phage spannin search tools
 > * various other analyses
 
 > ### {% icon tip %} Note that…
@@ -68,11 +68,9 @@ This workflow includes multiple computationally-intensive steps. With high serve
 >
 >![](../../images/functional-annotation-workflow-screenshots/9_report_bug.png)
 >
-> Some individual jobs (E.G.: BLAST and InterProScan) may remain yellow (“running”) for many hours.
+> Some individual jobs (e.g. BLAST and InterProScan) may remain yellow (“running”) for many hours.
 {: .tip}
 
 # Completion
 
-Once all the datasets and tools have completed, then functional annotation within Apollo my begin.
-
-<!-- LINK ANNOTATION INFORMATIONAL UPON COMPLETION. -->
+Once all the datasets and tools have completed, then functional annotation within Apollo may begin. How to use the evidence to predict gene function is beyond the scope of this tutorial and is touched on in the [Annotation in Apollo tutorial]({{ site.baseurl }}//topics/genome-annotation/tutorials/annotation-in-apollo/tutorial.html). General Apollo function help can be found in [tutorial 1]({{ site.baseurl }}//topics/genome-annotation/tutorials/getting-started-with-apollo/tutorial.html) and [tutorial 2]({{ site.baseurl }}//topics/genome-annotation/tutorials/annotation-in-apollo/tutorial.html).
