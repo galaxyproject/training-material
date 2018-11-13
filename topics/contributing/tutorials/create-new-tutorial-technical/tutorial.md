@@ -103,7 +103,7 @@ After the extraction, some formatting is needed:
 > 2. Correct the formatting of the `tools.yaml` file
 {: .hands_on}
 
-## Testing the workflow
+## Testing the workflow (recommended)
 
 Workflow testing is a great way to get feedback that your tutorial can be run successfully on a given server. When you're giving a training this can provide peace of mind, not only are the tools installed (as is indicated by the badges we provide) but they also work.
 
