@@ -54,7 +54,7 @@ Once the tutorial is ready, we need to develop a workflow that represents the st
 > 2. Save it in the `workflow` directory of the tutorial
 {: .hands_on}
 
-# Creating the `tools.yaml` (recommended)
+## Creating the `tools.yaml` (recommended)
 
 The first file to fill out is the `tools.yaml` file which contains the list of the required tools that could be installed from the ToolShed.
 
