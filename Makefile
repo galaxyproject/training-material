@@ -92,6 +92,7 @@ check-html-internal: build ## validate HTML (internal links only)
 	      --http-status-ignore 405,503,999 \
 	      --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
 	      --url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
+	      --url-swap "/training-material/badges/:https://training.galaxyproject.org/training-material/badges/" \
 	      --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
 	      --disable-external \
 	      --allow-hash-href \
