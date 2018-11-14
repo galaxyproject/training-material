@@ -13,7 +13,7 @@ This website is a collection of hands-on tutorials that are designed to be inter
 
 ![Interactive training](shared/images/interactive_training.png "The hands-on nature of our training material. It can be used with two web browser windows open side-by-side, one pointed at the current tutorial and the other at a Galaxy instance")
 
-This material is developed and maintained by the [worldwide Galaxy community](https://galaxyproject.org/). You can learn more about this effort by reading our [article](https://www.biorxiv.org/content/early/2018/04/05/225680).
+This material is developed and maintained by the [worldwide Galaxy community](https://galaxyproject.org/). You can learn more about this effort by reading our [article](https://doi.org/10.1016/j.cels.2018.05.012).
 
 ## What is Galaxy?
 
@@ -37,6 +37,10 @@ The content of this website is Creative Commons Attribution 4.0 ([License]({{ si
 ## How can I cite this effort?
 
 We wrote an [article](https://www.biorxiv.org/content/early/2018/04/05/225680) about our efforts.
+
+## How can I advertise the training materials on my posters?
+
+We provide some QR codes and logos in the [images folder](https://github.com/galaxyproject/training-material/tree/master/assets/images).
 
 # For Individual Learners
 
