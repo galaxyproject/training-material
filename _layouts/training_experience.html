@@ -50,18 +50,43 @@ layout: base
 
 <div class="container main-content">
     <section class="tutorial">
+        {% assign te_parts = page.url | split:'/' %}
+        {% assign te_date_parts = te_parts[6] | split:'-' %}
+
         <h1>{{ page.title }}</h1>
+        <table class="table table-striped">
+            <colgroup>
+                <col width="150px">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td align="right">Date</td>
+                    <td>{{ te_date_parts[0] }}-{{ te_date_parts[1] }}-{{ te_date_parts[2] }}</td>
+                </tr>
+                <tr>
+                    <td align="right">Author(s)</td>
+                    <td>
+                        {% capture contributors %}{% for contributor in page.contributors %}, {{contributors[contributor].name | default: contributor }}{% endfor %}{% endcapture %}
+                        {{ contributors | remove_first: ', ' }}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">Instructors(s)</td>
+                    <td>
+                        {% capture instructors %}{% for instructor in page.instructors %}, {{contributors[instructor].name | default: instructor }}{% endfor %}{% endcapture %}
+                        {{ instructors | remove_first: ', ' }}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">Audience</td>
+                    <td>
+                        {{ page.audience }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
         {{ content }}
-
-        <h2>Authors</h2>
-        {% if page.contributors %}
-        <ul>
-            {% for contributor in page.contributors %}
-            <li>{{ contributors[contributor].name }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
 
         {% if topic.name == "contributing" %}
         <blockquote class="agenda">
