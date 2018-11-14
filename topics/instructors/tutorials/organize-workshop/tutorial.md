@@ -143,6 +143,7 @@ These recommendations are highly inspired from the one by [The Carpentries](http
 18. Name badges for the instructors, usually with a different colour border so attendees can identify people who can help them with any issues they encounter.
 19. Name badges for attendees are important for participants as well. At busy venues it can help attendees to find each other and remember each others' names.
 20. Ensure that your catering service will label the food for contents (e.g. for vegetarian/vegan/allergens like gluten, etc.) This is extremely important for attendees to be able to enjoy themselves and find food that will not hurt them.
+21. Identify places you can promote your event [Galaxy Hub](https://github.com/galaxyproject/galaxy-hub) is the primary place to do this. You should do this 3-6 months in advance of your event (if you can)
 
 ## During the workshop
 
