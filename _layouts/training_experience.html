@@ -66,8 +66,8 @@ layout: base
                 <tr>
                     <td align="right">Author(s)</td>
                     <td>
-                        {% capture contributors %}{% for contributor in page.contributors %}, {{contributors[contributor].name | default: contributor }}{% endfor %}{% endcapture %}
-                        {{ contributors | remove_first: ', ' }}
+                        {% capture contributor_names %}{% for contributor in page.contributors %}, {{contributors[contributor].name | default: contributor }}{% endfor %}{% endcapture %}
+                        {{ contributor_names | remove_first: ', ' }}
                     </td>
                 </tr>
                 <tr>
