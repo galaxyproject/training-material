@@ -46,34 +46,32 @@ We will look at the first run SRR034310 out of seven which includes 16 samples f
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this RAD-seq exercise. If you are not inspired, you can name it "STACKS RAD: population genomics with reference genome" for example...
+>    {% include snippets/create_new_history.md %}
+>
 > 2. **Upload Reads from SRA** {% icon tool %}: Run `EBI SRA`
 >    - Select the Run from the results of the search for `SRR034310` (which will present you 1 Experiment (SRX015877) and 1 Run (SRR034310)).
 >    - Click the link in the column **FASTQ files (Galaxy)** of the results table
 >    - This will redirect to the Galaxy website and start the download.
+>
 > 3. Upload remaining training data from Zenodo:
->    - Open the Galaxy Upload Manager
->    - Select **Paste/Fetch Data**
->    - Paste the following links into the text field
 >    ```
 >    https://zenodo.org/record/1134547/files/Barcode_SRR034310.txt
 >    https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
 >    https://zenodo.org/record/1134547/files/Reference_genome_11_chromosomes.fasta
 >    ```
+>    {% include snippets/import_via_link.md %}
 >
->    > ### {% icon comment %} Comments
->    > If you are using the [GenOuest Galaxy instance](https://galaxy.genouest.org), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> '1 Galaxy teaching folder' <i class="fa fa-long-arrow-right"></i> 'EnginesOn' <i class="fa fa-long-arrow-right"></i> 'RADseq' <i class="fa fa-long-arrow-right"></i> 'Stickelback population genomics' <i class="fa fa-long-arrow-right"></i> 'SRR034310'
->    {: .comment}
+> 4. Make sure the fastq.gz files you imported are of datatype `fastqsanger.gz`
 >
->    > ### {% icon tip %} Tip: Changing the file type `fastq.gz` to `fastqsanger.gz` once the data file is in your history.
->    > As we know here that the datatype is fastqsanger, we can directly change it through the upcoming method. Normally, you need to execute FastQGroomer to be sure to have a correct fastqsanger file format. And if you don't know how your quality score is encoded on raw fastQ files, please, use the FastQC tool to determine it!
->    >
->    > * Click on the pencil button displayed in your dataset in the history
->    > * Choose **Datatype** on the top
->    > * Select `fastqsanger.gz`
->    > * Press **Save**
->    {: .tip}
+>    {% include snippets/change_datatype.md datatype="fastqsanger.gz" %}
 >
->    As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.
+>    We need to tell Galaxy about the reference genome associated with this.
+>
+> 5. First, we define a custom reference build
+>
+> 6. Set the dbkey of our imported fastq files to our custom build key
+>
+>    {% include snippets/change_dbkey.md %}
 >
 >    > ### {% icon comment %} Comments
 >    > - Add the "stickleback" custom build from the Fasta reference genome file from the User/custom builds menu
@@ -86,18 +84,18 @@ The sequences are raw sequences from the sequencing machine, without any pretrea
 
 ## Demultiplexing reads
 
-For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3journal.org/content/1/3/171.full) .
+For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3journal.org/content/1/3/171.full).
 
 > ### {% icon hands_on %} Hands-on: Demultiplexing reads
 >
-> 1. **Process Radtags** {% icon tool %}: Run `Stacks: process radtags` on FastQ file to demultiplex the reads
->  - Single-end or paired-end reads files: Single-end files
->  - singles-end reads infile(s): SRR034310.fastq(.gz)
->  - Barcode file: Barcodes_SRR034310.tabular
->  - Number of enzymes: One
->  - Enzyme: sbfI
->  - Capture discarded reads to a file: Yes
->  - Output format: fastq
+> 1. **Process Radtags** {% icon tool %} with the following parameters:
+>    - *"Single-end or paired-end reads files: `Single-end files`
+>    - *"singles-end reads infile(s)"*: `SRR034310.fastq(.gz)`
+>    - *"Barcode file"*: `Barcodes_SRR034310.tabular`
+>    - *"Number of enzymes"*: `One`
+>    - *"Enzyme"*: `sbfI`
+>    - *"Capture discarded reads to a file"*: `Yes`
+>    - *"Output format"*: `fastq`
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -179,7 +177,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    > {: .solution }
 >    {: .question}
 >
-> 2. **MultiQC** {% icon tool %}: Run MultiQC on FastQC results to better see quality information over samples. 
+> 2. **MultiQC** {% icon tool %}: Run MultiQC on FastQC results to better see quality information over samples.
 {: .hands_on}
 
 ![MultiQC output](../../images/RAD4_Population_Genomics/multiqc.PNG)
@@ -188,7 +186,7 @@ Note the quality drop at bases 5-10 which are the cut site of the RADSeq
 protocol (TGCAGG). This is caused by the extremely uneven distribution the
 sequencer observes TGCAGG in lockstep on all spots/clusters, i.e. all clusters
 light up at the same time. Therefore the sequencer can not be sure that each
-spot/cluster is correct which is expressed by the lower quality score. Usually, to reduce this problem, 
+spot/cluster is correct which is expressed by the lower quality score. Usually, to reduce this problem,
 PhiX is added, OR, as it is the case here, samples with heterogeneous barcodes lengths are mixed.
 Still, approximately ~99% of the cases match nucleotide expected for the cut
 site sequence.
@@ -217,7 +215,7 @@ Here we will use BWA. BWA is a fast light-weighted tool that aligns relatively s
 > - Will you select a reference genome from your history or use a built-in index?: Use a genome from history and build index
 > - Use the following dataset as the reference sequence: Reference_genome_11_chromosomes.fasta
 > - Select input type: Single Fastq
-> - Select fastq dataset: One dataset collection containing the demultiplexed reads obtained with Process Radtag execution made with a quality score of 10 and with the `Discard reads with low quality scores` parameter set to Yes (so containing 7373160 retained reads).  
+> - Select fastq dataset: One dataset collection containing the demultiplexed reads obtained with Process Radtag execution made with a quality score of 10 and with the `Discard reads with low quality scores` parameter set to Yes (so containing 7373160 retained reads).
 > - Leave everything else
 {: .hands_on}
 
