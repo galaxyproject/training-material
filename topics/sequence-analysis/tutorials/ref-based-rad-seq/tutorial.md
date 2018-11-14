@@ -89,7 +89,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 > ### {% icon hands_on %} Hands-on: Demultiplexing reads
 >
 > 1. **Process Radtags** {% icon tool %} with the following parameters:
->    - *"Single-end or paired-end reads files: `Single-end files`
+>    - *"Single-end or paired-end reads files:*" `Single-end files`
 >    - *"singles-end reads infile(s)"*: `SRR034310.fastq(.gz)`
 >    - *"Barcode file"*: `Barcodes_SRR034310.tabular`
 >    - *"Number of enzymes"*: `One`
@@ -116,11 +116,16 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >    > {: .solution}
 >    {: .question}
 >
-> 2. **Process Radtags** {% icon tool %}: Re-Run `Stacks: process radtags` on FastQ file playing with parameters
+> 2. **Process Radtags** {% icon tool %}: Re-Run playing with parameters
+>    - Section **Advanced**
+>      - *"Discard reads with low quality scores"*: `Yes`
+>      - *"score limit"*: `20` (for example; play with this)
+>      - *"Set the size of the sliding window as a fraction of the read length, between 0 and 1"*: `0.30` (for example; play with this)
 >
-> In `advanced options`, after activation of the `Discard reads with low quality scores` option, play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
+> This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
 >
 {: .hands_on}
+
 
 > ### {% icon hands_on %} Hands-on
 >
@@ -165,9 +170,9 @@ We propose to continue the tutorial using the dataset collection containing the 
 For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.baseurl}}/topics/sequence-analysis/tutorials/quality-control/tutorial.html): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 
 > ### {% icon hands_on %} Hands-on: Quality control
->
-> 1. **FastQC** {% icon tool %}: Run FastQC on FastQ files to control the quality of the reads. Warning! Don't forget you are working on data collections....
->
+> 1. **FastQC** {% icon tool %} to check the quality of the reads:
+>    - {% icon param-collection %} *"Short read data from your current history"*: the fastq files (collection)
+
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. What is the read length?
@@ -177,7 +182,9 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    > {: .solution }
 >    {: .question}
 >
-> 2. **MultiQC** {% icon tool %}: Run MultiQC on FastQC results to better see quality information over samples.
+> 2. **MultiQC** {% icon tool %} with the following parameters:
+>    - *"Which tool was used generate logs?"*: `FastQC`
+>    -
 {: .hands_on}
 
 ![MultiQC output](../../images/RAD4_Population_Genomics/multiqc.PNG)
