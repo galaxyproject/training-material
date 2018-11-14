@@ -26,6 +26,13 @@ Species Distribution Modeling (SDM) can help understand the distribution of a sp
 
 The goal of this tutorial is to model a theorical ecological niche and predict species distribution in a future climate scneario by using SDM with the Wallace interactive environment on Galaxy. We'll use the data occurrences of US *Chrysemys picta* ([Painted turtle](https://en.wikipedia.org/wiki/Painted_turtle)) from the North America region.
 
+> ### Agenda
+> In this tutorial, we will cover:
+1. Loading a dataset
+> {:Loading a dataset}
+2. Using the well-known SDM Wallace Shiny app
+> {:Using Wallace}
+
 # Step 1: Loading a dataset
 
 In this study the datasets are all imported from the tool `Get species occurrences data and taxref informations` in Galaxy-E. With this tool, data are available from differents databanks like [GBIF](https://www.gbif.org/), [bison](https://www.gbif.org/), [iNaturalist](https://www.inaturalist.org/) and others.
