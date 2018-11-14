@@ -34,10 +34,10 @@ contributors:
 
 ## Using the Training Material
 
-1. Decide, individually or together, if you will:
+1. Decide (individually or together) if you will:
 
-   a. Run through the tutorial with them step by step, waiting for everyone at each step
-   b. OR allow trainees to follow along at their own pace
+     1. Run through the tutorial with them step by step, waiting for everyone at each step
+     2. OR allow trainees to follow along at their own pace
 
    Each of these options has pros and cons:
 
@@ -81,7 +81,7 @@ Not everyone is always outwardly enthusiastic about the course for any number of
 ## Before the workshop
 
 1. Read the [teaching recommendations](https://carpentries.github.io/instructor-training/22-practices/) of Software Carpentry
-2. Read the [organiser recommendations]({{ site.baseurl }}/topics/instructors/tutorials/organize-workshop/) and see if there is anything you can help with
+2. Read the [organiser recommendations]({{ site.baseurl }}/topics/instructors/tutorials/organize-workshop/tutorial.html) and see if there is anything you can help with
 2. Decide on the order of the lessons and who will teach what with the organizers
 3. Assist the host in recruiting helpers (people to walk around the classroom and help people if they get stuck)
 4. Assist the host in ensuring the workshop location is accessible and everything is ready for the students

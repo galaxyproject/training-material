@@ -76,7 +76,6 @@ These recommendations are highly inspired from the one by [The Carpentries](http
     - Lactation space is provided
 
 5. Create a registration form
-
     1. Decide if there will be a workshop fee
 
       Even a small fee can greatly reduce the no-show rate.
@@ -86,10 +85,10 @@ These recommendations are highly inspired from the one by [The Carpentries](http
       Example of regular questions
 
     3. If there are social events planned, ask if students will participate in them
-
 6. Create a small webpage with all the information about the workshop
 
     Ideally, such a page should include:
+
     1. General presentation
     2. Registration information
     2. Schedule with topics, presenters and helpers, start / end, links to material (latter) for each day
@@ -100,21 +99,16 @@ These recommendations are highly inspired from the one by [The Carpentries](http
     4. Organizers
 
     It can be easily done on the [Galaxy Community Hub](https://galaxyproject.org/) or [European Galaxy](https://github.com/usegalaxy-eu/website/) website, depending on the audience
-
 7. Advertise your workshop on the Galaxy Hub and usegalaxy.\*
 
     PR / Issue template for training events?
 
 8. Prepare for visiting instructors
-
    - Make travel arrangements for them or communicate the reimbursement process
    - Make accommodation arrangements for them or maybe point out some common choices using your local knowledge
    - If you will give instructors a thank-you gift, find something that is inclusive regardless of their background (so wine / chocolate / food are bad choices.)
-
 9. Collect emergency contact information for instructors in case of last minute changes
-
 10. Arrange required materials and equipment
-
     - Power outlets for all participants
 
       This may include setting up extension cords or power strips
@@ -124,13 +118,10 @@ These recommendations are highly inspired from the one by [The Carpentries](http
     - Extra pens and paper in case people want to take notes by hand
     - Sign in sheets
     - Pens for black/white board
-
 11. Arrange for beverages, snacks, and meals
-
     - We all learn better with fuel!
     - Catering can be expensive. If you choose to have participants find their own lunch, then you should add nearby lunch location ideas to the workshop webpage
     - If your workshop is a multi-day workshop, you should include dinner options on the workshop webpage
-
 12. Test the projector with a different computers
 13. Contact participants to remind them of workshop webpage where you have written location/directions, start/end times, and contact information
 14. Contact instructors and help to remind them of workshop webpage
@@ -155,18 +146,14 @@ These recommendations are highly inspired from the one by [The Carpentries](http
 ### After it begins
 
 1. Introduce the workshop
-
     1. Explain the emergency plan
     2. Explain the schedule
     4. Organize a icebreaker (bingo sheet, for example) and ask for the data needs
 
         Everything is about networking!
-
 2. Remind them of the resources on the webpage
-
     1. The schedule
     2. Point out the lunch options
-
 3. Periodically check in on the class to be sure things are running smoothly
 
 
@@ -178,15 +165,11 @@ These recommendations are highly inspired from the one by [The Carpentries](http
 ### In the evenings
 
 1. Before they leave in the evening, recap what was learned that day, just the highlights
-
 2. Sometime later in the evening, contact the participants to remind them:
-
   - it's happening
   - what the schedule is
   - what's going on the next day
-
 3. Prepare the recap slides for the next morning, if they do not exist already
-
 4. Update the workshop webpage with links to each training material that was presented that day
 
 
@@ -199,10 +182,8 @@ These recommendations are highly inspired from the one by [The Carpentries](http
 1. Collect workshop attendance
 2. Reimburse the instructors, thank them for their participation
 3. Collect feedback form and discuss the results with the instructors
-
    - Ask what went right? What went wrong?
    - This is a good opportunity to identify things that are missing from this list
-
 4. Contact the participants with the links to the materials
 
 # Conclusion
