@@ -10,7 +10,7 @@ objectives:
   - "Link a tutorial to a topic"
   - "Create hands-on"
   - "Add technical support for a tutorial"
-time_estimation: "15min"
+time_estimation: "15m"
 key_points:
   - "Finding good training datasets is hard!"
   - "Creating a new tutorial involves several steps: some are mandatory, some can be skipped even if they are recommended"
@@ -248,9 +248,9 @@ For the next times, you can make it quicker.
 > 2. Create your workflow on a running Galaxy instance
 > 3. Create a Zenodo record with the input data
 > 4. Generate the skeleton of your tutorial
->
->    ```
->    $ planemo training_init \
+>    - option 1: from a workflow located on a Galaxy
+>      ```
+>      $ planemo training_init \
 >             --topic_name "my-topic" \
 >             --tutorial_name "my-new-tutorial" \
 >             --tutorial_title "Title of the tutorial" \
@@ -258,7 +258,19 @@ For the next times, you can make it quicker.
 >             --galaxy_api_key "Your API key on the Galaxy instance" \
 >             --workflow_id "ID of the workflow on the Galaxy instance" \
 >             --zenodo_link "URL to the Zenodo record"
->    ```
+>      ```
+>    - option 2: from a local workflow file (`.ga`)
+>
+>      ```
+>      $ planemo training_init \
+>             --topic_name "my-topic" \
+>             --tutorial_name "my-new-tutorial" \
+>             --tutorial_title "Title of the tutorial" \
+>             --workflow "path/to/workflow" \
+>             --zenodo_link "URL to the Zenodo record"
+>      ```
+>      You can use the example workflow file located in `topics/contributing/tutorials/create-new-tutorial/workflows/example-workflow.ga` if
+>      you do not have a workflow of your own. This is the workflow belonging to the *Galaxy 101* introduction tutorial.
 >
 > 5. Fill the remaining metadata in the `tutorial.md`
 > 6. Fill the content of the `tutorial.md`

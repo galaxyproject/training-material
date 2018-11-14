@@ -35,14 +35,14 @@ create-env: ## create conda environment
 	else \
 	    ${CONDA} env create -f environment.yml; \
 	fi
-.PHONY: create-env	
+.PHONY: create-env
 
 ACTIVATE_ENV=. $(dir ${CONDA})activate galaxy_training_material
 
 install: clean ## install dependencies
 	( $(ACTIVATE_ENV) && \
 	  npm install decktape && \
-	  gem install awesome_bot bundler html-proofer jekyll jekyll-feed pkg-config:'~> 1.1' && \
+	  gem install jekyll-environment-variables awesome_bot bundler html-proofer jekyll jekyll-feed pkg-config:'~> 1.1' && \
 	  gem install nokogiri:'1.8.2' -- --use-system-libraries --with-xml=$(CONDA_PREFIX)/lib \
 	)
 .PHONY: install
@@ -53,7 +53,7 @@ serve: ## run a local server}
 	)
 .PHONY: serve
 
-detached-serve: clean ## run a local server in detached mode
+detached-serve: install ## run a local server in detached mode
 	( $(ACTIVATE_ENV) && \
 	  ${JEKYLL} serve --strict_front_matter --detach -d _site/training-material \
 	)
@@ -64,6 +64,13 @@ build: clean ## build files but do not run a server
 	  ${JEKYLL} build --strict_front_matter -d _site/training-material \
 	)
 .PHONY: build
+
+check-frontmatter: build ## Validate the frontmatter
+	( $(ACTIVATE_ENV) && \
+	  find topics/ -name tutorial.md -or -name slides.html -or -name metadata.yaml | \
+	    xargs -n1 ruby bin/validate-frontmatter.rb \
+	)
+.PHONY: check-frontmatter
 
 check-html: build ## validate HTML
 	( $(ACTIVATE_ENV) && \
@@ -77,6 +84,20 @@ check-html: build ## validate HTML
 	      ./_site \
 	)
 .PHONY: check-html
+
+check-html-internal: build ## validate HTML (internal links only)
+	( $(ACTIVATE_ENV) && \
+	  htmlproofer \
+	      --assume-extension \
+	      --http-status-ignore 405,503,999 \
+	      --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
+	      --url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
+	      --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
+	      --disable-external \
+	      --allow-hash-href \
+	      ./_site \
+	)
+.PHONY: check-html-internal
 
 check-slides: build  ## check the markdown-formatted links in slides
 	( $(ACTIVATE_ENV) && \
@@ -94,7 +115,8 @@ check-slides: build  ## check the markdown-formatted links in slides
 
 check-yaml: ## lint yaml files
 	( $(ACTIVATE_ENV) && \
-	  find . -path "**/*.yaml" | xargs -L 1 -I '{}' sh -c "yamllint {}" \
+	  find . -name "*.yaml" | xargs -L 1 -I '{}' sh -c "yamllint {}" \
+	  find topics -name '*.yml' | xargs -L 1 -I '{}' sh -c "yamllint {}" \
 	)
 .PHONY: check-yaml
 

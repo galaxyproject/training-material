@@ -5,7 +5,10 @@ title: "Data source integration"
 enable: "false"
 questions:
 objectives:
-time_estimation: "1h/1d"
+time_estimation: "10M"
+contributors:
+ - bebatut
+ - shiltemann
 key_points:
 ---
 
