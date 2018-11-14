@@ -91,7 +91,7 @@ As for any NGS data analysis, ChIP-seq data must be quality controlled before be
 >
 >    ![data](../../images/data_uploaded.png "Imported datasets will appear in the history panel.")
 >
-> 3. Examine in Galaxy the data in a FASTQ file by clicking on the eye icon.
+> 3. Examine in Galaxy the data in a FASTQ file by clicking on the {% icon galaxy-eye %} (eye) icon.
 >
 >    > ### {% icon question %} Questions
 >    >

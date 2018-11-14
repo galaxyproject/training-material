@@ -7,10 +7,9 @@ tags:
   - prokaryote
 questions:
 objectives:
-time_estimation: "1h/1d"
+time_estimation: "2H"
 key_points:
 contributors:
-  - joachimwolff
   - erxleben
   - bgruening
 ---
