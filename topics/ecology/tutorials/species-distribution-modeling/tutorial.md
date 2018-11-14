@@ -37,40 +37,35 @@ The goal of this tutorial is to model a theorical ecological niche and predict s
 
 In this study the datasets are all imported from the tool `Get species occurrences data and taxref informations` in Galaxy-E. With this tool, data are available from differents databanks like [GBIF](https://www.gbif.org/), [bison](https://www.gbif.org/), [iNaturalist](https://www.inaturalist.org/) and others.
 
->    > ### {% icon tip %} Tip: Importing data set from a data bank
+> ### {% icon tip %} Tip: Importing data set from a data bank
 
->    > * Go into the "upload files" tool section (top left panel) then select the "Get species occurrences data and taxref informations" tool
->    > * Fill the "Scientific name" with `Chrysemys picta`
->    > * Choose the data source `gbif` and set the number of occurrences on `10000`
->    > * Set "Get species information from taxref database" to "No"
->    > * Click on "Execute"
+> * Go into the "upload files" tool section (top left panel) then select the "Get species occurrences data and taxref informations" tool
+> * Fill the "Scientific name" with `Chrysemys picta`
+> * Choose the data source `gbif` and set the number of occurrences on `10000`
+> * Set "Get species information from taxref database" to "No"
+> * Click on "Execute"
 
 You should now have a file with about `9562` occurrences.
 
 Because you only need informations about occurrences and their location:
-> use the tool `Couper des colonnes d'un jeu de données tabulé`
-> then in "Couper les colonnes" type `c1,c2,c3,c44`
+> ### {% icon hands_on %} Hands-on: 
+> use the tool `Couper des colonnes d'un jeu de données tabulé/Cut columns from a tabular file`
+> then in "Couper les colonnes/Cut columns" type `c1,c2,c3,c44`
 
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. For what stand c1, c2, c3, c44 ?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>c1 is the species name and c2 &c3 are respectively longitude an latitude corresponding to each occurrences of the file. The fourth column contain country code to have a possibility to easily filter occurences by countries.</li>
->    >    </ol>
->    >    </details>
+>    > ### {% icon solution %} Solution
+>    > 1. c1 is the species name and c2 &c3 are respectively longitude an latitude corresponding to each occurrences of the file. The fourth column contain country code to have a possibility to easily filter occurences by countries.
+>    {: .solution }
 >    {: .question}
-
+{: .hands_on}
 Then, as we want to keep only occurence records from US, we will use a tool to filter the data based on the fourth column. Can you find a way to do that alone?
 
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>Using the "Filtrer des données sur une colonne en utilisant des expressions simples", you can enter the following condition ```c4=='US'```. You should specify the following field as 1 in order to skip the first line (it is a header line).</li>
->    >    </ol>
->    >    </details>
+>    > ### {% icon solution %} Solution
+>    > 1. Using the "Filtrer des données sur une colonne en utilisant des expressions simples", you can enter the following condition ```c4=='US'```. You should specify the following field as 1 in order to skip the first line (it is a header line).</li>
+>    > {: .solution }
 >    {: .question}
 
 Finally, use the tool `Tabular to CSV` (use the default options) on this new file to convert it to a format suitable for further processing with Wallace.
@@ -81,11 +76,13 @@ Finally, use the tool `Tabular to CSV` (use the default options) on this new fil
 
 ## Obtain occurrence data
 
-With this you can either upload file you've loaded earlier from Galaxy-E data or you can download data directly from Wallace. Let's use the data from your Galaxy history:
+With this you can either upload file you've loaded earlier from Galaxy data or you can download data directly from Wallace. Let's use the data from your Galaxy history:
 
-> 1. Upload data from Galaxy-E
+> ### {% icon hands_on %} Hands-on: 
+> 1. Upload data from Galaxy
 >    > * Check `Galaxy History User`
 >    > * Select the correct csv file with your *Chrysemys Picta* occurrences informations
+{: .hands_on}
 
 You now have your occurence records on Wallace!
 
@@ -93,12 +90,9 @@ You now have your occurence records on Wallace!
 >    >
 >    > 1. One point appears near the African continent. Can you propose a reason ? Is this an error? Which ID is it?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>It's likely an error where the coordinates were not filled. It proprely have a country code and an ID: 6783.</li>
->    >    </ol>
->    >    </details>
+>    > ### {% icon solution %} Solutionpe="1">
+>    >    1. It's likely an error where the coordinates were not filled. It proprely have a country code and an ID: 6783.</li>
+>    >    {: .solution }
 >    {: .question}
 
 
