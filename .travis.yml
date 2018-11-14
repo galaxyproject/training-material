@@ -78,5 +78,8 @@ after_success:
   - |
     if [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_BRANCH" == "master" -a "$CHECK" == "site-build" ]
     then
+      # update badges and instances and rebuild
+      make annotate
+      make build
       bin/publish
     fi
