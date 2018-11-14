@@ -42,7 +42,7 @@ ACTIVATE_ENV=. $(dir ${CONDA})activate galaxy_training_material
 install: clean ## install dependencies
 	( $(ACTIVATE_ENV) && \
 	  npm install decktape && \
-	  gem install awesome_bot bundler html-proofer jekyll jekyll-feed pkg-config:'~> 1.1' && \
+	  gem install jekyll-environment-variables awesome_bot bundler html-proofer jekyll jekyll-feed pkg-config:'~> 1.1' && \
 	  gem install nokogiri:'1.8.2' -- --use-system-libraries --with-xml=$(CONDA_PREFIX)/lib \
 	)
 .PHONY: install
@@ -53,7 +53,7 @@ serve: ## run a local server}
 	)
 .PHONY: serve
 
-detached-serve: clean ## run a local server in detached mode
+detached-serve: install ## run a local server in detached mode
 	( $(ACTIVATE_ENV) && \
 	  ${JEKYLL} serve --strict_front_matter --detach -d _site/training-material \
 	)
@@ -67,7 +67,7 @@ build: clean ## build files but do not run a server
 
 check-frontmatter: build ## Validate the frontmatter
 	( $(ACTIVATE_ENV) && \
-	  find topics/ -name tutorial.md -or -name slides.html | \
+	  find topics/ -name tutorial.md -or -name slides.html -or -name metadata.yaml | \
 	    xargs -n1 ruby bin/validate-frontmatter.rb \
 	)
 .PHONY: check-frontmatter
