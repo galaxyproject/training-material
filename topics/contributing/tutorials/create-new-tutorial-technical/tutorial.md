@@ -140,7 +140,7 @@ items:
 >    $ planemo training_fill_data_library \
 >             --topic_name "my-topic" \
 >             --tutorial_name "my-new-tutorial" \
->             --zenodo_link "URL to the Zenodo record" 
+>             --zenodo_link "URL to the Zenodo record"
 >    ```
 >
 > 3. Check that the `data-library.yaml` has been generated (or updated)
@@ -177,7 +177,7 @@ It is a great way to help users run the tutorial directly inside Galaxy. To lear
 
 # Testing the technical infrastructure
 
-Once we have defined all the requirements for running the tutorial, we can test these requirements, either in a locally running Galaxy or in a Docker container. Please see our tutorial about [Setting up Galaxy for Training]({{site.baseurl}}/topics/contributing/tutorials/setup-galaxy-for-training/tutorial.html) about how to test your tutorial requirements.
+Once we have defined all the requirements for running the tutorial, we can test these requirements, either in a locally running Galaxy or in a Docker container. Please see our tutorial about [Setting up Galaxy for Training]({{site.baseurl}}/topics/instructors/tutorials/setup-galaxy-for-training/tutorial.html) about how to test your tutorial requirements.
 
 
 # Conclusion
