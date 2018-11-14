@@ -140,7 +140,9 @@ These recommendations are highly inspired from the one by [The Carpentries](http
 
     In one case the training material was taught in English, but the computers were in German. Some participants could not find the "Copy link location" that was mentioned in the tutorial. If you have sections that instruct users to do things like this, make sure to check how they will see it!
 
-18. Arrange name badges for the instructors. These can help participants remember the instructor names when they talk to them.
+18. Name badges for the instructors, usually with a different colour border so attendees can identify people who can help them with any issues they encounter.
+19. Name badges for attendees are important for participants as well. At busy venues it can help attendees to find each other and remember each others' names.
+20. Ensure that your catering service will label the food for contents (e.g. for vegetarian/vegan/allergens like gluten, etc.) This is extremely important for attendees to be able to enjoy themselves and find food that will not hurt them.
 
 ## During the workshop
 
