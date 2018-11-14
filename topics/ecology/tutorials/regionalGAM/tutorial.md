@@ -66,7 +66,7 @@ After uploading input files, you might have to use some data handling tools to b
 
 > ### {% icon comment %} Comment
 >
-> ⚠️ <a name="inputdatawarning"></a>Please note that the file must contain a header corresponding to: ```"SITES","SPECIES","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
+> {% icon warning %} <a name="inputdatawarning"></a>Please note that the file must contain a header corresponding to: ```"SITES","SPECIES","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
 
 > {: .comment}
 
@@ -110,7 +110,7 @@ The second step of any Regional GAM data analysis is making sure to have a datas
 
 > ### {% icon comment %} Comment
 
-❗In case the dataset contains informations one more than on species, you can follow the multispecies tutorial on regionalGAM which is a complement to this one from the second step. If you are interested in doing so, please click on the following link: [Selectionning one specific species](Multispecies_tutorial.md#selectionningonespecificspecies)
+{% icon keypoint %} In case the dataset contains informations one more than on species, you can follow the multispecies tutorial on regionalGAM which is a complement to this one from the second step. If you are interested in doing so, please click on the following link: [Selectionning one specific species](Multispecies_tutorial.md#selectionningonespecificspecies)
 
 {: .hands_on}
 
@@ -152,7 +152,7 @@ This step will allow you to compute and display the phenology of a species. In t
 >
 > ### {% icon comment %} Comments
 >
-> ⚠️ Please note, that if you want your chart to be more precise and to specify that the x-axis corresponds to "Week and year", it is possible. In order to do so, follow the tip below:
+> {% icon warning %} Please note, that if you want your chart to be more precise and to specify that the x-axis corresponds to "Week and year", it is possible. In order to do so, follow the tip below:
 >    > ### {% icon tip %} Tip: Creating a new column of the dataset containing the week and the year 
 First of all, you have to know how many years are taken into account in your dataset.
 >    > 1. Search for the tool `Count occurrences of each record` with the following parameters 
@@ -198,7 +198,7 @@ With the `output` from **Remove beginning of a file** you can now generate a new
 ![Phenology chart](Images/Pyronia%20tithonus%20phenology%20explicit%20ID.png "This shows the occurrence of Pyronia tithonus")
 >
 >
-> ⚠️ Please note, that if you want to create a "stacked" visualization, overlapping each year, you can use several executions (one execution by year) of the `Filter data on any column using simple expressions` tool specifying the year you want on the `With following condition` parameter, `c2==2003` for 2003, then `c2==2004` for 2004, etc... then you can paste all resulting files side by side using one or several executions of the `Paste two files side by side` tool so you can specify on the "Select Data" tab of visualization, several Data series (one by year). ❗WARNING❗ The use of this `Paste two files side by side` tool must be done carefully as in case of differences in term of number of lines between datasets to paste, it will mix informations from columns. Here, as we are working on temporal series over years, and as some years have 365 days, others 366, and as in this case, phenology is not centered on winter, we can delete informations from the 366 days of some years without any problems so we will have the same number of lines between datasets to paste side by side. To do so, use the `Select first lines from a dataset` tool to select first 366 lines from filtered datasets. As it will be of interest to reuse this combination of tools in a next tutorial step, you can create a workflow that you can named something like `Phenology "stacked" visualization creation`.
+> {% icon warning %} Please note, that if you want to create a "stacked" visualization, overlapping each year, you can use several executions (one execution by year) of the `Filter data on any column using simple expressions` tool specifying the year you want on the `With following condition` parameter, `c2==2003` for 2003, then `c2==2004` for 2004, etc... then you can paste all resulting files side by side using one or several executions of the `Paste two files side by side` tool so you can specify on the "Select Data" tab of visualization, several Data series (one by year). ❗WARNING❗ The use of this `Paste two files side by side` tool must be done carefully as in case of differences in term of number of lines between datasets to paste, it will mix informations from columns. Here, as we are working on temporal series over years, and as some years have 365 days, others 366, and as in this case, phenology is not centered on winter, we can delete informations from the 366 days of some years without any problems so we will have the same number of lines between datasets to paste side by side. To do so, use the `Select first lines from a dataset` tool to select first 366 lines from filtered datasets. As it will be of interest to reuse this combination of tools in a next tutorial step, you can create a workflow that you can named something like `Phenology "stacked" visualization creation`.
 >
 
 With the `output` from **Remove beginning of a file** you can now generate a new 'stacked' chart which will have a x-axis corresponding to your column `"week"`.
@@ -290,7 +290,7 @@ This will allow you to create a file showing the abundance index per year of a c
 > * "Flight curve output": `output` from **flight curve**.
 
 
-> 🔹 Based on the  output from **abundance index**, we can create a chart showing the annual abundance trend of a certain species per site. 
+>  Based on the  output from **abundance index**, we can create a chart showing the annual abundance trend of a certain species per site. 
 >    > 1. Select `Charts`
 >    > 2. Give it a proper name (`Pyronia tithonus abundance index ` for example)
 >    > 3. Select a visualization type: "Bar diagram (NVD 3)" 
@@ -315,7 +315,7 @@ This will allow you to create a file showing the abundance index per year of a c
 >    >    </ol>
 >    >    </details>
 >    {: .question}
-> 🔹 If you choose to create a new column of more explicit identifiers (`Site-Year`), we can now display a better chart showing the annual abundance trend of a certain species per site. 
+>  If you choose to create a new column of more explicit identifiers (`Site-Year`), we can now display a better chart showing the annual abundance trend of a certain species per site. 
 >    > 1. Select `Charts` from the **Sort data in ascending or descending order** execution
 >    > 2. Select a visualization type: "Bar diagram (NVD 3)" 
 >    > 3. Give it a proper name (`Pyronia tithonus abundance index` for example)
@@ -332,7 +332,7 @@ This will allow you to create a file showing the abundance index per year of a c
 ![Abundance index chart](Images/Pyronia%20tithonus%20Abundance%20index%20explicit%20ID.png "This shows the occurrence of Pyronia tithonus")
 
 
-> 🔹 If you choose to create a stacked visualization, we can now display a better chart showing the annual abundance trend of a certain species per site. 
+>  If you choose to create a stacked visualization, we can now display a better chart showing the annual abundance trend of a certain species per site. 
 >    > 1. Select `Charts` from the last execution of **Remove beginning of a file**
 >    > 2. Select a visualization type: "Bar diagram (NVD 3)" 
 >    > 3. Give it a proper name (`Pyronia tithonus abundance index` for example)
@@ -386,7 +386,7 @@ The expected temporal trend allows you to have an overview of the evolution of a
 >    
 ![Expected temporal trend](Images/Expected%20temporal%20trend.png "This shows the expected evolution of Abundance")
 
-> ⚠️ Please note that sometimes the expected temporal trend can't be done on dataset. If you want this action to work, the occurences on your dataset must lie between the month of April and the end of the month of September.
+> {% icon warning %} Please note that sometimes the expected temporal trend can't be done on dataset. If you want this action to work, the occurences on your dataset must lie between the month of April and the end of the month of September.
 
 Note also that you will obtain two files resulting of the action above. The first one will be the graph and the second one will contains the values of "x".
 
