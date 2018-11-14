@@ -1,7 +1,15 @@
 ---
 layout: tutorial_hands_on
-topic_name: galaxy-data-manipulation
-tutorial_name: processing-many-samples-at-once
+
+title: "Collections: Multisample Analysis"
+zenodo_link: ""
+questions:
+objectives:
+time_estimation: "1h"
+key_points:
+contributors:
+  - nekrut
+  - pajanne
 ---
 
 > ### Agenda
@@ -23,7 +31,7 @@ Here we will show Galaxy features designed to help with the analysis of large nu
 - you have an account in Galaxy ([see this](https://github.com/nekrut/galaxy/wiki/Galaxy101-1#01-setting-up-galaxy-account) if you don't);
 - you have your browser configured as described [here](https://github.com/nekrut/galaxy/wiki/Galaxy101-1#00-getting-your-display-sorted-out).
 
-:warning: *At this time this tutorial is using Galaxy's test server at https://test.galaxyproject.org. Once the main site is updated this tutorial will be edited.*
+{% icon warning %} *At this time this tutorial is using Galaxy's test server at https://test.galaxyproject.org. Once the main site is updated this tutorial will be edited.*
 
 ## 0. Getting data
 [Here](https://test.galaxyproject.org/u/anton/h/collections-1) is a history containing a few datasets we will be practicing with (as always with Galaxy tutorial you can upload your own data and play with it instead of the provided datasets):
@@ -173,5 +181,3 @@ From there you can import histories to make them your own.
 
 ## 6. If things don't work...
 ...you need to complain. Use [Galaxy's BioStar Channel](https://usegalaxy.org/biostar/biostar_redirect) to do this.
-
-## :clap: The End

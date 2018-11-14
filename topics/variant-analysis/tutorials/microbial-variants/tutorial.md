@@ -1,7 +1,26 @@
 ---
 layout: tutorial_hands_on
-topic_name: variant-analysis
-tutorial_name: microbial-variants
+
+title: "Microbial Variant Calling"
+zenodo_link: "https://doi.org/10.5281/zenodo.582600"
+tags:
+  - prokaryote
+questions:
+  - "How do we detect differences between a set of reads from a microorganism and a reference genome"
+objectives:
+  - "Find variants between a reference genome and a set of reads"
+  - "Visualise the SNP in context of the reads aligned to the genome"
+  - "Determine the effect of those variants on genomic features"
+  - "Understand if the SNP is potentially affecting the phenotype"
+time_estimation: "45m"
+key_points:
+  - "We used a tool called Snippy to call variants between our reads and our reference genome."
+  - "As our reference genome had annotations, we could see what effect the changes have on the features as annotated in the reference and therefore make inferences on the possible changes to the phenotype."
+  - "We used the JBrowse genome browser to visualise what these changes look like."
+contributors:
+  - annasyme
+  - slugger70
+  - tseemann
 ---
 
 # Introduction
@@ -196,7 +215,7 @@ We could go through all of the variants like this and read them out of a text ta
 >               - "Track Visibility" to `On for new users`
 {: .hands_on}
 
-A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view its contents and play with it by inspecting the `JBrowse on data XX and data XX - Complete` file (eye icon). The JBrowse window will appear in the centre Galaxy panel.
+A new dataset will be created in your history, containing the JBrowse interactive visualisation. We will now view its contents and play with it by clicking the {% icon galaxy-eye %} (eye) icon of the `JBrowse on data XX and data XX - Complete` dataset. The JBrowse window will appear in the centre Galaxy panel.
 
 > ### {% icon hands_on %} Hands-on: Inspecting the SNPs using JBrowse
 > 1. Display all the tracks and practice maneuvering around

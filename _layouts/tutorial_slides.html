@@ -3,7 +3,8 @@ layout: base_slides
 ---
 
 {% assign topic = site.data[page.topic_name] %}
-{% for tuto in topic.material %}
+{% assign topic_material = site.pages | topic_filter:page.topic_name %}
+{% for tuto in topic_material %}
     {% if tuto.name == page.tutorial_name %}
         {% assign tutorial = tuto %}
         {% assign title = tutorial.title %}
@@ -11,28 +12,32 @@ layout: base_slides
 {% endfor %}
 
 
-### :grey_question: Questions
+### {% icon question %} Questions
 
-{% for question in tutorial.questions %}
+{% for question in page.questions %}
 - {{ question }}
 {% endfor %}
 
 ---
 
-### :dart: Objectives
+{% if page.objectives %}
+### {% icon objectives %} Objectives
 
-{% for objective in tutorial.objectives %}
+{% for objective in page.objectives %}
 - {{ objective }}
 {% endfor %}
 
 ---
+{% endif %}
 
 {{ content }}
 
 ---
 
-### :grey_exclamation: Key points
+{% if page.key_points %}
+### {% icon keypoints %} Key points
 
-{% for key_point in tutorial.key_points %}
+{% for key_point in page.key_points %}
 - {{ key_point }}
 {% endfor %}
+{% endif %}

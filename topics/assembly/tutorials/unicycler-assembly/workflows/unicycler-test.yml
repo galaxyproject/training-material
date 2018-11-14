@@ -1,0 +1,16 @@
+---
+- doc: Test sample data for the unicycler assembly workflow
+  job: unicycler-job.yml
+  outputs:
+    ffn:
+      asserts:
+        has_text:
+          text: ">PROKKA_00010 chromosomal replication initiator protein DnaA; DNA-binding transcriptional dual regulator"
+    gbk:
+      asserts:
+        has_line:
+          line: '     CDS             70..1404'
+    tbl:
+      asserts:
+        has_text:
+          line: '			product	DNA polymerase III, holoenzyme'

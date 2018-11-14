@@ -1,7 +1,23 @@
 ---
 layout: tutorial_hands_on
-topic_name: assembly
-tutorial_name: debruijn-graph-assembly
+
+title: "De Bruijn Graph Assembly"
+zenodo_link: "https://doi.org/10.5281/zenodo.582600"
+questions:
+  - "What are the factors that affect genome assembly?"
+  - "How does Genome assembly work?"
+objectives:
+  - "Perform an optimised Velvet assembly with the Velvet Optimiser"
+  - "Compare this assembly with those we did in the basic tutorial"
+  - "Perform an assembly using the SPAdes assembler."
+time_estimation: "2h"
+key_points:
+  - "We learned about how the choice of k-mer size will affect assembly outcomes"
+  - "We learned about the strategies that assemblers use to make reference genomes"
+  - "We performed a number of assemblies with Velvet and SPAdes."
+  - "You should use SPAdes or another more modern assembler than Velvet for actual assemblies now."
+contributors:
+  - slugger70
 ---
 
 # Optimised de Bruijn Graph assemblies using the Velvet Optimiser and SPAdes
@@ -42,9 +58,9 @@ We will be using the same data that we used in the introductory tutorial, so if 
 >    {: .tip}
 >
 >
-> 3. Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the ![Pencil icon](../../images/edit_file.png) icon next to the relevant history entry.
+> 3. Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the {% icon galaxy-pencil %} pencil icon icon next to the relevant history entry.
 >
-> Click on the View Data button (the ![Eye icon](../../images/eye.png)) next to one of the FASTQ sequence files.
+> Click on the {% icon galaxy-eye %} (eye) icon next to one of the FASTQ sequence files.
 >
 >    > ### {% icon question %} Questions
 >    >

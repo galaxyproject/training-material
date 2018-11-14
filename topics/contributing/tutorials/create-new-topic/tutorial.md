@@ -1,7 +1,17 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: create-new-topic
+
+title: "Including a new topic"
+questions:
+  - "How to include a new topic?"
+objectives:
+  - "Create a new topic"
+  - "Set up the metadata for a topic"
+time_estimation: "30m"
+key_points:
+  - "A new topic can be easily added for new tutorials"
+contributors:
+  - bebatut
 ---
 
 # Introduction
@@ -113,19 +123,20 @@ Once the topic name has been chosen, we can create it.
 > 2. Run (by adapting the information between the quotes)
 >
 >    ```
->    $ python bin/setup_training_content.py \
+>    $ planemo training_init \
 >             --topic_name "my-favorite-topic" \
 >             --topic_title "Test" \
 >             --topic_target "use" \
 >             --topic_summary "Summary of the topic"
 >    ```
 >
-> 2. Check that a new directory has been generated in `topics`
-> 3. Make sure that Jekyll is running
+> 3. Check that a new directory has been generated in `topics`
+> 4. Check that a YAML file with your topic name has been generated in `metadata` folder
+> 5. Make sure that Jekyll is running
 >
 >    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}/topics/contributing/tutorials/running-jekyll/tutorial.html)
 >
-> 2. Check if the topic has been correctly added at [http://localhost:4000/training-material/](http://localhost:4000/training-material/)
+> 6. Check if the topic has been correctly added at [http://localhost:4000/training-material/](http://localhost:4000/training-material/)
 >
 {: .hands_on}
 
@@ -145,16 +156,12 @@ Several metadata are defined in `metadata.yaml` file in your topic folder to :
 
     If no Docker image exists for this topic, let this information empty
 
-- `material`: the list of the tutorials for the topic
-
-    To add a new tutorial, [check out our tutorial to serve the website locally]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial/tutorial.html)
-
 - `maintainers`: GitHub username of people maintaining the topic
 
-> ### {% icon hands_on %} Hands-on: Add the new topic to the website
+> ### {% icon hands_on %} Hands-on: Update the new topic to the website
 >
-> 1. Open the `metadata.yaml` file
-> 2. Play with the metadata of the topic
+> 1. Open the `metadata.yaml` file in your topic folder
+> 2. Fill the correct metadata of the topic
 > 3. Make sure that Jekyll is running
 >
 >    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}/topics/contributing/tutorials/running-jekyll/tutorial.html)
@@ -166,4 +173,4 @@ Several metadata are defined in `metadata.yaml` file in your topic folder to :
 # Conclusion
 {:.no_toc}
 
-We just created a new topic. We can now fill it with new tutorials.
+We just created a new topic. We can now fill it by [creating new tutorials]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial/tutorial.html)

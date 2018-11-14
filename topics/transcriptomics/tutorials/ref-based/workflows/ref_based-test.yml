@@ -1,0 +1,48 @@
+---
+- doc: "Test sample data for Transcriptomics:Refence-based"
+  job: ref_based-job.yml
+  outputs:
+    GSM461177_1_fastqc:
+      asserts:
+        has_text:
+          text: 'Sequence length	37'
+    GSM461177_cutadapt:
+      asserts:
+        has_text:
+          text: '147,810 (1.4%)'
+    GSM461180_cutadapt:
+      asserts:
+        has_text:
+          text: '1,101,875 (9.0%)'
+    GSM461177_star:
+      asserts:
+        has_text:
+          text: '79.00%'
+    GSM461180_star:
+      asserts:
+        has_text:
+          text: '8818168'
+    GSM461177_inferexperiment:
+      asserts:
+        has_text:
+          text: '0.4649'
+    GSM461180_inferexperiment:
+      asserts:
+        has_text:
+          text: '0.4524'
+    GSM461177_featurecounts:
+      asserts:
+        has_text:
+          text: '8234664'
+    GSM461180_featurecounts:
+      asserts:
+        has_text:
+          text: '8412167'
+    deseq:
+      asserts:
+        has_text:
+          text: '1086.97429520489'
+    goseq:
+      asserts:
+        has_text:
+          text: 'GO:0005576'

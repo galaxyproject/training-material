@@ -1,7 +1,22 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: setup-galaxy-for-training
+
+title: Set up a Galaxy for Training
+time_estimation: 2h
+questions:
+  - How do I prepare my Galaxy instance to support a training module?
+  - How can I generate a Docker Galaxy instance for my topic?
+objectives:
+  - Use ephemeris to install the training requirements to a Galaxy instance
+  - Create a docker image for a training topic
+key_points:
+  - Technical requirements have been defined for all the training materials
+  - Ephemeris can be used to automatically install these requirements to an existing Galaxy
+  - Convenience scripts are provided in the training material repository allow for easy installation
+  - Docker images can easily be created per topic
+contributors:
+  - shiltemann
+  - bebatut
 ---
 
 # Introduction
@@ -126,7 +141,7 @@ In this example we will install the requirements for the [*Reference-based RNASe
 > 2. Run the script to install the RNASeq tutorial
 >
 >    ```bash
->    bin/install_tutorial_requirements.sh topics/transcriptomics/tutorials/ref-based -g http://localhost:8080 -a <api key>
+>    bin/install_tutorial_requirements.sh topics/transcriptomics/tutorials/ref-based http://localhost:8080 <api key>
 >    ```
 >
 {: .hands_on}
@@ -167,10 +182,10 @@ Using the scripts in this repository:
 cd <training-materials repo root>
 
 # install single tutorial
-bin/install_tutorial_requirements.sh <Galaxy url> <API key> topics/<yourtopic>/tutorial/<yourtutorial
+bin/install_tutorial_requirements.sh topics/<yourtopic>/tutorials/<yourtutorial> <Galaxy URL> <API key>
 
 # install entire topic
-bin/install_topic_requirements.sh <Galaxy url> <API key> topics/<yourtopic>
+bin/install_topic_requirements.sh topics/<yourtopic> <Galaxy URL> <API key>
 
 ```
 
@@ -178,16 +193,16 @@ Using ephemeris directly:
 
 ```
 # install tools
-shed-tools install -g <Galaxy url> -a <API key> -t topics/<topic>/tutorials/<tutorial>/tools.yaml
+shed-tools install -g <Galaxy URL> -a <API key> -t topics/<topic>/tutorials/<tutorial>/tools.yaml
 
 # create data library with input datasets
-setup-data-libraries -g <Galaxy url> -a <API key> -i topic/<topic>/tutorial/<tutorial>/data-library.yaml
+setup-data-libraries -g <Galaxy URL> -a <API key> -i topic/<topic>/tutorial/<tutorial>/data-library.yaml
 
 # install reference data
-run-data-managers -g <Galaxy url> -a <API key> --config topic/<topic>/tutorial/<tutorial>/data-manager.yaml
+run-data-managers -g <Galaxy URL> -a <API key> --config topic/<topic>/tutorial/<tutorial>/data-manager.yaml
 
 # install workflows
-workflow-install --publish-workflows -g <Galaxy url> -a <API key> -w topics/<topic>/tutorials/<tutorial>/workflows
+workflow-install --publish-workflows -g <Galaxy URL> -a <API key> -w topics/<topic>/tutorials/<tutorial>/workflows
 
 # install tours
 copy the contents of the "tours" directory for the tutorial to Galaxy's "config/plugins/tours/"

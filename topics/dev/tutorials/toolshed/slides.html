@@ -1,8 +1,26 @@
 ---
 layout: tutorial_slides
-topic_name: dev
-tutorial_name: toolshed
 logo: "GTN"
+
+title: "Tool Shed: sharing Galaxy tools"
+questions:
+  - "What is a Tool Shed?"
+  - "How to install tools and workflows from a Tool Shed into a Galaxy instance?"
+  - "What are the Tool Shed repository types?"
+  - "How to publish with Planemo?"
+objectives:
+  - "Discover what is a Tool Shed"
+  - "Be able to install tools and workflows from a Tool Shed into a Galaxy instance"
+  - "Be able to publish tools with Planemo"
+time_estimation: "3h"
+key_points:
+  - "Use Planemo"
+  - "Contribute to the Main Tool Shed"
+contributors:
+  - abretaud
+  - loraine-gueguen
+  - slegras
+  - bebatut
 ---
 
 
@@ -41,7 +59,7 @@ logo: "GTN"
 
 - [Galaxy community Tool Shed](https://toolshed.g2.bx.psu.edu/) -> Main Tool Shed
 - [Galaxy community test Tool Shed](https://testtoolshed.g2.bx.psu.edu/) -> Sandbox for testing
-- [List of public Tool Sheds](https://wiki.galaxyproject.org/PublicGalaxyServers#Public_ToolSheds)
+- [List of public Tool Sheds](https://galaxyproject.org/toolshed/public-toolsheds/)
 
 ---
 
@@ -64,12 +82,7 @@ logo: "GTN"
 ### Connect your Galaxy to a Tool Shed
 
 - Only for third party toolsheds (Main and Test by default)
-- In `config/tool_sheds_conf.xml`:
-```bash
-  <tool_sheds>
-    <tool_shed name="Galaxy main tool shed" url="https://toolshed.g2.bx.psu.edu/" />
-  </tool_sheds>
-```
+- Add `<tool_shed />` block in `config/tool_sheds_conf.xml`
 - Restart Galaxy
 
 ---
@@ -659,20 +672,20 @@ Using planemo by hand
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+### {% icon hands_on %} Hands-on
 
 ![](../../images/exercise.png)
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+###  Hands-on
 
 #### The goal
 Publish your tool (seqtk_seq) in your local toolshed with Planemo
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+### {% icon hands_on %} Hands-on
 
 #### Step 1: Start and configure your toolshed
 - Start your toolshed (in galaxy home directory):
@@ -686,13 +699,13 @@ login: galaxy/azerty
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+### {% icon hands_on %} Hands-on
 
 #### Step 2: Use planemo to publish your tool
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+### {% icon hands_on %} Hands-on
 
 #### Step 2: Use planemo to publish your tool
 
@@ -719,13 +732,13 @@ planemo shed_create --shed_target local
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+### {% icon hands_on %} Hands-on
 
 #### Step 3: Update your tool and then use planemo to update your tool on the Tool Shed
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+### {% icon hands_on %} Hands-on
 
 #### Step 3: Update your tool and then use planemo to update your tool on the Tool Shed
 

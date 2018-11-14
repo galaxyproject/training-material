@@ -1,8 +1,36 @@
 ---
 layout: tutorial_slides
-topic_name: dev
-tutorial_name: tool-integration
 logo: "GTN"
+
+title: "Tool development and integration into Galaxy"
+hands_on: "external"
+hands_on_url: "http://planemo.readthedocs.io/en/latest/writing_standalone.html"
+questions:
+  - "What is a tool for Galaxy?"
+  - "How to build a tool/wrapper with the good practices?"
+  - "How to deal with the tool environment?"
+objectives:
+  - "Discover what is a wrapper and its structure"
+  - "Use the Planemo utilities to develop a good wrapper"
+  - "Deal with the dependencies"
+  - "Write functional tests"
+  - "Make a tool ready for publishing in a ToolShed"
+time_estimation: "6h"
+key_points:
+  - "Galaxy Tool Syntax"
+  - "Use Planemo"
+  - "Use Conda"
+  - "Use GitHub"
+  - "Use Travis"
+  - "No more excuse to develop crappy Galaxy tools"
+contributors:
+  - shiltemann
+  - bebatut
+  - abretaud
+  - jmchilton
+  - nsoranzo
+  - bgruening
+  - lecorguille
 ---
 
 
@@ -193,7 +221,7 @@ graphlan.py
 ![](../../images/input_text.png)
 
 ```xml
-<param name="..." type="text" value="" label="..." help="..."/>
+<param name="..." type="text" value="..." label="..." help="..."/>
 ```
 
 ---
@@ -239,6 +267,7 @@ If no `option` has `selected="true"`, the first one is selected by default.
 <param name="..." type="select" multiple="true" label="..." help="...">
     <option value="ld" selected="true">Length distribution</option>
     <option value="gc" selected="true">GC content distribution</option>
+    ...
 </param>
 ```
 
@@ -396,7 +425,6 @@ If you need more precision:
 
 ```xml
 <help><![CDATA[
-
 **What it does**
 GraPhlAn is a software tool for producing high-quality circular
 representations of taxonomic and phylogenetic trees. GraPhlAn focuses
@@ -406,7 +434,6 @@ investigation.
 
 For more information, check the `user manual
 < https://bitbucket.org/nsegata/graphlan/overview >`_.
-
 ]]></help>
 ```
 
@@ -861,13 +888,13 @@ See [Tool Dependencies and Conda](../conda/slides.html)
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+### {% icon hands_on %} Hands-on
 
 ![](../../images/exercise.png)
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+### {% icon hands_on %} Hands-on
 
 #### The Goal
 
@@ -877,7 +904,7 @@ See [Tool Dependencies and Conda](../conda/slides.html)
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+### {% icon hands_on %} Hands-on
 
 #### Steps
 

@@ -1,7 +1,25 @@
 ---
 layout: tutorial_hands_on
-topic_name: genome-annotation
-tutorial_name: "annotation-with-prokka"
+
+title: "Genome annotation with Prokka"
+zenodo_link: "https://doi.org/10.5281/zenodo.1156405"
+tags:
+  - prokaryote
+questions:
+  - "How to annotate a bacterial genome?"
+  - "How to visualize annoted genomic features?"
+objectives:
+  - "Load genome into Galaxy"
+  - "Annotate genome with Prokka"
+  - "View annotations in JBrowse"
+time_estimation: "1h"
+key_points:
+  - "Prokka is a useful tool to annotate a bacterial genome."
+  - "JBrowse can be used to inspect the annotation of a genome."
+contributors:
+  - annasyme
+  - tseemann
+  - slugger70
 ---
 
 # Introduction
@@ -49,28 +67,23 @@ Now we will run the tool called Prokka.
 > ### {% icon hands_on %} Hands-on: Annotate genome
 >
 > 1. **Prokka** {% icon tool %} with the following parameters (leave everything else unchanged)
->    - contigs to annotate: `contigs.fasta`
->    - Locus tag prefix (--locustag): P
->    - Force GenBank/ENA/DDJB compliance (--compliant): No
->    - Sequencing Centre ID (--centre): V
->    - Genus Name: Staphylococcus
->    - Species Name: aureus
->    - Use genus-specific BLAST database: No
->    - Your tool interface should look like this:
->    - ![prokka interface](images/interface.png)
->    - Click Execute
-> <br><br>
+>    - {% icon param-file %} *"contigs to annotate"*: `contigs.fasta`
+>    - *"Locus tag prefix (--locustag)"*: `P`
+>    - *"Force GenBank/ENA/DDJB compliance (--compliant)"*: `No`
+>    - *"Sequencing Centre ID (--centre)"*: `V`
+>    - *"Genus Name (--genus)"*: `Staphylococcus`
+>    - *"Species Name (--species)"*: `aureus`
+>    - *"Use genus-specific BLAST database"*: `No`
 {: .hands_on}
 
 ## Examine the output
 
 Once Prokka has finished, examine each of its output files.
 
- - The GFF and GBK files contain all of the information about the features annotated (in different formats.)
- - The .txt file contains a summary of the number of features annotated.
- - The .faa file contains the protein sequences of the genes annotated.
- - The .ffn file contains the nucleotide sequences of the genes annotated.
- <br><br>
+- The GFF and GBK files contain all of the information about the features annotated (in different formats.)
+- The .txt file contains a summary of the number of features annotated.
+- The .faa file contains the protein sequences of the genes annotated.
+- The .ffn file contains the nucleotide sequences of the genes annotated.
 
 
 ## View annotated features in JBrowse
@@ -79,33 +92,33 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 
 > ### {% icon hands_on %} Hands-on: Visualize the annotation
 >
-> 1. Search for **JBrowse** {% icon tool %} and run it with the following parameters
->    - "Reference genome to display" to `Use a genome from history`
->    - "Select the reference genome" to `Prokka on data XX.fna`.
+> 1. **JBrowse** {% icon tool %} with the following parameters
+>    - *"Reference genome to display"*: `Use a genome from history`
+>       - {% icon param-file %} *"Select the reference genome"*: `fna` output of **Prokka** {% icon tool %}
 >
 >       This sequence will be the reference against which annotations are displayed
 >
->    - "Produce Standalone Instance" to `Yes`
->    - "Genetic Code" to `11: The Bacterial, Archaeal and Plant Plastid Code`
->    - "JBrowse-in-Galaxy Action" to `New JBrowse Instance`
->    - "Track Group"
->    - We will now set up one track - each track is a dataset displayed underneath the reference sequence (which is displayed as nucleotides in FASTA format).
->    - We will choose to display the annotations (the Prokka.gff file).
+>    - *"Produce Standalone Instance"*: `Yes`
+>    - *"Genetic Code"*: `11: The Bacterial, Archaeal and Plant Plastid Code`
+>    - *"JBrowse-in-Galaxy Action"*: `New JBrowse Instance`
+>    - Click on `Insert Track Group`
+>    
+>      We will now set up one track - each track is a dataset displayed underneath the reference sequence (which is displayed as nucleotides in FASTA format).
+>      We will choose to display the annotations (the Prokka.gff file).
 >
->       - **Track 1 - sequence reads**: Click on `Insert Track Group` and fill it with
->           - "Track Cateogry" to `gene annotations`
->           - Click on `Insert Annotation Track` and fill it with
->               - "Track Type" to `GFF/GFF3/BED/GBK Features`
->               - "GFF/GFF3/BED Track Data" to `Prokka on data XX:gff`
->               - "Track Visibility" to `On for new users`
->               - "JBrowse Track Type [Advanced]" to `Canvas Features`
+>      - In **1: Track Group**
+>           - *"Track Cateogry"*: `gene annotations`
+>           - Click on `Insert Annotation Track` and fill it with:
+>               - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
+>               - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `gff` output of **Prokka** {% icon tool %}
+>               - *"JBrowse Track Type [Advanced]"*: `Canvas Features`
 >               - Click on "JBrowse Styling Options [Advanced]"
->               - "JBrowse style.label" to `product,name,id`
->               - "Track Visibility" to `On for new users`
->               - Click Execute
+>                   - *"JBrowse style.label"*: `product,name,id`
+>               - *"Track Visibility"*: `On for new users`
+> 
+>    A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view its contents and play with it
 >
-> A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view its contents and play with it
-> 2. Inspect the `JBrowse on data XX and data XX - Complete` file by clicking on the eye icon
+> 2. Inspect the `JBrowse on data XX and data XX - Complete` file by clicking on the {% icon galaxy-eye %} (eye) icon
 >
 >    The JBrowse window will appear in the centre Galaxy panel.
 >
