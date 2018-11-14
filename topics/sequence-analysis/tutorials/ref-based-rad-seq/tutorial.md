@@ -65,19 +65,17 @@ We will look at the first run SRR034310 out of seven which includes 16 samples f
 >
 >    {% include snippets/change_datatype.md datatype="fastqsanger.gz" %}
 >
->    We need to tell Galaxy about the reference genome associated with this.
+>    Next, we need to tell Galaxy about the reference genome associated with this.
 >
-> 5. First, we define a custom reference build
+> 5. We will define a custom reference build** for this tutorial:
 >
-> 6. Set the dbkey of our imported fastq files to our custom build key
+>    {% include snippets/add_custom_build.md name="Stickleback" dbkey="stickleback" fasta="Reference_genome_11_chromosomes.fasta" %}
 >
->    {% include snippets/change_dbkey.md %}
+> 6. Next, we set the `dbkey` of our imported fastq files to our custom build key
 >
->    > ### {% icon comment %} Comments
->    > - Add the "stickleback" custom build from the Fasta reference genome file from the User/custom builds menu
->    > - Edit the dataset "Database/Build" to select "stickleback"
->    > - Rename datasets according to samples
->    {: .comment}
+>    {% include snippets/change_dbkey.md dbkey="stickleback" %}
+>
+> 7. **Rename datasets** according to the sample names
 {: .hands_on}
 
 The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be demultiplexed. To do so, we can use the Process Radtags tool from STACKS.
@@ -89,7 +87,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 > ### {% icon hands_on %} Hands-on: Demultiplexing reads
 >
 > 1. **Process Radtags** {% icon tool %} with the following parameters:
->    - *"Single-end or paired-end reads files:*" `Single-end files`
+>    - *"Single-end or paired-end reads files"*: `Single-end files`
 >    - *"singles-end reads infile(s)"*: `SRR034310.fastq(.gz)`
 >    - *"Barcode file"*: `Barcodes_SRR034310.tabular`
 >    - *"Number of enzymes"*: `One`
@@ -172,7 +170,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 > ### {% icon hands_on %} Hands-on: Quality control
 > 1. **FastQC** {% icon tool %} to check the quality of the reads:
 >    - {% icon param-collection %} *"Short read data from your current history"*: the fastq files (collection)
-
+>
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. What is the read length?
@@ -217,13 +215,12 @@ Here we will use BWA. BWA is a fast light-weighted tool that aligns relatively s
 
 
 > ### {% icon hands_on %} Hands-on: Map with BWA
-> 1. **Map with BWA - map short reads (< 100 bp) against reference genome ** {% icon tool %}:
 >
-> - Will you select a reference genome from your history or use a built-in index?: Use a genome from history and build index
-> - Use the following dataset as the reference sequence: Reference_genome_11_chromosomes.fasta
-> - Select input type: Single Fastq
-> - Select fastq dataset: One dataset collection containing the demultiplexed reads obtained with Process Radtag execution made with a quality score of 10 and with the `Discard reads with low quality scores` parameter set to Yes (so containing 7373160 retained reads).
-> - Leave everything else
+> 1. **Map with BWA - map short reads (< 100 bp) against reference genome** {% icon tool %}:
+>    - Will you select a reference genome from your history or use a built-in index?: `Use a genome from history and build index`
+>    - Use the following dataset as the reference sequence: `Reference_genome_11_chromosomes.fasta`
+>    - Select input type: `Single Fastq`
+>    - Select fastq dataset: One dataset collection containing the demultiplexed reads obtained with Process Radtag execution made with a quality score of 10 and with the `Discard reads with low quality scores` parameter set to Yes (so containing 7373160 retained reads).
 {: .hands_on}
 
 **BWA** generates BAM files with the mapped reads.
