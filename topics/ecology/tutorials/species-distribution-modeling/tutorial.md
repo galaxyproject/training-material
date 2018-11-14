@@ -1,16 +1,21 @@
 ---
 layout: tutorial_hands_on
 title: "Species distribution modeling"
-zenodo_link: ""
+zenodo_link: "NO"
 questions:
-    - ""
+    - "How to build & evaluate a niche model, visualize and project it ?"
 objectives:
-    - ""
+    - "Find and download occurences data from GBIF"
+    - "Find and download environmental data"
+    - "Process both occurences and environmental"
+    - "Partition occurence data"
+    - "Model a theorical ecological niche and predict species distribution in a future climate scneario by using SDM"
 requirements:
 time_estimation: "1h"
 key_points:
     - ""
 contributors:
+    - emichn
     - yvanlebras
 ---
 
