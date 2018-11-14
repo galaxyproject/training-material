@@ -1,17 +1,21 @@
 ---
 layout: tutorial_hands_on
 title: Regional GAM
-zenodo_link: ""
+zenodo_link: "https://zenodo.org/record/1324204#.W2BmRn7fNE4"
 edam_ontology: "topic_0610"
 questions:
-    - ""
+    - "What are abundance and trends of a butterfly species?"
 objectives:
-    - ""
+    - "Obtain and filter/manipulate occurence data"
+    - "Compute and visualize phenology of a species through the years"
+    - "Compute temporal abundance trends"
 requirements:
 time_estimation: "1h"
 key_points:
     - ""
 contributors:
+    - Claraurf
+    - emichn
     - yvanlebras
 ---
 
