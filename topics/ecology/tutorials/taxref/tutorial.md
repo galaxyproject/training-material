@@ -1,7 +1,17 @@
 ---
 layout: tutorial_hands_on
-topic_name: chip-seq
-tutorial_name: estrogen-receptor-binding-site-identification
+title: ""
+zenodo_link: ""
+questions:
+    - ""
+objectives:
+    - ""
+requirements:
+time_estimation: "1h"
+key_points:
+    - ""
+contributors:
+    - yvanlebras
 ---
 
 # Introduction

@@ -1,7 +1,17 @@
 ---
 layout: tutorial_hands_on
-topic_name: sdm
-tutorial_name: species distribution modeling
+title: "Species distribution modeling"
+zenodo_link: ""
+questions:
+    - ""
+objectives:
+    - ""
+requirements:
+time_estimation: "1h"
+key_points:
+    - ""
+contributors:
+    - yvanlebras
 ---
 
 # Introduction

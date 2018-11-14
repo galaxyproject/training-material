@@ -1,7 +1,18 @@
 ---
 layout: tutorial_hands_on
-topic_name: ecology
-tutorial_name: Regional GAM
+title: Regional GAM
+zenodo_link: ""
+edam_ontology: "topic_0610"
+questions:
+    - ""
+objectives:
+    - ""
+requirements:
+time_estimation: "1h"
+key_points:
+    - ""
+contributors:
+    - yvanlebras
 ---
 
 # Introduction

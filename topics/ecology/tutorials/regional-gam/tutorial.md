@@ -1,7 +1,23 @@
 ---
 layout: tutorial_hands_on
-topic_name: ecology
-tutorial_name: regional-gam
+title: regional-gam
+zenodo_link: ""
+questions:
+    - How are biodiversity related data and environmental data processed, combined and analyzed?
+    - What are the expected distribution of species in space and/ro in time?
+objectives:
+    - Import biodiversity datasets from databanks like GBIF or ALA
+    - Import evironmental data as Worldclim
+    - Combine biodiversity and environmental data through modelization
+    - Predict time/space distribution of species
+requirements:
+time_estimation: "1h"
+key_points:
+    - Sophisticated analysis of biodiversity data is possible using tools hosted by Galaxy-E.
+    - Ecological dataset analyses require multiple methods of preprocess to ensure that the data are appropriate for answering the biology question of interest.
+    - By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced.
+contributors:
+    - yvanlebras
 ---
 
 # Introduction
