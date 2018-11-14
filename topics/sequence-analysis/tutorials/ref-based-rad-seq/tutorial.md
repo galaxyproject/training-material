@@ -48,10 +48,13 @@ We will look at the first run SRR034310 out of seven which includes 16 samples f
 > 1. Create a new history for this RAD-seq exercise. If you are not inspired, you can name it "STACKS RAD: population genomics with reference genome" for example...
 >    {% include snippets/create_new_history.md %}
 >
-> 2. **Upload Reads from SRA** {% icon tool %}: Run `EBI SRA`
->    - Select the Run from the results of the search for `SRR034310` (which will present you 1 Experiment (SRX015877) and 1 Run (SRR034310)).
->    - Click the link in the column **FASTQ files (Galaxy)** of the results table
->    - This will redirect to the Galaxy website and start the download.
+> 2. **EBI SRA** {% icon tool %} import files from SRA:
+>    - Search for `SRR034310`
+>    - Under results for *Run*, click on *view all 1 result*
+>    - In the next menu, click on the result `SRR034310`
+>    - In the table at the bottom, click the link in the column **FASTQ files (Galaxy)**
+>
+>    This will redirect to the Galaxy website and start the download.
 >
 > 3. Upload remaining training data from Zenodo:
 >    ```
@@ -76,6 +79,7 @@ We will look at the first run SRR034310 out of seven which includes 16 samples f
 >    {% include snippets/change_dbkey.md dbkey="stickleback" %}
 >
 > 7. **Rename datasets** according to the sample names
+>
 {: .hands_on}
 
 The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be demultiplexed. To do so, we can use the Process Radtags tool from STACKS.
@@ -88,7 +92,8 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >
 > 1. **Process Radtags** {% icon tool %} with the following parameters:
 >    - *"Single-end or paired-end reads files"*: `Single-end files`
->    - *"singles-end reads infile(s)"*: `SRR034310.fastq(.gz)`
+>      - *"Singles-end reads infile(s)"*: `SRR034310.fastq(.gz)`
+>      - *"Barcode location"*: `no barcode`
 >    - *"Barcode file"*: `Barcodes_SRR034310.tabular`
 >    - *"Number of enzymes"*: `One`
 >    - *"Enzyme"*: `sbfI`
@@ -182,7 +187,8 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >
 > 2. **MultiQC** {% icon tool %} with the following parameters:
 >    - *"Which tool was used generate logs?"*: `FastQC`
->    -
+>    - *"Type of FastQC output?"*: `raw data`
+>    - {% icon param-collection %} *"FASTQC output"*: the `raw data` output of FastQC (collection)
 {: .hands_on}
 
 ![MultiQC output](../../images/RAD4_Population_Genomics/multiqc.PNG)
@@ -216,11 +222,11 @@ Here we will use BWA. BWA is a fast light-weighted tool that aligns relatively s
 
 > ### {% icon hands_on %} Hands-on: Map with BWA
 >
-> 1. **Map with BWA - map short reads (< 100 bp) against reference genome** {% icon tool %}:
->    - Will you select a reference genome from your history or use a built-in index?: `Use a genome from history and build index`
->    - Use the following dataset as the reference sequence: `Reference_genome_11_chromosomes.fasta`
->    - Select input type: `Single Fastq`
->    - Select fastq dataset: One dataset collection containing the demultiplexed reads obtained with Process Radtag execution made with a quality score of 10 and with the `Discard reads with low quality scores` parameter set to Yes (so containing 7373160 retained reads).
+> 1. **Map with BWA - map short reads (< 100 bp) against reference genome** {% icon tool %} with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>    - *"Use the following dataset as the reference sequence"*: `Reference_genome_11_chromosomes.fasta`
+>    - *"Select input type"*: `Single Fastq`
+>    - *"Select fastq dataset"*: One dataset collection containing the demultiplexed reads obtained with Process Radtag execution made with a quality score of 10 and with the `Discard reads with low quality scores` parameter set to Yes (so containing 7373160 retained reads).
 {: .hands_on}
 
 **BWA** generates BAM files with the mapped reads.
@@ -237,34 +243,37 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Stacks: Reference map
-> **Stacks: Reference map** {% icon tool %}:
-> - Select your usage: Population
-> - Files containing an individual sample from a population: Choose the mapped reads (data collection)
-> - Specify a population map: Population_map.txt (see comment below concerning the creation of such a file)
-> - Minimum depth of coverage: 3
+>
+> 1. Create a new file with our population map:
+>
+>    ```
+>    sample_CCCC	1
+>    sample_CCAA	1
+>    sample_CCTT	1
+>    sample_CCGG	1
+>    sample_CACA	1
+>    sample_CAAC	1
+>    sample_CATG	1
+>    sample_CAGT	1
+>    sample_CTCT	2
+>    sample_CTAG	2
+>    sample_CTTC	2
+>    sample_CTGA	2
+>    sample_GGGG	2
+>    sample_GGAA	2
+>    sample_GGTT	2
+>    sample_GGCC	2
+>    ```
+>
+>    {% include snippets/create_new_file.md %}
+>
+> 2. **Stacks: Reference map** {% icon tool %}:
+>    - *"Select your usage"*: `Population`
+>    - *"Files containing an individual sample from a population"*: Choose the mapped reads (data collection)
+>    - *"pecify a population map"*: `Population_map.txt` created above
+>    - *"Minimum depth of coverage"*: `3`
 >
 >    > ### {% icon comment %} Comment
->    > Population map will look like this:
-
-```
-sample_CCCC	1
-sample_CCAA	1
-sample_CCTT	1
-sample_CCGG	1
-sample_CACA	1
-sample_CAAC	1
-sample_CATG	1
-sample_CAGT	1
-sample_CTCT	2
-sample_CTAG	2
-sample_CTTC	2
-sample_CTGA	2
-sample_GGGG	2
-sample_GGAA	2
-sample_GGTT	2
-sample_GGCC	2
-```
-
 >    > If you are using a file presenting population information and individual name in a different manner than expected by STACKS, you can use Galaxy tools like `Replace Text` (for example to replace `Rabbit Slough` by a population number like `2`, `Add column` (for example to add `sample_`) or `Cut columns from a table` (to put the new `sample_` column af the first place) and finally `Regex replace` (replacing `(sample_)\t` by `\1`) to generate it...
 >    {: .comment}
 >
@@ -276,7 +285,7 @@ sample_GGCC	2
 
 > ### {% icon hands_on %} Hands-on: Calculate population genomics statistics
 >
-> **Stacks: populations** {% icon tool %}: Run the last step of **Stacks: Reference map** pipeline specifying data filtering options (minimum percentage of individuals in a population required to process a locus for that population: 0.75 , output options (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
+> 1. **Stacks: populations** {% icon tool %}: Run the last step of **Stacks: Reference map** pipeline specifying data filtering options (minimum percentage of individuals in a population required to process a locus for that population: 0.75 , output options (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
 > - Input type: Stacks output
 > - Output from previous Stacks pipeline steps (e.g. denovo_map or refmap): Full output from ref_map
 > - Specify a population map: Population_map.txt
