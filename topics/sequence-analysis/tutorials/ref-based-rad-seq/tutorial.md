@@ -244,7 +244,7 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 
 > ### {% icon hands_on %} Hands-on: Stacks: Reference map
 >
-> 1. Create a new file with our population map:
+> 1. Create a new file with our population map and name it `Population_map.txt`:
 >
 >    ```
 >    sample_CCCC	1
@@ -279,22 +279,25 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 >
 > Once Stacks has completed running, investigate the output files: `ref_map.log`, `Summary from Stacks: reference map on data...` and `Catalog (*)` (snps, alleles and tags).
 > Notice that each locus now has a chromosome/base pair specified in each of the `*tags.tsv` files and in the catalog files.
+i>
 {: .hands_on}
 
 # Calculate population genomics statistics
 
 > ### {% icon hands_on %} Hands-on: Calculate population genomics statistics
 >
-> 1. **Stacks: populations** {% icon tool %}: Run the last step of **Stacks: Reference map** pipeline specifying data filtering options (minimum percentage of individuals in a population required to process a locus for that population: 0.75 , output options (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
-> - Input type: Stacks output
-> - Output from previous Stacks pipeline steps (e.g. denovo_map or refmap): Full output from ref_map
-> - Specify a population map: Population_map.txt
-> - Minimum percentage of individuals in a population required to process a locus for that population: 0.75
-> - Output results in Variant Call Format (VCF): yes
-> - Output results in Structure Format: yes
-> - Enable SNP and haplotype-based F statistics: yes
+> 1. **Stacks: populations** {% icon tool %} with the following parameters:
+>    - *"Input type"*: `Stacks output`
+>    - *"Output from previous Stacks pipeline steps (e.g. denovo_map or refmap)"*: Full output from ref_map
+>    - *"Specify a population map"*: `Population_map.txt`
+>    - Section **Data filtering options**
+>      - *"Minimum percentage of individuals in a population required to process a locus for that population"*: `0.75`
+>    - Section **Output options** (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
+>      - *"Output results in Variant Call Format (VCF)"*: `Yes`
+>      - *"Output results in Structure Format"*: `Yes`
+>    - *"Enable SNP and haplotype-based F statistics"*: `Yes`
 >
-> Now look at the output in the file `batch_1.sumstats` named `SNP and Haplotype-based F statistics with Stacks: populations ...` on your history. This file is also reachable on the data collection nammed `Full output from ref_map .....` with his original name `batch_1.sumstats`. There are a large number of statistics calculated at each SNP, so use Galaxy tools like filter, cut, and sort to focus on some.
+> 2. Now look at the output in the file `batch_1.sumstats` named `SNP and Haplotype-based F statistics with Stacks: populations ...` on your history. This file is also reachable on the data collection nammed `Full output from ref_map .....` with his original name `batch_1.sumstats`. There are a large number of statistics calculated at each SNP, so use Galaxy tools like filter, cut, and sort to focus on some.
 >
 > > ### {% icon question %} Question
 > >
