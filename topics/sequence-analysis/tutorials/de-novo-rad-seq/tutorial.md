@@ -62,7 +62,7 @@ We will look at the first run SRR034310 out of seven which includes 16 samples f
 >
 > 4. Make sure your fasta files are of datatype `fastqsanger`
 >
->    {% include snippets/change_datatype.md%}
+>    {% include snippets/change_datatype.md datatype="fastqsanger" %}
 >
 {: .hands_on}
 
