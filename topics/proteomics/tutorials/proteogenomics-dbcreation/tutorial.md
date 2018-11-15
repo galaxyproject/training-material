@@ -4,12 +4,12 @@ layout: tutorial_hands_on
 title: "Proteogenomics 1: Database Creation"
 zenodo_link: "https://doi.org/10.5281/zenodo.1302055"
 questions:
-  - "A research question"
+  - "How to create a customized Protein Database from RNAseq data?"
 objectives:
   - "Generating a customized Protein sequence database with variants, indels, splice junctions and known sequences."
 time_estimation: "30m"
 key_points:
-  - "Generating customized protein sequence database using RNA-seq data"
+  - "Generating variant protein database"
   - "Generating genomic and variant mapping files for visualization"
 
 contributors:
