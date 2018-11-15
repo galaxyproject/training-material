@@ -13,7 +13,7 @@ objectives:
   - Annotate genome with Maker
   - Evaluate annotation quality with BUSCO
   - View annotations in JBrowse
-time_estimation: 8h
+time_estimation: 4h
 key_points:
   - Maker allows to annotate a eukaryotic genome.
   - BUSCO and JBrowse allow to inspect the quality of an annotation.
