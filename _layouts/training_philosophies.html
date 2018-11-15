@@ -1,0 +1,44 @@
+---
+layout: base
+---
+
+{% assign stories = site.pages | where:"layout", "training_philosophy" %}
+{% assign contributors = site.data['contributors'] %}
+
+{% include _includes/default-header.html %}
+
+<div class="container main-content">
+    <section>
+        <h1>Training Stories</h1>
+
+        <p class="lead">
+            We all teach in different ways, share your training philosophy and help other instructors find the way that is best for them!
+        </p>
+
+        Read their stories below:
+        <ul>
+        {% for p in stories %}
+            <li>
+                <a href="#{{ p.username }}">
+                {{ contributors[p.username].name | default: p.username }}
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+
+        {% for p in stories %}
+        <div id="{{ p.username }}">
+        <h2>{{ contributors[p.username].name | default: p.username }}</h2>
+            <div class="hall-of-fame-hero">
+            <a href="https://github.com/{{ p.username }}" class="thumbnail">
+                <img src="https://avatars.githubusercontent.com/{{ p.username }}" alt="{{ p.username }}'s avatar">
+            </a>
+        </div>
+        {{ p.content | markdownify }}
+        </div>
+        {% endfor %}
+
+    </section>
+</div>
+
+{% include _includes/default-footer.html %}
