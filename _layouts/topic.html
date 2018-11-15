@@ -20,15 +20,7 @@ layout: base
         <p>Before diving into this topic, we recommend you to have a look at:</p>
 
         <ul>
-            {% for requirement in topic.requirements %}
-                <li>
-                    {% if requirement.type == "internal" %}
-                    <a href="{{ site.baseurl }}/topics{{ requirement.link }}">{{ requirement.title }}</a>
-                    {% elsif material.type == "external" %}
-                    <a href="{{ requirement.link }}">{{ requirement.title }}</a>
-                    {% endif %}
-                </li>
-            {% endfor %}
+            {% include snippets/display_extra_training.md extra_trainings=topic.requirements %}
         </ul>
         {% endif %}
 

@@ -19,8 +19,8 @@ objectives:
   - Visually inspect Tal1 peaks with Trackster
 requirements:
   -
-    title: "Trackster"
     type: "external"
+    title: "Trackster"
     link: "https://wiki.galaxyproject.org/Learn/Visualization"
 time_estimation: "3h"
 key_points:
