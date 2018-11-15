@@ -74,54 +74,41 @@ The datasets required for this tutorial contain 9 features of breast cancer whic
 >
 {: .hands_on}
 
-## Train a classifier
-In this step, `SVM (Support vector machine)` classifier is trained using `breast-w_train` dataset. The last column of this dataset assigns a category for each row. The classifier learns a mapping between each row and its category. This mapping is called a trained model. It is used to predict the categories of unseen data (`breast-w_test`).
+## Learn, predict and visualise the predictions
+In this step, `SVM (Support vector machine)` classifier is trained using `breast-w_train` dataset. The last column of this dataset assigns a category for each row. The classifier learns a mapping between each row and its category. This mapping is called a trained model. It is used to predict the categories of unseen data (`breast-w_test`). The previous step produces a model file of type `zip`. Rename this file to `model.zip` by using `edit` dataset property. The trained model is used to predict the categories of each row in `breast-w_test` dataset. The previous step produces a predicted file of type `tabular`. Rename this file to `predicted_labels` by using `edit` dataset property. This tool will create three output files, one each for confusion matrix, precision, recall and f1-score and roc curves. These files are zipped. These files should be downloaded and unzipped to see the `html` file which contains the plot.
 
 > ### {% icon hands_on %} Hands-on: Train a classifier
 > 
-> **SVM Classifier (Support vector machine)** {% icon tool %} with the following parameters
-> 1. {% icon param-select %} *"Select a Classification Task"*: `Train a model`
-> 2. {% icon param-select %} *"Classifier type"*: `Linear Support Vector Classification`
-> 3. {% icon param-select %} *"Select input type"*: `tabular data`
-> 4. {% icon param-file %} *"Training samples dataset"*: `breast-w_train`
-> 5. {% icon param-check %} *"Does the dataset contain header"*: `Yes`
-> 6. {% icon param-select %} *"Choose how to select data by column"*: `All columns but by column header name(s)`
-> 7. {% icon param-text %} *"Type header name(s)"*: `target`
-> 8. {% icon param-file %} *"Dataset containing class labels"*: `breast-w_train`
-> 9. {% icon param-check %} *"Does the dataset contain header"*: `Yes`
-> 10. {% icon param-select %} *"Choose how to select data by column"*: `Select columns by column header name(s)`
-> 11. {% icon param-text %} *"Select target column(s)"*: `target`
-> 12. `Execute` the classifier to train
-{: .hands_on}
-
-
-## Predict using a trained model
-The previous step produces a model file of type `zip`. Rename this file to `model.zip` by using `edit` dataset property. The trained model is used to predict the categories of each row in `breast-w_test` dataset.
-
-> ### {% icon hands_on %} Hands-on: Predict using a trained model
+> 1. **SVM Classifier (Support vector machine)** {% icon tool %} with the following parameters to train the classifier on training data:
+>
+>    - {% icon param-select %} *"Select a Classification Task"*: `Train a model`
+>    - {% icon param-select %} *"Classifier type"*: `Linear Support Vector Classification`
+>    - {% icon param-select %} *"Select input type"*: `tabular data`
+>    - {% icon param-file %} *"Training samples dataset"*: `breast-w_train`
+>    - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
+>    - {% icon param-select %} *"Choose how to select data by column"*: `All columns but by column header name(s)`
+>    - {% icon param-text %} *"Type header name(s)"*: `target`
+>    - {% icon param-file %} *"Dataset containing class labels"*: `breast-w_train`
+>    - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
+>    - {% icon param-select %} *"Choose how to select data by column"*: `Select columns by column header name(s)`
+>    - {% icon param-text %} *"Select target column(s)"*: `target`
+>    - `Execute` the classifier to train
+>
+> 2. **SVM Classifier (Support vector machine)** {% icon tool %} with the following parameters to predict classes of test data using the trained model:
 > 
-> **SVM Classifier (Support vector machine)** {% icon tool %} with the following parameters
+>    - {% icon param-select %} *"Select a Classification Task"*: `Load a model and predict`
+>    - {% icon param-file %} *"Models"*: `model.zip`
+>    - {% icon param-file %} *"Data (tabular)"*: `breast-w_test`
+>    - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
+>    - {% icon param-select %} *"Select the type of prediction"*: `Predict class labels`
+>    - `Execute` to predict categories
+>
+> 3. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualise the predictions:
 > 
-> 1. {% icon param-select %} *"Select a Classification Task"*: `Load a model and predict`
-> 2. {% icon param-file %} *"Models"*: `model.zip`
-> 3. {% icon param-file %} *"Data (tabular)"*: `breast-w_test`
-> 4. {% icon param-check %} *"Does the dataset contain header"*: `Yes`
-> 5. {% icon param-select %} *"Select the type of prediction"*: `Predict class labels`
-> 6. `Execute` to predict categories
-{: .hands_on}
-
-
-## Visualize the predictions
-The previous step produces a predicted file of type `tabular`. Rename this file to `predicted_labels` by using `edit` dataset property. This tool will create three output files, one each for confusion matrix, precision, recall and f1-score and roc curves. These files are zipped. These files should be downloaded and unzipped to see the `html` file which contains the plot.
-
-> ### {% icon hands_on %} Hands-on: Visualize the predictions
-> 
-> **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters
-> 
-> 1. {% icon param-file %} *"Select input data file"*: `breast-w_targets`
-> 2. {% icon param-file %} *"Select predicted data file"*: `predicted_labels`
-> 3. {% icon param-file %} *"Select trained model"*: `model.zip`
-> 4. `Execute` to create visualizations
+>    - {% icon param-file %} *"Select input data file"*: `breast-w_targets`
+>    - {% icon param-file %} *"Select predicted data file"*: `predicted_labels`
+>    - {% icon param-file %} *"Select trained model"*: `model.zip`
+>    - `Execute` to create visualizations
 >
 >    ![data](images/confusion_matrix.png "Confusion matix of the correctly and incorrectly predicted samples. The diagonal from bottom-left to top-right shows the number of correctly predicted labels which the diagonal from top-left to bottom-right shows the number of incorrectly predicted samples.")
 >    ![data](images/precision_recall_f1.png "Precision, recall and F1 score. The scores determine the robustness of classification.")
@@ -158,58 +145,43 @@ The previous step produces a predicted file of type `tabular`. Rename this file 
 {: .hands_on}
 
 
-## Train a regressor
-In this step, `Gradient boosting regressor` is used for the regression. This is an emsemble based [regressor](http://scikit-learn.org/stable/modules/ensemble.html#regression) which consists of weak learners (e.g. decision trees). It learns features of a training dataset (`train_data`) and maps all feature rows to respective targets. The process of mapping gives a trained model which is used to evaluate the quality of mapping. The trained model is tested on `test_data` in which the target of each row is predicted.
+## Learn, predict and visualize results
+In this step, `Gradient boosting regressor` is used for the regression. This is an emsemble based [regressor](http://scikit-learn.org/stable/modules/ensemble.html#regression) which consists of weak learners (e.g. decision trees). It learns features of a training dataset (`train_data`) and maps all feature rows to respective targets. The process of mapping gives a trained model which is used to evaluate the quality of mapping. The trained model is tested on `test_data` in which the target of each row is predicted. The previous step produces a model file of type `zip`. Rename this file to `model.zip` by using `edit` dataset property. The trained model is used to predict the categories of each row in `test_data` dataset.
+The previous step produces a predicted file of type `tabular`. Rename this file to `predicted_data` by using `edit` dataset property. This tool will create three output files, one each for true vs predicted values, scatter plot for true and predicted values and a residual plot. These files are zipped. These files should be downloaded and unzipped to see the `html` file which contains the plot.
 
 > ### {% icon hands_on %} Hands-on: Train a classifier
 > 
-> **Gradient boosting regressor** {% icon tool %} with the following parameters
-> 1. {% icon param-select %} *"Select a Classification Task"*: `Train a model`
-> 2. {% icon param-select %} *"Select an ensemble method"*: `Gradient Boosting Regressor`
-> 3. {% icon param-select %} *"Select input type"*: `tabular data`
-> 4. {% icon param-file %} *"Training samples dataset"*: `train_data`
-> 5. {% icon param-check %} *"Does the dataset contain header"*: `Yes`
-> 6. {% icon param-select %} *"Choose how to select data by column"*: `All columns but by column header name(s)`
-> 7. {% icon param-text %} *"Type header name(s)"*: `target`
-> 8. {% icon param-file %} *"Dataset containing class labels"*: `train_data`
-> 9. {% icon param-check %} *"Does the dataset contain header"*: `Yes`
-> 10. {% icon param-select %} *"Choose how to select data by column"*: `Select columns by column header name(s)`
-> 11. {% icon param-text %} *"Select target column(s)"*: `target`
-> 12. `Execute` the classifier to train
-{: .hands_on}
-
-
-## Predict using a trained model
-The previous step produces a model file of type `zip`. Rename this file to `model.zip` by using `edit` dataset property. The trained model is used to predict the categories of each row in `test_data` dataset.
-
-> ### {% icon hands_on %} Hands-on: Predict using a trained model
+> 1. **Gradient boosting regressor** {% icon tool %} with the following parameters to train the regressor:
+>    - {% icon param-select %} *"Select a Classification Task"*: `Train a model`
+>    - {% icon param-select %} *"Select an ensemble method"*: `Gradient Boosting Regressor`
+>    - {% icon param-select %} *"Select input type"*: `tabular data`
+>    - {% icon param-file %} *"Training samples dataset"*: `train_data`
+>    - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
+>    - {% icon param-select %} *"Choose how to select data by column"*: `All columns but by column header name(s)`
+>    - {% icon param-text %} *"Type header name(s)"*: `target`
+>    - {% icon param-file %} *"Dataset containing class labels"*: `train_data`
+>    - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
+>    - {% icon param-select %} *"Choose how to select data by column"*: `Select columns by column header name(s)`
+>    - {% icon param-text %} *"Select target column(s)"*: `target`
+>    - `Execute` the classifier to train
+>
+> 2. **Gradient Boosting Regressor** {% icon tool %} with the following parameters to predict targets of test data using the trained model:
 > 
-> **Gradient Boosting Regressor** {% icon tool %} with the following parameters
+>    - {% icon param-select %} *"Select a Classification Task"*: `Load a model and predict`
+>    - {% icon param-file %} *"Models"*: `model.zip`
+>    - {% icon param-file %} *"Data (tabular)"*: `test_data`
+>    - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
+>    - {% icon param-select %} *"Select the type of prediction"*: `Predict class labels`
+>    - `Execute` to predict categories
+>
+> 3. **Plot actual vs predicted curves and residual plots** {% icon tool %} with the following parameters to visualise the predictions:
 > 
-> 1. {% icon param-select %} *"Select a Classification Task"*: `Load a model and predict`
-> 2. {% icon param-file %} *"Models"*: `model.zip`
-> 3. {% icon param-file %} *"Data (tabular)"*: `test_data`
-> 4. {% icon param-check %} *"Does the dataset contain header"*: `Yes`
-> 5. {% icon param-select %} *"Select the type of prediction"*: `Predict class labels`
-> 6. `Execute` to predict categories
-{: .hands_on}
-
-
-## Visualize the predictions
-The previous step produces a predicted file of type `tabular`. Rename this file to `predicted_data` by using `edit` dataset property. This tool will create three output files, one each for true vs predicted values, scatter plot for true and predicted values and a residual plot. These files are zipped. These files should be downloaded and unzipped to see the `html` file which contains the plot.
-
-> ### {% icon hands_on %} Hands-on: Visualize the predictions
-> 
-> **Plot actual vs predicted curves and residual plots** {% icon tool %} with the following parameters
-> 
-> 1. {% icon param-file %} *"Select input data file"*: `test_target`
-> 2. {% icon param-file %} *"Select predicted data file"*: `predicted_data`
-> 4. `Execute` to create visualizations
+>    - {% icon param-file %} *"Select input data file"*: `test_target`
+>    - {% icon param-file %} *"Select predicted data file"*: `predicted_data`
+>    - `Execute` to create visualizations
 >
 >    ![data](images/true_pred_curves.png "True vs predicted targets curves. These curves should be close to each other for a good regression performance.")
 >    ![data](images/true_vs_pred_scatter.png "Scatter plot for true vs. predicted targets. The data points (blue) should be close to the orange curve (y = x) which shows that the true and predicted values are close.")
 >    ![data](images/residual_plot.png "Residual plot between residual (predicted - true) and predicted targets. For good regression performance, this plot should exhibit a random pattern.")
+>
 {: .hands_on}
-
-
-
