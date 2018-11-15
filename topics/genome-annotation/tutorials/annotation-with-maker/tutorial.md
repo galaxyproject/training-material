@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genome annotation with Maker
-zenodo_link: https://doi.org/10.5281/zenodo.1404209
+zenodo_link: https://doi.org/10.5281/zenodo.1488687
 tags:
   - eukaryote
 questions:
@@ -65,15 +65,15 @@ To annotate a genome using Maker, you need the following files:
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create and name a new history for this tutorial.
-> 2. Import the following files from [Zenodo](https://doi.org/10.5281/zenodo.1404209) or from the shared data library
+> 2. Import the following files from [Zenodo](https://doi.org/10.5281/zenodo.1488687) or from the shared data library
 >
 >    ```
->    https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/augustus_training_1.tar.gz
->    https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/augustus_training_2.tar.gz
->    https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/S_pombe_chrIII.fasta
->    https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/S_pombe_genome.fasta
->    https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/S_pombe_trinity_assembly.fasta
->    https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/Swissprot_no_S_pombe.fasta
+>    https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/augustus_training_1.tar.gz
+>    https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/augustus_training_2.tar.gz
+>    https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/S_pombe_chrIII.fasta
+>    https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/S_pombe_genome.fasta
+>    https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/S_pombe_trinity_assembly.fasta
+>    https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S_pombe.fasta
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
