@@ -2,9 +2,9 @@
 
 # Script to install a tutorial to a running Galaxy instance
 #
-# usage: install_tutorial.sh <topic_name> <galaxy_url> <admin_api_key>
+# usage: install_tutorial.sh </path/to/tutorial> <galaxy_url> <admin_api_keyoexample.org
 #
-# example: sh bin/install_tutorial.sh metagenomics http://localhost:8080 admin
+# example: sh bin/install_tutorial.sh topics/metagenomics/tutorials/mothur-miseq-sop http://localhost:8080 admin
 #
 # make sure you have ephemeris installed:
 #    pip install ephemeris -U
