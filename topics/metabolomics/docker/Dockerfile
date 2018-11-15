@@ -13,7 +13,7 @@ MAINTAINER Galaxy Training Material
 ENV GALAXY_CONFIG_BRAND "GTN: <your_topic>"
 
 # copy the tutorials directory for your topic
-ADD topics/<your_topic>/tutorials/ /tutorials/
+ADD topics/metabolomics/tutorials/ /tutorials/
 
 # install everything for tutorials
 ADD bin/docker-install-tutorials.sh /setup-tutorials.sh
