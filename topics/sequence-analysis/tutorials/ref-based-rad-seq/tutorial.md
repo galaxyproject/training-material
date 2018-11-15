@@ -93,7 +93,6 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 > 1. **Process Radtags** {% icon tool %} with the following parameters:
 >    - *"Single-end or paired-end reads files"*: `Single-end files`
 >      - *"Singles-end reads infile(s)"*: `SRR034310.fastq(.gz)`
->      - *"Barcode location"*: `no barcode`
 >    - *"Barcode file"*: `Barcodes_SRR034310.tabular`
 >    - *"Number of enzymes"*: `One`
 >    - *"Enzyme"*: `sbfI`
@@ -173,6 +172,7 @@ We propose to continue the tutorial using the dataset collection containing the 
 For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.baseurl}}/topics/sequence-analysis/tutorials/quality-control/tutorial.html): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 
 > ### {% icon hands_on %} Hands-on: Quality control
+>
 > 1. **FastQC** {% icon tool %} to check the quality of the reads:
 >    - {% icon param-collection %} *"Short read data from your current history"*: the fastq files (collection)
 >
@@ -227,6 +227,7 @@ Here we will use BWA. BWA is a fast light-weighted tool that aligns relatively s
 >    - *"Use the following dataset as the reference sequence"*: `Reference_genome_11_chromosomes.fasta`
 >    - *"Select input type"*: `Single Fastq`
 >    - *"Select fastq dataset"*: One dataset collection containing the demultiplexed reads obtained with Process Radtag execution made with a quality score of 10 and with the `Discard reads with low quality scores` parameter set to Yes (so containing 7373160 retained reads).
+>
 {: .hands_on}
 
 **BWA** generates BAM files with the mapped reads.
@@ -279,7 +280,7 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 >
 > Once Stacks has completed running, investigate the output files: `ref_map.log`, `Summary from Stacks: reference map on data...` and `Catalog (*)` (snps, alleles and tags).
 > Notice that each locus now has a chromosome/base pair specified in each of the `*tags.tsv` files and in the catalog files.
-i>
+>
 {: .hands_on}
 
 # Calculate population genomics statistics
