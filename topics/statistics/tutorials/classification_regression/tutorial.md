@@ -26,9 +26,9 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Supervised learning methods in machine learning have targets/classes/categories defined in the datasets. These targets can either be discreet values or real-values (continuous). When the targets are discreet, the learning task is called as classification. When the targets are real-values, the task becomes regression. Classification is assigning a distinct category to each sample in the dataset. Regression assigns a real-valued output to a sample in the dataset. In the image below, the "green" line is a boundary which separates the blue balls from the red ones. The task of a classification method is to learn this boundary which can be used to differentiate between unseen blue and red balls. This green line is the decision boundary which determines the category of a new ball.
+Supervised learning methods in machine learning have targets/classes/categories defined in the datasets. These targets can either be discrete values or real-values (continuous). When the targets are discreet, the learning task is called as classification. When the targets are real-values, the task becomes regression. Classification is assigning a distinct category to each sample in the dataset. Regression assigns a real-valued output to a sample in the dataset. In the image below, the "green" line is a boundary which separates the blue balls from the red ones. The task of a classification method is to learn this boundary which can be used to differentiate between unseen blue and red balls. This green line is the decision boundary which determines the category of a new ball.
 
->    ![data](images/classification_1.png "Classification of differently colored balls. The green line creates a boundary between two sets of balls and is learned by a classifier.")
+>    ![data](images/classification_1.png "Classification of differently coloured balls. The green line creates a boundary between two sets of balls and is learned by a classifier.")
 
 
 The following image shows how a (regression) curve is fit which explains most of the data points. Here, the curve is a straight line. The regression task is to learn this curve which explains the underlying distribution.
@@ -52,7 +52,7 @@ The following image shows how a (regression) curve is fit which explains most of
 
 ## Data upload
 
-The datasets required for this tutorial contain 9 features of breast cancer which include the thickness of clump, cell-size, cell-shape and so on ([more information](https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w)). In addition to these features, the training dataset contains one more column as `target`. It has a binary value (0 or 1) for each row. `0` indicates no breast cancer and `1` indicates breast cancer. The test dataset does not contain the `target` column. The third dataset contains the all the samples from test dataset but also the `target` column which would be needed to create plot showing comparison between actual and predicted targets.
+The datasets required for this tutorial contain 9 features of breast cancer which include the thickness of clump, cell-size, cell-shape and so on ([more information](https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w)). In addition to these features, the training dataset contains one more column as `target`. It has a binary value (0 or 1) for each row. `0` indicates no breast cancer and `1` indicates breast cancer. The test dataset does not contain the `target` column. The third dataset contains all the samples from test dataset but also the `target` column which would be needed to create a plot showing the comparison between actual and predicted targets. Using the dataset `breast-w_train.tsv`, a classifier is trained which learns features from the data and maps them to the targets. The test dataset `breast-w_test.tsv` is used do the predictions based on the model learned during training. Another dataset `breast-w_targets.tsv` is same as the test dataset with a target column which contains the true targets of the test data. With the predicted and true targets, the learned model is evaluated e.g. how good are the predictions. To visualise these predictions, a plotting tool is used.
 
 
 > ### {% icon hands_on %} Hands-on: Data upload
@@ -75,11 +75,16 @@ The datasets required for this tutorial contain 9 features of breast cancer whic
 {: .hands_on}
 
 ## Learn, predict and visualise the predictions
-In this step, `SVM (Support vector machine)` classifier is trained using `breast-w_train` dataset. The last column of this dataset assigns a category for each row. The classifier learns a mapping between each row and its category. This mapping is called a trained model. It is used to predict the categories of unseen data (`breast-w_test`). The previous step produces a model file of type `zip`. Rename this file to `model.zip` by using `edit` dataset property. The trained model is used to predict the categories of each row in `breast-w_test` dataset. The previous step produces a predicted file of type `tabular`. Rename this file to `predicted_labels` by using `edit` dataset property. This tool will create three output files, one each for confusion matrix, precision, recall and f1-score and roc curves. These files are zipped. These files should be downloaded and unzipped to see the `html` file which contains the plot.
+`SVM (Support vector machine)` classifier is trained using `breast-w_train` dataset. The last column of this dataset assigns a category for each row. The classifier learns a mapping between each row and its category. This mapping is called a trained model. It is used to predict the categories of unseen data (`breast-w_test`). The training step produces a model file of type `zip`. Rename this file to `model.zip` by using `edit` dataset property. The trained model is used to predict the categories of each row in `breast-w_test` dataset in the second step. Rename the predicted `tabular` file to `predicted_labels` by using its `edit` dataset property. The third step creates three output files (plots), one each for the confusion matrix, precision, recall and f1-score and roc curves. These files should be downloaded and unzipped to get the `html` file which contains the plot.
 
-> ### {% icon hands_on %} Hands-on: Train a classifier
+> ### {% icon comment %} Comment
+>
+> To find the **SVM classifier** tool, please type the name **support vector machines** in the tool search box and select the tool - **Support vector machines (SVMs) for classification**.
+{: .comment}
+
+> ### {% icon hands_on %} Hands-on: Learn, predict and visualise the predictions
 > 
-> 1. **SVM Classifier (Support vector machine)** {% icon tool %} with the following parameters to train the classifier on training data:
+> 1. **Support vector machines (SVMs) classifier** {% icon tool %} with the following parameters to train the classifier on training data:
 >
 >    - {% icon param-select %} *"Select a Classification Task"*: `Train a model`
 >    - {% icon param-select %} *"Classifier type"*: `Linear Support Vector Classification`
@@ -94,7 +99,7 @@ In this step, `SVM (Support vector machine)` classifier is trained using `breast
 >    - {% icon param-text %} *"Select target column(s)"*: `target`
 >    - `Execute` the classifier to train
 >
-> 2. **SVM Classifier (Support vector machine)** {% icon tool %} with the following parameters to predict classes of test data using the trained model:
+> 2. **Support vector machines (SVMs) classifier** {% icon tool %} with the following parameters to predict classes of test data using the trained model:
 > 
 >    - {% icon param-select %} *"Select a Classification Task"*: `Load a model and predict`
 >    - {% icon param-file %} *"Models"*: `model.zip`
@@ -116,14 +121,16 @@ In this step, `SVM (Support vector machine)` classifier is trained using `breast
 >
 {: .hands_on}
 
+The above hands-on section explains how to perform classification and visualise the predictions using Galaxy machine learning and plotting tools. The classes of unseen (test) data are predicted and evaluated against the true classes. The plots show how good the classification is. Figure 4 shows the percentage of correctly predicted samples per class (recall curve).
+
 
 # Regression
 
-[Regression](https://en.wikipedia.org/wiki/Regression_analysis) is also a supervised learning task where the target is a real number (continuous) instead of discreet like classification. The algorithms which are used for regression tasks are called regressors. A regressor learns mapping between the features of a dataset row and its target value. Inherently, it tries to fit a curve for the targets. This curve can be linear (straight line curve) or non-linear.
+[Regression](https://en.wikipedia.org/wiki/Regression_analysis) is also a supervised learning task where the target is a real number (continuous) instead of discreet like classification. The algorithms which are used for regression tasks are called regressors. A regressor learns the mapping between the features of a dataset row and its target value. Inherently, it tries to fit a curve for the targets. This curve can be linear (straight line curve) or non-linear.
 
 
 ## Data upload
-
+The datasets required for this tutorial contain 21 features of [computer system activity](https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/regression/573_cpu_act) which include columns like fork, exec and so on ([more information](https://sci2s.ugr.es/keel/dataset/data/regression/compactiv-names.txt)). In addition to these features, the training dataset contains one more column as `target` which contains a real number for each row. All the values in the datasets are real numbers. The dataset `train_data.tabular` is used for training a regressor which maps the features to the targets. The test (unseen) dataset `test_data.tabular` is used to predict a target value for each row. The dataset `test_target.tabular` is used to evaluate the quality of predictions as it is also the test data along with the true targets. A plotting tool is used to demonstrate the difference between true and predicted targets.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -145,11 +152,15 @@ In this step, `SVM (Support vector machine)` classifier is trained using `breast
 {: .hands_on}
 
 
-## Learn, predict and visualize results
-In this step, `Gradient boosting regressor` is used for the regression. This is an emsemble based [regressor](http://scikit-learn.org/stable/modules/ensemble.html#regression) which consists of weak learners (e.g. decision trees). It learns features of a training dataset (`train_data`) and maps all feature rows to respective targets. The process of mapping gives a trained model which is used to evaluate the quality of mapping. The trained model is tested on `test_data` in which the target of each row is predicted. The previous step produces a model file of type `zip`. Rename this file to `model.zip` by using `edit` dataset property. The trained model is used to predict the categories of each row in `test_data` dataset.
-The previous step produces a predicted file of type `tabular`. Rename this file to `predicted_data` by using `edit` dataset property. This tool will create three output files, one each for true vs predicted values, scatter plot for true and predicted values and a residual plot. These files are zipped. These files should be downloaded and unzipped to see the `html` file which contains the plot.
+## Learn, predict and visualise the predictions
+`Gradient boosting regressor` is used for regression. It is an ensemble based [regressor](http://scikit-learn.org/stable/modules/ensemble.html#regression) consisting of weak learners (e.g. decision trees). It learns features of a training dataset (`train_data`) and maps all feature rows to respective targets (the targets are real numbers). The process of mapping gives a trained model which is used to evaluate the quality of mapping. The trained model is evaluated on `test_data` which predicts a target value for each row. The second step produces a model file of type `zip`. Rename this file to `model.zip` by using its `edit` dataset property. The trained model is used to predict the categories of each row in `test_data` dataset. Rename the predicted file to `predicted_data` by using `edit` dataset property. The third step creates three output files (plots), one each for true vs predicted values, scatter plot for true and predicted values and a residual plot. These files should be downloaded and unzipped to see the `html` file which contains the plot.
 
-> ### {% icon hands_on %} Hands-on: Train a classifier
+> ### {% icon comment %} Comment
+>
+> To find the **Gradient boosting** tool, please type the name **ensemble methods** in the tool search box and select the tool - **Ensemble methods for classification and regression**.
+{: .comment}
+
+> ### {% icon hands_on %} Hands-on: Learn, predict and visualise the predictions
 > 
 > 1. **Gradient boosting regressor** {% icon tool %} with the following parameters to train the regressor:
 >    - {% icon param-select %} *"Select a Classification Task"*: `Train a model`
@@ -185,3 +196,8 @@ The previous step produces a predicted file of type `tabular`. Rename this file 
 >    ![data](images/residual_plot.png "Residual plot between residual (predicted - true) and predicted targets. For good regression performance, this plot should exhibit a random pattern.")
 >
 {: .hands_on}
+
+The above hands-on section explains how to perform regression and visualise the predictions using Galaxy machine learning and plotting tools. The features of the training data are mapped the real-valued targets. This mapping is used to make predictions on the unseen (test) data. The quality of predictions is visualised using a plotting tool. Figure 7 shows the performance. More the number of points are aligned along the x = y line, better is the prediction.
+
+
+
