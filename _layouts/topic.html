@@ -181,7 +181,7 @@ layout: base
         {% assign maintainers = topic.maintainers | sorted %}
         {% for maintainer in maintainers %}
             <li>
-                <a href="{{ site.baseurl }}/hall-of-fame#{{ maintainer }}">{{ contributors[maintainer].name }}</a>
+                <a href="{{ site.baseurl }}/hall-of-fame#{{ maintainer }}">{{ contributors[maintainer].name | default: maintainer}}</a>
                 {% if contributors[maintainer].maintainer_contact %}
                     {% if contributors[maintainer].maintainer_contact == 'email' %}
                     (<a href="mailto:{{ contributors[maintainer].email }}">Contact {% icon email %}</a> )
@@ -217,7 +217,7 @@ layout: base
         <ul>
         {% assign contributors_list_sorted = contributors_list | sorted %}
         {% for username in contributors_list_sorted %}
-            {% assign contributor = contributors[username] %}
+            {% assign contributor = contributors[username] | default: username %}
             <li>
                 <a href="{{ site.baseurl }}/hall-of-fame#{{ username }}">{% if contributor.name %}{{ contributor.name }}{% else %}{{ username }}{% endif %}</a>
             </li>
