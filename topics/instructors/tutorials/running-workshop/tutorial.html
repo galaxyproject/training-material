@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Running a workshop as instructor</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is a great solution to train the bioinformatics co..." />
+        <meta property="og:title" content="Galaxy Training: Running a workshop as instructor" />
+        <meta property="og:description" content="Galaxy is a great solution to train the bioinformatics co..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body>
+        
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/instructors" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Teaching and Hosting Galaxy training
+                        </a>
+                    </li>
+
+                    
+                    
+                    
+
+                    
+                        
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Finstructors%2Ftutorials%2Frunning-workshop%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Finstructors%2Ftutorials%2Frunning-workshop%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Finstructors%2Ftutorials%2Frunning-workshop%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Finstructors%2Ftutorials%2Frunning-workshop%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Finstructors%2Ftutorials%2Frunning-workshop%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://biostar.usegalaxy.org/" title="Ask on Biostars">
+            Ask questions on Biostars
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/instructors/tutorials/running-workshop/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+   
+{
+  "@context": "http://schema.org",
+  "@type": "CreativeWork",
+  "name": "Running a workshop as instructor",
+  "accessModeSufficient": "visual",
+  "accessibilityControl": "fullMouseControl",
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "learningResourceType": "",
+  "url": "/topics/instructors/tutorials/running-workshop/tutorial.html",
+  "mentions": [
+
+  ],
+  "timeRequired": "PT3H",
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "bebatut"
+    },
+    {
+      "@type": "Person",
+      "name": "bgruening"
+    },
+    {
+      "@type": "Person",
+      "name": "shiltemann"
+    },
+    {
+      "@type": "Person",
+      "name": "erasche"
+    }
+  ],
+  "description": "The questions this  addresses are:\n - \n\n\\nThe objectives are:\n - \n\n"
+}
+
+    </script>
+    <section class="tutorial">
+        <h1>Running a workshop as instructor</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li></li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li></li>
+            
+            </ul>
+
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 3 hours</p>
+            
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#tips-for-instructors" id="markdown-toc-tips-for-instructors">Tips for instructors</a>    <ol>
+      <li><a href="#using-the-training-material" id="markdown-toc-using-the-training-material">Using the Training Material</a></li>
+      <li><a href="#unexpected-situations" id="markdown-toc-unexpected-situations">(Un)expected situations</a></li>
+    </ol>
+  </li>
+  <li><a href="#checklists" id="markdown-toc-checklists">Checklists</a>    <ol>
+      <li><a href="#before-the-workshop" id="markdown-toc-before-the-workshop">Before the workshop</a></li>
+      <li><a href="#before-the-participants-arrive" id="markdown-toc-before-the-participants-arrive">Before the participants arrive</a></li>
+      <li><a href="#during-the-workshop" id="markdown-toc-during-the-workshop">During the workshop</a></li>
+      <li><a href="#after-the-workshop" id="markdown-toc-after-the-workshop">After the workshop</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="tips-for-instructors">Tips for instructors</h1>
+
+<h2 id="using-the-training-material">Using the Training Material</h2>
+
+<ol>
+  <li>
+    <p>Decide (individually or together) if you will:</p>
+
+    <ol>
+      <li>Run through the tutorial with them step by step, waiting for everyone at each step</li>
+      <li>OR allow trainees to follow along at their own pace</li>
+    </ol>
+
+    <p>Each of these options has pros and cons:</p>
+
+    <ul>
+      <li>
+        <p>Step by step</p>
+
+        <ul>
+          <li>Pro: everyone is on the same step, helpers can see similar errors at similar times that they can point out to the group at once</li>
+          <li>Con: Some trainees will be faster, and some will be slower. If you wait for everyone it may cause you to go at a slower pace than expected, depending on their skill levels</li>
+        </ul>
+      </li>
+      <li>
+        <p>At their own pace:</p>
+
+        <ul>
+          <li>Pro: Those who want to explore features have time to do so. If they are intrigued by the workflow editor, they can play around with it for some time before moving on.</li>
+          <li>Con: People will finish at wildly different times. Be prepared for some users to be done and maybe encourage them with a list of things they can do after they’ve completed the tutorial, or additional reading material, or just encourage them to try different parameters.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Will you present slides? Make sure these are prepared ahead of time. The Training Material offers introductory slides for many topics and many tutorials. See if you can contribute your slides back, if the topic does not currently have any.</p>
+  </li>
+</ol>
+
+<h2 id="unexpected-situations">(Un)expected situations</h2>
+
+<h3 id="students-asking-extremely-specific-questions">Students asking extremely specific questions</h3>
+
+<p>Occasionally students will either want to show off their knowledge on specific topics, or will just want special attention with their particular research question.
+If you can answer the question briefly then this can be good. Otherwise just ask them to bring it up with you during the next break.</p>
+
+<h3 id="interruptions">Interruptions</h3>
+
+<p>There are many kinds of interruptions that can occur:</p>
+
+<dl>
+  <dt>Fire alarm / evacuate the classroom</dt>
+  <dd>There is not much you can do in this situation. If they bring their stuff with them (they shouldn’t if it’s a fire alarm), then consider continuing outside. However this can be unpleasant for participants due to weather, or too much sun on their laptops. Make a break, point out nearby attractions, and make a plan to meat back in 30 minutes.</dd>
+  <dt>Internet / Server Outage</dt>
+  <dd>Can you estimate how long this will last? If it is going to be a short interruption, this can be a good time to recap briefly and then ask questions of the students, or suggest students should ask their questions. If it will be a long outage, you can switch to your backup server, OR you can walk the students through the rest of the steps. Be sure to go slowly and be detailed with what would have happened during the steps that they will miss.</dd>
+</dl>
+
+<p>(Any others?)</p>
+
+<h3 id="unsocial-participants">Unsocial participants</h3>
+
+<p>Not everyone is always outwardly enthusiastic about the course for any number of reasons; some students may be very introverted, maybe haven’t had their coffee yet, were told to be there by their boss, or just not willing to be social. While you cannot force them everyone, you can encourage try and make activities cover a wide range of groups, from small to large. Some people will be more willing to join smaller groups, or will be more than willing to interact with you one-on-one. Ice breakers that involve one-on-one conversations can be good, a nice one is to have a ‘bingo’ chart with various aspects about researchers (has PhD, works with viruses, is from local city, is from outside of the country, etc.) and ask them to find people matching these attributes. This allows them to have more personal conversations.</p>
+
+<h1 id="checklists">Checklists</h1>
+
+<h2 id="before-the-workshop">Before the workshop</h2>
+
+<ol>
+  <li>Read the <a href="https://carpentries.github.io/instructor-training/22-practices/">teaching recommendations</a> of Software Carpentry</li>
+  <li>Read the <a href="/training-material/topics/instructors/tutorials/organize-workshop/tutorial.html">organiser recommendations</a> and see if there is anything you can help with</li>
+  <li>Decide on the order of the lessons and who will teach what with the organizers</li>
+  <li>Assist the host in recruiting helpers (people to walk around the classroom and help people if they get stuck)</li>
+  <li>Assist the host in ensuring the workshop location is accessible and everything is ready for the students</li>
+  <li>Share emergency contact information with host in case of last minute changes</li>
+  <li>Practice teaching the material</li>
+  <li>Remind the host of any special equipment you might need (e.g. Mac connector)</li>
+  <li>Confirm criteria for reimbursement (per diem or save receipts)</li>
+  <li>Create a recap with the different formats and workflows taught during the workshop and print them</li>
+</ol>
+
+<h3 id="prepare-your-galaxy">Prepare your Galaxy</h3>
+
+<ol>
+  <li>
+    <p>Identify where you will run the training:</p>
+
+    <ol>
+      <li>
+        <p>A Public Galaxy?</p>
+
+        <ul>
+          <li>UseGalaxy.org? UseGalaxy.eu? .org.au? (etc.)</li>
+          <li>If you run on UseGalaxy.eu, they provide free <a href="/training-material/topics/instructors/tutorials/setup-tiaas-for-training/tutorial.html">Training Infrastructure</a></li>
+          <li>Work with the Galaxy administrator to ensure that the tools and datasets required are available</li>
+        </ul>
+      </li>
+      <li>
+        <p>A Private Galaxy?</p>
+
+        <p>Check our tutorial on <a href="/training-material/topics/instructors/tutorials/setup-galaxy-for-training/tutorial.html">how to set up a Galaxy for Training</a></p>
+
+        <ul>
+          <li>Technical infrastructure</li>
+          <li>Install the needed tools and data</li>
+          <li>Check the scalability for the number of participants</li>
+          <li>Test the tutorials on the infrastructure</li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>No matter what</strong>: Have a backup plan!</p>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <p>Run the tutorials several times on your server and your backup server</p>
+  </li>
+  <li>
+    <p>Identify the time / memory limiting steps and plan accordingly</p>
+  </li>
+</ol>
+
+<h2 id="before-the-participants-arrive">Before the participants arrive</h2>
+
+<ol>
+  <li>
+    <p>Check accessibility</p>
+
+    <ul>
+      <li>Set up the computer and go to the back of the room. Is the font used in your slides big enough? Is the font for showing the training materials?</li>
+      <li>If your room has a mic, use it, and have a helper stand in the back of the room to confirm that you can be heard</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="during-the-workshop">During the workshop</h2>
+
+<ol>
+  <li>Review Code of Conduct with participants</li>
+  <li>Support host in collecting attendee names and emails</li>
+  <li>
+    <p>Remind learners to use sticky notes to give feedback</p>
+
+    <p>Ask “Who is not yet finished?” and remind them to place the post-it notes so you can see quickly whether or not you can continue (assuming you have chosen step-by-step instructionm). If you are using the at-your-own-pace instruction, you can ask them to place postit notes if they have questions (better than their arms getting tired.)</p>
+  </li>
+  <li>Make regular breaks (every 1-2 hours for 15-30 minutes)</li>
+  <li>
+    <p>Engage and interact with the participants</p>
+
+    <p>You can use gamification and interactive examples to help participants learn. For example: use LEGO bricks to demonstrate how mapping works (TODO: Link to how to do this demo.)</p>
+
+    <p>Find someone you haven’t talked to yet today, and talk to them. Make sure all the helpers have the same goal.</p>
+  </li>
+  <li>Regularly ask questions of the trainees:</li>
+</ol>
+
+<ul>
+  <li>What data formats work here?</li>
+  <li>Where is the data coming from?</li>
+  <li>What data transformation is being made?</li>
+  <li>What were the data formats used today?</li>
+  <li>What were the main steps of today’s workflow?</li>
+</ul>
+
+<ol>
+  <li>
+    <p>Regularly remind trainees of things you’ve taught them</p>
+
+    <p>Repeat again and again, in different ways, to reinforce concepts</p>
+
+    <p>Explain and re-explain file formats and group them for their uses (e.g. SAM/BAM/CRAM are sequence alignment formats, fasta is for genomic sequences, FastQ variants all store sequencing reads)</p>
+  </li>
+  <li>Draw the workflow, maybe interactively ask students to remind you of next steps</li>
+  <li>Do recap at the end of each day about what happened during the day</li>
+  <li>Do recap each morning about what happened yesterday</li>
+  <li>Provide the students with a recap of the formats and workflows as a take-home</li>
+</ol>
+
+<h2 id="after-the-workshop">After the workshop</h2>
+
+<ol>
+  <li>Submit receipts for reimbursement</li>
+  <li>Report any training errors or suggest improvements on github, gitter or by email to the GTN</li>
+  <li>Update this document with anything that you did that wasn’t listed.</li>
+</ol>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+            <ul>
+                
+                <li>The take-home messages</li>
+                
+                <li>They will appear at the end of the tutorial</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+        <hr>
+        <br>
+
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Running a workshop as instructor (Teaching and Hosting Galaxy training)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Running a workshop as instructor (Teaching and Hosting Galaxy training)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Bérénice Batut, Björn Grüning, Helena Rasche, Saskia Hiltemann)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/instructors/tutorials/running-workshop/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>
