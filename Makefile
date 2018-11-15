@@ -2,7 +2,7 @@
 JEKYLL=jekyll
 PORT?=4000
 HOST?=localhost
-INCREMENTAL?=""
+FLAGS?=""
 CHROME=google-chrome-stable
 TUTORIALS=$(shell find _site/training-material -name 'tutorial.html' | sed 's/_site\/training-material\///')
 SLIDES=$(shell find _site/training-material -name 'slides.html' | sed 's/_site\/training-material\///')
@@ -48,16 +48,16 @@ install: clean ## install dependencies
 	gem install awesome_bot
 .PHONY: install
 
-serve: ## run a local server}
-	${JEKYLL} serve -d _site/training-material -P ${PORT} -H ${HOST} ${INCREMENTAL}
+serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
+	${JEKYLL} serve -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve
 
-detached-serve: clean ## run a local server in detached mode
-	${JEKYLL} serve --detach -d _site/training-material -P ${PORT} -H ${HOST} ${INCREMENTAL}
+detached-serve: clean ## run a local server in detached mode (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
+	${JEKYLL} serve --detach -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: detached-serve
 
 build: clean ## build files but do not run a server
-	${JEKYLL} build -d _site/training-material
+	${JEKYLL} build -d _site/training-material ${FLAGS}
 .PHONY: build
 
 check-html: build ## validate HTML
