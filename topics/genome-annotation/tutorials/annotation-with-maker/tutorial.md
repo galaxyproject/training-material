@@ -540,7 +540,7 @@ Enable the three different tracks on the left side of JBrowse, then navigate alo
 
 > ### {% icon question %} Questions
 >
-> Navigate to the sequence named `NC_003421.2` (NCBI identifier for Chromosome III), between positions `41800` and `45200`.
+> Navigate to the sequence named `NC_003421.2` (NCBI identifier for Chromosome III), between positions `41800` and `45200` (or between `143850` and `148763` if you used the full genome sequence sequence).
 > ![JBrowse navigation](../../images/jbrowse_navigate.png "Navigating to the given sequence and positions.")
 > 1. How did the annotation improved in this region after each Maker round?
 >
