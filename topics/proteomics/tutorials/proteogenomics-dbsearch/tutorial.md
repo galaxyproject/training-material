@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: "Proteogenomics 2: Database Search"
 zenodo_link: "https://doi.org/10.5281/zenodo.1302055"
 questions:
-  - "A research question"
+  - "How to identify variant proteoforms in MS data by searching with the customized Protein database?"
 objectives:
   - "A proteogenomic data analysis of mass spectrometry data to identify and visualize variant peptides."
 time_estimation: "15m"
