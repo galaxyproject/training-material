@@ -1,7 +1,20 @@
 ---
 layout: tutorial_hands_on
-topic_name: assembly
-tutorial_name: general-introduction
+
+title: "Introduction to Genome Assembly"
+zenodo_link: "https://doi.org/10.5281/zenodo.582600"
+questions:
+  - "How do we perform a very basic genome assembly from short read data?"
+objectives:
+  - "assemble some paired end reads using Velvet"
+  - "examine the output of the assembly."
+time_estimation: "30m"
+key_points:
+  - "We assembled some Illumina fastq reads into contigs using a short read assembler called Velvet"
+  - "We showed what effect one of the key assembly parameters, the k-mer size, has on the assembly"
+  - "It looks as though there are some exploitable patterns in the metric data vs the k-mer size."
+contributors:
+  - slugger70
 ---
 
 # Genome assembly with Velvet: Background
@@ -43,27 +56,21 @@ We will now import the data that we will use for the tutorial.
 >    > * Select **Paste/Fetch Data**
 >    > * Paste the link into the text field
 >    > * Change the data-type to **fastqsanger**
->    > * Press **Start**    
+>    > * Press **Start**
 >    {: .tip}
 >
 > 3. Change the name of the files to `mutant_R1` and `mutant_R2`.
 >
 >    As a default, Galaxy uses the link as the name of the new dataset. It also does not link the dataset to a database or a reference genome.
 >
->    > ### {% icon tip %} Tip: Changing the name of a dataset
->    >
->    > * Click on **Edit attributes** ![Pencil icon](../../images/edit_file.png) icon next to the relevant history entry
->    > * Change the **Name** in `Attributes` panel
->    {: .tip}
->
->    ![Imported datasets will appear in the history panel](../../images/starting_history.png "Imported datasets in the history panel")
+>    {% include snippets/rename_dataset.md %}
 >
 > 4. Inspect the content of a file.
 >
 >    > ### {% icon tip %} Tip: Inspecting the content of a dataset
 >    >
->    > * Click on **View Data** (the ![Eye icon](../../images/eye.png)) icon next to the relevant history entry
->    > * View the content of the file in the middle panel
+>    > * Click on the {% icon galaxy-eye %} (eye) icon next to the relevant history entry
+>    > * View the content of the file in the central panel
 >    {: .tip}
 >
 >    > ### {% icon question %} Questions

@@ -1,7 +1,25 @@
 ---
 layout: tutorial_hands_on
-topic_name: proteomics
-tutorial_name: protein-quant-sil
+
+title: "Peptide and Protein Quantification via Stable Isotope Labelling (SIL)"
+zenodo_link: "https://zenodo.org/record/1051552"
+questions:
+  - "What are MS1 features?"
+  - "How to quantify based on MS1 features?"
+  - "How to map MS1 features to MS2 identifications?"
+  - "How to evaluate and optimize the results?"
+objectives:
+  - "MS1 feature quantitation and mapping of quantitations to peptide and protein IDs."
+time_estimation: "1h"
+key_points:
+  - "Peptides labelled with stable isotopes result in multiple parallel MS1 ion traces."
+  - "MS1 features can be used for relative protein quantitation."
+  - "Quantitations have to be mapped to PSMs."
+  - "PSM quantitations can be used to calculate protein quantitations."
+  - "Proper quantitation and mapping needs careful evaluation and optimization."
+contributors:
+  - stortebecker
+  - bgruening
 ---
 
 # Introduction
@@ -114,19 +132,17 @@ Finally, we will combine the peptide quantifications to protein quantifications.
 >
 > 1. Run ***IDMapper*** {% icon tool %} with
 >   - the output of ***IDFilter*** as **Protein/peptide identifications file**,
->   - the `consensusXML` output of ***FidoAdapter*** as **Feature map/consensus map file**, 
+>   - the `consensusXML` output of ***FeatureFinderMultiplex*** as **Feature map/consensus map file**, 
 >   - **RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features** set to `20`,
 >   - **m/z tolerance (in ppm or Da) for matching of peptide identifications and (consensus) features** set to `10`, and
 >   - **Match using RT and m/z of sub-features instead of consensus RT and m/z** set to `Yes`.
-> 2. Change the filetype of the ***IDMapper*** output to `consensusXML`.
-> 3. Run ***FileFilter*** {% icon tool %} with
+> 2. Run ***FileFilter*** {% icon tool %} with
 >   - **Remove unassigned peptide identifications** set to `Yes`.
-> 4. Run ***IDConflictResolver*** {% icon tool %}.
-> 5. Run ***ProteinQuantifier*** {% icon tool %} with
+> 3. Run ***IDConflictResolver*** {% icon tool %}.
+> 4. Run ***ProteinQuantifier*** {% icon tool %} with
 >   - the output of ***IDConflictResolver*** as **Input file**,
 >   - the output of ***IDFilter*** as **Protein inference results [...]**,
 >   - **Calculate protein abundance from this number of proteotypic peptides (most abundant first; '0' for all)** set to `0`, 
->   - **Include results for proteins with fewer proteotypic peptides than indicated by 'top'** set to `Yes`,
 >   - **Averaging method used to compute protein abundances from peptide abundances** set to `sum`, and
 >   - **Add the log2 ratios of the abundance values to the output** set to `Yes`.
 >

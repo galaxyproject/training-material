@@ -1,7 +1,23 @@
 ---
 layout: tutorial_hands_on
-topic_name: proteomics
-tutorial_name: protein-id-oms
+
+title: "Peptide and Protein ID using OpenMS tools"
+zenodo_link: "https://zenodo.org/record/546301"
+questions:
+  - "How to convert LC-MS/MS raw files?"
+  - "How to identify peptides?"
+  - "How to identify proteins?"
+  - "How to evaluate the results?"
+objectives:
+  - "Protein identification from LC-MS/MS raw files."
+time_estimation: "45m"
+key_points:
+  - "LC-MS/MS raw files have to be converted to mzML before using GalaxyP on most GalaxyP servers."
+  - "OpenMS provides many tools for proteomic analysis and guarantees compatibility by using open file formats."
+  - "OpenMS provides several thirdparty search engines and Fido for protein inference."
+contributors:
+  - stortebecker
+  - bgruening
 ---
 
 # Introduction
@@ -58,7 +74,7 @@ If your data were generated on a low resolution mass spectrometer, use ***PeakPi
 > 1. Create a new history for this Peptide and Protein ID exercise.
 > 2. Load the example dataset into your history from Zenodo: [raw](https://zenodo.org/record/892005/files/qExactive01819.raw) [mzML](https://zenodo.org/record/892005/files/qExactive01819_profile.mzml)
 > 3. Rename the dataset to something meaningful.
-> 4. (*optional*) Run ***msconvert*** {% icon tool %} on the test data to convert to the `mzML` format.
+> 4. (*only for raw files*) Run ***msconvert*** {% icon tool %} on the test data to convert to the `mzML` format.
 > 5. Run ***PeakPickerHiRes*** {% icon tool %} on the resulting file. Click `+ Insert param.algorithm_ms_levels` and change the entry to "2". Thus, peak picking will only be performed on MS2 level.
 >
 >   > ### {% icon comment %} Comment: Local Use of MSConvert
@@ -81,7 +97,7 @@ Different peptide search engines have been developed to fulfill the matching pro
 > 1. Copy the prepared protein database from the tutorial [Database Handling](../database-handling/tutorial.html) into your current history by using the multiple history view or upload the ready-made database from this [link](https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_and_Mycoplasma_added%29.fasta).
 > 2. Run the tool ***XTandemAdapter*** {% icon tool %} with:
     - the MS2-centroided mzML as **Input file containing MS2 spectra** and
-    - the FASTA protein database as **FASTA file or pro file**.
+    - the FASTA protein database as **FASTA file**.
     - Click `+ Insert param_fixed_modifications` and choose `Carbamidomethyl (C)`.
     - Click `+ Insert param_variable_modifications` and choose `Oxidation (M)`.
 > 3. Run the tool ***FileInfo*** {% icon tool %} on the XTandem output.
@@ -97,7 +113,7 @@ Different peptide search engines have been developed to fulfill the matching pro
 The next step of peptide identification is to decide which PSMs will be used for protein inference. Measured MS2 spectra never perfectly fit the theoretical spectra. Therefore, peptide search engines calculate a score which indicates how well the measured MS2 spectrum was fitting the theoretical spectrum. How do we decide which PSMs are likely true and which are false?
 
 In proteomics, this decision is typically done by calculating false discovery rates (FDRs). Remember that the database we were using for peptide-to-spectrum matching consisted not only of true proteins, but also the same number of "fake entries", the so-called decoys. Those decoys can now be used to estimate the number of false identifications in the list of PSMs.
-The calculation is based on a simple assumption: for every decoy protein identified with a given score, we expect one false positive with at least the same score.
+The calculation is based on a simple assumption: for every decoy peptide identified with a given score, we expect one false positive with at least the same score.
 The false discovery rate is therefore defined as the number of false discoveries (decoy hits) divided by the number of false and correct discoveries (both target and decoy hits) at a given score threshold.
 
 To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool ***PeptideIndexer*** {% icon tool %}. Additionally, we will calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm used by OpenMS. We will then filter for 1 % FDR and set the score back to PEP.
@@ -115,7 +131,7 @@ To calculate FDRs, we first have to annotate the identified peptides to determin
 >   - `-add_decoy_peptides` set to `Yes`.
 > 4. Run ***IDScoreSwitcher*** {% icon tool %} with
 >   - **Name of the meta value to use as the new score** set to "Posterior Probability_score", and
->   - **Orientation of the new score`** set to `higher_better`.
+>   - **Orientation of the new score** set to `higher_better`.
 > 5. Run ***FileInfo*** {% icon tool %} to get basic information about the identified peptides.
 >
 >   > ### {% icon question %} Questions:
@@ -154,9 +170,8 @@ It also enables you to check for contaminations in your samples.
 > ### {% icon hands_on %} Hands-On: Analysis of Contaminants
 >
 > 1. Run ***TextExporter*** {% icon tool %} to convert the idXML output to a human-readable tabular file.
-> 1. Run ***Select*** {% icon tool %} to select all lines **Matching** the pattern "CONTAMINANT".
-> 3. Run ***Select*** {% icon tool %} to select all lines that **NOT Matching** the pattern "HUMAN".
-> 2. Remove all bovine and mycoplasma proteins from your list by running ***Select*** {% icon tool %}. Select only those lines **NOT Matching** match the pattern "HUMAN".
+> 2. Run ***Select lines that match an expression*** {% icon tool %} on the TextExporter output to select all lines **Matching** the pattern "CONTAMINANT".
+> 3. Remove all non human proteins (e.g. bovine) from your TextExporter list by running ***Select lines that match an expression*** {% icon tool %} only those lines **Matching** the pattern "HUMAN".
 >
 >   > ### {% icon question %} Questions
 >   > 1. Which contaminants did you identify? Where do these contaminations likely come from?
@@ -195,6 +210,7 @@ Here, we will use the OpenMS tool [ConsensusID](http://ftp.mi.fu-berlin.de/pub/O
 > 5. Run ***IDMerger*** {% icon tool %} with two **Input files [...]**:
 >   - the output of **IDScoreSwitcher** based on **XTandemAdapter**
 >   - the output of **IDScoreSwitcher** based on **MSGFPlusAdapter**
+>   - **Reduce collections** set to `reduce collections by aggregating single files of multiple collections`
 > 6. Run ***ConsensusID*** {% icon tool %}.
 > 1. Run ***PeptideIndexer*** {% icon tool %} with
 >   - the FASTA protein database as **Input sequence database in FASTA format**, and

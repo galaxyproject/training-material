@@ -1,7 +1,21 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: create-new-tutorial
+
+title: "Creating a new tutorial"
+questions:
+  - "How to integrate a new tutorial?"
+  - "How to make a tutorial robust and reproducible?"
+objectives:
+  - "Create a tutorial from scratch"
+  - "Link a tutorial to a topic"
+  - "Create hands-on"
+  - "Add technical support for a tutorial"
+time_estimation: "15m"
+key_points:
+  - "Finding good training datasets is hard!"
+  - "Creating a new tutorial involves several steps: some are mandatory, some can be skipped even if they are recommended"
+contributors:
+  - bebatut
 ---
 
 # Introduction
@@ -111,7 +125,7 @@ The most important file is the `tutorial.md` where the content of the tutorial i
 > 1. Run (by adapting the information between the quotes)
 >
 >    ```
->    $ python bin/setup_training_content.py \
+>    $ planemo training_init \
 >             --topic_name "my-topic" \
 >             --tutorial_name "my-new-tutorial" \
 >             --tutorial_title "Title of the tutorial" \
@@ -124,15 +138,6 @@ The most important file is the `tutorial.md` where the content of the tutorial i
 >    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}/topics/contributing/tutorials/running-jekyll/tutorial.html)
 >
 > 2. Check if the tutorial has been correctly added at [http://localhost:4000/training-material/](http://localhost:4000/training-material/)
-{: .hands_on}
-
-# Add metadata
-
-To make the topic aware of this new tutorial, some metadata about the tutorial has been added in the topic's `metadata.yaml` file. This metadata includes some technological and pedagogical support for the training. Once this is filled out, you can run the Galaxy Training Material website locally to check that the new tutorial is accessible.
-
-> ### {% icon hands_on %} Hands-on: Add metadata
->
-> 1. Check out and run our [metadata tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-metadata/tutorial.html)
 {: .hands_on}
 
 # A toy dataset
@@ -178,7 +183,7 @@ We would then develop the tutorial and test it on this toy dataset. Once we were
 > 12. Fill out any remaining information
 > 13. Click on **Publish**
 > 14. Copy the DOI link in the new page
-> 15. Paste the link in `zenodo_link` in the tutorial section of the `metadata.yaml` file
+> 15. Paste the link in `zenodo_link` in the tutorial header
 {: .hands_on}
 
 # Write the tutorial
@@ -209,10 +214,8 @@ The technical support are different files:
 >
 > 1. Add some technical support for the tutorial following the [tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html)
 >    - Add the workflow
->    - (Recommended) Generate the `tools.yaml`
 >    - (Recommended) Generate the `data-library.yaml`
 >    - (Optional) Create an interactive tour
-> 2. Update the `metadata.yaml` file given the technical support added
 {: .hands_on}
 
 # Add slides (optional)
@@ -222,7 +225,6 @@ Sometimes, you may want to have slides to support a tutorial and introduce it du
 > ### {% icon hands_on %} Hands-on: Add slides
 >
 > 1. Create a slide deck in `slides.html` following the [Slide tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-slides/slides.html)
-> 2. Update the `metadata.yaml` file by putting `yes` in `slides`
 {: .hands_on}
 
 # Conclusion
@@ -237,3 +239,40 @@ To develop a new tutorial:
 5. Write the tutorial
 6. Add some technical support (recommended)
 7. Add slides (optional)
+
+For the next times, you can make it quicker.
+
+> ### {% icon hands_on %} Hands-on: Generation of a tutorial
+>
+> 1. Determine the topic
+> 2. Create your workflow on a running Galaxy instance
+> 3. Create a Zenodo record with the input data
+> 4. Generate the skeleton of your tutorial
+>    - option 1: from a workflow located on a Galaxy
+>      ```
+>      $ planemo training_init \
+>             --topic_name "my-topic" \
+>             --tutorial_name "my-new-tutorial" \
+>             --tutorial_title "Title of the tutorial" \
+>             --galaxy_url "URL to Galaxy instance in which you created the workflow" \
+>             --galaxy_api_key "Your API key on the Galaxy instance" \
+>             --workflow_id "ID of the workflow on the Galaxy instance" \
+>             --zenodo_link "URL to the Zenodo record"
+>      ```
+>    - option 2: from a local workflow file (`.ga`)
+>
+>      ```
+>      $ planemo training_init \
+>             --topic_name "my-topic" \
+>             --tutorial_name "my-new-tutorial" \
+>             --tutorial_title "Title of the tutorial" \
+>             --workflow "path/to/workflow" \
+>             --zenodo_link "URL to the Zenodo record"
+>      ```
+>      You can use the example workflow file located in `topics/contributing/tutorials/create-new-tutorial/workflows/example-workflow.ga` if
+>      you do not have a workflow of your own. This is the workflow belonging to the *Galaxy 101* introduction tutorial.
+>
+> 5. Fill the remaining metadata in the `tutorial.md`
+> 6. Fill the content of the `tutorial.md`
+> 7. Check it using Jekyll
+{: .hands_on}

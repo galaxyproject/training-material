@@ -1,7 +1,29 @@
 ---
 layout: tutorial_hands_on
-topic_name: transcriptomics
-tutorial_name: clipseq
+
+title: CLIP-Seq data analysis from pre-processing to motif detection
+zenodo_link: https://zenodo.org/record/1327423
+questions:
+  - How is raw CLIP-Seq data processed and analysed?
+  - How do I find binding motifs and targets for a protein (e.g., RBFOX2)?
+objectives:
+  - Remove Adapters, Barcodes and Unique Molecular Identifiers (UMIs) from the reads
+  - Align trimmed reads with STAR
+  - De-duplicate the read library
+  - Inspect the read mapping and de-duplication quality
+  - Perform peak calling with PEAKachu
+  - Analyse the peaks and find potential binding motifs and targets
+  - Check the quality of the peak calling
+time_estimation: "6h"
+key_points:
+  - Sophisticated analysis of CLIP-Seq data is possible using tools hosted by Galaxy.
+  - Analysis of the datasets needs multiple methods to assess the quality of the data and to answer the biological question of interest.
+  - CLIP-Seq data varies from protocol to protocol, thus flexible changes to the data anylsis are required which is supported by Galaxy.
+  - By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced.
+contributors:
+  - Florian-H-Lab
+  - dmaticzka
+  - bebatut
 ---
 
 # Introduction
@@ -225,7 +247,10 @@ To determine where DNA fragments originated in the genome, the sequenced reads m
 >        - *"Reference genome with or without an annotation"*: `use genome reference with builtin gene-model`
 >            - *"Select reference genome"*: `Homo sapiens (hg19+GRCh37.75)`
 >    - *"Count number of reads per gene"*: `No`
->    - *"Would you like to set output parameters (formatting and filtering)?"*: `No`
+>    - *"Would you like to set output parameters (formatting and filtering)?"*: `Yes`
+>        - *"Extra SAM attributes to include"*: `All`
+>        - *"Include strand field flag XS"*: `Yes -- and reads with inconsistent and/or non-canonical introns are filtered out`
+>        - *"Would you like to set additional output parameters (formatting and filtering)?"*: `Yes`
 >    - *"Other parameters (seed, alignment, limits and chimeric alignment)"*: `Extended parameter list`
 >        - In *"Alignment parameters"*:
 >            - *"Use end-to-end read alignments, with no soft-clipping?"*: `Yes`

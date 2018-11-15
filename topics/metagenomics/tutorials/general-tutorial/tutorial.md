@@ -1,7 +1,26 @@
 ---
 layout: tutorial_hands_on
-topic_name: metagenomics
-tutorial_name: general-tutorial
+
+title: "Analyses of metagenomics data - The global picture"
+zenodo_link: "https://doi.org/10.5281/zenodo.815875"
+questions:
+  - "How to analyze metagenomics data?"
+  - "What information can be extracted of metagenomics data?"
+  - "What is the difference between amplicon and shotgun data?"
+  - "What are the difference in the analyses of amplicon and shotgun data?"
+objectives:
+  - "Choosing the best approach to analyze metagenomics data"
+  - "Selection of tools to analyze amplicon data or shotgun data"
+  - "Visualisation of a community structure"
+time_estimation: "2H30M"
+key_points:
+  - "With amplicon data, we can extract information about the studied community structure"
+  - "With shotgun data, we can extract information about the studied community structure and also the functions realised by the community"
+  - "The tools used to analyze amplicon and shotgun data are different, except for the visualisation"
+  - "Metagenomics data analyses are complex and time-consuming"
+contributors:
+  - shiltemann
+  - bebatut
 ---
 
 # Introduction
@@ -392,7 +411,7 @@ We would like to classify the sequences using a training set, which is again is 
 >   - "taxonomy" to `trainset16_022016.pds.tax` from your history
 >   - "count" to the count table from `Pre.cluster`
 >
-> This step may take a couple of minutes, now may be a good time to grab a cup of tea :coffee:
+> This step may take a couple of minutes, now may be a good time to grab a cup of tea/coffee.
 >
 {: .hands_on}
 
@@ -580,7 +599,7 @@ In this tutorial, we use the second approach with MetaPhlAn2. This tools is usin
 >    - "Database with clade-specific marker genes" to `locally cached`
 >    - "Cached database with clade-specific marker genes" to `MetaPhlAn2 clade-specific marker genes`
 >
-> This step may take a couple of minutes :coffee:
+> This step may take a couple of minutes.
 {: .hands_on}
 
 3 files are generated:

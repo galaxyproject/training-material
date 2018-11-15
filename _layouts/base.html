@@ -6,13 +6,37 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>{{ site.title }}</title>
+        <title>{{ page.title | default: site.title }}</title>
+        {% if site.env.GOOGLE_ANALYTICS_ID %}
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', '{{ site.env.GOOGLE_ANALYTICS_ID }}' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        {% endif %}
         <link rel="stylesheet" href="{{ "/assets/css/bootstrap.min.css?v=3" | prepend: site.baseurl }}">
         <link rel="stylesheet" href="{{ "/assets/css/main.css?v=2" | prepend: site.baseurl }}">
         <link rel="stylesheet" href="{{ "/assets/css/font-awesome.css" | prepend: site.baseurl }}">
         <link rel="stylesheet" href="{{ "/assets/css/academicons.css" | prepend: site.baseurl }}">
         <link rel="stylesheet" href="{{ "/assets/css/syntax_highlighting.css" | prepend: site.baseurl }}">
         <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon" />
+
+        {% assign topic = site.data[page.topic_name] %}
+        {% assign og_title = topic.title %}
+        {% if page.title %}
+          {% assign og_title = page.title %}
+        {% endif %}
+        {% assign og_desc = "Collection of tutorials developed and maintained by the worldwide Galaxy community" %}
+        {% if topic.summary %}
+          {% assign og_desc = topic.summary %}
+        {% endif %}
+        <meta name="description" content="{{ og_desc | strip_html | truncate: 60}}" />
+        <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}" />
+        <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}" />
+        <meta property="og:image" content="{{ "/assets/images/GTNLogo1000.png" | prepend: site.baseurl }}" />
     </head>
     <body>
         {{ content }}

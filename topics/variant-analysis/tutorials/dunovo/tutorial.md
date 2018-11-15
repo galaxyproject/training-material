@@ -1,7 +1,21 @@
 ---
 layout: tutorial_hands_on
-topic_name: variant-analysis
-tutorial_name: dunovo
+
+title: "Calling very rare variants"
+zenodo_link: ""
+questions:
+  - "What frequency of variants is so low that it is obscured by sequencing error rate?"
+  - "What are the different types of consensus sequences produced from duplex sequencing?"
+objectives:
+  - "Processing raw duplex sequencing data into consensus sequences"
+  - "Find rare variants without relying on diploid assumptions"
+time_estimation: "3h"
+key_points:
+  - "Diploid variant calling relies on assumptions that rare variant calling cannot make"
+  - "Duplex consensus sequences are usually most accurate, but sometimes you must rely on single-strand consensus sequences instead."
+contributors:
+  - nekrut
+  - NickSto
 ---
 
 # Introduction
@@ -85,7 +99,7 @@ Here are the steps, displayed as the Galaxy history you'll end up with if you fo
 
 # Generating consensus sequences
 
-The starting point of the analysis is sequencing reads (in [FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) format) produced from a duplex sequencing library.  
+The starting point of the analysis is sequencing reads (in [FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) format) produced from a duplex sequencing library.
 
 ## Getting data in and assessing quality
 
@@ -101,11 +115,11 @@ We uploaded the [Schmitt *et al.* 2015](https://www.ncbi.nlm.nih.gov/pmc/article
 > Or, if you'd like to use a different Galaxy instance, you can import it:
 > 1. Click on the gear icon at the top of the **History** pane.
 > 2. Click on "Import from File" at the bottom of the menu.
-> 3. Enter this link in the box under **Archived History URL**:  
+> 3. Enter this link in the box under **Archived History URL**:
 > `https://usegalaxy.org/history/export_archive?id=7ac09d1db287dbba`
 {: .hands_on}
 
-This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using {% icon tool %} **FastQC** [here](../../../../topics/sequence-analysis/tutorials/quality-control/tutorial.html#quality-check).
+This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using {% icon tool %} **FastQC** [here]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-the-read-quality).
 
 This gave us the following plots:
 
@@ -220,7 +234,7 @@ Normally, the tool only produces the final double-stranded consensus sequences. 
 
 ## Filtering consensuses
 
-You may have realized that when calling a "consensus" between two sequences, if the two disagree on a base, there's no way to know which is correct. So in these situations, Du Novo uses the [IUPAC ambiguity letter](https://en.wikipedia.org/wiki/Nucleic_acid_notation) for the two different bases (e.g. `W` = `A` or `T`). Also, when calling single-stranded consensus sequences, if there aren't enough high-quality bases to call a position ([above](#-hands-on-making-consensus-sequences), we set this threshold to 70%), it gives an `N`.
+You may have realized that when calling a "consensus" between two sequences, if the two disagree on a base, there's no way to know which is correct. So in these situations, Du Novo uses the [IUPAC ambiguity letter](https://en.wikipedia.org/wiki/Nucleic_acid_notation) for the two different bases (e.g. `W` = `A` or `T`). Also, when calling single-stranded consensus sequences, if there aren't enough high-quality bases to call a position (in the [above hands-on](#hands_on-hands-on-making-consensus-sequences), we set this threshold to 70%), it gives an `N`.
 
 This information could be useful for some analyses, but not for our variant calling. The tool {% icon tool %} **Sequence Content Trimmer** will help with filtering these out. With the settings below, it will move along the read, tracking the frequency of ambiguous (non-ACGT) bases in a 10bp window. If it sees more than 2 ambiguous bases in a window, it will remove the rest of the read, starting with the first offending base in the window. We'll also tell it to remove entirely any read pair containing a read that got trimmed to less than 50bp.
 
@@ -300,7 +314,7 @@ To identify sites containing variants we use the {% icon tool %} **Naive Variant
 >  - {% icon param-text %} *Chromosome*: `chr9`
 >    - *ABL1* is on chr9. Restricting it to this region saves some processing time.
 >  - {% icon param-text %} *Minimum base quality*: `0`
-     - In our case, base quality [isn't meaningful](#-where-do-the-fastq-quality-scores-come-from), so we set the threshold to 0.
+     - In our case, base quality [isn't meaningful](#details-where-do-the-fastq-quality-scores-come-from), so we set the threshold to 0.
 >  - {% icon param-text %} *Minimum mapping quality*: `20`
 >  - {% icon param-text %} *Ploidy*: `1`
 >    - Ploidy is irrelevant here as it is a mixture of multiple genomes.
@@ -359,10 +373,10 @@ The polymorphism we are interested in (and the one reported by [Schmitt *et al.*
 Analysis of SSCS data follows the exact same trajectory:
 
 * [Filtering consensuses](#filtering-consensuses)
-* [Calling variants](#calling-variants)  
- 	- [Aligning against genome](#align-against-the-genome-with-bwa-mem)  
- 	- [Left aligning indels](#left-aligning-indels)  
- 	- [Tabulating the differences](#tabulating-the-differences)  
+* [Mapping the reads](#mapping-the-reads)
+ 	- [Aligning against genome](#align-against-the-genome-with-bwa-mem)
+ 	- [Left aligning indels](#left-aligning-indels)
+* [Calling the variants](#calling-the-variants)
 
 > ### {% icon tip %} Tip: Re-running with the same settings
 >
