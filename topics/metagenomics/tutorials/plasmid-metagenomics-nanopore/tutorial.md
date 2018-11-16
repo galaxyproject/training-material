@@ -1,7 +1,8 @@
 ---
 layout: tutorial_hands_on
 
-title: "Nanopore sequence analysis"
+title: "Antibiotic resistance detection"
+tags: [nanopore, plasmids]
 zenodo_link: "https://doi.org/10.5281/zenodo.1443246"
 questions:
   - "How do I assemble a genome with Nanopore data?"
@@ -21,6 +22,7 @@ contributors:
   - willemdek11
   - shiltemann
 ---
+
 # Overview
 {:.no_toc}
 
@@ -58,7 +60,9 @@ In this tutorial we use metagenomic nanopore data, but similar pipelines can be 
 > (slide credit [Nanopore sequencing: The advantages of long reads for genome assembly](https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512 ))
 {: .tip}
 
+
 ## Understanding our input data
+
 In this tutorial we are interested in determing the antimicrobial resistance genes.
 
 As training data we use a sing plasmid from a dataset (,created by Li, Ruichao et al.) used for evaluation of the efficiency of MDR plasmid sequencing by MinION platform. In the experiment 12 MDR plasmid-bearing strains were selected for plasmid extraction, including E. coli, S. typhimurium, V. parahaemolyticus, and K. pneumoniae. Overnight cultures (100 mL) were harvested and subjected to plasmid extraction using the QIAGEN Plasmid Midi Kit. The extracted plasmids were dissolved in ultrapure distilled water, and concentrations were measured by Qubit 3.0 Fluorometer with a dsDNA BR Assay Kit. The plasmids were stored in –20°C until library preparation.
