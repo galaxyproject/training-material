@@ -17,7 +17,7 @@ time_estimation: "3h"
 key_points:
   - "Minimap2, Miniasm and Racon can be used for creating a fast assembly of Nanopore sequences"
   - "Nanopore sequencing is useful for reconstruction of genomes"
-  - "Antimicriobal resistance genes are detectable after fast assembly"
+  - "Antimicrobial resistance genes are detectable after fast assembly"
 contributors:
   - willemdek11
   - shiltemann
@@ -38,11 +38,7 @@ In this tutorial we will perform an assembly of nanopore data and show some of t
 {: .agenda}
 
 
-> ### {% icon comment %} Note
-> Your results may deviate slightly from the ones presented in this tutorial due to differing tool or
-> reference data versions or stochastic processes in the algorithms.
-{: .comment}
-
+{% include snippets/warning_results_may_vary.md %}
 
 # Obtaining and preparing data
 
@@ -65,15 +61,21 @@ In this tutorial we use metagenomic nanopore data, but similar pipelines can be 
 
 In this tutorial we are interested in determing the antimicrobial resistance genes.
 
-As training data we use a sing plasmid from a dataset (,created by Li, Ruichao et al.) used for evaluation of the efficiency of MDR plasmid sequencing by MinION platform. In the experiment 12 MDR plasmid-bearing strains were selected for plasmid extraction, including E. coli, S. typhimurium, V. parahaemolyticus, and K. pneumoniae. Overnight cultures (100 mL) were harvested and subjected to plasmid extraction using the QIAGEN Plasmid Midi Kit. The extracted plasmids were dissolved in ultrapure distilled water, and concentrations were measured by Qubit 3.0 Fluorometer with a dsDNA BR Assay Kit. The plasmids were stored in –20°C until library preparation.
+As training data we use a single plasmid from a dataset (created by Li, Ruichao et al.) used for evaluation of the efficiency of MDR plasmid sequencing by MinION platform. In the experiment, 12 MDR plasmid-bearing strains were selected for plasmid extraction, including *E. coli, S. typhimurium*, *V. parahaemolyticus*, and *K. pneumoniae*.
 
-Library preparation was performed using the Rapid Barcoding Sequencing Kit (SQK-RBK001) according to the standard protocol provided by the manufacturer (Oxford Nanopore). Briefly, 7.5-μL plasmid templates were combined with a 2.5-μL Fragmentation Mix Barcode (1 barcode for each sample). The mixtures were incubated at 30°C for 1 minute and at 75°C for 1 minute. The barcoded libraries were pooled together with designated ratios in 10 μL; 1 μL of RAD (Rapid 1D Adapter) was added to the pooled library and mixed gently; 0.2 μL of Blunt/TA Ligase Master Mix was added and incubated for 5 minutes at room temperature. The constructed library was loaded into the Flow Cell R9.4 (FLO-MIN106) on a MinION device and run with the SQK-RBK001_plus_Basecaller script of MinKNOW1.5.12 software. The run was stopped after 8 hours, and the flow cell was washed by a Wash Kit (EXP-WSH002) and stored in 4°C for later use.
 
-To obtain high-quality short read data, paired-end (2 × 150 bp) libraries were prepared by the focused acoustic shearing method with the NEBNext Ultra DNA Library Prep Kit and the Multiplex Oligos Kit for Illumina (NEB). The libraries were quantified by employing quantitative PCR with P5-P7 primers, and they were pooled together and sequenced on the NextSeq 500 platform according to the manufacturer's protocol (Illumina).
+> ### {% icon details %} More details about datasets
+> Overnight cultures (100 mL) were harvested and subjected to plasmid extraction using the QIAGEN Plasmid Midi Kit. The extracted plasmids were dissolved in ultrapure distilled water, and concentrations were measured by Qubit 3.0 Fluorometer with a dsDNA BR Assay Kit. The plasmids were stored in –20°C until library preparation.
+>
+> Library preparation was performed using the Rapid Barcoding Sequencing Kit (SQK-RBK001) according to the standard protocol provided by the manufacturer (Oxford Nanopore). Briefly, 7.5-μL plasmid templates were combined with a 2.5-μL Fragmentation Mix Barcode (1 barcode for each sample). The mixtures were incubated at 30°C for 1 minute and at 75°C for 1 minute. The barcoded libraries were pooled together with designated ratios in 10 μL; 1 μL of RAD (Rapid 1D Adapter) was added to the pooled library and mixed gently; 0.2 μL of Blunt/TA Ligase Master Mix was added and incubated for 5 minutes at room temperature. The constructed library was loaded into the Flow Cell R9.4 (FLO-MIN106) on a MinION device and run with the SQK-RBK001_plus_Basecaller script of MinKNOW1.5.12 software. The run was stopped after 8 hours, and the flow cell was washed by a Wash Kit (EXP-WSH002) and stored in 4°C for later use.
+>
+> To obtain high-quality short read data, paired-end (2 × 150 bp) libraries were prepared by the focused acoustic shearing method with the NEBNext Ultra DNA Library Prep Kit and the Multiplex Oligos Kit for Illumina (NEB). The libraries were quantified by employing quantitative PCR with P5-P7 primers, and they were pooled together and sequenced on the NextSeq 500 platform according to the manufacturer's protocol (Illumina).
+>
+> Although a local basecaller script was used during the run, there was still a small amount of reads that were not basecalled due to the generation of raw data in a rapid mode. Albacore basecalling software (v1.0.3) was used to generate fast5 files harboring the 1D DNA sequence from fast5 files with only raw data in the tmp folder. Also, the read_fast5_basecaller.py script in Albacore was used to de-multiplex the 12 samples from basecalled fast5 files (except the files in fail folder) based on the 12 barcodes in SQK-RBK001. The Poretools toolkit was utilized to extract all the DNA sequences from fast5 to fasta format among the 12 samples, respectively (Poretools, RRID:SCR_015879).
+>
+{: .details}
 
-Although a local basecaller script was used during the run, there was still a small amount of reads that were not basecalled due to the generation of raw data in a rapid mode. Albacore basecalling software (v1.0.3) was used to generate fast5 files harboring the 1D DNA sequence from fast5 files with only raw data in the tmp folder. Also, the read_fast5_basecaller.py script in Albacore was used to de-multiplex the 12 samples from basecalled fast5 files (except the files in fail folder) based on the 12 barcodes in SQK-RBK001. The Poretools toolkit was utilized to extract all the DNA sequences from fast5 to fasta format among the 12 samples, respectively (Poretools, RRID:SCR_015879).
-
-To make this tutorial easier to execute, we are providing only one MDR pasmid-bearing strain - you are given the file below.
+To make this tutorial easier to execute, we are providing only one MDR pasmid-bearing strain.
 
 > ### {% icon comment %} Dataset details
 > Because of the large size of the original datasets (1.15 GB) you are given 1 of the 12 plasmids
@@ -97,19 +99,11 @@ Now that we know what our input data is, let's get it into our Galaxy history:
 >    > * Select the option **Create New** from the menu
 >    {: .tip}
 >
-> 2. **Import Sample Data.** The data for this course may be available from a shared library in Galaxy
-> (ask your instructor). If this is not the case, you can upload it yourself.
->   - Option 1: From data library:
->     - Navigate to the shared data library, you should find the fasta file.
->     - Option 2: From your Zenodo:
->       - Data is available from Zenodo here: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1443246.svg)](https://doi.org/10.5281/zenodo.1443246)
->       - In the file upload menu choose the `Paste/Fetch data` option and enter the following urls to import the file from Zenodo to Galaxy directly
->
->       > ### {% icon solution %} List of Zenodo URLs
->       > ```
->       > https://zenodo.org/record/1443246/files/RB01.fasta
->       > ```
->       {: .solution }
+> 2. **Import Sample Data** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1443246.svg)](https://doi.org/10.5281/zenodo.1443246)
+>    ```
+>    https://zenodo.org/record/1443246/files/RB01.fasta
+>    ```
+>    {% include snippets/import_via_link.md %}
 {: .hands_on}
 
 # Quality Control
@@ -124,10 +118,9 @@ create several plots, statisical report and a HTML report page.
 
 > ### {% icon hands_on %} Hands-on: Plotting scripts for long read sequencing data
 >
-> - **NanoPlot** {% icon tool %} with the following parameters
->   - "Type of the file(s) to work on" to `fasta`
->   - "files" to the `RB01.fasta` you just uploaded
->   - Leave all other parameters to the default settings <br><br>
+> 1. **NanoPlot** {% icon tool %} with the following parameters
+>   - *"Type of the file(s) to work on"*: `fasta`
+>   - *"files"*: `RB01.fasta` you just uploaded
 >
 {: .hands_on}
 
@@ -141,8 +134,8 @@ For more information on the topic of quality control, please see our training ma
 
 ## Pairwise alignment using Minimap2
 
-In this experiment we used Nanopore sequencing, this means sequencing results in long reads with overlap.
-To find this overlaps Minimap2 is used. Minimap2 is a versatile sequence alignment program that aligns
+In this experiment we used Nanopore sequencing; this means that sequencing results in long reads with overlap.
+To find this overlap, Minimap2 is used. Minimap2 is a versatile sequence alignment program that aligns
 DNA or mRNA sequences against a large reference database. Typical use cases include: (1) mapping PacBio
  or Oxford Nanopore genomic reads to the human genome; (2) finding overlaps between long reads with
 error rate up to ~15%; (3) splice-aware alignment of PacBio Iso-Seq or Nanopore cDNA or Direct RNA
@@ -155,17 +148,17 @@ such as BLASR, BWA-MEM, NGMLR and GMAP. It is more accurate on simulated long re
  meaningful alignment ready for downstream analyses. For >100bp Illumina short reads, minimap2 is three times
  as fast as BWA-MEM and Bowtie2, and as accurate on simulated data. Detailed evaluations are available from
 the minimap2 paper or the preprint.
+
 ![Pairwise alignment](../../images/nanopore_seqeunce_analysis/Minimap2.png)
 
 
 > ### {% icon hands_on %} Hands-on: Pairwise sequence alignment
 >
-> - **Map with minimap2** {% icon tool %} with the following parameters
->   - "Will you select a reference genome from your history or use a built-in index?" to `Use a genome from history and build index`
->   - "Use the following dataset as the reference sequence"  to the `RB01.fasta` you just uploaded
->   - "Select analysis mode (sets default)" to `Oxford Nanopore all-vs--all overlap mapping`
->   - "Select an output format" to `paf`
->   - Leave all other parameters to the default settings <br><br>
+> 1. **Map with minimap2** {% icon tool %} with the following parameters
+>   - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>   - *"Use the following dataset as the reference sequence"*: `RB01.fasta`
+>   - *"Select analysis mode (sets default)"*: `Oxford Nanopore all-vs--all overlap mapping`
+>   - *"Select an output format"*: `paf`
 >
 {: .hands_on}
 
@@ -203,9 +196,9 @@ The mapped reads are ready to be assembled with Miniasm. Miniasm is a very fast 
 
 > ### {% icon hands_on %} Hands-on: De novo assembly
 >
-> - **miniasm** {% icon tool %} with the following parameters
->   - "Sequence Reads" parameter to the `RB01.fasta` you uploaded
->   - "PAF file" to the `PAF file` created by the Minimap2 tool
+> 1. **miniasm** {% icon tool %} with the following parameters
+>   - *"Sequence Reads"*: `RB01.fasta`
+>   - *"PAF file"*: `PAF file` created by the Minimap2 tool
 >
 {: .hands_on}
 
@@ -224,15 +217,14 @@ The Assembly graph created can be used for mapping again with minimap2, but firs
 
 > ### {% icon hands_on %} Hands-on: Pairwise sequence alignment
 >
-> - **GFA to Fasta** {% icon tool %} with the following parameters
->   - "Input GFA file" to the `Assembly Graph` created by the Miniasm tool
+> 1. **GFA to Fasta** {% icon tool %} with the following parameters
+>   - *"Input GFA file"*: the `Assembly Graph` created by the Miniasm tool
 >
-> - **Map with minimap2** {% icon tool %} with the following parameters
->   - "Will you select a reference genome from your history or use a built-in index?" to `Use a genome from history and build index`
->   - "Use the following dataset as the reference sequence"  to the `FASTA file` created by the GFA to Fasta tool
->   - "Select fastq dataset" parameter to the `RB01.fasta` you uploaded
->   - "Select an output format" to `paf`
->   - Leave all other parameters to the default settings <br><br>
+> 2. **Map with minimap2** {% icon tool %} with the following parameters
+>   - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>   - *"Use the following dataset as the reference sequence"*: `FASTA file` created by the GFA to Fasta tool
+>   - *"Select fastq dataset"*: `RB01.fasta`
+>   - *"Select an output format"*: `paf`
 >
 > > ### {% icon question %} Question
 > >
@@ -253,10 +245,10 @@ The mapped reads can be improved even more using Racon to find a consensus seque
 
 > ### {% icon hands_on %} Hands-on: Consensus module
 >
-> - **Racon** {% icon tool %} with the following parameters
->   - "Sequences" parameter to the `RB01.fasta` you uploaded
->   - "Overlaps" to the latest `PAF file` created by the Minimap2 tool
->   - "Target sequences" to the `FASTA file` created by the GFA to Fasta tool
+> 1. **Racon** {% icon tool %} with the following parameters
+>   - *"Sequences"*: `RB01.fasta`
+>   - *"Overlaps"*: the latest `PAF file` created by the Minimap2 tool
+>   - *"Target sequences"*: the `FASTA file` created by the GFA to Fasta tool
 >
 {: .hands_on}
 
@@ -283,8 +275,8 @@ PlasFlow is a set of scripts used for prediction of plasmid sequences in metagen
 
 > ### {% icon hands_on %} Hands-on: Prediction of plasmid sequences
 >
-> - **PlasFlow** {% icon tool %} with the following parameters
->   - "Sequence Reads" to the `contig file` created by the Racon tool
+> 1. **PlasFlow** {% icon tool %} with the following parameters
+>   - *"Sequence Reads"*: the `contig file` created by the Racon tool
 >
 > > ### {% icon question %} Question
 > >
@@ -329,8 +321,8 @@ Bandage (a Bioinformatics Application for Navigating De novo Assembly Graphs Eas
 
 > ### {% icon hands_on %} Hands-on: Visualising de novo assembly graphs
 >
-> - **Bandage image** {% icon tool %} with the following parameters
->   - "Graphical Fragment Assembly" to the `Assembly graph` created by the Miniasm tool
+> 1. **Bandage image** {% icon tool %} with the following parameters
+>   - *"Graphical Fragment Assembly"*: the `Assembly graph` created by the Miniasm tool
 >
 {: .hands_on}
 
@@ -349,8 +341,8 @@ Staramr (*AMR) scans bacterial genome contigs against both the ResFinder and Poi
 
 > ### {% icon hands_on %} Hands-on: Prediction of AMR genes
 >
-> - **staramr** {% icon tool %} with the following parameters
->   - "genomes" to the `contig file` created by the Racon tool
+> 1. **staramr** {% icon tool %} with the following parameters
+>   - *"genomes"* the `contig file` created by the Racon tool
 >
 > > ### {% icon question %} Question
 > >
