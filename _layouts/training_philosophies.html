@@ -2,55 +2,39 @@
 layout: base
 ---
 
-{% assign contributors = site.data['contributors'] %}
 {% assign stories = site.pages | where:"layout", "training_philosophy" %}
-
+{% assign contributors = site.data['contributors'] %}
 
 {% include _includes/default-header.html %}
 
 <div class="container main-content">
     <section>
-        <h1>Hall of Fame</h1>
+        <h1>Training Philosophies</h1>
 
         <p class="lead">
-            A big <em>Thank You!</em> to the <strong>{{ contributors|size }}</strong>
-            awesome contributors to the Galaxy training materials!
+            We all teach in different ways, share your training philosophy and help other instructors find the way that is best for them!
         </p>
 
-        <div class="hall-of-fame">
-            {% for contributor in contributors %}
-                {% assign username = contributor[0] %}
-                <div class="hall-of-fame-hero" id="{{ username }}">
-                    {% if contributors[username].github != false %}
-                        <a href="https://github.com/{{ username }}" class="thumbnail">
-                            <img src="https://avatars.githubusercontent.com/{{ username }}" alt="{{ username }}">
-                        </a>
-                    {% else %}
-                        <span class="thumbnail">
-                            <img src="https://avatars.githubusercontent.com/{{ username }}" alt="{{ username }}">
-                        </span>
-                    {% endif %}
+        Read their stories below:
+        <ul>
+        {% for p in stories %}
+            <li>
+                <a href="#{{ p.username }}">
+                {{ contributors[p.username].name | default: p.username }}
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
 
-                    <div class="name">
-                        {{ contributors[username].name | default: username }}
-                    </div>
-
-                    {% assign has_philosophy = false %}
-                    {% for story in stories %}
-                        {% if story.username == username %}
-                            {% assign has_philosophy = true %}
-                        {% endif %}
-                    {% endfor %}
-
-                    {% if has_philosophy %}
-                    <div class="contact-items">
-                        <a href="{{ site.baseurl }}/topics/instructors/philosophies/#{{ username }}">
-                            Training Philosophy
-                        </a>
-                    </div>
-                    {% endif %}
-
-                    <div class="contact-items">
+        {% for p in stories %}
+        {% assign username = p.username %}
+        <div id="{{ username }}">
+        <h2>{{ contributors[username].name | default: username }}</h2>
+            <div class="hall-of-fame-hero">
+            <a href="{{ site.baseurl }}/hall-of-fame#{{ username }}" class="thumbnail">
+                <img src="https://avatars.githubusercontent.com/{{ username }}" alt="{{ username }}'s avatar">
+            </a>
+            <div class="contact-items">
                         {% if contributors[username].github != false %}
                             <a title="GitHub" href="https://github.com/{{ username }}">
                                 {% icon github %}
@@ -82,9 +66,11 @@ layout: base
                             </a>
                         {% endif %}
                     </div>
-                </div>
-            {% endfor %}
         </div>
+        {{ p.content | markdownify }}
+        </div>
+        {% endfor %}
+
     </section>
 </div>
 
