@@ -60,10 +60,10 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 > ### {% icon hands_on %} Hands-on: data upload and organization
 >
 > 1. Create a new history and name it something meaningful (e.g. *Proteogenomics DB creation*)
-> 2. Import the FASTQ file and the GTF file from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1302055.svg)](https://doi.org/10.5281/zenodo.1302055)
+> 2. Import the FASTQ file and the GTF file from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg)](https://doi.org/10.5281/zenodo.1489208)
 >    ```
->    https://zenodo.org/record/1302055/files/FASTQ_ProB_22LIST.fastqsanger
->    https://zenodo.org/record/1302055/files/Mus_musculus.GRCm38.86.gtf
+>    https://zenodo.org/record/1489208/files/FASTQ_ProB_22LIST.fastqsanger
+>    https://zenodo.org/record/1489208/files/Mus_musculus.GRCm38.86.gtf
 >    ```
 >
 >    {% include snippets/import_via_link.md %}

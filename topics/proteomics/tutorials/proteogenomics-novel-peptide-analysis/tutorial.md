@@ -43,11 +43,19 @@ All the files to run this workflow can be obtained from the [second tutorial]({{
 
 > ### {% icon hands_on %} Hands-on: data organization
 >
-> The inputs for this workflow are:
+> 1. The inputs for this workflow are:
 >    - **Tabular file** – “**Peptides from BlastP analysis**”
 >    - **Tabular file** – “**PeptideShaker_PSM**”
 >    - **Mz to sqlite**
 >    - **Genomic mapping sqlite**
+>
+> If you do not have these files from the previous tutorials in this series, you can import them from Zenodo:
+> ```
+> https://zenodo.org/record/1489208/files/Peptides_for_Blast-P_analysis.tabular
+> https://zenodo.org/record/1489208/files/PeptideShaker_PSM.tabular
+> https://zenodo.org/record/1489208/files/mz_to_sqlite.mz.sqlite
+> https://zenodo.org/record/1489208/files/genomic_mapping_sqlite.sqlite
+> ```
 {: .hands_on}
 
 

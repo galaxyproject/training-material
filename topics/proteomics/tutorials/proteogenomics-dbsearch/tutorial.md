@@ -44,12 +44,12 @@ In this tutorial, we perform proteogenomic database searching using the Mass Spe
 > ### {% icon hands_on %} Hands-on: data upload and organization
 >
 > 1. Create a **new history** and name it something meaningful (e.g. *Proteogenomics DB search*)
-> 2. Import the four MGF MS/MS files and the FASTA sequence file from Zenodo.[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1302055.svg)](https://doi.org/10.5281/zenodo.1302055)
+> 2. Import the four MGF MS/MS files and the FASTA sequence file from Zenodo.[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg)](https://doi.org/10.5281/zenodo.1489208)
 >    ```
->    https://zenodo.org/record/1302055/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f4.mgf
->    https://zenodo.org/record/1302055/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f5.mgf
->    https://zenodo.org/record/1302055/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f8.mgf
->    https://zenodo.org/record/1302055/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f9.mgf
+>    https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f4.mgf
+>    https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f5.mgf
+>    https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f8.mgf
+>    https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f9.mgf
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
