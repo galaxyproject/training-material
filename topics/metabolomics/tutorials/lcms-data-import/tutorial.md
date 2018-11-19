@@ -1,5 +1,6 @@
 ---
 layout: tutorial_hands_on
+enable: false
 title: LC-MS - Data Import
 name: lcms-data-import
 zenodo_link: 'https://doi.org/10.5281/zenodo.1346742'
@@ -22,7 +23,7 @@ contributors:
 
 **TODO** Explain why metabolomics, what do you want to do
 
-To illustrate this approach, we will use data from [Thévenot et al, 2015](https://pubs.acs.org/doi/10.1021/acs.jproteome.5b00354). The objectives of this paper was to analyze the inﬂuence of age, body mass index, and gender on the urine metabolome. To do that, the authors collected samples from 183 employees from CEA and did 
+To illustrate this approach, we will use data from [Thévenot et al, 2015](https://pubs.acs.org/doi/10.1021/acs.jproteome.5b00354). The objectives of this paper was to analyze the inﬂuence of age, body mass index, and gender on the urine metabolome. To do that, the authors collected samples from 183 employees from CEA and did
 LC-HRMS LTQ-Orbitrap (negative ionization mode) (**TODO** explain the terms).
 
 To analyze these data, we will the follow the [LC-MS workflow](http://workflow4metabolomics.org/the-lc-ms-workflow), developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/). **TODO** Introduce with one or two sentence the workflow (explanation of the meaning of LC-MS, the big steps, etc). This workflow take as input **TODO** and perform several steps: pre-processing, statistics, and annotation.
@@ -68,7 +69,7 @@ The data are available in [Zenodo]({{ page.zenodo_link }}). It is composed of 4 
 >    The aim of the Dataset Collections is to use them as a sort of Dataset to not have to feed the tools with numerous individual datasets. If you miss the build step, don't panic.
 >
 >    {% include snippets/create_dataset_collection.md %}
-> 
+>
 > 3. Click on the collection to inspect the nested datasets
 > 4. Check that the datatype of the files in the collection is `mzxml`
 >
@@ -128,7 +129,7 @@ We will not have to run these steps 4 times on each datasets, thanks to the Data
 > ### {% icon hands_on %} Hands-on: Preprocessing with XCMS
 >
 > 1. **MSnbase readMSData** {% icon tool %} with the following parameters
->    - {% icon param-collection %} *"File(s) from your history containing your chromatograms"*: the input data collection selected with **Dataset collection** ({% icon param-collection %}) 
+>    - {% icon param-collection %} *"File(s) from your history containing your chromatograms"*: the input data collection selected with **Dataset collection** ({% icon param-collection %})
 >
 > 2. **xcms findChromPeaks (xcmsSet)** {% icon tool %} with the following parameters
 >    - {% icon param-collection %} *"RData file"*: the `raw.raw.RData` Data Collection
