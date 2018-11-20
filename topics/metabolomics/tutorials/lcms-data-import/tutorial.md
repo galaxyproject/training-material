@@ -10,7 +10,7 @@ questions:
     - How to use those data in the first steps of the W4M LC-MS workflow?
 objectives:
     - How to import your data in Galaxy and how to deal with the datasets through the first steps of the LC-MS workflow
-time_estimation: 30min
+time_estimation: 30m
 key_points:
     - "You know how to import your data in Galaxy and deal with the datasets through the first steps"
     - "From now, just do science!"
