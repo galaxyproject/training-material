@@ -9,7 +9,6 @@ objectives:
     - "Obtain and filter/manipulate occurence data"
     - "Compute and visualize phenology of a species through the years"
     - "Compute temporal abundance trends"
-requirements:
 time_estimation: "1h"
 key_points:
     - ""
@@ -26,14 +25,14 @@ This tutorial will show how to study species phenology through the computation o
 After a certain numbers of steps, you will be able to extract single species data and study related phenology through the years. The goal of this exercise is to be able to create abundance trend over time and biodiversity indicators. Following these indicators allow to follow trends in terms of population dynamics. You could for example try to predict the occurences of one specific species in a certain type of environnement using the prediction model of climate evolution. Based on charts that you will generate, you could try to explain the evolution of a species with environmental data (temperatures variations, modifications of the environmental conditions).
 You will basically learn how to create a file on the basis of which you can create a visual material that can be quite easily understood and therefore be efficient for a large audience.
 
-> {: .comment}
-
 > ### Agenda
-> In this tutorial, we will cover:
-1. Pre-processing
-> {:pre-processing}
-2. Analyze phenology of a species through the years
-> {:Analyze phenology of a species through the years}
+>
+> In this tutorial, we will deal with:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
 # Step 1: Pre-processing
 
@@ -44,244 +43,362 @@ After uploading input files, you might have to use some data handling tools to b
 >  ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial and give it a proper name as `Tuto training regionalGAM`.
-> 2. Import the following file from [Zenodo](https://zenodo.org/record/1324204#.W2BmRn7fNE4).
+> 2. Import the CSV dataset file with only one species  from [Zenodo](https://zenodo.org/record/1324204#.W2BmRn7fNE4).
 >
 >    ```
->    CSV dataset with only one species:
->    https://zenodo.org/record/1324204/files/regional%20GAM%20data.csv?download=1
+>    https://zenodo.org/record/1324204/files/regional%20GAM%20data.csv
 >    ```
 >   
-> ### {% icon tip %} Tip: Importing data via links
->    > 1. Click on the Upload button: 
->    > 
->    > ![upload button](Images/upload.PNG "Galaxy upload access button")
->    > 
->    > 2. To import the dataset:
->    > * Select **Paste/Fetch data**
->    > * Paste the link into the text field
->    > * Galaxy will normally automatically find the right format, here CSV, so you don't have to specify it
->    > * Press **Start** and **Close** the window
-
->    {: .tip}
-
-> ### {% icon comment %} Comment
+>    {% include snippets/import_via_link.md %}
 >
-> {% icon warning %} <a name="inputdatawarning"></a>Please note that the file must contain a header corresponding to: ```"SITES","SPECIES","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content must be between double quotes as "x" and that separators have to be ",". 
+> 2. Check that the file contains a header corresponding to: ```"SITES","SPECIES","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content are between double quotes as "x" and that separators have to be ","
+> {: .hands_on}
 
-> {: .comment}
+When the dataset contains many details, it lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example, the list of sites (look at the column with header `SITE)` of the dataset you are using is really long and the SITES are classified into sub-sites (like ESBMS.12, ESBMS.28,ESBMS.55,...). Here, we will assume that your file doesn't really need be as precise and this is the reason why you have to specify you don't want the sub-sites. To create a new "down-sampled" file (so delete the ---.12, ---.28 mentions), you can follow these steps:
 
->    > ## <a name="resampling"></a> Re-sampling.  
-When the dataset contains many details, it lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example, the list of sites (look at the column with header `SITE)` of the dataset you are using is really long and the SITES are classified into sub-sites (like ESBMS.12, ESBMS.28,ESBMS.55,...). Here, we will assume that your file doesn't really need be as precise and this is the reason why you have to specify you don't want the sub-sites. To create a new "down-sampled" file (so delete the ---.12, ---.28 mentions), you can follow these steps:   
+1. This tool creates a tabular file from your csv one (with only one species). This is a mandatory step as further tools are only working on tabular files!
+2. 
 
 > ### {% icon hands_on %} Hands-on: hiding some informations
+> 1. Run **CSV to tabular** {% icon tool %} with the following parameters:
+>       - {% icon param-files %} *""*: imported dataset
+>   
+> 2. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
+>       - *""*: Select the input file & the column with the `SITE` header.
+>       - *"Find Regex"*: `(\.[0-9]+)`
+>
+>           It specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
+>
+>       - *"Replacement"*: leave it empty
+> {: .hands_on}
 
->    > 1. Use the `CSV to tabular` tool to first create a tabular file from your csv one (with only one species). This is a mandatory step as further tools are only working on tabular files!
->    > 2. Search for the tool `Column Regex Find And Replace` on the tabular file with the following  parameters.
->    >  * Select the input file & the column with the `SITE` header.
->    >  * "Find Regex": `(\.[0-9]+)` which specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
->    >  * "Replacement": leave it empty.
 
->   > ### {% icon question %} Questions
->   >
->    > 1. After having successfully deleted the sub-sites informations, can you look at the original dataset and this new one and say how many sites you had, and you have now? You will maybe need to use tools like `Count occurrences of each record` (don't forget that if you want to run the same tool with same parameters to several input files, you can directly specify the "multiple dataset" option on the tool form for the `from dataset` parameter).
->    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The dataset contains 5 sites now against 1143 before "down-sampling". </li>
->    >    </ol>
->    >    </details>
->    {: .question}
+> ### {% icon question %} Questions
+>
+> After having successfully deleted the sub-sites informations, can you look at the original dataset and this new one and say how many sites you had, and you have now? You will maybe need to use tools like `Count occurrences of each record` (don't forget that if you want to run the same tool with same parameters to several input files, you can directly specify the "multiple dataset" option on the tool form for the `from dataset` parameter).
+>
+> > ### {% icon solution %} Solution
+> > The dataset contains 5 sites now against 1143 before "down-sampling"
+> > {: .solution}
+{: .question}
 
-> ### Making sure the dataset concerns only one species 
+> ### {% icon details %} Import RDatat
+> 
+> > ### {% icon hands_on %} Hands-on: Data upload.
+> > 1. Import the RData
+> >
+> >    For example, you can upload: 
+> >
+> >    ```
+> >    https://zenodo.org/record/1324204/files/gatekeeper_CM%20.RData
+> >    ```
+> >
+> > 2. **RData binary file reader** {% icon tool %} with the following parameters:
+> >    -  *"Rdata binary file to explore"*: imported RData
+> > 
+> > 2. **RData parser** {% icon tool %} with the following parameters
+> >    -  *"Rdata file to explore"*: imported RData
+> >    -  *"File with .Rdata content details"*: output of **RData binary file reader** {% icon tool %}
+> >    -  *"Select which attribute(s) you want to extract"*: select everything but "trend"
+> >    -  *"Bind variables in a single tabular when its possible"*: `Yes`
+> {: .hands_on}
+> 
+> Please note that if the tool **RData parser** {% icon tool %} don't succeed to create a single tabular file, it will generate separate files, each of them containing one column. The file with the "TREND" header can be let aside as we don't need it for what will follow.
+> 
+> > ### {% icon question %} Questions
+> >
+> > If Rdata parser fails to generate a single unified tabular file, can you propose a way to regenerate such a dataset ?
+> >
+> > > ### {% icon solution %} Solution
+> > > You can do that using:
+> > > 1. **Paste two files side by side tool** {% icon tool %} with the following parameters:
+> >     - *"paste"*: output from **RData parser** {% icon tool %} headed with "SPECIES"
+> >     - *"and"*: output from **RData parser** {% icon tool %} with headed with "SITE"
+> > > 2. Repeat **Paste two files side by side** {% icon tool %} executions as many times as there are separated files in order to create a final dataset with all the columns:
+> > >     1. Repeat **Paste two files side by side tool** {% icon tool %} to paste the file containing 2 columns with the one headed by "YEAR".
+> > >     1. Repeat **Paste two files side by side tool** {% icon tool %} to paste the file containing 3 columns with the one headed by "MONTH". 
+> > >     1. Repeat **Paste two files side by side tool** {% icon tool %} to paste the file containing 4 columns with the one headed by "DAY".
+> > >     1. Repeat **Paste two files side by side tool** {% icon tool %} to paste the file containing 5 columns with the one headed by "COUNT". 
+> > {: .solution}
+> {: .question}
+{: .details}
+
+
+
+### Making sure the dataset concerns only one species 
  
 The second step of any Regional GAM data analysis is making sure to have a dataset of only one specific species that you will then be able to use. If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another. 
 
 > ### {% icon hands_on %} Hands-on: How many species are taken into account in this dataset
 >
 > As the dataset is quite big and may countain heterogeneous informations, you want to know wether the data are about one species or more. 
-> 1. Search for the tool `Count occurrences of each record` with the following parameters:
-> * "from dataset": `output` from **CSV to Tabular**
+> 1. **Count occurrences of each record** {% icon tool %} with the following parameters:
+>    - "from dataset": `output` from **CSV to Tabular**
 > * "Count occurrences of values in column(s)": Specify the `SPECIES` column, normally `column 1`
 > * "Delimited by": `Tab`.
 > * "How should the results be sorted?": `With the most common values first`.
 > 2. Inspect the file by clicking on the `eye` icon to check that the dataset is on one species only.
 > 3. Now, as regionalGAM tools use CSV files as input, you can regenerate a CSV file using the `tabular to CSV` tool on the output from **Column Regex Find And Replace**. Please, tag your new dataset with an explicit tag as "Count" and/or rename this dataset like "Count file".
-
-> ### {% icon comment %} Comment
-
-{% icon keypoint %} In case the dataset contains informations one more than on species, you can follow the multispecies tutorial on regionalGAM which is a complement to this one from the second step. If you are interested in doing so, please click on the following link: [Selectionning one specific species](Multispecies_tutorial.md#selectionningonespecificspecies)
-
 {: .hands_on}
 
 
-# Step 2: <a name="analyzepheno"></a> Analyze phenology of a species through the years  
- 
+> ### {% icon details %} Datasets containings informations about more than one species
+>
+> If your dataset contains informations about more than one species, you can apply the previous steps and then run an extra-step to select one specific species and show all the data corresponding to it.
+>
+> As the dataset is quite big and countains heterogeneous informations, you want to know wether the data are about one species or more. So the first step consists to count how many species are taken into account in this dataset.
+>
+> > ### {% icon hands_on %} Hands-on: How many species are taken into account
+> > 1. **Count occurrences of each record** {% icon tool %} with the following parameters:
+> >      - *"from dataset"*: `output` from **Column Regex Find And Replace**
+> >      - *"Count occurrences of values in column(s)"*: the `SPECIES` column (normally `column 1`)
+> >      - *"Delimited by"*: `Tab`
+> >      - *"How should the results be sorted?": `With the most common values first`
+> 2. Inspect the file by clicking on the {% icon galaxy-eye %} icon to check how many species are taken into account.
+> {: .hands_on}
+>
+> > ### {% icon question %} Questions
+> >
+> > 1. How many species does your initial dataset take into account ?
+> > 2. What are their names ? 
+> >
+> > ### {% icon solution %} Solutions
+> > 1. The dataset contains informations on 2 different species
+> > 2. Their names are "Pyronia tithonus" and "Aglais io".
+> > {: .solution}
+> {: .question}
+> 
+> We now need to create a new file concerning only the data of one species
+> 
+> > ### {% icon hands_on %} Hands-on: Creating a new file concerning only the data of one species
+> > 1. Copy the name of the species you are interested in (for example: "Aglais io").
+> > 2. **Filter data on any column using simple expressions** {% icon tool %}
+> >      - *"Filter"*: output of **Column Regex Find And Replace** {% icon tool %}
+> >      - *"With following condition"*: `c1=='"Aglais io"'` or (another species name)  
+> >      - *"Number of header lines to skip"*: `1`
+> >
+> >    You can repeat this set of actions as much as necessary, changing only the name of the species taken into account. By doing this, you will obtain separated dataset, each of them concerning a different species.
+> >
+> > 3. **tabular to CSV** {% icon tool %}
+> >      - *""*: output of **Filter data on any column using simple expressions** {% icon tool %}
+> >
+> >    Repeat this step on all the different `outputs` from **Filter data on any column using simple expressions** {% icon tool %} that you have, one by species. Please, tag your new dataset with an explicit tags as "Count" and "Aglais io" and/or rename this dataset like "Aglais io count file".
+> {: .hands_on}
+>
+> To test the previous steps, you can use the following dataset: 
+> 
+>   ```
+>   https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv
+>   ```
+> 
+> If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another. 
+{: .details}
+
+# Step 2: Analyze phenology of a species through the years  
+
  
 Now you have a file containing all the data on the species of interest. The main goal of this step is to treat phenology related informations and create a material that can be used to generate charts. What you could also do, for example, would be to compare the phenology through the years and sites.
->
+
+This step will allow you to compute and display the phenology of a species. In the second part, you will learn that it is possible to show the phenology of various species on a single chart allowing to compare them and analyse them more easily.
 
 > ## {% icon hands_on %} Hands-on: Phenology
-
-This step will allow you to compute and display the phenology of a species. In the second part, you will learn that it is possible to show the phenology of various species on a single chart allowing to compare them and analyse them more easily. 
-
-
-> 1. Search for the tool `flight curve` on the "Phenology & Abundance Index tool section" and execute it specifying the following parameters: 
-> * "Count file": output file you just generated with the **tabular to CSV** tool.
+> 1. **flight curve** {% icon tool %} with the following parameters: 
+>    - *"Count file"*: output file you just generated with the **tabular to CSV** {% icon tool %}
 >
-> 🔹 Based on the `output` from **flight curve**, you can create a line chart which shows species occurences through the years on a very visual material 
+> 2. Generate the chart using the visualization
+>    1. Inspect and expand the output data from **flight curve** {% icon tool %}
+>    2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
+>    3. Select `Charts` 
+>    3. Select a visualization type: "line chart (NVD 3)"
+>    4. Give it a proper name, i.e. `Pyronia tithonus phenology raw simple vizu` 
+>    5. On **Select data** area, specify:
+>       - *"Provide a label"*: `Pyronia tithonus phenology from 2003 to 2012` for example
+>       - *"Pick a series color"*: Choose a color for the line 
+>       - *"Data point labels"*: `Column 1`
+>       - *"Values for x-axis"*: `Column 2`
+>       - *"Values for y-axis"*: `Column 6`
+>    6. On **Change settings**, specify:
+>       - *"X-Axis label"*: `Year`
+>       - *"Y-Axis label"*: `nm values`
+>    7. Click on **Visualize**
+>    8. Click on **save this visualization**
+>
 
->
->    > ### {% icon tip %} Visualization. 
->    > 1. Click on the name of output dataset from **flight curve** (something like `Flight curve on data 6`) to expand dataset related details and options
->    > 2. Click on the "Visualize" button then select `Charts` 
->    > 3. Select a visualization type: "line chart (NVD 3)"
->    > 4. Give it a proper name like `Pyronia tithonus phenology raw simple vizu` 
->    > 5. On {% icon tip %} "Select data" area, specify:
->    > * "Provide a label": For example `Pyronia tithonus phenology from 2003 to 2012`
->    > * "Pick a series color": Choose a color for the line 
->    > * "Data point labels": `Column 1`
->    > * "Values for x-axis": `Column 2`
->    > * "Values for y-axis": `Column 6`
->    > 6. On {% icon tip %} "change settings", specify:
->    > * "X-Axis label": `Year`
->    > * "Y-Axis label": `nm values`
->    > 7. Click on {% icon tip %} `Visualize`
->    > 8. Click on {% icon tip %} `save this visualization`if you are willing
->
->
-> ### {% icon comment %} Comments
->
-> {% icon warning %} Please note, that if you want your chart to be more precise and to specify that the x-axis corresponds to "Week and year", it is possible. In order to do so, follow the tip below:
->    > ### {% icon tip %} Tip: Creating a new column of the dataset containing the week and the year 
-First of all, you have to know how many years are taken into account in your dataset.
->    > 1. Search for the tool `Count occurrences of each record` with the following parameters 
->    > * "from dataset": output from **Flight curve**.
->    > * "Select": `Column 2` (the on headed with `YEAR`)
->    > * "Delimited by": `Tab`.
->    > * "How should the results be sorted?": `By the values being counted`.
->    > 2. Inspect the file by clicking on the `eye` icon to check how many years are taken into account.
->    > 3. Use the `Column Regex Find And Replace` tool with the following parameters:
->    > * "File to process": output file from **flight curve**.
->    > * "in column": `Column 2` (corresponding to the one headed with `YEAR`)
->    > * Click on `Insert check`:
->    >   * "Find pattern": `(20[0-9][0-9])`
->    >   * "Replace with": `-\1` 
->    > 5. Inspect the file by clicking on the `eye` icon to check if all the years are now written with a "-" before the digits. 
->    > 6. Search for the tool `Merge Columns together` with the following parameters:
->    > * "Select data": output from the last **Column Regex Find And Replace**.
->    > * "Merge column": `Column 3`(corresponding to the one headed with `WEEK`)
->    > * "with column": `Column 2`(corresponding to the one headed with `YEAR`)
->    > 7. Use the **Remove beginning of a file** tool to remove first line, a mandatory step to avoid header to be part of the visualization
-
-With the `output` from **Remove beginning of a file** you can now generate a new chart which will have a x-axis corresponding to your column `"week""year"`.
->    > ### {% icon tip %} Visualize
->    > 1. With the  `output` from **Remove beginning of a file**.
->    > 2. Select `Charts`
->    > 3. Select a visualization type: "line chart (NVD 3)
->    > 4. Give it a proper name like `Pyronia tithonus phenology simple vizu` 
->    > 5. On {% icon tip %} "Select data" area, specify:
->    > * "Provide a label": This can be `Pyronia tithonus phenology from 2003 to 2012`
->    > * "Pick a series color": Choose a color for the line 
->    > * "Data point labels": `Column 6` (the nm column) or another one
->    > * "Values for x-axis": `Column 7` (the "week-year" column)
->    > * "Values for y-axis": `Column 6` (the nm column)
->    > 6. On {% icon tip %} "change settings", specify:
->    > * "X-Axis label": `Week-Year`
->    > * "Y-Axis label": `nm values`
->    > 7. Click on {% icon tip %} `Visualize`
->    > 8. Click on {% icon tip %} `save this visualization` if you are willing to save to chart.
->   
-> {: .comment}
-
+> ## {% icon hands_on %} (Optional) Hands-on: Creating a new column of the dataset containing the week and the year 
+> 1. **Count occurrences of each record** {% icon tool %} with the following parameters 
+>    - *"from dataset"*: output from **Flight curve**
+>    - *"Select"*: `Column 2` (the on headed with `YEAR`)
+>    - *"Delimited by"*: `Tab`.
+>    - *"How should the results be sorted?"*: `By the values being counted`.
+> 2. Inspect and expand the output data from **flight curve** {% icon tool %}
+> 3. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
+>    - "File to process": output file from **flight curve**.
+>    - "in column": `Column 2` (corresponding to the one headed with `YEAR`)
+>    - Click on `Insert check`:
+>       - "Find pattern": `(20[0-9][0-9])`
+>       - "Replace with": `-\1` 
+> 4. Inspect the file by clicking on the `eye` icon to check if all the years are now written with a "-" before the digits. 
+> 5. **Merge Columns together** {% icon tool %} with the following parameters:
+>    - "Select data": output from the last **Column Regex Find And Replace**.
+>    - "Merge column": `Column 3`(corresponding to the one headed with `WEEK`)
+>    - "with column": `Column 2`(corresponding to the one headed with `YEAR`)
+> 7. Use **Remove beginning of a file** {% icon tool %} to remove first line
+> 
+>    It is mandatory step to avoid header to be part of the visualization
+>    If your dataset contains informations about more than one species, you can apply the previous steps and then run an extra-step to select one specific species and show all the data corresponding to it.
+> 
+> 2. Generate the chart using the visualization with the x-axis corresponding to your column `"week""year"`.
+>    1. Inspect and expand the output data from **Remove beginning of a file** {% icon tool %}
+>    2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
+>    3. Select `Charts` 
+>    3. Select a visualization type: "line chart (NVD 3)"
+>    4. Give it a proper name, i.e. `Pyronia tithonus phenology simple vizu` 
+>    5. On **Select data** area, specify:
+>       - *"Provide a label"*: `Pyronia tithonus phenology from 2003 to 2012` for example
+>       - *"Pick a series color"*: Choose a color for the line 
+>       - *"Data point labels"*: `Column 6` (the nm column) or another one
+>       - *"Values for x-axis"*: `Column 7` (the "week-year" column)
+>       - *"Values for y-axis"*: `Column 6` (the nm column)
+>    6. On **Change settings**, specify:
+>       - *"X-Axis label"*: `Week-Year`
+>       - *"Y-Axis label"*: `nm values`
+>    7. Click on **Visualize**
+>    8. Click on **save this visualization**
+> 
+{: .hands_on}
 
 ![Phenology chart](Images/Pyronia%20tithonus%20phenology%20explicit%20ID.png "This shows the occurrence of Pyronia tithonus")
->
->
-> {% icon warning %} Please note, that if you want to create a "stacked" visualization, overlapping each year, you can use several executions (one execution by year) of the `Filter data on any column using simple expressions` tool specifying the year you want on the `With following condition` parameter, `c2==2003` for 2003, then `c2==2004` for 2004, etc... then you can paste all resulting files side by side using one or several executions of the `Paste two files side by side` tool so you can specify on the "Select Data" tab of visualization, several Data series (one by year). ❗WARNING❗ The use of this `Paste two files side by side` tool must be done carefully as in case of differences in term of number of lines between datasets to paste, it will mix informations from columns. Here, as we are working on temporal series over years, and as some years have 365 days, others 366, and as in this case, phenology is not centered on winter, we can delete informations from the 366 days of some years without any problems so we will have the same number of lines between datasets to paste side by side. To do so, use the `Select first lines from a dataset` tool to select first 366 lines from filtered datasets. As it will be of interest to reuse this combination of tools in a next tutorial step, you can create a workflow that you can named something like `Phenology "stacked" visualization creation`.
->
+
+Please note, that if you want to create a "stacked" visualization, overlapping each year, you can use several executions (one execution by year) of the `Filter data on any column using simple expressions` tool specifying the year you want on the `With following condition` parameter, `c2==2003` for 2003, then `c2==2004` for 2004, etc... then you can paste all resulting files side by side using one or several executions of the `Paste two files side by side` tool so you can specify on the "Select Data" tab of visualization, several Data series (one by year). ❗WARNING❗ The use of this `Paste two files side by side` tool must be done carefully as in case of differences in term of number of lines between datasets to paste, it will mix informations from columns. Here, as we are working on temporal series over years, and as some years have 365 days, others 366, and as in this case, phenology is not centered on winter, we can delete informations from the 366 days of some years without any problems so we will have the same number of lines between datasets to paste side by side. To do so, use the `Select first lines from a dataset` tool to select first 366 lines from filtered datasets. As it will be of interest to reuse this combination of tools in a next tutorial step, you can create a workflow that you can named something like `Phenology "stacked" visualization creation`.
 
 With the `output` from **Remove beginning of a file** you can now generate a new 'stacked' chart which will have a x-axis corresponding to your column `"week"`.
->    > ### {% icon tip %} Visualize
->    > 1. With the output from **Remove beginning of a file**.
->    > 2. Select `Charts`
->    > 3. Select a visualization type: "line chart (NVD 3)
->    > 4. Give it a proper name like `Pyronia tithonus phenology` 
->    > 5. On {% icon tip %} "Select data" area, specify:
->    > * "Provide a label": This can be here the year, `2003`
->    > * "Pick a series color": Choose a color for the line 
->    > * "Data point labels": `Column 6` (the 2003 nm column) or another one
->    > * "Values for x-axis": `Column 3` (the 2003 "week" column)
->    > * "Values for y-axis": `Column 6` (the 2003 nm column)
->    > 6. Insert a new Data Series, choose a different color and specify:
->    > * "Provide a label": This can be here the year, `2004`
->    > * "Pick a series color": Choose a color for the line 
->    > * "Data point labels": `Column 12` (the 2004 nm column) or another one
->    > * "Values for x-axis": `Column 9` (the 2004 "week" column)
->    > * "Values for y-axis": `Column 12` (the 2004 nm column)
->    > 7. Insert a new Data Series, choose a different color and specify:
->    > * "Provide a label": This can be here the year, `2005`
->    > * "Pick a series color": Choose a color for the line 
->    > * "Data point labels": `Column 18` (the 2005 nm column) or another one
->    > * "Values for x-axis": `Column 15` (the 2005 "week" column)
->    > * "Values for y-axis": `Column 18` (the 2005 nm column)
->    > 8. Insert a new Data Series, choose a different color and specify:
->    > * "Provide a label": This can be here the year, `2006`
->    > * "Pick a series color": Choose a color for the line 
->    > * "Data point labels": `Column 24` (the 2006 nm column) or another one
->    > * "Values for x-axis": `Column 21` (the 2006 "week" column)
->    > * "Values for y-axis": `Column 24` (the 2006 nm column)
->    > 9. Insert a new Data Series, choose a different color and specify:
->    > * "Provide a label": This can be here the year, `2007`
->    > * "Pick a series color": Choose a color for the line 
->    > * "Data point labels": `Column 30` (the 2007 nm column) or another one
->    > * "Values for x-axis": `Column 27` (the 2007 "week" column)
->    > * "Values for y-axis": `Column 30` (the 2007 nm column)
->    > 10. Insert a new Data Series, choose a different color and specify:
->    > * "Provide a label": This can be here the year, `2008`
->    > * "Pick a series color": Choose a color for the line 
->    > * "Data point labels": `Column 36` (the 2008 nm column) or another one
->    > * "Values for x-axis": `Column 33` (the 2008 "week" column)
->    > * "Values for y-axis": `Column 36` (the 2008 nm column)
->    > 11. Insert a new Data Series, choose a different color and specify:
->    > * "Provide a label": This can be here the year, `2009`
->    > * "Pick a series color": Choose a color for the line 
->    > * "Data point labels": `Column 42` (the 2009 nm column) or another one
->    > * "Values for x-axis": `Column 39` (the 2009 "week" column)
->    > * "Values for y-axis": `Column 42` (the 2009 nm column)
->    > 12. Insert a new Data Series, choose a different color and specify:
->    > * "Provide a label": This can be here the year, `2010`
->    > * "Pick a series color": Choose a color for the line 
->    > * "Data point labels": `Column 48` (the 2010 nm column) or another one
->    > * "Values for x-axis": `Column 45` (the 2010 "week" column)
->    > * "Values for y-axis": `Column 48` (the 2010 nm column)
->    > 7. Insert a new Data Series, choose a different color and specify:
->    > * "Provide a label": This can be here the year, `2011`
->    > * "Pick a series color": Choose a color for the line 
->    > * "Data point labels": `Column 54` (the 2011 nm column) or another one
->    > * "Values for x-axis": `Column 51` (the 2011 "week" column)
->    > * "Values for y-axis": `Column 54` (the 2011 nm column)
->    > 8. Insert a new Data Series, choose a different color and specify:
->    > * "Provide a label": This can be here the year, `2012`
->    > * "Pick a series color": Choose a color for the line 
->    > * "Data point labels": `Column 60` (the 2012 nm column) or another one
->    > * "Values for x-axis": `Column 57` (the 2012 "week" column)
->    > * "Values for y-axis": `Column 60` (the 2012 nm column)
->    > 14. On {% icon tip %} "change settings", specify:
->    > * "X-Axis label": `Week`
->    > * "Y-Axis label": `nm values`
->    > * "Use multi-panels": `No`
->    > 7. Click on {% icon tip %} `Visualize`
->    > 8. Click on {% icon tip %} `save this visualization` if you are willing to save to chart.
->   
 
+> ### {% icon hands_on %} Generate a 'stacked' chart
+>
+> 1. Inspect and expand the output data from **Remove beginning of a file** {% icon tool %}
+> 2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
+> 3. Select `Charts` 
+> 3. Select a visualization type: "line chart (NVD 3)"
+> 4. Give it a proper name, i.e. `Pyronia tithonus phenology` 
+> 5. On **Select data** area, specify:
+>    - *"Provide a label"*: `2003` for example
+>    - *"Pick a series color"*: Choose a color for the line 
+>    - *"Data point labels"*: `Column 6` (the 2003 nm column) or another one
+>    - *"Values for x-axis"*: `Column 7` (the 2003 "week" column)
+>    - *"Values for y-axis"*: `Column 6` (the 2003 nm column)
+> 6. Insert a new Data Series, choose a different color:
+>    - *"Provide a label"*: `2004` for example
+>    - *"Pick a series color"*: Choose a color for the line 
+>    - *"Data point labels"*: `Column 12` (the 2004 nm column) or another one
+>    - *"Values for x-axis"*: `Column 9` (the 2004 "week" column)
+>    - *"Values for y-axis"*: `Column 12` (the 2004 nm column)
+> 6. Insert a new Data Series, choose a different color:
+>    - *"Provide a label"*: `2005` for example
+>    - *"Pick a series color"*: Choose a color for the line 
+>    - *"Data point labels"*: `Column 18` (the 2005 nm column) or another one
+>    - *"Values for x-axis"*: `Column 15` (the 2005 "week" column)
+>    - *"Values for y-axis"*: `Column 18` (the 2005 nm column)
+> 6. Insert a new Data Series, choose a different color:
+>    - *"Provide a label"*: `2006` for example
+>    - *"Pick a series color"*: Choose a color for the line 
+>    - *"Data point labels"*: `Column 24` (the 2006 nm column) or another one
+>    - *"Values for x-axis"*: `Column 21` (the 2006 "week" column)
+>    - *"Values for y-axis"*: `Column 24` (the 2006 nm column)
+> 6. Insert a new Data Series, choose a different color:
+>    - *"Provide a label"*: `2007` for example
+>    - *"Pick a series color"*: Choose a color for the line 
+>    - *"Data point labels"*: `Column 30` (the 2007 nm column) or another one
+>    - *"Values for x-axis"*: `Column 27` (the 2007 "week" column)
+>    - *"Values for y-axis"*: `Column 30` (the 2007 nm column)
+> 6. Insert a new Data Series, choose a different color:
+>    - *"Provide a label"*: `2008` for example
+>    - *"Pick a series color"*: Choose a color for the line 
+>    - *"Data point labels"*: `Column 36` (the 2008 nm column) or another one
+>    - *"Values for x-axis"*: `Column 33` (the 2008 "week" column)
+>    - *"Values for y-axis"*: `Column 36` (the 2008 nm column)
+> 6. Insert a new Data Series, choose a different color:
+>    - *"Provide a label"*: `2009` for example
+>    - *"Pick a series color"*: Choose a color for the line 
+>    - *"Data point labels"*: `Column 42` (the 2009 nm column) or another one
+>    - *"Values for x-axis"*: `Column 39` (the 2009 "week" column)
+>    - *"Values for y-axis"*: `Column 42` (the 2009 nm column)
+> 6. Insert a new Data Series, choose a different color:
+>    - *"Provide a label"*: `2010` for example
+>    - *"Pick a series color"*: Choose a color for the line 
+>    - *"Data point labels"*: `Column 48` (the 2010 nm column) or another one
+>    - *"Values for x-axis"*: `Column 45` (the 2010 "week" column)
+>    - *"Values for y-axis"*: `Column 48` (the 2010 nm column)
+> 6. Insert a new Data Series, choose a different color:
+>    - *"Provide a label"*: `2011` for example
+>    - *"Pick a series color"*: Choose a color for the line 
+>    - *"Data point labels"*: `Column 54` (the 2011 nm column) or another one
+>    - *"Values for x-axis"*: `Column 51` (the 2011 "week" column)
+>    - *"Values for y-axis"*: `Column 54` (the 2011 nm column)
+> 6. Insert a new Data Series, choose a different color:
+>    - *"Provide a label"*: `2012` for example
+>    - *"Pick a series color"*: Choose a color for the line 
+>    - *"Data point labels"*: `Column 60` (the 2012 nm column) or another one
+>    - *"Values for x-axis"*: `Column 57` (the 2012 "week" column)
+>    - *"Values for y-axis"*: `Column 60` (the 2012 nm column)
+> 6. On **Change settings**, specify:
+>    - *"X-Axis label"*: `Week`
+>    - *"Y-Axis label"*: `nm values`
+>    - *"Use multi-panels"*: `No`
+> 7. Click on **Visualize**
+> 8. Click on **save this visualization**
+>    
+{: .hands_on}
 
 ![Stacked Phenology chart](Images/Pyronia_tithonus_phenology_stacked_explicit_ID.png "This shows the occurrence of Pyronia tithonus")
->
->
 
- 
-> ##  <a name="Abundanceindex"></a>Compute Abundance Index across sites and years
+> ### {% icon tip %} Tip: Creating a file comporting all the data on various species
+>    > 1. Search for the tool `Paste two files side by side` with the following parameters:
+>    > * "Paste": `the output` from **merger des colonnes** (with the dataset concerning species 1)
+>    > * "and": `the output` from **merger des colonnes** (with the dataset concerning species 2)
+>    > * "Delimited by": tabulation 
+>    >❗WARNING❗ The use of this `Paste two files side by side` tool must be done carefully as in case of differences in term of number of lines between datasets to paste, it will mix informations from columns. Here, datasets have the same number of lines.
+
+> ### {% icon comment %} Comment
+> Concerning a different species,. In order to do so you will have to do as explained below:
+>    > * Search for the tool `Paste two files side by side` with the following parameters:
+>    >    * "Coller": the `output` from **Paste two files side by side** (with the dataset concerning species 1 and 2)
+>    >    * "et": `the output` from **Merge Columns together** (with the dataset concerning species 3)
+>    >    * "Délimité par": tabulation 
+>    > * Repeat `Paste two files side by side` with `the output` from **Paste two files side by side** (with the data concerning species 1, 2 and 3) and with `the output` from **Merge Columns together** (with the dataset concerning species 4).
+
+> ### {% icon details %} Generating a multispecies chart
+> 
+> If your input dataset contains informations about more than one species, you can now generate char for the multispecies:
+> 
+> > ## {% icon hands_on %}
+> > 1. Inspect and expand the output data from **flight curve** {% icon tool %}
+> > 2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
+> > 3. Select `Charts`
+> > 3. Select a visualization: "line chart (NVD 3) 
+> > 4. Give it a proper name like `Aglais io & Pyronia tithonus phenology`
+> > 5. Select data 
+> >     * "Provide a label": The name of the first species, for example `Aglais io`
+> >     * "Pick a series color": Choose a color
+> >     * "Data point labels": `Column corresponding to the name of the species 1` 
+> >     * "Values for x-axis": `Column corresponding to the "week and year" of the species 1`
+> >     * "Values for y-axis": `Column corresponding to nm of the species 1`
+> > 6. Insert data series:
+> >     * "Provide a label": he name of the second species, for example `Pyronia tithonus`
+> >     * "Pick a series color": Choose a different color
+> >     * "Data point labels": `Column corresponding to the name of the species 2` 
+> >     * "Values for x-axis": `Column corresponding to the "week and year" of the species 2`
+> >     * "Values for y-axis": `Column corresponding to nm of the species 2`
+> > 7. You may repeat "Insert data series" as many times as needed depending on the number of different species you want to represent on your chart.
+> > 8. Click on {% icon tip %} `Customize`
+> >     * "X-Axis label": `Week and Year`  
+> >     * Y-Axis label: `nm values`
+> >     * "Use multi-panels": click on `No`(or you will have separated charts, one for each species)
+> > 9. Click on {% icon tip %} `Visualize`
+> > 10. Click on {% icon tip %} `save this visualization`if you are willing to keep it
+> {: .hands_on}
+{: .details}
+
+## Compute Abundance Index across sites and years
 
 This will allow you to create a file showing the abundance index per year of a chosen species in a certain site. Based on this file you will then learn how to represent this abundance on a chart. 
 >
