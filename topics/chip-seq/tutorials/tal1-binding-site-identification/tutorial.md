@@ -4,6 +4,7 @@ layout: tutorial_hands_on
 title: "Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)"
 zenodo_link: "https://doi.org/10.5281/zenodo.197100"
 edam_ontology: "topic_3169"
+enable: false
 questions:
   - How is raw ChIP-seq data processed and analyzed?
   - What are the binding sites of Tal1?

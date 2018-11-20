@@ -123,7 +123,7 @@ check-yaml: ## lint yaml files
 	)
 .PHONY: check-yaml
 
-check: check-yaml check-html check-slides  ## run all checks
+check: check-yaml check-html-internal check-html check-slides ## run all checks
 .PHONY: check
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
