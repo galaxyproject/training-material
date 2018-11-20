@@ -57,14 +57,14 @@ After uploading input files, you might have to use some data handling tools to b
 When the dataset contains many details, it lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example, the list of sites (look at the column with header `SITE)` of the dataset you are using is really long and the SITES are classified into sub-sites (like ESBMS.12, ESBMS.28,ESBMS.55,...). Here, we will assume that your file doesn't really need be as precise and this is the reason why you have to specify you don't want the sub-sites. To create a new "down-sampled" file (so delete the ---.12, ---.28 mentions), you can follow these steps:
 
 1. This tool creates a tabular file from your csv one (with only one species). This is a mandatory step as further tools are only working on tabular files!
-2. 
 
 > ### {% icon hands_on %} Hands-on: hiding some informations
 > 1. Run **CSV to tabular** {% icon tool %} with the following parameters:
 >       - {% icon param-files %} *""*: imported dataset
 >   
 > 2. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
->       - *""*: Select the input file & the column with the `SITE` header.
+>       - *"Select cells from"*: Select the input file
+>       - *"using column"*: the column with the `SITE` header.
 >       - *"Find Regex"*: `(\.[0-9]+)`
 >
 >           It specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
@@ -82,7 +82,7 @@ When the dataset contains many details, it lengthens the file processing time th
 > > {: .solution}
 {: .question}
 
-> ### {% icon details %} Import RDatat
+> ### {% icon details %} IF your original data is on RData format
 > 
 > > ### {% icon hands_on %} Hands-on: Data upload.
 > > 1. Import the RData
@@ -180,7 +180,9 @@ The second step of any Regional GAM data analysis is making sure to have a datas
 > >    You can repeat this set of actions as much as necessary, changing only the name of the species taken into account. By doing this, you will obtain separated dataset, each of them concerning a different species.
 > >
 > > 3. **tabular to CSV** {% icon tool %}
-> >      - *""*: output of **Filter data on any column using simple expressions** {% icon tool %}
+> >      - *"tabular file"*: output of **Filter data on any column using simple expressions** {% icon tool %}
+> >      - *"output csv Separator"*: `,`
+> >      - *"Header in file"*: `Yes`
 > >
 > >    Repeat this step on all the different `outputs` from **Filter data on any column using simple expressions** {% icon tool %} that you have, one by species. Please, tag your new dataset with an explicit tags as "Count" and "Aglais io" and/or rename this dataset like "Aglais io count file".
 > {: .hands_on}
@@ -269,7 +271,7 @@ This step will allow you to compute and display the phenology of a species. In t
 
 ![Phenology chart](Images/Pyronia%20tithonus%20phenology%20explicit%20ID.png "This shows the occurrence of Pyronia tithonus")
 
-Please note, that if you want to create a "stacked" visualization, overlapping each year, you can use several executions (one execution by year) of the `Filter data on any column using simple expressions` tool specifying the year you want on the `With following condition` parameter, `c2==2003` for 2003, then `c2==2004` for 2004, etc... then you can paste all resulting files side by side using one or several executions of the `Paste two files side by side` tool so you can specify on the "Select Data" tab of visualization, several Data series (one by year). ❗WARNING❗ The use of this `Paste two files side by side` tool must be done carefully as in case of differences in term of number of lines between datasets to paste, it will mix informations from columns. Here, as we are working on temporal series over years, and as some years have 365 days, others 366, and as in this case, phenology is not centered on winter, we can delete informations from the 366 days of some years without any problems so we will have the same number of lines between datasets to paste side by side. To do so, use the `Select first lines from a dataset` tool to select first 366 lines from filtered datasets. As it will be of interest to reuse this combination of tools in a next tutorial step, you can create a workflow that you can named something like `Phenology "stacked" visualization creation`.
+Please note, that if you want to create a "stacked" visualization, overlapping each year, you can use several executions (one execution by year) of the `Filter data on any column using simple expressions` tool specifying the year you want on the `With following condition` parameter, `c2==2003` for 2003, then `c2==2004` for 2004, etc... then you can paste all resulting files side by side using one or several executions of the `Paste two files side by side` tool so you can specify on the "Select Data" tab of visualization, several Data series (one by year). WARNING The use of this `Paste two files side by side` tool must be done carefully as in case of differences in term of number of lines between datasets to paste, it will mix informations from columns. Here, as we are working on temporal series over years, and as some years have 365 days, others 366, and as in this case, phenology is not centered on winter, we can delete informations from the 366 days of some years without any problems so we will have the same number of lines between datasets to paste side by side. To do so, use the `Select first lines from a dataset` tool to select first 366 lines from filtered datasets. As it will be of interest to reuse this combination of tools in a next tutorial step, you can create a workflow that you can named something like `Phenology "stacked" visualization creation`.
 
 With the `output` from **Remove beginning of a file** you can now generate a new 'stacked' chart which will have a x-axis corresponding to your column `"week"`.
 
@@ -356,7 +358,7 @@ With the `output` from **Remove beginning of a file** you can now generate a new
 >    > * "Paste": `the output` from **merger des colonnes** (with the dataset concerning species 1)
 >    > * "and": `the output` from **merger des colonnes** (with the dataset concerning species 2)
 >    > * "Delimited by": tabulation 
->    >❗WARNING❗ The use of this `Paste two files side by side` tool must be done carefully as in case of differences in term of number of lines between datasets to paste, it will mix informations from columns. Here, datasets have the same number of lines.
+>    >WARNING The use of this `Paste two files side by side` tool must be done carefully as in case of differences in term of number of lines between datasets to paste, it will mix informations from columns. Here, datasets have the same number of lines.
 
 > ### {% icon comment %} Comment
 > Concerning a different species,. In order to do so you will have to do as explained below:
