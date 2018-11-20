@@ -113,7 +113,7 @@ Once Blast-P search is performed, it provides a tabular output containing “**N
 >
 {: .hands_on}
 
-
+Once this step is completed, a tabular output containing novel proteoforms are displayed. These novel proteforms fulfill our criteria of not being present in the existing NCBI repository. The next step is to remove any duplicate sequences. For this, we use the Query tabular tool again to select distinct sequences from the tabular output. 
 
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
@@ -308,6 +308,8 @@ The final tool for this workflow generates a tabular output that summarizes the 
 >
 >    ![Final Summary](../../images/final_summary.png){:width="100%"}
 >
+The Final summary displays a tabular output containing the list of novel peptides and its corresponding protein. It also provides the users with the chromosomal location of the novel proteoform along with the peptide's start and end position.	The output also features the strand information, gene	annotation and the genomic coordinates in a specific format that could be used on IGV or UCSC browser. It also provides the user with a	UCSC Genome Browser link, which the user can directly copy and paste it on a web browser to learn more about the novel proteoform. Here we are demonstrating the use of proteogenomics workflow on an example trimmed mouse dataset. This study explores the possibilities for downstream biological /functional analysis of peptides corresponding to novel proteoforms.
+
 {: .hands_on}
 
 ### What's next?
