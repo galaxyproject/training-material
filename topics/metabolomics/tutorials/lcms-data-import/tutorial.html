@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>LC-MS - Data Import</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material to analyse Metabolomics data in Galaxy ..." />
+        <meta property="og:title" content="Galaxy Training: LC-MS - Data Import" />
+        <meta property="og:description" content="Training material to analyse Metabolomics data in Galaxy ..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body>
+        
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/metabolomics" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Metabolomics
+                        </a>
+                    </li>
+
+                    
+                    
+                    
+
+                    
+                        
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    
+                                        
+                                            
+                                                <a class="dropdown-item" href="/training-material/topics/metabolomics/slides/introduction.html">
+                                                    Introduction to Metabolomics
+                                                </a>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                </div>
+                            </li>
+                        
+                    
+
+                    
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+                                <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">instances</span> Galaxy Instances
+                            </a>
+                            <div class="dropdown-menu">
+                                
+                                
+                                
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                        <a class="dropdown-item" href="http://galaxy.workflow4metabolomics.org" title="workflow4metabolomics">
+                                            workflow4metabolomics
+                                        </a>
+                                        
+                                    
+                                
+                            </div>
+                        </li>
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://doi.org/10.5281/zenodo.1346742" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/metabolomics#references" title="References">
+                            <i class="fa fa-bookmark" aria-hidden="true"></i><span class="visually-hidden">references</span> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetabolomics%2Ftutorials%2Flcms-data-import%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetabolomics%2Ftutorials%2Flcms-data-import%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetabolomics%2Ftutorials%2Flcms-data-import%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetabolomics%2Ftutorials%2Flcms-data-import%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetabolomics%2Ftutorials%2Flcms-data-import%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://biostar.usegalaxy.org/" title="Ask on Biostars">
+            Ask questions on Biostars
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/metabolomics/tutorials/lcms-data-import/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+   
+{
+  "@context": "http://schema.org",
+  "@type": "CreativeWork",
+  "name": "LC-MS - Data Import",
+  "accessModeSufficient": "visual",
+  "accessibilityControl": "fullMouseControl",
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "learningResourceType": "",
+  "url": "/topics/metabolomics/tutorials/lcms-data-import/tutorial.html",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://doi.org/10.5281/zenodo.1346742",
+      "name": "Training data for LC-MS - Data Import tutorial"
+    }
+  ],
+  "timeRequired": "PT30M",
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "lecorguille"
+    }
+  ],
+  "description": "The questions this  addresses are:\n - How to import the \"Raw\" data in \"DataSet Collection?\n - How to import the SampleMetadata Sheet?\n - How to use those data in the first steps of the W4M LC-MS workflow?\n\n\\nThe objectives are:\n - How to import your data in Galaxy and how to deal with the datasets through the first steps of the LC-MS workflow\n\n"
+}
+
+    </script>
+    <section class="tutorial">
+        <h1>LC-MS - Data Import</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>How to import the "Raw" data in "DataSet Collection?</li>
+            
+            <li>How to import the SampleMetadata Sheet?</li>
+            
+            <li>How to use those data in the first steps of the W4M LC-MS workflow?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>How to import your data in Galaxy and how to deal with the datasets through the first steps of the LC-MS workflow</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+                <li>
+                    
+                    <a href="/training-material/topics/introduction/">Galaxy introduction</a>
+                    
+                </li>
+            
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 30 minutes</p>
+            
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p><strong>TODO</strong> Explain why metabolomics, what do you want to do</p>
+
+<p>To illustrate this approach, we will use data from <a href="https://pubs.acs.org/doi/10.1021/acs.jproteome.5b00354">Thévenot et al, 2015</a>. The objectives of this paper was to analyze the inﬂuence of age, body mass index, and gender on the urine metabolome. To do that, the authors collected samples from 183 employees from CEA and did
+LC-HRMS LTQ-Orbitrap (negative ionization mode) (<strong>TODO</strong> explain the terms).</p>
+
+<p>To analyze these data, we will the follow the <a href="http://workflow4metabolomics.org/the-lc-ms-workflow">LC-MS workflow</a>, developed by the <a href="http://workflow4metabolomics.org/">Wokflow4metabolomics group</a>. <strong>TODO</strong> Introduce with one or two sentence the workflow (explanation of the meaning of LC-MS, the big steps, etc). This workflow take as input <strong>TODO</strong> and perform several steps: pre-processing, statistics, and annotation.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will go into each of the steps:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
+  <li><a href="#preprocessing-with-xcms" id="markdown-toc-preprocessing-with-xcms">Preprocessing with XCMS</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="data-upload">Data upload</h1>
+
+<p>Until recently, the LC-MS workflow required some zip files (with files nested in folders) as input. But now, the W4M team recommend to import individually the files into dataset collections and process them in parallel. But, we will see that the <strong>xcms.findChromPeaks</strong> outputs have to be merged (<strong>Merger</strong>) before using <strong>xcms.groupChromPeaks</strong> and a sampleMetadata file must be used to set the groups (but you need one for some further steps anyway).</p>
+
+<p>The data are available in <a href="https://doi.org/10.5281/zenodo.1346742">Zenodo</a>. It is composed of 4 datasets among the 240 (<strong>TODO</strong>: why 240 for 183 employees?) from the whole Sacurine dataset.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this RNA-seq exercise</li>
+    <li>
+      <p>Import the 4 mzXML files from <a href="https://doi.org/10.5281/zenodo.1185122">Zenodo</a> or a data library inside a collection:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1346742/files/Blanc12.mzXML
+https://zenodo.org/record/1346742/files/Blanc17.mzXML
+https://zenodo.org/record/1346742/files/HU_neg_099.mzXML
+https://zenodo.org/record/1346742/files/HU_neg_178.mzXML
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>
+            <p>Click on <strong>Collection</strong> on the top</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>Paste the link into the text field</li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li>Click on <strong>Build</strong> when available</li>
+          <li>Enter a name for the collection</li>
+          <li>Click on <strong>Create list</strong> (and wait a bit)</li>
+        </ul>
+
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <ul>
+          <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>
+          <li>Find the correct folder (ask your instructor)</li>
+          <li>Select interesting files</li>
+          <li>Click on <strong>Import selected datasets into history</strong></li>
+          <li>Import in the history</li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="comment">
+        <h3 id="comment-format-of-the-files"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Format of the files</h3>
+        <p>The files there are in mzxml format (<strong>TODO</strong>: explain the format). The other possible formats for metabolomics data are: mzml, mzdata, netcdf (<strong>TODO</strong>: explain the differences with the previous format)</p>
+      </blockquote>
+
+      <blockquote class="comment">
+        <h3 id="comment-files-bigger-than-2go"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Files bigger than 2Go</h3>
+        <p>If your files are bigger than 2Go, you need to import them into Galaxy using the FTP method.</p>
+      </blockquote>
+
+      <p>The aim of the Dataset Collections is to use them as a sort of Dataset to not have to feed the tools with numerous individual datasets. If you miss the build step, don’t panic.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-create-a-dataset-collection"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Create a dataset collection</h3>
+
+        <ol>
+          <li>Click on <i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> icon (<strong>Operation on multiple datasets</strong>) on the top of the history</li>
+          <li>Select all the datasets for the collection</li>
+          <li>Expand <strong>For all selected</strong> menu</li>
+          <li>Select <strong>Build dataset list</strong></li>
+          <li>Enter a name for the collection</li>
+          <li>Tick <strong>Hide original elements?</strong></li>
+          <li>Click on <strong>Create list</strong> (and wait a bit)</li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>Click on the collection to inspect the nested datasets</li>
+    <li>
+      <p>Check that the datatype of the files in the collection is <code class="highlighter-rouge">mzxml</code></p>
+
+      <p>If the datatype is not <code class="highlighter-rouge">mzxml</code>, please change the datatype to <code class="highlighter-rouge">mzxml</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="highlighter-rouge">mzxml</code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>We also need to import the metadata file. This file contains for each of your raw files their metadata:</p>
+<ul>
+  <li>class which will be used during the preprocessing steps</li>
+  <li>number of batch which will be useful for a batch correction step</li>
+  <li>different experimental conditions which can be used for the statistics</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>samples</th>
+      <th>class</th>
+      <th>sampleType</th>
+      <th>subset</th>
+      <th>full</th>
+      <th>injectionOrder</th>
+      <th>batch</th>
+      <th>osmolality</th>
+      <th>sampling</th>
+      <th>age</th>
+      <th>bmi</th>
+      <th>gender</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>HU_neg_099</td>
+      <td>bio</td>
+      <td>sample</td>
+      <td>1</td>
+      <td>1</td>
+      <td>83</td>
+      <td>ne1</td>
+      <td>923</td>
+      <td>4</td>
+      <td>23</td>
+      <td>21.3</td>
+      <td>Male</td>
+    </tr>
+    <tr>
+      <td>HU_neg_178</td>
+      <td>bio</td>
+      <td>sample</td>
+      <td>0</td>
+      <td>1</td>
+      <td>153</td>
+      <td>ne1</td>
+      <td>958</td>
+      <td>7</td>
+      <td>33</td>
+      <td>26.57</td>
+      <td>Female</td>
+    </tr>
+    <tr>
+      <td>HU_neg_199</td>
+      <td>bio</td>
+      <td>sample</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>ne2</td>
+      <td>945</td>
+      <td>9</td>
+      <td>55</td>
+      <td>25.3</td>
+      <td>Female</td>
+    </tr>
+    <tr>
+      <td>Blanc12</td>
+      <td>blank</td>
+      <td>blank</td>
+      <td>1</td>
+      <td>1</td>
+      <td>120</td>
+      <td>ne1</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <td>Blanc17</td>
+      <td>blank</td>
+      <td>blank</td>
+      <td>0</td>
+      <td>1</td>
+      <td>173</td>
+      <td>ne1</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>NA</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="comment">
+  <h3 id="comment-warning-be-careful-about-"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Warning: Be careful about …</h3>
+  <p>Microsoft Office Excel files are not allowed.
+Only file based on text are accepted: .tsv, .csv, .tab, .txt, …</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-metadata-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Metadata upload</h3>
+
+  <ol>
+    <li>
+      <p>Import the metadata file from <a href="https://doi.org/10.5281/zenodo.1185122">Zenodo</a> or a data library inside a collection</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   https://zenodo.org/record/1346742/files/sacuri_sampleMetadata.tsv
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>Paste the link into the text field</li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <ul>
+          <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>
+          <li>Find the correct folder (ask your instructor)</li>
+          <li>Select interesting files</li>
+          <li>Click on <strong>Import selected datasets into history</strong></li>
+          <li>Import in the history</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="preprocessing-with-xcms">Preprocessing with XCMS</h1>
+
+<p>The first step of the workflow is the pre-processing of the raw data with XCMS.</p>
+
+<p>XCMS is a free software dedicated to pre-processing any types of mass spectrometry acquisition files from low to high resolution including FT-MS data coupled with different kind of chromatography (liquid or gaz). This software is used worldwide by a majority of specialists of metabolomic using mass spectrometry methods.</p>
+
+<p>This software is based on different algorithms that have been published and is maintained on the R repository [5,6,7].</p>
+
+<p>XCMS is able to read files with open format as mzXML and netCDF which are independent of the constructors’ formats.</p>
+
+<p>It is composed of R functions able to extract, filter, align, fill gap and annotate isotopes, adducts and fragments. This set of functions gives a modularity particularly well adapted to defined workflows which is one of the key points of Galaxy:</p>
+
+<p><img src="../../images/tutorial-lcms-data-import-run-workflow.png" alt="Preprocessing of the raw data with XCMS (in blue)" /></p>
+
+<p>We will not have to run these steps 4 times on each datasets, thanks to the Dataset collection</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-preprocessing-with-xcms"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Preprocessing with XCMS</h3>
+
+  <ol>
+    <li><strong>MSnbase readMSData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“File(s) from your history containing your chromatograms”</em>: the input data collection selected with <strong>Dataset collection</strong> (<i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span>)</li>
+      </ul>
+    </li>
+    <li><strong>xcms findChromPeaks (xcmsSet)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RData file”</em>: the <code class="highlighter-rouge">raw.raw.RData</code> Data Collection</li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Extraction method for peaks detection”</em>: <code class="highlighter-rouge">CentWave</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Min,Max peak width in seconds”</em>: <code class="highlighter-rouge">10,35</code></li>
+      </ul>
+
+      <p>In the next step of the workflow, <strong>xcms.groupChromPeaks</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and <strong>xcms.adjustRtime</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> need one RData file. To merge all our RData which are nested in the Dataset Collection called something like <code class="highlighter-rouge">raw.xset.RData</code>, we will use a tool named <strong>xcms.find ChromPeaks Merger</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. This tool will also take the SampleMetadata <code class="highlighter-rouge">sampleMetadata.tsv</code> to map the classes to the samples: Samples, QC, Blank</p>
+    </li>
+    <li><strong>xcms findChromPeaks Merger</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RData file”</em>: the <code class="highlighter-rouge">raw.raw.xset.RData</code> Data Collection (output of <strong>xcms findChromPeaks (xcmsSet)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample metadata file”</em>: the imported metadata file</li>
+      </ul>
+
+      <p>When the <strong>xcms findChromPeaks Merger</strong> step is done, you can observe that we now have a dataset called <code class="highlighter-rouge">xset.merged.RData</code> in the history. It’s no longer a Dataset Collection.</p>
+    </li>
+    <li><strong>xcms.groupChromPeaks (group)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RData file”</em>: <code class="highlighter-rouge">xset.merged.RData</code> (output of <strong>xcms findChromPeaks Merger</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><strong>TODO</strong> some explanation about the observed outputs (+ question boxes?)</p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p><strong>TODO</strong>: recap of the different steps and why these steps</p>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+            <ul>
+                
+                <li>You know how to import your data in Galaxy and deal with the datasets through the first steps</li>
+                
+                <li>From now, just do science!</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+        <h1>Useful literature</h1>
+        <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/metabolomics#references">here</a>.</p>
+        
+
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+        <hr>
+        <br>
+
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=LC-MS - Data Import (Metabolomics)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=LC-MS - Data Import (Metabolomics)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Gildas Le Corguillé)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/metabolomics/tutorials/lcms-data-import/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>
