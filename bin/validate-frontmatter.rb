@@ -24,7 +24,7 @@ errs = []
 def skip_disabled(data, fn)
   # If there's an 'enable' key and it is one flavor of 'false', then, exit
   # immediately without testing.
-  if data.key?('enable') && (data['enable'].downcase == 'false' || data['enable'] == false) then
+  if data.key?('enable') && (data['enable'] == false || data['enable'].downcase == 'false') then
     puts "#{fn} skipped (disabled)"
     exit 0
   end
