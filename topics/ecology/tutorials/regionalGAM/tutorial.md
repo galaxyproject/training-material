@@ -36,7 +36,7 @@ You will basically learn how to create a file on the basis of which you can crea
 
 # Step 1: Pre-processing
 
-The goal of the first step is to upload and prepare the file so that it will be usable for the *regional GAM* analysis (See [this warning](#inputdatawarning) for more information about the input file).
+The goal of the first step is to upload and prepare the file so that it will be usable for the *regional GAM* analysis.
 First of all, you need to use a Galaxy instance with related regionalGAM tools. You can deploy your own local instance through Docker as a  Galaxy flavour or use our [Galaxy-E test instance](https://openstack-192-168-100-96.genouest.org/). 
 After uploading input files, you might have to use some data handling tools to be able to use *regional GAM* tools.
 
