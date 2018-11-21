@@ -375,7 +375,7 @@ With the `output` from the last **Paste two files side by side** execution, you 
 >    >    >    * "and": `the output` from **Merge Columns together** (with the dataset concerning species 3)
 >    >    >    * "Delimited by": tabulation 
 >    >    > * Repeat `Paste two files side by side` with `the output` from **Paste two files side by side** (with the data concerning species 1, 2 and 3) and with `the output` from **Merge Columns together** (with the dataset concerning species 4) and so on.
->    >
+> {: .comment}
 >    > ### {% icon details %} Generating a multispecies chart
 >    >
 >    > If your input dataset contains informations about more than one species, you can now generate char for the multispecies:
@@ -405,8 +405,9 @@ With the `output` from the last **Paste two files side by side** execution, you 
 > >    >     * "Use multi-panels": click on `No`(or you will have separated charts, one for each species)
 > >    > 9. Click on {% icon tip %} `Visualize`
 > >    > 10. Click on {% icon tip %} `save this visualization`if you are willing to keep it
->    > {: .hands_on}
+> > {: .hands_on}
 > {: .details}
+{: .tip}
 
 ## Compute Abundance Index across sites and years
 
@@ -431,8 +432,8 @@ This will allow you to create a file showing the abundance index per year of a c
 >    > 5. Visualize
 >    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 
->   > ### {% icon question %} Questions
->   >
+>    > ### {% icon question %} Questions
+>    >
 >    > 1. What do you think about this visualization? Maybe not so good? Search a way to display the content of the file using charts in a more accurate manner... To do so, you can apply approaches used before on this tutotrial using tools like **Column Regex Find And Replace**, **Merge Columns together**, **Remove beginning of a file**, and **Sort data in ascending or descending order** on one hand to create a new column of more explicit identifiers (ie `Site-Year`) and/or  **Filter data on any column using simple expressions**, **Paste two files side by side**, **Remove beginning of a file** on another hand to create a stacked visualization.
 >    >
 >    >    <details>
