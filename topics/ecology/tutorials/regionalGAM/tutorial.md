@@ -236,23 +236,23 @@ This step will allow you to compute and display the phenology of a species. In t
 >    - *"How should the results be sorted?"*: `By the values being counted`.
 > 2. Inspect and expand the output data from **Count occurrences of each record** {% icon tool %}
 > 3. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
->    - "File to process": output file from **flight curve**.
->    - "in column": `Column 2` (corresponding to the one headed with `YEAR`)
+>    - *"File to process"*: output file from **flight curve**.
+>    - *"in column"*: `Column 2` (corresponding to the one headed with `YEAR`)
 >    - Click on `Insert check`:
->       - "Find pattern": `(20[0-9][0-9])`
->       - "Replace with": `-\1` 
+>       - *"Find pattern"*: `(20[0-9][0-9])`
+>       - *"Replace with"*: `-\1` 
 > 4. Inspect the file by clicking on the `eye` icon to check if all the years are now written with a "-" before the digits. 
 > 5. **Merge Columns together** {% icon tool %} with the following parameters:
->    - "Select data": output from the last **Column Regex Find And Replace**.
->    - "Merge column": `Column 3`(corresponding to the one headed with `WEEK`)
->    - "with column": `Column 2`(corresponding to the one headed with `YEAR`)
+>    - *"Select data"*: output from the last **Column Regex Find And Replace**.
+>    - *"Merge column"*: `Column 3`(corresponding to the one headed with `WEEK`)
+>    - *"with column"*: `Column 2`(corresponding to the one headed with `YEAR`)
 > 7. Use **Remove beginning of a file** {% icon tool %} to remove first line
 > 8. Use one more **Column Regex Find And Replace** {% icon tool %} to recreate the original content for the `YEAR` column with the following parameters:
->    - "File to process": output file from **Remove beginning of a file**.
->    - "in column": `Column 2` (corresponding to the one headed with `YEAR`)
+>    - *"File to process"*: output file from **Remove beginning of a file**.
+>    - *"in column"*: `Column 2` (corresponding to the one headed with `YEAR`)
 >    - Click on `Insert check`:
->       - "Find pattern": `-(20[0-9][0-9])`
->       - "Replace with": `\1` 
+>       - *"Find pattern"*: `-(20[0-9][0-9])`
+>       - *"Replace with"*: `\1` 
 > 
 >    It is mandatory step to avoid header to be part of the visualization
 >    If your dataset contains informations about more than one species, you can apply the previous steps and then run an extra-step to select one specific species and show all the data corresponding to it.
@@ -363,17 +363,17 @@ With the `output` from the last **Paste two files side by side** execution, you 
 
 > ### {% icon tip %} Tip: Working with more than one species
 >    > 1. Search for the tool `Paste two files side by side` with the following parameters:
->    > * "Paste": `the output` from **Merge Columns together** (with the dataset concerning species 1)
->    > * "and": `the output` from **Merge Columns together** (with the dataset concerning species 2)
->    > * "Delimited by": tabulation 
+>    > -  *"Paste"*: `the output` from **Merge Columns together** (with the dataset concerning species 1)
+>    > -  *"and"*: `the output` from **Merge Columns together** (with the dataset concerning species 2)
+>    > -  *"elimited by"*: tabulation 
 >    >WARNING The use of this `Paste two files side by side` tool must be done carefully as in case of differences in term of number of lines between datasets to paste, it will mix informations from columns. Here, datasets have the same number of lines.
 >    >
 >    >### {% icon comment %} Comment: You can add other species.
 >  In order to do so you will have to do as explained below:
 >    >    > * Search for the tool `Paste two files side by side` with the following parameters:
->    >    >    * "Paste": the `output` from **Paste two files side by side** (with the dataset concerning species 1 and 2)
->    >    >    * "and": `the output` from **Merge Columns together** (with the dataset concerning species 3)
->    >    >    * "Delimited by": tabulation 
+>    >    >    -  *"Paste"*: the `output` from **Paste two files side by side** (with the dataset concerning species 1 and 2)
+>    >    >    -  *"and"*: `the output` from **Merge Columns together** (with the dataset concerning species 3)
+>    >    >    -  *"Delimited by"*: tabulation 
 >    >    > * Repeat `Paste two files side by side` with `the output` from **Paste two files side by side** (with the data concerning species 1, 2 and 3) and with `the output` from **Merge Columns together** (with the dataset concerning species 4) and so on.
 > {: .comment}
 >    > ### {% icon details %} Generating a multispecies chart
@@ -387,22 +387,22 @@ With the `output` from the last **Paste two files side by side** execution, you 
 > >    > 3. Select a visualization: "line chart (NVD 3) 
 > >    > 4. Give it a proper name like `Aglais io & Pyronia tithonus phenology`
 > >    > 5. Select data 
-> >    >     * "Provide a label": The name of the first species, for example `Aglais io`
-> >    >     * "Pick a series color": Choose a color
-> >    >     * "Data point labels": `Column corresponding to the name of the species 1` 
-> >    >     * "Values for x-axis": `Column corresponding to the "week and year" of the species 1`
-> >    >     * "Values for y-axis": `Column corresponding to nm of the species 1`
+> >    >     -  *"Provide a label"*: The name of the first species, for example `Aglais io`
+> >    >     -  *"Pick a series color"*: Choose a color
+> >    >     -  *"Data point labels"*: `Column corresponding to the name of the species 1` 
+> >    >     -  *"Values for x-axis"*: `Column corresponding to the "week and year" of the species 1`
+> >    >     -  *"Values for y-axis"*: `Column corresponding to nm of the species 1`
 > >    > 6. Insert data series:
-> >    >     * "Provide a label": he name of the second species, for example `Pyronia tithonus`
-> >    >     * "Pick a series color": Choose a different color
-> >    >     * "Data point labels": `Column corresponding to the name of the species 2` 
-> >    >     * "Values for x-axis": `Column corresponding to the "week and year" of the species 2`
-> >    >     * "Values for y-axis": `Column corresponding to nm of the species 2`
+> >    >     -  *"Provide a label": he name of the second species, for example `Pyronia tithonus`
+> >    >     -  *"Pick a series color"*: Choose a different color
+> >    >     -  *"Data point labels"*: `Column corresponding to the name of the species 2` 
+> >    >     -  *"Values for x-axis"*: `Column corresponding to the "week and year" of the species 2`
+> >    >     -  *"Values for y-axis"*: `Column corresponding to nm of the species 2`
 > >    > 7. You may repeat "Insert data series" as many times as needed depending on the number of different species you want to represent on your chart.
 > >    > 8. Click on {% icon tip %} `Customize`
-> >    >     * "X-Axis label": `Week and Year`  
-> >    >     * Y-Axis label: `nm values`
-> >    >     * "Use multi-panels": click on `No`(or you will have separated charts, one for each species)
+> >    >     -  *"X-Axis label"*: `Week and Year`  
+> >    >     -  *"Y-Axis label"*: `nm values`
+> >    >     -  *"Use multi-panels"*: click on `No`(or you will have separated charts, one for each species)
 > >    > 9. Click on {% icon tip %} `Visualize`
 > >    > 10. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 > > {: .hands_on}
@@ -414,8 +414,8 @@ With the `output` from the last **Paste two files side by side** execution, you 
 This will allow you to create a file showing the abundance index per year of a chosen species in a certain site. Based on this file you will then learn how to represent this abundance on a chart. 
 >
 > 1. Look for the tool `Abundance index` with the following parameters:
-> * "Count file": `output` from **tabular to CSV** (normally renamed "Counting file" and/or tagged "Count").  
-> * "Flight curve output": `output` from **flight curve**.
+> -  *"Count file"*: `output` from **tabular to CSV** (normally renamed "Counting file" and/or tagged "Count").  
+> -  *"Flight curve output"*: `output` from **flight curve**.
 
 
 >  Based on the  output from **abundance index**, we can create a chart showing the annual abundance trend of a certain species per site. 
@@ -423,12 +423,12 @@ This will allow you to create a file showing the abundance index per year of a c
 >    > 2. Give it a proper name (`Pyronia tithonus abundance index ` for example)
 >    > 3. Select a visualization type: "Bar diagram (NVD 3)" 
 >    > 4. Select data 
->    > * "Data point labels": `Column 1` 
->    > * "Values for x-axis": `Column 3`
->    > * "Values for y-axis": `Column 4`
+>    > -  *"Data point labels"*: `Column 1` 
+>    > -  *"Values for x-axis"*: `Column 3`
+>    > -  *"Values for y-axis"*: `Column 4`
 >    > 5. Customize 
->    > * "X-Axis label": `Year`
->    > * "Y-Axis label": `regional_gam`
+>    > -  *"X-Axis label"*: `Year`
+>    > -  *"Y-Axis label"*: `regional_gam`
 >    > 5. Visualize
 >    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 
@@ -444,12 +444,12 @@ This will allow you to create a file showing the abundance index per year of a c
 >    > 2. Select a visualization type: "Bar diagram (NVD 3)" 
 >    > 3. Give it a proper name (`Pyronia tithonus abundance index` for example)
 >    > 4. Select data 
->    > * "Data point labels": `Column 6` 
->    > * "Values for x-axis": `Column 6`
->    > * "Values for y-axis": `Column 4`
+>    > -  *"Data point labels"*: `Column 6` 
+>    > -  *"Values for x-axis"*: `Column 6`
+>    > -  *"Values for y-axis"*: `Column 4`
 >    > 5. Customize 
->    > * "X-Axis label": `Site-Year`
->    > * "Y-Axis label": `regional_gam`
+>    > -  *"X-Axis label"*: `Site-Year`
+>    > -  *"Y-Axis label"*: `regional_gam`
 >    > 5. Visualize
 >    > 6. Click on {% icon tip %} `save this visualization`if you are willing to keep it
 
@@ -461,34 +461,34 @@ This will allow you to create a file showing the abundance index per year of a c
 >    > 2. Select a visualization type: "Bar diagram (NVD 3)" 
 >    > 3. Give it a proper name (`Pyronia tithonus abundance index` for example)
 >    > 4. Select data
->    > * "Provide a label": This can be here the site, `UKBMS`
->    > * "Data point labels": `Column 5` (the UKBMS prop_pheno_sampled column)
->    > * "Values for x-axis": `Column 3` (the UKBMS YEAR column)
->    > * "Values for y-axis": `Column 4` (the UKBMS regional_gam column)
+>    > -  *"Provide a label"*: This can be here the site, `UKBMS`
+>    > -  *"Data point labels"*: `Column 5` (the UKBMS prop_pheno_sampled column)
+>    > -  *"Values for x-axis"*: `Column 3` (the UKBMS YEAR column)
+>    > -  *"Values for y-axis"*: `Column 4` (the UKBMS regional_gam column)
 >    > 5. Insert a new Data Series, choose a different color and specify:
->    > * "Provide a label": This can be here the site, `NLBMS`
->    > * "Pick a series color": Choose a color for the line 
->    > * "Data point labels": `Column 10` (the NLBMS prop_pheno_sampled column)
->    > * "Values for x-axis": `Column 8` (the NLBMS YEAR column)
->    > * "Values for y-axis": `Column 9` (the NLBMS regional_gam column)
+>    > -  *"Provide a label"*: This can be here the site, `NLBMS`
+>    > -  *"Pick a series color"*: Choose a color for the line 
+>    > -  *"Data point labels"*: `Column 10` (the NLBMS prop_pheno_sampled column)
+>    > -  *"Values for x-axis"*: `Column 8` (the NLBMS YEAR column)
+>    > -  *"Values for y-axis"*: `Column 9` (the NLBMS regional_gam column)
 >    > 6. Insert a new Data Series, choose a different color and specify:
->    > * "Provide a label": This can be here the site, `ESBMS`
->    > * "Pick a series color": Choose a color for the line 
->    > * "Data point labels": `Column 15` (the ESBMS prop_pheno_sampled column)
->    > * "Values for x-axis": `Column 13` (the ESBMS YEAR column)
->    > * "Values for y-axis": `Column 14` (the ESBMS regional_gam column)
+>    > -  *"Provide a label"*: This can be here the site, `ESBMS`
+>    > -  *"Pick a series color"*: Choose a color for the line 
+>    > -  *"Data point labels"*: `Column 15` (the ESBMS prop_pheno_sampled column)
+>    > -  *"Values for x-axis"*: `Column 13` (the ESBMS YEAR column)
+>    > -  *"Values for y-axis"*: `Column 14` (the ESBMS regional_gam column)
 >    > 7. Insert a new Data Series, choose a different color and specify:
->    > * "Provide a label": This can be here the site, `FRBMS`
->    > * "Pick a series color": Choose a color for the line 
->    > * "Data point labels": `Column 20` (the FRBMS prop_pheno_sampled column)
->    > * "Values for x-axis": `Column 18` (the FRBMS YEAR column)
->    > * "Values for y-axis": `Column 19` (the FRBMS regional_gam column)
+>    > -  *"Provide a label"*: This can be here the site, `FRBMS`
+>    > -  *"Pick a series color"*: Choose a color for the line 
+>    > -  *"Data point labels"*: `Column 20` (the FRBMS prop_pheno_sampled column)
+>    > -  *"Values for x-axis"*: `Column 18` (the FRBMS YEAR column)
+>    > -  *"Values for y-axis"*: `Column 19` (the FRBMS regional_gam column)
 >    > 8. Insert a new Data Series, choose a different color and specify:
->    > * "Provide a label": This can be here the site, `DEBMS`
->    > * "Pick a series color": Choose a color for the line 
->    > * "Data point labels": `Column 25` (the 2004 prop_pheno_sampled column)
->    > * "Values for x-axis": `Column 23` (the 2004 YEAR column)
->    > * "Values for y-axis": `Column 24` (the 2004 regional_gam column)
+>    > -  *"Provide a label": This can be here the site, `DEBMS`
+>    > -  *"Pick a series color"*: Choose a color for the line 
+>    > -  *"Data point labels"*: `Column 25` (the 2004 prop_pheno_sampled column)
+>    > -  *"Values for x-axis"*: `Column 23` (the 2004 YEAR column)
+>    > -  *"Values for y-axis"*: `Column 24` (the 2004 regional_gam column)
 
 ![Abundance index chart](../../Images/Pyronia%20tithonus%20Abundance%20index%20stacked.png "This shows the occurrence of Pyronia tithonus")
 
@@ -506,29 +506,29 @@ The expected temporal trend allows you to have an overview of the evolution of a
 
 > ### {% icon hands_on %} Hands-on: Expected temporal trend
 >    > 1. Look for the tool `Expected temporal trend` with the the following parameters: 
->    > * "Tabular file generated by the ab_index tool": output from **abundance index**.
+>    > -  *"Tabular file generated by the ab_index tool"*: output from **abundance index**.
 >    
 ![Expected temporal trend](../../Images/Expected%20temporal%20trend.png "This shows the expected evolution of Abundance")
 
 > {% icon warning %} Please note that sometimes the expected temporal trend can't be done on dataset. If you want this action to work, the occurences on your dataset must lie between the month of April and the end of the month of September.
 
-Note also that you will obtain two files resulting of the action above. The first one will be the graph and the second one will contains the values of "x".
+Note also that you will obtain two files resulting of the action above. The first one will be the graph and the second one will contains the values of "x", the collated index value by year.
 
 > ## Model temporal trend with a simple linear regression 
 
 The point of doing a linear regression is to determinate if the year has an influence on the abundance of a species. 
 
 >    > 1. Look for the tool `Model temporal trend with a simple linear regression` with the following parameters.
->    > * "File generated by the glmmpql/Expected temporal trend tool": `output 2` from **temporal trend**. 
->    > * "File generated by the ab_index tool": `output` from **abundance index**.
+>    > -  *"File generated by the glmmpql/Expected temporal trend tool"*: `output 2` from **temporal trend**. 
+>    > -  *"File generated by the ab_index tool"*: `output` from **abundance index**.
 
 > ## Model temporal trend taking into account autocorrelation of residuals
 
 Here we apply the same approach than at the previous step with addition of a correslation structure (ARMA(2,0)) to adjust the model.
 
 >    > 1. Look for the tool `Linear regression ajusted for autocorrelation in the residuals` with the following parameters.
->    > * "File generated by the glmmpql/Expected temporal trend tool": `output 2` from **temporal trend**. 
->    > * "File generated by the ab_index tool": `output` from **abundance index**.
+>    > -  *"File generated by the glmmpql/Expected temporal trend tool"*: `output 2` from **temporal trend**. 
+>    > -  *"File generated by the ab_index tool"*: `output` from **abundance index**.
 
 
 > ## Plot collated abundance index with trend line
