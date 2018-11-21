@@ -234,7 +234,7 @@ This step will allow you to compute and display the phenology of a species. In t
 >    - *"Select"*: `Column 2` (the on headed with `YEAR`)
 >    - *"Delimited by"*: `Tab`.
 >    - *"How should the results be sorted?"*: `By the values being counted`.
-> 2. Inspect and expand the output data from **flight curve** {% icon tool %}
+> 2. Inspect and expand the output data from **Count occurrences of each record** {% icon tool %}
 > 3. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
 >    - "File to process": output file from **flight curve**.
 >    - "in column": `Column 2` (corresponding to the one headed with `YEAR`)
