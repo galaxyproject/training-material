@@ -148,7 +148,7 @@ The second step of any Regional GAM data analysis is making sure to have a datas
 >
 > If your dataset contains informations about more than one species, you can apply the previous steps and then run an extra-step to select one specific species and show all the data corresponding to it.
 >
-> As the dataset is quite big and countains heterogeneous informations, you want to know wether the data are about one species or more. So the first step consists to count how many species are taken into account in this dataset.
+> As the dataset is quite big and contains heterogeneous informations, you want to know wether the data are about one species or more. So the first step consists to count how many species are taken into account in this dataset.
 >
 > > ### {% icon hands_on %} Hands-on: How many species are taken into account
 > > 1. **Count occurrences of each record** {% icon tool %} with the following parameters:
