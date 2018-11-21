@@ -77,7 +77,7 @@ When the dataset contains many details, it lengthens the file processing time th
 
 > ### {% icon question %} Questions
 >
-> After having successfully deleted the sub-sites informations, can you look at the original dataset and this new one and say how many sites you had, and you have now? You will maybe need to use tools like `Count occurrences of each record` (don't forget that if you want to run the same tool with same parameters to several input files, you can directly specify the "multiple dataset" option on the tool form for the `from dataset` parameter).
+> After having successfully deleted the sub-sites informations, can you look at the original dataset and this new one and say how many sites you had, and you have now? You will maybe need to use tools like `Count occurrences of each record` (don't forget that if you want to run the same tool with same parameters to several input files, you can directly specify the "multiple dataset" option on the tool form for the *"from dataset"* parameter).
 >
 > > ### {% icon solution %} Solution
 > > The dataset contains 5 sites now against 1143 before "down-sampling"
