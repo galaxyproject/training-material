@@ -159,6 +159,12 @@ The second step of any Regional GAM data analysis is making sure to have a datas
 > 2. Inspect the file by clicking on the {% icon galaxy-eye %} icon to check how many species are taken into account.
 > {: .hands_on}
 >
+> To test these steps, you can use the following dataset: 
+> 
+>   ```
+>   https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv
+>   ```
+> 
 > > ### {% icon question %} Questions
 > >
 > > 1. How many species does your initial dataset take into account ?
@@ -189,12 +195,6 @@ The second step of any Regional GAM data analysis is making sure to have a datas
 > >    Repeat this step on all the different `outputs` from **Filter data on any column using simple expressions** {% icon tool %} that you have, one by species. Please, tag your new dataset with an explicit tags as "Count" and "Aglais io" and/or rename this dataset like "Aglais io count file".
 > {: .hands_on}
 >
-> To test the previous steps, you can use the following dataset: 
-> 
->   ```
->   https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv
->   ```
-> 
 > If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another. 
 {: .details}
 
