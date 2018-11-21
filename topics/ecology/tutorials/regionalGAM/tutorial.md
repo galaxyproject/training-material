@@ -60,7 +60,9 @@ When the dataset contains many details, it lengthens the file processing time th
 
 > ### {% icon hands_on %} Hands-on: hiding some informations
 > 1. Run **CSV to tabular** {% icon tool %} with the following parameters:
->       - {% icon param-files %} *""*: imported dataset
+>       - {% icon param-files %} *"CSV file"*: imported dataset
+>       - {% icon param-files %} *"Separator"*: ","
+>       - {% icon param-files %} *"Header in file"*: Yes
 >   
 > 2. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
 >       - *"Select cells from"*: Select the input file
