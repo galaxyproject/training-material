@@ -361,52 +361,52 @@ With the `output` from the last **Paste two files side by side** execution, you 
 
 ![Stacked Phenology chart](../../Images/Pyronia_tithonus_phenology_stacked_explicit_ID.png "This shows the occurrence of Pyronia tithonus")
 
-> ### {% icon tip %} Tip: Creating a file comporting all the data on various species
+> ### {% icon tip %} Tip: Working with more than one species
 >    > 1. Search for the tool `Paste two files side by side` with the following parameters:
 >    > * "Paste": `the output` from **Merge Columns together** (with the dataset concerning species 1)
 >    > * "and": `the output` from **Merge Columns together** (with the dataset concerning species 2)
 >    > * "Delimited by": tabulation 
 >    >WARNING The use of this `Paste two files side by side` tool must be done carefully as in case of differences in term of number of lines between datasets to paste, it will mix informations from columns. Here, datasets have the same number of lines.
-
-> ### {% icon comment %} Comment: You can add other species.
+>    >
+>    >### {% icon comment %} Comment: You can add other species.
 >  In order to do so you will have to do as explained below:
->    > * Search for the tool `Paste two files side by side` with the following parameters:
->    >    * "Paste": the `output` from **Paste two files side by side** (with the dataset concerning species 1 and 2)
->    >    * "and": `the output` from **Merge Columns together** (with the dataset concerning species 3)
->    >    * "Delimited by": tabulation 
->    > * Repeat `Paste two files side by side` with `the output` from **Paste two files side by side** (with the data concerning species 1, 2 and 3) and with `the output` from **Merge Columns together** (with the dataset concerning species 4) and so on.
-
-> ### {% icon details %} Generating a multispecies chart
-> 
-> If your input dataset contains informations about more than one species, you can now generate char for the multispecies:
-> 
-> > ## {% icon hands_on %}
-> > 1. Inspect and expand the output data from **flight curve** {% icon tool %}
-> > 2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
-> > 3. Select `Charts`
-> > 3. Select a visualization: "line chart (NVD 3) 
-> > 4. Give it a proper name like `Aglais io & Pyronia tithonus phenology`
-> > 5. Select data 
-> >     * "Provide a label": The name of the first species, for example `Aglais io`
-> >     * "Pick a series color": Choose a color
-> >     * "Data point labels": `Column corresponding to the name of the species 1` 
-> >     * "Values for x-axis": `Column corresponding to the "week and year" of the species 1`
-> >     * "Values for y-axis": `Column corresponding to nm of the species 1`
-> > 6. Insert data series:
-> >     * "Provide a label": he name of the second species, for example `Pyronia tithonus`
-> >     * "Pick a series color": Choose a different color
-> >     * "Data point labels": `Column corresponding to the name of the species 2` 
-> >     * "Values for x-axis": `Column corresponding to the "week and year" of the species 2`
-> >     * "Values for y-axis": `Column corresponding to nm of the species 2`
-> > 7. You may repeat "Insert data series" as many times as needed depending on the number of different species you want to represent on your chart.
-> > 8. Click on {% icon tip %} `Customize`
-> >     * "X-Axis label": `Week and Year`  
-> >     * Y-Axis label: `nm values`
-> >     * "Use multi-panels": click on `No`(or you will have separated charts, one for each species)
-> > 9. Click on {% icon tip %} `Visualize`
-> > 10. Click on {% icon tip %} `save this visualization`if you are willing to keep it
-> {: .hands_on}
-{: .details}
+>    >    > * Search for the tool `Paste two files side by side` with the following parameters:
+>    >    >    * "Paste": the `output` from **Paste two files side by side** (with the dataset concerning species 1 and 2)
+>    >    >    * "and": `the output` from **Merge Columns together** (with the dataset concerning species 3)
+>    >    >    * "Delimited by": tabulation 
+>    >    > * Repeat `Paste two files side by side` with `the output` from **Paste two files side by side** (with the data concerning species 1, 2 and 3) and with `the output` from **Merge Columns together** (with the dataset concerning species 4) and so on.
+>    >
+>    > ### {% icon details %} Generating a multispecies chart
+>    >
+>    > If your input dataset contains informations about more than one species, you can now generate char for the multispecies:
+>    >
+> >    > ## {% icon hands_on %}
+> >    > 1. Inspect and expand the output data from **flight curve** {% icon tool %}
+> >    > 2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
+> >    > 3. Select `Charts`
+> >    > 3. Select a visualization: "line chart (NVD 3) 
+> >    > 4. Give it a proper name like `Aglais io & Pyronia tithonus phenology`
+> >    > 5. Select data 
+> >    >     * "Provide a label": The name of the first species, for example `Aglais io`
+> >    >     * "Pick a series color": Choose a color
+> >    >     * "Data point labels": `Column corresponding to the name of the species 1` 
+> >    >     * "Values for x-axis": `Column corresponding to the "week and year" of the species 1`
+> >    >     * "Values for y-axis": `Column corresponding to nm of the species 1`
+> >    > 6. Insert data series:
+> >    >     * "Provide a label": he name of the second species, for example `Pyronia tithonus`
+> >    >     * "Pick a series color": Choose a different color
+> >    >     * "Data point labels": `Column corresponding to the name of the species 2` 
+> >    >     * "Values for x-axis": `Column corresponding to the "week and year" of the species 2`
+> >    >     * "Values for y-axis": `Column corresponding to nm of the species 2`
+> >    > 7. You may repeat "Insert data series" as many times as needed depending on the number of different species you want to represent on your chart.
+> >    > 8. Click on {% icon tip %} `Customize`
+> >    >     * "X-Axis label": `Week and Year`  
+> >    >     * Y-Axis label: `nm values`
+> >    >     * "Use multi-panels": click on `No`(or you will have separated charts, one for each species)
+> >    > 9. Click on {% icon tip %} `Visualize`
+> >    > 10. Click on {% icon tip %} `save this visualization`if you are willing to keep it
+>    > {: .hands_on}
+> {: .details}
 
 ## Compute Abundance Index across sites and years
 
