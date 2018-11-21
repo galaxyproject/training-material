@@ -247,6 +247,12 @@ This step will allow you to compute and display the phenology of a species. In t
 >    - "Merge column": `Column 3`(corresponding to the one headed with `WEEK`)
 >    - "with column": `Column 2`(corresponding to the one headed with `YEAR`)
 > 7. Use **Remove beginning of a file** {% icon tool %} to remove first line
+> 8. Use one more **Column Regex Find And Replace** {% icon tool %} to recreate the original content for the `YEAR` column with the following parameters:
+>    - "File to process": output file from **Remove beginning of a file**.
+>    - "in column": `Column 2` (corresponding to the one headed with `YEAR`)
+>    - Click on `Insert check`:
+>       - "Find pattern": `-(20[0-9][0-9])`
+>       - "Replace with": `\1` 
 > 
 >    It is mandatory step to avoid header to be part of the visualization
 >    If your dataset contains informations about more than one species, you can apply the previous steps and then run an extra-step to select one specific species and show all the data corresponding to it.
