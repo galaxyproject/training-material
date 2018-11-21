@@ -368,13 +368,13 @@ With the `output` from the last **Paste two files side by side** execution, you 
 >    > * "Delimited by": tabulation 
 >    >WARNING The use of this `Paste two files side by side` tool must be done carefully as in case of differences in term of number of lines between datasets to paste, it will mix informations from columns. Here, datasets have the same number of lines.
 
-> ### {% icon comment %} Comment
-> Concerning a different species,. In order to do so you will have to do as explained below:
+> ### {% icon comment %} Comment: You can add other species.
+>  In order to do so you will have to do as explained below:
 >    > * Search for the tool `Paste two files side by side` with the following parameters:
->    >    * "Coller": the `output` from **Paste two files side by side** (with the dataset concerning species 1 and 2)
->    >    * "et": `the output` from **Merge Columns together** (with the dataset concerning species 3)
->    >    * "Délimité par": tabulation 
->    > * Repeat `Paste two files side by side` with `the output` from **Paste two files side by side** (with the data concerning species 1, 2 and 3) and with `the output` from **Merge Columns together** (with the dataset concerning species 4).
+>    >    * "Paste": the `output` from **Paste two files side by side** (with the dataset concerning species 1 and 2)
+>    >    * "and": `the output` from **Merge Columns together** (with the dataset concerning species 3)
+>    >    * "Delimited by": tabulation 
+>    > * Repeat `Paste two files side by side` with `the output` from **Paste two files side by side** (with the data concerning species 1, 2 and 3) and with `the output` from **Merge Columns together** (with the dataset concerning species 4) and so on.
 
 > ### {% icon details %} Generating a multispecies chart
 > 
