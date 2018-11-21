@@ -363,8 +363,8 @@ With the `output` from the last **Paste two files side by side** execution, you 
 
 > ### {% icon tip %} Tip: Creating a file comporting all the data on various species
 >    > 1. Search for the tool `Paste two files side by side` with the following parameters:
->    > * "Paste": `the output` from **merger des colonnes** (with the dataset concerning species 1)
->    > * "and": `the output` from **merger des colonnes** (with the dataset concerning species 2)
+>    > * "Paste": `the output` from **Merge Columns together** (with the dataset concerning species 1)
+>    > * "and": `the output` from **Merge Columns together** (with the dataset concerning species 2)
 >    > * "Delimited by": tabulation 
 >    >WARNING The use of this `Paste two files side by side` tool must be done carefully as in case of differences in term of number of lines between datasets to paste, it will mix informations from columns. Here, datasets have the same number of lines.
 
