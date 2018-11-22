@@ -24,6 +24,7 @@ key_points:
 - They will appear at the end of the tutorial
 contributors:
 - chrisbarnettster
+- tsenapathi
 
 ---
 
@@ -93,33 +94,47 @@ have fun!
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+# Analysis with NAMD (imported from CHARMM-GUI)
+
+This workflow uses NAMD as a molecular dynamics engine.
+An NVT simulation is followed by an NPT simulation.
+
+
+Is this converged?
+
+If you've imported from CHARMM-GUI read through the theory then skip to [namd_nvt](#namd_nvt) otherwise carry on and start with [setup](#setup)
+
 
 It comes first a description of the step: some background and some theory.
 Some image can be added there to support the theory explanation:
 
-![Alternative text](../../images/image_name "Legend of the image")
+![Snapshot of CHARMM and NAMD analysis workflow](images/NAMD_CHARMMGUI_workflow.png"A simple simulation workflow starting with CHARMM for setup and NAMD to continue the production simulation")
+![Snapshot of NAMD analysis workflow](images/NAMD_workflow.png "A simple NAMD simulation workflow")
+
+
 
 The idea is to keep the theory description before quite simple to focus more on the practical part.
 
 ***TODO***: *Consider adding a detail box to expand the theory*
 
-> ### {% icon details %} More details about the theory
+> ### {% icon details %} NVT theory
 >
 > But to describe more details, it is possible to use the detail boxes which are expandable
 >
 {: .details}
 
-A big step can have several subsections or sub steps:
+> ### {% icon details %} NPT theory
+>
+> But to describe more details, it is possible to use the detail boxes which are expandable
+>
+{: .details}
 
-
-## Sub-step with **My Tool**
+## Step with **setup**
+{: #setup}
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **My Tool** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input file"*: File
->    - *"Parameter"*: `a value`
+> 1. **setup** {% icon tool %} with the following parameters:
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -148,13 +163,105 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
+## Step with **minimizer**
 
-## Re-arrange
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **minimizer** {% icon tool %} with the following parameters:
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
 
-To create the template, each step of the workflow had its own subsection.
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Step with **namd_nvt**
+{: #namd_nvt}
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **namd_nvt** {% icon tool %} with the following parameters:
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Step with **namd_npt**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **namd_npt** {% icon tool %} with the following parameters:
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
 
 # Conclusion
 {:.no_toc}
