@@ -21,7 +21,7 @@ requirements:
 time_estimation: 30m
 key_points:
   - "The PDB is a key resource for finding protein structures."
-  - "Using CHARMM-GUI is one way to prepare a protein."
+  - "Using CHARMM-GUI is one way to prepare a protein and ligand system."
   - "To get data into Galaxy you can upload a file from your computer or paste in a web address."
 contributors:
   - chrisbarnettster
@@ -48,7 +48,7 @@ In this tutorial, we'll cover the basics of molecular modelling by setting up a 
 
 # Cellulase and cellulose
 
-To start we'll look at the PDB and find the entry for a fungal enzyme that cleaves cellulose. The enzyme is 7CEL, a hydrolase.
+To start we'll look at the PDB and find the entry for a fungal enzyme that cleaves cellulose. The enzyme is 7CEL, a hydrolase as seen in [the figure.](#figure-1)
 
 ![Snapshot of 7CEL pdb with octaose ligand](images/enzyme.jpg "7CEL Cellulase with a short chain cellulose (octaose) ligand")
 
@@ -85,8 +85,8 @@ The 7CEL PDB does not include a complete 8 unit substrate and some modelling is 
 The correctly modelled substrate is available. This modelling was done using VMD for atomic placement and CHARMM for minimisation.
 > ### {% icon details %} More details about the modelling done
 >
-> Reversing the mutation at 217
-> modelling the ligand
+  The mutation at 217 was reversed.
+  The ligand was modelled separately and inserted into the binding site.
 >
 {: .details}
 
@@ -99,8 +99,6 @@ The correctly modelled substrate is available. This modelling was done using VMD
 >    
 >    ```
 >    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
@@ -117,7 +115,19 @@ The correctly modelled substrate is available. This modelling was done using VMD
 {: .hands_on}
 
 # Modelling with CHARMM-GUI
-It is convenient to setup the molecular system using a tool such as CHARMM-GUI. Alternatives are available (expand!).
+It is convenient to setup the molecular system using a tool such as CHARMM-GUI. Alternatives are available.
+> ### {% icon details %} Alternatives for modelling
+> Schrodinger
+  Antechamber
+>
+{: .details}
+
+### {% icon tip %} Tip: Viewing figures
+>
+> * Some of the figures are screenshots and it may be difficult to make out details
+  * Right-click on the image and choose 'Open image in new tab' to view 
+  * Zoom in and out as needed to see the content
+{: .tip}
 
 ![CHARMM-GUI interface](images/charmmgui.png "The CHARMM-GUI inteface")
 
@@ -126,9 +136,6 @@ It is convenient to setup the molecular system using a tool such as CHARMM-GUI. 
 > But to describe more details, it is possible to use the detail boxes which are expandable
 >
 {: .details}
-
-Reference:
- - [CHARMM-GUI](https://www.ncbi.nlm.nih.gov/pubmed/27862047)
 
 Go to the correct section depending on which MD engine you will be using
  - [CHARMM](#CHARMM)
@@ -166,8 +173,6 @@ Upload the step1_pdbreader.psf and step1_pdbreader.crd to your BRIDGE instance a
 
 ![Snapshot of upload ](images/upload-charmm.png "Upload CHARMM inputs to BRIDGE")
 
-### Run the setup tool
-FIXME
 
 ## NAMD
 {: #NAMD}
@@ -183,6 +188,7 @@ Rename the hetero chain to BGLC and add disulfide bonds.
 
 ### Setup the waterbox and add ions
 Set up a waterbox. Use Size (!) and cubic.
+>    ***TODO***: *get the correct size for the waterbox*
 
 ![Snapshot of CHARMM-GUI waterbox section](images/charmmgui-waterbox.png "Setting up a waterbox in CHARMM-GUI")
 > ### {% icon details %} More details about the theory
@@ -226,3 +232,5 @@ In the meantime use CHARMM-GUI and select GROMACS outputs. In future FEsetup too
 {:.no_toc}
 
 {% icon trophy %} Well done! You have started modelling a cellulase protein and uploaded it into Galaxy.
+Up next: Running molecular dynamics simulations ([tutorial](../md-simulations/tutorial.html))
+

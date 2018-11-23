@@ -4,15 +4,11 @@ layout: tutorial_hands_on
 title: Running Molecular Dynamics simulations
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
+- Which molecular dynamics engine can I use to run simulations?
+- How to start molecular dynamics simulations?
 - Which bioinformatics techniques is important to know for this type of data?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentence describing what a learner will be able to do once they
-  have done the tutorial
-- You can use the Bloom's Taxonomy to write effective learning objectives
+- Learn about available MD engines provided in BRIDGE
 requirements:
   -
     title: "Setting up molecular systems"
@@ -20,8 +16,8 @@ requirements:
     link: "/computational-chemistry/tutorials/setting-up-molecular-systems/tutorial.html"
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- Several MD engines are available in BRIDGE
+- Workflows are available for common simulations tasks such as equilibration and production dynamics for various ensembles (NVT, NPT)
 contributors:
 - chrisbarnettster
 - tsenapathi
@@ -34,14 +30,13 @@ contributors:
 
 <!-- This is a comment. -->
 
+***TODO***: *Improve the introduction*
+
 General introduction about the topic and then an introduction of the
 tutorial (the questions and the objectives). It is nice also to have a
 scheme to sum up the pipeline used during the tutorial. The idea is to
 give to trainees insight into the content of the tutorial and the (theoretical
 and technical) key concepts they will learn.
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
 > ### Agenda
 >
@@ -52,19 +47,13 @@ and technical) key concepts they will learn.
 >
 {: .agenda}
 
-# Title for your first section
 
-Give some background about what the trainees will be doing in the section.
 
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
+# Simulation with NAMD (imported from CHARMM-GUI)
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
+This workflow uses NAMD as a molecular dynamics engine.An NVT simulation is followed by an NPT simulation.
 
-have fun!
+
 
 ## Get data
 
@@ -94,26 +83,15 @@ have fun!
 >
 {: .hands_on}
 
-# Analysis with NAMD (imported from CHARMM-GUI)
-
-This workflow uses NAMD as a molecular dynamics engine.
-An NVT simulation is followed by an NPT simulation.
+If you've imported from CHARMM-GUI read through the theory then skip to [namd_nvt](#namd_nvt) otherwise carry on and start with [setup](#setup). The workflows as shown below for [CHARMM and NAMD](#figure-1) or [only NAMD](#figure-2) will be used.
 
 
-Is this converged?
-
-If you've imported from CHARMM-GUI read through the theory then skip to [namd_nvt](#namd_nvt) otherwise carry on and start with [setup](#setup)
-
-
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
 
 ![Snapshot of CHARMM and NAMD analysis workflow](images/NAMD_CHARMMGUI_workflow.png"A simple simulation workflow starting with CHARMM for setup and NAMD to continue the production simulation")
 ![Snapshot of NAMD analysis workflow](images/NAMD_workflow.png "A simple NAMD simulation workflow")
 
 
 
-The idea is to keep the theory description before quite simple to focus more on the practical part.
 
 ***TODO***: *Consider adding a detail box to expand the theory*
 
@@ -129,8 +107,14 @@ The idea is to keep the theory description before quite simple to focus more on 
 >
 {: .details}
 
-## Step with **setup**
+## **setup**
 {: #setup}
+
+Prepare a protein ligand system in CHARMM. 
+This tool will:
+- solvate the protein-ligand comples in TIP3P waters
+- neutralise the system by using 0.05M NaCl
+- conduct a short minimisation 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -151,8 +135,8 @@ The idea is to keep the theory description before quite simple to focus more on 
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why use 0.05M NaCl?
+> 2. Why use TIP3P water?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -163,7 +147,13 @@ The idea is to keep the theory description before quite simple to focus more on 
 >
 {: .question}
 
-## Step with **minimizer**
+## **minimizer**
+
+Reduces the energy of the system by running a minimisation algorithm. 
+This tools will:
+- Minimise energy using steepest descent followed by Adopted Newton Raphson (using the define number of steps_
+- Setup periodic boundaries and generate Particle Mesh Ewald (PME)
+- generate reference structures for restraints in NAMD (if selected)
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -196,8 +186,9 @@ The idea is to keep the theory description before quite simple to focus more on 
 >
 {: .question}
 
-## Step with **namd_nvt**
+## **namd_nvt**
 {: #namd_nvt}
+Classical NVT dynamics.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -230,7 +221,8 @@ The idea is to keep the theory description before quite simple to focus more on 
 >
 {: .question}
 
-## Step with **namd_npt**
+## **namd_npt**
+Classical NPT dynamics.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -251,7 +243,7 @@ The idea is to keep the theory description before quite simple to focus more on 
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
+  1. Is this converged?
 > 2. Question2?
 >
 > > ### {% icon solution %} Solution
@@ -266,5 +258,3 @@ The idea is to keep the theory description before quite simple to focus more on 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.

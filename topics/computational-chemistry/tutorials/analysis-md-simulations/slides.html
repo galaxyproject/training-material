@@ -6,29 +6,63 @@ title: Analysis workflows
 type: introduction
 contributors:
   - chrisbarnettster
+  - tsenapathi
 ---
 
-### Upload the long run example
 
----
-
-### Explanation of rmsd etc. with MDAnalysis
-
----
-
-### Explanation of bio3d stuff
+# What is MD analysis
 
 ---
 
-### Existing workflows
+Using outputs from MD simulations to look for trends in physical and chemical behaviour. 
+* Timeseries analysis, distribution and correlation analysis are popular.
 
 ---
 
-### Jupyter and scripting hint
+# Tools
+
+- VMD (builtin plugins and custom scripts)
+- MDAnalysis
+- MDTraj
+- Bio3D
 
 ---
 
-### How to fill the slide decks?
+# Tools that are in Galaxy
+- Bio3d suite (PCA etc.)
+- MDanalysis suite (timeseries etc.)
 
-Please follow our
-[tutorial to learn how to fill the slides]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-slides/slides.html)
+---
+
+# Standard structural analysis
+![](../images/platform_overview.png)
+
+---
+
+# RMSD
+Root mean square deviation of atomic positions. 
+A measure of quantitative similarity. 
+
+--- 
+
+---
+
+# RMSF
+A measure of conformational variance
+Can be linked to spectroscopic outcomes (experimental)
+$$P(AB) = \frac{\lvert AB \rvert}{\lvert U \rvert}$$ and $$P(B) = \frac{\lvert B \rvert}{\lvert U \rvert}$$
+
+f_i=sqrt((1/(M-1))Sum_j(||r_i^j-r_i^0||^2))
+, where f_i is the RMSF value for the ith atom, M the total number of frames (total number of rows of xyz), r_i^j the positional vector of the ith atom in the jth frame, and r_i^0 the mean position of ith atom. ||r|| denotes the Euclidean norm of the vector r.
+
+.footnote[http://thegrantlab.org/bio3d/html/rmsf.html]
+
+---
+
+## PCA
+Principal component analysis
+
+Convert from a set of correlated observations (movement of all atoms in protein) to a set of principal components which are linearly independent (or uncorrelated).
+The first PCA has the highest variance and so on. 
+Useful to find important modes of the protein. 
+

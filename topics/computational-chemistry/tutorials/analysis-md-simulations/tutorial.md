@@ -4,15 +4,10 @@ layout: tutorial_hands_on
 title: Analysis -  Molecular Dynamics simulations
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques is important to know for this type of data?
+- Which analysis tools are available?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentence describing what a learner will be able to do once they
-  have done the tutorial
-- You can use the Bloom's Taxonomy to write effective learning objectives
+- Learn which analysis tools are available.
+- Analyse a protein and discuss the meaning behind each analysis. 
 requirements:
   -
     title: "Setting up molecular systems"
@@ -25,8 +20,8 @@ requirements:
 
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- Multiple analyses including timeseries, RMSD, PCA are available
+- Analysis tools allow a further chemical understanding of the system 
 contributors:
 - chrisbarnettster
 - tsenapathi
@@ -71,7 +66,6 @@ Some image can be added there to support the theory explanation:
 ![Snapshot of Bio3D analysis workflow](images/Bio3D_workflow.png "A simple BIO3D analysis workflow")
 
 
-The idea is to keep the theory description before quite simple to focus more on the practical part.
 
 ***TODO***: *Consider adding a detail box to expand the theory*
 
@@ -81,7 +75,7 @@ The idea is to keep the theory description before quite simple to focus more on 
 >
 {: .details}
 
-## Step with **bio3d_rmsd**
+## **bio3d_rmsd**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -118,7 +112,7 @@ The idea is to keep the theory description before quite simple to focus more on 
 >
 {: .question}
 
-## Step with **bio3d_rmsf**
+## **bio3d_rmsf**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -153,7 +147,7 @@ The idea is to keep the theory description before quite simple to focus more on 
 >
 {: .question}
 
-## Step with **bio3d_pca**
+## **bio3d_pca**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -175,5 +169,3 @@ The idea is to keep the theory description before quite simple to focus more on 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
