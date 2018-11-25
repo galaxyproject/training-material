@@ -766,7 +766,7 @@ The ensemble of genes set enrichment analyses (EGSEA) [(Alhamdoosh et al, 2017)]
 >          - {% icon param-file %} *"Factor File"*: Select `factordata`
 >      - {% icon param-file %} *"Symbols Mapping file"*: `EGSEA anno`
 >      - *"Contrast of Interest"*: `basalpregnant-basallactate`
->      - *"Contrast of Interest"*: `luminallpregnant-luminalllactate`
+>      - *"Contrast of Interest"*: `luminalpregnant-luminallactate`
 >      - *"Species"*: `mouse`
 >      - *"Gene Set Testing Methods"*: Tick `camera`, `safe`, `gage`, `zscore`, `gsva`, `globaltest`, `ora`, `ssgsea`, `padog`, `plage`, `fry`
 >      - *"MSigDB Gene Set Collections"*: `H: hallmark gene sets`
