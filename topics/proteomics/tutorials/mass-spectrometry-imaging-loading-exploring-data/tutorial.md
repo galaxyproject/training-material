@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "Mass spectrometry imaging 1: Loading and exploring MSI data"
 edam_ontology: "topic_0121"
-zenodo_link: ""
+zenodo_link: "https://doi.org/10.5281/zenodo.1560645"
 questions:
   - "How to upload an imzML file into Galaxy"
   - "Getting an overview of the MSI data with the MSI quality report tool"
