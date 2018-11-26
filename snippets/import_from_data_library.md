@@ -7,7 +7,7 @@
 >    > * Find the correct folder (ask your instructor)
 >    > * Select the desired files
 >    > * Click on the **To History** button near the top
->    > * From the dropdown menu, select the history you want to import the files to (or create a new one)
+>    > * In the pop-up window, select the history you want to import the files to (or create a new one)
 >    > * Click on **Import**
 >    {: .tip}
 >
