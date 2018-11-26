@@ -1,7 +1,7 @@
 >
 >    > ### {% icon tip %} Tip: Importing data from a data library
 >    > 
->    > As an alternative to uploading the data from a url or your computer, the files may also have been made available from a *shared data library*:
+>    > As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a *shared data library*:
 >    >
 >    > * Go into **Shared data** (top panel) then **Data libraries**
 >    > * Find the correct folder (ask your instructor)
