@@ -6,7 +6,7 @@
 >    > * Go into **Shared data** (top panel) then **Data libraries**
 >    > * Find the correct folder (ask your instructor)
 >    > * Select the desired files
->    > * Click on the **To History** button near the top
+>    > * Click on the **To History** button near the top and select **{{ include.astype | default: "as Datasets" }}** from the dropdown menu  
 >    > * In the pop-up window, select the history you want to import the files to (or create a new one)
 >    > * Click on **Import**
 >    {: .tip}
