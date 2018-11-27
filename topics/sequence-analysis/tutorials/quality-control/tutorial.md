@@ -233,7 +233,7 @@ FastQC produces other diagnostic plots to assess sample quality.
 >
 >     It plots out the percentage of base calls at each position for which an N was called.
 >
->     It's not unusual to see a very low proportion of Ns appearing in a sequence, especially near the end of a sequence. However, if this proportion rises above a few percent it suggests that the analysis pipeline was unable to interpret the data well enough to make valid base calls.  
+>     It's not unusual to see a very low proportion of Ns appearing in a sequence, especially near the end of a sequence. However, if this proportion rises above a few percent it suggests that the analysis pipeline was unable to interpret the data well enough to make valid base calls.
 >
 > - **Sequence length distribution**
 >
@@ -483,36 +483,36 @@ It is usual that the quality of the sequences is worse for the reverse than for 
 {: .hands_on}
 
 
-> ### {% icon comment %} Algorithmic details
-> 
-> One of the biggest advantage of cutadapt over other tools for trimming is that it is properly documented (https://cutadapt.readthedocs.io) which allows know how the tool works in detail.
-> 
-> Cutadapt quality trimming algorithm consists of three simple steps: 
-> 
+> ### {% icon detail %} Algorithmic details
+>
+> One of the biggest advantage of cutadapt over other tools for trimming is that it is properly documented (https://cutadapt.readthedocs.io) which allows you to know how the tool works in detail.
+>
+> Cutadapt quality trimming algorithm consists of three simple steps:
+>
 > 1. substract the chosen threshold value from the quality value of each position
 > 2. compute a partial sum of these differences from the end of the sequence to each position
 >    (as long as the partial sum is negative)
 > 3. cut at the minimum value of the partial sum
-> 
-> Note that thereby also positions with a quality value larger than the chosen threshold are removed if they are embedded in regions with lower quality (note that the partial sum is decreasing if the quality values are smaller than the threshold). The advantage of this procedure is that it is robust against a small number of positions with a quality higher than the threshold. 
-> 
-> Alternatives to this procedure would be 
-> 
+>
+> Note that thereby also positions with a quality value larger than the chosen threshold are removed if they are embedded in regions with lower quality (note that the partial sum is decreasing if the quality values are smaller than the threshold). The advantage of this procedure is that it is robust against a small number of positions with a quality higher than the threshold.
+>
+> Alternatives to this procedure would be
+>
 > * to cut all positions with a quality smaller than the threshold
 > * a sliding window approach
-> 
-> The sliding window approach checks that the average quality of each sequence window of specified length is larger than the threshold. Note that in contrast to cutadapt's approach, this approach has one more parameter and the robustness depends of the length of the windows (in combination with the quality threshold). Both approaches are implemented in Trimmomatic. 
+>
+> The sliding window approach checks that the average quality of each sequence window of specified length is larger than the threshold. Note that in contrast to cutadapt's approach, this approach has one more parameter and the robustness depends of the length of the windows (in combination with the quality threshold). Both approaches are implemented in Trimmomatic.
 {: .comment}
 
 > ### {% icon question %} Questions
 >
-> 1. What kind of alignment is used for finding adapters in reads. 
-> 2. What is the criterion to chose the best adapter alignment
+> 1. What kind of alignment is used for finding adapters in reads?
+> 2. What is the criterion to chose the best adapter alignment?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. Semi global alignment, i.e., only the overlapping part of the read and the adapter sequence is used for scoring.
-> > 2. Analignment with maximum overlap is computed that has a smallest number of mismatches and indels. 
+> > 2. An alignment with maximum overlap is computed that has a smallest number of mismatches and indels.
 > >
 > {: .solution}
 {: .question}
