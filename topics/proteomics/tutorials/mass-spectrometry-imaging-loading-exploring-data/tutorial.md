@@ -10,7 +10,7 @@ questions:
   - "How to export MSI data as tabular files"
 objectives:
   - "Basic understanding of handling and exploring an imzML file in Galaxy"
-time_estimation: "30min"
+time_estimation: "30m"
 key_points:
 - imzML (continuous or processed file type) and Analyze7.5 can be uploaded into Galaxy via the composite upload. 
 - The MSI quality report should be applied several times during the analysis, especially to control that the preprocessing is going well.
