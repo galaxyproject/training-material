@@ -90,7 +90,7 @@ For this tutorial, we are interested in CuffDiff's tested transcripts for differ
 > ### {% icon hands_on %} Hands-on: Extract CuffDiff results
 >
 > 1. **Extract CuffDiff** {% icon tool %} with the following parameters
->   - "Select tables to output" to `Transcript differential expression testing`
+>   - *"Select tables to output"*: `Transcript differential expression testing`
 >
 > 2. Inspect the table
 >
@@ -143,9 +143,9 @@ We now want to highlight those gene transcripts whose expression difference, the
 > ### {% icon hands_on %} Hands-on: Extract CuffDiff's significant differentially expressed genes
 >
 > 1. **Filter** {% icon tool %} with the following parameters
->   - "Filter" to the extracted table from the previous step
->   - "With following condition" to an appropriate filter over the target column (see questions below when in doubt)
->   - "Number of header lines to skip" to the number of rows used for the table's header
+>   - *"Filter"*: the extracted table from the previous step
+>   - *"With following condition"*: an appropriate filter over the target column (see questions below when in doubt)
+>   - *"Number of header lines to skip"*: the number of rows used for the table's header
 >
 >    > ### {% icon question %} Questions
 >    > 1. What column stores the information of significance for each record?
@@ -168,11 +168,11 @@ We now want to highlight those gene transcripts whose expression difference, the
 >  We will sort all records on the basis of their Q-score (column 13) and log<sub>2</sub>(fold_change).
 >
 > 2. **Sort** {% icon tool %}: with the following parameters
->   - "Sort Dataset" to the previously filtered table
->   - "on column", to 13
->   - "with flavor" to "Numerical sort"
->   - "everything in" to "Ascending order"
->   - Click on "Insert Column selection", and parameterize the Sort tool to sort on column 10. Be careful of the sorting order!
+>   - *"Sort Dataset"*: the filtered table
+>   - *"on column"*: `13`
+>   - *"with flavor" to `Numerical sort`
+>   - *"everything in"*: `Ascending order`
+>   - {% icon param-repeat %} **Insert Column selection**, and parameterize the Sort tool to sort on column 10. Be careful of the sorting order!
 >   - Are there any rows allocated for the table's header? In that case, set "Number of header lines to skip" accordingly!
 >
 >    > ### {% icon question %} Questions
@@ -195,14 +195,12 @@ In this section we will parametrize CummeRbund to create different kinds of plot
 > ### {% icon hands_on %} Hands-on: Visualization
 >
 > 1. **CummeRbund** {% icon tool %} with the following parameters
->   - Click on "Insert plot"
->   - Set its "Width" and "Height" to `800` and `600` respectively
->   - "Plot type" to `Expression Plot`
->   - "Expression levels to plot" to `Isoforms`
->   - "Gene ID" to `NDUFV1`
->   - Click on "Execute"
->
-> ![Expression plot_form](../../images/cummerbund-expression-plot-form.png)
+>    - {% icon param-repeat %}  **Insert plots**
+>      - *"Width"*: `800`
+>      - *"Height"*: `600`
+>      - *"Plot type"*: `Expression Plot`
+>        - *"Expression levels to plot"*:`Isoforms`
+>        - *"Gene ID"*: `NDUFV1`
 {: .hands_on}
 
 The input data used to create the visualization comprise 3 conditions: *hits7* (Patient 1), *hits8* (Patient 2), and *hits9* (Control).  
@@ -216,12 +214,12 @@ Our plot has a modest number of isoforms, and is therefore easy to read. However
 > ### {% icon hands_on %} Hands-on: Visualization
 >
 > 1. **CummeRbund** {% icon tool %} with the following parameters
->   - Click on "Insert plot"
->   - Set its "Width" and "Height" to `800` and `600` respectively
->   - "Plot type" to `Expression Bar Plot`
->   - "Expression levels to plot" to `Isoforms`
->   - "Gene ID" to `NDUFV1`
->   - Click on "Execute"
+>    - {% icon param-repeat %} Click on *"Insert plots"*
+>      - *"Width"*: `800`
+>      - *"Height"*: `600`
+>      - *"Plot type"*: `Expression Bar Plot`
+>        - *"Expression levels to plot"*:`Isoforms`
+>        - *"Gene ID"*: `NDUFV1`
 {: .hands_on}
 
 ![Expression bar plot](../../images/cummerbund-expression-bar-plot.png)

@@ -247,7 +247,10 @@ To determine where DNA fragments originated in the genome, the sequenced reads m
 >        - *"Reference genome with or without an annotation"*: `use genome reference with builtin gene-model`
 >            - *"Select reference genome"*: `Homo sapiens (hg19+GRCh37.75)`
 >    - *"Count number of reads per gene"*: `No`
->    - *"Would you like to set output parameters (formatting and filtering)?"*: `No`
+>    - *"Would you like to set output parameters (formatting and filtering)?"*: `Yes`
+>        - *"Extra SAM attributes to include"*: `All`
+>        - *"Include strand field flag XS"*: `Yes -- and reads with inconsistent and/or non-canonical introns are filtered out`
+>        - *"Would you like to set additional output parameters (formatting and filtering)?"*: `Yes`
 >    - *"Other parameters (seed, alignment, limits and chimeric alignment)"*: `Extended parameter list`
 >        - In *"Alignment parameters"*:
 >            - *"Use end-to-end read alignments, with no soft-clipping?"*: `Yes`

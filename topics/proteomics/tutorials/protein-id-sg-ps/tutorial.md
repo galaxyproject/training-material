@@ -58,7 +58,7 @@ If you already completed the tutorial on [Database Handling]({{site.baseurl}}/to
 
 Raw data conversion is the first step of any proteomic data analysis. The most common converter is msconvert from the [ProteoWizard software suite](http://proteowizard.sourceforge.net/), the format to convert to is mzML. SearchGUI needs `MGF` format as input, but as we need the `mzML` format for several other tasks, we will convert to `mzML` first. Due to licensing reasons, msconvert runs only on windows systems and will not work on most Galaxy servers.
 
-Depending on your machine settings, raw data will be generated either in profile mode or centroid mode. For most peptide search engines, the tandem mass spectrometry (MS2) data have to be converted to centroid mode, a process called "peak picking" or "centroiding". 
+Depending on your machine settings, raw data will be generated either in profile mode or centroid mode. For most peptide search engines, the tandem mass spectrometry (MS2) data have to be converted to centroid mode, a process called "peak picking" or "centroiding".
 Machine vendors offer algorithms to extract peaks from profile raw data. This is implemented in ***msconvert*** {% icon tool %} and can be run in parallel to the mzML conversion. However, the OpenMS tool ***PeakPickerHiRes*** {% icon tool %} is reported to generate slightly better results ([Lange et al., 2006, Pac Symp Biocomput](https://www.ncbi.nlm.nih.gov/pubmed/17094243)) and is therefore recommended for quantitative studies ([Vaudel et al., 2010, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/19953549)).
 If your data were generated on a low resolution mass spectrometer, use ***PeakPickerWavelet*** {% icon tool %} instead.
 
@@ -99,9 +99,9 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 >   {: .comment}
 >
 >   > ### {% icon comment %} Comment: PeptideShaker Outputs
->   > Peptide Shaker offers a variety of outputs. 
->   > The `Zip File for import to Desktop App` can be downloaded to view and evaluate the search results in the Peptide Shaker viewer ([Download](https://compomics.github.io/projects/peptide-shaker.html)). 
->   > The several `Reports` contain tabular, human-readable information. 
+>   > Peptide Shaker offers a variety of outputs.
+>   > The `Zip File for import to Desktop App` can be downloaded to view and evaluate the search results in the Peptide Shaker viewer ([Download](https://compomics.github.io/projects/peptide-shaker.html)).
+>   > The several `Reports` contain tabular, human-readable information.
 >   > Also, an `mzidentML` (= `mzid`) file can be created that contains all peptide sequence matching information and can be utilized by compatible downstream software.
 >   > The `Certificate of Analysis` provides details on all parameters settings of both Search GUI and Peptide Shaker used for the analysis.
 >   {: .comment}

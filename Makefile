@@ -1,10 +1,13 @@
 # Settings
 JEKYLL=jekyll
+PORT?=4000
+HOST?=localhost
+FLAGS?=""
 CHROME=google-chrome-stable
 TUTORIALS=$(shell find _site/training-material -name 'tutorial.html' | sed 's/_site\/training-material\///')
 SLIDES=$(shell find _site/training-material -name 'slides.html' | sed 's/_site\/training-material\///')
 SLIDES+=$(shell find _site/training-material/*/*/slides/* | sed 's/_site\/training-material\///')
-SITE_URL=http://localhost:4000/training-material
+SITE_URL=http://${HOST}:${PORT}/training-material
 PDF_DIR=_pdf
 REPO=$(shell echo "$${ORIGIN_REPO:-galaxyproject/training-material}")
 BRANCH=$(shell echo "$${ORIGIN_BRANCH:-master}")
@@ -42,32 +45,32 @@ ACTIVATE_ENV=. $(dir ${CONDA})activate galaxy_training_material
 install: clean ## install dependencies
 	( $(ACTIVATE_ENV) && \
 	  npm install decktape && \
-	  gem install awesome_bot bundler html-proofer jekyll jekyll-feed pkg-config:'~> 1.1' && \
+	  gem install jekyll-environment-variables awesome_bot bundler html-proofer jekyll jekyll-feed pkg-config:'~> 1.1' && \
 	  gem install nokogiri:'1.8.2' -- --use-system-libraries --with-xml=$(CONDA_PREFIX)/lib \
 	)
 .PHONY: install
 
-serve: ## run a local server}
+serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
 	( $(ACTIVATE_ENV) && \
-	  ${JEKYLL} serve --strict_front_matter -d _site/training-material \
+	  ${JEKYLL} serve --strict_front_matter -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS} \
 	)
 .PHONY: serve
 
-detached-serve: clean ## run a local server in detached mode
+detached-serve: install ## run a local server in detached mode (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags to Jekyll)
 	( $(ACTIVATE_ENV) && \
-	  ${JEKYLL} serve --strict_front_matter --detach -d _site/training-material \
+	  ${JEKYLL} serve --strict_front_matter --detach -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS} \
 	)
 .PHONY: detached-serve
 
-build: clean ## build files but do not run a server
+build: clean ## build files but do not run a server (You can specify FLAGS= to pass additional flags to Jekyll)
 	( $(ACTIVATE_ENV) && \
-	  ${JEKYLL} build --strict_front_matter -d _site/training-material \
+	  ${JEKYLL} build --strict_front_matter -d _site/training-material  ${FLAGS} \
 	)
 .PHONY: build
 
 check-frontmatter: build ## Validate the frontmatter
 	( $(ACTIVATE_ENV) && \
-	  find topics/ -name tutorial.md -or -name slides.html | \
+	  find topics/ -name tutorial.md -or -name slides.html -or -name metadata.yaml | \
 	    xargs -n1 ruby bin/validate-frontmatter.rb \
 	)
 .PHONY: check-frontmatter
@@ -120,7 +123,7 @@ check-yaml: ## lint yaml files
 	)
 .PHONY: check-yaml
 
-check: check-yaml check-html check-slides  ## run all checks
+check: check-yaml check-html-internal check-html check-slides ## run all checks
 .PHONY: check
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
