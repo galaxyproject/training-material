@@ -5,9 +5,10 @@ title: "Making sense of a newly assembled genome"
 zenodo_link: "https://doi.org/10.5281/zenodo.1306128"
 requirements:
   -
-    title: "Unicycler Assembly"
     type: "internal"
-    link: "/assembly/tutorials/unicycler-assembly/tutorial.html"
+    topic_name: assembly
+    tutorials: 
+      - unicycler-assembly
 tags:
   - prokaryote
 questions:
