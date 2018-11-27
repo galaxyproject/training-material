@@ -109,11 +109,9 @@ Our mouse kidney dataset contains internal calibrants that were sprayed together
 >    ```
 >    {% include snippets/create_new_file.md convertspaces=true %}
 >
-> 2. **Rename dataset**
+> 2. **Rename dataset** to `Calibrants`
 >
->    - Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
->    - In the central panel, change the **Name** field to `Calibrants`
->    - Click the **Save** button
+>    {% include snippets/rename_dataset.md name="Calibrants" %}
 >
 > 3. Run the **MSI quality report** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} **MSI data**: `mouse_kidney_cut` will be automatically recognized as input file
