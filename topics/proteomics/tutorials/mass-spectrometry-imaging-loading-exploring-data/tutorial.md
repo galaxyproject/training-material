@@ -99,24 +99,15 @@ Our mouse kidney dataset contains internal calibrants that were sprayed together
 
 
 > ### {% icon hands_on %} Hands-on: Running the MSI quality report tool
-> 1. Upload the tabular file with the m/z values of the internal calibrants.
->
->    > ### {% icon tip %} Tip: Importing data with copy and paste
->    >
->    > * Copy the table with m/z values and header line
->    >```
->    >m/z       name
->    >1296.69    Angiotensin_I
->    >1347.72    Substance_P
->    >1570.68    Fibrinopeptide_B
->    >2465.19    ACTH_18-39
->    >```
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data** in the 'regular' tab
->    > * Paste the table into the field
->    > * Select the 'convert spaces to tabs' option which is available via the gear wheel above the input field
->    > * Press **Start** and then **Close**
->    {: .tip}
+> 1. Create the tabular file with the m/z values of the internal calibrants:
+>    ```
+>    m/z       name
+>    1296.69    Angiotensin_I
+>    1347.72    Substance_P
+>    1570.68    Fibrinopeptide_B
+>    2465.19    ACTH_18-39
+>    ```
+>    {% include snippets/create_new_file.md convertspaces=true %}
 >
 > 2. **Rename dataset**
 >
