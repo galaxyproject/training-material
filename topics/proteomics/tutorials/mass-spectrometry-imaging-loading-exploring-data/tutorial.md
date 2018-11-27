@@ -56,12 +56,7 @@ In this tutorial we will use a dataset obtained from imaging a mouse kidney. To 
 >
 > 1. **Create a new history** and give it a name.
 >
->    > ### {% icon tip %} Tip: Starting a new history
->    >
->    > * Click the **gear icon** at the top of the history panel
->    > * Select the option **Create New** from the menu
->    > * Click into the **unnamed History** field and give the history a name and press **enter** to save it
->    {: .tip}
+>    {% include snippets/create_new_history.md %}
 >
 > 2. **Upload imzML data** via the 'composite' option.
 >
