@@ -502,7 +502,7 @@ It is usual that the quality of the sequences is worse for the reverse than for 
 > * a sliding window approach
 >
 > The sliding window approach checks that the average quality of each sequence window of specified length is larger than the threshold. Note that in contrast to cutadapt's approach, this approach has one more parameter and the robustness depends of the length of the windows (in combination with the quality threshold). Both approaches are implemented in Trimmomatic.
-{: .comment}
+{: .detail}
 
 > ### {% icon question %} Questions
 >
