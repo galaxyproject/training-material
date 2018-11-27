@@ -146,14 +146,14 @@ Open the pdf by clicking on the eye icon (view data) and answer the following qu
 
 The pdf report continous with plots that show the pixel of the sample in an x-y-coordinate grid. As in each pixel one spectrum is acquired, different properties of the mass spectra can be visualized in the pixel image. The help section of the quality report tool describes each plot of the pdf report, the tutorial here will discuss only some plots in more detail.
 
-Fold change plots:
+#### Fold change plots
 
 On page 4 and 5 there are the fold change plot that can be used to estimate the efficiency of the tryptic digestion. The first plot shows the average mass spectra for the digested and the undigested Bombesin peptide. The blue lines indicate the provided ppm range and the provided m/z value. The spectrum of the digested peptide probably overlaps with another peptide pattern, while the monoisotopic peak of the Bombesin peptide is clear. The average intensity of the full length Bombesin peptide is higher than the one of the digested peptide.
 The average intensity is not helpful here, because we only spotted one drop next to the tissue and the intensity fold change in those pixels is important. The previous spectra plot is useful to control the chosen m/z value and ppm range. To obtain the local fold change in each spectrum the intensities in the m/z ranges of both peptides are averaged, the intensity of the first m/z is divided by the intensity of the second m/z and log2 transformed to obtain the log2 fold change. This value is plotted for each spectrum (pixel) and then it is obvious that many spectra in the upper left corner have a log2 fold change > 0. The drop contains also spectra with a log2 fold change smaller 0 but larger than -5, what indicates that in these spectra less than half of the Bombesin was digested. With the used amounts of spotted Bombesin and sprayed trypsin the log2 fold changes indicate sufficient (but not ideal) digestion.
 ![Fold Change](../../images/MSI1_foldchange.png "Avererage mass spectra and log2 fold change for Bombesin and its digested peptide")
 
 
-Calibrant heatmaps:
+#### Calibrant heatmaps
 
 Starting from page 6 for each calibrant an intensity heatmap is plotted. The colour code shows the intensity of the m/z value that is closet to the input m/z value and within the given ppm range. The input m/z value and its name are printed on top of the image, the m/z number in the image shows the closest m/z value, so the m/z value which intensites are plotted in the heatmap. Low Angiotensin intensities occur at the boarder of the Bombesin spot and at the kidney boarder and on some spots in the kidney. In general calibrant intensities are higher in the matrix background than on the tissue due to ion suppression effects. Substance P shows also ion suppression in the Bombesin spot. The heatmap shows no intensity gradient what indicates that spraying of calibrants and matrix was homogeneous.
 ![Angiotensin heatmap](../../images/MSI1_angiotensin_image.png "Intensity heatmap of Angiotensin I")
@@ -161,7 +161,7 @@ Starting from page 6 for each calibrant an intensity heatmap is plotted. The col
 >    > * The **MSI mz images** {% icon tool %} tool allows to generate heatmaps with options such as contrast enhancement and smoothing functions.
 >    {: .tip}
 
-Number of peaks and TIC images:
+#### Number of peaks and TIC images
 
 On page 9 and 10 the number of peaks and the total ion chromatogram (TIC) are plotted per spectrum.
 
@@ -175,7 +175,7 @@ Both plots are helpful to decide if TIC normalization can be performed, as TIC n
 
 Both plots can also serve to check for spraying gradients or reduced machine performance during acquisition time. The mouse kidney was measured from bottom to top (plot on page 2), the performance over time can be easier spotted in the upper plots on page 14 and 15, where the x axis represents the spectra in the order they were measured.
 
-Mass spectra and m/z error:
+#### Mass spectra and m/z error
 
 From page 18 on, average mass spectra plots for each (valid) calibrant are plotted (A). Three different m/z scales are used and in one spectrum each blue dot indicates one data point. The theoretical Angiotensin I m/z (1296.69 - dashed blue line) is higher than the maximum of the peak (red line). There is no m/z value with exact m/z value of Angiotensin I (1296.69) but a close m/z value that is 1296.6776 (green line).
 ![mz error](../../images/MSI1_mz_error.png "m/z error plots")
