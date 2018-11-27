@@ -12,9 +12,9 @@ objectives:
   - "Basic understanding of handling and exploring an imzML file in Galaxy"
 time_estimation: "30m"
 key_points:
-- imzML (continuous or processed file type) and Analyze7.5 can be uploaded into Galaxy via the composite upload.
-- The MSI quality report should be applied several times during the analysis, especially to control that the preprocessing is going well.
-- The MSI data exporter can be used any time during the analysis when it is necessary to dig deeper into the data. Galaxy provides many text manipulation tools that can directly be applied on the exported tabular file to filter, sort, plot, ... the data.
+  - imzML (continuous or processed file type) and Analyze7.5 can be uploaded into Galaxy via the composite upload.
+  - The MSI quality report should be applied several times during the analysis, especially to control that the preprocessing is going well.
+  - The MSI data exporter can be used any time during the analysis when it is necessary to dig deeper into the data. Galaxy provides many text manipulation tools that can directly be applied on the exported tabular file to filter, sort, plot, ... the data.
 contributors:
   - foellmelanie
   - bgruening
@@ -58,20 +58,29 @@ In this tutorial we will use a dataset obtained from imaging a mouse kidney. To 
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. **Upload imzML data** via the `composite` option.
+> 2. Download the imzML data from [Zenodo](https://doi.org/10.5281/zenodo.156064) locally:
+>    - [imzML metadata component](https://zenodo.org/record/1560646/files/mouse_kidney_cut.imzML)
+>    - [mass spectral data component](https://zenodo.org/record/1560646/files/mouse_kidney_cut.ibd)
 >
->    Download the training dataset from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1560645.svg)](https://doi.org/10.5281/zenodo.1560645)
 >    ```
 >    https://zenodo.org/record/1560646/files/mouse_kidney_cut.imzML
 >    https://zenodo.org/record/1560646/files/mouse_kidney_cut.ibd
 >    ```
 >
->    - Open the Galaxy **Upload Manager** next to the tool panel
->    - Select the **Composite** tab
->    - Set **Composite Type** to 'imzml'
->    - Press the first **Select** button (The imzML metadata component) and **Choose local file** the imzML file.
->    - Press the second **Select** button (The mass spectral data component) and **Choose local file** the ibd file.
->    - Press **Start** and then **Close**
+> 3. Upload the data on Galax via the **composite** option
+>
+>    > ### {% icon tip %} Tip: Upload via the composite option
+>    > - Open the Galaxy Upload Manager ({% icon galaxy-upload %} on the top-right of the tool panel)
+>    > - Click on **Composite** on the top
+>    > - Set **Composite Type** to `imzml`
+>    > - Expand the first **Select** button (for the imzML metadata component)
+>    > - Select **Choose local file** and the local `mouse_kidney_cut.imzML` file
+>    > - Paste the link into the text field: `https://zenodo.org/record/1560646/files/mouse_kidney_cut.imzML`
+>    > - Expand the second **Select** button (for the mass spectral data component)
+>    > - Select **Choose local file** and the local `mouse_kidney_cut.ibd` file
+>    > - Press **Start**
+>    > - **Close** the window
+>    {: .tip}
 >
 >    ![Upload imzML files](../../images/MSI1_upload_composite.png "Upload an imzML file via the composite upload")
 >
@@ -210,18 +219,21 @@ The data from the imzMl file format is not directly readable, therefore special 
 >    - *"in"*: `descending order`
 >    - *"Flavor"*: `general numeric sort`
 >
-> The m/z values with the highest mean intensities over all pixels are the monoisotopic peaks and isotopic peaks of the calibrant
-> Substance P with some ppm errors because the data was not yet binned or aligned.
->
->    > ### {% icon question %} Questions
->    >
->    > 1. How many spectra does the dataset contain?
->    > 2. How many numeric properties does the m/z feature output contain?
->    >
->    > > ### {% icon solution %} Solution
->    > > 1. 1581 - The pixel output file has 1582 lines, every line contains the information of one spectrum, but the first line is a header line (click on dataset "MSI data exporter on data 1: spectra" in the history, the line number of the file is written below the dataset name)
->    > > 2. 7 - The feature file has 8 columns and except for the mz_names, all columns contain numeric properties, that can be used for further calculations.
->    > {: .solution }
->    {: .question}
 {: .hands_on}
 
+The m/z values with the highest mean intensities over all pixels are the monoisotopic peaks and isotopic peaks of the calibrant
+Substance P with some ppm errors because the data was not yet binned or aligned.
+
+> ### {% icon question %} Questions
+>
+> 1. How many spectra does the dataset contain?
+> 2. How many numeric properties does the m/z feature output contain?
+>
+> > ### {% icon solution %} Solution
+> > 1. 1581 - The pixel output file has 1582 lines, every line contains the information of one spectrum, but the first line is a header line (click on dataset "MSI data exporter on data 1: spectra" in the history, the line number of the file is written below the dataset name)
+> > 2. 7 - The feature file has 8 columns and except for the mz_names, all columns contain numeric properties, that can be used for further calculations.
+> {: .solution }
+{: .question}
+
+# Conclusion
+{:.no_toc}
