@@ -170,7 +170,7 @@ We now want to highlight those gene transcripts whose expression difference, the
 > 2. **Sort** {% icon tool %}: with the following parameters
 >   - *"Sort Dataset"*: the filtered table
 >   - *"on column"*: `13`
->   - *"with flavor" to `Numerical sort`
+>   - *"with flavor"*: `Numerical sort`
 >   - *"everything in"*: `Ascending order`
 >   - {% icon param-repeat %} **Insert Column selection**, and parameterize the Sort tool to sort on column 10. Be careful of the sorting order!
 >   - Are there any rows allocated for the table's header? In that case, set "Number of header lines to skip" accordingly!
@@ -203,7 +203,7 @@ In this section we will parametrize CummeRbund to create different kinds of plot
 >        - *"Gene ID"*: `NDUFV1`
 {: .hands_on}
 
-The input data used to create the visualization comprise 3 conditions: *hits7* (Patient 1), *hits8* (Patient 2), and *hits9* (Control).  
+The input data used to create the visualization comprise 3 conditions: *hits7* (Patient 1), *hits8* (Patient 2), and *hits9* (Control).
 
 Our first CummeRbund plot is the "Expression Plot" of the isoforms of gene NDUFV1, which shows the expression differences of isoforms NM_001166102 and NM_007103 among the three conditions. Error bars capture the variability of the distribution of FPKM values: the broader the distribution of FPKM values, the larger the corresponding error bar.
 
@@ -231,23 +231,25 @@ The Expression Bar Plot of gene NDUFV1's replicates NM_001166102 and NM_007103, 
 > These plots are shown also in [this](https://vimeo.com/channels/884356/128265982) Galaxy video tutorial.
 {: .comment}
 
-Let's now create a heatmap to plot the expression levels of the significant differentially expressed gene isoforms obtained from our filter and sort operations.  
+Let's now create a heatmap to plot the expression levels of the significant differentially expressed gene isoforms obtained from our filter and sort operations.
 As a showcase example, let's consider only the top 5 differentially expressed genes.
 
 > ### {% icon hands_on %} Hands-on: Visualization
 >
 > 1. **CummeRbund** {% icon tool %} with the following parameters
->   - Click on "Insert plot"
->   - Set its "Width" and "Height" to `800` and `600` respectively
->   - "Plot type" to `Heatmap`
->   - "Expression levels to plot" to `Isoforms`
->   - 1st "Gene ID" to `LIMCH1`
->   - 2nd "Gene ID" to `IFNL2`
->   - Click on "Insert Genes" twice
->   - 3rd "Gene ID" to `CXCL11`
->   - 4th "Gene ID" to `NUB1`
->   - Set "Cluster by" as "Both"
->   - Click on "Execute"
+>    - {% icon param-repeat %}  **Insert plots**
+>      - *"Width"*: `800`
+>      - *"Height"*: `600`
+>      - *"Plot type"*: `Heatmap`
+>        - *"Expression levels to plot"*: `Isoforms`
+>        - *"Gene ID"*: `LIMCH1`
+>        - *"Gene ID"*: `IFNL2`
+>        - {% icon param-repeat %} **Insert Genes**
+>          - *"Gene ID"*: `CXCL11`
+>        - {% icon param-repeat %} **Insert Genes**
+>          - *"Gene ID"*: `NUB1`
+>      - *"Cluster by"*: `Both`
+>
 {: .hands_on}
 
 ![Expression bar plot](../../images/cummerbund-heatmap.png)
@@ -262,5 +264,5 @@ Heatmap of significant differentially expressed isoforms of genes LIMCH1, IFNL2,
 # Conclusion
 {:.no_toc}
 
-Visualization tools help researchers making sense of data, providing a bird's-eye view of the underlying analysis results.  
+Visualization tools help researchers making sense of data, providing a bird's-eye view of the underlying analysis results.
 In this tutorial we overviewed the advantages of visualizing RNA-Seq results with CummeRbund, and gained insights on CuffDiff's big-data output by plotting informations relative to the most significant differentially expressed genes in our RNA-Seq analysis.
