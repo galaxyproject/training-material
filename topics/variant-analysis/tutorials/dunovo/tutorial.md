@@ -3,13 +3,14 @@ layout: tutorial_hands_on
 
 title: "Calling very rare variants"
 zenodo_link: ""
+enable: false
 questions:
   - "What frequency of variants is so low that it is obscured by sequencing error rate?"
   - "What are the different types of consensus sequences produced from duplex sequencing?"
 objectives:
   - "Processing raw duplex sequencing data into consensus sequences"
   - "Find rare variants without relying on diploid assumptions"
-time_estimation: "3 hr"
+time_estimation: "3h"
 key_points:
   - "Diploid variant calling relies on assumptions that rare variant calling cannot make"
   - "Duplex consensus sequences are usually most accurate, but sometimes you must rely on single-strand consensus sequences instead."
@@ -99,7 +100,7 @@ Here are the steps, displayed as the Galaxy history you'll end up with if you fo
 
 # Generating consensus sequences
 
-The starting point of the analysis is sequencing reads (in [FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) format) produced from a duplex sequencing library.  
+The starting point of the analysis is sequencing reads (in [FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) format) produced from a duplex sequencing library.
 
 ## Getting data in and assessing quality
 
@@ -115,11 +116,11 @@ We uploaded the [Schmitt *et al.* 2015](https://www.ncbi.nlm.nih.gov/pmc/article
 > Or, if you'd like to use a different Galaxy instance, you can import it:
 > 1. Click on the gear icon at the top of the **History** pane.
 > 2. Click on "Import from File" at the bottom of the menu.
-> 3. Enter this link in the box under **Archived History URL**:  
+> 3. Enter this link in the box under **Archived History URL**:
 > `https://usegalaxy.org/history/export_archive?id=7ac09d1db287dbba`
 {: .hands_on}
 
-This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using {% icon tool %} **FastQC** [here](../../../../topics/sequence-analysis/tutorials/quality-control/tutorial.html#quality-check).
+This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using {% icon tool %} **FastQC** [here]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-the-read-quality).
 
 This gave us the following plots:
 
@@ -373,10 +374,10 @@ The polymorphism we are interested in (and the one reported by [Schmitt *et al.*
 Analysis of SSCS data follows the exact same trajectory:
 
 * [Filtering consensuses](#filtering-consensuses)
-* [Mapping the reads](#mapping-the-reads)  
- 	- [Aligning against genome](#align-against-the-genome-with-bwa-mem)  
- 	- [Left aligning indels](#left-aligning-indels)  
-* [Calling the variants](#calling-the-variants)  
+* [Mapping the reads](#mapping-the-reads)
+ 	- [Aligning against genome](#align-against-the-genome-with-bwa-mem)
+ 	- [Left aligning indels](#left-aligning-indels)
+* [Calling the variants](#calling-the-variants)
 
 > ### {% icon tip %} Tip: Re-running with the same settings
 >

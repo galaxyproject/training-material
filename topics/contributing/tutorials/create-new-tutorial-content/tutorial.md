@@ -9,7 +9,7 @@ questions:
 objectives:
   - "Create hands-on"
   - "Use the different boxes"
-time_estimation: "15min"
+time_estimation: "15m"
 key_points:
   - "You can highlight questions, tools and hints with a special syntax"
   - "Self-learning can be done by questions and hidden answers"
@@ -210,12 +210,12 @@ The generated tutorial is structured with:
 >
 > We have also added a small plugin to handle captions for each image:
 >
-> ![This figure shows an example of an image with a caption](../../images/image_caption_screenshot.png "Example of an image with a caption")
+> ![A textual description of the image](../../images/image_caption_screenshot.png "Example of an image with a caption ")<!-- Adding a space to the caption to not trigger figurigy skip_titles -->
 >
 > The prefix "Figure 1." is automatically added before its caption. This is done with the following Markdown syntax:
 >
 > ```markdown
-> ![A textual description of the image](../images/image.png "This is my super caption")
+> ![A textual description of the image](../images/image.png "Example of an image with a caption")
 > ```
 >
 > We can also cross-reference images inside our Markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (changing `nb` with the image's number).
@@ -355,9 +355,9 @@ We find that having users walk through the tutorial, doing all of the steps is i
 
 For consistency please use:
 
-- {% raw %}`{% icon hands_on %}`{% endraw %} emoji to define that is an hands-on
+- {% raw %}`{% icon hands_on %}`{% endraw %} icon to define that is an hands-on
 - Short imperative sentences to make it easy to identify the tasks
-- Name of the tool in bold followed by {% raw %}`{% icon tool %}`{% endraw %} emoji to make it easy to identify a Galaxy tool
+- Name of the tool in bold followed by {% raw %}`{% icon tool %}`{% endraw %} icon to make it easy to identify a Galaxy tool
 - Parameters for the tool as a sublist
 
 This will be rendered like:
@@ -393,11 +393,13 @@ The available icons are:
 > ### {% icon hands_on %} Hands-on: My Step
 >
 > 1. **My Tool** {% icon tool %} with the following parameters
->  - {% icon param-text %} *"My text parameter"*: `my value`
->  - {% icon param-file %} *"My input file"*: `my file`
->  - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
->  - {% icon param-select %} *"My select menu"*: `my choice`
->  - {% icon param-check %} *"My check box"*: `yes`
+>    - {% icon param-text %} *"My text parameter"*: `my value`
+>    - {% icon param-file %} *"My input file"*: `my file`
+>    - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
+>    - {% icon param-select %} *"My select menu"*: `my choice`
+>    - {% icon param-check %} *"My check box"*: `yes`
+>    - {% icon param-repeat %} **My repeat parameter**
+>      - *"param1"*: `42`
 {: .hands_on}
 ```
 {% endraw %}
@@ -407,11 +409,13 @@ which, when rendered, look like:
 > ### {% icon hands_on %} Hands-on: My Step
 >
 > 1. **My Tool** {% icon tool %} with the following parameters
->  - {% icon param-text %} *"My text parameter"*: `my value`
->  - {% icon param-file %} *"My input file"*: `my file`
->  - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
->  - {% icon param-select %} *"My select menu"*: `my choice`
->  - {% icon param-check %} *"My check box"*: `yes`
+>    - {% icon param-text %} *"My text parameter"*: `my value`
+>    - {% icon param-file %} *"My input file"*: `my file`
+>    - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
+>    - {% icon param-select %} *"My select menu"*: `my choice`
+>    - {% icon param-check %} *"My check box"*: `yes`
+>    - {% icon param-repeat %} **My repeat parameter**
+>      - *"param1"*: `42`
 {: .hands_on}
 
 

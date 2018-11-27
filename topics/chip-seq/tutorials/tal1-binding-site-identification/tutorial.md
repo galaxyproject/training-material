@@ -4,6 +4,7 @@ layout: tutorial_hands_on
 title: "Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)"
 zenodo_link: "https://doi.org/10.5281/zenodo.197100"
 edam_ontology: "topic_3169"
+enable: false
 questions:
   - How is raw ChIP-seq data processed and analyzed?
   - What are the binding sites of Tal1?
@@ -91,7 +92,7 @@ As for any NGS data analysis, ChIP-seq data must be quality controlled before be
 >
 >    ![data](../../images/data_uploaded.png "Imported datasets will appear in the history panel.")
 >
-> 3. Examine in Galaxy the data in a FASTQ file by clicking on the eye icon.
+> 3. Examine in Galaxy the data in a FASTQ file by clicking on the {% icon galaxy-eye %} (eye) icon.
 >
 >    > ### {% icon question %} Questions
 >    >

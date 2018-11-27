@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Identification of the binding sites of the Estrogen receptor"
 zenodo_link: "https://doi.org/10.5281/zenodo.892432"
+enable: false
 questions:
   - How is raw ChIP-seq data processed and analyzed?
   - What are the binding sites of the Estrogen receptor?
@@ -73,7 +74,7 @@ The first step of any ChIP-Seq data analysis is quality control of the raw seque
 >    > * Paste the link into the text field
 >    > * Press **Start** and **Close** the window
 >    > * Click on the `pencil` icon once the file is imported
->    > * Click on **Datatype** in the middle panel
+>    > * Click on **Datatype** in the central panel
 >    > * Select `fastqsanger` as **New Type**
 >    {: .tip}
 >

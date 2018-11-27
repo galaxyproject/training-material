@@ -7,8 +7,14 @@ questions:
   - "How to manipulate and process NGS data"
 objectives:
   - "Learn about Fastq, SAM, and BAM."
-time_estimation: "30 min"
+time_estimation: "30M"
 key_points:
+  - "Data can be uploaded directly from a computer, from EBI SRA and from NCBI SRA, also using FTP or URL."
+  - "Fastq Sanger version of the format is considered to be the standard form of fastq."
+  - "Paired end data can be provided as two files or as an interleaved one."
+  - "FastqQC is a tool allowing to check the quality of fastq datasets."
+  - "The most common tools for mapping are Bowtie, BWA, BWA-MEM. You can use in-built genome to map against or upload one if it is missing."
+  - "The standard format for storing aligned reads is SAM/BAM. The major toolsets to process these datasets are DeepTools, SAMtools, BAMtools and Picard."
 contributors:
   - nekrut
 ---
@@ -17,7 +23,7 @@ In this section we will look at practical aspects of manipulation of next-genera
 
 # Getting NGS data in
 
-You can data in Galaxy using one of five ways:
+You can upload data in Galaxy using one of five ways:
 
 ## From your computer
 
