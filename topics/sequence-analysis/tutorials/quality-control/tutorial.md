@@ -114,7 +114,7 @@ The quality for each sequence is a string of characters, one for each base of th
  !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
  |                         |    |        |                              |                     |
 33                        59   64       73                            104                   126
- 0........................26...31.......40                                
+ 0........................26...31.......40
                           -5....0........9.............................40
                                 0........9.............................40
                                    3.....9.............................40
@@ -202,7 +202,7 @@ FastQC produces other diagnostic plots to assess sample quality.
 >     ![Per tile sequence quality](../../images/quality-control/per_tile_sequence_quality.png "Per tile sequence quality")
 >
 >      This graph will only appear for Illumina library which retains its original sequence identifiers. Encoded in these is the flowcell tile from which each read came. The graph enables you to look at the quality scores from each tile across all of your bases to see if there was a loss in quality associated with only one part of the flowcell.
->      
+>
 >      The plot shows the deviation from the average quality for each tile. The colours are on a cold to hot scale, with cold colours being positions where the quality was at, or above, the average for that base in the run, and hotter colours indicate that a tile had worse qualities than other tiles for that base. In the example above you can see that certain tiles show consistently poor quality. A good plot should be blue all over.
 >
 > - **Per base sequence content**
@@ -258,7 +258,7 @@ FastQC produces other diagnostic plots to assess sample quality.
 > - **Overrepresented sequences**
 >
 >      A normal high-throughput library will contain a diverse set of sequences, with no individual sequence making up a tiny fraction of the whole. Finding that a single sequence is very overrepresented in the set either means that it is highly biologically significant, or indicates that the library is contaminated, or not as diverse as you expected.
->      
+>
 >      FastQC lists all of the sequence which make up more than 0.1% of the total. For each overrepresented sequence FastQC will look for matches in a database of common contaminants and will report the best hit it finds. Hits must be at least 20bp in length and have no more than 1 mismatch. Finding a hit doesn't necessarily mean that this is the source of the contamination, but may point you in the right direction. It's also worth pointing out that many adapter sequences are very similar to each other so you may get a hit reported which isn't technically correct, but which has very similar sequence to the actual match.
 >
 > - **Adapter Content**
@@ -483,7 +483,7 @@ It is usual that the quality of the sequences is worse for the reverse than for 
 {: .hands_on}
 
 
-> ### {% icon detail %} Algorithmic details
+> ### {% icon details %} Algorithmic details
 >
 > One of the biggest advantage of cutadapt over other tools for trimming is that it is properly documented (https://cutadapt.readthedocs.io) which allows you to know how the tool works in detail.
 >
@@ -502,7 +502,7 @@ It is usual that the quality of the sequences is worse for the reverse than for 
 > * a sliding window approach
 >
 > The sliding window approach checks that the average quality of each sequence window of specified length is larger than the threshold. Note that in contrast to cutadapt's approach, this approach has one more parameter and the robustness depends of the length of the windows (in combination with the quality threshold). Both approaches are implemented in Trimmomatic.
-{: .detail}
+{: .details}
 
 > ### {% icon question %} Questions
 >
