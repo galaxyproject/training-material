@@ -46,7 +46,7 @@ Before starting with the data analysis it is therefore helpful to visualize all 
 # Uploading an imzML file into Galaxy
 
 In case no direct imzML export is provided by the mass spectrometer software, proprietary files can be converted to imzML files with the tools provided on the following website: [ms-imaging.org](https://ms-imaging.org/wp/imzml/software-tools/).
-The imzML file consists of two files: The first file contains the metadata in an XML file and has the extension .imzML. The second file contains the mass spectra data and is saved as binary file and its extension is .ibd. To be valid both files must have the same filename before the extension. More information about the imzML file structure can be found here: [ms-imaging.org](https://ms-imaging.org/wp/imzml/data-structure/). Galaxy provides the 'composite' upload for files consisting of several components.
+The imzML file consists of two files: The first file contains the metadata in an XML file and has the extension `.imzML`. The second file contains the mass spectra data and is saved as binary file and its extension is `.ibd`. To be valid both files must have the same filename before the extension. More information about the imzML file structure can be found here: [ms-imaging.org](https://ms-imaging.org/wp/imzml/data-structure/). Galaxy provides the `composite` upload for files consisting of several components.
 
 In this tutorial we will use a dataset obtained from imaging a mouse kidney. To make computation times more suitable for this training, only the m/z range from 1220 - 1625 and a part of the pixels (purple rectangle in figure 1) containing about half of the kidney and one Bombesin spot were kept.
 
@@ -58,7 +58,7 @@ In this tutorial we will use a dataset obtained from imaging a mouse kidney. To 
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. **Upload imzML data** via the 'composite' option.
+> 2. **Upload imzML data** via the `composite` option.
 >
 >    Download the training dataset from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1560645.svg)](https://doi.org/10.5281/zenodo.1560645)
 >    ```
@@ -81,9 +81,9 @@ In this tutorial we will use a dataset obtained from imaging a mouse kidney. To 
 >    {: .tip}
 >
 >    > ### {% icon tip %} Tip: Uploading an Analyze7.5 file
->    > * Analyze7.5 files are also supported by Galaxy.
+>    > * `Analyze7.5` files are also supported by Galaxy.
 >    > * The file consists of three components and is therefore uploaded via the 'composite' function, analogously to the imzML upload.
->    > * The files to select in the 'composite' tab are the header file .hdr, the m/z values file .t2m and the spectra file .img.
+>    > * The files to select in the `composite` tab are the header file `.hdr`, the m/z values file `.t2m` and the spectra file `.img`.
 >    {: .tip}
 {: .hands_on}
 
@@ -114,15 +114,15 @@ Our mouse kidney dataset contains internal calibrants that were sprayed together
 >    {% include snippets/rename_dataset.md name="Calibrants" %}
 >
 > 3. Run the **MSI quality report** {% icon tool %} with the following parameters:
->    - {% icon param-file %} **MSI data**: `mouse_kidney_cut` will be automatically recognized as input file
->    - **Title**: `Mouse kidney introduction tutorial`
->    - {% icon param-file %} **m/z of interest**: Select the `Calibrants` tabular file
->    - **Column with m/z values**: `Column: 1`
->    - **Column with name of m/z values**: `Column: 2`
->    - **Tabular file contains a header line** to `Yes`
->    - **Plot fold change of two m/z**: `Insert Plot fold change of two m/z`
->    - **M/z 1**: to `1224.63` (digested Bombesin)
->    - **M/z 2**: to `1619.89` (full length Bombesin)
+>    - {% icon param-file %} *"MSI data"*: `mouse_kidney_cut` will be automatically recognized as input file
+>    - *"Title"*: `Mouse kidney introduction tutorial`
+>    - {% icon param-file %} *"m/z of interest"*: Select the `Calibrants` tabular file
+>    - *"Column with m/z values"*: `Column: 1`
+>    - *"Column with name of m/z values"*: `Column: 2`
+>    - *"Tabular file contains a header line"*: `Yes`
+>    - *"Plot fold change of two m/z"*: `Insert Plot fold change of two m/z`
+>    - *"M/z 1"*: `1224.63` (digested Bombesin)
+>    - *"M/z 2"*: `1619.89` (full length Bombesin)
 >    - Press **Execute**
 {: .hands_on}
 
@@ -195,16 +195,15 @@ The data from the imzMl file format is not directly readable, therefore special 
 > ### {% icon hands_on %} Hands-on: Export and explore information from MSI data
 >
 > 1. Run **MSI data exporter** {% icon tool %} with the following parameters:
->    - {% icon param-file %} **MSI data**: `mouse_kidney_cut`
->    - **Multiple output files can be selected**: `mz feature output` and `pixel output`
->    - Press **Execute**
+>    - {% icon param-file %} *"MSI data"*: `mouse_kidney_cut`
+>    - *"Multiple output files can be selected"*: `mz feature output` and `pixel output`
+>
 > 2. Run **Sort data in ascending or descending order** {% icon tool %} with the following parameters:
->    - {% icon param-file %} **Sort Query**: `MSI data exporter on data 1: features` (output of **MSI data exporter** {% icon tool %})
->    - **Number of header lines**: `1`
->    - **on column**: `column: 3`
->    - **in**: `descending order`
->    - **Flavor**: `general numeric sort`
->    - Press **Execute**
+>    - {% icon param-file %} *"Sort Query"*: `MSI data exporter on data 1: features` (output of **MSI data exporter** {% icon tool %})
+>    - *"Number of header lines"*: `1`
+>    - *"on column"*: `column: 3`
+>    - *"in"*: `descending order`
+>    - *"Flavor"*: `general numeric sort`
 >
 > The m/z values with the highest mean intensities over all pixels are the monoisotopic peaks and isotopic peaks of the calibrant
 > Substance P with some ppm errors because the data was not yet binned or aligned.
