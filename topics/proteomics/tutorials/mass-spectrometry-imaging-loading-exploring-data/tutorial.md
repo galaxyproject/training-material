@@ -80,8 +80,8 @@ In this tutorial we will use a dataset obtained from imaging a mouse kidney. To 
 ![Upload imzML files](../../images/MSI1_upload_composite.png "Upload an imzML file via the composite upload")
 >
 >    > ### {% icon tip %} Tip: FTP upload for large files
->    > * In case one subfile is larger than 2 GB the uploading needs to be done via ftp. 
->    > * The necessary steps are explained in this tutorial [Getting data into Galaxy]({{site.baseurl}}//galaxy-data-manipulation/tutorials/get-data/slides.html#18)
+>    > * In case one subfile is larger than 2 GB the uploading needs to be done via ftp.
+>    > * The necessary steps are explained in this tutorial [Getting data into Galaxy]({{ site.baseurl }}/topics/galaxy-data-manipulation/tutorials/get-data/slides.html)
 >    {: .tip}
 >
 >    > ### {% icon tip %} Tip: Uploading an Analyze7.5 file
