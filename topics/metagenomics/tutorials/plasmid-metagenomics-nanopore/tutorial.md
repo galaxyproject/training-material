@@ -26,7 +26,7 @@ contributors:
 # Overview
 {:.no_toc}
 
-In this tutorial we will perform an assembly of nanopore data and show some of the possible analysis tools. The assembly is performed with Minimap2, Miniasm and Racon. The analysis is done with Nanoplot, Bandage and PlasFlow.
+In this tutorial we will perform an assembly of nanopore data and show some of the possible analysis tools. The assembly is performed with [Minimap2](https://doi.org/10.1093/bioinformatics/bty191), [Miniasm](https://doi.org/10.1093/bioinformatics/btw152) and [Racon](https://doi.org/10.1101/gr.214270.116). The downstream analysis is done with [Nanoplot](https://doi.org/10.1093/bioinformatics/bty149), [Bandage](https://doi.org/10.1093/bioinformatics/btv383) and [PlasFlow](https://doi.org/10.1093/nar/gkx1321).
 
 > ### Agenda
 >
