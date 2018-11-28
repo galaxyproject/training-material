@@ -109,8 +109,6 @@
                                         
                                     
                                         
-                                    
-                                        
                                         <a class="dropdown-item" href="https://bioinf-galaxian.erasmusmc.nl/galaxy/" title="Erasmus MC">
                                             Erasmus MC
                                         </a>
@@ -558,7 +556,7 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
  !"#$%&amp;'()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
  |                         |    |        |                              |                     |
 33                        59   64       73                            104                   126
- 0........................26...31.......40                                
+ 0........................26...31.......40
                           -5....0........9.............................40
                                 0........9.............................40
                                    3.....9.............................40
@@ -1032,7 +1030,7 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
 
 </blockquote>
 
-<p>It is usual that the quality of the sequences is worse for the reverse than for the forward reads. It makes it even important to treat the forward and reverse reads together.</p>
+<p>It is usual that the quality of the sequences is worse for the reverse than for the forward reads. Therefore it is important to treat the forward and reverse reads together.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-assessing-the-quality-of-paired-end-data-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Assessing the quality of paired-end data</h3>
@@ -1097,6 +1095,51 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
       </blockquote>
     </li>
   </ol>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-algorithmic-details"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Algorithmic details</h3>
+
+  <p>One of the biggest advantage of cutadapt over other tools for trimming is that it is properly documented (https://cutadapt.readthedocs.io) which allows you to know how the tool works in detail.</p>
+
+  <p>Cutadapt quality trimming algorithm consists of three simple steps:</p>
+
+  <ol>
+    <li>substract the chosen threshold value from the quality value of each position</li>
+    <li>compute a partial sum of these differences from the end of the sequence to each position
+(as long as the partial sum is negative)</li>
+    <li>cut at the minimum value of the partial sum</li>
+  </ol>
+
+  <p>Note that thereby also positions with a quality value larger than the chosen threshold are removed if they are embedded in regions with lower quality (note that the partial sum is decreasing if the quality values are smaller than the threshold). The advantage of this procedure is that it is robust against a small number of positions with a quality higher than the threshold.</p>
+
+  <p>Alternatives to this procedure would be</p>
+
+  <ul>
+    <li>to cut all positions with a quality smaller than the threshold</li>
+    <li>a sliding window approach</li>
+  </ul>
+
+  <p>The sliding window approach checks that the average quality of each sequence window of specified length is larger than the threshold. Note that in contrast to cutadapt’s approach, this approach has one more parameter and the robustness depends of the length of the windows (in combination with the quality threshold). Both approaches are implemented in Trimmomatic.</p>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-8"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>What kind of alignment is used for finding adapters in reads?</li>
+    <li>What is the criterion to choose the best adapter alignment?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-8"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Semi global alignment, i.e., only the overlapping part of the read and the adapter sequence is used for scoring.</li>
+      <li>An alignment with maximum overlap is computed that has a smallest number of mismatches and indels.</li>
+    </ol>
+
+  </blockquote>
 </blockquote>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
