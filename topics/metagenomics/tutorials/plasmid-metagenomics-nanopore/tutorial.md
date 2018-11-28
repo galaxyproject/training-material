@@ -26,7 +26,11 @@ contributors:
 # Overview
 {:.no_toc}
 
-In this tutorial we will perform an assembly of nanopore data and show some of the possible analysis tools. The assembly is performed with [Minimap2](https://doi.org/10.1093/bioinformatics/bty191), [Miniasm](https://doi.org/10.1093/bioinformatics/btw152) and [Racon](https://doi.org/10.1101/gr.214270.116). The downstream analysis is done with [Nanoplot](https://doi.org/10.1093/bioinformatics/bty149), [Bandage](https://doi.org/10.1093/bioinformatics/btv383) and [PlasFlow](https://doi.org/10.1093/nar/gkx1321).
+In this tutorial we will perform an assembly of [Nanopore](https://nanoporetech.com/) data and show
+some of the possible analysis tools. The assembly is performed with [Minimap2](https://doi.org/10.1093/bioinformatics/bty191),
+[Miniasm](https://doi.org/10.1093/bioinformatics/btw152) and [Racon](https://doi.org/10.1101/gr.214270.116).
+The downstream analysis is done with [Nanoplot](https://doi.org/10.1093/bioinformatics/bty149),
+[Bandage](https://doi.org/10.1093/bioinformatics/btv383) and [PlasFlow](https://doi.org/10.1093/nar/gkx1321).
 
 > ### Agenda
 >
@@ -42,7 +46,7 @@ In this tutorial we will perform an assembly of nanopore data and show some of t
 
 # Obtaining and preparing data
 
-In this tutorial we use metagenomic nanopore data, but similar pipelines can be used for Illumina data.
+In this tutorial we use metagenomic Nanopore data, but similar pipelines can be used for types of datasets or sequencing platforms.
 
 > ### {% icon tip %} Background: Nanopore sequencing
 > ![How nanopore sequencing works](../../images/nanopore_seqeunce_analysis/sequence_method.jpg) <br><br>
@@ -104,17 +108,19 @@ Now that we know what our input data is, let's get it into our Galaxy history:
 >    https://zenodo.org/record/1443246/files/RB01.fasta
 >    ```
 >    {% include snippets/import_via_link.md %}
+>
 {: .hands_on}
 
 # Quality Control
 
 ## NanoPlot to explore data
 
-![NanoPlot example](../../images/nanopore_seqeunce_analysis/NanoPlot.png) <br><br>
 
-The first thing we want to do is to understand the input data we use. This is done
-using the NanoPlot command, which requires the Nanopore sequences as input. This command will
-create several plots, statisical report and a HTML report page.
+The first thing we want to do is to get a feeling for our input data and its quality. This is done
+using the NanoPlot tool. This will create several plots, a statisical report and an HTML
+report page.
+
+![NanoPlot example](../../images/nanopore_seqeunce_analysis/NanoPlot.png)
 
 > ### {% icon hands_on %} Hands-on: Plotting scripts for long read sequencing data
 >
@@ -126,6 +132,19 @@ create several plots, statisical report and a HTML report page.
 
 The `Histogram Read Length` gives an overview of the read distribution of the input file.
 ![NanoPlot Output](../../images/nanopore_seqeunce_analysis/NanoPlot_output.png) <br><br>
+
+
+> ### {% icon question %} Question
+>
+> What was the mean read length for this sample?
+>
+> > ### {% icon solution %} Solution
+> > 4906.3
+> >
+> > This can be determined by looking at the NanoStats or HTML output of NanoPlot.
+> {: .solution }
+{: .question}
+
 
 For more information on the topic of quality control, please see our training materials
 [here]({{site.baseurl}}/topics/sequence-analysis/)
