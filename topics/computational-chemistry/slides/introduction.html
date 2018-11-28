@@ -21,24 +21,143 @@ Lets you look at ‘reality’ all along a pathway, that can't be probed experim
 
 ---
 
-# MD specific questions
+## Connection between Genomic and Proteins
 
-* what is the force field?
+![](../images/NCI_CCG_Genetics_Infographic_v12_top.__v100684792_httpswww.cancer.govabout-cancercauses-preventiongeneticsgenes-proteins-infographic.png)
 
--- 
+---
 
-* how to prepare your system?
+# Complexity vs Timescale
 
--- 
+![](../images/timescales.png)
 
-* what conditions to use (P,V,n,T)?
+---
+
+# Molecular Dynamics
+
+GIF OF PROTEIN
+
+Numerical step-by-step solution of the classical equations of motionA
+F=ma
+Link macroscopic properties to microscopic molecular properties
 
 
-.footnote[https://www.ks.uiuc.edu/Research/namd/tutorial/NCSA2002/pdf/01_intro_to_md.pdf]
+---
+
+# Molecular Dynamics (MD)
+N-body problem
+Define connectivity(topology) and parameters (chemistry of atoms in terms of a model)
+A molecule is described as charged balls (atoms) and springs (bonds)
+Then based on positions, calculate velocities, accelerations and forces. 
+
+.footnote[https://www.ks.uiuc.edu/Research/namd/tutorial/NCSA2002/pdf/01_intro_to_md.pdf, http://www.ks.uiuc.edu/Training/Tutorials/namd-index.html]
+---
+
+
+# Timescale of protein motions
+
+![](../images/motion_times_1-s2.0-S1471489210001463-gr1_lrg.jpg)
+https://doi.org/10.1016/j.coph.2010.09.008
 
 ---
 
 
+# Requirements to build a realistic model
+- Choose a force field
+- Prepare system 
+- Choose specific conditions
+
+---
+
+# Force fields
+Topology and Parameter files
+Topology: atom types, charges, connectivities
+Parameters: Force constants and non-bonded interactions vdW and electrostatics)
+
+CHARMM Forcefield, GROMOS, etc.
+
+---
+
+# Steps in a typical MD simulation
+
+1. Setup and preparation
+  - Read PDB and parameters. Mutate residues, solvate, assign protonations states etc.
+2. Minimisation
+  - Find a low energy structure using the force field parameters
+3. Heating
+  - Heat the system to the desired temperature (usually 298K)
+4. Equilibration
+  - Let the system evolve at T and ensure the system is stable.
+5. Production dynamics
+  - Simulate the system under specified conditions (NVE, NVT, NPT)
+  - Collect structure and velocity data
+6. Analysis and analytics
+  - Timeseries and Correlation, PCA
+
+
+--- 
+
+# Solvation
+
+Many biological events take place in aqueous media.
+Explicit: Water molecules added
+Implicit: continuum dielectric
+
+---
+
+# Molecular energy landscape
+
+folding funnel and accessible space. 
+
+---
+
+# Ensembles
+
+A mental or virtual collection of a very large number of copies of a system. Each copy represents a possible state ththat real system may be in.
+*A statistical ensemble is a probability distribution for the state of the system.* (https://en.wikipedia.org/wiki/Statistical_ensemble_(mathematical_physics))
+
+Thermodynamic ensembles are in statistical equilibrium over particular macroscopic properties
+- Microcanonical  (constant N V E)
+- Canonical (constant N V T)
+- Gibbs or Isobaric-isothermal (constant N P T)
+
+.footnote[See Statistical Mechanics, McQuarrie for more in depth theory ISBN:9781891389153]
+
+---
+
+# Molecular Dynamics Engines
+
+
+- CHARMM
+- NAMD
+- GROMACS
+- OpenMM
+etc.
+
+---
+# Example input file and the shell
+gif from asciicinema?
+
+---
+
+# Issues
+Parameters
+Version control
+Sharing  inputs and data
+Ensuring the correct version is used and tracking changesa
+Scripts for serial vs parallel and for queueing systems
+Bespoke scripts that temp solve challenges and are not reusable in the lab. 
+
+---
+
+# Solving these kinds of issues
+Train team to use collaborative version control.
+Use coding practices etc.
+but sometimes this is a challenge
+so 
+towards a community of practice and an easier barrier to entry
+
+---
 # Common challenges
 - MD scripting languages can be complex. easy to make errors in files (untested)
 - unforced errors in command line arguments and flags
@@ -48,7 +167,8 @@ Lets you look at ‘reality’ all along a pathway, that can't be probed experim
 - idiosyncracies of the MD engine inhibit use
 
 ---
-# Use Galaxy
+
+# Why Galaxy 
 
 Batteries included!
 
@@ -60,7 +180,10 @@ Batteries included!
 
 .footnote[Are there alternatives? Yes. https://www.commonwl.org/ https://www.nextflow.io/]
 
+
+
 ---
+
 
 ### Computational Chemistry, BRIDGE and Galaxy
 
