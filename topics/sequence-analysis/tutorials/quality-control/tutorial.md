@@ -507,7 +507,7 @@ It is usual that the quality of the sequences is worse for the reverse than for 
 > ### {% icon question %} Questions
 >
 > 1. What kind of alignment is used for finding adapters in reads?
-> 2. What is the criterion to chose the best adapter alignment?
+> 2. What is the criterion to choose the best adapter alignment?
 >
 > > ### {% icon solution %} Solution
 > >
