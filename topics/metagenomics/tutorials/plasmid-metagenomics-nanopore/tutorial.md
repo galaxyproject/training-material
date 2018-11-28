@@ -164,9 +164,9 @@ with divergence below ~15%.
 
 For ~10kb noisy reads sequences, minimap2 is tens of times faster than mainstream long-read mappers
 such as BLASR, BWA-MEM, NGMLR and GMAP. It is more accurate on simulated long reads and produces biologically
- meaningful alignment ready for downstream analyses. For >100bp Illumina short reads, minimap2 is three times
+ meaningful alignment ready for downstream analyses. For >100bp Illumina short reads, Minimap2 is three times
  as fast as BWA-MEM and Bowtie2, and as accurate on simulated data. Detailed evaluations are available from
-the minimap2 paper or the preprint.
+the [Minimap2 paper](https://doi.org/10.1093/bioinformatics/bty191).
 
 ![Pairwise alignment](../../images/nanopore_seqeunce_analysis/Minimap2.png)
 
