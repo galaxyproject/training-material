@@ -33,7 +33,7 @@ Tutorials in this repository are all supplemented with files describing the tech
 
 > For more information about how to create these files, please see our module on [specifying the technical requirements for your tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html).
 
-For just the list of Ephemeris commands needed for installation, skip to the [Quickstart section](#Quickstart) at the end of this tutorial.
+For just the list of Ephemeris commands needed for installation, skip to the [Quickstart section](#quickstart) at the end of this tutorial.
 
 > ### Agenda
 >
@@ -169,7 +169,7 @@ If you would like to install all the requirements for every tutorial within an e
 
 ### Installing a subset of components
 
-If you would like to pick and choose what to install for each tutorial, below are descriptions of the commands used to install each of the components (tools, workflows, reference data, data libraries, tours) please see the [Quickstart section](#Quickstart) for the individual commands used by the script
+If you would like to pick and choose what to install for each tutorial, below are descriptions of the commands used to install each of the components (tools, workflows, reference data, data libraries, tours) please see the [Quickstart section](#quickstart) for the individual commands used by the script
 
 # Quickstart
 
