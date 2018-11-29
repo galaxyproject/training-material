@@ -27,6 +27,8 @@ RNA-Seq analysis helps researchers annotate new genes and splice variants, and p
 
 Visualization techniques are key to overcome the complexity of RNA-Seq data, and represent valuable tools to gather information and insights.
 
+In this tutorial we will visualize RNA-seq data from the [CuffDiff](http://cole-trapnell-lab.github.io/cufflinks/cuffdiff/) tool.
+
 > ### Agenda
 >
 > In this tutorial, we will deal with:
