@@ -13,7 +13,7 @@ objectives:
   - "Visualize information"
 time_estimation: "1h"
 key_points:
-  - "Extract informations from a SQLite CuffDiff database"
+  - "Extract information from a SQLite CuffDiff database"
   - "Filter and sort results to highlight differential expressed genes of interest"
   - "Generate publication-ready visualizations for RNA-Seq analysis results"
 contributors:
@@ -265,4 +265,4 @@ Heatmap of significant differentially expressed isoforms of genes LIMCH1, IFNL2,
 {:.no_toc}
 
 Visualization tools help researchers making sense of data, providing a bird's-eye view of the underlying analysis results.
-In this tutorial we overviewed the advantages of visualizing RNA-Seq results with CummeRbund, and gained insights on CuffDiff's big-data output by plotting informations relative to the most significant differentially expressed genes in our RNA-Seq analysis.
+In this tutorial we overviewed the advantages of visualizing RNA-Seq results with CummeRbund, and gained insights on CuffDiff's big-data output by plotting information relative to the most significant differentially expressed genes in our RNA-Seq analysis.
