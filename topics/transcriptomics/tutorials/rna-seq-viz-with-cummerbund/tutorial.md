@@ -6,16 +6,16 @@ zenodo_link: "https://zenodo.org/record/1001880"
 questions:
   - "How are RNA-Seq results stored?"
   - "Why are visualization techniques needed?"
-  - "How to select our desired subjects for differential gene expression analysis?"
+  - "How to select genes for visualizing meaningful results of differential gene expression analysis?"
 objectives:
   - "Manage RNA-Seq results"
-  - "Extract the desired subject for differential gene expression analysis"
-  - "Visualize information"
+  - "Extract genes for producing differential gene expression analysis visualizations"
+  - "Visualize meaningful information"
 time_estimation: "1h"
 key_points:
   - "Extract information from a SQLite CuffDiff database"
   - "Filter and sort results to highlight differential expressed genes of interest"
-  - "Generate publication-ready visualizations for RNA-Seq analysis results"
+  - "Generate publication-ready visualizations of RNA-Seq analysis results"
 contributors:
   - bagnacan
 ---
