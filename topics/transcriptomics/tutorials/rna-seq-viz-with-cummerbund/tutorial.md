@@ -42,7 +42,7 @@ In this tutorial we will visualize RNA-seq data from the [CuffDiff](http://cole-
 
 To make sense of the available RNA-Seq data, and overview the condition-specific gene expression levels of the provided samples, we need to visualize our results. Here we will use [CummeRbund](http://compbio.mit.edu/cummeRbund/).
 
-CummeRbund is an open-source tool that simplifies the analysis of a CuffDiff RNA-Seq output. In particular, it helps researchers:
+CummeRbund is an open-source tool that simplifies the analysis of a CuffDiff RNA-Seq output. In particular, it helps researchers with:
 - managing, integrating, and visualizing the data produced by CuffDiff
 - simplifying data exploration
 - providing a bird's-eye view of the expression analysis by describing relationships betweeen genes, transcripts, transcription start sites, and protein-coding regions
@@ -98,8 +98,8 @@ For this tutorial, we are interested in CuffDiff's tested transcripts for differ
 >
 >    > ### {% icon tip %} Tip: Inspecting the content of a file in Galaxy
 >    >
->    > * Click on the eye ("View data") on the right of the file name in the history
->    > * Inspect the content of the file on the middle
+>    > * Click on the {% icon galaxy-eye %} (eye) icon ("View data") on the right of the file name in the history
+>    > * Inspect the content of the file
 >    {: .tip}
 >
 > Each entry is a differentially expressed gene, which is described in terms of the following attributes.
@@ -124,7 +124,7 @@ For this tutorial, we are interested in CuffDiff's tested transcripts for differ
 > - *q_value*: The False-discovery-rate-adjusted p-value of the test statistic
 > - *significant*: "yes" or "no", depending on whether the p_value is greater then the FDR after Benjamini-Hochberg correction for multiple-testing. This tells whether the difference between the expression levels in condition one (sample_1) and condition two (sample_2) is significant
 >
-> We want to keep only those the *significant differentially expressed* genes.
+> We want to keep only the *significant differentially expressed* genes.
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -140,7 +140,7 @@ For this tutorial, we are interested in CuffDiff's tested transcripts for differ
 
 # Filtering and sorting
 
-We now want to highlight those gene transcripts whose expression difference, the log<sub>2</sub>(fold_change), has been statistically assessed as both high and significant.
+We now want to highlight the transcripts whose expression difference, the log<sub>2</sub>(fold_change), has been statistically assessed as both high and significant.
 
 > ### {% icon hands_on %} Hands-on: Extract CuffDiff's significant differentially expressed genes
 >
@@ -156,17 +156,17 @@ We now want to highlight those gene transcripts whose expression difference, the
 >    > 4. How many entries were originally stored in the table? And how many after the filtering operation?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. column 14
+>    > > 1. Column 14
 >    > > 2. c14=='yes'
 >    > > 3. 1
->    > > 4. ~140.000 (before filtering) vs. 219 (after filtering)
+>    > > 4. ~140,000 (before filtering) vs. 219 (after filtering)
 >    > {: .solution }
 >    {: .question}
 >
 >  Review the meaning of each column, and look at your data.
 >
->  - The differential expression values are stored on column 10
->  - The statistical score, assessing the differential expression significance, is stored on column 13
+>  - The differential expression values are stored in column 10
+>  - The statistical score, assessing the differential expression significance, is stored in column 13
 >  We will sort all records on the basis of their Q-score (column 13) and log<sub>2</sub>(fold_change).
 >
 > 2. **Sort** {% icon tool %}: with the following parameters
@@ -260,7 +260,7 @@ Heatmap of significant differentially expressed isoforms of genes LIMCH1, IFNL2,
 
 > ### {% icon comment %} Comment
 >
-> For more sophisticated visualizations of your RNA-Seq analisys results, try selecting different CummeRbund plot options and parametrizations. Have a look also at CummeRbund's [manual](http://compbio.mit.edu/cummeRbund/manual_2_0.html). Alternatively, you can modify a plot's style by changing CummeRbund's R output! CummeRbund's R outputs are *ggplot* objects. Look [here](https://github.com/tidyverse/ggplot2) to learn how to change fonts, colors, error bars, and more.
+> For more sophisticated visualizations of your RNA-Seq analysis results, try selecting different CummeRbund plot options and parametrizations. Have a look also at CummeRbund's [manual](http://compbio.mit.edu/cummeRbund/manual_2_0.html). Alternatively, you can modify a plot's style by changing CummeRbund's R output! CummeRbund's R outputs are *ggplot* objects. Look [here](https://github.com/tidyverse/ggplot2) to learn how to change fonts, colors, error bars, and more.
 {: .comment}
 
 # Conclusion
