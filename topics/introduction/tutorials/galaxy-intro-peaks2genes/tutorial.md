@@ -434,7 +434,7 @@ Since we have some nice data, let's draw a barchart out of it!
 > 1. Click on {% icon galaxy-barchart %} (visualize) icon on the output from the **Group** tool
 > 2. Select `Bar diagram`
 > 3. Choose a title at **Provide a title**, e.g. `Gene counts per chromosome`
-> 4. Switch to the **Select data** tab and play around with the settings
+> 4. Switch to the {% icon galaxy-chart-select-data %} **Select data** tab and play around with the settings
 >
 {: .hands_on}
 
