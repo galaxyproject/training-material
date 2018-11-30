@@ -297,7 +297,7 @@
       "name": "bagnacan"
     }
   ],
-  "description": "The questions this  addresses are:\n - How are RNA-Seq results stored?\n - Why are visualization techniques needed?\n - How to select our desired subjects for differential gene expression analysis?\n\n\\nThe objectives are:\n - Manage RNA-Seq results\n - Extract the desired subject for differential gene expression analysis\n - Visualize information\n\n"
+  "description": "The questions this  addresses are:\n - How are RNA-Seq results stored?\n - Why are visualization techniques needed?\n - How to select genes for visualizing meaningful results of differential gene expression analysis?\n\n\\nThe objectives are:\n - Manage RNA-Seq results\n - Extract genes for producing differential gene expression analysis visualizations\n - Visualize meaningful information\n\n"
 }
 
     </script>
@@ -314,7 +314,7 @@
             
             <li>Why are visualization techniques needed?</li>
             
-            <li>How to select our desired subjects for differential gene expression analysis?</li>
+            <li>How to select genes for visualizing meaningful results of differential gene expression analysis?</li>
             
             </ul>
 
@@ -323,9 +323,9 @@
             
             <li>Manage RNA-Seq results</li>
             
-            <li>Extract the desired subject for differential gene expression analysis</li>
+            <li>Extract genes for producing differential gene expression analysis visualizations</li>
             
-            <li>Visualize information</li>
+            <li>Visualize meaningful information</li>
             
             </ul>
 
@@ -416,6 +416,8 @@
 
 <p>Visualization techniques are key to overcome the complexity of RNA-Seq data, and represent valuable tools to gather information and insights.</p>
 
+<p>In this tutorial we will visualize RNA-seq data from the <a href="http://cole-trapnell-lab.github.io/cufflinks/cuffdiff/">CuffDiff</a> tool.</p>
+
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
 
@@ -434,7 +436,7 @@
 
 <p>To make sense of the available RNA-Seq data, and overview the condition-specific gene expression levels of the provided samples, we need to visualize our results. Here we will use <a href="http://compbio.mit.edu/cummeRbund/">CummeRbund</a>.</p>
 
-<p>CummeRbund is an open-source tool that simplifies the analysis of a CuffDiff RNA-Seq output. In particular, it helps researchers:</p>
+<p>CummeRbund is an open-source tool that simplifies the analysis of a CuffDiff RNA-Seq output. In particular, it helps researchers with:</p>
 <ul>
   <li>managing, integrating, and visualizing the data produced by CuffDiff</li>
   <li>simplifying data exploration</li>
@@ -509,14 +511,41 @@
         <h3 id="tip-tip-inspecting-the-content-of-a-file-in-galaxy"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Inspecting the content of a file in Galaxy</h3>
 
         <ul>
-          <li>Click on the eye (“View data”) on the right of the file name in the history</li>
-          <li>Inspect the content of the file on the middle</li>
+          <li>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon (“View data”) on the right of the file name in the history</li>
+          <li>Inspect the content of the file</li>
         </ul>
       </blockquote>
     </li>
   </ol>
 
-  <p>Each entry represents a differentially expressed gene, but not all are significant. We want to keep only those that are reported as significant differentially expressed.</p>
+  <p>Each entry is a differentially expressed gene, which is described in terms of the following attributes.</p>
+
+  <ul>
+    <li><em>test_id</em>: A unique identifier describing the transcript being tested</li>
+    <li><em>gene_id</em>: The identifier of the gene being tested</li>
+    <li><em>gene</em>: The name of the gene being tested</li>
+    <li><em>locus</em>: The genomic coordinates of the gene transcript being tested</li>
+    <li><em>sample_1</em>: Label of the 1st sample</li>
+    <li><em>sample_2</em>: Label of the 2nd sample</li>
+    <li><em>status</em>: The test’s status:
+      <ul>
+        <li>“OK” if test successful</li>
+        <li>“NOTEST” if not enough alignments for testing</li>
+        <li>“LOWDATA” if too complex or shallowly sequenced</li>
+        <li>“HIDATA” if too many fragments in locus</li>
+        <li>“FAIL” if a numerical exception prevented testing</li>
+      </ul>
+    </li>
+    <li><em>value_1</em>: The gene’s FPKM in sample_1</li>
+    <li><em>value_2</em>: The gene’s FPKM in sample_2</li>
+    <li><em>log2(fold_change)</em>: The log<sub>2</sub> of the fold change (sample_1/sample_2). This reports the expression difference between condition one (sample_1) and condition two (sample_2)</li>
+    <li><em>test_stat</em>: The test statistic’s value, used to determine the significance of the observed change in FPKM</li>
+    <li><em>p_value</em>: The uncorrected p-value of the test statistic</li>
+    <li><em>q_value</em>: The False-discovery-rate-adjusted p-value of the test statistic</li>
+    <li><em>significant</em>: “yes” or “no”, depending on whether the p_value is greater then the FDR after Benjamini-Hochberg correction for multiple-testing. This tells whether the difference between the expression levels in condition one (sample_1) and condition two (sample_2) is significant</li>
+  </ul>
+
+  <p>We want to keep only the <em>significant differentially expressed</em> genes.</p>
 
   <blockquote class="question">
     <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -538,16 +567,17 @@
 
 <h1 id="filtering-and-sorting">Filtering and sorting</h1>
 
-<p>We now want to first highlight the most significant differentially expressed genes in our analysis, and then obtain informative visualizations.</p>
+<p>We now want to highlight the transcripts whose expression difference, the log<sub>2</sub>(fold_change), has been statistically assessed as both high and significant.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-extract-cuffdiffs-most-significant-differentially-expressed-genes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract CuffDiff’s most significant differentially expressed genes</h3>
+  <h3 id="hands_on-hands-on-extract-cuffdiffs-significant-differentially-expressed-genes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract CuffDiff’s significant differentially expressed genes</h3>
 
   <ol>
     <li><strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><em>“Filter”</em>: the extracted table from the previous step</li>
         <li><em>“With following condition”</em>: an appropriate filter over the target column (see questions below when in doubt)</li>
+        <li><em>“Number of header lines to skip”</em>: the number of rows used for the table’s header</li>
       </ul>
 
       <blockquote class="question">
@@ -555,44 +585,51 @@
         <ol>
           <li>What column stores the information of significance for each record?</li>
           <li>Which conditional expression has to be set to filter all records on the selected column?</li>
-          <li>What happened to the records in the original table?</li>
+          <li>How many rows are allocated for the table’s header?</li>
+          <li>How many entries were originally stored in the table? And how many after the filtering operation?</li>
         </ol>
 
         <blockquote class="solution">
           <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <ol>
-            <li>column 14</li>
+            <li>Column 14</li>
             <li>c14==’yes’</li>
-            <li>All records whose “significant” field was set to “yes” have been retained, while the others filtered out</li>
+            <li>1</li>
+            <li>~140,000 (before filtering) vs. 219 (after filtering)</li>
           </ol>
         </blockquote>
       </blockquote>
     </li>
   </ol>
 
-  <p>Look at your data. The differential expression values are stored on column 10, we will sort (descending) all records
- on the basis of their value at the 10th column</p>
+  <p>Review the meaning of each column, and look at your data.</p>
+
+  <ul>
+    <li>The differential expression values are stored in column 10</li>
+    <li>The statistical score, assessing the differential expression significance, is stored in column 13
+ We will sort all records on the basis of their Q-score (column 13) and log<sub>2</sub>(fold_change).</li>
+  </ul>
 
   <ol>
     <li><strong>Sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with the following parameters
       <ul>
         <li><em>“Sort Dataset”</em>: the filtered table</li>
-        <li><em>“on column”</em>, <em>“with flavor”</em> and <em>“everything in”</em>: the appropriate values (see above)</li>
+        <li><em>“on column”</em>: <code class="highlighter-rouge">13</code></li>
+        <li><em>“with flavor”</em>: <code class="highlighter-rouge">Numerical sort</code></li>
+        <li><em>“everything in”</em>: <code class="highlighter-rouge">Ascending order</code></li>
+        <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Column selection</strong>, and parameterize the Sort tool to sort on column 10. Be careful of the sorting order!</li>
+        <li>Are there any rows allocated for the table’s header? In that case, set “Number of header lines to skip” accordingly!</li>
       </ul>
 
       <blockquote class="question">
         <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
         <ol>
-          <li>Since the start of our filtering process, how many records now represent the significant subset for extracting informations?</li>
-          <li>What does this shrinking of the number of lines represent?</li>
+          <li>Which gene transcript has been statistically assessed as both high and significant?</li>
         </ol>
 
         <blockquote class="solution">
           <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-          <ol>
-            <li>Click on the boxes in your history, their small preview higlights the number of lines: from ~140,000 to 219</li>
-            <li>This process represents a necessary step to gather insights on the biological meaning of our samples in our analyses: putting the original raw RNA-Seq result data into context, cutting down the less-meaningful records to focus on what is needed to go from data to information</li>
-          </ol>
+          <p>1 LIMCH1</p>
         </blockquote>
       </blockquote>
     </li>
@@ -601,15 +638,13 @@
 
 <h1 id="cummerbund">CummeRbund</h1>
 
-<p>With CummeRbund we can visualize our RNA-Seq results of interest.</p>
-
-<p>CummeRbund generates always two outputs:</p>
+<p>CummeRbund generates two outputs:</p>
 <ul>
-  <li>the plot</li>
-  <li>the R script responsible for generating the plot</li>
+  <li>The plot, which visualizes our RNA-Seq results of interest</li>
+  <li>The <a href="http://had.co.nz/ggplot2/">ggplot</a> object responsible for generating the plot</li>
 </ul>
 
-<p>We are interested in visualizing all expression values of all transcripts relative to the most significant differentially expressed gene we found in the previous section.</p>
+<p>In this section we will parametrize CummeRbund to create different kinds of plots from our input data.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-visualization"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualization</h3>
@@ -634,13 +669,13 @@
   </ol>
 </blockquote>
 
-<p>Our first CummeRbund plot is the “Expression Plot”:</p>
+<p>The input data used to create the visualization comprise 3 conditions: <em>hits7</em> (Patient 1), <em>hits8</em> (Patient 2), and <em>hits9</em> (Control).</p>
+
+<p>Our first CummeRbund plot is the “Expression Plot” of the isoforms of gene NDUFV1, which shows the expression differences of isoforms NM_001166102 and NM_007103 among the three conditions. Error bars capture the variability of the distribution of FPKM values: the broader the distribution of FPKM values, the larger the corresponding error bar.</p>
 
 <p><img src="../../images/cummerbund-expression-plot.png" alt="Expression plot" /></p>
 
-<p>The Expression Plot represents the expression of all isoforms of a single gene (NDUFV1) with replicate FPKMs exposed.</p>
-
-<p>Our plot has a modest number of isoforms, and is therefore already readable. However, in case of 5 or 6 isoforms, the plot can look very busy. We can therefore change the visualization type by selecting another type of plot.</p>
+<p>Our plot has a modest number of isoforms, and is therefore easy to read. However, with a high number of isoforms and expression variability among different conditions, the plot can look very busy. We can therefore change the visualization type by selecting another type of plot. Let’s change visualization.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-visualization-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualization</h3>
@@ -667,20 +702,67 @@
 
 <p><img src="../../images/cummerbund-expression-bar-plot.png" alt="Expression bar plot" /></p>
 
-<p>Expression Bar Plot of a single gene (NDUFV1) with replicate FPKMs exposed.</p>
+<p>The Expression Bar Plot of gene NDUFV1’s replicates NM_001166102 and NM_007103, shows the expression changes across the three aforementioned conditions.</p>
 
 <blockquote class="comment">
   <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
   <p>These plots are shown also in <a href="https://vimeo.com/channels/884356/128265982">this</a> Galaxy video tutorial.</p>
+</blockquote>
 
-  <p>Would you like to obtain more sophisticated visualization of your RNA-Seq analysis results? Select different CummeRbund plot options, and look at their parametrizations according to the filtering and sorting operations we performed</p>
+<p>Let’s now create a heatmap to plot the expression levels of the significant differentially expressed gene isoforms obtained from our filter and sort operations.
+As a showcase example, let’s consider only the top 5 differentially expressed genes.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-visualization-2"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualization</h3>
+
+  <ol>
+    <li><strong>CummeRbund</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span>  <strong>Insert plots</strong>
+          <ul>
+            <li><em>“Width”</em>: <code class="highlighter-rouge">800</code></li>
+            <li><em>“Height”</em>: <code class="highlighter-rouge">600</code></li>
+            <li><em>“Plot type”</em>: <code class="highlighter-rouge">Heatmap</code>
+              <ul>
+                <li><em>“Expression levels to plot”</em>: <code class="highlighter-rouge">Isoforms</code></li>
+                <li><em>“Gene ID”</em>: <code class="highlighter-rouge">LIMCH1</code></li>
+                <li><em>“Gene ID”</em>: <code class="highlighter-rouge">IFNL2</code></li>
+                <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Genes</strong>
+                  <ul>
+                    <li><em>“Gene ID”</em>: <code class="highlighter-rouge">CXCL11</code></li>
+                  </ul>
+                </li>
+                <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Genes</strong>
+                  <ul>
+                    <li><em>“Gene ID”</em>: <code class="highlighter-rouge">NUB1</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><em>“Cluster by”</em>: <code class="highlighter-rouge">Both</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="../../images/cummerbund-heatmap.png" alt="Expression bar plot" /></p>
+
+<p>Heatmap of significant differentially expressed isoforms of genes LIMCH1, IFNL2, CXCL11, NUB1. Differences in up- and down-regulation of certain gene isoforms across Patient 1 (hits7), Patient 2 (hits8), and Control (hits9), are visible in the lower and upper part of the heatmap.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+  <p>For more sophisticated visualizations of your RNA-Seq analysis results, try selecting different CummeRbund plot options and parametrizations. Have a look also at CummeRbund’s <a href="http://compbio.mit.edu/cummeRbund/manual_2_0.html">manual</a>. Alternatively, you can modify a plot’s style by changing CummeRbund’s R output! CummeRbund’s R outputs are <em>ggplot</em> objects. Look <a href="https://github.com/tidyverse/ggplot2">here</a> to learn how to change fonts, colors, error bars, and more.</p>
 </blockquote>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
 <p>Visualization tools help researchers making sense of data, providing a bird’s-eye view of the underlying analysis results.
-In this tutorial we overviewed the advantages of visualizing RNA-Seq results with CummeRbund, and gained insights on CuffDiff’s big-data output by plotting informations relative to the most significant differentially expressed genes in our RNA-Seq analysis.</p>
+In this tutorial we overviewed the advantages of visualizing RNA-Seq results with CummeRbund, and gained insights on CuffDiff’s big-data output by plotting information relative to the most significant differentially expressed genes in our RNA-Seq analysis.</p>
 
 
         
@@ -689,11 +771,11 @@ In this tutorial we overviewed the advantages of visualizing RNA-Seq results wit
 
             <ul>
                 
-                <li>Extract informations from a SQLite CuffDiff database</li>
+                <li>Extract information from a SQLite CuffDiff database</li>
                 
                 <li>Filter and sort results to highlight differential expressed genes of interest</li>
                 
-                <li>Generate publication-ready visualizations for RNA-Seq analysis results</li>
+                <li>Generate publication-ready visualizations of RNA-Seq analysis results</li>
                 
             </ul>
         </blockquote>
