@@ -160,7 +160,7 @@ Let's start with a fresh history.
 >
 > 4. Search for `mm9` in **Database/Build** attribute and select `Mouse July 2007 (NCBI37/mm9)` (the paper tells us the peaks are from `mm9`)
 > 5. Click on **Save** on the top
-> 6. Add a tag called `peaks` to the dataset to make it easier to track in the history
+> 6. Add a tag called `#peaks` to the dataset to make it easier to track in the history
 >    {% include snippets/add_tag.md %}
 >
 >    The dataset should now look like below in the history
