@@ -160,7 +160,7 @@ Let's start with a fresh history.
 >
 > 4. Search for `mm9` in **Database/Build** attribute and select `Mouse July 2007 (NCBI37/mm9)` (the paper tells us the peaks are from `mm9`)
 > 5. Click on **Save** on the top
-> 6. Add a tag called `peaks` to the dataset to make it easier to track in the history
+> 6. Add a tag called `#peaks` to the dataset to make it easier to track in the history
 >    {% include snippets/add_tag.md %}
 >
 >    The dataset should now look like below in the history
@@ -434,7 +434,7 @@ Since we have some nice data, let's draw a barchart out of it!
 > 1. Click on {% icon galaxy-barchart %} (visualize) icon on the output from the **Group** tool
 > 2. Select `Bar diagram`
 > 3. Choose a title at **Provide a title**, e.g. `Gene counts per chromosome`
-> 4. Switch to the **Select data** tab and play around with the settings
+> 4. Switch to the {% icon galaxy-chart-select-data %} **Select data** tab and play around with the settings
 >
 {: .hands_on}
 
