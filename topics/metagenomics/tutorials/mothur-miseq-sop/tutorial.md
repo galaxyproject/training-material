@@ -1099,7 +1099,7 @@ coefficient](http://csyue.nccu.edu.tw/2005communicationindex.pdf)
 >
 > - **Heatmap.sim** {% icon tool %} with the following parameters
 >   - *"Generate Heatmap for"*: `phylip`
->   - {% icon param-collection %} *"phylip"*: the output of **Dist.shared** {% param tool%} (this is a collection input)
+>   - {% icon param-collection %} *"phylip"*: the output of **Dist.shared** {% icon tool %} (this is a collection input)
 >
 > <!-- TODO: way to view the SVGs inside Galaxy? -->
 {: .hands_on}
@@ -1124,7 +1124,7 @@ Let's take a look at the Venn diagrams for the first 4 time points of female 3 u
 > further analysis
 >
 > - **Venn** {% icon tool %} with the following parameters
->   - {% icon param-collection %} *"OTU Shared"*: output from **Subsample.shared** {% icon tool%} (collection)
+>   - {% icon param-collection %} *"OTU Shared"*: output from **Subsample.shared** {% icon tool %} (collection)
 >   - *"groups"*: `F3D0,F3D1,F3D2,F3D3`
 {: .hands_on}
 
@@ -1142,11 +1142,11 @@ dendrogram using the jclass and thetayc calculators within the `tree.shared` com
 > ### {% icon hands_on %} Tree
 >
 > 1. **Tree.shared** {% icon tool %} with the following parameters
->   - "Select input format" to Phylip Distance Matrix
->   - "phylip" to dist files from Dist.shared (collection)
+>   - *"Select input format"*: `Phylip Distance Matrix`
+>   - {% icon param-collection %} *"phylip"*: the `distance files` output from **Dist.shared** {% icon tool%}
 >
 > 2. **Newick display** {% icon tool %} with the following parameters
->  - "Newick file" to output from Tree.shared (collection)
+>  - {% icon param-collection %} *"Newick file"*: output from **Tree.shared** {% icon tool %}
 {: .hands_on}
 
 Inspection of the the tree shows that the early and late communities cluster with themselves to the exclusion
@@ -1172,9 +1172,9 @@ instance we can convert our shared file to the more widely used `biom` format an
 > ### {% icon hands_on %} Hands-on: Phinch
 >
 > - **Make.biom** {% icon tool %} with the following parameters
->   - "shared" to Subsample.shared
->   - "constaxonomy" to taxonomy output from Classify.otu (collection)
->   - "metadata" to `mouse.dpw.metadata`
+>   - {% icon param-collection %} *"shared"*: the output from **Subsample.shared** {% icon tool %}
+>   - {% icon param-collection %} *"constaxonomy"*: the `taxonomy` output from **Classify.otu** {% icon tool %}
+>   - {% icon param-file %} *"metadata"*: the `mouse.dpw.metadata` file you uploaded at the start of this tutorial
 >
 > The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
 > to view the file at Phinch:
@@ -1201,11 +1201,11 @@ A second tool we can use to visualize our data, is [Krona]()
 >  First we convert our mothur taxonomy file to a format compatible with Krona
 >
 > - **Taxonomy-to-Krona** {% icon tool %} with the following parameters
->   - "Taxonomy file" to the taxonomy output from Classify.otu (collection)
+>   - {% icon param-collection %} *"Taxonomy file"*: the `taxonomy` output from **Classify.otu**
 >
 > - **Krona pie chart** {% icon tool %} with the following parameters
->   - "Type of input" to `Tabular`
->   - "Input file" to taxonomy output from Classify.otu (collection)
+>   - *"Type of input"*: `Tabular`
+>   - {% icon param-collection %} *"Input file"*: the `taxonomy` output from **Taxonomy-to-Krona** {% icon tool %}
 {: .hands_on}
 
 The resulting file is an HTML file containing an interactive visualization. For instance try double-clicking the
