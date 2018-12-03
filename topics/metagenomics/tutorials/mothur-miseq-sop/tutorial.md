@@ -1014,7 +1014,7 @@ Let's plot the rarefaction curve for a couple of our sequences:
 >
 > - **Plotting tool** {% icon tool %} with the following parameters
 >   - *"Plot Title"*: `Rarefaction`
->   - *"Label for x axis": `Number of Sequences`
+>   - *"Label for x axis"*: `Number of Sequences`
 >   - *"Label for y axis"*: `Number of OTUs`
 >   - *"Output File Type"*: `PNG`
 >   - {% icon param-repeat %} Click on **Insert Series**,
@@ -1044,9 +1044,9 @@ let's randomly select 2440 sequences from each sample 1000 times and calculate t
 > ### {% icon hands_on %} Hands-on: Summary.single
 >
 > - **Summary.single** {% icon tool %} with the following parameters
->   - "share" to shared file from Make.shared
->   - "calc" to `nseqs,coverage,sobs,invsimpson`
->   - "size" to 2389
+>   - {% icon param-file %} *"share"*: the `shared` file from **Make.shared** {% icon tool %}
+>   - *"calc"*: `nseqs,coverage,sobs,invsimpson`
+>   - *"size"*: `2389`
 {: .hands_on}
 
 The data will be outputted to a table called the *summary file*:
@@ -1091,15 +1091,15 @@ coefficient](http://csyue.nccu.edu.tw/2005communicationindex.pdf)
 > with the `Dist.shared` command that will allow us to rarefy our data to a common number of sequences.
 >
 > - **Dist.shared** {% icon tool %} with the following parameters
->   - "shared" to the shared file from Make.shared
->   - "calc" to thetayc,jclass
->   - "subsample" to 2389
+>   - {% icon param-file %} *"shared"*: to the `shared` file from **Make.shared** {% icon tool %}
+>   - *"calc"*: `thetayc,jclass`
+>   - *"subsample"*: `2389`
 >
 > Let's visualize our data in a Heatmap
 >
 > - **Heatmap.sim** {% icon tool %} with the following parameters
->   - "Generate Heatmap for" to `phylip`
->   - "phylip" to output by Dist.shared (this is a collection input)
+>   - *"Generate Heatmap for"*: `phylip`
+>   - {% icon param-collection %} *"phylip"*: the output of **Dist.shared** {% param tool%} (this is a collection input)
 >
 > <!-- TODO: way to view the SVGs inside Galaxy? -->
 {: .hands_on}
@@ -1120,18 +1120,12 @@ Let's take a look at the Venn diagrams for the first 4 time points of female 3 u
 
 > ### {% icon hands_on %} Hands-on: Venn diagram
 >
-> <!-- need to collapse collection again for group select to work -->
-> First we collapse our collection again
->
-> - **Collapse Collection** {% icon tool %} with the following parameters
->   - "Collection" to Subsample.shared output collection from Sub.sample step
->
 > After the tool has finished, rename the output to `Subsample.shared` to make it easier to recognize in
 > further analysis
 >
 > - **Venn** {% icon tool %} with the following parameters
->   - Set `OTU Shared` to Subsample.shared file from previous step
->   - Set `groups` to `F3D0,F3D1,F3D2,F3D3`
+>   - {% icon param-collection %} *"OTU Shared"*: output from **Subsample.shared** {% icon tool%} (collection)
+>   - *"groups"*: `F3D0,F3D1,F3D2,F3D3`
 {: .hands_on}
 
 This generates a 4-way Venn diagram and a table listing the shared OTUs.
