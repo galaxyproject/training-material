@@ -260,8 +260,8 @@ fragment, resulting in an overlap in the middle. We will now combine these pairs
 > ### {% icon hands_on %} Hands-on: Combine forward and reverse reads into contigs
 >
 > - **Make.contigs** {% icon tool %} with the following parameters
->   - "Way to provide files" to `Multiple pairs - Combo mode`
->   - "Fastq pairs" to the collection you just created
+>   - {% icon param-select %} *"Way to provide files"*: `Multiple pairs - Combo mode`
+>   - {% icon param-collection %} *"Fastq pairs"*: the collection you just created
 >   - Leave all other parameters to the default settings <br><br>
 >
 {: .hands_on}
@@ -290,8 +290,8 @@ Next we want to improve the quality of our data. But first, let's get a feel of 
 > ### {% icon hands_on %} Hands-on: Summarize data
 >
 > - **Summary.seqs** {% icon tool %} with the following parameters
->   - "fasta" parameter to the `trim.contigs.fasta` file created by the make.contigs tool
->   - "Output logfile?" to `yes`
+>   - *"fasta"*: the `trim.contigs.fasta` file created by **Make.contigs** {% icon tool%}
+>   - *"Output logfile?"*: `yes`
 >
 {: .hands_on}
 
@@ -322,10 +322,10 @@ The following tool will remove any sequences with ambiguous bases (`maxambig` pa
 > ### {% icon hands_on %} Hands-on: Filter reads based on quality and length
 >
 > - **Screen.seqs** {% icon tool %} with the following parameters
->   - "fasta" to the `trim.contigs.fasta` file created by the make.contigs tool
->   - "group" the group file created in the make.contigs step
->   - "maxlength" parameter to `275`
->   - "maxambig" parameter to `0`
+>   - *"fasta"*: the `trim.contigs.fasta` file created by **Make.contigs** {% icon tool %}
+>   - *"group"*: the group file created in the **Make.contigs** {% icon tool %} step
+>   - *"maxlength"*: `275`
+>   - *"maxambig"*: `0`
 >
 > > ### {% icon question %} Question
 > >
@@ -351,8 +351,8 @@ times, we'll unique our sequences using the `unique.seqs` command:
 > ### {% icon hands_on %} Hands-on: Remove duplicate sequences
 >
 > - **Unique.seqs** {% icon tool %} with the following parameters
->   - "fasta" to the `good.fasta` output from Screen.seqs
->   - "output format" to `Name File`
+>   - *"fasta"*: the `good.fasta` output from **Screen.seqs** {% icon tool %}
+>   - *"output format"*: `Name File`
 >
 > > ### {% icon question %} Question
 > >
@@ -385,9 +385,9 @@ To reduce file sizes further and streamline analysis, we can now summarize the d
 > ### {% icon hands_on %} Hands-on: Generate count table
 >
 > - **Count.seqs** {% icon tool %} with the following parameters
->   - "name" to the `names` output from Unique.seqs
->   - "Use a Group file" to `yes`
->   - "group" to the group file we created using the Screen.seqs tool
+>   - *"name"*: the `names` output from **Unique.seqs** {% icon tool %}
+>   - *"Use a Group file"*: `yes`
+>   - *"group"*: the `group file` we created using the **Screen.seqs** {% icon tool %}
 {: .hands_on}
 
 The *count_table* output will look something like this:
@@ -414,13 +414,13 @@ step to perform to improve the clustering of your OTUs [[Schloss 2013]](https://
 > ### {% icon hands_on %} Hands-on: Align sequences
 >
 > 1. **Align.seqs** {% icon tool %} with the following parameters
->   - "fasta" to the fasta output from Unique.seqs
->   - "reference" to the `silva.v4.fasta` reference file
+>   - {% icon param-file %} *"fasta"*: the `fasta` output from **Unique.seqs** {% icon tool %}
+>   - {% icon param-file %} *"reference"*: `silva.v4.fasta` reference file from your history
 > <br><br>
 > 2. **Summary.seqs** {% icon tool %} with the following parameters
->   - "fasta" parameter to the aligned output from previous step
->   - "count" parameter to `count_table` output from Count.seqs
->   - "Output logfile?" to `yes`
+>   - {% icon param-file %} *"fasta"*: the aligned output from **Align.seqs** {% icon tool %}
+>   - {% icon param-file %} *"count"*: `count_table` output from **Count.seqs** {% icon tool %}
+>   - *"Output logfile?"*: `yes`
 >
 {: .hands_on}
 
@@ -456,11 +456,11 @@ base in a row (this also could have been done in the first execution of `screen.
 > ### {% icon hands_on %} Hands-on: Remove poorly aligned sequences
 >
 > - **Screen.seqs** {% icon tool %} with the following parameters
->   - "fasta" to the aligned fasta file
->   - "start" to 1968
->   - "end" to 11550
->   - "maxhomop" to 8
->   - "count" to our most recent count_table
+>   - {% icon param-file %} *"fasta"*: the aligned fasta file from **Align.seqs** {% icon tool %}
+>   - *"start"*: `1968`
+>   - *"end"*: `11550`
+>   - *"maxhomop"*: `8`
+>   - {% icon param-file %} *"count"*: the `count table` file from **Count.seqs** {% icon tool %}
 >
 > **Note:** we supply the count table so that it can be updated for the sequences we're removing.
 >
@@ -483,10 +483,9 @@ losing any information. We'll do all this with filter.seqs:
 > ### {% icon hands_on %} Hands-on: Filter sequences
 >
 > - **Filter.seqs** {% icon tool %} with the following parameters
->   - "fasta"" to good.fasta output from Sreen.seqs
->   - "Vertical" to `yes`
->   - "trump" to `.`
->   - "Output logfile" to `yes`
+>   - {% icon param-file %} *"fasta"*: `good.fasta` output from the lastest **Screen.seqs** {% icon tool %}
+>   - *"trump"*: `.`
+>   - *"Output logfile"*: `yes`
 {: .hands_on}
 
 In the log file we see the following information:
@@ -506,8 +505,8 @@ columns. Because we've perhaps created some redundancy across our sequences by t
 > ### {% icon hands_on %} Hands-on: Re-obtain unique sequences
 >
 > - **Unique.seqs** {% icon tool %} with the following parameters
->   - "fasta" to the `filtered fasta` output from Filter.seqs
->   - "name file or count table" to the count table from the last Screen.seqs
+>   - {% icon param-file %} *"fasta"*: the `filtered fasta` output from **Filter.seqs** {% icon tool %}
+>   - {% icon param-file %} *"name file or count table"*: the `count table` from the last **Screen.seqs** {% icon tool %}
 >
 > > ### {% icon question %} Question
 > >
@@ -530,9 +529,9 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 > ### {% icon hands_on %} Hands-on: Perform preliminary clustering of sequences
 >
 > - **Pre.cluster** {% icon tool %} with the following parameters
->   - "fasta" to the fasta output from the last Unique.seqs run
->   - "name file or count table" to the count table from the last Unique.seqs
->   - "diffs" to 2
+>   - {% icon param-file %} *"fasta"*: the `fasta` output from the last **Unique.seqs** {% icon tool %} run
+>   - {% icon param-file %} *"name file or count table"*: the `count table` from the last **Unique.seqs** {% icon tool %}
+>   - *"diffs"*: `2`
 >
 > > ### {% icon question %} Question
 > >
@@ -564,18 +563,18 @@ when they're the most abundant sequence in another sample. This is how we do it:
 > ### {% icon hands_on %} Hands-on: Remove chimeric sequences
 >
 > - **Chimera.vsearch** {% icon tool %} with the following parameters
->   - "fasta" to the fasta output from Pre.cluster
->   - "Select Reference Template from" to `Self`
->   - "count" to the count table from the last Pre.cluster
->   - "dereplicate" to Yes
+>   - {% icon param-file %} *"fasta"*: the `fasta` output from **Pre.cluster** {% icon tool %}
+>   - {% icon param-select %} *"Select Reference Template from"*: `Self`
+>   - {% icon param-file %} *"count"*: the `count table` from the last **Pre.cluster** {% icon tool %}
+>   - {% icon param-check %} "dereplicate" to Yes
 >
 > Running chimera.vsearch with the count file will remove the chimeric sequences from the count table, but we
 > still need to remove those sequences from the fasta file as well. We do this using remove.seqs:
 >
 > - **Remove.seqs** {% icon tool %} with the following parameters
->   - "accnos" to the vsearch.accnos file from Chimera.vsearch
->   - "fasta" to the fasta output from Pre.cluster
->   - "count" to the count table from Chimera.vsearch
+>   - {% icon param-file %} *"accnos"*: the `vsearch.accnos` file from **Chimera.vsearch** {% icon tool %}
+>   - {% icon param-file %} *"fasta"*: the `fasta` output from **Pre.cluster** {% icon tool %}
+>   - {% icon param-file %} *"count"*: the `count table` from **Chimera.vsearch** {% icon tool %}
 >
 > > ### {% icon question %} Question
 > >
@@ -606,10 +605,10 @@ Let's go ahead and classify those sequences using the Bayesian classifier with t
 > ### {% icon hands_on %} Hands-on: Remove undesired sequences
 >
 > - **Classify.seqs** {% icon tool %} with the following parameters
->   - "fasta" to the fasta output from Remove.seqs
->   - "reference" to `trainset9032012.pds.fasta` from your history
->   - "taxonomy" to `trainset9032012.pds.tax` from your history
->   - "count" to the count table file from Remove.seqs
+>   - {% icon param-file %} *"fasta"*: the `fasta` output from **Remove.seqs** {% icon tool %}
+>   - {% icon param-file %} *"reference"*: `trainset9032012.pds.fasta` from your history
+>   - {% icon param-file %} *"taxonomy"*: `trainset9032012.pds.tax` from your history
+>   - {% icon param-file %} *"count"*: the `count table` file from **Remove.seqs** {% icon tool %}
 >
 > Have a look at the taxonomy output. You will see that every read now has a classification.
 >
@@ -617,11 +616,10 @@ Let's go ahead and classify those sequences using the Bayesian classifier with t
 > command:
 >
 > - **Remove.lineage** {% icon tool %} with the following parameters
->   - "taxonomy" to the taxonomy output from Classify.seqs
->   - "taxon" to `Chloroplast-Mitochondria-unknown-Archaea-Eukaryota` in the text box under *Manually
-> select taxons for filtering*
->   - "fasta" to the fasta output from Remove.seqs
->   - "count" to the count table from Remove.seqs
+>   - {% icon param-file %} *"taxonomy"*: the taxonomy output from **Classify.seqs** {% icon tool %}
+>   - {% icon param-text %} *"taxon - Manually select taxons for filtering"*: `Chloroplast-Mitochondria-unknown-Archaea-Eukaryota`
+>   - {% icon param-file %} *"fasta"*: the `fasta` output from **Remove.seqs** {% icon tool %}
+>   - {% icon param-file %} *"count"*: the `count table` from **Remove.seqs** {% icon tool %}
 >
 > > ### {% icon question %} Questions
 > >
@@ -711,10 +709,10 @@ First, let's extract the sequences belonging to our mock samples from our data:
 >
 >
 > 1. **Get.groups** {% icon tool %} with the following parameters
->   - "group file or count table" to the count table from Remove.lineage
->   - "groups" to `Mock`
->   - "fasta" to fasta output from Remove.lineage
->   - "output logfile?" to `yes`
+>   - {% icon param-file %} *"group file or count table"*: the `count table` from **Remove.lineage** {% icon tool %}
+>   - {% icon param-select %} *"groups"*: `Mock`
+>   - {% icon param-file %}*"fasta"*: `fasta` output from **Remove.lineage** {% icon tool %}
+>   - {% icon param-check %} *"output logfile?"*: `yes`
 >
 {: .hands_on}
 
@@ -731,10 +729,10 @@ the reads from our mock sample back to their known sequences, to see how many fa
 
 > ### {% icon hands_on %} Hands-on: Assess error rates based on a mock community
 > - **Seq.error** {% icon tool %} with the following parameters
->   - "fasta" to the fasta from Get.groups
->   - "reference" to `HMP_MOCK.v35.fasta` file from your history
->   - "count" to the count table from Get.groups
->   - "output log?" to `yes`
+>   - {% icon param-file %} *"fasta"*: the `fasta` output from **Get.groups** {% icon tool %}
+>   - {% icon param-file %} *"reference"*: `HMP_MOCK.v35.fasta` file from your history
+>   - {% icon param-file %} *"count"*: the `count table` from **Get.groups** {% icon tool %}
+>   - {% icon param-check %} *"output log?"*: `yes`
 >
 {: .hands_on}
 
@@ -777,26 +775,26 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 > First we calculate the pairwise distances between our sequences
 >
 > - **Dist.seqs** {% icon tool %} with the following parameters
->   - "fasta" to the fasta from Get.groups
->   - "cutoff" to `0.20`
+>   - {% icon param-file %} *"fasta"*: the `fasta` from **Get.groups** {% icon tool %}
+>   - *"cutoff"*: `0.20`
 >
 > Next we group sequences into OTUs
 >
 > - **Cluster** {% icon tool %} with the following parameters
->   - "column" to the dist output from Dist.seqs
->   - "count" to the count table from Get.groups
+>   - {% icon param-file %} *"column"*: the `dist` output from **Dist.seqs** {% icon tool %}
+>   - {% icon param-file %} *"count"*: the `count table` from **Get.groups** {% icon tool %}
 >
 > Now we make a *shared* file that summarizes all our data into one handy table
 >
 > - **Make.shared** {% icon tool %} with the following parameters
->     - "list" to the OTU list from Cluster
->     - "count" to the count table from Get.groups
->     - "label" to `0.03` (this indicates we are interested in the clustering at a 97% identity threshold)
+>     - {% icon param-file %} *"list"*: the `OTU list` from **Cluster** {% icon tool %}
+>     - {% icon param-file %} *"count"*: the `count table` from **Get.groups** {% icon tool %}
+>     - *"label"*: `0.03` (this indicates we are interested in the clustering at a 97% identity threshold)
 >
 > And now we generate intra-sample rarefaction curves
 >
 > - **Rarefaction.single** {% icon tool %} with the following parameters
->   - "shared" to the shared file from Make.shared
+>   - {% icon param-file %} *"shared"*: the `shared` file from **Make.shared** {% icon tool %}
 >
 > > ### {% icon question %} Question
 > >
@@ -847,9 +845,10 @@ the `remove.groups` command:
 > ### {% icon hands_on %} Hands-on: Remove Mock community from our dataset
 >
 > - **Remove.groups** {% icon tool %} with the following parameters
->   - "Select input type" to `fasta , name, taxonomy, or list with a group file or count table`
->   - "count table", "fasta", and "taxonomy" to the respective outputs from Remove.lineage
->   - "groups" to `Mock`
+>   - *"Select input type"*: `fasta , name, taxonomy, or list with a group file or count table`
+>   - *"groups"*: `Mock`
+>   - {% icon param-files %} *"count table"*, *"fasta"*, and *"taxonomy"* to the respective outputs from **Remove.lineage** {% icon tool %}
+>
 {: .hands_on}
 
 
@@ -871,30 +870,29 @@ of *Order*. This is the approach that we  generally use in the Schloss lab.
 > ### {% icon hands_on %} Hands-on: Cluster our data into OTUs
 >
 > - **Cluster.split** {% icon tool %} with the following parameters
->   - "Split by" to `Classification using fasta`
->   - "fasta" to the fasta output from Remove.groups
->   - "taxonomy" to the taxonomy output from Remove.groups
->   - "name file or count table" to the count table output from Remove.groups
->   - "taxlevel" to `4`
->   - "cutoff" to `0.03`
+>   - *"Split by"*: `Classification using fasta`
+>   - {% icon param-file %} *"fasta"*: the `fasta` output from **Remove.groups** {% icon tool %}
+>   - {% icon param-file %} *"taxonomy"*: the `taxonomy` output from **Remove.groups** {% icon tool %}
+>   - {% icon param-file %} *"name file or count table"*: the `count table` output from **Remove.groups** {% icon tool %}
+>   - *"taxlevel"*: `4`
+>   - *"cutoff"*: `0.03`
 >
 > Next we want to know how many sequences are in each OTU from each group and we can do this using the
 > `Make.shared` command. Here we tell Mothur that we're really only interested in the 0.03 cutoff level:
 >
 > - **Make.shared** {% icon tool %} with the following parameters
->   - "Select input type" to `OTU list`
->   - "list" to list output from Cluster.split
->   - "count" to the count table from Remove.groups
->   - "label" to `0.03`
+>   - {% icon param-file %} *"list"*: the `list` output from **Cluster.split** {% icon tool %}
+>   - {% icon param-file %} *"count"*: the `count table` from **Remove.groups** {% icon tool %}
+>   - *"label"*: `0.03`
 >
 > We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each
 > OTU using the `Classify.otu` command:
 >
 > - **Classify.otu** {% icon tool %} with the following parameters
->   - "list" to output from Cluster.split
->   - "count" to the count table from Remove.groups
->   - "taxonomy" to the taxonomy output from Remove.groups
->   - "label" to `0.03`
+>   - {% icon param-file %} *"list"*: the `list` output from **Cluster.split** {% icon tool %}
+>   - {% icon param-file %} *"count"*: the `count table` from **Remove.groups** {% icon tool %}
+>   - {% icon param-file %} *"taxonomy"*: the `taxonomy` output from **Remove.groups** {% icon tool %}
+>   - *"label"*: `0.03`
 >
 {: .hands_on}
 
@@ -947,7 +945,7 @@ animal) followed by a D and a three digit number (number of days post weaning).
 > `Count.groups` command:
 >
 > - **Count.groups** {% icon tool %} with the following parameters
->   - "shared" to the shared file from Make.shared
+>   - {% icon param-file %} *"shared"*: the `shared` file from **Make.shared** {% icon tool %}
 >
 > Take a look at the output. We see that our smallest sample had 2389 sequences in it. That is a reasonable
 > number. Despite what some say, subsampling and rarefying your data is an important thing to do.
@@ -955,9 +953,9 @@ animal) followed by a D and a three digit number (number of days post weaning).
 > We'll generate a subsampled file for our analyses with the `Sub.sample` command:
 >
 > - **Sub.sample** {% icon tool %} with the following parameters
->   - "Select type of data to subsample" to `OTU Shared`
->   - "shared" to output from Make.shared
->   - "size" to `2389`
+>   - *"Select type of data to subsample"*: `OTU Shared`
+>   - {% icon param-file %} *"shared"*: the `shared` file from **Make.shared** {% icon tool %}
+>   - *"size"*: `2389`
 >
 > > ### {% icon question %} Question
 > >
@@ -987,7 +985,7 @@ curves describing the number of OTUs observed as a function of sampling effort. 
 
 > ### {% icon hands_on %} Hands-on: Calculate Rarefaction
 > - **Rarefaction.single** {% icon tool %} with the following parameters
->   - "shared" to shared file from Make.shared
+>   - {% icon param-file %} *"shared"*: the `shared file` from **Make.shared** {% icon tool %}
 {: .hands_on}
 
 Note that we used the default diversity measure here (*sobs*; observed species richness), but there are many
