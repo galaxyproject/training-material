@@ -1011,25 +1011,17 @@ we have covered our full diversity. This information would be easier to interpre
 Let's plot the rarefaction curve for a couple of our sequences:
 
 > ### {% icon hands_on %} Hands-on: Plot Rarefaction
-> <!-- the following tool is because plotting tool will not detect columns in files inside collections yet -->
-> First let's make our life a little bit easier. As we only have one dataset in our collection anyways, we can
-> collapse it into a single file.
->
-> - **Collapse Collection** {% icon tool %} with the following parameters
->   - "Collection of files to collapse to a single dataset" to the rarefaction curve collection
->
-> Now we are ready to plot our rarefaction curves:
 >
 > - **Plotting tool** {% icon tool %} with the following parameters
->   - "Plot Title" to `Rarefaction`
->   - "Label for x axis" to `Number of Sequences`
->   - "Label for y axis" to `Number of OTUs`
->   - "Output File Type" to `PNG`
->   - Click on Insert Series,
->     - "Dataset" to the collapsed rarefaction curve collection
->     - Set **Header in first line?** to `Yes`
->     - "Column for x axis" to `Column 1`
->     - "Column for y-axis" to `Column 2` and `Column 5` and every third column until the end (we are
+>   - *"Plot Title"*: `Rarefaction`
+>   - *"Label for x axis": `Number of Sequences`
+>   - *"Label for y axis"*: `Number of OTUs`
+>   - *"Output File Type"*: `PNG`
+>   - {% icon param-repeat %} Click on **Insert Series**,
+>     - {% icon param-collection %} *"Dataset"*: rarefaction curve collection
+>     - *"Header in first line?"*: `Yes`
+>     - *"Column for x axis"*: `Column 1`
+>     - *"Column for y-axis"*: `Column 2` and `Column 5` and every third column until the end (we are
 >       skipping the low confidence and high confidence interval columns)
 >
 {: .hands_on}
