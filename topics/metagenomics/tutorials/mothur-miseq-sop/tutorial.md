@@ -651,6 +651,14 @@ At this point we have curated our data as far as possible and we're ready to see
 
 ## Assessing error rates based on our mock community
 
+
+> ### {% icon tip %} Tip: Skipping the mock community analysis
+>
+> The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to [the next section](#preparing-for-analysis)
+> where we will cluster our sequences into OTUs and classify them.
+>
+{: .tip}
+
 Measuring the error rate of your sequences is something you can only do if you have co-sequenced a mock
 community, that is, a sample of which you know the exact composition. This is something we include for
 every 95 samples we sequence. You should too because it will help you gauge your error rates and allow
