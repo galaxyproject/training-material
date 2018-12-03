@@ -13,42 +13,41 @@ contributors:
 ---
 # Purpose
 
-Bridge between theory and experiment
-Lets you look at ‘reality’ all along a pathway, that can't be probed experimentally.
+- Bridge between theory and experiment.
+- "Lets you look at ‘reality’ all along a pathway, that can't be probed experimentally."
 
 
 .footnote[M. Bachrach, Computational Organic Chemistry, Wiley, 2014., [*Arthi et al, Nature, 2012*](https://udel.edu/~arthij/MD.pdf)]
 
 ---
 
-## Connection between Genomic and Proteins
+### Connection between Genomic and Proteins
 
-![](../images/NCI_CCG_Genetics_Infographic_v12_top.__v100684792_httpswww.cancer.govabout-cancercauses-preventiongeneticsgenes-proteins-infographic.png)
+.image-100[![](../images/NCI_CCG_Genetics_Infographic_v12_top.__v100684792_httpswww.cancer.govabout-cancercauses-preventiongeneticsgenes-proteins-infographic.png)]
 
 ---
 
-# Complexity vs Timescale
+### Complexity vs Timescale
 
-![](../images/timescales.png)
+.image-100[![](../images/timescales.png)]
 
 ---
 
 # Molecular Dynamics
 
-GIF OF PROTEIN
+TODO - GIF OF PROTEIN
 
-Numerical step-by-step solution of the classical equations of motionA
-F=ma
-Link macroscopic properties to microscopic molecular properties
+- Numerical step-by-step solution of the classical equations of motion : F = ma
+- Link macroscopic properties to microscopic molecular properties
 
 
 ---
 
 # Molecular Dynamics (MD)
-N-body problem
-Define connectivity(topology) and parameters (chemistry of atoms in terms of a model)
-A molecule is described as charged balls (atoms) and springs (bonds)
-Then based on positions, calculate velocities, accelerations and forces. 
+- N-body problem
+- Define connectivity (topology) and parameters (chemistry of atoms in terms of a model)
+- A molecule is described as charged balls (atoms) and springs (bonds)
+- Then based on positions, calculate velocities, accelerations and forces. 
 
 .footnote[https://www.ks.uiuc.edu/Research/namd/tutorial/NCSA2002/pdf/01_intro_to_md.pdf, http://www.ks.uiuc.edu/Training/Tutorials/namd-index.html]
 ---
@@ -57,7 +56,7 @@ Then based on positions, calculate velocities, accelerations and forces.
 # Timescale of protein motions
 
 ![](../images/motion_times_1-s2.0-S1471489210001463-gr1_lrg.jpg)
-https://doi.org/10.1016/j.coph.2010.09.008
+.footnote[https://doi.org/10.1016/j.coph.2010.09.008]
 
 ---
 
@@ -69,12 +68,33 @@ https://doi.org/10.1016/j.coph.2010.09.008
 
 ---
 
-# Force fields
-Topology and Parameter files
-Topology: atom types, charges, connectivities
-Parameters: Force constants and non-bonded interactions vdW and electrostatics)
+## Force fields
 
-CHARMM Forcefield, GROMOS, etc.
+Topology and Parameter files
+- Topology: atom types, charges, connectivities
+- Parameters: Force constants and non-bonded interactions vdW and electrostatics)
+
+For example the general CHARMM, AMBER, GROMOS etc. 
+
+--- 
+
+---
+
+## Internal Energy from Force field
+
+.pull-left[
+![](../images/Intramolecular_geometry_defined.png)
+- Sum of intramolecular and nonbonded terms
+]
+
+.pull-right[
+![](../images/Uintramolecular.png)
+![](../images/Unonbonded.png)
+![](../images/Unonbonded_LJ.png)
+![](../images/Unonbonded_coulombic.png)
+]
+
+.footnote[[*Arthi et al, Nature, 2012*](https://udel.edu/~arthij/MD.pdf)]
 
 ---
 
@@ -97,6 +117,8 @@ CHARMM Forcefield, GROMOS, etc.
 
 --- 
 
+---
+
 # Solvation
 
 Many biological events take place in aqueous media.
@@ -107,7 +129,11 @@ Implicit: continuum dielectric
 
 # Molecular energy landscape
 
-folding funnel and accessible space. 
+
+image-100[![](../images/F6.large.png)]
+Folding funnel and accessible space.
+
+.footnote[http://www.pnas.org/content/101/46/16192]
 
 ---
 
@@ -141,21 +167,20 @@ gif from asciicinema?
 ---
 
 # Issues
-Parameters
-Version control
-Sharing  inputs and data
-Ensuring the correct version is used and tracking changesa
-Scripts for serial vs parallel and for queueing systems
-Bespoke scripts that temp solve challenges and are not reusable in the lab. 
+- Parameters
+- Version control
+- Sharing  inputs and data
+- Ensuring the correct version is used and tracking changesa
+- Scripts for serial vs parallel and for queueing systems
+- Bespoke scripts that temp solve challenges and are not reusable in the lab. 
 
 ---
 
 # Solving these kinds of issues
-Train team to use collaborative version control.
-Use coding practices etc.
-but sometimes this is a challenge
-so 
-towards a community of practice and an easier barrier to entry
+- Train team to use collaborative version control.
+- Use coding practices etc.
+- Sometimes this is a challenge
+- A community of practice and an easier barrier to entry
 
 ---
 # Common challenges
