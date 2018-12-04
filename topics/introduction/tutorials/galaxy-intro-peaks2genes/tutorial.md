@@ -90,6 +90,7 @@ Let's start with a fresh history.
 >    >   ![Renaming history](../../../../shared/images/rename_history.png)
 >    >
 >    > * Type `Galaxy Introduction` as the name
+>    > * Press <kbd>Enter</kbd>
 >    >
 >    {: .tip}
 >
