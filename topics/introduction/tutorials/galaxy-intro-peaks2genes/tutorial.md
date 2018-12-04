@@ -328,11 +328,19 @@ In order to convert the chromosome names we have therefore two things to do:
 >    - *"Find pattern"*: `chr21`
 >    - *"Replace with"*: `chrY`
 >
-> 6. Inspect the latest file through the {% icon galaxy-eye %} (eye) icon
->
->    Have we been successful?
+> 6. Inspect the latest file through the {% icon galaxy-eye %} (eye) icon. Have we been successful?
 >
 >    We have quite a few files now and need to take care to select the correct ones at each step.
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > How many regions are in our output file? You can click the name of the output to expand it and see the number.
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > It should be equal to the number of regions in your first file, `GSE37268_mof3.out.hpeak.txt.gz`: 48,647
+>    > > If yours says 100 regions, then you have run it on the `Tail` file and need to re-run the steps.
+>    > {: .solution }
+>    {: .question}
 >
 > 7. Rename the file to something more recognizable, e.g. `Peak regions`
 {: .hands_on}
@@ -349,7 +357,7 @@ you want to include transcriptions factors in ChIP-seq experiments. There is no 
 > ### {% icon hands_on %} Hands-on: Add promoter region to gene records
 >
 > 1. **Get Flanks** {% icon tool %}: Run **Get flanks returns flanking region/s for every gene** with the following settings:
->     - *"Select data"*: Genes file from UCSC
+>     - *"Select data"*: `Genes` file from UCSC
 >     - *"Region"*: `Around Start`
 >     - *"Location of the flanking region/s"*: `Upstream`
 >     - *"Offset"*: `10000`
