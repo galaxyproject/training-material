@@ -283,7 +283,7 @@ As we can see, the peak file lacks `chr` before any chromosome number. But what 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 1. The chromosomes are just given by their number. In the gene file from UCSC, they started with `chr`
->    > > 2. The chromosomes X and Y are names 20 and 21
+>    > > 2. The chromosomes X and Y are named 20 and 21
 >    > {: .solution }
 >    {: .question}
 {: .hands_on}
