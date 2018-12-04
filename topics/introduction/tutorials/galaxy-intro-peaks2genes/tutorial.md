@@ -119,7 +119,7 @@ Let's start with a fresh history.
 >    ![History section](../../images/intro_01.png)
 >
 >    Directly uploading files is not the only way to get data into Galaxy
->    {% include snippets/import_via_link.md collection=true format="bed" genome="mm9" %}
+>    {% include snippets/import_via_link.md format="bed" genome="mm9" %}
 >
 >    > ### {% icon tip %} Tip: Importing data to Galaxy
 >    > There are [more options]({{ site.baseurl }}/topics/galaxy-data-manipulation/tutorials/get-data/slides.html) for advanced users.
