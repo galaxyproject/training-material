@@ -628,6 +628,9 @@ The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers
 >    It should look similar to below:
 >    ![Gene names](../../images/intro_gene_names.png)
 >
+> 3. Rename it `mm9.RefSeq_genes`
+> 4. Apply the tag `#genes`
+>
 {: .hands_on}
 
 ## Repeat workflow
@@ -637,20 +640,20 @@ It's time to reuse the workflow we created earlier.
 > ### {% icon hands_on %} Hands-on: Run a workflow
 > 1. Open the workflow menu (top menu bar)
 > 2. Find the workflow you made in the previous section, and select the option **Run**
-> 3. Choose as inputs our imported gene BED file and the result of the **Cut** tool
+> 3. Choose as inputs our `mm9.RefSeq_genes` (`#genes`) BED file and the result of the **Cut** tool (`#peaks`)
 > 4. Click **Run workflow**
 >
 >    The outputs should appear in the history but it might take some time until they are finished.
 >
 {: .hands_on}
 
-We used our workflow to rerun our analysis with the peak summits. The **Group** tool again produced a list containing the amount of genes found in each chromosome.
-But wouldn't it be more interesting to know about the amount of peaks in each unique gene? Let's rerun the workflow with different settings!
+We used our workflow to rerun our analysis with the peak summits. The **Group** tool again produced a list containing the number of genes found in each chromosome.
+But wouldn't it be more interesting to know the number of peaks in each unique gene? Let's rerun the workflow with different settings!
 
 > ### {% icon hands_on %} Hands-on: Run a workflow with changed settings
 > 1. Open the workflow menu (top menu bar)
 > 2. Find the workflow you made in the previous section, and select the option **Run**
-> 3. Choose as inputs our imported gene BED file and the result of the **Cut** tool
+> 3. Choose as inputs our `mm9.RefSeq_genes` (`#genes`) BED file and the result of the **Cut** tool (`#peaks`)
 > 4. Click on the title of the Group tool to expand the options.
 > 5. Change the following settings by clicking on the {% icon galaxy-pencil %} (pencil) icon on the left:
 >     - **Group by column**: `7`
@@ -665,7 +668,7 @@ Congratulations! You should have a file with all the unique gene names and a cou
 > The list of unique genes is not sorted. Try to sort it on your own!
 >
 > > ### {% icon solution %} Solution
-> > You can use the tool "Sort data in ascending or descending order" on column 2 and a numerical sort.
+> > You can use the tool "Sort data in ascending or descending order" on column 2 and "fast numeric sort".
 > {: .solution }
 {: .question}
 
