@@ -95,24 +95,16 @@ in this document differ slightly from the description on their website -->
 
 Now that we know what our input data is, let's get it into our Galaxy history:
 
+All data required for this tutorial has been made available from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg)](https://doi.org/10.5281/zenodo.800651)
+
 > ### {% icon hands_on %} Hands-on: Obtaining our data
 >
 > 1. Make sure you have an empty analysis history. Give it a name.
 >
->    > ### {% icon tip %} Starting a new history
->    >
->    > * Click the **gear icon** at the top of the history panel
->    > * Select the option **Create New** from the menu
->    {: .tip}
+>    {% include snippets/create_new_history.md %}
 >
-> 2. **Import Sample Data.** The data for this course may be available from a shared library in Galaxy
-> (ask your instructor). If this is not the case, you can upload it yourself.
->   - Option 1: From data library:
->     - Navigate to the shared data library, you should find 20 pairs of fastq files; 19 from the mice,
->       and one pair from the mock community.
->     - Option 2: From your Zenodo:
->       - Data is available from Zenodo here: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg)](https://doi.org/10.5281/zenodo.800651)
->       - In the file upload menu choose the `Paste/Fetch data` option and enter the following urls to import the file from Zenodo to Galaxy directly
+> 2. **Import Sample Data.**
+>       - Import the following files to your history:
 >
 >       > ### {% icon solution %} List of Zenodo URLs
 >       > ```
@@ -158,7 +150,10 @@ Now that we know what our input data is, let's get it into our Galaxy history:
 >       > https://zenodo.org/record/800651/files/Mock_R2.fastq
 >       > ```
 >       {: .solution }
-> <br>
+>
+>       {% include snippets/import_via_link.md %}
+>
+>       {% include snippets/import_from_data_library.md %}
 >
 > 3. **Import Reference Data.**  Go back to the data library and import the following reference
 > datasets
