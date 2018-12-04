@@ -306,8 +306,10 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 >         `&` is a placeholder for the find result of the pattern search
 >
-> 2. **Replace Text** {% icon tool %}: Let's rerun the tool with
->    - *"File to process"*: the output from the last run, e.g. something like `Replace Text on data ...`
+> 2. Rename your output file `chr prefix added`.
+>
+> 3. **Replace Text** {% icon tool %}: Let's rerun the tool with
+>    - *"File to process"*: the output from the last run, `chr prefix added`
 >    - *"in column"*: `Column:1`
 >    - *"Find pattern"*: `chr20`
 >    - *"Replace with"*: `chrX`
@@ -318,19 +320,21 @@ In order to convert the chromosome names we have therefore two things to do:
 >    > * Press the {% icon galaxy-refresh %} icon (**Run this job again**)
 >    {: .tip}
 >
-> 3. **Replace Text** {% icon tool %}: Rerun this tool to do the same for chromosome Y
->    - *"File to process"*: the output from the **last** run
+> 4. Rename your output file `chrX fixed`
+>
+> 5. **Replace Text** {% icon tool %}: Rerun this tool to do the same for chromosome Y
+>    - *"File to process"*: `chrX fixed`, the output from the last run
 >    - *"in column"*: `Column:1`
 >    - *"Find pattern"*: `chr21`
 >    - *"Replace with"*: `chrY`
 >
-> 4. Inspect the latest file through the {% icon galaxy-eye %} (eye) icon
+> 6. Inspect the latest file through the {% icon galaxy-eye %} (eye) icon
 >
 >    Have we been successful?
 >
->    We have quite some files now and should take care that we don't lose track.
+>    We have quite a few files now and need to take care to select the correct ones at each step.
 >
-> 5. Rename the file to something more recognizable, e.g. `Peak regions`
+> 7. Rename the file to something more recognizable, e.g. `Peak regions`
 {: .hands_on}
 
 ## Analysis
