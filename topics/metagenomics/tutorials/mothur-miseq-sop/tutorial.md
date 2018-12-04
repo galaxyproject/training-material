@@ -104,7 +104,7 @@ All data required for this tutorial has been made available from Zenodo [![DOI](
 >    {% include snippets/create_new_history.md %}
 >
 > 2. **Import Sample Data.**
->       - Import the following files to your history:
+>       - Import the sample FASTQ files to your history, either from a shared data library (if available), or from Zenodo:
 >
 >       > ### {% icon solution %} List of Zenodo URLs
 >       > ```
@@ -155,16 +155,15 @@ All data required for this tutorial has been made available from Zenodo [![DOI](
 >
 >       {% include snippets/import_from_data_library.md %}
 >
-> 3. **Import Reference Data.**  Go back to the data library and import the following reference
-> datasets
->  - `silva.v4.fasta`
->  - `HMP_MOCK.v35.fasta`
->  - `mouse.dpw.metadata`
->  - `mouse.time.design`
->  - `trainset9_032012.pds.fasta`
->  - `trainset9_032012.pds.tax`
+> 3. **Import Reference Data**
+>    - Import the following reference datasets
+>      - `silva.v4.fasta`
+>      - `HMP_MOCK.v35.fasta`
+>      - `mouse.dpw.metadata`
+>      - `mouse.time.design`
+>      - `trainset9_032012.pds.fasta`
+>      - `trainset9_032012.pds.tax`
 >
->    Or import them from Zenodo:
 >
 >    > ### {% icon solution %} List of Zenodo URLs
 >    > ```
