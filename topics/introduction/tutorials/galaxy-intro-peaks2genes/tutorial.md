@@ -598,9 +598,9 @@ The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers
 >
 > 1. From [Zenodo](https://zenodo.org/record/1025586) or from the data library, import the file `mm9.RefSeq_genes_from_UCSC.bed`
 >
->      ```
->      https://zenodo.org/record/1025586/files/mm9.RefSeq_genes_from_UCSC.bed
->      ```
+>    ```
+>    https://zenodo.org/record/1025586/files/mm9.RefSeq_genes_from_UCSC.bed
+>    ```
 >
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
