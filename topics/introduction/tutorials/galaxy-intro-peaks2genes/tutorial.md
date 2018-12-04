@@ -587,16 +587,7 @@ The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers
 >    https://zenodo.org/record/1025586/files/mm9.RefSeq_genes_from_UCSC.bed
 >    ```
 >
->    > ### {% icon tip %} Tip: Importing data via links
->    >
->    > * Copy the link location
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > * Paste the link into the text field
->    > * Select "Type": `bed`
->    > * Select "Genome": `mm9`
->    > * Press **Start**
->    {: .tip}
+>    {% include snippets/import_via_link.md type=bed genome=mm9 %}
 >
 >    > ### {% icon tip %} Tip: Importing data from a data library
 >    >

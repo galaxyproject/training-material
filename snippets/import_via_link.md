@@ -3,11 +3,17 @@
 >    >
 >    > * Copy the link location
 >    > * Open the Galaxy Upload Manager ({% icon galaxy-upload %} on the top-right of the tool panel)
->    > {% if include.collection %} 
+>    > {% if include.collection %}
 >    > * Click on **Collection** on the top
 >    > {% endif %}
 >    > * Select **Paste/Fetch Data**
 >    > * Paste the link into the text field
+>    > {% if include.type %}
+>    > * Change **Type** from "Auto-detect" to {{ include.type }}
+>    > {% endif %}
+>    > {% if include.build %}
+>    > * Change **Genome** to {{ include.build }}
+>    > {% endif %}
 >    > * Press **Start**
 >    > {% if include.collection %}
 >    > * Click on **Build** when available
