@@ -133,18 +133,6 @@ Let's start with a fresh history.
 {: .comment}
 
 
-> ### {% icon tip %} Tip: Importing data via links
->
-> You could also import this file via its link:
->
-> * Copy the link location
-> * Open the Galaxy Upload Manager
-> * Select **Paste/Fetch Data**
-> * Paste the link into the text field
-> * Select `interval` as **Type**
-> * Press **Start**
-{: .tip}
-
 > ### {% icon hands_on %} Hands-on: Inspect and edit attributes of a file
 >
 > 1. Click on the file in the history panel
