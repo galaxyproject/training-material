@@ -178,40 +178,47 @@ All data required for this tutorial has been made available from Zenodo [![DOI](
 {: .hands_on}
 
 Now that's a lot of files to manage. Luckily Galaxy can make life a bit easier by allowing us to create
-*dataset collections*. This enables us to easily run tools on multiple datasets at once. Let's
-create a collection now:
+**dataset collections**. This enables us to easily run tools on multiple datasets at once.
 
-> ### {% icon hands_on %} Hands-on: Organizing our data into a collection
+Since we have **paired-end** data, each sample consist of two separate fastq files, one containing the
+forward reads, and one containing the reverse reads. We can recognize the pairing from the file names,
+which will differ only by `_R1` or `_R2` in the filename. We can tell Galaxy about this paired naming
+convention, so that our tools will know which files belong together. We do this by building a **List of Dataset Pairs**
+
+
+> ### {% icon hands_on %} Hands-on: Organizing our data into a paired collection
 >
-> Since we have paired-end data, each sample consist of two separate fastq files, one containing the
-> forward reads, and one containing the reverse reads. We can recognize the pairing from the file names,
-> which will differ only by `_R1` or `_R2` in the filename. We can tell Galaxy about this paired naming
-> convention, so that our tools will know which files belong together.
+> 1. Click on the **checkmark icon** {% icon param-check %} at top of your history.
 >
-> 1. Click on the **checkmark icon** at top of your history.
->   ![Checkmark icon in history menu](../../../../shared/images/history_menu_buttons2.png)
+> 2. Select all the FASTQ files (40 in total)
+>    - Click on **for all selected..**
+>    - Select **Build List of Dataset Pairs** from the dropdown menu
 >
-> 2. Select all the fastq files (40 in total), then click on **for all selected..** and select
->   **Build List of Dataset Pairs** from the dropdown menu.
-> 3. In the next dialog window you can create the list of pairs. By default Galaxy will look for pairs
->   of files that differ only by a `_1` and `_2` part in their names. In our case however, these
->   should be `_R1` and `_R2`. Please change these values accordingly. You should now see a list of
->   pairs suggested by Galaxy,
->   ![List of suggested paired datasets](../../images/create_collection.png) <br><br>
+>    In the next dialog window you can create the list of pairs. By default Galaxy will look for pairs
+>    of files that differ only by a `_1` and `_2` part in their names. In our case however, these
+>    should be `_R1` and `_R2`.
 >
-> 4. Examine the pairings, if it looks good, you can click on **auto-pair** to create the suggested
->   pairs.
->   ![The result of pairing](../../images/create_collection2.png) <br><br>
->   The middle segment is the name for each pair. You can change these names by clicking on them. These
->   names will be used as sample names in the downstream analysis so always make sure they are
->   informative.
->   **Important:** Make sure these sample names contain only alphanumeric characters. If you've
->   imported the data from Zenodo, the sample names will default to the full url, please change these
->   values to only their last part, e.g. `F3D0`, `F3D5` etc.
+> 3. Change these values accordingly
+>    - Change `_1` to `_R1` in the text field on the top left
+>    - Change `_2` to `_R2` om the text field on the top right
 >
-> 5. Once you are happy with your pairings, enter a name for your new collection at the bottom right of
->   the screen. Then click the **Create List** button. A new dataset collection item will now appear in
->   your history.
+>    You should now see a list of pairs suggested by Galaxy:
+>    ![List of suggested paired datasets](../../images/create_collection.png) <br><br>
+>
+> 4. Examine the pairings and make sure they are correct.
+>    - Click on **auto-pair** to create the suggested pairs.
+>
+>      ![The result of pairing](../../images/create_collection2.png) <br><br>
+>
+>    The middle segment is the name for each pair. You can change these names by clicking on them.
+>    These names will be used as sample names in the downstream analysis so always make sure they are informative!
+>
+> 5. Name the pairs.
+>    - Make sure the pair names are like the image above (`F3D0`, `F3D5` etc)
+>      - If the files will imported via url, they may have the full url as sample name, please remove everything but the sample name for each pair
+>
+> 6. **Name your collection** at the bottom right of the screen
+> 7. Click the **Create List** button. A new dataset collection item will now appear in your history
 {: .hands_on}
 
 
