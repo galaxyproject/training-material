@@ -113,10 +113,17 @@ Let's start with a fresh history.
 > 6. Press **Close**
 > 7. Wait for the upload to finish. Galaxy will automatically unpack the file.
 >
->  After this you will see your first history item in Galaxy’s right pane. It will go through
+> 8. After this you will see your first history item in Galaxy’s right pane. It will go through
 > the gray (preparing/queued) and yellow (running) states to become green (success):
 >
-> ![History section](../../images/intro_01.png)
+>    ![History section](../../images/intro_01.png)
+>
+>    Directly uploading files is not the only way to get data into Galaxy
+>    {% include snippets/import_via_link.md collection=true format="bed" genome="mm9" %}
+>
+>    > ### {% icon tip %} Tip: Importing data to Galaxy
+>    > There are [more options]({{ site.baseurl }}/topics/galaxy-data-manipulation/tutorials/get-data/slides.html) for advanced users.
+>    {: .tip}
 >
 {: .hands_on}
 
