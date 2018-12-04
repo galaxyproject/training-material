@@ -115,7 +115,8 @@ The correctly modelled substrate is available. This modelling was done using VMD
 {: .hands_on}
 
 # Modelling with CHARMM-GUI
-It is convenient to setup the molecular system using a tool such as CHARMM-GUI. Alternatives are available.
+It is convenient to setup the molecular system using a tool such as CHARMM-GUI. Alternatives methods are possible.
+
 > ### {% icon details %} Alternatives for modelling
 > Schrodinger
   Antechamber
@@ -125,8 +126,8 @@ It is convenient to setup the molecular system using a tool such as CHARMM-GUI. 
 ### {% icon tip %} Tip: Viewing figures
 >
 > * Some of the figures are screenshots and it may be difficult to make out details
-  * Right-click on the image and choose 'Open image in new tab' to view 
-  * Zoom in and out as needed to see the content
+>  * Right-click on the image and choose 'Open image in new tab' to view 
+>  * Zoom in and out as needed to see the content
 {: .tip}
 
 ![CHARMM-GUI interface](images/charmmgui.png "The CHARMM-GUI inteface")

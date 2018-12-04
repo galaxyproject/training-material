@@ -1,8 +1,8 @@
 ---
 layout: introduction_slides
-logo: "GTN"
+logo: "SC"
 
-title: Introduction to Computational chemistry
+title: Introduction to Computational Chemistry
 type: introduction
 contributors:
   - chrisbarnettster
@@ -33,7 +33,7 @@ contributors:
 
 ---
 
-# Molecular Dynamics
+# Molecular Dynamics (MD)
 
 TODO - GIF OF PROTEIN
 
@@ -70,6 +70,8 @@ TODO - GIF OF PROTEIN
 
 ## Force fields
 
+![](../images/Intramolecular_geometry_defined.png)
+
 Topology and Parameter files
 - Topology: atom types, charges, connectivities
 - Parameters: Force constants and non-bonded interactions vdW and electrostatics)
@@ -83,12 +85,11 @@ For example the general CHARMM, AMBER, GROMOS etc.
 ## Internal Energy from Force field
 
 .pull-left[
-![](../images/Intramolecular_geometry_defined.png)
 - Sum of intramolecular and nonbonded terms
+![](../images/Uintramolecular.png)
 ]
 
 .pull-right[
-![](../images/Uintramolecular.png)
 ![](../images/Unonbonded.png)
 ![](../images/Unonbonded_LJ.png)
 ![](../images/Unonbonded_coulombic.png)
@@ -98,19 +99,34 @@ For example the general CHARMM, AMBER, GROMOS etc.
 
 ---
 
-# Steps in a typical MD simulation
+### Steps in a typical MD simulation
 
 1. Setup and preparation
   - Read PDB and parameters. Mutate residues, solvate, assign protonations states etc.
+
+--
+
 2. Minimisation
   - Find a low energy structure using the force field parameters
+
+--
+
 3. Heating
   - Heat the system to the desired temperature (usually 298K)
+
+--
+
 4. Equilibration
   - Let the system evolve at T and ensure the system is stable.
+
+--
+
 5. Production dynamics
   - Simulate the system under specified conditions (NVE, NVT, NPT)
   - Collect structure and velocity data
+
+--
+
 6. Analysis and analytics
   - Timeseries and Correlation, PCA
 
@@ -121,9 +137,12 @@ For example the general CHARMM, AMBER, GROMOS etc.
 
 # Solvation
 
-Many biological events take place in aqueous media.
-Explicit: Water molecules added
-Implicit: continuum dielectric
+Rationale: Many biological events take place in aqueous media.
+- Explicit: solvent molecules added (often water)
+- Implicit: continuum dielectric
+
+.image-100[![](../images/7cel_waterbox_galaxy.png)]
+
 
 ---
 
@@ -139,7 +158,8 @@ Folding funnel and accessible space.
 
 # Ensembles
 
-A mental or virtual collection of a very large number of copies of a system. Each copy represents a possible state ththat real system may be in.
+A mental or virtual collection of a very large number of copies of a system. Each copy represents a possible state that the real system may be in.
+
 *A statistical ensemble is a probability distribution for the state of the system.* (https://en.wikipedia.org/wiki/Statistical_ensemble_(mathematical_physics))
 
 Thermodynamic ensembles are in statistical equilibrium over particular macroscopic properties
@@ -147,18 +167,19 @@ Thermodynamic ensembles are in statistical equilibrium over particular macroscop
 - Canonical (constant N V T)
 - Gibbs or Isobaric-isothermal (constant N P T)
 
-.footnote[See Statistical Mechanics, McQuarrie for more in depth theory ISBN:9781891389153]
+.footnote[N=number of particles, V=volume, P=Pressure, T=Temperature, [See Statistical Mechanics, McQuarrie for more in depth theory ISBN:9781891389153](https://books.google.co.za/books/about/Statistical_Mechanics.html?id=itcpPnDnJM0C&redir_esc=y)]
 
 ---
 
 # Molecular Dynamics Engines
 
-
-- CHARMM
-- NAMD
+These are programs that create the ensemble (create trajectories).
+- [CHARMM](https://www.charmm.org/charmm/)
+- [NAMD](http://www.ks.uiuc.edu/Research/namd/)
 - GROMACS
 - OpenMM
-etc.
+
+.footnote[* non exhaustive list *]
 
 ---
 # Example input file and the shell
@@ -166,29 +187,64 @@ gif from asciicinema?
 
 ---
 
-# Issues
+# Challenges faced
 - Parameters
+
+--
+
 - Version control
+
+--
+
 - Sharing  inputs and data
+
+--
+
 - Ensuring the correct version is used and tracking changesa
+
+--
+
 - Scripts for serial vs parallel and for queueing systems
+
+--
+
 - Bespoke scripts that temp solve challenges and are not reusable in the lab. 
 
 ---
 
-# Solving these kinds of issues
+# Overcoming challenges
 - Train team to use collaborative version control.
-- Use coding practices etc.
-- Sometimes this is a challenge
-- A community of practice and an easier barrier to entry
+
+--
+
+- Use coding practices etc. , this can be a whole new challenge (!)
+
+--
+
+- A community of practice using common workflows may be an easier barrier to entry
 
 ---
 # Common challenges
-- MD scripting languages can be complex. easy to make errors in files (untested)
+- MD scripting languages can be complex. easy to make errors in files.
+
+--
+
 - unforced errors in command line arguments and flags
+
+--
+
 - verification and testing
+
+--
+
 - repeating the simulation, errors can result. Auditing.
+
+--
+
 - sharing 
+
+--
+
 - idiosyncracies of the MD engine inhibit use
 
 ---
@@ -203,8 +259,7 @@ Batteries included!
 - reproducibility / repeatability 
 - data typing
 
-.footnote[Are there alternatives? Yes. https://www.commonwl.org/ https://www.nextflow.io/]
-
+.footnote[Are there alternatives? Yes. [nextflow](https://www.nextflow.io/), [cwl](https://www.commonwl.org/)]
 
 
 ---
@@ -226,7 +281,7 @@ https://github.com/scientificomputing/bridge
 1. Setting up molecular systems ([tutorial](../tutorials/setting-up-molecular-systems/tutorial.html))
 2. Running molecular dynamics simulations ([tutorial](../tutorials/md-simulations/tutorial.html))
 3. Analysing molecular dynamics simulations ([tutorial](../tutorials/analysis-md-simulations/tutorial.html)) 
-4. Visualisation ([tutorial](../tutorials/formats-visualisation/tutorial.html))  
+4. Visualisation ([tutorial](../tutorials/formats-visualisation/slides.html))  
 
 ---
 
