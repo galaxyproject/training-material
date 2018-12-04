@@ -119,7 +119,7 @@ Let's start with a fresh history.
 >    ![History section](../../images/intro_01.png)
 >
 >    Directly uploading files is not the only way to get data into Galaxy
->    {% include snippets/import_via_link.md format="bed" genome="mm9" %}
+>    {% include snippets/import_via_link.md format="interval" %}
 >
 >    > ### {% icon tip %} Tip: Importing data to Galaxy
 >    > There are [more options]({{ site.baseurl }}/topics/galaxy-data-manipulation/tutorials/get-data/slides.html) for advanced users.
@@ -594,7 +594,7 @@ The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers
 >    https://zenodo.org/record/1025586/files/mm9.RefSeq_genes_from_UCSC.bed
 >    ```
 >
->    {% include snippets/import_via_link.md type=bed genome=mm9 %}
+>    {% include snippets/import_via_link.md type="bed" genome="mm9" %}
 >
 >    > ### {% icon tip %} Tip: Importing data from a data library
 >    >
