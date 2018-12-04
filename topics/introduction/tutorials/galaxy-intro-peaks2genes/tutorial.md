@@ -345,7 +345,7 @@ you want to include transcriptions factors in ChIP-seq experiments. There is no 
 > ### {% icon hands_on %} Hands-on: Add promoter region to gene records
 >
 > 1. **Get Flanks** {% icon tool %}: Run **Get flanks returns flanking region/s for every gene** with the following settings:
->     - *"Select data"*: file from UCSC
+>     - *"Select data"*: Genes file from UCSC
 >     - *"Region"*: `Around Start`
 >     - *"Location of the flanking region/s"*: `Upstream`
 >     - *"Offset"*: `10000`
