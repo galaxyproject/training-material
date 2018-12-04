@@ -9,10 +9,10 @@
 >    > * Select **Paste/Fetch Data**
 >    > * Paste the link into the text field
 >    > {% if include.format %}
->    > * Change **Type** from "Auto-detect" to {{ include.format }}
+>    > * Change **Type** from "Auto-detect" to `{{ include.format }}`
 >    > {% endif %}
 >    > {% if include.genome %}
->    > * Change **Genome** to {{ include.genome }}
+>    > * Change **Genome** to `{{ include.genome }}`
 >    > {% endif %}
 >    > * Press **Start**
 >    > {% if include.collection %}
