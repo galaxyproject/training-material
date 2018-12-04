@@ -1231,9 +1231,9 @@ Well done! {% icon trophy %} You have completed the basics of the Schloss lab's 
 
 ### Can't get enough?
 
-Below are some more exercises for those who wish to go into more details about statistical significance testing and population-level analysis.
+Below are some more exercises for those who wish to go into more detail about statistical significance testing and population-level analysis.
 
-Or, click [here](#wrap-up) to skip this extra credit section.
+Or, click [here](#wrap-up) to jump to the end and skip this extra credit section.
 
 
 # Extra Credit
