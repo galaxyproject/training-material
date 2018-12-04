@@ -47,6 +47,8 @@ The closest thing we could find is a file in GEO containing a list of the region
 
 The goal of this exercise is to **turn this list of genomic regions into a list of possible target genes**.
 
+{% include snippets/warning_results_may_vary.md %}
+
 > ### Agenda
 >
 > In this tutorial, we will deal with:
@@ -432,6 +434,7 @@ We will group the table by chromosome and count the number of genes with peaks o
 >    > Which chromosome contained the highest number of target genes?
 >    >
 >    > > ### {% icon solution %} Solution
+>    > >
 >    > > The result varies with different settings, for example, the annotation may change due to updates at UCSC. If you followed step by step, with the same annotation, it should be chromosome 11 with 1992 genes. Note that for reproducibility, you should keep all input data used because Galaxy can store all parameters but inputs may change e.g. the annotation from UCSC.
 >    > {: .solution }
 >    {: .question}
