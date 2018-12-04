@@ -451,6 +451,9 @@ Since we have some nice data, let's draw a barchart out of it!
 > 2. Select `Bar diagram`
 > 3. Choose a title at **Provide a title**, e.g. `Gene counts per chromosome`
 > 4. Switch to the {% icon galaxy-chart-select-data %} **Select data** tab and play around with the settings
+> 5. When you are happy, click the {% icon galaxy-save %} **Save** visualization in the top right of the *main panel*
+>
+>    This will store it to your saved visualisations where you can later view, download, or share with others.
 >
 {: .hands_on}
 
