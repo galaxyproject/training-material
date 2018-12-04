@@ -1220,8 +1220,21 @@ innermost ring labeled "Bacteria"
 > {: .solution }
 {: .question}
 
-Well done! you have completed the basics of the mothur SOP. Below are some more exercises for those who wish to
-go into more details about statistical significance testing and population-level analysis.
+
+# Conclusion
+{:.no_toc}
+
+Well done! {% icon trophy %} You have completed the basics of the Schloss lab's Standard Operating Procedure for Illumina MiSeq data. You have worked your way through the following pipeline:
+
+![Mothur sop tutorial pipeline](../../images/mothur_sop_pipeline.jpg){:width="50%"}
+
+
+### Can't get enough?
+
+Below are some more exercises for those who wish to go into more details about statistical significance testing and population-level analysis.
+
+Or, click [here](#wrap-up) to skip this extra credit section.
+
 
 # Extra Credit
 
@@ -1668,10 +1681,8 @@ Otu0082    0.08
 Otu0042    0.07
 ```
 
-# Conclusion
+# Wrap-up
 {:.no_toc}
 
-You have now seen how to perform the Schloss lab's Standard Operating Procedure (SOP) for MiSeq data.
-You have worked your way through the following pipeline:
+Well done! You have now seen how to perform the complete Schloss lab's Standard Operating Procedure (SOP) for MiSeq data.
 
-![Mothur sop tutorial pipeline](../../images/mothur_sop_pipeline.jpg)
