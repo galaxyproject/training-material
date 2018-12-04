@@ -576,10 +576,7 @@ Now we cut out just the chromosome plus the start and end of the summit:
 >
 > 2. Change the format to `interval` (use the {% icon galaxy-pencil %}) since that's what the tool **Intersect** expects.
 >
->    1. Click {% icon galaxy-pencil %}
->    2. Select the {% icon galaxy-chart-select-data %} Datatypes tab
->    3. *"New Type"*: select `interval`
->    4. Click **Change Datatype**
+>    {% include snippets/change_datatype.md datatype="interval" %}
 >
 >    The output should look like below:
 >
