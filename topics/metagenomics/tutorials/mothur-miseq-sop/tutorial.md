@@ -35,14 +35,7 @@ creators of the Mothur software package, the [Schloss lab](http://www.schlosslab
 {: .agenda}
 
 
-> ### {% icon comment %} Note
-> Each of the Mothur tools in Galaxy contains a link to the mothur wiki in the help section. Here you can find
-> more details about all the inputs, outputs and parameters for the tool.
-> <br><br>
-> Your results may deviate slightly from the ones presented in this tutorial due to differing tool or
-> reference data versions or stochastic processes in the algorithms.
-{: .comment}
-
+{% include snippets/warning_results_may_vary.md %}
 
 # Obtaining and preparing data
 
