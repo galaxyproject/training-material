@@ -536,35 +536,44 @@ In part 1 we used an overlap definition of 1 bp (default setting) to identify ge
 
 ## Preparation
 
-Create a new history and name it. If you forgot how to do that, you can have a look at the beginning of this tutorial.
-The history is now empty, but we need our peak file again. Before we upload it twice, we can copy it from our former history:
+We again need our peak file, but we'd like to work in a clean history. Instead of uploading it twice, we can copy it to a new history.
 
 > ### {% icon hands_on %} Hands-on: Copy history items
 >
-> 1. Click on the **View all histories** ({% icon galaxy-columns %} icon) at the top right of your history
+> 1. Create a new history and give it a new name like `Galaxy Introduction Part 2`
+>
+>    If you have forgotten how to do that, you can check the beginning of this tutorial.
+>
+> 2. Click on the **View all histories** ({% icon galaxy-columns %} icon) at the top right of your history
 >
 >       You should see both of your histories side-by-side now
 >
-> 2. Use drag-and-drop with your mouse to copy the edited peak file (after the replace steps), which contains the summit information, to your new history.
-> 3. Click on **Analyze Data** in the top panel to go back to your analysis window
+> 3. Drag and drop the edited peak file (`Peak regions`, after the replace steps), which contains the summit information, to your new history.
+> 4. Click on **Analyze Data** in the top menu bar to go back to your analysis window
 >
 {: .hands_on}
 
 ## Create peak summit file
 
-We need to generate a new BED file from the original peak file that contains the positions of the peak summits. The start of the summit is the start of the peak (column 2) plus the location within the peak that has the highest hypothetical DNA fragment coverage (column 5). As the end we simply define `start + 1`.
+We need to generate a new BED file from the original peak file that contains the positions of the peak summits. The start of the summit is the start of the peak (column 2) plus the location within the peak that has the highest hypothetical DNA fragment coverage (column 5). As the end of the peak region, we will simply define `start + 1`.
 
 > ### {% icon hands_on %} Hands-on: Create peak summit file
 >
-> 1. **Compute** {% icon tool %}: Run **Compute an expression on every row** with the following settings:
+> 1. **Compute an expression on every row** {% icon tool %} with the following parameters:
 >   - *"Add expression"*: `c2+c5`
 >   - *"as a new column to"*: our peak file `Peak regions` (the interval format file)
 >   - *"Round result?"*: `YES`
-> 2. **Compute an expression on every row** {% icon tool %}: rerun this tool on the last result with:
+>
+>   This will create an 8th column in our table, which we will use in our next step:
+>
+> 2. Rename the output `Peak regions new column`
+>
+> 3. **Compute an expression on every row** {% icon tool %}: rerun this tool on the last result with:
 >   - *"Add expression"*: `c8+1`
->   - *"as a new column to"*: the **Compute** result from step 1
+>   - *"as a new column to"*: the `Peak regions new column` file we just created
 >   - *"Round result?"*: `YES`
 >
+> 4. Rename this file `Peak summit regions`
 {: .hands_on}
 
 Now we cut out just the chromosome plus the start and end of the summit:
@@ -573,7 +582,7 @@ Now we cut out just the chromosome plus the start and end of the summit:
 > 1. **Cut** {% icon tool %}: Run **Cut columns from a table** with the following settings:
 >   - *"Cut columns"*: `c1,c8,c9`
 >   - *"Delimited by Tab"*: `Tab`
->   - *"From"*: our latest history item
+>   - *"From"*: `Peak summit regions`
 >
 >    The output from **Cut** will be in `tabular` format.
 >
@@ -602,16 +611,9 @@ The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers
 >    https://zenodo.org/record/1025586/files/mm9.RefSeq_genes_from_UCSC.bed
 >    ```
 >
->    {% include snippets/import_via_link.md type="bed" genome="mm9" %}
+>    {% include snippets/import_via_link.md genome="mm9" %}
 >
->    > ### {% icon tip %} Tip: Importing data from a data library
->    >
->    > * Go into **Shared data** (top panel) then **Data libraries**
->    > * Click on "Training data" and then "Introduction - From peaks to genes"
->    > * Select interesting file
->    > * Click on "Import selected datasets into history"
->    > * Import in a new history
->    {: .tip}
+>    {% include snippets/import_from_data_library.md path='Click on "Training data" and then "Introduction - From peaks to genes"' %}
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
@@ -645,10 +647,11 @@ But wouldn't it be more interesting to know the number of peaks in each unique g
 > 1. Open the workflow menu (top menu bar)
 > 2. Find the workflow you made in the previous section, and select the option **Run**
 > 3. Choose as inputs our `mm9.RefSeq_genes` (`#genes`) BED file and the result of the **Cut** tool (`#peaks`)
-> 4. Click on the title of the Group tool to expand the options.
+> 4. Click on the title of the {% icon tool %} **Group** tool to expand the options.
 > 5. Change the following settings by clicking on the {% icon galaxy-pencil %} (pencil) icon on the left:
->     - **Group by column**: `7`
->     - **Operation -> On column**: `7`
+>     - *"Group by column"*: `7`
+>     - In *"Operation"*:
+>       - *"On column"*: `7`
 > 6. Click **Run workflow**
 {: .hands_on}
 
