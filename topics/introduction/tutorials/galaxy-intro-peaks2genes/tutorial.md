@@ -28,6 +28,7 @@ contributors:
   - nsoranzo
   - dyusuf
   - sarah-peter
+  - erasche
 ---
 
 # Introduction
@@ -202,7 +203,10 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 > 5. Make sure that *"Create one BED record per"* is set to `Whole Gene`
 > 6. Click on the **Send Query to Galaxy** button
 > 7. Wait for the upload to finish
-> 8. Rename our dataset ({% icon galaxy-pencil %} (pencil) icon) to something more recognizable (`Genes`)
+> 8. Rename our dataset to something more recognizable like `Genes`
+>
+>    {% include snippets/rename_dataset.md name="Genes" %}
+>
 > 9. Add a tag called `#genes` to the dataset to make it easier to track in the history
 >
 {: .hands_on}
