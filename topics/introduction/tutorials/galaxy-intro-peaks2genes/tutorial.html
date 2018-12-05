@@ -629,6 +629,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
           <li><strong>Close</strong> the window</li>
         </ul>
 
+        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
       </blockquote>
 
       <blockquote class="tip">
@@ -1187,48 +1188,60 @@ Wouldn’t it be nice to just convert this history into a workflow that we’ll 
 
 <h2 id="preparation">Preparation</h2>
 
-<p>Create a new history and name it. If you forgot how to do that, you can have a look at the beginning of this tutorial.
-The history is now empty, but we need our peak file again. Before we upload it twice, we can copy it from our former history:</p>
+<p>We again need our peak file, but we’d like to work in a clean history. Instead of uploading it twice, we can copy it to a new history.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-copy-history-items"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Copy history items</h3>
 
   <ol>
     <li>
+      <p>Create a new history and give it a new name like <code class="highlighter-rouge">Galaxy Introduction Part 2</code></p>
+
+      <p>If you have forgotten how to do that, you can check the beginning of this tutorial.</p>
+    </li>
+    <li>
       <p>Click on the <strong>View all histories</strong> (<i class="fa fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-columns</span> icon) at the top right of your history</p>
 
       <p>You should see both of your histories side-by-side now</p>
     </li>
-    <li>Use drag-and-drop with your mouse to copy the edited peak file (after the replace steps), which contains the summit information, to your new history.</li>
-    <li>Click on <strong>Analyze Data</strong> in the top panel to go back to your analysis window</li>
+    <li>Drag and drop the edited peak file (<code class="highlighter-rouge">Peak regions</code>, after the replace steps), which contains the summit information, to your new history.</li>
+    <li>Click on <strong>Analyze Data</strong> in the top menu bar to go back to your analysis window</li>
   </ol>
 
 </blockquote>
 
 <h2 id="create-peak-summit-file">Create peak summit file</h2>
 
-<p>We need to generate a new BED file from the original peak file that contains the positions of the peak summits. The start of the summit is the start of the peak (column 2) plus the location within the peak that has the highest hypothetical DNA fragment coverage (column 5). As the end we simply define <code class="highlighter-rouge">start + 1</code>.</p>
+<p>We need to generate a new BED file from the original peak file that contains the positions of the peak summits. The start of the summit is the start of the peak (column 2) plus the location within the peak that has the highest hypothetical DNA fragment coverage (column 5). As the end of the peak region, we will simply define <code class="highlighter-rouge">start + 1</code>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-create-peak-summit-file"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create peak summit file</h3>
 
   <ol>
-    <li><strong>Compute</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <strong>Compute an expression on every row</strong> with the following settings:
+    <li><strong>Compute an expression on every row</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><em>“Add expression”</em>: <code class="highlighter-rouge">c2+c5</code></li>
         <li><em>“as a new column to”</em>: our peak file <code class="highlighter-rouge">Peak regions</code> (the interval format file)</li>
         <li><em>“Round result?”</em>: <code class="highlighter-rouge">YES</code></li>
       </ul>
     </li>
+  </ol>
+
+  <p>This will create an 8th column in our table, which we will use in our next step:</p>
+
+  <ol>
+    <li>
+      <p>Rename the output <code class="highlighter-rouge">Peak regions new column</code></p>
+    </li>
     <li><strong>Compute an expression on every row</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: rerun this tool on the last result with:
       <ul>
         <li><em>“Add expression”</em>: <code class="highlighter-rouge">c8+1</code></li>
-        <li><em>“as a new column to”</em>: the <strong>Compute</strong> result from step 1</li>
+        <li><em>“as a new column to”</em>: the <code class="highlighter-rouge">Peak regions new column</code> file we just created</li>
         <li><em>“Round result?”</em>: <code class="highlighter-rouge">YES</code></li>
       </ul>
     </li>
+    <li>Rename this file <code class="highlighter-rouge">Peak summit regions</code></li>
   </ol>
-
 </blockquote>
 
 <p>Now we cut out just the chromosome plus the start and end of the summit:</p>
@@ -1240,7 +1253,7 @@ The history is now empty, but we need our peak file again. Before we upload it t
       <ul>
         <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c1,c8,c9</code></li>
         <li><em>“Delimited by Tab”</em>: <code class="highlighter-rouge">Tab</code></li>
-        <li><em>“From”</em>: our latest history item</li>
+        <li><em>“From”</em>: <code class="highlighter-rouge">Peak summit regions</code></li>
       </ul>
 
       <p>The output from <strong>Cut</strong> will be in <code class="highlighter-rouge">tabular</code> format.</p>
@@ -1307,17 +1320,26 @@ The history is now empty, but we need our peak file again. Before we upload it t
           <li><strong>Close</strong> the window</li>
         </ul>
 
+        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
       </blockquote>
 
       <blockquote class="tip">
+
         <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
 
+        <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
         <ul>
-          <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>
-          <li>Click on “Training data” and then “Introduction - From peaks to genes”</li>
-          <li>Select interesting file</li>
-          <li>Click on “Import selected datasets into history”</li>
-          <li>Import in a new history</li>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Click on “Training data” and then “Introduction - From peaks to genes”</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
         </ul>
       </blockquote>
 
@@ -1362,11 +1384,15 @@ But wouldn’t it be more interesting to know the number of peaks in each unique
     <li>Open the workflow menu (top menu bar)</li>
     <li>Find the workflow you made in the previous section, and select the option <strong>Run</strong></li>
     <li>Choose as inputs our <code class="highlighter-rouge">mm9.RefSeq_genes</code> (<code class="highlighter-rouge">#genes</code>) BED file and the result of the <strong>Cut</strong> tool (<code class="highlighter-rouge">#peaks</code>)</li>
-    <li>Click on the title of the Group tool to expand the options.</li>
+    <li>Click on the title of the <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Group</strong> tool to expand the options.</li>
     <li>Change the following settings by clicking on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (pencil) icon on the left:
       <ul>
-        <li><strong>Group by column</strong>: <code class="highlighter-rouge">7</code></li>
-        <li><strong>Operation -&gt; On column</strong>: <code class="highlighter-rouge">7</code></li>
+        <li><em>“Group by column”</em>: <code class="highlighter-rouge">7</code></li>
+        <li>In <em>“Operation”</em>:
+          <ul>
+            <li><em>“On column”</em>: <code class="highlighter-rouge">7</code></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li>Click <strong>Run workflow</strong></li>
