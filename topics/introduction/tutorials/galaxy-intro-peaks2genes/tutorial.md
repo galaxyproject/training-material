@@ -246,19 +246,23 @@ Let's have a look at our files to see what we actually have here.
 >
 > While the file from UCSC has labels for the columns, the peak file does not. Can you guess what the columns stand for?
 >
+>
+> > ### {% icon solution %} Solution
+> >
+> > This peak file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper the authors mention that they used the peak caller [HPeak](https://www.ncbi.nlm.nih.gov/pubmed/20598134).
+> >
+> > By looking at the HPeak manual we can find out that the columns contain the following information:
+> >
+> >  - chromosome name by number
+> >  - start coordinate
+> >  - end coordinate
+> >  - length
+> >  - location within the peak that has the highest hypothetical DNA fragment coverage (summit)
+> >  - not relevant
+> >  - not relevant
+> >
+> {: .solution}
 {: .question}
-
-This peak file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper the authors mention that they used the peak caller [HPeak](https://www.ncbi.nlm.nih.gov/pubmed/20598134).
-
-By looking at the HPeak manual we can find out that the columns contain the following information:
-
- - chromosome name by number
- - start coordinate
- - end coordinate
- - length
- - location within the peak that has the highest hypothetical DNA fragment coverage (summit)
- - not relevant
- - not relevant
 
 In order to compare the two files, we have to make sure that the chromosome names follow the same format.
 As we can see, the peak file lacks `chr` before any chromosome number. But what happens with chromosome 20 and 21? Will it be X and Y instead? Let's check:
