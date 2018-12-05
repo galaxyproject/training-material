@@ -5,7 +5,7 @@
 >    >
 >    > * Go into **Shared data** (top panel) then **Data libraries**
 >    > {% if include.path %}
->    > {{ include.path }}
+>    > * {{ include.path }}
 >    > {% else %}
 >    > * Find the correct folder (ask your instructor)
 >    > {% endif %}
