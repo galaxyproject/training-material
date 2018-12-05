@@ -511,7 +511,7 @@ It is usual that the quality of the sequences is worse for the reverse than for 
 >     32 30 16 17 -2 -3 1 -6 -8 -7
 >     ```
 >
-> 2. Sum up the numbers, starting from the end (partial sums) and stop early if the sum is greater than zero
+> 2. Add up the numbers, starting from the end (partial sums) and stop early if the sum is greater than zero
 >
 >     ```
 >     (70) (38) 8 -8 -25 -23 -20, -21 -15 -7
