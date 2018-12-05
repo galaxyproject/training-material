@@ -10,6 +10,7 @@ contributors:
   - shiltemann
   - pajanne
   - nsoranzo
+  - erasche
 ---
 
 # What is Galaxy?
@@ -60,6 +61,11 @@ If the Galaxy framework makes everything as simple as possible, researchers are 
 
 # User Interface
 
+???
+
+So now that we know what Galaxy and the Galaxy Project are all about, let's
+look at the Galaxy interface.
+
 ---
 
 ### Main Galaxy interface
@@ -73,6 +79,7 @@ Home page divided into 3 panels
 ### Top menu
 
 ![Top menu](../images/galaxy_interface_menu.png)
+
 
 Link            | Usage
 --              | --
@@ -93,14 +100,10 @@ Link            | Usage
 
 ### Tools
 
-- Each tool is a text file describing:
+.image-50[![](../images/galaxy_tool.png)]
+- Tools are simply text files with:
   - input datasets, parameters, commands, and outputs
   - help, tests, citations, dependency requirements
-- Free tool store: [Galaxy Tool Shed](https://toolshed.g2.bx.psu.edu/)
-  - Thousands of tools already available
-  - Every software can be embedded
-     - If a tool is not available, ask the Galaxy community for help!
-  - Only a Galaxy admin can install tools
 - New versions can be installed without removing old ones to ensure reproducibility
 
 ???
@@ -112,6 +115,18 @@ A tool describes:
 - the output datasets the tool should produce and their datatypes
 
 Tools can be viewed as tiny LEGO pieces: each one solves a specific problem, and they can be combined together to build complex analysis pipelines.
+
+
+---
+
+### ToolShed
+
+.image-50[![](../images/galaxy_ts.png)]
+- Free "app" store: [Galaxy Tool Shed](https://toolshed.g2.bx.psu.edu/)
+  - Thousands of tools already available
+  - Most software can be made available
+     - If a tool is not available, ask the Galaxy community for help!
+  - Only a Galaxy admin can install tools
 
 ---
 
@@ -131,35 +146,56 @@ Tools can be viewed as tiny LEGO pieces: each one solves a specific problem, and
 
 ???
 
-We say <i>datasets</i> to refer to files as well as databases
+- We say <i>datasets</i> to refer to files as well as databases
+- Purged means permanently deleted
 
-Purged means permanently deleted
 ---
 
 ### Multiple histories
 
 - You can have as many histories as you want
-
   - each history should correspond to a **different analysis**
-
   - and should have a meaningful **name**
+
+.image-75[![](../images/galaxy_interface_multiple_histories.png)]
+
+???
+
+- Give it a good name so you can find it later. I have around a hundred histories and after a month I can't remember what I was doing in some, so a good name is important.
+- You can drag and drop datasets between histories
 
 ---
 
 ### History options menu
 
-- History behavior is controlled by the *History options* (gear icon) <img style="float: right;" alt="History menu" src="../images/galaxy_interface_history_long_menu.png" />
-
-.image-25[![History options gear button](../images/galaxy_interface_history_menu.png)]
-
+.pull-left[
+History behavior is controlled by the *History options* (gear icon)
+![History menu](../images/galaxy_interface_history_long_menu.png)
+]
+.pull-right[
+.image-75[![History options gear button](../images/galaxy_interface_history_menu.png)]
 - *Create New* history will **not** make your current history disappear
-- To list all your histories, choose *Saved Histories*
+- To see all of your histories, use the history switcher
+
+  .image-50[![History Switcher](../images/galaxy_interface_history_switch.png)]
+
 - You can *Copy Datasets* from one history to another
-  - saves disk space and your quota
+]
+
+???
+
+- Copying datasets between histories does not affect your quota, it doesn't
+  duplicate the dataset, just makes a link.
 
 ---
 
 # Loading data
+
+???
+
+So now you know about the tools to manipulate data and the history where you
+can see your data, your inputs and outputs. Let's discuss how to get data into
+Galaxy
 
 ---
 
@@ -183,10 +219,12 @@ See [Getting data into Galaxy](../../galaxy-data-manipulation/tutorials/get-data
 - For datasets produced by a tool, the datatype is assigned by the tool
 - Tools only accept input datasets with the appropriate datatypes
 - You can change the datatype of a dataset in 2 ways:
-  - Edit Attributes -> Datatype
-  - Edit Attributes -> Convert Formats
+  - Edit Attributes → Datatype
+  - Edit Attributes → Convert Formats
 
 ???
+
+- If galaxy gets dataset wrong ⇒ when you upload data, galaxy will try to autodetect but can get it wrong, so you may need to correct.
 
 - Edit Attributes -> Datatype is used to fix a wrongly assigned datatype
 - Edit Attributes -> Convert Formats creates a new dataset using a tool that converts the original dataset in the new format
@@ -196,15 +234,31 @@ See [Getting data into Galaxy](../../galaxy-data-manipulation/tutorials/get-data
 
 ### Reference genomes
 
+.pull-left[
 - Genome build specifies which genome assembly a dataset is associated with
   - e.g. mm10, hg38...
-- Genome build can be automatically detected or assigned by user
-- User can define their own custom genome build
-- New genome assemblies can be added by the site Galaxy admin
+- Can be automatically detected or assigned by user
+- Users can create custom genome builds
+- New builds can be added by the admin
+]
+
+.pull-right[
+![Genome Builds](../images/galaxy_interface_build.png)
+]
+
+???
+
+- Just like datatypes, you can tell galaxy what ref genome your file uses. some tools need to know this, and then galaxy tells the tool for you.
 
 ---
 
 # Workflows
+
+???
+
+Now that you've got data into Galaxy, you know you can use tools to manipulate
+this data, and histories to keep track of what you've done you're only missing one key part:
+Workflows. These help you easily reproduce the exact analysis that you ran.
 
 ---
 
@@ -214,6 +268,13 @@ See [Getting data into Galaxy](../../galaxy-data-manipulation/tutorials/get-data
 
 ???
 
+Biologist:
+- workflows are great
+- single button to run all of these 50 different tools
+- a lot of work once to figure out analysis, but easy in the future to just rerun, go get coffee and wait for thing to be done :)
+
+
+Bioinf / dev:
 - Boxes are workflow steps
   - 2 types: *input* and *tool* steps
 - Steps are connected by arrows representing the flow of datasets
@@ -240,26 +301,29 @@ See [Getting data into Galaxy](../../galaxy-data-manipulation/tutorials/get-data
 - Create **sub**-workflows: a workflow inside another workflow
 - **Share** workflows for publication and with the community
 
+???
+
+Potential information overload for newbies
+
 ---
 
 ### Data sharing
 
-- You can share your Galaxy items - histories, workflows, visualizations, and pages - with other people in three different ways:
+- Share everything you do in Galaxy: histories, workflows, and visualizations can all be shared with others:
   - Directly using a Galaxy account's email addresses on the same instance
   - Using a web link, with anyone who knows the link
   - Using a web link and publishing it to make it accessible to everyone from the *Shared Data* menu
-
-
-- Tools are shared using the free tool store: [Galaxy Tool Shed](https://toolshed.g2.bx.psu.edu/)
 
 ---
 
 ### Data visualization
 
-- Charts
-- Each datatype can have some visualizations associated
-- Track browser called Trackster
-  - To visualize genomic data in a tightly integrated way
+![](../../dev/images/charts_examples2.png)
+
+- Datatypes know what tools can be used to visualize them:
+  - Sequencing data has a button for visualizing in IGV
+  - Tabular data will prompt you to build charts
+  - Protein data can be seen in a 3D viewer
 
 ---
 
@@ -268,4 +332,6 @@ See [Getting data into Galaxy](../../galaxy-data-manipulation/tutorials/get-data
 - Be part of an active and friendly community
 - Get support and your questions answered on [Galaxy Help](https://help.galaxyproject.org/)
 - Access community curated documentation on [Galaxy Community Hub](https://www.galaxyproject.org/)
-- Learn more about Galaxy for scientists and for developers and admins on [Galaxy Training Community]({{site.url}}/{{site.baseurl}})
+- Training Community:
+  - Learn more about Galaxy for scientists and for developers and admins on [Galaxy Training Community]({{site.url}}/{{site.baseurl}})
+  - Chat with us on [Gitter](https://gitter.im/Galaxy-Training-Network/Lobby)
