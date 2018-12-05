@@ -162,6 +162,10 @@
                                         
                                     
                                         
+                                    
+                                        
+                                    
+                                        
                                         <a class="dropdown-item" href="https://usegalaxy.eu" title="Galaxy Europe">
                                             Galaxy Europe
                                         </a>
@@ -173,6 +177,8 @@
                                         <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
                                             Galaxy@GenOuest
                                         </a>
+                                        
+                                    
                                         
                                     
                                         
@@ -289,8 +295,8 @@
         <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
             Chat on Gitter
         </a>
-        <a class="dropdown-item" href="https://biostar.usegalaxy.org/" title="Ask on Biostars">
-            Ask questions on Biostars
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
         </a>
     </div>
 </li>
@@ -370,6 +376,10 @@
     {
       "@type": "Person",
       "name": "sarah-peter"
+    },
+    {
+      "@type": "Person",
+      "name": "erasche"
     }
   ],
   "description": "The questions this  addresses are:\n - How to use Galaxy?\n - How to get from peak regions to a list of gene names?\n\n\\nThe objectives are:\n - Familiarize yourself with the basics of Galaxy\n - Learn how to obtain data from external sources\n - Learn how to run tools\n - Learn how histories work\n - Learn how to create a workflow\n - Learn how to share your work\n\n"
@@ -475,6 +485,15 @@ The closest thing we could find is a file in GEO containing a list of the region
 
 <p>The goal of this exercise is to <strong>turn this list of genomic regions into a list of possible target genes</strong>.</p>
 
+<blockquote class="comment">
+  <h3 id="comment-note-results-may-vary"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note: results may vary</h3>
+
+  <p>Your results may be slightly different from the ones presented in this tutorial
+due to differing versions of tools, reference data, external databases, or
+because of stochastic processes in the algorithms.</p>
+
+</blockquote>
+
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
 
@@ -552,9 +571,8 @@ The closest thing we could find is a file in GEO containing a list of the region
 
             <p><img src="../../../../shared/images/rename_history.png" alt="Renaming history" /></p>
           </li>
-          <li>
-            <p>Type <code class="highlighter-rouge">Galaxy Introduction</code> as the name</p>
-          </li>
+          <li>Type <code class="highlighter-rouge">Galaxy Introduction</code> as the name</li>
+          <li>Press <kbd>Enter</kbd></li>
         </ul>
 
       </blockquote>
@@ -579,13 +597,46 @@ The closest thing we could find is a file in GEO containing a list of the region
     <li>Select <code class="highlighter-rouge">interval</code> as <strong>Type</strong></li>
     <li>Press <strong>Start</strong></li>
     <li>Press <strong>Close</strong></li>
-    <li>Wait for the upload to finish. Galaxy will automatically unpack the file.</li>
-  </ol>
-
-  <p>After this you will see your first history item in Galaxy’s right pane. It will go through
+    <li>
+      <p>Wait for the upload to finish. Galaxy will automatically unpack the file.</p>
+    </li>
+    <li>
+      <p>After this you will see your first history item in Galaxy’s right pane. It will go through
 the gray (preparing/queued) and yellow (running) states to become green (success):</p>
 
-  <p><img src="../../images/intro_01.png" alt="History section" /></p>
+      <p><img src="../../images/intro_01.png" alt="History section" /></p>
+
+      <p>Directly uploading files is not the only way to get data into Galaxy</p>
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Change <strong>Type</strong> from “Auto-detect” to <code class="highlighter-rouge">interval</code></p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-importing-data-to-galaxy"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data to Galaxy</h3>
+        <p>There are <a href="/training-material/topics/galaxy-data-manipulation/tutorials/get-data/slides.html">more options</a> for advanced users.</p>
+      </blockquote>
+    </li>
+  </ol>
 
 </blockquote>
 
@@ -601,21 +652,6 @@ the gray (preparing/queued) and yellow (running) states to become green (success
   <p>An optional strand column can also be specified, and an initial header row can be used to label the columns, which do not have to be in any special order. Unlike BED format (see below) arbitrary additional columns can also be present.</p>
 
   <p>You can find more information about formats that can be used in Galaxy at the <a href="https://usegalaxy.org/static/formatHelp.html">Galaxy Data Formats page</a>.</p>
-</blockquote>
-
-<blockquote class="tip">
-  <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
-
-  <p>You could also import this file via its link:</p>
-
-  <ul>
-    <li>Copy the link location</li>
-    <li>Open the Galaxy Upload Manager</li>
-    <li>Select <strong>Paste/Fetch Data</strong></li>
-    <li>Paste the link into the text field</li>
-    <li>Select <code class="highlighter-rouge">interval</code> as <strong>Type</strong></li>
-    <li>Press <strong>Start</strong></li>
-  </ul>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
@@ -708,8 +744,20 @@ we also need a list of genes in mice, which we can obtain from UCSC.</p>
     <li>Make sure that <em>“Create one BED record per”</em> is set to <code class="highlighter-rouge">Whole Gene</code></li>
     <li>Click on the <strong>Send Query to Galaxy</strong> button</li>
     <li>Wait for the upload to finish</li>
-    <li>Rename our dataset (<i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (pencil) icon) to something more recognizable (<code class="highlighter-rouge">Genes</code>)</li>
-    <li>Add a tag called <code class="highlighter-rouge">genes</code> to the dataset to make it easier to track in the history</li>
+    <li>
+      <p>Rename our dataset to something more recognizable like <code class="highlighter-rouge">Genes</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-rename-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Rename a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field  to <code class="highlighter-rouge">Genes</code></li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>Add a tag called <code class="highlighter-rouge">#genes</code> to the dataset to make it easier to track in the history</li>
   </ol>
 
 </blockquote>
@@ -763,21 +811,25 @@ we also need a list of genes in mice, which we can obtain from UCSC.</p>
 
   <p>While the file from UCSC has labels for the columns, the peak file does not. Can you guess what the columns stand for?</p>
 
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>This peak file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper the authors mention that they used the peak caller <a href="https://www.ncbi.nlm.nih.gov/pubmed/20598134">HPeak</a>.</p>
+
+    <p>By looking at the HPeak manual we can find out that the columns contain the following information:</p>
+
+    <ul>
+      <li>chromosome name by number</li>
+      <li>start coordinate</li>
+      <li>end coordinate</li>
+      <li>length</li>
+      <li>location within the peak that has the highest hypothetical DNA fragment coverage (summit)</li>
+      <li>not relevant</li>
+      <li>not relevant</li>
+    </ul>
+
+  </blockquote>
 </blockquote>
-
-<p>This peak file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper the authors mention that they used the peak caller <a href="https://www.ncbi.nlm.nih.gov/pubmed/20598134">HPeak</a>.</p>
-
-<p>By looking at the HPeak manual we can find out that the columns contain the following information:</p>
-
-<ul>
-  <li>chromosome name by number</li>
-  <li>start coordinate</li>
-  <li>end coordinate</li>
-  <li>length</li>
-  <li>location within the peak that has the highest hypothetical DNA fragment coverage (summit)</li>
-  <li>not relevant</li>
-  <li>not relevant</li>
-</ul>
 
 <p>In order to compare the two files, we have to make sure that the chromosome names follow the same format.
 As we can see, the peak file lacks <code class="highlighter-rouge">chr</code> before any chromosome number. But what happens with chromosome 20 and 21? Will it be X and Y instead? Let’s check:</p>
@@ -807,10 +859,10 @@ As we can see, the peak file lacks <code class="highlighter-rouge">chr</code> be
         </ol>
 
         <blockquote class="solution">
-          <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <ol>
             <li>The chromosomes are just given by their number. In the gene file from UCSC, they started with <code class="highlighter-rouge">chr</code></li>
-            <li>The chromosomes X and Y are names 20 and 21</li>
+            <li>The chromosomes X and Y are named 20 and 21</li>
           </ol>
         </blockquote>
       </blockquote>
@@ -845,9 +897,12 @@ As we can see, the peak file lacks <code class="highlighter-rouge">chr</code> be
         </li>
       </ul>
     </li>
+    <li>
+      <p>Rename your output file <code class="highlighter-rouge">chr prefix added</code>.</p>
+    </li>
     <li><strong>Replace Text</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Let’s rerun the tool with
       <ul>
-        <li><em>“File to process”</em>: the output from the last run, e.g. something like <code class="highlighter-rouge">Replace Text on data ...</code></li>
+        <li><em>“File to process”</em>: the output from the last run, <code class="highlighter-rouge">chr prefix added</code></li>
         <li><em>“in column”</em>: <code class="highlighter-rouge">Column:1</code></li>
         <li><em>“Find pattern”</em>: <code class="highlighter-rouge">chr20</code></li>
         <li><em>“Replace with”</em>: <code class="highlighter-rouge">chrX</code></li>
@@ -862,20 +917,33 @@ As we can see, the peak file lacks <code class="highlighter-rouge">chr</code> be
         </ul>
       </blockquote>
     </li>
+    <li>
+      <p>Rename your output file <code class="highlighter-rouge">chrX fixed</code></p>
+    </li>
     <li><strong>Replace Text</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Rerun this tool to do the same for chromosome Y
       <ul>
-        <li><em>“File to process”</em>: the output from the <strong>last</strong> run</li>
+        <li><em>“File to process”</em>: <code class="highlighter-rouge">chrX fixed</code>, the output from the last run</li>
         <li><em>“in column”</em>: <code class="highlighter-rouge">Column:1</code></li>
         <li><em>“Find pattern”</em>: <code class="highlighter-rouge">chr21</code></li>
         <li><em>“Replace with”</em>: <code class="highlighter-rouge">chrY</code></li>
       </ul>
     </li>
     <li>
-      <p>Inspect the latest file through the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon</p>
+      <p>Inspect the latest file through the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon. Have we been successful?</p>
 
-      <p>Have we been successful?</p>
+      <p>We have quite a few files now and need to take care to select the correct ones at each step.</p>
 
-      <p>We have quite some files now and should take care that we don’t lose track.</p>
+      <blockquote class="question">
+        <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>How many regions are in our output file? You can click the name of the output to expand it and see the number.</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>It should be equal to the number of regions in your first file, <code class="highlighter-rouge">GSE37268_mof3.out.hpeak.txt.gz</code>: 48,647
+If yours says 100 regions, then you have run it on the <code class="highlighter-rouge">Tail</code> file and need to re-run the steps.</p>
+        </blockquote>
+      </blockquote>
     </li>
     <li>Rename the file to something more recognizable, e.g. <code class="highlighter-rouge">Peak regions</code></li>
   </ol>
@@ -896,7 +964,7 @@ you want to include transcriptions factors in ChIP-seq experiments. There is no 
   <ol>
     <li><strong>Get Flanks</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <strong>Get flanks returns flanking region/s for every gene</strong> with the following settings:
       <ul>
-        <li><em>“Select data”</em>: file from UCSC</li>
+        <li><em>“Select data”</em>: <code class="highlighter-rouge">Genes</code> file from UCSC</li>
         <li><em>“Region”</em>: <code class="highlighter-rouge">Around Start</code></li>
         <li><em>“Location of the flanking region/s”</em>: <code class="highlighter-rouge">Upstream</code></li>
         <li><em>“Offset”</em>: <code class="highlighter-rouge">10000</code></li>
@@ -993,13 +1061,14 @@ We will group the table by chromosome and count the number of genes with peaks o
       </ul>
 
       <blockquote class="question">
-        <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <h3 id="question-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
         <p>Which chromosome contained the highest number of target genes?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-          <p>The result varies with different settings, for example, the annotation may change due to updates at UCSC. If you followed step by step, with the same annotation, it should be chromosome 7 with 1675 genes. Note that for reproducibility, you should keep all input data used because Galaxy can store all parameters but inputs may change e.g. the annotation from UCSC.</p>
+          <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>The result varies with different settings, for example, the annotation may change due to updates at UCSC. If you followed step by step, with the same annotation, it should be chromosome 11 with 1992 genes. Note that for reproducibility, you should keep all input data used because Galaxy can store all parameters but inputs may change e.g. the annotation from UCSC.</p>
         </blockquote>
       </blockquote>
     </li>
@@ -1019,6 +1088,11 @@ We will group the table by chromosome and count the number of genes with peaks o
     <li>Select <code class="highlighter-rouge">Bar diagram</code></li>
     <li>Choose a title at <strong>Provide a title</strong>, e.g. <code class="highlighter-rouge">Gene counts per chromosome</code></li>
     <li>Switch to the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Select data</strong> tab and play around with the settings</li>
+    <li>
+      <p>When you are happy, click the <i class="fa fa fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> <strong>Save</strong> visualization in the top right of the <em>main panel</em></p>
+
+      <p>This will store it to your saved visualisations where you can later view, download, or share it with others.</p>
+    </li>
   </ol>
 
 </blockquote>
@@ -1172,8 +1246,20 @@ The history is now empty, but we need our peak file again. Before we upload it t
       <p>The output from <strong>Cut</strong> will be in <code class="highlighter-rouge">tabular</code> format.</p>
     </li>
     <li>
-      <p>Change the format to <code class="highlighter-rouge">interval</code> (use the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span>) since that’s what the tool <strong>Intersect</strong> expects.
-The output should look like below:</p>
+      <p>Change the format to <code class="highlighter-rouge">interval</code> (use the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span>) since that’s what the tool <strong>Intersect</strong> expects.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="highlighter-rouge">interval</code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+
+      <p>The output should look like below:</p>
 
       <p><img src="../../images/intro_summits.png" alt="Peak summits" width="200px" /></p>
     </li>
@@ -1194,23 +1280,33 @@ The output should look like below:</p>
 
   <ol>
     <li>
-      <p>Import from <a href="https://zenodo.org/record/1025586">Zenodo</a> or from the data library the file <code class="highlighter-rouge">mm9.RefSeq_genes_from_UCSC.bed</code></p>
+      <p>From <a href="https://zenodo.org/record/1025586">Zenodo</a> or from the data library, import the file <code class="highlighter-rouge">mm9.RefSeq_genes_from_UCSC.bed</code></p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  https://zenodo.org/record/1025586/files/mm9.RefSeq_genes_from_UCSC.bed
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1025586/files/mm9.RefSeq_genes_from_UCSC.bed
 </code></pre></div>      </div>
 
       <blockquote class="tip">
+
         <h3 id="tip-tip-importing-data-via-links-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
 
         <ul>
           <li>Copy the link location</li>
-          <li>Open the Galaxy Upload Manager</li>
+          <li>
+            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+          </li>
           <li>Select <strong>Paste/Fetch Data</strong></li>
-          <li>Paste the link into the text field</li>
-          <li>Select “Type”: <code class="highlighter-rouge">bed</code></li>
-          <li>Select “Genome”: <code class="highlighter-rouge">mm9</code></li>
-          <li>Press <strong>Start</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Change <strong>Genome</strong> to <code class="highlighter-rouge">mm9</code></p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
         </ul>
+
       </blockquote>
 
       <blockquote class="tip">
@@ -1232,6 +1328,8 @@ The output should look like below:</p>
 It should look similar to below:
 <img src="../../images/intro_gene_names.png" alt="Gene names" /></p>
     </li>
+    <li>Rename it <code class="highlighter-rouge">mm9.RefSeq_genes</code></li>
+    <li>Apply the tag <code class="highlighter-rouge">#genes</code></li>
   </ol>
 
 </blockquote>
@@ -1245,7 +1343,7 @@ It should look similar to below:
   <ol>
     <li>Open the workflow menu (top menu bar)</li>
     <li>Find the workflow you made in the previous section, and select the option <strong>Run</strong></li>
-    <li>Choose as inputs our imported gene BED file and the result of the <strong>Cut</strong> tool</li>
+    <li>Choose as inputs our <code class="highlighter-rouge">mm9.RefSeq_genes</code> (<code class="highlighter-rouge">#genes</code>) BED file and the result of the <strong>Cut</strong> tool (<code class="highlighter-rouge">#peaks</code>)</li>
     <li>
       <p>Click <strong>Run workflow</strong></p>
 
@@ -1255,15 +1353,15 @@ It should look similar to below:
 
 </blockquote>
 
-<p>We used our workflow to rerun our analysis with the peak summits. The <strong>Group</strong> tool again produced a list containing the amount of genes found in each chromosome.
-But wouldn’t it be more interesting to know about the amount of peaks in each unique gene? Let’s rerun the workflow with different settings!</p>
+<p>We used our workflow to rerun our analysis with the peak summits. The <strong>Group</strong> tool again produced a list containing the number of genes found in each chromosome.
+But wouldn’t it be more interesting to know the number of peaks in each unique gene? Let’s rerun the workflow with different settings!</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-run-a-workflow-with-changed-settings"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run a workflow with changed settings</h3>
   <ol>
     <li>Open the workflow menu (top menu bar)</li>
     <li>Find the workflow you made in the previous section, and select the option <strong>Run</strong></li>
-    <li>Choose as inputs our imported gene BED file and the result of the <strong>Cut</strong> tool</li>
+    <li>Choose as inputs our <code class="highlighter-rouge">mm9.RefSeq_genes</code> (<code class="highlighter-rouge">#genes</code>) BED file and the result of the <strong>Cut</strong> tool (<code class="highlighter-rouge">#peaks</code>)</li>
     <li>Click on the title of the Group tool to expand the options.</li>
     <li>Change the following settings by clicking on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (pencil) icon on the left:
       <ul>
@@ -1278,13 +1376,13 @@ But wouldn’t it be more interesting to know about the amount of peaks in each 
 <p>Congratulations! You should have a file with all the unique gene names and a count on how many peaks they contained.</p>
 
 <blockquote class="question">
-  <h3 id="question-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <p>The list of unique genes is not sorted. Try to sort it on your own!</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <p>You can use the tool “Sort data in ascending or descending order” on column 2 and a numerical sort.</p>
+    <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>You can use the tool “Sort data in ascending or descending order” on column 2 and “fast numeric sort”.</p>
   </blockquote>
 </blockquote>
 
@@ -1379,7 +1477,7 @@ But wouldn’t it be more interesting to know about the amount of peaks in each 
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Bérénice Batut, Björn Grüning, Clemens Blank, Dilmurat Yusuf, Nicola Soranzo, Anne Pajon, Sarah Peter)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Bérénice Batut, Björn Grüning, Clemens Blank, Dilmurat Yusuf, Helena Rasche, Nicola Soranzo, Anne Pajon, Sarah Peter)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
