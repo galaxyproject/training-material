@@ -1108,7 +1108,7 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
 <blockquote class="details">
   <h3 id="details-algorithmic-details"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Algorithmic details</h3>
 
-  <p>One of the biggest advantage of cutadapt over other tools for trimming is that it is properly documented (https://cutadapt.readthedocs.io) which allows you to know how the tool works in detail.</p>
+  <p>One of the biggest advantage of cutadapt over other trimming tools is that it has a nice <a href="https://cutadapt.readthedocs.io">documentation</a> explaining how the tool works in detail.</p>
 
   <p>Cutadapt quality trimming algorithm consists of three simple steps:</p>
 
@@ -1118,6 +1118,36 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
 (as long as the partial sum is negative)</li>
     <li>cut at the minimum value of the partial sum</li>
   </ol>
+
+  <p>In the following example, we assume that the 3’ end is to be quality-trimmed with a threshold of 10 and we have the following quality values</p>
+
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>42 40 26 27 8 7 11 4 2 3
+</code></pre></div>  </div>
+
+  <ol>
+    <li>
+      <p>Subtract the threshold</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 32 30 16 17 -2 -3 1 -6 -8 -7
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Add up the numbers, starting from the end (partial sums) and stop early if the sum is greater than zero</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> (70) (38) 8 -8 -25 -23 -20, -21 -15 -7
+</code></pre></div>      </div>
+
+      <p>The numbers in parentheses are not computed (because 8 is greater than zero), but shown here for completeness.</p>
+    </li>
+    <li>
+      <p>Choose the position of the minimum (<code class="highlighter-rouge">-25</code>) as the trimming position</p>
+    </li>
+  </ol>
+
+  <p>Therefore, the read is trimmed to the first four bases, which have quality values</p>
+
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>42 40 26 27
+</code></pre></div>  </div>
 
   <p>Note that thereby also positions with a quality value larger than the chosen threshold are removed if they are embedded in regions with lower quality (note that the partial sum is decreasing if the quality values are smaller than the threshold). The advantage of this procedure is that it is robust against a small number of positions with a quality higher than the threshold.</p>
 
