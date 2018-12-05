@@ -490,7 +490,7 @@ It is usual that the quality of the sequences is worse for the reverse than for 
 
 > ### {% icon details %} Algorithmic details
 >
-> One of the biggest advantage of cutadapt over other tools for trimming is that it is properly documented (https://cutadapt.readthedocs.io) which allows you to know how the tool works in detail.
+> One of the biggest advantage of cutadapt over other trimming tools is that it has a nice [documentation](https://cutadapt.readthedocs.io) explaining how the tool works in detail.
 >
 > Cutadapt quality trimming algorithm consists of three simple steps:
 >
@@ -499,7 +499,36 @@ It is usual that the quality of the sequences is worse for the reverse than for 
 >    (as long as the partial sum is negative)
 > 3. cut at the minimum value of the partial sum
 >
+> In the following example, we assume that the 3’ end is to be quality-trimmed with a threshold of 10 and we have the following quality values
+>
+> ```
+> 42 40 26 27 8 7 11 4 2 3
+> ```
+> 
+> 1. Subtract the threshold
+>
+>     ```
+>     32 30 16 17 -2 -3 1 -6 -8 -7
+>     ```
+>
+> 2. Add up the numbers, starting from the end (partial sums) and stop early if the sum is greater than zero
+>
+>     ```
+>     (70) (38) 8 -8 -25 -23 -20, -21 -15 -7
+>     ```
+>
+>     The numbers in parentheses are not computed (because 8 is greater than zero), but shown here for completeness.
+>
+> 3. Choose the position of the minimum (`-25`) as the trimming position
+>
+> Therefore, the read is trimmed to the first four bases, which have quality values
+> 
+> ```
+> 42 40 26 27
+> ```
+>
 > Note that thereby also positions with a quality value larger than the chosen threshold are removed if they are embedded in regions with lower quality (note that the partial sum is decreasing if the quality values are smaller than the threshold). The advantage of this procedure is that it is robust against a small number of positions with a quality higher than the threshold.
+>
 >
 > Alternatives to this procedure would be
 >
