@@ -22,5 +22,6 @@
 >    > {% else %}
 >    > * **Close** the window
 >    > {% endif %}
+>    > By default, Galaxy uses the URL as then name, so rename the files with a more useful name.
 >    {: .tip}
 >
