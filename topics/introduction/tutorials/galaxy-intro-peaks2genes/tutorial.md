@@ -28,6 +28,7 @@ contributors:
   - nsoranzo
   - dyusuf
   - sarah-peter
+  - erasche
 ---
 
 # Introduction
@@ -46,6 +47,8 @@ The closest thing we could find is a file in GEO containing a list of the region
 **Table 1** Subsample of the available file
 
 The goal of this exercise is to **turn this list of genomic regions into a list of possible target genes**.
+
+{% include snippets/warning_results_may_vary.md %}
 
 > ### Agenda
 >
@@ -90,6 +93,7 @@ Let's start with a fresh history.
 >    >   ![Renaming history](../../../../shared/images/rename_history.png)
 >    >
 >    > * Type `Galaxy Introduction` as the name
+>    > * Press <kbd>Enter</kbd>
 >    >
 >    {: .tip}
 >
@@ -110,10 +114,17 @@ Let's start with a fresh history.
 > 6. Press **Close**
 > 7. Wait for the upload to finish. Galaxy will automatically unpack the file.
 >
->  After this you will see your first history item in Galaxy’s right pane. It will go through
+> 8. After this you will see your first history item in Galaxy’s right pane. It will go through
 > the gray (preparing/queued) and yellow (running) states to become green (success):
 >
-> ![History section](../../images/intro_01.png)
+>    ![History section](../../images/intro_01.png)
+>
+>    Directly uploading files is not the only way to get data into Galaxy
+>    {% include snippets/import_via_link.md format="interval" %}
+>
+>    > ### {% icon tip %} Tip: Importing data to Galaxy
+>    > There are [more options]({{ site.baseurl }}/topics/galaxy-data-manipulation/tutorials/get-data/slides.html) for advanced users.
+>    {: .tip}
 >
 {: .hands_on}
 
@@ -129,18 +140,6 @@ Let's start with a fresh history.
 > You can find more information about formats that can be used in Galaxy at the [Galaxy Data Formats page](https://usegalaxy.org/static/formatHelp.html).
 {: .comment}
 
-
-> ### {% icon tip %} Tip: Importing data via links
->
-> You could also import this file via its link:
->
-> * Copy the link location
-> * Open the Galaxy Upload Manager
-> * Select **Paste/Fetch Data**
-> * Paste the link into the text field
-> * Select `interval` as **Type**
-> * Press **Start**
-{: .tip}
 
 > ### {% icon hands_on %} Hands-on: Inspect and edit attributes of a file
 >
@@ -204,8 +203,11 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 > 5. Make sure that *"Create one BED record per"* is set to `Whole Gene`
 > 6. Click on the **Send Query to Galaxy** button
 > 7. Wait for the upload to finish
-> 8. Rename our dataset ({% icon galaxy-pencil %} (pencil) icon) to something more recognizable (`Genes`)
-> 9. Add a tag called `genes` to the dataset to make it easier to track in the history
+> 8. Rename our dataset to something more recognizable like `Genes`
+>
+>    {% include snippets/rename_dataset.md name="Genes" %}
+>
+> 9. Add a tag called `#genes` to the dataset to make it easier to track in the history
 >
 {: .hands_on}
 
@@ -248,19 +250,23 @@ Let's have a look at our files to see what we actually have here.
 >
 > While the file from UCSC has labels for the columns, the peak file does not. Can you guess what the columns stand for?
 >
+>
+> > ### {% icon solution %} Solution
+> >
+> > This peak file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper the authors mention that they used the peak caller [HPeak](https://www.ncbi.nlm.nih.gov/pubmed/20598134).
+> >
+> > By looking at the HPeak manual we can find out that the columns contain the following information:
+> >
+> >  - chromosome name by number
+> >  - start coordinate
+> >  - end coordinate
+> >  - length
+> >  - location within the peak that has the highest hypothetical DNA fragment coverage (summit)
+> >  - not relevant
+> >  - not relevant
+> >
+> {: .solution}
 {: .question}
-
-This peak file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper the authors mention that they used the peak caller [HPeak](https://www.ncbi.nlm.nih.gov/pubmed/20598134).
-
-By looking at the HPeak manual we can find out that the columns contain the following information:
-
- - chromosome name by number
- - start coordinate
- - end coordinate
- - length
- - location within the peak that has the highest hypothetical DNA fragment coverage (summit)
- - not relevant
- - not relevant
 
 In order to compare the two files, we have to make sure that the chromosome names follow the same format.
 As we can see, the peak file lacks `chr` before any chromosome number. But what happens with chromosome 20 and 21? Will it be X and Y instead? Let's check:
@@ -282,7 +288,7 @@ As we can see, the peak file lacks `chr` before any chromosome number. But what 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 1. The chromosomes are just given by their number. In the gene file from UCSC, they started with `chr`
->    > > 2. The chromosomes X and Y are names 20 and 21
+>    > > 2. The chromosomes X and Y are named 20 and 21
 >    > {: .solution }
 >    {: .question}
 {: .hands_on}
@@ -305,8 +311,10 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 >         `&` is a placeholder for the find result of the pattern search
 >
-> 2. **Replace Text** {% icon tool %}: Let's rerun the tool with
->    - *"File to process"*: the output from the last run, e.g. something like `Replace Text on data ...`
+> 2. Rename your output file `chr prefix added`.
+>
+> 3. **Replace Text** {% icon tool %}: Let's rerun the tool with
+>    - *"File to process"*: the output from the last run, `chr prefix added`
 >    - *"in column"*: `Column:1`
 >    - *"Find pattern"*: `chr20`
 >    - *"Replace with"*: `chrX`
@@ -317,19 +325,29 @@ In order to convert the chromosome names we have therefore two things to do:
 >    > * Press the {% icon galaxy-refresh %} icon (**Run this job again**)
 >    {: .tip}
 >
-> 3. **Replace Text** {% icon tool %}: Rerun this tool to do the same for chromosome Y
->    - *"File to process"*: the output from the **last** run
+> 4. Rename your output file `chrX fixed`
+>
+> 5. **Replace Text** {% icon tool %}: Rerun this tool to do the same for chromosome Y
+>    - *"File to process"*: `chrX fixed`, the output from the last run
 >    - *"in column"*: `Column:1`
 >    - *"Find pattern"*: `chr21`
 >    - *"Replace with"*: `chrY`
 >
-> 4. Inspect the latest file through the {% icon galaxy-eye %} (eye) icon
+> 6. Inspect the latest file through the {% icon galaxy-eye %} (eye) icon. Have we been successful?
 >
->    Have we been successful?
+>    We have quite a few files now and need to take care to select the correct ones at each step.
 >
->    We have quite some files now and should take care that we don't lose track.
+>    > ### {% icon question %} Questions
+>    >
+>    > How many regions are in our output file? You can click the name of the output to expand it and see the number.
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > It should be equal to the number of regions in your first file, `GSE37268_mof3.out.hpeak.txt.gz`: 48,647
+>    > > If yours says 100 regions, then you have run it on the `Tail` file and need to re-run the steps.
+>    > {: .solution }
+>    {: .question}
 >
-> 5. Rename the file to something more recognizable, e.g. `Peak regions`
+> 7. Rename the file to something more recognizable, e.g. `Peak regions`
 {: .hands_on}
 
 ## Analysis
@@ -344,7 +362,7 @@ you want to include transcriptions factors in ChIP-seq experiments. There is no 
 > ### {% icon hands_on %} Hands-on: Add promoter region to gene records
 >
 > 1. **Get Flanks** {% icon tool %}: Run **Get flanks returns flanking region/s for every gene** with the following settings:
->     - *"Select data"*: file from UCSC
+>     - *"Select data"*: `Genes` file from UCSC
 >     - *"Region"*: `Around Start`
 >     - *"Location of the flanking region/s"*: `Upstream`
 >     - *"Offset"*: `10000`
@@ -419,7 +437,8 @@ We will group the table by chromosome and count the number of genes with peaks o
 >    > Which chromosome contained the highest number of target genes?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > The result varies with different settings, for example, the annotation may change due to updates at UCSC. If you followed step by step, with the same annotation, it should be chromosome 7 with 1675 genes. Note that for reproducibility, you should keep all input data used because Galaxy can store all parameters but inputs may change e.g. the annotation from UCSC.
+>    > >
+>    > > The result varies with different settings, for example, the annotation may change due to updates at UCSC. If you followed step by step, with the same annotation, it should be chromosome 11 with 1992 genes. Note that for reproducibility, you should keep all input data used because Galaxy can store all parameters but inputs may change e.g. the annotation from UCSC.
 >    > {: .solution }
 >    {: .question}
 >
@@ -435,6 +454,9 @@ Since we have some nice data, let's draw a barchart out of it!
 > 2. Select `Bar diagram`
 > 3. Choose a title at **Provide a title**, e.g. `Gene counts per chromosome`
 > 4. Switch to the {% icon galaxy-chart-select-data %} **Select data** tab and play around with the settings
+> 5. When you are happy, click the {% icon galaxy-save %} **Save** visualization in the top right of the *main panel*
+>
+>    This will store it to your saved visualisations where you can later view, download, or share it with others.
 >
 {: .hands_on}
 
@@ -556,6 +578,9 @@ Now we cut out just the chromosome plus the start and end of the summit:
 >    The output from **Cut** will be in `tabular` format.
 >
 > 2. Change the format to `interval` (use the {% icon galaxy-pencil %}) since that's what the tool **Intersect** expects.
+>
+>    {% include snippets/change_datatype.md datatype="interval" %}
+>
 >    The output should look like below:
 >
 >    ![Peak summits](../../images/intro_summits.png){: width="200px"}
@@ -571,22 +596,13 @@ The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Import from [Zenodo](https://zenodo.org/record/1025586) or from the data library the file `mm9.RefSeq_genes_from_UCSC.bed`
+> 1. From [Zenodo](https://zenodo.org/record/1025586) or from the data library, import the file `mm9.RefSeq_genes_from_UCSC.bed`
 >
->      ```
->      https://zenodo.org/record/1025586/files/mm9.RefSeq_genes_from_UCSC.bed
->      ```
+>    ```
+>    https://zenodo.org/record/1025586/files/mm9.RefSeq_genes_from_UCSC.bed
+>    ```
 >
->    > ### {% icon tip %} Tip: Importing data via links
->    >
->    > * Copy the link location
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > * Paste the link into the text field
->    > * Select "Type": `bed`
->    > * Select "Genome": `mm9`
->    > * Press **Start**
->    {: .tip}
+>    {% include snippets/import_via_link.md type="bed" genome="mm9" %}
 >
 >    > ### {% icon tip %} Tip: Importing data from a data library
 >    >
@@ -603,6 +619,9 @@ The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers
 >    It should look similar to below:
 >    ![Gene names](../../images/intro_gene_names.png)
 >
+> 3. Rename it `mm9.RefSeq_genes`
+> 4. Apply the tag `#genes`
+>
 {: .hands_on}
 
 ## Repeat workflow
@@ -612,20 +631,20 @@ It's time to reuse the workflow we created earlier.
 > ### {% icon hands_on %} Hands-on: Run a workflow
 > 1. Open the workflow menu (top menu bar)
 > 2. Find the workflow you made in the previous section, and select the option **Run**
-> 3. Choose as inputs our imported gene BED file and the result of the **Cut** tool
+> 3. Choose as inputs our `mm9.RefSeq_genes` (`#genes`) BED file and the result of the **Cut** tool (`#peaks`)
 > 4. Click **Run workflow**
 >
 >    The outputs should appear in the history but it might take some time until they are finished.
 >
 {: .hands_on}
 
-We used our workflow to rerun our analysis with the peak summits. The **Group** tool again produced a list containing the amount of genes found in each chromosome.
-But wouldn't it be more interesting to know about the amount of peaks in each unique gene? Let's rerun the workflow with different settings!
+We used our workflow to rerun our analysis with the peak summits. The **Group** tool again produced a list containing the number of genes found in each chromosome.
+But wouldn't it be more interesting to know the number of peaks in each unique gene? Let's rerun the workflow with different settings!
 
 > ### {% icon hands_on %} Hands-on: Run a workflow with changed settings
 > 1. Open the workflow menu (top menu bar)
 > 2. Find the workflow you made in the previous section, and select the option **Run**
-> 3. Choose as inputs our imported gene BED file and the result of the **Cut** tool
+> 3. Choose as inputs our `mm9.RefSeq_genes` (`#genes`) BED file and the result of the **Cut** tool (`#peaks`)
 > 4. Click on the title of the Group tool to expand the options.
 > 5. Change the following settings by clicking on the {% icon galaxy-pencil %} (pencil) icon on the left:
 >     - **Group by column**: `7`
@@ -640,7 +659,7 @@ Congratulations! You should have a file with all the unique gene names and a cou
 > The list of unique genes is not sorted. Try to sort it on your own!
 >
 > > ### {% icon solution %} Solution
-> > You can use the tool "Sort data in ascending or descending order" on column 2 and a numerical sort.
+> > You can use the tool "Sort data in ascending or descending order" on column 2 and "fast numeric sort".
 > {: .solution }
 {: .question}
 
