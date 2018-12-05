@@ -19,7 +19,7 @@ contributors:
 
 [![Galaxy](../../../shared/images/galaxy_logo_25percent_transparent.png)](https://galaxyproject.org/)
 
-- **Web-based** platform for computational biomedical research
+- **Web-based** platform for computational biomedical research (analysis and data integration)
   - Developed at Penn State, Johns Hopkins, OHSU and Cleveland Clinic with substantial outside contributions
   - **Open source** under [Academic Free License](https://opensource.org/licenses/AFL-3.0)
 - More than 6,500 [citations](https://www.zotero.org/groups/1732893/galaxy)
@@ -27,10 +27,19 @@ contributors:
   - Many more non-public
   - Both general-purpose and domain-specific
 
+![Galaxy](../images/servers.png)
+
 ???
 
 - The Galaxy Team is composed by bioinformaticians and software engineers
 - OHSU = Oregon Health & Science University
+
+- More than 125+ [Galaxy servers](https://galaxyproject.org/use/)
+
+
+
+  - Many more non-public
+  - Both general-purpose and domain-specific
 
 ---
 
@@ -44,11 +53,9 @@ contributors:
   - Users can share or publish their analyses (histories, workflows, visualizations)
   - Pages: online Methods for your paper
 
-Pages: interactive, web-based documents that describe a complete analysis.
-
 ???
 
-**accessible** **reproducible** **transparent** research means <i>sharing everything</i>.
+**accessible** **reproducible** **transparent** research means *sharing everything*.
 
 If the Galaxy framework makes everything as simple as possible, researchers are able to:
 - share their analyses
@@ -56,6 +63,8 @@ If the Galaxy framework makes everything as simple as possible, researchers are 
 - check all parameters
 - justify each step in the analysis
 - publish the findings with all aforementioned information
+
+Pages: interactive, web-based documents that describe a complete analysis.
 
 ---
 
@@ -79,7 +88,6 @@ Home page divided into 3 panels
 ### Top menu
 
 ![Top menu](../images/galaxy_interface_menu.png)
-
 
 Link            | Usage
 --              | --
@@ -132,17 +140,21 @@ Tools can be viewed as tiny LEGO pieces: each one solves a specific problem, and
 
 ### History
 
-- Location of all your analyses <img style="float: right;" alt="History" src="../images/history.png" />
-  - collects all datasets produced by tools you run
-  - collects all operations performed on your data
+- Location of all analyses <img style="float: right;" alt="History" src="../images/history.png" />
+  - collects all datasets produced by tools
+  - collects all operations performed on the data
 
-- At the heart of Galaxy’s reproducibility<br />
-  For each dataset, the history tracks:
+- For each dataset (the heart of Galaxy’s reproducibility), the history tracks
   - name, format, size, creation time, datatype-specific metadata
-  - tool id and version, inputs, parameters
+  - tool id, version, inputs, parameters
   - standard output (`stdout`) and error (`stderr`)
   - state (<span style="background-color: grey">waiting</span>, <span style="background-color: yellow">running</span>, <span style="background-color: green">success</span>, <span style="background-color: red">failed</span>)
   - hidden, deleted, purged
+
+- Multiple histories
+  - each history should correspond to a **different analysis**
+  - need a meaningful **name**
+
 
 ???
 
@@ -179,7 +191,7 @@ History behavior is controlled by the *History options* (gear icon)
 
   .image-50[![History Switcher](../images/galaxy_interface_history_switch.png)]
 
-- You can *Copy Datasets* from one history to another
+- *Copy Datasets* from one history to another and save disk space for your quota
 ]
 
 ???
@@ -203,9 +215,8 @@ Galaxy
 
 - Copy/paste from a file
 - Upload data from a local computer
-- Upload data from internet
-- Upload data from online databases
-  - UCSC, BioMart, ENCODE, modENCODE, Flymine etc.
+- Upload data from internet using URL
+- Upload data from online databases: UCSC, BioMart, ENCODE, modENCODE, Flymine etc.
 - Import from Shared Data (libraries, histories, pages)
 - Upload data from FTP (>2GB)
 
@@ -215,19 +226,21 @@ See [Getting data into Galaxy](../../galaxy-data-manipulation/tutorials/get-data
 
 ### Datatypes
 
-- When uploading, datatype can be automatically detected or assigned by user
-- For datasets produced by a tool, the datatype is assigned by the tool
+- Uploaded dataset
+  - Datatype can be automatically detected
+  - Datatype assigned by user
+- Dataset produced by a tool: datatype assigned by the tool
 - Tools only accept input datasets with the appropriate datatypes
-- You can change the datatype of a dataset in 2 ways:
-  - Edit Attributes → Datatype
-  - Edit Attributes → Convert Formats
+- To change the datatype of a dataset:
+  - {% icon galaxy-pencil %} *Edit Attributes* and *Datatype*
+  - {% icon galaxy-pencil %} *Edit Attributes* and *Convert Formats*
 
 ???
 
 - If galaxy gets dataset wrong ⇒ when you upload data, galaxy will try to autodetect but can get it wrong, so you may need to correct.
 
-- Edit Attributes -> Datatype is used to fix a wrongly assigned datatype
-- Edit Attributes -> Convert Formats creates a new dataset using a tool that converts the original dataset in the new format
+- Edit Attributes → Datatype is used to fix a wrongly assigned datatype
+- Edit Attributes → Convert Formats creates a new dataset using a tool that converts the original dataset in the new format
 - New datatypes can be added to the Galaxy code base, if missing
 
 ---
@@ -262,9 +275,13 @@ Workflows. These help you easily reproduce the exact analysis that you ran.
 
 ---
 
-### Workflow interface
+### Workflow Editor
 
 ![Workflow interface](../images/RNA-Seq_workflow_editing.png)
+
+- **Extracted** from a history
+- **Built manually** by adding and configuring tools using the canvas
+- **Imported** using an existing shared workflow
 
 ???
 
@@ -281,14 +298,8 @@ Bioinf / dev:
 - Tool panel on the left with Inputs on top (to add input datasets and collections)
 - Small tool form on the right
 
----
-
-### Workflows
-
-- Can be **extracted** from a history
-  - Allow to easily convert an existing history into an analysis workflow
-- Can be **built manually** by adding and configuring tools using the workflow canvas
-- Can be **imported** using an existing shared workflow
+- **Extracted** from a history
+- Allow to easily convert an existing history into an analysis workflow
 
 ---
 
@@ -307,34 +318,37 @@ Potential information overload for newbies
 
 ---
 
-### Data sharing
+### Visualizations
 
-- Share everything you do in Galaxy: histories, workflows, and visualizations can all be shared with others:
+.image-75[![](../../dev/images/charts_examples2.png)]
+
+- Datatypes know what tools can be used to visualize them:
+  - Sequencing data has a button for visualizing in IGV
+  - Tabular data will prompt you to build charts
+  - Protein data can be seen in a 3D viewer
+- Interactive environments: Jupyter, RStudio, etc
+
+---
+
+### Shared data
+
+- Share everything you do in Galaxy - histories, workflows, and visualizations
   - Directly using a Galaxy account's email addresses on the same instance
   - Using a web link, with anyone who knows the link
   - Using a web link and publishing it to make it accessible to everyone from the *Shared Data* menu
 
 ---
 
-### Data visualization
-
-![](../../dev/images/charts_examples2.png)
-
-- Datatypes know what tools can be used to visualize them:
-  - Sequencing data has a button for visualizing in IGV
-  - Tabular data will prompt you to build charts
-  - Protein data can be seen in a 3D viewer
-
----
-
 ### Community
 
-- Be part of an active and friendly community
-- Get support and your questions answered on [Galaxy Help](https://help.galaxyproject.org/)
-- Access community curated documentation on [Galaxy Community Hub](https://www.galaxyproject.org/)
-- Training Community:
-  - Learn more about Galaxy for scientists and for developers and admins on [Galaxy Training Community]({{site.url}}/{{site.baseurl}})
-  - Chat with us on [Gitter](https://gitter.im/Galaxy-Training-Network/Lobby)
+Be part of an active and friendly community
+
+- Support and Questions: [Galaxy Help](https://help.galaxyproject.org/)
+
+  ![Galaxy Help](../images/galaxy_help.png)
+
+- Community curated documentation: [Galaxy Community Hub](https://www.galaxyproject.org/)
+- Training around Galaxy for scientists, developers, admins, instructors: [Galaxy Training Community]({{site.url}}/{{site.baseurl}}). Chat with training community on [Gitter](https://gitter.im/Galaxy-Training-Network/Lobby)
 
 ???
 
