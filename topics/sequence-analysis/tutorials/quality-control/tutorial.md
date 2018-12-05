@@ -490,7 +490,7 @@ It is usual that the quality of the sequences is worse for the reverse than for 
 
 > ### {% icon details %} Algorithmic details
 >
-> One of the biggest advantage of cutadapt over other tools for trimming is that it is properly documented [https://cutadapt.readthedocs.io](https://cutadapt.readthedocs.io) which allows you to know how the tool works in detail.
+> One of the biggest advantage of cutadapt over other trimming tools is that it has a nice [documentation](https://cutadapt.readthedocs.io) explaining how the tool works in detail.
 >
 > Cutadapt quality trimming algorithm consists of three simple steps:
 >
