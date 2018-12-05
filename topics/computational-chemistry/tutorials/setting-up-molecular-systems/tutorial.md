@@ -93,12 +93,11 @@ The correctly modelled substrate is available. This modelling was done using VMD
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from the [PDB](https://files.rcsb.org/download/7CEL.pdb) or from the shared data library
+> 2. Import the files from the [Google Drive](https://docs.google.com/document/d/1VlTfyYqFz2dJP_95Zec10eLr-1GhP3KpA31EGX8fLzI/edit?usp=sharing)  [PDB](https://files.rcsb.org/download/7CEL.pdb) or from the shared data library
 >
 >    ```
 >    
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
@@ -125,18 +124,12 @@ It is convenient to setup the molecular system using a tool such as CHARMM-GUI. 
 
 ### {% icon tip %} Tip: Viewing figures
 >
-> * Some of the figures are screenshots and it may be difficult to make out details
+>  * Some of the figures are screenshots and it may be difficult to make out details
 >  * Right-click on the image and choose 'Open image in new tab' to view 
 >  * Zoom in and out as needed to see the content
 {: .tip}
 
-![CHARMM-GUI interface](images/charmmgui.png "The CHARMM-GUI inteface")
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
+![CHARMM-GUI interface](images/charmmgui.png "The CHARMM-GUI interface")
 
 Go to the correct section depending on which MD engine you will be using
  - [CHARMM](#CHARMM)
@@ -147,12 +140,13 @@ Go to the correct section depending on which MD engine you will be using
 {: #CHARMM}
 Preparation in CHARMM-GUI if using CHARMM for later simulation.
 ### Upload the PDB to CHARMM-GUI
-[Navigate to CHARMM-GUI](http://www.charmm-gui.org/?doc=input/pdbreader) and use the Input Generator, specifically the PDB Reader tool.
+[Navigate to CHARMM-GUI](http://www.charmm-gui.org/?doc=input/pdbreader) and use the Input Generator, specifically the PDB Reader tool and upload the Cellulase PDB file.
 
 ![Snapshot of CHARMM-GUI PDB reader section](images/charmmgui-reader.png "The CHARMM-GUI PDB Reader tool")
 
 > ### {% icon hands_on %} Hands-on: Upload the PDB to CHARMM-GUI
 >
+> Retrieve the modelled PDB structure from [Google Drive](https://docs.google.com/document/d/1VlTfyYqFz2dJP_95Zec10eLr-1GhP3KpA31EGX8fLzI/edit?usp=sharing)  [PDB](https://files.rcsb.org/download/7CEL.pdb).
 >Upload the PDB and choose CHARMM format.
 {: .hands_on}
 
@@ -179,6 +173,7 @@ Upload the step1_pdbreader.psf and step1_pdbreader.crd to your BRIDGE instance a
 {: #NAMD}
 Preparation in CHARMM-GUI if using NAMD for later simulation.
 ### Upload the PDB to CHARMM-GUI
+Retrieve the modelled PDB structure from [Google Drive](https://docs.google.com/document/d/1VlTfyYqFz2dJP_95Zec10eLr-1GhP3KpA31EGX8fLzI/edit?usp=sharing)  [PDB](https://files.rcsb.org/download/7CEL.pdb).
 [Navigate to CHARMM-GUI](http://www.charmm-gui.org/?doc=input/mdsetup) and use the Input Generator, specifically the Quick MD Simulator tool.
 
 ![Snapshot of CHARMM-GUI Quick MD Simulator tool ](images/charmmgui-mdsimulator.png "The CHARMM-GUI Quick MD Simulator tool")
@@ -188,14 +183,13 @@ Rename the hetero chain to BGLC and add disulfide bonds.
 ![Snapshot of CHARMM-GUI renaming section](images/charmmgui-manipulate.png "Rename the chains in CHARMM-GUI")
 
 ### Setup the waterbox and add ions
-Set up a waterbox. Use Size (!) and cubic.
->    ***TODO***: *get the correct size for the waterbox*
+Set up a waterbox. Use a size if 10 Angstroms and choose a cubic box.
 
 ![Snapshot of CHARMM-GUI waterbox section](images/charmmgui-waterbox.png "Setting up a waterbox in CHARMM-GUI")
-> ### {% icon details %} More details about the theory
+> ### {% icon details %} Parameter details
 >
-> Why is 10 Angstrom a fair choice for the buffer?
-> Why choose 0.15M NaCl and not neutralise?
+> Why is 10 Angstrom a fair choice for the buffer? 
+> Why choose 0.15M NaCl ?
 >
 {: .details}
 

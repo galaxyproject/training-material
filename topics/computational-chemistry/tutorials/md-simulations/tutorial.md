@@ -28,15 +28,6 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
-
-***TODO***: *Improve the introduction*
-
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
 
 > ### Agenda
 >
@@ -54,35 +45,6 @@ and technical) key concepts they will learn.
 This workflow uses NAMD as a molecular dynamics engine.An NVT simulation is followed by an NPT simulation.
 
 
-
-## Get data
-
-> ### {% icon hands_on %} Hands-on: Data upload
->
-> 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
->
->    ```
->    
->    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
->
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
->
-> 3. Rename the datasets
-> 4. Check that the datatype
->
->    {% include snippets/change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
->
-{: .hands_on}
-
 If you've imported from CHARMM-GUI read through the theory then skip to [namd_nvt](#namd_nvt) otherwise carry on and start with [setup](#setup). The workflows as shown below for [CHARMM and NAMD](#figure-1) or [only NAMD](#figure-2) will be used.
 
 
@@ -92,18 +54,9 @@ If you've imported from CHARMM-GUI read through the theory then skip to [namd_nv
 
 
 
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} NVT theory
+> ### {% icon details %} NVT, NPT and statistical mechanics theory
 >
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-> ### {% icon details %} NPT theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
+> [See Statistical Mechanics, McQuarrie for more in depth theory ISBN:9781891389153](https://books.google.co.za/books/about/Statistical_Mechanics.html?id=itcpPnDnJM0C&redir_esc=y)
 >
 {: .details}
 
