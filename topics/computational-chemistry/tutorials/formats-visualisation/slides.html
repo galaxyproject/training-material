@@ -1,69 +1,82 @@
 ---
-layout: introduction_slides
+layout: tutorial_slides
 logo: "GTN"
 
 title: Formats and visualisation
 type: introduction
+questions:
+  - "What molecular formats are available?"
+  - "How to visualise a molecule?"
 contributors:
   - chrisbarnettster
   - tsenapathi
 ---
 
-## IN DEVELOPMENT
+## Molecular formats supported
+
+ 
+- PDB (by default)
+- DCD (in the latest release, and special install) see https://github.com/galaxyproject/galaxy/pull/6613)
+- Gromacs (in the latest release, and special install) see https://github.com/galaxyproject/galaxy/pull/6655
+- crd/psf (manually added)
+
+Add a new format:
+ - create a pull request
+ - add from the toolshed or, 
+ - manually include a custom format file on your Galaxy instance. 
+
+.footnote[ [learn datatypes](https://galaxyproject.org/learn/datatypes/) ]
 
 ---
 
-# POINT TO EXISTING RESOURCES 
-http://127.0.0.1:4000/training-material/topics/galaxy-ui/
-http://127.0.0.1:4000/training-material/topics/galaxy-ui/tutorials/history/tutorial.html
+### Visualisation inside Galaxy
 
-Histories: Understanding Galaxy history system
+.image-50[![](../images/animation.gif)]
+Use [charts](https://galaxyproject.org/learn/visualization/charts/).
+Currently only supports PDB
 
-http://127.0.0.1:4000/training-material/topics/galaxy-ui/tutorials/galaxy-intro-jupyter/tutorial.html
-Jupyter: Use Jupyter notebooks in Galaxy
-http://127.0.0.1:4000/training-material/topics/galaxy-ui/tutorials/history-to-workflow/tutorial.html
-Create a reusable workflow from a history
+.pull-left[
+![](../images/viewers.png)
+![](../images/visualise_in_galaxy.png)
 
----
+]
 
-### Supported Formats
+.pull-right[
+![](../images/7cel_waterbox_galaxy.png)
 
-PDB (by default)
-DCD (in the latest release, and special install) see https://github.com/galaxyproject/galaxy/pull/6613)
-Gromacs (in the latest release, and special install) see https://github.com/galaxyproject/galaxy/pull/6655
-https://galaxyproject.org/learn/datatypes/
-Add a new format is as easy as a pull request or custom format file on your Galaxy instance. 
+]
+
+.footnote[[nglviewer](http://nglviewer.org/ngl/),[pv](https://biasmv.github.io/pv/) ]
 
 ---
 
-### Viewing inside Galaxy
+### Visualisation outside Galaxy
+Will require downloading the dataset (!) - pdb,dcd or similar
 
-https://galaxyproject.org/learn/visualization/charts/
+- VMD*
+- Avogadro
+- Pymol
+- Schrodinger Maestro
 
-Screen shots of viewing a protein model (would have done this before with the first part of the course?)
+ Who has used VMD or similar? 
 
-http://nglviewer.org/ngl/ and this may be fully integrated at some point. 
-https://biasmv.github.io/pv/ 
-
----
-
-### hint at using Jupyter
-Jupyter and Galaxy: Easing entry barriers into complex data analyses for biomedical researchers DOI: 10.1371/journal.pcbi.1005425
----
-
-### Using VMD for viewing
-http://www.ks.uiuc.edu/Research/vmd/
-which for now requires downloading of the dataset - this may change ( and hopefully will for large datasets). 
-
-Alternative is to complete analysis using tools in Galaxy (work with data directly on the server.)
-
+.footnote[ [a more extensive list of viewers](https://en.wikipedia.org/wiki/List_of_molecular_graphics_systems)]
 
 ---
 
-### Sharing histories and workflows with friends 
+### Visualisation Best Practice
+- Use VMD for hands-on analysis
+- For analysis on large datasets, data download is an issue.
+- Complete analysis using tools in Galaxy (work with data directly on the server) then download image or raw results.
+
 ---
 
+### Visualisation demo
 
-### Resources 
+Let's visualise a PDB together very quickly before starting simulations.
 
--  https://galaxyproject.github.io/training-material/topics/dev/tutorials/visualization-charts/tutorial.html
+- 7CEL PDB
+- import into Galaxy and charts view
+- import into VMD and view
+
+

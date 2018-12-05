@@ -1,6 +1,6 @@
 ---
 layout: introduction_slides
-logo: "SC"
+logo: "GTN"
 
 title: Introduction to Computational Chemistry
 type: introduction
@@ -8,7 +8,22 @@ contributors:
   - chrisbarnettster
 ---
 
+
 # Computational Chemistry
+
+???
+
+ICEBREAKER TIME
+Names. Ask who is from where. Stage of qualification. Interests etc. 
+
+---
+
+# Resources for today & registration *
+- https://github.com/scientificomputing/bridge
+- https://events.chpc.ac.za/event/40/
+  - register on ilifu
+  - register on Github and join Gitter channel
+  - Download VMD
 
 ---
 # Purpose
@@ -35,7 +50,7 @@ contributors:
 
 # Molecular Dynamics (MD)
 
-TODO - GIF OF PROTEIN
+.image-50[![](../images/animation.gif)]
 
 - Numerical step-by-step solution of the classical equations of motion : F = ma
 - Link macroscopic properties to microscopic molecular properties
@@ -76,9 +91,8 @@ Topology and Parameter files
 - Topology: atom types, charges, connectivities
 - Parameters: Force constants and non-bonded interactions vdW and electrostatics)
 
-For example the general CHARMM, AMBER, GROMOS etc. 
-
---- 
+For example the general CHARMM, AMBER, OPLS etc.
+.footnote[ [Force field defined](https://en.wikipedia.org/wiki/Force_field_(chemistry)) , [Force fields list](https://en.wikipedia.org/wiki/Comparison_of_force_field_implementations)]
 
 ---
 
@@ -149,7 +163,7 @@ Rationale: Many biological events take place in aqueous media.
 # Molecular energy landscape
 
 
-image-100[![](../images/F6.large.png)]
+.image-100[![](../images/F6.large.png)]
 Folding funnel and accessible space.
 
 .footnote[http://www.pnas.org/content/101/46/16192]
@@ -179,28 +193,22 @@ These are programs that create the ensemble (create trajectories).
 - GROMACS
 - OpenMM
 
-.footnote[* non exhaustive list *]
+.footnote[[list of available software](https://en.wikipedia.org/wiki/Comparison_of_software_for_molecular_mechanics_modeling) ]
+
 
 ---
-# Example input file and the shell
-gif from asciicinema?
+# Example input file 
+.image-100[![](../images/input.gif)]
+- Often complex inputs and also requires familiarity with the command line and/or Linux.
 
 ---
 
-# Challenges faced
-- Parameters
+# Common challenges faced
+- Parameters. Easy to make errors in files.
 
 --
 
-- Version control
-
---
-
-- Sharing  inputs and data
-
---
-
-- Ensuring the correct version is used and tracking changesa
+- Version control. Ensuring the correct version is used and tracking changes
 
 --
 
@@ -208,7 +216,24 @@ gif from asciicinema?
 
 --
 
-- Bespoke scripts that temp solve challenges and are not reusable in the lab. 
+- Bespoke scripts that initially resolve challenges, but cannot be repurposed (e.g. for new models or HPC usage)
+
+--
+
+- MD scripting languages can be complex. Each MD engine uses a different language and syntax 
+
+--
+
+- Unforced errors in command line arguments and flags. Verification and testing
+
+--
+
+- Repeating the simulation, errors can result. Auditing.
+
+--
+
+- Sharing input files, custom scripts for simulation management and output data sets.
+
 
 ---
 
@@ -217,35 +242,20 @@ gif from asciicinema?
 
 --
 
-- Use coding practices etc. , this can be a whole new challenge (!)
+- Use coding best practices etc. , this can be a whole new challenge (!)
 
 --
 
-- A community of practice using common workflows may be an easier barrier to entry
+- A community of practice using common workflows, tools. 
 
 ---
-# Common challenges
-- MD scripting languages can be complex. easy to make errors in files.
 
---
+# Why Galaxy 
 
-- unforced errors in command line arguments and flags
+![Galaxy user interface](../images/galaxy_interface.png)
 
---
-
-- verification and testing
-
---
-
-- repeating the simulation, errors can result. Auditing.
-
---
-
-- sharing 
-
---
-
-- idiosyncracies of the MD engine inhibit use
+Many bioinformatics tools and workflows. We are sibling sciences, implement successes from this field. 
+Core values: Accessibility, Reproducibility, Transparency
 
 ---
 
@@ -265,7 +275,9 @@ Batteries included!
 ---
 
 
-### Computational Chemistry, BRIDGE and Galaxy
+### Biomolecular Reaction and Interaction Dynamics Global Environment
+
+Computational Chemistry + Galaxy = BRIDGE
 
 ![](../images/platform_overview.png)
 
@@ -278,17 +290,10 @@ https://github.com/scientificomputing/bridge
 
 # Topics to be covered
 
-1. Setting up molecular systems ([tutorial](../tutorials/setting-up-molecular-systems/tutorial.html))
-2. Running molecular dynamics simulations ([tutorial](../tutorials/md-simulations/tutorial.html))
-3. Analysing molecular dynamics simulations ([tutorial](../tutorials/analysis-md-simulations/tutorial.html)) 
-4. Visualisation ([tutorial](../tutorials/formats-visualisation/slides.html))  
+1. Visualisation ([tutorial](../tutorials/formats-visualisation/slides.html))  
+2. Setting up molecular systems ([tutorial](../tutorials/setting-up-molecular-systems/tutorial.html))
+3. Running molecular dynamics simulations ([tutorial](../tutorials/md-simulations/tutorial.html))
+4. Analysing molecular dynamics simulations ([tutorial](../tutorials/analysis-md-simulations/tutorial.html)) 
 
 ---
-
-# Resources for today*
-- https://github.com/scientificomputing/bridge
-- docker / mslogin / ilifu
-- slides - https://github.com/chrisbarnettster/training-material
-- Google Drive - has PDF of slides, inputs and histories. 
-- Google Form for questions
 
