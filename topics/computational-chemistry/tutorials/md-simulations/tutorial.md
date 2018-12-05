@@ -42,7 +42,7 @@ contributors:
 
 # Simulation with NAMD (imported from CHARMM-GUI)
 
-This workflow uses NAMD as a molecular dynamics engine.An NVT simulation is followed by an NPT simulation.
+This workflow uses NAMD as a molecular dynamics engine. An NVT simulation is followed by an NPT simulation.
 
 
 If you've imported from CHARMM-GUI read through the theory then skip to [namd_nvt](#namd_nvt) otherwise carry on and start with [setup](#setup). The workflows as shown below for [CHARMM and NAMD](#figure-1) or [only NAMD](#figure-2) will be used.
@@ -60,7 +60,9 @@ If you've imported from CHARMM-GUI read through the theory then skip to [namd_nv
 >
 {: .details}
 
-## **setup**
+## Additional prep with CHARMM (SKIP)
+
+### **setup**
 {: #setup}
 
 Prepare a protein ligand system in CHARMM. 
@@ -76,7 +78,7 @@ This tool will:
 >
 {: .hands_on}
 
-## **minimizer**
+### **minimizer**
 
 Reduces the energy of the system by running a minimisation algorithm. 
 This tools will:

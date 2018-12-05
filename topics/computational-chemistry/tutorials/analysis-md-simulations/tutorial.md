@@ -31,8 +31,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-We illustrate some of the analytical tools able to investigate conforma-
-tional changes by analysis of a typical short protein simulation such as
+We illustrate some of the analytical tools able to investigate conformational changes by analysis of a typical short protein simulation such as
 for CBH1.
 
 Protein conformational changes can be investigated in greater detail
@@ -65,6 +64,11 @@ As per the slides we'll carry out some basic analysis by calculating RMSD, RMSF 
 ![Snapshot of conformational analysis workflow](images/workflow_confanalysis.png "A simple analysis workflow")
 
 
+## Workflow or adhoc 
+You can choose to use the existing workflow or click on tools one by one (see below)
+
+Have a look at published workflows (and histories) and choose Conformational Changes Analysis.
+![Available workflows](images/published_workflows_update.png "Published workflows")
 
 
 ## **bio3d_rmsd**
@@ -72,8 +76,11 @@ As per the slides we'll carry out some basic analysis by calculating RMSD, RMSF 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **bio3d_rmsd/2.3** {% icon tool %} with the following parameters:
->
+> The Root Mean Square Deviation (RMSD) is a standard measure of structural distance between coordinates. This tool can calculate and plot the RMSD of the selected section.
 {: .hands_on}
+
+![Snapshot of RMSD tool parameters](images/analysis_rmsd.png "RMSD parameters")
+
 
 ![Snapshot of RMSD histogram](images/RMSD_Histogram_Plot_34.png "RMSD histogram for a short CBH1 simulation")
 ![Snapshot of RMSD plot](images/RMSD_plot_33.png "RMSD plot for a short CBH1 simulation")
@@ -84,8 +91,10 @@ As per the slides we'll carry out some basic analysis by calculating RMSD, RMSF 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **bio3d_rmsf/2.3** {% icon tool %} with the following parameters:
->
+> The Root Mean Square Fluctuation (RMSF) conformational variance that analysis can analyze the portions of structure that are fluctuating from their mean structure the most (or least). This tool can calculate and plot the RMSF of the selected section.
 {: .hands_on}
+
+![Snapshot of RMSF tool parameters](images/analysis_rmsf.png "RMSF parameters")
 
 ![Snapshot of RMSF plot](images/rmsf_plot_23.png "RMSF plot for a short CBH1 simulation")
 
@@ -93,10 +102,14 @@ As per the slides we'll carry out some basic analysis by calculating RMSD, RMSF 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **bio3d_pca/2.3** {% icon tool %} with the following parameters:
->
+> 1. **bio3d_pca/2.3 and pcavis** {% icon tool %} with the following parameters:
+> PCA can be used to determine the relationship between statistically meaningful conformations (major global motions) sampled during the trajectory.
+> PCAvis: This tool can generate small trajectories of first three principle components. The .pdb of the .nc files can be visualized using a visualization software such as VMD.
 >
 {: .hands_on}
+
+![Snapshot of PCA tool parameters](images/analysis_pca.png "PCA parameters")
+![Snapshot of PCA vis tool parameters](images/analysis_pca_vis.png "PCA vis tool parameters")
 
 ![Snapshot of PCA plot](images/PCA_plot_46.png "PCA plot for a short CBH1 simulation")
 

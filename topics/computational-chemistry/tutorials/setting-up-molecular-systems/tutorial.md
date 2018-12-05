@@ -95,10 +95,6 @@ The correctly modelled substrate is available. This modelling was done using VMD
 > 1. Create a new history for this tutorial
 > 2. Import the files from the [Google Drive](https://docs.google.com/document/d/1VlTfyYqFz2dJP_95Zec10eLr-1GhP3KpA31EGX8fLzI/edit?usp=sharing)  [PDB](https://files.rcsb.org/download/7CEL.pdb) or from the shared data library
 >
->    ```
->    
->    ```
->
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
@@ -115,12 +111,6 @@ The correctly modelled substrate is available. This modelling was done using VMD
 
 # Modelling with CHARMM-GUI
 It is convenient to setup the molecular system using a tool such as CHARMM-GUI. Alternatives methods are possible.
-
-> ### {% icon details %} Alternatives for modelling
-> Schrodinger
-  Antechamber
->
-{: .details}
 
 ### {% icon tip %} Tip: Viewing figures
 >  * Some of the figures are screenshots and it may be difficult to make out details
@@ -145,7 +135,7 @@ Preparation in CHARMM-GUI if using CHARMM for later simulation.
 
 > ### {% icon hands_on %} Hands-on: Upload the PDB to CHARMM-GUI
 >
-> Retrieve the modelled PDB structure from [Google Drive](https://docs.google.com/document/d/1VlTfyYqFz2dJP_95Zec10eLr-1GhP3KpA31EGX8fLzI/edit?usp=sharing)  [PDB](https://files.rcsb.org/download/7CEL.pdb).
+> Retrieve the modelled PDB structure from [Google Drive](https://docs.google.com/document/d/1VlTfyYqFz2dJP_95Zec10eLr-1GhP3KpA31EGX8fLzI/edit?usp=sharing) 
 >Upload the PDB and choose CHARMM format.
 {: .hands_on}
 
@@ -165,7 +155,7 @@ The output is a .tgz file (a tarball or zipped tarball). Inside the archive you 
 > ### {% icon tip %} What is a .tgz file?
 >
 > This is a compressed file and needs to be uncompressed using the correct tool.
-> On Linux or Mac: tar will work fine `tar -zxvf example.tgx`
+> On Linux or Mac: tar will work fine `tar -zxvf example.tgz`
 > On Windows use [7zip](https://www.7-zip.org/download.html) or download Git for windows and use Git Bash.
 {: .tip}
 
@@ -190,7 +180,7 @@ Rename the hetero chain to BGLC and add disulfide bonds.
 ![Snapshot of CHARMM-GUI renaming section](images/charmmgui-manipulate.png "Rename the chains in CHARMM-GUI")
 
 ### Setup the waterbox and add ions
-Set up a waterbox. Use a size if 10 Angstroms and choose a cubic box.
+Set up a waterbox. Use a size of 10 Angstroms and choose a cubic box.
 
 ![Snapshot of CHARMM-GUI waterbox section](images/charmmgui-waterbox.png "Setting up a waterbox in CHARMM-GUI")
 > ### {% icon details %} Parameter details
@@ -206,7 +196,16 @@ Set up a waterbox. Use a size if 10 Angstroms and choose a cubic box.
 
 ### Download the output
 The output is a .tgz file (a tarball or zipped tarball). Inside the archive you will see all inputs and outputs from CHARMM-GUI.
+
 ![Snapshot of CHARMM-GUI NAMD output section](images/charmmgui-namdoutput.png "NAMD output from CHARMM-GUI")
+
+> ### {% icon tip %} What is a .tgz file?
+>
+> This is a compressed file and needs to be uncompressed using the correct tool.
+> On Linux or Mac: tar will work fine `tar -zxvf example.tgz`
+> On Windows use [7zip](https://www.7-zip.org/download.html) or download [Git for windows](https://git-scm.com/downloads) and use Git Bash.
+{: .tip}
+
 
 ### Upload to Galaxy
 Upload the following files to your BRIDGE instance:
