@@ -123,7 +123,6 @@ It is convenient to setup the molecular system using a tool such as CHARMM-GUI. 
 {: .details}
 
 ### {% icon tip %} Tip: Viewing figures
->
 >  * Some of the figures are screenshots and it may be difficult to make out details
 >  * Right-click on the image and choose 'Open image in new tab' to view 
 >  * Zoom in and out as needed to see the content
@@ -162,6 +161,14 @@ Rename the hetero chain to BGLC and add disulfide bonds.
 The output is a .tgz file (a tarball or zipped tarball). Inside the archive you will see all inputs and outputs from CHARMM-GUI.
 
 ![Snapshot of CHARMM-GUI CHARMM output section](images/charmmgui-charmmoutput.png "CHARMM output from CHARMM-GUI")
+
+> ### {% icon tip %} What is a .tgz file?
+>
+> This is a compressed file and needs to be uncompressed using the correct tool.
+> On Linux or Mac: tar will work fine `tar -zxvf example.tgx`
+> On Windows use [7zip](https://www.7-zip.org/download.html) or download Git for windows and use Git Bash.
+{: .tip}
+
 
 ### Upload to Galaxy
 Upload the step1_pdbreader.psf and step1_pdbreader.crd to your BRIDGE instance and run the system setup tool.
