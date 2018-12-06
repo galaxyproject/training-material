@@ -18,6 +18,7 @@ time_estimation: 3H
 key_points:
 - Several MD engines are available in BRIDGE
 - Workflows are available for common simulations tasks such as equilibration and production dynamics for various ensembles (NVT, NPT)
+- You've run an equilibrium and production MD simulation using NAMD
 contributors:
 - chrisbarnettster
 - tsenapathi
@@ -42,10 +43,10 @@ contributors:
 
 # Simulation with NAMD (imported from CHARMM-GUI)
 
-This workflow uses NAMD as a molecular dynamics engine. An NVT simulation is followed by an NPT simulation.
+This process can be accomplished by selected each tools from the tools menu or by importing the workflow. The workflow method is most efficient and the individual tools used in the workflow are discussed below. 
 
 
-If you've imported from CHARMM-GUI read through the theory then skip to [namd_nvt](#namd_nvt) otherwise carry on and start with [setup](#setup). The workflows as shown below for [CHARMM and NAMD](#figure-1) or [only NAMD](#figure-2) will be used.
+If you've imported from CHARMM-GUI read through the theory then skip to [NAMD_MD](#namd_md) otherwise carry on and start with [setup](#setup). The workflows as shown below for [CHARMM and NAMD](#figure-1) or [only NAMD](#figure-2) will be used.
 
 
 
@@ -71,7 +72,7 @@ This tool will:
 - neutralise the system by using 0.05M NaCl
 - conduct a short minimisation 
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on:
 >
 > 1. **setup** {% icon tool %} with the following parameters:
 >
@@ -86,7 +87,7 @@ This tools will:
 - Setup periodic boundaries and generate Particle Mesh Ewald (PME)
 - generate reference structures for restraints in NAMD (if selected)
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: 
 >
 > 1. **minimizer** {% icon tool %} with the following parameters:
 >
@@ -94,33 +95,48 @@ This tools will:
 {: .hands_on}
 
 
+## NAMD MD workflow
+{: #namd_md}
 
-## **namd_nvt**
+This workflow uses NAMD as a molecular dynamics engine. An NVT simulation is followed by an NPT simulation.
+
+> ### {% icon hands_on %} Hands-on: Access the workflow
+> Access the published workflows
+> ![List of published workflows](images/published_workflows_update.png "Published workflows")
+> Choose to import the NAMD MD workflow from published workflows
+> ![Import workflow](images/import_workflow.png "Import workflow")
+> Choose to run a workflow from your available workflows
+> ![Your workflows](images/workflows_yours.png "Your workflows")
+{: .hands_on}
+
+
+
+### **namd_nvt**
 {: #namd_nvt}
 Classical NVT dynamics.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: NVT dynamics
 >
 > 1. **namd_nvt** {% icon tool %} with the following parameters:
 >
 > This tool runs classical molecular dynamics simulations in NAMD using an NVT ensemble. User can run the simulation in small time intervals. The coordinates, velocities and the extended system files can be use to restart the simulations. Harmonic restraints can be used. NAMD collective variable module is used to give RMSD harmonic restraints.
+> ![Snapshot of NAMD NVT tool parameters part 2](images/namd_nvt_tool_params.png "NAMD NVT parameters")
 {: .hands_on}
 
-![Snapshot of NAMD NVT tool parameters part 2](images/namd_nvt_tool_params.png "NAMD NVT parameters")
 
 
-## **namd_npt**
+### **namd_npt**
 Classical NPT dynamics.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: NPT dynamics
 >
 > 1. **namd_npt** {% icon tool %} with the following parameters:
 >
 > This tool runs classical molecular dynamics simulations in NAMD using an NPT ensemble. User can run the simulation in small time intervals. The coordinates, velocities and the extended system files can be use to restart the simulations. Harmonic restraints can be used. NAMD collective variable module is used to give RMSD harmonic restraints.
+> ![Snapshot of NAMD NPT tool parameters part 1](images/namd_npt_part1.png "NAMD NPT parameters 1")
+> ![Snapshot of NAMD NPT tool parameters part 2](images/namd_npt_part2.png "NAMD NPT parameters 2")
 {: .hands_on}
 
-![Snapshot of NAMD NPT tool parameters part 1](images/namd_npt_part1.png "NAMD NPT parameters 1")
-![Snapshot of NAMD NPT tool parameters part 2](images/namd_npt_part2.png "NAMD NPT parameters 2")
 
 # Conclusion
 {:.no_toc}

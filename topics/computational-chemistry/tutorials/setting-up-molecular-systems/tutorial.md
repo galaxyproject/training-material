@@ -57,7 +57,7 @@ In this section we'll access the PDB, download the correct structure, import it 
 > ### {% icon tip %} Background: What is the PDB (Protein Data Bank) and format?
 >
 > The Protein Data Bank (PDB) format contains atomic coordinates of biomolecules and provides a standard representation for macromolecular structure data derived from X-ray diffraction and NMR studies.
-> For example the `PDB`-file for a trans-sialadise with its substrate (PDB: [7CEL](https://www.rcsb.org/pdb/explore/explore.do?structureId=7CEL)):
+> For example the `PDB`-file for a hydrolase with its substrate (PDB: [7CEL](https://www.rcsb.org/pdb/explore/explore.do?structureId=7CEL)):
 >
 > More resources:
 >
@@ -81,7 +81,7 @@ In this section we'll access the PDB, download the correct structure, import it 
 
 ## Get data
 
-The 7CEL PDB does not include a complete 8 unit substrate and some modelling is required.
+The 7CEL [PDB](https://files.rcsb.org/download/7CEL.pdb) does not include a complete 8 unit substrate and some modelling is required.
 The correctly modelled substrate is available. This modelling was done using VMD for atomic placement and CHARMM for minimisation.
 > ### {% icon details %} More details about the modelling done
 >
@@ -93,29 +93,25 @@ The correctly modelled substrate is available. This modelling was done using VMD
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from the [Google Drive](https://docs.google.com/document/d/1VlTfyYqFz2dJP_95Zec10eLr-1GhP3KpA31EGX8fLzI/edit?usp=sharing)  [PDB](https://files.rcsb.org/download/7CEL.pdb) or from the shared data library
+> 2. Import the files from the [Google Drive](https://docs.google.com/document/d/1VlTfyYqFz2dJP_95Zec10eLr-1GhP3KpA31EGX8fLzI/edit?usp=sharing) or from the shared data library.
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
 > 3. Rename the datasets
-> 4. Check that the datatype
+> 4. Check that the datatatype is correct
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
 >
 {: .hands_on}
 
 # Modelling with CHARMM-GUI
 It is convenient to setup the molecular system using a tool such as CHARMM-GUI. Alternatives methods are possible.
 
-### {% icon tip %} Tip: Viewing figures
->  * Some of the figures are screenshots and it may be difficult to make out details
->  * Right-click on the image and choose 'Open image in new tab' to view 
->  * Zoom in and out as needed to see the content
+> ### {% icon tip %} Tip: Viewing figures
+> * Some of the figures are screenshots and it may be difficult to make out details
+> * Right-click on the image and choose 'Open image in new tab' to view 
+> * Zoom in and out as needed to see the content
 {: .tip}
 
 ![CHARMM-GUI interface](images/charmmgui.png "The CHARMM-GUI interface")
@@ -170,8 +166,8 @@ Upload the step1_pdbreader.psf and step1_pdbreader.crd to your BRIDGE instance a
 {: #NAMD}
 Preparation in CHARMM-GUI if using NAMD for later simulation.
 ### Upload the PDB to CHARMM-GUI
-Retrieve the modelled PDB structure from [Google Drive](https://docs.google.com/document/d/1VlTfyYqFz2dJP_95Zec10eLr-1GhP3KpA31EGX8fLzI/edit?usp=sharing)  [PDB](https://files.rcsb.org/download/7CEL.pdb).
-[Navigate to CHARMM-GUI](http://www.charmm-gui.org/?doc=input/mdsetup) and use the Input Generator, specifically the Quick MD Simulator tool.
+Retrieve the modelled PDB structure from [Google Drive](https://docs.google.com/document/d/1VlTfyYqFz2dJP_95Zec10eLr-1GhP3KpA31EGX8fLzI/edit?usp=sharing).
+[Navigate to CHARMM-GUI](http://www.charmm-gui.org/?doc=input/mdsetup) and use the Input Generator, specifically the Quick MD Simulator tool. 
 
 ![Snapshot of CHARMM-GUI Quick MD Simulator tool ](images/charmmgui-mdsimulator.png "The CHARMM-GUI Quick MD Simulator tool")
 
@@ -208,7 +204,7 @@ The output is a .tgz file (a tarball or zipped tarball). Inside the archive you 
 
 
 ### Upload to Galaxy
-Upload the following files to your BRIDGE instance:
+Upload the following files to your BRIDGE instance and ensure the correct datatype is selected:
  - step3_pbcsetup.xplor.ext.psf -> xplor psf input (psf format)
  - step3_pbcsetup.pdb -> pdb input (pdb format)
  - Checkfft.str -> PME grid specs (txt format)
