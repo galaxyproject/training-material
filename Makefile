@@ -88,6 +88,12 @@ check-html: build ## validate HTML
 	)
 .PHONY: check-html
 
+check-workflows: build ## validate Workflows
+	( $(ACTIVATE_ENV) && \
+	  ./bin/validate-json.sh
+	)
+.PHONY: check-workflows
+
 check-html-internal: build ## validate HTML (internal links only)
 	( $(ACTIVATE_ENV) && \
 	  htmlproofer \
