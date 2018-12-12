@@ -1,8 +1,373 @@
 {
-    "a_galaxy_workflow": "true",
-    "annotation": "",
-    "format-version": "0.1",
-    "uuid": "0e591c58-773c-4a20-be59-4559ea28f19f",
-    "name": "rna-seq-viz-with-cummerbund",
-    "steps": {"0": {"tool_id": null, "tool_version": null, "outputs": [], "workflow_outputs": [], "input_connections": {}, "tool_state": "{\"name\": \"RNA-Seq SQLite result data\"}", "id": 0, "uuid": "bd14fdd0-5c56-4c74-816f-c52ed5cf202d", "errors": null, "name": "Input dataset", "label": null, "inputs": [{"name": "RNA-Seq SQLite result data", "description": ""}], "position": {"top": 10, "left": 10}, "annotation": "", "content_id": null, "type": "data_input"}, "1": {"tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/cummerbund_to_tabular/cummerbund_to_cuffdiff/1.0.1", "tool_version": "1.0.1", "outputs": [{"type": "tabular", "name": "cds_count_output"}, {"type": "tabular", "name": "cds_diff_output"}, {"type": "tabular", "name": "cds_exp_diff_output"}, {"type": "tabular", "name": "cds_fpkm_output"}, {"type": "tabular", "name": "cds_rg_output"}, {"type": "tabular", "name": "gene_exp_diff_output"}, {"type": "tabular", "name": "genes_count_output"}, {"type": "tabular", "name": "genes_fpkm_output"}, {"type": "tabular", "name": "gene_rg_output"}, {"type": "tabular", "name": "isoform_exp_diff_output"}, {"type": "tabular", "name": "isoform_count_output"}, {"type": "tabular", "name": "isoform_fpkm_output"}, {"type": "tabular", "name": "isoform_rg_output"}, {"type": "tabular", "name": "promoters_diff_output"}, {"type": "tabular", "name": "read_groups_output"}, {"type": "tabular", "name": "run_info_output"}, {"type": "tabular", "name": "splicing_diff_output"}, {"type": "tabular", "name": "tss_group_exp_output"}, {"type": "tabular", "name": "tss_count_tracking_output"}, {"type": "tabular", "name": "tss_fpkm_output"}, {"type": "tabular", "name": "tss_rg_output"}, {"type": "tabular", "name": "var_model_output"}], "workflow_outputs": [], "input_connections": {"input_database": {"output_name": "output", "id": 0}}, "tool_state": "{\"tables\": \"[\\\"--tables isoform_exp_diff\\\"]\", \"input_database\": \"null\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"__page__\": null}", "id": 1, "tool_shed_repository": {"owner": "devteam", "changeset_revision": "0761bbc0a4e7", "name": "cummerbund_to_tabular", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "490435f6-eee7-4104-808d-10d1ead46a65", "errors": null, "name": "Extract CuffDiff", "post_job_actions": {}, "label": null, "inputs": [], "position": {"top": 10, "left": 230}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/cummerbund_to_tabular/cummerbund_to_cuffdiff/1.0.1", "type": "tool"}, "2": {"tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/cummerbund/cummeRbund/2.16.0", "tool_version": "2.16.0", "outputs": [{"type": "txt", "name": "output"}], "workflow_outputs": [], "input_connections": {"input_database": {"output_name": "output", "id": 0}}, "tool_state": "{\"plots\": \"[{\\\"__index__\\\": 0, \\\"height\\\": \\\"600\\\", \\\"plot\\\": {\\\"features\\\": \\\"isoforms\\\", \\\"log10\\\": \\\"true\\\", \\\"gene_id\\\": \\\"NDUFV1\\\", \\\"replicates\\\": \\\"true\\\", \\\"__current_case__\\\": 13, \\\"draw_summary\\\": \\\"false\\\", \\\"type\\\": \\\"expressionplot\\\", \\\"error_bars\\\": \\\"true\\\"}, \\\"width\\\": \\\"800\\\"}]\", \"input_database\": \"null\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"__page__\": null}", "id": 2, "tool_shed_repository": {"owner": "devteam", "changeset_revision": "78fcfc04fcfe", "name": "cummerbund", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "dbf34382-c7e2-45d2-b6ce-8d07bd5d899d", "errors": null, "name": "cummeRbund", "post_job_actions": {}, "label": null, "inputs": [], "position": {"top": 130, "left": 230}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/cummerbund/cummeRbund/2.16.0", "type": "tool"}, "3": {"tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/cummerbund/cummeRbund/2.16.0", "tool_version": "2.16.0", "outputs": [{"type": "txt", "name": "output"}], "workflow_outputs": [], "input_connections": {"input_database": {"output_name": "output", "id": 0}}, "tool_state": "{\"plots\": \"[{\\\"__index__\\\": 0, \\\"height\\\": \\\"600\\\", \\\"plot\\\": {\\\"features\\\": \\\"isoforms\\\", \\\"log10\\\": \\\"true\\\", \\\"gene_id\\\": \\\"NDUFV1\\\", \\\"replicates\\\": \\\"true\\\", \\\"__current_case__\\\": 14, \\\"type\\\": \\\"expressionbarplot\\\", \\\"error_bars\\\": \\\"true\\\"}, \\\"width\\\": \\\"800\\\"}]\", \"input_database\": \"null\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"__page__\": null}", "id": 3, "tool_shed_repository": {"owner": "devteam", "changeset_revision": "78fcfc04fcfe", "name": "cummerbund", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "b014fa95-d47e-427c-92e8-da68ad43643d", "errors": null, "name": "cummeRbund", "post_job_actions": {}, "label": null, "inputs": [], "position": {"top": 250, "left": 230}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/cummerbund/cummeRbund/2.16.0", "type": "tool"}, "4": {"tool_id": "Filter1", "tool_version": "1.1.0", "outputs": [{"type": "input", "name": "out_file1"}], "workflow_outputs": [], "input_connections": {"input": {"output_name": "isoform_exp_diff_output", "id": 1}}, "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"cond\": \"\\\"c14=='yes'\\\"\", \"input\": \"null\", \"header_lines\": \"\\\"0\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", "id": 4, "uuid": "8443fc4f-cc17-4bd7-958d-bd902f6b0d27", "errors": null, "name": "Filter", "post_job_actions": {}, "label": null, "inputs": [], "position": {"top": 10, "left": 450}, "annotation": "", "content_id": "Filter1", "type": "tool"}, "5": {"tool_id": "sort1", "tool_version": "1.0.3", "outputs": [{"type": "input", "name": "out_file1"}], "workflow_outputs": [], "input_connections": {"input": {"output_name": "out_file1", "id": 4}}, "tool_state": "{\"__page__\": null, \"style\": \"\\\"num\\\"\", \"column\": \"\\\"10\\\"\", \"__rerun_remap_job_id__\": null, \"order\": \"\\\"DESC\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"column_set\": \"[]\"}", "id": 5, "uuid": "b00768df-1b73-4305-b99a-1ed2a0ad0f03", "errors": null, "name": "Sort", "post_job_actions": {}, "label": null, "inputs": [], "position": {"top": 10, "left": 670}, "annotation": "", "content_id": "sort1", "type": "tool"}}
+  "a_galaxy_workflow": "true",
+  "annotation": "",
+  "format-version": "0.1",
+  "name": "rna-seq-viz-with-cummerbund",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "CuffDiff_SQLite_database.sqlite"
+        }
+      ],
+      "label": "CuffDiff_SQLite_database.sqlite",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 325
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"CuffDiff_SQLite_database.sqlite\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "ba779532-6b38-4d81-b4e0-b680da890655",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/cummerbund/cummeRbund/2.16.0",
+      "errors": null,
+      "id": 1,
+      "input_connections": {
+        "input_database": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool cummeRbund",
+          "name": "input_database"
+        }
+      ],
+      "label": null,
+      "name": "cummeRbund",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 613,
+        "top": 200
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/cummerbund/cummeRbund/2.16.0",
+      "tool_shed_repository": {
+        "changeset_revision": "78fcfc04fcfe",
+        "name": "cummerbund",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"plots\": \"[{\\\"__index__\\\": 0, \\\"height\\\": \\\"600\\\", \\\"plot\\\": {\\\"__current_case__\\\": 7, \\\"border\\\": \\\"false\\\", \\\"clustering\\\": \\\"both\\\", \\\"features\\\": \\\"isoforms\\\", \\\"genes\\\": [{\\\"__index__\\\": 0, \\\"gene_id\\\": \\\"LIMCH1\\\"}, {\\\"__index__\\\": 1, \\\"gene_id\\\": \\\"IFNL2\\\"}, {\\\"__index__\\\": 2, \\\"gene_id\\\": \\\"CXCL11\\\"}, {\\\"__index__\\\": 3, \\\"gene_id\\\": \\\"NUB1\\\"}], \\\"labcol\\\": \\\"true\\\", \\\"labrow\\\": \\\"true\\\", \\\"log10\\\": \\\"true\\\", \\\"type\\\": \\\"heatmap\\\"}, \\\"width\\\": \\\"800\\\"}]\", \"input_database\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}",
+      "tool_version": "2.16.0",
+      "type": "tool",
+      "uuid": "0cd7978f-0ec3-4fb8-8620-a0e73c9c1b83",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/cummerbund_to_tabular/cummerbund_to_cuffdiff/1.0.1",
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+        "input_database": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Extract CuffDiff",
+          "name": "input_database"
+        }
+      ],
+      "label": null,
+      "name": "Extract CuffDiff",
+      "outputs": [
+        {
+          "name": "cds_count_output",
+          "type": "tabular"
+        },
+        {
+          "name": "cds_diff_output",
+          "type": "tabular"
+        },
+        {
+          "name": "cds_exp_diff_output",
+          "type": "tabular"
+        },
+        {
+          "name": "cds_fpkm_output",
+          "type": "tabular"
+        },
+        {
+          "name": "cds_rg_output",
+          "type": "tabular"
+        },
+        {
+          "name": "gene_exp_diff_output",
+          "type": "tabular"
+        },
+        {
+          "name": "genes_count_output",
+          "type": "tabular"
+        },
+        {
+          "name": "genes_fpkm_output",
+          "type": "tabular"
+        },
+        {
+          "name": "gene_rg_output",
+          "type": "tabular"
+        },
+        {
+          "name": "isoform_exp_diff_output",
+          "type": "tabular"
+        },
+        {
+          "name": "isoform_count_output",
+          "type": "tabular"
+        },
+        {
+          "name": "isoform_fpkm_output",
+          "type": "tabular"
+        },
+        {
+          "name": "isoform_rg_output",
+          "type": "tabular"
+        },
+        {
+          "name": "promoters_diff_output",
+          "type": "tabular"
+        },
+        {
+          "name": "read_groups_output",
+          "type": "tabular"
+        },
+        {
+          "name": "run_info_output",
+          "type": "tabular"
+        },
+        {
+          "name": "splicing_diff_output",
+          "type": "tabular"
+        },
+        {
+          "name": "tss_group_exp_output",
+          "type": "tabular"
+        },
+        {
+          "name": "tss_count_tracking_output",
+          "type": "tabular"
+        },
+        {
+          "name": "tss_fpkm_output",
+          "type": "tabular"
+        },
+        {
+          "name": "tss_rg_output",
+          "type": "tabular"
+        },
+        {
+          "name": "var_model_output",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 393,
+        "top": 521
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/cummerbund_to_tabular/cummerbund_to_cuffdiff/1.0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "0761bbc0a4e7",
+        "name": "cummerbund_to_tabular",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"tables\": \"[\\\"--tables isoform_exp_diff\\\"]\", \"input_database\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"__page__\": null}",
+      "tool_version": "1.0.1",
+      "type": "tool",
+      "uuid": "c373df45-051e-4406-a304-4ed890cd4fd1",
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/cummerbund/cummeRbund/2.16.0",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "input_database": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool cummeRbund",
+          "name": "input_database"
+        }
+      ],
+      "label": null,
+      "name": "cummeRbund",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 626.5,
+        "top": 394
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/cummerbund/cummeRbund/2.16.0",
+      "tool_shed_repository": {
+        "changeset_revision": "78fcfc04fcfe",
+        "name": "cummerbund",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"plots\": \"[{\\\"__index__\\\": 0, \\\"height\\\": \\\"600\\\", \\\"plot\\\": {\\\"__current_case__\\\": 14, \\\"error_bars\\\": \\\"true\\\", \\\"features\\\": \\\"gene\\\", \\\"gene_id\\\": \\\"NDUFV1\\\", \\\"log10\\\": \\\"true\\\", \\\"replicates\\\": \\\"true\\\", \\\"type\\\": \\\"expressionbarplot\\\"}, \\\"width\\\": \\\"800\\\"}]\", \"input_database\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}",
+      "tool_version": "2.16.0",
+      "type": "tool",
+      "uuid": "caec839c-df2d-4626-9b09-5c443fcb82f3",
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/cummerbund/cummeRbund/2.16.0",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "input_database": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool cummeRbund",
+          "name": "input_database"
+        }
+      ],
+      "label": null,
+      "name": "cummeRbund",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 835.5,
+        "top": 301
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/cummerbund/cummeRbund/2.16.0",
+      "tool_shed_repository": {
+        "changeset_revision": "78fcfc04fcfe",
+        "name": "cummerbund",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"plots\": \"[{\\\"__index__\\\": 0, \\\"height\\\": \\\"600\\\", \\\"plot\\\": {\\\"__current_case__\\\": 13, \\\"draw_summary\\\": \\\"false\\\", \\\"error_bars\\\": \\\"true\\\", \\\"features\\\": \\\"isoforms\\\", \\\"gene_id\\\": \\\"NDUFV1\\\", \\\"log10\\\": \\\"true\\\", \\\"replicates\\\": \\\"true\\\", \\\"type\\\": \\\"expressionplot\\\"}, \\\"width\\\": \\\"800\\\"}]\", \"input_database\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}",
+      "tool_version": "2.16.0",
+      "type": "tool",
+      "uuid": "e05a80e4-e573-471c-b78f-9cc88651015e",
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "Filter1",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "input": {
+          "id": 2,
+          "output_name": "isoform_exp_diff_output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Filter",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "Filter",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 729,
+        "top": 528
+      },
+      "post_job_actions": {},
+      "tool_id": "Filter1",
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"cond\": \"\\\"c14=='yes'\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"header_lines\": \"\\\"1\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "1.1.0",
+      "type": "tool",
+      "uuid": "e9fe1a16-a0b7-429b-9eb1-892656bb6601",
+      "workflow_outputs": []
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "infile": {
+          "id": 5,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Sort",
+          "name": "infile"
+        }
+      ],
+      "label": null,
+      "name": "Sort",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 957,
+        "top": 523
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+      "tool_shed_repository": {
+        "changeset_revision": "74a8bef53a00",
+        "name": "text_processing",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"sortkeys\": \"[{\\\"__index__\\\": 0, \\\"column\\\": \\\"13\\\", \\\"order\\\": \\\"\\\", \\\"style\\\": \\\"n\\\"}, {\\\"__index__\\\": 1, \\\"column\\\": \\\"10\\\", \\\"order\\\": \\\"r\\\", \\\"style\\\": \\\"n\\\"}]\", \"__page__\": null, \"ignore_case\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"header\": \"\\\"1\\\"\", \"unique\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "1.1.1",
+      "type": "tool",
+      "uuid": "65631940-0685-4f3d-aa96-f71f1f3eb34f",
+      "workflow_outputs": []
+    }
+  },
+  "tags": [],
+  "uuid": "f7fb74e8-2e03-47a9-9dce-71bc33ccc52a",
+  "version": 1
 }
