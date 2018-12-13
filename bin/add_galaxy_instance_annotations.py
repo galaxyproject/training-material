@@ -1,12 +1,13 @@
 #!/usr/bin/env python
-import json
-import os
 import argparse
-import yaml
-import requests
-import io
 import csv
+import io
+import json
+import logging
 import multiprocessing.pool
+import os
+import requests
+import yaml
 
 
 def extract_public_galaxy_servers():
@@ -76,7 +77,7 @@ def extract_public_galaxy_servers_tools():
     return server_tools
 
 
-def check_tutorial(tool_filepath, server_tools):
+def check_tutorial(topic, tutorial, tool_filepath, server_tools):
     """Check which public Galaxy servers can run the tool in a tutorial"""
 
     # Extract the list of tools for the tutorial
@@ -95,6 +96,8 @@ def check_tutorial(tool_filepath, server_tools):
         if tutorial_tools.issubset(server_tools[server]['tools']):
             servers_supported[server] = server_tools[server]['url']
         else:
+            missing_tools = tutorial_tools - set(server_tools[server]['tools'])
+            logging.debug('MISSING:%s:%s/%s: %s', server, topic, tutorial, ', '.join(missing_tools))
             servers_unsupported[server] = server_tools[server]['url']
 
     return servers_supported, servers_unsupported
@@ -111,7 +114,6 @@ def check_tutorials():
         with open('.cache.yaml', 'w') as handle:
             yaml.dump(server_tools, handle)
 
-
     instance_annot = {}
     for topic in os.listdir("topics"):
         topic_dir = os.path.join("topics", topic)
@@ -126,7 +128,7 @@ def check_tutorials():
             if not os.path.exists(tool_filepath):
                 continue
             # extract the instances on which the tutorial can be run
-            supported, unsupported = check_tutorial(tool_filepath, server_tools)
+            supported, unsupported = check_tutorial(topic, tutorial, tool_filepath, server_tools)
 
             # Training-focused view
             instance_annot[topic]['tutorials'].setdefault(tutorial, {'supported': False, 'instances': {}})
@@ -143,5 +145,10 @@ def check_tutorials():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Extract which public Galaxy servers can run for the tutorials and add this information to a instance file')
+    parser.add_argument("--verbose", action='store_true')
     args = parser.parse_args()
+
+    if args.verbose:
+        logging.basicConfig(level=logging.DEBUG)
+
     check_tutorials()
