@@ -103,16 +103,20 @@ def check_tutorial(topic, tutorial, tool_filepath, server_tools):
     return servers_supported, servers_unsupported
 
 
-def check_tutorials():
+def check_tutorials(server=None):
     """Check all tutorials to extract the instances on which the tutorials can
     be run and add this information to metadata/instances.yaml file"""
-    if os.path.exists('.cache.yaml'):
-        with open('.cache.yaml', 'r') as handle:
-            server_tools = yaml.load(handle)
+    if server:
+        name, server = fetch_and_extract_individual_server_tools({'url': server, 'name': 'none'})
+        server_tools = {name: server}
     else:
-        server_tools = extract_public_galaxy_servers_tools()
-        with open('.cache.yaml', 'w') as handle:
-            yaml.dump(server_tools, handle)
+        if os.path.exists('.cache.yaml'):
+            with open('.cache.yaml', 'r') as handle:
+                server_tools = yaml.load(handle)
+        else:
+            server_tools = extract_public_galaxy_servers_tools()
+            with open('.cache.yaml', 'w') as handle:
+                yaml.dump(server_tools, handle)
 
     instance_annot = {}
     for topic in os.listdir("topics"):
@@ -146,9 +150,10 @@ def check_tutorials():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Extract which public Galaxy servers can run for the tutorials and add this information to a instance file')
     parser.add_argument("--verbose", action='store_true')
+    parser.add_argument("--server", help='Only check a single server, skip fetching of the public servers list.')
     args = parser.parse_args()
 
     if args.verbose:
         logging.basicConfig(level=logging.DEBUG)
 
-    check_tutorials()
+    check_tutorials(server=args.server)
