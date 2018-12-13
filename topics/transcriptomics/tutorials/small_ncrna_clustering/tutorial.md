@@ -27,7 +27,7 @@ Small Non-coding RNAs (ncRNAs) play a vital role in many cellular processes such
 
 For example, consider the miRNA biogenesis. The primary miRNA transcripts are processed by Drosha-complexes and results in hairpin precursor miRNAs. Then after they transported to the cytoplasm, Dicer slices off the hairpin. One of the RNA strands bound by Argonaute proteins regulates the target mRNA while the other strand is degraded.
 
-The following figure represents the mapped reads on the reference genome. The height of the bars represents the number of reads mapped. Reads in each bubble represent a *read profile*. In this case, they both are from miRNAs. From the small RNA-seq, we often see the two processed miRNA strands after mapping. The miRNA strand which targets the mRNA is expressed and we see more reads compared to the degraded strand. The gap between those two piles of reads represents the missing hairpin.
+The following figure (bottom part of the figure is taken from [DOI: 10.1038/nrg3162](https://doi.org/10.1038/nrg3162)) represents one of the small RNA processing patterns. The vertical block bars represent a mapped reads on reference genome. The height of the bars represents the number of reads mapped at that location. Reads in each bubble represent a *read profile*. In this case, they both are from miRNAs. From the small RNA-seq, we often see the two processed miRNA strands after mapping. The miRNA strand which targets the mRNA is expressed and we see more reads compared to the degraded strand. The gap between those two piles of reads represents the missing hairpin.
 
 ![read profiles](../../images/blockclust_profiles.png "Patterns of processing in read profiles")
 
@@ -43,16 +43,17 @@ In this tutorial, we will learn how to use **BlockClust** to cluster similar pro
 {: .agenda}
 
 # Preprocessing of the data
-We start with a BAM file as an input for this tutorial. If you want to use your own sequencing data, please clip the adapters and map to the reference genome. For this tutorial purpose, we already clipped the adapters and mapped the reads using **segemehl**.
+The data is we use is from human cell line MCF-7 sequenced in single-end on Illumina Genome Analyzer II. Reads are 36nt long and should be sufficiently long enough for this type of data. We start with a BAM file as an input for this tutorial. This BAM file is a result of mapping the reads on human reference genome build hg19 using **segemehl**. If you want to use your own raw sequencing data, please clip the adapters and map to the reference genome.
 
-First, we convert the BAM file into BED file. This is not a plain file conversion. Hence we cannot use any BAM to BED conversion tools. We use BlockClust tool in the pre-processing mode for this purpose. The resulting BED file contains tags (a tag is a unique read sequence in a deep-sequencing library) and their normalized expression (column 5), i.e. the ratio of the read count per tag to the number of mappings on the reference genome.
+In the first step, we convert the BAM file into BED file. This is not a plain file conversion. Hence we cannot use any kind of BAM to BED conversion tools. We use BlockClust tool in the pre-processing mode for this purpose. The resulting BED file contains tags (a tag is a unique read sequence in a deep-sequencing library) and their normalized expression (in column 5), i.e. the ratio of the read count per tag to the number of mappings on the reference genome.
+
 {: .hands_on}
 ## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
+> 2. Import the files from [Zenodo](https://zenodo.org/record/2172221/files/GSM769512.bam)
 >
 >    ```
 >    https://zenodo.org/record/2172221/files/GSM769512.bam
@@ -75,19 +76,19 @@ First, we convert the BAM file into BED file. This is not a plain file conversio
 
 
 ## Sort BAM file
-> Before continue to BAM to BED conversion we need to sort the alignments in the input BAM file by their positions.
+Before continue to BAM to BED conversion we need to sort the alignments in the input BAM file by their positions.
 > ### {% icon hands_on %} Hands-on: Sort BAM
 > 1. **Samtools sort** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"BAM File"*: `output` (Input dataset)
+>    - {% icon param-file %} *"BAM File"*: `GSM769512.bam`
 >
 {: .hands_on}
 
 ## BAM to BED of tags
-> Now it is time to do the actual conversion.
+Now it is time to do the actual conversion.
 > ### {% icon hands_on %} Hands-on: **BlockClust** preprocessing
 > 1. **BlockClust** {% icon tool %} with the following parameters:
 >    - *"Select mode of operation"*: `Pre-processing `
->        - {% icon param-file %} *"BAM file containing alignments"*: `output1` (output of **Samtools sort** {% icon tool %})
+>    - {% icon param-file %} *"BAM file containing alignments"*: output of **Samtools sort** {% icon tool %}
 >
 {: .hands_on}
 
@@ -99,7 +100,7 @@ Now we group the adjacent reads into so-called blocks and blockgroups using bloc
 
 > ### {% icon details %} More details about the theory
 >
-> The idea is to perform peak detection on the signal obtained by counting the number of reads per nucleotide. This signal, spanning adjacent loci, is then modeled with a mixture of Gaussians. An iterative greedy procedure is then used to collect reads that belong to the same block, starting from the largest Gaussian component, and removing them in successive iterations. The tool further assembles a sequence of adjacent blocks into a blockgroup if the blocks are either overlapping or are at a distance smaller than a user-defined threshold. A more detailed explanation is at http://hoffmann.bioinf.uni-leipzig.de/LIFE/blockbuster.html
+> The idea is to perform peak detection on the signal obtained by counting the number of reads per nucleotide. This signal, spanning adjacent loci, is then modeled with a mixture of Gaussians. An iterative greedy procedure is then used to collect reads that belong to the same block, starting from the largest Gaussian component, and removing them in successive iterations. The tool further assembles a sequence of adjacent blocks into a blockgroup if the blocks are either overlapping or are at a distance smaller than a user-defined threshold. A more detailed explanation is at [the blockbuster website](http://hoffmann.bioinf.uni-leipzig.de/LIFE/blockbuster.html)
 >
 {: .details}
 
@@ -111,20 +112,22 @@ In order to run the blockbuster successfully the input BED file need to be sorte
 > ### {% icon hands_on %} Hands-on: Sort the BED file
 >
 > 1. **Sort** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sort Query"*: `tags_bed` (output of **BlockClust** {% icon tool %})
+>    - {% icon param-file %} *"Sort Query"*: output of **BlockClust** {% icon tool %}
 >    - In *"Column selections"*:
->        - Click on *"Insert Column selections"*:
->        - In *"1: Column selections"*:
->            - *"on column"*: `c1`
->        - Click on *"Insert Column selections"*:
->        - In *"2: Column selections"*:
->            - *"on column"*: `c6`
->        - Click on *"Insert Column selections"*:
->        - In *"3: Column selections"*:
->            - *"on column"*: `c2`
->        - Click on *"Insert Column selections"*:
->        - In *"4: Column selections"*:
->            - *"on column"*: `c3`
+>        - *"on column"*: `Column: 1`
+>        - *"Flavor"*: `Alphabetical sort`
+>    - Click on *"Insert Column selections"*:
+>    - In *"Column selections"*:
+>        - *"on column"*: `Column: 6`
+>        - *"Flavor"*: `Alphabetical sort`
+>    - Click on *"Insert Column selections"*:
+>    - In *"Column selections"*:
+>        - *"on column"*: `Column: 2`
+>        - *"Flavor"*: `Fast numeric sort`
+>    - Click on *"Insert Column selections"*:
+>    - In *"Column selections"*:
+>        - *"on column"*: `Column: 3`
+>        - *"Flavor"*: `Fast numeric sort`
 >    - *"Ignore case"*: `Yes`
 >
 {: .hands_on}
@@ -134,11 +137,8 @@ In order to run the blockbuster successfully the input BED file need to be sorte
 > ### {% icon hands_on %} Hands-on: blockbuster
 >
 > 1. **blockbuster** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"BED file containing read expressions"*: `outfile` (output of **Sort** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+>    - {% icon param-file %} *"BED file containing read expressions"*: output of **Sort** {% icon tool %}
+>    - *"Type of output"*: `reads (blockbuster format)`
 >
 {: .hands_on}
 
@@ -152,14 +152,21 @@ Apart from clustering, **BlockClust** has built-in class specific discriminative
 > 1. **BlockClust** {% icon tool %} with the following parameters:
 >    - *"Select mode of operation"*: `Clustering and classification`
 >        - {% icon param-file %} *"Input blockgroups file"*: `output` (output of **blockbuster** {% icon tool %})
+>        - *"Select reference genome"*: `Humann (hg19)`
 >        - *"Would you like to perform classification?"*: `Yes`
 >        - *"Mode of classification"*: `Model based`
 >
 {: .hands_on}
 
+The tool produces the following four output files.
+
 The `BlockClust: BED of predicted clusters` file is the result of Markov cluster algorithm. Each entry in this file represents a blockgroup. The 4th column contains is in the form of *annotation:blockgroup_id:cluster_id*. The *cluster_id* represents which cluster the blockgroup belongs to.
 
-The `BlockClust: Model based predictions BED` file is the result of classification. Each entry in this file represents a blockgroup. The 4th column contains the annotation of the ncRNA which it overlaps. For the blockgroups which are not overlapped with any known ncRNAs, there is a prefix 'predicted_' is added indicating that it is predicted by the **BlockClust** classification models.
+The `BlockClust: Model based predictions BED` file is the result of classification. Each entry in this file represents a blockgroup. The 4th column contains the annotation of the ncRNA which it overlaps. For the blockgroups which are not overlapped with any known ncRNAs, the prefix `predicted_` is added indicating that it is predicted by the **BlockClust** classification models.
+
+The `BlockClust: Hierarchical clustering plot` file shows a dendrogram construced based on average linkage clustering.
+
+The `BlockClust: Pairwise similarities` file contains the pairwise similarities of all input blockgroups.
 
 Next, we will visualize the read profiles (from the BAM file) and the predictions (BED from **BlockClust**) together.
 
@@ -171,8 +178,10 @@ Next, we will visualize the read profiles (from the BAM file) and the prediction
 > 4. Click on the `local` in `display with IGV` to load the reads into the IGV browser
 > 5. Expand the {% icon param-file %} `BlockClust: Model based predictions BED` file
 > 6. Click on the `local` in `display with IGV` to load the reads into the IGV browser
-> 7. Go to the location chr4:90653059-90653141.
+> 7. Go to the location `chr4:90653059-90653141` on IGV.
 >
+{: .hands_on}
+
 > ### {% icon question %} Questions
 >
 > 1. Do you see any already annotated transcript in that location?
@@ -186,7 +195,7 @@ Next, we will visualize the read profiles (from the BAM file) and the prediction
 > > 3. Predicted as a miRNA.
 > >
 > {: .solution}
-
+>
 {: .question}
 
 >    > ### {% icon comment %} Comments
@@ -198,7 +207,6 @@ Next, we will visualize the read profiles (from the BAM file) and the prediction
 >    >
 >    {: .comment}
 >
-{: .hands_on}
 
 
 # Conclusion
