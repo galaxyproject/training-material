@@ -390,7 +390,7 @@ creators of the Mothur software package, the <a href="http://www.schlosslab.org/
   <li><a href="#quality-control" id="markdown-toc-quality-control">Quality Control</a>    <ol>
       <li><a href="#reducing-sequencing-and-pcr-errors" id="markdown-toc-reducing-sequencing-and-pcr-errors">Reducing sequencing and PCR errors</a></li>
       <li><a href="#processing-improved-sequences" id="markdown-toc-processing-improved-sequences">Processing improved sequences</a></li>
-      <li><a href="#assessing-error-rates-based-on-our-mock-community" id="markdown-toc-assessing-error-rates-based-on-our-mock-community">Assessing error rates based on our mock community</a></li>
+      <li><a href="#optional-assessing-error-rates-based-on-our-mock-community" id="markdown-toc-optional-assessing-error-rates-based-on-our-mock-community">Optional: Assessing error rates based on our mock community</a></li>
       <li><a href="#preparing-for-analysis" id="markdown-toc-preparing-for-analysis">Preparing for analysis</a></li>
     </ol>
   </li>
@@ -413,12 +413,12 @@ creators of the Mothur software package, the <a href="http://www.schlosslab.org/
 </blockquote>
 
 <blockquote class="comment">
-  <h3 id="comment-note"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note</h3>
-  <p>Each of the Mothur tools in Galaxy contains a link to the mothur wiki in the help section. Here you can find
-more details about all the inputs, outputs and parameters for the tool.
-<br /><br />
-Your results may deviate slightly from the ones presented in this tutorial due to differing tool or
-reference data versions or stochastic processes in the algorithms.</p>
+  <h3 id="comment-note-results-may-vary"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note: results may vary</h3>
+
+  <p>Your results may be slightly different from the ones presented in this tutorial
+due to differing versions of tools, reference data, external databases, or
+because of stochastic processes in the algorithms.</p>
+
 </blockquote>
 
 <h1 id="obtaining-and-preparing-data">Obtaining and preparing data</h1>
@@ -482,6 +482,8 @@ in this document differ slightly from the description on their website -->
 
 <p>Now that we know what our input data is, let’s get it into our Galaxy history:</p>
 
+<p>All data required for this tutorial has been made available from Zenodo <a href="https://doi.org/10.5281/zenodo.800651"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg" alt="DOI" /></a></p>
+
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-obtaining-our-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Obtaining our data</h3>
 
@@ -490,31 +492,23 @@ in this document differ slightly from the description on their website -->
       <p>Make sure you have an empty analysis history. Give it a name.</p>
 
       <blockquote class="tip">
-        <h3 id="tip-starting-a-new-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Starting a new history</h3>
 
-        <ul>
-          <li>Click the <strong>gear icon</strong> at the top of the history panel</li>
-          <li>Select the option <strong>Create New</strong> from the menu</li>
-        </ul>
+        <h3 id="tip-tip-create-a-new-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Create a new history</h3>
+
+        <ol>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Click on <strong>Create New</strong></li>
+        </ol>
       </blockquote>
     </li>
-    <li><strong>Import Sample Data.</strong> The data for this course may be available from a shared library in Galaxy
-(ask your instructor). If this is not the case, you can upload it yourself.
+    <li><strong>Import Sample Data.</strong>
       <ul>
-        <li>Option 1: From data library:</li>
+        <li>Import the sample FASTQ files to your history, either from a shared data library (if available), or from Zenodo:</li>
       </ul>
-      <ul>
-        <li>Navigate to the shared data library, you should find 20 pairs of fastq files; 19 from the mice,
-and one pair from the mock community.</li>
-        <li>Option 2: From your Zenodo:
-          <ul>
-            <li>Data is available from Zenodo here: <a href="https://doi.org/10.5281/zenodo.800651"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg" alt="DOI" /></a></li>
-            <li>In the file upload menu choose the <code class="highlighter-rouge">Paste/Fetch data</code> option and enter the following urls to import the file from Zenodo to Galaxy directly</li>
-          </ul>
 
-          <blockquote class="solution">
-            <h3 id="solution-list-of-zenodo-urls"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> List of Zenodo URLs</h3>
-            <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/800651/files/F3D0_R1.fastq
+      <blockquote class="solution">
+        <h3 id="solution-list-of-zenodo-urls"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> List of Zenodo URLs</h3>
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/800651/files/F3D0_R1.fastq
 https://zenodo.org/record/800651/files/F3D0_R2.fastq
 https://zenodo.org/record/800651/files/F3D141_R1.fastq
 https://zenodo.org/record/800651/files/F3D141_R2.fastq
@@ -554,24 +548,64 @@ https://zenodo.org/record/800651/files/F3D9_R1.fastq
 https://zenodo.org/record/800651/files/F3D9_R2.fastq
 https://zenodo.org/record/800651/files/Mock_R1.fastq
 https://zenodo.org/record/800651/files/Mock_R2.fastq
-</code></pre></div>            </div>
-          </blockquote>
-          <p><br /></p>
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+    <li><strong>Import Reference Data</strong>
+      <ul>
+        <li>Import the following reference datasets
+          <ul>
+            <li><code class="highlighter-rouge">silva.v4.fasta</code></li>
+            <li><code class="highlighter-rouge">HMP_MOCK.v35.fasta</code></li>
+            <li><code class="highlighter-rouge">mouse.dpw.metadata</code></li>
+            <li><code class="highlighter-rouge">mouse.time.design</code></li>
+            <li><code class="highlighter-rouge">trainset9_032012.pds.fasta</code></li>
+            <li><code class="highlighter-rouge">trainset9_032012.pds.tax</code></li>
+          </ul>
         </li>
       </ul>
-    </li>
-    <li><strong>Import Reference Data.</strong>  Go back to the data library and import the following reference
-datasets
-      <ul>
-        <li><code class="highlighter-rouge">silva.v4.fasta</code></li>
-        <li><code class="highlighter-rouge">HMP_MOCK.v35.fasta</code></li>
-        <li><code class="highlighter-rouge">mouse.dpw.metadata</code></li>
-        <li><code class="highlighter-rouge">mouse.time.design</code></li>
-        <li><code class="highlighter-rouge">trainset9_032012.pds.fasta</code></li>
-        <li><code class="highlighter-rouge">trainset9_032012.pds.tax</code></li>
-      </ul>
-
-      <p>Or import them from Zenodo:</p>
 
       <blockquote class="solution">
         <h3 id="solution-list-of-zenodo-urls-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> List of Zenodo URLs</h3>
@@ -588,45 +622,62 @@ https://zenodo.org/record/800651/files/trainset9_032012.pds.tax
 </blockquote>
 
 <p>Now that’s a lot of files to manage. Luckily Galaxy can make life a bit easier by allowing us to create
-<em>dataset collections</em>. This enables us to easily run tools on multiple datasets at once. Let’s
-create a collection now:</p>
+<strong>dataset collections</strong>. This enables us to easily run tools on multiple datasets at once.</p>
 
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-organizing-our-data-into-a-collection"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Organizing our data into a collection</h3>
-
-  <p>Since we have paired-end data, each sample consist of two separate fastq files, one containing the
+<p>Since we have <strong>paired-end</strong> data, each sample consist of two separate fastq files, one containing the
 forward reads, and one containing the reverse reads. We can recognize the pairing from the file names,
 which will differ only by <code class="highlighter-rouge">_R1</code> or <code class="highlighter-rouge">_R2</code> in the filename. We can tell Galaxy about this paired naming
-convention, so that our tools will know which files belong together.</p>
+convention, so that our tools will know which files belong together. We do this by building a <strong>List of Dataset Pairs</strong></p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-organizing-our-data-into-a-paired-collection"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Organizing our data into a paired collection</h3>
 
   <ol>
     <li>
-      <p>Click on the <strong>checkmark icon</strong> at top of your history.
-  <img src="../../../../shared/images/history_menu_buttons2.png" alt="Checkmark icon in history menu" /></p>
+      <p>Click on the <strong>checkmark icon</strong> <i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> at top of your history.</p>
     </li>
-    <li>Select all the fastq files (40 in total), then click on <strong>for all selected..</strong> and select
-  <strong>Build List of Dataset Pairs</strong> from the dropdown menu.</li>
-    <li>
+    <li>Select all the FASTQ files (40 in total)
+      <ul>
+        <li>Click on <strong>for all selected..</strong></li>
+        <li>Select <strong>Build List of Dataset Pairs</strong> from the dropdown menu</li>
+      </ul>
+
       <p>In the next dialog window you can create the list of pairs. By default Galaxy will look for pairs
-  of files that differ only by a <code class="highlighter-rouge">_1</code> and <code class="highlighter-rouge">_2</code> part in their names. In our case however, these
-  should be <code class="highlighter-rouge">_R1</code> and <code class="highlighter-rouge">_R2</code>. Please change these values accordingly. You should now see a list of
-  pairs suggested by Galaxy,
-  <img src="../../images/create_collection.png" alt="List of suggested paired datasets" /> <br /><br /></p>
+of files that differ only by a <code class="highlighter-rouge">_1</code> and <code class="highlighter-rouge">_2</code> part in their names. In our case however, these
+should be <code class="highlighter-rouge">_R1</code> and <code class="highlighter-rouge">_R2</code>.</p>
     </li>
-    <li>
-      <p>Examine the pairings, if it looks good, you can click on <strong>auto-pair</strong> to create the suggested
-  pairs.
-  <img src="../../images/create_collection2.png" alt="The result of pairing" /> <br /><br />
-  The middle segment is the name for each pair. You can change these names by clicking on them. These
-  names will be used as sample names in the downstream analysis so always make sure they are
-  informative.
-  <strong>Important:</strong> Make sure these sample names contain only alphanumeric characters. If you’ve
-  imported the data from Zenodo, the sample names will default to the full url, please change these
-  values to only their last part, e.g. <code class="highlighter-rouge">F3D0</code>, <code class="highlighter-rouge">F3D5</code> etc.</p>
+    <li>Change these values accordingly
+      <ul>
+        <li>Change <code class="highlighter-rouge">_1</code> to <code class="highlighter-rouge">_R1</code> in the text field on the top left</li>
+        <li>Change <code class="highlighter-rouge">_2</code> to <code class="highlighter-rouge">_R2</code> om the text field on the top right</li>
+      </ul>
+
+      <p>You should now see a list of pairs suggested by Galaxy:
+<img src="../../images/create_collection.png" alt="List of suggested paired datasets" /> <br /><br /></p>
     </li>
-    <li>Once you are happy with your pairings, enter a name for your new collection at the bottom right of
-  the screen. Then click the <strong>Create List</strong> button. A new dataset collection item will now appear in
-  your history.</li>
+    <li>Examine the pairings and make sure they are correct.
+      <ul>
+        <li>
+          <p>Click on <strong>auto-pair</strong> to create the suggested pairs.</p>
+
+          <p><img src="../../images/create_collection2.png" alt="The result of pairing" /> <br /><br /></p>
+        </li>
+      </ul>
+
+      <p>The middle segment is the name for each pair. You can change these names by clicking on them.
+These names will be used as sample names in the downstream analysis so always make sure they are informative!</p>
+    </li>
+    <li>Name the pairs.
+      <ul>
+        <li>Make sure the pair names are like the image above (<code class="highlighter-rouge">F3D0</code>, <code class="highlighter-rouge">F3D5</code> etc)
+          <ul>
+            <li>If the files will imported via url, they may have the full url as sample name, please remove everything but the sample name for each pair</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>Name your collection</strong> at the bottom right of the screen</li>
+    <li>Click the <strong>Create List</strong> button. A new dataset collection item will now appear in your history</li>
   </ol>
 </blockquote>
 
@@ -665,8 +716,8 @@ fragment, resulting in an overlap in the middle. We will now combine these pairs
   <ul>
     <li><strong>Make.contigs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“Way to provide files” to <code class="highlighter-rouge">Multiple pairs - Combo mode</code></li>
-        <li>“Fastq pairs” to the collection you just created</li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Way to provide files”</em>: <code class="highlighter-rouge">Multiple pairs - Combo mode</code></li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Fastq pairs”</em>: the collection you just created</li>
         <li>Leave all other parameters to the default settings <br /><br /></li>
       </ul>
     </li>
@@ -699,8 +750,8 @@ M00967_43_000000000-A3JHG_1_1101_10051_26098    F3D0
   <ul>
     <li><strong>Summary.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“fasta” parameter to the <code class="highlighter-rouge">trim.contigs.fasta</code> file created by the make.contigs tool</li>
-        <li>“Output logfile?” to <code class="highlighter-rouge">yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">trim.contigs.fasta</code> file created by <strong>Make.contigs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Output logfile?”</em>: <code class="highlighter-rouge">yes</code></li>
       </ul>
     </li>
   </ul>
@@ -736,10 +787,10 @@ step when we run <code class="highlighter-rouge">screen.seqs</code>.</p>
   <ul>
     <li><strong>Screen.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“fasta” to the <code class="highlighter-rouge">trim.contigs.fasta</code> file created by the make.contigs tool</li>
-        <li>“group” the group file created in the make.contigs step</li>
-        <li>“maxlength” parameter to <code class="highlighter-rouge">275</code></li>
-        <li>“maxambig” parameter to <code class="highlighter-rouge">0</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">trim.contigs.fasta</code> file created by <strong>Make.contigs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“group”</em>: the group file created in the <strong>Make.contigs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step</li>
+        <li><em>“maxlength”</em>: <code class="highlighter-rouge">275</code></li>
+        <li><em>“maxambig”</em>: <code class="highlighter-rouge">0</code></li>
       </ul>
     </li>
   </ul>
@@ -773,8 +824,8 @@ times, we’ll unique our sequences using the <code class="highlighter-rouge">un
   <ul>
     <li><strong>Unique.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“fasta” to the <code class="highlighter-rouge">good.fasta</code> output from Screen.seqs</li>
-        <li>“output format” to <code class="highlighter-rouge">Name File</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">good.fasta</code> output from <strong>Screen.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“output format”</em>: <code class="highlighter-rouge">Name File</code></li>
       </ul>
     </li>
   </ul>
@@ -814,9 +865,9 @@ read_name7    read_name8
   <ul>
     <li><strong>Count.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“name” to the <code class="highlighter-rouge">names</code> output from Unique.seqs</li>
-        <li>“Use a Group file” to <code class="highlighter-rouge">yes</code></li>
-        <li>“group” to the group file we created using the Screen.seqs tool</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“name”</em>: the <code class="highlighter-rouge">names</code> output from <strong>Unique.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Use a Group file”</em>: <code class="highlighter-rouge">yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“group”</em>: the <code class="highlighter-rouge">group file</code> we created using the <strong>Screen.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
   </ul>
@@ -848,16 +899,16 @@ step to perform to improve the clustering of your OTUs <a href="https://doi.org/
   <ol>
     <li><strong>Align.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“fasta” to the fasta output from Unique.seqs</li>
-        <li>“reference” to the <code class="highlighter-rouge">silva.v4.fasta</code> reference file
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">fasta</code> output from <strong>Unique.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“reference”</em>: <code class="highlighter-rouge">silva.v4.fasta</code> reference file from your history
 <br /><br /></li>
       </ul>
     </li>
     <li><strong>Summary.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“fasta” parameter to the aligned output from previous step</li>
-        <li>“count” parameter to <code class="highlighter-rouge">count_table</code> output from Count.seqs</li>
-        <li>“Output logfile?” to <code class="highlighter-rouge">yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the aligned output from <strong>Align.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: <code class="highlighter-rouge">count_table</code> output from <strong>Count.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Output logfile?”</em>: <code class="highlighter-rouge">yes</code></li>
       </ul>
     </li>
   </ol>
@@ -898,11 +949,11 @@ base in a row (this also could have been done in the first execution of <code cl
   <ul>
     <li><strong>Screen.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“fasta” to the aligned fasta file</li>
-        <li>“start” to 1968</li>
-        <li>“end” to 11550</li>
-        <li>“maxhomop” to 8</li>
-        <li>“count” to our most recent count_table</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the aligned fasta file from <strong>Align.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“start”</em>: <code class="highlighter-rouge">1968</code></li>
+        <li><em>“end”</em>: <code class="highlighter-rouge">11550</code></li>
+        <li><em>“maxhomop”</em>: <code class="highlighter-rouge">8</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> file from <strong>Count.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
   </ul>
@@ -932,10 +983,9 @@ losing any information. We’ll do all this with filter.seqs:</p>
   <ul>
     <li><strong>Filter.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“fasta”” to good.fasta output from Sreen.seqs</li>
-        <li>“Vertical” to <code class="highlighter-rouge">yes</code></li>
-        <li>“trump” to <code class="highlighter-rouge">.</code></li>
-        <li>“Output logfile” to <code class="highlighter-rouge">yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: <code class="highlighter-rouge">good.fasta</code> output from the lastest <strong>Screen.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“trump”</em>: <code class="highlighter-rouge">.</code></li>
+        <li><em>“Output logfile”</em>: <code class="highlighter-rouge">yes</code></li>
       </ul>
     </li>
   </ul>
@@ -960,8 +1010,8 @@ columns. Because we’ve perhaps created some redundancy across our sequences by
   <ul>
     <li><strong>Unique.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“fasta” to the <code class="highlighter-rouge">filtered fasta</code> output from Filter.seqs</li>
-        <li>“name file or count table” to the count table from the last Screen.seqs</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">filtered fasta</code> output from <strong>Filter.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“name file or count table”</em>: the <code class="highlighter-rouge">count table</code> from the last <strong>Screen.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
   </ul>
@@ -991,9 +1041,9 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
   <ul>
     <li><strong>Pre.cluster</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“fasta” to the fasta output from the last Unique.seqs run</li>
-        <li>“name file or count table” to the count table from the last Unique.seqs</li>
-        <li>“diffs” to 2</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">fasta</code> output from the last <strong>Unique.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“name file or count table”</em>: the <code class="highlighter-rouge">count table</code> from the last <strong>Unique.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“diffs”</em>: <code class="highlighter-rouge">2</code></li>
       </ul>
     </li>
   </ul>
@@ -1033,10 +1083,10 @@ when they’re the most abundant sequence in another sample. This is how we do i
   <ul>
     <li><strong>Chimera.vsearch</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“fasta” to the fasta output from Pre.cluster</li>
-        <li>“Select Reference Template from” to <code class="highlighter-rouge">Self</code></li>
-        <li>“count” to the count table from the last Pre.cluster</li>
-        <li>“dereplicate” to Yes</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">fasta</code> output from <strong>Pre.cluster</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select Reference Template from”</em>: <code class="highlighter-rouge">Self</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> from the last <strong>Pre.cluster</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> “dereplicate” to Yes</li>
       </ul>
     </li>
   </ul>
@@ -1047,9 +1097,9 @@ still need to remove those sequences from the fasta file as well. We do this usi
   <ul>
     <li><strong>Remove.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“accnos” to the vsearch.accnos file from Chimera.vsearch</li>
-        <li>“fasta” to the fasta output from Pre.cluster</li>
-        <li>“count” to the count table from Chimera.vsearch</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“accnos”</em>: the <code class="highlighter-rouge">vsearch.accnos</code> file from <strong>Chimera.vsearch</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">fasta</code> output from <strong>Pre.cluster</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Chimera.vsearch</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
   </ul>
@@ -1086,10 +1136,10 @@ that chloroplasts and mitochondria have no functional role in a microbial commun
   <ul>
     <li><strong>Classify.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“fasta” to the fasta output from Remove.seqs</li>
-        <li>“reference” to <code class="highlighter-rouge">trainset9032012.pds.fasta</code> from your history</li>
-        <li>“taxonomy” to <code class="highlighter-rouge">trainset9032012.pds.tax</code> from your history</li>
-        <li>“count” to the count table file from Remove.seqs</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">fasta</code> output from <strong>Remove.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“reference”</em>: <code class="highlighter-rouge">trainset9032012.pds.fasta</code> from your history</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“taxonomy”</em>: <code class="highlighter-rouge">trainset9032012.pds.tax</code> from your history</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> file from <strong>Remove.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
   </ul>
@@ -1102,11 +1152,10 @@ command:</p>
   <ul>
     <li><strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“taxonomy” to the taxonomy output from Classify.seqs</li>
-        <li>“taxon” to <code class="highlighter-rouge">Chloroplast-Mitochondria-unknown-Archaea-Eukaryota</code> in the text box under <em>Manually
-select taxons for filtering</em></li>
-        <li>“fasta” to the fasta output from Remove.seqs</li>
-        <li>“count” to the count table from Remove.seqs</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“taxonomy”</em>: the taxonomy output from <strong>Classify.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“taxon - Manually select taxons for filtering”</em>: <code class="highlighter-rouge">Chloroplast-Mitochondria-unknown-Archaea-Eukaryota</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">fasta</code> output from <strong>Remove.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Remove.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
   </ul>
@@ -1140,7 +1189,15 @@ sequence to one of the domains.</p>
 
 <p>At this point we have curated our data as far as possible and we’re ready to see what our error rate is.</p>
 
-<h2 id="assessing-error-rates-based-on-our-mock-community">Assessing error rates based on our mock community</h2>
+<h2 id="optional-assessing-error-rates-based-on-our-mock-community">Optional: Assessing error rates based on our mock community</h2>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-skipping-the-mock-community-analysis"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Skipping the mock community analysis</h3>
+
+  <p>The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to <a href="#preparing-for-analysis">the next section</a>
+where we will cluster our sequences into OTUs, classify them and perform some visualisations.</p>
+
+</blockquote>
 
 <p>Measuring the error rate of your sequences is something you can only do if you have co-sequenced a mock
 community, that is, a sample of which you know the exact composition. This is something we include for
@@ -1199,10 +1256,10 @@ exactly what we would expect the analysis to produce as a result.</p>
   <ol>
     <li><strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“group file or count table” to the count table from Remove.lineage</li>
-        <li>“groups” to <code class="highlighter-rouge">Mock</code></li>
-        <li>“fasta” to fasta output from Remove.lineage</li>
-        <li>“output logfile?” to <code class="highlighter-rouge">yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“group file or count table”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“groups”</em>: <code class="highlighter-rouge">Mock</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span><em>“fasta”</em>: <code class="highlighter-rouge">fasta</code> output from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“output logfile?”</em>: <code class="highlighter-rouge">yes</code></li>
       </ul>
     </li>
   </ol>
@@ -1224,10 +1281,10 @@ the reads from our mock sample back to their known sequences, to see how many fa
   <ul>
     <li><strong>Seq.error</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“fasta” to the fasta from Get.groups</li>
-        <li>“reference” to <code class="highlighter-rouge">HMP_MOCK.v35.fasta</code> file from your history</li>
-        <li>“count” to the count table from Get.groups</li>
-        <li>“output log?” to <code class="highlighter-rouge">yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">fasta</code> output from <strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“reference”</em>: <code class="highlighter-rouge">HMP_MOCK.v35.fasta</code> file from your history</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“output log?”</em>: <code class="highlighter-rouge">yes</code></li>
       </ul>
     </li>
   </ul>
@@ -1274,8 +1331,8 @@ separation.</p>
   <ul>
     <li><strong>Dist.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“fasta” to the fasta from Get.groups</li>
-        <li>“cutoff” to <code class="highlighter-rouge">0.20</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">fasta</code> from <strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“cutoff”</em>: <code class="highlighter-rouge">0.20</code></li>
       </ul>
     </li>
   </ul>
@@ -1285,8 +1342,8 @@ separation.</p>
   <ul>
     <li><strong>Cluster</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“column” to the dist output from Dist.seqs</li>
-        <li>“count” to the count table from Get.groups</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“column”</em>: the <code class="highlighter-rouge">dist</code> output from <strong>Dist.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
   </ul>
@@ -1296,9 +1353,9 @@ separation.</p>
   <ul>
     <li><strong>Make.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“list” to the OTU list from Cluster</li>
-        <li>“count” to the count table from Get.groups</li>
-        <li>“label” to <code class="highlighter-rouge">0.03</code> (this indicates we are interested in the clustering at a 97% identity threshold)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“list”</em>: the <code class="highlighter-rouge">OTU list</code> from <strong>Cluster</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“label”</em>: <code class="highlighter-rouge">0.03</code> (this indicates we are interested in the clustering at a 97% identity threshold)</li>
       </ul>
     </li>
   </ul>
@@ -1308,7 +1365,7 @@ separation.</p>
   <ul>
     <li><strong>Rarefaction.single</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“shared” to the shared file from Make.shared</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“shared”</em>: the <code class="highlighter-rouge">shared</code> file from <strong>Make.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
   </ul>
@@ -1366,12 +1423,13 @@ the <code class="highlighter-rouge">remove.groups</code> command:</p>
   <ul>
     <li><strong>Remove.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“Select input type” to <code class="highlighter-rouge">fasta , name, taxonomy, or list with a group file or count table</code></li>
-        <li>“count table”, “fasta”, and “taxonomy” to the respective outputs from Remove.lineage</li>
-        <li>“groups” to <code class="highlighter-rouge">Mock</code></li>
+        <li><em>“Select input type”</em>: <code class="highlighter-rouge">fasta , name, taxonomy, or list with a group file or count table</code></li>
+        <li><em>“groups”</em>: <code class="highlighter-rouge">Mock</code></li>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“count table”</em>, <em>“fasta”</em>, and <em>“taxonomy”</em> to the respective outputs from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
   </ul>
+
 </blockquote>
 
 <h3 id="clustering-sequences-into-otus">Clustering sequences into OTUs</h3>
@@ -1395,12 +1453,12 @@ of <em>Order</em>. This is the approach that we  generally use in the Schloss la
   <ul>
     <li><strong>Cluster.split</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“Split by” to <code class="highlighter-rouge">Classification using fasta</code></li>
-        <li>“fasta” to the fasta output from Remove.groups</li>
-        <li>“taxonomy” to the taxonomy output from Remove.groups</li>
-        <li>“name file or count table” to the count table output from Remove.groups</li>
-        <li>“taxlevel” to <code class="highlighter-rouge">4</code></li>
-        <li>“cutoff” to <code class="highlighter-rouge">0.03</code></li>
+        <li><em>“Split by”</em>: <code class="highlighter-rouge">Classification using fasta</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">fasta</code> output from <strong>Remove.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“taxonomy”</em>: the <code class="highlighter-rouge">taxonomy</code> output from <strong>Remove.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“name file or count table”</em>: the <code class="highlighter-rouge">count table</code> output from <strong>Remove.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“taxlevel”</em>: <code class="highlighter-rouge">4</code></li>
+        <li><em>“cutoff”</em>: <code class="highlighter-rouge">0.03</code></li>
       </ul>
     </li>
   </ul>
@@ -1411,10 +1469,9 @@ of <em>Order</em>. This is the approach that we  generally use in the Schloss la
   <ul>
     <li><strong>Make.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“Select input type” to <code class="highlighter-rouge">OTU list</code></li>
-        <li>“list” to list output from Cluster.split</li>
-        <li>“count” to the count table from Remove.groups</li>
-        <li>“label” to <code class="highlighter-rouge">0.03</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“list”</em>: the <code class="highlighter-rouge">list</code> output from <strong>Cluster.split</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Remove.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“label”</em>: <code class="highlighter-rouge">0.03</code></li>
       </ul>
     </li>
   </ul>
@@ -1425,10 +1482,10 @@ OTU using the <code class="highlighter-rouge">Classify.otu</code> command:</p>
   <ul>
     <li><strong>Classify.otu</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“list” to output from Cluster.split</li>
-        <li>“count” to the count table from Remove.groups</li>
-        <li>“taxonomy” to the taxonomy output from Remove.groups</li>
-        <li>“label” to <code class="highlighter-rouge">0.03</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“list”</em>: the <code class="highlighter-rouge">list</code> output from <strong>Cluster.split</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Remove.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“taxonomy”</em>: the <code class="highlighter-rouge">taxonomy</code> output from <strong>Remove.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“label”</em>: <code class="highlighter-rouge">0.03</code></li>
       </ul>
     </li>
   </ul>
@@ -1487,7 +1544,7 @@ animal) followed by a D and a three digit number (number of days post weaning).<
   <ul>
     <li><strong>Count.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“shared” to the shared file from Make.shared</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“shared”</em>: the <code class="highlighter-rouge">shared</code> file from <strong>Make.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
   </ul>
@@ -1500,9 +1557,9 @@ number. Despite what some say, subsampling and rarefying your data is an importa
   <ul>
     <li><strong>Sub.sample</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“Select type of data to subsample” to <code class="highlighter-rouge">OTU Shared</code></li>
-        <li>“shared” to output from Make.shared</li>
-        <li>“size” to <code class="highlighter-rouge">2389</code></li>
+        <li><em>“Select type of data to subsample”</em>: <code class="highlighter-rouge">OTU Shared</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“shared”</em>: the <code class="highlighter-rouge">shared</code> file from <strong>Make.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“size”</em>: <code class="highlighter-rouge">2389</code></li>
       </ul>
     </li>
   </ul>
@@ -1540,7 +1597,7 @@ curves describing the number of OTUs observed as a function of sampling effort. 
   <ul>
     <li><strong>Rarefaction.single</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“shared” to shared file from Make.shared</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“shared”</em>: the <code class="highlighter-rouge">shared file</code> from <strong>Make.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
   </ul>
@@ -1569,33 +1626,20 @@ Let’s plot the rarefaction curve for a couple of our sequences:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-plot-rarefaction"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot Rarefaction</h3>
-  <!-- the following tool is because plotting tool will not detect columns in files inside collections yet -->
-  <p>First let’s make our life a little bit easier. As we only have one dataset in our collection anyways, we can
-collapse it into a single file.</p>
-
-  <ul>
-    <li><strong>Collapse Collection</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
-      <ul>
-        <li>“Collection of files to collapse to a single dataset” to the rarefaction curve collection</li>
-      </ul>
-    </li>
-  </ul>
-
-  <p>Now we are ready to plot our rarefaction curves:</p>
 
   <ul>
     <li><strong>Plotting tool</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“Plot Title” to <code class="highlighter-rouge">Rarefaction</code></li>
-        <li>“Label for x axis” to <code class="highlighter-rouge">Number of Sequences</code></li>
-        <li>“Label for y axis” to <code class="highlighter-rouge">Number of OTUs</code></li>
-        <li>“Output File Type” to <code class="highlighter-rouge">PNG</code></li>
-        <li>Click on Insert Series,
+        <li><em>“Plot Title”</em>: <code class="highlighter-rouge">Rarefaction</code></li>
+        <li><em>“Label for x axis”</em>: <code class="highlighter-rouge">Number of Sequences</code></li>
+        <li><em>“Label for y axis”</em>: <code class="highlighter-rouge">Number of OTUs</code></li>
+        <li><em>“Output File Type”</em>: <code class="highlighter-rouge">PNG</code></li>
+        <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <strong>Insert Series</strong>,
           <ul>
-            <li>“Dataset” to the collapsed rarefaction curve collection</li>
-            <li>Set <strong>Header in first line?</strong> to <code class="highlighter-rouge">Yes</code></li>
-            <li>“Column for x axis” to <code class="highlighter-rouge">Column 1</code></li>
-            <li>“Column for y-axis” to <code class="highlighter-rouge">Column 2</code> and <code class="highlighter-rouge">Column 5</code> and every third column until the end (we are
+            <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Dataset”</em>: rarefaction curve collection</li>
+            <li><em>“Header in first line?”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Column for x axis”</em>: <code class="highlighter-rouge">Column 1</code></li>
+            <li><em>“Column for y-axis”</em>: <code class="highlighter-rouge">Column 2</code> and <code class="highlighter-rouge">Column 5</code> and every third column until the end (we are
 skipping the low confidence and high confidence interval columns)</li>
           </ul>
         </li>
@@ -1626,9 +1670,9 @@ let’s randomly select 2440 sequences from each sample 1000 times and calculate
   <ul>
     <li><strong>Summary.single</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“share” to shared file from Make.shared</li>
-        <li>“calc” to <code class="highlighter-rouge">nseqs,coverage,sobs,invsimpson</code></li>
-        <li>“size” to 2389</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“share”</em>: the <code class="highlighter-rouge">shared</code> file from <strong>Make.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“calc”</em>: <code class="highlighter-rouge">nseqs,coverage,sobs,invsimpson</code></li>
+        <li><em>“size”</em>: <code class="highlighter-rouge">2389</code></li>
       </ul>
     </li>
   </ul>
@@ -1678,9 +1722,9 @@ with the <code class="highlighter-rouge">Dist.shared</code> command that will al
   <ul>
     <li><strong>Dist.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“shared” to the shared file from Make.shared</li>
-        <li>“calc” to thetayc,jclass</li>
-        <li>“subsample” to 2389</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“shared”</em>: to the <code class="highlighter-rouge">shared</code> file from <strong>Make.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“calc”</em>: <code class="highlighter-rouge">thetayc,jclass</code></li>
+        <li><em>“subsample”</em>: <code class="highlighter-rouge">2389</code></li>
       </ul>
     </li>
   </ul>
@@ -1690,8 +1734,8 @@ with the <code class="highlighter-rouge">Dist.shared</code> command that will al
   <ul>
     <li><strong>Heatmap.sim</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“Generate Heatmap for” to <code class="highlighter-rouge">phylip</code></li>
-        <li>“phylip” to output by Dist.shared (this is a collection input)</li>
+        <li><em>“Generate Heatmap for”</em>: <code class="highlighter-rouge">phylip</code></li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“phylip”</em>: the output of <strong>Dist.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (this is a collection input)</li>
       </ul>
     </li>
   </ul>
@@ -1716,25 +1760,14 @@ Let’s take a look at the Venn diagrams for the first 4 time points of female 3
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-venn-diagram"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Venn diagram</h3>
 
-  <!-- need to collapse collection again for group select to work -->
-  <p>First we collapse our collection again</p>
-
-  <ul>
-    <li><strong>Collapse Collection</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
-      <ul>
-        <li>“Collection” to Subsample.shared output collection from Sub.sample step</li>
-      </ul>
-    </li>
-  </ul>
-
   <p>After the tool has finished, rename the output to <code class="highlighter-rouge">Subsample.shared</code> to make it easier to recognize in
 further analysis</p>
 
   <ul>
     <li><strong>Venn</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>Set <code class="highlighter-rouge">OTU Shared</code> to Subsample.shared file from previous step</li>
-        <li>Set <code class="highlighter-rouge">groups</code> to <code class="highlighter-rouge">F3D0,F3D1,F3D2,F3D3</code></li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“OTU Shared”</em>: output from <strong>Subsample.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (collection)</li>
+        <li><em>“groups”</em>: <code class="highlighter-rouge">F3D0,F3D1,F3D2,F3D3</code></li>
       </ul>
     </li>
   </ul>
@@ -1757,13 +1790,13 @@ dendrogram using the jclass and thetayc calculators within the <code class="high
   <ol>
     <li><strong>Tree.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“Select input format” to Phylip Distance Matrix</li>
-        <li>“phylip” to dist files from Dist.shared (collection)</li>
+        <li><em>“Select input format”</em>: <code class="highlighter-rouge">Phylip Distance Matrix</code></li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“phylip”</em>: the <code class="highlighter-rouge">distance files</code> output from <strong>Dist.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
     <li><strong>Newick display</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“Newick file” to output from Tree.shared (collection)</li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Newick file”</em>: output from <strong>Tree.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
   </ol>
@@ -1794,9 +1827,9 @@ instance we can convert our shared file to the more widely used <code class="hig
   <ul>
     <li><strong>Make.biom</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“shared” to Subsample.shared</li>
-        <li>“constaxonomy” to taxonomy output from Classify.otu (collection)</li>
-        <li>“metadata” to <code class="highlighter-rouge">mouse.dpw.metadata</code></li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“shared”</em>: the output from <strong>Subsample.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“constaxonomy”</em>: the <code class="highlighter-rouge">taxonomy</code> output from <strong>Classify.otu</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“metadata”</em>: the <code class="highlighter-rouge">mouse.dpw.metadata</code> file you uploaded at the start of this tutorial</li>
       </ul>
     </li>
   </ul>
@@ -1830,13 +1863,13 @@ where you can several interactive visualisations:</p>
   <ul>
     <li><strong>Taxonomy-to-Krona</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“Taxonomy file” to the taxonomy output from Classify.otu (collection)</li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Taxonomy file”</em>: the <code class="highlighter-rouge">taxonomy</code> output from <strong>Classify.otu</strong></li>
       </ul>
     </li>
     <li><strong>Krona pie chart</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“Type of input” to <code class="highlighter-rouge">Tabular</code></li>
-        <li>“Input file” to taxonomy output from Classify.otu (collection)</li>
+        <li><em>“Type of input”</em>: <code class="highlighter-rouge">Tabular</code></li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input file”</em>: the <code class="highlighter-rouge">taxonomy</code> output from <strong>Taxonomy-to-Krona</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
   </ul>
@@ -1862,8 +1895,17 @@ any point in the hierarchy (here 5% of all)</p>
   </blockquote>
 </blockquote>
 
-<p>Well done! you have completed the basics of the mothur SOP. Below are some more exercises for those who wish to
-go into more details about statistical significance testing and population-level analysis.</p>
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>Well done! <i class="fa fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> You have completed the basics of the Schloss lab’s Standard Operating Procedure for Illumina MiSeq data. You have worked your way through the following pipeline:</p>
+
+<p><img src="../../images/mothur_sop_pipeline.jpg" alt="Mothur sop tutorial pipeline" width="50%" /></p>
+
+<h3 id="cant-get-enough">Can’t get enough?</h3>
+
+<p>Below are some more exercises for those who wish to go into more detail about statistical significance testing and population-level analysis.</p>
+
+<p>Or, click <a href="#wrap-up">here</a> to jump to the end and skip this extra credit section.</p>
 
 <h1 id="extra-credit">Extra Credit</h1>
 
@@ -2372,12 +2414,10 @@ Otu0082    0.08
 Otu0042    0.07
 </code></pre></div></div>
 
-<h1 class="no_toc" id="conclusion">Conclusion</h1>
+<h1 class="no_toc" id="wrap-up">Wrap-up</h1>
 
-<p>You have now seen how to perform the Schloss lab’s Standard Operating Procedure (SOP) for MiSeq data.
-You have worked your way through the following pipeline:</p>
+<p>Well done! You have now seen how to perform the complete Schloss lab’s Standard Operating Procedure (SOP) for MiSeq data.</p>
 
-<p><img src="../../images/mothur_sop_pipeline.jpg" alt="Mothur sop tutorial pipeline" /></p>
 
 
         
