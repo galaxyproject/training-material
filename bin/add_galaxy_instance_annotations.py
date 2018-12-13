@@ -5,7 +5,7 @@ import argparse
 import yaml
 import requests
 import io
-import pandas as pd
+import csv
 import multiprocessing.pool
 
 
@@ -13,8 +13,10 @@ def extract_public_galaxy_servers():
     """Extract a pandas Data frame with the public Galaxy servers"""
     r = requests.get('https://raw.githubusercontent.com/martenson/public-galaxy-servers/master/servers.csv')
     f = io.StringIO(r.text)
-    public_galaxy_servers = pd.read_csv(f, sep=",")
-    return public_galaxy_servers
+    reader = csv.reader(f, delimiter=",")
+    header = next(reader)
+    for row in reader:
+        yield dict(zip(header, row))
 
 
 def fetch_and_extract_individual_server_tools(server):
@@ -51,17 +53,16 @@ def fetch_and_extract_individual_server_tools(server):
 
     return server['name'], {
         'url': server['url'],
-        'tools': found_tools
+        'tools': set(found_tools)
     }
 
 
 def extract_public_galaxy_servers_tools():
     """Extract the tools from the public Galaxy servers using their API"""
-    servers = extract_public_galaxy_servers()
     server_tools = {}
 
     to_process = []
-    for index, server in servers.iterrows():
+    for server in extract_public_galaxy_servers():
         to_process.append(server)
 
     pool = multiprocessing.pool.ThreadPool(processes=20)
