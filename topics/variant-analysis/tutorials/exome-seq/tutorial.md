@@ -135,13 +135,6 @@ for each family member, we will start with one BAM file with mapping results.
 >     1. Click on **Edit attributes** (pencil icon on right panel)
 >     2. Select `Human Feb 2009` on **Database/Build**
 >     3. Save it
-> 2. Import the reference genome {% icon tool %}:
->    1. Go on **Data Libraries** in **Shared data** (top panel on Galaxy's interface)
->    2. Click on **Training Data**
->    3. Select `hg19`
->    4. Click on **Import selected datasets into history** (just below the top panel)
->    5. Import it
->    6. Convert it from 2bit to fasta with **twoBitToFa** from **Convert Formats**
 > 2. Follow the next steps for father data and then apply the generated workflow on other datasets
 >
 {: .hands_on}
