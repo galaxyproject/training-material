@@ -141,6 +141,10 @@ def check_tutorials(server=None):
             instance_annot[topic]['supported'] |= instance_annot[topic]['tutorials'][tutorial]['supported']
             instance_annot[topic]['tutorials'][tutorial]['instances'].update({k: {'url': v, 'supported': False} for (k, v) in unsupported.items()})
 
+    # If we're checking a single server, do not update the metadata file.
+    if server:
+        return
+
     # add the conserved servers to the metadata/instances.yaml file
     inst_file = os.path.join("metadata", "instances.yaml")
     with open(inst_file, "w") as f:
