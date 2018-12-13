@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: genome_annotation
+topic_name: genome-annotation
 tutorial_name: functional-annotation-workflow
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: genome_annotation
-tutorial_name: getting_started_with_apollo
+topic_name: genome-annotation
+tutorial_name: getting-started-with-apollo
 ---
 
 
