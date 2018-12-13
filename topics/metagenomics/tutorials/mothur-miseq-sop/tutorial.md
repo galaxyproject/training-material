@@ -284,7 +284,7 @@ Next we want to improve the quality of our data. But first, let's get a feel of 
 > ### {% icon hands_on %} Hands-on: Summarize data
 >
 > - **Summary.seqs** {% icon tool %} with the following parameters
->   - *"fasta"*: the `trim.contigs.fasta` file created by **Make.contigs** {% icon tool%}
+>   - {% icon param-file %} *"fasta"*: the `trim.contigs.fasta` file created by **Make.contigs** {% icon tool%}
 >   - *"Output logfile?"*: `yes`
 >
 {: .hands_on}
@@ -316,8 +316,8 @@ The following tool will remove any sequences with ambiguous bases (`maxambig` pa
 > ### {% icon hands_on %} Hands-on: Filter reads based on quality and length
 >
 > - **Screen.seqs** {% icon tool %} with the following parameters
->   - *"fasta"*: the `trim.contigs.fasta` file created by **Make.contigs** {% icon tool %}
->   - *"group"*: the group file created in the **Make.contigs** {% icon tool %} step
+>   - {% icon param-file %} *"fasta"*: the `trim.contigs.fasta` file created by **Make.contigs** {% icon tool %}
+>   - {% icon param-file %} *"group"*: the group file created in the **Make.contigs** {% icon tool %} step
 >   - *"maxlength"*: `275`
 >   - *"maxambig"*: `0`
 >
@@ -345,7 +345,7 @@ times, we'll unique our sequences using the `unique.seqs` command:
 > ### {% icon hands_on %} Hands-on: Remove duplicate sequences
 >
 > - **Unique.seqs** {% icon tool %} with the following parameters
->   - *"fasta"*: the `good.fasta` output from **Screen.seqs** {% icon tool %}
+>   - {% icon param-file %} *"fasta"*: the `good.fasta` output from **Screen.seqs** {% icon tool %}
 >   - *"output format"*: `Name File`
 >
 > > ### {% icon question %} Question
@@ -379,9 +379,9 @@ To reduce file sizes further and streamline analysis, we can now summarize the d
 > ### {% icon hands_on %} Hands-on: Generate count table
 >
 > - **Count.seqs** {% icon tool %} with the following parameters
->   - *"name"*: the `names` output from **Unique.seqs** {% icon tool %}
+>   - {% icon param-file %} *"name"*: the `names` output from **Unique.seqs** {% icon tool %}
 >   - *"Use a Group file"*: `yes`
->   - *"group"*: the `group file` we created using the **Screen.seqs** {% icon tool %}
+>   - {% icon param-file %} *"group"*: the `group file` we created using the **Screen.seqs** {% icon tool %}
 {: .hands_on}
 
 The *count_table* output will look something like this:
