@@ -152,7 +152,7 @@ Apart from clustering, **BlockClust** has built-in class specific discriminative
 > 1. **BlockClust** {% icon tool %} with the following parameters:
 >    - *"Select mode of operation"*: `Clustering and classification`
 >        - {% icon param-file %} *"Input blockgroups file"*: output of **blockbuster** {% icon tool %}
->        - *"Select reference genome"*: `Humann (hg19)`
+>        - *"Select reference genome"*: `Human (hg19)`
 >        - *"Would you like to perform classification?"*: `Yes`
 >        - *"Mode of classification"*: `Model based`
 >
@@ -178,7 +178,7 @@ Next, we will visualize the read profiles (from the BAM file) and the prediction
 > 4. Click on the `local` in `display with IGV` to load the reads into the IGV browser
 > 5. Expand the {% icon param-file %} `BlockClust: Model based predictions BED` file
 > 6. Click on the `local` in `display with IGV` to load the reads into the IGV browser
-> 7. Go to the location `chr4:90653059-90653141` on IGV.
+> 7. Go to the location `chr4:90653059-90653141` in IGV.
 >
 {: .hands_on}
 
