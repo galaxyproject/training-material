@@ -198,15 +198,15 @@ Next, we will visualize the read profiles (from the BAM file) and the prediction
 >
 {: .question}
 
->    > ### {% icon comment %} Comments
->    >
->    > In order for this step to work, you will need to have either IGV or [Java web start](https://www.java.com/en/download/faq/java_webstart.xml)
->    > installed on your machine. However, the questions in this section can also be answered by inspecting the IGV screenshots below.
->    >
->    > Check the [IGV documentation](https://software.broadinstitute.org/software/igv/AlignmentData) for more information.
->    >
->    {: .comment}
+> ### {% icon comment %} Comments
 >
+> In order for this step to work, you will need to have either IGV or [Java web start](https://www.java.com/en/download/faq/java_webstart.xml)
+> installed on your machine. However, the questions in this section can also be answered by inspecting the IGV screenshots below.
+>
+> Check the [IGV documentation](https://software.broadinstitute.org/software/igv/AlignmentData) for more information.
+>
+{: .comment}
+
 
 
 # Conclusion
