@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Small Non-coding RNA Clustering using BlockClust</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:title" content="Galaxy Training: Small Non-coding RNA Clustering using BlockClust" />
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body>
+        
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/transcriptomics" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Transcriptomics
+                        </a>
+                    </li>
+
+                    
+                    
+                    
+
+                    
+                        
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    
+                                        
+                                            
+                                                <a class="dropdown-item" href="/training-material/topics/transcriptomics/slides/introduction.html">
+                                                    Introduction to Transcriptomics
+                                                </a>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                </div>
+                            </li>
+                        
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://zenodo.org/record/1491876" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/transcriptomics#references" title="References">
+                            <i class="fa fa-bookmark" aria-hidden="true"></i><span class="visually-hidden">references</span> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fsmall_ncrna_clustering%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fsmall_ncrna_clustering%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fsmall_ncrna_clustering%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fsmall_ncrna_clustering%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fsmall_ncrna_clustering%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/transcriptomics/tutorials/small_ncrna_clustering/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+   
+{
+  "@context": "http://schema.org",
+  "@type": "CreativeWork",
+  "name": "Small Non-coding RNA Clustering using BlockClust",
+  "accessModeSufficient": "visual",
+  "accessibilityControl": "fullMouseControl",
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "learningResourceType": "",
+  "url": "/topics/transcriptomics/tutorials/small_ncrna_clustering/tutorial.html",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/record/1491876",
+      "name": "Training data for Small Non-coding RNA Clustering using BlockClust tutorial"
+    }
+  ],
+  "timeRequired": "PT1H",
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "pavanvidem"
+    }
+  ],
+  "description": "The questions this  addresses are:\n - What do the read profiles of small non-coding RNAs represent?\n - How to cluster the read profiles based on some intrinsic features?\n\n\\nThe objectives are:\n - Difference between mRNA-seq and smallRNA-seq\n - Unsupervised grouping of the adjacent reads into read profiles\n - Look and learn what the shapes of the read profiles represent\n - Clustering of the read profiles by machine learning algorithm\n\n"
+}
+
+    </script>
+    <section class="tutorial">
+        <h1>Small Non-coding RNA Clustering using BlockClust</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>What do the read profiles of small non-coding RNAs represent?</li>
+            
+            <li>How to cluster the read profiles based on some intrinsic features?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>Difference between mRNA-seq and smallRNA-seq</li>
+            
+            <li>Unsupervised grouping of the adjacent reads into read profiles</li>
+            
+            <li>Look and learn what the shapes of the read profiles represent</li>
+            
+            <li>Clustering of the read profiles by machine learning algorithm</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Quality Control:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                            
+                            <li> Mapping:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                - <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour</p>
+            
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+<p>Small Non-coding RNAs (ncRNAs) play a vital role in many cellular processes such as RNA splicing, translation, gene regulation. The small RNA-seq is a type of RNA-seq in which RNA fragments are size selected to capture only short RNAs. One of the most common applications of the small RNA-seq is discovering novel small ncRNAs. Mapping the small RNA-seq data reveals interesting patterns that represent the traces of the small RNA processing.</p>
+
+<p>For example, consider the miRNA biogenesis. The primary miRNA transcripts are processed by Drosha-complexes and results in hairpin precursor miRNAs. Then after they transported to the cytoplasm, Dicer slices off the hairpin. One of the RNA strands bound by Argonaute proteins regulates the target mRNA while the other strand is degraded.</p>
+
+<p>The following figure (bottom part of the figure is taken from <a href="https://doi.org/10.1038/nrg3162">DOI: 10.1038/nrg3162</a>) represents one of the small RNA processing patterns. The vertical block bars represent a mapped reads on reference genome. The height of the bars represents the number of reads mapped at that location. Reads in each bubble represent a <em>read profile</em>. In this case, they both are from miRNAs. From the small RNA-seq, we often see the two processed miRNA strands after mapping. The miRNA strand which targets the mRNA is expressed and we see more reads compared to the degraded strand. The gap between those two piles of reads represents the missing hairpin.</p>
+
+<figure id="figure-1"><img src="../../images/blockclust_profiles.png" alt="read profiles" title="Patterns of processing in read profiles" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Patterns of processing in read profiles</figcaption></figure>
+
+<p>In this tutorial, we will learn how to use <strong>BlockClust</strong> to cluster similar processing patterns together.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#preprocessing-of-the-data" id="markdown-toc-preprocessing-of-the-data">Preprocessing of the data</a>    <ol>
+      <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+      <li><a href="#sort-bam-file" id="markdown-toc-sort-bam-file">Sort BAM file</a></li>
+      <li><a href="#bam-to-bed-of-tags" id="markdown-toc-bam-to-bed-of-tags">BAM to BED of tags</a></li>
+    </ol>
+  </li>
+  <li><a href="#grouping-of-the-adjacent-reads-into-read-profiles" id="markdown-toc-grouping-of-the-adjacent-reads-into-read-profiles">Grouping of the adjacent reads into read profiles</a>    <ol>
+      <li><a href="#sort-the-bed-file-of-tags" id="markdown-toc-sort-the-bed-file-of-tags">Sort the BED file of tags</a></li>
+      <li><a href="#group-reads-into-blocks-and-blockgroups-using-blockbuster" id="markdown-toc-group-reads-into-blocks-and-blockgroups-using-blockbuster">Group reads into blocks and blockgroups using <strong>blockbuster</strong></a></li>
+    </ol>
+  </li>
+  <li><a href="#clustering-with-blockclust" id="markdown-toc-clustering-with-blockclust">Clustering with <strong>BlockClust</strong></a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="preprocessing-of-the-data">Preprocessing of the data</h1>
+<p>The data is we use is from human cell line MCF-7 sequenced in single-end on Illumina Genome Analyzer II. Reads are 36nt long and should be sufficiently long enough for this type of data. We start with a BAM file as an input for this tutorial. This BAM file is a result of mapping the reads on human reference genome build hg19 using <strong>segemehl</strong>. If you want to use your own raw sequencing data, please clip the adapters and map to the reference genome.</p>
+
+<p>In the first step, we convert the BAM file into BED file. This is not a plain file conversion. Hence we cannot use any kind of BAM to BED conversion tools. We use BlockClust tool in the pre-processing mode for this purpose. The resulting BED file contains tags (a tag is a unique read sequence in a deep-sequencing library) and their normalized expression (in column 5), i.e. the ratio of the read count per tag to the number of mappings on the reference genome.</p>
+
+<h2 class="hands_on" id="get-data">Get data</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/2172221/files/GSM769512.bam">Zenodo</a></p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2172221/files/GSM769512.bam
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Why is it mandatory to clip the adapters from the small RNA-seq data?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>Generally, the processed RNA fragments from the small RNAs are about 18-30nt long. If the sequenced read length is longer than the fragment (which is usually the case), the sequencer reads into the 3’ adapter.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="sort-bam-file">Sort BAM file</h2>
+<p>Before continue to BAM to BED conversion we need to sort the alignments in the input BAM file by their positions.</p>
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-sort-bam"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Sort BAM</h3>
+  <ol>
+    <li><strong>Samtools sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM File”</em>: <code class="highlighter-rouge">GSM769512.bam</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="bam-to-bed-of-tags">BAM to BED of tags</h2>
+<p>Now it is time to do the actual conversion.</p>
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-blockclust-preprocessing"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: <strong>BlockClust</strong> preprocessing</h3>
+  <ol>
+    <li><strong>BlockClust</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Select mode of operation”</em>: <code class="highlighter-rouge">Pre-processing </code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM file containing alignments”</em>: output of <strong>Samtools sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="grouping-of-the-adjacent-reads-into-read-profiles">Grouping of the adjacent reads into read profiles</h1>
+
+<p>Now we group the adjacent reads into so-called blocks and blockgroups using blockbuster tool. In general, each blockgroup should represent a single ncRNA read profile.</p>
+
+<figure id="figure-2"><img src="../../images/blockclust_blocks.png" alt="blocks of a blockgroup" title="Representation of blocks and blockgroups of a read profile" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Representation of blocks and blockgroups of a read profile</figcaption></figure>
+
+<blockquote class="details">
+  <h3 id="details-more-details-about-the-theory"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> More details about the theory</h3>
+
+  <p>The idea is to perform peak detection on the signal obtained by counting the number of reads per nucleotide. This signal, spanning adjacent loci, is then modeled with a mixture of Gaussians. An iterative greedy procedure is then used to collect reads that belong to the same block, starting from the largest Gaussian component, and removing them in successive iterations. The tool further assembles a sequence of adjacent blocks into a blockgroup if the blocks are either overlapping or are at a distance smaller than a user-defined threshold. A more detailed explanation is at <a href="http://hoffmann.bioinf.uni-leipzig.de/LIFE/blockbuster.html">the blockbuster website</a></p>
+
+</blockquote>
+
+<h2 id="sort-the-bed-file-of-tags">Sort the BED file of tags</h2>
+
+<p>In order to run the blockbuster successfully the input BED file need to be sorted by chromosome, strand, start position and then end positions.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-sort-the-bed-file"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Sort the BED file</h3>
+
+  <ol>
+    <li><strong>Sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: output of <strong>BlockClust</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>In <em>“Column selections”</em>:
+          <ul>
+            <li><em>“on column”</em>: <code class="highlighter-rouge">Column: 1</code></li>
+            <li><em>“Flavor”</em>: <code class="highlighter-rouge">Alphabetical sort</code></li>
+          </ul>
+        </li>
+        <li>Click on <em>“Insert Column selections”</em>:</li>
+        <li>In <em>“Column selections”</em>:
+          <ul>
+            <li><em>“on column”</em>: <code class="highlighter-rouge">Column: 6</code></li>
+            <li><em>“Flavor”</em>: <code class="highlighter-rouge">Alphabetical sort</code></li>
+          </ul>
+        </li>
+        <li>Click on <em>“Insert Column selections”</em>:</li>
+        <li>In <em>“Column selections”</em>:
+          <ul>
+            <li><em>“on column”</em>: <code class="highlighter-rouge">Column: 2</code></li>
+            <li><em>“Flavor”</em>: <code class="highlighter-rouge">Fast numeric sort</code></li>
+          </ul>
+        </li>
+        <li>Click on <em>“Insert Column selections”</em>:</li>
+        <li>In <em>“Column selections”</em>:
+          <ul>
+            <li><em>“on column”</em>: <code class="highlighter-rouge">Column: 3</code></li>
+            <li><em>“Flavor”</em>: <code class="highlighter-rouge">Fast numeric sort</code></li>
+          </ul>
+        </li>
+        <li><em>“Ignore case”</em>: <code class="highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="group-reads-into-blocks-and-blockgroups-using-blockbuster">Group reads into blocks and blockgroups using <strong>blockbuster</strong></h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-blockbuster"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: blockbuster</h3>
+
+  <ol>
+    <li><strong>blockbuster</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BED file containing read expressions”</em>: output of <strong>Sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Type of output”</em>: <code class="highlighter-rouge">reads (blockbuster format)</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="clustering-with-blockclust">Clustering with <strong>BlockClust</strong></h1>
+<p>Here we use <strong>BlockClust</strong> in clustering mode. All you need here is the output of the <strong>blockbuster</strong>.</p>
+
+<p>Apart from clustering, <strong>BlockClust</strong> has built-in class specific discriminative models for C/D box snoRNA, H/ACA box snoRNA, miRNA, rRNA, snRNA, tRNA and Y_RNA. So it can also be used to predict if a read profile might belong to one of the known ncRNA class.</p>
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-clustering"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: clustering</h3>
+
+  <ol>
+    <li><strong>BlockClust</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Select mode of operation”</em>: <code class="highlighter-rouge">Clustering and classification</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input blockgroups file”</em>: output of <strong>blockbuster</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+            <li><em>“Select reference genome”</em>: <code class="highlighter-rouge">Human (hg19)</code></li>
+            <li><em>“Would you like to perform classification?”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Mode of classification”</em>: <code class="highlighter-rouge">Model based</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The tool produces the following four output files.</p>
+
+<p>The <code class="highlighter-rouge">BlockClust: BED of predicted clusters</code> file is the result of Markov cluster algorithm. Each entry in this file represents a blockgroup. The 4th column contains is in the form of <em>annotation:blockgroup_id:cluster_id</em>. The <em>cluster_id</em> represents which cluster the blockgroup belongs to.</p>
+
+<p>The <code class="highlighter-rouge">BlockClust: Model based predictions BED</code> file is the result of classification. Each entry in this file represents a blockgroup. The 4th column contains the annotation of the ncRNA which it overlaps. For the blockgroups which are not overlapped with any known ncRNAs, the prefix <code class="highlighter-rouge">predicted_</code> is added indicating that it is predicted by the <strong>BlockClust</strong> classification models.</p>
+
+<p>The <code class="highlighter-rouge">BlockClust: Hierarchical clustering plot</code> file shows a dendrogram construced based on average linkage clustering.</p>
+
+<p>The <code class="highlighter-rouge">BlockClust: Pairwise similarities</code> file contains the pairwise similarities of all input blockgroups.</p>
+
+<p>Next, we will visualize the read profiles (from the BAM file) and the predictions (BED from <strong>BlockClust</strong>) together.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-visualization"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: visualization</h3>
+
+  <ol>
+    <li>Install <a href="https://software.broadinstitute.org/software/igv/download">IGV</a> (if not already installed)</li>
+    <li>Start IGV locally</li>
+    <li>Expand the <i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <code class="highlighter-rouge">GSM769512.bam</code> file</li>
+    <li>Click on the <code class="highlighter-rouge">local</code> in <code class="highlighter-rouge">display with IGV</code> to load the reads into the IGV browser</li>
+    <li>Expand the <i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <code class="highlighter-rouge">BlockClust: Model based predictions BED</code> file</li>
+    <li>Click on the <code class="highlighter-rouge">local</code> in <code class="highlighter-rouge">display with IGV</code> to load the reads into the IGV browser</li>
+    <li>Go to the location <code class="highlighter-rouge">chr4:90653059-90653141</code> in IGV.</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Do you see any already annotated transcript in that location?</li>
+    <li>What does the read profile resemble?</li>
+    <li>What did <strong>BlockClust</strong> predict?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>There is no annotated gene from RefSeq annotation on the same strand.</li>
+      <li>It resembles the miRNA profiles mentioned in the introduction section. One of the read piles looks like mature miRNA and the other like miRNA*.</li>
+      <li>Predicted as a miRNA.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
+
+  <p>In order for this step to work, you will need to have either IGV or <a href="https://www.java.com/en/download/faq/java_webstart.xml">Java web start</a>
+installed on your machine. However, the questions in this section can also be answered by inspecting the IGV screenshots below.</p>
+
+  <p>Check the <a href="https://software.broadinstitute.org/software/igv/AlignmentData">IGV documentation</a> for more information.</p>
+
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, we learned how to use <strong>BlockClust</strong> to cluster real small RNA sequencing read profiles based on their similarity. We also learned that the <strong>BlockClust</strong> can also be used to classify the read profiles based on pre-built classification models.</p>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+            <ul>
+                
+                <li>Small non-coding RNA read profiles are often associate with function</li>
+                
+                <li>Clusters of read profiles correlate with the ncRNA classes</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+        <h1>Useful literature</h1>
+        <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Small Non-coding RNA Clustering using BlockClust (Transcriptomics)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Small Non-coding RNA Clustering using BlockClust (Transcriptomics)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Pavankumar Videm)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/transcriptomics/tutorials/small_ncrna_clustering/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>
