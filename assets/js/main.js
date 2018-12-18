@@ -1,7 +1,7 @@
 // Handle foldable challenges and solutions (on click and at start).
-$(".solution,.details").click(function(event) {
-    $(">*:not(h3)", this).toggle(400);
-    $(">h3>span.fold-unfold", this).toggleClass("fa-plus-square fa-minus-square");
+$(".solution>h3,.details>h3").click(function(event) {
+    $(">*:not(h3)", $(this).parent()).toggle(400);
+    $(">span.fold-unfold", this).toggleClass("fa-plus-square fa-minus-square");
 });
 
 $(".solution,.details").each(function() {

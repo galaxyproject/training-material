@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genome annotation with Maker
-zenodo_link: https://doi.org/10.5281/zenodo.1404209
+zenodo_link: https://doi.org/10.5281/zenodo.1488687
 tags:
   - eukaryote
 questions:
@@ -13,7 +13,7 @@ objectives:
   - Annotate genome with Maker
   - Evaluate annotation quality with BUSCO
   - View annotations in JBrowse
-time_estimation: 8h
+time_estimation: 4h
 key_points:
   - Maker allows to annotate a eukaryotic genome.
   - BUSCO and JBrowse allow to inspect the quality of an annotation.
@@ -25,7 +25,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Genome annotation of eukaryotes is a little mote complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.
+Genome annotation of eukaryotes is a little more complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.
 
 In this tutorial we will use a software tool called Maker to annotate the genome sequence of a small eukaryote: Schizosaccharomyces pombe (a yeast).
 
@@ -65,15 +65,15 @@ To annotate a genome using Maker, you need the following files:
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create and name a new history for this tutorial.
-> 2. Import the following files from [Zenodo](https://doi.org/10.5281/zenodo.1404209) or from the shared data library
+> 2. Import the following files from [Zenodo](https://doi.org/10.5281/zenodo.1488687) or from the shared data library
 >
 >    ```
->    https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/augustus_training_1.tar.gz
->    https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/augustus_training_2.tar.gz
->    https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/S_pombe_chrIII.fasta
->    https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/S_pombe_genome.fasta
->    https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/S_pombe_trinity_assembly.fasta
->    https://zenodo.org/api/files/df2563f6-2503-483e-906f-68e5bed3f629/Swissprot_no_S_pombe.fasta
+>    https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/augustus_training_1.tar.gz
+>    https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/augustus_training_2.tar.gz
+>    https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/S_pombe_chrIII.fasta
+>    https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/S_pombe_genome.fasta
+>    https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/S_pombe_trinity_assembly.fasta
+>    https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S_pombe.fasta
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -540,7 +540,7 @@ Enable the three different tracks on the left side of JBrowse, then navigate alo
 
 > ### {% icon question %} Questions
 >
-> Navigate to the sequence named `NC_003421.2` (NCBI identifier for Chromosome III), between positions `41800` and `45200`.
+> Navigate to the sequence named `NC_003421.2` (NCBI identifier for Chromosome III), between positions `41800` and `45200` (or between `143850` and `148763` if you used the full genome sequence sequence).
 > ![JBrowse navigation](../../images/jbrowse_navigate.png "Navigating to the given sequence and positions.")
 > 1. How did the annotation improved in this region after each Maker round?
 >

@@ -33,7 +33,7 @@ Tutorials in this repository are all supplemented with files describing the tech
 
 > For more information about how to create these files, please see our module on [specifying the technical requirements for your tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html).
 
-For just the list of Ephemeris commands needed for installation, skip to the [Quickstart section](#Quickstart) at the end of this tutorial.
+For just the list of Ephemeris commands needed for installation, skip to the [Quickstart section](#quickstart) at the end of this tutorial.
 
 > ### Agenda
 >
@@ -69,7 +69,7 @@ To setup a Galaxy server locally, we will first clone the Galaxy github reposito
 >    ```
 >    open the `galaxy.yml` file with your favorite editor and edit the following line with your email address:
 >    ```yaml
->    admin_users: user@example.eu
+>    admin_users: user@example.org
 >    ```
 >
 > 3. Start Galaxy
@@ -125,7 +125,7 @@ To install to training requirements to our Galaxy, we will use Ephemeris, let's 
 
 # Installing tutorial requirements
 
-We have created a small bash script to automatically install all the tutorial requirements to an existing Galaxy, it's located in this repository under: [`bin/install_tutorial_requirements.sh`]({{ site.github_repository }}/tree/master/bin/install_tutorial_requirements.sh)
+We have created a small bash script to automatically install all of a tutorial's requirements to an existing Galaxy. It's located in this repository under: [`bin/install_tutorial_requirements.sh`]({{ site.github_repository }}/tree/master/bin/install_tutorial_requirements.sh)
 
 In this example we will install the requirements for the [*Reference-based RNASeq*]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html) tutorial to the Galaxy instance running on localhost.
 
@@ -146,15 +146,15 @@ In this example we will install the requirements for the [*Reference-based RNASe
 >
 {: .hands_on}
 
-Installation may take some time, this script will automatically install the tools, create a data library and populate it with the input datasets from Zenodo, install and publish the workflows, and run any data managers that might be required.
+Installation may take some time. This script will automatically install the tools, create a data library and populate it with the input datasets from Zenodo, install and publish the workflows, and run any data managers that might be required.
 
-The only thing the script currently cannot automate, is the installation of the interactive tours. We will now do this manually by copying the contents of the `tours` folder to our Galaxy instance, in the folder `$GALAXY_ROOT/config/plugins/tours`
+The only thing the script cannot currently automate is the installation of the interactive tours. We will now do this manually by copying the contents of the `tours` folder to our Galaxy instance, in the folder `$GALAXY_ROOT/config/plugins/tours`
 
 > ### {% icon hands_on %} Hands-on: Install the interactive Tours
 >
 > 1. Copy the `tour.yaml` file from the training materials repo to Galaxy
 >    ```bash
->    cp -r topics/transcriptomics/tutorials/ref-based/tours/ path/to/local/galaxy/config/plugins/tours
+>    cp -r topics/transcriptomics/tutorials/ref-based/tours/ $GALAXY_ROOT/config/plugins/tours
 >    ```
 >
 {: .hands_on}
@@ -169,7 +169,7 @@ If you would like to install all the requirements for every tutorial within an e
 
 ### Installing a subset of components
 
-If you would like to pick and choose what to install for each tutorial, below are descriptions of the commands used to install each of the components (tools, workflows, reference data, data libraries, tours) please see the [Quickstart section](#Quickstart) for the individual commands used by the script
+If you would like to pick and choose what to install for each tutorial, below are descriptions of the commands used to install each of the components (tools, workflows, reference data, data libraries, tours) please see the [Quickstart section](#quickstart) for the individual commands used by the script
 
 # Quickstart
 
@@ -196,10 +196,10 @@ Using ephemeris directly:
 shed-tools install -g <Galaxy URL> -a <API key> -t topics/<topic>/tutorials/<tutorial>/tools.yaml
 
 # create data library with input datasets
-setup-data-libraries -g <Galaxy URL> -a <API key> -i topic/<topic>/tutorial/<tutorial>/data-library.yaml
+setup-data-libraries -g <Galaxy URL> -a <API key> -i topics/<topic>/tutorials/<tutorial>/data-library.yaml
 
 # install reference data
-run-data-managers -g <Galaxy URL> -a <API key> --config topic/<topic>/tutorial/<tutorial>/data-manager.yaml
+run-data-managers -g <Galaxy URL> -a <API key> --config topics/<topic>/tutorials/<tutorial>/data-manager.yaml
 
 # install workflows
 workflow-install --publish-workflows -g <Galaxy URL> -a <API key> -w topics/<topic>/tutorials/<tutorial>/workflows
