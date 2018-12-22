@@ -41,6 +41,9 @@ The purpose of this tutorial is to demonstrate how to perform gene set testing u
 >
 {: .agenda}
 
+
+{% include snippets/warning_results_may_vary.md %}
+
 # Preparing the inputs
 
 We will use several files for this analysis:
