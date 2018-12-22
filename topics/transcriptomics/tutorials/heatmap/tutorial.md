@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-title: Visualization of RNA-Seq results - heatmap
+title: Visualization of RNA-Seq results with heatmap2
 zenodo_link: add link
 enable: "false"
 questions:
@@ -18,10 +18,9 @@ contributors:
 # Introduction
 {:.no_toc}
 
+To generate a heatmap of RNA-seq results, we need a file of normalized counts, which is provided for you here. To generate this file yourself, see the [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom/tutorial.html) tutorial, and run limma-voom selecting *"Output Normalized Counts Table?"*: `Yes`.
 
-## Mouse mammary gland dataset
-
-The data for this tutorial comes from a Nature Cell Biology paper, [EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival](https://www.ncbi.nlm.nih.gov/pubmed/25730472)), Fu et al. 2015. This study examined the expression profiles of basal stem-cell enriched cells (B) and committed luminal cells (L) in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status. To generate the heatmap we need a file of normalized counts file which is provided for you. To generate this file yourself, see the RNA-seq counts to genes tutorial, and run limma-voom selecting *"Output Normalized Counts Table?"*: `Yes`.
+The data for this tutorial comes from a Nature Cell Biology paper, [EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival](https://www.ncbi.nlm.nih.gov/pubmed/25730472)), Fu et al. 2015. This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status.
 
 ![Tutorial Dataset](../../images/limma-voom_f2c/mouse_exp.png "Tutorial Dataset")
 
@@ -82,11 +81,6 @@ We will use one file for this analysis:
 {: .hands_on}
 
 
-Let’s take a look at the data. The `normalized counts` file contains information about genes (one gene per row), the first column has the Entrez gene id, the second has the gene length and the remaining columns contain the normalized counts for each experimental sample. There are two replicates for each cell type and time point (detailed sample info can be found in file “GSE60450_series_matrix.txt” from the GEO website). The first few rows and columns of the `normalized counts` file are shown below.
-
-![seqdata file](../../images/limma-voom/seqdata.png "Count file (before formatting)"){: width="50%"}
-
-
 ## Create heatmap of custom genes
 
 To create a heatmap for a set of genes of interest, such as the 31 genes from the original paper using this dataset, Fig. 6b below. These 31 genes include the authors' main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors, identified as differentially expressed. We will recreate this heatmap here.
@@ -136,7 +130,7 @@ Cxcl1
 > 2. **Join two Datasets** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Join"*: the `heatmap genes` file
 >    - *"using column"*: `Column: 1`
->    - {% icon param-file %} *"with"*: `Normalised counts` file (output of **limma** {% icon tool %})
+>    - {% icon param-file %} *"with"*: `Normalised counts` file
 >    - *"and column"*: `Column: 2`
 >    - *"Keep lines of first input that do not join with second input"*: `No`
 >    - *"Keep the header lines"*: `Yes`
@@ -183,8 +177,10 @@ You should see a heatmap like below.
 >    {: .solution}
 {: .question}
 
+Alternatively, or in addition, instead of a heatmmap of custom genes, you could create a heatmap of the most differentially expressed genes in a dataset, as shown in the [RNA-seq ref-based tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html) tutorial.
+
 
 # Conclusion
 {:.no_toc}
 
-In this tutorial we have seen how a heatmap can be generated from RNA-seq data. This uses the same dataset from the tutorials, RNA-seq reads to counts, RNA-seq counts to genes and RNA-seq genes to pathways. We have also reproduced results similar to what the authors found in the original paper with this dataset.
+In this tutorial we have seen how a heatmap can be generated from RNA-seq data using the heatmsp2 tool in Galaxy. This uses the same dataset from the tutorials, [RNA-seq reads to counts]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom_fastqs_to_counts/tutorial.html), [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom/tutorial.html), and [RNA-seq genes to pathways]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom_gene_set_testing/tutorial.html). We have also reproduced results similar to what the authors showed in the original paper for this dataset.
