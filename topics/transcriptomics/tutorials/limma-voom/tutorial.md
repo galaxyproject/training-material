@@ -60,6 +60,9 @@ This is a Galaxy tutorial based on material from the [COMBINE R RNAseq workshop]
 >
 {: .agenda}
 
+
+{% include snippets/warning_results_may_vary.md %}
+
 # Preparing the inputs
 
 We will use three files for this analysis:
