@@ -4,7 +4,6 @@ title: RNA-seq genes to pathways
 zenodo_link: "https://zenodo.org/record/2491305"
 tags:
   - mouse
-enable: "false"
 questions:
   - "What are the differentially expressed pathways in the mammary gland of pregnant versus lactating mice?"
 objectives:

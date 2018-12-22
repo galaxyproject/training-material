@@ -6,7 +6,6 @@ tags:
   - limma-voom
   - mouse
   - QC
-enable: "false"
 questions:
   - "What are the differentially expressed genes in the mammary gland of pregnant versus lactating mice?"
   - "How to analyze RNA count data using limma-voom?"

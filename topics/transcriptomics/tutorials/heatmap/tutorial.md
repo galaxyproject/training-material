@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: Visualization of RNA-Seq results with heatmap2
 zenodo_link: "https://zenodo.org/record/2492899"
-enable: "false"
 questions:
   - "How to generate a heatmap from RNA-seq data?"
 objectives:
