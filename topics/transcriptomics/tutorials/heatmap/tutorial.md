@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Visualization of RNA-Seq results with heatmap2
-zenodo_link: add link
+zenodo_link: "https://zenodo.org/record/2492899"
 enable: "false"
 questions:
   - "How to generate a heatmap from RNA-seq data?"
@@ -18,7 +18,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-To generate a heatmap of RNA-seq results, we need a file of normalized counts, which is provided for you here. To generate this file yourself, see the [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom/tutorial.html) tutorial, and run limma-voom selecting *"Output Normalized Counts Table?"*: `Yes`.
+To generate a heatmap of RNA-seq results, we need a file of normalized counts, which is provided for you here. To generate this file yourself, see the [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom/tutorial.html) tutorial, and run limma-voom selecting *"Output Normalised Counts Table?"*: `Yes`.
 
 The data for this tutorial comes from a Nature Cell Biology paper, [EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival](https://www.ncbi.nlm.nih.gov/pubmed/25730472)), Fu et al. 2015. This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status.
 
@@ -63,7 +63,7 @@ We will use one file for this analysis:
 >         - You can paste the link below into the **Paste/Fetch** box:
 >
 >           ```
->       add link
+>       https://zenodo.org/record/2492899/files/limma-voom_normalised_counts
 >           ```
 >
 >         - Select *"Genome"*: `mm10`
