@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: RNA-seq genes to pathways
-zenodo_link: "https://figshare.com/s/f5d63d8c265a05618137"
+zenodo_link: "https://zenodo.org/record/2491305"
 tags:
   - mouse
 enable: "false"
@@ -9,7 +9,7 @@ questions:
   - "What are the differentially expressed pathways in the mammary gland of pregnant versus lactating mice?"
 objectives:
   - "Identification of differentially expressed pathways"
-time_estimation: "3h"
+time_estimation: "2h"
 key_points:
   - "Multiple methods can be used to help identify differentially expressed pathways"
 contributors:
@@ -25,19 +25,9 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Measuring gene expression on a genome-wide scale has become common practice over the last two decades or so, with microarrays predominantly used pre-2008. With the advent of next generation sequencing technology in 2008, an increasing number of scientists use this technology to measure and understand changes in gene expression in often complex systems. As sequencing costs have decreased, using RNA-Seq to simultaneously measure the expression of tens of thousands of genes for multiple samples has never been easier. The cost of these experiments has now moved from generating the data to storing and analysing it.
+Sometimes there is quite a long list of genes to interpret after a differential expression analysis, and it is usually infeasible to go through the list one gene at a time trying to understand it’s biological function. A common downstream procedure is gene set testing, which aims to understand which pathways/gene networks the differentially expressed genes are implicated in. There are many different gene set testing methods that can be applied and it can be useful to try several.
 
-There are many steps involved in analysing an RNA-Seq experiment. Analysing an RNA-seq experiment begins with sequencing reads. These are aligned to a reference genome, then the number of reads mapped to each gene can be counted. This results in a table of counts, which is what we perform statistical analyses on to determine differentially expressed genes and pathways. The purpose of this tutorial is to demonstrate how to perform gene set testing using tools in Galaxy. How to generate differentially expressed genes from reads (FASTQs) is covered in the accompanying tutorials [RNA-seq reads to counts]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom_fastqs_to_counts/tutorial.html) and [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom/tutorial.html).
-
-## Mouse mammary gland dataset
-
-The data for this tutorial comes from a Nature Cell Biology paper, [EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival](https://www.ncbi.nlm.nih.gov/pubmed/25730472)), Fu et al. 2015. Both the raw data (sequence reads) and processed data (counts) can be downloaded from Gene Expression Omnibus database (GEO) under accession number [GSE60450](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE60450).
-
-This study examined the expression profiles of basal stem-cell enriched cells (B) and committed luminal cells (L) in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status. Note that two biological replicates are used here, two independent sorts of cells from the mammary glands of virgin, pregnant or lactating mice, however three replicates is usually recommended as a minimum requirement for RNA-seq. In this tutorial we will use the GEO counts file as a starting point for our analysis. Alternatively, you could create a count matrix from the raw sequence reads, as demonstrated in the [RNA-seq reads to counts tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom_fastqs_to_counts/tutorial.html). The GEO count file was generated from aligning the reads to the mouse `mm10` genome with the [Rsubread](https://www.biorxiv.org/content/early/2018/08/15/377762) aligner, followed by counting reads mapped to RefSeq genes with [featureCounts](https://academic.oup.com/bioinformatics/article/30/7/923/232889) (Liao, Smyth, and Shi 2014), see the [Fu paper](https://www.nature.com/articles/ncb3117) for details.
-
-We used **limma-voom** for identifying differentially expressed genes here. Other popular alternatives are edgeR and DESeq2. Limma-voom has been shown to be perform well in terms of precision, accuracy and sensitivity [Costa-Silva, Domingues and Lopes 2017](https://www.ncbi.nlm.nih.gov/pubmed/29267363) and, due to its speed, it's particularly recommended for large-scale datasets with 100s of samples [Chen, Lun, Smyth 2016](https://f1000research.com/articles/5-1438/v2).
-
-This is a Galaxy tutorial based on material from the [COMBINE R RNAseq workshop](http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html), first taught [here](http://combine-australia.github.io/2016-05-11-RNAseq/). Some of the gene set testing material is inspired by the Cancer Research UK workshop [here](https://bioinformatics-core-shared-training.github.io/cruk-summer-school-2018/RNASeq2018/html/06_Gene_set_testing.nb.html)
+The purpose of this tutorial is to demonstrate how to perform gene set testing using tools in Galaxy. The data comes from a Nature Cell Biology paper, [EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival](https://www.ncbi.nlm.nih.gov/pubmed/25730472)), Fu et al. 2015. That study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice (see Figure below). How to generate differentially expressed genes from reads (FASTQs) for this dataset is covered in the accompanying tutorials [RNA-seq reads to counts]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom_fastqs_to_counts/tutorial.html) and [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom/tutorial.html). This tutorial is inspired by material from the COMBINE R RNAseq workshop [here](http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html) and the Cancer Research UK workshop [here](https://bioinformatics-core-shared-training.github.io/cruk-summer-school-2018/RNASeq2018/html/06_Gene_set_testing.nb.html)
 
 ![Tutorial Dataset](../../images/limma-voom_f2c/mouse_exp.png "Tutorial Dataset")
 
@@ -53,66 +43,61 @@ This is a Galaxy tutorial based on material from the [COMBINE R RNAseq workshop]
 
 # Preparing the inputs
 
-We will use three files for this analysis:
+We will use several files for this analysis:
 
- * **Count matrix** (genes in rows, samples in columns)
+ * **Differentially expressed results files** (genes in rows, logFC and P values in columns)
  * **Sample information** file (sample id, group)
- * **Gene annotation** file (gene id, symbol, description)
+ * **Gene lengths file** (genes, lengths)
+ * **Filtered counts file** (genes in rows, counts for samples in columns, with lowly expressed genes removed)
+ * **Gene sets file for MSigDB Hallmark collection for mouse (rdata)
+
+> ### {% icon tip %} Tip: Files for this tutorial
+>
+> If you completed the [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom/tutorial.html) tutorial you should already have most of these files in your history. You only need to import the mouse_hallmark_sets and limma-voom_filtered_counts files from the files in the Hands-on box below.
+>
+{: .tip}
+
 
 ## Import data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq with limma-voom`
-> 2. Import the mammary gland counts table and the associated sample information file.
+> 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq genes to pathways`
+> 2. Import the files
 >
 >     To import the files, there are two options:
 >     - Option 1: From a shared data library if available (ask your instructor)
->     - Option 2: From [Figshare](https://figshare.com/s/1d788fd384d33e913a2a)
+>     - Option 2: From [Zenodo](https://zenodo.org/record/2491305)
 >
 >         > ### {% icon tip %} Tip: Importing data via links
 >         >
 >         > * Copy the link location
 >         > * Open the Galaxy Upload Manager
 >         > * Select **Paste/Fetch Data**
->         > * Paste the link into the text field
+>         > * Paste one link into the text field
+>         > * Give the dataset a Name (replace "New File")
+>         > * Select **Paste/Fetch Data** and repeat for each link
 >         > * Press **Start**
 >         {: .tip}
 >
->         - You can paste both links below into the **Paste/Fetch** box:
+>         - You can paste the names and links below into the Upload tool:
 >
->           ```
->       https://ndownloader.figshare.com/files/5057929?private_link=1d788fd384d33e913a2a
->       https://ndownloader.figshare.com/files/5999829?private_link=1d788fd384d33e913a2a
->           ```
+>```
+>Name                                      Link
+>limma-voom_basalpregnant-basallactate     https://zenodo.org/record/2491305/files/limma-voom_basalpregnant-basallactate
+>limma-voom_luminalpregnant-luminallactate https://zenodo.org/record/2491305/files/limma-voom_luminalpregnant-luminallactate
+>seqdata                                   https://zenodo.org/record/2491305/files/seqdata
+>mouse_hallmark_sets                       https://zenodo.org/record/2491305/files/mouse_hallmark_sets
+>factordata                                https://zenodo.org/record/2491305/files/factordata
+>limma-voom_filtered_counts                https://zenodo.org/record/2491305/files/limma-voom_filtered_counts
+>```
 >
->         - Select *"Genome"*: `mm10`
+> 3. Make a collection (list) out of the basal and luminal differentially expressed results files. Give it the name `DE tables`.
 >
-> 2. Rename the counts dataset as `seqdata` and the sample information dataset as `sampleinfo` using the {% icon galaxy-pencil %} (pencil) icon.
-> 3. Check that the datatype is `tabular`.
->    If the datatype is not `tabular`, please change the file type to `tabular`.
+>     {% include snippets/build_dataset_list.md %}
 >
->    > ### {% icon tip %} Tip: Changing the datatype
->    > * Click on the {% icon galaxy-pencil %} (pencil) icon displayed in your dataset in the history
->    > * Choose **Datatype** on the top
->    > * Select `tabular`
->    > * Press **Save**
->    {: .tip}
 {: .hands_on}
 
-
-Let’s take a look at the data. The `seqdata` file contains information about genes (one gene per row), the first column has the Entrez gene id, the second has the gene length and the remaining columns contain information about the number of reads aligning to the gene in each experimental sample. There are two replicates for each cell type and time point (detailed sample info can be found in file “GSE60450_series_matrix.txt” from the GEO website). The first few rows and columns of the seqdata file are shown below.
-
-![seqdata file](../../images/limma-voom/seqdata.png "Count file (before formatting)"){: width="50%"}
-
-The `sampleinfo` file contains basic information about the samples that we will need for the analysis. See below.
-
-![sampleinfo file](../../images/limma-voom/sampleinfo.png "Sample information file (before formatting)"){: width="50%"}
-
-
-# Gene Set Testing
-
-Sometimes there is quite a long list of differentially expressed genes to interpret after a differential expression analysis, and it is usually infeasible to go through the list one gene at a time trying to understand it’s biological function. A common downstream procedure is gene set testing, which aims to understand which pathways/gene networks the differentially expressed genes are implicated in. There are many different gene set testing methods that can be applied and it can be useful to try several.
 
 ## Gene Ontology testing with **goseq**
 
@@ -130,24 +115,24 @@ goseq needs 2 files as inputs:
     - the Gene IDs (unique within the file)
     - the gene lengths
 
-We will use the tables of differentially expressed results output from the limma-voom tool, for both the basal and luminal constrasts, and call genes differentially expressed if they have an adjusted P value below 0.01 and a fold change of 1.5 (equivalent to a $$log_{2} FC$$ of 0.58), as in the Fu paper. We can use the gene lengths from the original table we imported from GEO (`seqdata`). But if we didn't have that we could use a tool like **featureCounts** {% icon tool %} to output a gene lengths file. The original file with gene lengths contains all >20k genes, but we only want the ~15k we have in our differentially expressed genes file after filtering low counts, and in the same order. So we will join the lengths file with the differentially expressed genes file, keeping only the lengths information for genes present in the differentially expressed genes file. We can then cut out the columns we need for the two inputs (gene id, length) (gene id, DE status) and as a bonus they will both be sorted in the same order, what we need for goseq.
+We need a table of differentially expressed (DE) results for goseq. Here we will use two tables, one for each of the basal and luminal pregnant vs lactate results. This is so we can compare results for the two cell types. These tables were output from the limma-voom tool but DE tables from edgeR or DESeq2 could also be used. For this dataset we will call genes differentially expressed if they have an adjusted P value below 0.01 and a fold change of 1.5 (equivalent to a $$log_{2} FC$$ of 0.58), as in the Fu paper. We can use the gene lengths from the counts table in GEO (provided as a file called `seqdata` in Zenodo). But if we didn't have that we could use a tool like **featureCounts** {% icon tool %} to output a gene lengths file. The `seqdata` file contains >20k genes, but we only want the ~15k we have in our differentially expressed genes file. So we will join the lengths file with the differentially expressed genes file, keeping only the length information for genes present in the differentially expressed genes file. We can then cut out the columns we need for the two inputs (gene id, length) (gene id, DE status) and as a bonus they will both be sorted in the same order, which is what we need for goseq.
 
 To generate the two input files we will use:
-* **Compute** to add a column to the limma-voom table that gives genes meeting our adj.P and lfc thresholds the value "True" and all other genes the value "False". We want genes that have a lfc < -0.58 (downregulated) and lfc > 0.58 (upregulated). We could use separate filters (e.g. `bool(c4<-0.58) or bool(c4>0.58)`) or more simply, we can use the absolute (abs) value 0.58, where the minus sign is ignored.
-* **Join two Datasets** to add the gene lengths information to the differentially expressed genes, matching on gene ids
+* **Compute** to add a column to the DE tables, that gives genes meeting our adj.P and lfc thresholds the value "True" and all other genes the value "False". We want genes that have a lfc < -0.58 (downregulated) and lfc > 0.58 (upregulated). We could use separate filters (e.g. `bool(c4<-0.58) or bool(c4>0.58)`) or more simply, we can use the absolute (abs) value 0.58, where the minus sign is ignored.
+* **Join two Datasets** to add the gene length information to the differentially expressed genes, matching on gene ids
 * **Cut** to extract the two columns for the differentially expressed genes information
-* **Cut** to extract the two columns for the gene lengths information
+* **Cut** to extract the two columns for the gene length information
 
 
 > ### {% icon hands_on %} Hands-on: Prepare the two inputs for GOSeq
 >
 > 1. **Compute** {% icon tool %} with
 >    - *"Add expression"*: `bool(c8<0.01) and bool(abs(c4)>0.58)` (adj.P < 0.01 and lfc of 0.58)
->    - {% icon param-collection %} *"as a new column to"*: the `DE tables` output of **limma** {% icon tool %} (containing both the basal and luminal contrasts)
+>    - {% icon param-collection %} *"as a new column to"*: the `DE tables` collection
 > 2. **Join two Datasets** {% icon tool %} with
 >    - *"Join"*: output of **Compute** {% icon tool %}
 >    - *"using column"*: `Column: 1`
->    - {% icon param-file %} *"with"* the original GEO counts file `seqdata`
+>    - {% icon param-file %} *"with"* the `seqdata` file 
 >    - *"and column"*: `Column: 1`
 >    - *"Keep lines of first input that do not join with second input"*: `No`
 >    - *"Keep lines of first input that are incomplete"*: `No`
@@ -216,19 +201,17 @@ The Fu paper also used goseq and found enrichment for cell contractility genes i
 
 Gene Set Enrichment Analysis (GSEA) [(Subramanian et al., 2005)](https://www.ncbi.nlm.nih.gov/pubmed/16199517) is a widely used method that determines whether a set of genes is enriched in a list of differentially expressed genes. Unlike the previous method with goseq, no threshold is applied for what is considered "differentially expressed", all genes are used. If a gene set falls at either the top (over-expressed) or bottom (under-expressed) of the list it is said to be enriched. [fgsea](https://www.biorxiv.org/content/early/2016/06/20/060012) is a faster implementation of the GSEA method. fgsea requires a ranked list of genes and some gene sets to test.
 
-The [Molecular Signatures Database (MSigDB)](http://software.broadinstitute.org/gsea/msigdb/index.jsp) contains curated collections of gene sets that are commonly used in a GSEA analysis. They can be downloaded from the [Broad website](http://software.broadinstitute.org/gsea/downloads.jsp). But these collections are only of human gene sets. If working with another species you would need to first map the genes to their human orthologues. However, MSigDB versions for mouse are provided [by the Smyth lab here](http://bioinf.wehi.edu.au/software/MSigDB/index.html) so we'll use those. There are several MSigDB collections, we'll use the [Hallmark collection](https://www.cell.com/cell-systems/fulltext/S2405-4712(15)00218-5), which contains 50 gene sets. According to MSigDB, "each gene set in the hallmark collection consists of a “refined” gene set, derived from multiple “founder” sets, that conveys a specific biological state or process and displays coherent expression. The hallmarks effectively summarize most of the relevant information of the original founder sets and, by reducing both variation and redundancy, provide more refined and concise inputs for gene set enrichment analysis".
+The [Molecular Signatures Database (MSigDB)](http://software.broadinstitute.org/gsea/msigdb/index.jsp) contains curated collections of gene sets that are commonly used in a GSEA analysis. They can be downloaded from the [Broad website](http://software.broadinstitute.org/gsea/downloads.jsp). But these collections are only of human gene sets. If working with another species you would need to first map the genes to their human orthologues. However, MSigDB versions for mouse are provided [by the Smyth lab here](http://bioinf.wehi.edu.au/software/MSigDB/index.html). There are several MSigDB collections, we'll use the [Hallmark collection](https://www.cell.com/cell-systems/fulltext/S2405-4712(15)00218-5), which contains 50 gene sets. According to MSigDB, "each gene set in the hallmark collection consists of a “refined” gene set, derived from multiple “founder” sets, that conveys a specific biological state or process and displays coherent expression. The hallmarks effectively summarize most of the relevant information of the original founder sets and, by reducing both variation and redundancy, provide more refined and concise inputs for gene set enrichment analysis".  We'll use the mouse Hallmark file provided in Zenodo, originally downloaded from http://bioinf.wehi.edu.au/software/MSigDB/mouse_H_v5p2.rdata.
 
-There are several ways we could choose to rank our genes, we could rank by log-fold change (most upregulated to most downregulated) but that doesn't take into account any error in the log fold change value. Another way is to use the "signed fold change" which is to rank by the sign of the fold change multiplied by the P value (as described [here](http://genomespot.blogspot.com/2014/09/data-analysis-step-8-pathway-analysis.html). We could also use the t statistic that's output from limma, as that takes into account the log-fold change and it's standard error, see [here](https://support.bioconductor.org/p/6124/) for more explanation on the t statistic. We'll use the t statistic to rank here.
+There are several ways we could choose to rank our genes, we could rank by log-fold change (most upregulated to most downregulated) but that doesn't take into account any error in the log fold change value. Another way is to use the "signed fold change" which is to rank by the sign of the fold change multiplied by the P value (as described [here](http://genomespot.blogspot.com/2014/09/data-analysis-step-8-pathway-analysis.html). We could also use the t statistic that's output from limma, as that takes into account the log-fold change and it's standard error, see [here](https://support.bioconductor.org/p/6124/) for more explanation. We'll use the t statistic to rank here.
 
 > ### {% icon hands_on %} Hands-on: Perform gene set enrichment with fgsea
 >
-> 1. Import the mouse Hallmark collection of gene sets from `http://bioinf.wehi.edu.au/software/MSigDB/mouse_H_v5p2.rdata` using the Paste/Fetch upload box
->    - Set the file **Type** to `rdata`
->    - Rename file as `mouse_hallmark_sets`
+> 1. - Set the file **Type** of the `mouse_hallmark_sets` file to `rdata`. See Tip below.
 > 2. **Cut columns from a table** {% icon tool %} with
 >    - *"Cut columns"*: `c1,c6` (the Entrez gene ids and t-statistic)
 >    - *"Delimited by"*: `Tab`
->    - {% icon param-collection %} *"From"*: the `DE tables` output of **limma** {% icon tool %}
+>    - {% icon param-collection %} *"From"*: the `DE tables`
 > 3. **Sort data in ascending or descending order** {% icon tool %} with
 >    - {% icon param-collection %} *"Sort Query"*: the output of **Cut** {% icon tool %}
 >    - *"Number of header lines"*: `1`
@@ -242,6 +225,9 @@ There are several ways we could choose to rank our genes, we could rank by log-f
 >    - {% icon param-file %} *"Gene Sets"*: `mouse_hallmark_sets`
 >    - *"Minimum Size of Gene Set"*: `15`
 >    - *"Output plots"*: `Yes`
+>
+> {% include snippets/change_datatype.md %}
+>
 {: .hands_on}
 
 fgsea outputs a table of results containing a list of pathways with P values and enrichment scores. It can also output a summary table plot of the top pathways like the one shown below for the `basallpregnant-basallactate` contrast.
@@ -254,18 +240,18 @@ An enrichment plot of the each of the top pathways can also be produced, one is 
 
 ## Ensemble gene set enrichment analyses with **EGSEA**
 
-The ensemble of genes set enrichment analyses (EGSEA) [(Alhamdoosh et al, 2017)](https://www.ncbi.nlm.nih.gov/pubmed/27694195) is a method developed for RNA-sequencing data that combines results from multiple algorithms and calculates collective gene set scores, to try to improve the biological relevance of the highest ranked gene sets. EGSEA has built-in gene sets from MSigDB and KEGG for human and mouse. We'll show here how it can be used with the MSigDB Hallmark collection and KEGG pathways. For input we need a count matrix and EGSEA will perform a limma-voom analysis before gene set testing. We can use the filtered counts output from limma, where the low count genes have been filtered out, we just need to remove the gene symbol and description columns. We also need a symbols mapping file containing just the Entrez ids and symbols, which we can generate from the filtered counts file. The third input we need is a factors information file, containing what groups the samples belong to, we can use the one we used with limma.
+The ensemble of genes set enrichment analyses (EGSEA) [(Alhamdoosh et al, 2017)](https://www.ncbi.nlm.nih.gov/pubmed/27694195) is a method developed for RNA-seq data that combines results from multiple algorithms and calculates collective gene set scores, to try to improve the biological relevance of the highest ranked gene sets. EGSEA has built-in gene sets from MSigDB and KEGG for human and mouse. We'll show here how it can be used with the MSigDB Hallmark collection and KEGG pathways. For input we need a count matrix and EGSEA will perform a limma-voom analysis before gene set testing. We can use the filtered counts output from limma, where the low count genes have been filtered out, we just need to remove the gene symbol and description columns. We also need a symbols mapping file containing just the Entrez ids and symbols, which we can generate from the filtered counts file. The third input we need is a factors information file, containing what groups the samples belong to, we can use the one we used with limma.
 
 > ### {% icon hands_on %} Hands-on: Perform ensemble gene set testing with EGSEA
 >
 > 1. Rerun **limma** selecting *"Output Filtered Counts Table?"*: `Yes`
 > 2. **Cut** {% icon tool %}: Run **Cut columns from a table (cut)** with the following settings:
->      - {% icon param-file %} *"File to cut"*: `Filtered Counts` output from **limma**
+>      - {% icon param-file %} *"File to cut"*: `limma-voom filtered counts`
 >      - *"Operation"*: `Discard`
 >      - *"List of fields"*: Select `Column:2`, `Column:3`
 >      - Rename to `EGSEA counts`
 > 3. **Cut** {% icon tool %}: Run **Cut columns from a table (cut)** with the following settings:
->      - {% icon param-file %} *"File to cut"*: `Filtered Counts` output from **limma**
+>      - {% icon param-file %} *"File to cut"*: `limma-voom filtered counts`
 >      - *"Operation"*: `Keep`
 >      - *"List of fields"*: Select `Column:1`, `Column:2`
 >      - Rename to `EGSEA anno`
@@ -292,11 +278,11 @@ In addition to a table of results, plots are generated like the heatmaps of the 
 
 ![EGSEA heatmaps](../../images/limma-voom/EGSEA_heatmaps.png "EGSEA heatmaps"){: width="50%"}
 
-KEGG pathway diagrams are generated if KEGG pathways are selected, as shown below.  These show the expression values of the genes, genes upregulated in the contrast are shown in red, downregulated in blue.
+KEGG pathway diagrams are generated if KEGG pathways are selected, as shown below.  These show the expression values of the genes overlaid, genes upregulated in the contrast are shown in red, downregulated genes in blue. Ribosome was one of the top GO terms identified for the basal pregnant vs lactate contrast and here we see ribosome pathways are in the top ranked KEGG pathways.
 
 ![EGSEA KEGG](../../images/limma-voom/EGSEA_KEGG.png "EGSEA KEGG pathways")
 
 # Conclusion
 {:.no_toc}
 
-In this tutorial we have seen some gene set testing methods that can be used to help interpret lists of differentially expressed genes. This follows on from the accompanying tutorials, RNA-seq reads to counts and RNA-seq counts to genes, that showed how to turn reads (FASTQs) into differentially expressed genes for this dataset. For further reading on analysis of RNA-seq count data and the methods used here, see the articles; RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR [(Law et al. 2016)](https://f1000research.com/articles/5-1408/v2) and From reads to genes to pathways: differential expression analysis of RNA-Seq experiments using Rsubread and the edgeR quasi-likelihood pipeline [(Chen, Lun, Smyth 2016)](https://f1000research.com/articles/5-1438/v2).
+In this tutorial we have seen some gene set testing methods that can be used to interpret lists of differentially expressed genes. Multiple methods can be used to help identify pathways of interest and to provide complementary ways of visualising results. This follows on from the accompanying tutorials, [RNA-seq reads to counts]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom_fastqs_to_counts/tutorial.html) and [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom/tutorial.html), that showed how to turn reads (FASTQs) into differentially expressed genes for this dataset. For further reading on analysis of RNA-seq count data and the methods used here, see the articles; RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR [(Law et al. 2016)](https://f1000research.com/articles/5-1408/v2) and From reads to genes to pathways: differential expression analysis of RNA-Seq experiments using Rsubread and the edgeR quasi-likelihood pipeline [(Chen, Lun, Smyth 2016)](https://f1000research.com/articles/5-1438/v2).
