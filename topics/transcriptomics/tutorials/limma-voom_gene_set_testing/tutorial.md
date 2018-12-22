@@ -2,6 +2,8 @@
 layout: tutorial_hands_on
 title: RNA-seq genes to pathways
 zenodo_link: "https://figshare.com/s/f5d63d8c265a05618137"
+tags:
+  - mouse
 enable: "false"
 questions:
   - "What are the differentially expressed pathways in the mammary gland of pregnant versus lactating mice?"
