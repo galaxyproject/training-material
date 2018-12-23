@@ -5,10 +5,10 @@ zenodo_link: "https://zenodo.org/record/2491305"
 questions:
   - "How to generate a volcano plot from RNA-seq data?"
 objectives:
-  - "Create a volcano plot of RNA-seq data"
+  - "Create a volcano plot of RNA-seq data to visualize significant genes"
 time_estimation: "1h"
 key_points:
-  - "A volcano plot can be used to quickly visualize significant genes" 
+  - "A volcano plot can be used to quickly visualize significant genes in RNA-seq results"
 contributors:
   - mblue9
 ---
@@ -17,11 +17,11 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Volcano plots are commonly used to display the results of RNA-seq or other omics experiments. A volcano plot is a type of scatterplot that plots significance versus fold-change. A volcano plot enables quick visual identification of the genes that show large fold changes that are also statistically significant. The most significant genes are towards the top of the plot, the most upregulated genes are towards the right, nad the most downregulated genes towards the left.
+Volcano plots are commonly used to display the results of RNA-seq or other omics experiments. A volcano plot is a type of scatterplot that shows significance versus fold-change. It enables quick visual identification of genes with large fold changes that are also statistically significant. In a volcano plot, the most upregulated genes are towards the right, the most downregulated genes are towards the left, and the most statistically significant genes are towards the top.
 
-To generate a volcano plot of RNA-seq results, we need a file of differetially expressed results, which is provided for you here. To generate this file yourself, see the [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom/tutorial.html) tutorial. You could also use a file generated from other RNA-seq differential expression tools such as edgeR or DESeq2.
+To generate a volcano plot of RNA-seq results, we need a file of differentially expressed results which is provided for you here. To generate this file yourself, see the [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom/tutorial.html) tutorial. The file used here was generated from limma-voom but you could use a file from any RNA-seq differential expression tool, such as edgeR or DESeq2, as long as it has the required columns (see below).
 
-The data for this tutorial comes from a Nature Cell Biology paper, [EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival](https://www.ncbi.nlm.nih.gov/pubmed/25730472)), Fu et al. 2015. This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status. Here we will visualise the results of the luminal pregnant vs lactate comparison.
+The data for this tutorial comes from a Nature Cell Biology paper, [EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival](https://www.ncbi.nlm.nih.gov/pubmed/25730472)), Fu et al. 2015. This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Here we will visualise the results of the luminal pregnant vs lactate comparison.
 
 
 > ### Agenda
@@ -37,7 +37,7 @@ The data for this tutorial comes from a Nature Cell Biology paper, [EGF-mediated
 
 We will use one file for this analysis:
 
- * **Differentially expressed results file** (with genes in rows, and columns for raw P values, adjusted P values (FDR) and log fold change)
+ * **Differentially expressed results file** (genes in rows, and 4 required columns: raw P values, adjusted P values (FDR), log fold change and gene labels)
 
 ## Import data
 
@@ -79,7 +79,10 @@ We will use one file for this analysis:
 >    {: .tip}
 {: .hands_on}
 
+
 ## Create volcano plot
+
+We will create a volcano plot highlighting genes with FDR < 0.01 and a log fold change of 0.58 (equivalent to a fold-change of 1.5), as these were the values used in the original paper for this dataset.
 
 > ### {% icon hands_on %} Hands-on: Create a Volcano plot
 >
@@ -91,14 +94,15 @@ We will use one file for this analysis:
 >    - *"Labels"*: `Column 2`
 >    - *"Significance threshold"*: `0.01`
 >    - *"LogFC threshold to colour"*: `0.58`
->    - *"Points to label"*: `Significant`
->        - *"Only label top most significant"*: `10`
 {: .hands_on}
 
+TODO: Add plot of genes coloured
 
-## Create volcano plot of custom genes
+In this plot the genes are coloured if they pass the thresholds for FDR and Log Fold Change., red if they are upregulated and blue if they are downregulated.
 
-We can also label genes of interest in a volcano plot, to visualize where they lie in relation to other genes. In the original paper using this dataset, there is a heatmap (Fig. 6b below) of 31 genes. These genes are the authors' main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors, identified as differentially expressed in the luminal lactate comparison. We will label these genes in the volcano plot.
+## Create volcano plot highlighting genes of interest
+
+We can also label one or more genes of interest in a volcano plot. This enables us to visualize where these genes are in terms of significance and in comparison to the other genes. In the original paper using this dataset, there is a heatmap of 31 genes (Fig. 6b). These genes are a set of 30 cytokines/growth factor identified as differentially expressed, and the authors' main gene of interest, Mcl1. We will label these genes in the volcano plot.
 
 
 ```
@@ -136,8 +140,6 @@ Ccl28
 Cxcl1
 ```
 
-## Create volcano plot highlighting genes of interest
-
 > ### {% icon hands_on %} Hands-on: Create a Volcano plot labelling genes of interest
 > 1. Create a file of the gene symbols of interest
 >    - Paste the information above (the 31 gene symbols and header) into the Galaxy Data Uploader Paste/Fetch box
@@ -155,8 +157,11 @@ Cxcl1
 >        - *"File of labels"*: `volcano genes`
 {: .hands_on}
 
+![Volcano plot highlighting genes of interest](../../images/volcanoplot/volcanoplot_custom_genes.png)
+
+As in the previous plot, genes are coloured if they pass the thresholds for FDR and Log Fold Change. The genes of interest in the file we supplied are labelled, and also coloured red or blue if they pass the thresholds. Here all 31 labelled genes are significant (red or blue) except for two genes. One is the authors' gene of interest, Mcl1, and this result is expected, as they showed it's expression did change, but it was not significant at the transcription level. The other gene Gmfg, has an FDR very slightly outside the significance threshold we used of 0.01 (0.0105), if we rounded the FDR values to two decimal places it would then be coloured as significant.
 
 # Conclusion
 {:.no_toc}
 
-In this tutorial we have seen how a volcano plot can be generated from RNA-seq data and used to quickly visualize significant genes. This uses the same dataset from the tutorials, [RNA-seq reads to counts]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom_fastqs_to_counts/tutorial.html), [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom/tutorial.html), and [RNA-seq genes to pathways]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom_gene_set_testing/tutorial.html).
+In this tutorial we have seen how a volcano plot can be generated from RNA-seq data and used to quickly visualize significant genes.
