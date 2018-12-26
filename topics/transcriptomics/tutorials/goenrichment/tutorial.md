@@ -3,7 +3,6 @@ layout: tutorial_hands_on
 
 title: "GO Enrichment Analysis"
 zenodo_link: "https://zenodo.org/record/1255038#.Wx4qTBwh3CI"
-enable: "false"
 questions:
   - "How can I functionally interpret a list of genes of interest that I obtained from my experiment?"
 objectives:
