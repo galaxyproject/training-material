@@ -230,7 +230,7 @@ As you may notice, the number of enriched GO Terms is very high, with graphs tha
 
 The Summarize Output option in the GOEnrichment tool addresses this problem by conflating branches/families of enriched GO terms and selecting the most representative term(s) from them (usually 1-2 term per family). The greatly simplifies the results while retaining branch information, and thus ensuring that every enriched family of functions is present in the results. Some specificity is necessarily lost, but the trade-off is that the results become easier and more intuitive to analyze.
  
-> ### {% icon hands_on %} Hands-on:apnellPopulation.tab
+> ### {% icon hands_on %} Hands-on:
 >
 > 1. **GOEnrichment** <i class="fa fa-wrench" aria-hidden="true"></i>: Re-run `GOEnrichment` with the same files.
 >    - Use the default options (notice that by default the Summarize Option is on).
