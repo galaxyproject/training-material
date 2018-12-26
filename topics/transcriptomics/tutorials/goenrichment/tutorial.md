@@ -270,6 +270,7 @@ To test the GO slim approach, let us use the mouse dataset again. First, however
 {: .hands_on}
 > 
 > 
+
 Now we will go use the GOEnrichment tool with the new Slim Annotations file and the same study set.
  
 > ### {% icon hands_on %} Hands-on:
@@ -279,7 +280,7 @@ Now we will go use the GOEnrichment tool with the new Slim Annotations file and 
 >    - Use the default options.
 > ![](../../images/goenrichment_galaxyMouseSlim.png)
 >
-> ### {% icon question %} Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > 1. What differences do you observe when comparing the results obtained with the GO Slim to those obtained with the full GO, with the Summarize Output option?
 >    >
