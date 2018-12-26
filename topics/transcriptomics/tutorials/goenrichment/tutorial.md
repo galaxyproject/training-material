@@ -148,7 +148,7 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 >
 > If you press the eye icon of the *Molecular Function* you should see something like this:
 > 
-> ![](images/mfTrapnell.png)
+> ![](../../images/goenrichment_mfTrapnell.png)
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -234,7 +234,7 @@ The Summarize Output option in the GOEnrichment tool addresses this problem by c
 >
 > 1. **GOEnrichment** <i class="fa fa-wrench" aria-hidden="true"></i>: Re-run `GOEnrichment` with the same files.
 >    - Use the default options (notice that by default the Summarize Option is on).
-> ![](images/galaxyMouseDiffSum.png)
+> ![](../../images/goenrichment_galaxyMouseDiffSum.png)
 > 2. Analyze again the table and graph from *Biological Process*.
 > 
 > 
