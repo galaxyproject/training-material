@@ -1,6 +1,7 @@
 ---
 layout: tutorial_hands_on
-title: GO Enrichment Analysis
+
+title: "GO Enrichment Analysis"
 zenodo_link: "https://zenodo.org/record/1255038#.Wx4qTBwh3CI"
 enable: "false"
 questions:
