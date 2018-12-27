@@ -146,7 +146,7 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 > 
 >
 >
-> If you press the eye icon of the *Molecular Function* you should see something like this:
+> If you press the {% icon galaxy-eye %} (eye) icon of the *Molecular Function* file you should see something like this:
 > 
 > ![](../../images/goenrichment_mfTrapnell.png)
 >
