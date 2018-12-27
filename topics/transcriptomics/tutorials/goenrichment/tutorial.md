@@ -36,6 +36,7 @@ The GO Ontology, like other ontologies, are usually coded in the [OBO](http://ww
 
 > ### {% icon comment %} Comment:
 > Take note of when and where you obtained your ontology file, as these are constantly being updated.
+>http://www.ensembl.org/biomart/martview
 {: .comment}
 
 
