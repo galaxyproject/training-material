@@ -36,14 +36,14 @@ The GO Ontology, like other ontologies, are usually coded in the [OBO](http://ww
 
 > ### {% icon comment %} Comment:
 > Take note of when and where you obtained your ontology file, as these are constantly being updated.
->http://www.ensembl.org/biomart/martview
+>
 {: .comment}
 
 
 **What are GO annotations?** <br/>
 Genes are associated to GO terms via GO annotations. Each gene can have multiple annotations, even of the same GO type. An important notion to take into account when using GO is that, according to the **true path rule**, a gene annotated to a term is also implicitly annotated to each ancestor of that term in the GO graph. GO annotations have evidence codes that encode the type of evidence supporting them: only a small minority of genes have experimentally verified  annotations; the large majority have annotations inferred electronically based on sequence homology or known patterns.
 
-GO annotations can be obtained from the [Gene Ontology website](http://geneontology.org/page/download-go-annotations), or from species-specific databases. One useful resource to obtain GO annotations is [Ensembl biomart](http://www.ensembl.org/biomart/martview).
+GO annotations can be obtained from the [Gene Ontology website](http://geneontology.org/page/download-go-annotations), or from species-specific databases. One useful resource to obtain GO annotations is [Ensembl biomart](http://www.ensembl.org/biomart/martview). Again, take note to when and from where you obtained your annotations. For example, if you obtained your data from Ensembl, register the release you used.
 
 > ### Overview
 >
@@ -62,8 +62,8 @@ GO annotations can be obtained from the [Gene Ontology website](http://geneontol
 To perform functional enrichment analysis, we need to have:
 - A set of genes of interest (e.g., differentially expressed genes): **study set**
 - A set with all the genes to consider in the analysis: **population set** (which must contain the study set)
-- GO annotations, associating the genes in the population set to GO terms
-- The GO ontology, with the description of GO terms and their relationships
+- **GO annotations**, associating the genes in the population set to GO terms
+- The **GO ontology**, with the description of GO terms and their relationships
  
 For each GO term, we need to count the frequency (**k**) of genes in the study set (**n**) that are associated to the term, and the frequency (**K**) of genes in the population set (**N**) that are associated to the same term. Then we test how likely would it be to obtain at least **k** genes associated to the term if **n** genes would be randomly sampled from the population, given the frequency **K** and size **N** of the population.
 
@@ -74,7 +74,7 @@ The appropriate statistical test is the one-tailed variant of Fisher’s exact t
 For this first exercise we will use data from [Trapnell et al. 2014](https://www.ncbi.nlm.nih.gov/pubmed/22383036 "Trapnell et al. data"). In this work, the authors created an artificial dataset of gene expression in *Drosophila melanogaster*, where 300 random genes were set (insilico) to be differentially expressed between two conditions.
 
 > ### {% icon hands_on %} Hands-on:
-> The data for this tutorial is available at [Zenodo](https://zenodo.org/record/1255038#.Wx4qTBwh3CI) to download.
+> The data for this tutorial is available at [Zenodo](https://zenodo.org/record/1255038#.Wx4qTBwh3CI) to download. For convenience and reproducibility of results, we already added the GO ontology and annotations in the Zenodo repository.
 > 1. **Create a new history** 
 >
 > 2. **Upload to the Galaxy** the following files:
@@ -93,19 +93,14 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 >
 > 3. **Rename** the *go.obo* file to **GO** and *drosophila_gene_association.fb* file to **GO annotations Drosophila melanogaster**. 
 >
->    > After you upload the files, and if you press the {% icon galaxy-eye %} (eye) icon of *trapnellPopulation.tab* you should look something like this:
+>    > After you upload the files, and if you press the {% icon galaxy-eye %} (eye) icon of *trapnellPopulation.tab* it should look something like this:
 >    > ![](../../images/goenrichment_trapnellFile.png)
 > **Figure 2** Trapnell file
 >
->    > As you can see, we only have the population file, containing all genes. We have to define our genes of interest.
->
-> 4. In the tool menu, navigate to `Filter and Sort -> Filter data on any column using simple expressions`.
 >
 >    > ### {% icon comment %} Comments
->    > The study set represents the differentially expressed genes. These were chosen as having an adjusted p-value for the differential expression test (last column) smaller than a given threshold. In this case, we selected the genes with an adjusted p-value < 0,05.
+>    > The study set represents the differentially expressed genes. These were chosen as having an adjusted p-value for the differential expression test (last column) smaller than a given threshold. In this case, we want to select the genes with an adjusted p-value < 0,05.
 >    {: .comment}
->
->    > Let's go create the study set with the help of the **Filter** tool.
 > 
 > 4. **Filter data on any column using simple expressions** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `trapnellPopulation.tab`
@@ -115,14 +110,18 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 >    - **With following condition**: `c7 < 0.05`
 > ![](../../images/goenrichment_galaxyFilter.png)
 >
-> 6. This generates one file called *File on data 32*. **Rename** it to trapnellStudy.
+> 6. This generates one file. **Rename** it to trapnellStudy.
 >
 >    > ### {% icon comment %} Comments
->    > Both files have the same type of information, the difference between them is the number of genes, as the genes in the study sample are a subset of the population. 
+>    > Both files have the same type of information, the difference between them being the number of genes, as the genes in the study sample are a subset of the population. 
 >    {: .comment}
 >
 > 7. **GOEnrichment** {% icon tool %}: Run `GOEnrichment` tool with the four files.
->    - Use the default options.
+>    - {% icon param-file %} *"Gene Ontology File"*: `GO`
+>    - {% icon param-file %} *"Gene Product Annotation File"*: `Go Annotations Drosophila melanogaster`
+>    - {% icon param-file %} *"Study set File"*: `trapnellStudy`
+>    - {% icon param-file %} *"Gene Ontology File"*: `trapnellPopulation.tab`
+>    - Use the default options for the rest.
 > ![](../../images/goenrichment_galaxyTrapnell.png)
 > 
 >
@@ -175,7 +174,7 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 
 > ### {% icon comment %} Comments
 >
-> Let's go back a little bit, and reopen the trapnellPopulation file. If you go through the file, you'll see genes with 'NA' as an adjusted p-value. This means that there are genes in our population for which the differential expression test was not even performed (usually genes that were not expressed in any sample). These genes are irrelevant for this functional enrichment analysis.
+> Let's go back a little bit, and reopen the trapnellPopulation file. If you go through the file, you'll see genes with 'NA' as an adjusted p-value. This means that there are genes in our population for which the differential expression test was not even performed (usually genes that were not expressed in any sample). These genes are irrelevant for this functional enrichment analysis. We also need to note that the study set does not include those genes!
 {: .comment} 
 >
 > Let's remove the irrelevant genes from trapnellPopulation.tab, to see the differences in results.
@@ -188,7 +187,11 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 >
 > 2. This generates one file. **Rename** to `trapnellNewPopulation`.
 > 3. **GOEnrichment** {% icon tool %}: Run `GOEnrichment` tool with the new population.
->    - Use the default options.
+>    - {% icon param-file %} *"Gene Ontology File"*: `GO`
+>    - {% icon param-file %} *"Gene Product Annotation File"*: `Go Annotations Drosophila melanogaster`
+>    - {% icon param-file %} *"Study set File"*: `trapnellStudy`
+>    - {% icon param-file %} *"Gene Ontology File"*: `trapnellNewPopulation`
+>    - Use the default options for the rest.
 > ![](../../images/goenrichment_galaxyTrapnellNewPop.png)
 >
 > 4. **Rename** files to MF New Trapnell, BP New Trapnell, CC New Trapnell, MF New graphTrapnell, BP New graphTrapnell and CC New graphTrapnell, respectively.
@@ -206,7 +209,7 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 >    > <summary>Click to view answers</summary>
 >    > <ol type="1">
 >    > <li> According with the results, in *Molecular Function* and *Biological Process* we have 0 GO terms and *Component Cellular* just 1 GO term. </li>
->    > <li> The genes that we removed are not random, they are usually genes that are expressed specifically in specific conditions, tissues or time points. If they are included in the test, we will obtain false enrichments, as we saw.</li>
+>    > <li> The genes that we removed are not random, they are usually genes that are expressed in specific conditions, tissues or time points. If they are included in the test, we will obtain false enrichments, as we saw.</li>
 >    > </ol>
 >    > </details>
 >    {: .question}
@@ -215,7 +218,7 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
  
 # Simplification of graphs
 
-Graphs views are essential, but sometimes the graph view can become overwhelming due to the size of the results. To exemplify this issue, we will next perform functional enrichment analysis using a more realistic dataset from a study using the mouse model organism. The original dataset can be found [here](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE30352). In this [study](https://www.nature.com/articles/nature10532), the authors compared the gene expression of several tissues. Here, we will use results from the comparison between heart and brain.
+Graphical views are essential, but sometimes the graph view can become overwhelming due to the size of the results. To exemplify this issue, we will next perform functional enrichment analysis using a more realistic dataset from a study using the mouse model organism. The original dataset can be found [here](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE30352). In this [study](https://www.nature.com/articles/nature10532), the authors compared the gene expression of several tissues. Here, we will use results from the comparison between heart and brain.
   
 > ### {% icon hands_on %} Hands-on:
 >
@@ -223,6 +226,10 @@ Graphs views are essential, but sometimes the graph view can become overwhelming
 > 1. **Upload to Galaxy** the mouse_brain_vs_heart.txt, Mus_musculus_annotations_biomart_e92.tab and mouse_brain_vs_heart.difgenes.txt files.
 > 2. **Rename** the *mouse_brain_vs_heart.txt* file to **Mouse population**, *Mus_musculus_annotations_biomart_e92.tab* file to **GO annotations _Mus musculus_** and *mouse_brain_vs_heart.difgenes.txt* file to **Mouse diff**. 
 > 3. **GOEnrichment** <i class="fa fa-wrench" aria-hidden="true"></i>: Run `GOEnrichment` for the new study set.
+>    - {% icon param-file %} *"Gene Ontology File"*: `GO`
+>    - {% icon param-file %} *"Gene Product Annotation File"*: `GO annotations _Mus musculus_`
+>    - {% icon param-file %} *"Study set File"*: `Mouse diff`
+>    - {% icon param-file %} *"Gene Ontology File"*: `Mouse population`
 >    - Select **'No'** in the Summarize Output option.
 > ![](../../images/goenrichment_galaxyMouseDiff.png)
 > 
@@ -244,7 +251,11 @@ The Summarize Output option in the GOEnrichment tool addresses this problem by c
 > ### {% icon hands_on %} Hands-on:
 >
 > 1. **GOEnrichment** <i class="fa fa-wrench" aria-hidden="true"></i>: Re-run `GOEnrichment` with the same files.
->    - Use the default options (notice that by default the Summarize Option is on).
+>    - {% icon param-file %} *"Gene Ontology File"*: `GO`
+>    - {% icon param-file %} *"Gene Product Annotation File"*: `GO annotations _Mus musculus_`
+>    - {% icon param-file %} *"Study set File"*: `Mouse diff`
+>    - {% icon param-file %} *"Gene Ontology File"*: `Mouse population`
+>    - Use the default options for the rest (notice that by default the Summarize Option is on).
 > ![](../../images/goenrichment_galaxyMouseDiffSum.png)
 > 2. Analyze again the table and graph from *Biological Process*.
 > 
@@ -261,19 +272,18 @@ The Summarize Output option in the GOEnrichment tool addresses this problem by c
 >    {: .question}
 {: .hands_on}
  
-Another approach to reduce the complexity of the results is to use a shallower version of GO, the GO slims. GO slims are transversal cuts of GO that cover all key branches but lack specific terms. Thus, using them leads to much simpler results than using the full GO, but also leads to a substantial loss in specificity, which is greater than that of the Summarize Output option. 
+Another approach to reduce the complexity of the results is to use a shallower version of GO, the GO slims. GO slims are transversal cuts of GO that cover all key branches but lack specific terms. Thus, using them leads to much simpler results than using the full GO, but also leads to a substantial loss in specificity, which is greater than that of the Summarize Output option. You can download slimmed versions of GO from the [Gene Ontology website](http://geneontology.org/page/go-subset-guide).
 
 To test the GO slim approach, let us use the mouse dataset again. First, however, we need to use GOSlimmer tool to convert the annotations file from full GO to GO slim (as GO annotations are typically made to terms that are too specific to be in the GO slim, and thus need to be extended by the true path rule).
 
 > ### {% icon hands_on %} Hands-on:
 >
-> 1. **Upload to the Galaxy** the [goslim_generic.obo](http://www.geneontology.org/ontology/subsets/goslim_generic.obo) file.
+> 1. **Upload to the Galaxy** the goslim_generic.obo file.
 > 2. **Rename** the *goslim_generic.obo* file to **GO Slim**.
-> 3. **GOSlimmer** <i class="fa fa-wrench" aria-hidden="true"></i>: Run `GOSlimmer`.
-> 
->    > ### {% icon comment %} Comments
->    > You need to use the **GO** and **GO annotations _Mus musculus_** that you previously upload.
->    {: .comment}
+> 3. Run **GOSlimmer** <i class="fa fa-wrench" aria-hidden="true"></i>: Run `GOSlimmer`.
+>    - {% icon param-file %} *"Full Gene Ontology File"*: `GO`
+>    - {% icon param-file %} *"GOSlim File"*: `GO Slim`
+>    - {% icon param-file %} *"Gene Product Annotation File"*: `GO annotations _Mus musculus_`
 > 
 > ![](../../images/goenrichment_galaxySlimer.png)
 > 
