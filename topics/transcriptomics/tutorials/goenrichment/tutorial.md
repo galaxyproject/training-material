@@ -14,9 +14,8 @@ key_points:
   - "One needs to be careful when chosing the background population"
   - "There are several methods to simplify the output of the GO Enrichment analysis"
 contributors:
-  - DanFaria
-  - dsobral
-  - joanapaulas
+  - igcbioinformatics
+  - mblue9
 ---
 
 # Introduction
@@ -27,14 +26,23 @@ When we have a large list of genes of interest (for example, a list of different
 One way is to perform functional enrichment analysis. This method consists of the application of statistical tests to verify if genes of interest are more often associated to certain biological functions than what would be expected in a random set of genes. In this tutorial you will learn about enrichment analysis and how to perform it.
 
 **What is the Gene Ontology?** <br/>
-The [Gene Ontology](http://www.geneontology.org/) (GO) is a structured, controlled vocabulary and classification of gene function at the molecular and cellular level. It is divided in three separate sub-ontologies or GO types: biological process (e.g., signal transduction), molecular function (e.g., ATPase activity) and cellular component (e.g., ribosome). These sub-ontologies are structured as directed acyclic graphs (a hierarchy with multi-parenting) of GO terms.
+The [Gene Ontology](http://www.geneontology.org/) (GO) is a structured, controlled vocabulary and classification of gene function at the molecular and cellular level. It is divided in three separate sub-ontologies or GO types: biological process (e.g., signal transduction), molecular function (e.g., ATPase activity) and cellular component (e.g., ribosome). These sub-ontologies are structured as directed acyclic graphs (a hierarchy with multi-parenting) of GO terms. 
  
 ![](../../images/goenrichment_GOexample.png)
 > 
 **Figure 1** QuickGO - http://www.ebi.ac.uk/QuickGO
 
+The GO Ontology, like other ontologies, are usually coded in the [OBO](http://www.geneontology.org/faq/what-obo-file-format) or the [OWL](http://www.geneontology.org/faq/what-owl-file) formats. It can be downloaded from the [Gene Ontology website](http://geneontology.org/page/download-ontology) of from the [OBO foundry](http://www.obofoundry.org/).
+
+> ### {% icon comment %} Comment:
+> Take note of when and where you obtained your ontology file, as these are constantly being updated.
+{: .comment}
+
+
 **What are GO annotations?** <br/>
 Genes are associated to GO terms via GO annotations. Each gene can have multiple annotations, even of the same GO type. An important notion to take into account when using GO is that, according to the **true path rule**, a gene annotated to a term is also implicitly annotated to each ancestor of that term in the GO graph. GO annotations have evidence codes that encode the type of evidence supporting them: only a small minority of genes have experimentally verified  annotations; the large majority have annotations inferred electronically based on sequence homology or known patterns.
+
+GO annotations can be obtained from the [Gene Ontology website](http://geneontology.org/page/download-go-annotations), or from species-specific databases. One useful resource to obtain GO annotations is [Ensembl biomart](http://www.ensembl.org/biomart/martview).
 
 > ### Overview
 >
