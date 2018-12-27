@@ -156,7 +156,7 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 >    > 
 >    > <details> 
 >    > <summary>Click to view answers</summary>
->    > The ~300 genes should be random, wo we wouldn't expect to see any enriched term. Nonetheless we still have significant terms.
+>    > The ~300 genes should be random, so we wouldn't expect to see any enriched term. Nonetheless we still have significant terms.
 >    > </details>
 >    {: .question}
 {: .hands_on}
