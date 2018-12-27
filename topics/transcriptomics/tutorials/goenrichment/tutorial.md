@@ -84,7 +84,7 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 >
 > 3. **Rename** the *go.obo* file to **GO** and *drosophila_gene_association.fb* file to **GO annotations Drosophila melanogaster**. 
 >
->    > After you upload the files, and if you press the **eye icon** of *trapnellPopulation.tab* you should look someting like this:
+>    > After you upload the files, and if you press the {% icon galaxy-eye %} (eye) icon of *trapnellPopulation.tab* you should look something like this:
 >    > ![](../../images/goenrichment_trapnellFile.png)
 > **Figure 2** Trapnell file
 >
