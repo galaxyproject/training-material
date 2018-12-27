@@ -175,7 +175,7 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 >    - **With following condition**: `c7 != 'NA'`
 > ![](../../images/goenrichment_galaxyFilterNA.png)
 >
-> 2. This generate one file called *File on data 32*. **Rename** to trapnellNewPopulation.
+> 2. This generates one file. **Rename** to `trapnellNewPopulation`.
 > 3. **GOEnrichment** {% icon tool %}: Run `GOEnrichment` tool with the new population.
 >    - Use the default options.
 > ![](../../images/goenrichment_galaxyTrapnellNewPop.png)
