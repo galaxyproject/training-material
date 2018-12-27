@@ -98,7 +98,9 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 >
 >    > Let's go create the study set with the help of the **Filter** tool.
 > 
-> 5. **Filter** {% icon tool %}: We need to change the following settings:
+> 4. **Filter data on any column using simple expressions** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Filter"*: `trapnellPopulation.tab`
+>    - {% icon param-text %} *"With following condition"*: `c7 < 0.05`
 >
 >    - **Filter**: `trapnellPopulation.tab`
 >    - **With following condition**: `c7 < 0.05`
