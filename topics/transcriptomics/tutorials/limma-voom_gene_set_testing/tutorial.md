@@ -51,7 +51,7 @@ We will use several files for this analysis:
  * **Sample information** file (sample id, group)
  * **Gene lengths file** (genes, lengths)
  * **Filtered counts file** (genes in rows, counts for samples in columns, with lowly expressed genes removed)
- * **Gene sets file for MSigDB Hallmark collection for mouse (rdata)
+ * **Gene sets file** for MSigDB Hallmark collection for mouse (rdata)
 
 > ### {% icon tip %} Tip: Files for this tutorial
 >
@@ -128,27 +128,23 @@ To generate the two input files we will use:
 
 > ### {% icon hands_on %} Hands-on: Prepare the two inputs for GOSeq
 >
-> 1. **Compute** {% icon tool %} with
->    - *"Add expression"*: `bool(c8<0.01) and bool(abs(c4)>0.58)` (adj.P < 0.01 and lfc of 0.58)
+> 1. **Compute an expression on every row** {% icon tool %} with the following parameters:
+>    - {% icon param-text %} *"Add expression"*: `bool(c8<0.01) and bool(abs(c4)>0.58)` (adj.P < 0.01 and lfc of 0.58)
 >    - {% icon param-collection %} *"as a new column to"*: the `DE tables` collection
-> 2. **Join two Datasets** {% icon tool %} with
->    - *"Join"*: output of **Compute** {% icon tool %}
->    - *"using column"*: `Column: 1`
+> 2. **Join two Datasets side by side on a specified field** {% icon tool %} with the following parameters:
+>    - {% icon param-collection %} *"Join"*: output of **Compute** {% icon tool %}
+>    - {% icon param-select %} *"using column"*: `Column: 1`
 >    - {% icon param-file %} *"with"* the `seqdata` file 
->    - *"and column"*: `Column: 1`
->    - *"Keep lines of first input that do not join with second input"*: `No`
->    - *"Keep lines of first input that are incomplete"*: `No`
->    - *"Fill empty columns"*: `No`
->    - *"Keep the header lines"*: `No`
-> 3. **Cut columns from a table** {% icon tool %} with
->    - *"Cut columns"*: `c1,c9` (the gene ids and DE status)
->    - *"Delimited by"*: `Tab`
->    - {% icon param-file %} *"From"*: the output of **Join** {% icon tool %}
+>    - {% icon param-select %} *"and column"*: `Column: 1`
+> 3. **Cut columns from a table** {% icon tool %} with the following parameters:
+>    - {% icon param-text %} *"Cut columns"*: `c1,c9` (the gene ids and DE status)
+>    - {% icon param-select %} *"Delimited by"*: `Tab`
+>    - {% icon param-collection %} *"From"*: output of **Join** {% icon tool %}
 >    - Rename to `goseq DE status`
-> 4. **Cut columns from a table** {% icon tool %} with
->    - *"Cut columns"*: `c1,c11` (the gene ids and lengths)
->    - *"Delimited by"*: `Tab`
->    - {% icon param-file %} *"From"*: the output of **Join** {% icon tool %}
+> 4. **Cut columns from a table** {% icon tool %} with the following parameters:
+>    - {% icon param-text %} *"Cut columns"*: `c1,c11` (the gene ids and lengths)
+>    - {% icon param-select %} *"Delimited by"*: `Tab`
+>    - {% icon param-collection %} *"From"*: output of **Join** {% icon tool %}
 >    - Rename to `goseq gene lengths`
 {: .hands_on}
 
@@ -159,12 +155,12 @@ We now have the two required input files for goseq for both our basal and lumina
 > 1. **goseq** {% icon tool %} with
 >    - {% icon param-collection %} *"Differentially expressed genes file"*: `goseq DE status`
 >    - {% icon param-file %} *"Gene lengths file"*: `goseq gene lengths`
->    - *"Gene categories"*:  `Get categories`
->       - *"Select a genome to use"*:  `Mouse(mm10)`
->       - *"Select Gene ID format"*:  `Entrez Gene ID`
->       - *"Select one or more categories"*: `GO: Biological Process`
+>    - {% icon param-select %} *"Gene categories"*:  `Get categories`
+>       - {% icon param-select %} *"Select a genome to use"*:  `Mouse(mm10)`
+>       - {% icon param-select %} *"Select Gene ID format"*:  `Entrez Gene ID`
+>       - {% icon param-check %} *"Select one or more categories"*: `GO: Biological Process`
 >    - *"Output Options"*
->        - *"Output Top GO terms plot?"* `Yes`
+>        - {% icon param-check %} *"Output Top GO terms plot?"* `Yes`
 {: .hands_on}
 
 goseq generates a big table with the following columns for each GO term:
@@ -209,24 +205,24 @@ There are several ways we could choose to rank our genes, we could rank by log-f
 
 > ### {% icon hands_on %} Hands-on: Perform gene set enrichment with fgsea
 >
-> 1. - Set the file **Type** of the `mouse_hallmark_sets` file to `rdata`. See Tip below.
+> 1. Set the file **Type** of the `mouse_hallmark_sets` file to `rdata`. See Tip below.
 > 2. **Cut columns from a table** {% icon tool %} with
->    - *"Cut columns"*: `c1,c6` (the Entrez gene ids and t-statistic)
->    - *"Delimited by"*: `Tab`
+>    - {% icon param-text %} *"Cut columns"*: `c1,c6` (the Entrez gene ids and t-statistic)
+>    - {% icon param-select %} *"Delimited by"*: `Tab`
 >    - {% icon param-collection %} *"From"*: the `DE tables`
 > 3. **Sort data in ascending or descending order** {% icon tool %} with
 >    - {% icon param-collection %} *"Sort Query"*: the output of **Cut** {% icon tool %}
->    - *"Number of header lines"*: `1`
+>    - {% icon param-text %} *"Number of header lines"*: `1`
 >    - *"Column selections"*:
->        - *"on column"*: `Column: 2`
->        - *"in"*: `Descending order`
->        - *"Flavor"*: `Fast numeric sort (-n)`
+>        - {% icon param-select %} *"on column"*: `Column: 2`
+>        - {% icon param-select %} *"in"*: `Descending order`
+>        - {% icon param-select %} *"Flavor"*: `Fast numeric sort (-n)`
 > 4. **fgsea** {% icon tool %} with
 >    - {% icon param-collection %} *"Ranked Genes"*: the output of **Sort** {% icon tool %}
->    - *"File has header?"*: `Yes`
+>    - {% icon param-check %} *"File has header?"*: `Yes`
 >    - {% icon param-file %} *"Gene Sets"*: `mouse_hallmark_sets`
->    - *"Minimum Size of Gene Set"*: `15`
->    - *"Output plots"*: `Yes`
+>    - {% icon param-text %} *"Minimum Size of Gene Set"*: `15`
+>    - {% icon param-check %} *"Output plots"*: `Yes`
 >
 > {% include snippets/change_datatype.md %}
 >
@@ -246,30 +242,30 @@ The ensemble of genes set enrichment analyses (EGSEA) [(Alhamdoosh et al, 2017)]
 
 > ### {% icon hands_on %} Hands-on: Perform ensemble gene set testing with EGSEA
 >
-> 1. Rerun **limma** selecting *"Output Filtered Counts Table?"*: `Yes`
-> 2. **Cut** {% icon tool %}: Run **Cut columns from a table (cut)** with the following settings:
+> 1. Rerun **limma** {% icon tool %} selecting {% icon param-check %} *"Output Filtered Counts Table?"*: `Yes`
+> 2. **Cut columns from a table (cut)** {% icon tool %} with the following parameters:
 >      - {% icon param-file %} *"File to cut"*: `limma-voom filtered counts`
->      - *"Operation"*: `Discard`
->      - *"List of fields"*: Select `Column:2`, `Column:3`
+>      - {% icon param-select %} *"Operation"*: `Discard`
+>      - {% icon param-select %} *"List of fields"*: Select `Column:2`, `Column:3`
 >      - Rename to `EGSEA counts`
-> 3. **Cut** {% icon tool %}: Run **Cut columns from a table (cut)** with the following settings:
+> 3. **Cut columns from a table (cut)** {% icon tool %} with the following parameters:
 >      - {% icon param-file %} *"File to cut"*: `limma-voom filtered counts`
->      - *"Operation"*: `Keep`
->      - *"List of fields"*: Select `Column:1`, `Column:2`
+>      - {% icon param-select %} *"Operation"*: `Keep`
+>      - {% icon param-select %} *"List of fields"*: Select `Column:1`, `Column:2`
 >      - Rename to `EGSEA anno`
-> 4. **EGSEA** {% icon tool %} with
->      - *"Count Files or Matrix?*": `Single Count Matrix`
+> 4. **EGSEA** {% icon tool %} with the following parameters:
+>      - {% icon param-select %} *"Count Files or Matrix?*": `Single Count Matrix`
 >          - {% icon param-file %} *"Count Matrix"*: Select `EGSEA counts`
->      - *"Input factor information from file?"*: `Yes`
+>      - {% icon param-check %} *"Input factor information from file?"*: `Yes`
 >          - {% icon param-file %} *"Factor File"*: Select `factordata`
 >      - {% icon param-file %} *"Symbols Mapping file"*: `EGSEA anno`
->      - *"Contrast of Interest"*: `basalpregnant-basallactate`
->      - *"Contrast of Interest"*: `luminalpregnant-luminallactate`
->      - *"Species"*: `mouse`
->      - *"Gene Set Testing Methods"*: Tick `camera`, `safe`, `gage`, `zscore`, `gsva`, `globaltest`, `ora`, `ssgsea`, `padog`, `plage`, `fry`
->      - *"MSigDB Gene Set Collections"*: `H: hallmark gene sets`
->      - *"KEGG Pathways"*: `Metabolism` and `Signalling`
->      - *"I certify that I am not using this tool for commercial purposes"*: `Yes`
+>      - {% icon param-text %} *"Contrast of Interest"*: `basalpregnant-basallactate`
+>      - {% icon param-text %} *"Contrast of Interest"*: `luminalpregnant-luminallactate`
+>      - {% icon param-select %} *"Species"*: `mouse`
+>      - {% icon param-check %} *"Gene Set Testing Methods"*: Tick `camera`, `safe`, `gage`, `zscore`, `gsva`, `globaltest`, `ora`, `ssgsea`, `padog`, `plage`, `fry`
+>      - {% icon param-check %} *"MSigDB Gene Set Collections"*: `H: hallmark gene sets`
+>      - {% icon param-check %} *"KEGG Pathways"*: `Metabolism` and `Signalling`
+>      - {% icon param-check %} *"I certify that I am not using this tool for commercial purposes"*: `Yes`
 {: .hands_on}
 
 This generates a report like below.
