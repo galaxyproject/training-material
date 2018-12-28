@@ -226,9 +226,9 @@ The FastQC report contains a lot of information and we can look at the report fo
 >
 > 1. **MultiQC** {% icon tool %} with the following parameters to aggregate the FastQC reports
 >      - In *"Results"*
->        - *"Which tool was used generate logs?"*: `FastQC`
+>        - {% icon param-select %}*"Which tool was used generate logs?"*: `FastQC`
 >        - In *"FastQC output"*
->           - *"Type of FastQC output?"*: `Raw data`
+>           - {% icon param-select %} *"Type of FastQC output?"*: `Raw data`
 >           - {% icon param-collection %} *"FastQC output"*: `RawData` files (output of **FastQC** {% icon tool %} on trimmed reads)
 >           ![MultiQC](../../images/limma-voom_f2c/multiqc.png "Run MultiQC on collection"){: width="50px"}
 > 2. Inspect the `Webpage` output from MultiQC
@@ -270,21 +270,21 @@ We will use Cutadapt to trim the reads to remove the Illumina adapter and any lo
 > ### {% icon hands_on %} Hands-on: Trim reads with **Cutadapt**
 >
 > 1. **Cutadapt** {% icon tool %} with the following parameters:
->    - *"Single-end or Paired-end reads?"*: `Single-end`
+>    - {% icon param-select %} *"Single-end or Paired-end reads?"*: `Single-end`
 >        - {% icon param-collection %} *"FASTQ/A file"*: `fastqs` (Input dataset collection)
 >        - In *"Read 1 Options"*:
 >            - In *"3' (End) Adapters"*:
 >                - Click on *"Insert 3' (End) Adapters"*:
 >                - In *"1: 3' (End) Adapters"*:
->                    - *"Source"*: `Enter custom sequence`
->                        - *"Enter custom 3' adapter name (Optional)"*: `Illumina`
->                        - *"Enter custom 3' adapter sequence"*: `AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC`
+>                    - {% icon param-select %} *"Source"*: `Enter custom sequence`
+>                        - {% icon param-text %} *"Enter custom 3' adapter name (Optional)"*: `Illumina`
+>                        - {% icon param-text %} *"Enter custom 3' adapter sequence"*: `AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC`
 >    - In *"Filter Options"*:
->        - *"Minimum length"*: `20`
+>        - {% icon param-text %} *"Minimum length"*: `20`
 >    - In *"Read Modification Options"*:
->        - *"Quality cutoff"*: `20`
+>        - {% icon param-text %} *"Quality cutoff"*: `20`
 >    - In *"Output Options"*:
->        - *"Report"*: `Yes`
+>        - {% icon param-check %} *"Report"*: `Yes`
 >
 {: .hands_on}
 
@@ -298,9 +298,9 @@ We can take a look at the reads again now that they've been trimmed.
 >    - {% icon param-collection %} *"Short read data from your current history"*: `RawData` (output of **Cutadapt** {% icon tool %})
 > 2. **MultiQC** {% icon tool %} with the following parameters to aggregate the FastQC reports
 >    - In *"Results"*
->        - *"Which tool was used generate logs?"*: `FastQC`
+>        - {% icon param-select %} *"Which tool was used generate logs?"*: `FastQC`
 >        - In *"FastQC output"*
->           - *"Type of FastQC output?"*: `Raw data`
+>           - {% icon param-select %} *"Type of FastQC output?"*: `Raw data`
 >           - {% icon param-collection %} *"FastQC output"*: `RawData` files (output of **FastQC** {% icon tool %})
 > 3. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
@@ -324,21 +324,13 @@ Now that we have prepared our reads, we can align the reads for our 12 samples. 
 > ### {% icon hands_on %} Hands-on: Map reads to reference with **HISAT2**
 >
 > **HISAT2** {% icon tool %} with the following parameters:
->    - *"Source for the reference genome"*: `Use a built-in genome`
->        - *"Select a reference genome"*: `mm10`
->    - *"Single-end or paired-end reads?"*: `Single-end`
+>    - {% icon param-select %} *"Source for the reference genome"*: `Use a built-in genome`
+>        - {% icon param-select %} *"Select a reference genome"*: `mm10`
+>    - {% icon param-select %} *"Is this a single or paired library?"*: `Single-end`
 >        - {% icon param-collection %} *"FASTA/Q file"*: `Read 1 Output` (output of **Cutadapt** {% icon tool %})
 >    - In *"Summary Options"*:
->        - *"Output alignment summary in a more machine-friendly style."*: `Yes`
->        - *"Print alignment summary to a file."*: `Yes`
->    - In *"Advanced Options"*:
->        - *"Input options"*: `Use default values`
->        - *"Alignment options"*: `Use default values`
->        - *"Scoring options"*: `Use default values`
->        - *"Spliced alignment options"*: `Use default values`
->        - *"Reporting options"*: `Use default values`
->        - *"Output options"*: `Use default values`
->        - *"Other options"*: `Use default values`
+>        - {% icon param-check %} *"Output alignment summary in a more machine-friendly style."*: `Yes`
+>        - {% icon param-check %} *"Print alignment summary to a file."*: `Yes`
 {: .hands_on}
 
 > ### {% icon tip %} Tip: Settings for Paired-end or Stranded reads
@@ -378,7 +370,7 @@ An important metric to check is the percentage of reads mapped to the reference 
 >
 > 1. **MultiQC** {% icon tool %} with the following parameters to aggregate the HISAT2 summary files
 >    - In *"Results"*
->        - *"Which tool was used generate logs?"*: `HISAT2`
+>        - {% icon param-select %} *"Which tool was used generate logs?"*: `HISAT2`
 >        - {% icon param-collection %} *"Output of HISAT2"*: `Mapping summary` (output of **HISAT2** {% icon tool %})
 > 2. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
@@ -411,12 +403,9 @@ As far as we know this data is unstranded, but as a sanity check you can check t
 >    - {% icon param-file %} *"Reference gene model"*: `reference genes` (Reference BED file)
 > 2. **MultiQC* {% icon tool %} with the following parameters:
 >       - In *"1: Results"*:
->           - *"Which tool was used generate logs?"*: `RSeQC`
->               - In *"RSeQC output"*:
->                   - Click on *"Insert RSeQC output"*:
->                   - In *"1: RSeQC output"*:
->                       - *"Type of RSeQC output?"*: `infer_experiment`
->                           - {% icon param-collection %} *"RSeQC infer_experiment output"*: `Infer Experiment output` (output of **Infer Experiment** {% icon tool %})
+>           - {% icon param-select %} *"Which tool was used generate logs?"*: `RSeQC`
+>               - {% icon param-select %} *"Type of RSeQC output?"*: `infer_experiment`
+>                   - {% icon param-collection %} *"RSeQC infer_experiment output"*: `Infer Experiment output` (output of **Infer Experiment** {% icon tool %})
 > 3. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
 
@@ -446,12 +435,9 @@ Duplicate reads are usually kept in RNA-seq differential expression analysis as 
 >    - {% icon param-collection %} *"Select SAM/BAM dataset or dataset collection"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
 > 2. **MultiQC* {% icon tool %} with the following parameters:
 >       - In *"1: Results"*:
->           - *"Which tool was used generate logs?"*: `Picard`
->               - In *"Picard output"*:
->                   - Click on *"Insert Picard output"*:
->                   - In *"1: Picard output"*:
->                       - *"Type of Picard output?"*: `Markdups`
->                       - {% icon param-collection %} *"Picard output"*: `MarkDuplicate metrics` (output of **MarkDuplicates** {% icon tool %})
+>           - {% icon param-select %} *"Which tool was used generate logs?"*: `Picard`
+>               - {% icon param-select %} *"Type of Picard output?"*: `Markdups`
+>                   - {% icon param-collection %} *"Picard output"*: `MarkDuplicate metrics` (output of **MarkDuplicates** {% icon tool %})
 > 3. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
 
@@ -481,12 +467,9 @@ You can check the numbers of reads mapped to each chromosome with the **Samtools
 >    - {% icon param-collection %} *"BAM file"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
 > 2. **MultiQC* {% icon tool %} with the following parameters:
 >       - In *"1: Results"*:
->           - *"Which tool was used generate logs?"*: `Samtools`
->               - In *"Samtools output"*:
->                   - Click on *"Insert Samtools output"*:
->                   - In *"1: Samtools output"*:
->                      - *"Type of Samtools output?"*: `idxstats`
->                           - {% icon param-collection %} *"Samtools idxstats output"*: `IdxStats output` (output of **IdxStats** {% icon tool %})
+>           - {% icon param-select %} *"Which tool was used generate logs?"*: `Samtools`
+>               - {% icon param-select %} *"Type of Samtools output?"*: `idxstats`
+>                   - {% icon param-collection %} *"Samtools idxstats output"*: `IdxStats output` (output of **IdxStats** {% icon tool %})
 > 3. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
 
@@ -521,12 +504,9 @@ The coverage of reads along gene bodies can be assessed to check if there is any
 >    - {% icon param-file %} *"Reference gene model"*: `reference genes` (Input dataset)
 > 2. **MultiQC* {% icon tool %} with the following parameters:
 >       - In *"1: Results"*:
->           - *"Which tool was used generate logs?"*: `RSeQC`
->               - In *"RSeQC output"*:
->                   - Click on *"Insert RSeQC output"*:
->                   - In *"1: RSeQC output"*:
->                       - *"Type of RSeQC output?"*: `gene_body_coverage`
->                           - {% icon param-collection %} *"RSeQC gene_body_coverage output"*: `Gene Body Coverage (BAM) (text)` (output of **Gene Body Coverage (
+>           - {% icon param-select %} *"Which tool was used generate logs?"*: `RSeQC`
+>               - {% icon param-select %} *"Type of RSeQC output?"*: `gene_body_coverage`
+>                   - {% icon param-collection %} *"RSeQC gene_body_coverage output"*: `Gene Body Coverage (BAM) (text)` (output of **Gene Body Coverage (
 BAM)** {% icon tool %})
 > 3. Inspect the `Webpage` output from MultiQC
 >
@@ -563,12 +543,9 @@ We can also check the distribution of reads across known gene features, such as 
 >    - {% icon param-file %} *"Reference gene model"*: `reference genes` (Input dataset)
 > 2. **MultiQC* {% icon tool %} with the following parameters:
 >       - In *"1: Results"*:
->           - *"Which tool was used generate logs?"*: `RSeQC`
->               - In *"RSeQC output"*:
->                   - Click on *"Insert RSeQC output"*:
->                   - In *"1: RSeQC output"*:
->                       - *"Type of RSeQC output?"*: `read_distribution`
->                           - {% icon param-collection %} *"RSeQC read_distribution output"*: `Read Distribution output` (output of **Read Distribution** {% icon tool %})
+>           - {% icon param-select %} *"Which tool was used generate logs?"*: `RSeQC`
+>               - {% icon param-select %} *"Type of RSeQC output?"*: `read_distribution`
+>                   - {% icon param-collection %} *"RSeQC read_distribution output"*: `Read Distribution output` (output of **Read Distribution** {% icon tool %})
 > 3. Inspect the `Webpage` output from MultiQC
 >
 {: .hands_on}
@@ -606,17 +583,17 @@ The alignment produces a set of BAM files, where each file contains the read ali
 >
 > **featureCounts** {% icon tool %} with the following parameters:
 >    - {% icon param-collection %} *"Alignment file"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
->    - *"Gene annotation file"*: `featureCounts built-in`
->        - *"Select built-in genome"*: `mm10`
+>    - {% icon param-select %} *"Gene annotation file"*: `featureCounts built-in`
+>        - {% icon param-select %} *"Select built-in genome"*: `mm10`
 {: .hands_on}
 
 > ### {% icon tip %} Tip: Settings for Paired-end or Stranded reads
 >
 > - If you have **paired-end** reads
->     - Select *"Options for paired-end reads"*
->         - *"Count fragments instead of reads"*: `Enabled; fragments (or templates) will be counted instead of reads`
+>     - Click *"Options for paired-end reads"*
+>         - {% icon param-select %} *"Count fragments instead of reads"*: `Enabled; fragments (or templates) will be counted instead of reads`
 > - If you have **stranded** reads
->     - Select *"Specify strand information"*: `Stranded (Forward)` or `Stranded (Reverse)`
+>     - {% icon param-select %} Select *"Specify strand information"*: `Stranded (Forward)` or `Stranded (Reverse)`
 {: .tip}
 
 ## Check assignments of reads to genes
@@ -626,7 +603,7 @@ featureCounts reports the numbers of unassigned reads and the reasons why they a
 > ### {% icon hands_on %} Hands-on: Assess reads mapped to genes
 >
 > 1. **MultiQC** {% icon tool %} with the following parameters:
->    - *"Which tool was used generate logs?"*: `featureCounts`
+>    - {% icon param-select %} *"Which tool was used generate logs?"*: `featureCounts`
 >        - {% icon param-collection %} *"Output of FeatureCounts"*: `featureCounts summary` (output of **featureCounts** {% icon tool %})
 > 2. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
@@ -657,9 +634,9 @@ The counts files are currently in the format of one file per sample. However, it
 >
 > **Column Join on Collection** {% icon tool %} with the following parameters:
 >    - {% icon param-collection %} *"Tabular files"*: `featureCounts output` (output of **featureCounts** {% icon tool %})
->    - *"Identifier column"*: `1`
->    - *"Number of Header lines in each item"*: `1`
->    - *"Keep original column header"*: `No`
+>    - {% icon param-text %} *"Identifier column"*: `1`
+>    - {% icon param-text %} *"Number of Header lines in each item"*: `1`
+>    - {% icon param-check %} *"Keep original column header"*: `No`
 >
 {: .hands_on}
 
@@ -689,59 +666,45 @@ So far we have run MultiQC on one step at a time which generates multiple report
 > > **MultiQC** {% icon tool %} with the following parameters:
 > >    - In *"Results"*:
 > >        - In *"1: Results"*:
-> >            - *"Which tool was used generate logs?"*: `Cutadapt/Trim Galore!`
+> >            - {% icon param-select %} *"Which tool was used generate logs?"*: `Cutadapt/Trim Galore!`
 > >                - {% icon param-collection %} *"Output of Cutadapt"*: `Cutadapt Report` (output of **Cutadapt** {% icon tool %})
-> >        - Click on *"Insert Results"*:
+> >        - {% icon param-repeat %} Click on *"Insert Results"*:
 > >        - In *"2: Results"*:
-> >            - *"Which tool was used generate logs?"*: `FastQC`*:
+> >            - {% icon param-select %} *"Which tool was used generate logs?"*: `FastQC`
 > >                - {% icon param-collection %} *"FastQC output"*: `FastQC RawData` (output of **FastQC** {% icon tool %})
-> >        - Click on *"Insert Results"*:
+> >        - {% icon param-repeat %} Click on *"Insert Results"*:
 > >        - In *"3: Results"*:
-> >            - *"Which tool was used generate logs?"*: `HISAT2`
+> >            - {% icon param-select %} *"Which tool was used generate logs?"*: `HISAT2`
 > >                - {% icon param-collection %} *"Output of HISAT2"*: `Mapping summary` (output of **HISAT2** {% icon tool %})
-> >        - Click on *"Insert Results"*:
+> >        - {% icon param-repeat %} Click on *"Insert Results"*:
 > >        - In *"4: Results"*:
-> >            - *"Which tool was used generate logs?"*: `RSeQC`
-> >                - In *"RSeQC output"*:
-> >                    - Click on *"Insert RSeQC output"*:
-> >                    - In *"1: RSeQC output"*:
-> >                        - *"Type of RSeQC output?"*: `infer_experiment`
-> >                            - {% icon param-collection %} *"RSeQC infer_experiment output"*: `Infer Experiment output` (output of **Infer Experiment** {% icon tool %})
+> >            - {% icon param-select %} *"Which tool was used generate logs?"*: `RSeQC`
+> >                - {% icon param-select %} *"Type of RSeQC output?"*: `infer_experiment`
+> >                    - {% icon param-collection %} *"RSeQC infer_experiment output"*: `Infer Experiment output` (output of **Infer Experiment** {% icon tool %})
+> >        - {% icon param-repeat %} Click on *"Insert Results"*:  
 > >        - In *"5: Results"*:
-> >            - *"Which tool was used generate logs?"*: `Picard`
-> >                - In *"Picard output"*:
-> >                    - Click on *"Insert Picard output"*:
-> >                    - In *"1: Picard output"*:
-> >                        - *"Type of Picard output?"*: `Markdups`
-> >                        - {% icon param-collection %} *"Picard output"*: `MarkDuplicate metrics` (output of **MarkDuplicates** {% icon tool %})
-> >        - Click on *"Insert Results"*:
+> >            - {% icon param-select %} *"Which tool was used generate logs?"*: `Picard`
+> >                - {% icon param-select %} *"Type of Picard output?"*: `Markdups`
+> >                    - {% icon param-collection %} *"Picard output"*: `MarkDuplicate metrics` (output of **MarkDuplicates** {% icon tool %})
+> >        - {% icon param-repeat %} Click on *"Insert Results"*:
 > >        - In *"6: Results"*:
-> >            - *"Which tool was used generate logs?"*: `Samtools`
-> >                - In *"Samtools output"*:
-> >                    - Click on *"Insert Samtools output"*:
-> >                    - In *"1: Samtools output"*:
-> >                       - *"Type of Samtools output?"*: `idxstats`
-> >                            - {% icon param-collection %} *"Samtools idxstats output"*: `IdxStats output` (output of **IdxStats** {% icon tool %})
-> >        - Click on *"Insert Results"*:
+> >            - {% icon param-select %} *"Which tool was used generate logs?"*: `Samtools`
+> >               - {% icon param-select %} *"Type of Samtools output?"*: `idxstats`
+> >                    - {% icon param-collection %} *"Samtools idxstats output"*: `IdxStats output` (output of **IdxStats** {% icon tool %})
+> >        - {% icon param-repeat %} Click on *"Insert Results"*:
 > >        - In *"7: Results"*:
-> >            - *"Which tool was used generate logs?"*: `RSeQC`
-> >                - In *"RSeQC output"*:
-> >                    - Click on *"Insert RSeQC output"*:
-> >                    - In *"1: RSeQC output"*:
-> >                        - *"Type of RSeQC output?"*: `gene_body_coverage`
-> >                            - {% icon param-collection %} *"RSeQC gene_body_coverage output"*: `Gene Body Coverage (BAM) (text)` (output of **Gene Body Coverage (
+> >            - {% icon param-select %} *"Which tool was used generate logs?"*: `RSeQC`
+> >                - {% icon param-select %} *"Type of RSeQC output?"*: `gene_body_coverage`
+> >                    - {% icon param-collection %} *"RSeQC gene_body_coverage output"*: `Gene Body Coverage (BAM) (text)` (output of **Gene Body Coverage (
 BAM)** {% icon tool %})
-> >        - Click on *"Insert Results"*:
+> >        - {% icon param-repeat %} Click on *"Insert Results"*:
 > >        - In *"8: Results"*:
-> >            - *"Which tool was used generate logs?"*: `RSeQC`
-> >                - In *"RSeQC output"*:
-> >                    - Click on *"Insert RSeQC output"*:
-> >                    - In *"1: RSeQC output"*:
-> >                        - *"Type of RSeQC output?"*: `read_distribution`
-> >                            - {% icon param-collection %} *"RSeQC read_distribution output"*: `Read Distribution output` (output of **Read Distribution** {% icon tool %})
-> >        - Click on *"Insert Results"*:
+> >            - {% icon param-select %} *"Which tool was used generate logs?"*: `RSeQC`
+> >                - {% icon param-select %} *"Type of RSeQC output?"*: `read_distribution`
+> >                    - {% icon param-collection %} *"RSeQC read_distribution output"*: `Read Distribution output` (output of **Read Distribution** {% icon tool %})
+> >        - {% icon param-repeat %} Click on *"Insert Results"*:
 > >        - In *"9: Results"*:
-> >            - *"Which tool was used generate logs?"*: `featureCounts`
+> >            - {% icon param-select %} *"Which tool was used generate logs?"*: `featureCounts`
 > >                - {% icon param-collection %} *"Output of FeatureCounts"*: `featureCounts summary` (output of **featureCounts** {% icon tool %})
 > >
 > {: .solution}
