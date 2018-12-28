@@ -117,7 +117,7 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 >    - {% icon param-file %} *"Gene Ontology File"*: `GO`
 >    - {% icon param-file %} *"Gene Product Annotation File"*: `Go Annotations Drosophila melanogaster`
 >    - {% icon param-file %} *"Study set File"*: `trapnellStudy`
->    - {% icon param-file %} *"Gene Ontology File"*: `trapnellPopulation.tab`
+>    - {% icon param-file %} *"Population set File"*: `trapnellPopulation.tab`
 >    - Use the default options for the rest.
 > ![](../../images/goenrichment_galaxyTrapnell.png)
 >
@@ -185,7 +185,7 @@ Let's remove the irrelevant genes from the background population (`trapnellPopul
 >    - {% icon param-file %} *"Gene Ontology File"*: `GO`
 >    - {% icon param-file %} *"Gene Product Annotation File"*: `Go Annotations Drosophila melanogaster`
 >    - {% icon param-file %} *"Study set File"*: `trapnellStudy`
->    - {% icon param-file %} *"Gene Ontology File"*: `trapnellNewPopulation`
+>    - {% icon param-file %} *"Population set File"*: `trapnellNewPopulation`
 >    - Use the default options for the rest.
 > ![](../../images/goenrichment_galaxyTrapnellNewPop.png)
 >
@@ -224,7 +224,7 @@ Graphical views are essential, but sometimes the graph view can become overwhelm
 >    - {% icon param-file %} *"Gene Ontology File"*: `GO`
 >    - {% icon param-file %} *"Gene Product Annotation File"*: `GO annotations Mus musculus`
 >    - {% icon param-file %} *"Study set File"*: `Mouse diff`
->    - {% icon param-file %} *"Gene Ontology File"*: `Mouse population`
+>    - {% icon param-file %} *"Population set File"*: `Mouse population`
 >    - Select **'No'** in the Summarize Output option.
 > ![](../../images/goenrichment_galaxyMouseDiff.png)
 >
@@ -249,7 +249,7 @@ The Summarize Output option in the GOEnrichment tool addresses this problem by c
 >    - {% icon param-file %} *"Gene Ontology File"*: `GO`
 >    - {% icon param-file %} *"Gene Product Annotation File"*: `GO annotations Mus musculus`
 >    - {% icon param-file %} *"Study set File"*: `Mouse diff`
->    - {% icon param-file %} *"Gene Ontology File"*: `Mouse population`
+>    - {% icon param-file %} *"Population set File"*: `Mouse population`
 >    - Use the default options for the rest (notice that by default the Summarize Option is on).
 > ![](../../images/goenrichment_galaxyMouseDiffSum.png)
 > 2. Analyze again the table and graph from *Biological Process*.
