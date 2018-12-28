@@ -126,13 +126,13 @@ Let’s create a new file, `countdata`, that contains only the counts for the 12
 
 > ### {% icon hands_on %} Hands-on: Format the counts data
 >
-> 1. **Cut** {% icon tool %}: Run **Cut columns from a table (cut)** with the following settings:
->      - *"File to cut"*: `seqdata`
->      - *"Operation"*: `Discard`
->      - *"List of fields"*: Select `Column:2`
-> 2. **Replace Text** {% icon tool %}: Run **Replace Text in entire line** with the following settings:
->      - *"File to process"*: output of **Cut** {% icon tool %}
->      - *"Find pattern"*: `_B[A-Z0-9_]+`
+> 1. **Cut columns from a table (cut)** {% icon tool %} with the following parameters:
+>      - {% icon param-file %} *"File to cut"*: `seqdata`
+>      - {% icon param-select %} *"Operation"*: `Discard`
+>      - {% icon param-select %} *"List of fields"*: Select `Column:2`
+> 2. **Replace Text in entire line** {% icon tool %} with the following parameters:
+>      - {% icon param-file %} *"File to process"*: output of **Cut** {% icon tool %}
+>      - {% icon param-text %} *"Find pattern"*: `_B[A-Z0-9_]+`
 > 3. Rename file as `countdata` using the {% icon galaxy-pencil %} (pencil) icon. The file should look like below.
 >    ![countdata file](../../images/limma-voom/countdata.png "Count file (after formatting)")
 {: .hands_on}
@@ -141,14 +141,14 @@ Next, let's create a new file, `factordata`, that contains the groups informatio
 
 > ### {% icon hands_on %} Hands-on: Format the sample information file
 >
-> 1. **Merge Columns** {% icon tool %}: Run **Merge Columns together** with the following settings:
->      - *"Select data"*: `sampleinfo`
->      - *"Merge column"*: `Column: 3`
->      - *"with column"*: `Column: 4`
-> 2. **Cut** {% icon tool %}: Run **Cut columns from a table (cut)** with the following settings:
->      - *"File to cut"*: output of **Merge Columns** {% icon tool %}
->      - *"Operation"*: `Keep`
->      - *"List of fields"*: Select `Column:2` and `Column:5`
+> 1. **Merge Columns together** {% icon tool %} with the following parameters:
+>      - {% icon param-file %} *"Select data"*: `sampleinfo`
+>      - {% icon param-select %} *"Merge column"*: `Column: 3`
+>      - {% icon param-select %} *"with column"*: `Column: 4`
+> 2. **Cut columns from a table (cut)** {% icon tool %} with the following parameters:
+>      - {% icon param-file %} *"File to cut"*: output of **Merge Columns** {% icon tool %}
+>      - {% icon param-select %} *"Operation"*: `Keep`
+>      - {% icon param-select %} *"List of fields"*: Select `Column:2` and `Column:5`
 > 3. Rename file as `factordata` using the {% icon galaxy-pencil %} (pencil) icon. The file should look like below.
 >    ![factordata file](../../images/limma-voom/factordata.png "Sample information file (after formatting)")
 {: .hands_on}
@@ -159,12 +159,12 @@ Optionally, gene annotations can be provided to the limma-voom tool and if provi
 
 > ### {% icon hands_on %} Hands-on: Get gene annotations
 >
-> 1. **annotateMyIDs** {% icon tool %}: Run **annotateMyIDs** with the following settings:
->      - *"File with IDs"*: `countdata`
->      - *"File has header"*: `Yes`
->      - *"Organism"*: `Mouse`
->      - *"ID Type"*: `Entrez`
->      - "*Output columns": tick
+> 1. **annotateMyIDs** {% icon tool %} with the following parameters:
+>      - {% icon param-file %} *"File with IDs"*: `countdata`
+>      - {% icon param-check %} *"File has header"*: `Yes`
+>      - {% icon param-select %} *"Organism"*: `Mouse`
+>      - {% icon param-select %} *"ID Type"*: `Entrez`
+>      - {% icon param-check %} "*Output columns"*: tick
 >          - `ENTREZID`
 >          - `SYMBOL`
 >          - `GENENAME`
@@ -197,19 +197,19 @@ Since we are interested in differences between groups, we need to specify which 
 
 > ### {% icon hands_on %} Hands-on: Differential expression with limma-voom
 >
-> 1. **limma** {% icon tool %}: Run **limma** with the following settings:
->      - *"Differential Expression Method"*: `limma-voom`
->      - *"Count Files or Matrix?*": `Single Count Matrix`
->          - *"Count Matrix"*: Select `countdata`
->      - *"Input factor information from file?"*: `Yes`
->          - *"Factor File"*: Select `factordata`
->      - *"Use Gene Annotations?"*: `Yes`
->          - *"Factor File"*: Select `annodata`
->      - *"Contrast of Interest"*: `basalpregnant-basallactate`
->      - *"Filter lowly expressed genes?"*: `Yes`
->          - *"Filter on CPM or Count values?"*: `CPM`
->          - *"Minimum CPM"*: `0.5`
->          - *"Minimum Samples"*: `2`
+> 1. **limma** {% icon tool %} with the following parameters:
+>      - {% icon param-file %} *"Differential Expression Method"*: `limma-voom`
+>      - {% icon param-select %} *"Count Files or Matrix?*": `Single Count Matrix`
+>          - {% icon param-file %} *"Count Matrix"*: Select `countdata`
+>      - {% icon param-select %} *"Input factor information from file?"*: `Yes`
+>          - {% icon param-file %} *"Factor File"*: Select `factordata`
+>      - {% icon param-select %} *"Use Gene Annotations?"*: `Yes`
+>          - {% icon param-file %} *"Factor File"*: Select `annodata`
+>      - {% icon param-text %} *"Contrast of Interest"*: `basalpregnant-basallactate`
+>      - {% icon param-select %} *"Filter lowly expressed genes?"*: `Yes`
+>          - {% icon param-select %} *"Filter on CPM or Count values?"*: `CPM`
+>          - {% icon param-text %} *"Minimum CPM"*: `0.5`
+>          - {% icon param-text %} *"Minimum Samples"*: `2`
 > 2. Inspect the `Report` produced by clicking on the {% icon galaxy-eye %} (eye) icon
 {: .hands_on}
 
@@ -243,9 +243,9 @@ It turns out that there has been a mix-up with two samples, they have been misla
 > 1. Import the correct sample information file from `https://ndownloader.figshare.com/files/5999832?private_link=1d788fd384d33e913a2a`
 > 2. Use the Rerun button in the History to redo the **Merge Columns** and **Cut** steps on the correct sample information file.
 > 3. Delete the incorrect sample information datasets to avoid any confusion.
-> 4. Rerun **limma** as before with the correct `sampleinfo` file and adding the following settings:
+> 4. Rerun **limma** as before with the correct `sampleinfo` file and adding the following parameters:
 >      - **Output Options**
->          - *"Additional Plots"* tick:
+>          - {% icon param-check %} *"Additional Plots"* tick:
 >              - `Density Plots (if filtering)`
 >              - `CpmsVsCounts Plots (if filtering on cpms)`
 >              - `Box Plots (if normalising)`
@@ -253,7 +253,7 @@ It turns out that there has been a mix-up with two samples, they have been misla
 >              - `MD Plots for individual samples`
 >              - `Heatmaps (top DE genes)`
 >              - `Stripcharts (top DE genes)`
->          - *"Output Library information file?"*: `Yes`
+>          - {% icon param-check %} *"Output Library information file?"*: `Yes`
 {: .hands_on}
 
 In the `Report` you should then see the correct MDS plot as below.
@@ -417,13 +417,13 @@ When there is a lot of differential expression, sometimes we may want to cut-off
 
 > ### {% icon hands_on %} Hands-on: Testing relative to a threshold (TREAT)
 >
-> 1. **limma** {% icon tool %}: Rerun **limma** with the following settings:
+> 1. Rerun **limma** {% icon tool %} with the following parameters:
 >      - *"**Output Options**"*
->          - "Output Library information file?": `No`
+>          - {% icon param-check %} "Output Library information file?": `No`
 >      - *"**Advanced Options**"*
->          - *"Minimum Log2 Fold Change"*: `0.58`
->          - *"P-Value Adjusted Threshold"*: `0.01`
->          - *"Test significance relative to a fold-change threshold (TREAT)"*: `Yes`
+>          - {% icon param-text %} *"Minimum Log2 Fold Change"*: `0.58`
+>          - {% icon param-text %} *"P-Value Adjusted Threshold"*: `0.01`
+>          - {% icon param-check %} *"Test significance relative to a fold-change threshold (TREAT)"*: `Yes`
 > 2. Inspect the `Report`
 {: .hands_on}
 
@@ -475,13 +475,13 @@ Multiple contrasts can be run with the limma tool. For example, we can compare t
 
 > ### {% icon hands_on %} Hands-on: Run multiple contrasts
 >
-> 1. **limma** {% icon tool %}: Rerun **limma** adding the following settings *(i.e. run with 2 contrasts)*:
->      - *"Contrast of Interest"*: `basalpregnant-basallactate`
->      - *"Contrast of Interest"*: `luminalpregnant-luminallactate`
+> 1. Rerun **limma** {% icon tool %} adding the following parameters *(i.e. run with 2 contrasts)*:
+>      - {% icon param-text %} *"Contrast of Interest"*: `basalpregnant-basallactate`
+>      - {% icon param-text %} *"Contrast of Interest"*: `luminalpregnant-luminallactate`
 >      - *"**Advanced Options**"*
->          - *"Minimum Log2 Fold Change"*: `0.58`
->          - *"P-Value Adjusted Threshold"*: `0.01`
->          - *"Test significance relative to a fold-change threshold (TREAT)"*: `Yes`
+>          - {% icon param-text %} *"Minimum Log2 Fold Change"*: `0.58`
+>          - {% icon param-text %} *"P-Value Adjusted Threshold"*: `0.01`
+>          - {% icon param-check %} *"Test significance relative to a fold-change threshold (TREAT)"*: `Yes`
 > 2. Inspect the `Report`
 >
 > You should find that there are more genes differentially expressed for the luminal cells than the basal. There are ~274 genes DE in basal cells versus ~ 1610 in the luminal cells.
