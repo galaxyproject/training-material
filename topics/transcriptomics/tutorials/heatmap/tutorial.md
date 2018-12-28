@@ -126,19 +126,18 @@ Cxcl1
 >    - Paste the information above (the 31 gene symbols and header) into the Galaxy Data Uploader Paste/Fetch box
 >    - Set File Type to `tabular`
 >    - Use the {% icon galaxy-pencil %} (pencil) icon to rename the file to `heatmap genes`
-> 2. **Join two Datasets** {% icon tool %} with the following parameters:
+> 2. **Join two Datasets side by side on a specified field** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Join"*: the `heatmap genes` file
->    - *"using column"*: `Column: 1`
+>    - {% icon param-select %} *"using column"*: `Column: 1`
 >    - {% icon param-file %} *"with"*: `Normalised counts` file
->    - *"and column"*: `Column: 2`
->    - *"Keep lines of first input that do not join with second input"*: `No`
->    - *"Keep the header lines"*: `Yes`
+>    - {% icon param-select %} *"and column"*: `Column: 2`
+>    - {% icon param-select %} *"Keep the header lines"*: `Yes`
 >
 >    The generated file has more columns than we need for the heatmap. In addition to the columns with normalized counts (in log2), there is the $$log_{2} FC$$ and other information. We need to remove the extra columns.
 >
 > 3. **Cut columns from a table** {% icon tool %} to extract the columns with the gene ids and normalized counts
->    - *"Cut columns"*: `c1,c5-c16`
->    - *"Delimited by"*: `Tab`
+>    - {% icon param-text %} *"Cut columns"*: `c1,c5-c16`
+>    - {% icon param-select %} *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: the joined dataset (output of **Join two Datasets** {% icon tool %})
 >
 >    The genes are in rows and the samples in columns, we could leave the genes in rows but we will transpose to have genes in columns and samples in rows as in the Figure in the paper.
@@ -152,13 +151,13 @@ We now have a table with the 31 genes in columns and the 12 samples in rows.
 
 > ### {% icon hands_on %} Hands-on: Plot the heatmap of custom genes
 >
-> 1. **heatmap2** {% icon tool %} to plot the heatmap
+> 1. **heatmap2** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input should have column headers"*: the generated table (output of **Transpose** {% icon tool %})
->    - *"Data transformation"*: `Plot the data as it is`
->    - *"Enable data clustering"*: `No`
->    - *"Labeling columns and rows"*: `Label my columns and rows`
->    - *"Coloring groups"*: `Blue to white to red`
->    - *"Data scaling"*: `Scale my data by column` (scale genes)
+>    - {% icon param-select %} *"Data transformation"*: `Plot the data as it is`
+>    - {% icon param-check %} *"Enable data clustering"*: `No`
+>    - {% icon param-select %} *"Labeling columns and rows"*: `Label my columns and rows`
+>    - {% icon param-select %} *"Coloring groups"*: `Blue to white to red`
+>    - {% icon param-select %} *"Data scaling"*: `Scale my data by column` (scale genes)
 {: .hands_on}
 
 You should see a heatmap like below.
