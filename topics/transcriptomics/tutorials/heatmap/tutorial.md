@@ -79,9 +79,6 @@ We will use one file for this analysis:
 >    {: .tip}
 {: .hands_on}
 
-
-## Create heatmap of custom genes
-
 To create a heatmap for a set of genes of interest, such as the 31 genes from the original paper using this dataset, Fig. 6b below. These 31 genes include the authors' main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors, identified as differentially expressed. We will recreate this heatmap here.
 
 ![Fu heatmap](../../images/limma-voom/fu_heatmap.png "Fu et al, Nat Cell Biol 2015"){: width="50%"}
@@ -121,6 +118,8 @@ Ccl28
 Cxcl1
 ```
 
+## Extract normalized counts
+
 > ### {% icon hands_on %} Hands-on: Extract the normalized counts for the genes of interest
 > 1. Create a file of the gene symbols of interest
 >    - Paste the information above (the 31 gene symbols and header) into the Galaxy Data Uploader Paste/Fetch box
@@ -149,6 +148,8 @@ Cxcl1
 
 We now have a table with the 31 genes in columns and the 12 samples in rows.
 
+# Create heatmap of custom genes
+
 > ### {% icon hands_on %} Hands-on: Plot the heatmap of custom genes
 >
 > 1. **heatmap2** {% icon tool %} with the following parameters:
@@ -175,7 +176,7 @@ You should see a heatmap like below.
 >    {: .solution}
 {: .question}
 
-Alternatively, or in addition, instead of a heatmmap of custom genes, you could create a heatmap of the most differentially expressed genes in a dataset, as shown in the [RNA-seq ref-based tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html) tutorial.
+Alternatively, or in addition, instead of a heatmap of custom genes, you could create a heatmap of the most differentially expressed genes in a dataset, as shown in the [RNA-seq ref-based tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html).
 
 
 # Conclusion

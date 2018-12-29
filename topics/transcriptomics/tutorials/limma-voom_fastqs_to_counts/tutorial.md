@@ -8,11 +8,11 @@ tags:
   - QC
 questions:
 - How to convert RNA-seq reads into counts?
-- How to perform quality control of RNA-seq data?
+- How to perform quality control of RNA-seq reads?
 - How to do this analysis efficiently in Galaxy?
 objectives:
 - Learn how RNA-seq reads are converted into counts
-- Understand QC steps that can be performed on RNA-seq data
+- Understand QC steps that can be performed on RNA-seq reads
 - Generate interactive reports to summarise QC information with MultiQC
 - Use the Galaxy Rule-based Uploader to import FASTQs from URLs
 - Make use of Galaxy Collections for a tidy analysis
@@ -37,9 +37,9 @@ contributors:
 
 Measuring gene expression on a genome-wide scale has become common practice over the last two decades or so, with microarrays predominantly used pre-2008. With the advent of next generation sequencing technology in 2008, an increasing number of scientists use this technology to measure and understand changes in gene expression in often complex systems. As sequencing costs have decreased, using RNA-Seq to simultaneously measure the expression of tens of thousands of genes for multiple samples has never been easier. The cost of these experiments has now moved from generating the data to storing and analysing it.
 
-There are many steps involved in analysing an RNA-Seq experiment.he analysis begins with sequencing reads (FASTQ files). These are usually aligned to a reference genome, if available. Then the number of reads mapped to each gene can be counted. This results in a table of counts, which is what we perform statistical analyses on to determine differentially expressed genes and pathways. The purpose of this tutorial is to demonstrate how to do read alignment and counting, prior to performing differential expression. Differential expression analysis with limma-voom is covered in an accompanying tutorial [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom/tutorial.html). The tutorial here shows how to start from FASTQ data and perform the mapping and counting steps, along with associated Quality Control.
+There are many steps involved in analysing an RNA-Seq experiment. he analysis begins with sequencing reads (FASTQ files). These are usually aligned to a reference genome, if available. Then the number of reads mapped to each gene can be counted. This results in a table of counts, which is what we perform statistical analyses on to determine differentially expressed genes and pathways. The purpose of this tutorial is to demonstrate how to do read alignment and counting, prior to performing differential expression. Differential expression analysis with limma-voom is covered in an accompanying tutorial [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom/tutorial.html). The tutorial here shows how to start from FASTQ data and perform the mapping and counting steps, along with associated Quality Control.
 
-## Mouse mammary gland dataset
+**Mouse mammary gland dataset**
 
 The data for this tutorial comes from a Nature Cell Biology paper, [EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival](https://www.ncbi.nlm.nih.gov/pubmed/25730472)), Fu et al. 2015. Both the raw data (sequence reads) and processed data (counts) can be downloaded from Gene Expression Omnibus database (GEO) under accession number [GSE60450](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE60450).
 
@@ -263,7 +263,9 @@ See the [Quality Control tutorial]({{ site.baseurl }}/topics/sequence-analysis/t
 > {: .solution}
 {: .question}
 
-We will use Cutadapt to trim the reads to remove the Illumina adapter and any low quality bases at the ends. We will discard any sequences that are too short (< 20bp) after trimming. The [Cutadapt website](https://cutadapt.readthedocs.io/en/stable/guide.html#illumina-truseq) provides the sequence we can use to trim the Illumina adapter `AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC`. We will also output the Cutadapt report for summarising with MultiQC.
+We will use Cutadapt to trim the reads to remove the Illumina adapter and any low quality bases at the ends (quality score < 20). We will also output the Cutadapt report for summarising with MultiQC.
+
+The Cutadapt tool Help section provides the sequence we can use to trim this standard Illumina adapter `AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC`, as given on the [Cutadapt website](https://cutadapt.readthedocs.io/en/stable/guide.html#illumina-truseq). Other Illumina adapter sequences (e.g. Nextera) can be found at the [Illumina website](http://sapac.support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html). We will discard any sequences that are too short (< 20bp) after trimming.
 
 ## Trim reads
 
@@ -401,7 +403,7 @@ As far as we know this data is unstranded, but as a sanity check you can check t
 > 1. **Infer Experiment** {% icon tool %} with the following parameters:
 >    - {% icon param-collection %} *"Input .bam file"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
 >    - {% icon param-file %} *"Reference gene model"*: `reference genes` (Reference BED file)
-> 2. **MultiQC* {% icon tool %} with the following parameters:
+> 2. **MultiQC** {% icon tool %} with the following parameters:
 >       - In *"1: Results"*:
 >           - {% icon param-select %} *"Which tool was used generate logs?"*: `RSeQC`
 >               - {% icon param-select %} *"Type of RSeQC output?"*: `infer_experiment`

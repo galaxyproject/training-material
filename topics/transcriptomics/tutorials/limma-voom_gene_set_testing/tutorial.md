@@ -43,8 +43,6 @@ The purpose of this tutorial is to demonstrate how to perform gene set testing u
 
 {% include snippets/warning_results_may_vary.md %}
 
-# Preparing the inputs
-
 We will use several files for this analysis:
 
  * **Differentially expressed results files** (genes in rows, logFC and P values in columns)
@@ -60,7 +58,7 @@ We will use several files for this analysis:
 {: .tip}
 
 
-## Import data
+# Import data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -100,6 +98,7 @@ We will use several files for this analysis:
 >
 {: .hands_on}
 
+# Gene Set Testing
 
 ## Gene Ontology testing with **goseq**
 
@@ -205,22 +204,21 @@ There are several ways we could choose to rank our genes, we could rank by log-f
 
 > ### {% icon hands_on %} Hands-on: Perform gene set enrichment with fgsea
 >
-> 1. Set the file **Type** of the `mouse_hallmark_sets` file to `rdata`. See Tip below.
-> 2. **Cut columns from a table** {% icon tool %} with
+> 1. **Cut columns from a table** {% icon tool %} with
 >    - {% icon param-text %} *"Cut columns"*: `c1,c6` (the Entrez gene ids and t-statistic)
 >    - {% icon param-select %} *"Delimited by"*: `Tab`
 >    - {% icon param-collection %} *"From"*: the `DE tables`
-> 3. **Sort data in ascending or descending order** {% icon tool %} with
+> 2. **Sort data in ascending or descending order** {% icon tool %} with
 >    - {% icon param-collection %} *"Sort Query"*: the output of **Cut** {% icon tool %}
 >    - {% icon param-text %} *"Number of header lines"*: `1`
 >    - *"Column selections"*:
 >        - {% icon param-select %} *"on column"*: `Column: 2`
 >        - {% icon param-select %} *"in"*: `Descending order`
 >        - {% icon param-select %} *"Flavor"*: `Fast numeric sort (-n)`
-> 4. **fgsea** {% icon tool %} with
+> 3. **fgsea** {% icon tool %} with
 >    - {% icon param-collection %} *"Ranked Genes"*: the output of **Sort** {% icon tool %}
 >    - {% icon param-check %} *"File has header?"*: `Yes`
->    - {% icon param-file %} *"Gene Sets"*: `mouse_hallmark_sets`
+>    - {% icon param-file %} *"Gene Sets"*: `mouse_hallmark_sets` (this should be rdata format, see Tip below)
 >    - {% icon param-text %} *"Minimum Size of Gene Set"*: `15`
 >    - {% icon param-check %} *"Output plots"*: `Yes`
 >
@@ -238,22 +236,21 @@ An enrichment plot of the each of the top pathways can also be produced, one is 
 
 ## Ensemble gene set enrichment analyses with **EGSEA**
 
-The ensemble of genes set enrichment analyses (EGSEA) [(Alhamdoosh et al, 2017)](https://www.ncbi.nlm.nih.gov/pubmed/27694195) is a method developed for RNA-seq data that combines results from multiple algorithms and calculates collective gene set scores, to try to improve the biological relevance of the highest ranked gene sets. EGSEA has built-in gene sets from MSigDB and KEGG for human and mouse. We'll show here how it can be used with the MSigDB Hallmark collection and KEGG pathways. For input we need a count matrix and EGSEA will perform a limma-voom analysis before gene set testing. We can use the filtered counts output from limma, where the low count genes have been filtered out, we just need to remove the gene symbol and description columns. We also need a symbols mapping file containing just the Entrez ids and symbols, which we can generate from the filtered counts file. The third input we need is a factors information file, containing what groups the samples belong to, we can use the one we used with limma.
+The ensemble of genes set enrichment analyses (EGSEA) [(Alhamdoosh et al, 2017)](https://www.ncbi.nlm.nih.gov/pubmed/27694195) is a method developed for RNA-seq data that combines results from multiple algorithms and calculates collective gene set scores, to try to improve the biological relevance of the highest ranked gene sets. EGSEA has built-in gene sets from MSigDB and KEGG for human and mouse. We'll show here how it can be used with the MSigDB Hallmark collection and KEGG pathways. For input we need a count matrix and EGSEA will perform a limma-voom analysis before gene set testing. We can use the provided filtered counts file output from limma, where the low count genes have been filtered out (output from limma by selecting *"Output Filtered Counts Table?"*: `Yes`). We just need to remove the gene symbol and description columns. We also need a symbols mapping file containing just the Entrez ids and symbols, which we can generate from the filtered counts file. The third input we need is a factors information file, containing what groups the samples belong to, we can use the one we used with limma.
 
 > ### {% icon hands_on %} Hands-on: Perform ensemble gene set testing with EGSEA
 >
-> 1. Rerun **limma** {% icon tool %} selecting {% icon param-check %} *"Output Filtered Counts Table?"*: `Yes`
-> 2. **Cut columns from a table (cut)** {% icon tool %} with the following parameters:
+> 1. **Cut columns from a table (cut)** {% icon tool %} with the following parameters:
 >      - {% icon param-file %} *"File to cut"*: `limma-voom filtered counts`
 >      - {% icon param-select %} *"Operation"*: `Discard`
 >      - {% icon param-select %} *"List of fields"*: Select `Column:2`, `Column:3`
 >      - Rename to `EGSEA counts`
-> 3. **Cut columns from a table (cut)** {% icon tool %} with the following parameters:
+> 2. **Cut columns from a table (cut)** {% icon tool %} with the following parameters:
 >      - {% icon param-file %} *"File to cut"*: `limma-voom filtered counts`
 >      - {% icon param-select %} *"Operation"*: `Keep`
 >      - {% icon param-select %} *"List of fields"*: Select `Column:1`, `Column:2`
 >      - Rename to `EGSEA anno`
-> 4. **EGSEA** {% icon tool %} with the following parameters:
+> 3. **EGSEA** {% icon tool %} with the following parameters:
 >      - {% icon param-select %} *"Count Files or Matrix?*": `Single Count Matrix`
 >          - {% icon param-file %} *"Count Matrix"*: Select `EGSEA counts`
 >      - {% icon param-check %} *"Input factor information from file?"*: `Yes`
