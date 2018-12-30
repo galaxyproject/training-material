@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Visualization of RNA-Seq results with heatmap2
-zenodo_link: "https://zenodo.org/record/2492899"
+zenodo_link: "https://zenodo.org/record/2528905"
 questions:
   - "How to generate a heatmap from RNA-seq data?"
 objectives:
@@ -17,7 +17,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-To generate a heatmap of RNA-seq results, we need a file of normalized counts, which is provided for you here. To generate this file yourself, see the [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom/tutorial.html) tutorial, and run limma-voom selecting *"Output Normalised Counts Table?"*: `Yes`.
+To generate a heatmap of RNA-seq results, we need a file of normalized counts. This file is provided for you here. To generate this file yourself, see the [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom/tutorial.html) tutorial, and run limma-voom selecting *"Output Normalised Counts Table?"*: `Yes`. You could also use a file of normalized counts from other RNA-seq differential expression tools, such as edgeR or DESeq2.
 
 The data for this tutorial comes from a Nature Cell Biology paper, [EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival](https://www.ncbi.nlm.nih.gov/pubmed/25730472)), Fu et al. 2015. This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status.
 
@@ -35,9 +35,10 @@ The data for this tutorial comes from a Nature Cell Biology paper, [EGF-mediated
 
 # Preparing the inputs
 
-We will use one file for this analysis:
+We will use two files for this analysis:
 
- * **Normalised counts file** (genes in rows, samples in columns)
+ * **Normalized counts file** (genes in rows, samples in columns)
+ * **Genes of interest** (list of genes to be plotted in heatmap)
 
 ## Import data
 
@@ -48,7 +49,7 @@ We will use one file for this analysis:
 >
 >     To import the file, there are two options:
 >     - Option 1: From a shared data library if available (ask your instructor)
->     - Option 2: From [Zenodo](add link)
+>     - Option 2: From [Zenodo](https://zenodo.org/record/2528905)
 >
 >         > ### {% icon tip %} Tip: Importing data via links
 >         >
@@ -59,15 +60,16 @@ We will use one file for this analysis:
 >         > * Press **Start**
 >         {: .tip}
 >
->         - You can paste the link below into the **Paste/Fetch** box:
+>         - You can paste the links below into the **Paste/Fetch** box:
 >
 >           ```
->       https://zenodo.org/record/2492899/files/limma-voom_normalised_counts
+>       https://zenodo.org/record/2528905/files/limma-voom_normalised_counts
+>       https://zenodo.org/record/2528905/files/heatmap_genes
 >           ```
 >
 >         - Select *"Genome"*: `mm10`
 >
-> 2. Rename the counts dataset as `normalized counts` using the {% icon galaxy-pencil %} (pencil) icon.
+> 2. Rename the counts dataset as `normalized counts` and the list of genes as `heatmap genes` using the {% icon galaxy-pencil %} (pencil) icon.
 > 3. Check that the datatype is `tabular`.
 >    If the datatype is not `tabular`, please change the file type to `tabular`.
 >
@@ -79,74 +81,46 @@ We will use one file for this analysis:
 >    {: .tip}
 {: .hands_on}
 
-To create a heatmap for a set of genes of interest, such as the 31 genes from the original paper using this dataset, Fig. 6b below. These 31 genes include the authors' main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors, identified as differentially expressed. We will recreate this heatmap here.
+The files should look like below (just the first few rows and columns of the normalized counts file is shown).
+
+![Normalized counts](../../images/heatmap/normalized_counts.png "Normalized counts")
+
+![Heatmap genes](../../images/heatmap/heatmap_genes.png "Heatmap genes"){: height="30%"}
+
+We will create a heatmap for the 31 genes in Fig. 6b from the original paper using this dataset (see Figure below). These 31 genes include the authors' main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors identified as differentially expressed. We will recreate this heatmap here.
 
 ![Fu heatmap](../../images/limma-voom/fu_heatmap.png "Fu et al, Nat Cell Biol 2015"){: width="50%"}
 
-```
-GeneID
-Mcl1
-Hbegf
-Tgfb2
-Cxcl16
-Csf1
-Pdgfb
-Edn1
-Lif
-Kitl
-Bmp1
-Pdgfa
-Cmtm3
-Cx3cl1
-Ctgf
-Wnt5a
-Ptn
-Spp1
-Bmp3
-Cmtm8
-Gmfg
-Cxcl2
-Cxcl3
-Il15
-Egf
-Cmtm7
-Il34
-Pdgfd
-Nov
-Cmtm6
-Ccl28
-Cxcl1
-```
+First we need to extract the normalized counts for just these 31 genes from the file containing the normalized counts for all genes in the experiment. To do that we will join the files on the Gene Symbols and then extract the columns we need.
 
 ## Extract normalized counts
 
 > ### {% icon hands_on %} Hands-on: Extract the normalized counts for the genes of interest
-> 1. Create a file of the gene symbols of interest
->    - Paste the information above (the 31 gene symbols and header) into the Galaxy Data Uploader Paste/Fetch box
->    - Set File Type to `tabular`
->    - Use the {% icon galaxy-pencil %} (pencil) icon to rename the file to `heatmap genes`
-> 2. **Join two Datasets side by side on a specified field** {% icon tool %} with the following parameters:
+>
+> 1. **Join two Datasets side by side on a specified field** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Join"*: the `heatmap genes` file
 >    - {% icon param-select %} *"using column"*: `Column: 1`
->    - {% icon param-file %} *"with"*: `Normalised counts` file
+>    - {% icon param-file %} *"with"*: `normalized counts` file
 >    - {% icon param-select %} *"and column"*: `Column: 2`
 >    - {% icon param-select %} *"Keep the header lines"*: `Yes`
 >
 >    The generated file has more columns than we need for the heatmap. In addition to the columns with normalized counts (in log2), there is the $$log_{2} FC$$ and other information. We need to remove the extra columns.
 >
-> 3. **Cut columns from a table** {% icon tool %} to extract the columns with the gene ids and normalized counts
+> 2. **Cut columns from a table** {% icon tool %} to extract the columns with the gene ids and normalized counts
 >    - {% icon param-text %} *"Cut columns"*: `c1,c5-c16`
 >    - {% icon param-select %} *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: the joined dataset (output of **Join two Datasets** {% icon tool %})
 >
 >    The genes are in rows and the samples in columns, we could leave the genes in rows but we will transpose to have genes in columns and samples in rows as in the Figure in the paper.
 >
-> 4. **Transpose** {% icon tool %} to have samples in rows and genes in columns
+> 3. **Transpose** {% icon tool %} to have samples in rows and genes in columns
 >    - *"Input tabular dataset"*:
 >        - {% icon param-file %} *"From"*: the `Cut` dataset (output of **Cut** {% icon tool %})
 {: .hands_on}
 
-We now have a table with the 31 genes in columns and the 12 samples in rows.
+We now have a table with the 31 genes in columns and the normalized counts for the 12 samples in rows, similar to below (just the first few columns are shown).
+
+![Transposed input](../../images/heatmap/transposed_input.png "Transposed input")
 
 # Create heatmap of custom genes
 
