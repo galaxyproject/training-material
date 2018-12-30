@@ -19,7 +19,7 @@ contributors:
 
 Volcano plots are commonly used to display the results of RNA-seq or other omics experiments. A volcano plot is a type of scatterplot that shows significance versus fold-change. It enables quick visual identification of genes with large fold changes that are also statistically significant. In a volcano plot, the most upregulated genes are towards the right, the most downregulated genes are towards the left, and the most statistically significant genes are towards the top.
 
-To generate a volcano plot of RNA-seq results, we need a file of differentially expressed results which is provided for you here. To generate this file yourself, see the [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom/tutorial.html) tutorial. The file used here was generated from limma-voom but you could use a file from any RNA-seq differential expression tool, such as edgeR or DESeq2, as long as it has the required columns (see below).
+To generate a volcano plot of RNA-seq results, we need a file of differentially expressed results which is provided for you here. To generate this file yourself, see the [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html) tutorial. The file used here was generated from limma-voom but you could use a file from any RNA-seq differential expression tool, such as edgeR or DESeq2, as long as it has the required columns (see below).
 
 The data for this tutorial comes from a Nature Cell Biology paper, [EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival](https://www.ncbi.nlm.nih.gov/pubmed/25730472)), Fu et al. 2015. This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Here we will visualise the results of the luminal pregnant vs lactate comparison.
 
@@ -48,7 +48,7 @@ We will use one file for this analysis:
 >
 >     To import the file, there are two options:
 >     - Option 1: From a shared data library if available (ask your instructor)
->     - Option 2: From [Zenodo](add link)
+>     - Option 2: From [Zenodo](https://zenodo.org/record/2491305)
 >
 >         > ### {% icon tip %} Tip: Importing data via links
 >         >
@@ -157,7 +157,7 @@ Cxcl1
 >        - *"File of labels"*: `volcano genes`
 {: .hands_on}
 
-![Volcano plot highlighting genes of interest](../../images/volcanoplot/volcanoplot_custom_genes.png)
+![Volcano plot highlighting genes of interest](../../images/rna-seq-viz-with-volcanoplot/volcanoplot_custom_genes.png)
 
 As in the previous plot, genes are coloured if they pass the thresholds for FDR and Log Fold Change. The genes of interest in the file we supplied are labelled, and also coloured red or blue if they pass the thresholds. Here all 31 labelled genes are significant (red or blue) except for two genes. One is the authors' gene of interest, Mcl1, and this result is expected, as they showed it's expression did change, but it was not significant at the transcription level. The other gene Gmfg, has an FDR very slightly outside the significance threshold we used of 0.01 (0.0105), if we rounded the FDR values to two decimal places it would then be coloured as significant.
 
