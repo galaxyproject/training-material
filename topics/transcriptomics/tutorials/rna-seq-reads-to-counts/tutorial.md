@@ -37,7 +37,7 @@ contributors:
 
 Measuring gene expression on a genome-wide scale has become common practice over the last two decades or so, with microarrays predominantly used pre-2008. With the advent of next generation sequencing technology in 2008, an increasing number of scientists use this technology to measure and understand changes in gene expression in often complex systems. As sequencing costs have decreased, using RNA-Seq to simultaneously measure the expression of tens of thousands of genes for multiple samples has never been easier. The cost of these experiments has now moved from generating the data to storing and analysing it.
 
-There are many steps involved in analysing an RNA-Seq experiment. he analysis begins with sequencing reads (FASTQ files). These are usually aligned to a reference genome, if available. Then the number of reads mapped to each gene can be counted. This results in a table of counts, which is what we perform statistical analyses on to determine differentially expressed genes and pathways. The purpose of this tutorial is to demonstrate how to do read alignment and counting, prior to performing differential expression. Differential expression analysis with limma-voom is covered in an accompanying tutorial [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom/tutorial.html). The tutorial here shows how to start from FASTQ data and perform the mapping and counting steps, along with associated Quality Control.
+There are many steps involved in analysing an RNA-Seq experiment. he analysis begins with sequencing reads (FASTQ files). These are usually aligned to a reference genome, if available. Then the number of reads mapped to each gene can be counted. This results in a table of counts, which is what we perform statistical analyses on to determine differentially expressed genes and pathways. The purpose of this tutorial is to demonstrate how to do read alignment and counting, prior to performing differential expression. Differential expression analysis with limma-voom is covered in an accompanying tutorial [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html). The tutorial here shows how to start from FASTQ data and perform the mapping and counting steps, along with associated Quality Control.
 
 **Mouse mammary gland dataset**
 
@@ -47,7 +47,7 @@ This study examined the expression profiles of basal and luminal cells in the ma
 
 This is a Galaxy tutorial based on material from the [COMBINE R RNAseq workshop](http://combine-australia.github.io/RNAseq-R/07-rnaseq-day2.html), first taught [here](http://combine-australia.github.io/2016-05-11-RNAseq/).
 
-![Tutorial Dataset](../../images/limma-voom_f2c/mouse_exp.png "Tutorial Dataset")
+![Tutorial Dataset](../../images/rna-seq-reads-to-counts/mouse_exp.png "Tutorial Dataset")
 
 
 > ### Agenda
@@ -109,7 +109,7 @@ In order to get these files into Galaxy, we will want to do a few things:
 >    - Paste the table from the grey box above. *(You should now see below)*
 >    - Click **Build**
 >
->       ![Rule-based Uploader](../../images/limma-voom_f2c/rule_uploader.png "Rule-based Uploader")
+>       ![Rule-based Uploader](../../images/rna-seq-reads-to-counts/rule_uploader.png "Rule-based Uploader")
 >
 >    - In the `rules editor` that pops up:
 >
@@ -130,11 +130,11 @@ In order to get these files into Galaxy, we will want to do a few things:
 >        - **Name the collection**. For *"Name"* enter: `fastqs` *(You should now see below)*
 >        - Click `Upload`
 >
->        ![Rules Editor](../../images/limma-voom_f2c/rule_editor.png "Rules Editor")
+>        ![Rules Editor](../../images/rna-seq-reads-to-counts/rule_editor.png "Rules Editor")
 >
 >        You should see a collection (list) called `fastqs` in your history containing all 12 FASTQ files, like below.
 >
->        ![Collection](../../images/limma-voom_f2c/collection.png "Collection of FASTQs")
+>        ![Collection](../../images/rna-seq-reads-to-counts/collection.png "Collection of FASTQs")
 >
 {: .hands_on}
 
@@ -182,7 +182,7 @@ Take a look at one of the FASTQ files to see what it contains.
 > 1. Click on the collection name (`fastqs`)
 > 2. Click on the name of one of the collection elements (e.g `MCL1-DL`). Check that the data type is `fastqsanger.gz` and the database `mm10`.
 >
->    ![Collection Element](../../images/limma-voom_f2c/collection_element.png "Collection Element"){: width="50px" height="50px"}
+>    ![Collection Element](../../images/rna-seq-reads-to-counts/collection_element.png "Collection Element"){: width="50px" height="50px"}
 >
 > 3. Click on the {% icon galaxy-eye %} (eye) icon of one of the FASTQ files to have a look at what it contains
 {: .hands_on}
@@ -199,7 +199,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > 1. **FastQC** {% icon tool %} with the following parameters:
 >    - {% icon param-collection %} *"Short read data from your current history"*: `fastqs` (Input dataset collection)
 >
->    > ![FastQC Collection](../../images/limma-voom_f2c/run_fastqc.png "Run FastQC on collection"){: width="50px"}
+>    > ![FastQC Collection](../../images/rna-seq-reads-to-counts/run_fastqc.png "Run FastQC on collection"){: width="50px"}
 >
 > 2. Inspect the `Webpage` output of **FastQC** {% icon tool %} for the `MCL1-DL` sample by clicking on the {% icon galaxy-eye %} (eye) icon
 {: .hands_on}
@@ -214,7 +214,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > > 2. Sanger quality score encoding is used.
 > > This information can be seen at the top of the FastQC Webpage as below.
 > >
-> > ![FastQC Webpage](../../images/limma-voom_f2c/fastqc_webpage.png "FastQC Webpage"){: width="50px"}
+> > ![FastQC Webpage](../../images/rna-seq-reads-to-counts/fastqc_webpage.png "FastQC Webpage"){: width="50px"}
 > >
 > {: .solution}
 >
@@ -230,7 +230,7 @@ The FastQC report contains a lot of information and we can look at the report fo
 >        - In *"FastQC output"*
 >           - {% icon param-select %} *"Type of FastQC output?"*: `Raw data`
 >           - {% icon param-collection %} *"FastQC output"*: `RawData` files (output of **FastQC** {% icon tool %} on trimmed reads)
->           ![MultiQC](../../images/limma-voom_f2c/multiqc.png "Run MultiQC on collection"){: width="50px"}
+>           ![MultiQC](../../images/rna-seq-reads-to-counts/multiqc.png "Run MultiQC on collection"){: width="50px"}
 > 2. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
 
@@ -238,14 +238,14 @@ Note that these are the results for just 1000 reads. The FastQC results for the 
 
 Here, most of the plots in the small FASTQs look similar to the full dataset. However, in the small FASTQs, we see less duplication, some Ns in the reads and some overrepresented sequences.
 
-![General Statistics](../../images/limma-voom_f2c/fastqc_table.png "General Statistics")
-![Sequence Counts](../../images/limma-voom_f2c/fastqc_sequence_counts_plot.png "Sequence Counts")
-![Sequence Quality](../../images/limma-voom_f2c/fastqc_per_base_sequence_quality_plot.png "Sequence Quality")
-![Per Sequence Quality Scores](../../images/limma-voom_f2c/fastqc_per_sequence_quality_scores_plot.png "Per Sequence Quality Scores")
-![Per Sequence GC Content](../../images/limma-voom_f2c/fastqc_per_sequence_gc_content_plot.png "Per Sequence GC Content")
-![Per base N content](../../images/limma-voom_f2c/fastqc_per_base_n_content_plot.png "Per base N content")
-![Sequence Duplication Levels](../../images/limma-voom_f2c/fastqc_sequence_duplication_levels_plot.png "Sequence Duplication Levels")
-![Adapter Content](../../images/limma-voom_f2c/fastqc_adapter_content_plot.png "Adapter Content")
+![General Statistics](../../images/rna-seq-reads-to-counts/fastqc_table.png "General Statistics")
+![Sequence Counts](../../images/rna-seq-reads-to-counts/fastqc_sequence_counts_plot.png "Sequence Counts")
+![Sequence Quality](../../images/rna-seq-reads-to-counts/fastqc_per_base_sequence_quality_plot.png "Sequence Quality")
+![Per Sequence Quality Scores](../../images/rna-seq-reads-to-counts/fastqc_per_sequence_quality_scores_plot.png "Per Sequence Quality Scores")
+![Per Sequence GC Content](../../images/rna-seq-reads-to-counts/fastqc_per_sequence_gc_content_plot.png "Per Sequence GC Content")
+![Per base N content](../../images/rna-seq-reads-to-counts/fastqc_per_base_n_content_plot.png "Per base N content")
+![Sequence Duplication Levels](../../images/rna-seq-reads-to-counts/fastqc_sequence_duplication_levels_plot.png "Sequence Duplication Levels")
+![Adapter Content](../../images/rna-seq-reads-to-counts/fastqc_adapter_content_plot.png "Adapter Content")
 
 See the [Quality Control tutorial]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html) for more information on FastQC plots.
 
@@ -309,8 +309,8 @@ We can take a look at the reads again now that they've been trimmed.
 
 The MultiQC plot below shows the result from the full dataset for comparison.
 
-![Adapter Content post-trimming](../../images/limma-voom_f2c/post_cutadapt_adapter_content.png "Adapter Content post-trimming")
-![Sequence Length post-trimming](../../images/limma-voom_f2c/post_cutadapt_fastqc_sequence_length_distribution_plot.png "Sequence Length post-trimming")
+![Adapter Content post-trimming](../../images/rna-seq-reads-to-counts/post_cutadapt_adapter_content.png "Adapter Content post-trimming")
+![Sequence Length post-trimming](../../images/rna-seq-reads-to-counts/post_cutadapt_fastqc_sequence_length_distribution_plot.png "Sequence Length post-trimming")
 
 After trimming we can see that:
 
@@ -379,7 +379,7 @@ An important metric to check is the percentage of reads mapped to the reference 
 
 The MultiQC plot below shows the result from the full dataset for comparison.
 
-![HISAT2 mapping](../../images/limma-voom_f2c/hisat2_se_plot.png "HISAT2 mapping")
+![HISAT2 mapping](../../images/rna-seq-reads-to-counts/hisat2_se_plot.png "HISAT2 mapping")
 
 Over 90% of reads have mapped in all samples, a good mapping rate. And the vast majority of reads have mapped uniquely, they haven't mapped to multiple locations in the reference genome.
 
@@ -389,7 +389,7 @@ It is also good practice to visualise the read alignments in the BAM file, for e
 >
 > To download a collection of datasets (e.g. the collection of BAM files) click on the floppy icon as shown below. This will download a tar file containing all the datasets in the collection. Note that for BAM files the .bai indexes (required for IGV) will be included automatically in the download.
 >
-> ![Downloading collection](../../images/limma-voom_f2c/collection_download.png "Downloading a collection")
+> ![Downloading collection](../../images/rna-seq-reads-to-counts/collection_download.png "Downloading a collection")
 {: .tip}
 
 ## Check strandness
@@ -413,7 +413,7 @@ As far as we know this data is unstranded, but as a sanity check you can check t
 
 The MultiQC plot below shows the result from the full dataset for comparison.
 
-![Infer Experiment](../../images/limma-voom_f2c/rseqc_infer_experiment_plot.png "Infer Experiment")
+![Infer Experiment](../../images/rna-seq-reads-to-counts/rseqc_infer_experiment_plot.png "Infer Experiment")
 
 > ### {% icon question %} Questions
 >
@@ -445,7 +445,7 @@ Duplicate reads are usually kept in RNA-seq differential expression analysis as 
 
 The MultiQC plot below shows the result from the full dataset for comparison.
 
-![MarkDups metrics](../../images/limma-voom_f2c/picard_deduplication.png "MarkDups metrics")
+![MarkDups metrics](../../images/rna-seq-reads-to-counts/picard_deduplication.png "MarkDups metrics")
 
 > ### {% icon question %} Questions
 >
@@ -477,8 +477,8 @@ You can check the numbers of reads mapped to each chromosome with the **Samtools
 
 The MultiQC plot below shows the result from the full dataset for comparison.
 
-![IdxStats chromsome mappings](../../images/limma-voom_f2c/samtools-idxstats-mapped-reads-plot.png "IdxStats Chromosome Mappings")
-![IdxStats XY ](../../images/limma-voom_f2c/samtools-idxstats-xy-plot.png "IdxStats X/Y Mappings")
+![IdxStats chromsome mappings](../../images/rna-seq-reads-to-counts/samtools-idxstats-mapped-reads-plot.png "IdxStats Chromosome Mappings")
+![IdxStats XY ](../../images/rna-seq-reads-to-counts/samtools-idxstats-xy-plot.png "IdxStats X/Y Mappings")
 
 > ### {% icon question %} Questions
 >
@@ -516,10 +516,10 @@ BAM)** {% icon tool %})
 
 The MultiQC plot below shows the result from the full dataset for comparison.
 
-![Gene Body Coverage](../../images/limma-voom_f2c/rseqc_gene_body_coverage_plot.png "Gene Body Coverage")
+![Gene Body Coverage](../../images/rna-seq-reads-to-counts/rseqc_gene_body_coverage_plot.png "Gene Body Coverage")
 
 The plot below from the RSeQC website shows what samples with 3'biased coverage would look like.
-![Gene Body Coverage comparison](../../images/limma-voom_f2c/genebodycoverage.png "Gene Body Coverage comparison")
+![Gene Body Coverage comparison](../../images/rna-seq-reads-to-counts/genebodycoverage.png "Gene Body Coverage comparison")
 
 > ### {% icon question %} Questions
 >
@@ -554,7 +554,7 @@ We can also check the distribution of reads across known gene features, such as 
 
 The MultiQC plot below shows the result from the full dataset for comparison.
 
-![Read Distribution](../../images/limma-voom_f2c/rseqc_read_distribution_plot.png "Read Distribution")
+![Read Distribution](../../images/rna-seq-reads-to-counts/rseqc_read_distribution_plot.png "Read Distribution")
 
 > ### {% icon question %} Questions
 >
@@ -612,7 +612,7 @@ featureCounts reports the numbers of unassigned reads and the reasons why they a
 
 The MultiQC plot below shows the result from the full dataset for comparison.
 
-![featureCounts assignments](../../images/limma-voom_f2c/featureCounts_assignment_plot.png "featureCounts assignments")
+![featureCounts assignments](../../images/rna-seq-reads-to-counts/featureCounts_assignment_plot.png "featureCounts assignments")
 
 > ### {% icon question %} Questions
 >
@@ -644,7 +644,7 @@ The counts files are currently in the format of one file per sample. However, it
 
 Take a look at the output (the output for the full dataset is shown below).
 
-![Count matrix](../../images/limma-voom_f2c/count_matrix.png "Count matrix")
+![Count matrix](../../images/rna-seq-reads-to-counts/count_matrix.png "Count matrix")
 
 Now it is easier to see the counts for a gene across all samples. The accompanying limma-voom tutorial shows how gene information (symbols etc) can be added to a count matrix.
 
@@ -663,7 +663,7 @@ So far we have run MultiQC on one step at a time which generates multiple report
 > >
 > > MultiQC summary of all programs used (screenshot from the full dataset).
 > >
-> > ![MultiQC Summary](../../images/limma-voom_f2c/multiqc_summary.png "MultiQC Summary")
+> > ![MultiQC Summary](../../images/rna-seq-reads-to-counts/multiqc_summary.png "MultiQC Summary")
 > >
 > > **MultiQC** {% icon tool %} with the following parameters:
 > >    - In *"Results"*:
@@ -716,7 +716,7 @@ BAM)** {% icon tool %})
 
 The MultiQC report can be downloaded by clicking on the floppy disk icon on the dataset in the history as shown below.
 
-![MultiQC download](../../images/limma-voom_f2c/multiqc_download.png "Download MultiQC report")
+![MultiQC download](../../images/rna-seq-reads-to-counts/multiqc_download.png "Download MultiQC report")
 
 > ### {% icon question %} Questions
 >
@@ -738,9 +738,9 @@ The MultiQC report can be downloaded by clicking on the floppy disk icon on the 
 
 You can now extract a workflow from the steps that have been performed, as shown in the [Peaks to Genes tutorial]({{ site.baseurl }}/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html#extracting-workflow). This is a way to help keep a record of the steps performed. It also enables efficient rerunning of a multi-step analysis, such as RNA-seq.
 
-![fastq to counts Workflow](../../images/limma-voom_f2c/workflow.png "FASTQ to counts Workflow")
+![fastq to counts Workflow](../../images/rna-seq-reads-to-counts/workflow.png "FASTQ to counts Workflow")
 
 # Conclusion
 {:.no_toc}
 
-In this tutorial we have seen how reads (FASTQ files) can be converted into counts. We have also seen QC steps that can be performed to help assess the quality of the data. A follow-on tutorial, [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/limma-voom/tutorial.html), shows how to perform differential expression and QC on the counts for this dataset.
+In this tutorial we have seen how reads (FASTQ files) can be converted into counts. We have also seen QC steps that can be performed to help assess the quality of the data. A follow-on tutorial, [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html), shows how to perform differential expression and QC on the counts for this dataset.
