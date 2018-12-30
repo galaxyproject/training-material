@@ -96,9 +96,9 @@ We will create a volcano plot highlighting genes with FDR < 0.01 and a log fold 
 >    - *"LogFC threshold to colour"*: `0.58`
 {: .hands_on}
 
-TODO: Add plot of genes coloured
+![Volcano plot highlighting significant genes](../../images/rna-seq-viz-with-volcanoplot/volcanoplot.png)
 
-In this plot the genes are coloured if they pass the thresholds for FDR and Log Fold Change., red if they are upregulated and blue if they are downregulated.
+In the plot above the genes are coloured if they pass the thresholds for FDR and Log Fold Change., red if they are upregulated and blue if they are downregulated.
 
 ## Create volcano plot highlighting genes of interest
 
@@ -159,7 +159,7 @@ Cxcl1
 
 ![Volcano plot highlighting genes of interest](../../images/rna-seq-viz-with-volcanoplot/volcanoplot_custom_genes.png)
 
-As in the previous plot, genes are coloured if they pass the thresholds for FDR and Log Fold Change. The genes of interest in the file we supplied are labelled, and also coloured red or blue if they pass the thresholds. Here all 31 labelled genes are significant (red or blue) except for two genes. One is the authors' gene of interest, Mcl1, and this result is expected, as they showed it's expression did change, but it was not significant at the transcription level. The other gene Gmfg, has an FDR very slightly outside the significance threshold we used of 0.01 (0.0105), if we rounded the FDR values to two decimal places it would then be coloured as significant.
+As in the previous plot, genes are coloured if they pass the thresholds for FDR and Log Fold Change. The genes of interest in the file we supplied are labelled, and also coloured red or blue if they pass the thresholds. Here all 31 labelled genes are significant (red or blue) except for two genes. One is the authors' gene of interest, Mcl1, and this result is expected, as they showed it's expression did change, but it was not significant at the transcription level. The other gene Gmfg, has an FDR very slightly outside the significance threshold we used of 0.01 (0.0105).
 
 # Conclusion
 {:.no_toc}
