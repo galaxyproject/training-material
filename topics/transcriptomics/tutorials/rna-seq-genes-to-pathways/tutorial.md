@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 title: RNA-seq genes to pathways
 zenodo_link: "https://zenodo.org/record/2491305"
+enable: "false"
 tags:
   - mouse
 questions:
