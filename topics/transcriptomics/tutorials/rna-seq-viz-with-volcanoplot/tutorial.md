@@ -21,7 +21,7 @@ Volcano plots are commonly used to display the results of RNA-seq or other omics
 
 To generate a volcano plot of RNA-seq results, we need a file of differentially expressed results which is provided for you here. To generate this file yourself, see the [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html) tutorial. The file used here was generated from limma-voom but you could use a file from any RNA-seq differential expression tool, such as edgeR or DESeq2, as long as it has the required columns (see below).
 
-The data for this tutorial comes from a Nature Cell Biology paper, [EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival](https://www.ncbi.nlm.nih.gov/pubmed/25730472)), Fu et al. 2015. This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Here we will visualise the results of the luminal pregnant vs lactate comparison.
+The data for this tutorial comes from a Nature Cell Biology paper, [EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival](https://www.ncbi.nlm.nih.gov/pubmed/25730472)), Fu et al. 2015. This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Here we will visualize the results of the luminal pregnant vs lactating comparison.
 
 
 > ### Agenda
@@ -106,9 +106,20 @@ First we will create a volcano plot highlighting all significant genes. We will 
 
 In the plot above the genes are coloured if they pass the thresholds for FDR and Log Fold Change, red if they are upregulated and blue if they are downregulated. You can see in this plot that there are many (hundreds) of significant genes in this dataset.
 
+> ### {% icon question %} Question
+>
+> Why does the y axis use a negative P value scale?
+>
+>    > ### {% icon solution %} Solution
+>    >
+>    > The negative log of the P values are used for the y axis so that the smallest P values (most significant) are at the top of the plot.
+>    >
+>    {: .solution}
+{: .question}
+
 ## Create volcano plot labelling top significant genes
 
-You can also choose to label the significant genes, either all of them or just the top genes. The top genes are those that pass the FDR and logFC thresholds that have the smallest P values. As there are hundreds of significant genes here, too many to sensibly label, let's label the top 20 genes.
+You can also choose to show the labels (e.g. Gene Symbols) for the significant genes with this volcano plot tool. You can select to label all significant or just the top genes. The top genes are those that pass the FDR and logFC thresholds that have the smallest P values. As there are hundreds of significant genes here, too many to sensibly label, let's label the top 20 genes.
 
 > ### {% icon hands_on %} Hands-on: Create a Volcano plot labelling top genes
 > 1. **Volcano Plot** {% icon tool %} rerun with the same parameters as before except:
@@ -119,7 +130,18 @@ You can also choose to label the significant genes, either all of them or just t
 
 ![Volcano plot labelling top significant genes](../../images/rna-seq-viz-with-volcanoplot/volcanoplot_top20.png "Volcano plot labelling top significant genes")
 
-As in the previous plot, genes are coloured if they pass the thresholds for FDR and Log Fold Change, (red for upregulated and blue for downregulated)and the top genes by P value are labelled. Note that in the plot above we can now easily see what the top genes are by P value and also which of them have bigger fold changes.
+As in the previous plot, genes are coloured if they pass the thresholds for FDR and Log Fold Change, (red for upregulated and blue for downregulated) and the top genes by P value are labelled. Note that in the plot above we can now easily see what the top genes are by P value and also which of them have bigger fold changes.
+
+> ### {% icon question %} Question
+>
+> Which gene is the most statistically significant with large fold change?
+>
+>    > ### {% icon solution %} Solution
+>    >
+>    > Csn1s2b, as it is the gene nearest the top of the plot and it is also far to the left. This gene is a calcium-sensitive casein that is important in milk production. As this dataset compares lactating and pregnant mice, it makes sense that it is a gene that is very differentially expressed.
+>    >
+>    {: .solution}
+{: .question}
 
 ## Create volcano plot labelling genes of interest
 
@@ -135,7 +157,20 @@ We can also label one or more genes of interest in a volcano plot. This enables 
 
 ![Volcano plot labelling genes of interest](../../images/rna-seq-viz-with-volcanoplot/volcanoplot_custom_genes.png "Volcano plot labelling genes of interest")
 
-As in the previous plots, genes are coloured if they pass the thresholds for FDR and Log Fold Change. The genes of interest in the file we supplied are labelled and also coloured red or blue if they pass the thresholds. Here all 31 labelled genes are significant (red or blue) except for two genes. One is the authors' gene of interest, Mcl1, and this result is expected, as they showed it's expression did change, but it was not significant at the transcription level. The other gene Gmfg, has an FDR very slightly outside the significance threshold we used of 0.01 (0.0105).
+> ### {% icon question %} Question
+>
+> 1. How many of the genes of interest are significant?
+> 2. Which gene of interest is the most statistically significant?
+>
+>    > ### {% icon solution %} Solution
+>    >
+>    > 1. 29/31 are significant, the genes with the red and blue labels.
+>    > 2. The Egf gene is the most statistically significant as it is nearest the top of the plot.
+>    >
+>    {: .solution}
+{: .question}
+
+As in the previous plots, genes are coloured if they pass the thresholds for FDR and Log Fold Change. The genes of interest in the file we supplied are labelled and also coloured red or blue if they pass the thresholds. Here all the genes of interest are significant (red or blue) except for two genes. One is the authors' gene of interest, Mcl1, and this result is expected, as they showed it's expression did change, but it was not significant at the transcription level. The other gene Gmfg, has an FDR just very slightly outside the significance threshold we used of 0.01 (0.0105).
 
 # Conclusion
 {:.no_toc}
