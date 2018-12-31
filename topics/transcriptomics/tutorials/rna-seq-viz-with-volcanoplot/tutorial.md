@@ -80,7 +80,7 @@ We will use one file for this analysis:
 {: .hands_on}
 
 
-## Create volcano plot
+## Create volcano plot highlighting significant genes
 
 We will create a volcano plot highlighting genes with FDR < 0.01 and a log fold change of 0.58 (equivalent to a fold-change of 1.5), as these were the values used in the original paper for this dataset.
 
@@ -88,19 +88,20 @@ We will create a volcano plot highlighting genes with FDR < 0.01 and a log fold 
 >
 > 1. **Volcano Plot** {% icon tool %} to create a volcano plot
 >    - {% icon param-file %} *"Specify an input file"*: `DE results`
->    - *"FDR (adjusted P value)"*: `Column 8`
->    - *"P value (raw)"*: `Column 7`
->    - *"Log Fold Change"*: `Column 4`
->    - *"Labels"*: `Column 2`
->    - *"Significance threshold"*: `0.01`
->    - *"LogFC threshold to colour"*: `0.58`
+>    - {% icon param-select %} *"FDR (adjusted P value)"*: `Column 8`
+>    - {% icon param-select %} *"P value (raw)"*: `Column 7`
+>    - {% icon param-select %} *"Log Fold Change"*: `Column 4`
+>    - {% icon param-select %} *"Labels"*: `Column 2`
+>    - {% icon param-text %} *"Significance threshold"*: `0.01`
+>    - {% icon param-text %} *"LogFC threshold to colour"*: `0.58`
+>    - {% icon param-select %} *"Points to label"*: `None`
 {: .hands_on}
 
 ![Volcano plot highlighting significant genes](../../images/rna-seq-viz-with-volcanoplot/volcanoplot.png)
 
-In the plot above the genes are coloured if they pass the thresholds for FDR and Log Fold Change., red if they are upregulated and blue if they are downregulated.
+In the plot above the genes are coloured if they pass the thresholds for FDR and Log Fold Change, red if they are upregulated and blue if they are downregulated.
 
-## Create volcano plot highlighting genes of interest
+## Create volcano plot labelling genes of interest
 
 We can also label one or more genes of interest in a volcano plot. This enables us to visualize where these genes are in terms of significance and in comparison to the other genes. In the original paper using this dataset, there is a heatmap of 31 genes (Fig. 6b). These genes are a set of 30 cytokines/growth factor identified as differentially expressed, and the authors' main gene of interest, Mcl1. We will label these genes in the volcano plot.
 
@@ -145,19 +146,12 @@ Cxcl1
 >    - Paste the information above (the 31 gene symbols and header) into the Galaxy Data Uploader Paste/Fetch box
 >    - Set File Type to `tabular`
 >    - Use the {% icon galaxy-pencil %} (pencil) icon to rename the file to `volcano genes`
-> 2. **Volcano Plot** {% icon tool %} to create a volcano plot
->    - {% icon param-file %} *"Specify an input file"*: `DE results`
->    - *"FDR (adjusted P value)"*: `Column 8`
->    - *"P value (raw)"*: `Column 7`
->    - *"Log Fold Change"*: `Column 4`
->    - *"Labels"*: `Column 2`
->    - *"Significance threshold"*: `0.01`
->    - *"LogFC threshold to colour"*: `0.58`
->    - *"Points to label"*: `Input from file`
->        - *"File of labels"*: `volcano genes`
+> 2. **Volcano Plot** {% icon tool %} rerun with the same parameters as before except:
+>    - {% icon param-select %} *"Points to label"*: `Input from file`
+>        - {% icon param-file %} *"File of labels"*: `volcano genes`
 {: .hands_on}
 
-![Volcano plot highlighting genes of interest](../../images/rna-seq-viz-with-volcanoplot/volcanoplot_custom_genes.png)
+![Volcano plot labelling genes of interest](../../images/rna-seq-viz-with-volcanoplot/volcanoplot_custom_genes.png)
 
 As in the previous plot, genes are coloured if they pass the thresholds for FDR and Log Fold Change. The genes of interest in the file we supplied are labelled, and also coloured red or blue if they pass the thresholds. Here all 31 labelled genes are significant (red or blue) except for two genes. One is the authors' gene of interest, Mcl1, and this result is expected, as they showed it's expression did change, but it was not significant at the transcription level. The other gene Gmfg, has an FDR very slightly outside the significance threshold we used of 0.01 (0.0105).
 
