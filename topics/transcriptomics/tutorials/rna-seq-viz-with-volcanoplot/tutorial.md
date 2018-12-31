@@ -104,11 +104,11 @@ First we will create a volcano plot highlighting all significant genes. We will 
 
 ![Volcano plot highlighting significant genes](../../images/rna-seq-viz-with-volcanoplot/volcanoplot.png "Volcano plot highlighting significant genes")
 
-In the plot above the genes are coloured if they pass the thresholds for FDR and Log Fold Change, red if they are upregulated and blue if they are downregulated.
+In the plot above the genes are coloured if they pass the thresholds for FDR and Log Fold Change, red if they are upregulated and blue if they are downregulated. You can see in this plot that there are many (hundreds) of significant genes in this dataset.
 
 ## Create volcano plot labelling top significant genes
 
-You can also choose to label the significant genes, either all of them or just the top genes. The top genes are those that pass the FDR and logFC thresholds that have the smallest P values. Let's label the top 20 genes.
+You can also choose to label the significant genes, either all of them or just the top genes. The top genes are those that pass the FDR and logFC thresholds that have the smallest P values. As there are hundreds of significant genes here, too many to sensibly label, let's label the top 20 genes.
 
 > ### {% icon hands_on %} Hands-on: Create a Volcano plot labelling top genes
 > 1. **Volcano Plot** {% icon tool %} rerun with the same parameters as before except:
@@ -123,7 +123,7 @@ As in the previous plot, genes are coloured if they pass the thresholds for FDR 
 
 ## Create volcano plot labelling genes of interest
 
-We can also label one or more genes of interest in a volcano plot. This enables us to visualize where these genes are in terms of significance and in comparison to the other genes. In the original paper using this dataset, there is a heatmap of 31 genes (Fig. 6b). These genes are a set of 30 cytokines/growth factor identified as differentially expressed, and the authors' main gene of interest, Mcl1. These genes are provided in the `volcano genes` file and shown below. We will label these genes in the volcano plot.
+We can also label one or more genes of interest in a volcano plot. This enables us to visualize where these genes are in terms of significance and in comparison to the other genes. In the original paper using this dataset, there is a heatmap of 31 genes in Figure 6b (see the tutorial [here]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html) if you would like to see how to generate the heatmap). These genes are a set of 30 cytokines/growth factor identified as differentially expressed, and the authors' main gene of interest, Mcl1. These genes are provided in the `volcano genes` file and shown below. We will label these genes in the volcano plot.
 
 ![Volcano genes](../../images/rna-seq-viz-with-volcanoplot/volcano_genes.png "Volcano genes"){: height="30%"}
 
@@ -135,7 +135,7 @@ We can also label one or more genes of interest in a volcano plot. This enables 
 
 ![Volcano plot labelling genes of interest](../../images/rna-seq-viz-with-volcanoplot/volcanoplot_custom_genes.png "Volcano plot labelling genes of interest")
 
-As in the previous plots, genes are coloured if they pass the thresholds for FDR and Log Fold Change. The genes of interest in the file we supplied are labelled, and also coloured red or blue if they pass the thresholds. Here all 31 labelled genes are significant (red or blue) except for two genes. One is the authors' gene of interest, Mcl1, and this result is expected, as they showed it's expression did change, but it was not significant at the transcription level. The other gene Gmfg, has an FDR very slightly outside the significance threshold we used of 0.01 (0.0105).
+As in the previous plots, genes are coloured if they pass the thresholds for FDR and Log Fold Change. The genes of interest in the file we supplied are labelled and also coloured red or blue if they pass the thresholds. Here all 31 labelled genes are significant (red or blue) except for two genes. One is the authors' gene of interest, Mcl1, and this result is expected, as they showed it's expression did change, but it was not significant at the transcription level. The other gene Gmfg, has an FDR very slightly outside the significance threshold we used of 0.01 (0.0105).
 
 # Conclusion
 {:.no_toc}
