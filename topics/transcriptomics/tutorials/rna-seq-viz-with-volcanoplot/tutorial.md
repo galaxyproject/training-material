@@ -69,7 +69,7 @@ We will use two files for this analysis:
 >
 >         - Select *"Genome"*: `mm10`
 >
-> 2. Rename the counts dataset as `DE results` and `volcano genes` using the {% icon galaxy-pencil %} (pencil) icon.
+> 2. Name the limma-voom_luminalpregnant-luminallactate file `DE results` and the volcano genes file `volcano genes` using the {% icon galaxy-pencil %} (pencil) icon.
 > 3. Check that the datatype is `tabular`.
 >    If the datatype is not `tabular`, please change the file type to `tabular`.
 >
@@ -81,10 +81,13 @@ We will use two files for this analysis:
 >    {: .tip}
 {: .hands_on}
 
+Click on the {% icon galaxy-eye %} (eye) icon and take a look at the `DE results` file. It should look like below, with 8 columns.
+
+![DE results file](../../images/rna-seq-viz-with-volcanoplot/DE_results.png "DE results")
 
 ## Create volcano plot highlighting significant genes
 
-First we will create a volcano plot highlighting all significant genes. We will call genes significant in this dataset if they have FDR < 0.01 and a log fold change of 0.58 (equivalent to a fold-change of 1.5). These were the values used in the original paper for this dataset.
+First we will create a volcano plot highlighting all significant genes. We will call genes significant here if they have FDR < 0.01 and a log fold change of 0.58 (equivalent to a fold-change of 1.5). These were the values used in the original paper for this dataset.
 
 > ### {% icon hands_on %} Hands-on: Create a Volcano plot
 >
