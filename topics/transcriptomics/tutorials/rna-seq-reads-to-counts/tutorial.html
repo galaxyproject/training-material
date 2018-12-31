@@ -1,0 +1,1595 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>RNA-Seq reads to counts</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:title" content="Galaxy Training: RNA-Seq reads to counts" />
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body>
+        
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/transcriptomics" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Transcriptomics
+                        </a>
+                    </li>
+
+                    
+                    
+                    
+
+                    
+                        
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    
+                                        
+                                            
+                                                <a class="dropdown-item" href="/training-material/topics/transcriptomics/slides/introduction.html">
+                                                    Introduction to Transcriptomics
+                                                </a>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                </div>
+                            </li>
+                        
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://figshare.com/s/f5d63d8c265a05618137" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/transcriptomics#references" title="References">
+                            <i class="fa fa-bookmark" aria-hidden="true"></i><span class="visually-hidden">references</span> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-reads-to-counts%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-reads-to-counts%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-reads-to-counts%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-reads-to-counts%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-reads-to-counts%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+   
+{
+  "@context": "http://schema.org",
+  "@type": "CreativeWork",
+  "name": "RNA-Seq reads to counts",
+  "accessModeSufficient": "visual",
+  "accessibilityControl": "fullMouseControl",
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "learningResourceType": "",
+  "url": "/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://figshare.com/s/f5d63d8c265a05618137",
+      "name": "Training data for RNA-Seq reads to counts tutorial"
+    }
+  ],
+  "timeRequired": "PT3H",
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "mblue9"
+    },
+    {
+      "@type": "Person",
+      "name": "bphipson"
+    },
+    {
+      "@type": "Person",
+      "name": "hdashnow"
+    }
+  ],
+  "keywords": "collections, mouse, QC",
+  "description": "The questions this  addresses are:\n - How to convert RNA-seq reads into counts?\n - How to perform quality control of RNA-seq reads?\n - How to do this analysis efficiently in Galaxy?\n\n\\nThe objectives are:\n - Learn how RNA-seq reads are converted into counts\n - Understand QC steps that can be performed on RNA-seq reads\n - Generate interactive reports to summarise QC information with MultiQC\n - Use the Galaxy Rule-based Uploader to import FASTQs from URLs\n - Make use of Galaxy Collections for a tidy analysis\n - Create a Galaxy Workflow that converts RNA-seq reads into counts\n\n"
+}
+
+    </script>
+    <section class="tutorial">
+        <h1>RNA-Seq reads to counts</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>How to convert RNA-seq reads into counts?</li>
+            
+            <li>How to perform quality control of RNA-seq reads?</li>
+            
+            <li>How to do this analysis efficiently in Galaxy?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>Learn how RNA-seq reads are converted into counts</li>
+            
+            <li>Understand QC steps that can be performed on RNA-seq reads</li>
+            
+            <li>Generate interactive reports to summarise QC information with MultiQC</li>
+            
+            <li>Use the Galaxy Rule-based Uploader to import FASTQs from URLs</li>
+            
+            <li>Make use of Galaxy Collections for a tidy analysis</li>
+            
+            <li>Create a Galaxy Workflow that converts RNA-seq reads into counts</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Quality Control:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                            
+                            <li> Mapping:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                - <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 3 hours</p>
+            
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Measuring gene expression on a genome-wide scale has become common practice over the last two decades or so, with microarrays predominantly used pre-2008. With the advent of next generation sequencing technology in 2008, an increasing number of scientists use this technology to measure and understand changes in gene expression in often complex systems. As sequencing costs have decreased, using RNA-Seq to simultaneously measure the expression of tens of thousands of genes for multiple samples has never been easier. The cost of these experiments has now moved from generating the data to storing and analysing it.</p>
+
+<p>There are many steps involved in analysing an RNA-Seq experiment. he analysis begins with sequencing reads (FASTQ files). These are usually aligned to a reference genome, if available. Then the number of reads mapped to each gene can be counted. This results in a table of counts, which is what we perform statistical analyses on to determine differentially expressed genes and pathways. The purpose of this tutorial is to demonstrate how to do read alignment and counting, prior to performing differential expression. Differential expression analysis with limma-voom is covered in an accompanying tutorial <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a>. The tutorial here shows how to start from FASTQ data and perform the mapping and counting steps, along with associated Quality Control.</p>
+
+<p><strong>Mouse mammary gland dataset</strong></p>
+
+<p>The data for this tutorial comes from a Nature Cell Biology paper, <a href="https://www.ncbi.nlm.nih.gov/pubmed/25730472">EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival</a>), Fu et al. 2015. Both the raw data (sequence reads) and processed data (counts) can be downloaded from Gene Expression Omnibus database (GEO) under accession number <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE60450">GSE60450</a>.</p>
+
+<p>This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status. Note that two biological replicates are used here, two independent sorts of cells from the mammary glands of virgin, pregnant or lactating mice, however three replicates is usually recommended as a minimum requirement for RNA-seq.</p>
+
+<p>This is a Galaxy tutorial based on material from the <a href="http://combine-australia.github.io/RNAseq-R/07-rnaseq-day2.html">COMBINE R RNAseq workshop</a>, first taught <a href="http://combine-australia.github.io/2016-05-11-RNAseq/">here</a>.</p>
+
+<figure id="figure-1"><img src="../../images/rna-seq-reads-to-counts/mouse_exp.png" alt="Tutorial Dataset" title="Tutorial Dataset" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Tutorial Dataset</figcaption></figure>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#preparing-the-reads" id="markdown-toc-preparing-the-reads">Preparing the reads</a>    <ol>
+      <li><a href="#import-data-from-urls" id="markdown-toc-import-data-from-urls">Import data from URLs</a></li>
+      <li><a href="#check-raw-reads" id="markdown-toc-check-raw-reads">Check raw reads</a></li>
+      <li><a href="#trim-reads" id="markdown-toc-trim-reads">Trim reads</a></li>
+      <li><a href="#check-trimmed-reads" id="markdown-toc-check-trimmed-reads">Check trimmed reads</a></li>
+    </ol>
+  </li>
+  <li><a href="#mapping" id="markdown-toc-mapping">Mapping</a>    <ol>
+      <li><a href="#map-reads-to-reference-genome" id="markdown-toc-map-reads-to-reference-genome">Map reads to reference genome</a></li>
+      <li><a href="#check-mapped-reads" id="markdown-toc-check-mapped-reads">Check mapped reads</a></li>
+      <li><a href="#check-strandness" id="markdown-toc-check-strandness">Check strandness</a></li>
+      <li><a href="#check-duplicate-reads" id="markdown-toc-check-duplicate-reads">Check duplicate reads</a></li>
+      <li><a href="#check-number-of-reads-for-each-chromosome" id="markdown-toc-check-number-of-reads-for-each-chromosome">Check number of reads for each chromosome</a></li>
+      <li><a href="#check-coverage-across-gene-bodies-5-3" id="markdown-toc-check-coverage-across-gene-bodies-5-3">Check coverage across gene bodies (5’-3’)</a></li>
+      <li><a href="#check-distribution-of-reads-across-features-exons-introns-intergenic" id="markdown-toc-check-distribution-of-reads-across-features-exons-introns-intergenic">Check distribution of reads across features (exons, introns, intergenic..)</a></li>
+    </ol>
+  </li>
+  <li><a href="#counting" id="markdown-toc-counting">Counting</a>    <ol>
+      <li><a href="#count-reads-mapped-to-genes" id="markdown-toc-count-reads-mapped-to-genes">Count reads mapped to genes</a></li>
+      <li><a href="#check-assignments-of-reads-to-genes" id="markdown-toc-check-assignments-of-reads-to-genes">Check assignments of reads to genes</a></li>
+      <li><a href="#create-count-matrix" id="markdown-toc-create-count-matrix">Create count matrix</a></li>
+    </ol>
+  </li>
+  <li><a href="#generating-an-interactive-qc-summary-report" id="markdown-toc-generating-an-interactive-qc-summary-report">Generating an interactive QC summary report</a></li>
+  <li><a href="#creating-a-workflow-of-the-analysis" id="markdown-toc-creating-a-workflow-of-the-analysis">Creating a workflow of the analysis</a></li>
+</ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-note-results-may-vary"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note: results may vary</h3>
+
+  <p>Your results may be slightly different from the ones presented in this tutorial
+due to differing versions of tools, reference data, external databases, or
+because of stochastic processes in the algorithms.</p>
+
+</blockquote>
+
+<h1 id="preparing-the-reads">Preparing the reads</h1>
+
+<h2 id="import-data-from-urls">Import data from URLs</h2>
+
+<p>Read sequences are usually stored in compressed (gzipped) FASTQ files. Before the differential expression analysis can proceed, these reads must be aligned to the reference genome and counted into annotated genes. Mapping reads to the genome is a very important task, and many different aligners are available, such as HISAT2 (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4655817/">Kim, Langmead, and Salzberg, 2015</a>), STAR (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3530905/">Dobin et al. 2013</a>) and Subread (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3664803/">Liao, Smyth, and Shi 2013</a>]). Most mapping tasks require larger computers than an average laptop, so usually read mapping is done on a server in a linux-like environment, requiring some programming knowledge. However, Galaxy enables you to do this mapping without needing to know programming and if you don’t have access to a server you can try to use one of the publically available Galaxies e.g. <a href="https://usegalaxy.org">usegalaxy.org</a>, <a href="https://usegalaxy.eu">usegalaxy.eu</a>, <a href="https://usegalaxy.org.au/">usegalaxy.org.au</a>.</p>
+
+<p>If you are sequencing your own data, the sequencing facility will almost always provide compressed FASTQ files which you can upload into Galaxy. If your FASTQs are provided through Galaxy’s Shared Data, you can easily import them into a history. For publicly available sequence data, such as from GEO/SRA/ENA, Galaxy’s Rule-based Uploader can be used to import the files from URLs, saving on the need to download to your computer and upload into Galaxy.</p>
+
+<p>The raw reads used in this tutorial were obtained from SRA from the link given in GEO for the the mouse mammary gland dataset (Fu et al. 2015) (e.g <code class="highlighter-rouge">ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534</code>). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. If working with your own data you would use the full data and some results for the full mouse dataset will be shown for comparison. The small FASTQ files are available in <a href="https://figshare.com/s/f5d63d8c265a05618137">Figshare</a> and the links to the FASTQ files are provided below. We are going to import the files into a Collection. Using Galaxy Collections helps keep the datasets organised and tidy in the history. Collections also make it easier to maintain the sample names through tools and workflows. If you are not familiar with collections, see the <a href="/training-material/topics/galaxy-data-manipulation/tutorials/collections/tutorial.html">Galaxy Collections tutorial</a>.</p>
+
+<p>The sample information (sample ID, Group) and link to the FASTQ file (URL) are in the grey box below. To generate a file like this to import data from SRA/ENA see the <a href="/training-material/topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial.html">Galaxy Rule-based Uploader tutorial</a>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SampleID	Group	URL
+MCL1-DL	basallactate	https://ndownloader.figshare.com/files/5053573?private_link=f5d63d8c265a05618137
+MCL1-DK	basallactate	https://ndownloader.figshare.com/files/5053570?private_link=f5d63d8c265a05618137
+MCL1-DJ	basalpregnant	https://ndownloader.figshare.com/files/5053567?private_link=f5d63d8c265a05618137
+MCL1-DI	basalpregnant	https://ndownloader.figshare.com/files/5053564?private_link=f5d63d8c265a05618137
+MCL1-DH	basalvirgin	https://ndownloader.figshare.com/files/5053561?private_link=f5d63d8c265a05618137
+MCL1-DG	basalvirgin	https://ndownloader.figshare.com/files/5053558?private_link=f5d63d8c265a05618137
+MCL1-LF	luminalvirgin	https://ndownloader.figshare.com/files/5053555?private_link=f5d63d8c265a05618137
+MCL1-LE	luminalvirgin	https://ndownloader.figshare.com/files/5053588?private_link=f5d63d8c265a05618137
+MCL1-LD	luminalpregnant	https://ndownloader.figshare.com/files/5053579?private_link=f5d63d8c265a05618137
+MCL1-LC	luminalpregnant	https://ndownloader.figshare.com/files/5053582?private_link=f5d63d8c265a05618137
+MCL1-LB	luminalvirgin	https://ndownloader.figshare.com/files/5053585?private_link=f5d63d8c265a05618137
+MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_link=f5d63d8c265a05618137
+</code></pre></div></div>
+
+<p>In order to get these files into Galaxy, we will want to do a few things:</p>
+
+<ul>
+  <li>Strip the <em>header</em> out of the sample information (it doesn’t contain a URL Galaxy can download).</li>
+  <li>Define the file <strong>Identifier</strong> column (<code class="highlighter-rouge">SampleID</code>).</li>
+  <li>Define the <strong>URL</strong> column (<code class="highlighter-rouge">URL</code>) (this is the location Galaxy can download the data from).</li>
+  <li>Tell Galaxy to treat these files as <code class="highlighter-rouge">fastqsanger.gz</code> files</li>
+  <li>Tell Galaxy to treat these files as <code class="highlighter-rouge">mm10</code> files</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial e.g. <code class="highlighter-rouge">RNA-seq reads to counts</code></li>
+    <li>Import the files from Figshare using Galaxy’s Rule-based Uploader.
+      <ul>
+        <li>Open the Galaxy Upload Manager</li>
+        <li>Click the tab <strong>Rule-based</strong>
+          <ul>
+            <li><em>“Upload data as”</em>: <code class="highlighter-rouge">Collection(s)</code></li>
+            <li><em>“Load tabular data from”</em>: <code class="highlighter-rouge">Pasted Table</code></li>
+          </ul>
+        </li>
+        <li>Paste the table from the grey box above. <em>(You should now see below)</em></li>
+        <li>
+          <p>Click <strong>Build</strong></p>
+
+          <figure id="figure-2"><img src="../../images/rna-seq-reads-to-counts/rule_uploader.png" alt="Rule-based Uploader" title="Rule-based Uploader" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Rule-based Uploader</figcaption></figure>
+        </li>
+        <li>
+          <p>In the <code class="highlighter-rouge">rules editor</code> that pops up:</p>
+
+          <ul>
+            <li><strong>Remove the header</strong>. From the <strong>Filter</strong> menu select <code class="highlighter-rouge">First or Last N Rows</code>
+              <ul>
+                <li><em>“Filter which rows?”</em>: <code class="highlighter-rouge">first</code></li>
+                <li><em>“Filter how many rows?”</em>: <code class="highlighter-rouge">1</code></li>
+                <li>Click <code class="highlighter-rouge">Apply</code></li>
+              </ul>
+            </li>
+            <li><strong>Define the Identifier and URL columns</strong>. From the <strong>Rules</strong> menu select <code class="highlighter-rouge">Add / Modify Column Definitions</code>
+              <ul>
+                <li>Click <code class="highlighter-rouge">Add Definition</code> button and select List Identifier(s)
+                  <ul>
+                    <li><em>“List Identifier(s)”</em>: <code class="highlighter-rouge">A</code></li>
+                  </ul>
+                </li>
+                <li>Click <code class="highlighter-rouge">Add Definition</code> button again and select URL instead
+                  <ul>
+                    <li><em>“URL”</em>: <code class="highlighter-rouge">C</code></li>
+                  </ul>
+                </li>
+                <li>Click <code class="highlighter-rouge">Apply</code>, and you should see your new column definitions listed</li>
+              </ul>
+            </li>
+            <li><strong>Specify the file type</strong>. Select <em>“Type”</em>: <code class="highlighter-rouge">fastqsanger.gz</code></li>
+            <li><strong>Specify the genome</strong>. Select <em>“Genome”</em>: <code class="highlighter-rouge">mm10</code></li>
+            <li><strong>Name the collection</strong>. For <em>“Name”</em> enter: <code class="highlighter-rouge">fastqs</code> <em>(You should now see below)</em></li>
+            <li>Click <code class="highlighter-rouge">Upload</code></li>
+          </ul>
+
+          <figure id="figure-3"><img src="../../images/rna-seq-reads-to-counts/rule_editor.png" alt="Rules Editor" title="Rules Editor" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Rules Editor</figcaption></figure>
+
+          <p>You should see a collection (list) called <code class="highlighter-rouge">fastqs</code> in your history containing all 12 FASTQ files, like below.</p>
+
+          <figure id="figure-4"><img src="../../images/rna-seq-reads-to-counts/collection.png" alt="Collection" title="Collection of FASTQs" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Collection of FASTQs</figcaption></figure>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>If your data is not accessible by URL, for example, if your FASTQ files are located on your laptop, you can upload into a collection as below.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-upload-local-files-into-a-collection"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Upload local files into a collection</h3>
+
+  <ul>
+    <li>Open the Galaxy Upload Manager</li>
+    <li>Click the tab <strong>Collection</strong></li>
+    <li>Click <strong>Choose Local Files</strong> and locate the files you want to upload
+      <ul>
+        <li><em>“Collection Type”</em>: <code class="highlighter-rouge">List</code></li>
+        <li><em>“File Type”</em>: <code class="highlighter-rouge">fastqsanger.gz</code></li>
+        <li><em>“Genome”</em>: <code class="highlighter-rouge">mm10</code></li>
+      </ul>
+    </li>
+    <li>In the pop up that appears:
+      <ul>
+        <li><em>“Name”</em>: <code class="highlighter-rouge">fastqs</code></li>
+        <li>Click <code class="highlighter-rouge">Create list</code></li>
+      </ul>
+    </li>
+  </ul>
+</blockquote>
+
+<p>If your FASTQ files are located in Shared Data, you can import them into your history as a collection as below.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-import-files-from-shared-data-into-a-collection"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Import files from Shared Data into a collection</h3>
+
+  <ul>
+    <li>In the Menu at the top go to Shared Data &gt; Data Libraries</li>
+    <li>Locate your FASTQ files</li>
+    <li>Tick the checkboxes to select the files</li>
+    <li>From the <strong>To History</strong> menu select <code class="highlighter-rouge">as a Collection</code></li>
+    <li>In the pop up that appears:
+      <ul>
+        <li><em>“Which datasets?”</em>: <code class="highlighter-rouge">current selection</code></li>
+        <li><em>“Collection type”</em>: <code class="highlighter-rouge">List</code></li>
+        <li><em>“Select history”</em>: <code class="highlighter-rouge">select your History</code></li>
+        <li>Click <code class="highlighter-rouge">Continue</code></li>
+      </ul>
+    </li>
+    <li>In the pop up that appears:
+      <ul>
+        <li><em>“Name”</em>: <code class="highlighter-rouge">fastqs</code></li>
+        <li>Click <code class="highlighter-rouge">Create list</code></li>
+      </ul>
+    </li>
+  </ul>
+</blockquote>
+
+<p>Take a look at one of the FASTQ files to see what it contains.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-fastq-format"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: FASTQ format</h3>
+  <p>If you are not familiar with FASTQ format, see the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control tutorial</a></p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-take-a-look-at-fastq-format"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Take a look at FASTQ format</h3>
+
+  <ol>
+    <li>Click on the collection name (<code class="highlighter-rouge">fastqs</code>)</li>
+    <li>
+      <p>Click on the name of one of the collection elements (e.g <code class="highlighter-rouge">MCL1-DL</code>). Check that the data type is <code class="highlighter-rouge">fastqsanger.gz</code> and the database <code class="highlighter-rouge">mm10</code>.</p>
+
+      <figure id="figure-5" width="50px" height="50px"><img src="../../images/rna-seq-reads-to-counts/collection_element.png" alt="Collection Element" title="Collection Element" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Collection Element</figcaption></figure>
+    </li>
+    <li>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of one of the FASTQ files to have a look at what it contains</li>
+  </ol>
+</blockquote>
+
+<h2 id="check-raw-reads">Check raw reads</h2>
+
+<p>During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. Every base sequence gets a quality score from the sequencer and this information is present in the FASTQ file. A quality score of 30 corresponds to a 1 in 1000 chance of an incorrect base call (a quality score of 10 is a 1 in 10 chance of an incorrect base call). To look at the overall distribution of quality scores across the reads, we can use FastQC.</p>
+
+<p>Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the <a href="/training-material/topics/sequence-analysis">“Quality control” tutorial</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> and <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-check-raw-reads-with-fastqc"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check raw reads with <strong>FastQC</strong></h3>
+
+  <ol>
+    <li><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Short read data from your current history”</em>: <code class="highlighter-rouge">fastqs</code> (Input dataset collection)</li>
+      </ul>
+
+      <blockquote>
+        <figure id="figure-6" width="50px"><img src="../../images/rna-seq-reads-to-counts/run_fastqc.png" alt="FastQC Collection" title="Run FastQC on collection" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Run FastQC on collection</figcaption></figure>
+      </blockquote>
+    </li>
+    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <code class="highlighter-rouge">MCL1-DL</code> sample by clicking on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon</li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <ol>
+    <li>What is the read length?</li>
+    <li>What base quality score encoding is used?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>The read length is 100 bp.</li>
+      <li>Sanger quality score encoding is used.
+This information can be seen at the top of the FastQC Webpage as below.</li>
+    </ol>
+
+    <figure id="figure-7" width="50px"><img src="../../images/rna-seq-reads-to-counts/fastqc_webpage.png" alt="FastQC Webpage" title="FastQC Webpage" /><figcaption><span class="figcaption-prefix">Figure 7:</span> FastQC Webpage</figcaption></figure>
+
+  </blockquote>
+
+</blockquote>
+
+<p>The FastQC report contains a lot of information and we can look at the report for each sample. However, that is quite a few reports, 12 for this dataset. If you had more samples it could be a lot more. Luckily, there is a very useful tool called MultiQC that can summarise QC information for multiple samples into a single report.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-aggregate-fastqc-reports-with-multiqc"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Aggregate FastQC reports with <strong>MultiQC</strong></h3>
+
+  <ol>
+    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to aggregate the FastQC reports
+      <ul>
+        <li>In <em>“Results”</em>
+          <ul>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span><em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">FastQC</code></li>
+            <li>In <em>“FastQC output”</em>
+              <ul>
+                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of FastQC output?”</em>: <code class="highlighter-rouge">Raw data</code></li>
+                <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FastQC output”</em>: <code class="highlighter-rouge">RawData</code> files (output of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on trimmed reads)</li>
+              </ul>
+              <figure id="figure-8" width="50px"><img src="../../images/rna-seq-reads-to-counts/multiqc.png" alt="MultiQC" title="Run MultiQC on collection" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Run MultiQC on collection</figcaption></figure>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
+  </ol>
+</blockquote>
+
+<p>Note that these are the results for just 1000 reads. The FastQC results for the full dataset are shown below. These 1000 reads are the first reads from the FASTQ files, and the first reads usually originate from the flowcell edges, so we can expect that they may have lower quality and the patterns may be a bit different from the distribution in the full dataset.</p>
+
+<p>Here, most of the plots in the small FASTQs look similar to the full dataset. However, in the small FASTQs, we see less duplication, some Ns in the reads and some overrepresented sequences.</p>
+
+<figure id="figure-9"><img src="../../images/rna-seq-reads-to-counts/fastqc_table.png" alt="General Statistics" title="General Statistics" /><figcaption><span class="figcaption-prefix">Figure 9:</span> General Statistics</figcaption></figure>
+<figure id="figure-10"><img src="../../images/rna-seq-reads-to-counts/fastqc_sequence_counts_plot.png" alt="Sequence Counts" title="Sequence Counts" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Sequence Counts</figcaption></figure>
+<figure id="figure-11"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality" title="Sequence Quality" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Sequence Quality</figcaption></figure>
+<figure id="figure-12"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_sequence_quality_scores_plot.png" alt="Per Sequence Quality Scores" title="Per Sequence Quality Scores" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Per Sequence Quality Scores</figcaption></figure>
+<figure id="figure-13"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_sequence_gc_content_plot.png" alt="Per Sequence GC Content" title="Per Sequence GC Content" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Per Sequence GC Content</figcaption></figure>
+<figure id="figure-14"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_base_n_content_plot.png" alt="Per base N content" title="Per base N content" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Per base N content</figcaption></figure>
+<figure id="figure-15"><img src="../../images/rna-seq-reads-to-counts/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels" title="Sequence Duplication Levels" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Sequence Duplication Levels</figcaption></figure>
+<figure id="figure-16"><img src="../../images/rna-seq-reads-to-counts/fastqc_adapter_content_plot.png" alt="Adapter Content" title="Adapter Content" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Adapter Content</figcaption></figure>
+
+<p>See the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control tutorial</a> for more information on FastQC plots.</p>
+
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>What do you think of the overall quality of the sequences?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>Overall, the samples look pretty good. The main things to note here are:</p>
+    <ul>
+      <li>The <strong>base quality</strong> is high in all samples.</li>
+      <li>Some Illumina <strong>adapter</strong> has been detected.</li>
+      <li>Some duplication in RNA-seq can be normal due to the presence of highly expressed genes. However, for some reason <code class="highlighter-rouge">MCL1-LE</code> and <code class="highlighter-rouge">MCL1-LF</code> have higher numbers of duplicates detected than the other samples.</li>
+    </ul>
+
+  </blockquote>
+</blockquote>
+
+<p>We will use Cutadapt to trim the reads to remove the Illumina adapter and any low quality bases at the ends (quality score &lt; 20). We will also output the Cutadapt report for summarising with MultiQC.</p>
+
+<p>The Cutadapt tool Help section provides the sequence we can use to trim this standard Illumina adapter <code class="highlighter-rouge">AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC</code>, as given on the <a href="https://cutadapt.readthedocs.io/en/stable/guide.html#illumina-truseq">Cutadapt website</a>. Other Illumina adapter sequences (e.g. Nextera) can be found at the <a href="http://sapac.support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html">Illumina website</a>. We will discard any sequences that are too short (&lt; 20bp) after trimming.</p>
+
+<h2 id="trim-reads">Trim reads</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-trim-reads-with-cutadapt"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Trim reads with <strong>Cutadapt</strong></h3>
+
+  <ol>
+    <li><strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Single-end or Paired-end reads?”</em>: <code class="highlighter-rouge">Single-end</code>
+          <ul>
+            <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/A file”</em>: <code class="highlighter-rouge">fastqs</code> (Input dataset collection)</li>
+            <li>In <em>“Read 1 Options”</em>:
+              <ul>
+                <li>In <em>“3’ (End) Adapters”</em>:
+                  <ul>
+                    <li>Click on <em>“Insert 3’ (End) Adapters”</em>:</li>
+                    <li>In <em>“1: 3’ (End) Adapters”</em>:
+                      <ul>
+                        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Source”</em>: <code class="highlighter-rouge">Enter custom sequence</code>
+                          <ul>
+                            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Enter custom 3’ adapter name (Optional)”</em>: <code class="highlighter-rouge">Illumina</code></li>
+                            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Enter custom 3’ adapter sequence”</em>: <code class="highlighter-rouge">AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“Filter Options”</em>:
+          <ul>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum length”</em>: <code class="highlighter-rouge">20</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Read Modification Options”</em>:
+          <ul>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Quality cutoff”</em>: <code class="highlighter-rouge">20</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Output Options”</em>:
+          <ul>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Report”</em>: <code class="highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>We can take a look at the reads again now that they’ve been trimmed.</p>
+
+<h2 id="check-trimmed-reads">Check trimmed reads</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-check-trimmed-reads-with-fastqc"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check trimmed reads with <strong>FastQC</strong></h3>
+
+  <ol>
+    <li><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Short read data from your current history”</em>: <code class="highlighter-rouge">RawData</code> (output of <strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to aggregate the FastQC reports
+      <ul>
+        <li>In <em>“Results”</em>
+          <ul>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">FastQC</code></li>
+            <li>In <em>“FastQC output”</em>
+              <ul>
+                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of FastQC output?”</em>: <code class="highlighter-rouge">Raw data</code></li>
+                <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FastQC output”</em>: <code class="highlighter-rouge">RawData</code> files (output of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
+  </ol>
+</blockquote>
+
+<p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
+
+<figure id="figure-17"><img src="../../images/rna-seq-reads-to-counts/post_cutadapt_adapter_content.png" alt="Adapter Content post-trimming" title="Adapter Content post-trimming" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Adapter Content post-trimming</figcaption></figure>
+<figure id="figure-18"><img src="../../images/rna-seq-reads-to-counts/post_cutadapt_fastqc_sequence_length_distribution_plot.png" alt="Sequence Length post-trimming" title="Sequence Length post-trimming" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Sequence Length post-trimming</figcaption></figure>
+
+<p>After trimming we can see that:</p>
+
+<ul>
+  <li>No adapter is detected now.</li>
+  <li>The reads are no longer all the same length, we now have sequences of different lengths detected.</li>
+</ul>
+
+<h1 id="mapping">Mapping</h1>
+
+<p>Now that we have prepared our reads, we can align the reads for our 12 samples. There is an existing reference genome for mouse and we will map the reads to that. The current version of the mouse reference genome is <code class="highlighter-rouge">mm10/GRCm38</code>. Here we will use <a href="https://ccb.jhu.edu/software/hisat2/index.shtml">HISAT2</a>, the descendent of widely-used TopHat, to align the reads, but alternative mappers could be used, such as STAR. See the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#mapping">RNA-seq ref-based tutorial</a> for more information on RNA-seq mappers. There are often numerous mapping parameters that we can specify, but usually the default mapping parameters are fine. However, library type (paired-end vs single-end) and library strandness (stranded vs unstranded) require some different settings when mapping and counting, so they are two important pieces of information to know about samples. The mouse data comprises unstranded, single-end reads so we will specify that where necessary. If we had paired-end data or stranded data, we would specify that. HISAT2 can output a mapping summary file that tells what proportion of reads mapped to the reference genome. Summary files for multiple samples can be summarised with MultiQC. As we’re only using a subset of 1000 reads per sample, aligning should just take a minute or so. To run the full samples from this dataset would take longer.</p>
+
+<h2 id="map-reads-to-reference-genome">Map reads to reference genome</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-map-reads-to-reference-with-hisat2"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Map reads to reference with <strong>HISAT2</strong></h3>
+
+  <p><strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Source for the reference genome”</em>: <code class="highlighter-rouge">Use a built-in genome</code>
+      <ul>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select a reference genome”</em>: <code class="highlighter-rouge">mm10</code></li>
+      </ul>
+    </li>
+    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Is this a single or paired library?”</em>: <code class="highlighter-rouge">Single-end</code>
+      <ul>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTA/Q file”</em>: <code class="highlighter-rouge">Read 1 Output</code> (output of <strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+    <li>In <em>“Summary Options”</em>:
+      <ul>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Output alignment summary in a more machine-friendly style.”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Print alignment summary to a file.”</em>: <code class="highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ul>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-settings-for-paired-end-or-stranded-reads"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Settings for Paired-end or Stranded reads</h3>
+
+  <ul>
+    <li>If you have <strong>paired-end</strong> reads
+      <ul>
+        <li>Select <em>“Is this a single or paired library”</em> <code class="highlighter-rouge">Paired-end</code> or <code class="highlighter-rouge">Paired-end Dataset Collection</code> or <code class="highlighter-rouge">Paired-end data from single interleaved dataset</code></li>
+      </ul>
+    </li>
+    <li>If you have <strong>stranded</strong> reads
+      <ul>
+        <li>Select <em>“Specify strand information”</em>: <code class="highlighter-rouge">Forward (FR)</code> or <code class="highlighter-rouge">Reverse (RF)</code></li>
+      </ul>
+    </li>
+  </ul>
+</blockquote>
+
+<p><strong>HISAT2</strong> generates a BAM file with mapped reads.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-take-a-look-at-bam-format"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Take a look at BAM format</h3>
+
+  <ol>
+    <li>Click on the collection name (<code class="highlighter-rouge">HISAT2 on collection N: aligned reads (BAM)</code>)</li>
+    <li>
+      <p>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of one of the BAM files to have a look at what it contains.</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>What is BAM format?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>See the answer in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#pretreatments">RNA-seq ref-based tutorial</a></p>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="check-mapped-reads">Check mapped reads</h2>
+
+<p>An important metric to check is the percentage of reads mapped to the reference genome. A low percentage can indicate issues with the data or analysis. We can use MultiQC again to summarise the QC information.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-aggregate-the-hisat2-summary-files-with-multiqc"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Aggregate the HISAT2 summary files with <strong>MultiQC</strong></h3>
+
+  <ol>
+    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to aggregate the HISAT2 summary files
+      <ul>
+        <li>In <em>“Results”</em>
+          <ul>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">HISAT2</code></li>
+            <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Output of HISAT2”</em>: <code class="highlighter-rouge">Mapping summary</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
+  </ol>
+</blockquote>
+
+<p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
+
+<figure id="figure-19"><img src="../../images/rna-seq-reads-to-counts/hisat2_se_plot.png" alt="HISAT2 mapping" title="HISAT2 mapping" /><figcaption><span class="figcaption-prefix">Figure 19:</span> HISAT2 mapping</figcaption></figure>
+
+<p>Over 90% of reads have mapped in all samples, a good mapping rate. And the vast majority of reads have mapped uniquely, they haven’t mapped to multiple locations in the reference genome.</p>
+
+<p>It is also good practice to visualise the read alignments in the BAM file, for example using IGV, see the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#pretreatments">RNA-seq ref-based tutorial</a>.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-downloading-a-collection"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Downloading a collection</h3>
+
+  <p>To download a collection of datasets (e.g. the collection of BAM files) click on the floppy icon as shown below. This will download a tar file containing all the datasets in the collection. Note that for BAM files the .bai indexes (required for IGV) will be included automatically in the download.</p>
+
+  <figure id="figure-20"><img src="../../images/rna-seq-reads-to-counts/collection_download.png" alt="Downloading collection" title="Downloading a collection" /><figcaption><span class="figcaption-prefix">Figure 20:</span> Downloading a collection</figcaption></figure>
+</blockquote>
+
+<h2 id="check-strandness">Check strandness</h2>
+
+<p>As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to “guess” the strandness, as explained in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">RNA-seq ref-based tutorial</a>. This is done through comparing the “strandness of reads” with the “strandness of transcripts”. For this tool, and many of the other RSeQC tools, a reference bed file of genes (<code class="highlighter-rouge">reference genes</code>) is required. RSeQC provides some reference BED files for model organisms. You can import the RSeQC mm10 RefSeq BED file from the link <code class="highlighter-rouge">https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download</code> (and rename to <code class="highlighter-rouge">reference genes</code>) or import a file from Shared data if provided. Alternatively, you can provide your own BED file of reference genes, for example from UCSC (see the <a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html">Peaks to Genes tutorial</a>. Or the <strong>Convert GTF to BED12</strong> tool can be used to convert a GTF into a BED file.</p>
+
+<blockquote>
+
+  <blockquote class="tip">
+    <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+    <ul>
+      <li>Copy the link location</li>
+      <li>
+        <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+      </li>
+      <li>Select <strong>Paste/Fetch Data</strong></li>
+      <li>
+        <p>Paste the link into the text field</p>
+      </li>
+      <li>
+        <p>Press <strong>Start</strong></p>
+      </li>
+      <li><strong>Close</strong> the window</li>
+    </ul>
+
+    <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-check-strandness-with-infer-experiment"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check strandness with <strong>Infer Experiment</strong></h3>
+
+  <ol>
+    <li><strong>Infer Experiment</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input .bam file”</em>: <code class="highlighter-rouge">aligned reads (BAM)</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="highlighter-rouge">reference genes</code> (Reference BED file)</li>
+      </ul>
+    </li>
+    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li>In <em>“1: Results”</em>:
+          <ul>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">RSeQC</code>
+              <ul>
+                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of RSeQC output?”</em>: <code class="highlighter-rouge">infer_experiment</code>
+                  <ul>
+                    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RSeQC infer_experiment output”</em>: <code class="highlighter-rouge">Infer Experiment output</code> (output of <strong>Infer Experiment</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
+  </ol>
+</blockquote>
+
+<p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
+
+<figure id="figure-21"><img src="../../images/rna-seq-reads-to-counts/rseqc_infer_experiment_plot.png" alt="Infer Experiment" title="Infer Experiment" /><figcaption><span class="figcaption-prefix">Figure 21:</span> Infer Experiment</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Do you think the data is stranded or unstranded?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>It is unstranded as approximately equal numbers of reads have aligned to the sense and antisense strands.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="check-duplicate-reads">Check duplicate reads</h2>
+
+<p>Duplicate reads are usually kept in RNA-seq differential expression analysis as they can come from highly-expressed genes but it is still a good metric to check. A high percentage of duplicates can indicate a problem with the sample, for example, PCR amplification of a low complexity library (not many transcripts) due to not enough RNA used as input. FastQC gives us an idea of duplicates in the reads before mapping (note that it just takes a sample of the data). We can assess the numbers of duplicates in all mapped reads using the <strong>Picard MarkDuplicates</strong> tool. Picard considers duplicates to be reads that map to the same location, based on the start position of where the read maps.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-check-duplicate-reads-with-markduplicates"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check duplicate reads with <strong>MarkDuplicates</strong></h3>
+
+  <ol>
+    <li><strong>MarkDuplicates</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select SAM/BAM dataset or dataset collection”</em>: <code class="highlighter-rouge">aligned reads (BAM)</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+    <li><em>*MultiQC</em> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li>In <em>“1: Results”</em>:
+          <ul>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">Picard</code>
+              <ul>
+                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of Picard output?”</em>: <code class="highlighter-rouge">Markdups</code>
+                  <ul>
+                    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Picard output”</em>: <code class="highlighter-rouge">MarkDuplicate metrics</code> (output of <strong>MarkDuplicates</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
+  </ol>
+</blockquote>
+
+<p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
+
+<figure id="figure-22"><img src="../../images/rna-seq-reads-to-counts/picard_deduplication.png" alt="MarkDups metrics" title="MarkDups metrics" /><figcaption><span class="figcaption-prefix">Figure 22:</span> MarkDups metrics</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Which two samples have the most duplicates detected?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p><code class="highlighter-rouge">MCL1-LE</code> and <code class="highlighter-rouge">MCL1-LF</code> have the highest number of duplicates in mapped reads compared to the other samples, similar to what we saw in the raw reads with FastQC.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="check-number-of-reads-for-each-chromosome">Check number of reads for each chromosome</h2>
+
+<p>You can check the numbers of reads mapped to each chromosome with the <strong>Samtools IdxStats</strong> tool. This can help assess the sample quality, for example, if there is an excess of mitochondrial contamination. It could also help to check the sex of the sample through the numbers of reads mapping to X/Y or to see if any chromosomes have highly expressed genes.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-count-reads-mapping-to-each-chromosome-with-idxstats"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Count reads mapping to each chromosome with <strong>IdxStats</strong></h3>
+
+  <ol>
+    <li><strong>IdxStats</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM file”</em>: <code class="highlighter-rouge">aligned reads (BAM)</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+    <li><em>*MultiQC</em> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li>In <em>“1: Results”</em>:
+          <ul>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">Samtools</code>
+              <ul>
+                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of Samtools output?”</em>: <code class="highlighter-rouge">idxstats</code>
+                  <ul>
+                    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Samtools idxstats output”</em>: <code class="highlighter-rouge">IdxStats output</code> (output of <strong>IdxStats</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
+  </ol>
+</blockquote>
+
+<p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
+
+<figure id="figure-23"><img src="../../images/rna-seq-reads-to-counts/samtools-idxstats-mapped-reads-plot.png" alt="IdxStats chromsome mappings" title="IdxStats Chromosome Mappings" /><figcaption><span class="figcaption-prefix">Figure 23:</span> IdxStats Chromosome Mappings</figcaption></figure>
+<figure id="figure-24"><img src="../../images/rna-seq-reads-to-counts/samtools-idxstats-xy-plot.png" alt="IdxStats XY " title="IdxStats X/Y Mappings" /><figcaption><span class="figcaption-prefix">Figure 24:</span> IdxStats X/Y Mappings</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>What do you think of the chromosome mappings?</li>
+    <li>Are the samples male or female? <em>(If a sample is not in the XY plot it means no reads mapped to Y)</em></li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Some of the samples have very high mapping on chromosome 5. What is going on there?</li>
+      <li>The samples appear to be all female as there are few reads mapping to the Y chromosome. As this is a experiment studying virgin, pregnant and lactating mice if we saw large numbers of reads mapping to the Y chromosome in a sample it would be unexpected and a probable cause for concern.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="check-coverage-across-gene-bodies-5-3">Check coverage across gene bodies (5’-3’)</h2>
+
+<p>The coverage of reads along gene bodies can be assessed to check if there is any bias in coverage. For example, a bias towards the 3’ end of genes could indicate degradation of the RNA. Alternatively, a 3’ bias could indicate that the data is from a 3’ assay (e.g. oligodT-primed, 3’RNA-seq). You can use the RSeQC <strong>Gene Body Coverage (BAM)</strong> tool to assess gene body coverage in the BAM files.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-check-coverage-of-genes-with-gene-body-coverage-bam"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check coverage of genes with <strong>Gene Body Coverage (BAM)</strong></h3>
+
+  <ol>
+    <li><strong>Gene Body Coverage (BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Run each sample separately, or combine mutiple samples into one plot”</em>: <code class="highlighter-rouge">Run each sample separately</code>
+          <ul>
+            <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input .bam file”</em>: <code class="highlighter-rouge">aligned reads (BAM)</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="highlighter-rouge">reference genes</code> (Input dataset)</li>
+      </ul>
+    </li>
+    <li><em>*MultiQC</em> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li>In <em>“1: Results”</em>:
+          <ul>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">RSeQC</code>
+              <ul>
+                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of RSeQC output?”</em>: <code class="highlighter-rouge">gene_body_coverage</code>
+                  <ul>
+                    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RSeQC gene_body_coverage output”</em>: <code class="highlighter-rouge">Gene Body Coverage (BAM) (text)</code> (output of <strong>Gene Body Coverage (
+BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
+  </ol>
+
+</blockquote>
+
+<p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
+
+<figure id="figure-25"><img src="../../images/rna-seq-reads-to-counts/rseqc_gene_body_coverage_plot.png" alt="Gene Body Coverage" title="Gene Body Coverage" /><figcaption><span class="figcaption-prefix">Figure 25:</span> Gene Body Coverage</figcaption></figure>
+
+<p>The plot below from the RSeQC website shows what samples with 3’biased coverage would look like.</p>
+<figure id="figure-26"><img src="../../images/rna-seq-reads-to-counts/genebodycoverage.png" alt="Gene Body Coverage comparison" title="Gene Body Coverage comparison" /><figcaption><span class="figcaption-prefix">Figure 26:</span> Gene Body Coverage comparison</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions-6"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>What do you think of the coverage across gene bodies in these samples?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>It looks good. This plot looks a bit noisy in the small FASTQs but it still shows there’s pretty even coverage from 5’ to 3’ ends with no obvious bias in all the samples.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="check-distribution-of-reads-across-features-exons-introns-intergenic">Check distribution of reads across features (exons, introns, intergenic..)</h2>
+
+<p>We can also check the distribution of reads across known gene features, such as exons (CDS, 5’UTR, 3’UTR), introns and intergenic regions. In RNA-seq we expect most reads to map to exons rather than introns or intergenic regions. It is also the reads mapped to exons that will be counted so it is good to check what proportions of reads have mapped to those. High numbers of reads mapping to intergenic regions could indicate the presence of DNA contamination.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-check-distribution-of-reads-with-read-distribution"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check distribution of reads with <strong>Read Distribution</strong></h3>
+
+  <ol>
+    <li><strong>Read Distribution</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input .bam/.sam file”</em>: <code class="highlighter-rouge">aligned reads (BAM)</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="highlighter-rouge">reference genes</code> (Input dataset)</li>
+      </ul>
+    </li>
+    <li><em>*MultiQC</em> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li>In <em>“1: Results”</em>:
+          <ul>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">RSeQC</code>
+              <ul>
+                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of RSeQC output?”</em>: <code class="highlighter-rouge">read_distribution</code>
+                  <ul>
+                    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RSeQC read_distribution output”</em>: <code class="highlighter-rouge">Read Distribution output</code> (output of <strong>Read Distribution</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
+  </ol>
+
+</blockquote>
+
+<p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
+
+<figure id="figure-27"><img src="../../images/rna-seq-reads-to-counts/rseqc_read_distribution_plot.png" alt="Read Distribution" title="Read Distribution" /><figcaption><span class="figcaption-prefix">Figure 27:</span> Read Distribution</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions-7"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>What do you think of the read distribution?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>It looks good, most of the reads have mapped to exons and not many to introns or intergenic regions. The samples have pretty consistent read distribution, albeit with slightly higher numbers of reads mapping to CDS exons for <code class="highlighter-rouge">MCL1-LC</code> and <code class="highlighter-rouge">MCL1-LD</code>, and <code class="highlighter-rouge">MCL1-LE</code> and <code class="highlighter-rouge">MCL1-LF</code> have more reads mapping to CDS exons than the other samples.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Now that we have checked the data and are happy with how it looks, we can proceed to counting.</p>
+
+<h1 id="counting">Counting</h1>
+
+<p>The alignment produces a set of BAM files, where each file contains the read alignments for each sample. In the BAM file, there is a chromosomal location for every read that mapped. Now that we have figured out where each read comes from in the genome, we need to summarise the information across genes or exons. The mapped reads can be counted across mouse genes by using a tool called featureCounts. featureCounts requires gene annotation specifying the genomic start and end position of each exon of each gene. For convenience, featureCounts contains built-in annotation for mouse (<code class="highlighter-rouge">mm10</code>, <code class="highlighter-rouge">mm9</code>) and human (<code class="highlighter-rouge">hg38</code>, <code class="highlighter-rouge">hg19</code>) genome assemblies, where exon intervals are defined from the NCBI RefSeq annotation of the reference genome. Reads that map to exons of genes are added together to obtain the count for each gene, with some care taken with reads that span exon-exon boundaries. For other species, users will need to read in a data frame in GTF format to define the genes and exons. Users can also specify a custom annotation file in SAF format. See the tool help in Galaxy, which has an example of what an SAF file should like like, or the Rsubread users guide for more information.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+  <p>In this example we have kept many of the default settings, which are typically optimised to work well under a variety of situations. For example, the default setting for featureCounts is that it only keeps reads that uniquely map to the reference genome. For testing differential expression of genes, this is preferred, as the reads are unambigously assigned to one place in the genome, allowing for easier interpretation of the results. Understanding all the different parameters you can change involves doing a lot of reading about the tool that you are using, and can take a lot of time to understand! We won’t be going into the details of the parameters you can change here, but you can get more information from looking at the tool help.</p>
+</blockquote>
+
+<h2 id="count-reads-mapped-to-genes">Count reads mapped to genes</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-count-reads-mapped-to-genes-with-featurecounts"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Count reads mapped to genes with <strong>featureCounts</strong></h3>
+
+  <p><strong>featureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Alignment file”</em>: <code class="highlighter-rouge">aligned reads (BAM)</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Gene annotation file”</em>: <code class="highlighter-rouge">featureCounts built-in</code>
+      <ul>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select built-in genome”</em>: <code class="highlighter-rouge">mm10</code></li>
+      </ul>
+    </li>
+  </ul>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-settings-for-paired-end-or-stranded-reads-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Settings for Paired-end or Stranded reads</h3>
+
+  <ul>
+    <li>If you have <strong>paired-end</strong> reads
+      <ul>
+        <li>Click <em>“Options for paired-end reads”</em>
+          <ul>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Count fragments instead of reads”</em>: <code class="highlighter-rouge">Enabled; fragments (or templates) will be counted instead of reads</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>If you have <strong>stranded</strong> reads
+      <ul>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> Select <em>“Specify strand information”</em>: <code class="highlighter-rouge">Stranded (Forward)</code> or <code class="highlighter-rouge">Stranded (Reverse)</code></li>
+      </ul>
+    </li>
+  </ul>
+</blockquote>
+
+<h2 id="check-assignments-of-reads-to-genes">Check assignments of reads to genes</h2>
+
+<p>featureCounts reports the numbers of unassigned reads and the reasons why they are not assigned (eg. ambiguity, multi-mapping, secondary alignment, mapping quality, fragment length, chimera, read duplicate, non-junction and so on), in addition to the number of successfully assigned reads for each library. The statistics of the read mapping are output as a file from featureCounts. MultiQC can be used to assess the numbers of reads assigned to features, genes in this case.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-assess-reads-mapped-to-genes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Assess reads mapped to genes</h3>
+
+  <ol>
+    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">featureCounts</code>
+          <ul>
+            <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Output of FeatureCounts”</em>: <code class="highlighter-rouge">featureCounts summary</code> (output of <strong>featureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
+  </ol>
+</blockquote>
+
+<p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
+
+<figure id="figure-28"><img src="../../images/rna-seq-reads-to-counts/featureCounts_assignment_plot.png" alt="featureCounts assignments" title="featureCounts assignments" /><figcaption><span class="figcaption-prefix">Figure 28:</span> featureCounts assignments</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions-8"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>What % reads are assigned to exons?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-8"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>~60-70% of reads are assigned to exons. This is a fairly typical number for RNA-seq.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<p>The counts for the samples are output as tabular files. Take a look at one. The numbers in the first column of the counts file represent the Entrez gene identifiers for each gene, while the second column contains the counts for each gene for the sample.</p>
+
+<h2 id="create-count-matrix">Create count matrix</h2>
+
+<p>The counts files are currently in the format of one file per sample. However, it is often convenient to have a count matrix. A count matrix is a single table containing the counts for all samples, with the genes in rows and the samples in columns. The counts files are all within a collection so we can use the Galaxy <strong>Column Join on Collection</strong> tool to easily create a count matrix from the single counts files.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-count-matrix-with-column-join-on-collection"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create count matrix with <strong>Column Join on Collection</strong></h3>
+
+  <p><strong>Column Join on Collection</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Tabular files”</em>: <code class="highlighter-rouge">featureCounts output</code> (output of <strong>featureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Identifier column”</em>: <code class="highlighter-rouge">1</code></li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of Header lines in each item”</em>: <code class="highlighter-rouge">1</code></li>
+    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Keep original column header”</em>: <code class="highlighter-rouge">No</code></li>
+  </ul>
+
+</blockquote>
+
+<p>Take a look at the output (the output for the full dataset is shown below).</p>
+
+<figure id="figure-29"><img src="../../images/rna-seq-reads-to-counts/count_matrix.png" alt="Count matrix" title="Count matrix" /><figcaption><span class="figcaption-prefix">Figure 29:</span> Count matrix</figcaption></figure>
+
+<p>Now it is easier to see the counts for a gene across all samples. The accompanying limma-voom tutorial shows how gene information (symbols etc) can be added to a count matrix.</p>
+
+<h1 id="generating-an-interactive-qc-summary-report">Generating an interactive QC summary report</h1>
+
+<p>So far we have run MultiQC on one step at a time which generates multiple reports for the analysis. However, it would be more convenient to have a single report containing all the QC information for the analysis. This can be easily achieved in Galaxy with the MultiQC tool.</p>
+
+<blockquote class="question">
+  <h3 id="question-questions-9"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Can you create a MultiQC report that summarises all the QC information into a single report?</p>
+
+  <ul>
+    <li>Summarise the QC info for <strong>Cutadapt</strong>, <strong>FastQC</strong>, <strong>HISAT2</strong>, <strong>Infer Experiment</strong>, <strong>MarkDups</strong>, <strong>IdxStats</strong>, <strong>Gene Body Coverage</strong>, <strong>Read Distribution</strong>, <strong>featureCounts</strong>.</li>
+    <li>Use just one of the two FastQC outputs e.g. the trimmed FastQC RawData and not the untrimmed aswell, as you currently can’t have more than one run of the same tool in the same MultiQC report.</li>
+  </ul>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-9"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>MultiQC summary of all programs used (screenshot from the full dataset).</p>
+
+    <figure id="figure-30"><img src="../../images/rna-seq-reads-to-counts/multiqc_summary.png" alt="MultiQC Summary" title="MultiQC Summary" /><figcaption><span class="figcaption-prefix">Figure 30:</span> MultiQC Summary</figcaption></figure>
+
+    <p><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+    <ul>
+      <li>In <em>“Results”</em>:
+        <ul>
+          <li>In <em>“1: Results”</em>:
+            <ul>
+              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">Cutadapt/Trim Galore!</code>
+                <ul>
+                  <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Output of Cutadapt”</em>: <code class="highlighter-rouge">Cutadapt Report</code> (output of <strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert Results”</em>:</li>
+          <li>In <em>“2: Results”</em>:
+            <ul>
+              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">FastQC</code>
+                <ul>
+                  <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FastQC output”</em>: <code class="highlighter-rouge">FastQC RawData</code> (output of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert Results”</em>:</li>
+          <li>In <em>“3: Results”</em>:
+            <ul>
+              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">HISAT2</code>
+                <ul>
+                  <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Output of HISAT2”</em>: <code class="highlighter-rouge">Mapping summary</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert Results”</em>:</li>
+          <li>In <em>“4: Results”</em>:
+            <ul>
+              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">RSeQC</code>
+                <ul>
+                  <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of RSeQC output?”</em>: <code class="highlighter-rouge">infer_experiment</code>
+                    <ul>
+                      <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RSeQC infer_experiment output”</em>: <code class="highlighter-rouge">Infer Experiment output</code> (output of <strong>Infer Experiment</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert Results”</em>:</li>
+          <li>In <em>“5: Results”</em>:
+            <ul>
+              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">Picard</code>
+                <ul>
+                  <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of Picard output?”</em>: <code class="highlighter-rouge">Markdups</code>
+                    <ul>
+                      <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Picard output”</em>: <code class="highlighter-rouge">MarkDuplicate metrics</code> (output of <strong>MarkDuplicates</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert Results”</em>:</li>
+          <li>In <em>“6: Results”</em>:
+            <ul>
+              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">Samtools</code>
+                <ul>
+                  <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of Samtools output?”</em>: <code class="highlighter-rouge">idxstats</code>
+                    <ul>
+                      <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Samtools idxstats output”</em>: <code class="highlighter-rouge">IdxStats output</code> (output of <strong>IdxStats</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert Results”</em>:</li>
+          <li>In <em>“7: Results”</em>:
+            <ul>
+              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">RSeQC</code>
+                <ul>
+                  <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of RSeQC output?”</em>: <code class="highlighter-rouge">gene_body_coverage</code>
+                    <ul>
+                      <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RSeQC gene_body_coverage output”</em>: <code class="highlighter-rouge">Gene Body Coverage (BAM) (text)</code> (output of <strong>Gene Body Coverage (
+BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert Results”</em>:</li>
+          <li>In <em>“8: Results”</em>:
+            <ul>
+              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">RSeQC</code>
+                <ul>
+                  <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of RSeQC output?”</em>: <code class="highlighter-rouge">read_distribution</code>
+                    <ul>
+                      <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RSeQC read_distribution output”</em>: <code class="highlighter-rouge">Read Distribution output</code> (output of <strong>Read Distribution</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert Results”</em>:</li>
+          <li>In <em>“9: Results”</em>:
+            <ul>
+              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">featureCounts</code>
+                <ul>
+                  <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Output of FeatureCounts”</em>: <code class="highlighter-rouge">featureCounts summary</code> (output of <strong>featureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+  </blockquote>
+
+</blockquote>
+
+<p>The MultiQC report can be downloaded by clicking on the floppy disk icon on the dataset in the history as shown below.</p>
+
+<figure id="figure-31"><img src="../../images/rna-seq-reads-to-counts/multiqc_download.png" alt="MultiQC download" title="Download MultiQC report" /><figcaption><span class="figcaption-prefix">Figure 31:</span> Download MultiQC report</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions-10"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Can you think of any other QCs that could be performed on RNA-seq reads?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-10"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>The reads could be checked for:</p>
+    <ul>
+      <li>Ribosomal contamination</li>
+      <li>Contamination with other species e.g. bacteria</li>
+      <li>GC bias of the mapped reads</li>
+      <li>This is single-end data but paired-end mapped reads could be checked for fragment size (distance between the read pairs).</li>
+    </ul>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="creating-a-workflow-of-the-analysis">Creating a workflow of the analysis</h1>
+
+<p>You can now extract a workflow from the steps that have been performed, as shown in the <a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html#extracting-workflow">Peaks to Genes tutorial</a>. This is a way to help keep a record of the steps performed. It also enables efficient rerunning of a multi-step analysis, such as RNA-seq.</p>
+
+<figure id="figure-32"><img src="../../images/rna-seq-reads-to-counts/workflow.png" alt="fastq to counts Workflow" title="FASTQ to counts Workflow" /><figcaption><span class="figcaption-prefix">Figure 32:</span> FASTQ to counts Workflow</figcaption></figure>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this tutorial we have seen how reads (FASTQ files) can be converted into counts. We have also seen QC steps that can be performed to help assess the quality of the data. A follow-on tutorial, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a>, shows how to perform differential expression and QC on the counts for this dataset.</p>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+            <ul>
+                
+                <li>In RNA-seq, reads (FASTQs) are mapped to a reference genome with a spliced aligner (e.g HISAT2, STAR)</li>
+                
+                <li>The aligned reads (BAMs) can then be converted to counts (e.g featureCounts, HTSeq)</li>
+                
+                <li>Many QC steps can be performed to help check the quality of the data</li>
+                
+                <li>MultiQC can be used to create a nice summary report of QC information</li>
+                
+                <li>The Galaxy Rule-based Uploader, Collections and Workflows can help make analysis more efficient and easier</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+        <h1>Useful literature</h1>
+        <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=RNA-Seq reads to counts (Transcriptomics)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=RNA-Seq reads to counts (Transcriptomics)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Belinda Phipson, Harriet Dashnow, Maria Doyle)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>

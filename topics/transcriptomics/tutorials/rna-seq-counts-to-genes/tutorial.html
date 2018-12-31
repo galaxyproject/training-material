@@ -1,0 +1,1079 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>RNA-seq counts to genes</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:title" content="Galaxy Training: RNA-seq counts to genes" />
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body>
+        
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/transcriptomics" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Transcriptomics
+                        </a>
+                    </li>
+
+                    
+                    
+                    
+
+                    
+                        
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    
+                                        
+                                            
+                                                <a class="dropdown-item" href="/training-material/topics/transcriptomics/slides/introduction.html">
+                                                    Introduction to Transcriptomics
+                                                </a>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                </div>
+                            </li>
+                        
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://figshare.com/s/f5d63d8c265a05618137" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/transcriptomics#references" title="References">
+                            <i class="fa fa-bookmark" aria-hidden="true"></i><span class="visually-hidden">references</span> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-counts-to-genes%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-counts-to-genes%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-counts-to-genes%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-counts-to-genes%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-counts-to-genes%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+   
+{
+  "@context": "http://schema.org",
+  "@type": "CreativeWork",
+  "name": "RNA-seq counts to genes",
+  "accessModeSufficient": "visual",
+  "accessibilityControl": "fullMouseControl",
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "learningResourceType": "",
+  "url": "/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://figshare.com/s/f5d63d8c265a05618137",
+      "name": "Training data for RNA-seq counts to genes tutorial"
+    }
+  ],
+  "timeRequired": "PT3H",
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "mblue9"
+    },
+    {
+      "@type": "Person",
+      "name": "bphipson"
+    },
+    {
+      "@type": "Person",
+      "name": "annatrigos"
+    },
+    {
+      "@type": "Person",
+      "name": "mritchie"
+    },
+    {
+      "@type": "Person",
+      "name": "hdashnow"
+    },
+    {
+      "@type": "Person",
+      "name": "charitylaw"
+    }
+  ],
+  "keywords": "limma-voom, mouse, QC",
+  "description": "The questions this  addresses are:\n - What are the differentially expressed genes in the mammary gland of pregnant versus lactating mice?\n - How to analyze RNA count data using limma-voom?\n - How to perform quality control of RNA-seq count data?\n\n\\nThe objectives are:\n - Analysis of RNA-seq count data using limma-voom\n - Quality control of count data\n - Visualisation and interactive exploration of count data\n - Identification of differentially expressed genes\n\n"
+}
+
+    </script>
+    <section class="tutorial">
+        <h1>RNA-seq counts to genes</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>What are the differentially expressed genes in the mammary gland of pregnant versus lactating mice?</li>
+            
+            <li>How to analyze RNA count data using limma-voom?</li>
+            
+            <li>How to perform quality control of RNA-seq count data?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>Analysis of RNA-seq count data using limma-voom</li>
+            
+            <li>Quality control of count data</li>
+            
+            <li>Visualisation and interactive exploration of count data</li>
+            
+            <li>Identification of differentially expressed genes</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Quality Control:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                            
+                            <li> Mapping:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                - <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 3 hours</p>
+            
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Measuring gene expression on a genome-wide scale has become common practice over the last two decades or so, with microarrays predominantly used pre-2008. With the advent of next generation sequencing technology in 2008, an increasing number of scientists use this technology to measure and understand changes in gene expression in often complex systems. As sequencing costs have decreased, using RNA-Seq to simultaneously measure the expression of tens of thousands of genes for multiple samples has never been easier. The cost of these experiments has now moved from generating the data to storing and analysing it.</p>
+
+<p>There are many steps involved in analysing an RNA-Seq experiment. The analysis begins with sequencing reads (FASTQ files). These are usually aligned to a reference genome, if available. Then the number of reads mapped to each gene can be counted. This results in a table of counts, which is what we perform statistical analyses on to determine differentially expressed genes and pathways. The purpose of this tutorial is to demonstrate how to perform differential expression on count data with <strong>limma-voom</strong>. How to generate counts from reads (FASTQs) is covered in the accompanying tutorial <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">RNA-seq reads to counts</a>.</p>
+
+<p><strong>Mouse mammary gland dataset</strong></p>
+
+<p>The data for this tutorial comes from a Nature Cell Biology paper, <a href="https://www.ncbi.nlm.nih.gov/pubmed/25730472">EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival</a>), Fu et al. 2015. Both the raw data (sequence reads) and processed data (counts) can be downloaded from Gene Expression Omnibus database (GEO) under accession number <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE60450">GSE60450</a>.</p>
+
+<p>This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status. Note that two biological replicates are used here, two independent sorts of cells from the mammary glands of virgin, pregnant or lactating mice, however three replicates is usually recommended as a minimum requirement for RNA-seq. In this tutorial we will use the GEO counts file as a starting point for our analysis. Alternatively, you could create a count matrix from the raw sequence reads, as demonstrated in the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">RNA-seq reads to counts tutorial</a>. The GEO count file was generated from aligning the reads to the mouse <code class="highlighter-rouge">mm10</code> genome with the <a href="https://www.biorxiv.org/content/early/2018/08/15/377762">Rsubread</a> aligner, followed by counting reads mapped to RefSeq genes with <a href="https://academic.oup.com/bioinformatics/article/30/7/923/232889">featureCounts</a> (Liao, Smyth, and Shi 2014), see the <a href="https://www.nature.com/articles/ncb3117">Fu paper</a> for details.</p>
+
+<p>We will use <strong>limma-voom</strong> for identifying differentially expressed genes here. Other popular alternatives are edgeR and DESeq2. Limma-voom has been shown to be perform well in terms of precision, accuracy and sensitivity (<a href="https://www.ncbi.nlm.nih.gov/pubmed/29267363">Costa-Silva, Domingues and Lopes 2017</a>) and, due to its speed, it’s particularly recommended for large-scale datasets with 100s of samples (<a href="https://f1000research.com/articles/5-1438/v2">Chen, Lun, Smyth 2016</a>).</p>
+
+<p>This is a Galaxy tutorial based on material from the <a href="http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html">COMBINE R RNAseq workshop</a>, first taught <a href="http://combine-australia.github.io/2016-05-11-RNAseq/">here</a>.</p>
+
+<figure id="figure-1"><img src="../../images/rna-seq-reads-to-counts/mouse_exp.png" alt="Tutorial Dataset" title="Tutorial Dataset" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Tutorial Dataset</figcaption></figure>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#preparing-the-inputs" id="markdown-toc-preparing-the-inputs">Preparing the inputs</a>    <ol>
+      <li><a href="#import-data" id="markdown-toc-import-data">Import data</a></li>
+      <li><a href="#format-the-data" id="markdown-toc-format-the-data">Format the data</a></li>
+      <li><a href="#get-gene-annotations" id="markdown-toc-get-gene-annotations">Get gene annotations</a></li>
+    </ol>
+  </li>
+  <li><a href="#differential-expression-with-limma-voom" id="markdown-toc-differential-expression-with-limma-voom">Differential expression with limma-voom</a>    <ol>
+      <li><a href="#filtering-to-remove-lowly-expressed-genes" id="markdown-toc-filtering-to-remove-lowly-expressed-genes">Filtering to remove lowly expressed genes</a></li>
+      <li><a href="#normalization-for-composition-bias" id="markdown-toc-normalization-for-composition-bias">Normalization for composition bias</a></li>
+      <li><a href="#specify-contrasts-of-interest" id="markdown-toc-specify-contrasts-of-interest">Specify Contrast(s) of interest</a></li>
+    </ol>
+  </li>
+  <li><a href="#quality-control-of-count-data" id="markdown-toc-quality-control-of-count-data">Quality Control of count data</a>    <ol>
+      <li><a href="#multidimensional-scaling-plot" id="markdown-toc-multidimensional-scaling-plot">Multidimensional scaling plot</a></li>
+      <li><a href="#density-plots" id="markdown-toc-density-plots">Density plots</a></li>
+      <li><a href="#box-plots" id="markdown-toc-box-plots">Box plots</a></li>
+      <li><a href="#md-plots-for-samples" id="markdown-toc-md-plots-for-samples">MD plots for samples</a></li>
+      <li><a href="#voom-variance-plot" id="markdown-toc-voom-variance-plot">Voom variance plot</a></li>
+      <li><a href="#md-and-volcano-plots-for-de-results" id="markdown-toc-md-and-volcano-plots-for-de-results">MD and Volcano plots for DE results</a></li>
+    </ol>
+  </li>
+  <li><a href="#testing-relative-to-a-threshold-treat" id="markdown-toc-testing-relative-to-a-threshold-treat">Testing relative to a threshold (TREAT)</a></li>
+  <li><a href="#visualising-results" id="markdown-toc-visualising-results">Visualising results</a>    <ol>
+      <li><a href="#heatmap-of-top-genes" id="markdown-toc-heatmap-of-top-genes">Heatmap of top genes</a></li>
+      <li><a href="#stripcharts-of-top-genes" id="markdown-toc-stripcharts-of-top-genes">Stripcharts of top genes</a></li>
+      <li><a href="#interactive-plots-glimma" id="markdown-toc-interactive-plots-glimma">Interactive plots (Glimma)</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-note-results-may-vary"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note: results may vary</h3>
+
+  <p>Your results may be slightly different from the ones presented in this tutorial
+due to differing versions of tools, reference data, external databases, or
+because of stochastic processes in the algorithms.</p>
+
+</blockquote>
+
+<h1 id="preparing-the-inputs">Preparing the inputs</h1>
+
+<p>We will use three files for this analysis:</p>
+
+<ul>
+  <li><strong>Count matrix</strong> (genes in rows, samples in columns)</li>
+  <li><strong>Sample information</strong> file (sample id, group)</li>
+  <li><strong>Gene annotation</strong> file (gene id, symbol, description)</li>
+</ul>
+
+<h2 id="import-data">Import data</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this RNA-seq exercise e.g. <code class="highlighter-rouge">RNA-seq with limma-voom</code></li>
+    <li>
+      <p>Import the mammary gland counts table and the associated sample information file.</p>
+
+      <p>To import the files, there are two options:</p>
+      <ul>
+        <li>Option 1: From a shared data library if available (ask your instructor)</li>
+        <li>
+          <p>Option 2: From <a href="https://figshare.com/s/1d788fd384d33e913a2a">Figshare</a></p>
+
+          <blockquote class="tip">
+            <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+            <ul>
+              <li>Copy the link location</li>
+              <li>Open the Galaxy Upload Manager</li>
+              <li>Select <strong>Paste/Fetch Data</strong></li>
+              <li>Paste the link into the text field</li>
+              <li>Press <strong>Start</strong></li>
+            </ul>
+          </blockquote>
+
+          <ul>
+            <li>
+              <p>You can paste both links below into the <strong>Paste/Fetch</strong> box:</p>
+
+              <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://ndownloader.figshare.com/files/5057929?private_link=1d788fd384d33e913a2a
+https://ndownloader.figshare.com/files/5999829?private_link=1d788fd384d33e913a2a
+</code></pre></div>              </div>
+            </li>
+            <li>
+              <p>Select <em>“Genome”</em>: <code class="highlighter-rouge">mm10</code></p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Rename the counts dataset as <code class="highlighter-rouge">seqdata</code> and the sample information dataset as <code class="highlighter-rouge">sampleinfo</code> using the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (pencil) icon.</li>
+    <li>
+      <p>Check that the datatype is <code class="highlighter-rouge">tabular</code>.
+If the datatype is not <code class="highlighter-rouge">tabular</code>, please change the file type to <code class="highlighter-rouge">tabular</code>.</p>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (pencil) icon displayed in your dataset in the history</li>
+          <li>Choose <strong>Datatype</strong> on the top</li>
+          <li>Select <code class="highlighter-rouge">tabular</code></li>
+          <li>Press <strong>Save</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Let’s take a look at the data. The <code class="highlighter-rouge">seqdata</code> file contains information about genes (one gene per row), the first column has the Entrez gene id, the second has the gene length and the remaining columns contain information about the number of reads aligning to the gene in each experimental sample. There are two replicates for each cell type and time point (detailed sample info can be found in file “GSE60450_series_matrix.txt” from the GEO website). The first few rows and columns of the seqdata file are shown below.</p>
+
+<figure id="figure-2" width="50%"><img src="../../images/rna-seq-counts-to-genes/seqdata.png" alt="seqdata file" title="Count file (before formatting)" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Count file (before formatting)</figcaption></figure>
+
+<p>The <code class="highlighter-rouge">sampleinfo</code> file contains basic information about the samples that we will need for the analysis. See below.</p>
+
+<figure id="figure-3" width="50%"><img src="../../images/rna-seq-counts-to-genes/sampleinfo.png" alt="sampleinfo file" title="Sample information file (before formatting)" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Sample information file (before formatting)</figcaption></figure>
+
+<h2 id="format-the-data">Format the data</h2>
+
+<p>Let’s create a new file, <code class="highlighter-rouge">countdata</code>, that contains only the counts for the 12 samples i.e. we’ll remove the gene length column with the <strong>Cut columns from a table (cut)</strong> tool. The sample names are also pretty long so we’ll use the <strong>Replace Text in entire line</strong> tool to shorten these to contain only the relevant information about each sample.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-format-the-counts-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Format the counts data</h3>
+
+  <ol>
+    <li><strong>Cut columns from a table (cut)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="highlighter-rouge">seqdata</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Operation”</em>: <code class="highlighter-rouge">Discard</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“List of fields”</em>: Select <code class="highlighter-rouge">Column:2</code></li>
+      </ul>
+    </li>
+    <li><strong>Replace Text in entire line</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find pattern”</em>: <code class="highlighter-rouge">_B[A-Z0-9_]+</code></li>
+      </ul>
+    </li>
+    <li>Rename file as <code class="highlighter-rouge">countdata</code> using the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (pencil) icon. The file should look like below.
+      <figure id="figure-4"><img src="../../images/rna-seq-counts-to-genes/countdata.png" alt="countdata file" title="Count file (after formatting)" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Count file (after formatting)</figcaption></figure>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Next, let’s create a new file, <code class="highlighter-rouge">factordata</code>, that contains the groups information that we need for the limma-voom tool. We’ll combine the cell type and mouse status to make 6 groups e.g. we’ll combine the CellType <code class="highlighter-rouge">basal</code> with the Status <code class="highlighter-rouge">pregnant</code> for the group <code class="highlighter-rouge">basalpregnant</code>. We’ll use the <strong>Merge Columns</strong> tool to combine the cell type and mouse status columns in the sample information file, making a column with the 6 group names.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-format-the-sample-information-file"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Format the sample information file</h3>
+
+  <ol>
+    <li><strong>Merge Columns together</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select data”</em>: <code class="highlighter-rouge">sampleinfo</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Merge column”</em>: <code class="highlighter-rouge">Column: 3</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“with column”</em>: <code class="highlighter-rouge">Column: 4</code></li>
+      </ul>
+    </li>
+    <li><strong>Cut columns from a table (cut)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: output of <strong>Merge Columns</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Operation”</em>: <code class="highlighter-rouge">Keep</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“List of fields”</em>: Select <code class="highlighter-rouge">Column:2</code> and <code class="highlighter-rouge">Column:5</code></li>
+      </ul>
+    </li>
+    <li>Rename file as <code class="highlighter-rouge">factordata</code> using the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (pencil) icon. The file should look like below.
+      <figure id="figure-5"><img src="../../images/rna-seq-counts-to-genes/factordata.png" alt="factordata file" title="Sample information file (after formatting)" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Sample information file (after formatting)</figcaption></figure>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="get-gene-annotations">Get gene annotations</h2>
+
+<p>Optionally, gene annotations can be provided to the limma-voom tool and if provided the annotation will be available in the output files. We’ll get gene symbols and descriptions for these genes using the Galaxy <strong>annotateMyIDs</strong> tool, which provides annotations for human, mouse, fruitfly and zebrafish.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-get-gene-annotations"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get gene annotations</h3>
+
+  <ol>
+    <li><strong>annotateMyIDs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with IDs”</em>: <code class="highlighter-rouge">countdata</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“File has header”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Organism”</em>: <code class="highlighter-rouge">Mouse</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“ID Type”</em>: <code class="highlighter-rouge">Entrez</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> “<em>Output columns”</em>: tick
+          <ul>
+            <li><code class="highlighter-rouge">ENTREZID</code></li>
+            <li><code class="highlighter-rouge">SYMBOL</code></li>
+            <li><code class="highlighter-rouge">GENENAME</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Rename file as <code class="highlighter-rouge">annodata</code> using the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (pencil) icon. The file should look like below.
+      <figure id="figure-6" width="50%"><img src="../../images/rna-seq-counts-to-genes/annodata.png" alt="annodata file" title="Gene annotation file" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Gene annotation file</figcaption></figure>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="differential-expression-with-limma-voom">Differential expression with limma-voom</h1>
+
+<h2 id="filtering-to-remove-lowly-expressed-genes">Filtering to remove lowly expressed genes</h2>
+
+<p>It is recommended to filter for lowly expressed genes when running the limma-voom tool. Genes with very low counts across all samples provide little evidence for differential expression and they interfere with some of the statistical approximations that are used later in the pipeline. They also add to the multiple testing burden when estimating false discovery rates, reducing power to detect differentially expressed genes. These genes should be filtered out prior to further analysis.</p>
+
+<p>There are a few ways to filter out lowly expressed genes. When there are biological replicates in each group, in this case we have a sample size of 2 in each group, we favour filtering on a minimum counts-per-million (CPM) threshold present in at least 2 samples. Two represents the smallest sample size for each group in our experiment. In this dataset, we choose to retain genes if they are expressed at a CPM above 0.5 in at least two samples. The CPM threshold selected can be compared to the raw count with the CpmPlots (see below).</p>
+
+<blockquote class="details">
+  <h3 id="details-more-details-on-filtering"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> More details on filtering</h3>
+
+  <p>The limma tool uses the <code class="highlighter-rouge">cpm</code> function from the edgeR package <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2796818/">Robinson, McCarthy, and Smyth 2010</a> to generate the CPM values which can then be filtered. Note that by converting to CPMs we are normalizing for the different sequencing depths for each sample. A CPM of 0.5 is used as it corresponds to a count of 10-15 for the library sizes in this data set. If the count is any smaller, it is considered to be very low, indicating that the associated gene is not expressed in that sample. A requirement for expression in two or more libraries is used as each group contains two replicates. This ensures that a gene will be retained if it is only expressed in one group. Smaller CPM thresholds are usually appropriate for larger libraries. As a general rule, a good threshold can be chosen by identifying the CPM that corresponds to a count of 10, which in this case is about 0.5. You should filter with CPMs rather than filtering on the counts directly, as the latter does not account for differences in library sizes between samples.</p>
+</blockquote>
+
+<h2 id="normalization-for-composition-bias">Normalization for composition bias</h2>
+
+<p>In an RNA-seq analysis, the counts are normalized for different sequencing depths between samples. Normalizing to eliminate composition biases between samples is also typically performed. Composition biases can occur, for example, if there are a few highly expressed genes dominating in some samples, leading to less reads from other genes. By default, TMM normalization <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2864565/">(Robinson and Oshlack 2010)</a> is performed by the limma tool using the edgeR <code class="highlighter-rouge">calcNormFactors</code> function (this can be changed under <strong>Advanced Options</strong>). TMM stands for Trimmed Mean of M values, where a weighted trimmed mean of the log expression ratios is used to scale the counts for the samples. See the figure from the TMM paper below. Note the plot (Figure 1c) that shows how a few highly expressed genes in the liver sample (where the arrow is) results in the majority of other genes in the sample having the appearance of being expressed lower in liver. The mid-line through the points is offset from the expected zero and the TMM normalization factor (red line) scales the counts to adjust for this.</p>
+
+<figure id="figure-7" width="50%"><img src="../../images/rna-seq-counts-to-genes/TMM.png" alt="TMM normalization" title="TMM normalization (Robinson and Oshlack 2010)" /><figcaption><span class="figcaption-prefix">Figure 7:</span> TMM normalization (Robinson and Oshlack 2010)</figcaption></figure>
+
+<h2 id="specify-contrasts-of-interest">Specify Contrast(s) of interest</h2>
+
+<p>Since we are interested in differences between groups, we need to specify which comparisons we want to test. For example, if we are interested in knowing which genes are differentially expressed between the pregnant and lactating group in the basal cells we specify <code class="highlighter-rouge">basalpregnant-basallactate</code> for the <em>Contrast of Interest</em>. Note that the group names in the contrast must exactly match the names of the groups in the <code class="highlighter-rouge">factordata</code> file. More than one contrast can be specified using the <code class="highlighter-rouge">Insert Contrast</code> button, so we could look at more comparisons of the groups here, but first we’ll take a look at <code class="highlighter-rouge">basalpregnant-basallactate</code>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-differential-expression-with-limma-voom"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Differential expression with limma-voom</h3>
+
+  <ol>
+    <li><strong>limma</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Differential Expression Method”</em>: <code class="highlighter-rouge">limma-voom</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Count Files or Matrix?</em>”: <code class="highlighter-rouge">Single Count Matrix</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Count Matrix”</em>: Select <code class="highlighter-rouge">countdata</code></li>
+          </ul>
+        </li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Input factor information from file?”</em>: <code class="highlighter-rouge">Yes</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Factor File”</em>: Select <code class="highlighter-rouge">factordata</code></li>
+          </ul>
+        </li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Use Gene Annotations?”</em>: <code class="highlighter-rouge">Yes</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Factor File”</em>: Select <code class="highlighter-rouge">annodata</code></li>
+          </ul>
+        </li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Contrast of Interest”</em>: <code class="highlighter-rouge">basalpregnant-basallactate</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Filter lowly expressed genes?”</em>: <code class="highlighter-rouge">Yes</code>
+          <ul>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Filter on CPM or Count values?”</em>: <code class="highlighter-rouge">CPM</code></li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum CPM”</em>: <code class="highlighter-rouge">0.5</code></li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum Samples”</em>: <code class="highlighter-rouge">2</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Inspect the <code class="highlighter-rouge">Report</code> produced by clicking on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon</li>
+  </ol>
+</blockquote>
+
+<h1 id="quality-control-of-count-data">Quality Control of count data</h1>
+
+<p>Before we check out the differentially expressed genes, we can look at the <code class="highlighter-rouge">Report</code> information to check that the data is good quality and that the samples are as we would expect.</p>
+
+<h2 id="multidimensional-scaling-plot">Multidimensional scaling plot</h2>
+
+<p>By far, one of the most important plots we make when we analyse RNA-Seq data are MDS plots. An MDS plot is a visualisation of a principal components analysis, which determines the greatest sources of variation in the data. A principal components analysis is an example of an unsupervised analysis, where we don’t need to specify the groups. If your experiment is well controlled and has worked well, what we hope to see is that the greatest sources of variation in the data are the treatments/groups we are interested in. It is also an incredibly useful tool for quality control and checking for outliers. This Galaxy limma tool outputs an MDS plot by default in the <code class="highlighter-rouge">Report</code> and a link is also provided to a PDF version (<code class="highlighter-rouge">MDSPlot_CellTypeStatus.pdf</code>). A scree plot is also produced that shows how much variation is attributed to each dimension. If there was a batch effect for example, you may see high values for additional dimensions. The limma tool plots the first two dimensions by default (1 vs 2), however you can also plot additional dimensions 2 vs 3 and 3 vs 4 using under <strong>Output Options</strong> Additional Plots <code class="highlighter-rouge">MDS Extra</code> These are displayed in the <code class="highlighter-rouge">Report</code> along with a link to a PDF version (<code class="highlighter-rouge">MDSPlot_extra.pdf</code>).</p>
+
+<figure id="figure-8"><img src="../../images/rna-seq-counts-to-genes/mdsscree.png" alt="MDS Plot" title="MDS Plot" /><figcaption><span class="figcaption-prefix">Figure 8:</span> MDS Plot</figcaption></figure>
+
+<p>Take a look at the MDS plot coloured by group.</p>
+
+<blockquote class="question">
+  <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>Do you notice anything about the samples in this plot?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>Two samples don’t appear to be in the right place.</p>
+
+  </blockquote>
+</blockquote>
+
+<p>It turns out that there has been a mix-up with two samples, they have been mislabelled in the sample information file. This shows how the MDS plot can also be useful to help identify if sample mix-ups may have occurred. We need to redo the limma-voom analysis with the correct sample information.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-use-the-rerun-button-to-redo-steps"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Use the Rerun button to redo steps</h3>
+
+  <ol>
+    <li>Import the correct sample information file from <code class="highlighter-rouge">https://ndownloader.figshare.com/files/5999832?private_link=1d788fd384d33e913a2a</code></li>
+    <li>Use the Rerun button in the History to redo the <strong>Merge Columns</strong> and <strong>Cut</strong> steps on the correct sample information file.</li>
+    <li>Delete the incorrect sample information datasets to avoid any confusion.</li>
+    <li>Rerun <strong>limma</strong> as before with the correct <code class="highlighter-rouge">sampleinfo</code> file and adding the following parameters:
+      <ul>
+        <li><strong>Output Options</strong>
+          <ul>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Additional Plots”</em> tick:
+              <ul>
+                <li><code class="highlighter-rouge">Density Plots (if filtering)</code></li>
+                <li><code class="highlighter-rouge">CpmsVsCounts Plots (if filtering on cpms)</code></li>
+                <li><code class="highlighter-rouge">Box Plots (if normalising)</code></li>
+                <li><code class="highlighter-rouge">MDS Extra (Dims 2vs3 and 3vs4)</code></li>
+                <li><code class="highlighter-rouge">MD Plots for individual samples</code></li>
+                <li><code class="highlighter-rouge">Heatmaps (top DE genes)</code></li>
+                <li><code class="highlighter-rouge">Stripcharts (top DE genes)</code></li>
+              </ul>
+            </li>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Output Library information file?”</em>: <code class="highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>In the <code class="highlighter-rouge">Report</code> you should then see the correct MDS plot as below.</p>
+
+<figure id="figure-9"><img src="../../images/rna-seq-counts-to-genes/mdsscree_corr.png" alt="MDS Plot" title="MDS Plot (correct samples)" /><figcaption><span class="figcaption-prefix">Figure 9:</span> MDS Plot (correct samples)</figcaption></figure>
+
+<blockquote class="details">
+  <h3 id="details-more-details-on-mds-plots"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> More details on MDS plots</h3>
+
+  <p>The distance between each pair of samples in the MDS plot is calculated as the leading fold change, defined as the root-mean-square of the largest 500 log2-fold changes between that pair of samples. Replicate samples from the same group cluster together in the plot, while samples from different groups form separate clusters. This indicates that the differences between groups are larger than those within groups, i.e., differential expression is greater than the variance and can be detected. In the MDS plot, the distance between basal samples on the left and luminal cells on the right is about 6 units, corresponding to a leading fold change of about 64-fold (2^6 = 64) between basal and luminal. The expression differences between virgin, pregnant and lactating are greater for luminal cells than for basal.</p>
+
+  <p>Clustering in the MDS plot can be used to motivate changes to the analysis in light of potential batch effects. For example, imagine that the first replicate of each group was prepared at a separate time from the second replicate. If the MDS plot showed separation of samples by time, it might be worthwhile including time as an additional factor in the differential expression analysis, to account for the time-based effect.</p>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>What is the greatest source of variation in the data (i.e. what does dimension 1 represent)?
+What is the second greatest source of variation in the data?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>Dimension 1 represents the variation due to cell type, basal vs luminal. Dimension 2 represents the variation due to the stages, virgin, pregnant or lactating.</p>
+
+  </blockquote>
+</blockquote>
+
+<p>Next, scroll down the <code class="highlighter-rouge">Report</code> to take a look at the <strong>Additional information</strong> and <strong>Summary of experimental data</strong> sections near the bottom. It should look similar to below. Here you can check that the correct samples have been assigned to the correct groups, what settings were used (e.g. filters, normalization method) and also how many genes were filtered out due to low expression.</p>
+
+<p><img src="../../images/rna-seq-counts-to-genes/report_summary.png" alt="Report summary" width="600px" /></p>
+
+<blockquote class="question">
+  <h3 id="question-question-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>How many genes have been filtered out for low expression?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>11375 genes were filtered out as insignificant as they were without more than 0.5 CPM in at least 2 samples.</p>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="density-plots">Density plots</h2>
+
+<p>Density plots can be output in the <code class="highlighter-rouge">Report</code> if <em>Filter lowly expressed genes</em> is selected. A link is also provided in the <code class="highlighter-rouge">Report</code> to a PDF version (<code class="highlighter-rouge">DensityPlots.pdf</code>). These plots allow comparison of the counts distributions before and after filtering. The samples are coloured by the groups. Count data is not normally distributed, so if we want to examine the distributions of the raw counts we need to log the counts. We typically check the distribution of the read counts on the log2 scale. A CPM value of 1 is equivalent to a log-CPM value of 0 and the CPM we used of 0.5 is equivalent to a log-CPM of -1. It can be seen in the Raw counts (before filtering) plot below, that a large proportion of genes within each sample are not expressed or lowly-expressed, and the Filtered counts plot shows our filter of CPM of 0.5 (in at least 2 samples) removes a lot of these uninformative genes.</p>
+
+<figure id="figure-10"><img src="../../images/rna-seq-counts-to-genes/densityplots.png" alt="Density Plots" title="Density Plots" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Density Plots</figcaption></figure>
+
+<p>We can also have a look more closely to see whether our threshold of 0.5 CPM does indeed correspond to a count of about 10-15 reads in each sample with the plots of CPM versus raw counts.</p>
+
+<p>The <code class="highlighter-rouge">Report</code> provides links to PDFs of all plots shown in the <code class="highlighter-rouge">Report</code> and also to the rest of the additional plots selected to be output.</p>
+
+<figure id="figure-11"><img src="../../images/rna-seq-counts-to-genes/report_plots.png" alt="Report Outputs" title="Report outputs" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Report outputs</figcaption></figure>
+
+<p>Click on the <code class="highlighter-rouge">CpmPlots.pdf</code> link in the <code class="highlighter-rouge">Report</code>. You should see 12 plots, one for each sample. Two of the plots are shown below. From these plots we can see that 0.5 CPM is equivalent to ~10 counts in each of the 12 samples, so 0.5 seems to be an appropriate threshold for this dataset (these samples all have sequencing depth of 20-30 million, see the <code class="highlighter-rouge">Library information</code> file below, so a CPM value of 0.5 would be ~10 counts).</p>
+
+<figure id="figure-12"><img src="../../images/rna-seq-counts-to-genes/cpmsvscounts.png" alt="CPM threshold Plots" title="CPM vs Raw Counts Plots" /><figcaption><span class="figcaption-prefix">Figure 12:</span> CPM vs Raw Counts Plots</figcaption></figure>
+
+<blockquote class="tip">
+  <h3 id="tip-tip"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip</h3>
+
+  <ul>
+    <li>A threshold of 1 CPM in at least minimum group sample size is a good rule of thumb for samples with about 10 million reads. For larger library sizes increase the CPM theshold and for smaller library sizes decrease it. Check the CpmPlots to see if the selected threshold looks appropriate for the samples (equivalent to ~10 reads).</li>
+  </ul>
+
+</blockquote>
+
+<h2 id="box-plots">Box plots</h2>
+
+<p>We can also use box plots to check the distributions of counts in the samples. Box plots can be selected to be output by the Galaxy limma-voom tool if normalization is applied (TMM is applied by default). The plots are output in the <code class="highlighter-rouge">Report</code> and a link is also provided to a PDF version (<code class="highlighter-rouge">BoxPlots.pdf</code>). The samples are coloured by the groups. With the box plots for these samples we can see that overall the distributions are not identical but still not very different. If a sample is really far above or below the blue horizontal line we may need to investigate that sample further.</p>
+
+<figure id="figure-13"><img src="../../images/rna-seq-counts-to-genes/boxplots.png" alt="Box Plots" title="Box Plots" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Box Plots</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-question-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>Compare the box plots before and after TMM normalisation. Can you see any differences?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>After the normalization more of the samples are closer to the median horizontal line.</p>
+
+  </blockquote>
+</blockquote>
+
+<p>The TMM normalization generates normalization factors, where the product of these factors and the library sizes defines the effective library size. TMM normalization (and most scaling normalization methods) scale relative to one sample. The normalization factors multiply to unity across all libraries. A normalization factor below one indicates that the library size will be scaled down, as there is more suppression (i.e., composition bias) in that library relative to the other libraries. This is also equivalent to scaling the counts upwards in that sample. Conversely, a factor above one scales up the library size and is equivalent to downscaling the counts. We can see the normalization factors for these samples in the <code class="highlighter-rouge">Library information</code> file that we selected to output. Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon to view.</p>
+
+<figure id="figure-14"><img src="../../images/rna-seq-counts-to-genes/libinfo.png" alt="Library Info file" title="Library information file" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Library information file</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-question-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>Which sample has the largest normalization factor? Which sample has the smallest?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>MCL1.LA has the largest normalization factor and MCL1.LE the smallest.</p>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="md-plots-for-samples">MD plots for samples</h2>
+
+<p>It is considered good practice to make mean-difference (MD) plots for all the samples as a quality check, as described in this <a href="https://f1000research.com/articles/5-1438/v2">edgeR workflow article</a>. These plots allow expression profiles of individual samples to be explored more closely. An MD plot shows the log-fold change between a sample against the average expression across all the other samples. This visualisation can help you see if there are genes highly upregulated or downregulated in a sample. If we look at mean difference plots for these samples, we should be able to see the composition bias problem. The mean-difference plots show average expression (mean: x-axis) against log-fold-changes (difference: y-axis).</p>
+
+<p>Click on the <code class="highlighter-rouge">MDPlots_Samples.pdf</code> link in the <code class="highlighter-rouge">Report</code>. You should see 12 MD plots, one for each sample. Let’s take a look at the plots for the two samples MCL1.LA and MCL1.LE that had the largest and smallest normalization factors. The MD plots on the left below show the counts normalized for library size and the plots on the right show the counts after the TMM normalization has been applied. MCL1.LA had the largest normalization factor and was above the median line in the unnormalized by TMM box plots. MCL1.LE had the smallest normalization factor and was below the median line in the box plots. These MD plots help show the composition bias problem has been addressed.</p>
+<figure id="figure-15"><img src="../../images/rna-seq-counts-to-genes/mdsampleLA.png" alt="MD Plot LA" title="MD Plots for MCL1.LA before and after TMM normalization" /><figcaption><span class="figcaption-prefix">Figure 15:</span> MD Plots for MCL1.LA before and after TMM normalization</figcaption></figure>
+<figure id="figure-16"><img src="../../images/rna-seq-counts-to-genes/mdsampleLE.png" alt="MD Plot LE" title="MD Plots for MCL1.LE before and after TMM normalization" /><figcaption><span class="figcaption-prefix">Figure 16:</span> MD Plots for MCL1.LE before and after TMM normalization</figcaption></figure>
+
+<h2 id="voom-variance-plot">Voom variance plot</h2>
+
+<p>This plot is generated by the voom method and displayed in the <code class="highlighter-rouge">Report</code> along with a link to a PDF version (<code class="highlighter-rouge">VoomPlot.pdf</code>). It shows the mean-variance relationship of the genes in the dataset. It can help show if low counts have been filtered adequately and if there is a lot of variation in the data.</p>
+
+<figure id="figure-17"><img src="../../images/rna-seq-counts-to-genes/voomplot.png" alt="Voom Plot" title="Voom Plot" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Voom Plot</figcaption></figure>
+
+<blockquote class="details">
+  <h3 id="details-more-details-on-voom-variance-plots"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> More details on Voom variance plots</h3>
+
+  <p>If we didn’t filter this dataset for the lowly expressed genes the variance plot would look like below.</p>
+
+  <figure id="figure-18"><img src="../../images/rna-seq-counts-to-genes/voomplot_nofilt.png" alt="Voom Nofilter Plot" title="Voom Plot unfiltered counts" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Voom Plot unfiltered counts</figcaption></figure>
+
+  <p>If we look at the plot generated with the two samples mixed up we can see there’s more variation.</p>
+
+  <figure id="figure-19"><img src="../../images/rna-seq-counts-to-genes/voomplot_mixed.png" alt="Voom Mixedup Plot" title="Voom Plot mixed-up samples" /><figcaption><span class="figcaption-prefix">Figure 19:</span> Voom Plot mixed-up samples</figcaption></figure>
+
+  <p>More examples of the variation this plot can show can be seen in Figure 1 from the <a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2014-15-2-r29">limma-voom</a> paper, shown below.</p>
+
+  <figure id="figure-20"><img src="../../images/rna-seq-counts-to-genes/voom_variance_examples.jpg" alt="Voom Plot Examples" title="Voom Plot more examples" /><figcaption><span class="figcaption-prefix">Figure 20:</span> Voom Plot more examples</figcaption></figure>
+
+  <p><em>Figure 1: Mean-variance relationships. Gene-wise means and variances of RNA-seq data are represented by black points with a LOWESS trend. Plots are ordered by increasing levels of biological variation in datasets. (a) voom trend for HBRR and UHRR genes for Samples A, B, C and D of the SEQC project; technical variation only. (b) C57BL/6J and DBA mouse experiment; low-level biological variation. (c) Simulation study in the presence of 100 upregulating genes and 100 downregulating genes; moderate-level biological variation. (d) Nigerian lymphoblastoid cell lines; high-level biological variation. (e) Drosophila melanogaster embryonic developmental stages; very high biological variation due to systematic differences between samples. (f) LOWESS voom trends for datasets (a)–(e). HBRR, Ambion’s Human Brain Reference RNA; LOWESS, locally weighted regression; UHRR, Stratagene’s Universal Human Reference RNA</em>.</p>
+</blockquote>
+
+<h2 id="md-and-volcano-plots-for-de-results">MD and Volcano plots for DE results</h2>
+
+<p>Genome-wide plots that are useful for checking differentially expressed (DE) results are MD plots (or MA plots) and Volcano plots. There are functions in limma for generating these plots and they are used by this tool. These plots are output by default and shown in the <code class="highlighter-rouge">Report</code> along with a link to PDF versions (<code class="highlighter-rouge">MDPlot_basalpregnant-basallactate.pdf</code> and <code class="highlighter-rouge">VolcanoPlot_basalpregnant-basallactate.pdf</code>). In the volcano plot the top genes (by adjusted p-value) are highlighted. The number of top genes is 10 by default and the user can specify the number of top genes to view (up to 100) under <strong>Advanced Options</strong>.</p>
+
+<figure id="figure-21"><img src="../../images/rna-seq-counts-to-genes/mdvolplot_basalpregnant-basallactate.png" alt="MDVol Plot" title="MD Plot and Volcano Plot" /><figcaption><span class="figcaption-prefix">Figure 21:</span> MD Plot and Volcano Plot</figcaption></figure>
+
+<p>The MD Plot highlighted genes are significant at an adjusted p-value (adj.P) threshold of 0.05 and exhibit log2-fold-change (lfc) of at least 0. These thresholds can be changed under <strong>Advanced Options</strong>.</p>
+
+<blockquote class="question">
+  <h3 id="question-question-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>How many genes are differentially expressed at the default thresholds of adj.P=0.05 and lfc=0?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>The number of DE genes at these adj.P and lfc thresholds is shown in the table in the <code class="highlighter-rouge">Report</code> as below.</p>
+
+    <p><img src="../../images/rna-seq-counts-to-genes/decounts.png" alt="DE counts" width="500px" /></p>
+
+  </blockquote>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-comment-on-adjusted-p-value"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment on adjusted P value</h3>
+
+  <p><strong>A note about deciding how many genes are significant</strong>: In order to decide which genes are differentially expressed, we usually take a cut-off (e.g. 0.05 or 0.01) on the adjusted p-value, NOT the raw p-value. This is because we are testing many genes (more than 15000 genes here), and the chances of finding differentially expressed genes is very high when you do that many tests. Hence we need to control the false discovery rate, which is the adjusted p-value column in the results table. What this means is that, if we choose an adjusted p-value cut-off of 0.05, and if 100 genes are significant at a 5% false discovery rate, we are willing to accept that 5 will be false positives.</p>
+</blockquote>
+
+<h1 id="testing-relative-to-a-threshold-treat">Testing relative to a threshold (TREAT)</h1>
+
+<p>When there is a lot of differential expression, sometimes we may want to cut-off on a fold change threshold, as well as a p-value threshold, so that we follow up on the most biologically significant genes. However, it is not recommended to simply rank by p-value and then discard genes with small logFC’s, as this has been shown to increase the false discovery rate. In other words, you are not controlling the false discovery rate at 5% any more. There is a function called <code class="highlighter-rouge">treat</code> in limma that performs this style of analysis correctly <a href="https://www.ncbi.nlm.nih.gov/pubmed/19176553">(McCarthy and Smyth 2009)</a>. TREAT will simply take a user-specified log fold change cut-off and recalculate the moderated t-statistics and p-values with the new information about logFC. There are thousands of genes differentially expressed in this <code class="highlighter-rouge">basalpregnant-basallactate</code> comparison, so let’s rerun the analysis applying TREAT and similar thresholds to what was used in the Fu paper: an adjusted P value of 0.01 (1% false discovery rate) and a log-fold-change cutoff of 0.58 (equivalent to a fold change of 1.5).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-testing-relative-to-a-threshold-treat"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Testing relative to a threshold (TREAT)</h3>
+
+  <ol>
+    <li>Rerun <strong>limma</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“<strong>Output Options</strong>”</em>
+          <ul>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> “Output Library information file?”: <code class="highlighter-rouge">No</code></li>
+          </ul>
+        </li>
+        <li><em>“<strong>Advanced Options</strong>”</em>
+          <ul>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum Log2 Fold Change”</em>: <code class="highlighter-rouge">0.58</code></li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“P-Value Adjusted Threshold”</em>: <code class="highlighter-rouge">0.01</code></li>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Test significance relative to a fold-change threshold (TREAT)”</em>: <code class="highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Inspect the <code class="highlighter-rouge">Report</code></li>
+  </ol>
+</blockquote>
+
+<p>We can see that much fewer genes are now highlighted in the MD plot and identified as differentially expressed.</p>
+
+<figure id="figure-22"><img src="../../images/rna-seq-counts-to-genes/TREAT_mdvolplot_basalpregnant-basallactate.png" alt="TREAT MDVol Plot" title="TREAT MD and Volcano plots" /><figcaption><span class="figcaption-prefix">Figure 22:</span> TREAT MD and Volcano plots</figcaption></figure>
+
+<figure id="figure-23" width="400px"><img src="../../images/rna-seq-counts-to-genes/TREATdecounts.png" alt="TREAT DE counts" title="TREAT differentially expressed genes" /><figcaption><span class="figcaption-prefix">Figure 23:</span> TREAT differentially expressed genes</figcaption></figure>
+
+<h1 id="visualising-results">Visualising results</h1>
+
+<p>Before following up on the DE genes with further lab work, it is recommended to have a look at the expression levels of the individual samples for the genes of interest. The Galaxy limma tool can auto-generate heatmaps of the top genes to show the expression levels across the <em>samples</em>. This enables a quick view of the expression of the top differentially expressed genes. This can help show if expression is consistent between replicates in the groups.</p>
+
+<h2 id="heatmap-of-top-genes">Heatmap of top genes</h2>
+
+<p>Click on the <code class="highlighter-rouge">Heatmap_basalpregnant-basallactate.pdf</code> link in the <code class="highlighter-rouge">Report</code>. You should see a plot like below.</p>
+
+<figure id="figure-24"><img src="../../images/rna-seq-counts-to-genes/heatmap.png" alt="Heatmap" title="Heatmap of top genes" /><figcaption><span class="figcaption-prefix">Figure 24:</span> Heatmap of top genes</figcaption></figure>
+
+<h2 id="stripcharts-of-top-genes">Stripcharts of top genes</h2>
+
+<p>The limma-voom tool can also auto-generate stripcharts to view the expression of the top genes across the <em>groups</em>. Click on the <code class="highlighter-rouge">Stripcharts_basalpregnant-basallactate.pdf</code> link in the <code class="highlighter-rouge">Report</code>. You should see 10 plots, one for each top gene. Four are shown below. Note that here you can see if replicates tend to group together and how the expression compares to the other groups.</p>
+
+<figure id="figure-25" width="950px"><img src="../../images/rna-seq-counts-to-genes/stripcharts.png" alt="Stripchart Plot" title="Stripcharts of top genes" /><figcaption><span class="figcaption-prefix">Figure 25:</span> Stripcharts of top genes</figcaption></figure>
+
+<h2 id="interactive-plots-glimma">Interactive plots (Glimma)</h2>
+
+<p>An interactive version of the mean-difference plots is output by the limma-voom tool via the <a href="https://github.com/Shians/Glimma">Glimma</a> package, if a gene annotation file is provided. A link to a html page is generated in the <code class="highlighter-rouge">Report</code> that allows the user to search for their favourite gene.</p>
+
+<p>Click on the <code class="highlighter-rouge">Glimma_MDPlot_basalpregnant-basallactate.html</code> link in the <code class="highlighter-rouge">Report</code>. You should see a two-panel interactive MD plot like below. The left plot shows the log-fold-change vs average expression. The right plot shows the expression levels of a particular gene of each sample by groups (similar to the stripcharts). Hovering over points on left plot will plot expression level for corresponding gene, clicking on points will fix the expression plot to gene. Clicking on rows on the table has the same effect as clicking on the corresponding gene in the plot.</p>
+
+<iframe src="../../images/rna-seq-counts-to-genes/glimma/MD-Plot.html" width="100%" height="1000"></iframe>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-search-for-a-gene-of-interest"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Search for a gene of interest</h3>
+
+  <p><code class="highlighter-rouge">Egf</code> was a gene identifed as very highly expressed in the Fu paper and confirmed with qRT-PCR, see Fig. 6c from the paper below.</p>
+  <figure id="figure-26"><img src="../../images/rna-seq-counts-to-genes/fu_egf.png" alt="Fu EGF gene" title="Fu et al, Nat Cell Biol 2015" /><figcaption><span class="figcaption-prefix">Figure 26:</span> Fu et al, Nat Cell Biol 2015</figcaption></figure>
+
+  <p>Search for <code class="highlighter-rouge">Egf</code> in the Glimma interactive table. You should see something similar to below.</p>
+
+  <figure id="figure-27"><img src="../../images/rna-seq-counts-to-genes/glimma_egf.png" alt="Glimma EGF gene" title="Glimma EGF gene" /><figcaption><span class="figcaption-prefix">Figure 27:</span> Glimma EGF gene</figcaption></figure>
+
+  <p>Notice that in the plot on the right above, showing <code class="highlighter-rouge">Egf</code> expression for all samples, we can see it is highly expressed in the luminal lactate group but not the other samples.</p>
+</blockquote>
+
+<p>Multiple contrasts can be run with the limma tool. For example, we can compare the pregnant and lactating conditions for both the basal and luminal cells. So let’s rerun the limma-voom TREAT analysis (adj.P &lt;0.01 and lfc=0.58) and this time use the <code class="highlighter-rouge">Insert Contrast</code> button to include the additional contrast <code class="highlighter-rouge">luminalpregnant - luminallactate</code>. We can then see how the number of differentially expressed genes in the luminal cells compares to the basal cells.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-run-multiple-contrasts"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run multiple contrasts</h3>
+
+  <ol>
+    <li>Rerun <strong>limma</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> adding the following parameters <em>(i.e. run with 2 contrasts)</em>:
+      <ul>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Contrast of Interest”</em>: <code class="highlighter-rouge">basalpregnant-basallactate</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Contrast of Interest”</em>: <code class="highlighter-rouge">luminalpregnant-luminallactate</code></li>
+        <li><em>“<strong>Advanced Options</strong>”</em>
+          <ul>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum Log2 Fold Change”</em>: <code class="highlighter-rouge">0.58</code></li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“P-Value Adjusted Threshold”</em>: <code class="highlighter-rouge">0.01</code></li>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Test significance relative to a fold-change threshold (TREAT)”</em>: <code class="highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Inspect the <code class="highlighter-rouge">Report</code></li>
+  </ol>
+
+  <p>You should find that there are more genes differentially expressed for the luminal cells than the basal. There are ~274 genes DE in basal cells versus ~ 1610 in the luminal cells.</p>
+  <figure id="figure-28" width="50%"><img src="../../images/rna-seq-counts-to-genes/basal_luminal_decounts.png" alt="Basal Luminal DE counts" title="Basal vs Luminal DE counts" /><figcaption><span class="figcaption-prefix">Figure 28:</span> Basal vs Luminal DE counts</figcaption></figure>
+
+  <p>This is similar to what Fu et al found, many more genes differentially expressed in the luminal cells on lactation, compared to the basal cells.</p>
+  <figure id="figure-29" width="25%"><img src="../../images/rna-seq-counts-to-genes/fu_degenes.png" alt="Fu DE genes" title="Fu et al, Nat Cell Biol 2015" /><figcaption><span class="figcaption-prefix">Figure 29:</span> Fu et al, Nat Cell Biol 2015</figcaption></figure>
+</blockquote>
+
+<p>The tables of differentially expressed genes are output as links in the <code class="highlighter-rouge">Report</code> (<code class="highlighter-rouge">limma-voom_basalpregnant-basallactate.tsv</code> and <code class="highlighter-rouge">limma-voom_luminalpregnant-luminallactate.tsv</code>), see below, and also as datasets in the history (<code class="highlighter-rouge">DE tables</code>). With multiple contrasts, a plot for each contrast is generated for relevant plots, as shown below. This enables a quick and easy visual comparison of the contrasts.</p>
+
+<figure id="figure-30"><img src="../../images/rna-seq-counts-to-genes/multiple_contrasts.png" alt="Multiple contrasts" title="Multiple contrasts output" /><figcaption><span class="figcaption-prefix">Figure 30:</span> Multiple contrasts output</figcaption></figure>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip</h3>
+
+  <p>The <code class="highlighter-rouge">Report</code> with all the plots and tables can be downloaded by clicking on the floppy disk icon on the dataset in the history as shown below.</p>
+  <figure id="figure-31" width="20%"><img src="../../images/rna-seq-counts-to-genes/download_report.png" alt="Report download" title="Download limma report" /><figcaption><span class="figcaption-prefix">Figure 31:</span> Download limma report</figcaption></figure>
+
+</blockquote>
+
+<p>To see some methods for identifying differentially expressed pathways in this dataset, see the follow-on tutorial <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html">RNA-seq genes to pathways</a>. To see how to create a heatmap of custom genes using this dataset, see the tutorial <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html">Visualization of RNA-Seq results with heatmap2</a></p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this tutorial we have seen how counts files can be converted into differentially expressed genes with limma-voom. This follows on from the accompanying tutorial, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">RNA-seq reads to counts</a>, that showed how to generate counts from the raw reads (FASTQs) for this dataset. In this part we have seen ways to visualise the count data, and QC checks that can be performed to help assess the quality and results. We have also reproduced results similar to what the authors found in the original paper with this dataset. For further reading on analysis of RNA-seq count data and the methods used here, see the articles; RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR <a href="https://f1000research.com/articles/5-1408/v2">(Law et al. 2016)</a> and From reads to genes to pathways: differential expression analysis of RNA-Seq experiments using Rsubread and the edgeR quasi-likelihood pipeline <a href="https://f1000research.com/articles/5-1438/v2">(Chen, Lun, Smyth 2016)</a>.</p>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+            <ul>
+                
+                <li>The limma-voom tool can be used to perform differential expression and output useful plots</li>
+                
+                <li>Multiple comparisons can be input and compared</li>
+                
+                <li>Results can be interactively explored with limma-voom via Glimma</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+        <h1>Useful literature</h1>
+        <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=RNA-seq counts to genes (Transcriptomics)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=RNA-seq counts to genes (Transcriptomics)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anna Trigos, Belinda Phipson, Charity Law, Harriet Dashnow, Maria Doyle, Matt Ritchie)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>

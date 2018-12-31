@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>RNA-seq genes to pathways</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:title" content="Galaxy Training: RNA-seq genes to pathways" />
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body>
+        
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/transcriptomics" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Transcriptomics
+                        </a>
+                    </li>
+
+                    
+                    
+                    
+
+                    
+                        
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    
+                                        
+                                            
+                                                <a class="dropdown-item" href="/training-material/topics/transcriptomics/slides/introduction.html">
+                                                    Introduction to Transcriptomics
+                                                </a>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                </div>
+                            </li>
+                        
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://zenodo.org/record/2491305" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/transcriptomics#references" title="References">
+                            <i class="fa fa-bookmark" aria-hidden="true"></i><span class="visually-hidden">references</span> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-genes-to-pathways%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-genes-to-pathways%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-genes-to-pathways%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-genes-to-pathways%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-genes-to-pathways%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+   
+{
+  "@context": "http://schema.org",
+  "@type": "CreativeWork",
+  "name": "RNA-seq genes to pathways",
+  "accessModeSufficient": "visual",
+  "accessibilityControl": "fullMouseControl",
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "learningResourceType": "",
+  "url": "/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/record/2491305",
+      "name": "Training data for RNA-seq genes to pathways tutorial"
+    }
+  ],
+  "timeRequired": "PT2H",
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "mblue9"
+    },
+    {
+      "@type": "Person",
+      "name": "bphipson"
+    },
+    {
+      "@type": "Person",
+      "name": "annatrigos"
+    },
+    {
+      "@type": "Person",
+      "name": "mritchie"
+    },
+    {
+      "@type": "Person",
+      "name": "hdashnow"
+    },
+    {
+      "@type": "Person",
+      "name": "charitylaw"
+    }
+  ],
+  "keywords": "mouse",
+  "description": "The questions this  addresses are:\n - What are the differentially expressed pathways in the mammary gland of pregnant versus lactating mice?\n\n\\nThe objectives are:\n - Identification of differentially expressed pathways\n\n"
+}
+
+    </script>
+    <section class="tutorial">
+        <h1>RNA-seq genes to pathways</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>What are the differentially expressed pathways in the mammary gland of pregnant versus lactating mice?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>Identification of differentially expressed pathways</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Quality Control:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                            
+                            <li> Mapping:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                - <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours</p>
+            
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Sometimes there is quite a long list of genes to interpret after a differential expression analysis, and it is usually infeasible to go through the list one gene at a time trying to understand it’s biological function. A common downstream procedure is gene set testing, which aims to understand which pathways/gene networks the differentially expressed genes are implicated in. There are many different gene set testing methods that can be applied and it can be useful to try several.</p>
+
+<p>The purpose of this tutorial is to demonstrate how to perform gene set testing using tools in Galaxy. The data comes from a Nature Cell Biology paper, <a href="https://www.ncbi.nlm.nih.gov/pubmed/25730472">EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival</a>), Fu et al. 2015. That study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice (see Figure below). How to generate differentially expressed genes from reads (FASTQs) for this dataset is covered in the accompanying tutorials <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">RNA-seq reads to counts</a> and <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a>. This tutorial is inspired by material from the COMBINE R RNAseq workshop <a href="http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html">here</a> and the Cancer Research UK workshop <a href="https://bioinformatics-core-shared-training.github.io/cruk-summer-school-2018/RNASeq2018/html/06_Gene_set_testing.nb.html">here</a></p>
+
+<figure id="figure-1"><img src="../../images/rna-seq-reads-to-counts/mouse_exp.png" alt="Tutorial Dataset" title="Tutorial Dataset" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Tutorial Dataset</figcaption></figure>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#import-data" id="markdown-toc-import-data">Import data</a></li>
+  <li><a href="#gene-set-testing" id="markdown-toc-gene-set-testing">Gene Set Testing</a>    <ol>
+      <li><a href="#gene-ontology-testing-with-goseq" id="markdown-toc-gene-ontology-testing-with-goseq">Gene Ontology testing with <strong>goseq</strong></a></li>
+      <li><a href="#gene-set-enrichment-analysis-with-fgsea" id="markdown-toc-gene-set-enrichment-analysis-with-fgsea">Gene Set Enrichment Analysis with <strong>fgsea</strong></a></li>
+      <li><a href="#ensemble-gene-set-enrichment-analyses-with-egsea" id="markdown-toc-ensemble-gene-set-enrichment-analyses-with-egsea">Ensemble gene set enrichment analyses with <strong>EGSEA</strong></a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-note-results-may-vary"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note: results may vary</h3>
+
+  <p>Your results may be slightly different from the ones presented in this tutorial
+due to differing versions of tools, reference data, external databases, or
+because of stochastic processes in the algorithms.</p>
+
+</blockquote>
+
+<p>We will use several files for this analysis:</p>
+
+<ul>
+  <li><strong>Differentially expressed results files</strong> (genes in rows, logFC and P values in columns)</li>
+  <li><strong>Sample information</strong> file (sample id, group)</li>
+  <li><strong>Gene lengths file</strong> (genes, lengths)</li>
+  <li><strong>Filtered counts file</strong> (genes in rows, counts for samples in columns, with lowly expressed genes removed)</li>
+  <li><strong>Gene sets file</strong> for MSigDB Hallmark collection for mouse (rdata)</li>
+</ul>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-files-for-this-tutorial"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Files for this tutorial</h3>
+
+  <p>If you completed the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a> tutorial you should already have most of these files in your history. You only need to import the mouse_hallmark_sets and limma-voom_filtered_counts files from the files in the Hands-on box below.</p>
+
+</blockquote>
+
+<h1 id="import-data">Import data</h1>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this RNA-seq exercise e.g. <code class="highlighter-rouge">RNA-seq genes to pathways</code></li>
+    <li>
+      <p>Import the files</p>
+
+      <p>To import the files, there are two options:</p>
+      <ul>
+        <li>Option 1: From a shared data library if available (ask your instructor)</li>
+        <li>
+          <p>Option 2: From <a href="https://zenodo.org/record/2491305">Zenodo</a></p>
+
+          <blockquote class="tip">
+            <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+            <ul>
+              <li>Copy the link location</li>
+              <li>Open the Galaxy Upload Manager</li>
+              <li>Select <strong>Paste/Fetch Data</strong></li>
+              <li>Paste one link into the text field</li>
+              <li>Give the dataset a Name (replace “New File”)</li>
+              <li>Select <strong>Paste/Fetch Data</strong> and repeat for each link</li>
+              <li>Press <strong>Start</strong></li>
+            </ul>
+          </blockquote>
+
+          <ul>
+            <li>You can paste the names and links below into the Upload tool:</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Name                                      Link
+limma-voom_basalpregnant-basallactate     https://zenodo.org/record/2491305/files/limma-voom_basalpregnant-basallactate
+limma-voom_luminalpregnant-luminallactate https://zenodo.org/record/2491305/files/limma-voom_luminalpregnant-luminallactate
+seqdata                                   https://zenodo.org/record/2491305/files/seqdata
+mouse_hallmark_sets                       https://zenodo.org/record/2491305/files/mouse_hallmark_sets
+factordata                                https://zenodo.org/record/2491305/files/factordata
+limma-voom_filtered_counts                https://zenodo.org/record/2491305/files/limma-voom_filtered_counts
+</code></pre></div>  </div>
+
+  <ol>
+    <li>
+      <p>Make a collection (list) out of the basal and luminal differentially expressed results files. Give it the name <code class="highlighter-rouge">DE tables</code>.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-build-a-dataset-list"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Build a dataset list</h3>
+        <ul>
+          <li>Click on <i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Operations on multiple datasets</strong> at the top of the history panel</li>
+          <li>Check the boxes next the datasets to select</li>
+          <li>In <strong>For all selected…</strong>, choose <strong>Build dataset list</strong></li>
+          <li>Ensure that only the wanted samples are selected</li>
+          <li>Enter a name for the new collection</li>
+          <li>Click on <strong>Create list</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="gene-set-testing">Gene Set Testing</h1>
+
+<h2 id="gene-ontology-testing-with-goseq">Gene Ontology testing with <strong>goseq</strong></h2>
+
+<p>We would like to know if there are biological categories that are enriched among the differentially expressed genes. To do this we will perform a Gene Ontology analysis, similar to the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">RNA-seq ref-based tutorial</a>.</p>
+
+<p><a href="http://www.geneontology.org/">Gene Ontology (GO)</a> analysis is widely used to reduce complexity and highlight biological processes in genome-wide expression studies. However, standard methods give biased results on RNA-seq data due to over-detection of differential expression for long and highly-expressed transcripts.</p>
+
+<p><a href="https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf">goseq tool</a> provides methods for performing GO analysis of RNA-seq data, taking length bias into account. The methods and software used by goseq are equally applicable to other category based tests of RNA-seq data, such as KEGG pathway analysis.</p>
+
+<p>goseq needs 2 files as inputs:</p>
+<ul>
+  <li>a <strong>differentially expressed genes</strong> file. Information for all genes tested for differential expression (all genes after filtering lowly expressed). This file should have 2 columns:
+    <ul>
+      <li>the Gene IDs (unique within the file)</li>
+      <li>True (differentially expressed) or False (not differentially expressed)</li>
+    </ul>
+  </li>
+  <li>a <strong>gene lengths</strong> file. Information to correct for potential length bias in differentially expressed genes. This file should have 2 columns:
+    <ul>
+      <li>the Gene IDs (unique within the file)</li>
+      <li>the gene lengths</li>
+    </ul>
+  </li>
+</ul>
+
+<p>We need a table of differentially expressed (DE) results for goseq. Here we will use two tables, one for each of the basal and luminal pregnant vs lactate results. This is so we can compare results for the two cell types. These tables were output from the limma-voom tool but DE tables from edgeR or DESeq2 could also be used. For this dataset we will call genes differentially expressed if they have an adjusted P value below 0.01 and a fold change of 1.5 (equivalent to a <script type="math/tex">log_{2} FC</script> of 0.58), as in the Fu paper. We can use the gene lengths from the counts table in GEO (provided as a file called <code class="highlighter-rouge">seqdata</code> in Zenodo). But if we didn’t have that we could use a tool like <strong>featureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to output a gene lengths file. The <code class="highlighter-rouge">seqdata</code> file contains &gt;20k genes, but we only want the ~15k we have in our differentially expressed genes file. So we will join the lengths file with the differentially expressed genes file, keeping only the length information for genes present in the differentially expressed genes file. We can then cut out the columns we need for the two inputs (gene id, length) (gene id, DE status) and as a bonus they will both be sorted in the same order, which is what we need for goseq.</p>
+
+<p>To generate the two input files we will use:</p>
+<ul>
+  <li><strong>Compute</strong> to add a column to the DE tables, that gives genes meeting our adj.P and lfc thresholds the value “True” and all other genes the value “False”. We want genes that have a lfc &lt; -0.58 (downregulated) and lfc &gt; 0.58 (upregulated). We could use separate filters (e.g. <code class="highlighter-rouge">bool(c4&lt;-0.58) or bool(c4&gt;0.58)</code>) or more simply, we can use the absolute (abs) value 0.58, where the minus sign is ignored.</li>
+  <li><strong>Join two Datasets</strong> to add the gene length information to the differentially expressed genes, matching on gene ids</li>
+  <li><strong>Cut</strong> to extract the two columns for the differentially expressed genes information</li>
+  <li><strong>Cut</strong> to extract the two columns for the gene length information</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-prepare-the-two-inputs-for-goseq"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Prepare the two inputs for GOSeq</h3>
+
+  <ol>
+    <li><strong>Compute an expression on every row</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Add expression”</em>: <code class="highlighter-rouge">bool(c8&lt;0.01) and bool(abs(c4)&gt;0.58)</code> (adj.P &lt; 0.01 and lfc of 0.58)</li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“as a new column to”</em>: the <code class="highlighter-rouge">DE tables</code> collection</li>
+      </ul>
+    </li>
+    <li><strong>Join two Datasets side by side on a specified field</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Join”</em>: output of <strong>Compute</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“using column”</em>: <code class="highlighter-rouge">Column: 1</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“with”</em> the <code class="highlighter-rouge">seqdata</code> file</li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“and column”</em>: <code class="highlighter-rouge">Column: 1</code></li>
+      </ul>
+    </li>
+    <li><strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Cut columns”</em>: <code class="highlighter-rouge">c1,c9</code> (the gene ids and DE status)</li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“From”</em>: output of <strong>Join</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>Rename to <code class="highlighter-rouge">goseq DE status</code></li>
+      </ul>
+    </li>
+    <li><strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Cut columns”</em>: <code class="highlighter-rouge">c1,c11</code> (the gene ids and lengths)</li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“From”</em>: output of <strong>Join</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>Rename to <code class="highlighter-rouge">goseq gene lengths</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>We now have the two required input files for goseq for both our basal and luminal contrasts.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-perform-go-analysis"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Perform GO analysis</h3>
+
+  <ol>
+    <li><strong>goseq</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <ul>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Differentially expressed genes file”</em>: <code class="highlighter-rouge">goseq DE status</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene lengths file”</em>: <code class="highlighter-rouge">goseq gene lengths</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Gene categories”</em>:  <code class="highlighter-rouge">Get categories</code>
+          <ul>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select a genome to use”</em>:  <code class="highlighter-rouge">Mouse(mm10)</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select Gene ID format”</em>:  <code class="highlighter-rouge">Entrez Gene ID</code></li>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Select one or more categories”</em>: <code class="highlighter-rouge">GO: Biological Process</code></li>
+          </ul>
+        </li>
+        <li><em>“Output Options”</em>
+          <ul>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Output Top GO terms plot?”</em> <code class="highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>goseq generates a big table with the following columns for each GO term:</p>
+<ol>
+  <li><code class="highlighter-rouge">category</code>: GO category</li>
+  <li><code class="highlighter-rouge">over_rep_pval</code>: <em>p</em>-value for over representation of the term in the differentially expressed genes</li>
+  <li><code class="highlighter-rouge">under_rep_pval</code>: <em>p</em>-value for under representation of the term in the differentially expressed genes</li>
+  <li><code class="highlighter-rouge">numDEInCat</code>: number of differentially expressed genes in this category</li>
+  <li><code class="highlighter-rouge">numInCat</code>: number of genes in this category</li>
+  <li><code class="highlighter-rouge">term</code>: detail of the term</li>
+  <li><code class="highlighter-rouge">ontology</code>: MF (Molecular Function - molecular activities of gene products), CC (Cellular Component - where gene products are active), BP (Biological Process - pathways and larger processes made up of the activities of multiple gene products)</li>
+  <li><code class="highlighter-rouge">p.adjust.over_represented</code>: <em>p</em>-value for over representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure</li>
+  <li><code class="highlighter-rouge">p.adjust.under_represented</code>: <em>p</em>-value for over representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure</li>
+</ol>
+
+<p>To identify categories significantly enriched/unenriched below some p-value cutoff, it is necessary to use the adjusted <em>p</em>-value.</p>
+
+<p>A plot of the top 10 over-represented GO terms (by adjusted <em>p</em>-value) can be output from the goseq tool to help visualise results. Note that the top 10 are selected by adjusted p-value so if there are multiple terms with the same value there will be more than 10 terms in the plot. Click on the <code class="highlighter-rouge">Top over-represented GO terms plot</code> in the history. There should be 2 PDFs, one for each contrast, that look similar to below.</p>
+
+<figure id="figure-2"><img src="../../images/rna-seq-genes-to-pathways/basal_top_GO.png" alt="Basal Plot" title="Basal pregnant vs lactating top 10 GO terms" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Basal pregnant vs lactating top 10 GO terms</figcaption></figure>
+
+<figure id="figure-3"><img src="../../images/rna-seq-genes-to-pathways/luminal_top_GO.png" alt="Luminal Plot" title="Luminal pregnant vs lactating top 10 GO terms" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Luminal pregnant vs lactating top 10 GO terms</figcaption></figure>
+
+<p>The Fu paper also used goseq and found enrichment for cell contractility genes in the basal cells and enrichment in the luminal cells for general metabolic processes, lipid biosynthesis and transport proteins, and .</p>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Take a look at the top 10 GO plots for the luminal and basal contrast. How do you think they compare to what the authors found?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>The top 10 GO terms seem to describe similar processes to what the authors found.</p>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="gene-set-enrichment-analysis-with-fgsea">Gene Set Enrichment Analysis with <strong>fgsea</strong></h2>
+
+<p>Gene Set Enrichment Analysis (GSEA) <a href="https://www.ncbi.nlm.nih.gov/pubmed/16199517">(Subramanian et al., 2005)</a> is a widely used method that determines whether a set of genes is enriched in a list of differentially expressed genes. Unlike the previous method with goseq, no threshold is applied for what is considered “differentially expressed”, all genes are used. If a gene set falls at either the top (over-expressed) or bottom (under-expressed) of the list it is said to be enriched. <a href="https://www.biorxiv.org/content/early/2016/06/20/060012">fgsea</a> is a faster implementation of the GSEA method. fgsea requires a ranked list of genes and some gene sets to test.</p>
+
+<p>The <a href="http://software.broadinstitute.org/gsea/msigdb/index.jsp">Molecular Signatures Database (MSigDB)</a> contains curated collections of gene sets that are commonly used in a GSEA analysis. They can be downloaded from the <a href="http://software.broadinstitute.org/gsea/downloads.jsp">Broad website</a>. But these collections are only of human gene sets. If working with another species you would need to first map the genes to their human orthologues. However, MSigDB versions for mouse are provided <a href="http://bioinf.wehi.edu.au/software/MSigDB/index.html">by the Smyth lab here</a>. There are several MSigDB collections, we’ll use the <a href="https://www.cell.com/cell-systems/fulltext/S2405-4712(15)00218-5">Hallmark collection</a>, which contains 50 gene sets. According to MSigDB, “each gene set in the hallmark collection consists of a “refined” gene set, derived from multiple “founder” sets, that conveys a specific biological state or process and displays coherent expression. The hallmarks effectively summarize most of the relevant information of the original founder sets and, by reducing both variation and redundancy, provide more refined and concise inputs for gene set enrichment analysis”.  We’ll use the mouse Hallmark file provided in Zenodo, originally downloaded from http://bioinf.wehi.edu.au/software/MSigDB/mouse_H_v5p2.rdata.</p>
+
+<p>There are several ways we could choose to rank our genes, we could rank by log-fold change (most upregulated to most downregulated) but that doesn’t take into account any error in the log fold change value. Another way is to use the “signed fold change” which is to rank by the sign of the fold change multiplied by the P value (as described <a href="http://genomespot.blogspot.com/2014/09/data-analysis-step-8-pathway-analysis.html">here</a>. We could also use the t statistic that’s output from limma, as that takes into account the log-fold change and it’s standard error, see <a href="https://support.bioconductor.org/p/6124/">here</a> for more explanation. We’ll use the t statistic to rank here.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-perform-gene-set-enrichment-with-fgsea"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Perform gene set enrichment with fgsea</h3>
+
+  <ol>
+    <li><strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <ul>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Cut columns”</em>: <code class="highlighter-rouge">c1,c6</code> (the Entrez gene ids and t-statistic)</li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“From”</em>: the <code class="highlighter-rouge">DE tables</code></li>
+      </ul>
+    </li>
+    <li><strong>Sort data in ascending or descending order</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <ul>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Sort Query”</em>: the output of <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><em>“Column selections”</em>:
+          <ul>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“on column”</em>: <code class="highlighter-rouge">Column: 2</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“in”</em>: <code class="highlighter-rouge">Descending order</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Flavor”</em>: <code class="highlighter-rouge">Fast numeric sort (-n)</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>fgsea</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <ul>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Ranked Genes”</em>: the output of <strong>Sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“File has header?”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene Sets”</em>: <code class="highlighter-rouge">mouse_hallmark_sets</code> (this should be rdata format, see Tip below)</li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum Size of Gene Set”</em>: <code class="highlighter-rouge">15</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Output plots”</em>: <code class="highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="tip">
+
+    <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+    <ul>
+      <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+      <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+      <li>Select ``</li>
+      <li>Click the <strong>Change datatype</strong> button</li>
+    </ul>
+  </blockquote>
+
+</blockquote>
+
+<p>fgsea outputs a table of results containing a list of pathways with P values and enrichment scores. It can also output a summary table plot of the top pathways like the one shown below for the <code class="highlighter-rouge">basallpregnant-basallactate</code> contrast.</p>
+
+<figure id="figure-4" width="50%"><img src="../../images/rna-seq-genes-to-pathways/fgsea_table.png" alt="fgsea Table" title="fgsea Summary table" /><figcaption><span class="figcaption-prefix">Figure 4:</span> fgsea Summary table</figcaption></figure>
+
+<p>An enrichment plot of the each of the top pathways can also be produced, one is shown below. The barcode pattern shows where the genes in the set are found in the list of ranked genes. Most of the bars to the left indicate enrichment of the set at the top of the ranked list of genes (upregulated) and most bars towards the right indicate enrichment at the bottom of the list (downregulated). The enrichment score reflects the degree to which the genes are enriched at the top or bottom of the list.</p>
+
+<figure id="figure-5"><img src="../../images/rna-seq-genes-to-pathways/fgsea_enrichplot.png" alt="fgsea Enrichment" title="fgsea Enrichment plot" /><figcaption><span class="figcaption-prefix">Figure 5:</span> fgsea Enrichment plot</figcaption></figure>
+
+<h2 id="ensemble-gene-set-enrichment-analyses-with-egsea">Ensemble gene set enrichment analyses with <strong>EGSEA</strong></h2>
+
+<p>The ensemble of genes set enrichment analyses (EGSEA) <a href="https://www.ncbi.nlm.nih.gov/pubmed/27694195">(Alhamdoosh et al, 2017)</a> is a method developed for RNA-seq data that combines results from multiple algorithms and calculates collective gene set scores, to try to improve the biological relevance of the highest ranked gene sets. EGSEA has built-in gene sets from MSigDB and KEGG for human and mouse. We’ll show here how it can be used with the MSigDB Hallmark collection and KEGG pathways. For input we need a count matrix and EGSEA will perform a limma-voom analysis before gene set testing. We can use the provided filtered counts file output from limma, where the low count genes have been filtered out (output from limma by selecting <em>“Output Filtered Counts Table?”</em>: <code class="highlighter-rouge">Yes</code>). We just need to remove the gene symbol and description columns. We also need a symbols mapping file containing just the Entrez ids and symbols, which we can generate from the filtered counts file. The third input we need is a factors information file, containing what groups the samples belong to, we can use the one we used with limma.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-perform-ensemble-gene-set-testing-with-egsea"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Perform ensemble gene set testing with EGSEA</h3>
+
+  <ol>
+    <li><strong>Cut columns from a table (cut)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="highlighter-rouge">limma-voom filtered counts</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Operation”</em>: <code class="highlighter-rouge">Discard</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“List of fields”</em>: Select <code class="highlighter-rouge">Column:2</code>, <code class="highlighter-rouge">Column:3</code></li>
+        <li>Rename to <code class="highlighter-rouge">EGSEA counts</code></li>
+      </ul>
+    </li>
+    <li><strong>Cut columns from a table (cut)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="highlighter-rouge">limma-voom filtered counts</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Operation”</em>: <code class="highlighter-rouge">Keep</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“List of fields”</em>: Select <code class="highlighter-rouge">Column:1</code>, <code class="highlighter-rouge">Column:2</code></li>
+        <li>Rename to <code class="highlighter-rouge">EGSEA anno</code></li>
+      </ul>
+    </li>
+    <li><strong>EGSEA</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Count Files or Matrix?</em>”: <code class="highlighter-rouge">Single Count Matrix</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Count Matrix”</em>: Select <code class="highlighter-rouge">EGSEA counts</code></li>
+          </ul>
+        </li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Input factor information from file?”</em>: <code class="highlighter-rouge">Yes</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Factor File”</em>: Select <code class="highlighter-rouge">factordata</code></li>
+          </ul>
+        </li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Symbols Mapping file”</em>: <code class="highlighter-rouge">EGSEA anno</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Contrast of Interest”</em>: <code class="highlighter-rouge">basalpregnant-basallactate</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Contrast of Interest”</em>: <code class="highlighter-rouge">luminalpregnant-luminallactate</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Species”</em>: <code class="highlighter-rouge">mouse</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Gene Set Testing Methods”</em>: Tick <code class="highlighter-rouge">camera</code>, <code class="highlighter-rouge">safe</code>, <code class="highlighter-rouge">gage</code>, <code class="highlighter-rouge">zscore</code>, <code class="highlighter-rouge">gsva</code>, <code class="highlighter-rouge">globaltest</code>, <code class="highlighter-rouge">ora</code>, <code class="highlighter-rouge">ssgsea</code>, <code class="highlighter-rouge">padog</code>, <code class="highlighter-rouge">plage</code>, <code class="highlighter-rouge">fry</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“MSigDB Gene Set Collections”</em>: <code class="highlighter-rouge">H: hallmark gene sets</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“KEGG Pathways”</em>: <code class="highlighter-rouge">Metabolism</code> and <code class="highlighter-rouge">Signalling</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“I certify that I am not using this tool for commercial purposes”</em>: <code class="highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>This generates a report like below.</p>
+
+<figure id="figure-6" width="50%"><img src="../../images/rna-seq-genes-to-pathways/EGSEA_report.png" alt="EGSEA report" title="EGSEA report" /><figcaption><span class="figcaption-prefix">Figure 6:</span> EGSEA report</figcaption></figure>
+
+<p>In addition to a table of results, plots are generated like the heatmaps of the top ranked pathways, shown below. Note that we see some similar pathways in the results here as with the fgsea analysis.</p>
+
+<figure id="figure-7" width="50%"><img src="../../images/rna-seq-genes-to-pathways/EGSEA_heatmaps.png" alt="EGSEA heatmaps" title="EGSEA heatmaps" /><figcaption><span class="figcaption-prefix">Figure 7:</span> EGSEA heatmaps</figcaption></figure>
+
+<p>KEGG pathway diagrams are generated if KEGG pathways are selected, as shown below.  These show the expression values of the genes overlaid, genes upregulated in the contrast are shown in red, downregulated genes in blue. Ribosome was one of the top GO terms identified for the basal pregnant vs lactate contrast and here we see ribosome pathways are in the top ranked KEGG pathways.</p>
+
+<figure id="figure-8"><img src="../../images/rna-seq-genes-to-pathways/EGSEA_KEGG.png" alt="EGSEA KEGG" title="EGSEA KEGG pathways" /><figcaption><span class="figcaption-prefix">Figure 8:</span> EGSEA KEGG pathways</figcaption></figure>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this tutorial we have seen some gene set testing methods that can be used to interpret lists of differentially expressed genes. Multiple methods can be used to help identify pathways of interest and to provide complementary ways of visualising results. This follows on from the accompanying tutorials, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">RNA-seq reads to counts</a> and <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a>, that showed how to turn reads (FASTQs) into differentially expressed genes for this dataset. For further reading on analysis of RNA-seq count data and the methods used here, see the articles; RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR <a href="https://f1000research.com/articles/5-1408/v2">(Law et al. 2016)</a> and From reads to genes to pathways: differential expression analysis of RNA-Seq experiments using Rsubread and the edgeR quasi-likelihood pipeline <a href="https://f1000research.com/articles/5-1438/v2">(Chen, Lun, Smyth 2016)</a>.</p>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+            <ul>
+                
+                <li>Multiple methods can be used to help identify differentially expressed pathways</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+        <h1>Useful literature</h1>
+        <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=RNA-seq genes to pathways (Transcriptomics)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=RNA-seq genes to pathways (Transcriptomics)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anna Trigos, Belinda Phipson, Charity Law, Harriet Dashnow, Maria Doyle, Matt Ritchie)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>
