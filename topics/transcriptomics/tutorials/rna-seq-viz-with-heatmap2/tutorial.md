@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Visualization of RNA-Seq results with heatmap2
-zenodo_link: "https://zenodo.org/record/2528905"
+zenodo_link: "https://zenodo.org/record/2529926"
 questions:
   - "How to generate a heatmap from RNA-seq data?"
 objectives:
@@ -49,7 +49,7 @@ We will use two files for this analysis:
 >
 >     To import the file, there are two options:
 >     - Option 1: From a shared data library if available (ask your instructor)
->     - Option 2: From [Zenodo](https://zenodo.org/record/2528905)
+>     - Option 2: From [Zenodo](https://zenodo.org/record/2529926)
 >
 >         > ### {% icon tip %} Tip: Importing data via links
 >         >
@@ -62,14 +62,15 @@ We will use two files for this analysis:
 >
 >         - You can paste the links below into the **Paste/Fetch** box:
 >
->           ```
->       https://zenodo.org/record/2528905/files/limma-voom_normalised_counts
->       https://zenodo.org/record/2528905/files/heatmap_genes
+>           ```      
+>       https://zenodo.org/record/2529926/files/limma-voom_normalised_counts
+>       https://zenodo.org/record/2529926/files/limma-voom_luminalpregnant-luminallactate
+>       https://zenodo.org/record/2529926/files/heatmap_genes
 >           ```
 >
 >         - Select *"Genome"*: `mm10`
 >
-> 2. Rename the counts dataset as `normalized counts` and the list of genes as `heatmap genes` using the {% icon galaxy-pencil %} (pencil) icon.
+> 2. Rename the counts dataset as `normalized counts`, the limma-voom_luminalpregnant-luminallactate file as `DE results` and the list of genes as `heatmap genes` using the {% icon galaxy-pencil %} (pencil) icon.
 > 3. Check that the datatype is `tabular`.
 >    If the datatype is not `tabular`, please change the file type to `tabular`.
 >
