@@ -3,12 +3,12 @@ layout: tutorial_hands_on
 title: Visualization of RNA-Seq results with heatmap2
 zenodo_link: "https://zenodo.org/record/2529926"
 questions:
-  - "How to generate a heatmap from RNA-seq data?"
+  - "How to generate heatmaps from RNA-seq data?"
 objectives:
-  - "Create a heatmap of RNA-seq data"
+  - "Create heatmaps of RNA-seq data"
 time_estimation: "1h"
 key_points:
-  - "Heatmaps of RNA-seq data can be generated from normalized counts and used to visualise genes of interest"
+  - "Heatmaps can be used to visualize the expression of genes in RNA-Seq samples"
 contributors:
   - mblue9
 ---
@@ -17,7 +17,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Heatmaps are commonly used to visualize RNA-Seq results. In this tutorial we show how the **heatmap2** tool in Galaxy can be used to generate heatmaps. The heatmap2 tool uses the heatmap.2 function from the R gplots package. Here we will demonstrate how to make a heatmap of the top differentially expressed (DE) genes in an RNA-Seq experiment, similar to what is shown for the fruitfly dataset in the [RNA-seq ref-based tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html). We will also show how to create a heatmap for a custom set of genes.
+Heatmaps are commonly used to visualize RNA-Seq results. They are useful for visualizing the expression of genes across the samples. In this tutorial we show how the **heatmap2** tool in Galaxy can be used to generate heatmaps. The heatmap2 tool uses the heatmap.2 function from the R gplots package. Here we will demonstrate how to make a heatmap of the top differentially expressed (DE) genes in an RNA-Seq experiment, similar to what is shown for the fruitfly dataset in the [RNA-seq ref-based tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html). We will also show how a heatmap for a custom set of genes an be created.
 
 To generate a heatmap of RNA-seq results, we need a file of normalized counts. This file is provided for you here. The expression values have been normalized for differences in sequencing depth and composition bias between the samples. To generate this file yourself, see the [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html) tutorial, and run limma-voom selecting *"Output Normalised Counts Table?"*: `Yes`. You could also use a file of normalized counts from other RNA-seq differential expression tools, such as edgeR or DESeq2. We also need some genes to plot in the heatmap.
 
@@ -41,7 +41,7 @@ We will use three files for this analysis:
 
  * **Normalized counts file** (genes in rows, samples in columns)
  * **Differentially expressed results file** (genes in rows, columns for P values and log fold change)
- * **Genes of interest** (list of genes to be plotted in heatmap)
+ * **Genes of interest** (custom list of genes to be visualized in heatmap)
 
 ## Import data
 
@@ -128,9 +128,9 @@ This gives us a file with all the significant genes, the genes that pass our thr
 
 ## Extract the normalized counts for top genes
 
-Now we have a file that contains only the top 20 genes from the DE results. Next we need to get the normalized counts for these genes and extract just the columns we need for the heatmap (the normalized counts and gene labels).
+Now we have a file that contains only the top 20 genes from the DE results. Next we need to get the normalized counts for these genes, from the file containing the normalized counts for all genes in the experiment, and then extract just the columns we need for the heatmap (the normalized counts and gene labels).
 
-First click on the {% icon galaxy-eye %} (eye) icon and take a look at the `normalized counts` file that we imported. It should look like below (just the first few rows and columns are shown). Note that the normalized count values are log2.
+First click on the {% icon galaxy-eye %} (eye) icon and take a look at the `normalized counts` file that we imported. It should look like below (just the first few rows and columns are shown). Note that the normalized count values are log2. We will join our `top 20 by Pvalue` file to the `normalized counts` file, matching on the ENTREZID columns.
 
 ![Normalized counts](../../images/rna-seq-viz-with-heatmap2/normalized_counts.png "Normalized counts")
 
@@ -148,7 +148,6 @@ First click on the {% icon galaxy-eye %} (eye) icon and take a look at the `norm
 >    - {% icon param-text %} *"Cut columns"*: `c2,c12-c23`
 >    - {% icon param-select %} *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: the joined dataset (output of **Join two Datasets** {% icon tool %})
->
 {: .hands_on}
 
 The file should look like below with the 20 genes in the rows and the 12 samples in the columns (just the first few columns are shown).
@@ -170,7 +169,7 @@ Now that we have our file with just the normalized counts for the genes we want,
 >    - {% icon param-select %} *"Data scaling"*: `Scale my data by row` (scale genes)
 {: .hands_on}
 
-You should see a heatmap like below. Note that here we are plotting the top genes differentially expressed in the luminal cells from the pregnant mice (`MCL1.LC` and `MCL1.LD`) versus the luminal cells from the lactating mice (`MCL1.LE` and `MCL1.LF`). This heatmap enables us to see the expression of these genes in all samples in the experiment (basal virgin, basal pregnant, basal lactating, luminal virgin, luminal pregnant, luminal lactating).
+You should see a heatmap like below. Note that here we are plotting the top genes differentially expressed in the luminal cells from the pregnant mice (`MCL1.LC` and `MCL1.LD`) versus the luminal cells from the lactating mice (`MCL1.LE` and `MCL1.LF`). This heatmap enables us to see the expression of these genes in all the samples from the different groups in the experiment (basal virgin, basal pregnant, basal lactating, luminal virgin, luminal pregnant, luminal lactating).
 
 ![Heatmap of top DE genes](../../images/rna-seq-viz-with-heatmap2/heatmap2_top20.png "Heatmap of top DE genes"){:width="150%"}
 
@@ -179,31 +178,32 @@ You should see a heatmap like below. Note that here we are plotting the top gene
 > 1. Why do we not use clustering here?
 > 2. Why do we scale the rows (genes)? Try rerunning heatmap2 changing the *"Data scaling"* parameter to `Do not scale my data`.
 > 3. The genes are ordered by P value. Can you make the heatmap with the genes ordered by fold change? Hint: Sort by the logFC column in ascending order to have the genes downregulated in the luminal pregnant vs lactating (negative fold change) at the top and the upregulated genes (positive fold change) at the bottom.
-> 4. How could we make heatmaps of the most upregulated and downregulated significant genes?
+> 4. How could we make a heatmap of the top 10 most upregulated and top 10 most downregulated significant genes?
 >
 >    > ### {% icon solution %} Solution
 >    > 1. We don't use clustering here as we want to keep the genes in the order we input (ordered by P value).
 >    > 2. We scale the genes as otherwise large expression values from highly expressed genes would dominate the plot, see below.
 >    >     ![Heatmap with no scaling](../../images/rna-seq-viz-with-heatmap2/heatmap2_top20_noscale.png "Heatmap without scaling genes")
 >    >
->    > 3. To make the heatmap with the gene ordered by logFC we could **Sort** the output of the **Join** step on the logFC column, then **Cut** the columns as before and remake the heatmap. It should look like below.
+>    > 3. To make the heatmap with these genes ordered by logFC, we could **Sort** the output of the **Join** step on the logFC column, then **Cut** the columns as before and remake the heatmap. It should look like below.
 >    >     ![Heatmap sorted by logFC](../../images/rna-seq-viz-with-heatmap2/heatmap2_top20_sorted_by_lfc.png "Heatmap sorted by logFC")
->    > 4. To make heatmaps of the most upregulated and downregulated significant genes we could **Sort** on the logFC column (instead of P value above), then use the **Select first** and **Select last** tools to select the genes with the largest and smallest fold changes (e.g. 20) and the **Concatenate** tool to combine the outputs of the first and last Selects into one file. We would then repeat the **Join** and **Cut** steps as before to get the normalized counts for those genes before making the heatmap.
+>    > 4. To make a heatmap of the most upregulated and downregulated significant genes, we could **Sort** on the logFC column (instead of P value above), then use the **Select first** and **Select last** tools to select the genes with the largest and smallest fold changes (10 genes for each) and the **Concatenate** tool to combine the outputs of the first and last Selects into one file. We would then repeat the **Join** and **Cut** steps as before to get the normalized counts and make the heatmap as below (Note that one gene name in the middle is missing as it is a gene that has NA for gene symbol)
+>    >     ![Heatmap for top logFC](../../images/rna-seq-viz-with-heatmap2/heatmap2_top_up_and_down.png "Heatmap of top 10 up and down")
 >    {: .solution}
 {: .question}
 
 
 # Create heatmap of custom genes
 
-You can also create heatmaps for any genes of interest in a dataset. To demonstrate this, we will create a heatmap for the 31 genes in Figure 6b from the original paper using this dataset (see below). These 31 genes include the authors' main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors identified as differentially expressed. We will recreate this heatmap here. To see how to visualize these genes in a volcano plot see the tutorial [here]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html).
+You can also create a heatmap for a custom set of genes. To demonstrate this, we will create a heatmap for the 31 genes in Figure 6b from the original paper using this dataset (see below). These 31 genes include the authors' main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors identified as differentially expressed. We will recreate this heatmap here. To see how to visualize these genes in a volcano plot see the tutorial [here]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html).
 
 ![Fu heatmap](../../images/rna-seq-viz-with-heatmap2/fu_heatmap.png "Fu et al, Nat Cell Biol 2015"){: width="50%"}
 
-These 31 genes are in the file we imported called `heatmap genes`.
+These 31 genes are in the file we imported called `heatmap genes`, shown below.
 
 ![Heatmap genes](../../images/rna-seq-viz-with-heatmap2/heatmap_genes.png "Heatmap genes"){: height="30%"}
 
-First we need to extract the normalized counts for just these 31 genes from the file containing the normalized counts for all genes in the experiment. To do that we will join the files on the Gene Symbols and then extract the columns we need.
+As in the previous example, we need to extract the normalized counts for just these 31 genes. To do that we will join the `heatmap genes` file with the `normalized counts` file, on the Gene Symbol columns this time (instead of ENTREZID), and then extract the columns we need.
 
 ## Extract normalized counts for custom genes
 
@@ -215,9 +215,6 @@ First we need to extract the normalized counts for just these 31 genes from the 
 >    - {% icon param-file %} *"with"*: `normalized counts` file
 >    - {% icon param-select %} *"and column"*: `Column: 2`
 >    - {% icon param-select %} *"Keep the header lines"*: `Yes`
->
->    The generated file has more columns than we need for the heatmap. In addition to the columns with normalized counts (in log2), there is the $$log_{2} FC$$ and other information. We need to remove the extra columns.
->
 > 2. **Cut columns from a table** {% icon tool %} to extract the columns with the gene ids and normalized counts
 >    - {% icon param-text %} *"Cut columns"*: `c1,c5-c16`
 >    - {% icon param-select %} *"Delimited by"*: `Tab`
