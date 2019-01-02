@@ -135,7 +135,7 @@
 
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="https://zenodo.org/record/2528905" title="Links to data">
+                        <a class="nav-link" href="https://zenodo.org/record/2529926" title="Links to data">
                             <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Input Dataset
                         </a>
                     </li>
@@ -244,7 +244,7 @@
   "mentions": [
     {
       "@type": "Thing",
-      "url": "https://zenodo.org/record/2528905",
+      "url": "https://zenodo.org/record/2529926",
       "name": "Training data for Visualization of RNA-Seq results with heatmap2 tutorial"
     }
   ],
@@ -255,7 +255,7 @@
       "name": "mblue9"
     }
   ],
-  "description": "The questions this  addresses are:\n - How to generate a heatmap from RNA-seq data?\n\n\\nThe objectives are:\n - Create a heatmap of RNA-seq data\n\n"
+  "description": "The questions this  addresses are:\n - How to generate heatmaps from RNA-seq data?\n\n\\nThe objectives are:\n - Create heatmaps of RNA-seq data\n\n"
 }
 
     </script>
@@ -268,14 +268,14 @@
             <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
             <ul>
             
-            <li>How to generate a heatmap from RNA-seq data?</li>
+            <li>How to generate heatmaps from RNA-seq data?</li>
             
             </ul>
 
             <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
             <ul>
             
-            <li>Create a heatmap of RNA-seq data</li>
+            <li>Create heatmaps of RNA-seq data</li>
             
             </ul>
 
@@ -362,7 +362,9 @@
 
         <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>To generate a heatmap of RNA-seq results, we need a file of normalized counts. This file is provided for you here. To generate this file yourself, see the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a> tutorial, and run limma-voom selecting <em>“Output Normalised Counts Table?”</em>: <code class="highlighter-rouge">Yes</code>. You could also use a file of normalized counts from other RNA-seq differential expression tools, such as edgeR or DESeq2.</p>
+<p>Heatmaps are commonly used to visualize RNA-Seq results. They are useful for visualizing the expression of genes across the samples. In this tutorial we show how the <strong>heatmap2</strong> tool in Galaxy can be used to generate heatmaps. The heatmap2 tool uses the heatmap.2 function from the R gplots package. Here we will demonstrate how to make a heatmap of the top differentially expressed (DE) genes in an RNA-Seq experiment, similar to what is shown for the fruitfly dataset in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">RNA-seq ref-based tutorial</a>. We will also show how a heatmap for a custom set of genes an be created.</p>
+
+<p>To generate a heatmap of RNA-seq results, we need a file of normalized counts. This file is provided for you here. The expression values have been normalized for differences in sequencing depth and composition bias between the samples. To generate this file yourself, see the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a> tutorial, and run limma-voom selecting <em>“Output Normalised Counts Table?”</em>: <code class="highlighter-rouge">Yes</code>. You could also use a file of normalized counts from other RNA-seq differential expression tools, such as edgeR or DESeq2. We also need some genes to plot in the heatmap.</p>
 
 <p>The data for this tutorial comes from a Nature Cell Biology paper, <a href="https://www.ncbi.nlm.nih.gov/pubmed/25730472">EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival</a>), Fu et al. 2015. This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status.</p>
 
@@ -376,21 +378,32 @@
 <ol id="markdown-toc">
   <li><a href="#preparing-the-inputs" id="markdown-toc-preparing-the-inputs">Preparing the inputs</a>    <ol>
       <li><a href="#import-data" id="markdown-toc-import-data">Import data</a></li>
-      <li><a href="#extract-normalized-counts" id="markdown-toc-extract-normalized-counts">Extract normalized counts</a></li>
     </ol>
   </li>
-  <li><a href="#create-heatmap-of-custom-genes" id="markdown-toc-create-heatmap-of-custom-genes">Create heatmap of custom genes</a></li>
+  <li><a href="#create-heatmap-of-top-de-genes" id="markdown-toc-create-heatmap-of-top-de-genes">Create heatmap of top DE genes</a>    <ol>
+      <li><a href="#extract-all-significant-genes" id="markdown-toc-extract-all-significant-genes">Extract all significant genes</a></li>
+      <li><a href="#extract-the-top-significant-genes" id="markdown-toc-extract-the-top-significant-genes">Extract the top significant genes</a></li>
+      <li><a href="#extract-the-normalized-counts-for-top-genes" id="markdown-toc-extract-the-normalized-counts-for-top-genes">Extract the normalized counts for top genes</a></li>
+      <li><a href="#create-heatmap-of-top-genes" id="markdown-toc-create-heatmap-of-top-genes">Create heatmap of top genes</a></li>
+    </ol>
+  </li>
+  <li><a href="#create-heatmap-of-custom-genes" id="markdown-toc-create-heatmap-of-custom-genes">Create heatmap of custom genes</a>    <ol>
+      <li><a href="#extract-normalized-counts-for-custom-genes" id="markdown-toc-extract-normalized-counts-for-custom-genes">Extract normalized counts for custom genes</a></li>
+      <li><a href="#create-heatmap-of-custom-genes-1" id="markdown-toc-create-heatmap-of-custom-genes-1">Create heatmap of custom genes</a></li>
+    </ol>
+  </li>
 </ol>
 
 </blockquote>
 
 <h1 id="preparing-the-inputs">Preparing the inputs</h1>
 
-<p>We will use two files for this analysis:</p>
+<p>We will use three files for this analysis:</p>
 
 <ul>
   <li><strong>Normalized counts file</strong> (genes in rows, samples in columns)</li>
-  <li><strong>Genes of interest</strong> (list of genes to be plotted in heatmap)</li>
+  <li><strong>Differentially expressed results file</strong> (genes in rows, columns for P values and log fold change)</li>
+  <li><strong>Genes of interest</strong> (custom list of genes to be visualized in heatmap)</li>
 </ul>
 
 <h2 id="import-data">Import data</h2>
@@ -407,7 +420,7 @@
       <ul>
         <li>Option 1: From a shared data library if available (ask your instructor)</li>
         <li>
-          <p>Option 2: From <a href="https://zenodo.org/record/2528905">Zenodo</a></p>
+          <p>Option 2: From <a href="https://zenodo.org/record/2529926">Zenodo</a></p>
 
           <blockquote class="tip">
             <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
@@ -425,8 +438,9 @@
             <li>
               <p>You can paste the links below into the <strong>Paste/Fetch</strong> box:</p>
 
-              <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2528905/files/limma-voom_normalised_counts
-https://zenodo.org/record/2528905/files/heatmap_genes
+              <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2529926/files/limma-voom_normalised_counts
+https://zenodo.org/record/2529926/files/limma-voom_luminalpregnant-luminallactate
+https://zenodo.org/record/2529926/files/heatmap_genes
 </code></pre></div>              </div>
             </li>
             <li>
@@ -436,7 +450,7 @@ https://zenodo.org/record/2528905/files/heatmap_genes
         </li>
       </ul>
     </li>
-    <li>Rename the counts dataset as <code class="highlighter-rouge">normalized counts</code> and the list of genes as <code class="highlighter-rouge">heatmap genes</code> using the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (pencil) icon.</li>
+    <li>Rename the counts dataset as <code class="highlighter-rouge">normalized counts</code>, the limma-voom_luminalpregnant-luminallactate file as <code class="highlighter-rouge">DE results</code> and the list of genes as <code class="highlighter-rouge">heatmap genes</code> using the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (pencil) icon.</li>
     <li>
       <p>Check that the datatype is <code class="highlighter-rouge">tabular</code>.
 If the datatype is not <code class="highlighter-rouge">tabular</code>, please change the file type to <code class="highlighter-rouge">tabular</code>.</p>
@@ -454,19 +468,167 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
   </ol>
 </blockquote>
 
-<p>The files should look like below (just the first few rows and columns of the normalized counts file is shown).</p>
+<p>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the the <code class="highlighter-rouge">DE results</code> file and take a look. It should look like below with 8 columns (just the first few rows are shown).</p>
 
-<figure id="figure-2"><img src="../../images/rna-seq-viz-with-heatmap2/normalized_counts.png" alt="Normalized counts" title="Normalized counts" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Normalized counts</figcaption></figure>
+<figure id="figure-2"><img src="../../images/rna-seq-viz-with-heatmap2/DE_results.png" alt="DE results" title="DE results" /><figcaption><span class="figcaption-prefix">Figure 2:</span> DE results</figcaption></figure>
 
-<figure id="figure-3" height="30%"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap_genes.png" alt="Heatmap genes" title="Heatmap genes" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Heatmap genes</figcaption></figure>
+<h1 id="create-heatmap-of-top-de-genes">Create heatmap of top DE genes</h1>
 
-<p>We will create a heatmap for the 31 genes in Fig. 6b from the original paper using this dataset (see Figure below). These 31 genes include the authors’ main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors identified as differentially expressed. We will recreate this heatmap here.</p>
+<p>First we’ll demonstrate how to create a heatmap of the top differentially expressed genes in an RNA-seq dataset. To do this we need to extract the differentially expressed genes from the <code class="highlighter-rouge">DE results</code> file. This file contains the results from comparing gene expression in the luminal cells in the pregnant versus lactating mice. It includes genes that are not significantly differentially expressed. As in the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes tutorial</a>), we’ll call genes significantly differentially expressed in this dataset if they pass the thresholds of adjusted P value &lt; 0.01 and fold change of &gt; 1.5 (log2FC of 0.58).</p>
 
-<figure id="figure-4" width="50%"><img src="../../images/rna-seq-viz-with-heatmap2/fu_heatmap.png" alt="Fu heatmap" title="Fu et al, Nat Cell Biol 2015" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Fu et al, Nat Cell Biol 2015</figcaption></figure>
+<h2 id="extract-all-significant-genes">Extract all significant genes</h2>
 
-<p>First we need to extract the normalized counts for just these 31 genes from the file containing the normalized counts for all genes in the experiment. To do that we will join the files on the Gene Symbols and then extract the columns we need.</p>
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-extract-the-significant-genes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract the significant genes</h3>
 
-<h2 id="extract-normalized-counts">Extract normalized counts</h2>
+  <ol>
+    <li><strong>Filter data on any column using simple expressions</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to extract genes with adj P &lt; 0.01:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="highlighter-rouge">DE results</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“With following condition”</em>: <code class="highlighter-rouge">c8&lt;0.01</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines to skip”</em>: <code class="highlighter-rouge">1</code></li>
+      </ul>
+    </li>
+    <li><strong>Filter data on any column using simple expressions</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to extract genes with absolute fold change &gt; 1.5 (log2fc of 0.58):
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: output of Filter <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“With following condition”</em>: <code class="highlighter-rouge">abs(c4)&gt;0.58</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines to skip”</em>: <code class="highlighter-rouge">1</code></li>
+      </ul>
+    </li>
+    <li>Rename file to <code class="highlighter-rouge">Significant genes</code></li>
+  </ol>
+</blockquote>
+
+<h2 id="extract-the-top-significant-genes">Extract the top significant genes</h2>
+
+<p>This gives us a file with all the significant genes, the genes that pass our thresholds for statistical and biological significance. As we can see there are many genes (~1,610), too many to plot in one heatmap, so we’ll select the top 20 by P value.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-extract-the-top-significant-genes-by-p-value"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract the top significant genes by P value</h3>
+
+  <ol>
+    <li><strong>Sort data in ascending or descending order</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to sort by P value:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: output of 2nd Filter <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines to skip”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“on Column”</em>: <code class="highlighter-rouge">7</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“in”</em>: <code class="highlighter-rouge">Ascending order</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Flavor”</em>: <code class="highlighter-rouge">General numeric sort ( scientific notation -g)</code></li>
+      </ul>
+    </li>
+    <li><strong>Select first lines from a dataset</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to select top genes:
+      <ul>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Select first”</em>: <code class="highlighter-rouge">21</code> (20 genes plus header row)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: output of Sort <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>Rename file as <code class="highlighter-rouge">top 20 by Pvalue</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="extract-the-normalized-counts-for-top-genes">Extract the normalized counts for top genes</h2>
+
+<p>Now we have a file that contains only the top 20 genes from the DE results. Next we need to get the normalized counts for these genes, from the file containing the normalized counts for all genes in the experiment, and then extract just the columns we need for the heatmap (the normalized counts and gene labels).</p>
+
+<p>First click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon and take a look at the <code class="highlighter-rouge">normalized counts</code> file that we imported. It should look like below (just the first few rows and columns are shown). Note that the normalized count values are log2. We will join our <code class="highlighter-rouge">top 20 by Pvalue</code> file to the <code class="highlighter-rouge">normalized counts</code> file, matching on the ENTREZID columns.</p>
+
+<figure id="figure-3"><img src="../../images/rna-seq-viz-with-heatmap2/normalized_counts.png" alt="Normalized counts" title="Normalized counts" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Normalized counts</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-extract-the-normalized-counts-for-the-top-genes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract the normalized counts for the top genes</h3>
+  <ol>
+    <li><strong>Join two Datasets side by side on a specified field</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to join on the ENTREZID column:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: the <code class="highlighter-rouge">top 20 by Pvalue</code> file</li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“using column”</em>: <code class="highlighter-rouge">Column: 1</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“with”</em>: <code class="highlighter-rouge">normalized counts</code> file</li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“and column”</em>: <code class="highlighter-rouge">Column: 1</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Keep the header lines”</em>: <code class="highlighter-rouge">Yes</code></li>
+      </ul>
+
+      <p>The generated file has more columns than we need for the heatmap. In addition to the columns with normalized counts (in log2), there is the <script type="math/tex">log_{2} FC</script> and other information. We need to remove the extra columns.</p>
+    </li>
+    <li><strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract the columns with the gene symbols and normalized counts
+      <ul>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Cut columns”</em>: <code class="highlighter-rouge">c2,c12-c23</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: the joined dataset (output of <strong>Join two Datasets</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>The file should look like below with the 20 genes in the rows and the 12 samples in the columns (just the first few columns are shown).</p>
+
+<figure id="figure-4"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap_input.png" alt="Heatmap input" title="Heatmap input" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Heatmap input</figcaption></figure>
+
+<p>Now that we have our file with just the normalized counts for the genes we want, we can create a heatmap.</p>
+
+<h2 id="create-heatmap-of-top-genes">Create heatmap of top genes</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-plot-the-heatmap-of-top-genes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot the heatmap of top genes</h3>
+
+  <ol>
+    <li><strong>heatmap2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input should have column headers”</em>: output of <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Data transformation”</em>: <code class="highlighter-rouge">Plot the data as it is</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Enable data clustering”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Labeling columns and rows”</em>: <code class="highlighter-rouge">Label my columns and rows</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Coloring groups”</em>: <code class="highlighter-rouge">Blue to white to red</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Data scaling”</em>: <code class="highlighter-rouge">Scale my data by row</code> (scale genes)</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>You should see a heatmap like below. Note that here we are plotting the top genes differentially expressed in the luminal cells from the pregnant mice (<code class="highlighter-rouge">MCL1.LC</code> and <code class="highlighter-rouge">MCL1.LD</code>) versus the luminal cells from the lactating mice (<code class="highlighter-rouge">MCL1.LE</code> and <code class="highlighter-rouge">MCL1.LF</code>). This heatmap enables us to see the expression of these genes in all the samples from the different groups in the experiment (basal virgin, basal pregnant, basal lactating, luminal virgin, luminal pregnant, luminal lactating).</p>
+
+<figure id="figure-5" width="150%"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap2_top20.png" alt="Heatmap of top DE genes" title="Heatmap of top DE genes" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Heatmap of top DE genes</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <ol>
+    <li>Why do we not use clustering here?</li>
+    <li>Why do we scale the rows (genes)? Try rerunning heatmap2 changing the <em>“Data scaling”</em> parameter to <code class="highlighter-rouge">Do not scale my data</code>.</li>
+    <li>The genes are ordered by P value. Can you make the heatmap with the genes ordered by fold change? Hint: Sort by the logFC column in ascending order to have the genes downregulated in the luminal pregnant vs lactating (negative fold change) at the top and the upregulated genes (positive fold change) at the bottom.</li>
+    <li>
+      <p>How could we make a heatmap of the top 10 most upregulated and top 10 most downregulated significant genes?</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+        <ol>
+          <li>We don’t use clustering here as we want to keep the genes in the order we input (ordered by P value).</li>
+          <li>We scale the genes as otherwise large expression values from highly expressed genes would dominate the plot, see below.
+            <figure id="figure-6"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap2_top20_noscale.png" alt="Heatmap with no scaling" title="Heatmap without scaling genes" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Heatmap without scaling genes</figcaption></figure>
+          </li>
+          <li>To make the heatmap with these genes ordered by logFC, we could <strong>Sort</strong> the output of the <strong>Join</strong> step on the logFC column, then <strong>Cut</strong> the columns as before and remake the heatmap. It should look like below.
+            <figure id="figure-7"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap2_top20_sorted_by_lfc.png" alt="Heatmap sorted by logFC" title="Heatmap sorted by logFC" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Heatmap sorted by logFC</figcaption></figure>
+          </li>
+          <li>To make a heatmap of the most upregulated and downregulated significant genes, we could <strong>Sort</strong> on the logFC column (instead of P value above), then use the <strong>Select first</strong> and <strong>Select last</strong> tools to select the genes with the largest and smallest fold changes (10 genes for each) and the <strong>Concatenate</strong> tool to combine the outputs of the first and last Selects into one file. We would then repeat the <strong>Join</strong> and <strong>Cut</strong> steps as before to get the normalized counts and make the heatmap as below (Note that one gene name in the middle is missing as it is a gene that has NA for gene symbol)
+            <figure id="figure-8"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap2_top_up_and_down.png" alt="Heatmap for top logFC" title="Heatmap of top 10 up and down" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Heatmap of top 10 up and down</figcaption></figure>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="create-heatmap-of-custom-genes">Create heatmap of custom genes</h1>
+
+<p>You can also create a heatmap for a custom set of genes. To demonstrate this, we will create a heatmap for the 31 genes in Figure 6b from the original paper using this dataset (see below). These 31 genes include the authors’ main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors identified as differentially expressed. We will recreate this heatmap here. To see how to visualize these genes in a volcano plot see the tutorial <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html">here</a>.</p>
+
+<figure id="figure-9" width="50%"><img src="../../images/rna-seq-viz-with-heatmap2/fu_heatmap.png" alt="Fu heatmap" title="Fu et al, Nat Cell Biol 2015" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Fu et al, Nat Cell Biol 2015</figcaption></figure>
+
+<p>These 31 genes are in the file we imported called <code class="highlighter-rouge">heatmap genes</code>, shown below.</p>
+
+<figure id="figure-10" height="30%"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap_genes.png" alt="Heatmap genes" title="Heatmap genes" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Heatmap genes</figcaption></figure>
+
+<p>As in the previous example, we need to extract the normalized counts for just these 31 genes. To do that we will join the <code class="highlighter-rouge">heatmap genes</code> file with the <code class="highlighter-rouge">normalized counts</code> file, on the Gene Symbol columns this time (instead of ENTREZID), and then extract the columns we need.</p>
+
+<h2 id="extract-normalized-counts-for-custom-genes">Extract normalized counts for custom genes</h2>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-extract-the-normalized-counts-for-the-genes-of-interest"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract the normalized counts for the genes of interest</h3>
@@ -480,8 +642,6 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“and column”</em>: <code class="highlighter-rouge">Column: 2</code></li>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Keep the header lines”</em>: <code class="highlighter-rouge">Yes</code></li>
       </ul>
-
-      <p>The generated file has more columns than we need for the heatmap. In addition to the columns with normalized counts (in log2), there is the <script type="math/tex">log_{2} FC</script> and other information. We need to remove the extra columns.</p>
     </li>
     <li><strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract the columns with the gene ids and normalized counts
       <ul>
@@ -506,9 +666,9 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
 
 <p>We now have a table with the 31 genes in columns and the normalized counts for the 12 samples in rows, similar to below (just the first few columns are shown).</p>
 
-<figure id="figure-5"><img src="../../images/rna-seq-viz-with-heatmap2/transposed_input.png" alt="Transposed input" title="Transposed input" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Transposed input</figcaption></figure>
+<figure id="figure-11"><img src="../../images/rna-seq-viz-with-heatmap2/transposed_input.png" alt="Transposed input" title="Transposed input" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Transposed input</figcaption></figure>
 
-<h1 id="create-heatmap-of-custom-genes">Create heatmap of custom genes</h1>
+<h2 id="create-heatmap-of-custom-genes-1">Create heatmap of custom genes</h2>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-plot-the-heatmap-of-custom-genes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot the heatmap of custom genes</h3>
@@ -529,7 +689,7 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
 
 <p>You should see a heatmap like below.</p>
 
-<figure id="figure-6" width="30%"><img src="../../images/rna-seq-viz-with-heatmap2/fu_heatmap_regenerated.png" alt="Fu heatmap regenerated" title="Fu heatmap regenerated" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Fu heatmap regenerated</figcaption></figure>
+<figure id="figure-12" width="30%"><img src="../../images/rna-seq-viz-with-heatmap2/fu_heatmap_regenerated.png" alt="Fu heatmap regenerated" title="Fu heatmap regenerated" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Fu heatmap regenerated</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -537,18 +697,16 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
   <p>How does the heatmap compare to the one from the Fu paper Fig 6 (above)?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>The heatmap looks similar to the heatmap in the paper, which is reassuring.</p>
+    <p>The heatmap looks similar to the heatmap in the paper.</p>
 
   </blockquote>
 </blockquote>
 
-<p>Alternatively, or in addition, instead of a heatmap of custom genes, you could create a heatmap of the most differentially expressed genes in a dataset, as shown in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">RNA-seq ref-based tutorial</a>.</p>
-
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p>In this tutorial we have seen how a heatmap can be generated from RNA-seq data using the heatmsp2 tool in Galaxy. This uses the same dataset from the tutorials, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">RNA-seq reads to counts</a>, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a>, and <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html">RNA-seq genes to pathways</a>. We have also reproduced results similar to what the authors showed in the original paper for this dataset.</p>
+<p>In this tutorial we have seen how heatmaps can be used to visualize RNA-seq results using the <strong>heatmap2</strong> tool in Galaxy. We use the same dataset from the tutorials, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">RNA-seq reads to counts</a>, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a>, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html">RNA-seq genes to pathways</a> and <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html">Visualization of RNA-Seq results with Volcano Plot</a>.</p>
 
 
         
@@ -557,7 +715,7 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
 
             <ul>
                 
-                <li>A heatmap of RNA-seq data can be generated from normalized counts</li>
+                <li>Heatmaps can be used to visualize the expression of genes in RNA-Seq samples</li>
                 
             </ul>
         </blockquote>
