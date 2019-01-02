@@ -8,7 +8,7 @@ objectives:
   - "Create a heatmap of RNA-seq data"
 time_estimation: "1h"
 key_points:
-  - "A heatmap of RNA-seq data can be generated from normalized counts"
+  - "Heatmaps of RNA-seq data can be generated from normalized counts and used to visualise genes of interest"
 contributors:
   - mblue9
 ---
@@ -17,7 +17,9 @@ contributors:
 # Introduction
 {:.no_toc}
 
-To generate a heatmap of RNA-seq results, we need a file of normalized counts. This file is provided for you here. To generate this file yourself, see the [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html) tutorial, and run limma-voom selecting *"Output Normalised Counts Table?"*: `Yes`. You could also use a file of normalized counts from other RNA-seq differential expression tools, such as edgeR or DESeq2. We also need some genes to plot in the heatmap. Here we will demonstrate how to make a heatmap of the top differentially expressed (DE) genes, similar to what is shown for another dataset in the [RNA-seq ref-based tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html). We will also show how to create a heatmap for a custom set of genes.
+Heatmaps are commonly used to visualize RNA-Seq results. In this tutorial we show how the **heatmap2** tool in Galaxy can be used to generate heatmaps. The heatmap2 tool uses the heatmap.2 function from the R gplots package. Here we will demonstrate how to make a heatmap of the top differentially expressed (DE) genes in an RNA-Seq experiment, similar to what is shown for the fruitfly dataset in the [RNA-seq ref-based tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html). We will also show how to create a heatmap for a custom set of genes.
+
+To generate a heatmap of RNA-seq results, we need a file of normalized counts. This file is provided for you here. The expression values have been normalized for differences in sequencing depth and composition bias between the samples. To generate this file yourself, see the [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html) tutorial, and run limma-voom selecting *"Output Normalised Counts Table?"*: `Yes`. You could also use a file of normalized counts from other RNA-seq differential expression tools, such as edgeR or DESeq2. We also need some genes to plot in the heatmap.
 
 The data for this tutorial comes from a Nature Cell Biology paper, [EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival](https://www.ncbi.nlm.nih.gov/pubmed/25730472)), Fu et al. 2015. This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status.
 
@@ -38,7 +40,7 @@ The data for this tutorial comes from a Nature Cell Biology paper, [EGF-mediated
 We will use three files for this analysis:
 
  * **Normalized counts file** (genes in rows, samples in columns)
- * **Differentially expressed results file** (genes in rows, and columns for P values and log fold change)
+ * **Differentially expressed results file** (genes in rows, columns for P values and log fold change)
  * **Genes of interest** (list of genes to be plotted in heatmap)
 
 ## Import data
@@ -63,7 +65,7 @@ We will use three files for this analysis:
 >
 >         - You can paste the links below into the **Paste/Fetch** box:
 >
->           ```      
+>           ```
 >       https://zenodo.org/record/2529926/files/limma-voom_normalised_counts
 >       https://zenodo.org/record/2529926/files/limma-voom_luminalpregnant-luminallactate
 >       https://zenodo.org/record/2529926/files/heatmap_genes
@@ -83,13 +85,13 @@ We will use three files for this analysis:
 >    {: .tip}
 {: .hands_on}
 
-Click on the {% icon galaxy-eye %} (eye) icon and take a look at the `DE results` file. It should look like below with 8 columns (just the first few rows are shown).
+Click on the {% icon galaxy-eye %} (eye) icon of the the `DE results` file and take a look. It should look like below with 8 columns (just the first few rows are shown).
 
 ![DE results](../../images/rna-seq-viz-with-heatmap2/DE_results.png "DE results")
 
 # Create heatmap of top DE genes
 
-First we'll demonstrate how to create a heatmap of the differentially expressed genes in an RNA-seq dataset. We'll identify the differentially expressed genes in the `DE results` file, which is a comparison of gene expression in luminal cells in pregnant versus lactating mice. As shown in the [RNA-seq counts to genes tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html)), we'll call genes significantly differentially expressed in this dataset if they pass the thresholds of adjusted P value < 0.01 and fold change of > 1.5 (log2FC of 0.58).
+First we'll demonstrate how to create a heatmap of the top differentially expressed genes in an RNA-seq dataset. To do this we need to extract the differentially expressed genes from the `DE results` file. This file contains the results from comparing gene expression in the luminal cells in the pregnant versus lactating mice. It includes genes that are not significantly differentially expressed. As in the [RNA-seq counts to genes tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html)), we'll call genes significantly differentially expressed in this dataset if they pass the thresholds of adjusted P value < 0.01 and fold change of > 1.5 (log2FC of 0.58).
 
 ## Extract all significant genes
 
@@ -99,8 +101,8 @@ First we'll demonstrate how to create a heatmap of the differentially expressed 
 >    - {% icon param-file %} *"Filter"*: `DE results`
 >    - {% icon param-text %} *"With following condition"*: `c8<0.01`
 >    - {% icon param-text %} *"Number of header lines to skip"*: `1`
-> 2. **Filter data on any column using simple expressions** {% icon tool %} with the following parameters to extract genes with fold change > 1.5 (log2fc of 0.58):
->    - {% icon param-file %} *"Filter"*: output of Filter {% icon tool %} 
+> 2. **Filter data on any column using simple expressions** {% icon tool %} with the following parameters to extract genes with absolute fold change > 1.5 (log2fc of 0.58):
+>    - {% icon param-file %} *"Filter"*: output of Filter {% icon tool %}
 >    - {% icon param-text %} *"With following condition"*: `abs(c4)>0.58`
 >    - {% icon param-text %} *"Number of header lines to skip"*: `1`
 > 3. Rename file to `Significant genes`
@@ -108,7 +110,7 @@ First we'll demonstrate how to create a heatmap of the differentially expressed 
 
 ## Extract the top significant genes
 
-This gives us a file with all the significant genes, the genes that pass our thresholds for statistical and biological significance. As we can see there are many genes (~1,610) too many to plot in one heatmap, so we'll select the top 20 by P value.
+This gives us a file with all the significant genes, the genes that pass our thresholds for statistical and biological significance. As we can see there are many genes (~1,610), too many to plot in one heatmap, so we'll select the top 20 by P value.
 
 > ### {% icon hands_on %} Hands-on: Extract the top significant genes by P value
 >
@@ -133,7 +135,7 @@ First click on the {% icon galaxy-eye %} (eye) icon and take a look at the `norm
 ![Normalized counts](../../images/rna-seq-viz-with-heatmap2/normalized_counts.png "Normalized counts")
 
 > ### {% icon hands_on %} Hands-on: Extract the normalized counts for the top genes
-> 1. **Join two Datasets side by side on a specified field** {% icon tool %} with the following parameters:
+> 1. **Join two Datasets side by side on a specified field** {% icon tool %} with the following parameters to join on the ENTREZID column:
 >    - {% icon param-file %} *"Join"*: the `top 20 by Pvalue` file
 >    - {% icon param-select %} *"using column"*: `Column: 1`
 >    - {% icon param-file %} *"with"*: `normalized counts` file
@@ -168,6 +170,8 @@ Now that we have our file with just the normalized counts for the genes we want,
 >    - {% icon param-select %} *"Data scaling"*: `Scale my data by row` (scale genes)
 {: .hands_on}
 
+You should see a heatmap like below. Note that here we are plotting the top genes differentially expressed in the luminal cells from the pregnant mice (`MCL1.LC` and `MCL1.LD`) versus the luminal cells from the lactating mice (`MCL1.LE` and `MCL1.LF`). This heatmap enables us to see the expression of these genes in all samples in the experiment (basal virgin, basal pregnant, basal lactating, luminal virgin, luminal pregnant, luminal lactating).
+
 ![Heatmap of top DE genes](../../images/rna-seq-viz-with-heatmap2/heatmap2_top20.png "Heatmap of top DE genes"){:width="150%"}
 
 
@@ -179,7 +183,7 @@ Now that we have our file with just the normalized counts for the genes we want,
 >
 >    > ### {% icon solution %} Solution
 >    > 1. We don't use clustering here as we want to keep the genes in the order we input (ordered by P value).
->    > 2. We scale the genes as otherwise the expression of highly expressed genes dominates the plot, see below.
+>    > 2. We scale the genes as otherwise large expression values from highly expressed genes would dominate the plot, see below.
 >    >     ![Heatmap with no scaling](../../images/rna-seq-viz-with-heatmap2/heatmap2_top20_noscale.png "Heatmap without scaling genes")
 >    >
 >    > 3. To make the heatmap with the gene ordered by logFC we could **Sort** the output of the **Join** step on the logFC column, then **Cut** the columns as before and remake the heatmap. It should look like below.
@@ -191,7 +195,7 @@ Now that we have our file with just the normalized counts for the genes we want,
 
 # Create heatmap of custom genes
 
-You can also create heatmaps for any genes of interest in a dataset. To demonstrate this, we will create a heatmap for the 31 genes in Figure 6b from the original paper using this dataset (see below). These 31 genes include the authors' main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors identified as differentially expressed. We will recreate this heatmap here.
+You can also create heatmaps for any genes of interest in a dataset. To demonstrate this, we will create a heatmap for the 31 genes in Figure 6b from the original paper using this dataset (see below). These 31 genes include the authors' main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors identified as differentially expressed. We will recreate this heatmap here. To see how to visualize these genes in a volcano plot see the tutorial [here]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html).
 
 ![Fu heatmap](../../images/rna-seq-viz-with-heatmap2/fu_heatmap.png "Fu et al, Nat Cell Biol 2015"){: width="50%"}
 
@@ -253,7 +257,7 @@ You should see a heatmap like below.
 >
 >    > ### {% icon solution %} Solution
 >    >
->    > The heatmap looks similar to the heatmap in the paper, which is reassuring.
+>    > The heatmap looks similar to the heatmap in the paper.
 >    >
 >    {: .solution}
 {: .question}
@@ -262,4 +266,4 @@ You should see a heatmap like below.
 # Conclusion
 {:.no_toc}
 
-In this tutorial we have seen how heatmaps can be generated from RNA-seq data using the heatmap2 tool in Galaxy. This uses the same dataset from the tutorials, [RNA-seq reads to counts]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html), [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html), [RNA-seq genes to pathways]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html).
+In this tutorial we have seen how heatmaps can be used to visualize RNA-seq results using the **heatmap2** tool in Galaxy. We use the same dataset from the tutorials, [RNA-seq reads to counts]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html), [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html), [RNA-seq genes to pathways]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html) and [Visualization of RNA-Seq results with Volcano Plot]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html).
