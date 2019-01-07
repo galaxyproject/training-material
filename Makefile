@@ -56,14 +56,14 @@ serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set th
 		${JEKYLL} serve --strict_front_matter -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve
 
-detached-serve: install ## run a local server in detached mode (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags to Jekyll)
+detached-serve: ## run a local server in detached mode (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags to Jekyll)
 	$(ACTIVATE_ENV) && \
 		${JEKYLL} serve --strict_front_matter --detach -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: detached-serve
 
 build: clean ## build files but do not run a server (You can specify FLAGS= to pass additional flags to Jekyll)
 	$(ACTIVATE_ENV) && \
-		${JEKYLL} build --strict_front_matter -d _site/training-material  ${FLAGS}
+		${JEKYLL} build --strict_front_matter -d _site/training-material ${FLAGS}
 .PHONY: build
 
 check-frontmatter: build ## Validate the frontmatter
@@ -139,6 +139,7 @@ check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
 				-f {}"
 .PHONY: check-links-gh-pages
 
+
 pdf: detached-serve ## generate the PDF of the tutorials and slides
 	mkdir -p _pdf
 	@for t in $(TUTORIALS); do \
@@ -149,14 +150,17 @@ pdf: detached-serve ## generate the PDF of the tutorials and slides
             --print-to-pdf="$$name" \
             "$(SITE_URL)/$$t?with-answers" \
             2> /dev/null ; \
-    done
+	done
 	@for s in $(SLIDES); do \
 		name="$(PDF_DIR)/$$(echo $$s | tr '/' '-' | sed -e 's/html/pdf/' -e 's/topics-//' -e 's/tutorials-//')"; \
+		$(ACTIVATE_ENV) ; \
+		echo $$name; \
+		echo "$(SITE_URL)/$$s"; \
+		echo `which npm`; \
 		`npm bin`/decktape \
 			automatic \
-			"$(SITE_URL)/$$s?with-answers" \
-			"$$name" \
-            2> /dev/null ; \
+			"$(SITE_URL)/$$s" \
+			"$$name" ; \
 	done
 	pkill -f jekyll
 .PHONY: pdf
