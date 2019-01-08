@@ -34,6 +34,7 @@ matrix:
   allow_failures:
     - env: CHECK=htmlproofer
     - env: CHECK=slides
+    - env: CHECK=pdf-generation
 
 install:
   - sudo apt-get update
@@ -72,7 +73,6 @@ script:
       elif [ "$CHECK" == "site-build" ]
       then
         make build
-      fi
       elif [ "$CHECK" == "pdf-generation" ]
       then
         make pdf
