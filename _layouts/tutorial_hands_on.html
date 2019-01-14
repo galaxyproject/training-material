@@ -171,24 +171,8 @@ layout: base
             {% if topic.requirements or page.requirements %}
             <strong>{% icon requirements %} Requirements</strong>
             <ul>
-            {% for requirement in topic.requirements %}
-                <li>
-                    {% if requirement.type == "internal" %}
-                    <a href="{{ site.baseurl }}/topics{{ requirement.link }}">{{ requirement.title }}</a>
-                    {% elsif requirement.type == "external" %}
-                    <a href="{{ requirement.link }}">{{ requirement.title }}</a>
-                    {% endif %}
-                </li>
-            {% endfor %}
-            {% for requirement in page.requirements %}
-                <li>
-                    {% if requirement.type == "internal" %}
-                    <a href="{{ site.baseurl }}/topics{{ requirement.link }}">{{ requirement.title }}</a>
-                    {% elsif requirement.type == "external" %}
-                    <a href="{{ requirement.link }}">{{ requirement.title }}</a>
-                    {% endif %}
-                </li>
-            {% endfor %}
+            {% include snippets/display_extra_training.md extra_trainings=topic.requirements %}
+            {% include snippets/display_extra_training.md extra_trainings=page.requirements %}
             </ul>
             {% endif %}
 
@@ -217,6 +201,8 @@ layout: base
         <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="{{ site.baseurl }}/topics/{{ topic.name }}#references">here</a>.</p>
         {% endif %}
 
+        <h3>{% icon congratulations %} Congratulations on successfully completing this tutorial!</h3>
+
         {% if topic.name == "contributing" %}
         <blockquote class="agenda">
             <h3>Developing GTN training material</h3>
@@ -240,7 +226,15 @@ layout: base
         </blockquote>
         {% endif %}
 
-        <h3>{% icon congratulations %} Congratulations on successfully completing this tutorial!</h3>
+        {% if page.follow_up_training %}
+        <blockquote class="agenda follow-up">
+            <strong class="follow-up">{% icon curriculum %} Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+            <ul>
+                {% include snippets/display_extra_training.md extra_trainings=page.follow_up_training %}
+            </ul>
+        </blockquote>
+        {% endif %}
+
         <hr>
         <br>
 
