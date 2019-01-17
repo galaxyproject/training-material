@@ -1,7 +1,23 @@
 ---
 layout: tutorial_hands_on
-topic_name: assembly
-tutorial_name: debruijn-graph-assembly
+
+title: "De Bruijn Graph Assembly"
+zenodo_link: "https://doi.org/10.5281/zenodo.582600"
+questions:
+  - "What are the factors that affect genome assembly?"
+  - "How does Genome assembly work?"
+objectives:
+  - "Perform an optimised Velvet assembly with the Velvet Optimiser"
+  - "Compare this assembly with those we did in the basic tutorial"
+  - "Perform an assembly using the SPAdes assembler."
+time_estimation: "2h"
+key_points:
+  - "We learned about how the choice of k-mer size will affect assembly outcomes"
+  - "We learned about the strategies that assemblers use to make reference genomes"
+  - "We performed a number of assemblies with Velvet and SPAdes."
+  - "You should use SPAdes or another more modern assembler than Velvet for actual assemblies now."
+contributors:
+  - slugger70
 ---
 
 # Optimised de Bruijn Graph assemblies using the Velvet Optimiser and SPAdes
@@ -38,13 +54,13 @@ We will be using the same data that we used in the introductory tutorial, so if 
 >    > * Select **Paste/Fetch Data**
 >    > * Paste the link into the text field
 >    > * Change the data-type to **fastqsanger**
->    > * Press **Start**    
+>    > * Press **Start**
 >    {: .tip}
 >
 >
-> 3. Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the ![Pencil icon](../../images/edit_file.png) icon next to the relevant history entry.
+> 3. Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the {% icon galaxy-pencil %} pencil icon icon next to the relevant history entry.
 >
-> Click on the View Data button (the ![Eye icon](../../images/eye.png)) next to one of the FASTQ sequence files.
+> Click on the {% icon galaxy-eye %} (eye) icon next to one of the FASTQ sequence files.
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -61,16 +77,13 @@ We will perform an assembly with the Velvet Optimiser. It will automatically cho
 
 > ### {% icon hands_on %} Hands-on: Assemble with the Velvet Optimiser
 >
-> #### Use the **Velvet Optimiser** {% icon tool %} tool.
->
-> - Set the following parameters (leave other settings as they are):
->
->    - **Start k-mer size**: 45
->    - **End k-mer size**: 73
->    - **Input file type**: Fastq
->    - **Single or paired end reads**: Paired
->    - **Select first set of reads**: *mutant_R1.fastq*  
->    - **Select second set of reads**: *mutant_R2.fastq*
+>  1. **Velvet Optimiser** {% icon tool %}: Optimise your assembly with the following parameters:
+>    - *"Start k-mer size"*: `45`
+>    - *"End k-mer size"*: `73`
+>    - *"Input file type"*: `Fastq`
+>    - *"Single or paired end reads"*: `Paired`
+>    - {% icon param-file %} *"Select first set of reads"*: `mutant_R1.fastq`
+>    - {% icon param-file %} *"Select second set of reads"*: `mutant_R2.fastq`
 >
 {: .hands_on}
 
@@ -78,8 +91,6 @@ Your history will now contain a number of new files:
 
 * Velvet optimiser contigs
   * A fasta file of the final assembled contigs
-
-
 * Velvet optimiser contig stats
   * A table of the lengths (in k-mer length) and coverages (k-mer coverages) for the final contigs.
 
@@ -88,9 +99,10 @@ Have a look at each file.
 
 > ### {% icon hands_on %} Hands-on: Get contig statistics for Velvet Optimiser contigs
 >
-> #### Use the **Fasta Statistics** {% icon tool %} tool to produce a summary of the velvet optimiser contigs
+> 1. **Fasta Statistics** {% icon tool %}: Produce a summary of the velvet optimiser contigs:
+>    - {% icon param-file %} *"fasta or multifasta file"*: Select your velvet optimiser contigs file
 >
-> Look at the output file.
+> 2. View the output
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -109,19 +121,17 @@ Tables of results from **(a)** Simple assembly and **(b)** optimised assembly.
 
 # Assemble with SPAdes
 
-We will now perform an assembly with the much more modern SPAdes assembler. It goes through a similar process to Velvet in the fact that it uses and simplifies de Bruijn graphs but it uses multiple values for k-mer size and combines the resultant graphs. This combination produces very good assemblies. When using SPAdes it is typical to choose at least 3 k-mer sizes. One lowm one medium and one high. We will use 33, 55 and 91.
+We will now perform an assembly with the much more modern SPAdes assembler. It goes through a similar process to Velvet in the fact that it uses and simplifies de Bruijn graphs but it uses multiple values for k-mer size and combines the resultant graphs. This combination produces very good assemblies. When using SPAdes it is typical to choose at least 3 k-mer sizes. One low, one medium and one high. We will use 33, 55 and 91.
 
 > ### {% icon hands_on %} Hands-on: Assemble with SPAdes
 >
-> #### Use the **SPAdes** {% icon tool %} tool.
+> 1. **SPAdes** {% icon tool %}: Assemble the reads:
 >
-> - Set the following parameters (leave other settings as they are):
->
->    - **Run only assembly**: yes
->    - **K-mers to use separated by commas**: 33,55,91 *[note: no spaces!]*
->    - **Coverage cutoff**: auto
->    - **Files -> forward reads**: *mutant_R1.fastq*  
->    - **Files -> reverse reads**: *mutant_R2.fastq*
+>    - *"Run only assembly"*: `yes`
+>    - *"K-mers to use separated by commas"*: `33,55,91` [note: no spaces!]
+>    - *"Coverage cutoff"*: `auto`
+>    - {% icon param-file %} *"Files -> forward reads"*: `mutant_R1.fastq`
+>    - {% icon param-file %} *"Files -> reverse reads"*: `mutant_R2.fastq`
 >
 {: .hands_on}
 
@@ -145,10 +155,10 @@ Examine each file, especially the stats files.
 
 > ### {% icon hands_on %} Hands-on: Get contig statistics for SPAdes contigs
 >
+> 1. **Fasta Statistics** {% icon tool %}: Produce a summary of the SPAdes contigs:
+>    - {% icon param-file %} *"fasta or multifasta file"*: Select your velvet optimiser contigs file
 >
-> #### Use the **Fasta Statistics** {% icon tool %} tool to produce a summary of the SPAdes contigs
->
-> Look at the output file.
+> 2. Look at the output file.
 >
 >    > ### {% icon question %} Questions
 >    >

@@ -1,7 +1,26 @@
 ---
 layout: tutorial_hands_on
-topic_name: dev
-tutorial_name: visualization-generic
+
+title: "Visualizations: generic plugins"
+questions:
+  - "How can visualization plugins benefit science?"
+objectives:
+  - "Implement a first Galaxy visualization"
+  - "Understand the client side vs. server side principle"
+requirements:
+  -
+    title: "Javascript knowledge"
+    type: "external"
+    link: ""
+time_estimation: "90m"
+key_points:
+  - "Visualizations require a different way of thinking: server and client side; downloading files rather than system level access"
+  - "Interactivity is what makes visualizations different from static tools"
+  - "Requires understanding of both the Galaxy ecosystem as well as HTML5/JS"
+  - "Performance is more important than for static Galaxy tools"
+contributors:
+  - shiltemann
+  - yhoogstrate
 ---
 
 # Introduction

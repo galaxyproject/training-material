@@ -1,7 +1,23 @@
 ---
 layout: tutorial_hands_on
-topic_name: proteomics
-tutorial_name: protein-id-oms
+
+title: "Peptide and Protein ID using OpenMS tools"
+zenodo_link: "https://zenodo.org/record/546301"
+questions:
+  - "How to convert LC-MS/MS raw files?"
+  - "How to identify peptides?"
+  - "How to identify proteins?"
+  - "How to evaluate the results?"
+objectives:
+  - "Protein identification from LC-MS/MS raw files."
+time_estimation: "45m"
+key_points:
+  - "LC-MS/MS raw files have to be converted to mzML before using GalaxyP on most GalaxyP servers."
+  - "OpenMS provides many tools for proteomic analysis and guarantees compatibility by using open file formats."
+  - "OpenMS provides several thirdparty search engines and Fido for protein inference."
+contributors:
+  - stortebecker
+  - bgruening
 ---
 
 # Introduction
@@ -58,7 +74,7 @@ If your data were generated on a low resolution mass spectrometer, use ***PeakPi
 > 1. Create a new history for this Peptide and Protein ID exercise.
 > 2. Load the example dataset into your history from Zenodo: [raw](https://zenodo.org/record/892005/files/qExactive01819.raw) [mzML](https://zenodo.org/record/892005/files/qExactive01819_profile.mzml)
 > 3. Rename the dataset to something meaningful.
-> 4. (*optional*) Run ***msconvert*** {% icon tool %} on the test data to convert to the `mzML` format.
+> 4. (*only for raw files*) Run ***msconvert*** {% icon tool %} on the test data to convert to the `mzML` format.
 > 5. Run ***PeakPickerHiRes*** {% icon tool %} on the resulting file. Click `+ Insert param.algorithm_ms_levels` and change the entry to "2". Thus, peak picking will only be performed on MS2 level.
 >
 >   > ### {% icon comment %} Comment: Local Use of MSConvert
@@ -68,7 +84,6 @@ If your data were generated on a low resolution mass spectrometer, use ***PeakPi
 >   > ### {% icon comment %} Comment: MS2 peak picking during data acquisition
 >   > MS2 peaks are often acquired in centroided mode in first place. The profile data are converted to centroided mode already during data acquisition, resulting in MS2-centroided `raw` files. If your MS2 data are already centroided, simply omit the peak picking step.
 >  {: .comment}
-
 {: .hands_on}
 
 # Peptide Identification
@@ -82,7 +97,7 @@ Different peptide search engines have been developed to fulfill the matching pro
 > 1. Copy the prepared protein database from the tutorial [Database Handling](../database-handling/tutorial.html) into your current history by using the multiple history view or upload the ready-made database from this [link](https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_and_Mycoplasma_added%29.fasta).
 > 2. Run the tool ***XTandemAdapter*** {% icon tool %} with:
     - the MS2-centroided mzML as **Input file containing MS2 spectra** and
-    - the FASTA protein database as **FASTA file or pro file**.
+    - the FASTA protein database as **FASTA file**.
     - Click `+ Insert param_fixed_modifications` and choose `Carbamidomethyl (C)`.
     - Click `+ Insert param_variable_modifications` and choose `Oxidation (M)`.
 > 3. Run the tool ***FileInfo*** {% icon tool %} on the XTandem output.
@@ -98,7 +113,7 @@ Different peptide search engines have been developed to fulfill the matching pro
 The next step of peptide identification is to decide which PSMs will be used for protein inference. Measured MS2 spectra never perfectly fit the theoretical spectra. Therefore, peptide search engines calculate a score which indicates how well the measured MS2 spectrum was fitting the theoretical spectrum. How do we decide which PSMs are likely true and which are false?
 
 In proteomics, this decision is typically done by calculating false discovery rates (FDRs). Remember that the database we were using for peptide-to-spectrum matching consisted not only of true proteins, but also the same number of "fake entries", the so-called decoys. Those decoys can now be used to estimate the number of false identifications in the list of PSMs.
-The calculation is based on a simple assumption: for every decoy protein identified with a given score, we expect one false positive with at least the same score.
+The calculation is based on a simple assumption: for every decoy peptide identified with a given score, we expect one false positive with at least the same score.
 The false discovery rate is therefore defined as the number of false discoveries (decoy hits) divided by the number of false and correct discoveries (both target and decoy hits) at a given score threshold.
 
 To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool ***PeptideIndexer*** {% icon tool %}. Additionally, we will calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm used by OpenMS. We will then filter for 1 % FDR and set the score back to PEP.
@@ -116,17 +131,17 @@ To calculate FDRs, we first have to annotate the identified peptides to determin
 >   - `-add_decoy_peptides` set to `Yes`.
 > 4. Run ***IDScoreSwitcher*** {% icon tool %} with
 >   - **Name of the meta value to use as the new score** set to "Posterior Probability_score", and
->   - **Orientation of the new score`** set to `higher_better`.
+>   - **Orientation of the new score** set to `higher_better`.
 > 5. Run ***FileInfo*** {% icon tool %} to get basic information about the identified peptides.
 >
 >   > ### {% icon question %} Questions:
 >   > 1. How many peptides were identified?
 >   > 2. How many peptides with oxidized methionine were identified?
 >   >
->   >  > ### {% icon solution %} Solution
->   >  > 1. You should have identified 2,616 unique stripped peptides.
->   >  > 2. 503 peptides contain an oxidized methionine (MeO).
->   >  {: .solution }
+>   > > ### {% icon solution %} Solution
+>   > > 1. You should have identified 2,616 unique stripped peptides.
+>   > > 2. 503 peptides contain an oxidized methionine (MeO).
+>   > {: .solution }
 >   {: .question}
 {: .hands_on}
 
@@ -155,9 +170,8 @@ It also enables you to check for contaminations in your samples.
 > ### {% icon hands_on %} Hands-On: Analysis of Contaminants
 >
 > 1. Run ***TextExporter*** {% icon tool %} to convert the idXML output to a human-readable tabular file.
-> 1. Run ***Select*** {% icon tool %} to select all lines **Matching** the pattern "CONTAMINANT".
-> 3. Run ***Select*** {% icon tool %} to select all lines that **NOT Matching** the pattern "HUMAN".
-> 2. Remove all bovine and mycoplasma proteins from your list by running ***Select*** {% icon tool %}. Select only those lines **NOT Matching** match the pattern "HUMAN".
+> 2. Run ***Select lines that match an expression*** {% icon tool %} on the TextExporter output to select all lines **Matching** the pattern "CONTAMINANT".
+> 3. Remove all non human proteins (e.g. bovine) from your TextExporter list by running ***Select lines that match an expression*** {% icon tool %} only those lines **Matching** the pattern "HUMAN".
 >
 >   > ### {% icon question %} Questions
 >   > 1. Which contaminants did you identify? Where do these contaminations likely come from?
@@ -165,12 +179,12 @@ It also enables you to check for contaminations in your samples.
 >   > 3. How many mycoplasma proteins did you identify? Does this mean that the analyzed HeLa cells were infected with mycoplasma?
 >   > 4. How many false positives do we expect in our list?
 >   >
->   >  > ### {% icon solution %} Solution
->   >  > 1.  TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts. Also, five human proteins are listed, these are commonly introduced during sample preparation. As we were analyzing a human sample, it is not neccessary to remove these proteins, as they may as well originate from the HeLa cells.
->   >  > 2.  Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.
->   >  > 3.  One protein stemming from *Acholeplasma laidlawii* (ACHLI) was identified. If you again filter the protein list for "ACHLI", you will see that it was identified by a single peptide. Thus, it is likely a false positive and does not indicate contamination.
->   >  > 4.  As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list.
->   >  {: .solution }
+>   > > ### {% icon solution %} Solution
+>   > > 1.  TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts. Also, five human proteins are listed, these are commonly introduced during sample preparation. As we were analyzing a human sample, it is not neccessary to remove these proteins, as they may as well originate from the HeLa cells.
+>   > > 2.  Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.
+>   > > 3.  One protein stemming from *Acholeplasma laidlawii* (ACHLI) was identified. If you again filter the protein list for "ACHLI", you will see that it was identified by a single peptide. Thus, it is likely a false positive and does not indicate contamination.
+>   > > 4.  As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list.
+>   > {: .solution }
 >   {: .question}
 {: .hands_on}
 
@@ -196,6 +210,7 @@ Here, we will use the OpenMS tool [ConsensusID](http://ftp.mi.fu-berlin.de/pub/O
 > 5. Run ***IDMerger*** {% icon tool %} with two **Input files [...]**:
 >   - the output of **IDScoreSwitcher** based on **XTandemAdapter**
 >   - the output of **IDScoreSwitcher** based on **MSGFPlusAdapter**
+>   - **Reduce collections** set to `reduce collections by aggregating single files of multiple collections`
 > 6. Run ***ConsensusID*** {% icon tool %}.
 > 1. Run ***PeptideIndexer*** {% icon tool %} with
 >   - the FASTA protein database as **Input sequence database in FASTA format**, and
@@ -215,10 +230,10 @@ Here, we will use the OpenMS tool [ConsensusID](http://ftp.mi.fu-berlin.de/pub/O
 >   > 1. How many PSMs could be matched with XTandem and MSGFPlus alone? How many peptides were identified?
 >   > 2. How many PSMs could be matched after combining the results with ConsensusID? How many peptides were identified?
 >   >
->   >  > ### {% icon solution %} Solution
->   >  > 1.  After FDR-filtering, XTandem matched 3,552 PSMs (2,616 unique peptides) and MSGFPlus matched 4,292 PSMs (2,991 peptides).
->   >  > 2.  Combining the results with ConsensusID leads to matching of 4,299 PSMs (3,041 unique peptides).
->   >  {: .solution }
+>   > > ### {% icon solution %} Solution
+>   > > 1.  After FDR-filtering, XTandem matched 3,552 PSMs (2,616 unique peptides) and MSGFPlus matched 4,292 PSMs (2,991 peptides).
+>   > > 2.  Combining the results with ConsensusID leads to matching of 4,299 PSMs (3,041 unique peptides).
+>   > {: .solution }
 >   {: .question}
 {: .hands_on}
 

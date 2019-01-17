@@ -1,7 +1,28 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: github-command-line-contribution
+
+title: "Contributing with GitHub via command-line"
+questions:
+  - "How can I contribute to an open-source project with GitHub?"
+  - "What is the GitHub flow?"
+objectives:
+  - "Fork a repository on GitHub"
+  - "Clone a remote repository locally"
+  - "Create a branch"
+  - "Commit changes"
+  - "Push changes to a remote repository"
+  - "Create a pull request"
+  - "Update a pull request"
+time_estimation: "30m"
+key_points:
+  - "Work on your fork"
+  - "1 branch = 1 feature"
+  - "1 pull request = 1 branch"
+  - "Be careful of the branch you're working on"
+  - "Check the automated tests"
+contributors:
+  - cmonjeau
+  - bebatut
 ---
 
 # Introduction
@@ -85,7 +106,7 @@ To modify the content of the repository, you need a copy of it on your computer.
 {: .hands_on}
 
 > ### {% icon comment %} Comment
-> If you already have a local copy of the GitHub repository, you need to update it before doing any changes. To learn how to do that, please follow the [last section](#keep-up-to-date).
+> If you already have a local copy of the GitHub repository, you need to update it before doing any changes. To learn how to do that, please follow the [last section](#stay-up-to-date).
 {: .comment}
 
 # Create a new branch
@@ -319,7 +340,7 @@ You now want to work on a new tutorial or make some other new changes. However s
 >    $ git remote add upstream https://github.com/galaxyproject/training-material.git
 >    ```
 >
->    > {% icon tip %}: Tip: "remote upstream already exists"
+>    > ### {% icon tip %}: Tip: "remote upstream already exists"
 >    > If you have done step 2 before and try to `remote add` again, git will tell you that a "remote upstream already exists". In this case you can safely continue to step 4.
 >    {: .tip}
 >

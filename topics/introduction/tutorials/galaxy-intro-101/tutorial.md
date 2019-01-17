@@ -1,7 +1,31 @@
 ---
 layout: tutorial_hands_on
-topic_name: introduction
-tutorial_name: galaxy-intro-101
+
+title: "Galaxy 101"
+zenodo_link: ""
+questions:
+  - "Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?"
+objectives:
+  - "Familiarize yourself with the basics of Galaxy"
+  - "Learn how to obtain data from external sources"
+  - "Learn how to run tools"
+  - "Learn how histories work"
+  - "Learn how to create a workflow"
+  - "Learn how to share your work"
+time_estimation: "1H30M"
+key_points:
+  - "Galaxy provides an easy-to-use graphical user interface for often complex command-line tools"
+  - "Galaxy keeps a full record of your analysis in a history"
+  - "Workflows enable you to repeat your analysis on different data"
+  - "Galaxy can connect to external sources for data import and visualization purposes"
+  - "Galaxy provides ways to share your results and methods with others"
+contributors:
+  - shiltemann
+  - nsoranzo
+  - blankclemens
+  - nekrut
+  - bgruening
+  - pajanne
 ---
 
 # 101 Introduction
@@ -28,7 +52,7 @@ Suppose you get the following question:
 
 You are thinking "Wow! This is a simple question... I know where to find the data, at the [UCSC Genome Browser](https://genome.ucsc.edu/), but how do I actually compute this?" There is really a straightforward way of answering this question and it is called **Galaxy**. So let's try it...
 
-Browse to your Galaxy instance and log in or register. The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle pane will show the home page, a tool form or some dataset content.
+Browse to your Galaxy instance and log in or register. The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the central panel will show the home page, a tool form or some dataset content.
 
 ![Galaxy interface](../../images/galaxy_interface.png)
 
@@ -52,7 +76,7 @@ We are now ready to perform our analysis, but first we need to get some data int
 
 > ### {% icon hands_on %} Hands-on: Data upload from UCSC
 >
-> 1. In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
+> 1. **UCSC Main** {% icon tool %}: In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
 >
 >     ![`UCSC Main table browser` menu entry](../../images/101_01.png)
 >
@@ -60,18 +84,16 @@ We are now ready to perform our analysis, but first we need to get some data int
 >
 >     ![`UCSC table browser` tool, first screen for exons](../../images/101_02.png)
 >
->     > ### {% icon comment %} Settings
->     >
->     >- **clade** should be set to `Mammal`
->     >- **genome** should be set to `Human`
->     >- **assembly** should be set to `Dec. 2013 (GRCh38/hg38)`
->     >- **group** should be set to `Genes and Gene Predictions`
->     >- **track** should be set to `GENCODE v24`
->     >- **table** should be set to `knownGene`
->     >- **region** should be changed to `position` with value `chr22`
->     >- **output format** should be changed to `BED - browser extensible data`
->     >- **Send output to** should have the option `Galaxy` checked
->     {: .comment}
+>     Now set the following parameters:
+>     - *"clade"*: `Mammal`
+>     - *"genome"*: `Human`
+>     - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
+>     - *"group"*: `Genes and Gene Predictions`
+>     - *"track"*: `GENCODE v24`
+>     - *"table"*: `knownGene`
+>     - {% icon param-text %} *"region"* should be changed to `position` with value `chr22`
+>     - *"output format"* should be changed to `BED - browser extensible data`
+>     - {% icon param-check %} *"Send output to"* should have the option `Galaxy` checked
 >
 > 2. Click on the **get output** button and you will see the next screen:
 >
@@ -80,22 +102,22 @@ We are now ready to perform our analysis, but first we need to get some data int
 >    Change **Create one BED record per** to `Coding Exons` and then click on the **Send query to Galaxy** button.
 >
 >     > ### {% icon comment %} Comment
->     > After this you will see your first history item in Galaxy's right pane. It will go through
+>     > After this you will see your first history item in Galaxy's right panel. It will go through
 >     > the gray (preparing/queued) and yellow (running) states to become green (success):
 >     >
 >     > ![`UCSC Main on Human: knownGene` dataset is green](../../images/101_04.png)
 >     {: .comment}
 >
-> 3. When the dataset is green, click on the **eye icon** to **view the contents** of the file. It should look something like this:
+> 3. When the dataset is green, click on the {% icon galaxy-eye %} (eye) icon to **view the contents** of the file. It should look something like this:
 >
 >    ![Contents of the `UCSC Main on Human: knownGene` dataset](../../images/101_exons.png)
 >
 >    Each line represents an exon, the first three columns are the genomic location, and the fourth column contains the name of the exon.
 >
 > 4. Let's rename our dataset to something more recognizable.
->    - Click on the **pencil icon** to edit the dataset attributes.
->    - In the next screen change the name of the dataset to `Exons`.
->    - Click the **Save** button at the bottom of the screen.
+>    - Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
+>    - In the central panel, change the **Name** field to `Exons`
+>    - Click the **Save** button
 >
 >    Your history should now look something like this:
 >
@@ -107,21 +129,22 @@ We are now ready to perform our analysis, but first we need to get some data int
 Now we have information about the exon locations, but our question was which exon contains the largest number of SNPs, so let's get some information about SNP locations from UCSC as well:
 
 > ### {% icon hands_on %} Hands-on: SNP information
-> 1. **UCSC Main** {% icon tool %}: Return to the UCSC tool `UCSC Main - table browser`
->
-> 2. Change the setting in **group** to `Variation` and again **region** to `position` with value `chr22`
+> 1. **UCSC Main** {% icon tool %}: Open again the `UCSC Main - table browser` tool and set the following parameters:
+>    - *"group"* should be changed to `Variation`
+>    - {% icon param-text %} *"region"* should be changed again to `position` with value `chr22`
+>    - *"output format"* should be changed again to `BED - browser extensible data`
 >
 >    ![`UCSC table browser` tool, first screen for SNPs](../../images/101_06.png)
 >
->    The **track** setting shows the version of the SNP database to get. In this example it is version 150, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.
+>    The *"track"* setting shows the version of the SNP database to get. In this example it is version 150, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.
 >
-> 3. Click on the **get output** button to find a menu similar to this:
+> 2. Click on the **get output** button to find a form similar to this:
 >
 >    ![`UCSC table browser` tool, second screen for SNPs](../../images/101_07.png)
 >
->    Make sure that **Create one BED record per** is set to `Whole Gene` (Whole Gene here really means Whole Feature), and click on **Send query to Galaxy**. You will get your second item in your analysis history.
+>    Make sure that *"Create one BED record per"* is set to `Whole Gene` (Whole Gene here really means Whole Feature), and click on **Send query to Galaxy**. You will get your second item in your analysis history.
 >
-> 4. Now **rename** your new dataset to `SNPs` so we can easily remember what the file contains.
+> 3. Now **rename** your new dataset to `SNPs` so we can easily remember what the file contains.
 {: .hands_on}
 
 # Analysis
@@ -139,7 +162,7 @@ Let's remind ourselves that our objective is to find which exon contains the mos
 >
 > 1. **Join** {% icon tool %}: Enter the word `join` in the search bar of the tool panel, and select the tool named `Join - the intervals of two datasets side-by-side`
 >
-> 2. Select the `Exons` dataset as the first dataset, and the `SNPs` dataset as the second dataset, and make sure **return** is set to `INNER JOIN` so that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)
+> 2. Select the `Exons` dataset as the first dataset, and the `SNPs` dataset as the second dataset, and make sure *"return"* is set to `INNER JOIN` so that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)
 >
 >    ![Settings for the `Join` tool](../../images/101_11.png)
 >
@@ -147,11 +170,20 @@ Let's remind ourselves that our objective is to find which exon contains the mos
 >    > **Note:** if you scroll down on this page, you will find the help of the tool.
 >    {: .comment}
 >
-> 3. Click the **Execute** button and view the resulting file (with the eye icon). If everything went okay, you should see a file that looks similar to this:
+> 3. Click the **Execute** button and view the resulting file (with the {% icon galaxy-eye %} (eye) icon). If everything went okay, you should see a file that looks similar to this:
 >
 >    ![Contents of the `Join` output dataset](../../images/101_joined.png)
 >
 >    Remember that variations are possible due to using different versions of UCSC databases, as long as you have similar looking columns you did everything right :)
+>
+> > ### {% icon tip %} Tip: If things don't work...
+> >
+> > Did the Join tool error with a memory failure? Or is this step executing for a long time? Most likely a setting was missed when extracting the data from the UCSC Table Browser. Try again, double checking that:
+> >
+> >  * For both SNP and EXON: *"region"* is actually changed to `position` with value `chr22`
+> >  * For EXON: *"Create one BED record per"* `Coding Exons` is selected (*not* `Whole Gene` as for the SNP data)
+> >  * Carefully inspect the remaining Table Browser settings if these two most common reasons for problems were correct in your tool executions
+> {: .tip}
 >
 {: .hands_on}
 
@@ -171,14 +203,12 @@ We've just seen how to count the number of SNPs in each exon, so let's do this f
 >
 >    ![Settings for the `Group` tool](../../images/101_13.png)
 >
->     > ### {% icon comment %} Settings
->     >
->     > - **Select data**: select the output dataset from the `Join` tool
->     > - **Group by column**: `Column: 4` (the column with the exon IDs)
->     > - **Insert Operation**: click on this button, then set **Type** to `Count` and set **On column** to `Column: 4`
->     {: .comment}
+>    Now set the following parameters:
+>    - *"Select data"*: select the output dataset from the `Join` tool
+>    - *"Group by column"*: `Column: 4` (the column with the exon IDs)
+>    - *"Insert Operation"*: click on this button, then set *"Type"* to `Count` and set *"On column"* to `Column: 4`
 >
-> 2. Make sure your screen looks like the image above and click **Execute** to perform the grouping. Your output dataset will look something like this:
+> 2. Make sure your screen looks like the image above and click **Execute** to perform the grouping. Your new output dataset will look something like this:
 >
 >    ![Contents of the `Group` output dataset](../../images/101_14.png)
 >
@@ -189,12 +219,15 @@ This file contains only two columns. The first contains the exon IDs, and the se
 > ### {% icon question %} Question
 > How many exons are there in total in your file?
 >
-> *Hint: Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above*.
+>    > > ### {% icon solution %} Solution
+>    > > Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image below. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information.
+>    > >
+>    > {: .solution }
 {: .question}
 
 ## Sort the exons by SNPs count
 
-Now we have a list of all exons and the number of SNPs they contain, but we would like to know which exons has the *highest number* of SNPs. We can do this by sorting the file on the second column.
+Now we have a list of all exons and the number of SNPs they contain, but we would like to know which exon has the *highest number* of SNPs. We can do this by sorting the file on the second column.
 
 > ### {% icon hands_on %} Hands-on: Sorting
 >
@@ -202,7 +235,7 @@ Now we have a list of all exons and the number of SNPs they contain, but we woul
 >
 > 2. Make sure that the output of the `Group` tool from the previous step is selected as input
 >
-> 3. Set the **on column** parameter to `Column: 2`, by default it will select a numerical sort in descending order, which is exactly what we want in this case.
+> 3. Set the *"on column"* parameter to `Column: 2`, by default it will select a numerical sort in descending order, which is exactly what we want in this case.
 >
 >    ![Settings for the `Sort` tool](../../images/101_15.png)
 >
@@ -228,7 +261,7 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 >
 > 1. **Select first** {% icon tool %}: Open the tool `Select first - lines from a dataset`
 >
-> 2. Set **Select first** to `5`
+> 2. Set *"Select first"* to `5`
 >
 > 3. Make sure that the output of the `Sort` tool from the previous step is selected as input
 >
@@ -262,7 +295,7 @@ A good way to learn about these exons is to look at their genomic surrounding. T
 
 > ### {% icon hands_on %} Hands-on: UCSC genome browser
 >
-> 1. First, check that the **database** of your latest history dataset is `hg38`. If not, click on the pencil icon and modify the **Database/Build:** field to `Human Dec. 2013 (GRCh38/hg38) (hg38)`.
+> 1. First, check that the **database** of your latest history dataset is `hg38`. If not, click on the {% icon galaxy-pencil %} pencil icon and modify the **Database/Build:** field to `Human Dec. 2013 (GRCh38/hg38) (hg38)`.
 >
 >    ![Modify the database of the `Compare two Datasets` output dataset](../../images/101_20.png)
 >
@@ -279,15 +312,15 @@ UCSC provides a large number of tracks that can help you get a sense of your gen
 
 # Galaxy management
 
-In Galaxy your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc.) in the **Options** menu on the top of the history pane (gear symbol):
+In Galaxy your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc.) in the **Options** menu on the top of the history panel (gear symbol):
 
 ![History options menu](../../images/history_options_menu.png)
 
-If you create a new history, your current history does not disappear. If you would like to list all of your histories just choose `Saved Histories` from the history menu and you will see a list of all your histories in the center pane:
+If you create a new history, your current history does not disappear. If you would like to list all of your histories just choose `Saved Histories` from the history menu and you will see a list of all your histories in the central panel:
 
 ![`Saved Histories` list](../../images/101_23.png)
 
-An alternative overview of your histories can be accessed by clicking on the **View all histories** button at top of your history pane (window icon).
+An alternative overview of your histories can be accessed by clicking on the **View all histories** button at top of your history panel (window icon).
 
 ![Overview of histories with their datasets](../../images/101_history-overview.png)
 
@@ -309,7 +342,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >
 >    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
 >
->    The center pane will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
+>    The central panel will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
 >
 >    ![Selection of steps for `Extract Workflow` from history](../../images/101_25.png)
 >
@@ -347,7 +380,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >    > If you click on this asterisk for any of the output datasets, then *only* files with an asterisk will be shown, and all outputs without an asterisk will be hidden. (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown.)
 >    {: .tip}
 >
-> 3. **Click the asterisk** next to `out_file1` in the `Select First` and `Compare two Datasets` tools.
+> 3. Click the **asterisk** next to `out_file1` in the `Select First` and `Compare two Datasets` tools.
 >
 >    Now, when we run the workflow, we will only see the final two outputs, i.e. the table with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser. Once you have done this, you will notice that the **minimap** at the bottom-right corner of your screen will have a colour-coded view of your workflow, with orange boxes representing a tool with an output that will be shown.
 >
@@ -389,14 +422,14 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 > 1. Create a **new history** (gear icon) and give it a name.
 >
-> 2. We will need the list of exons again. We don't have to get this from UCSC again, we can just **copy** it from our previous history. The easiest way to do this is to go to the history overview (window icon at top of history pane). Here you can just drag and drop datasets from one history to another.
+> 2. We will need the list of exons again. We don't have to get this from UCSC again, we can just **copy** it from our previous history. The easiest way to do this is to go to the history overview (window icon at top of history panel). Here you can just drag and drop datasets from one history to another.
 >
 >    ![Drag and drop of `Exons` dataset in the history overview](../../images/101_copydataset.png)
 >
 > 3. We wanted to know something about the repetitive elements per exon. We get this data from UCSC.
->    - **assembly** should be set to `Dec. 2013 (GRCh38/hg38)`
->    - **group** parameter should be `Repeats`
->    - **position** should be `chr22`
+>    - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
+>    - *"group"* parameter should be changed to `Repeats`
+>    - *"position"*: `chr22`
 >    - leave the rest of the settings to the defaults
 >
 >    Click on **get output** and then **Send query to Galaxy** on the next screen.
@@ -405,7 +438,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    ![`Run` option in the workflow menu](../../images/101_37.png)
 >
->    The center pane will change to allow you to configure and launch the workflow.
+>    The central panel will change to allow you to configure and launch the workflow.
 >
 > 5. Select appropriate datasets for the inputs as shown below, then scroll down and click `Run workflow`.
 >
@@ -418,7 +451,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 
 > ### {% icon comment %} Comment
 > Because most intermediate steps of the workflow were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, we can unhide all hidden datasets by selecting `Unhide Hidden Datasets` from the history options menu.
-{: .Comment}
+{: .comment}
 
 > ### {% icon question %} Questions
 > Which exon had the highest number of repeats? How many repeats were there?
@@ -428,7 +461,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 
 One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
-To share a history, click on the gear symbol in the history pane and select `Share or Publish`. On this page you can do 3 things:
+To share a history, click on the gear symbol in the history panel and select `Share or Publish`. On this page you can do 3 things:
 
 1. **Make History Accessible via Link**. This generates a link that you can give out to others. Anybody with this link will be able to view your history.
 2. **Make History Accessible and Publish**. This will not only create a link, but will also publish your history. This means your history will be listed under `Shared Data → Histories` in the top menu.
@@ -444,4 +477,4 @@ To share a history, click on the gear symbol in the history pane and select `Sha
 # Conclusion
 {:.no_toc}
 
-:tada: Well done! :clap: You have just performed your first analysis in Galaxy. You also created a workflow from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.
+{% icon trophy %} Well done! You have just performed your first analysis in Galaxy. You also created a workflow from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.

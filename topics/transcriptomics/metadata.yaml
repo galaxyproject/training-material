@@ -1,149 +1,24 @@
-﻿---
-name: "transcriptomics"
-type: "use"
-title: "Transcriptomics"
-summary: "Training material for all kinds of transcriptomics analysis."
-docker_image:  # "quay.io/galaxy/transcriptomics-training" ## not yet ready
+---
+name: transcriptomics
+type: use
+title: Transcriptomics
+summary: Training material for all kinds of transcriptomics analysis.
+docker_image: null
 requirements:
   -
-    title: "Galaxy introduction"
     type: "internal"
-    link: "/introduction/"
+    topic_name: introduction
   -
-    title: "Quality control"
     type: "internal"
-    link: "/sequence-analysis/"
-
-material:
-  -
-    title: "Introduction to Transcriptomics"
-    type: "introduction"
-    name: "introduction"
-    slides: yes
-    contributors:
-      - bebatut
-      - erxleben
-      - mwolfien
-  -
-    title: "De novo transcriptome reconstruction with RNA-Seq"
-    type: "tutorial"
-    name: "de-novo"
-    zenodo_link: "https://zenodo.org/record/254485#.WKODmRIrKRu"
-    galaxy_tour: yes
-    hands_on: yes
-    slides: no
-    workflows: yes
-    questions:
-      - "What genes are differentially expressed between G1E cells and megakaryocytes?"
-      - "How can we generate a transcriptome de novo from RNA sequencing data?"
-    objectives:
-      - "Analysis of RNA sequencing data using a reference genome"
-      - "Reconstruction of transcripts without reference transcriptome (de novo)"
-      - "Analysis of differentially expressed genes"
-    time_estimation: "6h"
-    key_points:
-      - "De novo transcriptome reconstruction is the ideal approach for identifying differentially expressed known and novel transcripts."
-      - "Differential gene expression testing is improved with the use of replicate experiments and deep sequence coverage."
-      - "Visualizing data on a genome browser is a great way to display interesting patterns of differential expression."
-    contributors:
-      - malloryfreeberg
-      - moheydarian
-  -
-    title: "Reference-based RNA-Seq data analysis"
-    type: "tutorial"
-    name: "ref-based"
-    zenodo_link: "https://zenodo.org/record/1185122"
-    galaxy_tour: yes
-    hands_on: yes
-    slides: no
-    workflows: yes
-    questions:
-      - "What are the effects of Pasilla (PS) gene depletion on splicing events?"
-      - "How to analyze RNA sequencing data using a reference genome?"
-    objectives:
-      - "Analysis of RNA sequencing data using a reference genome"
-      - "Analysis of differentially expressed genes"
-      - "Identification of functional enrichment among differentially expressed genes"
-    time_estimation: "1d"
-    key_points:
-      - "Using a spliced mapping tool for eukaryotic RNA seq data"
-      - "Running a differential gene expression with taking care of the factors to study"
-      - "Running a differential exon usage with taking care of the factors to study"
-    contributors:
-      - bebatut
-      - malloryfreeberg
-      - moheydarian
-      - erxleben
-      - pavanvidem
-      - blankclemens
-  -
-    title: "Differential abundance testing of small RNAs"
-    type: "tutorial"
-    name: "srna"
-    zenodo_link: "https://zenodo.org/record/826906"
-    galaxy_tour: no
-    hands_on: yes
-    slides: no
-    workflows: yes
-    questions:
-      - "What small RNAs are expressed?"
-      - "What RNA features have significantly different numbers of small RNAs targeting them between two conditions?"
-    objectives:
-      - "Process small RNA-seq datasets to determine quality and reproducibility."
-      - "Filter out contaminants (e.g. rRNA reads) in small RNA-seq datasets."
-      - "Differentiate between subclasses of small RNAs based on their characteristics."
-      - "Identify differently abundant small RNAs and their targets."
-    time_estimation: "3h"
-    key_points:
-      - "Analysis of small RNAs is complex due to the diversity of small RNA subclasses."
-      - "Both alignment to references and transcript quantification approaches are useful for small RNA-seq analyses."
-    contributors:
-      - malloryfreeberg
-  -
-    title: "Visualization of RNA-Seq results with CummeRbund"
-    type: "tutorial"
-    name: "rna-seq-viz-with-cummerbund"
-    zenodo_link: "https://zenodo.org/record/1001880"
-    galaxy_tour: no
-    hands_on: yes
-    slides: yes
-    workflows: yes
-    questions:
-      - "How are RNA-Seq results stored?"
-      - "Why are visualization techniques needed?"
-      - "How to select our desired subjects for differential gene expression analysis?"
-    objectives:
-      - "Manage RNA-Seq results"
-      - "Extract the desired subject for differential gene expression analysis"
-      - "Visualize information"
-    time_estimation: "1h"
-    key_points:
-      - "Extract informations from a SQLite CuffDiff database"
-      - "Filter and sort results to highlight differential expressed genes of interest"
-      - "Generate publication-ready visualizations for RNA-Seq analysis results"
-    contributors:
-      - bagnacan
-  -
-    title: "Reference-based RNAseq data analysis (long)"
-    type: "tutorial"
-    name: "rb-rnaseq"
-    zenodo_link: ""
-    workflows: no
-    galaxy_tour: no
-    hands_on: yes
-    slides: no
-    questions:
-      - "How to perform analysis of RNAseq data when reference genome is available?"
-    objectives:
-      - "Learns basic concepts of RNAseq analysis"
-    time_estimation: "1h"
-    key_points:
-    contributors:
-      - nekrut
+    topic_name: sequence-analysis
+    tutorials: 
+      - quality-control
+      - mapping
 
 maintainers:
   - bebatut
   - malloryfreeberg
+  - mblue9
 
 references:
   -
@@ -195,4 +70,19 @@ references:
     authors: "Zhong Wang et al"
     title: "RNA-Seq: a revolutionary tool for transcriptomics"
     link: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2949280/"
+    summary: ""
+  -
+    authors: "Dittrich, M. T. and Klau, G. W. and Rosenwald, A. and Dandekar, T. and Muller, T."
+    title: "Identifying functional modules in protein-protein interaction networks: an integrated exact approach"
+    link: "http://dx.doi.org/10.1093/bioinformatics/btn161"
+    summary: ""
+  -
+    authors: "May, Ali; Brandt, Bernd W; El-Kebir, Mohammed; Klau, Gunnar W; Zaura, Egija; Crielaard, Wim; Heringa, Jaap; Abeln, Sanne"
+    title: "metaModules identifies key functional subnetworks in microbiome-related disease"
+    link: "http://dx.doi.org/10.1093/bioinformatics/btv526"
+    summary: ""
+  -
+    authors: "Pavankumar, Videm; Dominic, Rose; Fabrizio, Costa;  Rolf, Backofen"
+    title: "BlockClust: efficient clustering and classification of non-coding RNAs from short read RNA-seq profiles"
+    link: "doi:10.1093/bioinformatics/btu270"
     summary: ""

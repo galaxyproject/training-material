@@ -1,7 +1,23 @@
 ---
 layout: tutorial_hands_on
-topic_name: transcriptomics
-tutorial_name: de-novo
+
+title: "De novo transcriptome reconstruction with RNA-Seq"
+zenodo_link: "https://zenodo.org/record/254485#.WKODmRIrKRu"
+questions:
+  - "What genes are differentially expressed between G1E cells and megakaryocytes?"
+  - "How can we generate a transcriptome de novo from RNA sequencing data?"
+objectives:
+  - "Analysis of RNA sequencing data using a reference genome"
+  - "Reconstruction of transcripts without reference transcriptome (de novo)"
+  - "Analysis of differentially expressed genes"
+time_estimation: "6h"
+key_points:
+  - "De novo transcriptome reconstruction is the ideal approach for identifying differentially expressed known and novel transcripts."
+  - "Differential gene expression testing is improved with the use of replicate experiments and deep sequence coverage."
+  - "Visualizing data on a genome browser is a great way to display interesting patterns of differential expression."
+contributors:
+  - malloryfreeberg
+  - moheydarian
 ---
 
 # Introduction
@@ -11,7 +27,7 @@ The data provided here are part of a Galaxy tutorial that analyzes RNA-seq data 
 
 # Analysis strategy
 
-The goal of this exercise is to identify what transcripts are present in the G1E and megakaryocyte cellualr states and which transcripts are differentially expressed between the two states. We will use a *de novo* transcript reconstruction strategy to infer transcript structures from the mapped reads in the absence of the actual annotated transcript structures. This will allow us to identify novel transcripts and novel isoforms of known transcripts, as well as identify differentially expressed transcripts.
+The goal of this exercise is to identify what transcripts are present in the G1E and megakaryocyte cellular states and which transcripts are differentially expressed between the two states. We will use a *de novo* transcript reconstruction strategy to infer transcript structures from the mapped reads in the absence of the actual annotated transcript structures. This will allow us to identify novel transcripts and novel isoforms of known transcripts, as well as identify differentially expressed transcripts.
 
 > ### Agenda
 >
@@ -73,15 +89,18 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    > 1. What is the read length?
 >    > 2. Is there anything interesting about the quality of the base calls based on the position in the reads?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. The read length is 99 bp
->    >    > 2. The quality of base calls declines throughout a sequencing run. 
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. The read length is 99 bp
+>    > > 2. The quality of base calls declines throughout a sequencing run. 
+>    > {: .solution }
 >    {: .question}
 >
-> 2. **Trimmomatic** {% icon tool %}: Trim off the low quality bases from the ends of the reads to increase mapping efficiency. Run `Trimmomatic` on each pair of forward and reverse reads.
+> 2. **Trimmomatic** {% icon tool %}: Trim off the low quality bases from the ends of the reads to increase mapping efficiency. Run `Trimmomatic` on each pair of forward and reverse reads with the following settings:
 >
->    ![Trimmomatic tool input](../../images/trimmomatic.png)
+>    - *"Single-end or paired-end reads?"*: `Paired-end (two separate input files)`
+>       - {% icon param-file %} *"Input FASTQ file (R1/first of pair)"*: `G1E forward read (R1)`
+>       - {% icon param-file %} *"Input FASTQ file (R2/second of pair)"*: `G1E reverse read (R1)`
+>    - *"Perform initial ILLUMINACLIP step?"*: `No`
 >
 > 3. **FastQC** {% icon tool %}: Re-run `FastQC` on trimmed reads and inspect the differences.
 >
@@ -90,10 +109,10 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    > 1. What is the read length?
 >    > 2. Is there anything interesting about the quality of the base calls based on the position in the reads?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. The read lengths range from 1 to 99 bp after trimming
->    >    > 2. The average quality of base calls does not drop off as sharply at the 3' ends of reads.
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. The read lengths range from 1 to 99 bp after trimming
+>    > > 2. The average quality of base calls does not drop off as sharply at the 3' ends of reads.
+>    > {: .solution }
 >    {: .question}
 > ![Before and after trimming comparison](../../images/BeforeAndAfterTrimming.png)
 {: .hands_on}
@@ -136,16 +155,22 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 
 > ### {% icon hands_on %} Hands-on: Spliced mapping
 >
-> 1. **HISAT** {% icon tool %}: Run `HISAT` on one forward/reverse read pair and modify the following settings:
->    - **Single end or paired reads?**: Individual paired-end reads
->    - **Source for the reference genome to align against**: Use a built-in genome > Mouse (Mus Musculus): mm10
->    - **Spliced alignment parameters**: Specify spliced alignment parameters
->    - **Specify strand-specific information**: First Strand (R/RF)
->    - **Transcriptome assembly reporting**: Report alignments tailored for transcript assemblers including StringTie.
+> 1. **HISAT2** {% icon tool %}: Run `HISAT2` on one forward/reverse read pair and modify the following settings:
+>    - *"Source for the reference genome"*: `Use a built-in genome`
+>       - {% icon param-file %} *"Select a reference genome"*: `Mouse (Mus Musculus): mm10`
+>    - *"Single-end or paired-end reads?"*: `Paired-end`
+>       - {% icon param-file %} *"FASTA/Q file #1"*: trimmed G1E forward read (R1)
+>       - {% icon param-file %} *"FASTA/Q file #2"*: trimmed G1E reverse read (R1)
+>       - *"Specify strand information"*: `Forward(FR)`
+>    - *"Advanced options"*
+>       - *"Spliced alignment options"*
+>           - *"Penalty for non-canonical splice sites"*: '3'
+>           - *"Penalty function for long introns with canonical splice sites"*: 'Constant [f(x) = B]''
+>           - *"Constant term (B)"*: '0.0'
+>           - *"Penalty function for long introns with non-canonical splice sites"*: 'Constant [f(x) = B]''
+>           - *"Transcriptome assembly reporting"*: 'Report alignments tailored for transcript assemblers including StringTie'
 >
->       ![HISAT tool input and parameters](../../images/hisat_tool_form.png)
->
-> 2. **HISAT** {% icon tool %}: Run `HISAT` on the remaining forward/reverse read pairs with the same parameters.
+> 2. **HISAT2** {% icon tool %}: Run `HISAT2` on the remaining forward/reverse read pairs with the same parameters.
 >
 {: .hands_on}
 
@@ -154,9 +179,10 @@ Now that we have mapped our reads to the mouse genome with `HISAT`, we want to d
 
 > ### {% icon hands_on %} Hands-on: Transcriptome reconstruction
 >
-> 1. **Stringtie** {% icon tool %}: Run `Stringtie` on the `HISAT` alignments using the default parameters.
+> 1. **Stringtie** {% icon tool %}: Run `Stringtie` on the `HISAT2` alignments using the default parameters.
 >    - Use batch mode to run all four samples from one tool form.
-> ![Stringtie input and parameters](../../images/Stringtie.png)
+>    - {% icon param-file %} *"Specify strand information"*: `Forward (FR)`
+>
 {: .hands_on}
 
 # Transcriptome assembly
@@ -166,14 +192,16 @@ We just generated four transcriptomes with `Stringtie` representing each of the 
 > ### {% icon hands_on %} Hands-on: Transcriptome assembly
 >
 > 1. **Stringtie-merge** {% icon tool %}: Run `Stringtie-merge` on the `Stringtie` assembled transcripts along with the RefSeq annotation file we imported earlier.
->    - Use batch mode to inlcude all four `Stringtie` assemblies as "input_gtf".
->    - Select the "RefSeq GTF mm10" file as the "guide_gff".
-> ![Stringtie-merge input and parameters](../../images/stringtiemergetf.png)
+>    - {% icon param-file %} *"input_gtf"*: `all four `Stringtie` assemblies`
+>    - {% icon param-file %} *"guide_gff"*: `RefSeq GTF mm10`
 >
 > 2. **GFFCompare** {% icon tool %}: Run `GFFCompare` on the `Stringtie-merge` generated transcriptome along with the RefSeq annotation file.
->    - Select the output of `Stringtie-merge` as the GTF input.
->    - Select "Yes" under `Use Reference Annotation" and select the "RefSeq GTF mm10" file as the "Reference Annotation".`
-> ![GFFCompare input and parameters](../../images/GFFComparetf.png)
+>    - {% icon param-file %} *"GTF inputs for comparison"*: `output of Stringtie-merge`
+>    - *"Use Reference Annotation"*: `Yes`
+>       - {% icon param-file %} *"Reference Annotation"*: `RefSeq GTF mm10`
+>    - *"Use Sequence Data"*: `Yes`
+>       - *"Choose the source for the reference list"*: `Locally cached`
+>           - *"Using reference genome"*: 'Mouse (Mus Musculus): mm10'
 >
 {: .hands_on}
 
@@ -209,17 +237,14 @@ The recommended mode is "union", which counts overlaps even if a read only share
 
 > ### {% icon hands_on %} Hands-on: Counting the number of reads per transcript
 >
-> 1. **FeatureCounts** {% icon tool %}: Run `FeatureCounts` on the aligned reads (`HISAT` output) using the `GFFCompare` transcriptome database as the annotation file.
+> 1. **FeatureCounts** {% icon tool %}: Run `FeatureCounts` on the aligned reads (`HISAT2` output) using the `GFFCompare` transcriptome database as the annotation file.
 >
->    - Using the batch mode for input selection, choose the four `HISAT` aligned read files
->    - **Gene annotation file**:  in your history, then select the `annotated transcripts` GTF file output by `GFFCompare` (this specifies the "union" mode)
->    - Expand **Options for paired end reads**
->    - **Orientation of the two read from the same pair**: Reverse, Forward (rf)
->    - Expand **Advanced options**
->    - **GFF gene identifier**: enter "transcript_id"
->    - **Strand specificity of the protocol**: select "Stranded (reverse)"
-> ![FeatureCounts input and parameters](../../images/featurecountsA.png)
-> ![FeatureCounts advanced parameters](../../images/featurecountsB.png)
+>    - {% icon param-file %} *"Alignment file"*: `four HISAT2 aligned read files`
+>    - *"Specify strand information"*: `Stranded (Forward)`
+>    - {% icon param-file %} *"Gene annotation file"*: `in your history`
+>       - *"Gene annotation file"*: `the annotated transcripts GTF file output by GFFCompare`
+>    - *"Advanced options"*
+>       - *"GFF gene identifier"*: `transcript_id`
 >
 {: .hands_on}
 
@@ -236,16 +261,19 @@ Transcript expression is estimated from read counts, and attempts are made to co
 > ### {% icon hands_on %} Hands-on:
 >
 > 1. **DESeq2** {% icon tool %}: Run `DESeq2` with the following parameters:
->    - Specify "G1E" as the first factor level (condition) and select the count files corresponding to the two replicates
->    - Specify "Mega" as the second factor level (condition) and select the count files corresponding to the two replicates
+>    - *"1: Factor"*
+>       - *"1: Factor level"*: `G1E`
+>          - {% icon param-file %} *"Counts file(s)"*: `featureCount files corresponding to the two G1E replicates`
+>       - *"2: Factor level"*: `Mega`
+>          - {% icon param-file %} *"Counts file(s)"*: `featureCount files corresponding to the two Mega replicates`
 >
 >       > ### {% icon comment %} Comment
 >       >
 >       > You can select several files by holding down the CTRL (or COMMAND) key and clicking on the desired files
 >       {: .comment}
->    - **Visualising the analysis results**: Yes
->    - **Output normalized counts table**: Yes
-> ![DESeq2 input and parameters](../../images/deseq2tf.png)
+>    - *"Visualising the analysis results"*: Yes
+>    - *"Output normalized counts table"*: Yes
+>
 {: .hands_on}
 
 The first output of `DESeq2` is a tabular file. The columns are:
@@ -324,17 +352,17 @@ In this last section, we will convert our aligned read data from BAM format to b
 
 > ### {% icon hands_on %} Hands-on: Converting aligned read files to bigWig format
 >
-> 1. **bamCoverage** {% icon tool %}: Run `bamCoverage` on all four aligned read files (`HISAT` output) with the following parameters:
->    - **Bin size in bases**: 1
->    - **Effective genome size**: mm9 (2150570000)
->    - Expand the **Advanced options**
->    - **Only include reads originating from fragments from the forward or reverse strand**: forward
->![bamCoverage input and parameters](../../images/bamCoverage_forward.png)
+> 1. **bamCoverage** {% icon tool %}: Run `bamCoverage` on all four aligned read files (`HISAT2` output) with the following parameters:
+>    - *"Bin size in bases"*: '1'
+>    - *"Effective genome size"*: 'mm9 (2150570000)''
+>    - *"Advanced options"*
+>       - *"Only include reads originating from fragments from the forward or reverse strand"*: 'forward'
+>
 > 2. **Rename** {% icon tool %}: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the PLUS strand.
 >
 > 3. **bamCoverage** {% icon tool %}: Repeat Step 1 except changing the following parameter:
->    - **Only include reads originating from fragments from the forward or reverse strand**: reverse
-> ![bamCoverage input and reverse parameter](../../images/bamCoverage_reverse.png)
+>    - *"Only include reads originating from fragments from the forward or reverse strand"*: 'reverse'
+>
 > 4. **Rename** {% icon tool %}: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the MINUS strand.
 {: .hands_on}
 
@@ -375,11 +403,12 @@ In this last section, we will convert our aligned read data from BAM format to b
 >
 >    > ### {% icon question %} Question
 >    > what do you see?
->    >    > ### {% icon solution %} Solution
->    >    > 1. There are two clusters of transcripts that are exclusively expressed in the G1E background
->    >    > 2. The left-most transcript is the Hoxb13 transcript
->    >    > 3. The center cluster of transcripts are not present in the RefSeq annotation and are determined by `GFFCompare` to be "u" and "x"
->    >    {: .solution }
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > 1. There are two clusters of transcripts that are exclusively expressed in the G1E background
+>    > > 2. The left-most transcript is the Hoxb13 transcript
+>    > > 3. The center cluster of transcripts are not present in the RefSeq annotation and are determined by `GFFCompare` to be "u" and "x"
+>    > {: .solution }
 >    {: .question}
 >
 {: .hands_on}
@@ -387,8 +416,6 @@ In this last section, we will convert our aligned read data from BAM format to b
 # Conclusion
 {:.no_toc}
 
-In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or down-regulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
+In this tutorial, we have analyzed RNA sequencing data to extract useful information, such as which genes are expressed in the G1E and megakaryocyte cellular states and which of these genes are differentially expressed between the two cellular states. In addition, we identified unannotated genes that are expressed in a cell-state dependent manner and at a locus with relevance to differentiation and development. To identify these transcripts, we analyzed RNA sequence datasets using a de novo transcriptome reconstruction RNA-seq data analysis approach. This approach can be summed up with the following scheme:
 
 ![RNAseq de novo tutorial workflow](../../images/schematic_for_RNAseq_de_novo_tutorial.png)
-
-

@@ -1,7 +1,39 @@
 ---
 layout: tutorial_hands_on
-topic_name: chip-seq
-tutorial_name: tal1-binding-site-identification
+
+title: "Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)"
+zenodo_link: "https://doi.org/10.5281/zenodo.197100"
+edam_ontology: "topic_3169"
+enable: false
+questions:
+  - How is raw ChIP-seq data processed and analyzed?
+  - What are the binding sites of Tal1?
+  - Which genes are regulated by Tal1?
+objectives:
+  - Inspect read quality with FastQC
+  - Perform read trimming with Trimmomatic
+  - Align trimmed reads with BWA
+  - Assess quality and reproducibility of experiments
+  - Identify Tal1 binding sites with MACS2
+  - Determine unique/common Tal1 binding sites from G1E and Megakaryocytes
+  - Identify unique/common Tal1 peaks occupying gene promoters
+  - Visually inspect Tal1 peaks with Trackster
+requirements:
+  -
+    type: "external"
+    title: "Trackster"
+    link: "https://wiki.galaxyproject.org/Learn/Visualization"
+time_estimation: "3h"
+key_points:
+  - Sophisticated analysis of ChIP-seq data is possible using tools hosted by Galaxy.
+  - Genomic dataset analyses require multiple methods of quality assessment to ensure that the data are appropriate for answering the biology question of interest.
+  - By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced.
+contributors:
+  - malloryfreeberg
+  - moheydarian
+  - vivekbhr
+  - joachimwolff
+  - erxleben
 ---
 
 # Introduction
@@ -19,15 +51,15 @@ Because of the long processing time for the large original files, we have downsa
 **Table 1**: Metadata for ChIP-seq experiments in this tutorial. SE: single-end.
 
 | Cellular state | Datatype | ChIP Ab | Replicate | SRA Accession | Library type | Read length | Stranded? | Data size (MB) |
-|---|---|:-:|:-:|---|:-:|:-:|:-:|---|
-| G1E | ChIP-seq | input | 1 | SRR507859 | SE | 36 | No | 35.8 |
-| G1E | ChIP-seq | input | 2 | SRR507860 | SE | 55 | No | 427.1 |
-| G1E | ChIP-seq | TAL1 | 1 | SRR492444 | SE | 36 | No | 32.3 |
-| G1E | ChIP-seq | TAL1 | 2 | SRR492445 | SE | 41 | No | 62.7 |
-| Megakaryocyte | ChIP-seq | input | 1	| SRR492453 | SE | 41 | No | 57.2 |
-| Megakaryocyte | ChIP-seq | input | 2 | SRR492454 | SE | 55 | No | 403.8 |
-| Megakaryocyte | ChIP-seq | TAL1 | 1 | SRR549006 | SE | 55 | No | 340.3 |
-| Megakaryocyte | ChIP-seq | TAL1 | 2 | SRR549007 | SE | 48 | No | 356.9 |
+| ---            | ---      | :-:     | :-:       | ---           | :-:          | :-:         | :-:       | ---            |
+| G1E            | ChIP-seq | input   | 1         | SRR507859     | SE           | 36          | No        | 35.8           |
+| G1E            | ChIP-seq | input   | 2         | SRR507860     | SE           | 55          | No        | 427.1          |
+| G1E            | ChIP-seq | TAL1    | 1         | SRR492444     | SE           | 36          | No        | 32.3           |
+| G1E            | ChIP-seq | TAL1    | 2         | SRR492445     | SE           | 41          | No        | 62.7           |
+| Megakaryocyte  | ChIP-seq | input   | 1         | SRR492453     | SE           | 41          | No        | 57.2           |
+| Megakaryocyte  | ChIP-seq | input   | 2         | SRR492454     | SE           | 55          | No        | 403.8          |
+| Megakaryocyte  | ChIP-seq | TAL1    | 1         | SRR549006     | SE           | 55          | No        | 340.3          |
+| Megakaryocyte  | ChIP-seq | TAL1    | 2         | SRR549007     | SE           | 48          | No        | 356.9          |
 
 > ### Agenda
 >
@@ -60,17 +92,17 @@ As for any NGS data analysis, ChIP-seq data must be quality controlled before be
 >
 >    ![data](../../images/data_uploaded.png "Imported datasets will appear in the history panel.")
 >
-> 3. Examine in Galaxy the data in a FASTQ file by clicking on the eye icon.
+> 3. Examine in Galaxy the data in a FASTQ file by clicking on the {% icon galaxy-eye %} (eye) icon.
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. What are four key features of a FASTQ file?
 >    > 2. What is the main difference between a FASTQ and a FASTA file?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. Sequence identifier and additonal information, the raw sequence, information about the sequence again with optional information, and quality information about the sequence
->    >    > 2. A fasta file contains only the description of the sequence and the sequence itself. A fasta file does not contain any quality information.
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. Sequence identifier and additonal information, the raw sequence, information about the sequence again with optional information, and quality information about the sequence
+>    > > 2. A fasta file contains only the description of the sequence and the sequence itself. A fasta file does not contain any quality information.
+>    > {: .solution }
 >    {: .question}
 >
 > 4. **FastQC** {% icon tool %}: Run the tool **FastQC** on each FASTQ file to assess the quality of the raw data. An explanation of the results can be found on the [FastQC web page](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
@@ -88,10 +120,10 @@ As for any NGS data analysis, ChIP-seq data must be quality controlled before be
 >    > 1. What does the y-axis represent in Figure 3?
 >    > 2. Why is the quality score decreasing across the length of the reads?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. The phred-score. This score gives the probability of an incorrect base e.g. a score of 20 means that it is likely by 1% that one base is incorrect. See [here](https://en.wikipedia.org/wiki/Phred_quality_score) for more information.
->    >    > 2. This is an unsolved technical issue of the sequencing machines. The longer the sequences are the more likely are errors. More [information.](https://www.ecseq.com/support/ngs/why-does-the-sequence-quality-decrease-over-the-read-in-illumina)
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. The phred-score. This score gives the probability of an incorrect base e.g. a score of 20 means that it is likely by 1% that one base is incorrect. See [here](https://en.wikipedia.org/wiki/Phred_quality_score) for more information.
+>    > > 2. This is an unsolved technical issue of the sequencing machines. The longer the sequences are the more likely are errors. More [information.](https://www.ecseq.com/support/ngs/why-does-the-sequence-quality-decrease-over-the-read-in-illumina)
+>    > {: .solution }
 >    {: .question}
 {: .hands_on}
 
@@ -101,13 +133,13 @@ It is often necessary to trim a sequenced read to remove bases sequenced with hi
 
 > ### {% icon hands_on %} Hands-on: Trimming and clipping reads
 >
-> 1. **Trimmomatic** {% icon tool %}: Run the tool **Trimmomatic** on each FASTQ file to trim low-quality bases (remember how to run tools on all files at once?). Explore the full parameter list for `Trimmomatic` in the Tool Form and set the following `Trimmomatic` parameters:
->
->    - **Paired end data?**: No
->    - **Perform initial ILLUMINACLIP?**: No
->    - **Select Trimmomatic operation to perform**: Sliding window trimming (SLIDINGWINDOW)
->    - **Number of bases to average across**: 4
->    - **Average quality required**: 20
+> 1. **Trimmomatic** {% icon tool %} to trim low-quality reads:
+>    - *"Paired end data?"*: `No`
+>    - {% icon param-files %} *"Input FASTQ file"*: all of the FASTQ files
+>    - *"Perform initial ILLUMINACLIP?"*: `No`
+>    - *"Select Trimmomatic operation to perform"*: `Sliding window trimming (SLIDINGWINDOW)`
+>    - *"Number of bases to average across"*: `4`
+>    - *"Average quality required"*: `20`
 >
 >    > ### {% icon tip %} Tip: Changing datatypes
 >    >
@@ -121,13 +153,13 @@ It is often necessary to trim a sequenced read to remove bases sequenced with hi
 >    > 1. How did the range of read lengths change after trimming/clipping?
 >    > 2. What do you think could account for the enriched k-mers (**Kmer Content** heading in **FASTQC** output) observed in the Megakaryocytes TAL1 R2 ChIP-seq experiment?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. Before trimming, all the reads were the same length, which reflected the number of rounds of nucleotide incorporation in the sequencing experiment. After trimming, read lengths span a range of values reflecting different lengths of the actual DNA fragments captured during the ChIP experiement.
->    >    > 2. Many transcription factors recognize and bind to specific sequence motifs. Since a ChIP-seq experiment enriches for DNA fragments bound by the protein being immunopurified, we might expect that protein's recognition motif to be slightly enriched in the resulting sequenced reads.
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. Before trimming, all the reads were the same length, which reflected the number of rounds of nucleotide incorporation in the sequencing experiment. After trimming, read lengths span a range of values reflecting different lengths of the actual DNA fragments captured during the ChIP experiement.
+>    > > 2. Many transcription factors recognize and bind to specific sequence motifs. Since a ChIP-seq experiment enriches for DNA fragments bound by the protein being immunopurified, we might expect that protein's recognition motif to be slightly enriched in the resulting sequenced reads.
+>    > {: .solution }
 >    {: .question}
 >
->    ![fastqafter](../../images/fastqc_after.png "Sequence quality per base generated by **FastQC** <b>after</b> end trimming.")
+>    ![fastqafter](../../images/fastqc_after.png "Sequence quality per base generated by FastQC <b>after</b> end trimming.")
 {: .hands_on}
 
 # Step 3: Aligning reads to a reference genome
@@ -137,28 +169,29 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 
 > ### {% icon hands_on %} Hands-on: Aligning reads to a reference genome
 >
-> 1. **Map with BWA** {% icon tool %}: Run the tool **Map with BWA** to map the trimmed/clipped reads to the mouse genome. Set the following **Map with BWA** parameters:
+> 1. **Map with BWA** {% icon tool %} to map the trimmed/clipped reads to the mouse genome:
+>    - *"Will you select a reference genome..."*: `Use a built-in genome index`
+>    - *"Using reference genome"*: `Mouse (mus musculus) mm10`
+>    - *"Select input type"*: `Single fastq`
+>    - {% icon param-file %} *"Select fastq dataset"*: to the generated `trimmed reads`
 >
->    - **Using reference genome**: Mouse (mus musculus) mm10
->    - **Single or Paired-end reads**: Single
->
->    ![bwa](../../images/BWA_tool_form.png "Select the trimmed read files to be aligned.")
->
-> 2. Rename your files after **BWA** finishes to reflect the origin and contents
-> 3. Inspect a file produced by running **BWA**
+> 2. **Rename** your files after BWA finishes to reflect the origin and contents
+> 3. **Inspect** a file produced by running BWA
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. What datatype is the `BWA` output file?
 >    > 2. How many reads were mapped from each file?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. The output is a BAM file.
->    >    > 2. Check the number of lines for each file in your history. This gives you a rough estimate.
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. The output is a BAM file.
+>    > > 2. Check the number of lines for each file in your history. This gives you a rough estimate.
+>    > {: .solution }
 >    {: .question}
 >
-> 3. **IdxStats** {% icon tool %}: Run the tool **IdxStats** on all mapped files and look at the output (poke it in the eye!).
+> 3. **IdxStats** {% icon tool %} with the following parameters:
+>     - {% icon param-files %} *"BAM file"*: all the mapped files
+>    Examine the output (poke it in the eye!)
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -166,18 +199,18 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 >    > 2. How many reads were mapped to chromosome 19 in each experiment?
 >    > 3. If the mouse genome has 21 pairs of chromosomes, what are the other reference chromosomes (*e.g.* chr1_GL456210_random)?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. 
->    >    >    Column | Description
->    >    >    --- | ---
->    >    >    1 | Reference sequence identifier
->    >    >    2 | Reference sequence length
->    >    >    3 | Number of mapped reads
->    >    >    4 | Number of placed but unmapped reads (typically unmapped partners of mapped reads)
->    >    >   
->    >    > 2. This information can be seen in column 3, e.g. for Megakaryocyte_Tal1_R1 2143352 reads are mapped.
->    >    > 3. These are parts of chromosomes that e.g. for chr1_GL456210_random do belong to chr1 but it is unclear where exactly. There entires like chrUn that are not associated with a chromosome but it is believed that they are part of the genome. 
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. 
+>    > >    Column | Description
+>    > >    --- | ---
+>    > >    1 | Reference sequence identifier
+>    > >    2 | Reference sequence length
+>    > >    3 | Number of mapped reads
+>    > >    4 | Number of placed but unmapped reads (typically unmapped partners of mapped reads)
+>    > >   
+>    > > 2. This information can be seen in column 3, e.g. for Megakaryocyte_Tal1_R1 2143352 reads are mapped.
+>    > > 3. These are parts of chromosomes that e.g. for chr1_GL456210_random do belong to chr1 but it is unclear where exactly. There entires like chrUn that are not associated with a chromosome but it is believed that they are part of the genome. 
+>    > {: .solution }
 >    {: .question}
 {: .hands_on}
 
@@ -189,43 +222,37 @@ We expect that the replicate samples will cluster more closely to each other tha
 
 > ### {% icon hands_on %} Hands-on: Assessing correlation between samples
 >
-> 1. **multiBamSummary** {% icon tool %}: Run the tool **multiBamSummary** from the **multiBamSummary** package
+> **multiBamSummary** splits the reference genome into bins of equal size and counts the number of reads in each bin from each sample. We set a small **Bin size** here because we are working with a subset of reads that align to only a fraction of the genome.
 >
->    This tool splits the reference genome into bins of equal size and counts the number of reads in each bin from each sample. We set a small **Bin size** here because we are working with a subset of reads that align to only a fraction of the genome.
+> 1. **multiBamSummary** {% icon tool %} with the following parameters:
+>     - *"Sample order matters"*: `No`
+>     - {% icon param-files %} *"Bam files"*: Select all of the aligned BAM files (`Aligned ...`)
+>     - *"Bin size in bp"*: 1000
 >
->    Set the following **multiBamSummary** parameters:
+> 2. **plotCorrelation** {% icon tool %} from the **deepTools** package to visualize the results:
+>     - *"Matrix file from the multiBamSummary tool"*: Select the output from the previous step
+>     - *"Correlation method"*: `Pearson`
+>     - *"Plotting type"*: `Heatmap`
+>     - *"Plot the correlation value"*: `Yes`
+>     - *"Skip zeros"*: `Yes`
+>     - *"Remove regions with very large counts"*: `Yes`
 >
->     - Select all of the aligned BAM files
->     - **Bin size in bp**: 1000
->
->     ![multiBamSummary](../../images/multiBamSummary_1000bin.png "Select all of the aligned BAM files and change Bin size.")
->
-> 2. **plotCorrelation** {% icon tool %}: Run the tool **plotCorrelation** from the **deepTools** package to visualize the results from the previous step.
->
->    Feel free to try different parameters. To start, set the following **plotCorrelation** parameters:
->
->     - **Correlation method**: Pearson
->     - **Plotting type**: Heatmap
->     - **Plot the correlation value**: Yes
->     - **Skip zeros**: Yes
->     - **Remove regions with very large counts**: Yes
->
->     ![corr](../../images/plotCorrelation.png "Select the newly generation correlation matrix file from the previous step.")
+>     Feel free to play around with these parameter settings
 >
 >     > ### {% icon question %} Questions
 >     >
 >     > 1. Why do we want to skip zeros in **plotCorrelation**?
 >     > 2. What happens if the Spearman correlation method is used instead of the Pearson method?
 >     > 3. What does the output of making a Scatterplot instead of a Heatmap look like?
->    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. Large areas of zeros would lead to a correlation of these areas. The information we would get out of this computation would be meaningless. 
->    >    > 2. The clusters are different, e.g. Megakaryocyte_input_R2 and G1E_input_R2 are clustered together. [ More information about Pearson and Spearman correlation. ](http://support.minitab.com/en-us/minitab-express/1/help-and-how-to/modeling-statistics/regression/supporting-topics/basics/a-comparison-of-the-pearson-and-spearman-correlation-methods/)
->    >    > 3. No solution for you, just compare the different outputs. 
->    >    {: .solution }
+>     >
+>     > > ### {% icon solution %} Solution
+>     > > 1. Large areas of zeros would lead to a correlation of these areas. The information we would get out of this computation would be meaningless. 
+>     > > 2. The clusters are different, e.g. Megakaryocyte_input_R2 and G1E_input_R2 are clustered together. [ More information about Pearson and Spearman correlation. ](http://support.minitab.com/en-us/minitab-express/1/help-and-how-to/modeling-statistics/regression/supporting-topics/basics/a-comparison-of-the-pearson-and-spearman-correlation-methods/)
+>     > > 3. No solution for you, just compare the different outputs. 
+>     > {: .solution }
 >     {: .question}
 >
->     ![heatmap](../../images/plotCorrelation_heatmap_pearson_1kb.png "Heatmap of correlation matrix generated by **plotCorrelation**.")
+>     ![heatmap](../../images/plotCorrelation_heatmap_pearson_1kb.png "Heatmap of correlation matrix generated by <b>plotCorrelation</b>.")
 {: .hands_on}
 
 For additional informaton on how to interpret **plotCorrelation** plots, read the information [here](https://deeptools.readthedocs.io/en/latest/content/tools/plotCorrelation.html#background)
@@ -236,15 +263,11 @@ We will now evaluate the quality of the immuno-precipitation step in the ChIP-se
 
 > ### {% icon hands_on %} Hands-on: Assessing IP strength
 >
-> 1. **plotFingerprint** {% icon tool %}: Run the tool **plotFingerprint** from the **deepTools** package.
->
->    - Select all of the aligned BAM files for the G1E cell type
->    - **Show advanced options**: yes
->    - **Bin size in bases**: 100
->    - **Skip zeros**: Yes
->
->    ![fingerprint1](../../images/plotFingerprint1_v2.png)
->    ![fingerprint2](../../images/plotFingerprint2.png "Select all of the aligned BAM file to assess IP strength.")
+> 1. **plotFingerprint** {% icon tool %} from the **deepTools** package with the following parameters:
+>    - {% icon param-files %} *"Bam files"*: Select all of the aligned BAM files for the G1E cell type
+>    - *"Show advanced options"*: `yes`
+>    - *"Bin size in bases"*: `100`
+>    - *"Skip zeros"*: `Yes`
 >
 > 2. View the output image.
 >
@@ -257,12 +280,12 @@ We will now evaluate the quality of the immuno-precipitation step in the ChIP-se
 >    > 3. What do you think about the quality of the IP for this experiment?
 >    > 4. How does the quality of the IP for megakaryocytes compare to G1E cells?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. It shows us how good the ChIP Signal compared to the control signal is. An ideal control [input] with perfect uniform distribution of reads along the genome (i.e. without enrichments in open chromatin etc.) and infinite sequencing coverage should generate a straight diagonal line. A very specific and strong ChIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank. 
->    >    > 2. We expect that the control (input) signal is more or less uniform distributed over the genome (e.g. like the green line in the image above.) The IP dataset should look more like the red line but it would be better if the values for IP start to increase at around 0.8 on the x-axis. 
->    >    > 3. The enrichment did not work as it should. Compare the blue line with the red one! For your future experiments: You can never have enough replicates! 
->    >    > 4. The quality of megakaryocytes is better then G1E.
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. It shows us how good the ChIP Signal compared to the control signal is. An ideal control [input] with perfect uniform distribution of reads along the genome (i.e. without enrichments in open chromatin etc.) and infinite sequencing coverage should generate a straight diagonal line. A very specific and strong ChIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank. 
+>    > > 2. We expect that the control (input) signal is more or less uniform distributed over the genome (e.g. like the green line in the image above.) The IP dataset should look more like the red line but it would be better if the values for IP start to increase at around 0.8 on the x-axis. 
+>    > > 3. The enrichment did not work as it should. Compare the blue line with the red one! For your future experiments: You can never have enough replicates! 
+>    > > 4. The quality of megakaryocytes is better then G1E.
+>    > {: .solution }
 >    {: .question}
 {: .hands_on}
 
@@ -303,7 +326,11 @@ First, we will reformat the peak file before we send it to Trackster, and then w
 
 > ### {% icon hands_on %} Hands-on: Inspection of peaks and aligned data with Trackster
 >
-> 1. **Cut** {% icon tool %}: Run the tool **Cut** on the peak file choosing columns "c1,c2,c3,c4" and rename this file to reflect the origin and contents.
+> 1. **Cut** {% icon tool %} with the following parameters:
+>    - *"Cut columns"*: `c1,c2,c3,c4`
+>    - {% icon param-file %} *"From"*: the peak file
+>
+>    Afterwards, **rename** this file to reflect the origin and contents.
 >
 > 2. Import the gene annotations file from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.197100.svg)](https://doi.org/10.5281/zenodo.197100)
 >
@@ -311,26 +338,30 @@ First, we will reformat the peak file before we send it to Trackster, and then w
 >
 >    ![vizbutton](../../images/Highlighting_viz_button.png "Trackster can be accessed from the Visualizations button at the top of the screen.")
 >
-> 4. Give this session a descriptive name and choose "mm10" as the "Reference genome build (dbkey)".
+> 4. **Configure** the new visualization:
+>    - *"Browswer name"*: something descriptive
+>    - *"Reference genome build (dbkey)"*: `mm10`
 >
 >    ![tracksterdb](../../images/Trackster_session_and_db.png "Session name and assigning reference genome.")
 >
-> 5. Click "Add Datasets to visualization" and select the history containing the data from this analysis. Select the BEDgraph files and the peak files that you renamed.
+> 5. **Click** `Add Datasets to visualization`
+>    - Select the history containing the data from this analysis.
+>    - Select the BEDgraph files and the peak files that you renamed.
 >
 >    ![tracksteradd](../../images/Trackster_add_datasets.png "Load your data into Trackster with the Add Datasets to visualization feature.")
 >
 >    ![tracksterselect](../../images/Trackster_selecting_datasets.png "Select data from your histories to view in Trackster.")
 >
-> 6. Navigate to the Runx1 locus (chr16:92501466-92926074) to inspect the aligned reads and TAL1 peaks.
+> 6. Navigate to the `Runx1` locus (`chr16:92501466-92926074`) to inspect the aligned reads and `TAL1` peaks.
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. What do you see at the Runx1 locus in Trackster?
 >    > 2. What gene(s) other than Runx1 could be regulated by TAL1?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. Directly upstream of the shorter Runx1 gene models is a cluster of 3 TAL1 peaks that only appear in the G1E cell type, but not in Megakaryocytes. Further upstream, there are some shared TAL1 peaks in both cell types.
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. Directly upstream of the shorter Runx1 gene models is a cluster of 3 TAL1 peaks that only appear in the G1E cell type, but not in Megakaryocytes. Further upstream, there are some shared TAL1 peaks in both cell types.
+>    > {: .solution }
 >    {: .question}
 >
 >    ![runx1](../../images/Trackster_Runx1_locus.png "The Runx1 locus.")
@@ -344,6 +375,7 @@ We show here an alternative to Trackster, [IGV](http://software.broadinstitute.o
 > 1. Open IGV on your local computer.
 > 2. Click on each 'narrow peaks' result file from the MACS2 computations on 'display with IGV' --> 'local Mouse mm10'
 > 3. For more information about IGV see [here]({{site.baseurl}}/topics/introduction/tutorials/igv-introduction/tutorial.html)
+{: .hands_on}
 
 # Step 8: Identifying unique and common TAL1 peaks between stages
 
@@ -351,23 +383,23 @@ We have processed ChIP-seq data from two stages of hematopoiesis and have lists 
 
 > ### {% icon hands_on %} Hands-on: Identifying unique and common TAL1 peaks between states
 >
-> 1. **Intersect intervals** {% icon tool %}: Run the tool **Intersect intervals** to find peaks that exist both in G1E and megakaryocytes.
->
->    Select the "TAL1 G1E peaks" and "TAL1 Mega peaks" files as the inputs.
+> 1. **Intersect intervals** {% icon tool %} to find peaks that exist both in G1E and megakaryocytes:
+>    - {% icon param-file %} *"File A to intersect with B"*: `TAL1 G1E peaks`
+>    - {% icon param-file %} *"File B to intersect with A"*: `TAL1 Mega peaks`
 >
 >    Running this tool with the default settings will return overlapping peaks of both files.
 >
-> 2. **Intersect intervals** {% icon tool %}: Run the tool **Intersect intervals** to find peaks that exist only in G1E.
+> 2. **Intersect intervals** {% icon tool %} to find peaks that exist only in G1E:
+>    - {% icon param-file %} *"File A to intersect with B"*: `TAL1 G1E peaks`
+>    - {% icon param-file %} *"File B to intersect with A"*: `TAL1 Mega peaks`
+>    - *"Report only those alignments that \*\*do not\*\* overlap the BED file"*: `Yes`
 >
->    - Select "TAL1 G1E peaks" as the first input and "TAL1 Mega peaks" as the second input file.
->    - **Report only those alignments that \*\*do not\*\* overlap the BED file**: Yes
+> 3. **Intersect intervals** {% icon tool %} to find peaks that exist only in megakaryocytes:
+>    - {% icon param-file %} *"File A to intersect with B"*: `TAL1 Mega peaks`
+>    - {% icon param-file %} *"File B to intersect with A"*: `TAL1 G1E peaks`
+>    - *"Report only those alignments that \*\*do not\*\* overlap the BED file"*: `Yes`
 >
-> 3. **Intersect intervals** {% icon tool %}: Run the tool **Intersect intervals** to find peaks that exist only in megakaryocytes.
->
->    - Select "TAL1 Mega peaks" as the first input and "TAL1 G1E peaks" as the second input file.
->    - **Report only those alignments that \*\*do not\*\* overlap the BED file**: Yes
->
-> 4. Re-name the three files we generated to reflect their contents.
+> 4. **Rename** the three files we generated to reflect their contents.
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -375,11 +407,11 @@ We have processed ChIP-seq data from two stages of hematopoiesis and have lists 
 >    > 2. How many are unique to G1E cells?
 >    > 3. How many are unique to megakaryocytes?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. 1 region
->    >    > 2. 407 regions
->    >    > 3. 139 regions
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. 1 region
+>    > > 2. 407 regions
+>    > > 3. 139 regions
+>    > {: .solution }
 >    {: .question}
 {: .hands_on}
 
@@ -389,12 +421,16 @@ We will generate Input normalized coverage (bigwig) files for the ChIP samples, 
 
 > ### {% icon hands_on %} Hands-on: Generate Input-normalized bigwigs
 >
-> 1. Search for **bamCompare** in the Galaxy tool panel.
-> 2. Select the treatment sample, for example "Megakaryocyte_Tal1_R2.bam", as the first sample, and the input sample "Megakaryocyte_Input_R2.bam" as the second sample.
-> 3. Check that you are using log2 ratio to compare the samples, and click "Execute".
-> 4. Repeat this step for all treatment and input samples: Megakaryocyte_Tal1_R1.bam and Megakaryocyte_Input_R1.bam; G1E_Tal1_R2.bam and G1E_Input_R2.bam; G1E_Tal1_R1.bam and G1E_Input_R1.bam.
+> 1. **bamCompare** {% icon tool %} with the following parameters:
+>    - *"First BAM/CRAM file (e.g. treated sample)"*: `Megakaryocyte_Tal1_R2.bam`
+>    - *"Second BAM/CRAM file (e.g. control sample)"*: `Megakaryocyte_Input_R2.bam`
+>    - *"How to compare the two files"*: `Compute log2 of the number of reads`
 >
-> ![bamCompare tool settings](../../images/bamcom.png)
+> 2. **Repeat** this step for all treatment and input samples:
+>     - `Megakaryocyte_Tal1_R1.bam` and `Megakaryocyte_Input_R1.bam`
+>     - `G1E_Tal1_R2.bam` and `G1E_Input_R2.bam`
+>     - `G1E_Tal1_R1.bam` and `G1E_Input_R1.bam`
+>
 {: .hands_on}
 
 # Step 10: Plot the signal on the peaks between samples
@@ -409,33 +445,29 @@ optionally, you can also use `plotProfile`to create a profile plot using to comp
 
 > ### {% icon hands_on %} Hands-on: calculate signal matrix on the MACS2 output
 >
-> 1. Search for **computeMatrix** in the Galaxy tool panel.
-> 2. Under "Regions to plot", select the MACS2 output (narrowpeaks) for G1E cells (TAL1 over Input).
-> 3. Under "Score file", select the bigWigs (log2 ratios from bamCompare).
-> 4. From "computeMatrix has two main output options", select "reference point".
-> 5. Under "The Reference point for plotting", select "Center of region".
-> 6. For the two fields region upstream and downstream choose both times the value '5000'
+> 1. **computeMatrix** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *Select Regions* > *"Regions to plot"*: select the MACS2 output (narrowpeaks) for G1E cells (TAL1 over Input)
+>    - {% icon param-file %} *"Score file"*: Select the bigWigs (log2 ratios from bamCompare)
+>    - *"computeMatrix has two main output options"*: `reference-point`
+>    - *"The Reference point for plotting"*: `center of region`
+>    - *"Distance upstream of the start site of the regions defined in the region file"*: `5000`
+>    - *"Distance downstream of the end site of the given regions"*: `5000`
+>    - *"Show advanced options"*: `Yes`
+>    - *"Convert missing values ot zero"*: `Yes`
+>    - *"Skip zeros"*: `Yes`
 >
-> ![compMatrix](../../images/compM.png)
->
-> 7. Under advanced options , select "Yes" for "Convert missing values to zero" and "Skip zeros".
-> 8. Select "Execute"
->
-> ![computeMatrix](../../images/compM2.png)
 {: .hands_on}
 
 ### plotHeatmap
 
 > ### {% icon hands_on %} Hands-on: plot a Heatmap using computeMarix output
 >
-> 1. Select "plotHeatmap" from the Galaxy tool panel.
-> 2. Select the computeMatrix output as an input.
-> 3. Under advanced options, go to "Labels for the samples ", and enter sample labels (in the order you added them in compueMatrix ), separated by space.
-> 4. Click "Execute"
+> 1. **plotHeatmap** {% icon tool %} with the following parameters:
+>    - *"Matrix file from the computeMatrix tool"*: Select the computeMatrix output
+>    - *"Show advanced options"*: `Yes`
+>    - *"Labels for the samples (each bigwig) plotted"*: Enter sample labels in the order you added them in compueMatrix, separated by spaces.
 >
-> ![plotHM](../../images/plothm.png)
->
-> The output shall look like this :
+> The output should look like this :
 >
 > ![hm](../../images/hm.png)
 {: .hands_on}
@@ -450,26 +482,23 @@ We will now check whether the samples have more reads from regions of the genome
 
 > ### {% icon hands_on %} Hands-on: Assessing GC bias
 >
-> 1. **computeGCbias** {% icon tool %}: Run the tool **computeGCbias** from the **deepTools** package.
->
->    - First, select an aligned BAM files for an input dataset
->    - **Reference genome**: locally cached
->    - **Using reference genome**: mm10
->    - **Effective genome size**: user specified
->    - **Effective genome size**: 10000000
->    - **Fragment length used for the sequencing**: 50
->
->    ![gcbias](../../images/computeGCBias.png "Select a single aligned BAM file to check GC bias for that dataset.")
+> 1. **computeGCbias** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Bam file"*: select an aligned BAM file
+>    - *"Reference genome"*: `locally cached`
+>    - *"Using reference genome"*: `mm10`
+>    - *"Effective genome size"*: `user specified`
+>    - *"Effective genome size"*: `10000000`
+>    - *"Fragment length used for the sequencing"*: `50`
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. Why would we worry more about checking for GC bias in an input file?
 >    > 2. Does this dataset have a GC bias?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. In an input ChIP-seq file, the expectation is that DNA fragments are uniformly sampled from the genome. This is in contrast to an IP ChIP-seq file where it is *expected* that certain genomic regions contain more reads  (i.e. regions that are bound by the protein that is immunopurified). Therefore, non-uniformity of reads in the input sample could be a result of GC-bias, whereby more GC-rich fragments are preferentially amplified during PCR.
->    >    > 2. To answer this question, run the **computeGCbias** tool as described above and check out the results. What do YOU think? For more examples and information on how to interpret the results, check out the tool usage documentation [here](https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html#background).
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. In an input ChIP-seq file, the expectation is that DNA fragments are uniformly sampled from the genome. This is in contrast to an IP ChIP-seq file where it is *expected* that certain genomic regions contain more reads  (i.e. regions that are bound by the protein that is immunopurified). Therefore, non-uniformity of reads in the input sample could be a result of GC-bias, whereby more GC-rich fragments are preferentially amplified during PCR.
+>    > > 2. To answer this question, run the **computeGCbias** tool as described above and check out the results. What do YOU think? For more examples and information on how to interpret the results, check out the tool usage documentation [here](https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html#background).
+>    > {: .solution }
 >    {: .question}
 >
 > 2. **correctGCbias** {% icon tool %}: Explore the tool **correctGCbias** from the **deepTools** package.
@@ -480,11 +509,11 @@ We will now check whether the samples have more reads from regions of the genome
 >    > 2. What is the output of this tool?
 >    > 3. What are some caveats to be aware of if using the output of this tool in downstream analyses?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. The **corectGCbias** tool removes reads from regions with higher coverage than expected (typically corresponding to GC-rich regions) and adds reads to regions with lower coverage than expected (typically corresponding to AT-rich regions).
->    >    > 2. The output of this tool is a GC-corrected file in BAM, bigWig, or bedGraph format.
->    >    > 3. The GC-corrected output file likely contains duplicated reads in low-coverage regions where reads were added to match the expected read density. Therefore, it is necessary to *avoid* filtering or removing duplicate reads in any downstream analyses.
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. The **corectGCbias** tool removes reads from regions with higher coverage than expected (typically corresponding to GC-rich regions) and adds reads to regions with lower coverage than expected (typically corresponding to AT-rich regions).
+>    > > 2. The output of this tool is a GC-corrected file in BAM, bigWig, or bedGraph format.
+>    > > 3. The GC-corrected output file likely contains duplicated reads in low-coverage regions where reads were added to match the expected read density. Therefore, it is necessary to *avoid* filtering or removing duplicate reads in any downstream analyses.
+>    > {: .solution }
 >    {: .question}
 {: .hands_on}
 

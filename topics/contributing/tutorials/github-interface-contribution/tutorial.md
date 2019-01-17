@@ -1,7 +1,20 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: github-interface-contribution
+
+title: "Contributing with GitHub via its interface"
+questions:
+  - "How can I contribute to an open-source project with GitHub and its interface"
+objectives:
+  - "Edit a file via GitHub interface"
+  - "Create a pull request"
+  - "Update a pull request"
+time_estimation: "20m"
+key_points:
+  - "You can't add or push directly to the `master` branch, so you need to create a pull request"
+  - "1 pull request = 1 branch"
+  - "The pull request is the foundation of the collaborative development of the training material"
+contributors:
+  - bebatut
 ---
 
 # Introduction

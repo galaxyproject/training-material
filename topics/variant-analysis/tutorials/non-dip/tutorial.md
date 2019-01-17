@@ -1,7 +1,22 @@
 ---
 layout: tutorial_hands_on
-topic_name: variant-analysis
-tutorial_name: non-dip
+
+title: "Calling variants in non-diploid systems"
+zenodo_link: "https://doi.org/10.5281/zenodo.1251112"
+tags:
+  - prokaryote
+questions:
+  - "How does frequency of mitochondrial polymorphisms change from mother to child?"
+objectives:
+  - "Using Galaxy's main site we will see how to call variants in bacteria, viruses, and organelles."
+time_estimation: "1h30m"
+key_points:
+  - "Variation in human mitochondria is a proxy for other haploid systems."
+  - "Nucleotide variants in haploid systems may have any frequency between 0 and 1."
+  - "Distinguishing true variants from noise is not easy and requires accounting <br> for strand bias and read placement bias."
+  - "FreeBayes can be effectively used to call variants in haploid systems."
+contributors:
+  - nekrut
 ---
 
 # Introduction
@@ -99,7 +114,7 @@ We can BAM dataset using **NGS: Picard** &#8594; **MergeSAMFiles** tool:
 
 ## Removing duplicates
 
-Preparation of sequencing libraries (at least at the time of writing) for technologies such as Illumina (used in this example) involves PCR amplification. It is required to generate sufficient number of sequencing templates so that a reliable detection can be performed by base callers. Yet PCR has it's biases, which are especially profound in cases of multitemplate PCR used for construction of sequencing libraries (Kanagawa et al. [2003](https://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Abstract&list_uids=16233530)).
+Preparation of sequencing libraries (at least at the time of writing) for technologies such as Illumina (used in this example) involves PCR amplification. It is required to generate sufficient number of sequencing templates so that a reliable detection can be performed by base callers. Yet PCR has its own biases, which are especially profound in cases of multi-template PCR used for construction of sequencing libraries (Kanagawa et al. [2003](https://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Abstract&list_uids=16233530)).
 
 Duplicates can be identified based on their outer alignment coordinates or using sequence-based clustering. One of the common ways for identification of duplicate reads is the `MarkDuplicates` utility from [Picard](https://broadinstitute.github.io/picard/command-line-overview.html) package. It is designed to identify both PCR and optical duplicates (the following is an excerpt from Picard documentation):
 
@@ -325,9 +340,7 @@ chrM	15326	.	A	G	79542.1	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=2574;CIGAR=1X;DP=2586;DP
 ```
 
 # Filtering VCF data
-
-Even though we selected somewhat stringent input parameters (restricting base quality to a minimum of 30 and mapping quality to a minimum of 20) there is still a lot of just in our data. [Erik Garrison](https://github.com/ekg) has a beautiful illustration of various biases potentially affecting called variants (and making a locus sequence-able):
-
+After filtering the data with stringent input parameters (restricting base quality to a minimum of 30 and mapping quality to a minimum of 20) a considerable amount variants due to read-alignment bias exits. [Erik Garrison](https://github.com/ekg) has a beautiful illustration of various biases potentially affecting called variants (and making a locus sequence-able):
 |                            |
 |----------------------------|
 |![Various biases potentially affecting called variants](../../images/mt_biases.png)|
@@ -363,7 +376,7 @@ chrM	8557	.	G	C	2590.97	.	AB=0.267066;ABP=790.051;AC=2;AF=0.5;AN=4;AO=446;CIGAR=
 ```
 # Looking at the data
 
-For visalizaning VCFs Galaxy relies on the two external tools.  The first is called [VCF.IOBIO](http://vcf.iobio.io/) and is developed by [Gabor Marth's group](http://marthlab.org/) at the University of Utah. The second is called [IGV](http://software.broadinstitute.org/software/igv/) developed by Broad Institute.  
+For visualizing VCFs Galaxy relies on the two external tools.  The first is called [VCF.IOBIO](http://vcf.iobio.io/) and is developed by [Gabor Marth's group](http://marthlab.org/) at the University of Utah. The second is called [IGV](http://software.broadinstitute.org/software/igv/) developed by Broad Institute.  
 
 ## VCF.IOBIO
 

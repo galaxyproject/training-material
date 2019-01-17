@@ -1,41 +1,67 @@
 ---
 ---
 
+$font-size: 15px;
+$tutorial-box-spacing: 1rem;
+
+// palette
 $white: #fff;
 $gray: #777;
 $light-gray: #ddd;
-$bg-color: #2c3143;
-$menu-color: #9d9d9d;
 $text-color: #292b2c;
-$font-size: 15px;
-$overview-color: $bg-color;
-$agenda-color: $bg-color;
-$keypoints-color: #1D243D;
-$tip-color: #587177;
 
-$warning-color: #FAA632;
+$red: #f00000;
+$orange: #f06d00;
+$yellow: #be9900;
+$green: #339e3a;
+$blue: #009090;
+$dark-blue: #2c3143;
+$light-blue: #5daadd;
+$purple: #882d60;
+$mid-gray: #9d9d9d;
 
-$comment-color: #4aafcd;
-$handson-color: #190F2F;
-$question-color: #474E67;
-$solution-color: #c6c6c6;
-$details-color: #c6c6c6;
-$tutorial-box-spacing: 1rem;
+// colors general
+$bg-color: $dark-blue;
+$menu-color: $dark-blue;
 
-@mixin tutorial-box ($bg-color, $color: $white) {
-    margin-top: $tutorial-box-spacing;
-    padding: 0 $tutorial-box-spacing $tutorial-box-spacing;
+// colors tutorial boxes
+$overview-color: #8A9AD0;
+$agenda-color: #86D486;
+$keypoints-color: #FFA1A1;
+$tip-color: #FFE19E;
+$warning-color: #de8875;
+$comment-color: #ffecc1;
+$handson-color: #dfe5f9;
+$question-color: #8A9AD0;
+$solution-color: #B8C3EA;
+$details-color: $light-gray;
+$feedback-color: #86D486;
+
+
+@mixin tutorial-box ($bg-color, $color: rgba(255,255,255,.75)) {
+    margin-top: 3 * $tutorial-box-spacing;
+    padding: $tutorial-box-spacing $tutorial-box-spacing - 0.11rem $tutorial-box-spacing;
     border: 1px solid $bg-color;
-    border-top: none;
-
+    box-shadow: 3px 3px $bg-color;
     & > h3 {
         font-size: $font-size + 3;
-        margin-top: 0;
         margin-left: -$tutorial-box-spacing;
         margin-right: -$tutorial-box-spacing;
-        padding: $tutorial-box-spacing / 2;
+        margin-top: -3.30rem;
+        padding-top: $tutorial-box-spacing / 2;
+        padding-bottom: $tutorial-box-spacing / 2;
+        padding-left: $tutorial-box-spacing;
+        padding-right: $tutorial-box-spacing;
         background-color: $bg-color;
         color: $color;
+        vertical-align: 1em;
+        float: left;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+
+        .fa {
+            padding-right: $tutorial-box-spacing / 5;
+        }
     }
 }
 
@@ -52,7 +78,8 @@ h4 {
 }
 
 img {
-    max-width: 100%;
+    max-width: 95%;
+    margin: 2.5%;
 }
 
 pre {
@@ -80,6 +107,12 @@ footer {
     font-size: $font-size - 2;
 }
 
+.follow-up {
+    p {
+        font-size: 18px;
+    }
+}
+
 .navbar {
     background-color: $bg-color!important;
 
@@ -102,7 +135,11 @@ footer {
     .fa {
         font-size: $font-size + 5;
     }
-    
+
+}
+
+.topic-icon {
+    padding: .5rem .75rem;
 }
 
 .training-network-map {
@@ -145,48 +182,58 @@ footer {
         }
 
         &.agenda {
-            @include tutorial-box($agenda-color);
+            @include tutorial-box($agenda-color, $text-color);
         }
 
         &.tip {
-            @include tutorial-box($tip-color);
+            @include tutorial-box($tip-color, $text-color);
         }
 
         &.question {
-            @include tutorial-box($question-color);
+            @include tutorial-box($question-color, $text-color);
         }
 
         &.solution {
-            @include tutorial-box($solution-color);
+            @include tutorial-box($solution-color, $text-color);
         }
 
         &.comment {
-            @include tutorial-box($comment-color);
+            @include tutorial-box($comment-color, $text-color);
         }
 
         &.hands_on {
-            @include tutorial-box($handson-color);
+            @include tutorial-box($handson-color, $text-color);
         }
 
         &.key_points {
-            @include tutorial-box($keypoints-color);
+            @include tutorial-box($keypoints-color, $text-color);
         }
 
         &.overview {
-            @include tutorial-box($overview-color);
+            @include tutorial-box($overview-color, $text-color);
         }
 
         &.warning-box {
-            @include tutorial-box($warning-color);
+            @include tutorial-box($warning-color, $text-color);
         }
 
         &.details {
-            @include tutorial-box($details-color);
+            @include tutorial-box($details-color, $text-color);
+        }
+
+        &.feedback{
+            @include tutorial-box($feedback-color, $text-color);
         }
     }
 
     .fold-unfold {
-        margin-left: 5px;
+        margin-left: $tutorial-box-spacing;
+    }
+
+    .google-form {
+        width: 100%;
+        height: 1100px;
+        border: 0;
     }
 }
 
@@ -329,4 +376,31 @@ footer {
 
 .label-default {
     background-color: #999999;
+}
+
+.visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+
+/* WCAG Contrast. These aim to pass AA level for normal sized text. */
+a {
+    color: #0070e8;
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: #004590;
+    }
+}
+
+code {
+    color: #8b3035;
 }

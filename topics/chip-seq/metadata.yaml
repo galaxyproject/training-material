@@ -1,102 +1,20 @@
 ---
-name: "chip-seq"
-type: "use"
-title: "ChIP-Seq data analysis"
-summary: "ChIP-sequencing is a method used to analyze protein interactions with DNA."
-docker_image:  # "quay.io/galaxy/chip-seq-training" # not yet ready
-edam_ontology: "topic_3169"
-
+name: chip-seq
+type: use
+title: ChIP-Seq data analysis
+summary: ChIP-sequencing is a method used to analyze protein interactions with DNA.
+docker_image: null
+edam_ontology: topic_3169
 requirements:
   -
-    title: "Galaxy introduction"
     type: "internal"
-    link: "/introduction/"
+    topic_name: introduction
   -
-    title: "Quality control"
     type: "internal"
-    link: "/sequence-analysis/"
-  -
-    title: "Mapping"
-    type: "internal"
-    link: "/sequence-analysis/"
-
-material:
-  -
-    title: "Introduction to ChIP-Seq data analysis"
-    type: "introduction"
-    name: "introduction"
-    slides: yes
-    contributors:
-      - bebatut
-  -
-    title: "Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)"
-    type: "tutorial"
-    name: "tal1-binding-site-identification"
-    zenodo_link: "https://doi.org/10.5281/zenodo.197100"
-    galaxy_tour: yes
-    hands_on: yes
-    slides: no
-    workflows: no
-    edam_ontology: "topic_3169"
-    questions:
-      - How is raw ChIP-seq data processed and analyzed?
-      - What are the binding sites of Tal1?
-      - Which genes are regulated by Tal1?
-    objectives:
-      - Inspect read quality with FastQC
-      - Perform read trimming with Trimmomatic
-      - Align trimmed reads with BWA
-      - Assess quality and reproducibility of experiments
-      - Identify Tal1 binding sites with MACS2
-      - Determine unique/common Tal1 binding sites from G1E and Megakaryocytes
-      - Identify unique/common Tal1 peaks occupying gene promoters
-      - Visually inspect Tal1 peaks with Trackster
-    requirements:
-      -
-        title: "Trackster"
-        type: "external"
-        link: "https://wiki.galaxyproject.org/Learn/Visualization"
-    time_estimation: "3h"
-    key_points:
-      - Sophisticated analysis of ChIP-seq data is possible using tools hosted by Galaxy.
-      - Genomic dataset analyses require multiple methods of quality assessment to ensure that the data are appropriate for answering the biology question of interest.
-      - By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced.
-    contributors:
-      - malloryfreeberg
-      - moheydarian
-      - vivekbhr
-      - joachimwolff
-      - erxleben
-
-  -
-    title: "Identification of the binding sites of the Estrogen receptor"
-    type: "tutorial"
-    name: "estrogen-receptor-binding-site-identification"
-    zenodo_link: "https://doi.org/10.5281/zenodo.892432"
-    galaxy_tour: yes
-    hands_on: yes
-    slides: no
-    workflows: yes
-    questions:
-      - How is raw ChIP-seq data processed and analyzed?
-      - What are the binding sites of the Estrogen receptor?
-    objectives:
-      - Inspect read quality with FastQC
-      - Map reads with Bowtie2
-      - Assess the quality of an ChIP-seq experiments
-      - Extract coverage files
-      - Call enriched regions or peaks
-    time_estimation: "3h"
-    key_points:
-      - ChIP-seq data requires multiple methods of quality assessment to ensure that the data is of high quality.
-      - Multiple normalization methods exists depending on the availability of input data.
-      - Heatmaps containing all genes of an organism can be easily plotted given a BED file and a coverage file.
-    contributors:
-      - friedue
-      - erxleben
-      - bebatut
-      - vivekbhr
-      - fidelram
+    topic_name: sequence-analysis
+    tutorials: 
+      - quality-control
+      - mapping
 
 maintainers:
   - malloryfreeberg
@@ -104,93 +22,111 @@ maintainers:
   - friedue
 
 references:
-  -
-    authors: "Stephen G Landt et al"
-    title: "ChIP-seq guidelines and practices of the ENCODE and modENCODE consortia"
-    link: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3431496/"
-    summary: "A very useful encyclopedic paper with many details about the tools the (mod)ENCODE consortia use and also contains a long section about antibody validation"
-  -
-    authors: "Gabriel E Zentner and Steven Henikoff"
-    title: "Surveying the epigenomic landscape, one base at a time"
-    link: "http://genomebiology.biomedcentral.com/articles/10.1186/gb-2012-13-10-250"
-    summary: "Overview of popular sequencing techniques with very nice descriptions of DNase-seq, MNase-seq, FAIRE-seq"
-  -
-    authors: "Benjamin L Kidder et al"
-    title: "ChIP-Seq: technical considerations for obtaining high-quality data"
-    link: "http://www.nature.com/ni/journal/v12/n10/abs/ni.2117.html"
-    summary: "Nice, readable introduction into all aspects of ChIP-seq experiments (from antibodies to cell numbers to replicates to data analysis)"
-  -
-    authors: "Marion Leleu et al"
-    title: "Processing and analyzing ChIP-seq data"
-    link: "http://bfg.oxfordjournals.org/content/9/5-6/466"
-    summary: "Fairly detailed review of key concepts of ChIP-seq data processing (less detailed on analysis)"
-  -
-    authors: "Peter J. Park"
-    title: "ChIP-seq: Advantages and challenges of a maturing technology"
-    link: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3191340/"
-    summary: ""
-  -
-    authors: "Peter V Kharchenko et al"
-    title: "Design and analysis of ChIP-seq experiments for DNA-binding proteins"
-    link: "https://www.ncbi.nlm.nih.gov/pubmed/19029915"
-    summary: ""
-  -
-    authors: "Edison T Liu et al"
-    title: "Q&A: ChIP-seq technologies and the study of gene regulation"
-    link: "http://bmcbiol.biomedcentral.com/articles/10.1186/1741-7007-8-56"
-    summary: "Short overview of several (typical) issues of ChIP-seq analysis"
-  -
-    authors: "Thomas S. Carroll et al"
-    title: "Impact of artifact removal on ChIP quality metrics in ChIP-seq and ChIP-exo data"
-    link: "http://journal.frontiersin.org/article/10.3389/fgene.2014.00075/full"
-    summary: ""
-  -
-    authors: "Shirley Pepke et al"
-    title: "Computation for ChIP-seq and RNA-seq studies"
-    link: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4121056/"
-    summary: "First comparison of peak callers, focuses on the explanation of basic principles of ChIP-seq data processing and general workflows of peak calling algorithms"
-  -
-    authors: "Elizabeth G. Wilbanks & Marc T. Facciotti"
-    title: "Evaluation of Algorithm Performance in ChIP-Seq Peak Detection"
-    link: "http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0011471"
-    summary: "Another comparison of peak callers - focuses more on the evaluation of the peak callers performances than Shirley Pepke et al."
-  -
-    authors: "Mariann Micsinai et al"
-    title: "Picking ChIP-seq peak detectors for analyzing chromatin modification experiments"
-    link: "http://nar.oxfordjournals.org/content/40/9/e70.full"
-    summary: "How to choose the best peak caller for your data set - their finding: default parameters, surprisingly, yield the most reproducible results regardless of the data set type"
-  -
-    authors: "Jianxing Fen et al"
-    title: "Identifying ChIP-seq enrichment using MACS"
-    link: "http://www.nature.com/nprot/journal/v7/n9/abs/nprot.2012.101.html"
-    summary: "How to use MACS"
-  -
-    authors: "Yong Zhang et al"
-    title: "Model-based Analysis of ChIP-Seq (MACS)"
-    link: "http://genomebiology.biomedcentral.com/articles/10.1186/gb-2008-9-9-r137"
-    summary: "Original publication of MACS"
-  -
-    authors: "Modan K Das & Ho-Kwok Dai"
-    title: "A survey of DNA motif finding algorithms"
-    link: "http://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-8-S7-S21"
-    summary: "Review of motif analysis tools"
-  -
-    authors: "Philip Machanick and Timothy L. Bailey"
-    title: "MEME-ChIP: motif analysis of large DNA datasets"
-    link: "http://bioinformatics.oxfordjournals.org/content/27/12/1696.short"
-    summary: "MEME-ChIP-paper"
-  -
-    authors: "Timothy L. Bailey and Philip Machanick"
-    title: "Inferring direct DNA binding from ChIP-seq"
-    link: "http://nar.oxfordjournals.org/content/40/17/e128"
-    summary: "Centrimo: position-specific motif analysis, especially useful for ChIP-seq data"
-  -
-    authors: "Morgane Thomas-Chollier et al"
-    title: "Transcription factor binding predictions using TRAP for the analysis of ChIP-seq data and regulatory SNPs"
-    link: "http://www.nature.com/nprot/journal/v6/n12/abs/nprot.2011.409.html"
-    summary: "How to use TRAP"
-  -
-    authors: "Helge G. Roider et al"
-    title: "Predicting transcription factor affinities to DNA from a biophysical model"
-    link: "http://bioinformatics.oxfordjournals.org/content/23/2/134.short"
-    summary: "Theoretical background of TRAP"
+  - 
+    authors: Stephen G Landt et al
+    title: ChIP-seq guidelines and practices of the ENCODE and modENCODE consortia
+    link: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3431496/
+    summary: >
+        A very useful encyclopedic paper with many details about the tools the (mod)ENCODE consortia use 
+        and also contains a long section about antibody validation
+  - 
+    authors: Gabriel E Zentner and Steven Henikoff
+    title: Surveying the epigenomic landscape, one base at a time
+    link: http://genomebiology.biomedcentral.com/articles/10.1186/gb-2012-13-10-250
+    summary: >
+        Overview of popular sequencing techniques with very nice descriptions of DNase-seq, MNase-seq, 
+        FAIRE-seq
+  - 
+    authors: Benjamin L Kidder et al
+    title: 'ChIP-Seq: technical considerations for obtaining high-quality data'
+    link: http://www.nature.com/ni/journal/v12/n10/abs/ni.2117.html
+    summary: >
+        Nice, readable introduction into all aspects of ChIP-seq experiments (from antibodies to cell 
+        numbers to replicates to data analysis)
+  - 
+    authors: Marion Leleu et al
+    title: Processing and analyzing ChIP-seq data
+    link: http://bfg.oxfordjournals.org/content/9/5-6/466
+    summary: >
+        Fairly detailed review of key concepts of ChIP-seq data processing (less detailed on analysis)
+  - 
+    authors: Peter J. Park
+    title: 'ChIP-seq: Advantages and challenges of a maturing technology'
+    link: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3191340/
+    summary: ''
+  - 
+    authors: Peter V Kharchenko et al
+    title: Design and analysis of ChIP-seq experiments for DNA-binding proteins
+    link: https://www.ncbi.nlm.nih.gov/pubmed/19029915
+    summary: ''
+  - 
+    authors: Edison T Liu et al
+    title: 'Q&A: ChIP-seq technologies and the study of gene regulation'
+    link: http://bmcbiol.biomedcentral.com/articles/10.1186/1741-7007-8-56
+    summary: Short overview of several (typical) issues of ChIP-seq analysis
+  - 
+    authors: Thomas S. Carroll et al
+    title: Impact of artifact removal on ChIP quality metrics in ChIP-seq and ChIP-exo data
+    link: http://journal.frontiersin.org/article/10.3389/fgene.2014.00075/full
+    summary: ''
+  - 
+    authors: Shirley Pepke et al
+    title: Computation for ChIP-seq and RNA-seq studies
+    link: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4121056/
+    summary: >
+        First comparison of peak callers, focuses on the explanation of basic principles
+        of ChIP-seq data processing and general workflows of peak calling algorithms
+  - 
+    authors: Elizabeth G. Wilbanks & Marc T. Facciotti
+    title: Evaluation of Algorithm Performance in ChIP-Seq Peak Detection
+    link: http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0011471
+    summary: >
+        Another comparison of peak callers - focuses more on the evaluation of the peak callers 
+        performances than Shirley Pepke et al.
+  - 
+    authors: Mariann Micsinai et al
+    title: Picking ChIP-seq peak detectors for analyzing chromatin modification experiments
+    link: http://nar.oxfordjournals.org/content/40/9/e70.full
+    summary: >
+        'How to choose the best peak caller for your data set - their finding:
+        default parameters, surprisingly, yield the most reproducible results regardless
+        of the data set type'
+  - 
+    authors: Jianxing Fen et al
+    title: Identifying ChIP-seq enrichment using MACS
+    link: http://www.nature.com/nprot/journal/v7/n9/abs/nprot.2012.101.html
+    summary: How to use MACS
+  - 
+    authors: Yong Zhang et al
+    title: Model-based Analysis of ChIP-Seq (MACS)
+    link: http://genomebiology.biomedcentral.com/articles/10.1186/gb-2008-9-9-r137
+    summary: Original publication of MACS
+  - 
+    authors: Modan K Das & Ho-Kwok Dai
+    title: A survey of DNA motif finding algorithms
+    link: http://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-8-S7-S21
+    summary: Review of motif analysis tools
+  - 
+    authors: Philip Machanick and Timothy L. Bailey
+    title: 'MEME-ChIP: motif analysis of large DNA datasets'
+    link: http://bioinformatics.oxfordjournals.org/content/27/12/1696.short
+    summary: MEME-ChIP-paper
+  - 
+    authors: Timothy L. Bailey and Philip Machanick
+    title: Inferring direct DNA binding from ChIP-seq
+    link: http://nar.oxfordjournals.org/content/40/17/e128
+    summary: >
+        'Centrimo: position-specific motif analysis, especially useful for ChIP-seq
+        data'
+  - 
+    authors: Morgane Thomas-Chollier et al
+    title: >
+        Transcription factor binding predictions using TRAP for the analysis of ChIP-seq
+        data and regulatory SNPs
+    link: http://www.nature.com/nprot/journal/v6/n12/abs/nprot.2011.409.html
+    summary: How to use TRAP
+  - 
+    authors: Helge G. Roider et al
+    title: Predicting transcription factor affinities to DNA from a biophysical model
+    link: http://bioinformatics.oxfordjournals.org/content/23/2/134.short
+    summary: Theoretical background of TRAP

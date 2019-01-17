@@ -1,7 +1,22 @@
 ---
 layout: tutorial_hands_on
-topic_name: introduction
-tutorial_name: galaxy-intro-strands
+
+title: "Introduction to Genomics and Galaxy"
+zenodo_link: ""
+questions:
+  - "Do genes on opposite strands ever overlap?  If so, how often?"
+objectives:
+  - "Learn some of the basic concepts of genomics and bioinformatics"
+  - "Familiarize yourself with the basics of Galaxy"
+time_estimation: "2H30M"
+key_points:
+  - "Galaxy provides an easy-to-use graphical user interface for often complex command-line tools"
+  - "Galaxy keeps a full record of your analysis in a history"
+  - "Workflows enable you to repeat your analysis on different data"
+  - "Galaxy can connect to external sources for data import and visualization purposes"
+  - "Galaxy provides ways to share your results and methods with others"
+contributors:
+  - tnabtaf
 ---
 
 # Introduction to Galaxy
@@ -79,10 +94,10 @@ To answer this question we need to know where genes start and stop on human chro
 It turns out that for this particular question (and for many others), most **Galaxy** instances can help us find this information.
 
 > ### {% icon hands_on %} Hands-on: Log in to Galaxy
-> In your web browser, *go to* **[your Galaxy instance](#-requirements)** and *log in or register*.
+> In your web browser, *go to* **your Galaxy instance** and *log in or register*.
 {: .hands_on}
 
-The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle panel will show the home page, tool forms, and dataset content.
+The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the central panel will show the home page, tool forms, and dataset content.
 
 ![Galaxy interface](../../images/galaxy_interface.png)
 
@@ -97,7 +112,7 @@ The Galaxy interface consists of three main parts. The available tools are liste
 
 ## Get data into Galaxy
 
-There are [many ways to get data into a Galaxy instance]({{ site.baseurl }}//topics/introduction/tutorials/galaxy-intro-get-data/slides.html). We are going to use the **Get Data** toolbox in the **Tools** panel on the left.
+There are [many ways to get data into a Galaxy instance]({{ site.baseurl }}//topics/galaxy-data-manipulation/tutorials/get-data/slides.html). We are going to use the **Get Data** toolbox in the **Tools** panel on the left.
 
 > ### {% icon hands_on %} Hands-on: Open **Get Data** toolbox
 >
@@ -106,7 +121,7 @@ There are [many ways to get data into a Galaxy instance]({{ site.baseurl }}//top
 >
 {: .hands_on}
 
-The **Get Data** toolbox contains a list of data sources that this Galaxy instance can get data directly from.  **Upload file** is quite useful for getting data from your computer or from the web (see the [Getting data into Galaxy slides]({{ site.baseurl }}//topics/introduction/tutorials/galaxy-intro-get-data/slides.html)).  Today we are going to use the **UCSC Main table browser**.
+The **Get Data** toolbox contains a list of data sources that this Galaxy instance can get data directly from.  **Upload file** is quite useful for getting data from your computer or from the web (see the [Getting data into Galaxy slides]({{ site.baseurl }}//topics/galaxy-data-manipulation/tutorials/get-data/slides.html)).  Today we are going to use the **UCSC Main table browser**.
 
 ### Get genes
 
@@ -211,10 +226,10 @@ This expands the dataset and shows you information about it, and a preview of it
 The dataset preview is informative, but you can't see much of the actual dataset.  Lets use one of the dataset icons to see the whole dataset
 
 > ### {% icon hands_on %} Hands-on: Look at all the data.
-> * *Click* on the **eye icon** to view the contents of the dataset.
->   > This displays all of the data
->     &nbsp;
->   > ![Full dataset in center panel](../../images/genes_human_chr22_dataset_view.png)
+> 1. Click on the {% icon galaxy-eye %} (eye) icon to view the contents of the dataset.
+>    > This displays all of the data
+>      &nbsp;
+>    > ![Full dataset in central panel](../../images/genes_human_chr22_dataset_view.png)
 {: .hands_on}
 
 ### BED Format
@@ -279,7 +294,7 @@ How might we do this?  Column 6 contains the strand information.  Can we split g
 > 2. If you haven't already searched with it, *enter* `split` in the **tool search box**.  Near the top of the results is
 >    - **Filter** data on any column using simple expressions.
 >    - That might work.
-> 3. *Click* on **Filter** to open the Filter tool in the middle panel.
+> 3. *Click* on **Filter** to open the Filter tool in the central panel.
 > 4. Take a look at the **Syntax** and **Example** sections to understand what the tool does.
 >
 > ![The Filter Tool form](../../images/filter_tool_defaults.png)
@@ -301,7 +316,7 @@ It doesn't say anything about Filter being able to split a file into multiple fi
 >   > ![Run the Filter tool to get only the forward strand genes](../../images/filter_tool_forward_strand_genes_only.png)
 {: .hands_on}
 
-This adds another dataset to your history.  This one should contain only genes on the forward strand.  Once the dataset is green, *click* the **eye icon** to confirm this.  We also recommend that you rename this dataset to something like `Genes, forward strand` (remember how?).
+This adds another dataset to your history. This one should contain only genes on the forward strand.  Once the dataset is green, click the {% icon galaxy-eye %} (eye) icon to confirm this. We also recommend that you rename this dataset to something like `Genes, forward strand` (remember how?).
 
 Now we want to get the genes on the reverse strand.  There are actually many ways to get this.  Here are two of them.
 
@@ -315,7 +330,7 @@ Now we want to get the genes on the reverse strand.  There are actually many way
 > 1. *Click* the **Execute** button.
 >
 > **Method 2**
-> 1. *Click* on **Filter** in the tool panel to open the Filter tool in the middle panel.
+> 1. *Click* on **Filter** in the tool panel to open the Filter tool in the central panel.
 > 1. *Fill* the form as before, *except*:
 >    * Make sure the **Dataset** pulldown is set to the `Genes` dataset.
 >    * *Set* **Condition** to `c6 == "-"`.
@@ -485,7 +500,7 @@ Let's refine our question slightly
 
 ## Walk through the workflow tutorial
 
-Run the [Create a reusable workflow from a history](../galaxy-intro-history-to-workflow/tutorial.html) tutorial for how to do this, *and then come back here to run your newly created workflow with the exon data.*
+Run the [Create a reusable workflow from a history]({{ site.baseurl }}/topics/galaxy-ui/tutorials/history-to-workflow/tutorial.html) tutorial for how to do this, *and then come back here to run your newly created workflow with the exon data.*
 
 ## Rerun analysis with exon data
 
@@ -529,7 +544,7 @@ Your history should now have two datasets: one describing entire genes, and one 
 
 ### Rerun the analysis, this time on exons.
 
-When you did the *History to Workflow* tutorial you created a new workflow that was then added to your list of defined workflows.  
+When you did the *History to Workflow* tutorial you created a new workflow that was then added to your list of defined workflows.
 
 > ### {% icon hands_on %} Run the workflow on the exon data.
 >
@@ -548,7 +563,7 @@ And Galaxy launches the workflow and says (in a nice big green box) something li
 
 Which in this case *is the truth*.  You can refresh the history panel by either reloading the whole page, of by clicking the looping arrow icon at the top of the history panel.  What you'll see is a stack of history steps that will go from queued to running to done as you watch them.
 
-All steps in the history will be green when the workflow is done. Once that happens compare your output dataset with your input dataset?  What percentage of exons overlap with other exons on the opposite strand, and is it common or rare?  Is it a smaller percentage than we saw for whole genes?  
+All steps in the history will be green when the workflow is done. Once that happens compare your output dataset with your input dataset?  What percentage of exons overlap with other exons on the opposite strand, and is it common or rare?  Is it a smaller percentage than we saw for whole genes?
 
 
 ## Are we done?
@@ -558,7 +573,7 @@ Probably.  Note that we can no longer say what percentage of *genes* overlap.  W
 # Conclusion
 {: .no_toc}
 
-:tada: Well done! :clap: You have just performed your first analysis in Galaxy.
+{% icon trophy %} Well done! You have just performed your first analysis in Galaxy.
 
 
 # What next?

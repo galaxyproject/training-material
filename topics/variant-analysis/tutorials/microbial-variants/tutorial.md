@@ -1,7 +1,26 @@
 ---
 layout: tutorial_hands_on
-topic_name: variant-analysis
-tutorial_name: microbial-variants
+
+title: "Microbial Variant Calling"
+zenodo_link: "https://doi.org/10.5281/zenodo.582600"
+tags:
+  - prokaryote
+questions:
+  - "How do we detect differences between a set of reads from a microorganism and a reference genome"
+objectives:
+  - "Find variants between a reference genome and a set of reads"
+  - "Visualise the SNP in context of the reads aligned to the genome"
+  - "Determine the effect of those variants on genomic features"
+  - "Understand if the SNP is potentially affecting the phenotype"
+time_estimation: "45m"
+key_points:
+  - "We used a tool called Snippy to call variants between our reads and our reference genome."
+  - "As our reference genome had annotations, we could see what effect the changes have on the features as annotated in the reference and therefore make inferences on the possible changes to the phenotype."
+  - "We used the JBrowse genome browser to visualise what these changes look like."
+contributors:
+  - annasyme
+  - slugger70
+  - tseemann
 ---
 
 # Introduction
@@ -11,7 +30,7 @@ Variant calling is the process of identifying differences between two genome sam
 
 Imagine that you have been asked to find the differences between a sample that has been sequenced and a known genome. For example: You have a new sample from a patient and you want to see if it has any differences from a well known reference genome of the same species. Typically, you would have a couple of fastq read files sent back to you from the sequencing provider and either an annotated or non annotated reference genome.
 
-In this tutorial, we will use the tool “Snippy” (link to Snippy is [here](https://github.com/tseemann/snippy)) to find high confidence differences (indels or SNPs) between our known genome and our reads. Snippy uses one tool to align the reads to the reference genome, and another tool to decide (“call”) if any of the resulting discrepancies are real variants or technical artifacts that can be ignored. Finally, Snippy uses another tool to check what effect these differences have on the predicted genes - truncation, frame shift or if the changes are synonomous.
+In this tutorial, we will use the tool “Snippy” (link to Snippy is [here](https://github.com/tseemann/snippy)) to find high confidence differences (indels or SNPs) between our known genome and our reads. Snippy uses one tool to align the reads to the reference genome, and another tool to decide (“call”) if any of the resulting discrepancies are real variants or technical artifacts that can be ignored. Finally, Snippy uses another tool to check what effect these differences have on the predicted genes - truncation, frame shift or if the changes are synonymous.
 
 For the read alignment (read mapping) step, Snippy uses BWA MEM with a custom set of settings which are very suitable to aligning reads for microbial type data. For the variant calling step, Smippy uses Freebayes with a custom set of settings. snpeff is then used to describe what the predicted changes do in terms of the genes themselves.
 
@@ -30,7 +49,7 @@ More can be read about SNP calling [here](https://en.wikipedia.org/wiki/SNV_call
 
 # Get the data
 
-The data for today is a subset of a real dataset from a Staphylococcus aureus bacteria.
+The data for today is a subset of a real dataset from a *Staphylococcus aureus* bacteria.
 We have a closed genome sequence and an annotation for our "wildtype" strain.
 We have used a whole genome shotgun approach to produce a set of short sequence reads on an Illumina DNA sequencing instrument for our mutant strain.
 
@@ -88,7 +107,7 @@ We have an annotated reference and so will use it in this case.
 > ### {% icon hands_on %} Hands-on: Run Snippy
 >
 > 1. **Snippy** {% icon tool %} with the following parameters
->   - "Reference File" to the `wildtype.gbk` file
+>   - "Reference File" to the `wildtype.gbk` file (if the genbank file is not selectable, make sure to change its datatype to 'genbank')
 >   - "Single or Paired-end reads" to `Paired`
 >   - "Select first set of reads" to `mutant_R1.fastq`
 >   - "Select second set of reads" to `mutant_R2.fastq`
@@ -113,7 +132,7 @@ aligned fasta | A version of the reference but with - at position with depth=0 a
 consensus fasta | A version of the reference genome with all variants instantiated
 mapping depth | A table of the mapping depth
 mapped reads bam  | A BAM file containing all of the mapped reads
-outdir  | A tarball of the Snippy output directory for inout into Snippy-core if required
+outdir  | A tarball of the Snippy output directory for input into Snippy-core if required
 
 We will now have a look at the contents of the SNP table file (`snippy on data XX, data XX and data XX table`):
 
@@ -179,13 +198,13 @@ We could go through all of the variants like this and read them out of a text ta
 >               - "Autogenerate SNP Track" to `Yes`
 >               - "Track Visibility" to `On for new users`
 >       - **Track 2 - variants**: Click on `Insert Track Group` and fill it with
->           - "Track Cateogry" to `variants`
+>           - "Track Category" to `variants`
 >           - Click on `Insert Annotation Track` and fill it with
 >               - "Track Type" to `GFF/GFF3/BED/GBK Features`
 >               - "GFF/GFF3/BED Track Data" to `snippy snps gff file`
 >               - "Track Visibility" to `On for new users`
 >       - **Track 3 - annotated reference**: Click on `Insert Track Group` and fill it with
->           - "Track Cateogry" to `annotated reference`
+>           - "Track Category" to `annotated reference`
 >           - Click on `Insert Annotation Track` and fill it with
 >               - "Track Type" to `GFF/GFF3/BED/GBK Features`
 >               - "GFF/GFF3/BED Track Data" to `wildtype.gff`
@@ -196,7 +215,7 @@ We could go through all of the variants like this and read them out of a text ta
 >               - "Track Visibility" to `On for new users`
 {: .hands_on}
 
-A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view its contents and play with it by inspecting the `JBrowse on data XX and data XX - Complete` file (eye icon). The JBrowse window will appear in the centre Galaxy panel.
+A new dataset will be created in your history, containing the JBrowse interactive visualisation. We will now view its contents and play with it by clicking the {% icon galaxy-eye %} (eye) icon of the `JBrowse on data XX and data XX - Complete` dataset. The JBrowse window will appear in the centre Galaxy panel.
 
 > ### {% icon hands_on %} Hands-on: Inspecting the SNPs using JBrowse
 > 1. Display all the tracks and practice maneuvering around
@@ -219,10 +238,10 @@ A new file will be created in your history, this contains the JBrowse interactiv
 >     > 1. What is the correct codon at this position?
 >     > 2. What is the mutation found here?
 >     >
->     >    > ### {% icon solution %} Solution
->     >    > 1. The correct codon at this position is TGT, coding for the amino acid Cysteine (middle row of the amino acid translations).
->     >    > 2. The mutation of T → A turns this triplet into TGA, a stop codon.
->     >    {: .solution}
+>     > > ### {% icon solution %} Solution
+>     > > 1. The correct codon at this position is TGT, coding for the amino acid Cysteine (middle row of the amino acid translations).
+>     > > 2. The mutation of T → A turns this triplet into TGA, a stop codon.
+>     > {: .solution}
 >     {: .question}
 >
 {: .hands_on}

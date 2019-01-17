@@ -1,28 +1,35 @@
 ---
 layout: tutorial_hands_on
-topic_name: admin
-tutorial_name: dev-to-production
+
+title: "Move from dev instance to production instance"
+zenodo_link: ""
+hands_on: "github"
+enable: "false"
+questions:
+objectives:
+time_estimation: "1h"
+key_points:
+contributors:
+  - hrhotz
 ---
 
 Move from dev instance to production instance
 =============================================
 
-:grey_question: ***Questions***
+***Questions***
 
 - *Why do I need to configure Galaxy for production ?*
 - *How to run a galaxy in a production environment ?*
 
-:dart: ***Objectives***
+***Objectives***
 
 - *Learn to install a Galaxy server.*
 - *Upgrade a basic galaxy installation to a production environment*.
 - *Get a basic understanding of entry points in the main galaxy configuration file.*
 
-:heavy_check_mark: ***Requirements***
+***Requirements***
 
 - *[Galaxy Server Administration]({{site.baseurl}}/topics/admin)*
-
-:hourglass: ***Time estimation*** *TODO*
 
 # Introduction
 
@@ -108,72 +115,3 @@ Setting use_interactive to false disable displaying and live debugging of traceb
 Leaving it enabled will expose your configuration (database password, id_secret, etc.).
 
 - filter-with:
-
-## Subpart 1
-
-Short introduction about this subpart.
-
-{% icon hands_on %} ***Hands on!***
-
-1. First step
-2. Second step
-3. Third step
-
-## Subpart 2
-
-Short introduction about this subpart.
-
-{% icon hands_on %} ***Hands on!***
-
-1. First step
-2. Second step
-3. Third step
-
-Some blabla
-
-{% icon hands_on %} ***Hands on!***
-
-1. First step
-2. Second step
-3. Third step
-
-# Part 2
-
-Short introduction about this subpart.
-
-{% icon hands_on %} ***Hands on!***
-
-1. First step
-2. Second step
-3. Third step
-
-## Subpart 2
-
-Short introduction about this subpart.
-
-{% icon hands_on %} ***Hands on!***
-
-1. First step
-2. Second step
-3. Third step
-
-Some blabla
-
-{% icon hands_on %} ***Hands on!***
-
-1. First step
-2. Second step
-3. Third step
-
-# Conclusion
-
-Conclusion about the technical key points. And then relation between the techniques and the biological question to end with a global view.
-
-:grey_exclamation: ***Key Points***
-
-- *Simple sentence to sum up the first key point of the tutorial (Take home message)*
-- *Second key point*
-- *Third key point*
-- *...*
-
-# :clap: Thank you

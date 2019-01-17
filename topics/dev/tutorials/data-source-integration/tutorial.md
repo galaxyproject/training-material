@@ -1,7 +1,15 @@
 ---
 layout: tutorial_hands_on
-topic_name: dev
-tutorial_name: data-source-integration
+
+title: "Data source integration"
+enable: "false"
+questions:
+objectives:
+time_estimation: "10M"
+contributors:
+ - bebatut
+ - shiltemann
+key_points:
 ---
 
 # Data Source Integration
@@ -25,12 +33,3 @@ if you have a data source which you think is very important for your research wi
 6. Notice the new History Item
 
 That was very easy for all of you! If you want your database of choice to be accessible as easy as this **let us know**!
-
-:grey_exclamation: ***Key Points***
-
-- *Simple sentence to sum up the first key point of the tutorial (Take home message)*
-- *Second key point*
-- *Third key point*
-- *...*
-
-# :clap: Thank you

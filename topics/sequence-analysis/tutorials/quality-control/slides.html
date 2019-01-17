@@ -1,8 +1,27 @@
 ---
 layout: tutorial_slides
-topic_name: sequence-analysis
-tutorial_name: quality-control
 logo: "GTN"
+
+title: "Quality Control"
+zenodo_link: "https://doi.org/10.5281/zenodo.61771"
+questions:
+  - How to control quality of NGS data?
+  - What are the quality parameters to check for each dataset?
+  - How to improve the quality of a sequence dataset?
+objectives:
+  - Manipulate FASTQ files
+  - Control quality from a FASTQ file
+  - Use FastQC tool
+  - Understand FastQC output
+  - Use tools for quality correction
+requirements:
+time_estimation: "1h"
+key_points:
+  - Run quality control on every dataset before running any other bioinformatics analysis
+  - Take care of the parameters used to improve the sequence quality
+  - Re-run FastQC to check the impact of the quality control
+contributors:
+  - bebatut
 ---
 
 # Why Quality Control?
@@ -25,7 +44,7 @@ Quality control = First step of the bioinformatics analyses
 
 ---
 
-### My sequences? <br>Fasta
+### My sequences? <br>FASTA
 
 ```
 > Identifier1 (comment)
@@ -74,7 +93,7 @@ Phred Quality Score | Probability of incorrect base call | Base call accuracy
 ---
 
 ### My sequences?
-#### FastQ
+#### FASTQ
 
 ```
 @ Identifier1 (comment)
@@ -194,7 +213,7 @@ If a sequencer is unable to make a base call with sufficient confidence then it 
 ???
 Some high throughput sequencers generate sequence fragments of uniform length, while others can output reads of wildly varying lengths. The length distribution can be then used as quality measure. You would expect a normal distribution for the best result. However, most sequencing results show a slowly increasing and then a steep falling distribution.
 
-FastQC generates a graph showing the distribution of fragment sizes in the file which was analysed. In many cases this will produce a simple graph showing a peak only at one size, but for variable length FastQ files this will show the relative amounts of each different size of sequence fragment.
+FastQC generates a graph showing the distribution of fragment sizes in the file which was analysed. In many cases this will produce a simple graph showing a peak only at one size, but for variable length FASTQ files this will show the relative amounts of each different size of sequence fragment.
 
 This module will raise a warning if all sequences are not the same length. This module will raise an error if any of the sequences have zero length.
 

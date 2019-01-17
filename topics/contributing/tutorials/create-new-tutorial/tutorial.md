@@ -1,7 +1,21 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: create-new-tutorial
+
+title: "Creating a new tutorial"
+questions:
+  - "How to integrate a new tutorial?"
+  - "How to make a tutorial robust and reproducible?"
+objectives:
+  - "Create a tutorial from scratch"
+  - "Link a tutorial to a topic"
+  - "Create hands-on"
+  - "Add technical support for a tutorial"
+time_estimation: "15m"
+key_points:
+  - "Finding good training datasets is hard!"
+  - "Creating a new tutorial involves several steps: some are mandatory, some can be skipped even if they are recommended"
+contributors:
+  - bebatut
 ---
 
 # Introduction
@@ -9,14 +23,14 @@ tutorial_name: create-new-tutorial
 
 Galaxy is a great solution to train bioinformatics concepts:
 
-- numerous bioinformatics tools are available (almost 5,000 in the ToolShed)
+- numerous bioinformatics tools are available (almost 6,000 in the ToolShed)
 - it can be used by people without any computer science skills
 - it trains to use technology, outlining available resources and efforts that have made them accessible to researchers
 - it is scalable
 
 In 2016, the Galaxy Training Network decide to set up a new infrastructure for easily delivering Galaxy related training material. The idea was to develop something open, online, based on a community effort, and on top of the Galaxy platform.
 
-We took inspiration from [Software Carpentry](https://software-carpentry.org) and collected everything on a GitHub repository: [https://github.com/galaxyproject/training-material ](https://github.com/galaxyproject/training-material).
+We took inspiration from [Software Carpentry](https://software-carpentry.org) and collected everything on a GitHub repository: [https://github.com/galaxyproject/training-material](https://github.com/galaxyproject/training-material).
 We decided on a structure focusing on tutorials with hands-on activities; fitting both for online self-training but also for workshops. Each tutorial follows the same structure and comes with a virtualised instance allowing you to run the training anywhere you have resources available.
 
 Here you will learn how to create a new tutorial by developing a small tutorial that explains how to use BLAST.
@@ -74,6 +88,28 @@ This can be done online via the GitHub interface or locally on your computer via
 
 # Create the directory for the tutorial
 
+Each training material is related to a topic. All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to exome sequencing analysis). Each topic have the following structure:
+
+```
+├── README.md
+├── metadata.yaml
+├── images
+├── docker
+│   ├── Dockerfile
+├── slides
+│   ├── index.html
+├── tutorials
+│   ├── tutorial1
+│   │   ├── tutorial.md
+│   │   ├── slides.html
+│   │   ├── tools.yaml
+│   │   ├── data-library.yaml
+│   │   ├── workflows
+│   │   │   ├── workflow.ga
+│   │   ├── tours
+│   │   │   ├── tour.yaml
+```
+
 Once the topic has been chosen and you set up your contribution environment, you can create the tutorial. An ideal tutorial in the Galaxy Training Network contains:
 - a tutorial file `tutorial.md` written in Markdown with hands-on
 - an optional slides file `slides.md` in Markdown with slides to support the tutorial
@@ -84,30 +120,31 @@ Once the topic has been chosen and you set up your contribution environment, you
 
 The most important file is the `tutorial.md` where the content of the tutorial is. The other files are there to support the tutorial and make it robust and usable across many environments.
 
-To help you get started, we have created a template for new tutorials, complete with all of the above requirements.
-
-
-> ### {% icon hands_on %} Hands-on: Copy the required files
+> ### {% icon hands_on %} Hands-on: Create all the required files and folders structures automatically
 >
-> 1. Copy the `templates/tutorial/tutorial1` directory to `topics/sequence-analysis/tutorials`
-> 2. Rename the copied `tutorial1` directory to `similarity-search`
-{: .hands_on}
-
-# Add metadata
-
-To make the topic aware of this new tutorial, you need to add some metadata about the tutorial in the topic's `metadata.yaml` file. This metadata will include some technological and pedagogical support for the training. Once this is filled out, you can run the Galaxy Training material website locally to check that the new tutorial is accessible.
-
-> ### {% icon hands_on %} Hands-on: Add metadata
+> 1. Run (by adapting the information between the quotes)
 >
-> 1. Check out and run our [metadata tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-metadata/tutorial.html)
-> 2. (Optional) Build the website locally by following the [Jekyll tutorial]({{ site.baseurl }}/topics/contributing/tutorials/running-jekyll/tutorial.html) and check that the tutorial is referenced in the topic page
+>    ```
+>    $ planemo training_init \
+>             --topic_name "my-topic" \
+>             --tutorial_name "my-new-tutorial" \
+>             --tutorial_title "Title of the tutorial" \
+>             --hands_on
+>    ```
+>
+> 2. Check that a new directory (with your tutorial name) has been generated in the topic folder
+> 3. Make sure that Jekyll is running
+>
+>    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}/topics/contributing/tutorials/running-jekyll/tutorial.html)
+>
+> 2. Check if the tutorial has been correctly added at [http://localhost:4000/training-material/](http://localhost:4000/training-material/)
 {: .hands_on}
 
 # A toy dataset
 
 Our tutorials try to follow the "learn by doing" approach; they combine both theoretical and practical sections. The practical sections (or hands-on) are supposed to be done on Galaxy.
 
-The first task is to select some data to use the hands-on sections. The selected data must be informative enough to illustrate the meaning of using a tool or a given technique, but not too big to require long waiting times for its processing during a workshop. Typically, the selected data should be the informative subset of a full real-life dataset.
+The first task is to select some data to use for the Hands-on sections. The selected data must be informative enough to illustrate the meaning of using a tool or a given technique, but not too big to require long waiting times for processing during a workshop. Upload and download of files into and out of Galaxy is usually quick, but the time taken for a tool to run can be long. Tool run times of no more than 10-15 mins are recommended. Typically, the selected data should be the informative subset of a full real-life dataset.
 
 For example, we could generate a small dataset by
 
@@ -117,7 +154,7 @@ For example, we could generate a small dataset by
     - Extracting one similar sequence found with Blast
     - Searching and extracting 2 other sequences of the same species using the [NCBI Nucleotide database](https://www.ncbi.nlm.nih.gov/nuccore)
 
-We would then develope the tutorial and test it on this toy dataset. Once we were ready to share it, we would upload the datasets on [Zenodo](https://zenodo.org/) to store them on long-term and obtain a dedicated DOI in the [Galaxy training network community](https://zenodo.org/communities/galaxy-training/?page=1&size=20).
+We would then develop the tutorial and test it on this toy dataset. Once we were ready to share it, we would upload the datasets on [Zenodo](https://zenodo.org/) to store them on long-term and obtain a dedicated DOI in the [Galaxy training network community](https://zenodo.org/communities/galaxy-training/?page=1&size=20).
 
 > ### {% icon hands_on %} Hands-on: Upload the dataset to Zenodo
 >
@@ -146,12 +183,12 @@ We would then develope the tutorial and test it on this toy dataset. Once we wer
 > 12. Fill out any remaining information
 > 13. Click on **Publish**
 > 14. Copy the DOI link in the new page
-> 15. Paste the link in `zenodo_link` in the tutorial section of the `metadata.yaml` file
+> 15. Paste the link in `zenodo_link` in the tutorial header
 {: .hands_on}
 
 # Write the tutorial
 
-Now that you have the structure in place, you can the fill the tutorial per se.
+Now that you have the structure in place, you can then fill the tutorial per se.
 
 > ### {% icon hands_on %} Hands-on: Write the tutorial
 >
@@ -164,7 +201,7 @@ Now that you have the structure in place, you can the fill the tutorial per se.
 
 To able to run the tutorial, we need a Galaxy instance where the needed tools and the data are available. We need then to describe the required technical infrastructure.
 
-This description will be used to automatically set up a Docker Galaxy flavour, to set un an existing Galaxy instance and also to test if a public Galaxy instance is able to run the tool.
+This description will be used to automatically set up a Docker Galaxy flavour, to set up an existing Galaxy instance and also to test if a public Galaxy instance is able to run the tool.
 
 The technical support are different files:
 
@@ -177,10 +214,8 @@ The technical support are different files:
 >
 > 1. Add some technical support for the tutorial following the [tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html)
 >    - Add the workflow
->    - (Recommended) Generate the `tools.yaml`
 >    - (Recommended) Generate the `data-library.yaml`
 >    - (Optional) Create an interactive tour
-> 2. Update the `metadata.yaml` file given the technical support added
 {: .hands_on}
 
 # Add slides (optional)
@@ -190,7 +225,6 @@ Sometimes, you may want to have slides to support a tutorial and introduce it du
 > ### {% icon hands_on %} Hands-on: Add slides
 >
 > 1. Create a slide deck in `slides.html` following the [Slide tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-slides/slides.html)
-> 2. Update the `metadata.yaml` file by putting `yes` in `slides`
 {: .hands_on}
 
 # Conclusion
@@ -205,3 +239,40 @@ To develop a new tutorial:
 5. Write the tutorial
 6. Add some technical support (recommended)
 7. Add slides (optional)
+
+For the next times, you can make it quicker.
+
+> ### {% icon hands_on %} Hands-on: Generation of a tutorial
+>
+> 1. Determine the topic
+> 2. Create your workflow on a running Galaxy instance
+> 3. Create a Zenodo record with the input data
+> 4. Generate the skeleton of your tutorial
+>    - option 1: from a workflow located on a Galaxy
+>      ```
+>      $ planemo training_init \
+>             --topic_name "my-topic" \
+>             --tutorial_name "my-new-tutorial" \
+>             --tutorial_title "Title of the tutorial" \
+>             --galaxy_url "URL to Galaxy instance in which you created the workflow" \
+>             --galaxy_api_key "Your API key on the Galaxy instance" \
+>             --workflow_id "ID of the workflow on the Galaxy instance" \
+>             --zenodo_link "URL to the Zenodo record"
+>      ```
+>    - option 2: from a local workflow file (`.ga`)
+>
+>      ```
+>      $ planemo training_init \
+>             --topic_name "my-topic" \
+>             --tutorial_name "my-new-tutorial" \
+>             --tutorial_title "Title of the tutorial" \
+>             --workflow "path/to/workflow" \
+>             --zenodo_link "URL to the Zenodo record"
+>      ```
+>      You can use the example workflow file located in `topics/contributing/tutorials/create-new-tutorial/workflows/example-workflow.ga` if
+>      you do not have a workflow of your own. This is the workflow belonging to the *Galaxy 101* introduction tutorial.
+>
+> 5. Fill the remaining metadata in the `tutorial.md`
+> 6. Fill the content of the `tutorial.md`
+> 7. Check it using Jekyll
+{: .hands_on}

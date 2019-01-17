@@ -1,7 +1,17 @@
 ---
 layout: tutorial_hands_on
-topic_name: genome-annotation
-tutorial_name: genome-annotation
+
+title: "Genome Annotation"
+zenodo_link: "https://doi.org/10.5281/zenodo.1250793"
+tags:
+  - prokaryote
+questions:
+objectives:
+time_estimation: "2H"
+key_points:
+contributors:
+  - erxleben
+  - bgruening
 ---
 
 # Introduction
@@ -169,7 +179,7 @@ This file will be the input for more detailed analysis:
 
 ![BLAST programs](../../images/blastprograms.png)
 
-![BLAST databases](../../images/blast%20database.png)
+![BLAST databases](../../images/blast_database.png)
 
 > ### {% icon tip %} Tip:
 >
@@ -207,10 +217,11 @@ This file will be the input for more detailed analysis:
 
 For identification of gene clusters, **antiSMASH** is used. The tool uses genbank file as input files and predicts gene clusters. Output files are a html visualization and the gene cluster proteins.
 
-> ### antiSMASH analysis
+> ### {% icon hands_on %} Hands-on: antiSMASH analysis
 >
 > {% icon tool %} Import this [dataset](../../input_data/Streptomyces_coelicolor_part.genbank) into your Galaxy history and run **antiSMASH** to detect gene clusters. The genbank file contains a part of the *Streptomyces coelicolor* genome sequence.
 >
+{: .hands_on}
 
 > ### {% icon question %} Questions
 >
@@ -224,4 +235,4 @@ When you have a whole genome **antiSMASH** analysis, your result may look like t
 
 At the end, you can extract a reproducible workflow out of your history. The workflow should look like this:
 
-![GenomeAnnotation Workflow](../../images/work%20flow_Screenshot%20from%202015-06-23%2009-33-23.png)
+![GenomeAnnotation Workflow](../../images/work_flow_Screenshot_from_2015-06-23_09-33-23.png)

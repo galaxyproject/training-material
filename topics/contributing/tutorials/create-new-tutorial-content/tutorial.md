@@ -1,7 +1,22 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: create-new-tutorial-content
+
+title: "Creating a new tutorial - Writing content in Markdown"
+questions:
+  - "How to write a tutorial with hands-on?"
+  - "What are the different boxes?"
+  - "How can I add a caption to an image?"
+objectives:
+  - "Create hands-on"
+  - "Use the different boxes"
+time_estimation: "15m"
+key_points:
+  - "You can highlight questions, tools and hints with a special syntax"
+  - "Self-learning can be done by questions and hidden answers"
+contributors:
+  - bebatut
+  - bgruening
+  - shiltemann
 ---
 
 # Introduction
@@ -23,8 +38,26 @@ The tutorial's content should be placed in the file `tutorial.md`. Its syntax an
 ```markdown
 ---
 layout: tutorial_hands_on
-topic_name: training
-tutorial_name: create-new-tutorial
+
+title: Title of the tutorial
+zenodo_link: ''
+questions:
+- Which biological questions are addressed by the tutorial?
+- Which bioinformatics techniques are important to know for this type of data?
+objectives:
+- The learning objectives are the goals of the tutorial
+- They will be informed by your audience and will communicate to them and to yourself
+  what you should focus on during the course
+- They are single sentences describing what a learner should be able to do once they
+  have done completed tutorial
+- You can use Bloom's Taxonomy to write effective learning objectives
+time_estimation: ''
+key_points:
+- The take-home messages
+- They will appear at the end of the tutorial
+contributors:
+- contributor1
+- contributor2
 ---
 # Introduction
 {:.no_toc}
@@ -58,72 +91,171 @@ blabla
 The `tutorial.md` needs to start with some metadata at the top:
 
 - `layout: tutorial_hands_on`: keep the default
-- `topic_name: training`: replace 'training' the name of the topic
-- `tutorial_name: create-new-tutorial`: replace 'create-new-tutorial' with the `name` of tutorial that you used in the topic level metadata
+- `title`: title of the tutorial (it will appear on the tutorial page and the topic page)
+- `enable`: `false` to hide your tutorial from the topic page (optional)
+- `zenodo_link`: link on Zenodo to the input data for the tutorial
 
-These metadata are there to help the templating system linking between the tutorial's file and the global [metadata]({{site.baseurl}}/topics/contributing/tutorials/create-new-tutorial-metadata/tutorial.html).
-If this is not correctly defined, the tutorial will not be shown on the website.
-
-> ### {% icon hands_on %} Hands-on: Fix the top metadata
+> ### {% icon hands_on %} Hands-on: Fill the basic metadata
 >
-> 1. Change the `tutorial_name` and the `topic_name` to fit to the ones defined in the metadata
-> 2. (Optional) Build the website locally by following the [Jekyll tutorial]({{ site.baseurl }}/topics/contributing/tutorials/running-jekyll/tutorial.html) and check that the tutorial is reachable
+> 1. Update the tutorial information in the header section of your tutorial:
+>
+>     ```
+>     title: "Similarity search with BLAST"
+>     ```
+> 2. (Optional) Add the Zenodo link (if created)
+>
 {: .hands_on}
+
+This information is used to display the data from the topic and tutorial page. They are also used to check which information are missing for the tutorials.
+
+We also define metadata related to the pedagogical content of the tutorial, which will appear in the top ("Overview" box) and bottom of the online tutorial:
+
+- `requirements`: list of resources that the reader of the material should be familiar with before starting this training:
+    - `type`: the type of link (`internal` or `external`)
+
+    For internal, i.e. inside the Galaxy Training Material:
+    - `topic_name`: name of the topic
+    - `tutorials`: list of required tutorials inside of the topic
+
+    For external:
+    - `title`: title of the external resource
+    - `link`: URL to the external resource
+- `time_estimation`: an estimation of the time needed to complete the hands-on
+- `questions`: list of questions that will be addressed in the tutorial
+- `objectives`: list of learning objectives for the tutorial
+
+    A learning objective is a single sentence describing what a learner will be able to do once they have done the tutorial
+
+- `key_points`: list of take-home messages
+
+    This information will appear at the end of the tutorial
+
+- `follow_up_training`: list of resources that the reader of the material could follow at the end of the tutorial
+
+    - `type`: the type of link (`internal` or `external`)
+
+    For internal, i.e. inside the Galaxy Training Material:
+    - `topic_name`: name of the topic
+    - `tutorials`: list of required tutorials inside of the topic
+
+    For external:
+    - `title`: title of the external resource
+    - `link`: URL to the external resource
+
+    They will be displayed at the end of a tutorial.
+
+For this category of metadata, we have taken inspiration from what Software Carpentry has done and particularly what they described in their [Instructor training](https://swcarpentry.github.io/instructor-training/).
+
+> ### {% icon hands_on %} Hands-on: Fill out the pedagogical metadata
+>
+> 1. Define 2 questions that will be addressed during the tutorial and add them to the metadata
+> 2. Define 2 learning objectives for the tutorial and add them to the metadata
+{: .hands_on}
+
+> ### {% icon comment %} When filling the pedagogical metadata
+> We recommend that you fill out the *questions* and the *learning objectives* before starting writing the tutorial content. You can still refine them afterwards, but it will help to guide you in developing your tutorial, and gives you some time to think beforehand on what topics are worth being covered.
+>
+> For the take-home messages, it is easier to define them once the tutorial is written and you identified the issues.
+{: .comment}
+
 
 # Content
 
-The tutorial's content is written directly after the short section of metadata. This is written in Markdown, a simple markup language.
+The tutorial's content is written directly after the section of metadata. This is written in Markdown, a simple markup language.
 
 > ### {% icon tip %} Tip: Markdown
 >
 > Check [this cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) to learn more how to use Markdown.
 {: .tip}
 
-The Markdown content is then transformed into a user friendly webpage throughout a templating system. With this approach, there is no need to add the name of every tutorial each time, since they are automatically added based on the tutorial's metadata.
+The Markdown content is then transformed into a user friendly webpage through a templating system. With this approach, there is no need to add the name of every tutorial each time, since they are automatically added based on the tutorial's metadata.
 
-We recommend to structure the tutorials as follows:
+To help developing the tutorial, we recommend to create a workflow of the different steps of the tutorial inside Galaxy first, and then you can create the structure of the tutorial automatically from that:
 
-- An introduction, to bring an overview of the tutorial with its use cases, data, and methods
-- Multiple sections, representing the steps of the analysis, complete with their hands-on parts (practicing is an important part of the learning process)
-- A conclusion to summarize what has been done in the tutorial (with a graphic)
-
-> ### {% icon hands_on %} Hands-on: Structuring the tutorial
+> ### {% icon hands_on %} Hands-on: Create the structure of the tutorial from a workflow
 >
-> 1. Add a small description of the dataset
-> 2. Add one or two sections with ideas for the tutorial
-> 3. Add a small conclusion
+> 1. Create a small workflow with one or two steps on a running Galaxy instance
+> 2. Get the workflow id
+>    1. Go the "Share" page of the workflow
+>    2. Copy the information after `id=` in the URL of the page
+> 3. Get your API key for this Galaxy instance
+>    1. Click on **User** --> **Preferences**
+>    2. Click on **Manage API key**
+>    3. Click on **Create a new key** (if none is available)
+>    4. Copy the API key
+> 4. Generate the skeleton of the tutorial locally
+>
+>    ```
+>    $ planemo training_generate_from_wf \
+>             --topic_name "my-topic" \
+>             --tutorial_name "my-new-tutorial" \
+>             --galaxy_url "URL to Galaxy instance in which you created the workflow" \
+>             --galaxy_api_key "Your API key on the Galaxy instance" \
+>             --workflow_id "ID of the workflow on the Galaxy instance" \
+>             --zenodo_link "URL to the Zenodo record (Optional)"
+>    ```
+>
+>    > ### {% icon comment %} Using a local worklfow
+>    > It is also possible to download the workflow locally (with the `.ga` extension), and then run a slightly different command:
+>    >
+>    > ```
+>    > $ planemo training_generate_from_wf \
+>    >          --topic_name "my-topic" \
+>    >          --tutorial_name "my-new-tutorial" \
+>    >          -- workflow PATH/to/the/file.ga \
+>    >          --zenodo_link "URL to the Zenodo record (Optional)"
+>    > ```
+>    {: .comment}
+>
+> 5. Inspect the generated `tutorial.md`
 {: .hands_on}
 
-## Adding images with caption
+The generated tutorial is structured with:
 
-To add an image in Markdown file, we need to use the markdown syntax for this: `![](../../images/image.png)`.
+- An introduction, to give an overview of the tutorial with its use cases, data, and methods
+- Multiple sections representing the steps of the analysis, complete with automatically generated hands-on blocks, as practicing is a vital part of the learning process
+- A conclusion to summarize what has been done in the tutorial (with a graphic)
 
-We have also added a small plugin to add a caption for each image:
+> ### {% icon hands_on %} Hands-on: Filling out the structure of the tutorial
+>
+> 1. Fill out the "Introduction" with a general introduction of the tutorial and a small description of the dataset (goals)
+> 2. Rename/restructure the sections with several levels and more explication
+> 3. Add some theory about the tool used to introduce each section
+> 4. Add a small conclusion and relate the results to the original question
+>
+{: .hands_on}
 
-![This figure shows an example of an image with a caption](../../images/image_caption_screenshot.png "Example of an image with a caption")
+> ### {% icon comment %} Adding images with captions
+> To add an image in Markdown file, we need to use the markdown syntax for this: `![](../../images/image.png)`.
+>
+> We have also added a small plugin to handle captions for each image:
+>
+> ![A textual description of the image](../../images/image_caption_screenshot.png "Example of an image with a caption ")<!-- Adding a space to the caption to not trigger figurigy skip_titles -->
+>
+> The prefix "Figure 1." is automatically added before its caption. This is done with the following Markdown syntax:
+>
+> ```markdown
+> ![A textual description of the image](../images/image.png "Example of an image with a caption")
+> ```
+>
+> We can also cross-reference images inside our Markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (changing `nb` with the image's number).
+{: .comment}
 
-The prefix "Figure 1." is automatically added before its caption. This is done with the following Markdown syntax:
 
-```markdown
-![A textual description of the image](../images/image.png "This is my super caption")
-```
-
-We can also cross-reference images inside our Markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (changing `nb` with the image's number).
-
-## Writing mathematical expressions
-
-Mathematical expressions can be written in LaTeX, and are automtaically rendered with [MathJax](https://www.mathjax.org/).
-
-Surround your math expression with two `$` signs (like in LaTeX math blocks):
-
-- inline expressions, *e.g.* `$$ 5 + 5 $$` will be rendered as $$ 5 + 5 $$
-- block expressions, *e.g.* `$$ 5 + 5 $$` will be rendered in its own line block as
-
-   $$ 5 + 5 $$
-
-Dollar signs are therefore *reserved characters* for instructing the templating system to open/close LaTeX math blocks. If you want to use a `$` within your expression, you will need to *escape* it: `$$ a + 3\$ = 5\$ $$` will be rendered as: $$ a + 3\$ = 5\$ $$
-
-> ### {% icon comment %} Comments
+> ### {% icon comment %} Writing mathematical expressions
+>
+> Mathematical expressions can be written in LaTeX, and are automatically rendered with [MathJax](https://www.mathjax.org/).
+>
+> Surround your math expression with two `$` signs on each side (like in LaTeX math blocks):
+>
+> - inline expressions, *e.g.* `$$ 5 + 5 $$` will be rendered as $$ 5 + 5 $$
+> - block expressions, *e.g.* `$$ 5 + 5 $$` will be rendered in its own line block as
+>
+>    $$ 5 + 5 $$
+>
+> Dollar signs are therefore *reserved characters* for instructing the templating system to open/close LaTeX math blocks. If you want to use a `$` within your expression, you will need to *escape* it: `$$ a + 3\$ = 5\$ $$` will be rendered as: $$ a + 3\$ = 5\$ $$
+>
+>
 > LaTeX code that uses the pipe symbol `|` in inline math statements may lead to a line being recognized as a table line by the templating system.
 > This can be avoided by using the `\vert` command instead of `|`
 {: .comment}
@@ -146,7 +278,26 @@ You must follow this structure exactly for it to be rendered correctly.
 
 ## **Overview** box
 
-This box at the top of each tutorial is automatically generated using the metadata we defined in the topic's metadata file
+This box at the top of each tutorial is automatically generated using the metadata we defined in the topic's metadata file:
+
+> ### Overview
+>
+> **{% icon question %} Questions**
+> - Which biological questions are addressed by the tutorial?
+> - Which bioinformatics techniques are important to know for this type of data?
+>
+> **{% icon objectives %} Objectives**
+> - The learning objectives are the goals of the tutorial
+> - They will be informed by your audience and will communicate to them and to yourself what you should focus on during the course
+> - They are single sentences describing what a learner should be able to do once they have done completed tutorial
+> - You can use Bloom's Taxonomy to write effective learning objectives
+>
+> {% icon requirements %} Requirements
+> - [Galaxy introduction]({{ site.baseurl }}/topics/introduction/)
+>
+> {% icon time %} Time estimation: '1H'
+>
+{: .overview}
 
 > ### {% icon hands_on %} Hands-on: Checking the metadata
 >
@@ -156,11 +307,12 @@ This box at the top of each tutorial is automatically generated using the metada
 >    >
 >    > What metadata hasn't been added to this box?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    >
->    >    > The take-home messages are not added to this box but into the last box of the tutorial
->    >    {: .solution}
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > The take-home messages are not added to this box but into the last box of the tutorial
+>    > {: .solution}
 >    {: .question}
+>
 {: .hands_on}
 
 ## **Agenda** box
@@ -223,9 +375,9 @@ We find that having users walk through the tutorial, doing all of the steps is i
 
 For consistency please use:
 
-- {% raw %}`{% icon hands_on %}`{% endraw %} emoji to define that is an hands-on
+- {% raw %}`{% icon hands_on %}`{% endraw %} icon to define that is an hands-on
 - Short imperative sentences to make it easy to identify the tasks
-- Name of the tool in bold with the {% raw %}`{% icon tool %}`{% endraw %} emoji to make it easy to identify a Galaxy tool
+- Name of the tool in bold followed by {% raw %}`{% icon tool %}`{% endraw %} icon to make it easy to identify a Galaxy tool
 - Parameters for the tool as a sublist
 
 This will be rendered like:
@@ -261,11 +413,13 @@ The available icons are:
 > ### {% icon hands_on %} Hands-on: My Step
 >
 > 1. **My Tool** {% icon tool %} with the following parameters
->  - {% icon param-text %} *"My text parameter"*: `my value`
->  - {% icon param-file %} *"My input file"*: `my file`
->  - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
->  - {% icon param-select %} *"My select menu"*: `my choice`
->  - {% icon param-check %} *"My check box"*: `yes`
+>    - {% icon param-text %} *"My text parameter"*: `my value`
+>    - {% icon param-file %} *"My input file"*: `my file`
+>    - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
+>    - {% icon param-select %} *"My select menu"*: `my choice`
+>    - {% icon param-check %} *"My check box"*: `yes`
+>    - {% icon param-repeat %} **My repeat parameter**
+>      - *"param1"*: `42`
 {: .hands_on}
 ```
 {% endraw %}
@@ -275,11 +429,13 @@ which, when rendered, look like:
 > ### {% icon hands_on %} Hands-on: My Step
 >
 > 1. **My Tool** {% icon tool %} with the following parameters
->  - {% icon param-text %} *"My text parameter"*: `my value`
->  - {% icon param-file %} *"My input file"*: `my file`
->  - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
->  - {% icon param-select %} *"My select menu"*: `my choice`
->  - {% icon param-check %} *"My check box"*: `yes`
+>    - {% icon param-text %} *"My text parameter"*: `my value`
+>    - {% icon param-file %} *"My input file"*: `my file`
+>    - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
+>    - {% icon param-select %} *"My select menu"*: `my choice`
+>    - {% icon param-check %} *"My check box"*: `yes`
+>    - {% icon param-repeat %} **My repeat parameter**
+>      - *"param1"*: `42`
 {: .hands_on}
 
 
@@ -295,12 +451,12 @@ They can also help the instructors by exposing and clarifying common scenarios, 
 > 1. Why are some tests filtered?
 > 2. Does it improve the *p*-value distribution?
 >
->    > ### {% icon solution %} Solution
->    >
->    > 1. Sol for the first question
->    > 2. Sol for the second question
->    >
->    {: .solution}
+> > ### {% icon solution %} Solution
+> >
+> > 1. Sol for the first question
+> > 2. Sol for the second question
+> >
+> {: .solution}
 {: .question}
 ```
 {% endraw %}
@@ -312,12 +468,12 @@ Which will be rendered as:
 > 1. Why are some tests filtered?
 > 2. Does it improve the *p*-value distribution?
 >
->    > ### {% icon solution %} Solution
->    >
->    > 1. Sol for the first question
->    > 2. Sol for the second question
->    >
->    {: .solution}
+> > ### {% icon solution %} Solution
+> >
+> > 1. Sol for the first question
+> > 2. Sol for the second question
+> >
+> {: .solution}
 {: .question}
 
 Questions should be quick to answer. You can directly ask a question and expect an answer, or you can provide some answers and create multiple choices questions (MCQs).
@@ -413,11 +569,11 @@ Boxes can be nested, *e.g.* for having tips inside a hands-on:
 >    >
 >    > In which topic will you put the tutorial?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    >
->    >    > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
->    >    > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
->    >    {: .solution}
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
+>    > > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
+>    > {: .solution}
 >    {: .question}
 {: .hands_on}
 ```

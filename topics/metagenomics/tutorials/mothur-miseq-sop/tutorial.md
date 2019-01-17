@@ -1,7 +1,21 @@
 ---
 layout: tutorial_hands_on
-topic_name: metagenomics
-tutorial_name: mothur-miseq-sop
+
+title: "16S Microbial Analysis with Mothur"
+zenodo_link: "https://doi.org/10.5281/zenodo.165147"
+questions:
+  - "What is the effect of normal variation in the gut microbiome on host health?"
+objectives:
+  - "Analyze of 16S rRNA sequencing data using the Mothur toolsuite in Galaxy"
+time_estimation: "4h"
+key_points:
+  - "16S rRNA gene sequencing analysis results depend on the many algorithms used and their settings"
+  - "Quality control and cleaning of your data is a crucial step in order to obtain optimal results"
+  - "Adding a mock community to serve as a control sample can help you asses the error rate of your experimental setup"
+  - "We can explore alpha and beta diversities using Krona and Phinch for dynamic visualizations"
+contributors:
+  - shiltemann
+  - bebatut
 ---
 
 # Overview
@@ -21,14 +35,7 @@ creators of the Mothur software package, the [Schloss lab](http://www.schlosslab
 {: .agenda}
 
 
-> ### {% icon comment %} Note
-> Each of the Mothur tools in Galaxy contains a link to the mothur wiki in the help section. Here you can find
-> more details about all the inputs, outputs and parameters for the tool.
-> <br><br>
-> Your results may deviate slightly from the ones presented in this tutorial due to differing tool or
-> reference data versions or stochastic processes in the algorithms.
-{: .comment}
-
+{% include snippets/warning_results_may_vary.md %}
 
 # Obtaining and preparing data
 
@@ -88,80 +95,77 @@ in this document differ slightly from the description on their website -->
 
 Now that we know what our input data is, let's get it into our Galaxy history:
 
+All data required for this tutorial has been made available from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg)](https://doi.org/10.5281/zenodo.800651)
+
 > ### {% icon hands_on %} Hands-on: Obtaining our data
 >
 > 1. Make sure you have an empty analysis history. Give it a name.
 >
->    > ### {% icon tip %} Starting a new history
->    >
->    > * Click the **gear icon** at the top of the history panel
->    > * Select the option **Create New** from the menu
->    {: .tip}
+>    {% include snippets/create_new_history.md %}
 >
-> 2. **Import Sample Data.** The data for this course may be available from a shared library in Galaxy
-> (ask your instructor). If this is not the case, you can upload it yourself.
-> - Option 1: From data library:
->   - Navigate to the shared data library, you should find 20 pairs of fastq files; 19 from the mice,
-> and one pair from the mock community.
-> - Option 2: From your Zenodo:
->   - Data is available from Zenodo here: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg)](https://doi.org/10.5281/zenodo.800651)
->   - In the file upload menu choose the `Paste/Fetch data` option and enter the following urls to import the file from Zenodo to Galaxy directly
->    > ### {% icon solution %} Solution
->    > ```
->    > https://zenodo.org/record/800651/files/F3D0_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D0_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D141_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D141_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D142_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D142_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D143_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D143_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D144_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D144_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D145_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D145_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D146_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D146_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D147_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D147_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D148_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D148_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D149_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D149_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D150_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D150_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D1_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D1_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D2_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D2_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D3_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D3_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D5_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D5_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D6_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D6_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D7_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D7_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D8_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D8_R2.fastq
->    > https://zenodo.org/record/800651/files/F3D9_R1.fastq
->    > https://zenodo.org/record/800651/files/F3D9_R2.fastq
->    > https://zenodo.org/record/800651/files/Mock_R1.fastq
->    > https://zenodo.org/record/800651/files/Mock_R2.fastq
->    > ```
->    {: .solution }
-> <br>
+> 2. **Import Sample Data.**
+>       - Import the sample FASTQ files to your history, either from a shared data library (if available), or from Zenodo:
 >
-> 3. **Import Reference Data.**  Go back to the data library and import the following reference
-> datasets, or import them from Zenodo:
->  - `silva.v4.fasta`
->  - `HMP_MOCK.v35.fasta`
->  - `mouse.dpw.metadata`
->  - `mouse.time.design`
->  - `trainset9_032012.pds.fasta`
->  - `trainset9_032012.pds.tax`
+>       > ### {% icon solution %} List of Zenodo URLs
+>       > ```
+>       > https://zenodo.org/record/800651/files/F3D0_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D0_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D141_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D141_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D142_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D142_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D143_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D143_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D144_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D144_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D145_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D145_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D146_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D146_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D147_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D147_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D148_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D148_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D149_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D149_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D150_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D150_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D1_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D1_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D2_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D2_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D3_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D3_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D5_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D5_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D6_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D6_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D7_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D7_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D8_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D8_R2.fastq
+>       > https://zenodo.org/record/800651/files/F3D9_R1.fastq
+>       > https://zenodo.org/record/800651/files/F3D9_R2.fastq
+>       > https://zenodo.org/record/800651/files/Mock_R1.fastq
+>       > https://zenodo.org/record/800651/files/Mock_R2.fastq
+>       > ```
+>       {: .solution }
 >
->    > ### {% icon solution %} Solution
+>       {% include snippets/import_via_link.md %}
+>
+>       {% include snippets/import_from_data_library.md %}
+>
+> 3. **Import Reference Data**
+>    - Import the following reference datasets
+>      - `silva.v4.fasta`
+>      - `HMP_MOCK.v35.fasta`
+>      - `mouse.dpw.metadata`
+>      - `mouse.time.design`
+>      - `trainset9_032012.pds.fasta`
+>      - `trainset9_032012.pds.tax`
+>
+>
+>    > ### {% icon solution %} List of Zenodo URLs
 >    > ```
 >    > https://zenodo.org/record/800651/files/HMP_MOCK.v35.fasta
 >    > https://zenodo.org/record/800651/files/mouse.dpw.metadata
@@ -174,40 +178,47 @@ Now that we know what our input data is, let's get it into our Galaxy history:
 {: .hands_on}
 
 Now that's a lot of files to manage. Luckily Galaxy can make life a bit easier by allowing us to create
-*dataset collections*. This enables us to easily run tools on multiple datasets at once. Let's
-create a collection now:
+**dataset collections**. This enables us to easily run tools on multiple datasets at once.
 
-> ### {% icon hands_on %} Hands-on: Organizing our data into a collection
+Since we have **paired-end** data, each sample consist of two separate fastq files, one containing the
+forward reads, and one containing the reverse reads. We can recognize the pairing from the file names,
+which will differ only by `_R1` or `_R2` in the filename. We can tell Galaxy about this paired naming
+convention, so that our tools will know which files belong together. We do this by building a **List of Dataset Pairs**
+
+
+> ### {% icon hands_on %} Hands-on: Organizing our data into a paired collection
 >
-> Since we have paired-end data, each sample consist of two separate fastq files, one containing the
-> forward reads, and one containing the reverse reads. We can recognize the pairing from the file names,
-> which will differ only by `_R1` or `_R2` in the filename. We can tell Galaxy about this paired naming
-> convention, so that our tools will know which files belong together.
+> 1. Click on the **checkmark icon** {% icon param-check %} at top of your history.
 >
-> 1. Click on the **checkmark icon** at top of your history.
->   ![Checkmark icon in history menu](../../../../shared/images/history_menu_buttons2.png)
+> 2. Select all the FASTQ files (40 in total)
+>    - Click on **for all selected..**
+>    - Select **Build List of Dataset Pairs** from the dropdown menu
 >
-> 2. Select all the fastq files (40 in total), then click on **for all selected..** and select
->   **Build List of Dataset Pairs** from the dropdown menu.
-> 3. In the next dialog window you can create the list of pairs. By default Galaxy will look for pairs
->   of files that differ only by a `_1` and `_2` part in their names. In our case however, these
->   should be `_R1` and `_R2`. Please change these values accordingly. You should now see a list of
->   pairs suggested by Galaxy,
->   ![List of suggested paired datasets](../../images/create_collection.png) <br><br>
+>    In the next dialog window you can create the list of pairs. By default Galaxy will look for pairs
+>    of files that differ only by a `_1` and `_2` part in their names. In our case however, these
+>    should be `_R1` and `_R2`.
 >
-> 4. Examine the pairings, if it looks good, you can click on **auto-pair** to create the suggested
->   pairs.
->   ![The result of pairing](../../images/create_collection2.png) <br><br>
->   The middle segment is the name for each pair. You can change these names by clicking on them. These
->   names will be used as sample names in the downstream analysis so always make sure they are
->   informative.
->   **Important:** Make sure these sample names contain only alphanumeric characters. If you've
->   imported the data from Zenodo, the sample names will default to the full url, please change these
->   values to only their last part, e.g. `F3D0`, `F3D5` etc.
+> 3. Change these values accordingly
+>    - Change `_1` to `_R1` in the text field on the top left
+>    - Change `_2` to `_R2` om the text field on the top right
 >
-> 5. Once you are happy with your pairings, enter a name for your new collection at the bottom right of
->   the screen. Then click the **Create List** button. A new dataset collection item will now appear in
->   your history.
+>    You should now see a list of pairs suggested by Galaxy:
+>    ![List of suggested paired datasets](../../images/create_collection.png) <br><br>
+>
+> 4. Examine the pairings and make sure they are correct.
+>    - Click on **auto-pair** to create the suggested pairs.
+>
+>      ![The result of pairing](../../images/create_collection2.png) <br><br>
+>
+>    The middle segment is the name for each pair. You can change these names by clicking on them.
+>    These names will be used as sample names in the downstream analysis so always make sure they are informative!
+>
+> 5. Name the pairs.
+>    - Make sure the pair names are like the image above (`F3D0`, `F3D5` etc)
+>      - If the files will imported via url, they may have the full url as sample name, please remove everything but the sample name for each pair
+>
+> 6. **Name your collection** at the bottom right of the screen
+> 7. Click the **Create List** button. A new dataset collection item will now appear in your history
 {: .hands_on}
 
 
@@ -243,8 +254,8 @@ fragment, resulting in an overlap in the middle. We will now combine these pairs
 > ### {% icon hands_on %} Hands-on: Combine forward and reverse reads into contigs
 >
 > - **Make.contigs** {% icon tool %} with the following parameters
->   - "Way to provide files" to `Multiple pairs - Combo mode`
->   - "Fastq pairs" to the collection you just created
+>   - {% icon param-select %} *"Way to provide files"*: `Multiple pairs - Combo mode`
+>   - {% icon param-collection %} *"Fastq pairs"*: the collection you just created
 >   - Leave all other parameters to the default settings <br><br>
 >
 {: .hands_on}
@@ -273,8 +284,8 @@ Next we want to improve the quality of our data. But first, let's get a feel of 
 > ### {% icon hands_on %} Hands-on: Summarize data
 >
 > - **Summary.seqs** {% icon tool %} with the following parameters
->   - "fasta" parameter to the `trim.contigs.fasta` file created by the make.contigs tool
->   - "Output logfile?" to `yes`
+>   - {% icon param-file %} *"fasta"*: the `trim.contigs.fasta` file created by **Make.contigs** {% icon tool%}
+>   - *"Output logfile?"*: `yes`
 >
 {: .hands_on}
 
@@ -305,22 +316,22 @@ The following tool will remove any sequences with ambiguous bases (`maxambig` pa
 > ### {% icon hands_on %} Hands-on: Filter reads based on quality and length
 >
 > - **Screen.seqs** {% icon tool %} with the following parameters
->   - "fasta" to the `trim.contigs.fasta` file created by the make.contigs tool
->   - "group" the group file created in the make.contigs step
->   - "maxlength" parameter to `275`
->   - "maxambig" parameter to `0`
+>   - {% icon param-file %} *"fasta"*: the `trim.contigs.fasta` file created by **Make.contigs** {% icon tool %}
+>   - {% icon param-file %} *"group"*: the group file created in the **Make.contigs** {% icon tool %} step
+>   - *"maxlength"*: `275`
+>   - *"maxambig"*: `0`
 >
 > > ### {% icon question %} Question
 > >
 > > How many reads were removed in this screening step? (Hint: run the summary.seqs tool again)
 > >
-> >    > ### {% icon solution %} Solution
-> >    > 23,488.
-> >    > 
-> >    > This can be determined by looking at the number of lines in bad.accnos output of screen.seqs
-> >    > or by comparing the total number of seqs between of the summary log before and after this screening
-> >    > step
-> >    {: .solution }
+> > > ### {% icon solution %} Solution
+> > > 23,488.
+> > >
+> > > This can be determined by looking at the number of lines in bad.accnos output of screen.seqs
+> > > or by comparing the total number of seqs between of the summary log before and after this screening
+> > > step
+> > {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -334,18 +345,19 @@ times, we'll unique our sequences using the `unique.seqs` command:
 > ### {% icon hands_on %} Hands-on: Remove duplicate sequences
 >
 > - **Unique.seqs** {% icon tool %} with the following parameters
->   - "fasta" to the `good.fasta` output from Screen.seqs
->   - "output format" to `Name File`
+>   - {% icon param-file %} *"fasta"*: the `good.fasta` output from **Screen.seqs** {% icon tool %}
+>   - *"output format"*: `Name File`
 >
 > > ### {% icon question %} Question
 > >
 > > How many sequences were unique? how many duplicates were removed?
 > >
-> >    > ### {% icon solution %} Solution
-> >    > 16,426 unique sequences and 112,446 duplicates.
-> >    >
-> >    > This can be determined from the number of lines in the fasta (or names) output, compared to the
-> >    > number of lines in the fasta file before this step.
+> > > ### {% icon solution %} Solution
+> > > 16,426 unique sequences and 112,446 duplicates.
+> > >
+> > > This can be determined from the number of lines in the fasta (or names) output, compared to the
+> > > number of lines in the fasta file before this step.
+> > {: .solution}
 > {: .question}
 {: .hands_on}
 
@@ -367,9 +379,9 @@ To reduce file sizes further and streamline analysis, we can now summarize the d
 > ### {% icon hands_on %} Hands-on: Generate count table
 >
 > - **Count.seqs** {% icon tool %} with the following parameters
->   - "name" to the `names` output from Unique.seqs
->   - "Use a Group file" to `yes`
->   - "group" to the group file we created using the Screen.seqs tool
+>   - {% icon param-file %} *"name"*: the `names` output from **Unique.seqs** {% icon tool %}
+>   - *"Use a Group file"*: `yes`
+>   - {% icon param-file %} *"group"*: the `group file` we created using the **Screen.seqs** {% icon tool %}
 {: .hands_on}
 
 The *count_table* output will look something like this:
@@ -396,13 +408,13 @@ step to perform to improve the clustering of your OTUs [[Schloss 2013]](https://
 > ### {% icon hands_on %} Hands-on: Align sequences
 >
 > 1. **Align.seqs** {% icon tool %} with the following parameters
->   - "fasta" to the fasta output from Unique.seqs
->   - "reference" to the `silva.v4.fasta` reference file
+>   - {% icon param-file %} *"fasta"*: the `fasta` output from **Unique.seqs** {% icon tool %}
+>   - {% icon param-file %} *"reference"*: `silva.v4.fasta` reference file from your history
 > <br><br>
 > 2. **Summary.seqs** {% icon tool %} with the following parameters
->   - "fasta" parameter to the aligned output from previous step
->   - "count" parameter to `count_table` output from Count.seqs
->   - "Output logfile?" to `yes`
+>   - {% icon param-file %} *"fasta"*: the aligned output from **Align.seqs** {% icon tool %}
+>   - {% icon param-file %} *"count"*: `count_table` output from **Count.seqs** {% icon tool %}
+>   - *"Output logfile?"*: `yes`
 >
 {: .hands_on}
 
@@ -438,11 +450,11 @@ base in a row (this also could have been done in the first execution of `screen.
 > ### {% icon hands_on %} Hands-on: Remove poorly aligned sequences
 >
 > - **Screen.seqs** {% icon tool %} with the following parameters
->   - "fasta" to the aligned fasta file
->   - "start" to 1968
->   - "end" to 11550
->   - "maxhomop" to 8
->   - "count" to our most recent count_table
+>   - {% icon param-file %} *"fasta"*: the aligned fasta file from **Align.seqs** {% icon tool %}
+>   - *"start"*: `1968`
+>   - *"end"*: `11550`
+>   - *"maxhomop"*: `8`
+>   - {% icon param-file %} *"count"*: the `count table` file from **Count.seqs** {% icon tool %}
 >
 > **Note:** we supply the count table so that it can be updated for the sequences we're removing.
 >
@@ -465,10 +477,9 @@ losing any information. We'll do all this with filter.seqs:
 > ### {% icon hands_on %} Hands-on: Filter sequences
 >
 > - **Filter.seqs** {% icon tool %} with the following parameters
->   - "fasta"" to good.fasta output from Sreen.seqs
->   - "Vertical" to `yes`
->   - "trump" to `.`
->   - "Output logfile" to `yes`
+>   - {% icon param-file %} *"fasta"*: `good.fasta` output from the lastest **Screen.seqs** {% icon tool %}
+>   - *"trump"*: `.`
+>   - *"Output logfile"*: `yes`
 {: .hands_on}
 
 In the log file we see the following information:
@@ -488,15 +499,15 @@ columns. Because we've perhaps created some redundancy across our sequences by t
 > ### {% icon hands_on %} Hands-on: Re-obtain unique sequences
 >
 > - **Unique.seqs** {% icon tool %} with the following parameters
->   - "fasta" to the `filtered fasta` output from Filter.seqs
->   - "name file or count table" to the count table from the last Screen.seqs
+>   - {% icon param-file %} *"fasta"*: the `filtered fasta` output from **Filter.seqs** {% icon tool %}
+>   - {% icon param-file %} *"name file or count table"*: the `count table` from the last **Screen.seqs** {% icon tool %}
 >
 > > ### {% icon question %} Question
 > >
 > >  How many duplicate sequences did our filter step produce?
 > >
 > > > ### {% icon solution %} Solution
-> > > 3. The number of unique sequences was reduced from 16298 to 16295
+> > > 3: The number of unique sequences was reduced from 16298 to 16295
 > > {: .solution }
 > {: .question}
 {: .hands_on}
@@ -512,15 +523,15 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 > ### {% icon hands_on %} Hands-on: Perform preliminary clustering of sequences
 >
 > - **Pre.cluster** {% icon tool %} with the following parameters
->   - "fasta" to the fasta output from the last Unique.seqs run
->   - "name file or count table" to the count table from the last Unique.seqs
->   - "diffs" to 2
+>   - {% icon param-file %} *"fasta"*: the `fasta` output from the last **Unique.seqs** {% icon tool %} run
+>   - {% icon param-file %} *"name file or count table"*: the `count table` from the last **Unique.seqs** {% icon tool %}
+>   - *"diffs"*: `2`
 >
 > > ### {% icon question %} Question
 > >
 > >  How many unique sequences are we left with after this clustering of highly similar sequences?
 > > > ### {% icon solution %} Solution
-> > > 5720. This is the number of lines in the fasta output
+> > > 5720: This is the number of lines in the fasta output
 > > {: .solution }
 > {: .question}
 {: .hands_on}
@@ -546,18 +557,18 @@ when they're the most abundant sequence in another sample. This is how we do it:
 > ### {% icon hands_on %} Hands-on: Remove chimeric sequences
 >
 > - **Chimera.vsearch** {% icon tool %} with the following parameters
->   - "fasta" to the fasta output from Pre.cluster
->   - "Select Reference Template from" to `Self`
->   - "count" to the count table from the last Pre.cluster
->   - "dereplicate" to Yes
+>   - {% icon param-file %} *"fasta"*: the `fasta` output from **Pre.cluster** {% icon tool %}
+>   - {% icon param-select %} *"Select Reference Template from"*: `Self`
+>   - {% icon param-file %} *"count"*: the `count table` from the last **Pre.cluster** {% icon tool %}
+>   - {% icon param-check %} "dereplicate" to Yes
 >
 > Running chimera.vsearch with the count file will remove the chimeric sequences from the count table, but we
 > still need to remove those sequences from the fasta file as well. We do this using remove.seqs:
 >
 > - **Remove.seqs** {% icon tool %} with the following parameters
->   - "accnos" to the vsearch.accnos file from Chimera.vsearch
->   - "fasta" to the fasta output from Pre.cluster
->   - "count" to the count table from Chimera.vsearch
+>   - {% icon param-file %} *"accnos"*: the `vsearch.accnos` file from **Chimera.vsearch** {% icon tool %}
+>   - {% icon param-file %} *"fasta"*: the `fasta` output from **Pre.cluster** {% icon tool %}
+>   - {% icon param-file %} *"count"*: the `count table` from **Chimera.vsearch** {% icon tool %}
 >
 > > ### {% icon question %} Question
 > >
@@ -588,10 +599,10 @@ Let's go ahead and classify those sequences using the Bayesian classifier with t
 > ### {% icon hands_on %} Hands-on: Remove undesired sequences
 >
 > - **Classify.seqs** {% icon tool %} with the following parameters
->   - "fasta" to the fasta output from Remove.seqs
->   - "reference" to `trainset9032012.pds.fasta` from your history
->   - "taxonomy" to `trainset9032012.pds.tax` from your history
->   - "count" to the count table file from Remove.seqs
+>   - {% icon param-file %} *"fasta"*: the `fasta` output from **Remove.seqs** {% icon tool %}
+>   - {% icon param-file %} *"reference"*: `trainset9032012.pds.fasta` from your history
+>   - {% icon param-file %} *"taxonomy"*: `trainset9032012.pds.tax` from your history
+>   - {% icon param-file %} *"count"*: the `count table` file from **Remove.seqs** {% icon tool %}
 >
 > Have a look at the taxonomy output. You will see that every read now has a classification.
 >
@@ -599,29 +610,28 @@ Let's go ahead and classify those sequences using the Bayesian classifier with t
 > command:
 >
 > - **Remove.lineage** {% icon tool %} with the following parameters
->   - "taxonomy" to the taxonomy output from Classify.seqs
->   - "taxon" to `Chloroplast-Mitochondria-unknown-Archaea-Eukaryota` in the text box under *Manually
-> select taxons for filtering*
->   - "fasta" to the fasta output from Remove.seqs
->   - "count" to the count table from Remove.seqs
+>   - {% icon param-file %} *"taxonomy"*: the taxonomy output from **Classify.seqs** {% icon tool %}
+>   - {% icon param-text %} *"taxon - Manually select taxons for filtering"*: `Chloroplast-Mitochondria-unknown-Archaea-Eukaryota`
+>   - {% icon param-file %} *"fasta"*: the `fasta` output from **Remove.seqs** {% icon tool %}
+>   - {% icon param-file %} *"count"*: the `count table` from **Remove.seqs** {% icon tool %}
 >
 > > ### {% icon question %} Questions
 > >
 > > 1. How many unique (representative) sequences were removed in this step?
 > > 2. How many sequences in total?
 > >
-> >    > ### {% icon solution %} Solution
-> >    > 20 representative sequences were removed.
-> >    >
-> >    > The fasta file output from Remove.seqs had 2281 sequences while the fasta output from Remove.lineages
-> >    > contained 2261 sequences.
-> >    >
-> >    > 162 total sequences were removed.
-> >    >
-> >    > If you run summary.seqs with the count table, you will see that we now have 2261 unique sequences
-> >    > representing a total of 117,929 total sequences (down from 118,091 before). This means 162 of our
-> >    > sequences were in represented by these 20 representative sequences.
-> >    {: .solution }
+> > > ### {% icon solution %} Solution
+> > > 20 representative sequences were removed.
+> > >
+> > > The fasta file output from Remove.seqs had 2281 sequences while the fasta output from Remove.lineages
+> > > contained 2261 sequences.
+> > >
+> > > 162 total sequences were removed.
+> > >
+> > > If you run summary.seqs with the count table, you will see that we now have 2261 unique sequences
+> > > representing a total of 117,929 total sequences (down from 118,091 before). This means 162 of our
+> > > sequences were in represented by these 20 representative sequences.
+> > {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -631,19 +641,57 @@ sequence to one of the domains.
 At this point we have curated our data as far as possible and we're ready to see what our error rate is.
 
 
-## Assessing error rates based on our mock community
+## Optional: Assessing error rates based on our mock community
+
+
+> ### {% icon tip %} Tip: Skipping the mock community analysis
+>
+> The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to [the next section](#preparing-for-analysis)
+> where we will cluster our sequences into OTUs, classify them and perform some visualisations.
+>
+{: .tip}
 
 Measuring the error rate of your sequences is something you can only do if you have co-sequenced a mock
 community, that is, a sample of which you know the exact composition. This is something we include for
 every 95 samples we sequence. You should too because it will help you gauge your error rates and allow
 you to see how well your curation is going, and whether something is wrong with your sequencing setup.
 
-> ### {% icon comment %} Definition
+> ### {% icon tip %} Background: Mock communities
 >
-> **Mock community:** A defined mixture of microbial cells and/or viruses or nucleic acid molecules created
-> *in vitro* to simulate the composition of a microbiome sample or the nucleic acid isolated therefrom.
+> **What is a mock community?**
 >
-{: .comment}
+> A mock community is an artificially constructed sample; a defined mixture of microbial cells and/or
+> viruses or nucleic acid molecules created *in vitro* to simulate the composition of a microbiome
+> sample or the nucleic acid isolated therefrom.
+>
+> **Why sequence a mock community?**
+>
+> In a mock community, we know exactly which sequences/organisms we expect to find, and at which proportions.
+> Therefore, we can use such an artificial sample to assess the error rates of our sequencing and
+> analysis pipeline.
+>   - Did we miss any of the sequences we know to be present in the sample (false negatives)?
+>   - Do we find any sequences that were not present in the sample (false positives)?
+>   - Were we able to accurately detect their relative abundances?
+>
+> If our workflow performed well on the mock sample, we have more confidence in the accuracy of the
+> results on the rest of our samples.
+>
+> **Example**
+>
+> As an example, consider the following image from [Fouhy et al.](https://dx.doi.org/10.1186%2Fs12866-016-0738-z).
+> A mock community sample was sequenced for different combinations of sequencer and primer sets (V-regions).
+> Since we know the expected outcome, we can assess the accuracy of each pipeline. A similar approach can be used to
+> assess different parameter settings of the *in-silico*  analysis pipline.
+>
+> ![example results of mock community sequencing to assess error rates](../../images/mock_community.jpg "Example of usage of a mock community to assess accuracy. On the left is the expected result given that we know the exact composition of the mock sample. This was then used to assess the accuracy of different combinations of sequencing platform and primer set (choice of V-region)")
+>
+>
+> **Further reading**
+>
+> - [Next generation sequencing data of a defined microbial mock community](https://dx.doi.org/10.1038%2Fsdata.2016.81)
+> - [16S rRNA gene sequencing of mock microbial populations- impact of DNA extraction method, primer choice and sequencing platform](https://dx.doi.org/10.1186%2Fs12866-016-0738-z)
+>
+{: .tip}
 
 Our mock community is composed of genomic DNA from 21 bacterial strains. So in a perfect world, this is
 exactly what we would expect the analysis to produce as a result.
@@ -655,10 +703,10 @@ First, let's extract the sequences belonging to our mock samples from our data:
 >
 >
 > 1. **Get.groups** {% icon tool %} with the following parameters
->   - "group file or count table" to the count table from Remove.lineage
->   - "groups" to `Mock`
->   - "fasta" to fasta output from Remove.lineage
->   - "output logfile?" to `yes`
+>   - {% icon param-file %} *"group file or count table"*: the `count table` from **Remove.lineage** {% icon tool %}
+>   - {% icon param-select %} *"groups"*: `Mock`
+>   - {% icon param-file %}*"fasta"*: `fasta` output from **Remove.lineage** {% icon tool %}
+>   - {% icon param-check %} *"output logfile?"*: `yes`
 >
 {: .hands_on}
 
@@ -675,10 +723,10 @@ the reads from our mock sample back to their known sequences, to see how many fa
 
 > ### {% icon hands_on %} Hands-on: Assess error rates based on a mock community
 > - **Seq.error** {% icon tool %} with the following parameters
->   - "fasta" to the fasta from Get.groups
->   - "reference" to `HMP_MOCK.v35.fasta` file from your history
->   - "count" to the count table from Get.groups
->   - "output log?" to `yes`
+>   - {% icon param-file %} *"fasta"*: the `fasta` output from **Get.groups** {% icon tool %}
+>   - {% icon param-file %} *"reference"*: `HMP_MOCK.v35.fasta` file from your history
+>   - {% icon param-file %} *"count"*: the `count table` from **Get.groups** {% icon tool %}
+>   - {% icon param-check %} *"output log?"*: `yes`
 >
 {: .hands_on}
 
@@ -721,33 +769,32 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 > First we calculate the pairwise distances between our sequences
 >
 > - **Dist.seqs** {% icon tool %} with the following parameters
->   - "fasta" to the fasta from Get.groups
->   - "cutoff" to `0.20`
+>   - {% icon param-file %} *"fasta"*: the `fasta` from **Get.groups** {% icon tool %}
+>   - *"cutoff"*: `0.20`
 >
 > Next we group sequences into OTUs
 >
 > - **Cluster** {% icon tool %} with the following parameters
->   - "column" to the dist output from Dist.seqs
->   - "count" to the count table from Get.groups
+>   - {% icon param-file %} *"column"*: the `dist` output from **Dist.seqs** {% icon tool %}
+>   - {% icon param-file %} *"count"*: the `count table` from **Get.groups** {% icon tool %}
 >
 > Now we make a *shared* file that summarizes all our data into one handy table
 >
 > - **Make.shared** {% icon tool %} with the following parameters
->     - "list" to the OTU list from Cluster
->     - "count" to the count table from Get.groups
->     - "label" to `0.03` (this indicates we are interested in the clustering at a 97% identity threshold)
+>     - {% icon param-file %} *"list"*: the `OTU list` from **Cluster** {% icon tool %}
+>     - {% icon param-file %} *"count"*: the `count table` from **Get.groups** {% icon tool %}
+>     - *"label"*: `0.03` (this indicates we are interested in the clustering at a 97% identity threshold)
 >
 > And now we generate intra-sample rarefaction curves
 >
 > - **Rarefaction.single** {% icon tool %} with the following parameters
->   - "shared" to the shared file from Make.shared
+>   - {% icon param-file %} *"shared"*: the `shared` file from **Make.shared** {% icon tool %}
 >
 > > ### {% icon question %} Question
 > >
 > >  How many OTUs were identified in our mock community?
 > > > ### {% icon solution %} Solution
-> > > 34.
-> > > Open the shared file or OTU list and look at the header line. You will see a column for each OTU
+> > > 34: Open the shared file or OTU list and look at the header line. You will see a column for each OTU
 > > {: .solution }
 > {: .question}
 {: .hands_on}
@@ -792,9 +839,10 @@ the `remove.groups` command:
 > ### {% icon hands_on %} Hands-on: Remove Mock community from our dataset
 >
 > - **Remove.groups** {% icon tool %} with the following parameters
->   - "Select input type" to `fasta , name, taxonomy, or list with a group file or count table`
->   - "count table", "fasta", and "taxonomy" to the respective outputs from Remove.lineage
->   - "groups" to `Mock`
+>   - *"Select input type"*: `fasta , name, taxonomy, or list with a group file or count table`
+>   - *"groups"*: `Mock`
+>   - {% icon param-files %} *"count table"*, *"fasta"*, and *"taxonomy"* to the respective outputs from **Remove.lineage** {% icon tool %}
+>
 {: .hands_on}
 
 
@@ -816,30 +864,29 @@ of *Order*. This is the approach that we  generally use in the Schloss lab.
 > ### {% icon hands_on %} Hands-on: Cluster our data into OTUs
 >
 > - **Cluster.split** {% icon tool %} with the following parameters
->   - "Split by" to `Classification using fasta`
->   - "fasta" to the fasta output from Remove.groups
->   - "taxonomy" to the taxonomy output from Remove.groups
->   - "name file or count table" to the count table output from Remove.groups
->   - "taxlevel" to `4`
->   - "cutoff" to `0.03`
+>   - *"Split by"*: `Classification using fasta`
+>   - {% icon param-file %} *"fasta"*: the `fasta` output from **Remove.groups** {% icon tool %}
+>   - {% icon param-file %} *"taxonomy"*: the `taxonomy` output from **Remove.groups** {% icon tool %}
+>   - {% icon param-file %} *"name file or count table"*: the `count table` output from **Remove.groups** {% icon tool %}
+>   - *"taxlevel"*: `4`
+>   - *"cutoff"*: `0.03`
 >
 > Next we want to know how many sequences are in each OTU from each group and we can do this using the
 > `Make.shared` command. Here we tell Mothur that we're really only interested in the 0.03 cutoff level:
 >
 > - **Make.shared** {% icon tool %} with the following parameters
->   - "Select input type" to `OTU list`
->   - "list" to list output from Cluster.split
->   - "count" to the count table from Remove.groups
->   - "label" to `0.03`
+>   - {% icon param-file %} *"list"*: the `list` output from **Cluster.split** {% icon tool %}
+>   - {% icon param-file %} *"count"*: the `count table` from **Remove.groups** {% icon tool %}
+>   - *"label"*: `0.03`
 >
 > We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each
 > OTU using the `Classify.otu` command:
 >
 > - **Classify.otu** {% icon tool %} with the following parameters
->   - "list" to output from Cluster.split
->   - "count" to the count table from Remove.groups
->   - "taxonomy" to the taxonomy output from Remove.groups
->   - "label" to `0.03`
+>   - {% icon param-file %} *"list"*: the `list` output from **Cluster.split** {% icon tool %}
+>   - {% icon param-file %} *"count"*: the `count table` from **Remove.groups** {% icon tool %}
+>   - {% icon param-file %} *"taxonomy"*: the `taxonomy` output from **Remove.groups** {% icon tool %}
+>   - *"label"*: `0.03`
 >
 {: .hands_on}
 
@@ -866,9 +913,7 @@ sequences (100%) were classified as being members of the Alistipes.
 >
 > > ### {% icon solution %} Solution
 > > Examine the tax.summary file.
-> {: .solution }
->
-> > ### {% icon solution %} Solution
+> >
 > > Samples F3D141, F3D142,  F3D144, F3D145, F3D2. This answer can be found by
 > > examining the tax.summary output and finding the columns with nonzero
 > > values for the line of Staphylococcus
@@ -894,7 +939,7 @@ animal) followed by a D and a three digit number (number of days post weaning).
 > `Count.groups` command:
 >
 > - **Count.groups** {% icon tool %} with the following parameters
->   - "shared" to the shared file from Make.shared
+>   - {% icon param-file %} *"shared"*: the `shared` file from **Make.shared** {% icon tool %}
 >
 > Take a look at the output. We see that our smallest sample had 2389 sequences in it. That is a reasonable
 > number. Despite what some say, subsampling and rarefying your data is an important thing to do.
@@ -902,9 +947,9 @@ animal) followed by a D and a three digit number (number of days post weaning).
 > We'll generate a subsampled file for our analyses with the `Sub.sample` command:
 >
 > - **Sub.sample** {% icon tool %} with the following parameters
->   - "Select type of data to subsample" to `OTU Shared`
->   - "shared" to output from Make.shared
->   - "size" to `2389`
+>   - *"Select type of data to subsample"*: `OTU Shared`
+>   - {% icon param-file %} *"shared"*: the `shared` file from **Make.shared** {% icon tool %}
+>   - *"size"*: `2389`
 >
 > > ### {% icon question %} Question
 > >
@@ -934,7 +979,7 @@ curves describing the number of OTUs observed as a function of sampling effort. 
 
 > ### {% icon hands_on %} Hands-on: Calculate Rarefaction
 > - **Rarefaction.single** {% icon tool %} with the following parameters
->   - "shared" to shared file from Make.shared
+>   - {% icon param-file %} *"shared"*: the `shared file` from **Make.shared** {% icon tool %}
 {: .hands_on}
 
 Note that we used the default diversity measure here (*sobs*; observed species richness), but there are many
@@ -960,25 +1005,17 @@ we have covered our full diversity. This information would be easier to interpre
 Let's plot the rarefaction curve for a couple of our sequences:
 
 > ### {% icon hands_on %} Hands-on: Plot Rarefaction
-> <!-- the following tool is because plotting tool will not detect columns in files inside collections yet -->
-> First let's make our life a little bit easier. As we only have one dataset in our collection anyways, we can
-> collapse it into a single file.
->
-> - **Collapse Collection** {% icon tool %} with the following parameters
->   - "Collection of files to collapse to a single dataset" to the rarefaction curve collection
->
-> Now we are ready to plot our rarefaction curves:
 >
 > - **Plotting tool** {% icon tool %} with the following parameters
->   - "Plot Title" to `Rarefaction`
->   - "Label for x axis" to `Number of Sequences`
->   - "Label for y axis" to `Number of OTUs`
->   - "Output File Type" to `PNG`
->   - Click on Insert Series,
->     - "Dataset" to the collapsed rarefaction curve collection
->     - Set **Header in first line?** to `Yes`
->     - "Column for x axis" to `Column 1`
->     - "Column for y-axis" to `Column 2` and `Column 5` and every third column until the end (we are
+>   - *"Plot Title"*: `Rarefaction`
+>   - *"Label for x axis"*: `Number of Sequences`
+>   - *"Label for y axis"*: `Number of OTUs`
+>   - *"Output File Type"*: `PNG`
+>   - {% icon param-repeat %} Click on **Insert Series**,
+>     - {% icon param-collection %} *"Dataset"*: rarefaction curve collection
+>     - *"Header in first line?"*: `Yes`
+>     - *"Column for x axis"*: `Column 1`
+>     - *"Column for y-axis"*: `Column 2` and `Column 5` and every third column until the end (we are
 >       skipping the low confidence and high confidence interval columns)
 >
 {: .hands_on}
@@ -1001,9 +1038,9 @@ let's randomly select 2440 sequences from each sample 1000 times and calculate t
 > ### {% icon hands_on %} Hands-on: Summary.single
 >
 > - **Summary.single** {% icon tool %} with the following parameters
->   - "share" to shared file from Make.shared
->   - "calc" to `nseqs,coverage,sobs,invsimpson`
->   - "size" to 2389
+>   - {% icon param-file %} *"share"*: the `shared` file from **Make.shared** {% icon tool %}
+>   - *"calc"*: `nseqs,coverage,sobs,invsimpson`
+>   - *"size"*: `2389`
 {: .hands_on}
 
 The data will be outputted to a table called the *summary file*:
@@ -1048,15 +1085,15 @@ coefficient](http://csyue.nccu.edu.tw/2005communicationindex.pdf)
 > with the `Dist.shared` command that will allow us to rarefy our data to a common number of sequences.
 >
 > - **Dist.shared** {% icon tool %} with the following parameters
->   - "shared" to the shared file from Make.shared
->   - "calc" to thetayc,jclass
->   - "subsample" to 2389
+>   - {% icon param-file %} *"shared"*: to the `shared` file from **Make.shared** {% icon tool %}
+>   - *"calc"*: `thetayc,jclass`
+>   - *"subsample"*: `2389`
 >
 > Let's visualize our data in a Heatmap
 >
 > - **Heatmap.sim** {% icon tool %} with the following parameters
->   - "Generate Heatmap for" to `phylip`
->   - "phylip" to output by Dist.shared (this is a collection input)
+>   - *"Generate Heatmap for"*: `phylip`
+>   - {% icon param-collection %} *"phylip"*: the output of **Dist.shared** {% icon tool %} (this is a collection input)
 >
 > <!-- TODO: way to view the SVGs inside Galaxy? -->
 {: .hands_on}
@@ -1077,18 +1114,12 @@ Let's take a look at the Venn diagrams for the first 4 time points of female 3 u
 
 > ### {% icon hands_on %} Hands-on: Venn diagram
 >
-> <!-- need to collapse collection again for group select to work -->
-> First we collapse our collection again
->
-> - **Collapse Collection** {% icon tool %} with the following parameters
->   - "Collection" to Subsample.shared output collection from Sub.sample step
->
 > After the tool has finished, rename the output to `Subsample.shared` to make it easier to recognize in
 > further analysis
 >
 > - **Venn** {% icon tool %} with the following parameters
->   - Set `OTU Shared` to Subsample.shared file from previous step
->   - Set `groups` to `F3D0,F3D1,F3D2,F3D3`
+>   - {% icon param-collection %} *"OTU Shared"*: output from **Subsample.shared** {% icon tool %} (collection)
+>   - *"groups"*: `F3D0,F3D1,F3D2,F3D3`
 {: .hands_on}
 
 This generates a 4-way Venn diagram and a table listing the shared OTUs.
@@ -1105,11 +1136,11 @@ dendrogram using the jclass and thetayc calculators within the `tree.shared` com
 > ### {% icon hands_on %} Tree
 >
 > 1. **Tree.shared** {% icon tool %} with the following parameters
->   - "Select input format" to Phylip Distance Matrix
->   - "phylip" to dist files from Dist.shared (collection)
+>   - *"Select input format"*: `Phylip Distance Matrix`
+>   - {% icon param-collection %} *"phylip"*: the `distance files` output from **Dist.shared** {% icon tool%}
 >
 > 2. **Newick display** {% icon tool %} with the following parameters
->  - "Newick file" to output from Tree.shared (collection)
+>  - {% icon param-collection %} *"Newick file"*: output from **Tree.shared** {% icon tool %}
 {: .hands_on}
 
 Inspection of the the tree shows that the early and late communities cluster with themselves to the exclusion
@@ -1135,9 +1166,9 @@ instance we can convert our shared file to the more widely used `biom` format an
 > ### {% icon hands_on %} Hands-on: Phinch
 >
 > - **Make.biom** {% icon tool %} with the following parameters
->   - "shared" to Subsample.shared
->   - "constaxonomy" to taxonomy output from Classify.otu (collection)
->   - "metadata" to `mouse.dpw.metadata`
+>   - {% icon param-collection %} *"shared"*: the output from **Subsample.shared** {% icon tool %}
+>   - {% icon param-collection %} *"constaxonomy"*: the `taxonomy` output from **Classify.otu** {% icon tool %}
+>   - {% icon param-file %} *"metadata"*: the `mouse.dpw.metadata` file you uploaded at the start of this tutorial
 >
 > The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
 > to view the file at Phinch:
@@ -1164,11 +1195,11 @@ A second tool we can use to visualize our data, is [Krona]()
 >  First we convert our mothur taxonomy file to a format compatible with Krona
 >
 > - **Taxonomy-to-Krona** {% icon tool %} with the following parameters
->   - "Taxonomy file" to the taxonomy output from Classify.otu (collection)
+>   - {% icon param-collection %} *"Taxonomy file"*: the `taxonomy` output from **Classify.otu**
 >
 > - **Krona pie chart** {% icon tool %} with the following parameters
->   - "Type of input" to `Tabular`
->   - "Input file" to taxonomy output from Classify.otu (collection)
+>   - *"Type of input"*: `Tabular`
+>   - {% icon param-collection %} *"Input file"*: the `taxonomy` output from **Taxonomy-to-Krona** {% icon tool %}
 {: .hands_on}
 
 The resulting file is an HTML file containing an interactive visualization. For instance try double-clicking the
@@ -1189,8 +1220,21 @@ innermost ring labeled "Bacteria"
 > {: .solution }
 {: .question}
 
-Well done! you have completed the basics of the mothur SOP. Below are some more exercises for those who wish to
-go into more details about statistical significance testing and population-level analysis.
+
+# Conclusion
+{:.no_toc}
+
+Well done! {% icon trophy %} You have completed the basics of the Schloss lab's Standard Operating Procedure for Illumina MiSeq data. You have worked your way through the following pipeline:
+
+![Mothur sop tutorial pipeline](../../images/mothur_sop_pipeline.jpg){:width="50%"}
+
+
+### Can't get enough?
+
+Below are some more exercises for those who wish to go into more detail about statistical significance testing and population-level analysis.
+
+Or, click [here](#wrap-up) to jump to the end and skip this extra credit section.
+
 
 # Extra Credit
 
@@ -1637,10 +1681,8 @@ Otu0082    0.08
 Otu0042    0.07
 ```
 
-# Conclusion
+# Wrap-up
 {:.no_toc}
 
-You have now seen how to perform the Schloss lab's Standard Operating Procedure (SOP) for MiSeq data.
-You have worked your way through the following pipeline:
+Well done! You have now seen how to perform the complete Schloss lab's Standard Operating Procedure (SOP) for MiSeq data.
 
-![Mothur sop tutorial pipeline](../../images/mothur_sop_pipeline.jpg)

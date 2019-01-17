@@ -1,7 +1,32 @@
 ---
 layout: tutorial_hands_on
-topic_name: assembly
-tutorial_name: ecoli_comparison
+
+title: "Making sense of a newly assembled genome"
+zenodo_link: "https://doi.org/10.5281/zenodo.1306128"
+requirements:
+  -
+    type: "internal"
+    topic_name: assembly
+    tutorials: 
+      - unicycler-assembly
+tags:
+  - prokaryote
+questions:
+  - "I just assembled a genome. How does it compare with already sequenced genomes?"
+  - "How do I find rearranged, inserted, or deleted regions?"
+objectives:
+  - "Identification of the most closely related genome to my new assembly"
+  - "Perform sequence comparison to locate rearrangements"
+  - "Identify genes located in deletions"
+time_estimation: "4h"
+key_points:
+  - "We learned how to download large sets of completed genomes from NCBI"
+  - "We learned how to use Galaxy's rule-based collection builder"
+  - "We learned how to use a combination of Galaxy tools to create complex views of genome comparisons"
+  - "We learned about idiosyncrasies of data formats and how to deal with them using Galaxy tools"
+contributors:
+  - nekrut
+  - delphine-l
 ---
 
 > ### Outline of this tutorial
@@ -33,13 +58,13 @@ Our initial objective is to compare our assembly against all complete *E. coli* 
 >
 {: .hands_on}
 
-Now that the list is formatted as a table in a spreadsheet, it is time to upload it into Galaxy. There is a problem though &rarr; the URLs (web addresses) in the list do not actually point to sequence files that we would need to perform alignments. Instead they point to directories. For example, this URL:
+Now that the list is formatted as a table in a spreadsheet, it is time to upload it into Galaxy. There is a problem though: the URLs (web addresses) in the list do not actually point to sequence files that we would need to perform alignments. Instead they point to directories. For example, this URL:
 
 ```
 ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/008/865/GCA_000008865.1_ASM886v1
 ```
 
-points to a directory (rather than a file) containing many files most of which we do not need:
+points to a directory (rather than a file) containing many files, most of which we do not need:
 
 ![GenBank assembly files for an E. coli strain](../../images/genbank_dir.png "A list of files for an <i>E. coli</i> assembly. For further analyses we need datasets ending with <code>_genomic.fna.gz</code>.")
 
@@ -49,7 +74,7 @@ So to download sequence files we need to edit URLs by adding filenames to them. 
 ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/008/865/GCA_000008865.1_ASM886v1/GCA_000008865.1_ASM886v1_genomic.fna.gz
 ```
 
-This can be done as a two step process where we first copy the end part of the existing URL (`/GCA_000008865.1_ASM886v1`) and then add a fixed string `_genomic.fna.gz` to the end of it. Doing this by hand is crazy and trying it in a spreadsheet is complicated. Fortunately Galaxy's new rule-based uploader helps with that as shown in the next **Hands-on** section:
+This can be done as a two step process where we first copy the end part of the existing URL (`/GCA_000008865.1_ASM886v1`) and then add a fixed string `_genomic.fna.gz` to the end of it. Doing this by hand is crazy and trying to do it in a spreadsheet is complicated. Fortunately, Galaxy's new rule-based uploader can help, as shown in the next **Hands-on** section:
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -59,7 +84,7 @@ This can be done as a two step process where we first copy the end part of the e
 ><div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/271336444?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 {: .hands_on}
 
-Now we have all complete *E. coli* genomes in Galaxy's history. It is time to do a few things to out assembly.
+Now we have all complete *E. coli* genomes in Galaxy's history. It is time to do a few things to our assembly.
 
 ## Preparing assembly
 
@@ -68,9 +93,9 @@ Before starting any analyses we need to upload the assembly produced in [Unicycl
 
  > ### {% icon hands_on %} Uploading *E. coli* assembly into Galaxy
  >
- > 1. Upload tool {% icon tool %} (Upload icon on the top of the left pane)
+ > 1. **Upload** {% icon tool %}:
  >   - Click **Paste/Fetch data** button (Bottom of the interface box)
- >   - Paste `https://zenodo.org/record/1251125/files/Ecoli_C_assembly.fna` into the box.
+ >   - **Paste** `https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna` into the box.
  >   - *"Type"*: `fasta`
  >   - Click **Start**
 {: .hands_on}
@@ -92,12 +117,12 @@ Because phiX173 is around 5,000bp, we can remove those sequences by setting a mi
 > ### {% icon hands_on %} Hands-on: Fixing assembly
 >
 > 1. **Filter sequences by length** {% icon tool %} with the following parameters:
->   - *"Fasta file"*: the dataset you've just uploaded. (`https://zenodo.org/record/1251125/files/Ecoli_C_assembly.fna`).
+>   - *"Fasta file"*: the dataset you've just uploaded. (`https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna`).
 >   - *"Minimal length"*: `10000`
 >
 >
 > 2. **Text transformation with sed** {% icon tool %} with the following parameters:
->   - *"File to process"**: the output of the previous step
+>   - *"File to process"*: the output of the previous step
 >   - *"SED program"*: `s/^>1.*$/>Ecoli_C/`
 >
 {: .hands_on}
@@ -122,7 +147,7 @@ Because phiX173 is around 5,000bp, we can remove those sequences by setting a mi
 > - `Ecoli_C` is the *name* we want the sequence to have
 > - `/` - is the end of the SED command
 >
->So in short we are replacing `>1 length=4576293 depth=1.00x circular=true` with `>Ecoli_C`. The *Regular expression* `^\>1.*$` is used here to represent `>1 length=4576293 depth=1.00x circular=true`.<br>
+>So in short we are replacing `>1 length=4576293 depth=1.00x circular=true` with `>Ecoli_C`. The *Regular expression* `^>1.*$` is used here to represent `>1 length=4576293 depth=1.00x circular=true`.<br>
 >Detailed description of regular expressions is outside of the scope of this tutorial, but there are other great resources. Start with [Software Carpentry Regular Expressions tutorial](http://v4.software-carpentry.org/regexp/index.html).
 {: .tip}
 
@@ -130,12 +155,13 @@ Because phiX173 is around 5,000bp, we can remove those sequences by setting a mi
 >
 > 1. What is the meaning of `^` character is SED expression?
 > 2. Where do you go to learn more about regular expressions?
->    > ### {% icon solution %} Solution
->    >
->    > 1. It tells SED to start matching from the beginning of the string.
->    > 2. [Software Carpentry](https://software-carpentry.org)
->    >
->    {: .solution}
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. It tells SED to start matching from the beginning of the string.
+> > 2. [Software Carpentry](https://software-carpentry.org)
+> >
+> {: .solution}
 {: .question}
 
 
@@ -150,10 +176,10 @@ Now everything is loaded and ready to go. We will now align our assembly against
 >   - *"Select a reference dataset"*: the *E. coli* genomes we uploaded earlier (collection input)
 >   - *"Select QUERY sequence(s)"*: our assembly which was prepared in the previous step.
 >   - *"Perform chaining of HSPs with no penalties"*: `Yes` (in **Chaining** section)
->   - *"Specify the output format:*: `blastn` (in **Output** section)
+>   - *"Specify the output format"*: `blastn` (in **Output** section)
 {: .hands_on}
 
-Note that because we started LASTZ on *a collection* of *E. coli* genomes, it will output alignment information as *a collection* as well. Collection is simply a way to represent large sets of similar data in a compact way within Galaxy's interface.
+Note that because we started LASTZ on *a collection* of *E. coli* genomes, it will output alignment information as *a collection* as well. A collection is simply a way to represent large sets of similar data in a compact way within Galaxy's interface.
 
 > ### {% icon warning %} It will take a while!
 > Please understand that alignment is not an instantaneous process: allow several hours for these jobs to clear.
@@ -220,35 +246,35 @@ Now we can visualize this dataset to discover generalities:
 > ### {% icon hands_on %} Hands-on: Graphing alignment data
 > 1. Expand random subset of alignment data generated on the previous step by clicking on it.
 > 2. You will see "chart" button (![Chart icon](../../images/bar-chart-o.png)). Click on it.
-> 3. In the center pane you will see a list of visualizations. Select **Scatter plot (NVD3)**
+> 3. In the central panel you will see a list of visualizations. Select **Scatter plot (NVD3)**
 > 4. Click **Select data** button (![Disks](../../images/disks.png))
 > 5. Set **Values for x-axis** to `Column: 3` (alignment identity)
 > 6. Set **Values for y-axis** to `Column: 4` (alignment length)
 > 7. You can also click on configuration button (![Cog](../../images/chart_cog.png)) and specify axis labels etc.
 {: .hands_on}
 
-The relationship between the alignment identity and alignment length looks like this (remember that this only a subsample of the data):
+The relationship between the alignment identity and alignment length looks like this (remember that this is only a subsample of the data):
 
-![Identity versus length](../../images/id_vs_len.png "Alignment identity (%) versus length (bp). This graph is truncated at teh top")
+![Identity versus length](../../images/id_vs_len.png "Alignment identity (%) versus length (bp). This graph is truncated at the top")
 
-You can see that most alignments are short and have relatively low identity. Thus we can filter the original dataset by identity and length. Judging form this graph we can selected alignment longer than 10,000 bp with identity above 90%.
+You can see that most alignments are short and have relatively low identity. Thus we can filter the original dataset by identity and length. Judging from this graph we can select alignment longer than 10,000 bp with identity above 90%.
 
 > ### {% icon hands_on %} Hands-on: Filtering data
 > 1. **Filter data on any column using simple expressions** {% icon tool %} with the following parameters:
 >   - *"Filter"*: the full dataset.
 >   - *"With following condition"*: `c3 >= 90 and c4 >= 10000` (here `c` stands for *column*).
 >
->  NOTE: you need to select the full dataset, not the down-sampled one, but [the one generated by collection collapsing operation](#-hands-on-combining-collection-into-a-single-dataset).
+>  NOTE: You need to select the full dataset; not the down-sampled one, but [the one generated by the collection collapsing operation](#hands_on-hands-on-combining-collection-into-a-single-dataset).
 >
 {: .hands_on}
 
 ## Aggregating data
 
-Remember, our objective is to find genomes that are most similar to our. Given the alignment data in the table we just created we can define similarity as follows:
+Remember, our objective is to find the genomes that are most similar to ours. Given the alignment data in the table we just created we can define similarity as follows:
 
 *Genomes that have the smallest number of alignment blocks but the highest overall alignment length are most similar to our assembly. This essentially means that they have longest uninterrupted region of high similarity to our assembly.*
 
-However, to extract this information from our data we need to aggregate it. In other words, for each *E. coli* genome we need to calculate the total number of alignment blocks, their combined length, and average identity. The following section explain how to do this:
+However, to extract this information from our data we need to aggregate it. In other words, for each *E. coli* genome we need to calculate the total number of alignment blocks, their combined length, and average identity. The following section explains how to do this:
 
 > ### {% icon hands_on %} Hands-on: Aggregating the data
 > 1. **Datamash (operations on tabular data)** {% icon tool %} with the following parameters:
@@ -269,12 +295,12 @@ However, to extract this information from our data we need to aggregate it. In o
 
 ## Finding closest relatives
 
-Dataset generated above lists each *E. coli* genome accession only once and will have aggregate information of the number of alignment blocks, mean identity, and total length. Let's graph these data:
+The dataset generated above lists each *E. coli* genome accession only once and will have aggregate information for the number of alignment blocks, mean identity, and total length. Let's graph these data:
 
 > ### {% icon hands_on %} Hands-on: Graphing aggregated data
 > 1. Expand the aggregated data generated on the previous step by clicking on it.
 > 2. You will see "chart" button (![Chart icon](../../images/bar-chart-o.png)). Click on it.
-> 3. In the center pane you will see a list of visualizations. Select **Scatter plot (NVD3)**
+> 3. In the central panel you will see a list of visualizations. Select **Scatter plot (NVD3)**
 > 4. Click **Select data** button (![Disks](../../images/disks.png))
 > 5. Set **Data point labels** to `Column: 1` (Accession number of each *E. coli* genome)
 > 5. Set **Values for x-axis** to `Column: 2` (# of alignment blocks)
@@ -286,10 +312,10 @@ The relationship between the number of alignment blocks and total alignment leng
 
 ![Identity versus length](../../images/best_genomes_chart.png "Number of alignment blocks versus total alignment length (bp).")
 
-A group of three dots in the upper left corner of this scatter plot represents genomes that are most similar to our assembly: they have SMALL number of alignment blocks but HIGH total alignment length. Mousing over these three dots (if you set **Data point labels** correctly in the previous step) will reveal their accession numbers: `LT906474.1`, `CP024090.1`, and `CP020543.1`.
+A group of three dots in the upper left corner of this scatter plot represents genomes that are most similar to our assembly: they have a SMALL number of alignment blocks but HIGH total alignment length. Mousing over these three dots (if you set **Data point labels** correctly in the previous step) will reveal their accession numbers: `LT906474.1`, `CP024090.1`, and `CP020543.1`.
 
 > ### {% icon warning %} Things change
-> It is possible that when you will be repeating these steps the set of sequences in NCBI will change and you will obtain different accession numbers. Keep this in mind.
+> It is possible that when you repeat these steps the set of sequences in NCBI will have changed and you will obtain different accession numbers. Keep this in mind.
 {: .warning-box}
 
 Let's find table entries corresponding to these:
@@ -308,7 +334,7 @@ CP024090.1 12 99.91	4540487
 LT906474.1  8 99.94	4575223
 ```
 
-From this it appears that `LT906474.1` is closes to our assembly as it has eight alignment blocks, longest total alignment length (4,575,223) and highest mean identity (99.94%).
+From this it appears that `LT906474.1` is closest to our assembly because it has eight alignment blocks, the longest total alignment length (4,575,223) and highest mean identity (99.94%).
 
 # Comparing genome architectures
 
@@ -355,7 +381,7 @@ Now we will perform alignments between our assembly and the three most closely r
 >
 {: .hands_on}
 
-Because we chose to produce Dot Plots as well LASTZ will generate two collections: one containing alignment data and the other containing DotPlots in PNG format:
+Because we chose to produce Dot Plots as well, LASTZ will generate two collections: one containing alignment data and the other containing DotPlots in PNG format:
 
 ![Dot Plots](../../images/three_dot_plots.png "Dot Plot representations of alignments between three <i>E. coli</i> genomes and our assembly. Target (X-axis) is indicated above each dot plot. Query (Y-axis) is our assembly. Red circle indicates a region deleted in our assembly.")
 
@@ -367,9 +393,9 @@ For a moment let's leave LASTZ result and create a browser that would allows us 
 
 ## Producing a Genome Browser for this experiment
 
-Dot plots we've produced above are great, but they are static. It would be wonderful to load these data into a genome browser where one can zoom in and out as well as add tracks such as those containing genes. To create a browser we need a genome and a set of tracks. Tracks are features such as genes or SNPs with start and end positions corresponding to a coordinate system provided by the genome. Thus the first thing to do is to create a *genome* that would represent our experiment. We can create such a genome by simply combining the three genomes of closely related strains with our assembly in a single dataset&mdash;a hybrid genome.
+The dot plots we've produced above are great, but they are static. It would be wonderful to load these data into a genome browser where one can zoom in and out as well as add tracks such as those containing genes. To create a browser we need a genome and a set of tracks. Tracks are features such as genes or SNPs with start and end positions corresponding to a coordinate system provided by the genome. Thus the first thing to do is to create a *genome* that would represent our experiment. We can create such a genome by simply combining the three genomes of closely related strains with our assembly in a single dataset&mdash;a hybrid genome.
 
-First step will be collapsing the collection containing the three genomes into a single file:
+The first step will be collapsing the collection containing the three genomes into a single file:
 
 > ### {% icon hands_on %} Hands-on: Creating a single FASTA dataset with all genomes
 >
@@ -431,7 +457,7 @@ The resulting dataset contains four sequences: three genomes plus our assembly. 
 
 ## Preparing and displaying alignments
 
-[Above](#-hands-on-aligning-again) we computed alignments using LASTZ. Because we ran LASTZ on a collection containing genomic sequences, LASTZ produced a collection as well (actually two collections: one containing alignments an the other with dot plots). To display alignments in the browser we need to do several things:
+[Above](#hands_on-hands-on-aligning-again) we computed alignments using LASTZ. Because we ran LASTZ on a collection containing genomic sequences, LASTZ produced a collection as well (actually two collections: one containing alignments an the other with dot plots). To display alignments in the browser we need to do several things:
 
  1. Fix unwanted `%` signs in LASTZ output
  2. Create names for alignment blocks
@@ -448,7 +474,7 @@ To begin, let's look at the LASTZ output:
     4870 CP020543.1 + 159368 159512    144 Ecoli_C + 128706 128828    95/115     82.6%   3
 ```
 
-One immediate problem is `%` character in column 12 (alignment identity). We need to remove it. For this we will use **SED** tool that should be familiar to us from [previous hands-on exercises](#-hands-on-cleaning-sequence-names):
+One immediate problem is `%` character in column 12 (alignment identity). We need to remove it. For this we will use **SED** tool that should be familiar to us from [previous hands-on exercises](#hands_on-hands-on-cleaning-sequence-names):
 
 > ### {% icon hands_on %} Hands-on: Removing `%` character from LASTZ output
 >
@@ -469,14 +495,14 @@ As a result LASTZ output will look like this (no `%` signs):
     4870 CP020543.1 + 159368 159512    144 Ecoli_C + 128706 128828    95/115     82.6   3
 ```
 
-One of the fields chosen by us for [LASTZ run](#-hands-on-aligning-again) is `number`. This is an incrementing number given by LASTZ to every alignment block so it can be uniquely identified. The problem is that by running LASTZ on a collection on three genomes it generated number for each output independently starting with `1` each time. So these alignment identified are unique within each individual run but are redundant for multiple runs. We can fix that by pre-pending each alignment identified (column 13) with name of the target sequence (column 2). This would create alignment identified that are truly unique. For example, in case of LASTZ output shown above alignment identifier `1` will become `CP020543.11`, `2` will become `CP020543.12` and so on. Here is how we will do that:
+One of the fields chosen by us for [LASTZ run](#hands_on-hands-on-aligning-again) is `number`. This is an incrementing number given by LASTZ to every alignment block so it can be uniquely identified. The problem is that by running LASTZ on a collection of three genomes it generated a number for each output independently starting with `1` each time. So these alignments identified are unique within each individual run but are redundant for multiple runs. We can fix that by pre-pending each alignment identified (column 13) with the name of the target sequence (column 2). This would create alignments that are truly unique. For example, in the case of the LASTZ output shown above alignment identifier `1` will become `CP020543.11`, `2` will become `CP020543.12` and so on. Here is how we will do that:
 
 > ### {% icon hands_on %} Hands-on: Creating unique alignment identifiers
 >
 > 1. **Merge Columns together** {% icon tool %} with the following parameters:
 >   - *"Select data"*: the output of the previous step (`Text transformation of collection ...`)
->   - *"Merge column"*: `Column: 2` (this is Targe sequence name)
->   - *"with column"*: `Column: 13` (this is the alignment block identified created by LASTZ)
+>   - *"Merge column"*: `Column: 2` (this is the Target sequence name)
+>   - *"with column"*: `Column: 13` (this is the alignment block created by LASTZ)
 {: .hands_on}
 
 The output will look like this:
@@ -496,10 +522,10 @@ The tool added a new column (Column 14) containing a merge between the target na
 >   - *"Collection of files to collapse"*: the output of the previous step, `Merge Columns on collection...` (collection input)
 {: .hands_on}
 
-This will produce a single datasets combining all alignment info. We can tell which alignments are between which genomes because we have set identifiers such as `CP020543.13`.
+This will produce a single dataset combining all alignment info. We can tell which alignments are between which genomes because we have set identifiers such as `CP020543.13`.
 
 > ### {% icon tip %} Tip: BED format
-> Our next goals is to convert this into a format that will be acceptable to the genome browser [created above](#producing-a-genome-browser-for-this-experiment). One of such formats is [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). In one of its simplest forms (there is one even simpler - 3 column BED) it has six columns:
+> Our next goal is to convert this into a format that will be acceptable to the genome browser [created above](#producing-a-genome-browser-for-this-experiment). One of such formats is [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). In one of its simplest forms (there is one even simpler - 3 column BED) it has six columns:
 >
 > 1. Chromosome ID
 > 2. Start
@@ -509,7 +535,7 @@ This will produce a single datasets combining all alignment info. We can tell wh
 > 6. Strand (`+`, `-`, or `.` for no strand data).
 {: .tip}
 
-Let's again look at the data we generated at the last step:
+Let's look again at the data we generated in the last step:
 
 ```
      1          2 3      4      5      6       7 8      9     10            11    12  13           14
@@ -519,15 +545,15 @@ Let's again look at the data we generated at the last step:
     4870 CP020543.1 + 159368 159512    144 Ecoli_C + 128706 128828    95/115     82.6   3 CP020543.13
 ```
 
-Alignments are regions of high similarity between two sequences. Therefore each alignment block has two sets of coordinates associated with it: start/end in the first sequences (target) and start/end in the second sequence (query). But BED only has one set of coordinates. Thus we can create two BEDs: one using coordinates from the target and the other one from query. The first file will depict alignment data from the standpoint of target sequences `CP020543.1`, `CP024090.1`, `LT906474.1` and the second from the standpoint of query - our own assembly [we called](#-hands-on-fixing-assembly) `Ecoli_C`. In the first BED column 1 will contain names of targets (`CP020543.1`, `CP024090.1`, and `LT906474.1`). In the second BED column 1 will contain name of our assembly `Ecoli_C`. To create the first bed we will cut six columns from the dataset produced at the last step. Specifically, to produce target BED will cut columns 2, 4, 5, 14, 12, and 8. To produce query BED columns 7,9,10,14,12,8 will be cut.
+Alignments are regions of high similarity between two sequences. Therefore each alignment block has two sets of coordinates associated with it: start/end in the first sequences (target) and start/end in the second sequence (query). But BED only has one set of coordinates. Thus we can create two BEDs: one using coordinates from the target and the other one from query. The first file will depict alignment data from the standpoint of target sequences `CP020543.1`, `CP024090.1`, `LT906474.1` and the second from the standpoint of query - our own assembly [we called](#hands_on-hands-on-fixing-assembly) `Ecoli_C`. In the first BED, column 1 will contain names of targets (`CP020543.1`, `CP024090.1`, and `LT906474.1`). In the second BED, column 1 will contain name of our assembly: `Ecoli_C`. To create the first BED we will cut six columns from the dataset produced at the last step. Specifically, to produce the target BED we will cut columns 2, 4, 5, 14, 12, and 8. To produce the query BED columns 7,9,10,14,12,8 will be cut.
 
 > ### {% icon warning %} There are multiple **CUT** tools!
-> The Hands-On box below uses **Cut** tool. Beware that some Galaxy instances contain multiple **Cut** tools. The one that is used below is called **Cut columns from a table** while the other one, which we will NOT use is called **Cut columns from a table (cut)**. It is a small difference, but tools are different.
+> The Hands-On box below uses **Cut** tool. Beware that some Galaxy instances contain multiple **Cut** tools. The one that is used below is called **Cut columns from a table** while the other one, which we will NOT use is called **Cut columns from a table (cut)**. It is a small difference, but the tools are different.
 {: .warning-box}
 
 > ### {% icon hands_on %} Hands-on: Creating target BED
 > 1. **Cut columns from a table** {% icon tool %} with the following parameters:
->  - *"Cut columns:*: `c2,c4,c5,c14,c12,c8` (look at the data shown above and definition of BED to see why we make these choices.)
+>  - *"Cut columns"*: `c2,c4,c5,c14,c12,c8` (look at the data shown above and the definition of BED to see why we make these choices.)
 >  - *"From"*: the output of the previous step (`Collapse Collection on data ...`)
 {: .hands_on}
 
@@ -545,7 +571,7 @@ Now let's do a similar operation to create query BED:
 
 > ### {% icon hands_on %} Hands-on: Creating query BED
 > 1. **Cut columns from a table** {% icon tool %} with the following parameters
->  - *"Cut columns"*: `c7,c9,c10,c14,c12,c8` (look at the data shown above and definition of BED to see why we make these choices.)
+>  - *"Cut columns"*: `c7,c9,c10,c14,c12,c8` (look at the data shown above and the definition of BED to see why we make these choices.)
 >  - *"From"*: the output of **collection collapse** (a step before the last step!) (`Collapse Collection on data ...`)
 >
 > Note: In fact you can just click the rerun button (![Rerun](../../images/refresh.png)) at the previous step and change column names
@@ -559,7 +585,7 @@ Ecoli_C 109317 109418 CP020543.12  76.0 +
 Ecoli_C 128706 128828 CP020543.13  82.6 +
 ```
 
-Now we can merge these two datasets into a single BED datasets that will be ready for displaying in the browser:
+Now we can merge these two datasets into a single BED dataset that will be ready for display in the browser:
 
 > ### {% icon hands_on %} Hands-on: Merging Target and Query BEDs
 >
@@ -580,7 +606,7 @@ Now we have a single BED that combines everything. Before displaying it in the b
 > 5. Click **Change datatype** button.
 {: .hands_on}
 
-Now we are ready to display these data in the browser (make sure the browser we've created [above](#-hands-on-starting-a-custom-igv-browser) is open):
+Now we are ready to display these data in the browser (make sure the browser we've created [above](#hands_on-hands-on-starting-a-custom-igv-browser) is open):
 
 > ### {% icon hands_on %} Hands-on: Display alignments in the browser
 >
@@ -591,7 +617,7 @@ Now we are ready to display these data in the browser (make sure the browser we'
 {: .hands_on}
 
 > ### {% icon tip %} Tip: Naming IGV tracks
-> At the time of writing dataset sent by Galaxy to IGV have uninformative names such as `galaxy_bbd44h445645h45454`. While this will soon be fixed we can deal with it by renaming the displayed track manually by right clicking on IGV sidebar and choosing **Rename Track..** option.
+> At the time of writing the datasets sent by Galaxy to IGV have uninformative names such as `galaxy_bbd44h445645h45454`. While this will soon be fixed we can deal with it by renaming the displayed track manually by right clicking on IGV sidebar and choosing the **Rename Track..** option.
 >
 {: .tip}
 
@@ -603,7 +629,7 @@ Now it is time to think about the genes.
 
 ## Analyzing the deletion for gene content
 
-Earlier we [downloaded](#-hands-on-uploading-sequences-and-annotations) gene annotations for the three genomes most closely related to our assembly. The data was downloaded as a collection containing annotation for `CP020543.1`, `CP024090.1`, and `LT906474.1`. The annotation data contains multiple columns described by NCBI as follows (you can look at the actual data by finding the annotation collection from above (called `GENES` if you followed [the video](#-hands-on-uploading-sequences-and-annotations)):
+Earlier we [downloaded](#hands_on-hands-on-uploading-sequences-and-annotations) gene annotations for the three genomes most closely related to our assembly. The data was downloaded as a collection containing annotations for `CP020543.1`, `CP024090.1`, and `LT906474.1`. The annotation data contains multiple columns described by NCBI as follows (you can look at the actual data by finding the annotation collection from above (called `GENES` if you followed [the video](#hands_on-hands-on-uploading-sequences-and-annotations))):
 
 ```
 Tab-delimited text file reporting locations and attributes for a subset of
@@ -671,7 +697,7 @@ col20: attributes: semi-colon delimited list of a controlled set of qualifiers.
        anticodon=NNN (for tRNAs), old_locus_tag=XXX
 ```
 
-Our objective is convert these data into BED. In this analysis we want to initially concentrate on protein coding regions. To do this let's select all lines from the annotation datasets that contain the term `CDS`:
+Our objective is to convert these data into BED. In this analysis we want to initially concentrate on protein coding regions. To do this let's select all lines from the annotation datasets that contain the term `CDS`:
 
 > ### {% icon hands_on %} Hands-on: Retain CDS rows in annotation datasets
 > 1. **Select lines that match an expression** {% icon tool %} with the following parameters:
@@ -681,7 +707,7 @@ Our objective is convert these data into BED. In this analysis we want to initia
 > Note: This is because we want to retain all lines that begin (`^`) with `CDS`.
 {: .hands_on}
 
-This will produce a collection with three datasets just like the original `GENES` collection but containing only CDS data. Next we need to cut out only those columns that need to be included in the BED format. There is one problem with this. We are trying to convert these data into [6 column BED](#-tip-bed-format). In this format the fifth column (score) must have a value between 0 and 1000. To satisfy this requirement we will create a dummy column that will always have a value of `0`:
+This will produce a collection with three datasets just like the original `GENES` collection but containing only CDS data. Next we need to cut out only those columns that need to be included in the BED format. There is one problem with this. We are trying to convert these data into [6 column BED](#tip-tip-bed-format). In this format the fifth column (score) must have a value between 0 and 1000. To satisfy this requirement we will create a dummy column that will always have a value of `0`:
 
 > ### {% icon hands_on %} Hands-on: Creating a dummy score column
 >
@@ -709,7 +735,7 @@ This will produce a collection with each element containing data like this:
 2557 3630 DNA replication and repair protein RecF        0 +
 ```
 
-As we mentioned above this datasets lacks genome IDs such as `CP020543.1`. However, the individual elements in the collection we've created already have genomes IDs (if you are unsure make sure you followed direction when [creating collection containing annotations](#-hands-on-uploading-sequences-and-annotations)). We will leverage this while collapsing this collection into a single dataset:
+As we mentioned above these datasets lack genome IDs such as `CP020543.1`. However, the individual elements in the collection we've created already have genome IDs (if you are unsure make sure you followed the directions when [creating collection containing annotations](#hands_on-hands-on-uploading-sequences-and-annotations)). We will leverage this when collapsing this collection into a single dataset:
 
 > ### {% icon hands_on %} Hands-on: Collapsing annotations into a single BED dataset
 > 1. **Collapse Collection** {% icon tool %} with the following parameters:
@@ -728,22 +754,22 @@ CP020543.1 1457 2557 DNA polymerase III subunit beta                0 +
 CP020543.1 2557 3630 DNA replication and repair protein RecF        0 +
 ```
 
-you can see that the genome ID is now appended in the beginning and this dataset looks like a legitimate BED that can be displayed in IGV. The one thing that remains is to tell Galaxy that it is BED as [we did before](#-hands-on-changing-dataset-type). After the format of the last dataset is set to BED it can displayed at IGV by clicking **display with IGV local** link (remember to give this new track a ["humane" name](#-tip-naming-igv-tracks)):
+You can see that the genome ID is now appended at the beginning and this dataset looks like a legitimate BED that can be displayed in IGV. The one thing that remains is to tell Galaxy that it is BED as [we did before](#hands_on-hands-on-changing-dataset-type). After the format of the last dataset is set to BED it can be displayed in IGV by clicking the **display with IGV local** link (remember to give this new track a ["human" name](#tip-tip-naming-igv-tracks)):
 
 ![Displaying genes in IGV](../../images/igv_genes.png "Gene track is added to the browser. Here we are zoomed in at the gap region in LT906474.")
 
-## Extracting deleting genes programmatically
+## Extracting genes programmatically
 
-Above we've been able to look at genes that appear deleted in our assembly. But what we really need is to create a list that can be interrogated further. For example, which of these genes are essential? We can easily create such a list by overlapping coordinates of genes with coordinates of our deletion. But to do this we first need to create a set of coordinates corresponding to the deletion. This can be done by complementing coordinates of alignments we created [above](#-hands-on-changing-dataset-type):
+Above we've been able to look at genes that appear to be deleted in our assembly. But what we really need is to create a list that can be interrogated further. For example, which of these genes are essential? We can easily create such a list by overlapping coordinates of genes with coordinates of our deletion. But to do this we first need to create a set of coordinates corresponding to the deletion. This can be done by complementing coordinates of alignments we created [above](#hands_on-hands-on-changing-dataset-type):
 
 ![Complementing genomic ranges](../../images/complement.png "Any set of genomic intervals can <i>complemented</i> or converted into a set of intervals that do not overlap the original set (image from BEDTools documentation).")
 
-However, before we convert coordinates of aligned into their complement we need to prepare so called *genome file*, which is a list of "chromosomes" and their lengths in our [hybrid genome](#-hands-on-concatenate-fasta-files):
+However, before we convert coordinates of alignments into their complements we need to prepare a so called *genome file*, which is a list of "chromosomes" and their lengths in our [hybrid genome](#hands_on-hands-on-concatenate-fasta-files):
 
 > ### {% icon hands_on %} Hands-on: Creating a genome file
 >
 > 1. **Compute sequence length** {% icon tool %} with the following parameters:
->   - *"Compute length for these sequences"*: the FASTA dataset we generated [concatenated "hybrid" genome](#-hands-on-concatenate-fasta-files)
+>   - *"Compute length for these sequences"*: the FASTA dataset we generated [concatenated "hybrid" genome](#hands_on-hands-on-concatenate-fasta-files)
 {: .hands_on}
 
 This will generate a dataset that looks like this:
@@ -768,7 +794,7 @@ Next, we need to sort this file lexicographically:
 >  - *"everything in"*: `Ascending order`
 {: .hands_on}
 
-you will get a sorted version of the above dataset:
+You will get a sorted version of the above dataset:
 
 ```
          1       2
@@ -779,31 +805,31 @@ Ecoli_C    4576293
 LT906474.1 4625968
 ```
 
-next we need to go back to the BED file containing [alignment data](#-hands-on-changing-dataset-type) and sort it as well:
+Next we need to go back to the BED file containing [alignment data](#hands_on-hands-on-changing-dataset-type) and sort it as well:
 
 > ### {% icon hands_on %} Hands-on: Sorting BED file
 > 1. **SortBED order the intervals** {% icon tool %} with the following parameters
->   -  *"Sort the following BED file"*: our [alignment BED](#-hands-on-changing-dataset-type)
+>   -  *"Sort the following BED file"*: our [alignment BED](#hands_on-hands-on-changing-dataset-type)
 >   -  *"Sort by"* on its default setting (`chromosome, then by start position (asc)`)
 {: .hands_on}
 
-Now we can finally compute complement on sorted BED dataset:
+Now we can finally compute the complement of the sorted BED dataset:
 
 > ### {% icon hands_on %} Hands-on: Sorting BED file
 >
 > 1. **ComplementBed Extract intervals not represented by an interval file** {% icon tool %} with the following parameters:
 >  - *"BED/VCF/GFF file"*: output of the previous step
 >  - *"Genome file"*: `Genome file from your history`
->  - *"Genome file"*: sorted genome file we've generated [two steps ago](#-hands-on-sorting-genome-file)
+>  - *"Genome file"*: sorted genome file we've generated [two steps ago](#hands_on-hands-on-sorting-genome-file)
 {: .hands_on}
 
 The output of this step can directly viewed in IGV by clicking on **display with IGV** link:
 
 ![Gaps in IGV](../../images/igv_gaps.png "Complement of alignment bed shows the position of the insertion.")
 
-At this point we have two BEDs: one just created and the other containing [gene annotation](#-hands-on-collapsing-annotations-into-a-single-bed-dataset). We can simply intersect two of them:
+At this point we have two BEDs: one just created and the other containing [gene annotations](#hands_on-hands-on-collapsing-annotations-into-a-single-bed-dataset). We can simply intersect the two:
 
-![Intersect between two BED datasets](../../images/intersect.png "Computing intersect meaning finding overlapping regions in two BED datasets (image from BEDTools documentation).")
+![Intersect between two BED datasets](../../images/intersect.png "Computing intersect means finding overlapping regions in two BED datasets (image from BEDTools documentation).")
 
 But before we do that let's filter all small intervals below 10,000 kb to remove noise:
 
@@ -813,7 +839,7 @@ But before we do that let's filter all small intervals below 10,000 kb to remove
 >  - *"Filter"*: dataset from the last step (`Complement of SortBed on ...`)
 >  - *"With following condition"*: `c3-c2>=10000`
 >
-> Note: Here we are computing the length (difference bewteen end (column 3) and start (column 2) and making sire it is above 10,000).
+> Note: Here we are computing the length (difference between end (column 3) and start (column 2) and making sure it is above 10,000).
 {: .hands_on}
 
 The resulting dataset will look like this:
@@ -830,9 +856,9 @@ LT906474.1 3252785 3288031
 LT906474.1 3288166 3304009
 ```
 
-you will notice that all three genomes have a region starting past 3,200,000 and only `CP020543.1` has another region starting at 1,668,702. However, this region reflects some unique feature of `CP020543.1` rather than that of our assembly. This is why we will concentrate on *common* region which is deleted in our genome, but is present in the three closely related *E. coli* strains:
+You will notice that all three genomes have a region starting past 3,200,000 and only `CP020543.1` has another region starting at 1,668,702. However, this region reflects some unique feature of `CP020543.1` rather than that of our assembly. This is why we will concentrate on the *common* region which is deleted in our genome, but is present in the three closely related *E. coli* strains:
 
-> ### {% icon hands_on %} Hands-on: Restricting list of deleted region to the *common* deletion
+> ### {% icon hands_on %} Hands-on: Restricting list of deleted regions to the *common* deletion
 >
 > 1. **Filter data on any column using simple expressions** {% icon tool %} with the following parameters:
 >  - *"Filter"*: dataset from the last step (`Filter on data...`)
@@ -853,19 +879,19 @@ LT906474.1 3288166 3304009
 
 We can look closely at these using IGV:
 
-![Close up of the deleted region](../../images/igv_gap_closeup.png "Close up of deleted region (this region is deleted from our assembly and looks like a gap when our assembly is aligned to genomic sequences shown here). In CP0205543 and LT906474 the continuity of the region is interrupted by small aligned region that relatively low identity (~72%). This is a spurious alignment and can be ignored.")
+![Close up of the deleted region](../../images/igv_gap_closeup.png "Close up of deleted region (this region is deleted from our assembly and looks like a gap when our assembly is aligned to genomic sequences shown here). In CP0205543 and LT906474 the continuity of the region is interrupted by a small aligned region that has relatively low identity (~72%). This is a spurious alignment and can be ignored.")
 
-Now we are ready to intersect these regions with gene coordinates we formatted [earlier](#-hands-on-collapsing-annotations-into-a-single-bed-dataset):
+Now we are ready to intersect these regions with gene coordinates we formatted [earlier](#hands_on-hands-on-collapsing-annotations-into-a-single-bed-dataset):
 
 > ### {% icon hands_on %} Hands-on: Finding genes deleted in our assembly
 >
 > 1. **Intersect intervals find overlapping intervals in various ways** {% icon tool %} with the following parameters:
 >  - *"File A to intersect with B"*: output of the previous step
->  - *"File(s) B to intersect with A"*: gene annotations in [BED format](#-hands-on-collapsing-annotations-into-a-single-bed-dataset)
+>  - *"File(s) B to intersect with A"*: gene annotations in [BED format](#hands_on-hands-on-collapsing-annotations-into-a-single-bed-dataset)
 >  - *"What should be written to the output file?"*: `Write the original A and B entries plus the number of base pairs of overlap between the two features. Only A features with overlap are reported. Restricted by the fraction- and reciprocal option (-wo)`
 {: .hands_on}
 
-As a result we will get a list of all genes that overlap with the positions of the deletion. Because of the parameters we have select the tool joins rows from the two datasets if their coordinates overlap:
+As a result we will get a list of all genes that overlap with the positions of the deletion. Because of the parameters we have selected, the tool joins rows from the two datasets if their coordinates overlap:
 
 ```
          1       2       3          4       5       6    7 8 9   10
@@ -885,7 +911,7 @@ LT906474.1 3252785 3288031 LT906474.1 3255430 3255843 entH 0 -  413
 > 2. Open your Google Drive and create a new Google Sheet
 > 3. Go to **File** and select **Import**
 > 4. Within the **Import** dialog box select **Upload** and use it to upload the file downloaded at step 1
-> 5. You will the contents of the file
+> 5. You will see the contents of the file
 > 6. Remove the first two header rows so that there is only data and nothing else
 > 7. Go to **File** and choose **Download as ... TAB-separated values**
 > 8. Upload this file into Galaxy using its upload tool.
@@ -902,18 +928,18 @@ thrA 0.149817296 32.64262069 FALSE TRUE FALSE
 thrB 0.177920686 39.389847   FALSE TRUE FALSE
 ```
 
-the two truly important columns here are 1 (gene name) and 4 (is gene essential?). Let's join the results of the [intersect](#-hands-on-finding-genes-deleted-in-our-assembly) with this list:
+The two truly important columns here are 1 (gene name) and 4 (is gene essential?). Let's join the results of the [intersection](#hands_on-hands-on-finding-genes-deleted-in-our-assembly) with this list:
 
 > ### {% icon hands_on %} Hands-on: Are there essential genes?
 >
 > 1. **Join two Datasets side by side on a specified field** {% icon tool %} with the following parameters:
->   - *"Join"*: the results of [intersect operation](#-hands-on-finding-genes-deleted-in-our-assembly)(`Intersect intervals on data...`)
+>   - *"Join"*: the results of the [intersect operation](#hands_on-hands-on-finding-genes-deleted-in-our-assembly)(`Intersect intervals on data...`)
 >   - *"using column"*: `Column: 7` (because it contains gene names)
 >   - *"with"*: the newly uploaded dataset with essential gene data
 >   - *"and column"*: `Column: 1` (as in this dataset the first column contains gene names)
 {: .hands_on}
 
-Once the tool finished we will find that there are no essential genes deleted from our assembly. So our version of *E. coli* C is safe!
+Once the tool is finished we will find that there are no essential genes deleted from our assembly. So our version of *E. coli* C is safe!
 
 ```
 CP020543.1	3253711	3288956	CP020543.1	3258389	3259999	entE	0	-	1610	entE	0.105524519	21.77552317	FALSE	TRUE	FALSE

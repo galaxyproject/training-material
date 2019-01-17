@@ -1,7 +1,26 @@
 ---
 layout: tutorial_hands_on
-topic_name: variant-analysis
-tutorial_name: exome-seq
+
+title: "Exome sequencing data analysis"
+zenodo_link: "https://doi.org/10.5281/zenodo.60520"
+questions:
+  - "How to identify the genetic variation with the use of exome sequencing?"
+  - "What is the pipeline of the process of finding genetic variation which caused the disease?"
+objectives:
+  - "Identification of the genetic variation using the exome sequencing"
+  - "Using FreeBayes calls for variants generating"
+  - "Variant analysis and GEMINI queries"
+time_estimation: "2h"
+key_points:
+  - "With exome sequencing, one can identify genetic variation that is responsible for some diseases"
+  - "Exome sequencing is the most efficient way to identify the genetic variants in all of an individual's genes"
+  - "One can use GEMINI queries to access database with all the genetic variants"
+  - "In order to generate such database one can use FreeBayes"
+contributors:
+  - bebatut
+  - torhou
+  - erxleben
+  - bgruening
 ---
 
 # Introduction
@@ -109,8 +128,8 @@ for each family member, we will start with one BAM file with mapping results.
 > ### {% icon hands_on %} Hands-on: Data pre-processing
 >
 > 1.  Import all 3 BAM's into a new history:
->     - [Father](https://zenodo.org/record/60520/files/father.bam)  
->     - [Mother](https://zenodo.org/record/60520/files/mother.bam)  
+>     - [Father](https://zenodo.org/record/60520/files/father.bam)
+>     - [Mother](https://zenodo.org/record/60520/files/mother.bam)
 >     - [Child = Patient](https://zenodo.org/record/60520/files/patient.bam)
 > 2. Specify the used genome for mapping (for each dataset)
 >     1. Click on **Edit attributes** (pencil icon on right panel)
@@ -149,7 +168,7 @@ substitution events) smaller than the length of a short-read sequencing alignmen
 >
 {: .hands_on}
 
-:+1::tada: **Congratulations!** :tada::+1:
+{% icon trophy %} **Congratulations!**
 You have created you first VCF file, one of most complicated
 file formats in bioinformatics. In such a file your called variants are stored
 with one variant per line (+header lines).
@@ -246,7 +265,7 @@ Now that we have an annotated VCF file it is time to peek inside our variation d
 >    >
 >    > This creates a sqlite database. To see the content of the database use
 >    > **GEMINI_db_info**
->{: .comment}
+>    {: .comment}
 >
 {: .hands_on}
 
