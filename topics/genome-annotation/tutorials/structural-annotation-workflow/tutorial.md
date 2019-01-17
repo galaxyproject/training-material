@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: genome_annotation
-tutorial_name: structural_annotation_workflow
+topic_name: genome-annotation
+tutorial_name: structural-annotation-workflow
 ---
 
 # Structural Annotation Workflow

@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: genome-annotation
-tutorial_name: annotating_tmp_chaperone_frameshifts
+tutorial_name: annotating-tmp-chaperone-frameshifts
 ---
 
 # A Brief Preamble
