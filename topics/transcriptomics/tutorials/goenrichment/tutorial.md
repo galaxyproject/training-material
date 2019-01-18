@@ -32,7 +32,7 @@ The [Gene Ontology](http://www.geneontology.org/) (GO) is a structured, controll
 >
 **Figure 1** QuickGO - http://www.ebi.ac.uk/QuickGO
 
-The GO Ontology, like other ontologies, are usually coded in the [OBO](http://www.geneontology.org/faq/what-obo-file-format) or the [OWL](http://www.geneontology.org/faq/what-owl-file) formats. It can be downloaded from the [Gene Ontology website](http://geneontology.org/page/download-ontology) or from the [OBO foundry](http://www.obofoundry.org/).
+The GO Ontology, like other ontologies, are usually coded in the [OBO](http://www.geneontology.org/faq/what-obo-file-format) or the [OWL](http://www.geneontology.org/faq/what-owl-file) formats. It can be downloaded from the [Gene Ontology website](http://geneontology.org/page/download-ontology) or from the [OBO foundry](http://www.obofoundry.org/). You can also find in Galaxy tools that allow you to manipulate and extract information from OBO files, but this is outside the scope of this tutorial.
 
 > ### {% icon comment %} Comment:
 > Take note of when and where you obtained your ontology file, as these are constantly being updated.
@@ -128,7 +128,7 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 >    > <details>
 >    >
 >    > <summary>Click to view answers</summary>
->    > This will generate 6 files with the respective default names: `trapnellStudy MF Table', `trapnellStudy BP Table', `trapnellStudy MF Table', `trapnellStudy MF Graph', `trapnellStudy BP Graph' and `trapnellStudy CC Graph'. The three Table files list the results of the statistical test for each GO Term, ordered by p-value, and the three Graph files are image files displaying a graph view of the enriched GO terms.
+>    > This will generate 6 files with the respective default names: `goenrichment on trapnellStudy MF Table', `goenrichment on trapnellStudy BP Table', `goenrichment on trapnellStudy MF Table', `goenrichment on trapnellStudy MF Graph', `goenrichment on trapnellStudy BP Graph' and `goenrichment on trapnellStudy CC Graph'. The three Table files list the results of the statistical test for each GO Term, ordered by p-value, and the three Graph files are image files displaying a graph view of the enriched GO terms.
 >    > </details>
 >    {: .question}
 >
@@ -185,7 +185,7 @@ Let's remove the irrelevant genes from the background population (`trapnellPopul
 > ![](../../images/goenrichment_galaxyTrapnellNewPop.png)
 >
 > 4. **Rename** all 6 output files by appending `FilteredPop` to the name, to distinguish them from the previous outputs.
-> Let's check the new graph **trapnellStudy MF Graph FilteredPop**.
+> Let's check the new graph **goenrichment on trapnellStudy MF Graph FilteredPop**.
 >
 > ![](../../images/goenrichment_mfTrapnellNew.png)
 >
@@ -223,7 +223,7 @@ Graphical views are essential, but sometimes the graph view can become overwhelm
 >    - Select **'No'** in the Summarize Output option.
 > ![](../../images/goenrichment_galaxyMouseDiff.png)
 >
-> 4. This will generate 6 files with the names: `Mouse diff MF Table`, `Mouse diff BP Table`, `Mouse diff CC Table`, `Mouse diff MF Graph`, `Mouse diff BP Graph` and `Mouse diff CC Graph`.
+> 4. This will generate 6 files with the names: `goenrichment on Mouse diff MF Table`, `goenrichment on Mouse diff BP Table`, `goenrichment on Mouse diff CC Table`, `goenrichment on Mouse diff MF Graph`, `goenrichment on Mouse diff BP Graph` and `goenrichment on Mouse diff CC Graph`.
 > 5. Analyze the table and graph from *Biological Process*.
 >
 >
