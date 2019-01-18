@@ -21,12 +21,12 @@ contributors:
 # Introduction
 {:.no_toc}
 
-When we have a large list of genes of interest (for example, a list of differentially expressed genes obtained from an RNA-Seq experiment), how do we extract biological meaning from that list?
+When we have a large list of genes of interest, such as a list of differentially expressed genes obtained from an RNA-Seq experiment, how do we extract biological meaning from it?
 
-One way is to perform functional enrichment analysis. This method consists of the application of statistical tests to verify if genes of interest are more often associated to certain biological functions than what would be expected in a random set of genes. In this tutorial you will learn about enrichment analysis and how to perform it.
+One way to do so is to perform functional enrichment analysis. This method consists of applying statistical tests to verify if genes of interest are more often associated to certain biological functions than what would be expected in a random set of genes. In this tutorial you will learn about enrichment analysis and how to perform it.
 
 **What is the Gene Ontology?** <br/>
-The [Gene Ontology](http://www.geneontology.org/) (GO) is a structured, controlled vocabulary and classification of gene function at the molecular and cellular level. It is divided in three separate sub-ontologies or GO types: biological process (e.g., signal transduction), molecular function (e.g., ATPase activity) and cellular component (e.g., ribosome). These sub-ontologies are structured as directed acyclic graphs (a hierarchy with multi-parenting) of GO terms.
+The [Gene Ontology](http://www.geneontology.org/) (GO) is a structured, controlled vocabulary for the classification of gene function at the molecular and cellular level. It is divided in three separate sub-ontologies or GO types: biological process (e.g., signal transduction), molecular function (e.g., ATPase activity) and cellular component (e.g., ribosome). These sub-ontologies are structured as directed acyclic graphs (a hierarchy with multi-parenting) of GO terms.
 
 ![](../../images/goenrichment_GOexample.png)
 >
@@ -43,7 +43,7 @@ The GO Ontology, like other ontologies, are usually coded in the [OBO](http://ww
 **What are GO annotations?** <br/>
 Genes are associated to GO terms via GO annotations. Each gene can have multiple annotations, even of the same GO type. An important notion to take into account when using GO is that, according to the **true path rule**, a gene annotated to a term is also implicitly annotated to each ancestor of that term in the GO graph. GO annotations have evidence codes that encode the type of evidence supporting them: only a small minority of genes have experimentally verified  annotations; the large majority have annotations inferred electronically based on sequence homology or known patterns.
 
-GO annotations can be obtained from the [Gene Ontology website](http://geneontology.org/page/download-go-annotations), or from species-specific databases. One useful resource to obtain GO annotations is [Ensembl biomart](http://www.ensembl.org/biomart/martview). Again, take note to when and from where you obtained your annotations. For example, if you obtained your data from Ensembl, register the release you used.
+GO annotations can be obtained from the [Gene Ontology website](http://geneontology.org/page/download-go-annotations), or from species-specific databases. One useful resource to obtain GO annotations is [Ensembl biomart](http://www.ensembl.org/biomart/martview). Again, take note to when and from where you obtained your annotations. For example, if you obtained your data from Ensembl, record the release you used.
 
 > ### Overview
 >
@@ -128,14 +128,9 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 >    > <details>
 >    >
 >    > <summary>Click to view answers</summary>
->    > This will generate 6 files with the respective default names: MF_Result.txt, BP_Result.txt, CC_Result.txt, MF_Graph, BP_Graph and CC_Graph. The three Result files are tables with statistical tests for each GO Term, and the other three Graph files are image files displaying a graph view of the enriched GO terms.
+>    > This will generate 6 files with the respective default names: `trapnellStudy MF Table', `trapnellStudy BP Table', `trapnellStudy MF Table', `trapnellStudy MF Graph', `trapnellStudy BP Graph' and `trapnellStudy CC Graph'. The three Table files list the results of the statistical test for each GO Term, ordered by p-value, and the three Graph files are image files displaying a graph view of the enriched GO terms.
 >    > </details>
 >    {: .question}
->
-> 7. **Rename** files to `MF Trapnell`, `BP Trapnell`, `CC Trapnell`, `MF graphTrapnell`, `BP graphTrapnell` and `CC graphTrapnell`, respectively.
->
->
-> As you can see, the output consists of a table with p-values and frequencies for each GO type plus an image with a graph view of the GO type, where you can visualize the enrichment results and highlighted enriched ontology branches.
 >
 >    > ### {% icon comment %} Comments
 >    > For each GO term we obtain a p-value corresponding to a single, independent test. Since we are making multiple similar tests, the probability of at least one of them being a false positive increases. Therefore we need to make a correction for multiple testing.
@@ -180,17 +175,17 @@ Let's remove the irrelevant genes from the background population (`trapnellPopul
 >    - {% icon param-text %} *"With following condition"*: `c7 != 'NA'`
 > ![](../../images/goenrichment_galaxyFilterNA.png)
 >
-> 2. This generates one file. **Rename** to `trapnellNewPopulation`.
+> 2. This generates one file. **Rename** to `trapnellFilteredPopulation`.
 > 3. **GOEnrichment** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Gene Ontology File"*: `GO`
 >    - {% icon param-file %} *"Gene Product Annotation File"*: `Go Annotations Drosophila melanogaster`
 >    - {% icon param-file %} *"Study set File"*: `trapnellStudy`
->    - {% icon param-file %} *"Population set File"*: `trapnellNewPopulation`
+>    - {% icon param-file %} *"Population set File"*: `trapnellFilteredPopulation`
 >    - Use the default options for the rest.
 > ![](../../images/goenrichment_galaxyTrapnellNewPop.png)
 >
-> 4. **Rename** files to `MF New Trapnell`, `BP New Trapnell`, `CC New Trapnell`, `MF New graphTrapnell`, `BP New graphTrapnell` and `CC New graphTrapnell`, respectively.
-> Let's go see again the graph **MF New graphTrapnell**.
+> 4. **Rename** all 6 output files by appending `FilteredPop` to the name, to distinguish them from the previous outputs.
+> Let's check the new graph **trapnellStudy MF Graph FilteredPop**.
 >
 > ![](../../images/goenrichment_mfTrapnellNew.png)
 >
@@ -228,7 +223,7 @@ Graphical views are essential, but sometimes the graph view can become overwhelm
 >    - Select **'No'** in the Summarize Output option.
 > ![](../../images/goenrichment_galaxyMouseDiff.png)
 >
-> 4. This will generate 6 files, with the respective names: MF_Result.txt, BP_Result.txt, CC_Result.txt, MF_Graph, BP_Graph and CC_Graph. **Rename** to `MF tabDiff`, `BP tabDiff`, `CC tabDiff`, `MF grapDiff`, `BP grapDiff` and `CC grapDiff`, respectively.
+> 4. This will generate 6 files with the names: `Mouse diff MF Table`, `Mouse diff BP Table`, `Mouse diff CC Table`, `Mouse diff MF Graph`, `Mouse diff BP Graph` and `Mouse diff CC Graph`.
 > 5. Analyze the table and graph from *Biological Process*.
 >
 >
@@ -239,7 +234,7 @@ Graphical views are essential, but sometimes the graph view can become overwhelm
 >    {: .comment}
 {: .hands_on}
 
-As you may notice, the number of enriched GO Terms is very high, with graphs that are too extensive to analyze manually. And this is despite the fact that GOEnrichment ignores singletons and skips dependent tests by default, precisely to avoid enrichment results that are too extensive and not informative.
+As you see, the number of enriched GO Terms is very high, with graphs that are too extensive to analyze manually. And this is despite the fact that GOEnrichment ignores singletons and skips dependent tests by default, precisely to avoid enrichment results that are too extensive and not informative.
 
 The Summarize Output option in the GOEnrichment tool addresses this problem by conflating branches/families of enriched GO terms and selecting the most representative term(s) from them (usually 1-2 term per family). The greatly simplifies the results while retaining branch information, and thus ensuring that every enriched family of functions is present in the results. Some specificity is necessarily lost, but the trade-off is that the results become easier and more intuitive to analyze.
 
@@ -339,7 +334,7 @@ For the second exercice, we will continue to work with the same study set as bef
 > ![](../../images/goenrichment_galaxyMouseOver.png)
 > ![](../../images/goenrichment_galaxyMouseUnder.png)
 >
-> 3. This will generate 12 files, 6 for each sample, with the respective names: MF_Result.txt, BP_Result.txt, CC_Result.txt, MF_Graph, BP_Graph and CC_Graph. **Rename** according to sample (under- and overexpressed): `MF tableUnder`, `BP tableUnder`, `CC tableUnder`, `MF graphUnder`, `BP graphUnder`, `CC graphUnder`, `MF tableOver`, `BP tableOver`, `CC tableOver`, `MF graphOver`, `BP graphOver` and `CC graphOver`.
+> 3. This will generate 12 files, 6 for each sample file, like in previous cases.
 >
 >    > ### {% icon question %} Questions
 >    >
