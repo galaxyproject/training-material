@@ -232,7 +232,6 @@ We proceed to the analysis with uploading new datasets. You might want to create
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
 >    > ### {% icon comment %} Comment
->    >
 >    > The `train_rows` contains a column `age` which is the label or target. We will evaluate our model on
 >    > `test_rows` and compare the predicted age with the true age in `test_rows_labels`
 >
@@ -317,7 +316,7 @@ In the previous step, we found the best model based on the training data. Now, w
 
 Let's plot the predictions and compare with the test labels.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Plots
 >
 > 1. **Plot actual vs predicted curves and residual plots of tabular data** {% icon tool %} with the following parameters:
 >    - *"Select input data file :"*: `test_rows_labels`
@@ -327,34 +326,29 @@ Let's plot the predictions and compare with the test labels.
 >    >
 >    > The tool outputs three html files with the interactive plots.
 >    {: .comment}
+>    > ![Scatter plot](images/scatter_plot.png "Scatter plot for true and predicted age")
+>    > We can see in the scatter plot (figure 2) that most of the points lie along the x=y curve. It means that the true and predicted ages are 
+>    > close to each other. The root mean squared error (`RMSE`) is `3.76` and R2 score is `0.94`.
+>    > ![Residuals](images/residual_plot.png "Residuals")
+>    > The residual plot (figure 3) is generated to see if there is any visible pattern between residual (predicted age - true age)
+>    > and predicted  age. For a good > model, there should not be any visible pattern with the plotted points.
+>    >
+>    > ![True vs predicted age](images/true_vs_predicted_plot.png "True vs predicted age")
+>    > The plot in figure 4 shows the true and predicted ages. It can be seen that the points are close.
 >
 {: .hands_on}
 
 > ### {% icon question %} Questions
 >
-> 1. Inspect the plots. What can you say about our predictions?
+> 1. Inspect the plots. What can you say about the predictions?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The predictions (marked orange) show good results.
+> > 1. The figures 2 and 4 show that the prediction is good because the predicted age lie close to the true age.
 > >
 > {: .solution}
 >
 {: .question}
-
-# Plots
-We will look into the predicted results through the 3 different visualisation plots. 
-
-> ![Scatter plot](images/scatter_plot.png "Scatter plot for true and predicted age")
-> We can see in the scatter plot (figure 2) that most of the points lie along the x=y curve. It means that the true and predicted ages are close 
-> to each other. The root mean squared error (`RMSE`) is `3.76` and R2 score is `0.94`. 
->
-> ![Residuals](images/residual_plot.png "Residuals")
-> The residual plot (figure 3) is generated to see if there is any visible pattern between residual (predicted age - true age) and predicted age. For a good > model, there should not be any visible pattern with the plotted points.
-> 
-> ![True vs predicted age](images/true_vs_predicted_plot.png "True vs predicted age")
-> The plot in figure 4 shows the true and predicted ages. It can be seen that the points are close.
-
 
 # Conclusion
 {:.no_toc}
