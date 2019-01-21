@@ -20,7 +20,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-[Machine Learning](https://en.wikipedia.org/wiki/Machine_learning) is used to create predictive models by learning features from datasets. In this tutorial, we will apply a couple of (scikit-learn) machine learning tools to [RNA-seq](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) and [DNA methylation](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) datasets to predict chronological age of humans. Using these machine learning tools in Galaxy, we can achieve comparable prediction scores as achieved by these analyses. The RNA-seq gene expression ([FPKM](https://www.ebi.ac.uk/training/online/glossary/fpkm)) dataset is generated using fibroblast cell lines from 133 healthy humans and their ages range from 1 to 94 years. The biomarkers of age are identified by a machine learning algorithm to create a age prediction model. Within each individual, [DNA methylation](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3174260/) changes with age. This knowledge is used to create an age prediction model by selecting useful biomarkers from DNA methylation dataset. The CpGs sites with highest correlation to age are selected as biomarkers/features. These are used by a machine learning algorithm to create an age prediction model. This tutorial is divided into two parts - one with RNA-seq and another with DNA methylation datasets.
+[Machine Learning](https://en.wikipedia.org/wiki/Machine_learning) is used to create predictive models by learning features from datasets. In this tutorial, we will apply a couple of (scikit-learn) machine learning tools to [RNA-seq](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) and [DNA methylation](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) datasets to predict the chronological age of humans. Using these machine learning tools in Galaxy, we can achieve comparable prediction scores as achieved by these analyses. The RNA-seq gene expression ([FPKM](https://www.ebi.ac.uk/training/online/glossary/fpkm)) dataset is generated using fibroblast cell lines from 133 healthy humans and their ages range from 1 to 94 years. The biomarkers of age are identified by a machine learning algorithm to create an age prediction model. Within each individual, [DNA methylation](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3174260/) changes with age. This knowledge is used to create an age prediction model by selecting useful biomarkers from DNA methylation dataset. The CpGs sites with the highest correlation to age are selected as biomarkers/features. These are used by a machine learning algorithm to create an age prediction model. This tutorial is divided into two parts - one with RNA-seq and another with DNA methylation datasets.
 
 
 > ### Agenda
@@ -34,12 +34,11 @@ contributors:
 
 # Analyze RNA-seq dataset 
 
-The data on which we perform our first task of hyperparameter estimation is a RNAseq data of firoblast cell lines belonging to 133 healthy patients
-of age from 1 to 94 years. On this data we perform an exhaustive search (known as grid search) for finding the best features in the dataset and then apply ElasticNet regressor with 5-fold cross-validation. The R2 regression score is compared to the predictions found in the [original paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9).
+The data on which we perform our first task of hyperparameter estimation is an RNA-seq dataset of fibroblast cell lines belonging to 133 healthy patients of age from 1 to 94 years. On this data, we perform an exhaustive search (known as grid search) for finding the best features in the dataset and then apply ElasticNet regressor with 5-fold cross-validation. The R2 regression score is compared to the predictions found in the [original paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9).
 
 ## Get the raw data
 
-We proceed to the analysis with uploading the data.
+We proceed to the analysis by uploading the dataset.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -47,7 +46,7 @@ We proceed to the analysis with uploading the data.
 > 2. Import the files from [Zenodo](https://zenodo.org/record/2545213#.XEWTJ9-YVa0)
 >
 >    ```
->    https://zenodo.org/record/2545213/files/training_data_normal.tsv?download=1
+>    https://zenodo.org/record/2545213/files/training_data_normal.tsv
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -64,7 +63,7 @@ We proceed to the analysis with uploading the data.
 
 ## Create a data processing pipeline
 
-We can see that the RNA-seq dataset is high-dimensional. There are over `27,000` columns/features. Generally, not all the columns in the dataset are useful for prediction. We need only those columns/features which increases the predictive ability of the model. To filter these columns, we perform feature selection and retain only those columns which are useful. To do that, we use `SelectKBest` module in the suite of data preprocessors. Again, we are not sure of how many of these columns we will need. To find the right number of columns, we do a hyperparameter search by setting different number of features and find out the best number. To create this preprocessor, we will use **pipeline builder** tool. This tool defines a sequential processing of datasets. After preprocessing step, we should add a regressor algorithm (ElasticNet) which analyzes the preprocessed dataset. This tool gives a `zip` file as output containing the specifications of different steps of the entire analysis. 
+We can see that the RNA-seq dataset is high-dimensional. There are over `27,000` columns/features. Generally, not all the columns in the dataset are useful for prediction. We need only those columns/features which increases the predictive ability of the model. To filter these columns, we perform feature selection and retain only those columns which are useful. To do that, we use `SelectKBest` module in the suite of data preprocessors. Again, we are not sure of how many of these columns we will need. To find the right number of columns, we do a hyperparameter search by setting a different number of features and find out the best number. To create this preprocessor, we will use **pipeline builder** tool. This tool defines the sequential processing of datasets. After the preprocessing step, we should add a regressor algorithm (ElasticNet) which analyzes the preprocessed dataset. This tool gives a `zip` file as an output containing the specifications of different steps of the entire analysis. 
 
 > ### {% icon hands_on %} Hands-on: Create pipeline
 >
@@ -90,7 +89,7 @@ In any machine learning algorithm, there are many parameters (hyperparameters) w
 - Grid search
 - Random search
 
-For our analyses, we will use grid search approach. It is an exhaustive search which tries out all the combinations of different hyperparameters and ranks these combinations based on a scoring metric.
+For our analyses, we will use the grid search approach. It is an exhaustive search which tries out all the combinations of different hyperparameters and ranks these combinations based on a scoring metric. In the random search, the values of a parameter are selected randomly from a given range and the best one is found.
 
 > ### {% icon details %} Cross-validation
 >
@@ -127,7 +126,7 @@ For these three parameters, we have 24 different combinations (4 x 2 x 3) of val
 >                - *"n_splits"*: `5`
 >                - *"Whether to shuffle data before splitting"*: `Yes`
 >                - *"Random seed number"*: `3111696`
->            - *"Raise fit error:"*: `Yes`
+>            - *"Raise fit error:"*: `No`
 >    - *"Select input type:"*: `tabular data`
 >        - *"Training samples dataset:"*: `training_data_normal` tabular file
 >        - *"Does the dataset contain header:"*: `Yes`
@@ -153,7 +152,7 @@ For these three parameters, we have 24 different combinations (4 x 2 x 3) of val
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 0.7269799945732331
+> > 1. 0.73
 > > 2. alpha: 0.001, normalize: True, k: 5880
 > > 3. 24
 > >
@@ -198,14 +197,14 @@ We will visualize the tabular output of hyperparameter search tool from the prev
 {: .question}
 
 ## Conclusion
-In the plot shown above, we achieved an R2 score of `0.73` (last column) with 5-fold cross-validation. In the [paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) as well, a similar R2 score is mentioned for linear regressors. It showcases one of the usecases of using the scikit-learn machine learning tools in Galaxy to reproduce the results published in a paper.
+In the plot shown above, we achieved an R2 score of `0.73` (last column) with 5-fold cross-validation. In the [paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) as well, a similar R2 score is mentioned for linear regressors. It showcases one of the use-cases of using the scikit-learn machine learning tools in Galaxy to reproduce the results published in a paper.
 
 # Analyze DNA methylation dataset
-In the second part of the analysis, we will use DNA methylation dataset to predict chronological age. The dataset is divided into two parts - training and test sets. The training set is used to train a regressor and the test set is used to evaluate the performance of trained model.
+In the second part of the analysis, we will use DNA methylation dataset to predict chronological age. The dataset is divided into two parts - training and test sets. The training set is used to train a regressor and the test set is used to evaluate the performance of the trained model.
 
 ## Get the train and test datasets
 
-We proceed to the analysis with uploading new datasets. You might want to create a new history first.
+We proceed with the analysis by uploading new datasets. You might want to create a new history first.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -213,9 +212,9 @@ We proceed to the analysis with uploading new datasets. You might want to create
 > 2. Import the files from [Zenodo](https://zenodo.org/record/2545213#.XEWTJ9-YVa0)
 >
 >    ```
->    https://zenodo.org/record/2545213/files/train_rows.csv?download=1
->    https://zenodo.org/record/2545213/files/test_rows_labels.csv?download=1
->    https://zenodo.org/record/2545213/files/test_rows.csv?download=1
+>    https://zenodo.org/record/2545213/files/train_rows.csv
+>    https://zenodo.org/record/2545213/files/test_rows_labels.csv
+>    https://zenodo.org/record/2545213/files/test_rows.csv
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -229,14 +228,14 @@ We proceed to the analysis with uploading new datasets. You might want to create
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
 >    > ### {% icon comment %} Comment
->    > The `train_rows` contains a column `age` which is the label or target. We will evaluate our model on
+>    > The `train_rows` contains a column `Age` which is the label or target. We will evaluate our model on
 >    > `test_rows` and compare the predicted age with the true age in `test_rows_labels`
 >    {: .comment}
 {: .hands_on}
 
 ## Create a data processing pipeline
 
-We will create a pipeline with **Pipeline Builder** tool but just specify the regressor, [Gradient Boosting Regressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html). This is an ensemble based regressor which uses multiple tree based regressors internally and predict by taking ensemble of the predictions. The tool will output a zipped file.
+We will create a pipeline with **Pipeline Builder** tool but just specify the regressor, [Gradient Boosting Regressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html). This is an ensemble based regressor which uses multiple tree based regressors internally and predicts by taking an ensemble of the predictions. The tool will output a zipped file.
 
 > ### {% icon hands_on %} Hands-on: Create pipeline
 >
@@ -254,7 +253,7 @@ We will create a pipeline with **Pipeline Builder** tool but just specify the re
 
 ## Hyperparameter optimisation
 
-For this analysis as well, we will use **Hyperparameter Search** tool to estimate the best values of parameters for the given dataset. We use only one parameter `n_estimators` of `Gradient Boosting` regressor for this task. This parameter specifies the number of boosting stages the learning process has to go through. This step will find the optimal number of estimators using grid search and returns the best trained model. This model is used in the next step to make prediction on test dataset.
+For this analysis as well, we will use **Hyperparameter Search** tool to estimate the best values of parameters for the given dataset. We use only one parameter `n_estimators` of `Gradient Boosting` regressor for this task. This parameter specifies the number of boosting stages the learning process has to go through. This step will find the optimal number of estimators using grid search and returns the best-trained model. This model is used in the next step to make a prediction on the test dataset.
 
 > ### {% icon hands_on %} Hands-on: Hyperparameter optimisation
 >
@@ -272,7 +271,7 @@ For this analysis as well, we will use **Hyperparameter Search** tool to estimat
 >                - *"n_splits"*: `5`
 >                - *"Whether to shuffle data before splitting"*: `Yes`
 >                - *"Random seed number"*: `3111696`
->            - *"Raise fit error:"*: `Yes`
+>            - *"Raise fit error:"*: `No`
 >    - *"Select input type:"*: `tabular data`
 >        - *"Training samples dataset:"*: `train_rows` tabular file
 >        - *"Does the dataset contain header:"*: `Yes`
@@ -303,7 +302,7 @@ In the previous step, we found the best model based on the training data. Now, w
 >
 > 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters:
 >    - *"Select a Classification Task:"*: `Load a model and predict`
->        - *"Models"*: `Output from Hyperparameter Search` zipeped model file
+>        - *"Models"*: `Output from Hyperparameter Search` zipped model file
 >        - *"Data (tabular)"*: `test_rows`
 >        - *"Does the dataset contain header:"*: `Yes`
 >        - *"Select the type of prediction:"*: `Predict class labels`
