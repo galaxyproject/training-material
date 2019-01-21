@@ -296,7 +296,7 @@ For this analysis as well, we will use **Hyperparameter Search** tool to estimat
 > >
 > {: .solution}
 
-# Predict age
+## Predict age
 
 In the previous step, we found the best model based on the training data. Now, we will make predictions using this model and test dataset.
 
@@ -347,6 +347,7 @@ Let's plot the predictions and compare with the test labels.
 >
 {: .question}
 
-# Conclusion
+## Conclusion
+> 
 {:.no_toc}
 
