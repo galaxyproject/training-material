@@ -109,7 +109,7 @@ For these three parameters, we have 24 different combinations (4 x 2 x 3) of val
 >
 > 1. **Hyperparameter Search** {% icon tool %} with the following parameters:
 >    - *"Select a model selection search scheme:"*: `GridSearchCV - Exhaustive search over specified parameter values for an estimator ` 
-         - In *"Choose the dataset containing pipeline object"*: `Pipeline builder` zipped file
+>        - *"Choose the dataset containing pipeline object"*: `Pipeline builder` zipped file
 >        - In *"Search parameters Builder"*:
 >            - In *"Parameter setting for search:"*:
 >                - {% icon param-repeat %} *"Insert Parameter setting for search:"*
@@ -129,9 +129,11 @@ For these three parameters, we have 24 different combinations (4 x 2 x 3) of val
 >                - *"Random seed number"*: `3111696`
 >            - *"Raise fit error:"*: `Yes`
 >    - *"Select input type:"*: `tabular data`
+>        - *"Training samples dataset:"*: `training_data_normal` tabular file
 >        - *"Does the dataset contain header:"*: `Yes`
 >        - *"Choose how to select data by column:"*: `All columns BUT by column header name(s)`
 >            - *"Type header name(s):"*: `age`
+>        - *"Dataset containing class labels or target values"*: `training_data_normal` tabular file
 >        - *"Does the dataset contain header:"*: `Yes`
 >        - *"Choose how to select data by column:"*: `Select columns by column header name(s)`
 >            - *"Type header name(s):"*: `age`
@@ -163,18 +165,20 @@ are visible in the 8th column.
 
 ## Parallel coordinates plot
 
-We will visialize the tabular output of hyperparameter search tool from previous step using **Parallel Coordinates Plot of tabular data**.
+We will visualize the tabular output of hyperparameter search tool from the previous step using **Parallel Coordinates Plot of tabular data**.
 
 > ### {% icon hands_on %} Hands-on: Parallel coordinates plot
 >
 > 1. **Parallel Coordinates Plot** {% icon tool %} with the following parameters:
+>    - *"Select data file:"*: Tabular output of hyperparameter search tool
 >    - *"Select the columns for dimensions:"*: `c[5, 6, 7, 14]`
 >    - *"Select a column containing the values for coloring:"*: `c14`
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > The output plot has the following legend: the colour-coding is based on the mean_test_score column. You can follow the 'line' leading
+>    > The output plot has the following legend: the colour-coding is based on the `mean_test_score` column. You can follow the line leading
 to the score along every column with parameters' settings.
+>
 >
 >    ![data](images/plotting_output.png "The vizualization of the hyperparameter optimization tool output.")
 >
@@ -197,6 +201,9 @@ to the score along every column with parameters' settings.
 > {: .solution}
 >
 {: .question}
+
+## Conclusion
+In the plot shown above, we achieved an R2 score of `0.73` (last column) with 5-fold cross-validation. In the [paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) as well, a similar R2 score is mentioned for linear regressors. It showcases one of the usecases of using the scikit-learn machine learning tools in Galaxy to reproduce the results published in a paper.
 
 # Preparing for the prediction
 
