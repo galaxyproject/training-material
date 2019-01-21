@@ -20,7 +20,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-[Machine Learning](https://en.wikipedia.org/wiki/Machine_learning) is used to create predictive models by learning features from datasets. In this tutorial, we will apply a couple of (scikit-learn) machine learning tools to [RNA-seq](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) and [DNA methylation](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) datasets to predict chronological age of humans. Using these tools in Galaxy, we can achieve comparable prediction scores as achieved by these analyses. The RNA-seq gene expression ([FPKM](https://www.ebi.ac.uk/training/online/glossary/fpkm)) dataset is generated using fibroblast cell lines from 133 healthy humans and their ages range from 1 to 94 years. The biomarkers of age are identified by a machine learning algorithm to create a age prediction model. Within each individual, DNA methylation changes with age. This knowledge is used to create an age prediction model using DNA methylation dataset. The CpGs sites with highest correlation to age are selected as biomarkers/features. These are used by a machine learning algorithm to create a predictive model. This tutorial is divided into two parts - one with RNA-seq and another with DNA methylation datasets.
+[Machine Learning](https://en.wikipedia.org/wiki/Machine_learning) is used to create predictive models by learning features from datasets. In this tutorial, we will apply a couple of (scikit-learn) machine learning tools to [RNA-seq](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) and [DNA methylation](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) datasets to predict chronological age of humans. Using these machine learning tools in Galaxy, we can achieve comparable prediction scores as achieved by these analyses. The RNA-seq gene expression ([FPKM](https://www.ebi.ac.uk/training/online/glossary/fpkm)) dataset is generated using fibroblast cell lines from 133 healthy humans and their ages range from 1 to 94 years. The biomarkers of age are identified by a machine learning algorithm to create a age prediction model. Within each individual, [DNA methylation](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3174260/) changes with age. This knowledge is used to create an age prediction model by selecting useful biomarkers from DNA methylation dataset. The CpGs sites with highest correlation to age are selected as biomarkers/features. These are used by a machine learning algorithm to create an age prediction model. This tutorial is divided into two parts - one with RNA-seq and another with DNA methylation datasets.
 
 
 > ### Agenda
@@ -35,7 +35,7 @@ contributors:
 # Analyze RNA-seq dataset 
 
 The data on which we perform our first task of hyperparameter estimation is a RNAseq data of firoblast cell lines belonging to 133 healthy patients
-of age from 1 to 94 years. On this data we perform an exhaustive search (known as grid search) for finding the best features in the dataset and then apply ElasticNet regressor with 5-fold crossvalidation. The R2 regression score is compared to the predictions found in the [original paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9).
+of age from 1 to 94 years. On this data we perform an exhaustive search (known as grid search) for finding the best features in the dataset and then apply ElasticNet regressor with 5-fold cross-validation. The R2 regression score is compared to the predictions found in the [original paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9).
 
 ## Get the raw data
 
@@ -98,7 +98,7 @@ For our analyses, we will use grid search approach. It is an exhaustive search w
 >
 {: .details}
 
-In the pipeline builder, we added two steps - preprocessing (feature selection) and an estimator (regressor). There are different hyperparameters for these two steps and their best combination should be found out. We will perform grid search to estimate the best values for these parameters: **k**, **normalize**, **alpha**. For each parameter, we need to specify a set of values to choose from:
+In the pipeline builder, we added two steps - preprocessing (feature selection) and an estimator (regressor). There are different hyperparameters for these two steps and their best combination should be found out. We will perform grid search to estimate the best values for these parameters: **k**, **normalize** and **alpha**. For each parameter, we need to specify a set of values to choose from:
 - **k**: [5880, 5890, 5895, 5900]
 - **normalize**: [True, False]
 - **alpha**: [0.00001, 0.0001, 0.001]
@@ -254,7 +254,7 @@ We will create a pipeline with **Pipeline Builder** tool but just specify the re
 
 ## Hyperparameter optimisation
 
-For this analysis as well, we will use **Hyperparameter Search** tool to estimate the best parameter values for the given dataset. We will estimate the best value of `n_estimators` of `Gradient Boosting` regressor. This parameter specifies the number of boosting stages the learning process has to go through. This step will find the optimal number of estimators using grid search and returns the best trained model. This model is used further to make prediction on test dataset.
+For this analysis as well, we will use **Hyperparameter Search** tool to estimate the best values of parameters for the given dataset. We use only one parameter `n_estimators` of `Gradient Boosting` regressor for this task. This parameter specifies the number of boosting stages the learning process has to go through. This step will find the optimal number of estimators using grid search and returns the best trained model. This model is used in the next step to make prediction on test dataset.
 
 > ### {% icon hands_on %} Hands-on: Hyperparameter optimisation
 >
