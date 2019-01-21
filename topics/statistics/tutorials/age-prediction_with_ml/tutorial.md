@@ -94,7 +94,7 @@ For our analyses, we will use grid search approach. It is an exhaustive search w
 
 > ### {% icon details %} Cross-validation
 >
-> *Cross-validation* is a model validation technique which estimates the performance of a predictive model on an unseen data. A dataset is divided into `k` folds and these folds are divided over a training and validation sets. The performance is averaged over `k` folds.
+> It is a model validation technique which estimates the performance of a predictive model on an unseen data. A dataset is divided into `k` folds (parts) and these folds are categorised into training and validation sets. For example in 5-fold cross-validation, 4 parts of the dataset are used for training and 1 part is used for validating the performance. The final performance is averaged over `k` folds.
 >
 {: .details}
 
@@ -231,7 +231,6 @@ We proceed to the analysis with uploading new datasets. You might want to create
 >    > ### {% icon comment %} Comment
 >    > The `train_rows` contains a column `age` which is the label or target. We will evaluate our model on
 >    > `test_rows` and compare the predicted age with the true age in `test_rows_labels`
->
 >    {: .comment}
 {: .hands_on}
 
