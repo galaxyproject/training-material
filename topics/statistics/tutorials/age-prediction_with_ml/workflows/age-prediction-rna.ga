@@ -1,0 +1,158 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "",
+  "format-version": "0.1",
+  "name": "age-prediction-rna",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "training_data_normal.tsv"
+        }
+      ],
+      "label": null,
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 10,
+        "top": 10
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"training_data_normal.tsv\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "e52aea63-b62f-4d18-8eca-4b6cd65f4caa",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_build_pipeline/sklearn_build_pipeline/1.0",
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [],
+      "label": null,
+      "name": "Pipeline Builder",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "zip"
+        }
+      ],
+      "position": {
+        "left": 10,
+        "top": 130
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_build_pipeline/sklearn_build_pipeline/1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "99038af8deda",
+        "name": "sklearn_build_pipeline",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"pipeline_component\": \"[{\\\"__index__\\\": 0, \\\"component_selector\\\": {\\\"__current_case__\\\": 2, \\\"component_type\\\": \\\"feature_selection\\\", \\\"fs_algorithm_selector\\\": {\\\"__current_case__\\\": 2, \\\"options\\\": {\\\"k\\\": \\\"10\\\"}, \\\"score_func\\\": \\\"f_regression\\\", \\\"selected_algorithm\\\": \\\"SelectKBest\\\"}}}]\", \"__rerun_remap_job_id__\": null, \"__workflow_invocation_uuid__\": \"\\\"1bcbb9ea15a611e9b670001b21d75532\\\"\", \"final_estimator\": \"{\\\"estimator_selector\\\": {\\\"__current_case__\\\": 1, \\\"selected_estimator\\\": \\\"ElasticNet\\\", \\\"selected_module\\\": \\\"linear_model\\\", \\\"text_params\\\": \\\"\\\"}}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "1.0",
+      "type": "tool",
+      "uuid": "09e99236-51a4-49ab-9ea8-da57f2e3fcd9",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_searchcv/sklearn_searchcv/1.0",
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+        "input_options|infile1": {
+          "id": 0,
+          "output_name": "output"
+        },
+        "input_options|infile2": {
+          "id": 0,
+          "output_name": "output"
+        },
+        "search_schemes|infile_pipeline": {
+          "id": 1,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Hyperparameter Search",
+      "outputs": [
+        {
+          "name": "outfile_result",
+          "type": "tabular"
+        },
+        {
+          "name": "outfile_estimator",
+          "type": "zip"
+        }
+      ],
+      "position": {
+        "left": 230,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_searchcv/sklearn_searchcv/1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "4368259ff821",
+        "name": "sklearn_searchcv",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"search_schemes\": \"{\\\"__current_case__\\\": 0, \\\"infile_pipeline\\\": null, \\\"options\\\": {\\\"cv_selector\\\": {\\\"__current_case__\\\": 1, \\\"n_splits\\\": \\\"5\\\", \\\"random_state\\\": \\\"3111696\\\", \\\"selected_cv\\\": \\\"KFold\\\", \\\"shuffle\\\": \\\"true\\\"}, \\\"error_score\\\": \\\"false\\\", \\\"iid\\\": \\\"true\\\", \\\"pre_dispatch\\\": \\\"all\\\", \\\"refit\\\": \\\"true\\\", \\\"return_train_score\\\": \\\"false\\\", \\\"scoring\\\": {\\\"__current_case__\\\": 26, \\\"primary_scoring\\\": \\\"r2\\\", \\\"secondary_scoring\\\": null}, \\\"verbose\\\": \\\"0\\\"}, \\\"search_params_builder\\\": {\\\"param_set\\\": [{\\\"__index__\\\": 0, \\\"search_param_selector\\\": {\\\"__current_case__\\\": 1, \\\"search_p\\\": \\\"k: [5880, 5890, 5895, 5900]\\\", \\\"selected_param_type\\\": \\\"prep_1_p\\\"}}, {\\\"__index__\\\": 1, \\\"search_param_selector\\\": {\\\"__current_case__\\\": 0, \\\"search_p\\\": \\\"normalize: [True, False]\\\", \\\"selected_param_type\\\": \\\"final_estimator_p\\\"}}, {\\\"__index__\\\": 2, \\\"search_param_selector\\\": {\\\"__current_case__\\\": 0, \\\"search_p\\\": \\\"alpha: [0.00001, 0.0001, 0.001]\\\", \\\"selected_param_type\\\": \\\"final_estimator_p\\\"}}]}, \\\"selected_search_scheme\\\": \\\"GridSearchCV\\\"}\", \"__rerun_remap_job_id__\": null, \"__workflow_invocation_uuid__\": \"\\\"1bcbb9ea15a611e9b670001b21d75532\\\"\", \"save\": \"\\\"true\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"input_options\": \"{\\\"__current_case__\\\": 0, \\\"column_selector_options_1\\\": {\\\"__current_case__\\\": 3, \\\"col1\\\": \\\"age\\\", \\\"selected_column_selector_option\\\": \\\"all_but_by_header_name\\\"}, \\\"column_selector_options_2\\\": {\\\"__current_case__\\\": 2, \\\"col2\\\": \\\"age\\\", \\\"selected_column_selector_option2\\\": \\\"by_header_name\\\"}, \\\"header1\\\": \\\"true\\\", \\\"header2\\\": \\\"true\\\", \\\"infile1\\\": null, \\\"infile2\\\": null, \\\"selected_input\\\": \\\"tabular\\\"}\"}",
+      "tool_version": "1.0",
+      "type": "tool",
+      "uuid": "1a19fe7d-19a3-48df-870f-73b922db2c06",
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/plotly_parallel_coordinates_plot/plotly_parallel_coordinates_plot/0.1",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "infile": {
+          "id": 2,
+          "output_name": "outfile_result"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Parallel Coordinates Plot",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "html"
+        }
+      ],
+      "position": {
+        "left": 450,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/plotly_parallel_coordinates_plot/plotly_parallel_coordinates_plot/0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "7b2455348edf",
+        "name": "plotly_parallel_coordinates_plot",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"col_color\": \"\\\"14\\\"\", \"col_dimensions\": \"[\\\"5\\\", \\\"6\\\", \\\"7\\\", \\\"14\\\"]\", \"__rerun_remap_job_id__\": null, \"__workflow_invocation_uuid__\": \"\\\"1bcbb9ea15a611e9b670001b21d75532\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"infile\": \"null\"}",
+      "tool_version": "0.1",
+      "type": "tool",
+      "uuid": "c2f3b8ba-ffed-4b09-88c4-41a272d5dc51",
+      "workflow_outputs": []
+    }
+  },
+  "tags": [],
+  "uuid": "9be8cf68-1cb4-412f-9ca3-922d156c5bee",
+  "version": 0
+}
