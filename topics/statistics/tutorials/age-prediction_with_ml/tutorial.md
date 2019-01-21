@@ -32,7 +32,7 @@ contributors:
 >
 {: .agenda}
 
-# Analyze RNA-seq data 
+# Analyze RNA-seq dataset 
 
 The data on which we perform our first task of hyperparameter estimation is a RNAseq data of firoblast cell lines belonging to 133 healthy patients
 of age from 1 to 94 years. On this data we perform an exhaustive search (known as grid search) for finding the best features in the dataset and then apply ElasticNet regressor with 5-fold crossvalidation. The R2 regression score is compared to the predictions found in the [original paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9).
@@ -44,7 +44,7 @@ We proceed to the analysis with uploading the data.
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]()
+> 2. Import the files from [Zenodo](https://zenodo.org/record/2545213#.XEWTJ9-YVa0)
 >
 >    ```
 >    https://zenodo.org/record/2545213/files/training_data_normal.tsv?download=1
@@ -62,11 +62,11 @@ We proceed to the analysis with uploading the data.
 >
 {: .hands_on}
 
-## Pre-processing
+## Create a data processing pipeline
 
 We can see that the RNA-seq dataset is high-dimensional. There are over `27,000` columns/features. Generally, not all the columns in the dataset are useful for prediction. We need only those columns/features which increases the predictive ability of the model. To filter these columns, we perform feature selection and retain only those columns which are useful. To do that, we use `SelectKBest` module in the suite of data preprocessors. Again, we are not sure of how many of these columns we will need. To find the right number of columns, we do a hyperparameter search by setting different number of features and find out the best number. To create this preprocessor, we will use **pipeline builder** tool. This tool defines a sequential processing of datasets. After preprocessing step, we should add a regressor algorithm (ElasticNet) which analyzes the preprocessed dataset. This tool gives a `zip` file as output containing the specifications of different steps of the entire analysis. 
 
-> ### {% icon hands_on %} Hands-on: Data pre-processing
+> ### {% icon hands_on %} Hands-on: Create pipeline
 >
 > 1. **Pipeline Builder** {% icon tool %} with the following parameters:
 >    - In *"1: Pre-processing step:"*:
@@ -140,18 +140,16 @@ For these three parameters, we have 24 different combinations (4 x 2 x 3) of val
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > The tool returns two outputs, one of which is a table with numerical results. Inspect it carefully: the last column shows the ranking of settings
-based on performance. The ranking is based on the the 14th column where you can find mean test score and the values for parameters which output this result
-are visible in the 8th column.
+>    > The tool returns two outputs, one of which is a table with numerical results. Please inspect it carefully: the `rank_test_score` column shows the ranking of different combinations based on the values in `mean_test_score` column.
 >    {: .comment}
 >
 {: .hands_on}
 
 > ### {% icon question %} Questions
 >
-> 1. What is the 'best' possible mean_test_score estimated by the tool for these parameters?
-> 2. Which combination of parameter settings gives it?
-> 3. How many combinations of possible parameters the tool estimated?
+> 1. What is the best `mean_test_score` value estimated by the hyperparameter search tool?
+> 2. Which combination of parameters gives the best result?
+> 3. How many possible combinations of parameters the hyperparameter search tool estimated?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -165,13 +163,13 @@ are visible in the 8th column.
 
 ## Parallel coordinates plot
 
-We will visualize the tabular output of hyperparameter search tool from the previous step using **Parallel Coordinates Plot of tabular data**.
+We will visualize the tabular output of hyperparameter search tool from the previous step using **Parallel Coordinates Plot of tabular data**. There are multiple columns in the tabular output but we will focus on only a few of them.
 
 > ### {% icon hands_on %} Hands-on: Parallel coordinates plot
 >
 > 1. **Parallel Coordinates Plot** {% icon tool %} with the following parameters:
 >    - *"Select data file:"*: Tabular output of hyperparameter search tool
->    - *"Select the columns for dimensions:"*: `c[5, 6, 7, 14]`
+>    - *"Select the columns for dimensions:"*: `c5, c6, c7, c14`
 >    - *"Select a column containing the values for coloring:"*: `c14`
 >
 >    > ### {% icon comment %} Comment
@@ -180,7 +178,7 @@ We will visualize the tabular output of hyperparameter search tool from the prev
 to the score along every column with parameters' settings.
 >
 >
->    ![data](images/plotting_output.png "The vizualization of the hyperparameter optimization tool output.")
+>    ![data](images/plotting_output.png "The visualization of the hyperparameter optimisation tool output.")
 >
 >    {: .comment}
 >
@@ -205,49 +203,47 @@ to the score along every column with parameters' settings.
 ## Conclusion
 In the plot shown above, we achieved an R2 score of `0.73` (last column) with 5-fold cross-validation. In the [paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) as well, a similar R2 score is mentioned for linear regressors. It showcases one of the usecases of using the scikit-learn machine learning tools in Galaxy to reproduce the results published in a paper.
 
-# Preparing for the prediction
+# Analyze DNA methylation dataset
+In the second part of the analysis, we will use DNA methylation dataset to predict chronological age. The dataset is divided into two parts - training and test sets. The training set is used to train a regressor and the test set is used to evaluate the performance of trained model.
 
-This second part of the analysis is covering the age prediction task. We start with repeating the same already familiar steps from the first part of the tutorial to estimate hyperparameters. The next stage is the actual training, using the tool for ensemble methods for classification and regression. Then we
-compare the results with available test labels in order to calculate residuals.
+## Get the train and test datasets
 
-## Get the train and test data
-
-We proceed to the analysis with uploading new data. You might want to create a new history first.
+We proceed to the analysis with uploading new datasets. You might want to create a new history first.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]()
+> 2. Import the files from [Zenodo](https://zenodo.org/record/2545213#.XEWTJ9-YVa0)
 >
 >    ```
->    https://zenodo.org/api/files/0d468136-5025-4c0f-bf8b-a8277a513a93/test_rows.csv
->    https://zenodo.org/api/files/0d468136-5025-4c0f-bf8b-a8277a513a93/test_rows_labels.csv
->    https://zenodo.org/api/files/0d468136-5025-4c0f-bf8b-a8277a513a93/train_rows.csv
+>    https://zenodo.org/record/2545213/files/train_rows.csv?download=1
+>    https://zenodo.org/record/2545213/files/test_rows_labels.csv?download=1
+>    https://zenodo.org/record/2545213/files/test_rows.csv?download=1
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
 >
-> 3. Rename the datasets accordingly.
+> 3. Rename the datasets as `train_rows`, `test_rows_labels` and `test_rows` respectively.
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 4. Check that the datatypes.
+> 4. Check that the datatype of all the three datasets is `tabular`.
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > The `train_rows.csv` contains an additional column with ages, which is used for the training. We will estimate our model on
->    > `test_rows.csv` and compare the predicted age with labels in `test_rows_labels.csv`
+>    > The `train_rows` contains a column `age` which is the label or target. We will evaluate our model on
+>    > `test_rows` and compare the predicted age with the true age in `test_rows_labels`
 >
 >    {: .comment}
 {: .hands_on}
 
-## Pre-processing with *Pipeline Builder*
+## Create a data processing pipeline
 
-We move on to pre-processing with re-running **Pipeline Builder** on the new data to setup the [Gradient Boosting Regressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html).
+We will create a pipeline with **Pipeline Builder** tool but just specify the regressor, [Gradient Boosting Regressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html). This is an ensemble based regressor which uses multiple tree based regressors internally and predict by taking ensemble of the predictions. The tool will output a zipped file.
 
-> ### {% icon hands_on %} Hands-on: Data pre-processing
+> ### {% icon hands_on %} Hands-on: Create pipeline
 >
 > 1. **Pipeline Builder** {% icon tool %} with the following parameters:
 >    - In *"Final Estimator:"*:
@@ -256,19 +252,20 @@ We move on to pre-processing with re-running **Pipeline Builder** on the new dat
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > [*Ensemble*](https://en.wikipedia.org/wiki/Ensemble_learning) methods allow to use several learning models for better predictions. 
+>    > [*Ensemble*](https://en.wikipedia.org/wiki/Ensemble_learning) method uses multiple learning models internally for better predictions. 
 >    {: .comment}
 >
 {: .hands_on}
 
-## *Hyperparameter Search*: the training
+## Hyperparameter optimisation
 
-Before we can start testing, we need to train the model on the input data. At the same time the familiar **Hyperparameter Search** tool allows to estimate the optimal number of learners for the ensemble, which is a hyperparameter.
+For this analysis as well, we will use **Hyperparameter Search** tool to estimate the best parameter values for the given dataset. We will estimate the best value of `n_estimators` of `Gradient Boosting` regressor. This parameter specifies the number of boosting stages the learning process has to go through. This step will find the optimal number of estimators using grid search and returns the best trained model. This model is used further to make prediction on test dataset.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Hyperparameter optimisation
 >
 > 1. **Hyperparameter Search** {% icon tool %} with the following parameters:
 >    - *"Select a model selection search scheme:"*: `GridSearchCV - Exhaustive search over specified parameter values for an estimator `
+>        - *"Choose the dataset containing pipeline object"*: `Pipeline builder` zipped file
 >        - In *"Search parameters Builder"*:
 >            - In *"Parameter setting for search:"*:
 >                - {% icon param-repeat %} *"Insert Parameter setting for search:"*
@@ -282,9 +279,11 @@ Before we can start testing, we need to train the model on the input data. At th
 >                - *"Random seed number"*: `3111696`
 >            - *"Raise fit error:"*: `Yes`
 >    - *"Select input type:"*: `tabular data`
+>        - *"Training samples dataset:"*: `train_rows` tabular file
 >        - *"Does the dataset contain header:"*: `Yes`
 >        - *"Choose how to select data by column:"*: `All columns BUT by column header name(s)`
 >            - *"Type header name(s):"*: `Age`
+>        - *"Dataset containing class labels or target values"*: `train_rows` tabular file
 >        - *"Does the dataset contain header:"*: `Yes`
 >        - *"Choose how to select data by column:"*: `Select columns by column header name(s)`
 >            - *"Type header name(s):"*: `Age`
@@ -293,46 +292,24 @@ Before we can start testing, we need to train the model on the input data. At th
 
 > ### {% icon question %} Questions
 >
-> 1. What is the predicted optimal number of estimators?
+> 1. What is the optimal number of estimators for the given dataset?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. 75
 > >
 > {: .solution}
->
-{: .question}
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Parallel Coordinates Plot** {% icon tool %} with the following parameters:
->    - *"Select the columns for dimentions:"*: `c[5, 12]`
->    - *"Select a column containg the values for coloring:"*: `c12`
->
-{: .hands_on}
+# Predict age
 
-> ### {% icon question %} Questions
->
-> 1. What hyperparameter value returned the lowest mean_test_score (according to the plot)?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. n = 25
-> >
-> {: .solution}
->
-{: .question}
+In the previous step, we found the best model based on the training data. Now, we will make predictions using this model and test dataset.
 
-# Ensemble prediction
-
-Now when we prepared the trained model, the actual prediction can be launched.
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Prediction
 >
 > 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters:
 >    - *"Select a Classification Task:"*: `Load a model and predict`
->        - *"Models"*: to the `output from Hyperparameter Search`
->        - *"Data (tabular)"*: `test_rows.csv`
+>        - *"Models"*: `Output from Hyperparameter Search` zipeped model file
+>        - *"Data (tabular)"*: `test_rows`
 >        - *"Does the dataset contain header:"*: `Yes`
 >        - *"Select the type of prediction:"*: `Predict class labels`
 >
@@ -343,8 +320,8 @@ Let's plot the predictions and compare with the test labels.
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Plot actual vs predicted curves and residual plots of tabular data** {% icon tool %} with the following parameters:
->    - *"Select input data file :"*: `test_rows_labels.csv`
->    - *"Select predicted data file :"*: to the `output from the previous tool`
+>    - *"Select input data file :"*: `test_rows_labels`
+>    - *"Select predicted data file :"*: `Output from the previous tool` tabular file
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -364,6 +341,19 @@ Let's plot the predictions and compare with the test labels.
 > {: .solution}
 >
 {: .question}
+
+# Plots
+We will look into the predicted results through the 3 different visualisation plots. 
+
+> ![Scatter plot](images/scatter_plot.png "Scatter plot for true and predicted age")
+> We can see in the scatter plot (figure 2) that most of the points lie along the x=y curve. It means that the true and predicted ages are close 
+> to each other. The root mean squared error (`RMSE`) is `3.76` and R2 score is `0.94`. 
+>
+> ![Residuals](images/residual_plot.png "Residuals")
+> The residual plot (figure 3) is generated to see if there is any visible pattern between residual (predicted age - true age) and predicted age. For a good > model, there should not be any visible pattern with the plotted points.
+> 
+> ![True vs predicted age](images/true_vs_predicted_plot.png "True vs predicted age")
+> The plot in figure 4 shows the true and predicted ages. It can be seen that the points are close.
 
 
 # Conclusion
