@@ -175,12 +175,9 @@ We will visualize the tabular output of hyperparameter search tool from the prev
 >    > ### {% icon comment %} Comment
 >    >
 >    > The output plot has the following legend: the colour-coding is based on the `mean_test_score` column. You can follow the line leading
-to the score along every column with parameters' settings.
->
->
->    ![data](images/plotting_output.png "The visualization of the hyperparameter optimisation tool output.")
->
+>    > to the score along every column with parameters' settings.
 >    {: .comment}
+>    ![data](images/plotting_output.png "The visualization of the hyperparameter optimisation tool output.")
 >
 {: .hands_on}
 
@@ -331,7 +328,7 @@ Let's plot the predictions and compare with the test labels.
 >    > close to each other. The root mean squared error (`RMSE`) is `3.76` and R2 score is `0.94`.
 >    > ![Residuals](images/residual_plot.png "Residuals")
 >    > The residual plot (figure 3) is generated to see if there is any visible pattern between residual (predicted age - true age)
->    > and predicted  age. For a good > model, there should not be any visible pattern with the plotted points.
+>    > and predicted  age. For a good model, there should not be any visible pattern with the plotted points.
 >    >
 >    > ![True vs predicted age](images/true_vs_predicted_plot.png "True vs predicted age")
 >    > The plot in figure 4 shows the true and predicted ages. It can be seen that the points are close.
@@ -353,5 +350,3 @@ Let's plot the predictions and compare with the test labels.
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
