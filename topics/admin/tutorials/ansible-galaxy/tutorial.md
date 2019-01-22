@@ -180,6 +180,31 @@ To proceed from here it is expected that:
 - You have [Ansible installed](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) on your local machine
 - You have a [hosts file](../ansible/tutorial.html#hosts-file) with the VM or host specified where you will deploy galaxy. We will refer to this group of hosts as "galaxyservers" but you can refer to it with another name if you prefer.
 
+## Requirements
+
+We have codified all of the dependencies you will need into a yaml file that `ansible-galaxy` can install
+
+
+> ### {% icon hands_on %} Hands-on: Minimal Galaxy Playbook
+>
+> 1. Create a new file in your working directory called `requirements.yaml` and include the following contents:
+>
+>    ```yaml
+>    - src: galaxyproject.galaxy
+>    - src: galaxyproject.postgresql
+>    - src: galaxyproject.proftpd
+>    - src: https://github.com/usegalaxy-eu/ansible-repos
+>      name: galaxyproject.repos
+>    - src: geerlingguy.nginx
+>    - src: natefoo.postgresql_objects
+>    - src: https://github.com/usegalaxy-eu/ansible-role-supervisor
+>      name: geerlingguy.supervisor
+>    ```
+>
+> 2. In the same directory, run `ansible-galaxy install -p roles -r requirements.yaml`. This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
+>
+{: .hands_on}
+
 ## Minimal Galaxy Playbook
 
 We will dive right in to deploying a copy of Galaxy onto our server, but it will just be a static copy of the code without anything running.
@@ -188,10 +213,10 @@ We will dive right in to deploying a copy of Galaxy onto our server, but it will
 >
 > 1. Open `playbook.yml` with your text editor and set the following:
 >
->    - Add pre-tasks to create the `/opt/galaxy` directory and install the necessary dependencies (identical to a normal package installation task, but in a `pre_tasks` section.)
+>    - Add pre-tasks to create the `/srv/galaxy` directory and install the necessary dependencies (identical to a normal package installation task, but in a `pre_tasks` section.)
 >        - For Debian you need: git, python-virtualenv, python-psycopg2
 >        - For RHEL you need: mercurial, python-virtualenv, python-psycopg2
->    - Add a role with `galaxyproject.galaxy`
+>    - Add the role `galaxyproject.galaxy` to the roles to be executed
 >
 >    > ### {% icon question %} Question
 >    >
@@ -203,7 +228,7 @@ We will dive right in to deploying a copy of Galaxy onto our server, but it will
 >    > > - hosts: galaxyservers
 >    > >   pre_tasks:
 >    > >     - file:
->    > >         path: /opt/galaxy # Whatever directory you chose for galaxy_root
+>    > >         path: /srv/galaxy # Whatever directory you chose for galaxy_root
 >    > >         owner: ubuntu     # Or centos, whatever the login is
 >    > >         group: ubuntu
 >    > >     - name: Install Dependencies
@@ -220,13 +245,9 @@ We will dive right in to deploying a copy of Galaxy onto our server, but it will
 >
 > 2. Create and edit a group variables file for your group (`group_vars/galaxyservers.yml`).
 >
->    Set `galaxy_server_dir` to something like `/opt/galaxy`, but you can put it somewhere else if you would prefer.
+>    Set `galaxy_server_dir` to something like `/srv/galaxy`, but you can put it somewhere else if you would prefer.
 >
-> 3. Install the `galaxyproject.galaxy` role
->
->    Run the command `$ ansible-galaxy install -p roles galaxyproject.galaxy`, especially during a tutorial it is nice to be able to dig into the internals of the role.
->
-> 4. Run the playbook.
+> 3. Run the playbook.
 >
 >    `ansible-playbook -i hosts playbook.yml`
 >
@@ -234,9 +255,9 @@ We will dive right in to deploying a copy of Galaxy onto our server, but it will
 >
 {: .hands_on}
 
-## Postgres
+This has Galaxy setup in the correct location, the configuration files written, and the client prepared. For now, it does nothing, no Galaxy processes are running.
 
-Let's now deploy our Postgres instance before we try to start Galaxy.
+## Postgres
 
 > ### {% icon hands_on %} Hands-on: Installing Postgres
 >
@@ -251,7 +272,7 @@ Let's now deploy our Postgres instance before we try to start Galaxy.
 >        owner: ubuntu
 >    ```
 >
-> 2. Open `playbook.yml` with your text editor and add the following:
+> 2. Open `playbook.yml` with your text editor and add the following *before* the Galaxy role:
 >
 >    - A role for `galaxyproject.postgresql`, run as root (`become: true`). This will handle the installation of Postgres.
 >    - A role for `natefoo.postgresql_objects`, run as the postgres user. (You will need become/become_user.) This role allows for managing databases and users within postgres.
@@ -266,7 +287,7 @@ Let's now deploy our Postgres instance before we try to start Galaxy.
 >    > > - hosts: galaxyservers
 >    > >   pre_tasks:
 >    > >     - file:
->    > >         path: /opt/galaxy # Whatever directory you chose for galaxy_root
+>    > >         path: /srv/galaxy # Whatever directory you chose for galaxy_root
 >    > >         owner: ubuntu     # Or centos, whatever the login is
 >    > >         group: ubuntu
 >    > >     - name: Install Dependencies
@@ -286,14 +307,7 @@ Let's now deploy our Postgres instance before we try to start Galaxy.
 >    >
 >    {: .question}
 >
-> 3. You will need to install both of the roles we've just added:
->
->    ```
->    ansible-galaxy install -p roles galaxyproject.postgresql
->    ansible-galaxy install -p roles natefoo.postgresql_objects
->    ```
->
-> 4. Run the playbook.
+> 3. Run the playbook.
 >
 {: .hands_on}
 
@@ -313,6 +327,16 @@ For a normal Galaxy instance there are a few configuration changes you make very
 - Changing the database connection
 - Configuring the admin user list
 - Changing the "brand"
+
+Additionally we'll go ahead and set up the production-ready [uWSGI Mules](https://uwsgi-docs.readthedocs.io/en/latest/Mules.html) which will handle processing Galaxy jobs. With Mules, uWSGI launches as many as you request, and then they take turns placing a lock, accepting a job, releasing that lock, and then going on to process that job.
+
+> ### {% icon tip %} Tip: Mules are not the only option
+>
+> Galaxy can be run in a [couple of other configurations](https://docs.galaxyproject.org/en/master/admin/scaling.html#deployment-options) depending on your needs. Mules are generally a good solution for most production needs.
+>
+{: .tip}
+
+The configuration is quite simple thanks to how many sensible defaults are already provided in the Ansible roles.
 
 > ### {% icon hands_on %} Hands-on: Configuring Galaxy
 >
@@ -352,7 +376,7 @@ For a normal Galaxy instance there are a few configuration changes you make very
 >    > >     owner: ubuntu
 >    > >
 >    > > # Galaxy
->    > > galaxy_root: /opt/galaxy
+>    > > galaxy_root: /srv/galaxy
 >    > > galaxy_server_dir: "{{ galaxy_root }}/server"
 >    > > galaxy_config_dir: "{{ galaxy_root }}/config"
 >    > > galaxy_mutable_config_dir: "{{ galaxy_root }}/mutable-config"
@@ -430,120 +454,24 @@ For a normal Galaxy instance there are a few configuration changes you make very
 
 Galaxy is now configured to use the mules so we're ready to set up supervisord which will handle launching the processes!
 
+### Supervisord
 
+Su
 
 > ### {% icon hands_on %} Hands-on: Supervisord
 >
-> 1. Open your group variables file (`group_vars/galaxyservers.yml`) and add the following variables and settings:
->
->    {% raw %}
->    - Set a `galaxy_root` where everything Galaxy related will go.
->    - Set galaxy_server_dir to `{{ galaxy_root }}/server`
->    - Set galaxy_config_dir to `{{ galaxy_root }}/config`
->    - Set galaxy_mutable_config_dir to `{{ galaxy_root }}/mutable-config`
->    - Set galaxy_mutable_data_dir to `{{ galaxy_root }}/mutable-data`
->    {% endraw %}
->
-> 2. Add a variable for `galaxy_config_hash`, it will be a hash with one key,
->    `"app:main"` which will also be a hash. Inside here you can place all of
->    your Galaxy configuration.
->
->    Now you should set:
->    1. `admin_users` to the email address you will use with this Galaxy
->    2. `brand` to something recognisable
->    3. `database_connection` to point to the database you setup earlier.
->
->    > ### {% icon question %} Question
->    >
->    > How does your current group variables file look?
->    >
->    > > ### {% icon solution %} Solution
->    > > {% raw %}
->    > > ```yaml
->    > > ---
->    > > # Postgres
->    > > postgresql_objects_users:
->    > >   - name: ubuntu
->    > >     password: null
->    > > postgresql_objects_databases:
->    > >   - name: galaxy
->    > >     owner: ubuntu
->    > >
->    > > # Galaxy
->    > > galaxy_root: /opt/galaxy
->    > > galaxy_server_dir: "{{ galaxy_root }}/server"
->    > > galaxy_config_dir: "{{ galaxy_root }}/config"
->    > > galaxy_mutable_config_dir: "{{ galaxy_root }}/mutable-config"
->    > > galaxy_mutable_data_dir: "{{ galaxy_root }}/mutable-data"
->    > > galaxy_config:
->    > >   galaxy:
->    > >     brand: "My Galaxy"
->    > >     admin_users: admin@example.com
->    > >     database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
->    > > ```
->    > > {% endraw %}
->    > {: .solution }
->    >
->    {: .question}
->
-> 3. In order to use mule messaging, we need to edit the uWSGI configuration of the `galaxy.yml`, this has a default value, but we will have to override it. Add the following configuration to `galaxy_config`:
->
->    {% raw %}
->    ```yaml
->    uwsgi:
->      # Default values
->      http: 127.0.0.1:8080
->      buffer-size: 16384
->      processes: 1
->      threads: 4
->      offload-threads: 2
->      static-map:
->        - /static/style={{ galaxy_server_dir }}/static/style/blue
->        - /static={{ galaxy_server_dir }}/static
->      master: true
->      virtualenv: "{{ galaxy_venv_dir }}"
->      pythonpath: "{{ galaxy_server_dir }}/lib"
->      module: galaxy.webapps.galaxy.buildapp:uwsgi_app()
->      thunder-lock: true
->      die-on-term: true
->      hook-master-start:
->        - unix_signal:2 gracefully_kill_them_all
->        - unix_signal:15 gracefully_kill_them_all
->      py-call-osafterfork: true
->      enable-threads: true
->      # Our additions
->      mules:
->        - mule: lib/galaxy/main.py
->        - mule: lib/galaxy/main.py
->      farm: job-handlers:1,2
->    ```
->    {% endraw %}
->
->    > ### {% icon question %} Question
->    >
->    > How does your current group variables file look?
->    >
->    > > ### {% icon solution %} Solution
->    > > {% raw %}
->    > > ```yaml
->    > > ...
->    > > galaxy_config:
->    > >   uwsgi:
->    > >     ...
->    > >     mules:
->    > >     farm: job-handlers:1,2
->    > >   galaxy:
->    > >     brand: "My Galaxy"
->    > >     admin_users: admin@example.com
->    > >     database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
->    > > ```
->    > > {% endraw %}
->    > {: .solution }
->    >
->    {: .question}
->
-> 3. Run the playbook.
+> 1.
 >
 {: .hands_on}
 
+
+## ProFTPD
+
+With a large Galaxy instance, users will often request FTP access in order to upload large data sets. The ProFTPD server works well for Galaxy, it can leverage an SQL authentication module, to allow users to login to the FTP server with their normal Galaxy username and password.
+
+> ### {% icon hands_on %} Hands-on: ProFTPD
+>
+> 1.
+>
+{: .hands_on}
 
