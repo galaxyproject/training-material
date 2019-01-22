@@ -28,7 +28,7 @@ One way to do so is to perform functional enrichment analysis. This method consi
 **What is the Gene Ontology?** <br/>
 The [Gene Ontology](http://www.geneontology.org/) (GO) is a structured, controlled vocabulary for the classification of gene function at the molecular and cellular level. It is divided in three separate sub-ontologies or GO types: biological process (e.g., signal transduction), molecular function (e.g., ATPase activity) and cellular component (e.g., ribosome). These sub-ontologies are structured as directed acyclic graphs (a hierarchy with multi-parenting) of GO terms.
 
-![](../../images/goenrichment_GOexample.png)
+![GO Example](../../images/goenrichment_GOexample.png)
 >
 **Figure 1** QuickGO - http://www.ebi.ac.uk/QuickGO
 
@@ -69,7 +69,7 @@ For each GO term, we need to count the frequency (**k**) of genes in the study s
 
 The appropriate statistical test is the one-tailed variant of Fisher’s exact test, also known as the hypergeometric test for over-representation. When the one-tailed version is applied, this test will compute the probability of observing at least the sample frequency, given the population frequency.  The [hypergeometric distribution](https://en.wikipedia.org/wiki/Hypergeometric_distribution) measures precisely the probability of **k** successes in **n** draws, without replacement, from a finite population of size **N** that contains exactly **K** successful objects:
 >
-![](../../images/goenrichment_formula.png)
+![Go Enrichment Formula](../../images/goenrichment_formula.png)
 
 For this first exercise we will use data from [Trapnell et al. 2014](https://www.ncbi.nlm.nih.gov/pubmed/22383036 "Trapnell et al. data"). In this work, the authors created an artificial dataset of gene expression in *Drosophila melanogaster*, where 300 random genes were set (insilico) to be differentially expressed between two conditions.
 
@@ -85,7 +85,7 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 >    > ### {% icon tip %} Tip: Upload data to Galaxy [<span style="color:red">[1]</span>](https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html)
 >    > * **Click** on the upload button in the upper left of the interface.
 >    >
->    > ![](../../images/goenrichment_galaxy_upload.png)
+>    > ![Galaxy Upload](../../images/goenrichment_galaxy_upload.png)
 >    >
 >    > * Press **Choose local file** and search for your file.
 >    > * Press **Start** and wait for the upload to finish.
@@ -94,7 +94,7 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 > 3. **Rename** the *go.obo* file to `GO` and *drosophila_gene_association.fb* file to `GO annotations Drosophila melanogaster`.
 >
 >    > After you upload the files, and if you press the {% icon galaxy-eye %} (eye) icon of `trapnellPopulation.tab` it should look something like this:
->    > ![](../../images/goenrichment_trapnellFile.png)
+>    > ![Trapnell File](../../images/goenrichment_trapnellFile.png)
 > **Figure 2** Trapnell file
 >
 >
@@ -105,7 +105,7 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 > 4. **Filter data on any column using simple expressions** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `trapnellPopulation.tab`
 >    - {% icon param-text %} *"With following condition"*: `c7 < 0.05`
-> ![](../../images/goenrichment_galaxyFilter.png)
+> ![Galaxy Filter](../../images/goenrichment_galaxyFilter.png)
 >
 > 5. This generates one file. **Rename** it to `trapnellStudy`.
 >
@@ -119,7 +119,7 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 >    - {% icon param-file %} *"Study set File"*: `trapnellStudy`
 >    - {% icon param-file %} *"Population set File"*: `trapnellPopulation.tab`
 >    - Use the default options for the rest.
-> ![](../../images/goenrichment_galaxyTrapnell.png)
+> ![GO Enrichment Trapnell](../../images/goenrichment_galaxyTrapnell.png)
 >
 >
 >    > ### {% icon question %} Questions
@@ -148,7 +148,7 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 >
 > If you press the {% icon galaxy-eye %} (eye) icon of the *Molecular Function* file (`MF Trapnell`) you should see something like this:
 >
-> ![](../../images/goenrichment_mfTrapnell.png)
+> ![GO Enrichment Trapnell MF](../../images/goenrichment_mfTrapnell.png)
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -173,7 +173,7 @@ Let's remove the irrelevant genes from the background population (`trapnellPopul
 > 1. **Filter data on any column using simple expressions** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `trapnellPopulation.tab`
 >    - {% icon param-text %} *"With following condition"*: `c7 != 'NA'`
-> ![](../../images/goenrichment_galaxyFilterNA.png)
+> ![Galaxy Filter NA](../../images/goenrichment_galaxyFilterNA.png)
 >
 > 2. This generates one file. **Rename** to `trapnellFilteredPopulation`.
 > 3. **GOEnrichment** {% icon tool %} with the following parameters:
@@ -182,12 +182,12 @@ Let's remove the irrelevant genes from the background population (`trapnellPopul
 >    - {% icon param-file %} *"Study set File"*: `trapnellStudy`
 >    - {% icon param-file %} *"Population set File"*: `trapnellFilteredPopulation`
 >    - Use the default options for the rest.
-> ![](../../images/goenrichment_galaxyTrapnellNewPop.png)
+> ![GO Enrichment Trapnell new Population](../../images/goenrichment_galaxyTrapnellNewPop.png)
 >
 > 4. **Rename** all 6 output files by appending `FilteredPop` to the name, to distinguish them from the previous outputs.
 > Let's check the new graph **goenrichment on trapnellStudy MF Graph FilteredPop**.
 >
-> ![](../../images/goenrichment_mfTrapnellNew.png)
+> ![GO Enrichment Trapnell new Population MF](../../images/goenrichment_mfTrapnellNew.png)
 >
 >
 >    > ### {% icon question %} Question
@@ -221,13 +221,13 @@ Graphical views are essential, but sometimes the graph view can become overwhelm
 >    - {% icon param-file %} *"Study set File"*: `Mouse diff`
 >    - {% icon param-file %} *"Population set File"*: `Mouse population`
 >    - Select **'No'** in the Summarize Output option.
-> ![](../../images/goenrichment_galaxyMouseDiff.png)
+> ![GO Enrichment Mouse Diff](../../images/goenrichment_galaxyMouseDiff.png)
 >
 > 4. This will generate 6 files with the names: `goenrichment on Mouse diff MF Table`, `goenrichment on Mouse diff BP Table`, `goenrichment on Mouse diff CC Table`, `goenrichment on Mouse diff MF Graph`, `goenrichment on Mouse diff BP Graph` and `goenrichment on Mouse diff CC Graph`.
 > 5. Analyze the table and graph from *Biological Process*.
 >
 >
-> ![](../../images/goenrichment_bpMouseDiff.png)
+> ![GO Enrichment Mouse Diff BP](../../images/goenrichment_bpMouseDiff.png)
 >
 >    > ### {% icon comment %} Comments
 >    > As you can see the three graphs are very complex and difficult to analyze.
@@ -246,11 +246,11 @@ The Summarize Output option in the GOEnrichment tool addresses this problem by c
 >    - {% icon param-file %} *"Study set File"*: `Mouse diff`
 >    - {% icon param-file %} *"Population set File"*: `Mouse population`
 >    - Use the default options for the rest (notice that by default the Summarize Option is on).
-> ![](../../images/goenrichment_galaxyMouseDiffSum.png)
+> ![GO Enrichment Mouse Diff Summarize](../../images/goenrichment_galaxyMouseDiffSum.png)
 > 2. Analyze again the table and graph from *Biological Process*.
 >
 >
-> ![](../../images/goenrichment_bpMouseDiffSum.png)
+> ![GO Enrichment Mouse Diff Summarize BP](../../images/goenrichment_bpMouseDiffSum.png)
 >
 >    > ### {% icon question %} Questions
 >    > 1. Are there differences in complexity comparing the graph with and without the summarize output option?
@@ -275,7 +275,7 @@ To test the GO slim approach, let us use the mouse dataset again. First, however
 >    - {% icon param-file %} *"GOSlim File"*: `GO Slim`
 >    - {% icon param-file %} *"Gene Product Annotation File"*: `GO annotations Mus musculus`
 >
-> ![](../../images/goenrichment_galaxySlimer.png)
+> ![Galaxy GO Slimmer](../../images/goenrichment_galaxySlimer.png)
 >
 > This will generate one file called `Slim Annotations`.
 {: .hands_on}
@@ -289,16 +289,16 @@ Now we will go use the GOEnrichment tool with the new Slim Annotations file and 
 > 1. **GOEnrichment** {% icon tool %} with the following parameters:
 >    - Use the `GO Slim`, `Slim Annotations`, `Mouse diff` and `Mouse population` files.
 >    - Use the default options.
-> ![](../../images/goenrichment_galaxyMouseSlim.png)
+> ![GO Enrichment Mouse Slim](../../images/goenrichment_galaxyMouseSlim.png)
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. What differences do you observe when comparing the results obtained with the GO Slim to those obtained with the full GO, with the Summarize Output option?
 >    >
 >    > *Component Cellular* with full GO
->    > ![](../../images/goenrichment_ccSum.png)
+>    > ![GO Enrichment Mouse Summarize CC](../../images/goenrichment_ccSum.png)
 >    > *Component Cellular* with GO Slim
->    > ![](../../images/goenrichment_ccSlimSum.png)
+>    > ![GO Enrichment Mouse Slim CC](../../images/goenrichment_ccSlimSum.png)
 >    > <details>
 >    >
 >    > <summary>Click to view answers</summary>
@@ -331,8 +331,8 @@ For the second exercice, we will continue to work with the same study set as bef
 > 2. **GOEnrichment** {% icon tool %} with the following parameters for the both study files (*mouseOverexpressed.txt* and the *mouseUnderexpressed.txt*).
 >    - Use the `GO`, the `GO annotations Mus musculus` and the `Mouse population` files.
 >    - Use the default options.
-> ![](../../images/goenrichment_galaxyMouseOver.png)
-> ![](../../images/goenrichment_galaxyMouseUnder.png)
+> ![GO Enrichment Mouse Overexpress](../../images/goenrichment_galaxyMouseOver.png)
+> ![GO Enrichment Mouse Underexpress](../../images/goenrichment_galaxyMouseUnder.png)
 >
 > 3. This will generate 12 files, 6 for each sample file, like in previous cases.
 >
