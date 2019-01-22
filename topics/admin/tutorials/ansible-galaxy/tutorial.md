@@ -205,59 +205,9 @@ We have codified all of the dependencies you will need into a yaml file that `an
 >
 {: .hands_on}
 
-## Minimal Galaxy Playbook
-
-We will dive right in to deploying a copy of Galaxy onto our server, but it will just be a static copy of the code without anything running.
-
-> ### {% icon hands_on %} Hands-on: Minimal Galaxy Playbook
->
-> 1. Open `playbook.yml` with your text editor and set the following:
->
->    - Add pre-tasks to create the `/srv/galaxy` directory and install the necessary dependencies (identical to a normal package installation task, but in a `pre_tasks` section.)
->        - For Debian you need: git, python-virtualenv, python-psycopg2
->        - For RHEL you need: mercurial, python-virtualenv, python-psycopg2
->    - Add the role `galaxyproject.galaxy` to the roles to be executed
->
->    > ### {% icon question %} Question
->    >
->    > How does your final configuration look?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > ```yaml
->    > > - hosts: galaxyservers
->    > >   pre_tasks:
->    > >     - file:
->    > >         path: /srv/galaxy # Whatever directory you chose for galaxy_root
->    > >         owner: ubuntu     # Or centos, whatever the login is
->    > >         group: ubuntu
->    > >     - name: Install Dependencies
->    > >       package:
->    > >         name: ['git', 'python-virtualenv', 'python-psycopg2']
->    > >       become: yes
->    > >   roles:
->    > >     - galaxyproject.galaxy
->    > > ```
->    > >
->    > {: .solution }
->    >
->    {: .question}
->
-> 2. Create and edit a group variables file for your group (`group_vars/galaxyservers.yml`).
->
->    Set `galaxy_server_dir` to something like `/srv/galaxy`, but you can put it somewhere else if you would prefer.
->
-> 3. Run the playbook.
->
->    `ansible-playbook -i hosts playbook.yml`
->
-> 4. SSH into your server and explore what has been set up for you.
->
-{: .hands_on}
-
-This has Galaxy setup in the correct location, the configuration files written, and the client prepared. For now, it does nothing, no Galaxy processes are running.
-
 ## Postgres
+
+
 
 > ### {% icon hands_on %} Hands-on: Installing Postgres
 >
@@ -312,6 +262,59 @@ This has Galaxy setup in the correct location, the configuration files written, 
 {: .hands_on}
 
 You can now login and access the database with `psql galaxy`, using commands like `\ds` to list all of the tables.
+
+
+## Minimal Galaxy Playbook
+
+We will dive right in to deploying a copy of Galaxy onto our server, but it will just be a static copy of the code without anything running.
+
+> ### {% icon hands_on %} Hands-on: Minimal Galaxy Playbook
+>
+> 1. Open `playbook.yml` with your text editor and set the following:
+>
+>    - Add pre-tasks to create the `/srv/galaxy` directory and install the necessary dependencies (identical to a normal package installation task, but in a `pre_tasks` section.)
+>        - For Debian you need: git, python-virtualenv, python-psycopg2
+>        - For RHEL you need: mercurial, python-virtualenv, python-psycopg2
+>    - Add the role `galaxyproject.galaxy` to the roles to be executed
+>
+>    > ### {% icon question %} Question
+>    >
+>    > How does your final configuration look?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > ```yaml
+>    > > - hosts: galaxyservers
+>    > >   pre_tasks:
+>    > >     - file:
+>    > >         path: /srv/galaxy # Whatever directory you chose for galaxy_root
+>    > >         owner: ubuntu     # Or centos, whatever the login is
+>    > >         group: ubuntu
+>    > >     - name: Install Dependencies
+>    > >       package:
+>    > >         name: ['git', 'python-virtualenv', 'python-psycopg2']
+>    > >       become: yes
+>    > >   roles:
+>    > >     - galaxyproject.galaxy
+>    > > ```
+>    > >
+>    > {: .solution }
+>    >
+>    {: .question}
+>
+> 2. Create and edit a group variables file for your group (`group_vars/galaxyservers.yml`).
+>
+>    Set `galaxy_server_dir` to something like `/srv/galaxy`, but you can put it somewhere else if you would prefer.
+>
+> 3. Run the playbook.
+>
+>    `ansible-playbook -i hosts playbook.yml`
+>
+> 4. SSH into your server and explore what has been set up for you.
+>
+{: .hands_on}
+
+This has Galaxy setup in the correct location, the configuration files written, and the client prepared. For now, it does nothing, no Galaxy processes are running.
 
 ## Galaxy
 
