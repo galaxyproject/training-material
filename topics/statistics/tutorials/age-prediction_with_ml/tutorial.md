@@ -9,7 +9,7 @@ objectives:
 - Learn aging biomarkers from RNA-seq and DNA methylation datasets
 - Apply regression based machine learning algorithms
 - Learn feature selection and hyperparameter optimisation
-time_estimation: 1H
+time_estimation: 2H
 contributors:
 - polkhe
 - anuprulez
@@ -20,15 +20,15 @@ contributors:
 # Introduction
 {:.no_toc}
 
-[Machine Learning](https://en.wikipedia.org/wiki/Machine_learning) is used to create predictive models by learning features from datasets. In this tutorial, we will apply a couple of (scikit-learn) machine learning tools to [RNA-seq](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) and [DNA methylation](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) datasets to predict the chronological age of humans. Using these machine learning tools in Galaxy, we can achieve comparable prediction scores as achieved by these analyses. The RNA-seq gene expression ([FPKM](https://www.ebi.ac.uk/training/online/glossary/fpkm)) dataset is generated using fibroblast cell lines from 133 healthy humans and their ages range from 1 to 94 years. The biomarkers of age are identified by a machine learning algorithm to create an age prediction model. Within each individual, [DNA methylation](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3174260/) changes with age. This knowledge is used to create an age prediction model by selecting useful biomarkers from DNA methylation dataset. The CpGs sites with the highest correlation to age are selected as biomarkers/features. These are used by a machine learning algorithm to create an age prediction model. In this tutorial, the machine learning task is [regression](https://en.wikipedia.org/wiki/Regression_analysis) because the targets/labels are real numbers.
+[Machine Learning](https://en.wikipedia.org/wiki/Machine_learning) is used to create predictive models by learning features from datasets. In the studies [Jason G. Fleischer el al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) and [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub), biomarkers were examined to predict choronological age of humans by analysing the RNA-seq gene expression levels and DNA methylation pattern respectively. Different machine learning algorithms were used in these studies to select specific biomarkers to make age prediction. The RNA-seq gene expression ([FPKM](https://www.ebi.ac.uk/training/online/glossary/fpkm)) dataset was generated using fibroblast cell lines from 133 healthy humans and their ages range from 1 to 94 years. Within each individual, [DNA methylation](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3174260/) changes with age. This knowledge was used to select useful biomarkers from DNA methylation dataset. The CpGs sites with the highest correlation to age were selected as biomarkers/features. In both these studies, specific biomarkers were analysed by machine learning algorithms to create an age prediction model. [Regression](https://en.wikipedia.org/wiki/Regression_analysis) is used as the machine learning task in both the studies because the targets/labels/ages are real numbers.
 
-The training is done over 5-fold cross-validation and the scoring metric is R2 (r-squared). The closer it is to 1.0, better it is. If negative, then the trained model is not good. We can compare the figures 1 and 2. In both the plots, true and predicted targets are plotted in a scatter plot. For a good model, most of the points should lie along the `x = y` line as the true and predicted targets are close to each other. In figure 1, we can see that the points are scattered and do not show any pattern. The R2 score `-0.06`. But, the figure 2 shows a much better pattern as most of the points lie along the line and the R2 score is almost to `1.0`.
+Using machine learning tools in Galaxy, we can achieve comparable prediction scores as achieved by these analyses. In this tutorial, we will apply a couple of ([scikit-learn](https://scikit-learn.org/stable/)) machine learning tools to [RNA-seq](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) and [DNA methylation](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) datasets to predict the chronological age of humans. These datasets have been taken directly from these studies. The training is done over 5-fold cross-validation and [R2](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html) (r-squared) scoring metric is used to evaluate the performance of trained model. The closer it is to 1.0, the better it is. If it is negative, then the trained model is not good. To infer how its values exhibit model performance, we can compare the figures 1 and 2. In both the plots, the true and predicted targets are plotted in a scatter plot. For a good model, most of the points should lie along the `x = y` line as the true and predicted targets are close to each other. In figure 1, we can see that the points are scattered and do not show any pattern. Therefore, the R2 score `-0.06`. But, figure 2 shows a better pattern as most of the points lie along the line and the R2 score is almost `1.0`.
 
 >    ![model_bad](images/model_bad.png "This shows an example of bad model as most of the points are scattered.")
 
 >    ![model_good](images/model_good.png "This shows an example of good model as most of the points lie along the x = y line.")
 
-This tutorial is divided into two parts - one with RNA-seq dataset and another with DNA methylation dataset. We will use R2 metric to evaluate the performance of trained model - once with the cross-validation using only the training set (for RNA-seq dataset) and with the test set (with DNA methylation dataset).
+This tutorial is divided into two parts - one with RNA-seq dataset and another with DNA methylation dataset. We will use R2 metric to evaluate the performance of the trained model. For RNA-seq dataset, we will compute cross-validated R2 score using the training set and for DNA methylation dataset, we will compute R2 score for the test set.
 
 > ### Agenda
 >
@@ -41,7 +41,7 @@ This tutorial is divided into two parts - one with RNA-seq dataset and another w
 
 # Analyze RNA-seq dataset 
 
-The data on which we perform our first task of hyperparameter estimation is an RNA-seq dataset of fibroblast cell lines belonging to 133 healthy patients of age from 1 to 94 years. On this data, we perform an exhaustive search (known as grid search) for finding the best features in the dataset and then apply ElasticNet regressor with 5-fold cross-validation. The R2 regression score is compared to the predictions found in the [original paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9).
+The data on which we perform our first task of hyperparameter estimation is an RNA-seq dataset of fibroblast cell lines belonging to 133 healthy patients of age from 1 to 94 years. On this data, we perform an exhaustive search (known as grid search) for finding the best features in the dataset and then apply [ElasticNet regressor](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet)  with 5-fold cross-validation. The R2 regression score is compared to the predictions found in the [original paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9).
 
 ## Get the raw data
 
@@ -204,7 +204,7 @@ We will visualize the tabular output of hyperparameter search tool from the prev
 {: .question}
 
 ## Conclusion
-In the plot shown above, we achieved an R2 score of `0.73` (last column) with 5-fold cross-validation. In the [paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) as well, a similar R2 score is mentioned for linear regressors. It showcases one of the use-cases of using the scikit-learn machine learning tools in Galaxy to reproduce the results published in a paper.
+In the plot shown above (figure 3), we achieved an R2 score of `0.73` (last column) with 5-fold cross-validation on training set. In the [paper](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) as well, a similar R2 score is mentioned for linear regressors. It showcases one of the use-cases of using the scikit-learn machine learning tools in Galaxy to reproduce the results published in a paper.
 
 # Analyze DNA methylation dataset
 In the second part of the analysis, we will use DNA methylation dataset to predict chronological age. The dataset is divided into two parts - training and test sets. The training set is used to train a regressor and the test set is used to evaluate the performance of the trained model.
@@ -329,14 +329,14 @@ Let's plot the predictions and compare with the test labels.
 >    > The tool outputs three html files with the interactive plots.
 >    {: .comment}
 >    > ![Scatter plot](images/scatter_plot.png "Scatter plot for true and predicted age")
->    > We can see in the scatter plot (figure 2) that most of the points lie along the x=y curve. It means that the true and predicted ages are 
+>    > We can see in the scatter plot (figure 4) that most of the points lie along the x=y curve. It means that the true and predicted ages are 
 >    > close to each other. The root mean squared error (`RMSE`) is `3.76` and R2 score is `0.94`.
 >    > ![Residuals](images/residual_plot.png "Residuals")
->    > The residual plot (figure 3) is generated to see if there is any visible pattern between residual (predicted age - true age)
+>    > The residual plot (figure 5) is generated to see if there is any visible pattern between residual (predicted age - true age)
 >    > and predicted  age. For a good model, there should not be any visible pattern with the plotted points.
 >    >
 >    > ![True vs predicted age](images/true_vs_predicted_plot.png "True vs predicted age")
->    > The plot in figure 4 shows the true and predicted ages. It can be seen that the points are close.
+>    > The plot in figure 6 shows the true and predicted ages. It can be seen that the points are close.
 >
 {: .hands_on}
 
@@ -346,7 +346,7 @@ Let's plot the predictions and compare with the test labels.
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The figures 2 and 4 show that the prediction is good because the predicted age lie close to the true age.
+> > 1. Figures 2 and 4 show that the prediction is good because the predicted age lie close to the true age.
 > >
 > {: .solution}
 >
