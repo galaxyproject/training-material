@@ -161,9 +161,9 @@ For these three parameters, we have 24 different combinations (4 x 2 x 3) of val
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 0.73
+> > 1. 0.73 (it is close to the best r2 score (0.81) achieved by a customised ensemble algorithm explained in [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9))
 > > 2. alpha: 0.001, normalize: True, k: 5880
-> > 3. 24
+> > 3. 24 (it is equal to the number of rows in the tabular output of **hyperparameter search** {% icon tool %})
 > >
 > {: .solution}
 >
@@ -206,15 +206,15 @@ We will visualize the tabular output of hyperparameter search tool from the prev
 
 ## Conclusion
 
-In the plot shown above in figure [4](#figure-4), we achieved an r2 score of `0.73` (last column) with 5-fold cross-validation on the training set. In the study [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) as well, a similar r2 score is mentioned for linear regressors. Moreover, the study also included a customised ensemble regressor which achieved better performance (`r2 = 0.81`). However, our analysis showcases the use of machine learning tools in Galaxy to reproduce the results published in the paper.
+In the plot shown above in figure [4](#figure-4), we achieved an r2 score of `0.73` (last column) with 5-fold cross-validation on the training set. In the study [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) as well, a similar r2 score is mentioned for linear regressors. Moreover, the study also included a customised ensemble regressor which achieved better performance (`r2 = 0.81`). However, our analysis showcases the use of machine learning tools in Galaxy to reproduce the results published in the paper. The trained model can be used to predict age using another RNA-seq dataset, but this new dataset should contain the same features as were used in the training.
 
 # Analyze DNA methylation dataset
 
-In the second part of the analysis, we will use DNA methylation dataset to predict chronological age. The dataset is divided into two parts - training and test sets. The training set is used to train a regressor and the test set is used to evaluate the performance of the trained model using the r2 scoring metric. 5-fold cross-validation is used for training.
+In the second part of the analysis, we will use DNA methylation dataset to predict chronological age. Whole blood samples were collected from humans aged 18-69 and best age-correlated CpG sites in the genome were chosen as features. The dataset is divided into two parts - training and test sets. The training set is used to train a regressor and the test set is used to evaluate the performance of the trained model using the r2 scoring metric. 5-fold cross-validation is used for training.
 
 ## Get train and test datasets
 
-We proceed with the analysis by uploading new datasets. You might want to create a new history first. The training set contains `208` rows corresponding to humans and `14` features. The last column is `age`. The test set contains `104` rows and the same number of features as the training set. The `age` column in the test set is predicted after training on the training set. Another dataset `test_rows_labels` contains the true age values of the test set which is used to compute r2 scores between true and predicted age.
+We proceed with the analysis by uploading new datasets. You might want to create a new history first. The training set contains `208` rows corresponding to humans and `13` features (age-correlated CpG sites). The last column is `age`. The test set contains `104` rows and the same number of features as the training set. The `age` column in the test set is predicted after training on the training set. Another dataset `test_rows_labels` contains the true age values of the test set which is used to compute r2 scores between true and predicted age.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
