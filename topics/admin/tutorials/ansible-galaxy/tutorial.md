@@ -744,9 +744,43 @@ With a large Galaxy instance, users will often request FTP access in order to up
 
 > ### {% icon hands_on %} Hands-on: ProFTPD
 >
-> 1. Add the role `` to your playbook and have it run as root.
+> 1. Add the role `galaxyproject.proftpd` to your playbook and have it run as root.
 >
+> 2. Edit the group variables file, we will define some variables for the proftpd role:
+>
+>    ```yaml
+>    galaxy_ftp_upload_dir: "{{ galaxy_root }}/ftp"
+>    proftpd_display_connect: |
+>      Unauthorized access is prohibited
+>    proftpd_galaxy_auth: yes
+>    galaxy_user: galaxy
+>    proftpd_options:
+>      - User: galaxy
+>      - Group: galaxy
+>    proftpd_sql_user: galaxy
+>    proftpd_sql_db: galaxy@/var/run/postgresql
+>    ```
+>
+> 3. And additionally two changes to the Galaxy configuration portion:
+>
+>    ```yaml
+>    ...
+>    galaxy_config:
+>      galaxy:
+>        ...
+>        ftp_upload_dir: "{{ galaxy_ftp_upload_dir }}"
+>        ftp_upload_site: "ftp://{{ ansible_hostname}}"
+>        ...
+>      uwsgi: ...
+>    ```
+>
+> 4. Apply the playbook
+>
+> 5. Restart Galaxy with supervisord (`supervisorctl restart galaxy`) to allow the changes to take effect.
 {: .hands_on}
+
+With this, users can see an "Upload via FTP" button in their upload interface, and they can upload their data using Filezilla or other preferred FTP client.
+
 
 ## Disaster Strikes!
 
