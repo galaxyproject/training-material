@@ -201,7 +201,8 @@ We have codified all of the dependencies you will need into a yaml file that `an
 >    ```yaml
 >    - src: galaxyproject.galaxy
 >    - src: galaxyproject.postgresql
->    - src: galaxyproject.proftpd
+>    - src: https://github.com/galaxyproject/ansible-proftpd
+>      name: galaxyproject.proftpd
 >    - src: https://github.com/usegalaxy-eu/ansible-repos
 >      name: galaxyproject.repos
 >    - src: geerlingguy.nginx
