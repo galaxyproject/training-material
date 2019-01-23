@@ -14,6 +14,7 @@ key_points:
 - Complexity can grow over time as your organisation does, no need to start with playbooks like usegalaxy.org
 contributors:
   - erasche
+  - natefoo
 requirements:
   - type: "internal"
     topic_name: admin
@@ -222,12 +223,13 @@ We have codified all of the dependencies you will need into a yaml file that `an
 
 Best admin practices is to not run Galaxy as a user with `sudo` access, like your login user probably has. So we will create a new user account specifically to run Galaxy under.
 
-> ### {% icon hands_on %} Hands-on: Installing Postgres
+> ### {% icon hands_on %} Hands-on: Creating a Galaxy User
 >
 > 1. Open `playbook.yml` with your text editor and add the following:
 >
->    - Add a `pre_task` to [create a group](https://docs.ansible.com/ansible/latest/modules/group_module.html) named `galaxy`
->    - Add a `pre_task` to [create a user](https://docs.ansible.com/ansible/latest/modules/user_module.html) with the home directory `/srv/galaxy` which should be created, the username `galaxy`, and part of the `galaxy` group.
+>    - Add a `pre_task` to [create a directory](https://docs.ansible.com/ansible/latest/modules/file_module.html) named `/srv/galaxy`.
+>    - Add a `pre_task` to [create a group](https://docs.ansible.com/ansible/latest/modules/group_module.html) named `galaxy`, as a system group.
+>    - Add a `pre_task` to [create a user](https://docs.ansible.com/ansible/latest/modules/user_module.html) with the home directory `/srv/galaxy/home` which should be created, with the username `galaxy`, as a system user, and part of the `galaxy` group.
 >    - For the majority of tasks we will execute, we need to do these as the root user, so specify `become: true` on the playbook level. We will execute all roles with reduced permissions when possible, but many of the tasks we need to do as root to install required packages or configuration.
 >
 >    > ### {% icon question %} Question
@@ -240,14 +242,19 @@ Best admin practices is to not run Galaxy as a user with `sudo` access, like you
 >    > > - hosts: galaxyservers
 >    > >   become: true
 >    > >   pre_tasks:
+>    > >     - file:
+>    > >         path: /srv/galaxy
+>    > >         state: directory
 >    > >     - group:
 >    > >         name: galaxy
+>    > >         system: yes
 >    > >     - user:
 >    > >         name: galaxy
 >    > >         group: galaxy
 >    > >         create_home: yes
 >    > >         shell: /bin/bash
->    > >         home: /srv/galaxy
+>    > >         home: /srv/galaxy/home
+>    > >         system: yes
 >    > > ```
 >    > >
 >    > {: .solution }
@@ -258,17 +265,17 @@ Best admin practices is to not run Galaxy as a user with `sudo` access, like you
 >
 {: .hands_on}
 
-## Postgres
+## PostgreSQL
 
-Galaxy is capable of talking to multiple databases through SQLAlchemy drivers. SQLite is the development database, but Postgres is recommended in production. MySQL is a possibility, but does not receive the same testing or bugfixes from the main development team as Postgres, so we will only show installation with Postgres.
+Galaxy is capable of talking to multiple databases through SQLAlchemy drivers. SQLite is the development database, but PostgreSQL is recommended in production. MySQL is a possibility, but does not receive the same testing or bugfixes from the main development team as PostgreSQL, so we will only show installation with PostgreSQL.
 
 PostgreSQL maintains its own user database apart from the system user database. By default, PostgreSQL uses the "peer" authentication method which allows access for system users with matching PostgreSQL usernames (other authentication mechanisms are available, see the [PostgreSQL Client Authentication documentation](https://www.postgresql.org/docs/current/static/client-authentication.html).
 
 For this tutorial, we will use the default "peer" authentication, so we need to create a PostgreSQL user matching the system user under which Galaxy is running, i.e. `galaxy`. This is normally done with the PostgreSQL `createuser` command, and it must be run as the `postgres` user. In our case, we will use the `natefoo.postgresql_objects` role to handle this step.
 
-> ### {% icon hands_on %} Hands-on: Installing Postgres
+> ### {% icon hands_on %} Hands-on: Installing PostgreSQL
 >
-> 1. Create and edit `group_vars/galaxyservers.yml` and add some variables to configure Postgres:
+> 1. Create and edit `group_vars/galaxyservers.yml` and add some variables to configure PostgreSQL:
 >
 >    ```yaml
 >    postgresql_objects_users:
@@ -282,7 +289,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 > 2. Open `playbook.yml` with your text editor and add the following:
 >
 >    - A role for `galaxyproject.repos`. This will add the additional repositories that are needed by Galaxy in various places.
->    - A role for `galaxyproject.postgresql`. This will handle the installation of Postgres.
+>    - A role for `galaxyproject.postgresql`. This will handle the installation of PostgreSQL.
 >    - A role for `natefoo.postgresql_objects`, run as the postgres user. (You will need `become`/`become_user`.) This role allows for managing databases and users within postgres.
 >
 >    > ### {% icon question %} Question
@@ -295,13 +302,18 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > > - hosts: galaxyservers
 >    > >   become: true
 >    > >   pre_tasks:
+>    > >     - file:
+>    > >         path: /srv/galaxy
+>    > >         state: directory
 >    > >     - group:
 >    > >         name: galaxy
+>    > >         system: yes
 >    > >     - user:
 >    > >         name: galaxy
 >    > >         group: galaxy
 >    > >         create_home: yes
->    > >         home: /srv/galaxy
+>    > >         home: /srv/galaxy/home
+>    > >         system: yes
 >    > >   roles:
 >    > >     - galaxyproject.repos
 >    > >     - galaxyproject.postgresql
@@ -318,7 +330,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >
 {: .hands_on}
 
-You can now login and access the database. You will need to `sudo su - galaxy` first, and then you can run `psql galaxy`. The database will currently be empty as Galaxy has never connected to it yet. Once you install Galaxy in the next step, the database will be populated.
+You can now login and access the database. You will need to `sudo -iu galaxy` first, and then you can run `psql galaxy`. The database will currently be empty as Galaxy has never connected to it yet. Once you install Galaxy in the next step, the database will be populated.
 
 ## Galaxy
 
@@ -359,16 +371,27 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > ```yaml
 >    > > - hosts: galaxyservers
 >    > >   pre_tasks:
+>    > >     - file:
+>    > >         path: /srv/galaxy
+>    > >         state: directory
 >    > >     - group:
 >    > >         name: galaxy
+>    > >         system: yes
 >    > >     - user:
 >    > >         name: galaxy
 >    > >         group: galaxy
 >    > >         create_home: yes
->    > >         home: /srv/galaxy
+>    > >         home: /srv/galaxy/home
+>    > >         system: yes
 >    > >     - name: Install Dependencies
 >    > >       package:
 >    > >         name: ['git', 'python-virtualenv', 'python-psycopg2']
+>    > >     - file:
+>    > >         path: /data
+>    > >         state: directory
+>    > >         owner: galaxy
+>    > >         group: galaxy
+>    > >         mode: 0750
 >    > >   roles:
 >    > >     - galaxyproject.repos
 >    > >     - galaxyproject.postgresql
@@ -424,7 +447,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > {% raw %}
 >    > > ```yaml
 >    > > ---
->    > > # Postgres
+>    > > # PostgreSQL
 >    > > postgresql_objects_users:
 >    > >   - name: galaxy
 >    > >     password: null
@@ -522,7 +545,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 > ### {% icon hands_on %} Hands-on: (Optional) Launching uWSGI by hand
 >
 > 1. SSH into your server
-> 2. Switch user to Galaxy account (`sudo su - galaxy`)
+> 2. Switch user to Galaxy account (`sudo -iu galaxy`)
 > 3. Change directory into `/srv/galaxy/server`
 > 4. Activate virtualenv (`. .venv/bin/activate`)
 > 5. `uwsgi --plugin python --yaml ../config/galaxy.yml`
@@ -599,7 +622,7 @@ Galaxy should now be accessible over port :8080, again try connecting to your VM
 
 With this we have:
 
-- Postgres running
+- PostgreSQL running
 - Galaxy running (managed by supervisord)
 
 When we first configured Galaxy, we used the setting `http: 0.0.0.0:8080`, which instructed uWSGI to handle the serving of Galaxy, and to process the HTTP requests itself. This has some overhead and is not as efficient as is desired in production. So we will set up a reverse proxy to handle the HTTP processing, and translate this into the more efficient uWSGI protocol. Additionally it can handle serving static files for us without the requests going through uWSGI, allowing it to spend more time on useful tasks like processing jobs.
