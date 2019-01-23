@@ -45,7 +45,7 @@ class: left
 
 Require verification that a user's email is real. You must enable SMTP first.
 
-In `galaxy.ini`:
+In `galaxy.yml`:
 * `user_activation_on` require users to click link in email before running jobs.
 * `activation_grace_period` time (hours) that a user can 'explore' Galaxy before activation lockout.
 * `inactivity_box_content` message provided to non-activated users.
@@ -62,7 +62,7 @@ Exercise:
 class: left
 ## User Control
 
-In `galaxy.ini`:
+In `galaxy.yml`:
 * `require_login` can be enabled to prevent anonymous access.
 * `show_welcome_with_login` show welcome page next to login page
 * `allow_user_creation` allow user registration. When False, admins must create users; often coupled with `require_login`.
@@ -74,7 +74,7 @@ In `galaxy.ini`:
 class: left
 ## Password & Session Policies
 
-In `galaxy.ini`:
+In `galaxy.yml`:
 * `password_expiration_period` days before requiring a user to change password.
 * `session_duration` minutes before invaliding a user's session, requiring re-login.
 
@@ -83,7 +83,7 @@ In `galaxy.ini`:
 class: left
 ## Admin Control
 
-In `galaxy.ini`:
+In `galaxy.yml`:
 * `admin_users` comma-separated list of admin users' emails
 * `allow_user_deletion` admins can delete users
 * `allow_user_impersonation` admins can become other users. Great for debugging / user assistance.
@@ -99,7 +99,7 @@ Exercise:
 class: left
 ## User Privacy
 
-In `galaxy.ini`:
+In `galaxy.yml`:
 * `expose_user_name` users can view other registered usernames
 * `expose_user_email` users can view other registered emails
 * `new_user_dataset_access_role_default_private` newly created datasets are private to the creating user
@@ -166,7 +166,7 @@ class: left
 
 Used to control user disk usage.
 
-To turn on the use of quotas: In `galaxy.ini`:
+To turn on the use of quotas: In `galaxy.yml`:
 * `enable_quotas` Enable enforcement of quotas.  Quotas can be set from the Admin interface (under Data).
 * must create quotas in admin interface before any quota will be enforced, otherwise 'unlimited'
 
@@ -183,35 +183,8 @@ or associated with Groups or Users
 
 ---
 class: left
-## Exercise: Creating Quotas
-
-* Create quotas for Unregistered (1b) and Registered Users (1mb)
-* Create a quota that adds 1GB
-* Create a quota that decreases by 1GB
-* Create a quota that grants unlimited
-
----
-class: left
 ## Alternate Authentication
 
 * Galaxy-specific login using e-mail address and password
 * OpenID authentication with Galaxy as a relying party
 * HTTP remote user provided by any front-end Web server
-
-More on this topic in Advanced Session 4: External authentication
-
----
-class: left
-## OpenID
-
-* `enable_openid` Enable authentication via OpenID.
-* `openid_config_file` = config/openid_conf.xml.sample used if default does not exist
-* `openid_consumer_cache_path` where to cache OpenID files
-
-Exercise: Enable OpenID:
-* `enable_openid = True`
-* Log in using GenomeSpace
-* Log out
-* Log in using GenomeSpace
-* Send files to GenomeSpace
-* Retrieve files from GenomeSpace
