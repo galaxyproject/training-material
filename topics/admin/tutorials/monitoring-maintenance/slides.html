@@ -28,37 +28,30 @@ class: left, middle
 
 Has a lot of tools and lists that are useful for administrators of the Galaxy server.
 
-* Tools that list:
   * Data types
   * Data tables
   * Display applications
-
-
-* Tools for manipulating
-  * Users, groups, roles and quotas etc
+  * Users, groups, roles, and quotas
   * Running jobs
   * Installed Tools
-  * Errors etc
+  * Tool whitelist
+  * Tool errors
 
 ---
 class: left
 ## Data Types
 
-Data types are Galaxy's method of understanding how to handle data.
+* Galaxy's method of understanding users' files.
+* Data types and converters are shipped with Galaxy.
+* Admin UI displays all available data types.
+  * Can be configured by modifying `config/datatypes_conf.xml` file.
+* Use class inheritance (`text:json` is a super class of `hivtrace`, `biom1`, `d3_hierarchy`...)
+  * Affects how tools consume datasets.
 
-* Display of that data
-* Which tools to present the data to
-* Mime-types etc.
-* Whether to allow specification at upload time
-* Which tools are used to convert to different types/versions/indexes
-
-The Admin UI has a link to display all the current data types that are registered.
-
-Datatypes are located in the `datatypes_conf.xml` file.
 ---
 class: left
 ## datatypes_conf.xml
-Config file for datatypes. Hard to find stuff...
+Config file for datatypes.
 ```
 <?xml version="1.0"?>
 <datatypes>
@@ -82,11 +75,12 @@ Config file for datatypes. Hard to find stuff...
   * Add `display_in_upload="true"` to the xml tag.
 
 You'll then need to restart Galaxy.
+
 ---
 class: left
 ## Display applications
 
-This link shows the list of applications that can be used to display various datatypes.
+The list of applications that can be used to display various datatypes.
 
 They are set in the `datatypes_conf.xml` file. For example:
 ```
@@ -101,7 +95,8 @@ They are set in the `datatypes_conf.xml` file. For example:
   </datatype>
 ```
 
-We are not going to go into how to set these up here but there is a page on the [wiki](https://wiki.galaxyproject.org/Admin/Tools/External%20Display%20Applications%20Tutorial)
+See a [Hub](https://galaxyproject.org/admin/tools/external-display-applications-tutorial/) page to help you create a new one.
+
 ---
 class: left
 ## Manage Jobs
@@ -110,42 +105,34 @@ An admin interface to list current unfinished jobs and finished jobs of a certai
 
 * You can stop unfinished jobs
 * You can show details of old jobs
-* You can lock the server from spawning new jobs. (If you need to do maintenance.)
+* You can lock the server from spawning new jobs. (e.g. for maintenance.)
 
-.large[
-**Can be very handy!**
-]
 ---
 class: left
-## Tool tools/UIs!
+## Tools
 
-  * **Search Toolshed** - To install tools from the toolshed(s)
+  * **Install new tools** - Use to install tools from the configured toolsheds.
 
-  * **Manage Installed Tools** - To list, manage, repair, upgrade, check status, uninstall or disable currently installed tools.
+  * **Monitor installation** - Shows tools currently being installed.
 
-  * **Reset Metadata** - If something is wrong, try this!
+  * **Manage tools** - To list, manage, repair, upgrade, check status, uninstall or disable currently installed tools.
 
-  * **Tool Lineage** - Shows the revision history and default versions of tools.
+  * **Manage metadata** - Can help with certain types of tool problems, like incorrect lineage.
 
-  * **Reload Tool Configuration** - After you've edited a tool, this will reload it's xml wrapper etc.
+  * **Manage whitelist** - Allows admins to selectively prevent tool outputs from being sanitized (allows for interactive javascript pages such as visualizations).
 
-  * **Review Tool Error Logs** - Will show tool problems during Galaxy startup.
+  * **View lineage** - Shows the revision history and default versions of tools.
 
-  * **Manage Display Whitelist** - Allows admins to selectively allow fancy interactive stuff in tool output to be displayed/used.
+  * **View error logs** - Will show tool problems during Galaxy startup.
+
 ---
 class: left
 ## Other links
 
-**Data management**
-
   * **Quotas** - Allows for control of user disk space.
-  * **Data Libraries** - Links to the data library UI.
   * **Local Data** - Links to the Reference Data and Data Managers UI.
-
-**User Management**
-
-  * **Users, Groups, Roles, Impersonate user** - Discussed earlier
-  * **API Keys** - Allows generation of API keys for various users.
+  * **Users, Groups, Roles** - Used for quotas, libraries, sharing...
+  * **Impersonate user** - Allows to switch to a user account. Has to be enabled in configuration.
 
 
 ---
@@ -160,9 +147,18 @@ class: left
 ---
 # DB Shell
 
-A programmer's interface to the database
+`scripts/db_shell.py`
 
-Interact with the database using Galaxy's model
+A programmer's interface to the database. Interact with the database using Galaxy's model
+
+```
+$ python -i scripts/db_shell.py -c config/galaxy.ini
+ >>> new_user = User("admin@gmail.com")
+ >>> new_user.set_password
+ >>> sa_session.add(new_user)
+ >>> sa_session.commit()
+ >>> sa_session.query(User).all()
+```
 
 ---
 # Database Queries
@@ -338,17 +334,6 @@ General purpose tool for monitoring systems and services.
 Galaxy-specific check in `contrib/nagios/`: Runs Galaxy jobs
 
 ---
-# Grafana and telegraf
-
-General purpose tool for monitoring systems and services.
-
-telegraf: The plugin-driven server agent for collecting & reporting metrics.
-grafana: dashboard for beautiful analytics and monitoring
-
-Example: usegalaxy.eu project [monitoring server](https://stats.usegalaxy.eu)
-
----
-
 # Backups
 
 What to back up:
@@ -362,11 +347,43 @@ What not to back up:
 - Job working directories
 
 ---
-# Reports
+# Telegraf, InfluxDB, and Grafana
 
-[Run Galaxy Reports - Exercise](./tutorial.html)
+General purpose tools for monitoring systems and services.
+
+telegraf: plugin-driven server agent for collecting & reporting metrics
+influxdb: purpose built time series database
+grafana: dashboard for beautiful analytics and monitoring
+
+dataflow:
+Galaxy -> Telegraf -> InfluxDB -> Grafana
 
 ---
+# Infrastructure for Grafana
 
-layout: true
-class: center, middle
+* Everything captured in Galaxy Ansible [infrastructure-playbook](https://github.com/galaxyproject/infrastructure-playbook/) repository.
+* Ansible [playbook](https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles/dj-wasabi.telegraf) to install Telegraf.
+* Ansible [task](https://github.com/galaxyproject/infrastructure-playbook/blob/master/roles/stats/tasks/redhat.yml) for installing influxdb and grafana.
+
+---
+# Grafana showcase
+
+* usegalaxy.eu [public server](https://stats.usegalaxy.eu)
+* usegalaxy.org.au [public server](https://stats.genome.edu.au)
+* usegalaxy.org private server
+
+If you see a dashboard you can export its configuration and put it on your Grafana with your data. Copy away!
+
+---
+# Sentry
+
+* Motto: *"Stop hoping your users will report errors"*
+* Error tracking and analysing tool.
+* Galaxy has Sentry middleware that you can enable in configuration.
+
+---
+# Reports
+
+Galaxy ships with its own app that reports usage (user, job, data, etc numbers)
+
+[Run Galaxy Reports - Exercise](./tutorial.html)
