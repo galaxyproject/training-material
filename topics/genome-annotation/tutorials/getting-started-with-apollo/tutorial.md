@@ -20,10 +20,6 @@ The Center for Phage Technology Galaxy program is an instance of the Galaxy Proj
 >    >    > 2. GBrowse
 >    >    > 3. JBrowse
 >    >    > 4. Apollo
->    > * Genome File Formats
->    >    > 1. FASTA
->    >    > 2. GFF3
->    >    > 3. GenBank
 > * Annotation Within Apollo
 >    > * Apollo in Galaxy - General Use
 >    >    > 1. JBrowse in Galaxy
@@ -34,14 +30,14 @@ The Center for Phage Technology Galaxy program is an instance of the Galaxy Proj
 
 # Background Information
 
-Although it is not the first genome browser, Apollo is the first collaborative genomic annotation editor available solely on the Internet.
+Although it is not the first genome browser, Apollo is the first collaborative genomic annotation editor available solely on the Internet. Apollo is still under development and new features are being added all the time.
 
 > ### {% icon details %} Important Definitions 
 > * **Static:** Unmodifiable, specifically in the context of a computer resource that you are accessing. The website that you see cannot be modified by you, the user accessing them. This is opposed to “dynamic” where you can interact with the files or service, and your interactions can persist.
-> * **Instance:** A specific copy of a web service made available over the internet. Given that the administrators can run 0-N copies of the same web service, we use the term “instance” to refer to a specific copy of a service.
-> * **Tracks:** A set of analysis results that can be shown or hidden depending on the annotator’s needs.
-> * **Feature:** Conceptually, a region of a genome with some annotations (such as a Name, Product, or Dbxref). Visually, a rectangular box in a track.
+> * **Instance:** A specific copy of a web service made available over the internet. Given that the administrators can run many copies of the same web service, we use the term “instance” to refer to a specific copy of a service.
+> * **Tracks:** In Apollo, a track is a set of analysis results that can be shown or hidden depending on the annotator’s needs. All tracks are stored in a file format that allows them to be aligned to the organisms's DNA sequence.
 > * **Evidence:** Tracks contain evidence; these are results of specific computer methods (which are documented and citable), which we use to make annotations. Annotations should not be made without evidence. Evidence allows us to move the annotation process from an art to a science.
+> * **Feature:** Conceptually, a feature is any defined and named region of a genome. Features could be genes, conserved domains, promoter binding sites, terminators, intron splice sites, or any other region of interest. Visually, a features appear as rectangular boxes in Apollo.
 > * **Annotations:** Annotation is the addition of descriptive features to a DNA sequence, such as a protein’s function, or locating tRNAs, and terminators. The annotation process we do is 100% computer based, so keep in mind that until an annotation is experimentally tested in the lab, it is putative or assumed based on an educated hypothesis.
 {: .details}
 
@@ -53,82 +49,34 @@ We use a lot of software under the umbrella term of GMOD, the [Generic Model Org
 
 GMOD is a collection of open source software for maintaining Model Organism Databases (MODs). Having a common platform for MODs is important, as historically individual labs spent effort building their own, custom organism databases, and then faced challenges trying to interoperate with other databases. With GMOD and the associated tools, software that talks to one MOD can be re-used when talking to another MOD. We can use the same tools to work with the CPT’s Phage Database, as people use to access data in Yeast genome databases.
 
-### 1. Artemis
 
-Artemis, the first genome browser discussed here, is not actually a GMOD project. Artemis was an older, desktop-based genome browser. You had to install the software on your computer in order to run it. All of the other genome browsers observed here are web-based. Artemis allows for annotation, but those annotations were only stored on your local device. Artemis featured a three-pane view consisting of a high-level overview of the genome, a DNA-level view, and a list of all the features in the genome.
-
-![](../../images/getting-started-with-apollo-screenshots/2_artemis.png)
-
-### 2. GBrowse
+### 1. GBrowse
 
 One of the earlier genome browsers, GBrowse did *not* support annotation. Think of it like the old Yahoo-maps. Instead of just clicking and dragging the map, you had to click where you wanted to go, wait a few seconds, and the new map would be displayed. It makes the process tedious.
 
 ![](../../images/getting-started-with-apollo-screenshots/3_gbrowse_from_gmod_wiki.png)
 
-### 3. JBrowse
+### 2. JBrowse
 
 JBrowse is used in Galaxy workflows for genome visualization. JBrowse is a more modern re-implementation of GBrowse. JBrowse is much more like Google Maps (or any other current web map service); you click and drag and can quickly browse around the genome, turning evidence tracks on and off where relevant. Many labs have deployed JBrowse instances to help showcase their annotation efforts to the community, and to make their data accessible. FlyBase has produced a demo in JBrowse, displaying *Drosophila melanogaster*. Note that JBrowse is a **_static_** visualization tool. You cannot make any changes to the data, and you cannot make annotations and save them. It is a “Read Only” view of genomes and annotations.
 
 ![](../../images/getting-started-with-apollo-screenshots/4_jbrowse.png)
 
-### 4. Apollo
+### 3. Apollo
 
 Apollo takes JBrowse one step further and adds support for community annotation; it provides a “Read+Write” view of genomes. You can create new annotations on new gene features, and these are shared with everyone who has access to the Apollo server. From a computer perspective, Apollo embeds a copy of JBrowse. For the annotation workflow, we will use both Apollo and JBrowse.
 
-![](../../images/getting-started-with-apollo-screenshots/5_compare_and_contrast_browsers.png)
+![](../../images/getting-started-with-apollo-screenshots/apollo_screenshot.png)
 
-## Genome File Formats
+### 4. Stand-alone tools: Artemis
 
-There are three file formats to be aware of during genome annotation.
-> * **FASTA:** stores genomic sequence information in the form of nucleotide sequences.
-> * **GFF3:** stands for general feature format; stores genome annotations.
-> * **GenBank:** an older format containing annotations and sequence information.
+Many genome browsers and annotators are installed and store thier data on your local computer. Artemis, produced by the Sanger Institute, is a powerful and freely-available desktop-based genome browser and annotation tool. Artemis is written in Java and so it can be run on Windows, Mac and Linux-based systems.  Artemis provides a three-pane view consisting of a high-level overview of the genome, a DNA-level view, and a list of all the features in the genome. Unlike Apollo, all data is only stored on your local device. 
 
-![](../../images/getting-started-with-apollo-screenshots/13_compare_and_contrast_file_formats.png)
+![](../../images/getting-started-with-apollo-screenshots/2_artemis.png)
 
+Artemis is capable of adding, deleting and editing genome features and annotations, and also has limited ability to edit DNA sequence directly. Features are not added from evidence tracks but may be entered by the user directly, which allows for great flexibility but also means that evidence for each annotation is not tied to the record itself. 
 
-### 1. FASTA
-
-The sequence contained in a FASTA file may be DNA, RNA, or protein sequences; they may contain unspecified bases (N/Y/X) or gaps (-). Within a FASTA file, each sequence begins with a “>,” which is immediately followed by the “FASTA ID.” Some sequences have a “description” after *any whitespace character*, such as the given example.
-
-![](../../images/getting-started-with-apollo-screenshots/6_fasta.png)
-
-### 2. GFF3
-
-The eukaryotic gene model captures a lot of information about the biological process behind producing proteins from DNA, such as mRNAs, transcription, and alternative splicing. GFF3 files thus have to encode these complex, hierarchical, parent-child relationships. Characteristics of GFF3 files, such as the tab separated, key-value pairs, allow simplicity and ease of use. The top image is the text contained in a GFF3 file, and the bottom image is a visual representation of that text.
-
-![](../../images/getting-started-with-apollo-screenshots/7_gff3.png)
-
-![](../../images/getting-started-with-apollo-screenshots/8_gff3_visually.png)
-
-At the top level is a “gene” (3rd column) spanning from 1000 to 9000, on the forward strand (7th column), with an ID of gene00001, and the Name EDEN.
-
-Below the "gene" is an mRNA feature. The mRNA has a Parent attribute (Parent=gene00001) set to the ID of the “parent” gene feature. This makes it a child of the gene feature.
-
-Similarly all four exons and all four CDSs have a Parent of mRNA00001. ID, Name, and Parent are all known as feature attributes - metadata about a feature. Feature attributes also contain other fields; you will sometimes see Notes, Products, or many other fields. Only a handful of these attributes have standards defining what information they contain, and the rest are free to be used as needed. From a computational perspective, we prefer the fields with standardized meanings. If they conform to a standard, we can apply automation in our processing. If they are a free-form “notes” field, we need a human to interpret and codify the evidence.
-
-> ### {% icon tip %} Note that…
-> All of this is a little bit excessive for phages (where exons are rare, and mRNAs not involved). Nevertheless, it is important to ensure that the data is accessible to other researchers so they can do experiments building on the work. Part of this requires conforming to standard formats and conventions used by other groups. It is more important that to understand the format exists and that it encodes parent-child biological relationships than the precise specifics of what each column means.
-{: .tip}
-
-### 3. GenBank
-
-GenBank files are a fixed-width format which displays a “flat” gene model and lacks any way to represent the hierarchical relationships that are biologically relevant. There are a few major regions in a GenBank file:
-> * The header (starting with LOCUS…) gives information on
->    > 1. Sequence ID (BK000583 in the example shown)
->    > 2. Genome or chromosome length (41724 bp)
->    > 3. Annotation set version (1, from VERSION BK000583.1)
->    > 4. References
-
-![](../../images/getting-started-with-apollo-screenshots/10_genbank_header_p22.png)
-
-> * The feature table (starting with FEATURES) usually begins with a “source” type feature, which contains information about the chromosome/genome. Features consist of a feature type key on the left, and key-value pairs on the right formatted as */key=“Value…”*
-
-![](../../images/getting-started-with-apollo-screenshots/11_genbank_features_p22.png)
-
-> * The sequence data, which is displayed as six separated columns of ten characters each, with the sequence index annotated on the left.
-
-![](../../images/getting-started-with-apollo-screenshots/12_genbank_sequence_data_p22.png)
+In BICH 464, we will not be using Artemis for the annotation of your genomes.  However, Artemis is useful for viewing genomes retrieved from the public databases such as NCBI GenBank. Artemis is able to directly read GenBank-formatted files downloaded from the internet.  We will cover Artemis on an individual basis later in the course.
 
 
 # Annotation Within Apollo
@@ -138,7 +86,9 @@ Continuing on to actually using Apollo, this section will go through an example 
 1. Structural annotation, which consists of locations of genomic features, such as genes and terminators. Several gene callers will identify possible genes in the phage genome. Putative genes in Apollo will be annotated based on these results. See the [Structural Annotation Workflow Tutorial]({{ site.baseurl }}//topics/genome-annotation/tutorials/structural-annotation-workflow/tutorial.html) for more information. 
 2. Functional annotation, which entails predicting gene functions based on multiple sources of evidence. To run the analyses to allow this prediction see the [Functional Annotation Workflow Tutorial]({{ site.baseurl }}//topics/genome-annotation/tutorials/functional-annotation-workflow/tutorial.html).
 
-## Apollo in Galaxy - General Use
+## The Galaxy-Apollo Bridge
+
+> ### {% icon details %} Important Definitions 
 
 ### 1. JBrowse in Galaxy
 
@@ -172,6 +122,7 @@ With a complete JBrowse instance, data can now be channeled to Apollo. Data is b
 {: .tip}
 
 Executing this step will transfer data to Apollo and produce a JSON (JavaScript Object Notation) file. The output JSON file contains some metadata about the organism. With the data available in Apollo, it can be accessed at [Apollo](https://cpt.tamu.edu/apollo/annotator/index); accessing Apollo requires logging into Galaxy. The genome can also be accessed via the “Annotate on data #” step in the history column by clicking the eye {% icon solution %} symbol. The Annotate tool takes the JSON file from the **Create or Update Organism** step and loads Apollo directly in Galaxy.
+{: .details}
 
 ### Navigating Through Apollo
 
