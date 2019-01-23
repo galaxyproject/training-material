@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>GO Enrichment Analysis</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:title" content="Galaxy Training: GO Enrichment Analysis" />
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body>
+        
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/transcriptomics" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Transcriptomics
+                        </a>
+                    </li>
+
+                    
+                    
+                    
+
+                    
+                        
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    
+                                        
+                                            
+                                                <a class="dropdown-item" href="/training-material/topics/transcriptomics/slides/introduction.html">
+                                                    Introduction to Transcriptomics
+                                                </a>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                </div>
+                            </li>
+                        
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://zenodo.org/record/1255038#.Wx4qTBwh3CI" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/transcriptomics#references" title="References">
+                            <i class="fa fa-bookmark" aria-hidden="true"></i><span class="visually-hidden">references</span> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fgoenrichment%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fgoenrichment%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fgoenrichment%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fgoenrichment%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fgoenrichment%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/transcriptomics/tutorials/goenrichment/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+   
+{
+  "@context": "http://schema.org",
+  "@type": "CreativeWork",
+  "name": "GO Enrichment Analysis",
+  "accessModeSufficient": "visual",
+  "accessibilityControl": "fullMouseControl",
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "learningResourceType": "",
+  "url": "/topics/transcriptomics/tutorials/goenrichment/tutorial.html",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/record/1255038#.Wx4qTBwh3CI",
+      "name": "Training data for GO Enrichment Analysis tutorial"
+    }
+  ],
+  "timeRequired": "PT1H",
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "igcbioinformatics"
+    },
+    {
+      "@type": "Person",
+      "name": "mblue9"
+    }
+  ],
+  "description": "The questions this  addresses are:\n - How can I functionally interpret a list of genes of interest that I obtained from my experiment?\n\n\\nThe objectives are:\n - How to perform a GO Enrichment Analysis\n - How to interpret and simplify the results\n\n"
+}
+
+    </script>
+    <section class="tutorial">
+        <h1>GO Enrichment Analysis</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>How can I functionally interpret a list of genes of interest that I obtained from my experiment?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>How to perform a GO Enrichment Analysis</li>
+            
+            <li>How to interpret and simplify the results</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Quality Control:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                            
+                            <li> Mapping:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                - <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour</p>
+            
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>When we have a large list of genes of interest, such as a list of differentially expressed genes obtained from an RNA-Seq experiment, how do we extract biological meaning from it?</p>
+
+<p>One way to do so is to perform functional enrichment analysis. This method consists of applying statistical tests to verify if genes of interest are more often associated to certain biological functions than what would be expected in a random set of genes. In this tutorial you will learn about enrichment analysis and how to perform it.</p>
+
+<p><strong>What is the Gene Ontology?</strong> <br />
+The <a href="http://www.geneontology.org/">Gene Ontology</a> (GO) is a structured, controlled vocabulary for the classification of gene function at the molecular and cellular level. It is divided in three separate sub-ontologies or GO types: biological process (e.g., signal transduction), molecular function (e.g., ATPase activity) and cellular component (e.g., ribosome). These sub-ontologies are structured as directed acyclic graphs (a hierarchy with multi-parenting) of GO terms.</p>
+
+<p><img src="../../images/goenrichment_GOexample.png" alt="GO Example" /></p>
+<blockquote>
+
+  <p><strong>Figure 1</strong> QuickGO - http://www.ebi.ac.uk/QuickGO</p>
+</blockquote>
+
+<p>The GO Ontology, like other ontologies, are usually coded in the <a href="http://www.geneontology.org/faq/what-obo-file-format">OBO</a> or the <a href="http://www.geneontology.org/faq/what-owl-file">OWL</a> formats. It can be downloaded from the <a href="http://geneontology.org/page/download-ontology">Gene Ontology website</a> or from the <a href="http://www.obofoundry.org/">OBO foundry</a>. You can also find in Galaxy tools that allow you to manipulate and extract information from OBO files, but this is outside the scope of this tutorial.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment:</h3>
+  <p>Take note of when and where you obtained your ontology file, as these are constantly being updated.</p>
+
+</blockquote>
+
+<p><strong>What are GO annotations?</strong> <br />
+Genes are associated to GO terms via GO annotations. Each gene can have multiple annotations, even of the same GO type. An important notion to take into account when using GO is that, according to the <strong>true path rule</strong>, a gene annotated to a term is also implicitly annotated to each ancestor of that term in the GO graph. GO annotations have evidence codes that encode the type of evidence supporting them: only a small minority of genes have experimentally verified  annotations; the large majority have annotations inferred electronically based on sequence homology or known patterns.</p>
+
+<p>GO annotations can be obtained from the <a href="http://geneontology.org/page/download-go-annotations">Gene Ontology website</a>, or from species-specific databases. One useful resource to obtain GO annotations is <a href="http://www.ensembl.org/biomart/martview">Ensembl biomart</a>. Again, take note to when and from where you obtained your annotations. For example, if you obtained your data from Ensembl, record the release you used.</p>
+
+<blockquote class="agenda">
+  <h3 id="overview">Overview</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#functional-enrichment-analysis" id="markdown-toc-functional-enrichment-analysis">Functional Enrichment Analysis</a></li>
+  <li><a href="#simplification-of-graphs" id="markdown-toc-simplification-of-graphs">Simplification of graphs</a></li>
+  <li><a href="#interpretation-of-the-results" id="markdown-toc-interpretation-of-the-results">Interpretation of the results</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="functional-enrichment-analysis">Functional Enrichment Analysis</h1>
+
+<p>To perform functional enrichment analysis, we need to have:</p>
+<ul>
+  <li>A set of genes of interest (e.g., differentially expressed genes): <strong>study set</strong></li>
+  <li>A set with all the genes to consider in the analysis: <strong>population set</strong> (which must contain the study set)</li>
+  <li><strong>GO annotations</strong>, associating the genes in the population set to GO terms</li>
+  <li>The <strong>GO ontology</strong>, with the description of GO terms and their relationships</li>
+</ul>
+
+<p>For each GO term, we need to count the frequency (<strong>k</strong>) of genes in the study set (<strong>n</strong>) that are associated to the term, and the frequency (<strong>K</strong>) of genes in the population set (<strong>N</strong>) that are associated to the same term. Then we test how likely would it be to obtain at least <strong>k</strong> genes associated to the term if <strong>n</strong> genes would be randomly sampled from the population, given the frequency <strong>K</strong> and size <strong>N</strong> of the population.</p>
+
+<p>The appropriate statistical test is the one-tailed variant of Fisher’s exact test, also known as the hypergeometric test for over-representation. When the one-tailed version is applied, this test will compute the probability of observing at least the sample frequency, given the population frequency.  The <a href="https://en.wikipedia.org/wiki/Hypergeometric_distribution">hypergeometric distribution</a> measures precisely the probability of <strong>k</strong> successes in <strong>n</strong> draws, without replacement, from a finite population of size <strong>N</strong> that contains exactly <strong>K</strong> successful objects:</p>
+<blockquote>
+
+  <p><img src="../../images/goenrichment_formula.png" alt="Go Enrichment Formula" /></p>
+</blockquote>
+
+<p>For this first exercise we will use data from <a href="https://www.ncbi.nlm.nih.gov/pubmed/22383036" title="Trapnell et al. data">Trapnell et al. 2014</a>. In this work, the authors created an artificial dataset of gene expression in <em>Drosophila melanogaster</em>, where 300 random genes were set (insilico) to be differentially expressed between two conditions.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:</h3>
+  <p>The data for this tutorial is available at <a href="https://zenodo.org/record/1255038#.Wx4qTBwh3CI">Zenodo</a> to download. For convenience and reproducibility of results, we already added the GO ontology and annotations in the Zenodo repository.</p>
+  <ol>
+    <li>
+      <p><strong>Create a new history</strong></p>
+    </li>
+    <li><strong>Upload to the Galaxy</strong> the following files:
+      <ul>
+        <li>go.obo</li>
+        <li>drosophila_gene_association.fb</li>
+        <li>trapnellPopulation.tab</li>
+      </ul>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-upload-data-to-galaxy-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Upload data to Galaxy <a href="https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html"><span style="color:red">[1]</span></a></h3>
+        <ul>
+          <li><strong>Click</strong> on the upload button in the upper left of the interface.</li>
+        </ul>
+
+        <p><img src="../../images/goenrichment_galaxy_upload.png" alt="Galaxy Upload" /></p>
+
+        <ul>
+          <li>Press <strong>Choose local file</strong> and search for your file.</li>
+          <li>Press <strong>Start</strong> and wait for the upload to finish.</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Rename</strong> the <em>go.obo</em> file to <code class="highlighter-rouge">GO</code> and <em>drosophila_gene_association.fb</em> file to <code class="highlighter-rouge">GO annotations Drosophila melanogaster</code>.</p>
+
+      <blockquote>
+        <p>After you upload the files, and if you press the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of <code class="highlighter-rouge">trapnellPopulation.tab</code> it should look something like this:
+<img src="../../images/goenrichment_trapnellFile.png" alt="Trapnell File" />
+<strong>Figure 2</strong> Trapnell file</p>
+      </blockquote>
+
+      <blockquote class="comment">
+        <h3 id="comment-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
+        <p>The study set represents the differentially expressed genes. These were chosen as having an adjusted p-value for the differential expression test (last column) smaller than a given threshold. In this case, we want to select the genes with an adjusted p-value &lt; 0.05.</p>
+      </blockquote>
+    </li>
+    <li><strong>Filter data on any column using simple expressions</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="highlighter-rouge">trapnellPopulation.tab</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“With following condition”</em>: <code class="highlighter-rouge">c7 &lt; 0.05</code>
+<img src="../../images/goenrichment_galaxyFilter.png" alt="Galaxy Filter" /></li>
+      </ul>
+    </li>
+    <li>
+      <p>This generates one file. <strong>Rename</strong> it to <code class="highlighter-rouge">trapnellStudy</code>.</p>
+
+      <blockquote class="comment">
+        <h3 id="comment-comments-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
+        <p>Both files have the same type of information, the difference between them being the number of genes, as the genes in the study sample are a subset of the population.</p>
+      </blockquote>
+    </li>
+    <li><strong>GOEnrichment</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene Ontology File”</em>: <code class="highlighter-rouge">GO</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene Product Annotation File”</em>: <code class="highlighter-rouge">Go Annotations Drosophila melanogaster</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Study set File”</em>: <code class="highlighter-rouge">trapnellStudy</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Population set File”</em>: <code class="highlighter-rouge">trapnellPopulation.tab</code></li>
+        <li>Use the default options for the rest.
+<img src="../../images/goenrichment_galaxyTrapnell.png" alt="GO Enrichment Trapnell" /></li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>What were the results from running GOEnrichment?</p>
+        <details>
+
+<summary>Click to view answers</summary>
+This will generate 6 files with the respective default names: `goenrichment on trapnellStudy MF Table', `goenrichment on trapnellStudy BP Table', `goenrichment on trapnellStudy MF Table', `goenrichment on trapnellStudy MF Graph', `goenrichment on trapnellStudy BP Graph' and `goenrichment on trapnellStudy CC Graph'. The three Table files list the results of the statistical test for each GO Term, ordered by p-value, and the three Graph files are image files displaying a graph view of the enriched GO terms.
+</details>
+      </blockquote>
+
+      <blockquote class="comment">
+        <h3 id="comment-comments-2"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
+        <p>For each GO term we obtain a p-value corresponding to a single, independent test. Since we are making multiple similar tests, the probability of at least one of them being a false positive increases. Therefore we need to make a correction for multiple testing.</p>
+      </blockquote>
+
+      <blockquote class="question">
+        <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>How many significant terms do we get?</p>
+
+        <details>
+<summary>Click to view answers</summary>
+When we ask how many significant terms, we want to see GO terms that have a p-value &lt; 0.05. According to the results, for Molecular Function we have 5 GO terms, Biological Process we have 43 GO terms and Component Cellular we have 10 GO terms.
+</details>
+      </blockquote>
+    </li>
+  </ol>
+
+  <p>If you press the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the <em>Molecular Function</em> file (<code class="highlighter-rouge">MF Trapnell</code>) you should see something like this:</p>
+
+  <p><img src="../../images/goenrichment_mfTrapnell.png" alt="GO Enrichment Trapnell MF" /></p>
+
+  <blockquote class="question">
+    <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+    <p>Did you expect to see significant terms?</p>
+
+    <details>
+<summary>Click to view answers</summary>
+The ~300 genes should be random, so we wouldn't expect to see any enriched term. Nonetheless we still have significant terms.
+</details>
+  </blockquote>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-comments-3"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
+
+  <p>Let’s go back a little bit, and reopen the <code class="highlighter-rouge">trapnellPopulation.tab</code> file. If you go through the file, you’ll see genes with ‘NA’ as an adjusted p-value. This means that there are genes in our background population for which the differential expression test was not even performed (usually genes that were not expressed in any sample). These genes are irrelevant for this functional enrichment analysis. We also need to note that the study set does not include those genes!</p>
+</blockquote>
+
+<p>Let’s remove the irrelevant genes from the background population (<code class="highlighter-rouge">trapnellPopulation.tab</code>), to see the differences in results.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:</h3>
+
+  <ol>
+    <li><strong>Filter data on any column using simple expressions</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="highlighter-rouge">trapnellPopulation.tab</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“With following condition”</em>: <code class="highlighter-rouge">c7 != 'NA'</code>
+<img src="../../images/goenrichment_galaxyFilterNA.png" alt="Galaxy Filter NA" /></li>
+      </ul>
+    </li>
+    <li>This generates one file. <strong>Rename</strong> to <code class="highlighter-rouge">trapnellFilteredPopulation</code>.</li>
+    <li><strong>GOEnrichment</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene Ontology File”</em>: <code class="highlighter-rouge">GO</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene Product Annotation File”</em>: <code class="highlighter-rouge">Go Annotations Drosophila melanogaster</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Study set File”</em>: <code class="highlighter-rouge">trapnellStudy</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Population set File”</em>: <code class="highlighter-rouge">trapnellFilteredPopulation</code></li>
+        <li>Use the default options for the rest.
+<img src="../../images/goenrichment_galaxyTrapnellNewPop.png" alt="GO Enrichment Trapnell new Population" /></li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> all 6 output files by appending <code class="highlighter-rouge">FilteredPop</code> to the name, to distinguish them from the previous outputs.
+Let’s check the new graph <strong>goenrichment on trapnellStudy MF Graph FilteredPop</strong>.</li>
+  </ol>
+
+  <p><img src="../../images/goenrichment_mfTrapnellNew.png" alt="GO Enrichment Trapnell new Population MF" /></p>
+
+  <blockquote class="question">
+    <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+    <ol>
+      <li>How many significant terms do we get now?</li>
+      <li>Why do you see these differences?</li>
+    </ol>
+    <details>
+
+<summary>Click to view answers</summary>
+<ol type="1">
+<li> According to the results, in *Molecular Function* and *Biological Process* we have 0 GO terms and *Component Cellular* just 1 GO term. </li>
+<li> The background population genes that we removed are not random, they are usually genes that are expressed in specific conditions, tissues or time points. If they are included in the test, we will obtain false enrichments, as we saw.</li>
+</ol>
+</details>
+  </blockquote>
+</blockquote>
+
+<h1 id="simplification-of-graphs">Simplification of graphs</h1>
+
+<p>Graphical views are essential, but sometimes the graph view can become overwhelming due to the size of the results. To exemplify this issue, we will next perform functional enrichment analysis using a more realistic dataset from a study using the mouse model organism. The original dataset can be found <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE30352">here</a>. In this <a href="https://www.nature.com/articles/nature10532">study</a>, the authors compared the gene expression of several tissues. Here, we will use results from the comparison between heart and brain.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-2"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:</h3>
+
+  <p>For the first exercise we will use as a study set the differential genes (padjusted&lt;0.05).</p>
+  <ol>
+    <li><strong>Upload to Galaxy</strong> the mouse_brain_vs_heart.txt, Mus_musculus_annotations_biomart_e92.tab and mouse_brain_vs_heart.difgenes.txt files.</li>
+    <li><strong>Rename</strong> the <em>mouse_brain_vs_heart.txt</em> file to <code class="highlighter-rouge">Mouse population</code>, <em>Mus_musculus_annotations_biomart_e92.tab</em> file to <code class="highlighter-rouge">GO annotations Mus musculus</code> and <em>mouse_brain_vs_heart.difgenes.txt</em> file to <code class="highlighter-rouge">Mouse diff</code>.</li>
+    <li><strong>GOEnrichment</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene Ontology File”</em>: <code class="highlighter-rouge">GO</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene Product Annotation File”</em>: <code class="highlighter-rouge">GO annotations Mus musculus</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Study set File”</em>: <code class="highlighter-rouge">Mouse diff</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Population set File”</em>: <code class="highlighter-rouge">Mouse population</code></li>
+        <li>Select <strong>‘No’</strong> in the Summarize Output option.
+<img src="../../images/goenrichment_galaxyMouseDiff.png" alt="GO Enrichment Mouse Diff" /></li>
+      </ul>
+    </li>
+    <li>This will generate 6 files with the names: <code class="highlighter-rouge">goenrichment on Mouse diff MF Table</code>, <code class="highlighter-rouge">goenrichment on Mouse diff BP Table</code>, <code class="highlighter-rouge">goenrichment on Mouse diff CC Table</code>, <code class="highlighter-rouge">goenrichment on Mouse diff MF Graph</code>, <code class="highlighter-rouge">goenrichment on Mouse diff BP Graph</code> and <code class="highlighter-rouge">goenrichment on Mouse diff CC Graph</code>.</li>
+    <li>Analyze the table and graph from <em>Biological Process</em>.</li>
+  </ol>
+
+  <p><img src="../../images/goenrichment_bpMouseDiff.png" alt="GO Enrichment Mouse Diff BP" /></p>
+
+  <blockquote class="comment">
+    <h3 id="comment-comments-4"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
+    <p>As you can see the three graphs are very complex and difficult to analyze.</p>
+  </blockquote>
+</blockquote>
+
+<p>As you see, the number of enriched GO Terms is very high, with graphs that are too extensive to analyze manually. And this is despite the fact that GOEnrichment ignores singletons and skips dependent tests by default, precisely to avoid enrichment results that are too extensive and not informative.</p>
+
+<p>The Summarize Output option in the GOEnrichment tool addresses this problem by conflating branches/families of enriched GO terms and selecting the most representative term(s) from them (usually 1-2 term per family). The greatly simplifies the results while retaining branch information, and thus ensuring that every enriched family of functions is present in the results. Some specificity is necessarily lost, but the trade-off is that the results become easier and more intuitive to analyze.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-3"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:</h3>
+
+  <ol>
+    <li><strong>GOEnrichment</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene Ontology File”</em>: <code class="highlighter-rouge">GO</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene Product Annotation File”</em>: <code class="highlighter-rouge">GO annotations Mus musculus</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Study set File”</em>: <code class="highlighter-rouge">Mouse diff</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Population set File”</em>: <code class="highlighter-rouge">Mouse population</code></li>
+        <li>Use the default options for the rest (notice that by default the Summarize Option is on).
+<img src="../../images/goenrichment_galaxyMouseDiffSum.png" alt="GO Enrichment Mouse Diff Summarize" /></li>
+      </ul>
+    </li>
+    <li>Analyze again the table and graph from <em>Biological Process</em>.</li>
+  </ol>
+
+  <p><img src="../../images/goenrichment_bpMouseDiffSum.png" alt="GO Enrichment Mouse Diff Summarize BP" /></p>
+
+  <blockquote class="question">
+    <h3 id="question-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+    <ol>
+      <li>Are there differences in complexity comparing the graph with and without the summarize output option?</li>
+    </ol>
+    <details>
+
+<summary>Click to view answers</summary>
+1. Yes, there are differences. As you can see, the activation of the Summarize option reduces the size of the graph because this parameter causes families of GO terms to be conflated. Each major branch in the full results is still present in the summarized results, but now is reduced to 1 or 2 most representative terms, leading to a graph that is much easier to interpret while still containing all the key functional information.
+</details>
+  </blockquote>
+</blockquote>
+
+<p>Another approach to reduce the complexity of the results is to use a shallower version of GO, the GO slims. GO slims are transversal cuts of GO that cover all key branches but lack specific terms. Thus, using them leads to much simpler results than using the full GO, but also leads to a substantial loss in specificity, which is greater than that of the Summarize Output option. You can download slimmed versions of GO from the <a href="http://geneontology.org/page/go-subset-guide">Gene Ontology website</a>.</p>
+
+<p>To test the GO slim approach, let us use the mouse dataset again. First, however, we need to use GOSlimmer tool to convert the annotations file from full GO to GO slim (as GO annotations are typically made to terms that are too specific to be in the GO slim, and thus need to be extended by the true path rule).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-4"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:</h3>
+
+  <ol>
+    <li><strong>Upload to the Galaxy</strong> the goslim_generic.obo file.</li>
+    <li><strong>Rename</strong> the <em>goslim_generic.obo</em> file to <code class="highlighter-rouge">GO Slim</code>.</li>
+    <li>Run <strong>GOSlimmer</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Full Gene Ontology File”</em>: <code class="highlighter-rouge">GO</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GOSlim File”</em>: <code class="highlighter-rouge">GO Slim</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene Product Annotation File”</em>: <code class="highlighter-rouge">GO annotations Mus musculus</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <p><img src="../../images/goenrichment_galaxySlimer.png" alt="Galaxy GO Slimmer" /></p>
+
+  <p>This will generate one file called <code class="highlighter-rouge">Slim Annotations</code>.</p>
+</blockquote>
+<blockquote>
+
+</blockquote>
+
+<p>Now we will go use the GOEnrichment tool with the new Slim Annotations file and the same study set.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-5"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:</h3>
+
+  <ol>
+    <li><strong>GOEnrichment</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li>Use the <code class="highlighter-rouge">GO Slim</code>, <code class="highlighter-rouge">Slim Annotations</code>, <code class="highlighter-rouge">Mouse diff</code> and <code class="highlighter-rouge">Mouse population</code> files.</li>
+        <li>Use the default options.
+<img src="../../images/goenrichment_galaxyMouseSlim.png" alt="GO Enrichment Mouse Slim" /></li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="question-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>What differences do you observe when comparing the results obtained with the GO Slim to those obtained with the full GO, with the Summarize Output option?</li>
+        </ol>
+
+        <p><em>Component Cellular</em> with full GO
+<img src="../../images/goenrichment_ccSum.png" alt="GO Enrichment Mouse Summarize CC" />
+<em>Component Cellular</em> with GO Slim
+<img src="../../images/goenrichment_ccSlimSum.png" alt="GO Enrichment Mouse Slim CC" /></p>
+        <details>
+
+<summary>Click to view answers</summary>
+1. The differences that you observe are due to the ontology used. When we apply the summarize option with the full GO, the GOEnrichment tool will return a summarized output (as we have seen previously). When we opted for GO Slim, the original annotation was already summarized, resulting in an even more summarized output, but with a consequent loss of specificity.
+</details>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="interpretation-of-the-results">Interpretation of the results</h1>
+<p>The interpretation of the results will depend on the biological information that we intend to extract. Enrichment analysis can be used in validation (e.g., of a protocol for extracting membrane proteins), characterization (e.g., of the effects of a stress in a organism) and elucidation (e.g., of the functions impacted by the knock-out of a transcription factor).</p>
+
+<p>There is one important point to keep in mind during the analysis: statistically significant is different from biologically meaningful. That said, it is typically possible to obtain some biological or technical insight about the underlying experiment from statistically enriched terms, even if it isn’t readily apparent.</p>
+
+<p>Terms that are very generic tend to be difficult to interpret, because the meaning they convey is shallow. On the other hand, very specific terms are generally not integrative and thus not useful in interpreting a gene set collectively. The interesting terms are those that are sufficiently specific to transmit substantial biological meaning, yet generic enough to integrate multiple genes.</p>
+
+<p>For the second exercice, we will continue to work with the same study set as before but now we analyze separately genes that are over- and under-expressed, and see the enriched GO terms presents in the brain and heart from the mouse.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-6"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:</h3>
+
+  <ol>
+    <li>
+      <p><strong>Upload to Galaxy</strong> the mouseOverexpressed.txt and the mouseUnderexpressed.txt files.</p>
+
+      <blockquote class="comment">
+        <h3 id="comment-comments-5"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
+
+        <p>The differentially expressed genes can be identified using the adjusted p-value (also known as FDR). The logFC values indicate whether genes are more expressed (logFC&gt;0) or less expressed (logFC&lt;0) in one condition when comparing with another condition.</p>
+
+      </blockquote>
+    </li>
+    <li><strong>GOEnrichment</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters for the both study files (<em>mouseOverexpressed.txt</em> and the <em>mouseUnderexpressed.txt</em>).
+      <ul>
+        <li>Use the <code class="highlighter-rouge">GO</code>, the <code class="highlighter-rouge">GO annotations Mus musculus</code> and the <code class="highlighter-rouge">Mouse population</code> files.</li>
+        <li>Use the default options.
+<img src="../../images/goenrichment_galaxyMouseOver.png" alt="GO Enrichment Mouse Overexpress" />
+<img src="../../images/goenrichment_galaxyMouseUnder.png" alt="GO Enrichment Mouse Underexpress" /></li>
+      </ul>
+    </li>
+    <li>
+      <p>This will generate 12 files, 6 for each sample file, like in previous cases.</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>Analyze both Biological Process tables. According to the study, which tissues are over- and underexpressed?</p>
+        <details>
+
+<summary>Click to view answers</summary>
+The samples correspond to the expressions that occur in the tissues referring to the brain and heart, so the results in the tables (and also in the graphs) should correspond to the specific functions of each organ. When we analyze the tables of enriched functional terms, we can see that the results from underexpressed genes reveal functions related to the brain. While in the case of the genes overexpressed, we identify functions related to muscle / heart function.
+</details>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+<p>Functional enrichment is a good way to look for patterns in gene lists, but interpretation of results can become a complicated process. One way to reduce this complexity is to use the GOEnrichment tool. This tool not only performs the GO Enrichment test, showing us enriched GO terms from our sets, but also contains functionality to simplify the results and make them more easily interpretable. Independently of this, we need to be careful when choosing our genes of interest, but also the background set of genes against which we want to compare.</p>
+
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+            <ul>
+                
+                <li>The goenrichment tool can be used to perform GO Enrichment analysis</li>
+                
+                <li>One needs to be careful when chosing the background population</li>
+                
+                <li>There are several methods to simplify the output of the GO Enrichment analysis</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+        <h1>Useful literature</h1>
+        <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=GO Enrichment Analysis (Transcriptomics)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=GO Enrichment Analysis (Transcriptomics)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (IGC Bioinformatics Unit, Maria Doyle)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/transcriptomics/tutorials/goenrichment/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>
