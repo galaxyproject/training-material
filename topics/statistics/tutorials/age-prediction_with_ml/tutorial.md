@@ -55,7 +55,7 @@ The RNA-seq dataset is collected from fibroblast cell lines belonging to 133 hea
 
 ## Get dataset
 
-We proceed to the analysis by uploading the dataset. The dataset has `133` rows corresponding to humans and over `27,000` columns specifying genes. The last column `age` contains the chronological age of humans. For the validation set, this `age` column is predicted and r2 metric is computed.
+We proceed to the analysis by uploading the RNA-seq dataset.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -78,9 +78,19 @@ We proceed to the analysis by uploading the dataset. The dataset has `133` rows 
 >
 {: .hands_on}
 
+The dataset has `133` rows corresponding to humans and over `27,000` columns specifying genes. The last column `age` contains the chronological age of humans. For the validation set, this `age` column is predicted and r2 metric is computed.
+
+> ### {% icon comment %} Comment
+> In `training_data_normal` dataset, you might have noticed that it showed `134` rows instead of `133` rows. The first row contains the header information i.e. the description of each column.
+{: .comment}
+
 ## Create data processing pipeline
 
-We can see that this RNA-seq dataset is high-dimensional. There are over `27,000` columns/features. Generally, not all the features in the dataset are useful for prediction. We need only those features which increase the predictive ability of the model. To filter these features, we perform feature selection and retain only those which are useful. To do that, we use `SelectKBest` module in the suite of data preprocessors. Again, we are not sure of how many of these features we will need. To find the right number of features, we do a hyperparameter search by setting a different number of features and find out the best number. To create this preprocessor, we will use **pipeline builder** tool. This tool defines sequential processing of datasets. After the preprocessing step, we should add a regressor algorithm (ElasticNet) which analyzes the preprocessed dataset. ElasticNet is a linear regressor with `l1` and `l2` as regularisers. The pipeline builder tool wraps the feature selection and regressor algorithm together and returns a `zipped` file as an output.
+We can see that this RNA-seq dataset is high-dimensional. There are over `27,000` columns/features. Generally, not all the features in the dataset are useful for prediction. We need only those features which increase the predictive ability of the model. To filter these features, we perform feature selection and retain only those which are useful. To do that, we use [SelectKBest](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest) module. This approach involves extracting those features which are most correlated to the target (`age` in our dataset). [F-regression](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_regression.html#sklearn.feature_selection.f_regression) is used for the extraction of features. Moreover, we are not sure of how many of these features we will need. To find the right number of features, we do a hyperparameter search. It works by setting a different number of features and find out the best number for which the accuracy is the best among all the numbers. To wrap this feature selector with a regressor, we will use **pipeline builder** tool. This tool creates a sequential flow of algorithms to execute on datasets. It does not take any dataset as an input. Rather, it is used as an input to **hyperparameter search tool** (explained in the following step). As a regressor, we will use ElasticNet which creates an age prediction model. It is a linear regressor with `l1` (also called lasso) and `l2` (also called ridge) as regularisers. Regularisation is a technique used in machine learning to prevent overfitting. Overfitting happens when a machine learning algorithm starts memorising dataset it is trained upon instead of learning general features. The consequence of overfitting is that the accuracy on training set is good but on the unseen set (test set) is not good which happens because the algorithm has not learned general features from dataset. To prevent overfitting, regularisers like `l1` and `l2` are used. `L1` is a linear term added to the error function of a machine learning algorithm and `l2` adds a squared term to the error function. More details about `l1` and `l2` can found [here](https://www.kaggle.com/residentmario/l1-norms-versus-l2-norms).
+
+> ### {% icon comment %} Comment
+> *ElasticNet* is a regularization method that combines lasso and ridge regression approaches.
+{: .comment}
 
 > ### {% icon hands_on %} Hands-on: Create pipeline
 >
@@ -95,10 +105,6 @@ We can see that this RNA-seq dataset is high-dimensional. There are over `27,000
 >
 {: .hands_on}
 
-> ### {% icon comment %} Comment
-> *ElasticNet* is a regularization method that combines lasso and ridge regression approaches.
-{: .comment}
-
 ## Optimise hyperparameters
 
 In any machine learning algorithm, there are many parameters (hyperparameters). We are not sure which values of these parameters will give an optimal prediction. The default values given for these parameters may not be optimal for different datasets. To find the best combination of the values of different parameters for a dataset, [hyperparameter optimisation](https://en.wikipedia.org/wiki/Hyperparameter_optimization) is performed. There are different techniques to optimise the hyperparameters of any algorithm given a dataset:
@@ -108,11 +114,18 @@ In any machine learning algorithm, there are many parameters (hyperparameters). 
 For our analyses, we will use the grid search approach. It is an exhaustive search which tries out all the combinations of different hyperparameters and ranks these combinations based on a scoring metric. In the random search, the values of a parameter are selected randomly from a given range and the best one is found. Grid search works well for parameters taking categorical as well as numerical values but for the random search, it becomes difficult for parameters which take categorical values.
 
 In the pipeline builder, we added two steps - preprocessing (feature selection) and an estimator (regressor). There are different hyperparameters for these two steps and their best combination should be found out. We will perform grid search to estimate the best values for these parameters: **k** (number of features), **normalize** (subtract the mean and divide by the l2-norm of the dataset) and **alpha** (a constant which is multiplied to the regularisation term). For each parameter, we need to specify a set of values to choose from:
+
 - **k**: [5880, 5890, 5895, 5900]
 - **normalize**: [True, False]
 - **alpha**: [0.00001, 0.0001, 0.001]
 
-For these three parameters, we have 24 different combinations (4 x 2 x 3) of values and we will verify the performance of each combination. You might have noticed that the parameter **k** is used for feature selection and parameters **normalize** and **alpha** are used for regressor.
+There are many more hyperparameters of [ElasticNet regressor](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet) which are explained in the official documentation of scikit-learn. But, the combination of the above three parameters already gives comparable accuracy published in the study [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9), we will stick to these parameters.
+
+> ### {% icon comment %} Comment
+> It is advisable to tune all the parameters of a machine learning algorithm for a dataset if no prior information is available about the subset of parameters which works best for the dataset.
+{: .comment}
+
+The values of `k` have been chosen to get the best accuracy. We can choose any number (integers) between `1` and `27,000` (maximum number of features in the dataset). We will use only these values (shown above) for `k` as the accuracy remains best around these numbers. But, it may vary for a different RNA-seq dataset. That's the reason we perform hyperparameter search to find the best values for parameters for any dataset. The default value of `normalize` is `False`. We will check for both, `[True, False]`. The parameter `alpha` takes a positive real number and its default value is `1.0`. For these three parameters, we have 24 different combinations (4 x 2 x 3) of values and we will verify the performance of each combination. You might have noticed that the parameter **k** is used for feature selection and parameters **normalize** and **alpha** are used for regressor.
 
 > ### {% icon hands_on %} Hands-on: Hyperparameter search
 >
