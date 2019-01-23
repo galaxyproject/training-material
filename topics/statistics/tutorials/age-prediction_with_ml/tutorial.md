@@ -25,11 +25,11 @@ contributors:
 
 [Machine Learning](https://en.wikipedia.org/wiki/Machine_learning) is used to create predictive models by learning features from datasets. In the studies [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) and [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub), biomarkers were examined to predict chronological age of humans by analysing the RNA-seq gene expression levels and DNA methylation pattern respectively. Different machine learning algorithms were used in these studies to select specific biomarkers to make age prediction. The RNA-seq gene expression ([FPKM](https://www.ebi.ac.uk/training/online/glossary/fpkm)) dataset was generated using fibroblast cell lines from 133 healthy humans and their ages range from 1 to 94 years. Within each individual, [DNA methylation](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3174260/) changes with age. This knowledge was used to select useful biomarkers from DNA methylation dataset. The [CpGs sites](https://en.wikipedia.org/wiki/CpG_site) with the highest correlation to age were selected as biomarkers/features. In both these studies, specific biomarkers were analysed by machine learning algorithms to create an age prediction model. [Regression](https://en.wikipedia.org/wiki/Regression_analysis) is used as the machine learning task in both the studies because the targets/labels/ages are real numbers.
 
-Using machine learning tools in Galaxy, we can achieve comparable prediction scores as achieved by these analyses. In this tutorial, we will apply a couple of ([scikit-learn](https://scikit-learn.org/stable/)) machine learning tools to [RNA-seq](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) and [DNA methylation](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) datasets to predict the chronological age of humans. These datasets have been taken directly from these studies. The training is done over 5-fold cross-validation and [r2](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html) (coefficient of determination) scoring metric is used to evaluate the performance of the trained model. The closer it is to 1.0, the better it is. If it is negative, then the trained model is not good. To infer how its values exhibit model performance, we can compare the figures 1 and 2. In both the plots, the true and predicted targets are plotted in a scatter plot. For a good model, most of the points should lie along the `x = y` line as the true and predicted targets are close to each other. In figure 1, we can see that the points are scattered and do not show any pattern. Therefore, the r2 score is `-0.06`. But, figure 2 shows a better pattern as most of the points lie along the line and the r2 score is almost `1.0`.
+Using machine learning tools in Galaxy, we can achieve comparable prediction scores as achieved by these analyses. In this tutorial, we will apply a couple of ([scikit-learn](https://scikit-learn.org/stable/)) machine learning tools to [RNA-seq](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) and [DNA methylation](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) datasets to predict the chronological age of humans. These datasets have been taken directly from these studies. The training is done over 5-fold cross-validation and [r2](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html) (coefficient of determination) scoring metric is used to evaluate the performance of the trained model. The closer it is to 1.0, the better it is. If it is negative, then the trained model is not good. To infer how its values exhibit model performance, we can compare the figure [1](#figure-1) and [2](#figure-2). In both the plots, the true and predicted targets are plotted in a scatter plot. For a good model, most of the points should lie along the `x = y` line as the true and predicted targets are close to each other. In figure [1](#figure-1), we can see that the points are scattered and do not show any pattern. Therefore, the r2 score is `-0.06`. But, figure [2](#figure-2) shows a better pattern as most of the points lie along the line and the r2 score is almost `1.0`.
 
->    ![model_bad](images/model_bad.png "This shows an example of a bad model as most of the points are scattered.")
+> ![model_bad](images/model_bad.png "This shows an example of a bad model as most of the points are scattered.")
 
->    ![model_good](images/model_good.png "This shows an example of a good model as most of the points lie along the x = y line.")
+> ![model_good](images/model_good.png "This shows an example of a good model as most of the points lie along the x = y line.")
 
 This tutorial is divided into two parts - one with RNA-seq dataset and another with DNA methylation dataset. We will use the r2 metric to evaluate the performance of the trained model. For RNA-seq dataset, we will compute cross-validated r2 score using the training set and for DNA methylation dataset, we will compute the r2 score for the test set.
 
@@ -46,9 +46,10 @@ This tutorial is divided into two parts - one with RNA-seq dataset and another w
 
 The RNA-seq dataset is collected from fibroblast cell lines belonging to 133 healthy patients of age from 1 to 94 years. Using this dataset, we perform an [exhaustive search](https://en.wikipedia.org/wiki/Hyperparameter_optimization) (also known as grid search) for finding the best features/genes and then apply [ElasticNet regressor](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet) with 5-fold cross-validation. The r2 score achieved is comparable to the predictions found in the study [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9).
 
-> ### {% icon details %} Cross-validation
+> ### {% icon details %} 5-fold cross-validation
 >
-> It is a model validation technique which estimates the performance of a predictive model on an unseen data. A dataset is divided into `k` folds (parts) and these folds are categorised into training and validation sets. For example in 5-fold cross-validation, 4 parts of the dataset are used for training and 1 part is used for validating the performance. The final performance is averaged over `k` folds.
+> It is a model validation technique which estimates the performance of a predictive model on an unseen data. A dataset is divided into `5` folds and these folds are categorised into training and validation sets. The idea of cross-validation is shown in figure [3](#figure-3). The complete dataset is divided into `5` equal parts. 80% of the dataset is used for training and the remaining 20% is used for validating the performance of training. This is done for `5` folds/iterations, each time the validation set (20% of dataset) is different. In all five folds, the complete dataset is used for training and validation. The final validation performance is averaged over `5` folds. 
+> ![5fold_cv](images/5fold_cv.png "5-fold cross-validation.")
 >
 {: .details}
 
@@ -92,12 +93,11 @@ We can see that this RNA-seq dataset is high-dimensional. There are over `27,000
 >        - *"Choose the module that contains target estimator:"*: `sklearn.linear_model`
 >            - *"Choose estimator class:"*: `ElasticNet`
 >
->    > ### {% icon comment %} Comment
->    >
->    > *ElasticNet* is a regularization method that combines lasso and ridge regression approaches.
->    {: .comment}
->
 {: .hands_on}
+
+> ### {% icon comment %} Comment
+> *ElasticNet* is a regularization method that combines lasso and ridge regression approaches.
+{: .comment}
 
 ## Optimise hyperparameters
 
@@ -147,12 +147,11 @@ For these three parameters, we have 24 different combinations (4 x 2 x 3) of val
 >        - *"Choose how to select data by column:"*: `Select columns by column header name(s)`
 >            - *"Type header name(s):"*: `age`
 >
->    > ### {% icon comment %} Comment
->    >
->    > The tool returns two outputs, one of which is a table with numerical results. Please inspect it carefully: the `rank_test_score` column shows the ranking of different combinations based on the values in `mean_test_score` column.
->    {: .comment}
->
 {: .hands_on}
+
+> ### {% icon comment %} Comment
+> The tool returns two outputs, one of which is a table with numerical results. Please inspect it carefully: the `rank_test_score` column shows the ranking of different combinations based on the values in `mean_test_score` column.
+{: .comment}
 
 > ### {% icon question %} Questions
 >
@@ -181,16 +180,15 @@ We will visualize the tabular output of hyperparameter search tool from the prev
 >    - *"Select the columns for dimensions:"*: `c5, c6, c7, c14`
 >    - *"Select a column containing the values for coloring:"*: `c14`
 >
->    > ### {% icon comment %} Comment
->    >
->    > The output plot has the following legend: the colour-coding is based on the `mean_test_score` column. You can follow the line leading
->    > to the score along every column with parameters' settings.
->    {: .comment}
->    ![data](images/plotting_output.png "The visualization of the hyperparameter optimisation tool output.")
->
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> ### {% icon comment %} Comment
+> The output plot has the following legend: the colour-coding is based on the `mean_test_score` column. You can follow the line leading to the score along every column with parameters' settings.
+{: .comment}
+
+> ![data](images/plotting_output.png "The visualization of the hyperparameter optimisation tool output.")
+
+> ### {% icon question %} Question
 >
 > 1. What can you notice about the least performing (let's say least four) hyperparameters' settings (judging by the plot)?
 >
@@ -208,7 +206,7 @@ We will visualize the tabular output of hyperparameter search tool from the prev
 
 ## Conclusion
 
-In the plot shown above (figure 3), we achieved an r2 score of `0.73` (last column) with 5-fold cross-validation on the training set. In the study [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) as well, a similar r2 score is mentioned for linear regressors. Moreover, the study also included a customised ensemble regressor which achieved better performance (`r2 = 0.81`). However, our analysis showcases the use of machine learning tools in Galaxy to reproduce the results published in the paper.
+In the plot shown above in figure [4](#figure-4), we achieved an r2 score of `0.73` (last column) with 5-fold cross-validation on the training set. In the study [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) as well, a similar r2 score is mentioned for linear regressors. Moreover, the study also included a customised ensemble regressor which achieved better performance (`r2 = 0.81`). However, our analysis showcases the use of machine learning tools in Galaxy to reproduce the results published in the paper.
 
 # Analyze DNA methylation dataset
 
@@ -239,15 +237,16 @@ We proceed with the analysis by uploading new datasets. You might want to create
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
->    > ### {% icon comment %} Comment
->    > The `train_rows` contains a column `Age` which is the label or target. We will evaluate our model on
->    > `test_rows` and compare the predicted age with the true age in `test_rows_labels`
->    {: .comment}
 {: .hands_on}
+
+> ### {% icon comment %} Comment
+> The `train_rows` contains a column `Age` which is the label or target. We will evaluate our model on `test_rows` and compare the predicted age with the true age in `test_rows_labels`
+{: .comment}
 
 ## Create data processing pipeline
 
-We will create a pipeline with **pipeline builder** tool but this time, we just specify the regressor, [gradient boosting regressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html). This is an ensemble-based regressor which uses multiple tree-based regressors internally and predicts by taking an ensemble of the predictions. It has good predictive power and it is robust to outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimises error. One disadvantage which comes from its basic principle of boosting is that it cannot be parallelised. The pipeline builder tool will wrap this regressor and returns a zipped file.
+We will create a pipeline with **pipeline builder** tool but this time, we just specify the regressor. [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) has used [random forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor) as the regressor and we can conclude from this study that ensemble-based regressor worked well on this DNA methylation dataset. Therefore, we will also use [gradient boosting](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html) which is another ensemble-based regressor. This is an ensemble-based regressor because it uses multiple tree-based regressors internally and predicts by taking an ensemble of the predictions. It has good predictive power and it is robust to outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimises error. One disadvantage which comes from its basic principle of boosting is that it cannot be parallelised. 
+The pipeline builder tool will wrap this regressor and returns a zipped file.
 
 > ### {% icon hands_on %} Hands-on: Create pipeline
 >
@@ -256,17 +255,16 @@ We will create a pipeline with **pipeline builder** tool but this time, we just 
 >        - *"Choose the module that contains target estimator:"*: `sklearn.ensemble`
 >            - *"Choose estimator class:"*: `GradientBoostingRegressor`
 >
->    > ### {% icon comment %} Comment
->    >
->    > [*Ensemble*](https://en.wikipedia.org/wiki/Ensemble_learning) method uses multiple learning models internally for better predictions. 
->    {: .comment}
->
 {: .hands_on}
+
+> ### {% icon comment %} Comment
+> [*Ensemble*](https://en.wikipedia.org/wiki/Ensemble_learning) method uses multiple learning models internally for better predictions. 
+{: .comment}
 
 ## Optimise hyperparameters
 
 For this analysis as well, we will use **hyperparameter search** tool to estimate the best values of parameters for the given dataset.
-We use only one parameter `n_estimators` of `Gradient Boosting` regressor for this task. This parameter specifies the number of boosting stages the learning process has to go through. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to predict age in the test dataset.
+We use only one parameter `n_estimators` of `Gradient Boosting` regressor for this task. This parameter specifies the number of boosting stages the learning process has to go through. The default value of `n_estimators` for this regressor is `100`. But, we are not sure if this gives the optimal accuracy. Therefore, it is important to set this parameter to different values to find the optimal one. We choose some values which are less than `100` and few more than `100`. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to predict age in the test dataset.
 
 > ### {% icon hands_on %} Hands-on: Hyperparameter search
 >
@@ -297,7 +295,7 @@ We use only one parameter `n_estimators` of `Gradient Boosting` regressor for th
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> ### {% icon question %} Question
 >
 > 1. What is the optimal number of estimators for the given dataset?
 >
@@ -306,6 +304,8 @@ We use only one parameter `n_estimators` of `Gradient Boosting` regressor for th
 > > 1. 75
 > >
 > {: .solution}
+>
+{: .question}
 
 ## Predict age
 
@@ -332,37 +332,34 @@ In the previous step, we generated predictions for the test dataset. We have one
 >    - {% icon param-files %} *"Select input data file :"*: `test_rows_labels` tabular file
 >    - {% icon param-files %} *"Select predicted data file :"*: `Tabular` file (output of **Ensemble methods for classification and regression** {% icon tool %})
 >
->    > ### {% icon comment %} Comment
->    >
->    > The tool outputs three html files with the interactive plots.
->    {: .comment}
->    > ![Scatter plot](images/scatter_plot.png "Scatter plot for true and predicted age")
->    > We can see in the scatter plot (figure 4) that most of the points lie along the x=y curve. It means that the true and predicted ages are 
->    > close to each other. The root mean square error (`RMSE`) is `3.76` and r2 score is `0.94`.
->    > ![Residuals](images/residual_plot.png "Residuals")
->    > The residual plot (figure 5) is generated to see if there is any visible pattern between residual (predicted age - true age)
->    > and predicted  age. For a good model, there should not be any visible pattern with the plotted points.
->    >
->    > ![True vs predicted age](images/true_vs_predicted_plot.png "True vs predicted age")
->    > The plot in figure 6 shows the true and predicted ages. It can be seen that the points are close.
->
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> ### {% icon comment %} Comment
+> The tool outputs three html files with the interactive plots.
+{: .comment}
+
+> ### {% icon question %} Question
 >
 > 1. Inspect the plots. What can you say about the predictions?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Figures 4 and 6 show that the prediction is good because the predicted age lie close to the true age.
+> > 1. Figure [5](#figure-5) and [7](#figure-7) show that the prediction is good because the predicted age lie close to the true age.
 > >
 > {: .solution}
->
 {: .question}
+
+> ![Scatter plot](images/scatter_plot.png "Scatter plot for true and predicted age")
+> We can see in the scatter plot figure [5](#figure-5) that most of the points lie along the x=y curve. It means that the true and predicted ages are close to each other. The root mean square error (`RMSE`) is `3.76` and r2 score is `0.94`.
+> 
+> ![Residuals](images/residual_plot.png "Residuals")
+> The residual plot shown in figure [6](#figure-6) is generated to see if there is any visible pattern between residual (predicted age - true age) and predicted  age. For a good model, there should not be any visible pattern with the plotted points.
+> 
+> ![True vs predicted age](images/true_vs_predicted_plot.png "True vs predicted age")
+> The plot in figure [7](#figure-7) shows the true and predicted ages. It can be seen that the points are close.
 
 ## Conclusion
 
-We can see in figure 4 that we have achieved an r2 score of `0.94` and root mean square score of `3.76` for the test set using gradient boosting regressor. In the study [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) as well, a similar root mean square score (`3.93`) is mentioned using random forest regressor. The root mean square score shows the difference in the true and predicted age of humans. The r2 score (`0.94`) is close to the best achievable score of `1.0` which shows that the trained model is good. Overall, the second part of the analysis also shows that using the machine learning tools in Galaxy, we can achieve state-of-the-art predictions mentioned in the recent scientific studies.
-> 
+We can see in figure [5](#figure-5) that we have achieved an r2 score of `0.94` and root mean square score of `3.76` for the test set using gradient boosting regressor. In the study [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) as well, a similar root mean square score (`3.93`) is mentioned using random forest regressor. The root mean square score shows the difference in the true and predicted age of humans. The r2 score (`0.94`) is close to the best achievable score of `1.0` which shows that the trained model is good. Overall, the second part of the analysis also shows that using the machine learning tools in Galaxy, we can achieve state-of-the-art predictions mentioned in the recent scientific studies.
 {:.no_toc}
 
