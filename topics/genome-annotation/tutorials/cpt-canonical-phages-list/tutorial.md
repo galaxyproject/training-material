@@ -4,7 +4,6 @@ topic_name: genome-annotation
 tutorial_name: cpt-canonical-phages-list
 ---
 
-
 # Center for Phage Technology's List of Canonical Phage Genomes
 
 <--! Include basic stats (host, size of genome, type of phage, taxonomy (ICTV, NCBI, *ViralZone*) Q/A boxes -->
@@ -19,7 +18,11 @@ Most trusted record: [RefSeq NC_001416](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > * 48,502 base pairs in genome
 >    > * Siphophage
 > {: .solution}
-{: question}
+{: .question}
+
+> ### {% icon comment %} Note that...
+> This phage' genome is available as a CPT organism in Apollo; access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
+{: .comment}
 
 ### Phage T1
 
@@ -32,6 +35,10 @@ Most trusted record: [RefSeq NC_005833](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > * Siphophage
 > {: .solution}
 {: .question}
+
+> ### {% icon comment %} Note that...
+> This phage' genome is available as a CPT organism in Apollo; access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
+{: .comment}
 
 ### Phage T3
 
@@ -53,10 +60,29 @@ Most trusted record: [RefSeq NC_000866](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > ### {% icon solution %}
 >    > * Host: *E. coli*
 >    > * 168,903 base pairs in genome
+>    > * Myophage
+> {: .solution}
+{: .question}
+
+> ### {% icon comment %} Note that...
+> This phage' genome is available as a CPT organism in Apollo; access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
+{: .comment}
 
 ### Phage T5
 
 Most trusted record: [RefSeq NC_005859](https://www.ncbi.nlm.nih.gov/nuccore/NC_005859.1/)
+
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *E. coli*
+>    > * 121,750 base pairs in genome
+>    > * Siphophage
+> {: .solution}
+{: .question}
+
+> ### {% icon comment %} Note that...
+> This phage' genome is available as a CPT organism in Apollo; access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
+{: .comment}
 
 Useful readings: 
 
@@ -65,16 +91,36 @@ Useful readings:
 J Virol, 88 (2014), pp. 1162-1174](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3911642/)
 
 > * [J. Wang,  Y. Jiang,  M. Vincent, Y. Sun, H. Yu, J. Wang, Q. Bao, H. Kong, S. Hu
-*Complete genome seuqnece of bacteriophage T5.*
+*Complete genome sequnece of bacteriophage T5.*
 Virology, 5 (2005), pp. 45-65](https://www.sciencedirect.com/science/article/pii/S0042682204007214?via%3Dihub)
 
 ### Phage T7
 
 Most trusted record: [RefSeq NC_001604](https://www.ncbi.nlm.nih.gov/nuccore/NC_001604)
 
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *E. coli*
+>    > * 39,937 base pairs in genome
+>    > * Podophage
+> {: .solution}
+{: .question}
+
+> ### {% icon comment %} Note that...
+> This phage' genome is available as a CPT organism in Apollo; access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
+{: .comment}
+
 ### Phage N4
 
 Most trusted record: [RefSeq NC_008720](https://www.ncbi.nlm.nih.gov/nuccore/119952179)
+
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *E. coli*
+>    > * 70,153 base pairs in genome
+>    > * Podophage
+> {: .solution}
+{: .question}
 
 Useful readings:
 
@@ -84,17 +130,55 @@ Useful readings:
 
 Most trusted record: [RefSeq NC_005856](https://www.ncbi.nlm.nih.gov/nuccore/NC_005856.1)
 
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *E. coli*
+>    > * 94,800 base pairs in genome
+>    > * Podophage
+> {: .solution}
+{: .question}
+
 ### Phage P2
 
 Most trusted record: [RefSeq NC_001895](https://www.ncbi.nlm.nih.gov/nuccore/NC_001895.1)
+
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *E. coli*
+>    > * 33,593 base pairs in genome
+>    > * Myophage
+> {: .solution}
+{: .question}
 
 ### Phage P4
 
 Most trusted record: [RefSeq NC_001609](https://www.ncbi.nlm.nih.gov/nuccore/NC_001609.1)
 
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *E. coli*
+>    > * 11,624 base pairs in genome
+>    > * Myophage
+> {: .solution}
+{: .question}
+
+Useful readings:
+
+> * [G. Truss, R. N. Goldstein, R. Calendar
+In Vitro Packaging of Satellite Phage P4 DNA
+Proc Natl Acad Sci USA, 71 (1984), pp. 2367-2371](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC388456/)
+
 ### Phage P22
 
 Most trusted record: [RefSeq NC_002371](https://www.ncbi.nlm.nih.gov/nuccore/NC_002371)
+
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *Salmonella*
+>    > * 41,724 base pairs in genome
+>    > * Podophage
+> {: .solution}
+{: .question}
 
 Useful readings:
 
@@ -106,102 +190,330 @@ Nat Struct Mol Biol, 18 (2011), pp. 597-603](https://www.ncbi.nlm.nih.gov/pmc/ar
 
 Most trusted record: [RefSeq NC_025442](https://www.ncbi.nlm.nih.gov/nuccore/NC_025442)
 
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *Salmonella*
+>    > * 59,578 base pairs in genome
+>    > * Siphophage
+> {: .solution}
+{: .question}
+
 ### Phage K
 
 Most trusted record: [RefSeq NC_005880](https://www.ncbi.nlm.nih.gov/nuccore/NC_005880)
+
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *Staphylococcus aureus*
+>    > * 148,317 base pairs in genome
+>    > * Myophage
+> {: .solution}
+{: .question}
 
 ### Phage Epsilon15
 
 Most trusted record: [RefSeq NC_004775](https://www.ncbi.nlm.nih.gov/nuccore/NC_004775)
 
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *Salmonella*
+>    > * 148,317 base pairs in genome
+>    > * Myophage
+> {: .solution}
+{: .question}
+
 ### Phage Felix01
 
 Most trusted record: [RefSeq NC_005282](https://www.ncbi.nlm.nih.gov/nuccore/NC_005282)
+
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *Salmonella*
+>    > * 86,155 base pairs in genome
+>    > * Myophage
+> {: .solution}
+{: .question}
 
 ### Phage Mu
 
 Most trusted record: [RefSeq NC_000929](https://www.ncbi.nlm.nih.gov/nuccore/NC_000929)
 
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *E. coli*
+>    > * 36,717 base pairs in genome
+>    > * Myophage
+> {: .solution}
+{: .question}
+
+> ### {% icon comment %} Note that...
+> This phage' genome is available as a CPT organism in Apollo; access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
+{: .comment}
+
 ### Phage N15
 
 Most trusted record: [RefSeq NC_001901](https://www.ncbi.nlm.nih.gov/nuccore/NC_001901)
+
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *E. coli*
+>    > * 46,375 base pairs in genome
+>    > * Siphophage
+> {: .solution}
+{: .question}
 
 ### Phage Phi29
 
 Most trusted record: [RefSeq_011048](https://www.ncbi.nlm.nih.gov/nuccore/NC_011048)
 
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *Bacillus subtilis*
+>    > * 19,282 base pairs in genome
+>    > * Podophage
+> {: .solution}
+{: .question}
+
 ### Phage PhiKMV
 
 Most trusted record: [RefSeq NC_005045](https://www.ncbi.nlm.nih.gov/nuccore/NC_005045)
+
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *Pseudomonas aeruginosa*
+>    > * 42,519 base pairs in genome
+>    > * Podophage
+> {: .solution}
+{: .question}
 
 ### Phage SP6
 
 Most trusted record: [RefSeq NC_004831](https://www.ncbi.nlm.nih.gov/nuccore/NC_004831)
 
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *Salmonella*
+>    > * 43,769 base pairs in genome
+>    > * Podophage
+> {: .solution}
+{: .question}
+
 ### Phage SPO1
 
 Most trusted record: [RefSeq NC_011421](https://www.ncbi.nlm.nih.gov/nuccore/NC_011421)
+
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *Bacillus subtilis*
+>    > * 132,562 base pairs in genome
+>    > * Myophage
+> {: .solution}
+{: .question}
 
 ### Phage SPP1
 
 Most trusted record: [RefSeq NC_004166](https://www.ncbi.nlm.nih.gov/nuccore/NC_004166)
 
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *Bacillus subtilis*
+>    > * 44,010 base pairs in genome
+>    > * Siphophage
+> {: .solution}
+{: .question}
+
 ### Phage PRD1
 
 Most trusted record: [RefSeq NC_001421](https://www.ncbi.nlm.nih.gov/nuccore/NC_001421)
+
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *E. coli*
+>    > * 14,927 base pairs in genome
+>    > * Tectiphage
+> {: .solution}
+{: .question}
+
+Useful readings: [International Committee on Taxonomy of Viruses
+Virus Taxonomy - Family - Tectiviridae
+ICTV, 9 (2012), pp. 317-321](https://www.sciencedirect.com/science/article/pii/B9780123846846000306)
 
 ### Phage PhiP68
 
 Most trusted record: [RefSeq NC_004679](https://www.ncbi.nlm.nih.gov/nuccore/NC_004679)
 
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *Staphylococcus aureus*
+>    > * 18,227 base pairs in genome
+>    > * Podophage
+> {: .solution}
+{: .question}
+
 ### Phage 9NA
 
 Most trusted record: [RefSeq NC_025443](https://www.ncbi.nlm.nih.gov/nuccore/NC_025443)
+
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *Salmonella*
+>    > * 52,869 base pairs in genome
+>    > * Podophage
+> {: .solution}
+{: .question}
 
 ### Phage Vi01
 
 Most trusted record: [RefSeq NC_015296](https://www.ncbi.nlm.nih.gov/nuccore/NC_015296)
 
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *Salmonella*
+>    > * 157,061 base pairs in genome
+>    > * "Viunalikevirus"
+> {: .solution}
+{: .question}
+
+> ### {% icon comment %} Note that...
+> This phage' genome is available as a CPT organism in Apollo; access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
+{: .comment}
+
+Useful readings: [E. M. Adriaenssens, H. Ackermann, H. Anna, B. Blasdel, I. F. Connerton, D. Goulding, M. W/ Griffiths, S. P. Hooton, E. M. Kutter, A. M. Kropinski, J. Lee, M. Maes, D. Pickard, S. Ryu, Z. Sepehrizadeh, S. S. Shahrbabak, A. L. Toribio, R. Lavigne
+A suggested new bacteriophage genus: "Viunalikevirus"
+Arch Virol, 157 (2012), pp. 2035-2046](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4174289/)
+
 ### Phage Phi92
 
 Most trusted record: [RefSeq NC_023693](https://www.ncbi.nlm.nih.gov/nuccore/NC_023693)
+
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *E. coli*
+>    > * 148,612 base pairs in genome
+>    > * Myophage
+> {: .solution}
+{: .question}
+
+> ### {% icon comment %} Note that...
+> This phage' genome is available as a CPT organism in Apollo; access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
+{: .comment}
 
 ### Phage PhiETA
 
 Most trusted record: [RefSeq NC_003288](https://www.ncbi.nlm.nih.gov/nuccore/NC_003288)
 
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *Staphylococcus aureus*
+>    > * 43,081 base pairs in genome
+>    > * Siphophage
+> {: .solution}
+{: .question}
+
 ### Phage HK97
 
 Most trusted record: [RefSeq NC_002167](https://www.ncbi.nlm.nih.gov/nuccore/9634155)
+
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *E. coli*
+>    > * 39,732 base pairs in genome
+>    > * Siphophage
+> {: .solution}
+{: .question}
 
 ### Phage HK022
 
 Most trusted record: [RefSeq NC_002166](https://www.ncbi.nlm.nih.gov/nuccore/9634119)
 
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *E. coli*
+>    > * 40,751 base pairs in genome
+>    > * Siphophage
+> {: .solution}
+{: .question}
+
 ### Phage 186
 
 Most trusted record: [RefSeq NC_001317](https://www.ncbi.nlm.nih.gov/nuccore/9634055)
+
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *E. coli*
+>    > * 30,624 base pairs in genome
+>    > * Myophage
+> {: .solution}
+{: .question}
 
 ### Phage Tuc2009
 
 Most trusted record: [RefSeq NC_002703](https://www.ncbi.nlm.nih.gov/nuccore/13487801)
 
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *Lactococcus*
+>    > * 38,347 base pairs in genome
+>    > * Siphophage
+> {: .solution}
+{: .question}
+
 ### Phage P335
 
 Most trusted record: [RefSeq NC_004746](https://www.ncbi.nlm.nih.gov/nuccore/30089861)
+
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *Lactococcus*
+>    > * 36,596 base pairs in genome
+>    > * Siphophage
+> {: .solution}
+{: .question}
 
 ### Phage TP901-1
 
 Most trusted record: [RefSeq NC_002747](https://www.ncbi.nlm.nih.gov/nuccore/13786531)
 
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *Lactococcus*
+>    > * 37,667 base pairs in genome
+>    > * Siphophage
+> {: .solution}
+{: .question}
+
 ### Phage A118
 
 Most trusted record: [RefSeq NC_003216](https://www.ncbi.nlm.nih.gov/nuccore/16798783)
+
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *Listeria monocytogenes*
+>    > * 40,834 base pairs in genome
+>    > * Siphophage
+> {: .solution}
+{: .question}
 
 ### Phage L5
 
 Most trusted record: [RefSeq NC_001335](https://www.ncbi.nlm.nih.gov/nuccore/9625433)
 
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *Mycobacterium smegmatis*
+>    > * 52,297 base pairs in genome
+>    > * Siphophage
+> {: .solution}
+{: .question}
+
 ### Phage Bxb1
 
 Most trusted recored: [RefSeq NC_2656](https://www.ncbi.nlm.nih.gov/nuccore/12657854)
+
+> ### {% icon question %} Basic Stats
+>    > ### {% icon solution %}
+>    > * Host: *Mycobacterium smegmatis*
+>    > * 50,550 base pairs in genome
+>    > * Siphophage
+> {: .solution}
+{: .question}
