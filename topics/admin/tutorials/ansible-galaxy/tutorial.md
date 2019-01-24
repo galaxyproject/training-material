@@ -58,7 +58,7 @@ The important variables for this tutorial are:
 - `galaxy_commit_id`
 - `galaxy_config`
 
-These are largely self explanatory, a server directory, which commit should be installed, and the Galaxy configuration. We will not Galaxy configuration variables in detail as they are covered sufficiently in the `galaxy.yml` file or the [online documentation](https://docs.galaxyproject.org/en/master/admin/config.html#configuration-options).
+These are largely self explanatory: a server directory, which commit should be installed, and the Galaxy configuration. We will not explain Galaxy configuration variables in detail as they are covered sufficiently in the `galaxy.yml` sample file or the [online documentation](https://docs.galaxyproject.org/en/master/admin/config.html#configuration-options).
 
 The official recommendation is that you should have a variables file such as a `group_vars/galaxy.yml` for storing all of the Galaxy configuration.
 
