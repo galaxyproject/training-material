@@ -69,21 +69,22 @@ Apollo takes JBrowse one step further and adds support for community annotation;
 
 ### 4. Stand-alone tools: Artemis
 
-Many genome browsers and annotators are installed and store thier data on your local computer. Artemis, produced by the Sanger Institute, is a powerful and freely-available desktop-based genome browser and annotation tool. Artemis is written in Java and so it can be run on Windows, Mac and Linux-based systems.  Artemis provides a three-pane view consisting of a high-level overview of the genome, a DNA-level view, and a list of all the features in the genome. Unlike Apollo, all data is only stored on your local device. 
+Many genome browsers and annotators are installed and store their data on your local computer. Artemis, produced by the Sanger Institute, is a powerful and freely-available desktop-based genome browser and annotation tool. Artemis is written in Java and so it can be run on Windows, Mac and Linux-based systems.  Artemis is also able to directly read GenBank-formatted files downloaded from the internet. Artemis provides a three-pane view consisting of a high-level overview of the genome, a DNA-level view, and a list of all the features in the genome. Unlike Apollo, all data is only stored on your local device. 
 
 ![](../../images/getting-started-with-apollo-screenshots/2_artemis.png)
 
 Artemis is capable of adding, deleting and editing genome features and annotations, and also has limited ability to edit DNA sequence directly. Features are not added from evidence tracks but may be entered by the user directly, which allows for great flexibility but also means that evidence for each annotation is not tied to the record itself. 
 
-In BICH 464, we will not be using Artemis for the annotation of your genomes.  However, Artemis is useful for viewing genomes retrieved from the public databases such as NCBI GenBank. Artemis is able to directly read GenBank-formatted files downloaded from the internet.  We will cover Artemis on an individual basis later in the course.
+In BICH 464, we will not be using Artemis for the annotation of your genomes.  However, Artemis is useful for viewing genomes retrieved from the public databases such as NCBI GenBank.   We will cover Artemis on an individual basis later in the course.
 
 
 # Annotation Within Apollo
 
 Continuing on to actually using Apollo, this section will go through an example annotation. Characteristics of the program will also be described to assist in the navigation of the program. There are two primary components to annotation:
 
-1. Structural annotation, which consists of locations of genomic features, such as genes and terminators. Several gene callers will identify possible genes in the phage genome. Putative genes in Apollo will be annotated based on these results. See the [Structural Annotation Workflow Tutorial]({{ site.baseurl }}//topics/genome-annotation/tutorials/structural-annotation-workflow/tutorial.html) for more information. 
-2. Functional annotation, which entails predicting gene functions based on multiple sources of evidence. To run the analyses to allow this prediction see the [Functional Annotation Workflow Tutorial]({{ site.baseurl }}//topics/genome-annotation/tutorials/functional-annotation-workflow/tutorial.html).
+**1. Structural annotation**, which consists of locations of genomic features, such as genes and terminators. Several gene callers will identify possible genes in the phage genome. Putative genes in Apollo will be annotated based on these results. See the [Structural Annotation Workflow Tutorial]({{ site.baseurl }}//topics/genome-annotation/tutorials/structural-annotation-workflow/tutorial.html) for more information. 
+
+**2. Functional annotation**, which entails predicting gene functions based on multiple sources of evidence. To run the analyses to allow this prediction see the [Functional Annotation Workflow Tutorial]({{ site.baseurl }}//topics/genome-annotation/tutorials/functional-annotation-workflow/tutorial.html).
 
 ## Apollo in Galaxy - General Use
 
