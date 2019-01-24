@@ -69,13 +69,13 @@ Apollo takes JBrowse one step further and adds support for community annotation;
 
 ### 4. Stand-alone tools: Artemis
 
-Many genome browsers and annotators are installed and store their data on your local computer. Artemis, produced by the Sanger Institute, is a powerful and freely-available desktop-based genome browser and annotation tool. Artemis is written in Java and so it can be run on Windows, Mac and Linux-based systems.  Artemis is also able to directly read GenBank-formatted files downloaded from the internet. Artemis provides a three-pane view consisting of a high-level overview of the genome, a DNA-level view, and a list of all the features in the genome. Unlike Apollo, all data is only stored on your local device. 
+Many genome browsers and annotators are installed and store thier data on your local computer. Artemis, produced by the Sanger Institute, is a powerful and freely-available desktop-based genome browser and annotation tool. Artemis is written in Java and so it can be run on Windows, Mac and Linux-based systems.  Artemis provides a three-pane view consisting of a high-level overview of the genome, a DNA-level view, and a list of all the features in the genome. Unlike Apollo, all data is only stored on your local device. 
 
 ![](../../images/getting-started-with-apollo-screenshots/2_artemis.png)
 
 Artemis is capable of adding, deleting and editing genome features and annotations, and also has limited ability to edit DNA sequence directly. Features are not added from evidence tracks but may be entered by the user directly, which allows for great flexibility but also means that evidence for each annotation is not tied to the record itself. 
 
-In BICH 464, we will not be using Artemis for the annotation of your genomes.  However, Artemis is useful for viewing genomes retrieved from the public databases such as NCBI GenBank.   We will cover Artemis on an individual basis later in the course.
+In BICH 464, we will not be using Artemis for the annotation of your genomes.  However, Artemis is useful for viewing genomes retrieved from the public databases such as NCBI GenBank. Artemis is able to directly read GenBank-formatted files downloaded from the internet.  We will cover Artemis on an individual basis later in the course.
 
 
 # Annotation Within Apollo
@@ -86,7 +86,9 @@ Continuing on to actually using Apollo, this section will go through an example 
 
 **2. Functional annotation**, which entails predicting gene functions based on multiple sources of evidence. To run the analyses to allow this prediction see the [Functional Annotation Workflow Tutorial]({{ site.baseurl }}//topics/genome-annotation/tutorials/functional-annotation-workflow/tutorial.html).
 
-## Apollo in Galaxy - General Use
+## The Galaxy-Apollo Bridge
+
+> ### {% icon details %} Important Definitions 
 
 ### 1. JBrowse in Galaxy
 
@@ -120,6 +122,7 @@ With a complete JBrowse instance, data can now be channeled to Apollo. Data is b
 {: .tip}
 
 Executing this step will transfer data to Apollo and produce a JSON (JavaScript Object Notation) file. The output JSON file contains some metadata about the organism. With the data available in Apollo, it can be accessed at [Apollo](https://cpt.tamu.edu/apollo/annotator/index); accessing Apollo requires logging into Galaxy. The genome can also be accessed via the “Annotate on data #” step in the history column by clicking the eye {% icon solution %} symbol. The Annotate tool takes the JSON file from the **Create or Update Organism** step and loads Apollo directly in Galaxy.
+{: .details}
 
 ### Navigating Through Apollo
 
