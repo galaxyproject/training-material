@@ -82,14 +82,6 @@ if fn.include?('tutorial.md') then
     end
   end
 
-  # Check the requirements
-  if data.key?('requirements') then
-    data['requirements'].each{ |x|
-      if x.key?()
-        # TODO
-    }
-  end
-
   # Check contributors
   errs = errs.concat(check_contributors(data))
 elsif fn.include?('metadata.yaml') then
