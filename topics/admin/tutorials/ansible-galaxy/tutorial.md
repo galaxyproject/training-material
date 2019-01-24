@@ -52,7 +52,7 @@ We want to give you a comprehensive understanding of how the Galaxy installation
 
 The official playbook is extremely configurable, everything that you want to change is exposed as a variable, and then tasks will change behaviour based on that. The [playbook documentation](https://github.com/galaxyproject/ansible-galaxy#role-variables) is the most up-to-date source of documentation for the variables. You should take a minute a read over the variables listed there.
 
-The important variables for our purposes today will be:
+The important variables for this tutorial are:
 
 - `galaxy_server_dir`
 - `galaxy_commit_id`
