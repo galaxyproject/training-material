@@ -32,14 +32,13 @@ The Center for Phage Technology Galaxy program is an instance of the Galaxy Proj
 
 Although it is not the first genome browser, Apollo is the first collaborative genomic annotation editor available solely on the Internet. Apollo is still under development and new features are being added all the time.
 
-> ### {% icon details %} Important Definitions 
+## Important Definitions 
 > * **Static:** Unmodifiable, specifically in the context of a computer resource that you are accessing. The website that you see cannot be modified by you, the user accessing them. This is opposed to “dynamic” where you can interact with the files or service, and your interactions can persist.
 > * **Instance:** A specific copy of a web service made available over the internet. Given that the administrators can run many copies of the same web service, we use the term “instance” to refer to a specific copy of a service.
 > * **Tracks:** In Apollo, a track is a set of analysis results that can be shown or hidden depending on the annotator’s needs. All tracks are stored in a file format that allows them to be aligned to the organisms's DNA sequence.
 > * **Evidence:** Tracks contain evidence; these are results of specific computer methods (which are documented and citable), which we use to make annotations. Annotations should not be made without evidence. Evidence allows us to move the annotation process from an art to a science.
 > * **Feature:** Conceptually, a feature is any defined and named region of a genome. Features could be genes, conserved domains, promoter binding sites, terminators, intron splice sites, or any other region of interest. Visually, a features appear as rectangular boxes in Apollo.
 > * **Annotations:** Annotation is the addition of descriptive features to a DNA sequence, such as a protein’s function, or locating tRNAs, and terminators. The annotation process we do is 100% computer based, so keep in mind that until an annotation is experimentally tested in the lab, it is putative or assumed based on an educated hypothesis.
-{: .details}
 
 ## History of Genome Browsers
 
@@ -83,8 +82,9 @@ In BICH 464, we will not be using Artemis for the annotation of your genomes.  H
 
 Continuing on to actually using Apollo, this section will go through an example annotation. Characteristics of the program will also be described to assist in the navigation of the program. There are two primary components to annotation:
 
-1. Structural annotation, which consists of locations of genomic features, such as genes and terminators. Several gene callers will identify possible genes in the phage genome. Putative genes in Apollo will be annotated based on these results. See the [Structural Annotation Workflow Tutorial]({{ site.baseurl }}//topics/genome-annotation/tutorials/structural-annotation-workflow/tutorial.html) for more information. 
-2. Functional annotation, which entails predicting gene functions based on multiple sources of evidence. To run the analyses to allow this prediction see the [Functional Annotation Workflow Tutorial]({{ site.baseurl }}//topics/genome-annotation/tutorials/functional-annotation-workflow/tutorial.html).
+**1. Structural annotation**, which consists of locations of genomic features, such as genes and terminators. Several gene callers will identify possible genes in the phage genome. Putative genes in Apollo will be annotated based on these results. See the [Structural Annotation Workflow Tutorial]({{ site.baseurl }}//topics/genome-annotation/tutorials/structural-annotation-workflow/tutorial.html) for more information. 
+
+**2. Functional annotation**, which entails predicting gene functions based on multiple sources of evidence. To run the analyses to allow this prediction see the [Functional Annotation Workflow Tutorial]({{ site.baseurl }}//topics/genome-annotation/tutorials/functional-annotation-workflow/tutorial.html).
 
 ## The Galaxy-Apollo Bridge
 
