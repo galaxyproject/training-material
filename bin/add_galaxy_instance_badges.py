@@ -22,7 +22,7 @@ def discover_trainings(topics_dir):
             'trainings': {},
         }
 
-        for material in glob.glob(os.path.join(training_dir, 'tutorials', '*', 'tutorial.md')):
+        for material in glob.glob(os.path.join(training_dir, 'tutorials', '*', 'tutorial.md')) + glob.glob(os.path.join(training_dir, 'tutorials', '*', 'slides.html')):
             with open(material, 'r') as handle:
                 material_data = yaml.load_all(handle)
                 material_data = next(material_data)

@@ -655,17 +655,18 @@ In the previous section, we counted reads mapped to genes for two samples. To be
 >     - `GSM461176`
 >     - `GSM461179`
 >     - `GSM461182`
+>
 > The links to these files are below:
 >
->    ```
->    https://zenodo.org/record/1185122/files/GSM461178_1.fastqsanger
->    https://zenodo.org/record/1185122/files/GSM461178_2.fastqsanger
->    https://zenodo.org/record/1185122/files/GSM461181_1.fastqsanger
->    https://zenodo.org/record/1185122/files/GSM461181_2.fastqsanger
->    https://zenodo.org/record/1185122/files/GSM461176.fastqsanger
->    https://zenodo.org/record/1185122/files/GSM461179.fastqsanger
->    https://zenodo.org/record/1185122/files/GSM461182.fastqsanger
->    ```
+> ```
+> https://zenodo.org/record/1185122/files/GSM461178_1.fastqsanger
+> https://zenodo.org/record/1185122/files/GSM461178_2.fastqsanger
+> https://zenodo.org/record/1185122/files/GSM461181_1.fastqsanger
+> https://zenodo.org/record/1185122/files/GSM461181_2.fastqsanger
+> https://zenodo.org/record/1185122/files/GSM461176.fastqsanger
+> https://zenodo.org/record/1185122/files/GSM461179.fastqsanger
+> https://zenodo.org/record/1185122/files/GSM461182.fastqsanger
+> ```
 >
 > This is really interesting to redo on the other datasets, especially to check how parameters differ given the different type of data (single-end versus paired-end).
 {: .hands_on}

@@ -149,9 +149,16 @@ Several metadata are defined in `metadata.yaml` file in your topic folder to :
 - `type`: target for the topic ('use', 'admin-dev', 'instructors')
 - `summary`: summary of the focus of the topic
 - `requirements`: list of resources that the reader of the material should be familiar with before starting any tutorial in this topic:
-    - `title`
-    - `link`: relative for internal (inside training material) requirement or full for external requirement)
     - `type`: the type of link (`internal` or `external`)
+
+    For internal, i.e. inside the Galaxy Training Material:
+    - `topic_name`: name of the topic
+    - `tutorials`: list of required tutorials inside of the topic
+
+    For external:
+    - `title`: title of the external resource
+    - `link`: URL to the external resource
+
 - `docker_image`: name of the Docker image for the topic
 
     If no Docker image exists for this topic, let this information empty

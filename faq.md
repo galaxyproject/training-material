@@ -13,7 +13,7 @@ This website is a collection of hands-on tutorials that are designed to be inter
 
 ![Interactive training](shared/images/interactive_training.png "The hands-on nature of our training material. It can be used with two web browser windows open side-by-side, one pointed at the current tutorial and the other at a Galaxy instance")
 
-This material is developed and maintained by the [worldwide Galaxy community](https://galaxyproject.org/). You can learn more about this effort by reading our [article](https://www.biorxiv.org/content/early/2018/04/05/225680).
+This material is developed and maintained by the [worldwide Galaxy community](https://galaxyproject.org/). You can learn more about this effort by reading our [article](https://doi.org/10.1016/j.cels.2018.05.012).
 
 ## What is Galaxy?
 
@@ -37,6 +37,10 @@ The content of this website is Creative Commons Attribution 4.0 ([License]({{ si
 ## How can I cite this effort?
 
 We wrote an [article](https://www.biorxiv.org/content/early/2018/04/05/225680) about our efforts.
+
+## How can I advertise the training materials on my posters?
+
+We provide some QR codes and logos in the [images folder](https://github.com/galaxyproject/training-material/tree/master/assets/images).
 
 # For Individual Learners
 
@@ -62,7 +66,7 @@ To run the hands-on tutorials you need a Galaxy server to run them on.
 
 Each tutorial is annotated with information about which [public Galaxy servers](https://galaxyproject.org/public-galaxy-servers/) it can be run on. These servers are available to anyone on the world wide web and some may have all the tools that are needed by a specific tutorial.
 
-If your organization/consortia/community has its own Galaxy server, then you may  want to run tutorials on that. You will need to confirm that all necessary tools and reference genomes are available on your server and possible install missing tools and data. To learn how to do that, you can follow our [dedicated tutorial]({{ site.baseurl }}/topics/contributing/tutorials/setup-galaxy-for-training/tutorial.html).
+If your organization/consortia/community has its own Galaxy server, then you may  want to run tutorials on that. You will need to confirm that all necessary tools and reference genomes are available on your server and possible install missing tools and data. To learn how to do that, you can follow our [dedicated tutorial]({{ site.baseurl }}/topics/instructors/tutorials/setup-galaxy-for-training/tutorial.html).
 
 Some topics have a [Docker](https://www.docker.com/) image that can be installed and run on participants' laptops.  These Docker images contain Galaxy instances that include all tools and datasets used in a tutorial, as well as saved analyses and repeatable workflows that are relevant. You will need to [install Docker](https://docs.docker.com/install/).
 
@@ -91,7 +95,7 @@ Each tutorial is annotated with the information on which [public Galaxy servers]
 If your organization/consortia/community has its own Galaxy server, then you may  want to run tutorials on that. This can be ideal because then the instance you are teaching on is the same you your participants will be using after the training. They'll also be able to revisit any analysis they did during the training. If you pursue this option you'll need to work with your organization's Galaxy Admins to confirm that
 
 - the server can support a room full of people all doing the same analysis at the same time.
-- all tools and reference datasets needed in the tutorial are locally installed.  To learn how to setup a Galaxy instance for a tutorial, you can follow our [dedicated tutorial]({{ site.baseurl }}/topics/contributing/tutorials/setup-galaxy-for-training/tutorial.html).
+- all tools and reference datasets needed in the tutorial are locally installed.  To learn how to setup a Galaxy instance for a tutorial, you can follow our [dedicated tutorial]({{ site.baseurl }}/topics/instructors/tutorials/setup-galaxy-for-training/tutorial.html).
 - all participants will be able to create/use accounts on the system.
 
 Some training topics have a Docker image that can be installed and run on all participants' laptops.  These images contain Galaxy instances that include all tools and datasets used in a tutorial, as well as saved analyses and repeatable workflows that are relevant.
@@ -100,7 +104,7 @@ Finally, you can also run your tutorials on cloud-based infrastructures.  Galaxy
 
 ## What are the best practices for teaching with Galaxy?
 
-We started to collect some best practices for instructors inside our [Good practices slides]({{ site.baseurl }}/topics/contributing/tutorials/good-practices/slides.html)
+We started to collect some best practices for instructors inside our [Good practices slides]({{ site.baseurl }}/topics/instructors/)
 
 ## How do I get help?
 
@@ -278,16 +282,10 @@ In [issues](https://github.com/galaxyproject/training-material/issues), you will
 
 ## Are there any upcoming events focused on Galaxy Training?
 
-Yes. As of May 2018, these events are on the horizon:
+Yes, always! Have a look at the [Galaxy Community Events Calendar](https://galaxyproject.org/events/) for what coming up right now.
 
-* [CarpentryCon 2018](http://www.carpentrycon.org/), 30 May - 1 June, Dublin, Ireland
-  * Not specifically about Galaxy Training, but an excellent opportunity to gather with other computational science educators. [Bérénice Batut](https://github.com/bebatut) will present a poster and lightning talk on [Community-Driven Training for Biological Data Analysis with the Galaxy Training Network](https://github.com/carpentries/carpentrycon/blob/master/Sessions/2018-05-30/13-Poster-Session/abstract-berenice-batut.md)
-* [GCCBOSC 2018](https://gccbosc2018.sched.com/), June 25-30, Portland, Oregon, United States
-  * The annual gathering of the Galaxy Community is an opportunity to learn from experienced Galaxy trainers and to contribute to these efforts:
-    * [Bioinformatics Training and Education with the Galaxy Training Network](http://sched.co/Drp9), training session on how to use and contribute to these materials, presented by [Bérénice Batut](https://github.com/bebatut)
-    * [A fruitful year for the Galaxy Training materials](http://sched.co/EYF1), conference talk by [Bérénice Batut](https://github.com/bebatut)
-    * [Panel: Training and Documentation in Bioinformatics](http://sched.co/Dup7)
-    * The *Galaxy documentation, analysis, and training (Galaxy DAT)* track of [CollaborationFest](https://galaxyproject.org/events/gccbosc2018/collaboration/), June 29 - July 2. Focus on expanding Galaxy community resources like training materials and documentation.
-* Quarterly online training material Contribution Fests: The training community will meet online on the 3rd Friday of every 3rd month to focus on enhancing particular areas of the training material.
+## Sustainability of the training-material and metadata
 
-Is the above list now out of date? (it happens). See the [Galaxy Community Events Calendar](https://galaxyproject.org/events/) for what coming up right now.
+This repository is hosted on [GitHub](https://github.com/) using git as a [DVCS](https://en.wikipedia.org/wiki/Distributed_version_control). Therefore the community is hosting backups of this
+repository in a decentralised way. The repository is self-contained and contains all needed content and all metadata.
+In addition we mirror snapshops of this repo on [Zenodo](http://zenodo.org). 

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Calling variants in diploid systems"
-zenodo_link: ""
+zenodo_link: "https://doi.org/10.5281/zenodo.60520"
 questions:
   - "How to find variable sites in diploid genomes?"
 objectives:
