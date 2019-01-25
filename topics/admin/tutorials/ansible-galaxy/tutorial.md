@@ -35,7 +35,7 @@ requirements:
 
 This tutorial assumes you have some familiarity with Ansible and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook.
 
-We want to give you a comprehensive understanding of how the Galaxy installation occurs, but we want to avoid you having to write a "custom" Galaxy installation playbook which you would eventually throw away, in order to use the official playbooks. Given these goals, we will go through the playbook in depth first, and then move to a hands-on portion later. If you are not interested in the inner workings, you can [skip to that section now](#hands-on-installing-galaxy).
+We want to give you a comprehensive understanding of how the Galaxy installation occurs, but we want to avoid you having to write a "custom" Galaxy installation playbook which you would eventually throw away, in order to use the official playbooks. Given these goals, we will go through the playbook in depth first, and then move to a hands-on portion later. If you are not interested in the inner workings, you can [skip to that section now](#installing-galaxy).
 
 > ### Agenda
 >
@@ -50,7 +50,7 @@ We want to give you a comprehensive understanding of how the Galaxy installation
 
 ## Configuration
 
-The official playbook is extremely configurable, everything that you want to change is exposed as a variable, and then tasks will change behaviour based on that. The [playbook documentation](https://github.com/galaxyproject/ansible-galaxy#role-variables) is the most up-to-date source of documentation for the variables. You should take a minute a read over the variables listed there.
+The official playbook is extremely configurable, everything that you want to change is exposed as a variable, and then tasks will change behaviour based on that. The [playbook documentation](https://github.com/galaxyproject/ansible-galaxy#role-variables) is the most up-to-date source of documentation for the variables. You should take a minute and read over the variables listed there.
 
 The important variables for this tutorial are:
 
@@ -113,7 +113,8 @@ galaxy_config_files:
     dest: "{{ galaxy_config['galaxy']['dependency_resolvers_config_file'] }}"
   - src: files/galaxy/config/disposable_email_blacklist.conf
     dest: "{{ galaxy_config['galaxy']['blacklist_file'] }}"
-```{% endraw %}
+```
+{% endraw %}
 
 The configuration here is a bit different, it references the `galaxy_config`, which is structured like:
 
@@ -138,7 +139,7 @@ Now that Galaxy is available on disk, Ansible is ready to start processing [depe
 
 ### Mutable Setup
 
-[This task](https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/mutable_setup.yml) simply creates a directory and deploys any hand-managed mutable configuration files. It is unlikely that you want to manage these, as Galaxy does a sufficient job. Any changes you make to Galaxy like installing tools would result in the tools being "forgotten about", if you re-ran the playbook and overwrote that file.
+[This task](https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/mutable_setup.yml) creates a directory and deploys any hand-managed mutable configuration files. It is unlikely that you want to manage these, as Galaxy does a sufficient job. Any changes you make to Galaxy like installing tools would result in the tools being "forgotten about", if you re-ran the playbook and overwrote that file.
 
 
 ### Managing the Database
@@ -176,14 +177,14 @@ best practices and knowledge from previous admins codified for you.
 
 # Installing Galaxy
 
-With the necessary background in place, you're ready to install Galaxy with Ansible. The playbooks will start very simply, and will grow over time. We will start with the minimal Galaxy playbook which only requires setting the `galaxy_server_dir` and expand from there. First, however, we need a database for Galaxy to connect to, so we will do that now.
+With the necessary background in place, you're ready to install Galaxy with Ansible. The playbooks will start simple, and grow over time. We will start with the minimal Galaxy playbook which only requires setting the `galaxy_server_dir` and expand from there. First, however, we need a database for Galaxy to connect to, so we will do that now.
 
 To proceed from here it is expected that:
 
 - You have [Ansible installed](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) on your local machine
 
   > ### {% icon tip %} Tip: Running Ansible on your remote machine
-  > It is possible to have ansible installed on the remote machine and run it there as well. You will need to update your hosts file to point to localhost, and pass the `-c local` parameter. Be **certain** that your playbook that you're building is stored somewhere safe like your user home directory. We will remove data at one point during this tutorial and would not want you to lose your progress.
+  > It is possible to have ansible installed on the remote machine and run it there as well. You will need to update your hosts file to point to localhost, and pass the `-c local` parameter. Be **certain** that the playbook that you're building is stored somewhere safe like your user home directory. We will remove data at one point during this tutorial and would not want you to lose your progress.
   {: .tip}
 
 - You have a [hosts file](../ansible/tutorial.html#hosts-file) with the VM or host specified where you will deploy galaxy. We will refer to this group of hosts as "galaxyservers." You can use a different name if you prefer or are working on an existing playbook, just be sure to update all references later on.
@@ -835,7 +836,7 @@ Now that you've gotten through the worst case scenario, we'll attack the next wo
 This step uses letsencrypt for generating certificates, so it assumes that:
 
 1. Your machine is publicly accessible
-2. It has a publicly resolvable DNS entr
+2. It has a publicly resolvable DNS entry
 
 TODO(hxr): fix
 > ### {% icon hands_on %} Hands-on: SSL Certificates with Lets Encrypt!
