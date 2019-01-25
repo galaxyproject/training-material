@@ -1,0 +1,385 @@
+{  
+   "uuid":"bc1e80d3-ae5f-46ca-a4fa-11a2e3b3428d",
+   "tags":[  
+
+   ],
+   "format-version":"0.1",
+   "name":"Age_Prediction_DNA_Methylation",
+   "version":9,
+   "steps":{  
+      "0":{  
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_build_pipeline/sklearn_build_pipeline/1.0",
+         "tool_version":"1.0",
+         "outputs":[  
+            {  
+               "type":"zip",
+               "name":"outfile"
+            }
+         ],
+         "workflow_outputs":[  
+
+         ],
+         "input_connections":{  
+
+         },
+         "tool_state":"{\"final_estimator\": \"{\\\"estimator_selector\\\": {\\\"__current_case__\\\": 2, \\\"selected_estimator\\\": \\\"GradientBoostingRegressor\\\", \\\"selected_module\\\": \\\"ensemble\\\", \\\"text_params\\\": \\\"\\\"}}\", \"pipeline_component\": \"[{\\\"__index__\\\": 0, \\\"component_selector\\\": {\\\"__current_case__\\\": 0, \\\"component_type\\\": \\\"None\\\"}}]\", \"__rerun_remap_job_id__\": null, \"__page__\": null}",
+         "id":0,
+         "tool_shed_repository":{  
+            "owner":"bgruening",
+            "changeset_revision":"99038af8deda",
+            "name":"sklearn_build_pipeline",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"f50f4d02-1f39-4c89-a8a8-bd53a5ea599d",
+         "errors":null,
+         "name":"Pipeline Builder",
+         "post_job_actions":{  
+            "HideDatasetActionoutfile":{  
+               "output_name":"outfile",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{  
+
+               }
+            }
+         },
+         "label":null,
+         "inputs":[  
+
+         ],
+         "position":{  
+            "top":351.71875,
+            "left":126.5
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_build_pipeline/sklearn_build_pipeline/1.0",
+         "type":"tool"
+      },
+      "1":{  
+         "tool_id":null,
+         "tool_version":null,
+         "outputs":[  
+
+         ],
+         "workflow_outputs":[  
+            {  
+               "output_name":"output",
+               "uuid":"07613af7-31db-45e4-b866-527aec37dcc2",
+               "label":null
+            }
+         ],
+         "input_connections":{  
+
+         },
+         "tool_state":"{}",
+         "id":1,
+         "uuid":"cf0b885a-1ff1-4dff-b543-8aece1add06f",
+         "errors":null,
+         "name":"Input dataset",
+         "label":"train_rows",
+         "inputs":[  
+
+         ],
+         "position":{  
+            "top":589.71875,
+            "left":117.5
+         },
+         "annotation":"",
+         "content_id":null,
+         "type":"data_input"
+      },
+      "2":{  
+         "tool_id":null,
+         "tool_version":null,
+         "outputs":[  
+
+         ],
+         "workflow_outputs":[  
+            {  
+               "output_name":"output",
+               "uuid":"eb4b5a90-0e54-475d-b1e2-f3e24a62efe2",
+               "label":null
+            }
+         ],
+         "input_connections":{  
+
+         },
+         "tool_state":"{}",
+         "id":2,
+         "uuid":"46997b57-f2df-4c97-942d-cfa3c8ebb414",
+         "errors":null,
+         "name":"Input dataset",
+         "label":"test_rows",
+         "inputs":[  
+
+         ],
+         "position":{  
+            "top":713.71875,
+            "left":213.5
+         },
+         "annotation":"",
+         "content_id":null,
+         "type":"data_input"
+      },
+      "3":{  
+         "tool_id":null,
+         "tool_version":null,
+         "outputs":[  
+
+         ],
+         "workflow_outputs":[  
+            {  
+               "output_name":"output",
+               "uuid":"202fb08e-40f0-46cc-8754-4bb74dbdfe9b",
+               "label":null
+            }
+         ],
+         "input_connections":{  
+
+         },
+         "tool_state":"{}",
+         "id":3,
+         "uuid":"943479c2-20be-4bcb-a493-08f195dc7fe7",
+         "errors":null,
+         "name":"Input dataset",
+         "label":"test_rows_labels",
+         "inputs":[  
+
+         ],
+         "position":{  
+            "top":335.71875,
+            "left":672.5
+         },
+         "annotation":"",
+         "content_id":null,
+         "type":"data_input"
+      },
+      "4":{  
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_searchcv/sklearn_searchcv/1.0",
+         "tool_version":"1.0",
+         "outputs":[  
+            {  
+               "type":"tabular",
+               "name":"outfile_result"
+            },
+            {  
+               "type":"zip",
+               "name":"outfile_estimator"
+            }
+         ],
+         "workflow_outputs":[  
+            {  
+               "output_name":"outfile_result",
+               "uuid":"3e714ee9-0a0f-4190-85eb-ff40f0f1e459",
+               "label":null
+            }
+         ],
+         "input_connections":{  
+            "search_schemes|infile_pipeline":{  
+               "output_name":"outfile",
+               "id":0
+            },
+            "input_options|infile2":{  
+               "output_name":"output",
+               "id":1
+            },
+            "input_options|infile1":{  
+               "output_name":"output",
+               "id":1
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"save\": \"\\\"true\\\"\", \"search_schemes\": \"{\\\"__current_case__\\\": 0, \\\"infile_pipeline\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"options\\\": {\\\"cv_selector\\\": {\\\"__current_case__\\\": 1, \\\"n_splits\\\": \\\"5\\\", \\\"random_state\\\": \\\"3111696\\\", \\\"selected_cv\\\": \\\"KFold\\\", \\\"shuffle\\\": \\\"true\\\"}, \\\"error_score\\\": \\\"false\\\", \\\"iid\\\": \\\"true\\\", \\\"pre_dispatch\\\": \\\"all\\\", \\\"refit\\\": \\\"true\\\", \\\"return_train_score\\\": \\\"false\\\", \\\"scoring\\\": {\\\"__current_case__\\\": 26, \\\"primary_scoring\\\": \\\"r2\\\", \\\"secondary_scoring\\\": null}, \\\"verbose\\\": \\\"0\\\"}, \\\"search_params_builder\\\": {\\\"param_set\\\": [{\\\"__index__\\\": 0, \\\"search_param_selector\\\": {\\\"__current_case__\\\": 0, \\\"search_p\\\": \\\"n_estimators: [25, 50, 75, 100, 200]\\\", \\\"selected_param_type\\\": \\\"final_estimator_p\\\"}}]}, \\\"selected_search_scheme\\\": \\\"GridSearchCV\\\"}\", \"input_options\": \"{\\\"__current_case__\\\": 0, \\\"column_selector_options_1\\\": {\\\"__current_case__\\\": 3, \\\"col1\\\": \\\"Age\\\", \\\"selected_column_selector_option\\\": \\\"all_but_by_header_name\\\"}, \\\"column_selector_options_2\\\": {\\\"__current_case__\\\": 2, \\\"col2\\\": \\\"Age\\\", \\\"selected_column_selector_option2\\\": \\\"by_header_name\\\"}, \\\"header1\\\": \\\"true\\\", \\\"header2\\\": \\\"true\\\", \\\"infile1\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"infile2\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"selected_input\\\": \\\"tabular\\\"}\"}",
+         "id":4,
+         "tool_shed_repository":{  
+            "owner":"bgruening",
+            "changeset_revision":"4368259ff821",
+            "name":"sklearn_searchcv",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"5aa79c2a-fe72-4d0c-844f-0a1e43711a66",
+         "errors":null,
+         "name":"Hyperparameter Search",
+         "post_job_actions":{  
+            "HideDatasetActionoutfile_estimator":{  
+               "output_name":"outfile_estimator",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{  
+
+               }
+            }
+         },
+         "label":null,
+         "inputs":[  
+            {  
+               "name":"search_schemes",
+               "description":"runtime parameter for tool Hyperparameter Search"
+            },
+            {  
+               "name":"input_options",
+               "description":"runtime parameter for tool Hyperparameter Search"
+            },
+            {  
+               "name":"input_options",
+               "description":"runtime parameter for tool Hyperparameter Search"
+            }
+         ],
+         "position":{  
+            "top":281.71875,
+            "left":330
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_searchcv/sklearn_searchcv/1.0",
+         "type":"tool"
+      },
+      "5":{  
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0",
+         "tool_version":"1.0",
+         "outputs":[  
+            {  
+               "type":"tabular",
+               "name":"outfile_predict"
+            },
+            {  
+               "type":"zip",
+               "name":"outfile_fit"
+            }
+         ],
+         "workflow_outputs":[  
+
+         ],
+         "input_connections":{  
+            "selected_tasks|infile_data":{  
+               "output_name":"output",
+               "id":2
+            },
+            "selected_tasks|infile_model":{  
+               "output_name":"outfile_estimator",
+               "id":4
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"selected_tasks\": \"{\\\"__current_case__\\\": 0, \\\"header\\\": \\\"true\\\", \\\"infile_data\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"infile_model\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"prediction_options\\\": {\\\"__current_case__\\\": 0, \\\"prediction_option\\\": \\\"predict\\\"}, \\\"selected_task\\\": \\\"load\\\"}\", \"__rerun_remap_job_id__\": null}",
+         "id":5,
+         "tool_shed_repository":{  
+            "owner":"bgruening",
+            "changeset_revision":"39ae276e75d9",
+            "name":"sklearn_ensemble",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"3d9958e8-d151-4590-8299-0a62a1423f00",
+         "errors":null,
+         "name":"Ensemble methods",
+         "post_job_actions":{  
+            "HideDatasetActionoutfile_fit":{  
+               "output_name":"outfile_fit",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{  
+
+               }
+            },
+            "HideDatasetActionoutfile_predict":{  
+               "output_name":"outfile_predict",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{  
+
+               }
+            }
+         },
+         "label":null,
+         "inputs":[  
+            {  
+               "name":"selected_tasks",
+               "description":"runtime parameter for tool Ensemble methods"
+            },
+            {  
+               "name":"selected_tasks",
+               "description":"runtime parameter for tool Ensemble methods"
+            }
+         ],
+         "position":{  
+            "top":601.71875,
+            "left":471.5
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0",
+         "type":"tool"
+      },
+      "6":{  
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1",
+         "tool_version":"0.1",
+         "outputs":[  
+            {  
+               "type":"html",
+               "name":"output_actual_vs_pred"
+            },
+            {  
+               "type":"html",
+               "name":"output_scatter_plot"
+            },
+            {  
+               "type":"html",
+               "name":"output_residual_plot"
+            }
+         ],
+         "workflow_outputs":[  
+            {  
+               "output_name":"output_scatter_plot",
+               "uuid":"c036d621-09d2-4058-9d82-2f84f4c6cb91",
+               "label":null
+            },
+            {  
+               "output_name":"output_actual_vs_pred",
+               "uuid":"b4a6a23e-b5d0-42ab-a054-d6e46e5069a2",
+               "label":null
+            },
+            {  
+               "output_name":"output_residual_plot",
+               "uuid":"c162d3c9-49a4-404f-ab7e-856edb457c72",
+               "label":null
+            }
+         ],
+         "input_connections":{  
+            "infile_output":{  
+               "output_name":"outfile_predict",
+               "id":5
+            },
+            "infile_input":{  
+               "output_name":"output",
+               "id":3
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile_output\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"infile_input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+         "id":6,
+         "tool_shed_repository":{  
+            "owner":"bgruening",
+            "changeset_revision":"389227fa1864",
+            "name":"plotly_regression_performance_plots",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"af946946-6d6b-4611-bb32-288b7760c3d4",
+         "errors":null,
+         "name":"Plot actual vs predicted curves and residual plots",
+         "post_job_actions":{  
+
+         },
+         "label":null,
+         "inputs":[  
+            {  
+               "name":"infile_output",
+               "description":"runtime parameter for tool Plot actual vs predicted curves and residual plots"
+            },
+            {  
+               "name":"infile_input",
+               "description":"runtime parameter for tool Plot actual vs predicted curves and residual plots"
+            }
+         ],
+         "position":{  
+            "top":450,
+            "left":770.265625
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1",
+         "type":"tool"
+      }
+   },
+   "annotation":"",
+   "a_galaxy_workflow":"true"
+}
