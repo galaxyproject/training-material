@@ -23,6 +23,7 @@ contributors:
   - bebatut
   - bgruening
   - shiltemann
+  - erasche
 ---
 
 # Building a Galaxy instance specifically for your training
@@ -53,7 +54,7 @@ Once the tutorial is ready, we need to develop a workflow that represents the st
 > 2. Save it in the `workflow` directory of the tutorial
 {: .hands_on}
 
-# Creating the `tools.yaml` (recommended)
+## Creating the `tools.yaml` (recommended)
 
 The first file to fill out is the `tools.yaml` file which contains the list of the required tools that could be installed from the ToolShed.
 
@@ -102,6 +103,183 @@ After the extraction, some formatting is needed:
 > 2. Correct the formatting of the `tools.yaml` file
 {: .hands_on}
 
+## Testing the workflow (recommended)
+
+Workflow testing is a great way to get feedback that your tutorial can be run successfully on a given server. When you're giving a training this can provide peace of mind, not only are the tools installed (as is indicated by the badges we provide) but they also work.
+
+Given the workflow you created above and have included in the tutorial folder, you'll need to create a corresponding `-test.yml` file.
+
+> ### {% icon hands_on %} Hands-on: Creating the `-test.yml` file for your workflow
+>
+> 1. Find the correct name for the file; if your workflow was `unicycler.ga`, then your test file should be `unicycler-test.yml`, they need to share the same prefix.
+>
+> 2. Create the following structure:
+>
+>    ```yaml
+>    ---
+>    - doc: Test sample data for the workflow
+>      job:
+>        an_input_file:
+>          class: File
+>          location: https://....
+>          filetype: fasta
+>      outputs:
+>        ffn:
+>          asserts:
+>            has_text:
+>              text: ">A"
+>            has_text:
+>              text: ">B"
+>    ```
+>
+>
+{: .hands_on}
+
+You'll need to edit the `job` and `outputs` sections according to your workflow's inputs and outputs. Additionally you will need to edit the steps of your workflow `.ga` file appropriately.
+
+### Inputs
+
+Your workflow **must** use "Data Inputs" for each input dataset. For each of these input step in the `.ga` file, you'll need to do the following:
+
+1. Edit the `label`
+2. Edit the `name`
+3. Edit the `inputs[0].name`
+4. Edit the `tool_state`
+
+In a normal workflow you have exported from Galaxy, you'll see something like
+
+```json
+{
+    "id": 0,
+    "input_connections": {},
+    "inputs": [
+        {
+            "description": "",
+            "name": "patient1_ChIP_ER_good_outcome.bam"
+        }
+    ],
+    "label": null,
+    "name": "Input dataset",
+    "outputs": [],
+    "position": {
+        "left": 10,
+        "top": 10
+    },
+    "tool_id": null,
+    "tool_state": "{\"name\": \"patient1_ChIP_ER_good_outcome.bam\"}",
+    "tool_version": null
+}
+```
+
+You should synchronize the aforementioned fields so it looks like this:
+
+```json
+{
+    "id": 0,
+    "input_connections": {},
+    "inputs": [
+        {
+            "description": "",
+            "name": "good_outcome"
+        }
+    ],
+    "label": "good_outcome",
+    "name": "good_outcome",
+    "outputs": [],
+    "position": {
+        "left": 10,
+        "top": 10
+    },
+    "tool_id": null,
+    "tool_state": "{\"name\": \"good_outcome\"}",
+    "tool_version": null
+}
+```
+
+This will allow you to specify `good_outcome` in your job to load a file:
+
+```
+- doc: ...
+  job:
+    good_outcome:
+      class: File
+      location: ...
+      filetype: ...
+```
+
+The filetype should be the Galaxy datatype of your file, for example `fastqsanger`, `tabular`, `bam`.
+
+### Outputs
+
+For the outputs the process is somewhat simpler:
+
+1. Identify a step, the outputs of which you would like to test
+2. Convert the relevant `outputs` to `workflow_outputs`
+
+   In a normal workflow you see
+
+   ```json
+   {
+       "outputs": [
+           {
+               "type": "txt",
+               "name": "ofile"
+           },
+           {
+               "type": "txt",
+               "name": "ofile2"
+           }
+       ],
+       "workflow_outputs": []
+   }
+   ```
+
+   If you want to test the contents of `ofile`, you should change it to
+
+   ```json
+   {
+       "outputs": [
+           {
+               "type": "txt",
+               "name": "ofile"
+           },
+           {
+               "type": "txt",
+               "name": "ofile2"
+           }
+       ],
+       "workflow_outputs": [
+           {"output_name": "ofile", "label": "my_output"}
+       ]
+   }
+   ```
+
+3. You can now use the label you chose (here `my_output`) in your test case:
+
+   ```yaml
+   - doc:
+     job: ...
+     outputs:
+       my_output:
+         asserts:
+           has_text:
+             text: 'some-string'
+   ```
+
+### Running the Tests
+
+You can test the file you've written with the following command and a recent version (>=0.56.0) of planemo:
+
+```console
+planemo test \
+	--galaxy_url "$GALAXY_URL" \
+	--galaxy_user_key "$GALAXY_USER_KEY" \
+	--no_shed_install \
+	--engine external_galaxy \
+	workflow.ga
+```
+
+Planemo will autodetect that the `workflow-test.yml` file and load that for the testing.
 
 # Creating the `data-library.yaml` (recommended)
 
@@ -140,7 +318,7 @@ items:
 >    $ planemo training_fill_data_library \
 >             --topic_name "my-topic" \
 >             --tutorial_name "my-new-tutorial" \
->             --zenodo_link "URL to the Zenodo record" 
+>             --zenodo_link "URL to the Zenodo record"
 >    ```
 >
 > 3. Check that the `data-library.yaml` has been generated (or updated)
@@ -177,7 +355,7 @@ It is a great way to help users run the tutorial directly inside Galaxy. To lear
 
 # Testing the technical infrastructure
 
-Once we have defined all the requirements for running the tutorial, we can test these requirements, either in a locally running Galaxy or in a Docker container. Please see our tutorial about [Setting up Galaxy for Training]({{site.baseurl}}/topics/contributing/tutorials/setup-galaxy-for-training/tutorial.html) about how to test your tutorial requirements.
+Once we have defined all the requirements for running the tutorial, we can test these requirements, either in a locally running Galaxy or in a Docker container. Please see our tutorial about [Setting up Galaxy for Training]({{site.baseurl}}/topics/instructors/tutorials/setup-galaxy-for-training/tutorial.html) about how to test your tutorial requirements.
 
 
 # Conclusion

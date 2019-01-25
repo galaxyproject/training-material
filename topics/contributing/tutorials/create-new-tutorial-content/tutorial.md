@@ -111,9 +111,15 @@ This information is used to display the data from the topic and tutorial page. T
 We also define metadata related to the pedagogical content of the tutorial, which will appear in the top ("Overview" box) and bottom of the online tutorial:
 
 - `requirements`: list of resources that the reader of the material should be familiar with before starting this training:
-    - `title`
-    - `link`: relative for internal (inside training material) requirement or full for external requirement)
     - `type`: the type of link (`internal` or `external`)
+
+    For internal, i.e. inside the Galaxy Training Material:
+    - `topic_name`: name of the topic
+    - `tutorials`: list of required tutorials inside of the topic
+
+    For external:
+    - `title`: title of the external resource
+    - `link`: URL to the external resource
 - `time_estimation`: an estimation of the time needed to complete the hands-on
 - `questions`: list of questions that will be addressed in the tutorial
 - `objectives`: list of learning objectives for the tutorial
@@ -123,6 +129,20 @@ We also define metadata related to the pedagogical content of the tutorial, whic
 - `key_points`: list of take-home messages
 
     This information will appear at the end of the tutorial
+
+- `follow_up_training`: list of resources that the reader of the material could follow at the end of the tutorial
+
+    - `type`: the type of link (`internal` or `external`)
+
+    For internal, i.e. inside the Galaxy Training Material:
+    - `topic_name`: name of the topic
+    - `tutorials`: list of required tutorials inside of the topic
+
+    For external:
+    - `title`: title of the external resource
+    - `link`: URL to the external resource
+
+    They will be displayed at the end of a tutorial.
 
 For this category of metadata, we have taken inspiration from what Software Carpentry has done and particularly what they described in their [Instructor training](https://swcarpentry.github.io/instructor-training/).
 
@@ -393,11 +413,13 @@ The available icons are:
 > ### {% icon hands_on %} Hands-on: My Step
 >
 > 1. **My Tool** {% icon tool %} with the following parameters
->  - {% icon param-text %} *"My text parameter"*: `my value`
->  - {% icon param-file %} *"My input file"*: `my file`
->  - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
->  - {% icon param-select %} *"My select menu"*: `my choice`
->  - {% icon param-check %} *"My check box"*: `yes`
+>    - {% icon param-text %} *"My text parameter"*: `my value`
+>    - {% icon param-file %} *"My input file"*: `my file`
+>    - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
+>    - {% icon param-select %} *"My select menu"*: `my choice`
+>    - {% icon param-check %} *"My check box"*: `yes`
+>    - {% icon param-repeat %} **My repeat parameter**
+>      - *"param1"*: `42`
 {: .hands_on}
 ```
 {% endraw %}
@@ -407,11 +429,13 @@ which, when rendered, look like:
 > ### {% icon hands_on %} Hands-on: My Step
 >
 > 1. **My Tool** {% icon tool %} with the following parameters
->  - {% icon param-text %} *"My text parameter"*: `my value`
->  - {% icon param-file %} *"My input file"*: `my file`
->  - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
->  - {% icon param-select %} *"My select menu"*: `my choice`
->  - {% icon param-check %} *"My check box"*: `yes`
+>    - {% icon param-text %} *"My text parameter"*: `my value`
+>    - {% icon param-file %} *"My input file"*: `my file`
+>    - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
+>    - {% icon param-select %} *"My select menu"*: `my choice`
+>    - {% icon param-check %} *"My check box"*: `yes`
+>    - {% icon param-repeat %} **My repeat parameter**
+>      - *"param1"*: `42`
 {: .hands_on}
 
 

@@ -30,9 +30,11 @@ matrix:
       if: branch != gh-pages
     - env: CHECK=htmlproofer
     - env: CHECK=htmlproofer-internal
+    - env: CHECK=pdf-generation
   allow_failures:
     - env: CHECK=htmlproofer
     - env: CHECK=slides
+    - env: CHECK=pdf-generation
 
 install:
   - sudo apt-get update
@@ -71,6 +73,9 @@ script:
       elif [ "$CHECK" == "site-build" ]
       then
         make build
+      elif [ "$CHECK" == "pdf-generation" ]
+      then
+        make pdf
       fi
     fi
 
@@ -78,5 +83,8 @@ after_success:
   - |
     if [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_BRANCH" == "master" -a "$CHECK" == "site-build" ]
     then
+      # update badges and instances and rebuild
+      make annotate
+      make build
       bin/publish
     fi

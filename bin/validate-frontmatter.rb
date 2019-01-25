@@ -4,11 +4,11 @@ fn = ARGV[0]
 
 # Required keys
 tutorial_required_keys = ['layout', 'title', 'time_estimation', 'contributors']
-tutorial_optional_keys = ['questions', 'zenodo_link', 'objectives', 'key_points', 'tags', 'edam_ontology', 'requirements']
+tutorial_optional_keys = ['questions', 'zenodo_link', 'objectives', 'key_points', 'tags', 'edam_ontology', 'requirements', 'follow_up_training']
 tutorial_deprecated_keys = ['topic_name', 'tutorial_name', 'type', 'name', 'galaxy_tour', 'hands_on', 'slides', 'workflows']
 
 slides_required_keys = ['layout', 'logo', 'title', 'contributors']
-slides_optional_keys = ['time_estimation', 'questions', 'zenodo_link', 'objectives', 'key_points', 'tags', 'edam_ontology', 'requirements', 'class', 'hands_on', 'hands_on_url']
+slides_optional_keys = ['time_estimation', 'questions', 'zenodo_link', 'objectives', 'key_points', 'tags', 'edam_ontology', 'requirements', 'follow_up_training', 'class', 'hands_on', 'hands_on_url']
 slides_deprecated_keys = ['topic_name', 'tutorial_name', 'type', 'name', 'galaxy_tour', 'slides', 'workflows']
 
 metadata_required_keys = ['name', 'type', 'title', 'summary', 'maintainers']
@@ -24,7 +24,7 @@ errs = []
 def skip_disabled(data, fn)
   # If there's an 'enable' key and it is one flavor of 'false', then, exit
   # immediately without testing.
-  if data.key?('enable') && (data['enable'].downcase == 'false' || data['enable'] == false) then
+  if data.key?('enable') && (data['enable'] == false || data['enable'].downcase == 'false') then
     puts "#{fn} skipped (disabled)"
     exit 0
   end

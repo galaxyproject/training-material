@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Calling very rare variants"
 zenodo_link: ""
+enable: false
 questions:
   - "What frequency of variants is so low that it is obscured by sequencing error rate?"
   - "What are the different types of consensus sequences produced from duplex sequencing?"
@@ -423,4 +424,4 @@ You can use the variant calling workflow to call variants using the SSCS instead
 You should now understand duplex sequencing, rare variants, and be able to process the former to find the latter.
 
 ### If things don't work...
-...you need to complain. Use [Galaxy's BioStar Channel](https://usegalaxy.org/biostar/biostar_redirect) to do this.
+...you need to complain. Use [Galaxy's Help Channel](https://help.galaxyproject.org/) to do this.

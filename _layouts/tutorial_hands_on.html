@@ -6,6 +6,7 @@ layout: base
 {% assign contributors = site.data['contributors'] %}
 {% assign instances = site.data['instances'] %}
 {% assign topic_material = site.pages | topic_filter:page.topic_name %}
+{% assign language = site.other_languages | split: ", " %}
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -117,6 +118,19 @@ layout: base
                     </li>
                     {% endif %}
 
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            {% for lang in language %}
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{ lang }}&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ topic.name }}%2Ftutorials%2F{{ page.tutorial_name }}%2Ftutorial.html&edit-text=&act=url" title="{{ inst[0] }}">
+                                {{ lang | upcase }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </li>
+
                     {% include _includes/help.html %}
 
                     <li class="nav-item">
@@ -157,24 +171,8 @@ layout: base
             {% if topic.requirements or page.requirements %}
             <strong>{% icon requirements %} Requirements</strong>
             <ul>
-            {% for requirement in topic.requirements %}
-                <li>
-                    {% if requirement.type == "internal" %}
-                    <a href="{{ site.baseurl }}/topics{{ requirement.link }}">{{ requirement.title }}</a>
-                    {% elsif requirement.type == "external" %}
-                    <a href="{{ requirement.link }}">{{ requirement.title }}</a>
-                    {% endif %}
-                </li>
-            {% endfor %}
-            {% for requirement in page.requirements %}
-                <li>
-                    {% if requirement.type == "internal" %}
-                    <a href="{{ site.baseurl }}/topics{{ requirement.link }}">{{ requirement.title }}</a>
-                    {% elsif requirement.type == "external" %}
-                    <a href="{{ requirement.link }}">{{ requirement.title }}</a>
-                    {% endif %}
-                </li>
-            {% endfor %}
+            {% include snippets/display_extra_training.md extra_trainings=topic.requirements %}
+            {% include snippets/display_extra_training.md extra_trainings=page.requirements %}
             </ul>
             {% endif %}
 
@@ -183,7 +181,8 @@ layout: base
             {% endif %}
         </blockquote>
 
-        {{ content }}
+        {{ content 
+            | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">' }}
 
         {% if page.key_points %}
         <blockquote class="key_points">
@@ -201,6 +200,8 @@ layout: base
         <h1>Useful literature</h1>
         <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="{{ site.baseurl }}/topics/{{ topic.name }}#references">here</a>.</p>
         {% endif %}
+
+        <h3>{% icon congratulations %} Congratulations on successfully completing this tutorial!</h3>
 
         {% if topic.name == "contributing" %}
         <blockquote class="agenda">
@@ -225,7 +226,15 @@ layout: base
         </blockquote>
         {% endif %}
 
-        <h3>{% icon congratulations %} Congratulations on successfully completing this tutorial!</h3>
+        {% if page.follow_up_training %}
+        <blockquote class="agenda follow-up">
+            <strong class="follow-up">{% icon curriculum %} Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+            <ul>
+                {% include snippets/display_extra_training.md extra_trainings=page.follow_up_training %}
+            </ul>
+        </blockquote>
+        {% endif %}
+
         <hr>
         <br>
 
@@ -241,7 +250,7 @@ layout: base
 
 {% if page.contributors %}
 {% assign contrib = page.contributors | sort %}
-{% capture contributors %}{% for contributor in contrib %}, {{contributors[contributor].name }}{% endfor %}{% endcapture %}
+{% capture contributors %}{% for contributor in contrib %}, {{contributors[contributor].name | default: contributor }}{% endfor %}{% endcapture %}
 {% endif %}
 <footer>
     <div class="container">

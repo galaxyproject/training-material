@@ -2,15 +2,22 @@
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
         {% icon help %} Help
     </a>
-    <div class="dropdown-menu">
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{ site.baseurl }}/faq" title="Check our FAQ">
             FAQ
         </a>
         <a class="dropdown-item" href="{{ site.gitter_url }}" title="Chat on Gitter">
             Chat on Gitter
         </a>
-        <a class="dropdown-item" href="{{ site.biostars_url }}" title="Ask on Biostars">
-            Ask questions on Biostars
+        <a class="dropdown-item" href="{{ site.help_url }}" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
         </a>
     </div>
 </li>
