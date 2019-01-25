@@ -10,14 +10,13 @@ objectives:
 - Apply regression based machine learning algorithms
 - Learn feature selection and hyperparameter optimisation
 key_points:
-    - Various machine learning algorithms should be used to find the best ones
-    - For each machine learning algorithm, it hyperparameters should be optimised based on the dataset
-    - Feature selection should be done for high-dimensional datasets
+- Various machine learning algorithms should be used to find the best ones
+- For each machine learning algorithm, it hyperparameters should be optimised based on the dataset
+- Feature selection should be done for high-dimensional datasets
 time_estimation: 2H
 contributors:
 - polkhe
 - anuprulez
-
 ---
 
 # Introduction
@@ -34,10 +33,9 @@ The datasets from these studies contain features (present as columns). The last 
 #### R2 (coefficient of determination)
 In both the parts, learning on datasets is done using cross-validation and [r2](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html) scoring metric is used to evaluate the performance of the trained model. The closer it is to 1.0, the better it is. If it is negative, then the trained model is not good. To infer how its values exhibit model performance, we can compare the figures [1](#figure-1) and [2](#figure-2). In both the plots, the true and predicted targets are plotted in a scatter plot. For a good model, most of the points should lie along the `x = y` line as the true and predicted targets are close to each other. In figure [1](#figure-1), we can see that the points are scattered and do not show any pattern. Therefore, the r2 score is `-0.06`. But, figure [2](#figure-2) shows a better pattern as most of the points lie along the line and the r2 score is almost `1.0`. For RNA-seq dataset, we will compute cross-validated r2 score using the training set and for DNA methylation dataset, we will compute the r2 score for the test set. 
 
-> ![model_bad](images/model_bad.png "This shows an example of a bad model as most of the points are scattered.")
+![model_bad](../../images/age-prediction-with-ml/model_bad.png "This shows an example of a bad model as most of the points are scattered.")
 
-> ![model_good](images/model_good.png "This shows an example of a good model as most of the points lie along the x = y line.")
-
+![model_good](../../images/age-prediction-with-ml/model_good.png "This shows an example of a good model as most of the points lie along the x = y line.")
 
 
 > ### Agenda
@@ -56,7 +54,8 @@ The RNA-seq dataset is collected from fibroblast cell lines belonging to 133 hea
 > ### {% icon details %} 5-fold cross-validation
 >
 > It is a model validation technique which estimates the performance of a predictive model on an unseen data. A dataset is divided into `5` folds and these folds are categorised into training and validation sets. The idea of cross-validation is shown in figure [3](#figure-3). The complete dataset is divided into `5` equal parts. 80% of the dataset is used for training and the remaining 20% is used for validating the performance of training. This is done for `5` folds/iterations, each time the validation set (20% of the dataset) is different. In all five folds, the complete dataset is used for training and validation. The final validation performance is averaged over `5` folds. 
-> ![5fold_cv](images/5fold_cv.png "5-fold cross-validation.")
+>
+> ![5fold_cv](../../images/age-prediction-with-ml/5fold_cv.png "5-fold cross-validation.")
 >
 {: .details}
 
@@ -117,21 +116,22 @@ For our analyses, we will use the grid search approach. It is an exhaustive sear
 In the pipeline builder, we added two steps - preprocessing (feature selection) and an estimator (regressor). There are different hyperparameters for these two steps and their best combination should be found out. We will perform grid search to estimate the best values for these parameters: **k** (number of features), **normalize** (subtract the mean and divide by the l2-norm of the dataset) and **alpha** (a constant which is multiplied to the regularisation term). For each parameter, we need to specify a set of values to choose from:
 
 - **k**: [5880, 5890, 5895, 5900]
+
+    These values of `k` are chosen to get the best accuracy. We can choose any number (integers) between `1` and `27,000` (maximum number of features in the dataset). We will use only these values (shown above) for `k` as the accuracy remains the best around these numbers. But, it may vary for a different RNA-seq dataset. That's the reason why we perform hyperparameter search to find the best values of parameters for any dataset. 
+
 - **normalize**: [True, False]
+
+    The default value of `normalize` is `False`. We will check both, `True` and `False`. 
+
 - **alpha**: [0.00001, 0.0001, 0.001]
 
-There are many more hyperparameters of [ElasticNet regressor](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet) which are explained in the official documentation of scikit-learn. But, the combination of the above three parameters already gives a comparable accuracy published in the study [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9). Therefore, we will stick to these parameters.
+    The parameter `alpha` takes a positive real number and its default value is `1.0`. 
+
+For these three parameters, we have 24 different combinations (4 x 2 x 3) of values and we will verify the performance of each combination. The parameter **k** is used for feature selection and parameters **normalize** and **alpha** are used for regressor. There are many more hyperparameters of [ElasticNet regressor](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet) which are explained in the official documentation of scikit-learn. But, the combination of the above three parameters already gives a comparable accuracy published in the study [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9). Therefore, we will stick to these parameters.
 
 > ### {% icon comment %} Comment
 > It is advisable to tune all the parameters of a machine learning algorithm for a dataset if no prior information is available about the subset of parameters which works best for the dataset.
 {: .comment}
-
-The values of `k` are chosen to get the best accuracy. We can choose any number (integers) between `1` and `27,000` (maximum number of features in the dataset). We will use only these values (shown above) for `k` as the accuracy remains the best around these numbers. But, it may vary for a different RNA-seq dataset. That's the reason why we perform hyperparameter search to find the best values of parameters for any dataset. The default value of `normalize` is `False`. We will check both, `True` and `False`. The parameter `alpha` takes a positive real number and its default value is `1.0`. For these three parameters, we have 24 different combinations (4 x 2 x 3) of values and we will verify the performance of each combination. You might have noticed that the parameter **k** is used for feature selection and parameters **normalize** and **alpha** are used for regressor. There are few more parameters (**advanced options**) of hyperparameter search tool which are explained below:
-
-- **Select the primary metric (scoring)**: A scoring metric can be set. In this tutorial, we will use `Regression -- 'r2'`
-- **Select the cv splitter**: There are different ways to split the dataset into training and validation sets. In our tutorial, we will use `KFold` which splits the dataset into `K` consecutive parts. It is used for cross-validation. It is set to `5` using another parameter `n_splits`.
-- **Random seed number**: It is set to an integer and used to retain the randomness/accuracy when **Whether to shuffle data before splitting** is `True` across successive experiments.
-- **Raise fit error**: While setting different values for a parameter during hyperparameter search, it can happen that wrong values are set which may generate exceptions. To avoid stopping the execution of a regressor, it is set to `No` which means even if a wrong parameter value is encountered, the regressor does not stop running and skips that value. 
 
 > ### {% icon comment %} Comment
 > These parameters have the same description and values in the second part of the tutorial where we will again use **hyperparameter search** tool.
@@ -155,11 +155,23 @@ The values of `k` are chosen to get the best accuracy. We can choose any number 
 >                        - *"Estimator parameter:"*: `alpha: [0.00001, 0.0001, 0.001]`
 >        - In *"Advanced Options for SearchCV"*:
 >            - *"Select the primary metric (scoring):"*: `Regression -- 'r2'`
+>
+>               A scoring metric can be set. In this tutorial, we use `Regression -- 'r2'`
+>
 >            - *"Select the cv splitter:"*: `KFold`
+>
+>               There are different ways to split the dataset into training and validation sets. In our tutorial, we will use `KFold` which splits the dataset into `K` consecutive parts. It is used for cross-validation. It is set to `5` using another parameter `n_splits`.
+>
 >                - *"n_splits"*: `5`
 >                - *"Whether to shuffle data before splitting"*: `Yes`
 >                - *"Random seed number"*: `3111696`
+>
+>                   It is set to an integer and used to retain the randomness/accuracy when *"Whether to shuffle data before splitting"* is `True` across successive experiments.
+>
 >            - *"Raise fit error:"*: `No`
+>
+>               While setting different values for a parameter during hyperparameter search, it can happen that wrong values are set which may generate exceptions. To avoid stopping the execution of a regressor, it is set to `No` which means even if a wrong parameter value is encountered, the regressor does not stop running and skips that value.
+>
 >    - *"Select input type:"*: `tabular data`
 >        - {% icon param-files %} *"Training samples dataset:"*: `training_data_normal` tabular file
 >        - *"Does the dataset contain header:"*: `Yes`
@@ -172,9 +184,7 @@ The values of `k` are chosen to get the best accuracy. We can choose any number 
 >
 {: .hands_on}
 
-> ### {% icon comment %} Comment
-> The tool returns two outputs, one of which is a table with numerical results. Please inspect it carefully: the `rank_test_score` column shows the ranking of different combinations based on the values in `mean_test_score` column.
-{: .comment}
+The tool returns two outputs, one of which is a table with numerical results. Please inspect it carefully: the `rank_test_score` column shows the ranking of different combinations based on the values in `mean_test_score` column.
 
 > ### {% icon question %} Questions
 >
@@ -205,19 +215,18 @@ We will visualize the tabular output of hyperparameter search tool from the prev
 >
 {: .hands_on}
 
-> ### {% icon comment %} Comment
-> The output plot has the following legend: the colour-coding is based on the `mean_test_score` column. You can follow the line leading to the score along every column with parameters' settings. The columns `c5, c6` and `c7` are the parameters we chose and `c14` is the accuracy column present in the `tabular` output of hyperparameter search tool.
-{: .comment}
+The output plot has the following legend: the colour-coding is based on the `mean_test_score` column. You can follow the line leading to the score along every column with parameters' settings. The columns `c5, c6` and `c7` are the parameters we chose and `c14` is the accuracy column present in the `tabular` output of hyperparameter search tool.
 
-> ![data](images/plotting_output.png "The visualization of the hyperparameter optimisation tool output.")
+
+![data](../../images/age-prediction-with-ml/plotting_output.png "The visualization of the hyperparameter optimisation tool output.")
 
 > ### {% icon question %} Question
 >
-> 1. What can you notice about the least performing (let's say least four) hyperparameters' settings (judging by the plot)?
+> What can you notice about the least performing (let's say least four) hyperparameters' settings (judging by the plot)?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The four 'worst' settings are:
+> > The four 'worst' settings are:
 > > - alpha: 0.00001, normalize: False, k: 5880
 > > - alpha: 0.00001, normalize: False, k: 5890
 > > - alpha: 0.00001, normalize: False, k: 5895
@@ -262,8 +271,7 @@ We proceed with the analysis by uploading new datasets. You might want to create
 >
 {: .hands_on}
 
-> ### {% icon comment %} Comment
-> The `train_rows` contains a column `Age` which is the label or target. We will evaluate our model on `test_rows` and compare the predicted age with the true age in `test_rows_labels`
+The `train_rows` contains a column `Age` which is the label or target. We will evaluate our model on `test_rows` and compare the predicted age with the true age in `test_rows_labels`
 {: .comment}
 
 ## Create data processing pipeline
@@ -319,11 +327,11 @@ We use only one parameter `n_estimators` of `Gradient Boosting` regressor for th
 
 > ### {% icon question %} Question
 >
-> 1. What is the optimal number of estimators for the given dataset?
+> What is the optimal number of estimators for the given dataset?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 75 (Even though the default value of number of estimators for gradient boosting regressor is `100`, `75` gives the best accuracy. That's why it is important to perform hyperparameter search to tune these parameters for any dataset)
+> > 75 (Even though the default value of number of estimators for gradient boosting regressor is `100`, `75` gives the best accuracy. That's why it is important to perform hyperparameter search to tune these parameters for any dataset)
 > >
 > {: .solution}
 >
@@ -356,35 +364,38 @@ In the previous step, we generated predictions for the test dataset. We have one
 >
 {: .hands_on}
 
-> ### {% icon comment %} Comment
-> The tool outputs three html files with the interactive plots.
-{: .comment}
+The tool outputs three html files with the interactive plots.
 
 > ### {% icon question %} Question
 >
-> 1. Inspect the plots. What can you say about the predictions?
+> Inspect the plots. What can you say about the predictions?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Figure [5](#figure-5) and [7](#figure-7) show that the prediction is good because the predicted age lie close to the true age.
+> > Figure [5](#figure-5) and [7](#figure-7) show that the prediction is good because the predicted age lie close to the true age.
 > >
 > {: .solution}
 {: .question}
 
-> ![Scatter plot](images/scatter_plot.png "Scatter plot for true and predicted age")
-> We can see in the scatter plot figure [5](#figure-5) that most of the points lie along the x=y curve. It means that the true and predicted ages are close to each other. The root mean square error (`RMSE`) is `3.76` and the r2 score is `0.94`.
-> 
-> ![Residuals](images/residual_plot.png "Residuals")
-> The residual plot shown in figure [6](#figure-6) is generated to see if there is any visible pattern between residual (predicted age - true age) and predicted age. For a good model, there should not be any visible pattern with the plotted points.
-> 
-> ![True vs predicted age](images/true_vs_predicted_plot.png "True vs predicted age")
-> The plot in figure [7](#figure-7) shows the true and predicted ages. It can be seen that the points are close.
+![Scatter plot](../../images/age-prediction-with-ml/scatter_plot.png "Scatter plot for true and predicted age")
+
+We can see in the scatter plot figure [5](#figure-5) that most of the points lie along the x=y curve. It means that the true and predicted ages are close to each other. The root mean square error (`RMSE`) is `3.76` and the r2 score is `0.94`.
+
+![Residuals](../../images/age-prediction-with-ml/residual_plot.png "Residuals")
+
+The residual plot shown in figure [6](#figure-6) is generated to see if there is any visible pattern between residual (predicted age - true age) and predicted age. For a good model, there should not be any visible pattern with the plotted points.
+
+![True vs predicted age](../../images/age-prediction-with-ml/true_vs_predicted_plot.png "True vs predicted age")
+
+The plot in figure [7](#figure-7) shows the true and predicted ages. It can be seen that the points are close.
 
 ## Summary
 
 We can see in figure [5](#figure-5) that we have achieved an r2 score of `0.94` and root mean square score of `3.76` for the test set using gradient boosting regressor. In the study [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) as well, a similar root mean square score (`3.93`) is mentioned using random forest regressor. The root mean square score shows the difference in the true and predicted age of humans. The r2 score (`0.94`) is close to the best achievable score of `1.0` which shows that the trained model is good. Overall, the second part of the analysis also shows that using the machine learning tools in Galaxy, we can achieve state-of-the-art predictions mentioned in the recent scientific studies.
 
 # Conclusion
-In our tutorial, we could reproduce the results using machine learning tools in Galaxy as achieved in these scientific studies - [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) and [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub). We also learned how to work with high-dimensional datasets, perform hyperparameter search and cross-validation. Further, we can reuse the trained models to make predictions on a new dataset provided that this new dataset has the same features. There are numerous other machine learning algorithms available in Galaxy which can also be tried out on these datasets to verify whether the accuracy can be improved.
 {:.no_toc}
+
+In our tutorial, we could reproduce the results using machine learning tools in Galaxy as achieved in these scientific studies - [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) and [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub). We also learned how to work with high-dimensional datasets, perform hyperparameter search and cross-validation. Further, we can reuse the trained models to make predictions on a new dataset provided that this new dataset has the same features. There are numerous other machine learning algorithms available in Galaxy which can also be tried out on these datasets to verify whether the accuracy can be improved.
+
 
