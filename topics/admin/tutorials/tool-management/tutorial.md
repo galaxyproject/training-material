@@ -42,6 +42,8 @@ You are an administrator of your lab's Galaxy. A colleague approached you with a
 
 Ephemeris is a small Python library and set of scripts for managing the bootstrapping of Galaxy plugins - tools, index data, and workflows.
 
+# Hands on
+
 > ### {% icon hands_on %} Hands-on: Setting up our workspace
 > For Python library a virtualenv is the preferred way to set up a single-purpose environment.
 >
@@ -100,8 +102,9 @@ Ephemeris is a small Python library and set of scripts for managing the bootstra
 >    > ```console
 >    > $ shed-tools install -t workflow_tools.yml -g "http://127.0.0.1:8080" -a "5cfd0d5f88c8addd5700b6a522a6a983" --test
 >    > ```
+>    {: .solution }
 
-> ### {% icon hands_on %} Hands-on: Get your Galaxy's full tool list
+> ### {% icon hands_on %} Hands-on: Get Galaxy's full tool list
 >
 > 1. Use proper Ephemeris command to obtain a tool list of all tools installed into your Galaxy.
 >
@@ -113,4 +116,11 @@ Ephemeris is a small Python library and set of scripts for managing the bootstra
 >    > ```
 >    {: .solution }
 
+# Production (best) practices
+
+Servers in `usegalaxy.*` network use Ephemeris extensively to manage its large tool sets.
+
+You can explore the usegalaxy.eu [approach](https://github.com/usegalaxy-eu/usegalaxy-eu-tools) and the usegalaxy.org.au [way](https://github.com/usegalaxy-au/usegalaxy-au-tools/tree/current) of doing things.
+
+There is also an existing Ansible [role](https://github.com/galaxyproject/ansible-galaxy-tools) and a sample [playbook](https://github.com/afgane/galaxy-tools-playbook) that can help automate some tasks even more.
 
