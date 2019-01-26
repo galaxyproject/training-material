@@ -424,11 +424,11 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    {% endraw %}
 >
 >
-> 2. Again edit the group variables file and add a variable for `galaxy_config_hash`. It will be a hash with one key, `galaxy` which will also be a hash. Inside here you can place all of your Galaxy configuration.
+> 2. Again edit the group variables file and add a variable for `galaxy_config`. It will be a hash with one key, `galaxy` which will also be a hash. Inside here you can place all of your Galaxy configuration.
 >
 >    The structure is:
 >    ```yaml
->    galaxy_config_hash:
+>    galaxy_config:
 >       galaxy:
 >           key: value
 >    ```
