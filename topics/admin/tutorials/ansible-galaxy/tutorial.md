@@ -19,14 +19,12 @@ requirements:
     topic_name: admin
     tutorials:
       - ansible
-  -
-    title: "A server/VM to deploy Galaxy on"
+  - title: "A server/VM to deploy Galaxy on"
     type: "none"
   - type: "external"
     title: Ansible setup on your local machine
     link: "https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html"
-  -
-    title: Comfort with Ansible roles and tasks
+  - title: Comfort with Ansible roles and tasks
     type: "none"
 ---
 
@@ -838,13 +836,16 @@ This step uses letsencrypt for generating certificates, so it assumes that:
 1. Your machine is publicly accessible
 2. It has a publicly resolvable DNS entry
 
+If you do not meet these requirements, you should read through them to see the changes that are required.
+
 TODO(hxr): fix
+
 > ### {% icon hands_on %} Hands-on: SSL Certificates with Lets Encrypt!
 >
 > 1. Add the role `usegalaxy-eu.certbot` to your playbook and have it run as root.
 >
-> 2. This role requires a few variables to be set in your group vars:
->
 >
 {: .hands_on}
+
+TODO(hxr): fix hostname uniformly, say to set ansible_hostname if they don't have a real one
 
