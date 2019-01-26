@@ -441,6 +441,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > galaxy_mutable_config_dir: "{{ galaxy_root }}/mutable-config"
 >    > > galaxy_mutable_data_dir: "{{ galaxy_root }}/mutable-data"
 >    > > galaxy_config_style: yaml
+>    > > galaxy_force_checkout: true
 >    > > galaxy_config:
 >    > >   galaxy:
 >    > >     brand: "My Galaxy"
