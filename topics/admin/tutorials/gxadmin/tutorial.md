@@ -41,7 +41,7 @@ Otherwise, you may need to set some of the [PostgreSQL environment variables](ht
 
 # Queries
 
-**@slugger70's favourite**: `gxadmin query old-histories`. He contributed this function to find old histories, as their instance has a 90 day limit on histories, anything older than that might be automatically removed. This helps their group identify any histories that they can purge in order to save space. Running this on UseGalaxy.eu, we have some ancient histories that probably are no longer useful to their owners.
+**@slugger70's favourite**: `gxadmin query old-histories`. He contributed this function to find old histories, as their instance has a 90 day limit on histories, anything older than that might be automatically removed. This helps their group identify any histories that can be purged in order to save space. Running this on UseGalaxy.eu, we have some truly ancient histories, and maybe could benefit from a similar policy.
 
 id  |        update-time         | user-id | email |           name           | published | deleted | purged | hid-counter
 --- | -------------------------- | ------- | ----- | ------------------------ | --------- | ------- | ------ | ------------
@@ -89,20 +89,20 @@ id    |        create_time         | disk_usage | username | email | groups | ac
 3923  | 2019-01-26 04:51:03.47129  | 15 GB      | xxxx     | xxxx  |        | t
 3922  | 2019-01-25 20:04:40.934584 | 7886 MB    | xxxx     | xxxx  |        | t
 
-**@erasche's favourite** `gxadmin iquery queue-overview`. We recently implemented `influx` queries, gxadmin already supported table + CSV + TSV outputs, which lets us output our data in a format that [Telegraf](https://github.com/influxdata/telegraf) can consume.
+**@erasche's favourite** `gxadmin iquery queue-overview`. `gxadmin` already supported `query`, `csvquery`, and `tsvquery` for requesting data from the Galaxy database in tables, CSV, or TSV formats, but we recently implemented `influx` queries which output data in a format that [Telegraf](https://github.com/influxdata/telegraf) can consume.
 
 So running `gxadmin query queue-overview` normally shows something like:
 
-tool_id                                                                                            |  tool_version  |    destination_id    |     handler     |  state  | job_runner_name | count
--------------------------------------------------------------------------------------------------- | -------------- | -------------------- | --------------- | ------- | --------------- | ------
-toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.6.0                                       | 0.4.6.0        | 12cores_180G_special | handler_main_4  | running | condor          |     1
-toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.6.0                                       | 0.4.6.0        | 12cores_180G_special | handler_main_5  | running | condor          |     1
-toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.1.0.46-0                                | 1.1.0.46-0     | 12cores_12G          | handler_main_3  | running | condor          |     2
-toolshed.g2.bx.psu.edu/repos/iuc/qiime_extract_barcodes/qiime_extract_barcodes/1.9.1.0             | 1.9.1.0        | 4G_memory            | handler_main_1  | running | condor          |     1
-toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.1.0+galaxy3                                       | 2.1.0+galaxy3  | 8cores_20G           | handler_main_11 | running | condor          |     1
-toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72                                            | 0.72           | 20G_memory           | handler_main_11 | running | condor          |     4
-ebi_sra_main                                                                                       | 1.0.1          | 4G_memory            | handler_main_3  | running | condor          |     2
-ebi_sra_main                                                                                       | 1.0.1          | 4G_memory            | handler_main_4  | running | condor          |     3
+tool_id                                                                                |  tool_version  |    destination_id    |     handler     |  state  | job_runner_name | count
+-------------------------------------------------------------------------------------- | -------------- | -------------------- | --------------- | ------- | --------------- | ------
+toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.6.0                           | 0.4.6.0        | 12cores_180G_special | handler_main_4  | running | condor          |     1
+toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.6.0                           | 0.4.6.0        | 12cores_180G_special | handler_main_5  | running | condor          |     1
+toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.1.0.46-0                    | 1.1.0.46-0     | 12cores_12G          | handler_main_3  | running | condor          |     2
+toolshed.g2.bx.psu.edu/repos/iuc/qiime_extract_barcodes/qiime_extract_barcodes/1.9.1.0 | 1.9.1.0        | 4G_memory            | handler_main_1  | running | condor          |     1
+toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.1.0+galaxy3                           | 2.1.0+galaxy3  | 8cores_20G           | handler_main_11 | running | condor          |     1
+toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72                                | 0.72           | 20G_memory           | handler_main_11 | running | condor          |     4
+ebi_sra_main                                                                           | 1.0.1          | 4G_memory            | handler_main_3  | running | condor          |     2
+ebi_sra_main                                                                           | 1.0.1          | 4G_memory            | handler_main_4  | running | condor          |     3
 
 
 The `gxadmin iquery queue-overview` is run by our Telegraf monitor on a regular basis, allowing us to consume the data:
@@ -122,7 +122,7 @@ And produce [some nice graphs](https://stats.galaxyproject.eu/) from it.
 
 # Implementing a Query
 
-We will not do a proper hands-on, but merely show by way of example [@slugger70's PR to find old histories](https://github.com/usegalaxy-eu/gxadmin/pull/5/files#diff-f905e55928aae903b7e13cc72842af3c), you simply implement a function, provide some help output in a formatted manner, and then write your SQL query. If you don't feel comfortable writing bash, just share any SQL you've written and we will help you add it.
+We will not do a proper hands-on, but instead show [@slugger70's PR to find old histories](https://github.com/usegalaxy-eu/gxadmin/pull/5/files#diff-f905e55928aae903b7e13cc72842af3c), he implemented a function, provided some help output in a formatted manner, and then wrote his SQL query. If you don't feel comfortable writing bash, just share any SQL you've written and we will help you add it.
 
 # Summary
 
