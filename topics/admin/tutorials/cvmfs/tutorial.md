@@ -235,11 +235,11 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >
 > 5. In your Galaxy interface, open the `bwa`, `bwa-mem` or `Bowtie2` tool interface (whichever you may have installed). Now check that there are a lot more Genomes available for use!
 >
->    ![available_genomes.png](../../docs/05-reference-genomes/images/available_genomes.png)
+>    ![available_genomes.png](../../images/available_genomes.png)
 >
 > 5. Login to Galaxy as the admin user, and go to **Admin → Local Data → View Tool Data Table Entries → bwa_mem indexes**
 >
->    ![bwa_mem_indices.png](../../docs/05-reference-genomes/images/bwa_mem_indices.png)
+>    ![bwa_mem_indices.png](../../images/bwa_mem_indices.png)
 >
 {: .hands_on}
 
