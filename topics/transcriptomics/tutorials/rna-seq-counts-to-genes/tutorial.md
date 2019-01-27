@@ -504,11 +504,12 @@ The tables of differentially expressed genes are output as links in the `Report`
 
 ![Multiple contrasts](../../images/rna-seq-counts-to-genes/multiple_contrasts.png "Multiple contrasts output")
 
-> ### {% icon tip %} Tip
+> ### {% icon tip %} Tips
 >
-> The `Report` with all the plots and tables can be downloaded by clicking on the floppy disk icon on the dataset in the history as shown below.
-> ![Report download](../../images/rna-seq-counts-to-genes/download_report.png "Download limma report"){: width="20%"}
->
+> 1. The `Report` with all the plots and tables can be downloaded by clicking on the floppy disk icon on the dataset in the history as shown below.
+>     ![Report download](../../images/rna-seq-counts-to-genes/download_report.png "Download limma report"){: width="20%"}
+> 2. If you want to see the R code used, or to explore some of the outputs in R, you can select to output the Rscript and/or RData files, see below.
+>     ![R outputs](../../images/rna-seq-counts-to-genes/R_outputs.png "R outputs"){: width="20%"}
 {: .tip}
 
 To see some methods for identifying differentially expressed pathways in this dataset, see the follow-on tutorial [RNA-seq genes to pathways]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html). To see how to create a heatmap of custom genes using this dataset, see the tutorial [Visualization of RNA-Seq results with heatmap2]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html)
