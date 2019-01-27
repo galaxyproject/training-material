@@ -391,13 +391,13 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    {% raw %}
 >    Variable                    | Value                              | Purpose
 >    ---                         | -----                              | ---
->    `galaxy_root`               | `/srv/galaxy`                      | This is just the same as the Galaxy home directory, where we will place most of our configuration and data folders.
+>    `galaxy_root`               | `/srv/galaxy`                      | This is just the same as the Galaxy home directory, where we will <br> place most of our configuration and data folders.
 >    `galaxy_server_dir`         | `{{ galaxy_root }}/server`         | Where the Galaxy code itself will be located.
->    `galaxy_config_dir`         | `{{ galaxy_root }}/config`         | Our location for Galaxy configuration. Notice that this is outside of the server code directory.
->    `galaxy_mutable_config_dir` | `{{ galaxy_root }}/mutable-config` | Mutable configuration data consists of things like the `shed_tool_conf.xml`, anything that Galaxy modifies or creates during runtime.
->    `galaxy_mutable_data_dir`   | `{{ galaxy_root }}/mutable-data`   | This folder will contain dependencies and other data that Galaxy fetches.
+>    `galaxy_config_dir`         | `{{ galaxy_root }}/config`         | Our location for Galaxy configuration. Notice that this is outside <br> of the server code directory.
+>    `galaxy_mutable_config_dir` | `{{ galaxy_root }}/mutable-config` | Mutable configuration data consists of things like the <br> `shed_tool_conf.xml`, anything that Galaxy modifies or <br> creates during runtime.
+>    `galaxy_mutable_data_dir`   | `{{ galaxy_root }}/mutable-data`   | This folder will contain dependencies and other data that Galaxy <br> fetches.
 >    `galaxy_config_style`       | `yaml`                             | We want to opt-in to the new style YAML configuration.
->    `galaxy_force_checkout`     | `true`                             | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
+>    `galaxy_force_checkout`     | `true`                             | If we make any modifications to the Galaxy codebase, they will be <br> removed. This way we know we're getting an unmodified Galaxy and <br> no one has made any unexpected changes to the codebase.
 >    {% endraw %}
 >
 >
