@@ -52,11 +52,11 @@ The official playbook is extremely configurable, everything that you want to cha
 
 The important variables for this tutorial are:
 
-- `galaxy_server_dir`
+- `galaxy_root`
 - `galaxy_commit_id`
 - `galaxy_config`
 
-These are largely self explanatory: a server directory, which commit should be installed, and the Galaxy configuration. We will not explain Galaxy configuration variables in detail as they are covered sufficiently in the `galaxy.yml` sample file or the [online documentation](https://docs.galaxyproject.org/en/master/admin/config.html#configuration-options).
+These are largely self explanatory: a directory for all of Galaxy's code and configuration, which commit should be installed, and the Galaxy configuration. We will not explain Galaxy configuration variables in detail as they are covered sufficiently in the `galaxy.yml` sample file or the [online documentation](https://docs.galaxyproject.org/en/master/admin/config.html#configuration-options).
 
 The official recommendation is that you should have a variables file such as a `group_vars/galaxy.yml` for storing all of the Galaxy configuration.
 
@@ -74,9 +74,8 @@ As with every role, the entry point for execution is the `tasks/main.yml` file. 
 
 The [clone](https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/clone.yml) task is the one which is primarily interesting to us, it downloads Galaxy, using git, to a specific commit.
 
-1. It starts by checking if the Galaxy directory exists, this is done so the tasks will attempt to check the current commit, will not fail in case the folder does not exist.
-2. The current commit of the repository on disk is retrieved, in order to decide whether or not Galaxy needs to be updated. This is then reported in a debugging message to the user.
-3. Galaxy is updated to the correct commit. If the `galaxy_server_dir` is not yet populated, e.g. on first run, Galaxy will be cloned to the specified location. Otherwise the existing repo will be updated to that commit. The `galaxy_force_checkout` variable allows you to control whether or not any locally made changes will be discarded. This will not affect mutable configuration files as those are not tracked in git.
+1. Ansible tries to update Galaxy, cloning it if it is missing, or otherwise attempting to update to the correct commit (or latest commit of that branch.)
+2. Any change is reported.
 4. The virtualenv is set up:
 	1. An empty virtualenv is created.
 	2. Pip is updated within the virtualenv.
