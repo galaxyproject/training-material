@@ -834,7 +834,7 @@ Then you can potentially use it to recover.
 
 Now that you've gotten through the worst case scenario, we'll attack the next worst case scenario, auditors! They've shown up and demanded that everything have valid SSL certificates.
 
-This step uses letsencrypt for generating certificates, so it assumes that:
+This step uses [Let's Encrypt](https://letsencrypt.org/) for generating certificates, so it assumes that:
 
 1. Your machine is publicly accessible
 2. It has a publicly resolvable DNS entry
