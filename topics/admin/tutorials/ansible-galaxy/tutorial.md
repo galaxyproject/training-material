@@ -11,7 +11,7 @@ objectives:
 time_estimation: "2h"
 key_points:
 - Basic deployment with Ansible is surprisingly easy
-- Complexity can grow over time as your organisation does, no need to start with playbooks like usegalaxy.org
+- Complexity can grow over time as your organisation does, no need to start with playbooks like UseGalaxy.org
 contributors:
   - erasche
 requirements:
@@ -62,7 +62,7 @@ The official recommendation is that you should have a variables file such as a `
 
 ## Tasks
 
-As with every role, the entrypoint for execution is the `tasks/main.yml` file. For the [ansible-galaxy](https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/main.yml) file, this includes a few groups of important tasks:
+As with every role, the entry point for execution is the `tasks/main.yml` file. For the [ansible-galaxy](https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/main.yml) file, this includes a few groups of important tasks:
 
 - [Clone (or Download) Galaxy](#cloning-galaxy)
 - [Managing Configuration](#managing-configuration)
@@ -93,9 +93,9 @@ The [static configuration setup](https://github.com/galaxyproject/ansible-galaxy
 3. Any templates are copied over
 4. The `galaxy.yml` (or `.ini`) is deployed
 
-The setup for deploying templates and configuration files is a little bit non-standard by ansible standards. Here you are expected to provide your own templates and static config files, and then describe them as a list of files and where they should be deployed to.
+The setup for deploying templates and configuration files is a little bit non-standard by Ansible standards. Here you are expected to provide your own templates and static config files, and then describe them as a list of files and where they should be deployed to.
 
-Using the [usegalaxy.eu](https://github.com/usegalaxy-eu/infrastructure-playbook/blob/02ca578211bfee45044facf36635d28208e5dbb3/group_vars/galaxy.yml#L578) configuration as an example, we have something like:
+Using the [UseGalaxy.eu](https://github.com/usegalaxy-eu/infrastructure-playbook/blob/02ca578211bfee45044facf36635d28208e5dbb3/group_vars/galaxy.yml#L578) configuration as an example, we have something like:
 
 
 {% raw %}
@@ -182,7 +182,7 @@ To proceed from here it is expected that:
 - You have [Ansible installed](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) on your local machine
 
   > ### {% icon tip %} Tip: Running Ansible on your remote machine
-  > It is possible to have ansible installed on the remote machine and run it there as well. You will need to update your hosts file to point to localhost, and pass the `-c local` parameter. Be **certain** that the playbook that you're building is stored somewhere safe like your user home directory. We will remove data at one point during this tutorial and would not want you to lose your progress.
+  > It is possible to have Ansible installed on the remote machine and run it there as well. You will need to update your hosts file to point to localhost, and pass the `-c local` parameter. Be **certain** that the playbook that you're building is stored somewhere safe like your user home directory. We will remove data at one point during this tutorial and would not want you to lose your progress.
   {: .tip}
 
 - You have a [hosts file](../ansible/tutorial.html#hosts-file) with the VM or host specified where you will deploy galaxy. We will refer to this group of hosts as "galaxyservers." You can use a different name if you prefer or are working on an existing playbook, just be sure to update all references later on.
@@ -805,7 +805,7 @@ For this "disaster", we will pretend that:
 
 Your entire Galaxy server is gone. You were a responsible admin and had your user data and database stored on a separate system (and backed up), so at least those survived. Nevertheless, this is when most of us start feeling really bad; bosses start yelling, we start crying or reaching for bad coping habits.
 
-But not you! You spent the day writing this ansible playbook that describes your environment completely; all of the software that was installed, all of the configuration changes you've made. It leverages many community maintained roles and can be used to completely rebuild the server! With minimal effort on your part.
+But not you! You spent the day writing this Ansible playbook that describes your environment completely; all of the software that was installed, all of the configuration changes you've made. It leverages many community maintained roles and can be used to completely rebuild the server! With minimal effort on your part.
 
 > ### {% icon hands_on %} Hands-on: Revert the Apocalypse
 >
@@ -826,7 +826,7 @@ Then you can potentially use it to recover.
 >
 > We can tell you this, we can repeat it over and over, but unless you really have a disaster happen to you, it is hard to appreciate how important it is that machines are completely controlled in terms of configuration and software deployment.
 >
-> We've experienced these incidents and we know how horribly stresseful it can be if an important service like Galaxy goes down and you cannot immediately replace it with another instance. We hope you will immediately apply the lessons from this training material, it can potentially save you a lot of stress and worry.
+> We've experienced these incidents and we know how horribly stressful it can be if an important service like Galaxy goes down and you cannot immediately replace it with another instance. We hope you will immediately apply the lessons from this training material, it can potentially save you a lot of stress and worry.
 >
 {: .tip}
 
