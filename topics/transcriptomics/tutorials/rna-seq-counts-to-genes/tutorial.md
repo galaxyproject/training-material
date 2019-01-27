@@ -171,6 +171,9 @@ Optionally, gene annotations can be provided to the limma-voom tool and if provi
 >          - `GENENAME`
 > 2. Rename file as `annodata` using the {% icon galaxy-pencil %} (pencil) icon. The file should look like below.
 >    ![annodata file](../../images/rna-seq-counts-to-genes/annodata.png "Gene annotation file"){: width="50%"}
+> 3. You must have the same number of lines (rows) in the counts and annotation. Check that there are 27,180 lines in each as below.
+>    ![counts lines](../../images/rna-seq-counts-to-genes/countdata_lines.png "Counts file lines")
+>    ![annotation lines](../../images/rna-seq-counts-to-genes/annodata_lines.png "Annotation file lines")
 {: .hands_on}
 
 # Differential expression with limma-voom
