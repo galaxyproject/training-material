@@ -667,7 +667,7 @@ You may find that certain tools can benefit from having form elements added to t
 
 Such form elements can be added to tools without modifying each tool's configuration file through the use of the **job resource parameters configuration file**
 
-{% include snippets/todo.md notes="Split this, do a dynamic destination first, THEN add resource params." %}
+{% include snippets/todo.md notes="Split this, do a dynamic destination first, THEN add resource params. @hxr" %}
 
 > ### {% icon hands_on %} Hands-on: Configuring a Resource Selector
 >
@@ -797,7 +797,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >    It is important to note that **you are responsible for parameter validation, including the job resource selector**. This function only handles the job resource parameter fields, but it could do many other things - examine inputs, job queues, other tool parameters, etc.
 >
 >
-> 2. Deploy this, somehow. TODO
+> 2. Deploy this, somehow. TODO @natefoo
 >
 > 3. Run the playbook, restart Galaxy
 >
