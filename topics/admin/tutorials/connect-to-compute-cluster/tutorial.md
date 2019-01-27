@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 
 title: "Connecting Galaxy to a compute cluster"
-zenodo_link: ""
 questions:
   - How to connect Galaxy to a compute cluster?
   - How can I configure job dependent resources, like cores, memory for my DRM?
@@ -14,137 +13,130 @@ objectives:
   - Know how to map tools to job destinations
   - Be able to use the dynamic job runner to make arbitrary destination mappings
   - Understand the job resource selector config and dynamic rule creation
-time_estimation: "2h"
+time_estimation: "3.5h"
 key_points:
   - Galaxy supports a variety of different DRMs.
   - Tools/Jobs/Users etc can have their own resource.
 contributors:
   - natefoo
   - bgruening
+  - erasche
+tags:
+  - ansible
+requirements:
+  - type: "internal"
+    topic_name: admin
+    tutorials:
+      - ansible
+  - title: "A server/VM on which to deploy Slurm"
+    type: "none"
+  - type: "external"
+    title: Ansible setup on your local machine
+    link: "https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html"
+  - title: Comfort with Ansible roles and tasks
+    type: "none"
 ---
 
-## Running Galaxy Jobs with Slurm
+# Running Galaxy Jobs with Slurm
 
-### Introduction
+{% include snippets/warning_results_may_vary.md %}
 
 The tools that are added to Galaxy can have a wide variance in the compute resources that they require and work efficiently on.
 To account for this, Galaxy's job configuration needs to be tuned to run these tools properly. In addition, site-specific variables must
 be taken into consideration when choosing where to run jobs and what parameters to run them with.
 
-### Section 1 - Install and configure Slurm
+> ### Agenda
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
-**Part 1 - Install Slurm**
+## Installing Slurm
 
-Install Slurm with apt:
+> ### {% icon hands_on %} Hands-on: Installing Slurm
+>
+> 1. Create and edit a file in your working directory called `requirements.yaml` and include the following contents:
+>
+>    ```yaml
+>    - src: https://github.com/galaxyproject/ansible-slurm
+>      name: galaxyproject.slurm
+>    ```
+>
+> 2. In the same directory, run `ansible-galaxy install -p roles -r requirements.yaml`. This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
+>
+> 3. Create the hosts file if you have not done so, include a group for `[galaxyservers]` with the address of the host where you will install Slurm
+>
+> 4. Create a playbook, `slurm.yml` which looks like the following:
+>
+>    ```yaml
+>    - hosts: galaxyservers
+>      become: true
+>      vars:
+>        slurm_user: {}
+>        slurm_roles: ['controller', 'exec']
+>        slurm_controller_name: "{{ ansible_hostname }}"
+>        slurm_controller_ip: 127.0.0.1
+>      roles:
+>        - galaxyproject.slurm
+>    ```
+>
+> 5. Run the playbook (`ansible -i hosts slurm.yml`)
+>
+{: .hands_on}
+
+
+Installed with Slurm is MUNGE (MUNGE Uid 'N Gid Emporium...) which authenticates users between cluster hosts. You would normally need to ensure the same Munge key is distributed across all cluster hosts (in `/etc/munge/munge.key`) - A great task for Ansible. However, the installation of the munge package has created a random key for you, and you will not need to distribute this since you'll run jobs only on a single host.
+
+You can now check that all of the daemons are running with the command `systemctl status munge slurmd slurmctld`
 
 ```console
-$ sudo apt-get install -y slurm-wlm
-Reading package lists... Done
-Building dependency tree       
-Reading state information... Done
-The following additional packages will be installed:
-  ...
-$
-```
-
-Installed with Slurm is MUNGE (MUNGE Uid 'N Gid Emporium...) which authenticates users between cluster hosts. You would normally need to ensure the same Munge key is distributed across all cluster hosts (in `/etc/munge/munge.key`) - A great task for Ansible. However, the installation of the munge package has created a random key for you, and you will not need to distribute this since you'll run jobs locally.
-
-Verify that MUNGE is now running with `systemctl status munge`:
-
-```console
-$ systemctl status munge
+$ sudo systemctl status munge slurmd slurmctld
 ● munge.service - MUNGE authentication service
-   Loaded: loaded (/etc/systemd/system/munge.service; enabled; vendor preset: enabled)
-   Active: active (running) since Wed 2018-01-10 13:15:33 UTC; 3min 46s ago
+   Loaded: loaded (/usr/lib/systemd/system/munge.service; enabled; vendor preset: disabled)
+   Active: active (running) since Sa 2019-01-26 22:38:13 CET; 28min ago
      Docs: man:munged(8)
- Main PID: 4805 (munged)
+ Main PID: 22930 (munged)
+    Tasks: 4
+   Memory: 128.0K
    CGroup: /system.slice/munge.service
-           └─4805 /usr/sbin/munged --syslog
+           └─22930 /usr/sbin/munged
 
-Jan 10 13:15:33 galaxy-admin-ws-big-35 systemd[1]: Starting MUNGE authentication service...
-Jan 10 13:15:33 galaxy-admin-ws-big-35 systemd[1]: Started MUNGE authentication service.
-$
-```
+Jan 26 22:38:13 helena-test.novalocal systemd[1]: Starting MUNGE authentication service...
+Jan 26 22:38:13 helena-test.novalocal systemd[1]: Started MUNGE authentication service.
 
-You can also see that Slurm's controller and execution daemon processes are configured to start automatically, and that they attempted to start, but failed:
-
-```console
-$ systemctl status slurmctld
-● slurmctld.service - Slurm controller daemon
-   Loaded: loaded (/lib/systemd/system/slurmctld.service; enabled; vendor preset: enabled)
-   Active: inactive (dead)
-Condition: start condition failed at Fri 2016-11-04 16:05:30 EDT; 39s ago
-$ systemctl status slurmd
 ● slurmd.service - Slurm node daemon
-   Loaded: loaded (/lib/systemd/system/slurmd.service; enabled; vendor preset: enabled)
-   Active: inactive (dead)
-Condition: start condition failed at Fri 2016-11-04 16:05:29 EDT; 43s ago
-```
-
-The start condition that failed was the missing slurm config file.
-
-**Part 2 - Configure Slurm**
-
-Under Ubuntu, Slurm configs are stored in `/etc/slurm-llnl`<sup>[1]</sup>. No config is created by default.
-
-Slurm provides a tool to create a configuration file. This is available online for the latest version, but Ubuntu 16.04 ships with Slurm 15.08. There's a copy of the configurator in `/usr/share/doc/slurmctld/slurm-wlm-configurator.html`. I've copied that to the training repository:
-
-[Slurm Version 15.08 Configuration Tool](./slurm-wlm-configurator.html)
-
-Enter the following values into the configuration tool (leaving others at their defaults):
-- ControlMachine: `localhost`
-- NodeName: `localhost`
-- CPUs: 2
-- SelectType: Cons_res
-
-Then click **Submit** at the bottom of the form. You should now see the contents of a `slurm.conf` which you can copy and paste into `/etc/slurm-llnl/slurm.conf`.
-
-We need to make one change to the configuration that was generated: Uncomment `SelectTypeParameters` and set its value to `CR_CPU`.
-
-Your VM should have 2 CPUs allocated to it, but if you're running this exercise on a different VM that only has one core, set `FastSchedule` to `2` or else Slurm will set the node state to `DRAINING` because it does not match the configuration.
-
-**Part 3 - Start Slurm daemons**
-
-It should now be possible to start Slurm's daemons. Begin by starting `slurmctld`, The Slurm controller daemon (only one host runs the controller, this orchestrates job scheduling, dispatching, and completion):
-
-```console
-$ sudo systemctl start slurmctld
-$ systemctl status slurmctld
-● slurmctld.service - Slurm controller daemon
-   Loaded: loaded (/lib/systemd/system/slurmctld.service; enabled; vendor preset: enabled)
-   Active: active (running) since Fri 2016-11-04 16:46:08 EDT; 4s ago
-  Process: 5134 ExecStart=/usr/sbin/slurmctld $SLURMCTLD_OPTIONS (code=exited, status=0/SUCCESS)
- Main PID: 5138 (slurmctld)
-    Tasks: 10
-   Memory: 884.0K
-      CPU: 11ms
-   CGroup: /system.slice/slurmctld.service
-           └─5138 /usr/sbin/slurmctld
-
-Nov 04 16:46:08 gat2016 systemd[1]: Starting Slurm controller daemon...
-Nov 04 16:46:08 gat2016 systemd[1]: Started Slurm controller daemon.
-```
-
-Next, start up `slurmd`, the Slurm execution daemon. Every host that will execute jobs runs slurmd, which manages the processes that the slurm controller dispatches to it:
-
-```console
-$ sudo systemctl start slurmd
-$ systemctl status slurmd
-● slurmd.service - Slurm node daemon
-   Loaded: loaded (/lib/systemd/system/slurmd.service; enabled; vendor preset: enabled)
-   Active: active (running) since Fri 2016-11-04 16:50:35 EDT; 2s ago
-  Process: 5169 ExecStart=/usr/sbin/slurmd $SLURMD_OPTIONS (code=exited, status=0/SUCCESS)
- Main PID: 5173 (slurmd)
+   Loaded: loaded (/usr/lib/systemd/system/slurmd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Sa 2019-01-26 23:04:21 CET; 2min 25s ago
+  Process: 15051 ExecStart=/usr/sbin/slurmd $SLURMD_OPTIONS (code=exited, status=0/SUCCESS)
+ Main PID: 15054 (slurmd)
     Tasks: 1
-   Memory: 2.0M
-      CPU: 10ms
+   Memory: 628.0K
    CGroup: /system.slice/slurmd.service
-           └─5173 /usr/sbin/slurmd
+           └─15054 /usr/sbin/slurmd
 
-Nov 04 16:50:35 gat2016 systemd[1]: Starting Slurm node daemon...
-Nov 04 16:50:35 gat2016 systemd[1]: slurmd.service: PID file /var/run/slurm-llnl/slurmd.pid not readable (yet?) after start: No such
-Nov 04 16:50:35 gat2016 systemd[1]: Started Slurm node daemon.
+Jan 26 23:04:21 helena-test.novalocal systemd[1]: Starting Slurm node daemon...
+Jan 26 23:04:21 helena-test.novalocal systemd[1]: PID file /var/run/slurmd.pid not readable (yet?) after start.
+Jan 26 23:04:21 helena-test.novalocal systemd[1]: Started Slurm node daemon.
+
+● slurmctld.service - Slurm controller daemon
+   Loaded: loaded (/usr/lib/systemd/system/slurmctld.service; enabled; vendor preset: disabled)
+   Active: active (running) since Sa 2019-01-26 23:04:20 CET; 2min 26s ago
+  Process: 15040 ExecStart=/usr/sbin/slurmctld $SLURMCTLD_OPTIONS (code=exited, status=0/SUCCESS)
+ Main PID: 15042 (slurmctld)
+    Tasks: 7
+   Memory: 1.1M
+   CGroup: /system.slice/slurmctld.service
+           └─15042 /usr/sbin/slurmctld
+
+Jan 26 23:04:20 helena-test.novalocal systemd[1]: Starting Slurm controller daemon...
+Jan 26 23:04:20 helena-test.novalocal systemd[1]: PID file /var/run/slurmctld.pid not readable (yet?) after start.
+Jan 26 23:04:20 helena-test.novalocal systemd[1]: Started Slurm controller daemon.
 ```
+
+Running the playbook, the configuration was created for you automatically. All of the variables were set by default. If you need to override the configuration yourself, Slurm provides [an online tool](https://slurm.schedmd.com/configurator.html) which will help you configure it.
+
+## Using Slurm
 
 You should now be able to see that your slurm cluster is operational with the `sinfo` command. This shows the state of nodes and partitions (synonymous with queues in other DRMs). The "node-oriented view" provided with the `-N` flag is particularly useful:
 
@@ -158,11 +150,7 @@ NODELIST   NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT FEAT
 localhost      1    debug*        idle    1    2:1:1      1        0      1   (null) none
 ```
 
-If your node state is not `idle`, something has gone wrong. If your node state ends with an asterisk `*`, the slurm controller is attempting to contact the slurm execution daemon but has not yet been successful.
-
-### Section 2 - Get Slurm ready for Galaxy
-
-**Part 1 - Test Slurm**
+If your node state is not `idle`, something has gone wrong. If your node state ends with an asterisk \*, the slurm controller is attempting to contact the slurm execution daemon but has not yet been successful.
 
 We want to ensure that Slurm is actually able to run jobs. There are two ways this can be done:
 
@@ -171,46 +159,83 @@ We want to ensure that Slurm is actually able to run jobs. There are two ways th
 
 Galaxy runs `sbatch` jobs but we can use both `srun` and `sbatch` to test:
 
-```console
-$ srun uname -a
-Linux gat2016 4.4.0-31-generic #50-Ubuntu SMP Wed Jul 13 00:07:12 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
-```
-(This is an example only, output may look slightly different.)
+
+> ### {% icon hands_on %} Hands-on: Running commands with `srun`
+>
+> 1. Use [`srun`](https://slurm.schedmd.com/srun.html) to run the command `uname -a`
+>
+>
+>    > ### {% icon question %} Question
+>    >
+>    > How did the output look?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > Your output may look slightly different:
+>    > > ```console
+>    > > $ srun uname -a
+>    > > Linux helena-test.novalocal 3.10.0-862.14.4.el7.x86_64 #1 SMP Wed Sep 26 15:12:11 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+>    > > ```
+>    > {: .solution }
+>    {: .question}
+{: .hands_on}
 
 Although it looks like this command ran as if I had not used `srun`, it was in fact routed through Slurm.
 
-Next, create a test job script somewhere, such as in `~/sbatch-test.sh`. This should be a shell script and must include the shell "shebang" line:
-
-```bash
-#!/bin/sh
-
-uname -a
-uptime
-cat /etc/issue
-sleep 30
-```
-
-Submit it with `sbatch` and monitor it with `squeue`:
-
-```console
-$ sbatch sbatch-test.sh
-Submitted batch job 3
-$ squeue
-             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-                 3     debug sbatch-t galaxygu  R       0:03      1 localhost
-$ cat slurm-3.out
-Linux gat2016 4.4.0-31-generic #50-Ubuntu SMP Wed Jul 13 00:07:12 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
- 17:09:18 up  1:28,  2 users,  load average: 0.00, 0.00, 0.00
-Ubuntu 16.04.1 LTS \n \l
-
-$
-```
+> ### {% icon hands_on %} Hands-on: Running commands with `sbatch`
+>
+> 1. Create a test job script somewhere, such as in `~/sbatch-test.sh`. It should be a batch script which runs `uname -a`, `uptime`, and sleeps for 30 seconds.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > What does your shell script look like?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > ```bash
+>    > > #!/bin/bash
+>    > > uname -a
+>    > > uptime
+>    > > sleep 30
+>    > > ```
+>    > {: .solution }
+>    {: .question}
+>
+> 2. Make the script executable, `chmod +x ~/sbatch-test.sh`
+>
+> 3. Use [`sbatch`](https://slurm.schedmd.com/sbatch.html) to submit the job script
+>
+>    > ### {% icon question %} Question
+>    >
+>    > What command did you run?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > ```console
+>    > > $ sbatch ~/sbatch-test.sh
+>    > > ```
+>    > {: .solution }
+>    {: .question}
+>
+> 4. Use [`squeue`](https://slurm.schedmd.com/squeue.html) to check the queue
+>
+>    > ### {% icon question %} Question
+>    >
+>    > What did the output look like?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > ```console
+>    > > $ sbatch ~/sbatch-test.sh
+>    > > ```
+>    > {: .solution }
+>    {: .question}
+>
+{: .hands_on}
 
 If you've made it this far, your Slurm installation is working!
 
-**Part 2 - Install slurm-drmaa**
+## Slurm-DRMAA
 
-Above Slurm in the stack sits slurm-drmaa, a library that provides a translational interface from the Slurm API to the generalized DRMAA API in C. Thankfully, Ubuntu has a package for it as well:
+Above Slurm in the stack is slurm-drmaa, a library that provides a translational interface from the Slurm API to the generalized DRMAA API in C.
+
+{% include snippets/todo.md notes="Need to ansibilize. Ping @natefoo" %}
 
 ```console
 $ sudo apt-get install slurm-drmaa1
@@ -242,70 +267,57 @@ Processing triggers for libc-bin (2.23-0ubuntu3) ...
 $
 ```
 
-### Section 3 - Run Galaxy jobs through Slurm
 
-**Part 1 - Install DRMAA Python**
+Moving one level further up the stack, we find DRMAA Python. This is a Galaxy framework *conditional dependency*. Conditional dependencies are only installed if, during startup, a configuration option is set that requires that dependency. The `galaxyproject.galaxy` Ansible role will install these conditional dependencies, automatically.
 
-Moving one level further up the stack, we find DRMAA Python. This is a Galaxy framework *conditional dependency*. Conditional dependencies are only installed if, during startup, a configuration option is set that requires that dependency. Galaxy will automatically install it into the virtualenv if we're using the `run.sh` (which calls `scripts/common_startup.sh`) method of starting. Since our Galaxy now starts the application directly with uWSGI or the "headless" `galaxy-main`, we need to install it into Galaxy's virtualenv directly.
+# Galaxy and Slurm
 
-The `galaxyprojectdotorg.galaxy` Ansible role *does* install conditional dependencies. An alternative option would be to modify `job_conf.xml` as described in the next part and then rerun the Ansible playbook from the second exercise in the Ansible section.
+At the top of the stack sits Galaxy. Galaxy must now be configured to use the cluster we've just set up. The DRMAA Python documentation (and Galaxy's own documentation) instruct that you should set the `$DRMAA_LIBRARY_PATH` environment variable so that DRMAA Python can find `libdrmaa.so` (aka slurm-drmaa). Because Galaxy runs under supervisor, the environment that Galaxy starts under is controlled by the `environment` option in `/etc/supervisor/conf.d/galaxy.conf`. The galaxy task should thus be updated to refer to the path to slurm-drmaa, which is `/usr/lib/slurm-drmaa/lib/libdrmaa.so.1`:
 
-Assuming we will install DRMAA Python ourselves, we must:
 
-1. Become the `galaxy` user.
-2. Run `pip` from Galaxy's virtualenv in `/srv/galaxy/venv`
-3. Install the `drmaa` package from PyPI.
-
-We can do this with a single command: `sudo -H -u galaxy /srv/galaxy/venv/bin/pip install drmaa`:
-
-```console
-$ sudo -H -u galaxy /srv/galaxy/venv/bin/pip install drmaa
-Collecting drmaa
-  Downloading drmaa-0.7.6-py2.py3-none-any.whl
-Installing collected packages: drmaa
-Successfully installed drmaa-0.7.6
-You are using pip version 8.1.2, however version 9.0.0 is available.
-You should consider upgrading via the 'pip install --upgrade pip' command.
-$
-```
-
-**Part 2 - Configure Galaxy**
-
-At the top of the stack sits Galaxy. Galaxy must now be configured to use the cluster we've just set up. The DRMAA Python documentation (and Galaxy's own documentation) instruct that you should set the `$DRMAA_LIBRARY_PATH` environment variable so that DRMAA Python can find `libdrmaa.so` (aka slurm-drmaa). Because Galaxy is now being started under supervisor, the environment that Galaxy starts under is controlled by the `environment` option in `/etc/supervisor/conf.d/galaxy.conf`. The `[program:handler]` should thus be updated to refer to the path to slurm-drmaa, which is `/usr/lib/slurm-drmaa/lib/libdrmaa.so.1`:
-
-```ini
-environment     = VIRTUAL_ENV="/srv/galaxy/venv",PATH="/srv/galaxy/venv/bin:%(ENV_PATH)s",DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"
-```
-
-This change is not read until `supervisord` is notified with `sudo supervisorctl update`, but we'll wait to do that until after we've updated Galaxy's job configuration.
-
-We need to modify `job_conf.xml` to instruct Galaxy's job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. This file was installed by Ansible and can be found in `/srv/galaxy/config` (remember, it's owned by the `galaxy` user so you'll need to use `sudo` to edit it). A job runner plugin definition must have the `id`, `type`, and `load` attributes. The entire `<plugins>` tag group should look like:
-
-```xml
-    <plugins workers="4">
-        <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
-        <plugin id="slurm" type="runner" load="galaxy.jobs.runners.slurm:SlurmJobRunner"/>
-    </plugins>
-```
-
-Next, we need to add a new destination for the Slurm job runner. This is a basic destination with no parameters, Galaxy will do the equivalent of submitting a job as `sbatch /path/to/job_script.sh`. Note that we also need to set a default destination now that more than one destination is defined. In a `<destination>` tag, the `id` attribute is a unique identifier for that destination and the `runner` attribute must match the `id` of defined plugin:
-
-```xml
-    <destinations default="slurm">
-        <destination id="slurm" runner="slurm"/>
-        <destination id="local" runner="local"/>
-    </destinations>
-```
-
-To reread the job config, Galaxy must be restarted. You can do this with `sudo supervisorctl restart all`. Technically these changes only require restarting the handlers (if we were changing a tool-to-handler mapping it'd require restarting the web server as well) so `sudo supervisorctl restart gx:handler0 gx:handler1` would suffice. However, the handlers will be restarted when we update supervisor to reread the config that we changed earlier. Do this now with `sudo supervisorctl update`
-
-Before you restart, you can follow the handler log files using `tail`: `tail -f /srv/galaxy/log/handler?.log`.
-
-```xml
-$ sudo supervisorctl update
-gx: stopped
-gx: updated process group
-```
+> ### {% icon hands_on %} Hands-on: Making Galaxy aware of DRMAA
+>
+> 1. Open your group variables and edit the supervisor task, update the environment variable:
+>    ```yaml
+>    supervisor_programs:
+>      - name: galaxy
+>        ...
+>        configuration: |
+>          ...
+>          environment=HOME={{ galaxy_root }},VIRTUALENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:%(ENV_PATH)s,DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"
+>
+>
+> 2. We need to modify `job_conf.xml` to instruct Galaxy's job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the `id`, `type`, and `load` attributes. The entire `<plugins>` tag group should look like:
+>
+>    If the folder does not exist, create `files/galaxy/config` next to your `playbook.yml` (`mkdir -p files/galaxy/config/`)
+>
+>    Create `files/galaxy/config/job_conf.xml` with the following contents:
+>
+>    ```xml
+>    <job_conf>
+>        <plugins workers="4">
+>            <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
+>            <plugin id="slurm" type="runner" load="galaxy.jobs.runners.slurm:SlurmJobRunner"/>
+>        </plugins>
+>        <destinations>
+>            <destination id="local" runner="local"/>
+>        </destinations>
+>    </job_conf>
+>    ```
+> 3. Next, we need to add a new destination for the Slurm job runner. This is a basic destination with no parameters, Galaxy will do the equivalent of submitting a job as `sbatch /path/to/job_script.sh`. Note that we also need to set a default destination now that more than one destination is defined. In a `<destination>` tag, the `id` attribute is a unique identifier for that destination and the `runner` attribute must match the `id` of defined plugin:
+>
+>    ```xml
+>    <destinations default="slurm">
+>        <destination id="slurm" runner="slurm"/>
+>        <destination id="local" runner="local"/>
+>    </destinations>
+>    ```
+>
+> 4. Follow the logs with `supervisorctl tail -f galaxy`
+>
+> 5. Rerun the playbook. Because we updated the supervisor config, Galaxy will automatically be restarted.
+>
+{: .hands_on}
 
 Two sections of the log output are of interest. First, when Galaxy parses `job_conf.xml`:
 
@@ -331,16 +343,19 @@ galaxy.jobs DEBUG 2016-11-05 14:07:22,455 Loaded job runner 'galaxy.jobs.runners
 galaxy.jobs.handler DEBUG 2016-11-05 14:07:22,455 Loaded job runners plugins: slurm:local
 ```
 
-**Part 2 - Go!**
+## Running a Job
 
-You should now be able to run a Galaxy job through Slurm. The simplest way to test is using the upload tool to upload some text. If you're not still following the log files with `tail`, do so now.
+You should now be able to run a Galaxy job through Slurm. The simplest way to test is using the upload tool to upload some text.
 
-Then, upload to Galaxy to create a new job:
-
-1. Click the upload button at the top of the tool panel (on the left side of the Galaxy UI).
-2. In the resulting modal dialog, click the "Paste/Fetch data" button.
-3. Type some random characters into the text field that has just appeared.
-4. Click "Start" and then "Close"
+> ### {% icon hands_on %} Hands-on: Testing a Slurm Job
+>
+> 1. If you're not still following the log files with `tail`, do so now.
+> 2. Click the upload button at the top of the tool panel (on the left side of the Galaxy UI).
+> 3. In the resulting modal dialog, click the "Paste/Fetch data" button.
+> 4. Type some random characters into the text field that has just appeared.
+> 5. Click "Start" and then "Close"
+>
+{: .hands_on}
 
 In your `tail` terminal window you should see the following messages:
 
@@ -417,315 +432,384 @@ JobId=7 JobName=g2_upload1_anonymous_10_0_2_2
 
 After the job has been purged from the active jobs database, a bit of information (but not as much as `scontrol` provides) can be retrieved from Slurm's logs. However, it's a good idea to set up Slurm's accounting database to keep old job information in a queryable format.
 
-## So, what did we learn?
-
-Hopefully, you now understand:
-- How the various DRM and DRMAA pieces fit together to allow Galaxy to interface with a cluster
-- Some basic Slurm inspection and usage: commands for other DRMs are different but the process is similar
-
 ## Further Reading
 
-- [Galaxy's cluster documentation](https://wiki.galaxyproject.org/Admin/Config/Performance/Cluster) describes in detail alternative cluster configurations
-- [The job_conf.xml documentation](https://wiki.galaxyproject.org/Admin/Config/Jobs) fully describes the syntax of the job configuration file.
+- [Galaxy's cluster documentation](https://docs.galaxyproject.org/en/latest/admin/cluster.html) describes in detail alternative cluster configurations.
+- [The job_conf.xml documentation](https://docs.galaxyproject.org/en/latest/admin/jobs.html) fully describes the syntax of the job configuration file.
 - The [Distributed Resource Management Application API (DRMAA)](https://www.drmaa.org/) page contains the DRMAA specification as well as documentation for various implementations. It also includes a list of DRMs supporting DRMAA.
 - The [Slurm documentation](http://slurm.schedmd.com/) is extensive and covers all the features and myriad of ways in which you can configure slurm.
 - [PSNC slurm-drmaa](http://apps.man.poznan.pl/trac/slurm-drmaa)'s page includes documentation and the SVN repository, which has a few minor fixes since the last released version. PSNC also wrote the initial implementations of the DRMAA libraries for PBSPro and LSF, so all three are similar.
-- [My own fork of slurm-drmaa](http://github.com/natefoo/slurm-drmaa) includes support for Slurms `-M`/`--clusters` multi-cluster functionality.
+- [Our own fork of slurm-drmaa](http://github.com/natefoo/slurm-drmaa) includes support for Slurms `-M`/`--clusters` multi-cluster functionality.
 - [Slurm Accounting documentation](http://slurm.schedmd.com/accounting.html) explains how to set up SlurmDBD.
 
-## Notes
+# Galaxy and Slurm - Statically Mapping a Job
 
-<sup>1. The package and config directory name oddities are due to an unrelated `slurm` package existing in Debian before Slurm was added to Debian.
-`slurm-llnl` refers to Lawrence Livermore National Laboratory, where Slurm was originally developed,
-but the package was later renamed to `slurm-wlm` (for **W**ork**L**oad **M**anager) when the Slurm authors quit LLNL.</sup>
+We don't want to overload our training VMs trying to run real tools, so to demonstrate how to map a multicore tool to a multicore destination, we'll create a fake tool.
+
+## Writing a testing tool
+
+> ### {% icon hands_on %} Hands-on: Deploying a Tool
+>
+> 1. Create and edit a new file in `files/galaxy/config/testing.xml` with the following contents:
+>
+>    ```xml
+>    <tool id="testing" name="Multicore Tool">
+>        <command>
+>            <![CDATA[echo "Running with '\${GALAXY_SLOTS:-1}' threads" > "$output1"]]>
+>        </command>
+>        <inputs>
+>            <param name="input1" type="data" format="txt" label="Input Dataset"/>
+>        </inputs>
+>        <outputs>
+>            <data name="output1" format="txt" />
+>        </outputs>
+>    </tool>
+>    ```
+>    {: .question}
+>
+> 2. Edit your group variables and add the variable `galaxy_config_files` if it doesn't exist:
+>
+>    ```yml
+>    galaxy_config_files:
+>        ...
+>        - src: files/galaxy/config/tool_conf.xml
+>          dest: {% raw %}"{{ galaxy_config_dir }}/tool_conf.custom.xml"{% endraw %}
+>      ```
+>
+>      The variable `galaxy_config_files` is an array of hashes, each with `src` and `dest`, the files from src will be copied to dest on the server. `galaxy_template_files` exist to template files out.
+>
+{: .hands_on}
+
+Of course, this tool doesn't actually *use* the allocated number of cores. In a real tool, you would call the tools's underlying command with whatever flag that tool provides to control the number of threads or processes it starts, such as `samtools sort -@ \${GALAXY_SLOTS:-1}`.
+
+## Configuring Galaxy
+
+Up until now we've been using the default tool panel config file, located at `/srv/galaxy/server/config/tool_conf.xml.sample`. We will add a new tool conf that is loaded in addition to this default one.
+
+> ### {% icon hands_on %} Hands-on: Updating the `tool_conf.xml`
+>
+> 1. Create a new file, `files/galaxy/config/tool_conf.xml` which will contain our custom tool box. Add the following:
+>
+>    ```xml
+>    <?xml version='1.0' encoding='utf-8'?>
+>    <toolbox>
+>      <section id="testing" name="Testing">
+>        {% raw %}<tool file="{{ galaxy_root }}/config/testing_tool.xml" />{% endraw %}
+>      </section>
+>    </toolbox>
+>    ```
+> 2. Edit your group variables and add a variable `galaxy_config` > `galaxy` object to load; our new tool box, the default, and anything from the Tool Shed.
+>
+>    ```yml
+>    galaxy_config:
+>      galaxy:
+>        tool_config_file: {% raw %}"{{ galaxy_config_dir }}/tool_conf.custom.xml,{{ galaxy_server_dir }}/config/tool_conf.xml.sample,{{ galaxy_mutable_config_dir }}/shed_tool_conf.xml"{% endraw %}
+>    ```
+>
+> 3. Edit your group variables and add an entry to `galaxy_config_files`
+>
+>    ```yml
+>    galaxy_config_files:
+>        ...
+>        - src: files/galaxy/config/tool_conf.xml
+>          dest: {% raw %}"{{ galaxy_config_dir }}/tool_conf.custom.xml"{% endraw %}
+>      ```
+>
+> 4. Restart Galaxy (`sudo supervisorctl restart galaxy`)
+>
+> 5. Reload Galaxy in your browser and the new tool should now appear in the tool panel. If you have not already created a dataset in your history, upload a random text dataset. Once you have a dataset, click the tool's name in the tool panel, then click Execute. When your job completes, the output should be:
+>
+>    > ### {% icon question %} Question
+>    >
+>    > What is the tool's output?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > ```
+>    > > Running with '1' threads
+>    > > ```
+>    > >
+>    > {: .solution }
+>    >
+>    {: .question}
+{: .hands_on}
 
 
-
-### Section 4 - Statically map a tool to a job destination
-
-**Part 1 - Create a tool**
-
-We don't want to overload our training VMs trying to run real tools, so to demonstrate how to map a multicore tool to a multicore destination, we'll create a fake tool. Since most of these operations are performed as the `galaxy` user it's probably easiest to open a shell as that user before starting:
-
-```console
-ubuntu$ sudo -su galaxy
-galaxy$
-```
-
-If you prefer (as I do) to do less user switching, you can open a second shell to your VM to do this.
-
-Now, open a new file at `/srv/galaxy/server/tools/multi.xml` and add the contents:
-
-```xml
-<tool id="multi" name="Multicore Tool">
-    <command>
-        echo "Running with '\${GALAXY_SLOTS:-1}' threads" &gt; "$output1"
-    </command>
-    <inputs>
-        <param name="input1" type="data" format="txt" label="Input Dataset"/>
-    </inputs>
-    <outputs>
-        <data name="output1" format="txt" />
-    </outputs>
-</tool>
-```
-
-Of course, this tool doesn't actually *use* the allocated number of cores. In a real tool, you would call the tools's underlying command with whatever flag that tool provides to control the number of threads or processes it starts, such as `foobar -t \${GALAXY_SLOTS:-1} ...`.
-
-Up until now we've been using the default tool panel config file, located at `/srv/galaxy/server/config/tool_conf.xml.sample`. Copy this to `/srv/galaxy/config/tool_conf.xml` in the same directory as the sample and open it up with an editor. We need to add the entry for our new tool. This can go anywhere, but I suggest putting it at the very top, between the opening `<toolbox>` and first `<section>`, so that it appears right at the top of the toolbox.
-
-```console
-$ cp /srv/galaxy/server/config/tool_conf.xml.sample /srv/galaxy/config/tool_conf.xml
-$ vim /srv/galaxy/config/tool_conf.xml
-```
-
-The tag to add is:
-
-```xml
-  <tool file="multi.xml"/>
-```
-
-Galaxy needs to be instructed to read `tool_conf.xml` instead of `tool_conf.xml.sample`. Normally it does this automatically if `tool_conf.xml` exists, but the Ansible role we used to install Galaxy explicitly instructed Galaxy to load `tool_conf.xml.sample`.
-
-Edit `/srv/galaxy/config/galaxy.yml` and modify the value of `tool_config_file` accordingly:
-
-```yml
-galaxy:
-    tool_config_file: /srv/galaxy/config/tool_conf.xml,/srv/galaxy/config/shed_tool_conf.xml
-```
-
-Finally, in order to read the toolbox changes, Galaxy should be restarted. You'll need to return to the `ubuntu` user to do this (since the `galaxy` user does not have `sudo` privileges). It is, as usual, `sudo supervisorctl restart all`.
-
-Reload Galaxy in your browser and the new tool should now appear in the tool panel. If you have not already created a dataset in your history, upload a random text dataset. Once you have a dataset, click the tool's name in the tool panel, then click Execute. When your job completes, the output should be:
-
-```
-Running with '1' threads
-```
-
-**Part 2 - Create a destination and map the tool**
+## Running with more resources
 
 We want our tool to run with more than one core. To do this, we need to instruct Slurm to allocate more cores for this job. This is done in the job configuration file.
 
-As the `galaxy` user, open up `/srv/galaxy/config/job_conf.xml` and add the following new destination:
 
-```xml
-        <destination id="slurm-2c" runner="slurm">
-            <param id="nativeSpecification">--nodes=1 --ntasks=2</param>
-        </destination>
-```
+> ### {% icon hands_on %} Hands-on:
+>
+> 1. Edit your `files/galaxy/config/job_conf.xml` and add the following destination:
+>
+>    ```xml
+>    <destination id="slurm-2c" runner="slurm">
+>        <param id="nativeSpecification">--nodes=1 --ntasks=2</param>
+>    </destination>
+>    ```
+> 2. Then, map the new tool to the new destination using the tool ID (`<tool id="testing">`) and destination id (`<destination id="slurm-2c">`) by adding a new section to the job config, `<tools>`:
+>
+>    ```xml
+>        <tools>
+>            <tool id="testing" destination="slurm-2c"/>
+>        </tools>
+>    ```
+>
+> 3. Run the playbook, and restart Galaxy with `sudo supervisorctl restart all`.
+>
+> 4. Click the rerun button on the last history item, or click **Testing Tool** in the tool panel, and then click the tool's Execute button.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > What is the tool's output?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > ```
+>    > > Running with '2' threads
+>    > > ```
+>    > >
+>    > {: .solution }
+>    >
+>    {: .question}
+>
+{: .hands_on}
 
-Then, map the new tool to the new destination using the tool ID (`<tool id="multi">`) and destination id (`<destination id="slurm-2c">`) by adding a new section to the job config, `<tools>`:
 
-```xml
-    <tools>
-        <tool id="multi" destination="slurm-2c"/>
-    </tools>
-```
-
-And finally, restart Galaxy with `sudo supervisorctl restart all` (as the `ubuntu` user).
-
-Now, click the rerun button on the last history item, or click **Multicore Tool** in the tool panel, and then click the tool's Execute button. If successful, your tool's output should now be:
-
-```
-Running with '2' threads
-```
-
-### Section 5 - Dynamically map a tool to a job destination
-
-**Part 1 - Write a Dynamic Tool Destination**
+# Dynamically map a tool to a job destination
 
 Dynamic tool destinations utilize the dynamic job runner to provide dynamic job mapping functionality without having to explicitly write code to perform the mapping. The mapping functionality is mostly limited to input sizes, but often input size is the most important factor in deciding what resources to allocate for a job.
 
-Dynamic tool destinations are configured via a YAML file at `/srv/galaxy/config/tool_destinations.yml`. As before, we'll use a fake example. Create the file with the following contents:
+## Tool Destinations
 
-```yaml
----
-tools:
-  multi:
-    rules:
-      - rule_type: file_size
-        lower_bound: 16
-        upper_bound: Infinity
-        destination: slurm-2c
-    default_destination: slurm
-default_destination: local
-verbose: True
-```
 
-The rule says:
-- If the tool has ID `multi`:
-  - If the input dataset is >=16 bytes, run on the destination `slurm-2c`
-  - If the input dataset is <16 bytes, run on the destination `slurm`
-- Else, run on the destination `local`
+> ### {% icon hands_on %} Hands-on:
+>
+> 1. Dynamic tool destinations are configured via a YAML file. As before, we'll use a fake example but this is extremely useful in real-life scenarios. Create the file `files/galaxy/config/tool_destinations.yml` with the following contents:
+>
+>    ```yaml
+>    ---
+>    tools:
+>      testing:
+>        rules:
+>          - rule_type: file_size
+>            lower_bound: 16
+>            upper_bound: Infinity
+>            destination: slurm-2c
+>        default_destination: slurm
+>    default_destination: local
+>    verbose: True
+>    ```
+>
+>    The rule says:
+>    - If the tool has ID `testing`:
+>      - If the input dataset is >=16 bytes, run on the destination `slurm-2c`
+>      - If the input dataset is <16 bytes, run on the destination `slurm`
+>    - Else, run on the destination `local`
+>
+> 2. We also need to inform Galaxy of the path to the file we've just created, which is done using the `tool_destinations_config_file` in `galaxy_config` > `galaxy`. Additionally we need to add a `galaxy_config_files` entry to ensure it is deployed.
+>
+>    ```yml
+>    galaxy_config:
+>      galaxy:
+>        tool_destinations_config_file: {% raw %}{{ galaxy_config_dir }}/tool_destinations.yml{% endraw %}
+>    ...
+>    galaxy_config_files:
+>        ...
+>        - src: files/galaxy/config/tool_destinations.yml
+>          dest: {% raw %}"{{ galaxy_config['galaxy']['tool_destinations_config_file'] }}"{% endraw %}
+>    ```
+>
+> 3. We need to update Galaxy's job configuration to use this rule. Open `files/galaxy/config/job_conf.xml` and add a DTD destination:
+>
+>    ```xml
+>    <destination id="dtd" runner="dynamic">
+>        <param id="type">dtd</param>
+>    </destination>
+>    ```
+>
+>    Also, comment out the previous `<tool>` definition for the `testing` tool, and replace it with a mapping to the dtd destination like so:
+>
+>    ```xml
+>        <tools>
+>    <!--
+>            <tool id="testing" destination="slurm-2c"/>
+>    -->
+>            <tool id="testing" destination="dtd"/>
+>        </tools>
+>    ```
+>
+> 4. Run the playbook and restart Galaxy
+{: .hands_on}
 
-We also need to inform Galaxy of the path to the file we've just created, which is done using the `tool_destinations_config_file` in `galaxy.yml`:
+## Testing the Dynamic Destination
 
-```yml
-galaxy:
-    tool_destinations_config_file: /srv/galaxy/config/tool_destinations.yml
-```
+Our rule specified that any invocation of the `testing` tool with an input dataset with size <16 bytes would run on the 1 core destination, whereas any with >= 16 bytes would run on the 2 core destination.
 
-Once the dynamic tool definition has been written, we need to update Galaxy's job configuration to use this rule. Open `/srv/galaxy/config/job_conf.xml` and add a DTD destination:
+> ### {% icon hands_on %} Hands-on:
+>
+> 1. Create a dataset using the upload paste tool with a few (<16) characters
+>
+> 2. Create a dataset using the upload paste tool with >16 characters
+>
+> 3. Run the `Testing Tool` on both datasets.
+>
+{: .hands_on}
 
-```xml
-        <destination id="dtd" runner="dynamic">
-            <param id="type">dtd</param>
-        </destination>
-```
+You can imagine using this to run large blast jobs on compute hardware with more resources, or giving them more CPU cores. Some tools require more memory as job inputs increase, you can use this to run tools with a larger memory limit, if you know it will need it to process a certain size of inputs.
 
-Also, comment out the previous `<tool>` definition for the `multi` tool, and replace it with a mapping to the dtd destination like so:
 
-```xml
-    <tools>
-<!--
-        <tool id="multi" destination="slurm-2c"/>
--->
-        <tool id="multi" destination="dtd"/>
-    </tools>
-```
-
-Then, restart Galaxy with `sudo supervisorctl restart all`.
-
-**Part 2 - Verify**
-
-Our rule specified that any invocation of the `multi` tool with an input dataset with size <16 bytes would run on the 1 core destination, whereas any with >= 16 bytes would run on the 2 core destination. To verify, create a dataset using the upload paste tool of just a few (<16) characters, and another with >16 characters and run the Multicore Tool on each. The former will run "with '1' thread" whereas the latter will run "with '2' threads".
-
-## Section 6 - Implement a job resource selector
-
-**Part 1 - Define the resource selector**
+# Job Resource Selectors
 
 You may find that certain tools can benefit from having form elements added to them to allow for controlling certain job parameters, so that users can select based on their own knowledge. For example, a user might know that a particular set of parameters and inputs to a certain tool needs a larger memory allocation than the standard amount for a given tool. This of course assumes that your users are well behaved enough not to choose the maximum whenever available, although such concerns can be mitigated somewhat by the use of concurrency limits on larger memory destinations.
 
-Such form elements can be added to tools without modifying each tool's configuration file through the use of the **job resource parameters configuration file**, `/srv/galaxy/config/job_resource_params_conf.xml`. Create this file and add the following contents:
+Such form elements can be added to tools without modifying each tool's configuration file through the use of the **job resource parameters configuration file**
 
-```xml
-<parameters>
-    <param label="Cores" name="cores" type="select" help="Number of cores to run job on.">
-        <option value="1">1 (default)</option>
-        <option value="2">2</option>
-    </param>
-  <param label="Time" name="time" type="integer" size="3" min="1" max="24" value="1" help="Maximum job time in hours, 'walltime' value (1-24). Leave blank to use default value." />
-</parameters>
-```
+{% include snippets/todo.md notes="Split this, do a dynamic destination first, THEN add resource params." %}
 
-This defines two resource fields, a select box where users can choose between 1 and 2 cores, and a text entry field where users can input an integer value from 1-24 to set the walltime for a job.
+> ### {% icon hands_on %} Hands-on: Configuring a Resource Selector
+>
+> 1. Create and open `files/galaxy/config/job_resource_params_conf.xml`
+>
+>    ```xml
+>    <parameters>
+>        <param label="Cores" name="cores" type="select" help="Number of cores to run job on.">
+>            <option value="1">1 (default)</option>
+>            <option value="2">2</option>
+>        </param>
+>      <param label="Time" name="time" type="integer" size="3" min="1" max="24" value="1" help="Maximum job time in hours, 'walltime' value (1-24). Leave blank to use default value." />
+>    </parameters>
+>    ```
+>
+>    This defines two resource fields, a select box where users can choose between 1 and 2 cores, and a text entry field where users can input an integer value from 1-24 to set the walltime for a job.
+>
+> 2. As usual, we need to instruct Galaxy of where to find this file:
+>
+>    - Edit your group variables file and add the following:
+>
+>      ```yml
+>      galaxy_config:
+>        galaxy:
+>          job_resource_params_file: {% raw %}"{{ galaxy_config_dir }}/job_resource_params_conf.xml"{% endraw %}
+>      ...
+>      galaxy_config_files:
+>        ...
+>        - src: files/galaxy/config/job_resource_params_conf.xml
+>          dest: {% raw %}"{{ galaxy_config['galaxy']['job_resource_params_file'] }}"{% endraw %}
+>      ```
+>
+> 3. Next, we define a new section in `job_conf.xml`: `<resources>`. This groups together parameters that should appear together on a tool form. Add the following section to your `files/galaxy/config/job_conf.xml`:
+>
+>    ```xml
+>    <resources>
+>        <group id="testing">cores,time</group>
+>    </resources>
+>    ```
+>
+>    The group ID will be used to map a tool to job resource parameters, and the text value of the `<group>` tag is a comma-separated list of `name`s from `job_resource_params_conf.xml` to include on the form of any tool that is mapped to the defined `<group>`.
+>
+>
+> 4. Finally, in `job_conf.xml`, move the previous `<tool>` definition for the `testing` tool into the comment and define a new `<tool>` that defines the `resources` for the tool:
+>
+>    ```xml
+>    <tools>
+>        <!--
+>        <tool id="testing" destination="slurm-2c"/>
+>        <tool id="testing" destination="dtd"/>
+>        -->
+>        <tool id="testing" destination="dynamic_cores_time" resources="testing_resources"/>
+>    </tools>
+>    ```
+> 5. We have assigned the `testing` tool to a new destination: `dynamic_cores_time`, but this destination does not exist. We need to create it. Add the following destination in your job conf:
+>
+>    ```xml
+>    <destination id="dynamic_cores_time" runner="dynamic">
+>        <param id="type">python</param>
+>        <param id="function">dynamic_cores_time</param>
+>    </destination>
+>    ```
+>
+>    This is a **Python function dynamic destination**. Galaxy will load all python files in the `{{ galaxy_dynamic_rule_dir }}`, and all functions defined in those will be available `dynamic_cores_time` to be used in the `job_conf.xml`
+>
+{: .hands_on}
 
-As usual, we need to instruct Galaxy of where to find this file in `galaxy.yml` using the `job_resource_params_file` option:
+This will set everything up to use the function. We have:
 
-```yml
-galaxy:
-    job_resource_params_file: /srv/galaxy/config/job_resource_params_conf.xml
-```
+- A set of "job resources" defined which will let the user select the number of cores and walltime.
+- A job configuration which says:
+    -  that our testing tool should allow selection of the cores and time parameters
+    - directs it to use a new, `dynamic_cores_time` destination
+    - and a has a new destination, `dynamic_cores_time`, which is defined as a dynamic destination which will call a python function we will load.
 
-**Part 2 - Configure Galaxy to use the resource selector**
+This is a lot but we're still missing the last piece for it to work:
 
-Next, we define a new section in `job_conf.xml`: `<resources>`. This groups together parameters that should appear together on a tool form. Add the following section to `/srv/galaxy/server/job_conf.xml`:
+## A dynamic destination
 
-```xml
-    <resources>
-        <group id="multi_resources">cores,time</group>
-    </resources>
-```
+Lastly, we need to write the rule that will read the value of the job resource parameter form fields and decide how to submit the job.
 
-The group ID will be used to map a tool to job resource parameters, and the text value of the `<group>` tag is a comma-separated list of `name`s from `job_resource_params_conf.xml` to include on the form of any tool that is mapped to the defined `<group>`.
-
-Finally, in `job_conf.xml`, move the previous `<tool>` definition for the `multi` tool into the comment and define a new `<tool>` that defines the `resources` for the tool:
-
-```xml
-    <tools>
-<!--
-        <tool id="multi" destination="slurm-2c"/>
-        <tool id="multi" destination="dtd"/>
--->
-        <tool id="multi" destination="dynamic_cores_time" resources="multi_resources"/>
-    </tools>
-```
-
-We have assigned the `multi` tool to a new destination: `dynamic_cores_time`, but this destination does not exist. We need to create it. Add the following destination:
-
-```xml
-        <destination id="dynamic_cores_time" runner="dynamic">
-            <param id="type">python</param>
-            <param id="function">dynamic_cores_time</param>
-        </destination>
-```
-
-This is a **Python function dynamic destination**. Galaxy will load a function from `/srv/galaxy/server/lib/galaxy/jobs/rules/*.py` named `dynamic_cores_time` and that function will determine the job destination for this tool.
-
-**Part 3 - Python function dynamic rule**
-
-Lastly, we need to write the rule that will read the value of the job resource parameter form fields and decide how to submit the job. But first, let's see the fruits of our labor thus far. Restart Galaxy with `sudo supervisorctl restart all`, then click the **Multicore Tool**. You should see that a "Job Resource Parameters" select box has been added to the bottom of the tool form. If this is switched to "**Specify job resource parameters**", the fields that were defined in `job_resource_params_conf.xml` are displayed.
-
-We need to write a Python function that will process these rules. Such rules live, by default, in `/srv/galaxy/server/lib/galaxy/jobs/rules/*.py` (although this can be configured). Create a new file, `/srv/galaxy/server/lib/galaxy/jobs/rules/cores_time.py`. This file should contains the function that we named in `job_conf.xml`: `dynamic_cores_time`:
-
-```python
-import logging
-from galaxy.jobs.mapper import JobMappingException
-
-log = logging.getLogger(__name__)
-
-DESTINATION_IDS = {
-    1 : 'slurm',
-    2 : 'slurm-2c'
-}
-FAILURE_MESSAGE = 'This tool could not be run because of a misconfiguration in the Galaxy job running system, please report this error'
-
-
-def dynamic_cores_time(app, tool, job, user_email):
-    destination = None
-    destination_id = 'slurm'
-
-    # build the param dictionary
-    param_dict = dict( [ ( p.name, p.value ) for p in job.parameters ] )
-    param_dict = tool.params_from_strings( param_dict, app )
-
-    # handle job resource parameters
-    if '__job_resource' in param_dict:
-        if param_dict['__job_resource']['__job_resource__select'] == 'yes':
-            try:
-                # validate params
-                cores = int(param_dict['__job_resource']['cores'])
-                time = int(param_dict['__job_resource']['time'])
-                assert cores in (1, 2), "Invalid value for core selector"
-                assert time in range(1, 25), "Invalid value for time selector"
-            except (TypeError, AssertionError) as exc:
-                log.exception(exc)
-                log.error('(%s) param_dict was: %s', job.id, param_dict)
-                raise JobMappingException( FAILURE_MESSAGE )
-            # params validated
-            destination_id = DESTINATION_IDS[cores]
-            destination = app.job_config.get_destination(destination_id)
-            # set walltime
-            if 'nativeSpecification' not in destination.params:
-                destination.params['nativeSpecification'] = ''
-            destination.params['nativeSpecification'] += ' --time=%s:00:00' % time
-        elif param_dict['__job_resource']['__job_resource__select'] != 'no':
-            # someone's up to some shenanigans
-            log.error('(%s) resource selector not yes/no, param_dict was: %s', job.id, param_dict)
-            raise JobMappingException( FAILURE_MESSAGE )
-    else:
-        # resource param selector not sent with tool form, job_conf.xml misconfigured
-        log.warning('(%s) did not receive the __job_resource param, keys were: %s', job.id, param_dict.keys())
-        raise JobMappingException( FAILURE_MESSAGE )
-
-    if destination is not None and 'nativeSpecification' in destination.params:
-        log.info("native specification: %s", destination.params['nativeSpecification'])
-    log.info('returning destination: %s', destination_id)
-    return destination or destination_id
-```
-
-It is important to note that **you are responsible for parameter validation, including the job resource selector**. This function only handles the job resource parameter fields, but it could do many other things - examine inputs, job queues, other tool parameters, etc.
-
-Once written, restart Galaxy with `sudo supervisorctl restart all`.
-
-**Part 4 - Verify**
-
-Run the **Multicore Tool** with various resource parameter selections:
-- Use default job resource parameters
-- Specify job resource parameters:
-  - 1 core
-  - 2 cores
-  - Some value for walltime from 1-24
+> ### {% icon hands_on %} Hands-on:
+>
+> 1. Create and edit `files/galaxy/config/dynamic_destination.py`. Create it with the following contents:
+>
+>    ```python
+>    import logging
+>    from galaxy.jobs.mapper import JobMappingException
+>
+>    log = logging.getLogger(__name__)
+>
+>    DESTINATION_IDS = {
+>        1 : 'slurm',
+>        2 : 'slurm-2c'
+>    }
+>    FAILURE_MESSAGE = 'This tool could not be run because of a misconfiguration in the Galaxy job running system, please report this error'
+>
+>
+>    def dynamic_cores_time(app, tool, job, user_email):
+>        destination = None
+>        destination_id = 'slurm'
+>
+>        # build the param dictionary
+>        param_dict = dict( [ ( p.name, p.value ) for p in job.parameters ] )
+>        param_dict = tool.params_from_strings( param_dict, app )
+>
+>        # handle job resource parameters
+>        try:
+>            # validate params
+>            cores = int(param_dict['__job_resource']['cores'])
+>            time = int(param_dict['__job_resource']['time'])
+>            destination_id = DESTINATION_IDS[cores]
+>            destination = app.job_config.get_destination(destination_id)
+>            # set walltime
+>            if 'nativeSpecification' not in destination.params:
+>                destination.params['nativeSpecification'] = ''
+>            destination.params['nativeSpecification'] += ' --time=%s:00:00' % time
+>        else:
+>            # resource param selector not sent with tool form, job_conf.xml misconfigured
+>            log.warning('(%s) did not receive the __job_resource param, keys were: %s', job.id, param_dict.keys())
+>            raise JobMappingException( FAILURE_MESSAGE )
+>
+>        log.info('returning destination: %s', destination_id)
+>        return destination or destination_id
+>    ```
+>
+>    It is important to note that **you are responsible for parameter validation, including the job resource selector**. This function only handles the job resource parameter fields, but it could do many other things - examine inputs, job queues, other tool parameters, etc.
+>
+>
+> 2. Deploy this, somehow. TODO
+>
+> 3. Run the playbook, restart Galaxy
+>
+> 4. Run the **Multicore Tool** with various resource parameter selections
+>
+>    - Use default job resource parameters
+>    - Specify job resource parameters:
+>      - 1 core
+>      - 2 cores
+>      - Some value for walltime from 1-24
+>
+{: .hands_on}
 
 The cores parameter can be verified from the output of the tool. The walltime can be verified with `scontrol`:
 
@@ -760,17 +844,9 @@ JobId=24 JobName=g24_multi_anonymous_10_0_2_2
 
 Note that the `TimeLimit` for this job (which I gave a 12 hour time limit) was set to `12:00:00`.
 
-### So, what did we learn?
-
-Hopefully, you now understand:
-- The various ways in which tools can be mapped to destinations, both statically and dynamically
-- How to write a dynamic tool destination (DTD)
-- How to write a dynamic python function destination
-- How to use the job resource parameter selection feature
-
-### Further Reading
+## Further Reading
 
 - The [sample dynamic tool destination config file](https://github.com/galaxyproject/galaxy/blob/dev/config/tool_destinations.yml.sample) fully describes the configuration language
-- [Dynamic destination documentation](https://wiki.galaxyproject.org/Admin/Config/Jobs#Dynamic_Destination_Mapping)
+- [Dynamic destination documentation](https://docs.galaxyproject.org/en/latest/admin/jobs.html)
 - Job resource parameters are not as well documented as they could be, but the [sample configuration file](https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/test/files/galaxy/config/job_resource_params_conf.xml) shows some of the possibilities.
 - [usegalaxy.org's job_conf.xml](https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/main/templates/galaxy/config/job_conf.xml.j2) is publicly available for reference.
