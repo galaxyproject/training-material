@@ -117,7 +117,7 @@ galaxy_config_files:
 The configuration here is a bit different, it references the `galaxy_config`, which is structured like:
 
 {% raw %}
-```
+```yaml
 galaxy_config:
   galaxy:
     builds_file_path: "{{ galaxy_config_dir  }}/builds.txt"
@@ -539,7 +539,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 > 2. Open your group variables file and we'll add some variables for supervisor. Supervisor communicates over a unix or tcp socket; we will use the unix socket without password authentication, instead using user/group authentication. We will thus need to set a couple of variables to allow our Galaxy user to access this. Add the following:
 >
->    ```
+>    ```yaml
 >    supervisor_socket_user: 'galaxy'
 >    supervisor_socket_chown: 'galaxy'
 >    ```
