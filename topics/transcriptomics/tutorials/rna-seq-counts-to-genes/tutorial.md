@@ -27,6 +27,7 @@ contributors:
   - annatrigos
   - mritchie
   - hdashnow
+  - Shians
   - charitylaw
 ---
 
