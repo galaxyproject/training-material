@@ -38,7 +38,7 @@ The CernVM-FS is a distributed filesystem perfectly designed for sharing readonl
     * Indices for the genome sequences
     * Various bioinformatic tool indices for the available genomes
 * **Tool containers**
-    * **[Singularity](https://www.sylabs.io/)** containers of everything stored in **[Biocontainers](https://biocontainers.pro/)** (A bioinformatic tool container repository.) You get these for free everytime you build a **[Bioconda](https://bioconda.github.io/)** recipe/package for a tool.
+    * **[Singularity](https://www.sylabs.io/)** containers of everything stored in **[Biocontainers](https://biocontainers.pro/)** (A bioinformatic tool container repository.) You get these for free every time you build a **[Bioconda](https://bioconda.github.io/)** recipe/package for a tool.
 * Others too..
 
 From the Cern website:
