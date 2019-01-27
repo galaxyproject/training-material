@@ -2,15 +2,18 @@
 layout: tutorial_hands_on
 
 title: "Ansible"
-zenodo_link: ""
 questions:
+- How does Galaxy locate data?
+- How can I have Galaxy use multiple storage locations?
 objectives:
+- Setup Galaxy with both the Hierarachical and Distributed Object Storages
 time_estimation: "30m"
 key_points:
+- The distributed object store configuration allows you to easily expand that storage that is attached to your Galaxy.
+- You can move data around without affecting users.
 contributors:
   - natefoo
   - erasche
-
 requirements:
  - type: "internal"
    topic_name: admin
@@ -134,7 +137,8 @@ Sites like UseGalaxy.eu use the distributed object store in order to balance dat
 > ### {% icon tip %} Tip: More documentation
 >
 > More information can be found in the [sample file](https://github.com/galaxyproject/galaxy/blob/dev/config/object_store_conf.xml.sample)
-{: tip}
+>
+{: .tip}
 
 > ### {% icon warning %} Warning: switching object store types will cause issues
 > We have switched between two different object stores here, but this is not supported. If you need to do this, you will need to update datasets in Galaxy's database. Any datasets that were created as hierarchical will lack the `object_store_id`, and you will need to supply the correct one. Do not just blindly copy these instructions, please understand what they do before running them and tlak to us on [Gitter](http://gitter.im/galaxyproject/Lobby) for more help
