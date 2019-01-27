@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Ansible"
+title: "Distributed Object Storage"
 questions:
 - How does Galaxy locate data?
 - How can I have Galaxy use multiple storage locations?
