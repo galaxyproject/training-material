@@ -223,7 +223,7 @@ Before we check out the differentially expressed genes, we can look at the `Repo
 
 ## Multidimensional scaling plot
 
-By far, one of the most important plots we make when we analyse RNA-Seq data are MDS plots. An MDS plot is a visualisation of a principal components analysis, which determines the greatest sources of variation in the data. A principal components analysis is an example of an unsupervised analysis, where we don’t need to specify the groups. If your experiment is well controlled and has worked well, what we hope to see is that the greatest sources of variation in the data are the treatments/groups we are interested in. It is also an incredibly useful tool for quality control and checking for outliers. This Galaxy limma tool outputs an MDS plot by default in the `Report` and a link is also provided to a PDF version (`MDSPlot_CellTypeStatus.pdf`). A scree plot is also produced that shows how much variation is attributed to each dimension. If there was a batch effect for example, you may see high values for additional dimensions. The limma tool plots the first two dimensions by default (1 vs 2), however you can also plot additional dimensions 2 vs 3 and 3 vs 4 using under **Output Options** Additional Plots `MDS Extra` These are displayed in the `Report` along with a link to a PDF version (`MDSPlot_extra.pdf`).
+By far, one of the most important plots we make when we analyse RNA-Seq data are MDS plots. An MDS plot is a visualisation of a principal components analysis, which determines the greatest sources of variation in the data. A principal components analysis is an example of an unsupervised analysis, where we don’t need to specify the groups. If your experiment is well controlled and has worked well, what we hope to see is that the greatest sources of variation in the data are the treatments/groups we are interested in. It is also an incredibly useful tool for quality control and checking for outliers. This Galaxy limma tool outputs an MDS plot by default in the `Report` and a link is also provided to a PDF version (`MDSPlot_CellTypeStatus.pdf`). A scree plot is also produced that shows how much variation is attributed to each dimension. If there was a batch effect for example, you may see high values for additional dimensions. The limma tool plots the first two dimensions by default (1 vs 2), however you can also plot additional dimensions 2 vs 3 and 3 vs 4 using under **Output Options** Additional Plots `MDS Extra` These are displayed in the `Report` along with a link to a PDF version (`MDSPlot_extra.pdf`). Selecting the `Glimma Interactive Plots` will generate an interactive version of the MDS plot, see the plots section of the report below.
 
 ![MDS Plot](../../images/rna-seq-counts-to-genes/mdsscree.png "MDS Plot")
 
@@ -250,6 +250,7 @@ It turns out that there has been a mix-up with two samples, they have been misla
 > 4. Rerun **limma** as before with the correct `sampleinfo` file and adding the following parameters:
 >      - **Output Options**
 >          - {% icon param-check %} *"Additional Plots"* tick:
+>              - `Glimma Interactive Plots`
 >              - `Density Plots (if filtering)`
 >              - `CpmsVsCounts Plots (if filtering on cpms)`
 >              - `Box Plots (if normalising)`
@@ -455,11 +456,11 @@ The limma-voom tool can also auto-generate stripcharts to view the expression of
 ![Stripchart Plot](../../images/rna-seq-counts-to-genes/stripcharts.png "Stripcharts of top genes"){: width="950px"}
 
 
-## Interactive plots (Glimma)
+## Interactive DE plots (Glimma)
 
-An interactive version of the mean-difference plots is output by the limma-voom tool via the [Glimma](https://github.com/Shians/Glimma) package, if a gene annotation file is provided. A link to a html page is generated in the `Report` that allows the user to search for their favourite gene.
+Interactive versions of the MD and Volcano plots can be output by the limma-voom tool via the [Glimma](https://github.com/Shians/Glimma) package, if a gene annotation file is provided and `Glimma Interactive Plots` is selected. Links to the Glimma html pages are generated in the `Report`.
 
-Click on the `Glimma_MDPlot_basalpregnant-basallactate.html` link in the `Report`. You should see a two-panel interactive MD plot like below. The left plot shows the log-fold-change vs average expression. The right plot shows the expression levels of a particular gene of each sample by groups (similar to the stripcharts). Hovering over points on left plot will plot expression level for corresponding gene, clicking on points will fix the expression plot to gene. Clicking on rows on the table has the same effect as clicking on the corresponding gene in the plot.
+Let's take a look at the interactive MD plot. Click on the `Glimma_MDPlot_basalpregnant-basallactate.html` link in the `Report`. You should see a two-panel interactive MD plot like below. The left plot shows the log-fold-change vs average expression. The right plot shows the expression levels of a particular gene of each sample by groups (similar to the stripcharts). Hovering over points on left plot will plot expression level for corresponding gene, clicking on points will fix the expression plot to gene. Clicking on rows on the table has the same effect as clicking on the corresponding gene in the plot.
 
 <iframe src="../../images/rna-seq-counts-to-genes/glimma/MD-Plot.html" width="100%" height="1000"></iframe>
 
