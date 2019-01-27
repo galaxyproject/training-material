@@ -53,6 +53,7 @@ The official playbook is extremely configurable, everything that you want to cha
 
 The important variables for this tutorial are:
 
+- `galaxy_root`
 - `galaxy_server_dir`
 - `galaxy_commit_id`
 - `galaxy_config`
@@ -77,7 +78,7 @@ The [clone](https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/cl
 
 1. It starts by checking if the Galaxy directory exists, this is done so the tasks will attempt to check the current commit, will not fail in case the folder does not exist.
 2. The current commit of the repository on disk is retrieved, in order to decide whether or not Galaxy needs to be updated. This is then reported in a debugging message to the user.
-3. Galaxy is updated to the correct commit. If the `galaxy_server_dir` is not yet populated, e.g. on first run, Galaxy will be cloned to the specified location. Otherwise the existing repo will be updated to that commit. The `galaxy_force_checkout` variable allows you to control whether or not any locally made changes will be discarded. This will not affect mutable configuration files as those are not tracked in git.
+3. Galaxy is updated to the correct commit. If the `galaxy_root` is not yet populated, e.g. on first run, Galaxy will be cloned under the specified location. Otherwise the existing repo will be updated to that commit. The `galaxy_force_checkout` variable allows you to control whether or not any locally made changes will be discarded. This will not affect mutable configuration files as those are not tracked in git, and in the case of this exercise, are not stored in the clone.
 4. The virtualenv is set up:
 	1. An empty virtualenv is created.
 	2. Pip is updated within the virtualenv.
@@ -219,59 +220,13 @@ We have codified all of the dependencies you will need into a yaml file that `an
 >
 {: .hands_on}
 
-## Setting up Galaxy User
-
-Best admin practices is to not run Galaxy as a user with `sudo` access, like your login user probably has. So we will create a new user account specifically to run Galaxy under.
-
-> ### {% icon hands_on %} Hands-on: Creating a Galaxy User
->
-> 1. Open `playbook.yml` with your text editor and add the following:
->
->    - Add a `pre_task` to [create a directory](https://docs.ansible.com/ansible/latest/modules/file_module.html) named `/srv/galaxy`.
->    - Add a `pre_task` to [create a group](https://docs.ansible.com/ansible/latest/modules/group_module.html) named `galaxy`, as a system group.
->    - Add a `pre_task` to [create a user](https://docs.ansible.com/ansible/latest/modules/user_module.html) with the home directory `/srv/galaxy/home` which should be created, with the username `galaxy`, as a system user, and part of the `galaxy` group.
->    - For the majority of tasks we will execute, we need to do these as the root user, so specify `become: true` on the playbook level. We will execute all roles with reduced permissions when possible, but many of the tasks we need to do as root to install required packages or configuration.
->
->    > ### {% icon question %} Question
->    >
->    > How does your current playbook look?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > ```yaml
->    > > - hosts: galaxyservers
->    > >   become: true
->    > >   pre_tasks:
->    > >     - file:
->    > >         path: /srv/galaxy
->    > >         state: directory
->    > >     - group:
->    > >         name: galaxy
->    > >         system: yes
->    > >     - user:
->    > >         name: galaxy
->    > >         group: galaxy
->    > >         create_home: yes
->    > >         shell: /bin/bash
->    > >         home: /srv/galaxy/home
->    > >         system: yes
->    > > ```
->    > >
->    > {: .solution }
->    >
->    {: .question}
->
-> 2. Run the playbook (`ansible -i hosts playbook.yml`)
->
-{: .hands_on}
-
 ## PostgreSQL
 
 Galaxy is capable of talking to multiple databases through SQLAlchemy drivers. SQLite is the development database, but PostgreSQL is recommended in production. MySQL is a possibility, but does not receive the same testing or bugfixes from the main development team as PostgreSQL, so we will only show installation with PostgreSQL.
 
 PostgreSQL maintains its own user database apart from the system user database. By default, PostgreSQL uses the "peer" authentication method which allows access for system users with matching PostgreSQL usernames (other authentication mechanisms are available, see the [PostgreSQL Client Authentication documentation](https://www.postgresql.org/docs/current/static/client-authentication.html).
 
-For this tutorial, we will use the default "peer" authentication, so we need to create a PostgreSQL user matching the system user under which Galaxy is running, i.e. `galaxy`. This is normally done with the PostgreSQL `createuser` command, and it must be run as the `postgres` user. In our case, we will use the `natefoo.postgresql_objects` role to handle this step.
+For this tutorial, we will use the default "peer" authentication, so we need to create a PostgreSQL user matching the system user under which Galaxy will be running, i.e. `galaxy`. This is normally done with the PostgreSQL `createuser` command, and it must be run as the `postgres` user. In our case, we will use the `natefoo.postgresql_objects` role to handle this step.
 
 > ### {% icon hands_on %} Hands-on: Installing PostgreSQL
 >
@@ -288,6 +243,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >
 > 2. Open `playbook.yml` with your text editor and add the following:
 >
+>    - Add a pre-task to install the necessary dependency, `python-psycopg2` (the package name is the same for both Debian and RHEL).
 >    - A role for `galaxyproject.repos`. This will add the additional repositories that are needed by Galaxy in various places.
 >    - A role for `galaxyproject.postgresql`. This will handle the installation of PostgreSQL.
 >    - A role for `natefoo.postgresql_objects`, run as the postgres user. (You will need `become`/`become_user`.) This role allows for managing databases and users within postgres.
@@ -302,18 +258,9 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > > - hosts: galaxyservers
 >    > >   become: true
 >    > >   pre_tasks:
->    > >     - file:
->    > >         path: /srv/galaxy
->    > >         state: directory
->    > >     - group:
->    > >         name: galaxy
->    > >         system: yes
->    > >     - user:
->    > >         name: galaxy
->    > >         group: galaxy
->    > >         create_home: yes
->    > >         home: /srv/galaxy/home
->    > >         system: yes
+>    > >     - name: Install Dependencies
+>    > >       package:
+>    > >         name: 'python-psycopg2'
 >    > >   roles:
 >    > >     - galaxyproject.repos
 >    > >     - galaxyproject.postgresql
@@ -330,7 +277,8 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >
 {: .hands_on}
 
-You can now login and access the database. You will need to `sudo -iu galaxy` first, and then you can run `psql galaxy`. The database will currently be empty as Galaxy has never connected to it yet. Once you install Galaxy in the next step, the database will be populated.
+You can now login and access the database, but only as the `postgres` user. You will need to `sudo -iu postgres` first, and then you can run `psql galaxy`. The database will currently be empty as Galaxy has never connected to it yet. Once you install Galaxy in the next step, the database will be populated.
+
 
 ## Galaxy
 
@@ -344,6 +292,8 @@ For a normal Galaxy instance there are a few configuration changes you make very
 
 Additionally we'll go ahead and set up the production-ready [uWSGI Mules](https://uwsgi-docs.readthedocs.io/en/latest/Mules.html) which will handle processing Galaxy jobs. With Mules, uWSGI launches as many as you request, and then they take turns placing a lock, accepting a job, releasing that lock, and then going on to process that job.
 
+Finally, best admin practices are to not run Galaxy as a user with `sudo` access, like your login user probably has. Additionally, it is best to install the Galaxy code and configs as a separate user, for security purposes. So we will instruct the `galaxyproject.galaxy` role to create a new user account specifically to run Galaxy under.
+
 > ### {% icon tip %} Tip: Mules are not the only option
 >
 > Galaxy can be run in a [couple of other configurations](https://docs.galaxyproject.org/en/master/admin/scaling.html#deployment-options) depending on your needs. Mules are generally a good solution for most production needs.
@@ -356,12 +306,11 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 > 1. Open `playbook.yml` with your text editor and set the following:
 >
->    - Add a pre-task to [create a directory](https://docs.ansible.com/ansible/2.5/modules/file_module.html#file-module), `/data`, owned by the galaxy user and group, with mode `755`
->    - Add a pre-task to install the necessary dependencies:
->        - For Debian: git, python-virtualenv, python-psycopg2, make, build-essential
->        - For RHEL: mercurial, python-virtualenv, python-psycopg2
->    - Add the role `galaxyproject.galaxy` to the roles to be executed, at the end, run as the user `galaxy`
->
+>    - Amend the dependency installation pre-task to install additional necessary dependencies:
+         - For Debian: git, python-virtualenv, make, build-essential
+>        - For RHEL: mercurial, python-virtualenv
+>    - Add the role `galaxyproject.galaxy` to the roles to be executed, at the end
+
 >    > ### {% icon question %} Question
 >    >
 >    > How does your final configuration look?
@@ -371,27 +320,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > ```yaml
 >    > > - hosts: galaxyservers
 >    > >   pre_tasks:
->    > >     - file:
->    > >         path: /srv/galaxy
->    > >         state: directory
->    > >     - group:
->    > >         name: galaxy
->    > >         system: yes
->    > >     - user:
->    > >         name: galaxy
->    > >         group: galaxy
->    > >         create_home: yes
->    > >         home: /srv/galaxy/home
->    > >         system: yes
 >    > >     - name: Install Dependencies
 >    > >       package:
->    > >         name: ['git', 'python-virtualenv', 'python-psycopg2']
->    > >     - file:
->    > >         path: /data
->    > >         state: directory
->    > >         owner: galaxy
->    > >         group: galaxy
->    > >         mode: 0750
+>    > >         name: ['python-psycopg2', 'git', 'python-virtualenv', 'make', 'build-essential']
 >    > >   roles:
 >    > >     - galaxyproject.repos
 >    > >     - galaxyproject.postgresql
@@ -399,6 +330,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > >       become: true
 >    > >       become_user: postgres
 >    > >     - role: galaxyproject.galaxy
+NATE: FIXME
 >    > >       become: true
 >    > >       become_user: galaxy
 >    > > ```
@@ -412,18 +344,21 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    We need to set the following variables:
 >
 >    {% raw %}
->    Variable                    | Value                              | Purpose
->    ---                         | -----                              | ---
->    `galaxy_root`               | `/srv/galaxy`                      | This is just the same as the Galaxy home directory, where we will place most of our configuration and data folders.
->    `galaxy_server_dir`         | `{{ galaxy_root }}/server`         | Where the Galaxy code itself will be located.
->    `galaxy_config_dir`         | `{{ galaxy_root }}/config`         | Our location for Galaxy configuration. Notice that this is outside of the server code directory.
->    `galaxy_mutable_config_dir` | `{{ galaxy_root }}/mutable-config` | Mutable configuration data consists of things like the `shed_tool_conf.xml`, anything that Galaxy modifies or creates during runtime.
->    `galaxy_mutable_data_dir`   | `{{ galaxy_root }}/mutable-data`   | This folder will contain dependencies and other data that Galaxy fetches.
->    `galaxy_config_style`       | `yaml`                             | We want to opt-in to the new style YAML configuration.
->    `galaxy_force_checkout`     | `true`                             | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
+>    Variable                    | Value                                      | Purpose
+>    ---                         | -----                                      | ---
+     `galaxy_create_user`         | `true`                                     | Instruct the role to create a Galaxy user
+     `galaxy_separate_privileges` | `true`                                     | Enable separation mode to install the Galaxy code as `root` but run the Galaxy server as `galaxy`
+     `galaxy_manage_paths`        | `true`                                     | Instruct thre role to create the needed directories.
+     `galaxy_layout`              | `root-dir`                                 | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, and data folders will live beneath `galaxy_root`.
+>    `galaxy_root`                | `/srv/galaxy`                              | This is the root of the Galaxy deployment.
+     `galaxy_file_path`           | `/data`                                    | The directory where Galaxy datasets (user data) will be stored. On a real deployment, this would likely be a mounted network filesystem.
+     `galaxy_user`                | `{'name': 'galaxy', 'shell': '/bin/bash'}` | The user that Galaxy will run as.
+     `galaxy_commit_id`           | `release_18.09`                            | The git reference to check out, which in this case is the branch for Galaxy Release 18.09.
+>    `galaxy_config_style`        | `yaml`                                     | We want to opt-in to the new style YAML configuration.
+>    `galaxy_force_checkout`      | `true`                                     | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
 >    {% endraw %}
 >
->
+
 > 2. Again edit the group variables file and add a variable for `galaxy_config`. It will be a hash with one key, `galaxy` which will also be a hash. Inside here you can place all of your Galaxy configuration.
 >
 >    The structure is:
@@ -456,11 +391,16 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > >     owner: galaxy
 >    > >
 >    > > # Galaxy
+>    > > galaxy_create_user: true
+>    > > galaxy_separate_privileges: true
+>    > > galaxy_manage_paths: true
+>    > > galaxy_layout: root-dir
 >    > > galaxy_root: /srv/galaxy
->    > > galaxy_server_dir: "{{ galaxy_root }}/server"
->    > > galaxy_config_dir: "{{ galaxy_root }}/config"
->    > > galaxy_mutable_config_dir: "{{ galaxy_root }}/mutable-config"
->    > > galaxy_mutable_data_dir: "{{ galaxy_root }}/mutable-data"
+>    > > galaxy_file_path: /data
+>    > > galaxy_user:
+>    > >   name: galaxy
+>    > >   shell: /bin/bash
+>    > > galaxy_commit_id: release_18.09
 >    > > galaxy_config_style: yaml
 >    > > galaxy_force_checkout: true
 >    > > galaxy_config:
