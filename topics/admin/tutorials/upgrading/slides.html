@@ -38,6 +38,13 @@ contributors:
   * Kept up to date (especially for recent releases)
 
 ---
+# Ansible
+
+We recommend setting up, managing, and upgrading Galaxy using the Ansible software management tool. Please see the materials under 'Galaxy Installation with Ansible'.
+
+When you use Ansible the majority of this slide deck is not relevant anymore since everything mentioned becomes a trivial change in your playbook configuration. Use Ansible if you can.
+
+---
 class: left
 # Deal with local Galaxy modifications
 
@@ -135,16 +142,14 @@ $ deactivate
 
 ---
 class: left
-# make client on `dev`
+# Client Artifacts
 
-Since January 2018, the `dev` and pre-release (frozen) Galaxy branches do not
-contain client build artifacts (e.g. JavaScript bundles in `static/`).  For
-`dev`, Galaxy will automatically build the client locally, as needed, though if
-you need to do so manually (e.g. to include local changes), the following steps
-should do it:
+* Since 18.01, the `dev` and pre-release (frozen) Galaxy branches do not
+contain client build artifacts (e.g. JavaScript bundles in `static/`).
 
-1. install `yarn`
-2. run `make client-production`
+* Since 18.09 not even the `release_*` branches include the client build. Instead Galaxy will check for local JavaScript changes and perform a build if neccessary (including the build dependency installation).
+
+* You can always run `make client-production` to force the client build (but this assumes you manage the dependencies).
 
 [Documentation](https://github.com/galaxyproject/galaxy/blob/dev/client/README.md)
 ---
