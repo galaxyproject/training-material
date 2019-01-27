@@ -31,7 +31,7 @@ requirements:
 # Overview
 {:.no_toc}
 
-This tutorial assumes you have some familiarity with Ansible and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook.
+This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook.
 
 We want to give you a comprehensive understanding of how the Galaxy installation occurs, but we want to avoid you having to write a "custom" Galaxy installation playbook which you would eventually throw away, in order to use the official playbooks. Given these goals, we will go through the playbook in depth first, and then move to a hands-on portion later. If you are not interested in the inner workings, you can [skip to that section now](#installing-galaxy).
 
