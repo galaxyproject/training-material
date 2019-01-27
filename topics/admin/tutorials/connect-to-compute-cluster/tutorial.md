@@ -13,10 +13,15 @@ objectives:
   - Know how to map tools to job destinations
   - Be able to use the dynamic job runner to make arbitrary destination mappings
   - Understand the job resource selector config and dynamic rule creation
+  - The various ways in which tools can be mapped to destinations, both statically and dynamically
+  - How to write a dynamic tool destination (DTD)
+  - How to write a dynamic python function destination
+  - How to use the job resource parameter selection feature
 time_estimation: "3.5h"
 key_points:
   - Galaxy supports a variety of different DRMs.
-  - Tools/Jobs/Users etc can have their own resource.
+  - Dynamic Tool Destinations are a convenient way to map
+  - Job resource parameters can allow you to give your users control over job resource requirements, if they are knowledgeable about the tools and compute resources available to them.
 contributors:
   - natefoo
   - bgruening
@@ -540,7 +545,7 @@ Up until now we've been using the default tool panel config file, located at `/s
 We want our tool to run with more than one core. To do this, we need to instruct Slurm to allocate more cores for this job. This is done in the job configuration file.
 
 
-> ### {% icon hands_on %} Hands-on:
+> ### {% icon hands_on %} Hands-on: Allocating more resources
 >
 > 1. Edit your `files/galaxy/config/job_conf.xml` and add the following destination:
 >
@@ -582,10 +587,9 @@ We want our tool to run with more than one core. To do this, we need to instruct
 
 Dynamic tool destinations utilize the dynamic job runner to provide dynamic job mapping functionality without having to explicitly write code to perform the mapping. The mapping functionality is mostly limited to input sizes, but often input size is the most important factor in deciding what resources to allocate for a job.
 
-## Tool Destinations
+## Writing a Dynamic Tool Destination
 
-
-> ### {% icon hands_on %} Hands-on:
+> ### {% icon hands_on %} Hands-on: Writing a DTD
 >
 > 1. Dynamic tool destinations are configured via a YAML file. As before, we'll use a fake example but this is extremely useful in real-life scenarios. Create the file `files/galaxy/config/tool_destinations.yml` with the following contents:
 >
@@ -644,11 +648,11 @@ Dynamic tool destinations utilize the dynamic job runner to provide dynamic job 
 > 4. Run the playbook and restart Galaxy
 {: .hands_on}
 
-## Testing the Dynamic Destination
+## Testing the DTD
 
 Our rule specified that any invocation of the `testing` tool with an input dataset with size <16 bytes would run on the 1 core destination, whereas any with >= 16 bytes would run on the 2 core destination.
 
-> ### {% icon hands_on %} Hands-on:
+> ### {% icon hands_on %} Hands-on: Testing the DTD
 >
 > 1. Create a dataset using the upload paste tool with a few (<16) characters
 >
@@ -749,7 +753,7 @@ This is a lot but we're still missing the last piece for it to work:
 
 Lastly, we need to write the rule that will read the value of the job resource parameter form fields and decide how to submit the job.
 
-> ### {% icon hands_on %} Hands-on:
+> ### {% icon hands_on %} Hands-on: Writing a dynamic destination
 >
 > 1. Create and edit `files/galaxy/config/dynamic_destination.py`. Create it with the following contents:
 >
