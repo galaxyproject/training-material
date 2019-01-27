@@ -141,7 +141,7 @@ Sites like UseGalaxy.eu use the distributed object store in order to balance dat
 {: .tip}
 
 > ### {% icon warning %} Warning: switching object store types will cause issues
-> We have switched between two different object stores here, but this is not supported. If you need to do this, you will need to update datasets in Galaxy's database. Any datasets that were created as hierarchical will lack the `object_store_id`, and you will need to supply the correct one. Do not just blindly copy these instructions, please understand what they do before running them and tlak to us on [Gitter](http://gitter.im/galaxyproject/Lobby) for more help
+> We have switched between two different object stores here, but this is not supported. If you need to do this, you will need to update datasets in Galaxy's database. Any datasets that were created as hierarchical will lack the `object_store_id`, and you will need to supply the correct one. Do not just blindly copy these instructions, please understand what they do before running them and talk to us on [Gitter](http://gitter.im/galaxyproject/Lobby) for more help
 >
 > 1. Move the datasets to their new location: `sudo -u galaxy rsync -avr /hierarchical/000/ /distributed/000/`
 >
