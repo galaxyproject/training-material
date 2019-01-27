@@ -310,7 +310,7 @@ We can also have a look more closely to see whether our threshold of 0.5 CPM doe
 
 The `Report` provides links to PDFs of all plots shown in the `Report` and also to the rest of the additional plots selected to be output.
 
-![Report Outputs](../../images/rna-seq-counts-to-genes/report_plots.png "Report outputs")
+![Report Outputs](../../images/rna-seq-counts-to-genes/report_plots.png "Report outputs"){: width="30%"}
 
 Click on the `CpmPlots.pdf` link in the `Report`. You should see 12 plots, one for each sample. Two of the plots are shown below. From these plots we can see that 0.5 CPM is equivalent to ~10 counts in each of the 12 samples, so 0.5 seems to be an appropriate threshold for this dataset (these samples all have sequencing depth of 20-30 million, see the `Library information` file below, so a CPM value of 0.5 would be ~10 counts).
 
