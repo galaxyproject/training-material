@@ -254,7 +254,7 @@ Best admin practices is to not run Galaxy as a user with `sudo` access, like you
 >    >
 >    {: .question}
 >
-> 2. Run the playbook.
+> 2. Run the playbook (`ansible -i hosts playbook.yml`)
 >
 {: .hands_on}
 
@@ -346,7 +346,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    - Add a pre-task to [create a directory](https://docs.ansible.com/ansible/2.5/modules/file_module.html#file-module), `/data`, owned by the galaxy user and group, with mode `755`
 >    - Add a pre-task to install the necessary dependencies:
->        - For Debian: git, python-virtualenv, python-psycopg2
+>        - For Debian: git, python-virtualenv, python-psycopg2, make, build-essential
 >        - For RHEL: mercurial, python-virtualenv, python-psycopg2
 >    - Add the role `galaxyproject.galaxy` to the roles to be executed, at the end, run as the user `galaxy`
 >
@@ -560,7 +560,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >          user=galaxy
 >          umask=022
 >          directory={{ galaxy_server_dir }}
->          environment=HOME={{ galaxy_root }},VIRTUALENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin,
+>          environment=HOME={{ galaxy_root }},VIRTUALENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:%(ENV_PATH)s
 >    ```
 >    {% endraw %}
 >
