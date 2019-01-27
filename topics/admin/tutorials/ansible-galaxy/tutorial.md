@@ -307,10 +307,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 > 1. Open `playbook.yml` with your text editor and set the following:
 >
 >    - Amend the dependency installation pre-task to install additional necessary dependencies:
-         - For Debian: git, python-virtualenv, make, build-essential
->        - For RHEL: mercurial, python-virtualenv
+>        - For Debian: git, python-virtualenv, make, build-essential
+>        - For RHEL: python-virtualenv
 >    - Add the role `galaxyproject.galaxy` to the roles to be executed, at the end
-
+>
 >    > ### {% icon question %} Question
 >    >
 >    > How does your final configuration look?
@@ -330,9 +330,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > >       become: true
 >    > >       become_user: postgres
 >    > >     - role: galaxyproject.galaxy
-NATE: FIXME
->    > >       become: true
->    > >       become_user: galaxy
 >    > > ```
 >    > >
 >    > {: .solution }
@@ -344,21 +341,21 @@ NATE: FIXME
 >    We need to set the following variables:
 >
 >    {% raw %}
->    Variable                    | Value                                      | Purpose
->    ---                         | -----                                      | ---
-     `galaxy_create_user`         | `true`                                     | Instruct the role to create a Galaxy user
-     `galaxy_separate_privileges` | `true`                                     | Enable separation mode to install the Galaxy code as `root` but run the Galaxy server as `galaxy`
-     `galaxy_manage_paths`        | `true`                                     | Instruct thre role to create the needed directories.
-     `galaxy_layout`              | `root-dir`                                 | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, and data folders will live beneath `galaxy_root`.
+>    Variable                     | Value                                      | Purpose
+>    ---                          | -----                                      | ---
+>    `galaxy_create_user`         | `true`                                     | Instruct the role to create a Galaxy user
+>    `galaxy_separate_privileges` | `true`                                     | Enable separation mode to install the Galaxy code as `root` but run the Galaxy server as `galaxy`
+>    `galaxy_manage_paths`        | `true`                                     | Instruct thre role to create the needed directories.
+>    `galaxy_layout`              | `root-dir`                                 | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, and data folders will live beneath `galaxy_root`.
 >    `galaxy_root`                | `/srv/galaxy`                              | This is the root of the Galaxy deployment.
-     `galaxy_file_path`           | `/data`                                    | The directory where Galaxy datasets (user data) will be stored. On a real deployment, this would likely be a mounted network filesystem.
-     `galaxy_user`                | `{'name': 'galaxy', 'shell': '/bin/bash'}` | The user that Galaxy will run as.
-     `galaxy_commit_id`           | `release_18.09`                            | The git reference to check out, which in this case is the branch for Galaxy Release 18.09.
+>    `galaxy_file_path`           | `/data`                                    | The directory where Galaxy datasets (user data) will be stored. On a real deployment, this would likely be a mounted network filesystem.
+>    `galaxy_user`                | `{'name': 'galaxy', 'shell': '/bin/bash'}` | The user that Galaxy will run as.
+>    `galaxy_commit_id`           | `release_18.09`                            | The git reference to check out, which in this case is the branch for Galaxy Release 18.09.
 >    `galaxy_config_style`        | `yaml`                                     | We want to opt-in to the new style YAML configuration.
 >    `galaxy_force_checkout`      | `true`                                     | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
 >    {% endraw %}
 >
-
+>
 > 2. Again edit the group variables file and add a variable for `galaxy_config`. It will be a hash with one key, `galaxy` which will also be a hash. Inside here you can place all of your Galaxy configuration.
 >
 >    The structure is:
@@ -441,9 +438,9 @@ NATE: FIXME
 >      py-call-osafterfork: true
 >      enable-threads: true
 >      # Our additions
->      mules:
->        - mule: lib/galaxy/main.py
->        - mule: lib/galaxy/main.py
+>      mule:
+>        - lib/galaxy/main.py
+>        - lib/galaxy/main.py
 >      farm: job-handlers:1,2
 >    ```
 >    {% endraw %}
@@ -464,6 +461,9 @@ NATE: FIXME
 >    > >     file_path: /data
 >    > >   uwsgi:
 >    > >     ...
+     > >     mule:
+     > >       - lib/galaxy/main.py
+     > >       - lib/galaxy/main.py
 >    > >     farm: job-handlers:1,2
 >    > > ```
 >    > > {% endraw %}
@@ -487,7 +487,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 > 1. SSH into your server
 > 2. Switch user to Galaxy account (`sudo -iu galaxy`)
 > 3. Change directory into `/srv/galaxy/server`
-> 4. Activate virtualenv (`. .venv/bin/activate`)
+> 4. Activate virtualenv (`. ../venv/bin/activate`)
 > 5. `uwsgi --plugin python --yaml ../config/galaxy.yml`
 > 6. Accces at port `<ip address>:8080` once the server has started
 {: .hands_on}
@@ -523,7 +523,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >          user=galaxy
 >          umask=022
 >          directory={{ galaxy_server_dir }}
->          environment=HOME={{ galaxy_root }},VIRTUALENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:%(ENV_PATH)s
+>          environment=HOME={{ galaxy_mutable_data_dir }},VIRTUALENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:%(ENV_PATH)s
 >    ```
 >    {% endraw %}
 >
@@ -582,6 +582,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```yaml
 >    nginx_package_name: nginx-full # nginx-galaxy on RHEL/CentOS
 >    nginx_remove_default_vhost: true
+>    nginx_server_names_hash_bucket_size: "128"
 >    nginx_vhosts:
 >      - listen: "80"
 >        server_name: "{{ ansible_hostname }}"
@@ -624,6 +625,10 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >            location /favicon.ico {
 >                    alias {{ galaxy_server_dir }}/static/favicon.ico;
 >            }
+>
+>            location /static/welcome.html {
+>                    alias {{ galaxy_server_dir }}/static/welcome.html.sample;
+>            }
 >    ```
 >    {% endraw %}
 >
@@ -634,6 +639,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```yaml
 >    nginx_package_name: nginx-full # nginx-galaxy on RHEL/CentOS
 >    nginx_remove_default_vhost: true
+>    nginx_server_names_hash_bucket_size: "128"
 >    ```
 >    {% endraw %}
 >
@@ -695,12 +701,18 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >            location /favicon.ico {
 >                    alias {{ galaxy_server_dir }}/static/favicon.ico;
 >            }
+>
+>            location /static/welcome.html {
+>                    alias {{ galaxy_server_dir }}/static/welcome.html.sample;
+>            }
 >    ```
 >    {% endraw %}
 >
 > 4. Run the playbook.
 >
-> 5. Your Galaxy should now be accessible and served efficiently! Try registering (using the admin email from earlier) and maybe executing a couple of jobs. The author's favourite tool (speaking as an admin) is the `secure hash digest` tool, it's perfect for testing.
+> 5. Restart Galaxy using Supervisor: `supervisorctl restart galaxy`
+>
+> 6. Your Galaxy should now be accessible and served efficiently! Try registering (using the admin email from earlier) and maybe executing a couple of jobs. The author's favourite tool (speaking as an admin) is the `secure hash digest` tool, it's perfect for testing.
 >
 {: .hands_on}
 
