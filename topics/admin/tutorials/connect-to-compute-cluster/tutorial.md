@@ -583,9 +583,66 @@ We want our tool to run with more than one core. To do this, we need to instruct
 {: .hands_on}
 
 
+# Dynamic Job Destinations
+
+Dynamic destinations allow you to write custom python code to dispatch jobs based on whatever rules you like. For example, UseGalaxy.eu at one point used a very complex custom dispatching configuration to handle sorting jobs between multiple clusters. Galaxy has [extensive documentation](https://docs.galaxyproject.org/en/latest/admin/jobs.html#dynamic-destination-mapping-python-method) on how to write these sort of destinations.
+
+> ### {% icon hands_on %} Hands-on: Writing a dynamic job destination
+>
+> 1. Create and open `files/galaxy/dynamic_job_rules/admin_only.py`
+>
+>    ```python
+>    from galaxy.jobs import JobDestination
+>    import os
+>
+>    def admin_only(app, user_email):
+>         # Only allow the tool to be executed if the user is an admin
+>         admin_users = app.config.get( "admin_users", "" ).split( "," )
+>         if user_email not in admin_users:
+>             raise JobMappingException("Unauthorized.")
+>        return JobDestination(runner="slurm")
+>    ```
+>
+>    This destination will check that the `user_email` is in the set of `admin_users` from your config file.
+>
+> 2. As usual, we need to instruct Galaxy of where to find this file:
+>
+>    - Edit your group variables file and add the following:
+>
+>      ```yml
+>      galaxy_dynamic_job_rules:
+>        - admin_only
+>      ```
+>
+> 3. We next need to configure this plugin in our job configuration:
+>
+>    ```xml
+>    <destination id="dynamic_admin_only" runner="dynamic">
+>        <param id="type">python</param>
+>        <param id="function">admin_only</param>
+>    </destination>
+>    ```
+>
+>    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available `admin_only.py` to be used in the `job_conf.xml`
+>
+> 4. Finally, in `job_conf.xml`, update the `<tool>` definition and point it to this destination:
+>
+>    ```xml
+>    <tools>
+>        <tool id="testing" destination="dynamic_admin_only" />
+>    </tools>
+>    ```
+>
+> 5. Run the playbook / restart Galaxy
+>
+{: .hands_on}
+
+
+Try running the tool as both an admin user and a non-admin user, non-admins should not be able to run it. You can imagine extending this to complex logic for permissions, or for destination mapping depending on numerous factors. We did not cover it, but in the documentation you can add additional variables to your function signature, and they will be automatically supplied. Some useful variables are `tool`, `user`, `job`, and `app` if you need to load configuration information.
+
 # Dynamically map a tool to a job destination
 
-Dynamic tool destinations utilize the dynamic job runner to provide dynamic job mapping functionality without having to explicitly write code to perform the mapping. The mapping functionality is mostly limited to input sizes, but often input size is the most important factor in deciding what resources to allocate for a job.
+If you don't want to write dynamic destinations yourself, Dynamic Tool Destinations (DTDs) utilize the dynamic job runner to provide dynamic job mapping functionality without having to explicitly write code to perform the mapping. The mapping functionality is mostly limited to input sizes, but often input size is the most important factor in deciding what resources to allocate for a job.
 
 ## Writing a Dynamic Tool Destination
 
@@ -637,15 +694,17 @@ Dynamic tool destinations utilize the dynamic job runner to provide dynamic job 
 >    Also, comment out the previous `<tool>` definition for the `testing` tool, and replace it with a mapping to the dtd destination like so:
 >
 >    ```xml
->        <tools>
+>    <tools>
 >    <!--
->            <tool id="testing" destination="slurm-2c"/>
+>        <tool id="testing" destination="slurm-2c"/>
+>        <tool id="testing" destination="dynamic_admin_only" />
 >    -->
->            <tool id="testing" destination="dtd"/>
->        </tools>
+>        <tool id="testing" destination="dtd"/>
+>    </tools>
 >    ```
 >
 > 4. Run the playbook and restart Galaxy
+>
 {: .hands_on}
 
 ## Testing the DTD
@@ -664,14 +723,11 @@ Our rule specified that any invocation of the `testing` tool with an input datas
 
 You can imagine using this to run large blast jobs on compute hardware with more resources, or giving them more CPU cores. Some tools require more memory as job inputs increase, you can use this to run tools with a larger memory limit, if you know it will need it to process a certain size of inputs.
 
-
 # Job Resource Selectors
 
 You may find that certain tools can benefit from having form elements added to them to allow for controlling certain job parameters, so that users can select based on their own knowledge. For example, a user might know that a particular set of parameters and inputs to a certain tool needs a larger memory allocation than the standard amount for a given tool. This of course assumes that your users are well behaved enough not to choose the maximum whenever available, although such concerns can be mitigated somewhat by the use of concurrency limits on larger memory destinations.
 
 Such form elements can be added to tools without modifying each tool's configuration file through the use of the **job resource parameters configuration file**
-
-{% include snippets/todo.md notes="Split this, do a dynamic destination first, THEN add resource params. @hxr" %}
 
 > ### {% icon hands_on %} Hands-on: Configuring a Resource Selector
 >
@@ -735,7 +791,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    </destination>
 >    ```
 >
->    This is a **Python function dynamic destination**. Galaxy will load all python files in the `{{ galaxy_dynamic_rule_dir }}`, and all functions defined in those will be available `dynamic_cores_time` to be used in the `job_conf.xml`
+>    This will be another dynamic destination. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available `dynamic_cores_time` to be used in the `job_conf.xml`
 >
 {: .hands_on}
 
@@ -755,7 +811,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 
 > ### {% icon hands_on %} Hands-on: Writing a dynamic destination
 >
-> 1. Create and edit `files/galaxy/config/dynamic_destination.py`. Create it with the following contents:
+> 1. Create and edit `files/galaxy/dynamic_job_rules/map_resources.py`. Create it with the following contents:
 >
 >    ```python
 >    import logging
@@ -791,7 +847,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >            destination.params['nativeSpecification'] += ' --time=%s:00:00' % time
 >        else:
 >            # resource param selector not sent with tool form, job_conf.xml misconfigured
->            log.warning('(%s) did not receive the __job_resource param, keys were: %s', job.id, param_dict.keys())
+>            log.warning('(%s) error, keys were: %s', job.id, param_dict.keys())
 >            raise JobMappingException( FAILURE_MESSAGE )
 >
 >        log.info('returning destination: %s', destination_id)
@@ -801,7 +857,15 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >    It is important to note that **you are responsible for parameter validation, including the job resource selector**. This function only handles the job resource parameter fields, but it could do many other things - examine inputs, job queues, other tool parameters, etc.
 >
 >
-> 2. Deploy this, somehow. TODO @natefoo
+> 2. As usual, we need to instruct Galaxy of where to find this file:
+>
+>    - Edit your group variables file and add the following:
+>
+>      ```yml
+>      galaxy_dynamic_job_rules:
+>        - admin_only
+>        - map_resources
+>      ```
 >
 > 3. Run the playbook, restart Galaxy
 >
