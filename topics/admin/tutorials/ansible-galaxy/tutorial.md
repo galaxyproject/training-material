@@ -531,7 +531,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 
 ### Supervisord
 
-Launching Galaxy by hand is not a good use of your time, so we will immediately switch to a process manager for that, supervisord. If you're familiar with systemd, supervisord does many of the same things. We use supervisord instead of the native init system as it supports some of Galaxy's use cases better and was fully featured long before SystemD became common.
+Launching Galaxy by hand is not a good use of your time, so we will immediately switch to a process manager for that, [supervisord](http://supervisord.org/). If you're familiar with systemd, supervisord does many of the same things. We use supervisord instead of the native init system as it supports some of Galaxy's use cases better and was fully featured long before SystemD became common.
 
 > ### {% icon hands_on %} Hands-on: Supervisord
 >
@@ -743,7 +743,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 
 ## ProFTPD
 
-With a large Galaxy instance, users will often request FTP access in order to upload large data sets. The ProFTPD server works well for Galaxy, it can leverage an SQL authentication module, to allow users to login to the FTP server with their normal Galaxy username and password.
+With a large Galaxy instance, users will often request FTP access in order to upload large data sets. The [ProFTPD](http://proftpd.org/) server works well for Galaxy, it can leverage an SQL authentication module, to allow users to login to the FTP server with their normal Galaxy username and password.
 
 > ### {% icon hands_on %} Hands-on: ProFTPD
 >
