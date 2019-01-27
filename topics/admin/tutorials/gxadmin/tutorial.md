@@ -12,7 +12,7 @@ objectives:
   - See some queries and learn how they help debug production issues
 time_estimation: "30m"
 key_points:
-  - gxadmin formalizes + shares many queries that admins have been running for a long time in private
+  - gxadmin is a tool to run common database queries useful for Galaxy admins
   - new queries are welcome and easy to contribute
 contributors:
   - erasche
