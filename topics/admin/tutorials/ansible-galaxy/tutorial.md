@@ -11,7 +11,7 @@ objectives:
 time_estimation: "2h"
 key_points:
 - Basic deployment with Ansible is surprisingly easy
-- Complexity can grow over time as your organisation does, no need to start with playbooks like usegalaxy.org
+- Complexity can grow over time as your organisation does, no need to start with playbooks like UseGalaxy.org
 contributors:
   - erasche
   - natefoo
@@ -32,7 +32,7 @@ requirements:
 # Overview
 {:.no_toc}
 
-This tutorial assumes you have some familiarity with Ansible and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook.
+This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook.
 
 We want to give you a comprehensive understanding of how the Galaxy installation occurs, but we want to avoid you having to write a "custom" Galaxy installation playbook which you would eventually throw away, in order to use the official playbooks. Given these goals, we will go through the playbook in depth first, and then move to a hands-on portion later. If you are not interested in the inner workings, you can [skip to that section now](#installing-galaxy).
 
@@ -64,7 +64,7 @@ The official recommendation is that you should have a variables file such as a `
 
 ## Tasks
 
-As with every role, the entrypoint for execution is the `tasks/main.yml` file. For the [ansible-galaxy](https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/main.yml) file, this includes a few groups of important tasks:
+As with every role, the entry point for execution is the `tasks/main.yml` file. For the [ansible-galaxy](https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/main.yml) file, this includes a few groups of important tasks:
 
 - [Clone (or Download) Galaxy](#cloning-galaxy)
 - [Managing Configuration](#managing-configuration)
@@ -95,9 +95,9 @@ The [static configuration setup](https://github.com/galaxyproject/ansible-galaxy
 3. Any templates are copied over
 4. The `galaxy.yml` (or `.ini`) is deployed
 
-The setup for deploying templates and configuration files is a little bit non-standard by ansible standards. Here you are expected to provide your own templates and static config files, and then describe them as a list of files and where they should be deployed to.
+The setup for deploying templates and configuration files is a little bit non-standard by Ansible standards. Here you are expected to provide your own templates and static config files, and then describe them as a list of files and where they should be deployed to.
 
-Using the [usegalaxy.eu](https://github.com/usegalaxy-eu/infrastructure-playbook/blob/02ca578211bfee45044facf36635d28208e5dbb3/group_vars/galaxy.yml#L578) configuration as an example, we have something like:
+Using the [UseGalaxy.eu](https://github.com/usegalaxy-eu/infrastructure-playbook/blob/02ca578211bfee45044facf36635d28208e5dbb3/group_vars/galaxy.yml#L578) configuration as an example, we have something like:
 
 
 {% raw %}
@@ -119,7 +119,7 @@ galaxy_config_files:
 The configuration here is a bit different, it references the `galaxy_config`, which is structured like:
 
 {% raw %}
-```
+```yaml
 galaxy_config:
   galaxy:
     builds_file_path: "{{ galaxy_config_dir  }}/builds.txt"
@@ -184,7 +184,7 @@ To proceed from here it is expected that:
 - You have [Ansible installed](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) on your local machine
 
   > ### {% icon tip %} Tip: Running Ansible on your remote machine
-  > It is possible to have ansible installed on the remote machine and run it there as well. You will need to update your hosts file to point to localhost, and pass the `-c local` parameter. Be **certain** that the playbook that you're building is stored somewhere safe like your user home directory. We will remove data at one point during this tutorial and would not want you to lose your progress.
+  > It is possible to have Ansible installed on the remote machine and run it there as well. You will need to update your hosts file to point to localhost, and pass the `-c local` parameter. Be **certain** that the playbook that you're building is stored somewhere safe like your user home directory. We will remove data at one point during this tutorial and would not want you to lose your progress.
   {: .tip}
 
 - You have a [hosts file](../ansible/tutorial.html#hosts-file) with the VM or host specified where you will deploy galaxy. We will refer to this group of hosts as "galaxyservers." You can use a different name if you prefer or are working on an existing playbook, just be sure to update all references later on.
@@ -344,15 +344,15 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    Variable                     | Value                                      | Purpose
 >    ---                          | -----                                      | ---
 >    `galaxy_create_user`         | `true`                                     | Instruct the role to create a Galaxy user
->    `galaxy_separate_privileges` | `true`                                     | Enable separation mode to install the Galaxy code as `root` but run the Galaxy server as `galaxy`
+>    `galaxy_separate_privileges` | `true`                                     | Enable separation mode to install the Galaxy code as <br> `root` but run the Galaxy server as `galaxy`
 >    `galaxy_manage_paths`        | `true`                                     | Instruct thre role to create the needed directories.
->    `galaxy_layout`              | `root-dir`                                 | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, and data folders will live beneath `galaxy_root`.
+>    `galaxy_layout`              | `root-dir`                                 | This enables the `galaxy_root` Galaxy deployment layout:<br> all of the code, configuration, and data folders will live beneath `galaxy_root`.
 >    `galaxy_root`                | `/srv/galaxy`                              | This is the root of the Galaxy deployment.
->    `galaxy_file_path`           | `/data`                                    | The directory where Galaxy datasets (user data) will be stored. On a real deployment, this would likely be a mounted network filesystem.
+>    `galaxy_file_path`           | `/data`                                    | The directory where Galaxy datasets (user data) will be <br> stored. On a real deployment, this would likely be a mounted network filesystem.
 >    `galaxy_user`                | `{'name': 'galaxy', 'shell': '/bin/bash'}` | The user that Galaxy will run as.
->    `galaxy_commit_id`           | `release_18.09`                            | The git reference to check out, which in this case is the branch for Galaxy Release 18.09.
+>    `galaxy_commit_id`           | `release_18.09`                            | The git reference to check out, which in this case is the <br>branch for Galaxy Release 18.09.
 >    `galaxy_config_style`        | `yaml`                                     | We want to opt-in to the new style YAML configuration.
->    `galaxy_force_checkout`      | `true`                                     | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
+>    `galaxy_force_checkout`      | `true`                                     | If we make any modifications to the Galaxy codebase, <br> they will be removed. This way we know we're getting an unmodified <br> Galaxy and no one has made any unexpected changes to the codebase.
 >    {% endraw %}
 >
 >
@@ -494,7 +494,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 
 ### Supervisord
 
-Launching Galaxy by hand is not a good use of your time, so we will immediately switch to a process manager for that, supervisord. If you're familiar with systemd, supervisord does many of the same things. We use supervisord instead of the native init system as it supports some of Galaxy's use cases better and was fully featured long before SystemD became common.
+Launching Galaxy by hand is not a good use of your time, so we will immediately switch to a process manager for that, [supervisord](http://supervisord.org/). If you're familiar with systemd, supervisord does many of the same things. We use supervisord instead of the native init system as it supports some of Galaxy's use cases better and was fully featured long before SystemD became common.
 
 > ### {% icon hands_on %} Hands-on: Supervisord
 >
@@ -502,7 +502,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 > 2. Open your group variables file and we'll add some variables for supervisor. Supervisor communicates over a unix or tcp socket; we will use the unix socket without password authentication, instead using user/group authentication. We will thus need to set a couple of variables to allow our Galaxy user to access this. Add the following:
 >
->    ```
+>    ```yaml
 >    supervisor_socket_user: 'galaxy'
 >    supervisor_socket_chown: 'galaxy'
 >    ```
@@ -718,7 +718,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 
 ## ProFTPD
 
-With a large Galaxy instance, users will often request FTP access in order to upload large data sets. The ProFTPD server works well for Galaxy, it can leverage an SQL authentication module, to allow users to login to the FTP server with their normal Galaxy username and password.
+With a large Galaxy instance, users will often request FTP access in order to upload large data sets. The [ProFTPD](http://proftpd.org/) server works well for Galaxy, it can leverage an SQL authentication module, to allow users to login to the FTP server with their normal Galaxy username and password.
 
 > ### {% icon hands_on %} Hands-on: ProFTPD
 >
@@ -780,7 +780,7 @@ For this "disaster", we will pretend that:
 
 Your entire Galaxy server is gone. You were a responsible admin and had your user data and database stored on a separate system (and backed up), so at least those survived. Nevertheless, this is when most of us start feeling really bad; bosses start yelling, we start crying or reaching for bad coping habits.
 
-But not you! You spent the day writing this ansible playbook that describes your environment completely; all of the software that was installed, all of the configuration changes you've made. It leverages many community maintained roles and can be used to completely rebuild the server! With minimal effort on your part.
+But not you! You spent the day writing this Ansible playbook that describes your environment completely; all of the software that was installed, all of the configuration changes you've made. It leverages many community maintained roles and can be used to completely rebuild the server! With minimal effort on your part.
 
 > ### {% icon hands_on %} Hands-on: Revert the Apocalypse
 >
@@ -801,7 +801,7 @@ Then you can potentially use it to recover.
 >
 > We can tell you this, we can repeat it over and over, but unless you really have a disaster happen to you, it is hard to appreciate how important it is that machines are completely controlled in terms of configuration and software deployment.
 >
-> We've experienced these incidents and we know how horribly stresseful it can be if an important service like Galaxy goes down and you cannot immediately replace it with another instance. We hope you will immediately apply the lessons from this training material, it can potentially save you a lot of stress and worry.
+> We've experienced these incidents and we know how horribly stressful it can be if an important service like Galaxy goes down and you cannot immediately replace it with another instance. We hope you will immediately apply the lessons from this training material, it can potentially save you a lot of stress and worry.
 >
 {: .tip}
 
@@ -809,7 +809,7 @@ Then you can potentially use it to recover.
 
 Now that you've gotten through the worst case scenario, we'll attack the next worst case scenario, auditors! They've shown up and demanded that everything have valid SSL certificates.
 
-This step uses letsencrypt for generating certificates, so it assumes that:
+This step uses [Let's Encrypt](https://letsencrypt.org/) for generating certificates, so it assumes that:
 
 1. Your machine is publicly accessible
 2. It has a publicly resolvable DNS entry
