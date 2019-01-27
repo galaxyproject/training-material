@@ -19,6 +19,8 @@ key_points:
 contributors:
   - erasche
   - shiltemann
+tags:
+  - ansible
 ---
 
 # Overview
