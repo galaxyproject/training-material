@@ -118,7 +118,7 @@ The pale yellow track that is visible across the screen below the navigation con
 ### Track Selector
 On the left side of the embedded JBrowse instance is a checklist-like column titled “Available Tracks”. Here the evidence tracks currently available for the genome being analyzed are listed. Evidence tracks will appear upon the execution of structural and functional workflows, as well as other custom analyses.
 
-The evidence tracks shown below are from a version of the structural workflow: *GeneMarkS*, *MetaGeneAnnotator*, and *Glimmer3* are tools that locate the positions of potential protein-coding genes. Selecting these tracks will display predicted genes below the User-Created Annotations track. These tools were run in Galaxy and their outputs were exported to Apollo via JiG. As you can see, Apollo alows the user to directly view where on the genome features are predicted, and allows a stacked comparison of the outputs of different tools.  
+The evidence tracks shown below are from a version of the structural workflow: *SixPack*, *Glimmer3* and *MetaGeneAnnotator* are tools that locate the positions of potential protein-coding genes. Selecting these tracks will display predicted genes below the User-Created Annotations track. These tools were run in Galaxy and their outputs were exported to Apollo via JiG. As you can see, Apollo alows the user to directly view where on the genome features are predicted, and allows a stacked comparison of the outputs of different tools.  
 
 ![](../../images/getting-started-with-apollo-screenshots/22_zoomed_out_gene_tracks.png)
 
