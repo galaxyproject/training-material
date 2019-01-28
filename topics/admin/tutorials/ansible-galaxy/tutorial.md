@@ -49,7 +49,9 @@ We want to give you a comprehensive understanding of how the Galaxy installation
 
 ## Configuration
 
-The official playbook is extremely configurable, everything that you want to change is exposed as a variable, and then tasks will change behaviour based on that. The [playbook documentation](https://github.com/galaxyproject/ansible-galaxy#role-variables) is the most up-to-date source of documentation for the variables. You should take a minute and read over the variables listed there.
+We'll be using the [official Galaxy role](https://github.com/galaxyproject/ansible-galaxy) to install and manage Galaxy. This role is found in [Ansible Galaxy](https://galaxy.ansible.com/) (no relation - it is Ansible's ) as [galaxyproject.galaxy](https://galaxy.ansible.com/galaxyproject/galaxy).
+
+The official role is extremely configurable, everything that you want to change is exposed as a variable, and then tasks will change behaviour based on that. The [role documentation](https://github.com/galaxyproject/ansible-galaxy#role-variables) is the most up-to-date source of documentation for the variables. You should take a minute and read over the variables listed there.
 
 The important variables for this tutorial are:
 
@@ -154,7 +156,7 @@ As an administrator who often forgot to run the upgrade, and would only notice i
 
 ## Handlers
 
-A number of the tasks that are executed will trigger a restart of Galaxy. Currently there is no auto-magic implementation of this, and you will have to do something that fits for your setup. UseGalaxy.eu customized their copy of the role to restart the handlers as needed. Hopefully as Galaxy continues to standardise on setup, something can be implemented to automatically restart the correct processes.
+A number of the tasks that are executed will trigger a restart of Galaxy. Currently there is no auto-magic implementation of this, and you will have to do something that fits for your setup. The role provides a way to reference your own [handler](https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html#handlers-running-operations-on-change), which we will do in this exercise. As Galaxy continues to standardise on setup, something will be implemented directly in the role to automatically restart the correct processes.
 
 ## Defaults
 
@@ -195,9 +197,12 @@ We have codified all of the dependencies you will need into a yaml file that `an
 
 > ### {% icon hands_on %} Hands-on: Minimal Galaxy Playbook
 >
-> 1. Create a new file in your working directory called `requirements.yaml` and include the following contents:
+> 1. If you haven't done so already, create a new directory for your playbook, `playbook`, and `cd` to that directory
+>
+> 2. Create a new file in your working directory called `requirements.yml` and include the following contents:
 >
 >    ```yaml
+>    - galaxyproject.repos
 >    - galaxyproject.galaxy
 >    - geerlingguy.nginx
 >    - natefoo.postgresql_objects
@@ -210,9 +215,11 @@ We have codified all of the dependencies you will need into a yaml file that `an
 >      name: usegalaxy-eu.certbot
 >    ```
 >
-> 2. In the same directory, run `ansible-galaxy install -p roles -r requirements.yaml`. This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
+> 3. In the same directory, run `ansible-galaxy install -p roles -r requirements.yml`. This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
 >
-> 3. Create the hosts file if you have not done so, include a group for `[galaxyservers]` with the address of the host where you will install Galaxy.
+> 4. Create the hosts file if you have not done so, include a group for `[galaxyservers]` with the address of the host where you will install Galaxy.
+>
+> 5. Inspect the contents of the newly created `roles` directory in your working directory.
 >
 {: .hands_on}
 
@@ -231,7 +238,6 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    ```yaml
 >    postgresql_objects_users:
 >      - name: galaxy
->        password: null
 >    postgresql_objects_databases:
 >      - name: galaxy
 >        owner: galaxy
@@ -270,6 +276,14 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    {: .question}
 >
 > 3. Run the playbook (`ansible-playbook -i hosts playbook.yml`)
+>
+>    > ### {% icon tip %} Tip: When running Ansible
+>    > Always pay close attention to tasks reported as **changed** and ensure that the changes were expected!
+>    {: .tip}
+>
+> 4. Inspect the changes that have been made on your Galaxy server. Places to look include:
+>     - `/etc/postgresql`
+>     - Databases and users in PostgreSQL (connection details are below). Hint: try the commands `\du` and `\l`.
 >
 {: .hands_on}
 
@@ -351,7 +365,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    {% endraw %}
 >
 >
-> 2. Again edit the group variables file and add a variable for `galaxy_config`. It will be a hash with one key, `galaxy` which will also be a hash. Inside here you can place all of your Galaxy configuration.
+> 3. Again edit the group variables file and add a variable for `galaxy_config`. It will be a hash with one key, `galaxy` which will also be a hash. Inside here you can place all of your Galaxy configuration.
 >
 >    So tthe structure looks like:
 >    ```yaml
@@ -408,7 +422,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >
 >    {: .question}
 >
-> 3. In order to use mule messaging, we need to edit the uWSGI configuration of Galaxy. This has a default value, but we will have to override it. Add the following configuration as a child of the `galaxy_config` variable:
+> 4. In order to use mule messaging, we need to edit the uWSGI configuration of Galaxy. This has a default value, but we will have to override it. Add the following configuration as a child of the `galaxy_config` variable:
 >
 >    {% raw %}
 >    ```yaml
@@ -457,9 +471,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > >     file_path: /data
 >    > >   uwsgi:
 >    > >     ...
-     > >     mule:
-     > >       - lib/galaxy/main.py
-     > >       - lib/galaxy/main.py
+>    > >     mule:
+>    > >       - lib/galaxy/main.py
+>    > >       - lib/galaxy/main.py
 >    > >     farm: job-handlers:1,2
 >    > > ```
 >    > > {% endraw %}
@@ -468,11 +482,16 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    {: .question}
 >
 >
-> 3. Run the playbook.
+> 5. Run the playbook.
 >
 >    `ansible-playbook -i hosts playbook.yml`
 >
-> 4. SSH into your server and explore what has been set up for you. Galaxy has been deployed to `/srv/galaxy/server` and the configuration will live in `/srv/galaxy/config/galaxy.yml`.
+> 6. SSH into your server and explore what has been set up for you.
+>     - Galaxy has been deployed to `/srv/galaxy/server`
+>     - The configuration lives in `/srv/galaxy/config/galaxy.yml` - be sure to look through it to see what default options have been set for you
+>     - Note the permissions of the contents of `/srv/galaxy`
+>     - Some config files that Galaxy maintains itself, such as `shed_tool_conf.xml`, which controls what tools that you have installed from the Tool Shed will be loaded, have been instantiated in `/srv/galaxy/var/config`
+>     - A Python virtualenv - an isolated Python environment - with all of the Galaxy framework's dependencies has been installed in `/srv/galaxy/venv`
 >
 {: .hands_on}
 
@@ -523,14 +542,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 > 1. Add the roles `geerlingguy.pip` and `usegalaxy-eu.supervisor` to your playbook, these need to install things and should run as the root user.
 >
-> 2. Open your group variables file and we'll add some variables for supervisor. Supervisor communicates over a unix or tcp socket; we will use the unix socket without password authentication, instead using user/group authentication. We will thus need to set a couple of variables to allow our Galaxy user to access this. Add the following:
->
->    ```yaml
->    supervisor_socket_user: 'galaxy'
->    supervisor_socket_chown: 'galaxy'
->    ```
->
-> 3. Supervisor defines `programs` which should be executed with additional metadata like whether or not they should be restarted, what user they should run as, etc. Just like any other init system like SystemD. We will define a program for Galaxy which will directly invoke uWSGI, rather than run.sh, as run.sh does some additional tasks we do not need to do on every Galaxy start (e.g. rebuilding the client). For some setups like zerglings it is required that you use supervisord as you need to start multiple processes.
+> 2. Supervisor defines `programs` which should be executed with additional metadata like whether or not they should be restarted, what user they should run as, etc. Just like any other init system like SystemD. We will define a program for Galaxy which will directly invoke uWSGI, rather than run.sh, as run.sh does some additional tasks we do not need to do on every Galaxy start (e.g. rebuilding the client). For some setups like zerglings it is required that you use supervisord as you need to start multiple processes.
 >
 >    {% raw %}
 >    ```yaml
@@ -552,9 +564,39 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 >    Here we've defined a `galaxy` command that should be `present`. It will run the command `uwsgi ...` and is set to automatically start and restart, with 1 second between the retries. It will wait 10 seconds to see if the program has not crashed, and if it reaches this threshold it will be marked as `running`. It starts as the
 >
-> 4. Run the playbook
+> 3. Now that we have defined a process manager for Galaxy, we can also instruct `galaxyproject.galaxy` to use Supervisor to restart it when Galaxy is upgraded or config changes are made. To do so, open `playbook.yml` and add a `handlers:` section at the same level as `pre_tasks:` and `roles:`, and add a task to restart Galaxy using the [supervisorctl Ansible module](https://docs.ansible.com/ansible/latest/modules/supervisorctl_module.html). Handlers are structured just like tasks:
 >
-> 5. Login and check the status with `supervisorctl status` (remember to change to the Galaxy user)
+>    ```yaml
+>    - hosts: galaxyservers
+>      pre_tasks:
+>        - name: Install Dependencies
+>          package:
+>            name: ['python-psycopg2', 'git', 'python-virtualenv', 'make']
+>      handlers:
+>        - name: Restart Galaxy
+>          supervisorctl:
+>            name: galaxy
+>            state: restarted
+>      roles:
+>        ...
+>    ```
+>
+> 4. Open your group variables file and we'll add some variables for supervisor. Supervisor communicates over a unix or tcp socket; we will use the unix socket without password authentication, instead using user/group authentication. We will thus need to set a couple of variables to allow our Galaxy user to access this. Additionally, we need to inform `galaxyproject.galaxy` what the name of our new handler is. Add the following:
+>
+>    ```yaml
+>    supervisor_socket_user: galaxy
+>    supervisor_socket_chown: galaxy
+>    galaxy_restart_handler_name: Restart Galaxy
+>    ```
+>
+> 5. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
+>
+>    ```
+>    RUNNING HANDLER [restart galaxy] ****************************************
+>    changed: [galaxy.example.org]
+>    ```
+>
+> 6. Log in and check the status with `supervisorctl status` (remember to change to the Galaxy user)
 >
 >    > ### {% icon question %} Question
 >    >
@@ -572,10 +614,13 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    >
 >    {: .question}
 >
-> 6. Some things to note:
+>    Take a look at the supervisor configs that have been written in `/etc/supervisor` and `/etc/supervisor/conf.d`.
+>
+> 7. Some things to note:
 >
 >    1. Refreshing the page before Galaxy has restarted will hang, which is a nice feature of uWSGI
->    2. You can use `supervisorctl tail -f galaxy` and `supervisorctl tail -f galaxy stderr` to see the logs of Galaxy
+>    2. Although the playbook will restart Galaxy upon config changes, you will sometimes need to restart it by hand, which can be done with `supervisorctl restart galaxy`
+>    3. You can use `supervisorctl tail -f galaxy` and `supervisorctl tail -f galaxy stderr` to see the logs of Galaxy
 >
 {: .hands_on}
 
@@ -598,9 +643,9 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 > 2. Add the role `geerlingguy.nginx` to your playbook and have it run as root.
 >
-> 3. We will set a convenience variable, `hostname`, to refer to our VM. If you have a DNS entry for your server, add `hostname: <your server name>` to your group variables. Otherwise, add {% raw %}`hostname: {{ ansible_hostname }}`{% endraw %}.
+> 3. We will set a convenience variable, `hostname`, to refer to our VM. If you have a DNS entry for your server, add `hostname: <your server name>` to your group variables. Otherwise, add {% raw %}`hostname: "{{ ansible_hostname }}"`{% endraw %}.
 >
-> 3. We need to configure the virtualhost. This is a slightly more complex process as we have to write the proxying configuration ourselves. This may seem annoying, but it is often the case that sites have individual needs to cater to, and it is difficult to provide a truly generic webserver configuration.
+> 4. We need to configure the virtualhost. This is a slightly more complex process as we have to write the proxying configuration ourselves. This may seem annoying, but it is often the case that sites have individual needs to cater to, and it is difficult to provide a truly generic webserver configuration.
 >
 >    Add the following to your group variables file:
 >    {% raw %}
@@ -733,11 +778,11 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```
 >    {% endraw %}
 >
-> 4. Run the playbook.
+> 5. Run the playbook.
 >
-> 5. Restart Galaxy using Supervisor: `supervisorctl restart galaxy`
+> 6. Check out the changes made to your server in `/etc/nginx`, particularly the directory containing the Galaxy virtualhost.
 >
-> 6. Your Galaxy should now be accessible and served efficiently! Try registering (using the admin email from earlier) and maybe executing a couple of jobs. The author's favourite tool (speaking as an admin) is the `secure hash digest` tool, it's perfect for testing.
+> 7. Your Galaxy should now be accessible and served efficiently! Try registering (using the admin email from earlier) and maybe executing a couple of jobs. The author's favourite tool (speaking as an admin) is the `secure hash digest` tool, it's perfect for testing.
 >
 {: .hands_on}
 
@@ -794,9 +839,7 @@ With a large Galaxy instance, users will often request FTP access in order to up
 >    ```
 >    {% endraw %}
 >
-> 5. Apply the playbook
->
-> 6. Restart Galaxy with supervisord (`supervisorctl restart galaxy`) to allow the changes to take effect.
+> 5. Apply the playbook.
 {: .hands_on}
 
 With this, users can see an "Upload via FTP" button in their upload interface, and they can upload their data using Filezilla or other preferred FTP client.
