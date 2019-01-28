@@ -24,8 +24,10 @@ The Galaxy interface consists of three panels; on the left (boxed in blue) is a 
 >    > * Uploading Data
 >    > * Choosing and Executing a Tool
 > 2. Histories
+>    > * The Current History
+>    > * History Information
 >    > * Datasets
->    > * Naming Histories
+>    > * Managing Datasets Individually
 >    > * Switching Histories
 > 3. Workflows
 >    > * Importing a Workflow
