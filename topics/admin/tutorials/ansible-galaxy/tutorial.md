@@ -15,6 +15,10 @@ key_points:
 contributors:
   - erasche
   - natefoo
+  - slugger70
+  - shiltemann
+tags:
+  - ansible
 requirements:
   - type: "internal"
     topic_name: admin
@@ -640,7 +644,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 > 2. Add the role `geerlingguy.nginx` to your playbook and have it run as root.
 >
-> 3. We will set a convenience variable, `hostname`, to refer to our VM. If you have a DNS entry for your server, add `hostname: <your server name>` to your group variables. Otherwise, add {% raw %}`hostname: "{{ ansible_hostname }}"`{% endraw %}.
+> 3. In our group variables file, we will set a convenience variable, `hostname`, to refer to our VM. If you have a DNS entry for your server, add `hostname: <your server name>` to your group variables. Otherwise, add {% raw %}`hostname: "{{ ansible_hostname }}"`{% endraw %}.
 >
 > 4. We need to configure the virtualhost. This is a slightly more complex process as we have to write the proxying configuration ourselves. This may seem annoying, but it is often the case that sites have individual needs to cater to, and it is difficult to provide a truly generic webserver configuration.
 >
