@@ -83,8 +83,8 @@ The [clone](https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/cl
 1. Ansible tries to update Galaxy, cloning it if it is missing, or otherwise attempting to update to the correct commit (or latest commit of that branch.)
 2. Any change is reported.
 3. The virtualenv is set up:
-	1. An empty virtualenv is created.
-	2. Pip is updated within the virtualenv.
+    1. An empty virtualenv is created.
+    2. Pip is updated within the virtualenv.
 4. Any `.pyc` files are removed, as this can occasionally result in Python loading the cached code, even if the corresponding `.py` file is no more present at the checked-out commit. For safety, all of these are removed.
 
 With that Galaxy is cloned to disk and is ready to be configured by the next task.
