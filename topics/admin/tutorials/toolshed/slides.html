@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>The Galaxy Tool Shed</title>
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-45719423-18' , 'auto');
+        ga('send', 'pageview');
+    </script>
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css" id="theme">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+    <meta property="og:title" content="Galaxy Training: The Galaxy Tool Shed" />
+    <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/admin" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+# The Galaxy Tool Shed
+
+
+
+---
+
+Tool Shed is to Galaxy as App Store is to iPhone.
+
+It is a free service that hosts repositories containing Galaxy Tools.
+Installing from the Tool Shed takes care of
+  - dependencies
+  - reference data tables
+  - configuration files
+
+---
+Main Tool Shed (MTS) runs at http://toolshed.g2.bx.psu.edu and serves all Galaxies worldwide.
+
+Everybody can create a repository.
+
+Every repository is public including the whole history.
+
+Local sheds can be run e.g. for private or custom-licensed tools.
+
+???
+We discourage running local TS.
+
+---
+## Vocabulary
+
+* `wrapper` or `tool definition file` - The XML file that describes to Galaxy how the underlying software works, allowing Galaxy to render UI and execute the software in the right way.
+--
+
+* `repository` - A versioned code archive with tool(s) in Tool Shed.
+--
+
+* `revision` and `installable revision` - Every TS repo update generates a new revision but only certain (reproducibility-affecting) changes generate a new revision installable to Galaxy as a new version.
+
+???
+Every TS repo update can be propagated to the Galaxy though.
+
+---
+## Overview
+
+* Tool Shed is a host (not a development) platform.
+--
+
+* Tool Development repository should be linked from the TS repository.
+--
+
+* Tool Shed allows administrators to pick any installable revision.
+--
+
+* Multiple installable revisions of any repository can be present in Galaxy.
+
+---
+![TS_big_picture.png](../../images/TS_big_picture.png)
+
+---
+class: normal
+## Galaxy's Configuration
+
+List of available sheds is defined in `tool_sheds_conf.xml` and Galaxy comes with the MTS enabled and the TTS disabled.
+```xml
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;tool_sheds&gt;
+    &lt;tool_shed name=&quot;Galaxy Main Tool Shed&quot; url=&quot;https://toolshed.g2.bx.psu.edu/&quot;/&gt;
+&lt;!-- Test Tool Shed should be used only for testing purposes.
+    &lt;tool_shed name=&quot;Galaxy Test Tool Shed&quot; url=&quot;https://testtoolshed.g2.bx.psu.edu/&quot;/&gt;
+--&gt;
+&lt;/tool_sheds&gt;
+```
+
+---
+class: normal
+## Simple TS repository (remove_beginning)
+
+```shell
+.
+├── .shed.yml
+├── remove_beginning.pl
+├── remove_beginning.xml
+└── test-data
+    ├── 1.bed
+    └── eq-removebeginning.dat
+```
+
+---
+class: normal
+## Simple TS repository (remove_beginning)
+
+```shell
+.
+├── .shed.yml # metadata file
+├── remove_beginning.pl # script that performs the requested
+├── remove_beginning.xml # tool wrapper
+└── test-data # this one is descriptive
+    ├── 1.bed # test input file
+    └── eq-removebeginning.dat # test output file
+```
+
+---
+class: normal
+### .shed.yml file
+
+Contains tool's metadata.
+```yml
+categories:
+- Text Manipulation
+description: Remove lines from the beginning of a file.
+long_description: |
+  This tool removes the specified number of lines from the beginning
+  of the input dataset.
+name: remove_beginning
+owner: devteam
+remote_repository_url: https://github.com/galaxyproject/tools-devteam/tree/master/tools/remove_beginning
+type: unrestricted
+```
+
+---
+class: normal
+## Complex TS Repository
+
+```shell
+.
+├── .shed.yml
+├── macros.xml
+├── seqtk_comp.xml
+├── seqtk_sample.xml
+├── seqtk_seq.xml
+├── seqtk_trimfq.xml
+├── test-data
+│   ├── seqtk_trimfq.fq
+...
+│   ├── seqtk_trimfq_be.fq
+│   └── seqtk_trimfq_default.fq
+└── tool_dependencies.xml
+```
+
+---
+class: normal
+## Complex TS Repository
+
+```shell
+.
+├── .shed.yml
+├── macros.xml # defines xml macros usable in other xml files
+├── seqtk_comp.xml # wrapper for a tool
+├── seqtk_sample.xml # wrapper for tool #2
+├── seqtk_seq.xml # wrapper for tool #3
+├── seqtk_trimfq.xml # wrapper for tool #4
+├── test-data
+│   ├── seqtk_trimfq.fq # bunch of test data
+...
+│   ├── seqtk_trimfq_be.fq
+│   └── seqtk_trimfq_default.fq
+└── tool_dependencies.xml # file that describes Galaxy how to get TS-supplied dependencies to fulfill the &lt;requirements&gt; in tool wrappers
+```
+
+---
+### seqtk requirements
+
+Requirements of the wrapper.
+```xml
+&lt;requirements&gt;
+    &lt;requirement type=&quot;package&quot; version=&quot;1.2&quot;&gt;seqtk&lt;/requirement&gt;
+&lt;/requirements&gt;
+```
+
+Galaxy is aiming to be dependency resolution agnostic.
+
+---
+# Approach
+
+* We aim to make Galaxy resolver-independent but Conda-oriented.
+* What resolver is going to be used for the tool dependency is determined at runtime
+and prioritised in the config file `dependency_resolvers_conf.xml`.
+```xml
+&lt;dependency_resolvers&gt;
+  &lt;tool_shed_packages /&gt;
+  &lt;galaxy_packages /&gt;
+  &lt;conda /&gt;
+  &lt;galaxy_packages versionless=&quot;true&quot; /&gt;
+  &lt;conda versionless=&quot;true&quot; /&gt;
+&lt;!-- other resolvers
+  &lt;tool_shed_tap /&gt;
+  &lt;homebrew /&gt;
+--&gt;
+&lt;/dependency_resolvers&gt;
+```
+
+---
+class: smaller
+### seqtk Conda package
+
+```yml
+package:
+  name: seqtk
+  version: 1.2
+source:
+  fn: v1.2.tar.gz
+  url: https://github.com/lh3/seqtk/archive/v1.2.tar.gz
+  md5: 255ffe05bf2f073dc57abcff97f11a37
+build:
+  number: 0
+requirements:
+  build:
+    - gcc   # [not osx]
+    - llvm  # [osx]
+    - zlib
+  run:
+    - zlib
+about:
+  home: https://github.com/lh3/seqtk
+  license: MIT License
+  summary: Seqtk is a fast and lightweight tool for processing sequences in the FASTA or FASTQ format
+test:
+  commands:
+    - seqtk seq
+```
+
+
+---
+
+## Thank you!
+
+This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors  (Martin Čech, Marius van den Beek) !
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+
+.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub](https://github.com/galaxyproject/training-material/tree/master/topics/admin/tutorials/toolshed/slides.html)]
+
+    </textarea>
+    <script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false,}});
+      var hljs = remark.highlighter.engine;
+    </script>
+  </body>
+</html>

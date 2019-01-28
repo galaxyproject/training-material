@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Distributed Object Storage</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Distributed Object Storage" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body>
+        
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/admin" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Galaxy Server administration
+                        </a>
+                    </li>
+
+                    
+                    
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/admin/tutorials/object-store/slides.html" title="Slides for this tutorial">
+                            <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Associated slides
+                        </a>
+                    </li>
+                    
+
+                    
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+                                <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">instances</span> Galaxy Instances
+                            </a>
+                            <div class="dropdown-menu">
+                                
+                                    <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/admin/docker" title="Docker image for this tutorial">
+                                        <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+                                    </a>
+                                
+                                
+                                
+                            </div>
+                        </li>
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fobject-store%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fobject-store%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fobject-store%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fobject-store%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fobject-store%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/admin/tutorials/object-store/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+   
+{
+  "@context": "http://schema.org",
+  "@type": "CreativeWork",
+  "name": "Distributed Object Storage",
+  "accessModeSufficient": "visual",
+  "accessibilityControl": "fullMouseControl",
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "learningResourceType": "",
+  "url": "/topics/admin/tutorials/object-store/tutorial.html",
+  "mentions": [
+
+  ],
+  "timeRequired": "PT30M",
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "natefoo"
+    },
+    {
+      "@type": "Person",
+      "name": "erasche"
+    }
+  ],
+  "description": "The questions this  addresses are:\n - How does Galaxy locate data?\n - How can I have Galaxy use multiple storage locations?\n\n\\nThe objectives are:\n - Setup Galaxy with both the Hierarachical and Distributed Object Storages\n\n"
+}
+
+    </script>
+    <section class="tutorial">
+        <h1>Distributed Object Storage</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>How does Galaxy locate data?</li>
+            
+            <li>How can I have Galaxy use multiple storage locations?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>Setup Galaxy with both the Hierarachical and Distributed Object Storages</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/admin">Galaxy Server administration</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                - <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 30 minutes</p>
+            
+        </blockquote>
+
+        <h1 id="expanding-storage">Expanding Storage</h1>
+
+<p class="no_toc">You may find that your Galaxy files directory has run out of space, but you don’t want to move all of the files from one filesystem to another. One solution to this problem is to use Galaxy’s hierarchical object store to add an additional file space for Galaxy.</p>
+
+<p>Alternatively, you may wish to write new datasets to more than one filesystem. For this, you can use Galaxy’s distributed object store.</p>
+
+<p>This tutorial assumes you have done the “Ansible for installing Galaxy” tutorial, it references the base configuration set up in that tutorial in numerous places.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+<ol id="markdown-toc">
+  <li><a href="#expanding-storage" id="markdown-toc-expanding-storage">Expanding Storage</a></li>
+  <li><a href="#hierarchical-object-store" id="markdown-toc-hierarchical-object-store">Hierarchical Object Store</a></li>
+  <li><a href="#distributed-object-store" id="markdown-toc-distributed-object-store">Distributed Object Store</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="hierarchical-object-store">Hierarchical Object Store</h1>
+
+<p>First, note that your Galaxy datasets have been created thus far in the directory <code class="highlighter-rouge">/data</code>, due to <code class="highlighter-rouge">galaxy_config: galaxy: file_path</code>. In some cases, we run out of storage in a particular location. Galaxy allows us to add additional storage locations where it will create new datasets, while still looking in the old locations for old datasets. You will not have to migrate any of your datasets, and can just “plug and play” with new storage pools.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-adding-hierarchical-storage"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Adding Hierarchical Storage</h3>
+
+  <ol>
+    <li>
+      <p>Open your group variables file and set the <code class="highlighter-rouge">object_store_config_file</code> variable:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config</span><span class="pi">:</span>
+  <span class="na">galaxy</span><span class="pi">:</span>
+    <span class="na">object_store_config_file</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv">galaxy_config_dir</span> <span class="pi">}}</span><span class="s">/object_store_conf.xml</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>In your group variables file, add it to the <code class="highlighter-rouge">galaxy_config_files</code> section:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config_files</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/galaxy/config/object_store_conf.xml</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config['galaxy']['object_store_config_file']</span><span class="nv"> </span><span class="s">}}"</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Create and edit <code class="highlighter-rouge">files/config/galaxy/object_store_conf.xml</code> with the following contents:</p>
+
+      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;object_store</span> <span class="na">type=</span><span class="s">"hierarchical"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;backends&gt;</span>
+        <span class="nt">&lt;backend</span> <span class="na">id=</span><span class="s">"newdata"</span> <span class="na">type=</span><span class="s">"disk"</span> <span class="na">order=</span><span class="s">"0"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;files_dir</span> <span class="na">path=</span><span class="s">"/data2"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;extra_dir</span> <span class="na">type=</span><span class="s">"job_work"</span> <span class="na">path=</span><span class="s">"/data2/job_work_dir"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/backend&gt;</span>
+        <span class="nt">&lt;backend</span> <span class="na">id=</span><span class="s">"olddata"</span> <span class="na">type=</span><span class="s">"disk"</span> <span class="na">order=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;files_dir</span> <span class="na">path=</span><span class="s">"/data"</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;extra_dir</span> <span class="na">type=</span><span class="s">"job_work"</span> <span class="na">path=</span><span class="s">"/data/job_work_dir"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/backend&gt;</span>
+    <span class="nt">&lt;/backends&gt;</span>
+<span class="nt">&lt;/object_store&gt;</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Add a <code class="highlighter-rouge">pre_task</code> to create the <code class="highlighter-rouge">/data2</code> folder, exactly like for the <code class="highlighter-rouge">/data</code> folder.</p>
+    </li>
+    <li>
+      <p>Run the playbook and restart Galaxy</p>
+    </li>
+    <li>
+      <p>Run a couple of jobs after Galaxy has restarted, run a couple of jobs.</p>
+
+      <blockquote class="question">
+        <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>Where is the data now stored?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>You should see <code class="highlighter-rouge">/data2</code> in the <code class="highlighter-rouge">Full Path</code>, if not, something went wrong. Check that your “order” is correct</p>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="distributed-object-store">Distributed Object Store</h1>
+
+<p>Rather than searching a hierarchy of object stores until the dataset is found, Galaxy can store the ID (in the database) of the object store in which a dataset is located when the dataset is created. This allows Galaxy to write to more than one object store for new datasets.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-distributed-object-store"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Distributed Object Store</h3>
+
+  <ol>
+    <li>
+      <p>Edit your <code class="highlighter-rouge">files/galaxy/config/object_store_conf.xml</code> file and replace the contents with:</p>
+
+      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;object_store</span> <span class="na">type=</span><span class="s">"distributed"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;backends&gt;</span>
+        <span class="nt">&lt;backend</span> <span class="na">id=</span><span class="s">"newdata"</span> <span class="na">type=</span><span class="s">"disk"</span> <span class="na">weight=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;files_dir</span> <span class="na">path=</span><span class="s">"/data2"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;extra_dir</span> <span class="na">type=</span><span class="s">"job_work"</span> <span class="na">path=</span><span class="s">"/data2/job_work_dir"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/backend&gt;</span>
+        <span class="nt">&lt;backend</span> <span class="na">id=</span><span class="s">"olddata"</span> <span class="na">type=</span><span class="s">"disk"</span> <span class="na">weight=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;files_dir</span> <span class="na">path=</span><span class="s">"/data"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;extra_dir</span> <span class="na">type=</span><span class="s">"job_work"</span> <span class="na">path=</span><span class="s">"/data/job_work_dir"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/backend&gt;</span>
+    <span class="nt">&lt;/backends&gt;</span>
+<span class="nt">&lt;/object_store&gt;</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook, restart Galaxy</p>
+    </li>
+    <li>
+      <p>Run 4 or so jobs, and check where the output appear. You should see that they are split relatively evenly between the two data directories.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Sites like UseGalaxy.eu use the distributed object store in order to balance dataset storage across 10 different storage pools.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-more-documentation"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: More documentation</h3>
+
+  <p>More information can be found in the <a href="https://github.com/galaxyproject/galaxy/blob/dev/config/object_store_conf.xml.sample">sample file</a></p>
+
+</blockquote>
+
+<blockquote class="warning-box">
+  <h3 id="warning-warning-switching-object-store-types-will-cause-issues"><i class="fa fa-warning" aria-hidden="true"></i><span class="visually-hidden">warning</span> Warning: switching object store types will cause issues</h3>
+  <p>We have switched between two different object stores here, but this is not supported. If you need to do this, you will need to update datasets in Galaxy’s database. Any datasets that were created as hierarchical will lack the <code class="highlighter-rouge">object_store_id</code>, and you will need to supply the correct one. Do not just blindly copy these instructions, please understand what they do before running them and talk to us on <a href="http://gitter.im/galaxyproject/Lobby">Gitter</a> for more help</p>
+
+  <ol>
+    <li>
+      <p>Move the datasets to their new location: <code class="highlighter-rouge">sudo -u galaxy rsync -avr /hierarchical/000/ /distributed/000/</code></p>
+    </li>
+    <li>
+      <p>Update the database: <code class="highlighter-rouge">sudo -Hu galaxy psql galaxy -c "UPDATE dataset SET object_store_id='data';" </code></p>
+    </li>
+    <li>
+      <p>Restart your Galaxy</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+            <ul>
+                
+                <li>The distributed object store configuration allows you to easily expand that storage that is attached to your Galaxy.</li>
+                
+                <li>You can move data around without affecting users.</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Distributed Object Storage (Galaxy Server administration)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Distributed Object Storage (Galaxy Server administration)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Helena Rasche, Nate Coraor)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/admin/tutorials/object-store/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>

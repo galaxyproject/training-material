@@ -1,0 +1,1049 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Reference Data with CVMFS</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Reference Data with CVMFS" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body>
+        
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/admin" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Galaxy Server administration
+                        </a>
+                    </li>
+
+                    
+                    
+                    
+
+                    
+                        
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    
+                                        
+                                            
+                                                <a class="dropdown-item" href="/training-material/topics/admin/slides/introduction.html">
+                                                    Galaxy from an administrator point of view
+                                                </a>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                </div>
+                            </li>
+                        
+                    
+
+                    
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+                                <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">instances</span> Galaxy Instances
+                            </a>
+                            <div class="dropdown-menu">
+                                
+                                    <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/admin/docker" title="Docker image for this tutorial">
+                                        <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+                                    </a>
+                                
+                                
+                                
+                            </div>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fcvmfs%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fcvmfs%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fcvmfs%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fcvmfs%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fcvmfs%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/admin/tutorials/cvmfs/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+   
+{
+  "@context": "http://schema.org",
+  "@type": "CreativeWork",
+  "name": "Reference Data with CVMFS",
+  "accessModeSufficient": "visual",
+  "accessibilityControl": "fullMouseControl",
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "learningResourceType": "",
+  "url": "/topics/admin/tutorials/cvmfs/tutorial.html",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "",
+      "name": "Training data for Reference Data with CVMFS tutorial"
+    }
+  ],
+  "timeRequired": "PT1H",
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "slugger70"
+    },
+    {
+      "@type": "Person",
+      "name": "erasche"
+    }
+  ],
+  "keywords": "ansible",
+  "description": "The objectives are:\n - Have an understanding of what CVMFS is and how it works\n - Install and configure the CVMFS client on a linux machine and mount the Galaxy reference data repository\n - Configure your Galaxy to use these reference genomes and indices\n - Use an ansible playbook for all of the above.\n\n"
+}
+
+    </script>
+    <section class="tutorial">
+        <h1>Reference Data with CVMFS</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>Have an understanding of what CVMFS is and how it works</li>
+            
+            <li>Install and configure the CVMFS client on a linux machine and mount the Galaxy reference data repository</li>
+            
+            <li>Configure your Galaxy to use these reference genomes and indices</li>
+            
+            <li>Use an ansible playbook for all of the above.</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/admin">Galaxy Server administration</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                - <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        <a href="">A server/VM on which to deploy CVMFS</a>
+    
+    </li>
+
+    <li>
+    
+        <a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible setup on your local machine</a>
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour</p>
+            
+        </blockquote>
+
+        <h1 class="no_toc" id="overview">Overview</h1>
+
+<p>The CernVM-FS is a distributed filesystem perfectly designed for sharing readonly data across the globe. We use it in the <strong><a href="https://galaxyproject.org">Galaxy Project</a></strong> for sharing things that a lot of Galaxy servers need. Namely:</p>
+<ul>
+  <li><strong>Reference Data</strong>
+    <ul>
+      <li>Genome sequences for hundreds of useful species.</li>
+      <li>Indices for the genome sequences</li>
+      <li>Various bioinformatic tool indices for the available genomes</li>
+    </ul>
+  </li>
+  <li><strong>Tool containers</strong>
+    <ul>
+      <li><strong><a href="https://www.sylabs.io/">Singularity</a></strong> containers of everything stored in <strong><a href="https://biocontainers.pro/">Biocontainers</a></strong> (A bioinformatic tool container repository.) You get these for free every time you build a <strong><a href="https://bioconda.github.io/">Bioconda</a></strong> recipe/package for a tool.</li>
+    </ul>
+  </li>
+  <li>Others too..</li>
+</ul>
+
+<p>From the Cern website:</p>
+
+<p><em>“The CernVM File System provides a scalable, reliable and low-maintenance software distribution service. It was developed to assist High Energy Physics (HEP) collaborations to deploy software on the worldwide-distributed computing infrastructure used to run data processing applications. CernVM-FS is implemented as a POSIX read-only file system in user space (a FUSE module). Files and directories are hosted on standard web servers and mounted in the universal namespace /cvmfs.” - <a href="https://cernvm.cern.ch/portal/filesystem">https://cernvm.cern.ch/portal/filesystem</a></em></p>
+
+<p>A slideshow presentation on this subject can be found <a href="https://galaxyproject.github.io/dagobah-training/2019-pennstate/05-reference-genomes/reference_genomes.html#28">here</a>. More details on the usegalaxy.org (Galaxy Main’s) reference data setup and CVMFS system can be found <a href="https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data">here</a></p>
+
+<p>There are two sections to this exercise. The first shows you how to use ansible to setup and configure CVMFS for Galaxy. The second shows you how to do everything manually. It is recommended that you use the ansible method. The manual method is included here mainly for a more in depth understanding of what is happening.</p>
+
+<p>If you really want to perform all these tasks manually, go <a href="#cvmfs-and-galaxy-without-ansible">here</a>, otherwise just follow along.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+<ol id="markdown-toc">
+  <li><a href="#ansible-cvmfs-and-galaxy" id="markdown-toc-ansible-cvmfs-and-galaxy">Ansible-CVMFS and Galaxy</a>    <ol>
+      <li><a href="#installing-and-configuring-galaxys-cvmfs-reference-data-with-ansible" id="markdown-toc-installing-and-configuring-galaxys-cvmfs-reference-data-with-ansible">Installing and configuring Galaxy’s CVMFS reference data with ansible</a></li>
+      <li><a href="#exploring-the-cvmfs-installation" id="markdown-toc-exploring-the-cvmfs-installation">Exploring the CVMFS Installation</a></li>
+      <li><a href="#configuring-galaxy-to-use-the-cvmfs-references" id="markdown-toc-configuring-galaxy-to-use-the-cvmfs-references">Configuring Galaxy to use the CVMFS references.</a></li>
+    </ol>
+  </li>
+  <li><a href="#cvmfs-and-galaxy-without-ansible" id="markdown-toc-cvmfs-and-galaxy-without-ansible">CVMFS and Galaxy without Ansible</a>    <ol>
+      <li><a href="#configuring-cvmfs" id="markdown-toc-configuring-cvmfs">Configuring CVMFS</a></li>
+      <li><a href="#testing-it-out" id="markdown-toc-testing-it-out">Testing it out</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="ansible-cvmfs-and-galaxy">Ansible-CVMFS and Galaxy</h1>
+
+<p>The Galaxy project supports a few CVMFS repositories.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Repository</th>
+      <th>Repository Address</th>
+      <th>Contents</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Reference Data and Indices</td>
+      <td><code class="highlighter-rouge">data.galaxyproject.org</code></td>
+      <td>Genome sequences and their tool indices, Galaxy <code class="highlighter-rouge">.loc</code> files for them as well</td>
+    </tr>
+    <tr>
+      <td>Singularity Containers</td>
+      <td><code class="highlighter-rouge">singularity.galaxyproject.org</code></td>
+      <td>Singularity containers for everything in Biocontainers for use in Galaxy systems</td>
+    </tr>
+    <tr>
+      <td>Galaxy Main Configuration</td>
+      <td><code class="highlighter-rouge">main.galaxyproject.org</code></td>
+      <td>The configuration files etc for Galaxy Main (usegalaxy.org)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="installing-and-configuring-galaxys-cvmfs-reference-data-with-ansible">Installing and configuring Galaxy’s CVMFS reference data with ansible</h2>
+
+<p>Luckily for us, the Galaxy Project has a lot of experience with using and configuring CVMFS and we are going to leverage off that. To get CVMFS working on our Galaxy server, we will use the ansible role for CVMFS written by the Galaxy Project. Firstly, we need to install the role and then write a playbook for using it.</p>
+
+<p>If the terms “ansible”, “role” and “playbook” mean nothing to you, please checkout <a href="https://galaxyproject.github.io/training-material/topics/admin/tutorials/ansible/slides.html#1">the ansible introduction slides</a> and <a href="https://galaxyproject.github.io/training-material/topics/admin/tutorials/ansible/tutorial.html">the ansible introduction tutorial</a></p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-running-ansible-on-your-remote-machine"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Running Ansible on your remote machine</h3>
+  <p>It is possible to have ansible installed on the remote machine and run it there, not just from your local machine connecting to the remote machine.</p>
+
+  <p>Your hosts file will need to use <code class="highlighter-rouge">localhost</code>,  and whenever you run playbooks with <code class="highlighter-rouge">ansible-playbook -i hosts playbook.yml</code>, you will need to add <code class="highlighter-rouge">-c local</code> to your command.</p>
+
+  <p>Be <strong>certain</strong> that the playbook that you’re writing on the remote machine is stored somewhere safe, like your user home directory, or backed up on your local machine. The cloud can be unreliable and things can disappear at any time.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-installing-cvmfs-with-ansible"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing CVMFS with Ansible</h3>
+
+  <ol>
+    <li>
+      <p>In your working directory, add the CVMFS role to your <code class="highlighter-rouge">requirements.yaml</code></p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="pi">-</span> <span class="s">galaxyproject.cvmfs</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Install the requirements with <code class="highlighter-rouge">ansible-galaxy</code>:</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yaml
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Create and edit the group variables file, <code class="highlighter-rouge">group_vars/galaxyservers.yml</code> file.</p>
+
+      <p>The variables available in this role are:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="highlighter-rouge">cvmfs_role</code></td>
+            <td>string</td>
+            <td>Type of CVMFS host: <code class="highlighter-rouge">client</code>, <code class="highlighter-rouge">stratum0</code>, <code class="highlighter-rouge">stratum1</code>, or <code class="highlighter-rouge">localproxy</code>. Controls what packages are installed and what configuration is performed.</td>
+          </tr>
+          <tr>
+            <td><code class="highlighter-rouge">cvmfs_keys</code></td>
+            <td>list of dicts</td>
+            <td>Keys to install on hosts of all types.</td>
+          </tr>
+          <tr>
+            <td><code class="highlighter-rouge">cvmfs_server_urls</code></td>
+            <td>list of dicts</td>
+            <td>CVMFS server URLs, the value of <code class="highlighter-rouge">CVMFS_SERVER_URL</code> in <code class="highlighter-rouge">/etc/cvmfs/domain.d/&lt;domain&gt;.conf</code>.</td>
+          </tr>
+          <tr>
+            <td><code class="highlighter-rouge">cvmfs_repositories</code></td>
+            <td>list of dicts</td>
+            <td>CVMFS repository configurations, <code class="highlighter-rouge">CVMFS_REPOSITORIES</code> in <code class="highlighter-rouge">/etc/cvmfs/default.local</code> plus additional settings in <code class="highlighter-rouge">/etc/cvmfs/repositories.d/&lt;repository&gt;/{client,server}.conf</code>.</td>
+          </tr>
+          <tr>
+            <td><code class="highlighter-rouge">cvmfs_quota_limit</code></td>
+            <td>integer in MB</td>
+            <td>Size of CVMFS client cache. Default is <code class="highlighter-rouge">4000</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>But, luckily for us, the Galaxy Project CVMFS role has a lot of defaults for these variables which we can use by just setting <code class="highlighter-rouge">galaxy_cvmfs_repos_enabled</code> to true. We will also set the <code class="highlighter-rouge">cvmfs_quota_limit</code> to something sensible as we have relatively small disks on our instances (2000MB).</p>
+
+      <p>Add the following lines to your <code class="highlighter-rouge">group_vars/galaxyservers.yml</code> file:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="c1"># CVMFS vars</span>
+<span class="na">cvmfs_role</span><span class="pi">:</span> <span class="s">client</span>
+<span class="na">galaxy_cvmfs_repos_enabled</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">cvmfs_quota_limit</span><span class="pi">:</span> <span class="s">2000</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Create and edit a new playbook which uses the CVMFS role, name it <code class="highlighter-rouge">cvmfs_playbook.yml</code></p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">galaxyservers</span>
+  <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">roles</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">galaxyproject.cvmfs</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook -i hosts cvmfs_playbook.yml
+</code></pre></div>      </div>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Congratulations, you’ve set up CVMFS.</p>
+
+<h2 id="exploring-the-cvmfs-installation">Exploring the CVMFS Installation</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-exploring-cvmfs"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Exploring CVMFS</h3>
+
+  <ol>
+    <li>
+      <p>SSH into your machine</p>
+    </li>
+    <li>
+      <p>Change directory into <code class="highlighter-rouge">/cvmfs/</code> and list the files in that folder</p>
+
+      <blockquote class="question">
+        <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>What do you see?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>You should see nothing, as CVMFS uses <code class="highlighter-rouge">autofs</code> in order to mount paths only upon request. Once you <code class="highlighter-rouge">cd</code> into the directory, autofs will automatically mount the repository and files will be listed.</p>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>Change directory into <code class="highlighter-rouge">/cvmfs/data.galaxyproject.org/</code>. Have a browse through the contents. You’ll see <code class="highlighter-rouge">.loc</code> files, genomes and indices.</p>
+
+      <p>And just like that we all have access to all the reference genomes and associated tool indices thanks to the Galaxy Project’s and mostly Nate’s hard work!</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="configuring-galaxy-to-use-the-cvmfs-references">Configuring Galaxy to use the CVMFS references.</h2>
+
+<p>Now that we have mounted the cvmfs repository we need to tell Galaxy how to find it and use it.</p>
+
+<p>There are two primary directories in the reference data repository:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Directory</th>
+      <th>Contents</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">/managed</code></td>
+      <td>Data generated with Galaxy Data Managers, organized by data table (index format), then by genome build.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">/byhand</code></td>
+      <td>Data generated prior to the existence/use of Data Managers, manually curated. (For legacy reasons, this directory is shared as <code class="highlighter-rouge">/indexes</code> on the HTTP and rsync servers.)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>These directories have somewhat different structures:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">/managed</code> is organized by index type, then by genome build (Galaxy dbkey)</li>
+  <li><code class="highlighter-rouge">/byhand</code> is organzied by genome build, then by index type</li>
+</ul>
+
+<p>Both directories contain a location subdirectory, and each of these contain a <code class="highlighter-rouge">tool_data_table_conf.xml</code> file:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">/managed/location/tool_data_table_conf.xml</code></li>
+  <li><code class="highlighter-rouge">/byhand/location/tool_data_table_conf.xml</code></li>
+</ul>
+
+<p>Galaxy consumes these <code class="highlighter-rouge">tool_data_table_conf.xml</code> files and the <code class="highlighter-rouge">.loc</code> “location” files they reference. The paths contained in these files are valid if the data is mounted via CVMFS.</p>
+
+<p>Examples of data include:</p>
+
+<ul>
+  <li>twoBit (<code class="highlighter-rouge">.2bit</code>) and FASTA (<code class="highlighter-rouge">.fa</code>) sequence files</li>
+  <li>Bowtie 2 and BWA indexes</li>
+  <li>Mutation Annotation Format (<code class="highlighter-rouge">.maf</code>) files</li>
+  <li>SAMTools FASTA indexes (<code class="highlighter-rouge">.fai</code>)</li>
+</ul>
+
+<p>Now all we need to do is tell Galaxy how to find it! This tutorial assumes that you have run the tutorial in the requirements, “Galaxy Installation with Ansible”. The hands-on below will use the Galaxy Project Ansible role to configure everything.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-configuring-galaxy-to-use-cvmfs"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Configuring Galaxy to use CVMFS</h3>
+
+  <ol>
+    <li>
+      <p>Edit the <code class="highlighter-rouge">group_vars/galaxyservers.yml</code> file and add a <code class="highlighter-rouge">tool_data_table_config_path</code> entry under the <code class="highlighter-rouge">galaxy_config:</code> section in the <code class="highlighter-rouge">groupvars/galaxyservers.yml</code> file.</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config</span><span class="pi">:</span>
+  <span class="na">galaxy</span><span class="pi">:</span>
+    <span class="s">...</span>
+    <span class="s">tool_data_table_config_path</span><span class="pi">:</span> <span class="s">/cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml</span>
+</code></pre></div>      </div>
+
+      <blockquote class="question">
+        <h3 id="question-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>How does your final configuration look?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div>          </div>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>Because we want to alter some Galaxy settings now, we need to add the Galaxy role to our playbook.</p>
+
+      <p>Add <code class="highlighter-rouge">galaxyproject.galaxy</code> to the <code class="highlighter-rouge">roles</code> in our <code class="highlighter-rouge">cvmfs_playbook.yml</code> file.</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">galaxyservers</span>
+  <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">roles</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">galaxyproject.cvmfs</span>
+    <span class="pi">-</span> <span class="s">galaxyproject.galaxy</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Re-run the CVMFS playbook (<code class="highlighter-rouge">ansible-playbook -i hosts cvmfs_playbook.yml</code>)</p>
+    </li>
+    <li>
+      <p>Restart Galaxy</p>
+    </li>
+    <li>
+      <p>In your Galaxy interface, open the <code class="highlighter-rouge">bwa</code>, <code class="highlighter-rouge">bwa-mem</code> or <code class="highlighter-rouge">Bowtie2</code> tool interface (whichever you may have installed). Now check that there are a lot more Genomes available for use!</p>
+
+      <p><img src="../../images/available_genomes.png" alt="available_genomes.png" /></p>
+    </li>
+    <li>
+      <p>Login to Galaxy as the admin user, and go to <strong>Admin → Local Data → View Tool Data Table Entries → bwa_mem indexes</strong></p>
+
+      <p><img src="../../images/bwa_mem_indices.png" alt="bwa_mem_indices.png" /></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><em>That’s all folks.. Hope it was useful!</em></p>
+
+<hr />
+
+<h1 id="cvmfs-and-galaxy-without-ansible">CVMFS and Galaxy without Ansible</h1>
+
+<blockquote class="tip">
+  <p><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Manual version of Ansible Commands
+If you wish to perform the same thing that we’ve just done, but by building the ansible script manually, follow these instructions. Otherwise, you have already done everything below and do not need to re-do it.</p>
+</blockquote>
+
+<p>We are going to setup a CVMFS mount to the Galaxy reference data repository on our machines. To do this we have to install and configure the CVMFS client and then mount the appropriate CVMFS repository using the publicly available keys.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-installing-the-cvmfs-client"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing the CVMFS Client</h3>
+
+  <ol>
+    <li>
+      <p>On your remote machine, we need to first install the Cern software apt repo and then the cvmfs client and config utility:</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>lsb-release
+wget https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest_all.deb
+<span class="nb">sudo </span>dpkg <span class="nt">-i</span> cvmfs-release-latest_all.deb
+<span class="nb">rm</span> <span class="nt">-f</span> cvmfs-release-latest_all.deb
+<span class="nb">sudo </span>apt-get update
+
+<span class="nb">sudo </span>apt <span class="nb">install </span>cvmfs cvmfs-config
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Now we need to run the cvmfs setup script.</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>cvmfs_config setup
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="configuring-cvmfs">Configuring CVMFS</h2>
+
+<p>The configuration is not complex for CVMFS:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-configuring-cvmfs"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Configuring CVMFS</h3>
+
+  <ol>
+    <li>
+      <p>Create a <code class="highlighter-rouge">/etc/cvmfs/default.local</code> file with the following contents:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CVMFS_REPOSITORIES="data.galaxyproject.org"
+CVMFS_HTTP_PROXY="DIRECT"
+CVMFS_QUOTA_LIMIT="4000"
+CVMFS_CACHE_BASE="/srv/cvmfs/cache"
+CVMFS_USE_GEOAPI=yes
+</code></pre></div>      </div>
+
+      <p>This tells cvmfs to mount the Galaxy reference data repository and use a specific location for the cache which is limited to 4GB in size and to use the instance’s geo-location to choose the best CVMFS repo server to connect to.</p>
+    </li>
+    <li>
+      <p>Create a <code class="highlighter-rouge">/etc/cvmfs/domain.d/galaxyproject.org.conf</code> file with the following contents:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CVMFS_SERVER_URL="http://cvmfs1-tacc0.galaxyproject.org/cvmfs/@fqrn@;http://cvmfs1-iu0.galaxyproject.org/cvmfs/@fqrn@;http://cvmfs1-psu0.galaxyproject.org/cvmfs/@fqrn@;http://galaxy.jrc.ec.europa.eu:8008/cvmfs/@fqrn@;http://cvmfs1-mel0.gvl.org.au/cvmfs/@fqrn@;http://cvmfs1-ufr0.galaxyproject.eu/cvmfs/@fqrn@"
+</code></pre></div>      </div>
+
+      <p>This is a list of the available tier1 servers that have this repo. Note there is one in Penn State. We will most likely be connecting to this one.</p>
+    </li>
+    <li>
+      <p>Create a <code class="highlighter-rouge">/etc/cvmfs/keys/data.galaxyproject.org.pub</code> file with the following contents:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5LHQuKWzcX5iBbCGsXGt
+6CRi9+a9cKZG4UlX/lJukEJ+3dSxVDWJs88PSdLk+E25494oU56hB8YeVq+W8AQE
+3LWx2K2ruRjEAI2o8sRgs/IbafjZ7cBuERzqj3Tn5qUIBFoKUMWMSIiWTQe2Sfnj
+GzfDoswr5TTk7aH/FIXUjLnLGGCOzPtUC244IhHARzu86bWYxQJUw0/kZl5wVGcH
+maSgr39h1xPst0Vx1keJ95AH0wqxPbCcyBGtF1L6HQlLidmoIDqcCQpLsGJJEoOs
+NVNhhcb66OJHah5ppI1N3cZehdaKyr1XcF9eedwLFTvuiwTn6qMmttT/tHX7rcxT
+owIDAQAB
+-----END PUBLIC KEY-----
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Make a directory for the cache files</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mkdir /srv/cvmfs
+</code></pre></div>      </div>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="testing-it-out">Testing it out</h2>
+
+<p>Probe the connection.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-testing-it-out"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Testing it out</h3>
+
+  <ol>
+    <li>
+      <p>Run <code class="highlighter-rouge">sudo cvmfs_config probe data.galaxyproject.org</code></p>
+
+      <blockquote class="question">
+        <h3 id="question-question-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>What does it output?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OK
+</code></pre></div>          </div>
+
+          <p>If this doesn’t return <code class="highlighter-rouge">OK</code> then you may need to restart autofs: <code class="highlighter-rouge">sudo systemctl restart autofs</code></p>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>Change directory into <code class="highlighter-rouge">/cvmfs/</code> and list the files in that folder</p>
+
+      <blockquote class="question">
+        <h3 id="question-question-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>What do you see?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>You should see nothing, as CVMFS uses <code class="highlighter-rouge">autofs</code> in order to mount paths only upon request. Once you <code class="highlighter-rouge">cd</code> into the directory, autofs will automatically mount the repository and files will be listed.</p>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>Change directory into <code class="highlighter-rouge">/cvmfs/data.galaxyproject.org/</code>. Have a browse through the contents. You’ll see <code class="highlighter-rouge">.loc</code> files, genomes and indices.</p>
+
+      <p>And just like that we all have access to all the reference genomes and associated tool indices thanks to the Galaxy Project’s and mostly Nate’s hard work!</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h4 id="step-4-look-at-the-repository">Step 4: Look at the repository</h4>
+
+<p>Now to configure Galaxy to use the CVMFS references we have just installed, see <a href="#configuring-galaxy-to-use-the-cvmfs-references">here</a></p>
+
+
+        
+
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Reference Data with CVMFS (Galaxy Server administration)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Reference Data with CVMFS (Galaxy Server administration)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Helena Rasche, Simon Gladman)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/admin/tutorials/cvmfs/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>
