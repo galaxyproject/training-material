@@ -593,14 +593,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    galaxy_restart_handler_name: Restart Galaxy
 >    ```
 >
-> 5. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
->
->    ```
->    RUNNING HANDLER [restart galaxy] ****************************************
->    changed: [galaxy.example.org]
->    ```
->
-> 6. Log in and check the status with `supervisorctl status` (remember to change to the Galaxy user)
+> 5. Log in and check the status with `supervisorctl status` (remember to change to the Galaxy user)
 >
 >    > ### {% icon question %} Question
 >    >
@@ -620,7 +613,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 >    Take a look at the supervisor configs that have been written in `/etc/supervisor` and `/etc/supervisor/conf.d`.
 >
-> 7. Some things to note:
+> 6. Some things to note:
 >
 >    1. Refreshing the page before Galaxy has restarted will hang, which is a nice feature of uWSGI
 >    2. Although the playbook will restart Galaxy upon config changes, you will sometimes need to restart it by hand, which can be done with `supervisorctl restart galaxy`
@@ -782,7 +775,13 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```
 >    {% endraw %}
 >
-> 5. Run the playbook.
+> 5. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
+>
+>    ```
+>    RUNNING HANDLER [restart galaxy] ****************************************
+>    changed: [galaxy.example.org]
+>    ```
+>
 >
 > 6. Check out the changes made to your server in `/etc/nginx`, particularly the directory containing the Galaxy virtualhost.
 >
