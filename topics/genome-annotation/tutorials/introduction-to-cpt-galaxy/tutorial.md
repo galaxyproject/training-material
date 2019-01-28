@@ -129,26 +129,25 @@ The 'view all histories' button sends you to the interface for managing multiple
 ## History Information
 
 Histories also store information apart from the datasets they contain. They can be named/re-named, tagged, and
-annotated.
+annotated. It’s good scientific practice to maintain organized records; this translates to Galaxy histories and datasets. Imagine yourself in three years looking at this history, or sharing it with another user: is it clear what the history contains?
 
 ### Renaming a history
 
-All histories begin with the name 'Unnamed history'. Non-anonymous users can rename the history as they see fit:
+All histories begin with the name 'Unnamed history'. Users can re-name histories to provide relevant details on the work they conatin, such as the name of the organism and the date of the work:
 
 1. Click the existing name. A text input field will appear with the current name.
 2. Entered a new name or edit the existing the way you'd like.
 3. Press 'Enter' to save the new name. The input field will disappear and the new name display.
 4. To cancel renaming, press 'Esc' or click outside the input field.
 
-![Renaiming history](../../images/introduction-to-cpt-galaxy-screenshots/renaming.png)
+![Renaming history](../../images/introduction-to-cpt-galaxy-screenshots/renaming.png)
 
 ### Tagging a history
 
 Tags are short pieces of text used to describe the thing they're attached to and many things in Galaxy can be tagged.
 Each item can have many tags and you can add new tags or remove them at any time. Tags can be another useful way to
 organize and search your data. For instance, you might tag a history with the type of analysis you did in it: 'assembly'
-or 'variants'. Or you may tag them according to data sources or some other metadata: 'long-term-care-facility' or
-'yellowstone park:2014'.
+or 'variants'. Or you may tag them according to data sources or some other metadata.
 
 To tag a history:
 
@@ -262,21 +261,13 @@ make them not shown again.
 
 ![](../../images/introduction-to-cpt-galaxy-screenshots/17_deleted_dataset_example.png)
 
-## Organizing Histories
+### Re-naming Datasets
 
-It’s good scientific practice to maintain organized records; this translates to [CPT](https://cpt.tamu.edu) Galaxy histories and workflows. Clicking on the name of the history will allow for editing of the name. Hit *Enter* to save the new name. A good name for a history includes at minimum the date and the name of the phage being worked on, with other relevant descriptors. Imagine yourself in three years looking at this history name. Is it descriptive and useful?
+Click on the {% icon hands_on %} symbol in a dataset. This will bring up some editable fields in the main Galaxy interface.
 
-![](../../images/introduction-to-cpt-galaxy-screenshots/18_change_history_name.png)
+![](../../images/introduction-to-cpt-galaxy-screenshots/19_edit_dataset_attributes.png)
 
-To help keep track of progress on a phage, it is advised to create a new history when running a new set of analyses; this could be assembling/annotating a genome, or executing comparative analysis between phages. Another organizational suggestion is to change the name of the first dataset after a workflow/tool has been run.
-
-> ### {% icon hands_on %} Re-naming Datasets
-> Click on the {% icon hands_on %} symbol in the first dataset of the workflow. This will bring up some editable fields in the main Galaxy interface.
->
-> ![](../../images/introduction-to-cpt-galaxy-screenshots/19_edit_dataset_attributes.png)
->
-> There, the name can be changed. It is recommended to change the name of the dataset to the workflow/tool that was run (including the version), and the date executed.
-{: .hands_on}
+There, the name of the dataset can be changed, and this new name will appear on the dataset in the history window. It is not recommended to rename every dataset; reserve this attention for key datasets that you will want to return to repeatedly. Additional notes may also be added here. Make sure to click *Save* at the bottom of the window to keep your changes.
 
 ## Switching Histories
 
