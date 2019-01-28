@@ -54,6 +54,7 @@ The official playbook is extremely configurable, everything that you want to cha
 The important variables for this tutorial are:
 
 - `galaxy_root`
+- `galaxy_server_dir`
 - `galaxy_commit_id`
 - `galaxy_config`
 
@@ -239,6 +240,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 > 2. Create and open `playbook.yml` with your text editor and add the following:
 >
 >    - Add a pre-task to install the necessary dependency, `python-psycopg2`
+>    - A role for `galaxyproject.repos`. This will add the additional repositories that are needed by Galaxy in various places.
 >    - A role for `galaxyproject.postgresql`. This will handle the installation of PostgreSQL.
 >    - A role for `natefoo.postgresql_objects`, run as the postgres user. (You will need `become`/`become_user`.) This role allows for managing users and databases within postgres.
 >
@@ -256,6 +258,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > >       package:
 >    > >         name: 'python-psycopg2'
 >    > >   roles:
+>    > >     - galaxyproject.repos
 >    > >     - galaxyproject.postgresql
 >    > >     - role: natefoo.postgresql_objects
 >    > >       become: true
@@ -315,6 +318,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > >       package:
 >    > >         name: ['python-psycopg2', 'git', 'python-virtualenv', 'make']
 >    > >   roles:
+>    > >     - galaxyproject.repos
 >    > >     - galaxyproject.postgresql
 >    > >     - role: natefoo.postgresql_objects
 >    > >       become: true
@@ -339,11 +343,11 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_layout`              | `root-dir`                                 | This enables the `galaxy_root` Galaxy deployment layout:all of the code, configuration, and data folders will live beneath `galaxy_root`.
 >    `galaxy_root`                | `/srv/galaxy`                              | This is the root of the Galaxy deployment.
 >    `galaxy_file_path`           | `/data`                                    | The directory where Galaxy datasets (user data) will be stored. On a real deployment, this would likely be a mounted network filesystem.
->    `galaxy_user`                | `{name: galaxy, shell: /bin/bash}` | The user that Galaxy will run as.
+>    `galaxy_user`                | `{name: galaxy, shell: /bin/bash}`         | The user that Galaxy will run as.
 >    `galaxy_commit_id`           | `release_18.09`                            | The git reference to check out, which in this case is the <br>branch for Galaxy Release 18.09.
 >    `galaxy_config_style`        | `yaml`                                     | We want to opt-in to the new style YAML configuration.
 >    `galaxy_force_checkout`      | `true`                                     | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
->    `check_migrate_tools`      | `false`                                     | Not needed in this case due to a new install of Galaxy
+>    `check_migrate_tools`        | `false`                                    | Not needed in this case due to a new install of Galaxy
 >    {% endraw %}
 >
 >
@@ -385,7 +389,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > galaxy_layout: root-dir
 >    > > galaxy_root: /srv/galaxy
 >    > > galaxy_file_path: /data
->    > > galaxy_user: {name: galaxy, shell: /bin/bash}
+>    > > galaxy_user:
+>    > >   name: galaxy
+>    > >   shell: /bin/bash
 >    > > galaxy_commit_id: release_18.09
 >    > > galaxy_config_style: yaml
 >    > > galaxy_force_checkout: true
