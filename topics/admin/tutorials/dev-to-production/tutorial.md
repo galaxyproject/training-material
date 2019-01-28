@@ -43,7 +43,7 @@ After a basic installation, this tutorial present the main steps for moving from
 
 # Basic Installation
 
-## Clone it and run it  
+## Clone it and run it
 
 {% icon hands_on %} ***Hands on!***
 
@@ -65,7 +65,7 @@ Galaxy's server will start printing its output to your terminal. To stop the Gal
 In the basic installation Galaxy is bind to the loopback interface.
 To bind Galaxy to any available network interface edit the config/galaxy.yml file and change the host setting to:
 
-	host = 0.0.0.0
+	host: 0.0.0.0
 
 ## What did you just installed ?
 The galaxy you have just installed is configured with the following:
@@ -102,14 +102,14 @@ A set of option are useful for development but become irrelevant for production:
 
 - debug:
 
-	debug = False
+	debug: false
 
 Setting debug to False disable middleware that loads the entire response in memory for displaying debugging information in the page.
 If left enabled, the proxy server may timeout waiting for a response or your Galaxy process may run out of memory if it's serving large files.
 
 - use_interactive:
 
-	use_interactive = False
+	use_interactive: false
 
 Setting use_interactive to false disable displaying and live debugging of tracebacks via the web.
 Leaving it enabled will expose your configuration (database password, id_secret, etc.).
