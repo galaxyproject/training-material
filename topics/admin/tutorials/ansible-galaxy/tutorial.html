@@ -1,0 +1,1726 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Installation with Ansible</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Galaxy Installation with Ansible" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body>
+        
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/admin" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Galaxy Server administration
+                        </a>
+                    </li>
+
+                    
+                    
+                    
+
+                    
+                        
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    
+                                        
+                                            
+                                                <a class="dropdown-item" href="/training-material/topics/admin/slides/introduction.html">
+                                                    Galaxy from an administrator point of view
+                                                </a>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                </div>
+                            </li>
+                        
+                    
+
+                    
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+                                <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">instances</span> Galaxy Instances
+                            </a>
+                            <div class="dropdown-menu">
+                                
+                                    <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/admin/docker" title="Docker image for this tutorial">
+                                        <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+                                    </a>
+                                
+                                
+                                
+                            </div>
+                        </li>
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fansible-galaxy%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fansible-galaxy%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fansible-galaxy%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fansible-galaxy%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fansible-galaxy%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/admin/tutorials/ansible-galaxy/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+   
+{
+  "@context": "http://schema.org",
+  "@type": "CreativeWork",
+  "name": "Galaxy Installation with Ansible",
+  "accessModeSufficient": "visual",
+  "accessibilityControl": "fullMouseControl",
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "learningResourceType": "",
+  "url": "/topics/admin/tutorials/ansible-galaxy/tutorial.html",
+  "mentions": [
+
+  ],
+  "timeRequired": "PT2H",
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "erasche"
+    },
+    {
+      "@type": "Person",
+      "name": "natefoo"
+    }
+  ],
+  "description": "The questions this  addresses are:\n - How does the Galaxy Ansible module work internally?\n - How can I install a Galaxy server with Ansible\n\n\\nThe objectives are:\n - Have an understanding of how Galaxy's Ansible roles are structured and interact with one another\n - Be able to use an Ansible playbook to install different flavors of Galaxy for different purposes\n\n"
+}
+
+    </script>
+    <section class="tutorial">
+        <h1>Galaxy Installation with Ansible</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>How does the Galaxy Ansible module work internally?</li>
+            
+            <li>How can I install a Galaxy server with Ansible</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>Have an understanding of how Galaxy's Ansible roles are structured and interact with one another</li>
+            
+            <li>Be able to use an Ansible playbook to install different flavors of Galaxy for different purposes</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/admin">Galaxy Server administration</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                - <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        A server/VM to deploy Galaxy on
+    
+    </li>
+
+    <li>
+    
+        <a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible setup on your local machine</a>
+    
+    </li>
+
+    <li>
+    
+        Comfort with Ansible roles and tasks
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours</p>
+            
+        </blockquote>
+
+        <h1 class="no_toc" id="overview">Overview</h1>
+
+<p>This tutorial assumes you have some familiarity with <a href="https://www.ansible.com/resources/get-started">Ansible</a> and are comfortable with writing and running playbooks. Here we’ll see how to install a Galaxy server using an Ansible playbook. Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:</p>
+
+<blockquote>
+  <p>An ansible is a category of fictional device or technology capable of instantaneous or faster-than-light communication. It can send and receive messages to and from a corresponding device over any distance or obstacle whatsoever with no delay, even between star systems (<a href="https://en.wikipedia.org/wiki/Ansible">wikipedia</a>)</p>
+</blockquote>
+
+<p>We want to give you a comprehensive understanding of how the Galaxy installation occurs, but we want to avoid you having to write a “custom” Galaxy installation playbook which you would eventually throw away, in order to use the official playbooks. Given these goals, we will go through the playbook in depth first, and then move to a hands-on portion later. If you are not interested in the inner workings, you can <a href="#installing-galaxy">skip to that section now</a>.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+<ol id="markdown-toc">
+  <li><a href="#playbook-overview" id="markdown-toc-playbook-overview">Playbook Overview</a>    <ol>
+      <li><a href="#configuration" id="markdown-toc-configuration">Configuration</a></li>
+      <li><a href="#tasks" id="markdown-toc-tasks">Tasks</a></li>
+      <li><a href="#handlers" id="markdown-toc-handlers">Handlers</a></li>
+      <li><a href="#defaults" id="markdown-toc-defaults">Defaults</a></li>
+      <li><a href="#summary" id="markdown-toc-summary">Summary</a></li>
+    </ol>
+  </li>
+  <li><a href="#installing-galaxy" id="markdown-toc-installing-galaxy">Installing Galaxy</a>    <ol>
+      <li><a href="#requirements" id="markdown-toc-requirements">Requirements</a></li>
+      <li><a href="#postgresql" id="markdown-toc-postgresql">PostgreSQL</a></li>
+      <li><a href="#galaxy" id="markdown-toc-galaxy">Galaxy</a></li>
+      <li><a href="#proftpd" id="markdown-toc-proftpd">ProFTPD</a></li>
+      <li><a href="#disaster-strikes" id="markdown-toc-disaster-strikes">Disaster Strikes!</a></li>
+      <li><a href="#optional-securing-your-instance" id="markdown-toc-optional-securing-your-instance">(Optional) Securing your Instance</a></li>
+    </ol>
+  </li>
+  <li><a href="#final-notes" id="markdown-toc-final-notes">Final Notes</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="playbook-overview">Playbook Overview</h1>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>We’ll be using the <a href="https://github.com/galaxyproject/ansible-galaxy">official Galaxy role</a> to install and manage Galaxy. This role is found in <a href="https://galaxy.ansible.com/">Ansible Galaxy</a> (no relation - it is Ansible’s ) as <a href="https://galaxy.ansible.com/galaxyproject/galaxy">galaxyproject.galaxy</a>.</p>
+
+<p>The official role is extremely configurable, everything that you want to change is exposed as a variable, and then tasks will change behaviour based on that. The <a href="https://github.com/galaxyproject/ansible-galaxy#role-variables">role documentation</a> is the most up-to-date source of documentation for the variables. You should take a minute and read over the variables listed there.</p>
+
+<p>The important variables for this tutorial are:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">galaxy_root</code></li>
+  <li><code class="highlighter-rouge">galaxy_server_dir</code></li>
+  <li><code class="highlighter-rouge">galaxy_commit_id</code></li>
+  <li><code class="highlighter-rouge">galaxy_config</code></li>
+</ul>
+
+<p>These are largely self explanatory: a directory for all of Galaxy’s code and configuration, which commit should be installed, and the Galaxy configuration. We will not explain Galaxy configuration variables in detail as they are covered sufficiently in the <code class="highlighter-rouge">galaxy.yml</code> sample file or the <a href="https://docs.galaxyproject.org/en/master/admin/config.html#configuration-options">online documentation</a>.</p>
+
+<p>The official recommendation is that you should have a variables file such as a <code class="highlighter-rouge">group_vars/galaxy.yml</code> for storing all of the Galaxy configuration.</p>
+
+<h2 id="tasks">Tasks</h2>
+
+<p>As with every role, the entry point for execution is the <code class="highlighter-rouge">tasks/main.yml</code> file. For the <a href="https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/main.yml">ansible-galaxy</a> file, this includes a few groups of important tasks:</p>
+
+<ul>
+  <li><a href="#cloning-galaxy">Clone (or Download) Galaxy</a></li>
+  <li><a href="#managing-configuration">Managing Configuration</a></li>
+  <li><a href="#dependencies">Fetching Dependencies</a></li>
+  <li><a href="#mutable-setup">Managing Mutable Setup</a></li>
+  <li><a href="#managing-the-database">Managing the Database</a></li>
+</ul>
+
+<h3 id="cloning-galaxy">Cloning Galaxy</h3>
+
+<p>The <a href="https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/clone.yml">clone</a> task is the one which is primarily interesting to us, it downloads Galaxy, using git, to a specific commit.</p>
+
+<ol>
+  <li>Ansible tries to update Galaxy, cloning it if it is missing, or otherwise attempting to update to the correct commit (or latest commit of that branch.)</li>
+  <li>Any change is reported.</li>
+  <li>The virtualenv is set up:
+    <ol>
+      <li>An empty virtualenv is created.</li>
+      <li>Pip is updated within the virtualenv.</li>
+    </ol>
+  </li>
+  <li>Any <code class="highlighter-rouge">.pyc</code> files are removed, as this can occasionally result in Python loading the cached code, even if the corresponding <code class="highlighter-rouge">.py</code> file is no more present at the checked-out commit. For safety, all of these are removed.</li>
+</ol>
+
+<p>With that Galaxy is cloned to disk and is ready to be configured by the next task.</p>
+
+<h3 id="managing-configuration">Managing Configuration</h3>
+
+<p>The <a href="https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/static_setup.yml">static configuration setup</a> is relatively straightforward:</p>
+
+<ol>
+  <li>The directories for Galaxy configuration data and for the shed tools are created</li>
+  <li>Any config files are copied over</li>
+  <li>Any templates are copied over</li>
+  <li>The <code class="highlighter-rouge">galaxy.yml</code> (or <code class="highlighter-rouge">.ini</code>) is deployed</li>
+</ol>
+
+<p>The setup for deploying templates and configuration files is a little bit non-standard by Ansible standards. Here you are expected to provide your own templates and static config files, and then describe them as a list of files and where they should be deployed to.</p>
+
+<p>Using the <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/02ca578211bfee45044facf36635d28208e5dbb3/group_vars/galaxy.yml#L578">UseGalaxy.eu</a> configuration as an example, we have something like:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config_files</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/galaxy/config/builds.txt</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config['galaxy']['builds_file_path']</span><span class="nv"> </span><span class="s">}}"</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/galaxy/config/data_manager_conf.xml</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config['galaxy']['data_manager_config_file']</span><span class="nv"> </span><span class="s">}}"</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/galaxy/config/datatypes_conf.xml</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config['galaxy']['datatypes_config_file']</span><span class="nv"> </span><span class="s">}}"</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/galaxy/config/dependency_resolvers_conf.xml</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config['galaxy']['dependency_resolvers_config_file']</span><span class="nv"> </span><span class="s">}}"</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/galaxy/config/disposable_email_blacklist.conf</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config['galaxy']['blacklist_file']</span><span class="nv"> </span><span class="s">}}"</span>
+</code></pre></div></div>
+
+<p>The configuration here is a bit different, it references the <code class="highlighter-rouge">galaxy_config</code>, which is structured like:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config</span><span class="pi">:</span>
+  <span class="na">galaxy</span><span class="pi">:</span>
+    <span class="na">builds_file_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config_dir</span><span class="nv">  </span><span class="s">}}/builds.txt"</span>
+    <span class="na">datatypes_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config_dir</span><span class="nv">  </span><span class="s">}}/datatypes_conf.xml"</span>
+</code></pre></div></div>
+
+<p>So the references in <code class="highlighter-rouge">galaxy_config_file</code> to <code class="highlighter-rouge">galaxy_config</code> are done to ensure that the setting for e.g. “location of the blacklist file” is the same between where we have configured Galaxy to looking for it, and where the file has been deployed, without requiring us to make variables changes in numerous places.</p>
+
+<h3 id="dependencies">Dependencies</h3>
+
+<p>Now that Galaxy is available on disk, Ansible is ready to start processing <a href="https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/dependencies.yml">dependencies</a> of Galaxy.</p>
+
+<ol>
+  <li>The virtualenv is updated with data from the <code class="highlighter-rouge">galaxy_requirements_file</code>, by default pointing to the requirements file in the codebase: <code class="highlighter-rouge">{{ galaxy_server_dir  }}/lib/galaxy/dependencies/pinned-requirements.txt</code>.</li>
+  <li>Any necessary conditional dependencies of Galaxy are <a href="https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/dependencies/__init__.py">collected by processing the config file</a></li>
+  <li>and then installed to the virtualenv.</li>
+</ol>
+
+<h3 id="mutable-setup">Mutable Setup</h3>
+
+<p><a href="https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/mutable_setup.yml">This task</a> creates a directory and deploys any hand-managed mutable configuration files. It is unlikely that you want to manage these, as Galaxy does a sufficient job. Any changes you make to Galaxy like installing tools would result in the tools being “forgotten about”, if you re-ran the playbook and overwrote that file.</p>
+
+<h3 id="managing-the-database">Managing the Database</h3>
+
+<p>The <a href="https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/database.yml">database management tasks</a> are extremely convenient; any time you run the playbook to update Galaxy, this will automatically run the database schema migration as needed.</p>
+
+<ol>
+  <li>Galaxy first obtains the current DB version and the maximum possible DB version based on the codebase.</li>
+  <li>If needed, the database is created.</li>
+  <li>Both numbers are reported for the runner of the playbook.</li>
+  <li>If the numbers are different, then Ansible runs the command to upgrade the database to the latest version.</li>
+</ol>
+
+<p>As an administrator who often forgot to run the upgrade, and would only notice it once Galaxy crashed during startup, having this process completely automated is extremely nice.</p>
+
+<h2 id="handlers">Handlers</h2>
+
+<p>A number of the tasks that are executed will trigger a restart of Galaxy. Currently there is no auto-magic implementation of this, and you will have to do something that fits for your setup. The role provides a way to reference your own <a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html#handlers-running-operations-on-change">handler</a>, which we will do in this exercise. As Galaxy continues to standardise on setup, something will be implemented directly in the role to automatically restart the correct processes.</p>
+
+<h2 id="defaults">Defaults</h2>
+
+<p>As with other roles, numerous <a href="https://github.com/galaxyproject/ansible-galaxy/blob/master/defaults/main.yml">default values</a> are provided, but these are useful mostly as reference, and not to go through individually.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>Installation of Galaxy with the playbook follows generally the steps you would expect:</p>
+
+<ul>
+  <li>Galaxy is cloned (or updated)</li>
+  <li>A virtualenv is created if it doesn’t exist</li>
+  <li>Configuration files are installed</li>
+  <li>Any missing dependencies are installed</li>
+  <li>Any database updates are applied</li>
+</ul>
+
+<p>It would not be difficult to write a role that does this yourself, but by using
+the galaxyproject.galaxy role, you know that you’re getting all of the Galaxy
+best practices and knowledge from previous admins codified for you.</p>
+
+<h1 id="installing-galaxy">Installing Galaxy</h1>
+
+<p>With the necessary background in place, you’re ready to install Galaxy with Ansible. The playbooks will start simple, and grow over time. We will start with the minimal Galaxy playbook which only requires setting the <code class="highlighter-rouge">galaxy_server_dir</code> and expand from there. First, however, we need a database for Galaxy to connect to, so we will do that now.</p>
+
+<p>To proceed from here it is expected that:</p>
+
+<ul>
+  <li>
+    <p>You have <a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible installed</a> on your local machine</p>
+
+    <blockquote class="tip">
+      <h3 id="tip-tip-running-ansible-on-your-remote-machine"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Running Ansible on your remote machine</h3>
+      <p>It is possible to have Ansible installed on the remote machine and run it there as well. You will need to update your hosts file to point to localhost, and pass the <code class="highlighter-rouge">-c local</code> parameter. Be <strong>certain</strong> that the playbook that you’re building is stored somewhere safe like your user home directory. We will remove data at one point during this tutorial and would not want you to lose your progress.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>You have a <a href="../ansible/tutorial.html#hosts-file">hosts file</a> with the VM or host specified where you will deploy galaxy. We will refer to this group of hosts as “galaxyservers.” You can use a different name if you prefer or are working on an existing playbook, just be sure to update all references later on.</p>
+  </li>
+</ul>
+
+<h2 id="requirements">Requirements</h2>
+
+<p>We have codified all of the dependencies you will need into a yaml file that <code class="highlighter-rouge">ansible-galaxy</code> can install</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-minimal-galaxy-playbook"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Minimal Galaxy Playbook</h3>
+
+  <ol>
+    <li>
+      <p>If you haven’t done so already, create a new directory for your playbook, <code class="highlighter-rouge">playbook</code>, and <code class="highlighter-rouge">cd</code> to that directory</p>
+    </li>
+    <li>
+      <p>Create a new file in your working directory called <code class="highlighter-rouge">requirements.yml</code> and include the following contents:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="s">galaxyproject.repos</span>
+<span class="pi">-</span> <span class="s">galaxyproject.galaxy</span>
+<span class="pi">-</span> <span class="s">geerlingguy.nginx</span>
+<span class="pi">-</span> <span class="s">natefoo.postgresql_objects</span>
+<span class="pi">-</span> <span class="s">galaxyproject.postgresql</span>
+<span class="pi">-</span> <span class="s">galaxyproject.proftpd</span>
+<span class="pi">-</span> <span class="s">geerlingguy.pip</span>
+<span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">https://github.com/usegalaxy-eu/ansible-role-supervisor</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">usegalaxy-eu.supervisor</span>
+<span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">https://github.com/usegalaxy-eu/ansible-certbot</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">usegalaxy-eu.certbot</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>In the same directory, run <code class="highlighter-rouge">ansible-galaxy install -p roles -r requirements.yml</code>. This will install all of the required modules for this training into the <code class="highlighter-rouge">roles/</code> folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.</p>
+    </li>
+    <li>
+      <p>Create the hosts file if you have not done so, include a group for <code class="highlighter-rouge">[galaxyservers]</code> with the address of the host where you will install Galaxy.</p>
+    </li>
+    <li>
+      <p>Inspect the contents of the newly created <code class="highlighter-rouge">roles</code> directory in your working directory.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="postgresql">PostgreSQL</h2>
+
+<p>Galaxy is capable of talking to multiple databases through SQLAlchemy drivers. SQLite is the development database, but PostgreSQL is recommended in production. MySQL is a possibility, but does not receive the same testing or bugfixes from the main development team as PostgreSQL, so we will only show installation with PostgreSQL.</p>
+
+<p>PostgreSQL maintains its own user database apart from the system user database. By default, PostgreSQL uses the “peer” authentication method which allows access for system users with matching PostgreSQL usernames (other authentication mechanisms are available, see the <a href="https://www.postgresql.org/docs/current/static/client-authentication.html">PostgreSQL Client Authentication documentation</a>.</p>
+
+<p>For this tutorial, we will use the default “peer” authentication, so we need to create a PostgreSQL user matching the system user under which Galaxy will be running, i.e. <code class="highlighter-rouge">galaxy</code>. This is normally done with the PostgreSQL <code class="highlighter-rouge">createuser</code> command, and it must be run as the <code class="highlighter-rouge">postgres</code> user. In our case, we will use the <code class="highlighter-rouge">natefoo.postgresql_objects</code> role to handle this step.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-installing-postgresql"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing PostgreSQL</h3>
+
+  <ol>
+    <li>
+      <p>Create and edit <code class="highlighter-rouge">group_vars/galaxyservers.yml</code> and add some variables to configure PostgreSQL:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">postgresql_objects_users</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">galaxy</span>
+<span class="na">postgresql_objects_databases</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">galaxy</span>
+    <span class="na">owner</span><span class="pi">:</span> <span class="s">galaxy</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Create and open <code class="highlighter-rouge">playbook.yml</code> with your text editor and add the following:</p>
+
+      <ul>
+        <li>Add a pre-task to install the necessary dependency, <code class="highlighter-rouge">python-psycopg2</code></li>
+        <li>A role for <code class="highlighter-rouge">galaxyproject.repos</code>. This will add the additional repositories that are needed by Galaxy in various places.</li>
+        <li>A role for <code class="highlighter-rouge">galaxyproject.postgresql</code>. This will handle the installation of PostgreSQL.</li>
+        <li>A role for <code class="highlighter-rouge">natefoo.postgresql_objects</code>, run as the postgres user. (You will need <code class="highlighter-rouge">become</code>/<code class="highlighter-rouge">become_user</code>.) This role allows for managing users and databases within postgres.</li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>How does your current playbook look?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">galaxyservers</span>
+  <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">pre_tasks</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install Dependencies</span>
+      <span class="na">package</span><span class="pi">:</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">python-psycopg2'</span>
+  <span class="na">roles</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">galaxyproject.repos</span>
+    <span class="pi">-</span> <span class="s">galaxyproject.postgresql</span>
+    <span class="pi">-</span> <span class="na">role</span><span class="pi">:</span> <span class="s">natefoo.postgresql_objects</span>
+      <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
+      <span class="na">become_user</span><span class="pi">:</span> <span class="s">postgres</span>
+</code></pre></div>          </div>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>Run the playbook (<code class="highlighter-rouge">ansible-playbook -i hosts playbook.yml</code>)</p>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-when-running-ansible"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: When running Ansible</h3>
+        <p>Always pay close attention to tasks reported as <strong>changed</strong> and ensure that the changes were expected!</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Inspect the changes that have been made on your Galaxy server. Places to look include:</p>
+      <ul>
+        <li><code class="highlighter-rouge">/etc/postgresql</code></li>
+        <li>Databases and users in PostgreSQL (connection details are below). Hint: try the commands <code class="highlighter-rouge">\du</code> and <code class="highlighter-rouge">\l</code>.</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>You can now login and access the database, but only as the <code class="highlighter-rouge">postgres</code> user. You will need to <code class="highlighter-rouge">sudo -iu postgres</code> first, and then you can run <code class="highlighter-rouge">psql galaxy</code>. The database will currently be empty as Galaxy has never connected to it yet. Once you install Galaxy in the next step, the database will be populated.</p>
+
+<h2 id="galaxy">Galaxy</h2>
+
+<p>Next we will dive right in to deploying a copy of Galaxy onto our server, but it will just be a static copy of the code without anything running.</p>
+
+<p>For a normal Galaxy instance there are a few configuration changes you make very early during deployment:</p>
+
+<ul>
+  <li>Changing the database connection</li>
+  <li>Configuring the admin user list</li>
+  <li>Changing the “brand”</li>
+</ul>
+
+<p>Additionally we’ll go ahead and set up the production-ready <a href="https://uwsgi-docs.readthedocs.io/en/latest/Mules.html">uWSGI Mules</a> which will handle processing Galaxy jobs. With Mules, uWSGI launches as many as you request, and then they take turns placing a lock, accepting a job, releasing that lock, and then going on to process that job.</p>
+
+<p>Finally, best admin practices are to not run Galaxy as a user with <code class="highlighter-rouge">sudo</code> access, like your login user probably has. Additionally, it is best to install the Galaxy code and configs as a separate user, for security purposes. So we will instruct the <code class="highlighter-rouge">galaxyproject.galaxy</code> role to create a new user account specifically to run Galaxy under.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-mules-are-not-the-only-option"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Mules are not the only option</h3>
+
+  <p>Galaxy can be run in a <a href="https://docs.galaxyproject.org/en/master/admin/scaling.html#deployment-options">couple of other configurations</a> depending on your needs. Mules are generally a good solution for most production needs.</p>
+
+</blockquote>
+
+<p>The configuration is quite simple thanks to the many sensible defaults that are provided in the Ansible roles.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-minimal-galaxy-playbook-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Minimal Galaxy Playbook</h3>
+
+  <ol>
+    <li>
+      <p>Open <code class="highlighter-rouge">playbook.yml</code> with your text editor and set the following:</p>
+
+      <ul>
+        <li>Amend the dependency installation pre-task to install additional necessary dependencies: git, python-virtualenv, make</li>
+        <li>Add the role <code class="highlighter-rouge">galaxyproject.galaxy</code> to the roles to be executed, at the end</li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="question-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>How does your final configuration look?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">galaxyservers</span>
+  <span class="na">pre_tasks</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install Dependencies</span>
+      <span class="na">package</span><span class="pi">:</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">python-psycopg2'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">git'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">python-virtualenv'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">make'</span><span class="pi">]</span>
+  <span class="na">roles</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">galaxyproject.repos</span>
+    <span class="pi">-</span> <span class="s">galaxyproject.postgresql</span>
+    <span class="pi">-</span> <span class="na">role</span><span class="pi">:</span> <span class="s">natefoo.postgresql_objects</span>
+      <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
+      <span class="na">become_user</span><span class="pi">:</span> <span class="s">postgres</span>
+    <span class="pi">-</span> <span class="s">galaxyproject.galaxy</span>
+</code></pre></div>          </div>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>Edit your group variables file for your group (<code class="highlighter-rouge">group_vars/galaxyservers.yml</code>).</p>
+
+      <p>We need to set the following variables:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Value</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="highlighter-rouge">galaxy_create_user</code></td>
+            <td><code class="highlighter-rouge">true</code></td>
+            <td>Instruct the role to create a Galaxy user</td>
+          </tr>
+          <tr>
+            <td><code class="highlighter-rouge">galaxy_separate_privileges</code></td>
+            <td><code class="highlighter-rouge">true</code></td>
+            <td>Enable separation mode to install the Galaxy code as <code class="highlighter-rouge">root</code> but run the Galaxy server as <code class="highlighter-rouge">galaxy</code></td>
+          </tr>
+          <tr>
+            <td><code class="highlighter-rouge">galaxy_manage_paths</code></td>
+            <td><code class="highlighter-rouge">true</code></td>
+            <td>Instruct thre role to create the needed directories.</td>
+          </tr>
+          <tr>
+            <td><code class="highlighter-rouge">galaxy_layout</code></td>
+            <td><code class="highlighter-rouge">root-dir</code></td>
+            <td>This enables the <code class="highlighter-rouge">galaxy_root</code> Galaxy deployment layout:all of the code, configuration, and data folders will live beneath <code class="highlighter-rouge">galaxy_root</code>.</td>
+          </tr>
+          <tr>
+            <td><code class="highlighter-rouge">galaxy_root</code></td>
+            <td><code class="highlighter-rouge">/srv/galaxy</code></td>
+            <td>This is the root of the Galaxy deployment.</td>
+          </tr>
+          <tr>
+            <td><code class="highlighter-rouge">galaxy_file_path</code></td>
+            <td><code class="highlighter-rouge">/data</code></td>
+            <td>The directory where Galaxy datasets (user data) will be stored. On a real deployment, this would likely be a mounted network filesystem.</td>
+          </tr>
+          <tr>
+            <td><code class="highlighter-rouge">galaxy_user</code></td>
+            <td><code class="highlighter-rouge">{name: galaxy, shell: /bin/bash}</code></td>
+            <td>The user that Galaxy will run as.</td>
+          </tr>
+          <tr>
+            <td><code class="highlighter-rouge">galaxy_commit_id</code></td>
+            <td><code class="highlighter-rouge">release_18.09</code></td>
+            <td>The git reference to check out, which in this case is the <br />branch for Galaxy Release 18.09.</td>
+          </tr>
+          <tr>
+            <td><code class="highlighter-rouge">galaxy_config_style</code></td>
+            <td><code class="highlighter-rouge">yaml</code></td>
+            <td>We want to opt-in to the new style YAML configuration.</td>
+          </tr>
+          <tr>
+            <td><code class="highlighter-rouge">galaxy_force_checkout</code></td>
+            <td><code class="highlighter-rouge">true</code></td>
+            <td>If we make any modifications to the Galaxy codebase, they will be removed. This way we know we’re getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.</td>
+          </tr>
+          <tr>
+            <td><code class="highlighter-rouge">check_migrate_tools</code></td>
+            <td><code class="highlighter-rouge">false</code></td>
+            <td>Must be set to false in this case due to a new install of Galaxy</td>
+          </tr>
+        </tbody>
+      </table>
+    </li>
+    <li>
+      <p>Again edit the group variables file and add a variable for <code class="highlighter-rouge">galaxy_config</code>. It will be a hash with one key, <code class="highlighter-rouge">galaxy</code> which will also be a hash. Inside here you can place all of your Galaxy configuration.</p>
+
+      <p>So tthe structure looks like:</p>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config</span><span class="pi">:</span>
+   <span class="na">galaxy</span><span class="pi">:</span>
+       <span class="na">key</span><span class="pi">:</span> <span class="s">value</span>
+</code></pre></div>      </div>
+
+      <p>Now you should set:</p>
+      <ol>
+        <li><code class="highlighter-rouge">admin_users</code> to the email address you will use with this Galaxy.</li>
+        <li><code class="highlighter-rouge">brand</code> to something fun!</li>
+        <li><code class="highlighter-rouge">database_connection</code> to point to the database you setup earlier (<code class="highlighter-rouge">postgresql:///galaxy?host=/var/run/postgresql</code>)</li>
+        <li><code class="highlighter-rouge">file_path</code> to a place to store data, <code class="highlighter-rouge">/data</code> for this lesson.</li>
+      </ol>
+
+      <blockquote class="question">
+        <h3 id="question-question-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>How does your current group variables file look?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="c1"># PostgreSQL</span>
+<span class="na">postgresql_objects_users</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">galaxy</span>
+    <span class="na">password</span><span class="pi">:</span> <span class="no">null</span>
+<span class="na">postgresql_objects_databases</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">galaxy</span>
+    <span class="na">owner</span><span class="pi">:</span> <span class="s">galaxy</span>
+
+<span class="c1"># Galaxy</span>
+<span class="na">galaxy_create_user</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">galaxy_separate_privileges</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">galaxy_manage_paths</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">galaxy_layout</span><span class="pi">:</span> <span class="s">root-dir</span>
+<span class="na">galaxy_root</span><span class="pi">:</span> <span class="s">/srv/galaxy</span>
+<span class="na">galaxy_file_path</span><span class="pi">:</span> <span class="s">/data</span>
+<span class="na">galaxy_user</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">galaxy</span>
+  <span class="na">shell</span><span class="pi">:</span> <span class="s">/bin/bash</span>
+<span class="na">galaxy_commit_id</span><span class="pi">:</span> <span class="s">release_18.09</span>
+<span class="na">galaxy_config_style</span><span class="pi">:</span> <span class="s">yaml</span>
+<span class="na">galaxy_force_checkout</span><span class="pi">:</span> <span class="no">true</span>
+
+<span class="na">galaxy_config</span><span class="pi">:</span>
+  <span class="na">galaxy</span><span class="pi">:</span>
+    <span class="na">brand</span><span class="pi">:</span> <span class="s2">"</span><span class="s">My</span><span class="nv"> </span><span class="s">Galaxy"</span>
+    <span class="na">admin_users</span><span class="pi">:</span> <span class="s">admin@example.com</span>
+    <span class="na">database_connection</span><span class="pi">:</span> <span class="s2">"</span><span class="s">postgresql:///galaxy?host=/var/run/postgresql"</span>
+    <span class="na">file_path</span><span class="pi">:</span> <span class="s">/data</span>
+    <span class="na">check_migrate_tools</span><span class="pi">:</span> <span class="no">false</span>
+</code></pre></div>          </div>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>In order to use mule messaging, we need to edit the uWSGI configuration of Galaxy. This has a default value, but we will have to override it. Add the following configuration as a child of the <code class="highlighter-rouge">galaxy_config</code> variable:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">uwsgi</span><span class="pi">:</span>
+  <span class="c1"># Default values</span>
+  <span class="na">http</span><span class="pi">:</span> <span class="s">0.0.0.0:8080</span>
+  <span class="na">buffer-size</span><span class="pi">:</span> <span class="s">16384</span>
+  <span class="na">processes</span><span class="pi">:</span> <span class="s">1</span>
+  <span class="na">threads</span><span class="pi">:</span> <span class="s">4</span>
+  <span class="na">offload-threads</span><span class="pi">:</span> <span class="s">2</span>
+  <span class="na">static-map</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">/static/style={{ galaxy_server_dir }}/static/style/blue</span>
+    <span class="pi">-</span> <span class="s">/static={{ galaxy_server_dir }}/static</span>
+  <span class="na">master</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">virtualenv</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_venv_dir</span><span class="nv"> </span><span class="s">}}"</span>
+  <span class="na">pythonpath</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_server_dir</span><span class="nv"> </span><span class="s">}}/lib"</span>
+  <span class="na">module</span><span class="pi">:</span> <span class="s">galaxy.webapps.galaxy.buildapp:uwsgi_app()</span>
+  <span class="na">thunder-lock</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">die-on-term</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">hook-master-start</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">unix_signal:2 gracefully_kill_them_all</span>
+    <span class="pi">-</span> <span class="s">unix_signal:15 gracefully_kill_them_all</span>
+  <span class="na">py-call-osafterfork</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">enable-threads</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="c1"># Our additions</span>
+  <span class="na">mule</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">lib/galaxy/main.py</span>
+    <span class="pi">-</span> <span class="s">lib/galaxy/main.py</span>
+  <span class="na">farm</span><span class="pi">:</span> <span class="s">job-handlers:1,2</span>
+</code></pre></div>      </div>
+
+      <blockquote class="question">
+        <h3 id="question-question-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>How does your current group variables file look?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">...</span>
+<span class="na">galaxy_config</span><span class="pi">:</span>
+  <span class="na">galaxy</span><span class="pi">:</span>
+    <span class="na">brand</span><span class="pi">:</span> <span class="s2">"</span><span class="s">My</span><span class="nv"> </span><span class="s">Galaxy"</span>
+    <span class="na">admin_users</span><span class="pi">:</span> <span class="s">admin@example.com</span>
+    <span class="na">database_connection</span><span class="pi">:</span> <span class="s2">"</span><span class="s">postgresql:///galaxy?host=/var/run/postgresql"</span>
+    <span class="na">file_path</span><span class="pi">:</span> <span class="s">/data</span>
+    <span class="na">check_migrate_tools</span><span class="pi">:</span> <span class="no">false</span>
+  <span class="na">uwsgi</span><span class="pi">:</span>
+    <span class="s">...</span>
+    <span class="s">mule</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">lib/galaxy/main.py</span>
+      <span class="pi">-</span> <span class="s">lib/galaxy/main.py</span>
+    <span class="na">farm</span><span class="pi">:</span> <span class="s">job-handlers:1,2</span>
+</code></pre></div>          </div>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>Run the playbook.</p>
+
+      <p><code class="highlighter-rouge">ansible-playbook -i hosts playbook.yml</code></p>
+    </li>
+    <li>
+      <p>SSH into your server and explore what has been set up for you.</p>
+      <ul>
+        <li>Galaxy has been deployed to <code class="highlighter-rouge">/srv/galaxy/server</code></li>
+        <li>The configuration lives in <code class="highlighter-rouge">/srv/galaxy/config/galaxy.yml</code> - be sure to look through it to see what default options have been set for you</li>
+        <li>Note the permissions of the contents of <code class="highlighter-rouge">/srv/galaxy</code></li>
+        <li>Some config files that Galaxy maintains itself, such as <code class="highlighter-rouge">shed_tool_conf.xml</code>, which controls what tools that you have installed from the Tool Shed will be loaded, have been instantiated in <code class="highlighter-rouge">/srv/galaxy/var/config</code></li>
+        <li>A Python virtualenv - an isolated Python environment - with all of the Galaxy framework’s dependencies has been installed in <code class="highlighter-rouge">/srv/galaxy/venv</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-ansiblecfg"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: ansible.cfg</h3>
+  <p>Typing <code class="highlighter-rouge">-i hosts</code> every time can be a bit repetitive, you can save having to type this flag by creating an <code class="highlighter-rouge">ansible.cfg</code> file (next to your playbook) with the following contents:</p>
+
+  <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[defaults]</span>
+<span class="py">inventory</span> <span class="p">=</span> <span class="s">hosts</span>
+</code></pre></div>  </div>
+
+  <p>There are some additional useful options that you might want to add to your <code class="highlighter-rouge">ansible.cfg</code> file:</p>
+
+  <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[ssh_connection]</span>
+<span class="py">pipelining</span> <span class="p">=</span> <span class="s">true</span>
+<span class="nn">[defaults]</span>
+<span class="py">retry_files_enabled</span> <span class="p">=</span> <span class="s">false</span>
+</code></pre></div>  </div>
+
+  <p>Pipelining will make <a href="https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining">ansible run faster</a> by significantly reducing the number of new SSH connections that must be opened. Setting <code class="highlighter-rouge">retry_files_enabled = false</code> will prevent Ansible from creating <code class="highlighter-rouge">playbook.retry</code> files whenever a playbook crashes before finishing. These are rarely useful for the cases in which we run Ansible.</p>
+
+  <p>For users running with the local connection, you can specify this in your <code class="highlighter-rouge">hosts</code> file:</p>
+
+  <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[galaxyservers]</span>
+<span class="err">localhost</span> <span class="py">ansible_connection</span><span class="p">=</span><span class="s">local</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Galaxy is now configured with an admin user, a database, and a place to store data. Additionally we’ve immediately configured the mules for production Galaxy serving. So we’re ready to set up supervisord which will manage the Galaxy processes!</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-optional-launching-uwsgi-by-hand"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: (Optional) Launching uWSGI by hand</h3>
+
+  <ol>
+    <li>SSH into your server</li>
+    <li>Switch user to Galaxy account (<code class="highlighter-rouge">sudo -iu galaxy</code>)</li>
+    <li>Change directory into <code class="highlighter-rouge">/srv/galaxy/server</code></li>
+    <li>Activate virtualenv (<code class="highlighter-rouge">. ../venv/bin/activate</code>)</li>
+    <li><code class="highlighter-rouge">uwsgi --yaml ../config/galaxy.yml</code></li>
+    <li>Accces at port <code class="highlighter-rouge">&lt;ip address&gt;:8080</code> once the server has started</li>
+  </ol>
+</blockquote>
+
+<h3 id="supervisord">Supervisord</h3>
+
+<p>Launching Galaxy by hand is not a good use of your time, so we will immediately switch to a process manager for that, <a href="http://supervisord.org/">supervisord</a>. If you’re familiar with systemd, supervisord does many of the same things. We use supervisord instead of the native init system as it supports some of Galaxy’s use cases better and was fully featured long before SystemD became common.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-supervisord"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Supervisord</h3>
+
+  <ol>
+    <li>
+      <p>Add the roles <code class="highlighter-rouge">geerlingguy.pip</code> and <code class="highlighter-rouge">usegalaxy-eu.supervisor</code> to your playbook, these need to install things and should run as the root user.</p>
+    </li>
+    <li>
+      <p>Supervisor defines <code class="highlighter-rouge">programs</code> which should be executed with additional metadata like whether or not they should be restarted, what user they should run as, etc. Just like any other init system like SystemD. We will define a program for Galaxy which will directly invoke uWSGI, rather than run.sh, as run.sh does some additional tasks we do not need to do on every Galaxy start (e.g. rebuilding the client). For some setups like zerglings it is required that you use supervisord as you need to start multiple processes.</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">supervisor_programs</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">galaxy</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s">present</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">uwsgi --yaml {{ galaxy_config_dir }}/galaxy.yml</span>
+    <span class="na">configuration</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="no">autostart=true</span>
+      <span class="no">autorestart=true</span>
+      <span class="no">startretries=1</span>
+      <span class="no">startsecs=10</span>
+      <span class="no">user=galaxy</span>
+      <span class="no">umask=022</span>
+      <span class="no">directory={{ galaxy_server_dir }}</span>
+      <span class="no">environment=HOME={{ galaxy_mutable_data_dir }},VIRTUAL_ENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:%(ENV_PATH)s</span>
+</code></pre></div>      </div>
+
+      <p>Here we’ve defined a <code class="highlighter-rouge">galaxy</code> command that should be <code class="highlighter-rouge">present</code>. It will run the command <code class="highlighter-rouge">uwsgi ...</code> and is set to automatically start when supervisord starts and restart if it crashes, with 1 second between the retries. It will wait 10 seconds to see if the program has not crashed, and if it reaches this threshold it will be marked as <code class="highlighter-rouge">running</code>. It starts as the galaxy user with a umask of <code class="highlighter-rouge">022</code> (files created will be world readable by default). Its working directory on startup is the root of the Galaxy (cloned) code, and will run with the defined environment variables set.</p>
+    </li>
+    <li>
+      <p>Now that we have defined a process manager for Galaxy, we can also instruct <code class="highlighter-rouge">galaxyproject.galaxy</code> to use Supervisor to restart it when Galaxy is upgraded or config changes are made. To do so, open <code class="highlighter-rouge">playbook.yml</code> and add a <code class="highlighter-rouge">handlers:</code> section at the same level as <code class="highlighter-rouge">pre_tasks:</code> and <code class="highlighter-rouge">roles:</code>, and add a task to restart Galaxy using the <a href="https://docs.ansible.com/ansible/latest/modules/supervisorctl_module.html">supervisorctl Ansible module</a>. Handlers are structured just like tasks:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">galaxyservers</span>
+  <span class="na">pre_tasks</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install Dependencies</span>
+      <span class="na">package</span><span class="pi">:</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">python-psycopg2'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">git'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">python-virtualenv'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">make'</span><span class="pi">]</span>
+  <span class="na">handlers</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Restart Galaxy</span>
+      <span class="na">supervisorctl</span><span class="pi">:</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">galaxy</span>
+        <span class="na">state</span><span class="pi">:</span> <span class="s">restarted</span>
+  <span class="na">roles</span><span class="pi">:</span>
+    <span class="s">...</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Open your group variables file and we’ll add some variables for supervisor. Supervisor communicates over a unix or tcp socket; we will use the unix socket without password authentication, instead using user/group authentication. We will thus need to set a couple of variables to allow our Galaxy user to access this. Additionally, we need to inform <code class="highlighter-rouge">galaxyproject.galaxy</code> what the name of our new handler is. Add the following to your group variables file:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">supervisor_socket_user</span><span class="pi">:</span> <span class="s">galaxy</span>
+<span class="na">supervisor_socket_chown</span><span class="pi">:</span> <span class="s">galaxy</span>
+<span class="na">galaxy_restart_handler_name</span><span class="pi">:</span> <span class="s">Restart Galaxy</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Log in and check the status with <code class="highlighter-rouge">supervisorctl status</code> (remember to change to the Galaxy user)</p>
+
+      <blockquote class="question">
+        <h3 id="question-question-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>How does the output look?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>If everything went correctly you should see something like</p>
+
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">galaxy                  RUNNING   pid 2246972, uptime 0:02:00</span>
+</code></pre></div>          </div>
+
+        </blockquote>
+
+      </blockquote>
+
+      <p>Take a look at the supervisor configs that have been written in <code class="highlighter-rouge">/etc/supervisor</code> and <code class="highlighter-rouge">/etc/supervisor/conf.d</code>.</p>
+    </li>
+    <li>
+      <p>Some things to note:</p>
+
+      <ol>
+        <li>Refreshing the page before Galaxy has restarted will hang, which is a nice feature of uWSGI</li>
+        <li>Although the playbook will restart Galaxy upon config changes, you will sometimes need to restart it by hand, which can be done with <code class="highlighter-rouge">supervisorctl restart galaxy</code></li>
+        <li>You can use <code class="highlighter-rouge">supervisorctl tail -f galaxy</code> and <code class="highlighter-rouge">supervisorctl tail -f galaxy stderr</code> to see the logs of Galaxy</li>
+      </ol>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Galaxy should now be accessible over port :8080, again try connecting to your VM now and checking that Galaxy is working. Note that the welcome page is broken, this is a known issue, and a good reminder to write your own :)</p>
+
+<h3 id="nginx">NGINX</h3>
+
+<p>With this we have:</p>
+
+<ul>
+  <li>PostgreSQL running</li>
+  <li>Galaxy running (managed by supervisord)</li>
+</ul>
+
+<p>When we first configured Galaxy, we used the setting <code class="highlighter-rouge">http: 0.0.0.0:8080</code>, which instructed uWSGI to handle the serving of Galaxy, and to process the HTTP requests itself. This has some overhead and is not as efficient as is desired in production. So we will set up a reverse proxy to handle the HTTP processing, and translate this into the more efficient uWSGI protocol. Additionally it can handle serving static files for us without the requests going through uWSGI, allowing it to spend more time on useful tasks like processing jobs.</p>
+
+<p>For this, we will use NGINX. It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-nginx"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: NGINX</h3>
+
+  <ol>
+    <li>
+      <p>Edit your <code class="highlighter-rouge">group_vars/galaxyservers.yml</code>, we will update the line that <code class="highlighter-rouge">http: 0.0.0.0:8080</code> to be <code class="highlighter-rouge">socket: 127.0.0.1:8080</code>. This will cause uWSGI to only respond to uWSGI protocol, and only to requests originating on localhost.</p>
+    </li>
+    <li>
+      <p>Add the role <code class="highlighter-rouge">geerlingguy.nginx</code> to your playbook and have it run as root.</p>
+    </li>
+    <li>
+      <p>We will set a convenience variable, <code class="highlighter-rouge">hostname</code>, to refer to our VM. If you have a DNS entry for your server, add <code class="highlighter-rouge">hostname: &lt;your server name&gt;</code> to your group variables. Otherwise, add <code class="highlighter-rouge">hostname: "{{ ansible_hostname }}"</code>.</p>
+    </li>
+    <li>
+      <p>We need to configure the virtualhost. This is a slightly more complex process as we have to write the proxying configuration ourselves. This may seem annoying, but it is often the case that sites have individual needs to cater to, and it is difficult to provide a truly generic webserver configuration.</p>
+
+      <p>Add the following to your group variables file:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">nginx_package_name</span><span class="pi">:</span> <span class="s">nginx-full</span> <span class="c1"># nginx-galaxy on RHEL/CentOS</span>
+<span class="na">nginx_remove_default_vhost</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">nginx_server_names_hash_bucket_size</span><span class="pi">:</span> <span class="s2">"</span><span class="s">128"</span>
+<span class="na">nginx_vhosts</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">listen</span><span class="pi">:</span> <span class="s2">"</span><span class="s">80"</span>
+    <span class="na">server_name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}"</span>
+    <span class="na">root</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/var/www/{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}"</span>
+    <span class="na">index</span><span class="pi">:</span> <span class="s2">"</span><span class="s">index.html"</span>
+    <span class="na">access_log</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/var/log/nginx/access.log"</span>
+    <span class="na">error_log</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/var/log/nginx/error.log"</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">present"</span>
+    <span class="na">filename</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}.conf"</span>
+    <span class="na">extra_parameters</span><span class="pi">:</span> <span class="pi">|</span>
+        <span class="no">client_max_body_size 10G; # aka max upload size, defaults to 1M</span>
+        <span class="no">uwsgi_read_timeout 2400;</span>
+
+        <span class="no">location / {</span>
+            <span class="no">uwsgi_pass      127.0.0.1:8080;</span>
+            <span class="no">uwsgi_param UWSGI_SCHEME $scheme;</span>
+            <span class="no">include         uwsgi_params;</span>
+        <span class="no">}</span>
+
+
+        <span class="no">location /static {</span>
+                <span class="no">alias {{ galaxy_server_dir }}/static;</span>
+                <span class="no">expires 24h;</span>
+        <span class="no">}</span>
+
+        <span class="no">location /static/style {</span>
+                <span class="no">alias {{ galaxy_server_dir }}/static/style/blue;</span>
+                <span class="no">expires 24h;</span>
+        <span class="no">}</span>
+
+        <span class="no">location /static/scripts {</span>
+                <span class="no">alias {{ galaxy_server_dir }}/static/scripts;</span>
+                <span class="no">expires 24h;</span>
+        <span class="no">}</span>
+
+        <span class="no">location /robots.txt {</span>
+                <span class="no">alias {{ galaxy_server_dir }}/static/robots.txt;</span>
+        <span class="no">}</span>
+
+        <span class="no">location /favicon.ico {</span>
+                <span class="no">alias {{ galaxy_server_dir }}/static/favicon.ico;</span>
+        <span class="no">}</span>
+
+        <span class="no">location /static/welcome.html {</span>
+                <span class="no">alias {{ galaxy_server_dir }}/static/welcome.html.sample;</span>
+        <span class="no">}</span>
+</code></pre></div>      </div>
+
+      <p>This is a lot of configuration but it is not very complex to understand. We’ll go through it step by step:</p>
+
+      <p>This snippet says that the role should install the nginx-full package rather than the normal <code class="highlighter-rouge">nginx</code> package. Earlier we added the role <code class="highlighter-rouge">galaxyproject.repos</code>, this role gave us access to the Galaxy Project’s APT and YUM repositories.</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">nginx_package_name</span><span class="pi">:</span> <span class="s">nginx-full</span> <span class="c1"># nginx-galaxy on RHEL/CentOS</span>
+<span class="na">nginx_remove_default_vhost</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">nginx_server_names_hash_bucket_size</span><span class="pi">:</span> <span class="s2">"</span><span class="s">128"</span>
+</code></pre></div>      </div>
+
+      <p>Here we define a virtual host, usually used to respond on multiple hostnames with different content. In our case we only have a single virtualhost.</p>
+
+      <p>The value of <code class="highlighter-rouge">server_name</code> does not need to be a valid domain name in our case, because we only have a single virtualhost. Normally NGINX will try and match the hostname to the server_name, but in the case there is no match it will route it to the default server for that port, which is the first one defined.</p>
+
+      <p>Additionally we specify log files and a directory for static files which will never be used.</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">nginx_vhosts</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">listen</span><span class="pi">:</span> <span class="s2">"</span><span class="s">80"</span>
+    <span class="na">server_name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}"</span>
+    <span class="na">root</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/var/www/{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}"</span>
+    <span class="na">index</span><span class="pi">:</span> <span class="s2">"</span><span class="s">index.html"</span>
+    <span class="na">access_log</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/var/log/nginx/access.log"</span>
+    <span class="na">error_log</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/var/log/nginx/error.log"</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">present"</span>
+    <span class="na">filename</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}.conf"</span>
+</code></pre></div>      </div>
+
+      <p>Lastly we specify the “extra parameters” for this virtualhost which are included within the configuration file.</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">extra_parameters</span><span class="pi">:</span> <span class="pi">|</span>
+        <span class="no">client_max_body_size 10G; # aka max upload size, defaults to 1M</span>
+        <span class="no">uwsgi_read_timeout 2400;  # Wait up to 40 minutes for requests to timeout.</span>
+
+        <span class="no">location / {</span>
+            <span class="no">uwsgi_pass      127.0.0.1:8080;    # Proxy our requests to port 8080, just like we defined in our Galaxy group variables for the uWSGI configuration</span>
+            <span class="no">uwsgi_param UWSGI_SCHEME $scheme;  # Passes the scheme (http or https) to the uWSGI application. Used in generating links.</span>
+            <span class="no">include         uwsgi_params;      # Include some default uwsgi settings</span>
+        <span class="no">}</span>
+
+        <span class="no"># Proxy any requests for static content directly to their folders on disk</span>
+        <span class="no">location /static {</span>
+                <span class="no">alias {{ galaxy_server_dir }}/static;</span>
+                <span class="no">expires 24h;</span>
+        <span class="no">}</span>
+
+        <span class="no">location /static/style {</span>
+                <span class="no">alias {{ galaxy_server_dir }}/static/style/blue;</span>
+                <span class="no">expires 24h;</span>
+        <span class="no">}</span>
+
+        <span class="no">location /static/scripts {</span>
+                <span class="no">alias {{ galaxy_server_dir }}/static/scripts;</span>
+                <span class="no">expires 24h;</span>
+        <span class="no">}</span>
+
+        <span class="no">location /robots.txt {</span>
+                <span class="no">alias {{ galaxy_server_dir }}/static/robots.txt;</span>
+        <span class="no">}</span>
+
+        <span class="no">location /favicon.ico {</span>
+                <span class="no">alias {{ galaxy_server_dir }}/static/favicon.ico;</span>
+        <span class="no">}</span>
+
+        <span class="no">location /static/welcome.html {</span>
+                <span class="no">alias {{ galaxy_server_dir }}/static/welcome.html.sample;</span>
+        <span class="no">}</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RUNNING HANDLER [restart galaxy] ****************************************
+changed: [galaxy.example.org]
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Check out the changes made to your server in <code class="highlighter-rouge">/etc/nginx</code>, particularly the directory containing the Galaxy virtualhost.</p>
+    </li>
+    <li>
+      <p>Your Galaxy should now be accessible and served efficiently! Try registering (using the admin email from earlier) and maybe executing a couple of jobs. The author’s favourite tool (speaking as an admin) is the <code class="highlighter-rouge">secure hash digest</code> tool, it’s perfect for testing.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="proftpd">ProFTPD</h2>
+
+<p>With a large Galaxy instance, users will often request FTP access in order to upload large data sets. The <a href="http://proftpd.org/">ProFTPD</a> server works well for Galaxy, it can leverage an SQL authentication module, to allow users to login to the FTP server with their normal Galaxy username and password.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-proftpd"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: ProFTPD</h3>
+
+  <ol>
+    <li>
+      <p>Add the role <code class="highlighter-rouge">galaxyproject.proftpd</code> to your playbook and have it run as root.</p>
+    </li>
+    <li>
+      <p>Add a <code class="highlighter-rouge">pre_task</code> to <a href="https://docs.ansible.com/ansible/2.5/modules/file_module.html#file-module">create the FTP directory</a>, owned by galaxy:galaxy, with mode <code class="highlighter-rouge">0750</code>.</p>
+    </li>
+    <li>
+      <p>Edit the group variables file, we will define some variables for the proftpd role:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_ftp_upload_dir</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_root</span><span class="nv"> </span><span class="s">}}/ftp"</span>
+<span class="na">proftpd_display_connect</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="no">Unauthorized access is prohibited</span>
+<span class="na">proftpd_galaxy_auth</span><span class="pi">:</span> <span class="s">yes</span>
+<span class="na">__galaxy_user_name</span><span class="pi">:</span> <span class="s">galaxy</span>
+<span class="na">proftpd_options</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">User</span><span class="pi">:</span> <span class="s">galaxy</span>
+  <span class="pi">-</span> <span class="na">Group</span><span class="pi">:</span> <span class="s">galaxy</span>
+<span class="na">proftpd_sql_user</span><span class="pi">:</span> <span class="s">galaxy</span>
+<span class="na">proftpd_sql_db</span><span class="pi">:</span> <span class="s">galaxy@/var/run/postgresql</span>
+
+<span class="na">proftpd_virtualhosts</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">galaxy</span>
+    <span class="na">address</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}"</span>
+    <span class="na">options</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">ServerAdmin</span><span class="pi">:</span> <span class="s">admin@example.com</span>
+      <span class="pi">-</span> <span class="na">ServerName</span><span class="pi">:</span> <span class="s">Galaxy FTP</span>
+      <span class="pi">-</span> <span class="na">TransferLog</span><span class="pi">:</span> <span class="s">/var/log/proftpd/xfer.log</span>
+      <span class="pi">-</span> <span class="na">MaxLoginAttempts</span><span class="pi">:</span> <span class="s">3</span>
+      <span class="pi">-</span> <span class="na">RequireValidShell</span><span class="pi">:</span> <span class="s">no</span>
+      <span class="pi">-</span> <span class="na">AllowOverwrite</span><span class="pi">:</span> <span class="s">yes</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>And additionally two changes to the Galaxy configuration portion:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">...</span>
+<span class="na">galaxy_config</span><span class="pi">:</span>
+  <span class="na">galaxy</span><span class="pi">:</span>
+    <span class="s">...</span>
+    <span class="s">ftp_upload_dir</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_ftp_upload_dir</span><span class="nv"> </span><span class="s">}}"</span>
+    <span class="na">ftp_upload_site</span><span class="pi">:</span> <span class="s2">"</span><span class="s">ftp://{{</span><span class="nv"> </span><span class="s">hostname}}"</span>
+    <span class="s">...</span>
+  <span class="na">uwsgi</span><span class="pi">:</span> <span class="s">...</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Apply the playbook.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<p>With this, users can see an “Upload via FTP” button in their upload interface, and they can upload their data using Filezilla or other preferred FTP client.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-active-vs-passive"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Active vs Passive</h3>
+  <p>If connecting does not work, try forcing your client to use active FTP, university firewalls often have issues with passive FTP.</p>
+</blockquote>
+
+<h2 id="disaster-strikes">Disaster Strikes!</h2>
+
+<p>Because you’re an admin, you need to be prepared for any situation, including the worst case scenarios. So we’re going to simulate a disaster and show you how you can recover from it. It’ll be fun!</p>
+
+<p>For this “disaster”, we will pretend that:</p>
+
+<ol>
+  <li>Your database is on another machine</li>
+  <li>Your datasets are on an NFS server or some other remote machine.</li>
+</ol>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-summon-the-apocalypse"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Summon the Apocalypse</h3>
+
+  <p>So let’s have a “worst case scenario”, where your Galaxy server gets destroyed</p>
+
+  <ol>
+    <li>Log on to your machine.</li>
+    <li><strong>Carefully</strong>, as root, <code class="highlighter-rouge">rm -rf /srv/galaxy</code>, completely wipe out your Galaxy home directory.</li>
+  </ol>
+
+</blockquote>
+
+<p>Your entire Galaxy server is gone. You were a responsible admin and had your user data and database stored on a separate system (and backed up), so at least those survived. Nevertheless, this is when most of us start feeling really bad; bosses start yelling, we start crying or reaching for bad coping habits.</p>
+
+<p>But not you! You spent the day writing this Ansible playbook that describes your environment completely; all of the software that was installed, all of the configuration changes you’ve made. It leverages many community maintained roles and can be used to completely rebuild the server! With minimal effort on your part.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-revert-the-apocalypse"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Revert the Apocalypse</h3>
+
+  <ol>
+    <li><code class="highlighter-rouge">ansible-playbook -i hosts playbook.yml</code></li>
+  </ol>
+
+</blockquote>
+
+<p>And with that, Galaxy should be up and running again. If you log in, you should see the results of any jobs you ran earlier, you should still be able to login with your old account, everything should just work.</p>
+
+<p>Ansible can save you from some really bad scenarios, <em>if and only if</em>:</p>
+
+<ul>
+  <li>You can replace the hardware or find somewhere new to re-deploy</li>
+  <li>You’ve made absolutely certain that every change made to a system is recorded within your playbooks and roles (i.e. no manual package installation)</li>
+</ul>
+
+<p>Then you can potentially use it to recover.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-we-have-experience"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: We have experience</h3>
+
+  <p>We can tell you this, we can repeat it over and over, but unless you really have a disaster happen to you, it is hard to appreciate how important it is that machines are completely controlled in terms of configuration and software deployment.</p>
+
+  <p>We’ve experienced these incidents and we know how horribly stressful it can be if an important service like Galaxy goes down and you cannot immediately replace it with another instance. We hope you will immediately apply the lessons from this training material, it can potentially save you a lot of stress and worry.</p>
+
+</blockquote>
+
+<h2 id="optional-securing-your-instance">(Optional) Securing your Instance</h2>
+
+<p>Now that you’ve gotten through the worst case scenario, we’ll attack the next worst case scenario, auditors! They’ve shown up and demanded that everything have valid SSL certificates.</p>
+
+<p>Tnmhhis step uses <a href="https://letsencrypt.org/">Let’s Encrypt</a> for generating certificates, so it assumes that:</p>
+
+<ol>
+  <li>Your machine is publicly accessible</li>
+  <li>It has a publicly resolvable DNS entry</li>
+</ol>
+
+<p>If you do not meet these requirements, you should read through them to see the changes that are required.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-ssl-certificates-with-lets-encrypt-le"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: SSL Certificates with Let’s Encrypt (LE)!</h3>
+
+  <ol>
+    <li>
+      <p>We need to configure NGINX to proxy requests to LE, because LE needs to authenticate on 443 or 80, and nginx is already bound to 80.</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">location /.well-known/ {</span>
+    <span class="s">proxy_set_header           Host $host:$server_port;</span>
+    <span class="s">proxy_set_header           X-Real-IP $remote_addr;</span>
+    <span class="s">proxy_set_header           X-Forwarded-For $proxy_add_x_forwarded_for;</span>
+    <span class="s">proxy_set_header           X-Forwarded-Proto $scheme;</span>
+    <span class="s">proxy_pass                 http://127.0.0.1:8118;</span>
+    <span class="s">proxy_pass_request_headers on;</span>
+<span class="err">}</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook</p>
+    </li>
+    <li>
+      <p>Add the role <code class="highlighter-rouge">usegalaxy-eu.certbot</code> to your playbook and have it run as root.</p>
+    </li>
+    <li>
+      <p>We need to add some variables for this:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">certbot_auto_renew</span><span class="pi">:</span> <span class="s">yes</span>
+<span class="na">certbot_auto_renew_user</span><span class="pi">:</span> <span class="s">root</span>
+<span class="na">certbot_auto_renew_hour</span><span class="pi">:</span>    <span class="c1"># Pick a number between 0 and 23, inclusive</span>
+<span class="na">certbot_auto_renew_minute</span><span class="pi">:</span>  <span class="c1"># Pick a number between 0 and 59, inclusive</span>
+<span class="na">certbot_auto_renew_extra</span><span class="pi">:</span> <span class="s2">"</span><span class="s">--preferred-challenges</span><span class="nv"> </span><span class="s">http-01</span><span class="nv"> </span><span class="s">--http-01-port</span><span class="nv"> </span><span class="s">8118"</span>
+<span class="na">certbot_environment</span><span class="pi">:</span> <span class="s">staging</span>
+<span class="na">certbot_domains</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}"</span>
+<span class="na">certbot_agree_tos</span><span class="pi">:</span> <span class="s">--agree-tos</span>
+<span class="na">certbot_admin_email</span><span class="pi">:</span> <span class="s">security@usegalaxy.eu</span>
+<span class="na">certbot_share_key_users</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">nginx</span>
+<span class="na">certbot_post_renewal</span><span class="pi">:</span> <span class="pi">|</span>
+    <span class="no">systemctl restart nginx || true</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>And now we should have valid SSL certificates! We just need to go back and update our various services to support this.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-issues-on-centos"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Issues on CentOS</h3>
+  <p>Check that setenforce is permissive, or allow nginx to connect back to localhost on a non-standard port.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-securing-nginx"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Securing NGINX</h3>
+
+  <ol>
+    <li>
+      <p>Open your group variables, we need to re-structure the NGINX configuration to look like the following. As before we will show you the necessary configuration.</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">nginx_vhosts</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">listen</span><span class="pi">:</span> <span class="s2">"</span><span class="s">80"</span>
+    <span class="na">server_name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}"</span>
+    <span class="na">return</span><span class="pi">:</span> <span class="s2">"</span><span class="s">301</span><span class="nv"> </span><span class="s">https://{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}$request_uri"</span>
+    <span class="na">filename</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}.80.conf"</span>
+
+  <span class="pi">-</span> <span class="na">listen</span><span class="pi">:</span> <span class="s2">"</span><span class="s">443</span><span class="nv"> </span><span class="s">ssl"</span>
+    <span class="na">server_name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}"</span>
+    <span class="na">root</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/var/www/{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}"</span>
+    <span class="na">index</span><span class="pi">:</span> <span class="s2">"</span><span class="s">index.html"</span>
+    <span class="na">access_log</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/var/log/nginx/access.log"</span>
+    <span class="na">error_log</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/var/log/nginx/error.log"</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">present"</span>
+    <span class="na">filename</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}.conf"</span>
+    <span class="na">extra_parameters</span><span class="pi">:</span> <span class="pi">|</span>
+        <span class="no">client_max_body_size 10G; # aka max upload size, defaults to 1M</span>
+        <span class="no">uwsgi_read_timeout 2400;</span>
+
+        <span class="no">location / {</span>
+            <span class="no">uwsgi_pass      127.0.0.1:8080;</span>
+            <span class="no">uwsgi_param UWSGI_SCHEME $scheme;</span>
+            <span class="no">include         uwsgi_params;</span>
+        <span class="no">}</span>
+
+        <span class="no">location /.well-known/ {</span>
+            <span class="no">proxy_set_header           Host $host:$server_port;</span>
+            <span class="no">proxy_set_header           X-Real-IP $remote_addr;</span>
+            <span class="no">proxy_set_header           X-Forwarded-For $proxy_add_x_forwarded_for;</span>
+            <span class="no">proxy_set_header           X-Forwarded-Proto $scheme;</span>
+            <span class="no">proxy_pass                 http://127.0.0.1:8118;</span>
+            <span class="no">proxy_pass_request_headers on;</span>
+        <span class="no">}</span>
+
+        <span class="no">location /static {</span>
+                <span class="no">alias {{ galaxy_server_dir }}/static;</span>
+                <span class="no">expires 24h;</span>
+        <span class="no">}</span>
+
+        <span class="no">location /static/style {</span>
+                <span class="no">alias {{ galaxy_server_dir }}/static/style/blue;</span>
+                <span class="no">expires 24h;</span>
+        <span class="no">}</span>
+
+        <span class="no">location /static/scripts {</span>
+                <span class="no">alias {{ galaxy_server_dir }}/static/scripts;</span>
+                <span class="no">expires 24h;</span>
+        <span class="no">}</span>
+
+        <span class="no">location /robots.txt {</span>
+                <span class="no">alias {{ galaxy_server_dir }}/static/robots.txt;</span>
+        <span class="no">}</span>
+
+        <span class="no">location /favicon.ico {</span>
+                <span class="no">alias {{ galaxy_server_dir }}/static/favicon.ico;</span>
+        <span class="no">}</span>
+
+        <span class="no">location /static/welcome.html {</span>
+                <span class="no">alias {{ galaxy_server_dir }}/static/welcome.html.sample;</span>
+        <span class="no">}</span>
+        <span class="no">ssl_certificate /etc/ssl/certs/cert.pem;</span>
+        <span class="no">ssl_certificate_key /etc/ssl/private/privkey-nginx.pem;</span>
+
+        <span class="no">ssl_protocols TLSv1.2;# Requires nginx &gt;= 1.13.0 else use TLSv1.2</span>
+        <span class="no">ssl_prefer_server_ciphers on;</span>
+        <span class="no">ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384;</span>
+        <span class="no">ssl_ecdh_curve secp384r1;</span>
+        <span class="no">ssl_session_timeout  10m;</span>
+        <span class="no">ssl_session_cache shared:SSL:10m;</span>
+        <span class="no">ssl_session_tickets off;</span>
+        <span class="no">#ssl_stapling on;</span>
+        <span class="no">#ssl_stapling_verify on;</span>
+
+        <span class="no">resolver 8.8.8.8 8.8.4.4 valid=300s;</span>
+        <span class="no">resolver_timeout 5s;</span>
+        <span class="no">add_header X-Content-Type-Options nosniff;</span>
+        <span class="no">add_header X-XSS-Protection "1; mode=block";</span>
+        <span class="no">add_header X-Robots-Tag none;</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Add the following proftpd configuration:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">proftpd_tls_cipher_suite</span><span class="pi">:</span> <span class="s">AES128+EECDH:AES128+EDH</span>
+<span class="na">proftpd_tls_protocol</span><span class="pi">:</span> <span class="s">TLSv1.2</span>
+<span class="na">proftpd_conf_ssl_certificate</span><span class="pi">:</span> <span class="s">/etc/ssl/certs/cert.pem</span>
+<span class="na">proftpd_conf_ssl_certificate_key</span><span class="pi">:</span> <span class="s">/etc/ssl/private/privkey.pem</span>
+<span class="na">proftpd_conf_ssl_ca_certificate</span><span class="pi">:</span> <span class="s">/etc/ssl/certs/fullchain.pem</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="final-notes">Final Notes</h1>
+
+<p>If you’ve been following along you should have a production-ready Galaxy, secured, everything ready to go.</p>
+
+<p>If you missed any steps, you can compare against a reference <a href="./playbook.txt">playbook.yml</a>, and <a href="./galaxyservers.txt">group_vars/galaxyservers.yml</a></p>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+            <ul>
+                
+                <li>Basic deployment with Ansible is surprisingly easy</li>
+                
+                <li>Complexity can grow over time as your organisation does, no need to start with playbooks like UseGalaxy.org</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Galaxy Installation with Ansible (Galaxy Server administration)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Galaxy Installation with Ansible (Galaxy Server administration)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Helena Rasche, Nate Coraor)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/admin/tutorials/ansible-galaxy/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>

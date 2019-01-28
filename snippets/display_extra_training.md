@@ -24,6 +24,8 @@
                 {% endfor %}
             </ul>
         {% endif %}
+    {% elsif training.type == "none" %}
+        {{ training.title }}
     {% else %}
         <a href="{{ training.link }}">{{ training.title }}</a>
     {% endif %}

@@ -420,13 +420,13 @@
 <p>YAML style:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">package</span><span class="pi">:</span>
-    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
-    <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">package_name</span><span class="nv"> </span><span class="s">}}"</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">package_state</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div></div>
 
 <p>And an inline style.</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="s">package name= state=</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="s">package name={{ package_name }} state={{ package_state }}</span>
 </code></pre></div></div>
 
 <p>Some groups prefer one style or another. You can mix both of these but you probably shouldn’t. The inline style does not require quoting of templated values.</p>
@@ -940,7 +940,7 @@ The solution to this is to set <code class="highlighter-rouge">become: true</cod
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install stuff</span>
   <span class="na">package</span><span class="pi">:</span>
-    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">}}"</span>
     <span class="na">state</span><span class="pi">:</span> <span class="s">installed</span>
   <span class="na">with_items</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="s">htop</span>
