@@ -115,7 +115,7 @@ between them and creating new ones. This can be useful to organize different ana
 
 ### Current history controls
 
-![Current history buttons](../../images/current-history-buttons.png)
+![Current history buttons](../../images/introduction-to-cpt-galaxy-screenshots/current-history-buttons.png)
 
 Above the current history panel are three buttons: the refresh, history options, and 'view all histories' button.
 
@@ -140,7 +140,7 @@ All histories begin with the name 'Unnamed history'. Non-anonymous users can ren
 3. Press 'Enter' to save the new name. The input field will disappear and the new name display.
 4. To cancel renaming, press 'Esc' or click outside the input field.
 
-![Renaiming history](../../images/renaming.png)
+![Renaiming history](../../images/introduction-to-cpt-galaxy-screenshots/renaming.png)
 
 ### Tagging a history
 
@@ -158,7 +158,7 @@ To tag a history:
 3. Press enter or select one of the previous tags with your arrow keys or mouse.
 4. To remove an existing tag, click the small 'X' on the tag or use the backspace key while in the input field.
 
-![Using tags](../../images/tags.png)
+![Using tags](../../images/introduction-to-cpt-galaxy-screenshots/tags.png)
 
 ### Annotating a history
 
@@ -176,7 +176,7 @@ To annotate a history:
   entered since the 'Tab' button is used to switch between controls on the page - tabs can be pasted in however).
 4. To save the annotation, click the 'Done' button.
 
-![Annotations to history](../../images/annotations.png)
+![Annotations to history](../../images/introduction-to-cpt-galaxy-screenshots/annotations.png)
 
 ### History size
 
@@ -222,7 +222,7 @@ Near the top, the format is listed as *tabular*. At the bottom of the expanded d
 > * ![](../../images/introduction-to-cpt-galaxy-screenshots/11_save_icon.png) downloads the dataset to the local device; note that Galaxy will always have a digital copy.
 > * {% icon details %} views details about the tool that was run, and how the job was configured.
 > * ![](../../images/introduction-to-cpt-galaxy-screenshots/12_rerun_icon.png) is commonly used, as it re-runs the tool with the same parameters configured. Additionally, these parameters may be tweaked before re-running.
-> * ![](../../images/introduction-to-cpt-galaxy-screenshots/13_visualize_icon.png)  presents the dataset in different ways. Charts allow the user to build graphs from the tabular dataset, and a Multiple Sequence Alignment (MSA) visualization plugin in Galaxy allows for interactive exploration of MSAs.
+> * ![](../../images/introduction-to-cpt-galaxy-screenshots/13_visualize_icon.png)  presents the dataset in different ways. Charts allow the user to build graphs from a tabular dataset, and a Multiple Sequence Alignment (MSA) visualization plugin in Galaxy allows for interactive exploration of MSAs. Note that not all datasets are compatible with this function.
 > * ![](../../images/introduction-to-cpt-galaxy-screenshots/14_tags_icon.png) allows for the annotation of datasets with tags. Extremely useful as they are searchable.
 > * ![](../../images/introduction-to-cpt-galaxy-screenshots/15_comments_icon.png)  allows the user to comment on a dataset; this could be a reminder of why it was executed, or perhaps to annotate interesting results found in the output. Also a searchable field.
 
@@ -238,15 +238,29 @@ Near the top, the format is listed as *tabular*. At the bottom of the expanded d
 > If your inputs are all correct and the tool still fails, there may be a bug in the tool. Selecting the bug icon in the bottom left-hand corner will bring up a page in the main Galaxy interface that provides the error text and a form for reporting the error as a bug. There, a message can be typed and a report submitted to CPT IT. It is always recommended to submit bug reports when jobs fail because it improves the system for all users.
 {: .comment}
 
-> ### {% icon hands_on %} Recovering Deleted Datasets
-> Deleted datasets are not permanently removed from the history, and can be recovered. At the top of the history is a count of deleted and hidden datasets. Clicking on *deleted* will reveal the deleted datasets.
->
-> ![](../../images/introduction-to-cpt-galaxy-screenshots/16_deleted_hidden_datasets.png)
->
-> The revealed, deleted datasets will have two options; selecting *Undelete it* will allow the dataset to re-appear in the standard history.
->
-> ![](../../images/introduction-to-cpt-galaxy-screenshots/17_deleted_dataset_example.png)
-{: .hands_on}
+## Managing Datasets Individually
+
+### Hiding and unhiding datasets
+
+Some procedures in Galaxy such as workflows will often **hide** history datasets in order to simplify the history
+and hide intermediate steps of an automated analysis. These hidden datasets won't normally appear in the history panel
+but their still mentioned in the history subtitle (the smaller, grey text that appears below the history name). If you
+history has hidden datasets, the number will appear there (e.g. '95 hidden') as a clickable link. If you click this link,
+the hidden datasets are shown. Each hidden dataset has a link in the top of the summary view that allows you to unhide
+it. You can click that link again (which will now be 'hide hidden') to make them not shown again.
+
+![](../../images/introduction-to-cpt-galaxy-screenshots/16_deleted_hidden_datasets.png)
+
+### Deleting and undeleting datasets
+
+You can **delete** any dataset in your history by clicking the delete button. This does not immediately remove the
+dataset's data from Galaxy and **it is reversible**. When you delete a dataset from the history, it will be removed
+from the panel but (like hidden datasets) the total number of deleted datasets is shown in the history subtitle as a
+link. Clicking this link (e.g. '33 deleted') will make the deleted datasets visible and each deleted dataset will have a
+link for manually undeleting it above its title. You can click that link again (which will now be 'hide deleted') to
+make them not shown again.
+
+![](../../images/introduction-to-cpt-galaxy-screenshots/17_deleted_dataset_example.png)
 
 ## Organizing Histories
 
