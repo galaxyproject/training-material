@@ -76,25 +76,27 @@ In BICH 464, we will not be using Artemis for the annotation of your genomes.  H
 
 # Annotation Within Apollo
 
-Continuing on to actually using Apollo, this section will go through an example annotation. Characteristics of the program will also be described to assist in the navigation of the program. There are two primary components to annotation:
-
-**1. Structural annotation**, which consists of locations of genomic features, such as genes and terminators. Several gene callers will identify possible genes in the phage genome. Putative genes in Apollo will be annotated based on these results. See the [Structural Annotation Workflow Tutorial]({{ site.baseurl }}//topics/genome-annotation/tutorials/structural-annotation-workflow/tutorial.html) for more information. 
-
-**2. Functional annotation**, which entails predicting gene functions based on multiple sources of evidence. To run the analyses to allow this prediction see the [Functional Annotation Workflow Tutorial]({{ site.baseurl }}//topics/genome-annotation/tutorials/functional-annotation-workflow/tutorial.html).
+Continuing on to Apollo, this section will cover the relationship between Galaxy and Apollo and the general layout of the Apollo window. 
 
 ## The Galaxy-Apollo Bridge
 
-It is important to understand that Apollo is not just another tool or workflow in Galaxy. Apollo is a separate, stand-alone program that specializes in the display and editing of JBrowse genome information. The CPT has developed a tool called JBrowse-in-Galaxy (JiG), which can build JBrowse instances within Galaxy and then export them into Apollo where they can be accessed by the user. The conversion of your genome and its associated data into an Apollo-compatible JBrowse instance is carried out by several tools in the provided annotation workflows. 
+We will be using Galaxy and Apollo extensively in this course and it is important to understand the relationship between these platforms. Apollo is *not* just another tool or workflow in Galaxy. Apollo is a separate, stand-alone program that specializes in the display and editing of JBrowse datasets. The CPT has developed a tool called JBrowse-in-Galaxy (JiG), which can build JBrowse instances within Galaxy and then export them into Apollo where they can be accessed by the user. The conversion of your genome and its associated data into an Apollo-compatible JBrowse instance is carried out by several tools in the provided annotation workflows. 
 
 ![](../../images/getting-started-with-apollo-screenshots/basic-galaxy-apollo-bridge.png)
 
-JiG essentially sends a "snapshot" of your organism to Apollo, where you can add, remove or edit feature annotations. The changes you make in Apollo are maintained within a separate database and will not appear in Galaxy until you intentionally retrieve your data. The retrieved data can then be used to conduct further analyses in Galaxy, and then sent *back* into Apollo using the same JiG tools; as the course progresses, your organism's JBrowse insance will accumulate more and more features and data via this process.
+JiG essentially sends a "snapshot" of your organism to Apollo, where you can add, remove or edit feature annotations. The changes you make in Apollo are maintained within a separate database and will not appear in Galaxy until you intentionally retrieve your data. The retrieved data can then be used to conduct further analyses in Galaxy, and then sent *back* into Apollo using the same JiG tools; as the course progresses, your organism's JBrowse instance will accumulate more and more data via this process.
 
 Apollo uses the concept of *Organisms* with each organism having one or more *reference sequences* below it. Some organisms such as eukaryotes might have multiple reference sequences associated with them, which would correspond to multiple chromosomes. For your phage annotation project, **each organism should only have a single reference sequence.** 
 
 ## Navigating Through Apollo
 
 ![](../../images/getting-started-with-apollo-screenshots/19_jbrowse_embedded_in_apollo.png)
+
+As depicted above, Apollo will present a two-pane display, surrounded by the Galaxy Tools and History columns on the left and right, respectively. On the left is an embedded JBrowse instance, and on the right is the Apollo annotator panel. JBrowse as embedded in Apollo is *slightly* different than a normal JBrowse; however, the movement controls are all the same:
+> * the magnifying glasses will zoom in (+)/out (-) of the genome and its data.
+> * the arrow icons will move upstream/downstream along the genome.
+> * clicking/dragging on the red outlined box on the genome ruler (light grey box toward the top of the page, 0bp; 12,500 bp; 25,000 bp; etc.) will move to specific regions.
+> * clicking/dragging anywhere else on the genome ruler will allow movement and zooming into that specific region.
 
 > ### {% icon tip %} Maximizing Screen Space
 > Having the gene tracks on in combination with the Apollo panel and the Galaxy columns can be overwhelming and distracting from the annotation. 
@@ -105,11 +107,28 @@ Apollo uses the concept of *Organisms* with each organism having one or more *re
 > * Additionally, zooming down to the single gene level can greatly assist in focusing on annotation. 
 {: .tip}
 
-As depicted above, Apollo will present a two-pane display, surrounded by the Galaxy Tools and History columns on the left and right, respectively. On the left is an embedded JBrowse instance, and on the right is the Apollo annotator panel. JBrowse as embedded in Apollo is *slightly* different than a normal JBrowse; however, the movement controls are all the same:
-> * the magnifying glasses will zoom in (+)/out (-) of the genome and its data.
-> * the arrow icons will move upstream/downstream along the genome.
-> * clicking/dragging on the red outlined box on the genome ruler (light grey box toward the top of the page, 0bp; 12,500 bp; 25,000 bp; etc.) will move to specific regions.
-> * clicking/dragging anywhere else on the genome ruler will allow movement and zooming into that specific region.
+### Genome Selector
+In the Apollo panel on the right, there is a drop-down menu called the Genome Selector, and it will list all organisms available to the account in use.
+
+![](../../images/getting-started-with-apollo-screenshots/20_genome_selector.png)![](../../images/getting-started-with-apollo-screenshots/21_genome_selector_options.png)
+
+### User Created Annotations Track
+The pale yellow track that is visible across the screen below the navigation controls is the *User Created Annotations* track. The called genes and other features exist here, so this is where you will be spending much or your time. This track (and the entire annotator panel) is a linear representation of the organism reference sequence, starting with the first base on the left and the last base on the right. Since gene features will be added to this track and edited, this track will *always* be visible. When you export data from Apollo back into Galaxy, only the features and data in this track will be retrieved. All changes you make to this track are automatically and immediately saved in Apollo.
+
+### Track Selector
+On the left side of the embedded JBrowse instance is a checklist-like column titled “Available Tracks”. Here the evidence tracks currently available for the genome being analyzed are listed. Evidence tracks will appear upon the execution of structural and functional workflows, as well as other custom analyses.
+
+The evidence tracks shown below are from a version of the structural workflow: *GeneMarkS*, *MetaGeneAnnotator*, and *Glimmer3* are tools that locate the positions of potential protein-coding genes. Selecting these tracks will display predicted genes below the User-Created Annotations track. These tools were run in Galaxy and their outputs were exported to Apollo via JiG. As you can see, Apollo alows the user to directly view where on the genome features are predicted, and allows a stacked comparison of the outputs of different tools.  
+
+![](../../images/getting-started-with-apollo-screenshots/22_zoomed_out_gene_tracks.png)
+
+Zooming in below, fine comparison of the evidence tracks is possible. Both the *Glimmer3* and *MetaGeneAnnotatar* evidence tracks have suggested the same feature, and this feature has already been promoted to the yellow User-Created Annotations track. We will cover how to evaluate and make annotations in another tutorial.
+
+![](../../images/getting-started-with-apollo-screenshots/23_zoomed_in_gene_tracks.png)
+
+> ### {% icon tip %} Note that…
+> The examples above already have genes called in the User Created Annotations track. This *will not* be the case for your novel phage genome, which will start out with an empty User-Created Annotations track.
+{: .tip}
 
 > ### {% icon tip %} Enhance Viewing Experience
 > The menu bar at the top has useful options, some that aren’t available in “standard” JBrowse. **View** offers helpful adjustments to observing the genome within Apollo
@@ -117,26 +136,4 @@ As depicted above, Apollo will present a two-pane display, surrounded by the Gal
 > * “Show Track label” facilitates annotation by removing the track’s labeling at the far left of the embedded JBrowse window. This allows for annotation of small features near the end of the genome, which would otherwise be hidden by the track label (e.g. “User-created annotations).
 > * Once you have created an organism in Apollo, you do not need to go through Galaxy every time you want to view it. Navigate to the main Galaxy page by clicking *Analyze Data* on the top menu par and then click the *Apollo* logo in the top right. This will take you to an all-Apollo window outside of Galaxy. 
 {: .tip}
-
-The pale yellow track that is visible across the screen below the navigation controls is the User Created Annotations track. The called genes and other features exist here. Since gene features will be added to this track and edited, this track will *always* be visible.
-
-In the Apollo panel on the right, there is a drop-down menu called the Genome Selector, and it will list all organisms available to the account in use.
-
-![](../../images/getting-started-with-apollo-screenshots/20_genome_selector.png)![](../../images/getting-started-with-apollo-screenshots/21_genome_selector_options.png)
-
-On the left side of the embedded JBrowse instance is a checklist-like column titled “Available Tracks”. Here the evidence tracks currently available for the genome being analyzed are listed. Evidence tracks will appear upon the execution of structural and functional workflows, as well as other custom analyses.
-
-The first evidence tracks used will be those from the structural workflow: *GeneMarkS*, *MetaGeneAnnotator*, and *Glimmer3*. Selecting these will display predicted genes below the User-Created Annotations Track.
-
-![](../../images/getting-started-with-apollo-screenshots/22_zoomed_out_gene_tracks.png)
-
-![](../../images/getting-started-with-apollo-screenshots/23_zoomed_in_gene_tracks.png)
-
-> ### {% icon tip %} Note that…
-> The examples above already have genes called in the User Created Annotations track; the phage P22 genome is already annotated. This **_will not_** be the case for a novel phage genome.
-{: .tip}
-
-At that level, comparison of the three gene models may occur to determine possible genes. Only one gene in the *MetaGeneAnnotator* track has an annotated Shine-Dalgarno (SD) sequence; the CPT filters all SD sequences to ensure only the high-quality sequences are visible. If an undesirable feature has been created/annotated, right-clicking on the feature will display many options; select “Delete.”
-
-All changes made are instantaneously and immediately saved.
 
