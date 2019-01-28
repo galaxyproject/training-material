@@ -56,7 +56,7 @@ A config for running a Galaxy server under uWSGI has been installed at `/etc/sup
 
 ```ini
 [program:galaxy]
-command         = uwsgi --plugin python --virtualenv /srv/galaxy/server/.venv --ini-paste /srv/galaxy/server/galaxy.ini
+command         = uwsgi --plugin python --virtualenv /srv/galaxy/server/.venv --ini-paste /srv/galaxy/server/galaxy.yml
 directory       = /srv/galaxy/server
 autostart       = true
 autorestart     = true
@@ -135,8 +135,8 @@ $ systemctl status supervisor
  Main PID: 481 (supervisord)
    CGroup: /system.slice/supervisor.service
            ├─  481 /usr/bin/python /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
-           ├─ 6264 /usr/bin/uwsgi --plugin python --virtualenv /srv/galaxy/server/.venv --ini-paste /srv/galaxy/server/galaxy.ini
-           ├─ 6268 /usr/bin/uwsgi --plugin python --virtualenv /srv/galaxy/server/.venv --ini-paste /srv/galaxy/server/galaxy.ini
-           ├─10109 /srv/galaxy/server/.venv/bin/python ./scripts/galaxy-main -c /srv/galaxy/server/galaxy.ini --server-name=handler0
-           └─10142 /srv/galaxy/server/.venv/bin/python ./scripts/galaxy-main -c /srv/galaxy/server/galaxy.ini --server-name=handler1
+           ├─ 6264 /usr/bin/uwsgi --plugin python --virtualenv /srv/galaxy/server/.venv --ini-paste /srv/galaxy/server/galaxy.yml
+           ├─ 6268 /usr/bin/uwsgi --plugin python --virtualenv /srv/galaxy/server/.venv --ini-paste /srv/galaxy/server/galaxy.yml
+           ├─10109 /srv/galaxy/server/.venv/bin/python ./scripts/galaxy-main -c /srv/galaxy/server/galaxy.yml --server-name=handler0
+           └─10142 /srv/galaxy/server/.venv/bin/python ./scripts/galaxy-main -c /srv/galaxy/server/galaxy.yml --server-name=handler1
 ```

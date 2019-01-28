@@ -63,7 +63,7 @@ Galaxy's server will start printing its output to your terminal. To stop the Gal
 
 ## Access Galaxy over the network
 In the basic installation Galaxy is bind to the loopback interface.
-To bind Galaxy to any available network interface edit the config/galaxy.ini file and change the host setting to:
+To bind Galaxy to any available network interface edit the config/galaxy.yml file and change the host setting to:
 
 	host = 0.0.0.0
 
@@ -90,7 +90,7 @@ See the [GitHub](https://github.com/galaxyproject/galaxy) repository to get the 
 *In the config/ directory all the files are suffixed with ".sample".
 Sample files are default files provided by Galaxy.
 When you change a configuration it is strongly encouraged to work directly on a filename without the 'sample' suffix.
-So, go ahead save the 'galaxy.ini.sample' and create a 'galaxy.ini'*
+So, go ahead save the 'galaxy.yml.sample' and create a 'galaxy.yml'*
 
 ## What's next ?
 Next, you will configure your Galaxy server for production.

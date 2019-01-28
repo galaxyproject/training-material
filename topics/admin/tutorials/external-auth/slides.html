@@ -31,7 +31,7 @@ contributors:
 ---
 # Authentication tweaks
 
-In `galaxy.ini`:
+In `galaxy.yml`:
 * Activation
   * `user_activation_on` will prevent accounts from running jobs until they visit activation link
   * `activation_grace_period` gives users some time before their jobs are ignored
@@ -47,7 +47,7 @@ https://github.com/martenson/disposable-email-domains
 ---
 # OpenID
 
-In `galaxy.ini`:
+In `galaxy.yml`:
 * Set `enable_openid = True`
 * Consumer cache in `openid_consumer_cache_path = database/openid_consumer_cache`
 * Specify provider list in `openid_config_file = config/openid_conf.xml`
@@ -68,7 +68,7 @@ OpenID Connect support is [in the works](https://github.com/galaxyproject/galaxy
 ---
 # Reverse proxy
 
-In `galaxy.ini`:
+In `galaxy.yml`:
 * Set `use_remote_user = True` to delegate authentication to the upstream proxy server
   * The proxy server should set the `REMOTE_USER` HTTP header
   * Disables regular logins
