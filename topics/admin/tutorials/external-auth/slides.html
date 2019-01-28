@@ -11,7 +11,6 @@ contributors:
 # Auth Mechanisms supported
 
 * Galaxy-specific account database
-* OpenID authentication with Galaxy as a relying party
 * HTTP remote user provided by a reverse proxy server
 * Galaxy authentication framework (LDAP/AD, PAM)
 
@@ -43,27 +42,6 @@ In `galaxy.yml`:
 
 ???
 https://github.com/martenson/disposable-email-domains
-
----
-# OpenID
-
-In `galaxy.yml`:
-* Set `enable_openid = True`
-* Consumer cache in `openid_consumer_cache_path = database/openid_consumer_cache`
-* Specify provider list in `openid_config_file = config/openid_conf.xml`
-
----
-# Default OpenID providers
-
-```xml
-<openid>
-    <provider file="genomespace.xml" />
-    <provider file="aol.xml" />
-    <provider file="launchpad.xml" />
-</openid>
-```
-
-OpenID Connect support is [in the works](https://github.com/galaxyproject/galaxy/pull/4474)
 
 ---
 # Reverse proxy
