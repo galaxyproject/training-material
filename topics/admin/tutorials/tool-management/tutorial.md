@@ -104,6 +104,28 @@ Now that you have extracted a list of tools, let's install these to Galaxy. In o
 - To be an admin of this Galaxy
 - The API key for your account
 
+There are additionally two ways to install tools, we'll show both:
+
+> ### {% icon hands_on %} Hands-on: Installing tools from a specific tool name
+>
+> 1. Use the Ephemeris command [`shed-tools`](https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html) to install the tool `bwa`, owned by user `devteam` into a section named `Mapping`
+>
+>    > ### {% icon question %} Question
+>    > What did your command look like?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > Note that your API key and URL will probably be different than in the example command below:
+>    > >
+>    > > ```console
+>    > > $ shed-tools install -g https://your-galaxy -a <api-key> --name bwa --owner devteam --section_label Mapping
+>    > > ```
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+This provides an easy way to do one-off installation of tools, but is less convenient if you want to install many tools. For that, you can install from a yaml file:
+
 > ### {% icon hands_on %} Hands-on: Installing tools from a tool list
 >
 > 1. (optional) Use the `tail` command to watch the installation proceed
