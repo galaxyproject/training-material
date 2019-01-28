@@ -14,6 +14,8 @@ key_points:
 contributors:
   - natefoo
   - erasche
+tags:
+ - ansible
 requirements:
  - type: "internal"
    topic_name: admin
