@@ -96,9 +96,8 @@ class: center, middle, inverse
 ### Preparation
 
 ```
-$ docker pull quay.io/bgruening/galaxy:gcc2016
-$ docker pull quay.io/bgruening/galaxy-docs-slurm:gcc2016
-$ git clone -b gcc2016 https://github.com/bgruening/docker-galaxy-stable.git
+$ docker pull bgruening/galaxy-stable:18.05
+$ git clone https://github.com/bgruening/docker-galaxy-stable.git
 ```
 
 ???
@@ -434,7 +433,7 @@ $ docker run -i -t
     -e &quot;GALAXY_CONFIG_BRAND='My own Galaxy flavour'&quot;
     -e &quot;GALAXY_LOGGING=full&quot;
 
-    quay.io/bgruening/galaxy
+    bgruening/galaxy-stable:18.05
 ```
 
 ???
@@ -767,10 +766,12 @@ A Docker launching a Galaxy instance and
 
 
 ```
-docker run -i -t -p 8080:80 quay.io/bgruening
+docker run -i -t -p 8080:80 bgruening/galaxy-stable:18.05
 ```
 
-https://bgruening.github.io/docker-galaxy-stable/
+Visit your machine on port 8080 to see Galaxy running.
+
+https://github.com/bgruening/docker-galaxy-stable
 
 ---
 
@@ -825,14 +826,11 @@ https://github.com/bgruening/docker-galaxy-stable/tree/dev/docs/Running_jobs_out
 #
 # VERSION       0.1
 
-FROM quay.io/bgruening/galaxy:gcc2016
+FROM bgruening/galaxy-stable:18.05
 
 MAINTAINER Björn A. Grüning, bjoern.gruening@gmail.com
 
 ENV GALAXY_CONFIG_BRAND deepTools
-
-# Install Visualisation
-# RUN install-biojs msa
 
 # Adding the tool definitions to the container
 ADD my_tool_list.yml $GALAXY_ROOT/my_tool_list.yml
