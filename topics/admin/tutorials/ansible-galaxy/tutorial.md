@@ -58,7 +58,7 @@ The important variables for this tutorial are:
 - `galaxy_commit_id`
 - `galaxy_config`
 
-These are largely self explanatory: a server directory, which commit should be installed, and the Galaxy configuration. We will not explain Galaxy configuration variables in detail as they are covered sufficiently in the `galaxy.yml` sample file or the [online documentation](https://docs.galaxyproject.org/en/master/admin/config.html#configuration-options).
+These are largely self explanatory: a directory for all of Galaxy's code and configuration, which commit should be installed, and the Galaxy configuration. We will not explain Galaxy configuration variables in detail as they are covered sufficiently in the `galaxy.yml` sample file or the [online documentation](https://docs.galaxyproject.org/en/master/admin/config.html#configuration-options).
 
 The official recommendation is that you should have a variables file such as a `group_vars/galaxy.yml` for storing all of the Galaxy configuration.
 
@@ -76,13 +76,12 @@ As with every role, the entry point for execution is the `tasks/main.yml` file. 
 
 The [clone](https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/clone.yml) task is the one which is primarily interesting to us, it downloads Galaxy, using git, to a specific commit.
 
-1. It starts by checking if the Galaxy directory exists, this is done so the tasks will attempt to check the current commit, will not fail in case the folder does not exist.
-2. The current commit of the repository on disk is retrieved, in order to decide whether or not Galaxy needs to be updated. This is then reported in a debugging message to the user.
-3. Galaxy is updated to the correct commit. If the `galaxy_root` is not yet populated, e.g. on first run, Galaxy will be cloned under the specified location. Otherwise the existing repo will be updated to that commit. The `galaxy_force_checkout` variable allows you to control whether or not any locally made changes will be discarded. This will not affect mutable configuration files as those are not tracked in git, and in the case of this exercise, are not stored in the clone.
-4. The virtualenv is set up:
+1. Ansible tries to update Galaxy, cloning it if it is missing, or otherwise attempting to update to the correct commit (or latest commit of that branch.)
+2. Any change is reported.
+3. The virtualenv is set up:
 	1. An empty virtualenv is created.
 	2. Pip is updated within the virtualenv.
-5. Any `.pyc` files are removed, as this can occasionally result in Python loading the cached code, even if the corresponding `.py` file is no more present at the checked-out commit. For safety, all of these are removed.
+4. Any `.pyc` files are removed, as this can occasionally result in Python loading the cached code, even if the corresponding `.py` file is no more present at the checked-out commit. For safety, all of these are removed.
 
 With that Galaxy is cloned to disk and is ready to be configured by the next task.
 
@@ -198,16 +197,13 @@ We have codified all of the dependencies you will need into a yaml file that `an
 >
 > 1. Create a new file in your working directory called `requirements.yaml` and include the following contents:
 >
->    TODO(hxr): FIX
 >    ```yaml
->    - src: galaxyproject.galaxy
->    - src: galaxyproject.postgresql
->    - src: https://github.com/galaxyproject/ansible-proftpd
->      name: galaxyproject.proftpd
->    - src: https://github.com/usegalaxy-eu/ansible-repos
->      name: galaxyproject.repos
->    - src: geerlingguy.nginx
->    - src: natefoo.postgresql_objects
+>    - galaxyproject.galaxy
+>    - geerlingguy.nginx
+>    - natefoo.postgresql_objects
+>    - galaxyproject.postgresql
+>    - galaxyproject.proftpd
+>    - geerlingguy.pip
 >    - src: https://github.com/usegalaxy-eu/ansible-role-supervisor
 >      name: usegalaxy-eu.supervisor
 >    - src: https://github.com/usegalaxy-eu/ansible-certbot
@@ -241,12 +237,12 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >        owner: galaxy
 >    ```
 >
-> 2. Open `playbook.yml` with your text editor and add the following:
+> 2. Create and open `playbook.yml` with your text editor and add the following:
 >
->    - Add a pre-task to install the necessary dependency, `python-psycopg2` (the package name is the same for both Debian and RHEL).
+>    - Add a pre-task to install the necessary dependency, `python-psycopg2`
 >    - A role for `galaxyproject.repos`. This will add the additional repositories that are needed by Galaxy in various places.
 >    - A role for `galaxyproject.postgresql`. This will handle the installation of PostgreSQL.
->    - A role for `natefoo.postgresql_objects`, run as the postgres user. (You will need `become`/`become_user`.) This role allows for managing databases and users within postgres.
+>    - A role for `natefoo.postgresql_objects`, run as the postgres user. (You will need `become`/`become_user`.) This role allows for managing users and databases within postgres.
 >
 >    > ### {% icon question %} Question
 >    >
@@ -273,7 +269,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    >
 >    {: .question}
 >
-> 3. Run the playbook.
+> 3. Run the playbook (`ansible-playbook -i hosts playbook.yml`)
 >
 {: .hands_on}
 
@@ -306,9 +302,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 > 1. Open `playbook.yml` with your text editor and set the following:
 >
->    - Amend the dependency installation pre-task to install additional necessary dependencies:
->        - For Debian: git, python-virtualenv, make, build-essential
->        - For RHEL: python-virtualenv
+>    - Amend the dependency installation pre-task to install additional necessary dependencies: git, python-virtualenv, make
 >    - Add the role `galaxyproject.galaxy` to the roles to be executed, at the end
 >
 >    > ### {% icon question %} Question
@@ -322,14 +316,14 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > >   pre_tasks:
 >    > >     - name: Install Dependencies
 >    > >       package:
->    > >         name: ['python-psycopg2', 'git', 'python-virtualenv', 'make', 'build-essential']
+>    > >         name: ['python-psycopg2', 'git', 'python-virtualenv', 'make']
 >    > >   roles:
 >    > >     - galaxyproject.repos
 >    > >     - galaxyproject.postgresql
 >    > >     - role: natefoo.postgresql_objects
 >    > >       become: true
 >    > >       become_user: postgres
->    > >     - role: galaxyproject.galaxy
+>    > >     - galaxyproject.galaxy
 >    > > ```
 >    > >
 >    > {: .solution }
@@ -344,21 +338,22 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    Variable                     | Value                                      | Purpose
 >    ---                          | -----                                      | ---
 >    `galaxy_create_user`         | `true`                                     | Instruct the role to create a Galaxy user
->    `galaxy_separate_privileges` | `true`                                     | Enable separation mode to install the Galaxy code as <br> `root` but run the Galaxy server as `galaxy`
+>    `galaxy_separate_privileges` | `true`                                     | Enable separation mode to install the Galaxy code as `root` but run the Galaxy server as `galaxy`
 >    `galaxy_manage_paths`        | `true`                                     | Instruct thre role to create the needed directories.
->    `galaxy_layout`              | `root-dir`                                 | This enables the `galaxy_root` Galaxy deployment layout:<br> all of the code, configuration, and data folders will live beneath `galaxy_root`.
+>    `galaxy_layout`              | `root-dir`                                 | This enables the `galaxy_root` Galaxy deployment layout:all of the code, configuration, and data folders will live beneath `galaxy_root`.
 >    `galaxy_root`                | `/srv/galaxy`                              | This is the root of the Galaxy deployment.
->    `galaxy_file_path`           | `/data`                                    | The directory where Galaxy datasets (user data) will be <br> stored. On a real deployment, this would likely be a mounted network filesystem.
->    `galaxy_user`                | `{'name': 'galaxy', 'shell': '/bin/bash'}` | The user that Galaxy will run as.
+>    `galaxy_file_path`           | `/data`                                    | The directory where Galaxy datasets (user data) will be stored. On a real deployment, this would likely be a mounted network filesystem.
+>    `galaxy_user`                | `{name: galaxy, shell: /bin/bash}`         | The user that Galaxy will run as.
 >    `galaxy_commit_id`           | `release_18.09`                            | The git reference to check out, which in this case is the <br>branch for Galaxy Release 18.09.
 >    `galaxy_config_style`        | `yaml`                                     | We want to opt-in to the new style YAML configuration.
->    `galaxy_force_checkout`      | `true`                                     | If we make any modifications to the Galaxy codebase, <br> they will be removed. This way we know we're getting an unmodified <br> Galaxy and no one has made any unexpected changes to the codebase.
+>    `galaxy_force_checkout`      | `true`                                     | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
+>    `check_migrate_tools`        | `false`                                    | Not needed in this case due to a new install of Galaxy
 >    {% endraw %}
 >
 >
 > 2. Again edit the group variables file and add a variable for `galaxy_config`. It will be a hash with one key, `galaxy` which will also be a hash. Inside here you can place all of your Galaxy configuration.
 >
->    The structure is:
+>    So tthe structure looks like:
 >    ```yaml
 >    galaxy_config:
 >       galaxy:
@@ -367,8 +362,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    Now you should set:
 >    1. `admin_users` to the email address you will use with this Galaxy.
->    2. `brand` to something fun.
->    3. `database_connection` to point to the database you setup earlier.
+>    2. `brand` to something fun!
+>    3. `database_connection` to point to the database you setup earlier (`postgresql:///galaxy?host=/var/run/postgresql`)
 >    4. `file_path` to a place to store data, `/data` for this lesson.
 >
 >    > ### {% icon question %} Question
@@ -400,6 +395,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > galaxy_commit_id: release_18.09
 >    > > galaxy_config_style: yaml
 >    > > galaxy_force_checkout: true
+>    > >
 >    > > galaxy_config:
 >    > >   galaxy:
 >    > >     brand: "My Galaxy"
@@ -480,6 +476,33 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 {: .hands_on}
 
+> ### {% icon tip %} Tip: ansible.cfg
+> Typing `-i hosts` every time can be a bit repetitive, you can save having to type this flag by creating an `ansible.cfg` file (next to your playbook) with the following contents:
+>
+> ```ini
+> [defaults]
+> inventory = hosts
+> ```
+>
+> There are some additional useful options that you might want to add to your `ansible.cfg` file:
+>
+> ```ini
+> [ssh_connection]
+> pipelining = true
+> [defaults]
+> retry_files_enabled = false
+> ```
+>
+> Pipelining will make [ansible run faster](https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining) by significantly reducing the number of new SSH connections that must be opened. Setting `retry_files_enabled = false` will prevent Ansible from creating `playbook.retry` files whenever a playbook crashes before finishing. These are rarely useful for the cases in which we run Ansible.
+>
+> For users running with the local connection, you can specify this in your `hosts` file:
+>
+> ```ini
+> [galaxyservers]
+> localhost ansible_connection=local
+> ```
+{: .tip}
+
 Galaxy is now configured with an admin user, a database, and a place to store data. Additionally we've immediately configured the mules for production Galaxy serving. So we're ready to set up supervisord which will manage the Galaxy processes!
 
 > ### {% icon hands_on %} Hands-on: (Optional) Launching uWSGI by hand
@@ -488,7 +511,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 > 2. Switch user to Galaxy account (`sudo -iu galaxy`)
 > 3. Change directory into `/srv/galaxy/server`
 > 4. Activate virtualenv (`. ../venv/bin/activate`)
-> 5. `uwsgi --plugin python --yaml ../config/galaxy.yml`
+> 5. `uwsgi --yaml ../config/galaxy.yml`
 > 6. Accces at port `<ip address>:8080` once the server has started
 {: .hands_on}
 
@@ -498,7 +521,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 
 > ### {% icon hands_on %} Hands-on: Supervisord
 >
-> 1. Add the role `usegalaxy-eu.supervisor` to your playbook, it needs to install things and should run as the root user.
+> 1. Add the roles `geerlingguy.pip` and `usegalaxy-eu.supervisor` to your playbook, these need to install things and should run as the root user.
 >
 > 2. Open your group variables file and we'll add some variables for supervisor. Supervisor communicates over a unix or tcp socket; we will use the unix socket without password authentication, instead using user/group authentication. We will thus need to set a couple of variables to allow our Galaxy user to access this. Add the following:
 >
@@ -514,7 +537,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    supervisor_programs:
 >      - name: galaxy
 >        state: present
->        command: uwsgi --yaml {{ galaxy_config_dir }}/galaxy.yml  --plugin python
+>        command: uwsgi --yaml {{ galaxy_config_dir }}/galaxy.yml
 >        configuration: |
 >          autostart=true
 >          autorestart=true
@@ -575,6 +598,8 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 > 2. Add the role `geerlingguy.nginx` to your playbook and have it run as root.
 >
+> 3. We will set a convenience variable, `hostname`, to refer to our VM. If you have a DNS entry for your server, add `hostname: <your server name>` to your group variables. Otherwise, add {% raw %}`hostname: {{ ansible_hostname }}`{% endraw %}.
+>
 > 3. We need to configure the virtualhost. This is a slightly more complex process as we have to write the proxying configuration ourselves. This may seem annoying, but it is often the case that sites have individual needs to cater to, and it is difficult to provide a truly generic webserver configuration.
 >
 >    Add the following to your group variables file:
@@ -585,13 +610,13 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    nginx_server_names_hash_bucket_size: "128"
 >    nginx_vhosts:
 >      - listen: "80"
->        server_name: "{{ ansible_hostname }}"
->        root: "/var/www/{{ ansible_hostname }}"
+>        server_name: "{{ hostname }}"
+>        root: "/var/www/{{ hostname }}"
 >        index: "index.html"
 >        access_log: "/var/log/nginx/access.log"
 >        error_log: "/var/log/nginx/error.log"
 >        state: "present"
->        filename: "{{ ansible_hostname }}.conf"
+>        filename: "{{ hostname }}.conf"
 >        extra_parameters: |
 >            client_max_body_size 10G; # aka max upload size, defaults to 1M
 >            uwsgi_read_timeout 2400;
@@ -654,13 +679,13 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```yaml
 >    nginx_vhosts:
 >      - listen: "80"
->        server_name: "{{ ansible_hostname }}"
->        root: "/var/www/{{ ansible_hostname }}"
+>        server_name: "{{ hostname }}"
+>        root: "/var/www/{{ hostname }}"
 >        index: "index.html"
 >        access_log: "/var/log/nginx/access.log"
 >        error_log: "/var/log/nginx/error.log"
 >        state: "present"
->        filename: "{{ ansible_hostname }}.conf"
+>        filename: "{{ hostname }}.conf"
 >    ```
 >    {% endraw %}
 >
@@ -724,7 +749,9 @@ With a large Galaxy instance, users will often request FTP access in order to up
 >
 > 1. Add the role `galaxyproject.proftpd` to your playbook and have it run as root.
 >
-> 2. Edit the group variables file, we will define some variables for the proftpd role:
+> 2. Add a `pre_task` to [create the FTP directory](https://docs.ansible.com/ansible/2.5/modules/file_module.html#file-module), owned by galaxy:galaxy, with mode `0750`.
+>
+> 3. Edit the group variables file, we will define some variables for the proftpd role:
 >
 >    ```yaml
 >    galaxy_ftp_upload_dir: "{{ galaxy_root }}/ftp"
@@ -739,7 +766,7 @@ With a large Galaxy instance, users will often request FTP access in order to up
 >    proftpd_sql_db: galaxy@/var/run/postgresql
 >    ```
 >
-> 3. And additionally two changes to the Galaxy configuration portion:
+> 4. And additionally two changes to the Galaxy configuration portion:
 >
 >    ```yaml
 >    ...
@@ -747,18 +774,22 @@ With a large Galaxy instance, users will often request FTP access in order to up
 >      galaxy:
 >        ...
 >        ftp_upload_dir: "{{ galaxy_ftp_upload_dir }}"
->        ftp_upload_site: "ftp://{{ ansible_hostname}}"
+>        ftp_upload_site: "ftp://{{ hostname}}"
 >        ...
 >      uwsgi: ...
 >    ```
 >
-> 4. Apply the playbook
+> 5. Apply the playbook
 >
-> 5. Restart Galaxy with supervisord (`supervisorctl restart galaxy`) to allow the changes to take effect.
+> 6. Restart Galaxy with supervisord (`supervisorctl restart galaxy`) to allow the changes to take effect.
 {: .hands_on}
 
 With this, users can see an "Upload via FTP" button in their upload interface, and they can upload their data using Filezilla or other preferred FTP client.
 
+
+> ### {% icon tip %} Tip: Active vs Passive
+> If connecting does not work, try forcing your client to use active FTP, university firewalls often have issues with passive FTP.
+{: .tip}
 
 ## Disaster Strikes!
 
@@ -824,6 +855,4 @@ TODO(hxr): fix
 >
 >
 {: .hands_on}
-
-TODO(hxr): fix hostname uniformly, say to set ansible_hostname if they don't have a real one
 
