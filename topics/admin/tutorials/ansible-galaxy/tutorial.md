@@ -781,6 +781,10 @@ With a large Galaxy instance, users will often request FTP access in order to up
 With this, users can see an "Upload via FTP" button in their upload interface, and they can upload their data using Filezilla or other preferred FTP client.
 
 
+> ### {% icon tip %} Tip: Active vs Passive
+> If connecting does not work, try forcing your client to use active FTP, university firewalls often have issues with passive FTP.
+{: .tip}
+
 ## Disaster Strikes!
 
 Because you're an admin, you need to be prepared for any situation, including the worst case scenarios. So we're going to simulate a disaster and show you how you can recover from it. It'll be fun!
