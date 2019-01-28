@@ -765,6 +765,17 @@ With a large Galaxy instance, users will often request FTP access in order to up
 >      - Group: galaxy
 >    proftpd_sql_user: galaxy
 >    proftpd_sql_db: galaxy@/var/run/postgresql
+>
+>    proftpd_virtualhosts:
+>      - id: galaxy
+>        address: "{{ hostname }}"
+>        options:
+>          - ServerAdmin: admin@example.com
+>          - ServerName: Galaxy FTP
+>          - TransferLog: /var/log/proftpd/xfer.log
+>          - MaxLoginAttempts: 3
+>          - RequireValidShell: no
+>          - AllowOverwrite: yes
 >    ```
 >    {% endraw %}
 >
@@ -989,6 +1000,22 @@ And now we should have valid SSL certificates! We just need to go back and updat
 >    ```
 >    {% endraw %}
 >
-> 2. Run the playbook
+> 2. Add the following proftpd configuration:
+>
+>    ```yaml
+>    proftpd_tls_cipher_suite: AES128+EECDH:AES128+EDH
+>    proftpd_tls_protocol: TLSv1.2
+>    proftpd_conf_ssl_certificate: /etc/ssl/certs/cert.pem
+>    proftpd_conf_ssl_certificate_key: /etc/ssl/private/privkey.pem
+>    proftpd_conf_ssl_ca_certificate: /etc/ssl/certs/fullchain.pem
+>    ```
+>
+> 3. Run the playbook
 >
 {: .hands_on}
+
+# Final Notes
+
+If you've been following along you should have a production-ready Galaxy, secured, everything ready to go.
+
+If you missed any steps, you can compare against a reference [playbook.yml](./playbook.txt), and [group_vars/galaxyservers.yml](./galaxyservers.txt)
