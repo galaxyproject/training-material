@@ -361,7 +361,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_commit_id`           | `release_18.09`                            | The git reference to check out, which in this case is the <br>branch for Galaxy Release 18.09.
 >    `galaxy_config_style`        | `yaml`                                     | We want to opt-in to the new style YAML configuration.
 >    `galaxy_force_checkout`      | `true`                                     | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
->    `check_migrate_tools`        | `false`                                    | Not needed in this case due to a new install of Galaxy
+>    `check_migrate_tools`        | `false`                                    | Must be set to false in this case due to a new install of Galaxy
 >    {% endraw %}
 >
 >
@@ -416,6 +416,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > >     admin_users: admin@example.com
 >    > >     database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
 >    > >     file_path: /data
+>    > >     check_migrate_tools: false
 >    > > ```
 >    > > {% endraw %}
 >    > {: .solution }
@@ -469,6 +470,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > >     admin_users: admin@example.com
 >    > >     database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
 >    > >     file_path: /data
+>    > >     check_migrate_tools: false
 >    > >   uwsgi:
 >    > >     ...
 >    > >     mule:
