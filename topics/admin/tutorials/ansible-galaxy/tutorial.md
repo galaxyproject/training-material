@@ -747,21 +747,24 @@ With a large Galaxy instance, users will often request FTP access in order to up
 >
 > 3. Edit the group variables file, we will define some variables for the proftpd role:
 >
+>    {% raw %}
 >    ```yaml
 >    galaxy_ftp_upload_dir: "{{ galaxy_root }}/ftp"
 >    proftpd_display_connect: |
 >      Unauthorized access is prohibited
 >    proftpd_galaxy_auth: yes
->    galaxy_user: galaxy
+>    __galaxy_user_name: galaxy
 >    proftpd_options:
 >      - User: galaxy
 >      - Group: galaxy
 >    proftpd_sql_user: galaxy
 >    proftpd_sql_db: galaxy@/var/run/postgresql
 >    ```
+>    {% endraw %}
 >
 > 4. And additionally two changes to the Galaxy configuration portion:
 >
+>    {% raw %}
 >    ```yaml
 >    ...
 >    galaxy_config:
@@ -772,6 +775,7 @@ With a large Galaxy instance, users will often request FTP access in order to up
 >        ...
 >      uwsgi: ...
 >    ```
+>    {% endraw %}
 >
 > 5. Apply the playbook
 >
@@ -834,19 +838,151 @@ Then you can potentially use it to recover.
 
 Now that you've gotten through the worst case scenario, we'll attack the next worst case scenario, auditors! They've shown up and demanded that everything have valid SSL certificates.
 
-This step uses [Let's Encrypt](https://letsencrypt.org/) for generating certificates, so it assumes that:
+Tnmhhis step uses [Let's Encrypt](https://letsencrypt.org/) for generating certificates, so it assumes that:
 
 1. Your machine is publicly accessible
 2. It has a publicly resolvable DNS entry
 
 If you do not meet these requirements, you should read through them to see the changes that are required.
 
-TODO(hxr): fix
-
-> ### {% icon hands_on %} Hands-on: SSL Certificates with Lets Encrypt!
+> ### {% icon hands_on %} Hands-on: SSL Certificates with Let's Encrypt (LE)!
 >
-> 1. Add the role `usegalaxy-eu.certbot` to your playbook and have it run as root.
+> 1. We need to configure NGINX to proxy requests to LE, because LE needs to authenticate on 443 or 80, and nginx is already bound to 80.
 >
+>    ```yaml
+>    location /.well-known/ {
+>        proxy_set_header           Host $host:$server_port;
+>        proxy_set_header           X-Real-IP $remote_addr;
+>        proxy_set_header           X-Forwarded-For $proxy_add_x_forwarded_for;
+>        proxy_set_header           X-Forwarded-Proto $scheme;
+>        proxy_pass                 http://127.0.0.1:8118;
+>        proxy_pass_request_headers on;
+>    }
+>    ```
+>
+> 2. Run the playbook
+>
+> 3. Add the role `usegalaxy-eu.certbot` to your playbook and have it run as root.
+>
+> 4. We need to add some variables for this:
+>
+>    {% raw %}
+>    ```yaml
+>    certbot_auto_renew: yes
+>    certbot_auto_renew_user: root
+>    certbot_auto_renew_hour:    # Pick a number between 0 and 23, inclusive
+>    certbot_auto_renew_minute:  # Pick a number between 0 and 59, inclusive
+>    certbot_auto_renew_extra: "--preferred-challenges http-01 --http-01-port 8118"
+>    certbot_environment: staging
+>    certbot_domains:
+>      - "{{ hostname }}"
+>    certbot_agree_tos: --agree-tos
+>    certbot_admin_email: security@usegalaxy.eu
+>    certbot_share_key_users:
+>      - nginx
+>    certbot_post_renewal: |
+>        systemctl restart nginx || true
+>    ```
+>    {% endraw %}
+>
+> 5. Run the playbook
 >
 {: .hands_on}
 
+And now we should have valid SSL certificates! We just need to go back and update our various services to support this.
+
+> ### {% icon tip %} Tip: Issues on CentOS
+> Check that setenforce is permissive, or allow nginx to connect back to localhost on a non-standard port.
+{: .tip}
+
+
+> ### {% icon hands_on %} Hands-on: Securing NGINX
+>
+> 1. Open your group variables, we need to re-structure the NGINX configuration to look like the following. As before we will show you the necessary configuration.
+>
+>
+>    {% raw %}
+>    ```yaml
+>    nginx_vhosts:
+>      - listen: "80"
+>        server_name: "{{ hostname }}"
+>        return: "301 https://{{ hostname }}$request_uri"
+>        filename: "{{ hostname }}.80.conf"
+>
+>      - listen: "443 ssl"
+>        server_name: "{{ hostname }}"
+>        root: "/var/www/{{ hostname }}"
+>        index: "index.html"
+>        access_log: "/var/log/nginx/access.log"
+>        error_log: "/var/log/nginx/error.log"
+>        state: "present"
+>        filename: "{{ hostname }}.conf"
+>        extra_parameters: |
+>            client_max_body_size 10G; # aka max upload size, defaults to 1M
+>            uwsgi_read_timeout 2400;
+>
+>            location / {
+>                uwsgi_pass      127.0.0.1:8080;
+>                uwsgi_param UWSGI_SCHEME $scheme;
+>                include         uwsgi_params;
+>            }
+>
+>            location /.well-known/ {
+>                proxy_set_header           Host $host:$server_port;
+>                proxy_set_header           X-Real-IP $remote_addr;
+>                proxy_set_header           X-Forwarded-For $proxy_add_x_forwarded_for;
+>                proxy_set_header           X-Forwarded-Proto $scheme;
+>                proxy_pass                 http://127.0.0.1:8118;
+>                proxy_pass_request_headers on;
+>            }
+>
+>            location /static {
+>                    alias {{ galaxy_server_dir }}/static;
+>                    expires 24h;
+>            }
+>
+>            location /static/style {
+>                    alias {{ galaxy_server_dir }}/static/style/blue;
+>                    expires 24h;
+>            }
+>
+>            location /static/scripts {
+>                    alias {{ galaxy_server_dir }}/static/scripts;
+>                    expires 24h;
+>            }
+>
+>            location /robots.txt {
+>                    alias {{ galaxy_server_dir }}/static/robots.txt;
+>            }
+>
+>            location /favicon.ico {
+>                    alias {{ galaxy_server_dir }}/static/favicon.ico;
+>            }
+>
+>            location /static/welcome.html {
+>                    alias {{ galaxy_server_dir }}/static/welcome.html.sample;
+>            }
+>            ssl_certificate /etc/ssl/certs/cert.pem;
+>            ssl_certificate_key /etc/ssl/private/privkey-nginx.pem;
+>
+>            ssl_protocols TLSv1.2;# Requires nginx >= 1.13.0 else use TLSv1.2
+>            ssl_prefer_server_ciphers on;
+>            ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384;
+>            ssl_ecdh_curve secp384r1;
+>            ssl_session_timeout  10m;
+>            ssl_session_cache shared:SSL:10m;
+>            ssl_session_tickets off;
+>            #ssl_stapling on;
+>            #ssl_stapling_verify on;
+>
+>            resolver 8.8.8.8 8.8.4.4 valid=300s;
+>            resolver_timeout 5s;
+>            add_header X-Content-Type-Options nosniff;
+>            add_header X-XSS-Protection "1; mode=block";
+>            add_header X-Robots-Tag none;
+>    ```
+>    {% endraw %}
+>
+> 2. Run the playbook
+>
+{: .hands_on}
