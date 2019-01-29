@@ -40,7 +40,7 @@ More details on Pulsar can be found at:
 
 - [Pulsar's Documentation](https://pulsar.readthedocs.io/en/latest/index.html)
 - [Pulsar's Github Repository](https://github.com/galaxyproject/pulsar)
-- [Pular Ansible Role](https://github.com/galaxyproject/ansible-pulsar)
+- [Pulsar Ansible Role](https://github.com/galaxyproject/ansible-pulsar)
 
 
 Transport of data, tool information and other metadata can be configured as a web application via a RESTful interface or using a message passing system such as RabbitMQ.
