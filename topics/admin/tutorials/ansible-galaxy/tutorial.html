@@ -192,6 +192,10 @@
                                             
                                         
                                     
+                                        
+                                            
+                                        
+                                    
                                 </div>
                             </li>
                         
@@ -398,6 +402,8 @@
                                 - <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
                             
                             </li>
+                        
+                    
                         
                     
                         
@@ -1514,7 +1520,7 @@ changed: [galaxy.example.org]
 
   <ol>
     <li>
-      <p>We need to configure NGINX to proxy requests to LE, because LE needs to authenticate on 443 or 80, and nginx is already bound to 80.</p>
+      <p>We need to configure NGINX to proxy requests to LE, because LE needs to authenticate on 443 or 80, and nginx is already bound to 80. Add this configuration to the top of your <code class="highlighter-rouge">nginx_vhosts</code> &gt; <code class="highlighter-rouge">extra_parameters</code> section in your group variables file:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">location /.well-known/ {</span>
     <span class="s">proxy_set_header           Host $host:$server_port;</span>
