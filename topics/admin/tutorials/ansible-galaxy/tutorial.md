@@ -905,7 +905,7 @@ Then you can potentially use it to recover.
 
 Now that you've gotten through the worst case scenario, we'll attack the next worst case scenario, auditors! They've shown up and demanded that everything have valid SSL certificates.
 
-Tnmhhis step uses [Let's Encrypt](https://letsencrypt.org/) for generating certificates, so it assumes that:
+This step uses [Let's Encrypt](https://letsencrypt.org/) for generating certificates, so it assumes that:
 
 1. Your machine is publicly accessible
 2. It has a publicly resolvable DNS entry
@@ -951,6 +951,9 @@ If you do not meet these requirements, you should read through them to see the c
 >        systemctl restart nginx || true
 >    ```
 >    {% endraw %}
+>
+>    Be sure to pick a actual value for `certbot_auto_renew_minute` and `certbot_auto_renew_hour`
+>    as noted in the commands above.
 >
 > 5. Run the playbook
 >
@@ -1029,7 +1032,7 @@ And now we should have valid SSL certificates! We just need to go back and updat
 >            location /static/welcome.html {
 >                    alias {{ galaxy_server_dir }}/static/welcome.html.sample;
 >            }
->            ssl_certificate /etc/ssl/certs/cert.pem;
+>            ssl_certificate /etc/ssl/certs/fullchain.pem;
 >            ssl_certificate_key /etc/ssl/private/privkey-nginx.pem;
 >
 >            ssl_protocols TLSv1.2;# Requires nginx >= 1.13.0 else use TLSv1.2
@@ -1061,6 +1064,11 @@ And now we should have valid SSL certificates! We just need to go back and updat
 >    ```
 >
 > 3. Run the playbook
+>
+> 4. You are now running with staging certificates. You will need production certificates
+>    for most applications, so now change the `certbot_environment` group variable to
+>    `production`, wipe out the existing certifacts with `sudo rm -rf /etc/letsencrypt`,
+>    and re-run the playbook.
 >
 {: .hands_on}
 
