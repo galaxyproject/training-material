@@ -42,7 +42,7 @@ This section will cover a bit of history about Genome Browsers. While not useful
 
 We use a lot of software under the umbrella term of GMOD, the [Generic Model Organism Database.](http://www.gmod.org/wiki/Main_Page “Generic Model Organism Database”)
 
-GMOD is a collection of open source software for maintaining Model Organism Databases (MODs). Having a common platform for MODs is important, as historically individual labs spent effort building their own, custom organism databases, and then faced challenges trying to interoperate with other databases. With GMOD and the associated tools, software that talks to one MOD can be re-used when talking to another MOD. We can use the same tools to work with the CPT’s Phage Database, as people use to access data in Yeast genome databases.
+GMOD is a collection of open source software for maintaining Model Organism Databases (MODs). Having a common platform for MODs is important, as historically individual labs spent effort building their own, custom organism databases, and then faced challenges trying to interoperate with other databases. With GMOD and the associated tools, software that talks to one MOD can be re-used when talking to another MOD. We can use the same tools to work with the CPT’s Phage Database as people use to access data in Yeast genome databases.
 
 
 ### 1. GBrowse
@@ -65,13 +65,13 @@ Apollo takes JBrowse one step further and adds support for community annotation;
 
 ### 4. Stand-alone tools: Artemis
 
-Many genome browsers and annotators are installed and store thier data on your local computer. Artemis, produced by the Sanger Institute, is a powerful and freely-available desktop-based genome browser and annotation tool. Artemis is written in Java and so it can be run on Windows, Mac and Linux-based systems.  Artemis provides a three-pane view consisting of a high-level overview of the genome, a DNA-level view, and a list of all the features in the genome. Unlike Apollo, all data is only stored on your local device. 
+Many genome browsers and annotators are installed and store thier data on your local computer. Artemis, produced by the Sanger Institute, is a powerful and freely-available desktop-based genome browser and annotation tool. Artemis is written in Java and so it can be run on Windows, Mac, and Linux-based systems.  Artemis provides a three-pane view consisting of a high-level overview of the genome, a DNA-level view, and a list of all the features in the genome. Unlike Apollo, all data is only stored on your local device. 
 
 ![](../../images/getting-started-with-apollo-screenshots/2_artemis.png)
 
 Artemis is capable of adding, deleting and editing genome features and annotations, and also has limited ability to edit DNA sequence directly. Features are not added from evidence tracks but may be entered by the user directly, which allows for great flexibility but also means that evidence for each annotation is not tied to the record itself. 
 
-In BICH 464, we will not be using Artemis for the annotation of your genomes.  However, Artemis is useful for viewing genomes retrieved from the public databases such as NCBI GenBank. Artemis is able to directly read GenBank-formatted files downloaded from the internet.  We will cover Artemis on an individual basis later in the course.
+In BICH 464, we will not be using Artemis for the annotation of your genomes.  However, Artemis is useful for viewing genomes retrieved from the public databases such as NCBI GenBank. Artemis is able to directly read GenBank-formatted files downloaded from the internet.  As needed, Artemis may be used on an individual basis later in the course. Our primary tool in BICH 464 is the Apollo interface.
 
 
 # Annotation Within Apollo
@@ -86,7 +86,7 @@ We will be using Galaxy and Apollo extensively in this course and it is importan
 
 JiG essentially sends a "snapshot" of your organism to Apollo, where you can add, remove or edit feature annotations. The changes you make in Apollo are maintained within a separate database and will not appear in Galaxy until you intentionally retrieve your data. The retrieved data can then be used to conduct further analyses in Galaxy, and then sent *back* into Apollo using the same JiG tools; as the course progresses, your organism's JBrowse instance will accumulate more and more data via this process.
 
-Apollo uses the concept of *Organisms* with each organism having one or more *reference sequences* below it. Some organisms such as eukaryotes might have multiple reference sequences associated with them, which would correspond to multiple chromosomes. For your phage annotation project, **each organism should only have a single reference sequence.** 
+Apollo uses the concept of *Organisms* with each organism having one or more *reference sequences* below it. Some organisms such as eukaryotes might have multiple reference sequences associated with them, which would correspond to multiple chromosomes. For your phage annotation project, **each organism will only have a single reference sequence.** 
 
 ## Navigating Through Apollo
 
@@ -113,7 +113,7 @@ In the Apollo panel on the right, there is a drop-down menu called the Genome Se
 ![](../../images/getting-started-with-apollo-screenshots/20_genome_selector.png)![](../../images/getting-started-with-apollo-screenshots/21_genome_selector_options.png)
 
 ### User Created Annotations Track
-The pale yellow track that is visible across the screen below the navigation controls is the *User Created Annotations* track. The called genes and other features exist here, so this is where you will be spending much or your time. This track (and the entire annotator panel) is a linear representation of the organism reference sequence, starting with the first base on the left and the last base on the right. Since gene features will be added to this track and edited, this track will *always* be visible. When you export data from Apollo back into Galaxy, only the features and data in this track will be retrieved. All changes you make to this track are automatically and immediately saved in Apollo.
+The pale yellow track that is visible across the screen below the navigation controls is the *User Created Annotations* track. The called genes and other features exist here, so this is where you will be spending much of your time. This track (and the entire annotator panel) is a linear representation of the organism reference sequence, starting with the first base on the left and the last base on the right. Since gene features will be added to this track and edited, this track will *always* be visible. When you export data from Apollo back into Galaxy, only the features and data in this track will be retrieved. All changes you make to this track are automatically and immediately saved in Apollo.
 
 ### Track Selector
 On the left side of the embedded JBrowse instance is a checklist-like column titled “Available Tracks”. Here the evidence tracks currently available for the genome being analyzed are listed. Evidence tracks will appear upon the execution of structural and functional workflows, as well as other custom analyses.
