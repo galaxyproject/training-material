@@ -38,14 +38,9 @@ Pulsar is the Galaxy Project's remote job running system. It was written by John
 
 More details on Pulsar can be found at:
 
-* Pulsar Read-the-docs
-    * [https://pulsar.readthedocs.io/en/latest/index.html](https://pulsar.readthedocs.io/en/latest/index.html)
-* Pulsar on galaxyproject.org
-    * [https://galaxyproject.org/admin/config/pulsar/](https://galaxyproject.org/admin/config/pulsar/)
-* Pulsar Github
-    * [https://github.com/galaxyproject/pulsar](https://github.com/galaxyproject/pulsar)
-* Pulsar Ansible
-    * [https://github.com/galaxyproject/ansible-pulsar](https://github.com/galaxyproject/ansible-pulsar)
+- [Pulsar's Documentation](https://pulsar.readthedocs.io/en/latest/index.html)
+- [Pulsar's Github Repository](https://github.com/galaxyproject/pulsar)
+- [Pulsar Ansible Role](https://github.com/galaxyproject/ansible-pulsar)
 
 
 Transport of data, tool information and other metadata can be configured as a web application via a RESTful interface or using a message passing system such as RabbitMQ.
@@ -82,7 +77,7 @@ We need to create a new ansible playbook to install Pulsar. We will be using a *
 > 1. From your ansible working directory, edit the `requirements.yml` file and add the following line:
 >
 >    ```yaml
->    - src: galaxyproject.pulsar
+>    - galaxyproject.pulsar
 >    ```
 >
 > 2. Now install it with:
