@@ -7,7 +7,7 @@ questions:
 objectives:
 - be familiar with configuring Galaxy to use an upstream (proxy) authentication provider
 - be able to log in to your Galaxy server with a file-configured user.
-time_estimation: "2h"
+time_estimation: "30m"
 key_points:
 - Remote auth is not complex to set up and can help you meet institutional requirements
 contributors:
@@ -55,23 +55,19 @@ For this exercise we will use a basic password file method for authenticating - 
 >            auth_basic           galaxy;
 >            auth_basic_user_file /etc/nginx/passwd;
 >            uwsgi_param          HTTP_REMOTE_USER $remote_user;
+>            uwsgi_param          HTTP_GX_SECRET SOME_SECRET_STRING;
 >        }
 >    ```
 >
 >    `auth_basic` enables validation of username and password using the "HTTP Basic Authentication" protocol. Its value `galaxy` is used as a realm name to be displayed to the user when prompting for credentials.
->
->    `auth_basic_user_file` specifies the file that keeps usernames and passwords, in the following format:
->
->    ```
->    # comment
->    name1:password1
->    name2:password2:comment
->    name3:password3
->    ```
->
+>    `auth_basic_user_file` specifies the file that keeps usernames and passwords.
 >    `uwsgi_param` adds `HTTP_REMOTE_USER` to the special variables passed by nginx to uwsgi, with value `$remote_user`, which is a nginx embedded variable containing the username supplied with the Basic authentication.
 >
-> 2. Add a pre_task using the [`htpasswd`](https://docs.ansible.com/ansible/2.4/htpasswd_module.html) which sets up a password file in `/etc/nginx/passwd`, with owner and group set to root, and a name and password, and a mode of 0640.
+>    `GX_SECRET` is added as a header for security purposes, to prevent any other users on the system impersonating nginx and sending requests to Galaxy. NGINX and other webservers like Apache will strip any user-sent `REMOTE_USER` headers, as that header defines the authenticated user. If you can talk directly to Galaxy (e.g. via curl) and provide the `REMOTE_USER` header, you can impersonate any other use. While having Galaxy listen on `127.0.0.1` prevents any requests from outside of the system reaching Galaxy, anyone on the system can still send requests to that port. Here you can choose to switch to a unix socket with permissions only permitting Galaxy and Nginx to connect. For using sockets, we ins
+>
+> 2. Add a pre_task using the [`pip`](https://docs.ansible.com/ansible/latest/modules/pip_module.html) module which installs the library `passlib`, which is required for `htpasswd`.
+>
+>    Add a pre_task using the [`htpasswd`](https://docs.ansible.com/ansible/2.4/htpasswd_module.html) module which sets up a password file in `/etc/nginx/passwd`, with owner and group set to root, and a name and password, and a mode of 0640.
 >    > ### {% icon question %} Question
 >    >
 >    > How does your final configuration look?
@@ -79,11 +75,13 @@ For this exercise we will use a basic password file method for authenticating - 
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > ```
+>    > > - pip:
+>    > >     name: passlib
 >    > > - htpasswd:
 >    > >     path: /etc/nginx/passwd
->    > >     name: helena
->    > >     password: 'squeamish ossifrage'
->    > >     owner: root
+>    > >     name: helena                    # Pick a username
+>    > >     password: 'squeamish ossifrage' # and a password
+>    > >     owner: www-data # nginx on centos
 >    > >     group: root
 >    > >     mode: 0640
 >    > > ```
@@ -100,6 +98,7 @@ For this exercise we will use a basic password file method for authenticating - 
 >        ...
 >        use_remote_user: true
 >        remote_user_maildomain: "{{ hostname }}"
+>        remote_user_secret: SOME_SECRET_STRING
 >    ```
 >
 >    Set the `remote_user_maildomain` option to the appropriate domain name for your site.
@@ -110,7 +109,7 @@ For this exercise we will use a basic password file method for authenticating - 
 
 > ### {% icon tip %} Tip: Access denied
 >
-> If you see this message, it is because nginx is not correctly sending the `REMOTE_USER` variable
+> If you see this message, it is because nginx is not correctly sending the `REMOTE_USER` or the `GX_SECRET` values.
 >
 > ![access denied message](../../images/access_denied.png)
 >
@@ -121,17 +120,20 @@ For this exercise we will use a basic password file method for authenticating - 
 
 You should now be presented with a password dialog when attempting to load the Galaxy UI.
 
-> ### {% icon hands_on %} Hands-on:
+> ### {% icon hands_on %} Hands-on: Testing
 >
 > 1. Log in using the username and password you provided when creating the `passwd` file. If your username and the value of `remote_user_maildomain` match an existing user, you will be logged in to that account. If not, a new account will be created for that user.
 >
+> 2. Click on the "User" menu at the top, to see how the username appears.
+>
+> 3. Note that some user features are not available when remote user support is enabled.
+>
+>    Try logging out by selecting **User** -> **Logout**. You will discover that when returning to the user interface, you are still logged in. This is because Galaxy has no way of logging you out of the proxy's authentication system. Instead, you should set `remote_user_logout_href` in `galaxy.ini` to point to the URL of your authentication system's logout page.
+>
 {: .hands_on}
 
-Note that some user features are not available when remote user support is enabled.
 
-Try logging out by selecting **User** -> **Logout**. You will discover that when returning to the user interface, you are still logged in. This is because Galaxy has no way of logging you out of the proxy's authentication system. Instead, you should set `remote_user_logout_href` in `galaxy.ini` to point to the URL of your authentication system's logout page.
-
-# (Workshop Only) Reverting
+# Reverting
 
 We don't want to leave Galaxy this way for the rest of our workshop.
 

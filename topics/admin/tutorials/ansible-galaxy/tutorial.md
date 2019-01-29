@@ -914,7 +914,7 @@ If you do not meet these requirements, you should read through them to see the c
 
 > ### {% icon hands_on %} Hands-on: SSL Certificates with Let's Encrypt (LE)!
 >
-> 1. We need to configure NGINX to proxy requests to LE, because LE needs to authenticate on 443 or 80, and nginx is already bound to 80.
+> 1. We need to configure NGINX to proxy requests to LE, because LE needs to authenticate on 443 or 80, and nginx is already bound to 80. Add this configuration to the top of your `nginx_vhosts` > `extra_parameters` section in your group variables file:
 >
 >    ```yaml
 >    location /.well-known/ {
