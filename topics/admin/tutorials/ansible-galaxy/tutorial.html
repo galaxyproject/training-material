@@ -1500,7 +1500,7 @@ changed: [galaxy.example.org]
 
 <p>Now that you’ve gotten through the worst case scenario, we’ll attack the next worst case scenario, auditors! They’ve shown up and demanded that everything have valid SSL certificates.</p>
 
-<p>Tnmhhis step uses <a href="https://letsencrypt.org/">Let’s Encrypt</a> for generating certificates, so it assumes that:</p>
+<p>This step uses <a href="https://letsencrypt.org/">Let’s Encrypt</a> for generating certificates, so it assumes that:</p>
 
 <ol>
   <li>Your machine is publicly accessible</li>
@@ -1550,6 +1550,9 @@ changed: [galaxy.example.org]
 <span class="na">certbot_post_renewal</span><span class="pi">:</span> <span class="pi">|</span>
     <span class="no">systemctl restart nginx || true</span>
 </code></pre></div>      </div>
+
+      <p>Be sure to pick a actual value for <code class="highlighter-rouge">certbot_auto_renew_minute</code> and <code class="highlighter-rouge">certbot_auto_renew_hour</code>
+as noted in the commands above.</p>
     </li>
     <li>
       <p>Run the playbook</p>
@@ -1631,7 +1634,7 @@ changed: [galaxy.example.org]
         <span class="no">location /static/welcome.html {</span>
                 <span class="no">alias {{ galaxy_server_dir }}/static/welcome.html.sample;</span>
         <span class="no">}</span>
-        <span class="no">ssl_certificate /etc/ssl/certs/cert.pem;</span>
+        <span class="no">ssl_certificate /etc/ssl/certs/fullchain.pem;</span>
         <span class="no">ssl_certificate_key /etc/ssl/private/privkey-nginx.pem;</span>
 
         <span class="no">ssl_protocols TLSv1.2;# Requires nginx &gt;= 1.13.0 else use TLSv1.2</span>
@@ -1663,6 +1666,12 @@ changed: [galaxy.example.org]
     </li>
     <li>
       <p>Run the playbook</p>
+    </li>
+    <li>
+      <p>You are now running with staging certificates. You will need production certificates
+for most applications, so now change the <code class="highlighter-rouge">certbot_environment</code> group variable to
+<code class="highlighter-rouge">production</code>, wipe out the existing certifacts with <code class="highlighter-rouge">sudo rm -rf /etc/letsencrypt</code>,
+and re-run the playbook.</p>
     </li>
   </ol>
 
