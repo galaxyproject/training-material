@@ -73,7 +73,7 @@ The Galaxy project supports a few CVMFS repositories.
 
 Luckily for us, the Galaxy Project has a lot of experience with using and configuring CVMFS and we are going to leverage off that. To get CVMFS working on our Galaxy server, we will use the ansible role for CVMFS written by the Galaxy Project. Firstly, we need to install the role and then write a playbook for using it.
 
-If the terms "ansible", "role" and "playbook" mean nothing to you, please checkout [the ansible introduction slides](https://galaxyproject.github.io/training-material/topics/admin/tutorials/ansible/slides.html#1) and [the ansible introduction tutorial](https://galaxyproject.github.io/training-material/topics/admin/tutorials/ansible/tutorial.html)
+If the terms "ansible", "role" and "playbook" mean nothing to you, please checkout [the ansible introduction slides]({{ site.baseurl }}/topics/admin/tutorials/ansible/slides.html) and [the ansible introduction tutorial]({{ site.baseurl }}/topics/admin/tutorials/ansible/tutorial.html)
 
 {% include snippets/ansible_local.md %}
 
