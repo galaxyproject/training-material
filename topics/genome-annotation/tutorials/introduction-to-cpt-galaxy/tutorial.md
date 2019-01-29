@@ -105,7 +105,7 @@ generates a dataset. These datasets (and the output datasets from later analysis
 ## The Current History
 
 All users have one 'current' history, which can be thought of as **a workspace or a current working directory** in
-bioinformatics terms. You current history displayed in the right hand side of the main 'Analyze Data' Galaxy page in
+bioinformatics terms. Your current history is displayed on the right hand side of the main 'Analyze Data' Galaxy page in
 what is called the history panel.
 
 The history panel displays output datasets in the order in which they were created with the oldest/first shown on the
@@ -121,12 +121,12 @@ between them and creating new ones. This can be useful to organize different ana
 
 Above the current history panel are three buttons: the refresh, history options, and 'view all histories' button.
 
-The refresh button will entirely reload the history being viewed. This can be helpful if you believe the history
+> * The refresh button ![](../../images/introduction-to-cpt-galaxy-screenshots/12_rerun_icon.png) will entirely reload the history being viewed. This can be helpful if you believe the history
 interface needs to be updated or isn't updating properly.
 
-The history options button opens the history options menu which allows you to perform history-related tasks.
+> * The history options button ![](../../images/introduction-to-cpt-galaxy-screenshots/20_settings_icon.png) opens the history options menu which allows you to perform history-related tasks.
 
-The 'view all histories' button sends you to the interface for managing multiple histories
+> * The 'view all histories' button sends you to the interface for managing multiple histories
 
 ## History Information
 
@@ -135,21 +135,19 @@ annotated. It’s good scientific practice to maintain organized records; this t
 
 ### Renaming a history
 
-All histories begin with the name 'Unnamed history'. Users can re-name histories to provide relevant details on the work they conatin, such as the name of the organism and the date of the work:
+All histories begin with the name 'Unnamed history'. Users can re-name histories to provide relevant details on the work they contain, such as the name of the organism and the date of the work:
 
 1. Click the existing name. A text input field will appear with the current name.
-2. Entered a new name or edit the existing the way you'd like.
-3. Press 'Enter' to save the new name. The input field will disappear and the new name display.
-4. To cancel renaming, press 'Esc' or click outside the input field.
+2. Entered a new name or edit the existing one the way you'd like.
+3. Press 'Enter' to save the new name. The input field will disappear and the new name will display.
+4. To cancel renaming, press 'Esc' or **click outside the input field.** If your name is not saving, make sure you press 'Enter' before clicking anywhere outside the box.
 
 ![Renaming history](../../images/introduction-to-cpt-galaxy-screenshots/renaming.png)
 
 ### Tagging a history
 
 Tags are short pieces of text used to describe the thing they're attached to and many things in Galaxy can be tagged.
-Each item can have many tags and you can add new tags or remove them at any time. Tags can be another useful way to
-organize and search your data. For instance, you might tag a history with the type of analysis you did in it: 'assembly'
-or 'variants'. Or you may tag them according to data sources or some other metadata.
+Each item can have many tags and you can add new tags or remove them at any time. Think of them as keywords, as they are searchable. Tags can be another useful way to organize and search your data. For instance, you might tag a history with the type of analysis you did in it: 'assembly' or 'variants'. Or you may tag them according to data sources or some other metadata.
 
 To tag a history:
 
@@ -172,8 +170,8 @@ To annotate a history:
 
 1. Click the annotation button at the top of the history panel. A larger text section will appear displaying any
   existing annotation (or, if there's none, italic text saying you can click on the control to create an annotation).
-2. Click the annotation section. The a larger input field will appear.
-3. Add any annotations you desire. 'Return' will create a line break and white space is preserved. (Tabs cannot be
+2. Click the annotation section. Then a larger input field will appear.
+3. Add any annotations you desire. 'Return'/'Enter' will create a line break and white space is preserved. (Tabs cannot be
   entered since the 'Tab' button is used to switch between controls on the page - tabs can be pasted in however).
 4. To save the annotation, click the 'Done' button.
 
@@ -245,7 +243,7 @@ Near the top, the format is listed as *tabular*. At the bottom of the expanded d
 
 Some procedures in Galaxy such as workflows will often **hide** history datasets in order to simplify the history
 and hide intermediate steps of an automated analysis. These hidden datasets won't normally appear in the history panel
-but their still mentioned in the history subtitle (the smaller, grey text that appears below the history name). If you
+but they are still mentioned in the history subtitle (the smaller, grey text that appears below the history name). If your
 history has hidden datasets, the number will appear there (e.g. '95 hidden') as a clickable link. If you click this link,
 the hidden datasets are shown. Each hidden dataset has a link in the top of the summary view that allows you to unhide
 it. You can click that link again (which will now be 'hide hidden') to make them not shown again.
@@ -336,7 +334,7 @@ In the collection of workflows, click on the down arrow of the desired workflow,
 
 ![](../../images/introduction-to-cpt-galaxy-screenshots/26_run_workflow.png)
 
-The workflow interface page will appear; this can feel a little overwhelming, especially as a beginner. For the most part, the parameters are pre-configured. Some inputs may need to be manually adjust by the user. Ask the [CPT](https://cpt.tamu.edu) staff and IT management (cpt@tamu.edu) if there is confusion about the necessary inputs.
+The workflow interface page will appear; this can feel a little overwhelming, especially as a beginner. For the most part, the parameters are pre-configured. Some inputs may need to be manually adjusted by the user. Ask the [CPT](https://cpt.tamu.edu) staff and IT management (cpt@tamu.edu) if there is confusion about the necessary inputs.
 
 ![](../../images/introduction-to-cpt-galaxy-screenshots/27_workflow_parameters.png)
 
