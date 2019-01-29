@@ -79,7 +79,7 @@ If the terms "ansible", "role" and "playbook" mean nothing to you, please checko
 
 > ### {% icon hands_on %} Hands-on: Installing CVMFS with Ansible
 >
-> 1. In your working directory, add the CVMFS role to your `requirements.yaml`
+> 1. In your working directory, add the CVMFS role to your `requirements.yml`
 >
 >    ```yaml
 >    ---
@@ -89,7 +89,7 @@ If the terms "ansible", "role" and "playbook" mean nothing to you, please checko
 > 2. Install the requirements with `ansible-galaxy`:
 >
 >    ```bash
->    ansible-galaxy install -p roles -r requirements.yaml
+>    ansible-galaxy install -p roles -r requirements.yml
 >    ```
 >
 > 3. Create and edit the group variables file, `group_vars/galaxyservers.yml` file.
@@ -228,6 +228,10 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >        - galaxyproject.cvmfs
 >        - galaxyproject.galaxy
 >    ```
+>
+> > ### {% icon tip %} Ansible Heads-up
+> > If you've set up your Galaxy server using the [Galaxy Installation with Ansible](/training.galaxyproject.org/topics/admin/tutorials/ansible-galaxy/tutorial.html) tutorial, you'll've created a *handler* for restarting Galaxy (its name is set in the `galaxy_restart_handler_name` option in your group vars). You'll need to define that handler in the CVMFS playbook the same way as you defined it in your original playbook. This also means that Ansible will perform the restart step below for you!
+> {: .tip}
 >
 > 3. Re-run the CVMFS playbook (`ansible-playbook -i hosts cvmfs_playbook.yml`)
 >
