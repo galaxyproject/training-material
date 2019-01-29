@@ -953,7 +953,7 @@ If you do not meet these requirements, you should read through them to see the c
 >    {% endraw %}
 >
 >    Be sure to pick a actual value for `certbot_auto_renew_minute` and `certbot_auto_renew_hour`
->    as noted in the commends above.
+>    as noted in the commands above.
 >
 > 5. Run the playbook
 >
