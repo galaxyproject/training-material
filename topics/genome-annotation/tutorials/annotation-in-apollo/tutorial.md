@@ -27,7 +27,7 @@ tutorial_name: annotation-in-apollo
 
 # Prerequisites
 
-Before beginning annotation within Galaxy ([CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy)), it is necessary that there is a genome loaded into Apollo. Additionally, the [structural annotation]({{ site.baseurl }}//topics/genome-annotation/tutorials/structural-annotation-workflow/tutorial.html) *must* be complete, and the [functional annotation workflow]({{ site.baseurl }}//topics/genome-annotation/tutorials/functional-annotation-workflow/tutorial.html) has **already been run**. The functional annotation workflow opens up the necessary evidence tracks for annotation.
+Before beginning annotation within Galaxy ([CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy)), it is necessary that there is a genome loaded into Apollo. Additionally, the [structural annotation](https://cpt.tamu.edu/training-material/topics/introduction/tutorials/structural-annotation-workflow/tutorial.html) *must* be complete, and the [functional annotation workflow](https://cpt.tamu.edu/training-material/topics/introduction/tutorials/functional-annotation-workflow/tutorial.html) has **already been run**. The functional annotation workflow opens up the necessary evidence tracks for annotation.
 
 # Making an Annotation
 
@@ -43,7 +43,7 @@ Generally, the annotation process is a synthesis between the understanding of ph
 > * Comments -> *Apply any free-text comments here.* (Could be something like **the e-value(s)** between the annotated gene and homologs or notes to one’s self.)
 
 > ### {% icon tip %} Note that…
-> Calling genes is [covered in another tutorial.]({{ site.baseurl }}//topics/genome-annotation/tutorials/structural-annotation-workflow/tutorial.html)
+> Calling genes is [covered in another tutorial.](https://cpt.tamu.edu/training-material/topics/introduction/tutorials/structural-annotation-workflow/tutorial.html)
 {: .tip}
 
 To annotate a gene that has been called, right click on the gene in the pale yellow  User-Created Annotations track, and select “Edit information (alt-click).”
@@ -94,7 +94,7 @@ The [CPT’s](https://cpt.tamu.edu) PAP integrates gene calls from numerous sour
 ![](../../images/annotation-in-apollo-screenshots/2_gene_calls.png)
 
 > ### {% icon tip %} Note that…
-> Gene calling is part of structurally annotating a genome in Apollo. For more information on structural annotation and gene calling, please look at [this tutorial]({{ site.baseurl }}//topics/genome-annotation/tutorials/structural-annotation-workflow/tutorial.html).
+> Gene calling is part of structurally annotating a genome in Apollo. For more information on structural annotation and gene calling, please look at [this tutorial](https://cpt.tamu.edu/training-material/topics/introduction/tutorials/structural-annotation-workflow/tutorial.html).
 {: .tip}
 
 ### BLAST
