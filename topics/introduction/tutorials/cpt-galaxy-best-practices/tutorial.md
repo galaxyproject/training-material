@@ -122,7 +122,7 @@ On the contrary, tags can *ONLY* be added to a dataset be selecting the ![](../.
 
 > * In the multi-history view, the user can **search** the annotation notes that have been put onto both histories **and** datasets.
 
-## Assists Collaborators Use This Data
+## Assists Collaborators to Use This Data
 ------
 
 > * When the creator has moved on to a different lab, upcoming peers will be able to continue using this data for research and publication. **Clear documentation is essential for future publication**.
