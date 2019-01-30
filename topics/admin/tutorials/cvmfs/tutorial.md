@@ -73,7 +73,7 @@ The Galaxy project supports a few CVMFS repositories.
 
 Luckily for us, the Galaxy Project has a lot of experience with using and configuring CVMFS and we are going to leverage off that. To get CVMFS working on our Galaxy server, we will use the ansible role for CVMFS written by the Galaxy Project. Firstly, we need to install the role and then write a playbook for using it.
 
-If the terms "ansible", "role" and "playbook" mean nothing to you, please checkout [the ansible introduction slides](https://galaxyproject.github.io/training-material/topics/admin/tutorials/ansible/slides.html#1) and [the ansible introduction tutorial](https://galaxyproject.github.io/training-material/topics/admin/tutorials/ansible/tutorial.html)
+If the terms "ansible", "role" and "playbook" mean nothing to you, please checkout [the ansible introduction slides]({{ site.baseurl }}/topics/admin/tutorials/ansible/slides.html) and [the ansible introduction tutorial]({{ site.baseurl }}/topics/admin/tutorials/ansible/tutorial.html)
 
 {% include snippets/ansible_local.md %}
 
@@ -230,7 +230,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    ```
 >
 > > ### {% icon tip %} Ansible Heads-up
-> > If you've set up your Galaxy server using the [Galaxy Installation with Ansible](/training.galaxyproject.org/topics/admin/tutorials/ansible-galaxy/tutorial.html) tutorial, you'll've created a *handler* for restarting Galaxy (its name is set in the `galaxy_restart_handler_name` option in your group vars). You'll need to define that handler in the CVMFS playbook the same way as you defined it in your original playbook. This also means that Ansible will perform the restart step below for you!
+> > If you've set up your Galaxy server using the [Galaxy Installation with Ansible]({{ site.baseurl }}/topics/admin/tutorials/ansible-galaxy/tutorial.html) tutorial, you'll've created a *handler* for restarting Galaxy (its name is set in the `galaxy_restart_handler_name` option in your group vars). You'll need to define that handler in the CVMFS playbook the same way as you defined it in your original playbook. This also means that Ansible will perform the restart step below for you!
 > {: .tip}
 >
 > 3. Re-run the CVMFS playbook (`ansible-playbook -i hosts cvmfs_playbook.yml`)
