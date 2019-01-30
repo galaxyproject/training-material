@@ -33,13 +33,12 @@ requirements:
     topic_name: admin
     tutorials:
       - ansible
+      - ansible-galaxy
   - title: "A server/VM on which to deploy Slurm"
     type: "none"
   - type: "external"
     title: Ansible setup on your local machine
     link: "https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html"
-  - title: Comfort with Ansible roles and tasks
-    type: "none"
 ---
 
 # Running Galaxy Jobs with Slurm
