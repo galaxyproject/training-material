@@ -561,7 +561,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 
 > ### {% icon hands_on %} Hands-on: Writing a dynamic job destination
 >
-> 1. Create and open `files/galaxy/dynamic_job_rules/admin_only.py`
+> 1. Create and open `files/galaxy/dynamic_job_rules/my_rules.py`
 >
 >    ```python
 >    from galaxy.jobs import JobDestination
@@ -583,7 +583,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >
 >      ```yml
 >      galaxy_dynamic_job_rules:
->        - admin_only
+>        - my_rules.py
 >      ```
 >
 > 3. We next need to configure this plugin in our job configuration:
@@ -595,7 +595,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    </destination>
 >    ```
 >
->    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available `admin_only.py` to be used in the `job_conf.xml`
+>    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available `my_rules.py` to be used in the `job_conf.xml`
 >
 > 4. Finally, in `job_conf.xml`, update the `<tool>` definition and point it to this destination:
 >
@@ -835,8 +835,8 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >
 >      ```yml
 >      galaxy_dynamic_job_rules:
->        - admin_only
->        - map_resources
+>        - my_rules.py
+>        - map_resources.py
 >      ```
 >
 > 3. Run the playbook, restart Galaxy
