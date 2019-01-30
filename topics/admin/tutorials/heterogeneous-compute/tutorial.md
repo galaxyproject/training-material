@@ -244,7 +244,7 @@ We also need to create the dependency resolver file so pulsar knows how to find 
 
 > ### {% icon hands_on %} Hands-on: Run the Playbook
 >
-> 1. Run the playbook. If your remote pulsar machine uses a different key, you may need to supply the `ansible-playbook` command with the private key for the connection using the `--private_key key.pem` option.
+> 1. Run the playbook. If your remote pulsar machine uses a different key, you may need to supply the `ansible-playbook` command with the private key for the connection using the `--private-key key.pem` option.
 >
 >    ```bash
 >    ansible-playbook -i hosts pulsar_playbook.yml
