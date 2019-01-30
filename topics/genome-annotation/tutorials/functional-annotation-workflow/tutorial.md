@@ -6,7 +6,7 @@ tutorial_name: functional-annotation-workflow
 
 # Functional Annotation Workflow
 
-This tutorial is used to run analyses for gene function prediction after the genome [structural annotation]({{ site.baseurl }}//topics/genome-annotation/tutorials/structural-annotation-workflow/tutorial.html) has been completed.
+This tutorial is used to run analyses for gene function prediction after the genome [structural annotation](https://cpt.tamu.edu/training-material/topics/genome-annotation/tutorials/structural-annotation-workflow/tutorial.html) has been completed.
 
 > ### Agenda
 >
@@ -73,4 +73,4 @@ This workflow includes multiple computationally-intensive steps. With high serve
 
 # Completion
 
-Once all the datasets and tools have completed, then functional annotation within Apollo may begin. How to use the evidence to predict gene function is beyond the scope of this tutorial and is touched on in the [Annotation in Apollo tutorial]({{ site.baseurl }}//topics/genome-annotation/tutorials/annotation-in-apollo/tutorial.html). General Apollo function help can be found in [tutorial 1]({{ site.baseurl }}//topics/genome-annotation/tutorials/getting-started-with-apollo/tutorial.html) and [tutorial 2]({{ site.baseurl }}//topics/genome-annotation/tutorials/annotation-in-apollo/tutorial.html).
+Once all the datasets and tools have completed, then functional annotation within Apollo may begin. How to use the evidence to predict gene function is beyond the scope of this tutorial and is touched on in the [Annotation in Apollo tutorial](https://cpt.tamu.edu/training-material/topics/genome-annotation/tutorials/annotation-in-apollo/tutorial.html). General Apollo function help can be found in the [Getting Started with Apollo tutorial]({https://cpt.tamu.edu/training-material-dev/topics/genome-annotation/tutorials/getting-started-with-apollo/tutorial.html) and in the [Annotation in Apollo tutorial](https://cpt.tamu.edu/training-material-dev/topics/genome-annotation/tutorials/annotation-in-apollo/tutorial.html).
