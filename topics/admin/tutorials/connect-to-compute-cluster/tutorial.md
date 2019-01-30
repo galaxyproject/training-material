@@ -61,14 +61,16 @@ be taken into consideration when choosing where to run jobs and what parameters 
 
 > ### {% icon hands_on %} Hands-on: Installing Slurm
 >
-> 1. Create and edit a file in your working directory called `requirements.yaml` and include the following contents:
+> 1. Create and edit a file in your working directory called `requirements.yml` and include the following contents:
 >
 >    ```yaml
->    - src: https://github.com/galaxyproject/ansible-slurm
->      name: galaxyproject.slurm
+>    - name: galaxyproject.repos
+>    - name: galaxyproject.slurm
 >    ```
 >
-> 2. In the same directory, run `ansible-galaxy install -p roles -r requirements.yaml`. This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
+>    The `galaxyproject.repos` role adds the [Galaxy Packages for Enterprise Linux (GPEL)](https://depot.galaxyproject.org/yum/) repository for RedHat/CentOS, which provides both Slurm and Slurm-DRMAA (neither are available in standard repositories or EPEL). For Ubuntu versions 18.04 or newer, it adds the [Slurm-DRMAA PPA](https://launchpad.net/~natefoo/+archive/ubuntu/slurm-drmaa) (Slurm-DRMAA was removed from Debian/Ubuntu in buster/bionic).
+>
+> 2. In the same directory, run `ansible-galaxy install -p roles -r requirements.yml`. This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
 >
 > 3. Create the hosts file if you have not done so, include a group for `[galaxyservers]` with the address of the host where you will install Slurm
 >
@@ -78,15 +80,12 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    - hosts: galaxyservers
 >      become: true
 >      vars:
->        slurm_user: {}
 >        slurm_roles: ['controller', 'exec']
->        slurm_controller_name: "{{ ansible_hostname }}"
->        slurm_controller_ip: 127.0.0.1
 >      roles:
 >        - galaxyproject.slurm
 >    ```
 >
-> 5. Run the playbook (`ansible -i hosts slurm.yml`)
+> 5. Run the playbook (`ansible-playbook -i hosts slurm.yml`)
 >
 {: .hands_on}
 
@@ -139,11 +138,11 @@ Jan 26 23:04:20 helena-test.novalocal systemd[1]: PID file /var/run/slurmctld.pi
 Jan 26 23:04:20 helena-test.novalocal systemd[1]: Started Slurm controller daemon.
 ```
 
-Running the playbook, the configuration was created for you automatically. All of the variables were set by default. If you need to override the configuration yourself, Slurm provides [an online tool](https://slurm.schedmd.com/configurator.html) which will help you configure it.
+Running the playbook, the Slurm configuration, `/etc/slurm/slurm.conf` (or `/etc/slurm-llnl/slurm.conf` on Debian-based distributions) was created for you automatically. All of the variables were set by default. If you need to override the configuration yourself, Slurm provides [an online tool](https://slurm.schedmd.com/configurator.html) which will help you configure it.
 
 ## Using Slurm
 
-You should now be able to see that your slurm cluster is operational with the `sinfo` command. This shows the state of nodes and partitions (synonymous with queues in other DRMs). The "node-oriented view" provided with the `-N` flag is particularly useful:
+You should now be able to see that your Slurm cluster is operational with the `sinfo` command. This shows the state of nodes and partitions (synonymous with queues in other DRMs). The "node-oriented view" provided with the `-N` flag is particularly useful:
 
 ```console
 $ sinfo
@@ -155,7 +154,7 @@ NODELIST   NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT FEAT
 localhost      1    debug*        idle    1    2:1:1      1        0      1   (null) none
 ```
 
-If your node state is not `idle`, something has gone wrong. If your node state ends with an asterisk \*, the slurm controller is attempting to contact the slurm execution daemon but has not yet been successful.
+If your node state is not `idle`, something has gone wrong. If your node state ends with an asterisk \*, the Slurm controller is attempting to contact the Slurm execution daemon but has not yet been successful (the \* next to the partition name is normal, it indicates the default partition).
 
 We want to ensure that Slurm is actually able to run jobs. There are two ways this can be done:
 
@@ -227,7 +226,8 @@ Although it looks like this command ran as if I had not used `srun`, it was in f
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > ```console
->    > > $ sbatch ~/sbatch-test.sh
+>    > >JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+>    > >    3     debug sbatch-t   ubuntu  R       0:22      1 localhost
 >    > > ```
 >    > {: .solution }
 >    {: .question}
@@ -240,38 +240,27 @@ If you've made it this far, your Slurm installation is working!
 
 Above Slurm in the stack is slurm-drmaa, a library that provides a translational interface from the Slurm API to the generalized DRMAA API in C.
 
-{% include snippets/todo.md notes="Need to ansibilize. Ping @natefoo" %}
-
-```console
-$ sudo apt-get install slurm-drmaa1
-Reading package lists... Done
-Building dependency tree
-Reading state information... Done
-The following additional packages will be installed:
-  libslurm29
-The following NEW packages will be installed:
-  libslurm29 slurm-drmaa1
-0 upgraded, 2 newly installed, 0 to remove and 91 not upgraded.
-Need to get 574 kB of archives.
-After this operation, 1,676 kB of additional disk space will be used.
-Do you want to continue? [Y/n]
-Get:1 http://us.archive.ubuntu.com/ubuntu xenial/universe amd64 libslurm29 amd64 15.08.7-1build1 [522 kB]
-Get:2 http://us.archive.ubuntu.com/ubuntu xenial/universe amd64 slurm-drmaa1 amd64 1.0.7-1build3 [52.3 kB]
-Fetched 574 kB in 0s (1,102 kB/s)
-Selecting previously unselected package libslurm29.
-(Reading database ... 60829 files and directories currently installed.)
-Preparing to unpack .../libslurm29_15.08.7-1build1_amd64.deb ...
-Unpacking libslurm29 (15.08.7-1build1) ...
-Selecting previously unselected package slurm-drmaa1.
-Preparing to unpack .../slurm-drmaa1_1.0.7-1build3_amd64.deb ...
-Unpacking slurm-drmaa1 (1.0.7-1build3) ...
-Processing triggers for libc-bin (2.23-0ubuntu3) ...
-Setting up libslurm29 (15.08.7-1build1) ...
-Setting up slurm-drmaa1 (1.0.7-1build3) ...
-Processing triggers for libc-bin (2.23-0ubuntu3) ...
-$
-```
-
+> ### {% icon hands_on %} Hands-on: Installing Slurm-DRMAA
+>
+> 1. Add a task to your playbook to install `slurm-drmaa1` (Debian/Ubuntu) or `slurm-drmaa` (RedHat/CentOS):
+>
+>    ```yaml
+>    - hosts: galaxyservers
+>      become: true
+>      vars:
+>        slurm_roles: ['controller', 'exec']
+>      roles:
+>        - galaxyproject.repos
+>        - galaxyproject.slurm
+>      post_tasks:
+>        - name: Install slurm-drmaa
+>          package:
+>            name: slurm-drmaa1
+>    ```
+>
+> 2. Run the playbook (`ansible-playbook -i hosts slurm.yml`)
+>
+{: .hands_on}
 
 Moving one level further up the stack, we find DRMAA Python. This is a Galaxy framework *conditional dependency*. Conditional dependencies are only installed if, during startup, a configuration option is set that requires that dependency. The `galaxyproject.galaxy` Ansible role will install these conditional dependencies, automatically.
 
@@ -283,14 +272,15 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 > ### {% icon hands_on %} Hands-on: Making Galaxy aware of DRMAA
 >
 > 1. Open your group variables and edit the supervisor task, update the environment variable:
+>
 >    ```yaml
 >    supervisor_programs:
 >      - name: galaxy
 >        ...
 >        configuration: |
 >          ...
->          environment=HOME={{ galaxy_root }},VIRTUALENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:%(ENV_PATH)s,DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"
->
+>          {% raw %}environment=HOME="{{ galaxy_mutable_data_dir }}",VIRTUAL_ENV="{{ galaxy_venv_dir }}",PATH="{{ galaxy_venv_dir }}/bin:%(ENV_PATH)s",DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"{% endraw %}
+>   ```
 >
 > 2. We need to modify `job_conf.xml` to instruct Galaxy's job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the `id`, `type`, and `load` attributes. The entire `<plugins>` tag group should look like:
 >
@@ -318,9 +308,27 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    </destinations>
 >    ```
 >
-> 4. Follow the logs with `supervisorctl tail -f galaxy`
+> 4. Inform `galaxyproject.galaxy` of your new config file using the `galaxy_config_files` var in your group vars
 >
-> 5. Rerun the playbook. Because we updated the supervisor config, Galaxy will automatically be restarted.
+>    ```yaml
+>    galaxy_config_files:
+>      - src: files/galaxy/config/job_conf.xml
+>        dest: {% raw %}"{{ galaxy_config_dir }}/job_conf.xml"{% endraw %}
+>    ```
+>
+>    And by setting the `job_config_file` option in Galaxy's `galaxy_config` group variable:
+>
+>    ```yaml
+>    galaxy_config:
+>      galaxy:
+>        job_config_file: {% raw %}"{{ galaxy_config_dir }}/job_conf.xml"{% endraw %}
+>    ```
+>
+> 5. Run your *Galaxy* playbook (`ansible-playbook -i hosts playbook.yml`)
+>
+> 6. Follow the logs with `supervisorctl tail -f galaxy stderr`
+>
+> 7. Rerun the playbook. Because we updated the supervisor config, Galaxy will automatically be restarted.
 >
 {: .hands_on}
 
