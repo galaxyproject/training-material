@@ -44,7 +44,7 @@ Comparison of organisms by protein sequence is much more sensitive, as there is 
 
 # Workflow
 
-> * Open CPT Galaxy ([CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy)), and find the history that contains the results of the [functional workflow](LINK TUTORIAL!) for the desired phage genome.
+> * Open CPT Galaxy ([CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy)), and find the history that contains the results of the [functional workflow](https://cpt.tamu.edu/training-material-dev/topics/genome-annotation/tutorials/functional-annotation-workflow/tutorial.html) for the desired phage genome.
 
 > ### {% icon details %} Can't find the input dataset?
 > When workflows are run in Galaxy, they often hide the output of their tools to give a clean and readable history with only relevant datasets shown. Sometimes a later analysis will require that dataset and it must be unhidden so that it can be used as input for a tool. 
