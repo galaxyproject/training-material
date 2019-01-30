@@ -14,7 +14,7 @@ objectives:
   - "Understand and validate the extraction of UMIs and Cell-Barcodes"
   - "Obtain an overview of general alignment and quantification techniques"
   - "Generate a count matrix for downstream scRNA analysis"
-time_estimation: "1h"
+time_estimation: "2h"
 key_points:
   - "Verifying the distribution of barcodes via a FASTQC plot"
   - "Relocating barcodes into headers"
@@ -24,8 +24,12 @@ contributors:
   - mtekman
 
 ---
-
+<!-- Ideally need to place this in "assets/css/main.scss", but need to
+     set a marker in the markdown to apply the correct table class
+     during the conversion process -->
+     
 <style>
+
 blockquote img {
   width: 50%;
   display: block;
@@ -61,7 +65,18 @@ blockquote img {
 # Introduction
 {:.no_toc}
 
-The advent of single-cell RNA sequencing has provided the means to explore samples at the individual cell level, enabling a greater understanding of the development and function of such samples by the characteristics of their constituent cells. These cells can be classified into different cell subpopulations or "clusters" by the variation of gene expression exhibited by individual cells that share a common profile -- i.e. cells in the same cluster exhibit similar profiles of differential expression in the same set of related genes.
+The advent of single-cell RNA sequencing has provided the means to explore samples at the individual cell level, enabling a greater understanding of the development and function of such samples by the characteristics of their constituent cells.
+
+Cells from the same tissue share characterstics with one another, as opposed to cells from different tissues which will differ greatly in their expression of genes. Even cells from the same tissue will differ slightly since some may not have yet reached maturity in their progression of development. Consider the heterogenity of cells sampled from bone marrow:
+
+ ![Cell Differentiation of Hematopoietic Stem cells](../../images/hematopoiesis_simple.png "Cell Differentiation of Hematopoietic Stem cells")
+
+Cells can be classified into different cell subpopulations or "clusters" by the variation of gene expression exhibited by individual cells that share a common profile -- i.e. cells in the same cluster exhibit similar profiles of differential expression in the same set of related genes.
+
+ 
+ | <style class="matrix">  | Test | this |
+ |---------|------|------|
+ | bold    | normal | two |
 
 By identifying significant genes in each cluster, cell types can be inferred and similarity between clusters can be determined based on their proximity to one another. If the cells all come from the same sample tissue, the cell types will likely correspond to the different stages of cell differentiation expected of that tissue, wherein a lineage/heirarchy could potentially be derived.
 
