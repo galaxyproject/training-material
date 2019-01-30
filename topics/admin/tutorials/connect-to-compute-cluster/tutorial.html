@@ -1040,9 +1040,10 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 
   <ol>
     <li>
-      <p>Create and open <code class="highlighter-rouge">files/galaxy/dynamic_job_rules/admin_only.py</code></p>
+      <p>Create and open <code class="highlighter-rouge">files/galaxy/dynamic_job_rules/my_rules.py</code></p>
 
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">galaxy.jobs</span> <span class="kn">import</span> <span class="n">JobDestination</span>
+<span class="kn">from</span> <span class="nn">galaxy.jobs.mapper</span> <span class="kn">import</span> <span class="n">JobMappingException</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="k">def</span> <span class="nf">admin_only</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">user_email</span><span class="p">):</span>
@@ -1063,7 +1064,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
           <p>Edit your group variables file and add the following:</p>
 
           <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_dynamic_job_rules</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">admin_only</span>
+  <span class="pi">-</span> <span class="s">my_rules.py</span>
 </code></pre></div>          </div>
         </li>
       </ul>
@@ -1077,7 +1078,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 <span class="nt">&lt;/destination&gt;</span>
 </code></pre></div>      </div>
 
-      <p>This is a <strong>Python function dynamic destination</strong>. Galaxy will load all python files in the <code class="highlighter-rouge">{{ galaxy_dynamic_rule_dir }}</code>, and all functions defined in those will be available <code class="highlighter-rouge">admin_only.py</code> to be used in the <code class="highlighter-rouge">job_conf.xml</code></p>
+      <p>This is a <strong>Python function dynamic destination</strong>. Galaxy will load all python files in the <code class="highlighter-rouge">{{ galaxy_dynamic_rule_dir }}</code>, and all functions defined in those will be available <code class="highlighter-rouge">my_rules.py</code> to be used in the <code class="highlighter-rouge">job_conf.xml</code></p>
     </li>
     <li>
       <p>Finally, in <code class="highlighter-rouge">job_conf.xml</code>, update the <code class="highlighter-rouge">&lt;tool&gt;</code> definition and point it to this destination:</p>
@@ -1351,8 +1352,8 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
           <p>Edit your group variables file and add the following:</p>
 
           <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_dynamic_job_rules</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">admin_only</span>
-  <span class="pi">-</span> <span class="s">map_resources</span>
+  <span class="pi">-</span> <span class="s">my_rules.py</span>
+  <span class="pi">-</span> <span class="s">map_resources.py</span>
 </code></pre></div>          </div>
         </li>
       </ul>
