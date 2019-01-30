@@ -564,7 +564,8 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 > 1. Create and open `files/galaxy/dynamic_job_rules/my_rules.py`
 >
 >    ```python
->    from galaxy.jobs import JobDestination, JobMappingException
+>    from galaxy.jobs import JobDestination
+>    from galaxy.jobs.mapper import JobMappingException
 >    import os
 >
 >    def admin_only(app, user_email):
