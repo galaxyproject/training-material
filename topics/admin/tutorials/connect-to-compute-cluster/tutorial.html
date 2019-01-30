@@ -1046,10 +1046,10 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="k">def</span> <span class="nf">admin_only</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">user_email</span><span class="p">):</span>
-     <span class="c1"># Only allow the tool to be executed if the user is an admin
-</span>     <span class="n">admin_users</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span> <span class="s">"admin_users"</span><span class="p">,</span> <span class="s">""</span> <span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span> <span class="s">","</span> <span class="p">)</span>
-     <span class="k">if</span> <span class="n">user_email</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">admin_users</span><span class="p">:</span>
-         <span class="k">raise</span> <span class="n">JobMappingException</span><span class="p">(</span><span class="s">"Unauthorized."</span><span class="p">)</span>
+    <span class="c1"># Only allow the tool to be executed if the user is an admin
+</span>    <span class="n">admin_users</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span> <span class="s">"admin_users"</span><span class="p">,</span> <span class="s">""</span> <span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span> <span class="s">","</span> <span class="p">)</span>
+    <span class="k">if</span> <span class="n">user_email</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">admin_users</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">JobMappingException</span><span class="p">(</span><span class="s">"Unauthorized."</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">JobDestination</span><span class="p">(</span><span class="n">runner</span><span class="o">=</span><span class="s">"slurm"</span><span class="p">)</span>
 </code></pre></div>      </div>
 
