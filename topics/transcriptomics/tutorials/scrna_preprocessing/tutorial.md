@@ -26,7 +26,15 @@ contributors:
 ---
 <!-- Ideally need to place this in "assets/css/main.scss", but need to
      set a marker in the markdown to apply the correct table class
-     during the conversion process -->
+     during the conversion process. How? 
+     
+     <div class="matrix" /> 
+      * before a matrix seems to work, but it 
+        applies all the way down
+        
+      * applying it within the first line of the table seems to place it
+        in the header, but that would make the css selectors difficult
+     -->
      
 <style>
 
@@ -36,6 +44,7 @@ blockquote img {
   margin-left: auto;
   margin-right: auto;
 }
+
 .tutorial table { 
   width:unset;
   margin-left:auto;
@@ -65,24 +74,22 @@ blockquote img {
 # Introduction
 {:.no_toc}
 
+
+## Why do Single Cell?
+
 The advent of single-cell RNA sequencing has provided the means to explore samples at the individual cell level, enabling a greater understanding of the development and function of such samples by the characteristics of their constituent cells.
 
-Cells from the same tissue share characterstics with one another, as opposed to cells from different tissues which will differ greatly in their expression of genes. Even cells from the same tissue will differ slightly since some may not have yet reached maturity in their progression of development. Consider the heterogenity of cells sampled from bone marrow:
+Cells from the same tissue share characteristics with one another, as opposed to cells from different tissues which will differ greatly in their expression of genes. Even cells from the same tissue will differ slightly since some may not have yet reached maturity in their progression of development. Consider the heterogenity of cells sampled from bone marrow:
 
  ![Cell Differentiation of Hematopoietic Stem cells](../../images/hematopoiesis_simple.png "Cell Differentiation of Hematopoietic Stem cells")
 
 Cells can be classified into different cell subpopulations or "clusters" by the variation of gene expression exhibited by individual cells that share a common profile -- i.e. cells in the same cluster exhibit similar profiles of differential expression in the same set of related genes.
 
- 
- | <style class="matrix">  | Test | this |
- |---------|------|------|
- | bold    | normal | two |
-
 By identifying significant genes in each cluster, cell types can be inferred and similarity between clusters can be determined based on their proximity to one another. If the cells all come from the same sample tissue, the cell types will likely correspond to the different stages of cell differentiation expected of that tissue, wherein a lineage/heirarchy could potentially be derived.
 
  ![Facets of Cellular Identity](../../images/scrna_nbt3711.png "The various facets of cellular identity")
 
-This tutorial is in part inspired by aspects of the [Hemberg workflow](https://hemberg-lab.github.io/scRNA.seq.course/) at the Sangar insititute, as well as the [CGATOxford](https://github.com/CGATOxford/UMI-tools) workflow. The barcoding follows the CelSeq2 protocol and uses the lane configuration as that utilized by the Freiburg MPI Grün lab.
+This tutorial is in part inspired by aspects of the [Hemberg workflow](https://hemberg-lab.github.io/scRNA.seq.course/) at the Sangar insititute, as well as the [CGATOxford](https://github.com/CGATOxford/UMI-tools) workflow. The barcoding follows the [CelSeq2 protocol](#details-the-celseq2-protocol) and uses the lane configuration as that utilized by the Freiburg MPI Grün lab.
 
 
 # Analysis Strategy
@@ -373,7 +380,7 @@ These can be encoded into the sequences of our paired-end data by any means. In 
 
 #### Verifying the Barcode Format
 
-As shown in [CelSeq2 Primer Figure](#CelSeq2 Scheme), we have the following encoding:
+As shown in [CelSeq2 Primer Figure](#details-the-celseq2-protocol), we have the following encoding:
  * Forward Read:
     * 01-06bp: UMI Barcode
     * 07-12bp: Cell Barcode
