@@ -118,7 +118,7 @@ The batch files are the first of the set of multiple batches, and originate from
 > 1. Create a new history and name it something meaningful (*e.g.* scRNA-seq single batch tutorial)
 > 1. Open the Data Upload Manager by selecting *Get Data* from the Tool Panel and clicking *Upload File*
 > 1. Select *Paste/Fetch Data*
-> 1. Copy each link for the reads (`SRR5683689_1.fastq.gz`, `SRR5683689_1.fastq.gz`), annotation (`Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf`), and barcode (`celseq_barcodes.192.tabular`) files, and paste each link into a separate text field
+> 1. Copy each link for the reads (`SRR5683689_1.fastq.gz`, `SRR5683689_2.fastq.gz`), annotation (`Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf`), and barcode (`celseq_barcodes.192.tabular`) files, and paste each link into a separate text field
 >    - Set the datatype of the read (.fastq.gz) files to **fastq.gz**
 >    - Set the datatype of the annotation (.gtf) file to **tabular** and assign the Genome as **mm10**
 > 1. Click *Start*
