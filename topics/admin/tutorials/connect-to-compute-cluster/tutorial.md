@@ -64,8 +64,8 @@ be taken into consideration when choosing where to run jobs and what parameters 
 > 1. Create and edit a file in your working directory called `requirements.yml` and include the following contents:
 >
 >    ```yaml
->    - name: galaxyproject.repos
->    - name: galaxyproject.slurm
+>    - galaxyproject.repos
+>    - galaxyproject.slurm
 >    ```
 >
 >    The `galaxyproject.repos` role adds the [Galaxy Packages for Enterprise Linux (GPEL)](https://depot.galaxyproject.org/yum/) repository for RedHat/CentOS, which provides both Slurm and Slurm-DRMAA (neither are available in standard repositories or EPEL). For Ubuntu versions 18.04 or newer, it adds the [Slurm-DRMAA PPA](https://launchpad.net/~natefoo/+archive/ubuntu/slurm-drmaa) (Slurm-DRMAA was removed from Debian/Ubuntu in buster/bionic).
@@ -81,6 +81,9 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >      become: true
 >      vars:
 >        slurm_roles: ['controller', 'exec']
+>        slurm_nodes:
+>        - name: localhost
+>          CPUs: ??? # Here you need to figure out how many cores your machine has. (Hint, `htop`)
 >      roles:
 >        - galaxyproject.slurm
 >    ```
@@ -242,7 +245,7 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 
 > ### {% icon hands_on %} Hands-on: Installing Slurm-DRMAA
 >
-> 1. Add a task to your playbook to install `slurm-drmaa1` (Debian/Ubuntu) or `slurm-drmaa` (RedHat/CentOS):
+> 1. Add a `post_task` to your playbook to install `slurm-drmaa1` (Debian/Ubuntu) or `slurm-drmaa` (RedHat/CentOS), and additionally include the `galaxyproject.repos` role
 >
 >    ```yaml
 >    - hosts: galaxyservers
@@ -308,21 +311,23 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    </destinations>
 >    ```
 >
-> 4. Inform `galaxyproject.galaxy` of your new config file using the `galaxy_config_files` var in your group vars
->
->    ```yaml
->    galaxy_config_files:
->      - src: files/galaxy/config/job_conf.xml
->        dest: {% raw %}"{{ galaxy_config_dir }}/job_conf.xml"{% endraw %}
->    ```
->
->    And by setting the `job_config_file` option in Galaxy's `galaxy_config` group variable:
+> 4. Inform `galaxyproject.galaxy` of where you would like the `job_conf.xml` to reside in your group variables:
 >
 >    ```yaml
 >    galaxy_config:
 >      galaxy:
 >        job_config_file: {% raw %}"{{ galaxy_config_dir }}/job_conf.xml"{% endraw %}
 >    ```
+>
+>    And then deploy the new config file using the `galaxy_config_files` var in your group vars
+>
+>    ```yaml
+>    galaxy_config_files:
+>      - src: files/galaxy/config/job_conf.xml
+>        dest: {% raw %}"{{ galaxy_config['galaxy']['job_config_file'] }}"{% endraw %}
+>    ```
+>
+>      The variable `galaxy_config_files` is an array of hashes, each with `src` and `dest`, the files from src will be copied to dest on the server. `galaxy_template_files` exist to template files out.
 >
 > 5. Run your *Galaxy* playbook (`ansible-playbook -i hosts playbook.yml`)
 >
@@ -463,7 +468,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 
 > ### {% icon hands_on %} Hands-on: Deploying a Tool
 >
-> 1. Create and edit a new file in `files/galaxy/config/testing.xml` with the following contents:
+> 1. Create the directory `files/galaxy/tools/` if it doesn't exist and edit a new file in `files/galaxy/tools/testing.xml` with the following contents:
 >
 >    ```xml
 >    <tool id="testing" name="Multicore Tool">
@@ -480,57 +485,16 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    ```
 >    {: .question}
 >
-> 2. Edit your group variables and add the variable `galaxy_config_files` if it doesn't exist:
+> 2. Add the tool to the Ansible automated tool conf, `galaxy_local_tools`
 >
->    ```yml
->    galaxy_config_files:
->        ...
->        - src: files/galaxy/config/tool_conf.xml
->          dest: {% raw %}"{{ galaxy_config_dir }}/tool_conf.custom.xml"{% endraw %}
->      ```
->
->      The variable `galaxy_config_files` is an array of hashes, each with `src` and `dest`, the files from src will be copied to dest on the server. `galaxy_template_files` exist to template files out.
->
-{: .hands_on}
-
-Of course, this tool doesn't actually *use* the allocated number of cores. In a real tool, you would call the tools's underlying command with whatever flag that tool provides to control the number of threads or processes it starts, such as `samtools sort -@ \${GALAXY_SLOTS:-1}`.
-
-## Configuring Galaxy
-
-Up until now we've been using the default tool panel config file, located at `/srv/galaxy/server/config/tool_conf.xml.sample`. We will add a new tool conf that is loaded in addition to this default one.
-
-> ### {% icon hands_on %} Hands-on: Updating the `tool_conf.xml`
->
-> 1. Create a new file, `files/galaxy/config/tool_conf.xml` which will contain our custom tool box. Add the following:
->
->    ```xml
->    <?xml version='1.0' encoding='utf-8'?>
->    <toolbox>
->      <section id="testing" name="Testing">
->        {% raw %}<tool file="{{ galaxy_root }}/config/testing_tool.xml" />{% endraw %}
->      </section>
->    </toolbox>
->    ```
-> 2. Edit your group variables and add a variable `galaxy_config` > `galaxy` object to load; our new tool box, the default, and anything from the Tool Shed.
->
->    ```yml
->    galaxy_config:
->      galaxy:
->        tool_config_file: {% raw %}"{{ galaxy_config_dir }}/tool_conf.custom.xml,{{ galaxy_server_dir }}/config/tool_conf.xml.sample,{{ galaxy_mutable_config_dir }}/shed_tool_conf.xml"{% endraw %}
+>    ```yaml
+>    galaxy_local_tools:
+>    - testing.xml
 >    ```
 >
-> 3. Edit your group variables and add an entry to `galaxy_config_files`
+> 3. Run the playbook
 >
->    ```yml
->    galaxy_config_files:
->        ...
->        - src: files/galaxy/config/tool_conf.xml
->          dest: {% raw %}"{{ galaxy_config_dir }}/tool_conf.custom.xml"{% endraw %}
->      ```
->
-> 4. Restart Galaxy (`sudo supervisorctl restart galaxy`)
->
-> 5. Reload Galaxy in your browser and the new tool should now appear in the tool panel. If you have not already created a dataset in your history, upload a random text dataset. Once you have a dataset, click the tool's name in the tool panel, then click Execute. When your job completes, the output should be:
+> 4. Reload Galaxy in your browser and the new tool should now appear in the tool panel. If you have not already created a dataset in your history, upload a random text dataset. Once you have a dataset, click the tool's name in the tool panel, then click Execute.
 >
 >    > ### {% icon question %} Question
 >    >
@@ -547,6 +511,7 @@ Up until now we've been using the default tool panel config file, located at `/s
 >    {: .question}
 {: .hands_on}
 
+Of course, this tool doesn't actually *use* the allocated number of cores. In a real tool, you would call the tools's underlying command with whatever flag that tool provides to control the number of threads or processes it starts, such as `samtools sort -@ \${GALAXY_SLOTS:-1}`.
 
 ## Running with more resources
 
