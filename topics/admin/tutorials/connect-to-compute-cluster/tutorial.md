@@ -17,7 +17,7 @@ objectives:
   - How to write a dynamic tool destination (DTD)
   - How to write a dynamic python function destination
   - How to use the job resource parameter selection feature
-time_estimation: "3.5h"
+time_estimation: "4h"
 key_points:
   - Galaxy supports a variety of different DRMs.
   - Dynamic Tool Destinations are a convenient way to map
