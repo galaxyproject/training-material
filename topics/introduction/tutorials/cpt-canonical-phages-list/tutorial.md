@@ -339,7 +339,7 @@ Most trusted record: [RefSeq NC_001421](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 > {: .solution}
 {: .question}
 
-Useful readings: [International Committee on Taxonomy of Viruses
+References: [International Committee on Taxonomy of Viruses
 Virus Taxonomy - Family - Tectiviridae
 ICTV, 9 (2012), pp. 317-321](https://www.sciencedirect.com/science/article/pii/B9780123846846000306)
 
@@ -383,7 +383,8 @@ Most trusted record: [RefSeq NC_015296](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 > Genome present in the CPT Apollo instance. Access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
 {: .comment}
 
-Useful readings: [E. M. Adriaenssens, H. Ackermann, H. Anna, B. Blasdel, I. F. Connerton, D. Goulding, M. W/ Griffiths, S. P. Hooton, E. M. Kutter, A. M. Kropinski, J. Lee, M. Maes, D. Pickard, S. Ryu, Z. Sepehrizadeh, S. S. Shahrbabak, A. L. Toribio, R. Lavigne
+References: 
+[E. M. Adriaenssens, H. Ackermann, H. Anna, B. Blasdel, I. F. Connerton, D. Goulding, M. W/ Griffiths, S. P. Hooton, E. M. Kutter, A. M. Kropinski, J. Lee, M. Maes, D. Pickard, S. Ryu, Z. Sepehrizadeh, S. S. Shahrbabak, A. L. Toribio, R. Lavigne
 A suggested new bacteriophage genus: "Viunalikevirus"
 Arch Virol, 157 (2012), pp. 2035-2046](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4174289/)
 
