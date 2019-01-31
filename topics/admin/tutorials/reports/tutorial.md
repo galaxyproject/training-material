@@ -39,6 +39,8 @@ The reports application gives some pre-configured analytics screens.
 >
 {: .agenda}
 
+# Setting up Reports
+
 The reports application is not complex to setup as it is included directly in the Galaxy codebase and we've already done all of the setup required for Galaxy, Supervisord, uWSGI, and NGINX.
 
 > ### {% icon hands_on %} Hands-on: Setup Reports
