@@ -93,6 +93,25 @@ class: center, middle, inverse
 ---
 
 
+### Preparing Admin Training VMs
+
+If you're falling along on Galaxy Admin Training VMs, you will need to setup Docker.
+
+You can modify your Ansible setup to configure this as described at [bit.ly/gxadmin-docker-playbook](http://bit.ly/gxadmin-docker-playbook).
+
+You will also need to stop Galaxy running on the VM so that you can run Galaxy in a container.
+
+```
+sudo supervisorctl stop galaxy
+```
+
+???
+
+TODO: Remove this slide after the training, it isn't general.
+
+---
+
+
 ### Preparation
 
 ```
@@ -695,8 +714,8 @@ Play with `quay.io/biocontainers/samtools:1.3--1`:
 
 Play with `quay.io/biocontainers/samtools:1.3--1`:
 
-1. Create locally a `samtool_dir` directory
-2. Launch an interactive container with a volume pointing at `samtool_dir` directory
+1. Create a local `samtool_dir` directory
+2. Launch an interactive container with a volume pointing at the `samtool_dir` directory
   1. Add a [toy sam file](https://raw.githubusercontent.com/samtools/samtools/develop/examples/toy.sam) into the local `samtool_dir` directory
   2. Check if the existence of the file from inside the container
   3. Visualize the content of the toy file with `samtools view` commands
@@ -733,7 +752,7 @@ A text document that contains all the commands a user could call on the command 
 INSTRUCTION arguments
 ```
 
-.footnote[[Best practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/)]
+.footnote[[Best practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)]
 
 ???
 
@@ -746,6 +765,12 @@ Review of the commands
 ### Dockerfile &amp; Layers
 
 ![](../../images/dockerfile_layers.svg)
+
+---
+
+### But Don't Do it Manually, Use Biocontainers
+
+[Tool Dependencies and Containers](/training-material//topics/dev/tutorials/containers/slides.html)
 
 ---
 
@@ -785,7 +810,6 @@ Launch a Galaxy Docker Container and try to
 - Use export mounts (persistent data)
 - Trouble shooting (logging)
 - Install tools
-- Install visualizations (BioJS)
 - ...
 
 ---
