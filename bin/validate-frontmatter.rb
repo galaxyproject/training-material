@@ -148,11 +148,11 @@ end
 
 # If we had no errors, validated successfully
 if errs.length == 0 then
-  puts "#{fn} validated succesfully"
+  puts "\e[38;5;40m#{fn} validated succesfully\e[m"
   exit 0
 else
   # Otherwise, print errors and exit non-zero
-  puts "#{fn} has errors"
+  puts "\e[48;5;09m#{fn} has errors\e[m"
   errs.each {|x| puts "  #{x}" }
   exit 1
 end
