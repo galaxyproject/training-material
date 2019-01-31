@@ -6,7 +6,8 @@ tutorial_name: cpt-canonical-phages-list
 
 # Center for Phage Technology's List of Canonical Phage Genomes
 
-<--! Include basic stats (host, size of genome, type of phage, taxonomy (ICTV, NCBI, *ViralZone*) Q/A boxes -->
+A general reference on virus groups is available by searching at [ViralZone](https://viralzone.expasy.org). 
+Additional information on currently accepted phage taxonomy is put forth by the ICTV [International Committee on the Taxonomy of Viruses](https://talk.ictvonline.org/taxonomy/) and also searchable in the [NCBI Taxonomy Browser](https://www.ncbi.nlm.nih.gov/taxonomy/). While the taxonimical classification system used by these groups is not completely accurate, it can provide a useful way to find the closest related type phage for comparison purposes.
 
 ### Lambda
 
@@ -21,7 +22,7 @@ Most trusted record: [RefSeq NC_001416](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 {: .question}
 
 > ### {% icon comment %} Note that...
-> This phage' genome is available as a CPT organism in Apollo; access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
+> Genome present in the CPT Apollo instance. Access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
 {: .comment}
 
 ### Phage T1
@@ -37,7 +38,7 @@ Most trusted record: [RefSeq NC_005833](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 {: .question}
 
 > ### {% icon comment %} Note that...
-> This phage' genome is available as a CPT organism in Apollo; access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
+> Genome present in the CPT Apollo instance. Access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
 {: .comment}
 
 ### Phage T3
@@ -65,7 +66,7 @@ Most trusted record: [RefSeq NC_000866](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 {: .question}
 
 > ### {% icon comment %} Note that...
-> This phage' genome is available as a CPT organism in Apollo; access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
+> Genome present in the CPT Apollo instance. Access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
 {: .comment}
 
 ### Phage T5
@@ -81,7 +82,7 @@ Most trusted record: [RefSeq NC_005859](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 {: .question}
 
 > ### {% icon comment %} Note that...
-> This phage' genome is available as a CPT organism in Apollo; access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
+> Genome present in the CPT Apollo instance. Access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
 {: .comment}
 
 Useful readings: 
@@ -107,7 +108,7 @@ Most trusted record: [RefSeq NC_001604](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 {: .question}
 
 > ### {% icon comment %} Note that...
-> This phage' genome is available as a CPT organism in Apollo; access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
+> Genome present in the CPT Apollo instance. Access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
 {: .comment}
 
 ### Phage N4
@@ -247,7 +248,7 @@ Most trusted record: [RefSeq NC_000929](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 {: .question}
 
 > ### {% icon comment %} Note that...
-> This phage' genome is available as a CPT organism in Apollo; access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
+> Genome present in the CPT Apollo instance. Access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
 {: .comment}
 
 ### Phage N15
@@ -375,7 +376,7 @@ Most trusted record: [RefSeq NC_015296](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 {: .question}
 
 > ### {% icon comment %} Note that...
-> This phage' genome is available as a CPT organism in Apollo; access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
+> Genome present in the CPT Apollo instance. Access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
 {: .comment}
 
 Useful readings: [E. M. Adriaenssens, H. Ackermann, H. Anna, B. Blasdel, I. F. Connerton, D. Goulding, M. W/ Griffiths, S. P. Hooton, E. M. Kutter, A. M. Kropinski, J. Lee, M. Maes, D. Pickard, S. Ryu, Z. Sepehrizadeh, S. S. Shahrbabak, A. L. Toribio, R. Lavigne
@@ -395,7 +396,7 @@ Most trusted record: [RefSeq NC_023693](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 {: .question}
 
 > ### {% icon comment %} Note that...
-> This phage' genome is available as a CPT organism in Apollo; access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
+> Genome present in the CPT Apollo instance. Access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
 {: .comment}
 
 ### Phage PhiETA
