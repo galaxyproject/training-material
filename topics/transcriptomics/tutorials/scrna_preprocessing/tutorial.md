@@ -77,28 +77,27 @@ blockquote img {
 
 ## Why do Single Cell?
 
-The advent of single-cell RNA sequencing has provided the means to explore samples at the individual cell level, enabling a greater understanding of the development and function of such samples by the characteristics of their constituent cells.
 
-Cells from the same tissue share characteristics with one another, as opposed to cells from different tissues which will differ greatly in their expression of genes. Even cells from the same tissue will differ slightly since some may not have yet reached maturity in their progression of development. Consider the heterogenity of cells sampled from bone marrow:
+Single-cell RNA (scRNA) sequencing is the technological successor to classical bulk RNA-seq, where samples are no longer defined at the tissue level but at the individual cell level. Under bulk RNA-seq the expression of genes in a sample would yield the average expression of all the constituent cells in that sample, irregardless of the distinct expressions profiles given by subpopulations of cells. The advent of scRNA sequencing has provided the means to explore samples at the individual cell level, enabling a greater understanding of the development and function of such samples by the characteristics of their constituent cells. Consider the heterogenity of cells sampled from bone marrow, where hematopoietic stem cells can give rise to many different cell types within the same tissue:
 
- ![Cell Differentiation of Hematopoietic Stem cells](../../images/hematopoiesis_simple.png "Cell Differentiation of Hematopoietic Stem cells")
+ ![Cell Differentiation of Hematopoietic Stem cells](../../images/scrna_hematopoiesis.png "Cell Differentiation of Hematopoietic Stem cells [Wikimedia Commons]")
+ 
+The genes expressed by these cells at different developmental time points can be subtle, but generally can be classified into discrete cell subpopulations or under statistical clustering methods such as PCA or tSNE. Cells in the same cluster exhibit similar profiles of differential expression in the same set of related genes, compared to cells in other clusters. By identifying significant genes in each cluster, cell types and cell developmental heirarchies can be inferred based on the proximity of these clusters to one another.
 
-Cells can be classified into different cell subpopulations or "clusters" by the variation of gene expression exhibited by individual cells that share a common profile -- i.e. cells in the same cluster exhibit similar profiles of differential expression in the same set of related genes.
+Other than cell development, there are many more factors that can shape the level of gene expression exhibited by a given cell. Intercellular cell-signalling can block or enhance specific transcripts, the total amount of transcripts of a cell increases with the cell-cycle, or the proximity of a cell within a tissue to nutrients or oxygen.
 
-By identifying significant genes in each cluster, cell types can be inferred and similarity between clusters can be determined based on their proximity to one another. If the cells all come from the same sample tissue, the cell types will likely correspond to the different stages of cell differentiation expected of that tissue, wherein a lineage/heirarchy could potentially be derived.
+ ![Facets of Cellular Identity](../../images/scrna_nbt3711.png "Revealing the vectors of cellular identity with single-cell genomics, Nature Biotechnology, 2016")
 
- ![Facets of Cellular Identity](../../images/scrna_nbt3711.png "The various facets of cellular identity")
 
-This tutorial is in part inspired by aspects of the [Hemberg workflow](https://hemberg-lab.github.io/scRNA.seq.course/) at the Sangar insititute, as well as the [CGATOxford](https://github.com/CGATOxford/UMI-tools) workflow. The barcoding follows the [CelSeq2 protocol](#details-the-celseq2-protocol) and uses the lane configuration as that utilized by the Freiburg MPI Grün lab.
-
+This tutorial is in part inspired by aspects of the [Hemberg workflow](https://hemberg-lab.github.io/scRNA.seq.course/) at the Sanger institute, as well as the [CGATOxford](https://github.com/CGATOxford/UMI-tools) workflow. The barcoding follows the [CelSeq2 protocol](#details-the-celseq2-protocol) and uses the lane configuration as that utilized by the Freiburg MPI Grün lab.
 
 # Analysis Strategy
 
 Most scRNA sequencing techniques use pooled-sequencing approaches to generate a higher throughput of data by performing amplification and sequencing upon multiple cells in the same "pool". From a bioinformatics standpoint, this means that the output FASTQ data from the sequencer is batch-specific and contains all the sequences from multiple cells.
 
-In this tutorial, we will perform pre-processing upon single-cell RNA FASTQ batch data to generate an *N*-by-*M*  count matrix of *N* cells and *M* genes, with each element indicating the level of expression of that gene in a particular cell. This matrix can be used in further downstream analyses, which will be covered in another tutorial. 
+In this tutorial, we will perform pre-processing upon scRNA FASTQ batch data to generate an *N*-by-*M*  count matrix of *N* cells and *M* genes, with each element indicating the level of expression of that gene in a particular cell. This count matrix is crucial for performing the downstream analysis, where differential gene analysis is performed between cells in order to cluster them into groups denoting their cell type and lineage. 
 
-The first part of this tutorial will use example *FASTQ* Batch data, which we will pair into a Galaxy *Collection* and perform barcode extraction and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix. 
+The first part of this tutorial will use example *FASTQ* single batch data, which we will perform barcode extraction and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix. 
 
 The second part of this tutorial will deal with multiple batches, and a different set of example count matrices will be used in which to merge and perform quality control upon. This will produce a final count matrix valid for downstream analysis.
 
@@ -116,26 +115,50 @@ The second part of this tutorial will deal with multiple batches, and a differen
 
 ### Data upload and organization
 
-The size of scRNA FASTQ files are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expediate the analysis by using a smaller subset of actual batch data. This data is available at [`Zenodo`](https://zenodo.org/record/1345635) where the example FASTQ paired batch files are hosted, as well as a barcodes file and GTF file for the *Mus Musculus* genome version mm10.
+In this tutorial we will be analysing scRNA-seq data of bone marrow cells taken from a single C57 mouse by *Herman et al.* ([2018](https://doi.org/10.1038/nmeth.4662)) and producing a count matrix that we can use for later analysis.
 
-The batch files are the first of the set of multiple batches, and originate from the first sequencing plate. We will explain this more in detail later, but for now we should make note of this when renaming our files in step 6 of the hands-on below.
+The size of scRNA FASTQ files are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expediate the analysis by using a smaller subset of actual batch data. 
+
+<!-- 
+
+(This seems like useful information to kick out?)
+
+This data is available at [`Zenodo`](https://zenodo.org/record/1345635) where the example FASTQ paired batch files are hosted, as well as a barcodes file and GTF file for the *Mus Musculus* genome version `mm10`.
+
+The batch files are the first of the set of multiple batches, and originate from the first sequencing plate. Plates can contain multiple batches of sequencing material. We will explain this [more in detail later](#understanding-plates-and-batches), but for now we should make note of this when renaming our files in step 6 of the hands-on below. 
+
+-->
 
 > ### {% icon hands_on %} Hands-on: Data upload and organization
 >
-> 1. Create a new history and name it something meaningful (*e.g.* scRNA-seq single batch tutorial)
-> 1. Open the Data Upload Manager by selecting *Get Data* from the Tool Panel and clicking *Upload File*
-> 1. Select *Paste/Fetch Data*
-> 1. Copy each link for the reads (`SRR5683689_1.fastq.gz`, `SRR5683689_2.fastq.gz`), annotation (`Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf`), and barcode (`celseq_barcodes.192.tabular`) files, and paste each link into a separate text field
->    - Set the datatype of the read (.fastq.gz) files to **fastq.gz**
->    - Set the datatype of the annotation (.gtf) file to **tabular** and assign the Genome as **mm10**
-> 1. Click *Start*
+> 1. Create a new history and rename it (*e.g.* scRNA-seq single batch tutorial)
+> 1. Import the FASTQ (`SRR5683689_1.fastq.gz`, `SRR5683689_2.fastq.gz`), annotation (`Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf`), and barcode (`celseq_barcodes.192.tabular`) files.
+>    - By copying the following links from [`Zenodo`](https://zenodo.org/record/1345635) or from the data library (ask your instructor)
+>    ```
+>    https://zenodo.org/record/1345635/files/SRR5683689_1.fastq.gz?download=1
+>    https://zenodo.org/record/1345635/files/SRR5683689_2.fastq.gz?download=1
+>    https://zenodo.org/record/1345635/files/Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf?download=1
+>    https://zenodo.org/record/1345635/files/celseq_barcodes.192.tabular?download=1
+>    ``` 
+>    
+>    {% include snippets/import_via_link.md %}
+>    
+>    Set the database annotation to 'mm10' into the Genome dropdown box and select it.
+>        <img style='width:100%' src="../../images/scrna_select_data.png" />
+>    
+>    {% include snippets/import_from_data_library.md %}
+>
+>
+> 1. Set the datatype of the `celseq_barcodes.192.tabular` to `tsv`
 > 1. Build a *Dataset pair* for the two FASTQ files
 >    - Click the *Operations on multiple datasets* check box at the top of the history panel
 >    - Check the two boxes next to the R1 and R2 scRNA FASTQ samples
->    - Click *For all selected...* and choose *Build dataset list*
->    - Ensure that the forward read is the R1 sample, and the reverse read is the R2 sample.
+>    - Click *For all selected...* and choose *Build dataset pair*
+>    - Ensure that the forward read is the `_1` sample, and the reverse read is the `_2` sample.
 >      - Click 'Swap' otherwise.
->    - Set the name of the pair to something meaningful appended with '_P1_B1' to denote that our data originates from Plate1 and Batch1 (e.g. 'MMus_P1_B1')
+>    - Set the name of the pair
+>      - One useful convention to follow is `<name>_<plate>_<batch>` in order to preserve the sample names, sequencing plate number and batch number.
+>      - Here we will write 'C57_P1_B1'
 >    - Click *Hide original elements?*
 >    - Click *Create list*
 >
@@ -258,22 +281,20 @@ We now know the role of UMIs and cell barcodes, but how do we handle them in the
 > ### {% icon hands_on %} Hands-on: Selecting 4 reads of interest
 >
 > 1. Preparing the Data:
->     1. Create a new history and name it something useful (*e.g.* 'Inspecting FastQ Files in scRNA batch data')
->     1. Open the Data Upload Manager by selecting *Get Data* from the Tool Panel and clicking *Upload File*
->     1. Select *Paste/Fetch Data*
->        - Copy and Pase the following read IDs
->    
->            J00182:75:HTKJNBBXX:2:1114:12469:11073
->            J00182:75:HTKJNBBXX:2:2222:13301:35690
->            J00182:75:HTKJNBBXX:2:1203:25022:13763
->            J00182:75:HTKJNBBXX:2:1115:8501:46961
+>     1. Create a new history and rename it (*e.g.* 'Inspecting FastQ Files in scRNA batch data')
+>     1. Generate a list of reads to filter by creating a plain tabular file containing the following read names:
+>        ```
+>        J00182:75:HTKJNBBXX:2:1114:12469:11073
+>        J00182:75:HTKJNBBXX:2:2222:13301:35690
+>        J00182:75:HTKJNBBXX:2:1203:25022:13763
+>        J00182:75:HTKJNBBXX:2:1115:8501:46961
+>        ```
 >     1. Set the datatype of the file as **tabular**
->     1. Click *Start*
 >     1. Click the *View all histories* icon
 >     1. Drag the FASTQ collection from your previous history into your new history
->     1. Click the *Galaxy* icon to return home.
-> 1. Extracting our 4 reads
->    1. **Filter sequences by ID** {% icon tool %} with the following parameters:
+>     1. Click the *Galaxy* logo to return home.
+> 1. Extracting our 4 reads  
+>    **Filter sequences by ID** {% icon tool %} with the following parameters:
 >    - **Sequence file to be filtered**
 >      - Click the *Dataset Collection* icon
 >      - Select the FastQ collection if not already selected.
@@ -371,11 +392,12 @@ The main source of interest for us is in the (2) sequences of these reads, which
 These can be encoded into the sequences of our paired-end data by any means. In order to know where our barcodes are, we must be familiar with the sequencing primers used in the analysis:
 
 > ### {% icon details %} The CelSeq2 protocol
->
+> 
 > CelSeq2 is a paired-end protocol, meaning that two primers bind to opposite strands in order to sequence. Each primer has a specific role. In this case; *Read1* contains the barcoding information followed by the polyT tail of the messenger RNA, and *Read2* contains the actual sequence. Here, Read1 is regarded as the 'forward' strand and Read2 as the 'reverse' strand, though this is more a convention when dealing with paired-end data rather than an indication of the actual strand orientation.
 >
 > ![CelSeq2 Scheme](../../images/celseq2_schema.png "Read1 encapsulates the barcodes, and Read2 the mRNA sequence")
 >
+> [Back to previous](javascript:window.history.back())
 {: .details}
 
 #### Verifying the Barcode Format
@@ -910,21 +932,29 @@ The first step requires us to merely run the same workflow on each of our batche
 
 ### Data upload and organization
 
-The count matrix we have generated in the previous section is too sparse to perform any reasonable analysis upon, and constitutes data only of a single batch. Here we will use more populated count matrices from multiple batches, under the assumption that we now know how to generate each individual one of them using the steps provided in the previous section. This data is available at [`Zenodo`](https://link.this).
+The count matrix we have generated in the previous section is too sparse to perform any reasonable analysis upon, and constitutes data only of a single batch. Here we will use more populated count matrices from multiple batches, under the assumption that we now know how to generate each individual one of them using the steps provided in the previous section. This data is available at [`Zenodo`](https://zenodo.org/record/1345635).
 
 Once again, file naming is important, and so we will rename our matrix files appropriately to the plate and batch they are supposed to originate from.
 
 > ### {% icon hands_on %} Hands-on: Data upload and organization
 >
-> 1. Create a new history and name it something meaningful (*e.g.* scRNA-seq multiple-batch tutorial)
-> 1. Open the Data Upload Manager by selecting *Get Data* from the Tool Panel and clicking *Upload File*
-> 1. Select *Paste/Fetch Data*
-> 1. Copy each link for the four matrices (`P1_B1.tabular`, `P1_B2.tabular`, etc.), and paste each link into a separate text field
+> 1. Create a new history and rename it (*e.g.* scRNA-seq multiple-batch tutorial)
+> 1. Import the four matrices (`P1_B1.tabular`, `P1_B2.tabular`, etc.) from [`Zenodo`](https://zenodo.org/record/1345635) or from the data library (ask your instructor)
 >    - Set the datatype of the tabular files to **tabular**
-> 1. Click *Start*
+>
+>    ```
+>    https://zenodo.org/record/1345635/files/P1_B1.tabular?download=1
+>    https://zenodo.org/record/1345635/files/P1_B2.tabular?download=1
+>    https://zenodo.org/record/1345635/files/P2_B3.tabular?download=1
+>    https://zenodo.org/record/1345635/files/P2_B4.tabular?download=1
+>    ```
+>    
+>    {% include snippets/import_via_link.md %}
+>    {% include snippets/import_from_data_library.md %}
+>    
 > 1. Rename a matrix
 >    - Click on {% icon galaxy-pencil %} of the *`P1_B1.tabular`* file
->    - Set the Name field to something meaningul appended with "_P1_B1" (e.g. 'multibatch_P1_B1')
+>    - Set the Name field such that it is affixed with "_P1_B1" (e.g. 'multibatch_P1_B1')
 >    - Click *Save*
 > 1. Repeat for all matrices
 >    - **Pay attention to the Plate number which changes after Batch 4**
@@ -989,6 +1019,8 @@ It is true that we have applied the same cell barcodes to each batch -- but -- *
 We must thus question why different sets of the same superset of barcodes be used on different batches? To answer this, we must understand some of the technicalities of the library preparation.
 
 ## Understanding Plates and Batches
+
+[Back to previous](javascript:window.history.back())
 
 Plates are $$N \times M$$ arrays or wells that cells are sorted into and then individually amplified and sequenced. The way these slot are filled depends entirely on the protocol, but usually not all slots are filled. The reason for this will become clear momentarily.
 
