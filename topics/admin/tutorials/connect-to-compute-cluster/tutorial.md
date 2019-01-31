@@ -804,8 +804,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >        destination_id = 'slurm'
 >
 >        # build the param dictionary
->        param_dict = dict( [ ( p.name, p.value ) for p in job.parameters ] )
->        param_dict = tool.params_from_strings( param_dict, app )
+>        param_dict = job.get_param_values(app)
 >
 >        # handle job resource parameters
 >        try:
@@ -818,10 +817,10 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >            if 'nativeSpecification' not in destination.params:
 >                destination.params['nativeSpecification'] = ''
 >            destination.params['nativeSpecification'] += ' --time=%s:00:00' % time
->        else:
+>        except:
 >            # resource param selector not sent with tool form, job_conf.xml misconfigured
 >            log.warning('(%s) error, keys were: %s', job.id, param_dict.keys())
->            raise JobMappingException( FAILURE_MESSAGE )
+>            raise JobMappingException(FAILURE_MESSAGE)
 >
 >        log.info('returning destination: %s', destination_id)
 >        return destination or destination_id
