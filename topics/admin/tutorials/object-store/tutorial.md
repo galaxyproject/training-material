@@ -62,7 +62,7 @@ First, note that your Galaxy datasets have been created thus far in the director
 >    ```yaml
 >    galaxy_config_files:
 >      - src: files/galaxy/config/object_store_conf.xml
->        dest: {% raw %}"{{ galaxy_config['galaxy']['object_store_config_file'] }}"{% endraw %}
+>        dest: {% raw %}"{{ galaxy_config.galaxy.object_store_config_file }}"{% endraw %}
 >    ```
 >
 > 3. Create and edit `files/config/galaxy/object_store_conf.xml` with the following contents:
@@ -83,7 +83,7 @@ First, note that your Galaxy datasets have been created thus far in the director
 >    </object_store>
 >    ```
 >
-> 4. Add a `pre_task` to create the `/data2` folder, exactly like for the `/data` folder.
+> 4. Add a `pre_task` to create the `/data2` folder, exactly like for the `/data` folder. The [file module](https://docs.ansible.com/ansible/latest/modules/file_module.html) for Ansible may be helpful.
 >
 > 5. Run the playbook and restart Galaxy
 >
