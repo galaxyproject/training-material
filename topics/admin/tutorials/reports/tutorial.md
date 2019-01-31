@@ -101,6 +101,7 @@ The reports application is not complex to setup as it is included directly in th
 >        database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
 >        file_path: /data
 >        filter-with: proxy-prefix
+>        template_cache_path: {{ galaxy_mutable_data_dir }}/compiled_templates
 >    ```
 >
 > 4. In your group variables, configure Galaxy to deploy the reports configuration file:
@@ -114,6 +115,6 @@ The reports application is not complex to setup as it is included directly in th
 >
 > 5. Run the playbook
 >
-> 6. The reports application should be available, under `/reports`
+> 6. The reports application should be available, under `<server-url>/reports/`
 >
 {: .hands_on}
