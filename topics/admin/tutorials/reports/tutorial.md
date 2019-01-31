@@ -64,6 +64,7 @@ The reports application is not complex to setup as it is included directly in th
 >      - name: reports
 >        state: present
 >        command: uwsgi --yaml {{ galaxy_config_dir }}/reports.yml
+>        configuration: |
 >          autostart=true
 >          autorestart=true
 >          startretries=1
