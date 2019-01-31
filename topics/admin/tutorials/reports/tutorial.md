@@ -64,6 +64,7 @@ The reports application is not complex to setup as it is included directly in th
 >      - name: reports
 >        state: present
 >        command: uwsgi --yaml {{ galaxy_config_dir }}/reports.yml
+>        configuration: |
 >          autostart=true
 >          autorestart=true
 >          startretries=1
@@ -79,7 +80,7 @@ The reports application is not complex to setup as it is included directly in th
 >
 >    ```yml
 >    uwsgi:
->        http: 127.0.0.1:9001
+>        socket: 127.0.0.1:9001
 >        buffer-size: 16384
 >        processes: 1
 >        threads: 4
@@ -109,9 +110,9 @@ The reports application is not complex to setup as it is included directly in th
 > 4. In your group variables, configure Galaxy to deploy the reports configuration file:
 >
 >    ```yml
->    galaxy_template_files:
+>    galaxy_config_templates:
 >    ...
->    - src: files/galaxy/config/reports.yml
+>    - src: templates/galaxy/config/reports.yml
 >      dest: "{{ galaxy_config_dir }}/reports.yml"
 >    ```
 >
