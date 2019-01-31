@@ -85,7 +85,7 @@ Most trusted record: [RefSeq NC_005859](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 > Genome present in the CPT Apollo instance. Access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
 {: .comment}
 
-Useful readings: 
+References: 
 
 > * [Y. Zvanoic, F. Confalonieri, L. Ponchon, R. Lurz, M. Chami, A. Flayhan, M. Renouard, A. Huet, P. Decottignies, A. R. Davidson, C. Breyton, P. Boulanger
 *Insights into Bacteriophage T5 Structure from Analysis of Its Morphogenesis Genes and Protein Components*
@@ -181,8 +181,9 @@ Most trusted record: [RefSeq NC_002371](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 > {: .solution}
 {: .question}
 
-Useful readings:
+References:
 
+> * [Corrected sequence of the bacteriophage p22 genome. (2003). Corrected sequence of the bacteriophage p22 genome., 185(4), 1475–1477.](https://www.ncbi.nlm.nih.gov/pubmed/12562822)
 > * [A. S. Olia, P. E. Prevelige, J. E. Johnson, G. Cingolani
 *Three-dimensional structure of a viral genome-delivery portal vertex.*
 Nat Struct Mol Biol, 18 (2011), pp. 597-603](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3087855/)
