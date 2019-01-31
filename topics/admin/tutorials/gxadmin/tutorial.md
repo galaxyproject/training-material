@@ -34,6 +34,26 @@ Since then it became the home for "all of the SQL queries we [galaxy admins] run
 >
 {: .agenda}
 
+# Installation
+
+> ### {% icon hands_on %} Hands-on: Installing gxadmin with Ansible
+>
+> 1. Edit your `requirements.yml` and add the following:
+>
+>    ```yml
+>    - src: https://github.com/usegalaxy-eu/ansible-gxadmin
+>      name: usegalaxy-eu.gxadmin
+>    ```
+>
+> 2. Install the role with `ansible-galaxy install -p roles -r requirements.yml`
+>
+> 3. Add the role to your playbook with `become: true` and `become_user: galaxy`.
+>
+> 4. Run the playbook
+>
+{: .hands_on}
+
+
 # Configuration
 
 If `psql` runs without any additional arguments, and permits you to access your galaxy database then you do not need to do any more configuration for gxadmin.

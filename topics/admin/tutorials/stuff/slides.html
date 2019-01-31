@@ -2,11 +2,11 @@
 layout: tutorial_slides
 logo: "GTN"
 
-title: "Server Monitoring and Maintenance"
+title: "Server: Other"
+enable: false
 zenodo_link: ""
 questions:
   - How to monitor a Galaxy service?
-  - What are the best practices to maintain a Galaxy server?
 objectives:
   - Learn about different monitoring strategies.
   - Setup and start the Galaxy reports app.
@@ -18,12 +18,8 @@ contributors:
   - natefoo
   - bgruening
   - slugger70
+  - erasche
 ---
-layout: true
-name: left-aligned
-class: left, middle
----
-
 ## Admin UI
 
 Has a lot of tools and lists that are useful for administrators of the Galaxy server.
@@ -38,7 +34,27 @@ Has a lot of tools and lists that are useful for administrators of the Galaxy se
   * Tool errors
 
 ---
-class: left
+
+## Display applications
+
+The list of applications that can be used to display various datatypes.
+
+They are set in the `datatypes_conf.xml` file. For example:
+```
+  <datatype extension="bam" type="galaxy.datatypes.binary:Bam" mimetype="application/octet-stream" display_in_upload="true" description="A binary file compressed in the BGZF format with a '.bam' file extension." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#BAM">
+      <converter file="bam_to_bai.xml" target_datatype="bai"/>
+      <converter file="bam_to_bigwig_converter.xml" target_datatype="bigwig"/>
+      <display file="ucsc/bam.xml" />
+      <display file="ensembl/ensembl_bam.xml" />
+      <display file="igv/bam.xml" />
+      <display file="igb/bam.xml" />
+      <display file="iobio/bam.xml" />
+  </datatype>
+```
+
+[Tutorial](https://galaxyproject.org/admin/tools/external-display-applications-tutorial/) about creating new display apps.
+
+---
 ## Data Types
 
 * Galaxy's method of understanding users' files.
@@ -52,10 +68,12 @@ class: left
 Some datatypes can be installed from toolshed but this practice is deprecated and discouraged.
 
 ---
-class: left
-## datatypes_conf.xml
+
+## `datatypes_conf.xml`
+
 Config file for datatypes.
-```
+
+```xml
 <?xml version="1.0"?>
 <datatypes>
   <registration converters_path="lib/galaxy/datatypes/converters" display_path="display_applications">
@@ -80,38 +98,7 @@ Config file for datatypes.
 You'll then need to restart Galaxy.
 
 ---
-class: left
-## Display applications
 
-The list of applications that can be used to display various datatypes.
-
-They are set in the `datatypes_conf.xml` file. For example:
-```
-  <datatype extension="bam" type="galaxy.datatypes.binary:Bam" mimetype="application/octet-stream" display_in_upload="true" description="A binary file compressed in the BGZF format with a '.bam' file extension." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#BAM">
-      <converter file="bam_to_bai.xml" target_datatype="bai"/>
-      <converter file="bam_to_bigwig_converter.xml" target_datatype="bigwig"/>
-      <display file="ucsc/bam.xml" />
-      <display file="ensembl/ensembl_bam.xml" />
-      <display file="igv/bam.xml" />
-      <display file="igb/bam.xml" />
-      <display file="iobio/bam.xml" />
-  </datatype>
-```
-
-[Tutorial](https://galaxyproject.org/admin/tools/external-display-applications-tutorial/) about creating new display apps.
-
----
-class: left
-## Manage Jobs
-
-An admin interface to list current unfinished jobs and finished jobs of a certain age.
-
-* You can stop unfinished jobs
-* You can show details of old jobs
-* You can lock the server from spawning new jobs. (e.g. for maintenance.)
-
----
-class: left
 ## Tools
 
   * **Install new tools** - Use to install tools from the configured toolsheds.
@@ -129,7 +116,6 @@ class: left
   * **View error logs** - Will show tool problems during Galaxy startup.
 
 ---
-class: left
 ## Other links
 
   * **Quotas** - Allows for control of user disk space.
@@ -137,15 +123,6 @@ class: left
   * **Users, Groups, Roles** - Used for quotas, libraries, sharing...
   * **Impersonate user** - Allows to switch to a user account. Has to be enabled in configuration.
 
-
----
-# Log Files
-
-- Galaxy logs (`/srv/galaxy/log/*`)
-  - Web (uWSGI)
-  - Handler
-- nginx logs (`/var/log/nginx/*`)
-- supervisor logs (`/var/log/supervisor/*`)
 
 ---
 # DB Shell
@@ -162,117 +139,6 @@ $ python -i scripts/db_shell.py -c config/galaxy.yml
  >>> sa_session.commit()
  >>> sa_session.query(User).all()
 ```
-
----
-# Database Queries
-
-Sometimes it's the best way to get the exact data you need
-
-Can be very useful for:
-- Debugging
-- Reporting
-- Analytics
-
----
-# Database Queries
-
-"Can you send me the number of jobs per day/state from Main in September and October?"
-
-```sql
-SELECT
-  date_trunc('month', j.create_time) AS month,
-  j.state,
-  COUNT(j.state) AS job_count
-FROM job j
-LEFT OUTER JOIN galaxy_user u
-  ON j.user_id = u.id
-WHERE u.email != 'monitor@bx.psu.edu'
-GROUP BY month,
-         j.state
-HAVING date_trunc('month', j.create_time) >= '2016-09-01'
-AND date_trunc('month', j.create_time) < '2016-11-01'
-ORDER BY month, j.state;
-```
-
----
-# Database Queries
-
-```
-        month        |  state  | job_count
----------------------+---------+-----------
- 2016-09-01 00:00:00 | deleted |     11369
- 2016-09-01 00:00:00 | error   |     15375
- 2016-09-01 00:00:00 | new     |      1179
- 2016-09-01 00:00:00 | ok      |    165963
- 2016-09-01 00:00:00 | paused  |       933
- 2016-09-01 00:00:00 | waiting |         9
- 2016-10-01 00:00:00 | deleted |     13190
- 2016-10-01 00:00:00 | error   |     12539
- 2016-10-01 00:00:00 | new     |      1183
- 2016-10-01 00:00:00 | ok      |    167547
- 2016-10-01 00:00:00 | paused  |       645
- 2016-10-01 00:00:00 | queued  |        75
- 2016-10-01 00:00:00 | running |        36
- 2016-10-01 00:00:00 | waiting |        17
-(14 rows)
-```
-
----
-# Database Queries
-
-"I need a list of current main toolshed users and a number of their repos"
-
-```sql
-SELECT
-  u.username,
-  COUNT(r.id) AS r_count
-FROM galaxy_user u
-JOIN repository r
-  ON u.id = r.user_id
-WHERE NOT r.deleted
-GROUP BY u.id
-ORDER BY r_count DESC
-LIMIT 12;
-```
-
----
-# Database Queries
-
-```
-                 username                 | r_count
-------------------------------------------+---------
- iuc                                      |     571
- devteam                                  |     366
- bgruening                                |      95
- galaxyp                                  |      87
- jjohnson                                 |      46
- xuebing                                  |      40
- peterjc                                  |      39
- rnateam                                  |      33
- anton                                    |      32
- nml                                      |      32
- yhoogstrate                              |      31
- iracooke                                 |      30
-(12 rows)
-```
-
----
-# Analytics
-
-Can we make better walltime decisions?
-
-`scripts/runtime_stats.py`: Database-driven job runtime statistics
-
----
-# Job Metrics
-
-Galaxy can collect metrics on each job through configurable plugins in `job_metrics_conf.xml`.
-
-Some plugins:
-- `core`: Captures Galaxy slots, start and end of job, runtime
-- `cpuinfo`: processor count for each job
-- `env`: dump environment for each job
-- `collectl`: monitor a wide array of system performance data
 
 ---
 # Runaway Jobs
@@ -330,13 +196,7 @@ Mark purged all datasets last updated `$days` or more days ago **and remove from
 `python ./scripts/cleanup_datasets/pgcleanup.py -o $days -s purge_datasets`
 
 ---
-# Nagios
 
-General purpose tool for monitoring systems and services.
-
-Galaxy-specific check in `contrib/nagios/`: Runs Galaxy jobs
-
----
 # Backups
 
 What to back up:
@@ -350,43 +210,3 @@ What not to back up:
 - Job working directories
 
 ---
-# Telegraf, InfluxDB, and Grafana
-
-General purpose tools for monitoring systems and services.
-
-telegraf: plugin-driven server agent for collecting & reporting metrics
-influxdb: purpose built time series database
-grafana: dashboard for beautiful analytics and monitoring
-
-dataflow:
-Galaxy -> Telegraf -> InfluxDB -> Grafana
-
----
-# Infrastructure for Grafana
-
-* Everything captured in Galaxy Ansible [infrastructure-playbook](https://github.com/galaxyproject/infrastructure-playbook/) repository.
-* Ansible [playbook](https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles/dj-wasabi.telegraf) to install Telegraf.
-* Ansible [task](https://github.com/galaxyproject/infrastructure-playbook/blob/master/roles/stats/tasks/redhat.yml) for installing influxdb and grafana.
-
----
-# Grafana showcase
-
-* usegalaxy.eu [public server](https://stats.usegalaxy.eu)
-* usegalaxy.org.au [public server](https://stats.genome.edu.au)
-* usegalaxy.org private server
-
-If you see a dashboard you can export its configuration and put it on your Grafana with your data. Copy away!
-
----
-# Sentry
-
-* Motto: *"Stop hoping your users will report errors"*
-* Error tracking and analysing tool.
-* Galaxy has Sentry middleware that you can enable in configuration.
-
----
-# Reports
-
-Galaxy ships with its own app that reports usage (user, job, data, etc numbers)
-
-[Run Galaxy Reports - Exercise](./tutorial.html)
