@@ -95,11 +95,13 @@ This tutorial is in part inspired by aspects of the [Hemberg workflow](https://h
 
 Most scRNA sequencing techniques use pooled-sequencing approaches to generate a higher throughput of data by performing amplification and sequencing upon multiple cells in the same "pool". From a bioinformatics standpoint, this means that the output FASTQ data from the sequencer is batch-specific and contains all the sequences from multiple cells.
 
-In this tutorial, we will perform pre-processing upon scRNA FASTQ batch data to generate an *N*-by-*M*  count matrix of *N* cells and *M* genes, with each element indicating the level of expression of that gene in a particular cell. This count matrix is crucial for performing the downstream analysis, where differential gene analysis is performed between cells in order to cluster them into groups denoting their cell type and lineage. 
+In this tutorial, we will perform pre-processing upon scRNA FASTQ batch data to generate an *N*-by-*M*  count matrix of *N* cells and *M* genes, with each element indicating the level of expression of that gene in a particular cell.
 
-The first part of this tutorial will use example *FASTQ* single batch data, which we will perform barcode extraction and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix. 
+This count matrix is crucial for performing the downstream analysis, where differential gene analysis is performed between cells in order to cluster them into groups denoting their cell type and lineage. 
 
-The second part of this tutorial will deal with multiple batches, and a different set of example count matrices will be used in which to merge and perform quality control upon. This will produce a final count matrix valid for downstream analysis.
+The first part of this tutorial will use example *FASTQ* single batch data, which we will perform [barcode extraction](#understanding-barcodes) and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix. 
+
+The second part of this tutorial will deal with [multiple batches](#multiple-batches), and a different set of example count matrices will be used in which to merge and perform quality control upon. This will produce a final count matrix valid for downstream analysis.
 
 
 > ### Agenda
@@ -117,23 +119,12 @@ The second part of this tutorial will deal with multiple batches, and a differen
 
 In this tutorial we will be analysing scRNA-seq data of bone marrow cells taken from a single C57 mouse by *Herman et al.* ([2018](https://doi.org/10.1038/nmeth.4662)) and producing a count matrix that we can use for later analysis.
 
-The size of scRNA FASTQ files are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expediate the analysis by using a smaller subset of actual batch data. 
-
-<!-- 
-
-(This seems like useful information to kick out?)
-
-This data is available at [`Zenodo`](https://zenodo.org/record/1345635) where the example FASTQ paired batch files are hosted, as well as a barcodes file and GTF file for the *Mus Musculus* genome version `mm10`.
-
-The batch files are the first of the set of multiple batches, and originate from the first sequencing plate. Plates can contain multiple batches of sequencing material. We will explain this [more in detail later](#understanding-plates-and-batches), but for now we should make note of this when renaming our files in step 6 of the hands-on below. 
-
--->
+The size of scRNA files (.fastq) are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expediate the analysis by using a smaller subset of actual batch data. We will also be using *Mus Musculus* annotation data (.gtf) from the  [NCBI RefSeq](ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/vertebrate_mammalian/Mus_musculus/) track, as well as a barcodes file (.tsv).
 
 > ### {% icon hands_on %} Hands-on: Data upload and organization
 >
 > 1. Create a new history and rename it (*e.g.* scRNA-seq single batch tutorial)
-> 1. Import the FASTQ (`SRR5683689_1.fastq.gz`, `SRR5683689_2.fastq.gz`), annotation (`Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf`), and barcode (`celseq_barcodes.192.tabular`) files.
->    - By copying the following links from [`Zenodo`](https://zenodo.org/record/1345635) or from the data library (ask your instructor)
+> 1. Import the following files from [`Zenodo`](https://zenodo.org/record/1345635) or from the data library (ask your instructor)
 >    ```
 >    https://zenodo.org/record/1345635/files/SRR5683689_1.fastq.gz?download=1
 >    https://zenodo.org/record/1345635/files/SRR5683689_2.fastq.gz?download=1
@@ -144,10 +135,8 @@ The batch files are the first of the set of multiple batches, and originate from
 >    {% include snippets/import_via_link.md %}
 >    
 >    Set the database annotation to 'mm10' into the Genome dropdown box and select it.
->        <img style='width:100%' src="../../images/scrna_select_data.png" />
+>    <img style='width:100%' src="../../images/scrna_select_data.png" />
 >    
->    {% include snippets/import_from_data_library.md %}
->
 >
 > 1. Set the datatype of the `celseq_barcodes.192.tabular` to `tsv`
 > 1. Build a *Dataset pair* for the two FASTQ files
@@ -157,14 +146,24 @@ The batch files are the first of the set of multiple batches, and originate from
 >    - Ensure that the forward read is the `_1` sample, and the reverse read is the `_2` sample.
 >      - Click 'Swap' otherwise.
 >    - Set the name of the pair
->      - One useful convention to follow is `<name>_<plate>_<batch>` in order to preserve the sample names, sequencing plate number and batch number.
->      - Here we will write 'C57_P1_B1'
+>      
+>      > ### {% icon tip %} Tip: Naming conventions
+>      > * Multiple batches can exist on the same plate, and multiple plates can be used in an analysis
+>      > * This is further clarified [in detail](#understanding-plates-and-batches) later-
+>      > * For now, a useful convention to follow is `<name>_<plate>_<batch>` in order to preserve the sample names, sequencing plate number and batch number.
+>      >
+>      > Here we will write 'C57_P1_B1'
+>      >
+>      {: .tip}
+>      
 >    - Click *Hide original elements?*
 >    - Click *Create list*
 >
 {: .hands_on}
 
 ## Understanding Barcodes
+
+[Back to previous](javascript:window.history.back())
 
 Barcodes are small random oligonucleotides that are inserted into the captured sequence at a specific point, and provide two pieces of information about the sequence:
   
@@ -173,7 +172,7 @@ Barcodes are small random oligonucleotides that are inserted into the captured s
 
 When the sequence is mapped against a reference genome, we can then see which gene locus it aligns to and qualitavely assert that, together with the two pieces of information above, the sequence depicts a transcript from a specific a gene that originated from a specific cell.
 
-> ### {% icon question %} Question
+> ### {% icon question %} Questions about Cell Barcodes
 >
 > 1. Why is it important to know which cell a sequence came from?
 > 2. Barcoding the cell makes sense, but why do we need to barcode the transcript too? i.e. Can we not infer which gene the sequence originates from by simply mapping it against the reference genome?
@@ -193,6 +192,7 @@ To explore the uniqueness of counts, we must discuss the inclusion of *UMIs* in 
 > ### {% icon details %} Mitigating duplicate transcript counts with UMIs
 >
 > One of the major issues with sequencing is that the read fragments require amplification before they can be sequenced. A gene with a single mRNA transcript will not be detected by most sequencers, so it needs to be duplicated 100-1000x times for the sequencer to 'see' it.
+>
 >
 > Amplification is an imprecise process however, since some reads are amplified more than others, and subsequent amplification can lead to these over-amplified reads being over-amplified even more, leading to an exponential bias of some reads over others.
 >
@@ -640,7 +640,7 @@ As before, we can verify that the desired umi and cell barcodes have been extrac
 
 In their raw state, FASTQ files do not tell us very much. The sequences they signify align to genes in a genome, and it is these genes that we are interested in.
 
-Mapping is a relatively straightforward process:
+Mapping is a relatively straightforward process, and is covered more extensively in the [Galaxy NGS tutorial]({{site.baseurl}}/topics/sequence-analysis):
 
  1. Select your genome
  2. Select your gene annotation file
@@ -921,6 +921,8 @@ This concludes the first part of the tutorial which focused on the transformatio
 
 
 # Multiple Batches
+
+[Back to previous](javascript:window.history.back())
 
 Handling more than one batch of sequencing data is rather trivial when we take into account our main goals and requirements:
 
