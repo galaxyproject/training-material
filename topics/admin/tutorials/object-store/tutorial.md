@@ -54,7 +54,7 @@ First, note that your Galaxy datasets have been created thus far in the director
 >    ```yaml
 >    galaxy_config:
 >      galaxy:
->        object_store_config_file: {% raw %}{{ galaxy_config_dir }}/object_store_conf.xml{% endraw %}
+>        object_store_config_file: {% raw %}"{{ galaxy_config_dir }}/object_store_conf.xml"{% endraw %}
 >    ```
 >
 > 2. In your group variables file, add it to the `galaxy_config_files` section:
@@ -65,7 +65,7 @@ First, note that your Galaxy datasets have been created thus far in the director
 >        dest: {% raw %}"{{ galaxy_config.galaxy.object_store_config_file }}"{% endraw %}
 >    ```
 >
-> 3. Create and edit `files/config/galaxy/object_store_conf.xml` with the following contents:
+> 3. Create and edit `files/galaxy/config/object_store_conf.xml` with the following contents:
 >
 >    ```xml
 >    <?xml version="1.0"?>
