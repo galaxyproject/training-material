@@ -16,13 +16,21 @@ contributors:
   - bgruening
   - slugger70
   - erasche
+tags:
+  - ansible
+requirements:
+  - type: "internal"
+    topic_name: admin
+    tutorials:
+      - ansible
+      - ansible-galaxy
 ---
 
 
 # Overview
 {:.no_toc}
 
-
+The reports application gives some pre-configured analytics screens.
 
 > ### Agenda
 >
@@ -31,6 +39,7 @@ contributors:
 >
 {: .agenda}
 
+The reports application is not complex to setup as it is included directly in the Galaxy codebase and we've already done all of the setup required for Galaxy, Supervisord, uWSGI, and NGINX.
 
 > ### {% icon hands_on %} Hands-on: Setup Reports
 >
@@ -64,35 +73,47 @@ contributors:
 >    ```
 >    {% endraw %}
 >
-> 3. Create `files/galaxy/config/reports.yml` with the following contents:
+> 3. Create `templates/galaxy/config/`, if it doesn't exist, and add create and edit `templates/galaxy/config/reports.yml` with the following contents:
 >
 >    ```yml
+>    uwsgi:
+>        http: 127.0.0.1:9001
+>        buffer-size: 16384
+>        processes: 1
+>        threads: 4
+>        offload-threads: 2
+>        static-map: /static/style={{ galaxy_server_dir }}/static/style/blue
+>        static-map: /static={{ galaxy_server_dir }}/static
+>        static-map: /favicon.ico=static/favicon.ico
+>        master: true
+>        virtualenv: {{ galaxy_venv_dir }}
+>        pythonpath: {{ galaxy_server_dir }}/lib
+>        mount: /reports=galaxy.webapps.reports.buildapp:uwsgi_app()
+>        manage-script-name: true
+>        thunder-lock: false
+>        die-on-term: true
+>        hook-master-start: unix_signal:2 gracefully_kill_them_all
+>        hook-master-start: unix_signal:15 gracefully_kill_them_all
+>        py-call-osafterfork: true
+>        enable-threads: true
+>    reports:
+>        cookie-path: /reports
+>        database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
+>        file_path: /data
+>        filter-with: proxy-prefix
 >    ```
 >
+> 4. In your group variables, configure Galaxy to deploy the reports configuration file:
+>
+>    ```yml
+>    galaxy_template_files:
+>    ...
+>    - src: files/galaxy/config/reports.yml
+>      dest: "{{ galaxy_config_dir }}/reports.yml"
+>    ```
+>
+> 5. Run the playbook
+>
+> 6. The reports application should be available, under `/reports`
+>
 {: .hands_on}
-
-
-
-
-# Monitoring and maintenance
-
-## Running the Reports Application
-
-### Section 1 - Configure reports
-
-Begin by making a copy of the reports config file to your config directory, and editing it:
-
-```console
-$ sudo -u galaxy cp /srv/galaxy/server/config/reports.ini.sample /srv/galaxy/config/reports.ini
-$ sudo -u galaxy -e /srv/galaxy/config/reports.ini
-```
-
-Since we serve Galaxy at the root of our webserver, we'll need to serve Reports from a subdirectory: `/reports`. This is the default if we enable the `proxy-prefix` filter, all we need to do is uncomment the `proxy-prefix` setting. We also need to point the reports application at Galaxy's PostgreSQL database:
-
-```ini
-filter-with = proxy-prefix
-cookie_path = /reports
-database_connection = postgresql:///galaxy?host=/var/run/postgresql
-file_path = /srv/galaxy/data
-```
-
