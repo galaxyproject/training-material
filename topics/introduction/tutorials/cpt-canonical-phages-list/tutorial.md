@@ -323,6 +323,9 @@ Most trusted record: [RefSeq NC_004166](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 > {: .solution}
 {: .question}
 
+References:
+The Revisited Genome of Bacillus subtilis Bacteriophage SPP1. (2018). The Revisited Genome of Bacillus subtilis Bacteriophage SPP1., 10(12). [http://doi.org/10.3390/v10120705](http://doi.org/10.3390/v10120705)
+
 ### Phage PRD1
 
 Most trusted record: [RefSeq NC_001421](https://www.ncbi.nlm.nih.gov/nuccore/NC_001421)
