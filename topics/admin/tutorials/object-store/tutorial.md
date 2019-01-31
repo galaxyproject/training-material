@@ -83,7 +83,7 @@ First, note that your Galaxy datasets have been created thus far in the director
 >    </object_store>
 >    ```
 >
-> 4. Add a `pre_task` to create the `/data2` folder, exactly like for the `/data` folder. The [file module](https://docs.ansible.com/ansible/latest/modules/file_module.html) for Ansible may be helpful.
+> 4. Add a `pre_task` to create the `/data2` folder [using the file module](https://docs.ansible.com/ansible/latest/modules/file_module.html), exactly like for the `/data` folder.
 >
 > 5. Run the playbook and restart Galaxy
 >
