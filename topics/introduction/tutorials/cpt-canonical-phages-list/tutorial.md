@@ -6,7 +6,6 @@ tutorial_name: cpt-canonical-phages-list
 
 # Center for Phage Technology's List of Canonical Phage Genomes
 
-<--! Include basic stats (host, size of genome, type of phage, taxonomy (ICTV, NCBI, *ViralZone*) Q/A boxes -->
 
 ### Lambda
 
