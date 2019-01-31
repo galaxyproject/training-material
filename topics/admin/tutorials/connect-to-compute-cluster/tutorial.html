@@ -341,6 +341,12 @@
                     
                         
                     
+                        
+                    
+                        
+                    
+                        
+                    
                 
                     
                         
@@ -375,6 +381,12 @@
                                  <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
                             
                             </li>
+                        
+                    
+                        
+                    
+                        
+                    
                         
                     
                         
@@ -1319,8 +1331,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
     <span class="n">destination_id</span> <span class="o">=</span> <span class="s">'slurm'</span>
 
     <span class="c1"># build the param dictionary
-</span>    <span class="n">param_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span> <span class="p">[</span> <span class="p">(</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">value</span> <span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">job</span><span class="o">.</span><span class="n">parameters</span> <span class="p">]</span> <span class="p">)</span>
-    <span class="n">param_dict</span> <span class="o">=</span> <span class="n">tool</span><span class="o">.</span><span class="n">params_from_strings</span><span class="p">(</span> <span class="n">param_dict</span><span class="p">,</span> <span class="n">app</span> <span class="p">)</span>
+</span>    <span class="n">param_dict</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">get_param_values</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 
     <span class="c1"># handle job resource parameters
 </span>    <span class="k">try</span><span class="p">:</span>
@@ -1333,10 +1344,10 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 </span>        <span class="k">if</span> <span class="s">'nativeSpecification'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">destination</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
             <span class="n">destination</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s">'nativeSpecification'</span><span class="p">]</span> <span class="o">=</span> <span class="s">''</span>
         <span class="n">destination</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s">'nativeSpecification'</span><span class="p">]</span> <span class="o">+=</span> <span class="s">' --time=</span><span class="si">%</span><span class="s">s:00:00'</span> <span class="o">%</span> <span class="n">time</span>
-    <span class="k">else</span><span class="p">:</span>
+    <span class="k">except</span><span class="p">:</span>
         <span class="c1"># resource param selector not sent with tool form, job_conf.xml misconfigured
 </span>        <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">'(</span><span class="si">%</span><span class="s">s) error, keys were: </span><span class="si">%</span><span class="s">s'</span><span class="p">,</span> <span class="n">job</span><span class="o">.</span><span class="nb">id</span><span class="p">,</span> <span class="n">param_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-        <span class="k">raise</span> <span class="n">JobMappingException</span><span class="p">(</span> <span class="n">FAILURE_MESSAGE</span> <span class="p">)</span>
+        <span class="k">raise</span> <span class="n">JobMappingException</span><span class="p">(</span><span class="n">FAILURE_MESSAGE</span><span class="p">)</span>
 
     <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">'returning destination: </span><span class="si">%</span><span class="s">s'</span><span class="p">,</span> <span class="n">destination_id</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">destination</span> <span class="ow">or</span> <span class="n">destination_id</span>
