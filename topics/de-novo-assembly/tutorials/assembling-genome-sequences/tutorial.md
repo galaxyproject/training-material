@@ -6,13 +6,14 @@ tutorial_name: assembling-genome-sequences
 
 # Introduction
 
-General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
+In this tutorial users will learn how to assemble phage genomes that have been sequenced at the Center for Phage Technology. This starts from retrieving the raw read data into the CPT Galaxy, trimming those reads, and proceeds through assembly with SPAdes and initial analysis of the contig.
 
 > ### Agenda
 >
 > 1. Import Sequencing Data into a New History in Galaxy
 > 2. Running the Quality Control Report and Trimming the Reads
 > 3. Assemble the Contig Using SPAdes
+> 4. Preliminary Analysis
 > {:toc}
 >
 {: .agenda}
@@ -89,11 +90,11 @@ Selecting the Galaxy [spades tool](https://cpt.tamu.edu/galaxy/root?tool_id=tool
 
 3. File format: can use one or both of the reads sets
 
-**Unpaired/Single reads** assembly can be run using trimmed forward (R1) *or* backward (R2) reads.
+**Unpaired/Single reads** assembly can be run using trimmed forward (R1) *or* reverse (R2) reads.
 
 ![](../../images/assembling-genome-sequences-screenshots/11_unpaired_reads.png)
 
-**Separate input files** assembly uses *both* forward and backwards reads and it usually gives the best output.
+**Separate input files** assembly uses *both* forward and reverse reads and it usually gives the best output.
 
 > ### {% icon comment %} Note that...
 > This does not always yield the best output. For this reason, it is recommended that three instances of spades are run to start.
@@ -111,24 +112,24 @@ The contigs from each SPAdes iteration can be organized based on size by running
 
 ![](../../images/assembling-genome-sequences-screenshots/15_sort_parameters.png)
 
-Choosing "Spades scaffold stats" as the **Sort Dataset** option and "Column: 2" for **on column** will yield and outcome that looks something like this:
+Choosing "Spades scaffold stats" as the **Sort Dataset** option and "Column: 2" for **on column** will yield an outcome that looks something like this:
 
 ![](../../images/assembling-genome-sequences-screenshots/16_spades_scaffold.png)
 
 > ### {% icon comment %} Note that...
-> "SPAdes scaffold stats" and "SPAdes contig stats" should have very similar sorting results, though there can be a few differences between the two. If there is trouble finding a contig using one dataset, one possible troubleshooting solution is to check the other dataset.
+> "SPAdes scaffold stats" and "SPAdes contig stats" should have very similar sorting results, though there can be a few differences between the two. If there is trouble finding a contig using one dataset, try checking the other dataset.
 {: .comment}
 
 > ### {% icon tip %} What to Look For
-> * Most of the time, there is a general idea of the expected size of the genome that has been sequenced, based on restriction digest or PFGE results. Look for contigs in that size range.
+> * Most of the time, there is a general idea of the expected size of the genome that has been sequenced, based on restriction digest or Pulse Field Gel Electrophoresis results. Look for contigs in that size range.
 >
-> * Look for contigs with a coverage much higher than the rest of the list. Often this is something the user is looking for.
+> * Look for contigs with a coverage much higher than the rest of the list. Often contigs with much higher coverage than the rest of the list represent the desired sequence.
 > 
-> * Look for contigs that are the same size in the assembly that came out of using RL alone, R2 along, and both R1 and R2 together>
+> * Look for contigs that are the same size in the assembly that came out of using R1 alone, R2 alone, and both R1 and R2 together>
 >
 > * If unsure, extract a few candidate nodes and try blasting them as outlined below.
 >
-> * In the end, it is unsure if the correct contig have been chosen (or that the contig is even complete) until a confirmation PCR is attempted, and close the genome with  closure PCR/Sanger sequencing.
+> * In the end, the contig can only definitely be assigned to a specific sample (and shown that it is complete) after a confirmation PCR is attempted, and the genome is closed using PCR/Sanger sequencing. [Tutorial on Genome closure and re-opening](https://cpt.tamu.edu/training-material/topics/de-novo-assembly/tutorials/genome-close-reopen/tutorial.html).
 {: . tip}
 
 To extract the contig, run the **Fasta Extract Sequence** tool; this pulls out the FASTA file associated with a specific node.
@@ -137,13 +138,15 @@ To extract the contig, run the **Fasta Extract Sequence** tool; this pulls out t
 
 ![](../../images/assembling-genome-sequences-screenshots/18_fasta_tool_parameters.png)
 
-Choose "SPAdes contigs (fasta)" as the data file. Under "Sequence ID (or partial)," type in the node you want to extract. **Be sure to type in the underscore after the node number!** Example: NODE_21_. If the underscore is left out, it will extract *the wrong node*
+Choose "SPAdes contigs (fasta)" as the data file. Under "Sequence ID (or partial)," type in the node you want to extract. **Be sure to type in an underscore after the node number!** Example: NODE_21_. If the underscore is left out, it will extract *the wrong node*
+
+# Preliminary analysis
 
 Now, [BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome) that node! The will help identify which genome from the index this sequence is most likely associated with (ideally, do PCR confirmations to be 100% sure).
 
 > * Use BLASTn + megablast, as it will yield the most closely related organisms. For a broader net, choose a different algorithm.
 >    > * Doing the analysis on the home BLAST website will give a quick answer, but this is not a result that can be saved. This is recommended if an immediate answer is desired, but the following *must also* be done.
-> * Doing the BLAST in Galaxy will yield a permanent link that can be stored for reference. Choose the output as BLAST XML (later, the [blast2html tool](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/jankanis/blast2html/blast2html/0.0.14) must be used to convert to html) or html. After the result is ready, right-click on the eye {% icon solution %} icon and choose "open in a new tab." The hyperlink can be copied and subsequently pasted into a tracking sheet where confirmation and closure information will also be compiled.
+> * Doing the BLAST in Galaxy will yield a permanent link that can be stored for reference. Choose the output as BLAST XML (later, the [blast2html tool](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/jankanis/blast2html/blast2html/0.0.14) must be used to convert to html) or html. After the result is ready, right-click on the eye {% icon solution %} icon and choose "open in a new tab." The hyperlink can be copied and subsequently shared with other researchers or pasted into a tracking sheet where confirmation and closure information is compiled.
 
 Extracted sequences appear in the history as such:
 
@@ -151,7 +154,7 @@ Extracted sequences appear in the history as such:
 
 > 1. First, click on the pencil ![](../../images/assembling-genome-sequences-screenshots/20_pencil_icon.png) icon to bring upon the attributes of that dataset. Rename the dataset by editing the "Name" section of the attributes, and then select "Save." Example name: NODE_X:RawName ("raw" because this is the raw, unclosed contig).
 
-> 2. Next, rename it using the ["Fasta Sequence Renamer" tool.](https://cpt.tamu.edu/galaxy/root?tool_id=edu.tamu.cpt.fasta.rename) Do NOT put "raw" in this name, because this is the identifier that Galaxy will use to identify the contig, no matter how it is edited.
+> 2. Next, rename it using the ["Fasta Sequence Renamer" tool.](https://cpt.tamu.edu/galaxy/root?tool_id=edu.tamu.cpt.fasta.rename) Do NOT put "raw" in this name, because this is the identifier that Galaxy will use to identify the contig, no matter how it is edited. This changes the header in the FASTA file on the first line after the >
 
 ![](../../images/assembling-genome-sequences-screenshots/21_fasta_sequence_renamer.png)
 
@@ -165,8 +168,8 @@ Run the [PhageTerm tool](https://cpt.tamu.edu/galaxy/root?tool_id=PhageTerm) to 
 > * When complete, open the output called report.
 
 > ### {% icon tip %} More Information
-> * For the protocol on confirmation and closure, read [this document](https://docs.google.com/document/d/1uoSG9o2J2oWQZbHIhVRVGyIwPkbryujdeSBB2HQXTSQ/edit).
-> * For the protocol on polishing a genome after annotation to prepare for depositing in GenBank, read [this document](https://docs.google.com/document/d/1aXE01fphROysxygPMrYcWdkl4iU05H6jKvhtOalTh_A/edit#heading=h.lwwpw4ay44cb).
+> * Protocols on confirmation and closure are under development. CPT staff can read [this document](https://docs.google.com/document/d/1uoSG9o2J2oWQZbHIhVRVGyIwPkbryujdeSBB2HQXTSQ/edit).
+> * Protocols on polishing a genome after annotation to prepare for depositing in GenBank are also under development, but will vary from lab to lab. CPT staff can reference [this document](https://docs.google.com/document/d/1aXE01fphROysxygPMrYcWdkl4iU05H6jKvhtOalTh_A/edit#heading=h.lwwpw4ay44cb).
 {: .tip}
 
 

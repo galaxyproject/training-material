@@ -1,4 +1,4 @@
 ---
 layout: topic
-topic_name: genome-annotation
+topic_name: additional-analyses
 ---
