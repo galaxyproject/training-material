@@ -6,7 +6,7 @@ tutorial_name: assembling-genome-sequences
 
 # Introduction
 
-General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
+In this tutorial users will learn how to assemble phage genomes that have been sequenced at the Center for Phage Technology. This starts from retrieving the raw read data into the CPT Galaxy, trimming those reads, and proceeds through assembly with SPAdes and initial analysis of the contig.
 
 > ### Agenda
 >

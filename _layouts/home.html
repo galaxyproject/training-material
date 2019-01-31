@@ -20,12 +20,12 @@ layout: base
     <section>
         <h1>Welcome to {{ site.title }}</h1>
         <p class="lead">
-            Collection of tutorials developed and maintained by the worldwide Galaxy community
+            Collection of tutorials for CPT Galaxy users and BICH464 students. Further tutorials  developed and maintained by the worldwide Galaxy community are available here.
         </p>
 
         <div class="row">
             <div class="col">
-                <h3>Galaxy for Scientists</h3>
+                <h3>CPT Galaxy for Students</h3>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -57,7 +57,7 @@ layout: base
                 </table>
             </div>
             <div class="col">
-                <h3>Galaxy for Developers and Admins</h3>
+                <h3>CPT Galaxy for Scientists</h3>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -88,44 +88,6 @@ layout: base
                     </tbody>
                 </table>
 
-                <h2>How to contribute?</h2>
-
-                <p>First off, thanks for taking the time to contribute!</p>
-
-                <p>You can report mistakes or errors, create more contents, etc. Whatever is your background, there is probably a way to do it: via the GitHub website, via command-line. If you feel it is too much, you can even write it with any text editor and contact us: we will work together to integrate it.</p>
-
-                <p>To get you started, check our <a href="{{ site.baseurl }}/topics/contributing">dedicated tutorials</a> or our <a href="{{ site.baseurl }}/faq">Frequently Asked Questions</a></p>
-
-                <h3>Galaxy for Contributors and Instructors</h3>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Topic</th>
-                            <th>Tutorials</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for topic in sorted_topics %}
-                        {% if topic[1].type == "instructors" %}
-                        <tr>
-                            {% assign tutorial_number=0 %}
-                            {% assign introduction=0 %}
-                            {% for tuto in topic[1].material %}
-                                {% if tuto.type == "tutorial" %}
-                                    {% assign tutorial_number=tutorial_number | plus:1 %}
-                                {% endif %}
-                                {% if tuto.type == "introduction" %}
-                                    {% assign introduction=introduction | plus:1 %}
-                                {% endif %}
-                            {% endfor %}
-
-                            <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
-                            <td>{{ tutorial_number }}</td>
-                        </tr>
-                        {% endif %}
-                    {% endfor %}
-                    </tbody>
-                </table>
 
             </div>
         </div>
