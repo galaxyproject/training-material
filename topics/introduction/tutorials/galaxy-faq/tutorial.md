@@ -4,13 +4,6 @@ topic_name: genome-annotation
 tutorial_name: galaxy-cpt
 ---
 
-# Introduction
-{:.no_toc}
-
-<!-- This is a comment. -->
-
-General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
-
 > ### {% icon question %} One of my datasets turned red, what do I do?
 >    > ### {% icon solution %} Solution
 >    > * Sometimes tools fail and the output dataset turns red. A red dataset means that the tool has terminated with an error of some kind. If it was part of a **workflow** and downstream steps were waiting on the failed dataset, the workflow will not continue, and you may see one or more of the queued datasets remain in the paused (light blue) state.  Tools may return errors for a number of reasons, some of which the user can correct.
