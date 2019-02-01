@@ -863,7 +863,8 @@ Another filtering measure we can apply is to keep reads that we are confident ab
 >                - Click on *"Insert Filter"*:
 >                - In *"1: Filter"*:
 >                    - *"Select BAM property to filter on"*: `tag`
->                        - *"Filter on a particular tag"*: `nM:<3`
+>                        - *"Filter on a particular tag"*: `nM:<3`  
+>                           (**Attention! please use a lowercase 'n' here!**)
 >        - Click on *"Insert Condition"*:
 >        - In *"4: Condition"*:
 >            - In *"Filter"*:
