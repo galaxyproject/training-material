@@ -226,7 +226,7 @@ Near the top, the format is listed as *tabular*. At the bottom of the expanded d
 > * ![](../../images/introduction-to-cpt-galaxy-screenshots/15_comments_icon.png)  allows the user to comment on a dataset; this could be a reminder of why it was executed, or perhaps to annotate interesting results found in the output. Also a searchable field.
 
 > ### {% icon comment %} Failed Datasets
-> Sometimes tools fail and the output dataset turns red. A red dataset means that the tool has terminated with an error of some kind. If it was part of a **Workflow** (see below) and downstream steps were waiting on the failed dataset, the workflow will not continue, and you may see one or more of the queued datasets remain in the paused (light bue) state.
+> Sometimes tools fail and the output dataset turns red. A red dataset means that the tool has terminated with an error of some kind. If it was part of a **Workflow** (see below) and downstream steps were waiting on the failed dataset, the workflow will not continue, and you may see one or more of the queued datasets remain in the paused (light blue) state.
 
 > Tools may return errors for a number of reasons, some of which the user can correct. Clicking on the name of the failed dataset will open details about the job.
 >
