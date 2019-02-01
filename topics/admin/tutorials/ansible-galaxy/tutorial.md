@@ -636,7 +636,18 @@ With this we have:
 
 When we first configured Galaxy, we used the setting `http: 0.0.0.0:8080`, which instructed uWSGI to handle the serving of Galaxy, and to process the HTTP requests itself. This has some overhead and is not as efficient as is desired in production. So we will set up a reverse proxy to handle the HTTP processing, and translate this into the more efficient uWSGI protocol. Additionally it can handle serving static files for us without the requests going through uWSGI, allowing it to spend more time on useful tasks like processing jobs.
 
-For this, we will use NGINX. It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing.
+Additionally, by moving to NGINX or another reverse proxy, it can automatically compress selected content, we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at `/` and Galaxy at `/galaxy`. Lastly, it can provide authentication as well, as noted in the [External Authentication]({{ site.baseurl }}/topics/admin/tutorials/external-auth/tutorial.html) tutorial.
+
+
+For this, we will use NGINX. It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache
+
+NGINX plugins are dynamic shared objects since [1.9.11](https://www.nginx.com/blog/compiling-dynamic-modules-nginx-plus/). Debian/Ubuntu provide multiple nginx "flavors":
+
+- `nginx-light`: minimal set of core modules
+- `nginx-full`: full set of core modules
+- `nginx-extras`: full set of core modules and extras (3rd party modules)
+
+[Google's PageSpeed Tools](https://developers.google.com/speed/pagespeed/insights/) can identify any compression or caching improvements you can make.
 
 > ### {% icon hands_on %} Hands-on: NGINX
 >
@@ -965,6 +976,7 @@ And now we should have valid SSL certificates! We just need to go back and updat
 > Check that setenforce is permissive, or allow nginx to connect back to localhost on a non-standard port.
 {: .comment}
 
+Out-of-the-box SSL settings are often insecure. Use the [Mozilla SSL config generator](https://mozilla.github.io/server-side-tls/ssl-config-generator/) to create a default config and [Qualys SSL Server Test](https://www.ssllabs.com/ssltest/analyze.html) to check it.
 
 > ### {% icon hands_on %} Hands-on: Securing NGINX
 >
