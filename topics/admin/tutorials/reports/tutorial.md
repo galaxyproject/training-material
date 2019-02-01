@@ -78,6 +78,7 @@ The reports application is not complex to setup as it is included directly in th
 >
 > 3. Create `templates/galaxy/config/`, if it doesn't exist, and add create and edit `templates/galaxy/config/reports.yml` with the following contents:
 >
+>    {% raw %}
 >    ```yml
 >    uwsgi:
 >        socket: 127.0.0.1:9001
@@ -106,15 +107,18 @@ The reports application is not complex to setup as it is included directly in th
 >        filter-with: proxy-prefix
 >        template_cache_path: {{ galaxy_mutable_data_dir }}/compiled_templates
 >    ```
+>    {% endraw %}
 >
 > 4. In your group variables, configure Galaxy to deploy the reports configuration file:
 >
+>    {% raw %}
 >    ```yml
 >    galaxy_config_templates:
 >    ...
 >    - src: templates/galaxy/config/reports.yml
 >      dest: "{{ galaxy_config_dir }}/reports.yml"
 >    ```
+>    {% endraw %}
 >
 > 5. Run the playbook
 >
