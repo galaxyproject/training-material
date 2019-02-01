@@ -47,7 +47,7 @@ Binding certain proteins to each of the eight histone proteins may modify the ch
 
 ![Fadloun et al, 2013](../../images/formation_of_super-structures_on_xi/histone_modifications.jpg "Source: Fadloun et al, 2013")
 
-More H3K27me3 and less H3K4m3 on the Xi could explain a lower expression of the genes there.
+More H3K27me3 and less H3K4me3 on the Xi could explain a lower expression of the genes there.
 
 It has been also observed that the Xi adopts a distinct conformation without evident compartments or TAD. cohesins, condensins and CCCTC-binding factor (CTCF) play key roles in chromosomal architectures and TAD formation which are other potential cause of the repression of the expression of the genes on Xi.
 
