@@ -30,7 +30,6 @@ contributors:
 * Does it make sense to split out the Understanding Barcodes section into its own tutorial
 * Does it make sense to split out the Understanding Plates and Batches into its own tutorial
 * How do I set 'requirements'?
-* How to set alt for scrna
 * All other tutorials have only 1 set of slides to accompany the material.
    - Here I will need seperate ones for: UMIs, CelSeq
 
@@ -338,9 +337,7 @@ We now know the role of UMIs and cell barcodes, but how do we handle them in the
 >        J00182:75:HTKJNBBXX:2:1115:8501:46961
 >        ```
 >    1. Set the datatype of the file as **tabular**
->    1. Click the *View all histories* icon
->    1. Drag the FASTQ collection from your previous history into your new history
->    1. Click the *Galaxy* logo to return home.
+> 
 {: .hands_on}
 
 At this point we now have a history with two items: our paired FASTQ test data, and a tabular file of read names. We will now apply the tabular file to the FASTQ file and extract only those reads.
@@ -435,7 +432,7 @@ What we observe are the standard four lines of any FASTQ file:
   1. Read name starting with `@`
   2. Sequence of nucleotide bases
   3. Seperator `+`
-  4. Quality string of the nucleotide bases in Hex
+  4. Quality string of the nucleotide bases in ASCII
 
 The main source of interest for us is in the (2) sequences of these reads, which somewhere within encode for three crucial pieces of information that we will need to perform quantification:
 
