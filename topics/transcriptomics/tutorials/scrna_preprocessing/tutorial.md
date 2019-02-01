@@ -785,7 +785,7 @@ We now have a BAM file of our aligned reads, with cell and UMI barcodes embedded
 
 > ### {% icon hands_on %} Hands-on: Confirming the Alignment Data
 >
->  1. Click on the eye symbol of the BAM output from STAR.
+>  1. Click on the {% icon galaxy-eye %} symbol of the BAM output from STAR.
 >  2. There are many header lines that begin with `@` which we are not interested in. 
 >  3. Do a Ctrl+F search for `@co` and then look at the lines directly below it.  
 >     One such read is given as so:
