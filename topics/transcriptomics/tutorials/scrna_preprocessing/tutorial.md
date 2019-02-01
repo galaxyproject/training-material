@@ -171,7 +171,7 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >    
 >
 > 1. Set the datatype of the `celseq_barcodes.192.tabular` to `tsv`
-> 1. Build a *Dataset pair* for the two FASTQ files
+> 1. Build a **Dataset pair** for the two FASTQ files
 >    - Click the **Operations on multiple datasets** check box at the top of the history panel
 >    - Check the two boxes next to the R1 and R2 scRNA FASTQ samples
 >    - Click **For all selected...** and choose **Build dataset pair**
