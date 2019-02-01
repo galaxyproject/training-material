@@ -1,0 +1,253 @@
+---
+layout: tutorial_slides
+logo: "GTN"
+
+title: "Plates, Batches, and Barcodes"
+zenodo_link: ""
+questions:
+  - "What are barcodes and how are they applied to batches?"
+  - "What is the difference between a plate and a batch?"
+  - "Are batches and lanes the same?"
+  - "Why are plating setups important to know?"
+  - "Is it neccesary to check barcodes that don't exist in a batch?"
+objectives:
+  - "How to describe a plating setup"
+  - "Proper naming conventions when dealing with multiple batches"
+  - "Checking for false positives across batches"
+time_estimation: "1h"
+key_points:
+  - "Plates are split into lanes"
+  - "Batches are lanes, but their names are not reused"
+  - "Multiple batches can exist in many Plates"
+  - "Checking all barcodes across batches eliminates false positives"
+requirements:
+  - 
+    type: "internal"
+    topic_name: sequence-analysis
+    tutorials:
+        - scrna-introduction
+
+follow_up_training:
+  - 
+    type: "internal"
+    topic_name: sequence-analysis
+    tutorials:
+        - scrna_preprocessing
+        
+contributors:
+  - mtekman
+
+---
+
+# Plates and Lanes
+
+.left[Plates are *N x M* arrays of wells that cells are sorted, to then be individually amplified and sequenced.]
+
+                      | . . . . . . . . . |  <- Plate: N=9, M=6 
+                      | . . . . . . . . . |            54 slots 
+                      | . . . . . . . . . |                     
+                      | . . . . . . . . . |                     
+                      | . . . . . . . . . |                     
+                      | . . . . . . . . . |                     
+---
+
+# Plates and Lanes
+
+.left[Plates are *N x M* arrays of wells that cells are sorted, to then be individually amplified and sequenced.]
+
+                      | o o . . o o . . . |  <- Plate: N=9, M=6 
+                      | o o . . o o . . . |            54 slots 
+                      | o o . . o o . . . |                      
+                      | o o . . o o . . . |      24 cells        
+                      | o o . . o o . . . |      30 empty slots  
+                      | o o . . o o . . . |                      
+
+.left[Not all wells need to be occupied by cells, some wells are left empty.]
+.center[Why is this the case?]
+
+---
+
+# Plates and Lanes
+
+.left[Plates are *N x M* arrays of wells that cells are sorted, to then be individually amplified and sequenced.]
+
+                      | o o → ← o o → . . |  <- Plate: N=9, M=6 
+                      | o o → ← o o → . . |            54 slots 
+                      | o o → ← o o → . . |                      
+                      | o o → ← o o → . . |      24 cells        
+                      | o o → ← o o → . . |      30 empty slots  
+                      | o o → ← o o → . . |                      
+
+.left[Not all wells need to be occupied by cells, some wells are left empty.]
+.center[Why is this the case?]
+
+* Library preperation is not always perfect
+* Sample contamination from neighbouring wells
+
+---
+
+# Lanes
+
+* Sequencing plates are divided into lanes
+
+
+     | . . . . . . . . . |  <- Plate: N=9, M=6        | . . . : . . . : . . . |  <---   Plate: N=9, M=6, 3 lanes
+     | . . . . . . . . . |            54 slots        | . . . : . . . : . . . |                54 slots
+     | . . . . . . . . . |                            | . . . : . . . : . . . |          Lane: n=3, m=6
+     | . . . . . . . . . |                            | . . . : . . . : . . . |                18 slots per lane
+     | . . . . . . . . . |                            | . . . : . . . : . . . |
+     | . . . . . . . . . |                            | . . . : . . . : . . . |
+    
+
+Plates are divided into different sequencing *lanes*. These lanes demarcate evenly-sized $$n\times m$$ rectangular regions on a plate containing different non-overlapping sets of slots on the same plate. 
+
+All slots within a given lane are sequenced at the same time, and because of this characteristic, all cells that fill the slots of a given lane are said to be of the same *batch* (where lanes and batches are usually interchangeable terms).
+
+???
+The way these slot are filled depends entirely on the protocol, but usually not all slots are filled. The reason for this will become clear momentarily.
+
+---
+
+There are three main variables that can dictate the library preparation setup:
+
+ 1. Number of available cell barcodes
+ 1. Number of slots on a plate
+ 1. Number of slots in a lane/batch
+
+The last two can be explained by exploring different example plating arrangements of the sequencer, and the first can be explained via a better understanding of how cell barcodes are generated.
+
+???
+Data alone does not bring any information: to carry information, data needs to be contextualized. Transcriptomic data is no exception, therefore to organize the growing body of knowledge pertaining RNA-Seq experiments and infer valuable insights, data needs to be organized, annotated, and ultimately visualized.
+
+---
+
+### Where is my data coming from?
+
+![Wang et al, Nat Rev Genet, 2009](../../images/cummerbund-rna-seq-experiment.jpg)
+
+<small>[*Wang et al, Nat Rev Genet, 2009*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2949280/)</small>
+
+???
+- RNAs are converted into cDNA fragments through RNA fragmentation
+- sequencing adaptors (in blue) are then added to each cDNA fragment
+- cDNA sequences are obtained via NGS sequencing
+- the obtained reads are subsequently aligned against a reference genome or transcriptome, and classified in-silico as exonic reads, junction reads, and poly-A reads
+- these three types are then used to outline an expression profile for each gene
+
+This is the process that will:
+
+- reveal new genes and splice variants
+- help quantifying cell-specific gene expression within the genome under study
+
+But once this pipeline is implemented, how are sequence data going to be analysed and managed?
+
+---
+
+### Bioinformatic tools for RNA-Seq analysis
+
+Once the RNA-Seq pipeline is implemented, we still need to handle and analyse all data that is generated. This requires:
+
+- computer science skills to be handled
+
+- mathematical knowledge to be interpreted
+
+---
+
+### Bioinformatic tools for RNA-Seq analysis
+
+![Trapnell et al, Nat Protoc, 2012](../../images/cummerbund-rna-seq-experiment-tuxedo.jpg)
+
+<small>[*Trapnell et al, Nat Protoc, 2012*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3334321/)</small>
+???
+- first, reads from each condition are mapped to the reference genome using TopHat
+- the resulting alignment files are given to Cufflinks, which generates a transcriptome assembly for each condition
+- the two assemblies are then merged together to provides a uniform basis for calculating of gene and transcript expression in each condition
+- both reads and merged assemblies are fed to CuffDiff, to calculate expression levels via statistical significance test for the observed changes
+
+---
+
+### Bioinformatic tools for RNA-Seq analysis
+
+The last step in our RNA-Seq analysis is CuffDiff. Its output comprises multiple files containing the results of the differential expression analysis.
+
+- Gene expression levels are reported as <i>tab-separated</i> values: a simple tabular output that can be viewed with any spreadsheet application. Such files contain statistics, gene-related, and transcript-related attributes
+.image-75[![CuffDiff output](../../images/cummerbund-cuffdiff-output.png)]
+
+- Another way to collect all these data is to organize it within a dedicated database for later consultation. CuffDiff can be instructed to do so
+.image-50[![CuffDiff output SQLite](../../images/cummerbund-cuffdiff-set-sqlite.png)]
+
+???
+- CuffDiff provides analyses of differential expression and regulation at the gene and transcript level
+- its results are reported in a tab separated format
+- the overall collection of data is difficult to read to obtain a bird's-eye view of the change of expression
+- the data can be organized in a SQLite database
+
+---
+
+### Bioinformatic tools for RNA-Seq analysis
+
+Whatever storage strategy you opted for, i.e. multiple tab-separated-value files or a SQLite database, all data is still retained within text format.
+
+We need to have a bird's-eye view of that data, and <i>make sense</i> of it
+
+---
+
+# Visualization
+
+---
+
+### CummeRbund
+
+[CummeRbund](http://compbio.mit.edu/cummeRbund/) is an R package for visualizing the results of a CuffDiff output.
+
+- Manages, integrates, and visualizes all data produced by CuffDiff
+
+- Simplifies data exploration
+
+- Provides a bird's-eye view of the expression analysis
+
+- Helps creating publication-ready plots
+
+---
+
+### CummeRbund
+
+CummeRbund needs to be instructed on which data to be visualized:
+
+- <i>Extract CuffDiff</i>'s "Transcript differential expression testing" table
+
+- <i>Filter</i> the table on the column storing the significance of a differentially expressed gene
+
+- <i>Sort</i> all entries on the basis of most significant differentially expressed gene
+
+- Identify the most significant differentially expressed gene
+
+---
+
+### CummeRbund
+
+Once the most significant differentially expressed gene has been identified, CummeRbund can generate publication-ready plots to highlight...
+
+.image-50[![CummeRbund Expression plot](../../images/cummerbund-expression-plot.png)]
+
+The expression of all isoforms of the single gene with replicate FPKMs
+
+---
+
+### CummeRbund
+
+Once the most significant differentially expressed gene has been identified, CummeRbund can generate publication-ready plots to highlight...
+
+.image-50[![CummeRbund Expression plot](../../images/cummerbund-expression-bar-plot.png)]
+
+The expression bar-plot of all isoforms of a gene with replicate FPKMs
+
+---
+
+### CummeRbund
+
+...and many more
+
+.image-50[![Other CummeRbund plots](../../images/cummerbund-other-plots.png)]
+
+Have a look at [CummerBund's tutorial](https://bioconductor.org/packages/2.11/bioc/vignettes/cummeRbund/inst/doc/cummeRbund-manual.pdf) to overview all possibilities!
