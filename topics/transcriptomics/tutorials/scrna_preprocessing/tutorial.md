@@ -797,7 +797,7 @@ We now have a BAM file of our aligned reads, with cell and UMI barcodes embedded
 
 > ### {% icon hands_on %} Hands-on: Confirming the Alignment Data
 >
->  1. Click on the eye symbol of the BAM output from STAR.
+>  1. Click on the {% icon galaxy-eye %} symbol of the BAM output from STAR.
 >  2. There are many header lines that begin with `@` which we are not interested in. 
 >  3. Do a Ctrl+F search for `@co` and then look at the lines directly below it.  
 >     One such read is given as so:
@@ -840,7 +840,7 @@ Another filtering measure we can apply is to keep reads that we are confident ab
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Filter** {% icon tool %} with the following parameters:
+> 1. **Filter BAM datasets on a variety of attributes** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"BAM dataset(s) to filter"*: `output_bam` (output of **featureCounts** {% icon tool %})
 >    - In *"Condition"*:
 >        - Click on *"Insert Condition"*:
@@ -941,7 +941,7 @@ In order to obtain this desired format, we must use **UMI-tools count** to perfo
 >  - Scroll horizontally to the tags, observe the new `XT` tag.
 {: .hands_on}
 
-The `XS` and `XT` tags in the BAM file will now form the basis for which we will tally reads.
+The `XS` and `XT` tags in the BAM file will now form the basis for tallying reads.
 With all the relevant data now in our BAM file, we can actually perform the counting via `UMI-tools count`.
 
 > ### {% icon tip %} Tip: Verifying added gene name
@@ -969,7 +969,7 @@ With all the relevant data now in our BAM file, we can actually perform the coun
 {: .hands_on}
 
 
-The important parameters to take note of were those given in the *Extra Parameters* where we have specified that each of the reads with a `XT:Z` tag in the BAM file will be counted on a per cell basis. Reads sharing the same UMI and cell Barcodes will be de-duplicated into a single count, reducing PCR duplicate bias from the analysis.
+The important parameters to take note of are those given in the *Extra Parameters* where we specify that each of the reads with a `XT:Z` tag in the BAM file will be counted on a per cell basis. Reads sharing the same UMI and cell Barcodes will be de-duplicated into a single count, reducing PCR duplicate bias from the analysis.
 
 At this stage, we now have a tabular file containing genes/features as rows, and cell labels as headers.
 
