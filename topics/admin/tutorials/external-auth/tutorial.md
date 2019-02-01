@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Upstream Authentication"
+title: "External Authentication"
 questions:
 - How can I connect Galaxy with CAS, SAML, etc.
 objectives:

@@ -1,18 +1,26 @@
 ---
 layout: tutorial_hands_on
 
-title: "Galaxy Monitoring"
+title: "Galaxy Monitoring with Telegraf"
 zenodo_link: ""
 questions:
-  - How to monitor a Galaxy service with the Reports?
+  - How to monitor a Galaxy service?
 objectives:
   - Setup and start the Galaxy reports app.
 time_estimation: "30m"
+tags:
+  - ansible
 key_points:
   - Galaxy supports pluggable monitoring extensions.
-  - The Reports webapp is one option to monitor your system.
+  - Use grafana or the reports webapp to monitor your service.
 contributors:
   - erasche
+requirements:
+  - type: "internal"
+    topic_name: admin
+    tutorials:
+      - ansible
+      - ansible-galaxy
 ---
 
 
