@@ -260,6 +260,12 @@
     <li>
       <p><code class="highlighter-rouge">ansible-galaxy install -p roles -r requirements.yml</code></p>
     </li>
+    <li>
+      <p>Add an entry to your playbook under <code class="highlighter-rouge">roles:</code></p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="s">dj-wasabi.telegraf</span>
+</code></pre></div>      </div>
+    </li>
   </ol>
 
 </blockquote>
@@ -301,6 +307,9 @@
       <span class="pi">-</span> <span class="s">metric_separator = "."</span>
       <span class="pi">-</span> <span class="s">allowed_pending_messages = 10000</span>
 </code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Replace the <code class="highlighter-rouge">YOUR-INFLUX-URL</code> placeholder with your influx service url.</p>
 
       <p>This configures telegraf to output to the configured influxdb server in the <code class="highlighter-rouge">telegraf</code> database. A number of plugins are enabled as <code class="highlighter-rouge">defaults</code>, this is useful if you have telegraf configured for multiple machines; you can have a base configuration that applies to all machines (perhaps in <code class="highlighter-rouge">group_vars/all.yml</code>), and then <code class="highlighter-rouge">extra</code> configuration that is per-machine.</p>
 
