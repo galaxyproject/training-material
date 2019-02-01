@@ -12,16 +12,31 @@ objectives:
   - "Understand and validate the extraction of barcodes"
   - "Obtain an overview of general alignment and quantification techniques"
   - "Generate a count matrix for downstream single-cell RNA analysis"
-time_estimation: "2h"
+time_estimation: "4h"
 key_points:
   - "Verifying the distribution of barcodes via a FASTQC plot"
   - "Relocating barcodes into headers"
   - "Merging matrices from different batches together"
   - "Removing unwanted barcodes"
+requirements:
+  - 
+    type: "internal"
+    topic_name: sequence-analysis
+    tutorials:
+        - mapping
+        - quality control
+  - 
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+        - scrna-introduction
+        - plates-batches-and-barcodes
+        
 contributors:
   - mtekman
   - bebatut
   - erxleben
+  - wm75
   
 ---
 
