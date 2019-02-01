@@ -76,7 +76,7 @@ blockquote img {
 
 
 ## Why do Single Cell?
-
+{:.no_toc}
 
 Single-cell RNA (scRNA) sequencing is the technological successor to classical bulk RNA-seq, where samples are no longer defined at the tissue level but at the individual cell level. Under bulk RNA-seq the expression of genes in a sample would yield the average expression of all the constituent cells in that sample, irregardless of the distinct expressions profiles given by subpopulations of cells. The advent of scRNA sequencing has provided the means to explore samples at the individual cell level, enabling a greater understanding of the development and function of such samples by the characteristics of their constituent cells. Consider the heterogenity of cells sampled from bone marrow, where hematopoietic stem cells can give rise to many different cell types within the same tissue:
 
@@ -92,6 +92,7 @@ Other than cell development, there are many more factors that can shape the leve
 This tutorial is in part inspired by aspects of the [Hemberg workflow](https://hemberg-lab.github.io/scRNA.seq.course/) at the Sanger institute, as well as the [CGATOxford](https://github.com/CGATOxford/UMI-tools) workflow. The barcoding follows the [CelSeq2 protocol](#details-the-celseq2-protocol) and uses the lane configuration as that utilized by the Freiburg MPI Grün lab.
 
 # Analysis Strategy
+{:.no_toc}
 
 Most scRNA sequencing techniques use pooled-sequencing approaches to generate a higher throughput of data by performing amplification and sequencing upon multiple cells in the same "pool". From a bioinformatics standpoint, this means that the output FASTQ data from the sequencer is batch-specific and contains all the sequences from multiple cells.
 
@@ -132,10 +133,12 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >    https://zenodo.org/record/1345635/files/celseq_barcodes.192.tabular?download=1
 >    ``` 
 >    
->    {% include snippets/import_via_link.md %}
->    
 >    Set the database annotation to 'mm10' into the Genome dropdown box and select it.
 >    <img style='width:100%' src="../../images/scrna_select_data.png" />
+>    
+>    
+>    
+>    {% include snippets/import_via_link.md %}
 >    
 >
 > 1. Set the datatype of the `celseq_barcodes.192.tabular` to `tsv`
@@ -146,16 +149,16 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >    - Ensure that the forward read is the `_1` sample, and the reverse read is the `_2` sample.
 >      - Click 'Swap' otherwise.
 >    - Set the name of the pair
->      
->      > ### {% icon tip %} Tip: Naming conventions
->      > * Multiple batches can exist on the same plate, and multiple plates can be used in an analysis
->      > * This is further clarified [in detail](#understanding-plates-and-batches) later-
->      > * For now, a useful convention to follow is `<name>_<plate>_<batch>` in order to preserve the sample names, sequencing plate number and batch number.
->      >
->      > Here we will write 'C57_P1_B1'
->      >
->      {: .tip}
->      
+>    
+>    > ### {% icon tip %} Tip: Naming conventions
+>    > * Multiple batches can exist on the same plate, and multiple plates can be used in an analysis
+>    > * This is further clarified [in detail](#understanding-plates-and-batches) later-
+>    > * For now, a useful convention to follow is `<name>_<plate>_<batch>` in order to preserve the sample names, sequencing plate number and batch number.
+>    >
+>    > Here we will write 'C57_P1_B1'
+>    >
+>    {: .tip}
+>    
 >    - Click *Hide original elements?*
 >    - Click *Create list*
 >
@@ -508,10 +511,9 @@ For this we need to take the barcode information from the Forward reads, and sti
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > Here we specify the format of our barcodes as `NNNNNNCCCCCC` where the *N*s represent UMI bases and the *C*s represent the cell barcodes.
->    >
->    > In some protocols, actual sequence data can be found in between the cell and UMI barcodes, wherein it is neccesary to represent sequence bases using *X*.
->    >  e.g. A protocol that starts with a 3bp sequence, followed by a 4bp Cell barcode, followed once again by a 10bp sequence, and then finally a 5bp UMI barcode, would require the following barcode format:  
+>    > - Here we specify the format of our barcodes as `NNNNNNCCCCCC` where the *N*s represent UMI bases and the *C*s represent the cell barcodes.
+>    > - In some protocols, actual sequence data can be found in between the cell and UMI barcodes, wherein it is neccesary to represent sequence bases using *X*.
+>    > - e.g. A protocol that starts with a 3bp sequence, followed by a 4bp Cell barcode, followed once again by a 10bp sequence, and then finally a 5bp UMI barcode, would require the following barcode format:  
 >    >   `XXXCCCCXXXXXXXXXXNNNNN`
 >    >
 >    {: .comment}
@@ -701,14 +703,16 @@ The purpose of MultiQC is to observe how well our reads were mapped against the 
 {: .question}
 
 
-### Filtering
+## Filtering
 
-> #### {% icon comment %} Recap of previous stages
+> ### {% icon comment %} Recap of previous stages
 >
 > 1. *Barcode Extraction*:  
 >   Here we used `umi_tools extract` on our input forward and reverse FASTQ files, and extracted the umi and cell barcode from the forward read *sequence*, and placed it into the *header* of both forward and reverse FASTQ files. i.e. FASTQ files → Modified FASTQ files  
 > 2. *Mapping*:  
 >   We took the sequencing data from the reverse FASTQ file (with modified headers) and aligned it to the mouse genome, using annotations presented in the GTF file for that genome. i.e. Modified FASTQ file (reverse) → BAM file
+>
+{: .comment}
 
 #### Confirming Reads in the BAM file
 
@@ -915,6 +919,7 @@ The generation of a single count matrix is now complete, with the emphasis on th
 >  Reads with aligment mismatches greater than 2 were discarded, and only non multi-mapped reads that mapped to the forward or reverse strand were kept
 > 4. *Quantification*:  
 >  Gene tags were added to our alignment file, and reads were grouped according those sharing the same gene tag, with further reduction performed by collapsing all reads sharing the same cell and UMI barcode to be counted only once.
+>
 {: .comment}
 
 This concludes the first part of the tutorial which focused on the transformation of raw FASTQ data from a single batch into a count matrix. The second part of this tutorial guides us through the handling of multiple batches, and the challenges faced with different library preperation setups.
