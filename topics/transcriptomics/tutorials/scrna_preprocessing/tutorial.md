@@ -184,7 +184,7 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >    > * This is further clarified [in detail](#understanding-plates-and-batches) later-
 >    > * For now, a useful convention to follow is `<name>_<plate>_<batch>` in order to preserve the sample names, sequencing plate number and batch number.
 >    >
->    > Here we will write 'C57_P1_B1'
+>    > Here we will write `C57_P1_B1`
 >    >
 >    {: .tip}
 >    
