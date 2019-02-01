@@ -22,11 +22,6 @@ requirements:
     tutorials:
       - ansible
       - ansible-galaxy
-  - title: "A server/VM on which to deploy CVMFS"
-    type: "none"
-  - type: "external"
-    title: Ansible setup on your local machine
-    link: "https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html"
 ---
 
 # Overview
