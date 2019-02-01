@@ -153,8 +153,7 @@ The tutorial is structured in two parts:
 
 The first part of this tutorial will deal with batches, and use example *FASTQ* data from a single batch, which we will perform [barcode extraction](#understanding-barcodes) and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix. 
 
-The second part of this tutorial will deal with merging several output count matrices from (parallel) single batches generated in the first portion. 
-[count matrices](#multiple-batches), and a different set of example count matrices will be used in which to merge and perform quality control upon. This will produce a final count matrix valid for downstream analysis.
+The second part of this tutorial will deal with merging several output count matrices from multiple single batches generated in the first portion. Here, a set of example count matrices are [merged together](#merging-batches-together) and quality control performed. This produces a final count matrix valid for downstream analysis.
 
 
 > ### Agenda
@@ -1000,10 +999,10 @@ The generation of a single count matrix is now complete, with the emphasis on th
 >
 {: .comment}
 
-This concludes the first part of the tutorial which focused on the transformation of raw FASTQ data from a single batch into a count matrix. The second part of this tutorial guides us through the handling of multiple batches, and the challenges faced with different library preperation setups.
+This concludes the first part of the tutorial which focused on the transformation of raw FASTQ data from a single batch into a count matrix. The second part of this tutorial guides us through the process of merging multiple processed batches from the first stage, and performing qualitative filtering.
 
 
-# Multiple Batches
+# Merging Batches Together
 
 [Back to previous](javascript:window.history.back())
 
