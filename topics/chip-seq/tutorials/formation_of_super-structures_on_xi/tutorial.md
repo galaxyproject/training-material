@@ -222,7 +222,7 @@ It is often necessary to trim sequenced read, for example, to get rid of bases t
 
 # Step 2: Mapping of the reads
 
-With ChiP sequencing, we obtain sequences corresponding to portion of DNA linked to histones with H3K4me3. As H3K4me3 opens the chromatime, nearby genes are more transcribed. It would be interesting to know if there is a difference in the quantity of DNA impacted by H3K4me3 and the impacted genes between active and inactive X chromosome.
+With ChiP sequencing, we obtain sequences corresponding to a portion of DNA linked to histones with H3K4me3. As H3K4me3 opens the chromatime, nearby genes are more transcribed. It would be interesting to know if there is a difference in the quantity of DNA impacted by H3K4me3 and the impacted genes between active and inactive X chromosome.
 
 {% include topics/sequence-analysis/tutorials/mapping/mapping_explanation.md
     to_identify="binding sites"
