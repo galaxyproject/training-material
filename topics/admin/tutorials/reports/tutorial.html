@@ -633,12 +633,12 @@
     <span class="na">processes</span><span class="pi">:</span> <span class="s">1</span>
     <span class="na">threads</span><span class="pi">:</span> <span class="s">4</span>
     <span class="na">offload-threads</span><span class="pi">:</span> <span class="s">2</span>
-    <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static/style=/static/style/blue</span>
-    <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static=/static</span>
+    <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static/style={{ galaxy_server_dir }}/static/style/blue</span>
+    <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static={{ galaxy_server_dir }}/static</span>
     <span class="na">static-map</span><span class="pi">:</span> <span class="s">/favicon.ico=static/favicon.ico</span>
     <span class="na">master</span><span class="pi">:</span> <span class="no">true</span>
-    <span class="na">virtualenv</span><span class="pi">:</span> 
-    <span class="na">pythonpath</span><span class="pi">:</span> <span class="s">/lib</span>
+    <span class="na">virtualenv</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv">galaxy_venv_dir</span> <span class="pi">}}</span>
+    <span class="na">pythonpath</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv">galaxy_server_dir</span> <span class="pi">}}</span><span class="s">/lib</span>
     <span class="na">mount</span><span class="pi">:</span> <span class="s">/reports=galaxy.webapps.reports.buildapp:uwsgi_app()</span>
     <span class="na">manage-script-name</span><span class="pi">:</span> <span class="no">true</span>
     <span class="na">thunder-lock</span><span class="pi">:</span> <span class="no">false</span>
@@ -652,7 +652,7 @@
     <span class="na">database_connection</span><span class="pi">:</span> <span class="s2">"</span><span class="s">postgresql:///galaxy?host=/var/run/postgresql"</span>
     <span class="na">file_path</span><span class="pi">:</span> <span class="s">/data</span>
     <span class="na">filter-with</span><span class="pi">:</span> <span class="s">proxy-prefix</span>
-    <span class="na">template_cache_path</span><span class="pi">:</span> <span class="s">/compiled_templates</span>
+    <span class="na">template_cache_path</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv">galaxy_mutable_data_dir</span> <span class="pi">}}</span><span class="s">/compiled_templates</span>
 </code></pre></div>      </div>
     </li>
     <li>
@@ -661,7 +661,7 @@
       <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config_templates</span><span class="pi">:</span>
 <span class="nn">...</span>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/galaxy/config/reports.yml</span>
-  <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/reports.yml"</span>
+  <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config_dir</span><span class="nv"> </span><span class="s">}}/reports.yml"</span>
 </code></pre></div>      </div>
     </li>
     <li>
