@@ -828,7 +828,7 @@ Another filtering measure we can apply is to keep reads that we are confident ab
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Filter** {% icon tool %} with the following parameters:
+> 1. **Filter BAM datasets on a variety of attributes** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"BAM dataset(s) to filter"*: `output_bam` (output of **featureCounts** {% icon tool %})
 >    - In *"Condition"*:
 >        - Click on *"Insert Condition"*:
