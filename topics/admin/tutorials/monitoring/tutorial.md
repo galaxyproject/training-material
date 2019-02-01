@@ -43,6 +43,12 @@ We use [Telegraf](https://github.com/influxdata/telegraf) for monitoring as it i
 >
 > 2. `ansible-galaxy install -p roles -r requirements.yml`
 >
+> 3. Add an entry to your playbook under `roles:`
+> 
+>    ```yaml
+>    - dj-wasabi.telegraf
+>    ```
+>
 {: .hands_on}
 
 This role has many convenient variables for us to set. We'll do that now:
@@ -80,6 +86,8 @@ This role has many convenient variables for us to set. We'll do that now:
 >          - metric_separator = "."
 >          - allowed_pending_messages = 10000
 >    ```
+> 
+> 2. Replace the `YOUR-INFLUX-URL` placeholder with your influx service url.
 >
 >    This configures telegraf to output to the configured influxdb server in the `telegraf` database. A number of plugins are enabled as `defaults`, this is useful if you have telegraf configured for multiple machines; you can have a base configuration that applies to all machines (perhaps in `group_vars/all.yml`), and then `extra` configuration that is per-machine.
 >
