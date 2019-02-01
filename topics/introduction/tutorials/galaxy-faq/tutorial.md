@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: genome-annotation
-tutorial_name: galaxy-cpt
+tutorial_name: galaxy-faq
 ---
 
 > ### {% icon question %} One of my datasets turned red, what do I do?
