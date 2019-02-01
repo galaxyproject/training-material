@@ -929,7 +929,7 @@ In order to obtain this desired format, we must use **UMI-tools count** to perfo
 >  - Scroll horizontally to the tags, observe the new `XT` tag.
 {: .hands_on}
 
-The `XS` and `XT` tags in the BAM file will now form the basis for which we will tally reads.
+The `XS` and `XT` tags in the BAM file will now form the basis for tallying reads.
 With all the relevant data now in our BAM file, we can actually perform the counting via `UMI-tools count`.
 
 > ### {% icon tip %} Tip: Verifying added gene name
