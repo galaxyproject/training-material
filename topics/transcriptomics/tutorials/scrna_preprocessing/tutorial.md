@@ -957,7 +957,7 @@ With all the relevant data now in our BAM file, we can actually perform the coun
 {: .hands_on}
 
 
-The important parameters to take note of were those given in the *Extra Parameters* where we have specified that each of the reads with a `XT:Z` tag in the BAM file will be counted on a per cell basis. Reads sharing the same UMI and cell Barcodes will be de-duplicated into a single count, reducing PCR duplicate bias from the analysis.
+The important parameters to take note of are those given in the *Extra Parameters* where we specify that each of the reads with a `XT:Z` tag in the BAM file will be counted on a per cell basis. Reads sharing the same UMI and cell Barcodes will be de-duplicated into a single count, reducing PCR duplicate bias from the analysis.
 
 At this stage, we now have a tabular file containing genes/features as rows, and cell labels as headers.
 
