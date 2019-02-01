@@ -170,12 +170,12 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >    
 >
 > 1. Set the datatype of the `celseq_barcodes.192.tabular` to `tsv`
-> 1. Build a *Dataset pair* for the two FASTQ files
->    - Click the *Operations on multiple datasets* check box at the top of the history panel
+> 1. Build a **Dataset pair** for the two FASTQ files
+>    - Click the **Operations on multiple datasets** check box at the top of the history panel
 >    - Check the two boxes next to the R1 and R2 scRNA FASTQ samples
->    - Click *For all selected...* and choose *Build dataset pair*
+>    - Click **For all selected...** and choose **Build dataset pair**
 >    - Ensure that the forward read is the `_1` sample, and the reverse read is the `_2` sample.
->      - Click 'Swap' otherwise.
+>      - Click **Swap** otherwise.
 >    - Set the name of the pair
 >    
 >    > ### {% icon tip %} Tip: Naming conventions
@@ -183,7 +183,7 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >    > * This is further clarified [in detail](#understanding-plates-and-batches) later-
 >    > * For now, a useful convention to follow is `<name>_<plate>_<batch>` in order to preserve the sample names, sequencing plate number and batch number.
 >    >
->    > Here we will write 'C57_P1_B1'
+>    > Here we will write `C57_P1_B1`
 >    >
 >    {: .tip}
 >    
