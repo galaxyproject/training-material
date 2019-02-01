@@ -125,12 +125,12 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 > ### {% icon hands_on %} Hands-on: Data upload and organization
 >
 > 1. Create a new history and rename it (*e.g.* scRNA-seq single batch tutorial)
-> 1. Import the following files from [`Zenodo`](https://zenodo.org/record/1345635) or from the data library (ask your instructor)
+> 1. Import the following files from [`Zenodo`](https://zenodo.org/record/2554612) or from the data library (ask your instructor)
 >    ```
->    https://zenodo.org/record/1345635/files/SRR5683689_1.fastq.gz?download=1
->    https://zenodo.org/record/1345635/files/SRR5683689_2.fastq.gz?download=1
->    https://zenodo.org/record/1345635/files/Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf?download=1
->    https://zenodo.org/record/1345635/files/celseq_barcodes.192.tabular?download=1
+>    https://zenodo.org/record/2554612/files/SRR5683689_1.fastq.gz?download=1
+>    https://zenodo.org/record/2554612/files/SRR5683689_2.fastq.gz?download=1
+>    https://zenodo.org/record/2554612/files/Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf?download=1
+>    https://zenodo.org/record/2554612/files/celseq_barcodes.192.tabular?download=1
 >    ``` 
 >    
 >    Set the database annotation to 'mm10' into the Genome dropdown box and select it.
@@ -284,18 +284,33 @@ We now know the role of UMIs and cell barcodes, but how do we handle them in the
 > ### {% icon hands_on %} Hands-on: Selecting 4 reads of interest
 >
 > 1. Preparing the Data:
->     1. Create a new history and rename it (*e.g.* 'Inspecting FastQ Files in scRNA batch data')
->     1. Generate a list of reads to filter by creating a plain tabular file containing the following read names:
+>    1. Create a new history and rename it (*e.g.* 'Inspecting FastQ Files in scRNA batch data')
+>    1. Import the following files from [`Zenodo`](https://zenodo.org/record/2554612) or from the data library (ask your instructor)
+>    ```
+>    https://zenodo.org/record/2554612/files/test_barcodes_celseq2_R1.fastq.gz?download=1
+>    https://zenodo.org/record/2554612/files/test_barcodes_celseq2_R2.fastq.gz?download=1
+>    ``` 
+>
+>    {% include snippets/import_via_link.md %}
+>    1. Build a *Dataset pair* for the two FASTQ files
+>       - Click the *Operations on multiple datasets* check box at the top of the history panel
+>       - Check the two boxes next to the R1 and R2 scRNA FASTQ samples
+>       - Click *For all selected...* and choose *Build dataset pair*
+>       - Ensure that the forward read is the `R1` sample, and the reverse read is the `R2` sample.
+>          - Click 'Swap' otherwise.
+>       - Set the name of the pair
+>
+>    1. Generate a list of reads to filter by creating a plain tabular file containing the following read names:
 >        ```
 >        J00182:75:HTKJNBBXX:2:1114:12469:11073
 >        J00182:75:HTKJNBBXX:2:2222:13301:35690
 >        J00182:75:HTKJNBBXX:2:1203:25022:13763
 >        J00182:75:HTKJNBBXX:2:1115:8501:46961
 >        ```
->     1. Set the datatype of the file as **tabular**
->     1. Click the *View all histories* icon
->     1. Drag the FASTQ collection from your previous history into your new history
->     1. Click the *Galaxy* logo to return home.
+>    1. Set the datatype of the file as **tabular**
+>    1. Click the *View all histories* icon
+>    1. Drag the FASTQ collection from your previous history into your new history
+>    1. Click the *Galaxy* logo to return home.
 > 1. Extracting our 4 reads  
 >    **Filter sequences by ID** {% icon tool %} with the following parameters:
 >    - **Sequence file to be filtered**
@@ -659,7 +674,7 @@ For alignment, we will use RNA-STAR for performance and splice-awareness.
 > ### {% icon hands_on %} Hands-on: Performing the Alignment
 >
 > 1. Obtain the GTF file and import it into our history.
->   - Click on the [Zenodo](https://zenodo.org/record/1345635) link and import the **Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf (mm10)** GTF file if not already present
+>   - Click on the [Zenodo](https://zenodo.org/record/2554612) link and import the **Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf (mm10)** GTF file if not already present
 > 2. **RNA-STAR** {%icon tool %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Single-end`
 >        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file"*: `out2` (output of **UMI-tools extract** {% icon tool %})
@@ -939,21 +954,21 @@ The first step requires us to merely run the same workflow on each of our batche
 
 ### Data upload and organization
 
-The count matrix we have generated in the previous section is too sparse to perform any reasonable analysis upon, and constitutes data only of a single batch. Here we will use more populated count matrices from multiple batches, under the assumption that we now know how to generate each individual one of them using the steps provided in the previous section. This data is available at [`Zenodo`](https://zenodo.org/record/1345635).
+The count matrix we have generated in the previous section is too sparse to perform any reasonable analysis upon, and constitutes data only of a single batch. Here we will use more populated count matrices from multiple batches, under the assumption that we now know how to generate each individual one of them using the steps provided in the previous section. This data is available at [`Zenodo`](https://zenodo.org/record/2554612).
 
 Once again, file naming is important, and so we will rename our matrix files appropriately to the plate and batch they are supposed to originate from.
 
 > ### {% icon hands_on %} Hands-on: Data upload and organization
 >
 > 1. Create a new history and rename it (*e.g.* scRNA-seq multiple-batch tutorial)
-> 1. Import the four matrices (`P1_B1.tabular`, `P1_B2.tabular`, etc.) from [`Zenodo`](https://zenodo.org/record/1345635) or from the data library (ask your instructor)
+> 1. Import the four matrices (`P1_B1.tabular`, `P1_B2.tabular`, etc.) from [`Zenodo`](https://zenodo.org/record/2554612) or from the data library (ask your instructor)
 >    - Set the datatype of the tabular files to **tabular**
 >
 >    ```
->    https://zenodo.org/record/1345635/files/P1_B1.tabular?download=1
->    https://zenodo.org/record/1345635/files/P1_B2.tabular?download=1
->    https://zenodo.org/record/1345635/files/P2_B3.tabular?download=1
->    https://zenodo.org/record/1345635/files/P2_B4.tabular?download=1
+>    https://zenodo.org/record/2554612/files/P1_B1.tabular?download=1
+>    https://zenodo.org/record/2554612/files/P1_B2.tabular?download=1
+>    https://zenodo.org/record/2554612/files/P2_B3.tabular?download=1
+>    https://zenodo.org/record/2554612/files/P2_B4.tabular?download=1
 >    ```
 >    
 >    {% include snippets/import_via_link.md %}
