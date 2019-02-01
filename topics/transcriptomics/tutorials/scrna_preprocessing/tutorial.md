@@ -38,6 +38,9 @@ Todo:
 * Split "Mitigating duplicate transcript counts with UMIs"
 * Snippets can be parameterised, so USE them more.
 
+Feedback:
+* BG says the concepts of Cell barcode, UMI, and overall barcode are confusing.
+
 -->
 
 
@@ -160,7 +163,7 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >    ``` 
 >    
 >    Set the database annotation to 'mm10' into the Genome dropdown box and select it.
->    ![](../../images/scrna_select_data.png "Select the data")
+>    ![Select Data](../../images/scrna_select_data.png "Select the data")
 >    
 >    
 >    
