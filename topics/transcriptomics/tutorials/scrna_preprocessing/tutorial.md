@@ -864,7 +864,7 @@ Another filtering measure we can apply is to keep reads that we are confident ab
 >                - In *"1: Filter"*:
 >                    - *"Select BAM property to filter on"*: `tag`
 >                        - *"Filter on a particular tag"*: `nM:<3`  
->                           (**Attention! please use a lowercase 'n' here!**)
+>                          <small>(**Attention! please use a lowercase 'n' here!**)  
 >        - Click on *"Insert Condition"*:
 >        - In *"4: Condition"*:
 >            - In *"Filter"*:
@@ -1084,6 +1084,7 @@ This can be resolved by performing a "Full Join" where GeneA is inserted into Ba
 > > 2. The reason the cell headers are the same is because the cells use the **same barcodes**, due to fact that the same barcodes are used across different batches.
 > >
 > {: .solution}
+> 
 {: .question}
 
 
@@ -1094,7 +1095,7 @@ Let us now merge our matrices from different batches.
 > Select **Column Join on Collections** {%icon tool %} with the following parameters:
 > - *"Tabular Files"*: (Select each of the matrices that you wish to join)  
 > - *"Identifier column"*:`1`  
-> - *"Number of Header lines in each item"*:`1`  
+> - *"Number of Header lines in each item"*:`1` <small>(**Attention! This is not a default setting.**)  
 > - *"Keep original column header"*:`Yes`  
 > - *"Fill character"*:`0`  
 >
@@ -1368,9 +1369,11 @@ Let us now apply this protocol to our count matrix, and look for any cross-conta
 >              - *"Batches within this Plate Number"*:`3,4`
 >  - Expand the *"Advanced"* section:
 >     - *"RegEx to extract Plate, Batch, and Barcodes from headers"*:`.*P(\\d)_B(\\d)_([ACTG]+)`
+>       <small>(**Attention! Take note of that the 'B' is present**)
 >
 {: .hands_on}
 
+The [regular expression](https://www.regular-expressions.info/quickstart.html) (RegEx) used in that final step is required to tell us how to capture the important information in the cell headers contained in brackets `(` `)`, where `\\d` denotes an expected digit, and `[ACTG]+` denotes 1 or more characters matching A or C or T or G.
  
 The plot that follows tells us everything we need to know about each of our batches. Each batch is essentially tested against the full set of barcodes in order to assert that only the desired or 'Real' barcodes have been sequenced.
 
