@@ -151,10 +151,10 @@ The tutorial is structured in two parts:
 
  ![Overview of workflow](../../images/scrna_workflow.svg "An overview of the entire workflow")
 
-The first part of this tutorial will use example *FASTQ* data from a single batch, which we will perform [barcode extraction](#understanding-barcodes) and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix. 
+The first part of this tutorial will deal with batches, and use example *FASTQ* data from a single batch, which we will perform [barcode extraction](#understanding-barcodes) and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix. 
 
-
-The second part of this tutorial will deal with [multiple batches](#multiple-batches), and a different set of example count matrices will be used in which to merge and perform quality control upon. This will produce a final count matrix valid for downstream analysis.
+The second part of this tutorial will deal with merging several output count matrices from (parallel) single batches generated in the first portion. 
+[count matrices](#multiple-batches), and a different set of example count matrices will be used in which to merge and perform quality control upon. This will produce a final count matrix valid for downstream analysis.
 
 
 > ### Agenda
@@ -477,6 +477,8 @@ These can be encoded into the sequences of our paired-end data by any means. In 
 >
 > [Back to previous](javascript:window.history.back())
 {: .details}
+
+<!-- TODO: Expand the schema to talk about the actual read primers and not just the sequencing primers -->
 
 #### Verifying the Barcode Format
 
@@ -843,24 +845,20 @@ Another filtering measure we can apply is to keep reads that we are confident ab
 > 1. **Filter BAM datasets on a variety of attributes** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"BAM dataset(s) to filter"*: `output_bam` (output of **featureCounts** {% icon tool %})
 >    - In *"Condition"*:
->        - Click on *"Insert Condition"*:
 >        - In *"1: Condition"*:
 >            - In *"Filter"*:
->                - Click on *"Insert Filter"*:
 >                - In *"1: Filter"*:
 >                    - *"Select BAM property to filter on"*: `alignmentFlag`
 >                        - *"Filter on this alignment flag"*: `0`
 >        - Click on *"Insert Condition"*:
 >        - In *"2: Condition"*:
 >            - In *"Filter"*:
->                - Click on *"Insert Filter"*:
 >                - In *"1: Filter"*:
 >                    - *"Select BAM property to filter on"*: `alignmentFlag`
 >                        - *"Filter on this alignment flag"*: `16`
 >        - Click on *"Insert Condition"*:
 >        - In *"3: Condition"*:
 >            - In *"Filter"*:
->                - Click on *"Insert Filter"*:
 >                - In *"1: Filter"*:
 >                    - *"Select BAM property to filter on"*: `tag`
 >                        - *"Filter on a particular tag"*: `nM:<3`  
@@ -868,7 +866,6 @@ Another filtering measure we can apply is to keep reads that we are confident ab
 >        - Click on *"Insert Condition"*:
 >        - In *"4: Condition"*:
 >            - In *"Filter"*:
->                - Click on *"Insert Filter"*:
 >                - In *"1: Filter"*:
 >                    - *"Select BAM property to filter on"*: `tag`
 >                        - *"Filter on a particular tag"*: `NH:<2`
@@ -958,8 +955,6 @@ With all the relevant data now in our BAM file, we can actually perform the coun
 > **UMI-tools counts** {%icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Sorted BAM file"*: `out_file1` (output of **Filter** {% icon tool %})
 >    - *"Umi Extract Method"*: `Barcodes are contained at the end of the read seperated by a delimiter`
->    - *"Method to identify group of reads"*: `Unique`
->    - *"Prepend a label to all column headers"*: `Dataset Name`
 >    - *"Bam is paired-end"*:`No`
 >    - *"Method to identify group of reads"*:`Unique`
 >    - *"Extra Parameters"*:
@@ -1364,10 +1359,11 @@ Let us now apply this protocol to our count matrix, and look for any cross-conta
 >           - *"1: Plate Format"*:
 >              - *"Plate Number"*:`1`
 >              - *"Batches within this Plate Number"*:`1,2`
+>        - Select `+ Insert Plate Format`:
 >           - *"2: Plate Format"*:
 >              - *"Plate Number"*:`2`
 >              - *"Batches within this Plate Number"*:`3,4`
->  - Expand the *"Advanced"* section:
+>  - Expand the *"RegEx Parameters"* section:
 >     - *"RegEx to extract Plate, Batch, and Barcodes from headers"*:`.*P(\\d)_B(\\d)_([ACTG]+)`
 >       <small>(**Attention! Take note of that the 'B' is present**)
 >
