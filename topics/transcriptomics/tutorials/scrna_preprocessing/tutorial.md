@@ -2,6 +2,8 @@
 layout: tutorial_hands_on
 title: "Preprocessing of single-cell data"
 zenodo_link: "https://zenodo.org/record/1345635"
+tags:
+  - single-cell
 questions:
   - "How do we separate reads from seperate cells?"
   - "How do we reduce PCR bias?"
@@ -24,13 +26,21 @@ requirements:
     topic_name: sequence-analysis
     tutorials:
         - mapping
-        - quality control
+        - quality-control
   - 
     type: "internal"
     topic_name: transcriptomics
     tutorials:
         - scrna-introduction
         - plates-batches-and-barcodes
+
+follow-up_training:
+  - 
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+        - scrna-raceid
+        - scrna-scanpy
         
 contributors:
   - mtekman
@@ -51,9 +61,11 @@ contributors:
 Todo:
 * Split "Mitigating duplicate transcript counts with UMIs"
 * Snippets can be parameterised, so USE them more.
+* Add a section at the end of the single batches that prompts the user to extract their workflow, and then point to a picture of your workflow.
 
 Feedback:
 * BG says the concepts of Cell barcode, UMI, and overall barcode are confusing.
+
 
 -->
 
