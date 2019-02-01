@@ -24,6 +24,20 @@ contributors:
   - mtekman
 
 ---
+
+<!-- Questions for team
+
+* Does it make sense to split out the Understanding Barcodes section into its own tutorial
+* Does it make sense to split out the Understanding Plates and Batches into its own tutorial
+* How do I set 'requirements'?
+
+Todo:
+* Split "Mitigating duplicate transcript counts with UMIs"
+
+-->
+
+
+
 <!-- Ideally need to place this in "assets/css/main.scss", but need to
      set a marker in the markdown to apply the correct table class
      during the conversion process. How? 
@@ -38,12 +52,12 @@ contributors:
      
 <style>
 
-blockquote img {
-  width: 50%;
+/*blockquote img {
+  width: 100%;
   display: block;
   margin-left: auto;
   margin-right: auto;
-}
+}*/
 
 .tutorial table { 
   width:unset;
@@ -89,7 +103,7 @@ Other than cell development, there are many more factors that can shape the leve
  ![Facets of Cellular Identity](../../images/scrna_nbt3711.png "Revealing the vectors of cellular identity with single-cell genomics, Nature Biotechnology, 2016")
 
 
-This tutorial is in part inspired by aspects of the [Hemberg workflow](https://hemberg-lab.github.io/scRNA.seq.course/) at the Sanger institute, as well as the [CGATOxford](https://github.com/CGATOxford/UMI-tools) workflow. The barcoding follows the [CelSeq2 protocol](#details-the-celseq2-protocol) and uses the lane configuration as that utilized by the Freiburg MPI Grün lab.
+This tutorial is in part inspired by aspects of the [Hemberg workflow](https://hemberg-lab.github.io/scRNA.seq.course/) at the Sanger institute, as well as the [CGATOxford workflow](https://github.com/CGATOxford/UMI-tools) which provides the **UMI-tools** suite that we make use of. The barcoding follows the [CelSeq2 protocol](#details-the-celseq2-protocol) and uses the lane configuration as that utilized by the Freiburg MPI Grün lab.
 
 # Analysis Strategy
 {:.no_toc}
@@ -99,6 +113,10 @@ Most scRNA sequencing techniques use pooled-sequencing approaches to generate a 
 In this tutorial, we will perform pre-processing upon scRNA FASTQ batch data to generate an *N*-by-*M*  count matrix of *N* cells and *M* genes, with each element indicating the level of expression of that gene in a particular cell.
 
 This count matrix is crucial for performing the downstream analysis, where differential gene analysis is performed between cells in order to cluster them into groups denoting their cell type and lineage. 
+
+The tutorial is structured in two parts:
+
+ ![Overview of workflow](../../images/scrna_workflow.svg "An overview of the entire workflow")
 
 The first part of this tutorial will use example *FASTQ* single batch data, which we will perform [barcode extraction](#understanding-barcodes) and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix. 
 
@@ -121,6 +139,9 @@ The second part of this tutorial will deal with [multiple batches](#multiple-bat
 In this tutorial we will be analysing scRNA-seq data of bone marrow cells taken from a single C57 mouse by *Herman et al.* ([2018](https://doi.org/10.1038/nmeth.4662)) and producing a count matrix that we can use for later analysis.
 
 The size of scRNA files (.fastq) are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expediate the analysis by using a smaller subset of actual batch data. We will also be using *Mus Musculus* annotation data (.gtf) from the  [NCBI RefSeq](ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/vertebrate_mammalian/Mus_musculus/) track, as well as a barcodes file (.tsv).
+
+ ![Workflow Upper](../../images/scrna_workflow_upper.png "Single batch processing")
+
 
 > ### {% icon hands_on %} Hands-on: Data upload and organization
 >
@@ -281,17 +302,16 @@ To explore the uniqueness of counts, we must discuss the inclusion of *UMIs* in 
 
 We now know the role of UMIs and cell barcodes, but how do we handle them in the analysis? Let us look at 4 example sequences in our paired-end FASTQ data.
 
-> ### {% icon hands_on %} Hands-on: Selecting 4 reads of interest
+> ### {% icon hands_on %} Hands-on: Preparing the Data
 >
-> 1. Preparing the Data:
 >    1. Create a new history and rename it (*e.g.* 'Inspecting FastQ Files in scRNA batch data')
 >    1. Import the following files from [`Zenodo`](https://zenodo.org/record/2554612) or from the data library (ask your instructor)
 >    ```
 >    https://zenodo.org/record/2554612/files/test_barcodes_celseq2_R1.fastq.gz?download=1
 >    https://zenodo.org/record/2554612/files/test_barcodes_celseq2_R2.fastq.gz?download=1
 >    ``` 
->
 >    {% include snippets/import_via_link.md %}
+>
 >    1. Build a *Dataset pair* for the two FASTQ files
 >       - Click the *Operations on multiple datasets* check box at the top of the history panel
 >       - Check the two boxes next to the R1 and R2 scRNA FASTQ samples
@@ -311,16 +331,22 @@ We now know the role of UMIs and cell barcodes, but how do we handle them in the
 >    1. Click the *View all histories* icon
 >    1. Drag the FASTQ collection from your previous history into your new history
 >    1. Click the *Galaxy* logo to return home.
+{: .hands_on}
+
+At this point we now have a history with two items: our paired FASTQ test data, and a tabular file of read names. We will now apply the tabular file to the FASTQ file and extract only those reads.
+
+> ### {% icon hands_on %} Hands-on: Extracting the Reads
+>
 > 1. Extracting our 4 reads  
->    **Filter sequences by ID** {% icon tool %} with the following parameters:
->    - **Sequence file to be filtered**
->      - Click the *Dataset Collection* icon
->      - Select the FastQ collection if not already selected.
->    - **Filter using the ID list from**:`tabular file`
->      - *Tabular file containing sequence identifiers*:`Pasted Entry`
->    - **Column(s) containing sequence identifiers**
->      - **Select/Unselect all**:(tick the box)
->    - **Output positive matches, negative matches, or both?**:`Just positive matches (ID on list), as a single file`
+>    * **Filter sequences by ID** {% icon tool %} with the following parameters:
+>      - **Sequence file to be filtered**
+>        - Click the *Dataset Collection* icon
+>        - Select the FastQ collection if not already selected.
+>      - **Filter using the ID list from**:`tabular file`
+>        - *Tabular file containing sequence identifiers*:`Pasted Entry`
+>      - **Column(s) containing sequence identifiers**
+>        - **Select/Unselect all**:(tick the box)
+>      - **Output positive matches, negative matches, or both?**:`Just positive matches (ID on list), as a single file`
 > 1. Viewing our 4 reads side-by-side
 >    - Activate the **Scratchbook** by clicking on the **Enable/Disable Scratchbook** icon on the main top toolbar
 >    - Click on the newly generated FastQ pair ending in *"with matched ID"* to expand the individual reads
@@ -614,7 +640,7 @@ Let us now repeat the same barcode extraction on our batch data. This time we wi
 
 > ### {% icon hands_on %} Hands-on: Barcode Extraction
 >
-> 1. Switch back to the relevant History
+> 1. Switch back to the first History
 >   - Click the *View all histories* icon
 >   - Locate the history with our paired data set, barcodes, and annotation file
 >   - Click the *Switch to* button above the appropriate history.
@@ -648,7 +674,7 @@ As before, we can verify that the desired umi and cell barcodes have been extrac
 > > ### {% icon solution %} Solution
 > >
 > > 1. The input FASTQ files contained reads from all barcodes, including those with sequencing errors, resulting in a larger pool of detected barcodes than those desired. (e.g. Cell barcode `AAATTT` could have single basepair sequencing errors that could modify it into `ATATTT` or `AAACTT`, etc).
-> > 2. This information is included in the Log file of **UMI-tools extract** which contains all the parameters used to run, as well as *INFO* lines that indicate how many reads were read, and how many output. In this case: XXXX reads.
+> > 2. This information is included in the Log file of **UMI-tools extract** which contains all the parameters used to run, as well as *INFO* lines that indicate how many reads were read, and how many output. In this case: 14230244 reads (90.9%)
 > {: .solution}
 {: .question}
 
@@ -720,6 +746,8 @@ The purpose of MultiQC is to observe how well our reads were mapped against the 
 
 ## Filtering
 
+Before continuing let us first look back on some of the previous stages:
+
 > ### {% icon comment %} Recap of previous stages
 >
 > 1. *Barcode Extraction*:  
@@ -748,12 +776,17 @@ The fields of the BAM file can be better explained at section 1.4 of [the SAM sp
 
  * `J00182..._GACGAA_GCGGTC`: The *readname* appended by `_`, the cell barcode, another `_`, and then the UMI barcode.
  * `16`: The FLAG value
-> #### {% icon question %} What does the FLAG value of 16 tell us about this read?
-> We can interactively see what the different FLAG values mean in the SAM specification [here](https://broadinstitute.github.io/picard/explain-flags.html)
-> > ### {% icon solution %} Solution
-> > The read aligns to the reverse strand
-> {: .solution}
+
+> ### {% icon question %} What does the FLAG value of 16 tell us about this read?
+>
+>   We can interactively see what the different FLAG values mean by feeding values into the SAM specification to the [picard web tool](https://broadinstitute.github.io/picard/explain-flags.html)
+>   > ### {% icon solution %} Solution
+>   > The read aligns to the reverse strand
+>   >
+>   {: .solution}
+>
 {: .question}
+
  * `chr1` `2030`: The position and base-pair of alignment of the first base of the sequence.
  * A series of quality fields, with the main contributors being  the sequence and sequence quality strings.
  * `NH`: The number of hits for  this read. If it is multiply mapped, then the number of multiples will be shown (here `2`).
@@ -943,6 +976,8 @@ This concludes the first part of the tutorial which focused on the transformatio
 # Multiple Batches
 
 [Back to previous](javascript:window.history.back())
+
+ ![Workflow Lower](../../images/scrna_workflow_lower.png "Multiple batch processing")
 
 Handling more than one batch of sequencing data is rather trivial when we take into account our main goals and requirements:
 
@@ -1336,5 +1371,5 @@ Factoid: We can convert the number of UMIs to the number of molecules using a tr
 
 In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our reads and into the read headers, in order to preserve them during mapping. We have discovered how these barcoded reads are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against reads that are PCR duplicates. Finally, we have learned how to combine seperate batch data as well as being able to check and correct against cross-contamination.
 
- ![Overview](../../images/scrna_workflow.svg "An overview of the entire workflow")
+ ![Recap of workflow](../../images/scrna_workflow.svg "A recap of the entire workflow")
 
