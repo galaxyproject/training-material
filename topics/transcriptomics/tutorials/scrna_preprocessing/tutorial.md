@@ -174,7 +174,7 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 > 1. Build a *Dataset pair* for the two FASTQ files
 >    - Click the *Operations on multiple datasets* check box at the top of the history panel
 >    - Check the two boxes next to the R1 and R2 scRNA FASTQ samples
->    - Click *For all selected...* and choose *Build dataset pair*
+>    - Click **For all selected...** and choose **Build dataset pair**
 >    - Ensure that the forward read is the `_1` sample, and the reverse read is the `_2` sample.
 >      - Click 'Swap' otherwise.
 >    - Set the name of the pair
