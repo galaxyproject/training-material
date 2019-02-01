@@ -1019,7 +1019,7 @@ Handling more than one batch of sequencing data is rather trivial when we take i
   1. For each batch, convert FASTQ reads from into a count matrix.
   2. Merge all count matrices into a single count matrix
 
-The first step requires us to merely run the same workflow on each of our batches, using the exact same inputs except for the FASTQ paired data. The second step requires a minimal level of interaction from us; namely using a merge tool and selecting our matrices. 
+The first step merely requires us to run the same workflow on each of our batches, using the exact same inputs except for the FASTQ paired data. The second step requires a minimal level of interaction from us; namely using a merge tool and selecting our matrices. 
 
 
 ### Data upload and organization
