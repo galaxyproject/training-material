@@ -20,7 +20,9 @@ key_points:
   - "Removing unwanted barcodes"
 contributors:
   - mtekman
-
+  - bebatut
+  - erxleben
+  
 ---
 
 <!-- Questions for team
@@ -29,12 +31,14 @@ contributors:
 * Does it make sense to split out the Understanding Plates and Batches into its own tutorial
 * How do I set 'requirements'?
 * How to set alt for scrna
+* All other tutorials have only 1 set of slides to accompany the material.
+   - Here I will need seperate ones for: UMIs, CelSeq
 
 Todo:
 * Split "Mitigating duplicate transcript counts with UMIs"
+* Snippets can be parameterised, so USE them more.
 
 -->
-
 
 
 <!-- Ideally need to place this in "assets/css/main.scss", but need to
@@ -47,7 +51,8 @@ Todo:
         
       * applying it within the first line of the table seems to place it
         in the header, but that would make the css selectors difficult
-     -->
+
+-->
      
 <style>
 
@@ -117,7 +122,8 @@ The tutorial is structured in two parts:
 
  ![Overview of workflow](../../images/scrna_workflow.svg "An overview of the entire workflow")
 
-The first part of this tutorial will use example *FASTQ* single batch data, which we will perform [barcode extraction](#understanding-barcodes) and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix. 
+The first part of this tutorial will use example *FASTQ* data from a single batch, which we will perform [barcode extraction](#understanding-barcodes) and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix. 
+
 
 The second part of this tutorial will deal with [multiple batches](#multiple-batches), and a different set of example count matrices will be used in which to merge and perform quality control upon. This will produce a final count matrix valid for downstream analysis.
 
@@ -154,7 +160,7 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >    ``` 
 >    
 >    Set the database annotation to 'mm10' into the Genome dropdown box and select it.
->    <img style='width:100%' src="../../images/scrna_select_data.png" />
+>    ![](../../images/scrna_select_data.png "Select the data")
 >    
 >    
 >    
@@ -308,9 +314,11 @@ We now know the role of UMIs and cell barcodes, but how do we handle them in the
 >    ```
 >    https://zenodo.org/record/2554612/files/test_barcodes_celseq2_R1.fastq.gz?download=1
 >    https://zenodo.org/record/2554612/files/test_barcodes_celseq2_R2.fastq.gz?download=1
->    ``` 
+>    ```
+>    
 >    {% include snippets/import_via_link.md %}
->
+>    
+>    
 >    1. Build a *Dataset pair* for the two FASTQ files
 >       - Click the *Operations on multiple datasets* check box at the top of the history panel
 >       - Check the two boxes next to the R1 and R2 scRNA FASTQ samples
@@ -730,8 +738,8 @@ The purpose of MultiQC is to observe how well our reads were mapped against the 
 >
 > > ### {% icon solution %} Solution
 > > 
-> > 1. `73.5%` or 8.3 million reads were successfully mapped
-> > 2. `11.3%` are multiply mapped, and `2.2%` were mapped to too many loci
+> > 1. `70.9%` or 10 million reads were successfully mapped
+> > 2. `14.4%` are multiply mapped, and `2.2%` were mapped to too many loci
 > >   - Multiply mapped means that a read was aligned to more than one gene
 > >   - Mapped to too many loci means that a read was aligned to 10 or more loci, and should be ignored.
 > > 3. It depends on how good the sequencing protocol is, and how many reads in total were mapped.
