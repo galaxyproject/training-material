@@ -1293,7 +1293,7 @@ A technician always has to balance quality against cost, and this is illustrated
 > 
 {: .details}
 
-## Controlling against Cross-Contamination
+## Guarding against Cross-Contamination
 
 There are multiple possible ways to configure a plate for sequencing multiple batches. Thankfully, Galaxy provides a tool that caters for this, and checks for cross-contamination in any experimental setup. It requires only the following information:
 
