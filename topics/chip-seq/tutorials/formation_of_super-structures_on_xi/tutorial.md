@@ -84,7 +84,7 @@ In the upcoming tutorial, we will only use the wild type data from [Wang et al. 
 
 The first step of any ChIP-Seq data analysis is quality control of the raw sequencing data.
 
-To save time, we will do it only on the data of one sample `wt_H3K4me3_rep1` that has been down-sampled. keep in mind that with real data this should be done on all samples.
+To save time, we will do it only on the data of one sample `wt_H3K4me3_rep1` which has been already down-sampled. keep in mind that with real data this should be done on each and every sample.
 
 > ### {% icon hands_on %} Hands-on: Import the data
 >
