@@ -9,9 +9,9 @@ questions:
   - "How do we check for cross-contamination?"
 objectives:
   - "Demultiplex FASTQ data via UMI-tools"
-  - "Understand and validate the extraction of UMIs and Cell-Barcodes"
+  - "Understand and validate the extraction of barcodes"
   - "Obtain an overview of general alignment and quantification techniques"
-  - "Generate a count matrix for downstream scRNA analysis"
+  - "Generate a count matrix for downstream single-cell RNA analysis"
 time_estimation: "2h"
 key_points:
   - "Verifying the distribution of barcodes via a FASTQC plot"
