@@ -160,7 +160,7 @@ Some of the other options we will be using are:
 >    ```
 >    {% endraw %}
 >
-> 2. Replace <some_really_long_string_here> with a long randomish (or not) string.
+> 2. Replace `<some_really_long_string_here>` with a long randomish (or not) string.
 >
 > 3. Add the following lines to your `hosts` file:
 >
