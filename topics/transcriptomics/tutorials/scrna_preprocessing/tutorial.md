@@ -2,8 +2,6 @@
 layout: tutorial_hands_on
 title: "Preprocessing of single-cell data"
 zenodo_link: "https://zenodo.org/record/1345635"
-workflows: "true"
-galaxy_tour: "false"
 questions:
   - "How do we separate reads from seperate cells?"
   - "How do we reduce PCR bias?"
@@ -30,6 +28,7 @@ contributors:
 * Does it make sense to split out the Understanding Barcodes section into its own tutorial
 * Does it make sense to split out the Understanding Plates and Batches into its own tutorial
 * How do I set 'requirements'?
+* How to set alt for scrna
 
 Todo:
 * Split "Mitigating duplicate transcript counts with UMIs"
@@ -89,7 +88,7 @@ Todo:
 {:.no_toc}
 
 
-## Why do Single Cell?
+## Why do Single Cell sequencing?
 {:.no_toc}
 
 Single-cell RNA (scRNA) sequencing is the technological successor to classical bulk RNA-seq, where samples are no longer defined at the tissue level but at the individual cell level. Under bulk RNA-seq the expression of genes in a sample would yield the average expression of all the constituent cells in that sample, irregardless of the distinct expressions profiles given by subpopulations of cells. The advent of scRNA sequencing has provided the means to explore samples at the individual cell level, enabling a greater understanding of the development and function of such samples by the characteristics of their constituent cells. Consider the heterogenity of cells sampled from bone marrow, where hematopoietic stem cells can give rise to many different cell types within the same tissue:
