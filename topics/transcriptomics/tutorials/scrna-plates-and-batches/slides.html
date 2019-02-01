@@ -36,14 +36,46 @@ contributors:
                       | . . . . . . . . . |                     
                       | . . . . . . . . . |                     
 ---
-Not all wells need to be occupied by cells, some wells are left empty.
 
-Why is this the case?
+# Plates and Lanes
+
+.left[Plates are *N x M* arrays of wells that cells are sorted, to then be individually amplified and sequenced.]
+
+                      | o o . . o o . . . |  <- Plate: N=9, M=6 
+                      | o o . . o o . . . |            54 slots 
+                      | o o . . o o . . . |                      
+                      | o o . . o o . . . |      24 cells        
+                      | o o . . o o . . . |      30 empty slots  
+                      | o o . . o o . . . |                      
+
+.left[Not all wells need to be occupied by cells, some wells are left empty.]
+.center[Why is this the case?]
 
 ---
 
+# Plates and Lanes
 
-Plates are $$N \times M$$ arrays or wells that cells are sorted into and then individually amplified and sequenced. The way these slot are filled depends entirely on the protocol, but usually not all slots are filled. The reason for this will become clear momentarily.
+.left[Plates are *N x M* arrays of wells that cells are sorted, to then be individually amplified and sequenced.]
+
+                      | o o → ← o o → . . |  <- Plate: N=9, M=6 
+                      | o o → ← o o → . . |            54 slots 
+                      | o o → ← o o → . . |                      
+                      | o o → ← o o → . . |      24 cells        
+                      | o o → ← o o → . . |      30 empty slots  
+                      | o o → ← o o → . . |                      
+
+.left[Not all wells need to be occupied by cells, some wells are left empty.]
+.center[Why is this the case?]
+
+* Library preperation is not always perfect
+* Sample contamination from neighbouring wells
+
+---
+
+# Lanes
+
+* Sequencing plates are divided into lanes
+
 
      | . . . . . . . . . |  <- Plate: N=9, M=6        | . . . : . . . : . . . |  <---   Plate: N=9, M=6, 3 lanes
      | . . . . . . . . . |            54 slots        | . . . : . . . : . . . |                54 slots
@@ -56,6 +88,9 @@ Plates are $$N \times M$$ arrays or wells that cells are sorted into and then in
 Plates are divided into different sequencing *lanes*. These lanes demarcate evenly-sized $$n\times m$$ rectangular regions on a plate containing different non-overlapping sets of slots on the same plate. 
 
 All slots within a given lane are sequenced at the same time, and because of this characteristic, all cells that fill the slots of a given lane are said to be of the same *batch* (where lanes and batches are usually interchangeable terms).
+
+???
+The way these slot are filled depends entirely on the protocol, but usually not all slots are filled. The reason for this will become clear momentarily.
 
 ---
 
