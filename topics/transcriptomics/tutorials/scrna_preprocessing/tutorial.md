@@ -1057,7 +1057,7 @@ Once again, file naming is important, and so we will rename our matrix files app
 
 Before we begin, we must consider that our matrices are not equal -- e.g. Batch1 has at least 1 cell that maps to GeneA, whereas Batch2 has no mention of GeneA.
 
-This can be resolved by performing a "Full Join" (as described [here](http://www.sql-join.com/sql-join-types/)) where GeneA is inserted into Batch2 as a gene with 0 counts:
+This can be resolved by performing a "Full Join" where GeneA is inserted into Batch2 as a gene with 0 counts:
 
           B1     | C1 | C2 | C3 |                       B2     | C1 | C2 | C3 |
          --------+----+----+----|   + (Full Join) +    --------+----+----+----|
@@ -1069,8 +1069,8 @@ This can be resolved by performing a "Full Join" (as described [here](http://www
             --------+-------+-------+-------+-------+-------+-------|
              GeneA  |   3   |   0   |   1   |    0  |   0   |    0  | ← Exists in B1
              GeneM  |   2   |   2   |   1   |    0  |   3   |    2  | ← Common in Both
-             GeneX  |   0   |   0   |   0   |   10  |   2   |    7  | ← Exists in B2
-
+             GeneX  |   0   |   0   |   0   |   10  |   2   |    7  | ← Exists in B2  
+<small>(for more information on table joins, see [here](http://www.sql-join.com/sql-join-types/))
 
 
 > ### {% icon question %} Question
