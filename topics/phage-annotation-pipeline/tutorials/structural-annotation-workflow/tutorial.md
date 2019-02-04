@@ -19,8 +19,8 @@ This tutorial will walk you through the beginning of the phage genome annotation
 # Prerequisites 
 > ### {% icon tip %} Are you ready?
 > This module assumes you have already completed the following tutorials:
->[**Introduction to CPT Galaxy**](https://cpt.tamu.edu/training-material/topics/introduction/tutorials/introduction-to-cpt-galaxy/tutorial.html)
->[**Getting Started with Apollo**](https://cpt.tamu.edu/training-material/topics/introduction/tutorials/getting-started-with-apollo/tutorial.html).
+> [**Introduction to CPT Galaxy**](https://cpt.tamu.edu/training-material/topics/introduction/tutorials/introduction-to-cpt-galaxy/tutorial.html)
+> [**Getting Started with Apollo**](https://cpt.tamu.edu/training-material/topics/introduction/tutorials/getting-started-with-apollo/tutorial.html).
 {: .hands_on}
 
 First, you must have an active account in Galaxy.  Navigate to [**CPT TAMU Galaxy**](https://cpt.tamu.edu/galaxy) and log in with your NetID. You should be presented with the main Galaxy page and an empty history.  If you are in a history with datasets already in it, click on *History Options* (the gear icon) at the top of the History panel and click *Create New*.
