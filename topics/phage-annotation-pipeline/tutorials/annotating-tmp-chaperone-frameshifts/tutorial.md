@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: genome-annotation
+topic_name: phage-annotation-pipeline
 tutorial_name: annotating-tmp-chaperone-frameshifts
 ---
 

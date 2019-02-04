@@ -18,6 +18,7 @@ Most trusted record: [RefSeq NC_001416](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > * Host: *E. coli*
 >    > * 48,502 base pairs in genome
 >    > * Siphophage
+>    > * [Lambda ViralZone page](https://viralzone.expasy.org/512)
 > {: .solution}
 {: .question}
 
@@ -34,6 +35,7 @@ Most trusted record: [RefSeq NC_005833](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > * Host: *E. coli*
 >    > * 48,836 base pairs in genome
 >    > * Siphophage
+>    > * [T1 ViralZone page](https://viralzone.expasy.org/510)
 > {: .solution}
 {: .question}
 
@@ -62,6 +64,7 @@ Most trusted record: [RefSeq NC_000866](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > * Host: *E. coli*
 >    > * 168,903 base pairs in genome
 >    > * Myophage
+>    > * [T4 ViralZone page](https://viralzone.expasy.org/504)
 > {: .solution}
 {: .question}
 
@@ -78,6 +81,7 @@ Most trusted record: [RefSeq NC_005859](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > * Host: *E. coli*
 >    > * 121,750 base pairs in genome
 >    > * Siphophage
+>    > * [T5 ViralZone page](https://viralzone.expasy.org/511)
 > {: .solution}
 {: .question}
 
@@ -85,7 +89,7 @@ Most trusted record: [RefSeq NC_005859](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 > Genome present in the CPT Apollo instance. Access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
 {: .comment}
 
-Useful readings: 
+References: 
 
 > * [Y. Zvanoic, F. Confalonieri, L. Ponchon, R. Lurz, M. Chami, A. Flayhan, M. Renouard, A. Huet, P. Decottignies, A. R. Davidson, C. Breyton, P. Boulanger
 *Insights into Bacteriophage T5 Structure from Analysis of Its Morphogenesis Genes and Protein Components*
@@ -104,6 +108,7 @@ Most trusted record: [RefSeq NC_001604](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > * Host: *E. coli*
 >    > * 39,937 base pairs in genome
 >    > * Podophage
+>    > * [T7 ViralZone page](https://viralzone.expasy.org/518)
 > {: .solution}
 {: .question}
 
@@ -120,6 +125,7 @@ Most trusted record: [RefSeq NC_008720](https://www.ncbi.nlm.nih.gov/nuccore/119
 >    > * Host: *E. coli*
 >    > * 70,153 base pairs in genome
 >    > * Podophage
+>    > * [N4 ViralZone page](https://viralzone.expasy.org/521)
 > {: .solution}
 {: .question}
 
@@ -136,6 +142,7 @@ Most trusted record: [RefSeq NC_005856](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > * Host: *E. coli*
 >    > * 94,800 base pairs in genome
 >    > * Podophage
+>    > * [P1 ViralZone page](https://viralzone.expasy.org/505)
 > {: .solution}
 {: .question}
 
@@ -148,6 +155,7 @@ Most trusted record: [RefSeq NC_001895](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > * Host: *E. coli*
 >    > * 33,593 base pairs in genome
 >    > * Myophage
+>    > * [P2 ViralZone page](https://viralzone.expasy.org/506)
 > {: .solution}
 {: .question}
 
@@ -178,11 +186,13 @@ Most trusted record: [RefSeq NC_002371](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > * Host: *Salmonella*
 >    > * 41,724 base pairs in genome
 >    > * Podophage
+>    > * [P22 ViralZone page](https://viralzone.expasy.org/519)
 > {: .solution}
 {: .question}
 
-Useful readings:
+References:
 
+> * [Corrected sequence of the bacteriophage p22 genome. (2003). Corrected sequence of the bacteriophage p22 genome., 185(4), 1475–1477.](https://www.ncbi.nlm.nih.gov/pubmed/12562822)
 > * [A. S. Olia, P. E. Prevelige, J. E. Johnson, G. Cingolani
 *Three-dimensional structure of a viral genome-delivery portal vertex.*
 Nat Struct Mol Biol, 18 (2011), pp. 597-603](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3087855/)
@@ -196,6 +206,7 @@ Most trusted record: [RefSeq NC_025442](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > * Host: *Salmonella*
 >    > * 59,578 base pairs in genome
 >    > * Siphophage
+>    > * [Chi ViralZone page](https://viralzone.expasy.org/6256)
 > {: .solution}
 {: .question}
 
@@ -220,6 +231,7 @@ Most trusted record: [RefSeq NC_004775](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > * Host: *Salmonella*
 >    > * 148,317 base pairs in genome
 >    > * Myophage
+>    > * [Epsilon15 ViralZone page](https://viralzone.expasy.org/706)
 > {: .solution}
 {: .question}
 
@@ -244,6 +256,7 @@ Most trusted record: [RefSeq NC_000929](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > * Host: *E. coli*
 >    > * 36,717 base pairs in genome
 >    > * Myophage
+>    > * [Mu ViralZone page](https://viralzone.expasy.org/507)
 > {: .solution}
 {: .question}
 
@@ -260,6 +273,7 @@ Most trusted record: [RefSeq NC_001901](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > * Host: *E. coli*
 >    > * 46,375 base pairs in genome
 >    > * Siphophage
+>    > * [N15 ViralZone page](https://viralzone.expasy.org/517)
 > {: .solution}
 {: .question}
 
@@ -272,6 +286,7 @@ Most trusted record: [RefSeq_011048](https://www.ncbi.nlm.nih.gov/nuccore/NC_011
 >    > * Host: *Bacillus subtilis*
 >    > * 19,282 base pairs in genome
 >    > * Podophage
+>    > * [Phi29 ViralZone page](https://viralzone.expasy.org/520)
 > {: .solution}
 {: .question}
 
@@ -284,6 +299,7 @@ Most trusted record: [RefSeq NC_005045](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > * Host: *Pseudomonas aeruginosa*
 >    > * 42,519 base pairs in genome
 >    > * Podophage
+>    > * [PhiKMV ViralZone page](https://viralzone.expasy.org/710)
 > {: .solution}
 {: .question}
 
@@ -296,6 +312,7 @@ Most trusted record: [RefSeq NC_004831](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > * Host: *Salmonella*
 >    > * 43,769 base pairs in genome
 >    > * Podophage
+>    > * [SP6 ViralZone page](https://viralzone.expasy.org/708)
 > {: .solution}
 {: .question}
 
@@ -308,6 +325,7 @@ Most trusted record: [RefSeq NC_011421](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > * Host: *Bacillus subtilis*
 >    > * 132,562 base pairs in genome
 >    > * Myophage
+>    > * [SPO1 ViralZone page](https://viralzone.expasy.org/508)
 > {: .solution}
 {: .question}
 
@@ -323,6 +341,9 @@ Most trusted record: [RefSeq NC_004166](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 > {: .solution}
 {: .question}
 
+References:
+The Revisited Genome of Bacillus subtilis Bacteriophage SPP1. (2018). The Revisited Genome of Bacillus subtilis Bacteriophage SPP1., 10(12). [http://doi.org/10.3390/v10120705](http://doi.org/10.3390/v10120705)
+
 ### Phage PRD1
 
 Most trusted record: [RefSeq NC_001421](https://www.ncbi.nlm.nih.gov/nuccore/NC_001421)
@@ -335,7 +356,7 @@ Most trusted record: [RefSeq NC_001421](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 > {: .solution}
 {: .question}
 
-Useful readings: [International Committee on Taxonomy of Viruses
+References: [International Committee on Taxonomy of Viruses
 Virus Taxonomy - Family - Tectiviridae
 ICTV, 9 (2012), pp. 317-321](https://www.sciencedirect.com/science/article/pii/B9780123846846000306)
 
@@ -379,7 +400,8 @@ Most trusted record: [RefSeq NC_015296](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 > Genome present in the CPT Apollo instance. Access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
 {: .comment}
 
-Useful readings: [E. M. Adriaenssens, H. Ackermann, H. Anna, B. Blasdel, I. F. Connerton, D. Goulding, M. W/ Griffiths, S. P. Hooton, E. M. Kutter, A. M. Kropinski, J. Lee, M. Maes, D. Pickard, S. Ryu, Z. Sepehrizadeh, S. S. Shahrbabak, A. L. Toribio, R. Lavigne
+References: 
+[E. M. Adriaenssens, H. Ackermann, H. Anna, B. Blasdel, I. F. Connerton, D. Goulding, M. W/ Griffiths, S. P. Hooton, E. M. Kutter, A. M. Kropinski, J. Lee, M. Maes, D. Pickard, S. Ryu, Z. Sepehrizadeh, S. S. Shahrbabak, A. L. Toribio, R. Lavigne
 A suggested new bacteriophage genus: "Viunalikevirus"
 Arch Virol, 157 (2012), pp. 2035-2046](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4174289/)
 
@@ -408,6 +430,7 @@ Most trusted record: [RefSeq NC_003288](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > * Host: *Staphylococcus aureus*
 >    > * 43,081 base pairs in genome
 >    > * Siphophage
+>    > * [PhiETA ViralZone page](https://viralzone.expasy.org/6437)
 > {: .solution}
 {: .question}
 
@@ -504,6 +527,7 @@ Most trusted record: [RefSeq NC_001335](https://www.ncbi.nlm.nih.gov/nuccore/962
 >    > * Host: *Mycobacterium smegmatis*
 >    > * 52,297 base pairs in genome
 >    > * Siphophage
+>    > * [L5 ViralZone page](https://viralzone.expasy.org/513)
 > {: .solution}
 {: .question}
 

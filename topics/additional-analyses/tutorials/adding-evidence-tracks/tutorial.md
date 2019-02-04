@@ -6,7 +6,7 @@ tutorial_name: adding-evidence-tracks
 
 # Rationale
 
-While annotating a genome in Galaxy, one may realize that their annotation process would be improved by the addition of a new evidence track that was not produced by the structural or functional workflows.
+While annotating a genome in Galaxy, it is possible that the annotation progress could be improved by the addition of a new evidence track that was not produced by the structural or functional workflows.
 
 > ### Agenda
 >
