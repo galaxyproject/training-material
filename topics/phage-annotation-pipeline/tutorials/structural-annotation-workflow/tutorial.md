@@ -6,20 +6,26 @@ tutorial_name: structural-annotation-workflow
 
 # Structural Annotation Workflow
 
-This tutorial walks through running the structural annotation workflow to facilitate gene and other feature calling in a new genome.
+This tutorial will walk you through the beginning of the phage genome annotation process: loading your genome into a Galaxy history,  running the structural annotation workflow and beginning your structural annotation.
 
 > ### Agenda
 >
 > 1. Prerequisites
 > 2. Workflow
-> 3. Gene Calling
-> 4. Completion
+> 3. Gene calling
 >
 {: .agenda}
 
 # Prerequisites 
+> ### {% icon tip %} Are you ready?
+> This module assumes you have already completed the following tutorials:
+>[**Introduction to CPT Galaxy**](https://cpt.tamu.edu/training-material/topics/introduction/tutorials/introduction-to-cpt-galaxy/tutorial.html)
+>[**Getting Started with Apollo**](https://cpt.tamu.edu/training-material/topics/introduction/tutorials/getting-started-with-apollo/tutorial.html).
+{: .hands_on}
 
-<!-- BICH464 prerequisites discuss downloading the FASTA file from the Student Genomes Google Drive folder. -->
+First, you must have an active account in Galaxy.  Navigate to [**CPT TAMU Galaxy**](https://cpt.tamu.edu/galaxy) and log in with your NetID. You should be presented with the main Galaxy page and an empty history.  If you are in a history with datasets already in it, click on *History Options* (the gear icon) at the top of the History panel and click *Create New*.
+
+The class genomes for this year are stored in a Data Library within Galaxy. Click on *Shared Data > Data Libraries* and navigate to *BICH 464 Genomes* and the folder for 2019 class genomes. You have been assigned a phage genome in the class Google Drive. 
 
 If it is a novel phage that has not been named yet, decide on a name for the phage. Access CPT Galaxy ([CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy)) to upload the FASTA file containing the desired phage genome. There are two methods to upload a FASTA file to Galaxy.
 > * On the right side of the screen is a column titled “History;” it should be an empty, unnamed history containing only a blue box with a message. Click on the “… load your own data…” hyperlink.
