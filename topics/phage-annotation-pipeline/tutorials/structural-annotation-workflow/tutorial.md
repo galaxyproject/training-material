@@ -11,7 +11,7 @@ This tutorial will walk you through the beginning of the phage genome annotation
 > ### Agenda
 >
 > 1. Prerequisites
-> 2. Workflow
+> 2. Importing and Running the Workflow
 > 3. Gene calling
 >
 {: .agenda}
@@ -19,43 +19,29 @@ This tutorial will walk you through the beginning of the phage genome annotation
 # Prerequisites 
 > ### {% icon tip %} Are you ready?
 > This module assumes you have already completed the following tutorials:
+>
 > [**Introduction to CPT Galaxy**](https://cpt.tamu.edu/training-material/topics/introduction/tutorials/introduction-to-cpt-galaxy/tutorial.html)
+>
 > [**Getting Started with Apollo**](https://cpt.tamu.edu/training-material/topics/introduction/tutorials/getting-started-with-apollo/tutorial.html).
 {: .hands_on}
 
-First, you must have an active account in Galaxy.  Navigate to [**CPT TAMU Galaxy**](https://cpt.tamu.edu/galaxy) and log in with your NetID. You should be presented with the main Galaxy page and an empty history.  If you are in a history with datasets already in it, click on *History Options* (the gear icon) at the top of the History panel and click *Create New*.
+First, you must have an active account in Galaxy.  Navigate to [**CPT TAMU Galaxy**](https://cpt.tamu.edu/galaxy) and log in with your NetID. You should be presented with the main Galaxy page and an empty history.
 
-The class genomes for this year are stored in a Data Library within Galaxy. Click on *Shared Data > Data Libraries* and navigate to *BICH 464 Genomes* and the folder for 2019 class genomes. You have been assigned a phage genome in the class Google Drive. 
+The class genomes for this year are stored in a Data Library within Galaxy. Click on *Shared Data > Data Libraries* on the top menu bar and navigate to *BICH 464 Genomes* and the folder for the 2019 class genomes. You have been assigned a phage genome by name in a spreadsheet in the class Google Drive. Locate your genome and import it into a new history by clicking the checkbox to the left of your genome's name and then clicking the *To History* button at the top of the window. Select or create the history you would like to use and click *Import*.  You should import the genome into an empty history.
 
-If it is a novel phage that has not been named yet, decide on a name for the phage. Access CPT Galaxy ([CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy)) to upload the FASTA file containing the desired phage genome. There are two methods to upload a FASTA file to Galaxy.
-> * On the right side of the screen is a column titled “History;” it should be an empty, unnamed history containing only a blue box with a message. Click on the “… load your own data…” hyperlink.
+Click *Analyze Data* on the top menu bar and you should be taken to the main Galaxy window. Your active history should now contain a single dataset: the DNA sequence of your phage in FASTA format.
 
-![](../../images/structural-annotation-workflow-screenshots/1_new_history_option.png)
+# Importing and Running the Workflow
 
-> * On the left side of the screen is a column titled “Tools.” In the top right-hand corner of that column is an “upload” symbol. Click on it.
+> ### {% icon tip %} Annotation in a nutshell
+Genome annotation is the process of interpreting the raw DNA sequence of a genome into predictions of its function.  Genome annotation can be divided into two major steps: structural and functional. **Structural annotation** is the process of defining the locations and boundaries of features in the genome ("where are the genes?"). **Functional annotation** is the process of assigning functions or predicted phenotypes to the genome features ("what do the genes do?"). More details on the principles of these processes will be provided in class.
+{: .hands_on}
 
-![](../../images/structural-annotation-workflow-screenshots/0_upload_file.png)
-
-Both paths yield the same result; a white screen will appear, with different file upload options. 
-
-![](../../images/structural-annotation-workflow-screenshots/8_drag_n_drop_fasta_file.png)
-
-Drag and drop the FASTA file from the download location on the local device, or select “Choose local file” to find the FASTA file. Click ‘Start’ once the desired file has appeared in the list. After loading, a new dataset entry will be present in the History pane on the right. It is ready for use when the dataset turns green. 
-
-> ### {% icon comment %} Troubleshooting: Dataset/Tool Turns Red
-> When an upload fails, the dataset in the History column will turn red. During an upload, this is not usually the user's fault. If this happens, click on the failed dataset to expand it. Clicking on the bug icon will give the user the option to submit a bug report.
-> ![](../../images/structural-annotation-workflow-screenshots/9_report_bug.png)
-Whenever you encounter a red dataset submit a bug report so that CPT staff can investigate the issue.
-{: .comment}
-
-
-# Workflow
-
-The structural annotation workflow will analyze the input genome with three automated gene callers: *MetaGeneAnnotator*, *GeneMarkS*, and *Glimmer3*. A completely naïve set of open reading frames (ORFs) will also be generated from the *Sixpack* prediction program to ensure even unexpected genes can be called. Lastly, tNA and terminator finding tools will be run. To begin, click on Shared Data drop-down menu at the top of the center Galaxy panel and select the “Workflows” option.
+The structural annotation workflow will analyze the DNA sequence of the input genome with two automated gene callers: *MetaGeneAnnotator* and *Glimmer3*. A completely naïve set of open reading frames (ORFs) will also be generated from the *Sixpack* prediction program to ensure even unexpected genes can be called. Lastly, tRNA and terminator finding tools will be run. To begin, click on the *Shared Data* drop-down menu at the top of the center Galaxy panel and select the *Workflows* option.
 
 ![](../../images/structural-annotation-workflow-screenshots/2_find_workflow.png)
 
-The next page will list all the public and shared workflows developed at the CPT. The Phage Annotation Pipeline (PAP) workflows are available here. Look for most recent version labelled with the year and a version number, “PAP 201# Structural (v #.#)”. Click on the drop-down menu arrow for that most recent structural workflow, and select “Import.”
+The next page will list all the public and shared workflows developed at the CPT. The Phage Annotation Pipeline (PAP) workflows are available here. Look for most recent version labelled with the year and a version number, “PAP 2019 Structural (v #.#)”. Click on the drop-down menu arrow for that most recent structural workflow, and select “Import.”
 
 ![](../../images/structural-annotation-workflow-screenshots/3_import_workflow.png)
 
@@ -67,22 +53,21 @@ A successfully imported workflow will result in a message in a green box where y
 
 ![](../../images/structural-annotation-workflow-screenshots/4_successfully_imported_workflow.png)
 
-Alternatively, click on the Workflows menu item at the top of the center panel of Galaxy. In this list will be all the workflows that can run from this Galaxy account. Find the structural workflow that has just imported, click on the drop-down menu, and select “Run". 
+Once the workflow has been imported to your account, you can always run it by clicking on the *Workflow* menu item at the top of the center panel of Galaxy. In this list will be all the workflows that can run from this Galaxy account. Find the desired workflow, click on the drop-down menu, and select *Run*. 
 
 ![](../../images/structural-annotation-workflow-screenshots/5_imported_workflows.png)
 
-When workflow has loaded, there are three parameters that the user needs to set. These are required to properly execute the workflow.
+When the Structural workflow has loaded, you will see that this workflow will invoke over twenty separate Galaxy tools to produce the data you will need for structural annotation in Apollo.  There are two parameters that the user **must** set for the workflow to function. Conveniently, Galaxy will automatically expand the workflow steps that need attention from the user.
 
-![](../../images/structural-annotation-workflow-screenshots/10_workflow_parameters_table.png)
+> * **Step 1: Input Sequence** - This is the DNA sequence you want to annotate. Select the dataset containing the DNA sequence of your phage that you just imported. The tool expects a FASTA-formatted DNA sequence; any other file type will cause a workflow failure.
+> * **Step 22: Create or Update Organism** - This is a component of the JBrowse-in-Galaxy system that was discussed in a [previous tutorial]({{ site.baseurl }}//topics/introduction/tutorials/getting-started-with-apollo/tutorial.html). The name typed in the *Organism Common Name* field will be used to define the name of your genome in Apollo for the rest of the course. Enter the name of your phage genome as provided (e.g., "Pokken", "Moby", etc.). Double-check the spelling!
 
-Scroll through the steps in the workflow until you reach the sections that need user input listed in the table above. In the example here, phage P22 FASTA sequence and name were automatically selected from the available history datasets. Make sure this is the correct dataset. 
+Once the proper parameters have been filled out, click the *Run workflow* button found at both the bottom and top of the page. If the workflow was successful, a message in a green box will appear. Follow any instructions in the message (e.g. a need to refresh the History panel to see the jobs created by the workflow). The structural workflow is not computationally intensive and should complete running in a few minutes.
 
-![](../../images/structural-annotation-workflow-screenshots/6_workflow_parameters_top.png)
-
-Further down the name is entered. A genus name was not entered. 
-![](../../images/structural-annotation-workflow-screenshots/7_workflow_parameters_bottom.png)
-
-Once the proper parameters have been filled out, click “Run workflow,” found at both the bottom and top of the page. If the workflow was successful, a message in a green box will appear. Follow any instructions in the message (e.g. a need to refresh the History panel to see the jobs created by the workflow). 
+> ### {% icon comment %} Troubleshooting: Dataset/Tool Turns Red
+> When a Galaxy tool fails, the dataset in the History column will turn red. If this happens, click on the failed dataset to expand it. Contact your herd leader to try troubleshooting the problem; common causes for failures at this step include not specifying the correct input dataset, not entering the organism name in the correct field, or accidentally running the wrong workflow. Clicking on the bug icon will give the user the option to submit a bug report. 
+> ![](../../images/structural-annotation-workflow-screenshots/9_report_bug.png)
+{: .comment}
 
 # Gene Calling
 
@@ -90,36 +75,51 @@ When all jobs in the history panel generated by the Structural Annotation Workfl
 
 > * In the last dataset of the history, click the eyeball icon to open your genome in Apollo.
 
-OR
+> **OR**
 
-> * In a new tab, navigate to Apollo by clicking on the Apollo icon at the homepage of [Galaxy](https://cpt.tamu.edu/galaxy-pub). 
+> * In a new tab, navigate to Apollo by clicking on the Apollo icon at the homepage of [Galaxy](https://cpt.tamu.edu/galaxy). 
 
-When the genome has been opened in Apollo, each gene candidate must be examined. 
+When the genome has been opened in Apollo, you can begin structural annotation of your genome by examining the outputs of the gene calling tools and promoting the predicted features into genes, which will appear on the yellow *User annotation track* at the top of the Apollo window.
 
 > ### {% icon tip %} Working in Apollo
-> For help with navigating in Apollo to do things like show and hide evidence tracks, maximize screen space, and create features, see this [Apollo tutorial]({{ site.baseurl }}//topics/genome-annotation/tutorials/getting-started-with-apollo/tutorial.html). 
+> For help with navigating in Apollo to do things like show and hide evidence tracks, maximize screen space, and create features, see the [Apollo tutorial]({{ site.baseurl }}//topics/introduction/tutorials/getting-started-with-apollo/tutorial.html). 
 {: .hands_on}
 
-Recall that the three primary gene callers are correct ~90-95% of the time. Choose the best gene to call from the evidence tracks considering the start codon, presence of a Shine-Dalgarno sequence, and genome coverage (phage have high coding density and genes often overlap). 
+## Protein-coding Genes
 
-For example, in the image below, the light blue and dark blue tracks are a better choice for a gene than the green track; they have a higher genomic coverage and a good Shine-Dalgarno site identified.
+Recall that the primary gene callers *MetaGeneAnnotator* and *Glimmer3* use sophisticated algorithms to predict gene loctaions and are correct ~90-95% of the time. The *Sixpack* tool is a "dumb" gene caller in that it will detect any open reading frame (ORF) longer than 20 codons with a valid start codon. *Sixpack* is available as a "backup" tool to annotate genes that may have been missed by both *MetaGeneAnnotator* and *Glimmer3*.
+
+Choose the best gene to call from the evidence tracks considering the start codon, presence of a Shine-Dalgarno sequence, and genome coverage (phage have high coding density and genes often touch or overlap). A summary of phage gene structure is provided below.
+
+![](../../images/structural-annotation-workflow-screenshots/shine-dalgarno.png)
+
+For example, in the image below, the light blue and dark blue tracks are a better choice for a gene than the features in the green track; they have a higher genomic coverage and a good Shine-Dalgarno identified.
 
 ![](../../images/structural-annotation-workflow-screenshots/11_gene_callers.png)
 
 > ### {% icon hands_on %} Calling Genes
->Right-clicking on the gene will display four options in the menu. Hover over “Create new annotation”, this will display more options. Click on “gene” to create a feature for that gene. Genes for the whole genome must be called before continuing on to the functional annotation.
+> Right-clicking on a predicted feature in the evidence track will display four options in the menu. Hover over *Create new annotation*, this will display more options. Click on *gene* to create a new gene feature in your genome based on the feature in the evidence track. **All predicted genes in the entire genome must be called before continuing on to the functional annotation.**
 >
 >![](../../images/structural-annotation-workflow-screenshots/12_create_gene.png)
 {: .hands_on}
 
-> ### {% icon hands_on %} Calling Terminators
->Ensure the terminator evidence track is displayed. Evaluate the possible terminators based on score (greater than 90), at least 5 bp stem without mismatches, and at least 4 Ts after the stem. Right-clicking on the terminator evidence will display the options menu.  Hover over “Create new annotation”, and click on “terminator” to create a feature for that terminator. Only call terminators if they fit all the criteria. We cannot predict all terminators in the genome and we may not be able to identify any.
-{: .hands_on}
-
 > ### {% icon tip %} Note that…
-> It is better to over-call (call more genes than are likely to be in the genome) than to under-call genes and have to go back and re-run BLAST and related analyses. Do not leave large gaps with no gene calls as features can be deleted later.
+> Phages tend to maximize coding density (the amount of DNA that is occupied by a feature), since the amount of DNA they can fit into their capsid is limited. Avoid leaving large gaps in your DNA sequence with no gene calls. If *MetaGeneAnnotator* and *Glimmer3* have left large gaps in the DNA sequence, look in the *Sixpack* track for candidate genes that occupy the gaps and have valid Shine-Dalgarno sequences. If there is a large open reading frame that occupies a gap but does not have a good Shine-Dalgarno sequence, these may be worth calling as genes as well.
 {: .tip}
+
+## tRNA Genes
+
+Some phages encode tRNA's as a part of their genomes, and the workflow uses the tool ARAGORN to predict tRNA genes. By turning on the tRNA evidence track, you can quickly see if your phage is predicted to carry tRNA genes. Some phages encode over 30 tRNA's, and many phages encode none at all. There is little user curation required for the tRNA evidence track; any tRNA genes detected by ARAGORN should be promoted to the *User annotation track* by right-clicking on the evidence feature, selecting *Create new annotation* and then selecting *tRNA*.
+
+If your phage has many tRNA's, they will often occur as small clusters of genes. DNA sequence that is occupied by tRNA genes is extremely unlikely to contain any protein-coding sequence, and tRNA's should not overlap protein-coding genes.
+
+## Transcriptional Terminators
+
+Ensure the terminator evidence track is displayed. The workflow uses the tool TransTermHP to predict terminators, and this tool tends to over-call terminators.  Evaluate the possible terminators based on score (greater than 90), at least 5 bp stem without mismatches, and at least 4 Ts downstream of the stem. Right-clicking on the terminator evidence will display the options menu.  Hover over *Create new annotation* and click on *terminator* to create a feature for that terminator. Only call terminators if they fit all the criteria. We cannot predict all terminators in the genome and we may not be able to identify any.
+{: .hands_on}
 
 # Completion
 
-Once genes have been identified and called across the full length of the genome, the [functional annotation workflow]({{ site.baseurl }}//topics/genome-annotation/tutorials/functional-annotation-workflow/tutorial.html) may be executed to proceed with the prediction part of the genome annotation.
+Once genes have been identified and called across the full length of the genome, the [functional annotation workflow]({{ site.baseurl }}//topics/genome-annotation/tutorials/functional-annotation-workflow/tutorial.html) may be executed.
+
+
