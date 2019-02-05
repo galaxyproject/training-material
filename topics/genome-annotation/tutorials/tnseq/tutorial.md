@@ -374,7 +374,180 @@ In our case, the reads cover the flanking region on one side of the TA site wher
 
 ## Getting TA sites positions
 
+In order to get the coverage on each TA site we need to prepare a file containing the position of each TA site. As you can see on the figure "[Mapping read and TA site coverage](#MapCoverage)" the read can cover one side or the other of the TA depending on the direction of insertion of the transposon. Depending on the direction of insertion the coverage will be counted on the leftmost position of the TA site or on the rightmost. As we are not considering strand separately in this analyses, we will consider both count as attached to the leftmost base of the TA site. To do that we will create two list of TA site positions, listing the 5' end of each TA site for forward and reverse strand, and then merge them to get a global count per TA site.
+We first need to create a fasta file containing the motif :
+```
+>TA_site
+TA
+```
+
+> ### {% icon hands_on %} Hands-on:  Get TA sites coordinates
+>
+> {% icon tool %} Select the **wordmatch** tool in the tool bar and run with the following parameters:
+>   - Set *Sequence 1"* to `TA site` file you just created
+>   - Set *"Sequence 2"* to the genome sequence file `staph_aur.fasta`
+>   - Set *"Word size"* to `2`
+>   - Set *"Output Alignment File Format"* to `match`
+>   - Set *"Output Feature 1 File Format"* to `GFF`
+>   - Set *"Output Feature 2 File Format"* to `GFF`
+>   - **Click** on `Execute`
+>
+{: .hands_on}
+
+Wordmatch tools provides you with three outputs:
+    - A gff file containing the locations where sequence 1 maps on sequence 2
+    - A gff file containing the locations where sequence 2 maps on sequence 1
+    - A report file providing data on each alignment
+
+In our case we are only interested in the locations of TA sites mapping on the genomic sequence. We will therefore use the file looking like that :
+
+
+
+
+| Seqname |Source|Feature|Start|End|Score|Strand|Frame|Group|
+|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|
+| NC_007795.1 |wordmatch|misc_feature|5|6|1.000|+|.|Sequence "NC_007795.1.1"; note "TA_site"|
+||
+
+The only information we need here are the positions of the 5' end of each TA site for each strand.
+
+> ### {% icon hands_on %} Hands-on:  Get forward and reverse strand positions
+>
+> {% icon tool %} Select the **Cut columns from a table (cut)** tool in the tool bar and run with the following parameters:
+>   - Set *File to cut"* to `Wordmatch on...` file containing the TA sites positions
+>   - Set *"Operation"* to `Keep`
+>   - Set *"Delimited by"* to `tab`
+>   - Set *"Cut by"* to `fields`
+>   - Set *"List of Fields"* to `Column: 4`  to get forward strand coordinate
+>   - **Click** on `Execute`
+>   - Add `#forward` tag to the output
+>
+> {% icon tool %} Select the **Cut columns from a table (cut)** tool in the tool bar and run with the following parameters:
+>   - Set *File to cut"* to `Wordmatch on...` file containing the TA sites positions
+>   - Set *"Operation"* to `Keep`
+>   - Set *"Delimited by"* to `tab`
+>   - Set *"Cut by"* to `fields`
+>   - Set *"List of Fields"* to `Column: 5`  to get reverse strand coordinate
+>   - **Click** on `Execute`
+>   - Add `#reverse` tag to the output
+>
+{: .hands_on}
+
+The coordinates provided by wordmatch are based on count 1. Meaning the first nucleotide is counted as number 1. However, bamCoverage count the first nucleotide as nucleotide number 0. To be able to compare the two results, we need to shift the TA site positions by 1.
+
+> ### {% icon hands_on %} Hands-on:  Shift TA sites positions
+>
+> {% icon tool %} To shift the positions of TA sites, select the **Compute an expression on every row** tool in the tool bar and run with the following parameters:
+>   - Set *Add expression"* to `c1-1` to shift the position by 1
+>   - Set *"as a new column to"* to `Multiple datasets` and select the two files with the tags `forward` and `reverse`
+>   - Set *"Round result?"* to `yes`
+>   - **Click** on `Execute`
+>
+> {% icon tool %} To keep only the new coordinates, select the **Cut columns from a table (cut)** tool in the tool bar and run with the following parameters:
+>   - Set *File to cut"* to `Multiple datasets` and select the two files output of the previous step
+>   - Set *"Operation"* to `Keep`
+>   - Set *"Delimited by"* to `tab`
+>   - Set *"Cut by"* to `fields`
+>   - Set *"List of Fields"* to `Column: 2`  to get new coordinates
+>   - **Click** on `Execute`
+>
+{: .hands_on}
+
 ## Merging overall coverage and TA sites to get the coverage of each TA sites
+
+Now that have the files containing the coordinates of our TA sites for both strands. We will cross them with the coverage files to get the coverage on both sides of each TA site.
+
+> ### {% icon hands_on %} Hands-on:  Get coverage of TA sites
+>
+> {% icon tool %} Select the **Join two files** tool in the tool bar and run with the following parameters:
+>   - Set *1st file"* to `bamCoverage on ...` collection
+>   - Set *"Column to use from 1st file"* to `Column 2` to select the position of the end of the read
+>   - Set *"2nd File"* to the file with the `forward` tags
+>   - Set *"Column to use from 2nd file"* to `Column 1`
+>   - Set *"Output lines appearing in"*  to `Both 1st & 2nd file, plus unpairable lines from 2st file. (-a 2)` to get all TA sites.
+>   - Set *"First line is a header line"* to `No`
+>   - Set *"Value to put in unpaired (empty) fields"* to `0`: assign a count of 0 to TA sites not covered in  the bamCoverage file.
+>   - **Click** on `Execute`
+>   - Add `#forward` tag to the output collections
+>
+>
+> {% icon tool %} Repeat the operation with the `reverse` file
+>
+>
+> {% icon tool %} Select the **Cut columns from a table (cut)** tool in the tool bar and run with the following parameters:
+>   - Set *File to cut"* to the collection `Join on collection...` with the `forward` tag
+>   - Set *"Operation"* to `Keep`
+>   - Set *"Delimited by"* to `tab`
+>   - Set *"Cut by"* to `fields`
+>   - Set *"List of Fields"* to `Column: 2`  and `Column: 4` to keep only position and coverage
+>   - **Click** on `Execute`
+>
+> {% icon tool %} Repeat the operation with the `reverse` collection
+>
+{: .hands_on}
+
+We now have a read count for each nucleotides of the TA sites. The insertions counted in the forward strand files are in a different direction than those counted on the reverse strand file. In our case, we are only interested in studying the gene disruption, and therefore we do not want to consider the directions separately. We will add the forward and reverse count together to get a total count per TA site. In order to do that we need to assign the count of both strand to the same nucleotide. We will do that by shifting by one position the count on the reverse strand.
+
+> ### {% icon hands_on %} Hands-on:  Get total count per TA site
+>
+> {% icon tool %} To shift the positions of reverse strand counts, select the **Compute an expression on every row** tool in the tool bar and run with the following parameters:
+>   - Set *Add expression"* to `c1-1` to shift the position by 1
+>   - Set *"as a new column to"* to the collection `Cut on...` with the tags `reverse`
+>   - Set *"Round result?"* to `yes`
+>   - **Click** on `Execute`
+>
+> {% icon tool %} To select the new coordinates, select the **Cut columns from a table** tool in the tool bar and run with the following parameters:
+>   - Set *"Cut columns"* to `c3,c2` to keep only new position and counts in that order
+>   - Set *"Delimited by"* to `tab`
+>   - Set *From"* to the output of the previous step collection `Compute on collection...`
+>   - **Click** on `Execute`
+>
+> {% icon tool %} Before adding the counts we need to sort the files. Select the **Sort data in ascending or descending order** tool in the tool bar and run with the following parameters:
+>   - Set *Sort Query"* to the newest collection with the `forward` tag
+>   - Set *"Number of header lines"* to `0`
+>   - Set *"on column"* to `Column: 1` to sort on positions
+>   - Set *"in"* to `Ascending Order`
+>   - Set *"Flavor"* to `Fast numeric sort (-n)`
+>   - **Click** on `Execute`
+>
+> {% icon tool %} Repeat the operation with the newest `reverse` file
+>
+> {% icon tool %} To merge the two collections, select the **Join two files** tool in the tool bar and run with the following parameters:
+>   - Set *1st file"* to `Sort on ...` collection with the `forward` tag
+>   - Set *"Column to use from 1st file"* to `Column 1` to join on positions
+>   - Set *"2nd File"* o `Sort on ...` collection with the `reverse` tag
+>   - Set *"Column to use from 2nd file"* to `Column 1`
+>   - Set *"Output lines appearing in"*  to `Both 1st & 2nd file` to get all TA sites.
+>   - Set *"First line is a header line"* to `No`
+>   - Set *"Value to put in unpaired (empty) fields"* to `.`
+>   - **Click** on `Execute`
+>
+> Now that we have joined our files we want to create a new column with the addition of bth counts
+>
+> {% icon tool %} Select the **Compute an expression on every row** tool in the tool bar and run with the following parameters:
+>   - Set *Add expression"* to `c2+3` to get the total count
+>   - Set *"as a new column to"* to the collection `Join on ...` with the tags `reverse` and `forward`
+>   - Set *"Round result?"* to `yes`
+>   - **Click** on `Execute`
+>
+>  {% icon tool %} To get a file with only the position and total count, select the **Cut columns from a table (cut)** tool in the tool bar and run with the following parameters:
+>   - Set *File to cut"* to the collection `Compute...`
+>   - Set *"Operation"* to `Keep`
+>   - Set *"Delimited by"* to `tab`
+>   - Set *"Cut by"* to `fields`
+>   - Set *"List of Fields"* to `Column: 1`  and `Column: 4` to keep only position and total counts
+>   - **Click** on `Execute`
+>
+> {% icon tool %} Select the **Sort data in ascending or descending order** tool in the tool bar and run with the following parameters:
+>   - Set *Sort Query"* to the collection `Compute on...`
+>   - Set *"Number of header lines"* to `0`
+>   - Set *"on column"* to `Column: 1` to sort on positions
+>   - Set *"in"* to `Ascending Order`
+>   - Set *"Flavor"* to `Fast numeric sort (-n)`
+>   - **Click** on `Execute`
+>
+>
+{: .hands_on}
 
 # Predicting Essential Genes with Transit
 
