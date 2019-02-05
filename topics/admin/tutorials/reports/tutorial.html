@@ -589,43 +589,14 @@
 
 <h1 id="setting-up-reports">Setting up Reports</h1>
 
-<p>The reports application is not complex to setup as it is included directly in the Galaxy codebase and we’ve already done all of the setup required for Galaxy, Supervisord, uWSGI, and NGINX.</p>
+<p>The reports application is included with the Galaxy codebase and this tutorial assumes you’ve already done all of the setup required for Galaxy, Supervisord, uWSGI, and NGINX.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-setup-reports"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setup Reports</h3>
 
   <ol>
     <li>
-      <p>Edit your <code class="highlighter-rouge">galaxyservers</code> group variables file, and under the NGINX configuraiton, add a block for proxying the reports application. It should look like:</p>
-
-      <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">location</span> <span class="n">/reports</span> <span class="p">{</span>
-    <span class="kn">uwsgi_pass</span>           <span class="nf">127.0.0.1</span><span class="p">:</span><span class="mi">9001</span><span class="p">;</span>
-    <span class="kn">uwsgi_param</span>          <span class="s">UWSGI_SCHEME</span> <span class="nv">$scheme</span><span class="p">;</span>
-    <span class="kn">include</span>              <span class="s">uwsgi_params</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>      </div>
-    </li>
-    <li>
-      <p>In your <code class="highlighter-rouge">supervisor_programs</code>, add an entry for the reports webapp:</p>
-
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">supervisor_programs</span><span class="pi">:</span>
-  <span class="s">....</span>
-  <span class="s">- name</span><span class="pi">:</span> <span class="s">reports</span>
-    <span class="s">state</span><span class="pi">:</span> <span class="s">present</span>
-    <span class="s">command</span><span class="pi">:</span> <span class="s">uwsgi --yaml {{ galaxy_config_dir }}/reports.yml</span>
-    <span class="s">configuration</span><span class="pi">:</span> <span class="pi">|</span>
-      <span class="no">autostart=true</span>
-      <span class="no">autorestart=true</span>
-      <span class="no">startretries=1</span>
-      <span class="no">startsecs=10</span>
-      <span class="no">user=galaxy</span>
-      <span class="no">umask=022</span>
-      <span class="no">directory={{ galaxy_server_dir }}</span>
-      <span class="no">environment=HOME={{ galaxy_mutable_data_dir }},VIRTUAL_ENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:%(ENV_PATH)s</span>
-</code></pre></div>      </div>
-    </li>
-    <li>
-      <p>Create <code class="highlighter-rouge">templates/galaxy/config/</code>, if it doesn’t exist, and add create and edit <code class="highlighter-rouge">templates/galaxy/config/reports.yml</code> with the following contents:</p>
+      <p>First we add a basic configuration of the Reports app to the playbook templates. Create <code class="highlighter-rouge">templates/galaxy/config/</code> folder, if it doesn’t exist, and create <code class="highlighter-rouge">templates/galaxy/config/reports.yml</code> with the following contents:</p>
 
       <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">uwsgi</span><span class="pi">:</span>
     <span class="na">socket</span><span class="pi">:</span> <span class="s">127.0.0.1:9001</span>
@@ -652,11 +623,11 @@
     <span class="na">database_connection</span><span class="pi">:</span> <span class="s2">"</span><span class="s">postgresql:///galaxy?host=/var/run/postgresql"</span>
     <span class="na">file_path</span><span class="pi">:</span> <span class="s">/data</span>
     <span class="na">filter-with</span><span class="pi">:</span> <span class="s">proxy-prefix</span>
-    <span class="na">template_cache_path</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv">galaxy_mutable_data_dir</span> <span class="pi">}}</span><span class="s">/compiled_templates</span>
+    <span class="na">template_cache_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_mutable_data_dir</span><span class="nv"> </span><span class="s">}}/compiled_templates"</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>In your group variables, configure Galaxy to deploy the reports configuration file:</p>
+      <p>In your <code class="highlighter-rouge">galaxyservers</code> group variables file, tell the playbook to deploy the reports configuration file:</p>
 
       <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config_templates</span><span class="pi">:</span>
 <span class="nn">...</span>
@@ -665,10 +636,39 @@
 </code></pre></div>      </div>
     </li>
     <li>
+      <p>Similar to Galaxy we will again use Supervisor to manage the Reports process. In the same file (<code class="highlighter-rouge">galaxyservers</code> group variables file) edit the <code class="highlighter-rouge">supervisor_programs</code> section - add an entry for the Reports webapp:</p>
+
+      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">supervisor_programs</span><span class="pi">:</span>
+  <span class="s">....</span>
+  <span class="s">- name</span><span class="pi">:</span> <span class="s">reports</span>
+    <span class="s">state</span><span class="pi">:</span> <span class="s">present</span>
+    <span class="s">command</span><span class="pi">:</span> <span class="s">uwsgi --yaml {{ galaxy_config_dir }}/reports.yml</span>
+    <span class="s">configuration</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="no">autostart=true</span>
+      <span class="no">autorestart=true</span>
+      <span class="no">startretries=1</span>
+      <span class="no">startsecs=10</span>
+      <span class="no">user=galaxy</span>
+      <span class="no">umask=022</span>
+      <span class="no">directory={{ galaxy_server_dir }}</span>
+      <span class="no">environment=HOME={{ galaxy_mutable_data_dir }},VIRTUAL_ENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:%(ENV_PATH)s</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Then we need to tell NGINX it should serve our Reports app under <code class="highlighter-rouge">&lt;server_url&gt;/reports</code> url. Edit your <code class="highlighter-rouge">galaxyservers</code> group variables file, and under the NGINX configuraiton, add a block for proxying the reports application. It should look like:</p>
+
+      <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">location</span> <span class="n">/reports</span> <span class="p">{</span>
+    <span class="kn">uwsgi_pass</span>           <span class="nf">127.0.0.1</span><span class="p">:</span><span class="mi">9001</span><span class="p">;</span>
+    <span class="kn">uwsgi_param</span>          <span class="s">UWSGI_SCHEME</span> <span class="nv">$scheme</span><span class="p">;</span>
+    <span class="kn">include</span>              <span class="s">uwsgi_params</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
       <p>Run the playbook</p>
     </li>
     <li>
-      <p>The reports application should be available, under <code class="highlighter-rouge">&lt;server-url&gt;/reports/</code></p>
+      <p>The reports application should be available, under <code class="highlighter-rouge">&lt;server_url&gt;/reports/</code>. Note the trailing slash.</p>
     </li>
   </ol>
 
