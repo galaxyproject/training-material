@@ -34,7 +34,7 @@ Click *Analyze Data* on the top menu bar and you should be taken to the main Gal
 # Importing and Running the Workflow
 
 > ### {% icon tip %} Annotation in a nutshell
-Genome annotation is the process of interpreting the raw DNA sequence of a genome into predictions of its function.  Genome annotation can be divided into two major steps: structural annotation and functional annotation. **Structural annotation** is the process of defining the locations and boundaries of features in the genome ("where are the genes?"). **Functional annotation** is the process of assigning functions or predicted phenotypes to the genome features ("what do the genes do?"). More details on the principles of these processes will be provided in class.
+Genome annotation is the process of interpreting the raw DNA sequence of a genome into predictions of its function.  Genome annotation can be divided into two major steps: structural and functional. **Structural annotation** is the process of defining the locations and boundaries of features in the genome ("where are the genes?"). **Functional annotation** is the process of assigning functions or predicted phenotypes to the genome features ("what do the genes do?"). More details on the principles of these processes will be provided in class.
 {: .hands_on}
 
 The structural annotation workflow will analyze the DNA sequence of the input genome with two automated gene callers: *MetaGeneAnnotator* and *Glimmer3*. A completely naïve set of open reading frames (ORFs) will also be generated from the *Sixpack* prediction program to ensure even unexpected genes can be called. Lastly, tRNA and terminator finding tools will be run. To begin, click on the *Shared Data* drop-down menu at the top of the center Galaxy panel and select the *Workflows* option.
@@ -87,7 +87,7 @@ When the genome has been opened in Apollo, you can begin structural annotation o
 
 ## Protein-coding Genes
 
-Recall that the primary gene callers *MetaGeneAnnotator* and *Glimmer3* use sophisticated algorithms to predict gene loctaions and are correct ~90-95% of the time. The *Sixpack* tool is a "dumb" gene caller in that it will detect any open reading frame (ORF) longer than 20 codons with a valid start codon. *Sixpack* is available as a "backup" tool to annotate genes that mnay have been missed by both *MetaGeneAnnotator* and *Glimmer3*.
+Recall that the primary gene callers *MetaGeneAnnotator* and *Glimmer3* use sophisticated algorithms to predict gene loctaions and are correct ~90-95% of the time. The *Sixpack* tool is a "dumb" gene caller in that it will detect any open reading frame (ORF) longer than 20 codons with a valid start codon. *Sixpack* is available as a "backup" tool to annotate genes that may have been missed by both *MetaGeneAnnotator* and *Glimmer3*.
 
 Choose the best gene to call from the evidence tracks considering the start codon, presence of a Shine-Dalgarno sequence, and genome coverage (phage have high coding density and genes often touch or overlap). A summary of phage gene structure is provided below.
 
@@ -104,7 +104,7 @@ For example, in the image below, the light blue and dark blue tracks are a bette
 {: .hands_on}
 
 > ### {% icon tip %} Note that…
-> It is better to over-call (call more genes than are likely to be in the genome) than to under-call genes and have to go back and re-run BLAST and related analyses. Do not leave large gaps with no gene calls as features can be deleted later. If *MetaGeneAnnotator* and *Glimmer3* have left large gaps in the DNA sequence, look in the *Sixpack* track for candidate genes that occupy the gaps and have valid Shine-Dalgarno sequences.
+> Phages tend to maximize coding density (the amount of DNA that is occupied by a feature), since the amount of DNA they can fit into their capsid is limited. Avoid leaving large gaps in your DNA sequence with no gene calls. If *MetaGeneAnnotator* and *Glimmer3* have left large gaps in the DNA sequence, look in the *Sixpack* track for candidate genes that occupy the gaps and have valid Shine-Dalgarno sequences. If there is a large open reading frame that occupies a gap but does not have a good Shine-Dalgarno sequence, these may be worth calling as genes as well.
 {: .tip}
 
 ## tRNA Genes
