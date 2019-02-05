@@ -41,42 +41,12 @@ The reports application gives some pre-configured analytics screens.
 
 # Setting up Reports
 
-The reports application is not complex to setup as it is included directly in the Galaxy codebase and we've already done all of the setup required for Galaxy, Supervisord, uWSGI, and NGINX.
+The reports application is included with the Galaxy codebase and this tutorial assumes you've already done all of the setup required for Galaxy, Supervisord, uWSGI, and NGINX.
 
 > ### {% icon hands_on %} Hands-on: Setup Reports
 >
-> 1. Edit your `galaxyservers` group variables file, and under the NGINX configuraiton, add a block for proxying the reports application. It should look like:
 >
->    ```nginx
->    location /reports {
->        uwsgi_pass           127.0.0.1:9001;
->        uwsgi_param          UWSGI_SCHEME $scheme;
->        include              uwsgi_params;
->    }
->    ```
->
-> 2. In your `supervisor_programs`, add an entry for the reports webapp:
->
->    {% raw %}
->    ```yaml
->    supervisor_programs:
->      ....
->      - name: reports
->        state: present
->        command: uwsgi --yaml {{ galaxy_config_dir }}/reports.yml
->        configuration: |
->          autostart=true
->          autorestart=true
->          startretries=1
->          startsecs=10
->          user=galaxy
->          umask=022
->          directory={{ galaxy_server_dir }}
->          environment=HOME={{ galaxy_mutable_data_dir }},VIRTUAL_ENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:%(ENV_PATH)s
->    ```
->    {% endraw %}
->
-> 3. Create `templates/galaxy/config/`, if it doesn't exist, and add create and edit `templates/galaxy/config/reports.yml` with the following contents:
+> 1. First we add a basic configuration of the Reports app to the playbook templates. Create `templates/galaxy/config/` folder, if it doesn't exist, and create `templates/galaxy/config/reports.yml` with the following contents:
 >
 >    {% raw %}
 >    ```yml
@@ -105,11 +75,11 @@ The reports application is not complex to setup as it is included directly in th
 >        database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
 >        file_path: /data
 >        filter-with: proxy-prefix
->        template_cache_path: {{ galaxy_mutable_data_dir }}/compiled_templates
+>        template_cache_path: "{{ galaxy_mutable_data_dir }}/compiled_templates"
 >    ```
 >    {% endraw %}
 >
-> 4. In your group variables, configure Galaxy to deploy the reports configuration file:
+> 2. In your `galaxyservers` group variables file, tell the playbook to deploy the reports configuration file:
 >
 >    {% raw %}
 >    ```yml
@@ -120,8 +90,40 @@ The reports application is not complex to setup as it is included directly in th
 >    ```
 >    {% endraw %}
 >
+>
+> 3. Similar to Galaxy we will again use Supervisor to manage the Reports process. In the same file (`galaxyservers` group variables file) edit the `supervisor_programs` section - add an entry for the Reports webapp:
+>
+>    {% raw %}
+>    ```yml
+>    supervisor_programs:
+>      ....
+>      - name: reports
+>        state: present
+>        command: uwsgi --yaml {{ galaxy_config_dir }}/reports.yml
+>        configuration: |
+>          autostart=true
+>          autorestart=true
+>          startretries=1
+>          startsecs=10
+>          user=galaxy
+>          umask=022
+>          directory={{ galaxy_server_dir }}
+>          environment=HOME={{ galaxy_mutable_data_dir }},VIRTUAL_ENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:%(ENV_PATH)s
+>    ```
+>    {% endraw %}
+>
+> 4. Then we need to tell NGINX it should serve our Reports app under `<server_url>/reports` url. Edit your `galaxyservers` group variables file, and under the NGINX configuraiton, add a block for proxying the reports application. It should look like:
+>
+>    ```nginx
+>    location /reports {
+>        uwsgi_pass           127.0.0.1:9001;
+>        uwsgi_param          UWSGI_SCHEME $scheme;
+>        include              uwsgi_params;
+>    }
+>    ```
+>
 > 5. Run the playbook
 >
-> 6. The reports application should be available, under `<server-url>/reports/`
+> 6. The reports application should be available, under `<server_url>/reports/`. Note the trailing slash.
 >
 {: .hands_on}
