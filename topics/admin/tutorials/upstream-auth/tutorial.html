@@ -584,6 +584,7 @@
 <ol id="markdown-toc">
   <li><a href="#configuring-authentication" id="markdown-toc-configuring-authentication">Configuring Authentication</a></li>
   <li><a href="#testing" id="markdown-toc-testing">Testing</a></li>
+  <li><a href="#api-access" id="markdown-toc-api-access">API access</a></li>
   <li><a href="#reverting" id="markdown-toc-reverting">Reverting</a></li>
 </ol>
 
@@ -697,6 +698,16 @@
   </ol>
 
 </blockquote>
+
+<h1 id="api-access">API access</h1>
+
+<p>If you wish your Galaxy to be accessible to command line clients (e.g. bioblend, blend4j, parsec), you will need to add an exception for authentication on the API. Galaxy will still be secure and protected, but non-browser access will be permitted with an API key.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>location /api/ {
+    satisfy any;
+    allow all;
+}
+</code></pre></div></div>
 
 <h1 id="reverting">Reverting</h1>
 
