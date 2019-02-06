@@ -914,7 +914,7 @@ We now have a table with 130 lines (the most differentially expressed genes) and
 >
 > 1. **heatmap2** {% icon tool %} to plot the heatmap:
 >    - {% icon param-file %} *"Input should have column headers"*: the generated table (output of **Cut** {% icon tool %})
->    - *"Advanced - log transformation"*: `Log2(value) transform my data`
+>    - *"Advanced - log transformation"*/*"Data transformation"*: `Log2(value) transform my data`
 >    - *"Enable data clustering"*: `Yes`
 >    - *"Labeling columns and rows"*: `Label columns and not rows`
 >    - *"Coloring groups"*: `Blue to white to red`
