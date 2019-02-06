@@ -82,41 +82,6 @@ Feedback:
         in the header, but that would make the css selectors difficult
 
 -->
-     
-<style>
-
-/*blockquote img {
-  width: 100%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}*/
-
-.tutorial table { 
-  width:unset;
-  margin-left:auto;
-  margin-right:auto;
-}
-
-.tutorial table thead th {
-  border-bottom: 2px solid #777; 
-  text-align: left;
-}
-
-.tutorial table td:first-child, .tutorial table th:first-child  {
-  border-right: 2px solid #777; 
-  font-weight: bold;
-  text-align: left;
-}
-
-.tutorial table td:not(first-child), .tutorial table th:not(first-child) {
-  text-align: center;
-  border-right: 1px solid #ddd;
-  border-left: 1px solid #ddd;
-}
-
-</style>
-
 
 # Introduction
 {:.no_toc}
@@ -258,11 +223,11 @@ To explore the uniqueness of counts, we must discuss the inclusion of *UMIs* in 
 >
 > Consider the above example where two reads from different transcripts are amplified unevenly. The resulting frequency table would look like so:
 >
->  |  | Reads in Cell 1 |
->  |--|------------------|
->  | Gene Red | 5 |
->  | Gene Blue | 0 |
->
+>  > |  | Reads in Cell 1 |
+>  > |--|------------------|
+>  > | Gene Red | 5 |
+>  > | Gene Blue | 0 |
+>  {: .matrix}
 > 
 > But the truth is entirely different (i.e. Gene Red should have 1 count, and Gene Blue should also have 1 count). How do we correct for this bias?
 >
@@ -273,34 +238,37 @@ To explore the uniqueness of counts, we must discuss the inclusion of *UMIs* in 
 > 
 > Here, we see two unique transcripts from Gene Red and two unique transcripts from Gene Blue, each given a (coloured) UMI. After amplificaiton, Gene Red has more reads than Gene Blue. If we were to construct a frequency table as before to count the reads, we would have:
 > 
->  |  | Reads in Cell 1 |
->  |--|-----------------|
->  | Gene Red | 6 |
->  | Gene Blue | 3 |
+>  > |  | Reads in Cell 1 |
+>  > |--|-----------------|
+>  > | Gene Red | 6 |
+>  > | Gene Blue | 3 |
+>  {: .matrix}
 >  
 >  Which is wrong, because it shows that Red has twice the expression that Blue does. However, we can reconstitute the true count by considering the UMI information:
 >  
->  |  | UMI colour  | Reads in Cell 1 |
->  |--|-------------|-----------------|
->  | Gene Red | Pink | 2 |
->  |          | Blue | 4 |
->  | Gene Blue | Brown | 1 |
->  |           | Green | 2 |
+>  > |  | UMI colour  | Reads in Cell 1 |
+>  > |--|-------------|-----------------|
+>  > | Gene Red | Pink | 2 |
+>  > |          | Blue | 4 |
+>  > | Gene Blue | Brown | 1 |
+>  > |           | Green | 2 |
+>  {: .matrix}
 >  
 > We can then make the decision to ignore the frequencies of these UMIs, and simply count how many *unique* UMIs we see in each gene:
 > 
->  |  | Set of UMIs in Gene | UMIs in Cell 1 |
->  |--|---------------------|----------------|
->  | Gene Red | {Pink, Blue} | 2 |
->  | Gene Blue | {Brown, Green} | 2 |
->  
+>  > |  | Set of UMIs in Gene | UMIs in Cell 1 |
+>  > |--|---------------------|----------------|
+>  > | Gene Red | {Pink, Blue} | 2 |
+>  > | Gene Blue | {Brown, Green} | 2 |
+>  {: .matrix}
+>
 >  Which provides us with the true count of the number of true transcripts for each gene:
 >  
->  |  | UMIs in Cell 1 |
->  |--|----------------|
->  | Gene Red | 2 |
->  | Gene Blue | 2 |
->
+>  > |  | UMIs in Cell 1 |
+>  > |--|----------------|
+>  > | Gene Red | 2 |
+>  > | Gene Blue | 2 |
+>  {: .matrix}
 >
 {: .details}
 
@@ -890,22 +858,25 @@ Unfortunately, both are limited to counting without being able to distinguish be
 >
 > e.g. If we consider the number of reads that align to *GeneA*, the output given by these two tools is as follows:
 >
-> | (reads) | RNA STAR | FeatureCounts |
-> |---------|----------|---------------|
-> | GeneA   |   12     |    12         |
-> 
+> > | (reads) | RNA STAR | FeatureCounts |
+> > |---------|----------|---------------|
+> > | GeneA   |   12     |    12         |
+> {: .matrix}
 >
 > But what we actually require is:
 >
-> | (reads) | C1 | C2 |
-> |---------|----|----|
-> | GeneA   | 10 |  2 |
+> > | (reads) | C1 | C2 |
+> > |---------|----|----|
+> > | GeneA   | 10 |  2 |
+> {: .matrix}
 >
 > or more specifically:
 >
-> | (umis) | C1 | C2 |
-> |--------|----|----|
-> | GeneA  | 2  |  1 |
+> > | (umis) | C1 | C2 |
+> > |--------|----|----|
+> > | GeneA  | 2  |  1 |
+> {: .matrix}
+>
 {: .details}
 
 
