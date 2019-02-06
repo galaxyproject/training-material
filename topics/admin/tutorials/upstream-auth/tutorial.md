@@ -132,6 +132,16 @@ You should now be presented with a password dialog when attempting to load the G
 >
 {: .hands_on}
 
+# API access
+
+If you wish your Galaxy to be accessible to command line clients (e.g. bioblend, blend4j, parsec), you will need to add an exception for authentication on the API. Galaxy will still be secure and protected, but non-browser access will be permitted with an API key. 
+
+```
+location /api/ {
+    satisfy any;
+    allow all;
+}
+```
 
 # Reverting
 
