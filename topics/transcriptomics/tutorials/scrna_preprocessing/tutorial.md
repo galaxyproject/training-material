@@ -34,7 +34,7 @@ requirements:
         - scrna-introduction
         - plates-batches-and-barcodes
 
-follow-up_training:
+follow_up_training:
   - 
     type: "internal"
     topic_name: transcriptomics
