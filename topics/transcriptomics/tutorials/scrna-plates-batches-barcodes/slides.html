@@ -174,7 +174,7 @@ contributors:
   + e.g. *4 x 12  = 48* slots in the plate, need 48 unique cell barcodes
 
 ???
-The way these slots are filled depends entirely on the protocol, but usually not all slots are filled. The reason for this will become clear momentarily.
+The way these slots are filled depends entirely on the protocol, but usually not all slots are filled. The reason for this will become clear momentarily
 
 ---
 
@@ -182,23 +182,118 @@ The way these slots are filled depends entirely on the protocol, but usually not
 
 .image-75[![Add Barcodes](../../images/scrna_pbb_barcodes_add.svg)]
 
+* Barcodes are added to *all* transcripts of a *specific* cell
+* Transcripts with different cell barcodes originate from different cells
+
+???
+
+
 ---
 
 # What are Cell Barcodes?
 
-![Barcodes in Plate](../../images/scrna_pbb_barcodes_overview.svg)
+.image-100[![Barcodes in Plate](../../images/scrna_pbb_barcodes_overview.svg)]
+
+* Many different cell barcodes are used across many different cells
+* Each well in a plate contains a cell, indexed by its cell barcode
 
 ---
 
-There are three main variables that can dictate the library preparation setup:
+# Questions about Cell Barcodes
 
- 1. Number of available cell barcodes
- 1. Number of slots on a plate
- 1. Number of slots in a lane/batch
+.left[Assuming a lane is a 20x5 array:]
 
-The last two can be explained by exploring different example plating arrangements of the sequencer, and the first can be explained via a better understanding of how cell barcodes are generated.
+1. How many cell barcodes are needed for a single lane?
+
+1. How many cell barcodes are needed for a plate with 10 lanes?
+
+1. What would be the minimum length of the barcodes for each of the previous questions?
+
+
+---
+
+# Questions about Cell Barcodes
+
+.left[Assuming a lane is a 20x5 array:]
+
+1. How many cell barcodes are needed for a single lane?
+    * 20 x 5 = 100 unique barcodes per lane
+
+1. How many cell barcodes are needed for a plate with 10 lanes?
+    * 20 x 5 x 10 = 1,000 unique barcodes per plate
+    
+---
+
+# Questions about Cell Barcodes?
+
+3) What would be the minimum length of the barcodes for each of the previous questions?
+  
+.pull-left[
+
+1)   A single lane?
+
+ * 100 barcodes, 4 nucleotides for each base of a barcode
+
+| 4^2 = 16 | No, 2 bases is not enough |
+| 4^3  = 64 | No, 3 bases is not enough |
+| 4^4 = 256 | Yes, 4 bases is enough to cover 100 barcodes (and more!) |
+]
+
+.pull-right[
+  
+  2.  A plate with 10 lanes?
+     - 1000 barcodes, 4 nucleotides for each base of a barcode
+     - 4^4 = 256 ? No, 4 bases is not enough
+     - 4^5 = 1024 ? Yes, 5 bases is enough to cover 1,000 barcodes (just barely!)
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+# Questions about Cell Barcodes
+
+1. Why is it important to know which cell a sequence came from?
+
+2. Barcoding the cell makes sense, but why do we need to barcode all transcripts of a cell too? 
 
 ???
-Data alone does not bring any information: to carry information, data needs to be contextualized. Transcriptomic data is no exception, therefore to organize the growing body of knowledge pertaining RNA-Seq experiments and infer valuable insights, data needs to be organized, annotated, and ultimately visualized.
+Can we not infer which gene the sequence originates from by simply mapping it against the reference genome?
+
+---
+
+# Questions about Barcodes
+
+1. Cell Barcodes: Why is it important to know which cell a sequence came from?
+  * *GeneX* may exist is many cells. The relative expression of a gene between two different cells may be of biological significance.
+    
+2. Cell Barcodes make sense, but why do we need to barcode all transcripts of a cell too?
+  * **Yes** and **No**!
+  * **Yes**:  We can count 
+ 
+ ???
+ * If our sequence codes for a *GeneX* which is a gene of interest, we may want to know which cells express GeneX more than others. 
+      * e.g. If *CellA* has 10 times more *GeneX* sequences than *CellB*, then we know that *CellA* and *CellB* differ at *GeneX* - which might suggest a causative source of variation for any change in function between *CellA* and *CellB* (or cells in the same cluster as *CellA*, and cells in the same cluster as *CellB*).
+
+ * *Yes* and *no*!  
+    * **Yes**: We can indeed align our sequence against a reference genome and obtain the name of the gene it aligns against. This sequence will then contribute to the 'count' of sequences that gene has, and increase the expression of that gene.    
+    * **No**: We do not know whether these 'counts' are *unique*. Many of these counts could be duplicates as a result of the amplification process. To explain further, we must look at UMIs and their role in the analysis.
+
+
+???
+Can we not infer which gene the sequence originates from by simply mapping it against the reference genome?
 
 ---
