@@ -74,7 +74,7 @@ layout: base
                             </a>
                             <div class="dropdown-menu">
                                 {% if topic.docker_image %}
-                                    <a class="dropdown-item" href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/docker" title="Docker image for this tutorial">
+                                    <a class="dropdown-item" href="{{ site.github_repository }}/tree/{{ site.github_repository_branch }}/topics/{{ topic.name }}/docker" title="Docker image for this tutorial">
                                         {% icon docker_image %} Docker image
                                     </a>
                                 {% endif %}
@@ -181,7 +181,7 @@ layout: base
             {% endif %}
         </blockquote>
 
-        {{ content 
+        {{ content
             | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">' }}
 
         {% if page.key_points %}
