@@ -209,61 +209,341 @@ The way these slots are filled depends entirely on the protocol, but usually not
 1. How many cell barcodes are needed for a plate with 10 lanes?
 
 1. What would be the minimum length of the barcodes for each of the previous questions?
-
-
+--
+.center[.footnote[
+1. *20 x 5 = 100 unique barcodes per lane*
+1. *20 x 5 x 10 = 1,000 unique barcodes per plate*
+]]
 ---
 
-# Questions about Cell Barcodes
+### Questions about Cell Barcodes
 
-.left[Assuming a lane is a 20x5 array:]
+.left[3) What would be the minimum length of the barcodes for each of the previous questions?]
 
-1. How many cell barcodes are needed for a single lane?
-    * 20 x 5 = 100 unique barcodes per lane
-
-1. How many cell barcodes are needed for a plate with 10 lanes?
-    * 20 x 5 x 10 = 1,000 unique barcodes per plate
-    
----
-
-# Questions about Cell Barcodes?
-
-3) What would be the minimum length of the barcodes for each of the previous questions?
-  
 .pull-left[
 
-1)   A single lane?
+A single lane?
 
  * 100 barcodes, 4 nucleotides for each base of a barcode
 
-| 4^2 = 16 | No, 2 bases is not enough |
-| 4^3  = 64 | No, 3 bases is not enough |
-| 4^4 = 256 | Yes, 4 bases is enough to cover 100 barcodes (and more!) |
+| Barcodes | Result |
+|---------|------|
+| $$4^2 =  16$$ | <small>No, 2 bases is not enough |
+| $$4^3  = 64$$ | <small>No, 3 bases is not enough |
+| $$4^4 = 256$$ | <small>Yes, 4 bases is enough to cover 100 barcodes (and more!) |
+
+]
+--
+.pull-right[
+  
+A plate with 10 lanes?
+
+ * 1000 barcodes, 4 nucleotides for each base of a barcode
+
+| Barcodes | Result |
+|---------|------|
+|$$4^4 = 256$$ | <small>No, 4 bases is not enough |
+|$$4^5 = 1024$$ | <small>Yes, 5 bases is enough to cover 1,000 barcodes (just barely!) |
+
+]
+
+---
+
+### Barcode Safeguarding
+
+<!-- TODO:
+ * Find a way to get <style>.MathJax_Display { display: inline; }</style> working so that MathJax can render inline
+ * The MathJax selector seems to apply directly to the element, which is impossible to override!
+ -->
+
+.left[* Is 5 nucleotides really enough to capture 1000 cells?]
+.left[* If we assume our cell barcodes look like:]
+
+
+    AAAAA AAAAC AAAAG AAAAT AAACA AAAGA AAATA ....
+    CCCCC CCCCA CCCCG CCCCT CCCAC CCCGC CCCTC ....
+      .
+      .
+      .
+
+
+.left[* What could go wrong if all barcodes are seperated by 1 bp, as above?]
+
+???
+If we assume that every barcode is seperated from every other barcode by 1 bp, then the answer is 'yes'
+
+That's right, sequencing errors can mislabel a read to a completely different cell than from where the transcript originated from.
+
+---
+
+### Guarding against Sequencing Errors
+
+.left[* Sequencing errors can change the cell barcode]
+.left[* To guard against a 1 bp sequencing error, need to space barcodes by 2 bp]
+.left[* With an *Edit Distance* of 2 bp:]
+
+
+    AAAAA AAACC AAAGG AAATT AACCA AAGGA AATTA ...
+    CCCCC CCCAA CCCGG CCCTT CCAAC CCGGC CCTTC ...
+      .
+      .
+      .
+
+.left[* How many barcodes would this yield for a cell barcode of length 5 bp?]
+
+$$ $$
+--
+$$ 4^{5-1} = 512 $$
+
+
+---
+
+### Edit Distance : General Principle
+
+.pull-left[
+e.g. For barcodes of length N=3:
+
+* Edit Distance of E=1:  
+.center[`AAA AAC AAG AAT ACA ACC` ...]
+.center[<small>64 barcodes</small>]
+
+* Edit Distance of E=2:  
+.center[`AAA ACC AGG ATT CAA CCC` ...] 
+.center[<small>16 barcodes</small>]
+
+* Edit Distance of E=3:  
+.center[`AAA CCC GGG TTT`]
+.center[<small>4 barcodes</small>]
+]
+--
+.pull-right[
+Number of Barcodes :
+
+$$ 4^{N-(E-1)} $$
+
+.center[For barcodes of length *N*,  
+and Edit Distance of *E*.]
+
+]
+
+---
+
+### Design Factors in Barcodes
+
+Is it better to use Longer or Shorter Barcodes?
+
+.pull-left[
+Longer:
+* Offer larger range of barcodes
+* Prone to more sequencing errors
+   * Must increase edit distance significantly
+* Can accomodate large edit distances
 ]
 
 .pull-right[
+Shorter:
+* Offer smaller range of barcodes 
+* More robust against sequencing errors
+  * A smaller edit distance is more acceptable
+* *Cannot* accomodate large edit distances
+]
+
+---
+
+### Cell Barcodes: Summary
+
+.pull-left[
+* A single barcode sequence indexes a single cell
+* Every transcript in a specific cell has the same cell barcode
+]
+.pull-right[
+* Barcodes are *designed*
+* Barcodes are *limited*
+*  
+*  
+]
+--
+.center[
+#### Need to balance:  
+* Edit Distance vs. Barcode Length
+* Number of Barcodes vs. Plate and Lane Size
+  * ***How?***
+]
+
+---
+
+### Intelligent Plating Strategies
+
+The main contending questions are:
+
+ * How large is each batch?
+ 
+ * How many batches on a plate?
+ 
+ * Should each batch use the same barcodes?
+ 
+ * What constraints are there on the plate?
+ 
+
+ 
+???
+A technician always has to balance quality against cost, and this is illustrated in the following examples:
+
+---
+
+# Example Setup
+
+.pull-left[
+* Barcodes:
+  * 24 unique barcodes, with an edit distance of E=2:
+         
+             AAA ACC AGG TTT TAA TCC
+             ATT CCC CAA TGG NAA NCC
+             CGG CTT GGG NGG NTT ANN
+             GAA GCC GTT CNN GNN TNN
+
+]
+--
+.pull-right[
+* Plates and Lanes:
+  * 12 slots per lane
+  * 4 lanes per plate
   
-  2.  A plate with 10 lanes?
-     - 1000 barcodes, 4 nucleotides for each base of a barcode
-     - 4^4 = 256 ? No, 4 bases is not enough
-     - 4^5 = 1024 ? Yes, 5 bases is enough to cover 1,000 barcodes (just barely!)
+* Contraints
+  * Only 2 lanes sequenced at a time
+    * i.e. half the plate is sequenced at a time
+]
+
+???
+Here we use N as an extra base just for example purposes, but you do sometimes see this in other barcodes.
+2 lanes at a time, only half
+
+---
+
+### Example 1: Single Plate with a Single Lane
+
+.footnote[
+<small>
+Available Barcodes
+
+         
+                                           AAA ACC AGG TTT TAA TCC
+                                           ATT CCC CAA TGG NAA NCC
+                                           CGG CTT GGG NGG NTT ANN
+                                           GAA GCC GTT CNN GNN TNN
+
+</small>
+]
+
+* 12 total slots in Plate 1
+* 12 slots in Lane 1
+* All slots filled
+
+           | 1 1 1 |    <- AAA ACC AGT     
+           | 1 1 1 |       ATT CCC CAA      
+           | 1 1 1 |       CGG CTT GGG      
+           | 1 1 1 |       GAA GCC GTT
+
+--
+* We only need to use half of our barcodes
+
+--
+
+* Why is this wasteful?
+
+
+???
+* Half of the barcodes used for that lane, and the other half we can ignore.
+* Wasteful because we are not getting full use of our 24 barcodes in a single sequecing run
+
+---
+
+### Example 2: Single Plate with 2 Lanes
+
+.footnote[
+<small>
+Available Barcodes
+
+         
+                                           AAA ACC AGG TTT TAA TCC
+                                           ATT CCC CAA TGG NAA NCC
+                                           CGG CTT GGG NGG NTT ANN
+                                           GAA GCC GTT CNN GNN TNN
+
+</small>
+]
+
+* 24 total slots in Plate 1
+* 12 slots in Lane 1, and 12 slots in Lane 2
+* All slots filled
+
+         | 1 1 1 : 2 2 2 | <- AAA ACC AGG : TTT TAA TCC
+         | 1 1 1 : 2 2 2 |    ATT CCC CAA : TGG NAA NCC
+         | 1 1 1 : 2 2 2 |    CGG CTT GGG : NGG NTT ANN
+         | 1 1 1 : 2 2 2 |    GAA GCC GTT : CNN GNN TNN
+
+--
+* We can use all of our barcodes
+* Maximum number of cells can be sequenced in a single run
+
+--
+* Why might this be too optimal?
+
+???
+Here we use all barcodes since these lanes will be sequenced at the same time 
+Let's look at one final example to see why using all our barcodes on a plate might not be optimal.
+
+---
+
+### Example 3: Single Plate with 2 Lanes, only 1 active
+
+<style>
+.bottom-right-box {
+  position: absolute;
+  bottom:0px;
+  border: 1px solid grey;
+  font-size: medium;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left:auto;
+  margin-right:auto;
+  width: 50%;
+}
+</style>
+
+
+.bottom-right-box[
+Available Barcodes
+        
+    AAA ACC AGG TTT TAA TCC
+    ATT CCC CAA TGG NAA NCC
+    CGG CTT GGG NGG NTT ANN
+    GAA GCC GTT CNN GNN TNN
+
+]
+
+* 24 total slots in Plate 1
+* 12 slots in Lane 1, and 12 slots in Lane 2
+* Only slots in Lane 1 filled
+ 
+         | 1 1 1 : . . . | <- AAA ACC AGG : ttt taa tcc
+         | 1 1 1 : . . . |    ATT CCC CAA : tgg naa ncc
+         | 1 1 1 : . . . |    CGG CTT GGG : ngg ntt ann
+         | 1 1 1 : . . . |    GAA GCC GTT : cnn gnn tnn
+
+--
+* Why have we not filled in Lane 2?
+
+
+
+???
+All barcodes used
 
 ---
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
----
 
 # Questions about Cell Barcodes
 
