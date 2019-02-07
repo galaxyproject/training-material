@@ -11,7 +11,7 @@ check_built_version() {
 	# Only request 1 item max since we just need to know if /something/ exists there.
 	aws s3api list-objects \
 		--bucket galaxy-training \
-		--prefix "${tag}/" \
+		--prefix "archive/${tag}/" \
 		--max-items 1 \
 		| wc -l
 }
