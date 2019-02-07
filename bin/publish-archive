@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Obtain version list
+# Check if a specific tag has been built. "check_built_version [tagname]"
 check_built_version() {
 	tag=$1
 
@@ -41,7 +41,9 @@ build_version() {
 	fi
 }
 
+# For all tags
 for tag in $(git tag -l); do
+	# Has it been build?
 	result=$(check_built_version "$tag")
 	if [[ "$result" == "0" ]]; then
 		echo "$tag needs to be built"
