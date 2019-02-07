@@ -46,7 +46,7 @@ Here you will learn how to create a new tutorial by developing a small tutorial 
 
 > ### {% icon comment %} Comment
 > This tutorial explains the different steps to create a tutorial for the Galaxy Training Material.
-> It may require some knowledge that you may not have or do not have the time to learn. If this is the case, you can create a skeleton of a tutorial with whatever existing materials you have, using your prefered text editor, and then share it with us by opening [issue on GitHub]({{ site.github_repository }}/issues/new), writing us on [Gitter]({{ site.gitter_url }}), or sending us an [email](mailto:{{ site.email }}).
+> It may require some knowledge that you may not have or do not have the time to learn. If this is the case, you can create a skeleton of a tutorial with whatever existing materials you have, using your prefered text editor, and then share it with us by opening [issue on GitHub]({{ site.github.repository_url }}/issues/new), writing us on [Gitter]({{ site.gitter_url }}), or sending us an [email](mailto:{{ site.email }}).
 {: .comment}
 
 # Define the topic
@@ -76,7 +76,7 @@ The first question we need to answer is in which topic to place our new tutorial
 
 # Keep track of the changes
 
-The material is stored in a [GitHub repository]({{ site.github_repository }}), a code hosting platform for version control and collaboration. So to develop training material, we are following the [GitHub flow](https://guides.github.com/introduction/flow/), which is based on fork, branches, and pull requests.
+The material is stored in a [GitHub repository]({{ site.github.repository_url }}), a code hosting platform for version control and collaboration. So to develop training material, we are following the [GitHub flow](https://guides.github.com/introduction/flow/), which is based on fork, branches, and pull requests.
 
 This can be done online via the GitHub interface or locally on your computer via command-line.
 

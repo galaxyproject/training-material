@@ -20,7 +20,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-All the training material which you find on [{{ site.url }}{{ site.baseurl }}]({{ site.url }}{{ site.baseurl }}) is stored on a [GitHub](https://github.com) repository ([{{ site.github_repository }}]({{ site.github_repository }})), a code hosting platform for version control and collaboration. GitHub interface is quite intuitive and simplifies the contributions from anyone.
+All the training material which you find on [{{ site.url }}{{ site.baseurl }}]({{ site.url }}{{ site.baseurl }}) is stored on a [GitHub](https://github.com) repository ([{{ site.github.repository_url }}]({{ site.github.repository_url }})), a code hosting platform for version control and collaboration. GitHub interface is quite intuitive and simplifies the contributions from anyone.
 
 > ### Agenda
 >
@@ -33,11 +33,11 @@ All the training material which you find on [{{ site.url }}{{ site.baseurl }}]({
 
 # GitHub
 
-The GitHub repository for the training material is: [{{ site.github_repository }}]({{ site.github_repository }}).
+The GitHub repository for the training material is: [{{ site.github.repository_url }}]({{ site.github.repository_url }}).
 
 > ### {% icon hands_on %} Hands-on: Familiarization with GitHub
 >
-> 1. Go on the GitHub repository: [{{ site.github_repository }}]({{ site.github_repository }})
+> 1. Go on the GitHub repository: [{{ site.github.repository_url }}]({{ site.github.repository_url }})
 > 
 >    ![GitHub interface](../../images/github_interface.png "Interface of the GitHub repository of the training material")
 >
@@ -123,7 +123,7 @@ The GitHub interface guides you through this process: after clicking on **Propos
 
 > ### {% icon hands_on %} Hands-on: Edit a file
 >
-> 1. Open and read the [CONTRIBUTING.md]({{ site.github_repository }}/blob/master/CONTRIBUTING.md) file
+> 1. Open and read the [CONTRIBUTING.md]({{ site.github.repository_url }}/blob/master/CONTRIBUTING.md) file
 > 1. Come back to the pull request
 > 2. Fill in the pull request description
 >
