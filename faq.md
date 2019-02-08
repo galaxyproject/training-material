@@ -40,7 +40,7 @@ We wrote an [article](https://www.biorxiv.org/content/early/2018/04/05/225680) a
 
 ## How can I advertise the training materials on my posters?
 
-We provide some QR codes and logos in the [images folder](https://github.com/galaxyproject/training-material/tree/master/assets/images).
+We provide some QR codes and logos in the [images folder]({{ site.github_repository }}/tree/{{ site.github_repository_branch }}/assets/images).
 
 # For Individual Learners
 
@@ -288,4 +288,4 @@ Yes, always! Have a look at the [Galaxy Community Events Calendar](https://galax
 
 This repository is hosted on [GitHub](https://github.com/) using git as a [DVCS](https://en.wikipedia.org/wiki/Distributed_version_control). Therefore the community is hosting backups of this
 repository in a decentralised way. The repository is self-contained and contains all needed content and all metadata.
-In addition we mirror snapshops of this repo on [Zenodo](http://zenodo.org). 
+In addition we mirror snapshops of this repo on [Zenodo](http://zenodo.org).
