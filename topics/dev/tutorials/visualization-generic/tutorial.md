@@ -250,25 +250,25 @@ Let's put this all together.
 >    <!DOCTYPE HTML>
 >    <%
 >        import os
->    
+>
 >        ## Generates hash (hdadict['id']) of history item
 >        hdadict = trans.security.encode_dict_ids( hda.to_dict() )
->    
+>
 >        ## Finds the parent directory of galaxy (/, /galaxy, etc.)
 >        root     = h.url_for( '/' )
->    
+>
 >        ## Determines the exposed URL of the ./static directory
 >        app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
->    
+>
 >        ## Actual file URL:
 >        file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
->    
+>
 >        ## Ensure BAI index is symlinked
 >        bai_target = hda.file_name+'.bai'
->    
+>
 >        if not os.path.isfile(bai_target):
 >            os.symlink(hda.metadata.bam_index.file_name, bai_target)
->    
+>
 >        ## Extract idxstats
 >        import pysam
 >        bam_idxstats_data = pysam.idxstats(hda.file_name)
@@ -282,19 +282,19 @@ Let's put this all together.
 >        </body>
 >    </html>
 >    ```
->    
+>
 >    We are now ready to test this very basic visualization, we just need a (small) BAM file for it.
 >
 > 3. Download [the example BAM file](https://zenodo.org/record/248730/files/tutorial.bam)
 > 4. Go the galaxy root directory and start Galaxy:
->    
+>
 >    ```bash
 >    $ cd $GALAXY_ROOT
 >    $ ./run.sh
 >    ```
 >
 > 5. Upload the example BAM file to your history
->    
+>
 >    If everything went well, our plugin has appeared as a visualization option for the dataset
 >
 >    > ### {% icon comment %} Comments
@@ -359,34 +359,34 @@ functional changes to the mako files.
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Change the mako file to the following:
->    
+>
 >    ```html
 >    <!DOCTYPE HTML>
 >    <%
 >        import os
->    
+>
 >        ## Generates hash (hdadict['id']) of history item
 >        hdadict = trans.security.encode_dict_ids( hda.to_dict() )
->    
+>
 >        ## Finds the parent directory of galaxy (/, /galaxy, etc.)
 >        root     = h.url_for( '/' )
->    
+>
 >        ## Determines the exposed URL of the ./static directory
 >        app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
->    
+>
 >        ## Actual file URL:
 >        file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
->    
+>
 >        ## Ensure BAI index is symlinked
 >        bai_target = hda.file_name+'.bai'
->    
+>
 >        if not os.path.isfile(bai_target):
 >            os.symlink(hda.metadata.bam_index.file_name, bai_target)
->    
+>
 >        ## Extract idxstats
 >        import pysam
 >        bam_idxstats_data = pysam.idxstats(hda.file_name)
->    
+>
 >    %>
 >    <html>
 >        <head>
@@ -398,7 +398,7 @@ functional changes to the mako files.
 >                    for(var i = 0; i < data.length ; i++) {
 >                        var line = data[i];
 >                        var chunks = line.split("\t");
->    
+>
 >                        if(chunks[0].split("_").length == 1) { // only if it does not contain underscore
 >                            output[chunks[0]] = parseInt(chunks[2]);
 >                        }
@@ -427,7 +427,7 @@ chromosome.
 
 ![Example visualization](../../images/vis_plugins_example.png)
 
-The full contents of this plugin are provided in the [GitHub repository related to this material in `tree/master/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot`]({{ site.github.repository_url }}/tree/master/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot).
+The full contents of this plugin are provided in the [GitHub repository related to this material in `tree/master/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot`]({{ site.github.repository_url }}/tree/{{ site.repository_branch }}/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot).
 To try out this example, simply copy this folder to the `$GALAXY_ROOT/config/plugins/visualizations/` folder
 on your (local) Galaxy and restart Galaxy.
 

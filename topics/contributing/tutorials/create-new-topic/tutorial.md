@@ -73,7 +73,11 @@ Sometimes, an hands-on tutorial is not the most appropriate format for a tutoria
 
 For each topic, a flavored Docker image must integrate the tools needed for
 the tutorials. The corresponding image must be based on official Galaxy Docker
-images. We recommend to use the content of [`templates/docker`]({{ site.github.repository_url }}/tree/master/templates/docker) as a template.
+<<<<<<< HEAD
+images. We recommend to use the content of [`templates/docker`]({{ site.github.repository_url }}/tree/{{ site.repository_branch }}/templates/docker) as a template.
+=======
+images. We recommend to use the content of [`templates/docker`]({{ site.github_repository }}/tree/{{ site.github_repository_branch }}/templates/docker) as a template.
+>>>>>>> 2688de42b8978097242dc11bfee0c9d3f1f3f017
 
 The `docker` image will also integrate the Galaxy tours available for each topics and the workflows.
 

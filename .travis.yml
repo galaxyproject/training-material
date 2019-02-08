@@ -39,6 +39,7 @@ matrix:
 install:
   - sudo apt-get update
   - sudo update-ca-certificates
+  - sudo pip install awscli
   - make install-conda
   - export PATH="$HOME/miniconda3/bin:$PATH"
   - conda config --set always_yes yes --set changeps1 no
@@ -87,4 +88,5 @@ after_success:
       make annotate
       make build
       bin/publish
+      bin/publish-archive
     fi

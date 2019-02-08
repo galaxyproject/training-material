@@ -125,7 +125,7 @@ To install to training requirements to our Galaxy, we will use Ephemeris, let's 
 
 # Installing tutorial requirements
 
-We have created a small bash script to automatically install all of a tutorial's requirements to an existing Galaxy. It's located in this repository under: [`bin/install_tutorial_requirements.sh`]({{ site.github.repository_url }}/tree/master/bin/install_tutorial_requirements.sh)
+We have created a small bash script to automatically install all of a tutorial's requirements to an existing Galaxy. It's located in this repository under: [`bin/install_tutorial_requirements.sh`]({{ site.github.repository_url }}/tree/{{ site.repository_branch }}/bin/install_tutorial_requirements.sh)
 
 In this example we will install the requirements for the [*Reference-based RNASeq*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}) tutorial to the Galaxy instance running on localhost.
 
@@ -164,7 +164,11 @@ The only thing the script cannot currently automate is the installation of the i
 
 ### Installing an entire topic
 
-If you would like to install all the requirements for every tutorial within an entire topic, you can use the script in [`bin/install_topic_requirements.sh`]({{ site.github.repository_url }}/tree/master/bin/install_topic_requirements.sh)
+<<<<<<< HEAD
+If you would like to install all the requirements for every tutorial within an entire topic, you can use the script in [`bin/install_topic_requirements.sh`]({{ site.github.repository_url }}/tree/{{ site.repository_branch }}/bin/install_topic_requirements.sh)
+=======
+If you would like to install all the requirements for every tutorial within an entire topic, you can use the script in [`bin/install_topic_requirements.sh`]({{ site.github_repository }}/tree/{{ site.github_repository_branch }}/bin/install_topic_requirements.sh)
+>>>>>>> 2688de42b8978097242dc11bfee0c9d3f1f3f017
 
 
 ### Installing a subset of components
