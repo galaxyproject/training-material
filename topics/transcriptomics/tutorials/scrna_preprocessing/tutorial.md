@@ -50,38 +50,18 @@ contributors:
   
 ---
 
-<!-- Questions for team
+<!-- General Notes
 
-* Does it make sense to split out the Understanding Barcodes section into its own tutorial
-* Does it make sense to split out the Understanding Plates and Batches into its own tutorial
-* How do I set 'requirements'?
-* All other tutorials have only 1 set of slides to accompany the material.
-   - Here I will need seperate ones for: UMIs, CelSeq
-
-Todo:
-* Split "Mitigating duplicate transcript counts with UMIs"
-* Snippets can be parameterised, so USE them more.
+* DONE Split out the "Understanding Plates and Batches" into its own tutorial (scrna-plates-batches-barcodes)
+* TODO Split out the "Understanding Barcodes" and "Mitigating duplicate transcript counts with UMIs" sections into slides
+* TODO Use parameterised snippets
 * Add a section at the end of the single batches that prompts the user to extract their workflow, and then point to a picture of your workflow.
 
 Feedback:
-* BG says the concepts of Cell barcode, UMI, and overall barcode are confusing.
 
 
 -->
 
-
-<!-- Ideally need to place this in "assets/css/main.scss", but need to
-     set a marker in the markdown to apply the correct table class
-     during the conversion process. How? 
-     
-     <div class="matrix" /> 
-      * before a matrix seems to work, but it 
-        applies all the way down
-        
-      * applying it within the first line of the table seems to place it
-        in the header, but that would make the css selectors difficult
-
--->
 
 # Introduction
 {:.no_toc}
@@ -218,7 +198,7 @@ To explore the uniqueness of counts, we must discuss the inclusion of *UMIs* in 
 >
 > Amplification is an imprecise process however, since some reads are amplified more than others, and subsequent amplification can lead to these over-amplified reads being over-amplified even more, leading to an exponential bias of some reads over others.
 >
-> 
+> <!-- .image-50 [ ] -->
 > ![Amplification Bias](../../images/scrna_amplif_errors.png "A cell with two reads from different trascripts being amplified unevenly")
 >
 > Consider the above example where two reads from different transcripts are amplified unevenly. The resulting frequency table would look like so:
@@ -971,6 +951,19 @@ The generation of a single count matrix is now complete, with the emphasis on th
 {: .comment}
 
 This concludes the first part of the tutorial which focused on the transformation of raw FASTQ data from a single batch into a count matrix. The second part of this tutorial guides us through the process of merging multiple processed batches from the first stage, and performing qualitative filtering.
+
+
+> ### {% icon details %} Workflows For All Steps
+>
+> A workflow that captures the process of all the above stages for a single pair of FASTQ is given [here](workflow/scrna_pp_celseq.ga)
+>
+> ![Single Batch Workflow](../../images/scrna_workflow_single.png "Single Batch Workflow")
+>
+> For multiple batch processing, Galaxy can make use of *Nested Workflows* that in this case can take in a list of input paired FASTQ data and process them in parallel. A workflow to just this is given [here](workflow/scrna_mp_celseq.ga)
+>
+> ![Multiple Batch Workflow](../../images/scrna_workflow_nested.png "Nested Multiple Batch Workflow")
+>
+{: .details}
 
 
 # Merging Batches Together
