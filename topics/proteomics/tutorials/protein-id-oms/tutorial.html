@@ -15,12 +15,12 @@
             ga('send', 'pageview');
         </script>
         
-        <link rel="stylesheet" href="https://training.galaxyproject.org//assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="https://training.galaxyproject.org//assets/css/main.css?v=2">
-        <link rel="stylesheet" href="https://training.galaxyproject.org//assets/css/font-awesome.css">
-        <link rel="stylesheet" href="https://training.galaxyproject.org//assets/css/academicons.css">
-        <link rel="stylesheet" href="https://training.galaxyproject.org//assets/css/syntax_highlighting.css">
-        <link rel="shortcut icon" href="https://training.galaxyproject.org//favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
 
         
         
@@ -30,7 +30,7 @@
         <meta name="description" content="Training material for proteomics workflows in Galaxy" />
         <meta property="og:title" content="Galaxy Training: Peptide and Protein ID using OpenMS tools" />
         <meta property="og:description" content="Training material for proteomics workflows in Galaxy" />
-        <meta property="og:image" content="https://training.galaxyproject.org//assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body>
         
@@ -42,8 +42,8 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="/">
-                <img src="/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
                 Galaxy Training!
             </a>
 
@@ -53,7 +53,7 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/topics/proteomics/" title="Go back to list of tutorials">
+                        <a class="nav-link" href="/training-material/topics/proteomics" title="Go back to list of tutorials">
                             <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Proteomics
                         </a>
                     </li>
@@ -187,7 +187,7 @@
 
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="/topics/proteomics#references" title="References">
+                        <a class="nav-link" href="/training-material/topics/proteomics#references" title="References">
                             <i class="fa fa-bookmark" aria-hidden="true"></i><span class="visually-hidden">references</span> Literature
                         </a>
                     </li>
@@ -234,7 +234,7 @@
         </form>
 
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="/faq" title="Check our FAQ">
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
             FAQ
         </a>
         <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
@@ -341,7 +341,7 @@
     
         
         
-        <a href="/topics/introduction">Introduction to Galaxy Analyses</a>
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
         
     
     </li>
@@ -367,9 +367,9 @@
 </ol>
 
 <p>A plethora of different software solutions exists for each step. In this tutorial, we will use <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>  for raw data conversion and tools from the <a href="https://openms.de">OpenMS software suite</a> for all other steps. We will use one peptide search engine at first and later on show how to expand the workflow for using multiple search engines. Protein inference will be performed with the Fido algorithm (<a href="https://www.ncbi.nlm.nih.gov/pubmed/20712337">Serang et al, JPR, (2010)</a>).
-This tutorial covers peptide and protein <strong>identification</strong> only, but you may use the output of this tutorial for the <a href="/topics/proteomics/tutorials/protein-quant-sil/tutorial.html">tutorial on protein quantitation</a>.</p>
+This tutorial covers peptide and protein <strong>identification</strong> only, but you may use the output of this tutorial for the <a href="/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html">tutorial on protein quantitation</a>.</p>
 
-<p>For an alternative protein ID workflow using the <a href="https://compomics.com/">Compomics</a> tools <a href="https://compomics.github.io/projects/searchgui.html">SearchGUI</a> and <a href="https://compomics.github.io/projects/peptide-shaker.html">PeptideShaker</a>, please consult <a href="/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html">this tutorial</a>.
+<p>For an alternative protein ID workflow using the <a href="https://compomics.com/">Compomics</a> tools <a href="https://compomics.github.io/projects/searchgui.html">SearchGUI</a> and <a href="https://compomics.github.io/projects/peptide-shaker.html">PeptideShaker</a>, please consult <a href="/training-material/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html">this tutorial</a>.
 The latter tutorial does not allow to continue with the tutorial on protein quantitation.</p>
 
 <h1 class="no_toc" id="input-data">Input data</h1>
@@ -379,7 +379,7 @@ in <a href="https://www.ncbi.nlm.nih.gov/pubmed/24678044">Vaudel et al., 2014, P
 about the dataset can be found on <a href="https://www.ebi.ac.uk/pride/archive/projects/PXD000674">PRIDE</a>.
 For step 2 we will use a validated human Uniprot FASTA database with appended decoys.</p>
 
-<p>If you already completed the tutorial on <a href="/topics/proteomics/tutorials/database-handling/tutorial.html">Database Handling</a>
+<p>If you already completed the tutorial on <a href="/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Database Handling</a>
 you can use the constructed database including decoys.
 You can find a prepared database, as well as the input LC-MS/MS data in different file formats on <a href="https://zenodo.org/record/796184">Zenodo</a>.</p>
 
@@ -687,7 +687,7 @@ By comparing results of multiple search engines, you may improve the <em>sensiti
 
         
         <h1>Useful literature</h1>
-        <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/topics/proteomics#references">here</a>.</p>
+        <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/proteomics#references">here</a>.</p>
         
 
         <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
@@ -715,7 +715,7 @@ By comparing results of multiple search engines, you may improve the <em>sensiti
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/hall-of-fame">contributors</a> (Björn Grüning, Florian Christoph Sigloch)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Björn Grüning, Florian Christoph Sigloch)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
@@ -725,10 +725,10 @@ By comparing results of multiple search engines, you may improve the <em>sensiti
 </footer>
 
     </body>
-    <script type="text/javascript" src="https://training.galaxyproject.org//assets/js/jquery.slim.min.js"></script>
-    <script type="text/javascript" src="https://training.galaxyproject.org//assets/js/popper.min.js"></script>
-    <script type="text/javascript" src="https://training.galaxyproject.org//assets/js/bootstrap.min.js?v=3"></script>
-    <script type="text/javascript" src="https://training.galaxyproject.org//assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://training.galaxyproject.org//assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
 </html>
