@@ -33,7 +33,7 @@ UseGalaxy.eu has developed Training Infrastructure as a Service (TIaaS for short
 
 Consider the requirements for your training:
 
-- Do you need really special tools that are not already available on EU? The EU server supports [most training workflows]({{ site.url }}{{ site.baseurl }}/badges/#galaxy-europe), but if you need something special you might want to [contact the admins](mailto:contact@usegalaxy.eu) to see if they can accomodate your needs.
+- Do you need really special tools that are not already available on EU? The EU server supports [most training workflows]({{ site.url }}/badges/#galaxy-europe), but if you need something special you might want to [contact the admins](mailto:contact@usegalaxy.eu) to see if they can accomodate your needs.
 - Do you have special private training data that should be made public? If so the EU server is not appropriate
 - Do you need extra guarantees that the server will be online? The EU server has very good uptime for a server run by an academic group, but it cannot make promises regarding availability.
 
