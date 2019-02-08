@@ -17,12 +17,12 @@
             ga('send', 'pageview');
         </script>
         {% endif %}
-        <link rel="stylesheet" href="{{ "/assets/css/bootstrap.min.css?v=3" | prepend: site.baseurl }}">
-        <link rel="stylesheet" href="{{ "/assets/css/main.css?v=2" | prepend: site.baseurl }}">
-        <link rel="stylesheet" href="{{ "/assets/css/font-awesome.css" | prepend: site.baseurl }}">
-        <link rel="stylesheet" href="{{ "/assets/css/academicons.css" | prepend: site.baseurl }}">
-        <link rel="stylesheet" href="{{ "/assets/css/syntax_highlighting.css" | prepend: site.baseurl }}">
-        <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon" />
+        <link rel="stylesheet" href="{{ "/assets/css/bootstrap.min.css?v=3" | prepend: site.url }}">
+        <link rel="stylesheet" href="{{ "/assets/css/main.css?v=2" | prepend: site.url }}">
+        <link rel="stylesheet" href="{{ "/assets/css/font-awesome.css" | prepend: site.url }}">
+        <link rel="stylesheet" href="{{ "/assets/css/academicons.css" | prepend: site.url }}">
+        <link rel="stylesheet" href="{{ "/assets/css/syntax_highlighting.css" | prepend: site.url }}">
+        <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.url }}" type="image/x-icon" />
 
         {% assign topic = site.data[page.topic_name] %}
         {% assign og_title = topic.title %}
@@ -36,15 +36,15 @@
         <meta name="description" content="{{ og_desc | strip_html | truncate: 60}}" />
         <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}" />
         <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}" />
-        <meta property="og:image" content="{{ "/assets/images/GTNLogo1000.png" | prepend: site.baseurl }}" />
+        <meta property="og:image" content="{{ "/assets/images/GTNLogo1000.png" | prepend: site.url }}" />
     </head>
     <body>
         {{ content }}
     </body>
-    <script type="text/javascript" src="{{ "/assets/js/jquery.slim.min.js" | prepend: site.baseurl }}"></script>
-    <script type="text/javascript" src="{{ "/assets/js/popper.min.js" | prepend: site.baseurl }}"></script>
-    <script type="text/javascript" src="{{ "/assets/js/bootstrap.min.js?v=3" | prepend: site.baseurl }}"></script>
-    <script type="text/javascript" src="{{ "/assets/js/details-element-polyfill.js" | prepend: site.baseurl }}"></script>
+    <script type="text/javascript" src="{{ "/assets/js/jquery.slim.min.js" | prepend: site.url }}"></script>
+    <script type="text/javascript" src="{{ "/assets/js/popper.min.js" | prepend: site.url }}"></script>
+    <script type="text/javascript" src="{{ "/assets/js/bootstrap.min.js?v=3" | prepend: site.url }}"></script>
+    <script type="text/javascript" src="{{ "/assets/js/details-element-polyfill.js" | prepend: site.url }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="{{ "/assets/js/main.js" | prepend: site.baseurl }}"></script>
+    <script type="text/javascript" src="{{ "/assets/js/main.js" | prepend: site.url }}"></script>
 </html>
