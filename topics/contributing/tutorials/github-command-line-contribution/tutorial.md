@@ -111,7 +111,7 @@ To modify the content of the repository, you need a copy of it on your computer.
 
 # Create a new branch
 
-You have now your repository locally and you want to modify it. For this example tutorial, you will add yourself as contributor of the project to appear on the [Hall of Fame]({{ site.baseurl }}/hall-of-fame).
+You have now your repository locally and you want to modify it. For this example tutorial, you will add yourself as contributor of the project to appear on the [Hall of Fame]({{ site.baseurl }}{% link hall-of-fame.md %}).
 
 In GitHub flow, there is a concept: one new feature or change = one branch.
 
@@ -119,7 +119,7 @@ When you're working on a project, you're going to have a bunch of different feat
 
 ![Divergence of a branch compared to master](../../images/PR_branches_01.png "When you create a branch in your project, you're creating an environment where you can try out new ideas. Changes you make on a branch don't affect the master branch")
 
-Here for this tutorial, you will create a branch called "my_new_branch" in which you will modify the `CONTRIBUTORS.yaml` file, the file used to generate the [Hall of Fame]({{ site.baseurl }}/hall-of-fame).
+Here for this tutorial, you will create a branch called "my_new_branch" in which you will modify the `CONTRIBUTORS.yaml` file, the file used to generate the [Hall of Fame]({{ site.baseurl }}{% link hall-of-fame.md %}).
 
 > ### {% icon hands_on %} Hands-on: Create a branch
 >
@@ -217,7 +217,7 @@ The changes you made on your branch are only on the local copy of the repository
 
 # Open a pull request
 
-You pushed your changes to GitHub, but currently they are only on your fork. You want to have these changes in the main GitHub repository in order to appear on our [Hall of Fame]({{ site.baseurl }}/hall-of-fame) online. You can't add or push directly the main GitHub repository, so you need to create what we call a pull request:
+You pushed your changes to GitHub, but currently they are only on your fork. You want to have these changes in the main GitHub repository in order to appear on our [Hall of Fame]({{ site.baseurl }}{% link hall-of-fame.md %}) online. You can't add or push directly the main GitHub repository, so you need to create what we call a pull request:
 
 ![Pull request](../../images/PR_schema_05.png "Pull Requests provide a way to notify project maintainers about the changes you'd like them to consider")
 
@@ -244,7 +244,7 @@ You pushed your changes to GitHub, but currently they are only on your fork. You
 
 Once the pull is open, it will be reviewed. There are two possible outcomes:
 
-1. Your pull request is accepted. Congratulations! Your changes will be merged into the master branch of the original repository. The website will be re-built and you will be in the [Hall of Fame]({{ site.baseurl }}/hall-of-fame)
+1. Your pull request is accepted. Congratulations! Your changes will be merged into the master branch of the original repository. The website will be re-built and you will be in the [Hall of Fame]({{ site.baseurl }}{% link hall-of-fame.md %})
 2. Your pull request needs modifications: the reviewers will ask for some changes, possibly because the automatic tests are failing.
 
 # Make the requested changes

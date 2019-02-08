@@ -53,7 +53,7 @@ The GitHub repository for the training material is: [{{ site.github.repository_u
 >
 {: .hands_on}
 
-This `CONTRIBUTORS.yaml` file is where we collect the information (name, email, etc) about the different contributors to display them on our [Hall of Fame]({{ site.baseurl }}/hall-of-fame). You will add your information there. But first you need to sign in to GitHub to be able to change this file.
+This `CONTRIBUTORS.yaml` file is where we collect the information (name, email, etc) about the different contributors to display them on our [Hall of Fame]({{ site.baseurl }}{% link hall-of-fame.md %}). You will add your information there. But first you need to sign in to GitHub to be able to change this file.
 
 > ### {% icon hands_on %} Hands-on: Sign in to GitHub
 >
@@ -115,7 +115,7 @@ Without realizing it, GitHub let you create your first branch (named here `patch
 
 # Open a Pull Request
 
-Then the addition of your information in the `CONTRIBUTORS.yaml` file is currently only on your branch `patch-1`. Not on the `master` branch and so not only on the [Hall of Fame]({{ site.baseurl }}/hall-of-fame). You can't add or push directly to the `master` branch, so you need to create what we call a pull request.
+Then the addition of your information in the `CONTRIBUTORS.yaml` file is currently only on your branch `patch-1`. Not on the `master` branch and so not only on the [Hall of Fame]({{ site.baseurl }}{% link hall-of-fame.md %}). You can't add or push directly to the `master` branch, so you need to create what we call a pull request.
 
 The GitHub interface guides you through this process: after clicking on **Propose file change**, a new page opens:
 
@@ -150,7 +150,7 @@ You have created your first pull request!
 
 Your pull request will be reviewed. There are two possible outcomes:
 
-1. Your pull request is accepted. Congratulations! Your changes will be merged into the master branch of the original repository. The website will be re-built and you will be in the [Hall of Fame]({{ site.baseurl }}/hall-of-fame)
+1. Your pull request is accepted. Congratulations! Your changes will be merged into the master branch of the original repository. The website will be re-built and you will be in the [Hall of Fame]({{ site.baseurl }}{% link hall-of-fame.md %})
 2. Your pull request needs modifications: the reviewers will ask for some changes, possibly because the automatic tests are failing.
 
 # Update a Pull Request
