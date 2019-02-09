@@ -380,7 +380,7 @@ It is also good practice to visualise the read alignments in the BAM file, for e
 
 > ### {% icon tip %} Tip: Downloading a collection
 >
-> To download a collection of datasets (e.g. the collection of BAM files) click on the floppy disck icon within the collection. This will download a tar file containing all the datasets in the collection. Note that for BAM files the .bai indexes (required for IGV) will be included automatically in the download.
+> To download a collection of datasets (e.g. the collection of BAM files) click on the floppy disk icon within the collection. This will download a tar file containing all the datasets in the collection. Note that for BAM files the .bai indexes (required for IGV) will be included automatically in the download.
 >
 {: .tip}
 
