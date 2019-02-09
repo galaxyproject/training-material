@@ -133,9 +133,8 @@ In order to get these files into Galaxy, we will want to do a few things:
 >
 >        ![Rules Editor](../../images/rna-seq-reads-to-counts/rule_editor.png "Rules Editor")
 >
->        You should see a collection (list) called `fastqs` in your history containing all 12 FASTQ files, like below.
+>        You should see a collection (list) called `fastqs` in your history containing all 12 FASTQ files.
 >
->        ![Collection](../../images/rna-seq-reads-to-counts/collection.png "Collection of FASTQs")
 >
 {: .hands_on}
 
@@ -182,9 +181,6 @@ Take a look at one of the FASTQ files to see what it contains.
 >
 > 1. Click on the collection name (`fastqs`)
 > 2. Click on the name of one of the collection elements (e.g `MCL1-DL`). Check that the data type is `fastqsanger.gz` and the database `mm10`.
->
->    ![Collection Element](../../images/rna-seq-reads-to-counts/collection_element.png "Collection Element"){: width="50px" height="50px"}
->
 > 3. Click on the {% icon galaxy-eye %} (eye) icon of one of the FASTQ files to have a look at what it contains
 {: .hands_on}
 
@@ -199,9 +195,6 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >
 > 1. **FastQC** {% icon tool %} with the following parameters:
 >    - {% icon param-collection %} *"Short read data from your current history"*: `fastqs` (Input dataset collection)
->
->    > ![FastQC Collection](../../images/rna-seq-reads-to-counts/run_fastqc.png "Run FastQC on collection"){: width="50px"}
->
 > 2. Inspect the `Webpage` output of **FastQC** {% icon tool %} for the `MCL1-DL` sample by clicking on the {% icon galaxy-eye %} (eye) icon
 {: .hands_on}
 
@@ -231,7 +224,6 @@ The FastQC report contains a lot of information and we can look at the report fo
 >        - In *"FastQC output"*
 >           - {% icon param-select %} *"Type of FastQC output?"*: `Raw data`
 >           - {% icon param-collection %} *"FastQC output"*: `RawData` files (output of **FastQC** {% icon tool %} on trimmed reads)
->           ![MultiQC](../../images/rna-seq-reads-to-counts/multiqc.png "Run MultiQC on collection"){: width="50px"}
 > 2. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
 
@@ -388,9 +380,8 @@ It is also good practice to visualise the read alignments in the BAM file, for e
 
 > ### {% icon tip %} Tip: Downloading a collection
 >
-> To download a collection of datasets (e.g. the collection of BAM files) click on the floppy icon as shown below. This will download a tar file containing all the datasets in the collection. Note that for BAM files the .bai indexes (required for IGV) will be included automatically in the download.
+> To download a collection of datasets (e.g. the collection of BAM files) click on the floppy disck icon within the collection. This will download a tar file containing all the datasets in the collection. Note that for BAM files the .bai indexes (required for IGV) will be included automatically in the download.
 >
-> ![Downloading collection](../../images/rna-seq-reads-to-counts/collection_download.png "Downloading a collection")
 {: .tip}
 
 ## Check strandness
@@ -715,9 +706,7 @@ BAM)** {% icon tool %})
 {: .question}
 
 
-The MultiQC report can be downloaded by clicking on the floppy disk icon on the dataset in the history as shown below.
-
-![MultiQC download](../../images/rna-seq-reads-to-counts/multiqc_download.png "Download MultiQC report")
+The MultiQC report can be downloaded by clicking on the floppy disk icon on the dataset in the history.
 
 > ### {% icon question %} Questions
 >
@@ -737,9 +726,7 @@ The MultiQC report can be downloaded by clicking on the floppy disk icon on the 
 
 # Creating a workflow of the analysis
 
-You can now extract a workflow from the steps that have been performed, as shown in the [Peaks to Genes tutorial]({{ site.baseurl }}/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html#extracting-workflow). This is a way to help keep a record of the steps performed. It also enables efficient rerunning of a multi-step analysis, such as RNA-seq.
-
-![fastq to counts Workflow](../../images/rna-seq-reads-to-counts/workflow.png "FASTQ to counts Workflow")
+You can now extract a workflow from the steps that have been performed, as shown in the [Extracting Workflows from Histories tutorial]({{ site.baseurl }}/topics/galaxy-ui/tutorials/history-to-workflow/tutorial.html). This is a way to help keep a record of the steps performed. It also enables efficient rerunning of a multi-step analysis, such as RNA-seq.
 
 # Conclusion
 {:.no_toc}
