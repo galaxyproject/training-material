@@ -538,9 +538,7 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
 
           <figure id="figure-3"><img src="../../images/rna-seq-reads-to-counts/rule_editor.png" alt="Rules Editor" title="Rules Editor" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Rules Editor</figcaption></figure>
 
-          <p>You should see a collection (list) called <code class="highlighter-rouge">fastqs</code> in your history containing all 12 FASTQ files, like below.</p>
-
-          <figure id="figure-4"><img src="../../images/rna-seq-reads-to-counts/collection.png" alt="Collection" title="Collection of FASTQs" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Collection of FASTQs</figcaption></figure>
+          <p>You should see a collection (list) called <code class="highlighter-rouge">fastqs</code> in your history containing all 12 FASTQ files.</p>
         </li>
       </ul>
     </li>
@@ -611,11 +609,7 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
 
   <ol>
     <li>Click on the collection name (<code class="highlighter-rouge">fastqs</code>)</li>
-    <li>
-      <p>Click on the name of one of the collection elements (e.g <code class="highlighter-rouge">MCL1-DL</code>). Check that the data type is <code class="highlighter-rouge">fastqsanger.gz</code> and the database <code class="highlighter-rouge">mm10</code>.</p>
-
-      <figure id="figure-5" width="50px" height="50px"><img src="../../images/rna-seq-reads-to-counts/collection_element.png" alt="Collection Element" title="Collection Element" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Collection Element</figcaption></figure>
-    </li>
+    <li>Click on the name of one of the collection elements (e.g <code class="highlighter-rouge">MCL1-DL</code>). Check that the data type is <code class="highlighter-rouge">fastqsanger.gz</code> and the database <code class="highlighter-rouge">mm10</code>.</li>
     <li>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of one of the FASTQ files to have a look at what it contains</li>
   </ol>
 </blockquote>
@@ -634,10 +628,6 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
       <ul>
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Short read data from your current history”</em>: <code class="highlighter-rouge">fastqs</code> (Input dataset collection)</li>
       </ul>
-
-      <blockquote>
-        <figure id="figure-6" width="50px"><img src="../../images/rna-seq-reads-to-counts/run_fastqc.png" alt="FastQC Collection" title="Run FastQC on collection" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Run FastQC on collection</figcaption></figure>
-      </blockquote>
     </li>
     <li>Inspect the <code class="highlighter-rouge">Webpage</code> output of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <code class="highlighter-rouge">MCL1-DL</code> sample by clicking on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon</li>
   </ol>
@@ -659,7 +649,7 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
 This information can be seen at the top of the FastQC Webpage as below.</li>
     </ol>
 
-    <figure id="figure-7" width="50px"><img src="../../images/rna-seq-reads-to-counts/fastqc_webpage.png" alt="FastQC Webpage" title="FastQC Webpage" /><figcaption><span class="figcaption-prefix">Figure 7:</span> FastQC Webpage</figcaption></figure>
+    <figure id="figure-4" width="50px"><img src="../../images/rna-seq-reads-to-counts/fastqc_webpage.png" alt="FastQC Webpage" title="FastQC Webpage" /><figcaption><span class="figcaption-prefix">Figure 4:</span> FastQC Webpage</figcaption></figure>
 
   </blockquote>
 
@@ -681,7 +671,6 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
                 <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of FastQC output?”</em>: <code class="highlighter-rouge">Raw data</code></li>
                 <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FastQC output”</em>: <code class="highlighter-rouge">RawData</code> files (output of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on trimmed reads)</li>
               </ul>
-              <figure id="figure-8" width="50px"><img src="../../images/rna-seq-reads-to-counts/multiqc.png" alt="MultiQC" title="Run MultiQC on collection" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Run MultiQC on collection</figcaption></figure>
             </li>
           </ul>
         </li>
@@ -691,18 +680,18 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
   </ol>
 </blockquote>
 
-<p>Note that these are the results for just 1000 reads. The FastQC results for the full dataset are shown below. These 1000 reads are the first reads from the FASTQ files, and the first reads usually originate from the flowcell edges, so we can expect that they may have lower quality and the patterns may be a bit different from the distribution in the full dataset.</p>
+<p>Note that these are the results for just 1000 reads. The FastQC results for the full dataset are shown below. The 1000 reads are the first reads from the FASTQ files, and the first reads usually originate from the flowcell edges, so we can expect that they may have lower quality and the patterns may be a bit different from the distribution in the full dataset.</p>
 
-<p>Here, most of the plots in the small FASTQs look similar to the full dataset. However, in the small FASTQs, we see less duplication, some Ns in the reads and some overrepresented sequences.</p>
+<p>You should see that most of the plots in the small FASTQs look similar to the full dataset. However, in the small FASTQs, there is less duplication, some Ns in the reads and some overrepresented sequences.</p>
 
-<figure id="figure-9"><img src="../../images/rna-seq-reads-to-counts/fastqc_table.png" alt="General Statistics" title="General Statistics" /><figcaption><span class="figcaption-prefix">Figure 9:</span> General Statistics</figcaption></figure>
-<figure id="figure-10"><img src="../../images/rna-seq-reads-to-counts/fastqc_sequence_counts_plot.png" alt="Sequence Counts" title="Sequence Counts" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Sequence Counts</figcaption></figure>
-<figure id="figure-11"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality" title="Sequence Quality" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Sequence Quality</figcaption></figure>
-<figure id="figure-12"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_sequence_quality_scores_plot.png" alt="Per Sequence Quality Scores" title="Per Sequence Quality Scores" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Per Sequence Quality Scores</figcaption></figure>
-<figure id="figure-13"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_sequence_gc_content_plot.png" alt="Per Sequence GC Content" title="Per Sequence GC Content" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Per Sequence GC Content</figcaption></figure>
-<figure id="figure-14"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_base_n_content_plot.png" alt="Per base N content" title="Per base N content" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Per base N content</figcaption></figure>
-<figure id="figure-15"><img src="../../images/rna-seq-reads-to-counts/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels" title="Sequence Duplication Levels" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Sequence Duplication Levels</figcaption></figure>
-<figure id="figure-16"><img src="../../images/rna-seq-reads-to-counts/fastqc_adapter_content_plot.png" alt="Adapter Content" title="Adapter Content" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Adapter Content</figcaption></figure>
+<figure id="figure-5"><img src="../../images/rna-seq-reads-to-counts/fastqc_table.png" alt="General Statistics" title="General Statistics" /><figcaption><span class="figcaption-prefix">Figure 5:</span> General Statistics</figcaption></figure>
+<figure id="figure-6"><img src="../../images/rna-seq-reads-to-counts/fastqc_sequence_counts_plot.png" alt="Sequence Counts" title="Sequence Counts" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Sequence Counts</figcaption></figure>
+<figure id="figure-7"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality" title="Sequence Quality" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Sequence Quality</figcaption></figure>
+<figure id="figure-8"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_sequence_quality_scores_plot.png" alt="Per Sequence Quality Scores" title="Per Sequence Quality Scores" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Per Sequence Quality Scores</figcaption></figure>
+<figure id="figure-9"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_sequence_gc_content_plot.png" alt="Per Sequence GC Content" title="Per Sequence GC Content" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Per Sequence GC Content</figcaption></figure>
+<figure id="figure-10"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_base_n_content_plot.png" alt="Per base N content" title="Per base N content" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Per base N content</figcaption></figure>
+<figure id="figure-11"><img src="../../images/rna-seq-reads-to-counts/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels" title="Sequence Duplication Levels" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Sequence Duplication Levels</figcaption></figure>
+<figure id="figure-12"><img src="../../images/rna-seq-reads-to-counts/fastqc_adapter_content_plot.png" alt="Adapter Content" title="Adapter Content" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Adapter Content</figcaption></figure>
 
 <p>See the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control tutorial</a> for more information on FastQC plots.</p>
 
@@ -724,9 +713,9 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
   </blockquote>
 </blockquote>
 
-<p>We will use Cutadapt to trim the reads to remove the Illumina adapter and any low quality bases at the ends (quality score &lt; 20). We will also output the Cutadapt report for summarising with MultiQC.</p>
+<p>We will use Cutadapt to trim the reads to remove the Illumina adapter and any low quality bases at the ends (quality score &lt; 20). We will discard any sequences that are too short (&lt; 20bp) after trimming. We will also output the Cutadapt report for summarising with MultiQC.</p>
 
-<p>The Cutadapt tool Help section provides the sequence we can use to trim this standard Illumina adapter <code class="highlighter-rouge">AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC</code>, as given on the <a href="https://cutadapt.readthedocs.io/en/stable/guide.html#illumina-truseq">Cutadapt website</a>. Other Illumina adapter sequences (e.g. Nextera) can be found at the <a href="http://sapac.support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html">Illumina website</a>. We will discard any sequences that are too short (&lt; 20bp) after trimming.</p>
+<p>The Cutadapt tool Help section provides the sequence we can use to trim this standard Illumina adapter <code class="highlighter-rouge">AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC</code>, as given on the <a href="https://cutadapt.readthedocs.io/en/stable/guide.html#illumina-truseq">Cutadapt website</a>. For trimming paired-end data see the Cutadapt Help section. Other Illumina adapter sequences (e.g. Nextera) can be found at the <a href="http://sapac.support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html">Illumina website</a>. Note that Cutadapt requires at least three bases to match between adapter and read to reduce the number of falsely trimmed bases, which can be changed in the Cutadapt options if desired.</p>
 
 <h2 id="trim-reads">Trim reads</h2>
 
@@ -815,8 +804,8 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-17"><img src="../../images/rna-seq-reads-to-counts/post_cutadapt_adapter_content.png" alt="Adapter Content post-trimming" title="Adapter Content post-trimming" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Adapter Content post-trimming</figcaption></figure>
-<figure id="figure-18"><img src="../../images/rna-seq-reads-to-counts/post_cutadapt_fastqc_sequence_length_distribution_plot.png" alt="Sequence Length post-trimming" title="Sequence Length post-trimming" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Sequence Length post-trimming</figcaption></figure>
+<figure id="figure-13"><img src="../../images/rna-seq-reads-to-counts/post_cutadapt_adapter_content.png" alt="Adapter Content post-trimming" title="Adapter Content post-trimming" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Adapter Content post-trimming</figcaption></figure>
+<figure id="figure-14"><img src="../../images/rna-seq-reads-to-counts/post_cutadapt_fastqc_sequence_length_distribution_plot.png" alt="Sequence Length post-trimming" title="Sequence Length post-trimming" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Sequence Length post-trimming</figcaption></figure>
 
 <p>After trimming we can see that:</p>
 
@@ -827,7 +816,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <h1 id="mapping">Mapping</h1>
 
-<p>Now that we have prepared our reads, we can align the reads for our 12 samples. There is an existing reference genome for mouse and we will map the reads to that. The current version of the mouse reference genome is <code class="highlighter-rouge">mm10/GRCm38</code>. Here we will use <a href="https://ccb.jhu.edu/software/hisat2/index.shtml">HISAT2</a>, the descendent of widely-used TopHat, to align the reads, but alternative mappers could be used, such as STAR. See the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#mapping">RNA-seq ref-based tutorial</a> for more information on RNA-seq mappers. There are often numerous mapping parameters that we can specify, but usually the default mapping parameters are fine. However, library type (paired-end vs single-end) and library strandness (stranded vs unstranded) require some different settings when mapping and counting, so they are two important pieces of information to know about samples. The mouse data comprises unstranded, single-end reads so we will specify that where necessary. If we had paired-end data or stranded data, we would specify that. HISAT2 can output a mapping summary file that tells what proportion of reads mapped to the reference genome. Summary files for multiple samples can be summarised with MultiQC. As we’re only using a subset of 1000 reads per sample, aligning should just take a minute or so. To run the full samples from this dataset would take longer.</p>
+<p>Now that we have prepared our reads, we can align the reads for our 12 samples. There is an existing reference genome for mouse and we will map the reads to that. The current version of the mouse reference genome is <code class="highlighter-rouge">mm10/GRCm38</code>. Here we will use <a href="https://ccb.jhu.edu/software/hisat2/index.shtml"><strong>HISAT2</strong></a> to align the reads. HISAT2 is the descendent of TopHat, one of the first widely-used aligners, but alternative mappers could be used, such as STAR. See the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#mapping">RNA-seq ref-based tutorial</a> for more information on RNA-seq mappers. There are often numerous mapping parameters that we can specify, but usually the default mapping parameters are fine. However, library type (paired-end vs single-end) and library strandness (stranded vs unstranded) require some different settings when mapping and counting, so they are two important pieces of information to know about samples. The mouse data comprises unstranded, single-end reads so we will specify that where necessary. HISAT2 can output a mapping summary file that tells what proportion of reads mapped to the reference genome. Summary files for multiple samples can be summarised with MultiQC. As we’re only using a subset of 1000 reads per sample, aligning should just take a minute or so. To run the full samples from this dataset would take longer.</p>
 
 <h2 id="map-reads-to-reference-genome">Map reads to reference genome</h2>
 
@@ -924,23 +913,22 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-19"><img src="../../images/rna-seq-reads-to-counts/hisat2_se_plot.png" alt="HISAT2 mapping" title="HISAT2 mapping" /><figcaption><span class="figcaption-prefix">Figure 19:</span> HISAT2 mapping</figcaption></figure>
+<figure id="figure-15"><img src="../../images/rna-seq-reads-to-counts/hisat2_se_plot.png" alt="HISAT2 mapping" title="HISAT2 mapping" /><figcaption><span class="figcaption-prefix">Figure 15:</span> HISAT2 mapping</figcaption></figure>
 
-<p>Over 90% of reads have mapped in all samples, a good mapping rate. And the vast majority of reads have mapped uniquely, they haven’t mapped to multiple locations in the reference genome.</p>
+<p>Over 90% of reads have mapped in all samples, which is a good mapping rate, and the vast majority of reads have mapped uniquely, they haven’t mapped to multiple locations in the reference genome.</p>
 
 <p>It is also good practice to visualise the read alignments in the BAM file, for example using IGV, see the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#pretreatments">RNA-seq ref-based tutorial</a>.</p>
 
 <blockquote class="tip">
   <h3 id="tip-tip-downloading-a-collection"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Downloading a collection</h3>
 
-  <p>To download a collection of datasets (e.g. the collection of BAM files) click on the floppy icon as shown below. This will download a tar file containing all the datasets in the collection. Note that for BAM files the .bai indexes (required for IGV) will be included automatically in the download.</p>
+  <p>To download a collection of datasets (e.g. the collection of BAM files) click on the floppy disk icon within the collection. This will download a tar file containing all the datasets in the collection. Note that for BAM files the .bai indexes (required for IGV) will be included automatically in the download.</p>
 
-  <figure id="figure-20"><img src="../../images/rna-seq-reads-to-counts/collection_download.png" alt="Downloading collection" title="Downloading a collection" /><figcaption><span class="figcaption-prefix">Figure 20:</span> Downloading a collection</figcaption></figure>
 </blockquote>
 
 <h2 id="check-strandness">Check strandness</h2>
 
-<p>As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to “guess” the strandness, as explained in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">RNA-seq ref-based tutorial</a>. This is done through comparing the “strandness of reads” with the “strandness of transcripts”. For this tool, and many of the other RSeQC tools, a reference bed file of genes (<code class="highlighter-rouge">reference genes</code>) is required. RSeQC provides some reference BED files for model organisms. You can import the RSeQC mm10 RefSeq BED file from the link <code class="highlighter-rouge">https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download</code> (and rename to <code class="highlighter-rouge">reference genes</code>) or import a file from Shared data if provided. Alternatively, you can provide your own BED file of reference genes, for example from UCSC (see the <a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html">Peaks to Genes tutorial</a>. Or the <strong>Convert GTF to BED12</strong> tool can be used to convert a GTF into a BED file.</p>
+<p>As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use the RSeQC <strong>Infer Experiment</strong> tool to “guess” the strandness, as explained in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">RNA-seq ref-based tutorial</a>. This is done through comparing the “strandness of reads” with the “strandness of transcripts”. For this tool, and many of the other RSeQC tools, a reference bed file of genes (<code class="highlighter-rouge">reference genes</code>) is required. RSeQC provides some reference BED files for model organisms. You can import the RSeQC mm10 RefSeq BED file from the link <code class="highlighter-rouge">https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download</code> (and rename to <code class="highlighter-rouge">reference genes</code>) or import a file from Shared data if provided. Alternatively, you can provide your own BED file of reference genes, for example from UCSC (see the <a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html">Peaks to Genes tutorial</a>, or the <strong>Convert GTF to BED12</strong> tool can be used to convert a reference GTF file into BED format.</p>
 
 <blockquote>
 
@@ -1000,7 +988,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-21"><img src="../../images/rna-seq-reads-to-counts/rseqc_infer_experiment_plot.png" alt="Infer Experiment" title="Infer Experiment" /><figcaption><span class="figcaption-prefix">Figure 21:</span> Infer Experiment</figcaption></figure>
+<figure id="figure-16"><img src="../../images/rna-seq-reads-to-counts/rseqc_infer_experiment_plot.png" alt="Infer Experiment" title="Infer Experiment" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Infer Experiment</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1052,7 +1040,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-22"><img src="../../images/rna-seq-reads-to-counts/picard_deduplication.png" alt="MarkDups metrics" title="MarkDups metrics" /><figcaption><span class="figcaption-prefix">Figure 22:</span> MarkDups metrics</figcaption></figure>
+<figure id="figure-17"><img src="../../images/rna-seq-reads-to-counts/picard_deduplication.png" alt="MarkDups metrics" title="MarkDups metrics" /><figcaption><span class="figcaption-prefix">Figure 17:</span> MarkDups metrics</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1104,8 +1092,8 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-23"><img src="../../images/rna-seq-reads-to-counts/samtools-idxstats-mapped-reads-plot.png" alt="IdxStats chromsome mappings" title="IdxStats Chromosome Mappings" /><figcaption><span class="figcaption-prefix">Figure 23:</span> IdxStats Chromosome Mappings</figcaption></figure>
-<figure id="figure-24"><img src="../../images/rna-seq-reads-to-counts/samtools-idxstats-xy-plot.png" alt="IdxStats XY " title="IdxStats X/Y Mappings" /><figcaption><span class="figcaption-prefix">Figure 24:</span> IdxStats X/Y Mappings</figcaption></figure>
+<figure id="figure-18"><img src="../../images/rna-seq-reads-to-counts/samtools-idxstats-mapped-reads-plot.png" alt="IdxStats chromsome mappings" title="IdxStats Chromosome Mappings" /><figcaption><span class="figcaption-prefix">Figure 18:</span> IdxStats Chromosome Mappings</figcaption></figure>
+<figure id="figure-19"><img src="../../images/rna-seq-reads-to-counts/samtools-idxstats-xy-plot.png" alt="IdxStats XY " title="IdxStats X/Y Mappings" /><figcaption><span class="figcaption-prefix">Figure 19:</span> IdxStats X/Y Mappings</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1170,10 +1158,10 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-25"><img src="../../images/rna-seq-reads-to-counts/rseqc_gene_body_coverage_plot.png" alt="Gene Body Coverage" title="Gene Body Coverage" /><figcaption><span class="figcaption-prefix">Figure 25:</span> Gene Body Coverage</figcaption></figure>
+<figure id="figure-20"><img src="../../images/rna-seq-reads-to-counts/rseqc_gene_body_coverage_plot.png" alt="Gene Body Coverage" title="Gene Body Coverage" /><figcaption><span class="figcaption-prefix">Figure 20:</span> Gene Body Coverage</figcaption></figure>
 
 <p>The plot below from the RSeQC website shows what samples with 3’biased coverage would look like.</p>
-<figure id="figure-26"><img src="../../images/rna-seq-reads-to-counts/genebodycoverage.png" alt="Gene Body Coverage comparison" title="Gene Body Coverage comparison" /><figcaption><span class="figcaption-prefix">Figure 26:</span> Gene Body Coverage comparison</figcaption></figure>
+<figure id="figure-21"><img src="../../images/rna-seq-reads-to-counts/genebodycoverage.png" alt="Gene Body Coverage comparison" title="Gene Body Coverage comparison" /><figcaption><span class="figcaption-prefix">Figure 21:</span> Gene Body Coverage comparison</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-6"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1227,7 +1215,7 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-27"><img src="../../images/rna-seq-reads-to-counts/rseqc_read_distribution_plot.png" alt="Read Distribution" title="Read Distribution" /><figcaption><span class="figcaption-prefix">Figure 27:</span> Read Distribution</figcaption></figure>
+<figure id="figure-22"><img src="../../images/rna-seq-reads-to-counts/rseqc_read_distribution_plot.png" alt="Read Distribution" title="Read Distribution" /><figcaption><span class="figcaption-prefix">Figure 22:</span> Read Distribution</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-7"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1315,7 +1303,7 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-28"><img src="../../images/rna-seq-reads-to-counts/featureCounts_assignment_plot.png" alt="featureCounts assignments" title="featureCounts assignments" /><figcaption><span class="figcaption-prefix">Figure 28:</span> featureCounts assignments</figcaption></figure>
+<figure id="figure-23"><img src="../../images/rna-seq-reads-to-counts/featureCounts_assignment_plot.png" alt="featureCounts assignments" title="featureCounts assignments" /><figcaption><span class="figcaption-prefix">Figure 23:</span> featureCounts assignments</figcaption></figure>
 
 <blockquote class="question">
   <h3 id="question-questions-8"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1352,7 +1340,7 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
 
 <p>Take a look at the output (the output for the full dataset is shown below).</p>
 
-<figure id="figure-29"><img src="../../images/rna-seq-reads-to-counts/count_matrix.png" alt="Count matrix" title="Count matrix" /><figcaption><span class="figcaption-prefix">Figure 29:</span> Count matrix</figcaption></figure>
+<figure id="figure-24"><img src="../../images/rna-seq-reads-to-counts/count_matrix.png" alt="Count matrix" title="Count matrix" /><figcaption><span class="figcaption-prefix">Figure 24:</span> Count matrix</figcaption></figure>
 
 <p>Now it is easier to see the counts for a gene across all samples. The accompanying limma-voom tutorial shows how gene information (symbols etc) can be added to a count matrix.</p>
 
@@ -1375,7 +1363,7 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
 
     <p>MultiQC summary of all programs used (screenshot from the full dataset).</p>
 
-    <figure id="figure-30"><img src="../../images/rna-seq-reads-to-counts/multiqc_summary.png" alt="MultiQC Summary" title="MultiQC Summary" /><figcaption><span class="figcaption-prefix">Figure 30:</span> MultiQC Summary</figcaption></figure>
+    <figure id="figure-25"><img src="../../images/rna-seq-reads-to-counts/multiqc_summary.png" alt="MultiQC Summary" title="MultiQC Summary" /><figcaption><span class="figcaption-prefix">Figure 25:</span> MultiQC Summary</figcaption></figure>
 
     <p><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
     <ul>
@@ -1499,9 +1487,7 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
 
 </blockquote>
 
-<p>The MultiQC report can be downloaded by clicking on the floppy disk icon on the dataset in the history as shown below.</p>
-
-<figure id="figure-31"><img src="../../images/rna-seq-reads-to-counts/multiqc_download.png" alt="MultiQC download" title="Download MultiQC report" /><figcaption><span class="figcaption-prefix">Figure 31:</span> Download MultiQC report</figcaption></figure>
+<p>The MultiQC report can be downloaded by clicking on the floppy disk icon on the dataset in the history.</p>
 
 <blockquote class="question">
   <h3 id="question-questions-10"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1525,9 +1511,7 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
 
 <h1 id="creating-a-workflow-of-the-analysis">Creating a workflow of the analysis</h1>
 
-<p>You can now extract a workflow from the steps that have been performed, as shown in the <a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html#extracting-workflow">Peaks to Genes tutorial</a>. This is a way to help keep a record of the steps performed. It also enables efficient rerunning of a multi-step analysis, such as RNA-seq.</p>
-
-<figure id="figure-32"><img src="../../images/rna-seq-reads-to-counts/workflow.png" alt="fastq to counts Workflow" title="FASTQ to counts Workflow" /><figcaption><span class="figcaption-prefix">Figure 32:</span> FASTQ to counts Workflow</figcaption></figure>
+<p>You can now extract a workflow from the steps that have been performed, as shown in the <a href="/training-material/topics/galaxy-ui/tutorials/history-to-workflow/tutorial.html">Extracting Workflows from Histories tutorial</a>. This is a way to help keep a record of the steps performed. It also enables efficient rerunning of a multi-step analysis, such as RNA-seq.</p>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 

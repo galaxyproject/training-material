@@ -261,22 +261,6 @@
     {
       "@type": "Person",
       "name": "bphipson"
-    },
-    {
-      "@type": "Person",
-      "name": "annatrigos"
-    },
-    {
-      "@type": "Person",
-      "name": "mritchie"
-    },
-    {
-      "@type": "Person",
-      "name": "hdashnow"
-    },
-    {
-      "@type": "Person",
-      "name": "charitylaw"
     }
   ],
   "keywords": "mouse",
@@ -389,7 +373,7 @@
 
 <p>Sometimes there is quite a long list of genes to interpret after a differential expression analysis, and it is usually infeasible to go through the list one gene at a time trying to understand it’s biological function. A common downstream procedure is gene set testing, which aims to understand which pathways/gene networks the differentially expressed genes are implicated in. There are many different gene set testing methods that can be applied and it can be useful to try several.</p>
 
-<p>The purpose of this tutorial is to demonstrate how to perform gene set testing using tools in Galaxy. The data comes from a Nature Cell Biology paper, <a href="https://www.ncbi.nlm.nih.gov/pubmed/25730472">EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival</a>), Fu et al. 2015. That study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice (see Figure below). How to generate differentially expressed genes from reads (FASTQs) for this dataset is covered in the accompanying tutorials <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">RNA-seq reads to counts</a> and <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a>. This tutorial is inspired by material from the COMBINE R RNAseq workshop <a href="http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html">here</a> and the Cancer Research UK workshop <a href="https://bioinformatics-core-shared-training.github.io/cruk-summer-school-2018/RNASeq2018/html/06_Gene_set_testing.nb.html">here</a></p>
+<p>The purpose of this tutorial is to demonstrate how to perform gene set testing using tools in Galaxy. The data comes from a Nature Cell Biology paper, <a href="https://www.ncbi.nlm.nih.gov/pubmed/25730472">EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival</a>), Fu et al. 2015. That study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice (see Figure below). How to generate differentially expressed genes from reads (FASTQs) for this dataset is covered in the accompanying tutorials <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">RNA-seq reads to counts</a> and how to perform differential expression using limma-voom is covered in the tutorial <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a>. This tutorial is inspired by material from the COMBINE R RNAseq workshop <a href="http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html">here</a> and the Cancer Research UK workshop <a href="https://bioinformatics-core-shared-training.github.io/cruk-summer-school-2018/RNASeq2018/html/06_Gene_set_testing.nb.html">here</a></p>
 
 <figure id="figure-1"><img src="../../images/rna-seq-reads-to-counts/mouse_exp.png" alt="Tutorial Dataset" title="Tutorial Dataset" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Tutorial Dataset</figcaption></figure>
 
@@ -432,7 +416,7 @@ because of stochastic processes in the algorithms.</p>
 <blockquote class="tip">
   <h3 id="tip-tip-files-for-this-tutorial"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Files for this tutorial</h3>
 
-  <p>If you completed the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a> tutorial you should already have most of these files in your history. You only need to import the mouse_hallmark_sets and limma-voom_filtered_counts files from the files in the Hands-on box below.</p>
+  <p>If you completed the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a> tutorial you should already have most of these files in your history. You only need to import the <code class="highlighter-rouge">mouse_hallmark_sets</code> and <code class="highlighter-rouge">limma-voom_filtered_counts</code> files from the files in the Hands-on box below.</p>
 
 </blockquote>
 
@@ -512,7 +496,7 @@ limma-voom_filtered_counts                https://zenodo.org/record/2491305/file
 
 <p><a href="http://www.geneontology.org/">Gene Ontology (GO)</a> analysis is widely used to reduce complexity and highlight biological processes in genome-wide expression studies. However, standard methods give biased results on RNA-seq data due to over-detection of differential expression for long and highly-expressed transcripts.</p>
 
-<p><a href="https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf">goseq tool</a> provides methods for performing GO analysis of RNA-seq data, taking length bias into account. The methods and software used by goseq are equally applicable to other category based tests of RNA-seq data, such as KEGG pathway analysis.</p>
+<p>The <a href="https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf">goseq tool</a> provides methods for performing GO analysis of RNA-seq data, taking length bias into account. The methods and software used by goseq are equally applicable to other category based tests of RNA-seq data, such as KEGG pathway analysis.</p>
 
 <p>goseq needs 2 files as inputs:</p>
 <ul>
@@ -625,7 +609,7 @@ limma-voom_filtered_counts                https://zenodo.org/record/2491305/file
 
 <figure id="figure-3"><img src="../../images/rna-seq-genes-to-pathways/luminal_top_GO.png" alt="Luminal Plot" title="Luminal pregnant vs lactating top 10 GO terms" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Luminal pregnant vs lactating top 10 GO terms</figcaption></figure>
 
-<p>The Fu paper also used goseq and found enrichment for cell contractility genes in the basal cells and enrichment in the luminal cells for general metabolic processes, lipid biosynthesis and transport proteins, and .</p>
+<p>The Fu paper also used goseq and found enrichment for cell contractility genes in the basal cells and enrichment in the luminal cells for general metabolic processes, lipid biosynthesis and transport proteins.</p>
 
 <blockquote class="question">
   <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -639,6 +623,8 @@ limma-voom_filtered_counts                https://zenodo.org/record/2491305/file
 
   </blockquote>
 </blockquote>
+
+<p>For more on GO analysis, including how to simplify GO results and visualize with GO graphs, see the <a href="/training-material/topics/transcriptomics/tutorials/goenrichment/tutorial.html">GO Enrichment tutorial</a>.</p>
 
 <h2 id="gene-set-enrichment-analysis-with-fgsea">Gene Set Enrichment Analysis with <strong>fgsea</strong></h2>
 
@@ -696,7 +682,7 @@ limma-voom_filtered_counts                https://zenodo.org/record/2491305/file
 
 </blockquote>
 
-<p>fgsea outputs a table of results containing a list of pathways with P values and enrichment scores. It can also output a summary table plot of the top pathways like the one shown below for the <code class="highlighter-rouge">basallpregnant-basallactate</code> contrast.</p>
+<p>fgsea outputs a table of results containing a list of pathways with P values and enrichment scores. It can also output a summary table plot of the top pathways like the one shown below for the <code class="highlighter-rouge">basallpregnant-basallactate</code> contrast below.</p>
 
 <figure id="figure-4" width="50%"><img src="../../images/rna-seq-genes-to-pathways/fgsea_table.png" alt="fgsea Table" title="fgsea Summary table" /><figcaption><span class="figcaption-prefix">Figure 4:</span> fgsea Summary table</figcaption></figure>
 
@@ -706,7 +692,7 @@ limma-voom_filtered_counts                https://zenodo.org/record/2491305/file
 
 <h2 id="ensemble-gene-set-enrichment-analyses-with-egsea">Ensemble gene set enrichment analyses with <strong>EGSEA</strong></h2>
 
-<p>The ensemble of genes set enrichment analyses (EGSEA) <a href="https://www.ncbi.nlm.nih.gov/pubmed/27694195">(Alhamdoosh et al, 2017)</a> is a method developed for RNA-seq data that combines results from multiple algorithms and calculates collective gene set scores, to try to improve the biological relevance of the highest ranked gene sets. EGSEA has built-in gene sets from MSigDB and KEGG for human and mouse. We’ll show here how it can be used with the MSigDB Hallmark collection and KEGG pathways. For input we need a count matrix and EGSEA will perform a limma-voom analysis before gene set testing. We can use the provided filtered counts file output from limma, where the low count genes have been filtered out (output from limma by selecting <em>“Output Filtered Counts Table?”</em>: <code class="highlighter-rouge">Yes</code>). We just need to remove the gene symbol and description columns. We also need a symbols mapping file containing just the Entrez ids and symbols, which we can generate from the filtered counts file. The third input we need is a factors information file, containing what groups the samples belong to, we can use the one we used with limma.</p>
+<p>The ensemble of genes set enrichment analyses (EGSEA) <a href="https://www.ncbi.nlm.nih.gov/pubmed/27694195">(Alhamdoosh et al, 2017)</a> is a method developed for RNA-seq data that combines results from multiple algorithms and calculates collective gene set scores, to try to improve the biological relevance of the highest ranked gene sets. EGSEA has built-in gene sets from MSigDB and KEGG for human and mouse. We’ll show here how it can be used with the MSigDB Hallmark collection and KEGG pathways. For input we need a count matrix and EGSEA will perform a limma-voom analysis before gene set testing. We can use the provided filtered counts file output from limma, where the low count genes have been filtered out (output from limma by selecting <em>“Output Filtered Counts Table?”</em>: <code class="highlighter-rouge">Yes</code>). We just need to remove the gene symbol and description columns. We also need a symbols mapping file containing just the Entrez ids and symbols, which we can generate from the filtered counts file. The third input we need is a factors information file, containing what groups the samples belong to, we can use the same one from the tutorial <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-perform-ensemble-gene-set-testing-with-egsea"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Perform ensemble gene set testing with EGSEA</h3>
@@ -767,7 +753,7 @@ limma-voom_filtered_counts                https://zenodo.org/record/2491305/file
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p>In this tutorial we have seen some gene set testing methods that can be used to interpret lists of differentially expressed genes. Multiple methods can be used to help identify pathways of interest and to provide complementary ways of visualising results. This follows on from the accompanying tutorials, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">RNA-seq reads to counts</a> and <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a>, that showed how to turn reads (FASTQs) into differentially expressed genes for this dataset. For further reading on analysis of RNA-seq count data and the methods used here, see the articles; RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR <a href="https://f1000research.com/articles/5-1408/v2">(Law et al. 2016)</a> and From reads to genes to pathways: differential expression analysis of RNA-Seq experiments using Rsubread and the edgeR quasi-likelihood pipeline <a href="https://f1000research.com/articles/5-1438/v2">(Chen, Lun, Smyth 2016)</a>.</p>
+<p>In this tutorial we have seen some gene set testing methods that can be used to interpret lists of differentially expressed genes. Multiple methods can be used to help identify pathways of interest and to provide complementary ways of visualising results. This follows on from the accompanying tutorials, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">RNA-seq reads to counts</a> and <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a>, that showed how to turn reads (FASTQs) into differentially expressed genes for this dataset. For further reading on analysis of RNA-seq count data and the methods used here, see the articles; RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR <a href="https://f1000research.com/articles/5-1408/v3">(Law et al. 2016)</a> and From reads to genes to pathways: differential expression analysis of RNA-Seq experiments using Rsubread and the edgeR quasi-likelihood pipeline <a href="https://f1000research.com/articles/5-1438/v2">(Chen, Lun, Smyth 2016)</a>.</p>
 
 
         
@@ -812,7 +798,7 @@ limma-voom_filtered_counts                https://zenodo.org/record/2491305/file
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anna Trigos, Belinda Phipson, Charity Law, Harriet Dashnow, Maria Doyle, Matt Ritchie)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Belinda Phipson, Maria Doyle)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on

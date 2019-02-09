@@ -276,6 +276,10 @@
     },
     {
       "@type": "Person",
+      "name": "Shians"
+    },
+    {
+      "@type": "Person",
       "name": "charitylaw"
     }
   ],
@@ -444,7 +448,7 @@
   <li><a href="#visualising-results" id="markdown-toc-visualising-results">Visualising results</a>    <ol>
       <li><a href="#heatmap-of-top-genes" id="markdown-toc-heatmap-of-top-genes">Heatmap of top genes</a></li>
       <li><a href="#stripcharts-of-top-genes" id="markdown-toc-stripcharts-of-top-genes">Stripcharts of top genes</a></li>
-      <li><a href="#interactive-plots-glimma" id="markdown-toc-interactive-plots-glimma">Interactive plots (Glimma)</a></li>
+      <li><a href="#interactive-de-plots-glimma" id="markdown-toc-interactive-de-plots-glimma">Interactive DE plots (Glimma)</a></li>
     </ol>
   </li>
 </ol>
@@ -618,6 +622,7 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
     <li>Rename file as <code class="highlighter-rouge">annodata</code> using the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (pencil) icon. The file should look like below.
       <figure id="figure-6" width="50%"><img src="../../images/rna-seq-counts-to-genes/annodata.png" alt="annodata file" title="Gene annotation file" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Gene annotation file</figcaption></figure>
     </li>
+    <li>There must be the same number of lines (rows) in the counts and annotation. Check the number of lines shown on the datasets in the history, there should be 27,180 lines in both.</li>
   </ol>
 </blockquote>
 
@@ -687,7 +692,7 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
 
 <h2 id="multidimensional-scaling-plot">Multidimensional scaling plot</h2>
 
-<p>By far, one of the most important plots we make when we analyse RNA-Seq data are MDS plots. An MDS plot is a visualisation of a principal components analysis, which determines the greatest sources of variation in the data. A principal components analysis is an example of an unsupervised analysis, where we don’t need to specify the groups. If your experiment is well controlled and has worked well, what we hope to see is that the greatest sources of variation in the data are the treatments/groups we are interested in. It is also an incredibly useful tool for quality control and checking for outliers. This Galaxy limma tool outputs an MDS plot by default in the <code class="highlighter-rouge">Report</code> and a link is also provided to a PDF version (<code class="highlighter-rouge">MDSPlot_CellTypeStatus.pdf</code>). A scree plot is also produced that shows how much variation is attributed to each dimension. If there was a batch effect for example, you may see high values for additional dimensions. The limma tool plots the first two dimensions by default (1 vs 2), however you can also plot additional dimensions 2 vs 3 and 3 vs 4 using under <strong>Output Options</strong> Additional Plots <code class="highlighter-rouge">MDS Extra</code> These are displayed in the <code class="highlighter-rouge">Report</code> along with a link to a PDF version (<code class="highlighter-rouge">MDSPlot_extra.pdf</code>).</p>
+<p>By far, one of the most important plots we make when we analyse RNA-Seq data are MDS plots. An MDS plot is a visualisation of a principal components analysis, which determines the greatest sources of variation in the data. A principal components analysis is an example of an unsupervised analysis, where we don’t need to specify the groups. If your experiment is well controlled and has worked well, what we hope to see is that the greatest sources of variation in the data are the treatments/groups we are interested in. It is also an incredibly useful tool for quality control and checking for outliers. This Galaxy limma tool outputs an MDS plot by default in the <code class="highlighter-rouge">Report</code> and a link is also provided to a PDF version (<code class="highlighter-rouge">MDSPlot_CellTypeStatus.pdf</code>). A scree plot is also produced that shows how much variation is attributed to each dimension. If there was a batch effect for example, you may see high values for additional dimensions. The limma tool plots the first two dimensions by default (1 vs 2), however you can also plot additional dimensions 2 vs 3 and 3 vs 4 using under <strong>Output Options</strong> Additional Plots <code class="highlighter-rouge">MDS Extra</code> These are displayed in the <code class="highlighter-rouge">Report</code> along with a link to a PDF version (<code class="highlighter-rouge">MDSPlot_extra.pdf</code>). Selecting the <code class="highlighter-rouge">Glimma Interactive Plots</code> will generate an interactive version of the MDS plot, see the plots section of the report below.</p>
 
 <figure id="figure-8"><img src="../../images/rna-seq-counts-to-genes/mdsscree.png" alt="MDS Plot" title="MDS Plot" /><figcaption><span class="figcaption-prefix">Figure 8:</span> MDS Plot</figcaption></figure>
 
@@ -721,6 +726,7 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
           <ul>
             <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Additional Plots”</em> tick:
               <ul>
+                <li><code class="highlighter-rouge">Glimma Interactive Plots</code></li>
                 <li><code class="highlighter-rouge">Density Plots (if filtering)</code></li>
                 <li><code class="highlighter-rouge">CpmsVsCounts Plots (if filtering on cpms)</code></li>
                 <li><code class="highlighter-rouge">Box Plots (if normalising)</code></li>
@@ -791,7 +797,7 @@ What is the second greatest source of variation in the data?</p>
 
 <p>The <code class="highlighter-rouge">Report</code> provides links to PDFs of all plots shown in the <code class="highlighter-rouge">Report</code> and also to the rest of the additional plots selected to be output.</p>
 
-<figure id="figure-11"><img src="../../images/rna-seq-counts-to-genes/report_plots.png" alt="Report Outputs" title="Report outputs" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Report outputs</figcaption></figure>
+<figure id="figure-11" width="30%"><img src="../../images/rna-seq-counts-to-genes/report_plots.png" alt="Report Outputs" title="Report outputs" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Report outputs</figcaption></figure>
 
 <p>Click on the <code class="highlighter-rouge">CpmPlots.pdf</code> link in the <code class="highlighter-rouge">Report</code>. You should see 12 plots, one for each sample. Two of the plots are shown below. From these plots we can see that 0.5 CPM is equivalent to ~10 counts in each of the 12 samples, so 0.5 seems to be an appropriate threshold for this dataset (these samples all have sequencing depth of 20-30 million, see the <code class="highlighter-rouge">Library information</code> file below, so a CPM value of 0.5 would be ~10 counts).</p>
 
@@ -852,33 +858,37 @@ What is the second greatest source of variation in the data?</p>
 
 <h2 id="voom-variance-plot">Voom variance plot</h2>
 
-<p>This plot is generated by the voom method and displayed in the <code class="highlighter-rouge">Report</code> along with a link to a PDF version (<code class="highlighter-rouge">VoomPlot.pdf</code>). It shows the mean-variance relationship of the genes in the dataset. It can help show if low counts have been filtered adequately and if there is a lot of variation in the data.</p>
+<p>This plot is generated by the voom method and displayed in the <code class="highlighter-rouge">Report</code> along with a link to a PDF version (<code class="highlighter-rouge">VoomPlot.pdf</code>). Each dot represents a gene and it shows the mean-variance relationship of the genes in the dataset. This plot can help show if low counts have been filtered adequately and if there is a lot of variation in the data, as shown in the <strong>More details on Voom variance plots</strong> box below.</p>
 
 <figure id="figure-17"><img src="../../images/rna-seq-counts-to-genes/voomplot.png" alt="Voom Plot" title="Voom Plot" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Voom Plot</figcaption></figure>
+
+<p>The SA plot below plots log2 residual standard deviations against mean log-CPM values. The average log2 residual standard deviation is marked by a horizontal blue line. This plot shows how the dependence between the means and variances has been removed after the voom weights are applied to the data.</p>
+
+<figure id="figure-18"><img src="../../images/rna-seq-counts-to-genes/saplot.png" alt="SA Plot" title="SA Plot" /><figcaption><span class="figcaption-prefix">Figure 18:</span> SA Plot</figcaption></figure>
 
 <blockquote class="details">
   <h3 id="details-more-details-on-voom-variance-plots"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> More details on Voom variance plots</h3>
 
   <p>If we didn’t filter this dataset for the lowly expressed genes the variance plot would look like below.</p>
 
-  <figure id="figure-18"><img src="../../images/rna-seq-counts-to-genes/voomplot_nofilt.png" alt="Voom Nofilter Plot" title="Voom Plot unfiltered counts" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Voom Plot unfiltered counts</figcaption></figure>
+  <figure id="figure-19"><img src="../../images/rna-seq-counts-to-genes/voomplot_nofilt.png" alt="Voom Nofilter Plot" title="Voom Plot unfiltered counts" /><figcaption><span class="figcaption-prefix">Figure 19:</span> Voom Plot unfiltered counts</figcaption></figure>
 
   <p>If we look at the plot generated with the two samples mixed up we can see there’s more variation.</p>
 
-  <figure id="figure-19"><img src="../../images/rna-seq-counts-to-genes/voomplot_mixed.png" alt="Voom Mixedup Plot" title="Voom Plot mixed-up samples" /><figcaption><span class="figcaption-prefix">Figure 19:</span> Voom Plot mixed-up samples</figcaption></figure>
+  <figure id="figure-20"><img src="../../images/rna-seq-counts-to-genes/voomplot_mixed.png" alt="Voom Mixedup Plot" title="Voom Plot mixed-up samples" /><figcaption><span class="figcaption-prefix">Figure 20:</span> Voom Plot mixed-up samples</figcaption></figure>
 
   <p>More examples of the variation this plot can show can be seen in Figure 1 from the <a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2014-15-2-r29">limma-voom</a> paper, shown below.</p>
 
-  <figure id="figure-20"><img src="../../images/rna-seq-counts-to-genes/voom_variance_examples.jpg" alt="Voom Plot Examples" title="Voom Plot more examples" /><figcaption><span class="figcaption-prefix">Figure 20:</span> Voom Plot more examples</figcaption></figure>
+  <figure id="figure-21"><img src="../../images/rna-seq-counts-to-genes/voom_variance_examples.jpg" alt="Voom Plot Examples" title="Voom Plot more examples" /><figcaption><span class="figcaption-prefix">Figure 21:</span> Voom Plot more examples</figcaption></figure>
 
   <p><em>Figure 1: Mean-variance relationships. Gene-wise means and variances of RNA-seq data are represented by black points with a LOWESS trend. Plots are ordered by increasing levels of biological variation in datasets. (a) voom trend for HBRR and UHRR genes for Samples A, B, C and D of the SEQC project; technical variation only. (b) C57BL/6J and DBA mouse experiment; low-level biological variation. (c) Simulation study in the presence of 100 upregulating genes and 100 downregulating genes; moderate-level biological variation. (d) Nigerian lymphoblastoid cell lines; high-level biological variation. (e) Drosophila melanogaster embryonic developmental stages; very high biological variation due to systematic differences between samples. (f) LOWESS voom trends for datasets (a)–(e). HBRR, Ambion’s Human Brain Reference RNA; LOWESS, locally weighted regression; UHRR, Stratagene’s Universal Human Reference RNA</em>.</p>
 </blockquote>
 
 <h2 id="md-and-volcano-plots-for-de-results">MD and Volcano plots for DE results</h2>
 
-<p>Genome-wide plots that are useful for checking differentially expressed (DE) results are MD plots (or MA plots) and Volcano plots. There are functions in limma for generating these plots and they are used by this tool. These plots are output by default and shown in the <code class="highlighter-rouge">Report</code> along with a link to PDF versions (<code class="highlighter-rouge">MDPlot_basalpregnant-basallactate.pdf</code> and <code class="highlighter-rouge">VolcanoPlot_basalpregnant-basallactate.pdf</code>). In the volcano plot the top genes (by adjusted p-value) are highlighted. The number of top genes is 10 by default and the user can specify the number of top genes to view (up to 100) under <strong>Advanced Options</strong>.</p>
+<p>Genome-wide plots that are useful for checking differentially expressed (DE) results are MD plots (or MA plots) and Volcano plots. There are functions in limma for generating these plots and they are used by this tool. These plots are output by default and shown in the <code class="highlighter-rouge">Report</code> along with a link to PDF versions (<code class="highlighter-rouge">MDPlot_basalpregnant-basallactate.pdf</code> and <code class="highlighter-rouge">VolcanoPlot_basalpregnant-basallactate.pdf</code>). In the volcano plot the top genes (by adjusted p-value) are highlighted. The number of top genes is 10 by default and the user can specify the number of top genes to view (up to 100) under <strong>Advanced Options</strong>. For further information on volcano plots see the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html">Volcano Plot tutorial</a></p>
 
-<figure id="figure-21"><img src="../../images/rna-seq-counts-to-genes/mdvolplot_basalpregnant-basallactate.png" alt="MDVol Plot" title="MD Plot and Volcano Plot" /><figcaption><span class="figcaption-prefix">Figure 21:</span> MD Plot and Volcano Plot</figcaption></figure>
+<figure id="figure-22"><img src="../../images/rna-seq-counts-to-genes/mdvolplot_basalpregnant-basallactate.png" alt="MDVol Plot" title="MD Plot and Volcano Plot" /><figcaption><span class="figcaption-prefix">Figure 22:</span> MD Plot and Volcano Plot</figcaption></figure>
 
 <p>The MD Plot highlighted genes are significant at an adjusted p-value (adj.P) threshold of 0.05 and exhibit log2-fold-change (lfc) of at least 0. These thresholds can be changed under <strong>Advanced Options</strong>.</p>
 
@@ -933,9 +943,9 @@ What is the second greatest source of variation in the data?</p>
 
 <p>We can see that much fewer genes are now highlighted in the MD plot and identified as differentially expressed.</p>
 
-<figure id="figure-22"><img src="../../images/rna-seq-counts-to-genes/TREAT_mdvolplot_basalpregnant-basallactate.png" alt="TREAT MDVol Plot" title="TREAT MD and Volcano plots" /><figcaption><span class="figcaption-prefix">Figure 22:</span> TREAT MD and Volcano plots</figcaption></figure>
+<figure id="figure-23"><img src="../../images/rna-seq-counts-to-genes/TREAT_mdvolplot_basalpregnant-basallactate.png" alt="TREAT MDVol Plot" title="TREAT MD and Volcano plots" /><figcaption><span class="figcaption-prefix">Figure 23:</span> TREAT MD and Volcano plots</figcaption></figure>
 
-<figure id="figure-23" width="400px"><img src="../../images/rna-seq-counts-to-genes/TREATdecounts.png" alt="TREAT DE counts" title="TREAT differentially expressed genes" /><figcaption><span class="figcaption-prefix">Figure 23:</span> TREAT differentially expressed genes</figcaption></figure>
+<figure id="figure-24" width="400px"><img src="../../images/rna-seq-counts-to-genes/TREATdecounts.png" alt="TREAT DE counts" title="TREAT differentially expressed genes" /><figcaption><span class="figcaption-prefix">Figure 24:</span> TREAT differentially expressed genes</figcaption></figure>
 
 <h1 id="visualising-results">Visualising results</h1>
 
@@ -945,19 +955,19 @@ What is the second greatest source of variation in the data?</p>
 
 <p>Click on the <code class="highlighter-rouge">Heatmap_basalpregnant-basallactate.pdf</code> link in the <code class="highlighter-rouge">Report</code>. You should see a plot like below.</p>
 
-<figure id="figure-24"><img src="../../images/rna-seq-counts-to-genes/heatmap.png" alt="Heatmap" title="Heatmap of top genes" /><figcaption><span class="figcaption-prefix">Figure 24:</span> Heatmap of top genes</figcaption></figure>
+<figure id="figure-25"><img src="../../images/rna-seq-counts-to-genes/heatmap.png" alt="Heatmap" title="Heatmap of top genes" /><figcaption><span class="figcaption-prefix">Figure 25:</span> Heatmap of top genes</figcaption></figure>
 
 <h2 id="stripcharts-of-top-genes">Stripcharts of top genes</h2>
 
 <p>The limma-voom tool can also auto-generate stripcharts to view the expression of the top genes across the <em>groups</em>. Click on the <code class="highlighter-rouge">Stripcharts_basalpregnant-basallactate.pdf</code> link in the <code class="highlighter-rouge">Report</code>. You should see 10 plots, one for each top gene. Four are shown below. Note that here you can see if replicates tend to group together and how the expression compares to the other groups.</p>
 
-<figure id="figure-25" width="950px"><img src="../../images/rna-seq-counts-to-genes/stripcharts.png" alt="Stripchart Plot" title="Stripcharts of top genes" /><figcaption><span class="figcaption-prefix">Figure 25:</span> Stripcharts of top genes</figcaption></figure>
+<figure id="figure-26" width="950px"><img src="../../images/rna-seq-counts-to-genes/stripcharts.png" alt="Stripchart Plot" title="Stripcharts of top genes" /><figcaption><span class="figcaption-prefix">Figure 26:</span> Stripcharts of top genes</figcaption></figure>
 
-<h2 id="interactive-plots-glimma">Interactive plots (Glimma)</h2>
+<h2 id="interactive-de-plots-glimma">Interactive DE plots (Glimma)</h2>
 
-<p>An interactive version of the mean-difference plots is output by the limma-voom tool via the <a href="https://github.com/Shians/Glimma">Glimma</a> package, if a gene annotation file is provided. A link to a html page is generated in the <code class="highlighter-rouge">Report</code> that allows the user to search for their favourite gene.</p>
+<p>Interactive versions of the MD and Volcano plots can be output by the limma-voom tool via the <a href="https://github.com/Shians/Glimma">Glimma</a> package, if a gene annotation file is provided and <code class="highlighter-rouge">Glimma Interactive Plots</code> is selected. Links to the Glimma html pages are generated in the <code class="highlighter-rouge">Report</code>.</p>
 
-<p>Click on the <code class="highlighter-rouge">Glimma_MDPlot_basalpregnant-basallactate.html</code> link in the <code class="highlighter-rouge">Report</code>. You should see a two-panel interactive MD plot like below. The left plot shows the log-fold-change vs average expression. The right plot shows the expression levels of a particular gene of each sample by groups (similar to the stripcharts). Hovering over points on left plot will plot expression level for corresponding gene, clicking on points will fix the expression plot to gene. Clicking on rows on the table has the same effect as clicking on the corresponding gene in the plot.</p>
+<p>Let’s take a look at the interactive MD plot. Click on the <code class="highlighter-rouge">Glimma_MDPlot_basalpregnant-basallactate.html</code> link in the <code class="highlighter-rouge">Report</code>. You should see a two-panel interactive MD plot like below. The left plot shows the log-fold-change vs average expression. The right plot shows the expression levels of a particular gene of each sample by groups (similar to the stripcharts). Hovering over points on left plot will plot expression level for corresponding gene, clicking on points will fix the expression plot to gene. Clicking on rows on the table has the same effect as clicking on the corresponding gene in the plot.</p>
 
 <iframe src="../../images/rna-seq-counts-to-genes/glimma/MD-Plot.html" width="100%" height="1000"></iframe>
 
@@ -965,11 +975,11 @@ What is the second greatest source of variation in the data?</p>
   <h3 id="hands_on-hands-on-search-for-a-gene-of-interest"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Search for a gene of interest</h3>
 
   <p><code class="highlighter-rouge">Egf</code> was a gene identifed as very highly expressed in the Fu paper and confirmed with qRT-PCR, see Fig. 6c from the paper below.</p>
-  <figure id="figure-26"><img src="../../images/rna-seq-counts-to-genes/fu_egf.png" alt="Fu EGF gene" title="Fu et al, Nat Cell Biol 2015" /><figcaption><span class="figcaption-prefix">Figure 26:</span> Fu et al, Nat Cell Biol 2015</figcaption></figure>
+  <figure id="figure-27"><img src="../../images/rna-seq-counts-to-genes/fu_egf.png" alt="Fu EGF gene" title="Fu et al, Nat Cell Biol 2015" /><figcaption><span class="figcaption-prefix">Figure 27:</span> Fu et al, Nat Cell Biol 2015</figcaption></figure>
 
   <p>Search for <code class="highlighter-rouge">Egf</code> in the Glimma interactive table. You should see something similar to below.</p>
 
-  <figure id="figure-27"><img src="../../images/rna-seq-counts-to-genes/glimma_egf.png" alt="Glimma EGF gene" title="Glimma EGF gene" /><figcaption><span class="figcaption-prefix">Figure 27:</span> Glimma EGF gene</figcaption></figure>
+  <figure id="figure-28"><img src="../../images/rna-seq-counts-to-genes/glimma_egf.png" alt="Glimma EGF gene" title="Glimma EGF gene" /><figcaption><span class="figcaption-prefix">Figure 28:</span> Glimma EGF gene</figcaption></figure>
 
   <p>Notice that in the plot on the right above, showing <code class="highlighter-rouge">Egf</code> expression for all samples, we can see it is highly expressed in the luminal lactate group but not the other samples.</p>
 </blockquote>
@@ -997,29 +1007,30 @@ What is the second greatest source of variation in the data?</p>
   </ol>
 
   <p>You should find that there are more genes differentially expressed for the luminal cells than the basal. There are ~274 genes DE in basal cells versus ~ 1610 in the luminal cells.</p>
-  <figure id="figure-28" width="50%"><img src="../../images/rna-seq-counts-to-genes/basal_luminal_decounts.png" alt="Basal Luminal DE counts" title="Basal vs Luminal DE counts" /><figcaption><span class="figcaption-prefix">Figure 28:</span> Basal vs Luminal DE counts</figcaption></figure>
+  <figure id="figure-29" width="50%"><img src="../../images/rna-seq-counts-to-genes/basal_luminal_decounts.png" alt="Basal Luminal DE counts" title="Basal vs Luminal DE counts" /><figcaption><span class="figcaption-prefix">Figure 29:</span> Basal vs Luminal DE counts</figcaption></figure>
 
   <p>This is similar to what Fu et al found, many more genes differentially expressed in the luminal cells on lactation, compared to the basal cells.</p>
-  <figure id="figure-29" width="25%"><img src="../../images/rna-seq-counts-to-genes/fu_degenes.png" alt="Fu DE genes" title="Fu et al, Nat Cell Biol 2015" /><figcaption><span class="figcaption-prefix">Figure 29:</span> Fu et al, Nat Cell Biol 2015</figcaption></figure>
+  <figure id="figure-30" width="25%"><img src="../../images/rna-seq-counts-to-genes/fu_degenes.png" alt="Fu DE genes" title="Fu et al, Nat Cell Biol 2015" /><figcaption><span class="figcaption-prefix">Figure 30:</span> Fu et al, Nat Cell Biol 2015</figcaption></figure>
 </blockquote>
 
 <p>The tables of differentially expressed genes are output as links in the <code class="highlighter-rouge">Report</code> (<code class="highlighter-rouge">limma-voom_basalpregnant-basallactate.tsv</code> and <code class="highlighter-rouge">limma-voom_luminalpregnant-luminallactate.tsv</code>), see below, and also as datasets in the history (<code class="highlighter-rouge">DE tables</code>). With multiple contrasts, a plot for each contrast is generated for relevant plots, as shown below. This enables a quick and easy visual comparison of the contrasts.</p>
 
-<figure id="figure-30"><img src="../../images/rna-seq-counts-to-genes/multiple_contrasts.png" alt="Multiple contrasts" title="Multiple contrasts output" /><figcaption><span class="figcaption-prefix">Figure 30:</span> Multiple contrasts output</figcaption></figure>
+<figure id="figure-31"><img src="../../images/rna-seq-counts-to-genes/multiple_contrasts.png" alt="Multiple contrasts" title="Multiple contrasts output" /><figcaption><span class="figcaption-prefix">Figure 31:</span> Multiple contrasts output</figcaption></figure>
 
 <blockquote class="tip">
-  <h3 id="tip-tip-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip</h3>
+  <h3 id="tip-tips"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tips</h3>
 
-  <p>The <code class="highlighter-rouge">Report</code> with all the plots and tables can be downloaded by clicking on the floppy disk icon on the dataset in the history as shown below.</p>
-  <figure id="figure-31" width="20%"><img src="../../images/rna-seq-counts-to-genes/download_report.png" alt="Report download" title="Download limma report" /><figcaption><span class="figcaption-prefix">Figure 31:</span> Download limma report</figcaption></figure>
-
+  <ol>
+    <li>The <code class="highlighter-rouge">Report</code> with all the plots and tables can be downloaded by clicking on the floppy disk icon on the dataset in the history.</li>
+    <li>If you want to see the R code used, or to explore some of the outputs in R, you can select to output the Rscript and/or RData files in the tool form.</li>
+  </ol>
 </blockquote>
 
 <p>To see some methods for identifying differentially expressed pathways in this dataset, see the follow-on tutorial <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html">RNA-seq genes to pathways</a>. To see how to create a heatmap of custom genes using this dataset, see the tutorial <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html">Visualization of RNA-Seq results with heatmap2</a></p>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p>In this tutorial we have seen how counts files can be converted into differentially expressed genes with limma-voom. This follows on from the accompanying tutorial, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">RNA-seq reads to counts</a>, that showed how to generate counts from the raw reads (FASTQs) for this dataset. In this part we have seen ways to visualise the count data, and QC checks that can be performed to help assess the quality and results. We have also reproduced results similar to what the authors found in the original paper with this dataset. For further reading on analysis of RNA-seq count data and the methods used here, see the articles; RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR <a href="https://f1000research.com/articles/5-1408/v2">(Law et al. 2016)</a> and From reads to genes to pathways: differential expression analysis of RNA-Seq experiments using Rsubread and the edgeR quasi-likelihood pipeline <a href="https://f1000research.com/articles/5-1438/v2">(Chen, Lun, Smyth 2016)</a>.</p>
+<p>In this tutorial we have seen how counts files can be converted into differentially expressed genes with limma-voom. This follows on from the accompanying tutorial, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">RNA-seq reads to counts</a>, that showed how to generate counts from the raw reads (FASTQs) for this dataset. In this part we have seen ways to visualise the count data, and QC checks that can be performed to help assess the quality and results. We have also reproduced results similar to what the authors found in the original paper with this dataset. For further reading on analysis of RNA-seq count data and the methods used here, see the articles; RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR <a href="https://f1000research.com/articles/5-1408/v3">(Law et al. 2016)</a> and From reads to genes to pathways: differential expression analysis of RNA-Seq experiments using Rsubread and the edgeR quasi-likelihood pipeline <a href="https://f1000research.com/articles/5-1438/v2">(Chen, Lun, Smyth 2016)</a>.</p>
 
 
         
@@ -1068,7 +1079,7 @@ What is the second greatest source of variation in the data?</p>
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anna Trigos, Belinda Phipson, Charity Law, Harriet Dashnow, Maria Doyle, Matt Ritchie)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Shian Su, Anna Trigos, Belinda Phipson, Charity Law, Harriet Dashnow, Maria Doyle, Matt Ritchie)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
