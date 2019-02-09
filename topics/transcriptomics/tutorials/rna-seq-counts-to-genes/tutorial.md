@@ -172,9 +172,7 @@ Optionally, gene annotations can be provided to the limma-voom tool and if provi
 >          - `GENENAME`
 > 2. Rename file as `annodata` using the {% icon galaxy-pencil %} (pencil) icon. The file should look like below.
 >    ![annodata file](../../images/rna-seq-counts-to-genes/annodata.png "Gene annotation file"){: width="50%"}
-> 3. You must have the same number of lines (rows) in the counts and annotation. Check that there are 27,180 lines in each as below.
->    ![counts lines](../../images/rna-seq-counts-to-genes/countdata_lines.png "Counts file lines")
->    ![annotation lines](../../images/rna-seq-counts-to-genes/annodata_lines.png "Annotation file lines")
+> 3. There must be the same number of lines (rows) in the counts and annotation. Check the number of lines shown on the datasets in the history, there should be 27,180 lines in both.
 {: .hands_on}
 
 # Differential expression with limma-voom
@@ -507,10 +505,8 @@ The tables of differentially expressed genes are output as links in the `Report`
 
 > ### {% icon tip %} Tips
 >
-> 1. The `Report` with all the plots and tables can be downloaded by clicking on the floppy disk icon on the dataset in the history as shown below.
->     ![Report download](../../images/rna-seq-counts-to-genes/download_report.png "Download limma report"){: width="20%"}
-> 2. If you want to see the R code used, or to explore some of the outputs in R, you can select to output the Rscript and/or RData files, see below.
->     ![R outputs](../../images/rna-seq-counts-to-genes/R_outputs.png "R outputs"){: width="20%"}
+> 1. The `Report` with all the plots and tables can be downloaded by clicking on the floppy disk icon on the dataset in the history.
+> 2. If you want to see the R code used, or to explore some of the outputs in R, you can select to output the Rscript and/or RData files in the tool form.
 {: .tip}
 
 To see some methods for identifying differentially expressed pathways in this dataset, see the follow-on tutorial [RNA-seq genes to pathways]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html). To see how to create a heatmap of custom genes using this dataset, see the tutorial [Visualization of RNA-Seq results with heatmap2]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html)
