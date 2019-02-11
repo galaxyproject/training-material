@@ -164,11 +164,7 @@ The only thing the script cannot currently automate is the installation of the i
 
 ### Installing an entire topic
 
-<<<<<<< HEAD
 If you would like to install all the requirements for every tutorial within an entire topic, you can use the script in [`bin/install_topic_requirements.sh`]({{ site.github.repository_url }}/tree/{{ site.repository_branch }}/bin/install_topic_requirements.sh)
-=======
-If you would like to install all the requirements for every tutorial within an entire topic, you can use the script in [`bin/install_topic_requirements.sh`]({{ site.github_repository }}/tree/{{ site.github_repository_branch }}/bin/install_topic_requirements.sh)
->>>>>>> 2688de42b8978097242dc11bfee0c9d3f1f3f017
 
 
 ### Installing a subset of components

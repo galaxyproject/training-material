@@ -15,10 +15,6 @@ key_points:
 contributors:
   - mblue9
   - bphipson
-  - annatrigos
-  - mritchie
-  - hdashnow
-  - charitylaw
 ---
 
 
@@ -40,7 +36,6 @@ The purpose of this tutorial is to demonstrate how to perform gene set testing u
 > {:toc}
 >
 {: .agenda}
-
 
 {% include snippets/warning_results_may_vary.md %}
 
@@ -107,7 +102,7 @@ We would like to know if there are biological categories that are enriched among
 
 [Gene Ontology (GO)](http://www.geneontology.org/) analysis is widely used to reduce complexity and highlight biological processes in genome-wide expression studies. However, standard methods give biased results on RNA-seq data due to over-detection of differential expression for long and highly-expressed transcripts.
 
-[goseq tool](https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf) provides methods for performing GO analysis of RNA-seq data, taking length bias into account. The methods and software used by goseq are equally applicable to other category based tests of RNA-seq data, such as KEGG pathway analysis.
+The [goseq tool](https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf) provides methods for performing GO analysis of RNA-seq data, taking length bias into account. The methods and software used by goseq are equally applicable to other category based tests of RNA-seq data, such as KEGG pathway analysis.
 
 goseq needs 2 files as inputs:
 - a **differentially expressed genes** file. Information for all genes tested for differential expression (all genes after filtering lowly expressed). This file should have 2 columns:
@@ -182,7 +177,7 @@ A plot of the top 10 over-represented GO terms (by adjusted *p*-value) can be ou
 
 ![Luminal Plot](../../images/rna-seq-genes-to-pathways/luminal_top_GO.png "Luminal pregnant vs lactating top 10 GO terms")
 
-The Fu paper also used goseq and found enrichment for cell contractility genes in the basal cells and enrichment in the luminal cells for general metabolic processes, lipid biosynthesis and transport proteins, and .
+The Fu paper also used goseq and found enrichment for cell contractility genes in the basal cells and enrichment in the luminal cells for general metabolic processes, lipid biosynthesis and transport proteins.
 
 > ### {% icon question %} Questions
 >
@@ -194,6 +189,8 @@ The Fu paper also used goseq and found enrichment for cell contractility genes i
 > >
 > {: .solution}
 {: .question}
+
+For more on GO analysis, including how to simplify GO results and visualize with GO graphs, see the [GO Enrichment tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/goenrichment/tutorial.html).
 
 ## Gene Set Enrichment Analysis with **fgsea**
 
@@ -227,7 +224,7 @@ There are several ways we could choose to rank our genes, we could rank by log-f
 >
 {: .hands_on}
 
-fgsea outputs a table of results containing a list of pathways with P values and enrichment scores. It can also output a summary table plot of the top pathways like the one shown below for the `basallpregnant-basallactate` contrast.
+fgsea outputs a table of results containing a list of pathways with P values and enrichment scores. It can also output a summary table plot of the top pathways like the one shown below for the `basallpregnant-basallactate` contrast below.
 
 ![fgsea Table](../../images/rna-seq-genes-to-pathways/fgsea_table.png "fgsea Summary table"){: width="50%"}
 
@@ -237,7 +234,7 @@ An enrichment plot of the each of the top pathways can also be produced, one is 
 
 ## Ensemble gene set enrichment analyses with **EGSEA**
 
-The ensemble of genes set enrichment analyses (EGSEA) [(Alhamdoosh et al, 2017)](https://www.ncbi.nlm.nih.gov/pubmed/27694195) is a method developed for RNA-seq data that combines results from multiple algorithms and calculates collective gene set scores, to try to improve the biological relevance of the highest ranked gene sets. EGSEA has built-in gene sets from MSigDB and KEGG for human and mouse. We'll show here how it can be used with the MSigDB Hallmark collection and KEGG pathways. For input we need a count matrix and EGSEA will perform a limma-voom analysis before gene set testing. We can use the provided filtered counts file output from limma, where the low count genes have been filtered out (output from limma by selecting *"Output Filtered Counts Table?"*: `Yes`). We just need to remove the gene symbol and description columns. We also need a symbols mapping file containing just the Entrez ids and symbols, which we can generate from the filtered counts file. The third input we need is a factors information file, containing what groups the samples belong to, we can use the one we used with limma.
+The ensemble of genes set enrichment analyses (EGSEA) [(Alhamdoosh et al, 2017)](https://www.ncbi.nlm.nih.gov/pubmed/27694195) is a method developed for RNA-seq data that combines results from multiple algorithms and calculates collective gene set scores, to try to improve the biological relevance of the highest ranked gene sets. EGSEA has built-in gene sets from MSigDB and KEGG for human and mouse. We'll show here how it can be used with the MSigDB Hallmark collection and KEGG pathways. For input we need a count matrix and EGSEA will perform a limma-voom analysis before gene set testing. We can use the provided filtered counts file output from limma, where the low count genes have been filtered out (output from limma by selecting *"Output Filtered Counts Table?"*: `Yes`). We just need to remove the gene symbol and description columns. We also need a symbols mapping file containing just the Entrez ids and symbols, which we can generate from the filtered counts file. The third input we need is a factors information file, containing what groups the samples belong to, we can use the same one from the tutorial [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html).
 
 > ### {% icon hands_on %} Hands-on: Perform ensemble gene set testing with EGSEA
 >
