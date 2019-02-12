@@ -61,29 +61,16 @@ class: center, middle, inverse
 # {{ title }}
 
 {% if topic.requirements or page.requirements %}
+
 ---
 
-  ## Requirements
+## Requirements
 
-  Before diving into this slide deck, we recommend you to have a look at:
+Before diving into this slide deck, we recommend you to have a look at:
 
-  {% for requirement in topic.requirements %}
-    {% if requirement.type == "internal" %}
-  - [{{ requirement.title }}]({{ site.baseurl }}/topics{{ requirement.link }})
-    {% elsif requirement.type == "external" %}
-  - [{{ requirement.title }}]({{ requirement.link }})
-    {% endif %}
-  {% endfor %}
+{% include snippets/display_extra_training_slides.md extra_trainings=topic.requirements %}
+{% include snippets/display_extra_training_slides.md extra_trainings=page.requirements %}
 
-  {% if tutorial.requirements %}
-    {% for requirement in tutorial.requirements %}
-      {% if requirement.type == "internal" %}
-  - [{{ requirement.title }}]({{ site.baseurl }}{{ requirement.link }})
-      {% elsif requirement.type == "external" %}
-  - [{{ requirement.title }}]({{ requirement.link }})
-      {% endif %}
-    {% endfor %}
-  {% endif %}
 {% endif %}
 
 ---
