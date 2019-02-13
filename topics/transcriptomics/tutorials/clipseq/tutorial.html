@@ -487,7 +487,7 @@
 
         <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a study published by <em>Nostrand et al.</em> (<a href="https://doi.org/10.1038/nmeth.3810">2016</a>). The dataset contains the first biological replicate of RBFOX2 CLIP-seq and the input control experiment (FASTQ files). The data was changed and downsampled to reduce data processing time, consequently the data does not correspond to the original source pulled from <em>Nostrand et al.</em> (<a href="https://doi.org/10.1038/nmeth.3810">2016</a>). Also included is a text file (.txt) encompassing the chromosome sizes of hg19 obtained from <a href="http://hgdownload.cse.ucsc.edu/goldenPath/hg19/bigZips/hg19.chrom.sizes">UCSC</a> and a genome annotation (.gtf) file taken from <a href="http://ftp.ensemblorg.ebi.ac.uk/pub/release-74/gtf/homo_sapiens/">Ensembl</a>.</p>
+<p>The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a study published by <em>Nostrand et al.</em> (<a href="https://doi.org/10.1038/nmeth.3810">2016</a>). The dataset contains the first biological replicate of RBFOX2 CLIP-seq and the input control experiment (FASTQ files). The data was changed and downsampled to reduce data processing time, consequently the data does not correspond to the original source pulled from <em>Nostrand et al.</em> (<a href="https://doi.org/10.1038/nmeth.3810">2016</a>). Also included is a text file (.txt) encompassing the chromosome sizes of hg38 and a genome annotation (.gtf) file taken from <a href="http://ftp.ensemblorg.ebi.ac.uk/pub/release-74/gtf/homo_sapiens/">Ensembl</a>.</p>
 
 <p><strong>Table 1</strong>: Data from RBFOX2 CLIP-Seq and control experiment which we are going to use in this tutorial from a study published by <em>Nostrand et al.</em> (<a href="https://doi.org/10.1038/nmeth.3810">2016</a>). PE stands for a paired-end read library. Hep G2 is a human liver cancer cell line. Replicate is the number of the biological replicate. Stranded means, if the read-library is strand specific, i.e., in a specific forward-reverse direction.</p>
 
@@ -592,8 +592,8 @@
     <li>
       <p>Import the following files from <a href="https://zenodo.org/record/1327423">Zenodo</a>.</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/hg19_chr_sizes.txt
-https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/Homo_sapiens.GRCh37.74.gtf
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/hg38_chr_sizes.txt
+https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/Homo_sapiens.GRCh38.87.gtf
 https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/RBFOX2-204-CLIP_S1_R1_RBFOX2.fastq
 https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/RBFOX2-204-CLIP_S1_R2_RBFOX2.fastq
 https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/RBFOX2-204-INPUT_S2_R1.fastq
@@ -894,7 +894,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
           <ul>
             <li><em>“Reference genome with or without an annotation”</em>: <code class="highlighter-rouge">use genome reference with builtin gene-model</code>
               <ul>
-                <li><em>“Select reference genome”</em>: <code class="highlighter-rouge">Homo sapiens (hg19+GRCh37.75)</code></li>
+                <li><em>“Select reference genome”</em>: <code class="highlighter-rouge">Homo sapiens (hg38+GRCh38.87)</code></li>
               </ul>
             </li>
           </ul>
@@ -1239,7 +1239,7 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
     <li><strong>SlopBed</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BED/VCF/GFF file”</em>: <code class="highlighter-rouge">bed</code> (output of <strong>Text reformatting</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Genome file”</em>: <code class="highlighter-rouge">hg19_chr_sizes.txt</code> (file from your history)</li>
+        <li><em>“Genome file”</em>: <code class="highlighter-rouge">hg38_chr_sizes.txt</code> (file from your history)</li>
         <li><em>“Choose what you want to do”</em>: <code class="highlighter-rouge">Increase the BED/GFF/VCF entry by the same number base pairs in each direction.</code>
           <ul>
             <li><em>“Number of base pairs”</em>: <code class="highlighter-rouge">20</code></li>
@@ -1253,7 +1253,7 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
         <li><em>“Interpret features when possible”</em>: <code class="highlighter-rouge">Yes</code></li>
         <li><em>“Choose the source for the reference genome”</em>: <code class="highlighter-rouge">locally cached</code>
           <ul>
-            <li><em>“Using reference genome”</em>: <code class="highlighter-rouge">hg19</code></li>
+            <li><em>“Using reference genome”</em>: <code class="highlighter-rouge">hg38</code></li>
           </ul>
         </li>
         <li><em>“Select output format”</em>: <code class="highlighter-rouge">fasta</code></li>
@@ -1335,9 +1335,9 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
   <h3 id="hands_on-hands-on-functional-analysis"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Functional analysis</h3>
 
   <ol>
-    <li><strong>RNA Centric Annotation System (v. 1.1.1)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>RNA Centric Annotation System (v. 1.5.4)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Genome Version”</em>: <code class="highlighter-rouge">hg19</code></li>
+        <li><em>“Genome Version”</em>: <code class="highlighter-rouge">hg38</code></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Target regions in BED format”</em>: <code class="highlighter-rouge">bed</code> (output of <strong>SlopBed</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference annotation in ENSEMBL GTF format”</em>: <code class="highlighter-rouge">Homo_sapiens.GRCh37.74.gtf</code> (file from your history)</li>
         <li><em>“Run annotation.”</em>: <code class="highlighter-rouge">Yes</code></li>
@@ -1430,7 +1430,7 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
 
   <ol>
     <li>Open IGV on your local computer.</li>
-    <li>Choose as a reference genome <strong>hg19</strong>.</li>
+    <li>Choose as a reference genome <strong>hg38</strong>.</li>
     <li>Download and drag-and-drop the following files from galaxy into IGV:
       <ul>
         <li><strong>peaks_annotations.gff</strong> of PEAKachu <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
