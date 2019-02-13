@@ -32,7 +32,7 @@ There are two distinct audiences for these materials.
 
 ## How is the content licensed?
 
-The content of this website is [Creative Commons Attribution 4.0]({{ site.github.repository_url }}/tree/master/LICENSE.md).
+The content of this website is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/).
 
 ## How can I cite this effort?
 
