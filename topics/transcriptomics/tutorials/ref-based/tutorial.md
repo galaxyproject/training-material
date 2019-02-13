@@ -106,7 +106,7 @@ The reads are raw data from the sequencing machine without any pretreatments. Th
 
 During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data.
 
-Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the ["Quality control" training]({{site.baseurl}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html).
+Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the ["Quality control" training]({{site.baseurl}}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html).
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
@@ -226,7 +226,7 @@ This process is known as aligning or 'mapping' the reads to a reference. This is
 
 > ### {% icon comment %} Comment
 >
-> Do you want to learn more about the principles behind mapping? Follow our [training]({{site.baseurl}}/topics/sequence-analysis/).
+> Do you want to learn more about the principles behind mapping? Follow our [training]({{site.baseurl}}{% link topics/sequence-analysis/tutorials/mapping/tutorial.md %}).
 {: .comment}
 
 As a reference genome for *Drosophila melanogaster* is available, we can map the sequences to this genome in order to identify which genes are affected by  the *Pasilla* gene depletion.
