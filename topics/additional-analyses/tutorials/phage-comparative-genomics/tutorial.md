@@ -31,7 +31,7 @@ As part of the functional workflow, BLASTp (for proteins) and BLASTn (for nucleo
 
 ### DNA Sequence Comparisons
 
-Because the triplet code that encodes protein sequences is *degenerate* (as in, there are multiple possible triplet codons for most amino acids), a DNA sequence can drift and still encode the same protein sequence by accumulation of silent mutations. This means that DNA sequences encoding similar proteins can diverge at a relatively high rate, thus DNA sequence comparisons are only particularly useful for organisms that are **closely related.** Between related organisms, DNA sequence comparisons can provide good overall parallels, as this single analysis can demonstrate both conservation of DNA sequences and genome *synteny* (the order of genes in the genome). Additionally, high conservation of DNA sequences automatically means that proteins encoded by that sequence must also be similar. Once DNA sequence similarity drops below ≈ 30%, it is no longer very useful for comparisons.
+Because the triplet code that encodes protein sequences is *degenerate* (as in, there are multiple possible triplet codons for most amino acids), a DNA sequence can drift and still encode the same protein sequence by accumulation of silent mutations. This means that DNA sequences encoding similar proteins can diverge at a relatively high rate, thus DNA sequence comparisons are only particularly useful for organisms that are **closely related.** Between related organisms, DNA sequence comparisons can provide good overall parallels, as this single analysis can demonstrate both conservation of DNA sequences and genome *synteny* (the order of genes in the genome). Additionally, high conservation of DNA sequences automatically means that proteins encoded by that sequence must also be similar. *Once DNA sequence similarity drops below ≈ 30%, it is no longer very useful for comparisons.*
 
 ### Protein Sequence Comparisons
 
@@ -45,6 +45,10 @@ Comparison of organisms by protein sequence is much more sensitive, as there is 
 # Workflow
 
 > * Open CPT Galaxy ([CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy)), and find the history that contains the results of the [functional workflow](LINK TUTORIAL!) for the desired phage genome.
+> * To copy those relevant datasets into a new history for this analysis, click on the View all histories icon (top right).
+> * Create a new history by clicking on Create New (top right).
+> * Locate the three datasets (NT, NR, and your FASTA sequence that may be called your phage's name) that you need, then click and drag them over to your new history to copy the datasets there. As you are dragging toward the active history (the new one that you just created), a box will appear that says "Drag datasets here to copy them into the current history". Drop the datasets in that box and soon a green box with your new dataset should appear.
+> * After copying all necessary datasets, return to the main Galaxy analysis interface by clicking *Done* in the top left.
 
 > ### {% icon details %} Can't find the input dataset?
 > When workflows are run in Galaxy, they often hide the output of their tools to give a clean and readable history with only relevant datasets shown. Sometimes a later analysis will require that dataset and it must be unhidden so that it can be used as input for a tool. 
@@ -94,10 +98,11 @@ Look at the *Top BLASTn hits* data by clicking the eye {% icon solution %} symbo
 
 The results of a dot plot analysis can be seen by clicking on the eye {% icon solution %} symbol in the *MIST v3* dataset. This will be the results of pairwise dot plots of the phage in question against the 5 closest-matching genomes. Phages that are related and syntenic will produce a discrete diagonal line in the dot plot. As DNA sequence similarity decreases, the line will become fainter and patchier until it is no longer visible.
 
-Utilizing relationships and similarity at the protein level, the *Top BLASTp hits* dataset displays a table of the top 5 most related organisms based on the number of similar proteins found by BLASTp. This tool searched through your BLASTp results against the NCBI nr database and retrieved the organisms that matched the highest number of proteins in your phage (an E-value < 1e-3). This number can be found in the last column of the table. Note that this table shows **only** the top 5 results. If the phage in question is part of a large cluster of similar phages (E.G.: T4-like phages), then T4 itself may not appear in the list; 5 other T4-like phages may be more closely related to the phage in question, and T4 may by only the 10th most related phage. The does *not* mean the phage in question is not T4-like, and it is up to the annotator to determine how the phage in question relates to other phages.
+Utilizing relationships and similarity at the protein level, the *Top BLASTp hits* dataset displays a table of the top 5 most related organisms based on the number of similar proteins found by BLASTp. This tool searched through your BLASTp results against the NCBI nr database and retrieved the organisms that matched the highest number of proteins in your phage (an E-value < 1e-3). This number can be found in the last column of the table. Note that this table shows **only** the top 5 results. If the phage in question is part of a large cluster of similar phages (E.G.: T4-like phages), then T4 itself may not appear in the list; 5 other T4-like phages may be more closely related to the phage in question, and T4 may be only the 10th most related phage. The does *not* mean the phage in question is not T4-like, and it is up to the annotator to determine how the phage in question relates to other phages. See the box below for more additional investigations that may help.
 
 > ### {% icon details %} Further sleuthing...
-> There are several ways that the annotator can use the output of these analyses to determine the closest type phage.
+> There are several ways that the annotator can use the output of these analyses to determine the closest type phage. Note that these will all be under the classification Caudovirales.
 > * Copy the phage name or number. Go to the [NCBI Taxonomy browser](https://www.ncbi.nlm.nih.gov/taxonomy/) and search the name. Click on the name you searched to analyze its lineage.
-> * Copy the phage name and search it at [ViralZone](https://talk.ictvonline.org/taxonomy/). Find the closest related type phage.
+> * Copy the phage name and search it at the [ICTV](https://talk.ictvonline.org/taxonomy/) Taxonomy. Find the closest related type phage under Order Caudovirales.
+> * Copy the phage name and search it at [ViralZone](https://viralzone.expasy.org/). Find the closest related type phage. Not all phage are listed in ViralZone, so do not be alarmed if you have no results here.
 {: .details}
