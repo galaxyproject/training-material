@@ -39,7 +39,7 @@ The process of development of new content is open and transparent, using git and
 1. Create a new branch in your local copy for each significant change
 2. Commit the changes in that branch
 1. Push that branch to your fork on GitHub
-1. Submit a pull request from that branch to the [master repository]({{ site.github.repository_url }})
+1. Submit a pull request from that branch to the [original repository]({{ site.github.repository_url }})
 1. If you receive feedback, make changes in your local clone and push them to your branch on GitHub: the pull request will update automatically
 1. Pull requests will be merged by the training team members after at least one other person has reviewed the Pull request and approved it.
 
