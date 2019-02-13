@@ -20,7 +20,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-All the training material which you find on [{{ site.url }}{{ site.baseurl }}]({{ site.url }}{{ site.baseurl }}) is stored on a [GitHub](https://github.com) repository ([{{ site.github.repository_url }}]({{ site.github.repository_url }})), a code hosting platform for version control and collaboration. GitHub interface is quite intuitive and simplifies the contributions from anyone.
+All the training material which you find on [{{ site.url }}{{ site.baseurl }}/]({{ site.baseurl }}/) is stored on a [GitHub](https://github.com) repository ([{{ site.github.repository_url }}]({{ site.github.repository_url }})), a code hosting platform for version control and collaboration. GitHub interface is quite intuitive and simplifies the contributions from anyone.
 
 > ### Agenda
 >
