@@ -246,7 +246,7 @@ Globally, the process of development of new content is open and transparent:
 12. Automatic checks of the changes are automatically checked for the right format and working links using continuous integration testing on Travis CI
 13. Review of the content by several other instructors via discussions
 14. After the review process, merge of the content into the main branch, starting a series of automatic steps triggered by Travis CI
-15. Regeneration of the website and publication on [{{ site.url }}{{ site.baseurl }}]({{ site.url }}{{ site.baseurl }})
+15. Regeneration of the website and publication on [{{ site.url }}{{ site.baseurl }}/]({{ site.baseurl }}/)
 16. Generation of PDF artifacts of the tutorials and slides and upload on the FTP server
 18. Population of [TeSS](https://tess.elixir-europe.org/), the ELIXIR’s Training Portal, via the metadata
 
