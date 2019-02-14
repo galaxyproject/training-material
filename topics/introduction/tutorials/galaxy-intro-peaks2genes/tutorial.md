@@ -123,7 +123,7 @@ Let's start with a fresh history.
 >    {% include snippets/import_via_link.md format="interval" %}
 >
 >    > ### {% icon tip %} Tip: Importing data to Galaxy
->    > There are [more options]({{ site.baseurl }}/topics/galaxy-data-manipulation/tutorials/get-data/slides.html) for advanced users.
+>    > There are [more options]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/get-data/slides.html %}) for advanced users.
 >    {: .tip}
 >
 {: .hands_on}

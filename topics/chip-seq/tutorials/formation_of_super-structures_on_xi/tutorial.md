@@ -43,13 +43,13 @@ On a larger scale than nucleosomes, DNA is forming loops. DNA elements that woul
 
 In mammals, the X chromosome inactivation (XCI) balances the dosage of X-linked genes between females and males. The genes on the inactive X (Xi) chromosome are not expressed.
 
-Binding certain proteins to each of the eight histone proteins may modify the chromatin structure and may result in changes in transcription level. For example, the H3K4m3 is adding 3 methyl-group of the 4th Lysine in the histone 3 amino-acid. This modification is known to activate the transcription on nearby genes by opening the chromatin. The H3K27me3 on the other hand is inactivating the transcription of the nearby genes:
+Binding certain proteins to each of the eight histone proteins may modify the chromatin structure and may result in changes in transcription level. For example, the H3K4me3 is adding 3 methyl-group of the 4th Lysine in the histone 3 amino-acid. This modification is known to activate the transcription on nearby genes by opening the chromatin. The H3K27me3 on the other hand is inactivating the transcription of the nearby genes:
 
 ![Fadloun et al, 2013](../../images/formation_of_super-structures_on_xi/histone_modifications.jpg "Source: Fadloun et al, 2013")
 
-More H3K27me3 and less H3K4m3 on the Xi could explain a lower expression of the genes there.
+More H3K27me3 and less H3K4me3 on the Xi could explain a lower expression of the genes there.
 
-It has been also observed that the Xi adopts a distinct conformation without evident compartments or TAD. cohesins, condensins and CCCTC-binding factor (CTCF) play key roles in chromosomal architectures and TAD formation which are other potential cause of the repression of the expression of the genes on Xi.
+It has been also observed that the Xi reconfigures uniquely into a specific chromosomal conformation. cohesins, condensins and CCCTC-binding factor (CTCF) play key roles in chromosomal architectures and TAD formation which are other potential cause of the repression of the expression of the genes on Xi.
 
 The structural-maintenance-of-chromosomes hinge domain containing 1 (SMCHD1) has been found enriched on the Xi. It may be the potential actor in the shape of Xi and the change in gene expression there.
 
@@ -84,7 +84,7 @@ In the upcoming tutorial, we will only use the wild type data from [Wang et al. 
 
 The first step of any ChIP-Seq data analysis is quality control of the raw sequencing data.
 
-To save time, we will do it only on the data of one sample `wt_H3K4me3_rep1` that has been down-sampled. keep in mind that with real data this should be done on all samples.
+To save time, we will do it only on the data of one sample `wt_H3K4me3_rep1` which has been already down-sampled. keep in mind that with real data this should be done on each and every sample.
 
 > ### {% icon hands_on %} Hands-on: Import the data
 >
@@ -222,7 +222,7 @@ It is often necessary to trim sequenced read, for example, to get rid of bases t
 
 # Step 2: Mapping of the reads
 
-With ChiP sequencing, we obtain sequences corresponding to portion of DNA linked to histones with H3K4me3. As H3K4me3 opens the chromatime, nearby genes are more transcribed. It would be interesting to know if there is a difference in the quantity of DNA impacted by H3K4me3 and the impacted genes between active and inactive X chromosome.
+With ChiP sequencing, we obtain sequences corresponding to a portion of DNA linked to the histone mark of interest, H3K4me3 in this case. As H3K4me3 opens the chromatime, nearby genes are gioing to be more transcribed. It would be interesting to know if there is a difference in the quantity of DNA impacted by H3K4me3 and the impacted genes between active and inactive X chromosome.
 
 {% include topics/sequence-analysis/tutorials/mapping/mapping_explanation.md
     to_identify="binding sites"

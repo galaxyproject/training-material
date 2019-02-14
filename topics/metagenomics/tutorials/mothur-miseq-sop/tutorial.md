@@ -277,7 +277,7 @@ Here the first column contains the read name, and the second column contains the
 ### Data Cleaning
 
 For more information on the topic of quality control, please see our training materials
-[here]({{site.baseurl}}/topics/sequence-analysis/)
+[here]({{site.baseurl}}{% link topics/sequence-analysis/index.md %})
 
 Next we want to improve the quality of our data. But first, let's get a feel of our data
 
@@ -400,7 +400,7 @@ the number of duplicates of this sequence observed in each sample.
 ### Sequence Alignment
 
 For more information on the topic of alignment, please see our training materials
-[here]({{site.baseurl}}/topics/sequence-analysis/)
+[here]({{site.baseurl}}{% link topics/sequence-analysis/index.md %})
 
 We are now ready to align our sequences to the reference. This step is an important
 step to perform to improve the clustering of your OTUs [[Schloss 2013]](https://doi.org/10.1038/ismej.2012.102)
