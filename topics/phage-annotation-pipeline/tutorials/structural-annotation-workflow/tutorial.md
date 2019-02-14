@@ -105,12 +105,13 @@ For example, in the image below, the light blue and dark blue tracks are a bette
 
 > ### {% icon tip %} Gene calling tips
 > Phages tend to maximize coding density (the amount of DNA that is occupied by a feature), since the amount of DNA they can fit into their capsid is limited. **Avoid leaving large gaps in your DNA sequence with no gene calls.** 
-
+>
 > * If *MetaGeneAnnotator* and *Glimmer3* have left large gaps in the DNA sequence, look in the *Sixpack* track for candidate genes that occupy the gaps and have valid Shine-Dalgarno sequences. 
-
+>
 > * If there is a large open reading frame that occupies a gap but does not have a good Shine-Dalgarno sequence, these may be worth calling as genes as well.
-
+>
 > * If there are two overlapping predicted genes in the same reading frame, **choose the longer one** (the one with the first start codon).
+>
 {: .tip}
 
 ## tRNA Genes
