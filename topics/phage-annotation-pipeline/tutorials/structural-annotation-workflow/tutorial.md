@@ -87,7 +87,7 @@ When the genome has been opened in Apollo, you can begin structural annotation o
 
 ## Protein-coding Genes
 
-Recall that the primary gene callers *MetaGeneAnnotator* and *Glimmer3* use sophisticated algorithms to predict gene loctaions and are correct ~90-95% of the time. The *Sixpack* tool is a "dumb" gene caller in that it will detect any open reading frame (ORF) longer than 20 codons with a valid start codon. *Sixpack* is available as a "backup" tool to annotate genes that may have been missed by both *MetaGeneAnnotator* and *Glimmer3*.
+Recall that the primary gene callers *MetaGeneAnnotator* and *Glimmer3* use sophisticated algorithms to predict gene locations and are correct ~90-95% of the time. The *Sixpack* tool is a "dumb" gene caller in that it will detect any open reading frame (ORF) longer than 20 codons with a valid start codon; our version will also indicate those that have a valid Shine-Dalgarno (RBS), and you should generally use those if needed.  *Sixpack* is basically a "backup" tool to annotate genes that may have been missed by both *MetaGeneAnnotator* and *Glimmer3*.
 
 Choose the best gene to call from the evidence tracks considering the start codon, presence of a Shine-Dalgarno sequence, and genome coverage (phage have high coding density and genes often touch or overlap). A summary of phage gene structure is provided below.
 
@@ -103,8 +103,15 @@ For example, in the image below, the light blue and dark blue tracks are a bette
 >![](../../images/structural-annotation-workflow-screenshots/12_create_gene.png)
 {: .hands_on}
 
-> ### {% icon tip %} Note that…
-> Phages tend to maximize coding density (the amount of DNA that is occupied by a feature), since the amount of DNA they can fit into their capsid is limited. Avoid leaving large gaps in your DNA sequence with no gene calls. If *MetaGeneAnnotator* and *Glimmer3* have left large gaps in the DNA sequence, look in the *Sixpack* track for candidate genes that occupy the gaps and have valid Shine-Dalgarno sequences. If there is a large open reading frame that occupies a gap but does not have a good Shine-Dalgarno sequence, these may be worth calling as genes as well.
+> ### {% icon tip %} Gene calling tips
+> Phages tend to maximize coding density (the amount of DNA that is occupied by a feature), since the amount of DNA they can fit into their capsid is limited. **Avoid leaving large gaps in your DNA sequence with no gene calls.** 
+>
+> * If *MetaGeneAnnotator* and *Glimmer3* have left large gaps in the DNA sequence, look in the *Sixpack* track for candidate genes that occupy the gaps and have valid Shine-Dalgarno sequences. 
+>
+> * If there is a large open reading frame that occupies a gap but does not have a good Shine-Dalgarno sequence, this may be worth calling as a gene as well.
+>
+> * If there are two overlapping predicted genes in the same reading frame, in general you should **choose the longer one** (the one with the first start codon).  Often gene calling programs do not like to call gene starts inside upstream genes, because that is rare in bacteria or eukaryotes.  However, phage genes are compressed and very often overlap each other by up to 15 codons or so. Usually there is a sixpack call that will fix this problem. In some cases (remember lambda *nu3-C*) there are two start codons far apart, indicating that two different products are made from the same mRNA.  Likely this will not be revealed until the Functional workflow, so do not worry about this now. And, finally, the o-spanin gene (like *Rz1* is often embedded inside the i-spanin gene (*Rz*).  Gene calling programs NEVER detect embedded genes like this.  If you have a genome for a phage of a Gram-negative host, be alert for small out-of-frame genes (usually <100 codons) that have a good S-D but are wholly or partially embedded in a bigger gene ( usually 130 - 200 codons).    
+>
 {: .tip}
 
 ## tRNA Genes
