@@ -4,13 +4,6 @@ topic_name: genome-annotation
 tutorial_name: galaxy-faq
 ---
 
-# Introduction
-{:.no_toc}
-
-<!-- This is a comment. -->
-
-General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
-
 > ### {% icon question %} One of my datasets turned red, what do I do?
 >    > ### {% icon solution %} Solution
 >    > * Expand the dataset by clicking on the name. Click on the bug icon ![](../../images/galaxy-faq-screenshots/1_report_bug.png), and read the message that appears - it may give you a clue. [CPT IT staff](http://cpt.tamu.edu) will respond as soon as possible. **Do not rerun the job** unless you are changing some parameter to attempt to fix the problem. Otherwise, the history will be clogged with unnecessary, stalled jobs.
