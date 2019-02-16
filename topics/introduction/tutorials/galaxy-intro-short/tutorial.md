@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "A short introduction to Galaxy"
+zenodo_link: "https://doi.org/10.5281/zenodo.582600"
 questions:
   - "How to get started in Galaxy"
 objectives:
