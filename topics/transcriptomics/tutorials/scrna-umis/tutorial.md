@@ -28,7 +28,7 @@ follow_up_training:
     type: "internal"
     topic_name: transcriptomics
     tutorials:
-        - plates-batches-and-barcodes
+        - scrna-plates-batches-barcodes
 
         
 contributors:
