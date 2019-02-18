@@ -20,18 +20,17 @@ for dir in /tutorials/*
 do
     echo "Installing tutorial: $dir"
 
-    # install tools
-    if [ -f $dir/tools.yaml ]
-    then
-        echo " - Installing tools"
-        shed-tools install -t $dir/tools.yaml -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
-    else
-        echo " - No tools to install (no file named tools.yaml present)"
-    fi
-
-    # install workflows
+    # install tools and workflows
     if [ -d $dir/workflows/ ];
     then
+        echo " - Extracting tools from workflows"
+        for w in $dir/workflows/*.ga
+        do
+            python /workflow_tools_install.py "$dir" "$(basename $w)"
+            echo " - Installing tools from workflow $(basename $w)" 
+            shed-tools install -t $dir/workflows/wftools.yaml -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
+            rm $dir/workflows/wftools.yaml
+        done
         echo " - Installing workflows"
         workflow-install --publish_workflows --workflow_path $dir/workflows/ -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
     else
@@ -70,6 +69,10 @@ done
 
 cd /tutorials/
 python /mergeyaml.py > ./data-library_all.yaml
-setup-data-libraries -i ./data-library_all.yaml -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD -v
-
-
+# check if data-library_all.yaml is not empty
+if [ "$(head -n 1 ./data-library_all.yaml)" != "{}" ];
+then
+    setup-data-libraries -i ./data-library_all.yaml -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD -v
+else
+    echo "No data libraries to install"
+fi
