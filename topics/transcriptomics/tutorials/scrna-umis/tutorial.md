@@ -46,7 +46,7 @@ Barcodes are small oligonucleotides that are inserted into the captured sequence
  1. Which cell the sequence came from
  2. Which transcript the sequence came from
 
-When the sequence is mapped against a reference genome, we can then see which gene locus it aligns to and qualitavely assert that, together with the two pieces of information above, the sequence depicts a transcript from a specific a gene that originated from a specific cell.
+When the sequence is mapped against a reference genome, we can then see which gene locus it aligns to and qualitavely assert that, together with the two pieces of information above, the sequence depicts a transcript from a specific gene that originated from a specific cell.
 
 Barcodes come in a variety of formats, and in this tutorial we will be looking at the [CEL-Seq2 protocol](https://doi.org/10.1186/s13059-016-0938-8) used in droplet-based single-cell RNA-seq.
 
@@ -110,7 +110,7 @@ Transcript barcodes are often *not* unique. This becomes evident when you consid
 >
 {: .question}
 
-The purpose of transcript barcodes is to reduce the impact of duplicate reads than occur non-linearly during the amplification process.
+The purpose of transcript barcodes is to reduce the impact of duplicated reads that occur non-linearly during the amplification process.
 
 For this reason, transcript barcodes do not need to be unique. As long as we know that a given read maps to a specific transcript (i.e. after mapping it to a transcriptome), then we can assess how unique that read is based on:
 
@@ -187,7 +187,7 @@ This then provides us with the true count of the number of true transcripts for 
 
 
 > ### {% icon question %} Questions about UMIs
->
+> 
 > 1. Are UMIs specific to genes? i.e. Can the same UMI map to different genes?
 > 2. Can the same UMI map to different mRNA molecules of the same gene?
 >
