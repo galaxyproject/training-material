@@ -17,23 +17,24 @@ key_points:
   - "Relocating barcodes into headers"
   - "Removing unwanted barcodes"
 requirements:
-  - 
+  -
     type: "internal"
     topic_name: transcriptomics
     tutorials:
         - scrna-introduction
+        - scrna-plates-batches-barcodes
 
 follow_up_training:
-  - 
+  -
     type: "internal"
     topic_name: transcriptomics
     tutorials:
-        - scrna-plates-batches-barcodes
+        - scrna-preprocess
 
-        
+
 contributors:
   - mtekman
-  
+
 ---
 
 
