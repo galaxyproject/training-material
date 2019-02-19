@@ -284,7 +284,7 @@ These are reads that all map to ENSDARG00000019692. In [Cell, UMI] format:
 
 ## Our Four Reads of Interest
 
-Let us examine these reads four reads of interest which we have just sub-selected using their headers:
+Let us examine these four reads of interest which we have just sub-selected using their headers:
 
 > ### {% icon details %} Forward Reads:
 >
