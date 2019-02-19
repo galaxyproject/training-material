@@ -126,10 +126,12 @@ To fully explore the uniqueness of counts, we must discuss the inclusion of *UMI
 >
 > Amplification is an imprecise process however, since some reads are amplified more than others, and subsequent amplification can lead to these over-amplified reads being over-amplified even more, leading to an exponential bias of some reads over others.
 >
-> <!-- .image-50 [ ] -->
 > ![Amplification Bias](../../images/scrna_amplif_errors.png "A cell with two reads from different transcripts being amplified unevenly")
 >
-> Consider the above example where two reads from different transcripts are amplified unevenly. The resulting frequency table would look like so:
+> <small>***Note:*** Cell barcodes are not shown in any of these examples, we assume they were added to our transcripts previously. </small><br /><br />
+>
+> 
+> Consider the above example where two reads from different transcripts are amplified unevenly. The resulting frequency table would yield:
 >
 >  > |  | Reads in Cell 1 |
 >  > |--|------------------|
