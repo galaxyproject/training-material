@@ -522,6 +522,7 @@ We should now be able to see the following reads:
 >
 {: .details}
 
+Notice the remaining sequence in each of the reads, and that the reverse reads appear to fully encapsulate all the information that we wanted to capture in our table at the beginning of this section.
 
 > ### {% icon question %} Question
 >
@@ -541,9 +542,12 @@ We should now be able to see the following reads:
 > {: .solution}
 {: .question}
 
+We have now successfully multiplexed data from several different (cell) sources into a single file that will greatly simplify the mapping/alignment process downstream.
+
+We have also now successfully *de*-multiplexed our data, by decoding each pair of reads into barcoding and sequence parts and making use of the FASTQ format by storing this information within the FASTQ headers and data, respectively.
 
 
 # Conclusion
 {:.no_toc}
 
-With this tutorial we have understood the importance of demultiplexing FASTQ data using barcodes, and can apply it to a variety of analyses which make use of them. 
+With this tutorial we have understood the importance of handling FASTQ data from different sources, and extracting the information we need (barcodes (cell and UMI) and sequence) using **UMI-tools** so that we can perform mapping without losing any context of where the reads are derived from.
