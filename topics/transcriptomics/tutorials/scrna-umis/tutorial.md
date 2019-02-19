@@ -385,9 +385,9 @@ The encoding of the barcodes on the first read can actually be seen by examining
 
 Here we can see the three distinct regions along the x-axis that correspond to our expected [CEL-Seq2 Schema](#the-cel-seq2-protocol):
 
- * 01 - 06 bp: smooth, relatively constant bases.
- * 07 - 12 bp: noisy, highly varied distribution of bases.
- * 13 - 30b p: T-dominated region
+ * 01-06bp: smooth, relatively constant bases.
+ * 07-12bp: noisy, highly varied distribution of bases.
+ * 13-30bp: T-dominated region
 
 We can see that the distribution of the first 6bp is relatively more even than the following 6bp which seems to have more extreme variation.
 
