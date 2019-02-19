@@ -107,30 +107,6 @@ contributors:
 ???
 Plates are $$N \times M$$ arrays or wells that cells are sorted into and then individually amplified and sequenced. The way these slot are filled depends entirely on the protocol, but usually not all slots are filled. The reason for this will become clear momentarily.
 
-
----
-
-### Plates and Lanes
-
-
-        | · · · · · · · · · |  <- Plate: N=9, M=6
-        | · · · · · · · · · |            54 slots
-        | · · · · · · · · · |                    
-        | · · · · · · · · · |                    
-        | · · · · · · · · · |                    
-        | · · · · · · · · · |
-
-.center[Sequencing Plates are divided into *lanes*:]
-
-
-        | · · · : · · · : · · · |  <---   Plate: N=9, M=6, 3 lanes
-        | · · · : · · · : · · · |                54 slots
-        | · · · : · · · : · · · |          Lane: n=3, m=6
-        | · · · : · · · : · · · |                18 slots per lane
-        | · · · : · · · : · · · |
-        | · · · : · · · : · · · |
-
-
 * Lanes demarcate evenly-sized *n x m* rectangular regions on a plate (where *n < N and m < M*).
 * Multiple lanes can exist on plate, lanes ideally do not overlap within a plate.
 
@@ -162,6 +138,7 @@ Plates are $$N \times M$$ arrays or wells that cells are sorted into and then in
         | · · · : · · · : · · · |                          | · · · : · · · : · · · |
            B1       B2     B3                                  B4      B5      B6
 
+???
 * Lanes and batches describe the same spaces, but not the same samples.
 * For this reason, batch numbers should *not* persist across different plates.
 
@@ -224,7 +201,7 @@ The way these slots are filled depends entirely on the protocol, but usually not
 
 ### Questions about Cell Barcodes
 
-.left[3) What would be the minimum length of the barcodes for each of the previous questions?]
+.left[<small>3) What would be the minimum length of the barcodes for each of the previous questions?</small>]
 
 .pull-left[
 
@@ -271,11 +248,11 @@ A plate with 10 lanes?
 .pull-right[
 <small>*Edit distance = 1bp*
 
-    AAAAA AAAAC AAAAG AAAAT AAACA AAAGA AAATA ·...
-    CCCCC CCCCA CCCCG CCCCT CCCAC CCCGC CCCTC ·...
-      ·
-      ·
-      ·
+    AAAAA AAAAC AAAAG AAAAT AAACA AAAGA AAATA ····
+    CCCCC CCCCA CCCCG CCCCT CCCAC CCCGC CCCTC ····
+                        ·
+                        ·
+                        ·
 ]
 
 
@@ -294,17 +271,17 @@ That's right, sequencing errors can mislabel a read to a completely different ce
 
 * To guard against a 1 bp sequencing error, need to space barcodes by 2 bp
 
-* How many barcodes would this yield for a cell barcode of length 5 bp?
+* How many barcodes for a cell barcode of length 5 bp?
 ]
 .pull-right[
 <small>*Edit Distance = 2 bp*
 
 
-    AAAAA AAACC AAAGG AAATT AACCA AAGGA AATTA ...
-    CCCCC CCCAA CCCGG CCCTT CCAAC CCGGC CCTTC ...
-      ·
-      ·
-      ·
+    AAAAA AAAAC AAAAG AAAAT AAACA AAAGA AAATA ····
+    CCCCC CCCCA CCCCG CCCCT CCCAC CCCGC CCCTC ····
+                        ·
+                        ·
+                        ·
       
 ]
 
@@ -383,21 +360,12 @@ and Edit Distance of *E*.]
 
 Is it better to use Longer or Shorter Barcodes?
 
-.pull-left[
-Longer:
-* Offer larger range of barcodes
-* Prone to more sequencing errors
-   * Must increase edit distance significantly
-* Can accomodate large edit distances
-]
-
-.pull-right[
-Shorter:
-* Offer smaller range of barcodes 
-* More robust against sequencing errors
-  * A smaller edit distance is more acceptable
-* *Cannot* accomodate large edit distances
-]
+  | Longer | Shorter |
+  |--------|---------|
+  | Offer larger range of barcodes | Offer smaller range of barcodes |
+  | Prone to more sequencing errors | More robust against sequencing errors |
+  | Must increase edit distance significantly | A smaller edit distance is more acceptable | 
+  |  Can accomodate large edit distances | *Cannot* accomodate large edit distances | 
 
 ---
 
@@ -408,8 +376,6 @@ Shorter:
 * A single barcode sequence indexes a single cell
 
 * Every transcript in a specific cell has the same cell barcode
-]
-.pull-right[
 
 * Barcodes are *designed* and are not random oligonucleotides
 
@@ -418,17 +384,20 @@ Shorter:
 ]
 --
 <hline>
-.center[
+.pull-right[#### Need to balance:
 
-#### Need to balance:  
+<small>
 
-* Edit Distance vs. Barcode Length
+  | | | |
+|-|-|-|
+| Edit Distance | vs. | Barcode Length |
+| Number of Barcodes | vs. | Plate and Lane Size |
 
-* Number of Barcodes vs. Plate and Lane Size
-
-  * ***How?***
-
+</small>
 ]
+--
+.pull-right[* How?]
+
 
 ---
 
@@ -488,7 +457,7 @@ Here we use N as an extra base just for example purposes, but you do sometimes s
 
 ### Example 1: Single Plate with a Single Lane
 
-.bottom-right-box[
+.bottom-info-box[
 Available Barcodes
         
     AAA ACC AGG TTT TAA TCC
@@ -528,7 +497,7 @@ Available Barcodes
 
 ### Example 2: Single Plate with 2 Lanes
 
-.bottom-right-box[
+.bottom-info-box[
 Available Barcodes
         
     AAA ACC AGG TTT TAA TCC
@@ -562,7 +531,7 @@ Let's look at one final example to see why using all our barcodes on a plate mig
 
 ### Example 3: Single Plate with 2 Lanes, only 1 active
 
-.bottom-right-box[
+.bottom-info-box[
 Available Barcodes
         
     AAA ACC AGG TTT TAA TCC
@@ -593,7 +562,7 @@ All barcodes used, why leave one lane empty?
 
 ### Example 3: Single Plate with 2 Lanes, only 1 active
 
-.bottom-right-box[
+.bottom-info-box[
 Available Barcodes
         
     AAA ACC AGG TTT TAA TCC
@@ -624,7 +593,7 @@ If we see any reads in the Plate which contain barcodes {TTT,TAA,TCC, etc} then 
 
 ### Example 4: 2 Plates with 2 Lanes, only 1 active (alternate)
 
-.bottom-right-box[
+.bottom-info-box[
 Available Barcodes
         
     AAA ACC AGG TTT TAA TCC
@@ -648,14 +617,16 @@ Available Barcodes
          | · · · : 2 2 2 |       cgg ctt ggg : NGG NTT ANN
          | · · · : 2 2 2 |       gaa gcc gtt : CNN GNN TNN
          
-.pull-left[
+<small>
 * Why alternate active lanes across plates?
-]
+</small>
+
 --
-.pull-right[
-* Plate 1 and Plate 2 are sometimes the *same plate*
-* Contaminants might carry over *undetected* if same lane is used!
-]
+<small>
+  * Plate 1 and Plate 2 are sometimes the *same plate*
+  * Contaminants might carry over *undetected* if same lane is used!
+</small>
+
 ???
 * Here we have repeated previous example, but with an extra plate. In the first plate, the first half of the barcodes are used, and in the second plate, the second half of the barcodes are used.
 
@@ -669,7 +640,7 @@ Available Barcodes
 
 ### Example 5: 1 Plate with 2 lanes, both active
 
-.bottom-right-box[
+.bottom-info-box[
 Available Barcodes
         
     AAA ACC AGG TTT TAA TCC
