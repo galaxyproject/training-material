@@ -58,7 +58,7 @@ CEL-Seq2 is a paired-end protocol, meaning that two primers bind to opposite str
 
 In this case; *Read1* contains the barcoding information followed by the polyT tail of the messenger RNA, and *Read2* contains the actual sequence. Here, Read1 is regarded as the 'forward' strand and Read2 as the 'reverse' strand, though this is more a convention when dealing with paired-end data rather than an indication of the actual strand orientation.
 
- ![CEL-Seq2 Scheme](../../images/celseq2_schema.png "Read1 encapsulates the barcodes, and Read2 the mRNA sequence")
+ ![CEL-Seq2 Scheme](../../images/celseq2_schema.svg "Read1 encapsulates the barcodes, and Read2 the mRNA sequence")
 
 
 
