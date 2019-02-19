@@ -18,5 +18,4 @@ ADD topics/transcriptomics/tutorials/ /tutorials/
 # install everything for tutorials
 ADD bin/docker-install-tutorials.sh /setup-tutorials.sh
 ADD bin/mergeyaml.py /mergeyaml.py
-ADD bin/workflow_tools_install.py /workflow_tools_install.py
 RUN /setup-tutorials.sh

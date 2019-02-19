@@ -26,7 +26,7 @@ do
         echo " - Extracting tools from workflows"
         for w in $dir/workflows/*.ga
         do
-            python /workflow_tools_install.py "$dir" "$(basename $w)"
+            workflow-to-tools -w $w -o $dir/workflows/wftools.yaml -l $(basename $dir)
             echo " - Installing tools from workflow $(basename $w)" 
             shed-tools install -t $dir/workflows/wftools.yaml -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
             rm $dir/workflows/wftools.yaml
