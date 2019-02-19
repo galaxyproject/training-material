@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: "Understanding Barcodes"
-zenodo_link: "https://zenodo.org/record/1345635"
+zenodo_link: "https://zenodo.org/record/2573177"
 tags:
   - single-cell
 questions:
@@ -216,16 +216,15 @@ We now know the role of UMIs and cell barcodes, but how do we handle them in the
 > ### {% icon hands_on %} Hands-on: Preparing the Data
 >
 >    1. Create a new history and rename it (*e.g.* 'Inspecting FastQ Files in scRNA batch data')
->    1. Import the following files from [`Zenodo`](https://zenodo.org/record/2554612) or from the data library (ask your instructor)
+>    1. Import the following files from [`Zenodo`](https://zenodo.org/record/2573177) or from the data library (ask your instructor)
 >    ```
->    https://zenodo.org/record/2554612/files/test_barcodes_celseq2_R1.fastq.gz?download=1
->    https://zenodo.org/record/2554612/files/test_barcodes_celseq2_R2.fastq.gz?download=1
+>    https://zenodo.org/record/2573177/files/test_barcodes_celseq2_R1.fastq.gz
+>    https://zenodo.org/record/2573177/files/test_barcodes_celseq2_R2.fastq.gz
 >    ```
 >    
->    {% include snippets/import_via_link.md %}
+>    {% include snippets/import_via_link.md %} <br/>
 >    
->    
->    1. Build a *Dataset pair* for the two FASTQ files
+>    1. Build a *Dataset pair* for the two FASTQ files <!-- cannot force this to count from 3 -->
 >       - Click the *Operations on multiple datasets* check box at the top of the history panel
 >       - Check the two boxes next to the R1 and R2 scRNA FASTQ samples
 >       - Click *For all selected...* and choose *Build dataset pair*
