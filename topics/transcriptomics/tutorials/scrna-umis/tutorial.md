@@ -49,14 +49,16 @@ When the sequence is mapped against a reference genome, we can then see which ge
 
 Barcodes come in a variety of formats, and in this tutorial we will be looking at the [CEL-Seq2 protocol](https://doi.org/10.1186/s13059-016-0938-8) used in droplet-based single-cell RNA-seq.
 
-## {% icon info %} The CEL-Seq2 protocol
+### The CEL-Seq2 Protocol
+
+<small>[Back to previous](javascript:window.history.back())</small>
+
+CEL-Seq2 is a paired-end protocol, meaning that two primers bind to opposite strands in order to sequence. Each primer has a specific role. 
  
-CelSeq2 is a paired-end protocol, meaning that two primers bind to opposite strands in order to sequence. Each primer has a specific role. In this case; *Read1* contains the barcoding information followed by the polyT tail of the messenger RNA, and *Read2* contains the actual sequence. Here, Read1 is regarded as the 'forward' strand and Read2 as the 'reverse' strand, though this is more a convention when dealing with paired-end data rather than an indication of the actual strand orientation.
-
-![CelSeq2 Scheme](../../images/celseq2_schema.png "Read1 encapsulates the barcodes, and Read2 the mRNA sequence")
-
- [Back to previous](javascript:window.history.back())
-
+In this case; *Read1* contains the barcoding information followed by the polyT tail of the messenger RNA, and *Read2* contains the actual sequence. Here, Read1 is regarded as the 'forward' strand and Read2 as the 'reverse' strand, though this is more a convention when dealing with paired-end data rather than an indication of the actual strand orientation.
+ 
+ ![CEL-Seq2 Scheme](../../images/celseq2_schema.png "Read1 encapsulates the barcodes, and Read2 the mRNA sequence")
+ 
 
 
 > ### Agenda
@@ -70,24 +72,54 @@ CelSeq2 is a paired-end protocol, meaning that two primers bind to opposite stra
 
 # Understanding Barcodes
 
-> ### {% icon question %} Questions about Cell Barcodes
+> ### {% icon tip %} Tip: Viewing the pre-requisite topic
 >
-> 1. Why is it important to know which cell a sequence came from?
-> 2. Barcoding the cell makes sense, but why do we need to barcode the transcript too? i.e. Can we not infer which gene the sequence originates from by simply mapping it against the reference genome?
+> It is highly recommended that the material in the ***Plates, Batches, and Barcodes*** slides [here](../scrna-plates-batches-barcodes/slides.html) are first observed before proceeding with the rest of this tutorial.
+>
+{: .tip}
+
+Cell barcodes are designed primarily for delineating one cell from another, such that read transcripts containing different cell barcodes can be trivially said to be derived from different cells.
+
+ ![Cell Barcodes](../../images/scrna_pbb_barcodes_add.svg "Two seperate cell barcodes GGG and TCT, added to all read transcripts of two different cells")
+ 
+Transcript barcodes are different. These can be thought of as "random salt" that is sprinkled onto any given cell that helps reduce the number of duplicate transcripts. 
+
+ ![Transcript Barcodes](../../images/scrna_umi_add.svg "Random oligonucleotides barcodes added to (cell barcoded) reads")
+
+There are two things to take note of:
+
+ 1. The number of duplicates in the transcript barcodes (left)
+ 2. The number of duplicate read transcripts (right)
+
+Transcript barcodes are often *not* unique. This becomes evident when you consider that there are approximately 200,000 mRNA's in a given mammalian cell ([ref](https://doi.org/10.1038/nrg3542)) which would require barcode lengths of greater than 9 nucleotides to capture, assuming no sequencing errors.
+
+> ### {% icon question %} Questions 
+>
+> 1. Why is it important to know which cell a read came from?
+> 2. Why do we need to barcode a read transcript too? Isn't mapping it against the reference genome enough?
 > 
 > > ### {% icon solution %} Solution
 > >
-> > 1. If our sequence codes for a *GeneX* which is a gene of interest, we may want to know which cells express GeneX more than others.   
-> > e.g. If *CellA* has 10 times more *GeneX* sequences than *CellB*, then we know that *CellA* and *CellB* differ at *GeneX* - which might suggest a causative source of variation for any change in function between *CellA* and *CellB* (or cells in the same cluster as *CellA*, and cells in the same cluster as *CellB*).
+> > 1. If all our reads encode for a *Red Gene* (as above), we may want to know which cells express *Red Gene* more than others.   
+> > * e.g. If our *Grey* cell has 10 times more *Red Gene* reads than our *Green* cell, then we know that the *Grey* cell and *Green* cell differ in their expression of *Red Gene* - which might be biologically significant.
 > > 2. *Yes* and *no*!  
-> > **Yes**: We can indeed align our sequence against a reference genome and obtain the name of the gene it aligns against. This sequence will then contribute to the 'count' of sequences that gene has, and increase the expression of that gene.  
-> > **No**: We do not know whether these 'counts' are *unique*. Many of these counts could be duplicates as a result of the amplification process. To explain further, we must look at UMIs and their role in the analysis.
+> > * **Yes**: We can indeed align our sequence against a reference genome and obtain the name of the gene it aligns against. This sequence will then contribute to the 'count' of sequences that gene has, and increase the expression of that gene.  
+> > * **No**: We do not know whether these 'counts' are *unique*. Many of these counts could be duplicates as a result of the amplification process. To explain further, we must look at UMIs and their role in the analysis.
 > {: .solution}
+>
 {: .question}
 
-To explore the uniqueness of counts, we must discuss the inclusion of *UMIs* in a single-cell analysis.
+The purpose of transcript barcodes is to reduce the impact of duplicate reads than occur non-linearly during the amplification process.
 
-> ### {% icon details %} Mitigating duplicate transcript counts with UMIs
+For this reason, transcript barcodes do not need to be unique. As long as we know that a given read maps to a specific transcript (i.e. after mapping it to a transcriptome), then we can assess how unique that read is based on:
+
+  1. Cell barcode
+  2. Transcript barcode
+  3. Mapped location
+
+To fully explore the uniqueness of counts, we must discuss the inclusion of *UMIs* in a single-cell analysis.
+
+> ### {% icon tip %} Mitigating duplicate transcript counts with UMIs
 >
 > One of the major issues with sequencing is that the read fragments require amplification before they can be sequenced. A gene with a single mRNA transcript will not be detected by most sequencers, so it needs to be duplicated 100-1000x times for the sequencer to 'see' it.
 >
@@ -146,7 +178,7 @@ To explore the uniqueness of counts, we must discuss the inclusion of *UMIs* in 
 >  > | Gene Blue | 2 |
 >  {: .matrix}
 >
-{: .details}
+{: .tip}
 
 > ### {% icon question %} Questions about UMIs
 >
@@ -312,11 +344,11 @@ The main source of interest for us is in the (2) sequences of these reads, which
 
 These can be encoded into the sequences of our paired-end data by any means. In order to know where our barcodes are, we must be familiar with the sequencing primers used in the analysis:
 
-> ### {% icon details %} The CelSeq2 protocol
+> ### {% icon details %} The CEL-Seq2 protocol
 > 
-> CelSeq2 is a paired-end protocol, meaning that two primers bind to opposite strands in order to sequence. Each primer has a specific role. In this case; *Read1* contains the barcoding information followed by the polyT tail of the messenger RNA, and *Read2* contains the actual sequence. Here, Read1 is regarded as the 'forward' strand and Read2 as the 'reverse' strand, though this is more a convention when dealing with paired-end data rather than an indication of the actual strand orientation.
+> CEL-Seq2 is a paired-end protocol, meaning that two primers bind to opposite strands in order to sequence. Each primer has a specific role. In this case; *Read1* contains the barcoding information followed by the polyT tail of the messenger RNA, and *Read2* contains the actual sequence. Here, Read1 is regarded as the 'forward' strand and Read2 as the 'reverse' strand, though this is more a convention when dealing with paired-end data rather than an indication of the actual strand orientation.
 >
-> ![CelSeq2 Scheme](../../images/celseq2_schema.png "Read1 encapsulates the barcodes, and Read2 the mRNA sequence")
+> ![CEL-Seq2 Scheme](../../images/celseq2_schema.png "Read1 encapsulates the barcodes, and Read2 the mRNA sequence")
 >
 > [Back to previous](javascript:window.history.back())
 {: .details}
@@ -325,7 +357,7 @@ These can be encoded into the sequences of our paired-end data by any means. In 
 
 ## Verifying the Barcode Format
 
-As shown in [CelSeq2 Primer Figure](#details-the-celseq2-protocol), we have the following encoding:
+As shown in [CEL-Seq2 Primer Figure](#details-the-celseq2-protocol), we have the following encoding:
  * Forward Read:
     * 01-06bp: UMI Barcode
     * 07-12bp: Cell Barcode
@@ -354,7 +386,7 @@ The encoding of the barcodes on the first read can actually be seen by examining
  ![FastQC Plot](../../images/scrna_barcodes_fastq.png "FastQC plot of Forward read")
 
 
-Here we can see the three distinct regions along the x-axis that correspond to our expected CelSeq2 Schema:
+Here we can see the three distinct regions along the x-axis that correspond to our expected CEL-Seq2 Schema:
 
  * 01 - 06 bp: smooth, relatively constant bases.
  * 07 - 12 bp: noisy, highly varied distribution of bases.
