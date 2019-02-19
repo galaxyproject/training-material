@@ -40,12 +40,23 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Barcodes are small random oligonucleotides that are inserted into the captured sequence at a specific point, and provide two pieces of information about the sequence:
+Barcodes are small oligonucleotides that are inserted into the captured sequence at a specific point, and provide two pieces of information about the sequence:
   
  1. Which cell the sequence came from
  2. Which transcript the sequence came from
 
 When the sequence is mapped against a reference genome, we can then see which gene locus it aligns to and qualitavely assert that, together with the two pieces of information above, the sequence depicts a transcript from a specific a gene that originated from a specific cell.
+
+Barcodes come in a variety of formats, and in this tutorial we will be looking at the [CEL-Seq2 protocol](https://doi.org/10.1186/s13059-016-0938-8) used in droplet-based single-cell RNA-seq.
+
+## {% icon info %} The CEL-Seq2 protocol
+ 
+CelSeq2 is a paired-end protocol, meaning that two primers bind to opposite strands in order to sequence. Each primer has a specific role. In this case; *Read1* contains the barcoding information followed by the polyT tail of the messenger RNA, and *Read2* contains the actual sequence. Here, Read1 is regarded as the 'forward' strand and Read2 as the 'reverse' strand, though this is more a convention when dealing with paired-end data rather than an indication of the actual strand orientation.
+
+ ![CelSeq2 Scheme](../../images/celseq2_schema.png "Read1 encapsulates the barcodes, and Read2 the mRNA sequence")
+
+ [Back to previous](javascript:window.history.back())
+
 
 
 > ### Agenda
