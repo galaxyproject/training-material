@@ -188,12 +188,12 @@ This then provides us with the true count of the number of true transcripts for 
 
 > ### {% icon question %} Questions about UMIs
 > 
-> 1. Are UMIs specific to genes? i.e. Can the same UMI map to different genes?
+> 1. Are UMIs specific to genes? Can the same UMI map to different genes?
 > 2. Can the same UMI map to different mRNA molecules of the same gene?
 >
 > > ### {% icon solution %} Solution
 > >
-> 1. No. The same UMI can tag transcripts of different genes. UMIs are not universal tags, they are just 'added randomness' that help reduce amplification bias -- not unique to any particular gene.
+> 1. No, the same UMI barcode can tag transcripts of *different* genes. UMIs are not universal tags, they are just 'added randomness' that help reduce amplification bias -- not unique to any particular gene.
 > > 2. Yes, UMIs are not precise but operate probabilistically. In most cases, two transcripts of the same gene will be tagged by different UMIs. In rarer (but still prevalent) cases, the same UMI will capture different transcripts of the same gene.
 > >  * One helpful way to think about how quantification is performed is to observe the following heirarchy of data `Cell Barcode → Gene → UMI`
 > >
@@ -277,9 +277,9 @@ These are reads that all map to ENSDARG00000019692. In [Cell, UMI] format:
 
             Cell  , UMI
 1: 46961 -- ACCAGA, GGAAGA
-2: 13763 -- GGTAAC, GTCCCA -> same umi, same cell
-3: 35690 -- GGTAAC, GTCCCA -> same umi, same cell
-4: 11073 -- GGTAAC, CGGCGT -> diff umi, same cell
+2: 13763 -- GGTAAC, GTCCCA -> same UMI, same cell
+3: 35690 -- GGTAAC, GTCCCA -> same UMI, same cell
+4: 11073 -- GGTAAC, CGGCGT -> diff UMI, same cell
 -->
 
 ## Our Four Reads of Interest
@@ -389,7 +389,7 @@ Here we can see the three distinct regions along the x-axis that correspond to o
  * 07-12bp: noisy, highly varied distribution of bases.
  * 13-30bp: T-dominated region
 
-We can see that the distribution of the first 6bp is relatively more even than the following 6bp which seems to have more extreme variation.
+We can see that the distribution of nucleotides in the 01-06bp range is relatively more stable than the distribution of nucleotides in the 07-12bp range, which seems to exhibit more extreme variation.
 
 > ### {% icon question %} Question
 >
@@ -419,7 +419,7 @@ In a sense, we have a disparity in our data: the reverse reads contain the seque
 > Provided that these reads all map to the same gene:
 >
 > 1. Which of these reads come from the same cell?
-> 2. Which of these reads are duplicates?
+> 2. Which of these reads are PCR duplicates?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -432,13 +432,15 @@ In a sense, we have a disparity in our data: the reverse reads contain the seque
 > > 2. Reads:
 > >  * `@J00182:75:HTKJNBBXX:2:1203:25022:13763`
 > >  * `@J00182:75:HTKJNBBXX:2:2222:13301:35690`
-> >  are duplicates, since they both have the same cell barcode and same UMI.
+> >  appear to be PCR duplicates, since they both have the same cell barcode and same UMI.
 > >
-> > However, they are not direct duplicates of each other. since their sequences are different. However, they do stem from the same read as evidenced by their overlap:
+> > However if we consider their sequences, we can see that they contain different (but overlapping) sequences.
 > >
 > >          13763:   GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT
 > >          35690:                        CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
 > >
+> > They describe the same transcript but have sequences from different reads, and therefore both reads *should* be counted as seperate reads. Whether or not both these reads are counted as a single read due to their identical barcodes, or counted seperately due to their differing sequences depends entirely on the deduplication utility they are fed into it.
+> > 
 > {: .solution}
 {: .question}
 
@@ -538,7 +540,7 @@ Notice the remaining sequence in each of the reads, and that the reverse reads a
 > >    * Reverse:
 > >       * Sequence: Has not changed.
 > >       * Header: The `cell` and `umi` sections of the sequence from the Forward (note: **NOT** Reverse) reads have been added to the header.
-> > 2. With the inclusion of the cell and umi barcodes into the header of our sequence data, we now have all our useful data in the Reverse reads. We can now effectively throw away our Forward reads, as they have no more useful information within them.
+> > 2. With the inclusion of the cell and UMI barcodes into the header of our sequence data, we now have all our useful data in the Reverse reads. We can now effectively throw away our Forward reads, as they have no more useful information within them.
 > {: .solution}
 {: .question}
 
