@@ -240,7 +240,7 @@
       "name": "nekrut"
     }
   ],
-  "description": "The questions this  addresses are:\n - How to manipulate and process NGS data\n\n\\nThe objectives are:\n - Learn about Fastq, SAM, and BAM.\n\n"
+  "description": "The questions this  addresses are:\n - How to manipulate and process NGS data\n\n\\nThe objectives are:\n - Learn about FASTQ, SAM, and BAM.\n\n"
 }
 
     </script>
@@ -260,7 +260,7 @@
             <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
             <ul>
             
-            <li>Learn about Fastq, SAM, and BAM.</li>
+            <li>Learn about FASTQ, SAM, and BAM.</li>
             
             </ul>
 
@@ -271,7 +271,7 @@
             
         </blockquote>
 
-        <p>In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with Fastq format produced by most sequencing machines and will finish with SAM/BAM format representing mapped reads. The cover image above shows a screen dump of a SAM dataset.</p>
+        <p>In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with the FASTQ format produced by most sequencing machines and will finish with the SAM/BAM format representing mapped reads. The cover image above shows a screen dump of a SAM dataset.</p>
 
 <h1 id="getting-ngs-data-in">Getting NGS data in</h1>
 
@@ -321,13 +321,13 @@
 
 <p>These are paired end data (see below for explanation of what paired-end is) for a single Illumina run. Keep Galaxy history for later. We will need it again in a few minutes.</p>
 
-<h1 id="fastq-manipulation-and-quality-control">Fastq manipulation and quality control</h1>
+<h1 id="fastq-manipulation-and-quality-control">FASTQ manipulation and quality control</h1>
 
-<h2 id="what-is-fastq">What is Fastq?</h2>
+<h2 id="what-is-fastq">What is FASTQ?</h2>
 
-<p><a href="https://en.wikipedia.org/wiki/FASTQ_format">FastQ</a> is not a very well defined format. In the beginning various manufacturers of sequencing instruments were free to interpret fastq as they saw fit, resulting in a multitude of fastq flavors. This variation stemmed primarily from different ways of encoding quality values as described <a href="https://en.wikipedia.org/wiki/FASTQ_format">here</a> (below you will explanation of quality scores and their meaning). Today, <a href="https://www.ncbi.nlm.nih.gov/pubmed/20015970">fastq Sanger</a> version of the format is considered to be the standard form of fastq. Galaxy is using fastq sanger as the only legitimate input for downstream processing tools and provides <a href="https://www.ncbi.nlm.nih.gov/pubmed/20562416">a number of utilities for converting fastq files</a> into this form (see <strong>NGS: QC and manipulation</strong> section of Galaxy tools).</p>
+<p><a href="https://en.wikipedia.org/wiki/FASTQ_format">FASTQ</a> is not a very well defined format. In the beginning various manufacturers of sequencing instruments were free to interpret FASTQ as they saw fit, resulting in a multitude of FASTQ flavors. This variation stemmed primarily from different ways of encoding quality values as described <a href="https://en.wikipedia.org/wiki/FASTQ_format">here</a> (below you will explanation of quality scores and their meaning). Today, the <a href="https://www.ncbi.nlm.nih.gov/pubmed/20015970">FASTQ Sanger</a> version of the format is considered to be the standard form of FASTQ. Galaxy is using FASTQ Sanger as the only legitimate input for downstream processing tools and provides <a href="https://www.ncbi.nlm.nih.gov/pubmed/20562416">a number of utilities for converting FASTQ files</a> into this form (see <strong>NGS: QC and manipulation</strong> section of Galaxy tools).</p>
 
-<p>Fastq format looks like this:</p>
+<p>The FASTQ format looks like this:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 @M02286:19:000000000-AA549:1:1101:12677:1273 1:N:0:23
@@ -356,7 +356,7 @@ AAC&lt;CCF+@@&gt;CC,C9,F9C9@9-CFFFE@7@:+CC8-C@:7,@EFE,6CF:+8F7EFEEF@EGGGEEE
 
 <h2 id="paired-end-data">Paired end data</h2>
 
-<p>It is common to prepare pair-end and mate-pair sequencing libraries. This is highly beneficial for a number of applications discussed in subsequent topics. For now let’s just briefly discuss what these are and how they manifest themselves in fastq form.</p>
+<p>It is common to prepare pair-end and mate-pair sequencing libraries. This is highly beneficial for a number of applications discussed in subsequent topics. For now let’s just briefly discuss what these are and how they manifest themselves in FASTQ form.</p>
 
 <table>
   <thead>
@@ -369,12 +369,15 @@ AAC&lt;CCF+@@&gt;CC,C9,F9C9@9-CFFFE@7@:+CC8-C@:7,@EFE,6CF:+8F7EFEEF@EGGGEEE
       <td><img src="../../images/pe_mp.png" alt="Paired-end and mate-pair reads" /></td>
     </tr>
     <tr>
-      <td><small><strong>Paired-end and mate-pair reads</strong>. In paired end sequencing (left) the actual ends of rather short DNA molecules (less than 1kb) are determined, while for mate pair sequencing (right) the ends of long molecules are joined and prepared in special sequencing libraries. In these mate pair protocols, the ends of long, size-selected molecules are connected with an internal adapter sequence (i.e. linker, yellow) in a circularization reaction. The circular molecule is then processed using restriction enzymes or fragmentation. Fragments are enriched for the linker and outer library adapters are added around the two combined molecule ends. The internal adapter can then be used as a second priming site for an additional sequencing reaction in the same orientation or sequencing can be performed from the second adapter, from the reverse strand. (From Ph.D. dissertation by <a href="https://core.ac.uk/download/pdf/35186947.pdf">Martin Kircher</a>)</small></td>
+      <td><small><strong>Paired-end and mate-pair reads</strong>. In paired end sequencing (left) the actual ends of rather short DNA molecules (less than 1kb) are determined, while for mate pair sequencing (right) the ends of long molecules are joined and prepared in special sequencing libraries. In these mate pair protocols, the ends of long, size-selected molecules are connected with an internal adapter sequence (i.e. linker, yellow) in a circularization reaction. The circular molecule is then processed using restriction enzymes or fragmentation. Fragments are enriched for the linker and outer library adapters are added around the two combined molecule ends. The internal adapter can then be used as a second priming site for an additional sequencing reaction in the same orientation or sequencing can be performed from the second adapter, from the reverse strand. (From “Understanding and improving high-throughput</small></td>
+    </tr>
+    <tr>
+      <td>sequencing data production and analysis”, Ph.D. dissertation by <a href="https://www.qucosa.de/fileadmin/data/qucosa/documents/7110/pflichtexemplar_final.pdf">Martin Kircher</a>)&lt;/small&gt;</td>
     </tr>
   </tbody>
 </table>
 
-<p>Thus in both cases (paired-end and mate-pair) a single physical piece of DNA (or RNA in the case of RNA-seq) is sequenced from two ends and so generates two reads. These can be represented as separate files (two fastq files with first and second reads) or a single file were reads for each end are interleaved. Here are examples:</p>
+<p>Thus in both cases (paired-end and mate-pair) a single physical piece of DNA (or RNA in the case of RNA-seq) is sequenced from two ends and so generates two reads. These can be represented as separate files (two FASTQ files with first and second reads) or a single file were reads for each end are interleaved. Here are examples:</p>
 
 <h4 id="two-single-files">Two single files</h4>
 
@@ -430,13 +433,13 @@ HHHHHHHHHHHHHGHHHHHHGHHHHHHHHHHHFHHHFHHHHHHHHHHH
 <p>Here the first and the second reads are identified with <code class="highlighter-rouge">/1</code> and <code class="highlighter-rouge">/2</code> tags.</p>
 
 <blockquote class="comment">
-  <h3 id="comment-fastq-format-is-a-loose-standard"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Fastq format is a loose standard</h3>
-  <p>Fastq format is not strictly defined and its variations will always cause headache for you. See <a href="https://www.ncbi.nlm.nih.gov/books/NBK242622/">this page</a> for more information.</p>
+  <h3 id="comment-fastq-format-is-a-loose-standard"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> FASTQ format is a loose standard</h3>
+  <p>FASTQ format is not strictly defined and its variations will always cause headache for you. See <a href="https://www.ncbi.nlm.nih.gov/sra/docs/submitformats/">this page</a> for more information.</p>
 </blockquote>
 
 <h2 id="what-are-base-qualities">What are base qualities?</h2>
 
-<p>As we’ve seen above, fastq datasets contain two types of information:</p>
+<p>As we’ve seen above, FASTQ datasets contain two types of information:</p>
 
 <ul>
   <li><em>sequence of the read</em></li>
@@ -470,7 +473,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/fastq_qs.png" alt="FastQ quality score" /></td>
+      <td><img src="../../images/fastq_qs.png" alt="FASTQ quality score" /></td>
     </tr>
     <tr>
       <td><small>The ASCII interpretation and ranges of the different Phred score notations used by Illumina and the original Sanger interpretation. Although the Sanger format allows a theoretical score of 93, raw sequencing reads typically do not exceed a Phred score of 60. In fact, most Illumina-based sequencing will result in maximum scores of 41 to 45 (image from <a href="https://en.wikipedia.org/wiki/FASTQ_format">Wikipedia</a></small></td>
@@ -480,7 +483,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 <h2 id="assessing-data-quality">Assessing data quality</h2>
 
-<p>One of the first steps in the analysis of NGS data is seeing how good the data actually is. <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastqQC</a> is a fantastic tool allowing you to gauge the quality of fastq datasets (and deciding whether to blame or not to blame whoever has done sequencing for you).</p>
+<p>One of the first steps in the analysis of NGS data is seeing how good the data actually is. <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastqQC</a> is a fantastic tool allowing you to gauge the quality of FASTQ datasets (and deciding whether to blame or not to blame whoever has done sequencing for you).</p>
 
 <table>
   <thead>
@@ -864,11 +867,11 @@ Duplicates are identified as read pairs having identical 5' positions (coordinat
                 
                 <li>Data can be uploaded directly from a computer, from EBI SRA and from NCBI SRA, also using FTP or URL.</li>
                 
-                <li>Fastq Sanger version of the format is considered to be the standard form of fastq.</li>
+                <li>FASTQ Sanger version of the format is considered to be the standard form of FASTQ.</li>
                 
                 <li>Paired end data can be provided as two files or as an interleaved one.</li>
                 
-                <li>FastqQC is a tool allowing to check the quality of fastq datasets.</li>
+                <li>FastqQC is a tool allowing to check the quality of FASTQ datasets.</li>
                 
                 <li>The most common tools for mapping are Bowtie, BWA, BWA-MEM. You can use in-built genome to map against or upload one if it is missing.</li>
                 
