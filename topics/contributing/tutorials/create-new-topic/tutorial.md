@@ -64,7 +64,7 @@ The templates for the tutorials are different from the other pages to help users
 
 The content of each tutorial is generated with [Jekyll](https://jekyllrb.com/) from a Markdown file and some metadata (e.g. the requirements, the Zenodo link, the questions) defined inside the metadata of the related topic.
 
-> Want to contribute to a tutorial? [Check out our training materials about that]({{ site.baseurl }}{% link topics/contributing/index.md %})
+> Want to contribute to a tutorial? Check out [our training materials about that]({{ site.baseurl }}{% link topics/contributing/index.md %}).
 
 Sometimes, an hands-on tutorial is not the most appropriate format for a tutorial and slides are better. The content must be then added in the `slides` directory.
 
@@ -73,7 +73,7 @@ Sometimes, an hands-on tutorial is not the most appropriate format for a tutoria
 
 For each topic, a flavored Docker image must integrate the tools needed for
 the tutorials. The corresponding image must be based on official Galaxy Docker
-images. We recommend to use the content of [`templates/docker`]({{ site.github.repository_url }}/tree/{{ site.repository_branch }}/templates/docker) as a template.
+images.
 
 The `docker` image will also integrate the Galaxy tours available for each topics and the workflows.
 

@@ -80,7 +80,7 @@ Not everyone is always outwardly enthusiastic about the course for any number of
 
 ## Before the workshop
 
-1. Read the [teaching recommendations](https://carpentries.github.io/instructor-training/22-practices/) of Software Carpentry
+1. Read the [teaching recommendations](https://carpentries.github.io/instructor-training/24-practices/) of Software Carpentry
 2. Read the [organiser recommendations]({{ site.baseurl }}{% link  topics/instructors/tutorials/organize-workshop/tutorial.md %}) and see if there is anything you can help with
 2. Decide on the order of the lessons and who will teach what with the organizers
 3. Assist the host in recruiting helpers (people to walk around the classroom and help people if they get stuck)
