@@ -152,7 +152,7 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >    
 >    > ### {% icon tip %} Tip: Naming conventions
 >    > * Multiple batches can exist on the same plate, and multiple plates can be used in an analysis
->    > * This is further clarified [in detail](#understanding-plates-and-batches) later-
+>    > * This is further clarified in the *Plates, Batches, and Barcodes* slides [here](../scrna-plates-batches-barcodes/slides.html)
 >    > * For now, a useful convention to follow is `<name>_<plate>_<batch>` in order to preserve the sample names, sequencing plate number and batch number.
 >    >
 >    > Here we will write `C57_P1_B1`
@@ -617,8 +617,6 @@ Once the merge is complete, we can now peek at our full combined matrix by once 
 It is true that we have applied the same cell barcodes to each batch -- but -- **not all batches neccesarily use the same barcodes** to select their cells. For example, Batch1 might only use cell barcodes 1-50 in the barcodes file, and Batch2 might only use cell barcodes 51-100 in the barcodes file.
  
 We must thus question why different sets of the same superset of barcodes be used on different batches? To answer this, we must understand some of the technicalities of the library preparation as given by the slides [here](../scrna-plates-batches-barcodes/slides.html).
-
-<!-- Note, these slides exist on another branch. I did not wish to rebase this branch on top of it until the slides were reviewed/correct/complete -->
 
 
 ## Guarding against Cross-Contamination
