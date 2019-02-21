@@ -1,0 +1,155 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "",
+  "format-version": "0.1",
+  "name": "machine_learning",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "breast-w_train.tsv"
+        }
+      ],
+      "label": null,
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 10,
+        "top": 10
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"breast-w_train.tsv\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "d323e48b-2ab5-4dd0-8e01-7b57b6212be3",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "breast-w_test.tsv"
+        }
+      ],
+      "label": null,
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 10,
+        "top": 130
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"breast-w_test.tsv\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "aa8f7a45-d482-4193-b3c8-88fa82dd506e",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/svm_classifier/svm_classifier/0.9",
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+        "selected_tasks|selected_algorithms|input_options|infile1": {
+          "id": 0,
+          "output_name": "output"
+        },
+        "selected_tasks|selected_algorithms|input_options|infile2": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Support vector machines (SVMs)",
+      "outputs": [
+        {
+          "name": "outfile_predict",
+          "type": "tabular"
+        },
+        {
+          "name": "outfile_fit",
+          "type": "zip"
+        }
+      ],
+      "position": {
+        "left": 230,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/svm_classifier/svm_classifier/0.9",
+      "tool_shed_repository": {
+        "changeset_revision": "b8d4f843212c",
+        "name": "svm_classifier",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"selected_tasks\": \"{\\\"__current_case__\\\": 1, \\\"selected_algorithms\\\": {\\\"__current_case__\\\": 2, \\\"input_options\\\": {\\\"__current_case__\\\": 0, \\\"column_selector_options_1\\\": {\\\"__current_case__\\\": 3, \\\"col1\\\": \\\"target\\\", \\\"selected_column_selector_option\\\": \\\"all_but_by_header_name\\\"}, \\\"column_selector_options_2\\\": {\\\"__current_case__\\\": 1, \\\"col2\\\": \\\"target\\\", \\\"selected_column_selector_option2\\\": \\\"by_header_name\\\"}, \\\"header1\\\": \\\"true\\\", \\\"header2\\\": \\\"true\\\", \\\"infile1\\\": null, \\\"infile2\\\": null, \\\"selected_input\\\": \\\"tabular\\\"}, \\\"options\\\": {\\\"C\\\": \\\"1.0\\\", \\\"dual\\\": \\\"true\\\", \\\"fit_intercept\\\": \\\"true\\\", \\\"intercept_scaling\\\": \\\"1.0\\\", \\\"loss\\\": \\\"squared_hinge\\\", \\\"max_iter\\\": \\\"1000\\\", \\\"multi_class\\\": \\\"ovr\\\", \\\"penalty\\\": \\\"l2\\\", \\\"random_state\\\": \\\"\\\", \\\"tol\\\": \\\"0.001\\\"}, \\\"selected_algorithm\\\": \\\"LinearSVC\\\"}, \\\"selected_task\\\": \\\"train\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null}",
+      "tool_version": "0.9",
+      "type": "tool",
+      "uuid": "5073d204-4455-4985-a464-0f692a2e9294",
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/svm_classifier/svm_classifier/0.9",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "selected_tasks|infile_data": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "selected_tasks|infile_model": {
+          "id": 2,
+          "output_name": "outfile_fit"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Support vector machines (SVMs)",
+      "outputs": [
+        {
+          "name": "outfile_predict",
+          "type": "tabular"
+        },
+        {
+          "name": "outfile_fit",
+          "type": "zip"
+        }
+      ],
+      "position": {
+        "left": 450,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/svm_classifier/svm_classifier/0.9",
+      "tool_shed_repository": {
+        "changeset_revision": "b8d4f843212c",
+        "name": "svm_classifier",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"selected_tasks\": \"{\\\"__current_case__\\\": 0, \\\"header\\\": \\\"true\\\", \\\"infile_data\\\": null, \\\"infile_model\\\": null, \\\"prediction_options\\\": {\\\"__current_case__\\\": 0, \\\"prediction_option\\\": \\\"predict\\\"}, \\\"selected_task\\\": \\\"load\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null}",
+      "tool_version": "0.9",
+      "type": "tool",
+      "uuid": "c5ab9131-0009-47a5-9b52-0d1d0c096997",
+      "workflow_outputs": []
+    }
+  },
+  "tags": [],
+  "uuid": "ec18035e-ec98-4f26-8350-cd4a58bae9e1",
+  "version": 0
+}
