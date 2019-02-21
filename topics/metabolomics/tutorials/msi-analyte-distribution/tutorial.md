@@ -410,6 +410,3 @@ Next, we will plot the distribution of molecules with different distribution in 
 
 ![overlay images](../../images/msi_distribution_overlay_images.png "Distribution image for capsaicin and overlay of the three analytes")
 
-# Conclusion
-{:.no_toc}
-
