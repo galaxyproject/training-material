@@ -620,25 +620,24 @@ Since we the plating protocol we are using is that designed by the Freiburg MPI 
 >  * Barcodes:
 >     * These are each 8bp long, with an edit distance of 2, and there 192 of them.
 > 
->           001-006 | AACACC AACCTC AACGAG AACTGG AAGCAC AAGCCA
->           007-012 | AAGGTG AAGTGC ACAAGC ACAGAC ACAGGA ACAGTG
->              .
->              .
->           180-186 | TTACGC TTCACC TTCCAG TTCGAC TTCTCG TTGCAC
->           187-192 | TTGCGA TTGCTG TTGGAG TTGGCA TTGGTC TTGTGC
->  
+>     > |:-------:|:-----------:|
+>     > | 001-006 | AACACC AACCTC AACGAG AACTGG AAGCAC AAGCCA |
+>     > | 007-012 | AAGGTG AAGTGC ACAAGC ACAGAC ACAGGA ACAGTG |
+>     > |    .    |        .  |
+>     > |    .    |        .  |
+>     > | 180-186 | TTACGC TTCACC TTCCAG TTCGAC TTCTCG TTGCAC |
+>     > | 187-192 | TTGCGA TTGCTG TTGGAG TTGGCA TTGGTC TTGTGC |
+>     {: .matrix}
+>
 >  * Plates:
 >     * Here we have 8 batches spread out over 2 plates, with alternate barcode striping.
 >           
->           Plate 1  +-------+-------+-------+-------+
->                    |  B1   |  B2   |  B3   |  B4   |
->                    +-------+-------+-------+-------+
->                     001-096 097-192 001-096 097-192
->         
->           Plate 2  +-------+-------+-------+-------+
->                    |  B5   |  B6   |  B7   |  B8   |
->                    +-------+-------+-------+-------+
->                     001-096 097-192 001-096 097-192
+>     > |          | 001-096 | 097-192 | 001-096 | 097-192 |
+>     > |----------+---------+---------+---------+---------|
+>     > | Plate 1  |  B1     | B2      | B3      | B4      |
+>     > | Plate 2  |  B5     | B6      | B7      | B8      |
+>     {: .matrix}
+>
 {: .details}
 
 This plating protocol can be converted into a more textual format, which allows for many variable setups (see *Help* section of *Cross-contamination Barcode Filter* tool).
