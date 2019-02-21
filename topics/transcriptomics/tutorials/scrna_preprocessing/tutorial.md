@@ -32,7 +32,8 @@ requirements:
     topic_name: transcriptomics
     tutorials:
         - scrna-introduction
-        - plates-batches-and-barcodes
+        - scrna-plates-batches-barcodes
+        - scrna-umis
 
 follow_up_training:
   - 
@@ -81,7 +82,7 @@ Other than cell development, there are many more factors that can shape the leve
  ![Facets of Cellular Identity](../../images/scrna_nbt3711.png "Revealing the vectors of cellular identity with single-cell genomics, Nature Biotechnology, 2016")
 
 
-This tutorial is in part inspired by aspects of the [Hemberg workflow](https://hemberg-lab.github.io/scRNA.seq.course/) at the Sanger institute, as well as the [CGATOxford workflow](https://github.com/CGATOxford/UMI-tools) which provides the **UMI-tools** suite that we make use of. The barcoding follows the [CelSeq2 protocol](#details-the-celseq2-protocol) and uses the lane configuration as that utilized by the Freiburg MPI Grün lab.
+This tutorial is in part inspired by aspects of the [Hemberg workflow](https://hemberg-lab.github.io/scRNA.seq.course/) at the Sanger institute, as well as the [CGATOxford workflow](https://github.com/CGATOxford/UMI-tools) which provides the **UMI-tools** suite that we make use of. The barcoding follows the [CEL-Seq2 protocol](https://doi.org/10.1186/s13059-016-0938-8) mentioned in the *Understanding Barcodes* hands-on, and uses the same lane configuration as utilized by the Freiburg MPI Grün lab.
 
 # Analysis Strategy
 {:.no_toc}
@@ -126,10 +127,10 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 > 1. Create a new history and rename it (*e.g.* scRNA-seq single batch tutorial)
 > 1. Import the following files from [`Zenodo`](https://zenodo.org/record/2573175) or from the data library (ask your instructor)
 >    ```
->    https://zenodo.org/record/2573175/files/SRR5683689_1.fastq.gz?download=1
->    https://zenodo.org/record/2573175/files/SRR5683689_2.fastq.gz?download=1
->    https://zenodo.org/record/2573175/files/Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf?download=1
->    https://zenodo.org/record/2573175/files/celseq_barcodes.192.tabular?download=1
+>    https://zenodo.org/record/2573175/files/SRR5683689_1.fastq.gz
+>    https://zenodo.org/record/2573175/files/SRR5683689_2.fastq.gz
+>    https://zenodo.org/record/2573175/files/Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf
+>    https://zenodo.org/record/2573175/files/celseq_barcodes.192.tabular
 >    ``` 
 >    
 >    Set the database annotation to 'mm10' into the Genome dropdown box and select it.
@@ -516,7 +517,7 @@ This concludes the first part of the tutorial which focused on the transformatio
 
 # Merging Batches Together
 
-[Back to previous](javascript:window.history.back())
+<small>[Back to previous](javascript:window.history.back())</small>
 
  ![Workflow Lower](../../images/scrna_workflow_lower.png "Multiple batch processing")
 
@@ -541,10 +542,10 @@ Once again, file naming is important, and so we will rename our matrix files app
 >    - Set the datatype of the tabular files to **tabular**
 >
 >    ```
->    https://zenodo.org/record/2573175/files/P1_B1.tabular?download=1
->    https://zenodo.org/record/2573175/files/P1_B2.tabular?download=1
->    https://zenodo.org/record/2573175/files/P2_B3.tabular?download=1
->    https://zenodo.org/record/2573175/files/P2_B4.tabular?download=1
+>    https://zenodo.org/record/2573175/files/P1_B1.tabular
+>    https://zenodo.org/record/2573175/files/P1_B2.tabular
+>    https://zenodo.org/record/2573175/files/P2_B3.tabular
+>    https://zenodo.org/record/2573175/files/P2_B4.tabular
 >    ```
 >    
 >    {% include snippets/import_via_link.md %}
