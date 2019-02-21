@@ -187,15 +187,6 @@ We will be performing barcode extraction on our batch data as given by the *Unde
 >
 {: .hands_on}
 
-<!--- TODO: maybe talk about this later, it's not really required, and is more about predicting 
-> ### {% icon details %} Details: Filtering for Wanted Cell Barcodes
->
-> **UMI-tools** provides many ways to select for barcodes:
->  1. 
-> 
-> 
--->
-
 As before, we can verify that the desired umi and cell barcodes have been extracted from the sequence of the Forward reads and inserted into the header of the Reverse reads.
 
 > ### {% icon question %} Question
@@ -379,9 +370,9 @@ Tallying reads is performed by two commonly-used tools:
  1. RNA-STAR
  2. FeatureCounts
 
-**RNA-STAR** indeed has the recent ability to count reads as it maps them. **FeatureCounts** performs the same task, but it is more qualitative than **RNA-STAR** since it is capable of counting not just at the Read level, but also at the UMI level, such that 10 duplicate reads at GeneA will be counted only once. 
+The **RNA-STAR** tools has the ability to count reads as it maps them. **FeatureCounts** performs the same task, but is capable of counting not just at the Read level, but also at the UMI level too, such that 10 duplicate reads will be counted only once.
 
-Unfortunately, both are limited to counting without being able to distinguish between different cells. 
+Unfortunately, both are currently limited to counting without being able to distinguish between different cells.
 
 > ### {% icon details %} Example
 >
@@ -587,8 +578,8 @@ This can be resolved by performing a "Full Join" where GeneA is inserted into Ba
 > 
 > > ### {% icon solution %} Solution
 > >
-> > 1. Although the cell headers in each batch matrix is the same, **the cells they label are NOT the same** and need to be relabelled in the final matrix to tell us which batch they originated from.
-> > 2. The reason the cell headers are the same is because the cells use the **same barcodes**, due to fact that the same barcodes are used across different batches.
+> > 1. Although the cell headers in each batch matrix is the same, the cells they label are *not* the same and need to be relabelled in the final matrix to tell us which batch they originated from.
+> > 2. The reason the cell headers are the same is because the cells use the same barcodes, due to fact that the *same* barcodes are sometimes used across *different* batches.
 > >
 > {: .solution}
 > 
@@ -614,7 +605,9 @@ Once the merge is complete, we can now peek at our full combined matrix by once 
 
 **Or do we?**
 
-It is true that we have applied the same cell barcodes to each batch -- but -- **not all batches neccesarily use the same barcodes** to select their cells. For example, Batch1 might only use cell barcodes 1-50 in the barcodes file, and Batch2 might only use cell barcodes 51-100 in the barcodes file.
+It is true that we have applied the same cell barcodes to each batch,  but **not all batches use the same barcodes** to select their cells.
+
+For example, Batch1 might only use cell barcodes 1-50 in the barcodes file, and Batch2 might only use cell barcodes 51-100 in the barcodes file.
  
 We must thus question why different sets of the same superset of barcodes be used on different batches? To answer this, we must understand some of the technicalities of the library preparation as given by the slides [here]({{site.baseurl}}/topics/transcriptomics/scrna-plates-batches-barcodes/slides.html).
 
@@ -695,7 +688,7 @@ Let us now apply this protocol to our count matrix, and look for any cross-conta
 >              - *"Batches within this Plate Number"*:`3,4`
 >  - Expand the *"RegEx Parameters"* section:
 >     - *"RegEx to extract Plate, Batch, and Barcodes from headers"*:`.*P(\\d)_B(\\d)_([ACTG]+)`
->       <small>(**Attention! Take note of that the 'B' is present**)
+>       <small>(**Attention! Take note of the 'B'**)
 >
 {: .hands_on}
 
