@@ -553,21 +553,14 @@ Once again, file naming is important, and so we will rename our matrix files app
 
 ## Merging Count Matrices
 
-Before we begin, we must consider that our matrices are not equal -- e.g. Batch1 has at least 1 cell that maps to GeneA, whereas Batch2 has no mention of GeneA.
+Before we begin, we must consider that our matrices are not equal -- e.g. Batch1 has 3 cells that describe *Genes{A,B,C,D}* whereas Batch2 has 4 cells that describe *Genes{C,D,E}*.
 
-This can be resolved by performing a "Full Join" where GeneA is inserted into Batch2 as a gene with 0 counts:
+We have the problem that only *GeneC* and *GeneD* appear in both batches, whilst describing 7 different cells in total.
 
-          B1     | C1 | C2 | C3 |                       B2     | C1 | C2 | C3 |
-         --------+----+----+----|   + (Full Join) +    --------+----+----+----|
-          GeneA  | 3  | 0  | 1  |                       GeneM  |  0 | 3  | 2  |
-          GeneM  | 2  | 2  | 1  |                       GeneX  | 10 | 2  | 7  |
+To resolve this we can perform a "Full Table Join" where the missing data for *GeneE* and *GeneA* in Batch1 and Batch2 respectively are replaced with zeroes:
 
+![Table Join]({{site.baseurl}}/topics/transcriptomics/images/scrna_fulltable.svg "Full Table Join")
 
-      =      Full   | B1_C1 | B1_C2 | B1_C3 | B2_C1 | B2_C2 | B2_C3 |
-            --------+-------+-------+-------+-------+-------+-------|
-             GeneA  |   3   |   0   |   1   |    0  |   0   |    0  | ← Exists in B1
-             GeneM  |   2   |   2   |   1   |    0  |   3   |    2  | ← Common in Both
-             GeneX  |   0   |   0   |   0   |   10  |   2   |    7  | ← Exists in B2  
 <small>(for more information on table joins, see [here](http://www.sql-join.com/sql-join-types/))
 
 
