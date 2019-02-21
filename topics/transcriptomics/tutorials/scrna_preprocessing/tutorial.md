@@ -688,13 +688,12 @@ The [regular expression](https://www.regular-expressions.info/quickstart.html) (
  
 The plot that follows tells us everything we need to know about each of our batches. Each batch is essentially tested against the full set of barcodes in order to assert that only the desired or 'Real' barcodes have been sequenced.
 
-> ### {% icon details %} Details: Cross-contamination Plot Explained
->
->  ![Contamination Plots]({{site.baseurl}}/topics/transcriptomics/images/scrna_crosscontamination.gif "The Pre-filter and Post-filter plots")
-> 
->  1. In the pre-filter plot, we can see how only half of the sequences in each batch map to half the barcodes. This shows very little cross-contamination, and proves that our data is real. 
->  2. The post-filter plot essentially removes the false barcodes from each batch and retains only the 'Real' barcodes.
-{: .details}
+#### Cross-contamination Plot
+
+  ![Contamination Plots]({{site.baseurl}}/topics/transcriptomics/images/scrna_crosscontamination.png "The Pre-filter and Post-filter plots")
+
+  1. In the pre-filter plot, we can see how only half of the sequences in each batch map to half the barcodes. This shows very little cross-contamination, and proves that our data is real.
+  2. The post-filter plot essentially removes the false barcodes from each batch and retains only the 'Real' barcodes.
 
 > ### {% icon question %} Question
 >
