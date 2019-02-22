@@ -1,0 +1,1786 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Pre-processing of Single-Cell RNA Data</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:title" content="Galaxy Training: Pre-processing of Single-Cell RNA Data" />
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body>
+        
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/transcriptomics" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Transcriptomics
+                        </a>
+                    </li>
+
+                    
+                    
+                    
+
+                    
+                        
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    
+                                        
+                                            
+                                                <a class="dropdown-item" href="/training-material/topics/transcriptomics/slides/introduction.html">
+                                                    Introduction to Transcriptomics
+                                                </a>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                </div>
+                            </li>
+                        
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://zenodo.org/record/2573175" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/transcriptomics#references" title="References">
+                            <i class="fa fa-bookmark" aria-hidden="true"></i><span class="visually-hidden">references</span> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fscrna_preprocessing%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fscrna_preprocessing%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fscrna_preprocessing%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fscrna_preprocessing%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Fscrna_preprocessing%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/transcriptomics/tutorials/scrna_preprocessing/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+   
+{
+  "@context": "http://schema.org",
+  "@type": "CreativeWork",
+  "name": "Pre-processing of Single-Cell RNA Data",
+  "accessModeSufficient": "visual",
+  "accessibilityControl": "fullMouseControl",
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "learningResourceType": "",
+  "url": "/topics/transcriptomics/tutorials/scrna_preprocessing/tutorial.html",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/record/2573175",
+      "name": "Training data for Pre-processing of Single-Cell RNA Data tutorial"
+    }
+  ],
+  "timeRequired": "PT2H",
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "mtekman"
+    },
+    {
+      "@type": "Person",
+      "name": "bebatut"
+    },
+    {
+      "@type": "Person",
+      "name": "erxleben"
+    },
+    {
+      "@type": "Person",
+      "name": "wm75"
+    }
+  ],
+  "keywords": "single-cell",
+  "description": "The questions this  addresses are:\n - What is single-cell?\n - How do we process a batch?\n - How do we process multiple batches?\n - How do we check for cross-contamination?\n\n\\nThe objectives are:\n - Demultiplex FASTQ data via UMI-tools\n - Understand and validate the extraction of barcodes\n - Obtain an overview of general alignment and quantification techniques\n - Generate a count matrix for downstream single-cell RNA analysis\n\n"
+}
+
+    </script>
+    <section class="tutorial">
+        <h1>Pre-processing of Single-Cell RNA Data</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>What is single-cell?</li>
+            
+            <li>How do we process a batch?</li>
+            
+            <li>How do we process multiple batches?</li>
+            
+            <li>How do we check for cross-contamination?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>Demultiplex FASTQ data via UMI-tools</li>
+            
+            <li>Understand and validate the extraction of barcodes</li>
+            
+            <li>Obtain an overview of general alignment and quantification techniques</li>
+            
+            <li>Generate a count matrix for downstream single-cell RNA analysis</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Quality Control:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                            
+                            <li> Mapping:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                - <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                            
+                            <li> Mapping:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                - <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Quality Control:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/transcriptomics">Transcriptomics</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Plates, Batches, and Barcodes:
+                            
+                                <a href="/training-material/topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Understanding Barcodes:
+                            
+                            
+                                 <a href="/training-material/topics/transcriptomics/tutorials/scrna-umis/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours</p>
+            
+        </blockquote>
+
+        <!-- General Notes
+
+
+
+-->
+
+<h1 class="no_toc" id="introduction">Introduction</h1>
+
+<h4 class="no_toc" id="why-do-single-cell-sequencing">Why do Single Cell sequencing?</h4>
+
+<p>Single-cell RNA (scRNA) sequencing is the technological successor to classical “bulk” RNA-seq, where samples are no longer defined at the tissue level but at the individual cell level. The bulk RNA-seq methods seen in <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">previous hands-on material</a> would give the average expression of genes in a sample, whilst overlooking the distinct expression profiles given by the cell sub-populations due to their heterogeneity.</p>
+
+<p>The rise of scRNA sequencing provides the means to explore this hetereogeneity by examining samples at the individual cell level, enabling a greater understanding of the development and function of such samples, by the characteristics of their constituent cells.</p>
+
+<p>Consider the heterogenity of cells sampled from bone marrow, where hematopoietic stem cells can give rise to many different cell types within the same tissue:</p>
+
+<figure id="figure-1"><img src="/training-material/topics/transcriptomics/images/scrna_hematopoiesis.png" alt="Cell Differentiation of Hematopoietic Stem cells" title="Cell Differentiation of Hematopoietic Stem cells. Image Source: https://commons.wikimedia.org/wiki/File:Hematopoiesis_simple.svg" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Cell Differentiation of Hematopoietic Stem cells. Image Source: https://commons.wikimedia.org/wiki/File:Hematopoiesis_simple.svg</figcaption></figure>
+
+<p>The genes expressed by these cells at different developmental time points can be subtle, but generally can be classified into discrete cell subpopulations or under statistical clustering methods such as PCA or tSNE. Cells in the same cluster exhibit similar profiles of differential expression in the same set of related genes, compared to cells in other clusters. By identifying significant genes in each cluster, cell types and cell developmental heirarchies can be inferred based on the proximity of these clusters to one another.</p>
+
+<p>Other than cell development, there are many more factors that can shape the level of gene expression exhibited by a given cell. Intercellular cell-signalling can block or enhance specific transcripts, the total amount of transcripts of a cell increases with the cell-cycle, or the proximity of a cell within a tissue to nutrients or oxygen.</p>
+
+<figure id="figure-2"><img src="/training-material/topics/transcriptomics/images/scrna_nbt3711.png" alt="Facets of Cellular Identity" title="Revealing the vectors of cellular identity with single-cell genomics, Nature Biotechnology, 2016" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Revealing the vectors of cellular identity with single-cell genomics, Nature Biotechnology, 2016</figcaption></figure>
+
+<p>This tutorial is in part inspired by aspects of the <a href="https://hemberg-lab.github.io/scRNA.seq.course/">Hemberg workflow</a> at the Sanger institute, as well as the <a href="https://github.com/CGATOxford/UMI-tools">CGATOxford workflow</a> which provides the <strong>UMI-tools</strong> suite that we make use of. The barcoding follows the <a href="https://doi.org/10.1186/s13059-016-0938-8">CEL-Seq2 protocol</a> mentioned in the <a href="/training-material/topics/transcriptomics/tutorials/scrna-umis/tutorial.html"><em>Understanding Barcodes</em></a> hands-on, and uses the same lane configuration as utilized by the <a href="https://www.ie-freiburg.mpg.de/gruen">Freiburg MPI Grün lab</a>.</p>
+
+<h1 class="no_toc" id="analysis-strategy">Analysis Strategy</h1>
+
+<p>Most scRNA sequencing techniques use pooled-sequencing approaches to generate a higher throughput of data by performing amplification and sequencing upon multiple cells in the same “pool”. From a bioinformatics standpoint, this means that the output FASTQ data from the sequencer is batch-specific and contains all the sequences from multiple cells, where one sample of cells is equal to one batch.</p>
+
+<p>In this tutorial, we will perform pre-processing upon scRNA FASTQ batch data to generate an <em>N</em>-by-<em>M</em>  count matrix of <em>N</em> cells and <em>M</em> genes, with each element indicating the level of expression of that gene in a particular cell.</p>
+
+<p>This count matrix is crucial for performing the downstream analysis, where differential gene analysis is performed between cells in order to cluster them into groups denoting their cell type and lineage.</p>
+
+<p>The tutorial is structured in two parts:</p>
+
+<ol>
+  <li><strong>Single-Batch Processing</strong></li>
+  <li><strong>Multi-Batch Processing</strong></li>
+</ol>
+
+<figure id="figure-3"><img src="/training-material/topics/transcriptomics/images/scrna_workflow.svg" alt="Overview of workflow" title="An overview of the entire workflow" /><figcaption><span class="figcaption-prefix">Figure 3:</span> An overview of the entire workflow</figcaption></figure>
+
+<p>The first part of this tutorial will deal with batches, and use example <em>FASTQ</em> data from a single batch, which we will perform <a href="#barcode-extraction">barcode extraction</a> and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix.</p>
+
+<p>The second part of this tutorial will deal with merging several output count matrices from multiple single batches generated in the first portion. Here, a set of example count matrices are <a href="#merging-count-matrices">merged together</a> and quality control performed. This produces a final count matrix valid for downstream analysis.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#single-batch-processing" id="markdown-toc-single-batch-processing">Single-Batch Processing</a>    <ol>
+      <li><a href="#barcode-extraction" id="markdown-toc-barcode-extraction">Barcode Extraction</a></li>
+      <li><a href="#mapping--alignment" id="markdown-toc-mapping--alignment">Mapping / Alignment</a></li>
+      <li><a href="#filtering" id="markdown-toc-filtering">Filtering</a></li>
+      <li><a href="#quantification" id="markdown-toc-quantification">Quantification</a></li>
+    </ol>
+  </li>
+  <li><a href="#multi-batch-processing" id="markdown-toc-multi-batch-processing">Multi-Batch Processing</a>    <ol>
+      <li><a href="#merging-count-matrices" id="markdown-toc-merging-count-matrices">Merging Count Matrices</a></li>
+      <li><a href="#guarding-against-cross-contamination" id="markdown-toc-guarding-against-cross-contamination">Guarding against Cross-Contamination</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="single-batch-processing">Single-Batch Processing</h1>
+
+<h3 id="data-upload-and-organization">Data upload and organization</h3>
+
+<p>In this tutorial we will be analysing scRNA-seq data of bone marrow cells taken from a single C57 mouse by <em>Herman et al.</em> (<a href="https://doi.org/10.1038/nmeth.4662">2018</a>) and producing a count matrix that we can use for later analysis.</p>
+
+<p>The size of scRNA files (.fastq) are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expediate the analysis by using a smaller subset of actual batch data. We will also be using <em>Mus Musculus</em> annotation data (.gtf) from the  <a href="ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/vertebrate_mammalian/Mus_musculus/">NCBI RefSeq</a> track, as well as a barcodes file (.tsv).</p>
+
+<figure id="figure-4"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_upper.png" alt="Workflow Upper" title="Single batch processing" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Single batch processing</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload-and-organization"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload and organization</h3>
+
+  <ol>
+    <li>
+      <p>Create a new history and rename it (e.g. scRNA-seq single batch tutorial)</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-starting-a-new-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Starting a new history</h3>
+
+        <ul>
+          <li>Click the <strong>gear icon</strong> at the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Import the FASTQ paired data from <a href="https://zenodo.org/record/2573175"><code class="highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>
+            <p>Click on <strong>Collection</strong> on the top</p>
+          </li>
+          <li>
+            <p>Click on <strong>Collection Type</strong> and select <code class="highlighter-rouge">Paired</code></p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+
+            <p><code class="highlighter-rouge">https://zenodo.org/record/2573175/files/SRR5683689_1.fastq.gz</code></p>
+
+            <p><code class="highlighter-rouge">https://zenodo.org/record/2573175/files/SRR5683689_2.fastq.gz</code></p>
+          </li>
+          <li>
+            <p>Change <strong>Genome</strong> to <code class="highlighter-rouge">GRCm38/mm10</code></p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li>
+            <p>Click on <strong>Build</strong> when available</p>
+          </li>
+          <li>Ensure that the forward and reverse reads are set to <code class="highlighter-rouge">SRR5683689_1</code> and <code class="highlighter-rouge">SRR5683689_2</code>, respectively.
+            <ul>
+              <li>Click <strong>Swap</strong> otherwise</li>
+            </ul>
+          </li>
+          <li>
+            <p>Enter a name for the collection</p>
+
+            <ul>
+              <li>
+                <p>A useful naming convention is to use <code class="highlighter-rouge">&lt;name&gt;_&lt;plate&gt;_&lt;batch&gt;</code> to preserve the sample names, sequencing plate number and batch number.</p>
+              </li>
+              <li>
+                <p>Here we will write <code class="highlighter-rouge">C57_P1_B1</code></p>
+              </li>
+            </ul>
+          </li>
+          <li>Click on <strong>Create list</strong> (and wait a bit)</li>
+        </ul>
+
+        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Import the Gene Annotations and Barcodes from <a href="https://zenodo.org/record/2573175"><code class="highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2573175/files/Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf
+https://zenodo.org/record/2573175/files/celseq_barcodes.192.tabular
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Set the datatype of the <code class="highlighter-rouge">celseq_barcodes.192.tabular</code> to <code class="highlighter-rouge">tabular</code></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>For a more detailed understanding of the naming conventions used in generating our FASTQ pair, please consult the <a href="/training-material/topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html"><em>Plates, Batches, and Barcodes</em></a> slides.</p>
+
+<h2 id="barcode-extraction">Barcode Extraction</h2>
+
+<p>It is highly recommended that you familiarise yourself with the concepts of barcodes and UMIs within multiplexed FASTQ data with the <a href="/training-material/topics/transcriptomics/tutorials/scrna-umis/tutorial.html"><em>Understanding Barcodes</em></a> hands-on material.</p>
+
+<p>We will be performing barcode extraction on our batch data as given by the above hands-on tutorial, but this time filtering for <em>specific</em> cell barcodes, which we will ensure by providing the barcodes file.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-barcode-extraction"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Barcode Extraction</h3>
+
+  <ol>
+    <li><strong>UMI-tools extract</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Library type”</em>: <code class="highlighter-rouge">Paired-end Dataset Collection</code>
+          <ul>
+            <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Reads in FASTQ format”</em>: <code class="highlighter-rouge">output</code> (Our paired set)</li>
+            <li><em>“Barcode on both reads?”</em>: <code class="highlighter-rouge">Barcode on first read only</code></li>
+          </ul>
+        </li>
+        <li><em>“Use Known Barcodes?”</em>: <code class="highlighter-rouge">Yes</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Barcode File”</em>: <code class="highlighter-rouge">output</code> (Input dataset)</li>
+          </ul>
+        </li>
+        <li><em>“Barcode pattern for first read”</em>: <code class="highlighter-rouge">NNNNNNCCCCCC</code></li>
+        <li><em>“Enable quality filter?”</em>: <code class="highlighter-rouge">No</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>As before, we can verify that the desired UMI and cell barcodes have been extracted from the sequence of the Forward reads and inserted into the header of the Reverse reads.</p>
+
+<blockquote class="question">
+  <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <ol>
+    <li>Why are input and output FASTQ file sizes so different?</li>
+    <li>How many reads were filtered out, and why?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>The input FASTQ files contained reads from all barcodes, including those with sequencing errors, resulting in a larger pool of detected barcodes than those desired. (e.g. Cell barcode <code class="highlighter-rouge">AAATTT</code> could have single basepair sequencing errors that could modify it into <code class="highlighter-rouge">ATATTT</code> or <code class="highlighter-rouge">AAACTT</code>, etc).</li>
+      <li>This information is included in the Log file of <strong>UMI-tools extract</strong> which contains all the parameters used to run, as well as <em>INFO</em> lines that indicate how many reads were read, and how many output. In this case: 14230244 reads (90.9%)</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h2 id="mapping--alignment">Mapping / Alignment</h2>
+
+<p>FASTQ files contain sequence information that we wish to map to genes in a genome. Mapping is a relatively straightforward process, and is covered more extensively in the <a href="/training-material/topics/sequence-analysis/"><em>Sequence Analysis</em></a> tutorials:</p>
+
+<ol>
+  <li>Select your genome</li>
+  <li>Select your gene annotation file</li>
+  <li>Run the alignment program</li>
+  <li>(Optional) Run MultiQC to assess the quality of the mapping</li>
+</ol>
+
+<p>The FASTQ data was sequenced from mouse data, so to perform the alignment we will need to gather all data relevant to that genome. We will use the latest version (mm10).</p>
+
+<p>The annotation GTF file must match the genome version used, since both use physical coordinates. Each GTF contains all the gene, exon, intron, and other regions of interest that we will use to annotate our reads, should our reads align to any of the regions specified in this file.</p>
+
+<p>For alignment, we will use RNA-STAR for performance and splice-awareness.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-performing-the-alignment"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Performing the Alignment</h3>
+
+  <ol>
+    <li><strong>RNA-STAR</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Single-end or paired-end reads”</em>: <code class="highlighter-rouge">Single-end</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RNA-Seq FASTQ/FASTA file”</em>: <code class="highlighter-rouge">out2</code> (output of <strong>UMI-tools extract</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li><em>“Custom or built-in reference genome”</em>: <code class="highlighter-rouge">Use a built-in index</code>
+          <ul>
+            <li><em>“Reference genome with or without an annotation”</em>: <code class="highlighter-rouge">use genome reference without builtin gene-model</code>
+              <ul>
+                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select reference genome”</em>: <code class="highlighter-rouge">Mus Musculus (mm10)</code> (Mouse)</li>
+                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene model (gff3,gtf) file for splice junctions”</em>: <code class="highlighter-rouge">Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Results”</em>:
+          <ul>
+            <li><em>“1: Results”</em>:
+              <ul>
+                <li><em>“Which tool was used to generate logs?”</em>:<code class="highlighter-rouge">STAR</code></li>
+                <li><em>“STAR output”</em>:
+                  <ul>
+                    <li><em>“1: STAR output”</em>
+                      <ul>
+                        <li><em>“Type of STAR output?”</em>:<code class="highlighter-rouge">Log</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><em>“STAR log output”</em> :(Select the STAR output file that ends in “log”)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> symbol on the MultiQC Webpage</li>
+  </ol>
+
+</blockquote>
+
+<p>The purpose of MultiQC is to observe how well our reads were mapped against the reference genome. Many reads are discarded due to being of too low quality, or having ambiguous sequence content that can map them to multiple locations.</p>
+
+<blockquote class="question">
+  <h3 id="question-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <ol>
+    <li>What percentage of our reads are uniquely mapped? How many millions of reads is this percentage?</li>
+    <li>What percentage of our reads are mapped to more than one locus?</li>
+    <li>Is our overall mapping ‘good’ ?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li><code class="highlighter-rouge">70.9%</code> or 10 million reads were successfully mapped</li>
+      <li><code class="highlighter-rouge">14.4%</code> are multiply mapped, and <code class="highlighter-rouge">2.2%</code> were mapped to too many loci
+        <ul>
+          <li>Multiply mapped means that a read was aligned to more than one gene</li>
+          <li>Mapped to too many loci means that a read was aligned to 10 or more loci, and should be ignored.</li>
+        </ul>
+      </li>
+      <li>It depends on how good the sequencing protocol is, and how many reads in total were mapped.
+        <ul>
+          <li><code class="highlighter-rouge">90%</code> is amazing, reserved for bulk RNA-seq which typically has high coverage</li>
+          <li><code class="highlighter-rouge">70%</code> is weak for bulk RNA-seq, but good for single-cell RNA-seq</li>
+          <li>6 million mapped reads should be enough to generate a downstream analysis from.</li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="filtering">Filtering</h2>
+
+<p>Before continuing let us first look back on some of the previous stages:</p>
+
+<blockquote class="comment">
+  <h3 id="comment-recap-of-previous-stages"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Recap of previous stages</h3>
+
+  <ol>
+    <li>
+      <p><em>Barcode Extraction</em>:</p>
+
+      <p>Here we used <code class="highlighter-rouge">umi_tools extract</code> on our input forward and reverse FASTQ files, and extracted the UMI and cell barcode from the forward read <em>sequence</em>, and placed it into the <em>header</em> of both forward and reverse FASTQ files. i.e. FASTQ files → Modified FASTQ files</p>
+    </li>
+    <li>
+      <p><em>Mapping</em>:</p>
+
+      <p>We took the sequencing data from the reverse FASTQ file (with modified headers) and aligned it to the mouse genome, using annotations presented in the GTF file for that genome. i.e. Modified FASTQ file (reverse) → BAM file</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h4 id="confirming-reads-in-the-bam-file">Confirming Reads in the BAM file</h4>
+
+<p>We now have a BAM file of our aligned reads, with cell and UMI barcodes embedded in the read headers. We also have the chromosome and base-pair positions of where these reads are aligned. The can be confirmed by peeking into the BAM file:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-confirming-the-alignment-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Confirming the Alignment Data</h3>
+
+  <ol>
+    <li>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> symbol of the BAM output from STAR.</li>
+    <li>There are many header lines that begin with <code class="highlighter-rouge">@</code> which we are not interested in.</li>
+    <li>
+      <p>Look at first read directly below the header lines:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>J00182:75:HTKJNBBXX:2:1121:9729:45889_GACGAA_GTGGTC	16	chr1	2030	3	70M	*	0	0	AGAGGTTCCAATATTCCCATGAAATTGAGATTTTGTAAAAGAGTGAAGTGTGGTTACTTTCACTGAGAGG	JJJJJJJJJJJJJJJJJJJJJJJJFJJJJJAJJJJJJJJJJFJFJFFJJJJJJJJJJJJFF7AJA-77&lt;A	NH:i:2 HI:i:1 AS:i:64 nM:i:2
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The fields of the BAM file can be better explained at section 1.4 of <a href="https://samtools.github.io/hts-specs/SAMv1.pdf">the SAM specification</a>, but we will summarize the main fields of interest here:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">J00182..._GACGAA_GCGGTC</code>: The <em>readname</em> appended by <code class="highlighter-rouge">_</code>, the cell barcode, another <code class="highlighter-rouge">_</code>, and then the UMI barcode.</li>
+  <li><code class="highlighter-rouge">16</code>: The FLAG value</li>
+</ul>
+
+<blockquote class="question">
+  <h3 id="question-what-does-the-flag-value-of-16-tell-us-about-this-read"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> What does the FLAG value of 16 tell us about this read?</h3>
+
+  <p><!-- TODO This information needs to be integrated into an actual tool -->
+  We can interactively see what the different FLAG values mean by feeding values into the SAM specification to the <a href="https://broadinstitute.github.io/picard/explain-flags.html">Picard web tool</a></p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The read aligns to the reverse strand</p>
+
+  </blockquote>
+
+</blockquote>
+
+<ul>
+  <li><code class="highlighter-rouge">chr1</code> <code class="highlighter-rouge">2030</code>: The position and base-pair of alignment of the first base of the sequence.</li>
+  <li>A series of quality fields, with the main contributors being  the sequence and sequence quality strings.</li>
+  <li><code class="highlighter-rouge">NH</code>: The number of hits for  this read. If it is multiply mapped, then the number of multiples will be shown (here <code class="highlighter-rouge">2</code>).</li>
+  <li><code class="highlighter-rouge">HI</code>: Which number this particular read is in the series of (potentially) multi-mapped reads (here <code class="highlighter-rouge">1</code>, not neccesarily meaning the first or ‘better’).</li>
+  <li><code class="highlighter-rouge">nM</code>: The number of mismatches in the alignment of this read to the reference (here <code class="highlighter-rouge">2</code>).</li>
+</ul>
+
+<h4 id="filtering-the-bam-file">Filtering the BAM File</h4>
+
+<p>If we perform counting on the current BAM file we will be counting all reads, even the undesireable ones such as those that did not align so optimally.</p>
+
+<p>The main filtering steps performed on our reads so far have been relatively silent due to the ‘default’ parameters used.</p>
+<ul>
+  <li><em>UMI-tools Extract</em> - Filters reads for those only with matching barcodes given by our barcodes file.</li>
+  <li><em>RNA-STAR</em> - As seen in the log, we lose 10% of our reads for being too short or being multiply mapped.</li>
+</ul>
+
+<p>Another filtering measure we can apply is to keep reads that we are confident about, e.g those with a minimum number of mismatches to the reference within an acceptable range.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-task-description"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+
+  <ol>
+    <li><strong>Filter BAM datasets on a variety of attributes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM dataset(s) to filter”</em>: <code class="highlighter-rouge">output_bam</code> (output of <strong>featureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li>In <em>“Condition”</em>:
+          <ul>
+            <li>In <em>“1: Condition”</em>:
+              <ul>
+                <li>In <em>“Filter”</em>:
+                  <ul>
+                    <li>In <em>“1: Filter”</em>:
+                      <ul>
+                        <li><em>“Select BAM property to filter on”</em>: <code class="highlighter-rouge">alignmentFlag</code>
+                          <ul>
+                            <li><em>“Filter on this alignment flag”</em>: <code class="highlighter-rouge">0</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>Click on <em>“Insert Condition”</em>:</li>
+            <li>In <em>“2: Condition”</em>:
+              <ul>
+                <li>In <em>“Filter”</em>:
+                  <ul>
+                    <li>In <em>“1: Filter”</em>:
+                      <ul>
+                        <li><em>“Select BAM property to filter on”</em>: <code class="highlighter-rouge">alignmentFlag</code>
+                          <ul>
+                            <li><em>“Filter on this alignment flag”</em>: <code class="highlighter-rouge">16</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>Click on <em>“Insert Condition”</em>:</li>
+            <li>In <em>“3: Condition”</em>:
+              <ul>
+                <li>In <em>“Filter”</em>:
+                  <ul>
+                    <li>In <em>“1: Filter”</em>:
+                      <ul>
+                        <li><em>“Select BAM property to filter on”</em>: <code class="highlighter-rouge">tag</code>
+                          <ul>
+                            <li><em>“Filter on a particular tag”</em>: <code class="highlighter-rouge">nM:&lt;3</code><br />
+<small>(<strong>Attention! please use a lowercase ‘n’ here!</strong>)</small></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>Click on <em>“Insert Condition”</em>:</li>
+            <li>In <em>“4: Condition”</em>:
+              <ul>
+                <li>In <em>“Filter”</em>:
+                  <ul>
+                    <li>In <em>“1: Filter”</em>:
+                      <ul>
+                        <li><em>“Select BAM property to filter on”</em>: <code class="highlighter-rouge">tag</code>
+                          <ul>
+                            <li><em>“Filter on a particular tag”</em>: <code class="highlighter-rouge">NH:&lt;2</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Would you like to set rules?”</em>: <code class="highlighter-rouge">Yes</code>
+          <ul>
+            <li><em>“Enter rules here”</em>: <code class="highlighter-rouge">(1 | 2) &amp; 3 &amp; 4</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="quantification">Quantification</h2>
+
+<p>Once we have the name of the gene for a specific read, we can count how many of those reads fall into that gene and generate a count matrix.</p>
+
+<p>Counting reads is performed by two commonly-used tools:</p>
+<ol>
+  <li>RNA-STAR</li>
+  <li>FeatureCounts</li>
+</ol>
+
+<p>The <strong>RNA-STAR</strong> tools has the ability to count reads as it maps them. <strong>FeatureCounts</strong> performs the same task, but is capable of counting not just at the Read level, but also at the UMI level too, such that 10 duplicate reads will be counted only once.</p>
+
+<p>Unfortunately, both are currently limited to counting without being able to distinguish between different cells.</p>
+
+<blockquote class="details">
+  <h3 id="details-example"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Example</h3>
+
+  <p>If we consider the number of reads that align to <em>GeneA</em>, the output given by these two tools is as follows:</p>
+
+  <blockquote class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>(reads)</th>
+          <th>RNA STAR</th>
+          <th>FeatureCounts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>GeneA</td>
+          <td>12</td>
+          <td>12</td>
+        </tr>
+      </tbody>
+    </table>
+  </blockquote>
+
+  <p>But what we actually require is:</p>
+
+  <blockquote class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>(reads)</th>
+          <th>C1</th>
+          <th>C2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>GeneA</td>
+          <td>10</td>
+          <td>2</td>
+        </tr>
+      </tbody>
+    </table>
+  </blockquote>
+
+  <p>or more specifically:</p>
+
+  <blockquote class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>(UMIs)</th>
+          <th>C1</th>
+          <th>C2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>GeneA</td>
+          <td>2</td>
+          <td>1</td>
+        </tr>
+      </tbody>
+    </table>
+  </blockquote>
+
+</blockquote>
+
+<p>In order to obtain this desired format, we must use <strong>UMI-tools count</strong> to perform the counting. However, this tool is dependent on <strong>FeatureCounts</strong> to annotate our reads with the one crucial piece of information that is missing from our BAM file: the name of the gene.</p>
+
+<blockquote class="comment">
+  <h3 id="tip-tip-verifying-missing-gene-name"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Verifying missing gene name</h3>
+  <p>You can check this yourself by examining the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> of the BAM file <em>“STAR Alignment file”</em></p>
+</blockquote>
+
+<h3 id="annotating-gene-name-with-featurecounts">Annotating Gene name with FeatureCounts</h3>
+
+<p>Let us annotate our BAM file with desired gene tags.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-quantification-assist-via-featurecounts"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quantification assist via FeatureCounts</h3>
+
+  <ol>
+    <li><strong>FeatureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Alignment file”</em>: <code class="highlighter-rouge">mapped_reads</code> (output of <strong>RNA STAR</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Gene annotation file”</em>: <code class="highlighter-rouge">in your history</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene annotation file”</em>: <code class="highlighter-rouge">Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf</code></li>
+          </ul>
+        </li>
+        <li><em>“Specify strand information”</em>:<code class="highlighter-rouge">Unstranded</code></li>
+        <li>In <em>“Advanced options”</em>:
+          <ul>
+            <li><em>“Count multi-mapping reads/fragments”</em>: <code class="highlighter-rouge">Disabled; multi-mapping reads are excluded (default)</code></li>
+            <li><em>“Exon-exon junctions”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Annotates the alignment file with ‘XS:Z:’-tags to described per read or read-pair the corresponding assigned feature(s).”</em>: <code class="highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Examine the output BAM file
+      <ul>
+        <li>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> for the “Feature Counts: Alignment File”</li>
+        <li>Scroll down past the header lines</li>
+        <li>Scroll horizontally to the tags, observe the new <code class="highlighter-rouge">XT</code> tag.</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>The <code class="highlighter-rouge">XS</code> and <code class="highlighter-rouge">XT</code> tags in the BAM file will now form the basis for counting reads.
+With all the relevant data now in our BAM file, we can actually perform the counting via <code class="highlighter-rouge">UMI-tools count</code>.</p>
+
+<blockquote class="comment">
+  <h3 id="tip-tip-verifying-added-gene-name"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Verifying added gene name</h3>
+  <p>You can once again check this yourself by examining the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> of the BAM file <em>“STAR Alignment file”</em></p>
+</blockquote>
+
+<h3 id="counting-genes--cell">Counting Genes / Cell</h3>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-final-quantification"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Final Quantification</h3>
+
+  <ol>
+    <li><strong>UMI-tools counts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sorted BAM file”</em>: <code class="highlighter-rouge">out_file1</code> (output of <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“UMI Extract Method”</em>: <code class="highlighter-rouge">Barcodes are contained at the end of the read seperated by a delimiter</code></li>
+        <li><em>“Bam is paired-end”</em>:<code class="highlighter-rouge">No</code></li>
+        <li><em>“Method to identify group of reads”</em>:<code class="highlighter-rouge">Unique</code></li>
+        <li><em>“Extra Parameters”</em>:
+          <ul>
+            <li><em>“Deduplicate per gene.”</em>:<code class="highlighter-rouge">XT</code></li>
+            <li><em>“Group reads only if they have the same cell barcode.”</em>:<code class="highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+        <li><em>“Prepend a label to all column headers”</em>:<code class="highlighter-rouge">No modifications</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The important parameters to take note of are those given in the <em>Extra Parameters</em> where we specify that each of the reads with a <code class="highlighter-rouge">XT:Z</code> tag in the BAM file will be counted on a per cell basis. Reads sharing the same UMI and cell Barcodes will be de-duplicated into a single count, reducing PCR duplicate bias from the analysis.</p>
+
+<p>At this stage, we now have a tabular file containing genes/features as rows, and cell labels as headers.</p>
+
+<blockquote class="question">
+  <h3 id="question-question-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <ol>
+    <li>How many genes do we have in the matrix?</li>
+    <li>How many cells?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>
+        <p>~23,000 lines<br />
+This information can be seen in the file preview window by clicking on the name of the file (<strong>NOT</strong> the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> symbol).</p>
+      </li>
+      <li>
+        <p>192 columns (not including the first column of gene names)<br />
+The number of columns can be seen by scrolling the file preview window completely to the right.</p>
+      </li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<p>The generation of a single count matrix is now complete, with the emphasis on the word <em>single</em> due to the fact that we often deal in multiple batches of sequencing data.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-recap-of-previous-stages-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Recap of previous stages</h3>
+
+  <ol>
+    <li>
+      <p><em>Barcode Extraction</em>:</p>
+
+      <p>Here we used <code class="highlighter-rouge">UMI_tools extract</code> on our input forward and reverse FASTQ files, and extracted the UMI and cell barcode from the forward read <em>sequence</em>, and placed it into the <em>header</em> of both forward and reverse FASTQ files. i.e. FASTQ files → Modified FASTQ files</p>
+    </li>
+    <li>
+      <p><em>Mapping</em>:</p>
+
+      <p>We took the sequencing data from the reverse FASTQ file (with modified headers) and aligned it to the mouse genome, using annotations presented in the GTF file for that genome. i.e. Modified FASTQ file (reverse) → BAM file</p>
+    </li>
+    <li>
+      <p><em>Quality Filtering</em>:</p>
+
+      <p>Reads with aligment mismatches greater than 2 were discarded, and only non multi-mapped reads that mapped to the forward or reverse strand were kept</p>
+    </li>
+    <li>
+      <p><em>Quantification</em>:</p>
+
+      <p>Gene tags were added to our alignment file, and reads were grouped according those sharing the same gene tag, with further reduction performed by collapsing all reads sharing the same cell and UMI barcode to be counted only once.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This concludes the first part of the tutorial which focused on the transformation of raw FASTQ data from a single batch into a count matrix. The second part of this tutorial guides us through the process of merging multiple processed batches from the first stage, and performing qualitative filtering.</p>
+
+<blockquote class="details">
+  <h3 id="details-workflows-for-all-steps"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Workflows For All Steps</h3>
+
+  <p>Galaxy provides a workflow that captures the process of all the above stages for a <a href="workflows/scrna_pp_celseq.ga">single pair of FASTQ data</a>:</p>
+
+  <figure id="figure-5"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_single.png" alt="Single Batch Workflow" title="Single Batch Workflow" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Single Batch Workflow</figcaption></figure>
+
+  <p>For multiple batch processing, Galaxy can make use of <em>Nested Workflows</em> that in this case can take in a <a href="workflows/scrna_mp_celseq.ga">list of input paired FASTQ data</a> and process them in parallel.</p>
+
+  <figure id="figure-6"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_nested.png" alt="Multiple Batch Workflow" title="Nested Multiple Batch Workflow" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Nested Multiple Batch Workflow</figcaption></figure>
+
+</blockquote>
+
+<h1 id="multi-batch-processing">Multi-Batch Processing</h1>
+
+<figure id="figure-7"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_lower.png" alt="Workflow Lower" title="Multiple batch processing" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Multiple batch processing</figcaption></figure>
+
+<p>Handling more than one batch of sequencing data is rather trivial when we take into account our main goals and requirements:</p>
+
+<ol>
+  <li>For each batch, convert FASTQ reads from into a count matrix.</li>
+  <li>Merge all count matrices into a single count matrix</li>
+</ol>
+
+<p>The first step merely requires us to run the same workflow on each of our batches, using the exact same inputs except for the FASTQ paired data. The second step requires a minimal level of interaction from us; namely using a merge tool and selecting our matrices.</p>
+
+<h3 id="data-upload-and-organization-1">Data upload and organization</h3>
+
+<p>The count matrix we have generated in the previous section is too sparse to perform any reasonable analysis upon, and constitutes data only of a single batch. Here we will use more populated count matrices from multiple batches, under the assumption that we now know how to generate each individual one of them using the steps provided in the previous section. This data is available at <a href="https://zenodo.org/record/2573175"><code class="highlighter-rouge">Zenodo</code></a>.</p>
+
+<p>Once again, file naming is important, and so we will rename our matrix files appropriately to the plate and batch they are supposed to originate from.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload-and-organization-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload and organization</h3>
+
+  <ol>
+    <li>Create a new history and rename it (<em>e.g.</em> scRNA-seq multiple-batch tutorial)</li>
+    <li>Import the four matrices (<code class="highlighter-rouge">P1_B1.tabular</code>, <code class="highlighter-rouge">P1_B2.tabular</code>, etc.) from <a href="https://zenodo.org/record/2573175"><code class="highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)
+      <ul>
+        <li>Set the datatype of the tabular files to <strong>tabular</strong></li>
+      </ul>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2573175/files/P1_B1.tabular
+https://zenodo.org/record/2573175/files/P1_B2.tabular
+https://zenodo.org/record/2573175/files/P2_B3.tabular
+https://zenodo.org/record/2573175/files/P2_B4.tabular
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>Rename a matrix
+      <ul>
+        <li>Click on <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> of the <em><code class="highlighter-rouge">P1_B1.tabular</code></em> file</li>
+        <li>Set the Name field such that it is affixed with “_P1_B1” (e.g. ‘multibatch_P1_B1’)</li>
+        <li>Click <em>Save</em></li>
+      </ul>
+    </li>
+    <li>Repeat for all matrices
+<strong>Pay attention to the Plate number which changes after Batch 2</strong></li>
+  </ol>
+
+</blockquote>
+
+<h2 id="merging-count-matrices">Merging Count Matrices</h2>
+
+<p>Before we begin, we must consider that our matrices are not equal – e.g. Batch1 has 3 cells that describe <em>Genes{A,B,C,D}</em> whereas Batch2 has 4 cells that describe <em>Genes{C,D,E}</em>.</p>
+
+<p>We have the problem that only <em>GeneC</em> and <em>GeneD</em> appear in both batches, whilst describing 7 different cells in total.</p>
+
+<p>To resolve this we can perform a “Full Table Join” where the missing data for <em>GeneE</em> and <em>GeneA</em> in Batch1 and Batch2 respectively are replaced with zeroes:</p>
+
+<figure id="figure-8"><img src="/training-material/topics/transcriptomics/images/scrna_fulltable.svg" alt="Table Join" title="Full Table Join" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Full Table Join</figcaption></figure>
+
+<blockquote class="comment">
+  <h3 id="comment-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
+  <p>For more information on table joins, see <a href="http://www.sql-join.com/sql-join-types/">here</a></p>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <ol>
+    <li>Why have the column headers changed in the Full matrix?</li>
+    <li>Why are the cell labels in B1 and B2 the same, if they are labelling completely different cells?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Although the cell headers in each batch matrix is the same, the cells they label are <em>not</em> the same and need to be relabelled in the final matrix to tell us which batch they originated from.</li>
+      <li>The reason the cell headers are the same is because the cells use the same barcodes, due to fact that the <em>same</em> barcodes are sometimes used across <em>different</em> batches.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Let us now merge our matrices from different batches.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-table-merge"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Table Merge</h3>
+
+  <ol>
+    <li><strong>Column Join on Collections</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Tabular Files”</em>: (Select each of the matrices that you wish to join)</li>
+        <li><em>“Identifier column”</em>:<code class="highlighter-rouge">1</code></li>
+        <li><em>“Number of Header lines in each item”</em>:<code class="highlighter-rouge">1</code></li>
+        <li><em>“Keep original column header”</em>:<code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Fill character”</em>:<code class="highlighter-rouge">0</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The identifier column refers to the column where the gene names are listed. A 1:1 correspondence between matrices is checked, so that the merge does not concatenate the wrong rows between matrices. The <em>Fill character</em> provides a default value of 0 for cases where a Gene appears only in one of the matrices as per our example earlier.</p>
+
+<p>Once the merge is complete, we can now peek at our full combined matrix by once again clicking on the file name to see a small summary. Here we can see that we now have ~30,000 genes and over 1500 cells.</p>
+
+<p>However, the number of cells are greatly overestimated.  This is because <em>not all batches use the same barcodes</em>, and yet we are applying the full set of barcodes to each batch.</p>
+
+<p>The reason we do this is to test for cross-contamination between batches, the details of which are better explained in the <a href="/training-material/topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html"><em>Plates, Batches, and Barcodes</em></a> slides.</p>
+
+<h2 id="guarding-against-cross-contamination">Guarding against Cross-Contamination</h2>
+
+<p>There are multiple possible ways to configure a plate for sequencing multiple batches. Thankfully, Galaxy provides a tool that caters for this, and checks for cross-contamination in any experimental setup. It requires only the following information:</p>
+
+<ol>
+  <li>A full list of barcodes</li>
+  <li>Which barcodes apply to which batches</li>
+  <li>Which batches apply to which plates.</li>
+</ol>
+
+<p>Since we the plating protocol we are using is that designed by the Freiburg MPI Grün lab, we will follow their structure.</p>
+
+<blockquote class="details">
+  <h3 id="details-details-plating-protocol"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Details: Plating protocol</h3>
+
+  <ul>
+    <li>
+      <p>Barcodes:
+  These are each 8bp long, with an edit distance of 2, and there 192 of them.</p>
+
+      <blockquote class="matrix">
+        <table>
+          <tbody>
+            <tr>
+              <td>001-006</td>
+              <td>AACACC AACCTC AACGAG AACTGG AAGCAC AAGCCA</td>
+            </tr>
+            <tr>
+              <td>007-012</td>
+              <td>AAGGTG AAGTGC ACAAGC ACAGAC ACAGGA ACAGTG</td>
+            </tr>
+            <tr>
+              <td>.</td>
+              <td>.</td>
+            </tr>
+            <tr>
+              <td>.</td>
+              <td>.</td>
+            </tr>
+            <tr>
+              <td>180-186</td>
+              <td>TTACGC TTCACC TTCCAG TTCGAC TTCTCG TTGCAC</td>
+            </tr>
+            <tr>
+              <td>187-192</td>
+              <td>TTGCGA TTGCTG TTGGAG TTGGCA TTGGTC TTGTGC</td>
+            </tr>
+          </tbody>
+        </table>
+      </blockquote>
+    </li>
+    <li>
+      <p>Plates:
+  Here we have 8 batches spread out over 2 plates, with alternate barcode striping.</p>
+
+      <blockquote class="matrix">
+        <table>
+          <thead>
+            <tr>
+              <th> </th>
+              <th>001-096</th>
+              <th>097-192</th>
+              <th>001-096</th>
+              <th>097-192</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Plate 1</td>
+              <td>B1</td>
+              <td>B2</td>
+              <td>B3</td>
+              <td>B4</td>
+            </tr>
+            <tr>
+              <td>Plate 2</td>
+              <td>B5</td>
+              <td>B6</td>
+              <td>B7</td>
+              <td>B8</td>
+            </tr>
+          </tbody>
+        </table>
+      </blockquote>
+    </li>
+  </ul>
+
+</blockquote>
+
+<p>This plating protocol can be converted into a more textual format, which allows for many variable setups (see <em>Help</em> section of <em>Cross-contamination Barcode Filter</em> tool).</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Barcodes → Batches]
+001-096: B1 , B3 , B5 , B7
+097-192: B2 , B2 , B6 , B8
+
+[Plates → Batches]
+1: B1 , B2 , B3 , B4
+2: B5 , B6 , B7 , B8
+</code></pre></div></div>
+
+<p>Let us now apply this protocol to our count matrix, and look for any cross-contamination.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-barcode-filtering"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Barcode Filtering</h3>
+
+  <p>Select <strong>Cross-contamination Barcode Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><em>“Input Matrix”</em>:<code class="highlighter-rouge">output</code> (merged matrices from the Column Join tool)</li>
+    <li><em>“Complete Barcodes”</em>:(barcodes file)</li>
+    <li><em>“Plate Protocol”</em>:<code class="highlighter-rouge">Custom</code>
+      <ul>
+        <li><em>“Under ‘Barcode Format’“</em>:
+          <ul>
+            <li>Select <code class="highlighter-rouge">+ Insert Barcode Format</code>:
+              <ul>
+                <li><em>“1: Barcode Format”</em>:
+                  <ul>
+                    <li><em>“Barcode Range: Start”</em>:<code class="highlighter-rouge">1</code></li>
+                    <li><em>“Barcode Range: End”</em>:<code class="highlighter-rouge">96</code></li>
+                    <li><em>“Batches utilizing this Range”</em>:<code class="highlighter-rouge">2,4</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>Select <code class="highlighter-rouge">+ Insert Barcode Format</code>:
+              <ul>
+                <li><em>“2: Barcode Format”</em>:
+                  <ul>
+                    <li><em>“Barcode Range: Start”</em>:<code class="highlighter-rouge">97</code></li>
+                    <li><em>“Barcode Range: End”</em>:<code class="highlighter-rouge">192</code></li>
+                    <li><em>“Batches utilizing this Range”</em>:<code class="highlighter-rouge">1,3</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Under ‘Plate Format’“</em>:
+          <ul>
+            <li>Select <code class="highlighter-rouge">+ Insert Plate Format</code>:
+              <ul>
+                <li><em>“1: Plate Format”</em>:
+                  <ul>
+                    <li><em>“Plate Number”</em>:<code class="highlighter-rouge">1</code></li>
+                    <li><em>“Batches within this Plate Number”</em>:<code class="highlighter-rouge">1,2</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>Select <code class="highlighter-rouge">+ Insert Plate Format</code>:
+              <ul>
+                <li><em>“2: Plate Format”</em>:
+                  <ul>
+                    <li><em>“Plate Number”</em>:<code class="highlighter-rouge">2</code></li>
+                    <li><em>“Batches within this Plate Number”</em>:<code class="highlighter-rouge">3,4</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Expand the <em>“RegEx Parameters”</em> section:
+      <ul>
+        <li><em>“RegEx to extract Plate, Batch, and Barcodes from headers”</em>:<code class="highlighter-rouge">.*P(\\d)_B(\\d)_([ACTG]+)</code>
+<small>(<strong>Attention! Take note of the ‘B’</strong>)</small></li>
+      </ul>
+    </li>
+  </ul>
+
+</blockquote>
+
+<p>The <a href="https://www.regular-expressions.info/quickstart.html">regular expression</a> (RegEx) used in that final step is required to tell us how to capture the important information in the cell headers contained in brackets <code class="highlighter-rouge">(</code> <code class="highlighter-rouge">)</code>, where <code class="highlighter-rouge">\\d</code> denotes an expected digit, and <code class="highlighter-rouge">[ACTG]+</code> denotes 1 or more characters matching A or C or T or G.</p>
+
+<p>The plot that follows tells us everything we need to know about each of our batches. Each batch is essentially tested against the full set of barcodes in order to assert that only the desired or ‘Real’ barcodes have been sequenced.</p>
+
+<h4 id="cross-contamination-plot">Cross-contamination Plot</h4>
+
+<figure id="figure-9"><img src="/training-material/topics/transcriptomics/images/scrna_crosscontamination.png" alt="Contamination Plots" title="The Pre-filter and Post-filter plots" /><figcaption><span class="figcaption-prefix">Figure 9:</span> The Pre-filter and Post-filter plots</figcaption></figure>
+
+<ol>
+  <li>In the pre-filter plot, we can see how only half of the sequences in each batch map to half the barcodes. This shows very little cross-contamination, and proves that our data is real.</li>
+  <li>The post-filter plot essentially removes the false barcodes from each batch and retains only the ‘Real’ barcodes.</li>
+</ol>
+
+<blockquote class="question">
+  <h3 id="question-question-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>The count matrix that is output from this tool has only half the number of cells as the original input count matrix. Why is this?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>Because only half the barcodes in each batch were real. The <em>UMI-tools extract</em> took the entire barcodes file to filter against each batch, and the <em>UMI-tools count</em> also took the entire barcodes file to count against each batch.</p>
+
+    <p>Naturally, each batch produced 192 cells, even though 96 were real. As a result of joining each of these matrices we ended up with a count-matrix of <script type="math/tex">8 * 192 = 1536</script> cells. The cross-contamination tool removes the false barcodes (50% in each batch), resulting in <script type="math/tex">768</script> cells.</p>
+
+  </blockquote>
+</blockquote>
+
+<p>With this, we now have a count-matrix that can be used for further downstream analyis.</p>
+
+<!-- 
+Factoid: We can convert the number of UMIs to the number of molecules using a transformation script.
+-->
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our reads and into the read headers, in order to preserve them during mapping. We have discovered how these barcoded reads are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against reads that are PCR duplicates. Finally, we have learned how to combine seperate batch data as well as being able to check and correct against cross-contamination.</p>
+
+<figure id="figure-10"><img src="/training-material/topics/transcriptomics/images/scrna_workflow.svg" alt="Recap of workflow" title="A recap of the entire workflow" /><figcaption><span class="figcaption-prefix">Figure 10:</span> A recap of the entire workflow</figcaption></figure>
+
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+            <ul>
+                
+                <li>Verifying the distribution of barcodes via a FASTQC plot</li>
+                
+                <li>Relocating barcodes into headers</li>
+                
+                <li>Merging matrices from different batches together</li>
+                
+                <li>Removing unwanted barcodes</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+        <h1>Useful literature</h1>
+        <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+        <blockquote class="agenda follow-up">
+            <strong class="follow-up"><i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+            <ul>
+                
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/transcriptomics">Transcriptomics</a>
+        
+    
+    </li>
+
+            </ul>
+        </blockquote>
+        
+
+        <hr>
+        <br>
+
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Pre-processing of Single-Cell RNA Data (Transcriptomics)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Pre-processing of Single-Cell RNA Data (Transcriptomics)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Bérénice Batut, Anika Erxleben, Mehmet Tekman, Wolfgang Maier)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/transcriptomics/tutorials/scrna_preprocessing/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>
