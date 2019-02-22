@@ -1,20 +1,20 @@
 ---
 layout: tutorial_hands_on
-title: "Pre-processing of Single-cell Data"
+title: "Pre-processing of Single-Cell Data"
 zenodo_link: "https://zenodo.org/record/2573175"
 tags:
   - single-cell
 questions:
-  - "How do we separate reads from seperate cells?"
-  - "How do we reduce PCR bias?"
-  - "How do we verify a barcode format?"
+  - "What is single-cell?"
+  - "How do we process a batch?"
+  - "How do we process multiple batches?"
   - "How do we check for cross-contamination?"
 objectives:
   - "Demultiplex FASTQ data via UMI-tools"
   - "Understand and validate the extraction of barcodes"
   - "Obtain an overview of general alignment and quantification techniques"
   - "Generate a count matrix for downstream single-cell RNA analysis"
-time_estimation: "4h"
+time_estimation: "2h"
 key_points:
   - "Verifying the distribution of barcodes via a FASTQC plot"
   - "Relocating barcodes into headers"
@@ -62,10 +62,14 @@ contributors:
 {:.no_toc}
 
 
-## Why do Single Cell sequencing?
+#### Why do Single Cell sequencing?
 {:.no_toc}
 
-Single-cell RNA (scRNA) sequencing is the technological successor to classical bulk RNA-seq, where samples are no longer defined at the tissue level but at the individual cell level. Under bulk RNA-seq the expression of genes in a sample would yield the average expression of all the constituent cells in that sample, irregardless of the distinct expressions profiles given by subpopulations of cells. The advent of scRNA sequencing has provided the means to explore samples at the individual cell level, enabling a greater understanding of the development and function of such samples by the characteristics of their constituent cells. Consider the heterogenity of cells sampled from bone marrow, where hematopoietic stem cells can give rise to many different cell types within the same tissue:
+Single-cell RNA (scRNA) sequencing is the technological successor to classical "bulk" RNA-seq, where samples are no longer defined at the tissue level but at the individual cell level. The bulk RNA-seq methods seen in [previous hands-on material]({{site.baseurl}}/topics/transcriptomics/tutorials/ref-based/tutorial.html) would give the average expression of genes in a sample, whilst overlooking the distinct expression profiles given by the cell sub-populations due to their heterogeneity.
+
+The rise of scRNA sequencing provides the means to explore this hetereogeneity by examining samples at the individual cell level, enabling a greater understanding of the development and function of such samples, by the characteristics of their constituent cells.
+
+Consider the heterogenity of cells sampled from bone marrow, where hematopoietic stem cells can give rise to many different cell types within the same tissue:
 
  ![Cell Differentiation of Hematopoietic Stem cells]({{site.baseurl}}/topics/transcriptomics/images/scrna_hematopoiesis.png "Cell Differentiation of Hematopoietic Stem cells")
 
