@@ -91,6 +91,10 @@ This count matrix is crucial for performing the downstream analysis, where diffe
 
 The tutorial is structured in two parts:
 
+ 1. **Single-Batch Processing**
+ 1. **Multi-Batch Processing**
+
+
  ![Overview of workflow]({{site.baseurl}}/topics/transcriptomics/images/scrna_workflow.svg "An overview of the entire workflow")
 
 The first part of this tutorial will deal with batches, and use example *FASTQ* data from a single batch, which we will perform [barcode extraction](#understanding-barcodes) and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix. 
@@ -107,7 +111,7 @@ The second part of this tutorial will deal with merging several output count mat
 >
 {: .agenda}
 
-# Single Batch Processing
+# Single-Batch Processing
 
 ### Data upload and organization
 
@@ -478,7 +482,7 @@ This concludes the first part of the tutorial which focused on the transformatio
 {: .details}
 
 
-# Merging Batches Together
+# Multi-Batch Processing
 
 <small>[Back to previous](javascript:window.history.back())</small>
 
