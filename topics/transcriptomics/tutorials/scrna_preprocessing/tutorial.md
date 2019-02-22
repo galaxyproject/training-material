@@ -101,9 +101,9 @@ The tutorial is structured in two parts:
 
  ![Overview of workflow]({{site.baseurl}}/topics/transcriptomics/images/scrna_workflow.svg "An overview of the entire workflow")
 
-The first part of this tutorial will deal with batches, and use example *FASTQ* data from a single batch, which we will perform [barcode extraction](#understanding-barcodes) and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix. 
+The first part of this tutorial will deal with batches, and use example *FASTQ* data from a single batch, which we will perform [barcode extraction](#barcode-extraction) and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix.
 
-The second part of this tutorial will deal with merging several output count matrices from multiple single batches generated in the first portion. Here, a set of example count matrices are [merged together](#merging-batches-together) and quality control performed. This produces a final count matrix valid for downstream analysis.
+The second part of this tutorial will deal with merging several output count matrices from multiple single batches generated in the first portion. Here, a set of example count matrices are [merged together](#merging-count-matrices) and quality control performed. This produces a final count matrix valid for downstream analysis.
 
 
 > ### Agenda
@@ -148,9 +148,11 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 {: .hands_on}
 
 
-For a more detailed understanding of the naming conventions used in generating our FASTQ pair, please consult the [*Plates, Batches, and Barcodes*]({{site.baseurl}}/topics/transcriptomics/scrna-plates-batches-barcodes/slides.html) slides.
+For a more detailed understanding of the naming conventions used in generating our FASTQ pair, please consult the [*Plates, Batches, and Barcodes*](../scrna-plates-batches-barcodes/slides.html) slides.
 
 ## Barcode Extraction
+
+<small>[Back to previous](javascript:window.history.back())</small>
 
 It is highly recommended that you familiarise yourself with the concepts of barcodes and UMIs within multiplexed FASTQ data with the [*Understanding Barcodes*]({{site.baseurl}}/topics/transcriptomics/tutorials/scrna-umis/tutorial.html) hands-on material.
 
@@ -475,11 +477,11 @@ This concludes the first part of the tutorial which focused on the transformatio
 
 > ### {% icon details %} Workflows For All Steps
 >
-> Galaxy provides a workflow that captures the process of all the above stages for a [single pair of FASTQ data](workflow/scrna_pp_celseq.ga):
+> Galaxy provides a workflow that captures the process of all the above stages for a [single pair of FASTQ data](workflows/scrna_pp_celseq.ga):
 >
 > ![Single Batch Workflow]({{site.baseurl}}/topics/transcriptomics/images/scrna_workflow_single.png "Single Batch Workflow")
 >
-> For multiple batch processing, Galaxy can make use of *Nested Workflows* that in this case can take in a [list of input paired FASTQ data](workflow/scrna_mp_celseq.ga) and process them in parallel.
+> For multiple batch processing, Galaxy can make use of *Nested Workflows* that in this case can take in a [list of input paired FASTQ data](workflows/scrna_mp_celseq.ga) and process them in parallel.
 >
 > ![Multiple Batch Workflow]({{site.baseurl}}/topics/transcriptomics/images/scrna_workflow_nested.png "Nested Multiple Batch Workflow")
 >
@@ -533,6 +535,8 @@ Once again, file naming is important, and so we will rename our matrix files app
 
 ## Merging Count Matrices
 
+<small>[Back to previous](javascript:window.history.back())</small>
+
 Before we begin, we must consider that our matrices are not equal -- e.g. Batch1 has 3 cells that describe *Genes{A,B,C,D}* whereas Batch2 has 4 cells that describe *Genes{C,D,E}*.
 
 We have the problem that only *GeneC* and *GeneD* appear in both batches, whilst describing 7 different cells in total.
@@ -578,7 +582,7 @@ Once the merge is complete, we can now peek at our full combined matrix by once 
 
 However, the number of cells are greatly overestimated.  This is because *not all batches use the same barcodes*, and yet we are applying the full set of barcodes to each batch.
 
-The reason we do this is to test for cross-contamination between batches, the details of which are better explained in the [*Plates, Batches, and Barcodes*]({{site.baseurl}}/topics/transcriptomics/scrna-plates-batches-barcodes/slides.html) slides.
+The reason we do this is to test for cross-contamination between batches, the details of which are better explained in the [*Plates, Batches, and Barcodes*](../scrna-plates-batches-barcodes/slides.html) slides.
 
 
 ## Guarding against Cross-Contamination
