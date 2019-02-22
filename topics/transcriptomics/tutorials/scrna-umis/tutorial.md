@@ -29,7 +29,7 @@ follow_up_training:
     type: "internal"
     topic_name: transcriptomics
     tutorials:
-        - scrna-preprocess
+        - scrna_preprocessing
 
 
 contributors:
