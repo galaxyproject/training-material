@@ -39,9 +39,6 @@ follow_up_training:
   - 
     type: "internal"
     topic_name: transcriptomics
-    tutorials:
-        - scrna-raceid
-        - scrna-scanpy
         
 contributors:
   - mtekman
