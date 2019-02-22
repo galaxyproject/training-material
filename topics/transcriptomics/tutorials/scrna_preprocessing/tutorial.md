@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-title: "Preprocessing of single-cell data"
+title: "Pre-processing of Single-cell Data"
 zenodo_link: "https://zenodo.org/record/2573175"
 tags:
   - single-cell
