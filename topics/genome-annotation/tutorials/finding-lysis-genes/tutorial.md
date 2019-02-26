@@ -10,8 +10,19 @@ tutorial_name: finding-lysis-genes
 >    > * Genes Involved
 >    > * Expected Genetic Context
 > 2. Finding the Endolysin
+>    > * Conserved Domain (InterPro)
+>    > * BLAST Hits
+>    > * SAR Endolysins
+>    > * Types of Endolysins
 > 3. Finding Holins and Antiholins
+>    > * TMHMM Tracks - Transmembrane Prediction
+>    > * BLAST Homology
+>    > * Basic Considerations When Looking for Holins
+>    > * Annotating Holoin/Antiholin Pairs
 > 4. Spanin Genes
+>    > * Gram-Negative Hosts
+>    > * Spanin Architectures: i-spanin/o-spanin, u-spanin
+>    > * What is an SPII signal? What is a lipobox?
 > 5. Missing Lysis Genes
 > {:toc}
 >
