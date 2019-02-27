@@ -14,13 +14,24 @@ tutorial=$1
 galaxy_url=$2
 api_key=$3
 
-# install tools
-echo "Installing Tools.."
-if [ -f ${tutorial}/tools.yaml ]
+    
+# install workflows and tools
+echo "Installing workflows"
+if [ -d ${tutorial}/workflows ]
 then
-    shed-tools install -g ${galaxy_url} -a ${api_key} -t ${tutorial}/tools.yaml
+    echo " - Extracting tools from workflows"
+    for w in ${tutorial}/workflows/*.ga
+    do
+        workflow-to-tools -w $w -o ${tutorial}/workflows/wftools.yaml -l $(basename ${tutorial})
+        echo " - Installing tools from workflow $(basename $w)" 
+        shed-tools install -g ${galaxy_url} -a ${api_key} -t ${tutorial}/workflows/wftools.yaml
+        rm ${tutorial}/workflows/wftools.yaml
+    done
+    echo " - Installing workflows"
+    workflow-install --publish_workflows -g ${galaxy_url} -a ${api_key} -w ${tutorial}/workflows/
+
 else
-    echo "No tools to install (no file named tools.yaml present)"
+    echo "No workflows to install (no directory named workflow present)"
 fi
 
 # install data libraries
@@ -41,16 +52,5 @@ then
 else
     echo "No reference data to install (no file named data-manager.yaml present)"
 fi
-
-# install workflows
-echo "Installing workflows"
-if [ -d ${tutorial}/workflows ]
-then
-    workflow-install --publish_workflows -g ${galaxy_url} -a ${api_key} -w ${tutorial}/workflows/
-
-else
-    echo "No workflows to install (no directory named workflow present)"
-fi
-
 
 # install tours --> not possible via API yet
