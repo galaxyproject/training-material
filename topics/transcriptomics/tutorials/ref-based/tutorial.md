@@ -928,7 +928,7 @@ You should obtain something similar to:
 > ### {% icon question %} Questions
 >
 > 1. Do you observe anything in the clustering of the samples and the genes?
-> 2. What changes if you regenerate the heatmap and select `Plot the data as it is` in *"Advanced - log transformation"*/*"Data transformation"?
+> 2. What changes if you regenerate the heatmap and select `Plot the data as it is` in *"Advanced - log transformation"*/*"Data transformation"*?
 > 3. How could you generate a heatmap of normalized counts for all up-regulated genes with absolute fold change > 2?
 >
 > > ### {% icon solution %} Solution
