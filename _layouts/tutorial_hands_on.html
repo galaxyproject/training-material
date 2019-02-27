@@ -74,7 +74,7 @@ layout: base
                             </a>
                             <div class="dropdown-menu">
                                 {% if topic.docker_image %}
-                                    <a class="dropdown-item" href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/docker" title="Docker image for this tutorial">
+                                    <a class="dropdown-item" href="{{ site.github.repository_url }}/tree/{{ site.repository_branch }}/topics/{{ topic.name }}/docker" title="Docker image for this tutorial">
                                         {% icon docker_image %} Docker image
                                     </a>
                                 {% endif %}
@@ -134,7 +134,7 @@ layout: base
                     {% include _includes/help.html %}
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ site.github_repository }}/edit/master/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/tutorial.md">
+                        <a class="nav-link" href="{{ site.github.repository_url }}/edit/{{ site.repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/tutorial.md">
                             {% icon github %} Edit
                         </a>
                     </li>
@@ -181,7 +181,7 @@ layout: base
             {% endif %}
         </blockquote>
 
-        {{ content 
+        {{ content
             | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">' }}
 
         {% if page.key_points %}
@@ -261,7 +261,7 @@ layout: base
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/tutorial.md">GitHub</a>.
+            <a href="{{ site.github.repository_url }}/tree/{{ site.repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/tutorial.md">GitHub</a>.
         </p>
     </div>
 </footer>

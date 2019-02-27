@@ -193,7 +193,7 @@ It also enables you to check for contaminations in your samples.
 It is generally recommended to use more than one peptide search engine and use the combined results for peptide inference ([Shteynberg et al., 2013, Mol. Cell. Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/23720762)).
 By comparing results of multiple search engines, you may improve the *sensitivity* (when accepting peptides that were found by only one of the engines), the *specificity* (when accepting only peptides that were found by all of the search engines) or *both* (when using n>2 search engines and accept peptides found by a fraction of the (e.g. n-1) search engines).
 
-Here, we will use the OpenMS tool [ConsensusID](http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/html/TOPP_ConsensusID.html) to combine the search engine results.
+Here, we will use the OpenMS tool [ConsensusID](https://abibuilder.informatik.uni-tuebingen.de/archive/openms/Documentation/release/latest/html/TOPP_ConsensusID.html) to combine the search engine results.
 
 > ### {% icon hands_on %} Hands-On: Multiple search engines
 >

@@ -86,7 +86,7 @@ In this tutorial we will use a dataset obtained from imaging a mouse kidney. To 
 >
 >    > ### {% icon tip %} Tip: FTP upload for large files
 >    > * In case one subfile is larger than 2 GB the uploading needs to be done via ftp.
->    > * The necessary steps are explained in this tutorial [Getting data into Galaxy]({{ site.baseurl }}/topics/galaxy-data-manipulation/tutorials/get-data/slides.html)
+>    > * The necessary steps are explained in this tutorial [Getting data into Galaxy]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/get-data/slides.html %})
 >    {: .tip}
 >
 >    > ### {% icon tip %} Tip: Uploading an Analyze7.5 file

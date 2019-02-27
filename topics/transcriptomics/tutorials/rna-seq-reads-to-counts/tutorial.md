@@ -38,7 +38,7 @@ contributors:
 
 Measuring gene expression on a genome-wide scale has become common practice over the last two decades or so, with microarrays predominantly used pre-2008. With the advent of next generation sequencing technology in 2008, an increasing number of scientists use this technology to measure and understand changes in gene expression in often complex systems. As sequencing costs have decreased, using RNA-Seq to simultaneously measure the expression of tens of thousands of genes for multiple samples has never been easier. The cost of these experiments has now moved from generating the data to storing and analysing it.
 
-There are many steps involved in analysing an RNA-Seq experiment. he analysis begins with sequencing reads (FASTQ files). These are usually aligned to a reference genome, if available. Then the number of reads mapped to each gene can be counted. This results in a table of counts, which is what we perform statistical analyses on to determine differentially expressed genes and pathways. The purpose of this tutorial is to demonstrate how to do read alignment and counting, prior to performing differential expression. Differential expression analysis with limma-voom is covered in an accompanying tutorial [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html). The tutorial here shows how to start from FASTQ data and perform the mapping and counting steps, along with associated Quality Control.
+There are many steps involved in analysing an RNA-Seq experiment. he analysis begins with sequencing reads (FASTQ files). These are usually aligned to a reference genome, if available. Then the number of reads mapped to each gene can be counted. This results in a table of counts, which is what we perform statistical analyses on to determine differentially expressed genes and pathways. The purpose of this tutorial is to demonstrate how to do read alignment and counting, prior to performing differential expression. Differential expression analysis with limma-voom is covered in an accompanying tutorial [RNA-seq counts to genes]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.md %}). The tutorial here shows how to start from FASTQ data and perform the mapping and counting steps, along with associated Quality Control.
 
 **Mouse mammary gland dataset**
 
@@ -71,9 +71,9 @@ Read sequences are usually stored in compressed (gzipped) FASTQ files. Before th
 
 If you are sequencing your own data, the sequencing facility will almost always provide compressed FASTQ files which you can upload into Galaxy. If your FASTQs are provided through Galaxy's Shared Data, you can easily import them into a history. For publicly available sequence data, such as from GEO/SRA/ENA, Galaxy's Rule-based Uploader can be used to import the files from URLs, saving on the need to download to your computer and upload into Galaxy.
 
-The raw reads used in this tutorial were obtained from SRA from the link given in GEO for the the mouse mammary gland dataset (Fu et al. 2015) (e.g `ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534`). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. If working with your own data you would use the full data and some results for the full mouse dataset will be shown for comparison. The small FASTQ files are available in [Figshare](https://figshare.com/s/f5d63d8c265a05618137) and the links to the FASTQ files are provided below. We are going to import the files into a Collection. Using Galaxy Collections helps keep the datasets organised and tidy in the history. Collections also make it easier to maintain the sample names through tools and workflows. If you are not familiar with collections, see the [Galaxy Collections tutorial]({{ site.baseurl }}/topics/galaxy-data-manipulation/tutorials/collections/tutorial.html).
+The raw reads used in this tutorial were obtained from SRA from the link given in GEO for the the mouse mammary gland dataset (Fu et al. 2015) (e.g `ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534`). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. If working with your own data you would use the full data and some results for the full mouse dataset will be shown for comparison. The small FASTQ files are available in [Figshare](https://figshare.com/s/f5d63d8c265a05618137) and the links to the FASTQ files are provided below. We are going to import the files into a Collection. Using Galaxy Collections helps keep the datasets organised and tidy in the history. Collections also make it easier to maintain the sample names through tools and workflows. If you are not familiar with collections, see the [Galaxy Collections tutorial]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/collections/tutorial.md %}).
 
-The sample information (sample ID, Group) and link to the FASTQ file (URL) are in the grey box below. To generate a file like this to import data from SRA/ENA see the [Galaxy Rule-based Uploader tutorial]({{ site.baseurl }}/topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial.html).
+The sample information (sample ID, Group) and link to the FASTQ file (URL) are in the grey box below. To generate a file like this to import data from SRA/ENA see the [Galaxy Rule-based Uploader tutorial]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial.md %}).
 
 ```
 SampleID	Group	URL
@@ -133,9 +133,8 @@ In order to get these files into Galaxy, we will want to do a few things:
 >
 >        ![Rules Editor](../../images/rna-seq-reads-to-counts/rule_editor.png "Rules Editor")
 >
->        You should see a collection (list) called `fastqs` in your history containing all 12 FASTQ files, like below.
+>        You should see a collection (list) called `fastqs` in your history containing all 12 FASTQ files.
 >
->        ![Collection](../../images/rna-seq-reads-to-counts/collection.png "Collection of FASTQs")
 >
 {: .hands_on}
 
@@ -175,16 +174,13 @@ If your FASTQ files are located in Shared Data, you can import them into your hi
 Take a look at one of the FASTQ files to see what it contains.
 
 > ### {% icon tip %} Tip: FASTQ format
-> If you are not familiar with FASTQ format, see the [Quality Control tutorial]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html)
+> If you are not familiar with FASTQ format, see the [Quality Control tutorial]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
 {: .tip}
 
 > ### {% icon hands_on %} Hands-on: Take a look at FASTQ format
 >
 > 1. Click on the collection name (`fastqs`)
 > 2. Click on the name of one of the collection elements (e.g `MCL1-DL`). Check that the data type is `fastqsanger.gz` and the database `mm10`.
->
->    ![Collection Element](../../images/rna-seq-reads-to-counts/collection_element.png "Collection Element"){: width="50px" height="50px"}
->
 > 3. Click on the {% icon galaxy-eye %} (eye) icon of one of the FASTQ files to have a look at what it contains
 {: .hands_on}
 
@@ -193,15 +189,12 @@ Take a look at one of the FASTQ files to see what it contains.
 
 During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. Every base sequence gets a quality score from the sequencer and this information is present in the FASTQ file. A quality score of 30 corresponds to a 1 in 1000 chance of an incorrect base call (a quality score of 10 is a 1 in 10 chance of an incorrect base call). To look at the overall distribution of quality scores across the reads, we can use FastQC.
 
-Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the ["Quality control" tutorial]({{site.baseurl}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html).
+Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the ["Quality control" tutorial]({{site.baseurl}}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html).
 
 > ### {% icon hands_on %} Hands-on: Check raw reads with **FastQC**
 >
 > 1. **FastQC** {% icon tool %} with the following parameters:
 >    - {% icon param-collection %} *"Short read data from your current history"*: `fastqs` (Input dataset collection)
->
->    > ![FastQC Collection](../../images/rna-seq-reads-to-counts/run_fastqc.png "Run FastQC on collection"){: width="50px"}
->
 > 2. Inspect the `Webpage` output of **FastQC** {% icon tool %} for the `MCL1-DL` sample by clicking on the {% icon galaxy-eye %} (eye) icon
 {: .hands_on}
 
@@ -231,13 +224,12 @@ The FastQC report contains a lot of information and we can look at the report fo
 >        - In *"FastQC output"*
 >           - {% icon param-select %} *"Type of FastQC output?"*: `Raw data`
 >           - {% icon param-collection %} *"FastQC output"*: `RawData` files (output of **FastQC** {% icon tool %} on trimmed reads)
->           ![MultiQC](../../images/rna-seq-reads-to-counts/multiqc.png "Run MultiQC on collection"){: width="50px"}
 > 2. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
 
-Note that these are the results for just 1000 reads. The FastQC results for the full dataset are shown below. These 1000 reads are the first reads from the FASTQ files, and the first reads usually originate from the flowcell edges, so we can expect that they may have lower quality and the patterns may be a bit different from the distribution in the full dataset.
+Note that these are the results for just 1000 reads. The FastQC results for the full dataset are shown below. The 1000 reads are the first reads from the FASTQ files, and the first reads usually originate from the flowcell edges, so we can expect that they may have lower quality and the patterns may be a bit different from the distribution in the full dataset.
 
-Here, most of the plots in the small FASTQs look similar to the full dataset. However, in the small FASTQs, we see less duplication, some Ns in the reads and some overrepresented sequences.
+You should see that most of the plots in the small FASTQs look similar to the full dataset. However, in the small FASTQs, there is less duplication, some Ns in the reads and some overrepresented sequences.
 
 ![General Statistics](../../images/rna-seq-reads-to-counts/fastqc_table.png "General Statistics")
 ![Sequence Counts](../../images/rna-seq-reads-to-counts/fastqc_sequence_counts_plot.png "Sequence Counts")
@@ -248,7 +240,7 @@ Here, most of the plots in the small FASTQs look similar to the full dataset. Ho
 ![Sequence Duplication Levels](../../images/rna-seq-reads-to-counts/fastqc_sequence_duplication_levels_plot.png "Sequence Duplication Levels")
 ![Adapter Content](../../images/rna-seq-reads-to-counts/fastqc_adapter_content_plot.png "Adapter Content")
 
-See the [Quality Control tutorial]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html) for more information on FastQC plots.
+See the [Quality Control tutorial]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) for more information on FastQC plots.
 
 > ### {% icon question %} Questions
 >
@@ -264,9 +256,9 @@ See the [Quality Control tutorial]({{ site.baseurl }}/topics/sequence-analysis/t
 > {: .solution}
 {: .question}
 
-We will use Cutadapt to trim the reads to remove the Illumina adapter and any low quality bases at the ends (quality score < 20). We will also output the Cutadapt report for summarising with MultiQC.
+We will use Cutadapt to trim the reads to remove the Illumina adapter and any low quality bases at the ends (quality score < 20). We will discard any sequences that are too short (< 20bp) after trimming. We will also output the Cutadapt report for summarising with MultiQC.
 
-The Cutadapt tool Help section provides the sequence we can use to trim this standard Illumina adapter `AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC`, as given on the [Cutadapt website](https://cutadapt.readthedocs.io/en/stable/guide.html#illumina-truseq). Other Illumina adapter sequences (e.g. Nextera) can be found at the [Illumina website](http://sapac.support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html). We will discard any sequences that are too short (< 20bp) after trimming.
+The Cutadapt tool Help section provides the sequence we can use to trim this standard Illumina adapter `AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC`, as given on the [Cutadapt website](https://cutadapt.readthedocs.io/en/stable/guide.html#illumina-truseq). For trimming paired-end data see the Cutadapt Help section. Other Illumina adapter sequences (e.g. Nextera) can be found at the [Illumina website](http://sapac.support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html). Note that Cutadapt requires at least three bases to match between adapter and read to reduce the number of falsely trimmed bases, which can be changed in the Cutadapt options if desired.
 
 ## Trim reads
 
@@ -320,7 +312,7 @@ After trimming we can see that:
 
 # Mapping
 
-Now that we have prepared our reads, we can align the reads for our 12 samples. There is an existing reference genome for mouse and we will map the reads to that. The current version of the mouse reference genome is `mm10/GRCm38`. Here we will use [HISAT2](https://ccb.jhu.edu/software/hisat2/index.shtml), the descendent of widely-used TopHat, to align the reads, but alternative mappers could be used, such as STAR. See the [RNA-seq ref-based tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html#mapping) for more information on RNA-seq mappers. There are often numerous mapping parameters that we can specify, but usually the default mapping parameters are fine. However, library type (paired-end vs single-end) and library strandness (stranded vs unstranded) require some different settings when mapping and counting, so they are two important pieces of information to know about samples. The mouse data comprises unstranded, single-end reads so we will specify that where necessary. If we had paired-end data or stranded data, we would specify that. HISAT2 can output a mapping summary file that tells what proportion of reads mapped to the reference genome. Summary files for multiple samples can be summarised with MultiQC. As we’re only using a subset of 1000 reads per sample, aligning should just take a minute or so. To run the full samples from this dataset would take longer.
+Now that we have prepared our reads, we can align the reads for our 12 samples. There is an existing reference genome for mouse and we will map the reads to that. The current version of the mouse reference genome is `mm10/GRCm38`. Here we will use [**HISAT2**](https://ccb.jhu.edu/software/hisat2/index.shtml) to align the reads. HISAT2 is the descendent of TopHat, one of the first widely-used aligners, but alternative mappers could be used, such as STAR. See the [RNA-seq ref-based tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html#mapping) for more information on RNA-seq mappers. There are often numerous mapping parameters that we can specify, but usually the default mapping parameters are fine. However, library type (paired-end vs single-end) and library strandness (stranded vs unstranded) require some different settings when mapping and counting, so they are two important pieces of information to know about samples. The mouse data comprises unstranded, single-end reads so we will specify that where necessary. HISAT2 can output a mapping summary file that tells what proportion of reads mapped to the reference genome. Summary files for multiple samples can be summarised with MultiQC. As we’re only using a subset of 1000 reads per sample, aligning should just take a minute or so. To run the full samples from this dataset would take longer.
 
 ## Map reads to reference genome
 
@@ -382,20 +374,19 @@ The MultiQC plot below shows the result from the full dataset for comparison.
 
 ![HISAT2 mapping](../../images/rna-seq-reads-to-counts/hisat2_se_plot.png "HISAT2 mapping")
 
-Over 90% of reads have mapped in all samples, a good mapping rate. And the vast majority of reads have mapped uniquely, they haven't mapped to multiple locations in the reference genome.
+Over 90% of reads have mapped in all samples, which is a good mapping rate, and the vast majority of reads have mapped uniquely, they haven't mapped to multiple locations in the reference genome.
 
 It is also good practice to visualise the read alignments in the BAM file, for example using IGV, see the [RNA-seq ref-based tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html#pretreatments).
 
 > ### {% icon tip %} Tip: Downloading a collection
 >
-> To download a collection of datasets (e.g. the collection of BAM files) click on the floppy icon as shown below. This will download a tar file containing all the datasets in the collection. Note that for BAM files the .bai indexes (required for IGV) will be included automatically in the download.
+> To download a collection of datasets (e.g. the collection of BAM files) click on the floppy disk icon within the collection. This will download a tar file containing all the datasets in the collection. Note that for BAM files the .bai indexes (required for IGV) will be included automatically in the download.
 >
-> ![Downloading collection](../../images/rna-seq-reads-to-counts/collection_download.png "Downloading a collection")
 {: .tip}
 
 ## Check strandness
 
-As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to "guess" the strandness, as explained in the [RNA-seq ref-based tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html). This is done through comparing the "strandness of reads" with the "strandness of transcripts". For this tool, and many of the other RSeQC tools, a reference bed file of genes (`reference genes`) is required. RSeQC provides some reference BED files for model organisms. You can import the RSeQC mm10 RefSeq BED file from the link `https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download` (and rename to `reference genes`) or import a file from Shared data if provided. Alternatively, you can provide your own BED file of reference genes, for example from UCSC (see the [Peaks to Genes tutorial]({{ site.baseurl }}/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html). Or the **Convert GTF to BED12** tool can be used to convert a GTF into a BED file.
+As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to "guess" the strandness, as explained in the [RNA-seq ref-based tutorial]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}). This is done through comparing the "strandness of reads" with the "strandness of transcripts". For this tool, and many of the other RSeQC tools, a reference bed file of genes (`reference genes`) is required. RSeQC provides some reference BED files for model organisms. You can import the RSeQC mm10 RefSeq BED file from the link `https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download` (and rename to `reference genes`) or import a file from Shared data if provided. Alternatively, you can provide your own BED file of reference genes, for example from UCSC (see the [Peaks to Genes tutorial]({{ site.baseurl }}{% link topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.md %}). Or the **Convert GTF to BED12** tool can be used to convert a GTF into a BED file.
 
 {% include snippets/import_via_link.md %}
 
@@ -715,9 +706,7 @@ BAM)** {% icon tool %})
 {: .question}
 
 
-The MultiQC report can be downloaded by clicking on the floppy disk icon on the dataset in the history as shown below.
-
-![MultiQC download](../../images/rna-seq-reads-to-counts/multiqc_download.png "Download MultiQC report")
+The MultiQC report can be downloaded by clicking on the floppy disk icon on the dataset in the history.
 
 > ### {% icon question %} Questions
 >
@@ -737,11 +726,9 @@ The MultiQC report can be downloaded by clicking on the floppy disk icon on the 
 
 # Creating a workflow of the analysis
 
-You can now extract a workflow from the steps that have been performed, as shown in the [Peaks to Genes tutorial]({{ site.baseurl }}/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html#extracting-workflow). This is a way to help keep a record of the steps performed. It also enables efficient rerunning of a multi-step analysis, such as RNA-seq.
-
-![fastq to counts Workflow](../../images/rna-seq-reads-to-counts/workflow.png "FASTQ to counts Workflow")
+You can now extract a workflow from the steps that have been performed, as shown in the [Extracting Workflows from Histories tutorial]({{ site.baseurl }}/topics/galaxy-ui/tutorials/history-to-workflow/tutorial.html). This is a way to help keep a record of the steps performed. It also enables efficient rerunning of a multi-step analysis, such as RNA-seq.
 
 # Conclusion
 {:.no_toc}
 
-In this tutorial we have seen how reads (FASTQ files) can be converted into counts. We have also seen QC steps that can be performed to help assess the quality of the data. A follow-on tutorial, [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html), shows how to perform differential expression and QC on the counts for this dataset.
+In this tutorial we have seen how reads (FASTQ files) can be converted into counts. We have also seen QC steps that can be performed to help assess the quality of the data. A follow-on tutorial, [RNA-seq counts to genes]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.md %}), shows how to perform differential expression and QC on the counts for this dataset.

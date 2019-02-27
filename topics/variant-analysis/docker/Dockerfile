@@ -6,7 +6,7 @@
 # to run image:
 #    docker run -p "8080:80" -t <your_tag>
 
-FROM quay.io/bgruening/galaxy-exome-seq
+FROM bgruening/galaxy-stable:latest
 
 MAINTAINER Galaxy Training Material
 
