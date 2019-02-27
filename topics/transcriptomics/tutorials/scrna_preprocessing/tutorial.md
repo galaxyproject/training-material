@@ -23,12 +23,6 @@ key_points:
 requirements:
   - 
     type: "internal"
-    topic_name: sequence-analysis
-    tutorials:
-        - mapping
-        - quality-control
-  - 
-    type: "internal"
     topic_name: transcriptomics
     tutorials:
         - scrna-introduction
