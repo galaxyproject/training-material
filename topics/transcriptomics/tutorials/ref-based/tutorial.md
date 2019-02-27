@@ -1013,8 +1013,8 @@ To identify categories significantly enriched/unenriched below some p-value cuto
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 47 GO terms (0.49%) are over-represented and 64 (0.66%) - Filter on c8 (over-represented) and c9 (under-represented)
-> > 2. For over-represented, 31 BP, 6 CC and 10 MF - For under-represented, 36 BP, 25 CC and 3 MF - Group data on column 7 and count on column 1
+> > 1. 29 GO terms (0.25%) are over-represented and 81 (0.71%) - Filter on c8 (over-represented) and c9 (under-represented)
+> > 2. For over-represented, 21 BP, 4 CC and 4 MF - For under-represented, 45 BP, 30 CC and 6 MF - Group data on column 7 and count on column 1
 > >
 > {: .solution}
 {: .question}
