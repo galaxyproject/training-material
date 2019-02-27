@@ -16,6 +16,7 @@
         </script>
         
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
         <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
@@ -32,7 +33,7 @@
         <meta property="og:description" content="DNA sequence data has become an indispensable tool for Mo..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
-    <body>
+    <body data-spy="scroll" data-target="#toc">
         
 
 
@@ -301,8 +302,9 @@
 }
 
     </script>
+    
     <section class="tutorial">
-        <h1>Introduction to Genome Assembly</h1>
+        <h1 data-toc-skip>Introduction to Genome Assembly</h1>
 
         <blockquote class="overview">
             <h3>Overview</h3>
@@ -381,7 +383,14 @@
             
         </blockquote>
 
-        <h1 class="no_toc" id="genome-assembly-with-velvet-background">Genome assembly with Velvet: Background</h1>
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="genome-assembly-with-velvet-background">Genome assembly with Velvet: Background</h1>
 
 <p>Velvet is one of a number of <em>de novo</em> assemblers that use short read sets as input (<em>e.g.</em> Illumina Reads). The assembly method is based on the manipulation of de Bruijn graphs, via the removal of errors and the simplication of repeated regions.</p>
 
@@ -816,6 +825,9 @@
 
 <p>The reasons for these patterns will be discussed in detail in the De Bruijn graph assembly slides and tutorial.</p>
 
+                </div>
+            </div>
+        </div>
 
         
         <blockquote class="key_points">
@@ -834,7 +846,7 @@
         
 
         
-        <h1>Useful literature</h1>
+        <h1 data-toc-skip>Useful literature</h1>
         <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/assembly#references">here</a>.</p>
         
 
@@ -878,5 +890,6 @@
     <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
     <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
 </html>

@@ -16,6 +16,7 @@
         </script>
         
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
         <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
@@ -32,7 +33,7 @@
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
-    <body>
+    <body data-spy="scroll" data-target="#toc">
         
 
 
@@ -376,8 +377,9 @@
 }
 
     </script>
+    
     <section class="tutorial">
-        <h1>Differential abundance testing of small RNAs</h1>
+        <h1 data-toc-skip>Differential abundance testing of small RNAs</h1>
 
         <blockquote class="overview">
             <h3>Overview</h3>
@@ -485,7 +487,14 @@
             
         </blockquote>
 
-        <h1 class="no_toc" id="introduction">Introduction</h1>
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>Small, noncoding RNA (sRNA) molecules, typically 18-40nt in length, are key features of post-transcriptional regulatory mechanisms governing gene expression. Through interactions with protein cofactors, these tiny sRNAs typically function by perfectly or imperfectly basepairing with substrate RNA molecules, and then eliciting downstream effects such as translation inhibition or RNA degradation. Different subclasses of sRNAs - <em>e.g.</em> microRNAs (miRNAs), Piwi-interaction RNAs (piRNAs), and endogenous short interferring RNAs (siRNAs) - exhibit unique characteristics, and their relative abundances in biological contexts can indicate whether they are active or not. In this tutorial, we will examine expression of the piRNA subclass of sRNAs and their targets in <em>Drosophila melanogaster</em>.</p>
 
@@ -1155,6 +1164,9 @@ https://zenodo.org/record/826906/files/dm3_rRNA_sequences.fa.gz
 
 <p><img src="../../images/sRNA/schematic_for_sRNAseq_tutorial.png" alt="sRNA tutorial workflow" /></p>
 
+                </div>
+            </div>
+        </div>
 
         
         <blockquote class="key_points">
@@ -1171,7 +1183,7 @@ https://zenodo.org/record/826906/files/dm3_rRNA_sequences.fa.gz
         
 
         
-        <h1>Useful literature</h1>
+        <h1 data-toc-skip>Useful literature</h1>
         <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
         
 
@@ -1215,5 +1227,6 @@ https://zenodo.org/record/826906/files/dm3_rRNA_sequences.fa.gz
     <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
     <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
 </html>

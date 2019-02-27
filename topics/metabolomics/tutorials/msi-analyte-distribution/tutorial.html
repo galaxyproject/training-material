@@ -16,6 +16,7 @@
         </script>
         
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
         <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
@@ -32,7 +33,7 @@
         <meta property="og:description" content="Training material to analyse Metabolomics data in Galaxy ..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
-    <body>
+    <body data-spy="scroll" data-target="#toc">
         
 
 
@@ -221,8 +222,9 @@
 }
 
     </script>
+    
     <section class="tutorial">
-        <h1>Mass spectrometry imaging: Examining the spatial distribution of analytes</h1>
+        <h1 data-toc-skip>Mass spectrometry imaging: Examining the spatial distribution of analytes</h1>
 
         <blockquote class="overview">
             <h3>Overview</h3>
@@ -273,7 +275,14 @@
             
         </blockquote>
 
-        <h1 class="no_toc" id="introduction">Introduction</h1>
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>Mass spectrometry imaging (MSI) is applied to measure the spatial distribution of hundreds of biomolecules in a sample. A mass spectrometer scans over the entire sample and collects a mass spectrum every 5-200 µm. This results in thousands of spots in which a mass spectrum is acquired. Each mass spectrum consists of hundreds of analytes that are measured by their mass-to-charge (m/z) ratio. For each analyte the peak intensity in the mass spectra of every pixel is known and can be set together to map the spatial distribution of the analyte in the sample.</p>
 
@@ -825,6 +834,9 @@ Targeted analysis can be performed if the m/z of the molecule of interest is alr
 <figure id="figure-8"><img src="../../images/msi_distribution_overlay_images.png" alt="overlay images" title="Distribution image for capsaicin and overlay of the three analytes" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Distribution image for capsaicin and overlay of the three analytes</figcaption></figure>
 
 
+                </div>
+            </div>
+        </div>
 
         
         <blockquote class="key_points">
@@ -845,7 +857,7 @@ Targeted analysis can be performed if the m/z of the molecule of interest is alr
         
 
         
-        <h1>Useful literature</h1>
+        <h1 data-toc-skip>Useful literature</h1>
         <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/metabolomics#references">here</a>.</p>
         
 
@@ -889,5 +901,6 @@ Targeted analysis can be performed if the m/z of the molecule of interest is alr
     <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
     <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
 </html>

@@ -16,6 +16,7 @@
         </script>
         
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
         <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
@@ -32,7 +33,7 @@
         <meta property="og:description" content="Statistical Analyses for omics data and machine learning ..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
-    <body>
+    <body data-spy="scroll" data-target="#toc">
         
 
 
@@ -215,8 +216,9 @@
 }
 
     </script>
+    
     <section class="tutorial">
-        <h1>Age prediction using machine learning</h1>
+        <h1 data-toc-skip>Age prediction using machine learning</h1>
 
         <blockquote class="overview">
             <h3>Overview</h3>
@@ -261,7 +263,14 @@
             
         </blockquote>
 
-        <h1 class="no_toc" id="introduction">Introduction</h1>
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p><a href="https://en.wikipedia.org/wiki/Machine_learning">Machine Learning</a> is used to create predictive models by learning features from datasets. In the studies <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9">Jason G. Fleischer et al. 2018</a> and <a href="https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub">Jana Naue et al. 2017</a>, biomarkers are examined to predict chronological age of humans by analysing the RNA-seq gene expression levels and DNA methylation pattern respectively. Different machine learning algorithms are used in these studies to select specific biomarkers to make age prediction. The RNA-seq gene expression (<a href="https://www.ebi.ac.uk/training/online/glossary/fpkm">FPKM</a>) dataset is generated using fibroblast cell lines of humans. The skin fibroblasts cells keep damages that happen with age. Epigenomic and phenotypic changes which are age-dependent are also contained in these cells. Within each individual, <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3174260/">DNA methylation</a> changes with age. This knowledge is used to select useful biomarkers from DNA methylation dataset. The <a href="https://en.wikipedia.org/wiki/CpG_site">CpGs sites</a> with the highest correlation to age are selected as the biomarkers/features. In both these studies, specific biomarkers are analysed by machine learning algorithms to create an age prediction model.</p>
 
@@ -910,6 +919,9 @@ We use only one parameter <code class="highlighter-rouge">n_estimators</code> of
 <p>In our tutorial, we could reproduce the results using machine learning tools in Galaxy as achieved in these scientific studies - <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9">Jason G. Fleischer et al. 2018</a> and <a href="https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub">Jana Naue et al. 2017</a>. We also learned how to work with high-dimensional datasets, perform hyperparameter search and cross-validation. Further, we can reuse the trained models to make predictions on a new dataset provided that this new dataset has the same features. There are numerous other machine learning algorithms available in Galaxy which can also be tried out on these datasets to verify whether the accuracy can be improved.</p>
 
 
+                </div>
+            </div>
+        </div>
 
         
         <blockquote class="key_points">
@@ -928,7 +940,7 @@ We use only one parameter <code class="highlighter-rouge">n_estimators</code> of
         
 
         
-        <h1>Useful literature</h1>
+        <h1 data-toc-skip>Useful literature</h1>
         <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/statistics#references">here</a>.</p>
         
 
@@ -972,5 +984,6 @@ We use only one parameter <code class="highlighter-rouge">n_estimators</code> of
     <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
     <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
 </html>

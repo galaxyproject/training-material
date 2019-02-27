@@ -16,6 +16,7 @@
         </script>
         
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
         <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
@@ -32,7 +33,7 @@
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
-    <body>
+    <body data-spy="scroll" data-target="#toc">
         
 
 
@@ -275,8 +276,9 @@
 }
 
     </script>
+    
     <section class="tutorial">
-        <h1>Small Non-coding RNA Clustering using BlockClust</h1>
+        <h1 data-toc-skip>Small Non-coding RNA Clustering using BlockClust</h1>
 
         <blockquote class="overview">
             <h3>Overview</h3>
@@ -384,7 +386,14 @@
             
         </blockquote>
 
-        <h1 class="no_toc" id="introduction">Introduction</h1>
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
 <p>Small Non-coding RNAs (ncRNAs) play a vital role in many cellular processes such as RNA splicing, translation, gene regulation. The small RNA-seq is a type of RNA-seq in which RNA fragments are size selected to capture only short RNAs. One of the most common applications of the small RNA-seq is discovering novel small ncRNAs. Mapping the small RNA-seq data reveals interesting patterns that represent the traces of the small RNA processing.</p>
 
 <p>For example, consider the miRNA biogenesis. The primary miRNA transcripts are processed by Drosha-complexes and results in hairpin precursor miRNAs. Then after they transported to the cytoplasm, Dicer slices off the hairpin. One of the RNA strands bound by Argonaute proteins regulates the target mRNA while the other strand is degraded.</p>
@@ -665,6 +674,9 @@ installed on your machine. However, the questions in this section can also be an
 
 <p>In this tutorial, we learned how to use <strong>BlockClust</strong> to cluster real small RNA sequencing read profiles based on their similarity. We also learned that the <strong>BlockClust</strong> can also be used to classify the read profiles based on pre-built classification models.</p>
 
+                </div>
+            </div>
+        </div>
 
         
         <blockquote class="key_points">
@@ -681,7 +693,7 @@ installed on your machine. However, the questions in this section can also be an
         
 
         
-        <h1>Useful literature</h1>
+        <h1 data-toc-skip>Useful literature</h1>
         <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
         
 
@@ -725,5 +737,6 @@ installed on your machine. However, the questions in this section can also be an
     <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
     <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
 </html>

@@ -16,6 +16,7 @@
         </script>
         
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
         <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
@@ -32,7 +33,7 @@
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
-    <body>
+    <body data-spy="scroll" data-target="#toc">
         
 
 
@@ -367,8 +368,9 @@
 }
 
     </script>
+    
     <section class="tutorial">
-        <h1>Galaxy Installation with Ansible</h1>
+        <h1 data-toc-skip>Galaxy Installation with Ansible</h1>
 
         <blockquote class="overview">
             <h3>Overview</h3>
@@ -518,7 +520,14 @@
             
         </blockquote>
 
-        <h1 class="no_toc" id="overview">Overview</h1>
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="overview">Overview</h1>
 
 <p>This tutorial assumes you have some familiarity with <a href="https://www.ansible.com/resources/get-started">Ansible</a> and are comfortable with writing and running playbooks. Here we’ll see how to install a Galaxy server using an Ansible playbook. Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:</p>
 
@@ -1715,6 +1724,9 @@ and re-run the playbook.</p>
 
 <p>If you missed any steps, you can compare against a reference <a href="./playbook.txt">playbook.yml</a>, and <a href="./galaxyservers.txt">group_vars/galaxyservers.yml</a></p>
 
+                </div>
+            </div>
+        </div>
 
         
         <blockquote class="key_points">
@@ -1772,5 +1784,6 @@ and re-run the playbook.</p>
     <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
     <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
 </html>

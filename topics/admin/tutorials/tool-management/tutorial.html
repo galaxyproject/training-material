@@ -16,6 +16,7 @@
         </script>
         
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
         <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
@@ -32,7 +33,7 @@
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
-    <body>
+    <body data-spy="scroll" data-target="#toc">
         
 
 
@@ -210,8 +211,9 @@
 }
 
     </script>
+    
     <section class="tutorial">
-        <h1>Galaxy Tool Management</h1>
+        <h1 data-toc-skip>Galaxy Tool Management</h1>
 
         <blockquote class="overview">
             <h3>Overview</h3>
@@ -243,7 +245,14 @@
             
         </blockquote>
 
-        <h1 class="no_toc" id="overview">Overview</h1>
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="overview">Overview</h1>
 
 <p>This tutorial will introduce you to one of Galaxy’s associated projects - <a href="https://github.com/galaxyproject/ephemeris">Ephemeris</a>. Ephemeris is a small Python library and set of scripts for managing the bootstrapping of Galaxy plugins - tools, index data, and workflows. It aims to help automate, and limit the quantity of manual actions admins must do in order to maintain a Galaxy instance.</p>
 
@@ -469,6 +478,9 @@ toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.1
 
 <p>If running ephemeris at the command line is not your preference, there is also an Ansible <a href="https://github.com/galaxyproject/ansible-galaxy-tools">role</a> and a sample <a href="https://github.com/afgane/galaxy-tools-playbook">playbook</a> that can help automate some tasks.</p>
 
+                </div>
+            </div>
+        </div>
 
         
         <blockquote class="key_points">
@@ -528,5 +540,6 @@ toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.1
     <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
     <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
 </html>

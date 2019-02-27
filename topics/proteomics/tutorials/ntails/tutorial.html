@@ -16,6 +16,7 @@
         </script>
         
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
         <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
@@ -32,7 +33,7 @@
         <meta property="og:description" content="Training material for proteomics workflows in Galaxy" />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
-    <body>
+    <body data-spy="scroll" data-target="#toc">
         
 
 
@@ -301,8 +302,9 @@
 }
 
     </script>
+    
     <section class="tutorial">
-        <h1>Detection and quantitation of N-termini (degradomics) via N-TAILS</h1>
+        <h1 data-toc-skip>Detection and quantitation of N-termini (degradomics) via N-TAILS</h1>
 
         <blockquote class="overview">
             <h3>Overview</h3>
@@ -345,7 +347,14 @@
             
         </blockquote>
 
-        <p>N-Tails is a special Proteomics technique to analyze peptide abundancy changes of protein N-termini. Prior to the MS measurement, N-Tails enriches unmodified, as well as acetylated N-termini. Both common and “unusual” N-termini are identified, where “unusual” means that the protein N-terminus was changes.
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <p>N-Tails is a special Proteomics technique to analyze peptide abundancy changes of protein N-termini. Prior to the MS measurement, N-Tails enriches unmodified, as well as acetylated N-termini. Both common and “unusual” N-termini are identified, where “unusual” means that the protein N-terminus was changes.
 This is best explained by an example: directly after translation, a protein has exactly one N-terminus. When a protease is cutting the protein in half, each half has its own N-terminus. While the N-terminus of the first half protein is exactly the same as the one of the full protein precursor (“native N-terminus”), the N-terminus of the second half is different (“neo-N-terminus”) and depends on the amino acid sequence where the protein was cut.
 The N-Tails technique includes the use of heavy isotope dimethyl labelling.</p>
 
@@ -392,6 +401,9 @@ please cite:</p>
 
 <p>Lai, Z.W., Weisser, J., Nilse, L., Costa, F., Keller, E., Tholen, M., Kizhakkedathu, J.N., Biniossek, M., Bronsert, P., and Schilling, O. (2016). Formalin-Fixed, Paraffin-Embedded Tissues (FFPE) as a Robust Source for the Profiling of Native and Protease-Generated Protein Amino Termini. Mol. Cell. Proteomics 15, 2203–2213.</p>
 
+                </div>
+            </div>
+        </div>
 
         
         <blockquote class="key_points">
@@ -410,7 +422,7 @@ please cite:</p>
         
 
         
-        <h1>Useful literature</h1>
+        <h1 data-toc-skip>Useful literature</h1>
         <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/proteomics#references">here</a>.</p>
         
 
@@ -454,5 +466,6 @@ please cite:</p>
     <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
     <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
 </html>

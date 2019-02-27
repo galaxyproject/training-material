@@ -16,6 +16,7 @@
         </script>
         
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
         <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
@@ -32,7 +33,7 @@
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
-    <body>
+    <body data-spy="scroll" data-target="#toc">
         
 
 
@@ -204,8 +205,9 @@
 }
 
     </script>
+    
     <section class="tutorial">
-        <h1>Deploying a compute cluster in OpenStack via Terraform</h1>
+        <h1 data-toc-skip>Deploying a compute cluster in OpenStack via Terraform</h1>
 
         <blockquote class="overview">
             <h3>Overview</h3>
@@ -239,7 +241,14 @@
             
         </blockquote>
 
-        <h1 class="no_toc" id="overview">Overview</h1>
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="overview">Overview</h1>
 
 <p>In this tutorial we will briefly cover what <a href="https://www.terraform.io">Terraform</a> is and how you can leverage it for your needs. This will not make you an expert on Terraform but will give you the tools you need in order to maintain your cloud infrastructure as code.</p>
 
@@ -1508,6 +1517,9 @@ condor_drain <span class="k">$(</span><span class="nb">hostname</span><span clas
 
 <p>All of <a href="https://github.com/usegalaxy-eu/infrastructure/">our virtual infrastructure</a> is managed, publicly, with Terraform. We hope that this can inspire others and give people ideas of the sort of things they can accomplish with Terraform. If you have questions over the way we have done certain things, feel free to file an issue and ask us!</p>
 
+                </div>
+            </div>
+        </div>
 
         
         <blockquote class="key_points">
@@ -1565,5 +1577,6 @@ condor_drain <span class="k">$(</span><span class="nb">hostname</span><span clas
     <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
     <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
 </html>

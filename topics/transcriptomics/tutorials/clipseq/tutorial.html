@@ -16,6 +16,7 @@
         </script>
         
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
         <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
@@ -32,7 +33,7 @@
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
-    <body>
+    <body data-spy="scroll" data-target="#toc">
         
 
 
@@ -380,8 +381,9 @@
 }
 
     </script>
+    
     <section class="tutorial">
-        <h1>CLIP-Seq data analysis from pre-processing to motif detection</h1>
+        <h1 data-toc-skip>CLIP-Seq data analysis from pre-processing to motif detection</h1>
 
         <blockquote class="overview">
             <h3>Overview</h3>
@@ -495,7 +497,14 @@
             
         </blockquote>
 
-        <h1 class="no_toc" id="introduction">Introduction</h1>
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a study published by <em>Nostrand et al.</em> (<a href="https://doi.org/10.1038/nmeth.3810">2016</a>). The dataset contains the first biological replicate of RBFOX2 CLIP-seq and the input control experiment (FASTQ files). The data was changed and downsampled to reduce data processing time, consequently the data does not correspond to the original source pulled from <em>Nostrand et al.</em> (<a href="https://doi.org/10.1038/nmeth.3810">2016</a>). Also included is a text file (.txt) encompassing the chromosome sizes of hg38 and a genome annotation (.gtf) file taken from <a href="http://ftp.ensemblorg.ebi.ac.uk/pub/release-74/gtf/homo_sapiens/">Ensembl</a>.</p>
 
@@ -1505,6 +1514,9 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
   </blockquote>
 </blockquote>
 
+                </div>
+            </div>
+        </div>
 
         
         <blockquote class="key_points">
@@ -1525,7 +1537,7 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
         
 
         
-        <h1>Useful literature</h1>
+        <h1 data-toc-skip>Useful literature</h1>
         <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
         
 
@@ -1569,5 +1581,6 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
     <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
     <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
 </html>

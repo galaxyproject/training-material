@@ -16,6 +16,7 @@
         </script>
         
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
         <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
@@ -32,7 +33,7 @@
         <meta property="og:description" content="A collection of microtutorials explaining various feature..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
-    <body>
+    <body data-spy="scroll" data-target="#toc">
         
 
 
@@ -184,8 +185,9 @@
 }
 
     </script>
+    
     <section class="tutorial">
-        <h1>Histories: Understanding Galaxy history system</h1>
+        <h1 data-toc-skip>Histories: Understanding Galaxy history system</h1>
 
         <blockquote class="overview">
             <h3>Overview</h3>
@@ -211,7 +213,14 @@
             
         </blockquote>
 
-        <p>When data is uploaded from your computer or analysis is done on existing data using Galaxy, each output from those steps
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <p>When data is uploaded from your computer or analysis is done on existing data using Galaxy, each output from those steps
 generates a dataset. These datasets (and the output datasets from later analysis on them) are stored by Galaxy in
 <strong>Histories</strong>.</p>
 
@@ -585,6 +594,9 @@ the order of the collection. Click the help text at the top of the interface to 
 
 <p><img src="../../images/list-pairs.png" alt="List of dataset pairs" /></p>
 
+                </div>
+            </div>
+        </div>
 
         
         <blockquote class="key_points">
@@ -652,5 +664,6 @@ the order of the collection. Click the help text at the top of the interface to 
     <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
     <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
 </html>

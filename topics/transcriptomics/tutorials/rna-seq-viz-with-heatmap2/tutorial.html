@@ -16,6 +16,7 @@
         </script>
         
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
         <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
@@ -32,7 +33,7 @@
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
-    <body>
+    <body data-spy="scroll" data-target="#toc">
         
 
 
@@ -275,8 +276,9 @@
 }
 
     </script>
+    
     <section class="tutorial">
-        <h1>Visualization of RNA-Seq results with heatmap2</h1>
+        <h1 data-toc-skip>Visualization of RNA-Seq results with heatmap2</h1>
 
         <blockquote class="overview">
             <h3>Overview</h3>
@@ -376,7 +378,14 @@
             
         </blockquote>
 
-        <h1 class="no_toc" id="introduction">Introduction</h1>
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>Heatmaps are commonly used to visualize RNA-Seq results. They are useful for visualizing the expression of genes across the samples. In this tutorial we show how the <strong>heatmap2</strong> tool in Galaxy can be used to generate heatmaps. The heatmap2 tool uses the heatmap.2 function from the R gplots package. Here we will demonstrate how to make a heatmap of the top differentially expressed (DE) genes in an RNA-Seq experiment, similar to what is shown for the fruitfly dataset in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">RNA-seq ref-based tutorial</a>. We will also show how a heatmap for a custom set of genes an be created.</p>
 
@@ -724,6 +733,9 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
 
 <p>In this tutorial we have seen how heatmaps can be used to visualize RNA-seq results using the <strong>heatmap2</strong> tool in Galaxy. We use the same dataset from the tutorials, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">RNA-seq reads to counts</a>, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a>, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html">RNA-seq genes to pathways</a> and <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html">Visualization of RNA-Seq results with Volcano Plot</a>.</p>
 
+                </div>
+            </div>
+        </div>
 
         
         <blockquote class="key_points">
@@ -738,7 +750,7 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
         
 
         
-        <h1>Useful literature</h1>
+        <h1 data-toc-skip>Useful literature</h1>
         <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
         
 
@@ -782,5 +794,6 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
     <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
     <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
 </html>

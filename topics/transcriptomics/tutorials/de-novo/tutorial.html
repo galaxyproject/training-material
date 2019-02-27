@@ -16,6 +16,7 @@
         </script>
         
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
         <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
@@ -32,7 +33,7 @@
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
-    <body>
+    <body data-spy="scroll" data-target="#toc">
         
 
 
@@ -279,8 +280,9 @@
 }
 
     </script>
+    
     <section class="tutorial">
-        <h1>De novo transcriptome reconstruction with RNA-Seq</h1>
+        <h1 data-toc-skip>De novo transcriptome reconstruction with RNA-Seq</h1>
 
         <blockquote class="overview">
             <h3>Overview</h3>
@@ -386,7 +388,14 @@
             
         </blockquote>
 
-        <h1 class="no_toc" id="introduction">Introduction</h1>
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>The data provided here are part of a Galaxy tutorial that analyzes RNA-seq data from a study published by <em>Wu et al.</em> in 2014 <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4248312/">DOI:10.1101/gr.164830.113</a>. The goal of this study was to investigate “the dynamics of occupancy and the role in gene regulation of the transcription factor Tal1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation.” To this end, RNA-seq libraries were constructed from multiple mouse cell types including G1E - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes. This RNA-seq data was used to determine differential gene expression between G1E and megakaryocytes and later correlated with Tal1 occupancy. This dataset (GEO Accession: GSE51338) consists of biological replicate, paired-end, poly(A) selected RNA-seq libraries. Because of the long processing time for the large original files, we have downsampled the original raw data files to include only reads that align to chromosome 19 and a subset of interesting genomic loci identified by Wu <em>et al</em>.</p>
 
@@ -1043,6 +1052,9 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 
 <p><img src="../../images/schematic_for_RNAseq_de_novo_tutorial.png" alt="RNAseq de novo tutorial workflow" /></p>
 
+                </div>
+            </div>
+        </div>
 
         
         <blockquote class="key_points">
@@ -1061,7 +1073,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
         
 
         
-        <h1>Useful literature</h1>
+        <h1 data-toc-skip>Useful literature</h1>
         <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
         
 
@@ -1105,5 +1117,6 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
     <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
     <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
 </html>

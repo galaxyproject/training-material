@@ -16,6 +16,7 @@
         </script>
         
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
         <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
@@ -32,7 +33,7 @@
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
-    <body>
+    <body data-spy="scroll" data-target="#toc">
         
 
 
@@ -208,8 +209,9 @@
 }
 
     </script>
+    
     <section class="tutorial">
-        <h1>Ansible</h1>
+        <h1 data-toc-skip>Ansible</h1>
 
         <blockquote class="overview">
             <h3>Overview</h3>
@@ -245,7 +247,14 @@
             
         </blockquote>
 
-        <h1 class="no_toc" id="overview">Overview</h1>
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="overview">Overview</h1>
 
 <p>In this tutorial we have briefly cover what Ansible is and how to understand what it does. This guide is not meant to make you an expert on Ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Or maybe to contribute to the <a href="https://github.com/galaxyproject?q=ansible">Galaxyproject Ansible roles</a>.</p>
 
@@ -1004,6 +1013,9 @@ The solution to this is to set <code class="highlighter-rouge">become: true</cod
 
 <p>We no longer <code class="highlighter-rouge">register</code> the command, instead the <code class="highlighter-rouge">notify</code> attribute automatically marks that the appropriate handler should be called <em>at the end of the playbook run</em>. Additionally tasks from outside of this role can use the same <code class="highlighter-rouge">notify</code>. So if you use a community built role for managing apache, and then have a custom role that builds the apache configuration, you can use changes there to reload the service using their definition of the reload/restart.</p>
 
+                </div>
+            </div>
+        </div>
 
         
         <blockquote class="key_points">
@@ -1061,5 +1073,6 @@ The solution to this is to set <code class="highlighter-rouge">become: true</cod
     <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
     <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
 </html>
