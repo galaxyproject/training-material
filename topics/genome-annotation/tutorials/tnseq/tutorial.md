@@ -2,14 +2,14 @@
 layout: tutorial_hands_on
 
 title: "Essential genes detection with Transposon insertion sequencing "
-zenodo_link: ""
+zenodo_link: "https://doi.org/10.5281/zenodo.940733"
 tags:
   - bacteria
   - tnseq
   - essential genes
 questions:
 objectives:
-time_estimation: ""
+time_estimation: "7h"
 key_points:
 contributors:
   - dlariviere
@@ -121,8 +121,8 @@ The experimental design of transposon insertion sequencing produces raw reads co
 ## Separating reads from different experimental conditions
 
  First we divide the initial data set by experimental conditions thanks to a 8bp barcode added by the Illumina multiplexing protocol.
- Start with uploading the training dataset containing all the reads here (put zenodolink).
- Then we need to create a fasta file containing the barcodes for each condition.
+ Start with uploading the training dataset containing all the reads [here](https://zenodo.org/record/2579335/files/Tnseq-Tutorial-reads.fastqsanger.gz?download=1) .
+ Then we need to create a fasta file containing the barcodes for each condition (you can also get the file [here](https://zenodo.org/record/2579335/files/condition_barcodes.fasta?download=1) ).
 
 
  Barcode data:
@@ -237,7 +237,7 @@ We can see that is both samples the reads have pass the filtering at more than 9
 We have now removed the transposon sequences that was outside of the 3 bp barcode specific to the type of construct. The constructs used in this experiment contain different strengths and directions of promoters. It means that in addition of disrupting a gene at the location of the insertion, it will modify the expression of either upstream or downstream regions. The analysis of this modification will be studied in another training material, but for now we will consider it does not impact the essentiality analysis and we will use the different constructs as replicates.
 We therefore need to separate the reads based on the construct specific 3bp barcodes.
 
-You can download the fasta file containing the barcodes here (add zenodo link)). Upload the file into galaxy and take a look at it.
+You can download the fasta file containing the barcodes [here](https://zenodo.org/record/2579335/files/construct_barcodes.fasta?download=1). Upload the file into galaxy and take a look at it.
 
 > ### {% icon question %} Questions
 >
@@ -308,7 +308,7 @@ Verify that the majority of the read have been trimmed. Now that we isolated the
 
 ## Aligning the reads to a reference genome
 
-The first step is to map our read to a the reference genome (you can download it here (zenodo link)). We are going to use the tool Bowtie. We could also use Bowtie2 with an end-to-end option, but Bowtie is more suitable for very short reads like ours (16-17 bp).
+The first step is to map our read to a the reference genome (you can download it [here](https://zenodo.org/record/2579335/files/staph_aur.fasta?download=1)). We are going to use the tool Bowtie. We could also use Bowtie2 with an end-to-end option, but Bowtie is more suitable for very short reads like ours (16-17 bp).
 
 > ### {% icon hands_on %} Hands-on:  Map reads with Bowtie
 >
@@ -551,11 +551,96 @@ We now have a read count for each nucleotides of the TA sites. The insertions co
 
 # Predicting Essential Genes with Transit
 
-> ### {% icon hands_on %} Hands-on:
+Now that we have the counts of insertions per TA site, we can use them to predict gene esssentiality with Transit. In order to do that, we need to create a an annotation file in the `prot_table` format, specifique to the Transit tool. You can create this file from a gff3 from GenBank. Upload the gff3 file for *Staphylococcus aureus* [here](https://zenodo.org/record/2579335/files/staph_aur.gff3?download=1).
+
+
+> ### {% icon hands_on %} Hands-on : Create annotation file in prot_table format
 >
-> 1.
-> 2.
-> 3.
+>  {% icon tool %} Select the **Convert GFF3 to prot_table for TRANSIT** tool in the TRANSIT section of the tool bar and run with the following parameters:
+>   - Set *GenBank GFF file"* to the file you just uploaded
+>   - **Click** on `Execute`
+>
+>
+{: .hands_on}
+
+
+Now that we have prepared the annotation file, we can use the count per TA site to predict essential genes using Transit tool.  We will modify a couple parameters from the default settings :
+-   We want to ignore counts lower than 2, in order to reduce the number of sites presenting a single read, which could be artefactual.
+-   We want to ignore insertion near the extremities of the genes. A disrupted site that would be very close to the border of the gene may not actually disturb the gene function, and therefore not be an actual signal of disruption.
+
+> ### {% icon hands_on %} Hands-on : Predict gene essentiality with Transit
+>
+>  {% icon tool %} Select the **Gumbel** tool in the TRANSIT section of the tool bar and run with the following parameters:
+>   - Set *File to cut"* to the collection `Sort...`
+>   - Set *Input annotation* to the `prot_table` file generated at the previous step
+>   - Set *Smallest read-count to consider* to 2, to ignore single count insertions
+>   - Set *Ignore TAs occuring at given fraction of the N terminus.* to 0.1, to ignore 10% of the insertion at the N-terminus extremity of the gene
+>   - Set *Ignore TAs occuring at given fraction of the C terminus.* to 0.1, to ignore 10% of the insertion at the C-terminus extremity of the gene
+>   - **Click** on `Execute`
+>
+>
+{: .hands_on}
+
+The output of Transit is a tabulated file containing the following collumns (you can find more information on [Transit manual page](https://transit.readthedocs.io/en/latest/transit_methods.html)):
+-   Gene ID
+-   Name of the gene
+-   Gene description
+-   Number of Transposon Insertions Observed within the Gene
+-   Total Number of TA sites within the Gene
+-   Length of the Maximum Run of Non-Insertions observed (in number of TA sites)
+-   Span of nucleotides for the Maximum Run of Non-Insertions
+-   Posterior Probability of Essentiality
+-   Essentiality call for the gene : E=Essential, U=Uncertain, NE=Non-Essential, S=too short
+
+We can obtain the list of genes predicted as essential by filtering on the essentiality call.
+
+> ### {% icon hands_on %} Hands-on : Get table of essential genes
+>
+>  {% icon tool %} Select the **Filter data on any column using simple expressions** tool and run with the following parameters:
+>   - Set *With following condition"* to `c9=='E'` to select essential genes`
+>   - **Click** on `Execute`
+>
+>
+{: .hands_on}
+
+Let's compare the results between out two conditions :
+
+> ### {% icon hands_on %} Hands-on : Get gene essential in both conditions
+>
+>  {% icon tool %} Select the **Join two files** tool and run with the following parameters:
+>   - Set *1st file"* to `Control` Transit result
+>   - Set *Column to use from 1st file"* to `Column : 1` to compare on gene ID
+>   - Set *2nd file"* to `Condition` Transit result
+>   - Set *Column to use from 2nd file"* to `Column : 1` to compare on gene ID
+>   - Set *Output lines appearing in"* to `Both 1st and 2nd files` to get common essential genes
+>   - **Click** on `Execute`
+>
+>
+{: .hands_on}
+
+> ### {% icon hands_on %} Hands-on : Get gene essential only in control
+>
+>  {% icon tool %} Select the **Join two files** tool and run with the following parameters:
+>   - Set *1st file"* to `Control` Transit result
+>   - Set *Column to use from 1st file"* to `Column : 1` to compare on gene ID
+>   - Set *2nd file"* to `Condition` Transit result
+>   - Set *Column to use from 2nd file"* to `Column : 1` to compare on gene ID
+>   - Set *Output lines appearing in"* to `1st but not 2nd`
+>   - **Click** on `Execute`
+>
+>
+{: .hands_on}
+
+
+> ### {% icon hands_on %} Hands-on : Get gene essential only in condition
+>
+>  {% icon tool %} Select the **Join two files** tool and run with the following parameters:
+>   - Set *1st file"* to `Control` Transit result
+>   - Set *Column to use from 1st file"* to `Column : 1` to compare on gene ID
+>   - Set *2nd file"* to `Condition` Transit result
+>   - Set *Column to use from 2nd file"* to `Column : 1` to compare on gene ID
+>   - Set *Output lines appearing in"* to `2nd but not 1st`
+>   - **Click** on `Execute`
 >
 >
 {: .hands_on}
