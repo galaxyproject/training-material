@@ -142,6 +142,11 @@ if fn.include?('tutorial.md') then
     errs.push(*validate_requirements(data['requirements']))
   end
 
+  # Check follow ups
+  if data.key?('follow_up_training') then
+    errs.push(*validate_requirements(data['follow_up_training']))
+  end
+
   # Check contributors
   errs = errs.concat(check_contributors(data))
 elsif fn.include?('metadata.yaml') then
