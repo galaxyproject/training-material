@@ -30,18 +30,7 @@ module Jekyll
         # Properties from CreativeWork
         #"about" described below
         "accessMode": ["textual", "visual"],
-        "accessModeSufficient": [
-          {
-            "@type": "ItemList",
-            "itemListElement": ["textual"],
-            "description": "See the text"
-          },
-          {
-            "@type": "ItemList",
-            "itemListElement": ["textual", "visual"],
-            "description": "See the text and images"
-          },
-        ],
+        "accessModeSufficient": ["textual", "visual"],
         #"accessibilityAPI": ,
         "accessibilityControl": ["fullKeyboardControl", "fullMouseControl"],
         "accessibilityFeature": ["alternativeText", "tableOfContents"],
@@ -155,6 +144,7 @@ module Jekyll
       #info depending if tutorial, hands-on or slide level
       parts = []
       mentions = []
+      description = [material['title']]
       if material['type'] == 'tutorial' then
         data['courseCode'] = "#{material['topic_name']} / #{material['tutorial_name']}"
         data['isPartOf'] = topic_desc
@@ -201,8 +191,10 @@ module Jekyll
         data['isPartOf'] = {
           "@type": "Course",
           "name": "#{material['title']}",
+          "description": "#{material['title']}",
           "learningResourceType": "tutorial",
-          "interactivityType": "expositive"
+          "interactivityType": "expositive",
+          "provider": gtn
         }
         data['url'] = "#{site['url']}#{site['baseurl']}#{material['url']}"
         # Time required
@@ -210,7 +202,7 @@ module Jekyll
           data['timeRequired'] = "PT#{material['time_estimation'].upcase}"
         end
         # Description with questions, objectives and keypoints
-        description = []
+        
         if material.key?('questions') and not material['questions'].nil? and material['questions'].length > 0 then
           questions = material['questions'].join("\n - ")
           description.push("The questions this #{material['type']} addresses are:\n - #{questions}\n\n")
@@ -223,9 +215,7 @@ module Jekyll
           keypoints = material['keypoints'].join("\n - ")
           description.push("The keypoints are:\n - #{keypoints}\n\n")
         end
-        if description.length > 0 then
-          data['description'] = description.join('\n')
-        end
+        
         # Keywords
         if material.key?('tags') then
           data['keywords'] = material['tags'].join(', ')
@@ -239,6 +229,7 @@ module Jekyll
           })
         end
       end
+      data['description'] = description.join('\n')
 
       # Course requirements (material + topic)
       reqs = []
@@ -253,29 +244,31 @@ module Jekyll
         for req in reqs do
           if req['type'] == "internal" then
             if req.key?('tutorials') then
-                coursePrerequisites.push(req['tutorials'].map{ |x|
-                  {
-                    "@type": "Course",
-                    "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{x}/tutorial.html",
-                    "name": "Hands-on for '#{x}' tutorial",
-                    "learningResourceType": "hands-on tutorial",
-                    "interactivityType": "expositive"
-                  } 
-                })
-              else
-                coursePrerequisites.push({
-                  "@type": "CreativeWork",
-                  "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/",
-                  "name": "#{site['data'][req['topic_name']]['title']}",
-                  "description": "#{site['data'][req['topic_name']]['title']}"
-                })
-              end
+              coursePrerequisites.push(*req['tutorials'].map{ |x|
+                {
+                  "@type": "Course",
+                  "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{x}/tutorial.html",
+                  "name": "Hands-on for '#{x}' tutorial",
+                  "description": "#{x}",
+                  "learningResourceType": "hands-on tutorial",
+                  "interactivityType": "expositive",
+                  "provider": gtn
+                } 
+              })
+            else
+              coursePrerequisites.push({
+                "@type": "CreativeWork",
+                "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/",
+                "name": "#{site['data'][req['topic_name']]['title']}",
+                "description": "#{site['data'][req['topic_name']]['title']}"
+              })
+            end
           elsif req['type'] == "external" then
             coursePrerequisites.push({
-                  "@type": "CreativeWork",
-                  "url": "#{req['link']}",
-                  "name": "#{req['title']}"
-                })
+              "@type": "CreativeWork",
+              "url": "#{req['link']}",
+              "name": "#{req['title']}"
+            })
           else
             coursePrerequisites.push("#{req['title']}")
           end
