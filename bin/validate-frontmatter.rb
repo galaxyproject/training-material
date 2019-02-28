@@ -43,6 +43,61 @@ def check_contributors(data)
   return errs
 end
 
+def validate_non_empty_key_value(map, key)
+    if map.key?(key) then
+      if map[key].length == 0 then
+        return ['Empty #{key} for requirement']
+      end
+    else
+      return ['Missing #{key} for requirement']
+    end
+    return []
+end
+
+def validate_requirements(requirements)
+  errs = []
+  # Exit early if no requirements
+  if requirements.nil? or requirements.length == 0
+    return []
+  end
+
+  # Otherwise check each
+  for requirement in requirements
+    # For external links, they need a link that is non-empty
+    if requirement['type'] == 'external'
+      errs.push(*validate_non_empty_key_value(requirement, 'title'))
+      errs.push(*validate_non_empty_key_value(requirement, 'link'))
+
+      requirement.keys.each{ |x|
+        if not ['title', 'link', 'type'].include?(x) then
+          errs.push("Unknown key #{x}")
+        end
+      }
+    elsif requirement['type'] == 'internal'
+      errs.push(*validate_non_empty_key_value(requirement, 'topic_name'))
+      errs.push(*validate_non_empty_key_value(requirement, 'tutorials'))
+
+      requirement.keys.each{ |x|
+        if not ['topic_name', 'tutorials', 'type'].include?(x) then
+          errs.push("Unknown key #{x}")
+        end
+      }
+    elsif requirement['type'] == 'none'
+      errs.push(*validate_non_empty_key_value(requirement, 'title'))
+
+      requirement.keys.each{ |x|
+        if not ['title', 'type'].include?(x) then
+          errs.push("Unknown key #{x}")
+        end
+      }
+    else
+      errs.push("Unknown requirement type #{requirement['type']}")
+    end
+  end
+
+  return errs
+end
+
 # Handle tutorials
 if fn.include?('tutorial.md') then
   data = YAML.load_file(fn)
@@ -80,6 +135,11 @@ if fn.include?('tutorial.md') then
     if match.nil? then
       errs.push("Time specification could not be parsed (Should be of form ##h##m##s, is '#{data['time_estimation']}')")
     end
+  end
+
+  # Check requirements
+  if data.key?('requirements') then
+    errs.push(*validate_requirements(data['requirements']))
   end
 
   # Check contributors
@@ -132,6 +192,11 @@ elsif fn.include?('slides.html') then
       errs.push("Unknown key: #{x}")
     end
   }
+
+  # Check requirements
+  if data.key?('requirements') then
+    errs.push(*validate_requirements(data['requirements']))
+  end
 
   # Check that the layout is correct
   if not ['base_slides', 'tutorial_slides'].include?(data['layout']) then
