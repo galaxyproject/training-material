@@ -14,7 +14,6 @@ ENV GALAXY_CONFIG_BRAND "GTN: Contributing"
 
 # prerequisites
 RUN pip install ephemeris -U
-ADD bin/galaxy-sleep.py /galaxy-sleep.py
 
 # copy the tutorials directory for your topic
 ADD topics/contributing/tutorials/ /tutorials/
