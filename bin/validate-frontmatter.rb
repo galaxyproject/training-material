@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'yaml'
+require 'pathname'
 fn = ARGV[0]
 
 # Required keys
@@ -82,6 +83,18 @@ def validate_requirements(requirements)
           errs.push("Unknown key #{x}")
         end
       }
+      # For the internal requirements, test that they point at something real.
+      if requirement.key?('tutorials') then
+        requirement['tutorials'].each{ |tutorial|
+          # For each listed tutorial check that a directory with that name exists
+          pn = Pathname.new("topics/#{requirement['topic_name']}/tutorials/#{tutorial}")
+
+          if not pn.directory?
+            errs.push("Internal requirement to topics/#{requirement['topic_name']}/tutorials/#{tutorial} does not exist")
+          end
+        }
+      end
+      #
     elsif requirement['type'] == 'none'
       errs.push(*validate_non_empty_key_value(requirement, 'title'))
 
