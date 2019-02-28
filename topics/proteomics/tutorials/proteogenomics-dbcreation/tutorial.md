@@ -11,6 +11,12 @@ time_estimation: "30m"
 key_points:
   - "Generating variant protein database"
   - "Generating genomic and variant mapping files for visualization"
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: proteomics
+    tutorials: 
+      - proteogenomics-novel-peptide-analysis
 
 contributors:
   - subinamehta
@@ -485,8 +491,3 @@ by MVP to visualize the genomic loci of any variant peptides.
 
 ![SNP variant](../../images/viewing_SNP_Variant_IGV.png)
 
-### What's next?
-
-Please look at the following tutorials in this proteogenomics series:
-- [Proteogenomics database search]({{ site.baseurl }}/topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.html)
-- [Proteogenomics novel peptide analysis]({{ site.baseurl }}/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/tutorial.html)

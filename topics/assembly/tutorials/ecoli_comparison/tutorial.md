@@ -400,7 +400,7 @@ The first step will be collapsing the collection containing the three genomes in
 > ### {% icon hands_on %} Hands-on: Creating a single FASTA dataset with all genomes
 >
 > 1. **Collapse Collection** {% icon tool %} with the following parameters:
->   - *"Collection of files to collapse"* the three genomes (collection) (in the video above we called it `best hits`).
+>   - *"Collection of files to collapse"* the three genomes (collection) (in the video above we called it `DNA`).
 {: .hands_on}
 
 This will produce a single FASTA dataset containing the three genomes. There is one problem though. If we look at the data in this file, we will see that FASTA headers look like this:
@@ -721,7 +721,7 @@ This will create a 21st column containing `0` for all rows. Now we can cut neces
 > ### {% icon hands_on %} Hands-on: Cutting columns form annotation data
 >
 > 1. **Cut columns from a table** {% icon tool %} with the following parameters:
->   - *"Cut columns"*: `c8,c9,c14,c19,c10`
+>   - *"Cut columns"*: `c8,c9,c15,c21,c10`
 >   - *"From"* the collection produced at the previous step (`Select on collection...`)
 {: .hands_on}
 

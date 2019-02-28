@@ -3,31 +3,40 @@
 import glob
 import yaml
 
-merged = {'libraries': list()}
-merged_libs = dict()
 
-def is_url_included(url, lib):
-    for files in lib.values():
-        for _url, _file_type in files:
-            if _url == url:
-                return True
-    return False
+def extend_dict(merged, a):
+    if isinstance(merged, dict):
+        for k, v in a.items():
+            if k in merged:
+                extend_dict(merged[k], v)
+            else:
+                merged[k] = v
+    else:    
+        if isinstance(merged, list):
+            extend_list(merged, a)
+        else:
+            merged += a
+
+
+def extend_list(merged, a):
+    missing = []
+    for itema in a:
+        if not isinstance(itema, dict) or itema in missing:
+            continue
+        if 'name' in itema:
+            match = next((i for i in merged if i["name"] == itema["name"]), False)
+            if match:
+                extend_dict(match, itema)
+            else:
+                missing += [itema, ]
+    merged += missing
+
+
+merged = {}
 
 for filename in glob.iglob('./**/data-library.yaml'):
     a = yaml.load(open(filename))
-    libs = a['libraries']
-    for lib in libs:
-        name = lib['name']
-        if name in merged_libs:
-            for f in lib['files']:
-                if not is_url_included(f['url'], merged_libs):
-                    merged_libs[name].append(f)
-        else:
-            merged_libs[name] = lib['files']
-
-for name, files in merged_libs.items():
-    merged['libraries'].extend([{'files': files, 'name': name}])
-
-print(yaml.dump( merged, default_flow_style=False, default_style='' ))
+    extend_dict(merged, a)
 
 
+print(yaml.dump(merged, default_flow_style=False, default_style=''))

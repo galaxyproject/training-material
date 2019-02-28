@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "GO Enrichment Analysis"
-zenodo_link: "https://zenodo.org/record/1255038#.Wx4qTBwh3CI"
+zenodo_link: "https://zenodo.org/record/2565417#.XGXUXlz7TIU"
 questions:
   - "How can I functionally interpret a list of genes of interest that I obtained from my experiment?"
 objectives:
@@ -74,7 +74,7 @@ The appropriate statistical test is the one-tailed variant of Fisher’s exact t
 For this first exercise we will use data from [Trapnell et al. 2014](https://www.ncbi.nlm.nih.gov/pubmed/22383036 "Trapnell et al. data"). In this work, the authors created an artificial dataset of gene expression in *Drosophila melanogaster*, where 300 random genes were set (insilico) to be differentially expressed between two conditions.
 
 > ### {% icon hands_on %} Hands-on:
-> The data for this tutorial is available at [Zenodo](https://zenodo.org/record/1255038#.Wx4qTBwh3CI) to download. For convenience and reproducibility of results, we already added the GO ontology and annotations in the Zenodo repository.
+> The data for this tutorial is available at [Zenodo](https://zenodo.org/record/2565417#.XGXUXlz7TIU) to download. For convenience and reproducibility of results, we already added the GO ontology and annotations in the Zenodo repository.
 > 1. **Create a new history**
 >
 > 2. **Upload to the Galaxy** the following files:

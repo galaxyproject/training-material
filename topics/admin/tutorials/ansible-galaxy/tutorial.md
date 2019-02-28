@@ -419,7 +419,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > galaxy_config:
 >    > >   galaxy:
 >    > >     brand: "My Galaxy"
->    > >     admin_users: admin@example.com
+>    > >     admin_users: admin@example.org
 >    > >     database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
 >    > >     file_path: /data
 >    > >     check_migrate_tools: false
@@ -473,7 +473,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > galaxy_config:
 >    > >   galaxy:
 >    > >     brand: "My Galaxy"
->    > >     admin_users: admin@example.com
+>    > >     admin_users: admin@example.org
 >    > >     database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
 >    > >     file_path: /data
 >    > >     check_migrate_tools: false
@@ -822,7 +822,7 @@ With a large Galaxy instance, users will often request FTP access in order to up
 >      - id: galaxy
 >        address: "{{ hostname }}"
 >        options:
->          - ServerAdmin: admin@example.com
+>          - ServerAdmin: admin@example.org
 >          - ServerName: Galaxy FTP
 >          - TransferLog: /var/log/proftpd/xfer.log
 >          - MaxLoginAttempts: 3

@@ -25,9 +25,9 @@ contributors:
 This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
 
 > ###  {% icon comment %} Audience
-> This tutorial is for those who are new to Galaxy, genomics, and bioinformatics.  If you aren't new to bioinformatics you can just do the items listed in the Hands-On boxes ({% icon hands_on %}), or you can try one of the [other introductory tutorials]({{ site.baseurl }}/topics/introduction/).
+> This tutorial is for those who are new to Galaxy, genomics, and bioinformatics.  If you aren't new to bioinformatics you can just do the items listed in the Hands-On boxes ({% icon hands_on %}), or you can try one of the [other introductory tutorials]({{ site.baseurl }}{% link topics/introduction/index.md %}).
 >
-> This tutorial teaches the same basic content as [Galaxy 101]({{ site.baseurl }}//topics/introduction/tutorials/galaxy-intro-101/tutorial.html), but requires less knowledge of biology to understand the questions this tutorial addresses.
+> This tutorial teaches the same basic content as [Galaxy 101]({{ site.baseurl }}{% link topics/introduction/tutorials/galaxy-intro-101/tutorial.md %}), but requires less knowledge of biology to understand the questions this tutorial addresses.
 {: .comment}
 
 > ### Agenda
@@ -112,7 +112,7 @@ The Galaxy interface consists of three main parts. The available tools are liste
 
 ## Get data into Galaxy
 
-There are [many ways to get data into a Galaxy instance]({{ site.baseurl }}//topics/galaxy-data-manipulation/tutorials/get-data/slides.html). We are going to use the **Get Data** toolbox in the **Tools** panel on the left.
+There are [many ways to get data into a Galaxy instance]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/get-data/slides.html %}). We are going to use the **Get Data** toolbox in the **Tools** panel on the left.
 
 > ### {% icon hands_on %} Hands-on: Open **Get Data** toolbox
 >
@@ -121,7 +121,7 @@ There are [many ways to get data into a Galaxy instance]({{ site.baseurl }}//top
 >
 {: .hands_on}
 
-The **Get Data** toolbox contains a list of data sources that this Galaxy instance can get data directly from.  **Upload file** is quite useful for getting data from your computer or from the web (see the [Getting data into Galaxy slides]({{ site.baseurl }}//topics/galaxy-data-manipulation/tutorials/get-data/slides.html)).  Today we are going to use the **UCSC Main table browser**.
+The **Get Data** toolbox contains a list of data sources that this Galaxy instance can get data directly from.  **Upload file** is quite useful for getting data from your computer or from the web (see the [Getting data into Galaxy slides]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/get-data/slides.html %})).  Today we are going to use the **UCSC Main table browser**.
 
 ### Get genes
 
@@ -500,7 +500,7 @@ Let's refine our question slightly
 
 ## Walk through the workflow tutorial
 
-Run the [Create a reusable workflow from a history]({{ site.baseurl }}/topics/galaxy-ui/tutorials/history-to-workflow/tutorial.html) tutorial for how to do this, *and then come back here to run your newly created workflow with the exon data.*
+Run the [Create a reusable workflow from a history]({{ site.baseurl }}{% link topics/galaxy-ui/tutorials/history-to-workflow/tutorial.md %}) tutorial for how to do this, *and then come back here to run your newly created workflow with the exon data.*
 
 ## Rerun analysis with exon data
 
