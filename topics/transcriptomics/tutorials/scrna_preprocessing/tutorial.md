@@ -20,26 +20,26 @@ key_points:
   - "Relocating barcodes into headers"
   - "Merging matrices from different batches together"
   - "Removing unwanted barcodes"
-requirements:
-  - 
-    type: "internal"
-    topic_name: transcriptomics
-    tutorials:
-        - scrna-introduction
-        - scrna-plates-batches-barcodes
-        - scrna-umis
+# requirements:
+#   -
+#     type: "internal"
+#     topic_name: transcriptomics
+#     tutorials:
+#         - scrna-introduction
+#         - scrna-plates-batches-barcodes
+#         - scrna-umis
+#
+# follow_up_training:
+#   -
+#     type: "internal"
+#     topic_name: transcriptomics
 
-follow_up_training:
-  - 
-    type: "internal"
-    topic_name: transcriptomics
-        
 contributors:
   - mtekman
   - bebatut
   - erxleben
   - wm75
-  
+
 ---
 
 <!-- General Notes
