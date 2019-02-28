@@ -11,14 +11,6 @@ for wf in $(find topics -name '*.ga'); do
 		echo "  Invalid JSON"
 		exit_with=1
 	fi
-
-	# Then check that all keys are properly sorted
-	diff <(cat $wf) <(cat $wf | jq -S .) > /dev/null
-	ec=$?
-	if (( ec > 0 )); then
-		echo "  Incorrectly sorted JSON"
-		exit_with=1
-	fi
 done
 
 exit $exit_with
