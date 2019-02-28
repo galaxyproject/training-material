@@ -46,10 +46,10 @@ end
 def validate_non_empty_key_value(map, key)
     if map.key?(key) then
       if map[key].length == 0 then
-        return ['Empty #{key} for requirement']
+        return ["Empty #{key} for requirement"]
       end
     else
-      return ['Missing #{key} for requirement']
+      return ["Missing #{key} for requirement"]
     end
     return []
 end
