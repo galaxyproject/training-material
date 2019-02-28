@@ -60,7 +60,7 @@ This workflow includes multiple computationally-intensive steps. With high serve
 
 > * BLAST against numerous databases
 > * InterProScan
-> * phage spannin search tools
+> * phage spanin search tools
 > * various other analyses
 
 > ### {% icon tip %} Note that…
