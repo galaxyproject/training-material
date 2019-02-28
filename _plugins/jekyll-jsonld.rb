@@ -28,7 +28,7 @@ module Jekyll
         #"hasCourseInstance": ,
 
         # Properties from CreativeWork
-        "about": topic_desc,
+        #"about" described below
         "accessMode": ["textual", "visual"],
         "accessModeSufficient": [
           {
@@ -320,6 +320,20 @@ module Jekyll
         data['author'] = contributors
         data['contributor'] = contributors
       end
+
+      about = []
+      about.push(topic_desc)
+      if topic.key?('edam_ontology') then
+        about.push({
+          "@type": "DefinedTerm", 
+          "@id": "http://edamontology.org/#{topic['edam_ontology']}",
+          "inDefinedTermSet": "http://edamontology.org",
+          "termCode": "#{topic['edam_ontology']}",
+          #"name": ,
+          "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2F#{topic['edam_ontology']}"
+        })
+      end
+      data['about'] = about
 
       return JSON.pretty_generate(data)
     end
