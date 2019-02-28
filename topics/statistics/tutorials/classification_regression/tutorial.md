@@ -1,25 +1,29 @@
 ---
 layout: tutorial_hands_on
 
-title: "Machine learning: classification and regression"
+title: 'Machine learning: classification and regression'
+zenodo_link: https://zenodo.org/record/2579649#.XHep39F7mL4
 questions:
-  - "what are classification and regression techniques?"
-  - "How they can be used for prediction?"
-  - "How visualizations can be used to analyze predictions?"
+- what are classification and regression techniques?
+- How they can be used for prediction?
+- How visualizations can be used to analyze predictions?
 objectives:
-  - "Explain the types of supervised machine learning - classification and regression."
-  - "Learn how to make predictions using the training and test data."
-  - "Visualize the predictions."
-requirements:
-time_estimation: "1H"
+- Explain the types of supervised machine learning - classification and regression.
+- Learn how to make predictions using the training and test data.
+- Visualize the predictions.
+time_estimation: ''
 key_points:
-  - "Learn machine learning's supervised approaches - classification and regression."
-  - "In supervised approaches, the target for each sample is known."
-  - "For classification and regression tasks, data is divided into training and test sets."
-  - "Using classification, the categories of rows are learned using the training set and predicted using the test set."
-  - "Using regression, real-valued targets are learned using the training set and predicted using the test set."
+- There is two types of machine learning's supervised approaches, classification and regression.
+- In supervised approaches, the target for each sample is known.
+- For classification and regression tasks, data is divided into training and test
+  sets.
+- Using classification, the categories of rows are learned using the training set
+  and predicted using the test set.
+- Using regression, real-valued targets are learned using the training set and predicted
+  using the test set.
 contributors:
-  - anuprulez
+- anuprulez
+- bebatut
 
 ---
 
