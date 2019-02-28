@@ -17,7 +17,7 @@ key_points:
 - Average and annotated mass spectra show the relevant m/z range of the dataset and different compartment specific peaks.
 - MSI data can be filtered for m/z ranges of interest to speed up analysis time.
 - Distribution images for many analytes can be automatically generated with the MSI mz image tool.
-- The MSI mz image tools allows to overlay the distribution images for several analytes.
+- The MSI mz image tools allow to overlay the distribution images for several analytes.
 contributors:
 - foellmelanie
 
@@ -29,17 +29,17 @@ contributors:
 
 Mass spectrometry imaging (MSI) is applied to measure the spatial distribution of hundreds of biomolecules in a sample. A mass spectrometer scans over the entire sample and collects a mass spectrum every 5-200 µm. This results in thousands of spots in which a mass spectrum is acquired. Each mass spectrum consists of hundreds of analytes that are measured by their mass-to-charge (m/z) ratio. For each analyte the peak intensity in the mass spectra of every pixel is known and can be set together to map the spatial distribution of the analyte in the sample. 
 
-The technique has a broad range of applications as it is able to measure many different kind of analytes such as peptides, proteins, metabolites or chemical compounds in a large variety of samples such as cells, tissues and liquid biopsies. Application areas include pharmakokinetic studies, biomarker discovery, molecular pathology, forensic studies, plant research and material sciences. The strength of MSI is the simultaneous analysis of hundreds of analytes in an unbiassed, untargeted, label free, fast and affordable measurement while maintaining morphological information. 
+The technique has a broad range of applications as it is able to measure many different kinds of analytes such as peptides, proteins, metabolites or chemical compounds in a large variety of samples such as cells, tissues and liquid biopsies. Application areas include pharmacokinetic studies, biomarker discovery, molecular pathology, forensic studies, plant research and material sciences. The strength of MSI is the simultaneous analysis of hundreds of analytes in an unbiassed, untargeted, label free, fast and affordable measurement while maintaining morphological information. 
 
-Depending on the analyte of interest and the application, different mass spectrometers are used. A mass spectrometer measures the analytes by ionizing, evaporating and sorting them by their mass-to-charge (m/z) ratio. Put simply, a mass spectrometer needs basically three parts: the ionization source, the mass analyzer and a detector. Most common ionization sources for MSI are MALDI (Matrix Assisted Laser Desorption/Ionization), DESI (Desorption Electrospray Ionization) and SIMS (Secondary Ion Mass Spectrometry).
+Depending on the analyte of interest and the application, different mass spectrometers are used. A mass spectrometer measures the analytes by ionizing, evaporating and sorting them by their mass-to-charge (m/z) ratio. Put simply, a mass spectrometer needs basically three parts: an ionization source, a mass analyzer and a detector. Most common ionization sources for MSI are MALDI (Matrix Assisted Laser Desorption/Ionization), DESI (Desorption Electrospray Ionization) and SIMS (Secondary Ion Mass Spectrometry).
 
 ![MSI measurement](../../images/msi_distribution_maldi_tof_imaging.png "MALDI TOF imaging of a mouse kidney")
 
-One common type of mass spectrometer for MSI is a MALDI Time-Of-Flight (MALDI-TOF) device. During MALDI ionization a laser shoots onto the sample that was covered with a special matrix that absorbs the laser energy and transfers it to the analytes. This process evaporizes and ionizes the analytes that due to their charge can then be accelerated in an electrical field towards the TOF tube. The time of flight through the tube to the detector is measured and as this correlates with the mass over charge (m/z) of the analyte, the flight time allows the calculation of m/z. During measurement a complete mass spectrum is acquired in thousands of sample spots. Each mass spectrum contains hundreds of analyte m/z and for each of those analytes an abundance heatmap showing the spatial distribution in the sample can be calculated and visualized. 
+One common type of mass spectrometer for MSI is a MALDI Time-Of-Flight (MALDI-TOF) device. During MALDI ionization a laser shoots onto the sample that was covered with a special matrix which absorbs the laser energy and transfers it to the analytes. This process evaporizes and ionizes the analytes that due to their charge can then be accelerated in an electrical field towards the TOF tube. The time of flight through the tube to the detector is measured and as this correlates with the mass over charge (m/z) of the analyte, the flight time allows the calculation of m/z. During measurement complete mass spectra are acquired in thousands of sample spots. Each mass spectrum contains hundreds of analyte m/z and for each of those analytes an abundance heatmap showing the spatial distribution in the sample can be calculated and visualized. 
 
-Depending on the analyte of interest, the sample type and the mass spectrometer the sample preparation steps as well as the properties of the acquired data differs. Independent of those differences the preparation and measurement of the sample is normally straightforward while the analysis of the large and complex data is the main bottleneck of an MSI experiment. 
+Depending on the analyte of interest, the sample type and the mass spectrometer, the sample preparation steps as well as the properties of the acquired data differ. Independent of those differences, the preparation and measurement of the sample is normally straightforward while the analysis of the large and complex data is the main bottleneck of a MSI experiment. 
 
-In this tutorial we will determine analytes with a localized distribution in a chilli cross section. The data analysis steps can be transferred to any other application in which the morphological distribution of an analyte in a sample is analyzed. A common application is studying the distribution of a drug and its metabolites in an animal model to better understand pharmakocinetic properties of the drug. 
+In this tutorial we will determine analytes with a localized distribution in a chilli cross section. The data analysis steps can be transferred to any other application in which the morphological distribution of an analyte in a sample is analyzed. A common application is studying the distribution of a drug and its metabolites in an animal model to better understand pharmacokinetic properties of the drug. 
 
 
 > ### Agenda
@@ -55,7 +55,7 @@ In this tutorial we will determine analytes with a localized distribution in a c
 
 In this tutorial we will use the chilli dataset generated in the lab of Robert Winkler at the CINVESTAV institute in Irapuato (Mexico) and deposited at [Zenodo](https://zenodo.org/record/484496). The data was acquired to show that their self made low cost 'plug and play' MSI system as well as their open source R scripts work properly and allow the direct spatially resolved detection of volatile organic compounds (VOCs) from plant tissue ([Maldonado-Torres et al.](https://doi.org/10.1016/j.jprot.2014.03.003) and [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9)). 
 
-The mass spectrometer consisted of a low-temperature plasma (LTP) ionization source coupled to a quadrupole mass analyzer. This ionization source allows to measure semi-volatile organic compunds directly from fresh material under ambient conditions without destruction of the sample. To get an idea how this set up and the chilli looks like have a look at their [video](https://www.youtube.com/watch?v=NbZ1QqTZvXM) and [website](http://lababi.bioprocess.org/). The chilli (capsicum annuum) was purchased from a local market in Irapuato, Mexico and longitudinally cut into a slice of 80 x 35 mm and 4 mm thickness and laid onto a glass slide. Mass spectra were acquired with a spatial resolution of 1 mm and in a mass range from 15 – 2000 Thomson (Th, unit of m/z) to measure semi-volatile and volatile organic compounds (VOCs). 
+The mass spectrometer consisted of a low-temperature plasma (LTP) ionization source coupled to a quadrupole mass analyzer. This ionization source allows to measure semi-volatile organic compunds directly from fresh material under ambient conditions without destruction of the sample. To get an idea how this set up and the chilli looks like have a look at their [video](https://www.youtube.com/watch?v=NbZ1QqTZvXM) and [website](http://lababi.bioprocess.org/). The chilli (*Capsicum annuum*) was purchased from a local market in Irapuato, Mexico and longitudinally cut into a slice of 80 x 35 mm and 4 mm thickness and laid onto a glass slide. Mass spectra were acquired with a spatial resolution of 1 mm and in a mass range from 15 – 2000 Thomson (Th, unit of m/z) to measure semi-volatile and volatile organic compounds (VOCs). 
 
 We will check the properties of the dataset and then perform similar steps as described by [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9): Plotting an average mass spectrum, filtering the dataset for the relevant m/z range, automatical generation of m/z images to find analytes that correspond to morphological features and generating an image that overlays three different analytes. 
 
@@ -63,7 +63,7 @@ We will check the properties of the dataset and then perform similar steps as de
 
 ## Get data
 
-The imzML file consists of two files: The first file contains the metadata in an XML file and has the extension .imzML. The second file contains the mass spectra data, is saved as binary file and its extension is .ibd. To be valid both files must have the same filename before the extension. More information about the imzML file structure can be found here: [ms-imaging.org](https://ms-imaging.org/wp/imzml/data-structure/). Galaxy provides the composite upload for files consisting of several components.
+The imzML file consists of two files: The first file contains the metadata in an XML file and has the extension .imzML. The second file contains the mass spectra data, is saved as a binary file and its extension is .ibd. To be valid both files must have the same filename before the extension. More information about the imzML file structure can be found here: [ms-imaging.org](https://ms-imaging.org/wp/imzml/data-structure/). Galaxy provides the composite upload for files consisting of several components.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -78,7 +78,7 @@ The imzML file consists of two files: The first file contains the metadata in an
 >    https://zenodo.org/record/484496/files/ltpmsi-chilli.ibd
 >    ```
 >
-> 3. Upload the data on Galax via the **composite** option
+> 3. Upload the data on Galaxy via the **composite** option.
 >
 >    > ### {% icon tip %} Tip: Upload via the composite option
 >    > - Open the Galaxy Upload Manager ({% icon galaxy-upload %} on the top-right of the tool panel)
@@ -221,7 +221,7 @@ We will rerun the msi spectra plot tool and add the annotation of the pixels tha
 
 > ### {% icon hands_on %} Hands-on: Mass spectra of different chilli compartments
 >
-> 1. Create a tabular file with the coordinates interest and rename it:
+> 1. Create a tabular file with the coordinates of interest and rename it:
 >
 >    ```
     x     y     compartment
@@ -235,7 +235,7 @@ We will rerun the msi spectra plot tool and add the annotation of the pixels tha
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
 >    > * Paste the file contents into the text field
->    > * From the Settings menu ({% icon galaxy-gear %}) select **Convert spaces to tabs**
+>    > * From the settings menu {% icon galaxy-gear %} select **Convert spaces to tabs**
 >    > * Press **Start** and **Close** the window
 >    {: .tip}
 >
@@ -264,7 +264,7 @@ We will rerun the msi spectra plot tool and add the annotation of the pixels tha
 > > ### {% icon solution %} Solution
 > >
 > > 1. All spectra without annotation in the tabular file are considered as NA, what means that NA represents the average spectrum of the dataset except for the 3 annotated pixels.
-> > 2. The highest intensity peak at around 80 Th belongs to the spectra that is located in the pericarp of the chilli. 
+> > 2. The highest intensity peak at around 80 Th belongs to the spectrum that is located in the pericarp of the chilli. 
 > > 3. The peak at around 60 Th belongs to the spectrum that is located in the seeds.
 > {: .solution}
 >
@@ -303,7 +303,7 @@ The single spectra that derive from different chilli departments show quite some
 >
 {: .question}
 
-Cardinal tools writes only continuous imzMl formats, therefore from now on the dataset is in continuous imzML format and "processed imzML file" can be set to 'no' in the followin tools. 
+Cardinal tools write only continuous imzMl formats, therefore from now on the dataset is in continuous imzML format and "processed imzML file" can be set to 'no' in the following tools. 
 
 # Multiple and overlayed analyte images
 
@@ -326,7 +326,7 @@ For the chilli dataset we want to know which m/z features have a localized distr
 >    - {% icon param-file %} *"MSI data"*: `MSI filtering on data 1: imzML` (output of **MSI filtering** {% icon tool %})
 >    - {% icon param-file %} *"m/z of interest (e.g. internal Calibrants)"*: `Filter on data 8` (output of **Filter** {% icon tool %})
 >    - *"Column with m/z values"*: `column:2`
->    - *"Column with name of m/z values"*: `column:2`
+>    - *"Column with name of m/z values"*: `column:1`
 >    - *"Tabular file contains a header line"*: `Yes`
 >    - *"Select a contrast enhancement function for the heatmap images"*: `suppression`
 >    - *"M/z range"*: `0.4`
@@ -340,8 +340,8 @@ For the chilli dataset we want to know which m/z features have a localized distr
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. To define the exact m/z with the best localisation is quite tricky. Between 61.8 and 62.6 Th there is a localized feature and between 84 and 84.4 Th, we would choose 62.2 and 84.2 to be the best images (in the publication it was 62.1 and 84.1).
-> > 2. The comparison of the feature localisation with the chilli image shows that the 62.2 feature is located in the seeds and the 84.2 Th more uniformly in the placenta and pericarp. 
+> > 1. To define the exact m/z with the best localization is quite tricky. Between 61.8 and 62.6 Th there is a localized feature and between 84 and 84.4 Th. We would choose 62.2 and 84.2 to get the best images (in the publication it was 62.1 and 84.1).
+> > 2. The comparison of the feature localization with the chilli image shows that the 62.2 Th feature is located in the seeds and the 84.2 Th feature more uniformly in the placenta and pericarp.
 > >
 > {: .solution}
 >
@@ -359,7 +359,7 @@ After m/z features with a localized distribution have been found, it is interest
 
 ## Overlay image for three analyte features
 
-Next, we will plot the distribution of molecules with different distribution in the tissue: 306.6 Th (Capsaicin), 62.2 Th and 84.2 Th. 
+Next, we will plot the distribution of molecules with different distributions in the tissue: 306.6 Th (Capsaicin), 62.2 Th and 84.2 Th. 
 
 > ### {% icon hands_on %} Hands-on: Overlay image for several m/z features
 >
@@ -392,7 +392,7 @@ Next, we will plot the distribution of molecules with different distribution in 
 >    - *"Overlay image"*: `Yes`
 >        - *"1: Colours for the plots"*: `red`
 >        - *"2: Colours for the plots"*: `blue`
->        - *"3 Colours for the plots"*: `green`
+>        - *"3: Colours for the plots"*: `green`
 >
 {: .hands_on}
 
