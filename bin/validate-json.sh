@@ -5,7 +5,7 @@ exit_with=0
 for wf in $(find topics -name '*.ga'); do
 	# Check that it is valid JSON
 	echo "Checking $wf"
-	cat $wf | jq . > /dev/null;
+	jq . < $wf > /dev/null;
 	ec=$?
 	if (( ec > 0 )); then
 		echo "  Invalid JSON"
