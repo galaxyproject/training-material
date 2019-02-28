@@ -112,9 +112,10 @@ For example, in the image below, the light blue and dark blue tracks are a bette
 >
 > * If there are two overlapping predicted genes in the same reading frame, in general you should **choose the longer one** (the one with the first start codon). Take a look at the Shine-Dalgarno sequence too. A shorter gene with an SD closer to consensus might be the one preferred for translation in the cell.
 ![](../../images/structural-annotation-workflow-screenshots/13_longer_vs_SD.png)
--- Often gene calling programs do not like to call gene starts inside upstream genes, because that is rare in bacteria or eukaryotes. However, phage genes are compressed and very often overlap each other by up to 15 codons or so. Usually there is a sixpack call that will fix this problem. 
--- In some cases (remember lambda *nu3-C*) there are two start codons far apart, indicating that two different products are made from the same mRNA. Likely this will not be revealed until the Functional workflow, so do not worry about this now. 
---And, finally, the o-spanin gene (like *Rz1* is often embedded inside the i-spanin gene (*Rz*). Gene calling programs NEVER detect embedded genes like this.  If you have a genome for a phage of a Gram-negative host, be alert for small out-of-frame genes (usually <100 codons) that have a good S-D but are wholly or partially embedded in a bigger gene ( usually 130 - 200 codons).    
+>
+>-- Often gene calling programs do not like to call gene starts inside upstream genes, because that is rare in bacteria or eukaryotes. However, phage genes are compressed and very often overlap each other by up to 15 codons or so. Usually there is a sixpack call that will fix this problem. 
+>-- In some cases (remember lambda *nu3-C*) there are two start codons far apart, indicating that two different products are made from the same mRNA. Likely this will not be revealed until the Functional workflow, so do not worry about this now. 
+>--And, finally, the o-spanin gene (like *Rz1* is often embedded inside the i-spanin gene (*Rz*). Gene calling programs NEVER detect embedded genes like this.  If you have a genome for a phage of a Gram-negative host, be alert for small out-of-frame genes (usually <100 codons) that have a good S-D but are wholly or partially embedded in a bigger gene ( usually 130 - 200 codons).    
 >
 {: .tip}
 
