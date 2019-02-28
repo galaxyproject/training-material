@@ -150,12 +150,16 @@ The experimental design of transposon insertion sequencing produces raw reads co
 >    - **Click** on `Insert 5' (Front) Adapters`
 >         - Set *"Source"* to `File From History`
 >         - Set *"Choose file containing 5' adapters"* to the `condition barcodes` file in the history
+>    - <img name="FrontSdapter" src="../../images/tnseq/frontadaptercutadapt.png" width='70%' >
+>
 >    - **Click** on `Adapter Options`
 >         - Set *"Maximum error rate"* to `0.15` to allow 1 mismatch
 >         - Set *"Match times"* to `3` in case the barcode attached several times
+>    - <img name="AdapterOption" src="../../images/tnseq/optionaptercutadapt.png" width='70%' >
 >    - **Click** on `Output Options`
 >         - Set *"Report"* to `yes`
 >         - Set *"Multiple output"* to `yes` to separate the reads into one file per condition
+>    - <img name="OutputOption" src="../../images/tnseq/cutadaptOutput.png" width='70%' >
 >    - **Click** on `Execute`
 >
 >
@@ -172,7 +176,7 @@ The experimental design of transposon insertion sequencing produces raw reads co
 > {: .question}
 {: .hands_on}
 
-The output is a collection of the different conditions dataset, here control and condition, and a report text file.
+SThe output is a collection of the different conditions dataset, here control and condition, and a report text file.
 You can look at the report and see that 100% of the reads has been trimmed.
 
 
@@ -321,8 +325,10 @@ The first step is to map our read to a the reference genome (you can download it
 >       - Set *"Skip the first n reads (-s)"* to `0`
 >       - Set *"Maximum number of mismatches permitted in the seed (-n)"* to `0`
 >       - Set *"Seed length (-l)"* to `17`
+>       - <img name="Bowtie1" src="../../images/tnseq/bowtie1.png" width='70%' >
 >       - Set *"Whether or not to try as hard as possible to find valid alignments when they exist (-y)"* to `Try Hard`
 >       - Set *"Whether or not to make Bowtie guarantee that reported singleton alignments are 'best' in terms of stratum and in terms of the quality values at the mismatched positions (--best)"* to `Use best`
+>       - <img name="Bowtie2" src="../../images/tnseq/bowtie2.png" width='70%' >
 >   - **Click** on `Execute`
 >
 >
