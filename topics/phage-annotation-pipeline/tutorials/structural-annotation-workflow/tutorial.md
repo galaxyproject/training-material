@@ -132,6 +132,6 @@ Ensure the terminator evidence track is displayed. The workflow uses the tool Tr
 
 # Completion
 
-Once genes have been identified and called across the full length of the genome, the [functional annotation workflow]({{ site.baseurl }}//topics/genome-annotation/tutorials/functional-annotation-workflow/tutorial.html) may be executed.
+Once genes have been identified and called across the full length of the genome, the [functional annotation workflow]({{ site.baseurl }}//topics/phage-annotation-pipeline/tutorials/functional-annotation-workflow/tutorial.html) may be executed.
 
 
