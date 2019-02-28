@@ -10,8 +10,7 @@ objectives:
 requirements:
   -
     title: "Javascript knowledge"
-    type: "external"
-    link: ""
+    type: "none"
 time_estimation: "90m"
 key_points:
   - "Visualizations require a different way of thinking: server and client side; downloading files rather than system level access"
