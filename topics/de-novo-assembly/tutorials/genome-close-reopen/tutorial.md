@@ -8,25 +8,109 @@ tutorial_name: genome-close-reopen
 
 > ### Agenda
 >
-> 1. Genome Confirmation PCR
+> 1. Genome Closure
+>    > * Confirmation PCR
+>    > * Closure PCR
+>    >    > * Background
+>    > * Trimming
+>    > * Re-naming
 >
-> 2. Genome Closure
->    > * Background: Close the Assembled Contigs
->    > * Phage Term
->    > * PCR and Sequencing
->
-> 3. Trimming Sequence
->
-> 4. Re-Opening
->    > * Phage Term
->    > * Galaxy Tools
+> 2. Contig Re-opening
+>    > * Deciding Where to Re-open
+>    >    > * BLASTn Analysis
+>    >    > * PhageTerm Analysis
+>    > * Re-opening in Galaxy
 > {:toc}
 >
 {: .agenda}
 
-# Genome Confirmation PCR
-
 # Genome Closure
+
+======
+
+## Confirmation PCR
+
+### Primer design and reaction conditions
+
+Open the sequencing results node for your genome and copy/paste it into a word processor.
+
+Create there confirmation primers using the [IDT PrimerQuest Tool.](https://www.idtdna.com/Primerquest/Home/Index) Under the Tools drop-down menu, open the "Show Custom Design Parameters" tab.
+
+![](../../images/genome-close-reopen-screenshots/1_primerquest.png)
+
+Enter the following parameters:
+
+*General*
+> * Set Design Parameters for... **General PCR (primers only)**
+
+*Results*
+> * Results to Return - **50**
+
+*Reaction Conditions*
+> * Monovalent Salt (Na+)(mM) - **50**
+> * Primer DNA Conc (nM) - **250**
+> * Divalent Salt (Mg++)(mM) - **0**
+> * dNTP Conc (mM) - **10**
+
+*Primer Details*
+> * Primer Tm (Celcius) - **Min = 54, Opt = 55, Max = 56**
+
+*Amplicon Details*
+> * Amplicon Size (bp) - **Opt = 500**
+
+Copy sequence from the middle of the genome and paste it into the "Paste Sequence(s) here" textbox in the primer design tool and press the "Get Assays" button at there bottom of the screen.
+
+![](../../images/genome-close-reopen-screenshots/2_confirmation_pcr_expected_results.png)
+
+When primers are received, then spin them down and prepare a solution with a final concentration of 100 mM (1 mol = 10 μL H20). Dilute to prepare a 10 mM working stock. A 25 μL PCR reaction consists of:
+
+> * 12.5 μL Azura Taq 2x Mix (*keep on ice!*)
+> * 9.5 μL H20
+> * 1 μL of 10 mM forward primer
+> * 1 μL of 10 mM reverse primer
+> * 1 μL of genome DNA
+
+The reaction conditions are as follows:
+
+![](../../images/genome-close-reopen-screenshots/3_pcr_reaction_conditions.png)
+
+To visualize the PCR product, prepare a 1% agarose gel containing a visualizing agent (such as ethidium bromide or sybr safe). Mix 6x loading dye with the PCR product at the appropriate concentrations (5 μL of product with 1 μL of loading dye works well). Also, load a 100 bp ladder and perform electrophoresis set to a constant 100 V for approximately 45 minutes.
+
+Image the gel and record the results (regardless if an amplicon is present or not) and save the result. If a confirmation product is identified, proceed to the closure PCR step.
+
+> ### {% icon comment %} Note for CPT Technicians
+> Upload the annotated images to the appropriate Google Drive folder.
+{: .comment}
+
+![](../../images/genome-close-reopen-screenshots/4_pcr_example.png)
+
+### Closure PCR Primer Design and Reaction Conditions
+
+Open the sequencing results node for your genome and copy/paste it into a word processor.
+
+Create there confirmation primers using the [IDT PrimerQuest Tool.](https://www.idtdna.com/Primerquest/Home/Index) Under the Tools drop-down menu, open the "Show Custom Design Parameters" tab.
+
+Enter the following parameters:
+
+*General*
+> * Set Design Parameters for... **General PCR (primers only)**
+
+*Results*
+> * Results to Return - **50**
+
+*Reaction Conditions*
+> * Monovalent Salt (Na+)(mM) - **50**
+> * Primer DNA Conc (nM) - **250**
+> * Divalent Salt (Mg++)(mM) - **0**
+> * dNTP Conc (mM) - **10**
+
+*Primer Details*
+> * Primer Tm (Celcius) - **Min = 54, Opt = 55, Max = 56**
+
+*Amplicon Details*
+> * Amplicon Size (bp) - **Opt = 600**
+
+From the genome saved in the word processor, copy and past approximately the last 500 bases from the 3' end and paste it into the "Paste Sequence(s) here" textbox. Then, copy approximately the first 500 bases from the 5' end and paste it below the earlier sequence (closure PCR should span from the 3' to the 5' end; using this process may be easier than finding individual primers). Press the "get Assays" button at the bottom of the screen.
 
 ### Background: Close the Assembled Contigs
 

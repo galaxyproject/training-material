@@ -16,7 +16,7 @@ tutorial_name: galaxy-faq
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} I am seeing an error message in galaxy; how do I report it?
+> ### {% icon question %} I am seeing an error message in Galaxy; how do I report it?
 >    > ### {% icon solution %} Solution
 >    > * If it isn’t a job-related bug, take a screenshots and [follow the directions here.](https://cpt.tamu.edu/computer-resources/github-repo-list/)
 > {: .solution}
@@ -27,5 +27,19 @@ tutorial_name: galaxy-faq
 >    > * Check to make sure you are logged in.
 >    > * Check your internet connection.
 >    > * Try logging into an incognito window.
+> {: .solution}
+{: .question}
+
+> ### {% icon question %} Structural workflow stalled at second to last step; Create or Update Organism job failed.
+>    > ### {% icon solution %}
+>    > ![](../../images/galaxy-faq-screenshots/2_job_failed_structural_workflow.png)
+>    > 
+>    > In both the preview and in the bug report, you will see an error that says the following:
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/3_error_report_failed_structural.png)
+>    >
+>    > This is because you failed to provide a name for the organism before running the structural workflow. **To fix this**, re-run the tool and enter the appropriate organism name in the **Organism Common Name**. Also, select *Yes* for **Resume dependencies from this job**.
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/4_rerun_tool_adjustments.png)
 > {: .solution}
 {: .question}
