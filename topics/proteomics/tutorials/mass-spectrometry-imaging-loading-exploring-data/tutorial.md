@@ -61,6 +61,7 @@ The data for this tutorial comes from MALDI-TOF imaging of peptides in a mouse k
 
 ![mouse kidney image](../../images/MSI1_mouse_kidney.png "Mouse kidney sample before and after mass spectrometry measurement and H&E staining")
 
+
 > ### {% icon hands_on %} Hands-on: Uploading an imzML file
 >
 > 1. **Create a new history** and give it a name.
