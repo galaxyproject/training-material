@@ -9,7 +9,10 @@ layout: base
 {% assign language = site.other_languages | split: ", " %}
 {% if page.contributors %}
   {% assign contrib = page.contributors %}
-  {% capture contributors %}{% for contributor in contrib %}, {% assign c = contributors[contributor].name | default: contributor %} <a href="{{ site.baseurl }}/hall-of-fame#{{ contributor }}">{{ c }}</a>{% endfor %}{% endcapture %}
+  {% capture contributors %}
+  {% for contributor_id in contrib %}, {% assign c = contributors[contributor_id].name | default: contributor_id %}
+  <a href="{{ site.baseurl }}/hall-of-fame#{{ contributor }}" class="contributor-badge"><img src="https://avatars.githubusercontent.com/{{ contributor_id }}" alt="{{ c }}">{{ c }}</a>
+  {%- endfor %}{% endcapture %}
 {% endif %}
 
 <header>
