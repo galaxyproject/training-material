@@ -450,19 +450,18 @@ It is important to have the forward and reverse strand individual as a FASTQ fil
   <h3 id="hands_on-hands-on-mapping-reads"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Mapping reads</h3>
 
   <ol>
-    <li><strong>Map with BWA-MEM 0.8.0</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run Map with BWA-MEM on both strands <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R1</code> and <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R2</code> with:
+    <li><strong>Map with Bowtie</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run Bowtie on both strands <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R1</code> and <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R2</code> with:
       <ul>
-        <li>“Will you select a reference genome from your history or use a built-in index?” to <code class="highlighter-rouge">Use a built-in index</code></li>
-        <li>“Select a reference genome” to <code class="highlighter-rouge">dm3</code></li>
-        <li>“Is this library mate-paired?” to <code class="highlighter-rouge">Single-end or interleaved paired-end</code></li>
+        <li>“Is this single or paired library” to <code class="highlighter-rouge">Single-end</code></li>
         <li>Set multiple data sets</li>
         <li>“FASTQ file” to <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R1</code>and <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R2</code></li>
-        <li>“BWA settings to use” to <code class="highlighter-rouge">Full parameter List</code></li>
-        <li>“Gap extension penalty (-E)” to <code class="highlighter-rouge">50</code></li>
-        <li>“Penalty for clipping (-L)” to <code class="highlighter-rouge">0</code></li>
+        <li>“Will you select a reference genome from your history or use a built-in index?” to <code class="highlighter-rouge">Use a built-in index</code></li>
+        <li>“Select a reference genome” to <code class="highlighter-rouge">dm3</code></li>
+        <li>“Do you want to tweak SAM/BAM Options?” to <code class="highlighter-rouge">Yes</code></li>
+        <li>“Reorder output to reflect order of the input file” to <code class="highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li>Rename the output of the tool according to the corresponding files: <code class="highlighter-rouge">R1.sam</code> and <code class="highlighter-rouge">R2.sam</code></li>
+    <li>Rename the output of the tool according to the corresponding files: <code class="highlighter-rouge">R1.bam</code> and <code class="highlighter-rouge">R2.bam</code></li>
   </ol>
 
 </blockquote>
@@ -477,10 +476,10 @@ It is important to have the forward and reverse strand individual as a FASTQ fil
   <h3 id="hands_on-hands-on-hicbuildmatrix"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: hicBuildMatrix</h3>
 
   <ol>
-    <li><strong>hicBuildMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run hicBuildMatrix on the <code class="highlighter-rouge">R1.sam</code> and <code class="highlighter-rouge">R2.sam</code> from previous step with modifying the following parameters:
+    <li><strong>hicBuildMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run hicBuildMatrix on the <code class="highlighter-rouge">R1.bam</code> and <code class="highlighter-rouge">R2.bam</code> from previous step with modifying the following parameters:
       <ul>
-        <li>“1: Sam/Bam files to process” to <code class="highlighter-rouge">R1.sam</code></li>
-        <li>“2: Sam/Bam files to process” to <code class="highlighter-rouge">R2.sam</code></li>
+        <li>“1: Sam/Bam files to process” to <code class="highlighter-rouge">R1.bam</code></li>
+        <li>“2: Sam/Bam files to process” to <code class="highlighter-rouge">R2.bam</code></li>
         <li>“Choose to use a restriction cut file or a bin size” to <code class="highlighter-rouge">Bin size</code></li>
         <li>“Bin size in bp” to <code class="highlighter-rouge">10000</code></li>
         <li>
@@ -675,7 +674,7 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 
 <h1 id="integrating-hi-c-and-other-data">Integrating Hi-C and other data</h1>
 
-<p>We can plot the TADs for a given chromosomal region. For this we will use <a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html">hicPlotTADs</a>. But before make sure to import <a href="https://zenodo.org/record/1176070/files/dm6_genes.bed">gene track file</a> in .bed format from <a href="https://doi.org/10.5281/zenodo.1176070">Zenodo</a>.</p>
+<p>We can plot the TADs for a given chromosomal region. For this we will use <a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html">hicPlotTADs</a>.</p>
 
 <p>For the next step we need additional data tracks. Please load <code class="highlighter-rouge">dm3_genes.bed</code>, <code class="highlighter-rouge">H3K27me3.bw</code>, <code class="highlighter-rouge">H3K36me3.bw</code> and <code class="highlighter-rouge">H4K16ac.bw</code> to your history.</p>
 
