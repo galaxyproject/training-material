@@ -201,7 +201,7 @@
       "name": "Training data for Mass spectrometry imaging 1: Loading and exploring MSI data tutorial"
     }
   ],
-  "timeRequired": "PT30M",
+  "timeRequired": "PT45M",
   "contributor": [
     {
       "@type": "Person",
@@ -212,7 +212,7 @@
       "name": "bgruening"
     }
   ],
-  "description": "The questions this  addresses are:\n - How to upload an imzML file into Galaxy\n - Getting an overview of the MSI data with the MSI quality report tool\n - How to export MSI data as tabular files\n\n\\nThe objectives are:\n - Basic understanding of handling and exploring an imzML file in Galaxy\n\n"
+  "description": "The questions this  addresses are:\n - Did the tryptic digestions work?\n - Is there an intensity gradient in the data?\n - How good is the m/z accuracy?\n\n\\nThe objectives are:\n - How to upload an imzML file into Galaxy\n - Getting an overview of the MSI data with the MSI quality control tool\n - How to export MSI data as tabular files\n\n"
 }
 
     </script>
@@ -226,18 +226,22 @@
             <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
             <ul>
             
-            <li>How to upload an imzML file into Galaxy</li>
+            <li>Did the tryptic digestions work?</li>
             
-            <li>Getting an overview of the MSI data with the MSI quality report tool</li>
+            <li>Is there an intensity gradient in the data?</li>
             
-            <li>How to export MSI data as tabular files</li>
+            <li>How good is the m/z accuracy?</li>
             
             </ul>
 
             <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
             <ul>
             
-            <li>Basic understanding of handling and exploring an imzML file in Galaxy</li>
+            <li>How to upload an imzML file into Galaxy</li>
+            
+            <li>Getting an overview of the MSI data with the MSI quality control tool</li>
+            
+            <li>How to export MSI data as tabular files</li>
             
             </ul>
 
@@ -259,7 +263,7 @@
             
 
             
-            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 30 minutes</p>
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 45 minutes</p>
             
         </blockquote>
 
@@ -272,15 +276,20 @@
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>This tutorial introduces the handling of the mass spectrometry imaging (MSI) file type imzML in Galaxy and some first steps to explore the data.</p>
+<p>Mass spectrometry imaging (MSI) is applied to measure the spatial distribution of hundreds of biomolecules in a sample. A mass spectrometer scans over the entire sample and collects a mass spectrum every 5-200 µm. This results in thousands of spots in which a mass spectrum is acquired. Each mass spectrum consists of hundreds of analytes that are measured by their mass-to-charge (m/z) ratio. For each analyte the peak intensity in the mass spectra of every pixel is known and can be set together to map the spatial distribution of the analyte in the sample.</p>
 
-<p>Mass spectrometry imaging is applied to measure the spatial distribution of biomolecules such as peptides, proteins, metabolites or chemical compounds.
-Depending on the analyte of interest, different ionization sources and mass analyzers are used in the mass spectrometer.
-Traditionally, the resulting MSI data is exported in the file format of the mass spectrometry vendor. With the introduction of the common standard format imzML, more and more vendors provide an imzML export option and further software exists to convert proprietary files into an imzML file.
-The imzML file format was introduced to ease the exchange of MSI data between different instruments and data analysis software <a href="https://doi.org/10.1016/j.jprot.2012.07.026">Schramm et al., Journal of Proteomics, 2012</a>.
-Galaxy also supports the <code class="highlighter-rouge">Analyze7.5</code> data format, that is used by ABSciex mass spectrometers.
-Independent of the file type all MSI data experiments contain full mass spectra consisitng of mass over charge (m/z) - intensity pairs. Each spectrum has x- and y-coordinates that define the pixel in which it was measured. Often thousands of spectra with hundrets of m/z features are acquired leading to big and complex data.
-Before starting with the data analysis it is therefore helpful to visualize all levels of the data in different ways to better understand the data and to obtain an idea about it’s quality and usefulness.</p>
+<p>The technique has a broad range of applications as it is able to measure many different kinds of analytes such as peptides, proteins, metabolites or chemical compounds in a large variety of samples such as cells, tissues and liquid biopsies. Application areas include pharmacokinetic studies, biomarker discovery, molecular pathology, forensic studies, plant research and material sciences. The strength of MSI is the simultaneous analysis of hundreds of analytes in an unbiassed, untargeted, label free, fast and affordable measurement while maintaining morphological information.</p>
+
+<p>Depending on the analyte of interest and the application, different mass spectrometers are used. A mass spectrometer measures the analytes by ionizing, evaporating and sorting them by their mass-to-charge (m/z) ratio. Put simply, a mass spectrometer needs basically three parts: an ionization source, a mass analyzer and a detector. Most common ionization sources for MSI are MALDI (Matrix Assisted Laser Desorption/Ionization), DESI (Desorption Electrospray Ionization) and SIMS (Secondary Ion Mass Spectrometry).</p>
+
+<figure id="figure-1"><img src="../../images/MSI1_maldi_tof_imaging.png" alt="MSI measurement" title="MALDI TOF imaging of a mouse kidney" /><figcaption><span class="figcaption-prefix">Figure 1:</span> MALDI TOF imaging of a mouse kidney</figcaption></figure>
+
+<p>One common type of mass spectrometer for MSI is a MALDI Time-Of-Flight (MALDI-TOF) device. During MALDI ionization a laser shoots onto the sample that was covered with a special matrix which absorbs the laser energy and transfers it to the analytes. This process evaporizes and ionizes the analytes that due to their charge can then be accelerated in an electrical field towards the TOF tube. The time of flight through the tube to the detector is measured and as this correlates with the mass over charge (m/z) of the analyte, the flight time allows the calculation of m/z. During measurement complete mass spectra with hundreds of m/z - intensity pairs are acquired in thousands of sample plots leading to big and complex data. Each mass spectrum is annotated with coordinates (x,y) that define its location in the sample. This allows to visualize the intensity distribution of each m/z feature in the sample as a heatmap.</p>
+
+<p>Depending on the analyte of interest, the sample type and the mass spectrometer the sample preparation steps as well as the properties of the acquired data differ. Independent of those differences the preparation and measurement of the sample is normally straightforward while the analysis of the large and complex data is the main bottleneck of an MSI experiment.</p>
+
+<p>This tutorial introduces the handling of the mass spectrometry imaging (MSI) file type imzML in Galaxy and some first steps to explore the data.
+The imzML file format was introduced to ease the exchange of MSI data between different instruments and data analysis software (<a href="https://doi.org/10.1016/j.jprot.2012.07.026">Schramm et al., Journal of Proteomics, 2012</a>). More and more vendors provide an imzML export option and there are <a href="https://ms-imaging.org/wp/imzml/software-tools/">software solutions</a> to convert proprietary files into imzML files. Before starting any analysis it is recommended to visualize all features of the data in different ways to better understand the data and to obtain an idea about it’s quality and usefulness.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -289,8 +298,8 @@ Before starting with the data analysis it is therefore helpful to visualize all 
 
 <ol id="markdown-toc">
   <li><a href="#uploading-an-imzml-file-into-galaxy" id="markdown-toc-uploading-an-imzml-file-into-galaxy">Uploading an imzML file into Galaxy</a></li>
-  <li><a href="#exploring-msi-data-with-the-msi-quality-report-tool" id="markdown-toc-exploring-msi-data-with-the-msi-quality-report-tool">Exploring MSI data with the MSI quality report tool</a></li>
-  <li><a href="#exporting-msi-data-to-tabular-files" id="markdown-toc-exporting-msi-data-to-tabular-files">Exporting MSI data to tabular files</a></li>
+  <li><a href="#exploring-msi-data-with-the-msi-qualitycontrol-tool" id="markdown-toc-exploring-msi-data-with-the-msi-qualitycontrol-tool">Exploring MSI data with the MSI Qualitycontrol tool</a></li>
+  <li><a href="#exporting-msi-data-to-tabular-files-for-further-exploration-of-the-data" id="markdown-toc-exporting-msi-data-to-tabular-files-for-further-exploration-of-the-data">Exporting MSI data to tabular files for further exploration of the data</a></li>
 </ol>
 
 </blockquote>
@@ -300,9 +309,9 @@ Before starting with the data analysis it is therefore helpful to visualize all 
 <p>In case no direct imzML export is provided by the mass spectrometer software, proprietary files can be converted to imzML files with the tools provided on the following website: <a href="https://ms-imaging.org/wp/imzml/software-tools/">ms-imaging.org</a>.
 The imzML file consists of two files: The first file contains the metadata in an XML file and has the extension <code class="highlighter-rouge">.imzML</code>. The second file contains the mass spectra data and is saved as binary file and its extension is <code class="highlighter-rouge">.ibd</code>. To be valid both files must have the same filename before the extension. More information about the imzML file structure can be found here: <a href="https://ms-imaging.org/wp/imzml/data-structure/">ms-imaging.org</a>. Galaxy provides the <code class="highlighter-rouge">composite</code> upload for files consisting of several components.</p>
 
-<p>In this tutorial we will use a dataset obtained from imaging a mouse kidney. To make computation times more suitable for this training, only the m/z range from 1220 - 1625 and a part of the pixels (purple rectangle in figure 1) containing about half of the kidney and one <em>Bombesin</em> spot were kept.</p>
+<p>The data for this tutorial comes from MALDI-TOF imaging of peptides in a mouse kidney. To make computation times more suitable for this training, only the m/z range from 1220 - 1625 and a part of the pixels (purple rectangle in figure 1) containing about half of the kidney and one digestion control spot were kept.</p>
 
-<figure id="figure-1"><img src="../../images/MSI1_mouse_kidney.png" alt="mouse kidney image" title="Mouse kidney sample before mass spectrometry measurement" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Mouse kidney sample before mass spectrometry measurement</figcaption></figure>
+<figure id="figure-2"><img src="../../images/MSI1_mouse_kidney.png" alt="mouse kidney image" title="Mouse kidney sample before and after mass spectrometry measurement and H&amp;E staining" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Mouse kidney sample before and after mass spectrometry measurement and H&amp;E staining</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-uploading-an-imzml-file"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Uploading an imzML file</h3>
@@ -321,28 +330,23 @@ The imzML file consists of two files: The first file contains the metadata in an
         </ol>
       </blockquote>
     </li>
-    <li>Download the imzML data from <a href="https://doi.org/10.5281/zenodo.156064">Zenodo</a> locally:
+    <li>Download the imzML data from <a href="https://zenodo.org/record/1560646">Zenodo</a> locally:
       <ul>
         <li><a href="https://zenodo.org/record/1560646/files/mouse_kidney_cut.imzML">imzML metadata component</a></li>
         <li><a href="https://zenodo.org/record/1560646/files/mouse_kidney_cut.ibd">mass spectral data component</a></li>
       </ul>
-
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1560646/files/mouse_kidney_cut.imzML
-https://zenodo.org/record/1560646/files/mouse_kidney_cut.ibd
-</code></pre></div>      </div>
     </li>
     <li>
-      <p>Upload the data on Galax via the <strong>composite</strong> option</p>
+      <p>Upload the data on Galaxy via the <strong>composite</strong> option</p>
 
       <blockquote class="tip">
         <h3 id="tip-tip-upload-via-the-composite-option"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Upload via the composite option</h3>
         <ul>
-          <li>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</li>
+          <li>Open the Galaxy Upload Manager(<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</li>
           <li>Click on <strong>Composite</strong> on the top</li>
           <li>Set <strong>Composite Type</strong> to <code class="highlighter-rouge">imzml</code></li>
           <li>Expand the first <strong>Select</strong> button (for the imzML metadata component)</li>
           <li>Select <strong>Choose local file</strong> and the local <code class="highlighter-rouge">mouse_kidney_cut.imzML</code> file</li>
-          <li>Paste the link into the text field: <code class="highlighter-rouge">https://zenodo.org/record/1560646/files/mouse_kidney_cut.imzML</code></li>
           <li>Expand the second <strong>Select</strong> button (for the mass spectral data component)</li>
           <li>Select <strong>Choose local file</strong> and the local <code class="highlighter-rouge">mouse_kidney_cut.ibd</code> file</li>
           <li>Press <strong>Start</strong></li>
@@ -350,7 +354,7 @@ https://zenodo.org/record/1560646/files/mouse_kidney_cut.ibd
         </ul>
       </blockquote>
 
-      <figure id="figure-2"><img src="../../images/MSI1_upload_composite.png" alt="Upload imzML files" title="Upload an imzML file via the composite upload" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Upload an imzML file via the composite upload</figcaption></figure>
+      <figure id="figure-3"><img src="../../images/MSI1_upload_composite.png" alt="Upload imzML files" title="Upload an imzML file via the composite upload" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Upload an imzML file via the composite upload</figcaption></figure>
 
       <blockquote class="tip">
         <h3 id="tip-tip-ftp-upload-for-large-files"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: FTP upload for large files</h3>
@@ -372,18 +376,18 @@ https://zenodo.org/record/1560646/files/mouse_kidney_cut.ibd
   </ol>
 </blockquote>
 
-<h1 id="exploring-msi-data-with-the-msi-quality-report-tool">Exploring MSI data with the MSI quality report tool</h1>
+<h1 id="exploring-msi-data-with-the-msi-qualitycontrol-tool">Exploring MSI data with the MSI Qualitycontrol tool</h1>
 
 <p>Before starting any analysis, it is important to confirm that the quality of the acquired data is sufficient.
 Furthermore, knowing the data’s properties is important to choose the right preprocessing steps and parameters.
-The MSI quality report tool provides a fast way to obtain plenty of descriptive statistic plots for MSI data.
-Internal calibrants or other known, ubiquitous m/z features can further be used to obtain further quality measures, such as m/z accuracies.</p>
+The <em>*MSI Qualitycontrol</em> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> provides a fast way to obtain plenty of descriptive statistic plots for MSI datasets.
+Internal calibrants or other known, ubiquitous m/z features can be used to obtain further quality measures, such as m/z accuracies.</p>
 
-<p>Our mouse kidney dataset contains internal calibrants that were sprayed together with the matrix onto the tissue. The used calibrants are <em>Angiotensin I</em>, <em>Substance P</em>,
+<p>The mouse kidney dataset contains internal calibrants that were sprayed together with the matrix onto the tissue. The used calibrants were <em>Angiotensin I</em>, <em>Substance P</em>,
 <em>Fibrinopeptide B</em> and <em>ACTH_18-39</em>. We furthermore spotted <em>Bombesin</em> peptides close to the tissue to monitor the digestion quality with the fold change of digested vs. undigested <em>Bombesin</em>.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-running-the-msi-quality-report-tool"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Running the MSI quality report tool</h3>
+  <h3 id="hands_on-hands-on-running-the-msi-qualitycontrol-tool"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Running the MSI Qualitycontrol tool</h3>
   <ol>
     <li>Create the tabular file with the m/z values of the internal calibrants:
       <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>m/z       name
@@ -418,7 +422,7 @@ Internal calibrants or other known, ubiquitous m/z features can further be used 
         </ul>
       </blockquote>
     </li>
-    <li>Run the <strong>MSI quality report</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li>Run the <strong>MSI Qualitycontrol</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="highlighter-rouge">mouse_kidney_cut</code> will be automatically recognized as input file</li>
         <li><em>“Title”</em>: <code class="highlighter-rouge">Mouse kidney introduction tutorial</code></li>
@@ -429,12 +433,13 @@ Internal calibrants or other known, ubiquitous m/z features can further be used 
         <li><em>“Plot fold change of two m/z”</em>: <code class="highlighter-rouge">Insert Plot fold change of two m/z</code></li>
         <li><em>“M/z 1”</em>: <code class="highlighter-rouge">1224.63</code> (digested <em>Bombesin</em>)</li>
         <li><em>“M/z 2”</em>: <code class="highlighter-rouge">1619.89</code> (full length <em>Bombesin</em>)</li>
+        <li>Press <strong>Execute</strong></li>
       </ul>
     </li>
   </ol>
 </blockquote>
 
-<p>Open the pdf by clicking on the eye icon (view data) and answer the following questions according to the table on the first page.</p>
+<p>Open the pdf by clicking on the eye icon (view data) and answer the following questions according to the summary table on the first page.</p>
 
 <blockquote class="question">
   <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -450,69 +455,78 @@ Internal calibrants or other known, ubiquitous m/z features can further be used 
     <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
       <li>9013</li>
-      <li>Centroided = FALSE means that the data were read in profile mode. The user has to define in every tool if the input data is in profile or centroided mode. The Centroid value reported here corresponds to the choice the user has made in the tool and not by automatic recognition.</li>
-      <li>Median # peaks per spectrum: 4158. The quality report tool consideres intensities &gt; 0 as peaks. Before peak picking this means that also noise with small intensities is counted as peak, therefore the number 4158 is not as astonighing anymore and will probably decrease dramatically after peak picking. So far nearly every second m/z value has an intensity &gt; 0 (4158 peaks /9013 m/z values).</li>
-      <li>3 Calibrants out of the 4 Calibrants in the tabular files were valid. As we cut the m/z axis for this tutorial, ACTH is outside the m/z range that we kept (1220 - 1625).</li>
+      <li>Centroided = FALSE means that the data were read in profile mode. The user has to define in every tool if the input data is in profile or centroided mode. The Centroid value reported here corresponds to the choice the user has made in the tool and not by automatic recognition. To find out what the correct choice is visit <a href="/training-material/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.html#quality-control-of-the-data">Mass spectrometry imaging: Examining the spatial distribution of analytes</a>.</li>
+      <li>Median # peaks per spectrum: 4158. The <strong>MSI Qualitycontrol</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> consideres intensities &gt; 0 as peaks. Before peak picking this means that also noise with small intensities is counted as peak what explains why nearly every second m/z value has an intensity &gt; 0 (4158 peaks /9013 m/z values). After peak picking the number of peaks will decrease dramatically because only real peaks will be left.</li>
+      <li>3 Calibrants out of the 4 Calibrants in the tabular files were valid. As we cut the m/z axis for this tutorial, <em>ACTH</em> is outside the m/z range that we kept (1220 - 1625).</li>
     </ol>
   </blockquote>
 </blockquote>
 
-<p>The pdf report continous with plots that show the pixel of the sample in an x-y-coordinate grid. As in each pixel one spectrum is acquired, different properties of the mass spectra can be visualized in the pixel image. The help section of the quality report tool describes each plot of the pdf report, the tutorial here will discuss only some plots in more detail.</p>
+<p>Each plot of the <strong>MSI Qualitycontrol</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is described in the help section at the bottom of the tool, this tutorial will discuss a few selected plots in more detail.</p>
 
-<h4 id="fold-change-plots">Fold change plots</h4>
+<h4 id="digestion-efficiency">Digestion efficiency</h4>
 
-<p>On page 4 and 5 there are the fold change plot that can be used to estimate the efficiency of the tryptic digestion. The first plot shows the average mass spectra for the digested and the undigested <em>Bombesin</em> peptide. The blue lines indicate the provided ppm range and the provided m/z value. The spectrum of the digested peptide probably overlaps with another peptide pattern, while the monoisotopic peak of the <em>Bombesin</em> peptide is clear. The average intensity of the full length <em>Bombesin</em> peptide is higher than the one of the digested peptide.
-The average intensity is not helpful here, because we only spotted one drop next to the tissue and the intensity fold change in those pixels is important. The previous spectra plot is useful to control the chosen m/z value and ppm range. To obtain the local fold change in each spectrum the intensities in the m/z ranges of both peptides are averaged, the intensity of the first m/z is divided by the intensity of the second m/z and log2 transformed to obtain the log2 fold change. This value is plotted for each spectrum (pixel) and then it is obvious that many spectra in the upper left corner have a log2 fold change &gt; 0. The drop contains also spectra with a log2 fold change smaller 0 but larger than -5, what indicates that in these spectra less than half of the <em>Bombesin</em> was digested. With the used amounts of spotted <em>Bombesin</em> and sprayed <em>trypsin</em> the log2 fold changes indicate sufficient (but not ideal) digestion.</p>
+<p>The complete digestion of proteins into peptides is a crucial step when performing mass spectrometry of peptides. In MSI the digestion is further hindered by the fact that digestion has to occur on the tissue. One way to control digestion efficiency was suggested by <a href="https://www.sciencedirect.com/science/article/pii/S1570963916301820?via%3Dihub">Erich et al.</a>. They spotted <em>cytochrome c</em> next to the tissue before and after digestion and compared the protein intensities in the two spots.</p>
 
-<figure id="figure-3"><img src="../../images/MSI1_foldchange.png" alt="Fold Change" title="Avererage mass spectra and log2 fold change for Bombesin and its digested peptide" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Avererage mass spectra and log2 fold change for Bombesin and its digested peptide</figcaption></figure>
+<p>For the mouse kidney dataset we applied a similar approach and added three <em>bombesin</em> spots next to the kidney tissue (Figure 2) before digestion. <em>Bombesin</em> has the amino acid sequence QRLGNQWAVGHLM and a mass of 1619.89 Da. During trypsin digestion <em>bombesin</em> is cleaved by trypsin after arginin (R) what leads to the cleaved peptide LGNQWAVGHLM with a mass of 1224.63 Da. The digestion efficiency can be estimated from the log2 ratio (fold change) of these two peptides in the pixels of the <em>bombesin</em> spot.</p>
 
-<h4 id="calibrant-heatmaps">Calibrant heatmaps</h4>
+<p>The fold change plots are on page 4 and 5 of the pdf report. The first plot shows the average mass spectra for the digested and the undigested <em>bombesin</em> peptides. The blue lines indicate the provided m/z value and the chosen ppm range. The average intensity of the full length <em>bombesin</em> peptide is higher than the one of the digested peptide but the average intensity is not helpful here, because we only spotted one drop next to the tissue and only the intensity fold change in those pixels is important. The spectra plot is useful to control the chosen m/z value and ppm range. To obtain the log2 fold change in each spectrum, for each peptide the intensities in the m/z ranges are averaged, the intensity of the first m/z feature is divided by the intensity of the second m/z feature and log2 transformed. The log2 fold change for each spectrum (pixel) is plotted on page 5 and reveals that many spectra in the upper left corner (where the <em>bombesin</em> spot is) have a log2 fold change &gt;= 0 what indicates that there is more digested than undigested <em>bombesin</em> peptides and that the tryptic digestion was successful.</p>
 
-<p>Starting from page 6 for each calibrant an intensity heatmap is plotted. The colour code shows the intensity of the m/z value that is closet to the input m/z value and within the given ppm range. The input m/z value and its name are printed on top of the image, the m/z number in the image shows the closest m/z value, so the m/z value which intensites are plotted in the heatmap. Low <em>Angiotensin</em> intensities occur at the boarder of the <em>Bombesin</em> spot and at the kidney boarder and on some spots in the kidney. In general calibrant intensities are higher in the matrix background than on the tissue due to ion suppression effects. <em>Substance P</em> shows also ion suppression in the <em>Bombesin</em> spot. The heatmap shows no intensity gradient what indicates that spraying of calibrants and matrix was homogeneous.</p>
+<figure id="figure-4"><img src="../../images/MSI1_foldchange.png" alt="Fold Change" title="Avererage mass spectra and log2 fold change for Bombesin and its digested peptide" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Avererage mass spectra and log2 fold change for Bombesin and its digested peptide</figcaption></figure>
 
-<figure id="figure-4"><img src="../../images/MSI1_angiotensin_image.png" alt="Angiotensin heatmap" title="Intensity heatmap of Angiotensin I" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Intensity heatmap of Angiotensin I</figcaption></figure>
+<h4 id="distribution-images-for-calibrants">Distribution images for Calibrants</h4>
+
+<p>From page 6 on, for each calibrant an intensity heatmap is plotted. The colour code shows the intensity of the m/z value that is closest to the input m/z and if the ppm range contains several m/z features their intensities are averaged. The input m/z value and its name are printed on top of the image, the m/z number in the box shows the closest m/z value. Low <em>angiotensin</em> intensities occur at the boarder of the <em>bombesin</em> spot and at the boarder of the kidney tissue and on some spots in the kidney. In general calibrant intensities are higher in the matrix background than on the tissue due to ion suppression effects. <em>Substance P</em> shows also ion suppression in the <em>bombesin</em> spot. The heatmap shows no spatial intensity gradient what indicates that spraying of calibrants and matrix was homogeneous and that the MS performed stable during data acquisition.</p>
+
+<figure id="figure-5"><img src="../../images/MSI1_angiotensin_image.png" alt="Angiotensin heatmap" title="Intensity distribution image of Angiotensin I" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Intensity distribution image of Angiotensin I</figcaption></figure>
 
 <blockquote class="tip">
   <h3 id="tip-tip-plotting-heatmaps"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Plotting heatmaps</h3>
   <ul>
-    <li>The <strong>MSI mz images</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool allows to generate heatmaps with options such as contrast enhancement and smoothing functions.</li>
+    <li>The <strong>MSI mz images</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool allows to generate heatmaps with futher options such as contrast enhancement and smoothing functions. The tool is explained in more detail in the tutorial <a href="/training-material/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.html">Mass spectrometry imaging: Examining the spatial distribution of analytes</a>.</li>
   </ul>
 </blockquote>
 
-<h4 id="number-of-peaks-and-tic-images">Number of peaks and TIC images</h4>
+<h4 id="number-of-peaks-and-total-ion-chromatogram-images">Number of peaks and total ion chromatogram images</h4>
 
-<p>On page 9 and 10 the number of peaks and the total ion chromatogram (TIC) are plotted per spectrum.</p>
+<p>On page 9 the number of peaks per spectrum is plotted and the shape of the kidney can be estimated due to slightly higher number of peaks. The number of peaks is defined as intensity &gt; 0 what means that before peak picking also noise with intensity &gt; 0 is counted in. It is quite common for raw MALDI datasets to have a noise baseline in each spectrum and therefore high amounts of ‘peaks’ before baseline removal is performed. For the mouse kidney dataset baseline removal was already done during acquisition but as also suggested by the median number of peaks per spectrum in the summary table, about half of every m/z value has an intensity &gt; 0. This suggests to check the mass spectra for a baseline and if applicable remove the baseline during preprocessing of the data.</p>
 
-<p>The number of peaks is defined as intensity &gt; 0 what means that before peak picking also noise with intensity &gt; 0 is counted in. Therefore the number of peaks is not much higher in the tissue compared to the background matrix, but this should change after peak picking.</p>
+<p>The plot on page 10 shows the total ion chromatogram (TIC) for each spectrum with a few outlier TIC &gt; 25000. The TIC is the sum of all intensities of a spectrum. Therefore with more peaks in a spectrum the TIC should also be higher. Due to their low intensities, noise peaks contribute less to the TIC than analyte peaks, but with the large amount of noise we have in this dataset, this of course also sums up. Deviations in TICs are common in MALDI MSI due to e.g. unhomogeneous matrix spray, ion source contamination or pH gradients. To render the spectra more comparable TIC normalization is a default preprocessing step for MALDI MSI data but is based on the assumption that there are comparable numbers of signals present in each spectrum <a href="https://link.springer.com/article/10.1007%2Fs00216-011-4929-z">Deininger et al.</a>. 
+Both plots can also serve to check for spraying gradients or reduced machine performance during acquisition time. The mouse kidney was measured from bottom to top (plot on page 2), the performance over time can be easier spotted in the upper plots on page 14 and 15, where the x axis represents the spectra in the order they were measured.</p>
 
-<p>The TIC is the sum of all intensities of one spectrum. Therefore with more peaks in one spectrum the TIC should also be higher. due to their low intensities, noise peaks contribute less to TICs than real peaks, but with the large amount of noise we have in our data, this of course sums also up (4158 peaks per spectrum but we expect only a few hundret peaks with our MS).</p>
+<figure id="figure-6"><img src="../../images/MSI1_npeaks_TIC.png" alt="Npeaks and TIC heatmap" title="Number of peaks and TIC per spectrum" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Number of peaks and TIC per spectrum</figcaption></figure>
 
-<p>Both plots are helpful to decide if TIC normalization can be performed, as TIC normalization assumes that the number of peaks per spectrum are the same in all spectra (QUELLE).</p>
+<h4 id="most-abundand-mz-features">Most abundand m/z features</h4>
 
-<figure id="figure-5"><img src="../../images/MSI1_npeaks_TIC.png" alt="Npeaks and TIC heatmap" title="Number of peaks and TIC per spectrum" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Number of peaks and TIC per spectrum</figcaption></figure>
+<p>The plot on page 13 shows for each spectrum the m/z with the highest intensity (‘base peak’). This plot can already reveal some morphological features of the dataset. The plot for the mouse kidney dataset shows that the base peak is the same on the kidney tissue and the matrix background but a different one in the <em>bombesin</em> spot. According to the legend the base peak in most spectra is roughly at m/z 1350, the base peak in the <em>bombesin</em> spot is roughly at 1280 and in a few spectra at 1570. Later, we will export the spectra information, including the base peak of each spectrum, as a tabular file to find the correct m/z values of the most abundant features in the following spectra: x = 40 y = 50; x = 23, y = 70; x = 20, y = 73.</p>
 
-<p>Both plots can also serve to check for spraying gradients or reduced machine performance during acquisition time. The mouse kidney was measured from bottom to top (plot on page 2), the performance over time can be easier spotted in the upper plots on page 14 and 15, where the x axis represents the spectra in the order they were measured.</p>
+<p>As the feature around m/z 1350 is the highest feature in most of the spectra it is no suprise to find this feature as highest peak in the average spectra plot on page 20. The second highest peak is around 1300 m/z. It is obvious that those features are the calibrants <em>substance P</em> and <em>angiotensin</em> as they occur as high intensity peaks on the tissue as well as on the background. At least the concentration of <em>substance P</em> but also the concentration of <em>angiotensin I</em> could be reduced in further experiments. The concentration of <em>fibrinopeptide B</em> is chosen well as the peak at m/z 1750 is visible in most of the spectra plots but does not dominate the spectra as the other two calibrants do.</p>
 
-<h4 id="mass-spectra-and-mz-error">Mass spectra and m/z error</h4>
+<h4 id="mz-accuracy">m/z accuracy</h4>
 
-<p>From page 18 on, average mass spectra plots for each (valid) calibrant are plotted (A). Three different m/z scales are used and in one spectrum each blue dot indicates one data point. The theoretical <em>Angiotensin</em> I m/z (1296.69 - dashed blue line) is higher than the maximum of the peak (red line). There is no m/z value with exact m/z value of <em>Angiotensin I</em> (1296.69) but a close m/z value that is 1296.6776 (green line).</p>
+<p>A MSI dataset has not only deviations in the intensity dimension but also in the m/z dimension. Mass shifts can occur due to sample topography, small length changes in the flight tube or instable high voltage power supply. Mass accuracy is important for two reasons: First, the identification of m/z relies on accurate mass values and second, comparing m/z features across several spectra or even samples requires them to have similar values in order to be considered as the same molecule.</p>
 
-<figure id="figure-6"><img src="../../images/MSI1_mz_error.png" alt="mz error" title="m/z error plots" /><figcaption><span class="figcaption-prefix">Figure 6:</span> m/z error plots</figcaption></figure>
+<p>For precise m/z measurements the mass spectrometers are regularly calibrated with external calibrants that are often applied next to the sample. <a href="https://www.sciencedirect.com/science/article/pii/S1874391912003259?via%3Dihub">Gustafsson et al.</a> sprayed calibrants onto the complete sample and after MSI measurement used those internal calibrants to recalibrate every spectra what dramatically reduced the m/z error and improved the identification of the m/z features. The same approach was used for the mouse kidney dataset that we use in this tutorial: three internal calibrants are in the m/z range that we work with. These calibrants enable the calculation of the average m/z error as well as the m/z error in each spectrum.</p>
+
+<p>Starting at page 22 for each of the three calibrants average mass spectra are plotted. Three different m/z ranges are visualized while the fourth plot represents each datapoint as blue dot what helps to estimate the correct window sizes during preprocessing of the data. The dashed blue line represents the theoretical m/z, the red line indicates the m/z with the highest average intensity and the green line shows the m/z value that is closest to the theoretical m/z. For <em>angiotensin I</em> the theoretical m/z value is ~0.06 m/z higher than the peak maximum. There is no m/z value with the exact m/z of <em>angiotensin I</em> (1296.69), the closest m/z value is 1296.6776 (green line). The following barplot shows the average m/z error for each calibrant by taking the difference between the m/z of the peak maximum and the theoretical m/z. For <em>angiotensin I</em> this is 1296.6346 - 1296.69 = -0.0554 m/z and corresponds to 0.0554/1296.69*1000000 = 42.7 ppm. The next barplot shows the smallest m/z error that is possible due to the discrete m7z bins of the dataset: the difference between the closest m/z value and the theoretical m/z value.</p>
+
+<p>The average m/z error already gives a hint about the m/z accuracy but it is even more important to consider the m/z error in each individual spectrum. The plot on page 27 shows for each calibrant the m/z error in each spectrum. The spectra index corresponds to the order in which the spectra were measured and it becomes obvious that for all calibrants there is a m/z shift of about 200 ppm happening during acquisition. This gradient is also visible in the following plots where the m/z error in ppm is plotted in each pixel. The ppm error for <em>angiotensin</em> is about +50 ppm at the bottom of the dataset (start of acquisition) and decreases to about -150 ppm at the top of the image (end of acquisition). To be able to compare m/z features across the spectra they need to have the same m/z value, therefore recalibration with the <strong>MALDIquant preprocessing</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> or binning with the <strong>MSI preprocessing</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and a  tolerance of 200 ppm is highly recommended.</p>
+
+<figure id="figure-7"><img src="../../images/MSI1_mz_error.png" alt="mz error" title="Plots that show the average and individual m/z errors" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Plots that show the average and individual m/z errors</figcaption></figure>
 
 <blockquote class="tip">
   <h3 id="tip-tip-plotting-mass-spectra"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Plotting mass spectra</h3>
   <ul>
-    <li>The <strong>MSI plot spectra</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool allows to generate different mass spectra plots:</li>
-    <li>For single pixels, average spectra for the complete file or pixels of interest</li>
-    <li>With different m/z axis ranges (zoom function)</li>
+    <li>The <strong>MSI plot spectra</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool allows to single, average or overlayed mass spectra plots and to zoom into m/z regions of interest. The tool is explained in more detail in the tutorial <a href="/training-material/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.html">Mass spectrometry imaging: Examining the spatial distribution of analytes</a>.</li>
   </ul>
 </blockquote>
 
-<p>Figure D) The average plots already give a good estimation about the m/z error, but the error of each spectrum should also be considered. For this dataset a shift over time can be seen: At the beginning of the measurement the spectra had m/z errors up to 50 ppm for Fibrinopeptide B and during measurement the m/z error changed to -100ppm. This indicates that the dataset has to be binned or aligned with 150 ppm tolerance to ensure that the same peptides get a common m/z value.</p>
+<h1 id="exporting-msi-data-to-tabular-files-for-further-exploration-of-the-data">Exporting MSI data to tabular files for further exploration of the data</h1>
 
-<h1 id="exporting-msi-data-to-tabular-files">Exporting MSI data to tabular files</h1>
+<p>The data from the imzMl file format is not directly readable, therefore special tools are needed to extract its information. The <strong>MSI data exporter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> provides the option to export spectra, feature and intensity data from imzML files as tabular files. The underlaying values of the quality report can be found in the tabular files and allow to follow up on interesting aspects seen in quality report plots. Furthermore, tabular files are compatible with most software for statistical analysis and to generate plots. The intensity matrix of an unprocessed file might be huge as all pixels and all m/z values are stored in the file - therefore, the intensity matrix is often more helpful after preprocessing and filtering of the data. Despite preprocessing and filtering, the output tabular files are often too large for visual inspection. Galaxy offers many different text manipulation tools that are helpful to sort and filter such large tabular files.</p>
 
-<p>The data from the imzMl file format is not directly readable, therefore special tools are needed to extract information. The <strong>MSI data exporter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> provides the option to export spectra, feature and intensity data from imzML files as tabular files. The underlaying values of the quality report can be found in the tabular files and allow to follow up on interesting aspects seen in quality report plots. Furthermore, tabular files are compatible with most software for statistical analysis and to generate plots. The intensity matrix of an unprocessed file might be huge as all pixels and all m/z values are stored in the file - the intensity matrix is often more helpful after preprocessing and filtering of the data. Despite preprocessing and filtering, the output tabular files are often too large for visual inspection. Galaxy offers many different text manipulation tools that are helpful to sort and filter such large tabular files. &gt; To find the m/z value that has the highest mean intensity over all pixels, the data can be sorted on the column with the mean intensities:</p>
+<p>To find the m/z value that has the highest mean intensity across all pixels, the feature data can be sorted on the column with the mean intensities. 
+Furthermore the spectra data can be filtered for certain spectra to obtain some spectra properties such as the accurate value of its base peak that could not be accurately determined in the corresponding plot of the quality report before.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-export-and-explore-information-from-msi-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Export and explore information from MSI data</h3>
@@ -524,7 +538,7 @@ The average intensity is not helpful here, because we only spotted one drop next
         <li><em>“Multiple output files can be selected”</em>: <code class="highlighter-rouge">mz feature output</code> and <code class="highlighter-rouge">pixel output</code></li>
       </ul>
     </li>
-    <li>Run <strong>Sort data in ascending or descending order</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li>Run <strong>Sort data in ascending or descending order</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> from the ‘text manipulation’ category with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="highlighter-rouge">MSI data exporter on data 1: features</code> (output of <strong>MSI data exporter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Number of header lines”</em>: <code class="highlighter-rouge">1</code></li>
@@ -533,19 +547,23 @@ The average intensity is not helpful here, because we only spotted one drop next
         <li><em>“Flavor”</em>: <code class="highlighter-rouge">general numeric sort</code></li>
       </ul>
     </li>
+    <li>Run <strong>Select lines that match an expression</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> from the ‘filter and sort’ category with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="highlighter-rouge">MSI data exporter on data 1: spectra</code> (output of <strong>MSI data exporter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“the pattern”</em>: <code class="highlighter-rouge">(xy_40_40)|(xy_23_70)|(xy_20_73)</code></li>
+      </ul>
+    </li>
   </ol>
 
 </blockquote>
-
-<p>The m/z values with the highest mean intensities over all pixels are the monoisotopic peaks and isotopic peaks of the calibrant
-Substance P with some ppm errors because the data was not yet binned or aligned.</p>
 
 <blockquote class="question">
   <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>How many spectra does the dataset contain?</li>
-    <li>How many numeric properties does the m/z feature output contain?</li>
+    <li>How many numeric properties does the m/z feature output report?</li>
+    <li>Which m/z values have the highest mean intensities over all pixels?</li>
   </ol>
 
   <blockquote class="solution">
@@ -553,11 +571,14 @@ Substance P with some ppm errors because the data was not yet binned or aligned.
     <ol>
       <li>1581 - The pixel output file has 1582 lines, every line contains the information of one spectrum, but the first line is a header line (click on dataset “MSI data exporter on data 1: spectra” in the history, the line number of the file is written below the dataset name)</li>
       <li>7 - The feature file has 8 columns and except for the mz_names, all columns contain numeric properties, that can be used for further calculations.</li>
+      <li>The top m/z values are around 1347.71 and its isotopes (+1 m/z). This m/z feature derives from the <em>substance P</em> internal calibrant (the m/z value is not accurate and ondolates a bit because the data was not yet binned or aligned).</li>
     </ol>
   </blockquote>
 </blockquote>
 
-<h1 class="no_toc" id="conclusion">Conclusion</h1>
+<p>Exporting and sorting the feature information reveals that <em>substance P</em> has the highest mean intensity across all spectra what confirms our estimation when examining the average spectrum plot. 
+Exporting and filtering the spectra information for three pixel that have different base peaks confirms that the calibrants are the most abundant peaks in most of the spectra. <em>Substance P</em> is the base peak in spectrum xy_40_40 and thereby also the most abundant peak in most of the spectra (according to the colouring in the ‘most abundant m/z in each spectrum’ plot) regardless if they belong to tissue or matrix. Only the pixels that belong to the <em>bombesin</em> spot show different base peaks. In spectrum xy_23_70 <em>angiotensin I</em> is the highest feature while in spectrum xy_20_73 <em>fibrinopeptide B</em> appears as base peak.</p>
+
 
                 </div>
             </div>
@@ -571,7 +592,7 @@ Substance P with some ppm errors because the data was not yet binned or aligned.
                 
                 <li>imzML (continuous or processed file type) and Analyze7.5 can be uploaded into Galaxy via the composite upload.</li>
                 
-                <li>The MSI quality report should be applied several times during the analysis, especially to control that the preprocessing is going well.</li>
+                <li>The MSI Qualitycontrol tool gives valuable information before starting the analysis.</li>
                 
                 <li>The MSI data exporter can be used any time during the analysis when it is necessary to dig deeper into the data. Galaxy provides many text manipulation tools that can directly be applied on the exported tabular file to filter, sort, plot, ... the data.</li>
                 
