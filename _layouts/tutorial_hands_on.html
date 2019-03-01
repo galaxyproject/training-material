@@ -11,8 +11,8 @@ layout: base
   {% assign contrib = page.contributors %}
   {% capture contributors %}
   {% for contributor_id in contrib %}, {% assign c = contributors[contributor_id].name | default: contributor_id %}
-  <a href="{{ site.baseurl }}/hall-of-fame#{{ contributor }}" class="contributor-badge"><img src="https://avatars.githubusercontent.com/{{ contributor_id }}" alt="{{ c }}">{{ c }}</a>
-  {%- endfor %}{% endcapture %}
+  <a href="{{ site.baseurl }}/hall-of-fame#{{ contributor_id }}" class="contributor-badge"><img src="https://avatars.githubusercontent.com/{{ contributor_id }}" alt="{{ c }}">{{ c }}</a>
+  {% endfor %}{% endcapture %}
 {% endif %}
 
 <header>
