@@ -19,13 +19,11 @@ objectives:
 time_estimation: "75m"
 requirements:
   -
-    title: "Tool development and integration into Galaxy"
     type: "internal"
-    link: "/topics/dev/tutorials/tool-integration/slides.html"
-  -
-    title: "Prerequisites for building software/conda packages"
-    type: "internal"
-    link: "/topics/dev/tutorials/conda_sys/slides.html"
+    topic_name: dev
+    tutorials:
+      - tool-integration
+      - conda_sys
 key_points:
   - "Conda and Bioconda are Galaxy best practices for connecting Galaxy tools to underlying applications and libraries."
   - "Leveraging Conda allows easy installation of your tool's dependencies by Galaxy deployers."
@@ -595,7 +593,7 @@ build:
   skip: True  # [not py27]
 ```
 
-.footer[.center[https://conda.io/docs/building/meta-yaml.html#preprocessing-selectors ]]
+.footer[.center[https://conda.io/projects/conda-build/en/latest/source/define-metadata.html#preprocessing-selectors ]]
 
 ---
 
@@ -629,7 +627,7 @@ test:
 
 Please note that the Conda tests run inside the runtime environment and not in the build environment.
 
-.footnote[.center[https://conda.io/docs/building/meta-yaml.html#test-section ]]
+.footnote[.center[https://conda.io/projects/conda-build/en/latest/source/define-metadata.html#test-section ]]
 
 ---
 
@@ -846,7 +844,7 @@ source:
 {% endraw %}
 ```
 
-https://conda.io/docs/building/meta-yaml.html#templating-with-jinja
+https://conda.io/projects/conda-build/en/latest/source/define-metadata.html#templating-with-jinja
 
 ---
 

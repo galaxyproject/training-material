@@ -1,20 +1,23 @@
 #!/usr/bin/env python
-import json
-import os
 import argparse
-import yaml
-import requests
+import csv
 import io
-import pandas as pd
+import json
+import logging
 import multiprocessing.pool
+import os
+import requests
+import yaml
 
 
 def extract_public_galaxy_servers():
     """Extract a pandas Data frame with the public Galaxy servers"""
     r = requests.get('https://raw.githubusercontent.com/martenson/public-galaxy-servers/master/servers.csv')
     f = io.StringIO(r.text)
-    public_galaxy_servers = pd.read_csv(f, sep=",")
-    return public_galaxy_servers
+    reader = csv.reader(f, delimiter=",")
+    header = next(reader)
+    for row in reader:
+        yield dict(zip(header, row))
 
 
 def fetch_and_extract_individual_server_tools(server):
@@ -51,17 +54,16 @@ def fetch_and_extract_individual_server_tools(server):
 
     return server['name'], {
         'url': server['url'],
-        'tools': found_tools
+        'tools': set(found_tools)
     }
 
 
 def extract_public_galaxy_servers_tools():
     """Extract the tools from the public Galaxy servers using their API"""
-    servers = extract_public_galaxy_servers()
     server_tools = {}
 
     to_process = []
-    for index, server in servers.iterrows():
+    for server in extract_public_galaxy_servers():
         to_process.append(server)
 
     pool = multiprocessing.pool.ThreadPool(processes=20)
@@ -75,7 +77,7 @@ def extract_public_galaxy_servers_tools():
     return server_tools
 
 
-def check_tutorial(tool_filepath, server_tools):
+def check_tutorial(topic, tutorial, tool_filepath, server_tools):
     """Check which public Galaxy servers can run the tool in a tutorial"""
 
     # Extract the list of tools for the tutorial
@@ -94,22 +96,27 @@ def check_tutorial(tool_filepath, server_tools):
         if tutorial_tools.issubset(server_tools[server]['tools']):
             servers_supported[server] = server_tools[server]['url']
         else:
+            missing_tools = tutorial_tools - set(server_tools[server]['tools'])
+            logging.debug('MISSING:%s:%s/%s: %s', server, topic, tutorial, ', '.join(missing_tools))
             servers_unsupported[server] = server_tools[server]['url']
 
     return servers_supported, servers_unsupported
 
 
-def check_tutorials():
+def check_tutorials(server=None):
     """Check all tutorials to extract the instances on which the tutorials can
     be run and add this information to metadata/instances.yaml file"""
-    if os.path.exists('.cache.yaml'):
-        with open('.cache.yaml', 'r') as handle:
-            server_tools = yaml.load(handle)
+    if server:
+        name, server = fetch_and_extract_individual_server_tools({'url': server, 'name': 'none'})
+        server_tools = {name: server}
     else:
-        server_tools = extract_public_galaxy_servers_tools()
-        with open('.cache.yaml', 'w') as handle:
-            yaml.dump(server_tools, handle)
-
+        if os.path.exists('.cache.yaml'):
+            with open('.cache.yaml', 'r') as handle:
+                server_tools = yaml.load(handle)
+        else:
+            server_tools = extract_public_galaxy_servers_tools()
+            with open('.cache.yaml', 'w') as handle:
+                yaml.dump(server_tools, handle)
 
     instance_annot = {}
     for topic in os.listdir("topics"):
@@ -125,7 +132,7 @@ def check_tutorials():
             if not os.path.exists(tool_filepath):
                 continue
             # extract the instances on which the tutorial can be run
-            supported, unsupported = check_tutorial(tool_filepath, server_tools)
+            supported, unsupported = check_tutorial(topic, tutorial, tool_filepath, server_tools)
 
             # Training-focused view
             instance_annot[topic]['tutorials'].setdefault(tutorial, {'supported': False, 'instances': {}})
@@ -133,6 +140,10 @@ def check_tutorials():
             instance_annot[topic]['tutorials'][tutorial]['supported'] = any(instance_annot[topic]['tutorials'][tutorial]['instances'])
             instance_annot[topic]['supported'] |= instance_annot[topic]['tutorials'][tutorial]['supported']
             instance_annot[topic]['tutorials'][tutorial]['instances'].update({k: {'url': v, 'supported': False} for (k, v) in unsupported.items()})
+
+    # If we're checking a single server, do not update the metadata file.
+    if server:
+        return
 
     # add the conserved servers to the metadata/instances.yaml file
     inst_file = os.path.join("metadata", "instances.yaml")
@@ -142,5 +153,11 @@ def check_tutorials():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Extract which public Galaxy servers can run for the tutorials and add this information to a instance file')
+    parser.add_argument("--verbose", action='store_true')
+    parser.add_argument("--server", help='Only check a single server, skip fetching of the public servers list.')
     args = parser.parse_args()
-    check_tutorials()
+
+    if args.verbose:
+        logging.basicConfig(level=logging.DEBUG)
+
+    check_tutorials(server=args.server)

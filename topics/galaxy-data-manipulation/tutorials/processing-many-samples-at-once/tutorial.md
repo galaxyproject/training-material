@@ -180,4 +180,4 @@ The two histories and the workflow described in this page are accessible directl
 From there you can import histories to make them your own.
 
 ## 6. If things don't work...
-...you need to complain. Use [Galaxy's BioStar Channel](https://usegalaxy.org/biostar/biostar_redirect) to do this.
+...you need to complain. Use [Galaxy's Help Channel](https://help.galaxyproject.org/) to do this.
