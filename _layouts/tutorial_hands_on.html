@@ -8,8 +8,8 @@ layout: base
 {% assign topic_material = site.pages | topic_filter:page.topic_name %}
 {% assign language = site.other_languages | split: ", " %}
 {% if page.contributors %}
-  {% assign contrib = page.contributors | sort %}
-  {% capture contributors %}{% for contributor in contrib %}, {% assign c = contributors[contributor].name | default: contributor %} <a href="{{ site.baseurl }}/hall-of-fame#{{ contributor }}">{{ c }}</a> {% endfor %}{% endcapture %}
+  {% assign contrib = page.contributors %}
+  {% capture contributors %}{% for contributor in contrib %}, {% assign c = contributors[contributor].name | default: contributor %} <a href="{{ site.baseurl }}/hall-of-fame#{{ contributor }}">{{ c }}</a>{% endfor %}{% endcapture %}
 {% endif %}
 
 <header>
