@@ -8,6 +8,8 @@ questions:
   - "What is the effect of normal variation in the gut microbiome on host health?"
 objectives:
   - "Analyze of 16S rRNA sequencing data using the Mothur toolsuite in Galaxy"
+  - "Using a mock community to assess the error rate of your sequencing experiment"
+  - "Visualize sample diversity using Krona and Phinch"
 time_estimation: "4h"
 key_points:
   - "16S rRNA gene sequencing analysis results depend on the many algorithms used and their settings"
