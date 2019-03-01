@@ -35,7 +35,7 @@ Depending on the analyte of interest and the application, different mass spectro
 
 ![MSI measurement](../../images/msi_distribution_maldi_tof_imaging.png "MALDI TOF imaging of a mouse kidney")
 
-One common type of mass spectrometer for MSI is a MALDI Time-Of-Flight (MALDI-TOF) device. During MALDI ionization a laser shoots onto the sample that was covered with a special matrix which absorbs the laser energy and transfers it to the analytes. This process evaporizes and ionizes the analytes that due to their charge can then be accelerated in an electrical field towards the TOF tube. The time of flight through the tube to the detector is measured and as this correlates with the mass over charge (m/z) of the analyte, the flight time allows the calculation of m/z. During measurement complete mass spectra are acquired in thousands of sample spots. Each mass spectrum contains hundreds of analyte m/z and for each of those analytes an abundance heatmap showing the spatial distribution in the sample can be calculated and visualized. 
+One common type of mass spectrometer for MSI is a MALDI Time-Of-Flight (MALDI-TOF) device. During MALDI ionization a laser shoots onto the sample that was covered with a special matrix which absorbs the laser energy and transfers it to the analytes. This process evaporizes and ionizes the analytes that due to their charge can then be accelerated in an electrical field towards the TOF tube. The time of flight through the tube to the detector is measured and as this correlates with the mass over charge (m/z) of the analyte, the flight time allows the calculation of m/z. During measurement complete mass spectra with hundreds of m/z - intensity pairs are acquired in thousands of sample plots leading to big and complex data. Each mass spectrum is annotated with coordinates (x,y) that define its location in the sample. This allows to visualize the intensity distribution of each m/z feature in the sample as a heatmap.
 
 Depending on the analyte of interest, the sample type and the mass spectrometer, the sample preparation steps as well as the properties of the acquired data differ. Independent of those differences, the preparation and measurement of the sample is normally straightforward while the analysis of the large and complex data is the main bottleneck of a MSI experiment. 
 
@@ -111,10 +111,13 @@ The imzML file consists of two files: The first file contains the metadata in an
 
 ## Quality control of the data
 
+Before starting any analysis it is important to check the characteristics and quality of the MSI data. The MSI quality control tool creates a comprehensive pdf report that contains multiple descriptive visualizations of different data attributes. Here we will use the MSI quality control to get an idea about the m/z range and the shape of the chilli section. More details about the MSI quality control tool can be found in the tutorial [Mass spectrometry imaging 1: Loading and exploring MSI data]({{site.baseurl}}/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html).
+
 > ### {% icon hands_on %} Hands-on: Quality control 
 >
 > 1. **MSI Qualitycontrol** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"MSI data"*: `ltpmsi-chilli.imzML` (Input dataset)
+>    - *"Centroided input"*: `yes`
 >    - *"Processed imzML file"*: `yes`
 >        - *"Mass accuracy to which the m/z values will be binned"*: `0.1`
 >        - *"Unit of the mass accuracy"*: `mz`
@@ -123,15 +126,32 @@ The imzML file consists of two files: The first file contains the metadata in an
 >
 >    > ### {% icon comment %} Properties of the imzML file
 >    > To set the parameters for the mass spectrometry imaging tools correctly three parameters should be known about the dataset: Is the imzML file type processed or continuous, are the spectra profile or centroided mode and the accuracy of the mass spectrometer. For the chilli dataset the publication states that it is a processed imzML type in centroided mode. 
-To be sure this information can also be extracted by opening the local imzML component of the file in a text editor. There we read for the chilli dataset: 
+This information can also be extracted by opening the local imzML component of the file in a text editor or web browser. Line 10 and 11 state: 
 >    >
 >    >      <cvParam cvRef="MS" accession="MS:1000128" name="profile spectrum" value=""/>
 >    >      <cvParam cvRef="IMS" accession="IMS:1000031" name="processed" value=""/>
 >    >
->    >The spectra are in profile mode and not centroided. The information that the data is a processed imzML type is correct what means that each spectrum has an individual m/z axis opposite to the continuous imzML type where all spectra have the same m/z axis. In many software tools processed imzML files are not or only partly supported. The Cardinal software supports processed imzML files but requires a binning of the m/z values while reading the file. The bin size should be chosen according to the m/z accuracy of the mass spectrometer. For the chilli dataset we therefore use 0.1 m/z as this results in m/z bins of 0.2 m/z what corresponds to the m/z step size that was used in the publication. 
+>    > Starting from line 105 the "run" and "spectrumList" elements describe the acquired spectra in more detail:
+>    >
+>    >      <run defaultInstrumentConfigurationRef="IC1" id="_x0031_30704_IMGCHJ2">
+>    >      <spectrumList count="4166" defaultDataProcessingRef="pwiz_Reader_conversion">
+>    >        <spectrum defaultArrayLength="11127" id="controllerType=0 controllerNumber=1 scan=1" index="0" dataProcessingRef="pwiz_Reader_conversion">
+>    >          <cvParam cvRef="MS" accession="MS:1000511" name="ms level" value="1"/>
+>    >          <cvParam cvRef="MS" accession="MS:1000579" name="MS1 spectrum" value=""/>
+>    >          <cvParam cvRef="MS" accession="MS:1000127" name="centroid spectrum" value=""/>
+>    >          <cvParam cvRef="MS" accession="MS:1000528" name="lowest observed m/z" value="15"/>
+>    >          <cvParam cvRef="MS" accession="MS:1000527" name="highest observed m/z" value="2000"/>
+>    >          <cvParam cvRef="MS" accession="MS:1000504" name="base peak m/z" value="80.0377"/>
+>    >          <cvParam cvRef="MS" accession="MS:1000505" name="base peak intensity" value="3.72813e+006"/>
+>    >          <cvParam cvRef="MS" accession="MS:1000285" name="total ion current" value="2.42458e+008"/>
+>    >
+>    > This means that the file consists of 4166 spectra (count="4166") and that the imzML type is 'processed' as the first spectrum (scan="1") has 11127 m/z values (defaultArrayLength="11127) while the following spectra (not shown here) have different numbers of m/z values. In processed imzML files each spectrum has an individual m/z axis opposite to the continuous imzML type where all spectra have the same m/z axis. In many software tools processed imzML files are not or only partly supported. The MSI tools in Galaxy are based on [Cardinal](http://cardinalmsi.org/) and therefore support imzML files but require a binning of the m/z values while reading the file. The bin size should be chosen according to the m/z accuracy of the mass spectrometer. For the chilli dataset we therefore use 0.1 m/z as this results in m/z bins of 0.2 m/z what corresponds to the m/z step size that was used in the publication. 
+>    >
+>    > Regarding the spectra, type line 10 states that the spectra are in profile mode while the 'run' section declares spectrum 1 as centroided spectrum. As the 'run' section is directly linked to the spectra in the ibd file this is the information to trust. Furthermore, the 'dataProcessingList' element gives a hint that peak picking was performed and the publication states the same. 
 >    {: .comment}
 >
 {: .hands_on}
+
 
 > ### {% icon question %} Questions
 >
@@ -153,23 +173,22 @@ Open the quality report with the eye button and check the summary table on the f
 
 To further investigate mass spectra of different chilli compartments we select one pixel for each tissue area (pericarp, placenta and seeds) from the total ion chromatogram image. Knowing the exact shape of the chilli tissue from Figure 4 of the publication helps to find the corresponding areas. This are the pixels we have chosen for the tutorial: 
 
-    x     y     compartment
-    39    53    seeds
-    50    44    placenta
-    25    60    pericarp
+seeds: x=39 y=53, placenta: x=50 y=44, pericarp: x=25 y=60
 
-![quality report](../../images/msi_distribution_qc.png "Some images from the quality report")
+The relevant m/z range for VOCs was not known before the measurement and therefore chosen quite liberally. The average mass spectra plots gives a hint about the relevant m/z range of the sample with most peaks below 750 Th and no distinct peaks above 750 Th. 
 
-The average mass spectra plots show that there are not many analytes above 900 Th as the intensities in this m/z area are quite low and show no distinct peaks. 
+![quality report](../../images/msi_distribution_qc.png "Example plots from the quality report")
 
-## Plotting average  mass spectra
 
-We will follow up on the average mass spectra plots from the quality control report as well as on the differences of mass spectra from different chilli compartments. First, we generate more zoomed in mass spectra plots to get an idea about the m/z range that is relevant for LTP ionized analytes. Next, we will plot and compare mass spectra that derive from different regions of the chilli. 
+## Plotting average mass spectra
+
+We will follow up on the average mass spectra plots from the quality control report as well as on the differences of mass spectra from different chilli compartments. First, we generate more zoomed in mass spectra plots to get an idea about the m/z range that is relevant for VOCs. Next, we will plot and compare mass spectra that derive from different regions of the chilli. 
 
 > ### {% icon hands_on %} Hands-on: Average mass spectra
 >
 > 1. **MSI plot spectra** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"MSI data"*: `ltpmsi-chilli.imzML` (Input dataset)
+>    - *"Centroided input"*: `yes`
 >    - *"Processed imzML file"*: `yes`
 >        - *"Mass accuracy to which the m/z values will be binned"*: `0.1`
 >        - *"Unit of the mass accuracy"*: `mz`
@@ -224,10 +243,10 @@ We will rerun the msi spectra plot tool and add the annotation of the pixels tha
 > 1. Create a tabular file with the coordinates of interest and rename it:
 >
 >    ```
-    x     y     compartment
-    39    53    seeds
-    50    44    placenta
-    25    60    pericarp
+x     y     compartment
+39    53    seeds
+50    44    placenta
+25    60    pericarp
 >    ```
 >
 >    > ### {% icon tip %} Tip: Creating a new file
@@ -278,8 +297,9 @@ The single spectra that derive from different chilli departments show quite some
 
 > ### {% icon hands_on %} Hands-on: filtering for a m/z range
 >
-> 1. **MSI filtering** {% icon tool %} with the following parameters:
+> 1. **MSI filtering** {% icon tool %} (Version 1.12) with the following parameters:
 >    - {% icon param-file %} *"MSI data"*: `ltpmsi-chilli.imzML` (Input dataset)
+>    - *"Centroided input"*: `yes`
 >    - *"Processed imzML file"*: `yes`
 >        - *"Mass accuracy to which the m/z values will be binned"*: `0.1`
 >        - *"Unit of the mass accuracy"*: `mz`
@@ -303,27 +323,32 @@ The single spectra that derive from different chilli departments show quite some
 >
 {: .question}
 
-Cardinal tools write only continuous imzMl formats, therefore from now on the dataset is in continuous imzML format and "processed imzML file" can be set to 'no' in the following tools. 
+The MSI tools are only able to write outputs as continuous imzML format, therefore from now on the dataset is in continuous imzML format and "processed imzML file" can be set to 'no' in the following tools. 
 
 # Multiple and overlayed analyte images
 
 ## Automatic generation of analyte images
 
-For the chilli dataset we want to know which m/z features have a localized distribution in the fruit. This is done by automatically generating distribution images for all analytes (m/z features) and then visually identify which features are localized in specific compartments of the fruit. [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9) scan the m/z range with a step size of 0.2 Th and a tolerance of 0.4 Th what resulted in more than 2000 images which they visually explored for localized features. In this training we will only generate images for the two mass ranges where we have already seen high intensity peaks in the spectra plots: around 60 and 80 m/z. We already binned the dataset to 0.2 Th and therefore need only to specify the m/z tolerance of 0.4 Th. The large tolerance was chosen to obtain images from overlapping m/z ranges to make the signal intensity more robust against small m/z inaccuracies in individual mass spectra. We obtain the m/z features with the MSI data exporter tool and then filter for the m/z ranges of interest and use the resulting tabular file to automatically generate the analyte images.
+
+The main question for the chilli dataset is: Which m/z features have a localized distribution in the fruit. This question can be addressed by automatically generating distribution images for all analytes (m/z features) and then visually identifying which features are localized in specific compartments of the fruit. [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9) scan the m/z range with a step size of 0.2 Th and a tolerance of 0.4 Th what resulted in more than 2000 images which they visually explored for localized features. In this training we will only generate images for the two mass ranges where we have already seen high intensity peaks in the spectra plots: around 60 and 80 Th. 
+
+This requires three steps: First the extraction of all m/z features of the dataset with the MSI data exporter. Second, the filtering for all m/z features in the m/z ranges that we are interested in: between 55 and 65 Th as well as 75 and 85 Th (this step can be skipped to obtain distribution images for all features). Third the MSI mz image tool is able to automatically generate distribution images for each of the m/z from the second step. As the data is already binned to 0.2 Th only the m/z tolerance of 0.4 Th has to be specified. The large tolerance was chosen to obtain images from overlapping m/z ranges to make the signal intensity more robust against small m/z inaccuracies in individual mass spectra.
 
 > ### {% icon hands_on %} Hands-on: Generation of multiple analyte images
 >
 > 1. **MSI data exporter** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"MSI data"*: `MSI filtering on data 1: imzML` (output of **MSI filtering** {% icon tool %})
+>    - *"Centroided input"*: `yes`
 >    - *"Multiple output files can be selected"*: `mz feature output`
 >
-> 2. **Filter** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Filter data on any column using simple expressions"*: `MSI data exporter on data 6: features` (output of **MSI data exporter** {% icon tool %})
->    - *"With following condition"*: `c2>=60 and c2<=65 or c2>=80 and c2<=85`
+> 2. **Filter data on any column using simple expressions** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Filter"*: `MSI data exporter on data 6: features` (output of **MSI data exporter** {% icon tool %})
+>    - *"With following condition"*: `c2>=55 and c2<=65 or c2>=75 and c2<=85`
 >    - *"Number of header lines to skip"*: `1`
 >
 > 3. **MSI mz images** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"MSI data"*: `MSI filtering on data 1: imzML` (output of **MSI filtering** {% icon tool %})
+>    - *"Centroided input"*: `yes`
 >    - {% icon param-file %} *"m/z of interest (e.g. internal Calibrants)"*: `Filter on data 8` (output of **Filter** {% icon tool %})
 >    - *"Column with m/z values"*: `column:2`
 >    - *"Column with name of m/z values"*: `column:1`
@@ -347,19 +372,19 @@ For the chilli dataset we want to know which m/z features have a localized distr
 >
 {: .question}
 
+![best images](../../images/msi_distribution_auto_images.png "Distribution images for the analytes with the most localized distribution")
+
 In this tutorial we only evaluated 102 features, while the authors of this study evaluated more than 2000 images visually. This process is time consuming and biased by the judgment of the scientist, still this method seems to be quite common. Several attempts have been made to circumvent this process and obtain m/z features with localized distribution automatically [Alexandrov and Bartels](https://doi.org/10.1093/bioinformatics/btt388) and [Ingelese et al.](https://doi.org/10.1093/bioinformatics/bty622).
-After m/z features with a localized distribution have been found, it is interesting to identify them. Therefore [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9) performed additional gas and liquid chromatography mass spectrometry (GC-MS and LC-MS) which enabled the high certainty identification of several features. Unfortunately the highly localized features 62.2 and 84.2 could not be identified but the defined localization implies their biological importance. Several capsaicinoids could be identified amongst them capsaicine with a m/z of 306.6. 
+After m/z features with a localized distribution have been found, it is interesting to identify them. Therefore [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9) performed additional gas and liquid chromatography mass spectrometry (GC-MS and LC-MS) which enabled the high certainty identification of several features. Unfortunately the highly localized features 62.2 and 84.2 could not be identified but the defined localization implies their biological importance. Several capsaicinoids could be identified amongst them capsaicine (306.6 Th).
 
 > ### {% icon comment %} Identification of m/z features
 > The identification of m/z features in MSI experiments is not always necessary but can increase the confidence in the analysis and the molecular understanding. M/z features are either matched to databases or for more confidence another experiment is performed on the same sample to restrict the identification possibilities to analytes that are actually present in the sample. In this study other mass spectrometry techniques were applied and could identify several m/z features but at the same time features with defined localization could not be identified (e.g. 62.2 Th and 84.2 Th). This molecules can be fragments, metabolites or contaminants that are not available with the used mass spectrometry techniques. 
 > Targeted analysis can be performed if the m/z of the molecule of interest is already known (e.g. when studying the tissue distribution of a drug and its known metabolites). In this case distribution images for the molecules of interest are a good starting point and scanning through all m/z features might not be necessary.
 {: .comment}
 
-![best images](../../images/msi_distribution_auto_images.png "Distribution images for the analytes with the most localized distribution")
-
 ## Overlay image for three analyte features
 
-Next, we will plot the distribution of molecules with different distributions in the tissue: 306.6 Th (Capsaicin), 62.2 Th and 84.2 Th. 
+To get an idea about the distribution of capsaicin in the chilli we will plot its distribution in an overlay image with the two unknown but localized features 62.2 Th and 84.2 Th. 
 
 > ### {% icon hands_on %} Hands-on: Overlay image for several m/z features
 >
@@ -383,6 +408,7 @@ Next, we will plot the distribution of molecules with different distributions in
 >
 > 2. **MSI mz images** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"MSI data"*: `MSI filtering on data 1: imzML` (output of **MSI filtering** {% icon tool %})
+>    - *"Centroided input"*: `yes`
 >    - {% icon param-file %} *"m/z of interest (e.g. internal Calibrants)"*: `mz features` (Input dataset)
 >    - *"Column with m/z values"*: `column:1`
 >    - *"Column with name of m/z values"*: `column:1`
