@@ -60,7 +60,7 @@ This workflow includes multiple computationally-intensive steps. With high serve
 
 > * BLAST against numerous databases
 > * InterProScan
-> * phage spannin search tools
+> * phage spanin search tools
 > * various other analyses
 
 > ### {% icon tip %} Note that…
@@ -73,4 +73,4 @@ This workflow includes multiple computationally-intensive steps. With high serve
 
 # Completion
 
-Once all the datasets and tools have completed, then functional annotation within Apollo may begin. How to use the evidence to predict gene function is beyond the scope of this tutorial and is touched on in the [Annotation in Apollo tutorial]({{ site.baseurl }}//topics/genome-annotation/tutorials/annotation-in-apollo/tutorial.html). General Apollo function help can be found in [tutorial 1]({{ site.baseurl }}//topics/genome-annotation/tutorials/getting-started-with-apollo/tutorial.html) and [tutorial 2]({{ site.baseurl }}//topics/genome-annotation/tutorials/annotation-in-apollo/tutorial.html).
+Once all the datasets and tools have completed, then functional annotation within Apollo may begin. How to use the evidence to predict gene function is beyond the scope of this tutorial and is touched on in the [Annotation in Apollo tutorial]({{ site.baseurl }}//topics/phage-annotation-pipeline/tutorials/annotation-in-apollo/tutorial.html). General Apollo function help can be found in the [Getting Started with Apollo]({{ site.baseurl }}//topics/introduction/tutorials/getting-started-with-apollo/tutorial.html) tutorial.
