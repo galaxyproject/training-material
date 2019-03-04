@@ -310,21 +310,46 @@
 
 <div class="container main-content">
     <script type="application/ld+json">
-   
+        
+
+
 {
   "@context": "http://schema.org",
-  "@type": "CreativeWork",
-  "name": "Reference Data with CVMFS",
-  "accessModeSufficient": "visual",
-  "accessibilityControl": "fullMouseControl",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
   "accessibilityFeature": [
     "alternativeText",
     "tableOfContents"
   ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
   "audience": {
     "@type": "EducationalAudience",
     "educationalRole": "students"
   },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Reference Data with CVMFS",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -332,9 +357,84 @@
   },
   "interactivityType": "mixed",
   "isAccessibleForFree": true,
-  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
-  "learningResourceType": "",
-  "url": "/topics/admin/tutorials/cvmfs/tutorial.html",
+  "license": "/blob//LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "courseCode": "admin / cvmfs / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Reference Data with CVMFS' tutorial",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Reference Data with CVMFS",
+    "description": "Reference Data with CVMFS",
+    "learningResourceType": "tutorial",
+    "interactivityType": "expositive",
+    "provider": {
+      "@type": "Organization",
+      "email": "galaxytrainingnetwork@gmail.com",
+      "name": "Galaxy Training Network",
+      "url": "https://galaxyproject.org/teach/gtn/"
+    }
+  },
+  "url": "https://galaxyproject.github.io//training-material/topics/admin/tutorials/cvmfs/tutorial.html",
+  "timeRequired": "PT1H",
+  "keywords": "ansible",
+  "description": "Reference Data with CVMFS\\nThe objectives are:\n - Have an understanding of what CVMFS is and how it works\n - Install and configure the CVMFS client on a linux machine and mount the Galaxy reference data repository\n - Configure your Galaxy to use these reference genomes and indices\n - Use an ansible playbook for all of the above.\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "Course",
+      "url": "https://galaxyproject.github.io//training-material/topics/admin/tutorials/ansible/tutorial.html",
+      "name": "Hands-on for 'ansible' tutorial",
+      "description": "ansible",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://galaxyproject.github.io//training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
+      "name": "Hands-on for 'ansible-galaxy' tutorial",
+      "description": "ansible-galaxy",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    "A server/VM on which to deploy CVMFS",
+    {
+      "@type": "CreativeWork",
+      "url": "https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html",
+      "name": "Ansible setup on your local machine"
+    }
+  ],
+  "hasPart": [
+
+  ],
   "mentions": [
     {
       "@type": "Thing",
@@ -342,21 +442,35 @@
       "name": "Training data for Reference Data with CVMFS tutorial"
     }
   ],
-  "timeRequired": "PT1H",
-  "contributor": [
+  "author": [
     {
       "@type": "Person",
-      "name": "slugger70"
+      "name": "Simon Gladman"
     },
     {
       "@type": "Person",
-      "name": "erasche"
+      "name": "Helena Rasche"
     }
   ],
-  "keywords": "ansible",
-  "description": "The objectives are:\n - Have an understanding of what CVMFS is and how it works\n - Install and configure the CVMFS client on a linux machine and mount the Galaxy reference data repository\n - Configure your Galaxy to use these reference genomes and indices\n - Use an ansible playbook for all of the above.\n\n"
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Simon Gladman"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server administration",
+      "description": "Resources related to configuration and maintenance of Galaxy servers",
+      "url": "https://galaxyproject.github.io//training-material/topics/admin/"
+    }
+  ]
 }
-
     </script>
     
     <section class="tutorial">
