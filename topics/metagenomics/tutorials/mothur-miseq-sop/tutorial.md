@@ -689,7 +689,7 @@ At this point we have curated our data as far as possible and we're ready to see
 
 > ### {% icon tip %} Tip: Skipping the mock community analysis
 >
-> The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to [the next section](#preparing-for-analysis)
+> The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to [the next section](#removing-mock-sample)
 > where we will cluster our sequences into OTUs, classify them and perform some visualisations.
 >
 {: .tip}
