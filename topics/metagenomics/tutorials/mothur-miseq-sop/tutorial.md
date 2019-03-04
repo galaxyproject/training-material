@@ -240,15 +240,15 @@ and several other metrics.
 
 In this experiment we used paired-end sequencing of the V4 region of the 16S rRNA gene. This region is about 253 bp long.
 The sequencing was done from either end of each fragment. Because the reads are about 250 bp in length, this results in a
-significant overlap between the reads. We will now combine these pairs of reads into *contigs*.
+significant overlap between the forward and reverse reads in each pair. We will combine these pairs of reads into *contigs*.
 
 ![Merging into contigs](../../images/16S_merge_contigs.png)
 
 This is done using the `make.contigs` command, which requires the paired collection as input. This command
-will look at each read, take the reverse complement of the corresponding reverse read, and determine the overlap
-between the two sequences. Where an overlapping base call differs between the two reads, the quality score is used to determine
-the consensus base call. A new quality score is derived by combining the two original quality scores in both of the reads for all
-the overlapping positions.
+will look at each pair, take the reverse complement reverse read, and then determine the overlap between the
+two sequences. Where an overlapping base call differs between the two reads, the quality score is used to determine
+the consensus base call. A new quality score is derived by combining the two original quality scores in both of
+the reads for all the overlapping positions.
 
 > ### {% icon comment %} Algorithm details
 >
@@ -267,15 +267,15 @@ the overlapping positions.
 > - **Make.contigs** {% icon tool %} with the following parameters
 >   - {% icon param-select %} *"Way to provide files"*: `Multiple pairs - Combo mode`
 >   - {% icon param-collection %} *"Fastq pairs"*: the collection you just created
->   - Leave all other parameters to the default settings <br><br>
+>   - Leave all other parameters to the default settings
 >
 {: .hands_on}
 
 
-
-This step merges the forward and reverse reads into contigs for each pair, and
-then combines the results of into a single fasta file. To retain information about
-which reads originated from which samples, it also made a group file. View that
+This step combined the forward and reverse reads for each sample, and also combined
+the resulting contigs from all samples into a single file. So we have gone from a paired
+collection of 20x2 files, to a single FASTQ file. In order to retain information about
+which reads originated from which samples, the tool also output a *group file*. View that
 file now, it should look something like this:
 
 ```
@@ -321,14 +321,13 @@ Mean:        1        252.811    252.811    0.70063  4.44854
 
 This tells us that there are 152,360 sequences, mostly varying between 248 and 253 bases in length.
 The longest read in the dataset is 502 reads. Recall that our region of interest, the V4 region of the
-16S gene, is only around 250
+16S gene, is only around 250, so any reads significantly longer than this expected value likely did not
+assemble well in the `make.contigs` step. Furthermore, we see that 2,5% of our reads had between 6 and 249
+ambiguous base calls (`Ambigs` column). In the next steps we will clean up our data by removing these
+problematic reads.
 
-Interestingly, the longest read in the dataset is 502 bp. Be suspicious of this. Recall that the reads
-are supposed to be 251 bp each. This read clearly didn't assemble well (or at all). Also, note that at
-least 2.5% of our sequences had some ambiguous base calls. We'll take care of these issues in the next
-step when we run `screen.seqs`.
-
-The following tool will remove any sequences with ambiguous bases (`maxambig` parameter) and anything longer than 275 bp (`maxlength` parameter).
+We can do this data cleaning using the `screen.seqs` command. This step will remove any sequences with any
+ambiguous bases (`maxambig` parameter) and any contigs longer than 275 bp in length (`maxlength` parameter).
 
 > ### {% icon hands_on %} Hands-on: Filter reads based on quality and length
 >
@@ -355,9 +354,12 @@ The following tool will remove any sequences with ambiguous bases (`maxambig` pa
 ## Processing improved sequences
 
 ### Optimize files for computation
-Because we are sequencing many of the same organisms, we anticipate that many of our sequences are
-duplicates of each other. Because it's computationally wasteful to align the same thing a bazillion
-times, we'll unique our sequences using the `unique.seqs` command:
+
+Microbiome samples typically contain a large numbers of the same organism, and therefore we expect
+to find many identical sequences in our data. In order to speed up computation, we first determine
+the unique reads, and simple remember how many times each of these different reads was observed in
+the original dataset. We can do this by using the `unique.seqs` command.
+
 
 > ### {% icon hands_on %} Hands-on: Remove duplicate sequences
 >
@@ -378,9 +380,11 @@ times, we'll unique our sequences using the `unique.seqs` command:
 > {: .question}
 {: .hands_on}
 
-This tool outputs two files, one is a fasta file containing only the unique sequences, and a *names files*.
-The names file consists of two columns, the first contains the sequence names for each of the unique
-sequences, and the second column contains all other sequence names that are identical to the representative
+Here we see that this step has greatly reduced the size of our FASTQ file; not only will this speed up further computational
+steps, it will also greatly reduce the amount of disk space needed to store all the intermediate files generated during
+this analysis. This `unique.seqs` tool created two files, one is a fasta file containing only the unique sequences,
+and the second is a so-called *names files*. This names file consists of two columns, the first contains the sequence names
+for each of the unique sequences, and the second column contains all other sequence names that are identical to the representative
 sequence in the first column.
 
 ```
@@ -391,7 +395,15 @@ read_name7    read_name8
 ...
 ```
 
-To reduce file sizes further and streamline analysis, we can now summarize the data in a *count table*.
+To recap, we now have the following files:
+
+- a FASTQ file containing every distinct sequence in our dataset (the *representative* sequences)
+- a *group file* containing information about which samples
+- a *names file* containing the list of duplicate sequences
+
+To further reduce file sizes and streamline analysis, we can use the `count.seqs` command to combine
+the *group file* and the *names file* into a single *count table*.
+
 
 > ### {% icon hands_on %} Hands-on: Generate count table
 >
@@ -411,7 +423,7 @@ M00967_43_000000000-A3JHG_1_1101_13234_1983  10522   425    281   340     205
 ...
 ```
 
-The first column contains the read names of the representative sequence, and the subsequent columns contain
+The first column contains the read names of the representative sequences, and the subsequent columns contain
 the number of duplicates of this sequence observed in each sample.
 
 ### Sequence Alignment
@@ -421,6 +433,7 @@ For more information on the topic of alignment, please see our training material
 
 We are now ready to align our sequences to the reference. This step is an important
 step to perform to improve the clustering of your OTUs [[Schloss 2013]](https://doi.org/10.1038/ismej.2012.102)
+
 
 > ### {% icon hands_on %} Hands-on: Align sequences
 >
@@ -451,11 +464,10 @@ Mean:       1967.99  11550    252.462 0        4.36693
 total # of seqs:    128872
 ```
 
-So what does this mean? You'll see that the bulk of the sequences start at position 1968 and end at position 11550.
-Some sequences start at position 1250 or 1982 and end at 10693 or 13400. These deviants from the mode positions
-are likely due to an insertion or deletion at the terminal ends of the alignments. Sometimes you'll see sequences
-that start and end at the same position indicating a very poor alignment, which is generally due to non-specific
-amplification.
+
+The `Start` and `End` columns tell us that the majority of reads aligned between positions 1968 and 11550,
+which is what we expect to find given the reference file we used. However, some reads align to very different positions,
+which could indicate insertions or deletions at the terminal ends of the alignments.
 
 ### More Data Cleaning
 
