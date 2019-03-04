@@ -7,6 +7,13 @@ layout: base
 {% assign instances = site.data['instances'] %}
 {% assign topic_material = site.pages | topic_filter:page.topic_name %}
 {% assign language = site.other_languages | split: ", " %}
+{% if page.contributors %}
+  {% assign contrib = page.contributors %}
+  {% capture contributors %}
+  {% for contributor_id in contrib %}, {% assign c = contributors[contributor_id].name | default: contributor_id %}
+  <a href="{{ site.baseurl }}/hall-of-fame#{{ contributor_id }}" class="contributor-badge"><img src="https://avatars.githubusercontent.com/{{ contributor_id }}" alt="{{ c }}">{{ c }}</a>
+  {%- endfor %}{% endcapture %}
+{% endif %}
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -148,10 +155,10 @@ layout: base
     <script type="application/ld+json">
         {% include _includes/material.jsonld material=page topic=topic site=site %}
     </script>
-    
+
     <section class="tutorial">
         <h1 data-toc-skip>{{ page.title }}</h1>
-
+        <div class="contributors-line">By: {{ contributors | remove_first: ', ' }} </div>
         <blockquote class="overview">
             <h3>Overview</h3>
 
@@ -259,10 +266,7 @@ layout: base
     </section>
 </div>
 
-{% if page.contributors %}
-{% assign contrib = page.contributors | sort %}
-{% capture contributors %}{% for contributor in contrib %}, {{contributors[contributor].name | default: contributor }}{% endfor %}{% endcapture %}
-{% endif %}
+
 <footer>
     <div class="container">
         <p>
