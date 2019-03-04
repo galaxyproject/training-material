@@ -31,7 +31,7 @@ creators of the Mothur software package, the [Schloss lab](http://www.schlosslab
 
 > ### Agenda
 >
-> In this tutorial, we will:
+> In this tutorial, we will cover:
 >
 > 1. TOC
 > {:toc}
@@ -351,9 +351,8 @@ ambiguous bases (`maxambig` parameter) and any contigs longer than 275 bp in len
 > {: .question}
 {: .hands_on}
 
-## Processing improved sequences
 
-### Optimize files for computation
+## Optimize files for computation
 
 Microbiome samples typically contain a large numbers of the same organism, and therefore we expect
 to find many identical sequences in our data. In order to speed up computation, we first determine
@@ -426,7 +425,7 @@ M00967_43_000000000-A3JHG_1_1101_13234_1983  10522   425    281   340     205
 The first column contains the read names of the representative sequences, and the subsequent columns contain
 the number of duplicates of this sequence observed in each sample.
 
-### Sequence Alignment
+## Sequence Alignment
 
 For more information on the topic of alignment, please see our training materials
 [here]({{site.baseurl}}{% link topics/sequence-analysis/index.md %})
@@ -469,7 +468,7 @@ The `Start` and `End` columns tell us that the majority of reads aligned between
 which is what we expect to find given the reference file we used. However, some reads align to very different positions,
 which could indicate insertions or deletions at the terminal ends of the alignments.
 
-### More Data Cleaning
+## More Data Cleaning
 
 To make sure that everything overlaps the same region we'll re-run screen.seqs to get sequences that
 start at or before position 1968 and end at or after position 11550. We'll also set the maximum
@@ -566,7 +565,7 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 {: .hands_on}
 
 
-### Chimera Removal
+## Chimera Removal
 At this point we have removed as much sequencing error as we can, and it is time to turn our attention to
 removing sequencing artefacts known as chimeras.
 
@@ -612,7 +611,7 @@ when they're the most abundant sequence in another sample. This is how we do it:
 
 
 
-### Removal of non-bacterial sequences
+## Removal of non-bacterial sequences
 
 As a final quality control step, we need to see if there are any "undesirables" in our dataset. Sometimes when
 we pick a primer set they will amplify other stuff that survives to this point in the pipeline, such as
@@ -854,7 +853,7 @@ This is not a perfect world. But this is pretty darn good!
 
 Now that we have assessed our error rates we are ready for some real analysis.
 
-## Preparing for analysis
+# Preparing for analysis
 
 ### Removing Mock sample
 We're almost to the point where you can have some fun with your data (I'm already having fun, aren't you?).
@@ -875,7 +874,12 @@ the `remove.groups` command:
 {: .hands_on}
 
 
-### Clustering sequences into OTUs
+# OTU-based Analysis
+
+In this tutorial we will continue with an OTU-based approach, for the phylotype and phylogenic
+approaches, please refer to the [Mothur wiki page](https://www.mothur.org/wiki/MiSeq_SOP).
+
+## Clustering sequences into OTUs
 
 Now, we have a couple of options for clustering sequences into OTUs. For a small dataset like this, we could
 do the traditional approach using `dist.seqs` and `cluster` as we did with the Mock sample.
@@ -949,11 +953,6 @@ sequences (100%) were classified as being members of the Alistipes.
 > {: .solution }
 {: .question}
 
-
-In this tutorial we will continue with this otu-based approach, for the phylotype and phylogenic
-approaches, please refer to the [Mothur wiki page](https://www.mothur.org/wiki/MiSeq_SOP).
-
-# OTU-based Analysis
 
 Let's do something more interesting and actually analyze our data. We'll focus on the OTU-based dataset. The
 phylotype-based analysis is essentially the same. Also, remember that our initial question had to do with the
