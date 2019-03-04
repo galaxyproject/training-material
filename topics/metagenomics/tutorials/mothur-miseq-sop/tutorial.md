@@ -1061,8 +1061,10 @@ and many different metrics have been proposed to quantify diversity [Finotello e
 > >
 > {: .question}
 > <br><br>
+>
 > Even when two samples have identical richness and evenness, we still may conclude that one is more diverse than
-> other if the species are very dissimilar (have high phylogenetic distance)
+> other if the species are very dissimilar in one of the samples (have high phylogenetic distance), but very
+> closely related to each other in the second sample.
 >
 > ![](../../images/phylogenetic-distance.png){: width="50%"}
 >
