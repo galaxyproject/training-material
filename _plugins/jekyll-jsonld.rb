@@ -26,6 +26,7 @@ module Jekyll
         #"coursePrerequisites" described below
         #"educationalCredentialAwarded": ,
         #"hasCourseInstance": ,
+        #"skillLevel" described below
 
         # Properties from CreativeWork
         #"about" described below
@@ -327,6 +328,10 @@ module Jekyll
         })
       end
       data['about'] = about
+
+      if material.key?('level') then
+        data['skillLevel'] = material['level']
+      end
 
       return JSON.pretty_generate(data)
     end

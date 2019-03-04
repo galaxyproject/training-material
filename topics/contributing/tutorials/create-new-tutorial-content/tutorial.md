@@ -92,6 +92,7 @@ The `tutorial.md` needs to start with some metadata at the top:
 
 - `layout: tutorial_hands_on`: keep the default
 - `title`: title of the tutorial (it will appear on the tutorial page and the topic page)
+- `level`: `Introductory`, `Intermediate` or `Advanced`
 - `enable`: `false` to hide your tutorial from the topic page (optional)
 - `zenodo_link`: link on Zenodo to the input data for the tutorial
 

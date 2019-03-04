@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Galaxy 101"
 zenodo_link: ""
+level: Introductory
 questions:
   - "Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?"
 objectives:

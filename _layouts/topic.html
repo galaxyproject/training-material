@@ -50,6 +50,11 @@ layout: base
                     <tr>
                         <td>
                             {{ material.title }}
+                            {% if material.level %}
+                                <div class="">
+                                    <span class="label level">{{ material.level }}</span>
+                                </div>
+                            {% endif %}
                             {% if material.tags %}
                                 <div class="">
                                     {% for tag in material.tags %}
