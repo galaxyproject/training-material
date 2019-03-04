@@ -1040,8 +1040,8 @@ and several diversity indices are currently available [Finotello et al. 2016].
 
 ### Alpha diversity
 
-Let's start our analysis by analyzing the alpha diversity of the samples. First we will generate rarefaction
-curves describing the number of OTUs observed as a function of sampling effort. We'll do this with the
+In order to estimate alpha diversity of our samples, we first generate the rarefaction curves. Recall that
+rarefaction measure the number of observed OTUs as a function of the subsampling size. We do this with the
 `Rarefaction.single` command:
 
 > ### {% icon hands_on %} Hands-on: Calculate Rarefaction
@@ -1088,19 +1088,15 @@ Let's plot the rarefaction curve for a couple of our sequences:
 {: .hands_on}
 
 From the resulting image we can see that the rarefaction curves for all samples have started to level
-off so we are confident we cover a large part of our sample diversity.
+off so we are confident we cover a large part of our sample diversity:
 
 ![Rarefaction curves](../../images/rarefaction_curves.png)
 
-Alas, rarefaction is not a measure of richness, but a measure of diversity. If you consider two communities
-with the same richness, but different evenness then after sampling a large number of individuals their
-rarefaction curves will asymptote to the same value. Since they have different evennesses the shapes of
-the curves will differ. Therefore, selecting a number of individuals to cutoff the rarefaction curve isn't
-allowing a researcher to compare samples based on richness, but their diversity.
 
-Finally, let's get a table containing the number of sequences, the sample coverage, the number of observed
-OTUs, and the Inverse Simpson diversity estimate using the `Summary.single` command. To standardize everything,
-let's randomly select 2440 sequences from each sample 1000 times and calculate the average:
+Finally, let's get a summary containing the number of sequences, the sample coverage, the number of observed
+OTUs, and the Inverse Simpson diversity estimate using the `Summary.single` command. The following command
+will randomly subsample down to 2389 sequences, repeat this process 1000 times, and report the average:
+
 
 > ### {% icon hands_on %} Hands-on: Summary.single
 >
@@ -1135,10 +1131,12 @@ label   group   sobs          coverage    invsimpson   invsimpson_lci   invsimps
 0.03    F3D9    162.000000    0.994803    24.120541    23.105499        25.228865       5773.000000
 ```
 
-Interestingly, the sample coverages were all above 97%, indicating that we did a pretty good job of sampling
-the communities. Plotting the richness or diversity of the samples would show that there was little difference
-between the different animals or between the early and late time points. You could follow this up with a
-repeated-measures ANOVA and find that there was no significant difference based on sex or early vs. late.
+
+Notice that the sample coverages are all above 97%, which would indicate we did a pretty good job of sampling the communities.
+We also see that there is little difference in diversity or richness between early and late time points (or indeed bewteen
+different animals if we had used the full dataset). We could follow this up with statistical tests (e.g. AMOVA) to confirm our
+feeling that there is no significant difference based on sex or early vs. late, but this is beyond the scope of this tutorial.
+
 
 ### Beta diversity
 
@@ -1146,10 +1144,10 @@ Beta diversity is a measure of the similarity of the membership and structure fo
 The default calculator in the following section is *thetaYC*, which is the [Yue & Clayton theta similarity
 coefficient](http://csyue.nccu.edu.tw/2005communicationindex.pdf)
 
+We will calculate this with the `Dist.shared` command, which will allow us to rarefy our data to a common number of sequences.
+
+
 > ### {% icon hands_on %} Hands-on: Beta diversity
->
-> Let's calculate. We'll do this
-> with the `Dist.shared` command that will allow us to rarefy our data to a common number of sequences.
 >
 > - **Dist.shared** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"shared"*: to the `shared` file from **Make.shared** {% icon tool %}
@@ -1162,7 +1160,7 @@ coefficient](http://csyue.nccu.edu.tw/2005communicationindex.pdf)
 >   - *"Generate Heatmap for"*: `phylip`
 >   - {% icon param-collection %} *"phylip"*: the output of **Dist.shared** {% icon tool %} (this is a collection input)
 >
-> <!-- TODO: way to view the SVGs inside Galaxy? -->
+> <!-- TODO: add image conversion tool for Galaxy instances that do not support viewing of SVGs files? -->
 {: .hands_on}
 
 Look at some of the resulting heatmaps (you may have to download the SVG images first). In all of these
