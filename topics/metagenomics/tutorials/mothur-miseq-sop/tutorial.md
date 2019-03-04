@@ -1068,7 +1068,7 @@ and many different metrics have been proposed to quantify diversity [Finotello e
 >
 > ![](../../images/phylogenetic-distance.png){: width="50%"}
 >
-> All these factor play a role in diversity, and therefore the definition of how to calculate diversity is not straightforward
+> Each of these factors play a role in diversity, but how to combine them into a single measure of diversity is nontrivial.
 > Many different metrics have been proposed for this, for example: *shannon, chao, pd, ace, simpson, sobs, jack, npshannon,
 > smithwilson, heip bergerparker, boney, efron, shen, solow, bootstrap, qstat, coverage, anderberg, hamming, jclass, jest,
 > ochiai, canberra, thetayc, invsimpson*, just to name a few ;).
