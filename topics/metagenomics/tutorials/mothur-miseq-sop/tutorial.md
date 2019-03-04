@@ -431,7 +431,7 @@ the number of duplicates of this sequence observed in each sample.
 For more information on the topic of alignment, please see our training materials
 [here]({{site.baseurl}}{% link topics/sequence-analysis/index.md %})
 
-We are now ready to align our sequences to the reference. This step is an important
+We are now ready to align our sequences to the reference. This is an important
 step to perform to improve the clustering of your OTUs [[Schloss 2013]](https://doi.org/10.1038/ismej.2012.102)
 
 
@@ -471,16 +471,18 @@ which could indicate insertions or deletions at the terminal ends of the alignme
 
 Also notice the `Polymer` column in the output table. This indicates the average homopolymer length. Since we know that
 our reference database does not contain any homopolymer stretches longer than 8 reads, any reads containing such
-stretches are likely the result of PCR errors.
+long stretches are likely the result of PCR errors and we would be wise to remove them.
 
-We will now clean our data further by removing poorly aligned sequences and any sequences with long
+Next we will clean our data further by removing poorly aligned sequences and any sequences with long
 homopolymer stretches.
 
 ### More Data Cleaning
 
 To ensure that all our reads overlap our region of interest, we will remove any reads not overlapping the region
 from position 1968 to 11550 using the `screen.seqs` command. To make sure they overlap *only* that region, we will
-use the `filter.seqs` step to remove any overhang on either end of the V4 region.
+use the `filter.seqs` step to remove any overhang on either end of the V4 region. The `filter.seqs` command will
+additionally clean up our alignment file by removing any columns that have a gap character (`-`, or `.` for terminal gaps)
+in that position for every aligned sequence (`vertical` parameter).
 
 
 > ### {% icon hands_on %} Hands-on: Remove poorly aligned sequences
@@ -507,12 +509,26 @@ use the `filter.seqs` step to remove any overhang on either end of the V4 region
 > 2. **Filter.seqs** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"fasta"*: `good.fasta` output from the lastest **Screen.seqs** {% icon tool %}
 >   - *"trump"*: `.`
+>   - *"vertical"*: `yes`
 >   - *"Output logfile"*: `yes`
 >
 {: .hands_on}
 
 
-In the log file of the `filter.seqs` step we see the following information:
+Your resulting alignment (`filtered fasta` output) should look something like this:
+
+```
+>M00967_43_000000000-A3JHG_1_1101_14069_1827
+TAC--GG-AG-GAT--GCG-A-G-C-G-T-T--AT-C-CGG-AT--TT-A-T-T--GG-GT--TT-A-AA-GG-GT-GC-G-TA-GGC-G-G-C-CT-G-C-C-AA-G-T-C-A-G-C-G-G--TA-A-AA-TT-G-C-GG-GG--CT-C-AA-C-C-C-C-G-T-A--CA-G-C-CGTT-GAAAC-TG-C-CGGGC-TCGA-GT-GG-GC-GA-G-A---AG-T-A-TGCGGAATGCGTGGTGT-AGCGGT-GAAATGCATAG-AT-A-TC-AC-GC-AG-AACCCCGAT-TGCGAAGGCA------GC-ATA-CCG-G-CG-CC-C-T-ACTGACG-CTGA-GGCA-CGAAA-GTG-CGGGG-ATC-AAACAGG
+>M00967_43_000000000-A3JHG_1_1101_18044_1900
+TAC--GG-AG-GAT--GCG-A-G-C-G-T-T--GT-C-CGG-AA--TC-A-C-T--GG-GC--GT-A-AA-GG-GC-GC-G-TA-GGC-G-G-T-TT-A-A-T-AA-G-T-C-A-G-T-G-G--TG-A-AA-AC-T-G-AG-GG--CT-C-AA-C-C-C-T-C-A-G-CCT-G-C-CACT-GATAC-TG-T-TAGAC-TTGA-GT-AT-GG-AA-G-A---GG-A-G-AATGGAATTCCTAGTGT-AGCGGT-GAAATGCGTAG-AT-A-TT-AG-GA-GG-AACACCAGT-GGCGAAGGCG------AT-TCT-CTG-G-GC-CA-A-G-ACTGACG-CTGA-GGCG-CGAAA-GCG-TGGGG-AGC-AAACAGG
+>M00967_43_000000000-A3JHG_1_1101_13234_1983
+TAC--GG-AG-GAT--GCG-A-G-C-G-T-T--AT-C-CGG-AT--TT-A-T-T--GG-GT--TT-A-AA-GG-GT-GC-G-CA-GGC-G-G-A-AG-A-T-C-AA-G-T-C-A-G-C-G-G--TA-A-AA-TT-G-A-GA-GG--CT-C-AA-C-C-T-C-T-T-C--GA-G-C-CGTT-GAAAC-TG-G-TTTTC-TTGA-GT-GA-GC-GA-G-A---AG-T-A-TGCGGAATGCGTGGTGT-AGCGGT-GAAATGCATAG-AT-A-TC-AC-GC-AG-AACTCCGAT-TGCGAAGGCA------GC-ATA-CCG-G-CG-CT-C-A-ACTGACG-CTCA-TGCA-CGAAA-GTG-TGGGT-ATC-GAACAGG
+```
+
+These are all our representative reads again, now with additional alignment information.
+
+In the log file of the `filter.seqs` step we see the following additional information:
 
 ```
 Length of filtered alignment: 376
@@ -521,10 +537,12 @@ Length of the original alignment: 13425
 Number of sequences used to construct filter: 16298
 ```
 
-This means that our initial alignment was 13425 columns wide and that we were able to remove 13049 terminal gap
-characters using `trump=.` and vertical gap characters using `vertical=yes`. The final alignment length is 376
-columns. Because we've perhaps created some redundancy across our sequences by trimming the ends, we can re-run
-`unique.seqs`:
+From this log file we see that while our initial alignment was 13425 positions wide, after filtering the overhangs
+(`trump` parameter) and removing positions that had a gap in every aligned read (`vertical` parameter), we have
+trimmed our alignment down to a width of 376 columns.
+
+Because any filtering step we perform might lead to sequences no longer being unique, we deduplicate our data by re-running
+the `unique.seqs` command:
 
 > ### {% icon hands_on %} Hands-on: Re-obtain unique sequences
 >
@@ -544,11 +562,10 @@ columns. Because we've perhaps created some redundancy across our sequences by t
 
 
 ### Pre-clustering
-The next thing we want to do to further de-noise our sequences, is to pre-cluster the sequences using the
-`pre.cluster` command, allowing for up to 2 differences between sequences. This command will split the
-sequences by group and then sort them by abundance and go from most abundant to least and identify
-sequences that differ no more than 2 nucleotides from on another. If this is the case, then they get
-merged. We generally recommend allowing 1 difference for every 100 basepairs of sequence:
+
+The next step in cleaning our data, is to merge near-identical sequences together. Sequences that only differ
+by around 1 in every 100 bases are likely to represent sequencing errors, not true biological variation. Because
+our contigs are ~250 bp long, we will set the threshold to 2 mismatches.
 
 > ### {% icon hands_on %} Hands-on: Perform preliminary clustering of sequences
 >
@@ -568,8 +585,12 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 
 
 ## Chimera Removal
-At this point we have removed as much sequencing error as we can, and it is time to turn our attention to
-removing sequencing artefacts known as chimeras.
+
+We have now thoroughly cleaned our data and rid it of as much sequencing error as we can. Next, we will look
+at a class of sequencing artefacts known as chimeras. During PCR amplification, it is possible that two unrelated
+templates are combined to form a sort of hybrid sequence, also called a chimera. Needless to say, we do not want such
+sequencing artefacts confounding our results.
+
 
 > ### {% icon tip %} Background: Chimeras
 > ![Chemirec sequence](../../images/chimeras.jpg)
@@ -577,12 +598,8 @@ removing sequencing artefacts known as chimeras.
 {: .tip}
 
 We'll do this chimera removal using the `VSEARCH` algorithm that is called within Mothur, using the
-`chimera.vsearch` command. This command will split the data by sample and check for chimeras.
-
-Our preferred way of doing this is to use the abundant sequences as our reference. In addition, if a sequence
-is flagged as chimeric in one sample, the default (`dereplicate=No`) is to remove it from all samples. Our
-experience suggests that this is a bit aggressive since we've seen rare sequences get flagged as chimeric
-when they're the most abundant sequence in another sample. This is how we do it:
+`chimera.vsearch` command. This command will split the data by sample and check for chimeras. The recommended
+way of doing this is to use the abundant sequences as our reference.
 
 > ### {% icon hands_on %} Hands-on: Remove chimeric sequences
 >
@@ -615,16 +632,14 @@ when they're the most abundant sequence in another sample. This is how we do it:
 
 ## Removal of non-bacterial sequences
 
-As a final quality control step, we need to see if there are any "undesirables" in our dataset. Sometimes when
-we pick a primer set they will amplify other stuff that survives to this point in the pipeline, such as
-18S rRNA gene fragments or 16S rRNA from Archaea, chloroplasts, and mitochondria. There's also just the
-random stuff that we want to get rid of.
+As a final quality control step, we would like to get rid of any "undesirable" sequences in our dataset.
+This may include things such as 18S rRNA gene fragments or 16S rRNA from Archaea, chloroplasts, and mitochondria
+that may have survived all the cleaning steps up to this point. We are generally not interested in these sequences
+and want to remove them from our dataset.
 
-Now you may say, "But wait I want that stuff". Fine. But, the primers we use, are only supposed to amplify
-members of the Bacteria and if they're hitting Eukaryota or Archaea, then it is a mistake. Also, realize
-that chloroplasts and mitochondria have no functional role in a microbial community.
-
-Let's go ahead and classify those sequences using the Bayesian classifier with the `classify.seqs` command:
+Before we know which sequences may originate from sources other than our intended 16S bacterial genes, we must
+first classify those sequences. We can do this using a Bayesian classifier (via the `classify.seqs` command) and a training
+set provided by the Schloss lab.
 
 > ### {% icon hands_on %} Hands-on: Remove undesired sequences
 >
@@ -665,8 +680,6 @@ Let's go ahead and classify those sequences using the Bayesian classifier with t
 > {: .question}
 {: .hands_on}
 
-Also of note is that *unknown* only pops up as a classification if the classifier cannot classify your
-sequence to one of the domains.
 
 At this point we have curated our data as far as possible and we're ready to see what our error rate is.
 
@@ -681,10 +694,11 @@ At this point we have curated our data as far as possible and we're ready to see
 >
 {: .tip}
 
-Measuring the error rate of your sequences is something you can only do if you have co-sequenced a mock
-community, that is, a sample of which you know the exact composition. This is something we include for
-every 95 samples we sequence. You should too because it will help you gauge your error rates and allow
-you to see how well your curation is going, and whether something is wrong with your sequencing setup.
+
+The following step is only possible if you have co-sequenced a mock community with your samples. A mock community is a sample
+of which you know the exact composition. This is something we recommend you to do, because it will give you an idea of how
+accurate your sequencing and analysis protocol is.
+
 
 > ### {% icon tip %} Background: Mock communities
 >
@@ -723,14 +737,12 @@ you to see how well your curation is going, and whether something is wrong with 
 >
 {: .tip}
 
-Our mock community is composed of genomic DNA from 21 bacterial strains. So in a perfect world, this is
+The mock community in this experiment was composed of genomic DNA from 21 bacterial strains. So in a perfect world, this is
 exactly what we would expect the analysis to produce as a result.
 
 First, let's extract the sequences belonging to our mock samples from our data:
 
 > ### {% icon hands_on %} Hands-on: extract mock sample from our dataset
->
->
 >
 > 1. **Get.groups** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"group file or count table"*: the `count table` from **Remove.lineage** {% icon tool %}
@@ -747,7 +759,7 @@ Selected 58 sequences from your fasta file.
 Selected 4046 sequences from your count file
 ```
 
-This tells us that we had 58 unique sequences and a total of 4,046 total sequences in our Mock sample. We
+This tells us that there were 58 unique sequences, representing a total of 4,046 total sequences in our Mock sample. We
 can now use the `seq.error` command to measure the error rates based on our mock reference. Here we align
 the reads from our mock sample back to their known sequences, to see how many fail to match.
 
@@ -760,7 +772,7 @@ the reads from our mock sample back to their known sequences, to see how many fa
 >
 {: .hands_on}
 
- In the log file we see something like this:
+In the log file we see something like this:
 
 ```
 Overall error rate:    6.5108e-05
@@ -773,14 +785,15 @@ Errors    Sequences
 [..]
 ```
 
-That rocks, eh? Our error rate is 0.0065%!
+That is pretty good! Our error rate is only 0.0065%! This gives us confidence that the rest of our samples
+are also of high quality, and we can continue with our analysis.
 
 
 ### Cluster mock sequences into OTUs
 
-We can now cluster the mock sequences into OTUs to see how many spurious OTUs we have:
+We can now cluster the mock sequences into *OTUs* to see how many spurious OTUs we have:
 
-> ### {% icon tip %} Background: Operational Taxonomic Units (OTUs)
+> ### {% icon tip %} Background: What are Operational Taxonomic Units (OTUs)?
 >
 > In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
 > sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
@@ -830,12 +843,40 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 {: .hands_on}
 
 
+Open the rarefaction output (dataset named `sobs` inside the `rarefaction curves` output collection), it should look
+something like this:
 
-Open the rarefaction output (dataset named `sobs` inside the `rarefaction curves` output collection).
-You'll see that for 4060 sequences, we'd have 34 OTUs from the Mock community. This number of course
-includes some stealthy chimeras that escaped our detection methods. If we used 3000 sequences, we would
-have about 31 OTUs. In a perfect world with no chimeras and no sequencing errors, we'd have 20 OTUs.
-This is not a perfect world. But this is pretty darn good!
+```
+numsampled	0.03-	lci-	hci-
+1	1.0000	1.0000	1.0000
+100	18.0240	16.0000	20.0000
+200	19.2160	17.0000	22.0000
+300	19.8800	18.0000	22.0000
+400	20.3600	19.0000	22.0000
+
+[..]
+
+3000	30.4320	28.0000	33.0000
+3100	30.8800	28.0000	34.0000
+3200	31.3200	29.0000	34.0000
+3300	31.6320	29.0000	34.0000
+3400	31.9920	30.0000	34.0000
+3500	32.3440	30.0000	34.0000
+3600	32.6560	31.0000	34.0000
+3700	32.9920	31.0000	34.0000
+3800	33.2880	32.0000	34.0000
+3900	33.5920	32.0000	34.0000
+4000	33.8560	33.0000	34.0000
+4046	34.0000	34.0000	34.0000
+
+```
+
+
+In this file you see that when we use the full set of 4060 sequences, we find 34 OTUs from the Mock community.
+If we use 3000 sequences, we would have about 31 OTUs. In an ideal world, we would find exactly 21 OTUs. Despite our
+best efforts, some chimeras or other contaminations may have slipped through our filtering steps. It may not be perfect
+but it's still pretty good!
+
 
 > ### {% icon tip %} Background: Rarefaction
 >
@@ -855,15 +896,12 @@ This is not a perfect world. But this is pretty darn good!
 
 Now that we have assessed our error rates we are ready for some real analysis.
 
-# Preparing for analysis
 
 ### Removing Mock sample
-We're almost to the point where you can have some fun with your data (I'm already having fun, aren't you?).
-Next, we would assign sequences to OTUs, but first, we should remove the Mock sample from our dataset, it has
-served its purpose by allowing us to estimate our error rate, but in subsequent steps we only want to use
-our real samples.
 
-using
+Now that we have cleaned up our data set as best we can, and assured ourselves of the quality of our sequencing
+pipeline by considering a mock sample, we are almost ready to cluster and classify our real data. But
+before we start, we should first remove the mock dataset from our data, we no longer need it. We do this using
 the `remove.groups` command:
 
 > ### {% icon hands_on %} Hands-on: Remove Mock community from our dataset
@@ -883,18 +921,15 @@ approaches, please refer to the [Mothur wiki page](https://www.mothur.org/wiki/M
 
 ## Clustering sequences into OTUs
 
-Now, we have a couple of options for clustering sequences into OTUs. For a small dataset like this, we could
-do the traditional approach using `dist.seqs` and `cluster` as we did with the Mock sample.
+There are several ways we can perform clustering. We could repeat what we did for the mock community, and
+use the `dist.seqs` and `cluster` commands. The alternative is to use the `cluster.split` command.
+In this approach, taxonomic information is used to split the sequences into bins and then cluster within each bin.
+The Schloss lab have published results showing that if you split at the level of Order or Family, and cluster to a 0.03
+cutoff, you'll get just as good of clustering as you would with the "traditional" approach. In addition, this approach
+is less computationally expensive and can be parallelized, which is especially advantageous when you have large
+datasets.
 
-The alternative is to use the `cluster.split` command. In this approach, we use the taxonomic information to
-split the sequences into bins and then cluster within each bin. The Schloss lab have published results
-showing that if you split at the level of Order or Family, and cluster to a 0.03 cutoff, you'll get just as
-good of clustering as you would with the "traditional" approach.
-
-The advantage of the `cluster.split` approach is that it should be faster, use less memory, and can be run on
-multiple processors. In an ideal world we would prefer the traditional route because "Trad is rad", but we
-also think that kind of humor is funny.... In this command we use `taxlevel=4`, which corresponds to the level
-of *Order*. This is the approach that we  generally use in the Schloss lab.
+In this collowing cluster command we use `taxlevel=4`, which corresponds to the level of *Order*.
 
 > ### {% icon hands_on %} Hands-on: Cluster our data into OTUs
 >
@@ -956,12 +991,12 @@ sequences (100%) were classified as being members of the Alistipes.
 {: .question}
 
 
-Let's do something more interesting and actually analyze our data. We'll focus on the OTU-based dataset. The
-phylotype-based analysis is essentially the same. Also, remember that our initial question had to do with the
-stability and change in community structure in these samples when comparing early and late samples.
+Before we continue, let's remind ourselves what we set out to do. Our original question was about the stability of
+the microbiome and whether we could observe any change in community structure between the early and late samples.
 
-Keep in mind that the group names have either a F or M (sex of animal) followed by a number (number of
-animal) followed by a D and a three digit number (number of days post weaning).
+Because some of our sample may contain more sequences than others, it is generally a good idea to normalize your
+dataset by subsampling.
+
 
 > ### {% icon hands_on %} Hands-on: Subsampling
 >
@@ -993,6 +1028,8 @@ animal) followed by a D and a three digit number (number of days post weaning).
 > **Note:** since subsampling is a stochastic process, your results from any tools using this subsampled data
 > will deviate from the ones presented here.
 {: .hands_on}
+
+
 
 ## Calculate Species Diversity
 
