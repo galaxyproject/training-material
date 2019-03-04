@@ -229,6 +229,9 @@ convention, so that our tools will know which files belong together. We do this 
 
 # Quality Control
 
+For more information on the topic of quality control, please see our training materials
+[here]({{site.baseurl}}{% link topics/sequence-analysis/index.md %})
+
 ## Reducing sequencing and PCR errors
 
 Before starting any analysis, it is always a good idea to assess the quality of your input data and improve it
@@ -289,9 +292,6 @@ Here the first column contains the read name, and the second column contains the
 
 
 ### Data Cleaning
-
-For more information on the topic of quality control, please see our training materials
-[here]({{site.baseurl}}{% link topics/sequence-analysis/index.md %})
 
 As the next step, we want to improve the quality of our data. But first, let's get a feel of our dataset:
 
