@@ -25,9 +25,9 @@ contributors:
 # Overview
 {:.no_toc}
 
-In this tutorial we will perform the
+In this tutorial we will perform an analysis based on the
 [Standard Operating Procedure (SOP) for MiSeq data](https://www.mothur.org/wiki/MiSeq_SOP), developed by the
-creators of the Mothur software package, the [Schloss lab](http://www.schlosslab.org/), within Galaxy.
+creators of the Mothur software package, the [Schloss lab](http://www.schlosslab.org/).
 
 > ### Agenda
 >
@@ -277,7 +277,7 @@ the reads for all the overlapping positions.
 
 This step combined the forward and reverse reads for each sample, and also combined
 the resulting contigs from all samples into a single file. So we have gone from a paired
-collection of 20x2 files, to a single FASTQ file. In order to retain information about
+collection of 20x2 FASTQ files, to a single FASTA file. In order to retain information about
 which reads originated from which samples, the tool also output a *group file*. View that
 file now, it should look something like this:
 
@@ -379,9 +379,9 @@ the original dataset. We can do this by using the `unique.seqs` command.
 > {: .question}
 {: .hands_on}
 
-Here we see that this step has greatly reduced the size of our FASTQ file; not only will this speed up further computational
+Here we see that this step has greatly reduced the size of our sequence file; not only will this speed up further computational
 steps, it will also greatly reduce the amount of disk space needed to store all the intermediate files generated during
-this analysis. This `unique.seqs` tool created two files, one is a fasta file containing only the unique sequences,
+this analysis. This `unique.seqs` tool created two files, one is a FASTA file containing only the unique sequences,
 and the second is a so-called *names files*. This names file consists of two columns, the first contains the sequence names
 for each of the unique sequences, and the second column contains all other sequence names that are identical to the representative
 sequence in the first column.
@@ -396,9 +396,10 @@ read_name7    read_name8
 
 To recap, we now have the following files:
 
-- a FASTQ file containing every distinct sequence in our dataset (the *representative* sequences)
-- a *group file* containing information about which samples
+- a FASTA file containing every distinct sequence in our dataset (the *representative* sequences)
 - a *names file* containing the list of duplicate sequences
+- a *group file* containing information about the samples each read originated from
+
 
 To further reduce file sizes and streamline analysis, we can use the `count.seqs` command to combine
 the *group file* and the *names file* into a single *count table*.
@@ -466,51 +467,52 @@ total # of seqs:    128872
 
 The `Start` and `End` columns tell us that the majority of reads aligned between positions 1968 and 11550,
 which is what we expect to find given the reference file we used. However, some reads align to very different positions,
-which could indicate insertions or deletions at the terminal ends of the alignments.
+which could indicate insertions or deletions at the terminal ends of the alignments or other complicating factors.
 
-## More Data Cleaning
+Also notice the `Polymer` column in the output table. This indicates the average homopolymer length. Since we know that
+our reference database does not contain any homopolymer stretches longer than 8 reads, any reads containing such
+stretches are likely the result of PCR errors.
 
-To make sure that everything overlaps the same region we'll re-run screen.seqs to get sequences that
-start at or before position 1968 and end at or after position 11550. We'll also set the maximum
-homopolymer length to 8 (`maxhomop` parameter) since there's nothing in the database with a stretch of 9 or more of the same
-base in a row (this also could have been done in the first execution of `screen.seqs` above).
+We will now clean our data further by removing poorly aligned sequences and any sequences with long
+homopolymer stretches.
+
+### More Data Cleaning
+
+To ensure that all our reads overlap our region of interest, we will remove any reads not overlapping the region
+from position 1968 to 11550 using the `screen.seqs` command. To make sure they overlap *only* that region, we will
+use the `filter.seqs` step to remove any overhang on either end of the V4 region.
+
 
 > ### {% icon hands_on %} Hands-on: Remove poorly aligned sequences
 >
-> - **Screen.seqs** {% icon tool %} with the following parameters
+> 1. **Screen.seqs** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"fasta"*: the aligned fasta file from **Align.seqs** {% icon tool %}
 >   - *"start"*: `1968`
 >   - *"end"*: `11550`
 >   - *"maxhomop"*: `8`
 >   - {% icon param-file %} *"count"*: the `count table` file from **Count.seqs** {% icon tool %}
 >
-> **Note:** we supply the count table so that it can be updated for the sequences we're removing.
+>     **Note:** we supply the count table so that it can be updated for the sequences we're removing.
 >
-> > ### {% icon question %} Question
-> >
-> >  How many sequences were removed in this step?
-> > > ### {% icon solution %} Solution
-> > > 128 sequences were removed. This is the number of lines in the bad.accnos output.
-> > {: .solution }
-> {: .question}
-{: .hands_on}
-
-
-Now we know our sequences overlap the same alignment coordinates, we want to make sure they *only* overlap
-that region. So we'll filter the sequences to remove the overhangs at both ends. Since we've done
-paired-end sequencing, this shouldn't be much of an issue. In addition, there are many
-columns in the alignment that only contain gap characters (i.e. "."). These can be pulled out without
-losing any information. We'll do all this with filter.seqs:
-
-> ### {% icon hands_on %} Hands-on: Filter sequences
+>     > ### {% icon question %} Question
+>     >
+>     >  How many sequences were removed in this step?
+>     > > ### {% icon solution %} Solution
+>     > > 128 sequences were removed. This is the number of lines in the bad.accnos output.
+>     > {: .solution }
+>     {: .question}
 >
-> - **Filter.seqs** {% icon tool %} with the following parameters
+>     Next, we will remove any overhang on either side of the V4 region, and
+>
+> 2. **Filter.seqs** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"fasta"*: `good.fasta` output from the lastest **Screen.seqs** {% icon tool %}
 >   - *"trump"*: `.`
 >   - *"Output logfile"*: `yes`
+>
 {: .hands_on}
 
-In the log file we see the following information:
+
+In the log file of the `filter.seqs` step we see the following information:
 
 ```
 Length of filtered alignment: 376
