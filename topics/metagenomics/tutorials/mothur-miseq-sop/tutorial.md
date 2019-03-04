@@ -1033,10 +1033,48 @@ dataset by subsampling.
 
 ## Calculate Species Diversity
 
-Diversity indices provide valuable mathematical tools to describe the ecological complexity of a single sample
-(*alpha diversity*) or to detect species differences between samples (*beta diversity*). However, diversity
-is not a determined physical quantity for which a consensus definition and unit of measure have been established,
-and several diversity indices are currently available [Finotello et al. 2016].
+Species diversity is a valuable tool for describing the ecological complexity of a single sample (alpha diversity)
+or between samples (beta diversity). However, diversity is not some physical quantity that can be measure directly,
+and many different metrics have been proposed to quantify diversity [Finotello et al. 2016](https://www.ncbi.nlm.nih.gov/pubmed/28025179).
+
+
+> ### {% icon tip %} Background: Species Diversity
+>
+> Species diversity consists of three components: species richness, taxonomic or phylogenetic diversity and species evenness
+>
+> - **Species richness** = the number of different species in a community.
+> - **Species evenness** = how even in numbers each species in a community is.
+> - **Phylogenetic diversity** = how closely related the species in a community are.
+>
+> To understand the difference between richness and evenness, consider the following example:
+>
+> ![](../../images/richness-evenness.png)
+>
+> > ### {% icon question %} Question
+> > 1. Which of these communities has the highest richness?
+> > 2. Which of these communities has the highest evenness?
+> >
+> > > ### {% icon solution %} Solution
+> > > 1. Both communities have 4 different species, so they have same richness.
+> > > 2. Communty B is more even, because each species has the same abundance.
+> > {: .solution }
+> >
+> {: .question}
+> <br><br>
+> Even when two samples have identical richness and evenness, we still may conclude that one is more diverse than
+> other if the species are very dissimilar (have high phylogenetic distance)
+>
+> ![](../../images/phylogenetic-distance.png){: width="50%"}
+>
+> All these factor play a role in diversity, and therefore the definition of how to calculate diversity is not straightforward
+> Many different metrics have been proposed for this, for example: *shannon, chao, pd, ace, simpson, sobs, jack, npshannon,
+> smithwilson, heip bergerparker, boney, efron, shen, solow, bootstrap, qstat, coverage, anderberg, hamming, jclass, jest,
+> ochiai, canberra, thetayc, invsimpson*, just to name a few ;).
+>
+> Now you do not need to know what all these metrics are, but just remember that there is not a single
+> definition of diversity and as always, the metric you choose to use may influence your results.
+>
+{: .tip}
 
 ### Alpha diversity
 
