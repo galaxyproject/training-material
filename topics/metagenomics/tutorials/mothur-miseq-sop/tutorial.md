@@ -1034,18 +1034,19 @@ dataset by subsampling.
 ## Calculate Species Diversity
 
 Species diversity is a valuable tool for describing the ecological complexity of a single sample (alpha diversity)
-or between samples (beta diversity). However, diversity is not some physical quantity that can be measure directly,
+or between samples (beta diversity). However, diversity is not a physical quantity that can be measured directly,
 and many different metrics have been proposed to quantify diversity [Finotello et al. 2016](https://www.ncbi.nlm.nih.gov/pubmed/28025179).
 
 
 > ### {% icon tip %} Background: Species Diversity
 >
-> Species diversity consists of three components: species richness, taxonomic or phylogenetic diversity and species evenness
+> Species diversity consists of three components: species richness, taxonomic or phylogenetic diversity and species evenness.
 >
 > - **Species richness** = the number of different species in a community.
 > - **Species evenness** = how even in numbers each species in a community is.
 > - **Phylogenetic diversity** = how closely related the species in a community are.
 >
+> <br><br>
 > To understand the difference between richness and evenness, consider the following example:
 >
 > ![](../../images/richness-evenness.png)
@@ -1073,7 +1074,7 @@ and many different metrics have been proposed to quantify diversity [Finotello e
 > smithwilson, heip bergerparker, boney, efron, shen, solow, bootstrap, qstat, coverage, anderberg, hamming, jclass, jest,
 > ochiai, canberra, thetayc, invsimpson*, just to name a few ;).
 >
-> Now you do not need to know what all these metrics are, but just remember that there is not a single
+> Now, you do not need to know what all these different metrics are, but just remember that there is not a single
 > definition of diversity and as always, the metric you choose to use may influence your results.
 >
 {: .tip}
