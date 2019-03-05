@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "From peaks to genes"
-zenodo_link: "https://doi.org/10.5281/zenodo.1025585"
+zenodo_link: "https://doi.org/10.5281/zenodo.1025586"
 questions:
   - "How to use Galaxy?"
   - "How to get from peak regions to a list of gene names?"
@@ -123,7 +123,7 @@ Let's start with a fresh history.
 >    {% include snippets/import_via_link.md format="interval" %}
 >
 >    > ### {% icon tip %} Tip: Importing data to Galaxy
->    > There are [more options]({{ site.baseurl }}/topics/galaxy-data-manipulation/tutorials/get-data/slides.html) for advanced users.
+>    > There are [more options]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/get-data/slides.html %}) for advanced users.
 >    {: .tip}
 >
 {: .hands_on}

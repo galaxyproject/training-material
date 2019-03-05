@@ -87,17 +87,16 @@ We have used the HiCExplorer successfully with bwa, bowtie2 and hisat2. In this 
 
 > ### {% icon hands_on %} Hands-on: Mapping reads
 >
-> 1. **Map with BWA-MEM 0.8.0** {% icon tool %}: Run Map with BWA-MEM on both strands `HiC_S2_1p_10min_lowU_R1` and `HiC_S2_1p_10min_lowU_R2` with:
->    - "Will you select a reference genome from your history or use a built-in index?" to `Use a built-in index`
->    - "Select a reference genome" to `dm3`
->    - "Is this library mate-paired?" to `Single-end or interleaved paired-end`
+> 1. **Map with Bowtie** {% icon tool %}: Run Bowtie on both strands `HiC_S2_1p_10min_lowU_R1` and `HiC_S2_1p_10min_lowU_R2` with:
+>    - "Is this single or paired library" to `Single-end`
 >    - Set multiple data sets
 >    - "FASTQ file" to `HiC_S2_1p_10min_lowU_R1`and `HiC_S2_1p_10min_lowU_R2`
->    - "BWA settings to use" to `Full parameter List`
->    - "Gap extension penalty (-E)" to `50`
->    - "Penalty for clipping (-L)" to `0`
+>    - "Will you select a reference genome from your history or use a built-in index?" to `Use a built-in index`
+>    - "Select a reference genome" to `dm3`
+>    - "Do you want to tweak SAM/BAM Options?" to `Yes`
+>    - "Reorder output to reflect order of the input file" to `Yes`
 >
-> 2. Rename the output of the tool according to the corresponding files: `R1.sam` and `R2.sam`
+> 2. Rename the output of the tool according to the corresponding files: `R1.bam` and `R2.bam`
 >
 {: .hands_on}
 
@@ -109,9 +108,9 @@ For this step we will use [hicBuildMatrix](http://hicexplorer.readthedocs.io/en/
 
 > ### {% icon hands_on %} Hands-on: hicBuildMatrix
 >
-> 1. **hicBuildMatrix** {% icon tool %}: Run hicBuildMatrix on the `R1.sam` and `R2.sam` from previous step with modifying the following parameters:
->    - "1: Sam/Bam files to process" to `R1.sam`
->    - "2: Sam/Bam files to process" to `R2.sam`
+> 1. **hicBuildMatrix** {% icon tool %}: Run hicBuildMatrix on the `R1.bam` and `R2.bam` from previous step with modifying the following parameters:
+>    - "1: Sam/Bam files to process" to `R1.bam`
+>    - "2: Sam/Bam files to process" to `R2.bam`
 >    - "Choose to use a restriction cut file or a bin size" to `Bin size`
 >    - "Bin size in bp" to `10000`
 >    - "Sequence of the restriction site" to `GATC`
@@ -266,7 +265,7 @@ As an output we get the boundaries, domains and scores separated files. We will 
 
 # Integrating Hi-C and other data
 
-We can plot the TADs for a given chromosomal region. For this we will use [hicPlotTADs](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html). But before make sure to import [gene track file](https://zenodo.org/record/1176070/files/dm6_genes.bed) in .bed format from [Zenodo](https://doi.org/10.5281/zenodo.1176070).
+We can plot the TADs for a given chromosomal region. For this we will use [hicPlotTADs](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html). 
 
 For the next step we need additional data tracks. Please load `dm3_genes.bed`, `H3K27me3.bw`, `H3K36me3.bw` and `H4K16ac.bw` to your history.
 
