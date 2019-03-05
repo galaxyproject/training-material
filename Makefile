@@ -85,9 +85,8 @@ check-html: build ## validate HTML
 .PHONY: check-html
 
 check-workflows: build ## validate Workflows
-	( $(ACTIVATE_ENV) && \
-	  bash bin/validate-json.sh \
-	)
+	$(ACTIVATE_ENV) && \
+		bash bin/validate-json.sh
 .PHONY: check-workflows
 
 check-html-internal: build ## validate HTML (internal links only)
@@ -122,7 +121,7 @@ check-yaml: ## lint yaml files
 		find topics -name '*.yml' | xargs -L 1 -I '{}' sh -c "yamllint {}" 
 .PHONY: check-yaml
 
-check: check-yaml check-frontmatter check-html-internal check-html check-slides ## run all checks
+check: check-yaml check-frontmatter check-html-internal check-html check-slides check-workflows ## run all checks
 .PHONY: check
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
