@@ -121,33 +121,9 @@ tutorial_name: finding-lysis-genes
 
 ## Gram-Negative Hosts
 
-The [CPT](https://cpt.tamu.edu/) has curated a [spanin database](https://cpt.tamu.edu/spanindb/#/phages) containing information on hundreds of annotated spanins.
+Spanins are only expected in the genomes of phages that infect Gram-negative hosts. From detailed molecular characterization of the lamdba spanins Rz and Rz1, see this [recent review](https://www.ncbi.nlm.nih.gov/pubmed/30635077), and an [in-depth bioinformatic analysis](https://www.ncbi.nlm.nih.gov/pubmed/30219026) of many more spanin sequences, we know what the essential genetic signatures and genomic architectures to expect for spanins in novel genomes. 
 
-## Spanin Architectures: i-spanin/o-spanin, u-spanin
-
-> * **i-spanin**
->    > * 1 N-terminal TMD
->    > * Small (100-200 amino acids)
->    > * Functionally linked to *o-spanins*
-
-> * o-spanin
->    > * N-terminal SPII signal
->    > * 1 N-terminal lipobox
->    > * Genetically starts completely/partially embedded or just downstream of the i-spanin
-
-> ### {% icon comment %} An Important Note on Spanin Annotation
-> The i-spanin is **never** embedded in the o-spanin.
-{: .comment}
-
-![](../../images/finding-lysis-genes-screenshots/13_different_spanin_contexts.png)
-
-> * u-spanin
->    > * 1 N-terminal SPII signal
->    > * 1 C-terminal TMD 
-
-![](../../images/finding-lysis-genes-screenshots/9_lambda_t1_spanin_comparison.png)
-
-## What is an SPII signal? What is a lipobox?
+## A refresher on SPII signals and lipoboxes
 
 ![](../../images/finding-lysis-genes-screenshots/18_spi_signal.png)
 
@@ -155,5 +131,42 @@ The [CPT](https://cpt.tamu.edu/) has curated a [spanin database](https://cpt.tam
 
 ![](../../images/finding-lysis-genes-screenshots/20_spii_signal_lipobox)
 
+## Spanin systems: two-component and unimolecular
+
+![](../../images/finding-lysis-genes-screenshots/9_lambda_t1_spanin_comparison.png)
+
+> The two-component spanins encode separate proteins for the spanin subunits. 
+> 
+> * First, is the inner membrane spanin (**i-spanin**)
+>    > * 1 N-terminal TMD
+>    > * Small (100-200 amino acids)
+>    > * Functionally linked to *o-spanins*
+>
+> Second is the outer membrane spanin (**o-spanin**)
+>    > * N-terminal SPII signal
+>    > * 1 N-terminal lipobox
+>    > * Genetically starts completely/partially embedded or just downstream of the i-spanin (see below)
+
+> ### {% icon comment %} An Important Note on Spanin Annotation
+> The i-spanin is **never** embedded in the o-spanin.
+{: .comment}
+
+> Alternatively, some phages encode a single protein with the characteristics of both the i- and o-spanins, called the unimolecular spanin (u-spanin). 
+> * u-spanin
+>    > * 1 N-terminal SPII signal
+>    > * 1 C-terminal TMD 
+>
+## Spanin Two-component gene architectures: embedded, overlapping, and separate
+
+While the u-spanin should be easy to identify based on its genetic signatures colocalized within one coding region, the two-component spanins present a more varied architecture, an important factor in their identification. While the spanins can exist in a typical side-by-side genetic context, some spanin cassettes are instead present as overlapping, or even embedded genes. This is relatively rare, and actually can help in spanin identification. 
+![](../../images/finding-lysis-genes-screenshots/13_different_spanin_contexts.png)
+
 # Missing Lysis Genes
 
+ a. **No similarity** - If your phage's genes have no conservation at the protein level, either of domains, amino acids, or genetic architecture, high-confidence predictions for the lysis genes cannot be made. Experiments (or better information in a future iteration of our databases) may be required to predict the phage lysis genes.
+ >
+ b. **New types/topologies** - Do not fret if your phage genome does not contain any genes with signatures of known lysis genes! This could mean that your phage uses proteins with topologies outside our known paradigms, or a completely novel mechanism.
+ >
+ c. **Not in a cassette** - Not all phage cluster their genes in cassettes. When this is the case, *and* your phage genome has more than one protein with the signatures of holins/antiholins (TMDs), it is not possible to predict with certainty many of the lysis genes. 
+>
+The take-home principle is: without reasonable evidence for predicting a lysis function, lysis gene annotations should not be made.
