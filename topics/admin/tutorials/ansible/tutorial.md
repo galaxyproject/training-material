@@ -19,6 +19,8 @@ key_points:
 contributors:
   - erasche
   - shiltemann
+tags:
+  - ansible
 ---
 
 # Overview
@@ -151,14 +153,14 @@ YAML style:
 
 ```yaml
 - package:
-    name: "{{ package_name }}"
-    state: "{{ package_state }}"
+    name: "{% raw %}{{ package_name }}{% endraw %}"
+    state: "{% raw %}{{ package_state }}{% endraw %}"
 ```
 
 And an inline style.
 
 ```yaml
-- package name={{ package_name }} state={{ package_state }}
+{% raw %}- package name={{ package_name }} state={{ package_state }}{% endraw %}
 ```
 
 Some groups prefer one style or another. You can mix both of these but you probably shouldn't. The inline style does not require quoting of templated values.
@@ -593,7 +595,7 @@ Duplicating tasks ten times to install ten packages is not efficient, so Ansible
 ```yaml
 - name: Install stuff
   package:
-    name: "{{ item }}"
+    name: {% raw %}"{{ item }}"{% endraw %}
     state: installed
   with_items:
     - htop

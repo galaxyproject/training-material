@@ -46,7 +46,7 @@ Here you will learn how to create a new tutorial by developing a small tutorial 
 
 > ### {% icon comment %} Comment
 > This tutorial explains the different steps to create a tutorial for the Galaxy Training Material.
-> It may require some knowledge that you may not have or do not have the time to learn. If this is the case, you can create a skeleton of a tutorial with whatever existing materials you have, using your prefered text editor, and then share it with us by opening [issue on GitHub]({{ site.github_repository }}/issues/new), writing us on [Gitter]({{ site.gitter_url }}), or sending us an [email](mailto:{{ site.email }}).
+> It may require some knowledge that you may not have or do not have the time to learn. If this is the case, you can create a skeleton of a tutorial with whatever existing materials you have, using your prefered text editor, and then share it with us by opening [issue on GitHub]({{ site.github.repository_url }}/issues/new), writing us on [Gitter]({{ site.gitter_url }}), or sending us an [email](mailto:{{ site.email }}).
 {: .comment}
 
 # Define the topic
@@ -71,19 +71,19 @@ The first question we need to answer is in which topic to place our new tutorial
 {: .hands_on}
 
 > ### {% icon comment %} Creating a new topic
-> Want to create a new topic? [Check out our tutorial to create a new topic]({{ site.baseurl }}/topics/contributing/tutorials/create-new-topic/tutorial.html)
+> Want to create a new topic? [Check out our tutorial to create a new topic]({{ site.baseurl }}{% link topics/contributing/tutorials/create-new-topic/tutorial.md %})
 {: .comment}
 
 # Keep track of the changes
 
-The material is stored in a [GitHub repository]({{ site.github_repository }}), a code hosting platform for version control and collaboration. So to develop training material, we are following the [GitHub flow](https://guides.github.com/introduction/flow/), which is based on fork, branches, and pull requests.
+The material is stored in a [GitHub repository]({{ site.github.repository_url }}), a code hosting platform for version control and collaboration. So to develop training material, we are following the [GitHub flow](https://guides.github.com/introduction/flow/), which is based on fork, branches, and pull requests.
 
 This can be done online via the GitHub interface or locally on your computer via command-line.
 
 > ### {% icon comment %} Learning how to contribute
 > Want to learn how to contribute? Check our tutorials:
-> - [Contributing with GitHub via its interface]({{ site.baseurl }}/topics/contributing/tutorials/github-interface-contribution/tutorial.html)
-> - [Contributing with GitHub via command-line]({{ site.baseurl }}/topics/contributing/tutorials/github-command-line-contribution/tutorial.html)
+> - [Contributing with GitHub via its interface]({{ site.baseurl }}{% link topics/contributing/tutorials/github-interface-contribution/tutorial.md %})
+> - [Contributing with GitHub via command-line]({{ site.baseurl }}{% link topics/contributing/tutorials/github-command-line-contribution/tutorial.md %})
 {: .comment}
 
 # Create the directory for the tutorial
@@ -135,7 +135,7 @@ The most important file is the `tutorial.md` where the content of the tutorial i
 > 2. Check that a new directory (with your tutorial name) has been generated in the topic folder
 > 3. Make sure that Jekyll is running
 >
->    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}/topics/contributing/tutorials/running-jekyll/tutorial.html)
+>    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}{% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
 >
 > 2. Check if the tutorial has been correctly added at [http://localhost:4000/training-material/](http://localhost:4000/training-material/)
 {: .hands_on}
@@ -193,8 +193,8 @@ Now that you have the structure in place, you can then fill the tutorial per se.
 > ### {% icon hands_on %} Hands-on: Write the tutorial
 >
 > 1. Open the `tutorial.md` file with your favorite text editor
-> 2. Fill out the tutorial by following the [dedicated tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)
-> 2. (Optional) Build the website locally and check that the tutorial is there by following the [Jekyll tutorial]({{ site.baseurl }}/topics/contributing/tutorials/running-jekyll/tutorial.html)
+> 2. Fill out the tutorial by following the [dedicated tutorial]({{ site.baseurl }}{% link topics/contributing/tutorials/create-new-tutorial-content/tutorial.md %})
+> 2. (Optional) Build the website locally and check that the tutorial is there by following the [Jekyll tutorial]({{ site.baseurl }}{% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
 {: .hands_on}
 
 # Add some technical support (recommended)
@@ -212,7 +212,7 @@ The technical support are different files:
 
 > ### {% icon hands_on %} Hands-on: Add technical support for the tutorial
 >
-> 1. Add some technical support for the tutorial following the [tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html)
+> 1. Add some technical support for the tutorial following the [tutorial]({{ site.baseurl }}{% link topics/contributing/tutorials/create-new-tutorial-technical/tutorial.md %})
 >    - Add the workflow
 >    - (Recommended) Generate the `data-library.yaml`
 >    - (Optional) Create an interactive tour
@@ -224,7 +224,7 @@ Sometimes, you may want to have slides to support a tutorial and introduce it du
 
 > ### {% icon hands_on %} Hands-on: Add slides
 >
-> 1. Create a slide deck in `slides.html` following the [Slide tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-slides/slides.html)
+> 1. Create a slide deck in `slides.html` following the [Slide tutorial]({{ site.baseurl }}{% link topics/contributing/tutorials/create-new-tutorial-slides/slides.html %})
 {: .hands_on}
 
 # Conclusion
