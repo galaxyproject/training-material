@@ -689,7 +689,7 @@ set provided by the Schloss lab.
 
 The data is now as clean as we can get it.  Despite that, our remaining sequences will still have errors in them.
 
-## Optional: Assessing error rates based on our mock community
+## Optional: Calculate error rates based on our mock community
 
 
 > ### {% icon tip %} Tip: Skipping the mock community analysis
@@ -727,7 +727,7 @@ accurate your sequencing and analysis protocol is.
 >
 > **Example**
 >
-> As an example, consider the following image from [Fouhy et al.](https://dx.doi.org/10.1186%2Fs12866-016-0738-z).
+> As an example, consider the following image from [Fouhy 2016](https://dx.doi.org/10.1186%2Fs12866-016-0738-z).
 > A mock community sample was sequenced for different combinations of sequencer and primer sets (V-regions).
 > Since we know the expected outcome, we can assess the accuracy of each pipeline. A similar approach can be used to
 > assess different parameter settings of the *in-silico*  analysis pipline.
@@ -764,8 +764,9 @@ Selected 58 sequences from your fasta file.
 Selected 4046 sequences from your count file
 ```
 
-This tells us that there were 58 unique sequences, representing a total of 4,046 total sequences in our Mock sample. We
-can now use the `seq.error` command to measure the error rates based on our mock reference. Here we align
+The Mock sample has 58 unique sequences, representing a total of 4,046 total sequences.
+
+The **Seq.error** tool measures the error rates using our mock reference. Here we align
 the reads from our mock sample back to their known sequences, to see how many fail to match.
 
 > ### {% icon hands_on %} Hands-on: Assess error rates based on a mock community
@@ -790,13 +791,13 @@ Errors    Sequences
 [..]
 ```
 
-That is pretty good! Our error rate is only 0.0065%! This gives us confidence that the rest of our samples
+That is pretty good! The error rate is only 0.0065%! This gives us confidence that the rest of our samples
 are also of high quality, and we can continue with our analysis.
 
 
 ### Cluster mock sequences into OTUs
 
-We can now cluster the mock sequences into *OTUs* to see how many spurious OTUs we have:
+We'll now estimate how many bogus *OTUs* we have by clustering the Mock sequences into OTUs, and comparing the results with the expected results.
 
 > ### {% icon tip %} Background: What are Operational Taxonomic Units (OTUs)?
 >
@@ -877,11 +878,9 @@ numsampled	0.03-	lci-	hci-
 ```
 
 
-In this file you see that when we use the full set of 4060 sequences, we find 34 OTUs from the Mock community.
-If we use 3000 sequences, we would have about 31 OTUs. In an ideal world, we would find exactly 21 OTUs. Despite our
-best efforts, some chimeras or other contaminations may have slipped through our filtering steps. It may not be perfect
-but it's still pretty good!
-
+When we use the full set of 4060 sequences, we find 34 OTUs from the Mock community; and with
+3000 sequences, we find about 31 OTUs. In an ideal world, we would find exactly 21 OTUs. Despite our
+best efforts, some chimeras or other contaminations may have slipped through our filtering steps. 
 
 > ### {% icon tip %} Background: Rarefaction
 >
@@ -906,8 +905,8 @@ Now that we have assessed our error rates we are ready for some real analysis.
 
 Now that we have cleaned up our data set as best we can, and assured ourselves of the quality of our sequencing
 pipeline by considering a mock sample, we are almost ready to cluster and classify our real data. But
-before we start, we should first remove the mock dataset from our data, we no longer need it. We do this using
-the `remove.groups` command:
+before we start, we should first remove the Mock dataset from our data, as we no longer need it. We do this using
+the **Remove.groups** tool:
 
 > ### {% icon hands_on %} Hands-on: Remove Mock community from our dataset
 >
@@ -926,15 +925,16 @@ approaches, please refer to the [mothur wiki page](https://www.mothur.org/wiki/M
 
 ## Clustering sequences into OTUs
 
-There are several ways we can perform clustering. We could repeat what we did for the mock community, and
-use the `dist.seqs` and `cluster` commands. The alternative is to use the `cluster.split` command.
-In this approach, taxonomic information is used to split the sequences into bins and then cluster within each bin.
-The Schloss lab have published results showing that if you split at the level of Order or Family, and cluster to a 0.03
+There are several ways we can perform clustering. We could repeat what we did for the Mock community, and
+use the **Dist.seqs** and **Cluster** tools. (We could also use the **Cluster.split** tool.)
+
+The sequences are split into bins, and then clustered with each bin.  Taxonomic information is used to guide this process.
+The Schloss lab have [published results](https://www.mothur.org/wiki/MiSeq_SOP#OTUs) showing that if you split at the level of Order or Family, and cluster to a 0.03
 cutoff, you'll get just as good of clustering as you would with the "traditional" approach. In addition, this approach
 is less computationally expensive and can be parallelized, which is especially advantageous when you have large
 datasets.
 
-In this collowing cluster command we use `taxlevel=4`, which corresponds to the level of *Order*.
+We'll now use the **Cluster** tool, with `taxlevel` set to `4`, requesting that clusering be done at the *Order* level.
 
 > ### {% icon hands_on %} Hands-on: Cluster our data into OTUs
 >
@@ -965,7 +965,8 @@ In this collowing cluster command we use `taxlevel=4`, which corresponds to the 
 >
 {: .hands_on}
 
-Opening the taxonomy output for level 0.03 shows a file structured like the following:
+The different levels of taxonomy are shown in the dataset names.
+Opening the taxonomy output for level 0.03 (meaning 97% similarity, or *species* level) shows a file structured like the following:
 
 ```
 OTU       Size    Taxonomy
@@ -979,8 +980,9 @@ Otu0013	1856	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lac
 ..
 ```
 
-This file tells you that Otu008 was observed 5260 times in your samples and that all of the
-sequences (100%) were classified as being members of the Alistipes.
+The first line shown indicates that Otu008 occurred 5260 times, and that all of the
+sequences (100%) were binned in the genus *[Alistipes](https://en.wikipedia.org/wiki/Alistipes)*.
+
 
 > ### {% icon question %} Question
 >
@@ -999,7 +1001,7 @@ sequences (100%) were classified as being members of the Alistipes.
 Before we continue, let's remind ourselves what we set out to do. Our original question was about the stability of
 the microbiome and whether we could observe any change in community structure between the early and late samples.
 
-Because some of our sample may contain more sequences than others, it is generally a good idea to normalize your
+Because some of our sample may contain more sequences than others, it is generally a good idea to normalize the
 dataset by subsampling.
 
 
@@ -1011,8 +1013,7 @@ dataset by subsampling.
 > - **Count.groups** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"shared"*: the `shared` file from **Make.shared** {% icon tool %}
 >
-> Take a look at the output. We see that our smallest sample had 2389 sequences in it. That is a reasonable
-> number. Despite what some say, subsampling and rarefying your data is an important thing to do.
+> Take a look at the output. The smallest sample had 2389 sequences in it. "[That is a reasonable  number. Despite what some say, subsampling and rarefying your data is an important thing to do.](https://www.mothur.org/wiki/MiSeq_SOP#Analysis)"
 >
 > We'll generate a subsampled file for our analyses with the `Sub.sample` command:
 >
@@ -1088,7 +1089,7 @@ and many different metrics have been proposed to quantify diversity [Finotello e
 
 In order to estimate alpha diversity of our samples, we first generate the rarefaction curves. Recall that
 rarefaction measure the number of observed OTUs as a function of the subsampling size. We do this with the
-`Rarefaction.single` command:
+**Rarefaction.single** tool:
 
 > ### {% icon hands_on %} Hands-on: Calculate Rarefaction
 > - **Rarefaction.single** {% icon tool %} with the following parameters
@@ -1139,10 +1140,8 @@ off so we are confident we cover a large part of our sample diversity:
 ![Rarefaction curves](../../images/rarefaction_curves.png)
 
 
-Finally, let's get a summary containing the number of sequences, the sample coverage, the number of observed
-OTUs, and the Inverse Simpson diversity estimate using the `Summary.single` command. The following command
+Finally, let's use the **Summary.single** tool to generate a summary.  The following command
 will randomly subsample down to 2389 sequences, repeat this process 1000 times, and report the average:
-
 
 > ### {% icon hands_on %} Hands-on: Summary.single
 >
@@ -1177,21 +1176,21 @@ label   group   sobs          coverage    invsimpson   invsimpson_lci   invsimps
 0.03    F3D9    162.000000    0.994803    24.120541    23.105499        25.228865       5773.000000
 ```
 
+This shows the [number of sequences](https://www.mothur.org/wiki/Nseqs), the [sample coverage](https://www.mothur.org/wiki/Coverage), the number of [observed OTUs](https://www.mothur.org/wiki/Sobs), and the [Inverse Simpson diversity estimate](https://www.mothur.org/wiki/Invsimpson) for each group.
 
-Notice that the sample coverages are all above 97%, which would indicate we did a pretty good job of sampling the communities.
-We also see that there is little difference in diversity or richness between early and late time points (or indeed bewteen
-different animals if we had used the full dataset). We could follow this up with statistical tests (e.g. AMOVA) to confirm our
-feeling that there is no significant difference based on sex or early vs. late, but this is beyond the scope of this tutorial.
+There are a couple of things to note here:
+* the differences in diversity and richness between early and late time points is small.
+* All sample coverage is above 97%
 
+We could perform additional statistical tests (e.g. ANOVA) to confirm our feeling that there is no significant difference based on sex or early vs. late, but this is beyond the scope of this tutorial.
 
 ### Beta diversity
 
 Beta diversity is a measure of the similarity of the membership and structure found between *different* samples.
 The default calculator in the following section is *thetaYC*, which is the [Yue & Clayton theta similarity
-coefficient](http://csyue.nccu.edu.tw/2005communicationindex.pdf)
+coefficient](http://csyue.nccu.edu.tw/2005communicationindex.pdf).
 
-We will calculate this with the `Dist.shared` command, which will allow us to rarefy our data to a common number of sequences.
-
+We calculate this with the **Dist.shared** tool, which will rarefy our data.
 
 > ### {% icon hands_on %} Hands-on: Beta diversity
 >
@@ -1239,10 +1238,10 @@ This generates a 4-way Venn diagram and a table listing the shared OTUs.
 
 This shows that there were a total of 180 OTUs observed between the 4 time points. Only 76 of those OTUs were
 shared by all four time points. We could look deeper at the shared file to see whether those OTUs were
-umerically rare or just had a low incidence.
+numerically rare or just had a low incidence.
 
 Next, let's generate a dendrogram to describe the similarity of the samples to each other. We will generate a
-dendrogram using the jclass and thetayc calculators within the `tree.shared` command:
+dendrogram using the jclass and thetayc calculators within the **Tree.shared** tool:
 
 > ### {% icon hands_on %} Tree
 >
@@ -1299,7 +1298,7 @@ instance we can convert our shared file to the more widely used `biom` format an
 
 ## Krona
 
-A second tool we can use to visualize our data, is [Krona]()
+A second tool we can use to visualize our data, is [Krona](https://github.com/marbl/Krona/wiki)
 
 > ### {% icon hands_on %} Hands-on: Krona
 >
@@ -1335,11 +1334,7 @@ innermost ring labeled "Bacteria"
 # Conclusion
 {:.no_toc}
 
-Well done! {% icon trophy %} You have completed the basics of the Schloss lab's Standard Operating Procedure for Illumina MiSeq data. You have worked your way through the following pipeline:
+Well done! {% icon trophy %} You have completed the basics of the Schloss lab's [Standard Operating Procedure for Illumina MiSeq data](https://www.mothur.org/wiki/MiSeq_SOP). You have worked your way through the following pipeline:
 
 ![mothur sop tutorial pipeline](../../images/mothur_sop_pipeline.jpg){:width="50%"}
-
-
-
-Well done! You have now seen how to perform the complete Schloss lab's Standard Operating Procedure (SOP) for MiSeq data.
 
