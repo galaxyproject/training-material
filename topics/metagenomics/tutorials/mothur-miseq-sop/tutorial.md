@@ -1008,26 +1008,29 @@ dataset by subsampling.
 > What we now want to do is see how many sequences we have in each sample. We'll do this with the
 > `Count.groups` command:
 >
-> - **Count.groups** {% icon tool %} with the following parameters
+> 1. **Count.groups** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"shared"*: the `shared` file from **Make.shared** {% icon tool %}
 >
-> Take a look at the output. The smallest sample had 2389 sequences in it. "[That is a reasonable  number. Despite what some say, subsampling and rarefying your data is an important thing to do.](https://www.mothur.org/wiki/MiSeq_SOP#Analysis)"
+>    > ### {% icon question %} Question
+>    > How many sequences did the smallest sample consist of?
+>    > > ### {% icon solution %} Solution
+>    > > 2389. This is a reasonable number, so we will now subsample all the other samples down to this level.
+>    > {: .solution}
+>    {: .question}
 >
-> We'll generate a subsampled file for our analyses with the `Sub.sample` command:
->
-> - **Sub.sample** {% icon tool %} with the following parameters
+> 2. **Sub.sample** {% icon tool %} with the following parameters
 >   - *"Select type of data to subsample"*: `OTU Shared`
 >   - {% icon param-file %} *"shared"*: the `shared` file from **Make.shared** {% icon tool %}
 >   - *"size"*: `2389`
 >
-> > ### {% icon question %} Question
-> >
-> >  What would you exect the result of `count.groups` on this new shared output collection to be? Check if you are correct.
-> > > ### {% icon solution %} Solution
-> > > all groups (samples) should now have 2440 sequences. Run count.groups again on the shared output collection by the sub.sample
-> > > tool to confirm that this is indeed what happened.
-> > {: .solution }
-> {: .question}
+>    > ### {% icon question %} Question
+>    >
+>    >  What would you exect the result of `count.groups` on this new shared output collection to be? Check if you are correct.
+>    > > ### {% icon solution %} Solution
+>    > > all groups (samples) should now have 2389 sequences. Run count.groups again on the shared output collection by the sub.sample
+>    > > tool to confirm that this is indeed what happened.
+>    > {: .solution }
+>    {: .question}
 >
 > **Note:** since subsampling is a stochastic process, your results from any tools using this subsampled data
 > will deviate from the ones presented here.
