@@ -65,7 +65,7 @@ The second method works at any step during the analysis.
 > 2. Open the Galaxy Upload Manager ({% icon galaxy-upload %} on the top-right of the tool panel)
 > 3. Click on **Rule-based** on the top
 >
->    ![Rule-based upload](../../images/group-tag/rule_upload.png)
+>    ![Rule-based upload](../../images/group-tags/rule_upload.png)
 >
 >    As you can see in this dialog, data can be selected from a history dataset or pasted in directly
 >
