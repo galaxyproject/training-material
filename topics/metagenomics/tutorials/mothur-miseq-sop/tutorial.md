@@ -239,13 +239,13 @@ and several other metrics.
 
 ## Create contigs from paired-end reads
 
-In this experiment we used paired-end sequencing of the ~253 bp V4 region of the 16S rRNA gene. 
+In this experiment we used paired-end sequencing of the ~253 bp V4 region of the 16S rRNA gene.
 The sequencing was done from either end of each fragment. Because the reads are about 250 bp in length, this results in a
 significant overlap between the forward and reverse reads in each pair. We will combine these pairs of reads into *contigs*.
 
 ![Merging into contigs](../../images/16S_merge_contigs.png)
 
-The **Make.contigs** tool creates the contigs, and uses the paired collection as input. **Make.contigs** 
+The **Make.contigs** tool creates the contigs, and uses the paired collection as input. **Make.contigs**
 will look at each pair, take the reverse complement reverse read, and then determine the overlap between the
 two sequences. Where an overlapping base call differs between the two reads, the quality score is used to determine
 the consensus base call. A new quality score is derived by combining the two original quality scores in both of
@@ -880,7 +880,7 @@ numsampled	0.03-	lci-	hci-
 
 When we use the full set of 4060 sequences, we find 34 OTUs from the Mock community; and with
 3000 sequences, we find about 31 OTUs. In an ideal world, we would find exactly 21 OTUs. Despite our
-best efforts, some chimeras or other contaminations may have slipped through our filtering steps. 
+best efforts, some chimeras or other contaminations may have slipped through our filtering steps.
 
 > ### {% icon tip %} Background: Rarefaction
 >
@@ -1055,7 +1055,7 @@ and many different metrics have been proposed to quantify diversity [Finotello e
 > <br><br>
 > To understand the difference between richness and evenness, consider the following example:
 >
-> ![](../../images/richness-evenness.png)
+> ![illustration of richness and evenness](../../images/richness-evenness.png)
 >
 > > ### {% icon question %} Question
 > > 1. Which of these communities has the highest richness?
@@ -1073,7 +1073,7 @@ and many different metrics have been proposed to quantify diversity [Finotello e
 > other if the species are very dissimilar in one of the samples (have high phylogenetic distance), but very
 > closely related to each other in the second sample.
 >
-> ![](../../images/phylogenetic-distance.png){: width="50%"}
+> ![illustration of phylogenetic distance](../../images/phylogenetic-distance.png){: width="50%"}
 >
 > Each of these factors play a role in diversity, but how to combine them into a single measure of diversity is nontrivial.
 > Many different metrics have been proposed for this, for example: *shannon, chao, pd, ace, simpson, sobs, jack, npshannon,
