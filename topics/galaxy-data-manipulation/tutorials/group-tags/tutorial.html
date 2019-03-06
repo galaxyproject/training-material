@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Group tags for complex experimental designs</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="A collection of microtutorials explaining data manipulati..." />
+        <meta property="og:title" content="Galaxy Training: Group tags for complex experimental designs" />
+        <meta property="og:description" content="A collection of microtutorials explaining data manipulati..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/galaxy-data-manipulation" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Data Manipulation
+                        </a>
+                    </li>
+
+                    
+                    
+                    
+
+                    
+                        
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-data-manipulation%2Ftutorials%2Fgroup-tags%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-data-manipulation%2Ftutorials%2Fgroup-tags%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-data-manipulation%2Ftutorials%2Fgroup-tags%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-data-manipulation%2Ftutorials%2Fgroup-tags%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-data-manipulation%2Ftutorials%2Fgroup-tags%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/galaxy-data-manipulation/tutorials/group-tags/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Group tags for complex experimental designs",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "/blob//LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "courseCode": "galaxy-data-manipulation / group-tags / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Group tags for complex experimental designs' tutorial",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Group tags for complex experimental designs",
+    "description": "Group tags for complex experimental designs",
+    "learningResourceType": "tutorial",
+    "interactivityType": "expositive",
+    "provider": {
+      "@type": "Organization",
+      "email": "galaxytrainingnetwork@gmail.com",
+      "name": "Galaxy Training Network",
+      "url": "https://galaxyproject.org/teach/gtn/"
+    }
+  },
+  "url": "https://galaxyproject.github.io//training-material/topics/galaxy-data-manipulation/tutorials/group-tags/tutorial.html",
+  "timeRequired": "PT10M",
+  "description": "Group tags for complex experimental designs\\nThe questions this  addresses are:\n - What are group tags?\n - How can I use group tags to perform multi-factor analyses with collections\n\n\\nThe objectives are:\n - Learn how to set group tags\n - Learn how to select group tags in tools\n\n",
+  "hasPart": [
+
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "",
+      "name": "Training data for Group tags for complex experimental designs tutorial"
+    }
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Marius van den Beek"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Marius van den Beek"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Data Manipulation",
+      "description": "A collection of microtutorials explaining data manipulation within Galaxy",
+      "url": "https://galaxyproject.github.io//training-material/topics/galaxy-data-manipulation/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2F"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Group tags for complex experimental designs</h1>
+        <div class="contributors-line">By: 
+  
+  <a href="/training-material/hall-of-fame#mvdbeek" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mvdbeek" alt="Marius van den Beek">Marius van den Beek</a> </div>
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>What are group tags?</li>
+            
+            <li>How can I use group tags to perform multi-factor analyses with collections</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>Learn how to set group tags</li>
+            
+            <li>Learn how to select group tags in tools</li>
+            
+            </ul>
+
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 10 minutes</p>
+            
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Advanced uses of Galaxy often require the use of dataset collections,
+which can contain between one and tens of thousands of datasets.
+Grouping datasets in this way has numerous advantages:</p>
+<ul>
+  <li>It is easy to represent a single collection in the History</li>
+  <li>Dataset names (“Element Identifiers”) are immutable and preserved</li>
+  <li>Collections can be split and nested in arbitrary ways</li>
+</ul>
+
+<p>While collections can be split in any way, doing so for multi-factor analysis
+quickly becomes cumbersome and messy. An alternative is to label collection
+elements with special group tags. These tags can be displayed in the Tool form,
+allowing users to select subsets of collections.</p>
+
+<p>This tutorial outlines how to set and use group tags with the DESeq2 tool.
+For a more detailed description and background for differential expression
+testing see the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">Reference-based RNA-Seq data analysis</a>.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#setting-group-tags-using-the-apply-rules-tool" id="markdown-toc-setting-group-tags-using-the-apply-rules-tool">Setting group tags using the apply rules tool</a>    <ol>
+      <li><a href="#set-group-tags-during-upload" id="markdown-toc-set-group-tags-during-upload">Set group tags during upload</a></li>
+      <li><a href="#set-group-tags-using-the-tag-elements-from-file-tool" id="markdown-toc-set-group-tags-using-the-tag-elements-from-file-tool">Set group tags using the “Tag elements from file” tool</a></li>
+    </ol>
+  </li>
+  <li><a href="#using-group-tags-in-tool-eg-deseq2" id="markdown-toc-using-group-tags-in-tool-eg-deseq2">Using group tags in tool, e.g. DESeq2</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="setting-group-tags-using-the-apply-rules-tool">Setting group tags using the apply rules tool</h1>
+
+<p>There are three ways to set group tags:</p>
+<ul>
+  <li>Using the rule builder / apply_rules tool</li>
+  <li>Using the “Tag elements from file” tool</li>
+  <li>Manually</li>
+</ul>
+
+<p>We will use the first two methods in this tutorial.
+The second method works at any step during the analysis.</p>
+
+<h2 id="set-group-tags-during-upload">Set group tags during upload</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-set-group-tags-during-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Set group tags during upload</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</li>
+    <li>
+      <p>Click on <strong>Rule-based</strong> on the top</p>
+
+      <p><img src="../../images/group-tags/rule_upload.png" alt="Rule-based upload" /></p>
+
+      <p>As you can see in this dialog, data can be selected from a history dataset or pasted in directly</p>
+    </li>
+    <li>Set <strong>Upload data as:</strong> to <code class="highlighter-rouge">Collection(s)</code></li>
+    <li>
+      <p>Paste the following links into the text box</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts
+https://zenodo.org/record/1185122/files/GSM461177_untreat_paired.counts
+https://zenodo.org/record/1185122/files/GSM461178_untreat_paired.counts
+https://zenodo.org/record/1185122/files/GSM461179_treat_single.counts
+https://zenodo.org/record/1185122/files/GSM461180_treat_paired.counts
+https://zenodo.org/record/1185122/files/GSM461181_treat_paired.counts
+https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
+</code></pre></div>      </div>
+    </li>
+    <li>Click <strong>Build</strong></li>
+    <li>We will add a regex that creates 3 new columns with accession, treatment and library type:
+      <ul>
+        <li>Click on the <strong>Columnn</strong> button and then <strong>Using a Regular Expression</strong></li>
+        <li>Select <strong>Create columns matching expression groups</strong></li>
+        <li>Paste <code class="highlighter-rouge">.*(GSM.*)_(.*)_(.*).counts</code> in <em>“Regular Expression”</em></li>
+        <li>Set <em>“Number of Groups”</em> to 3</li>
+        <li>
+          <p>Click on <strong>Apply</strong></p>
+
+          <p>We should have now a table with 4 columns: link, sample name, treatment, sequencing type</p>
+        </li>
+        <li>Click on <strong>Rules</strong> and then <strong>Add / Modify Column Definitions</strong></li>
+        <li>Click on <strong>Add Definition</strong> and select:
+          <ul>
+            <li><em>“URL”</em>: Column A</li>
+            <li><em>“List Identifiers”</em>: Column B</li>
+            <li><em>“Group Tags”</em>: Columns C and D</li>
+          </ul>
+        </li>
+        <li>Click <strong>Apply</strong></li>
+        <li>Enter a name for the new collection</li>
+        <li>Click <strong>Build</strong></li>
+      </ul>
+    </li>
+    <li>Expand the generated collection and the files in it and check their names and tags</li>
+  </ol>
+</blockquote>
+
+<h2 id="set-group-tags-using-the-tag-elements-from-file-tool">Set group tags using the “Tag elements from file” tool</h2>
+
+<p>We now want to add group tags using the “Tag elements from file” tool.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-upload-and-create-a-collection"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Upload and create a collection</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import the following files</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts
+https://zenodo.org/record/1185122/files/GSM461177_untreat_paired.counts
+https://zenodo.org/record/1185122/files/GSM461178_untreat_paired.counts
+https://zenodo.org/record/1185122/files/GSM461179_treat_single.counts
+https://zenodo.org/record/1185122/files/GSM461180_treat_paired.counts
+https://zenodo.org/record/1185122/files/GSM461181_treat_paired.counts
+https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
+      </blockquote>
+    </li>
+    <li>Click on the <i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> icon (<strong>Operations on multiple datasets</strong>)</li>
+    <li>Check all new datasets</li>
+    <li>Click on <strong>For all selected…</strong> and then <strong>Build Dataset List</strong></li>
+    <li>Enter a name for the new collection and click <strong>Create list</strong></li>
+  </ol>
+</blockquote>
+
+<p>We have now a collection with our files. We can now either upload a tabular file containing the element identifiers
+and the tags we want to apply, or we can extract the element identifiers and extract the tags using a Regular Expression.
+We will do the latter.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-set-group-tags-using-the-tag-elements-from-file-tool"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Set group tags using the “Tag elements from file” tool</h3>
+  <ol>
+    <li><strong>Extract element identifiers</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+      <ul>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Dataset collection”</em>: created collection</li>
+      </ul>
+    </li>
+    <li><strong>Replace Text in entire line</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Extract element identifiers</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>In <em>“Replacement”</em>:
+          <ul>
+            <li>In <em>“1: Replacement”</em>
+              <ul>
+                <li><em>“Find pattern”</em>: <code class="highlighter-rouge">(.*)_(.*)_(.*).counts</code></li>
+                <li><em>“Replace with”</em>: <code class="highlighter-rouge">\1_\2_\3.counts\tgroup:\2\tgroup:\3</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>This step add an additional columns that can be used with the <code class="highlighter-rouge">Tag elements from file</code> tool</p>
+    </li>
+    <li>
+      <p>Change the datatype to <code class="highlighter-rouge">tabular</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="highlighter-rouge">tabular</code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li><strong>Tag elements from file</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+      <ul>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input Collection”</em>: created collection</li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Tag collection elements according to this file”</em>: output of <strong>Replace Text</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>You should now have a properly tagged collection of tabular files that can be used in DESeq2.</p>
+
+<h1 id="using-group-tags-in-tool-eg-deseq2">Using group tags in tool, e.g. DESeq2</h1>
+
+<p>DESeq2 has two modes for specifying factors. One can either
+select datasets corresponding to factors, or use group tags
+to specify factors. We will use the grop tags present in
+our collection to specify factors.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-running-deseq2-with-group-tags"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Running <strong>DESeq2</strong> with group tags</h3>
+
+  <ol>
+    <li><strong>DESeq2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“how”</em>: <code class="highlighter-rouge">Select group tags corresponding to levels</code>
+          <ul>
+            <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Count file(s) collection”</em>: Generated collection</li>
+            <li>In <em>“Factor”</em>:
+              <ul>
+                <li>In “1: Factor”
+                  <ul>
+                    <li><em>“Specify a factor name”</em>: <code class="highlighter-rouge">Treatment</code></li>
+                    <li>In <em>“Factor level”</em>:
+                      <ul>
+                        <li>In <em>“1: Factor level”</em>:
+                          <ul>
+                            <li><em>“Specify a factor level”</em>: <code class="highlighter-rouge">treat</code></li>
+                            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Counts file(s)”</em>: the 3 gene count files with <code class="highlighter-rouge">treat</code> in their name</li>
+                          </ul>
+                        </li>
+                        <li>In <em>“2: Factor level”</em>:
+                          <ul>
+                            <li><em>“Specify a factor level”</em>: <code class="highlighter-rouge">untreat</code></li>
+                            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Counts file(s)”</em>: the 4 gene count files with <code class="highlighter-rouge">untreat</code> in their name</li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert Factor”</em> (not on “Insert Factor level”)</li>
+                <li>In “2: Factor”
+                  <ul>
+                    <li>“Specify a factor name” to <code class="highlighter-rouge">Sequencing</code></li>
+                    <li>In <em>“Factor level”</em>:
+                      <ul>
+                        <li>In <em>“1: Factor level”</em>:
+                          <ul>
+                            <li><em>“Specify a factor level”</em>: <code class="highlighter-rouge">paired</code></li>
+                            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Counts file(s)”</em>: the 4 gene count files with <code class="highlighter-rouge">paired</code> in their name</li>
+                          </ul>
+                        </li>
+                        <li>In <em>“2: Factor level”</em>:
+                          <ul>
+                            <li><em>“Specify a factor level”</em>: <code class="highlighter-rouge">single</code></li>
+                            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Counts file(s)”</em>: the 3 gene count files with <code class="highlighter-rouge">single</code> in their name</li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Files have header?”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><em>“Output normalized counts table”</em>: <code class="highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>We can select a subset of Collections using the special group tag.</p>
+
+                </div>
+            </div>
+        </div>
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+            <ul>
+                
+                <li>Group tags allow complex analyses without reshaping or unhiding datasets in a collection</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Group tags for complex experimental designs (Data Manipulation)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Group tags for complex experimental designs (Data Manipulation)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (
+  
+  <a href="/training-material/hall-of-fame#mvdbeek" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mvdbeek" alt="Marius van den Beek">Marius van den Beek</a>)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/galaxy-data-manipulation/tutorials/group-tags/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>
