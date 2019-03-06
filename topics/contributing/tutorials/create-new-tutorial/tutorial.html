@@ -467,7 +467,6 @@ It may require some knowledge that you may not have or do not have the time to l
 │   ├── tutorial1
 │   │   ├── tutorial.md
 │   │   ├── slides.html
-│   │   ├── tools.yaml
 │   │   ├── data-library.yaml
 │   │   ├── workflows
 │   │   │   ├── workflow.ga
@@ -481,7 +480,6 @@ It may require some knowledge that you may not have or do not have the time to l
   <li>an optional slides file <code class="highlighter-rouge">slides.md</code> in Markdown with slides to support the tutorial</li>
   <li>a directory <code class="highlighter-rouge">tours</code> with Galaxy Interactive Tours to reproduce the tutorial</li>
   <li>a directory <code class="highlighter-rouge">workflows</code> with workflows extracted from the tutorial</li>
-  <li>a YAML file <code class="highlighter-rouge">tools.yaml</code> with the description of needed tools to run the tutorial</li>
   <li>a YAML file <code class="highlighter-rouge">data-library.yaml</code>  with the links to the input data needed for the tutorial</li>
 </ul>
 
@@ -586,7 +584,7 @@ So be careful when you start your upload that all your needed files are ready.</
 
 <h1 id="add-some-technical-support-recommended">Add some technical support (recommended)</h1>
 
-<p>To able to run the tutorial, we need a Galaxy instance where the needed tools and the data are available. We need then to describe the required technical infrastructure.</p>
+<p>To able to run the tutorial, we need a Galaxy instance where the needed tools and the data are available. We need then to describe the required technical infrastructure. Tools are installed based on the workflows in the <code class="highlighter-rouge">workflows</code> directory.</p>
 
 <p>This description will be used to automatically set up a Docker Galaxy flavour, to set up an existing Galaxy instance and also to test if a public Galaxy instance is able to run the tool.</p>
 
@@ -594,7 +592,6 @@ So be careful when you start your upload that all your needed files are ready.</
 
 <ul>
   <li>workflow file(s) in the <code class="highlighter-rouge">workflows</code> directory</li>
-  <li>the <code class="highlighter-rouge">tools.yaml</code> file with the description of needed tools to run the tutorial</li>
   <li>the <code class="highlighter-rouge">data-library.yaml</code> file with the links to the input data needed for the tutorial</li>
   <li>interactive tour file in the directory <code class="highlighter-rouge">tours</code> directory</li>
 </ul>

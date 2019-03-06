@@ -414,7 +414,6 @@
 
 <ol id="markdown-toc">
   <li><a href="#extracting-workflows" id="markdown-toc-extracting-workflows">Extracting workflows</a>    <ol>
-      <li><a href="#creating-the-toolsyaml-recommended" id="markdown-toc-creating-the-toolsyaml-recommended">Creating the <code class="highlighter-rouge">tools.yaml</code> (recommended)</a></li>
       <li><a href="#testing-the-workflow-recommended" id="markdown-toc-testing-the-workflow-recommended">Testing the workflow (recommended)</a></li>
     </ol>
   </li>
@@ -436,62 +435,6 @@
   <ol>
     <li>Download the workflow for the tutorial</li>
     <li>Save it in the <code class="highlighter-rouge">workflow</code> directory of the tutorial</li>
-  </ol>
-</blockquote>
-
-<h2 id="creating-the-toolsyaml-recommended">Creating the <code class="highlighter-rouge">tools.yaml</code> (recommended)</h2>
-
-<p>The first file to fill out is the <code class="highlighter-rouge">tools.yaml</code> file which contains the list of the required tools that could be installed from the ToolShed.</p>
-
-<p>This file looks like:</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
-<span class="na">api_key</span><span class="pi">:</span> <span class="s">admin</span>
-<span class="na">galaxy_instance</span><span class="pi">:</span> <span class="s">http://localhost:8080</span>
-<span class="na">tools</span><span class="pi">:</span>
-<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">tool1</span>
-  <span class="na">owner</span><span class="pi">:</span> <span class="s">owner</span>
-  <span class="na">tool_panel_section_label</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Section1"</span>
-<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">tool2</span>
-  <span class="na">owner</span><span class="pi">:</span> <span class="s">owner</span>
-  <span class="na">tool_panel_section_label</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Section2"</span>
-</code></pre></div></div>
-
-<p>with:</p>
-
-<ul>
-  <li><code class="highlighter-rouge">name</code>: the name of the wrapper of the tool in the ToolShed</li>
-  <li><code class="highlighter-rouge">owner</code>: the owner of the wrapper of the tool in the ToolShed</li>
-  <li><code class="highlighter-rouge">tool_panel_section_label</code>: section where to put the tool (in the left panel in the Galaxy instance)</li>
-</ul>
-
-<p>This list of tools can be automatically extracted from the workflow using <a href="https://ephemeris.readthedocs.io/en/latest/index.html">Ephemeris</a> (which should be in the conda environment):</p>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> workflow-to-tools <span class="nt">-w</span> path/to/workflow <span class="nt">-o</span> path/to/tools.yaml
-</code></pre></div></div>
-
-<p>After the extraction, some formatting is needed:</p>
-
-<ol>
-  <li>
-    <p>Add at the beginning:</p>
-
-    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="s">---</span>
- <span class="s">api_key</span><span class="pi">:</span> <span class="s">admin</span>
- <span class="na">galaxy_instance</span><span class="pi">:</span> <span class="s">http://localhost:8080</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Change the <code class="highlighter-rouge">tool_panel_section_label</code> to something more informative</p>
-  </li>
-</ol>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-creating-the-toolsyaml-from-your-workflow"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating the <code class="highlighter-rouge">tools.yaml</code> from your workflow</h3>
-
-  <ol>
-    <li>Create the <code class="highlighter-rouge">tools.yaml</code> file using your workflow and Ephemeris</li>
-    <li>Correct the formatting of the <code class="highlighter-rouge">tools.yaml</code> file</li>
   </ol>
 </blockquote>
 
