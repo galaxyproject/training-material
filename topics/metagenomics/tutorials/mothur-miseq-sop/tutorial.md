@@ -795,7 +795,7 @@ are also of high quality, and we can continue with our analysis.
 
 ### Cluster mock sequences into OTUs
 
-We'll now estimate how many bogus *OTUs* we have by clustering the Mock sequences into OTUs, and comparing the results with the expected results.
+We'll now estimate how many bogus *OTUs* we have by clustering the Mock sequences into OTUs, and comparing the results with the expected outcome.
 
 > ### {% icon tip %} Background: What are Operational Taxonomic Units (OTUs)?
 >
@@ -923,10 +923,9 @@ approaches, please refer to the [mothur wiki page](https://www.mothur.org/wiki/M
 
 ## Clustering sequences into OTUs
 
-There are several ways we can perform clustering. We could repeat what we did for the Mock community, and
-use the **Dist.seqs** and **Cluster** tools. (We could also use the **Cluster.split** tool.)
-
-The sequences are split into bins, and then clustered with each bin.  Taxonomic information is used to guide this process.
+There are several ways we can perform clustering. For the Mock community, we used the traditional approach of
+using the **Dist.seqs** and **Cluster** tools. Alternatively, we can also use the **Cluster.split** tool. With
+this approach, the sequences are split into bins, and then clustered with each bin.  Taxonomic information is used to guide this process.
 The Schloss lab have [published results](https://www.mothur.org/wiki/MiSeq_SOP#OTUs) showing that if you split at the level of Order or Family, and cluster to a 0.03
 cutoff, you'll get just as good of clustering as you would with the "traditional" approach. In addition, this approach
 is less computationally expensive and can be parallelized, which is especially advantageous when you have large
@@ -1141,8 +1140,8 @@ off so we are confident we cover a large part of our sample diversity:
 ![Rarefaction curves](../../images/rarefaction_curves.png)
 
 
-Finally, let's use the **Summary.single** tool to generate a summary.  The following command
-will randomly subsample down to 2389 sequences, repeat this process 1000 times, and report the average:
+Finally, let's use the **Summary.single** tool to generate a summary report.  The following command
+will randomly subsample down to 2389 sequences, repeat this process 1000 times, and report several metrics:
 
 > ### {% icon hands_on %} Hands-on: Summary.single
 >
