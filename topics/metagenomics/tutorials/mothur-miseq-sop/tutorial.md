@@ -936,7 +936,7 @@ We'll now use the **Cluster** tool, with `taxlevel` set to `4`, requesting that 
 
 > ### {% icon hands_on %} Hands-on: Cluster our data into OTUs
 >
-> - **Cluster.split** {% icon tool %} with the following parameters
+> 1. **Cluster.split** {% icon tool %} with the following parameters
 >   - *"Split by"*: `Classification using fasta`
 >   - {% icon param-file %} *"fasta"*: the `fasta` output from **Remove.groups** {% icon tool %}
 >   - {% icon param-file %} *"taxonomy"*: the `taxonomy` output from **Remove.groups** {% icon tool %}
@@ -944,18 +944,18 @@ We'll now use the **Cluster** tool, with `taxlevel` set to `4`, requesting that 
 >   - *"taxlevel"*: `4`
 >   - *"cutoff"*: `0.03`
 >
-> Next we want to know how many sequences are in each OTU from each group and we can do this using the
-> `Make.shared` command. Here we tell mothur that we're really only interested in the 0.03 cutoff level:
+>    Next we want to know how many sequences are in each OTU from each group and we can do this using the
+>    **Make.shared** tool. Here we tell mothur that we're really only interested in the 0.03 cutoff level:
 >
-> - **Make.shared** {% icon tool %} with the following parameters
+> 2. **Make.shared** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"list"*: the `list` output from **Cluster.split** {% icon tool %}
 >   - {% icon param-file %} *"count"*: the `count table` from **Remove.groups** {% icon tool %}
 >   - *"label"*: `0.03`
 >
-> We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each
-> OTU using the `Classify.otu` command:
+>    We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each
+>    OTU using the **Classify.otu** tool:
 >
-> - **Classify.otu** {% icon tool %} with the following parameters
+> 3. **Classify.otu** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"list"*: the `list` output from **Cluster.split** {% icon tool %}
 >   - {% icon param-file %} *"count"*: the `count table` from **Remove.groups** {% icon tool %}
 >   - {% icon param-file %} *"taxonomy"*: the `taxonomy` output from **Remove.groups** {% icon tool %}
@@ -1005,8 +1005,8 @@ dataset by subsampling.
 
 > ### {% icon hands_on %} Hands-on: Subsampling
 >
-> What we now want to do is see how many sequences we have in each sample. We'll do this with the
-> `Count.groups` command:
+> First we want to see how many sequences we have in each sample. We'll do this with the
+> **Count.groups** tool:
 >
 > 1. **Count.groups** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"shared"*: the `shared` file from **Make.shared** {% icon tool %}
@@ -1195,14 +1195,14 @@ We calculate this with the **Dist.shared** tool, which will rarefy our data.
 
 > ### {% icon hands_on %} Hands-on: Beta diversity
 >
-> - **Dist.shared** {% icon tool %} with the following parameters
+> 1. **Dist.shared** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"shared"*: to the `shared` file from **Make.shared** {% icon tool %}
 >   - *"calc"*: `thetayc,jclass`
 >   - *"subsample"*: `2389`
 >
-> Let's visualize our data in a Heatmap
+>    Let's visualize our data in a Heatmap:
 >
-> - **Heatmap.sim** {% icon tool %} with the following parameters
+> 2. **Heatmap.sim** {% icon tool %} with the following parameters
 >   - *"Generate Heatmap for"*: `phylip`
 >   - {% icon param-collection %} *"phylip"*: the output of **Dist.shared** {% icon tool %} (this is a collection input)
 >
@@ -1221,15 +1221,12 @@ and the jclass calulator (output `jclass.0.03.lt.ave`):
 ![Heatmap for the jclass calculator](../../images/heatmap.sim_jclass.png)
 
 When generating Venn diagrams we are limited by the number of samples that we can analyze simultaneously.
-Let's take a look at the Venn diagrams for the first 4 time points of female 3 using the `venn` command:
+Let's take a look at the Venn diagrams for the first 4 time points of female 3 using the **Venn** tool:
 
 > ### {% icon hands_on %} Hands-on: Venn diagram
 >
-> After the tool has finished, rename the output to `Subsample.shared` to make it easier to recognize in
-> further analysis
->
 > - **Venn** {% icon tool %} with the following parameters
->   - {% icon param-collection %} *"OTU Shared"*: output from **Subsample.shared** {% icon tool %} (collection)
+>   - {% icon param-collection %} *"OTU Shared"*: output from **Sub.sample** {% icon tool %} (collection)
 >   - *"groups"*: `F3D0,F3D1,F3D2,F3D3`
 {: .hands_on}
 
@@ -1276,24 +1273,24 @@ instance we can convert our shared file to the more widely used `biom` format an
 
 > ### {% icon hands_on %} Hands-on: Phinch
 >
-> - **Make.biom** {% icon tool %} with the following parameters
->   - {% icon param-collection %} *"shared"*: the output from **Subsample.shared** {% icon tool %}
+> 1. **Make.biom** {% icon tool %} with the following parameters
+>   - {% icon param-collection %} *"shared"*: the output from **Sub.sample** {% icon tool %}
 >   - {% icon param-collection %} *"constaxonomy"*: the `taxonomy` output from **Classify.otu** {% icon tool %}
 >   - {% icon param-file %} *"metadata"*: the `mouse.dpw.metadata` file you uploaded at the start of this tutorial
 >
-> The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
-> to view the file at Phinch:
+> 2. **View** the file in Phinch
+>   - The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
+>     to view the file at Phinch:
 >
-> ![Icon to view at Phinch](../../../../shared/images/viewatphinch.png)
+>       ![Icon to view at Phinch](../../../../shared/images/viewatphinch.png)
 >
-> Clicking on this link will lead you to the Phinch website, which will automatically load in your file, and
-> where you can several interactive visualisations:
->
-> ![Phinch overview](../../../../shared/images/phinch_overviewpage.png)
+>  Clicking on this link will lead you to the Phinch website, which will automatically load in your file, and
+>  where you can several interactive visualisations:
+>  ![Phinch overview](../../../../shared/images/phinch_overviewpage.png)
 >
 > > ### {% icon comment %} Comment
 > >
-> > If this link is not present on your Galaxy, you can download the generated BIOM file and upload directly to Phinch server at [http://phinch.org](http://phinch.org).
+> > If this link is not present on your Galaxy, you can download the generated BIOM file and upload directly to the Phinch server at [http://phinch.org](http://phinch.org).
 > {: .comment}
 {: .hands_on}
 
@@ -1305,10 +1302,10 @@ A second tool we can use to visualize our data, is [Krona](https://github.com/ma
 >
 >  First we convert our mothur taxonomy file to a format compatible with Krona
 >
-> - **Taxonomy-to-Krona** {% icon tool %} with the following parameters
+> 1. **Taxonomy-to-Krona** {% icon tool %} with the following parameters
 >   - {% icon param-collection %} *"Taxonomy file"*: the `taxonomy` output from **Classify.otu**
 >
-> - **Krona pie chart** {% icon tool %} with the following parameters
+> 2. **Krona pie chart** {% icon tool %} with the following parameters
 >   - *"Type of input"*: `Tabular`
 >   - {% icon param-collection %} *"Input file"*: the `taxonomy` output from **Taxonomy-to-Krona** {% icon tool %}
 {: .hands_on}
