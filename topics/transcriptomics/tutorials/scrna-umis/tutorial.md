@@ -21,7 +21,7 @@ requirements:
     type: "internal"
     topic_name: transcriptomics
     tutorials:
-        - scrna-introduction
+        #- scrna-introduction
         - scrna-plates-batches-barcodes
 
 follow_up_training:

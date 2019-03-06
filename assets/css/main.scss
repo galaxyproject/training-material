@@ -120,6 +120,7 @@ $feedback-color: #86D486;
 body {
     font-size: $font-size;
     word-wrap: break-word;
+    position: relative;
 }
 
 h1,
@@ -201,7 +202,7 @@ footer {
 
 .tutorial {
     & > h1:first-child {
-        margin-bottom: 3rem;
+        margin-bottom: 1rem;
     }
 
     table {
@@ -321,6 +322,12 @@ footer {
             font-size: 0.7em;
         }
     }
+}
+
+.contributors-line {
+    color: $gray;
+    font-size: 1.2em;
+    margin-bottom: 5rem;
 }
 
 .hall-of-fame {
@@ -463,4 +470,80 @@ a {
 
 code {
     color: #8b3035;
+}
+
+
+nav[data-toggle='toc'] {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    .nav {
+        li {
+            a {
+                padding-left: 0px;
+                &:hover,
+                &:focus,
+                &:active{
+                    padding-left: 0px;
+                    color: #004590;
+                    border-left: none;
+                }
+            }
+
+            .active {
+                padding-left: 0px;
+                color: #004590;
+                border-left: none;
+            }
+        }
+
+        .nav li {
+            a,
+            .active {
+                padding-left: 10px;
+                &:hover,
+                &:focus,
+                &:active{
+                    padding-left: 10px;
+                }
+            }
+
+            &:hover,
+            &:focus,
+            &:active{
+                padding-left: 10px;
+            }
+        }
+    }
+
+    .nav-link.active:hover {
+        padding-left: 0px;
+        color: #004590;
+        border-left: none;
+    }
+}
+
+.col-sm-2 {
+    padding-left: 0px;
+}
+
+/* small screens */
+@media screen and (max-width: 768px) {
+    nav[data-toggle='toc'] {
+        display: none !important;
+    }
+
+    .col-sm-10 {
+        max-width: 100%;
+    }
+}
+
+.contributor-badge {
+    /* prevent breaking across lines */
+    white-space: nowrap;
+
+    img {
+        height: 1.25em;
+        border-radius: 50%;
+        margin: 0.25em;
+    }
 }
