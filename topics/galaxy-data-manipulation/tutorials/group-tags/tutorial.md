@@ -111,7 +111,7 @@ We now want to add group tags using the "Tag elements from file" tool.
 > ### {% icon hands_on %} Hands-on: Upload and create a collection
 >
 > 1. Create a new history for this tutorial
-> 2. Import the following files 
+> 2. Import the following files
 >
 >    ```
 >    https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts
@@ -131,10 +131,10 @@ We now want to add group tags using the "Tag elements from file" tool.
 > 6. Enter a name for the new collection and click **Create list**
 {: .hands_on}
 
-We have now a collection with our files. We can now either upload a tabular file containing the element identifiers 
+We have now a collection with our files. We can now either upload a tabular file containing the element identifiers
 and the tags we want to apply, or we can extract the element identifiers and extract the tags using a Regular Expression.
 We will do the latter.
-  
+
 > ### {% icon hands_on %} Hands-on: Set group tags using the "Tag elements from file" tool
 > 1. **Extract element identifiers** {% icon tool %}
 >      - {% icon param-collection %} *"Dataset collection"*: created collection
@@ -180,7 +180,7 @@ our collection to specify factors.
 >                  - In *"2: Factor level"*:
 >                      - *"Specify a factor level"*: `untreat`
 >                      - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `untreat` in their name
->          - Click on *"Insert Factor"* (not on "Insert Factor level")
+>          - {% icon param-repeat %} Click on *"Insert Factor"* (not on "Insert Factor level")
 >          - In "2: Factor"
 >              - "Specify a factor name" to `Sequencing`
 >              - In *"Factor level"*:
