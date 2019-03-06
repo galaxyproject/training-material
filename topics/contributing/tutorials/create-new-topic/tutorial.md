@@ -31,7 +31,6 @@ Each training material is related to a topic. All training materials (slides, tu
 │   ├── tutorial1
 │   │   ├── tutorial.md
 │   │   ├── slides.html
-│   │   ├── tools.yaml
 │   │   ├── data-library.yaml
 │   │   ├── workflows
 │   │   │   ├── workflow.ga
