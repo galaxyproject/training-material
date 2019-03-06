@@ -11,7 +11,7 @@ objectives:
 - Explain the types of supervised machine learning - classification and regression.
 - Learn how to make predictions using the training and test data.
 - Visualize the predictions.
-time_estimation: ''
+time_estimation: '1H'
 key_points:
 - There is two types of machine learning's supervised approaches, classification and regression.
 - In supervised approaches, the target for each sample is known.
@@ -30,13 +30,13 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Supervised learning methods in machine learning have targets/classes/categories defined in the datasets. These targets can either be discrete values or real-values (continuous). When the targets are discreet, the learning task is called as classification. When the targets are real-values, the task becomes regression. Classification is assigning a distinct category to each sample in the dataset. Regression assigns a real-valued output to a sample in the dataset. In the image below, the "green" line is a boundary which separates the blue balls from the red ones. The task of a classification method is to learn this boundary which can be used to differentiate between unseen blue and red balls. This green line is the decision boundary which determines the category of a new ball.
+Supervised learning methods in machine learning have targets/classes/categories defined in the datasets. These targets can either be discrete values or real-values (continuous). When the targets are discreet, the learning task is known as classification. When the targets are real-values, the task becomes regression. Classification is assigning a distinct category to each sample in the dataset. Regression assigns a real-valued output to a sample in the dataset. In figure [1](#figure-1), the line is a boundary which separates blue balls from violet ones. The task of a classification method is to learn this boundary which can be used to differentiate between unseen balls. The line is the decision boundary which determines the category of a new ball.
 
-![Classification of differently coloured balls. The green line creates a boundary between two sets of balls and is learned by a classifier](images/classification_1.png "Classification of differently coloured balls. The green line creates a boundary between two sets of balls and is learned by a classifier.")
+![classification](images/classification.png "Classification of differently coloured balls. The line creates a boundary between two sets of balls and is learned by a classifier.")
 
-The following image shows how a (regression) curve is fit which explains most of the data points. Here, the curve is a straight line. The regression task is to learn this curve which explains the underlying distribution.
+Figure [2](#figure-2) shows how a (regression) curve is fit which explains most of the data points (blue balls). Here, the curve is a straight line (red). The regression task is to learn this curve which explains the underlying distribution of the data points.
 
-![Regression fit through the targets](images/regression_1.png "Regression fit through the targets.")
+![regression](images/regression.png "Regression fit through data points.")
 
 > ### Agenda
 >
@@ -75,9 +75,9 @@ The datasets required for this tutorial contain 9 features of breast cancer whic
 >
 {: .hands_on}
 
-## Learn, predict and visualise the predictions
+## Learn using training data
 
-Using the dataset `breast-w_train.tsv`, a `SVM (Support vector machine)` classifier is trained which learns features from the data and maps them to the targets. This mapping is called a trained model. The training step produces a model file of type `zip`. 
+Using the dataset `breast-w_train`, [SVM](https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC) (support vector machine) classifier is trained which learns features from the data and maps them to the targets. This mapping is called a trained model. The training step produces a model file of type `zip`. 
 
 > ### {% icon hands_on %} Hands-on: Train the model
 > 
@@ -96,6 +96,8 @@ Using the dataset `breast-w_train.tsv`, a `SVM (Support vector machine)` classif
 > 2. Rename the generated file to `model`
 {: .hands_on}
 
+## Predict using test data
+
 This model can now be used to predict the categories of unseen test data (`breast-w_test`).
 
 > ### {% icon hands_on %} Hands-on: Predict categories using the model
@@ -109,7 +111,9 @@ This model can now be used to predict the categories of unseen test data (`breas
 > 2. Rename the generated file to `predicted_labels`
 {: .hands_on}
 
-We would like to check if the predictions are correct.  We will use another dataset `breast-w_targets.tsv` which is similar to the test dataset but with a target column containing the true targets of the test data. With the predicted and true targets, the learned model is evaluated to see how good are the predictions. To visualise these predictions, a plotting tool is used. 
+## Visualise the prediction
+
+We would like to check if the predictions are correct.  We will use another dataset `breast-w_targets` which is similar to the test dataset but with a target column containing the true targets of the test data. With the predicted and true targets, the learned model is evaluated to see how good are the predictions. To visualise these predictions, a plotting tool is used. 
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the predictions
 > 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualise the predictions:
@@ -119,27 +123,27 @@ We would like to check if the predictions are correct.  We will use another data
 >
 {: .hands_on}
 
-The tool creates three plots
+The tool creates the following three plots:
 
-1. Confusion matix of the correctly and incorrectly predicted samples
+1. Confusion matrix of the correctly and incorrectly predicted samples
 
-    ![Confusion matix of the correctly and incorrectly predicted samples](images/confusion_matrix.png)
+    ![confusion_matrix](images/confusion_matrix.png "Confusion matrix of the correctly and incorrectly predicted sample.")
 
-    The diagonal from bottom-left to top-right shows the number of correctly predicted labels which the diagonal from top-left to bottom-right shows the number of incorrectly predicted samples.
+    In figure [3](#figure-3), the diagonal from bottom-left to top-right shows the number of correctly predicted labels which the diagonal from top-left to bottom-right shows the number of incorrectly predicted samples.
 
 2. Precision, recall and F1 score
 
-    ![Precision, recall and F1 score](images/precision_recall_f1.png)
+    ![prf1_scores](images/precision_recall_f1.png "Precision, recall and F1 score.")
 
-    The scores determine the robustness of classification. The recall curve shows the percentage of correctly predicted samples per class.
+    The scores determine the robustness of classification. In figure [4](#figure-4), the recall curve shows the percentage of correctly predicted samples per class. All these curves converge because all the samples in `breast-w_test` file get correctly classified.
 
 3. Receiver operator characteristics (ROC) and area under ROC (AUC)
 
-    ![Receiver operator characteristics (ROC) and area under ROC (AUC)](images/roc.png)
+    ![roc_scores](images/roc.png "Receiver operator characteristics (ROC) and area under ROC (AUC).")
 
-    The blue curve shows the ROC curve. When it is close to the orange curve (y = x), the classification results are not good. When it is more towards the top-left (like the blue curve shown in the plot), the classification performance is good. 
+    The blue curve in figure [5](#figure-5) shows the ROC curve. When it is close to the orange curve (y = x), the classification results are not good. When it is more towards the top-left (like the blue curve shown in the plot), the classification performance is good. 
 
-With the previous step, we learn how to perform classification and visualise the predictions using Galaxy machine learning and plotting tools. The classes of unseen (test) data are predicted, evaluated against the true classes and visualized to show how good is the classification.
+By following these steps, we learn how to perform classification and visualise the predictions using Galaxy machine learning and plotting tools. The classes of unseen (test) data are predicted, evaluated against the true classes and visualized to show how good is the classification.
 
 
 # Regression
@@ -171,9 +175,9 @@ The datasets required for this tutorial contain 21 features of [computer system 
 {: .hands_on}
 
 
-## Learn, predict and visualise the predictions
+## Learn from training data
 
-`Gradient boosting regressor` is used for regression. It is an ensemble based [regressor](http://scikit-learn.org/stable/modules/ensemble.html#regression) consisting of weak learners (e.g. decision trees). It learns features of a training dataset (`train_data`) and maps all feature rows to respective targets, which are are real numbers. The process of mapping gives a trained model.
+Gradient boosting regressor is used for regression. It is an ensemble based [regressor](http://scikit-learn.org/stable/modules/ensemble.html#regression) consisting of weak learners (e.g. decision trees). It learns features of a training dataset (`train_data`) and maps all feature rows to respective targets, which are real numbers. The process of mapping gives a trained model.
 
 > ### {% icon hands_on %} Hands-on: Train a model
 > 
@@ -192,6 +196,8 @@ The datasets required for this tutorial contain 21 features of [computer system 
 > 2. Rename the generated file to `model`
 {: .hands_on}
 
+## Predict using test data
+
 Similarly to the classification, the trained model is evaluated on `test_data` which predicts a target value for each row and the results compared to expected results
 
 > ### {% icon hands_on %} Hands-on: Predict categories using the model
@@ -205,6 +211,8 @@ Similarly to the classification, the trained model is evaluated on `test_data` w
 > 2. Rename the generated file to `predicted_data`
 {: .hands_on}
 
+## Visualise the prediction
+
 We now want to evaluate the prediction by comparing them to the expected targets.
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the predictions
@@ -213,24 +221,27 @@ We now want to evaluate the prediction by comparing them to the expected targets
 >    - {% icon param-file %} *"Select predicted data file"*: `predicted_data`
 {: .hands_on}
 
-The last tool creates three output plots:
+The last tool creates the following plots:
 
 1. True vs predicted targets curves
 
-    ![True vs predicted targets curves](images/true_pred_curves.png)
+    ![true_predicted](images/true_pred_curves.png "True vs predicted targets curves.")
 
-    These curves should be close to each other for a good regression performance
+    The corresponding points on both these curves in figure [6](#figure-6) should be close to each other for a good regression performance.
 
 2. Scatter plot for true vs. predicted targets
 
-    ![Scatter plot for true vs. predicted targets](images/true_vs_pred_scatter.png)
+    ![scatter_plot](images/true_vs_pred_scatter.png "Scatter plot for true vs. predicted targets.")
 
-    The data points (blue) should be close to the orange curve (y = x) which shows that the true and predicted values are close. It shows the performance of the regression. More the number of points are aligned along the x = y line, better is the prediction.
+    In figure [7](#figure-7), the data points (blue) should be close to the orange curve (y = x) which shows that the true and predicted values are close. It shows the performance of the regression. More the number of points are aligned along the x = y line, better is the prediction. [R2](https://en.wikipedia.org/wiki/Coefficient_of_determination) score is close to the best possible score of `1.0`.
 
 3. Residual plot between residual (predicted - true) and predicted targets
 
-    ![Residual plot between residual (predicted - true) and predicted targets](images/residual_plot.png)
+    ![residual_plot](images/residual_plot.png "Residual plot between residual (predicted - true) and predicted targets.")
 
-    For good regression performance, this plot should exhibit a random pattern.
+    For good regression performance, this plot should exhibit a random pattern. Figure [8](#figure-8) shows a random pattern of points.
 
-With the previous steps, we learn how to perform regression and visualise the predictions using Galaxy machine learning and plotting tools. The features of the training data are mapped the real-valued targets. This mapping is used to make predictions on the unseen (test) data. The quality of predictions is visualised using a plotting tool. 
+By following these steps, we learn how to perform regression and visualise the predictions using Galaxy machine learning and plotting tools. The features of the training data are mapped the real-valued targets. This mapping is used to make predictions on the unseen (test) data. The quality of predictions is visualised using a plotting tool.
+
+# Conclusion
+We learned how to perform classification and regression using different datasets and machine learning tools in Galaxy and visualized the output in multiple plots. There are many other classifiers and regressors which can be tried out on these datasets to find how they perform.
