@@ -111,10 +111,10 @@ At first you need to identify those structures of the genome which code for prot
 >
 {: .hands_on}
 
-> ### {% icon tip %} Tip:
+> ### {% icon details %} Aragorn in depth
 >
 > read more about **Aragorn** [here](https://nar.oxfordjournals.org/content/32/1/11.full.pdf+html).
-{: .tip}
+{: .details}
 
 # Functional Annotation
 
@@ -157,11 +157,15 @@ For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in 
 >
 > 5. {% icon tool %} Choose the tool **Select lines that match an expression** and enter the following information: *Select lines from* [select the BLAST top hit descriptions result file]; *that* [not matching]; *the pattern* [gi].
 >
-> <img src="../../images/selectlines.png" alt="Select lines that match an expression tool interface and parameters" width="50%">
+>    <img src="../../images/selectlines.png" alt="Select lines that match an expression tool interface and parameters" width="50%">
 >
->    > {% icon tip %} The result file will contain all proteins which do not have an entry in the second column and therefore have no similar protein in the SwissProt database.
->    >
->    > {% icon tip %} For functional description of those proteins we want to search for motifs or domains which may classify them more. To get a protein sequence FASTA file with only the not annotated proteins, use the tool **Filter sequences by ID from a tabular file** and select for *Sequence file to filter on the identifiers* [Augustus protein sequences] and for *Tabular file containing sequence identifiers* the protein file with not annotated sequences. The output file is a FASTA file with only those sequences without description.
+>    ### {% icon comment %} Results file
+>    > The result file will contain all proteins which do not have an entry in the second column and therefore have no similar protein in the SwissProt database.
+>    {: .comment}
+>
+>    ### {% icon comment %} Obtaining unannotated proteins for analysis
+>    > For functional description of those proteins we want to search for motifs or domains which may classify them more. To get a protein sequence FASTA file with only the not annotated proteins, use the tool **Filter sequences by ID from a tabular file** and select for *Sequence file to filter on the identifiers* [Augustus protein sequences] and for *Tabular file containing sequence identifiers* the protein file with not annotated sequences. The output file is a FASTA file with only those sequences without description.
+>    {: .comment}
 >
 {: .hands_on}
 
