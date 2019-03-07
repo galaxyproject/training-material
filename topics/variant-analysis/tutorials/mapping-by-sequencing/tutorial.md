@@ -52,7 +52,7 @@ tools. For Galaxy, the **MiModD** suite of tools offers efficient and flexible
 analysis workflows compatible with a variety of mapping-by-sequencing
 approaches.
 
-> ### {% icon detials %} Further reading
+> ### {% icon details %} Further reading
 > The MiModD documentation has its own chapter on supported
 > [mapping-by-sequencing schemes](http://mimodd.readthedocs.io/en/latest/nacreousmap.html)
 > not covered here.

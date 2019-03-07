@@ -153,7 +153,7 @@ We will start by managing your SSH keypair for the cloud as this is an easy thin
 >
 > 1. Find the public key you will use for connecting to the your new VM. It is usually known as `id_rsa.pub`
 >
->    > ### {% icon coment %} No public key
+>    > ### {% icon comment %} No public key
 >    > If you can find the private key file (possibly a `cloud.pem` file you downloaded earlier from OpenStack), then you can find the public key by running the command:
 >    >
 >    > ```shell
