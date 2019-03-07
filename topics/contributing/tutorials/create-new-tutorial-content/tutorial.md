@@ -163,10 +163,10 @@ For this category of metadata, we have taken inspiration from what Software Carp
 
 The tutorial's content is written directly after the section of metadata. This is written in Markdown, a simple markup language.
 
-> ### {% icon tip %} Tip: Markdown
+> ### {% icon comment %} Markdown
 >
 > Check [this cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) to learn more how to use Markdown.
-{: .tip}
+{: .comment}
 
 The Markdown content is then transformed into a user friendly webpage through a templating system. With this approach, there is no need to add the name of every tutorial each time, since they are automatically added based on the tutorial's metadata.
 
@@ -483,6 +483,8 @@ In the box below, initially hidden, we add the correct answer and possibly any a
 
 
 ## **Tips** box
+
+Tips boxes are really just for 'tips', usually hints regarding Galaxy operations that users may or may not be familiar with. If you want to provide extended discussion or links to external materials then consider the comment and detail boxes instead.
 
 {% raw %}
 ```markdown
