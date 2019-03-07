@@ -35,7 +35,7 @@ The process of development of new content is open and transparent, using git and
 ![Open source development process](../../images/oss_development_process.png "Open source development process")
 
 1. Create a fork
-1. Clone your fork of this repository to create a local copy on your computer 
+1. Clone your fork of this repository to create a local copy on your computer
 1. Create a new branch in your local copy for each significant change
 2. Commit the changes in that branch
 1. Push that branch to your fork on GitHub
@@ -64,13 +64,13 @@ Forking a repository is a simple two-step process:
 >
 > 1. Go on the GitHub repository: [{{ site.github.repository_url }}]({{ site.github.repository_url }})
 > 2. Click on **Fork** (top-right corner of the page)
->   
+>
 >    ![Fork](../../images/PR_fork.jpg)
 >
 > > ### {% icon comment %} Comment
 > > When you click the **Fork** button GitHub will show you a list with your user account and any groups where you can create a fork of this repository (starting with `@`). If you see yourself only below "You have existing forks of this repository:", it means you already have a fork and you have nothing to do.
 > {: .comment}
-> 
+>
 {: .hands_on}
 
 # Clone the GitHub repository on your computer
@@ -126,7 +126,7 @@ Here for this tutorial, you will create a branch called "my_new_branch" in which
 > 1. List the existing branch
 >
 >    ```
->    $ git branch 
+>    $ git branch
 >      * master
 >    ```
 >
@@ -168,9 +168,9 @@ You have created your first branch! Now you want to make the change in the `CONT
 >    Changes not staged for commit:
 >      (use "git add/rm <file>..." to update what will be committed)
 >      (use "git checkout -- <file>..." to discard changes in working directory)
->    
+>
 >        modified:   CONTRIBUTORS.yaml
->    
+>
 >    no changes added to commit (use "git add" and/or "git commit -a")
 >    ```
 >
@@ -231,9 +231,9 @@ You pushed your changes to GitHub, but currently they are only on your fork. You
 > 3. Check that the selected branch are correct: **master** on the left and your branch name on the right
 >
 >    ![Branches in PR](../../images/PR_branch_check.png)
-> 
+>
 > 2. Fill in the pull request description
->    
+>
 >    ![PR description](../../images/PR_description.png)
 >
 >    1. Add a title for the Pull Request
@@ -253,10 +253,10 @@ One of the reviewers of your pull request asked you to add your name after your 
 
 > ### {% icon hands_on %} Hands-on: Make further changes
 >
-> 1. Make the requested changes in the `CONTRIBUTORS.yaml` file 
+> 1. Make the requested changes in the `CONTRIBUTORS.yaml` file
 >
 >    It should look like
->    
+>
 >    ```yaml
 >    bebatut:
 >         name: Bérénice Batut
@@ -270,9 +270,9 @@ One of the reviewers of your pull request asked you to add your name after your 
 >    Changes not staged for commit:
 >      (use "git add/rm <file>..." to update what will be committed)
 >      (use "git checkout -- <file>..." to discard changes in working directory)
->    
+>
 >        modified:   CONTRIBUTORS.yaml
->    
+>
 >    no changes added to commit (use "git add" and/or "git commit -a")
 >    ```
 >
@@ -309,7 +309,7 @@ On the bottom of your pull request, you can see the status of the tests:
     The tests are still running
 
 - Red (with cross)
-    
+
     ![Failed tests](../../images/PR_test_red.png)
 
     When it is red, you can investigate why by clicking on **Details**. You will be redirected on [Travis](http://travis-ci.org/) where you can see the logs of the tests. Get in touch with us on [Gitter]({{ site.gitter_url }}) if you need help to understand the issue.
@@ -329,7 +329,7 @@ You now want to work on a new tutorial or make some other new changes. However s
 > ### {% icon hands_on %} Hands-on: Update the local copy
 >
 > 1. Move to the `master` branch
->    
+>
 >    ```
 >    $ git checkout master
 >    ```
@@ -340,9 +340,9 @@ You now want to work on a new tutorial or make some other new changes. However s
 >    $ git remote add upstream https://github.com/galaxyproject/training-material.git
 >    ```
 >
->    > ### {% icon tip %}: Tip: "remote upstream already exists"
+>    > ### {% icon comment %}: Error "remote upstream already exists"
 >    > If you have done step 2 before and try to `remote add` again, git will tell you that a "remote upstream already exists". In this case you can safely continue to step 4.
->    {: .tip}
+>    {: .comment}
 >
 > 4. Update the local copy of the repository by "pulling" in the content of the original GitHub repository
 >
@@ -373,10 +373,10 @@ You also learned the GitHub flow and its cycle:
 
 You can now contribute and help us to improve our tutorials!
 
-> ### {% icon tip %} Git in Depth
+> ### {% icon details %} Git in Depth
 > This tutorial was a quick introduction to explain the basics of contributing to the training material. We recommend that everyone follow a more detailed git tutorials:
 > - [Software Carpentry tutorial](http://swcarpentry.github.io/git-novice/) which explains a bit more in detail some git commands and the concept of remote, local and stagging
 > - [Learn Git Branching](https://learngitbranching.js.org/) by GitHub to test the different git commands
 >
 > You should also download, print and keep always with you the [Git Cheat Sheet](https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf)
-{: .tip}
+{: .details}
