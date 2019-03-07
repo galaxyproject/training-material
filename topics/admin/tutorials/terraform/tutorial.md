@@ -69,6 +69,11 @@ Some groups use Ansible or Bash scripts in order to launch VMs. This can be a be
 
 We will start small, by managing a single VM in our cloud account. Make sure you have your OpenStack credentials available.
 
+You can download the environment file with the credentials from the OpenStack dashboard.
+
+- Log in to the OpenStack dashboard, choose the project for which you want to download the OpenStack RC file, and click "Access & Security". 
+- Click "Download OpenStack RC File" and save the file. 
+
 <!-- TODO(hxr): add example DO config? -->
 
 ## Keypair
