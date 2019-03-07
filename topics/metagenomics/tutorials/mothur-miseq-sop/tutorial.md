@@ -377,7 +377,7 @@ the original dataset. We do this by using the **Unique.seqs** tool.
 Here we see that this step has greatly reduced the size of our sequence file; not only will this speed up further computational
 steps, it will also greatly reduce the amount of disk space (and your Galaxy quota) needed to store all the intermediate files generated during
 this analysis. This **Unique.seqs** tool created two files, one is a FASTA file containing only the unique sequences,
-and the second is a so-called *names files*. This names file consists of two columns, the first contains the sequence names
+and the second is a so-called *names file*. This names file consists of two columns, the first contains the sequence names
 for each of the unique sequences, and the second column contains all other sequence names that are identical to the representative
 sequence in the first column.
 
@@ -427,7 +427,7 @@ For more information on the topic of alignment, please see our training material
 [here]({{site.baseurl}}{% link topics/sequence-analysis/index.md %})
 
 We are now ready to align our sequences to the reference. This is an important
-step to perform to improve the clustering of your OTUs [[Schloss 2013]](https://doi.org/10.1038/ismej.2012.102)
+step to improve the clustering of your OTUs [[Schloss 2013]](https://doi.org/10.1038/ismej.2012.102)
 
 
 > ### {% icon hands_on %} Hands-on: Align sequences
@@ -534,7 +534,7 @@ Number of sequences used to construct filter: 16298
 
 From this log file we see that while our initial alignment was 13425 positions wide, after filtering the overhangs
 (`trump` parameter) and removing positions that had a gap in every aligned read (`vertical` parameter), we have
-trimmed our alignment down to a width of 376 columns.
+trimmed our alignment down to a length of 376.
 
 Because any filtering step we perform might lead to sequences no longer being unique, we deduplicate our data by re-running
 the **Unique.seqs** tool:
@@ -581,7 +581,7 @@ our contigs are ~250 bp long, we will set the threshold to 2 mismatches.
 
 ## Chimera Removal
 
-We have now thoroughly cleaned our data and rid it of as much sequencing error as we can. Next, we will look
+We have now thoroughly cleaned our data and removed as much sequencing error as we can. Next, we will look
 at a class of sequencing artefacts known as *chimeras*. During PCR amplification, it is possible that two unrelated
 templates are combined to form a sort of hybrid sequence, also called a chimera. Needless to say, we do not want such
 sequencing artefacts confounding our results.
@@ -633,8 +633,8 @@ that have survived all the cleaning steps up to this point. We are generally not
 and want to remove them from our dataset.
 
 Before we know which sequences may originate from sources other than our intended 16S bacterial genes, we must
-first classify those sequences. We can do this using a Bayesian classifier (via the **Classify.seqs** tool) and a training
-set provided by the Schloss lab.
+first classify those sequences. We can do this using a Bayesian classifier (via the **Classify.seqs** tool) and a [training
+set provided by the Schloss lab](https://www.mothur.org/wiki/RDP_reference_files).
 
 > ### {% icon hands_on %} Hands-on: Remove undesired sequences
 >
@@ -675,7 +675,9 @@ set provided by the Schloss lab.
 > {: .question}
 {: .hands_on}
 
-The data is now as clean as we can get it.  Despite that, our remaining sequences will still have errors in them.
+The data is now as clean as we can get it. In the next section we will use the Mock sample to assess how accurate
+our sequencing and bioinformatics pipeline is.
+
 
 ## Optional: Calculate error rates based on our mock community
 
@@ -689,7 +691,7 @@ The data is now as clean as we can get it.  Despite that, our remaining sequence
 
 
 The following step is only possible if you have co-sequenced a mock community with your samples. A mock community is a sample
-of which you know the exact composition. This is something we recommend you to do, because it will give you an idea of how
+of which you know the exact composition and is something we recommend to do, because it will give you an idea of how
 accurate your sequencing and analysis protocol is.
 
 
@@ -779,7 +781,7 @@ Errors    Sequences
 [..]
 ```
 
-That is pretty good! The error rate is only 0.0065%! This gives us confidence that the rest of our samples
+That is pretty good! The error rate is only 0.0065%! This gives us confidence that the rest of the samples
 are also of high quality, and we can continue with our analysis.
 
 
@@ -1078,7 +1080,7 @@ and many different metrics have been proposed to quantify diversity [Finotello e
 
 ### Alpha diversity
 
-In order to estimate alpha diversity of our samples, we first generate the rarefaction curves. Recall that
+In order to estimate alpha diversity of the samples, we first generate the rarefaction curves. Recall that
 rarefaction measure the number of observed OTUs as a function of the subsampling size. We do this with the
 **Rarefaction.single** tool:
 
