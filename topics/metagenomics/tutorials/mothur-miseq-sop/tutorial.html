@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>16S Microbial Analysis with Mothur</title>
+        <title>16S Microbial Analysis with mothur</title>
         
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -29,7 +29,7 @@
         
         
         <meta name="description" content="Metagenomics is a discipline that enables the genomic stu..." />
-        <meta property="og:title" content="Galaxy Training: 16S Microbial Analysis with Mothur" />
+        <meta property="og:title" content="Galaxy Training: 16S Microbial Analysis with mothur" />
         <meta property="og:description" content="Metagenomics is a discipline that enables the genomic stu..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
@@ -80,6 +80,8 @@
                                             
                                         
                                     
+                                        
+                                            
                                         
                                     
                                         
@@ -328,7 +330,7 @@
     "url": "https://galaxyproject.org/teach/gtn/"
   },
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "16S Microbial Analysis with Mothur",
+  "headline": "16S Microbial Analysis with mothur",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -357,11 +359,11 @@
   },
   "courseCode": "metagenomics / mothur-miseq-sop / hands-on",
   "learningResourceType": "hands-on tutorial",
-  "name": "Hands-on for '16S Microbial Analysis with Mothur' tutorial",
+  "name": "Hands-on for '16S Microbial Analysis with mothur' tutorial",
   "isPartOf": {
     "@type": "Course",
-    "name": "16S Microbial Analysis with Mothur",
-    "description": "16S Microbial Analysis with Mothur",
+    "name": "16S Microbial Analysis with mothur",
+    "description": "16S Microbial Analysis with mothur",
     "learningResourceType": "tutorial",
     "interactivityType": "expositive",
     "provider": {
@@ -373,7 +375,7 @@
   },
   "url": "https://galaxyproject.github.io//training-material/topics/metagenomics/tutorials/mothur-miseq-sop/tutorial.html",
   "timeRequired": "PT4H",
-  "description": "16S Microbial Analysis with Mothur\\nThe questions this  addresses are:\n - What is the effect of normal variation in the gut microbiome on host health?\n\n\\nThe objectives are:\n - Analyze of 16S rRNA sequencing data using the Mothur toolsuite in Galaxy\n\n",
+  "description": "16S Microbial Analysis with mothur\\nThe questions this  addresses are:\n - What is the effect of normal variation in the gut microbiome on host health?\n\n\\nThe objectives are:\n - Analyze of 16S rRNA sequencing data using the mothur toolsuite in Galaxy\n - Using a mock community to assess the error rate of your sequencing experiment\n - Visualize sample diversity using Krona and Phinch\n\n",
   "coursePrerequisites": [
     {
       "@type": "CreativeWork",
@@ -389,7 +391,7 @@
     {
       "@type": "Thing",
       "url": "https://doi.org/10.5281/zenodo.800651",
-      "name": "Training data for 16S Microbial Analysis with Mothur tutorial"
+      "name": "Training data for 16S Microbial Analysis with mothur tutorial"
     }
   ],
   "author": [
@@ -403,7 +405,7 @@
     },
     {
       "@type": "Person",
-      "name": "Pat Schloss"
+      "name": "Dave Clements"
     }
   ],
   "contributor": [
@@ -417,7 +419,7 @@
     },
     {
       "@type": "Person",
-      "name": "Pat Schloss"
+      "name": "Dave Clements"
     }
   ],
   "about": [
@@ -439,12 +441,12 @@
     </script>
 
     <section class="tutorial">
-        <h1 data-toc-skip>16S Microbial Analysis with Mothur</h1>
+        <h1 data-toc-skip>16S Microbial Analysis with mothur</h1>
         <div class="contributors-line">By: 
   
   <a href="/training-material/hall-of-fame#shiltemann" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a>, 
   <a href="/training-material/hall-of-fame#bebatut" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Bérénice Batut">Bérénice Batut</a>, 
-  <a href="/training-material/hall-of-fame#pschloss" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pschloss" alt="Pat Schloss">Pat Schloss</a> </div>
+  <a href="/training-material/hall-of-fame#tnabtaf" class="contributor-badge"><img src="https://avatars.githubusercontent.com/tnabtaf" alt="Dave Clements">Dave Clements</a> </div>
         <blockquote class="overview">
             <h3>Overview</h3>
 
@@ -458,7 +460,11 @@
             <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
             <ul>
             
-            <li>Analyze of 16S rRNA sequencing data using the Mothur toolsuite in Galaxy</li>
+            <li>Analyze of 16S rRNA sequencing data using the mothur toolsuite in Galaxy</li>
+            
+            <li>Using a mock community to assess the error rate of your sequencing experiment</li>
+            
+            <li>Visualize sample diversity using Krona and Phinch</li>
             
             </ul>
 
@@ -493,14 +499,14 @@
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="overview">Overview</h1>
 
-<p>In this tutorial we will perform the
+<p>In this tutorial we will perform an analysis based on the
 <a href="https://www.mothur.org/wiki/MiSeq_SOP">Standard Operating Procedure (SOP) for MiSeq data</a>, developed by the
-creators of the Mothur software package, the <a href="http://www.schlosslab.org/">Schloss lab</a>, within Galaxy.</p>
+creators of the mothur software package, the <a href="http://www.schlosslab.org/">Schloss lab</a>.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
 
-  <p>In this tutorial, we will:</p>
+  <p>In this tutorial, we will cover:</p>
 
 <ol id="markdown-toc">
   <li><a href="#obtaining-and-preparing-data" id="markdown-toc-obtaining-and-preparing-data">Obtaining and preparing data</a>    <ol>
@@ -509,24 +515,23 @@ creators of the Mothur software package, the <a href="http://www.schlosslab.org/
     </ol>
   </li>
   <li><a href="#quality-control" id="markdown-toc-quality-control">Quality Control</a>    <ol>
-      <li><a href="#reducing-sequencing-and-pcr-errors" id="markdown-toc-reducing-sequencing-and-pcr-errors">Reducing sequencing and PCR errors</a></li>
-      <li><a href="#processing-improved-sequences" id="markdown-toc-processing-improved-sequences">Processing improved sequences</a></li>
-      <li><a href="#optional-assessing-error-rates-based-on-our-mock-community" id="markdown-toc-optional-assessing-error-rates-based-on-our-mock-community">Optional: Assessing error rates based on our mock community</a></li>
-      <li><a href="#preparing-for-analysis" id="markdown-toc-preparing-for-analysis">Preparing for analysis</a></li>
+      <li><a href="#create-contigs-from-paired-end-reads" id="markdown-toc-create-contigs-from-paired-end-reads">Create contigs from paired-end reads</a></li>
+      <li><a href="#data-cleaning" id="markdown-toc-data-cleaning">Data Cleaning</a></li>
+      <li><a href="#optimize-files-for-computation" id="markdown-toc-optimize-files-for-computation">Optimize files for computation</a></li>
+      <li><a href="#sequence-alignment" id="markdown-toc-sequence-alignment">Sequence Alignment</a></li>
+      <li><a href="#chimera-removal" id="markdown-toc-chimera-removal">Chimera Removal</a></li>
+      <li><a href="#removal-of-non-bacterial-sequences" id="markdown-toc-removal-of-non-bacterial-sequences">Removal of non-bacterial sequences</a></li>
+      <li><a href="#optional-calculate-error-rates-based-on-our-mock-community" id="markdown-toc-optional-calculate-error-rates-based-on-our-mock-community">Optional: Calculate error rates based on our mock community</a></li>
     </ol>
   </li>
   <li><a href="#otu-based-analysis" id="markdown-toc-otu-based-analysis">OTU-based Analysis</a>    <ol>
+      <li><a href="#clustering-sequences-into-otus" id="markdown-toc-clustering-sequences-into-otus">Clustering sequences into OTUs</a></li>
       <li><a href="#calculate-species-diversity" id="markdown-toc-calculate-species-diversity">Calculate Species Diversity</a></li>
     </ol>
   </li>
   <li><a href="#visualisations" id="markdown-toc-visualisations">Visualisations</a>    <ol>
       <li><a href="#phinch" id="markdown-toc-phinch">Phinch</a></li>
       <li><a href="#krona" id="markdown-toc-krona">Krona</a></li>
-    </ol>
-  </li>
-  <li><a href="#extra-credit" id="markdown-toc-extra-credit">Extra Credit</a>    <ol>
-      <li><a href="#determine-statistical-significance-of-clusterings" id="markdown-toc-determine-statistical-significance-of-clusterings">Determine statistical significance of clusterings</a></li>
-      <li><a href="#population-level-analysis" id="markdown-toc-population-level-analysis">Population-level Analysis</a></li>
     </ol>
   </li>
 </ol>
@@ -563,40 +568,41 @@ because of stochastic processes in the algorithms.</p>
   <p>The highly conserved regions make it easy to target the gene across different organisms,
 while the highly variable regions allow us to distinguish between different species.</p>
 
-  <p>(slide credit <a href="https://www.slideshare.net/beiko/ccbc-tutorial-beiko">https://www.slideshare.net/beiko/ccbc-tutorial-beiko </a>)</p>
+  <p>(slide credit <a href="https://www.slideshare.net/beiko/ccbc-tutorial-beiko">https://www.slideshare.net/beiko/ccbc-tutorial-beiko</a>)</p>
 </blockquote>
 
 <h2 id="understanding-our-input-data">Understanding our input data</h2>
-<p>In this tutorial we are interested in understanding the effect of normal variation in the gut microbiome on host health.
-To that end, fresh feces from mice were collected on a daily basis for 365 days post weaning. During the first 150 days
-post weaning (dpw), nothing was done to our mice except allow them to eat, get fat, and be merry. We were curious whether
-the rapid change in weight observed during the first 10 dpw affected the stability microbiome compared to the microbiome
-observed between days 140 and 150. We will address this question in this tutorial using a combination of OTU, phylotype,
-and phylogenetic methods.</p>
+
+<p>In this tutorial we use the <a href="https://mothur.org/wiki/Analysis_examples">dataset generated by the Schloss lab</a> to illustrate
+<a href="https://www.mothur.org/wiki/MiSeq_SOP">their MiSeq SOP</a>).</p>
+
+<p>They <a href="https://www.mothur.org/wiki/MiSeq_SOP#Logistics">describe the experiment</a> as follows:</p>
+
+<p><em>“The Schloss lab is interested in understanding the effect of normal variation in the gut microbiome on host health. To that end,
+we collected fresh feces from mice on a daily basis for 365 days post weaning. During the first 150 days post weaning (dpw),
+nothing was done to our mice except allow them to eat, get fat, and be merry. We were curious whether the rapid change in
+weight observed during the first 10 dpw affected the stability microbiome compared to the microbiome observed between days
+140 and 150.”</em></p>
 
 <p><img src="../../images/experiment_setup.png" alt="Experiment setup" /></p>
 
-<p>To make this tutorial easier to execute, we are providing only part of the data - you are given the flow files for one
-animal at 10 time points (5 early and 5 late). In order to assess the error rate of our analysis pipeline and experimental
-setup, we additionally resequenced a mock community composed of genomic DNA from 21 bacterial strains.</p>
+<p>To speed up analysis for this tutorial, we will use only a subset of this data. We will look at a single mouse at 10 different
+time points (5 early, 5 late). In order to assess the error rate of the analysis pipeline and experimental setup, the Schloss lab
+additionally sequenced a mock community with a known composition (genomic DNA from 21 bacterial strains). The sequences used
+for this mock sample are contained in the file <code class="highlighter-rouge">HMP_MOCK.v35.fasta</code></p>
 
 <blockquote class="comment">
-  <h3 id="comment-dataset-details"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Dataset details</h3>
-  <p>Because of the large size of the original dataset (3.9 GB) you are given 20 of the 362 pairs of fastq
-files. For example, you will see two files: <code class="highlighter-rouge">F3D0_S188_L001_R1_001.fastq</code>, and
-<code class="highlighter-rouge">F3D0_S188_L001_R2_001.fastq</code>
-<br /><br />
-These two files correspond to Female 3 on Day 0 (F3D0) (i.e. the day of weaning). The first file
-(and all those with R1 in the name) correspond to the forward reads, while the second (and all
-those with R2 in the name) correspond to the reverse reads.
-<br /><br />
-These sequences are 250 bp and overlap in the V4 region of the 16S rRNA gene; this region is about
-253 bp long. Looking at the datasets, you will see 22 fastq files, representing 10 time points from
-Female 3 and 1 mock community. You will also see <code class="highlighter-rouge">HMP_MOCK.v35.fasta</code> which contains the sequences used
-in the mock community that were sequenced in fasta format.</p>
+  <h3 id="comment-dataset-naming-scheme"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Dataset naming scheme</h3>
+  <p>For this tutorial, you are given 10 pairs of files. For example, the following pair of files:<br />
+ <code class="highlighter-rouge">F3D0_S188_L001_R1_001.fastq</code><br />
+ <code class="highlighter-rouge">F3D0_S188_L001_R2_001.fastq</code></p>
+
+  <p>The first part of the file name indicates the sample; <code class="highlighter-rouge">F3D0</code> here signifies that this sample was obtained from Female 3 on Day 0.
+The rest of the file name is identical, except for <code class="highlighter-rouge">_R1</code> and <code class="highlighter-rouge">_R2</code>, this is used to indicate the forward and reverse reads
+respectively.</p>
 </blockquote>
 
-<!-- note: mothur seems to have forgotten day 4 in their SOP example data, therefore this description and results
+<!-- note: mothur does not include day 4 in their SOP example data, therefore this description and results
 in this document differ slightly from the description on their website -->
 
 <h2 id="importing-the-data-into-galaxy">Importing the data into Galaxy</h2>
@@ -804,32 +810,27 @@ These names will be used as sample names in the downstream analysis so always ma
 
 <h1 id="quality-control">Quality Control</h1>
 
-<h2 id="reducing-sequencing-and-pcr-errors">Reducing sequencing and PCR errors</h2>
+<p>For more information on the topic of quality control, please see our training materials
+<a href="/training-material/topics/sequence-analysis/">here</a>.</p>
 
-<p>The first thing we want to do is combine our forward and reverse reads for each sample. This is done
-using the <code class="highlighter-rouge">make.contigs</code> command, which requires the paired collection as input. This command will extract
-the sequence and quality score data from your fastq files, create the reverse complement of the reverse
-read and then join the reads into contigs. Then we will combine all samples into a single fasta file,
-remembering which reads came from which samples using a <em>group</em> file.</p>
+<p>Before starting any analysis, it is always a good idea to assess the quality of your input data and improve it
+where possible by trimming and filtering reads. The mothur toolsuite contains several tools to assist with this task.
+We will begin by merging our reads into contigs, followed by filtering and trimming of reads based on quality score
+and several other metrics.</p>
 
-<blockquote class="comment">
-  <h3 id="comment-algorithm-details"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Algorithm details</h3>
-  <p>We have a very simple algorithm to do this. First, we align the pairs of sequences. Next, we look
-across the alignment and identify any positions where the two reads disagree. If one sequence has a
-base and the other has a gap, the quality score of the base must be over 25 to be considered real. If
-both sequences have a base at that position, then we require one of the bases to have a quality score
-6 or more points better than the other. If it is less than 6 points better, then we set the consensus
-base to an N.</p>
-</blockquote>
+<h2 id="create-contigs-from-paired-end-reads">Create contigs from paired-end reads</h2>
 
-<h3 id="merging-our-data">Merging our data</h3>
-
-<h4 id="make-contigs-from-paired-end-reads">Make contigs from paired-end reads</h4>
-
-<p>In this experiment we used paired-end sequencing, this means sequencing was done from both ends of each
-fragment, resulting in an overlap in the middle. We will now combine these pairs of reads into <em>contigs</em>.</p>
+<p>In this experiment, paired-end sequencing of the ~253 bp V4 region of the 16S rRNA gene was performed.
+The sequencing was done from either end of each fragment. Because the reads are about 250 bp in length, this results in a
+significant overlap between the forward and reverse reads in each pair. We will combine these pairs of reads into <em>contigs</em>.</p>
 
 <p><img src="../../images/16S_merge_contigs.png" alt="Merging into contigs" /></p>
+
+<p>The <strong>Make.contigs</strong> tool creates the contigs, and uses the paired collection as input. <strong>Make.contigs</strong>
+will look at each pair, take the reverse complement reverse read, and then determine the overlap between the
+two sequences. Where an overlapping base call differs between the two reads, the quality score is used to determine
+the consensus base call. A new quality score is derived by combining the two original quality scores in both of
+the reads for all the overlapping positions.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-combine-forward-and-reverse-reads-into-contigs"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Combine forward and reverse reads into contigs</h3>
@@ -839,31 +840,30 @@ fragment, resulting in an overlap in the middle. We will now combine these pairs
       <ul>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Way to provide files”</em>: <code class="highlighter-rouge">Multiple pairs - Combo mode</code></li>
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Fastq pairs”</em>: the collection you just created</li>
-        <li>Leave all other parameters to the default settings <br /><br /></li>
+        <li>Leave all other parameters to the default settings</li>
       </ul>
     </li>
   </ul>
 
 </blockquote>
 
-<p>This step merges the forward and reverse reads into contigs for each pair, and
-then combines the results into a single fasta file. To retain information about
-which reads originated from which samples, it also made a group file. View that
+<p>This step combined the forward and reverse reads for each sample, and also combined
+the resulting contigs from all samples into a single file. So we have gone from a paired
+collection of 20x2 FASTQ files, to a single FASTA file. In order to retain information about
+which reads originated from which samples, the tool also output a <em>group file</em>. View that
 file now, it should look something like this:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>M00967_43_000000000-A3JHG_1_1101_10011_3881     F3D0
 M00967_43_000000000-A3JHG_1_1101_10050_15564    F3D0
 M00967_43_000000000-A3JHG_1_1101_10051_26098    F3D0
+[..]
 </code></pre></div></div>
 
 <p>Here the first column contains the read name, and the second column contains the sample name.</p>
 
-<h3 id="data-cleaning">Data Cleaning</h3>
+<h2 id="data-cleaning">Data Cleaning</h2>
 
-<p>For more information on the topic of quality control, please see our training materials
-<a href="/training-material/topics/sequence-analysis/">here</a></p>
-
-<p>Next we want to improve the quality of our data. But first, let’s get a feel of our data</p>
+<p>As the next step, we want to improve the quality of our data. But first, let’s get a feel of our dataset:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-summarize-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Summarize data</h3>
@@ -894,13 +894,27 @@ Mean:        1        252.811    252.811    0.70063  4.44854
 # of Seqs:   152360
 </code></pre></div></div>
 
-<p>This tells us that we have 152,360 sequences that for the most part vary between 248 and 253 bases.
-Interestingly, the longest read in the dataset is 502 bp. Be suspicious of this. Recall that the reads
-are supposed to be 251 bp each. This read clearly didn’t assemble well (or at all). Also, note that at
-least 2.5% of our sequences had some ambiguous base calls. We’ll take care of these issues in the next
-step when we run <code class="highlighter-rouge">screen.seqs</code>.</p>
+<p>In this dataset:</p>
 
-<p>The following tool will remove any sequences with ambiguous bases (<code class="highlighter-rouge">maxambig</code> parameter) and anything longer than 275 bp (<code class="highlighter-rouge">maxlength</code> parameter).</p>
+<ul>
+  <li>Almost all of the reads are between 248 and 253 bases long.</li>
+  <li>2,5% or more of our reads had ambiguous base calls (<code class="highlighter-rouge">Ambigs</code> column).</li>
+  <li>The longest read in the dataset is 502 reads.</li>
+  <li>There are 152,360 sequences.</li>
+</ul>
+
+<p>In our region of interest, the V4 region of the
+16S gene, is only around 250. Any reads significantly longer than this expected value likely did not
+assemble well in the <strong>Make.contigs</strong> step. Furthermore, we see that 2,5% of our reads had between 6 and 249
+ambiguous base calls (<code class="highlighter-rouge">Ambigs</code> column). In the next steps we will clean up our data by removing these
+problematic reads.</p>
+
+<p>We do this data cleaning using the <code class="highlighter-rouge">Screen.seqs</code> tool, which removes</p>
+
+<ol>
+  <li>sequences with ambiguous bases (<code class="highlighter-rouge">maxambig</code>) and</li>
+  <li>contigs longer than a given threshold (<code class="highlighter-rouge">maxlength</code>).</li>
+</ol>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-filter-reads-based-on-quality-and-length"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter reads based on quality and length</h3>
@@ -932,12 +946,12 @@ step</p>
   </blockquote>
 </blockquote>
 
-<h2 id="processing-improved-sequences">Processing improved sequences</h2>
+<h2 id="optimize-files-for-computation">Optimize files for computation</h2>
 
-<h3 id="optimize-files-for-computation">Optimize files for computation</h3>
-<p>Because we are sequencing many of the same organisms, we anticipate that many of our sequences are
-duplicates of each other. Because it’s computationally wasteful to align the same thing a bazillion
-times, we’ll unique our sequences using the <code class="highlighter-rouge">unique.seqs</code> command:</p>
+<p>Microbiome samples typically contain a large numbers of the same organism, and therefore we expect
+to find many identical sequences in our data. In order to speed up computation, we first determine
+the unique reads, and then record how many times each of these different reads was observed in
+the original dataset. We do this by using the <strong>Unique.seqs</strong> tool.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-duplicate-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove duplicate sequences</h3>
@@ -966,9 +980,11 @@ number of lines in the fasta file before this step.</p>
   </blockquote>
 </blockquote>
 
-<p>This tool outputs two files, one is a fasta file containing only the unique sequences, and a <em>names files</em>.
-The names file consists of two columns, the first contains the sequence names for each of the unique
-sequences, and the second column contains all other sequence names that are identical to the representative
+<p>Here we see that this step has greatly reduced the size of our sequence file; not only will this speed up further computational
+steps, it will also greatly reduce the amount of disk space (and your Galaxy quota) needed to store all the intermediate files generated during
+this analysis. This <strong>Unique.seqs</strong> tool created two files, one is a FASTA file containing only the unique sequences,
+and the second is a so-called <em>names file</em>. This names file consists of two columns, the first contains the sequence names
+for each of the unique sequences, and the second column contains all other sequence names that are identical to the representative
 sequence in the first column.</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name          representatives
@@ -978,7 +994,16 @@ read_name7    read_name8
 ...
 </code></pre></div></div>
 
-<p>To reduce file sizes further and streamline analysis, we can now summarize the data in a <em>count table</em>.</p>
+<p>To recap, we now have the following files:</p>
+
+<ul>
+  <li>a FASTA file containing every distinct sequence in our dataset (the <em>representative</em> sequences)</li>
+  <li>a <em>names file</em> containing the list of duplicate sequences</li>
+  <li>a <em>group file</em> containing information about the samples each read originated from</li>
+</ul>
+
+<p>To further reduce file sizes and streamline analysis, we can use the <strong>Count.seqs</strong> tool to combine
+the <em>group file</em> and the <em>names file</em> into a single <em>count table</em>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-generate-count-table"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate count table</h3>
@@ -1003,16 +1028,16 @@ M00967_43_000000000-A3JHG_1_1101_13234_1983  10522   425    281   340     205
 ...
 </code></pre></div></div>
 
-<p>The first column contains the read names of the representative sequence, and the subsequent columns contain
+<p>The first column contains the read names of the representative sequences, and the subsequent columns contain
 the number of duplicates of this sequence observed in each sample.</p>
 
-<h3 id="sequence-alignment">Sequence Alignment</h3>
+<h2 id="sequence-alignment">Sequence Alignment</h2>
 
 <p>For more information on the topic of alignment, please see our training materials
 <a href="/training-material/topics/sequence-analysis/">here</a></p>
 
-<p>We are now ready to align our sequences to the reference. This step is an important
-step to perform to improve the clustering of your OTUs <a href="https://doi.org/10.1038/ismej.2012.102">[Schloss 2013]</a></p>
+<p>We are now ready to align our sequences to the reference. This is an important
+step to improve the clustering of your OTUs <a href="https://doi.org/10.1038/ismej.2012.102">[Schloss 2013]</a></p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-align-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Align sequences</h3>
@@ -1051,23 +1076,29 @@ Mean:       1967.99  11550    252.462 0        4.36693
 total # of seqs:    128872
 </code></pre></div></div>
 
-<p>So what does this mean? You’ll see that the bulk of the sequences start at position 1968 and end at position 11550.
-Some sequences start at position 1250 or 1982 and end at 10693 or 13400. These deviants from the mode positions
-are likely due to an insertion or deletion at the terminal ends of the alignments. Sometimes you’ll see sequences
-that start and end at the same position indicating a very poor alignment, which is generally due to non-specific
-amplification.</p>
+<p>The <code class="highlighter-rouge">Start</code> and <code class="highlighter-rouge">End</code> columns tell us that the majority of reads aligned between positions 1968 and 11550,
+which is what we expect to find given the reference file we used. However, some reads align to very different positions,
+which could indicate insertions or deletions at the terminal ends of the alignments or other complicating factors.</p>
+
+<p>Also notice the <code class="highlighter-rouge">Polymer</code> column in the output table. This indicates the average homopolymer length. Since we know that
+our reference database does not contain any homopolymer stretches longer than 8 reads, any reads containing such
+long stretches are likely the result of PCR errors and we would be wise to remove them.</p>
+
+<p>Next we will clean our data further by removing poorly aligned sequences and any sequences with long
+homopolymer stretches.</p>
 
 <h3 id="more-data-cleaning">More Data Cleaning</h3>
 
-<p>To make sure that everything overlaps the same region we’ll re-run screen.seqs to get sequences that
-start at or before position 1968 and end at or after position 11550. We’ll also set the maximum
-homopolymer length to 8 (<code class="highlighter-rouge">maxhomop</code> parameter) since there’s nothing in the database with a stretch of 9 or more of the same
-base in a row (this also could have been done in the first execution of <code class="highlighter-rouge">screen.seqs</code> above).</p>
+<p>To ensure that all our reads overlap our region of interest, we will remove any reads not overlapping the region
+from position 1968 to 11550 using the <strong>Screen.seqs</strong> tool. To make sure they overlap <em>only</em> that region, we will
+use the <strong>Filter.seqs</strong> step to remove any overhang on either end of the V4 region. The <strong>Filter.seqs</strong> tool will
+additionally clean up our alignment file by removing any columns that have a gap character (<code class="highlighter-rouge">-</code>, or <code class="highlighter-rouge">.</code> for terminal gaps)
+in that position for every aligned sequence (<code class="highlighter-rouge">vertical</code> parameter).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-poorly-aligned-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove poorly aligned sequences</h3>
 
-  <ul>
+  <ol>
     <li><strong>Screen.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the aligned fasta file from <strong>Align.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1076,43 +1107,46 @@ base in a row (this also could have been done in the first execution of <code cl
         <li><em>“maxhomop”</em>: <code class="highlighter-rouge">8</code></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> file from <strong>Count.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
+
+      <p><strong>Note:</strong> we supply the count table so that it can be updated for the sequences we’re removing.</p>
+
+      <blockquote class="question">
+        <h3 id="question-question-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>How many sequences were removed in this step?</p>
+        <blockquote class="solution">
+          <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>128 sequences were removed. This is the number of lines in the bad.accnos output.</p>
+        </blockquote>
+      </blockquote>
+
+      <p>Next, we will remove any overhang on either side of the V4 region, and</p>
     </li>
-  </ul>
-
-  <p><strong>Note:</strong> we supply the count table so that it can be updated for the sequences we’re removing.</p>
-
-  <blockquote class="question">
-    <h3 id="question-question-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
-
-    <p>How many sequences were removed in this step?</p>
-    <blockquote class="solution">
-      <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-      <p>128 sequences were removed. This is the number of lines in the bad.accnos output.</p>
-    </blockquote>
-  </blockquote>
-</blockquote>
-
-<p>Now we know our sequences overlap the same alignment coordinates, we want to make sure they <em>only</em> overlap
-that region. So we’ll filter the sequences to remove the overhangs at both ends. Since we’ve done
-paired-end sequencing, this shouldn’t be much of an issue. In addition, there are many
-columns in the alignment that only contain gap characters (i.e. “.”). These can be pulled out without
-losing any information. We’ll do all this with filter.seqs:</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-filter-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter sequences</h3>
-
-  <ul>
     <li><strong>Filter.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: <code class="highlighter-rouge">good.fasta</code> output from the lastest <strong>Screen.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“trump”</em>: <code class="highlighter-rouge">.</code></li>
+        <li><em>“vertical”</em>: <code class="highlighter-rouge">yes</code></li>
         <li><em>“Output logfile”</em>: <code class="highlighter-rouge">yes</code></li>
       </ul>
     </li>
-  </ul>
+  </ol>
+
 </blockquote>
 
-<p>In the log file we see the following information:</p>
+<p>Your resulting alignment (<code class="highlighter-rouge">filtered fasta</code> output) should look something like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;M00967_43_000000000-A3JHG_1_1101_14069_1827
+TAC--GG-AG-GAT--GCG-A-G-C-G-T-T--AT-C-CGG-AT--TT-A-T-T--GG-GT--TT-A-AA-GG-GT-GC-G-TA-GGC-G-G-C-CT-G-C-C-AA-G-T-C-A-G-C-G-G--TA-A-AA-TT-G-C-GG-GG--CT-C-AA-C-C-C-C-G-T-A--CA-G-C-CGTT-GAAAC-TG-C-CGGGC-TCGA-GT-GG-GC-GA-G-A---AG-T-A-TGCGGAATGCGTGGTGT-AGCGGT-GAAATGCATAG-AT-A-TC-AC-GC-AG-AACCCCGAT-TGCGAAGGCA------GC-ATA-CCG-G-CG-CC-C-T-ACTGACG-CTGA-GGCA-CGAAA-GTG-CGGGG-ATC-AAACAGG
+&gt;M00967_43_000000000-A3JHG_1_1101_18044_1900
+TAC--GG-AG-GAT--GCG-A-G-C-G-T-T--GT-C-CGG-AA--TC-A-C-T--GG-GC--GT-A-AA-GG-GC-GC-G-TA-GGC-G-G-T-TT-A-A-T-AA-G-T-C-A-G-T-G-G--TG-A-AA-AC-T-G-AG-GG--CT-C-AA-C-C-C-T-C-A-G-CCT-G-C-CACT-GATAC-TG-T-TAGAC-TTGA-GT-AT-GG-AA-G-A---GG-A-G-AATGGAATTCCTAGTGT-AGCGGT-GAAATGCGTAG-AT-A-TT-AG-GA-GG-AACACCAGT-GGCGAAGGCG------AT-TCT-CTG-G-GC-CA-A-G-ACTGACG-CTGA-GGCG-CGAAA-GCG-TGGGG-AGC-AAACAGG
+&gt;M00967_43_000000000-A3JHG_1_1101_13234_1983
+TAC--GG-AG-GAT--GCG-A-G-C-G-T-T--AT-C-CGG-AT--TT-A-T-T--GG-GT--TT-A-AA-GG-GT-GC-G-CA-GGC-G-G-A-AG-A-T-C-AA-G-T-C-A-G-C-G-G--TA-A-AA-TT-G-A-GA-GG--CT-C-AA-C-C-T-C-T-T-C--GA-G-C-CGTT-GAAAC-TG-G-TTTTC-TTGA-GT-GA-GC-GA-G-A---AG-T-A-TGCGGAATGCGTGGTGT-AGCGGT-GAAATGCATAG-AT-A-TC-AC-GC-AG-AACTCCGAT-TGCGAAGGCA------GC-ATA-CCG-G-CG-CT-C-A-ACTGACG-CTCA-TGCA-CGAAA-GTG-TGGGT-ATC-GAACAGG
+</code></pre></div></div>
+
+<p>These are all our representative reads again, now with additional alignment information.</p>
+
+<p>In the log file of the <strong>Filter.seqs</strong> step we see the following additional information:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Length of filtered alignment: 376
 Number of columns removed: 13049
@@ -1120,10 +1154,12 @@ Length of the original alignment: 13425
 Number of sequences used to construct filter: 16298
 </code></pre></div></div>
 
-<p>This means that our initial alignment was 13425 columns wide and that we were able to remove 13049 terminal gap
-characters using <code class="highlighter-rouge">trump=.</code> and vertical gap characters using <code class="highlighter-rouge">vertical=yes</code>. The final alignment length is 376
-columns. Because we’ve perhaps created some redundancy across our sequences by trimming the ends, we can re-run
-<code class="highlighter-rouge">unique.seqs</code>:</p>
+<p>From this log file we see that while our initial alignment was 13425 positions wide, after filtering the overhangs
+(<code class="highlighter-rouge">trump</code> parameter) and removing positions that had a gap in every aligned read (<code class="highlighter-rouge">vertical</code> parameter), we have
+trimmed our alignment down to a length of 376.</p>
+
+<p>Because any filtering step we perform might lead to sequences no longer being unique, we deduplicate our data by re-running
+the <strong>Unique.seqs</strong> tool:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-re-obtain-unique-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Re-obtain unique sequences</h3>
@@ -1150,11 +1186,10 @@ columns. Because we’ve perhaps created some redundancy across our sequences by
 </blockquote>
 
 <h3 id="pre-clustering">Pre-clustering</h3>
-<p>The next thing we want to do to further de-noise our sequences, is to pre-cluster the sequences using the
-<code class="highlighter-rouge">pre.cluster</code> command, allowing for up to 2 differences between sequences. This command will split the
-sequences by group and then sort them by abundance and go from most abundant to least and identify
-sequences that differ no more than 2 nucleotides from on another. If this is the case, then they get
-merged. We generally recommend allowing 1 difference for every 100 basepairs of sequence:</p>
+
+<p>The next step in cleaning our data, is to merge near-identical sequences together. Sequences that only differ
+by around 1 in every 100 bases are likely to represent sequencing errors, not true biological variation. Because
+our contigs are ~250 bp long, we will set the threshold to 2 mismatches.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-perform-preliminary-clustering-of-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Perform preliminary clustering of sequences</h3>
@@ -1180,9 +1215,12 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
   </blockquote>
 </blockquote>
 
-<h3 id="chimera-removal">Chimera Removal</h3>
-<p>At this point we have removed as much sequencing error as we can, and it is time to turn our attention to
-removing sequencing artefacts known as chimeras.</p>
+<h2 id="chimera-removal">Chimera Removal</h2>
+
+<p>We have now thoroughly cleaned our data and removed as much sequencing error as we can. Next, we will look
+at a class of sequencing artefacts known as <em>chimeras</em>. During PCR amplification, it is possible that two unrelated
+templates are combined to form a sort of hybrid sequence, also called a chimera. Needless to say, we do not want such
+sequencing artefacts confounding our results.</p>
 
 <blockquote class="tip">
   <h3 id="tip-background-chimeras"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Background: Chimeras</h3>
@@ -1190,13 +1228,9 @@ removing sequencing artefacts known as chimeras.</p>
 (slide credit: <a href="http://slideplayer.com/slide/4559004/">http://slideplayer.com/slide/4559004/ </a>)</p>
 </blockquote>
 
-<p>We’ll do this chimera removal using the <code class="highlighter-rouge">VSEARCH</code> algorithm that is called within Mothur, using the
-<code class="highlighter-rouge">chimera.vsearch</code> command. This command will split the data by sample and check for chimeras.</p>
-
-<p>Our preferred way of doing this is to use the abundant sequences as our reference. In addition, if a sequence
-is flagged as chimeric in one sample, the default (<code class="highlighter-rouge">dereplicate=No</code>) is to remove it from all samples. Our
-experience suggests that this is a bit aggressive since we’ve seen rare sequences get flagged as chimeric
-when they’re the most abundant sequence in another sample. This is how we do it:</p>
+<p>We’ll do this chimera removal using the <code class="highlighter-rouge">VSEARCH</code> algorithm [<a href="https://dx.doi.org/10.7717">Rognes 2016</a>] that is called within mothur, using the
+<strong>Chimera.vsearch</strong> tool. This command will split the data by sample and check for chimeras. The recommended
+way of doing this is to use the abundant sequences as our reference.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-chimeric-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove chimeric sequences</h3>
@@ -1238,18 +1272,16 @@ sequences to be flagged as chimeric.</p>
   </blockquote>
 </blockquote>
 
-<h3 id="removal-of-non-bacterial-sequences">Removal of non-bacterial sequences</h3>
+<h2 id="removal-of-non-bacterial-sequences">Removal of non-bacterial sequences</h2>
 
-<p>As a final quality control step, we need to see if there are any “undesirables” in our dataset. Sometimes when
-we pick a primer set they will amplify other stuff that survives to this point in the pipeline, such as
-18S rRNA gene fragments or 16S rRNA from Archaea, chloroplasts, and mitochondria. There’s also just the
-random stuff that we want to get rid of.</p>
+<p>Despite all we have done to improve data quality, there may still be more to do:
+There may be 18S rRNA gene fragments or 16S rRNA from Archaea, chloroplasts, and mitochondria
+that have survived all the cleaning steps up to this point. We are generally not interested in these sequences
+and want to remove them from our dataset.</p>
 
-<p>Now you may say, “But wait I want that stuff”. Fine. But, the primers we use, are only supposed to amplify
-members of the Bacteria and if they’re hitting Eukaryota or Archaea, then it is a mistake. Also, realize
-that chloroplasts and mitochondria have no functional role in a microbial community.</p>
-
-<p>Let’s go ahead and classify those sequences using the Bayesian classifier with the <code class="highlighter-rouge">classify.seqs</code> command:</p>
+<p>Before we know which sequences may originate from sources other than our intended 16S bacterial genes, we must
+first classify those sequences. We can do this using a Bayesian classifier (via the <strong>Classify.seqs</strong> tool) and a <a href="https://www.mothur.org/wiki/RDP_reference_files">training
+set provided by the Schloss lab</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-undesired-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove undesired sequences</h3>
@@ -1305,25 +1337,22 @@ sequences were in represented by these 20 representative sequences.</p>
   </blockquote>
 </blockquote>
 
-<p>Also of note is that <em>unknown</em> only pops up as a classification if the classifier cannot classify your
-sequence to one of the domains.</p>
+<p>The data is now as clean as we can get it. In the next section we will use the Mock sample to assess how accurate
+our sequencing and bioinformatics pipeline is.</p>
 
-<p>At this point we have curated our data as far as possible and we’re ready to see what our error rate is.</p>
-
-<h2 id="optional-assessing-error-rates-based-on-our-mock-community">Optional: Assessing error rates based on our mock community</h2>
+<h2 id="optional-calculate-error-rates-based-on-our-mock-community">Optional: Calculate error rates based on our mock community</h2>
 
 <blockquote class="tip">
   <h3 id="tip-tip-skipping-the-mock-community-analysis"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Skipping the mock community analysis</h3>
 
-  <p>The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to <a href="#preparing-for-analysis">the next section</a>
+  <p>The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to <a href="#removing-mock-sample">the next section</a>
 where we will cluster our sequences into OTUs, classify them and perform some visualisations.</p>
 
 </blockquote>
 
-<p>Measuring the error rate of your sequences is something you can only do if you have co-sequenced a mock
-community, that is, a sample of which you know the exact composition. This is something we include for
-every 95 samples we sequence. You should too because it will help you gauge your error rates and allow
-you to see how well your curation is going, and whether something is wrong with your sequencing setup.</p>
+<p>The following step is only possible if you have co-sequenced a mock community with your samples. A mock community is a sample
+of which you know the exact composition and is something we recommend to do, because it will give you an idea of how
+accurate your sequencing and analysis protocol is.</p>
 
 <blockquote class="tip">
   <h3 id="tip-background-mock-communities"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Background: Mock communities</h3>
@@ -1350,7 +1379,7 @@ results on the rest of our samples.</p>
 
   <p><strong>Example</strong></p>
 
-  <p>As an example, consider the following image from <a href="https://dx.doi.org/10.1186%2Fs12866-016-0738-z">Fouhy et al.</a>.
+  <p>As an example, consider the following image from <a href="https://dx.doi.org/10.1186%2Fs12866-016-0738-z">Fouhy 2016</a>.
 A mock community sample was sequenced for different combinations of sequencer and primer sets (V-regions).
 Since we know the expected outcome, we can assess the accuracy of each pipeline. A similar approach can be used to
 assess different parameter settings of the <em>in-silico</em>  analysis pipline.</p>
@@ -1366,7 +1395,7 @@ assess different parameter settings of the <em>in-silico</em>  analysis pipline.
 
 </blockquote>
 
-<p>Our mock community is composed of genomic DNA from 21 bacterial strains. So in a perfect world, this is
+<p>The mock community in this experiment was composed of genomic DNA from 21 bacterial strains. So in a perfect world, this is
 exactly what we would expect the analysis to produce as a result.</p>
 
 <p>First, let’s extract the sequences belonging to our mock samples from our data:</p>
@@ -1393,8 +1422,9 @@ exactly what we would expect the analysis to produce as a result.</p>
 Selected 4046 sequences from your count file
 </code></pre></div></div>
 
-<p>This tells us that we had 58 unique sequences and a total of 4,046 total sequences in our Mock sample. We
-can now use the <code class="highlighter-rouge">seq.error</code> command to measure the error rates based on our mock reference. Here we align
+<p>The Mock sample has 58 unique sequences, representing a total of 4,046 total sequences.</p>
+
+<p>The <strong>Seq.error</strong> tool measures the error rates using our mock reference. Here we align
 the reads from our mock sample back to their known sequences, to see how many fail to match.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1424,14 +1454,16 @@ Errors    Sequences
 [..]
 </code></pre></div></div>
 
-<p>That rocks, eh? Our error rate is 0.0065%!</p>
+<p>That is pretty good! The error rate is only 0.0065%! This gives us confidence that the rest of the samples
+are also of high quality, and we can continue with our analysis.</p>
 
 <h3 id="cluster-mock-sequences-into-otus">Cluster mock sequences into OTUs</h3>
 
-<p>We can now cluster the mock sequences into OTUs to see how many spurious OTUs we have:</p>
+<p>We will now estimate the accuracy of our sequencing and analysis pipeline by clustering the Mock sequences into OTUs,
+and comparing the results with the expected outcome.</p>
 
 <blockquote class="tip">
-  <h3 id="tip-background-operational-taxonomic-units-otus"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Background: Operational Taxonomic Units (OTUs)</h3>
+  <h3 id="tip-background-what-are-operational-taxonomic-units-otus"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Background: What are Operational Taxonomic Units (OTUs)?</h3>
 
   <p>In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
 sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
@@ -1502,11 +1534,36 @@ separation.</p>
   </blockquote>
 </blockquote>
 
-<p>Open the rarefaction output (dataset named <code class="highlighter-rouge">sobs</code> inside the <code class="highlighter-rouge">rarefaction curves</code> output collection).
-You’ll see that for 4060 sequences, we’d have 34 OTUs from the Mock community. This number of course
-includes some stealthy chimeras that escaped our detection methods. If we used 3000 sequences, we would
-have about 31 OTUs. In a perfect world with no chimeras and no sequencing errors, we’d have 20 OTUs.
-This is not a perfect world. But this is pretty darn good!</p>
+<p>Open the rarefaction output (dataset named <code class="highlighter-rouge">sobs</code> inside the <code class="highlighter-rouge">rarefaction curves</code> output collection), it should look
+something like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>numsampled	0.03-	lci-	hci-
+1	1.0000	1.0000	1.0000
+100	18.0240	16.0000	20.0000
+200	19.2160	17.0000	22.0000
+300	19.8800	18.0000	22.0000
+400	20.3600	19.0000	22.0000
+
+[..]
+
+3000	30.4320	28.0000	33.0000
+3100	30.8800	28.0000	34.0000
+3200	31.3200	29.0000	34.0000
+3300	31.6320	29.0000	34.0000
+3400	31.9920	30.0000	34.0000
+3500	32.3440	30.0000	34.0000
+3600	32.6560	31.0000	34.0000
+3700	32.9920	31.0000	34.0000
+3800	33.2880	32.0000	34.0000
+3900	33.5920	32.0000	34.0000
+4000	33.8560	33.0000	34.0000
+4046	34.0000	34.0000	34.0000
+
+</code></pre></div></div>
+
+<p>When we use the full set of 4060 sequences, we find 34 OTUs from the Mock community; and with
+3000 sequences, we find about 31 OTUs. In an ideal world, we would find exactly 21 OTUs. Despite our
+best efforts, some chimeras or other contaminations may have slipped through our filtering steps.</p>
 
 <blockquote class="tip">
   <h3 id="tip-background-rarefaction"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Background: Rarefaction</h3>
@@ -1527,16 +1584,12 @@ species rich habitat, only a small fraction has been sampled.</p>
 
 <p>Now that we have assessed our error rates we are ready for some real analysis.</p>
 
-<h2 id="preparing-for-analysis">Preparing for analysis</h2>
-
 <h3 id="removing-mock-sample">Removing Mock sample</h3>
-<p>We’re almost to the point where you can have some fun with your data (I’m already having fun, aren’t you?).
-Next, we would assign sequences to OTUs, but first, we should remove the Mock sample from our dataset, it has
-served its purpose by allowing us to estimate our error rate, but in subsequent steps we only want to use
-our real samples.</p>
 
-<p>using
-the <code class="highlighter-rouge">remove.groups</code> command:</p>
+<p>Now that we have cleaned up our data set as best we can, and assured ourselves of the quality of our sequencing
+pipeline by considering a mock sample, we are almost ready to cluster and classify our real data. But
+before we start, we should first remove the Mock dataset from our data, as we no longer need it. We do this using
+the <strong>Remove.groups</strong> tool:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-mock-community-from-our-dataset"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove Mock community from our dataset</h3>
@@ -1553,25 +1606,27 @@ the <code class="highlighter-rouge">remove.groups</code> command:</p>
 
 </blockquote>
 
-<h3 id="clustering-sequences-into-otus">Clustering sequences into OTUs</h3>
+<h1 id="otu-based-analysis">OTU-based Analysis</h1>
 
-<p>Now, we have a couple of options for clustering sequences into OTUs. For a small dataset like this, we could
-do the traditional approach using <code class="highlighter-rouge">dist.seqs</code> and <code class="highlighter-rouge">cluster</code> as we did with the Mock sample.</p>
+<p>In this tutorial we will continue with an OTU-based approach, for the phylotype and phylogenic
+approaches, please refer to the <a href="https://www.mothur.org/wiki/MiSeq_SOP">mothur wiki page</a>.</p>
 
-<p>The alternative is to use the <code class="highlighter-rouge">cluster.split</code> command. In this approach, we use the taxonomic information to
-split the sequences into bins and then cluster within each bin. The Schloss lab have published results
-showing that if you split at the level of Order or Family, and cluster to a 0.03 cutoff, you’ll get just as
-good of clustering as you would with the “traditional” approach.</p>
+<h2 id="clustering-sequences-into-otus">Clustering sequences into OTUs</h2>
 
-<p>The advantage of the <code class="highlighter-rouge">cluster.split</code> approach is that it should be faster, use less memory, and can be run on
-multiple processors. In an ideal world we would prefer the traditional route because “Trad is rad”, but we
-also think that kind of humor is funny…. In this command we use <code class="highlighter-rouge">taxlevel=4</code>, which corresponds to the level
-of <em>Order</em>. This is the approach that we  generally use in the Schloss lab.</p>
+<p>There are several ways we can perform clustering. For the Mock community, we used the traditional approach of
+using the <strong>Dist.seqs</strong> and <strong>Cluster</strong> tools. Alternatively, we can also use the <strong>Cluster.split</strong> tool. With
+this approach, the sequences are split into bins, and then clustered with each bin.  Taxonomic information is used to guide this process.
+The Schloss lab have <a href="https://www.mothur.org/wiki/MiSeq_SOP#OTUs">published results</a> showing that if you split at the level of Order or Family, and cluster to a 0.03
+cutoff, you’ll get just as good of clustering as you would with the “traditional” approach. In addition, this approach
+is less computationally expensive and can be parallelized, which is especially advantageous when you have large
+datasets.</p>
+
+<p>We’ll now use the <strong>Cluster</strong> tool, with <code class="highlighter-rouge">taxlevel</code> set to <code class="highlighter-rouge">4</code>, requesting that clusering be done at the <em>Order</em> level.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-cluster-our-data-into-otus"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Cluster our data into OTUs</h3>
 
-  <ul>
+  <ol>
     <li><strong>Cluster.split</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><em>“Split by”</em>: <code class="highlighter-rouge">Classification using fasta</code></li>
@@ -1581,26 +1636,20 @@ of <em>Order</em>. This is the approach that we  generally use in the Schloss la
         <li><em>“taxlevel”</em>: <code class="highlighter-rouge">4</code></li>
         <li><em>“cutoff”</em>: <code class="highlighter-rouge">0.03</code></li>
       </ul>
+
+      <p>Next we want to know how many sequences are in each OTU from each group and we can do this using the
+<strong>Make.shared</strong> tool. Here we tell mothur that we’re really only interested in the 0.03 cutoff level:</p>
     </li>
-  </ul>
-
-  <p>Next we want to know how many sequences are in each OTU from each group and we can do this using the
-<code class="highlighter-rouge">Make.shared</code> command. Here we tell Mothur that we’re really only interested in the 0.03 cutoff level:</p>
-
-  <ul>
     <li><strong>Make.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“list”</em>: the <code class="highlighter-rouge">list</code> output from <strong>Cluster.split</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Remove.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“label”</em>: <code class="highlighter-rouge">0.03</code></li>
       </ul>
+
+      <p>We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each
+OTU using the <strong>Classify.otu</strong> tool:</p>
     </li>
-  </ul>
-
-  <p>We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each
-OTU using the <code class="highlighter-rouge">Classify.otu</code> command:</p>
-
-  <ul>
     <li><strong>Classify.otu</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“list”</em>: the <code class="highlighter-rouge">list</code> output from <strong>Cluster.split</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1609,11 +1658,12 @@ OTU using the <code class="highlighter-rouge">Classify.otu</code> command:</p>
         <li><em>“label”</em>: <code class="highlighter-rouge">0.03</code></li>
       </ul>
     </li>
-  </ul>
+  </ol>
 
 </blockquote>
 
-<p>Opening the taxonomy output for level 0.03 shows a file structured like the following:</p>
+<p>The different levels of taxonomy are shown in the dataset names.
+Opening the taxonomy output for level 0.03 (meaning 97% similarity, or <em>species</em> level) shows a file structured like the following:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OTU       Size    Taxonomy
 ..
@@ -1626,8 +1676,8 @@ Otu0013	1856	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lac
 ..
 </code></pre></div></div>
 
-<p>This file tells you that Otu008 was observed 5260 times in your samples and that all of the
-sequences (100%) were classified as being members of the Alistipes.</p>
+<p>The first line shown indicates that Otu008 occurred 5260 times, and that all of the
+sequences (100%) were binned in the genus <em><a href="https://en.wikipedia.org/wiki/Alistipes">Alistipes</a></em>.</p>
 
 <blockquote class="question">
   <h3 id="question-question-7"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -1644,57 +1694,54 @@ values for the line of Staphylococcus</p>
   </blockquote>
 </blockquote>
 
-<p>In this tutorial we will continue with this otu-based approach, for the phylotype and phylogenic
-approaches, please refer to the <a href="https://www.mothur.org/wiki/MiSeq_SOP">Mothur wiki page</a>.</p>
+<p>Before we continue, let’s remind ourselves what we set out to do. Our original question was about the stability of
+the microbiome and whether we could observe any change in community structure between the early and late samples.</p>
 
-<h1 id="otu-based-analysis">OTU-based Analysis</h1>
-
-<p>Let’s do something more interesting and actually analyze our data. We’ll focus on the OTU-based dataset. The
-phylotype-based analysis is essentially the same. Also, remember that our initial question had to do with the
-stability and change in community structure in these samples when comparing early and late samples.</p>
-
-<p>Keep in mind that the group names have either a F or M (sex of animal) followed by a number (number of
-animal) followed by a D and a three digit number (number of days post weaning).</p>
+<p>Because some of our sample may contain more sequences than others, it is generally a good idea to normalize the
+dataset by subsampling.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-subsampling"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Subsampling</h3>
 
-  <p>What we now want to do is see how many sequences we have in each sample. We’ll do this with the
-<code class="highlighter-rouge">Count.groups</code> command:</p>
+  <p>First we want to see how many sequences we have in each sample. We’ll do this with the
+<strong>Count.groups</strong> tool:</p>
 
-  <ul>
+  <ol>
     <li><strong>Count.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“shared”</em>: the <code class="highlighter-rouge">shared</code> file from <strong>Make.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
+
+      <blockquote class="question">
+        <h3 id="question-question-8"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <p>How many sequences did the smallest sample consist of?</p>
+        <blockquote class="solution">
+          <h3 id="solution-solution-9"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <ol>
+            <li>This is a reasonable number, so we will now subsample all the other samples down to this level.</li>
+          </ol>
+        </blockquote>
+      </blockquote>
     </li>
-  </ul>
-
-  <p>Take a look at the output. We see that our smallest sample had 2389 sequences in it. That is a reasonable
-number. Despite what some say, subsampling and rarefying your data is an important thing to do.</p>
-
-  <p>We’ll generate a subsampled file for our analyses with the <code class="highlighter-rouge">Sub.sample</code> command:</p>
-
-  <ul>
     <li><strong>Sub.sample</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><em>“Select type of data to subsample”</em>: <code class="highlighter-rouge">OTU Shared</code></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“shared”</em>: the <code class="highlighter-rouge">shared</code> file from <strong>Make.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“size”</em>: <code class="highlighter-rouge">2389</code></li>
       </ul>
-    </li>
-  </ul>
 
-  <blockquote class="question">
-    <h3 id="question-question-8"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+      <blockquote class="question">
+        <h3 id="question-question-9"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-    <p>What would you exect the result of <code class="highlighter-rouge">count.groups</code> on this new shared output collection to be? Check if you are correct.</p>
-    <blockquote class="solution">
-      <h3 id="solution-solution-9"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-      <p>all groups (samples) should now have 2440 sequences. Run count.groups again on the shared output collection by the sub.sample
+        <p>What would you exect the result of <code class="highlighter-rouge">count.groups</code> on this new shared output collection to be? Check if you are correct.</p>
+        <blockquote class="solution">
+          <h3 id="solution-solution-10"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>all groups (samples) should now have 2389 sequences. Run count.groups again on the shared output collection by the sub.sample
 tool to confirm that this is indeed what happened.</p>
-    </blockquote>
-  </blockquote>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
 
   <p><strong>Note:</strong> since subsampling is a stochastic process, your results from any tools using this subsampled data
 will deviate from the ones presented here.</p>
@@ -1702,16 +1749,65 @@ will deviate from the ones presented here.</p>
 
 <h2 id="calculate-species-diversity">Calculate Species Diversity</h2>
 
-<p>Diversity indices provide valuable mathematical tools to describe the ecological complexity of a single sample
-(<em>alpha diversity</em>) or to detect species differences between samples (<em>beta diversity</em>). However, diversity
-is not a determined physical quantity for which a consensus definition and unit of measure have been established,
-and several diversity indices are currently available [Finotello et al. 2016].</p>
+<p>Species diversity is a valuable tool for describing the ecological complexity of a single sample (alpha diversity)
+or between samples (beta diversity). However, diversity is not a physical quantity that can be measured directly,
+and many different metrics have been proposed to quantify diversity <a href="https://www.ncbi.nlm.nih.gov/pubmed/28025179">Finotello et al. 2016</a>.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-background-species-diversity"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Background: Species Diversity</h3>
+
+  <p>Species diversity consists of three components: species richness, taxonomic or phylogenetic diversity and species evenness.</p>
+
+  <ul>
+    <li><strong>Species richness</strong> = the number of different species in a community.</li>
+    <li><strong>Species evenness</strong> = how even in numbers each species in a community is.</li>
+    <li><strong>Phylogenetic diversity</strong> = how closely related the species in a community are.</li>
+  </ul>
+
+  <p><br /><br />
+To understand the difference between richness and evenness, consider the following example:</p>
+
+  <p><img src="../../images/richness-evenness.png" alt="illustration of richness and evenness" /></p>
+
+  <blockquote class="question">
+    <h3 id="question-question-10"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+    <ol>
+      <li>Which of these communities has the highest richness?</li>
+      <li>Which of these communities has the highest evenness?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution-11"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <ol>
+        <li>Both communities have 4 different species, so they have same richness.</li>
+        <li>Communty B is more even, because each species has the same abundance.</li>
+      </ol>
+    </blockquote>
+
+  </blockquote>
+  <p><br /><br /></p>
+
+  <p>Even when two samples have identical richness and evenness, we still may conclude that one is more diverse than
+the other if the species are very dissimilar in one of the samples (have high phylogenetic distance), but very
+closely related to each other in the second sample.</p>
+
+  <p><img src="../../images/phylogenetic-distance.png" alt="illustration of phylogenetic distance" width="50%" /></p>
+
+  <p>Each of these factors play a role in diversity, but how to combine them into a single measure of diversity is nontrivial.
+Many different metrics have been proposed for this, for example: <em>shannon, chao, pd, ace, simpson, sobs, jack, npshannon,
+smithwilson, heip bergerparker, boney, efron, shen, solow, bootstrap, qstat, coverage, anderberg, hamming, jclass, jest,
+ochiai, canberra, thetayc, invsimpson</em>, just to name a few ;).</p>
+
+  <p>Now, you do not need to know what all these different metrics are, but just remember that there is not a single
+definition of diversity and as always, the metric you choose to use may influence your results.</p>
+
+</blockquote>
 
 <h3 id="alpha-diversity">Alpha diversity</h3>
 
-<p>Let’s start our analysis by analyzing the alpha diversity of the samples. First we will generate rarefaction
-curves describing the number of OTUs observed as a function of sampling effort. We’ll do this with the
-<code class="highlighter-rouge">Rarefaction.single</code> command:</p>
+<p>In order to estimate alpha diversity of the samples, we first generate the rarefaction curves. Recall that
+rarefaction measure the number of observed OTUs as a function of the subsampling size. We do this with the
+<strong>Rarefaction.single</strong> tool:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-calculate-rarefaction"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Calculate Rarefaction</h3>
@@ -1771,19 +1867,12 @@ skipping the low confidence and high confidence interval columns)</li>
 </blockquote>
 
 <p>From the resulting image we can see that the rarefaction curves for all samples have started to level
-off so we are confident we cover a large part of our sample diversity.</p>
+off so we are confident we cover a large part of our sample diversity:</p>
 
 <p><img src="../../images/rarefaction_curves.png" alt="Rarefaction curves" /></p>
 
-<p>Alas, rarefaction is not a measure of richness, but a measure of diversity. If you consider two communities
-with the same richness, but different evenness then after sampling a large number of individuals their
-rarefaction curves will asymptote to the same value. Since they have different evennesses the shapes of
-the curves will differ. Therefore, selecting a number of individuals to cutoff the rarefaction curve isn’t
-allowing a researcher to compare samples based on richness, but their diversity.</p>
-
-<p>Finally, let’s get a table containing the number of sequences, the sample coverage, the number of observed
-OTUs, and the Inverse Simpson diversity estimate using the <code class="highlighter-rouge">Summary.single</code> command. To standardize everything,
-let’s randomly select 2440 sequences from each sample 1000 times and calculate the average:</p>
+<p>Finally, let’s use the <strong>Summary.single</strong> tool to generate a summary report.  The following step
+will randomly subsample down to 2389 sequences, repeat this process 1000 times, and report several metrics:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-summarysingle"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Summary.single</h3>
@@ -1823,45 +1912,46 @@ let’s randomly select 2440 sequences from each sample 1000 times and calculate
 0.03    F3D9    162.000000    0.994803    24.120541    23.105499        25.228865       5773.000000
 </code></pre></div></div>
 
-<p>Interestingly, the sample coverages were all above 97%, indicating that we did a pretty good job of sampling
-the communities. Plotting the richness or diversity of the samples would show that there was little difference
-between the different animals or between the early and late time points. You could follow this up with a
-repeated-measures ANOVA and find that there was no significant difference based on sex or early vs. late.</p>
+<p>This shows the <a href="https://www.mothur.org/wiki/Nseqs">number of sequences</a>, the <a href="https://www.mothur.org/wiki/Coverage">sample coverage</a>, the number of <a href="https://www.mothur.org/wiki/Sobs">observed OTUs</a>, and the <a href="https://www.mothur.org/wiki/Invsimpson">Inverse Simpson diversity estimate</a> for each group.</p>
+
+<p>There are a couple of things to note here:</p>
+<ul>
+  <li>The differences in diversity and richness between early and late time points is small.</li>
+  <li>All sample coverage is above 97%.</li>
+</ul>
+
+<p>We could perform additional statistical tests (e.g. ANOVA) to confirm our feeling that there is no significant difference based on sex or early vs. late, but this is beyond the scope of this tutorial.</p>
 
 <h3 id="beta-diversity">Beta diversity</h3>
 
 <p>Beta diversity is a measure of the similarity of the membership and structure found between <em>different</em> samples.
 The default calculator in the following section is <em>thetaYC</em>, which is the <a href="http://csyue.nccu.edu.tw/2005communicationindex.pdf">Yue &amp; Clayton theta similarity
-coefficient</a></p>
+coefficient</a>.</p>
+
+<p>We calculate this with the <strong>Dist.shared</strong> tool, which will rarefy our data.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-beta-diversity"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Beta diversity</h3>
 
-  <p>Let’s calculate. We’ll do this
-with the <code class="highlighter-rouge">Dist.shared</code> command that will allow us to rarefy our data to a common number of sequences.</p>
-
-  <ul>
+  <ol>
     <li><strong>Dist.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“shared”</em>: to the <code class="highlighter-rouge">shared</code> file from <strong>Make.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“calc”</em>: <code class="highlighter-rouge">thetayc,jclass</code></li>
         <li><em>“subsample”</em>: <code class="highlighter-rouge">2389</code></li>
       </ul>
+
+      <p>Let’s visualize our data in a Heatmap:</p>
     </li>
-  </ul>
-
-  <p>Let’s visualize our data in a Heatmap</p>
-
-  <ul>
     <li><strong>Heatmap.sim</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><em>“Generate Heatmap for”</em>: <code class="highlighter-rouge">phylip</code></li>
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“phylip”</em>: the output of <strong>Dist.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (this is a collection input)</li>
       </ul>
     </li>
-  </ul>
+  </ol>
 
-  <!-- TODO: way to view the SVGs inside Galaxy? -->
+  <!-- TODO: add image conversion tool for Galaxy instances that do not support viewing of SVGs files? -->
 </blockquote>
 
 <p>Look at some of the resulting heatmaps (you may have to download the SVG images first). In all of these
@@ -1876,18 +1966,15 @@ heatmaps the red colors indicate communities that are more similar than those wi
 <p><img src="../../images/heatmap.sim_jclass.png" alt="Heatmap for the jclass calculator" /></p>
 
 <p>When generating Venn diagrams we are limited by the number of samples that we can analyze simultaneously.
-Let’s take a look at the Venn diagrams for the first 4 time points of female 3 using the <code class="highlighter-rouge">venn</code> command:</p>
+Let’s take a look at the Venn diagrams for the first 4 time points of female 3 using the <strong>Venn</strong> tool:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-venn-diagram"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Venn diagram</h3>
 
-  <p>After the tool has finished, rename the output to <code class="highlighter-rouge">Subsample.shared</code> to make it easier to recognize in
-further analysis</p>
-
   <ul>
     <li><strong>Venn</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“OTU Shared”</em>: output from <strong>Subsample.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (collection)</li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“OTU Shared”</em>: output from <strong>Sub.sample</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (collection)</li>
         <li><em>“groups”</em>: <code class="highlighter-rouge">F3D0,F3D1,F3D2,F3D3</code></li>
       </ul>
     </li>
@@ -1900,10 +1987,10 @@ further analysis</p>
 
 <p>This shows that there were a total of 180 OTUs observed between the 4 time points. Only 76 of those OTUs were
 shared by all four time points. We could look deeper at the shared file to see whether those OTUs were
-umerically rare or just had a low incidence.</p>
+numerically rare or just had a low incidence.</p>
 
 <p>Next, let’s generate a dendrogram to describe the similarity of the samples to each other. We will generate a
-dendrogram using the jclass and thetayc calculators within the <code class="highlighter-rouge">tree.shared</code> command:</p>
+dendrogram using the jclass and thetayc calculators within the <strong>Tree.shared</strong> tool:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-tree"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Tree</h3>
@@ -1936,52 +2023,53 @@ of the others.</p>
 
 <h1 id="visualisations">Visualisations</h1>
 
-<p>Mothur does not have a lot of visualization tools built in, but external tools may be used for this. For
-instance we can convert our shared file to the more widely used <code class="highlighter-rouge">biom</code> format and view it in a platform like
-<a href="http://www.phinch.org/">Phinch</a>.</p>
+<p>We may now wish to visualize our results. We can convert our <em>shared</em> file to the more widely used <code class="highlighter-rouge">biom</code> format and
+view it in a platform like <a href="http://www.phinch.org/">Phinch</a>.</p>
 
 <h2 id="phinch">Phinch</h2>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-phinch"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Phinch</h3>
 
-  <ul>
+  <ol>
     <li><strong>Make.biom</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“shared”</em>: the output from <strong>Subsample.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“shared”</em>: the output from <strong>Sub.sample</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“constaxonomy”</em>: the <code class="highlighter-rouge">taxonomy</code> output from <strong>Classify.otu</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“metadata”</em>: the <code class="highlighter-rouge">mouse.dpw.metadata</code> file you uploaded at the start of this tutorial</li>
       </ul>
     </li>
-  </ul>
+    <li><strong>View</strong> the file in Phinch
+      <ul>
+        <li>The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
+ to view the file at Phinch:</li>
+      </ul>
 
-  <p>The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
-to view the file at Phinch:</p>
-
-  <p><img src="../../../../shared/images/viewatphinch.png" alt="Icon to view at Phinch" /></p>
+      <p><img src="../../../../shared/images/viewatphinch.png" alt="Icon to view at Phinch" /></p>
+    </li>
+  </ol>
 
   <p>Clicking on this link will lead you to the Phinch website, which will automatically load in your file, and
-where you can several interactive visualisations:</p>
-
-  <p><img src="../../../../shared/images/phinch_overviewpage.png" alt="Phinch overview" /></p>
+ where you can several interactive visualisations:
+ <img src="../../../../shared/images/phinch_overviewpage.png" alt="Phinch overview" /></p>
 
   <blockquote class="comment">
     <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-    <p>If this link is not present on your Galaxy, you can download the generated BIOM file and upload directly to Phinch server at <a href="http://phinch.org">http://phinch.org</a>.</p>
+    <p>If this link is not present on your Galaxy, you can download the generated BIOM file and upload directly to the Phinch server at <a href="http://phinch.org">http://phinch.org</a>.</p>
   </blockquote>
 </blockquote>
 
 <h2 id="krona">Krona</h2>
 
-<p>A second tool we can use to visualize our data, is <a href="">Krona</a></p>
+<p>A second tool we can use to visualize our data, is <a href="https://github.com/marbl/Krona/wiki">Krona</a></p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-krona"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Krona</h3>
 
   <p>First we convert our mothur taxonomy file to a format compatible with Krona</p>
 
-  <ul>
+  <ol>
     <li><strong>Taxonomy-to-Krona</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Taxonomy file”</em>: the <code class="highlighter-rouge">taxonomy</code> output from <strong>Classify.otu</strong></li>
@@ -1993,7 +2081,7 @@ where you can several interactive visualisations:</p>
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input file”</em>: the <code class="highlighter-rouge">taxonomy</code> output from <strong>Taxonomy-to-Krona</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
-  </ul>
+  </ol>
 </blockquote>
 
 <p>The resulting file is an HTML file containing an interactive visualization. For instance try double-clicking the
@@ -2002,12 +2090,12 @@ innermost ring labeled “Bacteria”</p>
 <p><img src="../../images/krona.png" alt="Krona" /></p>
 
 <blockquote class="question">
-  <h3 id="question-question-9"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <h3 id="question-question-11"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
   <p>What percentage of your sample was labelled <code class="highlighter-rouge">Lactobacillus</code>?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-10"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-12"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <p>Explore the Krona plot, double click on Firmicutes, here you should see Lactobacillus
 clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
 any point in the hierarchy (here 5% of all)</p>
@@ -2018,526 +2106,9 @@ any point in the hierarchy (here 5% of all)</p>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p>Well done! <i class="fa fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> You have completed the basics of the Schloss lab’s Standard Operating Procedure for Illumina MiSeq data. You have worked your way through the following pipeline:</p>
+<p>Well done! <i class="fa fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> You have completed the basics of the Schloss lab’s <a href="https://www.mothur.org/wiki/MiSeq_SOP">Standard Operating Procedure for Illumina MiSeq data</a>. You have worked your way through the following pipeline:</p>
 
-<p><img src="../../images/mothur_sop_pipeline.jpg" alt="Mothur sop tutorial pipeline" width="50%" /></p>
-
-<h3 id="cant-get-enough">Can’t get enough?</h3>
-
-<p>Below are some more exercises for those who wish to go into more detail about statistical significance testing and population-level analysis.</p>
-
-<p>Or, click <a href="#wrap-up">here</a> to jump to the end and skip this extra credit section.</p>
-
-<h1 id="extra-credit">Extra Credit</h1>
-
-<h2 id="determine-statistical-significance-of-clusterings">Determine statistical significance of clusterings</h2>
-
-<p>We can perform a test to determine whether the clustering within the tree is statistically significant or not
-using by choosing from the <code class="highlighter-rouge">parsimony</code>, <code class="highlighter-rouge">unifrac.unweighted</code>, or <code class="highlighter-rouge">unifrac.weighted</code> commands. To run these we
-will first need to create a design file that indicates which treatment each sample belongs to.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-obtain-design-file"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Obtain design file</h3>
-
-  <ul>
-    <li>Find the file <code class="highlighter-rouge">mouse.time.design</code> in your history (you imported this file at the start of this tutorial)</li>
-    <li>Make sure the datatype is set to <code class="highlighter-rouge">mothur.design</code>.</li>
-  </ul>
-
-  <blockquote class="tip">
-    <h3 id="tip-changing-datatype-of-a-datasets"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Changing datatype of a datasets</h3>
-    <ul>
-      <li>Click on the <strong>pencil icon</strong> of the dataset</li>
-      <li>Click on the <strong>Datatypes</strong> tab</li>
-      <li>Select the new datatype from dropdown menu</li>
-      <li>Click <strong>Save</strong></li>
-    </ul>
-  </blockquote>
-</blockquote>
-
-<p>The design file look something like this:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>group    time
-F3D0     Early
-F3D1     Early
-F3D141   Late
-F3D142   Late
-F3D143   Late
-F3D144   Late
-F3D145   Late
-F3D146   Late
-F3D147   Late
-F3D148   Late
-F3D149   Late
-F3D150   Late
-F3D2     Early
-F3D3     Early
-F3D5     Early
-F3D6     Early
-F3D7     Early
-F3D8     Early
-F3D9     Early
-</code></pre></div></div>
-
-<p>Using the <code class="highlighter-rouge">parsimony</code> command let’s look at the pairwise comparisons. Specifically, let’s focus on the
-early vs. late comparisons for each mouse:</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-compare-early-vs-late"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compare Early-vs-Late</h3>
-  <ul>
-    <li><strong>Parsimony</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
-      <ul>
-        <li>“tree” to the <code class="highlighter-rouge">tre</code> output from Tree.Shared (collection)</li>
-        <li>“group” to the design file described above</li>
-        <li>“output logfile?” to <code class="highlighter-rouge">yes</code></li>
-      </ul>
-    </li>
-  </ul>
-</blockquote>
-
-<p>In the logfile for <code class="highlighter-rouge">thetayc.0.03.lt.ave</code> we see</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Tree#   Groups      ParsScore   ParsSig
-1       Early-Late  1           &lt;0.001
-</code></pre></div></div>
-
-<p>There was clearly a significant difference between the clustering of the early and late time points.
-Recall that this method ignores the branch length.</p>
-
-<p>The two distance matrices that we generated earlier (i.e. <code class="highlighter-rouge">jclass.0.03.lt.ave.dist</code> and
-    <code class="highlighter-rouge">thetayc.0.03.lt.ave.dist</code>) can then be visualized using the pcoa or nmds plots.</p>
-
-<p>Principal Coordinates (PCoA) uses an eigenvector-based approach to represent multidimensional
-data in as few dimensions as possible. Our data is highly dimensional (~9 dimensions).</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-pcoa"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: PCoA</h3>
-
-  <ul>
-    <li><strong>Pcoa</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
-      <ul>
-        <li>“phylip” to dist files from Dist.shared (collection)</li>
-      </ul>
-    </li>
-  </ul>
-</blockquote>
-
-<p>The loadings files will tell you what fraction of the total variance in the data are represented
-by each of the axes. For instance the loading file for <code class="highlighter-rouge">thetayc.0.03.lt.ave</code> looks something like:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>axis  loading
-1     45.354207
-2     13.526582
-3     11.791424
-4     4.493544
-5     4.012474
-...
-</code></pre></div></div>
-
-<p>In this case the first and second axis represent about 45 and 14% of the variation (59% of the total)
-for the thetaYC distances. The output to the logfile:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Processing...
-Rsq 1 axis: 0.736369
-Rsq 2 axis: 0.882025
-Rsq 3 axis: 0.978093
-</code></pre></div></div>
-
-<p>indicates that the R-squared between the original distance matrix and the distance between the points in 2D
-PCoA space was 0.88, but that if you add a third dimension the R-squared value increases to 0.98. All in all,
-not bad.</p>
-
-<p>Alternatively, non-metric multidimensional scaling (NMDS) tries to preserve the distance between samples using
-a user defined number of dimensions. We can run our data through NMDS with 2 dimensions with the following
-tool:</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-nmds"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Nmds</h3>
-
-  <ul>
-    <li><strong>Nmds</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
-      <ul>
-        <li>“phylip” to dist files from Dist.shared (collection)</li>
-        <li>“output logfile?” to <code class="highlighter-rouge">yes</code></li>
-      </ul>
-    </li>
-  </ul>
-
-  <p>Opening the <code class="highlighter-rouge">stress</code> file for <code class="highlighter-rouge">thetayc.0.03.lt.ave</code> we can inspect the stress and R^2 values, which describe
-the quality of the ordination. Each line in this file represents a different iteration and the configuration
-obtained in the iteration with the lowest stress is reported in the <code class="highlighter-rouge">axes</code> file. In the logfile:</p>
-
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Number of dimensions:           2
-Lowest stress :                 0.113657
-R-squared for configuration:    0.947622
-</code></pre></div>  </div>
-
-  <p>We find that the lowest stress value was 0.11 with an R-squared value of 0.95; that stress level is
-actually pretty good. You can test what happens with three dimensions in the following way:</p>
-
-  <ul>
-    <li><strong>Nmds</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
-      <ul>
-        <li>“phylip” to dist files collection from Dist.shared</li>
-        <li>“mindim” to <code class="highlighter-rouge">3</code></li>
-        <li>“maxdim” to <code class="highlighter-rouge">3</code></li>
-        <li>“output logfile?” to <code class="highlighter-rouge">yes</code></li>
-      </ul>
-    </li>
-  </ul>
-
-  <blockquote class="question">
-    <h3 id="question-question-10"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
-
-    <p>What are stress and R-squared values when using 3 dimensions?</p>
-
-    <blockquote class="solution">
-      <h3 id="solution-solution-11"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-      <p>The stress value drops to 0.05 and the R2 value goes up to 0.99 (see logfile). Not bad.</p>
-    </blockquote>
-  </blockquote>
-</blockquote>
-
-<p>In general, we would like a stress value below 0.20 and a value below 0.10 is even better. Thus, we can conclude that,
-NMDS is better than PCoA. We can plot the three dimensions of the NMDS data by plotting the contents of the <code class="highlighter-rouge">axes</code>
-file. <!-- TODO: tool for 3D plots in Galaxy? --></p>
-
-<p>Again, it is clear that the early and late samples cluster separately from each other. Ultimately, ordination
-is a data visualization tool. We might ask if the spatial separation that we see between the early and late
-plots in the NMDS plot is statistically significant. To do this we have two statistical tools at our disposal.
-The first analysis of molecular variance (AMOVA), tests whether the centers of the clouds representing a group
-are more separated than the variation among samples of the same treatment. This is done using the distance
-matrices we created earlier and does not actually use ordination.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-amova"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Amova</h3>
-
-  <ul>
-    <li><strong>Amova</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
-      <ul>
-        <li>“phylip” to dist files from Dist.shared (collection)</li>
-        <li>“design” to mouse.time.design file from your history</li>
-        <li>“output logfile?” to <code class="highlighter-rouge">yes</code></li>
-      </ul>
-    </li>
-  </ul>
-</blockquote>
-
-<p>in logfile for thetaYC we find:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Early-Late    Among       Within     Total
-SS            0.628379    0.552221   1.1806
-df            1           17         18
-MS    0.628379    0.0324836
-
-Fs:    19.3445
-p-value: &lt;0.001*
-</code></pre></div></div>
-
-<p>Here we see from the AMOVA that the “cloud” early and late time points has a significantly different centroid
-for this mouse. Thus, the observed separation in early and late samples is statistically significant. We can
-also see whether the variation in the early samples is significantly different from the variation in the late
-samples using the <code class="highlighter-rouge">Homova</code> command:</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-homova"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Homova</h3>
-
-  <ul>
-    <li><strong>Homova</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
-      <ul>
-        <li>“phylip” to dist files from Dist.shared (collection)</li>
-        <li>“design” to mouse.time.design file from your history</li>
-        <li>“output logfile?” to <code class="highlighter-rouge">yes</code></li>
-      </ul>
-    </li>
-  </ul>
-</blockquote>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HOMOVA        BValue     P-value    SSwithin/(Ni-1)_values
-Early-Late    7.51408    &lt;0.001*    0.0603208    0.00773943
-</code></pre></div></div>
-
-<p>We see that there is a significant difference in the variation with the early samples having a larger amount
-of variation (0.061) than the late samples (0.008). This was what we found in the original study - the early
-samples were less stable than the late samples.</p>
-
-<p>Next, we might ask which OTUs are responsible for shifting the samples along the two axes. We can determine
-this by measuring the correlation of the relative abundance of each OTU with the two axes in the NMDS dataset.
-We do this with the <code class="highlighter-rouge">corr.axes</code> tool:</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-correlation"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Correlation</h3>
-
-  <ul>
-    <li><strong>Corr.axes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
-      <ul>
-        <li>“axes” to axes output from Nmds in 3 dimension (collection)</li>
-        <li>“shared” to shared output from collapse collection on Sub.sample</li>
-        <li>“method” to <code class="highlighter-rouge">Spearman</code></li>
-        <li>“numaxes” to <code class="highlighter-rouge">3</code></li>
-      </ul>
-    </li>
-  </ul>
-</blockquote>
-
-<p>Examining the axes output, we see the data for the first five OTUs look something like this..</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OTU         axis1       p-value      axis2       p-value     axis3       p-value     length
-Otu0001     0.285213    0.226258    -0.742431    0.000272    0.676613    0.001466    1.044201
-Otu0002     0.283582    0.228923    -0.636524    0.003387    0.873574    0.000001    1.117458
-Otu0003     0.461270    0.046828    -0.586271    0.008337    0.767610    0.000125    1.070378
-Otu0004    -0.131579    0.576679    -0.240351    0.307860    0.408772    0.082266    0.492114
-Otu0005    -0.315327    0.180955     0.046553    0.843432    0.097497    0.679135    0.333323
-...
-</code></pre></div></div>
-
-<p>What these results show is that OTUs 1 and 2 are responsible for moving points in a negative direction along
-axis 2. Recalling that we classified each OTU earlier (see taxonomy output from <code class="highlighter-rouge">Classify.otu</code>), we can see
-that these first five OTUs are mainly members of the Porphyromonadaceae:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OTU        Size   Taxonomy
-Otu0001    12329   Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);unclassified(100);
-Otu0002    8912    Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);unclassified(100);
-Otu0003    7857    Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);unclassified(100);
-Otu0004    7483    Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);Barnesiella(100);
-Otu0005    7479    Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);unclassified(100);
-...
-</code></pre></div></div>
-
-<p>This helps to illustrate the power of OTUs over phylotypes since each of these OTUs is behaving differently.
-These data can be plotted in what’s known as a biplot where lines radiating from the origin (axis1=0, axis2=0,
-axis3=0) to the correlation values with each axis are mapped on top of the PCoA or NMDS plots.
-<!-- TODO: make this plot? --></p>
-
-<p>Later, using the metastats command, we will see another method for describing which populations are
-responsible for differences seen between specific treatments.</p>
-
-<p>An alternative approach to building a biplot would be to provide data indicating metadata about each sample.
-For example, we may know the weight, height, blood pressure, etc. of the subjects in these samples. For
-discussion purposes the file <code class="highlighter-rouge">mouse.dpw.metadata</code> is provided and looks something like this:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>group    dpw
-F3D0     0
-F3D1     1
-F3D141   141
-F3D142   142
-F3D143   143
-F3D144   144
-F3D145   145
-F3D146   146
-F3D147   147
-F3D148   148
-F3D149   149
-F3D150   150
-F3D2     2
-F3D3     3
-F3D5     5
-F3D6     6
-F3D7     7
-F3D8     8
-F3D9     9
-</code></pre></div></div>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
-
-  <ul>
-    <li><strong>Corr.axes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
-      <ul>
-        <li>“axes” to axes output from Nmds in 3 dimension</li>
-        <li>“Generate Collector Curvers for” to Metadata table</li>
-        <li>“metadata table” to <code class="highlighter-rouge">mouse.dpw.metadata</code></li>
-        <li>“method” to <code class="highlighter-rouge">Spearman</code></li>
-        <li>“numaxes” to <code class="highlighter-rouge">3</code></li>
-      </ul>
-    </li>
-  </ul>
-
-  <p>This will output a file like the following:</p>
-
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Feature    axis1       p-value      axis2       p-value     axis3       p-value     length
-dpw        0.205263    0.383832    -0.292982    0.213861    0.821053    0.000016    0.895600
-</code></pre></div>  </div>
-
-  <p>Indicating that as the dpw increases, the communities shift to in the positive direction along axis 3.</p>
-
-  <p>Another tool we can use is <code class="highlighter-rouge">get.communitytype</code> to see whether our data can be partitioned in to separate
-community types</p>
-
-  <!-- TODO: add this tool to mothur suite -->
-  <ul>
-    <li><strong>Get.communitytype</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
-      <ul>
-        <li>“shared” to Subsample.shared file</li>
-        <li>“output logfile?” to <code class="highlighter-rouge">yes</code></li>
-      </ul>
-    </li>
-  </ul>
-
-</blockquote>
-
-<p>In logfile we find the following output:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>K    NLE        logDet    BIC         AIC         Laplace
-1    9612.15    522.97    10070.01    9923.15     9587.84
-2    9688.76    464.05    10605.95    10311.76    9348.28
-3    10329.39   329.18    11705.91    11264.39    9634.77
-4    11026.12   97.78     12861.98    12273.12    9929.10
-5    11662.52  -250.61    13957.71    13221.52    10104.59
-</code></pre></div></div>
-
-<p>We see that the minimum Laplace value is for a K value of 2 (9348.28). This indicates that our samples
-belonged to two community types. Opening the <code class="highlighter-rouge">design</code> output we see that all of the late samples and the Day 0
-sample belonged to Partition_1 and the other early samples belonged to Partition_2. We can look at the
-<code class="highlighter-rouge">summary</code> output to see which OTUs were most responsible for separating the communities:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OTU        P0.mean  P1.mean  P1.lci  P1.uci  P2.mean  P2.lci  P2.uci  Difference   CumFraction
-Otu0006    3.36     10.48    9.17    11.97   0.46     0.28    0.78    10.01        0.15
-Otu0014    6.17     8.45     7.35    9.72    3.76     2.98    4.73    4.70         0.22
-Otu0002    5.63     7.14     6.17    8.25    3.83     3.05    4.81    3.31         0.27
-Otu0008    4.01     2.92     2.41    3.54    5.85     4.80    7.12    2.92         0.31
-Otu0019    2.07     3.48     2.90    4.18    0.94     0.63    1.40    2.54         0.35
-...
-</code></pre></div></div>
-
-<p>Again we can cross reference these OTU labels with the consensus classifications in the taxonomy file to get
-the names of these organisms.</p>
-
-<blockquote class="question">
-  <h3 id="question-question-11"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
-
-  <p>What organisms were the top 5 contributing OTUs classified as?</p>
-
-  <blockquote class="solution">
-    <h3 id="solution-solution-12"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <p>Note down the names of the top 5 OTUs as output by thesummary output of get.communitytype.
-Then look at the taxonomy file output by Classify.otu.</p>
-
-    <p>In our example these top 5 OTUs were classified
-as belonging to Porphyromonadaceae (top 3 OTUs), Alistipes and Lactobacillus.</p>
-  </blockquote>
-</blockquote>
-
-<h2 id="population-level-analysis">Population-level Analysis</h2>
-
-<p>In addition to the use of <code class="highlighter-rouge">corr.axes</code> and <code class="highlighter-rouge">get.communitytype</code> we have several tools to differentiate between
-different groupings of samples. The first we’ll demonstrate is <code class="highlighter-rouge">metastats</code>, which is a non-parametric T-test
-that determines whether there are any OTUs that are differentially represented between the samples from early and late in this study.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-t-test"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: T-test</h3>
-
-  <ul>
-    <li><strong>Metastats</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
-      <ul>
-        <li>“shared” to Subsample.shared</li>
-        <li>“design” to <code class="highlighter-rouge">mouse.time.design</code></li>
-      </ul>
-    </li>
-  </ul>
-</blockquote>
-
-<p>Looking at the first 5 OTUs from <code class="highlighter-rouge">Late-Early</code> output file we see the following:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OTU        mean(group1)  variance(group1)  stderr(group1)  mean(group2)  variance(group2)  stderr(group2)  p-value
-Otu0001    0.026104      0.000079          0.002807        0.011304      0.000031          0.001856        0.000999
-Otu0002    0.072869      0.000101          0.003176        0.041946      0.000208          0.004805        0.000999
-Otu0003    0.015261      0.000023          0.001531        0.002182      0.000003          0.000539        0.000999
-Otu0004    0.029451      0.000064          0.002536        0.020427      0.000140          0.003947        0.074925
-Otu0005    0.068139      0.000087          0.002957        0.070058      0.000163          0.004254        0.729271
-</code></pre></div></div>
-
-<p>These data tell us that OTUs 1, 2, and 3 was significantly different between the early and late samples.</p>
-
-<blockquote class="question">
-  <h3 id="question-question-12"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
-
-  <p>Which of the top 10 OTUs in your output were significantly different between early and late samples?</p>
-
-  <blockquote class="solution">
-    <h3 id="solution-solution-13"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <p>Looking at the p-value cut-off and using your favorite cutoff threshold (say 0.01).
-Answer to the question is all OTUs with a value lower than this threshold. Note that these OTU labels may
-be different for you and may very between one repetition of this tutorial to the next, and therefore may
-vary between you and your neighbour as well.</p>
-  </blockquote>
-</blockquote>
-
-<p>Another non-parametric tool we can use as an alternative to metastats is lefse:</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-lefse"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Lefse</h3>
-
-  <ul>
-    <li><strong>Lefse</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
-      <ul>
-        <li>“shared” to Subsample.shared</li>
-        <li>“design” to <code class="highlighter-rouge">mouse.time.design</code></li>
-      </ul>
-    </li>
-  </ul>
-</blockquote>
-
-<p>Looking at the top of the lefse summary file we see:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OTU        LogMaxMean  Class   LDA         pValue
-Otu0001    4.41671     Late    3.91585    0.000601825
-Otu0002    4.86254     Late    4.20329    0.000695271
-Otu0003    4.18358     Late    3.82749    0.00022674
-Otu0004    4.4691      -
-Otu0005    4.84546     -
-</code></pre></div></div>
-
-<p>Again, OTUs 1, 2, and 3 are significantly different between the two groups and are significantly elevated in the
-late samples</p>
-
-<p>Finally, Mothur has an implementation of the random forest algorithm build into her as classify.rf. This will tell
-us which features (i.e. OTUs) are useful in discriminating between the two groups of samples:</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-classifyrf"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Classify.rf</h3>
-
-  <ul>
-    <li><strong>Classify.rf</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
-      <ul>
-        <li>“shared” to Subsample.shared</li>
-        <li>“design” to <code class="highlighter-rouge">mouse.time.design</code></li>
-      </ul>
-    </li>
-  </ul>
-</blockquote>
-
-<p>in the logfile we see:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Creating 100 (th) Decision tree
-numCorrect = 19
-forrestErrorRate = 0
-confusion matrix:
-        Early    Late    time
-Early   9        0       0
-Late    0        10      0
-time    0        0       0
-</code></pre></div></div>
-
-<p>We can ignore the time row and column and see that our samples were all correctly assigned to the proper groups.
-Looking at <code class="highlighter-rouge">summary</code> output, we see the top 10 OTUs that resulted in the greatest mean decrease in activity were:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OTU        Mean decrease accuracy
-Otu0038    0.21
-Otu0003    0.15
-Otu0091    0.14
-Otu0096    0.13
-Otu0024    0.12
-Otu0006    0.1
-Otu0011    0.1
-Otu0015    0.09
-Otu0082    0.08
-Otu0042    0.07
-</code></pre></div></div>
-
-<h1 class="no_toc" id="wrap-up">Wrap-up</h1>
-
-<p>Well done! You have now seen how to perform the complete Schloss lab’s Standard Operating Procedure (SOP) for MiSeq data.</p>
+<p><img src="../../images/mothur_sop_pipeline.jpg" alt="mothur sop tutorial pipeline" width="50%" /></p>
 
 
                 </div>
@@ -2576,12 +2147,12 @@ Otu0042    0.07
         <hr>
         <br>
 
-        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=16S Microbial Analysis with Mothur (Metagenomics)">Loading...
+        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=16S Microbial Analysis with mothur (Metagenomics)">Loading...
         </iframe>
 
         <blockquote class="feedback">
             <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
-            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=16S Microbial Analysis with Mothur (Metagenomics)">Feedback Form</a>.</p>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=16S Microbial Analysis with mothur (Metagenomics)">Feedback Form</a>.</p>
         </blockquote>
     </section>
 </div>
@@ -2596,7 +2167,7 @@ Otu0042    0.07
   
   <a href="/training-material/hall-of-fame#shiltemann" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a>, 
   <a href="/training-material/hall-of-fame#bebatut" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Bérénice Batut">Bérénice Batut</a>, 
-  <a href="/training-material/hall-of-fame#pschloss" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pschloss" alt="Pat Schloss">Pat Schloss</a>)!
+  <a href="/training-material/hall-of-fame#tnabtaf" class="contributor-badge"><img src="https://avatars.githubusercontent.com/tnabtaf" alt="Dave Clements">Dave Clements</a>)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
