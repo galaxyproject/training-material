@@ -185,35 +185,35 @@ This file will be the input for more detailed analysis:
 
 ![BLAST databases](../../images/blast_database.png)
 
-> ### {% icon tip %} Tip:
+> ### {% icon details %} Organism not available in a BLAST database
 >
 > If you have an organism which is not available in a BLAST database, you can use its genome sequence in FASTA file for BLAST searches "sequence file against sequence file". If you need to search in these sequences on a regularly basis, you can create a own BLAST database from the sequences of the organism. The advantage of having a own database for your organism is the duration of the BLAST search which speeds up a lot.
-{: .tip}
+{: .details}
 
 **NCBI BLAST+ makeblastdb** creates a BLAST database from your own FASTA sequence file. Molecule type of input is protein or nucleotide.
 
-> ### {% icon tip %} Tip: Further Reading about BLAST Tools in Galaxy
+> ### {% icon details %} Further Reading about BLAST Tools in Galaxy
 >
 > Cock et al. (2015): [NCBI BLAST+ integrated into Galaxy](http://biorxiv.org/content/early/2015/05/04/014043.full-text.pdf+html)
 >
 > Cock et al. (2013): [Galaxy tools and workflows for sequence analysis with applications in molecular plant pathology](https://peerj.com/articles/167/)
-{: .tip}
+{: .details}
 
 ## More Similarity Search Tools in Galaxy
 
 * **VSEARCH**: For processing metagenomic sequences, including searching, clustering, chimera detection, dereplication, sorting, masking and shuffling. VSEARCH stands for vectorized search, as the tool takes advantage of parallelism in the form of SIMD vectorization as well as multiple threads to perform accurate alignments at high speed. VSEARCH uses an optimal global aligner (full dynamic programming Needleman-Wunsch), in contrast to USEARCH which by default uses a heuristic seed and extend aligner. This results in more accurate alignments and overall improved sensitivity (recall) with VSEARCH, especially for alignments with gaps.
 
-> ### {% icon tip %} Tip:
+> ### {% icon details %} `vsearch` in depth
 >
 > Documentation for vsearch see [here](https://github.com/torognes/vsearch).
-{: .tip}
+{: .details}
 
 * **Diamond**: Diamond is a high-throughput program for aligning a file of short reads against a protein reference database such as NR, at 20,000 times the speed of Blastx, with high sensitivity.
 
-> ### {% icon tip %} Tip:
+> ### {% icon details %} Diamond in depth
 >
 > [Buchfink et al. (2015): Fast and sensitive protein alignment using Diamond.](https://www.nature.com/nmeth/journal/v12/n1/abs/nmeth.3176.html)
-{: .tip}
+{: .details}
 
 * **Kraken**: Kraken BLAST is a highly scalable, extremely fast, commercial, parallelized implementation of the NCBI BLAST application.
 
