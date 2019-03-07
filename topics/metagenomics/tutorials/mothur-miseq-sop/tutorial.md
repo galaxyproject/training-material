@@ -238,7 +238,7 @@ and several other metrics.
 
 ## Create contigs from paired-end reads
 
-In this experiment we used paired-end sequencing of the ~253 bp V4 region of the 16S rRNA gene.
+In this experiment, paired-end sequencing of the ~253 bp V4 region of the 16S rRNA gene was performed.
 The sequencing was done from either end of each fragment. Because the reads are about 250 bp in length, this results in a
 significant overlap between the forward and reverse reads in each pair. We will combine these pairs of reads into *contigs*.
 
@@ -249,18 +249,6 @@ will look at each pair, take the reverse complement reverse read, and then deter
 two sequences. Where an overlapping base call differs between the two reads, the quality score is used to determine
 the consensus base call. A new quality score is derived by combining the two original quality scores in both of
 the reads for all the overlapping positions.
-
-> ### {% icon comment %} Algorithm details
->
-> From the [Schloss lab MiSeq SOP](https://www.mothur.org/wiki/MiSeq_SOP#Reducing_sequencing_and_PCR_errors):<br />
-> *"We have a very simple algorithm to do this. First, we align the pairs of sequences. Next, we look
-> across the alignment and identify any positions where the two reads disagree. If one sequence has a
-> base and the other has a gap, the quality score of the base must be over 25 to be considered real. If
-> both sequences have a base at that position, then we require one of the bases to have a quality score
-> 6 or more points better than the other. If it is less than 6 points better, then we set the consensus
-> base to an N."*
->
-{: .comment}
 
 
 > ### {% icon hands_on %} Hands-on: Combine forward and reverse reads into contigs
@@ -319,8 +307,8 @@ Mean:        1        252.811    252.811    0.70063  4.44854
 
 In this dataset:
 
-* almost all of the reads are between 248 and 253 bases long
-* 2,5% or more of of our reads had ambiguous base calls (`Ambigs` column).
+* Almost all of the reads are between 248 and 253 bases long.
+* 2,5% or more of our reads had ambiguous base calls (`Ambigs` column).
 * The longest read in the dataset is 502 reads.
 * There are 152,360 sequences.
 
@@ -386,7 +374,7 @@ the original dataset. We do this by using the **Unique.seqs** tool.
 {: .hands_on}
 
 Here we see that this step has greatly reduced the size of our sequence file; not only will this speed up further computational
-steps, it will also greatly reduce the amount of disk space needed to store all the intermediate files generated during
+steps, it will also greatly reduce the amount of disk space (and your Galaxy quota) needed to store all the intermediate files generated during
 this analysis. This **Unique.seqs** tool created two files, one is a FASTA file containing only the unique sequences,
 and the second is a so-called *names files*. This names file consists of two columns, the first contains the sequence names
 for each of the unique sequences, and the second column contains all other sequence names that are identical to the representative
@@ -796,7 +784,8 @@ are also of high quality, and we can continue with our analysis.
 
 ### Cluster mock sequences into OTUs
 
-We'll now estimate how many bogus *OTUs* we have by clustering the Mock sequences into OTUs, and comparing the results with the expected outcome.
+We will now estimate the accuracy of our sequencing and analysis pipeline by clustering the Mock sequences into OTUs,
+and comparing the results with the expected outcome.
 
 > ### {% icon tip %} Background: What are Operational Taxonomic Units (OTUs)?
 >
@@ -1071,7 +1060,7 @@ and many different metrics have been proposed to quantify diversity [Finotello e
 > <br><br>
 >
 > Even when two samples have identical richness and evenness, we still may conclude that one is more diverse than
-> other if the species are very dissimilar in one of the samples (have high phylogenetic distance), but very
+> the other if the species are very dissimilar in one of the samples (have high phylogenetic distance), but very
 > closely related to each other in the second sample.
 >
 > ![illustration of phylogenetic distance](../../images/phylogenetic-distance.png){: width="50%"}
@@ -1141,7 +1130,7 @@ off so we are confident we cover a large part of our sample diversity:
 ![Rarefaction curves](../../images/rarefaction_curves.png)
 
 
-Finally, let's use the **Summary.single** tool to generate a summary report.  The following command
+Finally, let's use the **Summary.single** tool to generate a summary report.  The following step
 will randomly subsample down to 2389 sequences, repeat this process 1000 times, and report several metrics:
 
 > ### {% icon hands_on %} Hands-on: Summary.single
@@ -1180,8 +1169,8 @@ label   group   sobs          coverage    invsimpson   invsimpson_lci   invsimps
 This shows the [number of sequences](https://www.mothur.org/wiki/Nseqs), the [sample coverage](https://www.mothur.org/wiki/Coverage), the number of [observed OTUs](https://www.mothur.org/wiki/Sobs), and the [Inverse Simpson diversity estimate](https://www.mothur.org/wiki/Invsimpson) for each group.
 
 There are a couple of things to note here:
-* the differences in diversity and richness between early and late time points is small.
-* All sample coverage is above 97%
+* The differences in diversity and richness between early and late time points is small.
+* All sample coverage is above 97%.
 
 We could perform additional statistical tests (e.g. ANOVA) to confirm our feeling that there is no significant difference based on sex or early vs. late, but this is beyond the scope of this tutorial.
 
@@ -1265,9 +1254,8 @@ of the others.
 
 # Visualisations
 
-mothur does not have a lot of visualization tools built in, but external tools may be used for this. For
-instance we can convert our shared file to the more widely used `biom` format and view it in a platform like
-[Phinch](http://www.phinch.org/).
+We may now wish to visualize our results. We can convert our *shared* file to the more widely used `biom` format and
+view it in a platform like [Phinch](http://www.phinch.org/).
 
 ## Phinch
 
