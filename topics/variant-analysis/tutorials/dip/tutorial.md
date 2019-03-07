@@ -252,10 +252,10 @@ The first step is to convert a VCF file we would like to analyze into a GEMINI d
 
 The GEMINI database can be queried using the versatile SQL language (more on SQL [here](https://swcarpentry.github.io/sql-novice-survey)). In Galaxy this is done using the **GEMINI query** tool. Within this tool SQL commands are typed directly into the **The query to be issued to the database** text box. Let's begin getting information from some of the tables we discovered using the **GEMINI db_info** tool above.
 
-> ### {% icon tip %} Tip: GEMINI tutorials
+> ### {% icon comment %} GEMINI tutorials
 >
 > The examples below are taken from "[Introduction to GEMINI](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)" tutorial. For extensive documentation see "[Querying the GEMINI database](https://gemini.readthedocs.org/en/latest/content/querying.html)".
-{: .tip}
+{: .comment}
 
 > ### {% icon hands_on %} Hands-on: Selecting "novel" variants that are not annotated in dbSNP database
 >

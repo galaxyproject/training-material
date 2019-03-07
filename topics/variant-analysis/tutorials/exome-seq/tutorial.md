@@ -98,12 +98,12 @@ We will follow the pipeline:
 
 ![Exome sequencing pipeline in Galaxy](../../images/genVAST.png)
 
-> ### {% icon tip %} Tip:
+> ### {% icon details %} More detailed tutorial
 >
 > For a more detailed tutorial, have a look at the [tutorial on diploid variant calling](https://github.com/nekrut/galaxy/wiki/Diploid-variant-calling). It
 > follows a similar pipeline using genome in the bottle data, but with more details
 > particularly on the theory behind.
-{: .tip}
+{: .details}
 
 > ### Agenda
 >
@@ -191,10 +191,10 @@ to simplify the variant representation.
 >
 {: .hands_on}
 
-> ### {% icon tip %} Tip:
+> ### {% icon comment %} Constructing the correct expression
 >
 > Have a look at the examples that can help you construct the correct expression for the Filter criteria.
-{: .tip}
+{: .comment}
 
 ## Annotate your variants
 
@@ -217,11 +217,11 @@ the NCBI database of genetic variation and then `hg19` database with **SnpEff**.
 
 Look at your **"INFO"** column again in the generated VCF file. You will get some gene names for your variants, but also a predicted impact and if your variant is located inside of a known gene.
 
-> ### {% icon tip %} Tip:
+> ### {% icon comment %} HTML Report
 >
 > You can also have a look at the HTML report. It contains a number of useful
 metrics such as distribution of variants across gene features.
-{: .tip}
+{: .comment}
 
 ## Getting the final VCF
 
@@ -271,12 +271,13 @@ Now that we have an annotated VCF file it is time to peek inside our variation d
 
 Either way you have now a database with all your variants, with pedigree
 relations, additional annotations and most importantly its fast to search.
-> ### {% icon tip %} Tip:
+
+> ### {% icon comment %} GEMINI Tools
 >
 > Have a look at all different **Gemini** tools and run as many tools as possible on
 > your GEMINI databases. Try to get a feeling of what is possible with a variant
 > database in GEMINI.
-{: .tip}
+{: .comment}
 
 # Variant analysis
 
@@ -295,11 +296,11 @@ have a high impact
 also shows you the reference allele and the alternative allele and the RSID for
 the SNP if it exists
 
-> ### {% icon tip %} Tip:
+> ### {% icon comment %} Header
 >
 > Switch on the `--header` parameter**
 >
-> > ### {% icon tip %} Tip:
+> > ### {% icon details %} Advanced GEMINI usage
 > >
 > > To go further on **Gemini**, you can have a look at the following tutorials:
 > >
@@ -307,7 +308,7 @@ the SNP if it exists
 > > - [Identifying *de novo* mutations underlying Mendelian disease](https://s3.amazonaws.com/gemini-tutorials/Gemini-DeNovo-Tutorial.pdf)
 > > - [Identifying autosomal recessive variants underlying Mendelian disease](https://s3.amazonaws.com/gemini-tutorials/Gemini-Recessive-Tutorial.pdf)
 > > - [Identifying autosomal dominant variants underlying Mendelian disease](https://s3.amazonaws.com/gemini-tutorials/Gemini-Dominant-Tutorial.pdf)
-> {: .tip}
+> {: .details}
 > And for a more detailed tutorial on variant data generation in Galaxy, have a
 > look at the [tutorial on diploid variant calling](https://github.com/nekrut/galaxy/wiki/Diploid-variant-calling).
-{: .tip}
+{: .comment}

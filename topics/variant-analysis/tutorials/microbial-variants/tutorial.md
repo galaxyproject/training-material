@@ -71,32 +71,25 @@ This data is available at Zenodo using the following [link](https://doi.org/10.5
 > 1.  Import all of the following files into a new history:
 >     - [mutant_R1.fastq](https://zenodo.org/record/582600/files/mutant_R1.fastq)
 >     - [mutant_R2.fastq](https://zenodo.org/record/582600/files/mutant_R2.fastq)
->     - [wildtype.fna](https://zenodo.org/record/582600/files/wildtype.fna)  
+>     - [wildtype.fna](https://zenodo.org/record/582600/files/wildtype.fna)
 >     - [wildtype.gbk](https://zenodo.org/record/582600/files/wildtype.gbk)
 >     - [wildtype.gff](https://zenodo.org/record/582600/files/wildtype.gff)
-> 
+>
 >     ```
 >     https://zenodo.org/record/582600/files/mutant_R1.fastq
 >     https://zenodo.org/record/582600/files/mutant_R2.fastq
 >     https://zenodo.org/record/582600/files/wildtype.fna
 >     https://zenodo.org/record/582600/files/wildtype.gbk
 >     https://zenodo.org/record/582600/files/wildtype.gff
->     ```  
+>     ```
 >
->     > ### {% icon tip %} Tip: Importing data via links
->     >
->     > * Copy the link location
->     > * Open the Galaxy Upload Manager
->     > * Select **Paste/Fetch Data**
->     > * Paste the link into the text field
->     > * Press **Start**
->     {: .tip}
+>    {% include snippets/import_via_link.md %}
 >
 {: .hands_on}
 
 # Find variants with Snippy
 
-We will now run the Snippy tool on our reads, comparing it to the reference. 
+We will now run the Snippy tool on our reads, comparing it to the reference.
 
 Snippy is a tool for rapid bacterial SNP calling and core genome alignments. Snippy finds SNPs between a haploid reference genome and your NGS sequence reads. It will find both substitutions (snps) and insertions/deletions (indels).
 
@@ -144,20 +137,20 @@ Wildtype    29479   snp T   G   G:21 T:0    CDS +   39/792  13/263  synonymous_v
 Wildtype    47299   snp T   A   A:24 T:0    CDS +   54/1758 18/585  stop_gained c.54T>A p.Cys18*    WILD_00043  mecR1   Methicillin resistance mecR1 protein
 Wildtype    102969  snp G   C   C:16 G:0    CDS -   87/1281 29/426  synonymous_variant c.87C>G p.Gly29Gly   WILD_00093  spa Immunoglobulin G-binding protein A
 Wildtype    103048  snp T   A   A:20 T:0    CDS -   8/1281  3/426   missense_variant c.8A>T p.Lys3Met   WILD_00093  spa Immunoglobulin G-binding protein A
-Wildtype    103379  del GAA GA  GA:11 GAA:0                             
+Wildtype    103379  del GAA GA  GA:11 GAA:0
 Wildtype    106602  snp T   G   G:21 T:0    CDS -   993/993 331/330 stop_lost&splice_region_variant c.993A>C p.Ter331Tyrext*?   WILD_00097  yfiY    putative siderophore-binding lipoprotein YfiY
 Wildtype    109833  snp T   A   A:16 T:0    CDS +   1/1755  1/584   initiator_codon_variant c.1T>A p.Leu1?  WILD_00100  iucC_1  Aerobactin synthase
 Wildtype    114540  del ATT AT  AT:25 ATT:0 CDS +   1717/1737   573/578 frameshift_variant c.1717delT p.Cys573fs    WILD_00102  iucA    N(2)-citryl-N(6)-acetyl-N(6)-hydroxylysine synthase
 Wildtype    129881  mnp GT  AA  AA:18 GT:0  CDS +   55/708  19/235  missense_variant c.55_56delGTinsAA p.Val19Asn   WILD_00117  deoD    Purine nucleoside phosphorylase DeoD-type
 Wildtype    138877  snp G   C   C:14 G:0    CDS +   1119/1545   373/514 missense_variant c.1119G>C p.Trp373Cys  WILD_00125      hypothetical protein
 Wildtype    138920  snp A   G   G:10 A:0    CDS +   1162/1545   388/514 missense_variant c.1162A>G p.Lys388Glu  WILD_00125      hypothetical protein
-Wildtype    160547  del GTC GC  GC:18 GTC:0                             
-Wildtype    160552  del CTA CA  CA:20 CTA:0                             
+Wildtype    160547  del GTC GC  GC:18 GTC:0
+Wildtype    160552  del CTA CA  CA:20 CTA:0
 Wildtype    190866  del GTT GT  GT:18 GTT:0 CDS -   28/1356 10/451  frameshift_variant c.28delA p.Asn10fs   WILD_00166  brnQ    Branched-chain amino acid transport system 2 carrier protein
 ```
 
 > ### {% icon question %} Question
-> 
+>
 > 1. Which types of variants have been found?
 > 2. What is the third variant called?
 > 3. What is the product of the mutation?
@@ -180,14 +173,14 @@ We could go through all of the variants like this and read them out of a text ta
 > 1. **JBrowse** {% icon tool %} with the following parameters
 >    - "Reference genome to display" to `Use a genome from history`
 >    - "Select the reference genome" to `wildtype.fna`
->       
+>
 >       This sequence will be the reference against which annotations are displayed
 >
 >    - "Produce Standalone Instance" to `Yes`
 >    - "Genetic Code" to `11: The Bacterial, Archaeal and Plant Plastid Code`
 >    - "JBrowse-in-Galaxy Action" to `New JBrowse Instance`
 >    - "Track Group"
->       
+>
 >        We will now set up three different tracks - these are datasets displayed underneath the reference sequence (which is displayed as nucleotides in FASTA format). We will choose to display the sequence reads (the .bam file), the variants found by snippy (the .gff file) and the annotated reference genome (the wildtype.gff)
 >
 >       - **Track 1 - sequence reads**: Click on `Insert Track Group` and fill it with
