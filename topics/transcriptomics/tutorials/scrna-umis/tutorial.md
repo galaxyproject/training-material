@@ -73,11 +73,11 @@ In this case; *Read1* contains the barcoding information followed by the polyT t
 
 # Understanding Barcodes
 
-> ### {% icon tip %} Tip: Viewing the pre-requisite topic
+> ### {% icon comment %} Viewing the pre-requisite topic
 >
 > It is highly recommended that the material in the ***Plates, Batches, and Barcodes*** slides [here](../scrna-plates-batches-barcodes/slides.html) are first observed before proceeding with the rest of this tutorial.
 >
-{: .tip}
+{: .comment}
 
 Cell barcodes are designed primarily for delineating one cell from another, such that read transcripts containing different cell barcodes can be trivially said to be derived from different cells.
 
@@ -187,13 +187,13 @@ This then provides us with the true count of the number of true transcripts for 
 
 
 > ### {% icon question %} Questions about UMIs
-> 
+>
 > 1. Are UMIs not specific to certain genes? Can the same UMI map to different genes?
 > 2. Can the same UMI map to different mRNA molecules of the same gene?
 >
 > > ### {% icon solution %} Solution
 > >
-> 1. Yes, UMIs are not specific to genes and the same UMI barcode can tag the transcripts of different genes. UMIs are not universal tags, they are just 'added randomness' that help reduce amplification bias.  
+> 1. Yes, UMIs are not specific to genes and the same UMI barcode can tag the transcripts of different genes. UMIs are not universal tags, they are just 'added randomness' that help reduce amplification bias.
 > > 2. Yes, UMIs are not precise but operate probabilistically. In most cases, two transcripts of the same gene will be tagged by different UMIs. In rarer (but still prevalent) cases, the same UMI will capture different transcripts of the same gene.
 > >  * One helpful way to think about how quantification is performed is to observe the following heirarchy of data `Cell Barcode → Gene → UMI`
 > >
@@ -440,7 +440,7 @@ In a sense, we have a disparity in our data: the reverse reads contain the seque
 > >          35690:                        CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
 > >
 > > They describe the same transcript but have sequences from different reads, and therefore both reads *should* be counted as seperate reads. Whether or not both these reads are counted as a single read due to their identical barcodes, or counted seperately due to their differing sequences depends entirely on the deduplication utility they are fed into it.
-> > 
+> >
 > {: .solution}
 {: .question}
 

@@ -83,34 +83,24 @@ We will use three files for this analysis:
 >     - Option 1: From a shared data library if available (ask your instructor)
 >     - Option 2: From [Figshare](https://figshare.com/s/1d788fd384d33e913a2a)
 >
->         > ### {% icon tip %} Tip: Importing data via links
->         >
->         > * Copy the link location
->         > * Open the Galaxy Upload Manager
->         > * Select **Paste/Fetch Data**
->         > * Paste the link into the text field
->         > * Press **Start**
->         {: .tip}
+>     {% include snippets/import_via_link.md %}
 >
->         - You can paste both links below into the **Paste/Fetch** box:
+>     - You can paste both links below into the **Paste/Fetch** box:
 >
->           ```
->       https://ndownloader.figshare.com/files/5057929?private_link=1d788fd384d33e913a2a
->       https://ndownloader.figshare.com/files/5999829?private_link=1d788fd384d33e913a2a
->           ```
+>     ```
+>     https://ndownloader.figshare.com/files/5057929?private_link=1d788fd384d33e913a2a
+>     https://ndownloader.figshare.com/files/5999829?private_link=1d788fd384d33e913a2a
+>     ```
 >
->         - Select *"Genome"*: `mm10`
+>     - Select *"Genome"*: `mm10`
 >
 > 2. Rename the counts dataset as `seqdata` and the sample information dataset as `sampleinfo` using the {% icon galaxy-pencil %} (pencil) icon.
 > 3. Check that the datatype is `tabular`.
 >    If the datatype is not `tabular`, please change the file type to `tabular`.
 >
->    > ### {% icon tip %} Tip: Changing the datatype
->    > * Click on the {% icon galaxy-pencil %} (pencil) icon displayed in your dataset in the history
->    > * Choose **Datatype** on the top
->    > * Select `tabular`
->    > * Press **Save**
->    {: .tip}
+>
+>    {% include snippets/change_datatype.md datatype="tabular" %}
+>
 {: .hands_on}
 
 
@@ -315,11 +305,11 @@ Click on the `CpmPlots.pdf` link in the `Report`. You should see 12 plots, one f
 
 ![CPM threshold Plots](../../images/rna-seq-counts-to-genes/cpmsvscounts.png "CPM vs Raw Counts Plots")
 
-> ### {% icon tip %} Tip
+> ### {% icon comment %} Thresholds
 >
 > * A threshold of 1 CPM in at least minimum group sample size is a good rule of thumb for samples with about 10 million reads. For larger library sizes increase the CPM theshold and for smaller library sizes decrease it. Check the CpmPlots to see if the selected threshold looks appropriate for the samples (equivalent to ~10 reads).
 >
-{: .tip}
+{: .comment}
 
 
 ## Box plots
@@ -503,11 +493,11 @@ The tables of differentially expressed genes are output as links in the `Report`
 
 ![Multiple contrasts](../../images/rna-seq-counts-to-genes/multiple_contrasts.png "Multiple contrasts output")
 
-> ### {% icon tip %} Tips
+> ### {% icon details %} R code in detail
 >
 > 1. The `Report` with all the plots and tables can be downloaded by clicking on the floppy disk icon on the dataset in the history.
 > 2. If you want to see the R code used, or to explore some of the outputs in R, you can select to output the Rscript and/or RData files in the tool form.
-{: .tip}
+{: .details}
 
 To see some methods for identifying differentially expressed pathways in this dataset, see the follow-on tutorial [RNA-seq genes to pathways]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.md %}). To see how to create a heatmap of custom genes using this dataset, see the tutorial [Visualization of RNA-Seq results with heatmap2]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.md %})
 

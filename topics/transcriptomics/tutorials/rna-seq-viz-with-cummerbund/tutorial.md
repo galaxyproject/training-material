@@ -55,12 +55,12 @@ A typical workflow for the visualization of RNA-Seq data involving CummeRbund:
 
 CummeRbund reads your RNA-Seq results from a [SQLite](https://www.sqlite.org/) database. This database has to be created using CuffDiff's SQLite output option.
 
-> ### {% icon tip %} Tip: SQLite output with CuffDiff
+> ### {% icon details %} SQLite output with CuffDiff
 >
 > Instruct CuffDiff to organize its output in a SQLite database to be read CummeRbund.
 >
 > ![SQLite output](../../images/cummerbund-cuffdiff-set-sqlite.png)
-{: .tip}
+{: .details}
 
 # Importing RNA-Seq result data
 
@@ -69,19 +69,12 @@ CummeRbund reads your RNA-Seq results from a [SQLite](https://www.sqlite.org/) d
 > 1. Create a new history
 > 2. Import the [`CuffDiff SQLite`](https://zenodo.org/record/1001880/files/CuffDiff_SQLite_database.sqlite) dataset
 >
->    > ### {% icon tip %} Tip: Importing data via links
->    >
->    > * Copy the link location
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > * Paste the link into the text field
->    > * Press **Start**
->    {: .tip}
+>    {% include snippets/import_via_link.md %}
 >
->    > ### {% icon comment %} Comments
->    >
->    > Rename the dataset to "RNA-Seq SQLite result data"
->    {: .comment}
+>    Rename the dataset to "RNA-Seq SQLite result data"
+>
+>    {% include snippets/rename_dataset.md name="RNA-Seq SQLite result data" %}
+>
 > By default, when data is imported via its link, Galaxy names it with its URL.
 {: .hands_on}
 

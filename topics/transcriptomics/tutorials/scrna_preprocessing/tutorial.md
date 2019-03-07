@@ -80,7 +80,7 @@ Most scRNA sequencing techniques use pooled-sequencing approaches to generate a 
 
 In this tutorial, we will perform pre-processing upon scRNA FASTQ batch data to generate an *N*-by-*M*  count matrix of *N* cells and *M* genes, with each element indicating the level of expression of that gene in a particular cell.
 
-This count matrix is crucial for performing the downstream analysis, where differential gene analysis is performed between cells in order to cluster them into groups denoting their cell type and lineage. 
+This count matrix is crucial for performing the downstream analysis, where differential gene analysis is performed between cells in order to cluster them into groups denoting their cell type and lineage.
 
 The tutorial is structured in two parts:
 
@@ -161,7 +161,7 @@ We will be performing barcode extraction on our batch data as given by the above
 As before, we can verify that the desired UMI and cell barcodes have been extracted from the sequence of the Forward reads and inserted into the header of the Reverse reads.
 
 > ### {% icon question %} Question
-> 
+>
 > 1. Why are input and output FASTQ file sizes so different?
 > 2. How many reads were filtered out, and why?
 >
@@ -213,13 +213,13 @@ For alignment, we will use RNA-STAR for performance and splice-awareness.
 The purpose of MultiQC is to observe how well our reads were mapped against the reference genome. Many reads are discarded due to being of too low quality, or having ambiguous sequence content that can map them to multiple locations.
 
 > ### {% icon question %} Question
-> 
+>
 > 1. What percentage of our reads are uniquely mapped? How many millions of reads is this percentage?
 > 2. What percentage of our reads are mapped to more than one locus?
 > 3. Is our overall mapping 'good' ?
 >
 > > ### {% icon solution %} Solution
-> > 
+> >
 > > 1. `70.9%` or 10 million reads were successfully mapped
 > > 2. `14.4%` are multiply mapped, and `2.2%` were mapped to too many loci
 > >   - Multiply mapped means that a read was aligned to more than one gene
@@ -239,11 +239,11 @@ Before continuing let us first look back on some of the previous stages:
 
 > ### {% icon comment %} Recap of previous stages
 >
-> 1. *Barcode Extraction*:  
+> 1. *Barcode Extraction*:
 >
->     Here we used `umi_tools extract` on our input forward and reverse FASTQ files, and extracted the UMI and cell barcode from the forward read *sequence*, and placed it into the *header* of both forward and reverse FASTQ files. i.e. FASTQ files → Modified FASTQ files  
+>     Here we used `umi_tools extract` on our input forward and reverse FASTQ files, and extracted the UMI and cell barcode from the forward read *sequence*, and placed it into the *header* of both forward and reverse FASTQ files. i.e. FASTQ files → Modified FASTQ files
 >
-> 2. *Mapping*:  
+> 2. *Mapping*:
 >
 >     We took the sequencing data from the reverse FASTQ file (with modified headers) and aligned it to the mouse genome, using annotations presented in the GTF file for that genome. i.e. Modified FASTQ file (reverse) → BAM file
 >
@@ -256,9 +256,9 @@ We now have a BAM file of our aligned reads, with cell and UMI barcodes embedded
 > ### {% icon hands_on %} Hands-on: Confirming the Alignment Data
 >
 >  1. Click on the {% icon galaxy-eye %} symbol of the BAM output from STAR.
->  2. There are many header lines that begin with `@` which we are not interested in. 
+>  2. There are many header lines that begin with `@` which we are not interested in.
 >  3. Look at first read directly below the header lines:
-> 
+>
 >         J00182:75:HTKJNBBXX:2:1121:9729:45889_GACGAA_GTGGTC	16	chr1	2030	3	70M	*	0	0	AGAGGTTCCAATATTCCCATGAAATTGAGATTTTGTAAAAGAGTGAAGTGTGGTTACTTTCACTGAGAGG	JJJJJJJJJJJJJJJJJJJJJJJJFJJJJJAJJJJJJJJJJFJFJFFJJJJJJJJJJJJFF7AJA-77<A	NH:i:2 HI:i:1 AS:i:64 nM:i:2
 >
 {: .hands_on}
@@ -295,7 +295,7 @@ The main filtering steps performed on our reads so far have been relatively sile
 * *UMI-tools Extract* - Filters reads for those only with matching barcodes given by our barcodes file.
 * *RNA-STAR* - As seen in the log, we lose 10% of our reads for being too short or being multiply mapped.
 
-Another filtering measure we can apply is to keep reads that we are confident about, e.g those with a minimum number of mismatches to the reference within an acceptable range. 
+Another filtering measure we can apply is to keep reads that we are confident about, e.g those with a minimum number of mismatches to the reference within an acceptable range.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -318,8 +318,8 @@ Another filtering measure we can apply is to keep reads that we are confident ab
 >            - In *"Filter"*:
 >                - In *"1: Filter"*:
 >                    - *"Select BAM property to filter on"*: `tag`
->                        - *"Filter on a particular tag"*: `nM:<3`  
->                          <small>(**Attention! please use a lowercase 'n' here!**)  
+>                        - *"Filter on a particular tag"*: `nM:<3`
+>                          <small>(**Attention! please use a lowercase 'n' here!**)
 >        - Click on *"Insert Condition"*:
 >        - In *"4: Condition"*:
 >            - In *"Filter"*:
@@ -332,7 +332,7 @@ Another filtering measure we can apply is to keep reads that we are confident ab
 {: .hands_on}
 
 
-## Quantification 
+## Quantification
 
 Once we have the name of the gene for a specific read, we can count how many of those reads fall into that gene and generate a count matrix.
 
@@ -372,7 +372,7 @@ Unfortunately, both are currently limited to counting without being able to dist
 
 In order to obtain this desired format, we must use **UMI-tools count** to perform the counting. However, this tool is dependent on **FeatureCounts** to annotate our reads with the one crucial piece of information that is missing from our BAM file: the name of the gene.
 
-> ### {% icon tip %} Tip: Verifying missing gene name
+> ### {% icon comment %} Verifying missing gene name
 > You can check this yourself by examining the {% icon galaxy-eye %} of the BAM file *"STAR Alignment file"*
 {: .comment}
 
@@ -381,7 +381,7 @@ In order to obtain this desired format, we must use **UMI-tools count** to perfo
 Let us annotate our BAM file with desired gene tags.
 
 > ### {% icon hands_on %} Hands-on: Quantification assist via FeatureCounts
-> 
+>
 > 1. **FeatureCounts** {%icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Alignment file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
 >    - *"Gene annotation file"*: `in your history`
@@ -401,7 +401,7 @@ Let us annotate our BAM file with desired gene tags.
 The `XS` and `XT` tags in the BAM file will now form the basis for counting reads.
 With all the relevant data now in our BAM file, we can actually perform the counting via `UMI-tools count`.
 
-> ### {% icon tip %} Tip: Verifying added gene name
+> ### {% icon comment %} Verifying added gene name
 > You can once again check this yourself by examining the {% icon galaxy-eye %} of the BAM file *"STAR Alignment file"*
 {: .comment}
 
@@ -409,7 +409,7 @@ With all the relevant data now in our BAM file, we can actually perform the coun
 ### Counting Genes / Cell
 
 > ### {% icon hands_on %} Hands-on: Final Quantification
-> 
+>
 > 1. **UMI-tools counts** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Sorted BAM file"*: `out_file1` (output of **Filter** {% icon tool %})
 >    - *"UMI Extract Method"*: `Barcodes are contained at the end of the read seperated by a delimiter`
@@ -428,16 +428,16 @@ The important parameters to take note of are those given in the *Extra Parameter
 At this stage, we now have a tabular file containing genes/features as rows, and cell labels as headers.
 
 > ### {% icon question %} Question
-> 
+>
 > 1. How many genes do we have in the matrix?
 > 2. How many cells?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. ~23,000 lines  
-> >    This information can be seen in the file preview window by clicking on the name of the file (**NOT** the {% icon galaxy-eye %} symbol). 
+> > 1. ~23,000 lines
+> >    This information can be seen in the file preview window by clicking on the name of the file (**NOT** the {% icon galaxy-eye %} symbol).
 > >
-> > 2. 192 columns (not including the first column of gene names)  
+> > 2. 192 columns (not including the first column of gene names)
 > >    The number of columns can be seen by scrolling the file preview window completely to the right.
 > >
 > {: .solution}
@@ -448,18 +448,18 @@ The generation of a single count matrix is now complete, with the emphasis on th
 
 > ### {% icon comment %} Recap of previous stages
 >
-> 1. *Barcode Extraction*:  
->   
->     Here we used `UMI_tools extract` on our input forward and reverse FASTQ files, and extracted the UMI and cell barcode from the forward read *sequence*, and placed it into the *header* of both forward and reverse FASTQ files. i.e. FASTQ files → Modified FASTQ files  
+> 1. *Barcode Extraction*:
+>
+>     Here we used `UMI_tools extract` on our input forward and reverse FASTQ files, and extracted the UMI and cell barcode from the forward read *sequence*, and placed it into the *header* of both forward and reverse FASTQ files. i.e. FASTQ files → Modified FASTQ files
 > 2. *Mapping*:
 >
 >     We took the sequencing data from the reverse FASTQ file (with modified headers) and aligned it to the mouse genome, using annotations presented in the GTF file for that genome. i.e. Modified FASTQ file (reverse) → BAM file
 >
-> 3. *Quality Filtering*:  
+> 3. *Quality Filtering*:
 >
 >     Reads with aligment mismatches greater than 2 were discarded, and only non multi-mapped reads that mapped to the forward or reverse strand were kept
 >
-> 4. *Quantification*:  
+> 4. *Quantification*:
 >
 >     Gene tags were added to our alignment file, and reads were grouped according those sharing the same gene tag, with further reduction performed by collapsing all reads sharing the same cell and UMI barcode to be counted only once.
 >
@@ -491,7 +491,7 @@ Handling more than one batch of sequencing data is rather trivial when we take i
 1. For each batch, convert FASTQ reads from into a count matrix.
 2. Merge all count matrices into a single count matrix
 
-The first step merely requires us to run the same workflow on each of our batches, using the exact same inputs except for the FASTQ paired data. The second step requires a minimal level of interaction from us; namely using a merge tool and selecting our matrices. 
+The first step merely requires us to run the same workflow on each of our batches, using the exact same inputs except for the FASTQ paired data. The second step requires a minimal level of interaction from us; namely using a merge tool and selecting our matrices.
 
 
 ### Data upload and organization
@@ -512,10 +512,10 @@ Once again, file naming is important, and so we will rename our matrix files app
 >    https://zenodo.org/record/2573175/files/P2_B3.tabular
 >    https://zenodo.org/record/2573175/files/P2_B4.tabular
 >    ```
->    
+>
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
->    
+>
 > 1. Rename a matrix
 >    - Click on {% icon galaxy-pencil %} of the *`P1_B1.tabular`* file
 >    - Set the Name field such that it is affixed with "_P1_B1" (e.g. 'multibatch_P1_B1')
@@ -544,27 +544,27 @@ To resolve this we can perform a "Full Table Join" where the missing data for *G
 >
 > 1. Why have the column headers changed in the Full matrix?
 > 2. Why are the cell labels in B1 and B2 the same, if they are labelling completely different cells?
-> 
+>
 > > ### {% icon solution %} Solution
 > >
 > > 1. Although the cell headers in each batch matrix is the same, the cells they label are *not* the same and need to be relabelled in the final matrix to tell us which batch they originated from.
 > > 2. The reason the cell headers are the same is because the cells use the same barcodes, due to fact that the *same* barcodes are sometimes used across *different* batches.
 > >
 > {: .solution}
-> 
+>
 {: .question}
 
 
 Let us now merge our matrices from different batches.
 
 > ### {% icon hands_on %} Hands-on: Table Merge
-> 
+>
 > 1. **Column Join on Collections** {% icon tool %} with the following parameters:
->   - *"Tabular Files"*: (Select each of the matrices that you wish to join)  
->   - *"Identifier column"*:`1`  
->   - *"Number of Header lines in each item"*:`1`  
->   - *"Keep original column header"*:`Yes`  
->   - *"Fill character"*:`0`  
+>   - *"Tabular Files"*: (Select each of the matrices that you wish to join)
+>   - *"Identifier column"*:`1`
+>   - *"Number of Header lines in each item"*:`1`
+>   - *"Keep original column header"*:`Yes`
+>   - *"Fill character"*:`0`
 >
 {: .hands_on}
 
@@ -584,14 +584,14 @@ There are multiple possible ways to configure a plate for sequencing multiple ba
 1. A full list of barcodes
 2. Which barcodes apply to which batches
 3. Which batches apply to which plates.
- 
+
 Since we the plating protocol we are using is that designed by the Freiburg MPI Grün lab, we will follow their structure.
 
 > ### {% icon details %} Details: Plating protocol
-> 
+>
 > - Barcodes:
 >     These are each 8bp long, with an edit distance of 2, and there 192 of them.
-> 
+>
 >     > |:-------:|:-----------:|
 >     > | 001-006 | AACACC AACCTC AACGAG AACTGG AAGCAC AAGCCA |
 >     > | 007-012 | AAGGTG AAGTGC ACAAGC ACAGAC ACAGGA ACAGTG |
@@ -603,7 +603,7 @@ Since we the plating protocol we are using is that designed by the Freiburg MPI 
 >
 > - Plates:
 >     Here we have 8 batches spread out over 2 plates, with alternate barcode striping.
->           
+>
 >     > |          | 001-096 | 097-192 | 001-096 | 097-192 |
 >     > |----------+---------+---------+---------+---------|
 >     > | Plate 1  |  B1     | B2      | B3      | B4      |
@@ -625,7 +625,7 @@ This plating protocol can be converted into a more textual format, which allows 
 Let us now apply this protocol to our count matrix, and look for any cross-contamination.
 
 > ### {% icon hands_on %} Hands-on: Barcode Filtering
-> 
+>
 > Select **Cross-contamination Barcode Filter** {%icon tool %} with the following parameters:
 >  - *"Input Matrix"*:`output` (merged matrices from the Column Join tool)
 >  - *"Complete Barcodes"*:(barcodes file)
@@ -657,7 +657,7 @@ Let us now apply this protocol to our count matrix, and look for any cross-conta
 {: .hands_on}
 
 The [regular expression](https://www.regular-expressions.info/quickstart.html) (RegEx) used in that final step is required to tell us how to capture the important information in the cell headers contained in brackets `(` `)`, where `\\d` denotes an expected digit, and `[ACTG]+` denotes 1 or more characters matching A or C or T or G.
- 
+
 The plot that follows tells us everything we need to know about each of our batches. Each batch is essentially tested against the full set of barcodes in order to assert that only the desired or 'Real' barcodes have been sequenced.
 
 #### Cross-contamination Plot
@@ -673,19 +673,19 @@ The plot that follows tells us everything we need to know about each of our batc
 >
 > > ### {% icon solution %} Solution
 > >
-> > Because only half the barcodes in each batch were real. The *UMI-tools extract* took the entire barcodes file to filter against each batch, and the *UMI-tools count* also took the entire barcodes file to count against each batch. 
+> > Because only half the barcodes in each batch were real. The *UMI-tools extract* took the entire barcodes file to filter against each batch, and the *UMI-tools count* also took the entire barcodes file to count against each batch.
 > >
 > > Naturally, each batch produced 192 cells, even though 96 were real. As a result of joining each of these matrices we ended up with a count-matrix of $$8 * 192 = 1536$$ cells. The cross-contamination tool removes the false barcodes (50% in each batch), resulting in $$768$$ cells.
 > >
 > {: .solution}
 {: .question}
 
-With this, we now have a count-matrix that can be used for further downstream analyis. 
+With this, we now have a count-matrix that can be used for further downstream analyis.
 
-<!-- 
+<!--
 Factoid: We can convert the number of UMIs to the number of molecules using a transformation script.
 -->
- 
+
 # Conclusion
 {:.no_toc}
 
