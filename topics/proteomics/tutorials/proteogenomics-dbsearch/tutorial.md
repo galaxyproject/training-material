@@ -14,13 +14,13 @@ requirements:
   -
     type: "internal"
     topic_name: proteomics
-    tutorials: 
+    tutorials:
       - proteogenomics-dbcreation
 follow_up_training:
   -
     type: "internal"
     topic_name: proteomics
-    tutorials: 
+    tutorials:
       - proteogenomics-novel-peptide-analysis
 
 contributors:
@@ -352,11 +352,11 @@ Now that we have the list of known peptides, the query tabular tool is used to m
 >
 >    - *"Save the sqlite database in your history"*: `No`
 >
->      > ### {% icon tip %}Tip:
+>      > ### {% icon comment %} Querying an SQLite Database
 >      > **Query Tabular** can also use an existing SQLite database.
 >      > Activating `Save the sqlite database in your history`
 >      > will store the generated database in the history, allowing to reuse it directly.
->      {: .tip}
+>      {: .comment}
 >
 >    - *"SQL Query to generate tabular output"*:
 >      ```
