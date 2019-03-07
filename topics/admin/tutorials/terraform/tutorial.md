@@ -69,7 +69,7 @@ Some groups use Ansible or Bash scripts in order to launch VMs. This can be a be
 
 We will start small, by managing a single VM in our cloud account. Make sure you have your OpenStack credentials available.
 
-> ### {% icon tip %} Download the environment file with the credentials
+> ### {% icon tip %} Obtaining credentials from OpenStack dashboard
 >
 > You can download the environment file with the credentials from the OpenStack dashboard.
 >
