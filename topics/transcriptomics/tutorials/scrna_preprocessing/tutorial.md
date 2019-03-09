@@ -123,7 +123,7 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >
 > 1. Import the FASTQ paired data from [`Zenodo`](https://zenodo.org/record/2573175) or from the data library (ask your instructor)
 >
->    {% include snippets/import_via_link.md collection=true collection_type="Paired" collection_name_convention="`<name>_<plate>_<batch>` to preserve the sample names, sequencing plate number and batch number." collection_name="Here we will write `C57_P1_B1`"  link="https://zenodo.org/record/2554612/files/SRR5683689_1.fastq.gz" link2="https://zenodo.org/record/2554612/files/SRR5683689_2.fastq.gz" genome="GRCm38/mm10" pairswaptext="`SRR5683689_1` and `SRR5683689_2`" %}
+>    {% include snippets/import_via_link.md collection=true collection_type="Paired" collection_name_convention="`<name>_<plate>_<batch>` to preserve the sample names, sequencing plate number and batch number." collection_name="Here we will write `C57_P1_B1`"  link="https://zenodo.org/record/2573175/files/SRR5683689_1.fastq.gz" link2="https://zenodo.org/record/2573175/files/SRR5683689_2.fastq.gz" genome="GRCm38/mm10" pairswaptext="`SRR5683689_1` and `SRR5683689_2`" %}
 >
 > 3. Import the Gene Annotations and Barcodes from [`Zenodo`](https://zenodo.org/record/2573175) or from the data library (ask your instructor)
 >
@@ -300,7 +300,7 @@ Another filtering measure we can apply is to keep reads that we are confident ab
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Filter BAM datasets on a variety of attributes** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"BAM dataset(s) to filter"*: `output_bam` (output of **featureCounts** {% icon tool %})
+>    - {% icon param-file %} *"BAM dataset(s) to filter"*: `output_bam` (output of **RNA STAR** {% icon tool %})
 >    - In *"Condition"*:
 >        - In *"1: Condition"*:
 >            - In *"Filter"*:
@@ -411,7 +411,7 @@ With all the relevant data now in our BAM file, we can actually perform the coun
 > ### {% icon hands_on %} Hands-on: Final Quantification
 > 
 > 1. **UMI-tools counts** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sorted BAM file"*: `out_file1` (output of **Filter** {% icon tool %})
+>    - {% icon param-file %} *"Sorted BAM file"*: `out_file1` (output of **FeatureCounts** {% icon tool %})
 >    - *"UMI Extract Method"*: `Barcodes are contained at the end of the read seperated by a delimiter`
 >    - *"Bam is paired-end"*:`No`
 >    - *"Method to identify group of reads"*:`Unique`
