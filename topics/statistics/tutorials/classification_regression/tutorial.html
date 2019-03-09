@@ -373,13 +373,13 @@
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>Supervised learning methods in machine learning have targets/classes/categories defined in the datasets. These targets can either be discrete values or real-values (continuous). When the targets are discreet, the learning task is known as classification. When the targets are real-values, the task becomes regression. Classification is assigning a distinct category to each sample in the dataset. Regression assigns a real-valued output to a sample in the dataset. In figure <a href="#figure-1">1</a>, the line is a boundary which separates blue balls from violet ones. The task of a classification method is to learn this boundary which can be used to differentiate between unseen balls. The line is the decision boundary which determines the category of a new ball.</p>
+<p><a href="https://en.wikipedia.org/wiki/Supervised_learning">Supervised learning</a> methods in machine learning have targets/classes/categories defined in the datasets. These targets can either be discrete values (integers) or real-values (continuous). When the targets are discrete, the learning task is known as classification. These discrete values are called classes or categories. When the targets are real-values, the task becomes regression. Classification is assigning a category to each sample in the dataset. Regression assigns a real-valued output or target to each sample. In figure <a href="#figure-1">1</a>, the line is a boundary which separates blue balls from violet ones. The task of a classification method is to learn this boundary which can be used to differentiate between unseen balls. The line is the decision boundary which determines the category of a new ball.</p>
 
 <figure id="figure-1"><img src="images/classification.png" alt="classification" title="Classification of differently coloured balls. The line creates a boundary between two sets of balls and is learned by a classifier." /><figcaption><span class="figcaption-prefix">Figure 1:</span> Classification of differently coloured balls. The line creates a boundary between two sets of balls and is learned by a classifier.</figcaption></figure>
 
 <p>Figure <a href="#figure-2">2</a> shows how a (regression) curve is fit which explains most of the data points (blue balls). Here, the curve is a straight line (red). The regression task is to learn this curve which explains the underlying distribution of the data points.</p>
 
-<figure id="figure-2"><img src="images/regression.png" alt="regression" title="Regression fit through data points." /><figcaption><span class="figcaption-prefix">Figure 2:</span> Regression fit through data points.</figcaption></figure>
+<figure id="figure-2"><img src="images/regression.png" alt="regression" title="Regression fit through data points. A curve is learned which best explains the data points." /><figcaption><span class="figcaption-prefix">Figure 2:</span> Regression fit through data points. A curve is learned which best explains the data points.</figcaption></figure>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -510,7 +510,7 @@ https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/breast-w_train
 
 <h2 id="predict-using-test-data">Predict using test data</h2>
 
-<p>This model can now be used to predict the categories of unseen test data (<code class="highlighter-rouge">breast-w_test</code>).</p>
+<p>The <code class="highlighter-rouge">model</code> learned in the previous step can now be used to predict the categories of unseen test (<code class="highlighter-rouge">breast-w_test</code>) data. This step assigns a category to each row in <code class="highlighter-rouge">breast-w_test</code> dataset.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-predict-categories-using-the-model"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Predict categories using the model</h3>
@@ -534,7 +534,7 @@ https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/breast-w_train
 
 <h2 id="visualise-the-prediction">Visualise the prediction</h2>
 
-<p>We would like to check if the predictions are correct.  We will use another dataset <code class="highlighter-rouge">breast-w_targets</code> which is similar to the test dataset but with a target column containing the true targets of the test data. With the predicted and true targets, the learned model is evaluated to see how good are the predictions. To visualise these predictions, a plotting tool is used.</p>
+<p>After the training and prediction tasks, we should check whether the predictions are correct.  We will use another dataset <code class="highlighter-rouge">breast-w_targets</code> for this verification. It is similar to the test dataset (<code class="highlighter-rouge">breast-w_test</code>) but contains an extra target column having the true targets of the test data. With the predicted and true targets, the learned model is evaluated to verify how good the predictions are. To visualise these predictions, a plotting tool is used.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-check-and-visualize-the-predictions"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check and visualize the predictions</h3>
@@ -554,21 +554,21 @@ https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/breast-w_train
 
 <ol>
   <li>
-    <p>Confusion matrix of the correctly and incorrectly predicted samples</p>
+    <p>Confusion matrix of the correctly and incorrectly predicted samples:</p>
 
-    <figure id="figure-3"><img src="images/confusion_matrix.png" alt="confusion_matrix" title="Confusion matrix of the correctly and incorrectly predicted sample." /><figcaption><span class="figcaption-prefix">Figure 3:</span> Confusion matrix of the correctly and incorrectly predicted sample.</figcaption></figure>
+    <figure id="figure-3"><img src="images/confusion_matrix.png" alt="confusion_matrix" title="Confusion matrix of the correctly and incorrectly predicted samples." /><figcaption><span class="figcaption-prefix">Figure 3:</span> Confusion matrix of the correctly and incorrectly predicted samples.</figcaption></figure>
 
-    <p>In figure <a href="#figure-3">3</a>, the diagonal from bottom-left to top-right shows the number of correctly predicted labels which the diagonal from top-left to bottom-right shows the number of incorrectly predicted samples.</p>
+    <p>In figure <a href="#figure-3">3</a>, the diagonal from bottom-left to top-right shows the number of correctly predicted labels and the diagonal from top-left to bottom-right shows the number of incorrectly predicted samples.</p>
   </li>
   <li>
-    <p>Precision, recall and F1 score</p>
+    <p>Precision, recall and F1 score:</p>
 
     <figure id="figure-4"><img src="images/precision_recall_f1.png" alt="prf1_scores" title="Precision, recall and F1 score." /><figcaption><span class="figcaption-prefix">Figure 4:</span> Precision, recall and F1 score.</figcaption></figure>
 
-    <p>The scores determine the robustness of classification. In figure <a href="#figure-4">4</a>, the recall curve shows the percentage of correctly predicted samples per class. All these curves converge because all the samples in <code class="highlighter-rouge">breast-w_test</code> file get correctly classified.</p>
+    <p>These scores determine the robustness of classification. In figure <a href="#figure-4">4</a>, the recall curve shows the percentage of correctly predicted samples per class. All these curves converge because all the samples in <code class="highlighter-rouge">breast-w_test</code> file get correctly classified.</p>
   </li>
   <li>
-    <p>Receiver operator characteristics (ROC) and area under ROC (AUC)</p>
+    <p>Receiver operator characteristics (ROC) and area under ROC (AUC):</p>
 
     <figure id="figure-5"><img src="images/roc.png" alt="roc_scores" title="Receiver operator characteristics (ROC) and area under ROC (AUC)." /><figcaption><span class="figcaption-prefix">Figure 5:</span> Receiver operator characteristics (ROC) and area under ROC (AUC).</figcaption></figure>
 
@@ -580,7 +580,7 @@ https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/breast-w_train
 
 <h1 id="regression">Regression</h1>
 
-<p><a href="https://en.wikipedia.org/wiki/Regression_analysis">Regression</a> is also a supervised learning task where the target is a real number (continuous) instead of discreet like classification. The algorithms which are used for regression tasks are called regressors. A regressor learns the mapping between the features of a dataset row and its target value. Inherently, it tries to fit a curve for the targets. This curve can be linear (straight line curve) or non-linear.</p>
+<p><a href="https://en.wikipedia.org/wiki/Regression_analysis">Regression</a> is also a supervised learning task where target is a real number (continuous) instead of discrete like in classification. The algorithms which are used for regression tasks are called regressors. A regressor learns the mapping between the features of a dataset row and its target value. Inherently, it tries to fit a curve for the targets. This curve can be linear (straight line curve) or non-linear.</p>
 
 <h2 id="data-upload-1">Data upload</h2>
 
@@ -640,7 +640,7 @@ https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/train_data.tab
 
 <h2 id="learn-from-training-data">Learn from training data</h2>
 
-<p>Gradient boosting regressor is used for regression. It is an ensemble based <a href="http://scikit-learn.org/stable/modules/ensemble.html#regression">regressor</a> consisting of weak learners (e.g. decision trees). It learns features of a training dataset (<code class="highlighter-rouge">train_data</code>) and maps all feature rows to respective targets, which are real numbers. The process of mapping gives a trained model.</p>
+<p><a href="http://scikit-learn.org/stable/modules/ensemble.html#regression">Gradient boosting regressor</a> is used for this task. It is an ensemble based regressor consisting of weak learners (e.g. decision trees). It learns features from training dataset (<code class="highlighter-rouge">train_data</code>) and maps all rows to respective targets which are real numbers. The process of mapping gives a trained model.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-train-a-model"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Train a model</h3>
@@ -682,7 +682,7 @@ https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/train_data.tab
 
 <h2 id="predict-using-test-data-1">Predict using test data</h2>
 
-<p>Similarly to the classification, the trained model is evaluated on <code class="highlighter-rouge">test_data</code> which predicts a target value for each row and the results compared to expected results</p>
+<p>Similar to the classification task, the trained model is evaluated on <code class="highlighter-rouge">test_data</code> which predicts a target value for each row and the predicted targets are compared to the expected targets.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-predict-categories-using-the-model-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Predict categories using the model</h3>
@@ -706,7 +706,7 @@ https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/train_data.tab
 
 <h2 id="visualise-the-prediction-1">Visualise the prediction</h2>
 
-<p>We now want to evaluate the prediction by comparing them to the expected targets.</p>
+<p>We will evaluate the predictions by comparing them to the expected targets.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-check-and-visualize-the-predictions-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check and visualize the predictions</h3>
@@ -724,32 +724,32 @@ https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/train_data.tab
 
 <ol>
   <li>
-    <p>True vs predicted targets curves</p>
+    <p>True vs predicted targets curves:</p>
 
     <figure id="figure-6"><img src="images/true_pred_curves.png" alt="true_predicted" title="True vs predicted targets curves." /><figcaption><span class="figcaption-prefix">Figure 6:</span> True vs predicted targets curves.</figcaption></figure>
 
-    <p>The corresponding points on both these curves in figure <a href="#figure-6">6</a> should be close to each other for a good regression performance.</p>
+    <p>In figure <a href="#figure-6">6</a> the corresponding points in both these curves should be close to each other for a good regression performance.</p>
   </li>
   <li>
-    <p>Scatter plot for true vs. predicted targets</p>
+    <p>Scatter plot for true vs. predicted targets:</p>
 
     <figure id="figure-7"><img src="images/true_vs_pred_scatter.png" alt="scatter_plot" title="Scatter plot for true vs. predicted targets." /><figcaption><span class="figcaption-prefix">Figure 7:</span> Scatter plot for true vs. predicted targets.</figcaption></figure>
 
-    <p>In figure <a href="#figure-7">7</a>, the data points (blue) should be close to the orange curve (y = x) which shows that the true and predicted values are close. It shows the performance of the regression. More the number of points are aligned along the x = y line, better is the prediction. <a href="https://en.wikipedia.org/wiki/Coefficient_of_determination">R2</a> score is close to the best possible score of <code class="highlighter-rouge">1.0</code>.</p>
+    <p>Figure <a href="#figure-7">7</a> shows the performance of the regression task. The data points (blue) lie along the orange curve (y = x) which shows that the true and predicted values are close. More the number of points are aligned along the x = y line, better is the prediction. <a href="https://en.wikipedia.org/wiki/Coefficient_of_determination">R2</a> score is close to the best possible score of <code class="highlighter-rouge">1.0</code>.</p>
   </li>
   <li>
-    <p>Residual plot between residual (predicted - true) and predicted targets</p>
+    <p>Residual plot between residual (predicted - true) and predicted targets:</p>
 
     <figure id="figure-8"><img src="images/residual_plot.png" alt="residual_plot" title="Residual plot between residual (predicted - true) and predicted targets." /><figcaption><span class="figcaption-prefix">Figure 8:</span> Residual plot between residual (predicted - true) and predicted targets.</figcaption></figure>
 
-    <p>For good regression performance, this plot should exhibit a random pattern. Figure <a href="#figure-8">8</a> shows a random pattern of points.</p>
+    <p>Figure <a href="#figure-8">8</a> shows a random pattern of points. For a good regression performance, this plot should exhibit a random pattern.</p>
   </li>
 </ol>
 
-<p>By following these steps, we learn how to perform regression and visualise the predictions using Galaxy machine learning and plotting tools. The features of the training data are mapped the real-valued targets. This mapping is used to make predictions on the unseen (test) data. The quality of predictions is visualised using a plotting tool.</p>
+<p>By following these steps, we learn how to perform regression and visualise the predictions using Galaxy machine learning and plotting tools. The features of the training data are mapped to the real-valued targets. This mapping is used to make predictions on an unseen (test) dataset. The quality of predictions is visualised using a plotting tool.</p>
 
 <h1 id="conclusion">Conclusion</h1>
-<p>We learned how to perform classification and regression using different datasets and machine learning tools in Galaxy and visualized the output in multiple plots. There are many other classifiers and regressors which can be tried out on these datasets to find how they perform.</p>
+<p>We learned how to perform classification and regression using different datasets and machine learning tools in Galaxy and visualized the output in multiple plots. There are many other classifiers and regressors in the Galaxy machine learning suite which can be tried out on these datasets to find how they perform. Different datasets can also be analysed using these classifiers and regressors.</p>
 
                 </div>
             </div>
