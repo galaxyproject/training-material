@@ -1280,7 +1280,9 @@ view it in a platform like [Phinch](http://www.phinch.org/).
 >
 > > ### {% icon comment %} Comment
 > >
-> > If this link is not present on your Galaxy, you can download the generated BIOM file and upload directly to the Phinch server at [http://phinch.org](http://phinch.org).
+> > If this link is not present on your Galaxy, you can download the generated BIOM file and upload it directly to the Phinch server at [http://phinch.org](http://phinch.org).
+> >
+> > **Important:** After downloading, please change the file extension from `.biom1` to `.biom` before uploading to Phinch.
 > {: .comment}
 {: .hands_on}
 
