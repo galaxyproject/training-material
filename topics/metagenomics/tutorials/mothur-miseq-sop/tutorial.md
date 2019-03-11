@@ -218,9 +218,9 @@ convention, so that our tools will know which files belong together. We do this 
 >    The middle segment is the name for each pair. You can change these names by clicking on them.
 >    These names will be used as sample names in the downstream analysis so always make sure they are informative!
 >
-> 5. Name the pairs.
+> 5. **Name the pairs**.
 >    - Make sure the pair names are like the image above (`F3D0`, `F3D5` etc)
->      - If the files will imported via url, they may have the full url as sample name, please remove everything but the sample name for each pair
+>    - **Important:** If the files were imported via URL, they may have the full URL as sample name, please remove everything but the sample name for each pair!
 >
 > 6. **Name your collection** at the bottom right of the screen
 > 7. Click the **Create List** button. A new dataset collection item will now appear in your history
@@ -598,16 +598,16 @@ way of doing this is to use the abundant sequences as our reference.
 
 > ### {% icon hands_on %} Hands-on: Remove chimeric sequences
 >
-> - **Chimera.vsearch** {% icon tool %} with the following parameters
+> 1. **Chimera.vsearch** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"fasta"*: the `fasta` output from **Pre.cluster** {% icon tool %}
 >   - {% icon param-select %} *"Select Reference Template from"*: `Self`
 >   - {% icon param-file %} *"count"*: the `count table` from the last **Pre.cluster** {% icon tool %}
 >   - {% icon param-check %} "dereplicate" to Yes
 >
-> Running chimera.vsearch with the count file will remove the chimeric sequences from the count table, but we
-> still need to remove those sequences from the fasta file as well. We do this using remove.seqs:
+>     Running **Chimera.vsearch** with the count file will remove the chimeric sequences from the count table, but we
+>     still need to remove those sequences from the fasta file as well. We do this using **Remove.seqs**:
 >
-> - **Remove.seqs** {% icon tool %} with the following parameters
+> 2. **Remove.seqs** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"accnos"*: the `vsearch.accnos` file from **Chimera.vsearch** {% icon tool %}
 >   - {% icon param-file %} *"fasta"*: the `fasta` output from **Pre.cluster** {% icon tool %}
 >   - {% icon param-file %} *"count"*: the `count table` from **Chimera.vsearch** {% icon tool %}
@@ -638,18 +638,18 @@ set provided by the Schloss lab](https://www.mothur.org/wiki/RDP_reference_files
 
 > ### {% icon hands_on %} Hands-on: Remove undesired sequences
 >
-> - **Classify.seqs** {% icon tool %} with the following parameters
+> 1. **Classify.seqs** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"fasta"*: the `fasta` output from **Remove.seqs** {% icon tool %}
 >   - {% icon param-file %} *"reference"*: `trainset9032012.pds.fasta` from your history
 >   - {% icon param-file %} *"taxonomy"*: `trainset9032012.pds.tax` from your history
 >   - {% icon param-file %} *"count"*: the `count table` file from **Remove.seqs** {% icon tool %}
 >
-> Have a look at the taxonomy output. You will see that every read now has a classification.
+>     Have a look at the taxonomy output. You will see that every read now has a classification.
 >
-> Now that everything is classified we want to remove our undesirables. We do this with the remove.lineage
-> command:
+>     Now that everything is classified we want to remove our undesirables. We do this with the **Remove.lineage**
+>     tool:
 >
-> - **Remove.lineage** {% icon tool %} with the following parameters
+> 2. **Remove.lineage** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"taxonomy"*: the taxonomy output from **Classify.seqs** {% icon tool %}
 >   - {% icon param-text %} *"taxon - Manually select taxons for filtering"*: `Chloroplast-Mitochondria-unknown-Archaea-Eukaryota`
 >   - {% icon param-file %} *"fasta"*: the `fasta` output from **Remove.seqs** {% icon tool %}
@@ -739,7 +739,7 @@ First, let's extract the sequences belonging to our mock samples from our data:
 
 > ### {% icon hands_on %} Hands-on: extract mock sample from our dataset
 >
-> 1. **Get.groups** {% icon tool %} with the following parameters
+> - **Get.groups** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"group file or count table"*: the `count table` from **Remove.lineage** {% icon tool %}
 >   - {% icon param-select %} *"groups"*: `Mock`
 >   - {% icon param-file %}*"fasta"*: `fasta` output from **Remove.lineage** {% icon tool %}
@@ -808,26 +808,26 @@ and comparing the results with the expected outcome.
 >
 > First we calculate the pairwise distances between our sequences
 >
-> - **Dist.seqs** {% icon tool %} with the following parameters
+> 1. **Dist.seqs** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"fasta"*: the `fasta` from **Get.groups** {% icon tool %}
 >   - *"cutoff"*: `0.20`
 >
-> Next we group sequences into OTUs
+>     Next we group sequences into OTUs
 >
-> - **Cluster** {% icon tool %} with the following parameters
+> 2. **Cluster** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"column"*: the `dist` output from **Dist.seqs** {% icon tool %}
 >   - {% icon param-file %} *"count"*: the `count table` from **Get.groups** {% icon tool %}
 >
-> Now we make a *shared* file that summarizes all our data into one handy table
+>     Now we make a *shared* file that summarizes all our data into one handy table
 >
-> - **Make.shared** {% icon tool %} with the following parameters
->     - {% icon param-file %} *"list"*: the `OTU list` from **Cluster** {% icon tool %}
->     - {% icon param-file %} *"count"*: the `count table` from **Get.groups** {% icon tool %}
->     - *"label"*: `0.03` (this indicates we are interested in the clustering at a 97% identity threshold)
+> 3. **Make.shared** {% icon tool %} with the following parameters
+>   - {% icon param-file %} *"list"*: the `OTU list` from **Cluster** {% icon tool %}
+>   - {% icon param-file %} *"count"*: the `count table` from **Get.groups** {% icon tool %}
+>   - *"label"*: `0.03` (this indicates we are interested in the clustering at a 97% identity threshold)
 >
-> And now we generate intra-sample rarefaction curves
+>     And now we generate intra-sample rarefaction curves
 >
-> - **Rarefaction.single** {% icon tool %} with the following parameters
+> 4. **Rarefaction.single** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"shared"*: the `shared` file from **Make.shared** {% icon tool %}
 >
 > > ### {% icon question %} Question
