@@ -132,6 +132,8 @@
                                         
                                     
                                         
+                                    
+                                        
                                         <a class="dropdown-item" href="https://bioinf-galaxian.erasmusmc.nl/galaxy/" title="Erasmus MC">
                                             Erasmus MC
                                         </a>
@@ -149,8 +151,6 @@
                                         <a class="dropdown-item" href="https://usegalaxy.eu" title="Galaxy Europe">
                                             Galaxy Europe
                                         </a>
-                                        
-                                    
                                         
                                     
                                         
@@ -630,7 +630,8 @@ in this document differ slightly from the description on their website -->
     </li>
     <li><strong>Import Sample Data.</strong>
       <ul>
-        <li>Import the sample FASTQ files to your history, either from a shared data library (if available), or from Zenodo:</li>
+        <li>Import the sample FASTQ files to your history, either from a shared data library (if available), or from Zenodo
+using the URLs listed in the box below (click <i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> to expand):</li>
       </ul>
 
       <blockquote class="solution">
@@ -794,13 +795,10 @@ should be <code class="highlighter-rouge">_R1</code> and <code class="highlighte
       <p>The middle segment is the name for each pair. You can change these names by clicking on them.
 These names will be used as sample names in the downstream analysis so always make sure they are informative!</p>
     </li>
-    <li>Name the pairs.
+    <li><strong>Name the pairs</strong>.
       <ul>
-        <li>Make sure the pair names are like the image above (<code class="highlighter-rouge">F3D0</code>, <code class="highlighter-rouge">F3D5</code> etc)
-          <ul>
-            <li>If the files will imported via url, they may have the full url as sample name, please remove everything but the sample name for each pair</li>
-          </ul>
-        </li>
+        <li>Make sure the pair names are like the image above (<code class="highlighter-rouge">F3D0</code>, <code class="highlighter-rouge">F3D5</code> etc)</li>
+        <li><strong>Important:</strong> If the files were imported via URL, they may have the full URL as sample name, please remove everything but the sample name for each pair!</li>
       </ul>
     </li>
     <li><strong>Name your collection</strong> at the bottom right of the screen</li>
@@ -1235,7 +1233,7 @@ way of doing this is to use the abundant sequences as our reference.</p>
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-chimeric-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove chimeric sequences</h3>
 
-  <ul>
+  <ol>
     <li><strong>Chimera.vsearch</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">fasta</code> output from <strong>Pre.cluster</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1243,13 +1241,10 @@ way of doing this is to use the abundant sequences as our reference.</p>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> from the last <strong>Pre.cluster</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> “dereplicate” to Yes</li>
       </ul>
+
+      <p>Running <strong>Chimera.vsearch</strong> with the count file will remove the chimeric sequences from the count table, but we
+ still need to remove those sequences from the fasta file as well. We do this using <strong>Remove.seqs</strong>:</p>
     </li>
-  </ul>
-
-  <p>Running chimera.vsearch with the count file will remove the chimeric sequences from the count table, but we
-still need to remove those sequences from the fasta file as well. We do this using remove.seqs:</p>
-
-  <ul>
     <li><strong>Remove.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“accnos”</em>: the <code class="highlighter-rouge">vsearch.accnos</code> file from <strong>Chimera.vsearch</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1257,7 +1252,7 @@ still need to remove those sequences from the fasta file as well. We do this usi
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Chimera.vsearch</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
-  </ul>
+  </ol>
 
   <blockquote class="question">
     <h3 id="question-question-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -1286,7 +1281,7 @@ set provided by the Schloss lab</a>.</p>
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-undesired-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove undesired sequences</h3>
 
-  <ul>
+  <ol>
     <li><strong>Classify.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">fasta</code> output from <strong>Remove.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1294,15 +1289,12 @@ set provided by the Schloss lab</a>.</p>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“taxonomy”</em>: <code class="highlighter-rouge">trainset9032012.pds.tax</code> from your history</li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> file from <strong>Remove.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
+
+      <p>Have a look at the taxonomy output. You will see that every read now has a classification.</p>
+
+      <p>Now that everything is classified we want to remove our undesirables. We do this with the <strong>Remove.lineage</strong>
+ tool:</p>
     </li>
-  </ul>
-
-  <p>Have a look at the taxonomy output. You will see that every read now has a classification.</p>
-
-  <p>Now that everything is classified we want to remove our undesirables. We do this with the remove.lineage
-command:</p>
-
-  <ul>
     <li><strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“taxonomy”</em>: the taxonomy output from <strong>Classify.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1311,7 +1303,7 @@ command:</p>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Remove.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
-  </ul>
+  </ol>
 
   <blockquote class="question">
     <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1403,7 +1395,7 @@ exactly what we would expect the analysis to produce as a result.</p>
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-extract-mock-sample-from-our-dataset"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: extract mock sample from our dataset</h3>
 
-  <ol>
+  <ul>
     <li><strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“group file or count table”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1412,7 +1404,7 @@ exactly what we would expect the analysis to produce as a result.</p>
         <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“output logfile?”</em>: <code class="highlighter-rouge">yes</code></li>
       </ul>
     </li>
-  </ol>
+  </ul>
 
 </blockquote>
 
@@ -1481,47 +1473,38 @@ separation.</p>
 
   <p>First we calculate the pairwise distances between our sequences</p>
 
-  <ul>
+  <ol>
     <li><strong>Dist.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">fasta</code> from <strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“cutoff”</em>: <code class="highlighter-rouge">0.20</code></li>
       </ul>
+
+      <p>Next we group sequences into OTUs</p>
     </li>
-  </ul>
-
-  <p>Next we group sequences into OTUs</p>
-
-  <ul>
     <li><strong>Cluster</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“column”</em>: the <code class="highlighter-rouge">dist</code> output from <strong>Dist.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
+
+      <p>Now we make a <em>shared</em> file that summarizes all our data into one handy table</p>
     </li>
-  </ul>
-
-  <p>Now we make a <em>shared</em> file that summarizes all our data into one handy table</p>
-
-  <ul>
     <li><strong>Make.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“list”</em>: the <code class="highlighter-rouge">OTU list</code> from <strong>Cluster</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“label”</em>: <code class="highlighter-rouge">0.03</code> (this indicates we are interested in the clustering at a 97% identity threshold)</li>
       </ul>
+
+      <p>And now we generate intra-sample rarefaction curves</p>
     </li>
-  </ul>
-
-  <p>And now we generate intra-sample rarefaction curves</p>
-
-  <ul>
     <li><strong>Rarefaction.single</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“shared”</em>: the <code class="highlighter-rouge">shared</code> file from <strong>Make.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
-  </ul>
+  </ol>
 
   <blockquote class="question">
     <h3 id="question-question-6"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -2056,7 +2039,9 @@ view it in a platform like <a href="http://www.phinch.org/">Phinch</a>.</p>
   <blockquote class="comment">
     <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-    <p>If this link is not present on your Galaxy, you can download the generated BIOM file and upload directly to the Phinch server at <a href="http://phinch.org">http://phinch.org</a>.</p>
+    <p>If this link is not present on your Galaxy, you can download the generated BIOM file and upload it directly to the Phinch server at <a href="http://phinch.org">http://phinch.org</a>.</p>
+
+    <p><strong>Important:</strong> After downloading, please change the file extension from <code class="highlighter-rouge">.biom1</code> to <code class="highlighter-rouge">.biom</code> before uploading to Phinch.</p>
   </blockquote>
 </blockquote>
 
