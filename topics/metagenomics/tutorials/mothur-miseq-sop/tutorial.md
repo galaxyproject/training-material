@@ -108,7 +108,8 @@ All data required for this tutorial has been made available from Zenodo [![DOI](
 >    {% include snippets/create_new_history.md %}
 >
 > 2. **Import Sample Data.**
->       - Import the sample FASTQ files to your history, either from a shared data library (if available), or from Zenodo:
+>       - Import the sample FASTQ files to your history, either from a shared data library (if available), or from Zenodo
+>         using the URLs listed in the box below (click {% icon param-repeat %} to expand):
 >
 >       > ### {% icon solution %} List of Zenodo URLs
 >       > ```
