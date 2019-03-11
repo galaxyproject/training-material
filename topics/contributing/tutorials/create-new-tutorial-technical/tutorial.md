@@ -54,54 +54,6 @@ Once the tutorial is ready, we need to develop a workflow that represents the st
 > 2. Save it in the `workflow` directory of the tutorial
 {: .hands_on}
 
-## Creating the `tools.yaml` (recommended)
-
-The first file to fill out is the `tools.yaml` file which contains the list of the required tools that could be installed from the ToolShed.
-
-This file looks like:
-
-```yaml
----
-api_key: admin
-galaxy_instance: http://localhost:8080
-tools:
-- name: tool1
-  owner: owner
-  tool_panel_section_label: "Section1"
-- name: tool2
-  owner: owner
-  tool_panel_section_label: "Section2"
-```
-
-with:
-
-- `name`: the name of the wrapper of the tool in the ToolShed
-- `owner`: the owner of the wrapper of the tool in the ToolShed
-- `tool_panel_section_label`: section where to put the tool (in the left panel in the Galaxy instance)
-
-This list of tools can be automatically extracted from the workflow using [Ephemeris](https://ephemeris.readthedocs.io/en/latest/index.html) (which should be in the conda environment):
-
-```console
-$ workflow-to-tools -w path/to/workflow -o path/to/tools.yaml
-```
-
-After the extraction, some formatting is needed:
-
-1. Add at the beginning:
-
-    ```yaml
-    ---
-    api_key: admin
-    galaxy_instance: http://localhost:8080
-    ```
-
-2. Change the `tool_panel_section_label` to something more informative
-
-> ### {% icon hands_on %} Hands-on: Creating the `tools.yaml` from your workflow
->
-> 1. Create the `tools.yaml` file using your workflow and Ephemeris
-> 2. Correct the formatting of the `tools.yaml` file
-{: .hands_on}
 
 ## Testing the workflow (recommended)
 
@@ -355,7 +307,7 @@ It is a great way to help users run the tutorial directly inside Galaxy. To lear
 
 # Testing the technical infrastructure
 
-Once we have defined all the requirements for running the tutorial, we can test these requirements, either in a locally running Galaxy or in a Docker container. Please see our tutorial about [Setting up Galaxy for Training]({{site.baseurl}}/topics/contributing/tutorials/setup-galaxy-for-training/tutorial.html) about how to test your tutorial requirements.
+Once we have defined all the requirements for running the tutorial, we can test these requirements, either in a locally running Galaxy or in a Docker container. Please see our tutorial about [Setting up Galaxy for Training]({{site.baseurl}}/topics/instructors/tutorials/setup-galaxy-for-training/tutorial.html) about how to test your tutorial requirements.
 
 
 # Conclusion

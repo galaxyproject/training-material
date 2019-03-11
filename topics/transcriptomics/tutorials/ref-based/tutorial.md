@@ -106,7 +106,7 @@ The reads are raw data from the sequencing machine without any pretreatments. Th
 
 During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data.
 
-Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the ["Quality control" training]({{site.baseurl}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html).
+Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the ["Quality control" training]({{site.baseurl}}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html).
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
@@ -226,7 +226,7 @@ This process is known as aligning or 'mapping' the reads to a reference. This is
 
 > ### {% icon comment %} Comment
 >
-> Do you want to learn more about the principles behind mapping? Follow our [training]({{site.baseurl}}/topics/sequence-analysis/).
+> Do you want to learn more about the principles behind mapping? Follow our [training]({{site.baseurl}}{% link topics/sequence-analysis/tutorials/mapping/tutorial.md %}).
 {: .comment}
 
 As a reference genome for *Drosophila melanogaster* is available, we can map the sequences to this genome in order to identify which genes are affected by  the *Pasilla* gene depletion.
@@ -655,17 +655,18 @@ In the previous section, we counted reads mapped to genes for two samples. To be
 >     - `GSM461176`
 >     - `GSM461179`
 >     - `GSM461182`
+>
 > The links to these files are below:
 >
->    ```
->    https://zenodo.org/record/1185122/files/GSM461178_1.fastqsanger
->    https://zenodo.org/record/1185122/files/GSM461178_2.fastqsanger
->    https://zenodo.org/record/1185122/files/GSM461181_1.fastqsanger
->    https://zenodo.org/record/1185122/files/GSM461181_2.fastqsanger
->    https://zenodo.org/record/1185122/files/GSM461176.fastqsanger
->    https://zenodo.org/record/1185122/files/GSM461179.fastqsanger
->    https://zenodo.org/record/1185122/files/GSM461182.fastqsanger
->    ```
+> ```
+> https://zenodo.org/record/1185122/files/GSM461178_1.fastqsanger
+> https://zenodo.org/record/1185122/files/GSM461178_2.fastqsanger
+> https://zenodo.org/record/1185122/files/GSM461181_1.fastqsanger
+> https://zenodo.org/record/1185122/files/GSM461181_2.fastqsanger
+> https://zenodo.org/record/1185122/files/GSM461176.fastqsanger
+> https://zenodo.org/record/1185122/files/GSM461179.fastqsanger
+> https://zenodo.org/record/1185122/files/GSM461182.fastqsanger
+> ```
 >
 > This is really interesting to redo on the other datasets, especially to check how parameters differ given the different type of data (single-end versus paired-end).
 {: .hands_on}
@@ -731,28 +732,31 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 >
 > 3. Rename the datasets (if needed)
 > 4. **DESeq2** {% icon tool %} with the following parameters:
->    - In *"Factor"*:
->       - In "1: Factor"
->           - *"Specify a factor name"*: `Treatment`
->           - In *"Factor level"*:
->               - In *"1: Factor level"*:
->                   - *"Specify a factor level"*: `treated`
->                   - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `treat` in their name
->               - In *"2: Factor level"*:
->                   - *"Specify a factor level"*: `untreated`
->                   - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `untreat` in their name
->       - Click on *"Insert Factor"* (not on "Insert Factor level")
->       - In "2: Factor"
->           - "Specify a factor name" to `Sequencing`
->           - In *"Factor level"*:
->               - In *"1: Factor level"*:
->                   - *"Specify a factor level"*: `PE`
->                   - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `paired` in their name
->               - In *"2: Factor level"*:
->                   - *"Specify a factor level"*: `SE`
->                   - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `single` in their name
+>    - *"how"*: `Select group tags corresponding to levels`
+>       - In *"Factor"*:
+>          - In "1: Factor"
+>              - *"Specify a factor name"*: `Treatment`
+>              - In *"Factor level"*:
+>                  - In *"1: Factor level"*:
+>                      - *"Specify a factor level"*: `treated`
+>                      - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `treat` in their name
+>                  - In *"2: Factor level"*:
+>                      - *"Specify a factor level"*: `untreated`
+>                      - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `untreat` in their name
+>          - Click on *"Insert Factor"* (not on "Insert Factor level")
+>          - In "2: Factor"
+>              - "Specify a factor name" to `Sequencing`
+>              - In *"Factor level"*:
+>                  - In *"1: Factor level"*:
+>                      - *"Specify a factor level"*: `PE`
+>                      - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `paired` in their name
+>                  - In *"2: Factor level"*:
+>                      - *"Specify a factor level"*: `SE`
+>                      - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `single` in their name
 >    - *"Files have header?"*: `No`
 >    - *"Output normalized counts table"*: `Yes`
+> 
+> 
 {: .hands_on}
 
 **DESeq2** generated 3 outputs
@@ -816,6 +820,8 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 > ### {% icon comment %} Comment
 >
 > For more information about **DESeq2** and its outputs, you can have a look at [**DESeq2** documentation](https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf).
+>
+> For more complex setup, e.g. with many samples, it is possible to use a collection with tags to specify the factors and levels. Check our ["Group tags for complex experimental designs" tutorial]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/group-tags/tutorial.md %}), explaining how to do that.
 {: .comment}
 
 ## Visualization of the differentially expressed genes
@@ -878,7 +884,7 @@ We will join the normalized count table generated by DESeq with the table we jus
 
 > ### {% icon hands_on %} Hands-on: Extract the normalized counts of the most differentially expressed genes
 >
-> 1. **Create a Pasted Entry** {% icon tool %} from the header line of the **Filter** output:
+> 1. **Create a Pasted Entry** from the header line of the **Filter** output:
 >    - Copy the header of the final **Filter** output
 >    - Using the **Upload** tool select **Paste/Fetch data** and paste the copied data
 >    - Set the *Type* to **tabular** and select **Start** to upload a new **Pasted Entry**
@@ -913,7 +919,7 @@ We now have a table with 130 lines (the most differentially expressed genes) and
 >
 > 1. **heatmap2** {% icon tool %} to plot the heatmap:
 >    - {% icon param-file %} *"Input should have column headers"*: the generated table (output of **Cut** {% icon tool %})
->    - *"Advanced - log transformation"*: `Log2(value) transform my data`
+>    - *"Advanced - log transformation"*/*"Data transformation"*: `Log2(value) transform my data`
 >    - *"Enable data clustering"*: `Yes`
 >    - *"Labeling columns and rows"*: `Label columns and not rows`
 >    - *"Coloring groups"*: `Blue to white to red`
@@ -927,7 +933,7 @@ You should obtain something similar to:
 > ### {% icon question %} Questions
 >
 > 1. Do you observe anything in the clustering of the samples and the genes?
-> 2. What changes if you regenerate the heatmap and select `Plot the data as it is` in *"Advanced - log transformation"*?
+> 2. What changes if you regenerate the heatmap and select `Plot the data as it is` in *"Advanced - log transformation"*/*"Data transformation"*?
 > 3. How could you generate a heatmap of normalized counts for all up-regulated genes with absolute fold change > 2?
 >
 > > ### {% icon solution %} Solution
@@ -969,7 +975,7 @@ goseq needs 2 files as inputs:
 >    - *"Delimited by"*: `Tab`
 >    - *"To"*: `Upper case`
 >
->    We just generated the first input for goseq. We need as second input for goseq, the gene lengths. We can use there the gene length generated by **featureCounts** {% icon tool %} and reformate it a bit.
+>    We just generated the first input for goseq. We need as second input for goseq, the gene lengths. We can use there the gene length generated by **featureCounts** {% icon tool %} and reformat it a bit.
 >
 > 5. **Change Case** {% icon tool %} with
 >    - {% icon param-file %} *"From"*: the `feature lengths` (output of **featureCounts** {% icon tool %})
@@ -1012,8 +1018,8 @@ To identify categories significantly enriched/unenriched below some p-value cuto
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 47 GO terms (0.49%) are over-represented and 64 (0.66%) - Filter on c8 (over-represented) and c9 (under-represented)
-> > 2. For over-represented, 31 BP, 6 CC and 10 MF - For under-represented, 36 BP, 25 CC and 3 MF - Group data on column 7 and count on column 1
+> > 1. 29 GO terms (0.25%) are over-represented and 81 (0.71%) - Filter on c8 (over-represented) and c9 (under-represented)
+> > 2. For over-represented, 21 BP, 4 CC and 4 MF - For under-represented, 45 BP, 30 CC and 6 MF - Group data on column 7 and count on column 1
 > >
 > {: .solution}
 {: .question}

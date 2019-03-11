@@ -17,6 +17,8 @@ key_points:
   - It can drastically simplify management of large numbers of VMs
 contributors:
   - erasche
+tags:
+  - terraform
 ---
 
 # Overview
@@ -66,6 +68,14 @@ Some groups use Ansible or Bash scripts in order to launch VMs. This can be a be
 # Managing a Single VM
 
 We will start small, by managing a single VM in our cloud account. Make sure you have your OpenStack credentials available.
+
+> ### {% icon tip %} Obtaining credentials from OpenStack dashboard
+>
+> You can download the environment file with the credentials from the OpenStack dashboard.
+>
+> - Log in to the OpenStack dashboard, choose the project for which you want to download the OpenStack RC file, and click "Access & Security".
+> - Click "Download OpenStack RC File" and save the file. 
+{: .tip}
 
 <!-- TODO(hxr): add example DO config? -->
 

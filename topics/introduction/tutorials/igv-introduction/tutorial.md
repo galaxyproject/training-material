@@ -143,7 +143,7 @@ To start IGV, go to the IGV downloads page: https://www.broadinstitute.org/softw
 
 - Gitools Heatmaps - Data and results are represented as browsable heatmaps. Data can be exported from IGV in gitools format, or loaded directly into a running gitools session. See http://www.gitools.org for details.
 
-- BEDTools - A fast, flexible suite of tools used to compare sets of genomic features. IGV uses BEDTools to compare features in loaded tracks, and view the results as a new track. See more details under [Third Party Tools Integration](https://www.broadinstitute.org/software/igv/third_party_tools#_blank).
+- BEDTools - A fast, flexible suite of tools used to compare sets of genomic features. IGV uses BEDTools to compare features in loaded tracks, and view the results as a new track.
 
 **GenomeSpace**
 

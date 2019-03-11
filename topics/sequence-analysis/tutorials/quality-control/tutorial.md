@@ -15,7 +15,12 @@ objectives:
   - Use tools for quality correction
   - Use a tool to aggregate FastQC output
   - Process single-end and paired-end data
-requirements:
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: sequence-analysis
+    tutorials: 
+      - mapping
 time_estimation: "1H"
 key_points:
   - Run quality control on every dataset before running any other bioinformatics analysis
@@ -114,7 +119,7 @@ The quality for each sequence is a string of characters, one for each base of th
  !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
  |                         |    |        |                              |                     |
 33                        59   64       73                            104                   126
- 0........................26...31.......40                                
+ 0........................26...31.......40
                           -5....0........9.............................40
                                 0........9.............................40
                                    3.....9.............................40
@@ -202,7 +207,7 @@ FastQC produces other diagnostic plots to assess sample quality.
 >     ![Per tile sequence quality](../../images/quality-control/per_tile_sequence_quality.png "Per tile sequence quality")
 >
 >      This graph will only appear for Illumina library which retains its original sequence identifiers. Encoded in these is the flowcell tile from which each read came. The graph enables you to look at the quality scores from each tile across all of your bases to see if there was a loss in quality associated with only one part of the flowcell.
->      
+>
 >      The plot shows the deviation from the average quality for each tile. The colours are on a cold to hot scale, with cold colours being positions where the quality was at, or above, the average for that base in the run, and hotter colours indicate that a tile had worse qualities than other tiles for that base. In the example above you can see that certain tiles show consistently poor quality. A good plot should be blue all over.
 >
 > - **Per base sequence content**
@@ -233,7 +238,7 @@ FastQC produces other diagnostic plots to assess sample quality.
 >
 >     It plots out the percentage of base calls at each position for which an N was called.
 >
->     It's not unusual to see a very low proportion of Ns appearing in a sequence, especially near the end of a sequence. However, if this proportion rises above a few percent it suggests that the analysis pipeline was unable to interpret the data well enough to make valid base calls.  
+>     It's not unusual to see a very low proportion of Ns appearing in a sequence, especially near the end of a sequence. However, if this proportion rises above a few percent it suggests that the analysis pipeline was unable to interpret the data well enough to make valid base calls.
 >
 > - **Sequence length distribution**
 >
@@ -258,7 +263,7 @@ FastQC produces other diagnostic plots to assess sample quality.
 > - **Overrepresented sequences**
 >
 >      A normal high-throughput library will contain a diverse set of sequences, with no individual sequence making up a tiny fraction of the whole. Finding that a single sequence is very overrepresented in the set either means that it is highly biologically significant, or indicates that the library is contaminated, or not as diverse as you expected.
->      
+>
 >      FastQC lists all of the sequence which make up more than 0.1% of the total. For each overrepresented sequence FastQC will look for matches in a database of common contaminants and will report the best hit it finds. Hits must be at least 20bp in length and have no more than 1 mismatch. Finding a hit doesn't necessarily mean that this is the source of the contamination, but may point you in the right direction. It's also worth pointing out that many adapter sequences are very similar to each other so you may get a hit reported which isn't technically correct, but which has very similar sequence to the actual match.
 >
 > - **Adapter Content**
@@ -445,7 +450,7 @@ Let's first have a look at the quality of our reads!
 >
 {: .hands_on}
 
-It is usual that the quality of the sequences is worse for the reverse than for the forward reads. It makes it even important to treat the forward and reverse reads together.
+It is usual that the quality of the sequences is worse for the reverse than for the forward reads. Therefore it is important to treat the forward and reverse reads together.
 
 > ### {% icon hands_on %} Hands-on: Assessing the quality of paired-end data
 > 1. **Cutadapt** {% icon tool %} with the following parameters
@@ -481,6 +486,71 @@ It is usual that the quality of the sequences is worse for the reverse than for 
 >    > {: .solution }
 >    {: .question}
 {: .hands_on}
+
+
+> ### {% icon details %} Algorithmic details
+>
+> One of the biggest advantage of cutadapt over other trimming tools is that it has a nice [documentation](https://cutadapt.readthedocs.io) explaining how the tool works in detail.
+>
+> Cutadapt quality trimming algorithm consists of three simple steps:
+>
+> 1. substract the chosen threshold value from the quality value of each position
+> 2. compute a partial sum of these differences from the end of the sequence to each position
+>    (as long as the partial sum is negative)
+> 3. cut at the minimum value of the partial sum
+>
+> In the following example, we assume that the 3’ end is to be quality-trimmed with a threshold of 10 and we have the following quality values
+>
+> ```
+> 42 40 26 27 8 7 11 4 2 3
+> ```
+> 
+> 1. Subtract the threshold
+>
+>     ```
+>     32 30 16 17 -2 -3 1 -6 -8 -7
+>     ```
+>
+> 2. Add up the numbers, starting from the end (partial sums) and stop early if the sum is greater than zero
+>
+>     ```
+>     (70) (38) 8 -8 -25 -23 -20, -21 -15 -7
+>     ```
+>
+>     The numbers in parentheses are not computed (because 8 is greater than zero), but shown here for completeness.
+>
+> 3. Choose the position of the minimum (`-25`) as the trimming position
+>
+> Therefore, the read is trimmed to the first four bases, which have quality values
+> 
+> ```
+> 42 40 26 27
+> ```
+>
+> Note that thereby also positions with a quality value larger than the chosen threshold are removed if they are embedded in regions with lower quality (note that the partial sum is decreasing if the quality values are smaller than the threshold). The advantage of this procedure is that it is robust against a small number of positions with a quality higher than the threshold.
+>
+>
+> Alternatives to this procedure would be
+>
+> * to cut all positions with a quality smaller than the threshold
+> * a sliding window approach
+>
+> The sliding window approach checks that the average quality of each sequence window of specified length is larger than the threshold. Note that in contrast to cutadapt's approach, this approach has one more parameter and the robustness depends of the length of the windows (in combination with the quality threshold). Both approaches are implemented in Trimmomatic.
+{: .details}
+
+> ### {% icon question %} Questions
+>
+> 1. What kind of alignment is used for finding adapters in reads?
+> 2. What is the criterion to choose the best adapter alignment?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Semi global alignment, i.e., only the overlapping part of the read and the adapter sequence is used for scoring.
+> > 2. An alignment with maximum overlap is computed that has a smallest number of mismatches and indels.
+> >
+> {: .solution}
+{: .question}
+
 
 # Conclusion
 {:.no_toc}

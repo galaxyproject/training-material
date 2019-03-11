@@ -1,0 +1,221 @@
+{  
+   "uuid":"fbdd3651-b729-416b-83a1-190015bb130f",
+   "tags":[  
+
+   ],
+   "format-version":"0.1",
+   "name":"Age_Prediction_using_RNA_Seq",
+   "version":33,
+   "steps":{  
+      "0":{  
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_build_pipeline/sklearn_build_pipeline/1.0",
+         "tool_version":"1.0",
+         "outputs":[  
+            {  
+               "type":"zip",
+               "name":"outfile"
+            }
+         ],
+         "workflow_outputs":[  
+
+         ],
+         "input_connections":{  
+
+         },
+         "tool_state":"{\"final_estimator\": \"{\\\"estimator_selector\\\": {\\\"__current_case__\\\": 1, \\\"selected_estimator\\\": \\\"ElasticNet\\\", \\\"selected_module\\\": \\\"linear_model\\\", \\\"text_params\\\": \\\"\\\"}}\", \"pipeline_component\": \"[{\\\"__index__\\\": 0, \\\"component_selector\\\": {\\\"__current_case__\\\": 2, \\\"component_type\\\": \\\"feature_selection\\\", \\\"fs_algorithm_selector\\\": {\\\"__current_case__\\\": 2, \\\"options\\\": {\\\"k\\\": \\\"10\\\"}, \\\"score_func\\\": \\\"f_regression\\\", \\\"selected_algorithm\\\": \\\"SelectKBest\\\"}}}]\", \"__rerun_remap_job_id__\": null, \"__page__\": null}",
+         "id":0,
+         "tool_shed_repository":{  
+            "owner":"bgruening",
+            "changeset_revision":"99038af8deda",
+            "name":"sklearn_build_pipeline",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"191d3635-a068-4a8e-950e-dfaa1244f125",
+         "errors":null,
+         "name":"Pipeline Builder",
+         "post_job_actions":{  
+            "HideDatasetActionoutfile":{  
+               "output_name":"outfile",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{  
+
+               }
+            }
+         },
+         "label":null,
+         "inputs":[  
+
+         ],
+         "position":{  
+            "top":286.7166748046875,
+            "left":159.5
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_build_pipeline/sklearn_build_pipeline/1.0",
+         "type":"tool"
+      },
+      "1":{  
+         "tool_id":null,
+         "tool_version":null,
+         "outputs":[  
+
+         ],
+         "workflow_outputs":[  
+            {  
+               "output_name":"output",
+               "uuid":"08491312-c299-4b33-b25a-58ef08c860bb",
+               "label":null
+            }
+         ],
+         "input_connections":{  
+
+         },
+         "tool_state":"{}",
+         "id":1,
+         "uuid":"e6624ed3-54a0-406f-88f4-e68f3a04db19",
+         "errors":null,
+         "name":"Input dataset",
+         "label":"training_data_normal",
+         "inputs":[  
+
+         ],
+         "position":{  
+            "top":420.7166748046875,
+            "left":144.5
+         },
+         "annotation":"",
+         "content_id":null,
+         "type":"data_input"
+      },
+      "2":{  
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_searchcv/sklearn_searchcv/1.0",
+         "tool_version":"1.0",
+         "outputs":[  
+            {  
+               "type":"tabular",
+               "name":"outfile_result"
+            },
+            {  
+               "type":"zip",
+               "name":"outfile_estimator"
+            }
+         ],
+         "workflow_outputs":[  
+            {  
+               "output_name":"outfile_result",
+               "uuid":"58a3f81a-1038-40ea-bbd1-6fd9ec71b04c",
+               "label":null
+            }
+         ],
+         "input_connections":{  
+            "search_schemes|infile_pipeline":{  
+               "output_name":"outfile",
+               "id":0
+            },
+            "input_options|infile2":{  
+               "output_name":"output",
+               "id":1
+            },
+            "input_options|infile1":{  
+               "output_name":"output",
+               "id":1
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"save\": \"\\\"true\\\"\", \"search_schemes\": \"{\\\"__current_case__\\\": 0, \\\"infile_pipeline\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"options\\\": {\\\"cv_selector\\\": {\\\"__current_case__\\\": 1, \\\"n_splits\\\": \\\"5\\\", \\\"random_state\\\": \\\"3111696\\\", \\\"selected_cv\\\": \\\"KFold\\\", \\\"shuffle\\\": \\\"true\\\"}, \\\"error_score\\\": \\\"false\\\", \\\"iid\\\": \\\"true\\\", \\\"pre_dispatch\\\": \\\"all\\\", \\\"refit\\\": \\\"true\\\", \\\"return_train_score\\\": \\\"false\\\", \\\"scoring\\\": {\\\"__current_case__\\\": 26, \\\"primary_scoring\\\": \\\"r2\\\", \\\"secondary_scoring\\\": null}, \\\"verbose\\\": \\\"0\\\"}, \\\"search_params_builder\\\": {\\\"param_set\\\": [{\\\"__index__\\\": 0, \\\"search_param_selector\\\": {\\\"__current_case__\\\": 1, \\\"search_p\\\": \\\"k: [5880, 5890, 5895, 5900]\\\", \\\"selected_param_type\\\": \\\"prep_1_p\\\"}}, {\\\"__index__\\\": 1, \\\"search_param_selector\\\": {\\\"__current_case__\\\": 0, \\\"search_p\\\": \\\"normalize: [True, False]\\\", \\\"selected_param_type\\\": \\\"final_estimator_p\\\"}}, {\\\"__index__\\\": 2, \\\"search_param_selector\\\": {\\\"__current_case__\\\": 0, \\\"search_p\\\": \\\"alpha: [0.00001, 0.0001, 0.001]\\\", \\\"selected_param_type\\\": \\\"final_estimator_p\\\"}}]}, \\\"selected_search_scheme\\\": \\\"GridSearchCV\\\"}\", \"input_options\": \"{\\\"__current_case__\\\": 0, \\\"column_selector_options_1\\\": {\\\"__current_case__\\\": 3, \\\"col1\\\": \\\"age\\\", \\\"selected_column_selector_option\\\": \\\"all_but_by_header_name\\\"}, \\\"column_selector_options_2\\\": {\\\"__current_case__\\\": 2, \\\"col2\\\": \\\"age\\\", \\\"selected_column_selector_option2\\\": \\\"by_header_name\\\"}, \\\"header1\\\": \\\"true\\\", \\\"header2\\\": \\\"true\\\", \\\"infile1\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"infile2\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"selected_input\\\": \\\"tabular\\\"}\"}",
+         "id":2,
+         "tool_shed_repository":{  
+            "owner":"bgruening",
+            "changeset_revision":"4368259ff821",
+            "name":"sklearn_searchcv",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"736304a4-a679-410e-bdee-dc7a1a10c8e9",
+         "errors":null,
+         "name":"Hyperparameter Search",
+         "post_job_actions":{  
+            "HideDatasetActionoutfile_estimator":{  
+               "output_name":"outfile_estimator",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{  
+
+               }
+            }
+         },
+         "label":null,
+         "inputs":[  
+            {  
+               "name":"search_schemes",
+               "description":"runtime parameter for tool Hyperparameter Search"
+            },
+            {  
+               "name":"input_options",
+               "description":"runtime parameter for tool Hyperparameter Search"
+            },
+            {  
+               "name":"input_options",
+               "description":"runtime parameter for tool Hyperparameter Search"
+            }
+         ],
+         "position":{  
+            "top":222.7166748046875,
+            "left":376
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_searchcv/sklearn_searchcv/1.0",
+         "type":"tool"
+      },
+      "3":{  
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/bgruening/plotly_parallel_coordinates_plot/plotly_parallel_coordinates_plot/0.1",
+         "tool_version":"0.1",
+         "outputs":[  
+            {  
+               "type":"html",
+               "name":"output"
+            }
+         ],
+         "workflow_outputs":[  
+            {  
+               "output_name":"output",
+               "uuid":"a0e71534-83d7-437f-9b9e-649c311a0dd1",
+               "label":null
+            }
+         ],
+         "input_connections":{  
+            "infile":{  
+               "output_name":"outfile_result",
+               "id":2
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"col_color\": \"\\\"14\\\"\", \"col_dimensions\": \"\\\"5,6,7,14\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+         "id":3,
+         "tool_shed_repository":{  
+            "owner":"bgruening",
+            "changeset_revision":"7b2455348edf",
+            "name":"plotly_parallel_coordinates_plot",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"20973a94-c065-47e8-906c-525688d65a0a",
+         "errors":null,
+         "name":"Parallel Coordinates Plot",
+         "post_job_actions":{  
+
+         },
+         "label":null,
+         "inputs":[  
+            {  
+               "name":"infile",
+               "description":"runtime parameter for tool Parallel Coordinates Plot"
+            }
+         ],
+         "position":{  
+            "top":349.5,
+            "left":708
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/bgruening/plotly_parallel_coordinates_plot/plotly_parallel_coordinates_plot/0.1",
+         "type":"tool"
+      }
+   },
+   "annotation":"",
+   "a_galaxy_workflow":"true"
+}
