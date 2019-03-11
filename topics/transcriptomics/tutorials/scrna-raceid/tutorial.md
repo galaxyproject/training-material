@@ -14,15 +14,15 @@ objectives:
   - Examining gene expression
   - Determining the top most expressive genes per cluster
   - Correcting for unwanted variation
-requirements:
-  -
-    type: "internal"
-    topic_name: transcriptomics
-    tutorials:
-        - scrna-introduction
-        - scrna-plates-batches-barcodes
-        - scrna-umis
-        - scrna_preprocessing
+#requirements:
+#  -
+#    type: "internal"
+#    topic_name: transcriptomics
+#    tutorials:
+#        - scrna-introduction
+#        - scrna-plates-batches-barcodes
+#        - scrna-umis
+#        - scrna_preprocessing
 
 time_estimation: 2H
 key_points:
@@ -246,13 +246,13 @@ On the other hand, cell-cycle variation is well defined and can be modelled agai
 
 ![Sources of variation]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_technical_variation.svg %} "Sources of unwanted technical variation")
 
-Technical variation appears in three main forms: Library size variation, Amplification bias, and Dropout events.
+Technical variation appears in three main forms: *Library size variation*, *Amplification bias*, and *Dropout events*.
 
-Library size variation occurs where two cells of the same cell type may produce a different amount of total transcripts than one another (e.g. due to cell-cycle effects, or differing capture efficiencies), but have a similar *proportion* of transcripts for specific genes. For example, a neural cell with a library size of 100 may express 10 counts of SOX2 (10%), and another neural cell with a library size of 200 may express 20 counts of SOX2 (also 10%). The two cells have different library sizes, but harbor the same expression for that gene because they are of the same cell type.
+1. **Library size variation** occurs where two cells of the same cell type may produce a different amount of total transcripts than one another (e.g. due to cell-cycle effects, or differing capture efficiencies), but have a similar *proportion* of transcripts for specific genes. For example, a neural cell with a library size of 100 may express 10 counts of SOX2 (10%), and another neural cell with a library size of 200 may express 20 counts of SOX2 (also 10%). The two cells have different library sizes, but harbor the same expression for that gene because they are of the same cell type.
 
-Amplification bias stems from an uneven amplification of certain transcripts of a cell over others, giving a false number of reads for the number of mRNA molecules actually observed in the cell. Unique Moleculer Identifiers can significantly reduce this bias, and it is a topic that is covered more extensively in the [*Understanding Barcodes*]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on.
+1. **Amplification bias** stems from an uneven amplification of certain transcripts of a cell over others, giving a false number of reads for the number of mRNA molecules actually observed in the cell. Unique Moleculer Identifiers can significantly reduce this bias, and it is a topic that is covered more extensively in the [*Understanding Barcodes*]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on.
 
-Dropout events are the zero counts that are prevalent in the data due to the reduced sequencing sensitivity in detecting reads, which yields many false negatives in the detection of genes, often resulting in over 80% of the count values in the count matrix being zero. A major point to take into account is that some of these zeroes are *real* (i.e. no transcripts of that gene were detected in that cell) and some of these are *false* (i.e. the transcripts were never captured due to the low sequencing depth). Modelling this duality in the data and mitigating against it is one of the biggest challenges of normalising single-cell data.
+1. **Dropout events** are the zero counts that are prevalent in the data due to the reduced sequencing sensitivity in detecting reads, which yields many false negatives in the detection of genes, often resulting in over 80% of the count values in the count matrix being zero. A major point to take into account is that some of these zeroes are *real* (i.e. no transcripts of that gene were detected in that cell) and some of these are *false* (i.e. the transcripts were never captured due to the low sequencing depth). Modelling this duality in the data and mitigating against it is one of the biggest challenges of normalising single-cell data.
 
 
 ## Naive Approach
@@ -289,14 +289,51 @@ The first three plots tell us about the stability/reliability of our clusters, a
 
 ![Stability Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_sat_jacc.png %} "Stability Plots")
 
-The first plot measures the leves of dispersion within each cluster and produces the mean over all clusters (as defined by the k parameter). As *k* increases, the reduction in this dispersion is measured for each increase of *k* until the change in the mean within-cluster dispersion no longer changes. Here we can see that reduction saturates at k=12, which is chosen to the be the number of clusters detected in our data for all further analysis. The second plot is the same as the first but with the actual dispersion plotted instead of the relative change of dispersion.
+The first plot measures the levels of dispersion within each cluster and produces the mean over all clusters (as defined by the k parameter). As *k* increases, the reduction in this dispersion is measured for each increase of *k* until the change in the mean within-cluster dispersion no longer changes. Here we can see that reduction saturates at k=12, which is chosen to the be the number of clusters detected in our data for all further analysis. The second plot is the same as the first but with the actual dispersion plotted instead of the relative change of dispersion.
 
 The third plot measures the direct stability of each of the derived (in this case, 12) clusters using the [Jaccard index](https://en.wikipedia.org/wiki/Jaccard_index), which is a fraction that measures how many elements in two sets overlap divided by the union of both sets. Here the (top N) genes expressed by the cells in each cluster are intersected with cells in all other clusters to measure how unique the expression profile is to that cluster. The scales given by the plot are actually measuring the dissimalirity between sets, which is one minus the index.
 
 Ideally the Jaccard should have above 0.6 in most clusters, but it is acceptable to have one or two more poorly defined clusters
 
+----
+
+### Outlier Detection
+
+Outlier detection attempts to refine the initially detected clusters to find smaller (sub-)clusters that could be used to define rarer cell types.
+
+The next three plots attempts to do this by describing the variation of the gene expression, given by; a Background plot, a Sensitivity plot, and an Outlier probability plot.
+
+
 ![Gene Expression Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_gexpr.png %} "Stability Plots")
 
+
+1. A background model is calibrated and outliers are identified based on the distribution of transcript counts within a cluster. The counts for each gene are assumed to follow a negative binomial distribution determined by a mean (average expression of a gene across all cells in a cluster), and a dispersion parameter. The dispersion is dervied from the average variance-mean dependence, modelled as a logarithmic second order polynomial under the assumption that *most* genes are not differentially expressed between clusters, and that true biological variability should exceed this assumption.
+   As we can see from the Background plot, the (red) regression of the variance on the mean (as approximated by a second-order polynomial in logarithmic space) is higher than the variance or most genes (all grey dots below the red curve) as expected, since they are not differentially expressed. The genes above this regression are therefore significant for the detection of outlier cells. The orange line is the local regression (moving average variance per mean) and is used purely for illustrative purposes.
+
+1. Outlier cells are detected if the probability for that cell $$c$$, a minimum number of genes $$G_{min}$$ of observing total counts $$T_G_{min}$$ is less than a specific threshold $$P_{\textnormal{thr}}$$. To summarize formally: $$P(\sum_{g\epsilon \textnormal{ outlg}}T_{(c,g)}) < \textnormal{probthr}$$
+  This is shown in the chart below as the number of outliers as a function of the probablity threshold, which is set to $$1e-3$$ by default. Ideally, this threshold should be chosen to that the tail of the distribution is captured as outliers to ensure a maximum sensitivity of this method. If the sensitivity of the sequencing was low, then only a few highly expressed genes would be reliably quantified, so the outlier probability threshold would need to be higher (e.g. up to 1).
+
+1. A barplot of the outlier probabilities of all cells across all clusters. All outlier cells are merged into their own clusters if their similarity exceeds a quantile threshold of the similarity distribution for all pairs of cells within one of the original clusters. After the outlier cells are merged, then new cluster centers are defined for the original clusters after removing the outliers. Then, each cell is assigned to the nearest cluster center using k-partitioning.
+
+The most differentially expressed genes (below a maximum p-value cutoff) in each of the clusters can be seen in the output file *Clustering using RaceID on data: Cluster - Genes per Cluster*, with 7 columns describing:
+
+ | Column | Description |
+ |--------|-------------|
+ | **.** | Gene Name |
+ | **n** | Cluster number |
+ | **mean.ncl** | Mean expression of gene across cells *outside* the cluster |
+ | **mean.cl** | Mean expression of gene across cells *inside* the cluster |
+ | **fc** | Fold-change of mean expression in the cluster, against all remaining cells |
+ | **pv** | Inferred p-value for differential expression |
+ | **padj** | Adjusted p-value using the Benjami-Hochberg correction for the false discovery rate |
+
+
+---
+### Heatmaps
+
+The remainder of the plots are heatmaps derived from k-medoids clustering, showing the similarity between clusters for both the initial clustering and the final (post outlier detection) clustering.
+
+![Heatmaps]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_heatmaps.png %} "Heatmaps for initial and final clusters")
 
 
 > ### {% icon question %} Questions
