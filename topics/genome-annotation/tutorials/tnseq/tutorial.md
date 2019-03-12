@@ -8,7 +8,13 @@ tags:
   - tnseq
   - essential genes
 questions:
+  - "What is Transposon insertion Sequencing?"
+  - "How to get TA sites Coverage ? "
+  - "How to predict essential genes ?"
 objectives:
+  - "Understand the read structure of TnSeq analyses"
+  - "Predict Essential genes with Transit"
+  - "Compare gene essentiality in control sample and an different experimental condition"
 time_estimation: "7h"
 key_points:
 contributors:
@@ -557,6 +563,8 @@ We now have a read count for each nucleotides of the TA sites. The insertions co
 
 # Predicting Essential Genes with Transit
 
+## Predict the essentiality of genes
+
 Now that we have the counts of insertions per TA site, we can use them to predict gene esssentiality with Transit. In order to do that, we need to create a an annotation file in the `prot_table` format, specifique to the Transit tool. You can create this file from a gff3 from GenBank. Upload the gff3 file for *Staphylococcus aureus* [here](https://zenodo.org/record/2579335/files/staph_aur.gff3?download=1).
 
 
@@ -609,7 +617,9 @@ We can obtain the list of genes predicted as essential by filtering on the essen
 >
 {: .hands_on}
 
-Let's compare the results between out two conditions :
+## Compare the essential genes between two conditions
+
+Now let's compare the results between out two conditions :
 
 > ### {% icon hands_on %} Hands-on : Get gene essential in both conditions
 >
