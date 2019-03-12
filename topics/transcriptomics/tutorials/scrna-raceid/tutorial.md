@@ -255,24 +255,14 @@ Technical variation appears in three main forms: *Library size variation*, *Ampl
 1. **Dropout events** are the zero counts that are prevalent in the data due to the reduced sequencing sensitivity in detecting reads, which yields many false negatives in the detection of genes, often resulting in over 80% of the count values in the count matrix being zero. A major point to take into account is that some of these zeroes are *real* (i.e. no transcripts of that gene were detected in that cell) and some of these are *false* (i.e. the transcripts were never captured due to the low sequencing depth). Modelling this duality in the data and mitigating against it is one of the biggest challenges of normalising single-cell data.
 
 
-## Naive Approach
+## Clustering
 
-The naive clustering approach assumes that there is no unwanted technical or biological variability in the data and that the cells will cluster purely based on their phenotypes. This assumption is not completely without merit, since often the biological signal is strong enough to counter the lesser unwanted variation.
+Here we assume that there is no unwanted technical or biological variability in the data and that the cells will cluster purely based on their phenotypes. This assumption is not completely without merit, since often the biological signal is strong enough to counter the lesser unwanted variation.
 
 Here we will attempt to perform some filtering, normalisation, and clustering using the recommended default settings to see if we can detect different cell types. 
 
 
-### Filtering, Normalisation, and Clustering
-
 > ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Filtering, Normalisation, and Confounder Removal using RaceID** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Count Matrix"*: `output` (Input dataset)
->    - In *"Filtering"*:
->        - *"Min Transcripts"*: `3000`
->        - *"Min Expression"*: `5`
->        - *"Min Cells"*: `5`
->        - *"Use Defaults?"*: `Yes`
 >
 > 1. **Clustering using RaceID** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Filtering, Normalisation, and Confounder Removal using RaceID** {% icon tool %})
@@ -359,32 +349,9 @@ All the following plots are heatmaps for the individual genes expressed in each 
 The top 10 defining genes from each cluster (above only cl1-4 are shown) give us an idea of how unique these genes are to the cluster. For example, we can see that: *Gstm3*, *St3gal4*, and *Gna11* are only highly expressed in cl1 and cl6; *Eef1a1* is highly expressed everywhere and that cl4 appears to be a not so well-defined cluster.
 
 
+### Visualising Clusters
 
-### Clustering
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-### Assessing the Quality of the Clusters
+The previous section produced plots that spoke about the quality of the clustering without really showing us the clusters projected into an understandable 2D space. To perform this, we must feed the clustered data into the cluster inspection tool,
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -395,131 +362,36 @@ The top 10 defining genes from each cluster (above only cl1-4 are shown) give us
 >    - *"Examine Genes of Interest"*: `No`
 >    - *"Differential Gene Testing"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > This tool can perform multiple different modes of inspection upon clustered scRNA data, but for now we only wish to look at all clusters as one.
 >    {: .comment}
 >
 {: .hands_on}
 
-### Observations to take into account
 
-- Mention cell-cycle variation and transcriptional bursting (in slides?)
-
-
-## Refined Approach
+**RaceID** makes use of tSNE and force-directed (Fruchterman-Reingold) graph layouts to space the clusters in a visually meaningful manner to show the seperation and relative proximity of clusters to one another.
 
 
-### Filtering, Normalisation, and Confounder Removal
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Filtering, Normalisation, and Confounder Removal using RaceID** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Count Matrix"*: `output` (Input dataset)
->    - In *"Filtering"*:
->        - *"Use Defaults?"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+![Clusters]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_tsne_fr.png %} "Initial and Final clusters using tSNE and F-R projections")
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Which clusters appear to be well defined? Are they consistent between projections?
+> 1. Does this agree with the heatmaps we have seen previously?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. For example, cluster 11 appears to be an isolated well-defined cluster of cells, distinct in both projections. Cluster 1 is at the edge of the main cluster body in both projections, but seems to be closer to the Cluster 13 in the tSNE than in the F-R layout. Clusters 2, 3, and 4 are large noisy clusters in both projections, but Clusters 2 and 4 appear to be closer to one another in the F-R layout.
+> > 2. Cluster 1 was defined much better a smaller set of genes, than clusters 2, 3, or 4 which listed less differentially expressed genes as their most significant.
 > >
 > {: .solution}
 >
 {: .question}
 
 
-### Clustering
+# Inspecting Individual Clusters
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Clustering using RaceID** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Filtering, Normalisation, and Confounder Removal using RaceID** {% icon tool %})
->    - In *"Clustering"*:
->        - *"Use Defaults?"*: `Yes`
->    - In *"Outliers"*:
->        - *"Use Defaults?"*: `Yes`
->    - In *"tSNE and FR"*:
->        - *"Use Defaults?"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-### Assessing the Quality of the Clusters
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Cluster Inspection using RaceID** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Clustering using RaceID** {% icon tool %})
->    - *"Plot All Clusters?"*: `Yes`
->    - *"Perform Subset Analysis?"*: `No`
->    - *"Examine Genes of Interest"*: `No`
->    - *"Differential Gene Testing"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-
-
-## Learning to Play with the Data
-
-blahblahblah
-
-# Cluster Inspection
 
 ## Differential Gene Analysis Between Two Clusters
 
@@ -552,7 +424,10 @@ blahblahblah
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+![Cluster Inspection of Cells]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_clustinspect_cells.png %} "MA plot of cells in cluster 1 and cluster 3")
+
+
 
 > ### {% icon question %} Questions
 >
@@ -577,7 +452,7 @@ blahblahblah
 >    - *"Plot All Clusters?"*: `No`
 >    - *"Perform Subset Analysis?"*: `No`
 >    - *"Examine Genes of Interest"*: `Yes`
->        - *"Genes to Examine"*: `Ptma,Rps2`
+>        - *"Genes to Examine"*: `Gstm3, St3gal4, Gna11`
 >        - *"Use Defaults?"*: `Yes`
 >    - *"Differential Gene Testing"*: `No`
 >
@@ -592,7 +467,11 @@ blahblahblah
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+![Expression Plot]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_goi.png %} "Expression plot of genes of interest across different cells.")
+
+We also have the heatmaps for those specific genes across all clusters as given previously.
+sshfs tetris@ubi.crabdance.com:/extra/torrs ~/tmp
 
 > ### {% icon question %} Questions
 >
