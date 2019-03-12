@@ -335,20 +335,29 @@ The remainder of the plots are heatmaps derived from k-medoids clustering, showi
 
 ![Heatmaps]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_heatmaps.png %} "Heatmaps for initial and final clusters")
 
+The difference shown between the initial and final clustering is sometimes subtle depending which of the clusters the new clusters have been extracted from.
+
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What new clusters have been added?
+> 2. Which clusters are these new cells likely to come from?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. `c13` and `c14`
+> > 2. `c13` appears between `c8` and `c1`, suggesting that the cells in `c13` share a closer similarity to the cells in these clusters, which they were most likely extracted from. The other new cluster `c14` is between `c11` and `c6`, suggesting similar points of extraction.
 > >
 > {: .solution}
 >
 {: .question}
+
+All the following plots are heatmaps for the individual genes expressed in each cluster.
+
+![Gene Heatmaps]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_geneheatmaps.png %} "Individual (final) heatmaps for clusters 1 to 4")
+
+The top 10 defining genes from each cluster (above only cl1-4 are shown) give us an idea of how unique these genes are to the cluster. For example, we can see that: *Gstm3*, *St3gal4*, and *Gna11* are only highly expressed in cl1 and cl6; *Eef1a1* is highly expressed everywhere and that cl4 appears to be a not so well-defined cluster.
+
 
 
 ### Clustering
