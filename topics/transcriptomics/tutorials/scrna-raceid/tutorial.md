@@ -558,7 +558,23 @@ We also have the heatmaps for those specific genes across all clusters as given 
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+![Heatmap Cells]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_cells.png %} "Heatmap of cells.")
+
+ | Gene | Z-score |
+ |------|---------------------------|
+ | Chmp1a | 1.35614489404017 |
+ | Prpsap1 | 1.27561406917734 |
+ | Cyb5r3 | 1.24373637026355 |
+ | St3gal4 | 1.07824983159662 |
+ | Atp5g1 | 1.07747110336794 |
+ | Abcb1a | 1.06445701695433 |
+ | Tlr3 | 1.05483917876983 |
+ | Mrpl9 | 1.04546441547305 |
+ | Ces2a | 1.03563183389053 |
+ | Dgat1 | 0.996275665669355 |
+
+Genes DE along trajectory.
+Ordered z-score indicating the degree of up-regulation between link 1.3 and 3.5
 
 > ### {% icon question %} Questions
 >
@@ -599,7 +615,7 @@ We also have the heatmaps for those specific genes across all clusters as given 
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+![Heatmap FateID]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_fateid.png %} "Heatmap FateID")
 
 > ### {% icon question %} Questions
 >
