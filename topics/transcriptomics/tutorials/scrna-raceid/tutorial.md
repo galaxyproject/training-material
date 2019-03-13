@@ -471,7 +471,6 @@ The previous section produced plots that spoke about the quality of the clusteri
 ![Expression Plot]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_goi.png %} "Expression plot of genes of interest across different cells.")
 
 We also have the heatmaps for those specific genes across all clusters as given previously.
-sshfs tetris@ubi.crabdance.com:/extra/torrs ~/tmp
 
 > ### {% icon question %} Questions
 >
@@ -513,7 +512,13 @@ sshfs tetris@ubi.crabdance.com:/extra/torrs ~/tmp
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+![Lineage Computation Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_lineage.png %} "Lineage Tree and Branches of signficance.")
+
+![Link scores]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_linkscores.png %} "Link scores between branches.")
+
+![Other link scores]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_other.png %} "Other link scores between branches.")
+
 
 > ### {% icon question %} Questions
 >
