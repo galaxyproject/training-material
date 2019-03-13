@@ -59,11 +59,12 @@ The goal of the first step is to upload and prepare the file so that it will be 
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 2. Check that the file contains a header corresponding to: ```"SITES","SPECIES","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content are between double quotes as "x" and that separators have to be ","
+> 2. Check that the file contains a header corresponding to: ```"SPECIES","SITE","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content are between double quotes as "x" and that separators have to be ","
 >
 {: .hands_on}
 
-**TODO: explaining what is this file, what does it contain (the different column) and what we want to do with it**
+This dataset gathers years of records of the presence of butterfly species per site and per day. Columns indicates spieces names ("SPECIES"), observation site ("SITE"), date of the observation ("YEAR","MONTH","DAY") and number of indivudals ("COUNT").
+
 
 ## Prepare the data
 
@@ -232,7 +233,7 @@ The regionalGAM tools require CSV files as input, we need to regenerate a CSV fi
 
 ## Visualize the phenology
 
-**TODO: explain what is the phenology?**
+[Phenology](https://en.wikipedia.org/wiki/Phenology), as described in Wikipedia, is the study of periodic plant and animal life cycle events and how these are influenced by seasonal and interannual variations in climate, as well as habitat factors (such as elevation)
  
 Now you have a file containing all the data on the species of interest. The main goal of this step is to treat phenology related informations and create a material that can be used to generate charts. What you could also do, for example, would be to compare the phenology through the years and sites.
 
@@ -326,7 +327,7 @@ This graph displays the occurrence of Pyronia tithonus, over the year. But the f
 
 ![Phenology chart](../../images/regionalGAM/Pyronia_tithonus_phenology_explicit_ID.png)
 
-This shows the occurrence of Pyronia tithonus, over the weeks. We can already see some differences in the values between the weeks and years, but not how the weeks overlap between the years. We would like to visualize these differences using a stacked visualization. **TODO: any interesting comment?**
+This shows the occurrence of Pyronia tithonus, over the weeks. We can already see some differences in the values between the weeks and years, but not how the weeks overlap between the years. In this type of visualization, it's quite difficult to see when occurs maximum presence of butterflies and possible changes between years. We would like to visualize these differences using a stacked visualization. Here we can see global differences year by year like evolution of the maximum number of observations or some specific patterns as presence of more than only one peak in 2007, 2009 and 2012.
 
 To do that, we need to first create a table with the columns:
 1. Day
@@ -482,7 +483,7 @@ To do that, we need to first create a table with the columns:
 
 ![Stacked Phenology chart](../../images/regionalGAM/Pyronia_tithonus_phenology_stacked_explicit_ID.png)
 
-With this graph, we can see that the occurrence of Pyronia tithonus is always around the same weeks every year **TODO: add more blabla here**
+With this graph, we can see that the occurrence of Pyronia tithonus is always around the same weeks every year. We can also see differences between years, for example 2005 and 2007 show earlier observation than others years maybe due to climatic particularities or due to observations bias. Further tests can be made on these data to evaluate differences between years and relation to climatic, environmental or others factors. Earliest peak is found for year 2006 when latest for year 2012, and this can also be explained by different types of environmental factors or bias. This can be tested through further modeling steps.
 
 > ### {% icon details %} Working with more than one species
 > 
@@ -672,7 +673,8 @@ As before, we need first to create a table with the column:
 
 ![Abundance index chart](../../images/regionalGAM/Pyronia_tithonus_Abundance_index_stacked.png)
 
-**TODO: comment the output / add a question to explain why the next step**
+With this graph, we can see Pyronia tithonus abundance index through years by sites. Results can be different from one site to each other. Regarding overal patterns through years, DEBMS and NLBMS seems to be correlate and maybe due to the relative geographical proximity (DE=German / NL=Netherland). Considering min/max abundance, ESBMS show highest regionalGAM score when DEBMS show lowest. This can also be explained by different types of environmental factors or bias and have to be tested through further modeling steps.
+
 
 ## Compute a collated index for each year and estimates the temporal trend
 
@@ -702,9 +704,19 @@ We would like to know if the year has an influence on the abundance of a species
 >    - {% icon param-file %} *"File generated by the ab_index tool"*: output from **abundance index**
 {: .hands_on}
 
-**TODO: comment the output / add a question to explain why the next step**
+Have a look at the text file result. This is the output of the linear model applied in R. 
+Is the effect weak or strong? 
+Weak
 
-We would like now to apply the same approach than at the previous step with addition of a correlation structure (ARMA(2,0)) to adjust the model.
+Seems the model closed to the reality or not?
+No, the standard deviation is really bad
+
+Is the test p-value significant? 
+yes
+
+As we are applying here a very simple model, we need to test a more complex one to have more evidence about the relevance of the year effect on our data.
+
+We would like now to apply the same approach with addition of a correlation structure (ARMA(2,0)) to adjust the model.
 
 > ### {% icon hands_on %} Hands-on: Model temporal trend taking into account autocorrelation of residuals
 > 1. **Linear regression ajusted for autocorrelation in the residuals** {% icon tool %} with the following parameters.
@@ -712,7 +724,16 @@ We would like now to apply the same approach than at the previous step with addi
 >    - {% icon param-file %} *"File generated by the ab_index tool"*: output from **abundance index**
 {: .hands_on}
 
-**TODO: comment the output / add a question to explain why the next step**
+Have a look at this new text file result. 
+
+Is the test p-value still significant?
+No
+
+Seems the model closed to the reality or not?
+No, the standard deviation is really bad
+
+Can you explain why? 
+This is due to a strong autocorrelation in the residuals
 
 To compare the 2 models, we can compute and plot the global trend (over years).
 
@@ -724,7 +745,7 @@ To compare the 2 models, we can compute and plot the global trend (over years).
 
 ![Expected temporal trend](../../images/regionalGAM/trends.svg)
 
-**TODO: comment the output / add a question to explain why the next step** 
+Here you can see the temporal trends modeled from the simple regression vs using autocorrelation in residuals. You can see the trends are similar (apprently decrease) even if different (origin and slope are differents). Here results are not significant so we can say that there is a significant decrease of the abundance. 
 
 # Conclusions
 {:.no_toc}
