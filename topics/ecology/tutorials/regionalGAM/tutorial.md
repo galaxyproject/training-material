@@ -383,7 +383,7 @@ To do that, we need to first create a table with the columns:
 >
 > 4. **Paste two files side by side** to paste the files
 >    - {% icon param-file %} *"File to join"*: the first output of **Cut**
->    - {% icon param-files %} *"add additional file"*: all the other outputs of **Cut**
+>    - {% icon param-files %} *"add additional file"*: the other first output of **Cut**
 >    - *"Common key column"*: `3`
 >    - *"Column with values to preserve"*: All
 >
