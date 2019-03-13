@@ -1,7 +1,6 @@
 ---
 layout: tutorial_hands_on
 title: "Species distribution modeling"
-zenodo_link: 
 questions:
     - "How to build & evaluate a niche model, visualize and project it ?"
 objectives:
@@ -128,7 +127,7 @@ You now have your occurence records on Wallace!
 > 
 > > ### {% icon solution %} Solution
 > > 
-> >    {: .solution }
+> {: .solution }
 {: .question}
 
 
@@ -183,6 +182,8 @@ This module provides a raster with environmental variables from online sources. 
 > 3. Click on the **Load Env Data**
 {: .hands_on}
 
+**TODO: comment the output / add a question to explain why the next step**
+
 ## Process environmental Data
 
 Wallace will now associate environmental data and occurrences data to train a model.
@@ -211,6 +212,8 @@ Wallace will now associate environmental data and occurrences data to train a mo
 > 6. Click on **Sample**
 {: .hands_on}
 
+**TODO: comment the output / add a question to explain why the next step**
+
 ## Partition Occurrence Data
 
 By partitioning data, a dataset is divided into subsets (i.e. bins). A model is then built on each of subsets but one and test it on the last one (assuming that all the groups are independent). 
@@ -222,64 +225,138 @@ There is 2 possible way to partition data:
     2. Random k-fold: partition the data randomly in a number of bins set by the user with the option `Number of Folds`
 2. Spatial Partition: a partition used when there could be biais due to time, space or sampling method
     1. Block (k=4): the area is divided in four and the different occurrences are put equally into four bins
-    2. Checkerboard (k=2): two bins are used according to the position of the occurence on the grid
-    3. Checkerboard (k=4): four bins are used according to the position of the occurence on the grid. This require an aggregation factor, which is the size of a second grid put on a first one. For exemple, with a factor 4, the grids size will be 4x4
+    2. Checkerboard 1 (k=2): two bins are used according to the position of the occurence on the grid
+    3. Checkerboard 2 (k=4): four bins are used according to the position of the occurence on the grid. This require an aggregation factor, which is the size of a second grid put on a first one. For exemple, with a factor 4, the grids size will be 4x4
 
-        ![Checkerboard 2](https://raw.githubusercontent.com/emichn/training-material/patch-1/topics/ecology/tutorials/species-distribution-modeling/Images/Checkerboard.png "Example of checkerboard (k=4) with a factor 4. Source: doi:10.0.4.87/2041-210X.12261")
+        ![Checkerboard 2](../../images/species-distribution-modeling/Checkerboard.png "Example of checkerboard (k=4) with a factor 4. Source: doi:10.0.4.87/2041-210X.12261")
 
 For both of these technics the number of occurrences into each bin may vary.
 
+> ### {% icon hands_on %} Hands-on: Partition Occurrence Data
+> 1. Go to **5 Partition Occs**
+> 2. In **Partition Occurrence Data**
+>    - *"Modules Available"*: `Non-spatial Partition`
+>    - *"Options Available:"*: `Checkerboard 2 (k=4)`
+>    - *"Aggregation Factor"*: `6`
+> 4. Click on **Partition** 
+{: .hands_on}
 
-`Use spatial partition` on these data choose `Checkerboard 2 (k=4)` and an aggregation factor of `6`
-
+**TODO: comment the output / add a question to explain why the next step**
 
 ## Build and Evaluate Niche Model
 
-Wallace can build different models using either: 1) the presence-only approach BIOCLIM (Module BIOCLIM); or 2) the presence-background (presense-pseudo absence) algorithm Maxent (Module Maxent). To evaluate these models, Wallace computes the performance on a hold-out dataset (data not used for training) and provide evaluation metrics as the AUC (Area Under the Curve) mean. As a rule of thumb, an AUC of 0.75 and above is considered good, and closer to 1 is better.
+Wallace can build different models using either: 
+
+1. The presence-only approach BIOCLIM (Module BIOCLIM)
+2. The presence-background (presense-pseudo absence) algorithm Maxent (Module Maxent)
+
+To evaluate these models, Wallace computes the performance on a hold-out dataset (data not used for training) and provide evaluation metrics as the AUC (Area Under the Curve) mean. As a rule of thumb, an AUC of 0.75 and above is considered good, and closer to 1 is better.
+
+> ### {% icon hands_on %} Hands-on: Build and evaluate the niche model
+> 1. Go to **6 Model**
+> 2. In **Build and Evaluate Niche Model**
+>    - *"Modules Available"*: `BIOCLIM`
+> 4. Click on **Run** 
+{: .hands_on}
+
+**TODO: comment the output / add a question to explain why the next step**
 
 ## Visualize Model Results
 
-After the precedent step you can now model your theoretical niche.
+We would like now to visualize the model of the theoretical niche. First we will make a chart to simutate an ecological niche:
+- X-axis: temperature
+- Y-axis: the annual precipitation
 
-First with `BIOCLIM Envelope Plots`you can make a chart and choose the parameters of interest and see how the data responds adapting the threshold for more accuracy.
+> ### {% icon hands_on %} Hands-on: Visualize Model Results
+> 1. Go to **7 Visualize**
+> 2. In **Visualize Model Results**
+>    - *"Modules Available"*: `BIOCLIM Envelope Plots`
+>    - *"Axis 1"*: `1`
+>    - *"Axis 1"*: `12`
+>    - *"Set threshold"*: `0.75`
+{: .hands_on}
 
-With our data we can see that when we make a chart to simutate an ecological niche using `bio1` as y axis and `bio12` as x axis, with a threshol of `0,75`, the optimum environment parameter for this species is between `5°C` and `15°C`(on the graph, values are *10), for an annual precipitation between aproximatively `700mm` and `1250mm`.
+![temperature vs annual precipitation](../../images/species-distribution-modeling/bioclim_enveloppe_plots.png)
 
-Then with `Map Prediction`, you can either select `no threshold` to have a gradient of predicted presence or use, like in this study, `minimum training presence` to have a map with the predicted presence and predicted absence.
+The optimum environmental parameters for this species (represented in green) is between 5°C and 15°C (on the graph, values are x10) with an annual precipitation between aproximatively 700mm and 1250mm.
 
+To visualize the suitability on the map, we can use the map prediction module.
+
+> ### {% icon hands_on %} Hands-on: Visualize Model Results
+> 2. In **Visualize Model Results**
+>    - *"Modules Available"*: `Map Prediction`
+>    - *"Set threshold"*: `No threshold`
+>
+>      It will display a gradient of predicted presence or use. If you prefer a map with the predicted presence and predicted absence, select `minimum training presence`.
+>
+> 2. Click on **Plot**
+{: .hands_on}
+
+![map prediction](../../images/species-distribution-modeling/map_prediction.png)
+
+**TODO: comment the output / add a question to explain why the next step**
 
 ## Project Model
 
-Wallace can also help you use the model you just trained to predict possible species distributions in a different area, outside of the sampled one.
+Wallace can use the trained model to predict possible species distributions in a different area, outside of the sampled one. Here, we will try it for the Canada. 
 
-We'll apply the concept on a part of the Canada. Select `Project to New Extent` then draw a polygone around a part of Canada and use `Minimum Training Presence`.
+> ### {% icon hands_on %} Hands-on: Visualize Model Results
+> 1. Go to **8 Project**
+> 2. In **Project Model**
+>    - *"Modules Available"*: `Project to New Extent`
+> > 3. In the middle panel,
+>    1. Click on the polygon icon on the map
+>    2. Draw a polygon around a part of Canada
+> 2. In **Project Model**
+>    - *"Set threshold"*: `Minimum Training Presence`
+> 4. Click on **Project**
+{: .hands_on}
 
-You can also project not only in space, but time, and a different climate. Select `Project to New Time` if you want to do this.
-You need to choose a `GCM` (global circulation model). They are model made to predict atmospheric fluctuation and then study climate change. Each one is different and use parameters like ocean atmosphere and others.
+We can also predict not only for a different area, but also different timing and climate. The [Global Circulation Model (GCM)](https://en.wikipedia.org/wiki/General_circulation_model#Atmospheric_and_oceanic_models) are used here to predict atmospheric fluctuation and then study climate change. Each model is different and use parameters like ocean atmosphere and others. The prediction need also a RCP scenario, a scenarios about the amout of greenhouse gases emitted in the near futur. This scenario may have differents predicted presence models.
 
-Here using different model you can see the evolution of the predicted presence of `Chrysemys Picta` in Canada in 2050.
+We would like to predict the presence of Chrysemys Picta in Canada in 2050, given the model [CCSM4](http://www.cesm.ucar.edu/models/ccsm4.0/), a US model based on earth circulation, and a RCP value of 2.6 (**what does that represent?**)
 
-For exemple we can use the model [CCSM4](http://www.cesm.ucar.edu/models/ccsm4.0/), a US model based on earth circulation. We can try it with differents RCP scenarios, wich are scernarios about the amout of greenhouse gases emitted in the near futur. This allows us to have differents predicted presence models. Once again, we will use the `Minimum Training Presence` threshold.
+> ### {% icon hands_on %} Hands-on: Visualize Model Results with a 2.6 RCP
+> 2. In **Project Model**
+>    - *"Modules Available"*: `Project to New Time`
+>    - *"Select time period"*: `2050`
+>    - *"Select global circulation model"*: `CCSM4`
+>    - *"Select RCP"*: `2.6`
+>    - *"Select threshold"*: `Minimum Training Presence`
+> 4. Click on **Project**
+{: .hands_on}
 
-![CCM4 with a 2.6 RCP](https://raw.githubusercontent.com/emichn/training-material/patch-1/topics/ecology/tutorials/species-distribution-modeling/Images/GCM_CCSM4_RCP_2.6.png "CCM4 with a 2.6 RCP")
+![CCM4 with a 2.6 RCP](../../images/species-distribution-modeling/GCM_CCSM4_RCP_2.6.png)
 
-![CCM4 with a 8.5 RCP](https://raw.githubusercontent.com/emichn/training-material/patch-1/topics/ecology/tutorials/species-distribution-modeling/Images/GCM_CCSM4_RPC_8.5.png "CCM4 with a 8.5 RCP")
+We would like now to compare the prediction for RCP value of 8.5 (**what does that represent?**).
 
-You can see here the list of the different [Global Circulation Model](https://en.wikipedia.org/wiki/General_circulation_model#Atmospheric_and_oceanic_models)
+> ### {% icon hands_on %} Hands-on: Visualize Model Results with a 8.5 RCP
+> 2. In **Project Model**
+>    - *"Modules Available"*: `Project to New Time`
+>    - *"Select time period"*: `2050`
+>    - *"Select global circulation model"*: `CCSM4`
+>    - *"Select RCP"*: `8.5`
+>    - *"Select threshold"*: `Minimum Training Presence`
+> 4. Click on **Project**
+{: .hands_on}
+
+![CCM4 with a 8.5 RCP](../../images/species-distribution-modeling/GCM_CCSM4_RPC_8.5.png)
+
+**TODO: comment the output / add a question to compare the 2 predictions**
+
+
+**TODO: add a section on how to save / download**
 
 # Conclusion
 
-We’ve been able through Galaxy-E, to load a dataset of occurrences used in the shiny app Wallace and model the repartition of *Chrysemys picta* (Painted turtle) with the Species Distribution Modeling (SDM) method. It allowed us to visualize it’s ecological niche and how climate change can influence it’s futur repartition on North America. The project saved can help for futur similar studies.
+Following this tutorial, we have been able here to load a dataset of occurrences used in the shiny app Wallace and model the repartition of *Chrysemys picta* (Painted turtle) with the Species Distribution Modeling (SDM) method. It allowed us to visualize it’s ecological niche and how climate change can influence it’s futur repartition on North America. The project saved can help for futur similar studies.
 
-# References
-
-About [Wallace](https://wallaceecomod.github.io/) 
-
-Guissan, A. et *al.*, Predicting species distributions for conservation decisions. Ecology Letters, 16, 1424–1435  (2013).
-
-Booth, T. H. et *al.*, BIOCLIM: the first species distribution modelling package, its early applicationsand relevance to most current MAXENT studies. Diversity and Distributions, 20, 1–9 (2014).
-
-Muscarella, R. et *al.*, ENMeval: An R package for conducting spatially independent evaluations and estimating optimal model complexity for MAXENT ecological niche models. British Ecological Society, Methods in Ecology and Evolution, 5, 1198–1205 (2014).
-
-[Here](http://www.ipcc-data.org/guidelines/pages/gcm_guide.html) for informations on Global Circulation Model(GCM), how it's done what is taken in consideration and more.
+> ### {% icon details %} Some useful references
+> 
+> - Guissan, A. et *al.*, Predicting species distributions for conservation decisions. Ecology Letters, 16, 1424–1435  (2013).
+> -Booth, T. H. et *al.*, BIOCLIM: the first species distribution modelling package, its early applicationsand relevance to most current MAXENT studies. Diversity and Distributions, 20, 1–9 (2014).
+> - Muscarella, R. et *al.*, ENMeval: An R package for conducting spatially independent evaluations and estimating optimal model complexity for MAXENT ecological niche models. British Ecological Society, Methods in Ecology and Evolution, 5, 1198–1205 (2014).
+>
+> [Here](http://www.ipcc-data.org/guidelines/pages/gcm_guide.html) for informations on Global Circulation Model(GCM), how it's done what is taken in consideration and more.
+{: .details}
 
