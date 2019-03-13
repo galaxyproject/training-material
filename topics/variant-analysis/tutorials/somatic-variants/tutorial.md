@@ -3,34 +3,33 @@ layout: tutorial_hands_on
 
 title: Identification of somatic and germline variants from tumor and normal sample
   pairs
-zenodo_link: ''
+zenodo_link: https://doi.org/10.5281/zenodo.2582555
 questions:
-- What are the specific challenges in somatic variant calling that set it apart
-  from regular diploid variant calling?
-- How can you call variants and classify them according to their
-  presence/absence in/from tumor and normal tissue of the same individual?
-- How can you annotate variants and affected genes with prior knowledge from
-  human genetic and cancer-specific databases to generate clinically relevant
-  reports?
+- What are the specific challenges in somatic variant calling that set it apart from
+  regular diploid variant calling?
+- How can you call variants and classify them according to their presence/absence
+  in/from tumor and normal tissue of the same individual?
+- How can you annotate variants and affected genes with prior knowledge from human
+  genetic and cancer-specific databases to generate clinically relevant reports?
 objectives:
 - Call variants and their somatic status from whole-exome sequencing data
-- Annotate variants with a wealth of human genetic and cancer-specific
-  information extracted from public databases
-- Add gene-level annotations and generate reports of annotated somatic and
-  germline variants, loss-of-heterozygosity (LOH) events, and affected genes,
-  ready for interpretation by clinicians
+- Annotate variants with a wealth of human genetic and cancer-specific information
+  extracted from public databases
+- Add gene-level annotations and generate reports of annotated somatic and germline
+  variants, loss-of-heterozygosity (LOH) events, and affected genes, ready for interpretation
+  by clinicians
 time_estimation: 7h
 key_points:
-- "Follow best practices for read mapping, quality control and mapped reads
-  postprocessing to minimze false-positive variant calls."
-- "Use a dedicated somatic variant caller to call variants and to classify them
-  into somatic, germline and LOH event variants on statistical grounds."
-- "Annotations and queries based on variant properties add relevance to variant
-  and gene reports."
-- "A framework like GEMINI is very helpful for managing, annotating and querying
-  lists of variants in a flexible way."
-- "Prefer public, free annotation sources to foster reproducibility and
-  information sharing."
+- Follow best practices for read mapping, quality control and mapped reads postprocessing
+  to minimze false-positive variant calls.
+- Use a dedicated somatic variant caller to call variants and to classify them into
+  somatic, germline and LOH event variants on statistical grounds.
+- Annotations and queries based on variant properties add relevance to variant and
+  gene reports.
+- A framework like GEMINI is very helpful for managing, annotating and querying lists
+  of variants in a flexible way.
+- Prefer public, free annotation sources to foster reproducibility and information
+  sharing.
 contributors:
 - wm75
 
@@ -1379,3 +1378,17 @@ statistical grounds, but the interpretation of any list of variants (somatic,
 germline or LOH) also depends crucially on rich genetic and cancer-specific
 variant and gene annotations.
 
+
+
+## Re-arrange
+
+To create the template, each step of the workflow had its own subsection.
+
+***TODO***: *Re-arrange the generated subsections into sections or other subsections.
+Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+
+# Conclusion
+{:.no_toc}
+
+Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
+pipeline used.
