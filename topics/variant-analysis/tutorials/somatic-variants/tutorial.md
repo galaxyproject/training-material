@@ -88,9 +88,9 @@ resistance/sensitivity, tumor aggressiveness, *etc*.
 First we need to upload and prepare some input data to analyze. The sequencing
 reads we are going to analyze are from real-world data from a cancer patient's
 tumor and normal tissue samples.
-For the sake of an acceptable speed of the analyis, the original data has been
-downsampled though to include only the reads from human chromosomes 5, 7 and
-12.
+For the sake of an acceptable speed of the analysis, the original data has been
+downsampled though to include only the reads from human chromosomes 5, 12 and
+17.
 
 ## Get data
 
@@ -125,7 +125,7 @@ downsampled though to include only the reads from human chromosomes 5, 7 and
 > 3. Check that all newly created datasets in your history have their datatypes assigned 
 >    correctly, and fix any missing or wrong datatype assignment
 >
->    {% include snippets/change_datatype.md datatype="fastqsanger" %}
+>    {% include snippets/change_datatype.md datatype="fastqsanger.gz" %}
 >
 > 4. Rename the datasets and add appropriate tags to them
 >
@@ -152,11 +152,14 @@ downsampled though to include only the reads from human chromosomes 5, 7 and
 >    and the two datasets representing the tumor tissue with, *e.g.*,
 >    `#tumor`.
 >
-> 5. Import the reference genome with the `hg19` version of the sequences of human chromosomes 5, 12 and 17,
+> 5. Import the reference genome with the `hg19` version of the sequences of
+>    human chromosomes 5, 12 and 17:
 >
 >    ```
 >    https://zenodo.org/record/2582555/files/hg19.chr5_12_17.fa.gz
 >    ```
+>
+>    Make sure you specify the datatype as `fasta` in the import dialog.
 >
 >    > ### {% icon comment %} Shortcut
 >    > You can skip this step if the Galaxy server you are working on offers
@@ -164,12 +167,12 @@ downsampled though to include only the reads from human chromosomes 5, 7 and
 >    > *bwa-mem* **and** *samtools* (ask your instructor, or check the tools
 >    > **Map with BWA-MEM** {% icon tool %} and **VarScan Somatic**
 >    > {% icon tool %} if they list a `hg19` version as an option under
->    > **(Using) reference genome**).
+>    > *"(Using) reference genome"*).
 >    {: .comment}
 >
 >    Alternatively, load the dataset from a shared data library.
 >
-> 5. Rename the reference genome and add appropriate tags to them
+> 6. Rename the reference genome
 >
 >    The reference genome you have imported above came as a compressed
 >    file, but got unpacked by Galaxy to plain `fasta` format according to
@@ -204,7 +207,7 @@ a read provide evidence for is, of course, a prerequisite for variant calling.
 
 > ### {% icon hands_on %} Hands-on: Quality control of the input datasets
 > 1. Run **FastQC** {% icon tool %} on each of your four fastq datasets
->       - {% icon param-files %} *"Short read data from your current history"*: 4 FASTQ  datasets selected with **Multiple datasets**
+>       - {% icon param-files %} *"Short read data from your current history"*: all 4 FASTQ  datasets selected with **Multiple datasets**
 >
 >    {% include snippets/select_multiple_datasets.md %}
 >
@@ -217,7 +220,8 @@ a read provide evidence for is, of course, a prerequisite for variant calling.
 >        - *"Which tool was used generate logs?"*: `FastQC`
 >        - In *"FastQC output"*
 >           - *"Type of FastQC output?"*: `Raw data`
->           - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of **FastQC** {% icon tool %})
+>           - {% icon param-files %} *"FastQC output"*: all four *RawData*
+>             outputs of **FastQC** {% icon tool %})
 >
 > 3. Inspect the *Webpage* output produced by the tool
 >
@@ -238,14 +242,16 @@ a read provide evidence for is, of course, a prerequisite for variant calling.
 >    > >    samples reveal a very peculiar bimodal distribution.
 >    > >
 >    > >    Typically, a non-normal distribution of the GC content of the reads
->    > >    from a sample are considered to hint at possible contamination.
+>    > >    from a sample is considered to hint at possible contamination.
 >    > >    Here, however, we are dealing with sequencing data from captured
 >    > >    exomes, *i.e*, the reads are not representing random sequences from
 >    > >    a genome, but rather an arbitrary selection.
 >    > >    In fact, the samples at hand were prepared using Agilent's
 >    > >    SureSelect V5 technology for exome enrichment, and bimodal GC
 >    > >    content distributions can be seen as a hallmark of that capture
->    > >    method in several publications.
+>    > >    method in several publications (see, for example, Fig. 4C in
+>    > >    [Meienberg et al., 2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4477645/)
+>    > >    ).
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -263,8 +269,10 @@ improve things still a bit, but also to demonstrate the general concept.
 >      
 >      This makes the tool treat the forward and reverse reads simultaneously.
 >
->      - {% icon param-file %} *"Input FASTQ file (R1/first of pair)"*: imported forward reads (r1) dataset of the normal tissue sample
->      - {% icon param-file %} *"Input FASTQ file (R2/second of pair)"* choose the reverse reads (r2) dataset of the normal tissue sample
+>      - {% icon param-file %} *"Input FASTQ file (R1/first of pair)"*: the
+>        forward reads (r1) dataset of the normal tissue sample
+>      - {% icon param-file %} *"Input FASTQ file (R2/second of pair)"*: the
+>        reverse reads (r2) dataset of the normal tissue sample
 >
 >    - *"Perform initial ILLUMINACLIP step?"*: `Yes`
 >       - *"Select standard adapter sequences or provide custom?"*: `Standard`
@@ -280,7 +288,8 @@ improve things still a bit, but also to demonstrate the general concept.
 >        palindrome mode)"*: `8`
 >       - *"Always keep both reads (PE specific/palindrome mode)?"*: `Yes`
 >
->       This parameters are used to cut ILLUMINA-specific adapter sequences from the reads.
+>       These parameters are used to cut ILLUMINA-specific adapter sequences
+>       from the reads.
 >
 >    - In *"Trimmomatic Operation"*
 >       - In *"1: Trimmomatic Operation"*
@@ -292,13 +301,14 @@ improve things still a bit, but also to demonstrate the general concept.
 >           -  *"Select Trimmomatic operation to perform"*: `Cut bases off the end of
 >       a read, if below a threshold quality (TRAILING)`
 >              - *"Minimum quality required to keep a base"*: `10`
->        - {% icon param-repeat %} "Insert Trimmomatic Operation"*
+>       - {% icon param-repeat %} "Insert Trimmomatic Operation"*
 >       - In *"3: Trimmomatic Operation"*
->           -  *"Select Trimmomatic operation to perform"*: `Drop reads below a
+>           - *"Select Trimmomatic operation to perform"*: `Drop reads below a
 >       specified length (MINLEN)`
 >              - *"Minimum quality required to keep a base"*: `25`
 >
->       3 trimming and filtering operations will be applied to the reads in the given order after adapter trimming.
+>       These three trimming and filtering operations will be applied to the
+>       reads in the given order after adapter trimming.
 >    
 {: .hands_on}
 
@@ -356,17 +366,21 @@ Running this job will generate four output datasets:
 >      > If you have imported the `hg19` sequence as a fasta dataset into your
 >      > history instead:
 >      >   - *"Will you select a reference genome from your history or use a
->      >     built-in index?"* select `Use a genome from history and build index`
+>      >     built-in index?"*: `Use a genome from history and build index`
 >      >      - {% icon param-file %} *"Use the following dataset as the reference sequence"*: your imported `hg19` fasta dataset.
 >      {: .comment}
 >
 >    - *"Single or Paired-end reads"*: `Paired`
->       - {% icon param-file %} *"Select first set of reads"*: forward reads (r1) dataset of the **normal tissue** sample, output of **Trimmomatic** {% icon tool %}
->       - {% icon param-file %} *"Select second set of reads"*: reverse reads (r2) dataset of the **normal tissue** sample, output of **Trimmomatic** {% icon tool %}
+>       - {% icon param-file %} *"Select first set of reads"*: the trimmed 
+>         forward reads (r1) dataset of the **normal tissue** sample; output of
+>         **Trimmomatic** {% icon tool %}
+>       - {% icon param-file %} *"Select second set of reads"*: the trimmed
+>         reverse reads (r2) dataset of the **normal tissue** sample; output of
+>         **Trimmomatic** {% icon tool %}
 >    - *"Set read groups information?"*: `Set read groups (SAM/BAM specification)`
 >      - *"Auto-assign"*: `No`
 >        - *"Read group identifier (ID)"*: `231335` (this value being taken
->          from the original file name of the normal tissue input files)
+>          from the original name of the normal tissue input files)
 >      - *"Auto-assign"*: `No`
 >        - *"Read group sample name (SM)"*: `Normal`
 >
@@ -380,13 +394,20 @@ Running this job will generate four output datasets:
 > 2. **Map with BWA-MEM** {% icon tool %} to map the reads from the **tumor tissue** sample,
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a built-in genome index`
 >        - *"Using reference genome"*: `Human: hg19` (or a similarly named option)
+>
+>      Adjust these settings as before if you are using the imported reference
+>      genome.
 >    - *"Single or Paired-end reads"*: `Paired`
->       - {% icon param-file %} *"Select first set of reads"*: forward reads (r1) dataset of the **tumor tissue** sample, output of **Trimmomatic** {% icon tool %}
->       - {% icon param-file %} *"Select second set of reads"*: reverse reads (r2) dataset of the **tumor tissue** sample, output of **Trimmomatic** {% icon tool %}
+>       - {% icon param-file %} *"Select first set of reads"*: the trimmed
+>         forward reads (r1) dataset of the **tumor tissue** sample; output of
+>         **Trimmomatic** {% icon tool %}
+>       - {% icon param-file %} *"Select second set of reads"*: the reverse
+>         reads (r2) dataset of the **tumor tissue** sample; output of
+>         **Trimmomatic** {% icon tool %}
 >    - *"Set read groups information?"*: `Set read groups (SAM/BAM specification)`
 >      - *"Auto-assign"*: `No`
->        - *"Read group identifier (ID)"*: `231336` (this value being taken
->          from the original file name of the normal tissue input files)
+>        - *"Read group identifier (ID)"*: `231336` (this value, again, being
+>          taken from the original name of the tumor tissue input files)
 >      - *"Auto-assign"*: `No`
 >        - *"Read group sample name (SM)"*: `Tumor`
 >
@@ -395,12 +416,12 @@ Running this job will generate four output datasets:
 # Mapped reads postprocessing
 
 To ensure that we base our variant analysis only on unambiguous, high-quality
-read mappings we will do some postprocessing now.
+read mappings we will do some postprocessing next.
 
 ## Filtering on mapped reads properties
 
 To produce new filtered BAM datasets with only those reads retained that
-have a minimal mapping quality of 1 and are mapped in a proper pair
+have a minimal mapping quality of 1 and are mapped in a proper pair:
 
 > ### {% icon hands_on %} Hands-on: Filtering for mapping status and quality
 >
@@ -415,7 +436,7 @@ have a minimal mapping quality of 1 and are mapped in a proper pair
 >
 {: .hands_on}
 
-This will produce two new datasets, one for each of the normal and tumor data.
+This will result in two new datasets, one for each of the normal and tumor data.
 
 ## Removing duplicate reads
 
@@ -423,7 +444,8 @@ This will produce two new datasets, one for each of the normal and tumor data.
 >
 > 1. **RmDup** {% icon tool %} with the following parameters:
 >   - {% icon param-files %} *"BAM file"*: filtered reads datasets from
->     the normal *and* the tumor tissue data, outputs of **Filter SAM or BAM**
+>     the normal *and* the tumor tissue data; the outputs of
+>     **Filter SAM or BAM**
 >   - *"Is this paired-end or single end data"*: `BAM is paired-end`
 >     - *"Treat as single-end"*: `No`
 >
@@ -440,7 +462,7 @@ tumor data.
 >    - *"Choose the source for the reference genome"*: `Locally cached`
 >      - {% icon param-files %} *"BAM dataset to re-align"*: your
 >        filtered and deduplicated reads datasets from the normal *and* the tumor
->        tissue data, outputs of **RmDup**
+>        tissue data; the outputs of **RmDup**
 >      - *"Using reference genome"*: `Human: hg19` (or a similarly
 >        named choice)
 >   - *"Maximum number of iterations"*: `5`
@@ -449,18 +471,20 @@ tumor data.
 > > If you have imported the `hg19` sequence as a fasta dataset into your
 > > history instead:
 > >   - *"Choose the source for the reference genome"*: `History`
-> >      - {% icon param-file %} *"Using reference file"*: your imported `hg19` fasta dataset.
+> >      - {% icon param-file %} *"Using reference file"*: your imported `hg19` fasta dataset
 > {: .comment}
 {: .hands_on}
 
-As before, this will produce two new datasets, one for each of the normal and tumor data.
+As before, this will generate two new datasets, one for each of the normal and tumor data.
 
-## Recalibrate read base and mapping qualities
+## Recalibrate read mapping qualities
 
 > ### {% icon hands_on %} Hands-on: Recalibrate read quality scores
 >
 > 1. **CalMD** {% icon tool %} with the following parameters:
->    - {% icon param-files %} *"BAM file to recalculate"*: the left-aligned datasets from the normal *and* the tumor tissue data, output of **BamLeftAlign** {% icon tool %}
+>    - {% icon param-files %} *"BAM file to recalculate"*: the left-aligned
+>      datasets from the normal and the tumor tissue data; the outputs of
+>      **BamLeftAlign** {% icon tool %}
 >    - *"Choose the source for the reference genome"*: `Use a built-in genome`
 >      - *"Using reference genome"*: `Human: hg19` (or a similarly named choice)
 >
@@ -480,7 +504,7 @@ As before, this will produce two new datasets, one for each of the normal and tu
 >      are too severe for *VarScan* to retain good sensitivity. We are sticking
 >      with this practice in this tutorial.
 >
->      > ### {% icon comment %} Using adjusted base quality score
+>      > ### {% icon comment %} Using adjusted base quality scores
 >      > If, for your own data, you would like to experiment with adjusted base
 >      > quality scores, it is important to understand that *VarScan somatic* will
 >      > only make use of the adjusted scores if they are incorporated directly into
@@ -489,16 +513,24 @@ As before, this will produce two new datasets, one for each of the normal and tu
 >      > 
 >      > Hence, should you ever decide to use:
 >      > - *"Do you also want BAQ (Base Alignment Quality) scores to be calculated?"*: `Yes, run BAQ calculation`
+>      >
+>      >   and you want this setting to affect downstream variant calling with
+>      >   *VarScan somatic*, make sure you also set then:
 >      >   - *"Use BAQ to cap read base qualities"*: `Yes`
 >      >
->      > Please also note that BAQ scores are quite expensive to calculate so be
->      > prepared to see an enormous (up to 10x) increase in job run time when
->      > enabling it.
+>      > Please also note that BAQ scores are quite expensive to calculate so
+>      > be prepared to see a substantial (up to 10x!) increase in job run time 
+>      > when enabling it.
 >      {: .comment}
 >
 >    - *"Additional options"*: `Advanced options`
 >      - *"Change identical bases to '='"*: `No`
 >      - *"Coefficient to cap mapping quality of poorly mapped reads"*: `50`
+>
+>        This last setting is the real reason why we use CalMD at this point.
+>        It is an empirical, but well-established finding that the mapping
+>        quality of reads mapped with *bwa* should be capped this way before
+>        variant calling.
 >
 {: .hands_on}
 
@@ -507,6 +539,16 @@ and tumor data.
 
 
 # Variant calling and classification
+
+Having generated a high-quality set of mapped read pairs, we can proceed to
+variant calling. The tool **VarScan somatic** is a dedicated solution for
+somatic variant calling that:
+
+- detects variant alleles in tumor/normal sample pairs
+- calls sample genotypes at variant sites
+- classifies variants into germline, somatic and LOH event variants using
+  solid classical statistics even in the presence of non-pure samples like
+  those obtained from biopsies
 
 > ### {% icon hands_on %} Hands-on: Variant calling and classification
 >
@@ -523,10 +565,12 @@ and tumor data.
 >      >      - {% icon param-file %} *"reference genome"*: your imported `hg19` fasta dataset.
 >      {: .comment}
 >
->    - {% icon param-file %} *"aligned reads from normal sample"*: mapped and
->      fully post-processed normal tissue dataset, one of the two outputs of **CalMD**
->    - {% icon param-file %}*"aligned reads from tumor sample"*: the tumor tissue dataset
->      outputs of **CalMD**
+>    - {% icon param-file %} *"aligned reads from normal sample"*: the mapped
+>      and fully post-processed normal tissue dataset; one of the two outputs
+>      of **CalMD** {% icon tool %}
+>    - {% icon param-file %}*"aligned reads from tumor sample"*: the mapped
+>      and fully post-processed tumor tissue dataset; the other output of
+>      **CalMD** {% icon tool %}
 >    - *"Estimated purity (non-tumor content) of normal sample"*: `1`
 >    - *"Estimated purity (tumor content) of tumor sample"*: `0.5`
 >    - *"Generate separate output datasets for SNP and indel calls?"*: `No`
@@ -545,10 +589,34 @@ and tumor data.
 >        quality of at least one, so requiring this quality also here does not
 >        actually change the results, but it makes the requirement more explicit.
 >
+>      Leave all other settings in this section at their default values.
 >    - *"Settings for Posterior Variant Filtering"*: `Use default values`
 {: .hands_on}
 
 # Variant annotation and reporting
+
+For this tutorial we are going to use variant and gene annotations from many
+different sources. Most of these are handled for us by the tools we are going
+to use in this section, but we need to take care of importing the data from
+four sources into Galaxy separately:
+
+- variant annotations from [Cancer Hotspots](https://www.cancerhotspots.org)
+- variant and gene information from the
+  [Cancer Biomarkers database](https://www.cancergenomeinterpreter.org/biomarkers)
+  of the Cancer Genome Interpreter (CGI) project
+- variant and gene information from the [CIViC](https://civicdb.org) database
+- variant annotations from [dbSNP](https://www.ncbi.nlm.nih.gov/snp)
+- lists of genes annotated with the keywords *proto-oncogene* or *tumor
+  suppressor* at [UniProt](https://www.uniprot.org/)
+
+Each of these annotation sets has been released either in the public domain or
+under a free data license, which allows you to use them as part of this
+tutorial, but also for other purposes.
+
+Starting from the data downloaded from each of these sites, we have generated
+a set of new data files tailored to the requirements of the workflow of this
+tutorial and have made them available through Zenodo, again under a free data
+license.
 
 ## Get data
 
@@ -614,7 +682,8 @@ with *SnpEff*.
 
 > ### {% icon hands_on %} Hands-on: Adding annotations with SnpEff
 > 1. **SnpEff eff** {% icon tool %}
->    - {% icon param-file %} *"Sequence changes (SNPs, MNPs, InDels)"*: the output of **VarScan somatic** 
+>    - {% icon param-file %} *"Sequence changes (SNPs, MNPs, InDels)"*: the
+>      output of **VarScan somatic** {% icon tool %}
 >    - *"Input format"*: `VCF`
 >    - *"Output format"*: `VCF (only if input is VCF)`
 >    - *"Genome source"*: `Locally installed reference genome`
@@ -644,7 +713,8 @@ suite for this task and for all further work with the variants.
 
 > ### {% icon hands_on %} Hands-on: Creating a GEMINI database from a variants dataset
 > 1. **GEMINI load** {% icon tool %} with
->    - {% icon param-file %} *"VCF dataset to be loaded in the GEMINI database"*: output of **SnpEff eff**
+>    - {% icon param-file %} *"VCF dataset to be loaded in the GEMINI database"*:
+>      the output of **SnpEff eff** {% icon tool %}
 >    - *"The variants in this input are"*: `annotated with snpEff`
 >    - *"This input comes with genotype calls for its samples"*: `Yes`
 >
@@ -754,8 +824,8 @@ dataset and we are going to extract them from there and add them to the
 >        - *"If multiple annotations are found for the same variant,
 >        store ..."*: `the first annotation found`
 >
->        Recipe for extracting the VarScan-generated *SS* field and adding it as
->        a new column *somatic_status* to the GEMINI database
+>        This is the recipe for extracting the VarScan-generated *SS* field and
+>        adding it as a new column *somatic_status* to the GEMINI database.
 >
 >      - {% icon param-repeat %} *"Insert Annotation extraction recipe"*
 >      - In *"2: Annotation extraction recipe"*:
@@ -767,8 +837,8 @@ dataset and we are going to extract them from there and add them to the
 >        - *"If multiple annotations are found for the same variant,
 >        store ..."*: `the first annotation found`
 >
->        Recipe for extracting the VarScan-generated *GPV* field and adding it
->        as a new column *germline_p* to the GEMINI database
+>        This is the recipe for extracting the VarScan-generated *GPV* field
+>        and adding it as a new column *germline_p* to the GEMINI database.
 >
 >      - {% icon param-repeat %} *"Insert Annotation extraction recipe"*
 >      - In *"3: Annotation extraction recipe"*:
@@ -780,26 +850,29 @@ dataset and we are going to extract them from there and add them to the
 >        - *"If multiple annotations are found for the same variant,
 >        store ..."*: `the first annotation found`
 >
->        Recipe for extracting the VarScan-generated *SPV* field and adding it
->        as a new column *somatic_p* to the GEMINI database
+>        This is the recipe for extracting the VarScan-generated *SPV* field
+>        and adding it as a new column *somatic_p* to the GEMINI database.
 >
 {: .hands_on}
 
 Next, we are going to add additional annotations beyond the ones directly
-obtainable through *GEMINI* or from the input VCF dataset:
+obtainable through *GEMINI* or from the input VCF dataset. Specifically we
+want to add:
 
-1. Add information from **dbSNP**
+- more information from **dbSNP**
 
-   As part of the database creation process, GEMINI already checks all
-   variants whether they occur in dbSNP and, if so, stores their dbSNP IDs.
+  As part of the database creation process, GEMINI already checks all
+  variants whether they occur in dbSNP and, if so, stores their dbSNP IDs.
+  Hence, we only need to extract some additional information of interest.
 
-2. Add information from **cancerhotspots**
-3. Add link to **CIViC**
-4. Add information from the **Cancer Genome Interpreter (CGI)**
+- information from **Cancer Hotspots**
+- links to the **CIViC** database
+- information from the **Cancer Genome Interpreter (CGI)**
 
 > ### {% icon hands_on %} Hands-on: Adding further annotations
 > 1. **GEMINI annotate** {% icon tool %} to add further annotations from **dbSNP**
->    - {% icon param-file %} *"GEMINI database"*: output of the last **GEMINI annotate**
+>    - {% icon param-file %} *"GEMINI database"*: the output of the last
+>      **GEMINI annotate** {% icon tool %} run
 >    - {% icon param-file %} *"Dataset to use as the annotation source"*: the imported `dbsnp.b147.chr5_12_17.vcf`
 >    - *"Strict variant-identity matching of database and annotation records
 >      (VCF format only)"*: `Yes`
@@ -819,8 +892,8 @@ obtainable through *GEMINI* or from the input VCF dataset:
 >        - *"If multiple annotations are found for the same variant,
 >        store ..."*: `the first annotation found`
 >
->        Recipe for extracting the dbSNP *SAO* field and adding it as
->        *rs_ss* to the GEMINI database
+>        This recipe extracts the dbSNP *SAO* field and adds it as *rs_ss* to
+>        the GEMINI database.
 >
 >      - {% icon param-repeat %} *"Insert Annotation extraction recipe"*
 >      - In *"2: Annotation extraction recipe"*:
@@ -832,8 +905,8 @@ obtainable through *GEMINI* or from the input VCF dataset:
 >        - *"If multiple annotations are found for the same variant,
 >        store ..."*: `the first annotation found`
 >
->        Recipe for extracting the dbSNP *CFL* field and adding it as
->        *rs_cfl* to the GEMINI database
+>        This recipe extracts the dbSNP *CFL* field and adds it as *rs_cfl* to
+>        the GEMINI database.
 >
 >      - {% icon param-repeat %} *"Insert Annotation extraction recipe"*
 >      - In *"3: Annotation extraction recipe"*:
@@ -844,13 +917,15 @@ obtainable through *GEMINI* or from the input VCF dataset:
 >        - *"If multiple annotations are found for the same variant,
 >        store ..."*: `the first annotation found`
 >
+>        This recipe extracts the dbSNP *ASP* field and adds it as *rs_asp* to
+>        the GEMINI database.
 > 2. **GEMINI annotate** {% icon tool %} to add further annotations from **cancerhotspots**
->    - {% icon param-file %} *"GEMINI database"*: output of the last **GEMINI annotate**
+>    - {% icon param-file %} *"GEMINI database"*: the output of the last
+>      **GEMINI annotate** {% icon tool %} run
 >    - {% icon param-file %} *"Dataset to use as the annotation source"*: the imported `cancerhotspots_v2.bed`
 >    - *"Strict variant-identity matching of database and annotation records
->      (VCF format only)"*: `Yes`
->   
->      With input in BED format this setting will be ignored
+>      (VCF format only)"*: `Yes` (with input in BED format this setting will
+>      be ignored)
 >
 >      For the cancerhotspots data, we are simply going to record the best
 >      q-value associated with any cancerhotspots variant overlapping one
@@ -862,7 +937,7 @@ obtainable through *GEMINI* or from the input VCF dataset:
 >      - In *"1: Annotation extraction recipe"*:
 >        - *"Elements to extract from the annotation source"*: `5`
 >
->          The q-values are stored in the fifth column of the BED dataset
+>          The q-values are stored in the fifth column of the BED dataset.
 >
 >        - *"Database column name to use for recording annotations"*:
 >        `hs_qvalue`
@@ -871,16 +946,17 @@ obtainable through *GEMINI* or from the input VCF dataset:
 >        - *"If multiple annotations are found for the same variant,
 >        store ..."*: `the smallest of the (numeric) values`
 >
->        Recipe for extracting the *q-values* of overlapping cancerhotspots sites and 
->        adding them as *hs_qvalue* to the GEMINI database
+>        This is the recipe for extracting the *q-values* of overlapping
+>        cancerhotspots sites and adding them as *hs_qvalue* to the GEMINI
+>        database.
 >
 > 3. **GEMINI annotate** {% icon tool %} to add links to **CIViC**
->    - {% icon param-file %} *"GEMINI database"*: output of the last **GEMINI annotate**
+>    - {% icon param-file %} *"GEMINI database"*: the output of the last
+>      **GEMINI annotate** {% icon tool %} run
 >    - {% icon param-file %} *"Dataset to use as the annotation source"*: the imported `CIViC.bed`
 >    - *"Strict variant-identity matching of database and annotation records
->      (VCF format only)"*: `Yes`
->   
->      With input in BED format this setting will be ignored
+>      (VCF format only)"*: `Yes` (with input in BED format this setting will
+>      be ignored)
 >
 >      For the CIViC data, we are going to record the hyperlink to any variant
 >      found in the CIViC database that overlaps one of our variant sites.
@@ -899,16 +975,17 @@ obtainable through *GEMINI* or from the input VCF dataset:
 >        - *"If multiple annotations are found for the same variant,
 >        store ..."*: `a comma-separated list of non-redundant (text) values`
 >
->        Recipe for extracting the hyperlinks of overlapping CIViC sites and adding 
->        them as a list of *overlapping_civic_urls* to the GEMINI database
+>        This is the recipe for extracting the hyperlinks of overlapping CIViC
+>        sites and adding them as a list of *overlapping_civic_urls* to the
+>        GEMINI database.
 >
 > 3. **GEMINI annotate** {% icon tool %} to add information from the **Cancer Genome Interpreter (CGI)**
->    - {% icon param-file %} *"GEMINI database"*: output of the last **GEMINI annotate**
+>    - {% icon param-file %} *"GEMINI database"*: the output of the last
+>      **GEMINI annotate** {% icon tool %} run
 >    - {% icon param-file %} *"Dataset to use as the annotation source"*: the imported `cgi_variant_positions.bed`
 >    - *"Strict variant-identity matching of database and annotation records
->      (VCF format only)"*: `Yes`
->   
->      With input in BED format this setting will be ignored
+>      (VCF format only)"*: `Yes` (with input in BED format this setting will
+>      be ignored)
 >
 >      For the CGI data, we are going to record if any of our variant sites
 >      is overlapped by a variant in the CGI biomarkers database.
@@ -950,29 +1027,36 @@ that specify:
 {: .comment}
 
 Lets start by configuring a simple query to obtain a report of *bona fide*
-somatic variants. When looking for somatic variants we may want to disregard questionable
-> variants, for which either a non-negligible amount of supporting sequencing
-> reads is also found in the normal tissue data, or which are only supported by
-> a very small fraction of the reads from the tumor sample.
+somatic variants. Our strategy for retrieving them is to:
 
-We define a few criteria for variants to get included in the report.
+1. rely on the *somatic status* of the variants called by **VarScan somatic**
+   {% icon tool %}
+2. disregard questionable variants, for which either a non-negligible amount of
+   supporting sequencing reads is also found in the normal tissue data, or
+   which are only supported by a very small fraction of the reads from the
+   tumor sample
 
 > ### {% icon hands_on %} Hands-on: Querying the GEMINI database for somatic variants
 > 1. **GEMINI query** {% icon tool %} with:
->    - {% icon param-file %} *"GEMINI database"*: the fully annotated database created in the last
->    step of **GEMINI annotate**
+>    - {% icon param-file %} *"GEMINI database"*: the fully annotated database
+>      created in the last **GEMINI annotate** {% icon tool %} step
 >    - *"Build GEMINI query using"*: `Basic variant query constructor`
 >      - {% icon param-repeat %} *"Insert Genotype filter expression"*
->        - *"Restrictions to apply to genotype values"*: `gt_alt_freqs.NORMAL <= 0.05 AND gt_alt_freqs.TUMOR >= 0.10`
->        With this filter criteria, we can retain only variants that are supported by less than 5% 
->       of the reads of the normal sample, but by more than 10% of the reads of the tumor sample.
+>        - *"Restrictions to apply to genotype values"*:
+>          `gt_alt_freqs.NORMAL <= 0.05 AND gt_alt_freqs.TUMOR >= 0.10`
+>
+>        With this genotype-based filter, we retain only those variants that
+>        are supported by less than 5% of the reads of the normal sample, but
+>        by more than 10% of the reads of the tumor sample.
 >
 >      - *"Additional constraints expressed in SQL syntax"*: `somatic_status = 2`
 >
->        Among the info stored in the GEMINI database is the somatic status that
->        VarScan somatic has called for every variant.`somatic_status = 2` retains 
->        only those variants passing the genotype filter above, which are
->        **also** considered somatic variants by the variant caller.
+>        Among the info stored in the GEMINI database is the somatic status
+>        VarScan somatic has called for every variant (remember we
+>        used GEMINI annotate to add it). With the condition
+>        `somatic_status = 2` we retain only those variants passing the
+>        genotype filter above **and** considered somatic variants by the
+>        variant caller.
 >
 >      - In *"Output format options"*
 >        - *"Type of report to generate"*: `tabular (GEMINI default)`
@@ -986,6 +1070,10 @@ We define a few criteria for variants to get included in the report.
 >              - {% icon param-check %} *"alt"*
 >            - *"Additional columns (comma-separated)"*: `gene, aa_change, rs_ids,
 >              hs_qvalue, cosmic_ids`
+>
+>        Here we specify, which columns (from the *variants* table of the
+>        GEMINI database) we want to have included, in the specified order, in
+>        a `tabular` variant report.
 >
 {: .hands_on}
 
@@ -1008,10 +1096,11 @@ We define a few criteria for variants to get included in the report.
 > and their columns`
 {: .comment}
 
+What about more sophisticated filtering?
 
 > ### {% icon hands_on %} Hands-on: More complex filter criteria
 > 1. **GEMINI query** {% icon tool %} with the exact same settings as before, but:
->    - *"Additional constraints expressed in SQL syntax"*: `somatic_status = 2 AND somatic_p <= 0.05 AND (filter IS NULL OR rs_ids IS NOT NULL) AND rs_cfl != 1 and rs_asp != 1`
+>    - *"Additional constraints expressed in SQL syntax"*: `somatic_status = 2 AND somatic_p <= 0.05 AND (filter IS NULL OR rs_ids IS NOT NULL) AND rs_cfl != 1 AND rs_asp != 1`
 >
 >     This translates into "variants classified as somatic with a p-value <=
 >     0.05, which haven't been flagged as likely false-positives or, if so, are
@@ -1019,7 +1108,17 @@ We define a few criteria for variants to get included in the report.
 >     or -specific".
 {: .hands_on}
 
-If you've followed all steps up to here exactly, running this job should give
+> ### {% icon comment %} SQL keywords
+> In the condition above, SQL keywords are given in uppercase. This is not a
+> requirement, but it makes it easier to understand the syntax.
+>
+> You can check whether any cell in a data table is empty with `IS NULL`, and
+> whether it contains *any* value with `IS NOT NULL`. To combine different
+> filter criteria logically, you can use `AND` and `OR`, and parentheses to
+> group conditions if required.
+{: .comment}
+
+If you have followed all steps up to here exactly, running this job should give
 you a tabular dataset of 43 variants, and with the annotations in the report
 it is relatively easy to pick out a few interesting ones.
 Before we focus on the content of the report, however, we could enhance the
@@ -1030,18 +1129,19 @@ report format a bit more.
 > last example, but:
 >    - In *"Output format options"*
 >      - *"Additional columns (comma-separated)"*: `type, gt_alt_freqs.TUMOR, gt_alt_freqs.NORMAL,
->        ifnull(nullif(round(max_aaf_all,2),-1.0),0) as MAF, gene, impact_so,
->        aa_change, ifnull(round(cadd_scaled,2),'.') as cadd_scaled,
->        round(gerp_bp_score,2) as gerp_bp, ifnull(round(gerp_element_pval,2),'.')
->        as gerp_element_pval, ifnull(round(hs_qvalue,2), '.') as hs_qvalue,
->        in_omim, ifnull(clinvar_sig,'.') as clinvar_sig,
->        ifnull(clinvar_disease_name,'.') as clinvar_diesease_name,
->        ifnull(rs_ids,'.') as dbsnp_ids, rs_ss, ifnull(cosmic_ids,'.') as
->        cosmic_ids, ifnull(overlapping_civic_url,'.') as overlapping_civic_url,
+>        ifnull(nullif(round(max_aaf_all,2),-1.0),0) AS MAF, gene, impact_so,
+>        aa_change, ifnull(round(cadd_scaled,2),'.') AS cadd_scaled,
+>        round(gerp_bp_score,2) AS gerp_bp, ifnull(round(gerp_element_pval,2),'.')
+>        AS gerp_element_pval, ifnull(round(hs_qvalue,2), '.') AS hs_qvalue,
+>        in_omim, ifnull(clinvar_sig,'.') AS clinvar_sig,
+>        ifnull(clinvar_disease_name,'.') AS clinvar_diesease_name,
+>        ifnull(rs_ids,'.') AS dbsnp_ids, rs_ss, ifnull(cosmic_ids,'.') AS
+>        cosmic_ids, ifnull(overlapping_civic_url,'.') AS overlapping_civic_url,
 >        in_cgidb`
 {: .hands_on}
 
-The last request adds a lot more annotations to the report and it also uses some
+This last query adds a lot more annotations to the report, and it also
+demonstrates the use of the `AS` keyword to rename columns and of some
 [SQLite functions](https://sqlite.org/lang_corefunc.html) to clean up the
 output.
 
@@ -1071,11 +1171,11 @@ output.
 As a final step, let us now try to generate a gene-centered report based on the
 same somatic variants we just selected above.
 
-Such a gene- centered report would include annotations that apply to a whole
+Such a gene-centered report would include annotations that apply to a whole
 gene affected by a variant rather than to the variant itself. Examples of such
 annotations include known synonyms of an affected gene, its NCBI entrez number,
 the ClinVar phenotype, if any, associated with the gene, a hyperlink to the
-gene's page at CIViC.org, *etc.*.#
+gene's page at CIViC.org, *etc.*.
 
 Some of this information comes built-in into every GEMINI database, but it is
 stored in a separate table called `gene_detailed`, while all information we
@@ -1138,14 +1238,11 @@ process, in which we first *join* the report and tabular annotation sources
 into a larger tabular dataset, from which we then eliminate redundant and
 unwanted columns, while *rearranging* the remaining ones.
 
-**Step 1** consists of three separate *join* operations that sequentially pull in the annotations found in the three gene-based tabular datasets obtained in the *Get Data* step of this section: 
-1. **UniProt cancer genes**, by joining  GEMINI-generated gene report and `Uniprot_Cancer_Genes` dataset on the first column (the gene column) of both to determine corresponding lines. 
-2. **CGI biomarkers**
-3. **CIViC gene summaries**
+**Step 1** consists of three separate *join* operations that sequentially pull in the annotations found in the three gene-based tabular datasets that you imported in the *Get Data* step of this section.
 
 > ### {% icon hands_on %} Hands-on: Join 
 > 
-> 1. **Join two files** {% icon tool %} to add UniProt cancer genes information
+> 1. **Join two files** {% icon tool %} to add **UniProt cancer genes** information
 >    - {% icon param-file %} *"1st file"*: the GEMINI-generated gene report from the previous step
 >    - *"Column to use from 1st file"*: `Column: 1`
 >    - {% icon param-file %}  *"2nd file"*: the imported `Uniprot_Cancer_Genes` dataset 
@@ -1169,7 +1266,7 @@ unwanted columns, while *rearranging* the remaining ones.
 >      a variant is neither a known proto-oncogene, nor a tumor suppressor
 >      gene.
 >
-> 2. **Join two files** {% icon tool %} to add CGI biomarkers information
+> 2. **Join two files** {% icon tool %} to add **CGI biomarkers** information
 >    - {% icon param-file %} *"1st file"*: the partially annotated dataset from the previous
 >    - *"Column to use from 1st file"*: `Column: 1`
 >    - {% icon param-file %} *"2nd file"*: the imported `cgi_genes` dataset
@@ -1180,9 +1277,10 @@ unwanted columns, while *rearranging* the remaining ones.
 >    - *"Ignore case"*: `No`
 >    - *"Value to put in unpaired (empty) fields"*: `0`
 >
-> 3. Inspect the input and the result dataset to make sure you understand what happened at this step.
+>    Inspect the input and the result dataset to make sure you understand what
+>    happened at this step.
 >
-> 3. **Join two files** {% icon tool %} to add CIViC gene summaries
+> 3. **Join two files** {% icon tool %} to add gene information from **CIViC**
 >    - {% icon param-file %} *"1st file"*: the partially annotated dataset from step 2
 >    - *"Column to use from 1st file"*: `Column: 1`
 >    - {% icon param-file %} *"2nd file"*: the imported `GeneSummaries` dataset
@@ -1196,11 +1294,12 @@ unwanted columns, while *rearranging* the remaining ones.
 >    - *"Ignore case"*: `No`
 >    - *"Value to put in unpaired (empty) fields"*: `.`
 >
-> 5. Inspect the input and the result dataset to make sure you understand what happened at this step.
+>    Inspect the input and the result dataset to make sure you understand what
+>    happened at this step.
 >
 {: .hands_on}
 
-If you inspected all output datasets as suggested, you will have noticed
+If you took a look at all output datasets as suggested, you will have noticed
 that each of the *join* operations kept the gene columns from both input
 datasets. In addition, we had no control over the order, in which columns got
 added to the report, nor could we exclude columns.
@@ -1253,7 +1352,7 @@ issues and rearrange to get a fully annotated gene report.
 >
 > > ### {% icon comment %} Alternative tool suggestion
 > > If your Galaxy server does not offer the *Column arrange* tool, it will
-> > almost certainly offer the **Cut columns from a table** {% icon tool %},
+> > almost certainly offer **Cut columns from a table** {% icon tool %},
 > > which can be used as a drop-in replacement.
 > > Instead of column names, however, this tool expects a comma-separated list
 > > of column indexes, like `c1,c2` for the first and second column, so you
