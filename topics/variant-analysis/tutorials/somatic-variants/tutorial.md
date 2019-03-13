@@ -1377,18 +1377,3 @@ Dedicated somatic variant callers can perform this classification on
 statistical grounds, but the interpretation of any list of variants (somatic,
 germline or LOH) also depends crucially on rich genetic and cancer-specific
 variant and gene annotations.
-
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
-
-# Conclusion
-{:.no_toc}
-
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
