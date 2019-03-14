@@ -151,4 +151,4 @@ Sites like UseGalaxy.eu use the distributed object store in order to balance dat
 >
 > 3. Restart your Galaxy
 >
-{: .warning-box}
+{: .warning}

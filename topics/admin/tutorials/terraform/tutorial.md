@@ -349,7 +349,7 @@ You are now ready to launch an instance!
 >
 >    > ### {% icon warning %} Warning: Correct image/flavor/network/security_group names
 >    > The documentation below notes some specific values for the `image_name`, `flavor_name`, `security_groups`, and `network` properties. These *may not be correct* for your training, instead your instructor will provide these values to you.
->    {: .warning-box}
+>    {: .warning}
 >
 >    ```ini
 >    resource "openstack_compute_instance_v2" "test" {

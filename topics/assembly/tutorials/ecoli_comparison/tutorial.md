@@ -183,7 +183,7 @@ Note that because we started LASTZ on *a collection* of *E. coli* genomes, it wi
 
 > ### {% icon warning %} It will take a while!
 > Please understand that alignment is not an instantaneous process: allow several hours for these jobs to clear.
-{: .warning-box}
+{: .warning}
 
 ## Finding closely related assemblies
 
@@ -316,7 +316,7 @@ A group of three dots in the upper left corner of this scatter plot represents g
 
 > ### {% icon warning %} Things change
 > It is possible that when you repeat these steps the set of sequences in NCBI will have changed and you will obtain different accession numbers. Keep this in mind.
-{: .warning-box}
+{: .warning}
 
 Let's find table entries corresponding to these:
 
@@ -549,7 +549,7 @@ Alignments are regions of high similarity between two sequences. Therefore each 
 
 > ### {% icon warning %} There are multiple **CUT** tools!
 > The Hands-On box below uses **Cut** tool. Beware that some Galaxy instances contain multiple **Cut** tools. The one that is used below is called **Cut columns from a table** while the other one, which we will NOT use is called **Cut columns from a table (cut)**. It is a small difference, but the tools are different.
-{: .warning-box}
+{: .warning}
 
 > ### {% icon hands_on %} Hands-on: Creating target BED
 > 1. **Cut columns from a table** {% icon tool %} with the following parameters:
