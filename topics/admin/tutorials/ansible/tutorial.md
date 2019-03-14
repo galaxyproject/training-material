@@ -225,7 +225,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 > In this tutorial we will write to files in `/tmp` as that is a *relatively* safe thing to do. The training material community does not have the resources to test this tutorial across all of the platforms you might want to run it on. Additionally we do not want to be responsible if you accidentally cause permanent damage by following this tutorial.
 >
-{: .warning-box}
+{: .warning}
 
 
 ## A Basic Role

@@ -17,6 +17,7 @@ contributors:
   - bebatut
   - bgruening
   - shiltemann
+  - erasche
 ---
 
 # Introduction
@@ -553,6 +554,22 @@ Rendered:
 This last box of the tutorial is automatically created with the take-home messages defined in the topic's metadata
 
 To render the boxes correctly, the syntax needs to be correct. If it doesn't work, have a look at similar tutorials and get inspiration.
+
+## **Warning** box
+
+{% raw %}
+```markdown
+> ### {% icon warning %} Danger: You can lose data!
+> Something really bad can happen here!
+{: .warning}
+```
+{% endraw %}
+
+Rendered:
+
+> ### {% icon warning %} Danger: You can lose data!
+> Something really bad can happen here!
+{: .warning}
 
 ## Nested boxes
 
