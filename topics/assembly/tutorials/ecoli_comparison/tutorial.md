@@ -707,7 +707,7 @@ Our objective is to convert these data into BED. In this analysis we want to ini
 > Note: This is because we want to retain all lines that begin (`^`) with `CDS`.
 {: .hands_on}
 
-This will produce a collection with three datasets just like the original `GENES` collection but containing only CDS data. Next we need to cut out only those columns that need to be included in the BED format. There is one problem with this. We are trying to convert these data into [6 column BED](#tip-tip-bed-format). In this format the fifth column (score) must have a value between 0 and 1000. To satisfy this requirement we will create a dummy column that will always have a value of `0`:
+This will produce a collection with three datasets just like the original `GENES` collection but containing only CDS data. Next we need to cut out only those columns that need to be included in the BED format. There is one problem with this. We are trying to convert these data into [6 column BED](#comment-bed-format). In this format the fifth column (score) must have a value between 0 and 1000. To satisfy this requirement we will create a dummy column that will always have a value of `0`:
 
 > ### {% icon hands_on %} Hands-on: Creating a dummy score column
 >
@@ -754,7 +754,7 @@ CP020543.1 1457 2557 DNA polymerase III subunit beta                0 +
 CP020543.1 2557 3630 DNA replication and repair protein RecF        0 +
 ```
 
-You can see that the genome ID is now appended at the beginning and this dataset looks like a legitimate BED that can be displayed in IGV. The one thing that remains is to tell Galaxy that it is BED as [we did before](#hands_on-hands-on-changing-dataset-type). After the format of the last dataset is set to BED it can be displayed in IGV by clicking the **display with IGV local** link (remember to give this new track a ["human" name](#tip-tip-naming-igv-tracks)):
+You can see that the genome ID is now appended at the beginning and this dataset looks like a legitimate BED that can be displayed in IGV. The one thing that remains is to tell Galaxy that it is BED as [we did before](#hands_on-hands-on-changing-dataset-type). After the format of the last dataset is set to BED it can be displayed in IGV by clicking the **display with IGV local** link (remember to give this new track a ["human" name](#comment-naming-igv-tracks)):
 
 ![Displaying genes in IGV](../../images/igv_genes.png "Gene track is added to the browser. Here we are zoomed in at the gap region in LT906474.")
 
