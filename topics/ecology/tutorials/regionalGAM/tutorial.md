@@ -381,7 +381,7 @@ To do that, we need to first create a table with the columns:
 >    - *"Cut by"*: `fields`
 >       - *"List of Fields"*: `c1`, `c3`, `c4`, `c6`
 >
-> 4. **Paste two files side by side** to paste the files
+> 4. **Multi-Join (combine multiple files)** to paste the 9 files
 >    - {% icon param-file %} *"File to join"*: the first output of **Cut**
 >    - {% icon param-files %} *"add additional file"*: the other first output of **Cut**
 >    - *"Common key column"*: `3`
