@@ -7,7 +7,7 @@ requirements:
   -
     type: "internal"
     topic_name: assembly
-    tutorials: 
+    tutorials:
       - unicycler-assembly
 tags:
   - prokaryote
@@ -524,7 +524,7 @@ The tool added a new column (Column 14) containing a merge between the target na
 
 This will produce a single dataset combining all alignment info. We can tell which alignments are between which genomes because we have set identifiers such as `CP020543.13`.
 
-> ### {% icon tip %} Tip: BED format
+> ### {% icon comment %} BED format
 > Our next goal is to convert this into a format that will be acceptable to the genome browser [created above](#producing-a-genome-browser-for-this-experiment). One of such formats is [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). In one of its simplest forms (there is one even simpler - 3 column BED) it has six columns:
 >
 > 1. Chromosome ID
@@ -533,7 +533,7 @@ This will produce a single dataset combining all alignment info. We can tell whi
 > 4. Name of the feature
 > 5. Score (must be between 0 and 1000)
 > 6. Strand (`+`, `-`, or `.` for no strand data).
-{: .tip}
+{: .comment}
 
 Let's look again at the data we generated in the last step:
 
@@ -616,10 +616,10 @@ Now we are ready to display these data in the browser (make sure the browser we'
 > 4. If you get `Could not locate genome:` error ignore it and click **OK**.
 {: .hands_on}
 
-> ### {% icon tip %} Tip: Naming IGV tracks
+> ### {% icon comment %} Naming IGV tracks
 > At the time of writing the datasets sent by Galaxy to IGV have uninformative names such as `galaxy_bbd44h445645h45454`. While this will soon be fixed we can deal with it by renaming the displayed track manually by right clicking on IGV sidebar and choosing the **Rename Track..** option.
 >
-{: .tip}
+{: .comment}
 
 The result will look like this:
 

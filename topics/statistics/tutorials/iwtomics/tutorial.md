@@ -62,7 +62,7 @@ The data we use in this tutorial is available at [Zenodo](https://doi.org/10.528
 >    - Fixed ETn (`ETn_fixed.bed`) regions
 >    - Control (`Control.bed`) regions
 >    - Recombination Hotspot (`Recombination_hotspots.txt`) content
->     
+>
 >    ```
 >    https://zenodo.org/record/1288429/files/ETn_fixed.bed
 >    https://zenodo.org/record/1288429/files/Control.bed
@@ -121,7 +121,7 @@ The data we use in this tutorial is available at [Zenodo](https://doi.org/10.528
 > ![Recombination hotspot IWT results scale 8](../../images/plot_with_threshold_on_test_scale_output.png)
 {: .hands_on}
 
-> ### {% icon tip %} Additional resources:
+> ### {% icon details %} Additional resources
 >
 > Read more about **IWTomics** [here](https://bioconductor.org/packages/release/bioc/vignettes/IWTomics/inst/doc/IWTomics.pdf).
-{:.tip}  
+{:.details}

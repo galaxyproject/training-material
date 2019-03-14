@@ -173,9 +173,9 @@ If your FASTQ files are located in Shared Data, you can import them into your hi
 
 Take a look at one of the FASTQ files to see what it contains.
 
-> ### {% icon tip %} Tip: FASTQ format
+> ### {% icon details %} FASTQ format
 > If you are not familiar with FASTQ format, see the [Quality Control tutorial]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
-{: .tip}
+{: .details}
 
 > ### {% icon hands_on %} Hands-on: Take a look at FASTQ format
 >
@@ -328,13 +328,13 @@ Now that we have prepared our reads, we can align the reads for our 12 samples. 
 >        - {% icon param-check %} *"Print alignment summary to a file."*: `Yes`
 {: .hands_on}
 
-> ### {% icon tip %} Tip: Settings for Paired-end or Stranded reads
+> ### {% icon comment %} Settings for Paired-end or Stranded reads
 >
 > - If you have **paired-end** reads
 >     - Select *"Is this a single or paired library"* `Paired-end` or `Paired-end Dataset Collection` or `Paired-end data from single interleaved dataset`
 > - If you have **stranded** reads
 >     - Select *"Specify strand information"*: `Forward (FR)` or `Reverse (RF)`
-{: .tip}
+{: .comment}
 
 **HISAT2** generates a BAM file with mapped reads.
 
@@ -581,14 +581,14 @@ The alignment produces a set of BAM files, where each file contains the read ali
 >        - {% icon param-select %} *"Select built-in genome"*: `mm10`
 {: .hands_on}
 
-> ### {% icon tip %} Tip: Settings for Paired-end or Stranded reads
+> ### {% icon comment %} Settings for Paired-end or Stranded reads
 >
 > - If you have **paired-end** reads
 >     - Click *"Options for paired-end reads"*
 >         - {% icon param-select %} *"Count fragments instead of reads"*: `Enabled; fragments (or templates) will be counted instead of reads`
 > - If you have **stranded** reads
 >     - {% icon param-select %} Select *"Specify strand information"*: `Stranded (Forward)` or `Stranded (Reverse)`
-{: .tip}
+{: .comment}
 
 ## Check assignments of reads to genes
 
@@ -675,7 +675,7 @@ So far we have run MultiQC on one step at a time which generates multiple report
 > >            - {% icon param-select %} *"Which tool was used generate logs?"*: `RSeQC`
 > >                - {% icon param-select %} *"Type of RSeQC output?"*: `infer_experiment`
 > >                    - {% icon param-collection %} *"RSeQC infer_experiment output"*: `Infer Experiment output` (output of **Infer Experiment** {% icon tool %})
-> >        - {% icon param-repeat %} Click on *"Insert Results"*:  
+> >        - {% icon param-repeat %} Click on *"Insert Results"*:
 > >        - In *"5: Results"*:
 > >            - {% icon param-select %} *"Which tool was used generate logs?"*: `Picard`
 > >                - {% icon param-select %} *"Type of Picard output?"*: `Markdups`
