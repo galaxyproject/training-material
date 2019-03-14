@@ -114,7 +114,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >    > >  3. There are no sequences filtered because of low quality. This is because radtags didn't apply quality related filtering since the corresponding advanced option (Discard reads with low quality scores) has not been enabled. So here, all not retained sequences are removed because of an ambiguous barcode (626265) or an ambiguous RAD-Tag (129493). This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This strategy is often used to avoid having too much sequences beginning with the exact same nucleotide sequence which may cause Illumina related issues during sequencing and cluster analysis
 >    > >  4. Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!
 >    > >
->    > > In addition to the overall statistics the numbers of retained and removed reads are also given for each bar code sequence.
+>    > > In addition to the overall statistics the numbers of retained and removed reads are also given for each barcode sequence.
 >    > {: .solution}
 >    {: .question}
 >
