@@ -57,7 +57,7 @@ This tutorial will perform cell clustering and lineage construction, as well as 
 >
 {: .agenda}
 
-# Getting the Count Matrix
+# Initial Count Matrix
 
 Every single-cell RNA analysis begins with a count matrix, which contains the raw data required for the downstream analysis. Annotation data such as cell phenotype or gene annotations are sometimes also used to enrich the analysis, but these are typically only useful later, and can be generated from external databases if required.
 
@@ -225,7 +225,9 @@ The filtered distributions are what we expect a well filtered and normalised dat
 
 
 
-# Initial Clustering
+# Clustering Cells
+
+Clustering is one of the most crucial stages in the analysis after normalisation, that groups or categorises cells based on their similarity.
 
 There are two approaches to the analysis:
 
@@ -233,7 +235,7 @@ There are two approaches to the analysis:
 
 * *Refined Approach*, which takes into account that there may be some technical noise and unwanted sources of technological or biological variability in the data that needs to be accounted for.
 
-### Biological Variation
+## Biological Variation
 
 ![Sources of variation]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_cellcycle.svg %} "Sources of unwanted biological variation: (Left) Transcriptional Bursting, and (Right) Cell-cycle Variation")
 
@@ -242,7 +244,7 @@ Transcriptional bursting is a stochastic model for the transcription process in 
 On the other hand, cell-cycle variation is well defined and can be modelled against. As the cell grows from the G1 to the M phase, the amount of mRNA transcribed grows with it, meaning that cells in the later stages of their cycle are more likely to produce more transcripts of a given gene than a cell of the same type in the earlier stages of its cycle. Such differences can give false variation that would cluster two cells of the same type but at different time-points seperately. Fortunately, there are a well-defined set of genes whose expression is known to covary with the cell-cycle, and thus this effect can be modelled out.
 
 
-### Technical Variation
+## Technical Variation
 
 ![Sources of variation]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_technical_variation.svg %} "Sources of unwanted technical variation")
 
@@ -255,7 +257,7 @@ Technical variation appears in three main forms: *Library size variation*, *Ampl
 1. **Dropout events** are the zero counts that are prevalent in the data due to the reduced sequencing sensitivity in detecting reads, which yields many false negatives in the detection of genes, often resulting in over 80% of the count values in the count matrix being zero. A major point to take into account is that some of these zeroes are *real* (i.e. no transcripts of that gene were detected in that cell) and some of these are *false* (i.e. the transcripts were never captured due to the low sequencing depth). Modelling this duality in the data and mitigating against it is one of the biggest challenges of normalising single-cell data.
 
 
-## Clustering
+## Performing the Clustering
 
 Here we assume that there is no unwanted technical or biological variability in the data and that the cells will cluster purely based on their phenotypes. This assumption is not completely without merit, since often the biological signal is strong enough to counter the lesser unwanted variation.
 
@@ -285,9 +287,9 @@ The third plot measures the direct stability of each of the derived (in this cas
 
 Ideally the Jaccard should have above 0.6 in most clusters, but it is acceptable to have one or two more poorly defined clusters
 
-----
 
-### Outlier Detection
+
+## Outlier Detection
 
 Outlier detection attempts to refine the initially detected clusters to find smaller (sub-)clusters that could be used to define rarer cell types.
 
@@ -300,7 +302,7 @@ The next three plots attempts to do this by describing the variation of the gene
 1. A background model is calibrated and outliers are identified based on the distribution of transcript counts within a cluster. The counts for each gene are assumed to follow a negative binomial distribution determined by a mean (average expression of a gene across all cells in a cluster), and a dispersion parameter. The dispersion is dervied from the average variance-mean dependence, modelled as a logarithmic second order polynomial under the assumption that *most* genes are not differentially expressed between clusters, and that true biological variability should exceed this assumption.
    As we can see from the Background plot, the (red) regression of the variance on the mean (as approximated by a second-order polynomial in logarithmic space) is higher than the variance or most genes (all grey dots below the red curve) as expected, since they are not differentially expressed. The genes above this regression are therefore significant for the detection of outlier cells. The orange line is the local regression (moving average variance per mean) and is used purely for illustrative purposes.
 
-1. Outlier cells are detected if the probability for that cell $$c$$, a minimum number of genes $$G_{min}$$ of observing total counts $$T_G_{min}$$ is less than a specific threshold $$P_{\textnormal{thr}}$$. To summarize formally: $$P(\sum_{g\epsilon \textnormal{ outlg}}T_{(c,g)}) < \textnormal{probthr}$$
+1. Outlier cells are detected if the probability for that cell $$c$$, a minimum number of genes $$G_{min}$$ of observing total counts $$T_{G_{min}}$$ is less than a specific threshold $$P_{thr}$$. To summarize formally: $$P(\sum_{g\epsilon\ outlg}T_{(c,g)}) < probthr$$
   This is shown in the chart below as the number of outliers as a function of the probablity threshold, which is set to $$1e-3$$ by default. Ideally, this threshold should be chosen to that the tail of the distribution is captured as outliers to ensure a maximum sensitivity of this method. If the sensitivity of the sequencing was low, then only a few highly expressed genes would be reliably quantified, so the outlier probability threshold would need to be higher (e.g. up to 1).
 
 1. A barplot of the outlier probabilities of all cells across all clusters. All outlier cells are merged into their own clusters if their similarity exceeds a quantile threshold of the similarity distribution for all pairs of cells within one of the original clusters. After the outlier cells are merged, then new cluster centers are defined for the original clusters after removing the outliers. Then, each cell is assigned to the nearest cluster center using k-partitioning.
@@ -318,8 +320,8 @@ The most differentially expressed genes (below a maximum p-value cutoff) in each
  | **padj** | Adjusted p-value using the Benjami-Hochberg correction for the false discovery rate |
 
 
----
-### Heatmaps
+
+## Heatmaps
 
 The remainder of the plots are heatmaps derived from k-medoids clustering, showing the similarity between clusters for both the initial clustering and the final (post outlier detection) clustering.
 
@@ -349,9 +351,9 @@ All the following plots are heatmaps for the individual genes expressed in each 
 The top 10 defining genes from each cluster (above only cl1-4 are shown) give us an idea of how unique these genes are to the cluster. For example, we can see that: *Gstm3*, *St3gal4*, and *Gna11* are only highly expressed in cl1 and cl6; *Eef1a1* is highly expressed everywhere and that cl4 appears to be a not so well-defined cluster.
 
 
-### Visualising Clusters
+## Visualising All Clusters
 
-The previous section produced plots that spoke about the quality of the clustering without really showing us the clusters projected into an understandable 2D space. To perform this, we must feed the clustered data into the cluster inspection tool,
+The previous section produced plots that spoke about the quality of the clustering without really showing us the clusters projected into an understandable 2D space. To perform this, we must feed the clustered data into the cluster inspection tool.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -369,8 +371,25 @@ The previous section produced plots that spoke about the quality of the clusteri
 >
 {: .hands_on}
 
+The main issue with visualising this data is that as before, we have C cells that serve as our observations which are described by G genes. Representing G dimensional data in the 2 or 3 dimensional plots that we are more familiar falls under the problem of *dimensional reduction*, which aims to preserve the distances and relationship of the higher dimensional (G-dimensional) data in a lower dimensional (usually 2D) space.
 
-**RaceID** makes use of tSNE and force-directed (Fruchterman-Reingold) graph layouts to space the clusters in a visually meaningful manner to show the seperation and relative proximity of clusters to one another.
+![Dim red]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_dimred.svg %} "Reducing a set of 4 observations from 3D to 2D space, whilst approximating the 3D relationships")
+
+Preserving these higher dimensional distances in lower dimensional space is a complex and ongoing challenge in computer science, but there are various methods that deal with this in a manner of interesting ways. **RaceID** makes use of tSNE and force-directed (Fruchterman-Reingold) graph layouts to space the clusters in a visually meaningful manner to show the seperation and relative proximity of clusters to one another.
+
+> ### {% icon details %} Details: PCA, tSNE, and Force-Directed Graphs
+> 
+> * **PCA** (Principle Component Analysis)
+>   * This linearly seperates the N-dimensional data into N distinct components (or 'axes') of variability, sorted in descending order of variability (i.e. the first component explains most of the variation in the data, the second component contributes the second most amount of variation in the data, etc). For more information on how these components are derived, see [*Eigendecomposition of a matrix*](https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix).
+>   * PCA has the benefit of being deterministic, uncostly to implement, and usually good enough to find clear differences in the data if the data is not complex.
+>
+> * **tSNE** (T-distributed Stochastic Neighbor Embedding)
+>   * PCA rests on the assumption that each of its N components are independent of one another, but this is often rarely the case and data usually exhibits more complexity than that of a linearly seperable dataset. In these situations, tSNE outshines PCA, by modelling a more complex relationship between datapoints, and often produces better looking plots with more clearly defined clusters. This is especially the case in single-cell RNA-seq data which tends to describe a continuous blend of cell phenotypes, instead of discrete rigidly-defined types.
+> 
+> * **Force-Directed** Graphs
+>   * These graphs can be better thought of as particle simulations, instead of performing any dimensional reduction, since all that is required is a connected graph. Forces are added to the connections between the nodes on the graph based on the strength of the connection, and then the whole system simulates the interplay of these forces for a number of iterations or until the system comes to rest. In general, these tend to yield much more nicely seperated plots than tSNE, but it is not always the case and so it is always good practice to compare both force-directed and tSNE plots.
+>
+{: .details}
 
 
 ![Clusters]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_tsne_fr.png %} "Initial and Final clusters using tSNE and F-R projections")
@@ -390,8 +409,7 @@ The previous section produced plots that spoke about the quality of the clusteri
 {: .question}
 
 
-# Inspecting Individual Clusters
-
+# Individual Cluster Inspection
 
 ## Differential Gene Analysis Between Two Clusters
 
@@ -486,9 +504,9 @@ We also have the heatmaps for those specific genes across all clusters as given 
 >
 {: .question}
 
-# Lineage Tree Construction
+# Trajectory and Lineage Analysis
 
-## Lineage computation
+## Computing the Lineage Tree
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -534,7 +552,7 @@ We also have the heatmaps for those specific genes across all clusters as given 
 >
 {: .question}
 
-## Examining a Trajectory with StemID
+## Specific Trajectory Lineage Analysis (StemID)
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -590,7 +608,7 @@ Ordered z-score indicating the degree of up-regulation between link 1.3 and 3.5
 >
 {: .question}
 
-## Examining a Trajectory with FateID
+## Specific Trajectory Fate Analysis (FateID)
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -631,13 +649,6 @@ Ordered z-score indicating the degree of up-regulation between link 1.3 and 3.5
 >
 {: .question}
 
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 {:.no_toc}
