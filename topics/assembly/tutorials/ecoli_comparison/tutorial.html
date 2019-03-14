@@ -113,6 +113,12 @@
                                         
                                     
                                         
+                                        <a class="dropdown-item" href="https://usegalaxy.eu" title="Galaxy Europe">
+                                            Galaxy Europe
+                                        </a>
+                                        
+                                    
+                                        
                                     
                                         
                                     
@@ -140,8 +146,6 @@
                                         <a class="dropdown-item" href="https://usegalaxy.org" title="Main">
                                             Main
                                         </a>
-                                        
-                                    
                                         
                                     
                                         
@@ -749,7 +753,7 @@ Detailed description of regular expressions is outside of the scope of this tuto
 
 <p>Note that because we started LASTZ on <em>a collection</em> of <em>E. coli</em> genomes, it will output alignment information as <em>a collection</em> as well. A collection is simply a way to represent large sets of similar data in a compact way within Galaxy’s interface.</p>
 
-<blockquote class="warning-box">
+<blockquote class="warning">
   <h3 id="warning-it-will-take-a-while"><i class="fa fa-warning" aria-hidden="true"></i><span class="visually-hidden">warning</span> It will take a while!</h3>
   <p>Please understand that alignment is not an instantaneous process: allow several hours for these jobs to clear.</p>
 </blockquote>
@@ -923,7 +927,7 @@ BA000007.2 Ecoli_C 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 
 <p>A group of three dots in the upper left corner of this scatter plot represents genomes that are most similar to our assembly: they have a SMALL number of alignment blocks but HIGH total alignment length. Mousing over these three dots (if you set <strong>Data point labels</strong> correctly in the previous step) will reveal their accession numbers: <code class="highlighter-rouge">LT906474.1</code>, <code class="highlighter-rouge">CP024090.1</code>, and <code class="highlighter-rouge">CP020543.1</code>.</p>
 
-<blockquote class="warning-box">
+<blockquote class="warning">
   <h3 id="warning-things-change"><i class="fa fa-warning" aria-hidden="true"></i><span class="visually-hidden">warning</span> Things change</h3>
   <p>It is possible that when you repeat these steps the set of sequences in NCBI will have changed and you will obtain different accession numbers. Keep this in mind.</p>
 </blockquote>
@@ -1219,7 +1223,7 @@ LT906474.1  8 99.94	4575223
 
 <p>Alignments are regions of high similarity between two sequences. Therefore each alignment block has two sets of coordinates associated with it: start/end in the first sequences (target) and start/end in the second sequence (query). But BED only has one set of coordinates. Thus we can create two BEDs: one using coordinates from the target and the other one from query. The first file will depict alignment data from the standpoint of target sequences <code class="highlighter-rouge">CP020543.1</code>, <code class="highlighter-rouge">CP024090.1</code>, <code class="highlighter-rouge">LT906474.1</code> and the second from the standpoint of query - our own assembly <a href="#hands_on-hands-on-fixing-assembly">we called</a> <code class="highlighter-rouge">Ecoli_C</code>. In the first BED, column 1 will contain names of targets (<code class="highlighter-rouge">CP020543.1</code>, <code class="highlighter-rouge">CP024090.1</code>, and <code class="highlighter-rouge">LT906474.1</code>). In the second BED, column 1 will contain name of our assembly: <code class="highlighter-rouge">Ecoli_C</code>. To create the first BED we will cut six columns from the dataset produced at the last step. Specifically, to produce the target BED we will cut columns 2, 4, 5, 14, 12, and 8. To produce the query BED columns 7,9,10,14,12,8 will be cut.</p>
 
-<blockquote class="warning-box">
+<blockquote class="warning">
   <h3 id="warning-there-are-multiple-cut-tools"><i class="fa fa-warning" aria-hidden="true"></i><span class="visually-hidden">warning</span> There are multiple <strong>CUT</strong> tools!</h3>
   <p>The Hands-On box below uses <strong>Cut</strong> tool. Beware that some Galaxy instances contain multiple <strong>Cut</strong> tools. The one that is used below is called <strong>Cut columns from a table</strong> while the other one, which we will NOT use is called <strong>Cut columns from a table (cut)</strong>. It is a small difference, but the tools are different.</p>
 </blockquote>
