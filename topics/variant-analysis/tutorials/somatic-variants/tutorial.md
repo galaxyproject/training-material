@@ -1133,7 +1133,7 @@ report format a bit more.
 >        round(gerp_bp_score,2) AS gerp_bp, ifnull(round(gerp_element_pval,2),'.')
 >        AS gerp_element_pval, ifnull(round(hs_qvalue,2), '.') AS hs_qvalue,
 >        in_omim, ifnull(clinvar_sig,'.') AS clinvar_sig,
->        ifnull(clinvar_disease_name,'.') AS clinvar_diesease_name,
+>        ifnull(clinvar_disease_name,'.') AS clinvar_disease_name,
 >        ifnull(rs_ids,'.') AS dbsnp_ids, rs_ss, ifnull(cosmic_ids,'.') AS
 >        cosmic_ids, ifnull(overlapping_civic_url,'.') AS overlapping_civic_url,
 >        in_cgidb`
