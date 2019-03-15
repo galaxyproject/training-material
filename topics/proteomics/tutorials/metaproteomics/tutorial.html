@@ -441,15 +441,25 @@ Strait chlorophyll maximum layer (7m depth, 65° 43.44″ N, 168° 57.42″ W). 
       <p>Import the three MGF MS/MS files and the FASTA sequence file from Zenodo.</p>
 
       <blockquote class="tip">
+
         <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
 
         <ul>
           <li>Copy the link location</li>
-          <li>Open the Galaxy Upload Manager</li>
+          <li>
+            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+          </li>
           <li>Select <strong>Paste/Fetch Data</strong></li>
-          <li>Paste the link into the text field. You can add multiple links, each on a separate line.</li>
-          <li>Press <strong>Start</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
         </ul>
+
+        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
       </blockquote>
 
       <p>As default, Galaxy takes the link as name.</p>
@@ -594,7 +604,7 @@ PeptideShaker. A compressed file can be made containing all information needed t
 results in the standalone PeptideShaker viewer. A <code class="highlighter-rouge">mzidentML</code> file can be created that contains
 all peptide sequence matching information and can be utilized by compatible downstream
 software. Other outputs are focused on the inferred proteins identified from the PSMs, as well
-as phosphorylation reports, relevant if a phosphoproteomics experiment has been undertaken. 
+as phosphorylation reports, relevant if a phosphoproteomics experiment has been undertaken.
 More detailed information on peptide inference using SearchGUI and PeptideShaker can be found in our tutorial on <a href="/training-material/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html">Peptide and Protein ID</a>.</p>
 </blockquote>
 
@@ -653,8 +663,8 @@ about structure and function of the protein. The UniPept web resource developed
 by Ghent University will be used to match the sample peptides to proteins. UniPept indexes all Uniprot
 proteins and provides a fast matching algorithm for peptides.</p>
 
-<blockquote class="tip">
-  <h3 id="tip-tip-unipept"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Unipept</h3>
+<blockquote class="comment">
+  <h3 id="comment-unipept"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Unipept</h3>
 
   <p>Users can access UniPept via a <a href="https://unipept.ugent.be">web page</a> and paste peptide
 sequences into the search form to retrieve protein information. But we`ll use the Galaxy
@@ -716,8 +726,8 @@ would rename the second and fifth columns.</p>
         <li>
           <p><strong>Save the sqlite database in your history</strong>: <code class="highlighter-rouge">Yes</code></p>
 
-          <blockquote class="tip">
-            <h3 id="tip-tip"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip</h3>
+          <blockquote class="comment">
+            <h3 id="comment-querying-sqlite-databases"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Querying SQLite Databases</h3>
 
             <ul>
               <li><strong>Query Tabular</strong> can also use an existing SQLite database. Activating <code class="highlighter-rouge">Save the sqlite database in your history</code>
@@ -1030,8 +1040,8 @@ This might be handy if the automatic detection of the filetype didn’t work out
 
 </blockquote>
 
-<blockquote class="tip">
-  <h3 id="tip-tip-creating-your-own-gene-ontology-list"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating your own Gene Ontology list</h3>
+<blockquote class="details">
+  <h3 id="details-creating-your-own-gene-ontology-list"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Creating your own Gene Ontology list</h3>
 
   <p>The latest Gene Ontology can be downloaded <a href="http://geneontology.org/page/download-ontology">here</a> as a text file in the <code class="highlighter-rouge">OBO</code> format.
 <code class="highlighter-rouge">OBO</code> files are human-readable (in addition to machine-readable) and can be opened in any text editor. They contain more information than just the name and aspect.</p>
@@ -1306,11 +1316,11 @@ ORDER BY sequence
         <li>
           <p><strong>SQL Query</strong>:</p>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT go.description, 
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT go.description,
 
-count(distinct bering_psms.sequence) as "bering_peptides", count(distinct bering_psms.id) as "bering_psms" 
+count(distinct bering_psms.sequence) as "bering_peptides", count(distinct bering_psms.id) as "bering_psms"
 
-FROM go JOIN bering_prot_go ON go.go_id = bering_prot_go.go_reference JOIN bering_prot on bering_prot_go.id = bering_prot.id JOIN 
+FROM go JOIN bering_prot_go ON go.go_id = bering_prot_go.go_reference JOIN bering_prot on bering_prot_go.id = bering_prot.id JOIN
 
 bering_psms ON bering_prot.peptide = bering_psms.sequence
 

@@ -170,6 +170,8 @@
                                     
                                         
                                     
+                                        
+                                    
                                 
                             </div>
                         </li>
@@ -1198,8 +1200,8 @@ LT906474.1  8 99.94	4575223
 
 <p>This will produce a single dataset combining all alignment info. We can tell which alignments are between which genomes because we have set identifiers such as <code class="highlighter-rouge">CP020543.13</code>.</p>
 
-<blockquote class="tip">
-  <h3 id="tip-tip-bed-format"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: BED format</h3>
+<blockquote class="comment">
+  <h3 id="comment-bed-format"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> BED format</h3>
   <p>Our next goal is to convert this into a format that will be acceptable to the genome browser <a href="#producing-a-genome-browser-for-this-experiment">created above</a>. One of such formats is <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1">BED</a>. In one of its simplest forms (there is one even simpler - 3 column BED) it has six columns:</p>
 
   <ol>
@@ -1318,8 +1320,8 @@ Ecoli_C 128706 128828 CP020543.13  82.6 +
   </ol>
 </blockquote>
 
-<blockquote class="tip">
-  <h3 id="tip-tip-naming-igv-tracks"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Naming IGV tracks</h3>
+<blockquote class="comment">
+  <h3 id="comment-naming-igv-tracks"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Naming IGV tracks</h3>
   <p>At the time of writing the datasets sent by Galaxy to IGV have uninformative names such as <code class="highlighter-rouge">galaxy_bbd44h445645h45454</code>. While this will soon be fixed we can deal with it by renaming the displayed track manually by right clicking on IGV sidebar and choosing the <strong>Rename Track..</strong> option.</p>
 
 </blockquote>
@@ -1415,7 +1417,7 @@ col20: attributes: semi-colon delimited list of a controlled set of qualifiers.
   <p>Note: This is because we want to retain all lines that begin (<code class="highlighter-rouge">^</code>) with <code class="highlighter-rouge">CDS</code>.</p>
 </blockquote>
 
-<p>This will produce a collection with three datasets just like the original <code class="highlighter-rouge">GENES</code> collection but containing only CDS data. Next we need to cut out only those columns that need to be included in the BED format. There is one problem with this. We are trying to convert these data into <a href="#tip-tip-bed-format">6 column BED</a>. In this format the fifth column (score) must have a value between 0 and 1000. To satisfy this requirement we will create a dummy column that will always have a value of <code class="highlighter-rouge">0</code>:</p>
+<p>This will produce a collection with three datasets just like the original <code class="highlighter-rouge">GENES</code> collection but containing only CDS data. Next we need to cut out only those columns that need to be included in the BED format. There is one problem with this. We are trying to convert these data into <a href="#comment-bed-format">6 column BED</a>. In this format the fifth column (score) must have a value between 0 and 1000. To satisfy this requirement we will create a dummy column that will always have a value of <code class="highlighter-rouge">0</code>:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-creating-a-dummy-score-column"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating a dummy score column</h3>
@@ -1478,7 +1480,7 @@ CP020543.1 1457 2557 DNA polymerase III subunit beta                0 +
 CP020543.1 2557 3630 DNA replication and repair protein RecF        0 +
 </code></pre></div></div>
 
-<p>You can see that the genome ID is now appended at the beginning and this dataset looks like a legitimate BED that can be displayed in IGV. The one thing that remains is to tell Galaxy that it is BED as <a href="#hands_on-hands-on-changing-dataset-type">we did before</a>. After the format of the last dataset is set to BED it can be displayed in IGV by clicking the <strong>display with IGV local</strong> link (remember to give this new track a <a href="#tip-tip-naming-igv-tracks">“human” name</a>):</p>
+<p>You can see that the genome ID is now appended at the beginning and this dataset looks like a legitimate BED that can be displayed in IGV. The one thing that remains is to tell Galaxy that it is BED as <a href="#hands_on-hands-on-changing-dataset-type">we did before</a>. After the format of the last dataset is set to BED it can be displayed in IGV by clicking the <strong>display with IGV local</strong> link (remember to give this new track a <a href="#comment-naming-igv-tracks">“human” name</a>):</p>
 
 <figure id="figure-10"><img src="../../images/igv_genes.png" alt="Displaying genes in IGV" title="Gene track is added to the browser. Here we are zoomed in at the gap region in LT906474." /><figcaption><span class="figcaption-prefix">Figure 10:</span> Gene track is added to the browser. Here we are zoomed in at the gap region in LT906474.</figcaption></figure>
 

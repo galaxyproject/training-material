@@ -559,8 +559,8 @@ because of stochastic processes in the algorithms.</p>
   <li><strong>Gene sets file</strong> for MSigDB Hallmark collection for mouse (rdata)</li>
 </ul>
 
-<blockquote class="tip">
-  <h3 id="tip-tip-files-for-this-tutorial"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Files for this tutorial</h3>
+<blockquote class="comment">
+  <h3 id="comment-files-for-this-tutorial"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Files for this tutorial</h3>
 
   <p>If you completed the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a> tutorial you should already have most of these files in your history. You only need to import the mouse_hallmark_sets and limma-voom_filtered_counts files from the files in the Hands-on box below.</p>
 
@@ -568,49 +568,101 @@ because of stochastic processes in the algorithms.</p>
 
 <h1 id="import-data">Import data</h1>
 
-<blockquote class="notranslate hands_on">
+<blockquote>
   <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
 
   <ol>
-    <li>Create a new history for this RNA-seq exercise e.g. <code class="highlighter-rouge">RNA-seq genes to pathways</code></li>
+    <li>
+      <p>Create a new history for this RNA-seq exercise e.g. <code class="highlighter-rouge">RNA-seq genes to pathways</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <ol>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Click on <strong>Create New</strong></li>
+        </ol>
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a history</h3>
+
+        <ol>
+          <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>
+          <li>Type the new name</li>
+          <li>Press <kbd>Enter</kbd></li>
+        </ol>
+      </blockquote>
+    </li>
     <li>
       <p>Import the files</p>
 
       <p>To import the files, there are two options:</p>
       <ul>
         <li>Option 1: From a shared data library if available (ask your instructor)</li>
-        <li>
-          <p>Option 2: From <a href="https://zenodo.org/record/2491305">Zenodo</a></p>
-
-          <blockquote class="tip">
-            <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
-
-            <ul>
-              <li>Copy the link location</li>
-              <li>Open the Galaxy Upload Manager</li>
-              <li>Select <strong>Paste/Fetch Data</strong></li>
-              <li>Paste one link into the text field</li>
-              <li>Give the dataset a Name (replace “New File”)</li>
-              <li>Select <strong>Paste/Fetch Data</strong> and repeat for each link</li>
-              <li>Press <strong>Start</strong></li>
-            </ul>
-          </blockquote>
-
-          <ul>
-            <li>You can paste the names and links below into the Upload tool:</li>
-          </ul>
-        </li>
       </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
+
+      <ul>
+        <li>Option 2: From <a href="https://zenodo.org/record/2491305">Zenodo</a></li>
+      </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
+      </blockquote>
     </li>
   </ol>
 
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Name                                      Link
-limma-voom_basalpregnant-basallactate     https://zenodo.org/record/2491305/files/limma-voom_basalpregnant-basallactate
-limma-voom_luminalpregnant-luminallactate https://zenodo.org/record/2491305/files/limma-voom_luminalpregnant-luminallactate
-seqdata                                   https://zenodo.org/record/2491305/files/seqdata
-mouse_hallmark_sets                       https://zenodo.org/record/2491305/files/mouse_hallmark_sets
-factordata                                https://zenodo.org/record/2491305/files/factordata
-limma-voom_filtered_counts                https://zenodo.org/record/2491305/files/limma-voom_filtered_counts
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <p>You can paste the names and links below into the Upload tool:</p>
+
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   https://zenodo.org/record/2491305/files/limma-voom_basalpregnant-basallactate
+   https://zenodo.org/record/2491305/files/limma-voom_luminalpregnant-luminallactate
+   https://zenodo.org/record/2491305/files/seqdata
+   https://zenodo.org/record/2491305/files/mouse_hallmark_sets
+   https://zenodo.org/record/2491305/files/factordata
+   https://zenodo.org/record/2491305/files/limma-voom_filtered_counts
 </code></pre></div>  </div>
 
   <ol>

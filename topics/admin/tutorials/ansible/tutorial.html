@@ -410,8 +410,8 @@
 
 <p>Here we’ve defined two groups of computers, <code class="highlighter-rouge">webservers</code> and <code class="highlighter-rouge">databases</code>. <code class="highlighter-rouge">ansible_user</code> is used to specify which user to connect with.</p>
 
-<blockquote class="tip">
-  <h3 id="tip-ansible-inventory-documentation"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Ansible Inventory Documentation</h3>
+<blockquote class="details">
+  <h3 id="details-ansible-inventory-documentation"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Ansible Inventory Documentation</h3>
   <p>For more advanced features of the hosts file or “inventory”, check out <a href="https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html">the official documentation on this topic</a>.</p>
 </blockquote>
 
@@ -472,8 +472,8 @@
   </tbody>
 </table>
 
-<blockquote class="tip">
-  <h3 id="tip-ansible-role-documentation"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Ansible Role Documentation</h3>
+<blockquote class="details">
+  <h3 id="details-ansible-role-documentation"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Ansible Role Documentation</h3>
 
   <p>For more information check out <a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html">the official documentation on this topic</a>.</p>
 </blockquote>
@@ -534,8 +534,8 @@
 
 <p>This is a quite minimal playbook. It selects a <code class="highlighter-rouge">hosts</code> group named <code class="highlighter-rouge">webservers</code>, overrides the variable <code class="highlighter-rouge">cvmfs_numfiles</code>, and then says the following set of roles will be executed for this group of hosts. Ansible makes it easy to collect tasks that should apply to a group of hosts and run a playbook for all of those hosts. Some good uses of this are things like ensuring a certain set of users are installed on all of your managed machines, or using one of the package autoupdating roles to make sure your machines are up-to-date.</p>
 
-<blockquote class="tip">
-  <h3 id="tip-ansible-playbook-documentation"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Ansible Playbook Documentation</h3>
+<blockquote class="details">
+  <h3 id="details-ansible-playbook-documentation"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Ansible Playbook Documentation</h3>
 
   <p>For more information check out <a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html">the official documentation on this topic</a>.</p>
 </blockquote>
@@ -653,8 +653,8 @@ Ansible provides some flags which can help you identify changes before they’re
 
       <p>You can read about all of the parameters available to the <a href="http://docs.ansible.com/ansible/latest/copy_module.html"><code class="highlighter-rouge">copy</code></a> module on Ansible’s documentation.</p>
 
-      <blockquote class="tip">
-        <h3 id="tip-ansible-module-documentation"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Ansible Module Documentation</h3>
+      <blockquote class="details">
+        <h3 id="details-ansible-module-documentation"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Ansible Module Documentation</h3>
         <p>You can usually find a module that will represent most commands you will run at the linux cli. Usually by searching the internet for “ansible $do-some-action” e.g. “ansible copy file to server” or “ansible restart service.” If you cannot find a module that does it, there is the <a href="http://docs.ansible.com/ansible/latest/command_module.html"><code class="highlighter-rouge">command</code></a> module, but this should be avoided if possible. Expect to have a browser session with 10-30 different Ansible module documentation tabs if you work with Ansible regularly, no one remembers what arguments are available to every module.</p>
 
       </blockquote>
@@ -744,8 +744,8 @@ localhost                  : ok=2    changed=1    unreachable=0    failed=0
   <li>Identify a task you do regularly, e.g. restarting a service. Find the Ansible service module and add that to your playbook.</li>
 </ul>
 
-<blockquote class="tip">
-  <h3 id="tip-too-many-cows"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Too Many Cows?</h3>
+<blockquote class="comment">
+  <h3 id="comment-too-many-cows"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Too Many Cows?</h3>
   <p>If you’ve installed the <code class="highlighter-rouge">cowsay</code> tool, Ansible (for some reason) will take advantage of that to output a lot of the output with cowsay. To disable this you can <code class="highlighter-rouge">export ANSIBLE_NOCOWS=1</code> (Remember that exporting will only last as long as the current invocation of your terminal does, so consider adding this to your user profile if you wish to keep cowsay installed and still have legible output.)</p>
 
   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ________________
@@ -827,8 +827,8 @@ ok: [localhost]
 
 <p>Templates give you greater control over the files you are deploying to the remote system. If you need to deploy a file to multiple hosts, but configure it differently on each host, you should use templates. For instance deploying a service that should only listen on the correct IP address for that host would be a good use case for templates. All of the facts you discovered in the previous hands on are available to you to use in templates, <code class="highlighter-rouge">when</code> statements (like the <a href="#modules-and-tasks">ansible-cvmfs example we saw earlier</a>). Additionally all of the variables you’ve defined are available as well.</p>
 
-<blockquote class="tip">
-  <h3 id="tip-template-syntax"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Template Syntax</h3>
+<blockquote class="details">
+  <h3 id="details-template-syntax"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Template Syntax</h3>
   <p>Templates use Jinja2 syntax. If you are not familiar with it, you should <a href="http://jinja.pocoo.org/docs/2.10/templates/">read about it</a> first, before moving on with the tutorial.</p>
 </blockquote>
 
@@ -988,8 +988,8 @@ The solution to this is to set <code class="highlighter-rouge">become: true</cod
 
           <p><code class="highlighter-rouge">become</code> causes Ansible to attempt to become a different user (using sudo/su/whatever is appropriate), by default this is <code class="highlighter-rouge">root</code>. If you want to become a different user, just set <code class="highlighter-rouge">become_user</code>. Beware, the user should be able to privilege escalate without a password prompt. Otherwise when you execute the playbook you should set <code class="highlighter-rouge">--ask-become-pass</code>, using the privilege escalation password for that host.</p>
 
-          <blockquote class="tip">
-            <h3 id="tip-ansible-become"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Ansible Become</h3>
+          <blockquote class="details">
+            <h3 id="details-ansible-become"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Ansible Become</h3>
             <p>See the <a href="https://docs.ansible.com/ansible/latest/user_guide/become.html">documentation</a> if you need to control this behaviour differently. <code class="highlighter-rouge">become</code> can be set either at the task level or the playbook level.</p>
 
           </blockquote>

@@ -577,8 +577,8 @@ Internal calibrants or other known, ubiquitous m/z features can be used to obtai
 
 <figure id="figure-5"><img src="../../images/MSI1_angiotensin_image.png" alt="Angiotensin heatmap" title="Intensity distribution image of Angiotensin I" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Intensity distribution image of Angiotensin I</figcaption></figure>
 
-<blockquote class="tip">
-  <h3 id="tip-tip-plotting-heatmaps"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Plotting heatmaps</h3>
+<blockquote class="comment">
+  <h3 id="comment-plotting-heatmaps"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Plotting heatmaps</h3>
   <ul>
     <li>The <strong>MSI mz images</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool allows to generate heatmaps with futher options such as contrast enhancement and smoothing functions. The tool is explained in more detail in the tutorial <a href="/training-material/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.html">Mass spectrometry imaging: Examining the spatial distribution of analytes</a>.</li>
   </ul>
@@ -588,7 +588,7 @@ Internal calibrants or other known, ubiquitous m/z features can be used to obtai
 
 <p>On page 9 the number of peaks per spectrum is plotted and the shape of the kidney can be estimated due to slightly higher number of peaks. The number of peaks is defined as intensity &gt; 0 what means that before peak picking also noise with intensity &gt; 0 is counted in. It is quite common for raw MALDI datasets to have a noise baseline in each spectrum and therefore high amounts of ‘peaks’ before baseline removal is performed. For the mouse kidney dataset baseline removal was already done during acquisition but as also suggested by the median number of peaks per spectrum in the summary table, about half of every m/z value has an intensity &gt; 0. This suggests to check the mass spectra for a baseline and if applicable remove the baseline during preprocessing of the data.</p>
 
-<p>The plot on page 10 shows the total ion chromatogram (TIC) for each spectrum with a few outlier TIC &gt; 25000. The TIC is the sum of all intensities of a spectrum. Therefore with more peaks in a spectrum the TIC should also be higher. Due to their low intensities, noise peaks contribute less to the TIC than analyte peaks, but with the large amount of noise we have in this dataset, this of course also sums up. Deviations in TICs are common in MALDI MSI due to e.g. unhomogeneous matrix spray, ion source contamination or pH gradients. To render the spectra more comparable TIC normalization is a default preprocessing step for MALDI MSI data but is based on the assumption that there are comparable numbers of signals present in each spectrum <a href="https://link.springer.com/article/10.1007%2Fs00216-011-4929-z">Deininger et al.</a>. 
+<p>The plot on page 10 shows the total ion chromatogram (TIC) for each spectrum with a few outlier TIC &gt; 25000. The TIC is the sum of all intensities of a spectrum. Therefore with more peaks in a spectrum the TIC should also be higher. Due to their low intensities, noise peaks contribute less to the TIC than analyte peaks, but with the large amount of noise we have in this dataset, this of course also sums up. Deviations in TICs are common in MALDI MSI due to e.g. unhomogeneous matrix spray, ion source contamination or pH gradients. To render the spectra more comparable TIC normalization is a default preprocessing step for MALDI MSI data but is based on the assumption that there are comparable numbers of signals present in each spectrum <a href="https://link.springer.com/article/10.1007%2Fs00216-011-4929-z">Deininger et al.</a>.
 Both plots can also serve to check for spraying gradients or reduced machine performance during acquisition time. The mouse kidney was measured from bottom to top (plot on page 2), the performance over time can be easier spotted in the upper plots on page 14 and 15, where the x axis represents the spectra in the order they were measured.</p>
 
 <figure id="figure-6"><img src="../../images/MSI1_npeaks_TIC.png" alt="Npeaks and TIC heatmap" title="Number of peaks and TIC per spectrum" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Number of peaks and TIC per spectrum</figcaption></figure>
@@ -611,8 +611,8 @@ Both plots can also serve to check for spraying gradients or reduced machine per
 
 <figure id="figure-7"><img src="../../images/MSI1_mz_error.png" alt="mz error" title="Plots that show the average and individual m/z errors" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Plots that show the average and individual m/z errors</figcaption></figure>
 
-<blockquote class="tip">
-  <h3 id="tip-tip-plotting-mass-spectra"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Plotting mass spectra</h3>
+<blockquote class="comment">
+  <h3 id="comment-plotting-mass-spectra"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Plotting mass spectra</h3>
   <ul>
     <li>The <strong>MSI plot spectra</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool allows to single, average or overlayed mass spectra plots and to zoom into m/z regions of interest. The tool is explained in more detail in the tutorial <a href="/training-material/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.html">Mass spectrometry imaging: Examining the spatial distribution of analytes</a>.</li>
   </ul>
@@ -622,7 +622,7 @@ Both plots can also serve to check for spraying gradients or reduced machine per
 
 <p>The data from the imzMl file format is not directly readable, therefore special tools are needed to extract its information. The <strong>MSI data exporter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> provides the option to export spectra, feature and intensity data from imzML files as tabular files. The underlaying values of the quality report can be found in the tabular files and allow to follow up on interesting aspects seen in quality report plots. Furthermore, tabular files are compatible with most software for statistical analysis and to generate plots. The intensity matrix of an unprocessed file might be huge as all pixels and all m/z values are stored in the file - therefore, the intensity matrix is often more helpful after preprocessing and filtering of the data. Despite preprocessing and filtering, the output tabular files are often too large for visual inspection. Galaxy offers many different text manipulation tools that are helpful to sort and filter such large tabular files.</p>
 
-<p>To find the m/z value that has the highest mean intensity across all pixels, the feature data can be sorted on the column with the mean intensities. 
+<p>To find the m/z value that has the highest mean intensity across all pixels, the feature data can be sorted on the column with the mean intensities.
 Furthermore the spectra data can be filtered for certain spectra to obtain some spectra properties such as the accurate value of its base peak that could not be accurately determined in the corresponding plot of the quality report before.</p>
 
 <blockquote class="notranslate hands_on">
@@ -673,7 +673,7 @@ Furthermore the spectra data can be filtered for certain spectra to obtain some 
   </blockquote>
 </blockquote>
 
-<p>Exporting and sorting the feature information reveals that <em>substance P</em> has the highest mean intensity across all spectra what confirms our estimation when examining the average spectrum plot. 
+<p>Exporting and sorting the feature information reveals that <em>substance P</em> has the highest mean intensity across all spectra what confirms our estimation when examining the average spectrum plot.
 Exporting and filtering the spectra information for three pixel that have different base peaks confirms that the calibrants are the most abundant peaks in most of the spectra. <em>Substance P</em> is the base peak in spectrum xy_40_40 and thereby also the most abundant peak in most of the spectra (according to the colouring in the ‘most abundant m/z in each spectrum’ plot) regardless if they belong to tissue or matrix. Only the pixels that belong to the <em>bombesin</em> spot show different base peaks. In spectrum xy_23_70 <em>angiotensin I</em> is the highest feature while in spectrum xy_20_73 <em>fibrinopeptide B</em> appears as base peak.</p>
 
 

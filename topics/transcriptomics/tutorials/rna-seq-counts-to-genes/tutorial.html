@@ -658,34 +658,41 @@ because of stochastic processes in the algorithms.</p>
       <p>To import the files, there are two options:</p>
       <ul>
         <li>Option 1: From a shared data library if available (ask your instructor)</li>
-        <li>
-          <p>Option 2: From <a href="https://figshare.com/s/1d788fd384d33e913a2a">Figshare</a></p>
+        <li>Option 2: From <a href="https://figshare.com/s/1d788fd384d33e913a2a">Figshare</a></li>
+      </ul>
 
-          <blockquote class="tip">
-            <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+      <blockquote class="tip">
 
-            <ul>
-              <li>Copy the link location</li>
-              <li>Open the Galaxy Upload Manager</li>
-              <li>Select <strong>Paste/Fetch Data</strong></li>
-              <li>Paste the link into the text field</li>
-              <li>Press <strong>Start</strong></li>
-            </ul>
-          </blockquote>
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
 
-          <ul>
-            <li>
-              <p>You can paste both links below into the <strong>Paste/Fetch</strong> box:</p>
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
 
-              <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://ndownloader.figshare.com/files/5057929?private_link=1d788fd384d33e913a2a
-https://ndownloader.figshare.com/files/5999829?private_link=1d788fd384d33e913a2a
-</code></pre></div>              </div>
-            </li>
-            <li>
-              <p>Select <em>“Genome”</em>: <code class="highlighter-rouge">mm10</code></p>
-            </li>
-          </ul>
-        </li>
+        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
+      </blockquote>
+
+      <ul>
+        <li>You can paste both links below into the <strong>Paste/Fetch</strong> box:</li>
+      </ul>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> https://ndownloader.figshare.com/files/5057929?private_link=1d788fd384d33e913a2a
+ https://ndownloader.figshare.com/files/5999829?private_link=1d788fd384d33e913a2a
+</code></pre></div>      </div>
+
+      <ul>
+        <li>Select <em>“Genome”</em>: <code class="highlighter-rouge">mm10</code></li>
       </ul>
     </li>
     <li>Rename the counts dataset as <code class="highlighter-rouge">seqdata</code> and the sample information dataset as <code class="highlighter-rouge">sampleinfo</code> using the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (pencil) icon.</li>
@@ -694,16 +701,18 @@ https://ndownloader.figshare.com/files/5999829?private_link=1d788fd384d33e913a2a
 If the datatype is not <code class="highlighter-rouge">tabular</code>, please change the file type to <code class="highlighter-rouge">tabular</code>.</p>
 
       <blockquote class="tip">
+
         <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
         <ul>
-          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (pencil) icon displayed in your dataset in the history</li>
-          <li>Choose <strong>Datatype</strong> on the top</li>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
           <li>Select <code class="highlighter-rouge">tabular</code></li>
-          <li>Press <strong>Save</strong></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
       </blockquote>
     </li>
   </ol>
+
 </blockquote>
 
 <p>Let’s take a look at the data. The <code class="highlighter-rouge">seqdata</code> file contains information about genes (one gene per row), the first column has the Entrez gene id, the second has the gene length and the remaining columns contain information about the number of reads aligning to the gene in each experimental sample. There are two replicates for each cell type and time point (detailed sample info can be found in file “GSE60450_series_matrix.txt” from the GEO website). The first few rows and columns of the seqdata file are shown below.</p>
@@ -974,8 +983,8 @@ What is the second greatest source of variation in the data?</p>
 
 <figure id="figure-12"><img src="../../images/rna-seq-counts-to-genes/cpmsvscounts.png" alt="CPM threshold Plots" title="CPM vs Raw Counts Plots" /><figcaption><span class="figcaption-prefix">Figure 12:</span> CPM vs Raw Counts Plots</figcaption></figure>
 
-<blockquote class="tip">
-  <h3 id="tip-tip"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip</h3>
+<blockquote class="comment">
+  <h3 id="comment-thresholds"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Thresholds</h3>
 
   <ul>
     <li>A threshold of 1 CPM in at least minimum group sample size is a good rule of thumb for samples with about 10 million reads. For larger library sizes increase the CPM theshold and for smaller library sizes decrease it. Check the CpmPlots to see if the selected threshold looks appropriate for the samples (equivalent to ~10 reads).</li>
@@ -1188,8 +1197,8 @@ What is the second greatest source of variation in the data?</p>
 
 <figure id="figure-31"><img src="../../images/rna-seq-counts-to-genes/multiple_contrasts.png" alt="Multiple contrasts" title="Multiple contrasts output" /><figcaption><span class="figcaption-prefix">Figure 31:</span> Multiple contrasts output</figcaption></figure>
 
-<blockquote class="tip">
-  <h3 id="tip-tips"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tips</h3>
+<blockquote class="details">
+  <h3 id="details-r-code-in-detail"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> R code in detail</h3>
 
   <ol>
     <li>The <code class="highlighter-rouge">Report</code> with all the plots and tables can be downloaded by clicking on the floppy disk icon on the dataset in the history.</li>

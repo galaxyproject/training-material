@@ -176,6 +176,8 @@
                                     
                                         
                                     
+                                        
+                                    
                                 
                             </div>
                         </li>
@@ -474,7 +476,7 @@ There are two types of chemical tags:</p>
   <li>Isotopic tags are chemically identical, but differ in their mass due to incorporated stable isotopes. Examples of different isotopic tags for stable isotope labelling (SIL) are ICAT, SILAC, dimethylation, or heavy oxygen (<sup>18</sup>O).</li>
 </ol>
 
-<p>This tutorial deals with protein quantitation via stable isotope labelling (SIL). For isotopic tags, quantitation can be achieved by comparing the intensity of MS1 peptide mass traces. The whole MS1 profile of a peptide, i.e. the intensities of all its isotopic peaks over time, is called a <em>peptide feature</em> (Figure 1a). 
+<p>This tutorial deals with protein quantitation via stable isotope labelling (SIL). For isotopic tags, quantitation can be achieved by comparing the intensity of MS1 peptide mass traces. The whole MS1 profile of a peptide, i.e. the intensities of all its isotopic peaks over time, is called a <em>peptide feature</em> (Figure 1a).
 Incorporation of stable isotopes results in different peptide masses on MS1 level, which give rise to coeluting ion traces in the TIC with a mass difference typical for each different chemical tag (Figure 1b). Figure originally published in <a href="http://www.ncbi.nlm.nih.gov/pubmed/25931027">Nilse et al, 2015</a>.</p>
 
 <p>In this tutorial, we will use tools of the <a href="http://www.openms.org">OpenMS suite</a> to identify and quantify peptides and proteins.</p>
@@ -489,7 +491,7 @@ Incorporation of stable isotopes results in different peptide masses on MS1 leve
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-introduction"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Introduction</h3>
-  <p>In the hands-on section of this tutorial, we will use a quantitative comparison of HEK cell lysate as a test dataset. In this experiment, HEK cells were once labelled with light, once with heavy SILAC. Both cultures were lysed simultaneously and the cell lysates were mixed in a certain ratio. 
+  <p>In the hands-on section of this tutorial, we will use a quantitative comparison of HEK cell lysate as a test dataset. In this experiment, HEK cells were once labelled with light, once with heavy SILAC. Both cultures were lysed simultaneously and the cell lysates were mixed in a certain ratio.
 A detailed description of the full dataset is available in the <a href="">PRIDE archive</a>.</p>
 
   <p>Your objective in this hands-on-tutorial is to find out the correct mixing ratio of the test sample.</p>
@@ -600,7 +602,7 @@ This step facilitates mapping peptide IDs to identified features <a href="#mappi
 
 <h1 id="mapping-identifications-to-features">Mapping Identifications to Features</h1>
 
-<p>We now have feature quantifications for MS1 elution peaks, peptide identifications for the MS2 spectra and protein identifications. 
+<p>We now have feature quantifications for MS1 elution peaks, peptide identifications for the MS2 spectra and protein identifications.
 The next step is to map the MS2-based peptide identifications to the quantified MS1 precursor peaks (“peptide features”). This will enable the quantification of identified peptides.
 For labelled data, it is necessary to map peptide identifications to <em>consensus</em> features (i.e. a pair of one light peptide feature with one matching heavy feature in the correct m/z distance).
 For <code class="highlighter-rouge">consensusXML</code>, IDMapper uses the consensus centroids, not the feature boundaries for mapping. Therefore, the RT tolerance has to be set higher than for mapping to <code class="highlighter-rouge">featureXML</code>. A good starting value is half the expected typical retention time.</p>
@@ -642,7 +644,7 @@ For <code class="highlighter-rouge">consensusXML</code>, IDMapper uses the conse
   <blockquote class="comment">
     <h3 id="comment-comment-proteinquantifier-parameters"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: ProteinQuantifier parameters</h3>
     <p>Peptide quantitation algorithms are more precise for high abundant peptides. Therefore, it is recommended to base protein quantitations on those peptides. In ProteinQuantifier, you may restrict the calculation of protein abundances to the most abundant peptides by using the option “Calculate protein abundance from this number of proteotypic peptides”.
-However, we recommend to use the averaging method <code class="highlighter-rouge">sum</code> instead. By using this option, protein ratios are based on the sum of all peptide abundances. Thus, highly abundant peptides thus have more influence on protein abundance calculation than low abundant peptides. 
+However, we recommend to use the averaging method <code class="highlighter-rouge">sum</code> instead. By using this option, protein ratios are based on the sum of all peptide abundances. Thus, highly abundant peptides thus have more influence on protein abundance calculation than low abundant peptides.
 A simple sum-of-intensities algorithm provided the best estimates of true protein ratios in a comparison of several protein quantitation algorithms (<a href="https://www.ncbi.nlm.nih.gov/pubmed/19892804">Carrillo et al., Bioinformatics, 2009</a>).</p>
   </blockquote>
 </blockquote>
@@ -680,8 +682,8 @@ Comment lines in the beginning of a <code class="highlighter-rouge">tabular</cod
     </li>
   </ol>
 
-  <blockquote class="tip">
-    <h3 id="tip-tip-calculating-descriptive-statistics-for-peptides"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Calculating descriptive statistics for peptides</h3>
+  <blockquote class="comment">
+    <h3 id="comment-calculating-descriptive-statistics-for-peptides"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Calculating descriptive statistics for peptides</h3>
     <p>The peptide table output of <strong><em>ProteinQuantifier</em></strong> does not give the log-transformed ratio for each peptide. Nonetheless, you may calculate basic statistics of the FC values by running <strong><em>Summary Statistics</em></strong> with <strong>Column or expression</strong> set to <code class="highlighter-rouge">log(c6/c5,2)</code>.</p>
   </blockquote>
 

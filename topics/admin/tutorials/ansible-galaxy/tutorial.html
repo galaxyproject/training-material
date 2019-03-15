@@ -828,8 +828,8 @@ best practices and knowledge from previous admins codified for you.</p>
   <li>
     <p>You have <a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible installed</a> on your local machine</p>
 
-    <blockquote class="tip">
-      <h3 id="tip-tip-running-ansible-on-your-remote-machine"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Running Ansible on your remote machine</h3>
+    <blockquote class="comment">
+      <h3 id="comment-comment-running-ansible-on-your-remote-machine"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Running Ansible on your remote machine</h3>
       <p>It is possible to have Ansible installed on the remote machine and run it there as well. You will need to update your hosts file to point to localhost, and pass the <code class="highlighter-rouge">-c local</code> parameter. Be <strong>certain</strong> that the playbook that you’re building is stored somewhere safe like your user home directory. We will remove data at one point during this tutorial and would not want you to lose your progress.</p>
     </blockquote>
   </li>
@@ -939,8 +939,8 @@ best practices and knowledge from previous admins codified for you.</p>
     <li>
       <p>Run the playbook (<code class="highlighter-rouge">ansible-playbook -i hosts playbook.yml</code>)</p>
 
-      <blockquote class="tip">
-        <h3 id="tip-tip-when-running-ansible"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: When running Ansible</h3>
+      <blockquote class="comment">
+        <h3 id="comment-comment-when-running-ansible"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: When running Ansible</h3>
         <p>Always pay close attention to tasks reported as <strong>changed</strong> and ensure that the changes were expected!</p>
       </blockquote>
     </li>
@@ -973,8 +973,8 @@ best practices and knowledge from previous admins codified for you.</p>
 
 <p>Finally, best admin practices are to not run Galaxy as a user with <code class="highlighter-rouge">sudo</code> access, like your login user probably has. Additionally, it is best to install the Galaxy code and configs as a separate user, for security purposes. So we will instruct the <code class="highlighter-rouge">galaxyproject.galaxy</code> role to create a new user account specifically to run Galaxy under.</p>
 
-<blockquote class="tip">
-  <h3 id="tip-tip-mules-are-not-the-only-option"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Mules are not the only option</h3>
+<blockquote class="details">
+  <h3 id="details-mules-are-not-the-only-option"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Mules are not the only option</h3>
 
   <p>Galaxy can be run in a <a href="https://docs.galaxyproject.org/en/master/admin/scaling.html#deployment-options">couple of other configurations</a> depending on your needs. Mules are generally a good solution for most production needs.</p>
 
@@ -1231,8 +1231,8 @@ best practices and knowledge from previous admins codified for you.</p>
 
 </blockquote>
 
-<blockquote class="tip">
-  <h3 id="tip-tip-ansiblecfg"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: ansible.cfg</h3>
+<blockquote class="details">
+  <h3 id="details-simplifying-the-command-line-with-ansiblecfg"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Simplifying the command line with ansible.cfg</h3>
   <p>Typing <code class="highlighter-rouge">-i hosts</code> every time can be a bit repetitive, you can save having to type this flag by creating an <code class="highlighter-rouge">ansible.cfg</code> file (next to your playbook) with the following contents:</p>
 
   <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[defaults]</span>
@@ -1591,8 +1591,8 @@ changed: [galaxy.example.org]
 
 <p>With this, users can see an “Upload via FTP” button in their upload interface, and they can upload their data using Filezilla or other preferred FTP client.</p>
 
-<blockquote class="tip">
-  <h3 id="tip-tip-active-vs-passive"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Active vs Passive</h3>
+<blockquote class="comment">
+  <h3 id="comment-active-vs-passive"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Active vs Passive</h3>
   <p>If connecting does not work, try forcing your client to use active FTP, university firewalls often have issues with passive FTP.</p>
 </blockquote>
 
@@ -1643,8 +1643,8 @@ changed: [galaxy.example.org]
 
 <p>Then you can potentially use it to recover.</p>
 
-<blockquote class="tip">
-  <h3 id="tip-tip-we-have-experience"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: We have experience</h3>
+<blockquote class="comment">
+  <h3 id="comment-we-have-experience"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> We have experience</h3>
 
   <p>We can tell you this, we can repeat it over and over, but unless you really have a disaster happen to you, it is hard to appreciate how important it is that machines are completely controlled in terms of configuration and software deployment.</p>
 
@@ -1719,8 +1719,8 @@ as noted in the commands above.</p>
 
 <p>And now we should have valid SSL certificates! We just need to go back and update our various services to support this.</p>
 
-<blockquote class="tip">
-  <h3 id="tip-tip-issues-on-centos"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Issues on CentOS</h3>
+<blockquote class="comment">
+  <h3 id="comment-issues-on-centos"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Issues on CentOS</h3>
   <p>Check that setenforce is permissive, or allow nginx to connect back to localhost on a non-standard port.</p>
 </blockquote>
 
