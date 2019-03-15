@@ -229,9 +229,9 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >        - galaxyproject.galaxy
 >    ```
 >
-> > ### {% icon tip %} Ansible Heads-up
+> > ### {% icon comment %} Ansible Heads-up
 > > If you've set up your Galaxy server using the [Galaxy Installation with Ansible]({{ site.baseurl }}{% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, you will have created a *handler* for restarting Galaxy (its name is set in the `galaxy_restart_handler_name` option in your group vars). You will need to define that handler in the CVMFS playbook the same way as you defined it in your original playbook. This also means that Ansible will perform the restart step below for you!
-> {: .tip}
+> {: .comment}
 >
 > 3. Re-run the CVMFS playbook (`ansible-playbook -i hosts cvmfs_playbook.yml`)
 >
@@ -253,9 +253,9 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 
 # CVMFS and Galaxy without Ansible
 
-> {% icon tip %} Tip: Manual version of Ansible Commands
+> {% icon comment %} Manual version of Ansible Commands
 > If you wish to perform the same thing that we've just done, but by building the ansible script manually, follow these instructions. Otherwise, you have already done everything below and do not need to re-do it.
-{: .tip}
+{: .comment}
 
 We are going to setup a CVMFS mount to the Galaxy reference data repository on our machines. To do this we have to install and configure the CVMFS client and then mount the appropriate CVMFS repository using the publicly available keys.
 

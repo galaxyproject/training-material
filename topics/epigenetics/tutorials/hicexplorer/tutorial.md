@@ -69,10 +69,10 @@ After a corrected Hi-C matrix is created other tools can be used to visualize it
 > 3. Rename the data set to something meaningful, e.g. `HiC_S2_1p_10min_lowU_R1` and `HiC_S2_1p_10min_lowU_R2`.
 > By default, when data is imported via its link, Galaxy names it with its URL.
 >
-> > ### {% icon tip %} Tip: Get data from public sources
+> > ### {% icon comment %} Get data from public sources
 > > HiCExplorer needs as input the forward and reverse strand of a pair end read which are mapped independently. A usual start point for a typical analysis is the given GSE number of a publication, e.g. GSE63525 for Rao 2014. To get the actual data, go to [NCBI](https://www.ncbi.nlm.nih.gov/geo/) and search for the [GSE number](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE63525). In the section 'Samples' the GSM numbers of all samples are given. Select the correct one for you, and go to the [European Nucleotide Archive](https://www.ebi.ac.uk/ena) and enter the GSM number. Select a matching result e.g. [SRX764936](https://www.ebi.ac.uk/ena/data/view/SRX764936) and download the data given in the row 'FASTQ files (FTP)' the forward and reverse strand.
-> > It is important to have the forward and reverse strand individual as a FASTQ file and to map it individually, HiCExplorer can not work with interleaved files. 
-> {: .tip}
+> > It is important to have the forward and reverse strand individual as a FASTQ file and to map it individually, HiCExplorer can not work with interleaved files.
+> {: .comment}
 >
 {: .hands_on}
 
@@ -160,7 +160,7 @@ A 10kb bin matrix is too large to plot, it's better to reduce the resolution. We
 >
 {: .hands_on}
 
-The resulting plot of the 1 Mb contact matrix should look like: 
+The resulting plot of the 1 Mb contact matrix should look like:
 ![TAD plot](../../images/plotMatrix.png)
 
 # Correction of Hi-C matrix
@@ -172,7 +172,7 @@ The resulting plot of the 1 Mb contact matrix should look like:
 Matrix correction works in two steps: first a histogram containing the sum of contact per bin (row sum) is produced. This plot needs to be inspected to decide the best threshold for removing bins with lower number of reads. The second steps removes the low scoring bins and does the correction.
 
 > ### {% icon hands_on %} Hands-on: Matrix diagnostic
-> 
+>
 > 1. **hicCorrectMatrix** {% icon tool %}: Run hicCorrectMatrix on the output from hicBuildMatrix `10 kb contact matrix` adjusting the parameters:
 >    - "Range restriction (in bp)" to `Diagnostic plot`
 >    - "Chromosomes to include (and order to plot in)" to `chr2L`
@@ -247,7 +247,7 @@ TAD calling works in two steps: First HiCExplorer computes a TAD-separation scor
 >    - "Maximum window length (in bp) to be considered to the left and to the right of each Hi-C bin." to `100000`
 >    - "Step size when moving from minDepth to maxDepth" to `10000`
 >    - "Multiple Testing Corrections" to `False discovery rate`
->    - "q-value" to `0.05` 
+>    - "q-value" to `0.05`
 >    - "Minimum threshold of the difference between the TAD-separation score of a putative boundary and the mean of the TAD-sep. score of surrounding bins." to `0.001`
 >
 {: .hands_on}
@@ -265,7 +265,7 @@ As an output we get the boundaries, domains and scores separated files. We will 
 
 # Integrating Hi-C and other data
 
-We can plot the TADs for a given chromosomal region. For this we will use [hicPlotTADs](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html). 
+We can plot the TADs for a given chromosomal region. For this we will use [hicPlotTADs](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html).
 
 For the next step we need additional data tracks. Please load `dm3_genes.bed`, `H3K27me3.bw`, `H3K36me3.bw` and `H4K16ac.bw` to your history.
 
@@ -339,7 +339,7 @@ For the next step we need additional data tracks. Please load `dm3_genes.bed`, `
 >
 {: .hands_on}
 
-The resulting image should look like this one: 
+The resulting image should look like this one:
 ![TAD plot](../../images/plotTADs.png)
 # Conclusion
 {:.no_toc}

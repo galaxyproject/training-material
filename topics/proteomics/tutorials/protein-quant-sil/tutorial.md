@@ -30,7 +30,7 @@ There are two types of chemical tags:
   1. Isobaric tags display the same mass on first hand, but fragment during the generation of the MS/MS spectra to yield reporter ions of different mass. The intensity of those reporter ions can be compared in MS/MS spectra. There are two types of isobaric tags commercially available: *tandem mass tags* (TMT) and *isobaric tags for relative and absolute quantitation* (iTRAQ).
   2. Isotopic tags are chemically identical, but differ in their mass due to incorporated stable isotopes. Examples of different isotopic tags for stable isotope labelling (SIL) are ICAT, SILAC, dimethylation, or heavy oxygen (<sup>18</sup>O).
 
-This tutorial deals with protein quantitation via stable isotope labelling (SIL). For isotopic tags, quantitation can be achieved by comparing the intensity of MS1 peptide mass traces. The whole MS1 profile of a peptide, i.e. the intensities of all its isotopic peaks over time, is called a *peptide feature* (Figure 1a). 
+This tutorial deals with protein quantitation via stable isotope labelling (SIL). For isotopic tags, quantitation can be achieved by comparing the intensity of MS1 peptide mass traces. The whole MS1 profile of a peptide, i.e. the intensities of all its isotopic peaks over time, is called a *peptide feature* (Figure 1a).
 Incorporation of stable isotopes results in different peptide masses on MS1 level, which give rise to coeluting ion traces in the TIC with a mass difference typical for each different chemical tag (Figure 1b). Figure originally published in [Nilse et al, 2015](http://www.ncbi.nlm.nih.gov/pubmed/25931027).
 
 In this tutorial, we will use tools of the [OpenMS suite](http://www.openms.org) to identify and quantify peptides and proteins.
@@ -45,7 +45,7 @@ If you are in the planning phase of your quantitative proteomics experiment, you
 To learn about *protein identification* in Galaxy, please consider our OpenMS-based [peptide ID tutorial]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-oms/tutorial.html).
 
 > ### {% icon hands_on %} Hands-on: Introduction
-> In the hands-on section of this tutorial, we will use a quantitative comparison of HEK cell lysate as a test dataset. In this experiment, HEK cells were once labelled with light, once with heavy SILAC. Both cultures were lysed simultaneously and the cell lysates were mixed in a certain ratio. 
+> In the hands-on section of this tutorial, we will use a quantitative comparison of HEK cell lysate as a test dataset. In this experiment, HEK cells were once labelled with light, once with heavy SILAC. Both cultures were lysed simultaneously and the cell lysates were mixed in a certain ratio.
 > A detailed description of the full dataset is available in the [PRIDE archive]().
 >
 > Your objective in this hands-on-tutorial is to find out the correct mixing ratio of the test sample.
@@ -78,7 +78,7 @@ The OpenMS suite provides several tools (FeatureFinders) for MS1 feature detecti
 > 1. Import the test dataset from [zenodo](https://zenodo.org/record/1051552). The data have been preprocessed during the conversion from the machine raw file. We used background removal on MS1 and MS2 level, and MS2 deisotoping.
 > 2. Run ***FeatureFinderMultiplex*** {% icon tool %} with
 >   - the mzML file as **LC-MS dataset in centroid or profile mode**,
->   - **Labels used for labelling the samples** set to `[ ][Arg6,Lys6]`, 
+>   - **Labels used for labelling the samples** set to `[ ][Arg6,Lys6]`,
 >   - **m/z tolerance for search of peak patterns** set to `10`, and
 >   - **Maximum number of missed cleavages due to incomplete digestion** set to `1`.
 >
@@ -91,7 +91,7 @@ The OpenMS suite provides several tools (FeatureFinders) for MS1 feature detecti
 
 # Peptide and Protein Identification
 
-In this tutorial, peptide identification will be performed using the workflow of the previous [Peptide ID Tutorial]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-oms/tutorial.html). 
+In this tutorial, peptide identification will be performed using the workflow of the previous [Peptide ID Tutorial]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-oms/tutorial.html).
 
 A common problem in mass spectrometry are misassigned mono-isotopic precursor peaks. Although most search engines allow for some adaptation of the monoisotopic peak, we will instead perform a recalculation of the monoisotopic peaks based on the previously identified features prior to peptide identification.
 This step facilitates mapping peptide IDs to identified features [later on](#mapping-identifications-to-features). To do so, we will use the OpenMS tool ***HighResPrecursorMassCorrector*** {% icon tool %}.
@@ -119,7 +119,7 @@ This step facilitates mapping peptide IDs to identified features [later on](#map
 
 # Mapping Identifications to Features
 
-We now have feature quantifications for MS1 elution peaks, peptide identifications for the MS2 spectra and protein identifications. 
+We now have feature quantifications for MS1 elution peaks, peptide identifications for the MS2 spectra and protein identifications.
 The next step is to map the MS2-based peptide identifications to the quantified MS1 precursor peaks ("peptide features"). This will enable the quantification of identified peptides.
 For labelled data, it is necessary to map peptide identifications to *consensus* features (i.e. a pair of one light peptide feature with one matching heavy feature in the correct m/z distance).
 For `consensusXML`, IDMapper uses the consensus centroids, not the feature boundaries for mapping. Therefore, the RT tolerance has to be set higher than for mapping to `featureXML`. A good starting value is half the expected typical retention time.
@@ -132,7 +132,7 @@ Finally, we will combine the peptide quantifications to protein quantifications.
 >
 > 1. Run ***IDMapper*** {% icon tool %} with
 >   - the output of ***IDFilter*** as **Protein/peptide identifications file**,
->   - the `consensusXML` output of ***FeatureFinderMultiplex*** as **Feature map/consensus map file**, 
+>   - the `consensusXML` output of ***FeatureFinderMultiplex*** as **Feature map/consensus map file**,
 >   - **RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features** set to `20`,
 >   - **m/z tolerance (in ppm or Da) for matching of peptide identifications and (consensus) features** set to `10`, and
 >   - **Match using RT and m/z of sub-features instead of consensus RT and m/z** set to `Yes`.
@@ -142,13 +142,13 @@ Finally, we will combine the peptide quantifications to protein quantifications.
 > 4. Run ***ProteinQuantifier*** {% icon tool %} with
 >   - the output of ***IDConflictResolver*** as **Input file**,
 >   - the output of ***IDFilter*** as **Protein inference results [...]**,
->   - **Calculate protein abundance from this number of proteotypic peptides (most abundant first; '0' for all)** set to `0`, 
+>   - **Calculate protein abundance from this number of proteotypic peptides (most abundant first; '0' for all)** set to `0`,
 >   - **Averaging method used to compute protein abundances from peptide abundances** set to `sum`, and
 >   - **Add the log2 ratios of the abundance values to the output** set to `Yes`.
 >
 >   > ### {% icon comment %} Comment: ProteinQuantifier parameters
 >   > Peptide quantitation algorithms are more precise for high abundant peptides. Therefore, it is recommended to base protein quantitations on those peptides. In ProteinQuantifier, you may restrict the calculation of protein abundances to the most abundant peptides by using the option "Calculate protein abundance from this number of proteotypic peptides".
->   > However, we recommend to use the averaging method `sum` instead. By using this option, protein ratios are based on the sum of all peptide abundances. Thus, highly abundant peptides thus have more influence on protein abundance calculation than low abundant peptides. 
+>   > However, we recommend to use the averaging method `sum` instead. By using this option, protein ratios are based on the sum of all peptide abundances. Thus, highly abundant peptides thus have more influence on protein abundance calculation than low abundant peptides.
 >   > A simple sum-of-intensities algorithm provided the best estimates of true protein ratios in a comparison of several protein quantitation algorithms ([Carrillo et al., Bioinformatics, 2009](https://www.ncbi.nlm.nih.gov/pubmed/19892804)).
 >   {: .comment}
 {: .hands_on}
@@ -174,9 +174,9 @@ Comment lines in the beginning of a `tabular` file may sometimes cause errors, t
 >   - **Number of breaks (bars)** set to `20`.
 >   - Set the **Plot title** and **Label for x axis** to something meaningful.
 >
->   > ### {% icon tip %} Tip: Calculating descriptive statistics for peptides
+>   > ### {% icon comment %} Calculating descriptive statistics for peptides
 >   > The peptide table output of ***ProteinQuantifier*** does not give the log-transformed ratio for each peptide. Nonetheless, you may calculate basic statistics of the FC values by running ***Summary Statistics*** with **Column or expression** set to `log(c6/c5,2)`.
-> {: .tip}
+>   {: .comment}
 >
 >   > ### {% icon question %} Questions
 >   > 1. How many peptides and proteins were successfully quantified?
@@ -267,19 +267,19 @@ Three problems typically hamper correct peptide mapping:
     - *Possible solution*: Improve your search engine settings.
     ![noID](../../images/protein-quant-sil_problem_noID.png "Several features without peptide IDs. Several MS2 spectra were generated (fragment scan precursors marked with red circles), but did not lead to a peptide identification.")
 2. **A peptide was identified, but no feature is nearby.**
-    - *Possible cause*: 
+    - *Possible cause*:
         1. The elution peaks of the peptide may be distorted. This is typical for low intensity peptides. If a lot of peptides have distorted elution peaks this may be a sign of spray instability.
         2. The peptide is a contaminant.
-    - *Possible solution*: 
+    - *Possible solution*:
         1. Lower the FeatureFinderMultiplex parameters **Two peptides in a multiplet are expected to have the same isotopic pattern** and/or **The isotopic pattern of a peptide should resemble the averagine model at this m/z position** or broaden the **Range of isotopes per peptide in the sample** (in **Advanced Options**).
         2. No optimization of parameters is needed (see [example above](#examples))
     ![noID](../../images/protein-quant-sil_problem_noFeature.png "A peptide was identified in its unlabelled and in its labelled isoform, but no feature was detected. A) 2D View. No third isotopic peak was detected for the labelled peptide. B) 3D View.")
 3. **A peptide was identified and a feature was detected nearby, but the two are not mapped to each other.**
-    - *Possible cause*: 
+    - *Possible cause*:
         1. The MS2 event and the feature are too far apart to be mapped.
         2. The precursor of the MS2 was not correctly assigned to the mono-isotopic peak.
         3. The detected feature is too small in RT dimension and covers only a part of the peptide peaks.
-    - *Possible solution*: 
+    - *Possible solution*:
         1. Increase the IDMapper parameter **RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features**.
         2. Increase the HighResPrecursorMassCorrector parameter **Additional retention time tolerance added to feature boundaries**
         3. Feature size in RT dimension cannot be directly corrected, use solution 1 instead.
@@ -287,10 +287,10 @@ Three problems typically hamper correct peptide mapping:
 
 Two problems typically disturb correct peptide quantitation:
 1. **A peptide is mapped to the wrong feature.**
-    - *Possible cause*: Co-eluting peptides of a similar mass may be falsely mapped to a nearby feature, if the correct peptide did not lead to an identification or was identified only with a low score. In *high-resolution data*, this problem of is very limited. Co-eluting peptides can normally be distinguished by slightly different m/z values. In *low-resolution data*, wrong assignment may occur more often. 
+    - *Possible cause*: Co-eluting peptides of a similar mass may be falsely mapped to a nearby feature, if the correct peptide did not lead to an identification or was identified only with a low score. In *high-resolution data*, this problem of is very limited. Co-eluting peptides can normally be distinguished by slightly different m/z values. In *low-resolution data*, wrong assignment may occur more often.
     - *Possible solution*: If a high value is used for the precursor mass tolerance, try to keep the RT tolerance low to avoid false mapping.
 2. **Background noise (1) or co-eluting peptides (2) are incorporated in a feature.**
-    - *Possible solution*: 
+    - *Possible solution*:
         1. Use noise-filtering either during pre-processing or by increasing the FeatureFinderMultiplex parameter **Lower bound for the intensity of isotopic peaks**
         2. Reduce the FeatureFinderMultiplex parameter **m/z tolerance for search of peak patterns**.
 

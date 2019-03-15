@@ -47,11 +47,11 @@ We will use several files for this analysis:
  * **Filtered counts file** (genes in rows, counts for samples in columns, with lowly expressed genes removed)
  * **Gene sets file** for MSigDB Hallmark collection for mouse (rdata)
 
-> ### {% icon tip %} Tip: Files for this tutorial
+> ### {% icon comment %} Files for this tutorial
 >
 > If you completed the [RNA-seq counts to genes]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.md %}) tutorial you should already have most of these files in your history. You only need to import the mouse_hallmark_sets and limma-voom_filtered_counts files from the files in the Hands-on box below.
 >
-{: .tip}
+{: .comment}
 
 
 # Import data
@@ -59,34 +59,31 @@ We will use several files for this analysis:
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq genes to pathways`
+>
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
+>
 > 2. Import the files
 >
->     To import the files, there are two options:
->     - Option 1: From a shared data library if available (ask your instructor)
->     - Option 2: From [Zenodo](https://zenodo.org/record/2491305)
+>    To import the files, there are two options:
+>    - Option 1: From a shared data library if available (ask your instructor)
 >
->         > ### {% icon tip %} Tip: Importing data via links
->         >
->         > * Copy the link location
->         > * Open the Galaxy Upload Manager
->         > * Select **Paste/Fetch Data**
->         > * Paste one link into the text field
->         > * Give the dataset a Name (replace "New File")
->         > * Select **Paste/Fetch Data** and repeat for each link
->         > * Press **Start**
->         {: .tip}
+>    {% include snippets/import_from_data_library.md %}
 >
->         - You can paste the names and links below into the Upload tool:
+>    - Option 2: From [Zenodo](https://zenodo.org/record/2491305)
 >
->```
->Name                                      Link
->limma-voom_basalpregnant-basallactate     https://zenodo.org/record/2491305/files/limma-voom_basalpregnant-basallactate
->limma-voom_luminalpregnant-luminallactate https://zenodo.org/record/2491305/files/limma-voom_luminalpregnant-luminallactate
->seqdata                                   https://zenodo.org/record/2491305/files/seqdata
->mouse_hallmark_sets                       https://zenodo.org/record/2491305/files/mouse_hallmark_sets
->factordata                                https://zenodo.org/record/2491305/files/factordata
->limma-voom_filtered_counts                https://zenodo.org/record/2491305/files/limma-voom_filtered_counts
->```
+>    {% include snippets/import_via_link.md %}
+
+>    You can paste the names and links below into the Upload tool:
+>
+>    ```
+>    https://zenodo.org/record/2491305/files/limma-voom_basalpregnant-basallactate
+>    https://zenodo.org/record/2491305/files/limma-voom_luminalpregnant-luminallactate
+>    https://zenodo.org/record/2491305/files/seqdata
+>    https://zenodo.org/record/2491305/files/mouse_hallmark_sets
+>    https://zenodo.org/record/2491305/files/factordata
+>    https://zenodo.org/record/2491305/files/limma-voom_filtered_counts
+>    ```
 >
 > 3. Make a collection (list) out of the basal and luminal differentially expressed results files. Give it the name `DE tables`.
 >
@@ -129,7 +126,7 @@ To generate the two input files we will use:
 > 2. **Join two Datasets side by side on a specified field** {% icon tool %} with the following parameters:
 >    - {% icon param-collection %} *"Join"*: output of **Compute** {% icon tool %}
 >    - {% icon param-select %} *"using column"*: `Column: 1`
->    - {% icon param-file %} *"with"* the `seqdata` file 
+>    - {% icon param-file %} *"with"* the `seqdata` file
 >    - {% icon param-select %} *"and column"*: `Column: 1`
 > 3. **Cut columns from a table** {% icon tool %} with the following parameters:
 >    - {% icon param-text %} *"Cut columns"*: `c1,c9` (the gene ids and DE status)

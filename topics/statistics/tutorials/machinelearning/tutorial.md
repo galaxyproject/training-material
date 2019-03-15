@@ -65,12 +65,12 @@ The datasets required for this tutorial contain 9 features of breast cancer whic
 >
 > 1. Create a new history for this tutorial
 > 2. Import the following datasets and choose the type of data as `tabular`.
-> 
+>
 >    ```
 >    https://zenodo.org/record/1401230/files/breast-w_train.tsv
 >    https://zenodo.org/record/1401230/files/breast-w_test.tsv
 >    ```
-> 
+>
 >    {% include snippets/import_via_link.md %}
 >
 > 3. Rename datasets to `breast-w_train` and `breast-w_test`.
@@ -91,7 +91,7 @@ The datasets required for this tutorial contain 9 features of breast cancer whic
 In this step, we will use [SVM (support vector machine)](https://scikit-learn.org/stable/modules/svm.html#svm-classification) classifier for training on `breast-w_train` dataset. . The classifier learns a mapping between each row and its category. SVM is a memory efficient classifier which needs only those data points which lie on the decision boundaries among different classes to predict a class for a new sample. Rest of the data points can thrown away. We will use `LinearSVC` variant of SVM which is faster. Other variants `SVC` and `NuSVC` have high running time for large datasets. The last column of the training dataset contains a category/class for each row. The classifier learns a mapping between data row and its category which is called a trained model. The trained model is used to predict the categories of the unseen data.
 
 > ### {% icon hands_on %} Hands-on: Train a classifier
-> 
+>
 > **SVM Classifier (Support vector machine)** {% icon tool %} with the following parameters to train:
 >    - *"Select a Classification Task"*: `Train a model`
 >        - *"Classifier type"*: `Linear Support Vector Classification`
@@ -104,7 +104,7 @@ In this step, we will use [SVM (support vector machine)](https://scikit-learn.or
 >        - *"Does the dataset contain header"*: `Yes`
 >        - *"Choose how to select data by column"*: `Select columns by column header name(s)`
 >        - *"Select target column(s)"*: `target`
-> 
+>
 {: .hands_on}
 
 
@@ -112,29 +112,29 @@ In this step, we will use [SVM (support vector machine)](https://scikit-learn.or
 The previous step produced a trained model (`zip` file) which we will use to predict classes for the test data (`breast-w_test`).
 
 > ### {% icon hands_on %} Hands-on: Predict using a trained model
-> 
+>
 > **SVM Classifier (Support vector machine)** {% icon tool %} with the following parameters
-> 
+>
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >        - {% icon param-file %} *"Models"*: `Zipped `file (output of **SVM Classifier (Support vector machine)** {% icon tool %})
 >        - {% icon param-file %} *"Data (tabular)"*: `breast-w_test` file
 >        - *"Does the dataset contain header"*: `Yes`
 >        - *"Select the type of prediction"*: `Predict class labels`
-> 
+>
 {: .hands_on}
 
 
 # See predictions
-The last column of the predicted dataset shows the category of each row. A row either gets `0` (no breast cancer) or `1` (breast cancer) as its predicted category. 
+The last column of the predicted dataset shows the category of each row. A row either gets `0` (no breast cancer) or `1` (breast cancer) as its predicted category.
 
 > ### {% icon hands_on %} Hands-on: See the predicted column
 > 1. Click on `view data` link of the dataset created after executing the previous step.
 > 2. The last column of the `tabular` data shows the predicted category (`target`) for each row.
-> 
+>
 {: .hands_on}
 
 
-> ### {% icon tip %} Additional resources:
+> ### {% icon details %} Additional ML Resources
 >
 > Read more about **machine learning using scikit-learn** [here](http://scikit-learn.org/stable/).
-{:.tip}
+{:.details}

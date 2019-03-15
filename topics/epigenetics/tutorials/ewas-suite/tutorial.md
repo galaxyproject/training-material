@@ -115,10 +115,10 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 > 3. Run **minfi rset** {% icon tool %} to convert methylation data from the `MethylSet` to ratios
 > 4. Run **minfi maptogenome** {% icon tool %} to map ratio data to the genome
 >
-> > ### {% icon tip %} Tip: Preprocess and Normalize data
+> > ### {% icon comment %} Preprocess and Normalize data
 > > If your files require normalisation, you might prefer to use other of preprocessing tools provided in EWAS suite i.e. **minfi ppfun** {% icon tool %} or **minfi ppquantile**  {% icon tool %} look for recomendation at (ref).
 > >
-> {: .tip}
+> {: .comment}
 >
 {: .hands_on}
 
@@ -179,9 +179,9 @@ The main goal of the EWAS suite is to simplify the way differentially methylated
 
 ![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
 
-> ### {% icon tip %} Tip: Phenotype table
+> ### {% icon comment %} Phenotype table
 > Phenotype table can be in diffrent size with diffrent arguments only second column is required to contain phenotype covariate information for each sample.
-{: .tip}
+{: .comment}
 
 > ### {% icon question %} Questions
 > How are we define phenotype covariate?
@@ -219,9 +219,9 @@ In addition to downstream analysis users can annotate the differentially methyla
 >
 > 5. **clusterProfiler go** {% icon tool %} to run a GO Enrichment Analysis
 >
->   > ### {% icon tip %} Tip: Biological id translator
+>   > ### {% icon comment %} Biological id translator
 >   >  No matter what ID we need, this tool allows various conversions suitable for different databases and annotations.
->   {: .tip}
+>   {: .comment}
 {: .hands_on}
 
 ![Functional annotations](../../images/funcann.jpg "Results of GO enrichments analysis for DMPs")

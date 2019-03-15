@@ -382,11 +382,11 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 >
 > 3. **IGV** {% icon tool %}: Inspect the splice junctions using a **Sashimi plot**
 >
->    > ### {% icon tip %} Tip: Creation of a Sashimi plot
+>    > ### {% icon comment %} Creation of a Sashimi plot
 >    >
 >    > * Right click on the BAM file (in IGV)
 >    > * Select **Sashimi Plot** from the menu
->    {: .tip}
+>    {: .comment}
 >
 >    > ### {% icon question %} Question
 >    >

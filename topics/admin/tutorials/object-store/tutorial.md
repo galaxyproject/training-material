@@ -136,11 +136,11 @@ Rather than searching a hierarchy of object stores until the dataset is found, G
 
 Sites like UseGalaxy.eu use the distributed object store in order to balance dataset storage across 10 different storage pools.
 
-> ### {% icon tip %} Tip: More documentation
+> ### {% icon details %} More documentation
 >
 > More information can be found in the [sample file](https://github.com/galaxyproject/galaxy/blob/dev/config/object_store_conf.xml.sample).
 >
-{: .tip}
+{: .details}
 
 > ### {% icon warning %} Warning: switching object store types will cause issues
 > We have switched between two different object stores here, but this is not supported. If you need to do this, you will need to update datasets in Galaxy's database. Any datasets that were created as hierarchical will lack the `object_store_id`, and you will need to supply the correct one. Do not just blindly copy these instructions, please understand what they do before running them and talk to us on [Gitter](http://gitter.im/galaxyproject/Lobby) for more help

@@ -190,9 +190,9 @@ To proceed from here it is expected that:
 
 - You have [Ansible installed](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) on your local machine
 
-  > ### {% icon tip %} Tip: Running Ansible on your remote machine
+  > ### {% icon comment %} Comment: Running Ansible on your remote machine
   > It is possible to have Ansible installed on the remote machine and run it there as well. You will need to update your hosts file to point to localhost, and pass the `-c local` parameter. Be **certain** that the playbook that you're building is stored somewhere safe like your user home directory. We will remove data at one point during this tutorial and would not want you to lose your progress.
-  {: .tip}
+  {: .comment}
 
 - You have a [hosts file](../ansible/tutorial.html#hosts-file) with the VM or host specified where you will deploy galaxy. We will refer to this group of hosts as "galaxyservers." You can use a different name if you prefer or are working on an existing playbook, just be sure to update all references later on.
 
@@ -283,9 +283,9 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >
 > 3. Run the playbook (`ansible-playbook -i hosts playbook.yml`)
 >
->    > ### {% icon tip %} Tip: When running Ansible
+>    > ### {% icon comment %} Comment: When running Ansible
 >    > Always pay close attention to tasks reported as **changed** and ensure that the changes were expected!
->    {: .tip}
+>    {: .comment}
 >
 > 4. Inspect the changes that have been made on your Galaxy server. Places to look include:
 >     - `/etc/postgresql`
@@ -310,11 +310,11 @@ Additionally we'll go ahead and set up the production-ready [uWSGI Mules](https:
 
 Finally, best admin practices are to not run Galaxy as a user with `sudo` access, like your login user probably has. Additionally, it is best to install the Galaxy code and configs as a separate user, for security purposes. So we will instruct the `galaxyproject.galaxy` role to create a new user account specifically to run Galaxy under.
 
-> ### {% icon tip %} Tip: Mules are not the only option
+> ### {% icon details %} Mules are not the only option
 >
 > Galaxy can be run in a [couple of other configurations](https://docs.galaxyproject.org/en/master/admin/scaling.html#deployment-options) depending on your needs. Mules are generally a good solution for most production needs.
 >
-{: .tip}
+{: .details}
 
 The configuration is quite simple thanks to the many sensible defaults that are provided in the Ansible roles.
 
@@ -503,7 +503,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 {: .hands_on}
 
-> ### {% icon tip %} Tip: ansible.cfg
+> ### {% icon details %} Simplifying the command line with ansible.cfg
 > Typing `-i hosts` every time can be a bit repetitive, you can save having to type this flag by creating an `ansible.cfg` file (next to your playbook) with the following contents:
 >
 > ```ini
@@ -528,7 +528,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 > [galaxyservers]
 > localhost ansible_connection=local
 > ```
-{: .tip}
+{: .details}
 
 Galaxy is now configured with an admin user, a database, and a place to store data. Additionally we've immediately configured the mules for production Galaxy serving. So we're ready to set up supervisord which will manage the Galaxy processes!
 
@@ -852,9 +852,9 @@ With a large Galaxy instance, users will often request FTP access in order to up
 With this, users can see an "Upload via FTP" button in their upload interface, and they can upload their data using Filezilla or other preferred FTP client.
 
 
-> ### {% icon tip %} Tip: Active vs Passive
+> ### {% icon comment %} Active vs Passive
 > If connecting does not work, try forcing your client to use active FTP, university firewalls often have issues with passive FTP.
-{: .tip}
+{: .comment}
 
 ## Disaster Strikes!
 
@@ -893,13 +893,13 @@ Ansible can save you from some really bad scenarios, *if and only if*:
 
 Then you can potentially use it to recover.
 
-> ### {% icon tip %} Tip: We have experience
+> ### {% icon comment %} We have experience
 >
 > We can tell you this, we can repeat it over and over, but unless you really have a disaster happen to you, it is hard to appreciate how important it is that machines are completely controlled in terms of configuration and software deployment.
 >
 > We've experienced these incidents and we know how horribly stressful it can be if an important service like Galaxy goes down and you cannot immediately replace it with another instance. We hope you will immediately apply the lessons from this training material, it can potentially save you a lot of stress and worry.
 >
-{: .tip}
+{: .comment}
 
 ## (Optional) Securing your Instance
 
@@ -961,9 +961,9 @@ If you do not meet these requirements, you should read through them to see the c
 
 And now we should have valid SSL certificates! We just need to go back and update our various services to support this.
 
-> ### {% icon tip %} Tip: Issues on CentOS
+> ### {% icon comment %} Issues on CentOS
 > Check that setenforce is permissive, or allow nginx to connect back to localhost on a non-standard port.
-{: .tip}
+{: .comment}
 
 
 > ### {% icon hands_on %} Hands-on: Securing NGINX

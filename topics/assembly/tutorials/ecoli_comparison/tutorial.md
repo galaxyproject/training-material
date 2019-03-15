@@ -7,7 +7,7 @@ requirements:
   -
     type: "internal"
     topic_name: assembly
-    tutorials: 
+    tutorials:
       - unicycler-assembly
 tags:
   - prokaryote
@@ -524,7 +524,7 @@ The tool added a new column (Column 14) containing a merge between the target na
 
 This will produce a single dataset combining all alignment info. We can tell which alignments are between which genomes because we have set identifiers such as `CP020543.13`.
 
-> ### {% icon tip %} Tip: BED format
+> ### {% icon comment %} BED format
 > Our next goal is to convert this into a format that will be acceptable to the genome browser [created above](#producing-a-genome-browser-for-this-experiment). One of such formats is [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). In one of its simplest forms (there is one even simpler - 3 column BED) it has six columns:
 >
 > 1. Chromosome ID
@@ -533,7 +533,7 @@ This will produce a single dataset combining all alignment info. We can tell whi
 > 4. Name of the feature
 > 5. Score (must be between 0 and 1000)
 > 6. Strand (`+`, `-`, or `.` for no strand data).
-{: .tip}
+{: .comment}
 
 Let's look again at the data we generated in the last step:
 
@@ -616,10 +616,10 @@ Now we are ready to display these data in the browser (make sure the browser we'
 > 4. If you get `Could not locate genome:` error ignore it and click **OK**.
 {: .hands_on}
 
-> ### {% icon tip %} Tip: Naming IGV tracks
+> ### {% icon comment %} Naming IGV tracks
 > At the time of writing the datasets sent by Galaxy to IGV have uninformative names such as `galaxy_bbd44h445645h45454`. While this will soon be fixed we can deal with it by renaming the displayed track manually by right clicking on IGV sidebar and choosing the **Rename Track..** option.
 >
-{: .tip}
+{: .comment}
 
 The result will look like this:
 
@@ -707,7 +707,7 @@ Our objective is to convert these data into BED. In this analysis we want to ini
 > Note: This is because we want to retain all lines that begin (`^`) with `CDS`.
 {: .hands_on}
 
-This will produce a collection with three datasets just like the original `GENES` collection but containing only CDS data. Next we need to cut out only those columns that need to be included in the BED format. There is one problem with this. We are trying to convert these data into [6 column BED](#tip-tip-bed-format). In this format the fifth column (score) must have a value between 0 and 1000. To satisfy this requirement we will create a dummy column that will always have a value of `0`:
+This will produce a collection with three datasets just like the original `GENES` collection but containing only CDS data. Next we need to cut out only those columns that need to be included in the BED format. There is one problem with this. We are trying to convert these data into [6 column BED](#comment-bed-format). In this format the fifth column (score) must have a value between 0 and 1000. To satisfy this requirement we will create a dummy column that will always have a value of `0`:
 
 > ### {% icon hands_on %} Hands-on: Creating a dummy score column
 >
@@ -754,7 +754,7 @@ CP020543.1 1457 2557 DNA polymerase III subunit beta                0 +
 CP020543.1 2557 3630 DNA replication and repair protein RecF        0 +
 ```
 
-You can see that the genome ID is now appended at the beginning and this dataset looks like a legitimate BED that can be displayed in IGV. The one thing that remains is to tell Galaxy that it is BED as [we did before](#hands_on-hands-on-changing-dataset-type). After the format of the last dataset is set to BED it can be displayed in IGV by clicking the **display with IGV local** link (remember to give this new track a ["human" name](#tip-tip-naming-igv-tracks)):
+You can see that the genome ID is now appended at the beginning and this dataset looks like a legitimate BED that can be displayed in IGV. The one thing that remains is to tell Galaxy that it is BED as [we did before](#hands_on-hands-on-changing-dataset-type). After the format of the last dataset is set to BED it can be displayed in IGV by clicking the **display with IGV local** link (remember to give this new track a ["human" name](#comment-naming-igv-tracks)):
 
 ![Displaying genes in IGV](../../images/igv_genes.png "Gene track is added to the browser. Here we are zoomed in at the gap region in LT906474.")
 

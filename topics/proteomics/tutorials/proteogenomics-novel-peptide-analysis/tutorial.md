@@ -15,12 +15,12 @@ follow_up_training:
   -
     type: "internal"
     topic_name: proteomics
-    tutorials: 
+    tutorials:
       - proteogenomics-dbcreation
   -
     type: "internal"
     topic_name: proteomics
-    tutorials: 
+    tutorials:
       - proteogenomics-dbsearch
 
 contributors:
@@ -103,12 +103,12 @@ Once Blast-P search is performed, it provides a tabular output containing “**N
 >
 >    - *"Save the sqlite database in your history"*: `No`
 >
->       > ### {% icon tip %} Tip
+>       > ### {% icon comment %} Querying an SQLite Database
 >       >
 >       > **Query Tabular** can also use an existing SQLite database. Activating `Save the sqlite database in your history`
 >       > will store the created database in the history, allowing to reuse it directly.
 >       >
->       {: .tip}
+>       {: .comment}
 >
 >    - *"SQL Query to generate tabular output"*:
 >      ```
@@ -124,7 +124,7 @@ Once Blast-P search is performed, it provides a tabular output containing “**N
 >
 {: .hands_on}
 
-Once this step is completed, a tabular output containing novel proteoforms are displayed. These novel proteforms fulfill our criteria of not being present in the existing NCBI repository. The next step is to remove any duplicate sequences. For this, we use the Query tabular tool again to select distinct sequences from the tabular output. 
+Once this step is completed, a tabular output containing novel proteoforms are displayed. These novel proteforms fulfill our criteria of not being present in the existing NCBI repository. The next step is to remove any duplicate sequences. For this, we use the Query tabular tool again to select distinct sequences from the tabular output.
 
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >

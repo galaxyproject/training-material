@@ -44,7 +44,7 @@ creators of the mothur software package, the [Schloss lab](http://www.schlosslab
 
 In this tutorial we use 16S rRNA data, but similar pipelines can be used for WGS data.
 
-> ### {% icon tip %} Background: The 16S ribosomal RNA gene
+> ### {% icon comment %} Background: The 16S ribosomal RNA gene
 > ![The 16S ribosomal RNA gene](../../images/16S_gene.png) <br><br>
 >
 > The 16S rRNA gene has several properties that make it ideally suited for our purposes
@@ -59,7 +59,7 @@ In this tutorial we use 16S rRNA data, but similar pipelines can be used for WGS
 > while the highly variable regions allow us to distinguish between different species.
 >
 > (slide credit [https://www.slideshare.net/beiko/ccbc-tutorial-beiko](https://www.slideshare.net/beiko/ccbc-tutorial-beiko ))
-{: .tip}
+{: .comment}
 
 ## Understanding our input data
 
@@ -587,10 +587,10 @@ templates are combined to form a sort of hybrid sequence, also called a chimera.
 sequencing artefacts confounding our results.
 
 
-> ### {% icon tip %} Background: Chimeras
+> ### {% icon comment %} Background: Chimeras
 > ![Chemirec sequence](../../images/chimeras.jpg)
 > (slide credit: [http://slideplayer.com/slide/4559004/ ](http://slideplayer.com/slide/4559004/ ))
-{: .tip}
+{: .comment}
 
 We'll do this chimera removal using the `VSEARCH` algorithm [[Rognes 2016](https://dx.doi.org/10.7717)] that is called within mothur, using the
 **Chimera.vsearch** tool. This command will split the data by sample and check for chimeras. The recommended
@@ -682,12 +682,12 @@ our sequencing and bioinformatics pipeline is.
 ## Optional: Calculate error rates based on our mock community
 
 
-> ### {% icon tip %} Tip: Skipping the mock community analysis
+> ### {% icon comment %} Skipping the mock community analysis
 >
 > The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to [the next section](#removing-mock-sample)
 > where we will cluster our sequences into OTUs, classify them and perform some visualisations.
 >
-{: .tip}
+{: .comment}
 
 
 The following step is only possible if you have co-sequenced a mock community with your samples. A mock community is a sample
@@ -695,7 +695,7 @@ of which you know the exact composition and is something we recommend to do, bec
 accurate your sequencing and analysis protocol is.
 
 
-> ### {% icon tip %} Background: Mock communities
+> ### {% icon comment %} Background: Mock communities
 >
 > **What is a mock community?**
 >
@@ -730,7 +730,7 @@ accurate your sequencing and analysis protocol is.
 > - [Next generation sequencing data of a defined microbial mock community](https://dx.doi.org/10.1038%2Fsdata.2016.81)
 > - [16S rRNA gene sequencing of mock microbial populations- impact of DNA extraction method, primer choice and sequencing platform](https://dx.doi.org/10.1186%2Fs12866-016-0738-z)
 >
-{: .tip}
+{: .comment}
 
 The mock community in this experiment was composed of genomic DNA from 21 bacterial strains. So in a perfect world, this is
 exactly what we would expect the analysis to produce as a result.
@@ -790,7 +790,7 @@ are also of high quality, and we can continue with our analysis.
 We will now estimate the accuracy of our sequencing and analysis pipeline by clustering the Mock sequences into OTUs,
 and comparing the results with the expected outcome.
 
-> ### {% icon tip %} Background: What are Operational Taxonomic Units (OTUs)?
+> ### {% icon comment %} Background: What are Operational Taxonomic Units (OTUs)?
 >
 > In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
 > sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
@@ -801,7 +801,7 @@ and comparing the results with the expected outcome.
 > ![OTU graph](../../images/OTU_graph.png)
 >
 > (Image credit: Danzeisen et al. 2013, 10.7717/peerj.237)
-{: .tip}
+{: .comment}
 
 
 > ### {% icon hands_on %} Hands-on: Cluster mock sequences into OTUs
@@ -873,7 +873,7 @@ When we use the full set of 4060 sequences, we find 34 OTUs from the Mock commun
 3000 sequences, we find about 31 OTUs. In an ideal world, we would find exactly 21 OTUs. Despite our
 best efforts, some chimeras or other contaminations may have slipped through our filtering steps.
 
-> ### {% icon tip %} Background: Rarefaction
+> ### {% icon comment %} Background: Rarefaction
 >
 > To estimate the fraction of species sequenced, rarefaction curves are typically used. A rarefaction curve
 > plots the number of species as a function of the number of individuals sampled. The curve usually begins
@@ -887,7 +887,7 @@ best efforts, some chimeras or other contaminations may have slipped through our
 > species rich habitat, only a small fraction has been sampled.
 >
 > (*A Primer on Metagenomics*, Wooley et al. 2010, https://doi.org/10.1371/journal.pcbi.1000667)
-{: .tip}
+{: .comment}
 
 Now that we have assessed our error rates we are ready for some real analysis.
 
@@ -1037,7 +1037,7 @@ or between samples (beta diversity). However, diversity is not a physical quanti
 and many different metrics have been proposed to quantify diversity [Finotello et al. 2016](https://www.ncbi.nlm.nih.gov/pubmed/28025179).
 
 
-> ### {% icon tip %} Background: Species Diversity
+> ### {% icon comment %} Background: Species Diversity
 >
 > Species diversity consists of three components: species richness, taxonomic or phylogenetic diversity and species evenness.
 >
@@ -1076,7 +1076,7 @@ and many different metrics have been proposed to quantify diversity [Finotello e
 > Now, you do not need to know what all these different metrics are, but just remember that there is not a single
 > definition of diversity and as always, the metric you choose to use may influence your results.
 >
-{: .tip}
+{: .comment}
 
 ### Alpha diversity
 

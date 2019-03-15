@@ -22,41 +22,41 @@ contributors:
 
 In this tutorial we are going to demonstrate how to add a 3rd-party visualization to *Charts* and what the benefits are. The plugin we select for this purpose is the [*PV-Javascript Protein Viewer*](https://biasmv.github.io/pv/). It is an open source, protein structure viewer for `PDB`-files. There are many other popular protein structure viewers available for the visualization of `PDB`-files such as e.g. [NGL](https://arose.github.io/ngl/) (also available in *Charts*) and [JSMol](https://chemapps.stolaf.edu/jmol/jsmol/jsmol.htm).
 
-> ### {% icon tip %} Background: What is the PDB (Protein Data Bank) file format?
+> ### {% icon details %} Background: What is the PDB (Protein Data Bank) file format?
 >
 > The `PDB`-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial cyrstallographic snapshot of a protein. There are 100s of thousands of protein structures publicly available at the Protein Databank (https://www.rcsb.org). Proteins are usually labeled by a four-letter code.
 > Here is an example of a `PDB`-file for a hydrolase bond to its inhibitor (PDB: [1ACB](https://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)):
 >
 > ```bash
-> HEADER    HYDROLASE/HYDROLASE INHIBITOR           08-NOV-91   1ACB              
+> HEADER    HYDROLASE/HYDROLASE INHIBITOR           08-NOV-91   1ACB
 > TITLE     CRYSTAL AND MOLECULAR STRUCTURE OF THE BOVINE ALPHA-CHYMOTRYPSIN-EGLIN
-> TITLE    2 C COMPLEX AT 2.0 ANGSTROMS RESOLUTION   
+> TITLE    2 C COMPLEX AT 2.0 ANGSTROMS RESOLUTION
 > ...
-> KEYWDS    SERINE PROTEASE, HYDROLASE-HYDROLASE INHIBITOR COMPLEX                
+> KEYWDS    SERINE PROTEASE, HYDROLASE-HYDROLASE INHIBITOR COMPLEX
 > AUTHOR    R.Z.KRAMER,L.VITAGLIANO,J.BELLA,R.BERISIO,L.MAZZARELLA,
 > AUTHOR   2 B.BRODSKY,A.ZAGARI,H.M.BERMAN
 > ...
-> REMARK   1 REFERENCE 1                                                          
+> REMARK   1 REFERENCE 1
 > REMARK   1  AUTH   M.BOLOGNESI,L.PUGLIESE,G.GATTI,F.FRIGERIO,A.CODA,L.ANTOLINI,
-> REMARK   1  AUTH 2 H.P.SCHNEBLI,E.MENEGATTI,G.AMICONI,P.ASCENZI                 
-> REMARK   1  TITL   X-RAY CRYSTAL STRUCTURE OF THE BOVINE                        
-> REMARK   1  TITL 2 ALPHA-CHYMOTRYPSIN(SLASH)EGLIN C COMPLEX AT 2.6 ANGSTROMS    
+> REMARK   1  AUTH 2 H.P.SCHNEBLI,E.MENEGATTI,G.AMICONI,P.ASCENZI
+> REMARK   1  TITL   X-RAY CRYSTAL STRUCTURE OF THE BOVINE
+> REMARK   1  TITL 2 ALPHA-CHYMOTRYPSIN(SLASH)EGLIN C COMPLEX AT 2.6 ANGSTROMS
 > ...
-> SEQRES   1 E  245  CYS GLY VAL PRO ALA ILE GLN PRO VAL LEU SER GLY LEU          
-> SEQRES   2 E  245  SER ARG ILE VAL ASN GLY GLU GLU ALA VAL PRO GLY SER          
-> SEQRES   3 E  245  TRP PRO TRP GLN VAL SER LEU GLN ASP LYS THR GLY PHE          
+> SEQRES   1 E  245  CYS GLY VAL PRO ALA ILE GLN PRO VAL LEU SER GLY LEU
+> SEQRES   2 E  245  SER ARG ILE VAL ASN GLY GLU GLU ALA VAL PRO GLY SER
+> SEQRES   3 E  245  TRP PRO TRP GLN VAL SER LEU GLN ASP LYS THR GLY PHE
 > ...
-> ATOM      1  N   CYS E   1       2.323 -16.405  18.812  1.00 43.48           N  
-> ATOM      2  CA  CYS E   1       3.017 -15.136  18.786  1.00 35.11           C  
-> ATOM      3  C   CYS E   1       4.134 -15.068  19.799  1.00 32.90           C  
-> ATOM      4  O   CYS E   1       4.173 -15.810  20.772  1.00 41.38           O  
-> ATOM      5  CB  CYS E   1       2.052 -13.969  19.139  1.00 31.14           C  
-> ATOM      6  SG  CYS E   1       1.246 -14.085  20.788  1.00 34.72           S  
-> ATOM      7  N   GLY E   2       4.993 -14.081  19.607  1.00 21.94           N  
+> ATOM      1  N   CYS E   1       2.323 -16.405  18.812  1.00 43.48           N
+> ATOM      2  CA  CYS E   1       3.017 -15.136  18.786  1.00 35.11           C
+> ATOM      3  C   CYS E   1       4.134 -15.068  19.799  1.00 32.90           C
+> ATOM      4  O   CYS E   1       4.173 -15.810  20.772  1.00 41.38           O
+> ATOM      5  CB  CYS E   1       2.052 -13.969  19.139  1.00 31.14           C
+> ATOM      6  SG  CYS E   1       1.246 -14.085  20.788  1.00 34.72           S
+> ATOM      7  N   GLY E   2       4.993 -14.081  19.607  1.00 21.94           N
 > ...
-> HETATM 2292  O   HOH E 406      12.343   1.842  12.901  0.86 18.70           O  
-> HETATM 2293  O   HOH E 407      -4.767  17.237  10.630  1.00 59.78           O  
-> HETATM 2294  O   HOH E 408      11.489  -6.278  18.740  0.96 20.00           O  
+> HETATM 2292  O   HOH E 406      12.343   1.842  12.901  0.86 18.70           O
+> HETATM 2293  O   HOH E 407      -4.767  17.237  10.630  1.00 59.78           O
+> HETATM 2294  O   HOH E 408      11.489  -6.278  18.740  0.96 20.00           O
 > ...
 > ```
 >
@@ -64,7 +64,7 @@ In this tutorial we are going to demonstrate how to add a 3rd-party visualizatio
 >
 >   - [https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format) ](https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format))
 >   - [https://www.wwpdb.org/documentation/file-format ](http://www.wwpdb.org/documentation/file-format)
-{: .tip}
+{: .details}
 
 As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in this tutorial. Now that we have learned about the underlying file format, let us continue by visiting the viewers developer site at [https://biasmv.github.io/pv/ ](https://biasmv.github.io/pv/) to get familiar with the plugin.
 
