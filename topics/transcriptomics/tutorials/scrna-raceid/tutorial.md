@@ -375,7 +375,7 @@ The main issue with visualising this data is that as before, we have C cells tha
 
 ![Dim red]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_dimred.svg %} "Reducing a set of 4 observations from 3D to 2D space, whilst approximating the 3D relationships")
 
-Preserving these higher dimensional distances in lower dimensional space is a complex and ongoing challenge in computer science, but there are various methods that deal with this in a manner of interesting ways. **RaceID** makes use of tSNE and force-directed (Fruchterman-Reingold) graph layouts to space the clusters in a visually meaningful manner to show the seperation and relative proximity of clusters to one another.
+Preserving these higher dimensional distances in lower dimensional space is a complex and ongoing challenge in computer science, but there are various methods that deal with this in a manner of interesting ways such as PCA, tSNE, and diffusion maps.
 
 > ### {% icon details %} Details: PCA, tSNE, and Force-Directed Graphs
 > 
@@ -391,8 +391,11 @@ Preserving these higher dimensional distances in lower dimensional space is a co
 >
 {: .details}
 
+**RaceID** makes use of tSNE and force-directed (Fruchterman-Reingold) graph layouts to space the clusters in a visually meaningful manner to show the seperation and relative proximity of clusters to one another.
 
 ![Clusters]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_tsne_fr.png %} "Initial and Final clusters using tSNE and F-R projections")
+
+The figure above displays the initial (left top/bottom) and final (right top/bottom) clusters determined, but projected using tSNE and Fruchterman-Rheingold.
 
 > ### {% icon question %} Questions
 >
@@ -408,8 +411,30 @@ Preserving these higher dimensional distances in lower dimensional space is a co
 >
 {: .question}
 
+## Is this expected?
+
+One pervasive thought when analysing single-cell RNA data, is "*is this actually good clustering?*"
+
+To answer this question, we must understand the nature of the data which *does* contain clear cell type phenotypes, but that these cell phenotypes are driven by continuous cell-cycle and cell developmental processes. As a result it is quite normal to see clusters 'blending' into one another, since these suggest intermediate cell types that are transitioning from one cell type to another.
+
+> ### {% icon details %} Details: Continuous Phenotypes vs Discrete Clustering Methods
+>
+> ![Continuous Phenotypes]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_contpheno.svg %} "The continuous phenotypes along a red blood cell development trajectory")
+>
+>The gene expression profile for Reticulocytes is distinct from the gene expression profile for the mature Red Blood Cells that they will become, but the cells that are actually undergoing this short-lived transition from Reticulocyte to Red Blood Cell will not fit neatly into the two aforementioned gene expression profiles, instead having their own profile which lies somewhere in between.
+>
+>As a result it is often false to think of cell clustering as an exercise in classification, but better to be thought of as a desire to find the relatedness between expression profiles. A helpful visual example of this is to not think of assigning cells to different disocnnected 'peaks' of expression, but to place cells along an expression peak landscape that describes not only which expression profile they resemble the most, but along which gradient (or development trajectory) they adhere to, allowing transient cell types to be better assigned.
+>
+> ![Discrete vs Continuous]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_mountains.svg %} "(Above) Cells assigned to discrete profiles, compared to (Below) Cells placed along a continuous expression profile landscape.")
+>
+> The clustering of cells with single-cell RNA-seq data, is therefore not a classification problem, but a *manifold* detection one, where the manifold ultimately describes the topology of the data, and allows us to see relatedness between clusters.
+>
+{: .details}
+
 
 # Individual Cluster Inspection
+
+
 
 ## Differential Gene Analysis Between Two Clusters
 
