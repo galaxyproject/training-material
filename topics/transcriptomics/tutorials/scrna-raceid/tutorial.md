@@ -431,14 +431,26 @@ To answer this question, we must understand the nature of the data which *does* 
 >
 {: .details}
 
-
 # Individual Cluster Inspection
 
+To really understand the dynamics in the shifting profiles of gene expressions between different clusters, it is often useful to see the specifically which genes are differentially expressed, and which clusters and cells they align to or define the most.
 
+There are three ways to do this in RaceID:
+
+ 1. **MA Plot**
+    Perform a pairwise comparison between two clusters (or two sets of clusters) to see specifically which genes are differentially expressed between them.
+ 1. **Subset Cell Analysis**
+    If the cell headers have names that contain information prior to the clustering about the different cell phenotypes, then it might be interesting to see if the cells do cluster as expected.
+ 1. **Specific Expression Plots**
+    It may be of interest to look at how specific genes which may be markers for a cell type are expressed across different clusters, with the expectation that they are localised to a specific cluster depending on how specific the marker is.
 
 ## Differential Gene Analysis Between Two Clusters
 
-> ### {% icon hands_on %} Hands-on: Task description
+We will generate an [MA Plot](https://en.wikipedia.org/wiki/MA_plot) between the two clusters, which looks at the differences between two samples by comparing the *M* (log ratio) against the *A* (mean average) of the sets.
+
+Here we will compare how the cells in cluster 1 are differentially expressed compared to the cell of cluster 3.
+
+> ### {% icon hands_on %} Hands-on: MA plot
 >
 > 1. **Cluster Inspection using RaceID** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Clustering using RaceID** {% icon tool %})
@@ -456,37 +468,30 @@ To answer this question, we must understand the nature of the data which *does* 
 >                - *"List of clusters"*: `3`
 >        - *"Use Defaults?"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
-
 
 ![Cluster Inspection of Cells]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_clustinspect_cells.png %} "MA plot of cells in cluster 1 and cluster 3")
 
-
+The genes shown as grey dots are not labelled because they are of similar levels of gene expression variability in both clusters, but the genes as labelled red dots on the fringes do display significant changes between the clusters.
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> Is *Gstm3* (at position 1.5, -2.8 on the MA plot) more significantly differentially expressed than *Ptma* (at position 3.6, 1.2)?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > *Gstm3* has a lower overall total expression in both clusters than *Ptma* which has significantly more total expression, but *Gstm3* is primarily expressed in Cluster 1 cells and *Ptma* more in Cluster 3 cells, showing a clear difference in their expression profiles.
 > >
 > {: .solution}
 >
 {: .question}
 
+
 ## Differential Gene Expression Across All Clusters
+
+We will now look at some genes of interest to see how prevalent or unique they are across clusters. Usually known marker genes are used to identify clusters by their cell type and not just a number, but any gene of interest can be used if it is believed to characterise a cluster of cells.
+
+Here we will look at the combined expression of *Gstm3*, *St3gal4*, and *Gna11* which all had adjusted P-values of less than 1e-15 in cluster 1.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -499,41 +504,38 @@ To answer this question, we must understand the nature of the data which *does* 
 >        - *"Use Defaults?"*: `Yes`
 >    - *"Differential Gene Testing"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
 
 ![Expression Plot]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_goi.png %} "Expression plot of genes of interest across different cells.")
 
-We also have the heatmaps for those specific genes across all clusters as given previously.
 
-> ### {% icon question %} Questions
+
+> ### {% icon question %} Question
 >
-> 1. Question1?
-> 2. Question2?
+> Are these genes expressed where we expect?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > They appear to overlap Cluster 6 which is in close proximity to Cluster 1. There are two reasons why this might be the case:
+> > 1. Cluster 1 is a small cluster and noisy cluster surrounded by more stably defined neighbours.
+> > 2. The three genes are more differentially expressed in Cluster 1 than in Cluster 6 if we look at them as independent entities, but their combined effect tells us that together they describe Cluster 6 better.
 > >
 > {: .solution}
 >
 {: .question}
 
+
 # Trajectory and Lineage Analysis
+
+It was [mentioned previously](#details-details-continuous-phenotypes-vs-discrete-clustering-methods) that the clusters displayed are not discrete entities, but are related through some continuous topology as inferred by intermediate cell types.
+
+**StemID** is a tool (part of the **RaceID** package) that makes use of this topology to derive a heirarchy of these cell types by constructing a cell lineage tree, rooted at the cluster(s) believed to best describe multipotent progenitor stem cells, and terminating at the clusters which describe more mature cell types.
+
 
 ## Computing the Lineage Tree
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on
 >
 > 1. **Lineage computation using StemID** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input RDS"*: `outrdat` (output of **Clustering using RaceID** {% icon tool %})
@@ -544,64 +546,82 @@ We also have the heatmaps for those specific genes across all clusters as given 
 >    - In *"StemID2 Lineage Graph"*:
 >        - *"Use Defaults?"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
+![Lineage Computation Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_lineage.png %} "Lineage Tree and Branches of significance.")
 
-![Lineage Computation Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_lineage.png %} "Lineage Tree and Branches of signficance.")
+The first (top-left) plot shows a minimum spanning tree that summarizes the most likely connections between clusters. The second plot (top-right) elucidates this lineage heirarchy by projecting the cells along the links given by StemID, ordering the cells along each link in such a way to suggest a time series, or *pseudotime* analysis of each link. This is important, because by ordering the cells by lineage pseudotime we can trace the up or down regulation of a gene as discrete time points. The interval between each timepoint is of course hard to accurately determine, but the order of events is still important.
 
-![Link scores]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_linkscores.png %} "Link scores between branches.")
+The third (bottom-left) lends a degree of significance betwen clusters, where the colour indicates the level of significance between clusters, and the width indicates the link score computed by **StemID**. The thick red link between clusters 2-4, 3-5, and 3-1-6 have therefore a high level of significance attached to each of these.
 
-![Other link scores]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_other.png %} "Other link scores between branches.")
-
+This is clarified slightly better with the heatmap (bottom-right) that shows the link scores between each cluster-cluster pair. To see how the link score is actually calculated, the image below provides some context:
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
->
+> Based on the above plots, which cluster is likely to be the main progenitor of the others?
+> 
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > On first glance, it appears that cluster 2 would be the progenitor, giving rise to; mature type clusters 11, 4, and 9; cluster 3 which is the progenitor to 5 and 1; cluster 8, which gives rise to 12 that in turn generates 10. 
+> > `{2, {8 {12 {10}}, 11, 4, 9, 3 {5, 1 { 6 } } } }` (in JSON format)
+> > 
+> > This is actually not the case, and we will see why with the following images.
 > >
 > {: .solution}
 >
 {: .question}
 
+
+![Link scores]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_linkscores.png %} "Link scores between branches.")
+
+The top chart shows the number of links above a threshold that each cluster exhibits to another. The more links a cluster has, the more evidence that the cluster describes a progenitor cell type that gives rise to other more mature types. The middle chart describes the "Delta-Entropy" which measures the level of variability within a cluster, where clusters with more variability are less likely to be mature cell types due to the sheer "noise" that they exhibit that is to be expected of a cell type that could potentially give rise to other types. The bottom chart is simply the top chart multiplied by the middle chart, which adds both pieces of evidence together to yield the link score.
+
+> ### {% icon question %} Questions
+>
+> With this new information, which cluster is now most likely to be the sole progenitor?
+>
+> > ### {% icon solution %} Solution
+> >
+> > Cluster 3 has the most number of links, and the most entropy that one would expect a multipotent progenitor cell type to exhibit, and therefore must be the root of the lineage tree, *despite* having fewer links than Cluster 2.
+> > `{3 {5, 1 {6}, 2 {8 {12 {10}}, 11, 4}}}` (in JSON format)
+> >
+> {: .solution}
+>
+{: .question}
+
+<!--
+![Other link scores]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_other.png %} "Other link scores between branches.")
+-->
+
+In a similar vein to how clusters were explored individually in RaceID, we can also explore individual branches of the lineage tree to see how some genes are up or down regulated.
+
 ## Specific Trajectory Lineage Analysis (StemID)
 
-> ### {% icon hands_on %} Hands-on: Task description
+Here we will explore one branching point of interest; cluster 3 giving rise to clusters 1 and 5. Will we be able to find an up or down regulation of genes between these two branches?
+
+
+> ### {% icon hands_on %} Hands-on: Comparing trajectory paths 3 to 1, and 3 to 5
 >
 > 1. **Lineage Branch Analysis using StemID** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input RDS"*: `outrdat` (output of **Lineage computation using StemID** {% icon tool %})
 >    - In *"StemID Branch Link Examine"*:
 >        - *"Perform StemID?"*: `Yes`
+>            - *"Cluster Number"*: `1`
 >            - *"Trajectory Path i, j, k"*: `1,3,5`
 >            - *"Use Defaults?"*: `Yes`
 >    - In *"FateID Branch Link Examine"*:
 >        - *"Perform FateID?"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-![Heatmap Cells]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_cells.png %} "Heatmap of cells.")
+![Heatmap Cells]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_cells.png %} "Heatmap of Cluster 1 cell projections.")
+
+The vertical names along the heatmap are the cells from cluster 1 XXX(Page29)XXX being projected on to the two intercluster links (3 to 1, 3 to 5) with scores for each cluster being shown for that cell. 
+
+Here we can see that the last 7 cells in cluster 1 share more of an affinity towards the cluster 6 trajectory, as expected from a strong neighbouring link, but that the other cells in cluster 1 are more predisposed towards cluster 3 (and to a lesser extend cluster 5).
+
+The *Differential Genes* tabular file provides an ordered list of z-scores indicating the degree of up-regulation from the link 3 to 1 compared to 3 to 5, for cluster 1 cells.
+
 
  | Gene | Z-score |
  |------|---------------------------|
@@ -616,26 +636,17 @@ We also have the heatmaps for those specific genes across all clusters as given 
  | Ces2a | 1.03563183389053 |
  | Dgat1 | 0.996275665669355 |
 
-Genes DE along trajectory.
-Ordered z-score indicating the degree of up-regulation between link 1.3 and 3.5
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+Unsurprisingly, there is a higher score for the 3 to 1 trajectory for cluster 1 cells.
 
 ## Specific Trajectory Fate Analysis (FateID)
 
-> ### {% icon hands_on %} Hands-on: Task description
+One final trajectory analysis that can be performed uses **FateID**, which tries to quantify the cell fate bias a progenitor type might exhibit to indicate which lineage path it will pursue.
+
+Where **StemID** utilizes a bottom-up approach by starting from mature cell types and working up to the multi-potent progenitor, **FateID** uses top-down approach that starts from the progenitor and works its way down.
+
+Here we will see if we can see any pseudotime dynamics taking place between the branching point (3 to 1, and 3 to 5) that we explored previously.
+
+> ### {% icon hands_on %} Hands-on
 >
 > 1. **Lineage Branch Analysis using StemID** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input RDS"*: `outrdat` (output of **Lineage computation using StemID** {% icon tool %})
@@ -647,29 +658,21 @@ Ordered z-score indicating the degree of up-regulation between link 1.3 and 3.5
 >            - *"Use Defaults?"*: `Yes`
 >            - *"Perform Additional FateID Analysis with Self-Organised Map?"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
 ![Heatmap FateID]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_fateid.png %} "Heatmap FateID")
 
+The heatmaps generated depict the same data, but at different "heat" scales to better colourise the map. The genes here are not genes, but are gene expression modules, which can be interpreted as gene motifs that are present in both clusters 1 and 5, but at different levels of expression. 
+
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. To which trajectory are gene modules 1-17 up regulated?
+> 1. Do modules 18-40 exhibit a similar pattern?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
+> > 1. We can see a significant up-regulation in the expression of the 1-17 modules along the 3 to 1 trajectory, which does not exist in the 3 to 5 trajectory.
+> > 1. The 18-40 modules are down-regulation in the 3 to 1 trajectory, and constant expression along the 3 to 5 trajectory.
 > {: .solution}
 >
 {: .question}
@@ -678,5 +681,9 @@ Ordered z-score indicating the degree of up-regulation between link 1.3 and 3.5
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+In this tutorial we have learned to filter, normalise, and cluster cells from heterogenous single-cell RNA-seq data. We have explored the expression of marker genes and performed a differential gene expression analysis between two sets of clusters.
+
+We have also constructed a lineage tree from these clusters, and analysed different branching points of interest to infer a pseudotime ordering of cells as determined by the regulation of their genes
+
+
+<!-- Add a summary workflow pipeline image -->
