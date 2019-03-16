@@ -63,8 +63,7 @@ After running BLASTn, check the alignments to the top closest hits. If the top g
 > * If you have to RC: 1) do that, then re-run PhageTerm (or, do math) and then check the boundary number and re-open OR 2) re-open one base after the left end of the boundary and then RC (re-run PhageTerm to double check).
 >    > 1. Check the first 2-3 top BLASTn hits for orientation of all our alignments with it.
 >    > 2. If it is ambiguous, or a poorly annotated genome that may have been deposited incorrectly, in that case we will *not* have a convention to follow.
->    > 3. [Add in the produce here or somewhere].
-
+>    > 3. <!-- ADD IN PROCEDURE HERE OR SOMEWHERE IN PROTOCOL. -->
 **Phage type:**
 Check the top BLAST hits list. Record the accession #, identity, and coverage information of the top BLAST hit for easy reference. Keep a sharp eye out for phage names that will have papers published about them, the canonical phages. Having a genome like a known phage should inform both your re-opening and entire annotation process. If a well-known/studied phage is not among the BLAST hit list, it may help to check the closest type phage in the NCBI taxonomy or on ICTV. **Use this strategy with caution.**
 
@@ -73,3 +72,10 @@ If your genome's phage type can be determined, re-open your genome to make it sy
 ### PhageTerm Analysis
 
 [PhageTerm](https://www.nature.com/articles/s41598-017-07910-5) [PMID:28811656](https://www.ncbi.nlm.nih.gov/pubmed/?term=28811656) predicts termini and packaging mechanisms using the raw reads of a phage sequenced with technologies that rely on random fragmentation and its genomic reference sequence. While not fully verified, the tool provides a good guide for genome with well-described end types. Sometimes this prediction is informative when closing a genome (see assembly protocol); it can also be useful for deciding where to re-open a genomic sequence. After BLASTn, run PhageTerm in Galaxy as detailed below.
+
+<!-- COPY IN PROCEDURE FROM THE ASSEMBLY PROTOCOL -->
+
+## Re-Opening genomes in Galaxy After BLASTn and PhageTerm Analysis
+
+After integrating the information from BLASTn and the PhageTerm analysis, the following re-opening guidelines can be followed to re-open your genome with the [Galaxy re-opening tool](https://cpt.tamu.edu/galaxy/root?tool_id=edu.tamu.cpt.fasta.reopen).
+> * Run the [Re-open FASTA sequence]() tool
