@@ -5,33 +5,40 @@ zenodo_link: 'https://zenodo.org/record/1511582'
 tags:
   - single-cell
 questions:
-  - What are
+  - What is normalisation and why is it necessary?
+  - How many types of unwanted variation are there?
+  - How are biological phenotypes clustered?
   - What is the difference between PCA and tSNE?
+  - What is the difference between cell trajectory and cell fate?
 objectives:
-  - Clustering cells in a matrix
+  - Filtering, normalising, and clustering cells in a matrix
   - Assessing the quality of individual clusters
   - Inferring a lineage between cell types
   - Examining gene expression
   - Determining the top most expressive genes per cluster
   - Correcting for unwanted variation
-#requirements:
-#  -
-#    type: "internal"
-#    topic_name: transcriptomics
-#    tutorials:
-#        - scrna-introduction
-#        - scrna-plates-batches-barcodes
-#        - scrna-umis
-#        - scrna_preprocessing
+requirements:
+  -
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+##        - scrna-introduction
+        - scrna-plates-batches-barcodes
+        - scrna-umis
+        - scrna_preprocessing
 
 time_estimation: 2H
 key_points:
-  - The take-home messages
-  - They will appear at the end of the tutorial
+  - Clustering single-cell RNA-seq data is often noisy
+  - Understanding the heirarchal relationships between clusters provides an understanding of cell development 
 contributors:
   - mtekman
 
 ---
+
+<!-- TODO: Subset analysis to validate prior cell labelling -->
+<!-- DONE: update image with vertical red bar -->
+<!-- DONE: add feature that looks for number of features >=1, instead of >0, because RaceID adds 0.1 to 0 counts -->
 
 
 # Introduction
@@ -114,7 +121,7 @@ We can see this for ourselves by extracting the headers, and reformatting them t
 > 1. **Select first** {% icon tool %} with the following parameters:
 >    - *"Number of lines"*: `1`
 >
-> 1. **Transpose** {% icon tool %} with the following parameters:
+> 1. **Transpose** {% icon tool %}
 >
 > 1. **Text transformation** {% icon tool %} with the following parameters:
 >    - *"SED Program"*: `s/_[0-9]+//`
@@ -141,7 +148,7 @@ We can see this for ourselves by extracting the headers, and reformatting them t
 
 > ### {% icon question %} Questions
 >
-> 1. What did the transpose step do? Why is it neccesary?
+> 1. What did the transpose step do? Why is it necessary?
 > 2. How many rows remain after the **Text transformation** step?
 > 3. How many unique cell phenotypes were identified in the cell headers?
 > 4. Which cell phenotype is least represented in the count matrix?
@@ -162,9 +169,9 @@ With these types already labelled in the header of our data, we can validate the
 
 Low quality cells and genes are sometimes caught at the preprocessing stage and removed, but sometimes more filtering is required to remove unwanted noise from the data.
 
-A gene that has a low number of total counts across multiple cells might be differentially expressed across those cells (e.g. 1 count in CellA, and 10 counts in CellB, yielding a fold change of 10) but would not neccasarily be significant compared to a gene that has more total counts across cells (e.g. 100 counts in cellA, and 1000 counts in CellB, also yielding a fold change 10).
+A gene that has a low number of total counts across multiple cells might be differentially expressed across those cells (e.g. 1 count in CellA, and 10 counts in CellB, yielding a fold change of 10) but would not necessarily be significant compared to a gene that has more total counts across cells (e.g. 100 counts in cellA, and 1000 counts in CellB, also yielding a fold change 10).
 
-We can refine filtering thresholds by examining how much a histogram of our plots change before and after filtering using standard parameters
+We can refine filtering thresholds by examining how much a histogram of our plots change before and after filtering using standard parameters.
 
 > ### {% icon hands_on %} Hands-on: Unique Cell Types
 >
@@ -182,9 +189,6 @@ We can refine filtering thresholds by examining how much a histogram of our plot
 This tool generates four histograms with the top line giving the raw expression data fed into the tool, and the bottom line giving the filtered data. 
 
 ![Histograms of Raw and Filtered Data]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_filter_plots.png %} "Histograms of Raw and Filtered Data")
-
-<!-- Todo: update image with vertical red bar -->
-<!-- Todo: add feature that looks for number of features >=1, instead of >0, because RaceID adds 0.1 to 0 counts -->
 
 The top row shows the count distributions of the Library Size and Number of Features of the raw data:
 
@@ -221,27 +225,23 @@ The bottom row shows the count distributions of the Library Size and Number of F
 {: .question}
 
 
-The filtered distributions are what we expect a well filtered and normalised dataset to resemble: a count matrix with all observations having roughly the same number of transcripts, but distributed differently across different sets of common features. With this we can now perform initial clustering to see whether we can cluster any of our cells into distinct cell types.
+The filtered distributions are what we expect a nicely filtered and normalised dataset to look like, i.e. a count matrix with all observations having roughly the same number of transcripts, but distributed differently across different sets of common features. With this we can now perform initial clustering to see whether we can cluster any of our cells into distinct cell types.
 
 
+# Normalising and Clustering Cells
 
-# Clustering Cells
+Normalisation permits the comparison of different samples by refactoring out uninformative variability relating to the size of sample, and other sources of unwanted variability. Clustering is one of the most crucial stages in the analysis after normalisation, which groups or categorises cells based on their similarity.
 
-Clustering is one of the most crucial stages in the analysis after normalisation, that groups or categorises cells based on their similarity.
+The effectiveness of the clustering relies on the effectiveness of the normalisation, and the ideal method to normalise single cell RNA-seq data is still a hot topic in the field. There are two main reasons normalisation is not a straightforward process, and they relate to two potential sources of uncertainty: technological and biological variability.
 
-There are two approaches to the analysis:
-
-* *Naive Approach*, which assumes that the data contains only the biologically relevant information that we wish to cluster, and that rare cell subtypes have not been filtered out.
-
-* *Refined Approach*, which takes into account that there may be some technical noise and unwanted sources of technological or biological variability in the data that needs to be accounted for.
 
 ## Biological Variation
 
 ![Sources of variation]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_cellcycle.svg %} "Sources of unwanted biological variation: (Left) Transcriptional Bursting, and (Right) Cell-cycle Variation")
 
-Transcriptional bursting is a stochastic model for the transcription process in a cell, where transcription does not occur as a smooth or continuous process but occurs in spontaneous and discrete 'bursts' thought to be only loosely assosciated with chromatin conformation/availability. It is an effect that is not seen in bulk RNA-seq due to the smoothing effect of measuring average gene expression across a tissue. However, the effect is more pronounced in single-cell and it is hard to model against.
+Transcriptional bursting is a stochastic model for the transcription process in a cell, where transcription does not occur as a smooth or continuous process but occurs in spontaneous and discrete 'bursts' thought to be only loosely associated with chromatin conformation/availability. It is an effect that is not seen in bulk RNA-seq due to the smoothing effect of measuring average gene expression across a tissue. However, the effect is more pronounced in single-cell and it is hard to model against.
 
-On the other hand, cell-cycle variation is well defined and can be modelled against. As the cell grows from the G1 to the M phase, the amount of mRNA transcribed grows with it, meaning that cells in the later stages of their cycle are more likely to produce more transcripts of a given gene than a cell of the same type in the earlier stages of its cycle. Such differences can give false variation that would cluster two cells of the same type but at different time-points seperately. Fortunately, there are a well-defined set of genes whose expression is known to covary with the cell-cycle, and thus this effect can be modelled out.
+On the other hand, cell-cycle variation is well defined and can be modelled against. As the cell grows from the G1 to the M phase, the amount of mRNA transcribed grows with it, meaning that cells in the later stages of their cycle are more likely to produce more transcripts of a given gene than a cell of the same type in the earlier stages of its cycle. Such differences can give false variation that would cluster two cells of the same type but at different time-points separately. Fortunately, there are a well-defined set of genes whose expression is known to co-vary with the cell-cycle, and thus this effect can be modelled out.
 
 
 ## Technical Variation
@@ -281,12 +281,11 @@ The first three plots tell us about the stability/reliability of our clusters, a
 
 ![Stability Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_sat_jacc.png %} "Stability Plots")
 
-The first plot measures the levels of dispersion within each cluster and produces the mean over all clusters (as defined by the k parameter). As *k* increases, the reduction in this dispersion is measured for each increase of *k* until the change in the mean within-cluster dispersion no longer changes. Here we can see that reduction saturates at k=12, which is chosen to the be the number of clusters detected in our data for all further analysis. The second plot is the same as the first but with the actual dispersion plotted instead of the relative change of dispersion.
+The first plot measures the levels of dispersion within each cluster and produces the mean over all clusters (as defined by the k parameter). As *k* increases, the reduction in this dispersion is measured for each increase of *k* until the change in the mean within-cluster dispersion no longer changes. Here we can see that reduction saturates at *k=12*, which is chosen to the be the number of clusters detected in our data for all further analysis. The second plot is the same as the first but with the actual dispersion plotted instead of the relative change of dispersion.
 
-The third plot measures the direct stability of each of the derived (in this case, 12) clusters using the [Jaccard index](https://en.wikipedia.org/wiki/Jaccard_index), which is a fraction that measures how many elements in two sets overlap divided by the union of both sets. Here the (top N) genes expressed by the cells in each cluster are intersected with cells in all other clusters to measure how unique the expression profile is to that cluster. The scales given by the plot are actually measuring the dissimalirity between sets, which is one minus the index.
+The third plot measures the direct stability of each of the derived (in this case, 12) clusters using the [Jaccard index](https://en.wikipedia.org/wiki/Jaccard_index), which is a fractional quantity that measures how many elements in two sets overlap divided by the union of both sets. Here the (top N) genes expressed by the cells in each cluster are intersected with the cells in all other clusters to measure how unique the expression profile is to that cluster. The scales given by the plot are actually measuring the dissimilarity between sets, which is one minus the index, therefore the higher the better.
 
 Ideally the Jaccard should have above 0.6 in most clusters, but it is acceptable to have one or two more poorly defined clusters
-
 
 
 ## Outlier Detection
@@ -299,13 +298,13 @@ The next three plots attempts to do this by describing the variation of the gene
 ![Gene Expression Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_gexpr.png %} "Stability Plots")
 
 
-1. A background model is calibrated and outliers are identified based on the distribution of transcript counts within a cluster. The counts for each gene are assumed to follow a negative binomial distribution determined by a mean (average expression of a gene across all cells in a cluster), and a dispersion parameter. The dispersion is dervied from the average variance-mean dependence, modelled as a logarithmic second order polynomial under the assumption that *most* genes are not differentially expressed between clusters, and that true biological variability should exceed this assumption.
+1. A background model is calibrated and outliers are identified based on the distribution of transcript counts within a cluster. The counts for each gene are assumed to follow a negative binomial distribution determined by a mean (average expression of a gene across all cells in a cluster), and a dispersion parameter. The dispersion is derived from the average variance-mean dependence, modelled as a logarithmic second order polynomial under the assumption that *most* genes are not differentially expressed between clusters, and that true biological variability should exceed this assumption.
    As we can see from the Background plot, the (red) regression of the variance on the mean (as approximated by a second-order polynomial in logarithmic space) is higher than the variance or most genes (all grey dots below the red curve) as expected, since they are not differentially expressed. The genes above this regression are therefore significant for the detection of outlier cells. The orange line is the local regression (moving average variance per mean) and is used purely for illustrative purposes.
 
-1. Outlier cells are detected if the probability for that cell $$c$$, a minimum number of genes $$G_{min}$$ of observing total counts $$T_{G_{min}}$$ is less than a specific threshold $$P_{thr}$$. To summarize formally: $$P(\sum_{g\epsilon\ outlg}T_{(c,g)}) < probthr$$
-  This is shown in the chart below as the number of outliers as a function of the probablity threshold, which is set to $$1e-3$$ by default. Ideally, this threshold should be chosen to that the tail of the distribution is captured as outliers to ensure a maximum sensitivity of this method. If the sensitivity of the sequencing was low, then only a few highly expressed genes would be reliably quantified, so the outlier probability threshold would need to be higher (e.g. up to 1).
+1. Outlier cells are detected if the probability for that cell $$c$$, a minimum number of genes $$G_{min}$$ of observing total counts $$T_{G_{min}}$$ is less than a specific threshold $$P_{thr}$$.
+  This is shown in the chart below as the number of outliers as a function of the probability threshold, which is set to $$1e-3$$ by default. Ideally, this threshold should be chosen to that the tail of the distribution is captured as outliers to ensure a maximum sensitivity of this method. If the sensitivity of the sequencing was low, then only a few highly expressed genes would be reliably quantified, so the outlier probability threshold would need to be higher (e.g. up to 1).
 
-1. A barplot of the outlier probabilities of all cells across all clusters. All outlier cells are merged into their own clusters if their similarity exceeds a quantile threshold of the similarity distribution for all pairs of cells within one of the original clusters. After the outlier cells are merged, then new cluster centers are defined for the original clusters after removing the outliers. Then, each cell is assigned to the nearest cluster center using k-partitioning.
+1. A barplot of the outlier probabilities of all cells across all clusters. All outlier cells are merged into their own clusters if their similarity exceeds a quantile threshold of the similarity distribution for all pairs of cells within one of the original clusters. After the outlier cells are merged, then new cluster centres are defined for the original clusters after removing the outliers. Then, each cell is assigned to the nearest cluster centre using k-partitioning.
 
 The most differentially expressed genes (below a maximum p-value cutoff) in each of the clusters can be seen in the output file *Clustering using RaceID on data: Cluster - Genes per Cluster*, with 7 columns describing:
 
@@ -348,7 +347,7 @@ All the following plots are heatmaps for the individual genes expressed in each 
 
 ![Gene Heatmaps]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_geneheatmaps.png %} "Individual (final) heatmaps for clusters 1 to 4")
 
-The top 10 defining genes from each cluster (above only cl1-4 are shown) give us an idea of how unique these genes are to the cluster. For example, we can see that: *Gstm3*, *St3gal4*, and *Gna11* are only highly expressed in cl1 and cl6; *Eef1a1* is highly expressed everywhere and that cl4 appears to be a not so well-defined cluster.
+The top 10 defining genes from each cluster (above only `c1`-`c4` are shown) give us an idea of how unique these genes are to the cluster. For example, we can see that: *Gstm3*, *St3gal4*, and *Gna11* are only highly expressed in `c1` and `c6`; *Eef1a1* is highly expressed everywhere and that `c4` appears to be a not so well-defined cluster.
 
 
 ## Visualising All Clusters
@@ -380,18 +379,18 @@ Preserving these higher dimensional distances in lower dimensional space is a co
 > ### {% icon details %} Details: PCA, tSNE, and Force-Directed Graphs
 > 
 > * **PCA** (Principle Component Analysis)
->   * This linearly seperates the N-dimensional data into N distinct components (or 'axes') of variability, sorted in descending order of variability (i.e. the first component explains most of the variation in the data, the second component contributes the second most amount of variation in the data, etc). For more information on how these components are derived, see [*Eigendecomposition of a matrix*](https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix).
+>   * This linearly separates the N-dimensional data into N distinct components (or 'axes') of variability, sorted in descending order of variability (i.e. the first component explains most of the variation in the data, the second component contributes the second most amount of variation in the data, etc). For more information on how these components are derived, see [*Eigendecomposition of a matrix*](https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix).
 >   * PCA has the benefit of being deterministic, uncostly to implement, and usually good enough to find clear differences in the data if the data is not complex.
 >
-> * **tSNE** (T-distributed Stochastic Neighbor Embedding)
->   * PCA rests on the assumption that each of its N components are independent of one another, but this is often rarely the case and data usually exhibits more complexity than that of a linearly seperable dataset. In these situations, tSNE outshines PCA, by modelling a more complex relationship between datapoints, and often produces better looking plots with more clearly defined clusters. This is especially the case in single-cell RNA-seq data which tends to describe a continuous blend of cell phenotypes, instead of discrete rigidly-defined types.
+> * **tSNE** (T-distributed Stochastic Neighbour Embedding)
+>   * PCA rests on the assumption that each of its N components are independent of one another, but this is often rarely the case and data usually exhibits more complexity than that of a linearly separable dataset. In these situations, tSNE outshines PCA, by modelling a more complex relationship between datapoints, and often produces better looking plots with more clearly defined clusters. This is especially the case in single-cell RNA-seq data which tends to describe a continuous blend of cell phenotypes, instead of discrete rigidly-defined types.
 > 
 > * **Force-Directed** Graphs
->   * These graphs can be better thought of as particle simulations, instead of performing any dimensional reduction, since all that is required is a connected graph. Forces are added to the connections between the nodes on the graph based on the strength of the connection, and then the whole system simulates the interplay of these forces for a number of iterations or until the system comes to rest. In general, these tend to yield much more nicely seperated plots than tSNE, but it is not always the case and so it is always good practice to compare both force-directed and tSNE plots.
+>   * These graphs can be better thought of as particle simulations, instead of performing any dimensional reduction, since all that is required is a connected graph. Forces are added to the connections between the nodes on the graph based on the strength of the connection, and then the whole system simulates the interplay of these forces for a number of iterations or until the system comes to rest. In general, these tend to yield much more nicely separated plots than tSNE, but it is not always the case and so it is always good practice to compare both force-directed and tSNE plots.
 >
 {: .details}
 
-**RaceID** makes use of tSNE and force-directed (Fruchterman-Reingold) graph layouts to space the clusters in a visually meaningful manner to show the seperation and relative proximity of clusters to one another.
+**RaceID** makes use of tSNE and force-directed (Fruchterman-Reingold) graph layouts to space the clusters in a visually meaningful manner to show the separation and relative proximity of clusters to one another.
 
 ![Clusters]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_tsne_fr.png %} "Initial and Final clusters using tSNE and F-R projections")
 
@@ -404,8 +403,8 @@ The figure above displays the initial (left top/bottom) and final (right top/bot
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. For example, cluster 11 appears to be an isolated well-defined cluster of cells, distinct in both projections. Cluster 1 is at the edge of the main cluster body in both projections, but seems to be closer to the Cluster 13 in the tSNE than in the F-R layout. Clusters 2, 3, and 4 are large noisy clusters in both projections, but Clusters 2 and 4 appear to be closer to one another in the F-R layout.
-> > 2. Cluster 1 was defined much better a smaller set of genes, than clusters 2, 3, or 4 which listed less differentially expressed genes as their most significant.
+> > 1. For example, `c11` appears to be an isolated well-defined cluster of cells, distinct in both projections. At the edge of the main cluster body is `c1` in both projections, but seems to be closer to the `c13` in the tSNE than in the F-R layout. In both projections, `c2`, `c3`, and `c4` are large noisy clusters, but `c2` and `c4` appear to be closer to one another in the F-R layout.
+> > 2. `c1` was defined much better a smaller set of genes, than `c2`, `c3`, or `c4` which listed less differentially expressed genes as their most significant.
 > >
 > {: .solution}
 >
@@ -423,7 +422,7 @@ To answer this question, we must understand the nature of the data which *does* 
 >
 >The gene expression profile for Reticulocytes is distinct from the gene expression profile for the mature Red Blood Cells that they will become, but the cells that are actually undergoing this short-lived transition from Reticulocyte to Red Blood Cell will not fit neatly into the two aforementioned gene expression profiles, instead having their own profile which lies somewhere in between.
 >
->As a result it is often false to think of cell clustering as an exercise in classification, but better to be thought of as a desire to find the relatedness between expression profiles. A helpful visual example of this is to not think of assigning cells to different disocnnected 'peaks' of expression, but to place cells along an expression peak landscape that describes not only which expression profile they resemble the most, but along which gradient (or development trajectory) they adhere to, allowing transient cell types to be better assigned.
+>As a result it is often false to think of cell clustering as an exercise in classification, but better to be thought of as a desire to find the relatedness between expression profiles. A helpful visual example of this is to not think of assigning cells to different disconnected 'peaks' of expression, but to place cells along an expression peak landscape that describes not only which expression profile they resemble the most, but along which gradient (or development trajectory) they adhere to, allowing transient cell types to be better assigned.
 >
 > ![Discrete vs Continuous]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_mountains.svg %} "(Above) Cells assigned to discrete profiles, compared to (Below) Cells placed along a continuous expression profile landscape.")
 >
@@ -480,7 +479,7 @@ The genes shown as grey dots are not labelled because they are of similar levels
 >
 > > ### {% icon solution %} Solution
 > >
-> > *Gstm3* has a lower overall total expression in both clusters than *Ptma* which has significantly more total expression, but *Gstm3* is primarily expressed in Cluster 1 cells and *Ptma* more in Cluster 3 cells, showing a clear difference in their expression profiles.
+> > *Gstm3* has a lower overall total expression in both clusters than *Ptma* which has significantly more total expression, but *Gstm3* is primarily expressed in `c1` cells and *Ptma* more in `c3` cells, showing a clear difference in their expression profiles.
 > >
 > {: .solution}
 >
@@ -517,9 +516,9 @@ Here we will look at the combined expression of *Gstm3*, *St3gal4*, and *Gna11* 
 >
 > > ### {% icon solution %} Solution
 > >
-> > They appear to overlap Cluster 6 which is in close proximity to Cluster 1. There are two reasons why this might be the case:
-> > 1. Cluster 1 is a small cluster and noisy cluster surrounded by more stably defined neighbours.
-> > 2. The three genes are more differentially expressed in Cluster 1 than in Cluster 6 if we look at them as independent entities, but their combined effect tells us that together they describe Cluster 6 better.
+> > They appear to overlap `c6` which is in close proximity to `c1`. There are two reasons why this might be the case:
+> > 1. `c1` is a small cluster and noisy cluster surrounded by more stably defined neighbours.
+> > 2. The three genes are more differentially expressed in `c1` than in `c6` if we look at them as independent entities, but their combined effect tells us that together they describe `c6` better.
 > >
 > {: .solution}
 >
@@ -530,7 +529,7 @@ Here we will look at the combined expression of *Gstm3*, *St3gal4*, and *Gna11* 
 
 It was [mentioned previously](#details-details-continuous-phenotypes-vs-discrete-clustering-methods) that the clusters displayed are not discrete entities, but are related through some continuous topology as inferred by intermediate cell types.
 
-**StemID** is a tool (part of the **RaceID** package) that makes use of this topology to derive a heirarchy of these cell types by constructing a cell lineage tree, rooted at the cluster(s) believed to best describe multipotent progenitor stem cells, and terminating at the clusters which describe more mature cell types.
+**StemID** is a tool (part of the **RaceID** package) that makes use of this topology to derive a hierarchy of these cell types by constructing a cell lineage tree, rooted at the cluster(s) believed to best describe multipotent progenitor stem cells, and terminating at the clusters which describe more mature cell types.
 
 
 ## Computing the Lineage Tree
@@ -550,9 +549,9 @@ It was [mentioned previously](#details-details-continuous-phenotypes-vs-discrete
 
 ![Lineage Computation Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_lineage.png %} "Lineage Tree and Branches of significance.")
 
-The first (top-left) plot shows a minimum spanning tree that summarizes the most likely connections between clusters. The second plot (top-right) elucidates this lineage heirarchy by projecting the cells along the links given by StemID, ordering the cells along each link in such a way to suggest a time series, or *pseudotime* analysis of each link. This is important, because by ordering the cells by lineage pseudotime we can trace the up or down regulation of a gene as discrete time points. The interval between each timepoint is of course hard to accurately determine, but the order of events is still important.
+The first (top-left) plot shows a minimum spanning tree that summarises the most likely connections between clusters. The second plot (top-right) elucidates this lineage hierarchy by projecting the cells along the links given by StemID, ordering the cells along each link in such a way to suggest a time series, or *pseudotime* analysis of each link. This is important, because by ordering the cells by lineage pseudotime we can trace the up or down regulation of a gene as discrete time points. The interval between each timepoint is of course hard to accurately determine, but the order of events is still important.
 
-The third (bottom-left) lends a degree of significance betwen clusters, where the colour indicates the level of significance between clusters, and the width indicates the link score computed by **StemID**. The thick red link between clusters 2-4, 3-5, and 3-1-6 have therefore a high level of significance attached to each of these.
+The third (bottom-left) lends a degree of significance between clusters, where the colour indicates the level of significance between clusters, and the width indicates the link score computed by **StemID**. The thick red link between clusters 2-4, 3-5, and 3-1-6 have therefore a high level of significance attached to each of these.
 
 This is clarified slightly better with the heatmap (bottom-right) that shows the link scores between each cluster-cluster pair. To see how the link score is actually calculated, the image below provides some context:
 
@@ -562,7 +561,7 @@ This is clarified slightly better with the heatmap (bottom-right) that shows the
 > 
 > > ### {% icon solution %} Solution
 > >
-> > On first glance, it appears that cluster 2 would be the progenitor, giving rise to; mature type clusters 11, 4, and 9; cluster 3 which is the progenitor to 5 and 1; cluster 8, which gives rise to 12 that in turn generates 10. 
+> > On first glance, it appears that `c2` would be the progenitor, giving rise to; mature type `c11`, `c4`, and `c9`; `c3` which is the progenitor to `c5` and `c1`; `c8`, which gives rise to `c12` that in turn generates `c10`.
 > > `{2, {8 {12 {10}}, 11, 4, 9, 3 {5, 1 { 6 } } } }` (in JSON format)
 > > 
 > > This is actually not the case, and we will see why with the following images.
@@ -582,7 +581,7 @@ The top chart shows the number of links above a threshold that each cluster exhi
 >
 > > ### {% icon solution %} Solution
 > >
-> > Cluster 3 has the most number of links, and the most entropy that one would expect a multipotent progenitor cell type to exhibit, and therefore must be the root of the lineage tree, *despite* having fewer links than Cluster 2.
+> > `c3` has the most number of links, and the most entropy that one would expect a multipotent progenitor cell type to exhibit, and therefore must be the root of the lineage tree, *despite* having fewer links than `c2`.
 > > `{3 {5, 1 {6}, 2 {8 {12 {10}}, 11, 4}}}` (in JSON format)
 > >
 > {: .solution}
@@ -597,7 +596,7 @@ In a similar vein to how clusters were explored individually in RaceID, we can a
 
 ## Specific Trajectory Lineage Analysis (StemID)
 
-Here we will explore one branching point of interest; cluster 3 giving rise to clusters 1 and 5. Will we be able to find an up or down regulation of genes between these two branches?
+Here we will explore one branching point of interest; `c3` giving rise to `c1` and `c5`. Will we be able to find an up or down regulation of genes between these two branches?
 
 
 > ### {% icon hands_on %} Hands-on: Comparing trajectory paths 3 to 1, and 3 to 5
@@ -616,11 +615,11 @@ Here we will explore one branching point of interest; cluster 3 giving rise to c
 
 ![Heatmap Cells]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_cells.png %} "Heatmap of Cluster 1 cell projections.")
 
-The vertical names along the heatmap are the cells from cluster 1 XXX(Page29)XXX being projected on to the two intercluster links (3 to 1, 3 to 5) with scores for each cluster being shown for that cell. 
+The vertical names along the heatmap are the cells from `c1` being projected on to the two intercluster links (3 to 1, 3 to 5) with scores for each cluster being shown for that cell. 
 
-Here we can see that the last 7 cells in cluster 1 share more of an affinity towards the cluster 6 trajectory, as expected from a strong neighbouring link, but that the other cells in cluster 1 are more predisposed towards cluster 3 (and to a lesser extend cluster 5).
+Here we can see that the last 7 cells in `c1` share more of an affinity towards the `c6` trajectory, as expected from a strong neighbouring link, but that the other cells in `c1` are more predisposed towards `c3` (and to a lesser extent `c5`).
 
-The *Differential Genes* tabular file provides an ordered list of z-scores indicating the degree of up-regulation from the link 3 to 1 compared to 3 to 5, for cluster 1 cells.
+The *Differential Genes* tabular file provides an ordered list of z-scores indicating the degree of up-regulation from the link 3 to 1 compared to 3 to 5, for `c1` cells.
 
 
  | Gene | Z-score |
@@ -636,13 +635,13 @@ The *Differential Genes* tabular file provides an ordered list of z-scores indic
  | Ces2a | 1.03563183389053 |
  | Dgat1 | 0.996275665669355 |
 
-Unsurprisingly, there is a higher score for the 3 to 1 trajectory for cluster 1 cells.
+Unsurprisingly, there is a higher score for the 3 to 1 trajectory for `c1` cells.
 
 ## Specific Trajectory Fate Analysis (FateID)
 
 One final trajectory analysis that can be performed uses **FateID**, which tries to quantify the cell fate bias a progenitor type might exhibit to indicate which lineage path it will pursue.
 
-Where **StemID** utilizes a bottom-up approach by starting from mature cell types and working up to the multi-potent progenitor, **FateID** uses top-down approach that starts from the progenitor and works its way down.
+Where **StemID** utilises a bottom-up approach by starting from mature cell types and working up to the multi-potent progenitor, **FateID** uses top-down approach that starts from the progenitor and works its way down.
 
 Here we will see if we can see any pseudotime dynamics taking place between the branching point (3 to 1, and 3 to 5) that we explored previously.
 
@@ -662,7 +661,7 @@ Here we will see if we can see any pseudotime dynamics taking place between the 
 
 ![Heatmap FateID]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_fateid.png %} "Heatmap FateID")
 
-The heatmaps generated depict the same data, but at different "heat" scales to better colourise the map. The genes here are not genes, but are gene expression modules, which can be interpreted as gene motifs that are present in both clusters 1 and 5, but at different levels of expression. 
+The heatmaps generated depict the same data, but at different "heat" scales to better colourise the map. The genes here are not genes, but are gene expression modules, which can be interpreted as gene motifs that are present in both `c1` and `c5`, but at different levels of expression. 
 
 > ### {% icon question %} Questions
 >
@@ -681,9 +680,11 @@ The heatmaps generated depict the same data, but at different "heat" scales to b
 # Conclusion
 {:.no_toc}
 
-In this tutorial we have learned to filter, normalise, and cluster cells from heterogenous single-cell RNA-seq data. We have explored the expression of marker genes and performed a differential gene expression analysis between two sets of clusters.
+In this tutorial we have learned to filter, normalise, and cluster cells from heterogeneous single-cell RNA-seq data. We have explored the expression of marker genes and performed a differential gene expression analysis between two sets of clusters. We have also constructed a lineage tree from these clusters, and analysed different branching points of interest to infer a pseudotime ordering of cells as determined by the regulation of their genes.
 
-We have also constructed a lineage tree from these clusters, and analysed different branching points of interest to infer a pseudotime ordering of cells as determined by the regulation of their genes
+The steps of this workflow can be found in the related workflow.
 
+![Worfklow]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_workflow.png %} "RaceID Workflow")
 
-<!-- Add a summary workflow pipeline image -->
+All steps of the workflow have produced an R Data object (RDS) that serves as an input into the next step, but these objects can also be loaded into an R environment and analysed using any desired library.
+
