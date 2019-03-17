@@ -110,7 +110,7 @@ Let’s take a look at the data. The `seqdata` file contains information about g
 
 The `sampleinfo` file contains basic information about the samples that we will need for the analysis. See below.
 
-![sampleinfo file](../../images/rna-seq-counts-to-genes/sampleinfo.png "Sample information file (before formatting)"){: width="50%"}
+![sampleinfo file](../../images/rna-seq-counts-to-genes/sampleinfo.png "Sample information file (before formatting)"){:width="20%"}
 
 ## Format the data
 

@@ -241,9 +241,7 @@ An enrichment plot of the each of the top pathways can also be produced, one is 
 
 ## Ensemble gene set enrichment analyses with **EGSEA**
 
-The ensemble of genes set enrichment analyses (EGSEA) [(Alhamdoosh et al, 2017)](https://www.ncbi.nlm.nih.gov/pubmed/27694195) is a method developed for RNA-seq data that combines results from multiple algorithms and calculates collective gene set scores, to try to improve the biological relevance of the highest ranked gene sets. EGSEA has built-in gene sets from MSigDB and KEGG for human and mouse. We'll show here how it can be used with the MSigDB Hallmark collection and KEGG pathways. For input we need a count matrix and EGSEA will perform a limma-voom analysis before gene set testing. We can use the provided filtered counts file output from limma, where the low count genes have been filtered out (output from limma by selecting *"Output Filtered Counts Table?"*: `Yes`). We just need to remove the gene symbol and description columns. We also need a symbols mapping file containing just the Entrez ids and symbols, which we can generate from the filtered counts file. The third input we need is a factors information file, containing what groups the samples belong to, we can use the same one from the tutorial [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html).
-
-> ### {% icon hands_on %} Hands-on: Perform ensemble gene set testing with EGSEA
+The ensemble of genes set enrichment analyses (EGSEA) [(Alhamdoosh et al, 2017)](https://www.ncbi.nlm.nih.gov/pubmed/27694195) is a method developed for RNA-seq data that combines results from multiple algorithms and calculates collective gene set scores, to try to improve the biological relevance of the highest ranked gene sets. EGSEA has built-in gene sets from MSigDB and KEGG for human and mouse. We'll show here how it can be used with the MSigDB Hallmark collection and KEGG pathways. For input we need a count matrix and EGSEA will perform a limma-voom analysis before gene set testing. We can use the provided filtered counts file output from limma, where the low count genes have been filtered out (output from limma by selecting *"Output Filtered Counts Table?"*: `Yes`). We just need to remove the gene symbol and description columns. We also need a symbols mapping file containing just the Entrez ids and symbols, which we can generate from the filtered counts file. The third input we need is a factors information file, containing what groups the samples belong to, we can use the same one from the tutorial [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html). EGSEA provides twelve base methods and we will select eleven, all except roast, as the fry method is a fast approximation of roast.
 >
 > 1. **Cut columns from a table (cut)** {% icon tool %} with the following parameters:
 >      - {% icon param-file %} *"File to cut"*: `limma-voom filtered counts`
@@ -269,7 +267,7 @@ The ensemble of genes set enrichment analyses (EGSEA) [(Alhamdoosh et al, 2017)]
 >      - {% icon param-check %} *"I certify that I am not using this tool for commercial purposes"*: `Yes`
 {: .hands_on}
 
-This generates a table of results, and a rerpot. Contained within the report are plots, such as heatmaps of the top ranked pathways, as shown below. Note that we see some similar pathways in the results here as with the fgsea analysis.
+This generates a table of results, and a report. Contained within the report are plots, such as heatmaps of the top ranked pathways, as shown below. Note that we see some similar pathways in the results here as with the fgsea analysis.
 
 ![EGSEA heatmaps](../../images/rna-seq-genes-to-pathways/EGSEA_heatmaps.png "EGSEA heatmaps"){: width="50%"}
 
