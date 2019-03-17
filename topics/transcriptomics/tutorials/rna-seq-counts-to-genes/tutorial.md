@@ -10,10 +10,10 @@ tags:
 questions:
   - "What are the differentially expressed genes in the mammary gland of pregnant versus lactating mice?"
   - "How to analyze RNA count data using limma-voom?"
-  - "How to perform quality control of RNA-seq count data?"
+  - "How to perform quality control (QC) of RNA-seq count data?"
 objectives:
   - "Analysis of RNA-seq count data using limma-voom"
-  - "Quality control of count data"
+  - "QC of count data"
   - "Visualisation and interactive exploration of count data"
   - "Identification of differentially expressed genes"
 time_estimation: "3h"
@@ -206,7 +206,7 @@ Since we are interested in differences between groups, we need to specify which 
 > 2. Inspect the `Report` produced by clicking on the {% icon galaxy-eye %} (eye) icon
 {: .hands_on}
 
-# Quality Control of count data
+# QC of count data
 
 Before we check out the differentially expressed genes, we can look at the `Report` information to check that the data is good quality and that the samples are as we would expect.
 
@@ -434,7 +434,7 @@ We can see that much fewer genes are now highlighted in the MD plot and identifi
 
 # Visualising results
 
-Before following up on the DE genes with further lab work, it is recommended to have a look at the expression levels of the individual samples for the genes of interest. The Galaxy limma tool can auto-generate heatmaps of the top genes to show the expression levels across the *samples*. This enables a quick view of the expression of the top differentially expressed genes. This can help show if expression is consistent between replicates in the groups.
+In addition to the plots already discussed, it is recommended to have a look at the expression levels of the individual samples for the genes of interest, before following up on the DE genes with further lab work. The Galaxy limma tool can auto-generate heatmaps of the top genes to show the expression levels across the *samples*. This enables a quick view of the expression of the top differentially expressed genes and can help show if expression is consistent amongst replicates in the groups.
 
 ## Heatmap of top genes
 
@@ -444,7 +444,7 @@ Click on the `Heatmap_basalpregnant-basallactate.pdf` link in the `Report`. You 
 
 ## Stripcharts of top genes
 
-The limma-voom tool can also auto-generate stripcharts to view the expression of the top genes across the *groups*. Click on the `Stripcharts_basalpregnant-basallactate.pdf` link in the `Report`. You should see 10 plots, one for each top gene. Four are shown below. Note that here you can see if replicates tend to group together and how the expression compares to the other groups.
+The limma-voom tool can also auto-generate stripcharts to view the expression of the top genes across the groups. Click on the `Stripcharts_basalpregnant-basallactate.pdf` link in the `Report`. You should see 10 plots, one for each top gene. Four are shown below. Note that here you can see if replicates tend to group together and how the expression compares to the other groups.
 
 ![Stripchart Plot](../../images/rna-seq-counts-to-genes/stripcharts.png "Stripcharts of top genes"){: width="950px"}
 
