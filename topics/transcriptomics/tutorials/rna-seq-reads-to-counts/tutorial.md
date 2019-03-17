@@ -629,8 +629,8 @@ The counts files are currently in the format of one file per sample. However, it
 > **Column Join on Collection** {% icon tool %} with the following parameters:
 >    - {% icon param-collection %} *"Tabular files"*: `featureCounts output` (output of **featureCounts** {% icon tool %})
 >    - {% icon param-text %} *"Identifier column"*: `1`
->    - {% icon param-text %} *"Number of Header lines in each item"*: `1`
->    - {% icon param-check %} *"Keep original column header"*: `No`
+>    - {% icon param-text %} *"Number of header lines in each input file"*: `1`
+>    - {% icon param-check %} *"Add column name to header"*: `No`
 >
 {: .hands_on}
 
