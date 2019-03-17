@@ -30,7 +30,9 @@ requirements:
 time_estimation: 2H
 key_points:
   - Clustering single-cell RNA-seq data is often noisy
-  - Understanding the heirarchal relationships between clusters provides an understanding of cell development 
+  - RaceID can be used to cluster cells based on the their gene expression profiles
+  - StemID describes a heirarchal relationship between clusters to find multipotent progenitor stem cells to provide an understanding of cell development
+  - FateID predicts the potential lineages that cells within specific clusters are inclined towards
 contributors:
   - mtekman
 
@@ -186,7 +188,7 @@ We can refine filtering thresholds by examining how much a histogram of our plot
 
 This tool generates four histograms with the top line giving the raw expression data fed into the tool, and the bottom line giving the filtered data. 
 
-![Histograms of raw and filtered data]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_filter_plots.png %} "Histograms of raw and filtered data")
+![Histograms of raw and filtered data]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_filter_plots.png %} "RaceID Histograms of raw and filtered data")
 
 The top row shows the count distributions of the Library Size and Number of Features of the raw data:
 
@@ -244,7 +246,7 @@ The filtered distributions are what we expect a nicely filtered and normalised d
 
 Normalisation permits the comparison of different samples by refactoring out uninformative variability relating to the size of sample, and other sources of unwanted variability. Clustering is one of the most crucial stages in the analysis after normalisation, which groups or categorises cells based on their similarity.
 
-The effectiveness of the clustering relies on the effectiveness of the normalisation, and the ideal method to normalise single cell RNA-seq data is still a hot topic in the field. There are two main reasons normalisation is not a straightforward process, and they relate to two potential sources of uncertainty: technological and biological variability.
+The effectiveness of the clustering relies on the effectiveness of the normalisation, and the ideal method to normalise single cell RNA-seq data is still a field of active research. There are two main reasons normalisation is not a straightforward process, and they relate to two potential sources of uncertainty: technological and biological variability.
 
 
 ## Biological Variation
@@ -291,7 +293,7 @@ Here we will attempt to perform some filtering, normalisation, and clustering us
 
 The first three plots tell us about the stability/reliability of our clusters, and are more important indicators for the quality of our clustering than any of the resultant graph projections, such as PCA or tSNE. 
 
-![Stability Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_sat_jacc.png %} "Stability Plots")
+![Stability Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_sat_jacc.png %} "RaceID Saturation and Jaccard Plots")
 
 The first plot measures the levels of dispersion within each cluster and produces the mean over all clusters (as defined by the k parameter). As *k* increases, the reduction in this dispersion is measured for each increase of *k* until the change in the mean within-cluster dispersion no longer changes. Here we can see that reduction saturates at *k=12*, which is chosen to the be the number of clusters detected in our data for all further analysis. The second plot is the same as the first but with the actual dispersion plotted instead of the relative change of dispersion.
 
@@ -307,16 +309,16 @@ Outlier detection attempts to refine the initially detected clusters to find sma
 The next three plots attempts to do this by describing the variation of the gene expression, given by; a Background plot, a Sensitivity plot, and an Outlier probability plot.
 
 
-![Gene Expression Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_gexpr.png %} "Stability Plots")
+![Gene Expression Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_gexpr.png %} "RaceID Gene Expression Plots")
 
 
-1. A background model is calibrated and outliers are identified based on the distribution of transcript counts within a cluster. The counts for each gene are assumed to follow a negative binomial distribution determined by a mean (average expression of a gene across all cells in a cluster), and a dispersion parameter. The dispersion is derived from the average variance-mean dependence, modelled as a logarithmic second order polynomial under the assumption that *most* genes are not differentially expressed between clusters, and that true biological variability should exceed this assumption.
+* (Top-Left) A background model is calibrated and outliers are identified based on the distribution of transcript counts within a cluster. The counts for each gene are assumed to follow a negative binomial distribution determined by a mean (average expression of a gene across all cells in a cluster), and a dispersion parameter. The dispersion is derived from the average variance-mean dependence, modelled as a logarithmic second order polynomial under the assumption that *most* genes are not differentially expressed between clusters, and that true biological variability should exceed this assumption.
    As we can see from the Background plot, the (red) regression of the variance on the mean (as approximated by a second-order polynomial in logarithmic space) is higher than the variance or most genes (all grey dots below the red curve) as expected, since they are not differentially expressed. The genes above this regression are therefore significant for the detection of outlier cells. The orange line is the local regression (moving average variance per mean) and is used purely for illustrative purposes.
 
-1. Outlier cells are detected if the probability for that cell $$c$$, a minimum number of genes $$G_{min}$$ of observing total counts $$T_{G_{min}}$$ is less than a specific threshold $$P_{thr}$$.
-  This is shown in the chart below as the number of outliers as a function of the probability threshold, which is set to $$1e-3$$ by default. Ideally, this threshold should be chosen to that the tail of the distribution is captured as outliers to ensure a maximum sensitivity of this method. If the sensitivity of the sequencing was low, then only a few highly expressed genes would be reliably quantified, so the outlier probability threshold would need to be higher (e.g. up to 1).
+* (Top-Right) Outlier cells are detected if the probability for that cell $$c$$, a minimum number of genes $$G_{min}$$ of observing total counts $$T_{G_{min}}$$ is less than a specific threshold $$P_{thr}$$.
+  This is shown in the chart above as the number of outliers as a function of the probability threshold, which is set to $$1e-3$$ by default. Ideally, this threshold should be chosen to that the tail of the distribution is captured as outliers to ensure a maximum sensitivity of this method. If the sensitivity of the sequencing was low, then only a few highly expressed genes would be reliably quantified, so the outlier probability threshold would need to be higher (e.g. up to 1).
 
-1. A barplot of the outlier probabilities of all cells across all clusters. All outlier cells are merged into their own clusters if their similarity exceeds a quantile threshold of the similarity distribution for all pairs of cells within one of the original clusters. After the outlier cells are merged, then new cluster centres are defined for the original clusters after removing the outliers. Then, each cell is assigned to the nearest cluster centre using k-partitioning.
+* (Bottom-Left) A barplot of the outlier probabilities of all cells across all clusters. All outlier cells are merged into their own clusters if their similarity exceeds a quantile threshold of the similarity distribution for all pairs of cells within one of the original clusters. After the outlier cells are merged, then the new cluster centres are defined for the original clusters after removing the outliers. Then, each cell is assigned to the nearest cluster centre using k-partitioning.
 
 The most differentially expressed genes (below a maximum p-value cutoff) in each of the clusters can be seen in the output file *Clustering using RaceID on data: Cluster - Genes per Cluster*, with 7 columns describing:
 
@@ -336,15 +338,15 @@ The most differentially expressed genes (below a maximum p-value cutoff) in each
 
 The remainder of the plots are heatmaps derived from k-medoids clustering, showing the similarity between clusters for both the initial clustering and the final (post outlier detection) clustering.
 
-![Heatmaps]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_heatmaps.png %} "Heatmaps for initial and final clusters")
+![Heatmaps]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_heatmaps.png %} "RaceID Heatmaps for initial and final clusters")
 
 The difference shown between the initial and final clustering is sometimes subtle depending which of the clusters the new clusters have been extracted from.
 
 
 > ### {% icon question %} Questions
 >
-> 1. What new clusters have been added?
-> 2. Which clusters are these new cells likely to come from?
+> 1. Which new clusters have been added?
+> 2. From which cells are these new clusters derived from?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -357,9 +359,9 @@ The difference shown between the initial and final clustering is sometimes subtl
 
 All the following plots are heatmaps for the individual genes expressed in each cluster.
 
-![Gene Heatmaps]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_geneheatmaps.png %} "Individual (final) heatmaps for clusters 1 to 4")
+![Gene Heatmaps]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_geneheatmaps.png %} "RaceID Individual (final) heatmaps for the top 10 significant genes in clusters 1 to 4")
 
-The top 10 defining genes from each cluster (above only `c1`-`c4` are shown) give us an idea of how unique these genes are to the cluster. For example, we can see that: *Gstm3*, *St3gal4*, and *Gna11* are only highly expressed in `c1` and `c6`; *Eef1a1* is highly expressed everywhere and that `c4` appears to be a not so well-defined cluster.
+The top 10 defining genes from each cluster (above only `c1`-`c4` are shown) give us an idea of how unique these genes are to the cluster. For example, in the Top-Left heatmap we can see that: *Gstm3*, *St3gal4*, and *Gna11* are only highly expressed in `c1` and `c6`; *Eef1a1* is highly expressed everywhere and that `c4` appears to be a not so well-defined cluster.
 
 
 ## Visualising All Clusters
@@ -377,16 +379,16 @@ The previous section produced plots that spoke about the quality of the clusteri
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > This tool can perform multiple different modes of inspection upon clustered scRNA data, but for now we only wish to look at all clusters as one.
+>    > This tool can perform multiple different modes of inspection upon clustered scRNA data, and users are encouraged to explore the different modes.
 >    {: .comment}
 >
 {: .hands_on}
 
-The main issue with visualising this data is that as before, we have C cells that serve as our observations which are described by G genes. Representing G dimensional data in the 2 or 3 dimensional plots that we are more familiar falls under the problem of *dimensional reduction*, which aims to preserve the distances and relationship of the higher dimensional (G-dimensional) data in a lower dimensional (usually 2D) space.
+The main issue with visualising this data is that as before, we have C cells that serve as our observations which are described by G genes. Representing G dimensional data in the 2 or 3 dimensional plots that we are more familiar falls under the problem of [*dimensional reduction*](https://en.wikipedia.org/wiki/Dimensionality_reduction), which aims to preserve the distances and relationship of the higher dimensional (G-dimensional) data in a lower dimensional (usually 2D) space.
 
 ![Dim red]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_dimred.svg %} "Reducing a set of 4 observations from 3D to 2D space, whilst approximating the 3D relationships")
 
-Preserving these higher dimensional distances in lower dimensional space is a complex and ongoing challenge in computer science, but there are various methods that deal with this in a manner of interesting ways such as PCA, tSNE, and diffusion maps.
+Preserving these higher dimensional distances in lower dimensional space is a complex and ongoing challenge in computer science, but there are various commonly-used methods such as PCA and tSNE often encountered in single cell RNA-seq datasets. For more information, see the box below.
 
 > ### {% icon details %} Details: PCA, tSNE, and Force-Directed Graphs
 > 
@@ -404,7 +406,7 @@ Preserving these higher dimensional distances in lower dimensional space is a co
 
 **RaceID** makes use of tSNE and force-directed (Fruchterman-Reingold) graph layouts to space the clusters in a visually meaningful manner to show the separation and relative proximity of clusters to one another.
 
-![Clusters]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_tsne_fr.png %} "Initial and Final clusters using tSNE and F-R projections")
+![Clusters]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_tsne_fr.png %} "RaceID Initial and Final clusters using tSNE and F-R projections")
 
 The figure above displays the initial (left top/bottom) and final (right top/bottom) clusters determined, but projected using tSNE and Fruchterman-Rheingold.
 
@@ -415,14 +417,14 @@ The figure above displays the initial (left top/bottom) and final (right top/bot
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. For example, `c11` appears to be an isolated well-defined cluster of cells, distinct in both projections. At the edge of the main cluster body is `c1` in both projections, but seems to be closer to the `c13` in the tSNE than in the F-R layout. In both projections, `c2`, `c3`, and `c4` are large noisy clusters, but `c2` and `c4` appear to be closer to one another in the F-R layout.
-> > 2. `c1` was defined much better a smaller set of genes, than `c2`, `c3`, or `c4` which listed less differentially expressed genes as their most significant.
+> > 1. For example, `c11` appears to be an isolated well-defined cluster of cells, distinct in both projections. At the edge of the main cluster body in both projections lies `c1`, but seems to be in closer proximity to `c13` in the tSNE map than in the F-R layout. In both projections, `c2`, `c3`, and `c4` are large noisy clusters, but `c2` and `c4` appear to be closer to one another in the F-R layout.
+> > 2. `c1` was better defined by a smaller set of genes than `c2`, `c3`, or `c4,` which listed less differentially expressed genes as their most significant genes.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Is this expected?
+### Is this expected?
 
 One pervasive thought when analysing single-cell RNA data, is "*is this actually good clustering?*"
 
@@ -444,7 +446,7 @@ To answer this question, we must understand the nature of the data which *does* 
 
 # Individual Cluster Inspection
 
-To really understand the dynamics in the shifting profiles of gene expressions between different clusters, it is often useful to see the specifically which genes are differentially expressed, and which clusters and cells they align to or define the most.
+To really understand the dynamics in the shifting profiles of gene expressions between different clusters, it is often useful to see specifically which genes are differentially expressed, and which clusters and cells they align to or define the most.
 
 There are three ways to do this in RaceID:
 
@@ -481,7 +483,7 @@ Here we will compare how the cells in cluster 1 are differentially expressed com
 >
 {: .hands_on}
 
-![Cluster Inspection of Cells]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_clustinspect_cells.png %} "MA plot of cells in cluster 1 and cluster 3")
+![Cluster Inspection of Cells]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_clustinspect_cells.png %} "RaceID MA plot of cells in cluster 1 and cluster 3")
 
 The genes shown as grey dots are not labelled because they are of similar levels of gene expression variability in both clusters, but the genes as labelled red dots on the fringes do display significant changes between the clusters.
 
@@ -518,8 +520,7 @@ Here we will look at the combined expression of *Gstm3*, *St3gal4*, and *Gna11* 
 {: .hands_on}
 
 
-![Expression Plot]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_goi.png %} "Expression plot of genes of interest across different cells.")
-
+![Expression Plot]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_goi.png %} "RaceID Expression plot of genes of interest across different cells.")
 
 
 > ### {% icon question %} Question
@@ -527,6 +528,17 @@ Here we will look at the combined expression of *Gstm3*, *St3gal4*, and *Gna11* 
 > Are these genes expressed where we expect?
 >
 > > ### {% icon solution %} Solution
+> >
+> > > ### {% icon tip %} Tip <!-- this should be a snippet -->
+> > > Multiple plots can be compared side-by-side by enabling the *Scratchbook*
+> > >
+> > > * Click on the *Scratchbook* icon <!-- icon not in _config.yml -->
+> > > * Click on the {% icon galaxy-eye %} symbol of the first dataset
+> > > * Resize the window of the dataset to desired dimensions
+> > > * Click any point in the grey space to close the Scratchbook
+> > > * Click on the {% icon galaxy-eye %} symbol of the second dataset
+> > > * Resize both windows to desired dimensions
+> > {: .tip}
 > >
 > > They appear to overlap `c6` which is in close proximity to `c1`. There are two reasons why this might be the case:
 > > 1. `c1` is a small cluster and noisy cluster surrounded by more stably defined neighbours.
@@ -559,31 +571,30 @@ It was [mentioned previously](#details-details-continuous-phenotypes-vs-discrete
 >
 {: .hands_on}
 
-![Lineage Computation Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_lineage.png %} "Lineage Tree and Branches of significance.")
+![Lineage Computation Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_lineage.png %} "StemID Lineage Tree and Branches of significance.")
 
 The first (top-left) plot shows a minimum spanning tree that summarises the most likely connections between clusters. The second plot (top-right) elucidates this lineage hierarchy by projecting the cells along the links given by StemID, ordering the cells along each link in such a way to suggest a time series, or *pseudotime* analysis of each link. This is important, because by ordering the cells by lineage pseudotime we can trace the up or down regulation of a gene as discrete time points. The interval between each timepoint is of course hard to accurately determine, but the order of events is still important.
 
-The third (bottom-left) lends a degree of significance between clusters, where the colour indicates the level of significance between clusters, and the width indicates the link score computed by **StemID**. The thick red link between clusters 2-4, 3-5, and 3-1-6 have therefore a high level of significance attached to each of these.
+The third (bottom-left) displays the degree of significance between clusters, where the colour indicates the level of significance between clusters, and the width indicates the link score computed by **StemID**. The thick red link between clusters 2-4, 3-5, and 3-1-6 have therefore a high level of significance attached to each of these.
 
 This is clarified slightly better with the heatmap (bottom-right) that shows the link scores between each cluster-cluster pair. To see how the link score is actually calculated, the image below provides some context:
 
 > ### {% icon question %} Questions
 >
-> Based on the above plots, which cluster is likely to be the main progenitor of the others?
+> Based on the above plots, which cluster is most likely to be the main progenitor of the others?
 > 
 > > ### {% icon solution %} Solution
 > >
 > > On first glance, it appears that `c2` would be the progenitor, giving rise to; mature type `c11`, `c4`, and `c9`; `c3` which is the progenitor to `c5` and `c1`; `c8`, which gives rise to `c12` that in turn generates `c10`.
 > > `{2, {8 {12 {10}}, 11, 4, 9, 3 {5, 1 { 6 } } } }` (in JSON format)
 > > 
-> > This is actually not the case, and we will see why with the following images.
 > >
 > {: .solution}
 >
 {: .question}
 
 
-![Link scores]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_linkscores.png %} "Link scores between branches.")
+![Link scores]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_linkscores.png %} "StemID Link scores between branches.")
 
 The top chart shows the number of links above a threshold that each cluster exhibits to another. The more links a cluster has, the more evidence that the cluster describes a progenitor cell type that gives rise to other more mature types. The middle chart describes the "Delta-Entropy" which measures the level of variability within a cluster, where clusters with more variability are less likely to be mature cell types due to the sheer "noise" that they exhibit that is to be expected of a cell type that could potentially give rise to other types. The bottom chart is simply the top chart multiplied by the middle chart, which adds both pieces of evidence together to yield the link score.
 
@@ -625,7 +636,7 @@ Here we will explore one branching point of interest; `c3` giving rise to `c1` a
 >
 {: .hands_on}
 
-![Heatmap Cells]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_cells.png %} "Heatmap of Cluster 1 cell projections.")
+![Heatmap Cells]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_cells.png %} "StemID Heatmap of Cluster 1 cell projections.")
 
 The vertical names along the heatmap are the cells from `c1` being projected on to the two intercluster links (3 to 1, 3 to 5) with scores for each cluster being shown for that cell. 
 
@@ -671,7 +682,7 @@ Here we will see if we can see any pseudotime dynamics taking place between the 
 >
 {: .hands_on}
 
-![Heatmap FateID]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_fateid.png %} "Heatmap FateID")
+![Heatmap FateID]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_fateid.png %} "FateID Heatmap")
 
 The heatmaps generated depict the same data, but at different "heat" scales to better colourise the map. The genes here are not genes, but are gene expression modules, which can be interpreted as gene motifs that are present in both `c1` and `c5`, but at different levels of expression. 
 
@@ -696,7 +707,7 @@ In this tutorial we have learned to filter, normalise, and cluster cells from he
 
 The steps of this workflow can be found in the related workflow.
 
-![Worfklow]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_workflow.png %} "RaceID Workflow")
+![Workflow]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_workflow.png %} "RaceID Workflow")
 
 All steps of the workflow have produced an R Data object (RDS) that serves as an input into the next step, but these objects can also be loaded into an R environment and analysed using any desired library.
 
