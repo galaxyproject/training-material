@@ -37,9 +37,7 @@ contributors:
 ---
 
 <!-- TODO: Subset analysis to validate prior cell labelling -->
-<!-- DONE: update image with vertical red bar -->
-<!-- DONE: add feature that looks for number of features >=1, instead of >0, because RaceID adds 0.1 to 0 counts -->
-
+<!-- TODO: Replace sort/unique with datamash -->
 
 # Introduction
 {:.no_toc}
@@ -157,7 +155,7 @@ We can see this for ourselves by extracting the headers, and reformatting them t
 > > 
 > > 1. The sole purpose of the Transpose tool is to switch columns with rows (and vice versa), which will make it easier to inspect and sort data.
 > > 2. The number of rows has not changed since the last step, but the cell names have lost their numbering and are identified purely by their phenotype.
-> > 3. There are 5 types of cells in our count matrix: *I5d*,*II5d*,*III5d*,*IV5d*, and *V5d*.
+> > 3. There are 5 types of cells in our count matrix: *I5d*, *II5d*, *III5d*, *IV5d*, and *V5d*.
 > > 4. There are only 48 *IV5d* cells compared to the other types which have 95 or 96.
 > {: .solution}
 >
@@ -188,23 +186,33 @@ We can refine filtering thresholds by examining how much a histogram of our plot
 
 This tool generates four histograms with the top line giving the raw expression data fed into the tool, and the bottom line giving the filtered data. 
 
-![Histograms of Raw and Filtered Data]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_filter_plots.png %} "Histograms of Raw and Filtered Data")
+![Histograms of raw and filtered data]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_filter_plots.png %} "Histograms of raw and filtered data")
 
 The top row shows the count distributions of the Library Size and Number of Features of the raw data:
 
 * (Top-Left) Library Size (total number of transcripts per cell)
   * A lower-tail heavy distribution centred around $$10^{3-4}$$ counts per cell, with a few cells having library sizes containing a handful of counts (0-1000).
-* (Top-Right)
-  * Another lower-tail heavy distribution with a peak centred around $$10^3.5$$. The lower of the two profiles is defined somewhat sporadically, so we cannot assume that cells with less than 10 features (< 1.0) indicate anything meaningful except just being of low quality.
+* (Top-Right) Feature Set (total number of detectable genes per cell)
+  * Another lower-tail heavy distribution with a peak centred around $$10^{3.5}$$. Cells with a low number of features are hard to compare with other cells due to incomplete data. It is possible that these low feature cells (< 100 genes) are rare types and that we should impute their missing values, but it is often more likely the case that these are simply just low-quality cells that will add noise to the clustering.
 
 The bottom row shows the count distributions of the Library Size and Number of Features of the filtered data:
 
-* (Bottom-Left) The lower-tail of our previous distribution has been trimmed off (note that we required cells with no less than 3000 total transcripts), which gives an even normal-looking distribution centred around $$10^3.4$$ transcripts per cell.
+* (Bottom-Left) The lower-tail of our previous distribution has been trimmed off, which gives an even normal-looking distribution centred around $$10^{3.4}$$ transcripts per cell.
 * (Bottom-Right) Instead of a distribution we have a single bar that indicates that all of our cells have the exact number of features.
+
+> ### {%icon comment %} Comment: Choosing Filtering Thresholds
+>
+> The minimum total filtering threshold of 3000 chosen for this dataset is derived from analysing the *Cross-Contamination Plots* from the [Pre-processing of Single-Cell RNA Data]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna_preprocessing/tutorial.html}).
+>
+> This threshold is dependent primarily on the capture efficiency of the cells that were sequenced, with some cell types being easier to capture than others. For example, neuron cells would have a lower filtering threshold of ~1500 compared to the ~3000 used for haemopoietic cells.
+>
+{: .comment}
+
 
 > ### {% icon details %} Details: Why the Same Number of Features
 > * RaceID normalises the data so that all cells are compared using the same features. If the features compared between cells are different, then it is hard to make a meaningful assessment of how much one cell differs from another.
 > * For cells that are not filtered out during this stage which have less than the "required" number of features, a value of 0.1 is added to the count data so that these features are not lost during the analysis. This makes the assumption that the feature *is* detectable for that cell (i.e. no errors during sequencing) but that the transcript was very lowly expressed.
+> * However, it is important to see the flat square plot for the post-filtered number of features, since it shows that the dataset is primed correctly for analysis with C number of cells and G number of genes.
 > * For a more 'realistic' distribution of features, re-run the tool with *"Count filtered features greater than or equal to 1"* enabled.
 {: .details}
 
@@ -212,6 +220,7 @@ The bottom row shows the count distributions of the Library Size and Number of F
 >
 > 1. How many cells remain after filtering?
 > 2. How many genes remain after filtering?
+> 3. Are these numbers to be expected?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -219,7 +228,10 @@ The bottom row shows the count distributions of the Library Size and Number of F
 > >
 > > 1. 287 cells remain (66%)
 > > 2. 2089 genes remain (10%)
-> >
+> > 3. **Yes**
+> >    * Cells: These are the observations of your dataset, and the more observations you have, the better the model will be. At minimum, 60% of your initial cells should be retained, though this will depend on the quality of your dataset.
+> >    * Genes: These are the variables of your dataset, and the more variables you have, the more needlessly complex the model will be. Only a few variables will be relevant in modelling our observations, and it these variables we wish to discover. Most of your genes will *not* be differentially expressed between different cell types and so we are not interested in those genes (though they are very useful to have in the initial matrix, as they serve as a stable background metric to measure the significantly differentially expressed genes against). It is perfectly acceptable to perform a single-cell RNA-seq analysis with as few as 500 (differentially expressed) genes.
+> > 
 > {: .solution}
 >
 {: .question}
@@ -490,7 +502,7 @@ The genes shown as grey dots are not labelled because they are of similar levels
 
 We will now look at some genes of interest to see how prevalent or unique they are across clusters. Usually known marker genes are used to identify clusters by their cell type and not just a number, but any gene of interest can be used if it is believed to characterise a cluster of cells.
 
-Here we will look at the combined expression of *Gstm3*, *St3gal4*, and *Gna11* which all had adjusted P-values of less than 1e-15 in cluster 1.
+Here we will look at the combined expression of *Gstm3*, *St3gal4*, and *Gna11* which all had adjusted P-values of less than $$1e-15$$ in cluster 1.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
