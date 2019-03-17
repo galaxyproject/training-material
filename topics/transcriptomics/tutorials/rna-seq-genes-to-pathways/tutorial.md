@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: RNA-seq genes to pathways
-zenodo_link: "https://zenodo.org/record/2491305"
+zenodo_link: "https://zenodo.org/record/2596382"
 enable: "false"
 tags:
   - mouse
@@ -67,19 +67,19 @@ We will use several files for this analysis:
 >
 >    {% include snippets/import_from_data_library.md %}
 >
->    - Option 2: From [Zenodo](https://zenodo.org/record/2491305)
+>    - Option 2: From [Zenodo](https://zenodo.org/record/2596382)
 >
 >    {% include snippets/import_via_link.md %}
 >
 >    You can paste the names and links below into the Upload tool:
 >
 >    ```
->    https://zenodo.org/record/2491305/files/limma-voom_basalpregnant-basallactate
->    https://zenodo.org/record/2491305/files/limma-voom_luminalpregnant-luminallactate
->    https://zenodo.org/record/2491305/files/seqdata
->    https://zenodo.org/record/2491305/files/mouse_hallmark_sets
->    https://zenodo.org/record/2491305/files/factordata
->    https://zenodo.org/record/2491305/files/limma-voom_filtered_counts
+>    https://zenodo.org/record/2596382/files/limma-voom_basalpregnant-basallactate
+>    https://zenodo.org/record/2596382/files/limma-voom_luminalpregnant-luminallactate
+>    https://zenodo.org/record/2596382/files/seqdata
+>    https://zenodo.org/record/2596382/files/mouse_hallmark_sets
+>    https://zenodo.org/record/2596382/files/factordata
+>    https://zenodo.org/record/2596382/files/limma-voom_filtered_counts
 >    ```
 >
 > 3. Add a tag called `#basal` to the `limma-voom_basalpregnant-basallactate` and a tag called `#luminal` to the `limma-voom_luminalpregnant-luminallactate` files.
@@ -174,12 +174,12 @@ A plot of the top 10 over-represented GO terms (by *p*-value) can be output from
 The Fu paper also used goseq and found enrichment for cell contractility genes in the basal cells and enrichment in the luminal cells for general metabolic processes, lipid biosynthesis and transport proteins.
 
 > ### {% icon question %} Questions
-> 1. Can you run goseq on the luminal contrast and generate the plot of top 10 GO terms? Tip: You could use the Rerun button for each step, where the parameters are already selected, and choose the luminal file as input.
+> 1. Can you generate the plot of top 10 GO terms for the luminal differentially expressed genes? Tip: You could use the Rerun button for each step (as the parameters are already selected) and choose the luminal file as input.
 > 2. Take a look at the plots of top 10 GO terms for the luminal and basal contrasts. How do you think they compare to what the authors found?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Running goseq on the luminal file should give a plot similar to below. 
+> > 1. Running goseq on the luminal file should give a plot similar to below.
 > > ![Luminal Plot](../../images/rna-seq-genes-to-pathways/luminal_top_GO.png "Luminal pregnant vs lactating top 10 GO terms")
 > > 2. The top 10 GO terms seem to describe similar processes to what the authors found.
 > >
@@ -233,7 +233,7 @@ An enrichment plot of the each of the top pathways can also be produced, one is 
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Running fgsea on the luminal file should give a plot similar to below. 
+> > 1. Running fgsea on the luminal file should give a plot similar to below.
 > > TO DO: add plot
 > >
 > {: .solution}
