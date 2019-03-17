@@ -204,7 +204,7 @@ The bottom row shows the count distributions of the Library Size and Number of F
 
 > ### {%icon comment %} Comment: Choosing Filtering Thresholds
 >
-> The minimum total filtering threshold of 3000 chosen for this dataset is derived from analysing the *Cross-Contamination Plots* from the [Pre-processing of Single-Cell RNA Data]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna_preprocessing/tutorial.html}).
+> The minimum total filtering threshold of 3000 chosen for this dataset is derived from analysing the *Cross-Contamination Plots* from the [Pre-processing of Single-Cell RNA Data]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna_preprocessing/tutorial.md %}).
 >
 > This threshold is dependent primarily on the capture efficiency of the cells that were sequenced, with some cell types being easier to capture than others. For example, neuron cells would have a lower filtering threshold of ~1500 compared to the ~3000 used for haemopoietic cells.
 >
@@ -527,18 +527,17 @@ Here we will look at the combined expression of *Gstm3*, *St3gal4*, and *Gna11* 
 >
 > Are these genes expressed where we expect?
 >
+> > ### {% icon tip %} Tip <!-- this should be a snippet -->
+> > Multiple plots can be compared side-by-side by enabling the *Scratchbook*
+> > * Click on the *Scratchbook* icon <!-- icon not in _config.yml -->
+> > * Click on the {% icon galaxy-eye %} symbol of the first dataset
+> > * Resize the window of the dataset to desired dimensions
+> > * Click any point in the grey space to close the Scratchbook
+> > * Click on the {% icon galaxy-eye %} symbol of the second dataset
+> > * Resize both windows to desired dimensions
+> {: .tip}
+>
 > > ### {% icon solution %} Solution
-> >
-> > > ### {% icon tip %} Tip <!-- this should be a snippet -->
-> > > Multiple plots can be compared side-by-side by enabling the *Scratchbook*
-> > >
-> > > * Click on the *Scratchbook* icon <!-- icon not in _config.yml -->
-> > > * Click on the {% icon galaxy-eye %} symbol of the first dataset
-> > > * Resize the window of the dataset to desired dimensions
-> > > * Click any point in the grey space to close the Scratchbook
-> > > * Click on the {% icon galaxy-eye %} symbol of the second dataset
-> > > * Resize both windows to desired dimensions
-> > {: .tip}
 > >
 > > They appear to overlap `c6` which is in close proximity to `c1`. There are two reasons why this might be the case:
 > > 1. `c1` is a small cluster and noisy cluster surrounded by more stably defined neighbours.
