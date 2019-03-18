@@ -198,13 +198,13 @@ The regionalGAM tools require CSV files as input, we need to regenerate a CSV fi
 >
 > > ### {% icon question %} Questions
 > >
-> > 1. How many species does your initial dataset take into account ?
-> > 2. What are their names ?
+> > 1. How many species does your initial dataset take into account ? 
+> > 2. What are their names ? 
 > >
-> > ### {% icon solution %} Solutions
+> > > ### {% icon solution %} Solutions
 > > >
-> > > 1. The dataset contains informations on 2 different species
-> > > 2. Their names are "Pyronia tithonus" and "Aglais io".
+> > > 1. The dataset contains informations on 2 different species 
+> > > 2. Their names are "Pyronia tithonus" and "Aglais io". 
 > > >
 > > {: .solution}
 > {: .question}
@@ -249,7 +249,6 @@ This step will allow you to compute and display the phenology of a species. In t
 > 2. Generate the chart using the visualization
 >    1. Inspect and expand the output data from **Flight curve** {% icon tool %}
 >    2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
->    3. Select `Charts`
 >    3. Select **Line chart (NVD 3)** as visualization type
 >    4. Give it a proper name, i.e. `Pyronia tithonus phenology raw simple vizu`
 >    5. On **Select data** area, specify:
@@ -311,7 +310,6 @@ This graph displays the occurrence of Pyronia tithonus, over the year. But the f
 > 2. Generate the chart using the visualization with the x-axis corresponding to your column `"week""year"`.
 >    1. Inspect and expand the output data from **Remove beginning of a file** {% icon tool %}
 >    2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
->    3. Select `Charts`
 >    3. Select **Line chart (NVD 3)** as visualization type
 >    4. Give it a proper name, i.e. `Pyronia tithonus phenology simple vizu`
 >    5. On **Select data** area, specify:
@@ -383,17 +381,20 @@ To do that, we need to first create a table with the columns:
 >
 > 4. **Multi-Join (combine multiple files)** to paste the 9 files
 >    - {% icon param-file %} *"File to join"*: the first output of **Cut**
->    - {% icon param-files %} *"add additional file"*: the other first output of **Cut**
+>    - {% icon param-files %} *"add additional file"*: All the other output of **Cut**
 >    - *"Common key column"*: `3`
 >    - *"Column with values to preserve"*: All
+>    - *"Add header line to the output file"*: No
 >
-> 5. **Sort**
->    - {% icon param-file %} *"File"*: the output of **Paste**
+> 5. **Sort** to get your data in chronological order
+>    - {% icon param-file %} *"File"*: the output of **Multi-Join**
 >    - *"column"*: `Column: 1`
 >    - *"order"*: `ascending`
 >
-> 6. **Cut**
+> 6. **Cut** to remove repeated columns
 >    - {% icon param-files %} *"File to cut"*: output of **Sort**
+>    - *"Operation"*: `Keep`
+>    - *"Delimited by"*: `Tab`
 >    - *"Cut by"*: `fields`
 >      - *"List of Fields"*: `Column: 1`, `Column: 2`, `Column: 3`, `Column: 5`, `Column: 7`, `Column: 9`, `Column: 11`, `Column: 13`, `Column: 15`, `Column: 17`, `Column: 19`, `Column: 21`, `Column: 23`, `Column: 25`, `Column: 27`, `Column: 31`, `Column: 33`, `Column: 35`, `Column: 37`, `Column: 39`, `Column: 41`
 >
@@ -402,7 +403,6 @@ To do that, we need to first create a table with the columns:
 > 7. Generate the chart using the stacked visualization
 >    1. Inspect and expand the output data from **Cut** {% icon tool %}
 >    2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
->    3. Select `Charts`
 >    3. Select **Line chart (NVD 3)** as visualization type
 >    4. Give it a proper name, i.e. `Pyronia tithonus phenology`
 >    5. On **Select data** area, specify:
@@ -514,7 +514,6 @@ With this graph, we can see that the occurrence of Pyronia tithonus is always ar
 > > ### {% icon hands_on %} Hands-on:
 > > 1. Inspect and expand the output data from **flight curve** {% icon tool %}
 > > 2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
-> > 3. Select **Charts**
 > > 3. Select a visualization: `line chart (NVD 3)`
 > > 4. Give it a proper name like `Aglais io & Pyronia tithonus phenology`
 > > 5. Select data
@@ -566,7 +565,6 @@ We now would like to create a chart showing the annual abundance trend of a cert
 > ### {% icon hands_on %} Hands-on: Visualize the adundance index
 > 1. Inspect and expand the output data from **Abundance index** {% icon tool %}
 > 2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
-> 3. Select `Charts`
 > 3. Select **Bar diagram (NVD 3)** as visualization type
 > 4. Give it a proper name, i.e. `Pyronia tithonus abundance index`
 > 5. On **Select data** area, specify:
@@ -596,9 +594,9 @@ As before, we need first to create a table with the column:
 7. etc for all sites that we need to identify
 
 > ### {% icon hands_on %} Hands-on: Expected temporal trend
-> 1. **Unique** {% icon tool %}
+> 1. **Count occurrences of values in column(s)** {% icon tool %}
 >     - {% icon param-file %} *"Dataset"*: the output of **Abundance index**
->     -  *"Count occurrences on"*: `Column: 1`
+>     -  *"Count occurrences of values in column(s)"*: `Column: 1`
 > 2. Check the generated output to identify the different sites
 > 1. **Filter data on any column using simple expressions** {% icon tool %} to select values for 2003
 >    - {% icon param-file %} *"Filter"*: output of **Abundance index** {% icon tool %}
@@ -612,14 +610,14 @@ As before, we need first to create a table with the column:
 >   
 >    You should now have new 5 files in the history
 >
-> 4. **Paste two files side by side** {% icon tool %} to paste the files
+> 4. **Multi-Join (combine multiple files)** to paste the 5 files
 >    - {% icon param-file %} *"File to join"*: the first output of **Filter**
 >    - {% icon param-files %} *"add additional file"*: the other 4 output of **Filter**
 >    - *"Common key column"*: `3`
 >    - *"Column with values to preserve"*: `Column: 2`, `Column: 3`, `Column: 4`, `Column: 5`
 >
-> 6. **Cut**
->    - {% icon param-files %} *"File to cut"*: output of **Paste**
+> 6. **Cut columns from a table**
+>    - {% icon param-files %} *"File to cut"*: output of **Multi-Join**
 >    - *"Cut by"*: `fields`
 >      - *"List of Fields"*: `Column: 1`, `Column: 4`, `Column: 5`, `Column: 8`, `Column: 9`, `Column: 12`, `Column: 13`, `Column: 16`, `Column: 17`, `Column: 20`, `Column: 21`
 >
@@ -628,7 +626,6 @@ As before, we need first to create a table with the column:
 > 7. Generate the chart using the stacked visualization
 >    1. Inspect and expand the output data from **Cut** {% icon tool %}
 >    2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
->    3. Select `Charts`
 >    3. Select **Bar diagram (NVD 3)** as visualization type
 >    4. Give it a proper name, i.e. `Pyronia tithonus abundance index`
 >    5. On **Select data** area, specify:
