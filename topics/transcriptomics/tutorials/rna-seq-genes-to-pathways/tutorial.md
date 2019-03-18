@@ -26,7 +26,7 @@ contributors:
 
 Sometimes there is quite a long list of genes to interpret after a differential expression analysis, and it is usually infeasible to go through the list one gene at a time trying to understand it’s biological function. A common downstream procedure is gene set testing, which aims to understand which pathways/gene networks the differentially expressed genes are implicated in. There are many different gene set testing methods that can be applied and it can be useful to try several.
 
-The purpose of this tutorial is to demonstrate how to perform gene set testing using tools in Galaxy. The data comes from a Nature Cell Biology paper, [EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival](https://www.ncbi.nlm.nih.gov/pubmed/25730472)), Fu et al. 2015. That study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice (see Figure below). How to generate differentially expressed genes from reads (FASTQs) for this dataset is covered in the accompanying tutorials [RNA-seq reads to counts]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md %}) and [RNA-seq counts to genes]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.md %}). This tutorial is inspired by material from the COMBINE R RNAseq workshop [here](http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html) and the Cancer Research UK workshop [here](https://bioinformatics-core-shared-training.github.io/cruk-summer-school-2018/RNASeq2018/html/06_Gene_set_testing.nb.html)
+The purpose of this tutorial is to demonstrate how to perform gene set testing using tools in Galaxy. The data comes from a Nature Cell Biology paper, [EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival](https://www.ncbi.nlm.nih.gov/pubmed/25730472)), Fu et al. 2015. That study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice (see Figure below). How to generate differentially expressed genes from reads (FASTQs) for this dataset is covered in the accompanying tutorials [RNA-seq reads to counts]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md %}) and [RNA-seq counts to genes]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.md %}). This tutorial is inspired by material from the COMBINE R RNAseq workshop [here](http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html) and the Cancer Research UK workshop [here](https://bioinformatics-core-shared-training.github.io/cruk-summer-school-2018/RNASeq2018/html/06_Gene_set_testing.nb.html).
 
 ![Tutorial Dataset](../../images/rna-seq-reads-to-counts/mouse_exp.png "Tutorial Dataset")
 
@@ -105,7 +105,7 @@ goseq needs 2 files as inputs:
     - the Gene IDs (unique within the file)
     - the gene lengths
 
-We need a table of differentially expressed (DE) results for goseq. Here we will use two tables, one for each of the basal and luminal pregnant vs lactate results. This is so we can compare results for the two cell types. These tables were output from the limma-voom tool but DE tables from edgeR or DESeq2 could also be used. For this dataset we will call genes differentially expressed if they have an adjusted P value below 0.01 and a fold change of 1.5 (equivalent to a $$log_{2} FC$$ of 0.58), as in the Fu paper. We can use the gene lengths from the counts table in GEO (provided as a file called `seqdata` in Zenodo). But if we didn't have that we could use a tool like **featureCounts** {% icon tool %} to output a gene lengths file. The `seqdata` file contains >20k genes, but we only want the ~15k we have in our differentially expressed genes file. So we will join the lengths file with the differentially expressed genes file, keeping only the length information for genes present in the differentially expressed genes file. We can then cut out the columns we need for the two inputs (gene id, length) (gene id, DE status) and as a bonus they will both be sorted in the same order, which is what we need for goseq.
+We need a table of differentially expressed (DE) results for goseq. Here we will use two tables, one for each of the basal and luminal pregnant vs lactate results. This is so we can compare results for the two cell types. These tables were output from the limma-voom tool but DE tables from edgeR or DESeq2 could also be used. For this dataset we will call genes differentially expressed if they have an adjusted P value below 0.01. We can use the gene lengths from the counts table in GEO (provided as a file called `seqdata` in Zenodo). But if we didn't have that we could use a tool like **featureCounts** {% icon tool %} to output a gene lengths file. The `seqdata` file contains >20k genes, but we only want the ~15k we have in our differentially expressed genes file. So we will join the lengths file with the differentially expressed genes file, keeping only the length information for genes present in the differentially expressed genes file. We can then cut out the columns we need for the two inputs (gene id, length) (gene id, DE status) and as a bonus they will both be sorted in the same order, which is what we need for goseq.
 
 To generate the two input files we will use:
 * **Compute** to add a column to the DE tables, that gives genes meeting our adj.P threshold the value "True" and all other genes the value "False".
@@ -171,17 +171,14 @@ A plot of the top 10 over-represented GO terms (by *p*-value) can be output from
 
 ![Basal Plot](../../images/rna-seq-genes-to-pathways/basal_top_GO.png "Basal pregnant vs lactating top 10 GO terms")
 
-The Fu paper also used goseq and found enrichment for cell contractility genes in the basal cells and enrichment in the luminal cells for general metabolic processes, lipid biosynthesis and transport proteins.
 
 > ### {% icon question %} Questions
-> 1. Can you generate the plot of top 10 GO terms for the luminal differentially expressed genes? Tip: You could use the Rerun button for each step (as the parameters are already selected) and choose the luminal file as input.
-> 2. Take a look at the plots of top 10 GO terms for the luminal and basal contrasts. How do you think they compare to what the authors found?
+> Can you generate the plot of top 10 GO terms for the luminal differentially expressed genes? Tip: You could use the Rerun button for each step (as the parameters are already selected) and choose the luminal file as input.
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Running goseq on the luminal file should give a plot similar to below.
+> > Running goseq on the luminal file should give a plot similar to below.
 > > ![Luminal Plot](../../images/rna-seq-genes-to-pathways/luminal_top_GO.png "Luminal pregnant vs lactating top 10 GO terms")
-> > 2. The top 10 GO terms seem to describe similar processes to what the authors found.
 > >
 > {: .solution}
 {: .question}
@@ -220,21 +217,21 @@ There are several ways we could choose to rank our genes, we could rank by log-f
 >
 {: .hands_on}
 
-fgsea outputs a table of results containing a list of pathways with P values and enrichment scores. It can also output a summary table plot of the top pathways like the one shown below for the `basallpregnant-basallactate` contrast below.
+fgsea outputs a table of results containing a list of pathways with P values and enrichment scores. It can also output a summary table plot of the top pathways such as the one shown below for the `basallpregnant-basallactate` contrast below.
 
-![fgsea Table](../../images/rna-seq-genes-to-pathways/fgsea_table.png "fgsea Summary table"){: width="50%"}
+![fgsea Table](../../images/rna-seq-genes-to-pathways/fgsea_table_basal.png "fgsea Summary table")
 
 An enrichment plot of the each of the top pathways can also be produced, one is shown below. The barcode pattern shows where the genes in the set are found in the list of ranked genes. Most of the bars to the left indicate enrichment of the set at the top of the ranked list of genes (upregulated) and most bars towards the right indicate enrichment at the bottom of the list (downregulated). The enrichment score reflects the degree to which the genes are enriched at the top or bottom of the list.
 
 ![fgsea Enrichment](../../images/rna-seq-genes-to-pathways/fgsea_enrichplot.png "fgsea Enrichment plot")
 
 > ### {% icon question %} Questions
-> 1. Can you run fgsea on the luminal contrast and generate the fgsea summary table plot? 
+> Can you run fgsea on the luminal contrast and generate the fgsea summary table plot? 
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Running fgsea on the luminal file should give a plot similar to below.
-> > TO DO: add plot
+> > Running fgsea on the luminal file should give a plot similar to below.
+> > ![fgsea Luminal](../../images/rna-seq-genes-to-pathways/fgsea_table_luminal.png "fgsea Summary table for luminal")
 > >
 > {: .solution}
 {: .question}
@@ -242,6 +239,8 @@ An enrichment plot of the each of the top pathways can also be produced, one is 
 ## Ensemble gene set enrichment analyses with **EGSEA**
 
 The ensemble of genes set enrichment analyses (EGSEA) [(Alhamdoosh et al, 2017)](https://www.ncbi.nlm.nih.gov/pubmed/27694195) is a method developed for RNA-seq data that combines results from multiple algorithms and calculates collective gene set scores, to try to improve the biological relevance of the highest ranked gene sets. EGSEA has built-in gene sets from MSigDB and KEGG for human and mouse. We'll show here how it can be used with the MSigDB Hallmark collection and KEGG pathways. For input we need a count matrix and EGSEA will perform a limma-voom analysis before gene set testing. We can use the provided filtered counts file output from limma, where the low count genes have been filtered out (output from limma by selecting *"Output Filtered Counts Table?"*: `Yes`). We just need to remove the gene symbol and description columns. We also need a symbols mapping file containing just the Entrez ids and symbols, which we can generate from the filtered counts file. The third input we need is a factors information file, containing what groups the samples belong to, we can use the same one from the tutorial [RNA-seq counts to genes]({{ site.baseurl }}/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html). EGSEA provides twelve base methods and we will select eleven, all except roast, as the fry method is a fast approximation of roast.
+
+> ### {% icon hands_on %} Hands-on: Perform ensemble gene set testing with EGSEA
 >
 > 1. **Cut columns from a table (cut)** {% icon tool %} with the following parameters:
 >      - {% icon param-file %} *"File to cut"*: `limma-voom filtered counts`
@@ -264,24 +263,25 @@ The ensemble of genes set enrichment analyses (EGSEA) [(Alhamdoosh et al, 2017)]
 >      - {% icon param-check %} *"Gene Set Testing Methods"*: Tick `camera`, `safe`, `gage`, `zscore`, `gsva`, `globaltest`, `ora`, `ssgsea`, `padog`, `plage`, `fry`
 >      - {% icon param-check %} *"MSigDB Gene Set Collections"*: `H: hallmark gene sets`
 >      - {% icon param-check %} *"KEGG Pathways"*: `Metabolism` and `Signalling`
+>      - {% icon param-check %} *"Download KEGG pathways?"*: `Yes`
 >      - {% icon param-check %} *"I certify that I am not using this tool for commercial purposes"*: `Yes`
 {: .hands_on}
 
 This generates a table of results, and a report. Contained within the report are plots, such as heatmaps of the top ranked pathways, as shown below. Note that we see some similar pathways in the results here as with the fgsea analysis.
 
-![EGSEA heatmaps](../../images/rna-seq-genes-to-pathways/EGSEA_heatmaps.png "EGSEA heatmaps"){: width="50%"}
+![EGSEA heatmaps](../../images/rna-seq-genes-to-pathways/EGSEA_heatmaps.png "EGSEA heatmaps")
 
 KEGG pathway diagrams are generated if KEGG pathways are selected, as shown below. These show the expression values of the genes overlaid, genes upregulated in the contrast are shown in red, downregulated genes in blue. Ribosome was one of the top GO terms identified for the basal pregnant vs lactate contrast and here we see ribosome pathways are in the top ranked KEGG pathways.
 
 ![EGSEA KEGG](../../images/rna-seq-genes-to-pathways/EGSEA_KEGG.png "EGSEA KEGG pathways")
 
 > ### {% icon question %} Questions
-> 1. Can you run EGSEA on the luminal contrast identify the top gene sets? Tip: you could use the rerun button and replace the "Contrast of Interest" with the name of the luminal contrast.
+> Can you run EGSEA on the luminal contrast identify the top KEGG gene sets? Tip: you could use the rerun button and replace the "Contrast of Interest" with the name of the luminal contrast.
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Running EGSEA on the luminal file should give top gene sets similar to below.
-> > TO DO: add plot/names
+> > Running EGSEA on the luminal file should give top KEGG gene sets similar to below.
+> > ![EGSEA KEGG luminal](../../images/rna-seq-genes-to-pathways/EGSEA_KEGG_luminal.png "EGSEA KEGG pathways for luminal")
 > >
 > {: .solution}
 {: .question}
