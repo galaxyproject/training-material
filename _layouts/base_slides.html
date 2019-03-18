@@ -49,7 +49,13 @@ class: center, middle, inverse
 
 <div class="my-header"><span>
 <a href="{{ site.baseurl }}/topics/{{ topic.name }}" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
-<a class="nav-link" href="{{ site.github.repository_url }}/edit/{{ site.repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+{% if page.type == "introduction" %}
+  {% capture link %}{{ site.github.repository_url }}/edit/{{ site.repository_branch }}/topics/{{ topic.name }}/slides/{{ page.tutorial_name }}.html{% endcapture %}
+{% else %}
+  {% capture link %}{{ site.github.repository_url }}/edit/{{ site.repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html{% endcapture %}
+{% endif %}
+<a class="nav-link" href="{{ link }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
 </span></div>
 
 <div class="my-footer"><span>
