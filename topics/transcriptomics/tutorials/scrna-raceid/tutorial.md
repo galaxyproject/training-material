@@ -119,24 +119,47 @@ We can see this for ourselves by extracting the headers, and reformatting them t
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Select first** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"File to select"*: imported tabular file
+>    - *"Operation"*: `Keep first lines`
 >    - *"Number of lines"*: `1`
 >
-> 1. **Transpose** {% icon tool %}
+> 2. **Transpose** {% icon tool %}
+>    - {% icon param-file %} *"Input tabular dataset"*: output of **Select first**
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > What did this transpose step do? Why is it necessary?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > The sole purpose of the Transpose tool is to switch columns with rows (and vice versa), which will make it easier to inspect and sort data.
+>    > {: .solution}
+>    {: .question}
 >
 > 1. **Text transformation** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"File to process"*: output of **Transpose**
 >    - *"SED Program"*: `s/_[0-9]+//`
 >
->    > ### {% icon comment %} Comment
+>       The above text is a regular expression used to match on anything that contains a `_` followed by a number, and removing it.
+>
+> 2. Inspect the generated file and verify that we have the 5 phenotypes without `_` followed by a number
+>
+>    > ### {% icon question %} Questions
 >    >
->    > The above text is a regular expression used to match on anything that contains a `_` followed by a number, and removing it.
->    {: .comment}
+>    > How many rows remain after the **Text transformation** step?
+>    > > ### {% icon solution %} Solution
+>    > > The number of rows has not changed since the last step, but the cell names have lost their numbering and are identified purely by their phenotype.
+>    > {: .solution}
+>    {: .question}
 >
 > 1. **Sort** {% icon tool %} with the following parameters:
->    - In *"Column selections"*:
->        - {% icon param-repeat %} *"Insert Column selections"*
->            - *"on column"*: `c1`
+>    - {% icon param-file %} *"Sort Query"*: output of **Text transformation**
+>    - In *"Column selections"*
+>       - In *"1: Column selections"*
+>          - *"on column"*: `Column: 1`
+>          - *"in"*: `Ascending order`
 >
 > 1. **Unique lines** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"File to scan for unique values"*: output of **Text transformation**
 >    - *"Do you want to group each unique group"*: `No`
 >       - *"Counting number of occurrences"*: `Yes`
 >       - *"Only print duplicate lines"*: `No`
@@ -148,17 +171,13 @@ We can see this for ourselves by extracting the headers, and reformatting them t
 
 > ### {% icon question %} Questions
 >
-> 1. What did the transpose step do? Why is it necessary?
-> 2. How many rows remain after the **Text transformation** step?
-> 3. How many unique cell phenotypes were identified in the cell headers?
-> 4. Which cell phenotype is least represented in the count matrix?
+> 1. How many unique cell phenotypes were identified in the cell headers?
+> 2. Which cell phenotype is least represented in the count matrix?
 >
 > > ### {% icon solution %} Solution
 > > 
-> > 1. The sole purpose of the Transpose tool is to switch columns with rows (and vice versa), which will make it easier to inspect and sort data.
-> > 2. The number of rows has not changed since the last step, but the cell names have lost their numbering and are identified purely by their phenotype.
-> > 3. There are 5 types of cells in our count matrix: *I5d*, *II5d*, *III5d*, *IV5d*, and *V5d*.
-> > 4. There are only 48 *IV5d* cells compared to the other types which have 95 or 96.
+> > 1. There are 5 types of cells in our count matrix: *I5d*, *II5d*, *III5d*, *IV5d*, and *V5d*.
+> > 2. There are only 48 *IV5d* cells compared to the other types which have 95 or 96.
 > {: .solution}
 >
 {: .question}
@@ -291,7 +310,7 @@ Here we will attempt to perform some filtering, normalisation, and clustering us
 > 
 {: .hands_on}
 
-The first three plots tell us about the stability/reliability of our clusters, and are more important indicators for the quality of our clustering than any of the resultant graph projections, such as PCA or tSNE. 
+The first three plots (in the PDF report) tell us about the stability/reliability of our clusters, and are more important indicators for the quality of our clustering than any of the resultant graph projections, such as PCA or tSNE. 
 
 ![Stability Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_sat_jacc.png %} "RaceID Saturation and Jaccard Plots")
 
@@ -529,7 +548,7 @@ Here we will look at the combined expression of *Gstm3*, *St3gal4*, and *Gna11* 
 >
 > > ### {% icon tip %} Tip <!-- this should be a snippet -->
 > > Multiple plots can be compared side-by-side by enabling the *Scratchbook*
-> > * Click on the *Scratchbook* icon <!-- icon not in _config.yml -->
+> > * Click on the {% icon galaxy-scratchbook %} *Scratchbook* icon <!-- icon not in _config.yml -->
 > > * Click on the {% icon galaxy-eye %} symbol of the first dataset
 > > * Resize the window of the dataset to desired dimensions
 > > * Click any point in the grey space to close the Scratchbook
