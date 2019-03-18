@@ -106,11 +106,11 @@ We will use three files for this analysis:
 
 Let’s take a look at the data. The `seqdata` file contains information about genes (one gene per row), the first column has the Entrez gene id, the second has the gene length and the remaining columns contain information about the number of reads aligning to the gene in each experimental sample. There are two replicates for each cell type and time point (detailed sample info can be found in file “GSE60450_series_matrix.txt” from the GEO website). The first few rows and columns of the seqdata file are shown below.
 
-![seqdata file](../../images/rna-seq-counts-to-genes/seqdata.png "Count file (before formatting)"){: width="50%"}
+![seqdata file](../../images/rna-seq-counts-to-genes/seqdata.png "Count file (before formatting)")
 
 The `sampleinfo` file contains basic information about the samples that we will need for the analysis. See below.
 
-![sampleinfo file](../../images/rna-seq-counts-to-genes/sampleinfo.png "Sample information file (before formatting)"){:width="20%"}
+![sampleinfo file](../../images/rna-seq-counts-to-genes/sampleinfo.png "Sample information file (before formatting)")
 
 ## Format the data
 
@@ -161,7 +161,7 @@ Optionally, gene annotations can be provided to the limma-voom tool and if provi
 >          - `SYMBOL`
 >          - `GENENAME`
 > 2. Rename file as `annodata` using the {% icon galaxy-pencil %} (pencil) icon. The file should look like below.
->    ![annodata file](../../images/rna-seq-counts-to-genes/annodata.png "Gene annotation file"){: width="50%"}
+>    ![annodata file](../../images/rna-seq-counts-to-genes/annodata.png "Gene annotation file")
 > 3. There must be the same number of lines (rows) in the counts and annotation. Check the number of lines shown on the datasets in the history, there should be 27,180 lines in both.
 {: .hands_on}
 
@@ -182,7 +182,7 @@ There are a few ways to filter out lowly expressed genes. When there are biologi
 
 In an RNA-seq analysis, the counts are normalized for different sequencing depths between samples. Normalizing to eliminate composition biases between samples is also typically performed. Composition biases can occur, for example, if there are a few highly expressed genes dominating in some samples, leading to less reads from other genes. By default, TMM normalization [(Robinson and Oshlack 2010)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2864565/) is performed by the limma tool using the edgeR `calcNormFactors` function (this can be changed under **Advanced Options**). TMM stands for Trimmed Mean of M values, where a weighted trimmed mean of the log expression ratios is used to scale the counts for the samples. See the figure from the TMM paper below. Note the plot (Figure 1c) that shows how a few highly expressed genes in the liver sample (where the arrow is) results in the majority of other genes in the sample having the appearance of being expressed lower in liver. The mid-line through the points is offset from the expected zero and the TMM normalization factor (red line) scales the counts to adjust for this.
 
-![TMM normalization](../../images/rna-seq-counts-to-genes/TMM.png "TMM normalization (Robinson and Oshlack 2010)"){: width="50%"}
+![TMM normalization](../../images/rna-seq-counts-to-genes/TMM.png "TMM normalization (Robinson and Oshlack 2010)")
 
 ## Specify Contrast(s) of interest
 
@@ -299,7 +299,7 @@ We can also have a look more closely to see whether our threshold of 0.5 CPM doe
 
 The `Report` provides links to PDFs of all plots shown in the `Report` and also to the rest of the additional plots selected to be output.
 
-![Report Outputs](../../images/rna-seq-counts-to-genes/report_plots.png "Report outputs"){: width="30%"}
+![Report Outputs](../../images/rna-seq-counts-to-genes/report_plots.png "Report outputs")
 
 Click on the `CpmPlots.pdf` link in the `Report`. You should see 12 plots, one for each sample. Two of the plots are shown below. From these plots we can see that 0.5 CPM is equivalent to ~10 counts in each of the 12 samples, so 0.5 seems to be an appropriate threshold for this dataset (these samples all have sequencing depth of 20-30 million, see the `Library information` file below, so a CPM value of 0.5 would be ~10 counts).
 
@@ -429,7 +429,7 @@ We can see that much fewer genes are now highlighted in the MD plot and identifi
 
 ![TREAT MDVol Plot](../../images/rna-seq-counts-to-genes/TREAT_mdvolplot_basalpregnant-basallactate.png "TREAT MD and Volcano plots")
 
-![TREAT DE counts](../../images/rna-seq-counts-to-genes/TREATdecounts.png "TREAT differentially expressed genes"){: width="400px"}
+![TREAT DE counts](../../images/rna-seq-counts-to-genes/TREATdecounts.png "TREAT differentially expressed genes")
 
 
 # Visualising results
@@ -446,7 +446,7 @@ Click on the `Heatmap_basalpregnant-basallactate.pdf` link in the `Report`. You 
 
 The limma-voom tool can also auto-generate stripcharts to view the expression of the top genes across the groups. Click on the `Stripcharts_basalpregnant-basallactate.pdf` link in the `Report`. You should see 10 plots, one for each top gene. Four are shown below. Note that here you can see if replicates tend to group together and how the expression compares to the other groups.
 
-![Stripchart Plot](../../images/rna-seq-counts-to-genes/stripcharts.png "Stripcharts of top genes"){: width="950px"}
+![Stripchart Plot](../../images/rna-seq-counts-to-genes/stripcharts.png "Stripcharts of top genes")
 
 
 ## Interactive DE plots (Glimma)
@@ -482,11 +482,11 @@ Multiple contrasts can be run with the limma tool. For example, we can compare t
 >          - {% icon param-check %} *"Test significance relative to a fold-change threshold (TREAT)"*: `Yes`
 > 2. Inspect the `Report`
 >
-> You should find that there are more genes differentially expressed for the luminal cells than the basal. There are ~274 genes DE in basal cells versus ~ 1610 in the luminal cells.
-> ![Basal Luminal DE counts](../../images/rna-seq-counts-to-genes/basal_luminal_decounts.png "Basal vs Luminal DE counts"){: width="50%"}
+>   You should find that there are more genes differentially expressed for the luminal cells than the basal. There are ~274 genes DE in basal cells versus ~ 1610 in the luminal cells.
+> ![Basal Luminal DE counts](../../images/rna-seq-counts-to-genes/basal_luminal_decounts.png "Basal vs Luminal DE counts")
 >
-> This is similar to what Fu et al found, many more genes differentially expressed in the luminal cells on lactation, compared to the basal cells.
-> ![Fu DE genes](../../images/rna-seq-counts-to-genes/fu_degenes.png "Fu et al, Nat Cell Biol 2015"){: width="25%"}
+>   This is similar to what Fu et al found, many more genes differentially expressed in the luminal cells on lactation, compared to the basal cells.
+> ![Fu DE genes](../../images/rna-seq-counts-to-genes/fu_degenes.png "Fu et al, Nat Cell Biol 2015")
 {: .hands_on}
 
 The tables of differentially expressed genes are output as links in the `Report` (`limma-voom_basalpregnant-basallactate.tsv` and `limma-voom_luminalpregnant-luminallactate.tsv`), see below, and also as datasets in the history (`DE tables`). With multiple contrasts, a plot for each contrast is generated for relevant plots, as shown below. This enables a quick and easy visual comparison of the contrasts.
