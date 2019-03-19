@@ -59,11 +59,11 @@ The goal of the first step is to upload and prepare the file so that it will be 
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 2. Check that the file contains a header corresponding to: ```"SPECIES","SITE","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content are between double quotes as "x" and that separators have to be ","
+> 2. Check that the file contains a header corresponding to: ```"SPECIES","SITE","YEAR","MONTH","DAY","COUNT"```, and that all the non numeric content are between double quotes as "x" and that separators are ","
 >
 {: .hands_on}
 
-This dataset gathers years of records of the presence of butterfly species per site and per day. Columns indicates spieces names ("SPECIES"), observation site ("SITE"), date of the observation ("YEAR","MONTH","DAY") and number of indivudals ("COUNT").
+This dataset gathers years of records of the presence of butterfly species per site and per day. Columns indicates species names ("SPECIES"), observation site ("SITE"), date of the observation ("YEAR","MONTH","DAY") and number of indivudals ("COUNT").
 
 
 ## Prepare the data
@@ -77,14 +77,15 @@ The downstream tools require Tabular file and not CSV. So we need first to conve
 >       - *"Header in file"*: Yes
 {: .hands_on}
 
-The current dataset contains many details. It lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example, the list of sites (look at the column with header `SITE`) of the dataset you are using is really long and the `SITES `are classified into sub-sites (like `ESBMS.12`, `ESBMS.28`, `ESBMS.55`, etc). 
+The current dataset contains many details. It lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example, the list of sites (look at the column with header `SITE`) of the dataset you are using is really long and the `SITES `are classified into sub-sites (like `ESBMS.12`, `ESBMS.28`, `ESBMS.55`, etc).
 
-Here, we will assume that your file doesn't really need be as precise and this is the reason why you have to specify you don't want the sub-sites. We want to create a down-sampled file, deleting the `---.12, ---.28` mentions, 
+Here, we will assume that your file doesn't really need be as precise and this is the reason why you have to specify you don't want the sub-sites. We want to create a down-sampled file, deleting the `---.12, ---.28` mentions,
 
 > ### {% icon hands_on %} Hands-on: Downsample and hide some informations   
 > 1. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
 >       - {% icon param-file %} *"Select cells from"*: output of **CSV to tabular** {% icon tool %}
 >       - *"using column"*: `Column: 2`, the column with the `SITE` header
+>       - *"insert Check"*
 >       - *"Find pattern"*: `(\.[0-9]+)`
 >
 >           It specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
@@ -107,11 +108,11 @@ Here, we will assume that your file doesn't really need be as precise and this i
 {: .question}
 
 > ### {% icon details %} If your original data is on RData format
-> 
+>
 > > ### {% icon hands_on %} Hands-on: Data upload.
 > > 1. Import the RData
 > >
-> >    For example, you can upload: 
+> >    For example, you can upload:
 > >
 > >    ```
 > >    https://zenodo.org/record/1324204/files/gatekeeper_CM%20.RData
@@ -119,16 +120,16 @@ Here, we will assume that your file doesn't really need be as precise and this i
 > >
 > > 2. **RData binary file reader** {% icon tool %} with the following parameters:
 > >    -  {% icon param-file %} *"Rdata binary file to explore"*: imported RData
-> > 
+> >
 > > 2. **RData parser** {% icon tool %} with the following parameters
 > >    -  {% icon param-file %} *"Rdata file to explore"*: imported RData
 > >    -  {% icon param-file %} *"File with .Rdata content details"*: output of **RData binary file reader** {% icon tool %}
 > >    -  *"Select which attribute(s) you want to extract"*: select everything but "trend"
 > >    -  *"Bind variables in a single tabular when its possible"*: `Yes`
 > {: .hands_on}
-> 
+>
 > If the tool **RData parser** {% icon tool %} don't succeed to create a single tabular file, it generates separate files, each of them containing one column. The file with the `TREND` header can be let aside as we don't need it for what will follow.
-> 
+>
 > > ### {% icon question %} Questions
 > >
 > > If Rdata parser fails to generate a single unified tabular file, can you propose a way to regenerate such a dataset ?
@@ -140,31 +141,31 @@ Here, we will assume that your file doesn't really need be as precise and this i
 > >     - {% icon param-file %}*"and"*: output from **RData parser** {% icon tool %} with headed with "SITE"
 > > > 2. Repeat **Paste two files side by side** {% icon tool %} executions as many times as there are separated files in order to create a final dataset with all the columns:
 > > >     1. Repeat **Paste two files side by side tool** {% icon tool %} to paste the file containing 2 columns with the one headed by `YEAR`
-> > >     1. Repeat **Paste two files side by side tool** {% icon tool %} to paste the file containing 3 columns with the one headed by `MONTH` 
+> > >     1. Repeat **Paste two files side by side tool** {% icon tool %} to paste the file containing 3 columns with the one headed by `MONTH`
 > > >     1. Repeat **Paste two files side by side tool** {% icon tool %} to paste the file containing 4 columns with the one headed by `DAY`
-> > >     1. Repeat **Paste two files side by side tool** {% icon tool %} to paste the file containing 5 columns with the one headed by `COUNT` 
+> > >     1. Repeat **Paste two files side by side tool** {% icon tool %} to paste the file containing 5 columns with the one headed by `COUNT`
 > > {: .solution}
 > {: .question}
 {: .details}
 
-## Check that the dataset concerns only one species 
- 
-The second step of any Regional GAM data analysis is making sure to have a dataset of only one specific species that you will then be able to use. If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another. 
+## Check that the dataset concerns only one species
 
-As the dataset is quite big and may countain heterogeneous informations, we need to know whether the data are about one species or more. 
+The second step of any Regional GAM data analysis is making sure to have a dataset of only one specific species that you will then be able to use. If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another.
+
+As the dataset is quite big and may countain heterogeneous informations, we need to know whether the data are about one species or more.
 
 > ### {% icon hands_on %} Hands-on: How many species are taken into account in this dataset?
 >
 > 1. **Count occurrences of each record** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"from dataset"*: output of **Column Regex Find And Replace**
->    - *"Count occurrences of values in column(s)"*: `Column: 1`, the `SPECIES` column 
+>    - *"Count occurrences of values in column(s)"*: `Column: 1`, the `SPECIES` column
 >    - *"Delimited by"*: `Tab`
 >    - *"How should the results be sorted?"*: `With the most common values first`
 > 2. Inspect the generated file by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
 > 3. Check that the dataset is for one species only
 {: .hands_on}
 
-The regionalGAM tools require CSV files as input, we need to regenerate a CSV file using the `tabular to CSV` tool from 
+The regionalGAM tools require CSV files as input, we need to regenerate a CSV file using the `tabular to CSV` tool from
 
 > ### {% icon hands_on %} Hands-on: Regenerate a CSV file
 > 1. **Tabular to CSV** {% icon tool %}
@@ -189,25 +190,27 @@ The regionalGAM tools require CSV files as input, we need to regenerate a CSV fi
 > 2. Inspect the file by clicking on the {% icon galaxy-eye %} icon to check how many species are taken into account.
 > {: .hands_on}
 >
-> To test these steps, you can use the following dataset: 
-> 
+> To test these steps, you can use the following dataset:
+>
 >   ```
 >   https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv
 >   ```
-> 
+>
 > > ### {% icon question %} Questions
 > >
-> > 1. How many species does your initial dataset take into account ?
+> > 1. How many species does your initial dataset take into account ? 
 > > 2. What are their names ? 
 > >
-> > ### {% icon solution %} Solutions
-> > 1. The dataset contains informations on 2 different species
-> > 2. Their names are "Pyronia tithonus" and "Aglais io".
+> > > ### {% icon solution %} Solutions
+> > >
+> > > 1. The dataset contains informations on 2 different species 
+> > > 2. Their names are "Pyronia tithonus" and "Aglais io". 
+> > >
 > > {: .solution}
 > {: .question}
-> 
+>
 > We now need to create a new file concerning only the data of one species
-> 
+>
 > > ### {% icon hands_on %} Hands-on: Creating a new file concerning only the data of one species
 > > 1. Copy the name of the species you are interested in (for example: "Aglais io").
 > > 2. **Filter data on any column using simple expressions** {% icon tool %}
@@ -226,7 +229,7 @@ The regionalGAM tools require CSV files as input, we need to regenerate a CSV fi
 > > 5. Tag your new dataset with an explicit tags as "Count" and "Aglais io" and/or rename this dataset like "Aglais io count file".
 > {: .hands_on}
 >
-> If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another. 
+> If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another.
 {: .details}
 
 # Step 2: Analyze phenology of a species through the years
@@ -234,7 +237,7 @@ The regionalGAM tools require CSV files as input, we need to regenerate a CSV fi
 ## Visualize the phenology
 
 [Phenology](https://en.wikipedia.org/wiki/Phenology), as described in Wikipedia, is the study of periodic plant and animal life cycle events and how these are influenced by seasonal and interannual variations in climate, as well as habitat factors (such as elevation)
- 
+
 Now you have a file containing all the data on the species of interest. The main goal of this step is to treat phenology related informations and create a material that can be used to generate charts. What you could also do, for example, would be to compare the phenology through the years and sites.
 
 This step will allow you to compute and display the phenology of a species. In the second part, you will learn that it is possible to show the phenology of various species on a single chart allowing to compare them and analyse them more easily.
@@ -246,12 +249,11 @@ This step will allow you to compute and display the phenology of a species. In t
 > 2. Generate the chart using the visualization
 >    1. Inspect and expand the output data from **Flight curve** {% icon tool %}
 >    2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
->    3. Select `Charts` 
 >    3. Select **Line chart (NVD 3)** as visualization type
->    4. Give it a proper name, i.e. `Pyronia tithonus phenology raw simple vizu` 
+>    4. Give it a proper name, i.e. `Pyronia tithonus phenology raw simple vizu`
 >    5. On **Select data** area, specify:
 >       - *"Provide a label"*: `Pyronia tithonus phenology from 2003 to 2012` for example
->       - *"Pick a series color"*: Choose a color for the line 
+>       - *"Pick a series color"*: Choose a color for the line
 >       - *"Data point labels"*: `Column 1`
 >       - *"Values for x-axis"*: `Column 2`
 >       - *"Values for y-axis"*: `Column 6`
@@ -265,31 +267,31 @@ This step will allow you to compute and display the phenology of a species. In t
 
 ![Phenology chart](../../images/regionalGAM/phenology_year.png)
 
-This graph displays the occurrence of Pyronia tithonus, over the year. But the first year is "null", probably a left-over of the 1st line with the header, and we do not know the weeks there. 
+This graph displays the occurrence of Pyronia tithonus, over the year. But the first year is "null", probably a left-over of the 1st line with the header, and we do not know the weeks there.
 
-> ### {% icon hands_on %} Hands-on: Create a new column of the dataset containing the week and the year 
-> 1. **Count occurrences of each record** {% icon tool %} with the following parameters 
+> ### {% icon hands_on %} Hands-on: Create a new column of the dataset containing the week and the year
+> 1. **Count occurrences of each record** {% icon tool %} with the following parameters
 >    - {% icon param-file %} *"from dataset"*: output from **Flight curve**
 >    - *"Select"*: `Column: 2` (the column with the year)
 >    - *"Delimited by"*: `Tab`
 >    - *"How should the results be sorted?"*: `By the values being counted`
 > 2. Inspect and expand the output data from **Count occurrences of each record** {% icon tool %}
 >   
->    > ### {% icon question %} Questions
->    >
->    > What can you see in this file?
->    >
->    > > ### {% icon solution %} Solution
->    > > 
->    > {: .solution }
+> > ### {% icon question %} Questions
+> >
+> > What can you see in this file?
+> >
+> > > ### {% icon solution %} Solution
+> > > A list of the years and the number of occurence for each year which should match the number of days for each year.
+> > {: .solution }
 >    {: .question}
 >
 > 3. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: output file from **flight curve**.
 >    - *"in column"*: `Column 2` (the column with the year)
 >    - *"Find pattern"*: `(20[0-9][0-9])`
->    - *"Replace with"*: `-\\1` 
-> 4. Inspect the file and check if all the years are now written with a `-` before the digits. 
+>    - *"Replace with"*: `-\1`
+> 4. Inspect the file and check if all the years are now written with a `-` before the digits.
 > 5. **Merge Columns together** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select data"*: output from the last **Column Regex Find And Replace**.
 >    - *"Merge column"*: `Column: 3` (the column with the week)
@@ -299,21 +301,20 @@ This graph displays the occurrence of Pyronia tithonus, over the year. But the f
 >    - {% icon param-file %} *"File to process"*: output file from **Remove beginning of a file**.
 >    - *"in column"*: `Column 2` (the column with the year)
 >    - *"Find pattern"*: `-(20[0-9][0-9])`
->    - *"Replace with"*: `\\1`
+>    - *"Replace with"*: `\1`
 >
 >    > ### {% icon comment %} Dataset with information about more than one species
 >    > If your dataset contains information about more than one species, you can apply the previous steps and then run an extra-step to select one specific species and show all the data corresponding to it.
 >    {: .comment}
-> 
+>
 > 2. Generate the chart using the visualization with the x-axis corresponding to your column `"week""year"`.
 >    1. Inspect and expand the output data from **Remove beginning of a file** {% icon tool %}
 >    2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
->    3. Select `Charts` 
 >    3. Select **Line chart (NVD 3)** as visualization type
->    4. Give it a proper name, i.e. `Pyronia tithonus phenology simple vizu` 
+>    4. Give it a proper name, i.e. `Pyronia tithonus phenology simple vizu`
 >    5. On **Select data** area, specify:
 >       - *"Provide a label"*: `Pyronia tithonus phenology from 2003 to 2012` for example
->       - *"Pick a series color"*: Choose a color for the line 
+>       - *"Pick a series color"*: Choose a color for the line
 >       - *"Data point labels"*: `Column 6` (the nm column) or another one
 >       - *"Values for x-axis"*: `Column 7` (the "week-year" column)
 >       - *"Values for y-axis"*: `Column 6` (the nm column)
@@ -322,12 +323,12 @@ This graph displays the occurrence of Pyronia tithonus, over the year. But the f
 >       - *"Y-Axis label"*: `nm values`
 >    7. Click on **Visualize**
 >    8. Click on **Save**
-> 
+>
 {: .hands_on}
 
 ![Phenology chart](../../images/regionalGAM/Pyronia_tithonus_phenology_explicit_ID.png)
 
-This shows the occurrence of Pyronia tithonus, over the weeks. We can already see some differences in the values between the weeks and years, but not how the weeks overlap between the years. In this type of visualization, it's quite difficult to see when occurs maximum presence of butterflies and possible changes between years. We would like to visualize these differences using a stacked visualization. Here we can see global differences year by year like evolution of the maximum number of observations or some specific patterns as presence of more than only one peak in 2007, 2009 and 2012.
+This shows the occurrence of Pyronia tithonus, over the weeks. We can see there is a peak every year and we can already notice some differences in the values between the weeks and years, but not how the weeks overlap between the years. In this type of visualization, it's quite difficult to see when occurs maximum presence of butterflies and possible changes between years. We would like to visualize these differences using a stacked visualization. Here we can see global differences year by year like evolution of the maximum number of observations or some specific patterns as presence of more than only one peak in 2007, 2009 and 2012.
 
 To do that, we need to first create a table with the columns:
 1. Day
@@ -376,21 +377,24 @@ To do that, we need to first create a table with the columns:
 >    - *"Operation"*: `Keep`
 >    - *"Delimited"*: `Tab`
 >    - *"Cut by"*: `fields`
->       - *"List of Fields"*: `Column: 1`, `Column: 3`, `Column: 4`, `Column: 6`
+>       - *"List of Fields"*: `c1`, `c3`, `c4`, `c6`
 >
-> 4. **Paste two files side by side** to paste the files
+> 4. **Multi-Join (combine multiple files)** to paste the 9 files
 >    - {% icon param-file %} *"File to join"*: the first output of **Cut**
->    - {% icon param-files %} *"add additional file"*: the other first output of **Cut**
+>    - {% icon param-files %} *"add additional file"*: All the other output of **Cut**
 >    - *"Common key column"*: `3`
 >    - *"Column with values to preserve"*: All
-> 
-> 5. **Sort** 
->    - {% icon param-file %} *"File"*: the output of **Paste**
+>    - *"Add header line to the output file"*: No
+>
+> 5. **Sort** to get your data in chronological order
+>    - {% icon param-file %} *"File"*: the output of **Multi-Join**
 >    - *"column"*: `Column: 1`
 >    - *"order"*: `ascending`
 >
-> 6. **Cut**
+> 6. **Cut** to remove repeated columns
 >    - {% icon param-files %} *"File to cut"*: output of **Sort**
+>    - *"Operation"*: `Keep`
+>    - *"Delimited by"*: `Tab`
 >    - *"Cut by"*: `fields`
 >      - *"List of Fields"*: `Column: 1`, `Column: 2`, `Column: 3`, `Column: 5`, `Column: 7`, `Column: 9`, `Column: 11`, `Column: 13`, `Column: 15`, `Column: 17`, `Column: 19`, `Column: 21`, `Column: 23`, `Column: 25`, `Column: 27`, `Column: 31`, `Column: 33`, `Column: 35`, `Column: 37`, `Column: 39`, `Column: 41`
 >
@@ -399,76 +403,75 @@ To do that, we need to first create a table with the columns:
 > 7. Generate the chart using the stacked visualization
 >    1. Inspect and expand the output data from **Cut** {% icon tool %}
 >    2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
->    3. Select `Charts` 
 >    3. Select **Line chart (NVD 3)** as visualization type
->    4. Give it a proper name, i.e. `Pyronia tithonus phenology` 
+>    4. Give it a proper name, i.e. `Pyronia tithonus phenology`
 >    5. On **Select data** area, specify:
 >       - In *"1: Data series"*:
 >           - *"Provide a label"*: `2003` for example
->           - *"Pick a series color"*: Choose a color for the line 
+>           - *"Pick a series color"*: Choose a color for the line
 >           - *"Data point labels"*: `Column: 4` (the 2003 nm column)
 >           - *"Values for x-axis"*: `Column: 3` (the 2003 "week" column)
 >           - *"Values for y-axis"*: `Column: 4` (the 2003 nm column)
 >       - {% icon param-repeat %} *"Insert Data series"*
 >       - In *"2: Data series"*:
 >           - *"Provide a label"*: `2004` for example
->           - *"Pick a series color"*: Choose a color for the line 
+>           - *"Pick a series color"*: Choose a color for the line
 >           - *"Data point labels"*: `Column: 6` (the 2004 nm column)
 >           - *"Values for x-axis"*: `Column: 5` (the 2004 "week" column)
 >           - *"Values for y-axis"*: `Column: 6` (the 2004 nm column)
 >       - {% icon param-repeat %} *"Insert Data series"*
 >       - In *"3: Data series"*:
 >           - *"Provide a label"*: `2005` for example
->           - *"Pick a series color"*: Choose a color for the line 
+>           - *"Pick a series color"*: Choose a color for the line
 >           - *"Data point labels"*: `Column: 8`
 >           - *"Values for x-axis"*: `Column: 7`
 >           - *"Values for y-axis"*: `Column: 8`
 >       - {% icon param-repeat %} *"Insert Data series"*
 >       - In *"4: Data series"*:
 >           - *"Provide a label"*: `2006` for example
->           - *"Pick a series color"*: Choose a color for the line 
+>           - *"Pick a series color"*: Choose a color for the line
 >           - *"Data point labels"*: `Column: 10`
 >           - *"Values for x-axis"*: `Column: 9`
 >           - *"Values for y-axis"*: `Column: 10`
 >       - {% icon param-repeat %} *"Insert Data series"*
 >       - In *"5: Data series"*:
 >           - *"Provide a label"*: `2007` for example
->           - *"Pick a series color"*: Choose a color for the line 
+>           - *"Pick a series color"*: Choose a color for the line
 >           - *"Data point labels"*: `Column: 12`
 >           - *"Values for x-axis"*: `Column: 11`
 >           - *"Values for y-axis"*: `Column: 12`
 >       - {% icon param-repeat %} *"Insert Data series"*
 >       - In *"6: Data series"*:
 >           - *"Provide a label"*: `2008` for example
->           - *"Pick a series color"*: Choose a color for the line 
+>           - *"Pick a series color"*: Choose a color for the line
 >           - *"Data point labels"*: `Column: 14`
 >           - *"Values for x-axis"*: `Column: 13`
 >           - *"Values for y-axis"*: `Column: 14`
 >       - {% icon param-repeat %} *"Insert Data series"*
 >       - In *"7: Data series"*:
 >           - *"Provide a label"*: `2009` for example
->           - *"Pick a series color"*: Choose a color for the line 
+>           - *"Pick a series color"*: Choose a color for the line
 >           - *"Data point labels"*: `Column: 16`
 >           - *"Values for x-axis"*: `Column: 15`
 >           - *"Values for y-axis"*: `Column: 16`
 >       - {% icon param-repeat %} *"Insert Data series"*
 >       - In *"8: Data series"*:
 >           - *"Provide a label"*: `2010` for example
->           - *"Pick a series color"*: Choose a color for the line 
+>           - *"Pick a series color"*: Choose a color for the line
 >           - *"Data point labels"*: `Column: 18`
 >           - *"Values for x-axis"*: `Column: 17`
 >           - *"Values for y-axis"*: `Column: 18`
 >       - {% icon param-repeat %} *"Insert Data series"*
 >       - In *"9: Data series"*:
 >           - *"Provide a label"*: `2011` for example
->           - *"Pick a series color"*: Choose a color for the line 
+>           - *"Pick a series color"*: Choose a color for the line
 >           - *"Data point labels"*: `Column: 20`
 >           - *"Values for x-axis"*: `Column: 19`
 >           - *"Values for y-axis"*: `Column: 20`
 >       - {% icon param-repeat %} *"Insert Data series"*
 >       - In *"9: Data series"*:
 >           - *"Provide a label"*: `2012` for example
->           - *"Pick a series color"*: Choose a color for the line 
+>           - *"Pick a series color"*: Choose a color for the line
 >           - *"Data point labels"*: `Column: 22`
 >           - *"Values for x-axis"*: `Column: 21`
 >           - *"Values for y-axis"*: `Column: 22`
@@ -486,14 +489,14 @@ To do that, we need to first create a table with the columns:
 With this graph, we can see that the occurrence of Pyronia tithonus is always around the same weeks every year. We can also see differences between years, for example 2005 and 2007 show earlier observation than others years maybe due to climatic particularities or due to observations bias. Further tests can be made on these data to evaluate differences between years and relation to climatic, environmental or others factors. Earliest peak is found for year 2006 when latest for year 2012, and this can also be explained by different types of environmental factors or bias. This can be tested through further modeling steps.
 
 > ### {% icon details %} Working with more than one species
-> 
+>
 > If you are working with more than one species, you should follow the next steps
 >
-> > ### {% icon hands_on %} Hands-on: 
+> > ### {% icon hands_on %} Hands-on:
 > > 1. **Paste two files side by side** {% icon tool %} with the following parameters:
 > >     -  *"Paste"*: `the output` from **Merge Columns together** (with the dataset concerning species 1)
 > >     -  *"and"*: `the output` from **Merge Columns together** (with the dataset concerning species 2)
-> >     -  *"Delimited by"*: tabulation 
+> >     -  *"Delimited by"*: tabulation
 > >
 > >   >
 > >   > ### {% icon comment %} Comment: You can add other species.
@@ -501,29 +504,28 @@ With this graph, we can see that the occurrence of Pyronia tithonus is always ar
 > >   > 1. **Paste two files side by side** {% icon tool %} with the following parameters:
 > >   >    -  *"Paste"*: the `output` from **Paste two files side by side** (with the dataset concerning species 1 and 2)
 > >   >    -  *"and"*: `the output` from **Merge Columns together** (with the dataset concerning species 3)
-> >   >    -  *"Delimited by"*: tabulation 
+> >   >    -  *"Delimited by"*: tabulation
 > >   > 2. Repeat **Paste two files side by side** {% icon tool %} with the output from **Paste two files side by side** (with the data concerning species 1, 2 and 3) and with the output from **Merge Columns together** (with the dataset concerning species 4) and so on.
 > >   {: .comment}
 > {: .hands_on}
 >
 > If your input dataset contains informations about more than one species, you can now generate char for the multispecies:
 >
-> > ### {% icon hands_on %} Hands-on: 
+> > ### {% icon hands_on %} Hands-on:
 > > 1. Inspect and expand the output data from **flight curve** {% icon tool %}
 > > 2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
-> > 3. Select **Charts**
 > > 3. Select a visualization: `line chart (NVD 3)`
 > > 4. Give it a proper name like `Aglais io & Pyronia tithonus phenology`
-> > 5. Select data 
+> > 5. Select data
 > >     -  *"Provide a label"*: The name of the first species, for example `Aglais io`
 > >     -  *"Pick a series color"*: Choose a color
-> >     -  *"Data point labels"*: `Column corresponding to the name of the species 1` 
+> >     -  *"Data point labels"*: `Column corresponding to the name of the species 1`
 > >     -  *"Values for x-axis"*: `Column corresponding to the "week and year" of the species 1`
 > >     -  *"Values for y-axis"*: `Column corresponding to nm of the species 1`
 > > 6. Insert data series:
 > >     -  *"Provide a label": he name of the second species, for example `Pyronia tithonus`
 > >     -  *"Pick a series color"*: Choose a different color
-> >     -  *"Data point labels"*: `Column corresponding to the name of the species 2` 
+> >     -  *"Data point labels"*: `Column corresponding to the name of the species 2`
 > >     -  *"Values for x-axis"*: `Column corresponding to the "week and year" of the species 2`
 > >     -  *"Values for y-axis"*: `Column corresponding to nm of the species 2`
 > > 7. You may repeat "Insert data series" as many times as needed depending on the number of different species you want to represent on your chart.
@@ -540,7 +542,7 @@ With this graph, we can see that the occurrence of Pyronia tithonus is always ar
 
 ## Compute Abundance Index across sites and years
 
-We now would like to create a file showing the abundance index per year of a chosen species in a certain site. Based on this file we will then learn how to represent this abundance on a chart. 
+We now would like to create a file showing the abundance index per year of a chosen species in a certain site. Based on this file we will then learn how to represent this abundance on a chart.
 
 > ### {% icon hands_on %} Hands-on: Generate an adundance index
 > 1. **Abundance index** {% icon tool %} with the following parameters:
@@ -552,10 +554,10 @@ We now would like to create a file showing the abundance index per year of a cho
 - Site
 - Species
 - Year
-- Regional GAM 
+- Regional GAM
 - prop_pheno_sampled
 
-We now would like to create a chart showing the annual abundance trend of a certain species per site: 
+We now would like to create a chart showing the annual abundance trend of a certain species per site:
 - Sites as labels
 - Year as X-axis
 - Regional GAM as Y-axis
@@ -563,11 +565,10 @@ We now would like to create a chart showing the annual abundance trend of a cert
 > ### {% icon hands_on %} Hands-on: Visualize the adundance index
 > 1. Inspect and expand the output data from **Abundance index** {% icon tool %}
 > 2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
-> 3. Select `Charts` 
 > 3. Select **Bar diagram (NVD 3)** as visualization type
-> 4. Give it a proper name, i.e. `Pyronia tithonus abundance index` 
+> 4. Give it a proper name, i.e. `Pyronia tithonus abundance index`
 > 5. On **Select data** area, specify:
->     -  *"Data point labels"*: `Column 1` 
+>     -  *"Data point labels"*: `Column 1`
 >     -  *"Values for x-axis"*: `Column 3`
 >     -  *"Values for y-axis"*: `Column 4`
 > 5. Click on **Customize**
@@ -579,7 +580,7 @@ We now would like to create a chart showing the annual abundance trend of a cert
 
 ![Abundance index chart](../../images/regionalGAM/regionalgam_year.png)
 
-What do you think about this visualization? 
+What do you think about this visualization?
 
 It is maybe not so good. We can not quickly see the different sites. As before, we could create a stacked visualization. But here, we will now plot the barplot with bar colored by sites.
 
@@ -593,9 +594,9 @@ As before, we need first to create a table with the column:
 7. etc for all sites that we need to identify
 
 > ### {% icon hands_on %} Hands-on: Expected temporal trend
-> 1. **Unique** {% icon tool %}
+> 1. **Count occurrences of values in column(s)** {% icon tool %}
 >     - {% icon param-file %} *"Dataset"*: the output of **Abundance index**
->     -  *"Count occurrences on"*: `Column: 1`
+>     -  *"Count occurrences of values in column(s)"*: `Column: 1`
 > 2. Check the generated output to identify the different sites
 > 1. **Filter data on any column using simple expressions** {% icon tool %} to select values for 2003
 >    - {% icon param-file %} *"Filter"*: output of **Abundance index** {% icon tool %}
@@ -609,14 +610,14 @@ As before, we need first to create a table with the column:
 >   
 >    You should now have new 5 files in the history
 >
-> 4. **Paste two files side by side** {% icon tool %} to paste the files
+> 4. **Multi-Join (combine multiple files)** to paste the 5 files
 >    - {% icon param-file %} *"File to join"*: the first output of **Filter**
 >    - {% icon param-files %} *"add additional file"*: the other 4 output of **Filter**
 >    - *"Common key column"*: `3`
 >    - *"Column with values to preserve"*: `Column: 2`, `Column: 3`, `Column: 4`, `Column: 5`
-> 
-> 6. **Cut**
->    - {% icon param-files %} *"File to cut"*: output of **Paste**
+>
+> 6. **Cut columns from a table**
+>    - {% icon param-files %} *"File to cut"*: output of **Multi-Join**
 >    - *"Cut by"*: `fields`
 >      - *"List of Fields"*: `Column: 1`, `Column: 4`, `Column: 5`, `Column: 8`, `Column: 9`, `Column: 12`, `Column: 13`, `Column: 16`, `Column: 17`, `Column: 20`, `Column: 21`
 >
@@ -625,41 +626,40 @@ As before, we need first to create a table with the column:
 > 7. Generate the chart using the stacked visualization
 >    1. Inspect and expand the output data from **Cut** {% icon tool %}
 >    2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
->    3. Select `Charts` 
 >    3. Select **Bar diagram (NVD 3)** as visualization type
->    4. Give it a proper name, i.e. `Pyronia tithonus abundance index` 
+>    4. Give it a proper name, i.e. `Pyronia tithonus abundance index`
 >    5. On **Select data** area, specify:
 >       - In *"1: Data series"*:
 >           - *"Provide a label"*: `DEBMS` for example
->           - *"Pick a series color"*: Choose a color for the line 
+>           - *"Pick a series color"*: Choose a color for the line
 >           - *"Data point labels"*: `Column: 3` (the DEBMS prop_pheno_sampled column)
 >           - *"Values for x-axis"*: `Column: 1` (the "year" column)
 >           - *"Values for y-axis"*: `Column: 2` (the DEBMS regional_gam column)
 >       - {% icon param-repeat %} *"Insert Data series"*
 >       - In *"2: Data series"*:
 >           - *"Provide a label"*: `ESBMS` for example
->           - *"Pick a series color"*: Choose a color for the line 
+>           - *"Pick a series color"*: Choose a color for the line
 >           - *"Data point labels"*: `Column: 5`
 >           - *"Values for x-axis"*: `Column: 1`
 >           - *"Values for y-axis"*: `Column: 4`
 >       - {% icon param-repeat %} *"Insert Data series"*
 >       - In *"3: Data series"*:
 >           - *"Provide a label"*: `FRBMS` for example
->           - *"Pick a series color"*: Choose a color for the line 
+>           - *"Pick a series color"*: Choose a color for the line
 >           - *"Data point labels"*: `Column: 7`
 >           - *"Values for x-axis"*: `Column: 1`
 >           - *"Values for y-axis"*: `Column: 6`
 >       - {% icon param-repeat %} *"Insert Data series"*
 >       - In *"4: Data series"*:
 >           - *"Provide a label"*: `NLBMS` for example
->           - *"Pick a series color"*: Choose a color for the line 
+>           - *"Pick a series color"*: Choose a color for the line
 >           - *"Data point labels"*: `Column: 9`
 >           - *"Values for x-axis"*: `Column: 1`
 >           - *"Values for y-axis"*: `Column: 8`
 >       - {% icon param-repeat %} *"Insert Data series"*
 >       - In *"5: Data series"*:
 >           - *"Provide a label"*: `UKBMS` for example
->           - *"Pick a series color"*: Choose a color for the line 
+>           - *"Pick a series color"*: Choose a color for the line
 >           - *"Data point labels"*: `Column: 11`
 >           - *"Values for x-axis"*: `Column: 1`
 >           - *"Values for y-axis"*: `Column: 10`
@@ -681,12 +681,12 @@ With this graph, we can see Pyronia tithonus abundance index through years by si
 The expected temporal trend allows you to have an overview of the evolution of a species in a certain type of environment in the futur.
 
 > ### {% icon hands_on %} Hands-on: Expected temporal trend
-> 1. **Expected temporal trend** {% icon tool %} with the the following parameters: 
+> 1. **Expected temporal trend** {% icon tool %} with the the following parameters:
 >    -  *"Tabular file generated by the ab_index tool"*: output of **abundance index**
 {: .hands_on}
 
 **Expected temporal trend** {% icon tool %} generates 2 files"
-1. The graph like: 
+1. The graph like:
 
     ![Expected temporal trend](../../images/regionalGAM/Expected_temporal_trend.png)
 
@@ -704,14 +704,14 @@ We would like to know if the year has an influence on the abundance of a species
 >    - {% icon param-file %} *"File generated by the ab_index tool"*: output from **abundance index**
 {: .hands_on}
 
-Have a look at the text file result. This is the output of the linear model applied in R. 
-Is the effect weak or strong? 
+Have a look at the text file result. This is the output of the linear model applied in R.
+Is the effect weak or strong?
 Weak
 
 Seems the model closed to the reality or not?
 No, the standard deviation is really bad
 
-Is the test p-value significant? 
+Is the test p-value significant?
 yes
 
 As we are applying here a very simple model, we need to test a more complex one to have more evidence about the relevance of the year effect on our data.
@@ -724,7 +724,7 @@ We would like now to apply the same approach with addition of a correlation stru
 >    - {% icon param-file %} *"File generated by the ab_index tool"*: output from **abundance index**
 {: .hands_on}
 
-Have a look at this new text file result. 
+Have a look at this new text file result.
 
 Is the test p-value still significant?
 No
@@ -732,7 +732,7 @@ No
 Seems the model closed to the reality or not?
 No, the standard deviation is really bad
 
-Can you explain why? 
+Can you explain why?
 This is due to a strong autocorrelation in the residuals
 
 To compare the 2 models, we can compute and plot the global trend (over years).
@@ -745,9 +745,9 @@ To compare the 2 models, we can compute and plot the global trend (over years).
 
 ![Expected temporal trend](../../images/regionalGAM/trends.svg)
 
-Here you can see the temporal trends modeled from the simple regression vs using autocorrelation in residuals. You can see the trends are similar (apprently decrease) even if different (origin and slope are differents). Here results are not significant so we can say that there is a significant decrease of the abundance. 
+Here you can see the temporal trends modeled from the simple regression vs using autocorrelation in residuals. You can see the trends are similar (apprently decrease) even if different (origin and slope are differents). Here results are not significant so we can say that there is a significant decrease of the abundance.
 
 # Conclusions
 {:.no_toc}
 
-In this tutorial, you have analyzed regional GAM data to extract useful informations in order to be able to show different tendencies of a chosen species. Therefore, you are now able to treat the dataset so that it shows only the data concerning one specific species of your choice. From there, you can show the occurrence of this species through the years first on a dataset and then on a visual chart. You have also learned how to represent on a single chart the occurences of various species. Afterwards, we have shown you how to create a dataset containing the informations on the abundance of a species per year and per site. Based on which you can henceforth visually represent the annual abundance trend on a chart. Thereafter, you have the possibility of showing the expected temporal trend, based on which you will be able to try predicting the future evolution a given species. The last part of this tutorial has shown you how to calculate the linear regression allowing you to determinate wether the year has an influence on the abundance of a species or not. 
+In this tutorial, you have analyzed regional GAM data to extract useful informations in order to be able to show different tendencies of a chosen species. Therefore, you are now able to treat the dataset so that it shows only the data concerning one specific species of your choice. From there, you can show the occurrence of this species through the years first on a dataset and then on a visual chart. You have also learned how to represent on a single chart the occurences of various species. Afterwards, we have shown you how to create a dataset containing the informations on the abundance of a species per year and per site. Based on which you can henceforth visually represent the annual abundance trend on a chart. Thereafter, you have the possibility of showing the expected temporal trend, based on which you will be able to try predicting the future evolution a given species. The last part of this tutorial has shown you how to calculate the linear regression allowing you to determinate wether the year has an influence on the abundance of a species or not.
