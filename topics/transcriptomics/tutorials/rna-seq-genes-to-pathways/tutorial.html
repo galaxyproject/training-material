@@ -153,7 +153,7 @@
 
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="https://zenodo.org/record/2491305" title="Links to data">
+                        <a class="nav-link" href="https://zenodo.org/record/2596382" title="Links to data">
                             <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Input Dataset
                         </a>
                     </li>
@@ -362,7 +362,7 @@
   "mentions": [
     {
       "@type": "Thing",
-      "url": "https://zenodo.org/record/2491305",
+      "url": "https://zenodo.org/record/2596382",
       "name": "Training data for RNA-seq genes to pathways tutorial"
     }
   ],
@@ -519,7 +519,7 @@
 
 <p>Sometimes there is quite a long list of genes to interpret after a differential expression analysis, and it is usually infeasible to go through the list one gene at a time trying to understand it’s biological function. A common downstream procedure is gene set testing, which aims to understand which pathways/gene networks the differentially expressed genes are implicated in. There are many different gene set testing methods that can be applied and it can be useful to try several.</p>
 
-<p>The purpose of this tutorial is to demonstrate how to perform gene set testing using tools in Galaxy. The data comes from a Nature Cell Biology paper, <a href="https://www.ncbi.nlm.nih.gov/pubmed/25730472">EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival</a>), Fu et al. 2015. That study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice (see Figure below). How to generate differentially expressed genes from reads (FASTQs) for this dataset is covered in the accompanying tutorials <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">RNA-seq reads to counts</a> and <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a>. This tutorial is inspired by material from the COMBINE R RNAseq workshop <a href="http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html">here</a> and the Cancer Research UK workshop <a href="https://bioinformatics-core-shared-training.github.io/cruk-summer-school-2018/RNASeq2018/html/06_Gene_set_testing.nb.html">here</a></p>
+<p>The purpose of this tutorial is to demonstrate how to perform gene set testing using tools in Galaxy. The data comes from a Nature Cell Biology paper, <a href="https://www.ncbi.nlm.nih.gov/pubmed/25730472">EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival</a>), Fu et al. 2015. That study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice (see Figure below). How to generate differentially expressed genes from reads (FASTQs) for this dataset is covered in the accompanying tutorials <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">RNA-seq reads to counts</a> and <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a>. This tutorial is inspired by material from the COMBINE R RNAseq workshop <a href="http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html">here</a> and the Cancer Research UK workshop <a href="https://bioinformatics-core-shared-training.github.io/cruk-summer-school-2018/RNASeq2018/html/06_Gene_set_testing.nb.html">here</a>.</p>
 
 <figure id="figure-1"><img src="../../images/rna-seq-reads-to-counts/mouse_exp.png" alt="Tutorial Dataset" title="Tutorial Dataset" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Tutorial Dataset</figcaption></figure>
 
@@ -559,16 +559,9 @@ because of stochastic processes in the algorithms.</p>
   <li><strong>Gene sets file</strong> for MSigDB Hallmark collection for mouse (rdata)</li>
 </ul>
 
-<blockquote class="comment">
-  <h3 id="comment-files-for-this-tutorial"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Files for this tutorial</h3>
-
-  <p>If you completed the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a> tutorial you should already have most of these files in your history. You only need to import the mouse_hallmark_sets and limma-voom_filtered_counts files from the files in the Hands-on box below.</p>
-
-</blockquote>
-
 <h1 id="import-data">Import data</h1>
 
-<blockquote>
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
 
   <ol>
@@ -625,7 +618,7 @@ because of stochastic processes in the algorithms.</p>
       </blockquote>
 
       <ul>
-        <li>Option 2: From <a href="https://zenodo.org/record/2491305">Zenodo</a></li>
+        <li>Option 2: From <a href="https://zenodo.org/record/2596382">Zenodo</a></li>
       </ul>
 
       <blockquote class="tip">
@@ -649,37 +642,33 @@ because of stochastic processes in the algorithms.</p>
 
         <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
       </blockquote>
+
+      <p>You can paste the names and links below into the Upload tool:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2596382/files/limma-voom_basalpregnant-basallactate
+https://zenodo.org/record/2596382/files/limma-voom_luminalpregnant-luminallactate
+https://zenodo.org/record/2596382/files/seqdata
+https://zenodo.org/record/2596382/files/mouse_hallmark_sets
+https://zenodo.org/record/2596382/files/factordata
+https://zenodo.org/record/2596382/files/limma-voom_filtered_counts
+</code></pre></div>      </div>
     </li>
-  </ol>
-
-</blockquote>
-
-<blockquote class="notranslate hands_on">
-  <p>You can paste the names and links below into the Upload tool:</p>
-
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   https://zenodo.org/record/2491305/files/limma-voom_basalpregnant-basallactate
-   https://zenodo.org/record/2491305/files/limma-voom_luminalpregnant-luminallactate
-   https://zenodo.org/record/2491305/files/seqdata
-   https://zenodo.org/record/2491305/files/mouse_hallmark_sets
-   https://zenodo.org/record/2491305/files/factordata
-   https://zenodo.org/record/2491305/files/limma-voom_filtered_counts
-</code></pre></div>  </div>
-
-  <ol>
     <li>
-      <p>Make a collection (list) out of the basal and luminal differentially expressed results files. Give it the name <code class="highlighter-rouge">DE tables</code>.</p>
-
+      <p>Add a tag called <code class="highlighter-rouge">#basal</code> to the <code class="highlighter-rouge">limma-voom_basalpregnant-basallactate</code> and a tag called <code class="highlighter-rouge">#luminal</code> to the <code class="highlighter-rouge">limma-voom_luminalpregnant-luminallactate</code> files.</p>
       <blockquote class="tip">
 
-        <h3 id="tip-tip-build-a-dataset-list"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Build a dataset list</h3>
+        <h3 id="tip-tip-adding-a-tag"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Adding a tag</h3>
         <ul>
-          <li>Click on <i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Operations on multiple datasets</strong> at the top of the history panel</li>
-          <li>Check the boxes next the datasets to select</li>
-          <li>In <strong>For all selected…</strong>, choose <strong>Build dataset list</strong></li>
-          <li>Ensure that only the wanted samples are selected</li>
-          <li>Enter a name for the new collection</li>
-          <li>Click on <strong>Create list</strong></li>
+          <li>Click on the dataset</li>
+          <li>Click on <i class="fa fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> <strong>Edit dataset tags</strong></li>
+          <li>
+            <p>Add a tag starting with <code class="highlighter-rouge">#</code></p>
+
+            <p>Tags starting with <code class="highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
+          </li>
+          <li>Check that the tag is appearing below the dataset name</li>
         </ul>
+
       </blockquote>
     </li>
   </ol>
@@ -712,11 +701,11 @@ because of stochastic processes in the algorithms.</p>
   </li>
 </ul>
 
-<p>We need a table of differentially expressed (DE) results for goseq. Here we will use two tables, one for each of the basal and luminal pregnant vs lactate results. This is so we can compare results for the two cell types. These tables were output from the limma-voom tool but DE tables from edgeR or DESeq2 could also be used. For this dataset we will call genes differentially expressed if they have an adjusted P value below 0.01 and a fold change of 1.5 (equivalent to a <script type="math/tex">log_{2} FC</script> of 0.58), as in the Fu paper. We can use the gene lengths from the counts table in GEO (provided as a file called <code class="highlighter-rouge">seqdata</code> in Zenodo). But if we didn’t have that we could use a tool like <strong>featureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to output a gene lengths file. The <code class="highlighter-rouge">seqdata</code> file contains &gt;20k genes, but we only want the ~15k we have in our differentially expressed genes file. So we will join the lengths file with the differentially expressed genes file, keeping only the length information for genes present in the differentially expressed genes file. We can then cut out the columns we need for the two inputs (gene id, length) (gene id, DE status) and as a bonus they will both be sorted in the same order, which is what we need for goseq.</p>
+<p>We need a table of differentially expressed (DE) results for goseq. Here we will use two tables, one for each of the basal and luminal pregnant vs lactate results. This is so we can compare results for the two cell types. These tables were output from the limma-voom tool but DE tables from edgeR or DESeq2 could also be used. For this dataset we will call genes differentially expressed if they have an adjusted P value below 0.01. We can use the gene lengths from the counts table in GEO (provided as a file called <code class="highlighter-rouge">seqdata</code> in Zenodo). But if we didn’t have that we could use a tool like <strong>featureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to output a gene lengths file. The <code class="highlighter-rouge">seqdata</code> file contains &gt;20k genes, but we only want the ~15k we have in our differentially expressed genes file. So we will join the lengths file with the differentially expressed genes file, keeping only the length information for genes present in the differentially expressed genes file. We can then cut out the columns we need for the two inputs (gene id, length) (gene id, DE status) and as a bonus they will both be sorted in the same order, which is what we need for goseq.</p>
 
 <p>To generate the two input files we will use:</p>
 <ul>
-  <li><strong>Compute</strong> to add a column to the DE tables, that gives genes meeting our adj.P and lfc thresholds the value “True” and all other genes the value “False”. We want genes that have a lfc &lt; -0.58 (downregulated) and lfc &gt; 0.58 (upregulated). We could use separate filters (e.g. <code class="highlighter-rouge">bool(c4&lt;-0.58) or bool(c4&gt;0.58)</code>) or more simply, we can use the absolute (abs) value 0.58, where the minus sign is ignored.</li>
+  <li><strong>Compute</strong> to add a column to the DE tables, that gives genes meeting our adj.P threshold the value “True” and all other genes the value “False”.</li>
   <li><strong>Join two Datasets</strong> to add the gene length information to the differentially expressed genes, matching on gene ids</li>
   <li><strong>Cut</strong> to extract the two columns for the differentially expressed genes information</li>
   <li><strong>Cut</strong> to extract the two columns for the gene length information</li>
@@ -728,38 +717,41 @@ because of stochastic processes in the algorithms.</p>
   <ol>
     <li><strong>Compute an expression on every row</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Add expression”</em>: <code class="highlighter-rouge">bool(c8&lt;0.01) and bool(abs(c4)&gt;0.58)</code> (adj.P &lt; 0.01 and lfc of 0.58)</li>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“as a new column to”</em>: the <code class="highlighter-rouge">DE tables</code> collection</li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Add expression”</em>: <code class="highlighter-rouge">bool(c8&lt;0.01)</code> (adj.P &lt; 0.01)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“as a new column to”</em>: the <code class="highlighter-rouge">limma-voom_basalpregnant-basallactate</code> file</li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Skip a header line”</em>: <code class="highlighter-rouge">yes</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“The new column name”</em>: <code class="highlighter-rouge">Status</code></li>
       </ul>
     </li>
     <li><strong>Join two Datasets side by side on a specified field</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Join”</em>: output of <strong>Compute</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: output of <strong>Compute</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“using column”</em>: <code class="highlighter-rouge">Column: 1</code></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“with”</em> the <code class="highlighter-rouge">seqdata</code> file</li>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“and column”</em>: <code class="highlighter-rouge">Column: 1</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Keep the header lines”</em>: <code class="highlighter-rouge">Yes</code></li>
       </ul>
     </li>
     <li><strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Cut columns”</em>: <code class="highlighter-rouge">c1,c9</code> (the gene ids and DE status)</li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Cut columns”</em>: <code class="highlighter-rouge">c1,c10</code> (the gene ids and DE status)</li>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“From”</em>: output of <strong>Join</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Join</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li>Rename to <code class="highlighter-rouge">goseq DE status</code></li>
       </ul>
     </li>
     <li><strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Cut columns”</em>: <code class="highlighter-rouge">c1,c11</code> (the gene ids and lengths)</li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Cut columns”</em>: <code class="highlighter-rouge">c1,c12</code> (the gene ids and lengths)</li>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“From”</em>: output of <strong>Join</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Join</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li>Rename to <code class="highlighter-rouge">goseq gene lengths</code></li>
       </ul>
     </li>
   </ol>
 </blockquote>
 
-<p>We now have the two required input files for goseq for both our basal and luminal contrasts.</p>
+<p>We now have the two required input files for goseq.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-perform-go-analysis"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Perform GO analysis</h3>
@@ -767,7 +759,7 @@ because of stochastic processes in the algorithms.</p>
   <ol>
     <li><strong>goseq</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Differentially expressed genes file”</em>: <code class="highlighter-rouge">goseq DE status</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Differentially expressed genes file”</em>: <code class="highlighter-rouge">goseq DE status</code></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene lengths file”</em>: <code class="highlighter-rouge">goseq gene lengths</code></li>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Gene categories”</em>:  <code class="highlighter-rouge">Get categories</code>
           <ul>
@@ -801,23 +793,19 @@ because of stochastic processes in the algorithms.</p>
 
 <p>To identify categories significantly enriched/unenriched below some p-value cutoff, it is necessary to use the adjusted <em>p</em>-value.</p>
 
-<p>A plot of the top 10 over-represented GO terms (by adjusted <em>p</em>-value) can be output from the goseq tool to help visualise results. Note that the top 10 are selected by adjusted p-value so if there are multiple terms with the same value there will be more than 10 terms in the plot. Click on the <code class="highlighter-rouge">Top over-represented GO terms plot</code> in the history. There should be 2 PDFs, one for each contrast, that look similar to below.</p>
+<p>A plot of the top 10 over-represented GO terms (by <em>p</em>-value) can be output from the goseq tool to help visualise results. Click on the <code class="highlighter-rouge">Top over-represented GO terms plot</code> PDF in the history. It should look similar to below.</p>
 
 <figure id="figure-2"><img src="../../images/rna-seq-genes-to-pathways/basal_top_GO.png" alt="Basal Plot" title="Basal pregnant vs lactating top 10 GO terms" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Basal pregnant vs lactating top 10 GO terms</figcaption></figure>
 
-<figure id="figure-3"><img src="../../images/rna-seq-genes-to-pathways/luminal_top_GO.png" alt="Luminal Plot" title="Luminal pregnant vs lactating top 10 GO terms" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Luminal pregnant vs lactating top 10 GO terms</figcaption></figure>
-
-<p>The Fu paper also used goseq and found enrichment for cell contractility genes in the basal cells and enrichment in the luminal cells for general metabolic processes, lipid biosynthesis and transport proteins.</p>
-
 <blockquote class="question">
   <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-
-  <p>Take a look at the top 10 GO plots for the luminal and basal contrast. How do you think they compare to what the authors found?</p>
+  <p>Can you generate the plot of top 10 GO terms for the luminal differentially expressed genes? Tip: You could use the Rerun button for each step (as the parameters are already selected) and choose the luminal file as input.</p>
 
   <blockquote class="solution">
     <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>The top 10 GO terms seem to describe similar processes to what the authors found.</p>
+    <p>Running goseq on the luminal file should give a plot similar to below.</p>
+    <figure id="figure-3"><img src="../../images/rna-seq-genes-to-pathways/luminal_top_GO.png" alt="Luminal Plot" title="Luminal pregnant vs lactating top 10 GO terms" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Luminal pregnant vs lactating top 10 GO terms</figcaption></figure>
 
   </blockquote>
 </blockquote>
@@ -840,12 +828,12 @@ because of stochastic processes in the algorithms.</p>
       <ul>
         <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Cut columns”</em>: <code class="highlighter-rouge">c1,c6</code> (the Entrez gene ids and t-statistic)</li>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“From”</em>: the <code class="highlighter-rouge">DE tables</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: the <code class="highlighter-rouge">limma-voom_basalpregnant-basallactate</code> file</li>
       </ul>
     </li>
     <li><strong>Sort data in ascending or descending order</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Sort Query”</em>: the output of <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: the output of <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines”</em>: <code class="highlighter-rouge">1</code></li>
         <li><em>“Column selections”</em>:
           <ul>
@@ -858,9 +846,9 @@ because of stochastic processes in the algorithms.</p>
     </li>
     <li><strong>fgsea</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Ranked Genes”</em>: the output of <strong>Sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Ranked Genes”</em>: the output of <strong>Sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“File has header?”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene Sets”</em>: <code class="highlighter-rouge">mouse_hallmark_sets</code> (this should be rdata format, see Tip below)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene Sets”</em>: <code class="highlighter-rouge">mouse_hallmark_sets</code> (this should be <code class="highlighter-rouge">rdata</code> format, if not, see how to change it in the Tip below)</li>
         <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum Size of Gene Set”</em>: <code class="highlighter-rouge">15</code></li>
         <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Output plots”</em>: <code class="highlighter-rouge">Yes</code></li>
       </ul>
@@ -880,17 +868,30 @@ because of stochastic processes in the algorithms.</p>
 
 </blockquote>
 
-<p>fgsea outputs a table of results containing a list of pathways with P values and enrichment scores. It can also output a summary table plot of the top pathways like the one shown below for the <code class="highlighter-rouge">basallpregnant-basallactate</code> contrast below.</p>
+<p>fgsea outputs a table of results containing a list of pathways with P values and enrichment scores. It can also output a summary table plot of the top pathways such as the one shown below for the <code class="highlighter-rouge">basallpregnant-basallactate</code> contrast below.</p>
 
-<figure id="figure-4" width="50%"><img src="../../images/rna-seq-genes-to-pathways/fgsea_table.png" alt="fgsea Table" title="fgsea Summary table" /><figcaption><span class="figcaption-prefix">Figure 4:</span> fgsea Summary table</figcaption></figure>
+<figure id="figure-4"><img src="../../images/rna-seq-genes-to-pathways/fgsea_table_basal.png" alt="fgsea Table" title="fgsea Summary table" /><figcaption><span class="figcaption-prefix">Figure 4:</span> fgsea Summary table</figcaption></figure>
 
 <p>An enrichment plot of the each of the top pathways can also be produced, one is shown below. The barcode pattern shows where the genes in the set are found in the list of ranked genes. Most of the bars to the left indicate enrichment of the set at the top of the ranked list of genes (upregulated) and most bars towards the right indicate enrichment at the bottom of the list (downregulated). The enrichment score reflects the degree to which the genes are enriched at the top or bottom of the list.</p>
 
 <figure id="figure-5"><img src="../../images/rna-seq-genes-to-pathways/fgsea_enrichplot.png" alt="fgsea Enrichment" title="fgsea Enrichment plot" /><figcaption><span class="figcaption-prefix">Figure 5:</span> fgsea Enrichment plot</figcaption></figure>
 
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <p>Can you run fgsea on the luminal contrast and generate the fgsea summary table plot?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>Running fgsea on the luminal file should give a plot similar to below.</p>
+    <figure id="figure-6"><img src="../../images/rna-seq-genes-to-pathways/fgsea_table_luminal.png" alt="fgsea Luminal" title="fgsea Summary table for luminal" /><figcaption><span class="figcaption-prefix">Figure 6:</span> fgsea Summary table for luminal</figcaption></figure>
+
+  </blockquote>
+</blockquote>
+
 <h2 id="ensemble-gene-set-enrichment-analyses-with-egsea">Ensemble gene set enrichment analyses with <strong>EGSEA</strong></h2>
 
-<p>The ensemble of genes set enrichment analyses (EGSEA) <a href="https://www.ncbi.nlm.nih.gov/pubmed/27694195">(Alhamdoosh et al, 2017)</a> is a method developed for RNA-seq data that combines results from multiple algorithms and calculates collective gene set scores, to try to improve the biological relevance of the highest ranked gene sets. EGSEA has built-in gene sets from MSigDB and KEGG for human and mouse. We’ll show here how it can be used with the MSigDB Hallmark collection and KEGG pathways. For input we need a count matrix and EGSEA will perform a limma-voom analysis before gene set testing. We can use the provided filtered counts file output from limma, where the low count genes have been filtered out (output from limma by selecting <em>“Output Filtered Counts Table?”</em>: <code class="highlighter-rouge">Yes</code>). We just need to remove the gene symbol and description columns. We also need a symbols mapping file containing just the Entrez ids and symbols, which we can generate from the filtered counts file. The third input we need is a factors information file, containing what groups the samples belong to, we can use the same one from the tutorial <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a>.</p>
+<p>The ensemble of genes set enrichment analyses (EGSEA) <a href="https://www.ncbi.nlm.nih.gov/pubmed/27694195">(Alhamdoosh et al, 2017)</a> is a method developed for RNA-seq data that combines results from multiple algorithms and calculates collective gene set scores, to try to improve the biological relevance of the highest ranked gene sets. EGSEA has built-in gene sets from MSigDB and KEGG for human and mouse. We’ll show here how it can be used with the MSigDB Hallmark collection and KEGG pathways. For input we need a count matrix and EGSEA will perform a limma-voom analysis before gene set testing. We can use the provided filtered counts file output from limma, where the low count genes have been filtered out (output from limma by selecting <em>“Output Filtered Counts Table?”</em>: <code class="highlighter-rouge">Yes</code>). We just need to remove the gene symbol and description columns. We also need a symbols mapping file containing just the Entrez ids and symbols, which we can generate from the filtered counts file. The third input we need is a factors information file, containing what groups the samples belong to, we can use the same one from the tutorial <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a>. EGSEA provides twelve base methods and we will select eleven, all except roast, as the fry method is a fast approximation of roast.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-perform-ensemble-gene-set-testing-with-egsea"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Perform ensemble gene set testing with EGSEA</h3>
@@ -926,28 +927,37 @@ because of stochastic processes in the algorithms.</p>
         </li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Symbols Mapping file”</em>: <code class="highlighter-rouge">EGSEA anno</code></li>
         <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Contrast of Interest”</em>: <code class="highlighter-rouge">basalpregnant-basallactate</code></li>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Contrast of Interest”</em>: <code class="highlighter-rouge">luminalpregnant-luminallactate</code></li>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Species”</em>: <code class="highlighter-rouge">mouse</code></li>
         <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Gene Set Testing Methods”</em>: Tick <code class="highlighter-rouge">camera</code>, <code class="highlighter-rouge">safe</code>, <code class="highlighter-rouge">gage</code>, <code class="highlighter-rouge">zscore</code>, <code class="highlighter-rouge">gsva</code>, <code class="highlighter-rouge">globaltest</code>, <code class="highlighter-rouge">ora</code>, <code class="highlighter-rouge">ssgsea</code>, <code class="highlighter-rouge">padog</code>, <code class="highlighter-rouge">plage</code>, <code class="highlighter-rouge">fry</code></li>
         <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“MSigDB Gene Set Collections”</em>: <code class="highlighter-rouge">H: hallmark gene sets</code></li>
         <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“KEGG Pathways”</em>: <code class="highlighter-rouge">Metabolism</code> and <code class="highlighter-rouge">Signalling</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Download KEGG pathways?”</em>: <code class="highlighter-rouge">Yes</code></li>
         <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“I certify that I am not using this tool for commercial purposes”</em>: <code class="highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
 </blockquote>
 
-<p>This generates a report like below.</p>
+<p>This generates a table of results, and a report. Contained within the report are plots, such as heatmaps of the top ranked pathways, as shown below. Note that we see some similar pathways in the results here as with the fgsea analysis.</p>
 
-<figure id="figure-6" width="50%"><img src="../../images/rna-seq-genes-to-pathways/EGSEA_report.png" alt="EGSEA report" title="EGSEA report" /><figcaption><span class="figcaption-prefix">Figure 6:</span> EGSEA report</figcaption></figure>
+<figure id="figure-7"><img src="../../images/rna-seq-genes-to-pathways/EGSEA_heatmaps.png" alt="EGSEA heatmaps" title="EGSEA heatmaps" /><figcaption><span class="figcaption-prefix">Figure 7:</span> EGSEA heatmaps</figcaption></figure>
 
-<p>In addition to a table of results, plots are generated like the heatmaps of the top ranked pathways, shown below. Note that we see some similar pathways in the results here as with the fgsea analysis.</p>
-
-<figure id="figure-7" width="50%"><img src="../../images/rna-seq-genes-to-pathways/EGSEA_heatmaps.png" alt="EGSEA heatmaps" title="EGSEA heatmaps" /><figcaption><span class="figcaption-prefix">Figure 7:</span> EGSEA heatmaps</figcaption></figure>
-
-<p>KEGG pathway diagrams are generated if KEGG pathways are selected, as shown below.  These show the expression values of the genes overlaid, genes upregulated in the contrast are shown in red, downregulated genes in blue. Ribosome was one of the top GO terms identified for the basal pregnant vs lactate contrast and here we see ribosome pathways are in the top ranked KEGG pathways.</p>
+<p>KEGG pathway diagrams are generated if KEGG pathways are selected, as shown below. These show the expression values of the genes overlaid, genes upregulated in the contrast are shown in red, downregulated genes in blue. Ribosome was one of the top GO terms identified for the basal pregnant vs lactate contrast and here we see ribosome pathways are in the top ranked KEGG pathways.</p>
 
 <figure id="figure-8"><img src="../../images/rna-seq-genes-to-pathways/EGSEA_KEGG.png" alt="EGSEA KEGG" title="EGSEA KEGG pathways" /><figcaption><span class="figcaption-prefix">Figure 8:</span> EGSEA KEGG pathways</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <p>Can you run EGSEA on the luminal contrast identify the top KEGG gene sets? Tip: you could use the rerun button and replace the “Contrast of Interest” with the name of the luminal contrast.</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>Running EGSEA on the luminal file should give top KEGG gene sets similar to below.</p>
+    <figure id="figure-9"><img src="../../images/rna-seq-genes-to-pathways/EGSEA_KEGG_luminal.png" alt="EGSEA KEGG luminal" title="EGSEA KEGG pathways for luminal" /><figcaption><span class="figcaption-prefix">Figure 9:</span> EGSEA KEGG pathways for luminal</figcaption></figure>
+
+  </blockquote>
+</blockquote>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
@@ -963,7 +973,13 @@ because of stochastic processes in the algorithms.</p>
 
             <ul>
                 
-                <li>Multiple methods can be used to help identify differentially expressed pathways</li>
+                <li>goseq can be used to identify enriched gene ontology categories and incorporate gene length bias</li>
+                
+                <li>fgsea can be used to identify enriched gene sets, such as the MSigDB collections, and generate barcode plots</li>
+                
+                <li>EGSEA can be used to identify enriched gene sets, such as MSigDB and KEGG, generating visualisations that include heatmaps and KEGG pathway diagrams</li>
+                
+                <li>Multiple methods can be used to help identify differentially expressed pathways and to visualise results</li>
                 
             </ul>
         </blockquote>
