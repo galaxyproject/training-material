@@ -592,7 +592,7 @@ As before, we need first to create a table with the column:
 7. etc for all sites that we need to identify
 
 > ### {% icon hands_on %} Hands-on: Expected temporal trend
-> 1. **Count occurrences of values in column(s)** {% icon tool %}
+> 1. **Count occurrences of each record** {% icon tool %}
 >     - {% icon param-file %} *"Dataset"*: the output of **Abundance index**
 >     -  *"Count occurrences of values in column(s)"*: `Column: 1`
 > 2. Check the generated output to identify the different sites
