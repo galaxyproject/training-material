@@ -10,10 +10,10 @@ tags:
 questions:
   - "What are the differentially expressed genes in the mammary gland of pregnant versus lactating mice?"
   - "How to analyze RNA count data using limma-voom?"
-  - "How to perform quality control of RNA-seq count data?"
+  - "How to perform quality control (QC) of RNA-seq count data?"
 objectives:
   - "Analysis of RNA-seq count data using limma-voom"
-  - "Quality control of count data"
+  - "QC of count data"
   - "Visualisation and interactive exploration of count data"
   - "Identification of differentially expressed genes"
 time_estimation: "3h"
@@ -106,11 +106,11 @@ We will use three files for this analysis:
 
 Let’s take a look at the data. The `seqdata` file contains information about genes (one gene per row), the first column has the Entrez gene id, the second has the gene length and the remaining columns contain information about the number of reads aligning to the gene in each experimental sample. There are two replicates for each cell type and time point (detailed sample info can be found in file “GSE60450_series_matrix.txt” from the GEO website). The first few rows and columns of the seqdata file are shown below.
 
-![seqdata file](../../images/rna-seq-counts-to-genes/seqdata.png "Count file (before formatting)"){: width="50%"}
+![seqdata file](../../images/rna-seq-counts-to-genes/seqdata.png "Count file (before formatting)")
 
 The `sampleinfo` file contains basic information about the samples that we will need for the analysis. See below.
 
-![sampleinfo file](../../images/rna-seq-counts-to-genes/sampleinfo.png "Sample information file (before formatting)"){: width="50%"}
+![sampleinfo file](../../images/rna-seq-counts-to-genes/sampleinfo.png "Sample information file (before formatting)")
 
 ## Format the data
 
@@ -161,7 +161,7 @@ Optionally, gene annotations can be provided to the limma-voom tool and if provi
 >          - `SYMBOL`
 >          - `GENENAME`
 > 2. Rename file as `annodata` using the {% icon galaxy-pencil %} (pencil) icon. The file should look like below.
->    ![annodata file](../../images/rna-seq-counts-to-genes/annodata.png "Gene annotation file"){: width="50%"}
+>    ![annodata file](../../images/rna-seq-counts-to-genes/annodata.png "Gene annotation file")
 > 3. There must be the same number of lines (rows) in the counts and annotation. Check the number of lines shown on the datasets in the history, there should be 27,180 lines in both.
 {: .hands_on}
 
@@ -182,7 +182,7 @@ There are a few ways to filter out lowly expressed genes. When there are biologi
 
 In an RNA-seq analysis, the counts are normalized for different sequencing depths between samples. Normalizing to eliminate composition biases between samples is also typically performed. Composition biases can occur, for example, if there are a few highly expressed genes dominating in some samples, leading to less reads from other genes. By default, TMM normalization [(Robinson and Oshlack 2010)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2864565/) is performed by the limma tool using the edgeR `calcNormFactors` function (this can be changed under **Advanced Options**). TMM stands for Trimmed Mean of M values, where a weighted trimmed mean of the log expression ratios is used to scale the counts for the samples. See the figure from the TMM paper below. Note the plot (Figure 1c) that shows how a few highly expressed genes in the liver sample (where the arrow is) results in the majority of other genes in the sample having the appearance of being expressed lower in liver. The mid-line through the points is offset from the expected zero and the TMM normalization factor (red line) scales the counts to adjust for this.
 
-![TMM normalization](../../images/rna-seq-counts-to-genes/TMM.png "TMM normalization (Robinson and Oshlack 2010)"){: width="50%"}
+![TMM normalization](../../images/rna-seq-counts-to-genes/TMM.png "TMM normalization (Robinson and Oshlack 2010)")
 
 ## Specify Contrast(s) of interest
 
@@ -206,13 +206,13 @@ Since we are interested in differences between groups, we need to specify which 
 > 2. Inspect the `Report` produced by clicking on the {% icon galaxy-eye %} (eye) icon
 {: .hands_on}
 
-# Quality Control of count data
+# QC of count data
 
 Before we check out the differentially expressed genes, we can look at the `Report` information to check that the data is good quality and that the samples are as we would expect.
 
 ## Multidimensional scaling plot
 
-By far, one of the most important plots we make when we analyse RNA-Seq data are MDS plots. An MDS plot is a visualisation of a principal components analysis, which determines the greatest sources of variation in the data. A principal components analysis is an example of an unsupervised analysis, where we don’t need to specify the groups. If your experiment is well controlled and has worked well, what we hope to see is that the greatest sources of variation in the data are the treatments/groups we are interested in. It is also an incredibly useful tool for quality control and checking for outliers. This Galaxy limma tool outputs an MDS plot by default in the `Report` and a link is also provided to a PDF version (`MDSPlot_CellTypeStatus.pdf`). A scree plot is also produced that shows how much variation is attributed to each dimension. If there was a batch effect for example, you may see high values for additional dimensions. The limma tool plots the first two dimensions by default (1 vs 2), however you can also plot additional dimensions 2 vs 3 and 3 vs 4 using under **Output Options** Additional Plots `MDS Extra` These are displayed in the `Report` along with a link to a PDF version (`MDSPlot_extra.pdf`). Selecting the `Glimma Interactive Plots` will generate an interactive version of the MDS plot, see the plots section of the report below.
+By far, one of the most important plots we make when we analyse RNA-Seq data are MDS plots. An MDS plot is a visualisation of a principal components analysis, which determines the greatest sources of variation in the data. A principal components analysis is an example of an unsupervised analysis, where we don’t need to specify the groups. If your experiment is well controlled and has worked well, what we hope to see is that the greatest sources of variation in the data are the treatments/groups we are interested in. It is also an incredibly useful tool for quality control and checking for outliers. This Galaxy limma tool outputs an MDS plot by default in the `Report` and a link is also provided to a PDF version (`MDSPlot_CellTypeStatus.pdf`). A scree plot is also produced that shows how much variation is attributed to each dimension. If there was a batch effect for example, you may see high values for additional dimensions, and you may choose to include batch as an additional factor in the differential expression analysis. The limma tool plots the first two dimensions by default (1 vs 2), however you can also plot additional dimensions 2 vs 3 and 3 vs 4 using under **Output Options** *Additional Plots* `MDS Extra`. These are displayed in the `Report` along with a link to a PDF version (MDSPlot_extra.pdf). Selecting the `Glimma Interactive Plots` will generate an interactive version of the MDS plot, see the plots section of the report below. If outlier samples are detected you may decide to remove them. Alternatively, you could downweight them by choosing the option in the limma tool *Apply voom with sample quality weights?*. The voom sample quality weighting is described in the paper *Why weight? Modelling sample and observational level variability improves power in RNA-seq analyses* [(Liu et al. 2015)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4551905/).
 
 ![MDS Plot](../../images/rna-seq-counts-to-genes/mdsscree.png "MDS Plot")
 
@@ -254,12 +254,6 @@ In the `Report` you should then see the correct MDS plot as below.
 
 ![MDS Plot](../../images/rna-seq-counts-to-genes/mdsscree_corr.png "MDS Plot (correct samples)")
 
-> ### {% icon details %} More details on MDS plots
->
-> The distance between each pair of samples in the MDS plot is calculated as the leading fold change, defined as the root-mean-square of the largest 500 log2-fold changes between that pair of samples. Replicate samples from the same group cluster together in the plot, while samples from different groups form separate clusters. This indicates that the differences between groups are larger than those within groups, i.e., differential expression is greater than the variance and can be detected. In the MDS plot, the distance between basal samples on the left and luminal cells on the right is about 6 units, corresponding to a leading fold change of about 64-fold (2^6 = 64) between basal and luminal. The expression differences between virgin, pregnant and lactating are greater for luminal cells than for basal.
->
-> Clustering in the MDS plot can be used to motivate changes to the analysis in light of potential batch effects. For example, imagine that the first replicate of each group was prepared at a separate time from the second replicate. If the MDS plot showed separation of samples by time, it might be worthwhile including time as an additional factor in the differential expression analysis, to account for the time-based effect.
-{: .details}
 
 > ### {% icon question %} Question
 >
@@ -299,7 +293,7 @@ We can also have a look more closely to see whether our threshold of 0.5 CPM doe
 
 The `Report` provides links to PDFs of all plots shown in the `Report` and also to the rest of the additional plots selected to be output.
 
-![Report Outputs](../../images/rna-seq-counts-to-genes/report_plots.png "Report outputs"){: width="30%"}
+![Report Outputs](../../images/rna-seq-counts-to-genes/report_plots.png "Report outputs")
 
 Click on the `CpmPlots.pdf` link in the `Report`. You should see 12 plots, one for each sample. Two of the plots are shown below. From these plots we can see that 0.5 CPM is equivalent to ~10 counts in each of the 12 samples, so 0.5 seems to be an appropriate threshold for this dataset (these samples all have sequencing depth of 20-30 million, see the `Library information` file below, so a CPM value of 0.5 would be ~10 counts).
 
@@ -429,12 +423,12 @@ We can see that much fewer genes are now highlighted in the MD plot and identifi
 
 ![TREAT MDVol Plot](../../images/rna-seq-counts-to-genes/TREAT_mdvolplot_basalpregnant-basallactate.png "TREAT MD and Volcano plots")
 
-![TREAT DE counts](../../images/rna-seq-counts-to-genes/TREATdecounts.png "TREAT differentially expressed genes"){: width="400px"}
+![TREAT DE counts](../../images/rna-seq-counts-to-genes/TREATdecounts.png "TREAT differentially expressed genes")
 
 
 # Visualising results
 
-Before following up on the DE genes with further lab work, it is recommended to have a look at the expression levels of the individual samples for the genes of interest. The Galaxy limma tool can auto-generate heatmaps of the top genes to show the expression levels across the *samples*. This enables a quick view of the expression of the top differentially expressed genes. This can help show if expression is consistent between replicates in the groups.
+In addition to the plots already discussed, it is recommended to have a look at the expression levels of the individual samples for the genes of interest, before following up on the DE genes with further lab work. The Galaxy limma tool can auto-generate heatmaps of the top genes to show the expression levels across the *samples*. This enables a quick view of the expression of the top differentially expressed genes and can help show if expression is consistent amongst replicates in the groups.
 
 ## Heatmap of top genes
 
@@ -444,9 +438,9 @@ Click on the `Heatmap_basalpregnant-basallactate.pdf` link in the `Report`. You 
 
 ## Stripcharts of top genes
 
-The limma-voom tool can also auto-generate stripcharts to view the expression of the top genes across the *groups*. Click on the `Stripcharts_basalpregnant-basallactate.pdf` link in the `Report`. You should see 10 plots, one for each top gene. Four are shown below. Note that here you can see if replicates tend to group together and how the expression compares to the other groups.
+The limma-voom tool can also auto-generate stripcharts to view the expression of the top genes across the groups. Click on the `Stripcharts_basalpregnant-basallactate.pdf` link in the `Report`. You should see 10 plots, one for each top gene. Four are shown below. Note that here you can see if replicates tend to group together and how the expression compares to the other groups.
 
-![Stripchart Plot](../../images/rna-seq-counts-to-genes/stripcharts.png "Stripcharts of top genes"){: width="950px"}
+![Stripchart Plot](../../images/rna-seq-counts-to-genes/stripcharts.png "Stripcharts of top genes")
 
 
 ## Interactive DE plots (Glimma)
@@ -482,11 +476,11 @@ Multiple contrasts can be run with the limma tool. For example, we can compare t
 >          - {% icon param-check %} *"Test significance relative to a fold-change threshold (TREAT)"*: `Yes`
 > 2. Inspect the `Report`
 >
-> You should find that there are more genes differentially expressed for the luminal cells than the basal. There are ~274 genes DE in basal cells versus ~ 1610 in the luminal cells.
-> ![Basal Luminal DE counts](../../images/rna-seq-counts-to-genes/basal_luminal_decounts.png "Basal vs Luminal DE counts"){: width="50%"}
+>   You should find that there are more genes differentially expressed for the luminal cells than the basal. There are ~274 genes DE in basal cells versus ~ 1610 in the luminal cells.
+> ![Basal Luminal DE counts](../../images/rna-seq-counts-to-genes/basal_luminal_decounts.png "Basal vs Luminal DE counts")
 >
-> This is similar to what Fu et al found, many more genes differentially expressed in the luminal cells on lactation, compared to the basal cells.
-> ![Fu DE genes](../../images/rna-seq-counts-to-genes/fu_degenes.png "Fu et al, Nat Cell Biol 2015"){: width="25%"}
+>   This is similar to what Fu et al found, many more genes differentially expressed in the luminal cells on lactation, compared to the basal cells.
+> ![Fu DE genes](../../images/rna-seq-counts-to-genes/fu_degenes.png "Fu et al, Nat Cell Biol 2015")
 {: .hands_on}
 
 The tables of differentially expressed genes are output as links in the `Report` (`limma-voom_basalpregnant-basallactate.tsv` and `limma-voom_luminalpregnant-luminallactate.tsv`), see below, and also as datasets in the history (`DE tables`). With multiple contrasts, a plot for each contrast is generated for relevant plots, as shown below. This enables a quick and easy visual comparison of the contrasts.
@@ -504,4 +498,4 @@ To see some methods for identifying differentially expressed pathways in this da
 # Conclusion
 {:.no_toc}
 
-In this tutorial we have seen how counts files can be converted into differentially expressed genes with limma-voom. This follows on from the accompanying tutorial, [RNA-seq reads to counts]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md %}), that showed how to generate counts from the raw reads (FASTQs) for this dataset. In this part we have seen ways to visualise the count data, and QC checks that can be performed to help assess the quality and results. We have also reproduced results similar to what the authors found in the original paper with this dataset. For further reading on analysis of RNA-seq count data and the methods used here, see the articles; RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR [(Law et al. 2016)](https://f1000research.com/articles/5-1408/v2) and From reads to genes to pathways: differential expression analysis of RNA-Seq experiments using Rsubread and the edgeR quasi-likelihood pipeline [(Chen, Lun, Smyth 2016)](https://f1000research.com/articles/5-1438/v2).
+In this tutorial we have seen how counts files can be converted into differentially expressed genes with limma-voom. This follows on from the accompanying tutorial, [RNA-seq reads to counts]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md %}), that showed how to generate counts from the raw reads (FASTQs) for this dataset. In this part we have seen ways to visualise the count data, and QC checks that can be performed to help assess the quality and results. We have also reproduced results similar to what the authors found in the original paper with this dataset. For further reading on analysis of RNA-seq count data and the methods used here, see the articles; *RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR* [(Law et al. 2016)](https://f1000research.com/articles/5-1408/v2) and *From reads to genes to pathways: differential expression analysis of RNA-Seq experiments using Rsubread and the edgeR quasi-likelihood pipeline* [(Chen, Lun, Smyth 2016)](https://f1000research.com/articles/5-1438/v2).

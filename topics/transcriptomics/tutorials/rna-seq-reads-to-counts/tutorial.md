@@ -9,7 +9,7 @@ tags:
   - QC
 questions:
 - How to convert RNA-seq reads into counts?
-- How to perform quality control of RNA-seq reads?
+- How to perform quality control (QC) of RNA-seq reads?
 - How to do this analysis efficiently in Galaxy?
 objectives:
 - Learn how RNA-seq reads are converted into counts
@@ -185,7 +185,7 @@ Take a look at one of the FASTQ files to see what it contains.
 {: .hands_on}
 
 
-## Check raw reads
+## QC: raw reads
 
 During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. Every base sequence gets a quality score from the sequencer and this information is present in the FASTQ file. A quality score of 30 corresponds to a 1 in 1000 chance of an incorrect base call (a quality score of 10 is a 1 in 10 chance of an incorrect base call). To look at the overall distribution of quality scores across the reads, we can use FastQC.
 
@@ -285,9 +285,9 @@ The Cutadapt tool Help section provides the sequence we can use to trim this sta
 
 We can take a look at the reads again now that they've been trimmed.
 
-## Check trimmed reads
+## QC: trimmed reads
 
-> ### {% icon hands_on %} Hands-on: Check trimmed reads with **FastQC**
+> ### {% icon hands_on %} Hands-on: QC of trimmed reads with **FastQC**
 >
 > 1. **FastQC** {% icon tool %} with the following parameters:
 >    - {% icon param-collection %} *"Short read data from your current history"*: `RawData` (output of **Cutadapt** {% icon tool %})
@@ -357,7 +357,7 @@ Now that we have prepared our reads, we can align the reads for our 12 samples. 
 >
 {: .hands_on}
 
-## Check mapped reads
+## QC: mapped reads
 
 An important metric to check is the percentage of reads mapped to the reference genome. A low percentage can indicate issues with the data or analysis. We can use MultiQC again to summarise the QC information.
 
@@ -384,7 +384,7 @@ It is also good practice to visualise the read alignments in the BAM file, for e
 >
 {: .tip}
 
-## Check strandness
+## QC: strandness
 
 As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to "guess" the strandness, as explained in the [RNA-seq ref-based tutorial]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}). This is done through comparing the "strandness of reads" with the "strandness of transcripts". For this tool, and many of the other RSeQC tools, a reference bed file of genes (`reference genes`) is required. RSeQC provides some reference BED files for model organisms. You can import the RSeQC mm10 RefSeq BED file from the link `https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download` (and rename to `reference genes`) or import a file from Shared data if provided. Alternatively, you can provide your own BED file of reference genes, for example from UCSC (see the [Peaks to Genes tutorial]({{ site.baseurl }}{% link topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.md %}). Or the **Convert GTF to BED12** tool can be used to convert a GTF into a BED file.
 
@@ -419,7 +419,7 @@ The MultiQC plot below shows the result from the full dataset for comparison.
 >
 {: .question}
 
-## Check duplicate reads
+## QC: duplicate reads
 
 Duplicate reads are usually kept in RNA-seq differential expression analysis as they can come from highly-expressed genes but it is still a good metric to check. A high percentage of duplicates can indicate a problem with the sample, for example, PCR amplification of a low complexity library (not many transcripts) due to not enough RNA used as input. FastQC gives us an idea of duplicates in the reads before mapping (note that it just takes a sample of the data). We can assess the numbers of duplicates in all mapped reads using the **Picard MarkDuplicates** tool. Picard considers duplicates to be reads that map to the same location, based on the start position of where the read maps.
 
@@ -451,7 +451,7 @@ The MultiQC plot below shows the result from the full dataset for comparison.
 >
 {: .question}
 
-## Check number of reads for each chromosome
+## QC: number of reads mapped to each chromosome
 
 You can check the numbers of reads mapped to each chromosome with the **Samtools IdxStats** tool. This can help assess the sample quality, for example, if there is an excess of mitochondrial contamination. It could also help to check the sex of the sample through the numbers of reads mapping to X/Y or to see if any chromosomes have highly expressed genes.
 
@@ -486,7 +486,7 @@ The MultiQC plot below shows the result from the full dataset for comparison.
 >
 {: .question}
 
-## Check coverage across gene bodies (5'-3')
+## QC: gene body coverage (5'-3')
 
 The coverage of reads along gene bodies can be assessed to check if there is any bias in coverage. For example, a bias towards the 3' end of genes could indicate degradation of the RNA. Alternatively, a 3' bias could indicate that the data is from a 3' assay (e.g. oligodT-primed, 3'RNA-seq). You can use the RSeQC **Gene Body Coverage (BAM)** tool to assess gene body coverage in the BAM files.
 
@@ -526,7 +526,7 @@ The plot below from the RSeQC website shows what samples with 3'biased coverage 
 {: .question}
 
 
-## Check distribution of reads across features (exons, introns, intergenic..)
+## QC: read distribution across features (exons, introns, intergenic..)
 
 We can also check the distribution of reads across known gene features, such as exons (CDS, 5'UTR, 3'UTR), introns and intergenic regions. In RNA-seq we expect most reads to map to exons rather than introns or intergenic regions. It is also the reads mapped to exons that will be counted so it is good to check what proportions of reads have mapped to those. High numbers of reads mapping to intergenic regions could indicate the presence of DNA contamination.
 
@@ -564,7 +564,7 @@ Now that we have checked the data and are happy with how it looks, we can procee
 
 # Counting
 
-The alignment produces a set of BAM files, where each file contains the read alignments for each sample. In the BAM file, there is a chromosomal location for every read that mapped. Now that we have figured out where each read comes from in the genome, we need to summarise the information across genes or exons. The mapped reads can be counted across mouse genes by using a tool called featureCounts. featureCounts requires gene annotation specifying the genomic start and end position of each exon of each gene. For convenience, featureCounts contains built-in annotation for mouse (`mm10`, `mm9`) and human (`hg38`, `hg19`) genome assemblies, where exon intervals are defined from the NCBI RefSeq annotation of the reference genome. Reads that map to exons of genes are added together to obtain the count for each gene, with some care taken with reads that span exon-exon boundaries. For other species, users will need to read in a data frame in GTF format to define the genes and exons. Users can also specify a custom annotation file in SAF format. See the tool help in Galaxy, which has an example of what an SAF file should like like, or the Rsubread users guide for more information.
+The alignment produces a set of BAM files, where each file contains the read alignments for each sample. In the BAM file, there is a chromosomal location for every read that mapped. Now that we have figured out where each read comes from in the genome, we need to summarise the information across genes or exons. The mapped reads can be counted across mouse genes by using a tool called featureCounts. featureCounts requires gene annotation specifying the genomic start and end position of each exon of each gene. For convenience, featureCounts contains built-in annotation for mouse (`mm10`, `mm9`) and human (`hg38`, `hg19`) genome assemblies, where exon intervals are defined from the NCBI RefSeq annotation of the reference genome. Reads that map to exons of genes are added together to obtain the count for each gene, with some care taken with reads that span exon-exon boundaries. The output is a count for each Entrez Gene ID, which are numbers such as `100008567`. For other species, users will need to read in a data frame in GTF format to define the genes and exons. Users can also specify a custom annotation file in SAF format. See the tool help in Galaxy, which has an example of what an SAF file should like like, or the Rsubread users guide for more information.
 
 > ### {% icon comment %} Comment
 >
@@ -590,7 +590,7 @@ The alignment produces a set of BAM files, where each file contains the read ali
 >     - {% icon param-select %} Select *"Specify strand information"*: `Stranded (Forward)` or `Stranded (Reverse)`
 {: .comment}
 
-## Check assignments of reads to genes
+## QC: assignment of reads to genes
 
 featureCounts reports the numbers of unassigned reads and the reasons why they are not assigned (eg. ambiguity, multi-mapping, secondary alignment, mapping quality, fragment length, chimera, read duplicate, non-junction and so on), in addition to the number of successfully assigned reads for each library. The statistics of the read mapping are output as a file from featureCounts. MultiQC can be used to assess the numbers of reads assigned to features, genes in this case.
 
@@ -629,8 +629,8 @@ The counts files are currently in the format of one file per sample. However, it
 > **Column Join on Collection** {% icon tool %} with the following parameters:
 >    - {% icon param-collection %} *"Tabular files"*: `featureCounts output` (output of **featureCounts** {% icon tool %})
 >    - {% icon param-text %} *"Identifier column"*: `1`
->    - {% icon param-text %} *"Number of Header lines in each item"*: `1`
->    - {% icon param-check %} *"Keep original column header"*: `No`
+>    - {% icon param-text %} *"Number of header lines in each input file"*: `1`
+>    - {% icon param-check %} *"Add column name to header"*: `No`
 >
 {: .hands_on}
 
@@ -638,7 +638,7 @@ Take a look at the output (the output for the full dataset is shown below).
 
 ![Count matrix](../../images/rna-seq-reads-to-counts/count_matrix.png "Count matrix")
 
-Now it is easier to see the counts for a gene across all samples. The accompanying limma-voom tutorial shows how gene information (symbols etc) can be added to a count matrix.
+Now it is easier to see the counts for a gene across all samples. The accompanying tutorial, [RNA-seq counts to genes]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.md %}), shows how gene information (symbols etc) can be added to a count matrix.
 
 # Generating an interactive QC summary report
 
