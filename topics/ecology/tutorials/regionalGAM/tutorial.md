@@ -383,6 +383,8 @@ To do that, we need to first create a table with the columns:
 >    - *"Common key column"*: `3`
 >    - *"Column with values to preserve"*: All
 >    - *"Add header line to the output file"*: No
+>    - *"Input files contain a header line (as first line)"*: Yes
+>    - *"Ignore duplicated keys"*: Yes
 >
 > 5. **Sort data in ascending or descending order** to get your data in chronological order
 >    - {% icon param-file %} *"File"*: the output of **Multi-Join**
