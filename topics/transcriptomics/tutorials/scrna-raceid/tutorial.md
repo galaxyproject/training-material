@@ -621,7 +621,20 @@ This is clarified slightly better with the heatmap (bottom-right) that shows the
 > >    - `c5`
 > >    - `c1` giving then rise to `c6`
 > > - `c8` which gives rise to `c12` that in turn generates `c10`.
-> > `{2, {8 {12 {10}}, 11, 4, 9, 3 {5, 1 { 6 } } } }` (in JSON format)
+> >
+> > - *Cluster Tree Diagram:*
+> >
+> >         c2
+> >         ├─ c4
+> >         ├─ c9
+> >         ├─ c8
+> >         │  ├─ c11
+> >         │  └─ c12
+> >         │     └─ c10
+> >         └─ c3
+> >            ├─ c5
+> >            └─ c1
+> >               └─ c6
 > > 
 > >
 > {: .solution}
@@ -640,16 +653,20 @@ The top chart shows the number of links above a threshold that each cluster exhi
 > > ### {% icon solution %} Solution
 > >
 > > `c3` has the most number of links, and the most entropy that one would expect a multipotent progenitor cell type to exhibit, and therefore must be the root of the lineage tree, *despite* having fewer links than `c2`.
-> > `c3
-> >  - c5
-> >  - c1
-> >    - c6
-> >  - c2
-> >    - c8
-> >      - c12
-> >        - c10
-> >    - c11
-> >    - c4
+> >
+> > - *Cluster Tree Diagram:*
+> >
+> >         c3
+> >         ├─ c5
+> >         ├─ c1
+> >         │  └─ c6
+> >         └─ c2
+> >            ├─ c4
+> >            ├─ c9
+> >            └─ c8
+> >               ├─ c11
+> >               └─ c12
+> >                   └─ c10
 > >
 > {: .solution}
 >
