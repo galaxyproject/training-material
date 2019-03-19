@@ -147,8 +147,8 @@ We will calculate peptide posterior error probabilities (PEPs), because they are
 >   > 2. How many peptides with oxidized methionine were identified?
 >   >
 >   > > ### {% icon solution %} Solution
->   > > 1. You should have identified 2,616 unique stripped peptides.
->   > > 2. 503 peptides contain an oxidized methionine (MeO).
+>   > > 1. You should have identified 3366 non-redundant peptide hits.
+>   > > 2. 798 peptides contain an oxidized methionine.
 >   > {: .solution }
 >   {: .question}
 {: .hands_on}
@@ -167,6 +167,13 @@ The OpenMS suite implemented the [Fido](https://www.ncbi.nlm.nih.gov/pubmed/2071
 >   > ### {% icon comment %} Comment: "Greedy" Group Resolution
 >   > Protein groups are reported, when an identified peptide maps to multiple proteins in the used database [Nesvizhskii and Aebersold (2005)](https://www.ncbi.nlm.nih.gov/pubmed/16009968). Some peptides may map to different protein groups and can therefore not be used for protein quantitation. The option `-greedy_group_resolution` solves this problem by assigning peptides only to the one most probable protein group, thus enabling to quantify proteins based not only on unique, but also on shared peptides. This usually leads to a much higher number of quantified proteins. However it will introduce noise in the FCs when a peptide was indeed shared by different proteins and the quantity of this peptide was a weighted sum of contributions. The greedy group resolution is similar to Occam's razor.
 >   {: .comment}
+>   > ### {% icon question %} Questions:
+>   > 1. How many proteins were finally identified?
+>   >
+>   > > ### {% icon solution %} Solution
+>   > > 1. You should have identified 1255 proteins.
+>   > {: .solution }
+>   {: .question}
 {: .hands_on}
 
 # Analysis of Contaminants
@@ -184,14 +191,12 @@ It also enables you to check for contaminations in your samples.
 >   > ### {% icon question %} Questions
 >   > 1. Which contaminants did you identify? Where do these contaminations likely come from?
 >   > 2. What other sources of contaminants exist?
->   > 3. How many mycoplasma proteins did you identify? Does this mean that the analyzed HeLa cells were infected with mycoplasma?
->   > 4. How many false positives do we expect in our list?
+>   > 3. How many false positives do we expect in our list?
 >   >
 >   > > ### {% icon solution %} Solution
->   > > 1.  TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts. Also, five human proteins are listed, these are commonly introduced during sample preparation. As we were analyzing a human sample, it is not neccessary to remove these proteins, as they may as well originate from the HeLa cells.
+>   > > 1.  TRY1_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts. Also, eight human proteins are listed, these are commonly introduced during sample preparation. As we were analyzing a human sample, it is not neccessary to remove these proteins, as they may as well originate from the HeLa cells.
 >   > > 2.  Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.
->   > > 3.  One protein stemming from *Acholeplasma laidlawii* (ACHLI) was identified. If you again filter the protein list for "ACHLI", you will see that it was identified by a single peptide. Thus, it is likely a false positive and does not indicate contamination.
->   > > 4.  As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list.
+>   > > 3.  As we were allowing for a false discovery rate of 1 %, we would expect 13 (1255/0.01) false positive proteins in our list.
 >   > {: .solution }
 >   {: .question}
 {: .hands_on}
