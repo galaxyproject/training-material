@@ -706,14 +706,24 @@ We would like to know if the year has an influence on the abundance of a species
 {: .hands_on}
 
 Have a look at the text file result. This is the output of the linear model applied in R.
-Is the effect weak or strong?
-Weak
 
-Seems the model closed to the reality or not?
-No, the standard deviation is really bad
+>
+> > ### {% icon question %} Questions
+> >
+> > 1. Is the effect weak or strong? 
+> > 2. Seems the model closed to the reality or not? 
+> > 3. Is the test p-value significant?
+> >
+> > > ### {% icon solution %} Solutions
+> > >
+> > > 1. Weak.
+> > > 2. No, the standard deviation is really bad. 
+> > > 3. Yes
+> > >
+> > {: .solution}
+> {: .question}
+>
 
-Is the test p-value significant?
-yes
 
 As we are applying here a very simple model, we need to test a more complex one to have more evidence about the relevance of the year effect on our data.
 
@@ -727,14 +737,22 @@ We would like now to apply the same approach with addition of a correlation stru
 
 Have a look at this new text file result.
 
-Is the test p-value still significant?
-No
-
-Seems the model closed to the reality or not?
-No, the standard deviation is really bad
-
-Can you explain why?
-This is due to a strong autocorrelation in the residuals
+>
+> > ### {% icon question %} Questions
+> >
+> > 1. Is the test p-value still significant? 
+> > 2. Seems the model closed to the reality or not? 
+> > 3. Can you explain why?
+> >
+> > > ### {% icon solution %} Solutions
+> > >
+> > > 1. No.
+> > > 2. No, the standard deviation is really bad. 
+> > > 3. This is due to a strong autocorrelation in the residuals
+> > >
+> > {: .solution}
+> {: .question}
+>
 
 To compare the 2 models, we can compute and plot the global trend (over years).
 
