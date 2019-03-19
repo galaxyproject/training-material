@@ -96,12 +96,18 @@ Different peptide search engines have been developed to fulfill the matching pro
 >
 > 1. Copy the prepared protein database from the tutorial [Database Handling](../database-handling/tutorial.html) into your current history by using the multiple history view or upload the ready-made database from this [link](https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_and_Mycoplasma_added%29.fasta).
 > 2. Run the tool ***XTandemAdapter*** {% icon tool %} with:
-    - the MS2-centroided mzML as **Input file containing MS2 spectra** and
-    - the FASTA protein database as **FASTA file**.
-    - Click `+ Insert param_fixed_modifications` and choose `Carbamidomethyl (C)`.
-    - Click `+ Insert param_variable_modifications` and choose `Oxidation (M)`.
+>   - the MS2-centroided mzML as **Input file containing MS2 spectra** and
+>   - the FASTA protein database as **FASTA file**.
+>   - the FASTA protein database as **FASTA file**.
+>   - set **Fragment mass error** to `10`.
+>   - set **Fragment monoisotopic mass error units** to `ppm`.
+>   - Click `+ Insert param_fixed_modifications` and choose `Carbamidomethyl (C)`.
+>   - Click `+ Insert param_variable_modifications` and choose `Oxidation (M)`.
 > 3. Run the tool ***FileInfo*** {% icon tool %} on the XTandem output.
 >
+>   > ### {% icon tip %} Tip: Settings for labelled data
+>   > Several common quantitation methods are based on labels e.g. SILAC, TMT, iTRAQ, Dimethyl. Those labels must be specified in the search engine as a (variable) modification. See also [Peptide and Protein Quantification via Stable Isotope Labelling](https://galaxyproject.github.io/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html).
+>   {: .comment}
 >   > ### {% icon comment %} Comment: Advanced Search Engine Parameters
 >   > The OpenMS adapters do not always allow to set every option of the underlying search engine. If an option is missing, you may also run the search engine locally or by using a Galaxy wrapper. Afterwards, convert the search engine output to the OpenMS format `idXML` by running ***IDFileConverter*** {% icon tool %}.
 >   >
@@ -116,7 +122,7 @@ In proteomics, this decision is typically done by calculating false discovery ra
 The calculation is based on a simple assumption: for every decoy peptide identified with a given score, we expect one false positive with at least the same score.
 The false discovery rate is therefore defined as the number of false discoveries (decoy hits) divided by the number of false and correct discoveries (both target and decoy hits) at a given score threshold.
 
-To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool ***PeptideIndexer*** {% icon tool %}. Additionally, we will calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm used by OpenMS. We will then filter for 1 % FDR and set the score back to PEP.
+We will calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm used by OpenMS. To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool ***PeptideIndexer*** {% icon tool %}. This tool allows the annotation of protein names and calculates the protein coverage based on the identified peptides. We will then filter PSMs for 1 % FDR and set the score back to PEP. 
 
 > ### {% icon hands_on %} Hands-On: Peptide FDR filtering
 >
@@ -125,6 +131,8 @@ To calculate FDRs, we first have to annotate the identified peptides to determin
 > 1. Run ***PeptideIndexer*** {% icon tool %} with
 >   - the FASTA protein database as **Input sequence database in FASTA format**, and
 >   - **Specificity of the enzyme** set to `none`.
+>   - **If set, the protein sequences are stored as well** should be `Yes`. 
+>   - **If set, the protein description is stored as well** should be `Yes`. 
 > 3. Run ***FalseDiscoveryRate*** {% icon tool %} with
 >   - **Perform FDR calculation on protein level** set to `false`,
 >   - **Filter PSMs based on q-value** set to `0.01`, and
