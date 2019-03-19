@@ -617,11 +617,15 @@ As before, we need first to create a table with the column:
 > 6. **Cut columns from a table**
 >    - {% icon param-files %} *"File to cut"*: output of **Multi-Join**
 >    - *"Cut by"*: `fields`
->      - *"List of Fields"* corresponding to YEAR and regional_gam values: `Column: 1`, `Column: 3`, `Column: 4`, `Column: 7`, `Column: 8`, `Column: 11`, `Column: 12`, `Column: 15`, `Column: 16`, `Column: 19`, `Column: 20`
+>      - *"List of Fields"* corresponding to YEAR and regional_gam values: `Column: 1`, `Column: 4`, `Column: 8`, `Column: 12`, `Column: 16`, `Column: 20`
+>
+> 7. **Remove beginning or a file** to remove the header to have a better chart
+>    - {% icon param-file %} *"Remove first"*: 1
+>    - {% icon param-files %} *"from"*: the output of previous **Cut**
 >
 >    We have now a table as wanted that we can plot
 >
-> 7. Generate the chart using the stacked visualization
+> 8. Generate the chart using the stacked visualization
 >    1. Inspect and expand the output data from **Cut** {% icon tool %}
 >    2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
 >    3. Select **Bar diagram (NVD 3)** as visualization type
@@ -630,37 +634,37 @@ As before, we need first to create a table with the column:
 >       - In *"1: Data series"*:
 >           - *"Provide a label"*: `DEBMS` for example
 >           - *"Pick a series color"*: Choose a color for the line
->           - *"Data point labels"*: `Column: 3` (the DEBMS prop_pheno_sampled column)
+>           - *"Data point labels"*: `Column: 2` (the DEBMS prop_pheno_sampled column)
 >           - *"Values for x-axis"*: `Column: 1` (the "year" column)
 >           - *"Values for y-axis"*: `Column: 2` (the DEBMS regional_gam column)
 >       - {% icon param-repeat %} *"Insert Data series"*
 >       - In *"2: Data series"*:
 >           - *"Provide a label"*: `ESBMS` for example
 >           - *"Pick a series color"*: Choose a color for the line
->           - *"Data point labels"*: `Column: 5`
+>           - *"Data point labels"*: `Column: 3`
 >           - *"Values for x-axis"*: `Column: 1`
->           - *"Values for y-axis"*: `Column: 4`
+>           - *"Values for y-axis"*: `Column: 3`
 >       - {% icon param-repeat %} *"Insert Data series"*
 >       - In *"3: Data series"*:
 >           - *"Provide a label"*: `FRBMS` for example
 >           - *"Pick a series color"*: Choose a color for the line
->           - *"Data point labels"*: `Column: 7`
+>           - *"Data point labels"*: `Column: 4`
 >           - *"Values for x-axis"*: `Column: 1`
->           - *"Values for y-axis"*: `Column: 6`
+>           - *"Values for y-axis"*: `Column: 4`
 >       - {% icon param-repeat %} *"Insert Data series"*
 >       - In *"4: Data series"*:
 >           - *"Provide a label"*: `NLBMS` for example
 >           - *"Pick a series color"*: Choose a color for the line
->           - *"Data point labels"*: `Column: 9`
+>           - *"Data point labels"*: `Column: 5`
 >           - *"Values for x-axis"*: `Column: 1`
->           - *"Values for y-axis"*: `Column: 8`
+>           - *"Values for y-axis"*: `Column: 5`
 >       - {% icon param-repeat %} *"Insert Data series"*
 >       - In *"5: Data series"*:
 >           - *"Provide a label"*: `UKBMS` for example
 >           - *"Pick a series color"*: Choose a color for the line
->           - *"Data point labels"*: `Column: 11`
+>           - *"Data point labels"*: `Column: 6`
 >           - *"Values for x-axis"*: `Column: 1`
->           - *"Values for y-axis"*: `Column: 10`
+>           - *"Values for y-axis"*: `Column: 6`
 >    6. On **Customize**, specify:
 >       - *"X-Axis label"*: `Year`
 >       - *"Y-Axis label"*: `Regional GAM`
