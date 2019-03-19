@@ -295,18 +295,18 @@ This graph displays the occurrence of Pyronia tithonus, over the year. But the f
 >    - {% icon param-file %} *"Select data"*: output from the last **Column Regex Find And Replace**.
 >    - *"Merge column"*: `Column: 3` (the column with the week)
 >    - *"with column"*: `Column: 2` (the column with the year)
-> 7. **Remove beginning of a file** {% icon tool %} to remove first line (to avoid header in the visualization)
-> 8. **Column Regex Find And Replace** {% icon tool %} to recreate the original content for the year column:
->    - {% icon param-file %} *"File to process"*: output file from **Remove beginning of a file**.
+> 6. **Column Regex Find And Replace** {% icon tool %} to recreate the original content for the year column:
+>    - {% icon param-file %} *"File to process"*: output file from **Merge Columns together**.
 >    - *"in column"*: `Column 2` (the column with the year)
 >    - *"Find pattern"*: `-(20[0-9][0-9])`
 >    - *"Replace with"*: `\1`
+> 7. **Remove beginning of a file** {% icon tool %} to remove first line (to avoid header in the visualization)
 >
 >    > ### {% icon comment %} Dataset with information about more than one species
 >    > If your dataset contains information about more than one species, you can apply the previous steps and then run an extra-step to select one specific species and show all the data corresponding to it.
 >    {: .comment}
 >
-> 2. Generate the chart using the visualization with the x-axis corresponding to your column `"week""year"`.
+> 8. Generate the chart using the visualization with the x-axis corresponding to your column `"week""year"`.
 >    1. Inspect and expand the output data from **Remove beginning of a file** {% icon tool %}
 >    2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
 >    3. Select **Line chart (NVD 3)** as visualization type
