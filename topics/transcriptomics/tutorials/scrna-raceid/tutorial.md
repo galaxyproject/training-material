@@ -627,7 +627,16 @@ The top chart shows the number of links above a threshold that each cluster exhi
 > > ### {% icon solution %} Solution
 > >
 > > `c3` has the most number of links, and the most entropy that one would expect a multipotent progenitor cell type to exhibit, and therefore must be the root of the lineage tree, *despite* having fewer links than `c2`.
-> > `{3 {5, 1 {6}, 2 {8 {12 {10}}, 11, 4}}}` (in JSON format)
+> > `c3
+> >  - c5
+> >  - c1
+> >    - c6
+> >  - c2
+> >    - c8
+> >      - c12
+> >        - c10
+> >    - c11
+> >    - c4
 > >
 > {: .solution}
 >
