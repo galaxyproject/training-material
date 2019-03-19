@@ -249,7 +249,7 @@ The bottom row shows the count distributions of the Library Size and Number of F
 >
 > > ### {% icon solution %} Solution
 > >
-> > The answer to both questions can be seen in Metrics file
+> > The answer to both questions can be seen in log file generated **Filtering, Normalisation, and Confounder Removal using RaceID**
 > >
 > > 1. 287 cells remain (66%)
 > > 2. 2089 genes remain (10%)
