@@ -318,7 +318,9 @@ The first three plots (in the PDF report) tell us about the stability/reliabilit
 
 ![Stability Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_sat_jacc.png %} "RaceID Saturation and Jaccard Plots")
 
-The first plot measures the levels of dispersion within each cluster and produces the mean over all clusters (as defined by the k parameter). As *k* increases, the reduction in this dispersion is measured for each increase of *k* until the change in the mean within-cluster dispersion no longer changes. Here we can see that reduction saturates at *k=12*, which is chosen to the be the number of clusters detected in our data for all further analysis. The second plot is the same as the first but with the actual dispersion plotted instead of the relative change of dispersion.
+The first plot measures the levels of dispersion within each cluster and produces the mean over all clusters (as defined by the k parameter). As *k* increases, the reduction in this dispersion is measured for each increase of *k* until the change in the mean within-cluster dispersion no longer changes. Here we can see that reduction saturates at *k=12*, which is chosen to the be the number of clusters detected in our data for all further analysis.
+
+The second plot is the same as the first but with the actual dispersion plotted instead of the relative change of dispersion.
 
 The third plot measures the direct stability of each of the derived (in this case, 12) clusters using the [Jaccard index](https://en.wikipedia.org/wiki/Jaccard_index), which is a fractional quantity that measures how many elements in two sets overlap divided by the union of both sets. Here the (top N) genes expressed by the cells in each cluster are intersected with the cells in all other clusters to measure how unique the expression profile is to that cluster. The scales given by the plot are actually measuring the dissimilarity between sets, which is one minus the index, therefore the higher the better.
 
