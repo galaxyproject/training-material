@@ -476,7 +476,9 @@ To really understand the dynamics in the shifting profiles of gene expressions b
 There are three ways to do this in RaceID:
 
  1. **MA Plot**
+
     Perform a pairwise comparison between two clusters (or two sets of clusters) to see specifically which genes are differentially expressed between them.
+    
  1. **Subset Cell Analysis**
     If the cell headers have names that contain information prior to the clustering about the different cell phenotypes, then it might be interesting to see if the cells do cluster as expected.
  1. **Specific Expression Plots**
