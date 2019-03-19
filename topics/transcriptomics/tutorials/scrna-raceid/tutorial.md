@@ -480,9 +480,13 @@ There are three ways to do this in RaceID:
     Perform a pairwise comparison between two clusters (or two sets of clusters) to see specifically which genes are differentially expressed between them.
     
  1. **Subset Cell Analysis**
+
     If the cell headers have names that contain information prior to the clustering about the different cell phenotypes, then it might be interesting to see if the cells do cluster as expected.
+    
  1. **Specific Expression Plots**
+
     It may be of interest to look at how specific genes which may be markers for a cell type are expressed across different clusters, with the expectation that they are localised to a specific cluster depending on how specific the marker is.
+    
 
 ## Differential Gene Analysis Between Two Clusters
 
@@ -531,7 +535,7 @@ The genes shown as grey dots are not labelled because they are of similar levels
 
 We will now look at some genes of interest to see how prevalent or unique they are across clusters. Usually known marker genes are used to identify clusters by their cell type and not just a number, but any gene of interest can be used if it is believed to characterise a cluster of cells.
 
-Here we will look at the combined expression of *Gstm3*, *St3gal4*, and *Gna11* which all had adjusted P-values of less than $$1e-15$$ in cluster 1.
+Here we will look at the combined expression of *Gstm3*, *St3gal4*, and *Gna11* which all had adjusted P-values of less than $$1 \cdot 10^{-15}$$ in cluster 1.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -611,7 +615,12 @@ This is clarified slightly better with the heatmap (bottom-right) that shows the
 > 
 > > ### {% icon solution %} Solution
 > >
-> > On first glance, it appears that `c2` would be the progenitor, giving rise to; mature type `c11`, `c4`, and `c9`; `c3` which is the progenitor to `c5` and `c1`; `c8`, which gives rise to `c12` that in turn generates `c10`.
+> > On first glance, it appears that `c2` would be the progenitor, giving rise to
+> > - mature type `c11`, `c4`, and `c9`, which are not link to any other clusters
+> > - `c3` which is the progenitor of
+> >    - `c5`
+> >    - `c1` giving then rise to `c6`
+> > - `c8` which gives rise to `c12` that in turn generates `c10`.
 > > `{2, {8 {12 {10}}, 11, 4, 9, 3 {5, 1 { 6 } } } }` (in JSON format)
 > > 
 > >
