@@ -266,7 +266,7 @@ This step will allow you to compute and display the phenology of a species. In t
 
 ![Phenology chart](../../images/regionalGAM/phenology_year.png)
 
-This graph displays the occurrence of Pyronia tithonus, over the year. But the first year is "null", probably a left-over of the 1st line with the header, and we do not know the weeks there.
+This graph displays occurrences of *Pyronia tithonus*, over the year. But the first year is "null", probably a left-over of the 1st line with the header, and we do not know the weeks there.
 
 > ### {% icon hands_on %} Hands-on: Create a new column of the dataset containing the week and the year
 > 1. **Count occurrences of each record** {% icon tool %} with the following parameters
@@ -326,7 +326,7 @@ This graph displays the occurrence of Pyronia tithonus, over the year. But the f
 
 ![Phenology chart](../../images/regionalGAM/Pyronia_tithonus_phenology_explicit_ID.png)
 
-This shows the occurrence of Pyronia tithonus, over the weeks. We can see there is a peak every year and we can already notice some differences in the values between the weeks and years, but not how the weeks overlap between the years. In this type of visualization, it's quite difficult to see when occurs maximum presence of butterflies and possible changes between years. We would like to visualize these differences using a stacked visualization. Here we can see global differences year by year like evolution of the maximum number of observations or some specific patterns as presence of more than only one peak in 2007, 2009 and 2012.
+This shows the occurrences of *Pyronia tithonus*, over the weeks. We can see there is a peak every year and we can already notice some differences in the values between the weeks and years, but not how the weeks overlap between the years. In this type of visualization, it's quite difficult to see when occurs maximum presence of butterflies and possible changes between years. We would like to visualize these differences using a stacked visualization. Here we can see global differences year by year like evolution of the maximum number of observations or some specific patterns as presence of more than only one peak in 2007, 2009 and 2012.
 
 To do that, we need to first create a table with the columns:
 1. Day
@@ -485,7 +485,7 @@ To do that, we need to first create a table with the columns:
 
 ![Stacked Phenology chart](../../images/regionalGAM/Pyronia_tithonus_phenology_stacked_explicit_ID.png)
 
-With this graph, we can see that the occurrence of Pyronia tithonus is always around the same weeks every year. We can also see differences between years, for example 2005 and 2007 show earlier observation than others years maybe due to climatic particularities or due to observations bias. Further tests can be made on these data to evaluate differences between years and relation to climatic, environmental or others factors. Earliest peak is found for year 2006 when latest for year 2012, and this can also be explained by different types of environmental factors or bias. This can be tested through further modeling steps.
+With this graph, we can see that occurrences of *Pyronia tithonus* are always around the same weeks every year. We can also see differences between years, for example 2005 and 2007 show earlier observation than others years maybe due to climatic particularities or due to observations bias. Further tests can be made on these data to evaluate differences between years and relation to climatic, environmental or others factors. Earliest peak is found for year 2006 when latest for year 2012, and this can also be explained by different types of environmental factors or bias. This can be tested through further modeling steps.
 
 > ### {% icon details %} Working with more than one species
 >
@@ -669,7 +669,7 @@ As before, we need first to create a table with the column:
 
 ![Abundance index chart](../../images/regionalGAM/Pyronia_tithonus_Abundance_index_stacked.png)
 
-With this graph, we can see Pyronia tithonus abundance index through years by sites. Results can be different from one site to each other. Regarding overal patterns through years, DEBMS and NLBMS seems to be correlate and maybe due to the relative geographical proximity (DE=German / NL=Netherland). Considering min/max abundance, ESBMS show highest regionalGAM score when DEBMS show lowest. This can also be explained by different types of environmental factors or bias and have to be tested through further modeling steps.
+With this graph, we can see *Pyronia tithonus* abundance index through years by sites. Results can be different from one site to each other. Regarding overal patterns through years, DEBMS and NLBMS seems to be correlate and maybe due to the relative geographical proximity (DE=German / NL=Netherland). Considering min/max abundance, ESBMS show highest regionalGAM score when DEBMS show lowest. This can also be explained by different types of environmental factors or bias and have to be tested through further modeling steps.
 
 
 ## Compute a collated index for each year and estimates the temporal trend
