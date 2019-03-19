@@ -370,7 +370,7 @@ To do that, we need to first create a table with the columns:
 >   
 >    You should now have 10 files in the history
 >
-> 3. **Cut** to keep species, day, week and value columns
+> 3. **Cut columns from a table** to keep species, day, week and value columns
 >    - {% icon param-files %} *"File to cut"*: all the outputs of **Filter data on any column using simple expressions**
 >    - *"Operation"*: `Keep`
 >    - *"Delimited"*: `Tab`
@@ -384,12 +384,12 @@ To do that, we need to first create a table with the columns:
 >    - *"Column with values to preserve"*: All
 >    - *"Add header line to the output file"*: No
 >
-> 5. **Sort** to get your data in chronological order
+> 5. **Sort data in ascending or descending order** to get your data in chronological order
 >    - {% icon param-file %} *"File"*: the output of **Multi-Join**
 >    - *"column"*: `Column: 1`
 >    - *"order"*: `ascending`
 >
-> 6. **Cut** to remove repeated columns
+> 6. **Cut columns from a table** to remove repeated columns
 >    - {% icon param-files %} *"File to cut"*: output of **Sort**
 >    - *"Operation"*: `Keep`
 >    - *"Delimited by"*: `Tab`
