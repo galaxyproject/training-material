@@ -382,7 +382,7 @@ To do that, we need to first create a table with the columns:
 >    - {% icon param-files %} *"add additional file"*: All the other output of **Cut**
 >    - *"Common key column"*: `3`
 >    - *"Column with values to preserve"*: All
->    - *"Add header line to the output file"*: No
+>    - *"Add header line to the output file"*: Yes
 >    - *"Input files contain a header line (as first line)"*: Yes
 >    - *"Ignore duplicated keys"*: Yes
 >
