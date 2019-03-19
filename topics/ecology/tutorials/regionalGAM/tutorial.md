@@ -570,8 +570,9 @@ We now would like to create a chart showing the annual abundance trend of a cert
 >     -  *"Values for x-axis"*: `Column 3`
 >     -  *"Values for y-axis"*: `Column 4`
 > 5. Click on **Customize**
->     -  *"X-Axis label"*: `Year`
+>    -  *"X-Axis label"*: `Year`
 >    -  *"Y-Axis label"*: `regional_gam`
+>    -  *"Show legend"*: `No`
 > 9. Click on **Save** if you are willing to keep it
 {: .hands_on}
 
