@@ -260,8 +260,7 @@ This step will allow you to compute and display the phenology of a species. In t
 >    6. On **Change settings**, specify:
 >       - *"X-Axis label"*: `Year`
 >       - *"Y-Axis label"*: `nm values`
->    7. Click on **Visualize**
->    8. Click on **Save**
+>    7. Click on **Save**
 >
 {: .hands_on}
 
@@ -321,8 +320,7 @@ This graph displays the occurrence of Pyronia tithonus, over the year. But the f
 >    6. On **Customize**, specify:
 >       - *"X-Axis label"*: `Week-Year`
 >       - *"Y-Axis label"*: `nm values`
->    7. Click on **Visualize**
->    8. Click on **Save**
+>    7. Click on **Save**
 >
 {: .hands_on}
 
@@ -479,8 +477,7 @@ To do that, we need to first create a table with the columns:
 >       - *"X-Axis label"*: `Week`
 >       - *"Y-Axis label"*: `nm values`
 >       - *"Use multi-panels"*: `No`
->    7. Click on **Visualize**
->    8. Click on **Save**
+>    7. Click on **Save**
 >    
 {: .hands_on}
 
@@ -533,8 +530,7 @@ With this graph, we can see that the occurrence of Pyronia tithonus is always ar
 > >     -  *"X-Axis label"*: `Week and Year`  
 > >     -  *"Y-Axis label"*: `nm values`
 > >     -  *"Use multi-panels"*: click on `No`(or you will have separated charts, one for each species)
-> > 9. Click on **Visualize**
-> > 10. Click on **Save** if you are willing to keep it
+> > 9. Click on **Save** if you are willing to keep it
 > >
 > {: .hands_on}
 >
@@ -574,8 +570,7 @@ We now would like to create a chart showing the annual abundance trend of a cert
 > 5. Click on **Customize**
 >     -  *"X-Axis label"*: `Year`
 >    -  *"Y-Axis label"*: `regional_gam`
-> 9. Click on **Visualize**
-> 10. Click on **Save** if you are willing to keep it
+> 9. Click on **Save** if you are willing to keep it
 {: .hands_on}
 
 ![Abundance index chart](../../images/regionalGAM/regionalgam_year.png)
@@ -667,8 +662,7 @@ As before, we need first to create a table with the column:
 >       - *"X-Axis label"*: `Year`
 >       - *"Y-Axis label"*: `Regional GAM`
 >       - *"Use multi-panels"*: `No`
->    7. Click on **Visualize**
->    8. Click on **Save**
+>    7. Click on **Save**
 {: .hands_on}
 
 ![Abundance index chart](../../images/regionalGAM/Pyronia_tithonus_Abundance_index_stacked.png)
