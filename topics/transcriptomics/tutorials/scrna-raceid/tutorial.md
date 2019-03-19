@@ -205,7 +205,7 @@ We can refine filtering thresholds by examining how much a histogram of our plot
 >
 {: .hands_on}
 
-This tool generates four histograms with the top line giving the raw expression data fed into the tool, and the bottom line giving the filtered data. 
+This tool generates four histograms with the top line giving the raw expression data fed into the tool, and the bottom line giving the filtered data (cells with at least 3,000 transcripts in total and genes with at least 5 transcripts in at least 5 cells). 
 
 ![Histograms of raw and filtered data]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_filter_plots.png %} "RaceID Histograms of raw and filtered data")
 
