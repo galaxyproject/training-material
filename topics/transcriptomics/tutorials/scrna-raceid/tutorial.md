@@ -322,7 +322,7 @@ The first plot measures the levels of dispersion within each cluster and produce
 
 The second plot is the same as the first but with the actual dispersion plotted instead of the relative change of dispersion.
 
-The third plot measures the direct stability of each of the derived (in this case, 12) clusters using the [Jaccard index](https://en.wikipedia.org/wiki/Jaccard_index), which is a fractional quantity that measures how many elements in two sets overlap divided by the union of both sets. Here the (top N) genes expressed by the cells in each cluster are intersected with the cells in all other clusters to measure how unique the expression profile is to that cluster. The scales given by the plot are actually measuring the dissimilarity between sets, which is one minus the index, therefore the higher the better.
+The third plot measures the direct stability of each of the derived (in this case, 12) clusters using the [Jaccard index](https://en.wikipedia.org/wiki/Jaccard_index), which is a fractional quantity that measures how many elements in two sets overlap divided by the union of both sets. Here the (top N) genes expressed by the cells in each cluster are intersected with the (top N) genes expressed the cells in all other clusters to measure how unique the expression profile is to that cluster. The scales given by the plot are actually measuring the dissimilarity between sets, which is one minus the index, therefore the higher the better.
 
 Ideally the Jaccard should have above 0.6 in most clusters, but it is acceptable to have one or two more poorly defined clusters
 
