@@ -212,7 +212,9 @@ This tool generates four histograms with the top line giving the raw expression 
 The top row shows the count distributions of the Library Size and Number of Features of the raw data:
 
 * (Top-Left) Library Size (total number of transcripts per cell)
-  * A lower-tail heavy distribution centred around $$10^{3-4}$$ counts per cell, with a few cells having library sizes containing a handful of counts (0-1000).
+
+    A lower-tail heavy distribution centered around $$10^{3-4}$$ counts per cell, with a few cells having library sizes containing a handful of counts (0-1000).
+    
 * (Top-Right) Feature Set (total number of detectable genes per cell)
   * Another lower-tail heavy distribution with a peak centred around $$10^{3.5}$$. Cells with a low number of features are hard to compare with other cells due to incomplete data. It is possible that these low feature cells (< 100 genes) are rare types and that we should impute their missing values, but it is often more likely the case that these are simply just low-quality cells that will add noise to the clustering.
 
