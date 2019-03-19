@@ -598,7 +598,7 @@ As before, we need first to create a table with the column:
 > 2. Check the generated output to identify the different sites
 > 1. **Filter data on any column using simple expressions** {% icon tool %} to select values for 2003
 >    - {% icon param-file %} *"Filter"*: output of **Abundance index** {% icon tool %}
->    - *"With following condition"*: `c1=='"DEBMS"'` (another species name)  
+>    - *"With following condition"*: `c1=='"DEBMS"'`  
 >    - *"Number of header lines to skip"*: `1`
 > 2. Repeat the previous step with:
 >    - `c1=='"ESBMS"'`
