@@ -355,7 +355,7 @@ To do that, we need to first create a table with the columns:
 > ### {% icon hands_on %} Hands-on: Generate a stacked chart, overlapping each year
 > 1. **Filter data on any column using simple expressions** to select values for 2003
 >    - {% icon param-file %} *"Filter"*: output of **Column Regex Find And Replace** {% icon tool %}
->    - *"With following condition"*: `c2==2003` (another species name)  
+>    - *"With following condition"*: `c2==2003`  
 >    - *"Number of header lines to skip"*: `0`
 > 2. Repeat the previous steps with:
 >    - `c2==2004`
