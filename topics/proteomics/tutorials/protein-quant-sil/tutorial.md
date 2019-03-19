@@ -62,6 +62,29 @@ To learn about *protein identification* in Galaxy, please consider our OpenMS-ba
 >
 {: .agenda}
 
+# Peptide and Protein Identification
+
+In this tutorial, peptide identification will be performed using the workflow of the previous [Peptide ID Tutorial]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-oms/tutorial.html). Alternatively one can also the protein identification step by step in the [Peptide ID Tutorial]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-oms/tutorial.html) using the SILAC dataset from [zenodo](https://zenodo.org/record/1051552) **but** beware to specify the labels in the `param_variable_modifications` of ***XTandemAdapter*** {% icon tool %}. 
+
+A common problem in mass spectrometry are misassigned mono-isotopic precursor peaks. Most search engines allow for some adaptation of the monoisotopic peak and we will use this by leaving `By default, misassignment to the first and second isotopic 13C peak are also considered` at `No`. 
+
+[//]: # TODO: Read about monoisotopic peak problem, give citation to review!
+
+> ### {% icon hands_on %} Hands-on: Peptide and Protein Identification and Conversion
+> 1. Import the test dataset from [zenodo](https://zenodo.org/record/1051552). The data have been preprocessed during the conversion from the machine raw file. We used background removal on MS1 and MS2 level, and MS2 deisotoping.
+> 2. Import the human protein database (including cRAP contaminants and decoys) from [zenodo](https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_added%29.fasta).
+> 3. Import the [workflow]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga) from the tutorial "Protein identification using OpenMS" and modify it:
+>   - Connect the `mzML` input directly to the ***XTandemAdapter*** {% icon tool %} node.
+>   - Change the ***XTandemAdapter*** {% icon tool %} parameters: Add the **param_variable_modifications** `Label:13C(6) (K)` and `Label:13C(6) (R)`.
+> 4. Run the workflow with
+>   - the mzML dataset `1: mzML dataset`
+>   - the human FASTA database `2: protein FASTA database`
+>
+>   > ### {% icon tip %} Tip: Using Galaxy Workflows
+>   > If you want to learn more about Galaxy workflows, please consult the [Galaxy Introduction]({{site.baseurl}}/topics/introduction/tutorials/galaxy-intro-101/tutorial.html#the-workflow-editor)
+>   {: .tip}
+{: .hands_on}
+
 # MS1 Feature Detection
 MS1 feature detection is a critical step in quantitative workflows. In principle, there are two different ways to define features:
 1. Feature detection solely based upon MS1 data (mzML/raw files) without prior knowledge of peptide identifications (IDs).
@@ -75,8 +98,7 @@ The OpenMS suite provides several tools (FeatureFinders) for MS1 feature detecti
 
 > ### {% icon hands_on %} Hands-on: MS1 Feature Detection
 >
-> 1. Import the test dataset from [zenodo](https://zenodo.org/record/1051552). The data have been preprocessed during the conversion from the machine raw file. We used background removal on MS1 and MS2 level, and MS2 deisotoping.
-> 2. Run ***FeatureFinderMultiplex*** {% icon tool %} with
+> 1. Run ***FeatureFinderMultiplex*** {% icon tool %} with
 >   - the mzML file as **LC-MS dataset in centroid or profile mode**,
 >   - **Labels used for labelling the samples** set to `[ ][Arg6,Lys6]`,
 >   - **m/z tolerance for search of peak patterns** set to `10`, and
@@ -89,33 +111,6 @@ The OpenMS suite provides several tools (FeatureFinders) for MS1 feature detecti
 >   {: .comment}
 {: .hands_on}
 
-# Peptide and Protein Identification
-
-In this tutorial, peptide identification will be performed using the workflow of the previous [Peptide ID Tutorial]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-oms/tutorial.html).
-
-A common problem in mass spectrometry are misassigned mono-isotopic precursor peaks. Although most search engines allow for some adaptation of the monoisotopic peak, we will instead perform a recalculation of the monoisotopic peaks based on the previously identified features prior to peptide identification.
-This step facilitates mapping peptide IDs to identified features [later on](#mapping-identifications-to-features). To do so, we will use the OpenMS tool ***HighResPrecursorMassCorrector*** {% icon tool %}.
-
-[//]: # TODO: Read about monoisotopic peak problem, give citation to review!
-
-> ### {% icon hands_on %} Hands-on: Peptide and Protein Identification and Conversion
-> 1. Run ***HighResPrecursorMassCorrector*** {% icon tool %} with
->   - the `mzML` file as **Input file**,
->   - the output of ***FeatureFinderMultiplex*** as **Features used to correct precursor masses**, and
->   - **The precursor mass tolerance** set to `10`.
-> 1. Import the human protein database (including cRAP contaminants and decoys) from [zenodo](https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_added%29.fasta).
-> 2. Import the [workflow]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga) from the tutorial "Protein identification using OpenMS" and modify it:
->   - Delete the **PeakPickerHiRes** {% icon tool %} node, as the MS2 data of our test dataset are already centroided.
->   - Connect the `mzML` input directly to the **MSGFPlusAdapter** {% icon tool %} node.
->   - Change the **MSGFPlusAdapter** {% icon tool %} parameters: Add the variable modifications `Label:13C(6) (K)` and `Label:13C(6) (R)`.
-> 3. Run the workflow with
->   - the output of ***HighResPrecursorMassCorrector*** as `1: Input: mzML dataset`
->   - the human FASTA database as `2: protein FASTA database`
->
->   > ### {% icon tip %} Tip: Using Galaxy Workflows
->   > If you want to learn more about Galaxy workflows, please consult the [Galaxy Introduction]({{site.baseurl}}/topics/introduction/tutorials/galaxy-intro-101/tutorial.html#the-workflow-editor)
->   {: .tip}
-{: .hands_on}
 
 # Mapping Identifications to Features
 
@@ -135,11 +130,16 @@ Finally, we will combine the peptide quantifications to protein quantifications.
 >   - the `consensusXML` output of ***FeatureFinderMultiplex*** as **Feature map/consensus map file**,
 >   - **RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features** set to `20`,
 >   - **m/z tolerance (in ppm or Da) for matching of peptide identifications and (consensus) features** set to `10`, and
->   - **Match using RT and m/z of sub-features instead of consensus RT and m/z** set to `Yes`.
+>   - **Match using RT and m/z of sub-features instead of consensus RT and m/z** set to `Yes`, 
+>   - Select **Show advanced options**
+>       - **Store the map index of the sub-feature in the peptide ID** set to `Yes`.
 > 2. Run ***FileFilter*** {% icon tool %} with
 >   - **Remove unassigned peptide identifications** set to `Yes`.
 > 3. Run ***IDConflictResolver*** {% icon tool %}.
-> 4. Run ***ProteinQuantifier*** {% icon tool %} with
+> 4. Run ***MultiplexResolver*** {% icon tool %} with
+>   - **Labels used for labelling the samples** set to `[ ][Arg6,Lys6]`,
+>   - **Maximum number of missed cleavages due to incomplete digestion** set to `1`.
+> 5. Run ***ProteinQuantifier*** {% icon tool %} with
 >   - the output of ***IDConflictResolver*** as **Input file**,
 >   - the output of ***IDFilter*** as **Protein inference results [...]**,
 >   - **Calculate protein abundance from this number of proteotypic peptides (most abundant first; '0' for all)** set to `0`,
@@ -218,7 +218,7 @@ Using Galaxy Workflows enables us to quickly re-run a full analysis with changed
 >   - **Remove features with annotations** set to `Yes`.
 > 5. Rename the FileFilter output to "UNannotated features"
 > 2. Download the following files:
->   - Spectra: ***HighResPrecursorMassCorrector*** `mzML` output file
+>   - Spectra: `mzML` file
 >   - peptide IDs: ***IDScoreSwitcher*** `idXML` output file
 >   - features: ***FeatureFinderMultiplex*** `featureXML` output file
 >   - consensus features: ***FileFilter*** `consensusXML` output files ("Annotated" and "UNannotated" features)
@@ -281,8 +281,7 @@ Three problems typically hamper correct peptide mapping:
         3. The detected feature is too small in RT dimension and covers only a part of the peptide peaks.
     - *Possible solution*:
         1. Increase the IDMapper parameter **RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features**.
-        2. Increase the HighResPrecursorMassCorrector parameter **Additional retention time tolerance added to feature boundaries**
-        3. Feature size in RT dimension cannot be directly corrected, use solution 1 instead.
+        2. Feature size in RT dimension cannot be directly corrected, use solution 1 instead.
     ![noMapping](../../images/protein-quant-sil_problem_noMapping.png "A feature was detected, but the RT dimension is shorter than the peptides's elution peak. Also, the 2nd isotopic peak was fragmented and was not corrected due to the short feature. A) 2D View. B) 3D View.")
 
 Two problems typically disturb correct peptide quantitation:
@@ -315,7 +314,7 @@ In the test dataset, several peptides were identified, but not quantified. Some 
 > ### {% icon hands_on %} Hands-on: Optimize Feature Detection
 >
 > 1. Run the whole WF again, change the FeatureFinderMultiplex parameter **Range of isotopes per peptide in the sample** from `3:6` to `2:6`.
-> 2. Run the whole WF again, change the HighResPrecursorMassCorrector parameter **Additional retention time tolerance added to feature boundaries** from `0.0` to `10.0`.
+> 2. Integrate the ***HighResPrecursorMassCorrector*** {% icon tool %} into the workflow. Use the mzML file and the featureXML from the ***FeatureFinderMultiplex*** {% icon tool %} as input and set **Additional retention time tolerance added to feature boundaries** between `0.0` and `10.0`. Connect the output with the search engine. 
 > 3. Compare the number of identified proteins, unmatched features and unmapped peptides for each parameter setting.
 > 4. Visualize the results with TOPPView to check for correct feature detection and feature-to-peptide mapping.
 >
