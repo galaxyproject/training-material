@@ -617,7 +617,7 @@ As before, we need first to create a table with the column:
 > 6. **Cut columns from a table**
 >    - {% icon param-files %} *"File to cut"*: output of **Multi-Join**
 >    - *"Cut by"*: `fields`
->      - *"List of Fields"*: `Column: 1`, `Column: 4`, `Column: 5`, `Column: 8`, `Column: 9`, `Column: 12`, `Column: 13`, `Column: 16`, `Column: 17`, `Column: 20`, `Column: 21`
+>      - *"List of Fields"* corresponding to YEAR and regional_gam values: `Column: 1`, `Column: 3`, `Column: 4`, `Column: 7`, `Column: 8`, `Column: 11`, `Column: 12`, `Column: 15`, `Column: 16`, `Column: 19`, `Column: 20`
 >
 >    We have now a table as wanted that we can plot
 >
