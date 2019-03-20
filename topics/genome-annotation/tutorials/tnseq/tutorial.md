@@ -320,7 +320,7 @@ Verify that the majority of the read have been trimmed. Now that we isolated the
 
 ## Aligning the reads to a reference genome
 
-The first step is to map our read to a the reference genome (you can download it [here](https://zenodo.org/record/2579335/files/staph_aur.fasta?download=1)). We are going to use the tool Bowtie. We could also use Bowtie2 with an end-to-end option, but Bowtie is more suitable for very short reads like ours (16-17 bp).
+The first step is to map our read to the reference genome (you can download it [here](https://zenodo.org/record/2579335/files/staph_aur.fasta?download=1)). We are going to use the tool Bowtie. We could also use Bowtie2 with an end-to-end option, but Bowtie is more suitable for very short reads like ours (16-17 bp).
 
 > ### {% icon hands_on %} Hands-on:  Map reads with Bowtie
 >
@@ -553,7 +553,7 @@ We now have a read count for each nucleotides of the TA sites. The insertions co
 >   - **Click** on `Execute`
 >
 > {% icon tool %} Select the **Sort data in ascending or descending order** tool in the *"Text Manipulation"* section of the tool bar and run with the following parameters:
->   - Set *Sort Query"* to the collection `Compute on...`
+>   - Set *Sort Query"* to the collection `Cut columns on...`
 >   - Set *"Number of header lines"* to `0`
 >   - Set *"on column"* to `Column: 1` to sort on positions
 >   - Set *"in"* to `Ascending Order`

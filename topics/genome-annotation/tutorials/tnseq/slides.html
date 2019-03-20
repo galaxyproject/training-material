@@ -254,7 +254,7 @@ The pre-processing of the data will be done through several steps of Cutadapt so
 
 .center[
  Barcode data:
- ```
+ ```markdown
  >control
  ^CTCAGAAG
  >condition
@@ -309,12 +309,31 @@ All these steps are performed with the Cutadapt tool
 
 
 
+- The first step is to map our read to the reference genome. We are using the tool Bowtie. We could also use Bowtie2 with an end-to-end option, but Bowtie is more suitable for very short reads like ours (16-17 bp).
+
+- We are strictly enforcing a no mismatch mapping in the bowtie parameters :
+    - Our reads being very short, the smallest size allowing precise mapping, allowing even one mismatch would risk having reads mapping in wrong positions.
+
 ---
 
 ### 2. Counting the number of insertion per TA sites
 
 #### 2. Getting coverage of the genome
 
+- Now that we have mapped the reads on the reference genome, we need to calculate the coverage of the genome to later cross them with our TA sites position.
+
+
+.center[
+<img name="method" src="../../images/tnseq/Map_cov.png" width='90%' >
+]
+
+- We are using the tool BamCoverage with an offset of `-1`
+
+???
+
+In our case, the reads cover the flanking region on one side of the TA site where the transposon inserted. That means we do not want to have the coverage across the whole reads, as it could cover several TA sites, but only the coverage at the end of the read.
+
+The sequenced read cover the 5' region flanking the site of insertion. To assign the read to its correct insertion, we need to compute the coverage at the 3' end of the read.
 
 ---
 
@@ -322,12 +341,89 @@ All these steps are performed with the Cutadapt tool
 
 #### 3. Getting TA sites positions
 
+- We are considering both strands together and therefore reporting all counts to the leftmost position of the TA sites.
+
+- The first step is to get the TA sites coordinates using  Wordmatch, wich provides us with three outputs:
+    - A file containing the locations where the TA sites maps on the Genome
+    - A file containing the locations where the Genome maps on the TA site
+    - A report file
+
+- We use a succession of small operations using the Cut and Compute tools to extract two files :
+    - A file with the 5' coordinate of each TA site of the Forward Strand
+    - A file with the 5' coordinate of each TA site of the Reverse Strand
+
+
+
+???
+
+
+As we are not considering strand separately in this analyses, we will consider both count as attached to the leftmost base of the TA site. To do that we will create two list of TA site positions, listing the 5' end of each TA site for forward and reverse strand, and then merge them to get a global count per TA site.
+
+In order to get the coverage on each TA site we need to prepare a file containing the position of each TA site. Depending on the direction of insertion the coverage will be counted on the leftmost position of the TA site or on the rightmost. As we are not considering strand separately in this analyses, we will consider both count as attached to the leftmost base of the TA site. To do that we will create two list of TA site positions, listing the 5' end of each TA site for forward and reverse strand, and then merge them to get a global count per TA site.
+
+The coordinates provided by wordmatch are based on count 1. Meaning the first nucleotide is counted as number 1. However, bamCoverage count the first nucleotide as nucleotide number 0. To be able to compare the two results, we need to shift the TA site positions by 1.
+
 
 ---
 
 ### 2. Counting the number of insertion per TA sites
 
 #### 4. Merging overall coverage and TA sites to get the coverage of each TA sites
+
+- We use the Join tool to join the coverage and the TA sites coordinates on the genomic positions. We then get :
+    - The coverage of TA sites on the Forward Strand reported on the leftmost base
+    - The coverage of TA sites on the Forward Strand reported on the rightmost base
+
+- We add the counts of both strand and report the total on the leftmost position of the TA site :
+    - We know have a count of insertions at every single site.
+
+???
+
+
+Now that have the files containing the coordinates of our TA sites for both strands. We will cross them with the coverage files to get the coverage on both sides of each TA site.
+
+
+We now have a read count for each nucleotides of the TA sites. The insertions counted in the forward strand files are in a different direction than those counted on the reverse strand file. In our case, we are only interested in studying the gene disruption, and therefore we do not want to consider the directions separately. We will add the forward and reverse count together to get a total count per TA site. In order to do that we need to assign the count of both strand to the same nucleotide. We will do that by shifting by one position the count on the reverse strand.
+
+
+---
+
+
+### 3. Predicting Essential Genes with Transit
+
+####     1. Predict the essentiality of genes with Transit
+
+
+
+The output of Transit is a tabulated file containing the following collumns (you can find more information on [Transit manual page](https://transit.readthedocs.io/en/latest/transit_methods.html)):
+-   Gene ID
+-   Name of the gene
+-   Gene description
+-   Number of Transposon Insertions Observed within the Gene
+-   Total Number of TA sites within the Gene
+-   Length of the Maximum Run of Non-Insertions observed (in number of TA sites)
+-   Span of nucleotides for the Maximum Run of Non-Insertions
+-   Posterior Probability of Essentiality
+-   Essentiality call for the gene : E=Essential, U=Uncertain, NE=Non-Essential, S=too short
+
+We can obtain the list of genes predicted as essential by filtering on the essentiality call.
+
+???
+
+Now that we have the counts of insertions per TA site, we can use them to predict gene esssentiality with Transit. In order to do that, we need to create a an annotation file in the `prot_table` format, specifique to the Transit tool. You can create this file from a gff3 from GenBank.
+
+
+
+Now that we have prepared the annotation file, we can use the count per TA site to predict essential genes using Transit tool.  We will modify a couple parameters from the default settings :
+-   We want to ignore counts lower than 2, in order to reduce the number of sites presenting a single read, which could be artefactual.
+-   We want to ignore insertion near the extremities of the genes. A disrupted site that would be very close to the border of the gene may not actually disturb the gene function, and therefore not be an actual signal of disruption.
+
+
+---
+
+### 3. Predicting Essential Genes with Transit
+
+####     2. Compare the essential genes between two conditions
 
 
 ---
