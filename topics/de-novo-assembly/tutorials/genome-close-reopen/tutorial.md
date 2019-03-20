@@ -280,7 +280,10 @@ If your genome's phage type can be determined, re-open your genome to make it sy
 [PhageTerm](https://www.nature.com/articles/s41598-017-07910-5) [PMID:28811656](https://www.ncbi.nlm.nih.gov/pubmed/?term=28811656) predicts termini and packaging mechanisms using the raw reads of a phage sequenced with technologies that rely on random fragmentation and its genomic reference sequence. While not fully verified, the tool provides a good guide for genome with well-described end types. Sometimes this prediction is informative when closing a genome (see assembly protocol); it can also be useful for deciding where to re-open a genomic sequence. After BLASTn, run [PhageTerm in Galaxy](https://cpt.tamu.edu/galaxy/root?tool_id=PhageTerm) as detailed below.
 
 **_Procedure_**
-<!-- COPY IN FROM THE ASSEMBLY PROTOCOL? -->
+> * Choose the input files based on which dataset gave the contig for the phage genome. For the FASTQ **mandatory input** use the better set (usually R1). For the **optional input**, use the other dataset (usually R2).
+> * Name the output file with the phage name.
+> * Execute.
+> * When complete, open the output called report.
 
 > ### {% icon comment %} A Note on Prediction Agreement
 > Generally, we consider an agreement between the two methods in a [PhageTerm](https://cpt.tamu.edu/galaxy/root?tool_id=PhageTerm) report to be a good indication that the prediction is true.
