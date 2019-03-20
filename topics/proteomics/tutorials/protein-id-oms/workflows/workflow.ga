@@ -1,9 +1,9 @@
 {
-  "uuid": "f4f53dc2-b1eb-4395-ac3d-f91b58ea2567",
+  "uuid": "53213184-0d1d-45a4-ab7f-b90c0c4fd82a",
   "tags": [],
   "format-version": "0.1",
   "name": "Protein ID workflow for Galaxy training",
-  "version": 2,
+  "version": 3,
   "steps": {
     "0": {
       "tool_id": null,
@@ -244,7 +244,7 @@
           "id": 4
         }
       },
-      "tool_state": "{\"param_write_protein_sequence\": \"\\\"true\\\"\", \"param_missing_decoy_action\": \"\\\"error\\\"\", \"param_filter_aaa_proteins\": \"\\\"false\\\"\", \"param_keep_unreferenced_proteins\": \"\\\"false\\\"\", \"adv_opts\": \"{\\\"__current_case__\\\": 0, \\\"adv_opts_selector\\\": \\\"basic\\\"}\", \"__page__\": null, \"param_allow_unmatched\": \"\\\"false\\\"\", \"param_decoy_string_position\": \"\\\"prefix\\\"\", \"param_mismatches_max\": \"\\\"0\\\"\", \"param_enzyme_name\": \"\\\"Trypsin\\\"\", \"param_enzyme_specificity\": \"\\\"none\\\"\", \"param_decoy_string\": \"\\\"DECOY_\\\"\", \"param_write_protein_description\": \"\\\"true\\\"\", \"param_full_tolerant_search\": \"\\\"false\\\"\", \"param_fasta\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_aaa_max\": \"\\\"4\\\"\", \"__rerun_remap_job_id__\": null, \"param_IL_equivalent\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_state": "{\"param_write_protein_sequence\": \"\\\"true\\\"\", \"param_missing_decoy_action\": \"\\\"error\\\"\", \"param_filter_aaa_proteins\": \"\\\"false\\\"\", \"param_keep_unreferenced_proteins\": \"\\\"false\\\"\", \"adv_opts\": \"{\\\"__current_case__\\\": 0, \\\"adv_opts_selector\\\": \\\"basic\\\"}\", \"__page__\": null, \"param_allow_unmatched\": \"\\\"false\\\"\", \"param_decoy_string_position\": \"\\\"prefix\\\"\", \"param_mismatches_max\": \"\\\"0\\\"\", \"param_enzyme_name\": \"\\\"Trypsin\\\"\", \"param_enzyme_specificity\": \"\\\"none\\\"\", \"param_decoy_string\": \"\\\"DECOY_\\\"\", \"param_write_protein_description\": \"\\\"true\\\"\", \"param_full_tolerant_search\": \"\\\"false\\\"\", \"param_fasta\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_aaa_max\": \"\\\"4\\\"\", \"__rerun_remap_job_id__\": null, \"param_IL_equivalent\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
       "id": 5,
       "tool_shed_repository": {
         "owner": "galaxyp",
@@ -266,10 +266,6 @@
       "inputs": [
         {
           "name": "param_fasta",
-          "description": "runtime parameter for tool PeptideIndexer"
-        },
-        {
-          "name": "param_in",
           "description": "runtime parameter for tool PeptideIndexer"
         }
       ],
@@ -624,10 +620,167 @@
       "inputs": [],
       "position": {
         "top": 647,
-        "left": 1808
+        "left": 1809
       },
       "annotation": "",
       "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.3.0",
+      "type": "tool"
+    },
+    "13": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.3.0",
+      "tool_version": "2.3.0",
+      "outputs": [
+        {
+          "type": "tabular",
+          "name": "param_out"
+        },
+        {
+          "type": "tabular",
+          "name": "param_consensus_centroids"
+        },
+        {
+          "type": "tabular",
+          "name": "param_consensus_elements"
+        },
+        {
+          "type": "tabular",
+          "name": "param_consensus_features"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "param_in": {
+          "output_name": "param_out",
+          "id": 11
+        }
+      },
+      "tool_state": "{\"param_no_ids\": \"\\\"false\\\"\", \"param_feature_minimal\": \"\\\"false\\\"\", \"param_id_add_metavalues\": \"\\\"-1\\\"\", \"param_consensus_sorting_method\": \"\\\"none\\\"\", \"param_quoting\": \"\\\"none\\\"\", \"param_id_peptides_only\": \"\\\"false\\\"\", \"adv_opts\": \"{\\\"__current_case__\\\": 0, \\\"adv_opts_selector\\\": \\\"basic\\\"}\", \"__page__\": null, \"param_consensus_sort_by_size\": \"\\\"false\\\"\", \"param_feature_add_metavalues\": \"\\\"-1\\\"\", \"param_id_proteins_only\": \"\\\"false\\\"\", \"param_replacement\": \"\\\"_\\\"\", \"param_id_add_hit_metavalues\": \"\\\"-1\\\"\", \"param_separator\": \"\\\"\\\"\", \"param_id_first_dim_rt\": \"\\\"false\\\"\", \"param_consensus_sort_by_maps\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"param_in\": \"{\\\"values\\\": [{\\\"id\\\": 9082991, \\\"src\\\": \\\"hda\\\"}]}\"}",
+      "id": 13,
+      "tool_shed_repository": {
+        "owner": "galaxyp",
+        "changeset_revision": "33e848694dc1",
+        "name": "openms_textexporter",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "98609cd5-748b-4cf6-9228-fcb3705e1f99",
+      "errors": null,
+      "name": "TextExporter",
+      "post_job_actions": {
+        "HideDatasetActionparam_consensus_elements": {
+          "output_name": "param_consensus_elements",
+          "action_type": "HideDatasetAction",
+          "action_arguments": {}
+        },
+        "HideDatasetActionparam_out": {
+          "output_name": "param_out",
+          "action_type": "HideDatasetAction",
+          "action_arguments": {}
+        },
+        "HideDatasetActionparam_consensus_features": {
+          "output_name": "param_consensus_features",
+          "action_type": "HideDatasetAction",
+          "action_arguments": {}
+        },
+        "HideDatasetActionparam_consensus_centroids": {
+          "output_name": "param_consensus_centroids",
+          "action_type": "HideDatasetAction",
+          "action_arguments": {}
+        }
+      },
+      "label": null,
+      "inputs": [],
+      "position": {
+        "top": 787,
+        "left": 1802
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.3.0",
+      "type": "tool"
+    },
+    "14": {
+      "tool_id": "Grep1",
+      "tool_version": "1.0.1",
+      "outputs": [
+        {
+          "type": "input",
+          "name": "out_file1"
+        }
+      ],
+      "workflow_outputs": [
+        {
+          "output_name": "out_file1",
+          "uuid": "4807a097-92bd-46b7-917c-da15e6b4fec9",
+          "label": null
+        }
+      ],
+      "input_connections": {
+        "input": {
+          "output_name": "param_out",
+          "id": 13
+        }
+      },
+      "tool_state": "{\"__page__\": null, \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"invert\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"pattern\": \"\\\"CONTAMINANT\\\"\"}",
+      "id": 14,
+      "uuid": "ddfe7899-163a-49ef-b473-a093a5ea635f",
+      "errors": null,
+      "name": "Select",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [
+        {
+          "name": "input",
+          "description": "runtime parameter for tool Select"
+        }
+      ],
+      "position": {
+        "top": 670,
+        "left": 2153
+      },
+      "annotation": "",
+      "content_id": "Grep1",
+      "type": "tool"
+    },
+    "15": {
+      "tool_id": "Grep1",
+      "tool_version": "1.0.1",
+      "outputs": [
+        {
+          "type": "input",
+          "name": "out_file1"
+        }
+      ],
+      "workflow_outputs": [
+        {
+          "output_name": "out_file1",
+          "uuid": "e02089ed-8adb-4b7c-9f41-1d5faf459191",
+          "label": null
+        }
+      ],
+      "input_connections": {
+        "input": {
+          "output_name": "param_out",
+          "id": 13
+        }
+      },
+      "tool_state": "{\"__page__\": null, \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"invert\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"pattern\": \"\\\"HUMAN\\\"\"}",
+      "id": 15,
+      "uuid": "fb4cb7a0-3b2e-4332-98e4-5b63fa954f08",
+      "errors": null,
+      "name": "Select",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [
+        {
+          "name": "input",
+          "description": "runtime parameter for tool Select"
+        }
+      ],
+      "position": {
+        "top": 784,
+        "left": 2154
+      },
+      "annotation": "",
+      "content_id": "Grep1",
       "type": "tool"
     }
   },
