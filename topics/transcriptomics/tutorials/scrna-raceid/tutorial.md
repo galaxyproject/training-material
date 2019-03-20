@@ -46,11 +46,11 @@ contributors:
 
 The data provided here as part of this tutorial analyses single-cell RNA-seq data from a study published by [Grün et.al](https://doi.org/10.1016/j.stem.2016.05.010) in 2016. The data was used to cluster cells from *Lgr5*-positive intestinal stem cells of C57BL6/J mice, with the aim of discovering distinct cell sub-populations and deriving a lineage tree between them to find out how these sub-populations relate (or are derived from) one another.
 
-The input data consists of a single count matrix consisting of ~21,000 genes (rows) and ~400 cells (columns), following the [tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) convention prevalent amongst the R data analysis community which assigns every value to a variable and an observation.
+The input data consists of a single count matrix consisting of ~21,000 genes (rows) and ~400 cells (columns), generated via [scRNA pre-processing methods](({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna_preprocessing/tutorial.md %})) using the [CelSeq2 protocol](({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %})).
 
-Here, the values are the number of reads which are assigned to a particular gene (a variable) that was observed within a specific cell (an observation).
+Here, the data follows the [tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) convention prevalent amongst the R data analysis community which assigns every value to a variable and an observation. The values are the number of reads which are assigned to a particular gene (a variable) that was measured within a specific cell (an observation).
 
-Normally a count matrix consists of integers, but this matrix has undergone an UMI-to-transcript [count alteration](https://www.nature.com/articles/nmeth.2930#methods) to correct against UMI errors, yielding decimal values instead.
+Normally a count matrix consists of integers, but this matrix has undergone an UMI-to-transcript [count alteration](https://www.nature.com/articles/nmeth.2930#methods) to correct against UMI errors, yielding decimal values instead. This correction is not that neccesary in most datasets but it it is used here.
 
 This tutorial will perform cell clustering and lineage construction, as well as exploring some genes of interest.
 
@@ -209,15 +209,16 @@ This tool generates four histograms with the top line giving the raw expression 
 
 ![Histograms of raw and filtered data]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_filter_plots.png %} "RaceID Histograms of raw and filtered data")
 
-The top row shows the count distributions of the Library Size and Number of Features of the raw data:
+
+The top row shows the count distributions of the Library Size and Number of Features of the raw data using a Log scale on the x-axis (e.g. 2.5 on the Log10 x-axis = $$10^{2.5}$$ = 316 counts).
 
 * (Top-Left) Library Size (total number of transcripts per cell)
 
-    A lower-tail heavy distribution centered around $$10^{3-4}$$ counts per cell, with a few cells having library sizes containing a handful of counts (0-1000).
+    A lower-tail heavy distribution centered around 3-4 Log10 (~3000) counts per cell , with a few cells having library sizes containing a handful of counts (0-1000).
     
 * (Top-Right) Feature Set (total number of detectable genes per cell)
 
-    Another lower-tail heavy distribution with a peak centered around $$10^{3.5}$$. Cells with a low number of features are hard to compare with other cells due to incomplete data. It is possible that these low feature cells (< 100 genes) are rare types and that we should impute their missing values, but it is often more likely the case that these are simply just low-quality cells that will add noise to the clustering.
+    Another lower-tail heavy distribution with a peak centered around $$10^{3.5}$$ counts. Cells with a low number of features are hard to compare with other cells due to incomplete data. It is possible that these low feature cells (< 100 genes) are rare types and that we should impute their missing values, but it is often more likely the case that these are simply just low-quality cells that will add noise to the clustering.
     
 
 The bottom row shows the count distributions of the Library Size and Number of Features of the filtered data:
@@ -249,7 +250,7 @@ The bottom row shows the count distributions of the Library Size and Number of F
 >
 > > ### {% icon solution %} Solution
 > >
-> > The answer to both questions can be seen in log file generated **Filtering, Normalisation, and Confounder Removal using RaceID**
+> > The answer to the first two questions can be seen in log file generated **Filtering, Normalisation, and Confounder Removal using RaceID**
 > >
 > > 1. 287 cells remain (66%)
 > > 2. 2089 genes remain (10%)
