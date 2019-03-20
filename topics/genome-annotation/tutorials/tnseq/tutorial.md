@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Essential genes detection with Transposon insertion sequencing "
+title: "Essential genes detection with Transposon insertion sequencing"
 zenodo_link: "https://doi.org/10.5281/zenodo.940733"
 tags:
   - bacteria
@@ -24,11 +24,13 @@ contributors:
 # Introduction
 {:.no_toc}
 
-In microbiology, identifying links between genotype and phenotype is key to understand bacteria growth and virulence mechanisms, and to identify targets for drugs and vaccines. These analysis are limated y the lack of bacterial genome annotations (eg 30% of genes for S. pneumoniae are of unknown function) and by the fact that genotypes often arose from complex composant interactions.
+In microbiology, identifying links between genotype and phenotype is key to understand bacteria growth and virulence mechanisms, and to identify targets for drugs and vaccines. These analysis are limitated by the lack of bacterial genome annotations (eg 30% of genes for S. pneumoniae are of unknown function) and by the fact that genotypes often arose from complex composant interactions.
+
+
 ## Overview of Transposon insertion Sequencing
 {:.no_toc}
 
-Transposon insertion sequencing is a technique used to functionally annotate bacterial genomes. The genome is saturated by transposon insertions, an the insertion of a transposon being disruptive for the region, the analysis of insertion frequency provides information on how the bacteria fitness change due to this disruption (see [Transposon insertion sequencing method](#method)) :
+Transposon insertion sequencing is a technique used to functionally annotate bacterial genomes. The genome is saturated by transposon insertions, and the insertion of a transposon being disruptive for the region, the analysis of insertion frequency provides information on how the bacteria fitness change due to this disruption (see [Transposon insertion sequencing method](#method)) :
  - An insertion mutant with lower fitness decrease frequency in the population
  - An increased fitness lead to increased frequency in the population
 
@@ -64,16 +66,16 @@ In this tutorial, we are using mariner transposon, that target TA sequences, in 
 Independently of your choice of transposon you need to be careful about your library complexity . A large complexity means that there is multiple insertion in every potential locus. The higher density of insertion you have, the greater precision  you have in identifying limits of regions of interest. If the density of the library is too low, some genes might not be disrupted by chance and mistaken for essential. The advantage of a target specific transposon, like the mariner, in opposition of a Tn5-based transposon inserting randomly, it that the limited number of insertion sites makes it easier to build high complexity libraries.
 
 After you selected the type of transposon corresponding to your goals, you need to modify it to allow insertion site amplification and sequencing so that you get a library representative of the tranposon insertion.
-Biases could get introduced by the process due to uneven fragment sized. To avoid this problem, we can introduce a Type I restriction site to cleave DNA downstream of transposon, and get uniform fragment sizes
+Biases could get introduced by the process due to uneven fragment sizes. To avoid this problem, we can introduce a Type I restriction site to cleave DNA downstream of transposon, and get uniform fragment sizes
 
-It has been shown that a minimum length of 16 bp is necessary for precise mapping on the genome ([Kwon and al. 2016](http://doi.org/10.1007/s00253-015-7037-8)). We can therefore use the MmeI restriction site (21pb) but not BsmFI (11 to 12 bp). It is not important in that case to have longer reads as we do not care to have a good coverage on the entire genome, the only information we need it the Ta site affected by an insertion, to do that we only need the location of the start of a read.
+It has been shown that a minimum length of 16 bp is necessary for precise mapping on the genome ([Kwon and al. 2016](http://doi.org/10.1007/s00253-015-7037-8)). We can therefore use the MmeI restriction site (21pb) but not BsmFI (11 to 12 bp). It is not important in that case to have longer reads as we do not care to have a good coverage on the entire genome, the only information we need is the Ta site affected by an insertion, to do that we only need the location of the start of the reads.
 
 In this tutorial, the transposon is a mariner Himar1 with the structure described in the figure [Structure of the tranposon constructs](#TranspStructure)
 
 | Structure of the tranposon constructs |
 |:--------------:|
 |<img name="TranspStructure" src="../../images/tnseq/tranposon_structure.png" width='60%' >|
-| The transposon construct is a mariner transposon with two specific region used to specifically sequence the region upstream of the insertion. The transposon inserts at TA site at the ITR junctions. These ITR junctions have been modified to include a Mme1 restriction site (cut 21 bp upstream from the restriction site). Using MmeI enzyme to determine the size of the reads allow to have a hmogeneous read size and therefore avoid a bias in the representation of the insertions. It also includes a NotI restriction site. These two site are the 5' and 3' limits to the genomic DNA we want to sequence. **A. Sequence flanking genomic regions** After digestion by NotI restriction enzyme. these fragments are attached to biotinylated adaptors that link to NotI restriction site. The attached fragment are then digested by MMeI at a site upstream , where an Illumina primer is then linked. The sequencing is then done, adding Illumina adaptors and an additional barcode to the read for multiplexed sequencing. **B. Removing incorrect fragments** An insertion can sometimes be composed of one or more copies of the transposon (multimer). There is therefore a risk to select plasmid backbone sequence. To solve this problem, an additional NotI has been add in the backbone to create different length construct, that can later be filtrated (C). Different promoters are added to the construct along with an additional 3 bp barcode to analyze differential expression impact, but this will be the subject of another tutorial.  From [Santiago et al.](http://www.doi.org/10.1186/s12864-015-1361-3)|
+| The transposon construct is a mariner transposon with two specific region used to specifically sequence the region upstream of the insertion. The transposon inserts at TA site at the ITR junctions. These ITR junctions have been modified to include a Mme1 restriction site (cut 21 bp upstream from the restriction site). Using MmeI enzyme to determine the size of the reads allow to have a hmogeneous read size and therefore avoid a bias in the representation of the insertions. It also includes a NotI restriction site. These two site are the 5' and 3' limits to the genomic DNA we want to sequence. **A. Sequence flanking genomic regions** After digestion by NotI restriction enzyme, the fragments are attached to biotinylated adaptors that link to NotI restriction site. The attached fragment are then digested by MMeI at a site upstream , where an Illumina primer is then linked. The sequencing is then done, adding Illumina adaptors and an additional barcode to the read for multiplexed sequencing. **B. Removing incorrect fragments** An insertion can sometimes be composed of one or more copies of the transposon (multimer). There is therefore a risk to select plasmid backbone sequence. To solve this problem, an additional NotI has been add in the backbone to create different length construct, that can later be filtrated (C). Different promoters are added to the construct along with an additional 3 bp barcode to analyze differential expression impact, but this will be the subject of another tutorial.  From [Santiago et al.](http://www.doi.org/10.1186/s12864-015-1361-3)|
 ||
 
 Because of this complex tranposon structure, the reads obtained after sequencing contain a large portion of tranposon sequence for a 16-17 bp genomic sequence. This will necessitate several step of pre-processing to extract this genomic sequence.  
@@ -120,7 +122,7 @@ The experimental design of transposon insertion sequencing produces raw reads co
 | Data pre-processing |
 |:--------------:|
 |<img src="../../images/tnseq/preprocessing.png" width='90%' >|
-|The pre-processing of the data will be don through several steps of Cutadapt software, first we sill separate the reads of each experimental condition based on a 8 bp barcode at the beginning of the read (Illumina demultiplexing). The tail of each set of read is then removed. It immediately follows the 3bp barcode specific to transposon constructs, and contains illumina adapter sequence and downstream. To be sure all our reads have been trimmed correctly we filter out the reads too large. We then separate the reads per transposon construct and then remove the remaining transposon sequence containing MmeI.|
+|The pre-processing of the data will be done through several steps of Cutadapt software, first we sill separate the reads of each experimental condition based on a 8 bp barcode at the beginning of the read (Illumina demultiplexing). The tail of each set of read is then removed. It immediately follows the 3bp barcode specific to transposon constructs, and contains illumina adapter sequence and downstream. To be sure all our reads have been trimmed correctly we filter out the reads too large. We then separate the reads per transposon construct and then remove the remaining transposon sequence containing MmeI.|
 ||
 
 
@@ -182,7 +184,7 @@ The experimental design of transposon insertion sequencing produces raw reads co
 > {: .question}
 {: .hands_on}
 
-SThe output is a collection of the different conditions dataset, here control and condition, and a report text file.
+The output is a collection of the different conditions dataset, here control and condition, and a report text file.
 You can look at the report and see that 100% of the reads has been trimmed.
 
 
@@ -430,7 +432,7 @@ The only information we need here are the positions of the 5' end of each TA sit
 >   - Set *"Operation"* to `Keep`
 >   - Set *"Delimited by"* to `tab`
 >   - Set *"Cut by"* to `fields`
->   - Set *"List of Fields"* to `Column: 4`  to get forward strand coordinate
+>   - Set *"List of Fields"* to `Column: 1` and `Column: 4`  to get forward strand coordinate
 >   - **Click** on `Execute`
 >   - Add `#forward` tag to the output
 >
@@ -439,7 +441,7 @@ The only information we need here are the positions of the 5' end of each TA sit
 >   - Set *"Operation"* to `Keep`
 >   - Set *"Delimited by"* to `tab`
 >   - Set *"Cut by"* to `fields`
->   - Set *"List of Fields"* to `Column: 5`  to get reverse strand coordinate
+>   - Set *"List of Fields"* to  `Column: 1` and  `Column: 5`  to get reverse strand coordinate
 >   - **Click** on `Execute`
 >   - Add `#reverse` tag to the output
 >
@@ -450,7 +452,7 @@ The coordinates provided by wordmatch are based on count 1. Meaning the first nu
 > ### {% icon hands_on %} Hands-on:  Shift TA sites positions
 >
 > {% icon tool %} To shift the positions of TA sites, select the **Compute an expression on every row** tool in the tool bar and run with the following parameters:
->   - Set *Add expression"* to `c1-1` to shift the position by 1
+>   - Set *Add expression"* to `c2-1` to shift the position by 1
 >   - Set *"as a new column to"* to `Multiple datasets` and select the two files with the tags `forward` and `reverse`
 >   - Set *"Round result?"* to `yes`
 >   - **Click** on `Execute`
@@ -460,7 +462,7 @@ The coordinates provided by wordmatch are based on count 1. Meaning the first nu
 >   - Set *"Operation"* to `Keep`
 >   - Set *"Delimited by"* to `tab`
 >   - Set *"Cut by"* to `fields`
->   - Set *"List of Fields"* to `Column: 2`  to get new coordinates
+>   - Set *"List of Fields"* to `Column: 3`  to get new coordinates
 >   - **Click** on `Execute`
 >
 {: .hands_on}
@@ -491,7 +493,7 @@ Now that have the files containing the coordinates of our TA sites for both stra
 >   - Set *"Operation"* to `Keep`
 >   - Set *"Delimited by"* to `tab`
 >   - Set *"Cut by"* to `fields`
->   - Set *"List of Fields"* to `Column: 2`  and `Column: 4` to keep only position and coverage
+>   - Set *"List of Fields"* to `Column: 1`  and `Column: 4` to keep only position and coverage
 >   - **Click** on `Execute`
 >
 > {% icon tool %} Repeat the operation with the `reverse` collection
@@ -514,8 +516,8 @@ We now have a read count for each nucleotides of the TA sites. The insertions co
 >   - Set *From"* to the output of the previous step collection `Compute on collection...`
 >   - **Click** on `Execute`
 >
-> {% icon tool %} Before adding the counts we need to sort the files. Select the **Sort data in ascending or descending order** tool in the tool bar and run with the following parameters:
->   - Set *Sort Query"* to the newest collection with the `forward` tag
+> {% icon tool %} Before adding the counts we need to sort the files. Select the **Sort data in ascending or descending order** tool in the *"Text Manipulation"* section of the tool bar and run with the following parameters:
+>   - Set *"Sort Query"* to the newest collection with the `forward` tag
 >   - Set *"Number of header lines"* to `0`
 >   - Set *"on column"* to `Column: 1` to sort on positions
 >   - Set *"in"* to `Ascending Order`
@@ -550,7 +552,7 @@ We now have a read count for each nucleotides of the TA sites. The insertions co
 >   - Set *"List of Fields"* to `Column: 1`  and `Column: 4` to keep only position and total counts
 >   - **Click** on `Execute`
 >
-> {% icon tool %} Select the **Sort data in ascending or descending order** tool in the tool bar and run with the following parameters:
+> {% icon tool %} Select the **Sort data in ascending or descending order** tool in the *"Text Manipulation"* section of the tool bar and run with the following parameters:
 >   - Set *Sort Query"* to the collection `Compute on...`
 >   - Set *"Number of header lines"* to `0`
 >   - Set *"on column"* to `Column: 1` to sort on positions
