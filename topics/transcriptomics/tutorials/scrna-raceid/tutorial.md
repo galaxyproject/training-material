@@ -400,6 +400,42 @@ The most differentially expressed genes (below a maximum p-value cutoff) in each
 
 The remainder of the plots are heatmaps derived from k-medoids clustering, showing the similarity between clusters for both the initial clustering and the final (post outlier detection) clustering.
 
+> ### {% icon details %} Details: K-medoids and K-means Clustering
+>
+> The k-medoids algorithm relates to the k-means algorithm of clustering, by which
+>
+> * Initialise:
+>    1. A value of k is chosen, e.g *k=3*.
+>    1. k points are chosen at random in the dataset (or initialised in some rational way)
+> * Step:
+>    1. Each datapoint in the dataset is assigned to the closest k point using some distance metric.
+>    1. The mean (or in this case, the median) of all points assigned to a specific k point are computed for each k point.
+>    1. The k-points take on the new position of the mean (or median) values just computed
+>    1. Repeat Step until convergence reached or after N number of iterations
+>
+> ![K-means](https://upload.wikimedia.org/wikipedia/commons/e/ea/K-means_convergence.gif "K-means convergence (Wikimedia Commons)")
+>
+> In terms of single-cell data, each datapoint is a G-dimensional cell (for G genes), and distances between cells are computed via [Euclidean distance or other](https://en.wikipedia.org/wiki/Metric_(mathematics)). The k points are therefore also G-dimensional points that are updated for each iteration of the algorithm.
+>
+> > ### {% icon question %} Questions
+> >
+> > Why use G dimensions?
+> >
+> > Why not use 2 dimensions as given in the graphic above?
+> >
+> > > ### {% icon solution %} Solution
+> > >
+> > > Using 2 dimensions will not capture all the variability in the data, and so the clustering will be based on whatever those 2 chosen dimensions are biased towards.
+> > >
+> > > For example, if we performed a PCA first on the data and used only the first two (most variable) components of the data to perform clustering upon, we might be clustering cells based on cell-cycle variation which might be stronger than the actual biological signal that is perhaps hidden away in the higher PCA components.
+> > >
+> > {: .solution}
+> >
+> {: .question}
+>
+{: .details}
+
+
 ![Heatmaps]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_heatmaps.png %} "RaceID Heatmaps for initial and final clusters")
 
 The difference shown between the initial and final clustering is sometimes subtle depending which of the clusters the new clusters have been extracted from.
