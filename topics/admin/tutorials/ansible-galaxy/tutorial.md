@@ -944,7 +944,7 @@ If you do not meet these requirements, you should read through them to see the c
 >    certbot_domains:
 >      - "{{ hostname }}"
 >    certbot_agree_tos: --agree-tos
->    certbot_admin_email: security@usegalaxy.eu
+>    certbot_admin_email: # Put YOUR email here
 >    certbot_share_key_users:
 >      - nginx
 >    certbot_post_renewal: |
