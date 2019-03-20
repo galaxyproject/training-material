@@ -242,7 +242,7 @@ The top row shows the count distributions of the Library Size and Number of Feat
 The bottom row shows the count distributions of the Library Size and Number of Features of the filtered data:
 
 * (Bottom-Left) The lower-tail of our previous distribution has been trimmed off, which gives an even normal-looking distribution centred around $$10^{3.4}$$ transcripts per cell.
-* (Bottom-Right) Instead of a distribution we have a single bar that indicates that all of our cells have the exact number of features.
+* (Bottom-Right) Instead of a distribution we have a single bar that indicates that all of our cells have the exact number of features. The red line displays the number of features across all cells (~ $$10^{3.3}$$).
 
 > ### {%icon comment %} Comment: Choosing Filtering Thresholds
 >
@@ -251,7 +251,6 @@ The bottom row shows the count distributions of the Library Size and Number of F
 > This threshold is dependent primarily on the capture efficiency of the cells that were sequenced, with some cell types being easier to capture than others. For example, neuron cells would have a lower filtering threshold of ~1500 compared to the ~3000 used for haemopoietic cells.
 >
 {: .comment}
-
 
 > ### {% icon details %} Details: Why the Same Number of Features
 > * RaceID normalises the data so that all cells are compared using the same features. If the features compared between cells are different, then it is hard to make a meaningful assessment of how much one cell differs from another.
@@ -333,11 +332,13 @@ Here we will attempt to perform some filtering, normalisation, and clustering us
 > 
 {: .hands_on}
 
-The first three plots (in the PDF report) tell us about the stability/reliability of our clusters, and are more important indicators for the quality of our clustering than any of the resultant graph projections, such as PCA or tSNE. 
+The first three plots in the PDF report tell us about the stability/reliability of our clusters, and are more important indicators for the quality of our clustering than any of the resultant graph projections, such as PCA or tSNE.
 
 ![Stability Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_sat_jacc.png %} "RaceID Saturation and Jaccard Plots")
 
-The first plot measures the levels of dispersion within each cluster and produces the mean over all clusters (as defined by the k parameter). As *k* increases, the reduction in this dispersion is measured for each increase of *k* until the change in the mean within-cluster dispersion no longer changes. Here we can see that reduction saturates at *k=12*, which is chosen to the be the number of clusters detected in our data for all further analysis.
+The first plot measures the levels of dispersion within each cluster and displays the mean dispersion over all clusters for each k value. The grey points indicate the mean change in dispersion for that k values, and the red bars show this dispersion as a box plot, which get smaller and smaller until a "saturation point" (blue) is reached where the change in dispersion no longer decreases for an increase in k.
+
+For example, if *k=2*, then all cells will be sorted into 2 clusters, and the variance of the gene expression in each cluster will be measured and averaged to give a score for the clustering at that k value. Certain values of *k* may cluster the cells of the same type better, with the expectation that the average dispersion of expression values across all clusters will be minimised for some value of *k*.  As *k* increases, the reduction in this dispersion is measured for each increase of *k* until the change in the mean within-cluster dispersion no longer changes. Here we can see that reduction saturates at *k=12*, which is chosen to the be the number of clusters detected in our data for all further analysis. 
 
 The second plot is the same as the first but with the actual dispersion plotted instead of the relative change of dispersion.
 
@@ -373,10 +374,11 @@ The next three plots attempts to do this by describing the variation of the gene
 
 
 * (Top-Left) A background model is calibrated and outliers are identified based on the distribution of transcript counts within a cluster. The counts for each gene are assumed to follow a negative binomial distribution determined by a mean (average expression of a gene across all cells in a cluster), and a dispersion parameter. The dispersion is derived from the average variance-mean dependence, modelled as a logarithmic second order polynomial under the assumption that *most* genes are not differentially expressed between clusters, and that true biological variability should exceed this assumption.
-   As we can see from the Background plot, the (red) regression of the variance on the mean (as approximated by a second-order polynomial in logarithmic space) is higher than the variance or most genes (all grey dots below the red curve) as expected, since they are not differentially expressed. The genes above this regression are therefore significant for the detection of outlier cells. The orange line is the local regression (moving average variance per mean) and is used purely for illustrative purposes.
+   As we can see from the Background plot, the upper and lower (violet and red) regression of the variance on the mean (as approximated by a second-order polynomial in logarithmic space) is higher than the variance of most genes (all grey dots below the red curve). This is expected since they are not differentially expressed, and so the genes above the background regression are therefore significant in the detection of outlier cells. The orange line is the local regression (moving average variance per mean) and is used purely for illustrative purposes.
+   <!-- See: https://github.com/dgrun/RaceID3_StemID2_package/blob/master/R/RaceID.R#L280 -->
 
-* (Top-Right) Outlier cells are detected if the probability for that cell $$c$$ that a minimum number of genes $$G_{min}$$ of observing total counts $$T_{G_{min}}$$ is less than a specific threshold $$P_{thr}$$.
-  This is shown in the chart above as the number of outliers as a function of the probability threshold, which is set to $$1 \cdot 10^{-3}$$ by default. Ideally, this threshold should be chosen to that the tail of the distribution is captured as outliers to ensure a maximum sensitivity of this method. If the sensitivity of the sequencing was low, then only a few highly expressed genes would be reliably quantified, so the outlier probability threshold would need to be higher (e.g. up to 1).
+* (Top-Right) Outlier cells are detected if the probability for that cell $$c$$ that a minimum number of genes $$G_{min}$$ of observing total counts $$T_{G_{min}}$$ is less than a specific threshold $$P_{thr}$$, as given by the red dotted line.
+  This is shown in the chart above as the number of outliers as a function of the probability threshold, which is set to $$1 \cdot 10^{-3}$$ by default. Ideally, this threshold should be chosen so that the lower tail of the distribution contains as few outliers as possible (i.e. lower than the steep rise in outliers towards the higher end of the plot) to ensure a maximum sensitivity of this method. If the sensitivity of the sequencing was low, then only a few highly expressed genes would be reliably quantified, so the outlier probability threshold would need to be higher (e.g. up to 1).
 
 * (Bottom-Left) A barplot of the outlier probabilities of all cells across all clusters. All outlier cells are merged into their own clusters if their similarity exceeds a quantile threshold of the similarity distribution for all pairs of cells within one of the original clusters. After the outlier cells are merged, then the new cluster centres are defined for the original clusters after removing the outliers. Then, each cell is assigned to the nearest cluster centre using k-partitioning.
 
@@ -679,7 +681,7 @@ This is clarified slightly better with the heatmap (bottom-right) that shows the
 
 ![Link scores]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_linkscores.png %} "StemID Link scores between branches.")
 
-The top chart shows the number of links above a threshold that each cluster exhibits to another. The more links a cluster has, the more evidence that the cluster describes a progenitor cell type that gives rise to other more mature types. The middle chart describes the "Delta-Entropy" which measures the level of variability within a cluster, where clusters with more variability are less likely to be mature cell types due to the sheer "noise" that they exhibit that is to be expected of a cell type that could potentially give rise to other types. The bottom chart is simply the top chart multiplied by the middle chart, which adds both pieces of evidence together to yield the link score.
+The top chart shows the number of links above a threshold that each cluster exhibits to another. The more links a cluster has, the more evidence that the cluster describes a progenitor cell type that gives rise to other more mature types. The middle chart describes the "Delta-Entropy" which measures the variability of gene expression values within a cluster as the number of potential states (or cell types) it could produce, where clusters with more variability are less likely to be mature cell types due to the sheer "noise" that they exhibit that is to be expected of a cell type that could potentially give rise to other types. The bottom chart is simply the top chart multiplied by the middle chart, which adds both pieces of evidence together to yield the link score.
 
 > ### {% icon question %} Questions
 >
