@@ -205,7 +205,25 @@ We can refine filtering thresholds by examining how much a histogram of our plot
 >
 {: .hands_on}
 
-This tool generates four histograms with the top line giving the raw expression data fed into the tool, and the bottom line giving the filtered data (cells with at least 3,000 transcripts in total and genes with at least 5 transcripts in at least 5 cells). 
+The tool provides metrics on the library size and the number of detected features.
+
+> ### {% icon details %} Details: Library Size and Number of Features (Definitions)
+>
+> ![Library Size and Detected Genes]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_libsize.svg %} "Library Size and Number of Features")
+>
+> * **Library Size**: The total number of transcripts in a cell, or a column sum. *The minimum threshold for this can be set by "Min Transcripts" (= 3000)*.
+> * **Gene Transcripts**: The total number of transcripts for a gene, or a row sum.
+> * **Detectability**: This is how many values above a certain threshold exist in a given row/column.
+>   * **Number of Features**: The number of genes detected above a certain threshold.
+>     * *>0*: This is the default threshold when the term *Number of Features* is used, because it counts any genes with non-zero counts for that cell, and are therefore 'detected' during sequencing.
+>     * *>N*: Depending on how lowly sequenced the cells are, sometimes it is useful to set a higher threshold of detectability to guard against sequencing errors or other noise-related factors. *The minimum threshold for this can be set by "Min Expression" (= 5)*.
+>   * **Number of Cells**:
+>     * *>0*: This is the default threshold when the term *Detected in X number of Cells* is used, because it counts any cells with non-zero counts for that gene.
+>     * *>N*: This raises the detectability threshold to any cell count above N. *The minimum threshold for this can be set by "Min Cells" (= 5)*.
+>
+{: .details}
+
+Four histograms are generated with the top line giving the raw expression data fed into the tool, and the bottom line giving the filtered data (cells with at least 3,000 transcripts in total and genes with at least 5 transcripts in at least 5 cells).
 
 ![Histograms of raw and filtered data]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_filter_plots.png %} "RaceID Histograms of raw and filtered data")
 
