@@ -83,6 +83,14 @@ A common problem in mass spectrometry are misassigned mono-isotopic precursor pe
 >   > ### {% icon tip %} Tip: Using Galaxy Workflows
 >   > If you want to learn more about Galaxy workflows, please consult the [Galaxy Introduction]({{site.baseurl}}/topics/introduction/tutorials/galaxy-intro-101/tutorial.html#the-workflow-editor)
 >   {: .tip}
+>
+>   > ### {% icon question %} Questions
+>   > 1. How many peptides and proteins were successfully identified?
+>   >
+>   > > ### {% icon solution %} Solution
+>   > > 1.    2276 non-redundant peptides and 780 proteins were identified.
+>   > {: .solution }
+>   {: .question}
 {: .hands_on}
 
 # MS1 Feature Detection
@@ -119,9 +127,10 @@ The next step is to map the MS2-based peptide identifications to the quantified 
 For labelled data, it is necessary to map peptide identifications to *consensus* features (i.e. a pair of one light peptide feature with one matching heavy feature in the correct m/z distance).
 For `consensusXML`, IDMapper uses the consensus centroids, not the feature boundaries for mapping. Therefore, the RT tolerance has to be set higher than for mapping to `featureXML`. A good starting value is half the expected typical retention time.
 
-Sometimes several peptide identifications are mapped to a feature. The tool [IDConflictResolver](http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/html/TOPP_IDConflictResolver.html) filters the mapping so that only the identification with the best score is associated to each feature.
+Sometimes several peptide identifications are mapped to a feature. The tool [IDConflictResolver](http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/html/TOPP_IDConflictResolver.html) filters the mapping so that only the identification with the best score is associated to each feature. 
+Another refinement of the quantitative result is obtained by removing falsely mapped identifications e.g. light identification mapped to heavy feature. This step is performed by the ***MultiplexResolver*** {% icon tool %} that returns a first file with the correctly mapped peptides and as a second output the falsly mapped peptides.  
 
-Finally, we will combine the peptide quantifications to protein quantifications.
+Finally, the correctly mapped peptides will be combined into protein quantifications with the ***ProteinQuantifier*** {% icon tool %}.
 
 > ### {% icon hands_on %} Hands-on: Quant to ID matching
 >
@@ -140,7 +149,7 @@ Finally, we will combine the peptide quantifications to protein quantifications.
 >   - **Labels used for labelling the samples** set to `[ ][Arg6,Lys6]`,
 >   - **Maximum number of missed cleavages due to incomplete digestion** set to `1`.
 > 5. Run ***ProteinQuantifier*** {% icon tool %} with
->   - the output of ***IDConflictResolver*** as **Input file**,
+>   - the first output of ***MultiplexResolver*** as **Input file**,
 >   - the output of ***IDFilter*** as **Protein inference results [...]**,
 >   - **Calculate protein abundance from this number of proteotypic peptides (most abundant first; '0' for all)** set to `0`,
 >   - **Averaging method used to compute protein abundances from peptide abundances** set to `sum`, and
@@ -184,7 +193,7 @@ Comment lines in the beginning of a `tabular` file may sometimes cause errors, t
 >   > 3. In the histogram, there is a second local maximum at about FC 0. What might that mean?
 >   >
 >   > > ### {% icon solution %} Solution
->   > > 1.    With the above parameters, you should have quantified 818 peptides and 407 proteins.
+>   > > 1.    With the above parameters, you should have quantified 792 peptides and 408 proteins.
 >   > > 2. In the histogram, you see that the peak of the density curve is between -1.1 and -1.2. In the summary statistics, you can see that the mean protein ratio was -0.98. An FC of -1 indicates that the unlabelled proteins were twice as abundant as their heavy-labelled counterparts. Indeed, the mixing ratio of the dataset was 2 parts light labelled HEK cell lysate and 1 part heavy labelled HEK cell lysate.
 >   > > 3. Some proteins were quantified with an FC close to 0. These may stem from incomplete SILAC labelling. Even after two weeks of cell culture in SILAC medium, some proteins with a very low turnover rate may remain unlabelled.
 >   > {: .solution }
