@@ -253,10 +253,12 @@ The bottom row shows the count distributions of the Library Size and Number of F
 {: .comment}
 
 > ### {% icon details %} Details: Why the Same Number of Features
-> * RaceID normalises the data so that all cells are compared using the same features. If the features compared between cells are different, then it is hard to make a meaningful assessment of how much one cell differs from another.
-> * For cells that are not filtered out during this stage which have less than the "required" number of features, a value of 0.1 is added to the count data so that these features are not lost during the analysis. This makes the assumption that the feature *is* detectable for that cell (i.e. no errors during sequencing) but that the transcript was very lowly expressed.
-> * However, it is important to see the flat square plot for the post-filtered number of features, since it shows that the dataset is primed correctly for analysis with C number of cells and G number of genes.
-> * For a more 'realistic' distribution of features, re-run the tool with *"Count filtered features greater than or equal to 1"* enabled.
+> RaceID normalises the data so that all cells are compared using the same features. If the features compared between cells are different, then it is hard to make a meaningful assessment of how much one cell differs from another. The features that are selected need to be *meaningful*, meaning that they must describe or contribute to the biological variation in the data, and therefore must be differentially expressed between cells.
+>
+> The cells that still remain after filtering will *still* contain some genes which have count values of zero. Zero values are hard to work with when comparing levels of expression across cells, so a value of 0.1 is added to the count data so that these features are not lost during the analysis. This forces the assumption that the gene *is* detectable for that cell (i.e. no errors during sequencing) but that the transcript was very lowly expressed.
+>
+> However, it is important to see the flat square plot (bottom-right) for the post-filtered number of features, since it shows that the dataset is primed correctly for analysis with C number of cells and G number of genes. For a more 'realistic' distribution of features, re-run the tool with *"Count filtered features greater than or equal to 1"* enabled.
+>
 {: .details}
 
 > ### {% icon question %} Questions
@@ -506,17 +508,19 @@ Preserving these higher dimensional distances in lower dimensional space is a co
 
 ![Clusters]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_tsne_fr.png %} "RaceID Initial and Final clusters using tSNE and F-R projections")
 
-The figure above displays the initial (left top/bottom) and final (right top/bottom) clusters determined, but projected using tSNE and Fruchterman-Rheingold.
+The figure above displays the initial (left top/bottom) clusters detected during the clustering stage, as well as the final (right top/bottom) clusters determined during the outlier detection stage, projected using tSNE and Fruchterman-Rheingold graph layouts.
 
 > ### {% icon question %} Questions
 >
+> 1. What has changed between the initial and final plots?
 > 1. Which clusters appear to be well defined? Are they consistent between projections?
 > 1. Does this agree with the heatmaps we have seen previously?
 >
 > > ### {% icon solution %} Solution
 > >
+> > 1. Two extra clusters are added in the final plots `c13` and `c14` 
 > > 1. For example, `c11` appears to be an isolated well-defined cluster of cells, distinct in both projections. At the edge of the main cluster body in both projections lies `c1`, but seems to be in closer proximity to `c13` in the tSNE map than in the F-R layout. In both projections, `c2`, `c3`, and `c4` are large noisy clusters, but `c2` and `c4` appear to be closer to one another in the F-R layout.
-> > 2. `c1` was better defined by a smaller set of genes than `c2`, `c3`, or `c4,` which listed less differentially expressed genes as their most significant genes.
+> > 1. `c1` was better defined by a smaller set of genes than `c2`, `c3`, or `c4,` which listed less differentially expressed genes as their most significant genes.
 > >
 > {: .solution}
 >
@@ -589,16 +593,20 @@ Here we will compare how the cells in cluster 1 are differentially expressed com
 
 ![Cluster Inspection of Cells]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_clustinspect_cells.png %} "RaceID MA plot of cells in cluster 1 and cluster 3")
 
-The genes shown as grey dots are not labelled because they are of similar levels of gene expression variability in both clusters, but the genes as labelled red dots on the fringes do display significant changes between the clusters.
+The genes shown as grey dots are not labelled because they are not so differentially expressed between the two clusters, but the genes as labelled red dots on the fringes do display significant variability between the clusters.
 
 > ### {% icon question %} Questions
 >
-> Is *Gstm3* (at position 1.5, -2.8 on the MA plot) more significantly differentially expressed than *Ptma* (at position 3.6, 1.2)?
+> 1. How do we interpret this plot?
+> 1. Is *Gstm3* (at position 1.5, -2.8 on the MA plot) more significantly differentially expressed than *Ptma* (at position 3.6, 1.2)?
 >
 > > ### {% icon solution %} Solution
 > >
-> > *Gstm3* has a lower overall total expression in both clusters than *Ptma* which has significantly more total expression, but *Gstm3* is primarily expressed in `c1` cells and *Ptma* more in `c3` cells, showing a clear difference in their expression profiles.
-> >
+> > 1. Intepretation of plot:
+> >   * The vertical axis displays the difference between cluster 3 and cluster 1, where the total counts of a gene in cluster 3 are subtracted by the total counts of a gene in cluster 1. Therefore, a gene which is in the negative portion of the vertical axis has more expression in cluster 1.
+> >   * The horizontal axis displays the average expression of a gene in both clusters, and so serves as a yardstick to estimate how expressive that gene is overall. 
+> > 1. *Gstm3* has a lower average expression in both clusters, than *Ptma* which is higher on the horizontal axis. However, *Gstm3* is expressed significantly more in Cluster 1, whereas *Ptma* is expressed only slightly more in Cluster 3. Overall, *Gstm3* is more differentially expressed than *Ptma*, and is up-regulated in Cluster 3, although with fewer total mRNA counts.
+> > 
 > {: .solution}
 >
 {: .question}
@@ -626,10 +634,13 @@ Here we will look at the combined expression of *Gstm3*, *St3gal4*, and *Gna11* 
 
 ![Expression Plot]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_goi.png %} "RaceID Expression plot of genes of interest across different cells.")
 
+The above figure shows where the combined expression of *Gstm3*, *St3gal4*, and *Gna11* is centred, which from the tSNE plot (top-left) appears to be concentrated in cluster 6. The log expression plot (top-right) changes the scale so that lesser expression in other clusters is still visible. The bottom images provide the same information but using the F-R layout.
+
 
 > ### {% icon question %} Question
 >
-> Are these genes expressed where we expect?
+> Observe the above expression plot and the overall clustering plot generated during the "*Visualising All Clusters*" stage.
+> Are these genes expressed where we expect them to be?
 >
 > > ### {% icon tip %} Tip <!-- this should be a snippet -->
 > > Multiple plots can be compared side-by-side by enabling the *Scratchbook*
@@ -656,8 +667,7 @@ Here we will look at the combined expression of *Gstm3*, *St3gal4*, and *Gna11* 
 
 It was [mentioned previously](#details-details-continuous-phenotypes-vs-discrete-clustering-methods) that the clusters displayed are not discrete entities, but are related through some continuous topology as inferred by intermediate cell types.
 
-**StemID** is a tool (part of the **RaceID** package) that makes use of this topology to derive a hierarchy of these cell types by constructing a cell lineage tree, rooted at the cluster(s) believed to best describe multipotent progenitor stem cells, and terminating at the clusters which describe more mature cell types.
-
+**StemID** is a tool (part of the **RaceID** package) that makes use of this topology to derive a hierarchy of these cell types by constructing a cell lineage tree, rooted at the cluster(s) believed to best describe multipotent progenitor stem cells, and terminating at the clusters which describe more mature cell types. Cell trajectories are identified as a sequence of links between the medoids of different clusters, where the links between clusters are assigned scores that reflect the level of multipotency of the cell type indicated by the cluster. 
 
 ## Computing the Lineage Tree
 
