@@ -67,7 +67,7 @@ HHPred on hypothetical proteins
 
 > ### {% icon question %} Questions About Interpreting Results?
 >    > ### {% icon solution %}
->    > For answers to questions about looking at the results and more ("What is the meaning of the symbols (+.-|~)?" or, "What is the significance of upper vs. lowercase letters in both the consensus and ss_pred lines?"), see this document: https://github.com/soedinglab/hh-suite/wiki
+>    > For answers to questions about looking at the results and more ("What is the meaning of the symbols (+.-|~)?" or, "What is the significance of upper vs. lowercase letters in both the consensus and ss_pred lines?"), see this document: [https://github.com/soedinglab/hh-suite/wiki](https://github.com/soedinglab/hh-suite/wiki)
 >    {: .solution}
 {: .question}
 
