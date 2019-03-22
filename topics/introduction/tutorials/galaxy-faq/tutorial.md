@@ -31,15 +31,44 @@ tutorial_name: galaxy-faq
 {: .question}
 
 > ### {% icon question %} Structural workflow stalled at second to last step; Create or Update Organism job failed.
->    > ### {% icon solution %}
+>    > ### {% icon solution %} Solution
 >    > ![](../../images/galaxy-faq-screenshots/2_job_failed_structural_workflow.png)
->    > 
->    > In both the preview and in the bug report, you will see an error that says the following:
+>    >
+>    > This gives an error that says this in the preview and in the bug report:
 >    >
 >    > ![](../../images/galaxy-faq-screenshots/3_error_report_failed_structural.png)
 >    >
->    > This is because you failed to provide a name for the organism before running the structural workflow. **To fix this**, re-run the tool and enter the appropriate organism name in the **Organism Common Name**. Also, select *Yes* for **Resume dependencies from this job**.
+>    > This is because you failed to provide a name for the organism before running the workflow. To fix this, rerun the tool. Enter the appropriate organism name. Also, check *Yes* for "Resume dependencies from this job."
 >    >
 >    > ![](../../images/galaxy-faq-screenshots/4_rerun_tool_adjustments.png)
 > {: .solution}
 {: .question}
+
+> ### {% icon question %} Converting GFF3 of a genome with frameshifted genes into Genbank format files.
+>    > ### {% icon solution %} Solution
+>    > This usually fails when the genes (particularly the tape measure chaperones) in Apollo were not annotated with the correct attributes [put in link to frameshift tutorial]. It can be corrected by adding the attribute tag 'frameshift' and value 'a' to both the genes, then retrieving the data again and re-running the GFF33 to Genbank tool. The error will appear like this in the Galaxy history:
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/5_gff3_genbank_error.png)
+>    >
+>    > The Galaxy bug report looks like this:
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/6_gff3_genbank_bug_report.png)
+>    >
+>    > Go back to the genome in Apollo and edit the information for BOTH pieces of the frameshifted protein:
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/7_edit_frameshift_product_information.png)
+>    >
+>    > If the attributes were not added (or did not save):
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/8_attributes_before.png)
+>    >
+>    > The correct entry:
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/9_attributes_corrected.png)
+>    >
+>    > Now the tool successfully completes, and the frameshift features are properly merged:
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/10_tool_successful_features_merged.png)
+> {: .solution}
+{: .question}
+

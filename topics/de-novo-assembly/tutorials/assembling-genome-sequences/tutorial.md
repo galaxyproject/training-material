@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: genome-annotation
+topic_name: de-novo-assembly
 tutorial_name: assembling-genome-sequences
 ---
 

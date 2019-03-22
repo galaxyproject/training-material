@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: genome-annotation
+topic_name: introduction
 tutorial_name: cpt-canonical-phages-list
 ---
 
