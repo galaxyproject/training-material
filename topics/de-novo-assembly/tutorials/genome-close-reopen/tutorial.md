@@ -51,7 +51,7 @@ Design confirmation PCR primers off the node sequence. This primer pair can be d
 
 ![](../../images/genome-close-reopen-screenshots/1_primerquest.png)
 
-> * Set the design parameters to "General PCR (primers only) in the Custom Design section and enter the following parameters:
+> * Set the design parameters to "General PCR (primers only)" in the Custom Design section and enter the following parameters:
 
 ![](../../images/genome-close-reopen-screenshots/2_general_pcr_parameters.png)
 
@@ -61,7 +61,7 @@ Design confirmation PCR primers off the node sequence. This primer pair can be d
 
 ![](../../images/genome-close-reopen-screenshots/3_primer_pair_options.png)
 
-> * Be sure to record the option that you have chosen to order and make a note in your sequence file where the expected amplicon and primers are located. A good formatting suggestion is shown here:
+> * Be sure to record the option that you have chosen to order and make a note in your sequence file where the expected amplicon and primers are located. A good formatting suggestion is shown here, where the highlighted regions represent where primers would bind and the underlined region is the expected amplicon:
 
 ![](../../images/genome-close-reopen-screenshots/4_sequence_file_format.png)
 
@@ -76,7 +76,7 @@ Set up a PCR reaction with new confirmation primers as follows:
 ![](../../images/genome-close-reopen-screenshots/6_pcr_reaction_conditions.png)
 
 Visualize the PCR product on a 1% agarose gel using a visualizing agent, such as ethidium bromide or SYBR Safe.
-> * Mix loading dye with the PCR product at the appropriate concentrations (5 uL of product with 1 uL of 6X loading dye). Also load a 100 bp ladder and perform electrophoresis set to a constant 100 V.
+> * Mix loading dye with the PCR product at the appropriate concentrations (5 uL of product with 1 uL of 6X loading dye). Also load a 100 bp ladder and perform electrophoresis at 100 constant Volts.
 > * Image the gel after approximately 45 minutes. Record whether the product sizes match the expected length.
 > * Save the results. Upload the properly labeled images to an appropriate storage location (such as a shared Google Drive folder).
 > * Should the results be unexpected, see the troubleshooting section below.
@@ -89,7 +89,7 @@ If a confirmation product is identified, congratulations! This node matches the 
 ## Closure PCR
 
 Return to the FASTA file for the confirmed node (*Raw_phagename*). Design a set of primers that amplifies 500-700 bp product across the ends. If using the [IDT PrimerQuest Tool](https://www.idtdna.com/site/account/login?returnurl=%2FPrimerquest%2FHome%2FIndex), follow the guidelines given above, with the following modifications.
-> * Set the design parameters to “General PCR (primers only) in the Custom Design section and enter the following parameters:
+> * Set the design parameters to “General PCR (primers only)" in the Custom Design section and enter the following parameters:
 
 ![](../../images/genome-close-reopen-screenshots/8_closure_pcr_parameters.png)
 
