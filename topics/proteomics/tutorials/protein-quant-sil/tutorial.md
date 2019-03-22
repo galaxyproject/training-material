@@ -43,7 +43,7 @@ In this tutorial, we will use tools of the [OpenMS suite](http://www.openms.org)
 
 If you are in the planning phase of your quantitative proteomics experiment, you may want to consider our tutorial on different [quantitation methods]({{site.baseurl}}/topics/proteomics/tutorials/labelfree-vs-labelled/tutorial.html) first.
 
-To learn about *protein identification* in Galaxy, please consider our OpenMS-based [peptide ID tutorial]({{site.baseurl}}{ % link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}).
+To learn about *protein identification* in Galaxy, please consider our OpenMS-based [peptide ID tutorial]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}).
 
 > ### {% icon hands_on %} Hands-on: Introduction
 > In the hands-on section of this tutorial, we will use a quantitative comparison of HEK cell lysate as a test dataset. In this experiment, HEK cells were once labelled with light, once with heavy SILAC. Both cultures were lysed simultaneously and the cell lysates were mixed in a certain ratio.
@@ -93,7 +93,7 @@ A common problem in mass spectrometry are misassigned mono-isotopic precursor pe
 >    https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_added%29.fasta
 >    ```
 >
-> 3. Import the [workflow]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga)
+> 3. Import the [workflow]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %})
 >
 >    ```
 >    {{ site.url }}/{{site.baseurl}}/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga
@@ -261,7 +261,7 @@ Using Galaxy Workflows enables us to quickly re-run a full analysis with changed
 >   - {% icon param-file %} *"Input file"*: 
 >   - *"Retention time range to extract"*: `2000:2200`
 > 
-> 1. Extract a workflow out of your history or import the [premade workflow]({{site.baseurl}}{ % link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %})
+> 1. Extract a workflow out of your history or import the [premade workflow]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %})
 >
 > 3. Run the whole workflow again with default settings on the reduced `mzML` file.
 >
