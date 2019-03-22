@@ -318,7 +318,7 @@ Technical variation appears in three main forms: *Library size variation*, *Ampl
 
 Here we assume that there is no unwanted technical or biological variability in the data and that the cells will cluster purely based on their phenotypes. This assumption is not completely without merit, since often the biological signal is strong enough to counter the lesser unwanted variation.
 
-Here we will attempt to perform some filtering, normalisation, and clustering using the recommended default settings to see if we can detect different cell types. 
+We will attempt to perform some filtering, normalisation, and clustering using the recommended default settings to see if we can detect different cell types.
 
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -461,7 +461,23 @@ All the following plots are heatmaps for the individual genes expressed in each 
 
 ![Gene Heatmaps]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_geneheatmaps.png %} "RaceID Individual (final) heatmaps for the top 10 significant genes in clusters 1 to 4")
 
-The top 10 defining genes from each cluster (above only `c1`-`c4` are shown) give us an idea of how unique these genes are to the cluster. For example, in the Top-Left heatmap we can see that: *Gstm3*, *St3gal4*, and *Gna11* are only highly expressed in `c1` and `c6`; *Eef1a1* is highly expressed everywhere and that `c4` appears to be a not so well-defined cluster.
+The top 10 defining genes from each cluster (above only `c1`-`c4` are shown) give us an idea of how unique these genes are to the cluster.
+
+> ### {% icon question %} Questions
+>
+> 1. Which clusters are *Gstm3*, *St3gal4*, and *Gna11* highly expressed in?
+> 2. Where is *Eef1a1* expressed?
+> 3. Which cluster is poorly defined?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. (Top-Left Heatmap) *Gstm3*, *St3gal4*, and *Gna11* are highly expressed in `c1` and `c6`
+> > 2. *Eef1a1* is highly expressed everywhere, and so is not a very differentially expressed gene.
+> > 3. `c4` appears to be a not so well-defined cluster with no genes specifically bound to it.
+> {: .solution}
+>
+{: .question}
+
 
 
 ## Visualising All Clusters
@@ -682,13 +698,26 @@ It was [mentioned previously](#details-details-continuous-phenotypes-vs-discrete
 >    - In *"StemID2 Lineage Graph"*:
 >        - *"Use Defaults?"*: `Yes`
 >
+> > ### {% icon comment %} Comment
+> >
+> > This tool has three main functions:
+> > 1. Estimate the entropy (variability) of a cell
+> > 1. Estimate links/trajectories between clusters of cells
+> > 1. Generate a [minimum spanning tree](https://en.wikipedia.org/wiki/Minimum_spanning_tree) for the connected graph of links.
+> >
+> > We use the defaults in this section, but leave the fine-tuning of these parameters as an exercise for the more the statistically enthusiastic users.
+> >
+> {: .comment}
+>
 {: .hands_on}
 
 ![Lineage Computation Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_lineage.png %} "StemID Lineage Tree and Branches of significance.")
 
 The first (top-left) plot shows a minimum spanning tree that summarises the most likely connections between clusters. The second plot (top-right) elucidates this lineage hierarchy by projecting the cells along the links given by StemID, ordering the cells along each link in such a way to suggest a time series, or *pseudotime* analysis of each link. This is important, because by ordering the cells by lineage pseudotime we can trace the up or down regulation of a gene as discrete time points. The interval between each timepoint is of course hard to accurately determine, but the order of events is still important.
 
-The third (bottom-left) displays the degree of significance between clusters, where the colour indicates the level of significance between clusters, and the width indicates the link score computed by **StemID**. The thick red link between clusters 2-4, 3-5, and 3-1-6 have therefore a high level of significance attached to each of these.
+The third (bottom-left) displays the degree of significance between clusters, where the colour indicates the level of significance between clusters, and the width indicates the link score computed by **StemID**. Here, blue clusters indicate a higher level of cluster entropy (assosciated with progenitor cell types), and red with low entropy (for mature types). The link colouring is red for more significant links between clusters, than green, and the width is indicative of the number of cells in the cluster sharing that link to another cluster. 
+
+The thick red link between clusters 2-4, 3-5, and 3-1-6 have therefore a high level of significance attached to each of these.
 
 This is clarified slightly better with the heatmap (bottom-right) that shows the link scores between each cluster-cluster pair. To see how the link score is actually calculated, the image below provides some context:
 
@@ -735,7 +764,7 @@ The top chart shows the number of links above a threshold that each cluster exhi
 >
 > > ### {% icon solution %} Solution
 > >
-> > `c3` has the most number of links, and the most entropy that one would expect a multipotent progenitor cell type to exhibit, and therefore must be the root of the lineage tree, *despite* having fewer links than `c2`.
+> > `c3` has both the most number of links as well as the most entropy that one would expect a multipotent progenitor cell type to exhibit, and therefore must be the root of the lineage tree, despite having the same number of links as `c2`.
 > >
 > > - *Cluster Tree Diagram:*
 > >
