@@ -22,13 +22,17 @@ tutorial_name: hhpred-analysis-of-proteins
 # Background: Using Protein Structure Prediction Tools to Predict Function
 
 ## Protein Structure Prediction
+There are a variety of tools that have been developed to predict protein structure using the amino acid sequence. Often these rely on protein alignments and usually threading through the published structures of similar proteins. These are incredibly computationally intensive tasks, and sometimes very wrong. For this reason, online servers typically limit the number of prediction jobs that can be run at a time, and we do not host them here in the CPT Galaxy. It is not very useful to run protein sequence through these tools if you have high confidence of its function based on high-confidence similarity to phage or bacterial proteins of known function, or with good domain hits and reasonable genomic context. Sometimes, the predicted structures, or similarity to structures of proteins with known function is helpful to making a novel phage protein functional prediction, but their use and interpretation should be done judiciously.
 
 ## Tools That Predict Protein Structure
 
+ A few of the tools in the field are:
+> * [Phyre2](http://www.sbg.bio.ic.ac.uk/phyre2/html/page.cgi?id=index)
+> * [I-TASSER](https://zhanglab.ccmb.med.umich.edu/I-TASSER/)
+> * [HHPred](https://toolkit.tuebingen.mpg.de/#/tools/hhpred) (discussed here)
 > ### {% icon tip %} A Relevant Read
 > [ A Completely Reimplemented MPI Bioinformatics Toolkit with a New HHpred Server at its Core. J Mol Biol. 2017 Dec 16.](https://www.ncbi.nlm.nih.gov/pubmed/29258817)
 {: .comment}
-
 > ### {% icon comment %} Note that...
 > Jobs are stored for 3 weeks.
 {: .comment}
