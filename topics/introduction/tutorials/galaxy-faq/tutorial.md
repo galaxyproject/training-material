@@ -72,3 +72,30 @@ tutorial_name: galaxy-faq
 > {: .solution}
 {: .question}
 
+> ### {% icon question %} PhageTerm broke on my data!
+>    > ### {% icon solution %} Solution
+>    > When running a [PhageTerm](https://cpt.tamu.edu/galaxy/root?tool_id=PhageTerm) job, the job fails. We do not have a good fix for this problem, as we didn't write the PhageTerm tool (it is published [here(https://www.ncbi.nlm.nih.gov/pubmed/28811656)). A couple common errors, and a few possible solutions are given below.
+>    >
+>    > Error 1:
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/11_phageterm_error_1.png)
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/12_phageterm_error_1_description.png)
+>    >
+>    > Error 2:
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/13_phageterm_error_2.png)
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/14_phageterm_error_2_description.png)
+>    >
+>    > Error 3 (related to using host genome in the optional input):
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/15_phageterm_error_3.png)
+>    >
+>    > **Possible solutions**:
+>    > 1. Re-run [PhageTerm](https://cpt.tamu.edu/galaxy/root?tool_id=PhageTerm) in Galaxy, omitting an input for the optional parameters, including the corresponding paired-end reads and the host genome.
+>    > 2. Re-open the genome in another place ([Re-open FASTA sequence](https://cpt.tamu.edu/galaxy/root?tool_id=edu.tamu.cpt.fasta.reopen)). Try running the job again.
+>    > 3. It is possible that some phage genome data simply cannot be run through this tool in its current state. We are in communication with the authors to attempt to remedy the situation. If you have encountered a reproducible error when running PhageTerm on a particular dataset, please send us the information (cory.maughmer@tamu.edu) so that the developers can develop a fix for that specific problem.
+> {: .solution}
+{: .question}
+
