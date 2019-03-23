@@ -316,6 +316,27 @@ Technical variation appears in three main forms: *Library size variation*, *Ampl
 
 ## Performing the Clustering
 
+In order to perform clustering, the proximity of cells to one another are first defined by a distance metric
+such as [Euclidean distance or other](https://en.wikipedia.org/wiki/Metric_(mathematics)).
+
+![Distances]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_distance.svg %} "Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)")
+
+> ### {% icon question %} Questions
+>
+> 1. Why are there zeroes along the diagonal of the above example distance matrix?
+> 1. Is there any symmetry in this matrix?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. The distance between a point to itself is - nothing!
+> > 1. The distance between point *a* to point *b* is the same as the distance between point *b* to point *a* using the Euclidean distance metric.
+> >
+> {: .solution }
+>
+{: .question }
+
+The clustering then tries to find groupings of cells using this distance matrix.
+
 Here we assume that there is no unwanted technical or biological variability in the data and that the cells will cluster purely based on their phenotypes. This assumption is not completely without merit, since often the biological signal is strong enough to counter the lesser unwanted variation.
 
 We will attempt to perform some filtering, normalisation, and clustering using the recommended default settings to see if we can detect different cell types.
@@ -417,7 +438,7 @@ The remainder of the plots are heatmaps derived from k-medoids clustering, showi
 >
 > ![K-means](https://upload.wikimedia.org/wikipedia/commons/e/ea/K-means_convergence.gif "K-means convergence (Wikimedia Commons)")
 >
-> In terms of single-cell data, each datapoint is a G-dimensional cell (for G genes), and distances between cells are computed via [Euclidean distance or other](https://en.wikipedia.org/wiki/Metric_(mathematics)). The k points are therefore also G-dimensional points that are updated for each iteration of the algorithm.
+> In terms of single-cell data, for *G* genes, each datapoint is a G-dimensional cell. The distances between cells are computed using a [given metric](#performing-the-clustering), and the k points are G-dimensional points indicating the centre of cluster. The k points are then updated for each iteration of the algorithm.
 >
 > > ### {% icon question %} Questions
 > >
@@ -656,17 +677,10 @@ The above figure shows where the combined expression of *Gstm3*, *St3gal4*, and 
 > ### {% icon question %} Question
 >
 > Observe the above expression plot and the overall clustering plot generated during the "*Visualising All Clusters*" stage.
-> Are these genes expressed where we expect them to be?
 >
-> > ### {% icon tip %} Tip <!-- this should be a snippet -->
-> > Multiple plots can be compared side-by-side by enabling the *Scratchbook*
-> > * Click on the {% icon galaxy-scratchbook %} *Scratchbook* icon <!-- icon not in _config.yml -->
-> > * Click on the {% icon galaxy-eye %} symbol of the first dataset
-> > * Resize the window of the dataset to desired dimensions
-> > * Click any point in the grey space to close the Scratchbook
-> > * Click on the {% icon galaxy-eye %} symbol of the second dataset
-> > * Resize both windows to desired dimensions
-> {: .tip}
+> {% include snippets/use_scratchbook.md %}
+>
+> Are these genes expressed where we expect them to be?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -727,12 +741,7 @@ This is clarified slightly better with the heatmap (bottom-right) that shows the
 > 
 > > ### {% icon solution %} Solution
 > >
-> > On first glance, it appears that `c2` would be the progenitor, giving rise to
-> > - mature type `c11`, `c4`, and `c9`, which are not link to any other clusters
-> > - `c3` which is the progenitor of
-> >    - `c5`
-> >    - `c1` giving then rise to `c6`
-> > - `c8` which gives rise to `c12` that in turn generates `c10`.
+> > On first glance, it appears that `c2` would be the progenitor, due to the number of links it has and its more central position in the cluster plot.
 > >
 > > - *Cluster Tree Diagram:*
 > >
@@ -764,7 +773,7 @@ The top chart shows the number of links above a threshold that each cluster exhi
 >
 > > ### {% icon solution %} Solution
 > >
-> > `c3` has both the most number of links as well as the most entropy that one would expect a multipotent progenitor cell type to exhibit, and therefore must be the root of the lineage tree, despite having the same number of links as `c2`.
+> > `c3` has both the most number of links as well as the most entropy that one would expect a multipotent progenitor cell type to exhibit, and therefore must be the root of the lineage tree, despite having the same number of links as `c2`. The more centred position of `c2` in the plots has no bearing on it being the initial progenitor type.
 > >
 > > - *Cluster Tree Diagram:*
 > >
@@ -801,21 +810,44 @@ Here we will explore one branching point of interest; `c3` giving rise to `c1` a
 >    - {% icon param-file %} *"Input RDS"*: `outrdat` (output of **Lineage computation using StemID** {% icon tool %})
 >    - In *"StemID Branch Link Examine"*:
 >        - *"Perform StemID?"*: `Yes`
->            - *"Cluster Number"*: `1`
+>            - *"Cluster Number"*: `3`
 >            - *"Trajectory Path i, j, k"*: `1,3,5`
 >            - *"Use Defaults?"*: `Yes`
 >    - In *"FateID Branch Link Examine"*:
 >        - *"Perform FateID?"*: `No`
 >
+> > ### {% icon comment %} Comment
+> >
+> > This tool requires trajectories to be numerical order, hence the "*1,3,5*" ordering.
+> >
+> {: .comment}
+>
 {: .hands_on}
 
-![Heatmap Cells]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_cells.png %} "StemID Heatmap of Cluster 1 cell projections.")
+![Heatmap Cells]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_cells.png %} "(Top) StemID Minimal spanning tree of all cells projected along the links between clusters. (Bottom) StemID Heatmap of Cluster 3 cells compared to other clusters.")
 
-The vertical names along the heatmap are the cells from `c1` being projected on to the two intercluster links (3 to 1, 3 to 5) with scores for each cluster being shown for that cell. 
+The vertical names along the heatmap are the cells from `c3` being compared to all other clusters.
 
-Here we can see that the last 7 cells in `c1` share more of an affinity towards the `c6` trajectory, as expected from a strong neighbouring link, but that the other cells in `c1` are more predisposed towards `c3` (and to a lesser extent `c5`).
+> ### {% icon question %} Questions
+>
+> 1. How does the heatmap correlate to the minimum spanning tree (MST)?
+> 1. How many `c3` cells are strongly *dissimilar* to cells in `c2`, `c4`, `c9`, `c8`, and `c11`. Where are they plotted on the MST?
+> 1. Many `c3` cells appear to have stronger (red/orange) correlation to `c2` and `c4`, instead of the expected `c5` and `c1` shown in the MST, yet `c2` is further away than `c5` or `c1`. Why is this?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Each `c3` cell in the heatmap is "pulled" towards different clusters along a straight line in the MST. The degree to which it is pulled is given by the strength of the correlation of that cell to that cluster. For example cell *I5d_45* has a very strong correlation to `c12` and `c10`, and so it apppears on the MST as a single (3) lying in between the `c3`,`c12`,`c10` triangle.
+> > 1. 10 `c3` cells (III5d-53 to I5d-48) show negative (blue) correlation to these clusters, and these same cells have a strong correlation to `c5` or `c1` clusters. We can see these cells plotted along the links to these two clusters.
+> > 1. The `c3` cells strongly correlated to `c2` and `c4` are also strongly correlated to `c9`, `c8`, and `c11` - i.e. these cells have noisy profiles and are outliers in `c3`. Note that the 10 cells we identified in the previous question are not strongly correlated to other clusters except `c5` and `c1`, meaning they have very clear trajectories.
+> >
+> {: .solution}
+>
+{: .question}
 
-The *Differential Genes* tabular file provides an ordered list of z-scores indicating the degree of up-regulation from the link 3 to 1 compared to 3 to 5, for `c1` cells.
+
+<!--  This table is confusing and I doubt anyone will use it.
+
+The *Differential Genes* tabular file provides an ordered list of z-scores indicating the degree of up-regulation from the link 3 to 1 compared to 3 to 5, for `c3` cells.
 
 
  | Gene | Z-score |
@@ -832,6 +864,7 @@ The *Differential Genes* tabular file provides an ordered list of z-scores indic
  | Dgat1 | 0.996275665669355 |
 
 Unsurprisingly, there is a higher score for the 3 to 1 trajectory for `c1` cells.
+-->
 
 ## Specific Trajectory Fate Analysis (FateID)
 
