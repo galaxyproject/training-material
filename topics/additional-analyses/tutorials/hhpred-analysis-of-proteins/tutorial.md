@@ -32,41 +32,57 @@ Be conservative in your use of protein structural prediction tools for functiona
 > * [Phyre2](http://www.sbg.bio.ic.ac.uk/phyre2/html/page.cgi?id=index)
 > * [I-TASSER](https://zhanglab.ccmb.med.umich.edu/I-TASSER/)
 > * [HHPred](https://toolkit.tuebingen.mpg.de/#/tools/hhpred) (discussed here)
+
 > ### {% icon tip %} A Relevant Read
-> [ A Completely Reimplemented MPI Bioinformatics Toolkit with a New HHpred Server at its Core. J Mol Biol. 2017 Dec 16.](https://www.ncbi.nlm.nih.gov/pubmed/29258817)
+> [A Completely Reimplemented MPI Bioinformatics Toolkit with a New HHpred Server at its Core. J Mol Biol. 2017 Dec 16.](https://www.ncbi.nlm.nih.gov/pubmed/29258817)
 {: .comment}
 
 ## Caveats
 
 # Using & Interpreting HHPred with Caution
 
-> * **Input: Getting your protein sequence from Apollo to HHPred**
+##### **Input -  Getting your protein sequence from Apollo to HHPred**
+
 Right-click on a feature and select *Get Sequence*. 
 Copy the amino acid sequence. Including the genomic coordinates is useful as well.
 Navigate to the HHPred tool. Paste the protein sequence in FASTA format into the query box. To do this, add a '>', then paste the copied sequence with the feature coordinates as the header and all the amino acids on a new line. 
 
-> * **Parameters to run the tool**
+![](../../images/hhpred-analysis-of-proteins-screenshots/1_hhpred_initial.png)
+
+![](../../images/hhpred-analysis-of-proteins-screenshots/2_hhpred_insert_aas.png)
+
+##### **Parameters to run the tool**
 Use the standard parameters, unless you have read the help documentation and have good reason to change the defaults. 
 Click Submit Job after it detects that you have entered your protein sequence in FASTA format.
 Jobs can take from 1-30 minutes typically.
+
+![](../../images/hhpred-analysis-of-proteins-screenshots/3_parameters.png)
 
 > ### {% icon comment %} Note that...
 > Jobs are stored for 3 weeks. If you want to come back to these analyses in another browser or session, write down the job ID.
 {: .comment}
 
-> * **Looking at the results**
+![](../../images/hhpred-analysis-of-proteins-screenshots/4_submit_job.png)
+
+##### **Looking at the results**
 
 The results are displayed in the browser under several new tabs. The most interesting results are usually in the Results tab and are divided into three parts: Visualization, Hits, and Alignment. 
 
 Under Visualization, colored boxes show where there is alignment of the query protein to hits in the structure database. The color indicates probability score, where red is best and blue is worst. Pay close attention to how much of the query protein is similar to these hits. A good hit that covers a small percentage of the query may be enough to give you a reasonable functional prediction. A low probability hit over a majority of the protein, on the other hand, may not be enough to allow confident prediction of the function.
 
+![](../../images/hhpred-analysis-of-proteins-screenshots/5_results_visualization.png)
+
 Under Hits, the proteins that align, with their probability, coverage, and external links to their Protein Data Bank entry (Under Hit column) are listed.
 
-Under Alignment, a detailed alignment between the query and target is given. 
+![](../../images/hhpred-analysis-of-proteins-screenshots/7_results_hitlist.png)
+
+Under Alignment, a detailed alignment between the query and target is given.
+
+![](../../images/hhpred-analysis-of-proteins-screenshots/6_results_alignments.png)
 
 > ### {% icon comment %} Note that...
 > *Probability* takes into consideration secondary structure, and uses the weighted conservation of amino acids at each position for homology determination for prediction.
-
+>
 > *E-value* indicates how many chance hits with a better score than this would be expected in a fully unrelated database (I. E.: Smaller is better, and smaller than one is **absolutely** required).
 {: .comment}
 
@@ -86,7 +102,7 @@ Under Alignment, a detailed alignment between the query and target is given.
 >    {: .solution}
 {: .question}
 
-> * **Sorting through results critically**
+##### **Sorting through results critically**
 
 HHPred on hypothetical proteins
 
