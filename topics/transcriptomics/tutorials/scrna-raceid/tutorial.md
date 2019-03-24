@@ -46,7 +46,7 @@ contributors:
 
 The data provided here as part of this tutorial analyses single-cell RNA-seq data from a study published by [Grün et.al](https://doi.org/10.1016/j.stem.2016.05.010) in 2016. The data was used to cluster cells from *Lgr5*-positive intestinal stem cells of C57BL6/J mice, with the aim of discovering distinct cell sub-populations and deriving a lineage tree between them to find out how these sub-populations relate (or are derived from) one another.
 
-The input data consists of a single count matrix consisting of ~21,000 genes (rows) and ~400 cells (columns), generated via [scRNA pre-processing methods](({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna_preprocessing/tutorial.md %})) using the [CelSeq2 protocol](({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %})).
+The input data consists of a single count matrix consisting of ~21,000 genes (rows) and ~400 cells (columns), generated via [scRNA pre-processing methods]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna_preprocessing/tutorial.md %}) using the [CelSeq2 protocol]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}).
 
 Here, the data follows the [tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) convention prevalent amongst the R data analysis community which assigns every value to a variable and an observation. The values are the number of reads which are assigned to a particular gene (a variable) that was measured within a specific cell (an observation).
 
