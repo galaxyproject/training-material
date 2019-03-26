@@ -244,23 +244,53 @@ module Jekyll
         for req in reqs do
           if req['type'] == "internal" then
             if req.key?('tutorials') then
-              coursePrerequisites.push(*req['tutorials'].map{ |x|
-                {
-                  "@type": "Course",
-                  "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{x}/tutorial.html",
-                  "name": "Hands-on for '#{x}' tutorial",
-                  "description": "#{x}",
-                  "learningResourceType": "hands-on tutorial",
-                  "interactivityType": "expositive",
-                  "provider": gtn
-                } 
-              })
+              for tuto in req['tutorials'] do
+                for page in site['pages'] do
+                  if page['name'] == 'tutorial.md' or page['name'] == 'slides.html' then
+                    if page['topic_name'] == req['topic_name'] and page['tutorial_name'] == tuto then
+                      #slides
+                      if page['name'] == 'slides.html' then
+                        coursePrerequisites.push({
+                          "@type": "Course",
+                          "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/slides.html",
+                          "name": "#{page['title']}",
+                          "description": "Slides for '#{page['title']}' tutorial",
+                          "learningResourceType": "slides",
+                          "interactivityType": "expositive",
+                          "provider": gtn
+                        })
+                        if page['hands_on_url'] then
+                          coursePrerequisites.push({
+                            "@type": "Course",
+                            "url": "#{page['hands_on_url']}",
+                            "learningResourceType": "hands-on tutorial",
+                            "interactivityType": "expositive",
+                          })
+                        end
+                      end
+                      #hands-on
+                      if page['name'] == 'tutorial.md' then
+                        coursePrerequisites.push({
+                          "@type": "Course",
+                          "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/tutorial.html",
+                          "name": "#{page['title']}",
+                          "description": "Hands-on for '#{page['title']}' tutorial",
+                          "learningResourceType": "hands-on tutorial",
+                          "interactivityType": "expositive",
+                          "provider": gtn
+                        })
+                      end
+                    end
+                  end
+                end
+              end
             else
               coursePrerequisites.push({
                 "@type": "CreativeWork",
                 "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/",
                 "name": "#{site['data'][req['topic_name']]['title']}",
-                "description": "#{site['data'][req['topic_name']]['title']}"
+                "description": "#{site['data'][req['topic_name']]['title']}",
+                "provider": gtn
               })
             end
           elsif req['type'] == "external" then
