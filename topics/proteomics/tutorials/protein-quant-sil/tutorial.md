@@ -65,7 +65,7 @@ To learn about *protein identification* in Galaxy, please consider our OpenMS-ba
 
 # Peptide and Protein Identification
 
-In this tutorial, peptide identification will be performed using the workflow of the previous [Peptide ID Tutorial]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}). Alternatively one can also the protein identification step by step in the [Peptide ID Tutorial]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}) using the SILAC dataset from [zenodo](https://zenodo.org/record/1051552) **but** beware to specify the labels in the `param_variable_modifications` of **XTandemAdapter** {% icon tool %}. 
+In this tutorial, peptide identification will be performed using the workflow of the previous [Peptide ID Tutorial]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}). Alternatively one can perform the protein identification step by step in the [Peptide ID Tutorial]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}) using the SILAC dataset from [zenodo](https://zenodo.org/record/1051552) **but** beware to specify the labels in the `param_variable_modifications` of **XTandemAdapter** {% icon tool %}. 
 
 A common problem in mass spectrometry are misassigned mono-isotopic precursor peaks. Most search engines allow for some adaptation of the monoisotopic peak and we will use this by leaving `By default, misassignment to the first and second isotopic 13C peak are also considered` at `No`. 
 
@@ -73,8 +73,8 @@ A common problem in mass spectrometry are misassigned mono-isotopic precursor pe
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this RNA-seq exercise
-> 2. Import the FASTQ file pairs from [Zenodo](https://doi.org/10.5281/zenodo.1051552) or a data library:
+> 1. Create a new history for this SILAC Proteome exercise
+> 2. Import the mzml file, containing the measured mass spectra from [Zenodo](https://doi.org/10.5281/zenodo.1051552) or a data library:
 >
 >    ```
 >    https://zenodo.org/record/1051552/files/HEK_SILAC-K6R6_ST905_part.mzml
@@ -101,8 +101,8 @@ A common problem in mass spectrometry are misassigned mono-isotopic precursor pe
 >
 > 4. Modify the workflow
 >
->   1. Connect the `mzML` input directly to the ***XTandemAdapter*** {% icon tool %} node.
->   2. Change the ***XTandemAdapter*** {% icon tool %} parameters: Add the **param_variable_modifications** `Label:13C(6) (K)` and `Label:13C(6) (R)`
+>   1. Connect the `mzML` input directly to the **XTandemAdapter** {% icon tool %} node.
+>   2. Change the **XTandemAdapter** {% icon tool %} parameters: Add the **param_variable_modifications** `Label:13C(6) (K)` and `Label:13C(6) (R)`
 >
 > 4. Run the workflow with
 >   - the mzML dataset `1: mzML dataset`
@@ -158,9 +158,9 @@ For labelled data, it is necessary to map peptide identifications to *consensus*
 For `consensusXML`, IDMapper uses the consensus centroids, not the feature boundaries for mapping. Therefore, the RT tolerance has to be set higher than for mapping to `featureXML`. A good starting value is half the expected typical retention time.
 
 Sometimes several peptide identifications are mapped to a feature. The tool [IDConflictResolver](http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/html/TOPP_IDConflictResolver.html) filters the mapping so that only the identification with the best score is associated to each feature. 
-Another refinement of the quantitative result is obtained by removing falsely mapped identifications e.g. light identification mapped to heavy feature. This step is performed by the ***MultiplexResolver*** {% icon tool %} that returns a first file with the correctly mapped peptides and as a second output the falsly mapped peptides.  
+Another refinement of the quantitative result is obtained by removing falsely mapped identifications e.g. light identification mapped to heavy feature. This step is performed by the **MultiplexResolver** {% icon tool %} that returns a first file with the correctly mapped peptides and as a second output the falsly mapped peptides.  
 
-Finally, the correctly mapped peptides will be combined into protein quantifications with the ***ProteinQuantifier*** {% icon tool %}.
+Finally, the correctly mapped peptides will be combined into protein quantifications with the **ProteinQuantifier** {% icon tool %}.
 
 > ### {% icon hands_on %} Hands-on: Quant to ID matching
 >
@@ -246,7 +246,7 @@ Comment lines in the beginning of a `tabular` file may sometimes cause errors, t
 
 Protein quantitation is a multi-step procedure. Many parameters of different steps influence the final results. Therefore, it is recommended to optimize the tool parameters for each dataset and to carefully evaluate quantitation results. While the total number of quantified proteins is a first important parameter for optimization, it is also necessary to visualize the results and check for correct feature finding and ID mapping.
 
-Galaxy does not provide a tool for proteomics visualization, we recommend to use the OpenMS Viewer ***TOPPView***.
+Galaxy does not provide a tool for proteomics visualization, we recommend to use the OpenMS Viewer **TOPPView**.
 Basic TOPPView tutorials are available as [videos](https://www.openms.de/getting-started/command-line-and-visualisations/) and a more comprehensive tutorial as [HTML](http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/html/TOPP_TOPPView.html) or [PDF](http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/TOPP_tutorial.pdf).
 
 For the optimization of tool parameters, it is recommended not to work with a complete LC-MS/MS run. Instead, we will use **FileFilter** to extract a small *RT-slice* of our input dataset, i.e. a fraction of the original dataset that was measured during a short period of time. Reducing the test data reduces the time needed for analysis and facilitates visual examination of the data.
@@ -258,10 +258,10 @@ Using Galaxy Workflows enables us to quickly re-run a full analysis with changed
 > ### {% icon hands_on %} Hands-on: Data reduction and visual evaluation with TOPPView
 >
 > 1. Run **FileFilter** {% icon tool %} with
->   - {% icon param-file %} *"Input file"*: 
+>   - {% icon param-file %} *"Input file"*: `mzML` file
 >   - *"Retention time range to extract"*: `2000:2200`
 > 
-> 1. Extract a workflow out of your history or import the [premade workflow]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %})
+> 2. Extract a workflow out of your history or import the [premade workflow]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %})
 >
 > 3. Run the whole workflow again with default settings on the reduced `mzML` file.
 >
@@ -273,34 +273,34 @@ Using Galaxy Workflows enables us to quickly re-run a full analysis with changed
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 5. Run **FileFilter** {% icon tool %} with
+> 6. Run **FileFilter** {% icon tool %} with
 >   - {% icon param-file %} *"Input file"*: **IDConflictResolver** output
 >   - *"Remove features without annotations"*: `Yes`
 >
-> 5. Rename the **FileFilter** output to `UNannotated features`
+> 7. Rename the **FileFilter** output to `UNannotated features`
 >
-> 2. Download locally the following files:
+> 8. Download locally the following files:
 >   - Spectra: `mzML` file
 >   - peptide IDs: **IDScoreSwitcher** `idXML` output file
 >   - features: **FeatureFinderMultiplex** `featureXML` output file
 >   - consensus features: **FileFilter** `consensusXML` output files ("Annotated" and "UNannotated" features)
 >
-> 2. Open **TOPPView**
-> 3. Open the `mzML` file in **TOPPView** with
+> 9. Open **TOPPView**
+> 10. Open the `mzML` file in **TOPPView** with
 >   - **Open as** set to `new window`
 >   - **Map view** set to `2D`
 >   - **Low intensity cutoff** set to `off`
-> 4. Open all other downloaded files in **TOPPView** with
+> 11. Open all other downloaded files in **TOPPView** with
 >   - **Open as** set to `new layer`
-> 5. Activate the `mzML` layer and click on `Show projections`
+> 12. Activate the `mzML` layer and click on `Show projections`
 >
 >   ![showProjections](../../images/protein-quant-sil_showProjections.png "The projections display intensities plotted against RT (top panel) and plotted against m/z (right panel).")
 >
-> 6. Activate the `consensusXML` layers and click on `Show consensus feature element positions`
+> 13. Activate the `consensusXML` layers and click on `Show consensus feature element positions`
 >
 >   ![showConsensus](../../images/protein-quant-sil_showConsensus.png "Arrows between linked light and heavy features centroids are displayed.")
 >
-> 7. Evaluate your data analysis, by
+> 14. Evaluate your data analysis, by
 >   - zooming into a specific region (hold `Ctrl` and use the mouse to zoom)
 >   - measuring m/z and RT distances (select the `mzML` layer, hold `Shift` and use the mouse to measure)
 >   - displaying an area in 3D view (`right-click` into the 2D View and select `Switch to 3D view`)
