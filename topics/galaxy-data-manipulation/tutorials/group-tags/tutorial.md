@@ -52,7 +52,7 @@ testing see the [Reference-based RNA-Seq data analysis]({{ site.baseurl }}/topic
 There are three ways to set group tags:
   - Using the rule builder / apply_rules tool
   - Using the "Tag elements from file" tool
-  - Manually
+  - Manually adding dataset tags with the prefix `group:`
 
 We will use the first two methods in this tutorial.
 The second method works at any step during the analysis.
@@ -102,6 +102,8 @@ The second method works at any step during the analysis.
 >    - Click **Build**
 >
 > 8. Expand the generated collection and the files in it and check their names and tags
+>
+>    ![](../../images/group-tags/group-tags.png)
 {: .hands_on}
 
 ## Set group tags using the "Tag elements from file" tool
@@ -164,6 +166,10 @@ DESeq2 has two modes for specifying factors. One can either
 select datasets corresponding to factors, or use group tags
 to specify factors. We will use the grop tags present in
 our collection to specify factors.
+
+The tool interface will prompt you with the group tags that are available for your inputs:
+
+![](../../images/group-tags/tool-ui.png)
 
 > ### {% icon hands_on %} Hands-on: Running **DESeq2** with group tags
 >
