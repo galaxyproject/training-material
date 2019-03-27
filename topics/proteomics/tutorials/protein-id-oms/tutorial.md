@@ -75,24 +75,27 @@ If your data were generated on a low resolution mass spectrometer, use **PeakPic
 
 > ### {% icon hands_on %} Hands-On: File Conversion and Peak Picking
 >
-> We provide the [input data](https://zenodo.org/record/796184) in the original `raw` format and also already converted to `mzML`. If **msconvert** {% icon tool %} does not run on your Galaxy instance, please download the preconverted `mzML` as an input.
+> We provide the [input data](https://zenodo.org/record/796184) in the original `raw` format and also already converted to `mzML`. If **msconvert** {% icon tool %} does not run on your Galaxy instance, please download the preconverted `mzML` as an input and continue with step 5 of the following hands-on training.
 >
 > 1. Create a new history for this Peptide and Protein ID exercise.
-> 2. Load the example dataset into your history from Zenodo
+> 2. Load one of the example datasets into your history from Zenodo
 >
 >    ```
 >    https://zenodo.org/record/892005/files/qExactive01819.raw
+>    https://zenodo.org/record/892005/files/qExactive01819_profile.mzml
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
 >
 > 3. Rename the dataset to something meaningful
 >
-> 4. Run **msconvert** {% icon tool %} on the test data to convert to the `mzML` format
->    - {% icon param-file %} *"Input unrefined MS data"*: imported file
+> 4. Run **msconvert** {% icon tool %} on the training `raw` file to convert to the `mzML` format
+>    - {% icon param-file %} *"Input unrefined MS data"*: imported `raw` file
+>    - *"Do you agree to the vendor licenses"*: set to `Yes`
+>    - *"Output Type"*: set to `mzML`
 >  
 > 5. Run **PeakPickerHiRes** {% icon tool %} on the resulting file
->    - {% icon param-file %} *"input profile data file": output of **msconvert**
+>    - {% icon param-file %} *"input profile data file": output of **msconvert** or `mzML` file
 >    - In *"param_algorithm_ms_levels"*
 >      - {% icon param-repeat %} Click on *"Insert param_algorithm_ms_levels"*
 >      - In *"1: param_algorithm_ms_levels"*
@@ -119,13 +122,13 @@ Different peptide search engines have been developed to fulfill the matching pro
 
 > ### {% icon hands_on %} Hands-On: Peptide Identification
 >
-> 1. Copy the prepared protein database from the tutorial [Database Handling]({{ site.baseurl }}{% link topics/proteomics/tutorials/database-handling/tutorial.md %}) into your current history by using the multiple history view 
+> 1. Copy the prepared protein database (Human database including cRAP contaminants and decoys) from the tutorial [Database Handling]({{ site.baseurl }}{% link topics/proteomics/tutorials/database-handling/tutorial.md %}) into your current history by using the multiple history view 
 >
 >   > ### {% icon comment %} You did not run the Database Handling first?
 >   > You can upload the ready-made database from Zenodo
 >   >
 >   > ```
->   > https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_and_Mycoplasma_added%29.fasta
+>   > https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_added%29.fasta
 >   > ```
 >   {: .comment}
 >    
@@ -170,7 +173,7 @@ We will calculate peptide posterior error probabilities (PEPs), because they are
 > ### {% icon hands_on %} Hands-On: Peptide FDR filtering
 >
 > 1. Run **IDPosteriorErrorProbability** {% icon tool %} with
->    - {% icon param-file %} *"input file"*: 
+>    - {% icon param-file %} *"input file"*: **XTandemAdapter** output
 >    - *"If set scores will be calculated as '1 - ErrorProbabilities' and can be interpreted as probabilities for correct identifications"*: `Yes`
 >
 > 1. Run **PeptideIndexer** {% icon tool %} with
@@ -192,7 +195,7 @@ We will calculate peptide posterior error probabilities (PEPs), because they are
 >    - *"Orientation of the new score"*: `higher_better`
 >
 > 5. Run **FileInfo** {% icon tool %} to get basic information about the identified peptides
->    - {% icon param-file %} *"input file"*: 
+>    - {% icon param-file %} *"input file"*: **IDScoreSwitcher** output
 >
 {: .hands_on}
 
@@ -214,7 +217,7 @@ The OpenMS suite implemented the [Fido](https://www.ncbi.nlm.nih.gov/pubmed/2071
 > ### {% icon hands_on %} Hands-On: Protein inference
 >
 > 1. Run **FidoAdapter** {% icon tool %}
->    - {% icon param-file %} *"Input: identification results"*: 
+>    - {% icon param-file %} *"Input: identification results"*: output of **IDScoreSwitcher**
 >    - *"Post-process Fido output with greedy resolution of shared peptides based on the protein probabilities"*: `Yes`
 >
 > 2. Run **FalseDiscoveryRate** {% icon tool %}
@@ -222,11 +225,11 @@ The OpenMS suite implemented the [Fido](https://www.ncbi.nlm.nih.gov/pubmed/2071
 >    - *"Perform FDR calculation on PSM level"*: `false`
 >
 > 3. Run **IDFilter** {% icon tool %}
->    - {% icon param-file %} *"input file"*: 
+>    - {% icon param-file %} *"input file"*: output of **FalseDiscoveryRate**
 >    - *"The score which should be reached by a protein hit to be kept"*: `0.01`
 >
 > 4. Run **FileInfo** {% icon tool %} to get basic information about the identified proteins
->    - {% icon param-file %} *"input file"*: 
+>    - {% icon param-file %} *"input file"*: output of **IDFilter**
 {: .hands_on}
 
 > ### {% icon comment %} Comment: "Greedy" Group Resolution
@@ -251,7 +254,7 @@ It also enables you to check for contaminations in your samples.
 > ### {% icon hands_on %} Hands-On: Analysis of Contaminants
 >
 > 1. Run **TextExporter** {% icon tool %} to convert the idXML output to a human-readable tabular file.
->    - {% icon param-file %} *"Input file"*: **idXML** output
+>    - {% icon param-file %} *"Input file"*: **IDFilter** output
 >
 > 2. Run **Select lines that match an expression** {% icon tool %}
 >    - {% icon param-file %} *"Select lines from"*: **TextExporter**
@@ -305,7 +308,7 @@ Here, we will use the OpenMS tool [ConsensusID](https://abibuilder.informatik.un
 >    - {% icon param-file %} *"input file"*: **MSGFPlusAdapter** output
 >
 > 3. Run **IDPosteriorErrorProbability** {% icon tool %} with
->    - {% icon param-file %} *"input file"*: 
+>    - {% icon param-file %} *"input file"*: **MSGFPlusAdapter** output
 >    - *"If set scores will be calculated as '1 - ErrorProbabilities' and can be interpreted as probabilities for correct identifications"*: `No`
 > 
 > 4. Run **IDMerger** {% icon tool %}
@@ -317,27 +320,27 @@ Here, we will use the OpenMS tool [ConsensusID](https://abibuilder.informatik.un
 >          - {% icon param-file %} *"Input files separated by blanks"*: output of **IDScoreSwitcher** based on **MSGFPlusAdapter**
 >  
 > 5. Run **ConsensusID** {% icon tool %}
->    - {% icon param-file %} *"input file"*: 
+>    - {% icon param-file %} *"input file"*: **IDMerger** output
 >
 > 6. Run **PeptideIndexer** {% icon tool %} with
->    - {% icon param-file %} *"Input idXML file containing the identifications"*: 
+>    - {% icon param-file %} *"Input idXML file containing the identifications"*: **ConsensusID** output
 >    - {% icon param-file %} *"Input sequence database in FASTA format"*: FASTA protein database
 >    - *"Specificity of the enzyme"*: `none`
 >
 > 7. Run **FalseDiscoveryRate** {% icon tool %} with
->    - {% icon param-file %} *"Identifications from searching a target-decoy database"*: output of **FidoAdapter**
+>    - {% icon param-file %} *"Identifications from searching a target-decoy database"*: output of **PeptideIndexer**
 >    - *"Perform FDR calculation on protein level"*: `false`
 >    - *"Filter PSMs based on q-value"*: `0.01`
 >    - *"If 'true' decoy peptides will be written to output file, too"*: `Yes`
 >
 > 8. Run **IDScoreSwitcher** {% icon tool %} with
->    - {% icon param-file %} *"Input file"*: 
+>    - {% icon param-file %} *"Input file"*: **FalseDiscoveryRate** output
 >    - *"Name of the meta value to use as the new score"*: `Posterior Error Probability_score`
 >    - *"Orientation of the new score"*: `lower_better`
 >    - *"Name to use as the type of the new score"*: `Posterior Error Probability`
 >
-> 4. Run **FileInfo** {% icon tool %} to get basic information about the identified proteins
->    - {% icon param-file %} *"input file"*: 
+> 9. Run **FileInfo** {% icon tool %} to get basic information about the identified peptides
+>    - {% icon param-file %} *"input file"*: **IDScoreSwitcher** output
 >
 > 10. Proceed with the protein inference as described [above](#protein-inference)
 >
