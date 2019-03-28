@@ -103,7 +103,7 @@ The second method works at any step during the analysis.
 >
 > 8. Expand the generated collection and the files in it and check their names and tags
 >
->    ![](../../images/group-tags/group-tags.png)
+>    ![Group tags in Galaxy UI are prefixed with group:](../../images/group-tags/group-tags.png)
 {: .hands_on}
 
 ## Set group tags using the "Tag elements from file" tool
@@ -169,7 +169,7 @@ our collection to specify factors.
 
 The tool interface will prompt you with the group tags that are available for your inputs:
 
-![](../../images/group-tags/tool-ui.png)
+![Group tags in the tool UI](../../images/group-tags/tool-ui.png)
 
 > ### {% icon hands_on %} Hands-on: Running **DESeq2** with group tags
 >
