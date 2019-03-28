@@ -24,8 +24,6 @@ tutorial_name: hhpred-analysis-of-proteins
 ## Protein Structure Prediction
 There are a variety of tools that have been developed to predict protein structure using the amino acid sequence. Often these rely on protein alignments and usually threading through the published structures of similar proteins. These are incredibly computationally intensive tasks, and sometimes very wrong. For this reason, online servers typically limit the number of prediction jobs that can be run at a time, and we do not host them here in the CPT Galaxy. It is not very useful to run protein sequence through these tools if you have high confidence of its function based on high-confidence similarity to phage or bacterial proteins of known function, or with good domain hits and reasonable genomic context. Sometimes, the predicted structures, or similarity to structures of proteins with known function is helpful to making a novel phage protein functional prediction, but their use and interpretation should be done judiciously.
 
-Be conservative in your use of protein structural prediction tools for functional prediction. Use it last and be *most* suspicious of its results.
-
 ## Tools That Predict Protein Structure
 
  A few of the tools in the field are:
@@ -38,6 +36,7 @@ Be conservative in your use of protein structural prediction tools for functiona
 {: .comment}
 
 ## Caveats
+The outputs from these tools are *predictions* with varying levels of accuracy. At their very best, structure prediction serves to generate hypotheses that can be tested experimentally. Similar to cautions that apply to domain-swapping (as discussed with regard to InterPro domain hits), pay careful attention to each hit. Small regions of predicted structural similarity and low-confidence in the predictions should be considered weak evidence, and **not** used for confident structural prediction. Be conservative in your use of protein structural prediction tools for functional prediction. Use it last and be *most* suspicious of its results.
 
 # Using & Interpreting HHPred with Caution
 
