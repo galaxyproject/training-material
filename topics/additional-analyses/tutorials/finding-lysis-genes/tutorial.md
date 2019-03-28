@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: genome-annotation
+topic_name: additional-analyses
 tutorial_name: finding-lysis-genes
 ---
 
@@ -74,4 +74,13 @@ To complete lysis, the endolysin activity is necessary to free the spanins from 
 
 ![](../../images/finding-lysis-genes-screenshots/7_endolysin_activity.png)
 
-Once the spanins have been liberated from the peptidoglycan that was keeping them apart, they can oligomerize and destroy the outer membrane by membrane fusion; this allows for the release of all the phage particles that were made within the bacterial host and 
+Once the spanins have been liberated from the peptidoglycan that was keeping them apart, they can oligomerize and destroy the outer membrane by membrane fusion; this allows for the release of all the phage particles that were made within the bacterial host.
+
+![](../../images/finding-lysis-genes-screenshots/8_spanins_disrupt-membranes.png)
+
+> {% icon comment %} U-Spanins
+> **U-spanins** are unimolecular spanins that reach from the inner membrane (anchored by a C-terminus TMD) to the outer membrane. A u-spanin is present in phage T1 as gp*11*, associated with a pinholin and a SAR endolysin. *U-spanins found in nature are only associated with pinholes and SAR endolyins.* The figure below shows a structural comparison between lambda's i-spanin and o-spanin (Rz and Rz1) and phage T1's u-spanin.
+>
+> ![](../../images/finding-lysis-genes-screenshots/9_lambda_t1_spanin_comparison.png)
+>
+{: .comment}
