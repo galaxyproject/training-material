@@ -129,7 +129,7 @@ Spanins are only expected in the genomes of phages that infect Gram-negative hos
 
 ![](../../images/finding-lysis-genes-screenshots/19_lipoprotein.png)
 
-![](../../images/finding-lysis-genes-screenshots/20_spii_signal_lipobox)
+![](../../images/finding-lysis-genes-screenshots/20_spii_signal_lipobox.png)
 
 ## Spanin systems: two-component and unimolecular
 
