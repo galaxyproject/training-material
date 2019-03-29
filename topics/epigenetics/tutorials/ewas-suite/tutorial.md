@@ -65,19 +65,18 @@ The first step of EWAS data anylalysis is raw methylation data loading (intensit
 >    - `GSM1588704_8795207135_R01C02_Grn.idat`
 >    - `GSM1588705_8795207119_R05C02_Grn.idat`
 >    - `GSM1588706_8795207135_R02C02_Grn.idat`
->    - `GSM1588707_8795207119_R06C02_Grn.idat`
+>    - `GSM1588707_8795207119_R06C02_Grn.idat` 
 >
+>    ```  
+>    https://zenodo.org/record/1251211/files/GSM1588704_8795207135_R01C02_Grn.idat?download=1
+>    https://zenodo.org/record/1251211/files/GSM1588704_8795207135_R01C02_Red.idat?download=1
+>    https://zenodo.org/record/1251211/files/GSM1588705_8795207119_R05C02_Grn.idat?download=1
+>    https://zenodo.org/record/1251211/files/GSM1588705_8795207119_R05C02_Red.idat?download=1
+>    https://zenodo.org/record/1251211/files/GSM1588706_8795207135_R02C02_Grn.idat?download=1
+>    https://zenodo.org/record/1251211/files/GSM1588706_8795207135_R02C02_Red.idat?download=1
+>    https://zenodo.org/record/1251211/files/GSM1588707_8795207119_R06C02_Grn.idat?download=1
+>    https://zenodo.org/record/1251211/files/GSM1588707_8795207119_R06C02_Red.idat?download=1
 >    ```
->    https://zenodo.org/record/1185122/files/GSM1588704_8795207135_R01C02_Red.idat
->    https://zenodo.org/record/1185122/files/GSM1588705_8795207119_R05C02_Red.idat
->    https://zenodo.org/record/1185122/files/GSM1588706_8795207135_R02C02_Red.idat
->    https://zenodo.org/record/1185122/files/GSM1588707_8795207119_R06C02_Red.idat
->    https://zenodo.org/record/1185122/files/GSM1588704_8795207135_R01C02_Grn.idat
->    https://zenodo.org/record/1185122/files/GSM1588705_8795207119_R05C02_Grn.idat
->    https://zenodo.org/record/1185122/files/GSM1588706_8795207135_R02C02_Grn.idat
->    https://zenodo.org/record/1185122/files/GSM1588707_8795207119_R06C02_Grn.idat
->    ```
->
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
 >    > * Copy the link locations
