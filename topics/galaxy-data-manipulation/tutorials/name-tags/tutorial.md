@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Name tags for following datasets over complex histories
+title: Name tags for following complex histories
 zenodo_link: ''
 questions:
 - What are name tags or hash tags?
