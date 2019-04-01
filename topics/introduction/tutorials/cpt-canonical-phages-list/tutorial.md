@@ -40,7 +40,7 @@ Most trusted record: [RefSeq NC_005833](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 {: .question}
 
 > ### {% icon comment %} Note that...
-> Genome present in the CPT Apollo instance. Access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
+> Genome present in the CPT Apollo instance. Access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy) Additionally, since the T1 genome is deposited backwards, we refer to T1-like phage TLS for re-opening and orientation [RefSeq NC_009540.1](https://www.ncbi.nlm.nih.gov/nuccore/NC_009540.1).
 {: .comment}
 
 ### Phage T3
