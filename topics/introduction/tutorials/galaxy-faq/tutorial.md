@@ -90,7 +90,7 @@ tutorial_name: galaxy-faq
 >    >
 >    > Error 3 (related to using host genome in the optional input):
 >    >
->    > ![](../../images/galaxy-faq-screenshots/15_phageterm_error_3.png)
+>    > ![](../../images/galaxy-faq-screenshots/15_phagerterm_error_3.png)
 >    >
 >    > **Possible solutions**:
 >    > 1. Re-run [PhageTerm](https://cpt.tamu.edu/galaxy/root?tool_id=PhageTerm) in Galaxy, omitting an input for the optional parameters, including the corresponding paired-end reads and the host genome.

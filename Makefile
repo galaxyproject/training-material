@@ -4,7 +4,7 @@ CHROME=google-chrome-stable
 TUTORIALS=$(shell find _site/training-material -name 'tutorial.html' | sed 's/_site\/training-material\///')
 SLIDES=$(shell find _site/training-material -name 'slides.html' | sed 's/_site\/training-material\///')
 SLIDES+=$(shell find _site/training-material/*/*/slides/* | sed 's/_site\/training-material\///')
-SITE_URL=http://localhost:4000/training-material-dev
+SITE_URL=http://localhost:4000/training-material
 PDF_DIR=_pdf
 REPO=$(shell echo "$${ORIGIN_REPO:-galaxyproject/training-material}")
 BRANCH=$(shell echo "$${ORIGIN_BRANCH:-master}")
@@ -46,15 +46,15 @@ install: ## install dependencies
 .PHONY: install
 
 serve: ## run a local server}
-	${JEKYLL} serve -d _site/training-material-dev
+	${JEKYLL} serve -d _site/training-material
 .PHONY: serve
 
 detached-serve: clean ## run a local server in detached mode
-	${JEKYLL} serve --detach -d _site/training-material-dev
+	${JEKYLL} serve --detach -d _site/training-material
 .PHONY: detached-serve
 
 build: clean ## build files but do not run a server
-	${JEKYLL} build -d _site/training-material-dev
+	${JEKYLL} build -d _site/training-material
 .PHONY: build
 
 check-html: build ## validate HTML

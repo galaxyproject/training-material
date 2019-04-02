@@ -40,7 +40,7 @@ Most trusted record: [RefSeq NC_005833](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 {: .question}
 
 > ### {% icon comment %} Note that...
-> Genome present in the CPT Apollo instance. Access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
+> Genome present in the CPT Apollo instance. Access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy) Additionally, since the T1 genome is deposited backwards, we refer to T1-like phage TLS for re-opening and orientation [RefSeq NC_009540.1](https://www.ncbi.nlm.nih.gov/nuccore/NC_009540.1).
 {: .comment}
 
 ### Phage T3
@@ -79,7 +79,7 @@ Most trusted record: [RefSeq NC_005859](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 > ### {% icon question %} Basic Stats
 >    > ### {% icon solution %}
 >    > * Host: *E. coli*
->    > * 121,750 base pairs in genome
+>    > * 121,750 base pairs in genome (the RefSeq sequence comes from the Russian version [NCBI AY543070.1]()https://www.ncbi.nlm.nih.gov/nuccore/ay543070.1
 >    > * Siphophage
 >    > * [T5 ViralZone page](https://viralzone.expasy.org/511)
 > {: .solution}
@@ -87,6 +87,7 @@ Most trusted record: [RefSeq NC_005859](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 
 > ### {% icon comment %} Note that...
 > Genome present in the CPT Apollo instance. Access to the record can be requested after making an account on [CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub) or [CPT Galaxy for TAMU.](https://cpt.tamu.edu/galaxy)
+Two other annotated T5 genomes that have some good calls in other parts of the genome are the Hangzhou, China version ([NCBI AY587007.1](https://www.ncbi.nlm.nih.gov/nuccore/ay587007.1)) and the Paris-Orsay version ([NCBI AY692264.1](https://www.ncbi.nlm.nih.gov/nuccore/ay692264.1)).
 {: .comment}
 
 References: 
