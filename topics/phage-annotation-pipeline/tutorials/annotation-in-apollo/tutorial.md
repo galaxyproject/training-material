@@ -43,7 +43,7 @@ Generally, the annotation process is a synthesis between the understanding of ph
 > * Comments -> *Apply any free-text comments here.* (Could be something like **the e-value(s)** between the annotated gene and homologs or notes to one’s self.)
 
 > ### {% icon tip %} Note that…
-> Calling genes is [covered in another tutorial.]({{ site.baseurl }}//topics/genome-annotation/tutorials/structural-annotation-workflow/tutorial.html)
+> Calling genes is [covered in another tutorial.]({{ site.baseurl }}//topics/phage-annotation-pipeline/tutorials/structural-annotation-workflow/tutorial.html)
 {: .tip}
 
 To annotate a gene that has been called, right click on the gene in the pale yellow  User-Created Annotations track, and select “Edit information (alt-click).”
