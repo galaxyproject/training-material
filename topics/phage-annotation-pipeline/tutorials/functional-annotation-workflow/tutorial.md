@@ -6,7 +6,7 @@ tutorial_name: functional-annotation-workflow
 
 # Functional Annotation Workflow
 
-This tutorial is used to run analyses for gene function prediction after the genome [structural annotation]({{ site.baseurl }}//topics/genome-annotation/tutorials/structural-annotation-workflow/tutorial.html) has been completed.
+This tutorial is used to run analyses for gene function prediction after the genome [structural annotation]({{ site.baseurl }}//topics/phage-annotation-pipeline/tutorials/structural-annotation-workflow/tutorial.html) has been completed.
 
 > ### Agenda
 >
