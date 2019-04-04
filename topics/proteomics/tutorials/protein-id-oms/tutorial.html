@@ -115,11 +115,11 @@
                                         
                                     
                                         
+                                    
+                                        
                                         <a class="dropdown-item" href="https://usegalaxy.eu" title="Galaxy Europe">
                                             Galaxy Europe
                                         </a>
-                                        
-                                    
                                         
                                     
                                         
@@ -359,6 +359,20 @@
         "name": "Galaxy Training Network",
         "url": "https://galaxyproject.org/teach/gtn/"
       }
+    },
+    {
+      "@type": "Course",
+      "url": "https://galaxyproject.github.io//training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html",
+      "name": "Peptide and Protein Quantification via Stable Isotope Labelling (SIL)",
+      "description": "Hands-on for 'Peptide and Protein Quantification via Stable Isotope Labelling (SIL)' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
     }
   ],
   "hasPart": [
@@ -452,6 +466,55 @@
     </li>
 
             
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/proteomics">Proteomics</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Peptide and Protein Quantification via Stable Isotope Labelling (SIL):
+                            
+                            
+                                
+                                     <a href="/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
             </ul>
             
 
@@ -521,33 +584,89 @@ Due to licensing reasons, MSConvert runs only on windows systems and will not wo
 <p>Depending on your machine settings, raw data will be generated either in profile mode or centroid mode. For most peptide search engines, the MS2 data have to be converted to centroid mode, a process called “peak picking” or “centroiding”.
 Machine vendors offer algorithms to extract peaks from profile raw data. Those are integrated in <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and can be run in parallel to the mzML conversion.
 However, the OpenMS tool <strong><em>PeakPickerHiRes</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is reported to generate slightly better results (<a href="https://www.ncbi.nlm.nih.gov/pubmed/17094243">Lange et al., 2006, Pac Symp Biocomput</a>) and is therefore recommended for quantitative studies (<a href="https://www.ncbi.nlm.nih.gov/pubmed/19953549">Vaudel et al., 2010, Proteomics</a>).
-If your data were generated on a low resolution mass spectrometer, use <strong><em>PeakPickerWavelet</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> instead.</p>
+If your data were generated on a low resolution mass spectrometer, use <strong>PeakPickerWavelet</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> instead.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-file-conversion-and-peak-picking"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-On: File Conversion and Peak Picking</h3>
 
-  <p>We provide the <a href="https://zenodo.org/record/796184">input data</a> in the original <code class="highlighter-rouge">raw</code> format and also already converted to <code class="highlighter-rouge">mzML</code>. If <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> does not run on your Galaxy instance, please download the preconverted <code class="highlighter-rouge">mzML</code> as an input.</p>
+  <p>We provide the <a href="https://zenodo.org/record/796184">input data</a> in the original <code class="highlighter-rouge">raw</code> format and also already converted to <code class="highlighter-rouge">mzML</code>. If <strong>msconvert</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> does not run on your Galaxy instance, please download the preconverted <code class="highlighter-rouge">mzML</code> as an input and continue with step 5 of the following hands-on training.</p>
 
   <ol>
     <li>Create a new history for this Peptide and Protein ID exercise.</li>
-    <li>Load the example dataset into your history from Zenodo: <a href="https://zenodo.org/record/892005/files/qExactive01819.raw">raw</a> <a href="https://zenodo.org/record/892005/files/qExactive01819_profile.mzml">mzML</a></li>
-    <li>Rename the dataset to something meaningful.</li>
-    <li>(<em>only for raw files</em>) Run <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the test data to convert to the <code class="highlighter-rouge">mzML</code> format.</li>
-    <li>Run <strong><em>PeakPickerHiRes</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the resulting file. Click <code class="highlighter-rouge">+ Insert param.algorithm_ms_levels</code> and change the entry to “2”. Thus, peak picking will only be performed on MS2 level.</li>
+    <li>
+      <p>Load one of the example datasets into your history from Zenodo</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/892005/files/qExactive01819.raw
+https://zenodo.org/record/892005/files/qExactive01819_profile.mzml
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Rename the dataset to something meaningful</p>
+    </li>
+    <li>Run <strong>msconvert</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the training <code class="highlighter-rouge">raw</code> file to convert to the <code class="highlighter-rouge">mzML</code> format
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input unrefined MS data”</em>: imported <code class="highlighter-rouge">raw</code> file</li>
+        <li><em>“Do you agree to the vendor licenses”</em>: set to <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Output Type”</em>: set to <code class="highlighter-rouge">mzML</code></li>
+      </ul>
+    </li>
+    <li>Run <strong>PeakPickerHiRes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the resulting file
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *“input profile data file”: output of <strong>msconvert</strong> or <code class="highlighter-rouge">mzML</code> file</li>
+        <li>In <em>“param_algorithm_ms_levels”</em>
+          <ul>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert param_algorithm_ms_levels”</em></li>
+            <li>In <em>“1: param_algorithm_ms_levels”</em>
+              <ul>
+                <li>
+                  <p><em>“List of MS levels for which the peak picking is applied”</em>: <code class="highlighter-rouge">2</code></p>
+
+                  <p>Peak picking will only be performed on MS2 level.</p>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
   </ol>
 
   <blockquote class="comment">
     <h3 id="comment-comment-local-use-of-msconvert"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Local Use of MSConvert</h3>
-    <p>The vendor libraries used by MSConvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps <a href="https://compomics.com/bioinformatics-for-proteomics/identification/">here</a> (“Peak List Generation”). Afterwards, upload the resulting mzML file to your Galaxy history.</p>
+    <p>The vendor libraries used by MSConvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If <strong>msconvert</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps <a href="https://compomics.com/bioinformatics-for-proteomics/identification/">here</a> (“Peak List Generation”). Afterwards, upload the resulting mzML file to your Galaxy history.</p>
   </blockquote>
 
-  <blockquote class="comment">
-    <h3 id="comment-comment-ms2-peak-picking-during-data-acquisition"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: MS2 peak picking during data acquisition</h3>
-    <p>MS2 peaks are often acquired in centroided mode in first place. The profile data are converted to centroided mode already during data acquisition, resulting in MS2-centroided <code class="highlighter-rouge">raw</code> files. If your MS2 data are already centroided, simply omit the peak picking step.</p>
-  </blockquote>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-comment-ms2-peak-picking-during-data-acquisition"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: MS2 peak picking during data acquisition</h3>
+  <p>MS2 peaks are often acquired in centroided mode in first place. The profile data are converted to centroided mode already during data acquisition, resulting in MS2-centroided <code class="highlighter-rouge">raw</code> files. If your MS2 data are already centroided, simply omit the peak picking step.</p>
 </blockquote>
 
 <h1 id="peptide-identification">Peptide Identification</h1>
+
 <p>MS/MS experiments identify peptides by isolating them and subsequently colliding them with a gas for fragmentation. This method generates a spectrum of peptide fragment masses for each isolated peptide - an MS2 spectrum.
 To find out the peptide sequences, the MS2 spectrum is compared to a theoretical spectrum generated from a protein database. This step is called peptide-to-spectrum (also: spectrum-to-sequence) matching. Accordingly, a peptide that is successfully matched to a sequence is termed PSM (Peptide-Spectrum-Match). There can be multiple PSMs per peptide, if the peptide was fragmented several times.</p>
 
@@ -557,80 +676,134 @@ To find out the peptide sequences, the MS2 spectrum is compared to a theoretical
   <h3 id="hands_on-hands-on-peptide-identification"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-On: Peptide Identification</h3>
 
   <ol>
-    <li>Copy the prepared protein database from the tutorial <a href="../database-handling/tutorial.html">Database Handling</a> into your current history by using the multiple history view or upload the ready-made database from this <a href="https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_and_Mycoplasma_added%29.fasta">link</a>.</li>
-    <li>Run the tool <strong><em>XTandemAdapter</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
-      <ul>
-        <li>the MS2-centroided mzML as <strong>Input file containing MS2 spectra</strong> and</li>
-        <li>the FASTA protein database as <strong>FASTA file</strong>.</li>
-        <li>Click <code class="highlighter-rouge">+ Insert param_fixed_modifications</code> and choose <code class="highlighter-rouge">Carbamidomethyl (C)</code>.</li>
-        <li>Click <code class="highlighter-rouge">+ Insert param_variable_modifications</code> and choose <code class="highlighter-rouge">Oxidation (M)</code>.</li>
-      </ul>
-    </li>
-    <li>Run the tool <strong><em>FileInfo</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the XTandem output.</li>
+    <li>Copy the prepared protein database (Human database including cRAP contaminants and decoys) from the tutorial <a href="/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Database Handling</a> into your current history by using the multiple history view</li>
   </ol>
 
   <blockquote class="comment">
-    <h3 id="comment-comment-advanced-search-engine-parameters"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Advanced Search Engine Parameters</h3>
-    <p>The OpenMS adapters do not always allow to set every option of the underlying search engine. If an option is missing, you may also run the search engine locally or by using a Galaxy wrapper. Afterwards, convert the search engine output to the OpenMS format <code class="highlighter-rouge">idXML</code> by running <strong><em>IDFileConverter</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+    <h3 id="comment-you-did-not-run-the-database-handling-first"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> You did not run the Database Handling first?</h3>
+    <p>You can upload the ready-made database from Zenodo</p>
 
-    <p>The search engine X!Tandem features some more advanced options than the ones reflected in the <strong><em>XTandemAdapter</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. If you need those advanced options, the <strong><em>XTandemAdapter</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> allows for the optional input of a classic X!Tandem parameter file. Upload your parameter file to the history and use it as an input in the field <code class="highlighter-rouge">Default X!Tandem configuration file</code>. You may also set the option <code class="highlighter-rouge">-ignore_adapter_param</code> to <code class="highlighter-rouge">Yes</code> to overwrite all options set by the GUI.</p>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_added%29.fasta
+</code></pre></div>    </div>
   </blockquote>
+
+  <ol>
+    <li>Run the tool <strong>XTandemAdapter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file containing MS2 spectra”</em>: MS2-centroided mzML file</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA file”</em>: FASTA protein database</li>
+        <li><em>“Fragment mass error”</em>: <code class="highlighter-rouge">10</code></li>
+        <li><em>“Fragment monoisotopic mass error units”</em>: <code class="highlighter-rouge">ppm</code></li>
+      </ul>
+      <ul>
+        <li>In <em>“param_fixed_modifications”</em>
+          <ul>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert param_fixed_modifications”</em></li>
+            <li>In <em>“1: param_fixed_modifications”</em>
+              <ul>
+                <li><em>“Fixed modifications”</em>: <code class="highlighter-rouge">Carbamidomethyl (C)</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“param_variable_modifications”</em>
+          <ul>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert param_variable_modifications”</em></li>
+            <li>In <em>“1: param_variable_modifications”</em>
+              <ul>
+                <li><em>“Variable modifications”</em>: <code class="highlighter-rouge">Oxidation (M)</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Run the tool <strong>FileInfo</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: <strong>XTandem</strong> output</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-settings-for-labelled-data"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Settings for labelled data</h3>
+  <p>Several common quantitation methods are based on labels e.g. SILAC, TMT, iTRAQ, Dimethyl. Those labels must be specified in the search engine as a (variable) modification. See also <a href="/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html">Peptide and Protein Quantification via Stable Isotope Labelling</a>.</p>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-comment-advanced-search-engine-parameters"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Advanced Search Engine Parameters</h3>
+  <p>The OpenMS adapters do not always allow to set every option of the underlying search engine. If an option is missing, you may also run the search engine locally or by using a Galaxy wrapper. Afterwards, convert the search engine output to the OpenMS format <code class="highlighter-rouge">idXML</code> by running <strong>IDFileConverter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+
+  <p>The search engine X!Tandem features some more advanced options than the ones reflected in the <strong>XTandemAdapter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. If you need those advanced options, the <strong>XTandemAdapter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> allows for the optional input of a classic X!Tandem parameter file. Upload your parameter file to the history and use it as an input in the field <code class="highlighter-rouge">Default X!Tandem configuration file</code>. You may also set the option <em>“ignore_adapter_param”</em> to <code class="highlighter-rouge">Yes</code> to overwrite all options set by the GUI.</p>
 </blockquote>
 
 <h1 id="peptide-fdr-filtering">Peptide FDR filtering</h1>
+
 <p>The next step of peptide identification is to decide which PSMs will be used for protein inference. Measured MS2 spectra never perfectly fit the theoretical spectra. Therefore, peptide search engines calculate a score which indicates how well the measured MS2 spectrum was fitting the theoretical spectrum. How do we decide which PSMs are likely true and which are false?</p>
 
 <p>In proteomics, this decision is typically done by calculating false discovery rates (FDRs). Remember that the database we were using for peptide-to-spectrum matching consisted not only of true proteins, but also the same number of “fake entries”, the so-called decoys. Those decoys can now be used to estimate the number of false identifications in the list of PSMs.
 The calculation is based on a simple assumption: for every decoy peptide identified with a given score, we expect one false positive with at least the same score.
 The false discovery rate is therefore defined as the number of false discoveries (decoy hits) divided by the number of false and correct discoveries (both target and decoy hits) at a given score threshold.</p>
 
-<p>To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool <strong><em>PeptideIndexer</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. Additionally, we will calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm used by OpenMS. We will then filter for 1 % FDR and set the score back to PEP.</p>
+<p>We will calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm used by OpenMS. To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool <strong>PeptideIndexer</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. This tool allows the annotation of protein names and calculates the protein coverage based on the identified peptides. We will then filter PSMs for 1 % FDR and set the score back to PEP.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-peptide-fdr-filtering"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-On: Peptide FDR filtering</h3>
 
   <ol>
-    <li>Run <strong><em>IDPosteriorErrorProbability</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+    <li>Run <strong>IDPosteriorErrorProbability</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
-        <li><code class="highlighter-rouge">-prob_correct</code> set to <code class="highlighter-rouge">Yes</code>.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: <strong>XTandemAdapter</strong> output</li>
+        <li><em>“If set scores will be calculated as ‘1 - ErrorProbabilities’ and can be interpreted as probabilities for correct identifications”</em>: <code class="highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li>Run <strong><em>PeptideIndexer</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+    <li>Run <strong>PeptideIndexer</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
-        <li>the FASTA protein database as <strong>Input sequence database in FASTA format</strong>, and</li>
-        <li><strong>Specificity of the enzyme</strong> set to <code class="highlighter-rouge">none</code>.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input idXML file containing the identifications”</em>: output of <strong>IDPosteriorErrorProbability</strong></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input sequence database in FASTA format”</em>: FASTA protein database</li>
+        <li><em>“If set, the protein sequences are stored as well”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“If set, the protein description is stored as well”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Specificity of the enzyme”</em>: <code class="highlighter-rouge">none</code></li>
       </ul>
     </li>
-    <li>Run <strong><em>FalseDiscoveryRate</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+    <li>Run <strong>FalseDiscoveryRate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
-        <li><strong>Perform FDR calculation on protein level</strong> set to <code class="highlighter-rouge">false</code>,</li>
-        <li><strong>Filter PSMs based on q-value</strong> set to <code class="highlighter-rouge">0.01</code>, and</li>
-        <li><code class="highlighter-rouge">-add_decoy_peptides</code> set to <code class="highlighter-rouge">Yes</code>.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Identifications from searching a target-decoy database”</em>: output of <strong>PeptideIndexer</strong></li>
+        <li><em>“Perform FDR calculation on protein level”</em>: <code class="highlighter-rouge">false</code></li>
+        <li><em>“Filter PSMs based on q-value”</em>: <code class="highlighter-rouge">0.01</code></li>
+        <li><em>“If ‘true’ decoy peptides will be written to output file, too”</em>: <code class="highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li>Run <strong><em>IDScoreSwitcher</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+    <li>Run <strong>IDScoreSwitcher</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
-        <li><strong>Name of the meta value to use as the new score</strong> set to “Posterior Probability_score”, and</li>
-        <li><strong>Orientation of the new score</strong> set to <code class="highlighter-rouge">higher_better</code>.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: output of <strong>FalseDiscoveryRate</strong></li>
+        <li><em>“Name of the meta value to use as the new score”</em>: <code class="highlighter-rouge">Posterior Probability_score</code></li>
+        <li><em>“Orientation of the new score”</em>: <code class="highlighter-rouge">higher_better</code></li>
       </ul>
     </li>
-    <li>Run <strong><em>FileInfo</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to get basic information about the identified peptides.</li>
+    <li>Run <strong>FileInfo</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to get basic information about the identified peptides
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: <strong>IDScoreSwitcher</strong> output</li>
+      </ul>
+    </li>
   </ol>
 
-  <blockquote class="question">
-    <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions:</h3>
-    <ol>
-      <li>How many peptides were identified?</li>
-      <li>How many peptides with oxidized methionine were identified?</li>
-    </ol>
+</blockquote>
 
-    <blockquote class="solution">
-      <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-      <ol>
-        <li>You should have identified 2,616 unique stripped peptides.</li>
-        <li>503 peptides contain an oxidized methionine (MeO).</li>
-      </ol>
-    </blockquote>
+<blockquote class="question">
+  <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions:</h3>
+  <ol>
+    <li>How many peptides were identified?</li>
+    <li>How many peptides with oxidized methionine were identified?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>You should have identified 3366 non-redundant peptide hits.</li>
+      <li>798 peptides contain an oxidized methionine.</li>
+    </ol>
   </blockquote>
 </blockquote>
 
@@ -642,19 +815,49 @@ The OpenMS suite implemented the <a href="https://www.ncbi.nlm.nih.gov/pubmed/20
   <h3 id="hands_on-hands-on-protein-inference"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-On: Protein inference</h3>
 
   <ol>
-    <li>Run <strong><em>FidoAdapter</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. Set <code class="highlighter-rouge">-greedy_group_resolution</code> = <code class="highlighter-rouge">Yes</code>.</li>
-    <li>Run <strong><em>FalseDiscoveryRate</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. Set the option <strong><code class="highlighter-rouge">Perform FDR calculation on PSM level</code></strong> to <code class="highlighter-rouge">false</code>.</li>
-    <li>Run <strong><em>IDFilter</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. Set<code class="highlighter-rouge">-prot</code> to <code class="highlighter-rouge">0.01</code>.</li>
-    <li>Run <strong><em>FileInfo</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to get basic information about the identified proteins.</li>
+    <li>Run <strong>FidoAdapter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input: identification results”</em>: output of <strong>IDScoreSwitcher</strong></li>
+        <li><em>“Post-process Fido output with greedy resolution of shared peptides based on the protein probabilities”</em>: <code class="highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>Run <strong>FalseDiscoveryRate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Identifications from searching a target-decoy database”</em>: output of <strong>FidoAdapter</strong></li>
+        <li><em>“Perform FDR calculation on PSM level”</em>: <code class="highlighter-rouge">false</code></li>
+      </ul>
+    </li>
+    <li>Run <strong>IDFilter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: output of <strong>FalseDiscoveryRate</strong></li>
+        <li><em>“The score which should be reached by a protein hit to be kept”</em>: <code class="highlighter-rouge">0.01</code></li>
+      </ul>
+    </li>
+    <li>Run <strong>FileInfo</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to get basic information about the identified proteins
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: output of <strong>IDFilter</strong></li>
+      </ul>
+    </li>
   </ol>
+</blockquote>
 
-  <blockquote class="comment">
-    <h3 id="comment-comment-greedy-group-resolution"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: “Greedy” Group Resolution</h3>
-    <p>Protein groups are reported, when an identified peptide maps to multiple proteins in the used database <a href="https://www.ncbi.nlm.nih.gov/pubmed/16009968">Nesvizhskii and Aebersold (2005)</a>. Some peptides may map to different protein groups and can therefore not be used for protein quantitation. The option <code class="highlighter-rouge">-greedy_group_resolution</code> solves this problem by assigning peptides only to the one most probable protein group, thus enabling to quantify proteins based not only on unique, but also on shared peptides. This usually leads to a much higher number of quantified proteins. However it will introduce noise in the FCs when a peptide was indeed shared by different proteins and the quantity of this peptide was a weighted sum of contributions. The greedy group resolution is similar to Occam’s razor.</p>
+<blockquote class="comment">
+  <h3 id="comment-comment-greedy-group-resolution"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: “Greedy” Group Resolution</h3>
+  <p>Protein groups are reported, when an identified peptide maps to multiple proteins in the used database <a href="https://www.ncbi.nlm.nih.gov/pubmed/16009968">Nesvizhskii and Aebersold (2005)</a>. Some peptides may map to different protein groups and can therefore not be used for protein quantitation. The option <code class="highlighter-rouge">-greedy_group_resolution</code> solves this problem by assigning peptides only to the one most probable protein group, thus enabling to quantify proteins based not only on unique, but also on shared peptides. This usually leads to a much higher number of quantified proteins. However it will introduce noise in the FCs when a peptide was indeed shared by different proteins and the quantity of this peptide was a weighted sum of contributions. The greedy group resolution is similar to Occam’s razor.</p>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions:</h3>
+  <p>How many proteins were finally identified?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>You should have identified 1255 proteins.</p>
   </blockquote>
 </blockquote>
 
 <h1 id="analysis-of-contaminants">Analysis of Contaminants</h1>
+
 <p>The FASTA database used for the peptide to spectrum matching contained some entries that were not expected to stem from the HeLa cell lysate, but are common contaminations in LC-MS/MS samples. The main reason to add those is to avoid false assignment of contaminant spectra to other proteins.
 It also enables you to check for contaminations in your samples.</p>
 
@@ -664,29 +867,44 @@ It also enables you to check for contaminations in your samples.</p>
   <h3 id="hands_on-hands-on-analysis-of-contaminants"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-On: Analysis of Contaminants</h3>
 
   <ol>
-    <li>Run <strong><em>TextExporter</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to convert the idXML output to a human-readable tabular file.</li>
-    <li>Run <strong><em>Select lines that match an expression</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the TextExporter output to select all lines <strong>Matching</strong> the pattern “CONTAMINANT”.</li>
-    <li>Remove all non human proteins (e.g. bovine) from your TextExporter list by running <strong><em>Select lines that match an expression</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> only those lines <strong>Matching</strong> the pattern “HUMAN”.</li>
+    <li>Run <strong>TextExporter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to convert the idXML output to a human-readable tabular file.
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <strong>IDFilter</strong> output</li>
+      </ul>
+    </li>
+    <li>Run <strong>Select lines that match an expression</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <strong>TextExporter</strong></li>
+        <li><em>“that”</em>: <code class="highlighter-rouge">Matching</code></li>
+        <li><em>“the pattern”</em>: <code class="highlighter-rouge">CONTAMINANT</code></li>
+      </ul>
+    </li>
+    <li>Run <strong>Select lines that match an expression</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to remove all non human proteins (e.g. bovine)
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <strong>TextExporter</strong></li>
+        <li><em>“that”</em>: <code class="highlighter-rouge">Matching</code></li>
+        <li><em>“the pattern”</em>: <code class="highlighter-rouge">HUMAN</code></li>
+      </ul>
+    </li>
   </ol>
 
-  <blockquote class="question">
-    <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-    <ol>
-      <li>Which contaminants did you identify? Where do these contaminations likely come from?</li>
-      <li>What other sources of contaminants exist?</li>
-      <li>How many mycoplasma proteins did you identify? Does this mean that the analyzed HeLa cells were infected with mycoplasma?</li>
-      <li>How many false positives do we expect in our list?</li>
-    </ol>
+</blockquote>
 
-    <blockquote class="solution">
-      <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-      <ol>
-        <li>TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts. Also, five human proteins are listed, these are commonly introduced during sample preparation. As we were analyzing a human sample, it is not neccessary to remove these proteins, as they may as well originate from the HeLa cells.</li>
-        <li>Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.</li>
-        <li>One protein stemming from <em>Acholeplasma laidlawii</em> (ACHLI) was identified. If you again filter the protein list for “ACHLI”, you will see that it was identified by a single peptide. Thus, it is likely a false positive and does not indicate contamination.</li>
-        <li>As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list.</li>
-      </ol>
-    </blockquote>
+<blockquote class="question">
+  <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <ol>
+    <li>Which contaminants did you identify? Where do these contaminations likely come from?</li>
+    <li>What other sources of contaminants exist?</li>
+    <li>How many false positives do we expect in our list?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>TRY1_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts. Also, eight human proteins are listed, these are commonly introduced during sample preparation. As we were analyzing a human sample, it is not neccessary to remove these proteins, as they may as well originate from the HeLa cells.</li>
+      <li>Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.</li>
+      <li>As we were allowing for a false discovery rate of 1 %, we would expect 13 (1255/0.01) false positive proteins in our list.</li>
+    </ol>
   </blockquote>
 </blockquote>
 
@@ -701,76 +919,126 @@ By comparing results of multiple search engines, you may improve the <em>sensiti
   <h3 id="hands_on-hands-on-multiple-search-engines"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-On: Multiple search engines</h3>
 
   <ol>
-    <li>Run <strong><em>MSGFPlusAdapter</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+    <li>Run <strong>MSGFPlusAdapter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
-        <li>the MS2-centroided mzML as <strong>Input file</strong> and</li>
-        <li>the FASTA protein database as <strong>Protein sequence database</strong>.</li>
-        <li><strong>Precursor monoisotopic mass tolerance</strong> set to <code class="highlighter-rouge">10.0</code>.</li>
-        <li><strong>Instrument that generated the data</strong> set to <code class="highlighter-rouge">Q_Exactive</code>.</li>
-        <li>Click <code class="highlighter-rouge">+ Insert param_fixed_modifications</code> and choose <code class="highlighter-rouge">Carbamidomethyl (C)</code>.</li>
-        <li>Click <code class="highlighter-rouge">+ Insert param_variable_modifications</code> and choose <code class="highlighter-rouge">Oxidation (M)</code>.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: the MS2-centroided mzML</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein sequence database</em>”: the FASTA protein database</li>
+        <li><em>“Precursor monoisotopic mass tolerance”</em>: <code class="highlighter-rouge">10.0</code></li>
+        <li><em>“Instrument that generated the data”</em>: <code class="highlighter-rouge">Q_Exactive</code></li>
+        <li>In <em>“param_fixed_modifications”</em>
+          <ul>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert param_fixed_modifications”</em></li>
+            <li>In <em>“1: param_fixed_modifications”</em>
+              <ul>
+                <li><em>“Fixed modifications”</em>: <code class="highlighter-rouge">Carbamidomethyl (C)</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“param_variable_modifications”</em>
+          <ul>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert param_variable_modifications”</em></li>
+            <li>In <em>“1: param_variable_modifications”</em>
+              <ul>
+                <li><em>“Variable modifications”</em>: <code class="highlighter-rouge">Oxidation (M)</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
       </ul>
     </li>
-    <li>Run the tool <strong><em>FileInfo</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the MSGFPlusAdapter output.</li>
-    <li>Run <strong><em>IDPosteriorErrorProbability</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+    <li>Run <strong>FileInfo</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to get basic information about the identified proteins
       <ul>
-        <li><code class="highlighter-rouge">-prob_correct</code> set to <code class="highlighter-rouge">No</code>.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: <strong>MSGFPlusAdapter</strong> output</li>
       </ul>
     </li>
-    <li>Run <strong><em>IDMerger</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with two <strong>Input files […]</strong>:
+    <li>Run <strong>IDPosteriorErrorProbability</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
-        <li>the output of <strong>IDScoreSwitcher</strong> based on <strong>XTandemAdapter</strong></li>
-        <li>the output of <strong>IDScoreSwitcher</strong> based on <strong>MSGFPlusAdapter</strong></li>
-        <li><strong>Reduce collections</strong> set to <code class="highlighter-rouge">reduce collections by aggregating single files of multiple collections</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: <strong>MSGFPlusAdapter</strong> output</li>
+        <li><em>“If set scores will be calculated as ‘1 - ErrorProbabilities’ and can be interpreted as probabilities for correct identifications”</em>: <code class="highlighter-rouge">No</code></li>
       </ul>
     </li>
-    <li>Run <strong><em>ConsensusID</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
-    <li>Run <strong><em>PeptideIndexer</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+    <li>Run <strong>IDMerger</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
       <ul>
-        <li>the FASTA protein database as <strong>Input sequence database in FASTA format</strong>, and</li>
-        <li><strong>Specificity of the enzyme</strong> set to <code class="highlighter-rouge">none</code>.</li>
+        <li><em>“Reduce collectons”</em>: <code class="highlighter-rouge">reduce collections by aggregating single files of multiple collections</code>
+          <ul>
+            <li>In <em>“inputs”</em>
+              <ul>
+                <li>In <em>“1: Repeat”</em>
+                  <ul>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input files separated by blanks”</em>: output of <strong>IDScoreSwitcher</strong> based on <strong>XTandemAdapter</strong></li>
+                  </ul>
+                </li>
+                <li>In <em>“2: Repeat”</em>
+                  <ul>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input files separated by blanks”</em>: output of <strong>IDScoreSwitcher</strong> based on <strong>MSGFPlusAdapter</strong></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
       </ul>
     </li>
-    <li>Run <strong><em>FalseDiscoveryRate</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+    <li>Run <strong>ConsensusID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
       <ul>
-        <li><strong>Perform FDR calculation on protein level</strong> set to <code class="highlighter-rouge">false</code>,</li>
-        <li><strong>Filter PSMs based on q-value</strong> set to <code class="highlighter-rouge">0.01</code>, and</li>
-        <li><code class="highlighter-rouge">-add_decoy_peptides</code> set to <code class="highlighter-rouge">Yes</code>.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: <strong>IDMerger</strong> output</li>
       </ul>
     </li>
-    <li>Run <strong><em>IDScoreSwitcher</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+    <li>Run <strong>PeptideIndexer</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
-        <li><strong>Name of the meta value to use as the new score</strong> set to “Posterior Error Probability_score”,</li>
-        <li>**Orientation of the new score<code class="highlighter-rouge">** set to </code>lower_better`, and</li>
-        <li><strong>Name to use as the type of the new score</strong> set to “Posterior Error Probability”.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input idXML file containing the identifications”</em>: <strong>ConsensusID</strong> output</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input sequence database in FASTA format”</em>: FASTA protein database</li>
+        <li><em>“Specificity of the enzyme”</em>: <code class="highlighter-rouge">none</code></li>
       </ul>
     </li>
-    <li>Run <strong><em>FileInfo</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to get basic information about the identified peptides.</li>
+    <li>Run <strong>FalseDiscoveryRate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Identifications from searching a target-decoy database”</em>: output of <strong>PeptideIndexer</strong></li>
+        <li><em>“Perform FDR calculation on protein level”</em>: <code class="highlighter-rouge">false</code></li>
+        <li><em>“Filter PSMs based on q-value”</em>: <code class="highlighter-rouge">0.01</code></li>
+        <li><em>“If ‘true’ decoy peptides will be written to output file, too”</em>: <code class="highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>Run <strong>IDScoreSwitcher</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <strong>FalseDiscoveryRate</strong> output</li>
+        <li><em>“Name of the meta value to use as the new score”</em>: <code class="highlighter-rouge">Posterior Error Probability_score</code></li>
+        <li><em>“Orientation of the new score”</em>: <code class="highlighter-rouge">lower_better</code></li>
+        <li><em>“Name to use as the type of the new score”</em>: <code class="highlighter-rouge">Posterior Error Probability</code></li>
+      </ul>
+    </li>
+    <li>Run <strong>FileInfo</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to get basic information about the identified peptides
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: <strong>IDScoreSwitcher</strong> output</li>
+      </ul>
+    </li>
     <li>Proceed with the protein inference as described <a href="#protein-inference">above</a></li>
   </ol>
 
-  <blockquote class="question">
-    <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions:</h3>
-    <ol>
-      <li>How many PSMs could be matched with XTandem and MSGFPlus alone? How many peptides were identified?</li>
-      <li>How many PSMs could be matched after combining the results with ConsensusID? How many peptides were identified?</li>
-    </ol>
+</blockquote>
 
-    <blockquote class="solution">
-      <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-      <ol>
-        <li>After FDR-filtering, XTandem matched 3,552 PSMs (2,616 unique peptides) and MSGFPlus matched 4,292 PSMs (2,991 peptides).</li>
-        <li>Combining the results with ConsensusID leads to matching of 4,299 PSMs (3,041 unique peptides).</li>
-      </ol>
-    </blockquote>
+<blockquote class="question">
+  <h3 id="question-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions:</h3>
+  <ol>
+    <li>How many PSMs could be matched with XTandem and MSGFPlus alone? How many peptides were identified?</li>
+    <li>How many PSMs could be matched after combining the results with ConsensusID? How many peptides were identified?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>After FDR-filtering, XTandem matched 3,552 PSMs (2,616 unique peptides) and MSGFPlus matched 4,292 PSMs (2,991 peptides).</li>
+      <li>Combining the results with ConsensusID leads to matching of 4,299 PSMs (3,041 unique peptides).</li>
+    </ol>
   </blockquote>
 </blockquote>
 
 <h1 id="premade-workflow">Premade Workflow</h1>
 
-<p>A premade workflow for this tutorial can be found <a href="workflows/workflow.ga">here</a>.</p>
+<p>A premade workflow for this tutorial can be found <a href="/training-material/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga">here</a>.</p>
 
-<p>A premade workflow using the search engines XTandem and MSGF+ can be found <a href="workflows/workflow_two-search-engines.ga">here</a>.</p>
+<p>A premade workflow using the search engines XTandem and MSGF+ can be found <a href="/training-material/topics/proteomics/tutorials/protein-id-oms/workflows/workflow_two-search-engines.ga">here</a>.</p>
 
 <h1 id="further-reading">Further Reading</h1>
 
