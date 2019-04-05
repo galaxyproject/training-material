@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: RNA-Seq reads to counts
 zenodo_link: "https://figshare.com/s/f5d63d8c265a05618137"
-enable: "false"
 tags:
   - collections
   - mouse
