@@ -123,7 +123,13 @@ In this tutorial, we are using mariner transposon, that target TA sequences.
 ### Library complexity
 
 
-A large complexity means that there is multiple insertion in every potential locus. The higher density of insertion you have, the greater precision  you have in identifying limits of regions of interest. If the density of the library is too low, some genes might not be disrupted by chance and mistaken for essential. The advantage of a target specific transposon, like the mariner, in opposition of a Tn5-based transposon inserting randomly, it that the limited number of insertion sites makes it easier to build high complexity libraries.
+- Large complexity means multiple insertion in every potential locus.
+- The higher density of insertion you have, the greater precision  you have in identifying limits of regions of interest
+- If the density of the library is too low, some genes might not be disrupted by chance and mistaken for essential
+
+???
+
+The advantage of a target specific transposon, like the mariner, in opposition of a Tn5-based transposon inserting randomly, it that the limited number of insertion sites makes it easier to build high complexity libraries.
 
 
 
@@ -205,6 +211,38 @@ From [Chao et al.](http://www.doi.org/10.1038/nrmicro.2015.7)
 
 ---
 
+
+
+### TRANSIT Tool
+
+.left[
+- Tool for Essentiality Prediction
+- From TA sites read counts
+- Different analysis methods :
+    -   Gumbel : Gene Level Prediction
+    -   HMM : Region level prediction
+    -   Re-Sampling : Gene Level Prediction, Sample Comparison
+]
+
+From [DeJesus et al.](https://doi.org/10.1093/bioinformatics/btt043)
+
+???
+
+We are presenting only the Himar1 methods, other tn5 specific methods existing
+
+Gumbel
+The Gumbel can be used to determine which genes are essential in a single condition. It does a gene-by-gene analysis of the insertions at TA sites with each gene, makes a call based on the longest consecutive sequence of TA sites without insertion in the genes, calculates the probability of this using a Bayesian model.
+
+HMM
+The HMM method can be used to determine the essentiality of the entire genome, as opposed to gene-level analysis of the other methods. It is capable of identifying regions that have unusually high or unusually low read counts (i.e. growth advantage or growth defect regions), in addition to the more common categories of essential and non-essential.
+
+Re-sampling
+The re-sampling method is a comparative analysis the allows that can be used to determine conditional essentiality of genes. It is based on a permutation test, and is capable of determining read-counts that are significantly different across conditions.
+
+
+---
+
+
 # Workflow of Analysis of Tnseq Data
 
 ---
@@ -225,7 +263,7 @@ From [Chao et al.](http://www.doi.org/10.1038/nrmicro.2015.7)
     4. Merging overall coverage and TA sites to get the coverage of each TA sites
 3. Predicting Essential Genes with Transit
     1. Predict the essentiality of genes
-    2. Compare the essential genes between two conditions
+    2. Understand the output
 
 ---
 
@@ -423,7 +461,59 @@ Now that we have prepared the annotation file, we can use the count per TA site 
 
 ### 3. Predicting Essential Genes with Transit
 
-####     2. Compare the essential genes between two conditions
+####     2. Understand the output
+
+.left[
+
+- FDR Corrected thresholds: 0.992500, 0.055350
+- MH Acceptance-Rate:    38.48%
+- Total Iterations Performed:    20999
+- Sample Size:   20000
+- phi estimate:  0.481177
+- Time: 584.757580996
+
+
+
+
+Orf | Name | Desc | k | n | r | s | zbar | Call
+--- | --- | --- | --- | --- | --- | --- | --- | ---
+SAOUHSC_00002 | - | DNA polymerase III subunit  |  2 | 96 | 94 | 1102 | 1.000000 | E
+SAOUHSC_00008 | - | histidine ammonia- |  54 | 128 | 8 | 95 | 0.000000 | NE
+SAOUHSC_00028 | - | hypothetical protein | 8 | 18 | 4 | 24 | -1.000000 | S
+SAOUHSC_00227 | - | hypothetical protein | 21 | 162 | 24 | 267 | 0.970900 | U
+
+]
+
+???
+
+ORF	Gene ID.
+
+Name	Name of the gene.
+
+Description	Gene description.
+
+k	Number of Transposon Insertions Observed within the ORF.
+
+n	Total Number of TA dinucleotides within the ORF.
+
+r	Length of the Maximum Run of Non-Insertions observed.
+
+s	Span of nucleotides for the Maximum Run of Non-Insertions.
+
+zbar	Posterior Probability of Essentiality.
+
+Call	Essentiality call for the gene. Depends on FDR corrected thresholds. E=Essential U=Uncertain, NE=Non-Essential, S=too short
+
+
+Note: Technically, Bayesian models are used to calculate posterior probabilities, not p-values (which is a concept associated with the frequentist framework). However, we have implemented a method for computing the approximate false-discovery rate (FDR) that serves a similar purpose. This determines a threshold for significance on the posterior probabilities that is corrected for multiple tests. The actual thresholds used are reported in the headers of the output file (and are near 1 for essentials and near 0 for non-essentials). There can be many genes that score between the two thresholds (t1 < zbar < t2). This reflects intrinsic uncertainty associated with either low read counts, sparse insertion density, or small genes. If the insertion_density is too low (< ~30%), the method may not work as well, and might indicate an unusually large number of Uncertain or Essential genes.
 
 
 ---
+
+### Take Home
+
+- TnSeq use Tranposon insertion to identify Gene essential in different conditions
+- Based on insertion sites count. Whole genome coverage is not important.
+- Be aware of your library saturation: A saturation too low will give you a lot of false essential Genes
+- Do not Accept Mismatches in your alignements when working with very short reads
+- Be careful when you use different tools based on genomic positions, some tools start at position 1, or 0
