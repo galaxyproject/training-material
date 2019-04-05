@@ -417,7 +417,6 @@ In our case we are only interested in the locations of TA sites mapping on the g
 
 
 
-
 | Seqname |Source|Feature|Start|End|Score|Strand|Frame|Group|
 |:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|
 | NC_007795.1 |wordmatch|misc_feature|5|6|1.000|+|.|Sequence "NC_007795.1.1"; note "TA_site"|
@@ -539,7 +538,7 @@ We now have a read count for each nucleotides of the TA sites. The insertions co
 > Now that we have joined our files we want to create a new column with the addition of bth counts
 >
 > {% icon tool %} Select the **Compute an expression on every row** tool in the tool bar and run with the following parameters:
->   - Set *Add expression"* to `c2+3` to get the total count
+>   - Set *Add expression"* to `c2+c3` to get the total count
 >   - Set *"as a new column to"* to the collection `Join on ...` with the tags `reverse` and `forward`
 >   - Set *"Round result?"* to `yes`
 >   - **Click** on `Execute`
@@ -568,7 +567,7 @@ We now have a read count for each nucleotides of the TA sites. The insertions co
 ## Predict the essentiality of genes
 
 Now that we have the counts of insertions per TA site, we can use them to predict gene esssentiality with Transit. In order to do that, we need to create a an annotation file in the `prot_table` format, specifique to the Transit tool. You can create this file from a gff3 from GenBank. Upload the gff3 file for *Staphylococcus aureus* [here](https://zenodo.org/record/2579335/files/staph_aur.gff3?download=1).
-
+Once uploaded, verify that the format of your file is `gff3` and not `gff`. If that is not the case you can change the format by clicking on the pencil icon of the dataset.
 
 > ### {% icon hands_on %} Hands-on : Create annotation file in prot_table format
 >
@@ -587,8 +586,8 @@ Now that we have prepared the annotation file, we can use the count per TA site 
 > ### {% icon hands_on %} Hands-on : Predict gene essentiality with Transit
 >
 >  {% icon tool %} Select the **Gumbel** tool in the TRANSIT section of the tool bar and run with the following parameters:
->   - Set *File to cut"* to the collection `Sort...`
->   - Set *Input annotation* to the `prot_table` file generated at the previous step
+>   - Set *Input .wig files"* to the collection `Sort...`
+>   - Set *Input annotation* to the `Convert...` file generated at the previous step
 >   - Set *Smallest read-count to consider* to 2, to ignore single count insertions
 >   - Set *Ignore TAs occuring at given fraction of the N terminus.* to 0.1, to ignore 10% of the insertion at the N-terminus extremity of the gene
 >   - Set *Ignore TAs occuring at given fraction of the C terminus.* to 0.1, to ignore 10% of the insertion at the C-terminus extremity of the gene
@@ -597,7 +596,7 @@ Now that we have prepared the annotation file, we can use the count per TA site 
 >
 {: .hands_on}
 
-The output of Transit is a tabulated file containing the following collumns (you can find more information on [Transit manual page](https://transit.readthedocs.io/en/latest/transit_methods.html)):
+The output of Transit is a tabulated file containing the following columns (you can find more information on [Transit manual page](https://transit.readthedocs.io/en/latest/transit_methods.html)):
 -   Gene ID
 -   Name of the gene
 -   Gene description
@@ -623,12 +622,28 @@ We can obtain the list of genes predicted as essential by filtering on the essen
 
 Now let's compare the results between out two conditions :
 
+
+> ### {% icon hands_on %} Hands-on : Separate Files from the collection
+>  {% icon tool %} Select the **Extract Dataset from a list** tool and run with the following parameters:
+>   - Set *Input List"* to the `Filter on...`  result
+>   - Set *How should a dataset be selected?"* to `Select by index`
+>   - Set *Element index:"* to `0` to select the first dataset
+>   - **Click** on `Execute`
+>
+>  {% icon tool %} Select the **Extract Dataset from a list** tool and run with the following parameters:
+>   - Set *Input List"* to the `Filter on...`  result
+>   - Set *How should a dataset be selected?"* to `Select by index`
+>   - Set *Element index:"* to `1` to select the second dataset
+>   - **Click** on `Execute`
+{: .hands_on}
+
+
 > ### {% icon hands_on %} Hands-on : Get gene essential in both conditions
 >
 >  {% icon tool %} Select the **Join two files** tool and run with the following parameters:
->   - Set *1st file"* to `Control` Transit result
+>   - Set *1st file"* to `Control`
 >   - Set *Column to use from 1st file"* to `Column : 1` to compare on gene ID
->   - Set *2nd file"* to `Condition` Transit result
+>   - Set *2nd file"* to `Condition`
 >   - Set *Column to use from 2nd file"* to `Column : 1` to compare on gene ID
 >   - Set *Output lines appearing in"* to `Both 1st and 2nd files` to get common essential genes
 >   - **Click** on `Execute`
@@ -639,9 +654,9 @@ Now let's compare the results between out two conditions :
 > ### {% icon hands_on %} Hands-on : Get gene essential only in control
 >
 >  {% icon tool %} Select the **Join two files** tool and run with the following parameters:
->   - Set *1st file"* to `Control` Transit result
+>   - Set *1st file"* to `Control`
 >   - Set *Column to use from 1st file"* to `Column : 1` to compare on gene ID
->   - Set *2nd file"* to `Condition` Transit result
+>   - Set *2nd file"* to `Condition`
 >   - Set *Column to use from 2nd file"* to `Column : 1` to compare on gene ID
 >   - Set *Output lines appearing in"* to `1st but not 2nd`
 >   - **Click** on `Execute`
@@ -653,9 +668,9 @@ Now let's compare the results between out two conditions :
 > ### {% icon hands_on %} Hands-on : Get gene essential only in condition
 >
 >  {% icon tool %} Select the **Join two files** tool and run with the following parameters:
->   - Set *1st file"* to `Control` Transit result
+>   - Set *1st file"* to `Control`
 >   - Set *Column to use from 1st file"* to `Column : 1` to compare on gene ID
->   - Set *2nd file"* to `Condition` Transit result
+>   - Set *2nd file"* to `Condition`
 >   - Set *Column to use from 2nd file"* to `Column : 1` to compare on gene ID
 >   - Set *Output lines appearing in"* to `2nd but not 1st`
 >   - **Click** on `Execute`
