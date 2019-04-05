@@ -24,6 +24,7 @@ key_points:
 contributors:
   - mblue9
   - bphipson
+  - JovMaksimovic
   - annatrigos
   - mritchie
   - hdashnow
