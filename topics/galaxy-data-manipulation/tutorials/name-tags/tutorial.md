@@ -65,7 +65,7 @@ How would you identify which input sample corresponds with which featureCounts o
 >
 > 3. When this is uploaded, click on the title of the dataset in your history panel to expand it
 >
-> 4. Add some tags to your dataset:
+> 4. Add some name tags (hashtags) to your dataset:
 >
 >    - `#female`
 >    - `#male`
@@ -94,6 +94,10 @@ If you're using a Galaxy server newer than 19.01, you will notice that the tags 
 {: .details}
 
 # Setting name tags with the Rule Builder
+
+In this section we will demonstrate how you can add name tags to datasets automatically using the rule-based uploader. This is especially useful when you have a large number of datasets you want to tag all at once.
+
+For more information about the rule-based uploader, please see [this dedicated tutorial]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial.md %})
 
 > ### {% icon hands_on %} Hands-on: Set name tags during upload
 >
@@ -143,13 +147,26 @@ This will add 7 new datasets to your history, each one tagged and named appropri
 
 ![Automatically tagged uploads](../../images/nametag-rulebuilder.png)
 
-> ### {% icon tip %} Tip: Rule Builder
-> If you aren't familiar with the Rule Builder, you might want to check out the tutorial on [using the Rule Builder]({{ site.baseurl  }}{% link topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial.md %})
-{: .tip}
 
 The datasets now have two types of tags: name tags and general purpose tags. General purpose tags, unlike name tags, will not propagate. They're mainly useful for searching through your datasets (Try entering `tag=paired` in your History search box).
 
+> ### {% icon question %} Questions
+>
+> 1. How many tags does the dataset named `GSM461176` have? Which ones?
+> 2. How many of those tags are propagating name tags?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. 3 tags. You can find all tags of a dataset by first clicking on it to expand it, and then clicking on the tags icon {% icon galaxy-tags %}. The tags are `#GSM461177`, `paired`, and `untreat`
+> > 2. 1 propagating name tag. Only hashtags (tags starting with a `#` symbol) will propagate to downstream results derived from it. So in this example only `#GSM461177` is a propagating name tag.
+> >
+> {: .solution}
+{: .question}
+
+
 # Name tags in Action
+
+Now that we have our name tags in place, let's see them in action!
 
 > ### {% icon hands_on %} Hands-on: Some analysis steps
 > 1. **Select first** {% icon tool %} lines from a dataset (head)
