@@ -31,14 +31,14 @@ time it takes to figure out where your datasets came from.
 You have two options to deal with this:
 
 - Re-name datasets constantly with more useful titles
-- Use name tags once, on the inputs to your analaysis
+- Use name tags once, on the inputs to your analysis
 
 Name tags "propagate", they will follow your datasets throughout their analysis.
 To more clearly see this, look at the simple workflow below. If the input datasets are tagged `TB8_R1` and `TB8_R2`, these tags will propagate to the outputs of any tools run on these datasets. If a tool has multiple inputs with tags, the outputs will have all of the tags like in the bowtie2 tool.
 
 ![A workflow with some tags overlaid](../../images/nametag-wf.png)
 
-It can turn your histories from a complicated mess into an eaiser to follow analysis, as each step is clearly labelled with the original input sample corresponding to each analysis:
+It can turn your histories from a complicated mess into an easier to follow analysis, as each step is clearly labelled with the original input sample corresponding to each analysis:
 
 Bad | Good
 --- | ---
@@ -77,7 +77,7 @@ How would you identify which input sample corresponds with which featureCounts o
 >
 {: .hands_on}
 
-These are example tags, but it is recommended that you use nametags to reflect the identity of the input sample, in some way that's important to you. If you're doing an analysis comparing wildtype and treated samples, you might tag things based on the condition. If you're processing NGS data you might want to tag based on the read set where each sample originated.
+These are example tags, but it is recommended that you use name tags to reflect the identity of the input sample, in some way that's important to you. If you're doing an analysis comparing wildtype and treated samples, you might tag things based on the condition. If you're processing NGS data you might want to tag based on the read set where each sample originated.
 
 If you're using a Galaxy server newer than 19.01, you will notice that the tags each have different colours:
 
