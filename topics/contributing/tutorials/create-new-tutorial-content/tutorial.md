@@ -598,5 +598,50 @@ Boxes can be nested, *e.g.* for having tips inside a hands-on:
 ```
 {% endraw %}
 
+# Citations
+If you would like to cite any articles, books or websites in your tutorial, you can do so by adding a file called `tutorial.bib` next to your `tutorial.md` file. In this file you may enter [bibtex](http://www.bibtex.org/Using/) formatted citations. An example is given below:
+
+{% raw %}
+```
+@article{batut2018community,
+  title={Community-driven data analysis training for biology},
+  author={Batut, B{\'e}r{\'e}nice and Hiltemann, Saskia and Bagnacani, Andrea and Baker, Dannon and Bhardwaj, Vivek and Blank, Clemens and Bretaudeau, Anthony and Brillet-Gu{\'e}guen, Loraine and {\v{C}}ech, Martin and Chilton, John and others},
+  journal={Cell systems},
+  volume={6},
+  number={6},
+  pages={752--758},
+  year={2018},
+  publisher={Elsevier}
+}
+
+@misc{galaxy-training-materials,
+  url = {https://training.galaxyproject.org},
+  year = {2018},
+  note = {Accessed 2019-04-08},
+  title = {Galaxy Training materials website}
+}
+```
+{% endraw %}
+
+You can use this in your tutorial as follows:
+
+{% raw %}
+```
+For more information please look at this great article {% cite bebatut2018community %},
+and the corresponding website {% cite galaxy-training-materials %}
+```
+{% endraw %}
+
+Rendered:
+
+For more information please look at this great article {% cite batut2018community %}, and the corresponding website {% cite galaxy-training-materials %}
+
+
+A bibliography will automatically be appended to the end of your tutorial (scroll down to the end of this tutorial to see how it looks! or [jump there directly](#references))
+
+> ### {% icon tip %} Tip: Getting a bibtex citation from a doi
+> If you have a doi for a paper, you can easily obtain the bibtex citation using [doi2bib.org](https://www.doi2bib.org/).
+{: .tip}
+
 # Conclusion
 {:.no_toc}
