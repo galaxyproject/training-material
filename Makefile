@@ -48,7 +48,7 @@ install: clean ## install dependencies
 		npm install decktape && \
 		gem update --system && \
 		gem install nokogiri:'1.10.0' -- --use-system-libraries --with-xml=$(CONDA_PREFIX)/lib && \
-		gem install addressable:'2.5.2' jekyll jekyll-feed jekyll-environment-variables jekyll-github-metadata awesome_bot html-proofer pkg-config 
+		gem install addressable:'2.5.2' jekyll jekyll-feed jekyll-environment-variables jekyll-github-metadata jekyll-scholar awesome_bot html-proofer pkg-config
 .PHONY: install
 
 serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
@@ -69,7 +69,7 @@ build: clean ## build files but do not run a server (You can specify FLAGS= to p
 check-frontmatter: build ## Validate the frontmatter
 	$(ACTIVATE_ENV) && \
 		find topics/ -name tutorial.md -or -name slides.html -or -name metadata.yaml | \
-	    xargs -n1 ruby bin/validate-frontmatter.rb 
+	    xargs -n1 ruby bin/validate-frontmatter.rb
 .PHONY: check-frontmatter
 
 check-html: build ## validate HTML
@@ -118,7 +118,7 @@ check-slides: build  ## check the markdown-formatted links in slides
 check-yaml: ## lint yaml files
 	$(ACTIVATE_ENV) && \
 		find . -name "*.yaml" | xargs -L 1 -I '{}' sh -c "yamllint {}" \
-		find topics -name '*.yml' | xargs -L 1 -I '{}' sh -c "yamllint {}" 
+		find topics -name '*.yml' | xargs -L 1 -I '{}' sh -c "yamllint {}"
 .PHONY: check-yaml
 
 check: check-yaml check-frontmatter check-html-internal check-html check-slides check-workflows ## run all checks
