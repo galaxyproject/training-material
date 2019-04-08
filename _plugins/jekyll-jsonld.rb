@@ -10,6 +10,10 @@ module Jekyll
         "name": "Galaxy Training Network",
         "url": "https://galaxyproject.org/teach/gtn/"
       }
+      if not topic then
+        return '{}'
+      end
+
       topic_desc = {
         "@type": "CreativeWork",
         "name": "#{topic['title']}",
@@ -138,7 +142,7 @@ module Jekyll
         #"potentialAction":,
         #"sameAs":,
         #"subjectOf":,
-        # "url" described below    
+        # "url" described below
       }
 
       #info depending if tutorial, hands-on or slide level
@@ -202,7 +206,7 @@ module Jekyll
           data['timeRequired'] = "PT#{material['time_estimation'].upcase}"
         end
         # Description with questions, objectives and keypoints
-        
+
         if material.key?('questions') and not material['questions'].nil? and material['questions'].length > 0 then
           questions = material['questions'].join("\n - ")
           description.push("The questions this #{material['type']} addresses are:\n - #{questions}\n\n")
@@ -215,7 +219,7 @@ module Jekyll
           keypoints = material['keypoints'].join("\n - ")
           description.push("The keypoints are:\n - #{keypoints}\n\n")
         end
-        
+
         # Keywords
         if material.key?('tags') then
           data['keywords'] = material['tags'].join(', ')
@@ -319,7 +323,7 @@ module Jekyll
         })
       end
       data['hasPart'] = parts
-      
+
       #Workflows
       if material.key?('workflows') then
         mentions.push(material['contributors'].map{ |x|
@@ -348,7 +352,7 @@ module Jekyll
       about.push(topic_desc)
       if topic.key?('edam_ontology') then
         about.push({
-          "@type": "DefinedTerm", 
+          "@type": "DefinedTerm",
           "@id": "http://edamontology.org/#{topic['edam_ontology']}",
           "inDefinedTermSet": "http://edamontology.org",
           "termCode": "#{topic['edam_ontology']}",
