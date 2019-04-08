@@ -48,7 +48,7 @@ install: clean ## install dependencies
 		npm install decktape && \
 		gem update --system && \
 		gem install nokogiri:'1.10.0' -- --use-system-libraries --with-xml=$(CONDA_PREFIX)/lib && \
-		gem install addressable:'2.5.2' jekyll jekyll-feed jekyll-environment-variables jekyll-github-metadata jekyll-scholar awesome_bot html-proofer pkg-config
+		gem install addressable:'2.5.2' jekyll jekyll-feed jekyll-environment-variables jekyll-github-metadata jekyll-scholar csl-styles awesome_bot html-proofer pkg-config
 .PHONY: install
 
 serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)

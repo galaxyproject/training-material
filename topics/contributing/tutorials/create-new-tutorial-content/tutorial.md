@@ -611,12 +611,12 @@ If you would like to cite any articles, books or websites in your tutorial, you 
   number={6},
   pages={752--758},
   year={2018},
-  publisher={Elsevier}
+  publisher={Elsevier},
+  doi={10.1016/j.cels.2018.05.012}
 }
 
 @misc{galaxy-training-materials,
   url = {https://training.galaxyproject.org},
-  year = {2018},
   note = {Accessed 2019-04-08},
   title = {Galaxy Training materials website}
 }
