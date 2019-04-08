@@ -198,31 +198,33 @@ layout: base
                 <div class="col-sm-10">
                     {{ content
                         | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">' }}
+
+
+                    {% if page.key_points %}
+                    <blockquote class="key_points">
+                        <h3>{% icon keypoints %} Key points</h3>
+
+                        <ul>
+                            {% for key_point in page.key_points %}
+                            <li>{{ key_point }}</li>
+                            {% endfor %}
+                        </ul>
+                    </blockquote>
+                    {% endif %}
+
+                    {% if topic.references %}
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="{{ site.baseurl }}/topics/{{ topic.name }}#references">here</a>.</p>
+                    {% endif %}
+
+                    {% if material.cited %}
+                    <h1 id="bibliography">References</h1>
+                    {% bibliography --cited %}
+                    {% endif %}
+
                 </div>
             </div>
         </div>
-
-        {% if page.key_points %}
-        <blockquote class="key_points">
-            <h3>{% icon keypoints %} Key points</h3>
-
-            <ul>
-                {% for key_point in page.key_points %}
-                <li>{{ key_point }}</li>
-                {% endfor %}
-            </ul>
-        </blockquote>
-        {% endif %}
-
-        {% if topic.references %}
-        <h1 data-toc-skip>Useful literature</h1>
-        <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="{{ site.baseurl }}/topics/{{ topic.name }}#references">here</a>.</p>
-        {% endif %}
-
-        {% if material.cited %}
-        <h1 id="bibliography">References</h1>
-        {% bibliography --cited %}
-        {% endif %}
 
         <h3>{% icon congratulations %} Congratulations on successfully completing this tutorial!</h3>
 
