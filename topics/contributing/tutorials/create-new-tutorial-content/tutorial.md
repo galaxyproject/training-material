@@ -637,7 +637,7 @@ Rendered:
 For more information please look at this great article {% cite batut2018community %}, and the corresponding website {% cite galaxy-training-materials %}
 
 
-A bibliography will automatically be appended to the end of your tutorial (scroll down to the end of this tutorial to see how it looks! or [jump there directly](#references))
+A bibliography will automatically be appended to the end of your tutorial (scroll down to the end of this tutorial to see how it looks! or [jump there directly](#bibliography))
 
 > ### {% icon tip %} Tip: Getting a bibtex citation from a doi
 > If you have a DOI for a paper, you can easily obtain the bibtex citation using [doi2bib.org](https://www.doi2bib.org/).
