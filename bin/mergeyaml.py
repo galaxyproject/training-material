@@ -35,7 +35,7 @@ def extend_list(merged, a):
 merged = {}
 
 for filename in glob.iglob('./**/data-library.yaml'):
-    a = yaml.load(open(filename))
+    a = yaml.load(open(filename), Loader=yaml.FullLoader)
     extend_dict(merged, a)
 
 

@@ -69,10 +69,3 @@ done
 
 cd /tutorials/
 python /mergeyaml.py > ./data-library_all.yaml
-# check if data-library_all.yaml is not empty
-if [ "$(head -n 1 ./data-library_all.yaml)" != "{}" ];
-then
-    setup-data-libraries -i ./data-library_all.yaml -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD -v
-else
-    echo "No data libraries to install"
-fi
