@@ -65,19 +65,18 @@ The first step of EWAS data anylalysis is raw methylation data loading (intensit
 >    - `GSM1588704_8795207135_R01C02_Grn.idat`
 >    - `GSM1588705_8795207119_R05C02_Grn.idat`
 >    - `GSM1588706_8795207135_R02C02_Grn.idat`
->    - `GSM1588707_8795207119_R06C02_Grn.idat`
+>    - `GSM1588707_8795207119_R06C02_Grn.idat` 
 >
+>    ```  
+>    https://zenodo.org/record/1251211/files/GSM1588704_8795207135_R01C02_Grn.idat?download=1
+>    https://zenodo.org/record/1251211/files/GSM1588704_8795207135_R01C02_Red.idat?download=1
+>    https://zenodo.org/record/1251211/files/GSM1588705_8795207119_R05C02_Grn.idat?download=1
+>    https://zenodo.org/record/1251211/files/GSM1588705_8795207119_R05C02_Red.idat?download=1
+>    https://zenodo.org/record/1251211/files/GSM1588706_8795207135_R02C02_Grn.idat?download=1
+>    https://zenodo.org/record/1251211/files/GSM1588706_8795207135_R02C02_Red.idat?download=1
+>    https://zenodo.org/record/1251211/files/GSM1588707_8795207119_R06C02_Grn.idat?download=1
+>    https://zenodo.org/record/1251211/files/GSM1588707_8795207119_R06C02_Red.idat?download=1
 >    ```
->    https://zenodo.org/record/1185122/files/GSM1588704_8795207135_R01C02_Red.idat
->    https://zenodo.org/record/1185122/files/GSM1588705_8795207119_R05C02_Red.idat
->    https://zenodo.org/record/1185122/files/GSM1588706_8795207135_R02C02_Red.idat
->    https://zenodo.org/record/1185122/files/GSM1588707_8795207119_R06C02_Red.idat
->    https://zenodo.org/record/1185122/files/GSM1588704_8795207135_R01C02_Grn.idat
->    https://zenodo.org/record/1185122/files/GSM1588705_8795207119_R05C02_Grn.idat
->    https://zenodo.org/record/1185122/files/GSM1588706_8795207135_R02C02_Grn.idat
->    https://zenodo.org/record/1185122/files/GSM1588707_8795207119_R06C02_Grn.idat
->    ```
->
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
 >    > * Copy the link locations
@@ -115,10 +114,10 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 > 3. Run **minfi rset** {% icon tool %} to convert methylation data from the `MethylSet` to ratios
 > 4. Run **minfi maptogenome** {% icon tool %} to map ratio data to the genome
 >
-> > ### {% icon tip %} Tip: Preprocess and Normalize data
+> > ### {% icon comment %} Preprocess and Normalize data
 > > If your files require normalisation, you might prefer to use other of preprocessing tools provided in EWAS suite i.e. **minfi ppfun** {% icon tool %} or **minfi ppquantile**  {% icon tool %} look for recomendation at (ref).
 > >
-> {: .tip}
+> {: .comment}
 >
 {: .hands_on}
 
@@ -179,9 +178,9 @@ The main goal of the EWAS suite is to simplify the way differentially methylated
 
 ![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
 
-> ### {% icon tip %} Tip: Phenotype table
+> ### {% icon comment %} Phenotype table
 > Phenotype table can be in diffrent size with diffrent arguments only second column is required to contain phenotype covariate information for each sample.
-{: .tip}
+{: .comment}
 
 > ### {% icon question %} Questions
 > How are we define phenotype covariate?
@@ -219,9 +218,9 @@ In addition to downstream analysis users can annotate the differentially methyla
 >
 > 5. **clusterProfiler go** {% icon tool %} to run a GO Enrichment Analysis
 >
->   > ### {% icon tip %} Tip: Biological id translator
+>   > ### {% icon comment %} Biological id translator
 >   >  No matter what ID we need, this tool allows various conversions suitable for different databases and annotations.
->   {: .tip}
+>   {: .comment}
 {: .hands_on}
 
 ![Functional annotations](../../images/funcann.jpg "Results of GO enrichments analysis for DMPs")

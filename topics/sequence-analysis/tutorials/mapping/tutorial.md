@@ -19,18 +19,18 @@ requirements:
   -
     type: "internal"
     topic_name: sequence-analysis
-    tutorials: 
+    tutorials:
       - quality-control
 follow_up_training:
   -
     type: "internal"
     topic_name: transcriptomics
-    tutorials: 
+    tutorials:
       - ref-based
   -
     type: "internal"
     topic_name: chip-seq
-    tutorials: 
+    tutorials:
       - formation_of_super-structures_on_xi
 contributors:
   - joachimwolff

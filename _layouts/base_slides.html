@@ -37,6 +37,9 @@
     <meta property="og:title" content="Galaxy Training: {{ og_title | truncate: 60}}" />
     <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}" />
     <meta property="og:image" content="{{ "/assets/images/GTNLogo1000.png" | prepend: site.baseurl }}" />
+    <script type="application/ld+json">
+      {% include _includes/material.jsonld material=page topic=topic site=site %}
+    </script>
   </head>
   <body>
     <textarea id="source">
@@ -46,6 +49,13 @@ class: center, middle, inverse
 
 <div class="my-header"><span>
 <a href="{{ site.baseurl }}/topics/{{ topic.name }}" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+{% if page.type == "introduction" %}
+  {% capture link %}{{ site.github.repository_url }}/edit/{{ site.repository_branch }}/topics/{{ topic.name }}/slides/{{ page.tutorial_name }}.html{% endcapture %}
+{% else %}
+  {% capture link %}{{ site.github.repository_url }}/edit/{{ site.repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html{% endcapture %}
+{% endif %}
+<a class="nav-link" href="{{ link }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
 </span></div>
 
 <div class="my-footer"><span>
@@ -81,7 +91,7 @@ Before diving into this slide deck, we recommend you to have a look at:
 
 ## Thank you!
 
-This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors {% if tutorial.contributors %}{% capture contributors %}{% for c in tutorial.contributors %}, {{ contributors[c].name | default: c }}{% endfor %}{% endcapture %} ({{ contributors | remove_first: ', ' }}) {% endif %}!
+This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors {% if tutorial.contributors %}{% capture contributors %}{% for c in tutorial.contributors %}, [{{ contributors[c].name | default: c }}]({{ site.baseurl }}/hall-of-fame#{{ c }}){% endfor %}{% endcapture %} ({{ contributors | remove_first: ', ' }}) {% endif %}!
 
 {% if page.logo == "GTN" %}
 <img src="{{ site.baseurl }}/{{ site.logo }}" alt="Galaxy Training Network" style="height: 100px;"/>

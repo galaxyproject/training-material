@@ -50,7 +50,7 @@ Amplicon sequencing is a highly targeted approach for analyzing genetic variatio
 In the metagenomics fields, amplicon sequencing refers to capture and sequence of rRNA data in a sample.
 It can be 16S for bacteria or archea or 18S for eukaryotes.
 
-> ### {% icon tip %} Background: The 16S ribosomal RNA gene
+> ### {% icon comment %} Background: The 16S ribosomal RNA gene
 > ![The 16S ribosomal RNA gene](../../images/16S_gene.png "The 16S ribosomal RNA gene. Credit: https://www.slideshare.net/beiko/ccbc-tutorial-beiko")
 >
 > The 16S rRNA gene has several properties that make it ideally suited to our purposes
@@ -63,7 +63,7 @@ It can be 16S for bacteria or archea or 18S for eukaryotes.
 >
 > The highly conserved regions make it easy to target the gene across different organisms, while the highly variable regions allow us to distinguish between different species.
 >
-{: .tip}
+{: .comment}
 
 With amplicon data, we can determine the micro-organisms from which the sequences in our sample are coming from. This is called taxonomic assignation.
 We try to assign sequences to taxons and then classify or extract the taxonomy in our sample.
@@ -146,10 +146,10 @@ and create a *group file*, indicating which reads belong to which samples.
 >
 {: .hands_on}
 
-> ### {% icon tip %} Tip
+> ### {% icon comment %} Note
 >
 > Because we only have a small number of samples, we used the manual specification. If you have hundreds of samples this would quickly become bothersome. The solution? use a collection! To read more about collections in Galaxy, please see [this]() tutorial
-{: .tip}
+{: .comment}
 
 Have a look at the group file. It is a very simple file, it contains two columns: the first contains the read names, the second contains the group (sample) name, in our case `pampa` or `anguil`.
 
@@ -360,7 +360,7 @@ The main questions when analyzing amplicon data are: Which micro-organisms are p
 
 The idea is to take the sequences and assign them to a taxon. To do that, we group (or cluster) sequences based on their similarity to defined Operational Taxonomic Units (OTUs): groups of similar sequences that can be treated as a single "genus" or "species" (depending on the clustering threshold)
 
-> ### {% icon tip %} Background: Operational Taxonomic Units (OTUs)
+> ### {% icon comment %} Background: Operational Taxonomic Units (OTUs)
 >
 > In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene sequence. Each of these clusters is intended to represent a taxonomic unit of a bacterial species or genus depending on the sequence similarity threshold. Typically, OTU clusters are defined by a 97% identity threshold of the 16S gene sequence variants at genus level. 98% or 99% identity is suggested for species separation.
 >
@@ -368,7 +368,7 @@ The idea is to take the sequences and assign them to a taxon. To do that, we gro
 >
 > ![OTU graph](../../images/OTU_graph.png "Cladogram of operational taxonomic units (OTUs). Credit: Danzeisen et al. 2013, 10.7717/peerj.237")
 >
-{: .tip}
+{: .comment}
 
 The first thing we want to do is to further de-noise our sequences from potential sequencing errors, by pre-clustering the sequences using the `Pre.cluster` command, allowing for up to 2 differences between sequences. This command will split the sequences by group and then sort them by abundance, then go from most abundant to least and identify sequences that differ by no more than 2 nucleotides from on another. If this is the case, then they get merged. We generally recommend allowing 1 difference for every 100 basepairs of sequence:
 

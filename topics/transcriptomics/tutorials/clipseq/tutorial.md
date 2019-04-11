@@ -67,16 +67,7 @@ RBFOX2 is a relevant development and tissue-specific splicing factor with the co
 >    https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/RBFOX2-204-INPUT_S2_R2.fastq
 >    ```
 >
->    > ### {% icon tip %} Tip: Importing data via links
->    >
->    > * Copy the link location
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > * Paste the link into the text field
->    > * Press **Start**
->    >
->    > By default, Galaxy uses the url as the name, so please rename them to something more pleasing.
->    {: .tip}
+>    {% include snippets/import_via_link.md %}
 >
 >    ![upload](../../images/upload_data_page.png "Data can be imported directly with links.")
 >
@@ -100,7 +91,7 @@ As for any NGS data analysis, CLIP-seq data must be quality controlled before be
 >    > To do this, first select the "Multiple datasets" icon (two stacked pages) under the "Input FASTQ file" heading in the **FASTQC** Tool Form, then shift+click to select multiple FASTQ files.
 >    {: .tip}
 >
-> 2. Check the **Sequence Duplication Levels** plot.   
+> 2. Check the **Sequence Duplication Levels** plot.
 >
 >   ![fastqbefore](../../images/clipseq_duplication_level_1.png "Sequence duplication levels <b>before</b> de-duplication; The y-axis represents the portion of reads with the specific duplication level. An exact sequence match is needed to detect a duplicated read. The blue line shows the duplication level distribution of the full sequence set. The red line depicts an ideal curve after a de-duplication step (duplicates are filtered out).")
 >
@@ -389,7 +380,7 @@ For additional information on how to interpret **plotFingerprint** plots, read t
 ## Correlation between Samples
 
 We have seen that our input control and our CLIP experiment might be strongly correlated, meaning, that our potential RBFOX2 binding regions are not truly enrichment when comparing to a our control.
-We are therefore going to further check the correlation between our control and CLIP experiment.  
+We are therefore going to further check the correlation between our control and CLIP experiment.
 
 > ### {% icon hands_on %} Hands-on: Assessing correlation between samples
 >

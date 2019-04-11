@@ -7,6 +7,13 @@ layout: base
 {% assign instances = site.data['instances'] %}
 {% assign topic_material = site.pages | topic_filter:page.topic_name %}
 {% assign language = site.other_languages | split: ", " %}
+{% if page.contributors %}
+  {% assign contrib = page.contributors %}
+  {% capture contributors %}
+  {% for contributor_id in contrib %}, {% assign c = contributors[contributor_id].name | default: contributor_id %}
+  <a href="{{ site.baseurl }}/hall-of-fame#{{ contributor_id }}" class="contributor-badge"><img src="https://avatars.githubusercontent.com/{{ contributor_id }}" alt="{{ c }}">{{ c }}</a>
+  {%- endfor %}{% endcapture %}
+{% endif %}
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -146,12 +153,12 @@ layout: base
 
 <div class="container main-content">
     <script type="application/ld+json">
-   {% include _includes/material.jsonld material=page %}
+        {% include _includes/material.jsonld material=page topic=topic site=site %}
     </script>
-    
+
     <section class="tutorial">
         <h1 data-toc-skip>{{ page.title }}</h1>
-
+        <div class="contributors-line">By: {{ contributors | remove_first: ', ' }} </div>
         <blockquote class="overview">
             <h3>Overview</h3>
 
@@ -191,26 +198,33 @@ layout: base
                 <div class="col-sm-10">
                     {{ content
                         | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">' }}
+
+
+                    {% if page.key_points %}
+                    <blockquote class="key_points">
+                        <h3>{% icon keypoints %} Key points</h3>
+
+                        <ul>
+                            {% for key_point in page.key_points %}
+                            <li>{{ key_point }}</li>
+                            {% endfor %}
+                        </ul>
+                    </blockquote>
+                    {% endif %}
+
+                    {% if topic.references %}
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="{{ site.baseurl }}/topics/{{ topic.name }}#references">here</a>.</p>
+                    {% endif %}
+
+                    {% if material.cited %}
+                    <h1 id="bibliography">References</h1>
+                    {% bibliography --cited %}
+                    {% endif %}
+
                 </div>
             </div>
         </div>
-
-        {% if page.key_points %}
-        <blockquote class="key_points">
-            <h3>{% icon keypoints %} Key points</h3>
-
-            <ul>
-                {% for key_point in page.key_points %}
-                <li>{{ key_point }}</li>
-                {% endfor %}
-            </ul>
-        </blockquote>
-        {% endif %}
-
-        {% if topic.references %}
-        <h1 data-toc-skip>Useful literature</h1>
-        <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="{{ site.baseurl }}/topics/{{ topic.name }}#references">here</a>.</p>
-        {% endif %}
 
         <h3>{% icon congratulations %} Congratulations on successfully completing this tutorial!</h3>
 
@@ -259,10 +273,7 @@ layout: base
     </section>
 </div>
 
-{% if page.contributors %}
-{% assign contrib = page.contributors | sort %}
-{% capture contributors %}{% for contributor in contrib %}, {{contributors[contributor].name | default: contributor }}{% endfor %}{% endcapture %}
-{% endif %}
+
 <footer>
     <div class="container">
         <p>

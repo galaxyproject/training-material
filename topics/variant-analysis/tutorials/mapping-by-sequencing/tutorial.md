@@ -52,11 +52,11 @@ tools. For Galaxy, the **MiModD** suite of tools offers efficient and flexible
 analysis workflows compatible with a variety of mapping-by-sequencing
 approaches.
 
-> ### {% icon tip %} Further reading
+> ### {% icon details %} Further reading
 > The MiModD documentation has its own chapter on supported
 > [mapping-by-sequencing schemes](http://mimodd.readthedocs.io/en/latest/nacreousmap.html)
 > not covered here.
-{: .tip}
+{: .details}
 
 In this tutorial we are going to use several of these tools to map and identify
 a point mutation in an *Arabidopsis thaliana* strain from whole-genome
@@ -165,10 +165,10 @@ if you do not know what this means).
 >    3. **Save** the edited attributes
 > 3. Import the reference genome
 >
->    > ### {% icon tip %} Tip
+>    > ### {% icon comment %} TAIR10 Version
 >    > This step is only necessary if the TAIR10 version of the *A. thaliana*
 >    > genome is not available as a built-in genome on your Galaxy server.
->    {: .tip}
+>    {: .comment}
 >
 >    1. Upload the reference genome using the URL:
 >       `https://www.arabidopsis.org/download_files/Genes/TAIR10_genome_release/TAIR10_chromosome_files/TAIR10_chr_all.fas`
