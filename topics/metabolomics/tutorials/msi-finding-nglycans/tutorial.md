@@ -230,7 +230,7 @@ The key step during preprocessing is peak detection as it reduces the dimensiona
   3. **Extracting peaks**: 
 The average peak picking has removed all spatial information and kept only mean intensity values for the two subfiles. Therefore, the 'peaks' function is used to retrieve the picked peaks from all pixels of the normalized, smoothed and baseline reduced dataset. 
 
-For further reading on preprocessing we recommend [Gibb and Strimmer](https://arxiv.org/pdf/1607.03180.pdf) and [Norris et al.](10.1016/j.ijms.2006.10.005). 
+For further reading on preprocessing we recommend [Gibb and Strimmer](https://arxiv.org/pdf/1607.03180.pdf) and [Norris et al.](https://doi.org/10.1016/j.ijms.2006.10.005). 
 
 > ### {% icon hands_on %} Hands-on: Preprocessing part II
 >
