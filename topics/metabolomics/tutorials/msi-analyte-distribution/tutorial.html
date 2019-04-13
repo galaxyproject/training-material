@@ -88,6 +88,10 @@
                                             
                                         
                                     
+                                        
+                                            
+                                        
+                                    
                                 </div>
                             </li>
                         
@@ -417,6 +421,7 @@
       <li><a href="#overlay-image-for-three-analyte-features" id="markdown-toc-overlay-image-for-three-analyte-features">Overlay image for three analyte features</a></li>
     </ol>
   </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
 
 </blockquote>
@@ -453,25 +458,24 @@
       </blockquote>
     </li>
     <li>
-      <p>Import the files from <a href="https://zenodo.org/record/484496">Zenodo</a>. Download both subfiles of the imzML file: the imzML part and the ibd part:</p>
-
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/484496/files/ltpmsi-chilli.imzML
-https://zenodo.org/record/484496/files/ltpmsi-chilli.ibd
-</code></pre></div>      </div>
-    </li>
-    <li>
-      <p>Upload the data on Galaxy via the <strong>composite</strong> option.</p>
+      <p>Upload the data from <a href="https://zenodo.org/record/484496">Zenodo</a> via the <strong>composite</strong> option</p>
 
       <blockquote class="tip">
         <h3 id="tip-tip-upload-via-the-composite-option"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Upload via the composite option</h3>
         <ul>
-          <li>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</li>
+          <li>Open the Galaxy Upload Manager(<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</li>
           <li>Click on <strong>Composite</strong> on the top</li>
           <li>Set <strong>Composite Type</strong> to <code class="highlighter-rouge">imzml</code></li>
           <li>Expand the first <strong>Select</strong> button (for the imzML metadata component)</li>
-          <li>Select <strong>Choose local file</strong> and the local <code class="highlighter-rouge">ltpmsi-chilli.imzML</code> file</li>
+          <li>Select <strong>Paste/Fetch data</strong> and paste
+            <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/484496/files/ltpmsi-chilli.imzML
+</code></pre></div>            </div>
+          </li>
           <li>Expand the second <strong>Select</strong> button (for the mass spectral data component)</li>
-          <li>Select <strong>Choose local file</strong> and the local <code class="highlighter-rouge">ltpmsi-chilli.ibd</code> file</li>
+          <li>Select <strong>Paste/Fetch data</strong> and paste
+            <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/484496/files/ltpmsi-chilli.ibd
+</code></pre></div>            </div>
+          </li>
           <li>Press <strong>Start</strong></li>
           <li><strong>Close</strong> the window</li>
         </ul>
@@ -493,6 +497,18 @@ https://zenodo.org/record/484496/files/ltpmsi-chilli.ibd
           <li><code class="highlighter-rouge">Analyze7.5</code> files are also supported by Galaxy.</li>
           <li>The file consists of three components and is therefore uploaded via the ‘composite’ function, analogously to the imzML upload.</li>
           <li>The files to select in the <code class="highlighter-rouge">composite</code> tab are the header file <code class="highlighter-rouge">.hdr</code>, the m/z values file <code class="highlighter-rouge">.t2m</code> and the spectra file <code class="highlighter-rouge">.img</code>.</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Rename the data into <code class="highlighter-rouge">ltpmsi-chilli</code></p>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-rename-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Rename a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field to <code class="highlighter-rouge">ltpmsi-chilli</code></li>
+          <li>Click the <strong>Save</strong> button</li>
         </ul>
       </blockquote>
     </li>
@@ -578,9 +594,9 @@ This information can also be extracted by opening the local imzML component of t
 
 </blockquote>
 
-<p>Open the quality report with the eye button and check the summary table on the first page to answer question 1 and 2. The shape of the chilli can roughly be seen in the images showing the number of peaks per spectrum and the total ion chromatogram with higher values in the middle part of the fruit that roughly corresponds to the placenta. In the PCA image the complete chilli except for the lowest part of the fruit is visible in light colours compared to the dark background.</p>
+<p>Open the quality report with the eye button and check the summary table on the first page to answer question 1 and 2. The shape of the chilli can roughly be seen in the images showing the number of peaks per spectrum and the total ion current with higher values in the middle part of the fruit that roughly corresponds to the placenta. In the PCA image the complete chilli except for the lowest part of the fruit is visible in light colours compared to the dark background.</p>
 
-<p>To further investigate mass spectra of different chilli compartments we select one pixel for each tissue area (pericarp, placenta and seeds) from the total ion chromatogram image. Knowing the exact shape of the chilli tissue from Figure 4 of the publication helps to find the corresponding areas. This are the pixels we have chosen for the tutorial:</p>
+<p>To further investigate mass spectra of different chilli compartments we select one pixel for each tissue area (pericarp, placenta and seeds) from the total ion current image. Knowing the exact shape of the chilli tissue from Figure 4 of the publication helps to find the corresponding areas. This are the pixels we have chosen for the tutorial:</p>
 
 <p>seeds: x=39 y=53, placenta: x=50 y=44, pericarp: x=25 y=60</p>
 
@@ -706,15 +722,6 @@ This information can also be extracted by opening the local imzML component of t
           <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li>
         </ul>
       </blockquote>
-
-      <blockquote class="tip">
-        <h3 id="tip-tip-rename-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Rename a dataset</h3>
-        <ul>
-          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
-          <li>In the central panel, change the <strong>Name</strong> field to <code class="highlighter-rouge">annotations</code></li>
-          <li>Click the <strong>Save</strong> button</li>
-        </ul>
-      </blockquote>
     </li>
     <li>
       <p>Press the rerun button of the <strong>MSI plot spectra</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> result, keep everything as above and change the following:</p>
@@ -781,6 +788,7 @@ This information can also be extracted by opening the local imzML component of t
             <li><em>“Maximum value for m/z”</em>: <code class="highlighter-rouge">1000.0</code></li>
           </ul>
         </li>
+        <li><em>“Output format”</em>: <code class="highlighter-rouge">imzML</code></li>
       </ul>
     </li>
   </ol>
@@ -823,7 +831,7 @@ This information can also be extracted by opening the local imzML component of t
   <ol>
     <li><strong>MSI data exporter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="highlighter-rouge">MSI filtering on data 1: imzML</code> (output of <strong>MSI filtering</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="highlighter-rouge">filtered imzML</code> (output of <strong>MSI filtering</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Centroided input”</em>: <code class="highlighter-rouge">yes</code></li>
         <li><em>“Multiple output files can be selected”</em>: <code class="highlighter-rouge">mz feature output</code></li>
       </ul>
@@ -837,9 +845,9 @@ This information can also be extracted by opening the local imzML component of t
     </li>
     <li><strong>MSI mz images</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="highlighter-rouge">MSI filtering on data 1: imzML</code> (output of <strong>MSI filtering</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="highlighter-rouge">filtered imzML</code> (output of <strong>MSI filtering</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Centroided input”</em>: <code class="highlighter-rouge">yes</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“m/z of interest (e.g. internal Calibrants)”</em>: <code class="highlighter-rouge">Filter on data 8</code> (output of <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“m/z of interest (e.g. internal Calibrants)”</em>: <code class="highlighter-rouge">Filter on data</code> (output of <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Column with m/z values”</em>: <code class="highlighter-rouge">column:2</code></li>
         <li><em>“Column with name of m/z values”</em>: <code class="highlighter-rouge">column:1</code></li>
         <li><em>“Tabular file contains a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
@@ -913,7 +921,7 @@ Targeted analysis can be performed if the m/z of the molecule of interest is alr
     <li>
       <p><strong>MSI mz images</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="highlighter-rouge">MSI filtering on data 1: imzML</code> (output of <strong>MSI filtering</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="highlighter-rouge">filtered imzML</code> (output of <strong>MSI filtering</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Centroided input”</em>: <code class="highlighter-rouge">yes</code></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“m/z of interest (e.g. internal Calibrants)”</em>: <code class="highlighter-rouge">mz features</code> (Input dataset)</li>
         <li><em>“Column with m/z values”</em>: <code class="highlighter-rouge">column:1</code></li>
@@ -953,6 +961,12 @@ Targeted analysis can be performed if the m/z of the molecule of interest is alr
 </blockquote>
 
 <figure id="figure-8"><img src="../../images/msi_distribution_overlay_images.png" alt="overlay images" title="Distribution image for capsaicin and overlay of the three analytes" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Distribution image for capsaicin and overlay of the three analytes</figcaption></figure>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>This tutorial covered the steps to explore the properties of a dataset and visualize the morphological distribution of molecules.</p>
+
+<figure id="figure-9"><img src="../../images/msi_distribution_workflow.png" alt="workflow" title="Workflow that was used during this tutorial." /><figcaption><span class="figcaption-prefix">Figure 9:</span> Workflow that was used during this tutorial.</figcaption></figure>
 
 
 
