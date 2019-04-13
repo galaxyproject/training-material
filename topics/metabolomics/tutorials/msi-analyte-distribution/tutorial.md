@@ -71,23 +71,22 @@ The imzML file consists of two files: The first file contains the metadata in an
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. Import the files from [Zenodo](https://zenodo.org/record/484496). Download both subfiles of the imzML file: the imzML part and the ibd part:
->
->    ```
->    https://zenodo.org/record/484496/files/ltpmsi-chilli.imzML
->    https://zenodo.org/record/484496/files/ltpmsi-chilli.ibd
->    ```
->
-> 3. Upload the data on Galaxy via the **composite** option.
+> 2. Upload the data from [Zenodo](https://zenodo.org/record/484496) via the **composite** option
 >
 >    > ### {% icon tip %} Tip: Upload via the composite option
->    > - Open the Galaxy Upload Manager ({% icon galaxy-upload %} on the top-right of the tool panel)
+>    > - Open the Galaxy Upload Manager({% icon galaxy-upload %} on the top-right of the tool panel)
 >    > - Click on **Composite** on the top
 >    > - Set **Composite Type** to `imzml`
 >    > - Expand the first **Select** button (for the imzML metadata component)
->    > - Select **Choose local file** and the local `ltpmsi-chilli.imzML` file
+>    > - Select **Paste/Fetch data** and paste
+>    >    ```
+>    > https://zenodo.org/record/484496/files/ltpmsi-chilli.imzML
+>    >    ```
 >    > - Expand the second **Select** button (for the mass spectral data component)
->    > - Select **Choose local file** and the local `ltpmsi-chilli.ibd` file
+>    > - Select **Paste/Fetch data** and paste
+>    >    ```
+>    > https://zenodo.org/record/484496/files/ltpmsi-chilli.ibd
+>    >    ```
 >    > - Press **Start**
 >    > - **Close** the window
 >    {: .tip}
@@ -103,6 +102,14 @@ The imzML file consists of two files: The first file contains the metadata in an
 >    > * `Analyze7.5` files are also supported by Galaxy.
 >    > * The file consists of three components and is therefore uploaded via the 'composite' function, analogously to the imzML upload.
 >    > * The files to select in the `composite` tab are the header file `.hdr`, the m/z values file `.t2m` and the spectra file `.img`.
+>    {: .tip}
+>
+> 3. Rename the data into `ltpmsi-chilli`
+>
+>    > ### {% icon tip %} Tip: Rename a dataset
+>    > - Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
+>    > - In the central panel, change the **Name** field to `ltpmsi-chilli`
+>    > - Click the **Save** button
 >    {: .tip}
 {: .hands_on}
 
@@ -169,9 +176,9 @@ This information can also be extracted by opening the local imzML component of t
 >
 {: .question}
 
-Open the quality report with the eye button and check the summary table on the first page to answer question 1 and 2. The shape of the chilli can roughly be seen in the images showing the number of peaks per spectrum and the total ion chromatogram with higher values in the middle part of the fruit that roughly corresponds to the placenta. In the PCA image the complete chilli except for the lowest part of the fruit is visible in light colours compared to the dark background. 
+Open the quality report with the eye button and check the summary table on the first page to answer question 1 and 2. The shape of the chilli can roughly be seen in the images showing the number of peaks per spectrum and the total ion current with higher values in the middle part of the fruit that roughly corresponds to the placenta. In the PCA image the complete chilli except for the lowest part of the fruit is visible in light colours compared to the dark background. 
 
-To further investigate mass spectra of different chilli compartments we select one pixel for each tissue area (pericarp, placenta and seeds) from the total ion chromatogram image. Knowing the exact shape of the chilli tissue from Figure 4 of the publication helps to find the corresponding areas. This are the pixels we have chosen for the tutorial: 
+To further investigate mass spectra of different chilli compartments we select one pixel for each tissue area (pericarp, placenta and seeds) from the total ion current image. Knowing the exact shape of the chilli tissue from Figure 4 of the publication helps to find the corresponding areas. This are the pixels we have chosen for the tutorial: 
 
 seeds: x=39 y=53, placenta: x=50 y=44, pericarp: x=25 y=60
 
@@ -258,12 +265,6 @@ x     y     compartment
 >    > * Press **Start** and **Close** the window
 >    {: .tip}
 >
->    > ### {% icon tip %} Tip: Rename a dataset
->    > - Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
->    > - In the central panel, change the **Name** field to `annotations`
->    > - Click the **Save** button
->    {: .tip}
->
 > 2. Press the rerun button of the **MSI plot spectra** {% icon tool %} result, keep everything as above and change the following:
 >    - *"Use pixel annotation from tabular file for spectra plots"*: `group pixels according to annotations`
 >        - {% icon param-file %} *"Tabular file with pixel coordinates and annotation"*: `annotations` (Input dataset)
@@ -306,6 +307,7 @@ The single spectra that derive from different chilli departments show quite some
 >    - *"Select m/z feature filtering option"*: `m/z range (manually)`
 >        - *"Minimum value for m/z"*: `15.0`
 >        - *"Maximum value for m/z"*: `1000.0`
+>    - *"Output format"*: `imzML`
 >
 {: .hands_on}
 
@@ -337,7 +339,7 @@ This requires three steps: First the extraction of all m/z features of the datas
 > ### {% icon hands_on %} Hands-on: Generation of multiple analyte images
 >
 > 1. **MSI data exporter** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"MSI data"*: `MSI filtering on data 1: imzML` (output of **MSI filtering** {% icon tool %})
+>    - {% icon param-file %} *"MSI data"*: `filtered imzML` (output of **MSI filtering** {% icon tool %})
 >    - *"Centroided input"*: `yes`
 >    - *"Multiple output files can be selected"*: `mz feature output`
 >
@@ -347,9 +349,9 @@ This requires three steps: First the extraction of all m/z features of the datas
 >    - *"Number of header lines to skip"*: `1`
 >
 > 3. **MSI mz images** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"MSI data"*: `MSI filtering on data 1: imzML` (output of **MSI filtering** {% icon tool %})
+>    - {% icon param-file %} *"MSI data"*: `filtered imzML` (output of **MSI filtering** {% icon tool %})
 >    - *"Centroided input"*: `yes`
->    - {% icon param-file %} *"m/z of interest (e.g. internal Calibrants)"*: `Filter on data 8` (output of **Filter** {% icon tool %})
+>    - {% icon param-file %} *"m/z of interest (e.g. internal Calibrants)"*: `Filter on data` (output of **Filter** {% icon tool %})
 >    - *"Column with m/z values"*: `column:2`
 >    - *"Column with name of m/z values"*: `column:1`
 >    - *"Tabular file contains a header line"*: `Yes`
@@ -407,7 +409,7 @@ To get an idea about the distribution of capsaicin in the chilli we will plot it
 >
 >
 > 2. **MSI mz images** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"MSI data"*: `MSI filtering on data 1: imzML` (output of **MSI filtering** {% icon tool %})
+>    - {% icon param-file %} *"MSI data"*: `filtered imzML` (output of **MSI filtering** {% icon tool %})
 >    - *"Centroided input"*: `yes`
 >    - {% icon param-file %} *"m/z of interest (e.g. internal Calibrants)"*: `mz features` (Input dataset)
 >    - *"Column with m/z values"*: `column:1`
@@ -435,4 +437,10 @@ To get an idea about the distribution of capsaicin in the chilli we will plot it
 {: .question}
 
 ![overlay images](../../images/msi_distribution_overlay_images.png "Distribution image for capsaicin and overlay of the three analytes")
+
+# Conclusion
+
+This tutorial covered the steps to explore the properties of a dataset and visualize the morphological distribution of molecules. 
+
+![workflow](../../images/msi_distribution_workflow.png "Workflow that was used during this tutorial.")
 
