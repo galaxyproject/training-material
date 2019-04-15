@@ -350,9 +350,14 @@ The original form of this program is also distributed as part of the Cufflinks s
 
 In this section we will perform the following tasks:
 - The **Protein Database Downloader** tool is used to download the FASTA database from UniProt and cRAP (**c**ommon **R**epository of **A**dventitious **P**roteins) database containing known/reference mouse proteins.
-- The **Regex Text Manipulation** tool is used to manipulate the FASTA file to make it SearchGUI-compatible.
+
+> ### {% icon comment %}
+For the purpose of this tutorial, you can use the "Reference_5000_uniprot_cRAP.fasta" as this database.
+{: .comment}
+
 - The **FASTA Merge Files and Filter Unique Sequences** tool is used to merge the databases obtained from CustomProDB and "Translate BED" tool
 along with the UniProt and cRAP databases.
+- The **Regex Text Manipulation** tool is used to manipulate the FASTA file to make it SearchGUI-compatible.
 
 > ### {% icon hands_on %} Hands-on
 >
@@ -491,4 +496,26 @@ by MVP to visualize the genomic loci of any variant peptides.
 
 
 ![SNP variant](../../images/viewing_SNP_Variant_IGV.png)
+> ### {% icon hands_on %} Hands-on
+>
+Finally, we can create a database which can be used to search Mass spectrometry (raw/mgf) files to identify peptides that match to this database.
+To do so:
+
+> ### {% icon hands_on %} Hands-on
+>
+> 1. **FASTA Merge Files and Filter Unique Sequences** {% icon tool %} with the following parameters:
+>   - {% icon param-check %} *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
+>   - {% icon param-files %} *"Input FASTA File(s)"* : `Input Custom ProDB Merged Fasta File output`
+>   - {% icon param-files %} *"Input FASTA File(s)"* : `Input Translate BED transcripts Fasta output`
+>   - {% icon param-files %} *"Input FASTA File(s)"* : `Input Reference_5000_uniprot_cRAP.fasta`
+>   - {% icon param-select %} *"How are sequences judged to be unique?"*: `Accession and Sequence`
+>   - {% icon param-text %} *"Accession Parsing Regular Expression"*: `^>([^ |]+).*$`
+>
+{: .hands_on}
+
+> ### {% icon comment %} Tool parameters explained
+> This tool concatenates FASTA database files together.
+> - If the uniqueness criterion is "Accession and Sequence", only the first appearence of each unique sequence will appear in the output. Otherwise, duplicate sequences are allowed, but only the first appearance of each accession will appear in the output.
+> - The default accession parser will treat everything in the header before the first space as the accession.
+{: .comment}
 
