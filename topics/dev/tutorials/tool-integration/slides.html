@@ -1274,6 +1274,27 @@ trinity.xml
 
 ---
 
+### Tips and best practices
+
+Use a `TOOL_VERSION` token
+
+```xml
+&lt;macros&gt;
+    &lt;token name=&quot;@TOOL_VERSION@&quot;&gt;1.2&lt;/token&gt;
+&lt;/macros&gt;
+```
+
+```xml
+&lt;tool id=&quot;seqtk_seq&quot; name=&quot;Convert to FASTA (seqtk)&quot; version=&quot;@TOOL_VERSION@+galaxy3&quot;&gt;
+    &lt;requirements&gt;
+        &lt;requirement type=&quot;package&quot; version=&quot;@TOOL_VERSION@&quot;&gt;seqtk&lt;/requirement&gt;
+    &lt;/requirements&gt;
+```
+
+This means: the 3rd revision of the Galaxy tool wrapper for Seqtk 1.2 .
+
+---
+
 ### `command` &gt; Reserved Variables
 
 ```xml
@@ -1368,7 +1389,7 @@ If the output file extension is not present/usable:
 
 ### Dataset collection
 
-To group related datasets, and treat them as a single entity
+A dataset collection combines numerous datasets in a single entity that can be manipulated together
 
 - `list`: a simple list of datasets
 - `paired`: a pair of datasets, `forward` and `reverse` for NGS
@@ -1398,19 +1419,23 @@ Usage
 
 ### Dataset collection
 
-Creation when uploading (&gt;=17.05)
+Creation when uploading
 
-![](../../images/upload_collection.png)
+![collectionPrefiltered](../../../galaxy-data-manipulation/images/collectionPrefiltered.png)
+
+[Also possible with the rule-based uploader](/training-material/topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial.html)
 
 ---
 
 ### Dataset collection &gt; input
 
 ```xml
-&lt;param name=&quot;inputs&quot; type=&quot;data&quot; format=&quot;bam&quot; multiple=&quot;true&quot; label=&quot;Input BAM(s)&quot; /&gt;
+&lt;param name=&quot;inputs&quot; type=&quot;data&quot; format=&quot;bam&quot; label=&quot;Input BAM(s)&quot; /&gt;
 ```
 
 ![](../../images/input_data_collection.png)
+
+&lt;small&gt;Also accepted with `multiple=&quot;true&quot;`&lt;/small&gt;
 
 Accept only collections:
 
@@ -1508,6 +1533,71 @@ blastn -query foo_bar -num_threads 4
 
 ---
 
+## Publishing tools
+
+---
+
+### Contributing to a community
+
+Many tools developed by the community on GitHub repositories
+- [Intergalactic Utilities Commission](https://github.com/galaxyproject/tools-iuc)
+- [GalaxyP](https://github.com/galaxyproteomics/tools-galaxyp)
+- ...
+
+Added value:
+- Easier development
+- Easier contribution for user
+- Avoid duplications of efforts
+- Automated tests on each contribution
+- Automated publishing to ToolShed
+- Principle of many eyes: if something is visible to many people then, collectively, they are more likely to find errors in it
+---
+
+### IUC: Intergalactic Utilities Commission
+
+.image-50[![IUC](../../images/iuc_logo.png)]
+
+- A team maintaining high quality tools
+- Establishing and following [best practices](https://galaxy-iuc-standards.readthedocs.io/) for tool development
+- Open to contributions: bug fixes, new tools, ...
+
+https://github.com/galaxyproject/tools-iuc
+
+---
+
+### How should I publish my tool?
+
+Adding to an existing GitHub repository (IUC, GalaxyP, ...)
+
+- Read the guidelines
+- Open a pull request
+- Respond to review comments
+
+---
+
+### How should I publish my tool?
+
+Using your own GitHub repository
+
+- Reasons: ownership, specific practices, exotic tools
+- Follow the same structure
+- Use `.travis.yml` to automate tests and publishing
+
+---
+
+### How should I publish my tool?
+
+Using planemo by hand
+
+- Ok for few tools
+- Makes contributing harder
+
+[Check out our tutorial to publish to the ToolShed using Planemo](/training-material/topics/dev/tutorials/toolshed/slides.html)
+
+---
+
+### Continuous Integration
+
 .image-50[![](../../images/github_logo.png)]
 
 .image-50[![](../../images/travis_ci_logo.png)]
@@ -1515,6 +1605,16 @@ blastn -query foo_bar -num_threads 4
 .image-50[![](../../images/planemo-logo.png)]
 
 .image-50[![](../../../../shared/images/conda_logo.png)]
+
+---
+
+### Continuous Integration
+
+- Create a Pull Request on a GitHub repository
+- Tests are automatically run on Travis
+- Other contributors review your tool
+- The Pull Request is accepted when all lights are green
+- The tool is automatically uploaded to the ToolShed
 
 ---
 
@@ -1527,6 +1627,75 @@ blastn -query foo_bar -num_threads 4
 ### Travis CI side
 
 ![](../../images/github_travis_travis.png)
+
+---
+
+### ToolShed
+
+- Need to create a `.shed.yml` file in the tool directory of the GitHub repository:
+
+```yml
+categories: [Sequence Analysis]
+description: Tandem Repeats Finder description
+long_description: A long long description.
+name: tandem_repeats_finder_2
+owner: gandres
+```
+
+```bash
+planemo shed_init --name=&quot;tandem_repeats_finder_2&quot;
+                     --owner=&quot;gandres&quot;
+                     --description=&quot;Tandem Repeats Finder description&quot;
+                     --long_description=&quot;A long long description.&quot;
+                     --category=&quot;Sequence Analysis&quot;
+                     [--remote_repository_url=&lt;URL to .shed.yml on github&gt;]
+                     [--homepage_url=&lt;Homepage for tool.&gt;]
+```
+
+---
+
+### Tool suites
+
+A tool suite is a group of related tools that can all be installed at once.
+
+Defined in `.shed.yml`: implicitly define repositories for each individual tool in the directory and build a suite for those tools.
+
+Example: `trinity/.shed.yml`
+
+```yml
+[...]
+auto_tool_repositories:
+    name_template: &quot;&quot;
+    description_template: &quot; (from the Trinity tool suite)&quot;
+suite:
+    name: &quot;suite_trinity&quot;
+    description: Trinity tools to assemble transcript sequences from Illumina RNA-Seq data.
+```
+
+---
+
+### Check
+
+```bash
+planemo shed_lint --tools
+```
+```bash
+Linting repository […]/tandem_repeats_finder
+Applying linter expansion... CHECK
+.. INFO: Included files all found.
+Applying linter tool_dependencies_xsd... CHECK
+.. INFO: tool_dependencies.xml found and appears to be valid XML
+Applying linter tool_dependencies_actions... CHECK
+.. INFO: Parsed tool dependencies.
+Applying linter repository_dependencies... CHECK
+.. INFO: No repository_dependencies.xml, skipping.
+Applying linter shed_yaml... CHECK
+.. INFO: .shed.yml found and appears to be valid YAML.
+Applying linter readme... CHECK
+.. INFO: No README found skipping.
++Linting tool […]/tandem_repeats_finder/tandem_repeats_finder_wrapper.xml
+[…]
+```
 
 ---
 
@@ -1598,18 +1767,6 @@ tools:
 ```bash
 docker run -d -p 8080:80 galaxy-deeptools
 ```
-
----
-
-## Conclusion
-
----
-
-### IUC: Intergalactic Utilities Commission
-
-- Lobbyist :)
-- Host orphan tools: [GitHub](https://github.com/galaxyproject/tools-iuc)
-- [IUC-standards](https://galaxy-iuc-standards.readthedocs.io/)
 
 
 
