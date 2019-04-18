@@ -1062,7 +1062,8 @@ Use a `TOOL_VERSION` token
 ```xml
 <macros>
     <token name="@TOOL_VERSION@">1.2</token>
-</macros>```
+</macros>
+```
 
 ```xml
 <tool id="seqtk_seq" name="Convert to FASTA (seqtk)" version="@TOOL_VERSION@+galaxy3">
@@ -1071,7 +1072,7 @@ Use a `TOOL_VERSION` token
     </requirements>
 ```
 
-This means: the 3rd revision of the Galaxy tool wrapper for SeqTK 1.2
+This means: the 3rd revision of the Galaxy tool wrapper for Seqtk 1.2 .
 
 ---
 
@@ -1169,7 +1170,7 @@ If the output file extension is not present/usable:
 
 ### Dataset collection
 
-A dataset collection combine numerous datasets in a single entity that can be easily manipulated
+A dataset collection combines numerous datasets in a single entity that can be manipulatedtogether
 
 - `list`: a simple list of datasets
 - `paired`: a pair of datasets, `forward` and `reverse` for NGS
@@ -1203,7 +1204,7 @@ Creation when uploading
 
 ![collectionPrefiltered](../../../galaxy-data-manipulation/images/collectionPrefiltered.png)
 
-Also possible from rule-based uploader
+[Also possible with the rule-based uploader]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial.md %})
 
 ---
 
@@ -1325,11 +1326,12 @@ Many tools developed by the community on GitHub repositories
 - ...
 
 Added value:
-- Easier development for developers
+- Easier development
 - Easier contribution for user
+- Avoid duplications of efforts
 - Automated tests on each contribution
 - Automated publishing to ToolShed
-
+- Principle of many eyes: if something is visible to many people then, collectively, they are more likely to find errors in it
 ---
 
 ### IUC: Intergalactic Utilities Commission
@@ -1346,10 +1348,11 @@ https://github.com/galaxyproject/tools-iuc
 
 ### How should I publish my tool?
 
-Using an existing GitHub repository (IUC, GalaxyP, ...)
+Adding to an existing GitHub repository (IUC, GalaxyP, ...)
 
+- Read the guidelines
 - Open a pull request
-- Follow the guidelines and comments from maintainers
+- Respond to review comments
 
 ---
 
@@ -1410,7 +1413,7 @@ Using planemo by hand
 
 ### ToolShed
 
-- Need to create a `.shed.yml` file in the current repository (tool repository):
+- Need to create a `.shed.yml` file in the tool directory of the GitHub repository:
 
 ```yml
 categories: [Sequence Analysis]
@@ -1434,9 +1437,11 @@ planemo shed_init --name="tandem_repeats_finder_2"
 
 ### Tool suites
 
-- Tools and tool suite `.shed.yml`: implicitly define repositories for each individual tool in the directory and build a suite for those tools.
+A tool suite is a group of related tools that can all be installed at once.
 
-- Example: `trinity/.shed.yml`
+Defined in `.shed.yml`: implicitly define repositories for each individual tool in the directory and build a suite for those tools.
+
+Example: `trinity/.shed.yml`
 
 ```yml
 [...]

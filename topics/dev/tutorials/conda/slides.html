@@ -564,9 +564,8 @@ requirements:
   host:
     - zlib
   run:
-    - zlib
     - bowtie2
-  {% endraw %}
+{% endraw %}
 ```
 <small>
 - `build`: requirements needed to perform the compilation (if any)
@@ -958,78 +957,11 @@ conda skeleton cran <packagename>
 
 - Builds likely correct `build.sh` and `meta.yaml`.
 - The recipe name will have an `r-` prefix and will be converted to lowercase.
-- Typically can be used without modification, though dependencies may also need recipes.
 
-https://bioconda.github.io/guidelines.html#r-cran
+{% icon warning %} _The majority of R packages on CRAN are generic and should therefore be submitted at Conda-Forge.
+Exceptions are r-\* packages that depends on bioconductor-\* packages._
 
-{% icon warning %} The majority of R packages on CRAN are generic and should therefore be submitted at Conda-Forge.
-
----
-
-## R - locfit's `build.sh`
-
-```sh
-#!/bin/bash
-
-# R refuses to build packages that mark themselves as Priority: Recommended
-mv DESCRIPTION DESCRIPTION.old
-grep -v '^Priority: ' DESCRIPTION.old > DESCRIPTION
-
-$R CMD INSTALL --build .
-```
-
----
-
-class: reduce70
-
-## R - locfit's `meta.yaml`
-
-```yaml
-{% raw %}
-{% set version = '1.5-9.1' %}
-
-{% set posix = 'm2-' if win else '' %}
-{% set native = 'm2w64-' if win else '' %}
-
-package:
-  name: r-locfit
-  version: {{ version|replace("-", "_") }}
-
-source:
-  fn: locfit_{{ version }}.tar.gz
-  url:
-    - https://cran.r-project.org/src/contrib/locfit_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/locfit/locfit_{{ version }}.tar.gz
-  sha256: f524148fdb29aac3a178618f88718d3d4ac91283014091aa11a01f1c70cd4e51
-
-build:
-  merge_build_host: True  # [win]
-  number: 1002
-  skip: true  # [win32]
-
-  rpaths:
-    - lib/R/lib/
-    - lib/
-
-requirements:
-  build:
-    - posix                # [win]
-    - {{ compiler('c') }}        # [unix]
-    - {{ compiler('m2w64_c') }}  # [win]
-  host:
-    - r-base
-    - r-lattice
-
-  run:
-    - r-base
-    - r-lattice
-
-test:
-  commands:
-    - $R -e "library('locfit')"  # [not win]
-- "\"%R%\" -e \"library('locfit')\"" # [win]
-{% endraw %}
-```
+[Conda-Forge contribution guidelines](https://conda-forge.org/docs/maintainer/adding_pkgs.html)
 
 ---
 
@@ -1120,12 +1052,17 @@ build:
 
 requirements:
   host:
-    - gcc
     - perl
-
+    - perl-cpan-meta-yaml
+    - perl-extutils-parsexs
+    - perl-data-dumper
+    # [...]
   run:
-    - libgcc
     - perl
+    - perl-text-parsewords
+    - perl-cpan-meta
+    - perl-version
+    # [...]
 
 test:
   # Perl 'use' tests
@@ -1134,10 +1071,7 @@ test:
     - Module::Build::Base
     - Module::Build::Compat
     - Module::Build::Config
-    - Module::Build::Cookbook
-    - Module::Build::Dumper
-    - Module::Build::Notes
-    - Module::Build::PPMMaker
+    # [...]
 
 about:
   home: https://metacpan.org/pod/Module::Build
