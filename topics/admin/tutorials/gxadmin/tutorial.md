@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "gxadmin"
+title: "Server Monitoring with gxadmin"
 zenodo_link: ""
 questions:
   - What is gxadmin
