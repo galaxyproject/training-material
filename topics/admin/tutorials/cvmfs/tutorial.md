@@ -27,13 +27,13 @@ requirements:
 # Overview
 {:.no_toc}
 
-The CernVM-FS is a distributed filesystem perfectly designed for sharing readonly data across the globe. We use it in the **[Galaxy Project](https://galaxyproject.org)** for sharing things that a lot of Galaxy servers need. Namely:
+The CernVM-FS is a distributed filesystem perfectly designed for sharing readonly data across the globe. We use it in the [Galaxy Project](https://galaxyproject.org) for sharing things that a lot of Galaxy servers need. Namely:
 * **Reference Data**
     * Genome sequences for hundreds of useful species.
     * Indices for the genome sequences
     * Various bioinformatic tool indices for the available genomes
 * **Tool containers**
-    * **[Singularity](https://www.sylabs.io/)** containers of everything stored in **[Biocontainers](https://biocontainers.pro/)** (A bioinformatic tool container repository.) You get these for free every time you build a **[Bioconda](https://bioconda.github.io/)** recipe/package for a tool.
+    * [Singularity](https://www.sylabs.io/) containers of everything stored in [Biocontainers](https://biocontainers.pro/) (A bioinformatic tool container repository.) You get these for free every time you build a [Bioconda](https://bioconda.github.io/) recipe/package for a tool.
 * Others too..
 
 From the Cern website:
@@ -227,9 +227,9 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >        - galaxyproject.galaxy
 >    ```
 >
-> > ### {% icon comment %} Ansible Heads-up
-> > If you've set up your Galaxy server using the [Galaxy Installation with Ansible]({{ site.baseurl }}{% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, you will have created a *handler* for restarting Galaxy (its name is set in the `galaxy_restart_handler_name` option in your group vars). You will need to define that handler in the CVMFS playbook the same way as you defined it in your original playbook. This also means that Ansible will perform the restart step below for you!
-> {: .comment}
+>    > ### {% icon comment %} Ansible Heads-up
+>    > If you've set up your Galaxy server using the [Galaxy Installation with Ansible]({{ site.baseurl }}{% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, you will have created a *handler* for restarting Galaxy (its name is set in the `galaxy_restart_handler_name` option in your group vars). You will need to define that handler in the CVMFS playbook the same way as you defined it in your original playbook. This also means that Ansible will perform the restart step below for you!
+>    {: .comment}
 >
 > 3. Re-run the CVMFS playbook (`ansible-playbook -i hosts cvmfs_playbook.yml`)
 >
@@ -245,13 +245,11 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >
 {: .hands_on}
 
-*That's all folks.. Hope it was useful!*
-
----
+You've now finished the tutorial, and you can [jump to the end](#feedback-google) or read on to learn about configuring CVMFS without Ansible.
 
 # CVMFS and Galaxy without Ansible
 
-> {% icon comment %} Manual version of Ansible Commands
+> ### {% icon comment %} Manual version of Ansible Commands
 > If you wish to perform the same thing that we've just done, but by building the ansible script manually, follow these instructions. Otherwise, you have already done everything below and do not need to re-do it.
 {: .comment}
 
