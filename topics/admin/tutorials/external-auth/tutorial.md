@@ -128,7 +128,7 @@ You should now be presented with a password dialog when attempting to load the G
 >
 > 3. Note that some user features are not available when remote user support is enabled.
 >
->    Try logging out by selecting **User** -> **Logout**. You will discover that when returning to the user interface, you are still logged in. This is because Galaxy has no way of logging you out of the proxy's authentication system. Instead, you should set `remote_user_logout_href` in `galaxy.ini` to point to the URL of your authentication system's logout page.
+>    Try logging out by selecting **User** -> **Logout**. You will discover that when returning to the user interface, you are still logged in. This is because Galaxy has no way of logging you out of the proxy's authentication system. Instead, you should set `remote_user_logout_href` in `galaxy.yml` to point to the URL of your authentication system's logout page.
 >
 {: .hands_on}
 
