@@ -151,23 +151,21 @@ We can see this for ourselves by extracting the headers, and reformatting them t
 >    > {: .solution}
 >    {: .question}
 >
-> 1. **Sort** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sort Query"*: output of **Text transformation**
->    - In *"Column selections"*
->       - In *"1: Column selections"*
->          - *"on column"*: `Column: 1`
->          - *"in"*: `Ascending order`
->
-> 1. **Unique lines** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"File to scan for unique values"*: output of **Text transformation**
->    - *"Do you want to group each unique group"*: `No`
->       - *"Counting number of occurrences"*: `Yes`
->       - *"Only print duplicate lines"*: `No`
->       - *"Only print unique lines"*: `No`
->    - *"Ignore differences in case when comparing"*: `No`
+> 1. **Datamash** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input tabular dataset"*: output of **Text transformation**
+>    - *"Group by fields"*: `1`
+>    - *"Input file has a header line"* : `Yes`
+>    - *"Print header line"*:`No`
+>    - *"Sort input"*:`Yes`
+>    - *"Print all fields from input file"*:`No`
+>    - *"Ignore case when grouping"*:`No`
+>    - In *"Operation to perform on each group"*
+>       - Select `+ Insert Operation to perform on each group`:
+>       - In *"1: Operation to perform on each group"*
+>          - *"Type"*: `count`
+>          - *"On column"*: `Column: 1`
 >
 {: .hands_on}
-
 
 > ### {% icon question %} Questions
 >
