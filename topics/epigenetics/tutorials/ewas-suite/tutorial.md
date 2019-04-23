@@ -210,11 +210,11 @@ In order the next we will need additional file that annotate illumina450K with g
 ![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
 
 > ### {% icon comment %} Phenotype table
-> Phenotype table can be in diffrent size with diffrent arguments only second column is required to contain phenotype covariate information for each sample.
+> Phenotype table can be in different size with different arguments only second column is required to contain phenotype covariate information for each sample.
 {: .comment}
 
 > ### {% icon question %} Questions
-> How are we define phenotype covariate?
+> How do we define phenotype covariate?
 > > ### {% icon solution %} Solution
 > > Phenotype covariate is the set of observable characteristics of an individual resulting from the gene-environment interactions
 > {: .solution}
