@@ -56,6 +56,9 @@ The first step of EWAS data anylalysis is the raw methylation data loading (inte
 > ### {% icon hands_on %} Hands-on: Data Loading
 >
 > 1. Create a new history for this tutorial and give it a proper name
+>
+>    {% include snippets/history_create_new.md %}
+>
 > 2. Import the following IDAT files from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or from the data library (ask your instructor)
 >    - `GSM1588704_8795207135_R01C02_Red.idat`
 >    - `GSM1588705_8795207119_R05C02_Red.idat`
@@ -66,26 +69,22 @@ The first step of EWAS data anylalysis is the raw methylation data loading (inte
 >    - `GSM1588706_8795207135_R02C02_Grn.idat`
 >    - `GSM1588707_8795207119_R06C02_Grn.idat`
 >
->    ```
+>    > ### {% icon details %} List of Zenodo URLs
+>    > ```
+>    > https://zenodo.org/record/1251211/files/GSM1588704_8795207135_R01C02_Red.idat
+>    > https://zenodo.org/record/1251211/files/GSM1588706_8795207135_R02C02_Red.idat
+>    > https://zenodo.org/record/1251211/files/GSM1588705_8795207119_R05C02_Red.idat
+>    > https://zenodo.org/record/1251211/files/GSM1588707_8795207119_R06C02_Red.idat
+>    > https://zenodo.org/record/1251211/files/GSM1588704_8795207135_R01C02_Grn.idat
+>    > https://zenodo.org/record/1251211/files/GSM1588706_8795207135_R02C02_Grn.idat
+>    > https://zenodo.org/record/1251211/files/GSM1588705_8795207119_R05C02_Grn.idat
+>    > https://zenodo.org/record/1251211/files/GSM1588707_8795207119_R06C02_Grn.idat
+>    > ```
+>    {: .details}
 >
->    https://zenodo.org/record/1251211/files/GSM1588704_8795207135_R01C02_Red.idat
->    https://zenodo.org/record/1251211/files/GSM1588706_8795207135_R02C02_Red.idat
->    https://zenodo.org/record/1251211/files/GSM1588705_8795207119_R05C02_Red.idat
->    https://zenodo.org/record/1251211/files/GSM1588707_8795207119_R06C02_Red.idat
->    https://zenodo.org/record/1251211/files/GSM1588704_8795207135_R01C02_Grn.idat
->    https://zenodo.org/record/1251211/files/GSM1588706_8795207135_R02C02_Grn.idat
->    https://zenodo.org/record/1251211/files/GSM1588705_8795207119_R05C02_Grn.idat
->    https://zenodo.org/record/1251211/files/GSM1588707_8795207119_R06C02_Grn.idat
-
->    ```
->    > ### {% icon tip %} Tip: Importing data via links
->    >
->    > * Copy the link locations
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > * Paste the link into the text field
->    > * Press **Start**
->    {: .tip}
+>    {% include snippets/import_via_link.md %}
+>
+>    {% include snippets/import_from_data_library.md %}
 >
 > 3. Run **minfi read450k** {% icon tool %} with the appropriate selection of {% icon param-files %} *"red channel files"*: > and {% icon param-files %} *"green channel files"*: on datesets uploaded in the previous step
 > 4. Inspect generated set of data
