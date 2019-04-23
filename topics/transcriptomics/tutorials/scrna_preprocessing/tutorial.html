@@ -327,7 +327,7 @@
     }
   },
   "url": "https://galaxyproject.github.io//training-material/topics/transcriptomics/tutorials/scrna_preprocessing/tutorial.html",
-  "timeRequired": "PT2H",
+  "timeRequired": "PT3H",
   "keywords": "single-cell",
   "description": "Pre-processing of Single-Cell RNA Data\\nThe questions this  addresses are:\n - What is single-cell?\n - How do we process a batch?\n - How do we process multiple batches?\n - How do we check for cross-contamination?\n\n\\nThe objectives are:\n - Demultiplex FASTQ data via UMI-tools\n - Understand and validate the extraction of barcodes\n - Obtain an overview of general alignment and quantification techniques\n - Generate a count matrix for downstream single-cell RNA analysis\n\n",
   "coursePrerequisites": [
@@ -582,7 +582,7 @@
             
 
             
-            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours</p>
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 3 hours</p>
             
         </blockquote>
 
@@ -593,13 +593,7 @@
                     <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
                 </div>
                 <div class="col-sm-10">
-                    <!-- General Notes
-
-
-
--->
-
-<h1 class="no_toc" id="introduction">Introduction</h1>
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <h4 class="no_toc" id="why-do-single-cell-sequencing">Why do Single Cell sequencing?</h4>
 
@@ -1349,7 +1343,7 @@ The number of columns can be seen by scrolling the file preview window completel
 
   <ol>
     <li>Create a new history and rename it (<em>e.g.</em> scRNA-seq multiple-batch tutorial)</li>
-    <li>Import the four matrices (<code class="highlighter-rouge">P1_B1.tabular</code>, <code class="highlighter-rouge">P1_B2.tabular</code>, etc.) from <a href="https://zenodo.org/record/2573175"><code class="highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)
+    <li>Import the four matrices and barcodes (<code class="highlighter-rouge">P1_B1.tabular</code>, <code class="highlighter-rouge">P1_B2.tabular</code>, etc.) from <a href="https://zenodo.org/record/2573175"><code class="highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)
       <ul>
         <li>Set the datatype of the tabular files to <strong>tabular</strong></li>
       </ul>
@@ -1358,6 +1352,7 @@ The number of columns can be seen by scrolling the file preview window completel
 https://zenodo.org/record/2573175/files/P1_B2.tabular
 https://zenodo.org/record/2573175/files/P2_B3.tabular
 https://zenodo.org/record/2573175/files/P2_B4.tabular
+https://zenodo.org/record/2573175/files/celseq_barcodes.192.tabular
 </code></pre></div>      </div>
 
       <blockquote class="tip">
@@ -1471,7 +1466,7 @@ https://zenodo.org/record/2573175/files/P2_B4.tabular
 
 <p>The identifier column refers to the column where the gene names are listed. A 1:1 correspondence between matrices is checked, so that the merge does not concatenate the wrong rows between matrices. The <em>Fill character</em> provides a default value of 0 for cases where a Gene appears only in one of the matrices as per our example earlier.</p>
 
-<p>Once the merge is complete, we can now peek at our full combined matrix by once again clicking on the file name to see a small summary. Here we can see that we now have ~30,000 genes and over 1500 cells.</p>
+<p>Once the merge is complete, we can now peek at our full combined matrix by once again clicking on the file name to see a small summary. Compared to the ~2,500 genes and 192 cells we observe in the individual matrices, we can see that we now have ~6,200 genes and more than 750 cells.</p>
 
 <p>However, the number of cells are greatly overestimated.  This is because <em>not all batches use the same barcodes</em>, and yet we are applying the full set of barcodes to each batch.</p>
 
@@ -1584,8 +1579,8 @@ https://zenodo.org/record/2573175/files/P2_B4.tabular
 
   <p>Select <strong>Cross-contamination Barcode Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
-    <li><em>“Input Matrix”</em>:<code class="highlighter-rouge">output</code> (merged matrices from the Column Join tool)</li>
-    <li><em>“Complete Barcodes”</em>:(barcodes file)</li>
+    <li><em>“Input Matrix”</em>:<code class="highlighter-rouge">Column Join output</code> (merged matrices)</li>
+    <li><em>“Complete Barcodes”</em>:<code class="highlighter-rouge">celseq_barcodes.192.tabular</code> (barcodes file)</li>
     <li><em>“Plate Protocol”</em>:<code class="highlighter-rouge">Custom</code>
       <ul>
         <li><em>“Under ‘Barcode Format’“</em>:
@@ -1644,13 +1639,20 @@ https://zenodo.org/record/2573175/files/P2_B4.tabular
       <ul>
         <li><em>“RegEx to extract Plate, Batch, and Barcodes from headers”</em>:<code class="highlighter-rouge">.*P(\\d)_B(\\d)_([ACTG]+)</code>
 <small>(<strong>Attention! Take note of the ‘B’</strong>)</small></li>
+        <li><em>“RegEx to replace Plate, Batch, and Barcodes from headers”</em>:<code class="highlighter-rouge">P\\1_B\\2_\\3</code></li>
       </ul>
     </li>
   </ul>
 
 </blockquote>
 
-<p>The <a href="https://www.regular-expressions.info/quickstart.html">regular expression</a> (RegEx) used in that final step is required to tell us how to capture the important information in the cell headers contained in brackets <code class="highlighter-rouge">(</code> <code class="highlighter-rouge">)</code>, where <code class="highlighter-rouge">\\d</code> denotes an expected digit, and <code class="highlighter-rouge">[ACTG]+</code> denotes 1 or more characters matching A or C or T or G.</p>
+<blockquote class="comment">
+  <h3 id="comment-regular-expressions"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Regular Expressions</h3>
+  <p>The <a href="https://www.regular-expressions.info/quickstart.html">regular expression</a> (RegEx) used in the final steps of the above <em>Hands-On</em> is required in order to tell us how to capture the important information in the cell headers contained in brackets <code class="highlighter-rouge">(</code> <code class="highlighter-rouge">)</code>, where <code class="highlighter-rouge">\\d</code> denotes an expected digit, and <code class="highlighter-rouge">[ACTG]+</code> denotes 1 or more characters matching A or C or T or G.</p>
+
+  <p>The information captured in the brackets <code class="highlighter-rouge">(</code> <code class="highlighter-rouge">)</code> can then be placed in the desired arrangement, where <code class="highlighter-rouge">Place \\1 Matches \\2 Here \\3</code> would place the first <code class="highlighter-rouge">\\d</code> after “Place “, the second after “Matches “, and so on.</p>
+
+</blockquote>
 
 <p>The plot that follows tells us everything we need to know about each of our batches. Each batch is essentially tested against the full set of barcodes in order to assert that only the desired or ‘Real’ barcodes have been sequenced.</p>
 

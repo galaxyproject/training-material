@@ -985,32 +985,26 @@
         </blockquote>
       </blockquote>
     </li>
-    <li><strong>Sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Datamash</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: output of <strong>Text transformation</strong></li>
-        <li>In <em>“Column selections”</em>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: output of <strong>Text transformation</strong></li>
+        <li><em>“Group by fields”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><em>“Input file has a header line”</em> : <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Print header line”</em>:<code class="highlighter-rouge">No</code></li>
+        <li><em>“Sort input”</em>:<code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Print all fields from input file”</em>:<code class="highlighter-rouge">No</code></li>
+        <li><em>“Ignore case when grouping”</em>:<code class="highlighter-rouge">No</code></li>
+        <li>In <em>“Operation to perform on each group”</em>
           <ul>
-            <li>In <em>“1: Column selections”</em>
+            <li>Select <code class="highlighter-rouge">+ Insert Operation to perform on each group</code>:</li>
+            <li>In <em>“1: Operation to perform on each group”</em>
               <ul>
-                <li><em>“on column”</em>: <code class="highlighter-rouge">Column: 1</code></li>
-                <li><em>“in”</em>: <code class="highlighter-rouge">Ascending order</code></li>
+                <li><em>“Type”</em>: <code class="highlighter-rouge">count</code></li>
+                <li><em>“On column”</em>: <code class="highlighter-rouge">Column: 1</code></li>
               </ul>
             </li>
           </ul>
         </li>
-      </ul>
-    </li>
-    <li><strong>Unique lines</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to scan for unique values”</em>: output of <strong>Text transformation</strong></li>
-        <li><em>“Do you want to group each unique group”</em>: <code class="highlighter-rouge">No</code>
-          <ul>
-            <li><em>“Counting number of occurrences”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Only print duplicate lines”</em>: <code class="highlighter-rouge">No</code></li>
-            <li><em>“Only print unique lines”</em>: <code class="highlighter-rouge">No</code></li>
-          </ul>
-        </li>
-        <li><em>“Ignore differences in case when comparing”</em>: <code class="highlighter-rouge">No</code></li>
       </ul>
     </li>
   </ol>
@@ -1134,11 +1128,18 @@
 
 <blockquote class="details">
   <h3 id="details-details-why-the-same-number-of-features"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Details: Why the Same Number of Features</h3>
-  <p>RaceID normalises the data so that all cells are compared using the same features. If the features compared between cells are different, then it is hard to make a meaningful assessment of how much one cell differs from another. The features that are selected need to be <em>meaningful</em>, meaning that they must describe or contribute to the biological variation in the data, and therefore must be differentially expressed between cells.</p>
 
-  <p>The cells that still remain after filtering will <em>still</em> contain some genes which have count values of zero. Zero values are hard to work with when comparing levels of expression across cells, so a value of 0.1 is added to the count data so that these features are not lost during the analysis. This forces the assumption that the gene <em>is</em> detectable for that cell (i.e. no errors during sequencing) but that the transcript was very lowly expressed.</p>
-
-  <p>However, it is important to see the flat square plot (bottom-right) for the post-filtered number of features, since it shows that the dataset is primed correctly for analysis with C number of cells and G number of genes. For a more ‘realistic’ distribution of features, re-run the tool with <em>“Count filtered features greater than or equal to 1”</em> enabled.</p>
+  <ul>
+    <li>
+      <p>RaceID normalises the data so that all cells are compared using the same features. If the features compared between cells are different, then it is hard to make a meaningful assessment of how much one cell differs from another. The features that are selected need to be <em>meaningful</em>, meaning that they must describe or contribute to the biological variation in the data, and therefore must be differentially expressed between cells.</p>
+    </li>
+    <li>
+      <p>The cells that still remain after filtering will <em>still</em> contain some genes which have count values of zero. Zero values are hard to work with when comparing levels of expression across cells, so a value of 0.1 is added to the count data so that these features are not lost during the analysis. This forces the assumption that the gene <em>is</em> detectable for that cell (i.e. no errors during sequencing) but that the transcript was very lowly expressed.</p>
+    </li>
+    <li>
+      <p>However, it is important to see the flat square plot (bottom-right) for the post-filtered number of features, since it shows that the dataset is primed correctly for analysis with C number of cells and G number of genes. For a more ‘realistic’ distribution of features, re-run the tool with <em>“Count filtered features greater than or equal to 1”</em> enabled.</p>
+    </li>
+  </ul>
 
 </blockquote>
 
@@ -1161,8 +1162,8 @@
       <li>2089 genes remain (10%)</li>
       <li><strong>Yes</strong>
         <ul>
-          <li>Cells: These are the observations of your dataset, and the more observations you have, the better the model will be. At minimum, 60% of your initial cells should be retained, though this will depend on the quality of your dataset.</li>
-          <li>Genes: These are the variables of your dataset, and the more variables you have, the more needlessly complex the model will be. Only a few variables will be relevant in modelling our observations, and it these variables we wish to discover. Most of your genes will <em>not</em> be differentially expressed between different cell types and so we are not interested in those genes (though they are very useful to have in the initial matrix, as they serve as a stable background metric to measure the significantly differentially expressed genes against). It is perfectly acceptable to perform a single-cell RNA-seq analysis with as few as 500 (differentially expressed) genes.</li>
+          <li><em>Cells:</em> These are the observations of your dataset, and the more observations you have, the better the model will be. At minimum, 60% of your initial cells should be retained, though this will depend on the quality of your dataset.</li>
+          <li><em>Genes:</em> These are the variables of your dataset, and the more variables you have, the more needlessly complex the model will be. Only a few variables will be relevant in modelling our observations, and it these variables we wish to discover. Most of your genes will <em>not</em> be differentially expressed between different cell types and so we are not interested in those genes (though they are very useful to have in the initial matrix, as they serve as a stable background metric to measure the significantly differentially expressed genes against). It is perfectly acceptable to perform a single-cell RNA-seq analysis with as few as 500 (differentially expressed) genes.</li>
         </ul>
       </li>
     </ol>
