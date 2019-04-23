@@ -14,7 +14,7 @@ objectives:
   - "Understand and validate the extraction of barcodes"
   - "Obtain an overview of general alignment and quantification techniques"
   - "Generate a count matrix for downstream single-cell RNA analysis"
-time_estimation: "2h"
+time_estimation: "3h"
 key_points:
   - "Verifying the distribution of barcodes via a FASTQC plot"
   - "Relocating barcodes into headers"
@@ -42,11 +42,6 @@ contributors:
 
 ---
 
-<!-- General Notes
-
-
-
--->
 
 
 # Introduction
@@ -503,7 +498,7 @@ Once again, file naming is important, and so we will rename our matrix files app
 > ### {% icon hands_on %} Hands-on: Data upload and organization
 >
 > 1. Create a new history and rename it (*e.g.* scRNA-seq multiple-batch tutorial)
-> 1. Import the four matrices (`P1_B1.tabular`, `P1_B2.tabular`, etc.) from [`Zenodo`](https://zenodo.org/record/2573175) or from the data library (ask your instructor)
+> 1. Import the four matrices and barcodes (`P1_B1.tabular`, `P1_B2.tabular`, etc.) from [`Zenodo`](https://zenodo.org/record/2573175) or from the data library (ask your instructor)
 >    - Set the datatype of the tabular files to **tabular**
 >
 >    ```
@@ -511,6 +506,7 @@ Once again, file naming is important, and so we will rename our matrix files app
 >    https://zenodo.org/record/2573175/files/P1_B2.tabular
 >    https://zenodo.org/record/2573175/files/P2_B3.tabular
 >    https://zenodo.org/record/2573175/files/P2_B4.tabular
+>    https://zenodo.org/record/2573175/files/celseq_barcodes.192.tabular
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -570,7 +566,7 @@ Let us now merge our matrices from different batches.
 
 The identifier column refers to the column where the gene names are listed. A 1:1 correspondence between matrices is checked, so that the merge does not concatenate the wrong rows between matrices. The *Fill character* provides a default value of 0 for cases where a Gene appears only in one of the matrices as per our example earlier.
 
-Once the merge is complete, we can now peek at our full combined matrix by once again clicking on the file name to see a small summary. Here we can see that we now have ~30,000 genes and over 1500 cells.
+Once the merge is complete, we can now peek at our full combined matrix by once again clicking on the file name to see a small summary. Compared to the ~2,500 genes and 192 cells we observe in the individual matrices, we can see that we now have ~6,200 genes and more than 750 cells.
 
 However, the number of cells are greatly overestimated.  This is because *not all batches use the same barcodes*, and yet we are applying the full set of barcodes to each batch.
 
@@ -627,8 +623,8 @@ Let us now apply this protocol to our count matrix, and look for any cross-conta
 > ### {% icon hands_on %} Hands-on: Barcode Filtering
 >
 > Select **Cross-contamination Barcode Filter** {%icon tool %} with the following parameters:
->  - *"Input Matrix"*:`output` (merged matrices from the Column Join tool)
->  - *"Complete Barcodes"*:(barcodes file)
+>  - *"Input Matrix"*:`Column Join output` (merged matrices)
+>  - *"Complete Barcodes"*:`celseq_barcodes.192.tabular` (barcodes file)
 >  - *"Plate Protocol"*:`Custom`
 >     - *"Under 'Barcode Format'"*:
 >        - Select `+ Insert Barcode Format`:
@@ -653,10 +649,16 @@ Let us now apply this protocol to our count matrix, and look for any cross-conta
 >  - Expand the *"RegEx Parameters"* section:
 >     - *"RegEx to extract Plate, Batch, and Barcodes from headers"*:`.*P(\\d)_B(\\d)_([ACTG]+)`
 >       <small>(**Attention! Take note of the 'B'**)
+>     - *"RegEx to replace Plate, Batch, and Barcodes from headers"*:`P\\1_B\\2_\\3`
 >
 {: .hands_on}
 
-The [regular expression](https://www.regular-expressions.info/quickstart.html) (RegEx) used in that final step is required to tell us how to capture the important information in the cell headers contained in brackets `(` `)`, where `\\d` denotes an expected digit, and `[ACTG]+` denotes 1 or more characters matching A or C or T or G.
+> ### {% icon comment  %} Regular Expressions
+> The [regular expression](https://www.regular-expressions.info/quickstart.html) (RegEx) used in the final steps of the above *Hands-On* is required in order to tell us how to capture the important information in the cell headers contained in brackets `(` `)`, where `\\d` denotes an expected digit, and `[ACTG]+` denotes 1 or more characters matching A or C or T or G.
+>
+> The information captured in the brackets `(` `)` can then be placed in the desired arrangement, where `Place \\1 Matches \\2 Here \\3` would place the first `\\d` after "Place ", the second after "Matches ", and so on.
+>
+{: .comment }
 
 The plot that follows tells us everything we need to know about each of our batches. Each batch is essentially tested against the full set of barcodes in order to assert that only the desired or 'Real' barcodes have been sequenced.
 

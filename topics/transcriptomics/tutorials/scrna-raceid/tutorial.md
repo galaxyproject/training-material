@@ -151,23 +151,21 @@ We can see this for ourselves by extracting the headers, and reformatting them t
 >    > {: .solution}
 >    {: .question}
 >
-> 1. **Sort** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sort Query"*: output of **Text transformation**
->    - In *"Column selections"*
->       - In *"1: Column selections"*
->          - *"on column"*: `Column: 1`
->          - *"in"*: `Ascending order`
->
-> 1. **Unique lines** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"File to scan for unique values"*: output of **Text transformation**
->    - *"Do you want to group each unique group"*: `No`
->       - *"Counting number of occurrences"*: `Yes`
->       - *"Only print duplicate lines"*: `No`
->       - *"Only print unique lines"*: `No`
->    - *"Ignore differences in case when comparing"*: `No`
+> 1. **Datamash** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input tabular dataset"*: output of **Text transformation**
+>    - *"Group by fields"*: `1`
+>    - *"Input file has a header line"* : `Yes`
+>    - *"Print header line"*:`No`
+>    - *"Sort input"*:`Yes`
+>    - *"Print all fields from input file"*:`No`
+>    - *"Ignore case when grouping"*:`No`
+>    - In *"Operation to perform on each group"*
+>       - Select `+ Insert Operation to perform on each group`:
+>       - In *"1: Operation to perform on each group"*
+>          - *"Type"*: `count`
+>          - *"On column"*: `Column: 1`
 >
 {: .hands_on}
-
 
 > ### {% icon question %} Questions
 >
@@ -253,11 +251,12 @@ The bottom row shows the count distributions of the Library Size and Number of F
 {: .comment}
 
 > ### {% icon details %} Details: Why the Same Number of Features
-> RaceID normalises the data so that all cells are compared using the same features. If the features compared between cells are different, then it is hard to make a meaningful assessment of how much one cell differs from another. The features that are selected need to be *meaningful*, meaning that they must describe or contribute to the biological variation in the data, and therefore must be differentially expressed between cells.
 >
-> The cells that still remain after filtering will *still* contain some genes which have count values of zero. Zero values are hard to work with when comparing levels of expression across cells, so a value of 0.1 is added to the count data so that these features are not lost during the analysis. This forces the assumption that the gene *is* detectable for that cell (i.e. no errors during sequencing) but that the transcript was very lowly expressed.
+> * RaceID normalises the data so that all cells are compared using the same features. If the features compared between cells are different, then it is hard to make a meaningful assessment of how much one cell differs from another. The features that are selected need to be *meaningful*, meaning that they must describe or contribute to the biological variation in the data, and therefore must be differentially expressed between cells.
 >
-> However, it is important to see the flat square plot (bottom-right) for the post-filtered number of features, since it shows that the dataset is primed correctly for analysis with C number of cells and G number of genes. For a more 'realistic' distribution of features, re-run the tool with *"Count filtered features greater than or equal to 1"* enabled.
+> * The cells that still remain after filtering will *still* contain some genes which have count values of zero. Zero values are hard to work with when comparing levels of expression across cells, so a value of 0.1 is added to the count data so that these features are not lost during the analysis. This forces the assumption that the gene *is* detectable for that cell (i.e. no errors during sequencing) but that the transcript was very lowly expressed.
+>
+> * However, it is important to see the flat square plot (bottom-right) for the post-filtered number of features, since it shows that the dataset is primed correctly for analysis with C number of cells and G number of genes. For a more 'realistic' distribution of features, re-run the tool with *"Count filtered features greater than or equal to 1"* enabled.
 >
 {: .details}
 
@@ -274,8 +273,8 @@ The bottom row shows the count distributions of the Library Size and Number of F
 > > 1. 287 cells remain (66%)
 > > 2. 2089 genes remain (10%)
 > > 3. **Yes**
-> >    * Cells: These are the observations of your dataset, and the more observations you have, the better the model will be. At minimum, 60% of your initial cells should be retained, though this will depend on the quality of your dataset.
-> >    * Genes: These are the variables of your dataset, and the more variables you have, the more needlessly complex the model will be. Only a few variables will be relevant in modelling our observations, and it these variables we wish to discover. Most of your genes will *not* be differentially expressed between different cell types and so we are not interested in those genes (though they are very useful to have in the initial matrix, as they serve as a stable background metric to measure the significantly differentially expressed genes against). It is perfectly acceptable to perform a single-cell RNA-seq analysis with as few as 500 (differentially expressed) genes.
+> >    * *Cells:* These are the observations of your dataset, and the more observations you have, the better the model will be. At minimum, 60% of your initial cells should be retained, though this will depend on the quality of your dataset.
+> >    * *Genes:* These are the variables of your dataset, and the more variables you have, the more needlessly complex the model will be. Only a few variables will be relevant in modelling our observations, and it these variables we wish to discover. Most of your genes will *not* be differentially expressed between different cell types and so we are not interested in those genes (though they are very useful to have in the initial matrix, as they serve as a stable background metric to measure the significantly differentially expressed genes against). It is perfectly acceptable to perform a single-cell RNA-seq analysis with as few as 500 (differentially expressed) genes.
 > > 
 > {: .solution}
 >
