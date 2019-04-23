@@ -2,72 +2,12 @@
 layout: tutorial_slides
 logo: "GTN"
 
-title: "Galaxy Monitoring"
+title: "Galaxy Monitoring with Telegraf and Grafana"
 contributors:
   - natefoo
   - bgruening
   - slugger70
   - erasche
----
-
-## Manage Jobs
-
-An admin interface to list current unfinished jobs and finished jobs of a certain age.
-
-* You can stop unfinished jobs
-* You can show details of old jobs
-* You can lock the server from spawning new jobs. (e.g. for maintenance.)
-
----
-
-# Log Files
-
-- Galaxy logs (`/srv/galaxy/log/*`)
-  - Web (uWSGI)
-  - Handler
-- nginx logs (`/var/log/nginx/*`)
-- supervisor logs (`/var/log/supervisor/*`)
-
----
-
-# Analytics
-
-Can we make better walltime decisions?
-
-`scripts/runtime_stats.py`: Database-driven job runtime statistics
-
----
-
-# Reports
-
-Galaxy ships with its own app that reports usage (user, job, data, etc numbers)
-
----
-# Nagios
-
-General purpose tool for monitoring systems and services.
-
-Galaxy-specific check in `contrib/nagios/`: Runs Galaxy jobs
-
----
-
-# Sentry
-
-* Motto: *"Stop hoping your users will report errors"*
-* Error tracking and analysing tool.
-* Galaxy has Sentry middleware that you can enable in configuration.
-
----
-# Job Metrics
-
-Galaxy can collect metrics on each job through configurable plugins in `job_metrics_conf.xml`.
-
-Some plugins:
-- `core`: Captures Galaxy slots, start and end of job, runtime
-- `cpuinfo`: processor count for each job
-- `env`: dump environment for each job
-- `collectl`: monitor a wide array of system performance data
-
 ---
 
 # Telegraf, InfluxDB, and Grafana
