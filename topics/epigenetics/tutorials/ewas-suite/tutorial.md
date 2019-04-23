@@ -86,7 +86,10 @@ The first step of EWAS data anylalysis is the raw methylation data loading (inte
 >
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Run **minfi read450k** {% icon tool %} with the appropriate selection of {% icon param-files %} *"red channel files"*: > and {% icon param-files %} *"green channel files"*: on datesets uploaded in the previous step
+> 3. Run **minfi read450k** {% icon tool %} with the following parameters:
+>    - {% icon param-files %} *"red channel files"*: all files ending in `_Red`
+>    - {% icon param-files %} *"green channel files"*: all files ending in `Grn`
+>
 > 4. Inspect generated set of data
 {: .hands_on}
 
