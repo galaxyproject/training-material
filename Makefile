@@ -23,7 +23,7 @@ endif
 
 CONDA=$(shell which conda)
 ifeq ($(CONDA),)
-	CONDA=${HOME}/miniconda3/bin/conda
+	CONDA=${HOME}/miniconda3/bin/conda/
 endif
 
 default: help
