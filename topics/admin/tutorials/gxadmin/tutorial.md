@@ -16,6 +16,8 @@ key_points:
   - new queries are welcome and easy to contribute
 contributors:
   - erasche
+tags:
+  - ansible
 ---
 
 # Overview
@@ -34,7 +36,7 @@ Since then it became the home for "all of the SQL queries we [galaxy admins] run
 >
 {: .agenda}
 
-## Installation
+## Installation with Ansible
 
 > ### {% icon hands_on %} Hands-on: Installing gxadmin with Ansible
 >
@@ -47,12 +49,11 @@ Since then it became the home for "all of the SQL queries we [galaxy admins] run
 >
 > 2. Install the role with `ansible-galaxy install -p roles -r requirements.yml`
 >
-> 3. Add the role to your playbook with `become: true` and `become_user: galaxy`.
+> 3. Add the role to your playbook, it should run as root
 >
 > 4. Run the playbook
 >
 {: .hands_on}
-
 
 ## Configuration
 
