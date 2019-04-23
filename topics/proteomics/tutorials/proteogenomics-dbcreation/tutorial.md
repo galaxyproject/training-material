@@ -15,7 +15,7 @@ follow_up_training:
   -
     type: "internal"
     topic_name: proteomics
-    tutorials: 
+    tutorials:
       - proteogenomics-novel-peptide-analysis
 
 contributors:
@@ -24,6 +24,7 @@ contributors:
   - pratikdjagtap
   - jraysajulga
   - jj-umn
+  - pravs3683
 ---
 
 # Introduction
