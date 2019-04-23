@@ -95,10 +95,10 @@ The first step of EWAS data anylalysis is the raw methylation data loading (inte
 
 > ### {% icon question %} Questions
 >
-> How are the Green and Red signals are stored?
+> How are the Green and Red signals stored?
 >
 > > ### {% icon solution %} Solution
->    > Green and Red micro arrays are builded up into `RGChannelSet`
+>    > Green and Red micro arrays are built up into `RGChannelSet`
 > {: .solution}
 >
 {: .question}
@@ -116,7 +116,7 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 > 4. Run **minfi maptogenome** {% icon tool %} on the output from the previous step to map ratio data to the genomic positions
 >
 > > ### {% icon comment %} Preprocess and Normalize data
-> > If your files require normalisation, you might prefer to use other of preprocessing tools provided in EWAS suite i.e. **minfi ppfun** {% icon tool %} or **minfi ppquantile**  {% icon tool %} look for recomendation at (ref).
+> > If your files require normalisation, you might prefer to use other of preprocessing tools provided in EWAS suite i.e. **minfi ppfun** {% icon tool %} or **minfi ppquantile**  {% icon tool %} look for recommendation at (ref).
 > >
 > {: .comment}
 >
@@ -128,10 +128,10 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 
 Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect DNA measurements and interfere results from downstream analysis.
 
-Hansen, J. P. 2014 highly recommende to remove the probes that contain either a SNP at the metylated loci interrogation or at the single nucleotide extension
+Hansen, J. P. 2014 highly recommended to remove the probes that contain either a SNP at the methylated loci interrogation or at the single nucleotide extension
 
 > ### {% icon hands_on %} Hands-on: Removing probes affected by genetic variation
-> 1. Run **minfi dropsnp** {% icon tool %}  on the output of minfi_maptogenome to remove the probes that contain either a SNP at the metylated loci interrogation or at the single nucleotide extension
+> 1. Run **minfi dropsnp** {% icon tool %}  on the output of minfi_maptogenome to remove the probes that contain either a SNP at the methylated loci interrogation or at the single nucleotide extension
 {: .hands_on}
 
 # DMPs and DMRs Identification
