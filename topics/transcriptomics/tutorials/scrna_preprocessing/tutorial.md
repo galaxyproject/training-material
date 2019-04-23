@@ -653,12 +653,12 @@ Let us now apply this protocol to our count matrix, and look for any cross-conta
 >
 {: .hands_on}
 
-> ### {% icon details  %} Regular Expression
-> The [regular expression](https://www.regular-expressions.info/quickstart.html) (RegEx) used in that final step is required to tell us how to capture the important information in the cell headers contained in brackets `(` `)`, where `\\d` denotes an expected digit, and `[ACTG]+` denotes 1 or more characters matching A or C or T or G.
+> ### {% icon comment  %} Regular Expressions
+> The [regular expression](https://www.regular-expressions.info/quickstart.html) (RegEx) used in the final steps of the above *Hands-On* is required in order to tell us how to capture the important information in the cell headers contained in brackets `(` `)`, where `\\d` denotes an expected digit, and `[ACTG]+` denotes 1 or more characters matching A or C or T or G.
 >
 > The information captured in the brackets `(` `)` can then be placed in the desired arrangement, where `Place \\1 Matches \\2 Here \\3` would place the first `\\d` after "Place ", the second after "Matches ", and so on.
 >
-{: .details }
+{: .comment }
 
 The plot that follows tells us everything we need to know about each of our batches. Each batch is essentially tested against the full set of barcodes in order to assert that only the desired or 'Real' barcodes have been sequenced.
 
