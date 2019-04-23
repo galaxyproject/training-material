@@ -247,8 +247,7 @@ In addition to downstream analysis users can annotate the differentially methyla
 >   - *"Input Type Gene ID"*: `SYMBOL`
 >   - *"Output Type Gene ID"*: `ENTREZID`
 >
-> 5. Use the outpu of the  clusterProfiler bitr {% icon tool %} to run a GO Enrichment Analysis using **clusterProfiler go**
-
+> 5. Use the output of the  clusterProfiler bitr {% icon tool %} to run a GO Enrichment Analysis using **clusterProfiler go**
 {: .hands_on}
 
 ![Functional annotations](../../images/funcann.jpg "Results of GO enrichments analysis for DMPs")
