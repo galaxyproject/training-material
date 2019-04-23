@@ -176,9 +176,7 @@ In order the next we will need additional file that annotate illumina450K with g
 
 > ### {% icon hands_on %} Hands-on: DMPs and DMRs Identification
 >
-> 1. Import `phenotypeTable.txt` from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or data library
-> {% icon tip %} Tip: Importing data via links
->
+> 1. Import `phenotypeTable.txt` from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or data library:
 >    ```
 >    https://zenodo.org/record/1251211/files/phenotypeTable.txt
 >    ```
@@ -187,13 +185,8 @@ In order the next we will need additional file that annotate illumina450K with g
 >    - {% icon param-file %} *"Input set"*:`GenomicRatioSet`
 >    - {% icon param-file %} *"Phenotype Table"*:`phenotypeTable.txt`
 >    - *"Phenotype Type"*:`categorical`
->    - *"qCutoff Size"*:`0.5`
->
->        DMPs with an FDR q-value greater than this will not be returned
->
->    - *"Variance Shrinkage"*:` TRUE`
->
->       This is recommended when sample sizes are small <10
+>    - *"qCutoff Size"*:`0.5` (DMPs with an FDR q-value greater than this will not be returned)
+>    - *"Variance Shrinkage"*:` TRUE` (This is recommended when sample sizes are small <10}
 >    - *"Genome Table"*: `wgEncodeHaibMethyl450 ... `
 >
 > 3. Run **minfi dmr** {% icon tool %} on the output of minfi_dmp adjusting the following parameters
@@ -208,10 +201,9 @@ In order the next we will need additional file that annotate illumina450K with g
 >    - *"verbose"*:`TRUE`
 >
 > 4. Click on the **minfi dmr** {% icon tool %} output in your history to expand it
-> 5. Click on the {% icon galaxy-pencil %} (pencil) icon displayed in your dataset in the history
-> 6. Set Database/Build to `Human Feb. 2009 (GRCh37/hg19) (hg19)`
-> 7. Press **Save**
-> 8. Click on `display at UCSC` towards the bottom of the history item
+> 5. Set the database build of your dataset to `Human Feb. 2009 (GRCh37/hg19) (hg19)`
+>    {% include snippets/change_dbkey.md dbkey="hg19" %}
+> 6. Click on `display at UCSC` towards the bottom of the history item.
 >     This will launch UCSC Genome Browser with your Custom Track
 {: .hands_on}
 
