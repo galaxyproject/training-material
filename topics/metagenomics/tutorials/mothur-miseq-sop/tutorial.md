@@ -196,6 +196,7 @@ convention, so that our tools will know which files belong together. We do this 
 > 1. Click on the **checkmark icon** {% icon param-check %} at top of your history.
 >
 > 2. Select all the FASTQ files (40 in total)
+>    - **Tip:** type `fastq` in the search bar at the top of your history to filter only the fastq files; you can now use the `All` button at the top instead of having to individually select all 40 input files.
 >    - Click on **for all selected..**
 >    - Select **Build List of Dataset Pairs** from the dropdown menu
 >
@@ -627,7 +628,7 @@ way of doing this is to use the abundant sequences as our reference.
 ## Removal of non-bacterial sequences
 
 Despite all we have done to improve data quality, there may still be more to do:
-There may be 18S rRNA gene fragments or 16S rRNA from Archaea, chloroplasts, and mitochondria
+there may be 18S rRNA gene fragments or 16S rRNA from Archaea, chloroplasts, and mitochondria
 that have survived all the cleaning steps up to this point. We are generally not interested in these sequences
 and want to remove them from our dataset.
 
