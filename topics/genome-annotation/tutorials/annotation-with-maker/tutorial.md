@@ -60,8 +60,6 @@ To annotate a genome using Maker, you need the following files:
 
  Maker will align the transcript and protein sequences on the genome sequence to determine gene positions.
 
-## Get data
-
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create and name a new history for this tutorial.
