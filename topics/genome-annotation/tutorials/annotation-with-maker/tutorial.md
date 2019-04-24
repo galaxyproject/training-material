@@ -91,9 +91,21 @@ You have four main datasets:
 - `S_pombe_trinity_assembly.fasta` contains the EST sequences
 - `Swissprot_no_S_pombe.fasta` contanis the protein sequences from SwissProt
 - `S_pombe_genome.fasta` contains the full genome sequence
-- `S_pombe_chrIII.fasta` contains only a fraction of the full genome sequence, ie the chromosome III
+- `S_pombe_chrIII.fasta` contains only the third chromosome from the full genome
 
-For the rest of this tutorial, you need to choose between `S_pombe_chrIII.fasta` and `S_pombe_genome.fasta`. If you have time, use the full genome (`S_pombe_genome.fasta`), it will take more computing time, but the results will be closer to real-life data. If you want to get results faster, use the chromosome III (`S_pombe_chrIII.fasta`). In the rest of this tutorial, we will refer to the file you choose as `the genome`.
+
+> ### {% icon hands_on %} Hands-on: Choose your Genome
+>
+> 1. You need to choose between `S_pombe_chrIII.fasta` and `S_pombe_genome.fasta`:
+>
+>    - If you have time: use the full genome (`S_pombe_genome.fasta`), it will take more computing time, but the results will be closer to real-life data.
+>    - If you want to get results faster: use the chromosome III (`S_pombe_chrIII.fasta`).
+>
+> 2. Rename the file you will use to `genome.fasta`. E.g. if you are using `S_pombe_chrIII.fasta`, rename it to `genome.fa`
+>
+>    {% include snippets/rename_dataset.md name="genome.fa" %}
+>
+{: .hands_on}
 
 The two other datasets (`augustus_training_1.tar.gz` an `augustus_training_2.tar.gz`) will be used later in the tutorial.
 
@@ -106,7 +118,7 @@ Before running the full annotation process, you need first to evaluate the quali
 > ### {% icon hands_on %} Hands-on: Get genome sequence statistics
 >
 > 1. **Fasta Statistics** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: select the genome sequence from your history
+>    - {% icon param-file %} *"Sequences to analyse"*: select `genome.fa` sequence from your history
 >
 {: .hands_on}
 
