@@ -310,11 +310,10 @@ In this dataset:
 
 * Almost all of the reads are between 248 and 253 bases long.
 * 2,5% or more of our reads had ambiguous base calls (`Ambigs` column).
-* The longest read in the dataset is 502 reads.
+* The longest read in the dataset is 502 bases.
 * There are 152,360 sequences.
 
-In our region of interest, the V4 region of the
-16S gene, is only around 250. Any reads significantly longer than this expected value likely did not
+Our region of interest, the V4 region of the 16S gene, is only around 250 bases long. Any reads significantly longer than this expected value likely did not
 assemble well in the **Make.contigs** step. Furthermore, we see that 2,5% of our reads had between 6 and 249
 ambiguous base calls (`Ambigs` column). In the next steps we will clean up our data by removing these
 problematic reads.
