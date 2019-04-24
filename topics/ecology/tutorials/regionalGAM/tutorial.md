@@ -17,14 +17,15 @@ contributors:
     - emichn
     - yvanlebras
     - bebatut
+    - sbenateau
 ---
 
 # Introduction
 {:.no_toc}
 
-This tutorial will show how to study species phenology through the computation of abundance index and trends. It will explain you how to use different [regionalGAM](https://github.com/RetoSchmucki/regionalGAM) tools on Galaxy allowing you to deal with datasets containing occurences informations for various species per site and per date through a couple of years.
+This tutorial will show how to study species abundance through the computation of a flight curve, abundance index, and trends. It will explain you how to use different [regionalGAM](https://github.com/RetoSchmucki/regionalGAM) tools on Galaxy allowing you to deal with datasets containing abundance information for various species per site and per date through a couple of years.
 
-After a certain numbers of steps, you will be able to extract single species data and study related phenology through the years. The goal of this exercise is to be able to create abundance trend over time and biodiversity indicators. Following these indicators allow to follow trends in terms of population dynamics. You could for example try to predict the occurences of one specific species in a certain type of environnement using the prediction model of climate evolution. Based on charts that you will generate, you could try to explain the evolution of a species with environmental data (temperatures variations, modifications of the environmental conditions).
+After a certain numbers of steps, you will be able to extract single species data and study related abundance through the years. The goal of this exercise is to be able to create abundance trend over time and biodiversity indicators. Following these indicators allow to follow trends in terms of population dynamics. You could for example try to predict the occurrences of one specific species in a certain type of environment using the prediction model of climate evolution. Based on charts that you will generate, you could try to explain the evolution of a species with environmental data (temperatures variations, modifications of the environmental conditions).
 
 You will basically learn how to create a file on the basis of which you can create a visual material that can be quite easily understood and therefore be efficient for a large audience.
 
@@ -65,6 +66,7 @@ The goal of the first step is to upload and prepare the file so that it will be 
 
 This dataset gathers years of records of the presence of butterfly species per site and per day. Columns indicates species names ("SPECIES"), observation site ("SITE"), date of the observation ("YEAR","MONTH","DAY") and number of indivudals ("COUNT").
 
+This dataset compiles counts for the Gatekeeper (Pironia tithonus) collected between 2003 and 2012 and extracted from five European BMSs (United Kingdom, Netherlands, France, Germany, and Catalonia-Spain). The Gatekeeper has one generation per year.
 
 ## Prepare the data
 
@@ -198,13 +200,13 @@ The regionalGAM tools require CSV files as input, we need to regenerate a CSV fi
 >
 > > ### {% icon question %} Questions
 > >
-> > 1. How many species does your initial dataset take into account ? 
-> > 2. What are their names ? 
+> > 1. How many species does your initial dataset take into account ?
+> > 2. What are their names ?
 > >
 > > > ### {% icon solution %} Solutions
 > > >
-> > > 1. The dataset contains informations on 2 different species 
-> > > 2. Their names are "Pyronia tithonus" and "Aglais io". 
+> > > 1. The dataset contains informations on 2 different species
+> > > 2. Their names are "Pyronia tithonus" and "Aglais io".
 > > >
 > > {: .solution}
 > {: .question}
@@ -266,7 +268,7 @@ This step will allow you to compute and display the phenology of a species. In t
 
 ![Phenology chart](../../images/regionalGAM/phenology_year.png)
 
-This graph displays occurrences of *Pyronia tithonus*, over the year. But the first year is "null", probably a left-over of the 1st line with the header, and we do not know the weeks there.
+This graph displays the modeled flight curve of *Pyronia tithonus* over the years. But the first year is "null", probably a left-over of the 1st line with the header, and we do not know the weeks there.
 
 > ### {% icon hands_on %} Hands-on: Create a new column of the dataset containing the week and the year
 > 1. **Count occurrences of each record** {% icon tool %} with the following parameters
@@ -710,14 +712,14 @@ Have a look at the text file result. This is the output of the linear model appl
 >
 > > ### {% icon question %} Questions
 > >
-> > 1. Is the effect weak or strong? 
-> > 2. Seems the model closed to the reality or not? 
+> > 1. Is the effect weak or strong?
+> > 2. Seems the model closed to the reality or not?
 > > 3. Is the test p-value significant?
 > >
 > > > ### {% icon solution %} Solutions
 > > >
 > > > 1. Weak.
-> > > 2. No, the standard deviation is really bad. 
+> > > 2. No, the standard deviation is really bad.
 > > > 3. Yes
 > > >
 > > {: .solution}
@@ -727,7 +729,7 @@ Have a look at the text file result. This is the output of the linear model appl
 
 As we are applying here a very simple model, we need to test a more complex one to have more evidence about the relevance of the year effect on our data.
 
-We would like now to apply the same approach with addition of a correlation structure (ARMA(2,0)) to adjust the model.
+We would like now to apply the same approach with addition of an autocorrelation structure (ARMA(2,0)) to adjust the model.
 
 > ### {% icon hands_on %} Hands-on: Model temporal trend taking into account autocorrelation of residuals
 > 1. **Linear regression ajusted for autocorrelation in the residuals** {% icon tool %} with the following parameters.
@@ -740,14 +742,14 @@ Have a look at this new text file result.
 >
 > > ### {% icon question %} Questions
 > >
-> > 1. Is the test p-value still significant? 
-> > 2. Seems the model closed to the reality or not? 
+> > 1. Is the test p-value still significant?
+> > 2. Seems the model closed to the reality or not?
 > > 3. Can you explain why?
 > >
 > > > ### {% icon solution %} Solutions
 > > >
 > > > 1. No.
-> > > 2. No, the standard deviation is really bad. 
+> > > 2. No, the standard deviation is really bad.
 > > > 3. This is due to a strong autocorrelation in the residuals
 > > >
 > > {: .solution}
