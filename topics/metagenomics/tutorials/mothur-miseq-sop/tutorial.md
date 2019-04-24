@@ -1005,7 +1005,7 @@ dataset by subsampling.
 >    > ### {% icon question %} Question
 >    > How many sequences did the smallest sample consist of?
 >    > > ### {% icon solution %} Solution
->    > > 2389. This is a reasonable number, so we will now subsample all the other samples down to this level.
+>    > > The smallest sample is `F3D143`, and consists of 2389 sequences. This is a reasonable number, so we will now subsample all the other samples down to this level.
 >    > {: .solution}
 >    {: .question}
 >
