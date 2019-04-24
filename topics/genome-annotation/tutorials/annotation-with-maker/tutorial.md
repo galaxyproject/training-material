@@ -55,7 +55,7 @@ This tutorial was inspired by the MAKER Tutorial for [WGS Assembly and Annotatio
 To annotate a genome using Maker, you need the following files:
 
 - The genome sequence in fasta format
-- A set of transcripts or EST sequences, preferably from the same organism.
+- A set of transcripts or [EST sequences](https://en.wikipedia.org/wiki/Expressed_sequence_tag), preferably from the same organism.
 - A set of protein sequences, usually from closely related species or from a curated sequence database like UniProt/SwissProt.
 
  Maker will align the transcript and protein sequences on the genome sequence to determine gene positions.
@@ -118,7 +118,7 @@ Before running the full annotation process, you need first to evaluate the quali
 > ### {% icon hands_on %} Hands-on: Get genome sequence statistics
 >
 > 1. **Fasta Statistics** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: select `genome.fa` sequence from your history
+>    - {% icon param-file %} *"Sequences to analyse"*: select `genome.fasta` sequence from your history
 >
 {: .hands_on}
 
@@ -130,7 +130,7 @@ Have a look at the statistics:
 
 These statistics are useful to detect obvious problems in the genome assembly, but it gives no information about the quality of the sequence content. We want to evaluate if the genome sequence contains all the genes we expect to find in the considered species, and if their sequence are correct.
 
-[BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to answer this question: by comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, ...). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a genome sequence or a set of (predicted) transcript or protein sequences. This is a good evluation of the "completeness" of the genome or annotation.
+[BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to answer this question: by comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, ...). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a genome sequence or a set of (predicted) transcript or protein sequences. This is a good evaluation of the "completeness" of the genome or annotation.
 
 We will first run this tool on the genome sequence to evaluate its quality.
 
@@ -159,11 +159,11 @@ BUSCO produces three output datasets
 
 > ### {% icon question %} Questions
 >
-> 1. Do you think the genome quality is good enough for performing the annotation?
+> Do you think the genome quality is good enough for performing the annotation?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The genome consists of the exepected 4 chromosomes sequences, with very few N, which is the ideal case. Most of the BUSCO genes are found as complete single copy, and very few are fragmented, which means that our genome have a good quality as it contains most of the expected content. That's a very good material to perform an annotation.
+> > The genome consists of the exepected 4 chromosomes sequences, with very few N, which is the ideal case. Most of the BUSCO genes are found as complete single copy, and very few are fragmented, which means that our genome have a good quality as it contains most of the expected content. That's a very good material to perform an annotation.
 > >
 > {: .solution}
 >
@@ -178,7 +178,7 @@ BUSCO produces three output datasets
 
 ## Maker
 
-For this first round, we configure Maker to construct gene models only by aligning ESTs and proteins to the genome. This will produce a first draft annotation that we will improve in the next steps.
+For this first round, we configure Maker to construct gene models only by aligning [ESTs](https://en.wikipedia.org/wiki/Expressed_sequence_tag) and proteins to the genome. This will produce a first draft annotation that we will improve in the next steps.
 
 > ### {% icon hands_on %} Hands-on: First draft annotation with Maker
 >
