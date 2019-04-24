@@ -502,8 +502,8 @@ in that position for every aligned sequence (`vertical` parameter).
 >
 > 2. **Filter.seqs** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"fasta"*: `good.fasta` output from the lastest **Screen.seqs** {% icon tool %}
->   - *"trump"*: `.`
 >   - *"vertical"*: `yes`
+>   - *"trump"*: `.`
 >   - *"Output logfile"*: `yes`
 >
 {: .hands_on}
