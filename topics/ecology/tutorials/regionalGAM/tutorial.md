@@ -79,11 +79,11 @@ The downstream tools require Tabular file and not CSV. So we need first to conve
 >       - *"Header in file"*: Yes
 {: .hands_on}
 
-The current dataset contains many details. It lengthens the file processing time therefore it can be very useful to learn how to hide the informations you don't need. For example, the list of sites (look at the column with header `SITE`) of the dataset you are using is really long and the `SITES `are classified into sub-sites (like `ESBMS.12`, `ESBMS.28`, `ESBMS.55`, etc).
+The current dataset contains many details (exact site names). Processing the file is this condition would require time and for the purpose of this tutorial, we will reduce the number of sites. The column with header `SITE` of the dataset you are using is really long and the `SITES` are classified into sub-sites (like `ESBMS.12`, `ESBMS.28`, `ESBMS.55`, etc).
 
-Here, we will assume that your file doesn't really need be as precise and this is the reason why you have to specify you don't want the sub-sites. We want to create a down-sampled file, deleting the `---.12, ---.28` mentions,
+Here, we will delete the sub-sites ID and consider . We want to create a down-sampled file, deleting the `---.12, ---.28` mentions,
 
-> ### {% icon hands_on %} Hands-on: Downsample and hide some informations   
+> ### {% icon hands_on %} Hands-on: Downsample and hide some information   
 > 1. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
 >       - {% icon param-file %} *"Select cells from"*: output of **CSV to tabular** {% icon tool %}
 >       - *"using column"*: `Column: 2`, the column with the `SITE` header
@@ -97,7 +97,7 @@ Here, we will assume that your file doesn't really need be as precise and this i
 
 > ### {% icon question %} Questions
 >
-> How many sites do you have before and after deleting the sub-sites informations?
+> How many sites do you have before and after deleting the sub-sites information?
 >
 >
 > You may need to use a tool like **Count occurrences of each record** {% icon tool %}. If you want to run the same tool with same parameters to several input files, you can directly specify the {% icon param-files %} **Multiple datasets** option on the tool form for the *"from dataset"* parameter).
@@ -154,7 +154,7 @@ Here, we will assume that your file doesn't really need be as precise and this i
 
 The second step of any Regional GAM data analysis is making sure to have a dataset of only one specific species that you will then be able to use. If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another.
 
-As the dataset is quite big and may countain heterogeneous informations, we need to know whether the data are about one species or more.
+As the dataset is quite big and may countain heterogeneous information, we need to know whether the data are about one species or more.
 
 > ### {% icon hands_on %} Hands-on: How many species are taken into account in this dataset?
 >
@@ -177,11 +177,11 @@ The regionalGAM tools require CSV files as input, we need to regenerate a CSV fi
 > 2. Tag your new dataset with an explicit tag as `Count` and/or rename this dataset like `Count file`
 {: .hands_on}
 
-> ### {% icon details %} Datasets containings informations about more than one species
+> ### {% icon details %} Datasets containings information about more than one species
 >
-> If your dataset contains informations about more than one species, you can apply the previous steps and then run an extra-step to select one specific species and show all the data corresponding to it.
+> If your dataset contains information about more than one species, you can apply the previous steps and then run an extra-step to select one specific species and show all the data corresponding to it.
 >
-> As the dataset is quite big and contains heterogeneous informations, you want to know wether the data are about one species or more. So the first step consists to count how many species are taken into account in this dataset.
+> As the dataset is quite big and contains heterogeneous information, you want to know wether the data are about one species or more. So the first step consists to count how many species are taken into account in this dataset.
 >
 > > ### {% icon hands_on %} Hands-on: How many species are taken into account
 > > 1. **Count occurrences of each record** {% icon tool %} with the following parameters:
@@ -205,7 +205,7 @@ The regionalGAM tools require CSV files as input, we need to regenerate a CSV fi
 > >
 > > > ### {% icon solution %} Solutions
 > > >
-> > > 1. The dataset contains informations on 2 different species
+> > > 1. The dataset contains information on 2 different species
 > > > 2. Their names are "Pyronia tithonus" and "Aglais io".
 > > >
 > > {: .solution}
@@ -240,7 +240,7 @@ The regionalGAM tools require CSV files as input, we need to regenerate a CSV fi
 
 [Phenology](https://en.wikipedia.org/wiki/Phenology), as described in Wikipedia, is the study of periodic plant and animal life cycle events and how these are influenced by seasonal and interannual variations in climate, as well as habitat factors (such as elevation)
 
-Now you have a file containing all the data on the species of interest. The main goal of this step is to treat phenology related informations and create a material that can be used to generate charts. What you could also do, for example, would be to compare the phenology through the years and sites.
+Now you have a file containing all the data on the species of interest. The main goal of this step is to treat phenology related information and create a material that can be used to generate charts. What you could also do, for example, would be to compare the phenology through the years and sites.
 
 This step will allow you to compute and display the phenology of a species. In the second part, you will learn that it is possible to show the phenology of various species on a single chart allowing to compare them and analyse them more easily.
 
@@ -510,7 +510,7 @@ With this graph, we can see that occurrences of *Pyronia tithonus* are always ar
 > >   {: .comment}
 > {: .hands_on}
 >
-> If your input dataset contains informations about more than one species, you can now generate char for the multispecies:
+> If your input dataset contains information about more than one species, you can now generate char for the multispecies:
 >
 > > ### {% icon hands_on %} Hands-on:
 > > 1. Inspect and expand the output data from **flight curve** {% icon tool %}
@@ -766,9 +766,9 @@ To compare the 2 models, we can compute and plot the global trend (over years).
 
 ![Expected temporal trend](../../images/regionalGAM/trends.svg)
 
-Here you can see the temporal trends modeled from the simple regression vs using autocorrelation in residuals. You can see the trends are similar (apprently decrease) even if different (origin and slope are differents). Here results are not significant so we can say that there is a significant decrease of the abundance.
+Here you can see the temporal trends modeled from the simple regression vs using autocorrelation in residuals. You can see the trends are similar (apparently decrease) even if different (origin and slope are different). Here results are not significant so we can say that there is a significant decrease of the abundance.
 
 # Conclusions
 {:.no_toc}
 
-In this tutorial, you have analyzed regional GAM data to extract useful informations in order to be able to show different tendencies of a chosen species. Therefore, you are now able to treat the dataset so that it shows only the data concerning one specific species of your choice. From there, you can show the occurrence of this species through the years first on a dataset and then on a visual chart. You have also learned how to represent on a single chart the occurences of various species. Afterwards, we have shown you how to create a dataset containing the informations on the abundance of a species per year and per site. Based on which you can henceforth visually represent the annual abundance trend on a chart. Thereafter, you have the possibility of showing the expected temporal trend, based on which you will be able to try predicting the future evolution a given species. The last part of this tutorial has shown you how to calculate the linear regression allowing you to determinate wether the year has an influence on the abundance of a species or not.
+In this tutorial, you have analyzed regional GAM data to extract useful information in order to be able to show different tendencies of a chosen species. Therefore, you are now able to treat the dataset so that it shows only the data concerning one specific species of your choice. From there, you can show the phenology of this species through the years first on a dataset and then on a visual chart. You have also learned how to represent on a single chart the phenology of various species. Afterwards, we have shown you how to create a dataset containing the information on the abundance of a species per year and per site. Based on which you can henceforth visually represent the annual abundance trend on a chart. Thereafter, you have the possibility of showing the expected temporal trend, based on which you will be able to try predicting the future evolution a given species. The last part of this tutorial has shown you how to calculate the linear regression allowing you to determinate whether the year has an influence on the abundance of a species or not.
