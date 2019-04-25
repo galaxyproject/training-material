@@ -64,9 +64,10 @@ The goal of the first step is to upload and prepare the file so that it will be 
 >
 {: .hands_on}
 
-This dataset gathers years of records of the presence of butterfly species per site and per day. Columns indicates species names ("SPECIES"), observation site ("SITE"), date of the observation ("YEAR","MONTH","DAY") and number of indivudals ("COUNT").
+This dataset gathers years of records of the presence of butterfly species per site and per day. Columns indicates species names ("SPECIES"), observation site ("SITE"), date of the observation ("YEAR","MONTH","DAY") and number of indivudals ("COUNT"). It compiles counts for the Gatekeeper (Pironia tithonus) collected between 2003 and 2012 and extracted from five European BMSs (United Kingdom, Netherlands, France, Germany, and Catalonia-Spain). The Gatekeeper has one generation per year and feeds mainly on Poaceae.
 
-This dataset compiles counts for the Gatekeeper (Pironia tithonus) collected between 2003 and 2012 and extracted from five European BMSs (United Kingdom, Netherlands, France, Germany, and Catalonia-Spain). The Gatekeeper has one generation per year.
+![Gatekeeper (Pironia tithonus)](../images/Gatekeeper-Pyronia_tithonus-male.jpg "Gatekeeper (Pironia tithonus)")
+
 
 ## Prepare the data
 
@@ -79,7 +80,7 @@ The downstream tools require Tabular file and not CSV. So we need first to conve
 >       - *"Header in file"*: Yes
 {: .hands_on}
 
-The current dataset contains many details (exact site names). Processing the file is this condition would require time and for the purpose of this tutorial, we will reduce the number of sites. The column with header `SITE` of the dataset you are using is really long and the `SITES` are classified into sub-sites (like `ESBMS.12`, `ESBMS.28`, `ESBMS.55`, etc).
+The current dataset contains a lot of data (exact site names for 5 ). Processing the file is this condition would require time and for the purpose of this tutorial, we will reduce the number of sites. The column with header `SITE` of the dataset you are using is really long and the `SITES` are classified into sub-sites (like `ESBMS.12`, `ESBMS.28`, `ESBMS.55`, etc).
 
 Here, we will delete the sub-sites ID and consider . We want to create a down-sampled file, deleting the `---.12, ---.28` mentions,
 
