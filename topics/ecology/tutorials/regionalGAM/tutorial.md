@@ -64,9 +64,9 @@ The goal of the first step is to upload and prepare the file so that it will be 
 >
 {: .hands_on}
 
-This dataset gathers years of records of the presence of butterfly species per site and per day. Columns indicates species names ("SPECIES"), observation site ("SITE"), date of the observation ("YEAR","MONTH","DAY") and number of indivudals ("COUNT"). It compiles counts for the Gatekeeper (Pironia tithonus) collected between 2003 and 2012 and extracted from five European BMSs (United Kingdom, Netherlands, France, Germany, and Catalonia-Spain). The Gatekeeper has one generation per year and feeds mainly on Poaceae.
+This dataset gathers years of records of the presence of butterfly species per site and per day. Columns indicates species names ("SPECIES"), observation site ("SITE"), date of the observation ("YEAR","MONTH","DAY") and number of indivudals ("COUNT"). It compiles counts for the Gatekeeper (Pironia tithonus) collected between 2003 and 2012 and extracted from five European BMSs (United Kingdom, Netherlands, France, Germany, and Catalonia-Spain). The Gatekeeper has one generation per year and feeds mainly on Poaceae. It is found in the Central and Southern Europe, North Africa Anatolia, and Caucasus.
 
-![Gatekeeper (Pironia tithonus)](../images/Gatekeeper-Pyronia_tithonus-male.jpg "Gatekeeper (Pironia tithonus)")
+![Gatekeeper (Pironia tithonus)](../../images/regionalGAM/Gatekeeper-Pyronia_tithonus-male.jpg "Gatekeeper (Pironia tithonus)")
 
 
 ## Prepare the data
@@ -239,7 +239,9 @@ The regionalGAM tools require CSV files as input, we need to regenerate a CSV fi
 
 ## Visualize the phenology
 
-[Phenology](https://en.wikipedia.org/wiki/Phenology), as described in Wikipedia, is the study of periodic plant and animal life cycle events and how these are influenced by seasonal and interannual variations in climate, as well as habitat factors (such as elevation)
+
+
+[Phenology](https://en.wikipedia.org/wiki/Phenology), as described in Wikipedia, is the study of periodic plant and animal life cycle events and how these are influenced by seasonal and interannual variations in climate, as well as habitat factors (such as elevation).
 
 Now you have a file containing all the data on the species of interest. The main goal of this step is to treat phenology related information and create a material that can be used to generate charts. What you could also do, for example, would be to compare the phenology through the years and sites.
 
