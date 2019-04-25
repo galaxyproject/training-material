@@ -7,6 +7,13 @@ layout: base
 {% assign instances = site.data['instances'] %}
 {% assign topic_material = site.pages | topic_filter:page.topic_name %}
 {% assign language = site.other_languages | split: ", " %}
+{% if page.contributors %}
+  {% assign contrib = page.contributors %}
+  {% capture contributors %}
+  {% for contributor_id in contrib %}, {% assign c = contributors[contributor_id].name | default: contributor_id %}
+  <a href="{{ site.baseurl }}/hall-of-fame#{{ contributor_id }}" class="contributor-badge"><img src="https://avatars.githubusercontent.com/{{ contributor_id }}" alt="{{ c }}">{{ c }}</a>
+  {%- endfor %}{% endcapture %}
+{% endif %}
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -74,7 +81,7 @@ layout: base
                             </a>
                             <div class="dropdown-menu">
                                 {% if topic.docker_image %}
-                                    <a class="dropdown-item" href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/docker" title="Docker image for this tutorial">
+                                    <a class="dropdown-item" href="{{ site.github.repository_url }}/tree/{{ site.repository_branch }}/topics/{{ topic.name }}/docker" title="Docker image for this tutorial">
                                         {% icon docker_image %} Docker image
                                     </a>
                                 {% endif %}
@@ -134,7 +141,7 @@ layout: base
                     {% include _includes/help.html %}
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ site.github_repository }}/edit/master/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/tutorial.md">
+                        <a class="nav-link" href="{{ site.github.repository_url }}/edit/{{ site.repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/tutorial.md">
                             {% icon github %} Edit
                         </a>
                     </li>
@@ -146,11 +153,12 @@ layout: base
 
 <div class="container main-content">
     <script type="application/ld+json">
-   {% include _includes/material.jsonld material=page %}
+        {% include _includes/material.jsonld material=page topic=topic site=site %}
     </script>
-    <section class="tutorial">
-        <h1>{{ page.title }}</h1>
 
+    <section class="tutorial">
+        <h1 data-toc-skip>{{ page.title }}</h1>
+        <div class="contributors-line">By: {{ contributors | remove_first: ', ' }} </div>
         <blockquote class="overview">
             <h3>Overview</h3>
 
@@ -171,24 +179,8 @@ layout: base
             {% if topic.requirements or page.requirements %}
             <strong>{% icon requirements %} Requirements</strong>
             <ul>
-            {% for requirement in topic.requirements %}
-                <li>
-                    {% if requirement.type == "internal" %}
-                    <a href="{{ site.baseurl }}/topics{{ requirement.link }}">{{ requirement.title }}</a>
-                    {% elsif requirement.type == "external" %}
-                    <a href="{{ requirement.link }}">{{ requirement.title }}</a>
-                    {% endif %}
-                </li>
-            {% endfor %}
-            {% for requirement in page.requirements %}
-                <li>
-                    {% if requirement.type == "internal" %}
-                    <a href="{{ site.baseurl }}/topics{{ requirement.link }}">{{ requirement.title }}</a>
-                    {% elsif requirement.type == "external" %}
-                    <a href="{{ requirement.link }}">{{ requirement.title }}</a>
-                    {% endif %}
-                </li>
-            {% endfor %}
+            {% include snippets/display_extra_training.md extra_trainings=topic.requirements %}
+            {% include snippets/display_extra_training.md extra_trainings=page.requirements %}
             </ul>
             {% endif %}
 
@@ -197,25 +189,44 @@ layout: base
             {% endif %}
         </blockquote>
 
-        {{ content 
-            | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">' }}
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    {{ content
+                        | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">' }}
 
-        {% if page.key_points %}
-        <blockquote class="key_points">
-            <h3>{% icon keypoints %} Key points</h3>
 
-            <ul>
-                {% for key_point in page.key_points %}
-                <li>{{ key_point }}</li>
-                {% endfor %}
-            </ul>
-        </blockquote>
-        {% endif %}
+                    {% if page.key_points %}
+                    <blockquote class="key_points">
+                        <h3>{% icon keypoints %} Key points</h3>
 
-        {% if topic.references %}
-        <h1>Useful literature</h1>
-        <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="{{ site.baseurl }}/topics/{{ topic.name }}#references">here</a>.</p>
-        {% endif %}
+                        <ul>
+                            {% for key_point in page.key_points %}
+                            <li>{{ key_point }}</li>
+                            {% endfor %}
+                        </ul>
+                    </blockquote>
+                    {% endif %}
+
+                    {% if topic.references %}
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="{{ site.baseurl }}/topics/{{ topic.name }}#references">here</a>.</p>
+                    {% endif %}
+
+                    {% if material.cited %}
+                    <h1 id="bibliography">References</h1>
+                    {% bibliography --cited %}
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+        <h3>{% icon congratulations %} Congratulations on successfully completing this tutorial!</h3>
 
         {% if topic.name == "contributing" %}
         <blockquote class="agenda">
@@ -224,23 +235,31 @@ layout: base
             {% assign topic = site.data[page.topic_name] %}
             <ol>
             {% for material in topic_material %}
-             {% if material.enable != "false" %}
-              {% if material.type == "introduction" %}
+                {% if material.enable != "false" %}
+                    {% if material.type == "introduction" %}
             <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html">{{ material.title }}</a></li>
-             {% elsif material.type == "tutorial" %}
-              {% if material.hands_on %}
+                    {% elsif material.type == "tutorial" %}
+                        {% if material.hands_on %}
             <li><a href="{{ site.baseurl }}/topics/{{ topic.name  }}/tutorials/{{ material.tutorial_name }}/tutorial.html">{{ material.title }}</a></li>
-              {% elsif material.slides %}
+                        {% elsif material.slides %}
             <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/slides.html">{{ material.title }}</a></li>
-               {% endif %}
-              {% endif %}
-             {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
             {% endfor %}
-             </ol>
+            </ol>
         </blockquote>
         {% endif %}
 
-        <h3>{% icon congratulations %} Congratulations on successfully completing this tutorial!</h3>
+        {% if page.follow_up_training %}
+        <blockquote class="agenda follow-up">
+            <strong class="follow-up">{% icon curriculum %} Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+            <ul>
+                {% include snippets/display_extra_training.md extra_trainings=page.follow_up_training %}
+            </ul>
+        </blockquote>
+        {% endif %}
+
         <hr>
         <br>
 
@@ -254,10 +273,7 @@ layout: base
     </section>
 </div>
 
-{% if page.contributors %}
-{% assign contrib = page.contributors | sort %}
-{% capture contributors %}{% for contributor in contrib %}, {{contributors[contributor].name | default: contributor }}{% endfor %}{% endcapture %}
-{% endif %}
+
 <footer>
     <div class="container">
         <p>
@@ -267,7 +283,7 @@ layout: base
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/tutorial.md">GitHub</a>.
+            <a href="{{ site.github.repository_url }}/tree/{{ site.repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/tutorial.md">GitHub</a>.
         </p>
     </div>
 </footer>

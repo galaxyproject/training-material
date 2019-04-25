@@ -22,15 +22,14 @@ contributors:
 {:.no_toc}
 
 In order to map and identify phenotype-causing mutations efficiently from a
-single experiment, modern genetic research aims at combining classical genetic
+single experiment, modern genetic research aims to combine classical genetic
 mapping concepts with the power of next-generation-sequencing.
 
-After having obtained, *e.g.*, from a forward genetic screen, a mutant strain
-of an organism with a particular phenotype, the classical approach towards
-identification of the underlying causative mutation would be to
+For example, after having obtained a mutant strain of an organism with a particular phenotype from a forward genetic screen, the classical approach towards
+identification of the underlying causative mutation would be to:
 
 1. perform mapping crosses to probe for linkage between the unknown mutation
-   and selected markers with known location on the genome in order to determine
+   and selected markers with known location on the genome, in order to determine
    the approximate genomic region that the mutation resides in, then
 2. sequence candidate DNA stretches in this region to identify the precise
    nature of the mutation.
@@ -53,11 +52,11 @@ tools. For Galaxy, the **MiModD** suite of tools offers efficient and flexible
 analysis workflows compatible with a variety of mapping-by-sequencing
 approaches.
 
-> ### {% icon tip %} Further reading
+> ### {% icon details %} Further reading
 > The MiModD documentation has its own chapter on supported
 > [mapping-by-sequencing schemes](http://mimodd.readthedocs.io/en/latest/nacreousmap.html)
 > not covered here.
-{: .tip}
+{: .details}
 
 In this tutorial we are going to use several of these tools to map and identify
 a point mutation in an *Arabidopsis thaliana* strain from whole-genome
@@ -72,8 +71,10 @@ As illustrated in Figure 1, variant allele frequency mapping analyzes marker
 variant inheritance patterns in pooled F2 recombinants selected for the
 mutation to be mapped.
 
-A mutant line established for any organism - in the figure we assume a diploid
-organism with just two pairs (dark and light grey) of chromosomes - will harbor
+In the figure we assume a diploid
+organism with just two pairs (dark and light grey) of chromosomes.
+
+A mutant line established for any organism will harbor
 two types of variants (diamonds):
 - variants induced during mutagenesis (orange), among them the causative
   variant responsible for the mutant phenotype (yellow)
@@ -164,10 +165,10 @@ if you do not know what this means).
 >    3. **Save** the edited attributes
 > 3. Import the reference genome
 >
->    > ### {% icon tip %} Tip
+>    > ### {% icon comment %} TAIR10 Version
 >    > This step is only necessary if the TAIR10 version of the *A. thaliana*
 >    > genome is not available as a built-in genome on your Galaxy server.
->    {: .tip}
+>    {: .comment}
 >
 >    1. Upload the reference genome using the URL:
 >       `https://www.arabidopsis.org/download_files/Genes/TAIR10_genome_release/TAIR10_chromosome_files/TAIR10_chr_all.fas`
@@ -231,14 +232,14 @@ one sample appears to have a non-wt genotype, and report them in VCF format.
 >
 > > ### {% icon question %} Questions
 > >
-> > 1. Approximately how many variants did get extracted?
+> > 1. Approximately how many variants were extracted?
 > > 2. Does this number surprise you?
 > >
 > > > ### {% icon solution %} Solution
 > > >  1. You can click on the extracted variants dataset in your history to
 > > >     get more details about it. You should see that the file has an
-> > >     estimated 130,000 lines and since, in VCF format, apart from a number
-> > >     of header lines, one variant gets reported per line, this roughly
+> > >     estimated 130,000 lines. Since one variant gets reported per line in VCF format (apart from a number
+> > >     of header lines), this roughly
 > > >     equals the number of variants in the dataset.
 > > >  2. The huge number of variants reflects the fact that the L*er*
 > > >     mapping strain is really quite diverged from the Col reference
@@ -251,8 +252,8 @@ one sample appears to have a non-wt genotype, and report them in VCF format.
 > > >     chromosomes. In addition, we provided really low-coverage data
 > > >     even for those two chromosomes so our analysis will miss many true
 > > >     variants and contain many questionable variant calls that may represent
-> > >     false-positives, but an analysis based on such a large overall number
-> > >     of variants is robust enough to provide useful results regardless.
+> > >     false-positives. Regardless, an analysis based on such a large overall number
+> > >     of variants is robust enough to provide useful results.
 > > {: .solution }
 > >
 > {: .question}
@@ -284,7 +285,7 @@ mutation.
 >    > In `Variant Allele Frequency Mapping` mode the tool requires:
 >    > - a **mapping sample**, which corresponds to the recombinant pool, from
 >    >   which allele frequencies should be calculated
->    > - either a **related** or an **unrelated parent sample** (, or both),
+>    > - either a **related** or an **unrelated parent sample** (or both),
 >    >   from which the marker variant sites to use in the linkage analysis
 >    >   will be determined. A related parent sample is related (or identical)
 >    >   to the original mutant line by descent and provides information about
@@ -412,7 +413,7 @@ so far:
 > > > 1. If you used the suggested mapping interval of 1Mb on chr2, you
 > > >    should have retained 5 variants. Filtering is a really powerful way to
 > > >    reduce the number of variants to consider!
-> > > 2. Rerunning the job with the region filter removed shows that across
+> > > 2. Re-running the job with the region filter removed shows that across
 > > >    the two chromosomes, for which the input datasets provided sequencing
 > > >    reads, there are 50 variants for which the pool appears homozygous
 > > >    mutant and for which the L*er* strain is homozygous wt.
@@ -512,13 +513,13 @@ with predicted functional effects.
 
 Mapping-by-sequencing can greatly speed up and facilitate the molecular
 identification of mutations recovered from mutagenesis screens. The method
-makes extensive use of cross-sample comparison of variants and profits strongly
+makes extensive use of cross-sample comparison of variants and benefits strongly
 from joint variant calling to generate reliable and manageable variant
 information. A combination of variant linkage analysis and filtering often
 results in very small lists of candidate variants that can then be confirmed
 through further experimental work. Importantly, the selection of biological
 samples for sequencing determines the meaningful variant comparisons that can
-be made in the bioinformatical analysis so it is important to understand the
+be made in the bioinformatics analysis so it is important to understand the
 essence of the analysis method **before** the preparation of any biological
 samples.
 

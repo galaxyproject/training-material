@@ -17,6 +17,7 @@ contributors:
   - bebatut
   - bgruening
   - shiltemann
+  - erasche
 ---
 
 # Introduction
@@ -111,9 +112,15 @@ This information is used to display the data from the topic and tutorial page. T
 We also define metadata related to the pedagogical content of the tutorial, which will appear in the top ("Overview" box) and bottom of the online tutorial:
 
 - `requirements`: list of resources that the reader of the material should be familiar with before starting this training:
-    - `title`
-    - `link`: relative for internal (inside training material) requirement or full for external requirement)
     - `type`: the type of link (`internal` or `external`)
+
+    For internal, i.e. inside the Galaxy Training Material:
+    - `topic_name`: name of the topic
+    - `tutorials`: list of required tutorials inside of the topic
+
+    For external:
+    - `title`: title of the external resource
+    - `link`: URL to the external resource
 - `time_estimation`: an estimation of the time needed to complete the hands-on
 - `questions`: list of questions that will be addressed in the tutorial
 - `objectives`: list of learning objectives for the tutorial
@@ -123,6 +130,20 @@ We also define metadata related to the pedagogical content of the tutorial, whic
 - `key_points`: list of take-home messages
 
     This information will appear at the end of the tutorial
+
+- `follow_up_training`: list of resources that the reader of the material could follow at the end of the tutorial
+
+    - `type`: the type of link (`internal` or `external`)
+
+    For internal, i.e. inside the Galaxy Training Material:
+    - `topic_name`: name of the topic
+    - `tutorials`: list of required tutorials inside of the topic
+
+    For external:
+    - `title`: title of the external resource
+    - `link`: URL to the external resource
+
+    They will be displayed at the end of a tutorial.
 
 For this category of metadata, we have taken inspiration from what Software Carpentry has done and particularly what they described in their [Instructor training](https://swcarpentry.github.io/instructor-training/).
 
@@ -143,10 +164,10 @@ For this category of metadata, we have taken inspiration from what Software Carp
 
 The tutorial's content is written directly after the section of metadata. This is written in Markdown, a simple markup language.
 
-> ### {% icon tip %} Tip: Markdown
+> ### {% icon comment %} Markdown
 >
 > Check [this cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) to learn more how to use Markdown.
-{: .tip}
+{: .comment}
 
 The Markdown content is then transformed into a user friendly webpage through a templating system. With this approach, there is no need to add the name of every tutorial each time, since they are automatically added based on the tutorial's metadata.
 
@@ -273,7 +294,7 @@ This box at the top of each tutorial is automatically generated using the metada
 > - You can use Bloom's Taxonomy to write effective learning objectives
 >
 > {% icon requirements %} Requirements
-> - [Galaxy introduction]({{ site.baseurl }}/topics/introduction/)
+> - [Galaxy introduction]({{ site.baseurl }}{% link topics/introduction/index.md %})
 >
 > {% icon time %} Time estimation: '1H'
 >
@@ -464,6 +485,8 @@ In the box below, initially hidden, we add the correct answer and possibly any a
 
 ## **Tips** box
 
+Tips boxes are really just for 'tips', usually hints regarding Galaxy operations that users may or may not be familiar with. If you want to provide extended discussion or links to external materials then consider the comment and detail boxes instead.
+
 {% raw %}
 ```markdown
 > ### {% icon tip %} Tip: Importing data via links
@@ -534,6 +557,22 @@ This last box of the tutorial is automatically created with the take-home messag
 
 To render the boxes correctly, the syntax needs to be correct. If it doesn't work, have a look at similar tutorials and get inspiration.
 
+## **Warning** box
+
+{% raw %}
+```markdown
+> ### {% icon warning %} Danger: You can lose data!
+> Something really bad can happen here!
+{: .warning}
+```
+{% endraw %}
+
+Rendered:
+
+> ### {% icon warning %} Danger: You can lose data!
+> Something really bad can happen here!
+{: .warning}
+
 ## Nested boxes
 
 Boxes can be nested, *e.g.* for having tips inside a hands-on:
@@ -558,6 +597,51 @@ Boxes can be nested, *e.g.* for having tips inside a hands-on:
 {: .hands_on}
 ```
 {% endraw %}
+
+# Citations
+If you would like to cite any articles, books or websites in your tutorial, you can do so by adding a file called `tutorial.bib` next to your `tutorial.md` file. In this file you may enter [bibtex](http://www.bibtex.org/Using/) formatted citations. An example is given below:
+
+{% raw %}
+```
+@article{batut2018community,
+  title={Community-driven data analysis training for biology},
+  author={Batut, B{\'e}r{\'e}nice and Hiltemann, Saskia and Bagnacani, Andrea and Baker, Dannon and Bhardwaj, Vivek and Blank, Clemens and Bretaudeau, Anthony and Brillet-Gu{\'e}guen, Loraine and {\v{C}}ech, Martin and Chilton, John and others},
+  journal={Cell systems},
+  volume={6},
+  number={6},
+  pages={752--758},
+  year={2018},
+  publisher={Elsevier},
+  doi={10.1016/j.cels.2018.05.012}
+}
+
+@misc{galaxy-training-materials,
+  url = {https://training.galaxyproject.org},
+  note = {Accessed 2019-04-08},
+  title = {Galaxy Training materials website}
+}
+```
+{% endraw %}
+
+You can use this in your tutorial as follows:
+
+{% raw %}
+```
+For more information please look at this great article {% cite bebatut2018community %},
+and the corresponding website {% cite galaxy-training-materials %}
+```
+{% endraw %}
+
+Rendered:
+
+For more information please look at this great article {% cite batut2018community %}, and the corresponding website {% cite galaxy-training-materials %}
+
+
+A bibliography will automatically be appended to the end of your tutorial (scroll down to the end of this tutorial to see how it looks! or [jump there directly](#bibliography))
+
+> ### {% icon tip %} Tip: Getting a bibtex citation from a doi
+> If you have a DOI for a paper, you can easily obtain the bibtex citation using [doi2bib.org](https://www.doi2bib.org/).
+{: .tip}
 
 # Conclusion
 {:.no_toc}

@@ -1,14 +1,15 @@
 #!/usr/bin/env ruby
 require 'yaml'
+require 'pathname'
 fn = ARGV[0]
 
 # Required keys
 tutorial_required_keys = ['layout', 'title', 'time_estimation', 'contributors']
-tutorial_optional_keys = ['questions', 'zenodo_link', 'objectives', 'key_points', 'tags', 'edam_ontology', 'requirements']
+tutorial_optional_keys = ['questions', 'zenodo_link', 'objectives', 'key_points', 'tags', 'edam_ontology', 'requirements', 'follow_up_training']
 tutorial_deprecated_keys = ['topic_name', 'tutorial_name', 'type', 'name', 'galaxy_tour', 'hands_on', 'slides', 'workflows']
 
 slides_required_keys = ['layout', 'logo', 'title', 'contributors']
-slides_optional_keys = ['time_estimation', 'questions', 'zenodo_link', 'objectives', 'key_points', 'tags', 'edam_ontology', 'requirements', 'class', 'hands_on', 'hands_on_url']
+slides_optional_keys = ['time_estimation', 'questions', 'zenodo_link', 'objectives', 'key_points', 'tags', 'edam_ontology', 'requirements', 'follow_up_training', 'class', 'hands_on', 'hands_on_url']
 slides_deprecated_keys = ['topic_name', 'tutorial_name', 'type', 'name', 'galaxy_tour', 'slides', 'workflows']
 
 metadata_required_keys = ['name', 'type', 'title', 'summary', 'maintainers']
@@ -24,7 +25,7 @@ errs = []
 def skip_disabled(data, fn)
   # If there's an 'enable' key and it is one flavor of 'false', then, exit
   # immediately without testing.
-  if data.key?('enable') && (data['enable'].downcase == 'false' || data['enable'] == false) then
+  if data.key?('enable') && (data['enable'] == false || data['enable'].downcase == 'false') then
     puts "#{fn} skipped (disabled)"
     exit 0
   end
@@ -38,6 +39,73 @@ def check_contributors(data)
         errs.push("Unknown contributor #{x}, please add to CONTRIBUTORS.yaml")
       end
     }
+  end
+
+  return errs
+end
+
+def validate_non_empty_key_value(map, key)
+    if map.key?(key) then
+      if map[key].length == 0 then
+        return ["Empty #{key} for requirement"]
+      end
+    else
+      return ["Missing #{key} for requirement"]
+    end
+    return []
+end
+
+def validate_requirements(requirements)
+  errs = []
+  # Exit early if no requirements
+  if requirements.nil? or requirements.length == 0
+    return []
+  end
+
+  # Otherwise check each
+  for requirement in requirements
+    # For external links, they need a link that is non-empty
+    if requirement['type'] == 'external'
+      errs.push(*validate_non_empty_key_value(requirement, 'title'))
+      errs.push(*validate_non_empty_key_value(requirement, 'link'))
+
+      requirement.keys.each{ |x|
+        if not ['title', 'link', 'type'].include?(x) then
+          errs.push("Unknown key #{x}")
+        end
+      }
+    elsif requirement['type'] == 'internal'
+      errs.push(*validate_non_empty_key_value(requirement, 'topic_name'))
+      errs.push(*validate_non_empty_key_value(requirement, 'tutorials'))
+
+      requirement.keys.each{ |x|
+        if not ['topic_name', 'tutorials', 'type'].include?(x) then
+          errs.push("Unknown key #{x}")
+        end
+      }
+      # For the internal requirements, test that they point at something real.
+      if requirement.key?('tutorials') then
+        requirement['tutorials'].each{ |tutorial|
+          # For each listed tutorial check that a directory with that name exists
+          pn = Pathname.new("topics/#{requirement['topic_name']}/tutorials/#{tutorial}")
+
+          if not pn.directory?
+            errs.push("Internal requirement to topics/#{requirement['topic_name']}/tutorials/#{tutorial} does not exist")
+          end
+        }
+      end
+      #
+    elsif requirement['type'] == 'none'
+      errs.push(*validate_non_empty_key_value(requirement, 'title'))
+
+      requirement.keys.each{ |x|
+        if not ['title', 'type'].include?(x) then
+          errs.push("Unknown key #{x}")
+        end
+      }
+    else
+      errs.push("Unknown requirement type #{requirement['type']}")
+    end
   end
 
   return errs
@@ -80,6 +148,16 @@ if fn.include?('tutorial.md') then
     if match.nil? then
       errs.push("Time specification could not be parsed (Should be of form ##h##m##s, is '#{data['time_estimation']}')")
     end
+  end
+
+  # Check requirements
+  if data.key?('requirements') then
+    errs.push(*validate_requirements(data['requirements']))
+  end
+
+  # Check follow ups
+  if data.key?('follow_up_training') then
+    errs.push(*validate_requirements(data['follow_up_training']))
   end
 
   # Check contributors
@@ -133,6 +211,11 @@ elsif fn.include?('slides.html') then
     end
   }
 
+  # Check requirements
+  if data.key?('requirements') then
+    errs.push(*validate_requirements(data['requirements']))
+  end
+
   # Check that the layout is correct
   if not ['base_slides', 'tutorial_slides'].include?(data['layout']) then
     errs.push("layout should be 'base_slides', not '#{data['layout']}'")
@@ -148,11 +231,11 @@ end
 
 # If we had no errors, validated successfully
 if errs.length == 0 then
-  puts "#{fn} validated succesfully"
+  puts "\e[38;5;40m#{fn} validated succesfully\e[m"
   exit 0
 else
   # Otherwise, print errors and exit non-zero
-  puts "#{fn} has errors"
+  puts "\e[48;5;09m#{fn} has errors\e[m"
   errs.each {|x| puts "  #{x}" }
   exit 1
 end

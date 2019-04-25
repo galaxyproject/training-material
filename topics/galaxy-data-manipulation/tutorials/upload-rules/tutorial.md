@@ -9,6 +9,12 @@ objectives:
   - "Learn about the Rule Based Uploader"
 time_estimation: "30m"
 key_points:
+requirements:
+  -
+    type: "internal"
+    topic_name: galaxy-data-manipulation
+    tutorials:
+      - collections
 contributors:
   - jmchilton
   - erasche
@@ -20,7 +26,7 @@ contributors:
 Through a series of examples, this tutorial aims to familiarize the reader with building Galaxy collections from tabular data containing URLs, sample sheets, list of accessions or identifiers, etc..
 
 > ###  {% icon comment %} Audience
-> This tutorial assumes a basic knowledge of using dataset collections in Galaxy but doesn't assume any particular knowledge of biology or bioinformatics. If you have not used collections with Galaxy previously, please check out the [using dataset collections]({{ site.baseurl }}/topics/galaxy-data-manipulation/tutorials/collections/tutorial.html) tutorial.
+> This tutorial assumes a basic knowledge of using dataset collections in Galaxy but doesn't assume any particular knowledge of biology or bioinformatics. If you have not used collections with Galaxy previously, please check out the [using dataset collections]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/collections/tutorial.md %}) tutorial.
 {: .comment}
 
 > ### Agenda
@@ -166,9 +172,9 @@ This example will demonstrate using such history datasets as the source for coll
 >
 > For our second example, we will use the same initial metadata.
 >
->    > ### {% icon tip %} Tip: Loading Metadata from a History Element
+>    > ### {% icon comment %} Loading Metadata from a History Element
 >    > In addition to directly pasting data into the Rule Based Uploader, you can also load the metadata from a dataset in your Galaxy History, or from a file in your FTP directory if the admin has enabled FTP upload
->    {: .tip}
+>    {: .comment}
 >
 > 1. **Upload** the metadata from the [first example](#example-1-metadata) to your Galaxy
 > 2. **Open** the `Rule-based` upload tab again, but this time:
@@ -288,14 +294,14 @@ For this next example we will again use ENA data, this time corresponding to the
 >    - *"paired indicator"*: column `D`
 >    - *"URL"*: column `E`
 >
->    > ### {% icon tip %} Tip: Paired Indicator Column Definition
+>    > ### {% icon comment %} Paired Indicator Column Definition
 >    > The column selector for paired indicator is a bit less obvious and a bit more picky than the other ones we have used. The row value of the paired indicator column must be one of the following to indicate "forward" or "reverse" reads.
 >    >
 >    > Column  | Acceptable Indicators
 >    > ------  | ---------------------
 >    > Forward | `1`, `R1`, `forward`, `f`, or `F`
 >    > Reverse | `2`, `R2`, `reverse`, `r`, or `R`
->    {: .tip}
+>    {: .comment}
 >
 > 12. **Supply** a name for your collection and click **Upload**
 > ![screenshot](../../images/rules/rules_example_3_14_paired_identifier_set.png)
@@ -403,13 +409,13 @@ We will use this information to build a collection of FASTA files from our query
 >     - Click `Upload`
 >    ![screenshot](../../images/rules/rules_example_4_7_mapping_extension_and_name.png)
 >
->    > ### {% icon tip %} Tip: JSON Rule Definitions
+>    > ### {% icon comment %} JSON Rule Definitions
 >    > This example is ready to go, but before clicking "Build" it may be interesting to check out the rules Galaxy is following to clean and import your data. Click the little Wrench icon at the top of the list of rules. The result is a bunch of JavaScript object notation (JSON) text that you should never need to worry about but that you can build or modify by hand if you find it useful. We will use it the next example to quickly restore the list builder back to this state.
 >    >
 >    > ![screenshot](../../images/rules/rules_example_4_8_source.png)
 >    >
 >    > This could additionally be copied and pasted if you need to do the same set of operations on multiple metadata inputs that are similarly formatted.
->    {: .tip}
+>    {: .comment}
 > 7. Click `Build` and wait for your list of FASTA files to appear.
 {: .hands_on}
 
@@ -676,9 +682,9 @@ So use either the SRA exporter tool or download the CSV file with fake URLs. If 
 >     - Click on `... Assign Another Column`
 >     - Select column `A`
 >
->        > ### {% icon tip %} Tip: Re-ordering columns
+>        > ### {% icon comment %} Re-ordering columns
 >        > If you make a mistake in the order you select columns in you can simple use the up and down arrows to re-arrange the list
->        {: .tip}
+>        {: .comment}
 >
 >    The result should look something like this:
 >    ![screenshot](../../images/rules/rules_example_6_5_multiple_identifiers_edit.png)

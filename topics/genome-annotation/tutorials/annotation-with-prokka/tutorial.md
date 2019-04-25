@@ -46,11 +46,7 @@ Prokka requires assembled contigs.
 >
 > 1. Make sure you have an empty analysis history. Give it a name.
 >
->    > ### {% icon tip %} Starting a new history
->    >
->    > * Click the **gear icon** at the top of the history panel
->    > * Select the option **Create New** from the menu
->    {: .tip}
+>    {% include snippets/create_new_history.md %}
 >
 > 2. **Import Sample Data.**
 >   - Obtain data directly from Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1156405.svg)](https://doi.org/10.5281/zenodo.1156405)
@@ -102,7 +98,7 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 >    - *"Genetic Code"*: `11: The Bacterial, Archaeal and Plant Plastid Code`
 >    - *"JBrowse-in-Galaxy Action"*: `New JBrowse Instance`
 >    - Click on `Insert Track Group`
->    
+>
 >      We will now set up one track - each track is a dataset displayed underneath the reference sequence (which is displayed as nucleotides in FASTA format).
 >      We will choose to display the annotations (the Prokka.gff file).
 >
@@ -115,7 +111,7 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 >               - Click on "JBrowse Styling Options [Advanced]"
 >                   - *"JBrowse style.label"*: `product,name,id`
 >               - *"Track Visibility"*: `On for new users`
-> 
+>
 >    A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view its contents and play with it
 >
 > 2. Inspect the `JBrowse on data XX and data XX - Complete` file by clicking on the {% icon galaxy-eye %} (eye) icon

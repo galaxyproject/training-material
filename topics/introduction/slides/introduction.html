@@ -10,6 +10,7 @@ contributors:
   - shiltemann
   - pajanne
   - nsoranzo
+  - erasche
 ---
 
 # What is Galaxy?
@@ -18,19 +19,20 @@ contributors:
 
 [![Galaxy](../../../shared/images/galaxy_logo_25percent_transparent.png)](https://galaxyproject.org/)
 
-- **Web-based** platform for computational biomedical research
+- **Web-based** platform for computational biomedical research (analysis and data integration)
   - Developed at Penn State, Johns Hopkins, OHSU and Cleveland Clinic with substantial outside contributions
   - **Open source** under [Academic Free License](https://opensource.org/licenses/AFL-3.0)
-- More than 5,300 [citations](https://www.zotero.org/groups/1732893/galaxy)
-- More than 80 [public Galaxy servers](https://galaxyproject.org/public-galaxy-servers/)
-  - Many more non-public
+- More than 6,500 [citations](https://www.zotero.org/groups/1732893/galaxy)
+- More than 125 [public Galaxy resources](https://galaxyproject.org/use/)
+  - 100+ public servers, many more non-public
   - Both general-purpose and domain-specific
+
+![Galaxy](../images/servers.png)
 
 ???
 
 - The Galaxy Team is composed by bioinformaticians and software engineers
 - OHSU = Oregon Health & Science University
-
 ---
 
 ### Core values
@@ -43,11 +45,9 @@ contributors:
   - Users can share or publish their analyses (histories, workflows, visualizations)
   - Pages: online Methods for your paper
 
-Pages: interactive, web-based documents that describe a complete analysis.
-
 ???
 
-**accessible** **reproducible** **transparent** research means <i>sharing everything</i>.
+**accessible** **reproducible** **transparent** research means *sharing everything*.
 
 If the Galaxy framework makes everything as simple as possible, researchers are able to:
 - share their analyses
@@ -56,9 +56,16 @@ If the Galaxy framework makes everything as simple as possible, researchers are 
 - justify each step in the analysis
 - publish the findings with all aforementioned information
 
+Pages: interactive, web-based documents that describe a complete analysis.
+
 ---
 
 # User Interface
+
+???
+
+So now that we know what Galaxy and the Galaxy Project are all about, let's
+look at the Galaxy interface.
 
 ---
 
@@ -74,31 +81,31 @@ Home page divided into 3 panels
 
 ![Top menu](../images/galaxy_interface_menu.png)
 
-- *Analyze Data* - go back to the 3-panels homepage
-- *Workflow* - access existing workflows or create new one using the editable diagrammatic pipeline
-- *Shared data* - access data libraries, histories, workflows, visualizations and pages shared with you
-- *Visualization* - create new track browser and access your saved visualisations
-- *Help* - links to Galaxy Biostar (Q&A), Galaxy Community Hub (Wiki), and Interactive Tours
-- *User* – your preferences and saved histories, datasets, and pages
-
----
-
-### Tool interface
-
-![Tool interface](../images/101_11.png)
+Link            | Usage
+--              | --
+*Analyze Data*  | go back to the homepage
+*Workflow*      | access existing workflows or create new one using the editable diagrammatic pipeline
+*Visualize*     | create new visualisations and launch Interactive Environments
+*Shared data*   | access data libraries, histories, workflows, visualizations and pages shared with you
+*Help*          | links to Galaxy Help Forum (Q&A), Galaxy Community Hub (Wiki), and Interactive Tours
+*User*          | your preferences and saved histories, datasets, pages and visualizations
 
 ---
 
 ### Tools
 
-- Each tool is a text file describing:
+![Tool interface](../images/101_11.png)
+
+- The tool search helps in finding a tool in a crowded toolbox
+
+---
+
+### Tool interface
+
+.image-50[![](../images/galaxy_tool.png)]
+- Tools are simply text files with:
   - input datasets, parameters, commands, and outputs
   - help, tests, citations, dependency requirements
-- Free tool store: [Galaxy Tool Shed](https://toolshed.g2.bx.psu.edu/)
-  - Thousands of tools already available
-  - Every software can be embedded
-     - If a tool is not available, ask the Galaxy community for help!
-  - Only a Galaxy admin can install tools
 - New versions can be installed without removing old ones to ensure reproducibility
 
 ???
@@ -113,51 +120,81 @@ Tools can be viewed as tiny LEGO pieces: each one solves a specific problem, and
 
 ---
 
+### Tool Shed
+
+.image-50[![](../images/galaxy_ts.png)]
+- Free "app" store: [Galaxy Tool Shed](https://toolshed.g2.bx.psu.edu/)
+  - Thousands of tools already available
+  - Most software can be integrated
+     - If a tool is not available, ask the Galaxy community for help!
+  - Only a Galaxy admin can install tools
+
+---
+
 ### History
 
-- Location of all your analyses <img style="float: right;" alt="History" src="../images/history.png" />
-  - collects all datasets produced by tools you run
-  - collects all operations performed on your data
+- Location of all analyses <img style="float: right;" alt="History" src="../images/history.png" />
+  - collects all datasets produced by tools
+  - collects all operations performed on the data
 
-- At the heart of Galaxy’s reproducibility<br />
-  For each dataset, the history tracks:
+- For each dataset (the heart of Galaxy’s reproducibility), the history tracks
   - name, format, size, creation time, datatype-specific metadata
-  - tool id and version, inputs, parameters
+  - tool id, version, inputs, parameters
   - standard output (`stdout`) and error (`stderr`)
   - state (<span style="background-color: grey">waiting</span>, <span style="background-color: yellow">running</span>, <span style="background-color: green">success</span>, <span style="background-color: red">failed</span>)
   - hidden, deleted, purged
 
 ???
 
-We say <i>datasets</i> to refer to files as well as databases
+- We say *datasets* to refer to files as well as databases
+- Purged means permanently deleted
 
-Purged means permanently deleted
 ---
 
 ### Multiple histories
 
 - You can have as many histories as you want
-
   - each history should correspond to a **different analysis**
-
   - and should have a meaningful **name**
+
+.image-75[![](../images/galaxy_interface_multiple_histories.png)]
+
+???
+
+- Give it a good name so you can find it later. I have around a hundred histories and after a month I can't remember what I was doing in some, so a good name is important.
+- You can drag and drop datasets between histories
 
 ---
 
 ### History options menu
 
-- History behavior is controlled by the *History options* (gear icon) <img style="float: right;" alt="History menu" src="../images/galaxy_interface_history_long_menu.png" />
-
-.image-25[![History options gear button](../images/galaxy_interface_history_menu.png)]
-
+.pull-left[
+History behavior is controlled by the *History options* (gear icon)
+![History menu](../images/galaxy_interface_history_long_menu.png)
+]
+.pull-right[
+.image-75[![History options gear button](../images/galaxy_interface_history_menu.png)]
 - *Create New* history will **not** make your current history disappear
-- To list all your histories, choose *Saved Histories*
-- You can *Copy Datasets* from one history to another
-  - saves disk space and your quota
+- To see all of your histories, use the history switcher
+
+  .image-50[![History Switcher](../images/galaxy_interface_history_switch.png)]
+
+- *Copy Datasets* from one history to another and save disk space for your quota
+]
+
+???
+
+- Copying datasets between histories does not affect your quota, only a single copy of the file is stored on disk because datasets are never modified after creation.
 
 ---
 
 # Loading data
+
+???
+
+So now you know about the tools to manipulate data and the history where you
+can see your data, your inputs and outputs. Let's discuss how to get data into
+Galaxy
 
 ---
 
@@ -165,9 +202,8 @@ Purged means permanently deleted
 
 - Copy/paste from a file
 - Upload data from a local computer
-- Upload data from internet
-- Upload data from online databases
-  - UCSC, BioMart, ENCODE, modENCODE, Flymine etc.
+- Upload data from internet using URL
+- Upload data from online databases: UCSC, BioMart, ENCODE, modENCODE, Flymine etc.
 - Import from Shared Data (libraries, histories, pages)
 - Upload data from FTP (>2GB)
 
@@ -177,55 +213,77 @@ See [Getting data into Galaxy](../../galaxy-data-manipulation/tutorials/get-data
 
 ### Datatypes
 
-- When uploading, datatype can be automatically detected or assigned by user
-- For datasets produced by a tool, the datatype is assigned by the tool
 - Tools only accept input datasets with the appropriate datatypes
-- You can change the datatype of a dataset in 2 ways:
-  - Edit Attributes -> Datatype
-  - Edit Attributes -> Convert Formats
+- When uploading a dataset, its datatype can be either:
+  - automatically detected
+  - assigned by user
+- Dataset produced by a tool: datatype assigned by the tool
+- To change the datatype of a dataset:
+  - {% icon galaxy-pencil %} *Edit Attributes* and *Datatype*
+  - {% icon galaxy-pencil %} *Edit Attributes* and *Convert Formats*
 
 ???
 
-- Edit Attributes -> Datatype is used to fix a wrongly assigned datatype
-- Edit Attributes -> Convert Formats creates a new dataset using a tool that converts the original dataset in the new format
+- When you upload data, Galaxy will try to autodetect the format of the data, but can sometimes get it wrong, so you may need to correct it later.
+- Edit Attributes → Datatype is used to fix a wrongly assigned datatype
+- Edit Attributes → Convert Formats creates a new dataset using a tool that converts the original dataset in the new format
 - New datatypes can be added to the Galaxy code base, if missing
 
 ---
 
 ### Reference genomes
 
+.pull-left[
 - Genome build specifies which genome assembly a dataset is associated with
   - e.g. mm10, hg38...
-- Genome build can be automatically detected or assigned by user
-- User can define their own custom genome build
-- New genome assemblies can be added by the site Galaxy admin
+- Can be automatically detected or assigned by user
+- Users can create custom genome builds
+- New builds can be added by the admin
+]
+
+.pull-right[
+![Genome Builds](../images/galaxy_interface_build.png)
+]
+
+???
+
+- Just like datatypes, you can specify which genome assembly your dataset is about. Some tools need to know this, and Galaxy can tell the tool for you.
 
 ---
 
 # Workflows
 
+???
+
+Now that you've got data into Galaxy, you know you can use tools to manipulate
+this data, and histories to keep track of what you've done. You're only missing one key part:
+workflows. These help you easily reproduce the exact analysis that you ran.
+
 ---
 
-### Workflow interface
+### Workflow Editor
 
 ![Workflow interface](../images/RNA-Seq_workflow_editing.png)
 
+- **Extracted** from a history
+- **Built manually** by adding and configuring tools using the canvas
+- **Imported** using an existing shared workflow
+
 ???
 
+Biologist:
+- workflows are great
+- single button to run all of these 50 different tools
+- a lot of work once to figure out analysis, but easy in the future to just rerun, go get coffee and wait for thing to be done :)
+
+
+Bioinf / dev:
 - Boxes are workflow steps
   - 2 types: *input* and *tool* steps
 - Steps are connected by arrows representing the flow of datasets
 - Tool panel on the left with Inputs on top (to add input datasets and collections)
 - Small tool form on the right
-
----
-
-### Workflows
-
-- Can be **extracted** from a history
-  - Allow to easily convert an existing history into an analysis workflow
-- Can be **built manually** by adding and configuring tools using the workflow canvas
-- Can be **imported** using an existing shared workflow
+- Extracting a workflow from a history allows to easily convert an existing history into an analysis workflow
 
 ---
 
@@ -238,32 +296,46 @@ See [Getting data into Galaxy](../../galaxy-data-manipulation/tutorials/get-data
 - Create **sub**-workflows: a workflow inside another workflow
 - **Share** workflows for publication and with the community
 
+???
+
+Potential information overload for newbies
+
 ---
 
-### Data sharing
+### Visualizations
 
-- You can share your Galaxy items - histories, workflows, visualizations, and pages - with other people in three different ways:
+.image-75[![](../../dev/images/charts_examples2.png)]
+
+- Datatypes know what tools can be used to visualize datasets:
+  - Sequencing data has a button for visualizing in IGV
+  - Tabular data will prompt you to build charts
+  - Protein data can be seen in a 3D viewer
+- Interactive environments: Jupyter, RStudio, etc
+
+---
+
+### Sharing data
+
+- Share everything you do in Galaxy - histories, workflows, and visualizations
   - Directly using a Galaxy account's email addresses on the same instance
   - Using a web link, with anyone who knows the link
   - Using a web link and publishing it to make it accessible to everyone from the *Shared Data* menu
-
-
-- Tools are shared using the free tool store: [Galaxy Tool Shed](https://toolshed.g2.bx.psu.edu/)
-
----
-
-### Data visualization
-
-- Charts
-- Each datatype can have some visualizations associated
-- Track browser called Trackster
-  - To visualize genomic data in a tightly integrated way
 
 ---
 
 ### Community
 
-- Be part of an active and friendly community
-- Get support and your questions answered on [Galaxy Biostars](https://biostar.usegalaxy.org/)
-- Access community curated documentation on [Galaxy Community Hub](https://www.galaxyproject.org/)
-- Learn more about Galaxy for scientists and for developers and admins on [Galaxy Training Community]({{site.url}}/{{site.baseurl}})
+- Support forum: [Galaxy Help](https://help.galaxyproject.org/)
+
+  ![Galaxy Help](../images/galaxy_help.png)
+- Community curated documentation: [Galaxy Community Hub](https://www.galaxyproject.org/)
+- [Events](https://galaxyproject.org/events/) all around the world
+- Galaxy Training for scientists, developers, admins, instructors: [Galaxy Training Community]({{site.baseurl}}/)
+  - Training questions? Chat with us on [Gitter](https://gitter.im/Galaxy-Training-Network/Lobby)
+
+???
+
+- know was a lot
+- we'll come back
+- slides are always available online
+- first real analysis after the coffee?

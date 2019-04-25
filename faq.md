@@ -32,7 +32,7 @@ There are two distinct audiences for these materials.
 
 ## How is the content licensed?
 
-The content of this website is Creative Commons Attribution 4.0 ([License]({{ site.github_repository }}/tree/master/LICENSE.md)).
+The content of this website is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/).
 
 ## How can I cite this effort?
 
@@ -40,7 +40,7 @@ We wrote an [article](https://www.biorxiv.org/content/early/2018/04/05/225680) a
 
 ## How can I advertise the training materials on my posters?
 
-We provide some QR codes and logos in the [images folder](https://github.com/galaxyproject/training-material/tree/master/assets/images).
+We provide some QR codes and logos in the [images folder]({{ site.github.repository_url }}/tree/{{ site.repository_branch }}/assets/images).
 
 # For Individual Learners
 
@@ -66,7 +66,7 @@ To run the hands-on tutorials you need a Galaxy server to run them on.
 
 Each tutorial is annotated with information about which [public Galaxy servers](https://galaxyproject.org/public-galaxy-servers/) it can be run on. These servers are available to anyone on the world wide web and some may have all the tools that are needed by a specific tutorial.
 
-If your organization/consortia/community has its own Galaxy server, then you may  want to run tutorials on that. You will need to confirm that all necessary tools and reference genomes are available on your server and possible install missing tools and data. To learn how to do that, you can follow our [dedicated tutorial]({{ site.baseurl }}/topics/instructors/tutorials/setup-galaxy-for-training/tutorial.html).
+If your organization/consortia/community has its own Galaxy server, then you may  want to run tutorials on that. You will need to confirm that all necessary tools and reference genomes are available on your server and possible install missing tools and data. To learn how to do that, you can follow our [dedicated tutorial]({{ site.baseurl }}{% link topics/instructors/tutorials/setup-galaxy-for-training/tutorial.md %}).
 
 Some topics have a [Docker](https://www.docker.com/) image that can be installed and run on participants' laptops.  These Docker images contain Galaxy instances that include all tools and datasets used in a tutorial, as well as saved analyses and repeatable workflows that are relevant. You will need to [install Docker](https://docs.docker.com/install/).
 
@@ -95,7 +95,7 @@ Each tutorial is annotated with the information on which [public Galaxy servers]
 If your organization/consortia/community has its own Galaxy server, then you may  want to run tutorials on that. This can be ideal because then the instance you are teaching on is the same you your participants will be using after the training. They'll also be able to revisit any analysis they did during the training. If you pursue this option you'll need to work with your organization's Galaxy Admins to confirm that
 
 - the server can support a room full of people all doing the same analysis at the same time.
-- all tools and reference datasets needed in the tutorial are locally installed.  To learn how to setup a Galaxy instance for a tutorial, you can follow our [dedicated tutorial]({{ site.baseurl }}/topics/instructors/tutorials/setup-galaxy-for-training/tutorial.html).
+- all tools and reference datasets needed in the tutorial are locally installed.  To learn how to setup a Galaxy instance for a tutorial, you can follow our [dedicated tutorial]({{ site.baseurl }}{% link topics/instructors/tutorials/setup-galaxy-for-training/tutorial.md %}).
 - all participants will be able to create/use accounts on the system.
 
 Some training topics have a Docker image that can be installed and run on all participants' laptops.  These images contain Galaxy instances that include all tools and datasets used in a tutorial, as well as saved analyses and repeatable workflows that are relevant.
@@ -104,7 +104,7 @@ Finally, you can also run your tutorials on cloud-based infrastructures.  Galaxy
 
 ## What are the best practices for teaching with Galaxy?
 
-We started to collect some best practices for instructors inside our [Good practices slides]({{ site.baseurl }}/topics/instructors/)
+We started to collect some best practices for instructors inside our [Good practices slides]({{ site.baseurl }}{% link topics/instructors/index.md %})
 
 ## How do I get help?
 
@@ -118,7 +118,7 @@ First off, thanks for your interest in contributing to the Galaxy training mater
 
 Individual learners and instructors can make these training more effective by contributing back to them. You can report mistakes and errors, create more content, etc. Whatever is your background, there is a way to contribute: via the GitHub website, via command-line or even without dealing with GitHub.
 
-We will address your issues and/or assess your change proposal as promptly as we can, and help you become a member of our community. You can also check our [tutorials]({{ site.baseurl }}/topics/contributing) for more details.
+We will address your issues and/or assess your change proposal as promptly as we can, and help you become a member of our community. You can also check our [tutorials]({{ site.baseurl }}{% link topics/contributing/index.md %}) for more details.
 
 ## How can I get started with contributing?
 
@@ -166,18 +166,18 @@ Below is a checklist of things to look out for to help you get started. If you f
 
 ### 2. Reviewing pull requests
 
-Another great way to help out the project is by reviewing [open pull requests](https://github.com/galaxyproject/training-material/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc). You can use the above checklist as a guide for your review. Some documentation about how to add your review in the GitHub interface can be found [here](https://help.github.com/articles/about-pull-request-reviews/)
+Another great way to help out the project is by reviewing [open pull requests]({{ site.github.repository_url }}/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc). You can use the above checklist as a guide for your review. Some documentation about how to add your review in the GitHub interface can be found [here](https://help.github.com/articles/about-pull-request-reviews/)
 
 
 ## How can I give feedback?
 
 At the end of each tutorial, there is a link to [a feedback form](https://docs.google.com/forms/d/1BILuBp8bPv42odpZ55Kcf2rqzR-k0Czx46agVVSRgm4/edit). We use this information to improve our tutorials.
 
-For global feedbacks, you can open an [issue on GitHub]({{ site.github_repository }}/issues/new), write us on [Gitter]({{ site.gitter_url }}) or send us an [email](mailto:{{ site.email }}).
+For global feedbacks, you can open an [issue on GitHub]({{ site.github.repository_url }}/issues/new), write us on [Gitter]({{ site.gitter_url }}) or send us an [email](mailto:{{ site.email }}).
 
 ## How can I report mistakes or errors?
 
-The easiest way to start contributing is to [file an issue]({{ site.github_repository }}/issues/new) to tell us about a problem such as a typo, spelling mistake, or a factual error. You can then introduce yourself and meet some of our community members.
+The easiest way to start contributing is to [file an issue]({{ site.github.repository_url }}/issues/new) to tell us about a problem such as a typo, spelling mistake, or a factual error. You can then introduce yourself and meet some of our community members.
 
 
 ## How can I test an Interactive Tour?
@@ -201,7 +201,7 @@ If you feel uncomfortable with using the git and the [GitHub flow](https://guide
 
 ## How can I contribute in "advanced" mode?
 
-Most of the content is written in [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/) with some metadata (or variables) found in [YAML](http://yaml.org/) files. Everything is stored on our [GitHub repository]({{ site.github_repository }}). Each training material is related to a topic. All training materials (slides, tutorials, etc) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to transcriptomic analysis). Each topic has the following <a name="structure">structure</a>:
+Most of the content is written in [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/) with some metadata (or variables) found in [YAML](http://yaml.org/) files. Everything is stored on our [GitHub repository]({{ site.github.repository_url }}). Each training material is related to a topic. All training materials (slides, tutorials, etc) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to transcriptomic analysis). Each topic has the following <a name="structure">structure</a>:
 
 ![Structure of the repository](shared/images/repo_organization.png){: width="400px"}
 
@@ -219,14 +219,14 @@ Most of the content is written in [GitHub Flavored Markdown](https://guides.gith
 
 - a directory with the Dockerfile describing the details to build a container for the topic (self-study environments).
 
-To manage changes, we use [GitHub flow](https://guides.github.com/introduction/flow/) based on Pull Requests (check our [tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)):
+To manage changes, we use [GitHub flow](https://guides.github.com/introduction/flow/) based on Pull Requests (check our [tutorial]({{ site.baseurl }}{% link topics/contributing/tutorials/create-new-tutorial-content/tutorial.md %})):
 
 1. [Create a fork](https://help.github.com/articles/fork-a-repo/) of this repository on GitHub
 2. Clone your fork of this repository to create a local copy on your computer and initialize the required submodules (`git submodule init` and `git submodule update`)
 3. Create a new branch in your local copy for each significant change
 4. Commit the changes in that branch
 5. Push that branch to your fork on GitHub
-6. Submit a pull request from that branch to the [master repository]({{ site.github_repository }})
+6. Submit a pull request from that branch to the [original repository]({{ site.github.repository_url }})
 7. If you receive feedback, make changes in your local clone and push them to your branch on GitHub: the pull request will update automatically
 8. Pull requests will be merged by the training team members after at least one other person has reviewed the Pull request and approved it.
 
@@ -246,13 +246,13 @@ Globally, the process of development of new content is open and transparent:
 12. Automatic checks of the changes are automatically checked for the right format and working links using continuous integration testing on Travis CI
 13. Review of the content by several other instructors via discussions
 14. After the review process, merge of the content into the main branch, starting a series of automatic steps triggered by Travis CI
-15. Regeneration of the website and publication on [{{site.url}}{{site.baseurl}}]({{site.url}}{{site.baseurl}})
+15. Regeneration of the website and publication on [{{ site.url }}{{ site.baseurl }}/]({{ site.baseurl }}/)
 16. Generation of PDF artifacts of the tutorials and slides and upload on the FTP server
 18. Population of [TeSS](https://tess.elixir-europe.org/), the ELIXIR’s Training Portal, via the metadata
 
 ![Development process](shared/images/development_process.png)
 
-To learn how to add new content, check out our [series of tutorials on creating new content]({{ site.baseurl }}/topics/contributing/):
+To learn how to add new content, check out our [series of tutorials on creating new content]({{ site.baseurl }}{% link topics/contributing/index.md %}):
 
 {% assign topic = site.data["contributing"] %}
 <ol>
@@ -272,26 +272,20 @@ To learn how to add new content, check out our [series of tutorials on creating 
 {% endfor %}
  </ol>
 
-We also strongly recommend you read and follow [Software Carpentry's](https://software-carpentry.org/) recommendations on [lesson design](https://carpentries.github.io/lesson-example/01-design/) and [lesson writing](https://carpentries.github.io/instructor-training/14-lesson-study/) if you plan to add or change some training materials, and also to check the [structure of the training material](#structure).
+We also strongly recommend you read and follow [The Carpentries](https://carpentries.org/) recommendations on [lesson design](https://carpentries.github.io/lesson-example/01-design/) and [lesson writing](https://carpentries.github.io/instructor-training/15-lesson-study/) if you plan to add or change some training materials, and also to check the [structure of the training material](#structure).
 
 ## What can I do to help the project?
 
-In [issues](https://github.com/galaxyproject/training-material/issues), you will find lists of issues to fix and features to implement (with the ["newcomer-friendly"]({{ site.github_repository }}/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Anewcomer-friendly) label for example). Feel free to work on them!
+In [issues](https://github.com/galaxyproject/training-material/issues), you will find lists of issues to fix and features to implement (with the ["newcomer-friendly"]({{ site.github.repository_url }}/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Anewcomer-friendly) label for example). Feel free to work on them!
 
 # Other Questions
 
 ## Are there any upcoming events focused on Galaxy Training?
 
-Yes. As of May 2018, these events are on the horizon:
+Yes, always! Have a look at the [Galaxy Community Events Calendar](https://galaxyproject.org/events/) for what coming up right now.
 
-* [CarpentryCon 2018](http://www.carpentrycon.org/), 30 May - 1 June, Dublin, Ireland
-  * Not specifically about Galaxy Training, but an excellent opportunity to gather with other computational science educators. [Bérénice Batut](https://github.com/bebatut) will present a poster and lightning talk on [Community-Driven Training for Biological Data Analysis with the Galaxy Training Network](https://github.com/carpentries/carpentrycon/blob/master/Sessions/2018-05-30/13-Poster-Session/abstract-berenice-batut.md)
-* [GCCBOSC 2018](https://gccbosc2018.sched.com/), June 25-30, Portland, Oregon, United States
-  * The annual gathering of the Galaxy Community is an opportunity to learn from experienced Galaxy trainers and to contribute to these efforts:
-    * [Bioinformatics Training and Education with the Galaxy Training Network](http://sched.co/Drp9), training session on how to use and contribute to these materials, presented by [Bérénice Batut](https://github.com/bebatut)
-    * [A fruitful year for the Galaxy Training materials](http://sched.co/EYF1), conference talk by [Bérénice Batut](https://github.com/bebatut)
-    * [Panel: Training and Documentation in Bioinformatics](http://sched.co/Dup7)
-    * The *Galaxy documentation, analysis, and training (Galaxy DAT)* track of [CollaborationFest](https://galaxyproject.org/events/gccbosc2018/collaboration/), June 29 - July 2. Focus on expanding Galaxy community resources like training materials and documentation.
-* Quarterly online training material Contribution Fests: The training community will meet online on the 3rd Friday of every 3rd month to focus on enhancing particular areas of the training material.
+## Sustainability of the training-material and metadata
 
-Is the above list now out of date? (it happens). See the [Galaxy Community Events Calendar](https://galaxyproject.org/events/) for what coming up right now.
+This repository is hosted on [GitHub](https://github.com/) using git as a [DVCS](https://en.wikipedia.org/wiki/Distributed_version_control). Therefore the community is hosting backups of this
+repository in a decentralised way. The repository is self-contained and contains all needed content and all metadata.
+In addition we mirror snapshops of this repo on [Zenodo](http://zenodo.org).

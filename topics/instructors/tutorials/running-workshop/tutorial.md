@@ -80,8 +80,8 @@ Not everyone is always outwardly enthusiastic about the course for any number of
 
 ## Before the workshop
 
-1. Read the [teaching recommendations](https://carpentries.github.io/instructor-training/22-practices/) of Software Carpentry
-2. Read the [organiser recommendations]({{ site.baseurl }}/topics/instructors/tutorials/organize-workshop/tutorial.html) and see if there is anything you can help with
+1. Read the [teaching recommendations](https://carpentries.github.io/instructor-training/24-practices/) of Software Carpentry
+2. Read the [organiser recommendations]({{ site.baseurl }}{% link  topics/instructors/tutorials/organize-workshop/tutorial.md %}) and see if there is anything you can help with
 2. Decide on the order of the lessons and who will teach what with the organizers
 3. Assist the host in recruiting helpers (people to walk around the classroom and help people if they get stuck)
 4. Assist the host in ensuring the workshop location is accessible and everything is ready for the students
@@ -98,12 +98,12 @@ Not everyone is always outwardly enthusiastic about the course for any number of
    1. A Public Galaxy?
 
       - UseGalaxy.org? UseGalaxy.eu? .org.au? (etc.)
-      - If you run on UseGalaxy.eu, they provide free [Training Infrastructure]({{ site.baseurl }}/topics/instructors/tutorials/setup-tiaas-for-training/tutorial.html)
+      - If you run on UseGalaxy.eu, they provide free [Training Infrastructure]({{ site.baseurl }}{% link topics/instructors/tutorials/setup-tiaas-for-training/tutorial.md %})
       - Work with the Galaxy administrator to ensure that the tools and datasets required are available
 
    2. A Private Galaxy?
 
-      Check our tutorial on [how to set up a Galaxy for Training]({{ site.baseurl}}/topics/instructors/tutorials/setup-galaxy-for-training/tutorial.html)
+      Check our tutorial on [how to set up a Galaxy for Training]({{ site.baseurl}}{% link topics/instructors/tutorials/setup-galaxy-for-training/tutorial.md %})
 
       - Technical infrastructure
       - Install the needed tools and data

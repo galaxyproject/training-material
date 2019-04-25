@@ -19,13 +19,11 @@ objectives:
 time_estimation: "75m"
 requirements:
   -
-    title: "Tool development and integration into Galaxy"
     type: "internal"
-    link: "/topics/dev/tutorials/tool-integration/slides.html"
-  -
-    title: "Prerequisites for building software/conda packages"
-    type: "internal"
-    link: "/topics/dev/tutorials/conda_sys/slides.html"
+    topic_name: dev
+    tutorials:
+      - tool-integration
+      - conda_sys
 key_points:
   - "Conda and Bioconda are Galaxy best practices for connecting Galaxy tools to underlying applications and libraries."
   - "Leveraging Conda allows easy installation of your tool's dependencies by Galaxy deployers."
@@ -550,7 +548,6 @@ build:
   number: 0
   skip: True # [osx]
 source:
-  fn: v0.7.15.tar.gz
   url: https://github.com/lh3/bwa/archive/v0.7.15.tar.gz
   md5: 54fdee953c5c256d36885a1c5c6b118c
 ```
@@ -560,18 +557,19 @@ source:
 ###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe - `requirements`
 
 ```yaml
+{% raw %}
 requirements:
   build:
-    - gcc   # [not osx]
-    - llvm  # [osx]
+    - {{ compiler('c') }}
+  host:
     - zlib
   run:
-    - libgcc   # [not osx]
-    - zlib
     - bowtie2
+{% endraw %}
 ```
 <small>
-- `build`: requirements needed during the build step (here compilation)
+- `build`: requirements needed to perform the compilation (if any)
+- `host`: requirements needed during the build step (here compilation)
 - `run`: requirements needed at runtime
 </small>
 
@@ -595,7 +593,7 @@ build:
   skip: True  # [not py27]
 ```
 
-.footer[.center[https://conda.io/docs/building/meta-yaml.html#preprocessing-selectors ]]
+.footer[.center[https://conda.io/projects/conda-build/en/latest/source/define-metadata.html#preprocessing-selectors ]]
 
 ---
 
@@ -629,7 +627,7 @@ test:
 
 Please note that the Conda tests run inside the runtime environment and not in the build environment.
 
-.footnote[.center[https://conda.io/docs/building/meta-yaml.html#test-section ]]
+.footnote[.center[https://conda.io/projects/conda-build/en/latest/source/define-metadata.html#test-section ]]
 
 ---
 
@@ -840,61 +838,12 @@ package:
   version: {{ version }}
 
 source:
-    fn: {{ name }}-{{ version }}.zip
     url: http://coolsoftware.com/{{ name }}/{{ version }}/{{ name }}-{{ version }}.zip
 
 {% endraw %}
 ```
 
-https://conda.io/docs/building/meta-yaml.html#templating-with-jinja
-
----
-
-## Bioconda Variables
-
-```yaml
-CONDA_PY:
-  - 27
-  - 35
-  - 36
-CONDA_HTSLIB: "1.7"
-CONDA_BOOST: "1.64"
-CONDA_R: "3.4.1"
-CONDA_PERL: "5.22.0"
-CONDA_NPY: "112"
-CONDA_NCURSES: "5.9"
-CONDA_GSL: "1.16"
-CONDA_GMP: "5.1"
-CONDA_HDF5: "1.8.17"
-MACOSX_DEPLOYMENT_TARGET: "10.9"
-CONDA_ZLIB: "1.2.11"
-CONDA_BZIP2: "1.0"
-CONDA_XZ: "5.2"
-CONDA_BAMTOOLS: "2.4.1"
-```
-
-.footnote[.center[https://github.com/bioconda/bioconda-recipes/blob/master/scripts/env_matrix.yml ]]
-
----
-
-class: left
-
-## Pinning Libraries - Use jinja
-
-> If your package links dynamically against a particular library, it is **often necessary to pin the version against which it was compiled, in order to avoid ABI incompatibilities**. Instead of hardcoding a particular version in the recipe, we use jinja templates to achieve this. This **helps ensure that all bioconda packages are binary-compatible with each other**. For example, bioconda provides an environment variable `CONDA_ZLIB` that contains the current major version of Zlib.
-
-
-```yaml
-{% raw %}
-requirements:
-  build:
-    - zlib {{ CONDA_ZLIB }}*
-  run:
-    - zlib {{ CONDA_ZLIB }}*
-{% endraw %}
-```
-
-.footnote[.center[https://bioconda.github.io/guidelines.html#c-c ]]
+https://conda.io/projects/conda-build/en/latest/source/define-metadata.html#templating-with-jinja
 
 ---
 
@@ -904,7 +853,6 @@ class: left
 
 ```yaml
 source:
-  fn: v0.7.15.tar.gz
   url: https://github.com/lh3/bwa/archive/v0.7.15.tar.gz
   md5: 54fdee953c5c256d36885a1c5c6b118c
 ```
@@ -954,47 +902,47 @@ $PYTHON setup.py install
 ## Python - pysam's `meta.yaml`
 
 .reduce50[```yaml
+{% raw %}
+{% set version = "0.15.2" %}
+{% set samtools_version = "1.9" %}
+{% set bcftools_version = "1.9" %}
+
 package:
-    name: pysam
-    version: 0.11.2.2
+  name: pysam
+  version: '{{ version }}'
 
 source:
-    fn: pysam-0.11.2.2.tar.gz
-    url: https://pypi.python.org/packages/a4/1b/b6dfd92aea876647d20d9a8bd8618e4f2af6300539426be83c8bb0912d6f/pysam-0.11.2.2.tar.gz
-    md5: 56230cd5f55b503845915b76c22d620a
-    patches:  # [osx]
-      - osx_rpath.patch [osx]
+  url: https://github.com/pysam-developers/pysam/archive/v{{ version }}.tar.gz
+  sha256: 8cb3dd70f0d825086ac059ec2445ebd2ec5f14af73e7f1f4bd358966aaee5ed3
 
 build:
-    number: 0
-    skip: False
+  number: 3
+  binary_relocation: False # [linux]
 
 requirements:
-    build:
-        - gcc  # [linux]
-        - llvm # [osx]
-        - htslib >=1.4.1,<1.5
-        - samtools >=1.4.1,<1.5
-        - bcftools >=1.4.1,<1.5
-        - cython
-        - python
-        - setuptools
-        - zlib
-        - curl
-
-    run:
-        - libgcc # [linux]
-        - htslib >=1.4.1,<1.5
-        - samtools >=1.4.1,<1.5
-        - bcftools >=1.4.1,<1.5
-        - python
-        - zlib
-        - curl
+  build:
+    - {{ compiler('c') }}
+  host:
+    - htslib
+    - samtools {{ samtools_version }}
+    - bcftools {{ bcftools_version }}
+    - cython
+    - python
+    - setuptools
+    - zlib
+    - curl
+    - libdeflate
+  run:
+    - samtools {{ samtools_version }}
+    - bcftools {{ bcftools_version }}
+    - python
+    - curl
+    - libdeflate
 
 test:
-
-    imports:
-        - pysam
+  imports:
+    - pysam
+{% endraw %}
 ```]
 
 ---
@@ -1009,65 +957,11 @@ conda skeleton cran <packagename>
 
 - Builds likely correct `build.sh` and `meta.yaml`.
 - The recipe name will have an `r-` prefix and will be converted to lowercase.
-- Typically can be used without modification, though dependencies may also need recipes.
 
-https://bioconda.github.io/guidelines.html#r-cran
+{% icon warning %} _The majority of R packages on CRAN are generic and should therefore be submitted at Conda-Forge.
+Exceptions are r-\* packages that depends on bioconductor-\* packages._
 
----
-
-## R - locfit's `build.sh`
-
-```sh
-#!/bin/bash
-
-# R refuses to build packages that mark themselves as Priority: Recommended
-mv DESCRIPTION DESCRIPTION.old
-grep -v '^Priority: ' DESCRIPTION.old > DESCRIPTION
-
-$R CMD INSTALL --build .
-```
-
----
-
-class: reduce70
-
-## R - locfit's `meta.yaml`
-
-```yaml
-package:
-  name: r-locfit
-  # Note that conda versions cannot contain -, so any -'s in the version have been replaced with _'s.
-  version: "1.5_9.1"
-
-source:
-  url: https://cran.r-project.org/src/contrib/locfit_1.5-9.1.tar.gz
-  md5: 38af7791c9cda78e2804020e65ac7fb4
-
-build:
-  number: 0
-  rpaths:
-    - lib/R/lib/
-    - lib/
-
-requirements:
-  build:
-    - gcc
-    - r-base
-    - r-lattice
-  run:
-    - libgcc
-    - r-base
-    - r-lattice
-
-test:
-  commands:
-    - $R -e "library('locfit')"
-
-about:
-  home: https://cran.rstudio.com/web/packages/locfit/index.html
-  license: GPL (>= 2)
-  summary: 'Local regression, likelihood and density estimation.'
-```
+[Conda-Forge contribution guidelines](https://conda-forge.org/docs/maintainer/adding_pkgs.html)
 
 ---
 
@@ -1109,7 +1003,6 @@ class: reduce70
 
 {% raw %}
 source:
-    fn: {{ name }}-{{ version }}.zip
     url: http://genesis.ugent.be/maven2/eu/isas/peptideshaker/{{ name }}/{{ version }}/{{ name }}-{{ version }}.zip
     md5: 14a48413e28a25614f5fda2b381d7197
 {% endraw %}
@@ -1151,7 +1044,6 @@ package:
   version: "0.4214"
 
 source:
-  fn: Module-Build-0.4214.tar.gz
   url: https://cpan.metacpan.org/authors/id/L/LE/LEONT/Module-Build-0.4214.tar.gz
   md5: 7b7ca5a47bef48c50c8b5906ca3ac7fb
 
@@ -1159,13 +1051,18 @@ build:
   number: 0
 
 requirements:
-  build:
-    - gcc
+  host:
     - perl
-
+    - perl-cpan-meta-yaml
+    - perl-extutils-parsexs
+    - perl-data-dumper
+    # [...]
   run:
-    - libgcc
     - perl
+    - perl-text-parsewords
+    - perl-cpan-meta
+    - perl-version
+    # [...]
 
 test:
   # Perl 'use' tests
@@ -1174,10 +1071,7 @@ test:
     - Module::Build::Base
     - Module::Build::Compat
     - Module::Build::Config
-    - Module::Build::Cookbook
-    - Module::Build::Dumper
-    - Module::Build::Notes
-    - Module::Build::PPMMaker
+    # [...]
 
 about:
   home: https://metacpan.org/pod/Module::Build

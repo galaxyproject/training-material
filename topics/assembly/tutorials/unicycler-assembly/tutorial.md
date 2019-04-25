@@ -12,6 +12,12 @@ objectives:
   - "Perform a Small genome Assembly with Unicycler"
   - "Evaluate the Quality of the Assembly with Quast"
   - "Annotate the assembly with Prokka"
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: assembly
+    tutorials: 
+      - ecoli_comparison
 time_estimation: "4h"
 key_points:
   - "We learned about the strategies used by assemblers for hybrid assemblies"
@@ -65,7 +71,7 @@ You can see that there many reads under the second peak with median of approxima
 > ### {% icon warning %} Oxford Nanopore Data Format
 > Oxford Nanopore machines output
  data in [fast5](http://bioinformatics.cvr.ac.uk/blog/exploring-the-fast5-format/) format that contains additional information besides sequence data. In this tutorial we assume that this data is *already* converted into [fastq](https://en.wikipedia.org/wiki/FASTQ_format). An additional tutorial dedicated to handling fast5 datasets will be developed shortly.
-{: .warning-box}
+{: .warning}
 
 
 ## The tools
@@ -210,7 +216,7 @@ Now it is time to perform assembly.
 > ### <i class="fa fa-cutlery" aria-hidden="true"></i> <i class="fa fa-coffee" aria-hidden="true"></i> Assembly takes time!
 >
 > There is no such thing as Assembly in real time. It takes time so it is a good time to have lunch or at least coffee. This Unicycler run will take anywhere between 90 minutes and two hours.
-{: .warning-box}
+{: .warning}
 
 ## Assess Assembly quality with Quast
 
