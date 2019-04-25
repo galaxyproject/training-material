@@ -233,7 +233,7 @@ Queries are really easy to implement! All you have to do is add your SQL, with a
 
 ## A basic function
 
-> ### {% icon hands_on %}: Hands-on: Implementing a basic function
+> ### {% icon hands_on %} Hands-on: Implementing a basic function
 >
 > 1. If `~/.config/` does not exist, create that directory with `mkdir -p ~/.config/`
 >
@@ -289,7 +289,7 @@ This is the simplest possible function you can add, and is pretty limited in its
 
 Every function is improved by documentation! Let's add that now:
 
-> ### {% icon hands_on %}: Hands-on: Adding help
+> ### {% icon hands_on %} Hands-on: Adding help
 >
 > 1. Open `~/.config/gxadmin-local.sh` in a text editor.
 >
@@ -339,7 +339,7 @@ Every function is improved by documentation! Let's add that now:
 
 The bulk of gxadmin is not fnuctions calling shell commands though, it's mostly SQL queries. So let's find the N most recent jobs
 
-> ### {% icon hands_on %}: Hands-on: Adding a query
+> ### {% icon hands_on %} Hands-on: Adding a query
 >
 > 1. Open `~/.config/gxadmin-local.sh` in a text editor.
 >
