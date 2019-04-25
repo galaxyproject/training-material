@@ -172,6 +172,8 @@ As the dataset is quite big and may countain heterogeneous information, we need 
 
 The regionalGAM tools require CSV files as input, we need to regenerate a CSV file using the `tabular to CSV` tool from
 
+CHANGE THE TOOL TO GET RID OF THIS STEP
+
 > ### {% icon hands_on %} Hands-on: Regenerate a CSV file
 > 1. **Tabular to CSV** {% icon tool %}
 >       - {% icon param-file %} *"tabular file"*: output of **Column Regex Find And Replace**
@@ -184,7 +186,7 @@ The regionalGAM tools require CSV files as input, we need to regenerate a CSV fi
 >
 > If your dataset contains information about more than one species, you can apply the previous steps and then run an extra-step to select one specific species and show all the data corresponding to it.
 >
-> As the dataset is quite big and contains heterogeneous information, you want to know wether the data are about one species or more. So the first step consists to count how many species are taken into account in this dataset.
+> As the dataset is quite big and contains heterogeneous information, you want to know whether the data are about one species or more. So the first step consists to count how many species are taken into account in this dataset.
 >
 > > ### {% icon hands_on %} Hands-on: How many species are taken into account
 > > 1. **Count occurrences of each record** {% icon tool %} with the following parameters:
