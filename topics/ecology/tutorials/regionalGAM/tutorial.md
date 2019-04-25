@@ -9,7 +9,7 @@ objectives:
     - "Obtain and filter/manipulate occurence data"
     - "Compute and visualize phenology of a species through the years"
     - "Compute temporal abundance trends"
-time_estimation: "1h"
+time_estimation: "2h"
 key_points:
     - ""
 contributors:
@@ -80,25 +80,21 @@ The downstream tools require Tabular file and not CSV. So we need first to conve
 >       - *"Header in file"*: Yes
 {: .hands_on}
 
-The current dataset contains a lot of data (exact site names for 5 ). Processing the file is this condition would require time and for the purpose of this tutorial, we will reduce the number of sites. The column with header `SITE` of the dataset you are using is really long and the `SITES` are classified into sub-sites (like `ESBMS.12`, `ESBMS.28`, `ESBMS.55`, etc).
+The current dataset contains a lot of data (exact site names for 5 butterfly monitoring scheme). Processing the file in this condition would require time and for the purpose of this tutorial, we will reduce the number of sites. The column with header `SITE` of the dataset you are using is really long and the `SITES` are classified into sub-sites (like `ESBMS.12`, `ESBMS.28`, `ESBMS.55`, etc).
 
-Here, we will delete the sub-sites ID and consider . We want to create a down-sampled file, deleting the `---.12, ---.28` mentions,
+Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We want to create a down-sampled file, by selecting the lines where NLBMS is found.
 
 > ### {% icon hands_on %} Hands-on: Downsample and hide some information   
-> 1. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
+> 1. **Text reformatting with awk** {% icon tool %} with the following parameters:
 >       - {% icon param-file %} *"Select cells from"*: output of **CSV to tabular** {% icon tool %}
->       - *"using column"*: `Column: 2`, the column with the `SITE` header
->       - *"insert Check"*
->       - *"Find pattern"*: `(\.[0-9]+)`
+>       - *"AWK Program"*: `NR == 1{ print }
+>                          /NLBMS/ { print }`, the first line will skip and print the header and the second will print all the lines where NLBMS is found
 >
->           It specifies that you don't want the sub-sites (all suites of digits following a "." character) to be taken into account.
->
->       - *"Replace with"*: leave it empty
 {: .hands_on}
 
 > ### {% icon question %} Questions
 >
-> How many sites do you have before and after deleting the sub-sites information?
+> How many sites do you have before and after removing the sites from outside the Netherlands?
 >
 >
 > You may need to use a tool like **Count occurrences of each record** {% icon tool %}. If you want to run the same tool with same parameters to several input files, you can directly specify the {% icon param-files %} **Multiple datasets** option on the tool form for the *"from dataset"* parameter).
@@ -106,7 +102,7 @@ Here, we will delete the sub-sites ID and consider . We want to create a down-sa
 >    {% include snippets/select_multiple_datasets.md %}
 >
 > > ### {% icon solution %} Solution
-> > The dataset contains 5 sites now against 1143 before down-sampling.
+> > The dataset contains 5 sites now against 1143 before down-sampling. CHANGE NUMBERS
 > {: .solution}
 {: .question}
 
@@ -237,13 +233,11 @@ The regionalGAM tools require CSV files as input, we need to regenerate a CSV fi
 
 # Step 2: Analyze phenology of a species through the years
 
-## Visualize the phenology
+## Compute and visualize the phenology
 
+[Phenology](https://en.wikipedia.org/wiki/Phenology), as described in Wikipedia, is the study of periodic plant and animal life cycle events and how these are influenced by seasonal and inter-annual variations in climate, as well as habitat factors (such as elevation).
 
-
-[Phenology](https://en.wikipedia.org/wiki/Phenology), as described in Wikipedia, is the study of periodic plant and animal life cycle events and how these are influenced by seasonal and interannual variations in climate, as well as habitat factors (such as elevation).
-
-Now you have a file containing all the data on the species of interest. The main goal of this step is to treat phenology related information and create a material that can be used to generate charts. What you could also do, for example, would be to compare the phenology through the years and sites.
+Now you have a file containing all the data on the species of interest. The main goal of this step is to model a phenology that will be used to predict values for missing counts at local sites and create a material that can be used to generate charts.
 
 This step will allow you to compute and display the phenology of a species. In the second part, you will learn that it is possible to show the phenology of various species on a single chart allowing to compare them and analyse them more easily.
 
@@ -679,7 +673,7 @@ As before, we need first to create a table with the column:
 
 ![Abundance index chart](../../images/regionalGAM/Pyronia_tithonus_Abundance_index_stacked.png)
 
-With this graph, we can see *Pyronia tithonus* abundance index through years by sites. Results can be different from one site to each other. Regarding overal patterns through years, DEBMS and NLBMS seems to be correlate and maybe due to the relative geographical proximity (DE=German / NL=Netherland). Considering min/max abundance, ESBMS show highest regionalGAM score when DEBMS show lowest. This can also be explained by different types of environmental factors or bias and have to be tested through further modeling steps.
+With this graph, we can see *Pyronia tithonus* abundance index through years by sites. Results can be different from one site to each other. Regarding overal patterns through years, DEBMS and NLBMS seems to be correlate and maybe due to the relative geographical proximity (DE=German / NL=Netherlands). Considering min/max abundance, ESBMS show highest regionalGAM score when DEBMS show lowest. This can also be explained by different types of environmental factors or bias and have to be tested through further modeling steps.
 
 
 ## Compute a collated index for each year and estimates the temporal trend
