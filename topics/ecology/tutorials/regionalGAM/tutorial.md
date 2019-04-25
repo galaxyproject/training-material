@@ -9,7 +9,7 @@ objectives:
     - "Obtain and filter/manipulate occurence data"
     - "Compute and visualize phenology of a species through the years"
     - "Compute temporal abundance trends"
-time_estimation: "2h"
+time_estimation: "2h30"
 key_points:
     - ""
 contributors:
@@ -87,8 +87,14 @@ Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We wan
 > ### {% icon hands_on %} Hands-on: Downsample and hide some information   
 > 1. **Text reformatting with awk** {% icon tool %} with the following parameters:
 >       - {% icon param-file %} *"Select cells from"*: output of **CSV to tabular** {% icon tool %}
->       - *"AWK Program"*: `NR == 1{ print }
->                          /NLBMS/ { print }`, the first line will skip and print the header and the second will print all the lines where NLBMS is found
+>       - *"AWK Program"*:
+>
+>              ```
+>              NR == 1{ print }
+>              /NLBMS/ { print }
+>              ```
+>
+> the first line will skip and print the header and the second will print all the lines where NLBMS is found
 >
 {: .hands_on}
 
@@ -102,11 +108,11 @@ Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We wan
 >    {% include snippets/select_multiple_datasets.md %}
 >
 > > ### {% icon solution %} Solution
-> > The dataset contains 5 sites now against 1143 before down-sampling. CHANGE NUMBERS
+> > The dataset contains 280 sites now against 1143 before down-sampling.
 > {: .solution}
 {: .question}
 
-> ### {% icon details %} If your original data is on RData format
+> ### {% icon details %} If your original data is in RData format
 >
 > > ### {% icon hands_on %} Hands-on: Data upload.
 > > 1. Import the RData
@@ -147,7 +153,7 @@ Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We wan
 > {: .question}
 {: .details}
 
-## Check that the dataset concerns only one species
+## Check that the dataset contains only one species
 
 The second step of any Regional GAM data analysis is making sure to have a dataset of only one specific species that you will then be able to use. If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another.
 
@@ -208,16 +214,16 @@ The regionalGAM tools require CSV files as input, we need to regenerate a CSV fi
 > > {: .solution}
 > {: .question}
 >
-> We now need to create a new file concerning only the data of one species
+> We now need to create a new file containing the data for only one species
 >
-> > ### {% icon hands_on %} Hands-on: Creating a new file concerning only the data of one species
+> > ### {% icon hands_on %} Hands-on: Creating a new file containing only the data from one species
 > > 1. Copy the name of the species you are interested in (for example: "Aglais io").
 > > 2. **Filter data on any column using simple expressions** {% icon tool %}
 > >      - {% icon param-file %} *"Filter"*: output of **Column Regex Find And Replace** {% icon tool %}
 > >      - *"With following condition"*: `c1=='"Aglais io"'` or (another species name)  
 > >      - *"Number of header lines to skip"*: `1`
 > >
-> >    You can repeat this set of actions as much as necessary, changing only the name of the species taken into account. By doing this, you will obtain separated dataset, each of them concerning a different species.
+> >    You can repeat this set of actions as much as necessary, changing only the name of the species taken into account. By doing this, you will obtain separated dataset, each of them containing a different species.
 > >
 > > 3. **tabular to CSV** {% icon tool %}
 > >      - {% icon param-file %} *"tabular file"*: output of **Filter data on any column using simple expressions** {% icon tool %}
@@ -492,18 +498,18 @@ With this graph, we can see that occurrences of *Pyronia tithonus* are always ar
 >
 > > ### {% icon hands_on %} Hands-on:
 > > 1. **Paste two files side by side** {% icon tool %} with the following parameters:
-> >     -  *"Paste"*: `the output` from **Merge Columns together** (with the dataset concerning species 1)
-> >     -  *"and"*: `the output` from **Merge Columns together** (with the dataset concerning species 2)
+> >     -  *"Paste"*: `the output` from **Merge Columns together** (with the dataset for species 1)
+> >     -  *"and"*: `the output` from **Merge Columns together** (with the dataset for species 2)
 > >     -  *"Delimited by"*: tabulation
 > >
 > >   >
 > >   > ### {% icon comment %} Comment: You can add other species.
 > >   > In order to do so you will have to do as explained below:
 > >   > 1. **Paste two files side by side** {% icon tool %} with the following parameters:
-> >   >    -  *"Paste"*: the `output` from **Paste two files side by side** (with the dataset concerning species 1 and 2)
-> >   >    -  *"and"*: `the output` from **Merge Columns together** (with the dataset concerning species 3)
+> >   >    -  *"Paste"*: the `output` from **Paste two files side by side** (with the dataset containing species 1 and 2)
+> >   >    -  *"and"*: `the output` from **Merge Columns together** (with the dataset containing species 3)
 > >   >    -  *"Delimited by"*: tabulation
-> >   > 2. Repeat **Paste two files side by side** {% icon tool %} with the output from **Paste two files side by side** (with the data concerning species 1, 2 and 3) and with the output from **Merge Columns together** (with the dataset concerning species 4) and so on.
+> >   > 2. Repeat **Paste two files side by side** {% icon tool %} with the output from **Paste two files side by side** (with the data containing species 1, 2 and 3) and with the output from **Merge Columns together** (with the dataset containing species 4) and so on.
 > >   {: .comment}
 > {: .hands_on}
 >
@@ -768,4 +774,4 @@ Here you can see the temporal trends modeled from the simple regression vs using
 # Conclusions
 {:.no_toc}
 
-In this tutorial, you have analyzed regional GAM data to extract useful information in order to be able to show different tendencies of a chosen species. Therefore, you are now able to treat the dataset so that it shows only the data concerning one specific species of your choice. From there, you can show the phenology of this species through the years first on a dataset and then on a visual chart. You have also learned how to represent on a single chart the phenology of various species. Afterwards, we have shown you how to create a dataset containing the information on the abundance of a species per year and per site. Based on which you can henceforth visually represent the annual abundance trend on a chart. Thereafter, you have the possibility of showing the expected temporal trend, based on which you will be able to try predicting the future evolution a given species. The last part of this tutorial has shown you how to calculate the linear regression allowing you to determinate whether the year has an influence on the abundance of a species or not.
+In this tutorial, you have analyzed regional GAM data to extract useful information in order to be able to show different tendencies of a chosen species. Therefore, you are now able to treat the dataset so that it shows only the data for one specific species of your choice. From there, you can show the phenology of this species through the years first on a dataset and then on a visual chart. You have also learned how to represent on a single chart the phenology of various species. Afterwards, we have shown you how to create a dataset containing the information on the abundance of a species per year and per site. Based on which you can henceforth visually represent the annual abundance trend on a chart. Thereafter, you have the possibility of showing the expected temporal trend, based on which you will be able to try predicting the future evolution a given species. The last part of this tutorial has shown you how to calculate the linear regression allowing you to determinate whether the year has an influence on the abundance of a species or not.
