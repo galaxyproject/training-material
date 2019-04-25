@@ -466,6 +466,8 @@ The coordinates provided by wordmatch are based on count 1. Meaning the first nu
 >
 {: .hands_on}
 
+You can display the coverage data and the aligned read with IGV (See **IGV Introduction** training in *Introduction to Galaxy Analyses* section)
+
 ## Merging overall coverage and TA sites to get the coverage of each TA sites
 
 Now that have the files containing the coordinates of our TA sites for both strands. We will cross them with the coverage files to get the coverage on both sides of each TA site.
