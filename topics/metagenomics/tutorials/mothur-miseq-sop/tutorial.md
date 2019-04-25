@@ -426,7 +426,7 @@ For more information on the topic of alignment, please see our training material
 [here]({{site.baseurl}}{% link topics/sequence-analysis/index.md %})
 
 We are now ready to align our sequences to the reference. This is an important
-step to improve the clustering of your OTUs {% cite Schloss2012 %}.
+step to improve the clustering of your OTUs ({% cite Schloss2012 %}).
 
 
 > ### {% icon hands_on %} Hands-on: Align sequences
@@ -591,7 +591,7 @@ sequencing artefacts confounding our results.
 > (slide credit: [http://slideplayer.com/slide/4559004/ ](http://slideplayer.com/slide/4559004/ ))
 {: .comment}
 
-We'll do this chimera removal using the `VSEARCH` algorithm {% cite Rognes2016 %} that is called within mothur, using the
+We'll do this chimera removal using the `VSEARCH` algorithm ({% cite Rognes2016 %}) that is called within mothur, using the
 **Chimera.vsearch** tool. This command will split the data by sample and check for chimeras. The recommended
 way of doing this is to use the abundant sequences as our reference.
 
@@ -716,7 +716,7 @@ accurate your sequencing and analysis protocol is.
 >
 > **Example**
 >
-> As an example, consider the following image from Fouhy et al {% cite Fouhy2016 %}.
+> As an example, consider the following image from {% cite Fouhy2016 %}.
 > A mock community sample was sequenced for different combinations of sequencer and primer sets (V-regions).
 > Since we know the expected outcome, we can assess the accuracy of each pipeline. A similar approach can be used to
 > assess different parameter settings of the *in-silico*  analysis pipline.
@@ -726,8 +726,8 @@ accurate your sequencing and analysis protocol is.
 >
 > **Further reading**
 >
-> - Next generation sequencing data of a defined microbial mock community {% cite Singer2016 %}
-> - 16S rRNA gene sequencing of mock microbial populations- impact of DNA extraction method, primer choice and sequencing platform {% cite Fouhy2016 %}
+> - Next generation sequencing data of a defined microbial mock community ({% cite Singer2016 %})
+> - 16S rRNA gene sequencing of mock microbial populations- impact of DNA extraction method, primer choice and sequencing platform ({% cite Fouhy2016 %})
 >
 {: .comment}
 
@@ -1033,7 +1033,7 @@ dataset by subsampling.
 
 Species diversity is a valuable tool for describing the ecological complexity of a single sample (alpha diversity)
 or between samples (beta diversity). However, diversity is not a physical quantity that can be measured directly,
-and many different metrics have been proposed to quantify diversity [Finotello et al. 2016](https://www.ncbi.nlm.nih.gov/pubmed/28025179).
+and many different metrics have been proposed to quantify diversity ({% cite Finotello2016 %}).
 
 
 > ### {% icon comment %} Background: Species Diversity
@@ -1257,7 +1257,7 @@ of the others.
 # Visualisations
 
 We may now wish to visualize our results. We can convert our *shared* file to the more widely used `biom` format and
-view it in a platform like [Phinch](http://www.phinch.org/).
+view it in a platform like [Phinch](http://www.phinch.org/) ({% cite Bik2014 %}).
 
 ## Phinch
 
@@ -1288,7 +1288,7 @@ view it in a platform like [Phinch](http://www.phinch.org/).
 
 ## Krona
 
-A second tool we can use to visualize our data, is [Krona](https://github.com/marbl/Krona/wiki)
+A second tool we can use to visualize our data, is [Krona](https://github.com/marbl/Krona/wiki) ({% cite Ondov2011 %}).
 
 > ### {% icon hands_on %} Hands-on: Krona
 >
