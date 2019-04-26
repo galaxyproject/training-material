@@ -15,10 +15,10 @@ objectives:
   - "Understand the read structure of TnSeq analyses"
   - "Predict Essential genes with Transit"
   - "Compare gene essentiality in control sample and an different experimental condition"
-time_estimation: "7h"
+time_estimation: "7H"
 key_points:
 contributors:
-  - dlariviere
+  - delphine-l
 ---
 
 # Introduction
@@ -359,6 +359,9 @@ The first step is to map our read to the reference genome (you can download it [
 >
 {: .hands_on}
 
+
+
+
 ## Getting coverage of the genome
 
 Now that we have mapped the reads on the reference genome, we are going to calculate the coverage of the genome to later cross them with our TA sites position.
@@ -466,7 +469,7 @@ The coordinates provided by wordmatch are based on count 1. Meaning the first nu
 >
 {: .hands_on}
 
-You can display the coverage data and the aligned read with IGV (See **IGV Introduction** training in *Introduction to Galaxy Analyses* section)
+
 
 ## Merging overall coverage and TA sites to get the coverage of each TA sites
 
