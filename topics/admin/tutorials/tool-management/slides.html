@@ -2,18 +2,69 @@
 layout: base_slides
 logo: "GTN"
 
-title: "Ephemeris"
+title: "Ephemeris for Galaxy Tool Management"
+questions:
+  - How to install, update, and maintain Galaxy tools?
+  - How to extract a list of tools from a workflow or Galaxy instance?
+objectives:
+  - Learn about Ephemeris
+  - Extract a list of tools from a workflow
+  - Install these tools into a given Galaxy
+key_points:
+  - Ephemeris and automation help with the tool management on Galaxy
+  - There are tool management best practices you can learn from
+  - Do not manage your Galaxy's tools manually
 contributors:
+  - mvdbeek
   - martenson
+  - slugger70
+  - erasche
 ---
 
-# Please ask!
+# Galaxy Vocabulary
 
-We answer.
+* `tool` - XML file that describes to Galaxy how the underlying software works.
+* `repository` - Versioned code archive in Tool Shed containing Galaxy tool(s).
 
 ---
 
-# What is it and what does it do?
+# Ways to add tools
+
+You can add tools to Galaxy either
+
+* Manually - Trivial for trivial tools and useful for tool development.
+* Using Tool Shed
+  * Through admin UI in Galaxy
+  * Using **ephemeris** (recommended)
+
+---
+
+# How to add tools manually
+
+- By default Galaxy loads all tools in `tool_conf.xml.sample` into tool panel.
+- To add local tools you need:
+  - Make a copy `$ cp tool_conf.xml.sample tool_conf.xml`.
+  - Add your tool entries to the `tool_conf.xml`.
+  - Refresh the site
+
+---
+
+# How to install from the Tool Shed
+
+* Find the repository you want to install.
+* From Galaxy's admin UI find the repo in the connected TS.
+* Install the repo into Galaxy.
+
+---
+
+# How to install with Ephemeris
+
+* Find the repository you want to install.
+* Run `shed-tools install` with the repository name
+
+---
+
+# What is ephemeris and what does it do?
 
 Small Python library for Galaxy Management
 
@@ -27,7 +78,8 @@ Small Python library for Galaxy Management
 * https://ephemeris.readthedocs.io
 
 ---
-# Install workflows
+
+## Install workflows
 
 ```
 workflow-install [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
@@ -38,7 +90,7 @@ workflow-install [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
 (use `workflow-to-tools` to extract list of tools from a workflow)
 
 ---
-# Get Galaxy's tool list
+## Get Galaxy's tool list
 
 ```
 get-tool-list [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
@@ -51,6 +103,7 @@ get-tool-list [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
 ```
 
 ---
+
 ```
 tools:
 - name: 'column_maker'
@@ -71,7 +124,7 @@ tools:
 ```
 
 ---
-# Install/Update/Test tools
+## Install/Update/Test tools
 
 ```
 shed-tools install [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
@@ -100,7 +153,8 @@ shed-tools install [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
 * Sample playbook: https://github.com/afgane/galaxy-tools-playbook
 
 ---
-# Run data managers
+
+## Run data managers
 
 ```
 run-data-managers [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
@@ -111,7 +165,8 @@ run-data-managers [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
 ```
 
 ---
-# Setup data libraries
+
+## Setup data libraries
 
 ```
 setup-data-libraries [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
@@ -146,7 +201,7 @@ items:
 ```
 
 ---
-# Wait for Galaxy
+## Wait for Galaxy
 
 ```
 $ galaxy-wait -g http://localhost:8080 -v
@@ -164,4 +219,84 @@ $ galaxy-wait -g http://localhost:8080 -v
 	 Max retries exceeded with url: /api/version (Caused
 
 Galaxy Version: 17.05
+```
+
+---
+
+# More on Tool Management:
+
+- tool installation
+- configuration
+- suites
+- dependencies
+
+---
+
+## What happens during tool installation
+
+* Repository was downloaded.
+* If needed Galaxy downloaded and compiled the needed dependencies.
+* Galaxy created an entry for the tool in the DB.
+* Galaxy added the tool to one of the tool configs (`shed_tool_conf.xml`).
+
+---
+
+## Example config entry
+ one entry in `shed_tool_conf.xml`
+
+```xml
+<section id="filter" name="Filter and Sort" version="">
+  <tool file="testtoolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/23a1c1f66b47/bamtools_filter/bamtools-filter.xml" guid="testtoolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/0.0.1">
+      <tool_shed>testtoolshed.g2.bx.psu.edu</tool_shed>
+        <repository_name>bamtools_filter</repository_name>
+        <repository_owner>devteam</repository_owner>
+        <installed_changeset_revision>23a1c1f66b47</installed_changeset_revision>
+        <id>testtoolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/0.0.1</id>
+        <version>0.0.1</version>
+    </tool>
+</section>
+```
+
+---
+
+## Example config entry
+
+one entry in `integrated_tool_panel.xml`
+```xml
+<section id="filter" name="Filter and Sort" version="">
+    <tool id="testtoolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/0.0.1" />
+```
+
+---
+
+## Suites - more repos in one
+
+* To install multiple repositories some authors offer suites.
+* Suite is a single repository that 'depends' on many other.
+* If you install the suite all 'dependency repositories' will be installed too.
+
+---
+
+## Toolpanel management
+
+* How the toolpanel looks like is decided in a file called `integrated_tool_panel.xml`.
+* By default it resides in Galaxy's root folder.
+* If missing it is generated from all other tool config files during startup.
+* Modify it if you want to reorder tools or move section.
+
+---
+
+## Dependency resolvers
+
+* We aim to make Galaxy resolver-independent.
+* What resolver is going to be used for the tool dependency is determined at runtime and prioritised in `config/dependency_resolvers_conf.xml`.
+
+```xml
+<dependency_resolvers>
+  <tool_shed_packages />
+  <galaxy_packages />
+  <conda />
+  <galaxy_packages versionless="true" />
+  <conda versionless="true" />
+</dependency_resolvers>
 ```
