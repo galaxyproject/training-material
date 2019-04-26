@@ -37,7 +37,7 @@ Transposon insertion sequencing is a technique used to functionally annotate bac
 | Transposon insertion sequencing method |
 |:--------------:|
 |<img name="method" src="../../images/tnseq/principle_tnseq.png" width='70%' alt= "Illustration of tnseq Method" >|
-| **a. Data production** The initial population genomes are mutated so that the genome is saturated with transposon insertions.  A library is *saturated* if in the genomes across the whole population of bacteria, each potential insertion site has at least one insertion. The population is then divided into several media containing different growth conditions. After growth, the regions flanking the insertion are amplified and sequenced, allowing to determine the location of the insertion. **b. Analysis** After alignement to the reference genome, the resulting data will show a discrete repartition of reads on each TA site. If a gene present several insertions, like the two leftmost genes in *Condition A*, it means that its disruption has little or no impact to the bacterial growth. On the other hand, when a gene shows no insertions at all, like the rightmost gene in *Condition A*, is means that any disruption in this gene killed the bacteria, meaning its a gene essential to bacteria survival. If the library is sufficiently saturated, there is a clear threshold between essential and non-essential genes when you analyze the insertion rate per gene. From [Chao et al.](http://www.doi.org/10.1038/nrmicro.2015.7)|
+| **a. Data production** The initial population genomes are mutated so that the genome is saturated with transposon insertions.  A library is *saturated* if in the genomes across the whole population of bacteria, each potential insertion site has at least one insertion. The population is then divided into several media containing different growth conditions. After growth, the regions flanking the insertion are amplified and sequenced, allowing to determine the location of the insertion. **b. Analysis** After alignement to the reference genome, the resulting data will show a discrete repartition of reads on each TA site. If a gene present several insertions, like the two leftmost genes in *Condition A*, it means that its disruption has little or no impact to the bacterial growth. On the other hand, when a gene shows no insertions at all, like the rightmost gene in *Condition A*, is means that any disruption in this gene killed the bacteria, meaning its a gene essential to bacteria survival. If the library is sufficiently saturated, there is a clear threshold between essential and non-essential genes when you analyze the insertion rate per gene. From {% cite Chao2016 %}|
 ||
 
 
@@ -75,10 +75,10 @@ In this tutorial, the transposon is a mariner Himar1 with the structure describe
 | Structure of the tranposon constructs |
 |:--------------:|
 |<img name="TranspStructure" src="../../images/tnseq/tranposon_structure.png" width='60%' alt="Structure of the transposon containing several parcodes and adapters" >|
-| The transposon construct is a mariner transposon with two specific region used to specifically sequence the region upstream of the insertion. The transposon inserts at TA site at the ITR junctions. These ITR junctions have been modified to include a Mme1 restriction site (cut 21 bp upstream from the restriction site). Using MmeI enzyme to determine the size of the reads allow to have a hmogeneous read size and therefore avoid a bias in the representation of the insertions. It also includes a NotI restriction site. These two site are the 5' and 3' limits to the genomic DNA we want to sequence. **A. Sequence flanking genomic regions** After digestion by NotI restriction enzyme, the fragments are attached to biotinylated adaptors that link to NotI restriction site. The attached fragment are then digested by MMeI at a site upstream , where an Illumina primer is then linked. The sequencing is then done, adding Illumina adaptors and an additional barcode to the read for multiplexed sequencing. **B. Removing incorrect fragments** An insertion can sometimes be composed of one or more copies of the transposon (multimer). There is therefore a risk to select plasmid backbone sequence. To solve this problem, an additional NotI has been add in the backbone to create different length construct, that can later be filtrated (C). Different promoters are added to the construct along with an additional 3 bp barcode to analyze differential expression impact, but this will be the subject of another tutorial.  From [Santiago et al.](http://www.doi.org/10.1186/s12864-015-1361-3)|
+| The transposon construct is a mariner transposon with two specific region used to specifically sequence the region upstream of the insertion. The transposon inserts at TA site at the ITR junctions. These ITR junctions have been modified to include a Mme1 restriction site (cut 21 bp upstream from the restriction site). Using MmeI enzyme to determine the size of the reads allow to have a hmogeneous read size and therefore avoid a bias in the representation of the insertions. It also includes a NotI restriction site. These two site are the 5' and 3' limits to the genomic DNA we want to sequence. **A. Sequence flanking genomic regions** After digestion by NotI restriction enzyme, the fragments are attached to biotinylated adaptors that link to NotI restriction site. The attached fragment are then digested by MMeI at a site upstream , where an Illumina primer is then linked. The sequencing is then done, adding Illumina adaptors and an additional barcode to the read for multiplexed sequencing. **B. Removing incorrect fragments** An insertion can sometimes be composed of one or more copies of the transposon (multimer). There is therefore a risk to select plasmid backbone sequence. To solve this problem, an additional NotI has been add in the backbone to create different length construct, that can later be filtrated (C). Different promoters are added to the construct along with an additional 3 bp barcode to analyze differential expression impact, but this will be the subject of another tutorial. From {% cite Santiago2015 %}|
 ||
 
-Because of this complex tranposon structure, the reads obtained after sequencing contain a large portion of tranposon sequence for a 16-17 bp genomic sequence. This will necessitate several step of pre-processing to extract this genomic sequence.  
+Because of this complex tranposon structure, the reads obtained after sequencing contain a large portion of tranposon sequence for a 16-17 bp genomic sequence. This will necessitate several step of pre-processing to extract this genomic sequence.
 
 
 
@@ -98,7 +98,7 @@ Once we have the count of insertion at every insertion site, there is several me
 | Methods of TnSeq Analyses|
 |:--------------:|
 |<img name="AnalysesMethods" src="../../images/tnseq/type_of_analyses.png" width='60%' alt="Different types of TnSeq Analyses" >|
-| **Annotation dependent method** The total read count an/or percentage of disrupted site are computed per annotated regions. The values are then compared to the rest of the genome to classify the genes into the categories *essential* or *non-essential*. **Annotation independent method** The total read count and/or disrupted sites are computed independently of annotated regions. One of these methods is using a sliding window. Each window is then classified into the categories *essential* or *non-essential*. After the windows have been classified, they are linked annotations, and the genes/regions can be classified as *essential*, *non-essential*, or *domain essential* according to the classification of the windows they cover. The same classification can be done using HMM based methods instead of sliding windows. In that case, each insertion site will be predicted as *essential* or *non essential*. From [Chao et al.](http://www.doi.org/10.1038/nrmicro.2015.7)|
+| **Annotation dependent method** The total read count an/or percentage of disrupted site are computed per annotated regions. The values are then compared to the rest of the genome to classify the genes into the categories *essential* or *non-essential*. **Annotation independent method** The total read count and/or disrupted sites are computed independently of annotated regions. One of these methods is using a sliding window. Each window is then classified into the categories *essential* or *non-essential*. After the windows have been classified, they are linked annotations, and the genes/regions can be classified as *essential*, *non-essential*, or *domain essential* according to the classification of the windows they cover. The same classification can be done using HMM based methods instead of sliding windows. In that case, each insertion site will be predicted as *essential* or *non essential*. From {% cite Chao2016 %}|
 ||
 
 
@@ -176,7 +176,7 @@ The experimental design of transposon insertion sequencing produces raw reads co
 >    >  What would change if our barcodes were at the end of the reads ?
 >    >
 >    > > ### {% icon solution %} Solution
->    > >  
+>    > >
 >    > >  We would have used the option `Insert 3' (End) Adapters` and anchored them at the end of the read with the symbol `$` in our fasta file containing the barcodes.
 >    > >
 >    > {: .solution }
@@ -224,13 +224,13 @@ To remove the reads that might not have been trimmed because of too many mismatc
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. What are the outputs at this step?
->    >  
+>    >
 >    > 2. What percentage of the reads contained the adapter?
->    >  
+>    >
 >    > 3. How many reads where discarded after filtering?
 >    >
 >    > > ### {% icon solution %} Solution
->    > >  
+>    > >
 >    > > 1. The outputs are two collections : one containing the reads in two conditions, and one containing the Cutadapt reports for each condition.
 >    > >
 >    > > 2. More than 99% of the reads contained the adapter in both conditions. (Line `Reads with adapters` in Report output)
@@ -261,7 +261,7 @@ You can download the fasta file containing the barcodes [here](https://zenodo.or
 >   >
 > {: .solution }
 >
-{: .question}  
+{: .question}
 
 
 > ### {% icon hands_on %} Hands-on:  Barcode split with Cutadapt
