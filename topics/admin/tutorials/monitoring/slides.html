@@ -11,7 +11,7 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Server Monitoring</title>
+    <title>Galaxy Monitoring with Telegraf and Grafana</title>
     
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -32,7 +32,7 @@
     
     
     <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
-    <meta property="og:title" content="Galaxy Training: Server Monitoring" />
+    <meta property="og:title" content="Galaxy Training: Galaxy Monitoring with Telegraf and Grafana" />
     <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
     <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     <script type="application/ld+json">
@@ -75,7 +75,7 @@
     "url": "https://galaxyproject.org/teach/gtn/"
   },
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "Server Monitoring",
+  "headline": "Galaxy Monitoring with Telegraf and Grafana",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -104,11 +104,11 @@
   },
   "courseCode": "admin / monitoring / slides",
   "learningResourceType": "slides",
-  "name": "Slides for 'Server Monitoring' tutorial",
+  "name": "Slides for 'Galaxy Monitoring with Telegraf and Grafana' tutorial",
   "isPartOf": {
     "@type": "Course",
-    "name": "Server Monitoring",
-    "description": "Server Monitoring",
+    "name": "Galaxy Monitoring with Telegraf and Grafana",
+    "description": "Galaxy Monitoring with Telegraf and Grafana",
     "learningResourceType": "tutorial",
     "interactivityType": "expositive",
     "provider": {
@@ -119,17 +119,12 @@
     }
   },
   "url": "https://galaxyproject.github.io//training-material/topics/admin/tutorials/monitoring/slides.html",
-  "timeRequired": "PT1H",
-  "description": "Server Monitoring\\nThe questions this  addresses are:\n - How to monitor a Galaxy service?\n\n\\nThe objectives are:\n - Learn about different monitoring strategies.\n - Setup and start the Galaxy reports app.\n\n",
+  "description": "Galaxy Monitoring with Telegraf and Grafana\\nThe questions this  addresses are:\n - How to monitor Galaxy with Telegraf\n\n\\nThe objectives are:\n - Setup and start the Galaxy reports app.\n\n",
   "hasPart": [
 
   ],
   "mentions": [
-    {
-      "@type": "Thing",
-      "url": "",
-      "name": "Training data for Server Monitoring tutorial"
-    }
+
   ],
   "author": [
     {
@@ -199,7 +194,7 @@ class: center, middle, inverse
 
 ---
 
-# Server Monitoring
+# Galaxy Monitoring with Telegraf and Grafana
 
 
 
@@ -212,7 +207,7 @@ class: center, middle, inverse
 ### &lt;i class=&quot;fa fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
 
 
-- How to monitor a Galaxy service?
+- How to monitor Galaxy with Telegraf
 
 
 ---
@@ -221,174 +216,11 @@ class: center, middle, inverse
 ### &lt;i class=&quot;fa fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
 
 
-- Learn about different monitoring strategies.
-
 - Setup and start the Galaxy reports app.
 
 
 ---
 
-
-## Manage Jobs
-
-An admin interface to list current unfinished jobs and finished jobs of a certain age.
-
-* You can stop unfinished jobs
-* You can show details of old jobs
-* You can lock the server from spawning new jobs. (e.g. for maintenance.)
-
----
-
-# Log Files
-
-- Galaxy logs (`/srv/galaxy/log/*`)
-  - Web (uWSGI)
-  - Handler
-- nginx logs (`/var/log/nginx/*`)
-- supervisor logs (`/var/log/supervisor/*`)
-
----
-
-# Database Queries
-
-Sometimes it's the best way to get the exact data you need
-
-Can be very useful for:
-- Debugging
-- Reporting
-- Analytics
-
-But consider: [`gxadmin`](https://github.com/usegalaxy-eu/gxadmin) and sharing your SQL
----
-# Database Queries
-
-&quot;Can you send me the number of jobs per day/state from Main in September and October?&quot;
-
-```sql
-SELECT
-  date_trunc('month', j.create_time) AS month,
-  j.state,
-  COUNT(j.state) AS job_count
-FROM job j
-LEFT OUTER JOIN galaxy_user u
-  ON j.user_id = u.id
-WHERE u.email != 'monitor@bx.psu.edu'
-GROUP BY month,
-         j.state
-HAVING date_trunc('month', j.create_time) &gt;= '2016-09-01'
-AND date_trunc('month', j.create_time) &lt; '2016-11-01'
-ORDER BY month, j.state;
-```
-
----
-# Database Queries
-
-```
-        month        |  state  | job_count
----------------------+---------+-----------
- 2016-09-01 00:00:00 | deleted |     11369
- 2016-09-01 00:00:00 | error   |     15375
- 2016-09-01 00:00:00 | new     |      1179
- 2016-09-01 00:00:00 | ok      |    165963
- 2016-09-01 00:00:00 | paused  |       933
- 2016-09-01 00:00:00 | waiting |         9
- 2016-10-01 00:00:00 | deleted |     13190
- 2016-10-01 00:00:00 | error   |     12539
- 2016-10-01 00:00:00 | new     |      1183
- 2016-10-01 00:00:00 | ok      |    167547
- 2016-10-01 00:00:00 | paused  |       645
- 2016-10-01 00:00:00 | queued  |        75
- 2016-10-01 00:00:00 | running |        36
- 2016-10-01 00:00:00 | waiting |        17
-(14 rows)
-```
-
----
-# Database Queries
-
-&quot;I need a list of current main toolshed users and a number of their repos&quot;
-
-```
-gxadmin query ts-repos
-```
-
-**OR**
-
-```sql
-SELECT
-  u.username,
-  COUNT(r.id) AS r_count
-FROM galaxy_user u
-JOIN repository r
-  ON u.id = r.user_id
-WHERE NOT r.deleted
-GROUP BY u.id
-ORDER BY r_count DESC
-LIMIT 12;
-```
-
----
-# Database Queries
-
-```
-                 username                 | r_count
-------------------------------------------+---------
- iuc                                      |     571
- devteam                                  |     366
- bgruening                                |      95
- galaxyp                                  |      87
- jjohnson                                 |      46
- xuebing                                  |      40
- peterjc                                  |      39
- rnateam                                  |      33
- anton                                    |      32
- nml                                      |      32
- yhoogstrate                              |      31
- iracooke                                 |      30
-(12 rows)
-```
-
----
-
-# Analytics
-
-Can we make better walltime decisions?
-
-`scripts/runtime_stats.py`: Database-driven job runtime statistics
-
----
-
-# Reports
-
-Galaxy ships with its own app that reports usage (user, job, data, etc numbers)
-
----
-# Nagios
-
-General purpose tool for monitoring systems and services.
-
-Galaxy-specific check in `contrib/nagios/`: Runs Galaxy jobs
-
----
-
-# Sentry
-
-* Motto: *&quot;Stop hoping your users will report errors&quot;*
-* Error tracking and analysing tool.
-* Galaxy has Sentry middleware that you can enable in configuration.
-
----
-# Job Metrics
-
-Galaxy can collect metrics on each job through configurable plugins in `job_metrics_conf.xml`.
-
-Some plugins:
-- `core`: Captures Galaxy slots, start and end of job, runtime
-- `cpuinfo`: processor count for each job
-- `env`: dump environment for each job
-- `collectl`: monitor a wide array of system performance data
-
----
 
 # Telegraf, InfluxDB, and Grafana
 
@@ -412,7 +244,7 @@ Dataflow:
 
 * Everything captured in Galaxy Ansible [infrastructure-playbook](https://github.com/galaxyproject/infrastructure-playbook/) repository.
 * Ansible [playbook](https://github.com/dj-wasabi/ansible-telegraf) to install Telegraf.
-* Ansible [tasks](https://github.com/galaxyproject/infrastructure-playbook/blob/master/roles/stats/tasks/redhat.yml) for installing influxdb and grafana.
+* Ansible [tasks](https://github.com/galaxyproject/infrastructure-playbook/blob/master/roles/stats/tasks/redhat.yml) for installing InfluxDB and Grafana.
 
 ---
 # Grafana showcase
@@ -432,7 +264,7 @@ If you see a dashboard you can export its configuration and put it on your Grafa
 
 - Galaxy supports pluggable monitoring extensions.
 
-- Use grafana or the reports webapp to monitor your service.
+- Use Grafana or the reports webapp to monitor your service.
 
 
 

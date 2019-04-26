@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Reference Data with CVMFS</title>
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-45719423-18' , 'auto');
+        ga('send', 'pageview');
+    </script>
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css" id="theme">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+    <meta property="og:title" content="Galaxy Training: Reference Data with CVMFS" />
+    <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Reference Data with CVMFS",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "/blob//LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "courseCode": "admin / cvmfs / slides",
+  "learningResourceType": "slides",
+  "name": "Slides for 'Reference Data with CVMFS' tutorial",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Reference Data with CVMFS",
+    "description": "Reference Data with CVMFS",
+    "learningResourceType": "tutorial",
+    "interactivityType": "expositive",
+    "provider": {
+      "@type": "Organization",
+      "email": "galaxytrainingnetwork@gmail.com",
+      "name": "Galaxy Training Network",
+      "url": "https://galaxyproject.org/teach/gtn/"
+    }
+  },
+  "url": "https://galaxyproject.github.io//training-material/topics/admin/tutorials/cvmfs/slides.html",
+  "description": "Reference Data with CVMFS\\nThe objectives are:\n - Have an understanding of what CVMFS is and how it works\n - Install and configure the CVMFS client on a linux machine and mount the Galaxy reference data repository\n - Configure your Galaxy to use these reference genomes and indices\n - Use an ansible playbook for all of the above.\n\n",
+  "hasPart": [
+
+  ],
+  "mentions": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Daniel Blankenberg"
+    },
+    {
+      "@type": "Person",
+      "name": "Simon Gladman"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Daniel Blankenberg"
+    },
+    {
+      "@type": "Person",
+      "name": "Simon Gladman"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server administration",
+      "description": "Resources related to configuration and maintenance of Galaxy servers",
+      "url": "https://galaxyproject.github.io//training-material/topics/admin/"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/admin" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/admin/tutorials/cvmfs/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+# Reference Data with CVMFS
+
+
+
+---
+
+# Built in Data
+
+![List_of_data.png](../../images/i06-List_of_data.png)
+
+---
+
+# Data, what data?
+
+.large[
+* Some genomes are large! Human, Mouse, Coral
+* Some tools require indices of the genomes.
+* The indices take a long time to build!
+* Better to pre-build the indices.
+]
+
+---
+
+# Data schematics in Galaxy
+
+![schematic](../../images/data_managers_schematic_overview.png)
+
+---
+
+# Using reference data in a tool
+
+#### bwa.xml
+
+```xml
+&lt;conditional name=&quot;reference_source&quot;&gt;
+      &lt;param name=&quot;reference_source_selector&quot; type=&quot;select&quot; label=&quot;Will you select a reference genome from your history or use a built-in index?&quot; help=&quot;Built-ins were indexed using default options. See 'Indexes' section of help below&quot;&gt;
+        &lt;option value=&quot;cached&quot;&gt;Use a built-in genome index&lt;/option&gt;
+        &lt;option value=&quot;history&quot;&gt;Use a genome from history and build index&lt;/option&gt;
+      &lt;/param&gt;
+      &lt;when value=&quot;cached&quot;&gt;
+        &lt;param name=&quot;ref_file&quot; type=&quot;select&quot; label=&quot;Using reference genome&quot; help=&quot;Select genome from the list&quot;&gt;
+          &lt;options from_data_table=&quot;bwa_mem_indexes&quot;&gt;
+            &lt;filter type=&quot;sort_by&quot; column=&quot;2&quot; /&gt;
+            &lt;validator type=&quot;no_options&quot; message=&quot;No indexes are available&quot; /&gt;
+          &lt;/options&gt;
+          &lt;validator type=&quot;no_options&quot; message=&quot;A built-in reference genome is not available for the build associated with the selected input file&quot;/&gt;
+        &lt;/param&gt;
+      &lt;/when&gt;
+      &lt;when value=&quot;history&quot;&gt;
+
+```
+
+---
+
+# Where are the data tables?
+
+#### tool_data_table_conf.xml
+
+(Usually located in `galaxy/config/`)
+
+```xml
+  &lt;tables&gt;
+    &lt;!-- Locations of indexes in the BWA mapper format --&gt;
+    &lt;table name=&quot;bwa_mem_indexes&quot; comment_char=&quot;#&quot; allow_duplicate_entries=&quot;False&quot;&gt;
+      &lt;columns&gt;value, dbkey, name, path&lt;/columns&gt;
+      &lt;file path=&quot;tool-data/bwa_index.loc&quot; /&gt;
+    &lt;/table&gt;
+  &lt;/tables&gt;
+```
+
+---
+
+# &quot;loc&quot; files - Short for location!
+
+bwa_index.loc
+
+```text
+...
+#
+#&lt;unique_build_id&gt;   &lt;dbkey&gt;   &lt;display_name&gt;   &lt;file_path&gt;
+#
+...
+
+bosTau7 bosTau7 Cow (bosTau7)   /mnt/galaxyIndices/genomes/bosTau7/bwa_mem_index/bosTau7/bosTau7.fa
+ce10    ce10    C. elegans (ce10)       /mnt/galaxyIndices/genomes/ce10/bwa_mem_index/ce10/ce10.fa
+danRer7 danRer7 Zebrafish (danRer7)     /mnt/galaxyIndices/genomes/danRer7/bwa_mem_index/danRer7/danRer7.fa
+dm3     dm3     D. melanogaster Apr. 2006 (BDGP R5/dm3) (dm3)   /mnt/galaxyIndices/genomes/dm3/bwa_mem_index/dm3/dm3.fa
+hg19    hg19    Human (hg19)    /mnt/galaxyIndices/genomes/hg19/bwa_mem_index/hg19/hg19.fa
+hg38    hg38    Human (hg38)    /mnt/galaxyIndices/genomes/hg38/bwa_mem_index/hg38/hg38.fa
+mm10    mm10    Mouse (mm10)    /mnt/galaxyIndices/genomes/mm10/bwa_mem_index/mm10/mm10.fa
+...
+```
+
+---
+
+# Some Problems!
+
+.large[
+* Time consuming!
+  * ~30 minutes work just to add a new genome to 1 tool!
+
+* Administrator needs to know:
+  * how to index **every** tool
+  * expected format of the reference data
+  * format of the .loc file
+
+* Some parts solved by Data Managers
+
+* But there's an easier way!
+]
+
+---
+
+# There's a lot of reference data
+
+.large[
+(and it's hard to keep up with)
+]
+![ref_data_prob_flow.png](../../images/ref_data_prob_flow.png)
+
+---
+
+# CernVM-fs to the rescue
+
+.largeish[
+* Needed a method of sharing reference data across country efficiently
+* **CVM-FS** is an efficient method for read only data sharing between systems
+    * Originally designed for distributed software installation at Cern
+    * Turns out it's really useful for read only data sets as well
+* All nodes of Galaxy Main get their reference genomes and indices from CVM-FS
+    * Shared via mirroring and caching across the country
+* It's also really useful to share data **globally**
+    * The **usegalaxy.*** initiative has taken full advantage of this.
+]
+
+---
+
+.widen_image[
+![cvmfs_server_distribution.png](../../images/cvmfs_server_distribution.png)
+]
+
+---
+
+# CVM-FS Global Structure
+
+.widen_image[
+![cvmfs_global_structure.png](../../images/cvmfs_global_structure.png)
+]
+
+
+---
+
+## Thank you!
+
+This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors  ([Daniel Blankenberg](/training-material/hall-of-fame#blankenberg), [Simon Gladman](/training-material/hall-of-fame#slugger70), [Helena Rasche](/training-material/hall-of-fame#erasche)) !
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+
+.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub](https://github.com/galaxyproject/training-material/tree/master/topics/admin/tutorials/cvmfs/slides.html)]
+
+    </textarea>
+    <script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false,}});
+      var hljs = remark.highlighter.engine;
+    </script>
+  </body>
+</html>

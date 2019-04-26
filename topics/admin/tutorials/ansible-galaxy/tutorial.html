@@ -196,22 +196,6 @@
                                             
                                         
                                     
-                                        
-                                            
-                                        
-                                    
-                                        
-                                            
-                                        
-                                    
-                                        
-                                            
-                                        
-                                    
-                                        
-                                            
-                                        
-                                    
                                 </div>
                             </li>
                         
@@ -427,14 +411,7 @@
         "name": "Galaxy Training Network",
         "url": "https://galaxyproject.org/teach/gtn/"
       }
-    },
-    "A server/VM to deploy Galaxy on",
-    {
-      "@type": "CreativeWork",
-      "url": "https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html",
-      "name": "Ansible setup on your local machine"
-    },
-    "Comfort with Ansible roles and tasks"
+    }
   ],
   "hasPart": [
 
@@ -605,35 +582,9 @@
                     
                         
                     
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
                 
             </ul>
         
-    
-    </li>
-
-    <li>
-    
-        A server/VM to deploy Galaxy on
-    
-    </li>
-
-    <li>
-    
-        <a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible setup on your local machine</a>
-    
-    </li>
-
-    <li>
-    
-        Comfort with Ansible roles and tasks
     
     </li>
 
@@ -1385,7 +1336,19 @@ best practices and knowledge from previous admins codified for you.</p>
 
 <p>When we first configured Galaxy, we used the setting <code class="highlighter-rouge">http: 0.0.0.0:8080</code>, which instructed uWSGI to handle the serving of Galaxy, and to process the HTTP requests itself. This has some overhead and is not as efficient as is desired in production. So we will set up a reverse proxy to handle the HTTP processing, and translate this into the more efficient uWSGI protocol. Additionally it can handle serving static files for us without the requests going through uWSGI, allowing it to spend more time on useful tasks like processing jobs.</p>
 
-<p>For this, we will use NGINX. It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing.</p>
+<p>Additionally, by moving to NGINX or another reverse proxy, it can automatically compress selected content, we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at <code class="highlighter-rouge">/</code> and Galaxy at <code class="highlighter-rouge">/galaxy</code>. Lastly, it can provide authentication as well, as noted in the <a href="/training-material/topics/admin/tutorials/external-auth/tutorial.html">External Authentication</a> tutorial.</p>
+
+<p>For this, we will use NGINX. It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache</p>
+
+<p>NGINX plugins are dynamic shared objects since <a href="https://www.nginx.com/blog/compiling-dynamic-modules-nginx-plus/">1.9.11</a>. Debian/Ubuntu provide multiple nginx “flavors”:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">nginx-light</code>: minimal set of core modules</li>
+  <li><code class="highlighter-rouge">nginx-full</code>: full set of core modules</li>
+  <li><code class="highlighter-rouge">nginx-extras</code>: full set of core modules and extras (3rd party modules)</li>
+</ul>
+
+<p><a href="https://developers.google.com/speed/pagespeed/insights/">Google’s PageSpeed Tools</a> can identify any compression or caching improvements you can make.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-nginx"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: NGINX</h3>
@@ -1734,6 +1697,8 @@ as noted in the commands above.</p>
   <p>Check that setenforce is permissive, or allow nginx to connect back to localhost on a non-standard port.</p>
 </blockquote>
 
+<p>Out-of-the-box SSL settings are often insecure. Use the <a href="https://mozilla.github.io/server-side-tls/ssl-config-generator/">Mozilla SSL config generator</a> to create a default config and <a href="https://www.ssllabs.com/ssltest/analyze.html">Qualys SSL Server Test</a> to check it.</p>
+
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-securing-nginx"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Securing NGINX</h3>
 
@@ -1882,7 +1847,7 @@ and re-run the playbook.</p>
         <hr>
         <br>
 
-        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Galaxy Installation with Ansible (Galaxy Server administration)">Loading...
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Galaxy Installation with Ansible (Galaxy Server administration)">Loading...
         </iframe>
 
         <blockquote class="feedback">

@@ -11,7 +11,7 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Using Pulsar to Handle Heterogeneous Compute Resources</title>
+    <title>Galaxy Monitoring</title>
     
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -32,7 +32,7 @@
     
     
     <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
-    <meta property="og:title" content="Galaxy Training: Using Pulsar to Handle Heterogeneous Compute Resources" />
+    <meta property="og:title" content="Galaxy Training: Galaxy Monitoring" />
     <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
     <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     <script type="application/ld+json">
@@ -75,7 +75,7 @@
     "url": "https://galaxyproject.org/teach/gtn/"
   },
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "Using Pulsar to Handle Heterogeneous Compute Resources",
+  "headline": "Galaxy Monitoring",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -102,13 +102,13 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "courseCode": "admin / heterogeneous-compute / slides",
+  "courseCode": "admin / general-monitoring / slides",
   "learningResourceType": "slides",
-  "name": "Slides for 'Using Pulsar to Handle Heterogeneous Compute Resources' tutorial",
+  "name": "Slides for 'Galaxy Monitoring' tutorial",
   "isPartOf": {
     "@type": "Course",
-    "name": "Using Pulsar to Handle Heterogeneous Compute Resources",
-    "description": "Using Pulsar to Handle Heterogeneous Compute Resources",
+    "name": "Galaxy Monitoring",
+    "description": "Galaxy Monitoring",
     "learningResourceType": "tutorial",
     "interactivityType": "expositive",
     "provider": {
@@ -118,8 +118,8 @@
       "url": "https://galaxyproject.org/teach/gtn/"
     }
   },
-  "url": "https://galaxyproject.github.io//training-material/topics/admin/tutorials/heterogeneous-compute/slides.html",
-  "description": "Using Pulsar to Handle Heterogeneous Compute Resources",
+  "url": "https://galaxyproject.github.io//training-material/topics/admin/tutorials/general-monitoring/slides.html",
+  "description": "Galaxy Monitoring",
   "hasPart": [
 
   ],
@@ -133,7 +133,15 @@
     },
     {
       "@type": "Person",
+      "name": "Björn Grüning"
+    },
+    {
+      "@type": "Person",
       "name": "Simon Gladman"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
     }
   ],
   "contributor": [
@@ -143,7 +151,15 @@
     },
     {
       "@type": "Person",
+      "name": "Björn Grüning"
+    },
+    {
+      "@type": "Person",
       "name": "Simon Gladman"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
     }
   ],
   "about": [
@@ -166,7 +182,7 @@ class: center, middle, inverse
 <div class="my-header"><span>
 <a href="/training-material/topics/admin" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
 
-<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/admin/tutorials/heterogeneous-compute/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/admin/tutorials/general-monitoring/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
 </span></div>
 
@@ -178,154 +194,135 @@ class: center, middle, inverse
 
 ---
 
-# Using Pulsar to Handle Heterogeneous Compute Resources
+# Galaxy Monitoring
 
 
 
 ---
 
-# Remote resources are heterogenous compute resources? Yes.
 
-Differences in:
-- Operating system or version
-- Users/groups
-- Data accessibility
-- Administrative control
-- Physical Location (i.e. Cities)
 
-Galaxy expects:
-- One OS, version (dependencies)
-- Shared filesystem w/ fixed paths
 
----
-# Example - Australia
 
-![australia_locations.png](../../images/australia_locations.png)
+### &lt;i class=&quot;fa fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
 
----
-# Partial solution - CLI job runner
 
-SSH to remote, submit jobs with CLI `sbatch`, `qsub`, etc.
-
-Still depends on shared FS
-
----
-# Pulsar
-
-![pulsar_logo.png](../../images/pulsar_logo.png)
-
-Galaxy's remote job management system
-
-* Can run jobs on any(?) OS including Windows
-
-* Multiple modes of operation for every environment
-
----
-# Pulsar - Architecture
-
-* Pulsar server runs on remote resource (e.g. cluster head node)
-
-* Galaxy Pulsar job runner is Pulsar client
-
-* Transport is HTTP or AMQP, language is JSON
-
----
-# Pulsar - Architecture
-
-![pulsar_schematic.png](../../images/pulsar_schematic.png)
-
----
-# Pulsar Transports - RESTful
-
-Pulsar server listens over HTTP(S)
-
-Pulsar client initiates connections to server
-
-Good for:
-- Environments where firewall, open ports are not concerns
-- No external dependencies (AMQP server)
-
----
-# Pulsar Transports - AMQP
-
-Pulsar server and client connect to AMQP server
-
-Good for:
-- Firewalled/NATted remote compute
-- Networks w/ bad connectivity
-
----
-# Pulsar Transports - Embedded
-
-Galaxy runs Pulsar server internally
-
-Good for:
-- Manipulating paths
-- Copying input datasets from non-shared filesystem
-
----
-# Pulsar - Job file staging
-
-Pulsar can be configured to *push* or *pull* when using RESTful:
-- Push
-  - Galaxy sends job inputs, metadata to Pulsar over HTTP
-  - Upon completion signal from Pulsar, Galaxy pulls from Pulsar over HTTP
-- Pull
-  - Upon setup signal, Pulsar pulls job inputs, metadata from Galaxy over HTTP
-  - Upon completion, Pulsar pushes to Galaxy over HTTP
-
-Pulsar can use libcurl for more robust transfers with resume capability
-
-AMQP is pull-only because Pulsar does not run HTTP server
-
----
-# Pulsar - Dependency management
-
-Pulsar does not provide Tool Shed tool dependency management. But:
-- It has a similar dependency resolver config to Galaxy
-- It can auto-install **conda** dependencies
-- It can use containers too!
-
----
-# Pulsar - Job management
-
-Pulsar &quot;managers&quot; provide job running interfaces:
-- `queued_python`: Run locally on the Pulsar server
-- `queued_drmaa`: Run on a cluster with DRMAA
-- `queued_cli`: Run on a cluster with local `qsub`, `sbatch`, etc.
-- `queued_condor`: Run on HTCondor
-
----
-# Pulsar Australia
-
-![pulsar_australia.png](../../images/pulsar_australia.png)
 
 ---
 
-# Resources
 
-* Pulsar Read-the-docs
-    * [https://pulsar.readthedocs.io/en/latest/index.html](https://pulsar.readthedocs.io/en/latest/index.html)
-* Pulsar on galaxyproject.org
-    * [https://galaxyproject.org/admin/config/pulsar/](https://galaxyproject.org/admin/config/pulsar/)
-* Pulsar Github
-    * [https://github.com/galaxyproject/pulsar](https://github.com/galaxyproject/pulsar)
-* Pulsar Ansible
-    * [https://github.com/galaxyproject/ansible-pulsar](https://github.com/galaxyproject/ansible-pulsar)
+
+## Manage Jobs
+
+An admin interface to list current unfinished jobs and finished jobs of a certain age.
+
+* You can stop unfinished jobs
+* You can show details of old jobs
+* You can lock the server from spawning new jobs. (e.g. for maintenance.)
+
+---
+
+# Log Files
+
+- Galaxy logs (`/srv/galaxy/log/*`)
+  - Web (uWSGI)
+  - Handler
+- nginx logs (`/var/log/nginx/*`)
+- supervisor logs (`/var/log/supervisor/*`)
+
+---
+
+# Analytics
+
+Can we make better walltime decisions?
+
+`scripts/runtime_stats.py`: Database-driven job runtime statistics
+
+---
+
+# Reports
+
+Galaxy ships with its own app that reports usage (user, job, data, etc numbers)
+
+---
+# Nagios
+
+[Nagios](https://www.nagios.com/) is a general-purpose tool for monitoring systems and services.
+
+Galaxy-specific check in `contrib/nagios/`: Runs Galaxy jobs
+
+---
+
+# Sentry
+
+* Motto: *&quot;Stop hoping your users will report errors&quot;*
+* Error tracking and analysing tool.
+* Galaxy has Sentry middleware that you can enable in configuration.
+
+---
+# Job Metrics
+
+Galaxy can collect metrics on each job through configurable plugins in `job_metrics_conf.xml`.
+
+Some plugins:
+- `core`: Captures Galaxy slots, start and end of job, runtime
+- `cpuinfo`: processor count for each job
+- `env`: dump environment for each job
+- `collectl`: monitor a wide array of system performance data
+
+---
+
+# Telegraf, InfluxDB, and Grafana
+
+General purpose tools for monitoring systems and services.
+
+Tool     | Use
+---      | ---
+[Telegraf](https://github.com/influxdata/telegraf) | plugin-driven server agent for collecting &amp; reporting metrics
+[Influxdb](https://github.com/influxdata/influxdb/) | purpose built time series database
+[Grafana](https://grafana.com/)  | dashboard for beautiful analytics and monitoring
+
+Dataflow:
+
+- Galaxy produces data
+- Telegraf consumes and buffers it, before sending it to
+- InfluxDB which stores the data
+- And Grafana is used to visualise it
+
+---
+# Infrastructure for Grafana
+
+* Everything captured in Galaxy Ansible [infrastructure-playbook](https://github.com/galaxyproject/infrastructure-playbook/) repository.
+* Ansible [playbook](https://github.com/dj-wasabi/ansible-telegraf) to install Telegraf.
+* Ansible [tasks](https://github.com/galaxyproject/infrastructure-playbook/blob/master/roles/stats/tasks/redhat.yml) for installing InfluxDB and Grafana.
+
+---
+# Grafana showcase
+
+* usegalaxy.eu [public server](https://stats.usegalaxy.eu)
+* usegalaxy.org.au [public server](https://stats.genome.edu.au)
+* usegalaxy.org private server
+
+If you see a dashboard you can export its configuration and put it on your Grafana with your data. Copy away!
+
+
+
+
+
+
+
 
 
 ---
 
 ## Thank you!
 
-This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors  ([Nate Coraor](/training-material/hall-of-fame#natefoo), [Simon Gladman](/training-material/hall-of-fame#slugger70)) !
+This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors  ([Nate Coraor](/training-material/hall-of-fame#natefoo), [Björn Grüning](/training-material/hall-of-fame#bgruening), [Simon Gladman](/training-material/hall-of-fame#slugger70), [Helena Rasche](/training-material/hall-of-fame#erasche)) !
 
 
 <img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
 
 
-
-.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub](https://github.com/galaxyproject/training-material/tree/master/topics/admin/tutorials/heterogeneous-compute/slides.html)]
 
     </textarea>
     <script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript">

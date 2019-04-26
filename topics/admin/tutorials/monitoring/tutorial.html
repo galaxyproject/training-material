@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Galaxy Monitoring</title>
+        <title>Galaxy Monitoring with Telegraf and Grafana</title>
         
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -29,7 +29,7 @@
         
         
         <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
-        <meta property="og:title" content="Galaxy Training: Galaxy Monitoring" />
+        <meta property="og:title" content="Galaxy Training: Galaxy Monitoring with Telegraf and Grafana" />
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
@@ -201,7 +201,7 @@
     "url": "https://galaxyproject.org/teach/gtn/"
   },
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "Galaxy Monitoring",
+  "headline": "Galaxy Monitoring with Telegraf and Grafana",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -230,11 +230,11 @@
   },
   "courseCode": "admin / monitoring / hands-on",
   "learningResourceType": "hands-on tutorial",
-  "name": "Hands-on for 'Galaxy Monitoring' tutorial",
+  "name": "Hands-on for 'Galaxy Monitoring with Telegraf and Grafana' tutorial",
   "isPartOf": {
     "@type": "Course",
-    "name": "Galaxy Monitoring",
-    "description": "Galaxy Monitoring",
+    "name": "Galaxy Monitoring with Telegraf and Grafana",
+    "description": "Galaxy Monitoring with Telegraf and Grafana",
     "learningResourceType": "tutorial",
     "interactivityType": "expositive",
     "provider": {
@@ -246,7 +246,52 @@
   },
   "url": "https://galaxyproject.github.io//training-material/topics/admin/tutorials/monitoring/tutorial.html",
   "timeRequired": "PT30M",
-  "description": "Galaxy Monitoring\\nThe questions this  addresses are:\n - How to monitor a Galaxy service with the Reports?\n\n\\nThe objectives are:\n - Setup and start the Galaxy reports app.\n\n",
+  "keywords": "ansible",
+  "description": "Galaxy Monitoring with Telegraf and Grafana\\nThe questions this  addresses are:\n - How to monitor Galaxy with Telegraf\n\n\\nThe objectives are:\n - Setup and start the Galaxy reports app.\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "Course",
+      "url": "https://galaxyproject.github.io//training-material/topics/admin/tutorials/ansible/slides.html",
+      "name": "Ansible",
+      "description": "Slides for 'Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://galaxyproject.github.io//training-material/topics/admin/tutorials/ansible/tutorial.html",
+      "name": "Ansible",
+      "description": "Hands-on for 'Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://galaxyproject.github.io//training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Hands-on for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
   "hasPart": [
 
   ],
@@ -254,7 +299,7 @@
     {
       "@type": "Thing",
       "url": "",
-      "name": "Training data for Galaxy Monitoring tutorial"
+      "name": "Training data for Galaxy Monitoring with Telegraf and Grafana tutorial"
     }
   ],
   "author": [
@@ -281,7 +326,7 @@
     </script>
 
     <section class="tutorial">
-        <h1 data-toc-skip>Galaxy Monitoring</h1>
+        <h1 data-toc-skip>Galaxy Monitoring with Telegraf and Grafana</h1>
         <div class="contributors-line">By: 
   
   <a href="/training-material/hall-of-fame#erasche" class="contributor-badge"><img src="https://avatars.githubusercontent.com/erasche" alt="Helena Rasche">Helena Rasche</a> </div>
@@ -291,7 +336,7 @@
             <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
             <ul>
             
-            <li>How to monitor a Galaxy service with the Reports?</li>
+            <li>How to monitor Galaxy with Telegraf</li>
             
             </ul>
 
@@ -302,6 +347,172 @@
             
             </ul>
 
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/admin">Galaxy Server administration</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Galaxy Installation with Ansible:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
             
 
             
@@ -431,7 +642,7 @@
                             
                             <li>Galaxy supports pluggable monitoring extensions.</li>
                             
-                            <li>The Reports webapp is one option to monitor your system.</li>
+                            <li>Use grafana or the reports webapp to monitor your service.</li>
                             
                         </ul>
                     </blockquote>
@@ -454,12 +665,12 @@
         <hr>
         <br>
 
-        <iframe class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Galaxy Monitoring (Galaxy Server administration)">Loading...
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Galaxy Monitoring with Telegraf and Grafana (Galaxy Server administration)">Loading...
         </iframe>
 
         <blockquote class="feedback">
             <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
-            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Galaxy Monitoring (Galaxy Server administration)">Feedback Form</a>.</p>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Galaxy Monitoring with Telegraf and Grafana (Galaxy Server administration)">Feedback Form</a>.</p>
         </blockquote>
     </section>
 </div>

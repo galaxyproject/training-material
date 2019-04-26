@@ -123,12 +123,36 @@
     {
       "@type": "Person",
       "name": "Valentin Marcon"
+    },
+    {
+      "@type": "Person",
+      "name": "Nate Coraor"
+    },
+    {
+      "@type": "Person",
+      "name": "Björn Grüning"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
     }
   ],
   "contributor": [
     {
       "@type": "Person",
       "name": "Valentin Marcon"
+    },
+    {
+      "@type": "Person",
+      "name": "Nate Coraor"
+    },
+    {
+      "@type": "Person",
+      "name": "Björn Grüning"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
     }
   ],
   "about": [
@@ -169,97 +193,195 @@ class: center, middle, inverse
 
 ---
 
-## Galaxy is available in several different ways
+![](../images/use-resource-banner.png)
 
 ---
 
-###  Several different ways
+# Where can Galaxy run?
 
-- [Main](https://usegalaxy.org/) and [others](https://galaxyproject.org/public-galaxy-servers/) free public servers
-- Run your [local instance](https://galaxyproject.org/admin/get-galaxy/) or a [docker](https://github.com/bgruening/docker-galaxy-stable) image
-- Use Galaxy on the [Cloud](https://galaxyproject.org/cloud/)
-- Get the SlipStream [Galaxy Appliance](https://bioteam.net/)
+* Cloud (SaaS)
+  - [usegalaxy.org](https://usegalaxy.org)
+  - [Public Galaxy Servers](https://wiki.galaxyproject.org/PublicGalaxyServers)
+  - [Amazon EC2](https://wiki.galaxyproject.org/CloudMan)
+  - Semi-private cloud (e.g.: [Genomics Virtual Lab](https://www.genome.edu.au/), [Jetstream](http://jetstream-cloud.org/))
+* Private cloud (build your own Galaxy SaaS)
+* Cloud (IaaS)
+  - Any cloud
+* Scalable Local Server
+  - Dedicated or shared compute cluster(s)
+  - Cloud compute resources
+* Standalone Local Server
+
 
 ---
 
-### Which option to choose ?
+# Choosing where to run
 
-[](https://galaxyproject.org/choices/)
+[Resource Directory](https://galaxyproject.org/use/)
 
 ![](../images/options-to-choose.png)
 
 ---
 
-## Galaxy Locally
-
----
-
-### Reasons to Install Your Own Galaxy
+## Reasons to Install Your Own Galaxy
 
 - You want to run a local [production Galaxy](https://galaxyproject.org/admin/config/performance/production-server/)
 - You want to develop [Galaxy tools](https://galaxyproject.org/admin/tools/add-tool-tutorial)
 - You to [Develop Galaxy](https://galaxyproject.org/develop/) itself
-
----
-
-### Requirements
-
-- UNIX/Linux or Mac OS X (or [Windows](https://galaxyproject.org/admin/config/windows))
-- Python 2.7
-- Git
-
----
-
-## Galaxy in production
-
----
-
-## Reasons to install Galaxy in production
-
-- [install](https://galaxyproject.org/admin/tools/add-tool-tutorial) and use tools unavailable on [public Galaxies](https://galaxyproject.org/public-galaxy-servers)
-- use sensitive data (e.g. clinical)
-- process large datasets that are too big for public Galaxies
+- [Install](https://galaxyproject.org/admin/tools/add-tool-tutorial) and use tools unavailable on [public Galaxies](https://galaxyproject.org/public-galaxy-servers)
+- Use sensitive data (e.g. clinical)
+- Process large datasets that are too big for public Galaxies
 - [plug-in](https://galaxyproject.org/admin/internals/data-sources) new datasources
 
----
-
-### By default Galaxy
-
-![](../images/installG1.png)
-
-???
-
-- Uses SQLite
-- Uses a built-in HTTP Server
-- Runs all tools locally
-- Runs in a single process
 
 ---
 
-### Galaxy in production, basic configuration
+# Software Requirements
 
-![](../images/installG2.png)
+Required:
+  - Galaxy is written in Python and depends on **Python 2.7**
+  - All major distros in wide circulation have 2.7, *except* RHEL&lt;sup&gt;[1]&lt;/sup&gt; 6
+    - See: Software Collections for [RHEL](https://access.redhat.com/solutions/472793), [CentOS](https://wiki.centos.org/AdditionalResources/Repositories/SCL), [Scientific Linux](http://linux.web.cern.ch/linux/scl/)
 
-???
-
-- Switching to a database server
-- Using a proxy server
-- Using a compute cluster
-
----
-
-### What's next ?
-
-- You want to install Galaxy locally ?
-- And You want to configure Galaxy for production ?
+Optional (but not really):
+  - [PostgreSQL](https://galaxyproject.github.io/dagobah-training/2018-oslo/03-production-basics/databases.html)
+  - [Reverse proxy server](https://galaxyproject.github.io/dagobah-training/2018-oslo/03-production-basics/webservers.html) (NGINX, Apache)
 
 ---
 
-### Tutorials
+# Hardware Requirements
 
-- [Deployment and Platform options](/training-material/topics/admin/tutorials/deployment-platforms-options/slides.html)
-- [Docker and Galaxy](/training-material/topics/admin/tutorials/galaxy-docker/slides.html)
-- [Galaxy Database schema](/training-material/topics/admin/tutorials/database-schema/tutorial.html)
+This depends:
+
+- What do you intend to run?
+- Where do you intend to run it?
+
+If possible, run the Galaxy server **separate** from Galaxy jobs
+
+**Storage** will be the bigger concern
+
+---
+# Hardware Estimates
+
+Based on concurrent user count and assuming separate compute for jobs:
+
+Users     | Resource estimate
+----------|-------------------
+1 - 5     | 1 core, 1GB, 10 TB
+5 - 20    | 2 cores, 2 GB, 40 TB
+20 - 40   | 8 cores, 8 GB, 200 TB
+40+       | multiple hosts, 16 GB/host, 500 TB, dedicated DB host
+
+Storage is the big variable since it, like compute, is **analysis** and **policy** dependent
+
+---
+
+template: left-aligned
+
+# On Storage...
+
+The Philosophy of Galaxy:
+
+- Foster transparency and reproducibility
+- Data is always created, *never overwritten*
+- Data is never deleted unless *explicitly instructed*
+- Even deleted data can be undeleted unless *forcibly purged*
+
+Additionally, tools can produce large amounts of transient data while running.
+
+---
+
+template: left-aligned
+
+# Storage Requirements
+
+An &quot;average&quot; NGS analysis (by Anton): **66 GB**
+
+10 users, 10 histories: **&gt; 6 TB**
+
+Solutions:
+
+- Quotas
+- Clean up deleted data (aggressively)
+- Forced removal based on age available
+
+---
+
+# Compute Requirements
+
+This depends:
+
+- What tools will your users be using?
+  - What are their requirements?
+- In general, the most commonly used tools use a single core
+  - But can use lots of memory!
+- Some compute-intensive tools use multiple cores
+
+usegalaxy.org allocates from **8 GB/core** to **16 GB/core**
+
+Connecting Galaxy to clusters/HPC is covered in the advanced section.
+
+
+---
+
+# How is Galaxy deployed?
+
+Current:
+
+- Ansible / `git clone https://github.com/galaxyproject/galaxy.git`
+- *Framework dependencies* provided as Python &quot;wheels&quot;, fetched at first startup with `pip`
+- *Tool dependencies* provided as Conda packages or legacy Tool Shed packages
+
+Future:
+
+- RPM, Debian packages
+- Galaxy wheel in PyPI
+- Watch: [Pull Request #921](https://github.com/galaxyproject/galaxy/pull/921)
+
+---
+# Making Plans
+
+**Before** deploying your first Galaxy server:
+
+- Get PostgreSQL (you do not want to switch later)
+- Figure out where Galaxy will be stored
+  - Make sure it will be accessible to any eventual compute
+- Figure out where data will be stored
+  - Make sure it will be accessible to any eventual compute
+
+---
+# Deployment Best Practices
+
+**Use configuration management**
+- [Ansible](http://docs.ansible.com) ([tutorial](https://galaxyproject.github.io/dagobah-training/2018-oslo/14-ansible/ansible-introduction.html))
+- [Chef](https://www.chef.io/)
+- [Puppet](https://puppet.com)
+- [SaltStack](https://saltstack.com)
+- [CFEngine](https://cfengine.com)
+
+**Use configuration management** but if you don't, *record every change you make somehow.*
+- Large, complex deployments grow organically
+- If you don't know what you did you can't do it again
+- &quot;My context switching penalty is high and my process isolation is not what it used to be.&quot; - Elon Musk
+
+---
+
+template: left-aligned
+
+# System Administration Best Practices
+
+Take security seriously
+- OS security best practices (not covered yet)
+- **Update Galaxy when security updates are released**
+  - We put a lot of effort into these!
+
+Privilege separate if you can
+- Separate code and job/data ownership
+
+Write protect Galaxy and data if you can
+- Read-only cluster mounts
+
+Back up everything (except that which is managed by configuration management)
 
 
 ---
@@ -388,29 +510,13 @@ class: center, middle, inverse
         
     
 
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
-    
-        
-    
-
 
 
 ---
 
 ## Thank you!
 
-This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors  ([Valentin Marcon](/training-material/hall-of-fame#valentinmarcon)) !
+This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors  ([Valentin Marcon](/training-material/hall-of-fame#valentinmarcon), [Nate Coraor](/training-material/hall-of-fame#natefoo), [Björn Grüning](/training-material/hall-of-fame#bgruening), [Helena Rasche](/training-material/hall-of-fame#erasche)) !
 
 
 <img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
