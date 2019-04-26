@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: De novo transcriptome assembly, annotation, and differential exression analysis
+title: De novo transcriptome assembly, annotation, and differential expression analysis
 zenodo_link: ''
 questions:
 - Which biological questions are addressed by the tutorial?
