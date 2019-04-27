@@ -144,7 +144,7 @@ We will be performing barcode extraction on our batch data as given by the above
 >
 > 1. **UMI-tools extract** {% icon tool %} with the following parameters:
 >    - *"Library type"*: `Paired-end Dataset Collection`
->        - {% icon param-collection %} *"Reads in FASTQ format"*: `output` (Our paired set)
+>        - {% icon param-collection %} *"Reads in FASTQ format"*: `C57_P1_B1` (Our paired set)
 >        - *"Barcode on both reads?"*: `Barcode on first read only`
 >    - *"Use Known Barcodes?"*: `Yes`
 >        - {% icon param-file %} *"Barcode File"*: `output` (Input dataset)
