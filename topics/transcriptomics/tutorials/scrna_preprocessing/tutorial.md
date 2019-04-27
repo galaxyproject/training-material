@@ -136,9 +136,7 @@ For a more detailed understanding of the naming conventions used in generating o
 
 ## Barcode Extraction
 
-It is highly recommended that you familiarise yourself with the concepts of barcodes and UMIs within multiplexed FASTQ data with the [*Understanding Barcodes*]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on material.
-
-We will be performing barcode extraction on our batch data as given by the above hands-on tutorial, but this time filtering for *specific* cell barcodes, which we will ensure by providing the barcodes file.
+We will be demultiplexing our FASTQ batch data by performing barcode extraction whilst making use of the provided barcodes file to filter for *specific* cell barcodes.
 
 > ### {% icon hands_on %} Hands-on: Barcode Extraction
 >
@@ -379,9 +377,9 @@ Let us annotate our BAM file with desired gene tags.
 >
 > 1. **FeatureCounts** {%icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Alignment file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
+>    - *"Specify strand information"*:`Unstranded`
 >    - *"Gene annotation file"*: `in your history`
 >        - {% icon param-file %} *"Gene annotation file"*: `Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf`
->    - *"Specify strand information"*:`Unstranded`
 >    - In *"Advanced options"*:
 >        - *"Count multi-mapping reads/fragments"*: `Disabled; multi-mapping reads are excluded (default)`
 >        - *"Exon-exon junctions"*: `Yes`
