@@ -118,7 +118,7 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >
 > 1. Import the subset FASTQ paired data from [`Zenodo`](https://zenodo.org/record/2581041) or from the data library (ask your instructor)
 >
->    {% include snippets/import_via_link.md collection=true collection_type="Paired" collection_name_convention="`<name>_<plate>_<batch>` to preserve the sample names, sequencing plate number and batch number." collection_name="Here we will write `C57_P1_B1`"  link="https://zenodo.org/record/2581041/files/SRR5683689_1.fastq.gz" link2="https://zenodo.org/record/2581041/files/SRR5683689_2.fastq.gz" genome="GRCm38/mm10" pairswaptext="`SRR5683689_1` and `SRR5683689_2`" %}
+>    {% include snippets/import_via_link.md collection=true collection_type="Paired" collection_name_convention="`<name>_<plate>_<batch>` to preserve the sample names, sequencing plate number and batch number." collection_name="Here we will write `C57_P1_B1`"  link="https://zenodo.org/record/2581041/files/SRR5683689_1.subset.fastq" link2="https://zenodo.org/record/2581041/files/SRR5683689_2.subset.fastq" genome="GRCm38/mm10" pairswaptext="`SRR5683689_1` and `SRR5683689_2`" %}
 >
 > 3. Import the Gene Annotations and Barcodes from [`Zenodo`](https://zenodo.org/record/2581041) or from the data library (ask your instructor)
 >
@@ -136,7 +136,13 @@ For a more detailed understanding of the naming conventions used in generating o
 
 ## Barcode Extraction
 
-We will be demultiplexing our FASTQ batch data by performing barcode extraction whilst making use of the provided barcodes file to filter for *specific* cell barcodes.
+> ### {% icon comment %} Note
+>
+> Before performing the barcode extraction process, it is recommended that you familiarise yourself with the concepts of barcodes within multiplexed FASTQ data as given by the [*Understanding Barcodes*]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on material.
+>
+{: .comment}
+
+We will be demultiplexing our FASTQ batch data by performing barcode extraction whilst also making use of the provided barcodes file to filter for *specific* cell barcodes.
 
 > ### {% icon hands_on %} Hands-on: Barcode Extraction
 >
@@ -151,17 +157,18 @@ We will be demultiplexing our FASTQ batch data by performing barcode extraction 
 >
 {: .hands_on}
 
-As before, we can verify that the desired UMI and cell barcodes have been extracted from the sequence of the Forward reads and inserted into the header of the Reverse reads.
+Verifying that the desired UMI and cell barcodes have been extracted from the sequence of the Forward reads and inserted into the header of the Reverse reads is encouraged, using the method outlined in the above hands-on material.
+
 
 > ### {% icon question %} Question
 >
-> 1. Why are input and output FASTQ file sizes so different?
-> 2. How many reads were filtered out, and why?
+> How many reads were filtered out, and why?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The input FASTQ files contained reads from all barcodes, including those with sequencing errors, resulting in a larger pool of detected barcodes than those desired. (e.g. Cell barcode `AAATTT` could have single basepair sequencing errors that could modify it into `ATATTT` or `AAACTT`, etc).
-> > 2. This information is included in the Log file of **UMI-tools extract** which contains all the parameters used to run, as well as *INFO* lines that indicate how many reads were read, and how many output. In this case: 14230244 reads (90.9%)
+> > The input FASTQ files contained reads from all barcodes, including those with sequencing errors, resulting in a larger pool of detected barcodes than those desired. (e.g. Cell barcode `AAATTT` could have single basepair sequencing errors that could modify it into `ATATTT` or `AAACTT`, etc).
+> >
+> > This information is included in the Log file of **UMI-tools extract** which contains all the parameters used to run, as well as *INFO* lines that indicate how many reads were read, and how many output. In this case: 134431 reads were retained (>90% of input reads).
 > {: .solution}
 {: .question}
 
@@ -186,7 +193,7 @@ For alignment, we will use RNA-STAR for performance and splice-awareness.
 >
 > 1. **RNA-STAR** {%icon tool %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Single-end`
->        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file"*: `out2` (output of **UMI-tools extract** {% icon tool %})
+>        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file"*: `Reads2` (output of **UMI-tools extract** {% icon tool %})
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
 >            - {% icon param-file %} *"Select reference genome"*: `Mus Musculus (mm10)` (Mouse)
@@ -213,14 +220,14 @@ The purpose of MultiQC is to observe how well our reads were mapped against the 
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. `70.9%` or 10 million reads were successfully mapped
-> > 2. `14.4%` are multiply mapped, and `2.2%` were mapped to too many loci
+> > 1. `59.5%` or ~80k reads were successfully mapped
+> > 2. `13.6%` are multiply mapped, and `3.7%` were mapped to too many loci
 > >   - Multiply mapped means that a read was aligned to more than one gene
 > >   - Mapped to too many loci means that a read was aligned to 10 or more loci, and should be ignored.
 > > 3. It depends on how good the sequencing protocol is, and how many reads in total were mapped.
 > >   - `90%` is amazing, reserved for bulk RNA-seq which typically has high coverage
 > >   - `70%` is weak for bulk RNA-seq, but good for single-cell RNA-seq
-> >   - 6 million mapped reads should be enough to generate a downstream analysis from.
+> >   - This a small subset of a real dataset, but one would explect that 6 million mapped reads would be enough to generate a downstream analysis.
 > >
 > {: .solution}
 {: .question}
@@ -250,15 +257,16 @@ We now have a BAM file of our aligned reads, with cell and UMI barcodes embedded
 >
 >  1. Click on the {% icon galaxy-eye %} symbol of the BAM output from STAR.
 >  2. There are many header lines that begin with `@` which we are not interested in.
->  3. Look at first read directly below the header lines:
+>  3. Look at 10th read directly below the header lines:
 >
->         J00182:75:HTKJNBBXX:2:1121:9729:45889_GACGAA_GTGGTC	16	chr1	2030	3	70M	*	0	0	AGAGGTTCCAATATTCCCATGAAATTGAGATTTTGTAAAAGAGTGAAGTGTGGTTACTTTCACTGAGAGG	JJJJJJJJJJJJJJJJJJJJJJJJFJJJJJAJJJJJJJJJJFJFJFFJJJJJJJJJJJJFF7AJA-77<A	NH:i:2 HI:i:1 AS:i:64 nM:i:2
+>        SRR5683689.38437_GCATTC_CTTCGT	16	chr1	3439991	255	70M	*	0	0	CTTTGAATCTCTTCTTCCCAGCTAGTCATCTTCCTGCTTTTCTCTCTGTCTGTCTGTCTGTCTGTCTGTC	'0'<B<''B77<BFBBBBB7'FBFB0F7FBB<B'''<IFFBF<FBFB<FBBFBB0<BFFFBB0BBFFB<<	NH:i:1 HI:i:1 AS:i:66 nM:i:1
+>
 >
 {: .hands_on}
 
 The fields of the BAM file can be better explained at section 1.4 of [the SAM specification](https://samtools.github.io/hts-specs/SAMv1.pdf), but we will summarize the main fields of interest here:
 
-* `J00182..._GACGAA_GCGGTC`: The *readname* appended by `_`, the cell barcode, another `_`, and then the UMI barcode.
+* `SRR568..._GCATTC_CTTCGT`: The *readname* appended by `_`, the cell barcode, another `_`, and then the UMI barcode.
 * `16`: The FLAG value
 
 > ### {% icon question %} What does the FLAG value of 16 tell us about this read?
@@ -273,11 +281,11 @@ The fields of the BAM file can be better explained at section 1.4 of [the SAM sp
 >
 {: .question}
 
-* `chr1` `2030`: The position and base-pair of alignment of the first base of the sequence.
+* `chr1` `3439991`: The position and base-pair of alignment of the first base of the sequence.
 * A series of quality fields, with the main contributors being  the sequence and sequence quality strings.
-* `NH`: The number of hits for  this read. If it is multiply mapped, then the number of multiples will be shown (here `2`).
+* `NH`: The number of hits for  this read. If it is multiply mapped, then the number of multiples will be shown (here `1`, so not multiply mapped).
 * `HI`: Which number this particular read is in the series of (potentially) multi-mapped reads (here `1`, not neccesarily meaning the first or 'better').
-* `nM`: The number of mismatches in the alignment of this read to the reference (here `2`).
+* `nM`: The number of base mismatches in the alignment of this read to the reference (here `1`).
 
 
 #### Filtering the BAM File
@@ -286,7 +294,7 @@ If we perform counting on the current BAM file we will be counting all reads, ev
 
 The main filtering steps performed on our reads so far have been relatively silent due to the 'default' parameters used.
 * *UMI-tools Extract* - Filters reads for those only with matching barcodes given by our barcodes file.
-* *RNA-STAR* - As seen in the log, we lose 10% of our reads for being too short or being multiply mapped.
+* *RNA-STAR* - As seen in the log, we lose 25% of our reads for being too short or being multiply mapped.
 
 Another filtering measure we can apply is to keep reads that we are confident about, e.g those with a minimum number of mismatches to the reference within an acceptable range.
 
@@ -427,11 +435,11 @@ At this stage, we now have a tabular file containing genes/features as rows, and
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. ~23,000 lines
+> > 1. 2,140 lines
 > >    This information can be seen in the file preview window by clicking on the name of the file (**NOT** the {% icon galaxy-eye %} symbol).
 > >
-> > 2. 192 columns (not including the first column of gene names)
-> >    The number of columns can be seen by scrolling the file preview window completely to the right.
+> > 2. 180 columns (not including the first column of gene names)
+> >    The number of columns can be seen by scrolling the file preview window completely to the right. 192 cell barcodes were given, but due to the subsetted data, only 180 were detected.
 > >
 > {: .solution}
 {: .question}
