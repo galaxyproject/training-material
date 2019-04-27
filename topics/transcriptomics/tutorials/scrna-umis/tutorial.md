@@ -261,6 +261,10 @@ At this point we now have a history with two items: our paired FASTQ test data, 
 >      - **Column(s) containing sequence identifiers**
 >        - **Select/Unselect all**:(tick the box)
 >      - **Output positive matches, negative matches, or both?**:`Just positive matches (ID on list), as a single file`
+>
+> 1. Change the datatypes of the output pair to `fastqsanger` if not already set.
+>    {% include snippets/change_datatype.md %}
+>
 > 1. Viewing our 4 reads side-by-side
 >    - Activate the **Scratchbook** by clicking on the **Enable/Disable Scratchbook** icon on the main top toolbar
 >    - Click on the newly generated FastQ pair ending in *"with matched ID"* to expand the individual reads
