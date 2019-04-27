@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: "Pre-processing of Single-Cell RNA Data"
-zenodo_link: "https://zenodo.org/record/2573175"
+zenodo_link: "https://zenodo.org/record/2581041"
 tags:
   - single-cell
 questions:
@@ -116,15 +116,15 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >
 >    {% include snippets/history_create_new.md %}
 >
-> 1. Import the FASTQ paired data from [`Zenodo`](https://zenodo.org/record/2573175) or from the data library (ask your instructor)
+> 1. Import the subset FASTQ paired data from [`Zenodo`](https://zenodo.org/record/2581041) or from the data library (ask your instructor)
 >
->    {% include snippets/import_via_link.md collection=true collection_type="Paired" collection_name_convention="`<name>_<plate>_<batch>` to preserve the sample names, sequencing plate number and batch number." collection_name="Here we will write `C57_P1_B1`"  link="https://zenodo.org/record/2573175/files/SRR5683689_1.fastq.gz" link2="https://zenodo.org/record/2573175/files/SRR5683689_2.fastq.gz" genome="GRCm38/mm10" pairswaptext="`SRR5683689_1` and `SRR5683689_2`" %}
+>    {% include snippets/import_via_link.md collection=true collection_type="Paired" collection_name_convention="`<name>_<plate>_<batch>` to preserve the sample names, sequencing plate number and batch number." collection_name="Here we will write `C57_P1_B1`"  link="https://zenodo.org/record/2581041/files/SRR5683689_1.fastq.gz" link2="https://zenodo.org/record/2581041/files/SRR5683689_2.fastq.gz" genome="GRCm38/mm10" pairswaptext="`SRR5683689_1` and `SRR5683689_2`" %}
 >
-> 3. Import the Gene Annotations and Barcodes from [`Zenodo`](https://zenodo.org/record/2573175) or from the data library (ask your instructor)
+> 3. Import the Gene Annotations and Barcodes from [`Zenodo`](https://zenodo.org/record/2581041) or from the data library (ask your instructor)
 >
 >    ```
->    https://zenodo.org/record/2573175/files/Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf
->    https://zenodo.org/record/2573175/files/celseq_barcodes.192.tabular
+>    https://zenodo.org/record/2581041/files/Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf
+>    https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
 >    ```
 >
 > 4. Set the datatype of the `celseq_barcodes.192.tabular` to `tabular`
@@ -489,22 +489,22 @@ The first step merely requires us to run the same workflow on each of our batche
 
 ### Data upload and organization
 
-The count matrix we have generated in the previous section is too sparse to perform any reasonable analysis upon, and constitutes data only of a single batch. Here we will use more populated count matrices from multiple batches, under the assumption that we now know how to generate each individual one of them using the steps provided in the previous section. This data is available at [`Zenodo`](https://zenodo.org/record/2573175).
+The count matrix we have generated in the previous section is too sparse to perform any reasonable analysis upon, and constitutes data only of a single batch. Here we will use more populated count matrices from multiple batches, under the assumption that we now know how to generate each individual one of them using the steps provided in the previous section. This data is available at [`Zenodo`](https://zenodo.org/record/2581041).
 
 Once again, file naming is important, and so we will rename our matrix files appropriately to the plate and batch they are supposed to originate from.
 
 > ### {% icon hands_on %} Hands-on: Data upload and organization
 >
 > 1. Create a new history and rename it (*e.g.* scRNA-seq multiple-batch tutorial)
-> 1. Import the four matrices and barcodes (`P1_B1.tabular`, `P1_B2.tabular`, etc.) from [`Zenodo`](https://zenodo.org/record/2573175) or from the data library (ask your instructor)
+> 1. Import the four matrices and barcodes (`P1_B1.tabular`, `P1_B2.tabular`, etc.) from [`Zenodo`](https://zenodo.org/record/2581041) or from the data library (ask your instructor)
 >    - Set the datatype of the tabular files to **tabular**
 >
 >    ```
->    https://zenodo.org/record/2573175/files/P1_B1.tabular
->    https://zenodo.org/record/2573175/files/P1_B2.tabular
->    https://zenodo.org/record/2573175/files/P2_B3.tabular
->    https://zenodo.org/record/2573175/files/P2_B4.tabular
->    https://zenodo.org/record/2573175/files/celseq_barcodes.192.tabular
+>    https://zenodo.org/record/2581041/files/P1_B1.tabular
+>    https://zenodo.org/record/2581041/files/P1_B2.tabular
+>    https://zenodo.org/record/2581041/files/P2_B3.tabular
+>    https://zenodo.org/record/2581041/files/P2_B4.tabular
+>    https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
