@@ -151,7 +151,7 @@ How do we correct for this bias?
 
  ![Amplification Bias with UMIs](../../images/scrna_amplif_errors_umis.svg "A cell with four unique transcripts, two from Gene Red and two from Gene Blue")
 
- Here, we see two unique transcripts from Gene Red and two unique transcripts from Gene Blue, each given a (coloured) UMI. After amplificaiton, Gene Red has more reads than Gene Blue. If we were to construct a frequency table as before to count the reads, we would have:
+ Here, we see two unique transcripts from Gene Red and two unique transcripts from Gene Blue, each given a (coloured) UMI. After amplification, Gene Red has more reads than Gene Blue. If we were to construct a frequency table as before to count the reads, we would have:
 
 > |  | Reads in Cell 1 |
 > |--|-----------------|
