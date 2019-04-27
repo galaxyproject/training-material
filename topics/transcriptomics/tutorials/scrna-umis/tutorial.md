@@ -122,11 +122,11 @@ To fully explore the uniqueness of counts, we must discuss the inclusion of *UMI
 
 # Mitigating duplicate transcript counts with UMIs
 
-<small>***Note:*** Cell barcodes are not shown in any of these examples, we assume they were added to our transcripts previously. </small><br /><br />
-
 One of the major issues with sequencing is that the read fragments require amplification before they can be sequenced. A gene with a single mRNA transcript will not be detected by most sequencers, so it needs to be duplicated 100-1000x times for the sequencer to 'see' it.
 
 Amplification is an imprecise process however, since some reads are amplified more than others, and subsequent amplification can lead to these over-amplified reads being over-amplified even more, leading to an exponential bias of some reads over others.
+
+<small>***Note:*** Cell barcodes are not shown in any of the below examples, we assume they were added to our transcripts previously. </small><br /><br />
 
 ## Naive Amplification
 
