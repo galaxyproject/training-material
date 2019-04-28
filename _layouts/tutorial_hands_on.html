@@ -187,6 +187,11 @@ layout: base
             {% if page.time_estimation %}
             <p><strong>{% icon time %} Time estimation:</strong> {{ page.time_estimation | duration_to_human }}</p>
             {% endif %}
+
+            {% if page.level %}
+            <p><strong>{% icon level %} Level: </strong>
+            {% include _includes/difficulty-indicator.html level=page.level textlabel=true %}</p>
+            {% endif %}
         </blockquote>
 
         <div class="container">
