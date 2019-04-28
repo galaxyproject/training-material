@@ -17,10 +17,11 @@ objectives:
   - "Checking for false positives across batches"
 time_estimation: "1h"
 key_points:
-  - "Plates are split into lanes"
-  - "Batches are lanes, but their names are not reused"
+  - "Plates are split into Lanes"
+  - "Batches are Lanes, but their names are not reused"
   - "Multiple batches can exist in many Plates"
-  - "Checking all barcodes across batches eliminates false positives"
+  - "Checking all barcodes across Batches eliminates false positives / cross-contamination"
+  - "Intelligent plating strategies can guard against cross-contamination"
 
 # (This will be split out of the pre-processing later)
 # requirements:
@@ -146,12 +147,12 @@ Plates are $$N \times M$$ arrays or wells that cells are sorted into and then in
 
 ### Distinguishing cells in a plate
 
-                          L1       L2     L3      L4
+                          L1      L2      L3      L4
       Plate 1 -->     | · · · : · · · : · · · : · · · |
     with 4 lanes      | · · · : · · · : · · · : · · · |
     and 12 slots      | · · · : · · · : · · · : · · · |
       per lane        | · · · : · · · : · · · : · · · |
-                          B1       B2     B3      B4     
+                          B1      B2      B3      B4
 
 * Cells are selected from a plate by their *barcodes*
 * Barcodes must be unique
@@ -184,6 +185,14 @@ The way these slots are filled depends entirely on the protocol, but usually not
 ---
 
 ### Questions about Cell Barcodes
+
+
+                                 ←--- 20 ---→
+           A single lane    |····················| 
+          in a sequencing   |····················|  ↑
+           plate            |····················|  5
+                            |····················|  ↓
+                            |····················|
 
 .left[Assuming a lane is a 20x5 array:]
 
@@ -271,7 +280,7 @@ That's right, sequencing errors can mislabel a read to a completely different ce
 
 * To guard against a 1 bp sequencing error, need to space barcodes by 2 bp
 
-* How many barcodes for a cell barcode of length 5 bp?
+* How many barcodes for a cell barcode of length 5 bp (ED = 2)?
 ]
 .pull-right[
 <small>*Edit Distance = 2 bp*
@@ -406,6 +415,9 @@ Is it better to use Longer or Shorter Barcodes?
 
  1. How large is each batch?
  
+???
+How many slots in a batch that we need to barcode for
+
 --
 
  2. How many batches on a plate?
@@ -440,12 +452,12 @@ A technician always has to balance quality against cost, and this is illustrated
 --
 .pull-right[
 * Plates and Lanes:
-  * 12 slots per lane
+  * 12 slots per lane (3x4)
   * 4 lanes per plate
   
 * Contraints
-  * Only 2 lanes sequenced at a time
-    * i.e. half the plate is sequenced at a time
+  * Only 2 lanes sequenced at the same time
+    * i.e. half the plate is sequenced at the same time
 ]
 
 ???

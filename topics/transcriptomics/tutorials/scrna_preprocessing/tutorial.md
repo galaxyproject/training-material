@@ -132,13 +132,15 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 {: .hands_on}
 
 
+<!--
 For a more detailed understanding of the naming conventions used in generating our FASTQ pair, please consult the [*Plates, Batches, and Barcodes*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides.
+-->
 
 ## Barcode Extraction
 
 > ### {% icon comment %} Note
 >
-> Before performing the barcode extraction process, it is recommended that you familiarise yourself with the concepts of barcodes within multiplexed FASTQ data as given by the [*Understanding Barcodes*]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on material.
+> Before performing the barcode extraction process, it is recommended that you familiarise yourself with the concepts of designing cell barcodes as given by the [*Plates, Batches, and Barcodes*]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides 1-26, as well as the [*Understanding Barcodes*]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on material for an introduction into transcript barcodes.
 >
 {: .comment}
 
@@ -151,7 +153,7 @@ We will be demultiplexing our FASTQ batch data by performing barcode extraction 
 >        - {% icon param-collection %} *"Reads in FASTQ format"*: `C57_P1_B1` (Our paired set)
 >        - *"Barcode on both reads?"*: `Barcode on first read only`
 >    - *"Use Known Barcodes?"*: `Yes`
->        - {% icon param-file %} *"Barcode File"*: `output` (Input dataset)
+>        - {% icon param-file %} *"Barcode File"*: `celseq_barcodes.192.tabular` (Input dataset)
 >    - *"Barcode pattern for first read"*: `NNNNNNCCCCCC`
 >    - *"Enable quality filter?"*: `No`
 >
@@ -504,7 +506,8 @@ Once again, file naming is important, and so we will rename our matrix files app
 > ### {% icon hands_on %} Hands-on: Data upload and organization
 >
 > 1. Create a new history and rename it (*e.g.* scRNA-seq multiple-batch tutorial)
-> 1. Import the four matrices and barcodes (`P1_B1.tabular`, `P1_B2.tabular`, etc.) from [`Zenodo`](https://zenodo.org/record/2581041) or from the data library (ask your instructor)
+>
+> 1. Import the four matrices (`P1_B1.tabular`, `P1_B2.tabular`, etc.) and the barcodes file from [`Zenodo`](https://zenodo.org/record/2581041) or from the data library (ask your instructor)
 >    - Set the datatype of the tabular files to **tabular**
 >
 >    ```
@@ -544,8 +547,8 @@ To resolve this we can perform a "Full Table Join" where the missing data for *G
 
 > ### {% icon question %} Question
 >
-> 1. Why have the column headers changed in the Full matrix?
-> 2. Why are the cell labels in B1 and B2 the same, if they are labelling completely different cells?
+> 1. Why is it required to change the column headers in the Full matrix?
+> 2. Why were the cell labels in B1 and B2 the same, if they were labelling completely different cells?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -572,11 +575,29 @@ Let us now merge our matrices from different batches.
 
 The identifier column refers to the column where the gene names are listed. A 1:1 correspondence between matrices is checked, so that the merge does not concatenate the wrong rows between matrices. The *Fill character* provides a default value of 0 for cases where a Gene appears only in one of the matrices as per our example earlier.
 
-Once the merge is complete, we can now peek at our full combined matrix by once again clicking on the file name to see a small summary. Compared to the ~2,500 genes and 192 cells we observe in the individual matrices, we can see that we now have ~6,200 genes and more than 750 cells.
+Once the merge is complete, we can now peek at our full combined matrix by once again clicking on the file name to see a small summary.
 
-However, the number of cells are greatly overestimated.  This is because *not all batches use the same barcodes*, and yet we are applying the full set of barcodes to each batch.
+> ### {% icon question %} Question
+>
+> Each of these matrices/batches come from the same organism.
+>
+> 1. How much overlap in their detected genes did you expect?
+> 2. How much overlap in their detected genes did you observe?
+> 3. Why is this?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Given that they come from the same sample, and each matrix has ~2,500 genes, we would have expected a high overlap between matrices, yielding ~3,000 genes in the combined matrix.
+> >
+> > 2. We observe ~6,200 genes, very little overlap between batches of the same organism.
+> >
+> > 3. The batches were sequenced at different time points along the organisms development, and therefore different genes were expressed/detected at different time points. For early development data, this is normal.
+> {: .solution}
+{: .question}
 
-The reason we do this is to test for cross-contamination between batches, the details of which are better explained in the [*Plates, Batches, and Barcodes*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides.
+In the new combined matrix we see that we have more than 750 cells, but this number is greatly overestimated.  This is because *not all batches use the same barcodes*, and yet we applied the full set of 192 barcodes against our FASTQ data during the [*Barcode Extraction*](#barcode-extraction) stage previously.
+
+The reason we do this is to test for cross-contamination between batches, the details of which are better explained in the [*Plates, Batches, and Barcodes*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides 26-52.
 
 
 ## Guarding against Cross-Contamination
@@ -672,6 +693,8 @@ The plot that follows tells us everything we need to know about each of our batc
 
 ![Contamination Plots]({{site.baseurl}}{% link topics/transcriptomics/images/scrna_crosscontamination.png %} "The Pre-filter and Post-filter plots")
 
+Two things to take note of:
+
 1. In the pre-filter plot, we can see how only half of the sequences in each batch map to half the barcodes. This shows very little cross-contamination, and proves that our data is real.
 2. The post-filter plot essentially removes the false barcodes from each batch and retains only the 'Real' barcodes.
 
@@ -683,7 +706,7 @@ The plot that follows tells us everything we need to know about each of our batc
 > >
 > > Because only half the barcodes in each batch were real. The *UMI-tools extract* took the entire barcodes file to filter against each batch, and the *UMI-tools count* also took the entire barcodes file to count against each batch.
 > >
-> > Naturally, each batch produced 192 cells, even though 96 were real. As a result of joining each of these matrices we ended up with a count-matrix of $$8 * 192 = 1536$$ cells. The cross-contamination tool removes the false barcodes (50% in each batch), resulting in $$768$$ cells.
+> > Naturally, each batch produced 192 cells, even though 96 were real. As a result of joining each of these matrices we ended up with a count-matrix of $$4 * 192 = 768$$ cells. The cross-contamination tool removes the false barcodes (50% in each batch), resulting in $$384$$ cells.
 > >
 > {: .solution}
 {: .question}
