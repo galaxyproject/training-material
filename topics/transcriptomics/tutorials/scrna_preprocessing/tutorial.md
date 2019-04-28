@@ -132,13 +132,15 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 {: .hands_on}
 
 
+<!--
 For a more detailed understanding of the naming conventions used in generating our FASTQ pair, please consult the [*Plates, Batches, and Barcodes*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides.
+-->
 
 ## Barcode Extraction
 
 > ### {% icon comment %} Note
 >
-> Before performing the barcode extraction process, it is recommended that you familiarise yourself with the concepts of barcodes within multiplexed FASTQ data as given by the [*Understanding Barcodes*]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on material.
+> Before performing the barcode extraction process, it is recommended that you familiarise yourself with the concepts of plates and lanes, and designing cell barcodes for them as given by the [*Plates, Batches, and Barcodes*]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides 1-26, and the [*Understanding Barcodes*]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on material.
 >
 {: .comment}
 
@@ -576,7 +578,7 @@ Once the merge is complete, we can now peek at our full combined matrix by once 
 
 However, the number of cells are greatly overestimated.  This is because *not all batches use the same barcodes*, and yet we are applying the full set of barcodes to each batch.
 
-The reason we do this is to test for cross-contamination between batches, the details of which are better explained in the [*Plates, Batches, and Barcodes*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides.
+The reason we do this is to test for cross-contamination between batches, the details of which are better explained in the [*Plates, Batches, and Barcodes*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides 26-52.
 
 
 ## Guarding against Cross-Contamination
