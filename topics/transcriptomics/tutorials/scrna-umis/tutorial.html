@@ -653,7 +653,7 @@
 
 <p><small><a href="javascript:window.history.back()">Back to previous</a></small></p>
 
-<p>CEL-Seq2 is a paired-end protocol, meaning that two primers bind to opposite strands in order to sequence. Each primer has a specific role.</p>
+<p>CEL-Seq2 is a paired-end protocol, meaning that two primers bind to opposite ends of a cDNA strand in order to sequence. Each primer has a specific role.</p>
 
 <p>In this case; <em>Read1</em> contains the barcoding information followed by the polyT tail of the messenger RNA, and <em>Read2</em> contains the actual sequence. Here, Read1 is regarded as the ‘forward’ strand and Read2 as the ‘reverse’ strand, though this is more a convention when dealing with paired-end data rather than an indication of the actual strand orientation.</p>
 
@@ -752,11 +752,11 @@
 
 <h1 id="mitigating-duplicate-transcript-counts-with-umis">Mitigating duplicate transcript counts with UMIs</h1>
 
-<p><small><strong><em>Note:</em></strong> Cell barcodes are not shown in any of these examples, we assume they were added to our transcripts previously. </small><br /><br /></p>
-
 <p>One of the major issues with sequencing is that the read fragments require amplification before they can be sequenced. A gene with a single mRNA transcript will not be detected by most sequencers, so it needs to be duplicated 100-1000x times for the sequencer to ‘see’ it.</p>
 
 <p>Amplification is an imprecise process however, since some reads are amplified more than others, and subsequent amplification can lead to these over-amplified reads being over-amplified even more, leading to an exponential bias of some reads over others.</p>
+
+<p><small><strong><em>Note:</em></strong> Cell barcodes are not shown in any of the below examples, we assume they were added to our transcripts previously. </small><br /><br /></p>
 
 <h2 id="naive-amplification">Naive Amplification</h2>
 
@@ -794,7 +794,7 @@ How do we correct for this bias?</p>
 
 <figure id="figure-5"><img src="../../images/scrna_amplif_errors_umis.svg" alt="Amplification Bias with UMIs" title="A cell with four unique transcripts, two from Gene Red and two from Gene Blue" /><figcaption><span class="figcaption-prefix">Figure 5:</span> A cell with four unique transcripts, two from Gene Red and two from Gene Blue</figcaption></figure>
 
-<p>Here, we see two unique transcripts from Gene Red and two unique transcripts from Gene Blue, each given a (coloured) UMI. After amplificaiton, Gene Red has more reads than Gene Blue. If we were to construct a frequency table as before to count the reads, we would have:</p>
+<p>Here, we see two unique transcripts from Gene Red and two unique transcripts from Gene Blue, each given a (coloured) UMI. After amplification, Gene Red has more reads than Gene Blue. If we were to construct a frequency table as before to count the reads, we would have:</p>
 
 <blockquote class="matrix">
   <table>
@@ -1062,6 +1062,18 @@ J00182:75:HTKJNBBXX:2:1115:8501:46961
           </ul>
         </li>
       </ul>
+    </li>
+    <li>Change the datatypes of the output pair to <code class="highlighter-rouge">fastqsanger</code> if not already set.
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select ``</li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
     </li>
     <li>Viewing our 4 reads side-by-side
       <ul>

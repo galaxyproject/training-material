@@ -163,7 +163,7 @@
 
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="https://zenodo.org/record/2573175" title="Links to data">
+                        <a class="nav-link" href="https://zenodo.org/record/2581041" title="Links to data">
                             <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Input Dataset
                         </a>
                     </li>
@@ -406,7 +406,7 @@
   "mentions": [
     {
       "@type": "Thing",
-      "url": "https://zenodo.org/record/2573175",
+      "url": "https://zenodo.org/record/2581041",
       "name": "Training data for Pre-processing of Single-Cell RNA Data tutorial"
     }
   ],
@@ -684,7 +684,7 @@
       </blockquote>
     </li>
     <li>
-      <p>Import the FASTQ paired data from <a href="https://zenodo.org/record/2573175"><code class="highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)</p>
+      <p>Import the subset FASTQ paired data from <a href="https://zenodo.org/record/2581041"><code class="highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)</p>
 
       <blockquote class="tip">
 
@@ -705,9 +705,9 @@
           <li>
             <p>Paste the link into the text field</p>
 
-            <p><code class="highlighter-rouge">https://zenodo.org/record/2573175/files/SRR5683689_1.fastq.gz</code></p>
+            <p><code class="highlighter-rouge">https://zenodo.org/record/2581041/files/SRR5683689_1.subset.fastq</code></p>
 
-            <p><code class="highlighter-rouge">https://zenodo.org/record/2573175/files/SRR5683689_2.fastq.gz</code></p>
+            <p><code class="highlighter-rouge">https://zenodo.org/record/2581041/files/SRR5683689_2.subset.fastq</code></p>
           </li>
           <li>
             <p>Change <strong>Genome</strong> to <code class="highlighter-rouge">GRCm38/mm10</code></p>
@@ -742,10 +742,10 @@
       </blockquote>
     </li>
     <li>
-      <p>Import the Gene Annotations and Barcodes from <a href="https://zenodo.org/record/2573175"><code class="highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)</p>
+      <p>Import the Gene Annotations and Barcodes from <a href="https://zenodo.org/record/2581041"><code class="highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2573175/files/Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf
-https://zenodo.org/record/2573175/files/celseq_barcodes.192.tabular
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2581041/files/Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf
+https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
 </code></pre></div>      </div>
     </li>
     <li>
@@ -759,9 +759,14 @@ https://zenodo.org/record/2573175/files/celseq_barcodes.192.tabular
 
 <h2 id="barcode-extraction">Barcode Extraction</h2>
 
-<p>It is highly recommended that you familiarise yourself with the concepts of barcodes and UMIs within multiplexed FASTQ data with the <a href="/training-material/topics/transcriptomics/tutorials/scrna-umis/tutorial.html"><em>Understanding Barcodes</em></a> hands-on material.</p>
+<blockquote class="comment">
+  <h3 id="comment-note"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note</h3>
 
-<p>We will be performing barcode extraction on our batch data as given by the above hands-on tutorial, but this time filtering for <em>specific</em> cell barcodes, which we will ensure by providing the barcodes file.</p>
+  <p>Before performing the barcode extraction process, it is recommended that you familiarise yourself with the concepts of barcodes within multiplexed FASTQ data as given by the <a href="/training-material/topics/transcriptomics/tutorials/scrna-umis/tutorial.html"><em>Understanding Barcodes</em></a> hands-on material.</p>
+
+</blockquote>
+
+<p>We will be demultiplexing our FASTQ batch data by performing barcode extraction whilst also making use of the provided barcodes file to filter for <em>specific</em> cell barcodes.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-barcode-extraction"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Barcode Extraction</h3>
@@ -771,7 +776,7 @@ https://zenodo.org/record/2573175/files/celseq_barcodes.192.tabular
       <ul>
         <li><em>“Library type”</em>: <code class="highlighter-rouge">Paired-end Dataset Collection</code>
           <ul>
-            <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Reads in FASTQ format”</em>: <code class="highlighter-rouge">output</code> (Our paired set)</li>
+            <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Reads in FASTQ format”</em>: <code class="highlighter-rouge">C57_P1_B1</code> (Our paired set)</li>
             <li><em>“Barcode on both reads?”</em>: <code class="highlighter-rouge">Barcode on first read only</code></li>
           </ul>
         </li>
@@ -788,23 +793,19 @@ https://zenodo.org/record/2573175/files/celseq_barcodes.192.tabular
 
 </blockquote>
 
-<p>As before, we can verify that the desired UMI and cell barcodes have been extracted from the sequence of the Forward reads and inserted into the header of the Reverse reads.</p>
+<p>Verifying that the desired UMI and cell barcodes have been extracted from the sequence of the Forward reads and inserted into the header of the Reverse reads is encouraged, using the method outlined in the above hands-on material.</p>
 
 <blockquote class="question">
   <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-  <ol>
-    <li>Why are input and output FASTQ file sizes so different?</li>
-    <li>How many reads were filtered out, and why?</li>
-  </ol>
+  <p>How many reads were filtered out, and why?</p>
 
   <blockquote class="solution">
     <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <ol>
-      <li>The input FASTQ files contained reads from all barcodes, including those with sequencing errors, resulting in a larger pool of detected barcodes than those desired. (e.g. Cell barcode <code class="highlighter-rouge">AAATTT</code> could have single basepair sequencing errors that could modify it into <code class="highlighter-rouge">ATATTT</code> or <code class="highlighter-rouge">AAACTT</code>, etc).</li>
-      <li>This information is included in the Log file of <strong>UMI-tools extract</strong> which contains all the parameters used to run, as well as <em>INFO</em> lines that indicate how many reads were read, and how many output. In this case: 14230244 reads (90.9%)</li>
-    </ol>
+    <p>The input FASTQ files contained reads from all barcodes, including those with sequencing errors, resulting in a larger pool of detected barcodes than those desired. (e.g. Cell barcode <code class="highlighter-rouge">AAATTT</code> could have single basepair sequencing errors that could modify it into <code class="highlighter-rouge">ATATTT</code> or <code class="highlighter-rouge">AAACTT</code>, etc).</p>
+
+    <p>This information is included in the Log file of <strong>UMI-tools extract</strong> which contains all the parameters used to run, as well as <em>INFO</em> lines that indicate how many reads were read, and how many output. In this case: 134431 reads were retained (&gt;90% of input reads).</p>
   </blockquote>
 </blockquote>
 
@@ -833,7 +834,7 @@ https://zenodo.org/record/2573175/files/celseq_barcodes.192.tabular
       <ul>
         <li><em>“Single-end or paired-end reads”</em>: <code class="highlighter-rouge">Single-end</code>
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RNA-Seq FASTQ/FASTA file”</em>: <code class="highlighter-rouge">out2</code> (output of <strong>UMI-tools extract</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RNA-Seq FASTQ/FASTA file”</em>: <code class="highlighter-rouge">Reads2</code> (output of <strong>UMI-tools extract</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
           </ul>
         </li>
         <li><em>“Custom or built-in reference genome”</em>: <code class="highlighter-rouge">Use a built-in index</code>
@@ -891,8 +892,8 @@ https://zenodo.org/record/2573175/files/celseq_barcodes.192.tabular
     <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li><code class="highlighter-rouge">70.9%</code> or 10 million reads were successfully mapped</li>
-      <li><code class="highlighter-rouge">14.4%</code> are multiply mapped, and <code class="highlighter-rouge">2.2%</code> were mapped to too many loci
+      <li><code class="highlighter-rouge">59.5%</code> or ~80k reads were successfully mapped</li>
+      <li><code class="highlighter-rouge">13.6%</code> are multiply mapped, and <code class="highlighter-rouge">3.7%</code> were mapped to too many loci
         <ul>
           <li>Multiply mapped means that a read was aligned to more than one gene</li>
           <li>Mapped to too many loci means that a read was aligned to 10 or more loci, and should be ignored.</li>
@@ -902,7 +903,7 @@ https://zenodo.org/record/2573175/files/celseq_barcodes.192.tabular
         <ul>
           <li><code class="highlighter-rouge">90%</code> is amazing, reserved for bulk RNA-seq which typically has high coverage</li>
           <li><code class="highlighter-rouge">70%</code> is weak for bulk RNA-seq, but good for single-cell RNA-seq</li>
-          <li>6 million mapped reads should be enough to generate a downstream analysis from.</li>
+          <li>This a small subset of a real dataset, but one would explect that 6 million mapped reads would be enough to generate a downstream analysis.</li>
         </ul>
       </li>
     </ol>
@@ -943,10 +944,9 @@ https://zenodo.org/record/2573175/files/celseq_barcodes.192.tabular
     <li>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> symbol of the BAM output from STAR.</li>
     <li>There are many header lines that begin with <code class="highlighter-rouge">@</code> which we are not interested in.</li>
     <li>
-      <p>Look at first read directly below the header lines:</p>
+      <p>Look at 10th read directly below the header lines:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>J00182:75:HTKJNBBXX:2:1121:9729:45889_GACGAA_GTGGTC	16	chr1	2030	3	70M	*	0	0	AGAGGTTCCAATATTCCCATGAAATTGAGATTTTGTAAAAGAGTGAAGTGTGGTTACTTTCACTGAGAGG	JJJJJJJJJJJJJJJJJJJJJJJJFJJJJJAJJJJJJJJJJFJFJFFJJJJJJJJJJJJFF7AJA-77&lt;A	NH:i:2 HI:i:1 AS:i:64 nM:i:2
-</code></pre></div>      </div>
+      <p>SRR5683689.38437_GCATTC_CTTCGT	16	chr1	3439991	255	70M	*	0	0	CTTTGAATCTCTTCTTCCCAGCTAGTCATCTTCCTGCTTTTCTCTCTGTCTGTCTGTCTGTCTGTCTGTC	‘0’&lt;B&lt;’‘B77&lt;BFBBBBB7’FBFB0F7FBB&lt;B’’‘&lt;IFFBF&lt;FBFB&lt;FBBFBB0&lt;BFFFBB0BBFFB«	NH:i:1 HI:i:1 AS:i:66 nM:i:1</p>
     </li>
   </ol>
 
@@ -955,7 +955,7 @@ https://zenodo.org/record/2573175/files/celseq_barcodes.192.tabular
 <p>The fields of the BAM file can be better explained at section 1.4 of <a href="https://samtools.github.io/hts-specs/SAMv1.pdf">the SAM specification</a>, but we will summarize the main fields of interest here:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">J00182..._GACGAA_GCGGTC</code>: The <em>readname</em> appended by <code class="highlighter-rouge">_</code>, the cell barcode, another <code class="highlighter-rouge">_</code>, and then the UMI barcode.</li>
+  <li><code class="highlighter-rouge">SRR568..._GCATTC_CTTCGT</code>: The <em>readname</em> appended by <code class="highlighter-rouge">_</code>, the cell barcode, another <code class="highlighter-rouge">_</code>, and then the UMI barcode.</li>
   <li><code class="highlighter-rouge">16</code>: The FLAG value</li>
 </ul>
 
@@ -974,11 +974,11 @@ https://zenodo.org/record/2573175/files/celseq_barcodes.192.tabular
 </blockquote>
 
 <ul>
-  <li><code class="highlighter-rouge">chr1</code> <code class="highlighter-rouge">2030</code>: The position and base-pair of alignment of the first base of the sequence.</li>
+  <li><code class="highlighter-rouge">chr1</code> <code class="highlighter-rouge">3439991</code>: The position and base-pair of alignment of the first base of the sequence.</li>
   <li>A series of quality fields, with the main contributors being  the sequence and sequence quality strings.</li>
-  <li><code class="highlighter-rouge">NH</code>: The number of hits for  this read. If it is multiply mapped, then the number of multiples will be shown (here <code class="highlighter-rouge">2</code>).</li>
+  <li><code class="highlighter-rouge">NH</code>: The number of hits for  this read. If it is multiply mapped, then the number of multiples will be shown (here <code class="highlighter-rouge">1</code>, so not multiply mapped).</li>
   <li><code class="highlighter-rouge">HI</code>: Which number this particular read is in the series of (potentially) multi-mapped reads (here <code class="highlighter-rouge">1</code>, not neccesarily meaning the first or ‘better’).</li>
-  <li><code class="highlighter-rouge">nM</code>: The number of mismatches in the alignment of this read to the reference (here <code class="highlighter-rouge">2</code>).</li>
+  <li><code class="highlighter-rouge">nM</code>: The number of base mismatches in the alignment of this read to the reference (here <code class="highlighter-rouge">1</code>).</li>
 </ul>
 
 <h4 id="filtering-the-bam-file">Filtering the BAM File</h4>
@@ -988,7 +988,7 @@ https://zenodo.org/record/2573175/files/celseq_barcodes.192.tabular
 <p>The main filtering steps performed on our reads so far have been relatively silent due to the ‘default’ parameters used.</p>
 <ul>
   <li><em>UMI-tools Extract</em> - Filters reads for those only with matching barcodes given by our barcodes file.</li>
-  <li><em>RNA-STAR</em> - As seen in the log, we lose 10% of our reads for being too short or being multiply mapped.</li>
+  <li><em>RNA-STAR</em> - As seen in the log, we lose 25% of our reads for being too short or being multiply mapped.</li>
 </ul>
 
 <p>Another filtering measure we can apply is to keep reads that we are confident about, e.g those with a minimum number of mismatches to the reference within an acceptable range.</p>
@@ -1187,12 +1187,12 @@ https://zenodo.org/record/2573175/files/celseq_barcodes.192.tabular
     <li><strong>FeatureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Alignment file”</em>: <code class="highlighter-rouge">mapped_reads</code> (output of <strong>RNA STAR</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Specify strand information”</em>:<code class="highlighter-rouge">Unstranded</code></li>
         <li><em>“Gene annotation file”</em>: <code class="highlighter-rouge">in your history</code>
           <ul>
             <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene annotation file”</em>: <code class="highlighter-rouge">Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf</code></li>
           </ul>
         </li>
-        <li><em>“Specify strand information”</em>:<code class="highlighter-rouge">Unstranded</code></li>
         <li>In <em>“Advanced options”</em>:
           <ul>
             <li><em>“Count multi-mapping reads/fragments”</em>: <code class="highlighter-rouge">Disabled; multi-mapping reads are excluded (default)</code></li>
@@ -1262,12 +1262,12 @@ With all the relevant data now in our BAM file, we can actually perform the coun
 
     <ol>
       <li>
-        <p>~23,000 lines
+        <p>2,140 lines
 This information can be seen in the file preview window by clicking on the name of the file (<strong>NOT</strong> the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> symbol).</p>
       </li>
       <li>
-        <p>192 columns (not including the first column of gene names)
-The number of columns can be seen by scrolling the file preview window completely to the right.</p>
+        <p>180 columns (not including the first column of gene names)
+The number of columns can be seen by scrolling the file preview window completely to the right. 192 cell barcodes were given, but due to the subsetted data, only 180 were detected.</p>
       </li>
     </ol>
 
@@ -1334,7 +1334,7 @@ The number of columns can be seen by scrolling the file preview window completel
 
 <h3 id="data-upload-and-organization-1">Data upload and organization</h3>
 
-<p>The count matrix we have generated in the previous section is too sparse to perform any reasonable analysis upon, and constitutes data only of a single batch. Here we will use more populated count matrices from multiple batches, under the assumption that we now know how to generate each individual one of them using the steps provided in the previous section. This data is available at <a href="https://zenodo.org/record/2573175"><code class="highlighter-rouge">Zenodo</code></a>.</p>
+<p>The count matrix we have generated in the previous section is too sparse to perform any reasonable analysis upon, and constitutes data only of a single batch. Here we will use more populated count matrices from multiple batches, under the assumption that we now know how to generate each individual one of them using the steps provided in the previous section. This data is available at <a href="https://zenodo.org/record/2581041"><code class="highlighter-rouge">Zenodo</code></a>.</p>
 
 <p>Once again, file naming is important, and so we will rename our matrix files appropriately to the plate and batch they are supposed to originate from.</p>
 
@@ -1343,16 +1343,16 @@ The number of columns can be seen by scrolling the file preview window completel
 
   <ol>
     <li>Create a new history and rename it (<em>e.g.</em> scRNA-seq multiple-batch tutorial)</li>
-    <li>Import the four matrices and barcodes (<code class="highlighter-rouge">P1_B1.tabular</code>, <code class="highlighter-rouge">P1_B2.tabular</code>, etc.) from <a href="https://zenodo.org/record/2573175"><code class="highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)
+    <li>Import the four matrices and barcodes (<code class="highlighter-rouge">P1_B1.tabular</code>, <code class="highlighter-rouge">P1_B2.tabular</code>, etc.) from <a href="https://zenodo.org/record/2581041"><code class="highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)
       <ul>
         <li>Set the datatype of the tabular files to <strong>tabular</strong></li>
       </ul>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2573175/files/P1_B1.tabular
-https://zenodo.org/record/2573175/files/P1_B2.tabular
-https://zenodo.org/record/2573175/files/P2_B3.tabular
-https://zenodo.org/record/2573175/files/P2_B4.tabular
-https://zenodo.org/record/2573175/files/celseq_barcodes.192.tabular
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2581041/files/P1_B1.tabular
+https://zenodo.org/record/2581041/files/P1_B2.tabular
+https://zenodo.org/record/2581041/files/P2_B3.tabular
+https://zenodo.org/record/2581041/files/P2_B4.tabular
+https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
 </code></pre></div>      </div>
 
       <blockquote class="tip">
