@@ -506,6 +506,7 @@ Once again, file naming is important, and so we will rename our matrix files app
 > ### {% icon hands_on %} Hands-on: Data upload and organization
 >
 > 1. Create a new history and rename it (*e.g.* scRNA-seq multiple-batch tutorial)
+>
 > 1. Import the four matrices (`P1_B1.tabular`, `P1_B2.tabular`, etc.) and the barcodes file from [`Zenodo`](https://zenodo.org/record/2581041) or from the data library (ask your instructor)
 >    - Set the datatype of the tabular files to **tabular**
 >
