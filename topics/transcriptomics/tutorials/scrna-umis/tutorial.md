@@ -54,7 +54,7 @@ Barcodes come in a variety of formats, and in this tutorial we will be looking a
 
 <small>[Back to previous](javascript:window.history.back())</small>
 
-CEL-Seq2 is a paired-end protocol, meaning that two primers bind to opposite strands in order to sequence. Each primer has a specific role.
+CEL-Seq2 is a paired-end protocol, meaning that two primers bind to opposite ends of a cDNA strand in order to sequence. Each primer has a specific role.
 
 In this case; *Read1* contains the barcoding information followed by the polyT tail of the messenger RNA, and *Read2* contains the actual sequence. Here, Read1 is regarded as the 'forward' strand and Read2 as the 'reverse' strand, though this is more a convention when dealing with paired-end data rather than an indication of the actual strand orientation.
 
@@ -122,11 +122,11 @@ To fully explore the uniqueness of counts, we must discuss the inclusion of *UMI
 
 # Mitigating duplicate transcript counts with UMIs
 
-<small>***Note:*** Cell barcodes are not shown in any of these examples, we assume they were added to our transcripts previously. </small><br /><br />
-
 One of the major issues with sequencing is that the read fragments require amplification before they can be sequenced. A gene with a single mRNA transcript will not be detected by most sequencers, so it needs to be duplicated 100-1000x times for the sequencer to 'see' it.
 
 Amplification is an imprecise process however, since some reads are amplified more than others, and subsequent amplification can lead to these over-amplified reads being over-amplified even more, leading to an exponential bias of some reads over others.
+
+<small>***Note:*** Cell barcodes are not shown in any of the below examples, we assume they were added to our transcripts previously. </small><br /><br />
 
 ## Naive Amplification
 
@@ -151,7 +151,7 @@ How do we correct for this bias?
 
  ![Amplification Bias with UMIs](../../images/scrna_amplif_errors_umis.svg "A cell with four unique transcripts, two from Gene Red and two from Gene Blue")
 
- Here, we see two unique transcripts from Gene Red and two unique transcripts from Gene Blue, each given a (coloured) UMI. After amplificaiton, Gene Red has more reads than Gene Blue. If we were to construct a frequency table as before to count the reads, we would have:
+ Here, we see two unique transcripts from Gene Red and two unique transcripts from Gene Blue, each given a (coloured) UMI. After amplification, Gene Red has more reads than Gene Blue. If we were to construct a frequency table as before to count the reads, we would have:
 
 > |  | Reads in Cell 1 |
 > |--|-----------------|
@@ -261,6 +261,10 @@ At this point we now have a history with two items: our paired FASTQ test data, 
 >      - **Column(s) containing sequence identifiers**
 >        - **Select/Unselect all**:(tick the box)
 >      - **Output positive matches, negative matches, or both?**:`Just positive matches (ID on list), as a single file`
+>
+> 1. Change the datatypes of the output pair to `fastqsanger` if not already set.
+>    {% include snippets/change_datatype.md %}
+>
 > 1. Viewing our 4 reads side-by-side
 >    - Activate the **Scratchbook** by clicking on the **Enable/Disable Scratchbook** icon on the main top toolbar
 >    - Click on the newly generated FastQ pair ending in *"with matched ID"* to expand the individual reads
