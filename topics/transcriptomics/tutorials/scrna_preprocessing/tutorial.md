@@ -140,7 +140,7 @@ For a more detailed understanding of the naming conventions used in generating o
 
 > ### {% icon comment %} Note
 >
-> Before performing the barcode extraction process, it is recommended that you familiarise yourself with the concepts of plates and lanes, and designing cell barcodes for them as given by the [*Plates, Batches, and Barcodes*]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides 1-26, and the [*Understanding Barcodes*]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on material.
+> Before performing the barcode extraction process, it is recommended that you familiarise yourself with the concepts of designing cell barcodes as given by the [*Plates, Batches, and Barcodes*]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides 1-26, as well as the [*Understanding Barcodes*]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on material for an introduction into transcript barcodes.
 >
 {: .comment}
 
@@ -153,7 +153,7 @@ We will be demultiplexing our FASTQ batch data by performing barcode extraction 
 >        - {% icon param-collection %} *"Reads in FASTQ format"*: `C57_P1_B1` (Our paired set)
 >        - *"Barcode on both reads?"*: `Barcode on first read only`
 >    - *"Use Known Barcodes?"*: `Yes`
->        - {% icon param-file %} *"Barcode File"*: `output` (Input dataset)
+>        - {% icon param-file %} *"Barcode File"*: `celseq_barcodes.192.tabular` (Input dataset)
 >    - *"Barcode pattern for first read"*: `NNNNNNCCCCCC`
 >    - *"Enable quality filter?"*: `No`
 >
@@ -506,7 +506,7 @@ Once again, file naming is important, and so we will rename our matrix files app
 > ### {% icon hands_on %} Hands-on: Data upload and organization
 >
 > 1. Create a new history and rename it (*e.g.* scRNA-seq multiple-batch tutorial)
-> 1. Import the four matrices and barcodes (`P1_B1.tabular`, `P1_B2.tabular`, etc.) from [`Zenodo`](https://zenodo.org/record/2581041) or from the data library (ask your instructor)
+> 1. Import the four matrices (`P1_B1.tabular`, `P1_B2.tabular`, etc.) and the barcodes file from [`Zenodo`](https://zenodo.org/record/2581041) or from the data library (ask your instructor)
 >    - Set the datatype of the tabular files to **tabular**
 >
 >    ```
@@ -546,8 +546,8 @@ To resolve this we can perform a "Full Table Join" where the missing data for *G
 
 > ### {% icon question %} Question
 >
-> 1. Why have the column headers changed in the Full matrix?
-> 2. Why are the cell labels in B1 and B2 the same, if they are labelling completely different cells?
+> 1. Why is it required to change the column headers in the Full matrix?
+> 2. Why were the cell labels in B1 and B2 the same, if they were labelling completely different cells?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -574,9 +574,27 @@ Let us now merge our matrices from different batches.
 
 The identifier column refers to the column where the gene names are listed. A 1:1 correspondence between matrices is checked, so that the merge does not concatenate the wrong rows between matrices. The *Fill character* provides a default value of 0 for cases where a Gene appears only in one of the matrices as per our example earlier.
 
-Once the merge is complete, we can now peek at our full combined matrix by once again clicking on the file name to see a small summary. Compared to the ~2,500 genes and 192 cells we observe in the individual matrices, we can see that we now have ~6,200 genes and more than 750 cells.
+Once the merge is complete, we can now peek at our full combined matrix by once again clicking on the file name to see a small summary.
 
-However, the number of cells are greatly overestimated.  This is because *not all batches use the same barcodes*, and yet we are applying the full set of barcodes to each batch.
+> ### {% icon question %} Question
+>
+> Each of these matrices/batches come from the same organism.
+>
+> 1. How much overlap in their detected genes did you expect?
+> 2. How much overlap in their detected genes did you observe?
+> 3. Why is this?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Given that they come from the same sample, and each matrix has ~2,500 genes, we would have expected a high overlap between matrices, yielding ~3,000 genes in the combined matrix.
+> >
+> > 2. We observe ~6,200 genes, very little overlap between batches of the same organism.
+> >
+> > 3. The batches were sequenced at different time points along the organisms development, and therefore different genes were expressed/detected at different time points. For early development data, this is normal.
+> {: .solution}
+{: .question}
+
+In the new combined matrix we see that we have more than 750 cells, but this number is greatly overestimated.  This is because *not all batches use the same barcodes*, and yet we applied the full set of 192 barcodes against our FASTQ data during the *Barcode Extraction* stage previously.
 
 The reason we do this is to test for cross-contamination between batches, the details of which are better explained in the [*Plates, Batches, and Barcodes*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides 26-52.
 
