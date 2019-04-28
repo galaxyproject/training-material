@@ -692,6 +692,8 @@ The plot that follows tells us everything we need to know about each of our batc
 
 ![Contamination Plots]({{site.baseurl}}{% link topics/transcriptomics/images/scrna_crosscontamination.png %} "The Pre-filter and Post-filter plots")
 
+Two things to take note of:
+
 1. In the pre-filter plot, we can see how only half of the sequences in each batch map to half the barcodes. This shows very little cross-contamination, and proves that our data is real.
 2. The post-filter plot essentially removes the false barcodes from each batch and retains only the 'Real' barcodes.
 
@@ -703,7 +705,7 @@ The plot that follows tells us everything we need to know about each of our batc
 > >
 > > Because only half the barcodes in each batch were real. The *UMI-tools extract* took the entire barcodes file to filter against each batch, and the *UMI-tools count* also took the entire barcodes file to count against each batch.
 > >
-> > Naturally, each batch produced 192 cells, even though 96 were real. As a result of joining each of these matrices we ended up with a count-matrix of $$8 * 192 = 1536$$ cells. The cross-contamination tool removes the false barcodes (50% in each batch), resulting in $$768$$ cells.
+> > Naturally, each batch produced 192 cells, even though 96 were real. As a result of joining each of these matrices we ended up with a count-matrix of $$4 * 192 = 768$$ cells. The cross-contamination tool removes the false barcodes (50% in each batch), resulting in $$384$$ cells.
 > >
 > {: .solution}
 {: .question}
