@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Downstream single-cell RNA analysis with RaceID</title>
+        <title>Downstream Single-cell RNA analysis with RaceID</title>
         
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -29,7 +29,7 @@
         
         
         <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
-        <meta property="og:title" content="Galaxy Training: Downstream single-cell RNA analysis with RaceID" />
+        <meta property="og:title" content="Galaxy Training: Downstream Single-cell RNA analysis with RaceID" />
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
@@ -283,7 +283,7 @@
     "url": "https://galaxyproject.org/teach/gtn/"
   },
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "Downstream single-cell RNA analysis with RaceID",
+  "headline": "Downstream Single-cell RNA analysis with RaceID",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -312,11 +312,11 @@
   },
   "courseCode": "transcriptomics / scrna-raceid / hands-on",
   "learningResourceType": "hands-on tutorial",
-  "name": "Hands-on for 'Downstream single-cell RNA analysis with RaceID' tutorial",
+  "name": "Hands-on for 'Downstream Single-cell RNA analysis with RaceID' tutorial",
   "isPartOf": {
     "@type": "Course",
-    "name": "Downstream single-cell RNA analysis with RaceID",
-    "description": "Downstream single-cell RNA analysis with RaceID",
+    "name": "Downstream Single-cell RNA analysis with RaceID",
+    "description": "Downstream Single-cell RNA analysis with RaceID",
     "learningResourceType": "tutorial",
     "interactivityType": "expositive",
     "provider": {
@@ -329,7 +329,7 @@
   "url": "https://galaxyproject.github.io//training-material/topics/transcriptomics/tutorials/scrna-raceid/tutorial.html",
   "timeRequired": "PT2H",
   "keywords": "single-cell",
-  "description": "Downstream single-cell RNA analysis with RaceID\\nThe questions this  addresses are:\n - What is normalisation and why is it necessary?\n - How many types of unwanted variation are there?\n - How are biological phenotypes clustered?\n - What is the difference between PCA and tSNE?\n - What is the difference between cell trajectory and cell fate?\n\n\\nThe objectives are:\n - Filtering, normalising, and clustering cells in a matrix\n - Assessing the quality of individual clusters\n - Inferring a lineage between cell types\n - Examining gene expression\n - Determining the top most expressive genes per cluster\n - Correcting for unwanted variation\n\n",
+  "description": "Downstream Single-cell RNA analysis with RaceID\\nThe questions this  addresses are:\n - What is normalisation and why is it necessary?\n - How many types of unwanted variation are there?\n - How are biological phenotypes clustered?\n - What is the difference between PCA and tSNE?\n - What is the difference between cell trajectory and cell fate?\n\n\\nThe objectives are:\n - Filtering, normalising, and clustering cells in a matrix\n - Assessing the quality of individual clusters\n - Inferring a lineage between cell types\n - Examining gene expression\n - Determining the top most expressive genes per cluster\n - Correcting for unwanted variation\n\n",
   "coursePrerequisites": [
     {
       "@type": "CreativeWork",
@@ -449,7 +449,7 @@
     {
       "@type": "Thing",
       "url": "https://zenodo.org/record/1511582",
-      "name": "Training data for Downstream single-cell RNA analysis with RaceID tutorial"
+      "name": "Training data for Downstream Single-cell RNA analysis with RaceID tutorial"
     }
   ],
   "author": [
@@ -483,7 +483,7 @@
     </script>
 
     <section class="tutorial">
-        <h1 data-toc-skip>Downstream single-cell RNA analysis with RaceID</h1>
+        <h1 data-toc-skip>Downstream Single-cell RNA analysis with RaceID</h1>
         <div class="contributors-line">By: 
   
   <a href="/training-material/hall-of-fame#mtekman" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mtekman" alt="Mehmet Tekman">Mehmet Tekman</a> </div>
@@ -1208,36 +1208,9 @@
 
 <h2 id="performing-the-clustering">Performing the Clustering</h2>
 
-<p>In order to perform clustering, the proximity of cells to one another are first defined by a distance metric
-such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean distance or other</a>.</p>
-
-<figure id="figure-5"><img src="/training-material/topics/transcriptomics/images/raceid_distance.svg" alt="Distances" title="Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)</figcaption></figure>
-
-<blockquote class="question">
-  <h3 id="question-questions-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-
-  <ol>
-    <li>Why are there zeroes along the diagonal of the above example distance matrix?</li>
-    <li>Is there any symmetry in this matrix?</li>
-  </ol>
-
-  <blockquote class="solution">
-    <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
-    <ol>
-      <li>The distance between a point to itself is - nothing!</li>
-      <li>The distance between point <em>a</em> to point <em>b</em> is the same as the distance between point <em>b</em> to point <em>a</em> using the Euclidean distance metric.</li>
-    </ol>
-
-  </blockquote>
-
-</blockquote>
-
-<p>The clustering then tries to find groupings of cells using this distance matrix.</p>
+<p>We will attempt to perform some normalisation and clustering using the recommended default settings to see if we can detect different cell types.</p>
 
 <p>Here we assume that there is no unwanted technical or biological variability in the data and that the cells will cluster purely based on their phenotypes. This assumption is not completely without merit, since often the biological signal is strong enough to counter the lesser unwanted variation.</p>
-
-<p>We will attempt to perform some filtering, normalisation, and clustering using the recommended default settings to see if we can detect different cell types.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
@@ -1267,13 +1240,45 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
 
 </blockquote>
 
+<blockquote class="details">
+  <h3 id="details-clustering-on-a-distance-matrix"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Clustering on a Distance Matrix</h3>
+
+  <p>In order to perform clustering, the proximity of cells to one another are first defined by a distance metric
+such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean distance or other</a>.</p>
+
+  <figure id="figure-5"><img src="/training-material/topics/transcriptomics/images/raceid_distance.svg" alt="Distances" title="Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)</figcaption></figure>
+
+  <p>The clustering then tries to find groupings of cells using this distance matrix.</p>
+
+  <blockquote class="question">
+    <h3 id="question-questions-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+    <ol>
+      <li>Why are there zeroes along the diagonal of the above example distance matrix?</li>
+      <li>Is there any symmetry in this matrix?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+      <ol>
+        <li>The distance between a point to itself is - nothing!</li>
+        <li>The distance between point <em>a</em> to point <em>b</em> is the same as the distance between point <em>b</em> to point <em>a</em> using the Euclidean distance metric.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+</blockquote>
+
 <p>The first three plots in the PDF report tell us about the stability/reliability of our clusters, and are more important indicators for the quality of our clustering than any of the resultant graph projections, such as PCA or tSNE.</p>
 
 <figure id="figure-6"><img src="/training-material/topics/transcriptomics/images/raceid_sat_jacc.png" alt="Stability Plots" title="RaceID Saturation and Jaccard Plots" /><figcaption><span class="figcaption-prefix">Figure 6:</span> RaceID Saturation and Jaccard Plots</figcaption></figure>
 
 <p>The first plot measures the levels of dispersion within each cluster and displays the mean dispersion over all clusters for each k value. The grey points indicate the mean change in dispersion for that k values, and the red bars show this dispersion as a box plot, which get smaller and smaller until a “saturation point” (blue) is reached where the change in dispersion no longer decreases for an increase in k.</p>
 
-<p>For example, if <em>k=2</em>, then all cells will be sorted into 2 clusters, and the variance of the gene expression in each cluster will be measured and averaged to give a score for the clustering at that k value. Certain values of <em>k</em> may cluster the cells of the same type better, with the expectation that the average dispersion of expression values across all clusters will be minimised for some value of <em>k</em>.  As <em>k</em> increases, the reduction in this dispersion is measured for each increase of <em>k</em> until the change in the mean within-cluster dispersion no longer changes. Here we can see that reduction saturates at <em>k=12</em>, which is chosen to the be the number of clusters detected in our data for all further analysis.</p>
+<p>For example, if <em>k=2</em>, then all cells will be sorted into 2 clusters, and the variance of the gene expression in each cluster will be measured and averaged to give a score for the clustering at that k value. Certain values of <em>k</em> may cluster the cells of the same type better, with the expectation that the average dispersion of expression values across all clusters will be minimised for some value of <em>k</em>. As <em>k</em> increases, the reduction in this dispersion is measured for each increase of <em>k</em> until the change in the mean within-cluster dispersion no longer changes. Here we can see that reduction saturates at <em>k=12</em>, which is chosen to the be the number of clusters detected in our data for all further analysis.</p>
 
 <p>The second plot is the same as the first but with the actual dispersion plotted instead of the relative change of dispersion.</p>
 
@@ -1307,8 +1312,9 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
 
 <ul>
   <li>
-    <p>(Top-Left) A background model is calibrated and outliers are identified based on the distribution of transcript counts within a cluster. The counts for each gene are assumed to follow a negative binomial distribution determined by a mean (average expression of a gene across all cells in a cluster), and a dispersion parameter. The dispersion is derived from the average variance-mean dependence, modelled as a logarithmic second order polynomial under the assumption that <em>most</em> genes are not differentially expressed between clusters, and that true biological variability should exceed this assumption.
- As we can see from the Background plot, the upper and lower (violet and red) regression of the variance on the mean (as approximated by a second-order polynomial in logarithmic space) is higher than the variance of most genes (all grey dots below the red curve). This is expected since they are not differentially expressed, and so the genes above the background regression are therefore significant in the detection of outlier cells. The orange line is the local regression (moving average variance per mean) and is used purely for illustrative purposes.
+    <p>(Top-Left) A background model is calibrated and outliers are identified based on the distribution of transcript counts within a cluster. The counts for each gene are assumed to follow a negative binomial distribution determined by a mean (average expression of a gene across all cells in a cluster), and a dispersion parameter. The dispersion is derived from the average variance-mean dependence, modelled as a logarithmic second order polynomial under the assumption that <em>most</em> genes are not differentially expressed between clusters, and that true biological variability should exceed this assumption.</p>
+
+    <p>As we can see from the Background plot, the upper and lower (violet and red) regression of the variance on the mean (as approximated by a second-order polynomial in logarithmic space) is higher than the variance of most genes (all grey dots below the red curve). This is expected since they are not differentially expressed, and so the genes above the background regression are therefore significant in the detection of outlier cells. The orange line is the local regression (moving average variance per mean) and is used purely for illustrative purposes.
  <!-- See: https://github.com/dgrun/RaceID3_StemID2_package/blob/master/R/RaceID.R#L280 --></p>
   </li>
   <li>
@@ -1648,7 +1654,7 @@ This is shown in the chart above as the number of outliers as a function of the 
 
   <ol>
     <li>How do we interpret this plot?</li>
-    <li>Is <em>Gstm3</em> (at position 1.5, -2.8 on the MA plot) more significantly differentially expressed than <em>Ptma</em> (at position 3.6, 1.2)?</li>
+    <li>Is <em>Gstm3</em> (at position 1.5, -2.7 on the MA plot) more significantly differentially expressed than <em>Ptma</em> (at position 3.6, 1.2)?</li>
   </ol>
 
   <blockquote class="solution">
@@ -1705,6 +1711,8 @@ This is shown in the chart above as the number of outliers as a function of the 
 
   <p>Observe the above expression plot and the overall clustering plot generated during the “<em>Visualising All Clusters</em>” stage.</p>
 
+  <p>Are these genes (the top 3 DE genes from cluster 1) expressed where we expect them to be?</p>
+
   <blockquote class="tip">
 
     <h3 id="tip-tip--using-the-scratchbook"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip : Using the Scratchbook</h3>
@@ -1720,15 +1728,13 @@ This is shown in the chart above as the number of outliers as a function of the 
     </ol>
   </blockquote>
 
-  <p>Are these genes expressed where we expect them to be?</p>
-
   <blockquote class="solution">
     <h3 id="solution-solution-11"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <p>They appear to overlap <code class="highlighter-rouge">c6</code> which is in close proximity to <code class="highlighter-rouge">c1</code>. There are two reasons why this might be the case:</p>
     <ol>
       <li><code class="highlighter-rouge">c1</code> is a small cluster and noisy cluster surrounded by more stably defined neighbours.</li>
-      <li>The three genes are more differentially expressed in <code class="highlighter-rouge">c1</code> than in <code class="highlighter-rouge">c6</code> if we look at them as independent entities, but their combined effect tells us that together they describe <code class="highlighter-rouge">c6</code> better.</li>
+      <li>The three genes are more differentially expressed in <code class="highlighter-rouge">c1</code> than in <code class="highlighter-rouge">c6</code>, but they are more highly expressed in <code class="highlighter-rouge">c6</code>. That is, their expression is more significant in <code class="highlighter-rouge">c1</code> compared to the rest of the genes in that cluster.</li>
     </ol>
 
   </blockquote>
@@ -2069,12 +2075,12 @@ Unsurprisingly, there is a higher score for the 3 to 1 trajectory for `c1` cells
         <hr>
         <br>
 
-        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Downstream single-cell RNA analysis with RaceID (Transcriptomics)">Loading...
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Downstream Single-cell RNA analysis with RaceID (Transcriptomics)">Loading...
         </iframe>
 
         <blockquote class="feedback">
             <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
-            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Downstream single-cell RNA analysis with RaceID (Transcriptomics)">Feedback Form</a>.</p>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Downstream Single-cell RNA analysis with RaceID (Transcriptomics)">Feedback Form</a>.</p>
         </blockquote>
     </section>
 </div>
