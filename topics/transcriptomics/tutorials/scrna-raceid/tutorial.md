@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-title: Downstream single-cell RNA analysis with RaceID
+title: Downstream Single-cell RNA analysis with RaceID
 zenodo_link: 'https://zenodo.org/record/1511582'
 tags:
   - single-cell
@@ -315,30 +315,9 @@ Technical variation appears in three main forms: *Library size variation*, *Ampl
 
 ## Performing the Clustering
 
-In order to perform clustering, the proximity of cells to one another are first defined by a distance metric
-such as [Euclidean distance or other](https://en.wikipedia.org/wiki/Metric_(mathematics)).
-
-![Distances]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_distance.svg %} "Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)")
-
-> ### {% icon question %} Questions
->
-> 1. Why are there zeroes along the diagonal of the above example distance matrix?
-> 1. Is there any symmetry in this matrix?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. The distance between a point to itself is - nothing!
-> > 1. The distance between point *a* to point *b* is the same as the distance between point *b* to point *a* using the Euclidean distance metric.
-> >
-> {: .solution }
->
-{: .question }
-
-The clustering then tries to find groupings of cells using this distance matrix.
+We will attempt to perform some normalisation and clustering using the recommended default settings to see if we can detect different cell types.
 
 Here we assume that there is no unwanted technical or biological variability in the data and that the cells will cluster purely based on their phenotypes. This assumption is not completely without merit, since often the biological signal is strong enough to counter the lesser unwanted variation.
-
-We will attempt to perform some filtering, normalisation, and clustering using the recommended default settings to see if we can detect different cell types.
 
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -354,13 +333,40 @@ We will attempt to perform some filtering, normalisation, and clustering using t
 > 
 {: .hands_on}
 
+
+> ### {%icon details %} Clustering on a Distance Matrix
+>
+>
+> In order to perform clustering, the proximity of cells to one another are first defined by a distance metric
+> such as [Euclidean distance or other](https://en.wikipedia.org/wiki/Metric_(mathematics)).
+>
+> ![Distances]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_distance.svg %} "Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)")
+>
+> The clustering then tries to find groupings of cells using this distance matrix.
+>
+> > ### {% icon question %} Questions
+> >
+> > 1. Why are there zeroes along the diagonal of the above example distance matrix?
+> > 1. Is there any symmetry in this matrix?
+> >
+> > > ### {% icon solution %} Solution
+> > >
+> > > 1. The distance between a point to itself is - nothing!
+> > > 1. The distance between point *a* to point *b* is the same as the distance between point *b* to point *a* using the Euclidean distance metric.
+> > >
+> > {: .solution }
+> >
+> {: .question }
+>
+{: .details}
+
 The first three plots in the PDF report tell us about the stability/reliability of our clusters, and are more important indicators for the quality of our clustering than any of the resultant graph projections, such as PCA or tSNE.
 
 ![Stability Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_sat_jacc.png %} "RaceID Saturation and Jaccard Plots")
 
 The first plot measures the levels of dispersion within each cluster and displays the mean dispersion over all clusters for each k value. The grey points indicate the mean change in dispersion for that k values, and the red bars show this dispersion as a box plot, which get smaller and smaller until a "saturation point" (blue) is reached where the change in dispersion no longer decreases for an increase in k.
 
-For example, if *k=2*, then all cells will be sorted into 2 clusters, and the variance of the gene expression in each cluster will be measured and averaged to give a score for the clustering at that k value. Certain values of *k* may cluster the cells of the same type better, with the expectation that the average dispersion of expression values across all clusters will be minimised for some value of *k*.  As *k* increases, the reduction in this dispersion is measured for each increase of *k* until the change in the mean within-cluster dispersion no longer changes. Here we can see that reduction saturates at *k=12*, which is chosen to the be the number of clusters detected in our data for all further analysis. 
+For example, if *k=2*, then all cells will be sorted into 2 clusters, and the variance of the gene expression in each cluster will be measured and averaged to give a score for the clustering at that k value. Certain values of *k* may cluster the cells of the same type better, with the expectation that the average dispersion of expression values across all clusters will be minimised for some value of *k*. As *k* increases, the reduction in this dispersion is measured for each increase of *k* until the change in the mean within-cluster dispersion no longer changes. Here we can see that reduction saturates at *k=12*, which is chosen to the be the number of clusters detected in our data for all further analysis.
 
 The second plot is the same as the first but with the actual dispersion plotted instead of the relative change of dispersion.
 
@@ -396,7 +402,8 @@ The next three plots attempts to do this by describing the variation of the gene
 
 
 * (Top-Left) A background model is calibrated and outliers are identified based on the distribution of transcript counts within a cluster. The counts for each gene are assumed to follow a negative binomial distribution determined by a mean (average expression of a gene across all cells in a cluster), and a dispersion parameter. The dispersion is derived from the average variance-mean dependence, modelled as a logarithmic second order polynomial under the assumption that *most* genes are not differentially expressed between clusters, and that true biological variability should exceed this assumption.
-   As we can see from the Background plot, the upper and lower (violet and red) regression of the variance on the mean (as approximated by a second-order polynomial in logarithmic space) is higher than the variance of most genes (all grey dots below the red curve). This is expected since they are not differentially expressed, and so the genes above the background regression are therefore significant in the detection of outlier cells. The orange line is the local regression (moving average variance per mean) and is used purely for illustrative purposes.
+
+  As we can see from the Background plot, the upper and lower (violet and red) regression of the variance on the mean (as approximated by a second-order polynomial in logarithmic space) is higher than the variance of most genes (all grey dots below the red curve). This is expected since they are not differentially expressed, and so the genes above the background regression are therefore significant in the detection of outlier cells. The orange line is the local regression (moving average variance per mean) and is used purely for illustrative purposes.
    <!-- See: https://github.com/dgrun/RaceID3_StemID2_package/blob/master/R/RaceID.R#L280 -->
 
 * (Top-Right) Outlier cells are detected if the probability for that cell $$c$$ that a minimum number of genes $$G_{min}$$ of observing total counts $$T_{G_{min}}$$ is less than a specific threshold $$P_{thr}$$, as given by the red dotted line.
@@ -634,7 +641,7 @@ The genes shown as grey dots are not labelled because they are not so differenti
 > ### {% icon question %} Questions
 >
 > 1. How do we interpret this plot?
-> 1. Is *Gstm3* (at position 1.5, -2.8 on the MA plot) more significantly differentially expressed than *Ptma* (at position 3.6, 1.2)?
+> 1. Is *Gstm3* (at position 1.5, -2.7 on the MA plot) more significantly differentially expressed than *Ptma* (at position 3.6, 1.2)?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -677,15 +684,16 @@ The above figure shows where the combined expression of *Gstm3*, *St3gal4*, and 
 >
 > Observe the above expression plot and the overall clustering plot generated during the "*Visualising All Clusters*" stage.
 >
+> Are these genes (the top 3 DE genes from cluster 1) expressed where we expect them to be?
+>
 > {% include snippets/use_scratchbook.md %}
 >
-> Are these genes expressed where we expect them to be?
 >
 > > ### {% icon solution %} Solution
 > >
 > > They appear to overlap `c6` which is in close proximity to `c1`. There are two reasons why this might be the case:
 > > 1. `c1` is a small cluster and noisy cluster surrounded by more stably defined neighbours.
-> > 2. The three genes are more differentially expressed in `c1` than in `c6` if we look at them as independent entities, but their combined effect tells us that together they describe `c6` better.
+> > 2. The three genes are more differentially expressed in `c1` than in `c6`, but they are more highly expressed in `c6`. That is, their expression is more significant in `c1` compared to the rest of the genes in that cluster.
 > >
 > {: .solution}
 >
