@@ -154,10 +154,10 @@ Now we have information about the exon locations, but our question was which exo
 
 Let's remind ourselves that our objective is to find which exon contains the most SNPs. Therefore we have to join the file with the exon locations with the file containing the SNP locations (here "join" is just a fancy word for printing the SNPs and exons that overlap side-by-side).
 
-> ### {% icon tip %} Search bar
+> ### {% icon comment %} Search bar
 >
 > Different Galaxy servers may have tools available under different sections, therefore it is often useful to use the **search bar** at the top of the tool panel to find your tool.
-{: .tip}
+{: .comment}
 
 > ### {% icon hands_on %} Hands-on: Finding Exons
 >
@@ -177,14 +177,14 @@ Let's remind ourselves that our objective is to find which exon contains the mos
 >
 >    Remember that variations are possible due to using different versions of UCSC databases, as long as you have similar looking columns you did everything right :)
 >
-> > ### {% icon tip %} Tip: If things don't work...
+> > ### {% icon comment %} If things don't work...
 > >
 > > Did the Join tool error with a memory failure? Or is this step executing for a long time? Most likely a setting was missed when extracting the data from the UCSC Table Browser. Try again, double checking that:
 > >
 > >  * For both SNP and EXON: *"region"* is actually changed to `position` with value `chr22`
 > >  * For EXON: *"Create one BED record per"* `Coding Exons` is selected (*not* `Whole Gene` as for the SNP data)
 > >  * Carefully inspect the remaining Table Browser settings if these two most common reasons for problems were correct in your tool executions
-> {: .tip}
+> {: .comment}
 >
 {: .hands_on}
 
@@ -374,12 +374,12 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >
 >    When you click on a component, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.
 >
->    > ### {% icon tip %} Tip: Hiding intermediate steps
+>    > ### {% icon comment %} Hiding intermediate steps
 >    > When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which outputs to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
 >    > ![Asterisk for `out_file1` in the `Select First` tool](../../../../shared/images/workflow_editor_mark_output.png)
 >    >
 >    > If you click on this asterisk for any of the output datasets, then *only* files with an asterisk will be shown, and all outputs without an asterisk will be hidden. (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown.)
->    {: .tip}
+>    {: .comment}
 >
 > 3. Click the **asterisk** next to `out_file1` in the `Select First` and `Compare two Datasets` tools.
 >

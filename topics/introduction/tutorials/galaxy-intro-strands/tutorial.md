@@ -343,12 +343,12 @@ Now we want to get the genes on the reverse strand.  There are actually many way
 
 The rerun button can be a huge help as you run more complex tools.
 
-> ### {% icon tip %} Tip: Empty result?
+> ### {% icon comment %} Empty result?
 >
 > If you used Method 2 and didn't explicitly set the dataset, then you ran Filter on the `Genes, forward strand` dataset. None of the genes in the forward strand dataset have "-" in column 6 so all of them were filtered out from the result.
 >
 > Try again and set the dataset to your `Genes` dataset.
-{: .tip}
+{: .comment}
 
 
 Your history should now have (at least) 3 datasets in it, with names like:

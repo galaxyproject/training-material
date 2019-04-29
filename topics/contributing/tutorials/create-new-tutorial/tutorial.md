@@ -102,7 +102,6 @@ Each training material is related to a topic. All training materials (slides, tu
 │   ├── tutorial1
 │   │   ├── tutorial.md
 │   │   ├── slides.html
-│   │   ├── tools.yaml
 │   │   ├── data-library.yaml
 │   │   ├── workflows
 │   │   │   ├── workflow.ga
@@ -115,7 +114,6 @@ Once the topic has been chosen and you set up your contribution environment, you
 - an optional slides file `slides.md` in Markdown with slides to support the tutorial
 - a directory `tours` with Galaxy Interactive Tours to reproduce the tutorial
 - a directory `workflows` with workflows extracted from the tutorial
-- a YAML file `tools.yaml` with the description of needed tools to run the tutorial
 - a YAML file `data-library.yaml`  with the links to the input data needed for the tutorial
 
 The most important file is the `tutorial.md` where the content of the tutorial is. The other files are there to support the tutorial and make it robust and usable across many environments.
@@ -199,14 +197,13 @@ Now that you have the structure in place, you can then fill the tutorial per se.
 
 # Add some technical support (recommended)
 
-To able to run the tutorial, we need a Galaxy instance where the needed tools and the data are available. We need then to describe the required technical infrastructure.
+To able to run the tutorial, we need a Galaxy instance where the needed tools and the data are available. We need then to describe the required technical infrastructure. Tools are installed based on the workflows in the `workflows` directory.
 
 This description will be used to automatically set up a Docker Galaxy flavour, to set up an existing Galaxy instance and also to test if a public Galaxy instance is able to run the tool.
 
 The technical support are different files:
 
 - workflow file(s) in the `workflows` directory
-- the `tools.yaml` file with the description of needed tools to run the tutorial
 - the `data-library.yaml` file with the links to the input data needed for the tutorial
 - interactive tour file in the directory `tours` directory
 

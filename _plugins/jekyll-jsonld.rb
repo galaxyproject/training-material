@@ -10,6 +10,10 @@ module Jekyll
         "name": "Galaxy Training Network",
         "url": "https://galaxyproject.org/teach/gtn/"
       }
+      if not topic then
+        return '{}'
+      end
+
       topic_desc = {
         "@type": "CreativeWork",
         "name": "#{topic['title']}",
@@ -139,7 +143,7 @@ module Jekyll
         #"potentialAction":,
         #"sameAs":,
         #"subjectOf":,
-        # "url" described below    
+        # "url" described below
       }
 
       #info depending if tutorial, hands-on or slide level
@@ -203,7 +207,7 @@ module Jekyll
           data['timeRequired'] = "PT#{material['time_estimation'].upcase}"
         end
         # Description with questions, objectives and keypoints
-        
+
         if material.key?('questions') and not material['questions'].nil? and material['questions'].length > 0 then
           questions = material['questions'].join("\n - ")
           description.push("The questions this #{material['type']} addresses are:\n - #{questions}\n\n")
@@ -216,7 +220,7 @@ module Jekyll
           keypoints = material['keypoints'].join("\n - ")
           description.push("The keypoints are:\n - #{keypoints}\n\n")
         end
-        
+
         # Keywords
         if material.key?('tags') then
           data['keywords'] = material['tags'].join(', ')
@@ -245,23 +249,53 @@ module Jekyll
         for req in reqs do
           if req['type'] == "internal" then
             if req.key?('tutorials') then
-              coursePrerequisites.push(*req['tutorials'].map{ |x|
-                {
-                  "@type": "Course",
-                  "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{x}/tutorial.html",
-                  "name": "Hands-on for '#{x}' tutorial",
-                  "description": "#{x}",
-                  "learningResourceType": "hands-on tutorial",
-                  "interactivityType": "expositive",
-                  "provider": gtn
-                } 
-              })
+              for tuto in req['tutorials'] do
+                for page in site['pages'] do
+                  if page['name'] == 'tutorial.md' or page['name'] == 'slides.html' then
+                    if page['topic_name'] == req['topic_name'] and page['tutorial_name'] == tuto then
+                      #slides
+                      if page['name'] == 'slides.html' then
+                        coursePrerequisites.push({
+                          "@type": "Course",
+                          "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/slides.html",
+                          "name": "#{page['title']}",
+                          "description": "Slides for '#{page['title']}' tutorial",
+                          "learningResourceType": "slides",
+                          "interactivityType": "expositive",
+                          "provider": gtn
+                        })
+                        if page['hands_on_url'] then
+                          coursePrerequisites.push({
+                            "@type": "Course",
+                            "url": "#{page['hands_on_url']}",
+                            "learningResourceType": "hands-on tutorial",
+                            "interactivityType": "expositive",
+                          })
+                        end
+                      end
+                      #hands-on
+                      if page['name'] == 'tutorial.md' then
+                        coursePrerequisites.push({
+                          "@type": "Course",
+                          "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/tutorial.html",
+                          "name": "#{page['title']}",
+                          "description": "Hands-on for '#{page['title']}' tutorial",
+                          "learningResourceType": "hands-on tutorial",
+                          "interactivityType": "expositive",
+                          "provider": gtn
+                        })
+                      end
+                    end
+                  end
+                end
+              end
             else
               coursePrerequisites.push({
                 "@type": "CreativeWork",
                 "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/",
                 "name": "#{site['data'][req['topic_name']]['title']}",
-                "description": "#{site['data'][req['topic_name']]['title']}"
+                "description": "#{site['data'][req['topic_name']]['title']}",
+                "provider": gtn
               })
             end
           elsif req['type'] == "external" then
@@ -290,7 +324,7 @@ module Jekyll
         })
       end
       data['hasPart'] = parts
-      
+
       #Workflows
       if material.key?('workflows') then
         mentions.push(material['contributors'].map{ |x|
@@ -319,7 +353,7 @@ module Jekyll
       about.push(topic_desc)
       if topic.key?('edam_ontology') then
         about.push({
-          "@type": "DefinedTerm", 
+          "@type": "DefinedTerm",
           "@id": "http://edamontology.org/#{topic['edam_ontology']}",
           "inDefinedTermSet": "http://edamontology.org",
           "termCode": "#{topic['edam_ontology']}",

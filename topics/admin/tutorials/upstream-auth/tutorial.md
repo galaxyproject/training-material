@@ -107,13 +107,13 @@ For this exercise we will use a basic password file method for authenticating - 
 >
 {: .hands_on}
 
-> ### {% icon tip %} Tip: Access denied
+> ### {% icon comment %} Access denied
 >
 > If you see this message, it is because nginx is not correctly sending the `REMOTE_USER` or the `GX_SECRET` values.
 >
 > ![access denied message](../../images/access_denied.png)
 >
-{: .tip}
+{: .comment}
 
 
 # Testing
@@ -134,7 +134,7 @@ You should now be presented with a password dialog when attempting to load the G
 
 # API access
 
-If you wish your Galaxy to be accessible to command line clients (e.g. bioblend, blend4j, parsec), you will need to add an exception for authentication on the API. Galaxy will still be secure and protected, but non-browser access will be permitted with an API key. 
+If you wish your Galaxy to be accessible to command line clients (e.g. bioblend, blend4j, parsec), you will need to add an exception for authentication on the API. Galaxy will still be secure and protected, but non-browser access will be permitted with an API key.
 
 ```
 location /api/ {

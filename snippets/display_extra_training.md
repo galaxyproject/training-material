@@ -16,7 +16,11 @@
                                 {% assign sep = "-" %}
                             {% endif %}
                             {% if topic_tuto.hands_on %}
-                                {{ sep }} <a href="{{ site.baseurl }}/topics/{{ training.topic_name }}/tutorials/{{ topic_tuto.tutorial_name }}/tutorial.html">{% icon tutorial %} hands-on</a>
+                                {% if topic_tuto.hands_on_url %}
+                                    {{ sep }} <a href="{{ topic_tuto.hands_on_url }}">{% icon tutorial %} hands-on</a>
+                                {% else %}
+                                    {{ sep }} <a href="{{ site.baseurl }}/topics/{{ training.topic_name }}/tutorials/{{ topic_tuto.tutorial_name }}/tutorial.html">{% icon tutorial %} hands-on</a>
+                                {% endif %}
                             {% endif %}
                             </li>
                         {% endif %}

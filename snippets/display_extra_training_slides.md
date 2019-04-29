@@ -16,7 +16,11 @@
                             {% assign sep = " - " %}
                         {% endif %}
                         {% if topic_tuto.hands_on %}
-                            {% capture tuto_hands_on_desc %}{{ sep }}[{% icon tutorial %} hands-on]({{ site.baseurl }}/topics/{{ training.topic_name }}/tutorials/{{ topic_tuto.tutorial_name }}/tutorial.html){% endcapture %}
+                            {% if topic_tuto.hands_on_url %}
+                                {% capture tuto_hands_on_desc %}{{ sep }}[{% icon tutorial %} hands-on]({{ topic_tuto.hands_on_url }}){% endcapture %}
+                            {% else %}
+                                {% capture tuto_hands_on_desc %}{{ sep }}[{% icon tutorial %} hands-on]({{ site.baseurl }}/topics/{{ training.topic_name }}/tutorials/{{ topic_tuto.tutorial_name }}/tutorial.html){% endcapture %}
+                            {% endif %}
                             {% assign tuto_desc = tuto_desc | append: tuto_hands_on_desc %}
                         {% endif %}
                     {% assign topic_desc = topic_desc | append: tuto_desc %}
