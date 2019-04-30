@@ -597,19 +597,19 @@
 
 <p>Single-cell RNA (scRNA) sequencing is the technological successor to classical “bulk” RNA-seq, where samples are no longer defined at the tissue level but at the individual cell level. The bulk RNA-seq methods seen in <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">previous hands-on material</a> would give the average expression of genes in a sample, whilst overlooking the distinct expression profiles given by the cell sub-populations due to their heterogeneity.</p>
 
-<p>The rise of scRNA sequencing provides the means to explore this hetereogeneity by examining samples at the individual cell level, enabling a greater understanding of the development and function of such samples, by the characteristics of their constituent cells.</p>
+<p>The rise of scRNA sequencing provides the means to explore this heterogeneity by examining samples at the individual cell level, enabling a greater understanding of the development and function of such samples, by the characteristics of their constituent cells.</p>
 
-<p>Consider the heterogenity of cells sampled from bone marrow, where hematopoietic stem cells can give rise to many different cell types within the same tissue:</p>
+<p>Consider the heterogeneity of cells sampled from bone marrow, where hematopoietic stem cells can give rise to many different cell types within the same tissue:</p>
 
 <figure id="figure-1"><img src="/training-material/topics/transcriptomics/images/scrna_hematopoiesis.png" alt="Cell Differentiation of Hematopoietic Stem cells" title="Cell Differentiation of Hematopoietic Stem cells. Image Source: https://commons.wikimedia.org/wiki/File:Hematopoiesis_simple.svg" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Cell Differentiation of Hematopoietic Stem cells. Image Source: https://commons.wikimedia.org/wiki/File:Hematopoiesis_simple.svg</figcaption></figure>
 
-<p>The genes expressed by these cells at different developmental time points can be subtle, but generally can be classified into discrete cell subpopulations or under statistical clustering methods such as PCA or tSNE. Cells in the same cluster exhibit similar profiles of differential expression in the same set of related genes, compared to cells in other clusters. By identifying significant genes in each cluster, cell types and cell developmental heirarchies can be inferred based on the proximity of these clusters to one another.</p>
+<p>The genes expressed by these cells at different developmental time points can be subtle, but generally can be classified into discrete cell sub-populations or under statistical clustering methods such as PCA or tSNE. Cells in the same cluster exhibit similar profiles of differential expression in the same set of related genes, compared to cells in other clusters. By identifying significant genes in each cluster, cell types and cell developmental hierarchies can be inferred based on the proximity of these clusters to one another.</p>
 
 <p>Other than cell development, there are many more factors that can shape the level of gene expression exhibited by a given cell. Intercellular cell-signalling can block or enhance specific transcripts, the total amount of transcripts of a cell increases with the cell-cycle, or the proximity of a cell within a tissue to nutrients or oxygen.</p>
 
 <figure id="figure-2"><img src="/training-material/topics/transcriptomics/images/scrna_nbt3711.png" alt="Facets of Cellular Identity" title="Revealing the vectors of cellular identity with single-cell genomics, Nature Biotechnology, 2016" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Revealing the vectors of cellular identity with single-cell genomics, Nature Biotechnology, 2016</figcaption></figure>
 
-<p>This tutorial is in part inspired by aspects of the <a href="https://hemberg-lab.github.io/scRNA.seq.course/">Hemberg workflow</a> at the Sanger institute, as well as the <a href="https://github.com/CGATOxford/UMI-tools">CGATOxford workflow</a> which provides the <strong>UMI-tools</strong> suite that we make use of. The barcoding follows the <a href="https://doi.org/10.1186/s13059-016-0938-8">CEL-Seq2 protocol</a> mentioned in the <a href="/training-material/topics/transcriptomics/tutorials/scrna-umis/tutorial.html"><em>Understanding Barcodes</em></a> hands-on, and uses the same lane configuration as utilized by the <a href="https://www.ie-freiburg.mpg.de/gruen">Freiburg MPI Grün lab</a>.</p>
+<p>This tutorial is in part inspired by aspects of the <a href="https://hemberg-lab.github.io/scRNA.seq.course/">Hemberg workflow</a> at the Sanger institute, as well as the <a href="https://github.com/CGATOxford/UMI-tools">CGATOxford workflow</a> which provides the <strong>UMI-tools</strong> suite that we make use of. The barcoding follows the <a href="https://doi.org/10.1186/s13059-016-0938-8">CEL-Seq2 protocol</a> mentioned in the <a href="/training-material/topics/transcriptomics/tutorials/scrna-umis/tutorial.html"><em>Understanding Barcodes</em></a> hands-on, and uses the same lane configuration as utilised by the <a href="https://www.ie-freiburg.mpg.de/gruen">Freiburg MPI Grün lab</a>.</p>
 
 <h1 class="no_toc" id="analysis-strategy">Analysis Strategy</h1>
 
@@ -660,7 +660,7 @@
 
 <p>In this tutorial we will be analysing scRNA-seq data of bone marrow cells taken from a single C57 mouse by <em>Herman et al.</em> (<a href="https://doi.org/10.1038/nmeth.4662">2018</a>) and producing a count matrix that we can use for later analysis.</p>
 
-<p>The size of scRNA files (.fastq) are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expediate the analysis by using a smaller subset of actual batch data. We will also be using <em>Mus Musculus</em> annotation data (.gtf) from the  <a href="ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/vertebrate_mammalian/Mus_musculus/">NCBI RefSeq</a> track, as well as a barcodes file (.tsv).</p>
+<p>The size of scRNA files (.fastq) are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expedite the analysis by using a smaller subset of actual batch data. We will also be using <em>Mus Musculus</em> annotation data (.gtf) from the  <a href="ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/vertebrate_mammalian/Mus_musculus/">NCBI RefSeq</a> track, as well as a barcodes file (.tsv).</p>
 
 <figure id="figure-4"><img src="/training-material/topics/transcriptomics/images/scrna_workflow_upper.png" alt="Workflow Upper" title="Single batch processing" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Single batch processing</figcaption></figure>
 
@@ -684,6 +684,10 @@
     <li>
       <p>Import the subset FASTQ paired data from <a href="https://zenodo.org/record/2581041"><code class="highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)</p>
 
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2581041/files/SRR5683689_1.subset.fastq
+https://zenodo.org/record/2581041/files/SRR5683689_2.subset.fastq
+</code></pre></div>      </div>
+
       <blockquote class="tip">
 
         <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
@@ -702,10 +706,6 @@
           <li>Select <strong>Paste/Fetch Data</strong></li>
           <li>
             <p>Paste the link into the text field</p>
-
-            <p><code class="highlighter-rouge">https://zenodo.org/record/2581041/files/SRR5683689_1.subset.fastq</code></p>
-
-            <p><code class="highlighter-rouge">https://zenodo.org/record/2581041/files/SRR5683689_2.subset.fastq</code></p>
           </li>
           <li>
             <p>Change <strong>Genome</strong> to <code class="highlighter-rouge">GRCm38/mm10</code></p>
@@ -803,7 +803,7 @@ For a more detailed understanding of the naming conventions used in generating o
   <blockquote class="solution">
     <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>The input FASTQ files contained reads from all barcodes, including those with sequencing errors, resulting in a larger pool of detected barcodes than those desired. (e.g. Cell barcode <code class="highlighter-rouge">AAATTT</code> could have single basepair sequencing errors that could modify it into <code class="highlighter-rouge">ATATTT</code> or <code class="highlighter-rouge">AAACTT</code>, etc).</p>
+    <p>The input FASTQ files contained reads from all barcodes, including those with sequencing errors, resulting in a larger pool of detected barcodes than those desired. (e.g. Cell barcode <code class="highlighter-rouge">AAATTT</code> could have single base-pair sequencing errors that could modify it into <code class="highlighter-rouge">ATATTT</code> or <code class="highlighter-rouge">AAACTT</code>, etc).</p>
 
     <p>This information is included in the Log file of <strong>UMI-tools extract</strong> which contains all the parameters used to run, as well as <em>INFO</em> lines that indicate how many reads were read, and how many output. In this case: 134431 reads were retained (&gt;90% of input reads).</p>
   </blockquote>
@@ -903,7 +903,7 @@ For a more detailed understanding of the naming conventions used in generating o
         <ul>
           <li><code class="highlighter-rouge">90%</code> is amazing, reserved for bulk RNA-seq which typically has high coverage</li>
           <li><code class="highlighter-rouge">70%</code> is weak for bulk RNA-seq, but good for single-cell RNA-seq</li>
-          <li>This a small subset of a real dataset, but one would explect that 6 million mapped reads would be enough to generate a downstream analysis.</li>
+          <li>This a small subset of a real dataset, but one would expect that 6 million mapped reads would be enough to generate a downstream analysis.</li>
         </ul>
       </li>
     </ol>
@@ -952,7 +952,7 @@ For a more detailed understanding of the naming conventions used in generating o
 
 </blockquote>
 
-<p>The fields of the BAM file can be better explained at section 1.4 of <a href="https://samtools.github.io/hts-specs/SAMv1.pdf">the SAM specification</a>, but we will summarize the main fields of interest here:</p>
+<p>The fields of the BAM file can be better explained at section 1.4 of <a href="https://samtools.github.io/hts-specs/SAMv1.pdf">the SAM specification</a>, but we will summarise the main fields of interest here:</p>
 
 <ul>
   <li><code class="highlighter-rouge">SRR568..._GCATTC_CTTCGT</code>: The <em>readname</em> appended by <code class="highlighter-rouge">_</code>, the cell barcode, another <code class="highlighter-rouge">_</code>, and then the UMI barcode.</li>
@@ -960,7 +960,7 @@ For a more detailed understanding of the naming conventions used in generating o
 </ul>
 
 <blockquote class="question">
-  <h3 id="question-what-does-the-flag-value-of-16-tell-us-about-this-read"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> What does the FLAG value of 16 tell us about this read?</h3>
+  <h3 id="question-what-does-the-alignment-flag-value-of-16-tell-us-about-this-read"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> What does the alignment flag value of 16 tell us about this read?</h3>
 
   <p><!-- TODO This information needs to be integrated into an actual tool -->
   We can interactively see what the different FLAG values mean by feeding values into the SAM specification to the <a href="https://broadinstitute.github.io/picard/explain-flags.html">Picard web tool</a></p>
@@ -977,13 +977,13 @@ For a more detailed understanding of the naming conventions used in generating o
   <li><code class="highlighter-rouge">chr1</code> <code class="highlighter-rouge">3439991</code>: The position and base-pair of alignment of the first base of the sequence.</li>
   <li>A series of quality fields, with the main contributors being  the sequence and sequence quality strings.</li>
   <li><code class="highlighter-rouge">NH</code>: The number of hits for  this read. If it is multiply mapped, then the number of multiples will be shown (here <code class="highlighter-rouge">1</code>, so not multiply mapped).</li>
-  <li><code class="highlighter-rouge">HI</code>: Which number this particular read is in the series of (potentially) multi-mapped reads (here <code class="highlighter-rouge">1</code>, not neccesarily meaning the first or ‘better’).</li>
+  <li><code class="highlighter-rouge">HI</code>: Which number this particular read is in the series of (potentially) multi-mapped reads (here <code class="highlighter-rouge">1</code>, not necessarily meaning the first or ‘better’).</li>
   <li><code class="highlighter-rouge">nM</code>: The number of base mismatches in the alignment of this read to the reference (here <code class="highlighter-rouge">1</code>).</li>
 </ul>
 
 <h4 id="filtering-the-bam-file">Filtering the BAM File</h4>
 
-<p>If we perform counting on the current BAM file we will be counting all reads, even the undesireable ones such as those that did not align so optimally.</p>
+<p>If we perform counting on the current BAM file we will be counting all reads, even the undesirable ones such as those that did not align so optimally.</p>
 
 <p>The main filtering steps performed on our reads so far have been relatively silent due to the ‘default’ parameters used.</p>
 <ul>
@@ -991,7 +991,7 @@ For a more detailed understanding of the naming conventions used in generating o
   <li><em>RNA-STAR</em> - As seen in the log, we lose 25% of our reads for being too short or being multiply mapped.</li>
 </ul>
 
-<p>Another filtering measure we can apply is to keep reads that we are confident about, e.g those with a minimum number of mismatches to the reference within an acceptable range.</p>
+<p>Another filtering measure we can apply is to keep reads that we are confident about, e.g those with a minimum number of mismatches to the reference within an acceptable range. Specifically, we want to keep all reads that align to the forward or reverse strand that also have less that 3 mismatches to the reference, and are also mapped only once to the reference.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
@@ -1085,6 +1085,27 @@ For a more detailed understanding of the naming conventions used in generating o
     </li>
   </ol>
 
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <ol>
+    <li>Why are we filtering only for alignment flags <code class="highlighter-rouge">0</code> and <code class="highlighter-rouge">16</code>?</li>
+    <li>What do the tag filters <code class="highlighter-rouge">nM:&lt;3</code> and <code class="highlighter-rouge">NH:&lt;2</code> do?</li>
+    <li>What is happening at the rules stage?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Alignment flags <code class="highlighter-rouge">0</code> and <code class="highlighter-rouge">16</code> specify that we wish to only keep reads that align to the forward and reverse strands.</li>
+      <li>We are keeping reads that have a number of mismatches (<code class="highlighter-rouge">nM</code>) to the reference of less than 3, and has a number of hits (<code class="highlighter-rouge">NH</code>) across the reference of less than 2 (i.e. it is not a multiply-mapped read).</li>
+      <li><a href="https://en.wikipedia.org/wiki/Boolean_expression">Boolean expressions</a> are applied that state that <em>either</em> conditions 1 or 2 can happen, in conjunction with rules 3 and 4 happening.</li>
+    </ol>
+
+  </blockquote>
 </blockquote>
 
 <h2 id="quantification">Quantification</h2>
@@ -1229,7 +1250,7 @@ With all the relevant data now in our BAM file, we can actually perform the coun
     <li><strong>UMI-tools counts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sorted BAM file”</em>: <code class="highlighter-rouge">out_file1</code> (output of <strong>FeatureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“UMI Extract Method”</em>: <code class="highlighter-rouge">Barcodes are contained at the end of the read seperated by a delimiter</code></li>
+        <li><em>“UMI Extract Method”</em>: <code class="highlighter-rouge">Barcodes are contained at the end of the read separated by a delimiter</code></li>
         <li><em>“Bam is paired-end”</em>:<code class="highlighter-rouge">No</code></li>
         <li><em>“Method to identify group of reads”</em>:<code class="highlighter-rouge">Unique</code></li>
         <li><em>“Extra Parameters”</em>:
@@ -1250,7 +1271,7 @@ With all the relevant data now in our BAM file, we can actually perform the coun
 <p>At this stage, we now have a tabular file containing genes/features as rows, and cell labels as headers.</p>
 
 <blockquote class="question">
-  <h3 id="question-question-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <h3 id="question-question-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
   <ol>
     <li>How many genes do we have in the matrix?</li>
@@ -1258,7 +1279,7 @@ With all the relevant data now in our BAM file, we can actually perform the coun
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>
@@ -1293,7 +1314,7 @@ The number of columns can be seen by scrolling the file preview window completel
     <li>
       <p><em>Quality Filtering</em>:</p>
 
-      <p>Reads with aligment mismatches greater than 2 were discarded, and only non multi-mapped reads that mapped to the forward or reverse strand were kept</p>
+      <p>Reads with alignment mismatches greater than 2 were discarded, and only non multi-mapped reads that mapped to the forward or reverse strand were kept</p>
     </li>
     <li>
       <p><em>Quantification</em>:</p>
@@ -1332,14 +1353,14 @@ The number of columns can be seen by scrolling the file preview window completel
 
 <p>The first step merely requires us to run the same workflow on each of our batches, using the exact same inputs except for the FASTQ paired data. The second step requires a minimal level of interaction from us; namely using a merge tool and selecting our matrices.</p>
 
-<h3 id="data-upload-and-organization-1">Data upload and organization</h3>
+<h3 id="data-upload-and-organisation">Data upload and organisation</h3>
 
 <p>The count matrix we have generated in the previous section is too sparse to perform any reasonable analysis upon, and constitutes data only of a single batch. Here we will use more populated count matrices from multiple batches, under the assumption that we now know how to generate each individual one of them using the steps provided in the previous section. This data is available at <a href="https://zenodo.org/record/2581041"><code class="highlighter-rouge">Zenodo</code></a>.</p>
 
 <p>Once again, file naming is important, and so we will rename our matrix files appropriately to the plate and batch they are supposed to originate from.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-data-upload-and-organization-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload and organization</h3>
+  <h3 id="hands_on-hands-on-data-upload-and-organisation"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload and organisation</h3>
 
   <ol>
     <li>
@@ -1428,7 +1449,7 @@ https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-question-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <h3 id="question-question-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
   <ol>
     <li>Why is it required to change the column headers in the Full matrix?</li>
@@ -1436,7 +1457,7 @@ https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>Although the cell headers in each batch matrix is the same, the cells they label are <em>not</em> the same and need to be relabelled in the final matrix to tell us which batch they originated from.</li>
@@ -1471,7 +1492,7 @@ https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
 <p>Once the merge is complete, we can now peek at our full combined matrix by once again clicking on the file name to see a small summary.</p>
 
 <blockquote class="question">
-  <h3 id="question-question-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <h3 id="question-question-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
   <p>Each of these matrices/batches come from the same organism.</p>
 
@@ -1482,7 +1503,7 @@ https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>
@@ -1595,7 +1616,7 @@ https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Barcodes → Batches]
 001-096: B1 , B3 , B5 , B7
-097-192: B2 , B2 , B6 , B8
+097-192: B2 , B4 , B6 , B8
 
 [Plates → Batches]
 1: B1 , B2 , B3 , B4
@@ -1621,7 +1642,7 @@ https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
                   <ul>
                     <li><em>“Barcode Range: Start”</em>:<code class="highlighter-rouge">1</code></li>
                     <li><em>“Barcode Range: End”</em>:<code class="highlighter-rouge">96</code></li>
-                    <li><em>“Batches utilizing this Range”</em>:<code class="highlighter-rouge">2,4</code></li>
+                    <li><em>“Batches utilizing this Range”</em>:<code class="highlighter-rouge">1,3</code></li>
                   </ul>
                 </li>
               </ul>
@@ -1632,7 +1653,7 @@ https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
                   <ul>
                     <li><em>“Barcode Range: Start”</em>:<code class="highlighter-rouge">97</code></li>
                     <li><em>“Barcode Range: End”</em>:<code class="highlighter-rouge">192</code></li>
-                    <li><em>“Batches utilizing this Range”</em>:<code class="highlighter-rouge">1,3</code></li>
+                    <li><em>“Batches utilizing this Range”</em>:<code class="highlighter-rouge">2,4</code></li>
                   </ul>
                 </li>
               </ul>
@@ -1698,12 +1719,12 @@ https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
 </ol>
 
 <blockquote class="question">
-  <h3 id="question-question-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <h3 id="question-question-6"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
   <p>The count matrix that is output from this tool has only half the number of cells as the original input count matrix. Why is this?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <p>Because only half the barcodes in each batch were real. The <em>UMI-tools extract</em> took the entire barcodes file to filter against each batch, and the <em>UMI-tools count</em> also took the entire barcodes file to count against each batch.</p>
 
@@ -1712,7 +1733,7 @@ https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
   </blockquote>
 </blockquote>
 
-<p>With this, we now have a count-matrix that can be used for further downstream analyis.</p>
+<p>With this, we now have a count-matrix that can be used for further downstream analysis.</p>
 
 <!--
 Factoid: We can convert the number of UMIs to the number of molecules using a transformation script.
@@ -1720,7 +1741,7 @@ Factoid: We can convert the number of UMIs to the number of molecules using a tr
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p>In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our reads and into the read headers, in order to preserve them during mapping. We have discovered how these barcoded reads are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against reads that are PCR duplicates. Finally, we have learned how to combine seperate batch data as well as being able to check and correct against cross-contamination.</p>
+<p>In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our reads and into the read headers, in order to preserve them during mapping. We have discovered how these barcoded reads are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against reads that are PCR duplicates. Finally, we have learned how to combine separate batch data as well as being able to check and correct against cross-contamination.</p>
 
 <figure id="figure-10"><img src="/training-material/topics/transcriptomics/images/scrna_workflow.svg" alt="Recap of workflow" title="A recap of the entire workflow" /><figcaption><span class="figcaption-prefix">Figure 10:</span> A recap of the entire workflow</figcaption></figure>
 
