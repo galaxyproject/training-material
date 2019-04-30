@@ -435,7 +435,7 @@ With all the relevant data now in our BAM file, we can actually perform the coun
 >
 > 1. **UMI-tools counts** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Sorted BAM file"*: `out_file1` (output of **FeatureCounts** {% icon tool %})
->    - *"UMI Extract Method"*: `Barcodes are contained at the end of the read seperated by a delimiter`
+>    - *"UMI Extract Method"*: `Barcodes are contained at the end of the read separated by a delimiter`
 >    - *"Bam is paired-end"*:`No`
 >    - *"Method to identify group of reads"*:`Unique`
 >    - *"Extra Parameters"*:

@@ -31,7 +31,7 @@ time_estimation: 3H
 key_points:
   - Clustering single-cell RNA-seq data is often noisy
   - RaceID can be used to cluster cells based on the their gene expression profiles
-  - StemID describes a heirarchal relationship between clusters to find multipotent progenitor stem cells to provide an understanding of cell development
+  - StemID describes a hierarchical relationship between clusters to find multipotent progenitor stem cells to provide an understanding of cell development
   - FateID predicts the potential lineages that cells within specific clusters are inclined towards
 contributors:
   - mtekman
@@ -80,7 +80,7 @@ For now we will work with the count matrix alone.
 >    ```
 >    https://zenodo.org/record/1511582/files/intestinalData.tsv
 >    ```
-> 
+>
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
@@ -99,7 +99,7 @@ For now we will work with the count matrix alone.
 > > ### {% icon solution %} Solution
 > >
 > > A summary of our dataset is given by expanding the file preview window by clicking on the file name.
-> > 
+> >
 > > 1. 20,269 lines, where lines/rows denote our genes.
 > > 2. Scroll the mini-preview window to the right to see that the number of cells are 431
 > >
@@ -173,7 +173,7 @@ We can see this for ourselves by extracting the headers, and reformatting them t
 > 2. Which cell phenotype is least represented in the count matrix?
 >
 > > ### {% icon solution %} Solution
-> > 
+> >
 > > 1. There are 5 types of cells in our count matrix: *I5d*, *II5d*, *III5d*, *IV5d*, and *V5d*.
 > > 2. There are only 48 *IV5d* cells compared to the other types which have 95 or 96.
 > {: .solution}
@@ -231,11 +231,11 @@ The top row shows the count distributions of the Library Size and Number of Feat
 * (Top-Left) Library Size (total number of transcripts per cell)
 
     A lower-tail heavy distribution centred around 3-4 Log10 (~3000) counts per cell , with a few cells having library sizes containing a handful of counts (0-1000).
-    
+
 * (Top-Right) Feature Set (total number of detectable genes per cell)
 
     Another lower-tail heavy distribution with a peak centred around $$10^{3.5}$$ counts. Cells with a low number of features are hard to compare with other cells due to incomplete data. It is possible that these low feature cells (< 100 genes) are rare types and that we should impute their missing values, but it is often more likely the case that these are simply just low-quality cells that will add noise to the clustering.
-    
+
 
 The bottom row shows the count distributions of the Library Size and Number of Features of the filtered data:
 
@@ -246,7 +246,7 @@ The bottom row shows the count distributions of the Library Size and Number of F
 >
 > The minimum total filtering threshold of 3000 chosen for this dataset is derived from analysing the *Cross-Contamination Plots* from the [Pre-processing of Single-Cell RNA Data]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna_preprocessing/tutorial.md %}).
 >
-> This threshold is dependent primarily on the capture efficiency of the cells that were sequenced, with some cell types being easier to capture than others. For example, neuron cells would have a lower filtering threshold of ~1500 compared to the ~3000 used for haemopoietic cells.
+> This threshold is dependent primarily on the capture efficiency of the cells that were sequenced, with some cell types being easier to capture than others. For example, neuron cells would have a lower filtering threshold of ~1500 compared to the ~3000 used for hematopoietic cells.
 >
 {: .comment}
 
@@ -275,7 +275,7 @@ The bottom row shows the count distributions of the Library Size and Number of F
 > > 3. **Yes**
 > >    * *Cells:* These are the observations of your dataset, and the more observations you have, the better the model will be. At minimum, 60% of your initial cells should be retained, though this will depend on the quality of your dataset.
 > >    * *Genes:* These are the variables of your dataset, and the more variables you have, the more needlessly complex the model will be. Only a few variables will be relevant in modelling our observations, and it these variables we wish to discover. Most of your genes will *not* be differentially expressed between different cell types and so we are not interested in those genes (though they are very useful to have in the initial matrix, as they serve as a stable background metric to measure the significantly differentially expressed genes against). It is perfectly acceptable to perform a single-cell RNA-seq analysis with as few as 500 (differentially expressed) genes.
-> > 
+> >
 > {: .solution}
 >
 {: .question}
@@ -330,7 +330,7 @@ Here we assume that there is no unwanted technical or biological variability in 
 >        - *"Use Defaults?"*: `Yes`
 >    - In *"tSNE and FR"*:
 >        - *"Use Defaults?"*: `Yes`
-> 
+>
 {: .hands_on}
 
 
@@ -534,14 +534,14 @@ The main issue with visualising this data is that as before, we have C cells tha
 Preserving these higher dimensional distances in lower dimensional space is a complex and ongoing challenge in computer science, but there are various commonly-used methods such as PCA and tSNE often encountered in single cell RNA-seq datasets. For more information, see the box below.
 
 > ### {% icon details %} Details: PCA, tSNE, and Force-Directed Graphs
-> 
+>
 > * **PCA** (Principle Component Analysis)
 >   * This linearly separates the N-dimensional data into N distinct components (or 'axes') of variability, sorted in descending order of variability (i.e. the first component explains most of the variation in the data, the second component contributes the second most amount of variation in the data, etc). For more information on how these components are derived, see [*Eigendecomposition of a matrix*](https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix).
 >   * PCA has the benefit of being deterministic, uncostly to implement, and usually good enough to find clear differences in the data if the data is not complex.
 >
 > * **tSNE** (T-distributed Stochastic Neighbour Embedding)
 >   * PCA rests on the assumption that each of its N components are independent of one another, but this is often rarely the case and data usually exhibits more complexity than that of a linearly separable dataset. In these situations, tSNE outshines PCA, by modelling a more complex relationship between datapoints, and often produces better looking plots with more clearly defined clusters. This is especially the case in single-cell RNA-seq data which tends to describe a continuous blend of cell phenotypes, instead of discrete rigidly-defined types.
-> 
+>
 > * **Force-Directed** Graphs
 >   * These graphs can be better thought of as particle simulations, instead of performing any dimensional reduction, since all that is required is a connected graph. Forces are added to the connections between the nodes on the graph based on the strength of the connection, and then the whole system simulates the interplay of these forces for a number of iterations or until the system comes to rest. In general, these tend to yield much more nicely separated plots than tSNE, but it is not always the case and so it is always good practice to compare both force-directed and tSNE plots.
 >
@@ -561,7 +561,7 @@ The figure above displays the initial (left top/bottom) clusters detected during
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Two extra clusters are added in the final plots `c13` and `c14` 
+> > 1. Two extra clusters are added in the final plots `c13` and `c14`
 > > 1. For example, `c11` appears to be an isolated well-defined cluster of cells, distinct in both projections. At the edge of the main cluster body in both projections lies `c1`, but seems to be in closer proximity to `c13` in the tSNE map than in the F-R layout. In both projections, `c2`, `c3`, and `c4` are large noisy clusters, but `c2` and `c4` appear to be closer to one another in the F-R layout.
 > > 1. `c1` was better defined by a smaller set of genes than `c2`, `c3`, or `c4,` which listed less differentially expressed genes as their most significant genes.
 > >
@@ -598,15 +598,15 @@ There are three ways to do this in RaceID:
  1. **MA Plot**
 
     Perform a pairwise comparison between two clusters (or two sets of clusters) to see specifically which genes are differentially expressed between them.
-    
+
  1. **Subset Cell Analysis**
 
     If the cell headers have names that contain information prior to the clustering about the different cell phenotypes, then it might be interesting to see if the cells do cluster as expected.
-    
+
  1. **Specific Expression Plots**
 
     It may be of interest to look at how specific genes which may be markers for a cell type are expressed across different clusters, with the expectation that they are localised to a specific cluster depending on how specific the marker is.
-    
+
 
 ## Differential Gene Analysis Between Two Clusters
 
@@ -647,9 +647,9 @@ The genes shown as grey dots are not labelled because they are not so differenti
 > >
 > > 1. Interpretation of plot:
 > >   * The vertical axis displays the difference between cluster 3 and cluster 1, where the total counts of a gene in cluster 3 are subtracted by the total counts of a gene in cluster 1. Therefore, a gene which is in the negative portion of the vertical axis has more expression in cluster 1.
-> >   * The horizontal axis displays the average expression of a gene in both clusters, and so serves as a yardstick to estimate how expressive that gene is overall. 
+> >   * The horizontal axis displays the average expression of a gene in both clusters, and so serves as a yardstick to estimate how expressive that gene is overall.
 > > 1. *Gstm3* has a lower average expression in both clusters, than *Ptma* which is higher on the horizontal axis. However, *Gstm3* is expressed significantly more in Cluster 1, whereas *Ptma* is expressed only slightly more in Cluster 3. Overall, *Gstm3* is more differentially expressed than *Ptma*, and is up-regulated in Cluster 3, although with fewer total mRNA counts.
-> > 
+> >
 > {: .solution}
 >
 {: .question}
@@ -704,7 +704,7 @@ The above figure shows where the combined expression of *Gstm3*, *St3gal4*, and 
 
 It was [mentioned previously](#details-details-continuous-phenotypes-vs-discrete-clustering-methods) that the clusters displayed are not discrete entities, but are related through some continuous topology as inferred by intermediate cell types.
 
-**StemID** is a tool (part of the **RaceID** package) that makes use of this topology to derive a hierarchy of these cell types by constructing a cell lineage tree, rooted at the cluster(s) believed to best describe multipotent progenitor stem cells, and terminating at the clusters which describe more mature cell types. Cell trajectories are identified as a sequence of links between the medoids of different clusters, where the links between clusters are assigned scores that reflect the level of multipotency of the cell type indicated by the cluster. 
+**StemID** is a tool (part of the **RaceID** package) that makes use of this topology to derive a hierarchy of these cell types by constructing a cell lineage tree, rooted at the cluster(s) believed to best describe multipotent progenitor stem cells, and terminating at the clusters which describe more mature cell types. Cell trajectories are identified as a sequence of links between the medoids of different clusters, where the links between clusters are assigned scores that reflect the level of multipotency of the cell type indicated by the cluster.
 
 ## Computing the Lineage Tree
 
@@ -745,7 +745,7 @@ This is clarified slightly better with the heatmap (bottom-right) that shows the
 > ### {% icon question %} Questions
 >
 > Based on the above plots, which cluster is most likely to be the main progenitor of the others?
-> 
+>
 > > ### {% icon solution %} Solution
 > >
 > > On first glance, it appears that `c2` would be the progenitor, due to the number of links it has and its more central position in the cluster plot.
@@ -763,7 +763,7 @@ This is clarified slightly better with the heatmap (bottom-right) that shows the
 > >            ├─ c5
 > >            └─ c1
 > >               └─ c6
-> > 
+> >
 > >
 > {: .solution}
 >
@@ -843,7 +843,7 @@ The vertical names along the heatmap are the cells from `c3` being compared to a
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Each `c3` cell in the heatmap is "pulled" towards different clusters along a straight line in the MST. The degree to which it is pulled is given by the strength of the correlation of that cell to that cluster. For example cell *I5d_45* has a very strong correlation to `c12` and `c10`, and so it apppears on the MST as a single (3) lying in between the `c3`,`c12`,`c10` triangle.
+> > 1. Each `c3` cell in the heatmap is "pulled" towards different clusters along a straight line in the MST. The degree to which it is pulled is given by the strength of the correlation of that cell to that cluster. For example cell *I5d_45* has a very strong correlation to `c12` and `c10`, and so it appears on the MST as a single (3) lying in between the `c3`,`c12`,`c10` triangle.
 > > 1. 10 `c3` cells (III5d-53 to I5d-48) show negative (blue) correlation to these clusters, and these same cells have a strong correlation to `c5` or `c1` clusters. We can see these cells plotted along the links to these two clusters.
 > > 1. The `c3` cells strongly correlated to `c2` and `c4` are also strongly correlated to `c9`, `c8`, and `c11` - i.e. these cells have noisy profiles and are outliers in `c3`. Note that the 10 cells we identified in the previous question are not strongly correlated to other clusters except `c5` and `c1`, meaning they have very clear trajectories.
 > >
@@ -897,7 +897,7 @@ Here we will see if we can see any pseudo-time dynamics taking place between the
 
 ![Heatmap FateID]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_fateid.png %} "FateID Heatmap")
 
-The heatmaps generated depict the same data, but at different "heat" scales to better colourise the map. The genes here are not genes, but are gene expression modules, which can be interpreted as gene motifs that are present in both `c1` and `c5`, but at different levels of expression. 
+The heatmaps generated depict the same data, but at different "heat" scales to better colourise the map. The genes here are not genes, but are gene expression modules, which can be interpreted as gene motifs that are present in both `c1` and `c5`, but at different levels of expression.
 
 > ### {% icon question %} Questions
 >
