@@ -27,7 +27,7 @@ requirements:
         - scrna-umis
         - scrna_preprocessing
 
-time_estimation: 2H
+time_estimation: 3H
 key_points:
   - Clustering single-cell RNA-seq data is often noisy
   - RaceID can be used to cluster cells based on the their gene expression profiles
