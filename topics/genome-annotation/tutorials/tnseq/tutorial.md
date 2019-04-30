@@ -30,15 +30,14 @@ In microbiology, identifying links between genotype and phenotype is key to unde
 ## Overview of Transposon insertion Sequencing
 {:.no_toc}
 
-Transposon insertion sequencing is a technique used to functionally annotate bacterial genomes. The genome is saturated by transposon insertions, and the insertion of a transposon being disruptive for the region, the analysis of insertion frequency provides information on how the bacteria fitness change due to this disruption (see [Transposon insertion sequencing method](#method)) :
+Transposon insertion sequencing is a technique used to functionally annotate bacterial genomes. The genome is saturated by transposon insertions, and the insertion of a transposon being disruptive for the region, the analysis of insertion frequency provides information on how the bacteria fitness change due to this disruption (see [Transposon insertion sequencing method](#figure-1)) :
  - An insertion mutant with lower fitness decrease frequency in the population
  - An increased fitness lead to increased frequency in the population
 
-| Transposon insertion sequencing method |
-|:--------------:|
-|<img name="method" src="../../images/tnseq/principle_tnseq.png" width='70%' alt= "Illustration of tnseq Method" >|
-| **a. Data production** The initial population genomes are mutated so that the genome is saturated with transposon insertions.  A library is *saturated* if in the genomes across the whole population of bacteria, each potential insertion site has at least one insertion. The population is then divided into several media containing different growth conditions. After growth, the regions flanking the insertion are amplified and sequenced, allowing to determine the location of the insertion. **b. Analysis** After alignement to the reference genome, the resulting data will show a discrete repartition of reads on each TA site. If a gene present several insertions, like the two leftmost genes in *Condition A*, it means that its disruption has little or no impact to the bacterial growth. On the other hand, when a gene shows no insertions at all, like the rightmost gene in *Condition A*, is means that any disruption in this gene killed the bacteria, meaning its a gene essential to bacteria survival. If the library is sufficiently saturated, there is a clear threshold between essential and non-essential genes when you analyze the insertion rate per gene. From {% cite Chao2016 %}|
-||
+
+
+
+ ![Illustration of tnseq Method](../../images/tnseq/principle_tnseq.png "<b>Transposon insertion sequencing method</b> - <b>a. Data production</b> The initial population genomes are mutated so that the genome is saturated with transposon insertions.  A library is <i>saturated</i> if in the genomes across the whole population of bacteria, each potential insertion site has at least one insertion. The population is then divided into several media containing different growth conditions. After growth, the regions flanking the insertion are amplified and sequenced, allowing to determine the location of the insertion. <b>b. Analysis</b> After alignement to the reference genome, the resulting data will show a discrete repartition of reads on each TA site. If a gene present several insertions, like the two leftmost genes in <i>Condition A</i>, it means that its disruption has little or no impact to the bacterial growth. On the other hand, when a gene shows no insertions at all, like the rightmost gene in <i>Condition A</i>, is means that any disruption in this gene killed the bacteria, meaning its a gene essential to bacteria survival. If the library is sufficiently saturated, there is a clear threshold between essential and non-essential genes when you analyze the insertion rate per gene. (From <a href='#Chao2016'> Chao <i>et al.</i> 2016</a>)")
 
 
 Two type of transposon insertion methods exist:
@@ -48,7 +47,7 @@ Two type of transposon insertion methods exist:
 ## <a name="BuildLibrary">Building a TnSeq library</a>
 {:.no_toc}
 
-In this tutorial, we are using mariner transposon, that target TA sequences, in ordered to target the whole genome uniformaly. Different types of transposon can be used depending of the goal of you analysis :
+In this tutorial, we are using mariner transposon, that target TA sequences, in ordered to target the whole genome uniformely. Different types of transposon can be used depending of the goal of you analysis :
 - Randomly pooled tranposon :
     - Mariner-based transposons, which target TA dinucleotides
         - The TA are distributed relatively evenly along genome, which allows to impact statistically every gene
@@ -68,15 +67,12 @@ Independently of your choice of transposon you need to be careful about your lib
 After you selected the type of transposon corresponding to your goals, you need to modify it to allow insertion site amplification and sequencing so that you get a library representative of the tranposon insertion.
 Biases could get introduced by the process due to uneven fragment sizes. To avoid this problem, we can introduce a Type I restriction site to cleave DNA downstream of transposon, and get uniform fragment sizes
 
-It has been shown that a minimum length of 16 bp is necessary for precise mapping on the genome ([Kwon and al. 2016](http://doi.org/10.1007/s00253-015-7037-8)). We can therefore use the MmeI restriction site (21pb) but not BsmFI (11 to 12 bp). It is not important in that case to have longer reads as we do not care to have a good coverage on the entire genome, the only information we need is the Ta site affected by an insertion, to do that we only need the location of the start of the reads.
+It has been shown that a minimum length of 16 bp is necessary for precise mapping on the genome {% cite Kwon2015 %} . We can therefore use the MmeI restriction site (21pb) but not BsmFI (11 to 12 bp). It is not important in that case to have longer reads as we do not care to have a good coverage on the entire genome, the only information we need is the Ta site affected by an insertion, to do that we only need the location of the start of the reads.
 
-In this tutorial, the transposon is a mariner Himar1 with the structure described in the figure [Structure of the tranposon constructs](#TranspStructure)
+In this tutorial, the transposon is a mariner Himar1 with the structure described in the figure [Structure of the tranposon constructs](#TranspStructure) {% cite Santiago2015 %}.
 
-| Structure of the tranposon constructs |
-|:--------------:|
-|<img name="TranspStructure" src="../../images/tnseq/tranposon_structure.png" width='60%' alt="Structure of the transposon containing several parcodes and adapters" >|
-| The transposon construct is a mariner transposon with two specific region used to specifically sequence the region upstream of the insertion. The transposon inserts at TA site at the ITR junctions. These ITR junctions have been modified to include a Mme1 restriction site (cut 21 bp upstream from the restriction site). Using MmeI enzyme to determine the size of the reads allow to have a hmogeneous read size and therefore avoid a bias in the representation of the insertions. It also includes a NotI restriction site. These two site are the 5' and 3' limits to the genomic DNA we want to sequence. **A. Sequence flanking genomic regions** After digestion by NotI restriction enzyme, the fragments are attached to biotinylated adaptors that link to NotI restriction site. The attached fragment are then digested by MMeI at a site upstream , where an Illumina primer is then linked. The sequencing is then done, adding Illumina adaptors and an additional barcode to the read for multiplexed sequencing. **B. Removing incorrect fragments** An insertion can sometimes be composed of one or more copies of the transposon (multimer). There is therefore a risk to select plasmid backbone sequence. To solve this problem, an additional NotI has been add in the backbone to create different length construct, that can later be filtrated (C). Different promoters are added to the construct along with an additional 3 bp barcode to analyze differential expression impact, but this will be the subject of another tutorial. From {% cite Santiago2015 %}|
-||
+![Structure of the transposon containing several parcodes and adapters](../../images/tnseq/tranposon_structure.png "<b>Structure of the tranposon constructs</b> - The transposon construct is a mariner transposon with two specific region used to specifically sequence the region upstream of the insertion. The transposon inserts at TA site at the ITR junctions. These ITR junctions have been modified to include a Mme1 restriction site. Using MmeI enzyme to determine the size of the reads allow to have a homogeneous read size and therefore avoid a bias in the representation of the insertions. It also includes a NotI restriction site (cut 21 bp upstream from the restriction site). These two site are the 5' and 3' limits to the genomic DNA we want to sequence. <b>A. Sequence flanking genomic regions</b> After digestion by NotI restriction enzyme, the fragments are attached to biotinylated adaptors that link to NotI restriction site. The attached fragment are then digested by MMeI at a site upstream , where an Illumina primer is then linked. The sequencing is then done, adding Illumina adaptors and an additional barcode to the read for multiplexed sequencing. <b>B. Removing incorrect fragments</b> An insertion can sometimes be composed of one or more copies of the transposon (multimer). There is therefore a risk to select plasmid backbone sequence. To solve this problem, an additional NotI has been add in the backbone to create different length construct, that can later be filtrated (. Different promoters are added to the construct along with an additional 3 bp barcode to analyze differential expression impact, but this will be the subject of another tutorial. (From <a href='#Santiago2015'> Santiago <i>et al.</i> 2015</a>)")
+
 
 Because of this complex tranposon structure, the reads obtained after sequencing contain a large portion of tranposon sequence for a 16-17 bp genomic sequence. This will necessitate several step of pre-processing to extract this genomic sequence.
 
@@ -88,20 +84,14 @@ Because of this complex tranposon structure, the reads obtained after sequencing
 
 Once we extracted the genomic sequences from the initial reads, we need to locate each of them on the genome to link them to a TA site. To do that we need to map them to a reference genome, link them to a specific insertion site, and then count the number of insertion for each TA site.
 
-Once we have the count of insertion at every insertion site, there is several methods existing to identify essential genes of regions. They can be divided in two major categories (see figure [Methods of TnSeq Analyses](#AnalysesMethods)) :
+Once we have the count of insertion at every insertion site, there is several methods existing to identify essential genes of regions. They can be divided in two major categories (see figure [Methods of TnSeq Analyses](#AnalysesMethods) {% cite Chao2016 %}) :
 1. Annotation dependent : The read counts and/or insertion frequency are calculated across defined regions (genes, promoters ... )
 2. Annotation independent : The read counts and/or disrupted sites are considered across the whole genome, independently of defined structures.
 
 
 
 
-| Methods of TnSeq Analyses|
-|:--------------:|
-|<img name="AnalysesMethods" src="../../images/tnseq/type_of_analyses.png" width='60%' alt="Different types of TnSeq Analyses" >|
-| **Annotation dependent method** The total read count an/or percentage of disrupted site are computed per annotated regions. The values are then compared to the rest of the genome to classify the genes into the categories *essential* or *non-essential*. **Annotation independent method** The total read count and/or disrupted sites are computed independently of annotated regions. One of these methods is using a sliding window. Each window is then classified into the categories *essential* or *non-essential*. After the windows have been classified, they are linked annotations, and the genes/regions can be classified as *essential*, *non-essential*, or *domain essential* according to the classification of the windows they cover. The same classification can be done using HMM based methods instead of sliding windows. In that case, each insertion site will be predicted as *essential* or *non essential*. From {% cite Chao2016 %}|
-||
-
-
+![Different types of TnSeq Analyses](../../images/tnseq/type_of_analyses.png "<b>Methods of TnSeq Analyses</b> - <b>Annotation dependent method</b> The total read count an/or percentage of disrupted site are computed per annotated regions. The values are then compared to the rest of the genome to classify the genes into the categories <i>essential</i> or <i>non-essential</i>. <b>Annotation independent method</b> The total read count and/or disrupted sites are computed independently of annotated regions. One of these methods is using a sliding window. Each window is then classified into the categories <i>essential</i> or <i>non-essential</i>. After the windows have been classified, they are linked annotations, and the genes/regions can be classified as <i>essential</i>, <i>non-essential</i>, or <i>domain essential</i> according to the classification of the windows they cover. The same classification can be done using HMM based methods instead of sliding windows. In that case, each insertion site will be predicted as <i>essential</i> or <i>non essential</i>. (From <a href='#Chao2016'> Chao <i>et al.</i> 2016</a>)")
 
 The objectives of this tutorial will then be to remove non genomic sequences from the reads, align them to a reference genome, and use the location of genes to determine a list of essential genes.
 > ### Agenda
@@ -113,24 +103,45 @@ The objectives of this tutorial will then be to remove non genomic sequences fro
 >
 {: .agenda}
 
+Let's start with uploading the data.
+
+
+> ### {% icon hands_on %} Hands-on: Import the data
+>
+> 1. Create a new history for this tutorial and give it a proper name
+>
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
+>
+> 2. Import `Tnseq-Tutorial-reads.fastqsanger.gz`, `staph_aur.fasta`, `construct_barcodes.fasta`, `condition_barcodes.fasta`, and `staph_aur.gff3` from [Zenodo](https://zenodo.org/record/2579335)
+>
+>
+>    {% include snippets/import_via_link.md %}
+>
+>    As default, Galaxy takes the link as name, so rename them.
+>
+> 4. Rename the files ...
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 3. Inspect the files by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
+>
+{: .hands_on}
+
+
 # Removing all non genomic sequences from the sequenced reads
 
 ## Data Structure
 
 The experimental design of transposon insertion sequencing produces raw reads containing a lot of adapters and foreign sequences that has been used to insert and target the transposon. In order to obtain the core reads that contain only genomic sequence, we have a number of steps to do to remove them and divide the reads per experimental condition and type of transposon.
 
-| Data pre-processing |
-|:--------------:|
-|<img src="../../images/tnseq/preprocessing.png" width='90%' >|
-|The pre-processing of the data will be done through several steps of Cutadapt software, first we sill separate the reads of each experimental condition based on a 8 bp barcode at the beginning of the read (Illumina demultiplexing). The tail of each set of read is then removed. It immediately follows the 3bp barcode specific to transposon constructs, and contains illumina adapter sequence and downstream. To be sure all our reads have been trimmed correctly we filter out the reads too large. We then separate the reads per transposon construct and then remove the remaining transposon sequence containing MmeI.|
-||
+![Workflow of data pre-processing](../../images/tnseq/preprocessing.png "<b>Data pre-processing</b> - The pre-processing of the data will be done through several steps of Cutadapt software, first we sill separate the reads of each experimental condition based on a 8 bp barcode at the beginning of the read (Illumina demultiplexing). The tail of each set of read is then removed. It immediately follows the 3bp barcode specific to transposon constructs, and contains illumina adapter sequence and downstream. To be sure all our reads have been trimmed correctly we filter out the reads too large. We then separate the reads per transposon construct and then remove the remaining transposon sequence containing MmeI.")
 
 
 ## Separating reads from different experimental conditions
 
  First we divide the initial data set by experimental conditions thanks to a 8bp barcode added by the Illumina multiplexing protocol.
- Start with uploading the training dataset containing all the reads [here](https://zenodo.org/record/2579335/files/Tnseq-Tutorial-reads.fastqsanger.gz?download=1) .
- Then we need to create a fasta file containing the barcodes for each condition (you can also get the file [here](https://zenodo.org/record/2579335/files/condition_barcodes.fasta?download=1) ).
+ Take a look at the fasta file containing the barcodes for each condition (`condition_barcodes.fasta`) :
 
 
  Barcode data:
@@ -145,29 +156,22 @@ The experimental design of transposon insertion sequencing produces raw reads co
 
 > ### {% icon hands_on %} Hands-on:  Barcode splitting with Cutadapt
 >
-> {% icon tool %} **Click** on the upload icon in the left panel to upload barcode data.
->    - **Click** on the `Paste/Fetch Data` button
->    - Change *"Name"* to `Condition barcodes`
->    - Change *"Type"* to `Fasta`
->    - Paste the barcode data.
->    - **Click** on `Start button`
->
-> {% icon tool %} Select the **Cutadapt** tool in the tool bar and run with the following parameters to split the dataset based on barcodes:
+> 1. **Cutadapt** {% icon tool %} Split the dataset based on barcodes with:
 >    - Set *"Single-end or Paired-end reads?"* to `Single-end`
->    - Set *"FASTQ/A file"* to the `fastq file` containing the training set.
+>    - Set *"FASTQ/A file"* to the `fastq.gz file` containing the training set of reads.
 >    - **Click** on `Insert 5' (Front) Adapters`
 >         - Set *"Source"* to `File From History`
 >         - Set *"Choose file containing 5' adapters"* to the `condition barcodes` file in the history
->    - <img name="FrontSdapter" src="../../images/tnseq/frontadaptercutadapt.png" width='70%' alt="Use cutadapt with front adapters" >
+>     ![Use cutadapt with front adapters](../../images/tnseq/frontadaptercutadapt.png)
 >
 >    - **Click** on `Adapter Options`
 >         - Set *"Maximum error rate"* to `0.15` to allow 1 mismatch
 >         - Set *"Match times"* to `3` in case the barcode attached several times
->    - <img name="AdapterOption" src="../../images/tnseq/optionaptercutadapt.png" width='70%' alt="Adapter options in Cutadapt" >
+>     ![Adapter options in Cutadapt](../../images/tnseq/optionaptercutadapt.png)
 >    - **Click** on `Output Options`
 >         - Set *"Report"* to `yes`
 >         - Set *"Multiple output"* to `yes` to separate the reads into one file per condition
->    - <img name="OutputOption" src="../../images/tnseq/cutadaptOutput.png" width='70%' alt="Output options in Cutadapt" >
+>     ![Output options in Cutadapt](../../images/tnseq/cutadaptOutput.png)
 >    - **Click** on `Execute`
 >
 >
@@ -249,11 +253,10 @@ We can see that is both samples the reads have pass the filtering at more than 9
 We have now removed the transposon sequences that was outside of the 3 bp barcode specific to the type of construct. The constructs used in this experiment contain different strengths and directions of promoters. It means that in addition of disrupting a gene at the location of the insertion, it will modify the expression of either upstream or downstream regions. The analysis of this modification will be studied in another training material, but for now we will consider it does not impact the essentiality analysis and we will use the different constructs as replicates.
 We therefore need to separate the reads based on the construct specific 3bp barcodes.
 
-You can download the fasta file containing the barcodes [here](https://zenodo.org/record/2579335/files/construct_barcodes.fasta?download=1). Upload the file into galaxy and take a look at it.
 
 > ### {% icon question %} Questions
 >
-> What does the "$" means in the barcode sequence file ?
+> Take a look at the fasta file containing the construct barcodes. What does the "$" means in the barcode sequence file ?
 >
 >   > ### {% icon solution %} Solution
 >   >
@@ -320,23 +323,23 @@ Verify that the majority of the read have been trimmed. Now that we isolated the
 
 ## Aligning the reads to a reference genome
 
-The first step is to map our read to the reference genome (you can download it [here](https://zenodo.org/record/2579335/files/staph_aur.fasta?download=1)). We are going to use the tool Bowtie. We could also use Bowtie2 with an end-to-end option, but Bowtie is more suitable for very short reads like ours (16-17 bp).
+The first step is to map our read to the reference genome. We are going to use the tool Bowtie. We could also use Bowtie2 with an end-to-end option, but Bowtie is more suitable for very short reads like ours (16-17 bp).
 
 > ### {% icon hands_on %} Hands-on:  Map reads with Bowtie
 >
 > {% icon tool %} Select the **Map with Bowtie for Illumina** tool in the tool bar and run with the following parameters:
 >   - Set *"Will you select a reference genome from your history or use a built-in index?"* to `Use one from the history`
->   - Set *"Select the reference genome"* to the `staph_aur.fasta` file that you just uploaded.
+>   - Set *"Select the reference genome"* to the `staph_aur.fasta` file.
 >   - Set *"Is this library mate-paired?"* to `Single-end`
 >   -  Set *"FASTQ file"* to `Cutadapt on...Output` that you got at the end of the preprocessing section
 >   - Set *"Bowtie settings to use"* to `Full parameters list` to change parameters so that bowtie stricly enforces no mismatches.
 >       - Set *"Skip the first n reads (-s)"* to `0`
 >       - Set *"Maximum number of mismatches permitted in the seed (-n)"* to `0`
 >       - Set *"Seed length (-l)"* to `17`
->       - <img name="Bowtie1" src="../../images/tnseq/bowtie1.png" width='70%' alt="Full parameters in Bowtie" >
+>       ![Full parameters in Bowtie](../../images/tnseq/bowtie1.png)
 >       - Set *"Whether or not to try as hard as possible to find valid alignments when they exist (-y)"* to `Try Hard`
 >       - Set *"Whether or not to make Bowtie guarantee that reported singleton alignments are 'best' in terms of stratum and in terms of the quality values at the mismatched positions (--best)"* to `Use best`
->       - <img name="Bowtie2" src="../../images/tnseq/bowtie2.png" width='70%' alt="Full parameters in Bowtie" >
+>       ![Full parameters in Bowtie](../../images/tnseq/bowtie2.png)
 >   - **Click** on `Execute`
 >
 >
@@ -364,14 +367,10 @@ The first step is to map our read to the reference genome (you can download it [
 ## Getting coverage of the genome
 
 Now that we have mapped the reads on the reference genome, we are going to calculate the coverage of the genome to later cross them with our TA sites position.
-In our case, the reads cover the flanking region on one side of the TA site where the transposon inserted. That means we do not want to have the coverage across the whole reads, as it could cover several TA sites, but only the coverage at the end of the read. (See Figure [Mapping read and TA site coverage](#MapCoverage))
+In our case, the reads cover the flanking region on one side of the TA site where the transposon inserted. That means we do not want to have the coverage across the whole reads, as it could cover several TA sites, but only the coverage at the end of the read. (See Figure [Mapping read and TA site coverage](#figure-5))
 
 
-| <a name="MapCoverage">Mapping read and TA site coverage</a> |
-|:--------------:|
-|<img name="method" src="../../images/tnseq/Map_cov.png" width='90%' alt="A read align to the genome with its 3' end covering half of the TA site" >|
-| The sequenced read cover the 5' region flanking the site of insertion. To assign the read to its correct insertion, we need to compute the coverage at the 3' end of the read. |
-||
+![A read align to the genome with its 3' end covering half of the TA site](../../images/tnseq/Map_cov.png "<b>Mapping read and TA site coverage</b> - The sequenced read cover the 5' region flanking the site of insertion. To assign the read to its correct insertion, we need to compute the coverage at the 3' end of the read.")
 
 
 > ### {% icon hands_on %} Hands-on:  Compute genome coverage
@@ -570,13 +569,16 @@ We now have a read count for each nucleotides of the TA sites. The insertions co
 
 ## Predict the essentiality of genes
 
-Now that we have the counts of insertions per TA site, we can use them to predict gene esssentiality with Transit. In order to do that, we need to create a an annotation file in the `prot_table` format, specifique to the Transit tool. You can create this file from a gff3 from GenBank. Upload the gff3 file for *Staphylococcus aureus* [here](https://zenodo.org/record/2579335/files/staph_aur.gff3?download=1).
-Once uploaded, verify that the format of your file is `gff3` and not `gff`. If that is not the case you can change the format by clicking on the pencil icon of the dataset.
+Now that we have the counts of insertions per TA site, we can use them to predict gene esssentiality with Transit. In order to do that, we need to create a an annotation file in the `prot_table` format, specifique to the Transit tool. You can create this file from a gff3 from GenBank like the one you uploaded earlier.
+
+Verify that the format of your file is `gff3` and not `gff`. If that is not the case you can change the datatype.
+
+{% include snippets/change_datatype.md %}
 
 > ### {% icon hands_on %} Hands-on : Create annotation file in prot_table format
 >
 >  {% icon tool %} Select the **Convert GFF3 to prot_table for TRANSIT** tool in the TRANSIT section of the tool bar and run with the following parameters:
->   - Set *GenBank GFF file"* to the file you just uploaded
+>   - Set *GenBank GFF file"* to the `gff3` file
 >   - **Click** on `Execute`
 >
 >
