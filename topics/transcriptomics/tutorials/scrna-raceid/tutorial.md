@@ -362,7 +362,7 @@ Here we assume that there is no unwanted technical or biological variability in 
 
 The first three plots in the PDF report tell us about the stability/reliability of our clusters, and are more important indicators for the quality of our clustering than any of the resultant graph projections, such as PCA or tSNE.
 
-![Stability Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_sat_jacc.png %} "RaceID Saturation and Jaccard Plots")
+![Stability Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_sat_jacc.png %} "RaceID Saturation and Jaccard Distance Plots")
 
 The first plot measures the levels of dispersion within each cluster and displays the mean dispersion over all clusters for each k value. The grey points indicate the mean change in dispersion for that k values, and the red bars show this dispersion as a box plot, which get smaller and smaller until a "saturation point" (blue) is reached where the change in dispersion no longer decreases for an increase in k.
 
@@ -370,16 +370,16 @@ For example, if *k=2*, then all cells will be sorted into 2 clusters, and the va
 
 The second plot is the same as the first but with the actual dispersion plotted instead of the relative change of dispersion.
 
-The third plot measures the direct stability of each of the derived (in this case, 12) clusters using the [Jaccard index](https://en.wikipedia.org/wiki/Jaccard_index), which is a fractional quantity that measures how many elements in two sets overlap divided by the union of both sets.
+The third plot measures the direct stability of each of the derived (in this case, 12) clusters using the [Jaccard distance](https://en.wikipedia.org/wiki/Jaccard_index), which is a fractional quantity that measures the dissimilarity between two sets as measured by overlap divided by the union of both sets.
 
-> ### {% icon details %} Details: Jaccard Stability
+> ### {% icon details %} Details: Jaccard Distance
 >
-> Jaccard Stability is measured by the intersection of the two or more sets divided by the union of those sets.
+> Jaccard distance is measured by the intersection of the two or more sets divided by the union of those sets.
 >
 > $$d_J(X,Y) = 1 - J(X,Y) = \frac{|X \cup  Y| - |X \cap Y|}{|X \cup Y|}$$
 > <!-- This seems to be visible when collapsed...? -->
 >
-> In the case of single-cell data, sets are defined as the cells contained within a given cluster, and the Jaccard similarity score provides a quantitive measure for how distinct a given cluster is, based on it's similarity to other sets.
+> In the case of single-cell data, sets are defined as the cells contained within a given cluster, and the Jaccard similarity score provides a quantitative measure for how distinct a given cluster is, based on it's similarity to other sets.
 >
 > ![Jaccard]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_jaccard.svg %} "Example Jaccard Distance calculation")
 >
@@ -388,7 +388,7 @@ The third plot measures the direct stability of each of the derived (in this cas
 
 Here, for each of the 12 clusters, the (top N) genes expressed by the cells in each cluster are intersected with the (top N) genes expressed by the cells in all other clusters to measure how unique the expression profile is to that specific cluster. The scales given by the plot are actually measuring the dissimilarity between sets, which is one minus the index, therefore a higher y-value is better.
 
-Ideally the Jaccard should have above 0.6 in most clusters, but it is acceptable to have one or two more poorly defined clusters.
+Ideally the Jaccard distance should have above 0.6 in most clusters, but it is acceptable to have one or two more poorly defined clusters.
 
 
 ## Outlier Detection
