@@ -271,7 +271,7 @@ The fields of the BAM file can be better explained at section 1.4 of [the SAM sp
 * `SRR568..._GCATTC_CTTCGT`: The *readname* appended by `_`, the cell barcode, another `_`, and then the UMI barcode.
 * `16`: The FLAG value
 
-> ### {% icon question %} What does the FLAG value of 16 tell us about this read?
+> ### {% icon question %} What does the alignment flag value of 16 tell us about this read?
 >
 >   <!-- TODO This information needs to be integrated into an actual tool -->
 >   We can interactively see what the different FLAG values mean by feeding values into the SAM specification to the [Picard web tool](https://broadinstitute.github.io/picard/explain-flags.html)
@@ -298,7 +298,7 @@ The main filtering steps performed on our reads so far have been relatively sile
 * *UMI-tools Extract* - Filters reads for those only with matching barcodes given by our barcodes file.
 * *RNA-STAR* - As seen in the log, we lose 25% of our reads for being too short or being multiply mapped.
 
-Another filtering measure we can apply is to keep reads that we are confident about, e.g those with a minimum number of mismatches to the reference within an acceptable range.
+Another filtering measure we can apply is to keep reads that we are confident about, e.g those with a minimum number of mismatches to the reference within an acceptable range. Specifically, we want to keep all reads that align to the forward or reverse strand that also have less that 3 mismatches to the reference, and are also mapped only once to the reference.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -333,6 +333,21 @@ Another filtering measure we can apply is to keep reads that we are confident ab
 >        - *"Enter rules here"*: `(1 | 2) & 3 & 4`
 >
 {: .hands_on}
+
+> ### {% icon question %} Question
+>
+> 1. Why are we filtering only for alignment flags `0` and `16`?
+> 2. What do the tag filters `nM:<3` and `NH:<2` do?
+> 3. What is happening at the rules stage?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Alignment flags `0` and `16` specify that we wish to only keep reads that align to the forward and reverse strands.
+> > 2. We are keeping reads that have a number of mismatches (`nM`) to the reference of less than 3, and has a number of hits (`NH`) across the reference of less than 2 (i.e. it is not a multiply-mapped read).
+> > 3. [Boolean expressions](https://en.wikipedia.org/wiki/Boolean_expression) are applied that state that *either* conditions 1 or 2 can happen, in conjunction with rules 3 and 4 happening.
+> >
+> {: .solution}
+{: .question}
 
 
 ## Quantification
