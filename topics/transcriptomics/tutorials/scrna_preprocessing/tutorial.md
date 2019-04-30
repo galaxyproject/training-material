@@ -118,7 +118,12 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >
 > 1. Import the subset FASTQ paired data from [`Zenodo`](https://zenodo.org/record/2581041) or from the data library (ask your instructor)
 >
->    {% include snippets/import_via_link.md collection=true collection_type="Paired" collection_name_convention="`<name>_<plate>_<batch>` to preserve the sample names, sequencing plate number and batch number." collection_name="Here we will write `C57_P1_B1`"  link="https://zenodo.org/record/2581041/files/SRR5683689_1.subset.fastq" link2="https://zenodo.org/record/2581041/files/SRR5683689_2.subset.fastq" genome="GRCm38/mm10" pairswaptext="`SRR5683689_1` and `SRR5683689_2`" %}
+>    ```
+>    https://zenodo.org/record/2581041/files/SRR5683689_1.subset.fastq
+>    https://zenodo.org/record/2581041/files/SRR5683689_2.subset.fastq
+>    ```
+>
+>    {% include snippets/import_via_link.md collection=true collection_type="Paired" collection_name_convention="`<name>_<plate>_<batch>` to preserve the sample names, sequencing plate number and batch number." collection_name="Here we will write `C57_P1_B1`" genome="GRCm38/mm10" pairswaptext="`SRR5683689_1` and `SRR5683689_2`" %}
 >
 > 3. Import the Gene Annotations and Barcodes from [`Zenodo`](https://zenodo.org/record/2581041) or from the data library (ask your instructor)
 >
