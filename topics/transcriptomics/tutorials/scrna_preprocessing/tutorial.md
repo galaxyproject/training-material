@@ -654,7 +654,7 @@ This plating protocol can be converted into a more textual format, which allows 
 
     [Barcodes → Batches]
     001-096: B1 , B3 , B5 , B7
-    097-192: B2 , B2 , B6 , B8
+    097-192: B2 , B4 , B6 , B8
 
     [Plates → Batches]
     1: B1 , B2 , B3 , B4
@@ -673,12 +673,12 @@ Let us now apply this protocol to our count matrix, and look for any cross-conta
 >           - *"1: Barcode Format"*:
 >              - *"Barcode Range: Start"*:`1`
 >              - *"Barcode Range: End"*:`96`
->              - *"Batches utilizing this Range"*:`2,4`
+>              - *"Batches utilizing this Range"*:`1,3`
 >        - Select `+ Insert Barcode Format`:
 >           - *"2: Barcode Format"*:
 >              - *"Barcode Range: Start"*:`97`
 >              - *"Barcode Range: End"*:`192`
->              - *"Batches utilizing this Range"*:`1,3`
+>              - *"Batches utilizing this Range"*:`2,4`
 >     - *"Under 'Plate Format'"*:
 >        - Select `+ Insert Plate Format`:
 >           - *"1: Plate Format"*:
