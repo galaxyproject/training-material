@@ -50,7 +50,7 @@ The input data consists of a single count matrix consisting of ~21,000 genes (ro
 
 Here, the data follows the [tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) convention prevalent amongst the R data analysis community which assigns every value to a variable and an observation. The values are the number of reads which are assigned to a particular gene (a variable) that was measured within a specific cell (an observation).
 
-Normally a count matrix consists of integers, but this matrix has undergone an UMI-to-transcript [count alteration](https://www.nature.com/articles/nmeth.2930#methods) to correct against UMI errors, yielding decimal values instead. This correction is not that neccesary in most datasets but it it is used here.
+Normally a count matrix consists of integers, but this matrix has undergone an UMI-to-transcript [count alteration](https://www.nature.com/articles/nmeth.2930#methods) to correct against UMI errors, yielding decimal values instead. This correction is not that necessary in most datasets but it is used here.
 
 This tutorial will perform cell clustering and lineage construction, as well as exploring some genes of interest.
 
@@ -85,7 +85,7 @@ For now we will work with the count matrix alone.
 >    {% include snippets/import_from_data_library.md %}
 >
 > 3. Rename the dataset to *"intestinal"*
-> 4. Check that the datatype is a tab-seperated file
+> 4. Check that the datatype is a tab-separated file
 >
 >    {% include snippets/change_datatype.md datatype="tabular" %}
 >
@@ -180,13 +180,13 @@ We can see this for ourselves by extracting the headers, and reformatting them t
 >
 {: .question}
 
-With these types already labelled in the header of our data, we can validate the clustering that we will perform later. Ideally, the cells described by these 5 different labels should cluster into 5 seperate clusters, with varying degrees of proximity to one another.
+With these types already labelled in the header of our data, we can validate the clustering that we will perform later. Ideally, the cells described by these 5 different labels should cluster into 5 separate clusters, with varying degrees of proximity to one another.
 
 ## Inspecting the Quality of the Count Matrix
 
 Low quality cells and genes are sometimes caught at the preprocessing stage and removed, but sometimes more filtering is required to remove unwanted noise from the data.
 
-A gene that has a low number of total counts across multiple cells might be differentially expressed across those cells (e.g. 1 count in CellA, and 10 counts in CellB, yielding a fold change of 10) but would not necessarily be significant compared to a gene that has more total counts across cells (e.g. 100 counts in cellA, and 1000 counts in CellB, also yielding a fold change 10).
+A gene that has a low number of total counts across multiple cells might be differentially expressed across those cells (e.g. 1 count in CellA, and 10 counts in CellB, yielding a fold change of 10) but would not necessarily be significant compared to a gene that has more total counts across cells (e.g. 100 counts in CellA, and 1000 counts in CellB, also yielding a fold change 10).
 
 We can refine filtering thresholds by examining how much a histogram of our plots change before and after filtering using standard parameters.
 
@@ -230,11 +230,11 @@ The top row shows the count distributions of the Library Size and Number of Feat
 
 * (Top-Left) Library Size (total number of transcripts per cell)
 
-    A lower-tail heavy distribution centered around 3-4 Log10 (~3000) counts per cell , with a few cells having library sizes containing a handful of counts (0-1000).
+    A lower-tail heavy distribution centred around 3-4 Log10 (~3000) counts per cell , with a few cells having library sizes containing a handful of counts (0-1000).
     
 * (Top-Right) Feature Set (total number of detectable genes per cell)
 
-    Another lower-tail heavy distribution with a peak centered around $$10^{3.5}$$ counts. Cells with a low number of features are hard to compare with other cells due to incomplete data. It is possible that these low feature cells (< 100 genes) are rare types and that we should impute their missing values, but it is often more likely the case that these are simply just low-quality cells that will add noise to the clustering.
+    Another lower-tail heavy distribution with a peak centred around $$10^{3.5}$$ counts. Cells with a low number of features are hard to compare with other cells due to incomplete data. It is possible that these low feature cells (< 100 genes) are rare types and that we should impute their missing values, but it is often more likely the case that these are simply just low-quality cells that will add noise to the clustering.
     
 
 The bottom row shows the count distributions of the Library Size and Number of Features of the filtered data:
@@ -306,9 +306,9 @@ On the other hand, cell-cycle variation is well defined and can be modelled agai
 
 Technical variation appears in three main forms: *Library size variation*, *Amplification bias*, and *Dropout events*.
 
-1. **Library size variation** occurs where two cells of the same cell type may produce a different amount of total transcripts than one another (e.g. due to cell-cycle effects, or differing capture efficiencies), but have a similar *proportion* of transcripts for specific genes. For example, a neural cell with a library size of 100 may show 10 counts of SOX2 (10%), and another neural cell with a library size of 200 may show 20 counts of SOX2 (also 10%). The two cells have different library sizes, but harbor the same expression for that gene because they are of the same cell type.
+1. **Library size variation** occurs where two cells of the same cell type may produce a different amount of total transcripts than one another (e.g. due to cell-cycle effects, or differing capture efficiencies), but have a similar *proportion* of transcripts for specific genes. For example, a neural cell with a library size of 100 may show 10 counts of SOX2 (10%), and another neural cell with a library size of 200 may show 20 counts of SOX2 (also 10%). The two cells have different library sizes, but harbour the same expression for that gene because they are of the same cell type.
 
-1. **Amplification bias** stems from an uneven amplification of certain transcripts of a cell over others, giving a false number of reads for the number of mRNA molecules actually observed in the cell. Unique Moleculer Identifiers can significantly reduce this bias, and it is a topic that is covered more extensively in the [*Understanding Barcodes*]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on.
+1. **Amplification bias** stems from an uneven amplification of certain transcripts of a cell over others, giving a false number of reads for the number of mRNA molecules actually observed in the cell. Unique Molecular Identifiers can significantly reduce this bias, and it is a topic that is covered more extensively in the [*Understanding Barcodes*]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on.
 
 1. **Dropout events** are the zero counts that are prevalent in the data due to the reduced sequencing sensitivity in detecting reads, which yields many false negatives in the detection of genes, often resulting in over 80% of the count values in the count matrix being zero. A major point to take into account is that some of these zeroes are *real* (i.e. no transcripts of that gene were detected in that cell) and some of these are *false* (i.e. the transcripts were never captured due to the low sequencing depth). Modelling this duality in the data and mitigating against it is one of the biggest challenges of normalising single-cell data.
 
@@ -409,7 +409,7 @@ The next three plots attempts to do this by describing the variation of the gene
 * (Top-Right) Outlier cells are detected if the probability for that cell $$c$$ that a minimum number of genes $$G_{min}$$ of observing total counts $$T_{G_{min}}$$ is less than a specific threshold $$P_{thr}$$, as given by the red dotted line.
   This is shown in the chart above as the number of outliers as a function of the probability threshold, which is set to $$1 \cdot 10^{-3}$$ by default. Ideally, this threshold should be chosen so that the lower tail of the distribution contains as few outliers as possible (i.e. lower than the steep rise in outliers towards the higher end of the plot) to ensure a maximum sensitivity of this method. If the sensitivity of the sequencing was low, then only a few highly expressed genes would be reliably quantified, so the outlier probability threshold would need to be higher (e.g. up to 1).
 
-* (Bottom-Left) A barplot of the outlier probabilities of all cells across all clusters. All outlier cells are merged into their own clusters if their similarity exceeds a quantile threshold of the similarity distribution for all pairs of cells within one of the original clusters. After the outlier cells are merged, then the new cluster centres are defined for the original clusters after removing the outliers. Then, each cell is assigned to the nearest cluster centre using k-partitioning.
+* (Bottom-Left) A bar plot of the outlier probabilities of all cells across all clusters. All outlier cells are merged into their own clusters if their similarity exceeds a quantile threshold of the similarity distribution for all pairs of cells within one of the original clusters. After the outlier cells are merged, then the new cluster centres are defined for the original clusters after removing the outliers. Then, each cell is assigned to the nearest cluster centre using k-partitioning.
 
 The most differentially expressed genes (below a maximum p-value cutoff) in each of the clusters can be seen in the output file *Clustering using RaceID on data: Cluster - Genes per Cluster*, with 7 columns describing:
 
@@ -645,7 +645,7 @@ The genes shown as grey dots are not labelled because they are not so differenti
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Intepretation of plot:
+> > 1. Interpretation of plot:
 > >   * The vertical axis displays the difference between cluster 3 and cluster 1, where the total counts of a gene in cluster 3 are subtracted by the total counts of a gene in cluster 1. Therefore, a gene which is in the negative portion of the vertical axis has more expression in cluster 1.
 > >   * The horizontal axis displays the average expression of a gene in both clusters, and so serves as a yardstick to estimate how expressive that gene is overall. 
 > > 1. *Gstm3* has a lower average expression in both clusters, than *Ptma* which is higher on the horizontal axis. However, *Gstm3* is expressed significantly more in Cluster 1, whereas *Ptma* is expressed only slightly more in Cluster 3. Overall, *Gstm3* is more differentially expressed than *Ptma*, and is up-regulated in Cluster 3, although with fewer total mRNA counts.
@@ -714,7 +714,7 @@ It was [mentioned previously](#details-details-continuous-phenotypes-vs-discrete
 >    - {% icon param-file %} *"Input RDS"*: `outrdat` (output of **Clustering using RaceID** {% icon tool %})
 >    - In *"Compute transcriptome entropy of each cell"*:
 >        - *"Use Defaults?"*: `Yes`
->    - In *"Compute Cell Projections for Randomized Background Distribution"*:
+>    - In *"Compute Cell Projections for Randomised Background Distribution"*:
 >        - *"Use Defaults?"*: `Yes`
 >    - In *"StemID2 Lineage Graph"*:
 >        - *"Use Defaults?"*: `Yes`
@@ -734,9 +734,9 @@ It was [mentioned previously](#details-details-continuous-phenotypes-vs-discrete
 
 ![Lineage Computation Plots]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_lineage.png %} "StemID Lineage Tree and Branches of significance.")
 
-The first (top-left) plot shows a minimum spanning tree that summarises the most likely connections between clusters. The second plot (top-right) elucidates this lineage hierarchy by projecting the cells along the links given by StemID, ordering the cells along each link in such a way to suggest a time series, or *pseudotime* analysis of each link. This is important, because by ordering the cells by lineage pseudotime we can trace the up or down regulation of a gene as discrete time points. The interval between each timepoint is of course hard to accurately determine, but the order of events is still important.
+The first (top-left) plot shows a minimum spanning tree that summarises the most likely connections between clusters. The second plot (top-right) elucidates this lineage hierarchy by projecting the cells along the links given by StemID, ordering the cells along each link in such a way to suggest a time series, or *pseudo-time* analysis of each link. This is important, because by ordering the cells by lineage pseudo-time we can trace the up or down regulation of a gene as discrete time points. The interval between each time point is of course hard to accurately determine, but the order of events is still important.
 
-The third (bottom-left) displays the degree of significance between clusters, where the colour indicates the level of significance between clusters, and the width indicates the link score computed by **StemID**. Here, blue clusters indicate a higher level of cluster entropy (assosciated with progenitor cell types), and red with low entropy (for mature types). The link colouring is red for more significant links between clusters, than green, and the width is indicative of the number of cells in the cluster sharing that link to another cluster. 
+The third (bottom-left) displays the degree of significance between clusters, where the colour indicates the level of significance between clusters, and the width indicates the link score computed by **StemID**. Here, blue clusters indicate a higher level of cluster entropy (associated with progenitor cell types), and red with low entropy (for mature types). The link colouring is red for more significant links between clusters, than green, and the width is indicative of the number of cells in the cluster sharing that link to another cluster.
 
 The thick red link between clusters 2-4, 3-5, and 3-1-6 have therefore a high level of significance attached to each of these.
 
@@ -879,7 +879,7 @@ One final trajectory analysis that can be performed uses **FateID**, which tries
 
 Where **StemID** utilises a bottom-up approach by starting from mature cell types and working up to the multi-potent progenitor, **FateID** uses top-down approach that starts from the progenitor and works its way down.
 
-Here we will see if we can see any pseudotime dynamics taking place between the branching point (3 to 1, and 3 to 5) that we explored previously.
+Here we will see if we can see any pseudo-time dynamics taking place between the branching point (3 to 1, and 3 to 5) that we explored previously.
 
 > ### {% icon hands_on %} Hands-on
 >
@@ -916,7 +916,7 @@ The heatmaps generated depict the same data, but at different "heat" scales to b
 # Conclusion
 {:.no_toc}
 
-In this tutorial we have learned to filter, normalise, and cluster cells from heterogeneous single-cell RNA-seq data. We have explored the expression of marker genes and performed a differential gene expression analysis between two sets of clusters. We have also constructed a lineage tree from these clusters, and analysed different branching points of interest to infer a pseudotime ordering of cells as determined by the regulation of their genes.
+In this tutorial we have learned to filter, normalise, and cluster cells from heterogeneous single-cell RNA-seq data. We have explored the expression of marker genes and performed a differential gene expression analysis between two sets of clusters. We have also constructed a lineage tree from these clusters, and analysed different branching points of interest to infer a pseudo-time ordering of cells as determined by the regulation of their genes.
 
 The steps of this workflow can be found in the related workflow.
 
