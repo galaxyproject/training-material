@@ -245,9 +245,9 @@ CHANGE THE TOOL TO GET RID OF THIS STEP
 
 [Phenology](https://en.wikipedia.org/wiki/Phenology), as described in Wikipedia, is the study of periodic plant and animal life cycle events and how these are influenced by seasonal and inter-annual variations in climate, as well as habitat factors (such as elevation).
 
-Now you have a file containing all the data on the species of interest. The main goal of this step is to model a phenology that will be used to predict values for missing counts at local sites and create a material that can be used to generate charts.
+Now you have a file containing all the data on the species of interest. The main goal of this step is to model one phenology per year using a general additive model (GAM) with time and sites as explanatory variables. This model will be used to predict values for missing counts at local sites.
 
-This step will allow you to compute and display the phenology of a species. In the second part, you will learn that it is possible to show the phenology of various species on a single chart allowing to compare them and analyse them more easily.
+This step will allow you to compute and display the phenology of a species. In the second part, you will learn that it is possible to view the phenology of various species on a single chart allowing to compare them and analyse them more easily.
 
 > ### {% icon hands_on %} Hands-on: Phenology
 > 1. **Flight curve** {% icon tool %} with the following parameters
@@ -270,6 +270,7 @@ This step will allow you to compute and display the phenology of a species. In t
 >    7. Click on **Save**
 >
 {: .hands_on}
+
 
 ![Phenology chart](../../images/regionalGAM/phenology_year.png)
 
@@ -335,7 +336,19 @@ This graph displays the modeled flight curve of *Pyronia tithonus* over the year
 
 This shows the occurrences of *Pyronia tithonus*, over the weeks. We can see there is a peak every year and we can already notice some differences in the values between the weeks and years, but not how the weeks overlap between the years. In this type of visualization, it's quite difficult to see when occurs maximum presence of butterflies and possible changes between years. We would like to visualize these differences using a stacked visualization. Here we can see global differences year by year like evolution of the maximum number of observations or some specific patterns as presence of more than only one peak in 2007, 2009 and 2012.
 
-ADD GGPLOT2 hands_on
+> ### {% icon hands_on %} Hands-on: Visualize the years on a stacked graph
+> 1. **Scatterplot w ggplot2** {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"from dataset"*: output from **Flight curve**
+>    - *"Column to plot on x-axis"*: `4` (the column with the year)
+>    - *"Column to plot on y-axis"*: `6`
+>    - *"Plot title"*: add a meaningful title
+>    - *"Label for x axis"*: add a meaningful label (i.e. Day number)
+>    - *"Label for y axis"*: add a meaningful label(i.e. ????? Ask Benjamin or Reto to know more)
+>    - *"Type of plot"*: `Line only`
+>    - *"Plotting multiple groups"*: `Plot multiple groups of data on one plot` to superimpose years
+>   
+{: .hands_on}
+
 
 ![Stacked Phenology chart](../../images/regionalGAM/Pyronia_tithonus_phenology_stacked_explicit_ID.png)
 
@@ -519,7 +532,7 @@ To compare the 2 models, we can compute and plot the global trend (over years).
 
 ![Expected temporal trend](../../images/regionalGAM/trends.svg)
 
-Here you can see the temporal trends modeled from the simple regression vs using autocorrelation in residuals. You can see the trends are similar (apparently decrease) even if different (origin and slope are different). Here results are not significant so we can say that there is a significant decrease of the abundance.
+Here you can see the temporal trends modeled from the simple regression vs using autocorrelation in residuals. You can see the trends are similar (apparently decrease) even if different (intercept and slope are different). Here results are statistically significant so we can say that there is a significant decrease of the abundance.
 
 # Conclusions
 {:.no_toc}
