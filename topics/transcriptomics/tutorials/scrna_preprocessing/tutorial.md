@@ -53,20 +53,20 @@ contributors:
 
 Single-cell RNA (scRNA) sequencing is the technological successor to classical "bulk" RNA-seq, where samples are no longer defined at the tissue level but at the individual cell level. The bulk RNA-seq methods seen in [previous hands-on material]({{site.baseurl}}{% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}) would give the average expression of genes in a sample, whilst overlooking the distinct expression profiles given by the cell sub-populations due to their heterogeneity.
 
-The rise of scRNA sequencing provides the means to explore this hetereogeneity by examining samples at the individual cell level, enabling a greater understanding of the development and function of such samples, by the characteristics of their constituent cells.
+The rise of scRNA sequencing provides the means to explore this heterogeneity by examining samples at the individual cell level, enabling a greater understanding of the development and function of such samples, by the characteristics of their constituent cells.
 
-Consider the heterogenity of cells sampled from bone marrow, where hematopoietic stem cells can give rise to many different cell types within the same tissue:
+Consider the heterogeneity of cells sampled from bone marrow, where hematopoietic stem cells can give rise to many different cell types within the same tissue:
 
 ![Cell Differentiation of Hematopoietic Stem cells]({{site.baseurl}}{% link topics/transcriptomics/images/scrna_hematopoiesis.png %} "Cell Differentiation of Hematopoietic Stem cells. Image Source: https://commons.wikimedia.org/wiki/File:Hematopoiesis_simple.svg")
 
-The genes expressed by these cells at different developmental time points can be subtle, but generally can be classified into discrete cell subpopulations or under statistical clustering methods such as PCA or tSNE. Cells in the same cluster exhibit similar profiles of differential expression in the same set of related genes, compared to cells in other clusters. By identifying significant genes in each cluster, cell types and cell developmental heirarchies can be inferred based on the proximity of these clusters to one another.
+The genes expressed by these cells at different developmental time points can be subtle, but generally can be classified into discrete cell sub-populations or under statistical clustering methods such as PCA or tSNE. Cells in the same cluster exhibit similar profiles of differential expression in the same set of related genes, compared to cells in other clusters. By identifying significant genes in each cluster, cell types and cell developmental hierarchies can be inferred based on the proximity of these clusters to one another.
 
 Other than cell development, there are many more factors that can shape the level of gene expression exhibited by a given cell. Intercellular cell-signalling can block or enhance specific transcripts, the total amount of transcripts of a cell increases with the cell-cycle, or the proximity of a cell within a tissue to nutrients or oxygen.
 
 ![Facets of Cellular Identity]({{site.baseurl}}{% link topics/transcriptomics/images/scrna_nbt3711.png %} "Revealing the vectors of cellular identity with single-cell genomics, Nature Biotechnology, 2016")
 
 
-This tutorial is in part inspired by aspects of the [Hemberg workflow](https://hemberg-lab.github.io/scRNA.seq.course/) at the Sanger institute, as well as the [CGATOxford workflow](https://github.com/CGATOxford/UMI-tools) which provides the **UMI-tools** suite that we make use of. The barcoding follows the [CEL-Seq2 protocol](https://doi.org/10.1186/s13059-016-0938-8) mentioned in the [*Understanding Barcodes*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on, and uses the same lane configuration as utilized by the [Freiburg MPI Grün lab](https://www.ie-freiburg.mpg.de/gruen).
+This tutorial is in part inspired by aspects of the [Hemberg workflow](https://hemberg-lab.github.io/scRNA.seq.course/) at the Sanger institute, as well as the [CGATOxford workflow](https://github.com/CGATOxford/UMI-tools) which provides the **UMI-tools** suite that we make use of. The barcoding follows the [CEL-Seq2 protocol](https://doi.org/10.1186/s13059-016-0938-8) mentioned in the [*Understanding Barcodes*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on, and uses the same lane configuration as utilised by the [Freiburg MPI Grün lab](https://www.ie-freiburg.mpg.de/gruen).
 
 # Analysis Strategy
 {:.no_toc}
@@ -104,7 +104,7 @@ The second part of this tutorial will deal with merging several output count mat
 
 In this tutorial we will be analysing scRNA-seq data of bone marrow cells taken from a single C57 mouse by *Herman et al.* ([2018](https://doi.org/10.1038/nmeth.4662)) and producing a count matrix that we can use for later analysis.
 
-The size of scRNA files (.fastq) are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expediate the analysis by using a smaller subset of actual batch data. We will also be using *Mus Musculus* annotation data (.gtf) from the  [NCBI RefSeq](ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/vertebrate_mammalian/Mus_musculus/) track, as well as a barcodes file (.tsv).
+The size of scRNA files (.fastq) are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expedite the analysis by using a smaller subset of actual batch data. We will also be using *Mus Musculus* annotation data (.gtf) from the  [NCBI RefSeq](ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/vertebrate_mammalian/Mus_musculus/) track, as well as a barcodes file (.tsv).
 
 
 ![Workflow Upper]({{site.baseurl}}{% link topics/transcriptomics/images/scrna_workflow_upper.png %} "Single batch processing")
@@ -118,7 +118,12 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >
 > 1. Import the subset FASTQ paired data from [`Zenodo`](https://zenodo.org/record/2581041) or from the data library (ask your instructor)
 >
->    {% include snippets/import_via_link.md collection=true collection_type="Paired" collection_name_convention="`<name>_<plate>_<batch>` to preserve the sample names, sequencing plate number and batch number." collection_name="Here we will write `C57_P1_B1`"  link="https://zenodo.org/record/2581041/files/SRR5683689_1.subset.fastq" link2="https://zenodo.org/record/2581041/files/SRR5683689_2.subset.fastq" genome="GRCm38/mm10" pairswaptext="`SRR5683689_1` and `SRR5683689_2`" %}
+>    ```
+>    https://zenodo.org/record/2581041/files/SRR5683689_1.subset.fastq
+>    https://zenodo.org/record/2581041/files/SRR5683689_2.subset.fastq
+>    ```
+>
+>    {% include snippets/import_via_link.md collection=true collection_type="Paired" collection_name_convention="`<name>_<plate>_<batch>` to preserve the sample names, sequencing plate number and batch number." collection_name="Here we will write `C57_P1_B1`" genome="GRCm38/mm10" pairswaptext="`SRR5683689_1` and `SRR5683689_2`" %}
 >
 > 3. Import the Gene Annotations and Barcodes from [`Zenodo`](https://zenodo.org/record/2581041) or from the data library (ask your instructor)
 >
@@ -168,7 +173,7 @@ Verifying that the desired UMI and cell barcodes have been extracted from the se
 >
 > > ### {% icon solution %} Solution
 > >
-> > The input FASTQ files contained reads from all barcodes, including those with sequencing errors, resulting in a larger pool of detected barcodes than those desired. (e.g. Cell barcode `AAATTT` could have single basepair sequencing errors that could modify it into `ATATTT` or `AAACTT`, etc).
+> > The input FASTQ files contained reads from all barcodes, including those with sequencing errors, resulting in a larger pool of detected barcodes than those desired. (e.g. Cell barcode `AAATTT` could have single base-pair sequencing errors that could modify it into `ATATTT` or `AAACTT`, etc).
 > >
 > > This information is included in the Log file of **UMI-tools extract** which contains all the parameters used to run, as well as *INFO* lines that indicate how many reads were read, and how many output. In this case: 134431 reads were retained (>90% of input reads).
 > {: .solution}
@@ -229,7 +234,7 @@ The purpose of MultiQC is to observe how well our reads were mapped against the 
 > > 3. It depends on how good the sequencing protocol is, and how many reads in total were mapped.
 > >   - `90%` is amazing, reserved for bulk RNA-seq which typically has high coverage
 > >   - `70%` is weak for bulk RNA-seq, but good for single-cell RNA-seq
-> >   - This a small subset of a real dataset, but one would explect that 6 million mapped reads would be enough to generate a downstream analysis.
+> >   - This a small subset of a real dataset, but one would expect that 6 million mapped reads would be enough to generate a downstream analysis.
 > >
 > {: .solution}
 {: .question}
@@ -266,12 +271,12 @@ We now have a BAM file of our aligned reads, with cell and UMI barcodes embedded
 >
 {: .hands_on}
 
-The fields of the BAM file can be better explained at section 1.4 of [the SAM specification](https://samtools.github.io/hts-specs/SAMv1.pdf), but we will summarize the main fields of interest here:
+The fields of the BAM file can be better explained at section 1.4 of [the SAM specification](https://samtools.github.io/hts-specs/SAMv1.pdf), but we will summarise the main fields of interest here:
 
 * `SRR568..._GCATTC_CTTCGT`: The *readname* appended by `_`, the cell barcode, another `_`, and then the UMI barcode.
 * `16`: The FLAG value
 
-> ### {% icon question %} What does the FLAG value of 16 tell us about this read?
+> ### {% icon question %} What does the alignment flag value of 16 tell us about this read?
 >
 >   <!-- TODO This information needs to be integrated into an actual tool -->
 >   We can interactively see what the different FLAG values mean by feeding values into the SAM specification to the [Picard web tool](https://broadinstitute.github.io/picard/explain-flags.html)
@@ -286,19 +291,19 @@ The fields of the BAM file can be better explained at section 1.4 of [the SAM sp
 * `chr1` `3439991`: The position and base-pair of alignment of the first base of the sequence.
 * A series of quality fields, with the main contributors being  the sequence and sequence quality strings.
 * `NH`: The number of hits for  this read. If it is multiply mapped, then the number of multiples will be shown (here `1`, so not multiply mapped).
-* `HI`: Which number this particular read is in the series of (potentially) multi-mapped reads (here `1`, not neccesarily meaning the first or 'better').
+* `HI`: Which number this particular read is in the series of (potentially) multi-mapped reads (here `1`, not necessarily meaning the first or 'better').
 * `nM`: The number of base mismatches in the alignment of this read to the reference (here `1`).
 
 
 #### Filtering the BAM File
 
-If we perform counting on the current BAM file we will be counting all reads, even the undesireable ones such as those that did not align so optimally.
+If we perform counting on the current BAM file we will be counting all reads, even the undesirable ones such as those that did not align so optimally.
 
 The main filtering steps performed on our reads so far have been relatively silent due to the 'default' parameters used.
 * *UMI-tools Extract* - Filters reads for those only with matching barcodes given by our barcodes file.
 * *RNA-STAR* - As seen in the log, we lose 25% of our reads for being too short or being multiply mapped.
 
-Another filtering measure we can apply is to keep reads that we are confident about, e.g those with a minimum number of mismatches to the reference within an acceptable range.
+Another filtering measure we can apply is to keep reads that we are confident about, e.g those with a minimum number of mismatches to the reference within an acceptable range. Specifically, we want to keep all reads that align to the forward or reverse strand that also have less that 3 mismatches to the reference, and are also mapped only once to the reference.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -333,6 +338,21 @@ Another filtering measure we can apply is to keep reads that we are confident ab
 >        - *"Enter rules here"*: `(1 | 2) & 3 & 4`
 >
 {: .hands_on}
+
+> ### {% icon question %} Question
+>
+> 1. Why are we filtering only for alignment flags `0` and `16`?
+> 2. What do the tag filters `nM:<3` and `NH:<2` do?
+> 3. What is happening at the rules stage?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Alignment flags `0` and `16` specify that we wish to only keep reads that align to the forward and reverse strands.
+> > 2. We are keeping reads that have a number of mismatches (`nM`) to the reference of less than 3, and has a number of hits (`NH`) across the reference of less than 2 (i.e. it is not a multiply-mapped read).
+> > 3. [Boolean expressions](https://en.wikipedia.org/wiki/Boolean_expression) are applied that state that *either* conditions 1 or 2 can happen, in conjunction with rules 3 and 4 happening.
+> >
+> {: .solution}
+{: .question}
 
 
 ## Quantification
@@ -415,7 +435,7 @@ With all the relevant data now in our BAM file, we can actually perform the coun
 >
 > 1. **UMI-tools counts** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Sorted BAM file"*: `out_file1` (output of **FeatureCounts** {% icon tool %})
->    - *"UMI Extract Method"*: `Barcodes are contained at the end of the read seperated by a delimiter`
+>    - *"UMI Extract Method"*: `Barcodes are contained at the end of the read separated by a delimiter`
 >    - *"Bam is paired-end"*:`No`
 >    - *"Method to identify group of reads"*:`Unique`
 >    - *"Extra Parameters"*:
@@ -460,7 +480,7 @@ The generation of a single count matrix is now complete, with the emphasis on th
 >
 > 3. *Quality Filtering*:
 >
->     Reads with aligment mismatches greater than 2 were discarded, and only non multi-mapped reads that mapped to the forward or reverse strand were kept
+>     Reads with alignment mismatches greater than 2 were discarded, and only non multi-mapped reads that mapped to the forward or reverse strand were kept
 >
 > 4. *Quantification*:
 >
@@ -497,13 +517,13 @@ Handling more than one batch of sequencing data is rather trivial when we take i
 The first step merely requires us to run the same workflow on each of our batches, using the exact same inputs except for the FASTQ paired data. The second step requires a minimal level of interaction from us; namely using a merge tool and selecting our matrices.
 
 
-### Data upload and organization
+### Data upload and organisation
 
 The count matrix we have generated in the previous section is too sparse to perform any reasonable analysis upon, and constitutes data only of a single batch. Here we will use more populated count matrices from multiple batches, under the assumption that we now know how to generate each individual one of them using the steps provided in the previous section. This data is available at [`Zenodo`](https://zenodo.org/record/2581041).
 
 Once again, file naming is important, and so we will rename our matrix files appropriately to the plate and batch they are supposed to originate from.
 
-> ### {% icon hands_on %} Hands-on: Data upload and organization
+> ### {% icon hands_on %} Hands-on: Data upload and organisation
 >
 > 1. Create a new history and rename it (*e.g.* scRNA-seq multiple-batch tutorial)
 >
@@ -639,7 +659,7 @@ This plating protocol can be converted into a more textual format, which allows 
 
     [Barcodes → Batches]
     001-096: B1 , B3 , B5 , B7
-    097-192: B2 , B2 , B6 , B8
+    097-192: B2 , B4 , B6 , B8
 
     [Plates → Batches]
     1: B1 , B2 , B3 , B4
@@ -658,12 +678,12 @@ Let us now apply this protocol to our count matrix, and look for any cross-conta
 >           - *"1: Barcode Format"*:
 >              - *"Barcode Range: Start"*:`1`
 >              - *"Barcode Range: End"*:`96`
->              - *"Batches utilizing this Range"*:`2,4`
+>              - *"Batches utilizing this Range"*:`1,3`
 >        - Select `+ Insert Barcode Format`:
 >           - *"2: Barcode Format"*:
 >              - *"Barcode Range: Start"*:`97`
 >              - *"Barcode Range: End"*:`192`
->              - *"Batches utilizing this Range"*:`1,3`
+>              - *"Batches utilizing this Range"*:`2,4`
 >     - *"Under 'Plate Format'"*:
 >        - Select `+ Insert Plate Format`:
 >           - *"1: Plate Format"*:
@@ -711,7 +731,7 @@ Two things to take note of:
 > {: .solution}
 {: .question}
 
-With this, we now have a count-matrix that can be used for further downstream analyis.
+With this, we now have a count-matrix that can be used for further downstream analysis.
 
 <!--
 Factoid: We can convert the number of UMIs to the number of molecules using a transformation script.
@@ -720,7 +740,7 @@ Factoid: We can convert the number of UMIs to the number of molecules using a tr
 # Conclusion
 {:.no_toc}
 
-In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our reads and into the read headers, in order to preserve them during mapping. We have discovered how these barcoded reads are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against reads that are PCR duplicates. Finally, we have learned how to combine seperate batch data as well as being able to check and correct against cross-contamination.
+In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our reads and into the read headers, in order to preserve them during mapping. We have discovered how these barcoded reads are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against reads that are PCR duplicates. Finally, we have learned how to combine separate batch data as well as being able to check and correct against cross-contamination.
 
 ![Recap of workflow]({{site.baseurl}}{% link topics/transcriptomics/images/scrna_workflow.svg %} "A recap of the entire workflow")
 

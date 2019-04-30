@@ -46,7 +46,7 @@ Barcodes are small oligonucleotides that are inserted into the captured sequence
  1. Which cell the sequence came from
  2. Which transcript the sequence came from
 
-When the sequence is mapped against a reference genome, we can then see which gene locus it aligns to and qualitavely assert that, together with the two pieces of information above, the sequence depicts a transcript from a specific gene that originated from a specific cell.
+When the sequence is mapped against a reference genome, we can then see which gene locus it aligns to and qualitatively assert that, together with the two pieces of information above, the sequence depicts a transcript from a specific gene that originated from a specific cell.
 
 Barcodes come in a variety of formats, and in this tutorial we will be looking at the [CEL-Seq2 protocol](https://doi.org/10.1186/s13059-016-0938-8) used in droplet-based single-cell RNA-seq.
 
@@ -195,7 +195,7 @@ This then provides us with the true count of the number of true transcripts for 
 > >
 > 1. Yes, UMIs are not specific to genes and the same UMI barcode can tag the transcripts of different genes. UMIs are not universal tags, they are just 'added randomness' that help reduce amplification bias.
 > > 2. Yes, UMIs are not precise but operate probabilistically. In most cases, two transcripts of the same gene will be tagged by different UMIs. In rarer (but still prevalent) cases, the same UMI will capture different transcripts of the same gene.
-> >  * One helpful way to think about how quantification is performed is to observe the following heirarchy of data `Cell Barcode → Gene → UMI`
+> >  * One helpful way to think about how quantification is performed is to observe the following hierarchy of data `Cell Barcode → Gene → UMI`
 > >
 > >   e.g.
 > >

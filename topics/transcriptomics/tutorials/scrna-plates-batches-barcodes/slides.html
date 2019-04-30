@@ -10,7 +10,7 @@ questions:
   - "What is the difference between a plate and a batch?"
   - "Are batches and lanes the same?"
   - "Why are plating setups important to know?"
-  - "Is it neccesary to check barcodes that don't exist in a batch?"
+  - "Is it necessary to check barcodes that don't exist in a batch?"
 objectives:
   - "How to describe a plating setup"
   - "Proper naming conventions when dealing with multiple batches"
@@ -18,67 +18,67 @@ objectives:
 time_estimation: "1h"
 key_points:
   - "Plates are split into Lanes"
-  - "Batches are Lanes, but their names are not reused"
+  - "Batches are Lanes, but names are not reused"
   - "Multiple batches can exist in many Plates"
   - "Checking all barcodes across Batches eliminates false positives / cross-contamination"
   - "Intelligent plating strategies can guard against cross-contamination"
 
 # (This will be split out of the pre-processing later)
 # requirements:
-#  - 
+#  -
 #    type: "internal"
 #    topic_name: sequence-analysis
 #    tutorials:
 #        - scrna-introduction
 
 follow_up_training:
-  - 
+  -
     type: "internal"
     topic_name: sequence-analysis
     tutorials:
         - scrna_preprocessing
-        
+
 contributors:
   - mtekman
 
 ---
 
-### Sequencing Plates
+### Sorting Plates
 
 
-                      | · · · · · · · · · |  ← Plate: N=9, M=6 
-                      | · · · · · · · · · |           54 slots 
-                      | · · · · · · · · · |                     
-                      | · · · · · · · · · |                     
-                      | · · · · · · · · · |                     
-                      | · · · · · · · · · |                     
+                      | · · · · · · · · · |  ← Plate: N=9, M=6
+                      | · · · · · · · · · |           54 slots
+                      | · · · · · · · · · |
+                      | · · · · · · · · · |
+                      | · · · · · · · · · |
+                      | · · · · · · · · · |
 
 .left[Plates are *N x M* arrays of wells that cells are sorted, to then be individually amplified and sequenced.]
 
 ---
 
-### Sequencing Plates
+### Sorting Plates
 
-                      | o o · · o o · · · |  ← Plate: N=9, M=6 
-                      | o o · · o o · · · |           54 slots 
-                      | o o · · o o · · · |                      
-                      | o o · · o o · · · |     24 cells        
-                      | o o · · o o · · · |     30 empty slots  
-                      | o o · · o o · · · |                      
+                      | o o · · o o · · · |  ← Plate: N=9, M=6
+                      | o o · · o o · · · |           54 slots
+                      | o o · · o o · · · |
+                      | o o · · o o · · · |     24 cells
+                      | o o · · o o · · · |     30 empty slots
+                      | o o · · o o · · · |
 
 .left[Not all wells need to be occupied by cells, some wells are left empty.]
 .center[Why is this the case?]
 
 ---
 
-### Sequencing Plates
+### Sorting Plates
 
-                      | o o % % o o % · · |  ← Plate: N=9, M=6 
-                      | o o % % o o % · · |           54 slots 
-                      | o o % % o o % · · |                      
-                      | o o % % o o % · · |     24 cells         
-                      | o o % % o o % · · |     30 empty slots   
-                      | o o % % o o % · · |                      
+                      | o o % % o o % · · |  ← Plate: N=9, M=6
+                      | o o % % o o % · · |           54 slots
+                      | o o % % o o % · · |
+                      | o o % % o o % · · |     24 cells
+                      | o o % % o o % · · |     30 empty slots
+                      | o o % % o o % · · |
 
 .center[Library preparation is not always perfect]
 .center[Sample **contamination** from neighbouring wells]
@@ -90,12 +90,12 @@ contributors:
 
         | · · · · · · · · · |  <- Plate: N=9, M=6
         | · · · · · · · · · |            54 slots
-        | · · · · · · · · · |                    
-        | · · · · · · · · · |                    
-        | · · · · · · · · · |                    
+        | · · · · · · · · · |
+        | · · · · · · · · · |
+        | · · · · · · · · · |
         | · · · · · · · · · |
 
-.center[Sequencing Plates are divided into *lanes*:]
+.center[Sorting Plates are divided into *lanes*:]
 
 
         | · · · : · · · : · · · |  <---   Plate: N=9, M=6, 3 lanes
@@ -187,12 +187,12 @@ The way these slots are filled depends entirely on the protocol, but usually not
 ### Questions about Cell Barcodes
 
 
-                                 ←--- 20 ---→
-           A single lane    |····················| 
-          in a sequencing   |····················|  ↑
-           plate            |····················|  5
-                            |····················|  ↓
-                            |····················|
+                                ←--- 20 ---→
+           a single lane   |····················|
+           in a sorting    |····················|  ↑
+              plate        |····················|  5
+                           |····················|  ↓
+                           |····················|
 
 .left[Assuming a lane is a 20x5 array:]
 
@@ -227,7 +227,7 @@ A single lane?
 ]
 --
 .pull-right[
-  
+
 A plate with 10 lanes?
 
  * 1000 barcodes, 4 nucleotides for each base of a barcode
@@ -251,7 +251,7 @@ A plate with 10 lanes?
 .pull-left[
 * Is 5 nucleotides really enough to capture 1000 cells?
 
-* What could go wrong if all barcodes are seperated by 1 bp, as shown?
+* What could go wrong if all barcodes are separated by 1 bp, as shown?
 ]
 
 .pull-right[
@@ -267,7 +267,7 @@ A plate with 10 lanes?
 
 
 ???
-If we assume that every barcode is seperated from every other barcode by 1 bp, then the answer is 'yes'
+If we assume that every barcode is separated from every other barcode by 1 bp, then the answer is 'yes'
 
 That's right, sequencing errors can mislabel a read to a completely different cell than from where the transcript originated from.
 
@@ -291,7 +291,7 @@ That's right, sequencing errors can mislabel a read to a completely different ce
                         ·
                         ·
                         ·
-      
+
 ]
 
 --
@@ -304,15 +304,15 @@ $$ 4^{5-1} = 512 $$
 .pull-left[
 e.g. For barcodes of length N=3:
 
-* Edit Distance of E=1:  
+* Edit Distance of E=1:
 .center[`AAA AAC AAG AAT ACA ACC` ...]
 .center[<small>64 barcodes</small>]
 
-* Edit Distance of E=2:  
-.center[`AAA ACC AGG ATT CAA CCC` ...] 
+* Edit Distance of E=2:
+.center[`AAA ACC AGG ATT CAA CCC` ...]
 .center[<small>16 barcodes</small>]
 
-* Edit Distance of E=3:  
+* Edit Distance of E=3:
 .center[`AAA CCC GGG TTT`]
 .center[<small>4 barcodes</small>]
 ]
@@ -322,7 +322,7 @@ Number of Barcodes :
 
 $$ 4^{N-(E-1)} $$
 
-.center[For barcodes of length *N*,  
+.center[For barcodes of length *N*,
 and Edit Distance of *E*.]
 
 ]
@@ -337,7 +337,7 @@ and Edit Distance of *E*.]
 * Number of available barcodes depends on:
 
   1. The length of the barcode
-  
+
   2. The edit distance between adjacent barcodes
 
 * Must take sequencing errors into account
@@ -348,7 +348,7 @@ and Edit Distance of *E*.]
 * Availability is balance between *barcode size* vs. *sequencing errors*
 
 * Typically between 4-10 bases, range of cells that can be labelled:
-   
+
    $$[4^4, 4^{10}] = [256, 1048576]$$
 
 
@@ -359,7 +359,7 @@ and Edit Distance of *E*.]
 * The availability of barcodes and the number of cells they can label is a design choice, where the technician must balance two opposing forces: barcode size vs sequencing errors.
 
 * For the first, this means that for a barcode $$N$$ bases long, there will $$4^N$$ barcodes available. Typically barcodes tend to span 4-10 bases ($$4^4 = 256$$ to $$4^{10} = 1048576$$), since longer barcodes tend to be more subjectable to sequencing errors.
- 
+
 * The true number of barcodes used is actually smaller than $$4^N$$ due to the measures used to space barcodes apart from one another to reduce sequencing errors.
 
 ---
@@ -372,8 +372,8 @@ Is it better to use Longer or Shorter Barcodes?
   |--------|---------|
   | Offer larger range of barcodes | Offer smaller range of barcodes |
   | Prone to more sequencing errors | More robust against sequencing errors |
-  | Must increase edit distance significantly | A smaller edit distance is more acceptable | 
-  |  Can accomodate large edit distances | *Cannot* accomodate large edit distances | 
+  | Must increase edit distance significantly | A smaller edit distance is more acceptable |
+  | Can accommodate large edit distances | *Cannot* accommodate large edit distances |
 
 ---
 
@@ -414,24 +414,24 @@ Is it better to use Longer or Shorter Barcodes?
 * The main contending questions are:
 
  1. How large is each batch?
- 
+
 ???
 How many slots in a batch that we need to barcode for
 
 --
 
  2. How many batches on a plate?
- 
+
 --
 
  3. Should each batch use the same barcodes?
- 
+
 --
 
  4. What **constraints** are there on the plate?
- 
 
- 
+
+
 ???
 A technician always has to balance quality against cost, and this is illustrated in the following examples:
 
@@ -442,7 +442,7 @@ A technician always has to balance quality against cost, and this is illustrated
 .pull-left[
 * Barcodes:
   * 24 unique barcodes, with an edit distance of E=2:
-         
+
              AAA ACC AGG TTT TAA TCC
              ATT CCC CAA TGG NAA NCC
              CGG CTT GGG NGG NTT ANN
@@ -454,8 +454,8 @@ A technician always has to balance quality against cost, and this is illustrated
 * Plates and Lanes:
   * 12 slots per lane (3x4)
   * 4 lanes per plate
-  
-* Contraints
+
+* Constraints
   * Only 2 lanes sequenced at the same time
     * i.e. half the plate is sequenced at the same time
 ]
@@ -470,7 +470,7 @@ Here we use N as an extra base just for example purposes, but you do sometimes s
 
 .bottom-info-box[
 Available Barcodes
-        
+
     AAA ACC AGG TTT TAA TCC
     ATT CCC CAA TGG NAA NCC
     CGG CTT GGG NGG NTT ANN
@@ -502,7 +502,7 @@ Available Barcodes
 
 ???
 * Half of the barcodes used for that lane, and the other half we can ignore.
-* Wasteful because we are not getting full use of our 24 barcodes in a single sequecing run
+* Wasteful because we are not getting full use of our 24 barcodes in a single sequencing run
 
 ---
 
@@ -510,7 +510,7 @@ Available Barcodes
 
 .bottom-info-box[
 Available Barcodes
-        
+
     AAA ACC AGG TTT TAA TCC
     ATT CCC CAA TGG NAA NCC
     CGG CTT GGG NGG NTT ANN
@@ -519,23 +519,23 @@ Available Barcodes
 ]
 
 * 24 total slots in Plate 1
-* 12 slots in Lane 1, and 12 slots in Lane 2  
+* 12 slots in Lane 1, and 12 slots in Lane 2
 * All slots filled
- 
+
         | 1 1 1 : 2 2 2 |    AAA ACC AGG : TTT TAA TCC
         | 1 1 1 : 2 2 2 |    ATT CCC CAA : TGG NAA NCC
         | 1 1 1 : 2 2 2 |    CGG CTT GGG : NGG NTT ANN
         | 1 1 1 : 2 2 2 |    GAA GCC GTT : CNN GNN TNN
 
 --
-* We can use all of our barcodes  
-* Maximum number of cells can be sequenced in a single run  
+* We can use all of our barcodes
+* Maximum number of cells can be sequenced in a single run
 * Why might this be too optimal?
 
 
 
 ???
-Here we use all barcodes since these lanes will be sequenced at the same time 
+Here we use all barcodes since these lanes will be sequenced at the same time
 Let's look at one final example to see why using all our barcodes on a plate might not be optimal.
 
 ---
@@ -544,7 +544,7 @@ Let's look at one final example to see why using all our barcodes on a plate mig
 
 .bottom-info-box[
 Available Barcodes
-        
+
     AAA ACC AGG TTT TAA TCC
     ATT CCC CAA TGG NAA NCC
     CGG CTT GGG NGG NTT ANN
@@ -555,7 +555,7 @@ Available Barcodes
 * 24 total slots in Plate 1
 * 12 slots in Lane 1, and 12 slots in Lane 2
 * Only slots in Lane 1 filled
- 
+
          | 1 1 1 : · · · |    AAA ACC AGG : ttt taa tcc
          | 1 1 1 : · · · |    ATT CCC CAA : tgg naa ncc
          | 1 1 1 : · · · |    CGG CTT GGG : ngg ntt ann
@@ -575,7 +575,7 @@ All barcodes used, why leave one lane empty?
 
 .bottom-info-box[
 Available Barcodes
-        
+
     AAA ACC AGG TTT TAA TCC
     ATT CCC CAA TGG NAA NCC
     CGG CTT GGG NGG NTT ANN
@@ -598,7 +598,7 @@ Available Barcodes
 
 
 ???
-If we see any reads in the Plate which contain barcodes {TTT,TAA,TCC, etc} then we know that some contamination has occured *because there should be no cells there*. One reason is that the second lane was not completely cleaned before being used.
+If we see any reads in the Plate which contain barcodes {TTT,TAA,TCC, etc} then we know that some contamination has occurred *because there should be no cells there*. One reason is that the second lane was not completely cleaned before being used.
 
 ---
 
@@ -606,7 +606,7 @@ If we see any reads in the Plate which contain barcodes {TTT,TAA,TCC, etc} then 
 
 .bottom-info-box[
 Available Barcodes
-        
+
     AAA ACC AGG TTT TAA TCC
     ATT CCC CAA TGG NAA NCC
     CGG CTT GGG NGG NTT ANN
@@ -617,17 +617,17 @@ Available Barcodes
 
 * Same as before but extra plate. A single lane used to check for contaminants.
 * Alternate barcodes used for each plate
- 
+
          | 1 1 1 : · · · | P1    AAA ACC AGG : ttt taa tcc
          | 1 1 1 : · · · |       ATT CCC CAA : tgg naa ncc
          | 1 1 1 : · · · |       CGG CTT GGG : ngg ntt ann
          | 1 1 1 : · · · |       GAA GCC GTT : cnn gnn tnn
-     
+
          | · · · : 2 2 2 | P2    aaa acc agg : TTT TAA TCC
          | · · · : 2 2 2 |       att ccc caa : TGG NAA NCC
          | · · · : 2 2 2 |       cgg ctt ggg : NGG NTT ANN
          | · · · : 2 2 2 |       gaa gcc gtt : CNN GNN TNN
-         
+
 <small>
 * Why alternate active lanes across plates?
 </small>
@@ -653,7 +653,7 @@ Available Barcodes
 
 .bottom-info-box[
 Available Barcodes
-        
+
     AAA ACC AGG TTT TAA TCC
     ATT CCC CAA TGG NAA NCC
     CGG CTT GGG NGG NTT ANN
@@ -662,7 +662,7 @@ Available Barcodes
 ]
 
 * Both lanes filled. *All barcodes* are applied individually to *each* lane
-  
+
          | 1 1 1 : 2 2 2 |    AAA ACC AGG ttt taa tcc : aaa acc agg TTT TAA TCC
          | 1 1 1 : 2 2 2 |    ATT CCC CAA tgg naa ncc : att ccc caa TGG NAA NCC
          | 1 1 1 : 2 2 2 |    CGG CTT GGG ngg ntt ann : cgg ctt ggg NGG NTT ANN
@@ -672,7 +672,7 @@ Available Barcodes
 
 * Why check all barcodes against each lane?
 
-* Why not seperate lanes across different plates?
+* Why not separate lanes across different plates?
 
 ]
 --
@@ -683,7 +683,7 @@ Available Barcodes
 ]
 ???
 1. Why apply the full set of barcodes to each lane, when only half will actually label?
-2. What benefit does this serve, instead of seperating them over different plates as in the previous example?
+2. What benefit does this serve, instead of separating them over different plates as in the previous example?
 
 A1. This setup is actually the same as example 4, but with the two plates merged. Here we can check for cross-contamination in each lane by measuring the real cell labels against the false barcodes. If in lane 1, we detect a significant number of reads with cell barcodes of `TAA` or `ANN`, we can assume that some cross-contamination has occurred since we should not be able to detect these barcodes in that lane. The converse is also true of lane 2.
 
