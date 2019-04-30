@@ -69,7 +69,7 @@ Biases could get introduced by the process due to uneven fragment sizes. To avoi
 
 It has been shown that a minimum length of 16 bp is necessary for precise mapping on the genome {% cite Kwon2015 %} . We can therefore use the MmeI restriction site (21pb) but not BsmFI (11 to 12 bp). It is not important in that case to have longer reads as we do not care to have a good coverage on the entire genome, the only information we need is the Ta site affected by an insertion, to do that we only need the location of the start of the reads.
 
-In this tutorial, the transposon is a mariner Himar1 with the structure described in the figure [Structure of the tranposon constructs](#TranspStructure) {% cite Santiago2015 %}.
+In this tutorial, the transposon is a mariner Himar1 with the structure described in the figure [Structure of the tranposon constructs](#figure-2) {% cite Santiago2015 %}.
 
 ![Structure of the transposon containing several parcodes and adapters](../../images/tnseq/tranposon_structure.png "<b>Structure of the tranposon constructs</b> - The transposon construct is a mariner transposon with two specific region used to specifically sequence the region upstream of the insertion. The transposon inserts at TA site at the ITR junctions. These ITR junctions have been modified to include a Mme1 restriction site. Using MmeI enzyme to determine the size of the reads allow to have a homogeneous read size and therefore avoid a bias in the representation of the insertions. It also includes a NotI restriction site (cut 21 bp upstream from the restriction site). These two site are the 5' and 3' limits to the genomic DNA we want to sequence. <b>A. Sequence flanking genomic regions</b> After digestion by NotI restriction enzyme, the fragments are attached to biotinylated adaptors that link to NotI restriction site. The attached fragment are then digested by MMeI at a site upstream , where an Illumina primer is then linked. The sequencing is then done, adding Illumina adaptors and an additional barcode to the read for multiplexed sequencing. <b>B. Removing incorrect fragments</b> An insertion can sometimes be composed of one or more copies of the transposon (multimer). There is therefore a risk to select plasmid backbone sequence. To solve this problem, an additional NotI has been add in the backbone to create different length construct, that can later be filtrated (. Different promoters are added to the construct along with an additional 3 bp barcode to analyze differential expression impact, but this will be the subject of another tutorial. (From <a href='#Santiago2015'> Santiago <i>et al.</i> 2015</a>)")
 
@@ -84,7 +84,7 @@ Because of this complex tranposon structure, the reads obtained after sequencing
 
 Once we extracted the genomic sequences from the initial reads, we need to locate each of them on the genome to link them to a TA site. To do that we need to map them to a reference genome, link them to a specific insertion site, and then count the number of insertion for each TA site.
 
-Once we have the count of insertion at every insertion site, there is several methods existing to identify essential genes of regions. They can be divided in two major categories (see figure [Methods of TnSeq Analyses](#AnalysesMethods) {% cite Chao2016 %}) :
+Once we have the count of insertion at every insertion site, there is several methods existing to identify essential genes of regions. They can be divided in two major categories (see figure [Methods of TnSeq Analyses](#figure-3) {% cite Chao2016 %}) :
 1. Annotation dependent : The read counts and/or insertion frequency are calculated across defined regions (genes, promoters ... )
 2. Annotation independent : The read counts and/or disrupted sites are considered across the whole genome, independently of defined structures.
 
@@ -156,23 +156,21 @@ The experimental design of transposon insertion sequencing produces raw reads co
 
 > ### {% icon hands_on %} Hands-on:  Barcode splitting with Cutadapt
 >
-> 1. **Cutadapt** {% icon tool %} Split the dataset based on barcodes with:
->    - Set *"Single-end or Paired-end reads?"* to `Single-end`
->    - Set *"FASTQ/A file"* to the `fastq.gz file` containing the training set of reads.
->    - **Click** on `Insert 5' (Front) Adapters`
->         - Set *"Source"* to `File From History`
->         - Set *"Choose file containing 5' adapters"* to the `condition barcodes` file in the history
+>  1. **Cutadapt** {% icon tool %} Split the dataset based on barcodes with:
+>    - *"Single-end or Paired-end reads?"* : `Single-end`
+>    - *"FASTQ/A file"* : `fastq.gz file` containing the training set of reads.
+>    - Unfold `Insert 5' (Front) Adapters`
+>    - *"Source"* : `File From History`
+>    - *"Choose file containing 5' adapters"* : `condition barcodes` file
 >     ![Use cutadapt with front adapters](../../images/tnseq/frontadaptercutadapt.png)
->
->    - **Click** on `Adapter Options`
->         - Set *"Maximum error rate"* to `0.15` to allow 1 mismatch
->         - Set *"Match times"* to `3` in case the barcode attached several times
+>    - Unfold `Adapter Options`
+>    -  *"Maximum error rate"* : `0.15` to allow 1 mismatch
+>    -  *"Match times"* : `3` in case the barcode attached several times
 >     ![Adapter options in Cutadapt](../../images/tnseq/optionaptercutadapt.png)
->    - **Click** on `Output Options`
->         - Set *"Report"* to `yes`
->         - Set *"Multiple output"* to `yes` to separate the reads into one file per condition
+>    - Unfold `Output Options`
+>    -  *"Report"* : `yes`
+>    -  *"Multiple output"* : `yes` to separate the reads into one file per condition
 >     ![Output options in Cutadapt](../../images/tnseq/cutadaptOutput.png)
->    - **Click** on `Execute`
 >
 >
 >    > ### {% icon question %} Questions
@@ -200,30 +198,35 @@ To remove the reads that might not have been trimmed because of too many mismatc
 
 > ### {% icon hands_on %} Hands-on:  Remove Adapter with Cutadapt
 >
-> {% icon tool %} Select the **Cutadapt** tool in the tool bar and run with the following parameters to remove adapters:
->    - Set *"Single-end or Paired-end reads?"* to `Single-end`
->    - Set *"FASTQ/A file"* to the `Cutadapt on data... Output` collection output of the previous step.
->    - **Click** on `Insert 3' (End) Adapters`
->        - Set *"Source"* to `Enter custom Sequence`
->        - Set *"Enter custom 3' adapter sequence"* to `CGTTATGGCACGC`
->    - **Click** on `Adapter Options`
->        - Set *"Match times"* to `3` in case the barcode attached several times
->    - **Click** on `Output Options`
->        - Set *"Report"* to `yes`
->    - **Click** on `Execute`
+>  1. **Cutadapt** {% icon tool %} Remove adapters with:
+>    - *"Single-end or Paired-end reads?"* : `Single-end`
+>    - *"FASTQ/A file"* : `Cutadapt on data... Output` collection output of the previous step.
+>    - Unfold `Insert 3' (End) Adapters`
+>        - *"Source"* : `Enter custom Sequence`
+>        - *"Enter custom 3' adapter sequence"* : `CGTTATGGCACGC`
+>    - Unfold `Adapter Options`
+>        - *"Match times"* : `3` in case the barcode attached several times
+>    - Unfold `Output Options`
+>        - *"Report"* : `yes`
+>    - Unfold `Insert 3' (End) Adapters`
+>        - *"Source"* : `Enter custom Sequence`
+>        - *"Enter custom 3' adapter sequence"* : `CGTTATGGCACGC`
+>    - Unfold `Adapter Options`
+>        - *"Match times"* : `3` in case the barcode attached several times
+>    - Unfold `Output Options`
+>        - *"Report"* : `yes`
 >
 >
-> {% icon tool %} Run  **Cutadapt**  again with the following parameters to filter reads based on length:
->    - Set *"Single-end or Paired-end reads?"* to `Single-end`
->    - Set *"FASTQ/A file"* to the `Cutadapt on data... Output` collection output of the previous step.
->    - **Click** on `Filter Options`
->        - Set *"Minimum length"* to `64`
->        - Set *"Maximum length"* to `70`
->    - **Click** on `Output Options`
->        - Set *"Report"* to `yes`
->    - **Click** on `Execute`
+>  2. **Cutadapt** {% icon tool %} Filter reads based on length with:
+>    - Set *"Single-end or Paired-end reads?"* : `Single-end`
+>    - Set *"FASTQ/A file"* : `Cutadapt on data... Output` collection output of the previous step.
+>    - Unfold `Filter Options`
+>        - *"Minimum length"* : `64`
+>        - *"Maximum length"* : `70`
+>    - Unfold `Output Options`
+>        - *"Report"* to `yes`
 >
->
+>    {% include snippets/select_collection.md %}
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -269,18 +272,17 @@ We therefore need to separate the reads based on the construct specific 3bp barc
 
 > ### {% icon hands_on %} Hands-on:  Barcode split with Cutadapt
 >
-> {% icon tool %} Select the **Cutadapt** tool in the tool bar and run with the following parameters:
->    - Set *"Single-end or Paired-end reads?"* to `Single-end`
->    - Set *"FASTQ/A file"* to the  `Cutadapt on data... Output` collection output of the previous step.
->    - **Click** on `Insert 3' (End) Adapters`
->        - Set *"Source"* to `File From History`
->        - Set *"Choose file containing 3' adapters"* to the `construct barcodes` file in our history
->    - **Click** on `Adapter Options`
->        - Set *"Match times"* to `3` in case the barcode attached several times
->    - **Click** on `Output Options`
->        - Set *"Report"* to `yes`
->        - Set *"Multiple output"* to `yes` to separate the reads into one file per condition
->    - **Click** on `Execute`
+>  1. **Cutadapt** {% icon tool %} with:
+>    - *"Single-end or Paired-end reads?"* to `Single-end`
+>    - *"FASTQ/A file"* : `Cutadapt on data... Output` collection output of the previous step.
+>    - Unfold `Insert 3' (End) Adapters`
+>       - *"Source"* : `File From History`
+>       - *"Choose file containing 3' adapters"* : `construct barcodes` file
+>    - Unfold `Adapter Options`
+>       - *"Match times"* : `3` in case the barcode attached several times
+>    - Unfold `Output Options`
+>       - *"Report"* : `yes`
+>       - *"Multiple output"* : `yes` to separate the reads into one file per condition
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -303,17 +305,16 @@ The last remaining transposon sequence is the linker containing the MmeI restric
 
 > ### {% icon hands_on %} Hands-on:  Remove Linker with Cutadapt
 >
-> {% icon tool %} Select the **Cutadapt** tool in the tool bar and run with the following parameters:
->    - Set *"Single-end or Paired-end reads?"* to `Single-end`
->    - Set *"FASTQ/A file"* to the `Cutadapt on data... Output` nested collection output of the previous step.
->    - **Click** on `Insert 3' (End) Adapters`
->        - Set *"Source"* to `Enter custom Sequence`
->        - Set *"Enter custom 3' adapter sequence"* to `ACAGGTTGGATGATAAGTCCCCGGTCTATATTGAGAGTAACTACATTT`
->    - **Click** on `Adapter Options`
->        - Set *"Maximum error rate"* to `0.15`
->    - **Click** on `Output Options`
->        - Set *"Report"* to `yes`
->    - **Click** on `Execute`
+>  1. **Cutadapt** {% icon tool %} with:
+>    - *"Single-end or Paired-end reads?"* to `Single-end`
+>    - *"FASTQ/A file"* : `Cutadapt on data... Output` nested collection output of the previous step.
+>    - Unfold`Insert 3' (End) Adapters`
+>        - *"Source"* : `Enter custom Sequence`
+>        - *"Enter custom 3' adapter sequence"* : `ACAGGTTGGATGATAAGTCCCCGGTCTATATTGAGAGTAACTACATTT`
+>    - Unfold `Adapter Options`
+>        - *"Maximum error rate"* : `0.15`
+>    - Unfold `Output Options`
+>        - *"Report"* to `yes`
 >
 {: .hands_on}
 
@@ -327,27 +328,32 @@ The first step is to map our read to the reference genome. We are going to use t
 
 > ### {% icon hands_on %} Hands-on:  Map reads with Bowtie
 >
-> {% icon tool %} Select the **Map with Bowtie for Illumina** tool in the tool bar and run with the following parameters:
->   - Set *"Will you select a reference genome from your history or use a built-in index?"* to `Use one from the history`
->   - Set *"Select the reference genome"* to the `staph_aur.fasta` file.
->   - Set *"Is this library mate-paired?"* to `Single-end`
->   -  Set *"FASTQ file"* to `Cutadapt on...Output` that you got at the end of the preprocessing section
->   - Set *"Bowtie settings to use"* to `Full parameters list` to change parameters so that bowtie stricly enforces no mismatches.
->       - Set *"Skip the first n reads (-s)"* to `0`
->       - Set *"Maximum number of mismatches permitted in the seed (-n)"* to `0`
->       - Set *"Seed length (-l)"* to `17`
+>  1. **Map with Bowtie for Illumina** {% icon tool %} with:
+>   - *"Will you select a reference genome from your history or use a built-in index?"* : `Use one from the history`
+>   - *"Select the reference genome"* : `staph_aur.fasta` file.
+>   - *"Is this library mate-paired?"* : `Single-end`
+>   - *"FASTQ file"* : `Cutadapt on...Output` that you got at the end of the preprocessing section
+>   - *"Bowtie settings to use"* : `Full parameters list` to change parameters so that bowtie strictly enforces no mismatches.
+>       - *"Skip the first n reads (-s)"* : `0`
+>       - *"Maximum number of mismatches permitted in the seed (-n)"* : `0`
+>       - *"Seed length (-l)"* : `17`
 >       ![Full parameters in Bowtie](../../images/tnseq/bowtie1.png)
->       - Set *"Whether or not to try as hard as possible to find valid alignments when they exist (-y)"* to `Try Hard`
->       - Set *"Whether or not to make Bowtie guarantee that reported singleton alignments are 'best' in terms of stratum and in terms of the quality values at the mismatched positions (--best)"* to `Use best`
+>       - *"Whether or not to try as hard as possible to find valid alignments when they exist (-y)"* : `Try Hard`
+>       - *"Whether or not to make Bowtie guarantee that reported singleton alignments are 'best' in terms of stratum and in terms of the quality values at the mismatched positions (--best)"* : `Use best`
 >       ![Full parameters in Bowtie](../../images/tnseq/bowtie2.png)
->   - **Click** on `Execute`
 >
 >
-> {% icon tool %} *Optional* : Rename your collection for better clarity:
->   - Open the collection by clicking on it in the history panel
->   -  **Click** on the name of the collection `Bowtie...`
->   - Change the title to  `Mapped reads`
->   - Hit Enter key
+>  2. *Optional* : Rename your collection for better clarity
+>
+>
+>    > ### {% icon tip %} Tip: Renaming a collection
+>    >
+>    > 1. Open the collection by clicking on it in the history panel
+>    > 2. Click on the name of the collection
+>    > 3. Enter the new name
+>    > 4. Hit the `Enter` key
+>    {: .tip}
+>
 >
 >
 >    > ### {% icon question %} Questions
@@ -363,7 +369,6 @@ The first step is to map our read to the reference genome. We are going to use t
 {: .hands_on}
 
 
-
 ## Getting coverage of the genome
 
 Now that we have mapped the reads on the reference genome, we are going to calculate the coverage of the genome to later cross them with our TA sites position.
@@ -375,21 +380,20 @@ In our case, the reads cover the flanking region on one side of the TA site wher
 
 > ### {% icon hands_on %} Hands-on:  Compute genome coverage
 >
-> {% icon tool %} Select the **bamCoverage** tool in the tool bar and run with the following parameters:
->   - Set *"BAM/CRAM file"* to `Mapped Reads` collection
->   - Set *"Bin size in bases"* to `1`
->   - Set *"Scaling/Normalization method"* to `Do not normalize or scale`
->   - Set *"Coverage file format"* to `bedgraph`
->   - Set *"Show advanced options"* to `yes`
->       - Set *"Ignore missing data?"* to `yes` to get only region with read counts
->       - Set *"Offset inside each alignment to use for the signal location."* to `-1` to read the signal of the coverage only at the 3' end of the read.
->   - **Click** on `Execute`
+>  1. **bamCoverage** {% icon tool %} with:
+>   - *"BAM/CRAM file"* : `Mapped Reads` collection
+>   - *"Bin size in bases"* : `1`
+>   - *"Scaling/Normalization method"* : `Do not normalize or scale`
+>   - *"Coverage file format"* : `bedgraph`
+>   - *"Show advanced options"* : `yes`
+>       - *"Ignore missing data?"* : `yes` to get only region with read counts
+>       - *"Offset inside each alignment to use for the signal location."* : `-1` to read the signal of the coverage only at the 3' end of the read.
 >
 {: .hands_on}
 
 ## Getting TA sites positions
 
-In order to get the coverage on each TA site we need to prepare a file containing the position of each TA site. As you can see on the figure "[Mapping read and TA site coverage](#MapCoverage)" the read can cover one side or the other of the TA depending on the direction of insertion of the transposon. Depending on the direction of insertion the coverage will be counted on the leftmost position of the TA site or on the rightmost. As we are not considering strand separately in this analyses, we will consider both count as attached to the leftmost base of the TA site. To do that we will create two list of TA site positions, listing the 5' end of each TA site for forward and reverse strand, and then merge them to get a global count per TA site.
+In order to get the coverage on each TA site we need to prepare a file containing the position of each TA site. As you can see on the figure "[Mapping read and TA site coverage](#figure-5)" the read can cover one side or the other of the TA depending on the direction of insertion of the transposon. Depending on the direction of insertion the coverage will be counted on the leftmost position of the TA site or on the rightmost. As we are not considering strand separately in this analyses, we will consider both count as attached to the leftmost base of the TA site. To do that we will create two list of TA site positions, listing the 5' end of each TA site for forward and reverse strand, and then merge them to get a global count per TA site.
 We first need to create a fasta file containing the motif :
 ```
 >TA_site
@@ -398,14 +402,13 @@ TA
 
 > ### {% icon hands_on %} Hands-on:  Get TA sites coordinates
 >
-> {% icon tool %} Select the **wordmatch** tool in the tool bar and run with the following parameters:
->   - Set *Sequence 1"* to `TA site` file you just created
->   - Set *"Sequence 2"* to the genome sequence file `staph_aur.fasta`
->   - Set *"Word size"* to `2`
->   - Set *"Output Alignment File Format"* to `match`
->   - Set *"Output Feature 1 File Format"* to `GFF`
->   - Set *"Output Feature 2 File Format"* to `GFF`
->   - **Click** on `Execute`
+>  1. **wordmatch** {% icon tool %} with:
+>   - *Sequence 1"* : `TA site` file you just created
+>   - *"Sequence 2"* : `staph_aur.fasta`
+>   - *"Word size"* : `2`
+>   - *"Output Alignment File Format"* : `match`
+>   - *"Output Feature 1 File Format"* : `GFF`
+>   - *"Output Feature 2 File Format"* : `GFF`
 >
 {: .hands_on}
 
@@ -427,43 +430,59 @@ The only information we need here are the positions of the 5' end of each TA sit
 
 > ### {% icon hands_on %} Hands-on:  Get forward and reverse strand positions
 >
-> {% icon tool %} Select the **Cut columns from a table (cut)** tool in the tool bar and run with the following parameters:
->   - Set *File to cut"* to `Wordmatch on...` file containing the TA sites positions
->   - Set *"Operation"* to `Keep`
->   - Set *"Delimited by"* to `tab`
->   - Set *"Cut by"* to `fields`
->   - Set *"List of Fields"* to `Column: 1` and `Column: 4`  to get forward strand coordinate
->   - **Click** on `Execute`
->   - Add `#forward` tag to the output
+>  1. **Cut columns from a table (cut)** {% icon tool %} with:
+>   - *File to cut"* to `Wordmatch on...` file containing the TA sites positions
+>   - *"Operation"* to `Keep`
+>   - *"Delimited by"* to `tab`
+>   - *"Cut by"* to `fields`
+>   - *"List of Fields"* to `Column: 1` and `Column: 4`  to get forward strand coordinate
+>   
+>  2. Add the `#forward` tag to the output
 >
-> {% icon tool %} Select the **Cut columns from a table (cut)** tool in the tool bar and run with the following parameters:
->   - Set *File to cut"* to `Wordmatch on...` file containing the TA sites positions
->   - Set *"Operation"* to `Keep`
->   - Set *"Delimited by"* to `tab`
->   - Set *"Cut by"* to `fields`
->   - Set *"List of Fields"* to  `Column: 1` and  `Column: 5`  to get reverse strand coordinate
->   - **Click** on `Execute`
->   - Add `#reverse` tag to the output
+>
+>  3. **Cut columns from a table (cut)** {% icon tool %} with:
+>   - *File to cut"* : `Wordmatch on...` file containing the TA sites positions
+>   - *"Operation"* : `Keep`
+>   - *"Delimited by"* : `tab`
+>   - *"Cut by"* : `fields`
+>   - *"List of Fields"* : `Column: 1` and  `Column: 5`  to get reverse strand coordinate
+>
+>  4. Add the `#reverse` tag to the output
+>
+>    > ### {% icon tip %} Tip: Adding a tag to a collection
+>    > * Click on the collection
+>    > * Add a tag starting with `#` in the `Add tags` field
+>    >
+>    >     Tags starting with `#` will be automatically propagated to the outputs of tools using this dataset.
+>    >
+>    > * Hit the `Enter` key
+>    > * Check that the tag is appearing below the dataset name
+>    >
+>    {: .tip}
+>
+>
 >
 {: .hands_on}
+
 
 The coordinates provided by wordmatch are based on count 1. Meaning the first nucleotide is counted as number 1. However, bamCoverage count the first nucleotide as nucleotide number 0. To be able to compare the two results, we need to shift the TA site positions by 1.
 
 > ### {% icon hands_on %} Hands-on:  Shift TA sites positions
 >
-> {% icon tool %} To shift the positions of TA sites, select the **Compute an expression on every row** tool in the tool bar and run with the following parameters:
->   - Set *Add expression"* to `c2-1` to shift the position by 1
->   - Set *"as a new column to"* to `Multiple datasets` and select the two files with the tags `forward` and `reverse`
->   - Set *"Round result?"* to `yes`
->   - **Click** on `Execute`
+>  1. **Compute an expression on every row** {% icon tool %} to shift the positions of TA sites with:
+>   - *Add expression"* : `c2-1` to shift the position by 1
+>   - *"as a new column to"* : `Multiple datasets` and select the two files with the tags `forward` and `reverse`
+>   - *"Round result?"* : `yes`
 >
-> {% icon tool %} To keep only the new coordinates, select the **Cut columns from a table (cut)** tool in the tool bar and run with the following parameters:
->   - Set *File to cut"* to `Multiple datasets` and select the two files output of the previous step
->   - Set *"Operation"* to `Keep`
->   - Set *"Delimited by"* to `tab`
->   - Set *"Cut by"* to `fields`
->   - Set *"List of Fields"* to `Column: 3`  to get new coordinates
->   - **Click** on `Execute`
+>  2. **Cut columns from a table (cut)** {% icon tool %} to keep only the new coordinates with:
+>   - *File to cut"* : `Multiple datasets` and select the two files output of the previous step
+>   - *"Operation"* : `Keep`
+>   - *"Delimited by"* : `tab`
+>   - *"Cut by"* : `fields`
+>   - *"List of Fields"* : `Column: 3`  to get new coordinates
+>
+>
+>    {% include snippets/select_multiple_datasets.md %}
 >
 {: .hands_on}
 
@@ -475,30 +494,27 @@ Now that have the files containing the coordinates of our TA sites for both stra
 
 > ### {% icon hands_on %} Hands-on:  Get coverage of TA sites
 >
-> {% icon tool %} Select the **Join two files** tool in the tool bar and run with the following parameters:
->   - Set *1st file"* to `bamCoverage on ...` collection
->   - Set *"Column to use from 1st file"* to `Column 2` to select the position of the end of the read
->   - Set *"2nd File"* to the file with the `forward` tags
->   - Set *"Column to use from 2nd file"* to `Column 1`
->   - Set *"Output lines appearing in"*  to `Both 1st & 2nd file, plus unpairable lines from 2st file. (-a 2)` to get all TA sites.
->   - Set *"First line is a header line"* to `No`
->   - Set *"Value to put in unpaired (empty) fields"* to `0`: assign a count of 0 to TA sites not covered in  the bamCoverage file.
->   - **Click** on `Execute`
->   - Add `#forward` tag to the output collections
+>  1. **Join two file** {% icon tool %} with:
+>   - *1st file"* : `bamCoverage on ...` collection
+>   - *"Column to use from 1st file"* : `Column 2` to select the position of the end of the read
+>   - *"2nd File"* : the file with the `forward` tags
+>   - *"Column to use from 2nd file"* : `Column 1`
+>   - *"Output lines appearing in"*  : `Both 1st & 2nd file, plus unpairable lines from 2st file. (-a 2)` to get all TA sites.
+>   - *"First line is a header line"* : `No`
+>   - *"Value to put in unpaired (empty) fields"* : `0` to assign a count of 0 to TA sites not covered in the bamCoverage file.
 >
+>  2. Add `#forward` tag to the output collections
 >
-> {% icon tool %} Repeat the operation with the `reverse` file
+>  3. Repeat the operation with the `reverse` file
 >
+>  4. **Cut columns from a table (cut)** {% icon tool %} with:
+>   - *File to cut"* : `Join on collection...` collection with the `forward` tag
+>   - *"Operation"* : `Keep`
+>   - *"Delimited by"* : `tab`
+>   - *"Cut by"* : `fields`
+>   - *"List of Fields"* : `Column: 1` and `Column: 4` to keep only position and coverage
 >
-> {% icon tool %} Select the **Cut columns from a table (cut)** tool in the tool bar and run with the following parameters:
->   - Set *File to cut"* to the collection `Join on collection...` with the `forward` tag
->   - Set *"Operation"* to `Keep`
->   - Set *"Delimited by"* to `tab`
->   - Set *"Cut by"* to `fields`
->   - Set *"List of Fields"* to `Column: 1`  and `Column: 4` to keep only position and coverage
->   - **Click** on `Execute`
->
-> {% icon tool %} Repeat the operation with the `reverse` collection
+>  5. Repeat the operation with the `reverse` collection
 >
 {: .hands_on}
 
@@ -506,61 +522,52 @@ We now have a read count for each nucleotides of the TA sites. The insertions co
 
 > ### {% icon hands_on %} Hands-on:  Get total count per TA site
 >
-> {% icon tool %} To shift the positions of reverse strand counts, select the **Compute an expression on every row** tool in the tool bar and run with the following parameters:
->   - Set *Add expression"* to `c1-1` to shift the position by 1
->   - Set *"as a new column to"* to the collection `Cut on...` with the tags `reverse`
->   - Set *"Round result?"* to `yes`
->   - **Click** on `Execute`
+>  1. **Compute an expression on every row** {% icon tool %} to shift the positions of reverse strand counts with:
+>   - *Add expression"* : `c1-1` to shift the position by 1
+>   - *"as a new column to"* : `Cut on...` collection with the tags `reverse`
+>   - *"Round result?"* : `yes`
 >
-> {% icon tool %} To select the new coordinates, select the **Cut columns from a table** tool in the tool bar and run with the following parameters:
->   - Set *"Cut columns"* to `c3,c2` to keep only new position and counts in that order
->   - Set *"Delimited by"* to `tab`
->   - Set *From"* to the output of the previous step collection `Compute on collection...`
->   - **Click** on `Execute`
+>  2. **Cut columns from a table** {% icon tool %} with:
+>   - *"Cut columns"* : `c3,c2` to keep only new position and counts in that order
+>   - *"Delimited by"* : `tab`
+>   - *From"* : `Compute on collection...`
 >
-> {% icon tool %} Before adding the counts we need to sort the files. Select the **Sort data in ascending or descending order** tool in the *"Text Manipulation"* section of the tool bar and run with the following parameters:
->   - Set *"Sort Query"* to the newest collection with the `forward` tag
->   - Set *"Number of header lines"* to `0`
->   - Set *"on column"* to `Column: 1` to sort on positions
->   - Set *"in"* to `Ascending Order`
->   - Set *"Flavor"* to `Fast numeric sort (-n)`
->   - **Click** on `Execute`
+>  3. **Cut columns from a table** {% icon tool %} in the *"Text Manipulation"* section of the tool bar to sort the files with:
+>   - *"Sort Query"* : the newest collection with the `forward` tag
+>   - *"Number of header lines"* : `0`
+>   - *"on column"* : `Column: 1` to sort on positions
+>   - *"in"* : `Ascending Order`
+>   - *"Flavor"* : `Fast numeric sort (-n)`
 >
-> {% icon tool %} Repeat the operation with the newest `reverse` file
+>  4. Repeat the operation with the newest `reverse` file
 >
-> {% icon tool %} To merge the two collections, select the **Join two files** tool in the tool bar and run with the following parameters:
->   - Set *1st file"* to `Sort on ...` collection with the `forward` tag
->   - Set *"Column to use from 1st file"* to `Column 1` to join on positions
->   - Set *"2nd File"* o `Sort on ...` collection with the `reverse` tag
->   - Set *"Column to use from 2nd file"* to `Column 1`
->   - Set *"Output lines appearing in"*  to `Both 1st & 2nd file` to get all TA sites.
->   - Set *"First line is a header line"* to `No`
->   - Set *"Value to put in unpaired (empty) fields"* to `.`
->   - **Click** on `Execute`
+>  6. **Join two files** {% icon tool %} to merge the two collections and get the forward and reverse count in two different columns with:
+>   - *1st file"* : `Sort on ...` collection with the `forward` tag
+>   - *"Column to use from 1st file"* : `Column 1` to join on positions
+>   - *"2nd File"* : `Sort on ...` collection with the `reverse` tag
+>   - *"Column to use from 2nd file"* : `Column 1`
+>   - *"Output lines appearing in"*  : `Both 1st & 2nd file` to get all TA sites.
+>   - *"First line is a header line"* : `No`
+>   - *"Value to put in unpaired (empty) fields"* : `.`
 >
-> Now that we have joined our files we want to create a new column with the addition of bth counts
+>  7. **Compute an expression on every row** {% icon tool %} to get the total read count with:
+>   - *Add expression"* : `c2+c3` to get the total count
+>   - *"as a new column to"* : the collection `Join on ...` with the tags `reverse` and `forward`
+>   - *"Round result?"* : `yes`
 >
-> {% icon tool %} Select the **Compute an expression on every row** tool in the tool bar and run with the following parameters:
->   - Set *Add expression"* to `c2+c3` to get the total count
->   - Set *"as a new column to"* to the collection `Join on ...` with the tags `reverse` and `forward`
->   - Set *"Round result?"* to `yes`
->   - **Click** on `Execute`
+>  8. **Cut columns from a table (cut)** {% icon tool %} to get a file with only the position and total count with:
+>   - *File to cut"* : the collection `Compute...`
+>   - *"Operation"* : `Keep`
+>   - *"Delimited by"* : `tab`
+>   - *"Cut by"* : `fields`
+>   - *"List of Fields"* : `Column: 1` and `Column: 4` to keep only position and total counts
 >
->  {% icon tool %} To get a file with only the position and total count, select the **Cut columns from a table (cut)** tool in the tool bar and run with the following parameters:
->   - Set *File to cut"* to the collection `Compute...`
->   - Set *"Operation"* to `Keep`
->   - Set *"Delimited by"* to `tab`
->   - Set *"Cut by"* to `fields`
->   - Set *"List of Fields"* to `Column: 1`  and `Column: 4` to keep only position and total counts
->   - **Click** on `Execute`
->
-> {% icon tool %} Select the **Sort data in ascending or descending order** tool in the *"Text Manipulation"* section of the tool bar and run with the following parameters:
->   - Set *Sort Query"* to the collection `Cut columns on...`
->   - Set *"Number of header lines"* to `0`
->   - Set *"on column"* to `Column: 1` to sort on positions
->   - Set *"in"* to `Ascending Order`
->   - Set *"Flavor"* to `Fast numeric sort (-n)`
->   - **Click** on `Execute`
+>  9. **Sort data in ascending or descending order** {% icon tool %} in the *"Text Manipulation"* section of the tool bar with:
+>   - *Sort Query"* : the collection `Cut columns on...`
+>   - *"Number of header lines"* : `0`
+>   - *"on column"* : `Column: 1` to sort on positions
+>   - *"in"* : `Ascending Order`
+>   - *"Flavor"* : `Fast numeric sort (-n)`
 >
 >
 {: .hands_on}
@@ -577,9 +584,8 @@ Verify that the format of your file is `gff3` and not `gff`. If that is not the 
 
 > ### {% icon hands_on %} Hands-on : Create annotation file in prot_table format
 >
->  {% icon tool %} Select the **Convert GFF3 to prot_table for TRANSIT** tool in the TRANSIT section of the tool bar and run with the following parameters:
->   - Set *GenBank GFF file"* to the `gff3` file
->   - **Click** on `Execute`
+>  1. **Convert GFF3 to prot_table for TRANSIT** {% icon tool %} with:
+>   - *GenBank GFF file"* : the `gff3` file
 >
 >
 {: .hands_on}
@@ -591,13 +597,12 @@ Now that we have prepared the annotation file, we can use the count per TA site 
 
 > ### {% icon hands_on %} Hands-on : Predict gene essentiality with Transit
 >
->  {% icon tool %} Select the **Gumbel** tool in the TRANSIT section of the tool bar and run with the following parameters:
->   - Set *Input .wig files"* to the collection `Sort...`
->   - Set *Input annotation* to the `Convert...` file generated at the previous step
->   - Set *Smallest read-count to consider* to 2, to ignore single count insertions
->   - Set *Ignore TAs occuring at given fraction of the N terminus.* to 0.1, to ignore 10% of the insertion at the N-terminus extremity of the gene
->   - Set *Ignore TAs occuring at given fraction of the C terminus.* to 0.1, to ignore 10% of the insertion at the C-terminus extremity of the gene
->   - **Click** on `Execute`
+>  1. **Gumbel** {% icon tool %} with:
+>   - *Input .wig files"* : the collection `Sort...`
+>   - *Input annotation* : the `Convert...` file generated at the previous step
+>   - *Smallest read-count to consider* : `2`, to ignore single count insertions
+>   - *Ignore TAs occuring at given fraction of the N terminus.* : `0.1`, to ignore 10% of the insertion at the N-terminus extremity of the gene
+>   - *Ignore TAs occuring at given fraction of the C terminus.* : `0.1`, to ignore 10% of the insertion at the C-terminus extremity of the gene
 >
 >
 {: .hands_on}
@@ -617,9 +622,8 @@ We can obtain the list of genes predicted as essential by filtering on the essen
 
 > ### {% icon hands_on %} Hands-on : Get table of essential genes
 >
->  {% icon tool %} Select the **Filter data on any column using simple expressions** tool and run with the following parameters:
->   - Set *With following condition"* to `c9=='E'` to select essential genes`
->   - **Click** on `Execute`
+>  1. **Filter data on any column using simple expressions** {% icon tool %} with:
+>   - *With following condition"* : `c9=='E'` to select essential genes`
 >
 >
 {: .hands_on}
@@ -630,42 +634,40 @@ Now let's compare the results between out two conditions :
 
 
 > ### {% icon hands_on %} Hands-on : Separate Files from the collection
->  {% icon tool %} Select the **Extract Dataset from a list** tool and run with the following parameters:
->   - Set *Input List"* to the `Filter on...`  result
->   - Set *How should a dataset be selected?"* to `Select by index`
->   - Set *Element index:"* to `0` to select the first dataset
->   - **Click** on `Execute`
 >
->  {% icon tool %} Select the **Extract Dataset from a list** tool and run with the following parameters:
->   - Set *Input List"* to the `Filter on...`  result
->   - Set *How should a dataset be selected?"* to `Select by index`
->   - Set *Element index:"* to `1` to select the second dataset
->   - **Click** on `Execute`
+>  1. **Extract Dataset from a list** {% icon tool %} with:
+>   - *Input List"* : the `Filter on...`  result
+>   - *How should a dataset be selected?"* : `Select by index`
+>   - *Element index:"* : `0` to select the first dataset
+>
+>  2. **Extract Dataset from a list** {% icon tool %} with:
+>   - *Input List"* : the `Filter on...`  result
+>   - *How should a dataset be selected?"* : `Select by index`
+>   - *Element index:"* : `1` to select the second dataset
+>
 {: .hands_on}
 
 
 > ### {% icon hands_on %} Hands-on : Get gene essential in both conditions
 >
->  {% icon tool %} Select the **Join two files** tool and run with the following parameters:
->   - Set *1st file"* to `Control`
->   - Set *Column to use from 1st file"* to `Column : 1` to compare on gene ID
->   - Set *2nd file"* to `Condition`
->   - Set *Column to use from 2nd file"* to `Column : 1` to compare on gene ID
->   - Set *Output lines appearing in"* to `Both 1st and 2nd files` to get common essential genes
->   - **Click** on `Execute`
+>  1. **Join two files** {% icon tool %} with:
+>   - *1st file"* : `Control`
+>   - *Column to use from 1st file"* : `Column : 1` to compare on gene ID
+>   - *2nd file"* : `Condition`
+>   - *Column to use from 2nd file"* : `Column : 1` to compare on gene ID
+>   - *Output lines appearing in"* : `Both 1st and 2nd files` to get common essential genes
 >
 >
 {: .hands_on}
 
 > ### {% icon hands_on %} Hands-on : Get gene essential only in control
 >
->  {% icon tool %} Select the **Join two files** tool and run with the following parameters:
->   - Set *1st file"* to `Control`
->   - Set *Column to use from 1st file"* to `Column : 1` to compare on gene ID
->   - Set *2nd file"* to `Condition`
->   - Set *Column to use from 2nd file"* to `Column : 1` to compare on gene ID
->   - Set *Output lines appearing in"* to `1st but not 2nd`
->   - **Click** on `Execute`
+>  1. **Join two files** {% icon tool %} with:
+>   - *1st file"* : `Control`
+>   - *Column to use from 1st file"* : `Column : 1` to compare on gene ID
+>   - *2nd file"* : `Condition`
+>   - *Column to use from 2nd file"* : `Column : 1` to compare on gene ID
+>   - *Output lines appearing in"* : `1st but not 2nd`
 >
 >
 {: .hands_on}
@@ -673,13 +675,12 @@ Now let's compare the results between out two conditions :
 
 > ### {% icon hands_on %} Hands-on : Get gene essential only in condition
 >
->  {% icon tool %} Select the **Join two files** tool and run with the following parameters:
->   - Set *1st file"* to `Control`
->   - Set *Column to use from 1st file"* to `Column : 1` to compare on gene ID
->   - Set *2nd file"* to `Condition`
->   - Set *Column to use from 2nd file"* to `Column : 1` to compare on gene ID
->   - Set *Output lines appearing in"* to `2nd but not 1st`
->   - **Click** on `Execute`
+>  1. **Join two files** {% icon tool %} with:
+>   - *1st file"* : `Control`
+>   - *Column to use from 1st file"* : `Column : 1` to compare on gene ID
+>   - *2nd file"* : `Condition`
+>   - *Column to use from 2nd file"* : `Column : 1` to compare on gene ID
+>   - *Output lines appearing in"* : `2nd but not 1st`
 >
 >
 {: .hands_on}
