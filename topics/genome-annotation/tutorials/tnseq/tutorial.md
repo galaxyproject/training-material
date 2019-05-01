@@ -345,14 +345,7 @@ The first step is to map our read to the reference genome. We are going to use t
 >
 >  2. *Optional* : Rename your collection for better clarity
 >
->
->    > ### {% icon tip %} Tip: Renaming a collection
->    >
->    > 1. Open the collection by clicking on it in the history panel
->    > 2. Click on the name of the collection
->    > 3. Enter the new name
->    > 4. Hit the `Enter` key
->    {: .tip}
+>    {% include snippets/rename_collection.md %}
 >
 >
 >
