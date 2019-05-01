@@ -442,17 +442,7 @@ The only information we need here are the positions of the 5' end of each TA sit
 >
 >  4. Add the `#reverse` tag to the output
 >
->    > ### {% icon tip %} Tip: Adding a tag to a collection
->    > * Click on the collection
->    > * Add a tag starting with `#` in the `Add tags` field
->    >
->    >     Tags starting with `#` will be automatically propagated to the outputs of tools using this dataset.
->    >
->    > * Hit the `Enter` key
->    > * Check that the tag is appearing below the dataset name
->    >
->    {: .tip}
->
+>    {% include snippets/add_tag_to_collection.md %}
 >
 >
 {: .hands_on}
