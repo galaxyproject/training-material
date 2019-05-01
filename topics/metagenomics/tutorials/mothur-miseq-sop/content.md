@@ -274,6 +274,32 @@ Here the first column contains the read name, and the second column contains the
 
 ## Data Cleaning
 
+{% if include.short %}
+
+Next, we want to improve the quality of our data. To this end we will run a workflow that performs the following steps:
+
+1. **Filter by length**. We know that the V4 region of the 16S gene is around 250 bp long. Anything significantly longer
+   was likely a poorly assembled sequence. We will remove any contigs longer than 275 base pairs using the **Screen.seqs** {% icon tool %} tool.
+2. We will also remove any contigs containing too many ambiguous base calls (also using **Screen.seqs**)
+
+> ### {% icon hands_on %} Hands-on: Perform data cleaning
+>
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [the workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow1_quality_control.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
+>
+>    {% include snippets/import_workflow.md %}
+>
+> 2. **Run the workflow** using the following parameter:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *"1: Contigs"*: the fasta output from **Make.contigs** {% icon tool %}
+>    - {% icon param-file %} *"2: Groups"*: the group file from **Make.contigs** {% icon tool%}
+>
+>    {% include snippets/run_workflow.md %}
+>
+{: .hands_on}
+
+{% else %}
 As the next step, we want to improve the quality of our data. But first, let's get a feel of our dataset:
 
 > ### {% icon hands_on %} Hands-on: Summarize data
@@ -413,6 +439,9 @@ M00967_43_000000000-A3JHG_1_1101_13234_1983  10522   425    281   340     205
 
 The first column contains the read names of the representative sequences, and the subsequent columns contain
 the number of duplicates of this sequence observed in each sample.
+
+{% endif %}
+
 
 # Sequence Alignment
 
