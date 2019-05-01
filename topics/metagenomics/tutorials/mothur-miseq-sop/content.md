@@ -414,7 +414,7 @@ M00967_43_000000000-A3JHG_1_1101_13234_1983  10522   425    281   340     205
 The first column contains the read names of the representative sequences, and the subsequent columns contain
 the number of duplicates of this sequence observed in each sample.
 
-## Sequence Alignment
+# Sequence Alignment
 
 For more information on the topic of alignment, please see our training materials
 [here]({{site.baseurl}}{% link topics/sequence-analysis/index.md %})
@@ -464,7 +464,7 @@ long stretches are likely the result of PCR errors and we would be wise to remov
 Next we will clean our data further by removing poorly aligned sequences and any sequences with long
 homopolymer stretches.
 
-### More Data Cleaning
+# Data Cleaning
 
 To ensure that all our reads overlap our region of interest, we will remove any reads not overlapping the region
 from position 1968 to 11550 using the **Screen.seqs** tool. To make sure they overlap *only* that region, we will
@@ -672,7 +672,7 @@ The data is now as clean as we can get it. In the next section we will use the M
 our sequencing and bioinformatics pipeline is.
 
 
-## Optional: Calculate error rates based on our mock community
+# Optional: Calculate error rates based on our mock community
 
 
 > ### {% icon comment %} Skipping the mock community analysis
@@ -885,6 +885,12 @@ best efforts, some chimeras or other contaminations may have slipped through our
 Now that we have assessed our error rates we are ready for some real analysis.
 
 
+# OTU-based Analysis
+
+In this tutorial we will continue with an OTU-based approach, for the phylotype and phylogenic
+approaches, please refer to the [mothur wiki page](https://www.mothur.org/wiki/MiSeq_SOP).
+
+
 ### Removing Mock sample
 
 Now that we have cleaned up our data set as best we can, and assured ourselves of the quality of our sequencing
@@ -901,11 +907,6 @@ the **Remove.groups** tool:
 >
 {: .hands_on}
 
-
-# OTU-based Analysis
-
-In this tutorial we will continue with an OTU-based approach, for the phylotype and phylogenic
-approaches, please refer to the [mothur wiki page](https://www.mothur.org/wiki/MiSeq_SOP).
 
 ## Clustering sequences into OTUs
 
