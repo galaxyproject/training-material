@@ -118,7 +118,7 @@ Sequencing data contains a substantial number of sequencing errors that manifest
 5. Solid *k*-mers are mapped back to the reads.
 6. Reads are corrected using solid *k*-mers:
 
-![Read correction with BayesHammer](../../images/readCorrection.jpg "Read correction. Black <em>k</em>-mers are solid. Grey <em>k</em>-mers are non-solid. Red <em>k</em>-mers are the centers of the corresponding clusters (two grey <em>k</em>-mers striked through on the right are non-solid singletons). As a result, one nucleotide is changed based on majority rule. (From [Nikolenko:2013])")
+![Read correction with BayesHammer](../../images/readCorrection.jpg "Read correction. Black <em>k</em>-mers are solid. Grey <em>k</em>-mers are non-solid. Red <em>k</em>-mers are the centers of the corresponding clusters (two grey <em>k</em>-mers striked through on the right are non-solid singletons). As a result, one nucleotide is changed based on majority rule. (From {% cite Nikolenko2013 %})")
 
 In the case of the full dataset, SPAdes error correction changed 14,013,757 bases in 3,382,337 reads - a substantial fraction of the full ~18 million read dataset.
 
