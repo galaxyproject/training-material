@@ -87,9 +87,11 @@ In this analysis we will perform two tasks: (1) assembly and (2) annotation. Bel
 
 ![Logo unicycler](https://github.com/rrwick/Unicycler/raw/master/misc/logo.png)
 
-For assembly we will be using [Unicycler](https://github.com/rrwick/Unicycler) ({% cite Wick2017 %}). Unicycler is designed specifically for *hybrid assembly* (that is, using both short- and long-read sequencing data) of small (e.g., bacterial, viral, organellar) genomes. In our hands it has produced complete high quality assemblies. Unicycler employs a multi-step process that utilizes a number of software tools:
+For assembly we will be using [Unicycler](https://github.com/rrwick/Unicycler) (also see publication {% cite Wick2017 %}). Unicycler is designed specifically for *hybrid assembly* (that is, using both short- and long-read sequencing data) of small (e.g., bacterial, viral, organellar) genomes. In our hands it has produced complete high quality assemblies. Unicycler employs a multi-step process that utilizes a number of software tools:
 
-![Unicycler process](../../images/unicycler.png "Simplified view of the Unicycler assembly process (Wick et al. 2017)"). In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long reads to produce the longest possible set of contigs. These are then polished by aligning the original short reads against contigs and feeding these alignments to Pilon - an assembly improvement tool. (Walker et al. 2014})")
+![Unicycler process](../../images/unicycler.png "Simplified view of the Unicycler assembly process (From {% cite Wick2017 %}) In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long reads to produce the longest possible set of contigs. These are then polished by aligning the original short reads against contigs and feeding these alignments to Pilon - an assembly improvement tool. {% cite Wick2017 %}")
+
+
 
 As you can see Unicycler relies heavily on SPAdes ({% cite Bankevich2012 %}) and [Pilon](https://github.com/broadinstitute/pilon/wiki). We will briefly describe these two tools.
 
@@ -99,7 +101,7 @@ As you can see Unicycler relies heavily on SPAdes ({% cite Bankevich2012 %}) and
 
 Assemblers usually construct graphs for *k*-mers of a fixed size. We have noted that when *k* is small it is difficult to resolve the repeats. If *k* is too large a corresponding graph may be fragmented (especially if read coverage is low). SPAdes uses several values for *k* (that are either manually set or inferred automatically) to create a *multisized* graph that minimized tangledness and fragmentation by combining various *k*-mers ({% cite Bankevich2012 %})):
 
-![Multigraph approach implemented in SPAdes](../../images/multiGraph.jpg "Multisized de Bruijn graph. A circular Genome CATCAGATAGGA is covered by a set of Reads consisting of nine 4-mers, {ACAT, CATC, ATCA, TCAG, CAGA, AGAT, GATA, TAGG, GGAC}. Three out of 12 possible 4-mers from Genome are missing from Reads (namely {ATAG,AGGA,GACA}), but all 3-mers from the Genome are present in the Reads. (A) The outside circle shows a separate black edge for each 3-mer from Reads. Dotted red lines indicate vertices that will be glued. The inner circle shows the result of applying some of the glues. (B) The graph DB(Reads, 3) resulting from all the glues is tangled. The three h-paths of length 2 in this graph (shown in blue) correspond to h-reads ATAG, AGGA, and GACA. Thus Reads<sub>3,4</sub> contains all 4-mers from Genome. (C) The outside circle shows a separate edge for each of the nine 4-mer reads. The next inner circle shows the graph DB(Reads, 4), and the innermost circle represents the Genome. The graph DB(Reads, 4) is fragmented into 3 connected components. (D) The multisized de Bruijn graph DB (Reads, 3, 4). Figure and text from Bankevich et al. 2012")
+![Multigraph approach implemented in SPAdes](../../images/multiGraph.jpg "Multisized de Bruijn graph. A circular Genome CATCAGATAGGA is covered by a set of Reads consisting of nine 4-mers, {ACAT, CATC, ATCA, TCAG, CAGA, AGAT, GATA, TAGG, GGAC}. Three out of 12 possible 4-mers from Genome are missing from Reads (namely {ATAG,AGGA,GACA}), but all 3-mers from the Genome are present in the Reads. (A) The outside circle shows a separate black edge for each 3-mer from Reads. Dotted red lines indicate vertices that will be glued. The inner circle shows the result of applying some of the glues. (B) The graph DB(Reads, 3) resulting from all the glues is tangled. The three h-paths of length 2 in this graph (shown in blue) correspond to h-reads ATAG, AGGA, and GACA. Thus Reads<sub>3,4</sub> contains all 4-mers from Genome. (C) The outside circle shows a separate edge for each of the nine 4-mer reads. The next inner circle shows the graph DB(Reads, 4), and the innermost circle represents the Genome. The graph DB(Reads, 4) is fragmented into 3 connected components. (D) The multisized de Bruijn graph DB (Reads, 3, 4). Figure and text from {% cite Bankevich2012 %}.")
 
 ##### Read pair utilization
 
@@ -122,9 +124,9 @@ In the case of the full dataset, SPAdes error correction changed 14,013,757 base
 
 #### Pilon
 
-Pilon improves draft assemblies by using the information from the original reads aligned to the draft assembly. The following image from a publication by {% cite Pilon %} highlights the steps of this process:
+Pilon improves draft assemblies by using the information from the original reads aligned to the draft assembly. The following image from a publication by {% cite Walker2014 %} highlights the steps of this process:
 
-![Pilon workflow](../../images/pilon.png "The left column depicts the conceptual steps of the Pilon process, and the center and right columns describe what Pilon does at each step while in assembly improvement and variant detection modes, respectively. During the first step (top row), Pilon scans the read alignments for evidence where the sequencing data disagree with the input genome and makes corrections to small errors and detects small variants. During the second step (second row), Pilon looks for coverage and alignment discrepancies to identify potential mis-assemblies and larger variants. Finally (bottom row), Pilon uses reads and mate pairs which are anchored to the flanks of discrepant regions and gaps in the input genome to reassemble the area, attempting to fill in the true sequence including large insertions. The resulting output is an improved assembly and/or a VCF file of variants. (Walker et al. 2014)")
+![Pilon workflow](../../images/pilon.png "The left column depicts the conceptual steps of the Pilon process, and the center and right columns describe what Pilon does at each step while in assembly improvement and variant detection modes, respectively. During the first step (top row), Pilon scans the read alignments for evidence where the sequencing data disagree with the input genome and makes corrections to small errors and detects small variants. During the second step (second row), Pilon looks for coverage and alignment discrepancies to identify potential mis-assemblies and larger variants. Finally (bottom row), Pilon uses reads and mate pairs which are anchored to the flanks of discrepant regions and gaps in the input genome to reassemble the area, attempting to fill in the true sequence including large insertions. The resulting output is an improved assembly and/or a VCF file of variants. (From {% cite Walker2014 %})")
 
 ### Annotation
 
@@ -155,7 +157,7 @@ In this example we will use a downsampled version of *E. coli* C-1 Illumina and 
 >
 > 2. **Get data** {% icon tool %} as shown below (see [these slides]({{site.baseurl}}/topics/galaxy-data-manipulation/tutorials/get-data/slides.html) for an introduction on how to load data into Galaxy):
 >
->       ![Get Data](../../images/get_data.png "Getting data into history starts with clicking **Get data** button")
+>       ![Get Data](../../images/get_data.png "Getting data into history starts with clicking <b>Get data</b> button")
 >
 > 3. Open Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.940733.svg)](https://doi.org/10.5281/zenodo.940733)
  link in a **new browser window** and right-click on dataset links:
@@ -163,14 +165,14 @@ In this example we will use a downsampled version of *E. coli* C-1 Illumina and 
 > 4. And paste them into the **Galaxy upload**:
 >
 >
->       ![Upload file](../../images/upload_file.png  "Uploading data into Galaxy. First (1) click **Paste/Fetch data** link. Next (2), paste URL copied from Zenodo. Finally (3), set type of all datasets to <tt>fastqsanger</tt>. Click **Start** (4).")
+>       ![Upload file](../../images/upload_file.png  "Uploading data into Galaxy. First (1) click **Paste/Fetch data** link. Next (2), paste URL copied from Zenodo. Finally (3), set type of all datasets to <tt>fastqsanger</tt>. Click <b>Start</b> (4).")
 >
 {: .hands_on}
 
 
 If all goes well you will see datasets uploading and changing states from gray to green as shown below. The figure below also shows how datasets can be tagged.
 
-![Datasets in History](../../images/starting_data.png  "Sequencing data loaded into Galaxy history. The full progression from gray (scheduling) to green (all OK) state is shown. To make it easier to identify datasets as we progress through the analysis we use so-called <em>Hashtags</em>. To tag a dataset: click on dataset to expand it (as shown in panel four); click the tag icon (<i class='fa fa-tags' aria-hidden='true'></i>) and a text field will appear. Add a tag (in this case **F**) pre-pended with hash (#). Hit enter. Do this for all three datasets and it will appear as in panel five.")
+![Datasets in History](../../images/starting_data.png  "Sequencing data loaded into Galaxy history. The full progression from gray (scheduling) to green (all OK) state is shown. To make it easier to identify datasets as we progress through the analysis we use so-called <em>Hashtags</em>. To tag a dataset: click on dataset to expand it (as shown in panel four); click the tag icon (<i class='fa fa-tags' aria-hidden='true'></i>) and a text field will appear. Add a tag (in this case <b>F</b>) pre-pended with hash (#). Hit enter. Do this for all three datasets and it will appear as in panel five.")
 
 ### Assess Read Quality
 
@@ -191,7 +193,7 @@ To assess quality we will use two tools: FastQC ({% cite FastQC %}) to generate 
 
 A quick look at quality score distribution will show a confusing picture:
 
-![QC reported zoomed out](../../images/multiqc1.png "Because Illumina reads (green) are **much** shorter that ONT reads (red) the plot looks strange. ONT reads generally have low quality scores and so they are not really meaningful in the context of this technology. However, in the case of Illumina data they mean a lot...")
+![QC reported zoomed out](../../images/multiqc1.png "Because Illumina reads (green) are <b>much</b> shorter that ONT reads (red) the plot looks strange. ONT reads generally have low quality scores and so they are not really meaningful in the context of this technology. However, in the case of Illumina data they mean a lot...")
 
 So let's zoom in into Illumina data:
 
@@ -277,7 +279,7 @@ Go to IGV [download page](http://software.broadinstitute.org/software/igv/downlo
 >
 > 1. Start IGV. It will look something like this:
 >
->      ![IGV just started](../../images/igv1.png "IGV started by using Java Web Start. Note that it is currently showing Human Genome (hg38) build. This is obviously **not** what we want.")
+>      ![IGV just started](../../images/igv1.png "IGV started by using Java Web Start. Note that it is currently showing Human Genome (hg38) build. This is obviously <b>not</b> what we want.")
 >
 > 2. Locate the output of Unicycler and expand it :
 >
