@@ -1,57 +1,16 @@
 #!/usr/bin/env bash
 
-# Check if a specific tag has been built. "check_built_version [tagname]"
-check_built_version() {
-	tag=$1
+# Adjust baseurl
+sed -i s"|^baseurl: .*|baseurl: '/archive/${tag}'|g" _config.yml
+sed -i s"|^github_repository_branch: .*|github_repository_branch: '${tag}'|g" _config.yml
 
-	# List all objects with the prefix matching that folder. We don't just list
-	# root because if one version has more than max files, we won't see the
-	# other versions in the list.
-	#
-	# Only request 1 item max since we just need to know if /something/ exists there.
-	aws s3api list-objects \
-		--bucket galaxy-training \
-		--prefix "archive/${tag}/" \
-		--max-items 1 \
-		| wc -l
-}
+# Clean in order to remove anything from previous build
+make clean
+# And then rebuild with new version + updated _config.yml
+make build
 
-build_version() {
-	tag=$1
-	# Go into repo dir
-
-	# Checkout tag
-	git checkout $tag
-	if (( $? == 0 )); then
-		# Adjust baseurl
-		sed -i s"|^baseurl: .*|baseurl: '/archive/${tag}'|g" _config.yml
-		sed -i s"|^github_repository_branch: .*|github_repository_branch: '${tag}'|g" _config.yml
-		# Clean in order to remove anything from previous build
-		make clean
-		# And then rebuild with new version + updated _config.yml
-		make build
-		# Reset the config now that the site is built, since we no longer need
-		# it.
-		git checkout -- _config.yml
-
-		# Deploy
-		aws s3 sync _site/training-material/ s3://galaxy-training/archive/${tag}/
-	else
-		echo "Could not checkout ${tag}, probably older than Travis 50 commit clone depth."
-	fi
-}
-
-# For all tags
-for tag in $(git tag -l); do
-	# Has it been build?
-	result=$(check_built_version "$tag")
-	if [[ "$result" == "0" ]]; then
-		echo "$tag needs to be built"
-		build_version "$tag"
-	else
-		echo "$tag is already built, not rebuilding [${BUILD_DIR}/${tag}]"
-	fi
-done
+# Deploy
+aws s3 sync _site/training-material/ s3://galaxy-training/archive/${tag}/
 
 INDEX_PAGE_DIR=$(mktemp -d)
 INDEX="${INDEX_PAGE_DIR}/index.html"
