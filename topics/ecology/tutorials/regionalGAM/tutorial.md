@@ -262,13 +262,14 @@ This graph displays the modeled flight curve of *Pyronia tithonus* over the year
 > > What can you see in this file?
 > >
 > > > ### {% icon solution %} Solution
-> > > A list of the years and the number of occurence for each year which should match the number of days for each year.
+> > > A list of the years and the number of occurrence for each year which should match the number of days for each year.
 > > {: .solution }
 >    {: .question}
 >
 > 3. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: output file from **flight curve**.
 >    - *"in column"*: `Column 2` (the column with the year)
+>    - Click on *"Insert Check"*
 >    - *"Find pattern"*: `(20[0-9][0-9])`
 >    - *"Replace with"*: `-\1`
 > 4. Inspect the file and check if all the years are now written with a `-` before the digits.
@@ -291,7 +292,7 @@ This graph displays the modeled flight curve of *Pyronia tithonus* over the year
 >    1. Inspect and expand the output data from **Remove beginning of a file** {% icon tool %}
 >    2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
 >    3. Select **Line chart (NVD 3)** as visualization type
->    4. Give it a proper name, i.e. `Pyronia tithonus phenology simple vizu`
+>    4. Give it a proper name, e.g. `Pyronia tithonus phenology simple vizu`
 >    5. On **Select data** area, specify:
 >       - *"Provide a label"*: `Pyronia tithonus phenology from 2003 to 2012` for example
 >       - *"Pick a series color"*: Choose a color for the line
@@ -307,7 +308,7 @@ This graph displays the modeled flight curve of *Pyronia tithonus* over the year
 
 ![Phenology chart](../../images/regionalGAM/Pyronia_tithonus_phenology_explicit_ID.png)
 
-This shows the occurrences of *Pyronia tithonus*, over the weeks. We can see there is a peak every year and we can already notice some differences in the values between the weeks and years, but not how the weeks overlap between the years. In this type of visualization, it's quite difficult to see when occurs maximum presence of butterflies and possible changes between years. We would like to visualize these differences using a stacked visualization. Here we can see global differences year by year like evolution of the maximum number of observations or some specific patterns as presence of more than only one peak in 2007, 2009 and 2012.
+This shows the abundance of *Pyronia tithonus*, over the weeks. We can see there is a peak every year as expected and we can notice some differences in the values between the weeks and years, but not how the weeks overlap between the years. We will plot a stalked version of this visualization to check if there are no unexpected changes and have an idea of the quality of the reconstructed phenology.
 
 > ### {% icon hands_on %} Hands-on: Visualize the years on a stacked graph
 > 1. **Scatterplot w ggplot2** {% icon tool %} with the following parameters
