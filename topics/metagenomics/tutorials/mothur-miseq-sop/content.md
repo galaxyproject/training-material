@@ -696,6 +696,9 @@ our contigs are ~250 bp long, we will set the threshold to 2 mismatches.
 
 We now have a set of high-quality aligned sequences. The next steps will remove any undesired sequences (e.g. non-bacterial) and sequencing artefacts known as *chimeras*.
 
+
+
+
 ## Chimera Removal
 
 We have now thoroughly cleaned our data and removed as much sequencing error as we can. Next, we will look
@@ -709,6 +712,8 @@ sequencing artefacts confounding our results.
 > (slide credit: [http://slideplayer.com/slide/4559004/ ](http://slideplayer.com/slide/4559004/ ))
 {: .comment}
 
+
+{% unless include.short %}
 We'll do this chimera removal using the `VSEARCH` algorithm {% cite Rognes2016 %} that is called within mothur, using the
 **Chimera.vsearch** tool. This command will split the data by sample and check for chimeras. The recommended
 way of doing this is to use the abundant sequences as our reference.
@@ -733,14 +738,14 @@ way of doing this is to use the abundant sequences as our reference.
 > >
 > >  How many sequences were flagged as chimeric? what is the percentage? (Hint: summary.seqs)
 > > > ### {% icon solution %} Solution
-> > > If we run summary.seqs on the resulting fasta file and count table, we see that we went from 128,655
-> > > sequences down to 118,091 sequences in this step, for a reduction of 8.2%. This is a reasonable number of
+> > > Looking at the chimera.vsearch `accnos` output, we see that **3,439 representative sequences** were flagged as chimeric. If we run summary.seqs on the resulting fasta file and count table, we see that we went from 128,655
+> > > sequences down to 118,091 total sequences in this step, for a reduction of **10,564 total sequences**, or 8.2%. This is a reasonable number of
 > > > sequences to be flagged as chimeric.
 > > {: .solution }
 > {: .question}
 {: .hands_on}
 
-
+{% endunless %}
 
 ## Removal of non-bacterial sequences
 
@@ -752,6 +757,45 @@ and want to remove them from our dataset.
 Before we know which sequences may originate from sources other than our intended 16S bacterial genes, we must
 first classify those sequences. We can do this using a Bayesian classifier (via the **Classify.seqs** tool) and a [training
 set provided by the Schloss lab](https://www.mothur.org/wiki/RDP_reference_files).
+
+{% if include.short %}
+
+
+> ### {% icon hands_on %} Hands-on: Remove Chimeras and non-bacterial sequences
+>
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow3_removing_contamination.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
+>
+>    {% include snippets/import_workflow.md %}
+>
+> 2. Run **Workflow 3: Removing Contamination** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *"1: Pre-clustered sequences"*: the `fasta` output from **Pre.cluster** {% icon tool %}
+>    - {% icon param-file %} *"2: Count Table"*: the `count table` from **Pre.cluster** {% icon tool%}
+>    - {% icon param-file %} *"3: Training set Taxonomy"*: `trainset9_032012.pds.tax` file you imported from Zenodo
+>    - {% icon param-file %} *"4: Training set FASTA"*: `trainset9_032012.pds.fasta` file from Zenodo
+>
+>    {% include snippets/run_workflow.md %}
+>
+> > ### {% icon question %} Questions
+> >
+> > 1. How many chimeric sequences were detected?
+> > 2. How many non-bacterial sequences were removed?
+> >
+> > > ### {% icon solution %} Solution
+> > > 1. There were **3,439 representative sequences** flagged as chimeric. These represent a total of **10,564 total sequences**
+> > >
+> > >    This can be determined by looking at the number of sequences in the `vsearch.accnos` file (3439). To determine how many total sequences these represent, compare the Summary.seqs log output files before and after the chimera filtering step (128,655-118,091=10,564).
+> > > 2. There were **20 representative sequences** removed, representing **162 total sequences**.
+> > >    This can be determined by looking at the summary.seqs log outputs before and after the **Remove.lineage** step.
+> > {: .solution }
+> {: .question}
+>
+{: .hands_on}
+
+
+{% else %}
 
 > ### {% icon hands_on %} Hands-on: Remove undesired sequences
 >
@@ -778,19 +822,19 @@ set provided by the Schloss lab](https://www.mothur.org/wiki/RDP_reference_files
 > > 2. How many sequences in total?
 > >
 > > > ### {% icon solution %} Solution
-> > > 20 representative sequences were removed.
+> > > 1. 20 representative sequences were removed.
+> > >    The fasta file output from Remove.seqs had 2281 sequences while the fasta output from Remove.lineages
+> > >    contained 2261 sequences.
 > > >
-> > > The fasta file output from Remove.seqs had 2281 sequences while the fasta output from Remove.lineages
-> > > contained 2261 sequences.
-> > >
-> > > 162 total sequences were removed.
-> > >
-> > > If you run summary.seqs with the count table, you will see that we now have 2261 unique sequences
-> > > representing a total of 117,929 total sequences (down from 118,091 before). This means 162 of our
-> > > sequences were in represented by these 20 representative sequences.
+> > > 2. 162 total sequences were removed.
+> > >    If you run summary.seqs with the count table, you will see that we now have 2261 unique sequences
+> > >    representing a total of 117,929 total sequences (down from 118,091 before). This means 162 of our
+> > >    sequences were in represented by these 20 representative sequences.
 > > {: .solution }
 > {: .question}
 {: .hands_on}
+
+{% endif %}
 
 The data is now as clean as we can get it. In the next section we will use the Mock sample to assess how accurate
 our sequencing and bioinformatics pipeline is.
@@ -859,7 +903,7 @@ First, let's extract the sequences belonging to our mock samples from our data:
 > - **Get.groups** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"group file or count table"*: the `count table` from **Remove.lineage** {% icon tool %}
 >   - {% icon param-select %} *"groups"*: `Mock`
->   - {% icon param-file %}*"fasta"*: `fasta` output from **Remove.lineage** {% icon tool %}
+>   - {% icon param-file %} *"fasta"*: `fasta` output from **Remove.lineage** {% icon tool %}
 >   - {% icon param-check %} *"output logfile?"*: `yes`
 >
 {: .hands_on}
@@ -923,6 +967,23 @@ and comparing the results with the expected outcome.
 
 > ### {% icon hands_on %} Hands-on: Cluster mock sequences into OTUs
 >
+> {% if include.short %}
+>
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow4_mock_otu_clustering.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
+>
+>    {% include snippets/import_workflow.md %}
+>
+> 2. Run **Workflow 4: Mock OTU Clustering** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *"1: Mock Count Table"*: the `count table` output from **Get.groups** {% icon tool %}
+>    - {% icon param-file %} *"2: Mock Sequences"*: the `fasta` output from **Get.groups** {% icon tool%}
+>
+>    {% include snippets/run_workflow.md %}
+>
+> {% else %}
+>
 > First we calculate the pairwise distances between our sequences
 >
 > 1. **Dist.seqs** {% icon tool %} with the following parameters
@@ -947,11 +1008,15 @@ and comparing the results with the expected outcome.
 > 4. **Rarefaction.single** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"shared"*: the `shared` file from **Make.shared** {% icon tool %}
 >
+> {% endif %}
+>
 > > ### {% icon question %} Question
 > >
 > >  How many OTUs were identified in our mock community?
 > > > ### {% icon solution %} Solution
-> > > 34: Open the shared file or OTU list and look at the header line. You will see a column for each OTU
+> > > Answer: **34**
+> > >
+> > > This can be determined by opening the shared file or OTU list and looking at the header line. You will see a column for each OTU
 > > {: .solution }
 > {: .question}
 {: .hands_on}
