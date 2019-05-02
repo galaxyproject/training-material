@@ -1099,6 +1099,10 @@ the **Remove.groups** tool:
 
 ## Clustering sequences into OTUs
 
+{% if include.short %}
+We will now repeat the OTU clustering for our real datasets. We use a slightly different workflow because these tools are faster for larger datasets. We will also normalize our data by subsampling to the level of the sample with the lowest number of sequences in it.
+
+{% else %}
 There are several ways we can perform clustering. For the Mock community, we used the traditional approach of
 using the **Dist.seqs** and **Cluster** tools. Alternatively, we can also use the **Cluster.split** tool. With
 this approach, the sequences are split into bins, and then clustered with each bin.  Taxonomic information is used to guide this process.
@@ -1107,9 +1111,28 @@ cutoff, you'll get just as good of clustering as you would with the "traditional
 is less computationally expensive and can be parallelized, which is especially advantageous when you have large
 datasets.
 
-We'll now use the **Cluster** tool, with `taxlevel` set to `4`, requesting that clusering be done at the *Order* level.
+We'll now use the **Cluster** tool, with `taxlevel` set to `4`, requesting that clustering be done at the *Order* level.
+{% endif %}
 
 > ### {% icon hands_on %} Hands-on: Cluster our data into OTUs
+>
+> {% if include.short %}
+>
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow5_mock_otu_clustering.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
+>
+>    {% include snippets/import_workflow.md %}
+>
+> 2. Run **Workflow 4: OTU Clustering** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *"1: Sequences"*: the `fasta` output from **Remove.groups** {% icon tool %}
+>    - {% icon param-file %} *"2: Count table"*: the `count table` output from **Remove.groups** {% icon tool%}
+>    - {% icon param-file %} *"3: Taxonomy"*: the `taxonomy` output from **Remove.groups** {% icon tool%}
+>
+>    {% include snippets/run_workflow.md %}
+>
+> {% else %}
 >
 > 1. **Cluster.split** {% icon tool %} with the following parameters
 >   - *"Split by"*: `Classification using fasta`
@@ -1136,6 +1159,7 @@ We'll now use the **Cluster** tool, with `taxlevel` set to `4`, requesting that 
 >   - {% icon param-file %} *"taxonomy"*: the `taxonomy` output from **Remove.groups** {% icon tool %}
 >   - *"label"*: `0.03`
 >
+> {% endif %}
 {: .hands_on}
 
 The different levels of taxonomy are shown in the dataset names.
@@ -1162,7 +1186,7 @@ sequences (100%) were binned in the genus *[Alistipes](https://en.wikipedia.org/
 > Which samples contained sequences belonging to an OTU classified as Staphylococcus?
 >
 > > ### {% icon solution %} Solution
-> > Examine the tax.summary file.
+> > Examine the `tax.summary` file output by **Classify.otu** {% icon tool %}.
 > >
 > > Samples F3D141, F3D142,  F3D144, F3D145, F3D2. This answer can be found by
 > > examining the tax.summary output and finding the columns with nonzero
@@ -1174,6 +1198,7 @@ sequences (100%) were binned in the genus *[Alistipes](https://en.wikipedia.org/
 Before we continue, let's remind ourselves what we set out to do. Our original question was about the stability of
 the microbiome and whether we could observe any change in community structure between the early and late samples.
 
+{% unless include.short %}
 Because some of our sample may contain more sequences than others, it is generally a good idea to normalize the
 dataset by subsampling.
 
@@ -1211,7 +1236,7 @@ dataset by subsampling.
 > will deviate from the ones presented here.
 {: .hands_on}
 
-
+{% endunless %}
 
 ## Calculate Species Diversity
 
