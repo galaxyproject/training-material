@@ -1162,7 +1162,8 @@ We'll now use the **Cluster** tool, with `taxlevel` set to `4`, requesting that 
 > {% endif %}
 {: .hands_on}
 
-The different levels of taxonomy are shown in the dataset names.
+Examine {% icon galaxy-eye %} the `taxonomy` output of **Classify.otu** {% icon tool %}. This is a collection, and the different levels of taxonomy are shown in the names of the collection elements. In this example we only calculated one level, 0.03. This means we used a 97% similarity threshold. This threshold is commonly used to differentiate at *species level*.
+
 Opening the taxonomy output for level 0.03 (meaning 97% similarity, or *species* level) shows a file structured like the following:
 
 ```
@@ -1177,7 +1178,7 @@ Otu0013	1856	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lac
 ..
 ```
 
-The first line shown indicates that Otu008 occurred 5260 times, and that all of the
+The first line shown in the snippet above indicates that Otu008 occurred 5260 times, and that all of the
 sequences (100%) were binned in the genus *[Alistipes](https://en.wikipedia.org/wiki/Alistipes)*.
 
 
