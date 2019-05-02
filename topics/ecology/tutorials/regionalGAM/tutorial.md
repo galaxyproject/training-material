@@ -397,11 +397,33 @@ We now would like to create a file showing the abundance index per year of a cho
 - prop_pheno_sampled
 
 We now would like to create a chart showing the annual abundance trend of a certain species per site:
-- Sites as labels
 - Year as X-axis
 - Regional GAM as Y-axis
 
 TO DO REPLACE BY SCATTERPLOT
+
+> ### {% icon hands_on %} Visualize the abundance index
+> 1. Inspect and expand the output data from **Abundance index** {% icon tool %}
+> 2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
+> 3. Select **Scatter plot (NVD3)** as visualization type
+> 4. Give it a proper name, e.g. `Pyronia tithonus abundance simple vizu`
+> 5. On **Select data** area, specify:
+>    - *"Provide a label"*: `Pyronia tithonus abundance from 2003 to 2012` for example
+>    - *"Pick a series color"*: Choose a color for the line
+>    - *"Data point labels"*: `Column 4` (the regional_gam column) or another one
+>    - *"Values for x-axis"*: `Column 3` (the YEAR column)
+>    - *"Values for y-axis"*: `Column 4` (the regional_gam column)
+> 6. On **Customize**, specify:
+>    - *"X-Axis label"*: `Year`
+>    - *"Y-Axis label"*: `regional_gam`
+> 7. Click on **Save**
+>
+{: .hands_on}
+
+Each point represent the value for one site and one year. SHOULD WE COMMENT THE OULIER ? NOT MUCH TO SAY ON THIS GRAPH MORE IMPORTANT TO SEE THE GLOBAL TREND
+
+**ADD GRAPH**
+
 
 ## Compute a collated index for each year and estimates the temporal trend
 
