@@ -201,16 +201,11 @@ As the dataset is quite big and may countain heterogeneous information, we need 
 > > ### {% icon hands_on %} Hands-on: Creating a new file containing only the data from one species
 > > 1. Copy the name of the species you are interested in (for example: "Aglais io").
 > > 2. **Filter data on any column using simple expressions** {% icon tool %}
-> >      - {% icon param-file %} *"Filter"*: output of **Column Regex Find And Replace** {% icon tool %}
+> >      - {% icon param-file %} *"Filter"*: output of **Text reformatting with awk** {% icon tool %}
 > >      - *"With following condition"*: `c1=='"Aglais io"'` or (another species name)  
-> >      - *"Number of header lines to skip"*: `1`
+> >      - *"Number of header lines to skip"*: `1`  
 > >
 > >    You can repeat this set of actions as much as necessary, changing only the name of the species taken into account. By doing this, you will obtain separated dataset, each of them containing a different species.
-> >
-> > 3. **tabular to CSV** {% icon tool %}
-> >      - {% icon param-file %} *"tabular file"*: output of **Filter data on any column using simple expressions** {% icon tool %}
-> >      - *"output csv Separator"*: `,`
-> >      - *"Header in file"*: `Yes`
 > >
 > > 4. Repeat the last step on all the different `outputs` from **Filter data on any column using simple expressions** {% icon tool %} that you have, one by species
 > > 5. Tag your new dataset with an explicit tags as "Count" and "Aglais io" and/or rename this dataset like "Aglais io count file".
@@ -225,19 +220,17 @@ As the dataset is quite big and may countain heterogeneous information, we need 
 
 [Phenology](https://en.wikipedia.org/wiki/Phenology), as described in Wikipedia, is the study of periodic plant and animal life cycle events and how these are influenced by seasonal and inter-annual variations in climate, as well as habitat factors (such as elevation).
 
-Now you have a file containing all the data on the species of interest. The main goal of this step is to model one phenology per year using a general additive model (GAM) with time and sites as explanatory variables. This model will be used to predict values for missing counts at local sites.
-
-This step will allow you to compute and display the phenology of a species. In the second part, you will learn that it is possible to view the phenology of various species on a single chart allowing to compare them and analyse them more easily.
+Now you have a file containing all the data on the species of interest. The main goal of this step is to model one phenology per year using a general additive model (GAM) with time and sites as explanatory variables. This model will be used to predict values for missing counts at local sites in order to improve the quality of the abundance indices.
 
 > ### {% icon hands_on %} Hands-on: Phenology
 > 1. **Flight curve** {% icon tool %} with the following parameters
->    - {% icon param-file %} *"Count file"*: output file you just generated with the **tabular to CSV** {% icon tool %}
+>    - {% icon param-file %} *"Count file"*: output file you just generated with the **Text reformatting with awk** or **Filter data on any column using simple expressions** if your file was containing more than one species {% icon tool %}
 >
 > 2. Generate the chart using the visualization
 >    1. Inspect and expand the output data from **Flight curve** {% icon tool %}
 >    2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
 >    3. Select **Line chart (NVD 3)** as visualization type
->    4. Give it a proper name, i.e. `Pyronia tithonus phenology raw simple vizu`
+>    4. Give it a proper name, e.g. `Pyronia tithonus phenology raw simple vizu`
 >    5. On **Select data** area, specify:
 >       - *"Provide a label"*: `Pyronia tithonus phenology from 2003 to 2012` for example
 >       - *"Pick a series color"*: Choose a color for the line
@@ -254,7 +247,7 @@ This step will allow you to compute and display the phenology of a species. In t
 
 ![Phenology chart](../../images/regionalGAM/phenology_year.png)
 
-This graph displays the modeled flight curve of *Pyronia tithonus* over the years. But the first year is "null", probably a left-over of the 1st line with the header, and we do not know the weeks there.
+This graph displays the modeled flight curve of *Pyronia tithonus* over the years. But the first year is "null", probably a left-over of the 1st line with the header, and the week number is not shown.
 
 > ### {% icon hands_on %} Hands-on: Create a new column of the dataset containing the week and the year
 > 1. **Count occurrences of each record** {% icon tool %} with the following parameters
