@@ -326,7 +326,7 @@ This shows the abundance of *Pyronia tithonus*, over the weeks. We can see there
 
 ![Stacked Phenology chart](../../images/regionalGAM/Pyronia_tithonus_phenology_stacked_explicit_ID.png)
 
-With this graph, we can see that occurrences of *Pyronia tithonus* are always around the same weeks every year. We can also see differences between years, for example 2005 and 2007 show earlier observation than others years maybe due to climatic particularities or due to observations bias. Further tests can be made on these data to evaluate differences between years and relation to climatic, environmental or others factors. Earliest peak is found for year 2006 when latest for year 2012, and this can also be explained by different types of environmental factors or bias. This can be tested through further modeling steps.
+With this graph, we can see that *Pyronia tithonus* records are always around the same weeks every year. We can also see small differences between years but overall the phenology is quite stable and the results of this step seem good and allow us to continue with the calculation of the abundance index.
 
 > ### {% icon details %} Working with more than one species
 >
@@ -401,23 +401,7 @@ We now would like to create a chart showing the annual abundance trend of a cert
 - Year as X-axis
 - Regional GAM as Y-axis
 
-> ### {% icon hands_on %} Hands-on: Visualize the adundance index
-> 1. Inspect and expand the output data from **Abundance index** {% icon tool %}
-> 2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
-> 3. Select **Bar diagram (NVD 3)** as visualization type
-> 4. Give it a proper name, i.e. `Pyronia tithonus abundance index`
-> 5. On **Select data** area, specify:
->     -  *"Data point labels"*: `Column 1`
->     -  *"Values for x-axis"*: `Column 3`
->     -  *"Values for y-axis"*: `Column 4`
-> 5. Click on **Customize**
->    -  *"X-Axis label"*: `Year`
->    -  *"Y-Axis label"*: `regional_gam`
->    -  *"Show legend"*: `No`
-> 9. Click on **Save** if you are willing to keep it
-{: .hands_on}
-
-![Abundance index chart](../../images/regionalGAM/regionalgam_year.png)
+TO DO REPLACE BY SCATTERPLOT
 
 ## Compute a collated index for each year and estimates the temporal trend
 
