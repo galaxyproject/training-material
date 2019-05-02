@@ -315,11 +315,12 @@ This shows the abundance of *Pyronia tithonus*, over the weeks. We can see there
 >    - {% icon param-file %} *"from dataset"*: output from **Flight curve**
 >    - *"Column to plot on x-axis"*: `4` (the column with the year)
 >    - *"Column to plot on y-axis"*: `6`
->    - *"Plot title"*: add a meaningful title
->    - *"Label for x axis"*: add a meaningful label (i.e. Day number)
->    - *"Label for y axis"*: add a meaningful label(i.e. ????? Ask Benjamin or Reto to know more)
+>    - *"Plot title"*: add a meaningful title (e.g. Pyronia tithonus phenology stacked visualization)
+>    - *"Label for x axis"*: add a meaningful label (e.g. Day number)
+>    - *"Label for y axis"*: add a meaningful label(e.g. ????? Ask Benjamin or Reto to know more)
 >    - *"Type of plot"*: `Line only`
 >    - *"Plotting multiple groups"*: `Plot multiple groups of data on one plot` to superimpose years
+>    - *"Color schemes to differentiate your groups"*: `set 3` or any set of color with more than 10 colors as there are 10 years in our dataset.
 >   
 {: .hands_on}
 
