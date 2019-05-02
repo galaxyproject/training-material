@@ -89,12 +89,12 @@ Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We wan
 >       - {% icon param-file %} *"Select cells from"*: output of **CSV to tabular** {% icon tool %}
 >       - *"AWK Program"*:
 >
->              ```
->              NR == 1{ print }
+>              
+>              NR == 1 { print }
 >              /NLBMS/ { print }
->              ```
+>              
 >
-> the first line will skip and print the header and the second will print all the lines where NLBMS is found
+> The first line will skip and print the header and the second will print all the lines where NLBMS is found
 >
 {: .hands_on}
 
@@ -162,24 +162,12 @@ As the dataset is quite big and may countain heterogeneous information, we need 
 > ### {% icon hands_on %} Hands-on: How many species are taken into account in this dataset?
 >
 > 1. **Count occurrences of each record** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"from dataset"*: output of **Column Regex Find And Replace**
+>    - {% icon param-file %} *"from dataset"*: output of **Text reformatting with awk**
 >    - *"Count occurrences of values in column(s)"*: `Column: 1`, the `SPECIES` column
 >    - *"Delimited by"*: `Tab`
 >    - *"How should the results be sorted?"*: `With the most common values first`
 > 2. Inspect the generated file by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
 > 3. Check that the dataset is for one species only
-{: .hands_on}
-
-The regionalGAM tools require CSV files as input, we need to regenerate a CSV file using the `tabular to CSV` tool from
-
-CHANGE THE TOOL TO GET RID OF THIS STEP
-
-> ### {% icon hands_on %} Hands-on: Regenerate a CSV file
-> 1. **Tabular to CSV** {% icon tool %}
->       - {% icon param-file %} *"tabular file"*: output of **Column Regex Find And Replace**
->       - *"Separator"*: ","
->       - *"Header in file"*: Yes
-> 2. Tag your new dataset with an explicit tag as `Count` and/or rename this dataset like `Count file`
 {: .hands_on}
 
 > ### {% icon details %} Datasets containings information about more than one species
