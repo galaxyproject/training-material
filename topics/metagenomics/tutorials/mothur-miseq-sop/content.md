@@ -18,6 +18,7 @@ In this tutorial we will perform an analysis based on the
 > If you would like to run through the tutorial a bit quicker and use workflows to run groups of
 > analysis steps (e.g. data cleaning) at once, please see the [shorter version of this tutorial]({{ site.baseurl }}{% link topics/metagenomics/tutorials/mothur-miseq-sop-short/tutorial.md %})
 > {% endif %}
+> You can also **switch** between the long and short version at the start of any section.
 {: .comment}
 
 
@@ -279,23 +280,43 @@ Here the first column contains the read name, and the second column contains the
 Next, we want to improve the quality of our data. To this end we will run a workflow that performs the following steps:
 
 1. **Filter by length**. We know that the V4 region of the 16S gene is around 250 bp long. Anything significantly longer
-   was likely a poorly assembled sequence. We will remove any contigs longer than 275 base pairs using the **Screen.seqs** {% icon tool %} tool.
-2. We will also remove any contigs containing too many ambiguous base calls (also using **Screen.seqs**)
+   was likely a poorly assembled contig. We will remove any contigs longer than 275 base pairs using the **Screen.seqs** {% icon tool %} tool.
+2. **Remove low quality contigs**. We will also remove any contigs containing too many ambiguous base calls.
+3. **Deduplicate sequences**. Since we are sequencing many of the same organisms, there will likely be many identical contigs. To speed up downstream analysis we will determine the set of unique contigs using **Unique.seqs** {% icon tool %}.
+
 
 > ### {% icon hands_on %} Hands-on: Perform data cleaning
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [the workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow1_quality_control.ga) or download it to your computer.
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow1_quality_control.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
 >    {% include snippets/import_workflow.md %}
 >
-> 2. **Run the workflow** using the following parameter:
+> 2. Run **Workflow 1: Quality Control** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
->    - {% icon param-file %} *"1: Contigs"*: the fasta output from **Make.contigs** {% icon tool %}
->    - {% icon param-file %} *"2: Groups"*: the group file from **Make.contigs** {% icon tool%}
+>    - {% icon param-file %} *"1: Contigs"*: the `fasta` output from **Make.contigs** {% icon tool %}
+>    - {% icon param-file %} *"2: Groups"*: the `group file` from **Make.contigs** {% icon tool%}
 >
 >    {% include snippets/run_workflow.md %}
+>
+> > ### {% icon question %} Questions
+> >
+> > 1. How many sequences were removed in the screening step?
+> > 2. How many unique sequences are there in our cleaned dataset?
+> >
+> > > ### {% icon solution %} Solutions
+> > > 1. The screening removed **23,488** sequences.
+> > >
+> > >    This can be determined by looking at the number of lines in `bad.accnos` output of screen.seqs
+> > >    or by comparing the total number of seqs between of the summary log before and after this screening
+> > > step
+> > >
+> > > 2. There are **16,426** unique sequences.
+> > >
+> > >    This can be determined by expanding one of the outputs of **Unique.seqs** {% icon tool %} and looking at the number of lines in the file.
+ > > {: .solution }
+> {: .question}
 >
 {: .hands_on}
 
@@ -427,7 +448,9 @@ the *group file* and the *names file* into a single *count table*.
 >   - {% icon param-file %} *"group"*: the `group file` we created using the **Screen.seqs** {% icon tool %}
 {: .hands_on}
 
-The *count_table* output will look something like this:
+{% endif %}
+
+Have a look at the *count_table* output from the **Count.seqs** {% icon tool %}, it summarizes the number of times each unique sequence was observed across each of the samples. It will look something like this:
 
 ```
 Representative_Sequence                      total   F3D0   F3D1  F3D141  F3D142  ...
@@ -439,8 +462,6 @@ M00967_43_000000000-A3JHG_1_1101_13234_1983  10522   425    281   340     205
 
 The first column contains the read names of the representative sequences, and the subsequent columns contain
 the number of duplicates of this sequence observed in each sample.
-
-{% endif %}
 
 
 # Sequence Alignment
@@ -493,7 +514,7 @@ long stretches are likely the result of PCR errors and we would be wise to remov
 Next we will clean our data further by removing poorly aligned sequences and any sequences with long
 homopolymer stretches.
 
-# Data Cleaning
+# More Data Cleaning
 
 To ensure that all our reads overlap our region of interest, we will remove any reads not overlapping the region
 from position 1968 to 11550 using the **Screen.seqs** tool. To make sure they overlap *only* that region, we will

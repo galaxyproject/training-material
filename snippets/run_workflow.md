@@ -5,5 +5,6 @@
 >    >   - Select **Run** from the dropdown menu
 >    > - Configure the workflow as needed
 >    > - Click the **Run Workflow** button at the top-right of the screen
+>    > - You may have to refresh your history to see the queued jobs
 >    {: .tip}
 >
