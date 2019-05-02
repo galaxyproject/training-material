@@ -176,14 +176,6 @@ As the dataset is quite big and may countain heterogeneous information, we need 
 >
 > As the dataset is quite big and contains heterogeneous information, you want to know whether the data are about one species or more. So the first step consists to count how many species are taken into account in this dataset.
 >
-> > ### {% icon hands_on %} Hands-on: How many species are taken into account
-> > 1. **Count occurrences of each record** {% icon tool %} with the following parameters:
-> >      - {% icon param-file %}  *"from dataset"*: `output` from **Column Regex Find And Replace**
-> >      - *"Count occurrences of values in column(s)"*: the `SPECIES` column (normally `column 1`)
-> >      - *"Delimited by"*: `Tab`
-> >      - *"How should the results be sorted?": `With the most common values first`
-> 2. Inspect the file by clicking on the {% icon galaxy-eye %} icon to check how many species are taken into account.
-> {: .hands_on}
 >
 > To test these steps, you can use the following dataset:
 >
