@@ -479,6 +479,32 @@ step to improve the clustering of your OTUs {% cite Schloss2012 %}.
 >   - {% icon param-file %} *"fasta"*: the `fasta` output from **Unique.seqs** {% icon tool %}
 >   - {% icon param-file %} *"reference"*: `silva.v4.fasta` reference file from your history
 > <br><br>
+>
+>     > ### {% icon question %} Question
+>     >
+>     > Have a look at the alignment output, what do you see?
+>     >
+>     > > ### {% icon solution %} Solution
+>     > > At first glance, it might look like there is not much information there. We see our read names, but only period `.` characters below it.
+>     > > ```
+>     > > >M00967_43_000000000-A3JHG_1_1101_14069_1827
+>     > > ............................................................................
+>     > > >M00967_43_000000000-A3JHG_1_1101_18044_1900
+>     > > ............................................................................
+>     > > ```
+>     > > This is because the V4 region is located further down our reference database and nothing aligns to the start of it. If you scroll to right you will start seeing some more informative bits:
+>     > > ```
+>     > > .....T-------AC---GG-AG-GAT------------
+>     > > ```
+>     > > Here we start seeing how our sequences align to the reference database.
+>     > > There are different alignment characters in this output:
+>     > >   - `.`: gap character before first or after last base in query sequence
+>     > >   - `-`: gap character within the query sequence
+>     > >
+>     > > We will cut out only the V4 region in a later step (**filter.seqs**)
+>     > {: .solution }
+>     {: .question}
+>
 > 2. **Summary.seqs** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"fasta"*: the aligned output from **Align.seqs** {% icon tool %}
 >   - {% icon param-file %} *"count"*: `count_table` output from **Count.seqs** {% icon tool %}
@@ -514,14 +540,57 @@ long stretches are likely the result of PCR errors and we would be wise to remov
 Next we will clean our data further by removing poorly aligned sequences and any sequences with long
 homopolymer stretches.
 
-# More Data Cleaning
+## More Data Cleaning
 
 To ensure that all our reads overlap our region of interest, we will remove any reads not overlapping the region
 from position 1968 to 11550 using the **Screen.seqs** tool. To make sure they overlap *only* that region, we will
 use the **Filter.seqs** step to remove any overhang on either end of the V4 region. The **Filter.seqs** tool will
 additionally clean up our alignment file by removing any columns that have a gap character (`-`, or `.` for terminal gaps)
-in that position for every aligned sequence (`vertical` parameter).
+in that position for every aligned sequence (`vertical` parameter). Finally, we will group near-identical sequences together with the **Pre.cluster** tool.
 
+{% if include.short %}
+
+> ### {% icon hands_on %} Hands-on: Clean Aligned sequences
+>
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow2_data_cleaning.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
+>
+>    {% include snippets/import_workflow.md %}
+>
+> 2. Run **Workflow 2: Data Cleaning** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *"1: Aligned Sequences"*: the `align` output from **Align.seqs** {% icon tool %}
+>    - {% icon param-file %} *"2: Count Table"*: the `count table` from **Count.seqs** {% icon tool%}
+>
+>    {% include snippets/run_workflow.md %}
+>
+> > ### {% icon question %} Question
+> >
+> > How many sequences remain after this cleaning steps?
+> >
+> > > ### {% icon solution %} Solution
+> > > There are 5,720 remaining sequences after filtering and clustering of highly similar sequences.
+> > >
+> > > This can be determined by looking at the number of sequences in the fasta output of **Pre.cluster** {% icon tool %}
+> > {: .solution }
+> {: .question}
+>
+{: .hands_on}
+
+Have a look at the FASTA output from **Pre.cluster**, it should looks something like this:
+
+```
+>M00967_43_000000000-A3JHG_1_1101_13234_1983
+TAC--GG-AG-GAT--GCG-A-G-C-G-T-T--AT-C-CGG-AT--TT-A-T-T--GG-GT--TT-A-AA-GG-GT-GC-G-CA-GGC-G-G-A-AG-A-T-C-AA-G-T-C-A-G-C-G-G--TA-A-AA-TT-G-A-GA-GG--CT-C-AA-C-C-T-C-T-T-C--GA-G-C-CGTT-GAAAC-TG-G-TTTTC-TTGA-GT-GA-GC-GA-G-A---AG-T-A-TGCGGAATGCGTGGTGT-AGCGGT-GAAATGCATAG-AT-A-TC-AC-GC-AG-AACTCCGAT-TGCGAAGGCA------GC-ATA-CCG-G-CG-CT-C-A-ACTGACG-CTCA-TGCA-CGAAA-GTG-TGGGT-ATC-GAACAGG
+>M00967_43_000000000-A3JHG_1_1101_14069_1827
+TAC--GG-AG-GAT--GCG-A-G-C-G-T-T--AT-C-CGG-AT--TT-A-T-T--GG-GT--TT-A-AA-GG-GT-GC-G-TA-GGC-G-G-C-CT-G-C-C-AA-G-T-C-A-G-C-G-G--TA-A-AA-TT-G-C-GG-GG--CT-C-AA-C-C-C-C-G-T-A--CA-G-C-CGTT-GAAAC-TG-C-CGGGC-TCGA-GT-GG-GC-GA-G-A---AG-T-A-TGCGGAATGCGTGGTGT-AGCGGT-GAAATGCATAG-AT-A-TC-AC-GC-AG-AACCCCGAT-TGCGAAGGCA------GC-ATA-CCG-G-CG-CC-C-T-ACTGACG-CTGA-GGCA-CGAAA-GTG-CGGGG-ATC-AAACAGG
+```
+
+We see that these are our contigs, but with extra alignment information. The filtering steps have removed any positions which had a gap symbol in all reads of the dataset.
+
+
+{% else %}
 
 > ### {% icon hands_on %} Hands-on: Remove poorly aligned sequences
 >
@@ -621,6 +690,11 @@ our contigs are ~250 bp long, we will set the threshold to 2 mismatches.
 > {: .question}
 {: .hands_on}
 
+{% endif %}
+
+# Removing Contamination
+
+We now have a set of high-quality aligned sequences. The next steps will remove any undesired sequences (e.g. non-bacterial) and sequencing artefacts known as *chimeras*.
 
 ## Chimera Removal
 
