@@ -1119,7 +1119,7 @@ We'll now use the **Cluster** tool, with `taxlevel` set to `4`, requesting that 
 > {% if include.short %}
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow5_mock_otu_clustering.ga) or download it to your computer.
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow5_otu_clustering.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
 >    {% include snippets/import_workflow.md %}
