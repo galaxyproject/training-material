@@ -1,0 +1,91 @@
+---
+layout: base_slides
+logo: "GTN"
+
+title: Analysis workflows
+contributors:
+  - chrisbarnettster
+  - tsenapathi
+---
+
+
+# What is MD analysis?
+
+---
+
+![](images/platform_overview.png)
+- Using outputs from MD simulations to look for trends in physical and chemical behaviour. 
+- Timeseries analysis, distribution and correlation analysis are popular.
+
+---
+
+# Tools
+
+- VMD (builtin plugins and custom scripts)
+- MDAnalysis
+- MDTraj
+- Bio3D
+
+.footnote[ [a more extensive list of viewers](https://en.wikipedia.org/wiki/List_of_molecular_graphics_systems)]
+
+---
+
+# Tools that are in BRIDGE
+- Bio3d suite (PCA etc.)
+- MDAnalysis suite (timeseries etc.)
+- MDTraj
+
+---
+
+# Standard structural analysis
+![](images/platform_overview.png)
+
+---
+
+# RMSD - Root Mean Square Deviation
+.pull-left[
+![Snapshot of RMSD plot](images/RMSD_plot_33.png "RMSD plot for a short CBH1 simulation")
+- Root mean square deviation of atomic positions. 
+]
+.pull-right[
+![Snapshot of RMSD histogram](images/RMSD_Histogram_Plot_34.png "RMSD histogram for a short CBH1 simulation")
+- A measure of quantitative similarity. 
+]
+
+
+--- 
+
+---
+
+# RMSF - Root Mean Square Fluctuation
+.pull-left[
+- A measure of conformational variance. Can be linked to spectroscopic outcomes (experimental).
+
+
+]
+.pull-right[
+![Snapshot of RMSF plot](images/rmsf_plot_23.png "RMSF plot for a short CBH1 simulation")
+]
+
+.footnote[http://thegrantlab.org/bio3d/html/rmsf.html]
+
+???
+
+$$ f_i=\sqrt{(1/(M-1))\sum_{j=1}^{n} (\vert\vert r_i^{j}-r_i^i{0} \vert\vert ^{2})} $$
+
+, where f_i is the RMSF value for the ith atom, M the total number of frames (total number of rows of xyz), r_i^j the positional vector of the ith atom in the jth frame, and r_i^0 the mean position of ith atom. ||r|| denotes the Euclidean norm of the vector r.
+
+
+
+---
+
+## PCA - Principal Component Analysis
+.pull-left[
+ - Convert from a set of correlated observations (movement of all atoms in protein) to a set of principal components which are linearly independent (or uncorrelated).
+ - The first principal component has the highest variance and so on. 
+ - Useful to find important modes of the protein. 
+]
+.pull-right[
+![Snapshot of PCA plot](images/PCA_plot_46.png "PCA plot for a short CBH1 simulation")
+]
+

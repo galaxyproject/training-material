@@ -1,0 +1,80 @@
+---
+layout: base_slides
+logo: "GTN"
+
+title: Setting up molecular systems
+contributors:
+  - chrisbarnettster
+  - tsenapathi
+---
+
+# Setting up molecular systems
+Can be challenging!
+- Protonation states
+- Mutations
+- Simulation boxes and imaging
+- Solvent
+- MD (classical mechanics), QM (quantum), mixed 
+- Free energy?
+
+---
+
+# Tools that can be used
+
+- Packmol 
+- CHARMM
+- Schrodinger (Homology modelling, pKa prediction etc.)
+- [EBI](https://www.ebi.ac.uk/services/all)
+- AMBER and Antechamber etc.
+
+.footnote[[list of available software](https://en.wikipedia.org/wiki/Comparison_of_software_for_molecular_mechanics_modeling) ]
+
+---
+
+# Usecase : Cellulase 
+
+Cellulose, the β-1,4-linked straight chain homopolymer of glucose, plays a key structural role in plants as a component of lignocellulose (along with hemicellulose and lignin) and is the most abundant organic compound in the biosphere. This abundance has made it a key target for a source to produce biofuels such as ethanol.
+
+![Snapshot of 7CEL pdb with octaose ligand](images/enzyme.jpg "7CEL Cellulase with a short chain cellulose (octaose) ligand")
+
+---
+
+# Enzyme action
+![ CBH1 skeleton active site showing reaction coordinates labeled RC1 and RC2. R at the left-hand cellulosic oligosaccharide tail represents the remaining four glucose units. Protonated amino acids are starred (*)](images/ja-2011-06842j_0011.jpeg "Cellulase active site")
+
+
+.footnote[https://pubs.acs.org/doi/10.1021/ja206842j]
+
+---
+
+# Usecase : Cellulase 
+
+
+.pull-left[
+
+![Snapshot of 7CEL pdb with octaose ligand](images/enzyme.jpg "7CEL Cellulase with a short chain cellulose (octaose) ligand")
+]
+.pull-right[
+- Enzyme: 7CEL a cellobiose hydrolase that cleaves every second glycosidic linkage from a cellulose chain to produce cellobiose
+- Substrate: 'octaose' - a short chain of cellulose polymer (glucose-b1-4-glucose homopolymer)
+- Solvent: Water
+- Aim: Simulate the cellulase protein using freely available tools. 
+CHARMM wrappers are available, but not used here as CHARMM is not freely available.
+
+]
+
+.footnote[https://pubs.acs.org/doi/10.1021/ja206842j]
+
+---
+
+# Process
+- Use CHARMM-GUI for setup
+
+![Snapshot of CHARMM-GUI Quick MD Simulator tool ](images/charmmgui-mdsimulator.png "The CHARMM-GUI Quick MD Simulator tool")
+
+---
+
+- Use BRIDGE for simulations
+
+![Preview of NAMD tools in BRIDGE](images/namd.png "preview of NAMD tools")
+

@@ -1,0 +1,295 @@
+---
+layout: base_slides
+logo: "GTN"
+
+title: Introduction to Molecular Modelling and Dynamics
+contributors:
+  - chrisbarnettster
+  - tsenapathi
+---
+
+
+# Purpose
+
+- Bridge between theory and experiment.
+- "Lets you look at ‘reality’ all along a pathway, that can't be probed experimentally."
+
+
+.footnote[M. Bachrach, Computational Organic Chemistry, Wiley, 2014., [*Arthi et al, Nature, 2012*](https://udel.edu/~arthij/MD.pdf)]
+
+---
+
+### Connection between Genomic and Proteins
+
+.image-100[![](../images/NCI_CCG_Genetics_Infographic_v12_top.__v100684792_httpswww.cancer.govabout-cancercauses-preventiongeneticsgenes-proteins-infographic.png)]
+
+---
+
+### Complexity vs Timescale
+
+.image-100[![](../images/timescales.png)]
+
+---
+
+# Molecular Dynamics (MD)
+
+.image-50[![](../images/animation.gif)]
+
+- Numerical step-by-step solution of the classical equations of motion
+  - F = ma
+- Link macroscopic properties to microscopic molecular properties
+
+
+---
+
+# Molecular Dynamics (MD)
+
+.pull-left[
+![](../images/Intramolecular_geometry_defined.png)
+]
+
+.pull-right[
+- N-body problem
+- Define connectivity (topology) and parameters (chemistry of atoms in terms of a model)
+- A molecule is described as charged balls (atoms) and springs (bonds)
+- Then based on positions, calculate velocities, accelerations and forces. 
+]
+
+.footnote[https://www.ks.uiuc.edu/Research/namd/tutorial/NCSA2002/pdf/01_intro_to_md.pdf, http://www.ks.uiuc.edu/Training/Tutorials/namd-index.html]
+---
+
+
+# Timescale of protein motions
+
+![](../images/motion_times_1-s2.0-S1471489210001463-gr1_lrg.jpg)
+.footnote[https://doi.org/10.1016/j.coph.2010.09.008]
+
+---
+
+
+# Requirements to build a realistic model
+- Choose a force field
+- Prepare system 
+- Choose specific conditions
+
+---
+
+## Force fields
+
+![](../images/Intramolecular_geometry_defined.png)
+
+Topology and Parameter files
+- Topology: atom types, charges, connectivities
+- Parameters: Force constants and non-bonded interactions (van der Waals and electrostatics)
+
+For example the general CHARMM, AMBER, OPLS etc.
+.footnote[ [Force field defined](https://en.wikipedia.org/wiki/Force_field_(chemistry) , [Force fields list](https://en.wikipedia.org/wiki/Comparison_of_force_field_implementations)]
+
+---
+
+## Internal Energy from Force field
+
+.pull-left[
+- Sum of intramolecular and nonbonded terms
+![](../images/Uintramolecular.png)
+]
+
+.pull-right[
+![](../images/Unonbonded.png)
+![](../images/Unonbonded_LJ.png)
+![](../images/Unonbonded_coulombic.png)
+]
+
+.footnote[[*Arthi et al, Nature, 2012*](https://udel.edu/~arthij/MD.pdf)]
+
+---
+
+### Steps in a typical MD simulation
+
+1. Setup and preparation
+  - Read PDB and parameters. Mutate residues, solvate, assign protonation states etc.
+
+--
+
+2. Minimisation
+  - Find a low energy structure using the force field parameters
+
+--
+
+3. Heating
+  - Heat the system to the desired temperature (usually 298K)
+
+--
+
+4. Equilibration
+  - Let the system evolve at T and ensure the system is stable.
+
+--
+
+5. Production dynamics
+  - Simulate the system under specified conditions (NVE, NVT, NPT)
+  - Collect structure and velocity data
+
+--
+
+6. Analysis
+  - Timeseries and correlation, PCA
+
+
+--- 
+
+---
+
+# Solvation
+
+Rationale: Many biological events take place in aqueous media.
+- Explicit: solvent molecules added (often water)
+- Implicit: continuum dielectric
+
+.image-100[![](../images/7cel_waterbox_galaxy.png)]
+
+
+---
+
+# Molecular energy landscape
+
+
+.image-100[![](../images/F6.large.png)]
+Folding funnel and accessible space.
+
+.footnote[http://www.pnas.org/content/101/46/16192]
+
+---
+
+# Ensembles
+
+A mental or virtual collection of a very large number of copies of a system. Each copy represents a possible state that the real system may be in.
+
+*A statistical ensemble is a probability distribution for the state of the system.* (https://en.wikipedia.org/wiki/Statistical_ensemble_(mathematical_physics))
+
+Thermodynamic ensembles are in statistical equilibrium over particular macroscopic properties
+- Microcanonical  (constant N V E)
+- Canonical (constant N V T)
+- Gibbs or Isobaric-isothermal (constant N P T)
+
+.footnote[N=number of particles, V=volume, P=Pressure, T=Temperature, [See Statistical Mechanics, McQuarrie for more in depth theory ISBN:9781891389153](https://books.google.co.za/books/about/Statistical_Mechanics.html?id=itcpPnDnJM0C&redir_esc=y)]
+
+---
+
+# Molecular dynamics engines
+
+These are programs that create the ensemble (create trajectories).
+- [CHARMM](https://www.charmm.org/charmm/)
+- [NAMD](http://www.ks.uiuc.edu/Research/namd/)
+- [GROMACS](http://www.gromacs.org/)
+- [OpenMM](http://openmm.org/)
+
+.footnote[[list of available software](https://en.wikipedia.org/wiki/Comparison_of_software_for_molecular_mechanics_modeling) ]
+
+
+---
+# Example input file 
+.image-100[![](../images/input.gif)]
+- Often complex inputs and also requires familiarity with the command line and/or Linux.
+
+---
+
+# Common challenges faced
+- Parameters. Easy to make errors in files.
+
+--
+
+- Version control. Ensuring the correct version is used and tracking changes.
+
+--
+
+- Scripts for serial vs parallel and for queueing systems.
+
+--
+
+- Bespoke scripts that initially resolve challenges, but cannot be repurposed (e.g. for new models or HPC usage).
+
+--
+
+- MD scripting languages can be complex. Each MD engine uses a different language and syntax.
+
+--
+
+- Unforced errors in command line arguments and flags. Verification and testing.
+
+--
+
+- Repeating the simulation, errors can result. Auditing.
+
+--
+
+- Sharing input files, custom scripts for simulation management and output data sets.
+
+
+---
+
+# Overcoming challenges
+- Train team to use [collaborative version control](https://github.com/)
+
+--
+
+- Use coding best practices etc., this can be a whole new challenge (!)
+
+--
+
+- Define and implement a data management plan (DMP)
+
+--
+
+- A community of practice using common workflows, tools
+
+---
+
+# Why [Galaxy](http://galaxyproject.org/) 
+
+![Galaxy user interface](../images/galaxy_interface.png)
+
+- Many bioinformatics tools and workflows. We are sibling sciences, implement successes from this field. 
+- Core values: Accessibility, Reproducibility, Transparency
+
+---
+
+# Why Galaxy 
+
+Batteries included!
+
+- workflow views and histories
+- sharing and privacy via web UI
+- platform for inhouse tool testing and linking
+- aim to reduce tools breaking due to human failure (reduce unforced errors)
+- reproducibility / repeatability 
+- data typing
+
+.footnote[Are there alternatives? Yes. [nextflow](https://www.nextflow.io/), [cwl](https://www.commonwl.org/)]
+
+
+---
+
+
+### Biomolecular Reaction and Interaction Dynamics Global Environment
+
+Molecular dynamics + Galaxy = BRIDGE
+
+![](../images/platform_overview.png)
+
+- MD engines (CHARMM, NAMD and GROMACS)
+- MD analysis tools (Bio3D, MDTraj and MDAnalysis)
+
+https://github.com/scientificomputing/bridge
+
+---
+
+# Topics to be covered
+
+1. Visualisation ([tutorial](../tutorials/formats-visualisation/slides.html))  
+2. Setting up molecular systems ([tutorial](../tutorials/setting-up-molecular-systems/tutorial.html))
+3. Running molecular dynamics simulations with NAMD ([tutorial](../tutorials/md-simulation-namd/tutorial.html)) and GROMACS ([tutorial](../tutorials/md-simulation-gromacs/tutorial.html))
+4. Analysing molecular dynamics simulations ([tutorial](../tutorials/analysis-md-simulations/tutorial.html)) 
+
+---
+
