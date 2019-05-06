@@ -776,7 +776,7 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
 
 <h2 id="format-the-data">Format the data</h2>
 
-<p>Let’s create a new file, <code class="highlighter-rouge">countdata</code>, that contains only the counts for the 12 samples i.e. we’ll remove the gene length column with the <strong>Cut columns from a table (cut)</strong> tool. The sample names are also pretty long so we’ll use the <strong>Replace Text in entire line</strong> tool to shorten these to contain only the relevant information about each sample.</p>
+<p>Let’s create a new file, <code class="highlighter-rouge">countdata</code>, that contains only the counts for the 12 samples i.e. we’ll remove the gene length column with the <strong>Cut columns from a table (cut)</strong> tool. The sample names are also pretty long so we’ll use the <strong>Replace Text in entire line</strong> tool to shorten these to contain only the relevant information about each sample. We will also replace the hyphen in the sample names with a dot so they match the names in the sample information file.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-format-the-counts-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Format the counts data</h3>
@@ -793,6 +793,13 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find pattern”</em>: <code class="highlighter-rouge">_B[A-Z0-9_]+</code></li>
+      </ul>
+    </li>
+    <li><strong>Replace Text in entire line</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Replace Text</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find pattern”</em>: <code class="highlighter-rouge">-</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Replace with”</em>: <code class="highlighter-rouge">.</code></li>
       </ul>
     </li>
     <li>Rename file as <code class="highlighter-rouge">countdata</code> using the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (pencil) icon. The file should look like below.
