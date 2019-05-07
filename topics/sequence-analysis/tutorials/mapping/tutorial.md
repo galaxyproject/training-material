@@ -88,14 +88,24 @@ We just imported in Galaxy FASTQ files corresponding to paired-end data as we co
 
 During sequencing, errors are introduced, such as incorrect nucleotides being called. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. The first step for any type of sequencing data is to check their quality.
 
-> ### {% icon comment %} Check the Quality control tutorial
-> The [quality control](../quality-control/tutorial.html) tutorial is explaining this step. We will not going into the details here, in particular for the parameters.
+> ### {% icon comment %} Required Knowledge: Quality Control basics
+> In order to understand the tools we run in the next step, and how to interpret their outputs, you must have completed the [quality control](../quality-control/tutorial.html) tutorial.
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Quality control
 > 1. **FastQC** {% icon tool %} on both datasets
+>    - {% icon param-files %} *"Short read data from your current history"*: Both fastq files that you uploaded
+>
 > 2. **MultiQC** {% icon tool %} on the outputs of **FastQC** {% icon tool %}
+>      - In *"Results"*
+>        - *"Which tool was used generate logs?"*: `FastQC`
+>        - In *"FastQC output"*
+>           - *"Type of FastQC output?"*: `Raw data`
+>           - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of both **FastQC** {% icon tool %})
 > 3. **Trim Galore!** {% icon tool %} on the paired-end datasets
+>    - *"Is this paired- or single-end"*: `Paired-end`
+>       - {% icon param-file %} *"Reads in FASTQ format #1"*: `wt_H3K4me3_read1.fastq.gz`
+>       - {% icon param-file %} *"Reads in FASTQ format #2"*: `wt_H3K4me3_read2.fastq.gz`
 {: .hands_on}
 
 # Map reads on a reference genome
