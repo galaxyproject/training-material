@@ -207,11 +207,18 @@ So the BAM file integrates many information for each read, in particular the qua
 >    {: .question}
 {: .hands_on}
 
-# Visualization using a Genome Browser
+# Visualization using a Genome Browser (IGV)
 
 The Integrative Genomics Viewer (IGV) is a high-performance visualization tool for interactive exploration of large, integrated genomic datasets. It supports a wide variety of data types, including array-based and next-generation sequence data, and genomic annotations. In the following we will use it to visualize the mapped reads.
 
 {% include topics/sequence-analysis/tutorials/mapping/igv.md tool="Bowtie2" region_to_zoom="chr2:91,053,413-91,055,345" %}
+
+# Visualization using a Genome Browser (JBrowse)
+
+JBrowse is an alternative, web-based genome browser. Whereas IGV is a piece of software you must download and run, JBrowse instances are websites hosted online that provide an interface to browse genomics data. We'll use it to visualise the mapped reads.
+
+{% include topics/sequence-analysis/tutorials/mapping/jbrowse.md tool="Bowtie2" region_to_zoom="chr2:91,053,413-91,055,345" %}
+
 
 # Conclusion
 {:.no_toc}
