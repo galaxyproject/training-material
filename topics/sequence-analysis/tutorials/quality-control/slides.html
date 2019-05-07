@@ -17,8 +17,8 @@ objectives:
 requirements:
 time_estimation: "1h"
 key_points:
-  - Run quality control on every dataset before running any other bioinformatics analysis
-  - Take care of the parameters used to improve the sequence quality
+  - Run quality control on every sequencing dataset before any other analyses
+  - Choose QC parameters carefully
   - Re-run FastQC to check the impact of the quality control
 contributors:
   - bebatut
@@ -123,8 +123,8 @@ class: packed
 
 ---
 
-### Quality score
-#### Per-base sequence quality
+
+### Per-base Quality
 
 ![](../../images/per_base_sequence_quality_bad.png)
 
@@ -132,10 +132,7 @@ class: packed
 
 ---
 
-class: packed
-
-### Quality score
-#### Per-base sequence quality
+### Per-base Quality
 
 ![](../../images/per_base_sequence_quality_medium.png)
 
@@ -143,15 +140,13 @@ class: packed
 
 ---
 
-### Quality score
-#### Per-sequence quality scores
+### Per-sequence Quality
 
 ![](../../images/per_sequence_quality.png)
 
 ---
 
-### Quality score
-#### Per-tile sequence quality
+### Per-tile Quality
 
 ![](../../images/per_tile_quality.png)
 
@@ -164,8 +159,7 @@ This graph will only appear with Illumina libraries which retain their original 
 
 ---
 
-### Also to check: Sequence content
-#### Per-base sequence content
+### Per-base Sequence Content
 
 ![](../../images/per_base_sequence_content.png)
 
@@ -181,8 +175,7 @@ There are a number of common scenarios for these issues:
 
 ---
 
-### Also to check: Sequence content
-#### Per-sequence GC content
+### Per-sequence GC content
 
 ![](../../images/per_sequence_GC_content.png)
 
@@ -193,8 +186,7 @@ Issues in the GC content distribution usually indicate a problem with the librar
 
 ---
 
-### Also to check: Sequence content
-#### Per-base N content
+### Per-base N content
 
 ![](../../images/per_base_N_content.png)
 
@@ -205,8 +197,7 @@ If a sequencer is unable to make a base call with sufficient confidence then it 
 
 ---
 
-### Also to check: Sequence length
-#### Sequence length distribution
+### Sequence length distribution
 
 ![](../../images/sequence_length_distribution.png)
 
@@ -219,7 +210,7 @@ This module will raise a warning if all sequences are not the same length. This 
 
 ---
 
-### Also to check: Duplicated sequences
+### Duplicated sequences
 
 ![](../../images/sequence_duplication_levels.png)
 
@@ -234,8 +225,7 @@ This module issues a warning if non-unique sequences make up for more than 20% o
 
 ---
 
-### Also to check: Tag sequences
-#### Adapter contamination
+### Tag sequences: Adapter contamination
 
 ![](../../images/adapter_content.png)
 
@@ -246,25 +236,20 @@ To investigate tag or adapter content, FastQC generates a plot showing a cumulat
 
 ---
 
-### Also to check: Tag sequences
-#### K-mer content
+### Tag sequences: K-mer content
 
 ![](../../images/kmer_content.png)
 
 ???
 Another way to find tag sequences is to look at the K-mer content, and find those which do not have even coverage through the length of your reads and could correspond to tag sequences.
 
-K-mers with positionally biased enrichment are reported. The top 6 most biased K-mer are additionally plotted to show their distribution. 
+K-mers with positionally biased enrichment are reported. The top 6 most biased K-mer are additionally plotted to show their distribution.
 
-Over-represented K-mers will appear as sharp spikes at a single point in the sequence, deviating from what should be a progressive or broad enrichment. 
-
----
-
-## How to improve the quality of my sequences?
+Over-represented K-mers will appear as sharp spikes at a single point in the sequence, deviating from what should be a progressive or broad enrichment.
 
 ---
 
-### Sequence quality improvements
+## Improving the quality of sequences
 
 - Filtering of sequences
     - with small mean quality score
