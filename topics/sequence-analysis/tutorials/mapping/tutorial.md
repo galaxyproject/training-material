@@ -116,7 +116,7 @@ Read mapping is the process to align the reads on a reference genomes. A mapper 
 
 We need a reference genome to map the reads on.
 
-{% include topics/sequence-analysis/tutorials/mapping/ref_genome_explanation.md answer_3="This data comes from ChIP-seq of mices, so we will use mm10 (*Mus musculus*)."%}
+{% include topics/sequence-analysis/tutorials/mapping/ref_genome_explanation.md answer_3="This data comes from ChIP-seq of mice, so we will use mm10 (*Mus musculus*)."%}
 
 Currently, there are over 60 different mappers, and their number is growing. In this tutorial, we will use [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/), a fast and memory-efficient open-source tool particularly good at aligning sequencing reads of about 50 up to 1,000s of bases to relatively long genomes.
 
