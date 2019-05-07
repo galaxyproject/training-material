@@ -26,6 +26,17 @@ contributors:
 
 # Why Quality Control?
 
+???
+
+Potential audience poll ideas:
+
+- Sequenced something or assembled a genome or transcriptome?
+- Can guess why we need to do QC on our data?
+
+Comments:
+
+- Process of removing low quality sequences that might corrupt downstream analyses
+
 ---
 
 ### Where is my data coming from?
@@ -33,6 +44,15 @@ contributors:
 ![](../../images/ecker_2012.png)
 
 <small>[*Ecker et al, Nature, 2012*](https://www.ncbi.nlm.nih.gov/pubmed/22955614)</small>
+
+???
+
+- Many sequencing techniques
+- [Huge diversity in protocols](https://www.illumina.com/science/sequencing-method-explorer.html)
+- Knowledge about source of data (+expectations of how it looks) is important in QC process
+- What is/isn't normal for your data
+
+Segue: Might be concerned about different processing for each
 
 ---
 
@@ -42,22 +62,65 @@ contributors:
 
 Quality control = First step of the bioinformatics analyses
 
+???
+
+- But no matter what technique used, same file format
+- Always should go through QC
+
+Segue: So let's look at how that data is stored
+
 ---
 
-### My sequences? <br>FASTA
+### Sequences: FASTA
 
 ```
-> Identifier1 (comment)
+>Identifier1 (comment)
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-> Identifier2 (comment)
+>Identifier2 (comment)
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 XX
 ```
+
+???
+
+- familiar if you've seen genomic data before
+- Starts with greater-than sign
+- Then an identifier with no spaces
+- Everything after a space is a comment
+- Newline
+- Everything up to next greater-than is sequence data (wrapping unnecessary)
+
+Segue: But this is just sequence, and we have data from a sequencer, which includes quality
+
+---
+
+### Sequences: FASTQ
+
+```
+@Identifier1 (comment)
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
++
+QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
+@Identifier2 (comment)
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
++
+QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
+```
+
+???
+
+- Four lines
+- @ + identifier on first line, just like fasta
+- sequence
+- +
+- quality score characters
+
+Segue: so what do the quality chars mean?
 
 ---
 
@@ -78,11 +141,19 @@ Phred Quality Score | Probability of incorrect base call | Base call accuracy
 
 </small>
 
+???
+
+- Logarithmic scale
+
 ---
 
 ### Quality score
 
 ![](../../images/quality_score.png)
+
+???
+
+- Solexa uses slightly different measure
 
 ---
 
@@ -90,21 +161,13 @@ Phred Quality Score | Probability of incorrect base call | Base call accuracy
 
 ![](../../images/quality_score_encoding.png)
 
----
+???
 
-### My sequences?
-#### FASTQ
-
-```
-@ Identifier1 (comment)
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-+
-QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
-@ Identifier2 (comment)
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-+
-QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
-```
+- Earlier saw sequence + quality were same length of text
+- Each score encoded as a single character
+- Uses ASCII (common computer encoding, maps numbers to characters)
+- Each technology has a different mapping
+- Mostly see illumina 1.8 these days, others only if historical
 
 ---
 
