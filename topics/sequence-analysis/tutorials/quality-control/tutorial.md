@@ -319,7 +319,7 @@ To accomplish this task we will use [Cutadapt](https://cutadapt.readthedocs.io/e
 >
 >       - In *Read 1 Options*
 >
->          If you know which adapter sequences were used during library preparation, provide their sequences there.
+>          In this training, no adapters were already removed. If you know which adapter sequences were used during library preparation, provide their sequences there.
 >
 >    - In *"Adapter Options"*
 >       - *"Minimum overlap length"*: `3`
@@ -462,7 +462,7 @@ It is usual that the quality of the sequences is worse for the reverse than for 
 >
 >       - In *Read 1 Options* or *Read 2 Options*
 >
->          If you know which adapter sequences were used during library preparation, provide their sequences there.
+>         In this training, no adapters were already removed. When you process your own data, if you know which adapter sequences were used during library preparation, you should provide their sequences here.
 >
 >    - In *"Adapter Options"*
 >       - *"Minimum overlap length"*: `3`
