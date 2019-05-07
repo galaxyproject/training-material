@@ -289,11 +289,11 @@ FastQC produces other diagnostic plots to assess sample quality.
 {: .question}
 
 
-# Trim and filter
+# Filter and Trim
 
-Based on the information provided by the quality graphs, the quality of the sequences drops at the end of the sequences. It could cause bias in downstream analyis with these potentially wrong nucleotides.
+We will filter and trim the sequences based on the information provided by the quality graphs, the quality of the sequences drops at the end of the sequences. This could cause bias in downstream analyes with these potentially incorrectly called nucleotides.
 
-The sequences should be treated to reduce bias in downstream analyis. In general, quality treatments include:
+Sequences must be treated to reduce bias in downstream analyis. In general, quality treatments include:
 
 - Filtering of sequences
     - with low mean quality score
@@ -305,7 +305,7 @@ The sequences should be treated to reduce bias in downstream analyis. In general
     - beginning/end of sequence
     - removing adapters
 
-To accomplish this task we use [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) tool that enhances sequence quality by automating adapter trimming as well as quality control.
+To accomplish this task we will use [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html), a tool that enhances sequence quality by automating adapter trimming as well as quality control.
 
 > ### {% icon hands_on %} Hands-on: Improvement of sequence quality
 >
@@ -490,7 +490,7 @@ It is usual that the quality of the sequences is worse for the reverse than for 
 
 > ### {% icon details %} Algorithmic details
 >
-> One of the biggest advantage of cutadapt over other trimming tools is that it has a nice [documentation](https://cutadapt.readthedocs.io) explaining how the tool works in detail.
+> One of the biggest advantage of cutadapt over other trimming tools is that it has nice [documentation](https://cutadapt.readthedocs.io) explaining how the tool works in detail.
 >
 > Cutadapt quality trimming algorithm consists of three simple steps:
 >
@@ -511,7 +511,7 @@ It is usual that the quality of the sequences is worse for the reverse than for 
 >     32 30 16 17 -2 -3 1 -6 -8 -7
 >     ```
 >
-> 2. Add up the numbers, starting from the end (partial sums) and stop early if the sum is greater than zero
+> 2. Add up the numbers, starting from the 3' end (partial sums) and stop early if the sum is greater than zero
 >
 >     ```
 >     (70) (38) 8 -8 -25 -23 -20, -21 -15 -7
