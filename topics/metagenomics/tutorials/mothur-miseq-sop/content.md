@@ -473,6 +473,9 @@ We are now ready to align our sequences to the reference. This is an important
 step to improve the clustering of your OTUs {% cite Schloss2012 %}.
 
 
+
+
+
 > ### {% icon hands_on %} Hands-on: Align sequences
 >
 > 1. **Align.seqs** {% icon tool %} with the following parameters
@@ -1057,21 +1060,7 @@ When we use the full set of 4060 sequences, we find 34 OTUs from the Mock commun
 3000 sequences, we find about 31 OTUs. In an ideal world, we would find exactly 21 OTUs. Despite our
 best efforts, some chimeras or other contaminations may have slipped through our filtering steps.
 
-> ### {% icon comment %} Background: Rarefaction
->
-> To estimate the fraction of species sequenced, rarefaction curves are typically used. A rarefaction curve
-> plots the number of species as a function of the number of individuals sampled. The curve usually begins
-> with a steep slope, which at some point begins to flatten as fewer species are being discovered per sample:
-> the gentler the slope, the less contribution of the sampling to the total number of operational taxonomic
-> units or OTUs.
->
-> ![Rarefaction curves](../../images/rarefaction.png)
->
-> Green, most or all species have been sampled; blue, this habitat has not been exhaustively sampled; red,
-> species rich habitat, only a small fraction has been sampled.
->
-> (*A Primer on Metagenomics* {% cite Wooley2010 %} )
-{: .comment}
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/background_rarefaction.md %}
 
 Now that we have assessed our error rates we are ready for some real analysis.
 
@@ -1291,9 +1280,12 @@ and many different metrics have been proposed to quantify diversity [Finotello e
 
 ### Alpha diversity
 
-In order to estimate alpha diversity of the samples, we first generate the rarefaction curves. Recall that
-rarefaction measure the number of observed OTUs as a function of the subsampling size. We do this with the
-**Rarefaction.single** tool:
+In order to estimate alpha diversity of the samples, we first generate the *rarefaction curves*. Recall that
+rarefaction measure the number of observed OTUs as a function of the subsampling size.
+
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/background_rarefaction.md %}
+
+We calculate rarefaction curves with the **Rarefaction.single** {% icon tool %} tool:
 
 > ### {% icon hands_on %} Hands-on: Calculate Rarefaction
 > - **Rarefaction.single** {% icon tool %} with the following parameters
