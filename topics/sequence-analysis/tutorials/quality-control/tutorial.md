@@ -111,14 +111,14 @@ But what does this quality mean?
 The quality for each sequence is a string of characters, one for each base of the nucleic sequence, used to characterize the probability of mis-indentification of each base. The score is encoded using the ASCII character table (with [some historical differences](https://en.wikipedia.org/wiki/FASTQ_format#Encoding)):
 
 ```
- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS.....................................................  Sanger
- ..........................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX......................  Solexa
- ...............................IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII......................  Illumina 1.3+
- .................................JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ......................  Illumina 1.5+
- LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL....................................................  Illumina 1.8+
- !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
- |                         |    |        |                              |                     |
-33                        59   64       73                            104                   126
+ SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS...............................  Sanger
+ ..........................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  Solexa
+ ...............................IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  Illumina 1.3+
+ .................................JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ  Illumina 1.5+
+ LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL..............................  Illumina 1.8+
+ !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefgh
+ |                         |    |        |                              |
+33                        59   64       73                            104
  0........................26...31.......40
                           -5....0........9.............................40
                                 0........9.............................40
