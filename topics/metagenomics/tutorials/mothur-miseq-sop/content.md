@@ -769,7 +769,7 @@ way of doing this is to use the abundant sequences as our reference.
 
 Now that we have thoroughly cleaned our data, we are finally ready to assign a taxonomy to our sequences.
 
-We will do this using a Bayesian classifier (via the **Classify.seqs** tool) and a mothur-formatted [training
+We will do this using a Bayesian classifier (via the **Classify.seqs** {% icon tool %} tool) and a mothur-formatted [training
 set provided by the Schloss lab](https://www.mothur.org/wiki/RDP_reference_files) based on the RDP (Ribosomal Database Project, {% cite Cole2013 %}) reference taxonomy.
 
 {% include topics/metagenomics/tutorials/mothur-miseq-sop/background_reference_taxonomies.md %}
@@ -786,7 +786,7 @@ and want to remove them from our dataset.
 {% if include.short %}
 
 
-> ### {% icon hands_on %} Hands-on: Classification and removal of non-bacterial sequences
+> ### {% icon hands_on %} Hands-on: Taxonomic Classification and removal of non-bacterial sequences
 >
 > 1. **Import the workflow** into Galaxy
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow3_removing_contamination.ga) or download it to your computer.
