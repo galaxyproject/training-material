@@ -818,7 +818,7 @@ and want to remove them from our dataset.
 
 {% else %}
 
-> ### {% icon hands_on %} Hands-on: Remove undesired sequences
+> ### {% icon hands_on %} Hands-on: Taxonomic Classification and Removal of undesired sequences
 >
 > 1. **Classify.seqs** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"fasta"*: the `fasta` output from **Remove.seqs** {% icon tool %}
