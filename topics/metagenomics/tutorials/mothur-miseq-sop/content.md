@@ -765,11 +765,14 @@ way of doing this is to use the abundant sequences as our reference.
 {% endif %}
 
 
-# Classification
+# Taxonomic Classification
 
-Before we know which sequences may originate from sources other than our intended 16S bacterial genes, we must
-first classify those sequences. We can do this using a Bayesian classifier (via the **Classify.seqs** tool) and a [training
-set provided by the Schloss lab](https://www.mothur.org/wiki/RDP_reference_files).
+Now that we have thoroughly cleaned our data, we are finally ready to assign a taxonomy to our sequences.
+
+We will do this using a Bayesian classifier (via the **Classify.seqs** tool) and a mothur-formatted [training
+set provided by the Schloss lab](https://www.mothur.org/wiki/RDP_reference_files) based on the RDP (Ribosomal Database Project, {% cite Cole2013 %}) reference taxonomy.
+
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/background_reference_taxonomies.md %}
 
 
 ## Removal of non-bacterial sequences
