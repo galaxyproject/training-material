@@ -279,10 +279,13 @@ Here the first column contains the read name, and the second column contains the
 
 Next, we want to improve the quality of our data. To this end we will run a workflow that performs the following steps:
 
-1. **Filter by length**. We know that the V4 region of the 16S gene is around 250 bp long. Anything significantly longer
+1. **Filter by length** \\
+   We know that the V4 region of the 16S gene is around 250 bp long. Anything significantly longer
    was likely a poorly assembled contig. We will remove any contigs longer than 275 base pairs using the **Screen.seqs** {% icon tool %} tool.
-2. **Remove low quality contigs**. We will also remove any contigs containing too many ambiguous base calls.
-3. **Deduplicate sequences**. Since we are sequencing many of the same organisms, there will likely be many identical contigs. To speed up downstream analysis we will determine the set of unique contigs using **Unique.seqs** {% icon tool %}.
+2. **Remove low quality contigs** \\
+   We will also remove any contigs containing too many ambiguous base calls.
+3. **Deduplicate sequences** \\
+   Since we are sequencing many of the same organisms, there will likely be many identical contigs. To speed up downstream analysis we will determine the set of unique contigs using **Unique.seqs** {% icon tool %}.
 
 
 > ### {% icon hands_on %} Hands-on: Perform data cleaning
@@ -295,7 +298,7 @@ Next, we want to improve the quality of our data. To this end we will run a work
 >
 > 2. Run **Workflow 1: Quality Control** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
->    - {% icon param-file %} *"1: Contigs"*: the `fasta` output from **Make.contigs** {% icon tool %}
+>    - {% icon param-file %} *"1: Contigs"*: the `trim.contigs.fasta` output from **Make.contigs** {% icon tool %}
 >    - {% icon param-file %} *"2: Groups"*: the `group file` from **Make.contigs** {% icon tool%}
 >
 >    {% include snippets/run_workflow.md %}
@@ -303,19 +306,18 @@ Next, we want to improve the quality of our data. To this end we will run a work
 > > ### {% icon question %} Questions
 > >
 > > 1. How many sequences were removed in the screening step?
-> > 2. How many unique sequences are there in our cleaned dataset?
+> > 2. How many *unique* sequences are there in our cleaned dataset?
 > >
 > > > ### {% icon solution %} Solutions
 > > > 1. The screening removed **23,488** sequences.
 > > >
-> > >    This can be determined by looking at the number of lines in `bad.accnos` output of screen.seqs
-> > >    or by comparing the total number of seqs between of the summary log before and after this screening
-> > > step
+> > >    This can be determined by looking at the number of lines in `bad.accnos` output of **Screen.seqs** {% icon tool %}
+> > >    or by comparing the total number of sequencess before and after this screening step in the output of **Summary.seqs** {% icon tool %}
 > > >
 > > > 2. There are **16,426** unique sequences.
 > > >
 > > >    This can be determined by expanding one of the outputs of **Unique.seqs** {% icon tool %} and looking at the number of lines in the file.
- > > {: .solution }
+> > {: .solution }
 > {: .question}
 >
 {: .hands_on}
@@ -344,7 +346,7 @@ Median:      1        252        252        0        4        76181
 97.5%-tile:  1        253        253        6        6        148552
 Maximum:     1        502        502        249      243      152360
 Mean:        1        252.811    252.811    0.70063  4.44854
-# of Seqs:   152360
+ # of Seqs:   152360
 ```
 
 In this dataset:
@@ -463,6 +465,13 @@ M00967_43_000000000-A3JHG_1_1101_13234_1983  10522   425    281   340     205
 The first column contains the read names of the representative sequences, and the subsequent columns contain
 the number of duplicates of this sequence observed in each sample.
 
+> ### {% icon comment %} Representative sequences vs Total sequences
+> From now on, we will only work with the set of *unique sequences*, but it's important to remember that these represent a larger
+> number of *total sequences*, which we keep track of in the *count table*.
+>
+> The **Summary.seqs** {% icon tool %} tool will
+> report both the number of unique *representative sequences* as well as the *total sequences* they represent.
+{: .comment}
 
 # Sequence Alignment
 
@@ -501,15 +510,15 @@ step to improve the clustering of your OTUs {% cite Schloss2012 %}.
 >     > > ```
 >     > > Here we start seeing how our sequences align to the reference database.
 >     > > There are different alignment characters in this output:
->     > >   - `.`: gap character before first or after last base in query sequence
+>     > >   - `.`: terminal gap character (before the first or after the last base in our query sequence)
 >     > >   - `-`: gap character within the query sequence
 >     > >
->     > > We will cut out only the V4 region in a later step (**filter.seqs**)
+>     > > We will cut out only the V4 region in a later step (**Filter.seqs** {% icon tool %})
 >     > {: .solution }
 >     {: .question}
 >
-> 2. **Summary.seqs** {% icon tool %} with the following parameters
->   - {% icon param-file %} *"fasta"*: the aligned output from **Align.seqs** {% icon tool %}
+> 2. **Summary.seqs** {% icon tool %} with the following parameters:
+>   - {% icon param-file %} *"fasta"*: the `align` output from **Align.seqs** {% icon tool %}
 >   - {% icon param-file %} *"count"*: `count_table` output from **Count.seqs** {% icon tool %}
 >   - *"Output logfile?"*: `yes`
 >
@@ -543,57 +552,18 @@ long stretches are likely the result of PCR errors and we would be wise to remov
 Next we will clean our data further by removing poorly aligned sequences and any sequences with long
 homopolymer stretches.
 
+
 ## More Data Cleaning
 
-To ensure that all our reads overlap our region of interest, we will remove any reads not overlapping the region
-from position 1968 to 11550 using the **Screen.seqs** tool. To make sure they overlap *only* that region, we will
-use the **Filter.seqs** step to remove any overhang on either end of the V4 region. The **Filter.seqs** tool will
-additionally clean up our alignment file by removing any columns that have a gap character (`-`, or `.` for terminal gaps)
-in that position for every aligned sequence (`vertical` parameter). Finally, we will group near-identical sequences together with the **Pre.cluster** tool.
+To ensure that all our reads overlap our region of interest, we will:
 
-{% if include.short %}
+1. Remove any reads not overlapping the region V4 region {% unless include.short %}(position 1968 to 11550){% endunless %} using **Screen.seqs** {% icon tool %}.
+2. Remove any overhang on either end of the V4 region to ensure our sequences overlap *only* the V4 region, using **Filter.seqs** {% icon tool %}.
+3. Clean our alignment file by removing any columns that have a gap character (`-`, or `.` for terminal gaps) at that position in every sequence (also using **Filter.seqs** {% icon tool %}).
+4. Group near-identical sequences together with **Pre.cluster** {% icon tool %}. Sequences that only differ by one or two bases at this point are likely to represent sequencing errors rather than true biological variation, so we will cluster such sequences together.
+{% if include.short %} 5. Remove Sequencing artefacts known as *chimeras* (discussed in next section). {% endif %}
 
-> ### {% icon hands_on %} Hands-on: Clean Aligned sequences
->
-> 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow2_data_cleaning.ga) or download it to your computer.
->    - Import the workflow into Galaxy
->
->    {% include snippets/import_workflow.md %}
->
-> 2. Run **Workflow 2: Data Cleaning** {% icon workflow %} using the following parameters:
->    - *"Send results to a new history"*: `No`
->    - {% icon param-file %} *"1: Aligned Sequences"*: the `align` output from **Align.seqs** {% icon tool %}
->    - {% icon param-file %} *"2: Count Table"*: the `count table` from **Count.seqs** {% icon tool%}
->
->    {% include snippets/run_workflow.md %}
->
-> > ### {% icon question %} Question
-> >
-> > How many sequences remain after this cleaning steps?
-> >
-> > > ### {% icon solution %} Solution
-> > > There are 5,720 remaining sequences after filtering and clustering of highly similar sequences.
-> > >
-> > > This can be determined by looking at the number of sequences in the fasta output of **Pre.cluster** {% icon tool %}
-> > {: .solution }
-> {: .question}
->
-{: .hands_on}
-
-Have a look at the FASTA output from **Pre.cluster**, it should looks something like this:
-
-```
->M00967_43_000000000-A3JHG_1_1101_13234_1983
-TAC--GG-AG-GAT--GCG-A-G-C-G-T-T--AT-C-CGG-AT--TT-A-T-T--GG-GT--TT-A-AA-GG-GT-GC-G-CA-GGC-G-G-A-AG-A-T-C-AA-G-T-C-A-G-C-G-G--TA-A-AA-TT-G-A-GA-GG--CT-C-AA-C-C-T-C-T-T-C--GA-G-C-CGTT-GAAAC-TG-G-TTTTC-TTGA-GT-GA-GC-GA-G-A---AG-T-A-TGCGGAATGCGTGGTGT-AGCGGT-GAAATGCATAG-AT-A-TC-AC-GC-AG-AACTCCGAT-TGCGAAGGCA------GC-ATA-CCG-G-CG-CT-C-A-ACTGACG-CTCA-TGCA-CGAAA-GTG-TGGGT-ATC-GAACAGG
->M00967_43_000000000-A3JHG_1_1101_14069_1827
-TAC--GG-AG-GAT--GCG-A-G-C-G-T-T--AT-C-CGG-AT--TT-A-T-T--GG-GT--TT-A-AA-GG-GT-GC-G-TA-GGC-G-G-C-CT-G-C-C-AA-G-T-C-A-G-C-G-G--TA-A-AA-TT-G-C-GG-GG--CT-C-AA-C-C-C-C-G-T-A--CA-G-C-CGTT-GAAAC-TG-C-CGGGC-TCGA-GT-GG-GC-GA-G-A---AG-T-A-TGCGGAATGCGTGGTGT-AGCGGT-GAAATGCATAG-AT-A-TC-AC-GC-AG-AACCCCGAT-TGCGAAGGCA------GC-ATA-CCG-G-CG-CC-C-T-ACTGACG-CTGA-GGCA-CGAAA-GTG-CGGGG-ATC-AAACAGG
-```
-
-We see that these are our contigs, but with extra alignment information. The filtering steps have removed any positions which had a gap symbol in all reads of the dataset.
-
-
-{% else %}
+{% unless include.short %}
 
 > ### {% icon hands_on %} Hands-on: Remove poorly aligned sequences
 >
@@ -693,32 +663,75 @@ our contigs are ~250 bp long, we will set the threshold to 2 mismatches.
 > {: .question}
 {: .hands_on}
 
-{% endif %}
-
-# Removing Contamination
-
-We now have a set of high-quality aligned sequences. The next steps will remove any undesired sequences (e.g. non-bacterial) and sequencing artefacts known as *chimeras*.
-
-
+{% endunless %}
 
 
 ## Chimera Removal
 
-We have now thoroughly cleaned our data and removed as much sequencing error as we can. Next, we will look
-at a class of sequencing artefacts known as *chimeras*. During PCR amplification, it is possible that two unrelated
-templates are combined to form a sort of hybrid sequence, also called a chimera. Needless to say, we do not want such
-sequencing artefacts confounding our results.
-
-
-> ### {% icon comment %} Background: Chimeras
-> ![Chemirec sequence](../../images/chimeras.jpg)
-> (slide credit: [http://slideplayer.com/slide/4559004/ ](http://slideplayer.com/slide/4559004/ ))
-{: .comment}
-
-
 {% unless include.short %}
-We'll do this chimera removal using the `VSEARCH` algorithm {% cite Rognes2016 %} that is called within mothur, using the
-**Chimera.vsearch** tool. This command will split the data by sample and check for chimeras. The recommended
+We have now thoroughly cleaned our data and removed as much sequencing error as we can. Next, we will look
+at a class of sequencing artefacts known as *chimeras*.
+{% endunless %}
+
+During PCR amplification, it is possible that two unrelated templates are combined to form a sort of hybrid sequence,
+also called a *chimera*. Needless to say, we do not want such sequencing artefacts confounding our results. We'll do
+this chimera removal using the `VSEARCH` algorithm {% cite Rognes2016 %} that is called within mothur, using the
+**Chimera.vsearch** {% icon tool %} tool.
+
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/background_chimeras.md %}
+
+{% if include.short %}
+
+
+> ### {% icon hands_on %} Hands-on: Clean Aligned sequences and Chimera Removal
+>
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow2_data_cleaning.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
+>
+>    {% include snippets/import_workflow.md %}
+>
+> 2. Run **Workflow 2: Data Cleaning and Chimera Removal** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *"1: Aligned Sequences"*: the `align` output from **Align.seqs** {% icon tool %}
+>    - {% icon param-file %} *"2: Count Table"*: the `count table` from **Count.seqs** {% icon tool%}
+>
+>    {% include snippets/run_workflow.md %}
+>
+> > ### {% icon question %} Question
+> >
+> > 1. How many chimeric sequences were detected?
+> > 2. How many sequences remain after these cleaning steps?
+> >
+> > > ### {% icon solution %} Solution
+> > >
+> > > 1. There were **3,439 representative sequences** flagged as chimeric. These represent a total of **10,564 total sequences**
+> > >
+> > >    This can be determined by looking at the number of sequences in the `vsearch.accnos` file (3439). To determine how many total sequences these represent, compare the Summary.seqs log output files before and after the chimera filtering step (128,655-118,091=10,564).
+> > >
+> > > 2. There are 2,281 remaining sequences after filtering, clustering of highly similar sequences, and chimera removal.
+> > >
+> > >    This can be determined by looking at the number of sequences in the fasta output of **Remove.seqs** {% icon tool %}
+> > {: .solution }
+> {: .question}
+>
+{: .hands_on}
+
+Have a look at the FASTA output from **Pre.cluster**, it should looks something like this:
+
+```
+>M00967_43_000000000-A3JHG_1_1101_13234_1983
+TAC--GG-AG-GAT--GCG-A-G-C-G-T-T--AT-C-CGG-AT--TT-A-T-T--GG-GT--TT-A-AA-GG-GT-GC-G-CA-GGC-G-G-A-AG-A-T-C-AA-G-T-C-A-G-C-G-G--TA-A-AA-TT-G-A-GA-GG--CT-C-AA-C-C-T-C-T-T-C--GA-G-C-CGTT-GAAAC-TG-G-TTTTC-TTGA-GT-GA-GC-GA-G-A---AG-T-A-TGCGGAATGCGTGGTGT-AGCGGT-GAAATGCATAG-AT-A-TC-AC-GC-AG-AACTCCGAT-TGCGAAGGCA------GC-ATA-CCG-G-CG-CT-C-A-ACTGACG-CTCA-TGCA-CGAAA-GTG-TGGGT-ATC-GAACAGG
+>M00967_43_000000000-A3JHG_1_1101_14069_1827
+TAC--GG-AG-GAT--GCG-A-G-C-G-T-T--AT-C-CGG-AT--TT-A-T-T--GG-GT--TT-A-AA-GG-GT-GC-G-TA-GGC-G-G-C-CT-G-C-C-AA-G-T-C-A-G-C-G-G--TA-A-AA-TT-G-C-GG-GG--CT-C-AA-C-C-C-C-G-T-A--CA-G-C-CGTT-GAAAC-TG-C-CGGGC-TCGA-GT-GG-GC-GA-G-A---AG-T-A-TGCGGAATGCGTGGTGT-AGCGGT-GAAATGCATAG-AT-A-TC-AC-GC-AG-AACCCCGAT-TGCGAAGGCA------GC-ATA-CCG-G-CG-CC-C-T-ACTGACG-CTGA-GGCA-CGAAA-GTG-CGGGG-ATC-AAACAGG
+```
+
+We see that these are our contigs, but with extra alignment information. The filtering steps have removed any positions which had a gap symbol in all reads of the dataset.
+
+
+{% else %}
+
+This command will split the data by sample and check for chimeras. The recommended
 way of doing this is to use the abundant sequences as our reference.
 
 > ### {% icon hands_on %} Hands-on: Remove chimeric sequences
@@ -740,6 +753,7 @@ way of doing this is to use the abundant sequences as our reference.
 > > ### {% icon question %} Question
 > >
 > >  How many sequences were flagged as chimeric? what is the percentage? (Hint: summary.seqs)
+> >
 > > > ### {% icon solution %} Solution
 > > > Looking at the chimera.vsearch `accnos` output, we see that **3,439 representative sequences** were flagged as chimeric. If we run summary.seqs on the resulting fasta file and count table, we see that we went from 128,655
 > > > sequences down to 118,091 total sequences in this step, for a reduction of **10,564 total sequences**, or 8.2%. This is a reasonable number of
@@ -748,7 +762,15 @@ way of doing this is to use the abundant sequences as our reference.
 > {: .question}
 {: .hands_on}
 
-{% endunless %}
+{% endif %}
+
+
+# Classification
+
+Before we know which sequences may originate from sources other than our intended 16S bacterial genes, we must
+first classify those sequences. We can do this using a Bayesian classifier (via the **Classify.seqs** tool) and a [training
+set provided by the Schloss lab](https://www.mothur.org/wiki/RDP_reference_files).
+
 
 ## Removal of non-bacterial sequences
 
@@ -757,14 +779,11 @@ there may be 18S rRNA gene fragments or 16S rRNA from Archaea, chloroplasts, and
 that have survived all the cleaning steps up to this point. We are generally not interested in these sequences
 and want to remove them from our dataset.
 
-Before we know which sequences may originate from sources other than our intended 16S bacterial genes, we must
-first classify those sequences. We can do this using a Bayesian classifier (via the **Classify.seqs** tool) and a [training
-set provided by the Schloss lab](https://www.mothur.org/wiki/RDP_reference_files).
 
 {% if include.short %}
 
 
-> ### {% icon hands_on %} Hands-on: Remove Chimeras and non-bacterial sequences
+> ### {% icon hands_on %} Hands-on: Classification and removal of non-bacterial sequences
 >
 > 1. **Import the workflow** into Galaxy
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow3_removing_contamination.ga) or download it to your computer.
@@ -772,10 +791,10 @@ set provided by the Schloss lab](https://www.mothur.org/wiki/RDP_reference_files
 >
 >    {% include snippets/import_workflow.md %}
 >
-> 2. Run **Workflow 3: Removing Contamination** {% icon workflow %} using the following parameters:
+> 2. Run **Workflow 3: Classification** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
->    - {% icon param-file %} *"1: Pre-clustered sequences"*: the `fasta` output from **Pre.cluster** {% icon tool %}
->    - {% icon param-file %} *"2: Count Table"*: the `count table` from **Pre.cluster** {% icon tool%}
+>    - {% icon param-file %} *"1: Pre-clustered sequences"*: the `fasta` output from **Remove.seqs** {% icon tool %}
+>    - {% icon param-file %} *"2: Count Table"*: the `count table` from **Remove.seqs** {% icon tool%}
 >    - {% icon param-file %} *"3: Training set Taxonomy"*: `trainset9_032012.pds.tax` file you imported from Zenodo
 >    - {% icon param-file %} *"4: Training set FASTA"*: `trainset9_032012.pds.fasta` file from Zenodo
 >
@@ -783,15 +802,11 @@ set provided by the Schloss lab](https://www.mothur.org/wiki/RDP_reference_files
 >
 > > ### {% icon question %} Questions
 > >
-> > 1. How many chimeric sequences were detected?
-> > 2. How many non-bacterial sequences were removed?
+> > How many non-bacterial sequences were removed? Determine both the number of *representative sequences* and *total sequences* removed.
 > >
 > > > ### {% icon solution %} Solution
-> > > 1. There were **3,439 representative sequences** flagged as chimeric. These represent a total of **10,564 total sequences**
-> > >
-> > >    This can be determined by looking at the number of sequences in the `vsearch.accnos` file (3439). To determine how many total sequences these represent, compare the Summary.seqs log output files before and after the chimera filtering step (128,655-118,091=10,564).
-> > > 2. There were **20 representative sequences** removed, representing **162 total sequences**.
-> > >    This can be determined by looking at the summary.seqs log outputs before and after the **Remove.lineage** step.
+> > > There were **20 representative sequences** removed, representing **162 total sequences**.
+> > > This can be determined by looking at the summary.seqs log outputs before the **Remove.lineage** step (after chimera removal), and after.
 > > {: .solution }
 > {: .question}
 >
@@ -927,7 +942,7 @@ the reads from our mock sample back to their known sequences, to see how many fa
 
 > ### {% icon hands_on %} Hands-on: Assess error rates based on a mock community
 > - **Seq.error** {% icon tool %} with the following parameters
->   - {% icon param-file %} *"fasta"*: the `fasta` output from **Get.groups** {% icon tool %}
+>   - {% icon param-file %} *"pick.fasta"*: the `fasta` output from **Get.groups** {% icon tool %}
 >   - {% icon param-file %} *"reference"*: `HMP_MOCK.v35.fasta` file from your history
 >   - {% icon param-file %} *"count"*: the `count table` from **Get.groups** {% icon tool %}
 >   - {% icon param-check %} *"output log?"*: `yes`
@@ -1081,9 +1096,11 @@ the **Remove.groups** tool:
 > ### {% icon hands_on %} Hands-on: Remove Mock community from our dataset
 >
 > - **Remove.groups** {% icon tool %} with the following parameters
->   - *"Select input type"*: `fasta , name, taxonomy, or list with a group file or count table`
->   - *"groups"*: `Mock`
->   - {% icon param-files %} *"count table"*, *"fasta"*, and *"taxonomy"* to the respective outputs from **Remove.lineage** {% icon tool %}
+>   - {% icon param-select %} *"Select input type"*: `fasta , name, taxonomy, or list with a group file or count table`
+>   - {% icon param-file %} *"group or count table"*: the `pick.count_table` output from **Remove.lineage** {% icon tool %}
+>   - {% icon param-select %} *"groups"*: `Mock`
+>   - {% icon param-file %} *"fasta"*: the `pick.fasta` output from **Remove.lineage** {% icon tool %}
+>   - {% icon param-file %} *"taxonomy"*: the `pick.taxonomy` output from **Remove.lineage** {% icon tool %}
 >
 {: .hands_on}
 
