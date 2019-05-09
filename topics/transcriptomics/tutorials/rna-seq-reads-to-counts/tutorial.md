@@ -426,7 +426,7 @@ Duplicate reads are usually kept in RNA-seq differential expression analysis as 
 >
 > 1. **MarkDuplicates** {% icon tool %} with the following parameters:
 >    - {% icon param-collection %} *"Select SAM/BAM dataset or dataset collection"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
-> 2. **MultiQC* {% icon tool %} with the following parameters:
+> 2. **MultiQC** {% icon tool %} with the following parameters:
 >       - In *"1: Results"*:
 >           - {% icon param-select %} *"Which tool was used generate logs?"*: `Picard`
 >               - {% icon param-select %} *"Type of Picard output?"*: `Markdups`
