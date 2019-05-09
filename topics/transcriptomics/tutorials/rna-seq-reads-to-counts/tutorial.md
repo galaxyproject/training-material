@@ -495,7 +495,7 @@ The coverage of reads along gene bodies can be assessed to check if there is any
 >    - *"Run each sample separately, or combine mutiple samples into one plot"*: `Run each sample separately`
 >        - {% icon param-collection %} *"Input .bam file"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
 >    - {% icon param-file %} *"Reference gene model"*: `reference genes` (Input dataset)
-> 2. **MultiQC* {% icon tool %} with the following parameters:
+> 2. **MultiQC** {% icon tool %} with the following parameters:
 >       - In *"1: Results"*:
 >           - {% icon param-select %} *"Which tool was used generate logs?"*: `RSeQC`
 >               - {% icon param-select %} *"Type of RSeQC output?"*: `gene_body_coverage`
@@ -534,7 +534,7 @@ We can also check the distribution of reads across known gene features, such as 
 > 1. **Read Distribution** {% icon tool %} with the following parameters:
 >    - {% icon param-collection %} *"Input .bam/.sam file"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
 >    - {% icon param-file %} *"Reference gene model"*: `reference genes` (Input dataset)
-> 2. **MultiQC* {% icon tool %} with the following parameters:
+> 2. **MultiQC** {% icon tool %} with the following parameters:
 >       - In *"1: Results"*:
 >           - {% icon param-select %} *"Which tool was used generate logs?"*: `RSeQC`
 >               - {% icon param-select %} *"Type of RSeQC output?"*: `read_distribution`
