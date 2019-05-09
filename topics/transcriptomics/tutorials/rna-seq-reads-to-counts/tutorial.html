@@ -1204,7 +1204,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <h2 id="qc-duplicate-reads">QC: duplicate reads</h2>
 
-<p>Duplicate reads are usually kept in RNA-seq differential expression analysis as they can come from highly-expressed genes but it is still a good metric to check. A high percentage of duplicates can indicate a problem with the sample, for example, PCR amplification of a low complexity library (not many transcripts) due to not enough RNA used as input. FastQC gives us an idea of duplicates in the reads before mapping (note that it just takes a sample of the data). We can assess the numbers of duplicates in all mapped reads using the <strong>Picard MarkDuplicates</strong> tool. Picard considers duplicates to be reads that map to the same location, based on the start position of where the read maps.</p>
+<p>Duplicate reads are usually kept in RNA-seq differential expression analysis as they can come from highly-expressed genes but it is still a good metric to check. A high percentage of duplicates can indicate a problem with the sample, for example, PCR amplification of a low complexity library (not many transcripts) due to not enough RNA used as input. FastQC gives us an idea of duplicates in the reads before mapping (note that it just takes a sample of the data). We can assess the numbers of duplicates in all mapped reads using the <strong>Picard MarkDuplicates</strong> tool. Picard considers duplicates to be reads that map to the same location, based on the start position of where the read maps. In general, we consider normal to obtain up to 50% of duplication.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-check-duplicate-reads-with-markduplicates"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check duplicate reads with <strong>MarkDuplicates</strong></h3>
@@ -1215,7 +1215,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select SAM/BAM dataset or dataset collection”</em>: <code class="highlighter-rouge">aligned reads (BAM)</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
-    <li><em>*MultiQC</em> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li>In <em>“1: Results”</em>:
           <ul>
@@ -1331,7 +1331,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="highlighter-rouge">reference genes</code> (Input dataset)</li>
       </ul>
     </li>
-    <li><em>*MultiQC</em> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li>In <em>“1: Results”</em>:
           <ul>
@@ -1389,7 +1389,7 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="highlighter-rouge">reference genes</code> (Input dataset)</li>
       </ul>
     </li>
-    <li><em>*MultiQC</em> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li>In <em>“1: Results”</em>:
           <ul>
