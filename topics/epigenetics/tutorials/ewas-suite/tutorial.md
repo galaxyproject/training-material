@@ -86,7 +86,7 @@ The first step of EWAS data anylalysis is raw methylation data loading (intensit
 >    > * Press **Start**
 >    {: .tip}
 >
-> 3. Run **minfi read450k** {% icon tool %} with the following parameters
+> 3. Run **Minfi Read 450k** {% icon tool %} with the following parameters
 >     - {% icon param-files %} *"red files"*: `GSM1588704_8795207135_R01C02_Red.idat`, `GSM1588705_8795207119_R05C02_Red.idat`,`GSM1588706_8795207135_R02C02_Red.idat`,`GSM1588707_8795207119_R06C02_Red.idat`
 >     - {% icon param-files %} *"green files"*: `GSM1588704_8795207135_R01C02_Grn.idat`,`GSM1588705_8795207119_R05C02_Grn.idat`, `GSM1588706_8795207135_R02C02_Grn.idat`,`GSM1588707_8795207119_R06C02_Grn.idat`
 > 4. Inspect generated set of data
@@ -106,16 +106,16 @@ The first step of EWAS data anylalysis is raw methylation data loading (intensit
 
 Preprocessing and data quality assurance is an important step in Infinium Methylation Assay analysis.
 
-`RGChannelSet` represents two color data with a green and a red channel and can be converted into methylated and unmethylated signals assigned to `MethylSet` or into Beta values build in `RatioSet`. User can convert from `RGChannelSet` into `MethylSet` using the **minfi mset** {% icon tool %} or compute Beta values using **minfi set** {% icon tool %}. The **minfi qc** {% icon tool %} tool extracts and plots the quality control data frame with two columns mMed and uMed which are the medians of `MethylSet` signals (Meth and Unmeth).Comparing them against one another allows user to detect and remove low-quality samples.
+`RGChannelSet` represents two color data with a green and a red channel and can be converted into methylated and unmethylated signals assigned to `MethylSet` or into Beta values build in `RatioSet`. User can convert from `RGChannelSet` into `MethylSet` using the **Minfi Mset** {% icon tool %} or compute Beta values using **Minfi Rset** {% icon tool %}. The **Minfi QC** {% icon tool %} tool extracts and plots the quality control data frame with two columns mMed and uMed which are the medians of `MethylSet` signals (Meth and Unmeth).Comparing them against one another allows user to detect and remove low-quality samples.
 
 > ### {% icon hands_on %} Hands-on: Preprocessing
-> 1. Run **minfi mset** {% icon tool %} to create `MethylSet` object
-> 2. Run **minfi qc** {% icon tool %} to estimate sample-specific quality control
-> 3. Run **minfi rset** {% icon tool %} to convert methylation data from the `MethylSet` to ratios
-> 4. Run **minfi maptogenome** {% icon tool %} to map ratio data to the genome
+> 1. Run **Minfi Mset** {% icon tool %} to create `MethylSet` object
+> 2. Run **Minfi QC** {% icon tool %} to estimate sample-specific quality control
+> 3. Run **Minfi Rset** {% icon tool %} to convert methylation data from the `MethylSet` to ratios
+> 4. Run **Minfi Map to Genome** {% icon tool %} to map ratio data to the genome
 >
 > > ### {% icon comment %} Preprocess and Normalize data
-> > If your files require normalisation, you might prefer to use other of preprocessing tools provided in EWAS suite i.e. **minfi ppfun** {% icon tool %} or **minfi ppquantile**  {% icon tool %} look for recomendation at (ref).
+> > If your files require normalisation, you might prefer to use other of preprocessing tools provided in EWAS suite i.e. **Minfi Preprocess Funnorm** {% icon tool %} or **Minfi Preprocess Quantile**  {% icon tool %} look for recomendation at (ref).
 > >
 > {: .comment}
 >
@@ -130,12 +130,12 @@ Incomplete annotation of genetic variations such as single nucleotide polymorphi
 Hansen, J. P. 2014 highly recommende to remove the probes that contain either a SNP at the metylated loci interrogation or at the single nucleotide extension
 
 > ### {% icon hands_on %} Hands-on: Removing probes affected by genetic variation
-> 1. Run **minfi dropsnp** {% icon tool %} to remove the probes that contain either a SNP at the metylated loci interrogation or at the single nucleotide extension
+> 1. Run **Minfi Drop SNPs** {% icon tool %} to remove the probes that contain either a SNP at the metylated loci interrogation or at the single nucleotide extension
 {: .hands_on}
 
 # DMPs and DMRs Identification
 
-The main goal of the EWAS suite is to simplify the way differentially methylated loci sites are detected. The EWAS suite contains **minfi dmp** {% icon tool %} tool detecting differentially methylated positions (DMPs) with respect to a phenotype covariate, and more complex **minfi dmr** {% icon tool %} solution for finding differentially methylated regions (DMRs). Genomic regions that are differentially methylated between two conditions can be tracked using a bumphunting algorithm. The algorithm first implements a t-statistic at each methylated loci location, with optional smoothing, then groups probes into clusters with a maximum location gap and a cutoff size to refer the lowest possible value of genomic profile hunted by our tool.
+The main goal of the EWAS suite is to simplify the way differentially methylated loci sites are detected. The EWAS suite contains **Minfi DMP** {% icon tool %} tool detecting differentially methylated positions (DMPs) with respect to a phenotype covariate, and more complex **Minfi DMR** {% icon tool %} solution for finding differentially methylated regions (DMRs). Genomic regions that are differentially methylated between two conditions can be tracked using a bumphunting algorithm. The algorithm first implements a t-statistic at each methylated loci location, with optional smoothing, then groups probes into clusters with a maximum location gap and a cutoff size to refer the lowest possible value of genomic profile hunted by our tool.
 
 > ### {% icon hands_on %} Hands-on: DMPs and DMRs Identification
 >
@@ -145,7 +145,7 @@ The main goal of the EWAS suite is to simplify the way differentially methylated
 >    https://zenodo.org/record/1251211/files/phenotypeTable.txt?download=1
 >    ```
 >
-> 2. Run **minfi dmp** {% icon tool %} with the following parameters
+> 2. Run **Minfi DMP** {% icon tool %} with the following parameters
 >    - {% icon param-file %} *"Input set"*:`GenomicRatioSet`
 >    - {% icon param-file %} *"Phenotype Table"*:`phenotypeTable.txt`
 >    - *"Phenotype Type"*:`categorical`
@@ -157,7 +157,7 @@ The main goal of the EWAS suite is to simplify the way differentially methylated
 >
 >       This is recommended when sample sizes are small <10
 >
-> 3. Run **minfi dmr** {% icon tool %}
+> 3. Run **Minfi DMR** {% icon tool %}
 >    - {% icon param-file %} *"Input set"*:`GenomicRatioSet`
 >    - {% icon param-file %} *"Phenotype Table"*:`phenotypeTable.txt`
 >    - *"factor1"*: `sensitive`
@@ -168,7 +168,7 @@ The main goal of the EWAS suite is to simplify the way differentially methylated
 >    - *"nullMethod"*:`permutation`
 >    - *"verbose"*:`TRUE`
 >
-> 4. Click on the **minfi dmr** {% icon tool %} output in your history to expand it
+> 4. Click on the **Minfi DMR** {% icon tool %} output in your history to expand it
 > 5. Click on the {% icon galaxy-pencil %} (pencil) icon displayed in your dataset in the history
 > 6. Set Database/Build to `Human Feb. 2009 (GRCh37/hg19) (hg19)`
 > 7. Press **Save**
@@ -194,8 +194,8 @@ The main goal of the EWAS suite is to simplify the way differentially methylated
 In addition to downstream analysis users can annotate the differentially methylated loci to the promoter regions of genes with gene function description, and relationships between these concepts.
 
 > ### {% icon hands_on %} Hands-on:  Annotate Differentially Methylated Position
-> 1. Run **chipeakanno annopeaks** {% icon tool %} with the following parameters
->   - {% icon param-file %} *"Differentialy methylated data"*: output of **minfi dmp** {% icon tool %}
+> 1. Run **ChIPpeakAnno annoPeaks** {% icon tool %} with the following parameters
+>   - {% icon param-file %} *"Differentialy methylated data"*: output of **Minfi DMP** {% icon tool %}
 >   - *"bindingType"*: `StartSite`
 >   - *"bindingRegionStart"*:`-5000`
 >   - *"bindingRegionEnd"*:`3000`
@@ -206,17 +206,17 @@ In addition to downstream analysis users can annotate the differentially methyla
 > 2. **Cut** {% icon tool %} with the following parameters to cut "gene_name" column from table of annotated peaks and then get a list of geenes
 >   - *"Cut columns"*: `c16`
 >   - *"Delimited by"*: `Tab`
->   - {% icon param-file %} *"From"*: output of **chipeakanno annopeaks** {% icon tool %}
+>   - {% icon param-file %} *"From"*: output of **ChIPpeakAnno annoPeaks** {% icon tool %}
 >
 > 3. **Remove beginning** {% icon tool %} of `Gene List` with the following parameter
 >   - *"Remove first"*: `1`
 >   - {% icon param-file %} *"from"*: output of **Cut** {% icon tool %}
 >
-> 4. **clusterProfiler bitr** {% icon tool %} with the following parameter to convert the list of genes to list of entrez ID
+> 4. **Cluster Profiler Bitr** {% icon tool %} with the following parameter to convert the list of genes to list of entrez ID
 >   - *"Input Type Gene ID"*: `SYMBOL`
 >   - *"Output Type Gene ID"*: `ENTREZID`
 >
-> 5. **clusterProfiler go** {% icon tool %} to run a GO Enrichment Analysis
+> 5. **Cluster Profiler GO** {% icon tool %} to run a GO Enrichment Analysis
 >
 >   > ### {% icon comment %} Biological id translator
 >   >  No matter what ID we need, this tool allows various conversions suitable for different databases and annotations.
