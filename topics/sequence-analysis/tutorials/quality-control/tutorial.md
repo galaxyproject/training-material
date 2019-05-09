@@ -468,7 +468,7 @@ It is usual that the quality of the sequences is worse for the reverse than for 
 >       - *"Minimum overlap length"*: `3`
 >    - In *"Filter Options"*
 >       - *"Minimum length"*: `20`
->    - In *"Filter Options"*
+>    - In *"Read Modification Options"*
 >       - *"Quality cutoff"*: `20`
 >    - In *"Output Options"*
 >       - *"Report"*: `Yes`
