@@ -65,11 +65,11 @@ Compare with other species
 
 <div>
 .pull-left[
-Gene:
+Promoter:
 
 - -35 Region
 - TATA Box
-- Initiation site
+- Initiation site (TSS)
 ]
 .pull-right[
 ![](../images/intro-prok1.png)
@@ -79,7 +79,7 @@ Gene:
 
 <div>
 .pull-left[
-Genome:
+Operons:
 
 - Promoter
 - Some genes
@@ -90,12 +90,19 @@ Genome:
 ]
 </div>
 
+???
+
+Prokaryotic genes often have a well conserved structure, with a promoter, one or a few genes and a terminator.
 
 ---
 
 ### Eukaryotic Genes
 
 ![](../images/intro-eukaryotic-genes.png)
+
+???
+
+Things are a little more complicated for eukaryotic: splicing
 
 ---
 
@@ -119,8 +126,10 @@ Multiple pieces of evidence
 - Alignment of proteins (closely related species)
 
 .image-50[
-![](../images/intro-evidence.png)
+![](../images/intro-evidences.png)
 ]
+
+*But* data unavailable for novel or very distant genes, or unexpressed genes
 
 ---
 
@@ -132,7 +141,7 @@ Predictions using:
 - Stastical model (specific to organism)
 
 Models:
-- Built from training on evidence-based gene calls (2-3 interactions)
+- Built from training on evidence-based gene calls (2-3 iterations)
 ]
 
 .pull-right.image-90[
@@ -154,12 +163,33 @@ Models:
 ![](../images/intro-consensus.png)
 ]
 
+<small>
+Source: [Maker tutorial](http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018)
+</small>
+
+
 ---
 
-### Evaluation of Evidence
+### Evaluation of Evidence: metrics
 
-- Number of genes, average number of exons, length, ...
-- BUSCO: same principle as for assembly, except on CDS/proteins
+- Number of genes
+- Average number of exons
+- Average gene length
+- ...
+
+---
+
+### Evaluation of Evidence: BUSCO
+
+#### Benchmarking Universal Single-Copy Orthologs
+
+* Sets of genes having single-copy orthologs in all species of a clad (insects, plants, bacteria, ...)
+* Genes supposed to be vital for the species
+* Expected to be found in a good annotation
+* Results:
+  * Found genes
+  * Fragmented genes
+  * Duplicated genes
 
 ---
 
@@ -229,7 +259,7 @@ Apollo (based upon JBrowse), Artemis, others
 .pull-left[
 Annotations steps
 
-- check structure (exons, introns, start, stop, utr, ...)
+- Check structure (exons, introns, start, stop, utr, ...)
 - Search for isoforms
 - Ensure consistent naming conventions
 - Add functional annotations (based on homologies with other species)
@@ -283,7 +313,7 @@ Data Sources
 - For each protein (or CDS) of the annotation
   - Search for all InterPro patterns
 - Many motifs
-- Requires manual curation
+- Some of them manually curated
 - Gene Ontology Terms available for domains
 
 ---
@@ -301,7 +331,7 @@ Controlled vocabulary to describe:
 ]
 
 .pull-right[
-![](../images/intro-evidence.png)
+![](../images/intro-go-source.png)
 ]
 
 ---
