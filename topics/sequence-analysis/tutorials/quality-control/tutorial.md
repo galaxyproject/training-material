@@ -291,7 +291,7 @@ FastQC produces other diagnostic plots to assess sample quality.
 
 # Filter and Trim
 
-We will filter and trim the sequences based on the information provided by the quality graphs, the quality of the sequences drops at the end of the sequences. This could cause bias in downstream analyes with these potentially incorrectly called nucleotides.
+We will filter and trim the sequences based on the information provided by the quality graphs, the quality of the sequences drops at the end of the sequences. This could cause bias in downstream analyses with these potentially incorrectly called nucleotides.
 
 Sequences must be treated to reduce bias in downstream analyis. In general, quality treatments include:
 

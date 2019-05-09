@@ -15,7 +15,7 @@
 {: .hands_on}
 
 > ### {% icon comment %} Slow
-> This can take about a minute or two to run, depending on your training instance's resources. It takes time as the server builds up a small website for you, and pre-processes the reference genome into a more efficient format. If you wanted to share this with your colleagues, you could download this dataset and directly place it on your webserver
+> This can take about a minute or two to run, depending on your training instance's resources. It takes time as the server builds up a small website for you, and pre-processes the reference genome into a more efficient format. If you wanted to share this with your colleagues, you could download this dataset and directly place it on your webserver.
 {: .comment}
 
 The reads have a direction: they are mapped to the forward or reverse strand, respectively. When clicking on a read, extra information is displayed
@@ -34,7 +34,7 @@ The reads have a direction: they are mapped to the forward or reverse strand, re
 > >    <i style="background:#ec8b8b">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i> Original red  | Forward strand
 > >    <i style="background:#8f8fd8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i> Original blue | Reverse strand
 > >    <i style="background:#d11919">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i> Hard red      | Forward strand, missing mate
-> >    <i style="background:#1919d1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i> hard Blue     | Reverse strand, missing mate
+> >    <i style="background:#1919d1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i> Hard Blue     | Reverse strand, missing mate
 > >    <i style="background:#ecc8c8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i> Light red     | Forward strand not proper
 > >    <i style="background:#bebed8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i> Light blue    | Reverse strand, not proper
 > >    <i style="background:#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i> Black         | Forward, diff chr
