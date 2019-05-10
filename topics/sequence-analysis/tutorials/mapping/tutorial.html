@@ -581,7 +581,8 @@
   <li><a href="#prepare-the-data" id="markdown-toc-prepare-the-data">Prepare the data</a></li>
   <li><a href="#map-reads-on-a-reference-genome" id="markdown-toc-map-reads-on-a-reference-genome">Map reads on a reference genome</a></li>
   <li><a href="#inspection-of-a-bam-file" id="markdown-toc-inspection-of-a-bam-file">Inspection of a BAM file</a></li>
-  <li><a href="#visualization-using-a-genome-browser" id="markdown-toc-visualization-using-a-genome-browser">Visualization using a Genome Browser</a></li>
+  <li><a href="#visualization-using-a-genome-browser-igv" id="markdown-toc-visualization-using-a-genome-browser-igv">Visualization using a Genome Browser (IGV)</a></li>
+  <li><a href="#visualization-using-a-genome-browser-jbrowse" id="markdown-toc-visualization-using-a-genome-browser-jbrowse">Visualization using a Genome Browser (JBrowse)</a></li>
 </ol>
 
 </blockquote>
@@ -689,16 +690,43 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
 <p>During sequencing, errors are introduced, such as incorrect nucleotides being called. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. The first step for any type of sequencing data is to check their quality.</p>
 
 <blockquote class="comment">
-  <h3 id="comment-check-the-quality-control-tutorial"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Check the Quality control tutorial</h3>
-  <p>The <a href="../quality-control/tutorial.html">quality control</a> tutorial is explaining this step. We will not going into the details here, in particular for the parameters.</p>
+  <h3 id="comment-required-knowledge-quality-control-basics"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Required Knowledge: Quality Control basics</h3>
+  <p>In order to understand the tools we run in the next step, and how to interpret their outputs, you must have completed the <a href="../quality-control/tutorial.html">quality control</a> tutorial.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-quality-control"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality control</h3>
   <ol>
-    <li><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on both datasets</li>
-    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the outputs of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-    <li><strong>Trim Galore!</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the paired-end datasets</li>
+    <li><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on both datasets
+      <ul>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: Both fastq files that you uploaded</li>
+      </ul>
+    </li>
+    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the outputs of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+      <ul>
+        <li>In <em>“Results”</em>
+          <ul>
+            <li><em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">FastQC</code></li>
+            <li>In <em>“FastQC output”</em>
+              <ul>
+                <li><em>“Type of FastQC output?”</em>: <code class="highlighter-rouge">Raw data</code></li>
+                <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“FastQC output”</em>: <code class="highlighter-rouge">Raw data</code> files (output of both <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>Trim Galore!</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the paired-end datasets
+      <ul>
+        <li><em>“Is this paired- or single-end”</em>: <code class="highlighter-rouge">Paired-end</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reads in FASTQ format #1”</em>: <code class="highlighter-rouge">wt_H3K4me3_read1.fastq.gz</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reads in FASTQ format #2”</em>: <code class="highlighter-rouge">wt_H3K4me3_read2.fastq.gz</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
   </ol>
 </blockquote>
 
@@ -724,7 +752,7 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
     <ol>
       <li>A reference genome (or reference assembly) is a set of nucleic acid sequences assembled as a representative example of a species’ genetic material. As they are often assembled from the sequencing of different individuals, they do not accurately represent the set of genes of any single organism, but a mosaic of different nucleic acid sequences from each individual.</li>
       <li>As the cost of DNA sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are builts and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different released versions (called “builds”).</li>
-      <li>This data comes from ChIP-seq of mices, so we will use mm10 (<em>Mus musculus</em>).</li>
+      <li>This data comes from ChIP-seq of mice, so we will use mm10 (<em>Mus musculus</em>).</li>
     </ol>
   </blockquote>
 </blockquote>
@@ -980,7 +1008,7 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
   </ol>
 </blockquote>
 
-<h1 id="visualization-using-a-genome-browser">Visualization using a Genome Browser</h1>
+<h1 id="visualization-using-a-genome-browser-igv">Visualization using a Genome Browser (IGV)</h1>
 
 <p>The Integrative Genomics Viewer (IGV) is a high-performance visualization tool for interactive exploration of large, integrated genomic datasets. It supports a wide variety of data types, including array-based and next-generation sequence data, and genomic annotations. In the following we will use it to visualize the mapped reads.</p>
 
@@ -1027,6 +1055,114 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
   </ol>
 
   <p>A general description of the user interface of the IGV browser is available here: <a href="/training-material/topics/introduction/tutorials/igv-introduction/tutorial.html">IGV Browser description</a></p>
+</blockquote>
+
+<h1 id="visualization-using-a-genome-browser-jbrowse">Visualization using a Genome Browser (JBrowse)</h1>
+
+<p>JBrowse is an alternative, web-based genome browser. Whereas IGV is a piece of software you must download and run, JBrowse instances are websites hosted online that provide an interface to browse genomics data. We’ll use it to visualise the mapped reads.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-visualization-of-the-reads-in-jbrowse"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualization of the reads in JBrowse</h3>
+
+  <ol>
+    <li><strong>JBrowse</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> genome browser, with the following parameters:
+      <ul>
+        <li><em>“Reference genome to display”</em>: Use a built-in genome
+          <ul>
+            <li><em>“Select a reference genome”</em>: <code class="highlighter-rouge">mm10</code></li>
+          </ul>
+        </li>
+        <li><em>“Produce Standalone Instance”</em>: Yes</li>
+        <li><em>“Insert Track Group”</em>:
+          <ul>
+            <li><em>“Insert Annotation Track”</em>:
+              <ul>
+                <li><em>“Track Type”</em>: BAM Pileups</li>
+                <li><em>“BAM Track Data”</em>: <code class="highlighter-rouge">aligned reads</code> (output of <strong>Bowtie2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                <li><em>“Autogenerate SNP Track”</em>: Yes</li>
+                <li><em>“Track Visibility”</em>: On for new users</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Visualise the dataset <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span></li>
+    <li>Zoom on the <code class="highlighter-rouge">chr2:91,053,413-91,055,345</code></li>
+  </ol>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-slow"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Slow</h3>
+  <p>This can take about a minute or two to run, depending on your training instance’s resources. It takes time as the server builds up a small website for you, and pre-processes the reference genome into a more efficient format. If you wanted to share this with your colleagues, you could download this dataset and directly place it on your webserver.</p>
+</blockquote>
+
+<p>The reads have a direction: they are mapped to the forward or reverse strand, respectively. When clicking on a read, extra information is displayed</p>
+
+<blockquote class="question">
+  <h3 id="question-questions-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>What does the teardrop shape and line mean in the autogenerated SNP track?</li>
+    <li>What do differently coloured reads mean?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>If enough reads have a different value, then it is marked with a teardrop icon. The coverage plot is marked in height with percentage of reads with a different call at that position</li>
+      <li>
+        <p>Colour Codes:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Colour</th>
+              <th>Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><i style="background:#ec8b8b">     </i> Original red</td>
+              <td>Forward strand</td>
+            </tr>
+            <tr>
+              <td><i style="background:#8f8fd8">     </i> Original blue</td>
+              <td>Reverse strand</td>
+            </tr>
+            <tr>
+              <td><i style="background:#d11919">     </i> Hard red</td>
+              <td>Forward strand, missing mate</td>
+            </tr>
+            <tr>
+              <td><i style="background:#1919d1">     </i> Hard Blue</td>
+              <td>Reverse strand, missing mate</td>
+            </tr>
+            <tr>
+              <td><i style="background:#ecc8c8">     </i> Light red</td>
+              <td>Forward strand not proper</td>
+            </tr>
+            <tr>
+              <td><i style="background:#bebed8">     </i> Light blue</td>
+              <td>Reverse strand, not proper</td>
+            </tr>
+            <tr>
+              <td><i style="background:#000000">     </i> Black</td>
+              <td>Forward, diff chr</td>
+            </tr>
+            <tr>
+              <td><i style="background:#969696">     </i> Grey</td>
+              <td>Reverse, diff chr</td>
+            </tr>
+            <tr>
+              <td><i style="background:#999999">     </i> Grey</td>
+              <td>No strand</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ol>
+  </blockquote>
 </blockquote>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>

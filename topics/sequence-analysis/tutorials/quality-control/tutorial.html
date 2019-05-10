@@ -515,7 +515,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 <ol id="markdown-toc">
   <li><a href="#inspect-a-raw-sequence-file" id="markdown-toc-inspect-a-raw-sequence-file">Inspect a raw sequence file</a></li>
   <li><a href="#assess-the-read-quality" id="markdown-toc-assess-the-read-quality">Assess the Read Quality</a></li>
-  <li><a href="#trim-and-filter" id="markdown-toc-trim-and-filter">Trim and filter</a></li>
+  <li><a href="#filter-and-trim" id="markdown-toc-filter-and-trim">Filter and Trim</a></li>
   <li><a href="#process-paired-end-data" id="markdown-toc-process-paired-end-data">Process paired-end data</a></li>
 </ol>
 
@@ -674,14 +674,14 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
 
 <p>The quality for each sequence is a string of characters, one for each base of the nucleic sequence, used to characterize the probability of mis-indentification of each base. The score is encoded using the ASCII character table (with <a href="https://en.wikipedia.org/wiki/FASTQ_format#Encoding">some historical differences</a>):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS.....................................................  Sanger
- ..........................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX......................  Solexa
- ...............................IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII......................  Illumina 1.3+
- .................................JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ......................  Illumina 1.5+
- LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL....................................................  Illumina 1.8+
- !"#$%&amp;'()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
- |                         |    |        |                              |                     |
-33                        59   64       73                            104                   126
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS...............................  Sanger
+ ..........................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  Solexa
+ ...............................IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  Illumina 1.3+
+ .................................JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ  Illumina 1.5+
+ LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL..............................  Illumina 1.8+
+ !"#$%&amp;'()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefgh
+ |                         |    |        |                              |
+33                        59   64       73                            104
  0........................26...31.......40
                           -5....0........9.............................40
                                 0........9.............................40
@@ -916,11 +916,11 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
   </blockquote>
 </blockquote>
 
-<h1 id="trim-and-filter">Trim and filter</h1>
+<h1 id="filter-and-trim">Filter and Trim</h1>
 
-<p>Based on the information provided by the quality graphs, the quality of the sequences drops at the end of the sequences. It could cause bias in downstream analyis with these potentially wrong nucleotides.</p>
+<p>We will filter and trim the sequences based on the information provided by the quality graphs, the quality of the sequences drops at the end of the sequences. This could cause bias in downstream analyses with these potentially incorrectly called nucleotides.</p>
 
-<p>The sequences should be treated to reduce bias in downstream analyis. In general, quality treatments include:</p>
+<p>Sequences must be treated to reduce bias in downstream analyis. In general, quality treatments include:</p>
 
 <ul>
   <li>Filtering of sequences
@@ -940,7 +940,7 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
   </li>
 </ul>
 
-<p>To accomplish this task we use <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a> tool that enhances sequence quality by automating adapter trimming as well as quality control.</p>
+<p>To accomplish this task we will use <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a>, a tool that enhances sequence quality by automating adapter trimming as well as quality control.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-improvement-of-sequence-quality"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Improvement of sequence quality</h3>
@@ -961,7 +961,7 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
             <li>
               <p>In <em>Read 1 Options</em></p>
 
-              <p>If you know which adapter sequences were used during library preparation, provide their sequences there.</p>
+              <p>In this training, no adapters were already removed. If you know which adapter sequences were used during library preparation, provide their sequences there.</p>
             </li>
           </ul>
         </li>
@@ -1175,7 +1175,7 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
             <li>
               <p>In <em>Read 1 Options</em> or <em>Read 2 Options</em></p>
 
-              <p>If you know which adapter sequences were used during library preparation, provide their sequences there.</p>
+              <p>In this training, no adapters were already removed. When you process your own data, if you know which adapter sequences were used during library preparation, you should provide their sequences here.</p>
             </li>
           </ul>
         </li>
@@ -1227,7 +1227,7 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
 <blockquote class="details">
   <h3 id="details-algorithmic-details"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Algorithmic details</h3>
 
-  <p>One of the biggest advantage of cutadapt over other trimming tools is that it has a nice <a href="https://cutadapt.readthedocs.io">documentation</a> explaining how the tool works in detail.</p>
+  <p>One of the biggest advantage of cutadapt over other trimming tools is that it has nice <a href="https://cutadapt.readthedocs.io">documentation</a> explaining how the tool works in detail.</p>
 
   <p>Cutadapt quality trimming algorithm consists of three simple steps:</p>
 
@@ -1251,7 +1251,7 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Add up the numbers, starting from the end (partial sums) and stop early if the sum is greater than zero</p>
+      <p>Add up the numbers, starting from the 3’ end (partial sums) and stop early if the sum is greater than zero</p>
 
       <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> (70) (38) 8 -8 -25 -23 -20, -21 -15 -7
 </code></pre></div>      </div>
