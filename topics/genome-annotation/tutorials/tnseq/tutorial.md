@@ -24,55 +24,58 @@ contributors:
 # Introduction
 {:.no_toc}
 
-In microbiology, identifying links between genotype and phenotype is key to understand bacteria growth and virulence mechanisms, and to identify targets for drugs and vaccines. These analysis are limitated by the lack of bacterial genome annotations (eg 30% of genes for S. pneumoniae are of unknown function) and by the fact that genotypes often arose from complex composant interactions.
+In microbiology, identifying links between genotype and phenotype is key to understand bacteria growth and virulence mechanisms, and to identify targets for drugs and vaccines. These analysis are limitated by the lack of bacterial genome annotations (*e.g.* 30% of genes for *S. pneumoniae* are of unknown function) and by the fact that genotypes often arose from complex composant interactions.
 
-
-## Overview of Transposon insertion Sequencing
+## Transposon insertion Sequencing
 {:.no_toc}
 
-Transposon insertion sequencing is a technique used to functionally annotate bacterial genomes. The genome is saturated by transposon insertions, and the insertion of a transposon being disruptive for the region, the analysis of insertion frequency provides information on how the bacteria fitness change due to this disruption (see [Transposon insertion sequencing method](#figure-1)) :
- - An insertion mutant with lower fitness decrease frequency in the population
- - An increased fitness lead to increased frequency in the population
+Transposon insertion sequencing is a technique used to functionally annotate bacterial genomes. In this technique, the genome is saturated by insertions of transposons. Transposons are highly regulated, discrete DNA segments that can relocate within the genome. They have a large influence on gene expression and can be used to determine the function of genes.
 
+When a transposon inserts itself in a gene, the gene's function will be disrupted, affecting the fitness (growth) of the bacteria. We can then manipulate transposons for use in insertional mutagenesis, i.e. creation of mutations of DNA by the addition of transposons. The genomes can be then sequenced to locate the transposon insertion site and the function affected by a transposon insertion can be linked to the disrupted gene. 
 
+![Illustration of tnseq Method](../../images/tnseq/principle_tnseq.png "Transposon insertion sequencing method (From <a href='#Chao2016'> Chao <i>et al.</i> 2016</a>)")
 
+1. **Data production** (**a** in the previous image)
 
- ![Illustration of tnseq Method](../../images/tnseq/principle_tnseq.png "<b>Transposon insertion sequencing method</b> - <b>a. Data production</b> The initial population genomes are mutated so that the genome is saturated with transposon insertions.  A library is <i>saturated</i> if in the genomes across the whole population of bacteria, each potential insertion site has at least one insertion. The population is then divided into several media containing different growth conditions. After growth, the regions flanking the insertion are amplified and sequenced, allowing to determine the location of the insertion. <b>b. Analysis</b> After alignement to the reference genome, the resulting data will show a discrete repartition of reads on each TA site. If a gene present several insertions, like the two leftmost genes in <i>Condition A</i>, it means that its disruption has little or no impact to the bacterial growth. On the other hand, when a gene shows no insertions at all, like the rightmost gene in <i>Condition A</i>, is means that any disruption in this gene killed the bacteria, meaning its a gene essential to bacteria survival. If the library is sufficiently saturated, there is a clear threshold between essential and non-essential genes when you analyze the insertion rate per gene. (From <a href='#Chao2016'> Chao <i>et al.</i> 2016</a>)")
+    An initial population of genomes is mutated so that the genome of the bacteria is saturated with transposon insertions. A library is called *saturated* if in the genomes across the whole population of bacteria, each potential insertion site has at least one insertion. The population is then divided into several media containing different growth conditions, to identify the impact of the insertions on the bacteria growth. After growth, the regions flanking the insertion are amplified and sequenced, allowing to determine the location of the insertion. 
 
+2. **Analysis** (**b** in the previous image)
+
+    The sequences are aligned to the reference genome to identify the location of the regions flanking the insertions. The resulting data will show a discrete repartition of reads on each site. If a gene present several insertions, like the two leftmost genes in *Condition A*, it means that its disruption has little or no impact to the bacterial growth. On the other hand, when a gene shows no insertions at all, like the rightmost gene in *Condition A*, is means that any disruption in this gene killed the bacteria, meaning it is a gene essential to bacteria survival. If the library is sufficiently saturated, there is a clear threshold between essential and non-essential genes when you analyze the insertion rate per gene. 
 
 Two type of transposon insertion methods exist:
- -  Gene disruption, where we analyze only the disruptions. (The object of this tutorial)
- -  Regulatory element insertion, where different promoters are inserted by the transposon, and we analyze the change in gene expression in addition to the disruption. (Will be the subject or another tutorial)
+- Gene disruption, where we analyze only the disruptions. This will covered by of this tutorial
+- Regulatory element insertion, where different promoters are inserted by the transposon, and we analyze the change in gene expression in addition to the disruption. This method will be the subject of another tutorial.
 
-## <a name="BuildLibrary">Building a TnSeq library</a>
+## Building a TnSeq library
 {:.no_toc}
 
-In this tutorial, we are using mariner transposon, that target TA sequences, in ordered to target the whole genome uniformely. Different types of transposon can be used depending of the goal of you analysis :
-- Randomly pooled tranposon :
-    - Mariner-based transposons, which target TA dinucleotides
-        - The TA are distributed relatively evenly along genome, which allows to impact statistically every gene
-        - There is in average more than 30 insertions site per kb
-        - The local variations means less loci and less statistical power
-        - Advantages: low insertion bias, easy to build saturated libraries
+Different types of transposons can be used depending of the goal of your analysis.
+
+- Randomly pooled tranposon
+    - Mariner-based transposons, common and stable transposons which target the "TA" dinucleotides
+
+        The TA are distributed relatively evenly along genome. The Mariner-based transposons can be inserted to impact statistically every gene, with in average more than 30 insertions site per kb. With the low insertion bias, it is easy to build saturated libraries. But local variations means less loci and less statistical power.
+
     - Tn5-based vectors, which insert at random sites
-        - Require no target sequences
-        - It has a preference for high GC content, causing insertion bias
-        - Useful for specie where it is difficult to build mariner based transposons
+
+        This transposon do not require any target sequences. It is useful for specie where it is difficult to build mariner based transposons. But it has a preference for high GC content, causing insertion bias
+
 - Defined sequence transposon
-    - Can be used to study interactions in pathways of interest
-    - More precise targeting (small genes, pathways) for specific analyses
+    
+    It can be used to study interactions in pathways of interest, but also more precise targeting (small genes, pathways) for specific analyses
 
-Independently of your choice of transposon you need to be careful about your library complexity . A large complexity means that there is multiple insertion in every potential locus. The higher density of insertion you have, the greater precision  you have in identifying limits of regions of interest. If the density of the library is too low, some genes might not be disrupted by chance and mistaken for essential. The advantage of a target specific transposon, like the mariner, in opposition of a Tn5-based transposon inserting randomly, it that the limited number of insertion sites makes it easier to build high complexity libraries.
+Independently of the transposon choice we need to be careful about the library complexity. With a large complex library, multiple insertion can be found in every potential locus. The higher density of insertion, the greater precision in identifying limits of regions of interest. If the density of the library is too low, some genes might by chance not be disrupted and mistaken for essential. The advantage of a target specific transposon, like the mariner, in opposition of a Tn5-based transposon inserting randomly, it that the limited number of insertion sites makes it easier to build high complexity libraries. **In this tutorial, we are using mariner transposon targeting TA sequences, in ordered to target the whole genome uniformely.**
 
-After you selected the type of transposon corresponding to your goals, you need to modify it to allow insertion site amplification and sequencing so that you get a library representative of the tranposon insertion.
-Biases could get introduced by the process due to uneven fragment sizes. To avoid this problem, we can introduce a Type I restriction site to cleave DNA downstream of transposon, and get uniform fragment sizes
+After selection of the type of transposon, we need to modify it to allow insertion site amplification and sequencing to get a library representative of the tranposon insertion. Biases could get introduced by the process due to uneven fragment sizes. To avoid this problem, we can introduce a Type I restriction site to cleave DNA downstream of transposon, and get uniform fragment sizes
 
-It has been shown that a minimum length of 16 bp is necessary for precise mapping on the genome {% cite Kwon2015 %} . We can therefore use the MmeI restriction site (21pb) but not BsmFI (11 to 12 bp). It is not important in that case to have longer reads as we do not care to have a good coverage on the entire genome, the only information we need is the Ta site affected by an insertion, to do that we only need the location of the start of the reads.
+It has been shown that a minimum transposon length of 16 bp is necessary for precise mapping on the genome {% cite Kwon2015 %}. We can therefore not use the BsmFI restriction site (11 to 12 bp) but MmeI. Longer reads are not so important as we do not need a good coverage of the entire genome. As we just want to identify the TA site affected by an insertion, we only need the location of the start of the reads.
 
-In this tutorial, the transposon is a mariner Himar1 with the structure described in the figure [Structure of the tranposon constructs](#figure-2) {% cite Santiago2015 %}.
+In this tutorial, the transposon is a mariner Himar1 with two specific regions used to specifically sequence the region upstream of the insertion {% cite Santiago2015 %}:
 
-![Structure of the transposon containing several parcodes and adapters](../../images/tnseq/tranposon_structure.png "<b>Structure of the tranposon constructs</b> - The transposon construct is a mariner transposon with two specific region used to specifically sequence the region upstream of the insertion. The transposon inserts at TA site at the ITR junctions. These ITR junctions have been modified to include a Mme1 restriction site. Using MmeI enzyme to determine the size of the reads allow to have a homogeneous read size and therefore avoid a bias in the representation of the insertions. It also includes a NotI restriction site (cut 21 bp upstream from the restriction site). These two site are the 5' and 3' limits to the genomic DNA we want to sequence. <b>A. Sequence flanking genomic regions</b> After digestion by NotI restriction enzyme, the fragments are attached to biotinylated adaptors that link to NotI restriction site. The attached fragment are then digested by MMeI at a site upstream , where an Illumina primer is then linked. The sequencing is then done, adding Illumina adaptors and an additional barcode to the read for multiplexed sequencing. <b>B. Removing incorrect fragments</b> An insertion can sometimes be composed of one or more copies of the transposon (multimer). There is therefore a risk to select plasmid backbone sequence. To solve this problem, an additional NotI has been add in the backbone to create different length construct, that can later be filtrated (. Different promoters are added to the construct along with an additional 3 bp barcode to analyze differential expression impact, but this will be the subject of another tutorial. (From <a href='#Santiago2015'> Santiago <i>et al.</i> 2015</a>)")
+![Structure of the transposon containing several parcodes and adapters](../../images/tnseq/tranposon_structure.png "Structure of the transposon containing several parcodes and adapters (From <a href='#Santiago2015'> Santiago <i>et al.</i> 2015</a>)")
 
+The transposon inserts at TA site at the ITR junctions. These ITR junctions have been modified to include a Mme1 restriction site. Using MmeI enzyme to determine the size of the reads allow to have a homogeneous read size and therefore avoid a bias in the representation of the insertions. It also includes a NotI restriction site (cut 21 bp upstream from the restriction site). These two site are the 5' and 3' limits to the genomic DNA we want to sequence. A. Sequence flanking genomic regions</b> After digestion by NotI restriction enzyme, the fragments are attached to biotinylated adaptors that link to NotI restriction site. The attached fragment are then digested by MMeI at a site upstream , where an Illumina primer is then linked. The sequencing is then done, adding Illumina adaptors and an additional barcode to the read for multiplexed sequencing. <b>B. Removing incorrect fragments</b> An insertion can sometimes be composed of one or more copies of the transposon (multimer). There is therefore a risk to select plasmid backbone sequence. To solve this problem, an additional NotI has been add in the backbone to create different length construct, that can later be filtrated (. Different promoters are added to the construct along with an additional 3 bp barcode to analyze differential expression impact, but this will be the subject of another tutorial. 
 
 Because of this complex tranposon structure, the reads obtained after sequencing contain a large portion of tranposon sequence for a 16-17 bp genomic sequence. This will necessitate several step of pre-processing to extract this genomic sequence.
 
