@@ -8,6 +8,7 @@ questions:
   - "What is a epigenome-wide association studies?"
   - "Why is a EWAS analysis useful?"
   - "Why 450k data?"
+time_estimation: "1h"
 objectives:
   - "Learn how to perform reproducible EWAS analysis"
 key_points:
