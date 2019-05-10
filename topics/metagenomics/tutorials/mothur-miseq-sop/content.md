@@ -796,7 +796,7 @@ and want to remove them from our dataset.
 >
 > 2. Run **Workflow 3: Classification** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
->    - {% icon param-file %} *"1: Pre-clustered sequences"*: the `fasta` output from **Remove.seqs** {% icon tool %}
+>    - {% icon param-file %} *"1: Cleaned sequences"*: the `fasta` output from **Remove.seqs** {% icon tool %}
 >    - {% icon param-file %} *"2: Count Table"*: the `count table` from **Remove.seqs** {% icon tool%}
 >    - {% icon param-file %} *"3: Training set Taxonomy"*: `trainset9_032012.pds.tax` file you imported from Zenodo
 >    - {% icon param-file %} *"4: Training set FASTA"*: `trainset9_032012.pds.fasta` file from Zenodo
