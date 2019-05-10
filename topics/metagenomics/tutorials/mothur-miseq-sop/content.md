@@ -789,7 +789,7 @@ and want to remove them from our dataset.
 > ### {% icon hands_on %} Hands-on: Taxonomic Classification and removal of non-bacterial sequences
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow3_removing_contamination.ga) or download it to your computer.
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow3_classification.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
 >    {% include snippets/import_workflow.md %}
@@ -1135,7 +1135,7 @@ We'll now use the **Cluster** tool, with `taxlevel` set to `4`, requesting that 
 >
 >    {% include snippets/import_workflow.md %}
 >
-> 2. Run **Workflow 4: OTU Clustering** {% icon workflow %} using the following parameters:
+> 2. Run **Workflow 5: OTU Clustering** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-file %} *"1: Sequences"*: the `fasta` output from **Remove.groups** {% icon tool %}
 >    - {% icon param-file %} *"2: Count table"*: the `count table` output from **Remove.groups** {% icon tool%}
