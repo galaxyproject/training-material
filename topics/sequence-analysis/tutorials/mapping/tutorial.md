@@ -88,14 +88,24 @@ We just imported in Galaxy FASTQ files corresponding to paired-end data as we co
 
 During sequencing, errors are introduced, such as incorrect nucleotides being called. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. The first step for any type of sequencing data is to check their quality.
 
-> ### {% icon comment %} Check the Quality control tutorial
-> The [quality control](../quality-control/tutorial.html) tutorial is explaining this step. We will not going into the details here, in particular for the parameters.
+> ### {% icon comment %} Required Knowledge: Quality Control basics
+> In order to understand the tools we run in the next step, and how to interpret their outputs, you must have completed the [quality control](../quality-control/tutorial.html) tutorial.
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Quality control
 > 1. **FastQC** {% icon tool %} on both datasets
+>    - {% icon param-files %} *"Short read data from your current history"*: Both fastq files that you uploaded
+>
 > 2. **MultiQC** {% icon tool %} on the outputs of **FastQC** {% icon tool %}
+>      - In *"Results"*
+>        - *"Which tool was used generate logs?"*: `FastQC`
+>        - In *"FastQC output"*
+>           - *"Type of FastQC output?"*: `Raw data`
+>           - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of both **FastQC** {% icon tool %})
 > 3. **Trim Galore!** {% icon tool %} on the paired-end datasets
+>    - *"Is this paired- or single-end"*: `Paired-end`
+>       - {% icon param-file %} *"Reads in FASTQ format #1"*: `wt_H3K4me3_read1.fastq.gz`
+>       - {% icon param-file %} *"Reads in FASTQ format #2"*: `wt_H3K4me3_read2.fastq.gz`
 {: .hands_on}
 
 # Map reads on a reference genome
@@ -106,7 +116,7 @@ Read mapping is the process to align the reads on a reference genomes. A mapper 
 
 We need a reference genome to map the reads on.
 
-{% include topics/sequence-analysis/tutorials/mapping/ref_genome_explanation.md answer_3="This data comes from ChIP-seq of mices, so we will use mm10 (*Mus musculus*)."%}
+{% include topics/sequence-analysis/tutorials/mapping/ref_genome_explanation.md answer_3="This data comes from ChIP-seq of mice, so we will use mm10 (*Mus musculus*)."%}
 
 Currently, there are over 60 different mappers, and their number is growing. In this tutorial, we will use [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/), a fast and memory-efficient open-source tool particularly good at aligning sequencing reads of about 50 up to 1,000s of bases to relatively long genomes.
 
@@ -197,11 +207,18 @@ So the BAM file integrates many information for each read, in particular the qua
 >    {: .question}
 {: .hands_on}
 
-# Visualization using a Genome Browser
+# Visualization using a Genome Browser (IGV)
 
 The Integrative Genomics Viewer (IGV) is a high-performance visualization tool for interactive exploration of large, integrated genomic datasets. It supports a wide variety of data types, including array-based and next-generation sequence data, and genomic annotations. In the following we will use it to visualize the mapped reads.
 
 {% include topics/sequence-analysis/tutorials/mapping/igv.md tool="Bowtie2" region_to_zoom="chr2:91,053,413-91,055,345" %}
+
+# Visualization using a Genome Browser (JBrowse)
+
+JBrowse is an alternative, web-based genome browser. Whereas IGV is a piece of software you must download and run, JBrowse instances are websites hosted online that provide an interface to browse genomics data. We'll use it to visualise the mapped reads.
+
+{% include topics/sequence-analysis/tutorials/mapping/jbrowse.md tool="Bowtie2" region_to_zoom="chr2:91,053,413-91,055,345" %}
+
 
 # Conclusion
 {:.no_toc}
