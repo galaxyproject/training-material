@@ -55,11 +55,11 @@ In this tutorial, we will explore **Protein Database Downloader** {% icon tool %
 > 4. Click on `Execute`. There will be a new dataset named `Protein database` in your history, now.
 > 5. Rename the `Protein database` to `Main database`.
 >
->  > ### {% icon tip %} Tip: Types of uniprot databases
+>  > ### {% icon comment %} Types of uniprot databases
 >  > Uniprot offers several types of databases. You may choose to download only reviewed (UniProtKB/Swissprot) databases, only unreviewed (UniProtKB/TREMBL) or both (UniProtKB). In model organisms which are well-researched, e.g. _Homo sapiens_ or _D. melanogaster_, reviewed (Swissprot) databases contain curated proteins and may lead to smaller databases and cleaner search results. However, if the researcher is interested in identifying proteins that are unreviewed, it might be wiser to include the TrEMBL database.
 >  >
 >  > You may also include protein isoforms by setting the tick box `Include isoform data` to `Yes`.
->  {: .tip}
+>  {: .comment}
 >
 >  > ### {% icon question %} Question
 >  > What is the difference between a "reference proteome set" and a "complete proteome set"?
@@ -140,9 +140,9 @@ The most common method of peptide and protein False Discovery Rate (FDR) calcula
 > ### {% icon hands_on %} Hands-on: Creating a Decoy Database
 > 1. Run **DecoyDatabase**  {% icon tool %} on the merged database.
 >
->  > ### {% icon tip %} Tip: Decoy tags
+>  > ### {% icon comment %} Decoy tags
 >  > The string you enter as a decoy tag will be added as a prefix or suffix (your choice) to the description of each decoy protein entry. Thus you can see from which entry in the target database the decoy was computed.
->  {: .tip}
+>  {: .comment}
 >
 >  > ### {% icon comment %} Comment
 >  > **DecoyDatabase**  {% icon tool %} may also take several databases as input which are then automatically merged into one database.

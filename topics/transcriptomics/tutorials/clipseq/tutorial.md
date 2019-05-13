@@ -29,7 +29,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a study published by *Nostrand et al.* ([2016](https://doi.org/10.1038/nmeth.3810)). The dataset contains the first biological replicate of RBFOX2 CLIP-seq and the input control experiment (FASTQ files). The data was changed and downsampled to reduce data processing time, consequently the data does not correspond to the original source pulled from *Nostrand et al.* ([2016](https://doi.org/10.1038/nmeth.3810)). Also included is a text file (.txt) encompassing the chromosome sizes of hg19 obtained from [UCSC](http://hgdownload.cse.ucsc.edu/goldenPath/hg19/bigZips/hg19.chrom.sizes) and a genome annotation (.gtf) file taken from [Ensembl](http://ftp.ensemblorg.ebi.ac.uk/pub/release-74/gtf/homo_sapiens/).
+The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a study published by *Nostrand et al.* ([2016](https://doi.org/10.1038/nmeth.3810)). The dataset contains the first biological replicate of RBFOX2 CLIP-seq and the input control experiment (FASTQ files). The data was changed and downsampled to reduce data processing time, consequently the data does not correspond to the original source pulled from *Nostrand et al.* ([2016](https://doi.org/10.1038/nmeth.3810)). Also included is a text file (.txt) encompassing the chromosome sizes of hg38 and a genome annotation (.gtf) file taken from [Ensembl](http://ftp.ensemblorg.ebi.ac.uk/pub/release-74/gtf/homo_sapiens/).
 
 **Table 1**: Data from RBFOX2 CLIP-Seq and control experiment which we are going to use in this tutorial from a study published by *Nostrand et al.* ([2016](https://doi.org/10.1038/nmeth.3810)). PE stands for a paired-end read library. Hep G2 is a human liver cancer cell line. Replicate is the number of the biological replicate. Stranded means, if the read-library is strand specific, i.e., in a specific forward-reverse direction.
 
@@ -59,24 +59,15 @@ RBFOX2 is a relevant development and tissue-specific splicing factor with the co
 > 2. Import the following files from [Zenodo](https://zenodo.org/record/1327423).
 >
 >    ```
->    https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/hg19_chr_sizes.txt
->    https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/Homo_sapiens.GRCh37.74.gtf
+>    https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/hg38_chr_sizes.txt
+>    https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/Homo_sapiens.GRCh38.87.gtf
 >    https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/RBFOX2-204-CLIP_S1_R1_RBFOX2.fastq
 >    https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/RBFOX2-204-CLIP_S1_R2_RBFOX2.fastq
 >    https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/RBFOX2-204-INPUT_S2_R1.fastq
 >    https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/RBFOX2-204-INPUT_S2_R2.fastq
 >    ```
 >
->    > ### {% icon tip %} Tip: Importing data via links
->    >
->    > * Copy the link location
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > * Paste the link into the text field
->    > * Press **Start**
->    >
->    > By default, Galaxy uses the url as the name, so please rename them to something more pleasing.
->    {: .tip}
+>    {% include snippets/import_via_link.md %}
 >
 >    ![upload](../../images/upload_data_page.png "Data can be imported directly with links.")
 >
@@ -100,7 +91,7 @@ As for any NGS data analysis, CLIP-seq data must be quality controlled before be
 >    > To do this, first select the "Multiple datasets" icon (two stacked pages) under the "Input FASTQ file" heading in the **FASTQC** Tool Form, then shift+click to select multiple FASTQ files.
 >    {: .tip}
 >
-> 2. Check the **Sequence Duplication Levels** plot.   
+> 2. Check the **Sequence Duplication Levels** plot.
 >
 >   ![fastqbefore](../../images/clipseq_duplication_level_1.png "Sequence duplication levels <b>before</b> de-duplication; The y-axis represents the portion of reads with the specific duplication level. An exact sequence match is needed to detect a duplicated read. The blue line shows the duplication level distribution of the full sequence set. The red line depicts an ideal curve after a de-duplication step (duplicates are filtered out).")
 >
@@ -245,7 +236,7 @@ To determine where DNA fragments originated in the genome, the sequenced reads m
 >     - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, reverse reads"*: `FASTQ R1` (output from **UMI-tools extract** {% icon tool %})
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >        - *"Reference genome with or without an annotation"*: `use genome reference with builtin gene-model`
->            - *"Select reference genome"*: `Homo sapiens (hg19+GRCh37.75)`
+>            - *"Select reference genome"*: `Homo sapiens (hg38+GRCh38.87)`
 >    - *"Count number of reads per gene"*: `No`
 >    - *"Would you like to set output parameters (formatting and filtering)?"*: `Yes`
 >        - *"Extra SAM attributes to include"*: `All`
@@ -389,7 +380,7 @@ For additional information on how to interpret **plotFingerprint** plots, read t
 ## Correlation between Samples
 
 We have seen that our input control and our CLIP experiment might be strongly correlated, meaning, that our potential RBFOX2 binding regions are not truly enrichment when comparing to a our control.
-We are therefore going to further check the correlation between our control and CLIP experiment.  
+We are therefore going to further check the correlation between our control and CLIP experiment.
 
 > ### {% icon hands_on %} Hands-on: Assessing correlation between samples
 >
@@ -490,14 +481,14 @@ Lets first find out which sequence motifs RBFOX2 might preferentially bind to.
 >    - *"AWK Program"*: `NR>1{\nif ($3 < $4) {\n   print $1,$3,$4,\"clip_peak_\"NR-1,$9,$5;\n}\nelse {\n   print $1,$4,$3,\"clip_peak_\"NR-1,$9,$5;\n}\n}`
 > 2. **SlopBed** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"BED/VCF/GFF file"*: `bed` (output of **Text reformatting** {% icon tool %})
->    - *"Genome file"*: `hg19_chr_sizes.txt` (file from your history)
+>    - *"Genome file"*: `hg38_chr_sizes.txt` (file from your history)
 >    - *"Choose what you want to do"*: `Increase the BED/GFF/VCF entry by the same number base pairs in each direction.`
 >        - *"Number of base pairs"*: `20`
 > 3. **Extract Genomic DNA** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Fetch sequences for intervals in"*: `bed` (output of **SlopBed** {% icon tool %})
 >    - *"Interpret features when possible"*: `Yes`
 >    - *"Choose the source for the reference genome"*: `locally cached`
->        - *"Using reference genome"*: `hg19`
+>        - *"Using reference genome"*: `hg38`
 >    - *"Select output format"*: `fasta`
 > 4. **MEME-ChIP** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Primary sequences"*: `FASTA` (output of **Extract Genomic DNA** {% icon tool %})
@@ -554,8 +545,8 @@ Lets move to the next step and find out where these motifs might come from, i.e.
 
 > ### {% icon hands_on %} Hands-on: Functional analysis
 >
-> 1. **RNA Centric Annotation System (v. 1.1.1)** {% icon tool %} with the following parameters:
->    - *"Genome Version"*: `hg19`
+> 1. **RNA Centric Annotation System (v. 1.5.4)** {% icon tool %} with the following parameters:
+>    - *"Genome Version"*: `hg38`
 >    - {% icon param-file %} *"Target regions in BED format"*: `bed` (output of **SlopBed** {% icon tool %})
 >    - {% icon param-file %} *"Reference annotation in ENSEMBL GTF format"*: `Homo_sapiens.GRCh37.74.gtf` (file from your history)
 >    - *"Run annotation."*: `Yes`
@@ -621,7 +612,7 @@ Next we are going to use the generated bigWig files of our alignment ends and th
 > ### {% icon hands_on %} Hands-on: IGV
 >
 > 1. Open IGV on your local computer.
-> 2. Choose as a reference genome **hg19**.
+> 2. Choose as a reference genome **hg38**.
 > 3. Download and drag-and-drop the following files from galaxy into IGV:
 >     - **peaks_annotations.gff** of PEAKachu {% icon tool %}
 >     - **CLIP.bigWig** of Wig/BedGraph-to-bigWig {% icon tool %}

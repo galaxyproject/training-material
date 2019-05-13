@@ -37,6 +37,9 @@
     <meta property="og:title" content="Galaxy Training: {{ og_title | truncate: 60}}" />
     <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}" />
     <meta property="og:image" content="{{ "/assets/images/GTNLogo1000.png" | prepend: site.baseurl }}" />
+    <script type="application/ld+json">
+      {% include _includes/material.jsonld material=page topic=topic site=site %}
+    </script>
   </head>
   <body>
     <textarea id="source">
@@ -46,6 +49,13 @@ class: center, middle, inverse
 
 <div class="my-header"><span>
 <a href="{{ site.baseurl }}/topics/{{ topic.name }}" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+{% if page.type == "introduction" %}
+  {% capture link %}{{ site.github.repository_url }}/edit/{{ site.repository_branch }}/topics/{{ topic.name }}/slides/{{ page.tutorial_name }}.html{% endcapture %}
+{% else %}
+  {% capture link %}{{ site.github.repository_url }}/edit/{{ site.repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html{% endcapture %}
+{% endif %}
+<a class="nav-link" href="{{ link }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
 </span></div>
 
 <div class="my-footer"><span>
@@ -61,29 +71,16 @@ class: center, middle, inverse
 # {{ title }}
 
 {% if topic.requirements or page.requirements %}
+
 ---
 
-  ## Requirements
+## Requirements
 
-  Before diving into this slide deck, we recommend you to have a look at:
+Before diving into this slide deck, we recommend you to have a look at:
 
-  {% for requirement in topic.requirements %}
-    {% if requirement.type == "internal" %}
-  - [{{ requirement.title }}]({{ site.baseurl }}/topics{{ requirement.link }})
-    {% elsif requirement.type == "external" %}
-  - [{{ requirement.title }}]({{ requirement.link }})
-    {% endif %}
-  {% endfor %}
+{% include snippets/display_extra_training_slides.md extra_trainings=topic.requirements %}
+{% include snippets/display_extra_training_slides.md extra_trainings=page.requirements %}
 
-  {% if tutorial.requirements %}
-    {% for requirement in tutorial.requirements %}
-      {% if requirement.type == "internal" %}
-  - [{{ requirement.title }}]({{ site.baseurl }}{{ requirement.link }})
-      {% elsif requirement.type == "external" %}
-  - [{{ requirement.title }}]({{ requirement.link }})
-      {% endif %}
-    {% endfor %}
-  {% endif %}
 {% endif %}
 
 ---
@@ -94,7 +91,13 @@ class: center, middle, inverse
 
 ## Thank you!
 
-This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors {% if tutorial.contributors %}{% capture contributors %}{% for c in tutorial.contributors %}, {{ contributors[c].name | default: c }}{% endfor %}{% endcapture %} ({{ contributors | remove_first: ', ' }}) {% endif %}!
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+
+{% if tutorial.contributors %}
+<div class="contributors-line">
+{% include _includes/contributor-badge-list.html contributors=tutorial.contributors %}
+</div>
+{% endif %}
 
 {% if page.logo == "GTN" %}
 <img src="{{ site.baseurl }}/{{ site.logo }}" alt="Galaxy Training Network" style="height: 100px;"/>
@@ -103,7 +106,7 @@ This material is the result of a collaborative work. Thanks the [Galaxy Training
 {% endif %}
 
 {% if page.layout == "base_slides" %}
-.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/master{{ page.url }})]
+.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github.repository_url }}/tree/master{{ page.url }})]
 {% endif %}
     </textarea>
     <script src="{{ "/assets/js/remark-latest.min.js" | prepend: site.baseurl }}" type="text/javascript">

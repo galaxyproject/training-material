@@ -37,19 +37,19 @@ At the smallest scale, DNA is packaged into units called nucleosomes, made of ei
 
 On a larger scale than nucleosomes, DNA is forming loops. DNA elements that would be otherwise separated by large distances can interact. The corresponding self-interacting (or self-associating) domains are found in many organisms: they are called Topologically Associating Domains (TADs) in mammalian cells. Mammalian chromosomes are also partitioned into two spatial compartments, labeled "A" and "B", where regions in compartment A tend to interact preferentially with A compartment-associated regions than B compartment-associated ones. Similarly, regions in compartment B tend to associate with other B compartment-associated regions.
 
-> ### {% icon tip %} Tip: Learn more on chromosome conformation
+> ### {% icon comment %} Tip: Learn more about chromosome conformation
 > To learn more about chromosome conformation and TADs, you can follow our [HiC tutorial]({{site.baseurl}}/topics/epigenetics/tutorials/hicexplorer/tutorial.html)
-{: .tip}
+{: .comment}
 
 In mammals, the X chromosome inactivation (XCI) balances the dosage of X-linked genes between females and males. The genes on the inactive X (Xi) chromosome are not expressed.
 
-Binding certain proteins to each of the eight histone proteins may modify the chromatin structure and may result in changes in transcription level. For example, the H3K4m3 is adding 3 methyl-group of the 4th Lysine in the histone 3 amino-acid. This modification is known to activate the transcription on nearby genes by opening the chromatin. The H3K27me3 on the other hand is inactivating the transcription of the nearby genes:
+Binding certain proteins to each of the eight histone proteins may modify the chromatin structure and may result in changes in transcription level. For example, the H3K4me3 is adding 3 methyl-group of the 4th Lysine in the histone 3 amino-acid. This modification is known to activate the transcription on nearby genes by opening the chromatin. The H3K27me3 on the other hand is inactivating the transcription of the nearby genes:
 
 ![Fadloun et al, 2013](../../images/formation_of_super-structures_on_xi/histone_modifications.jpg "Source: Fadloun et al, 2013")
 
-More H3K27me3 and less H3K4m3 on the Xi could explain a lower expression of the genes there.
+More H3K27me3 and less H3K4me3 on the Xi could explain a lower expression of the genes there.
 
-It has been also observed that the Xi adopts a distinct conformation without evident compartments or TAD. cohesins, condensins and CCCTC-binding factor (CTCF) play key roles in chromosomal architectures and TAD formation which are other potential cause of the repression of the expression of the genes on Xi.
+It has been also observed that the Xi reconfigures uniquely into a specific chromosomal conformation. cohesins, condensins and CCCTC-binding factor (CTCF) play key roles in chromosomal architectures and TAD formation which are other potential cause of the repression of the expression of the genes on Xi.
 
 The structural-maintenance-of-chromosomes hinge domain containing 1 (SMCHD1) has been found enriched on the Xi. It may be the potential actor in the shape of Xi and the change in gene expression there.
 
@@ -84,7 +84,7 @@ In the upcoming tutorial, we will only use the wild type data from [Wang et al. 
 
 The first step of any ChIP-Seq data analysis is quality control of the raw sequencing data.
 
-To save time, we will do it only on the data of one sample `wt_H3K4me3_rep1` that has been down-sampled. keep in mind that with real data this should be done on all samples.
+To save time, we will do it only on the data of one sample `wt_H3K4me3_rep1` which has been already down-sampled. keep in mind that with real data this should be done on each and every sample.
 
 > ### {% icon hands_on %} Hands-on: Import the data
 >
@@ -160,7 +160,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    > >     - No more known adapters
 >    > >
 >    > >        ![Adapter Content for read1](../../images/formation_of_super-structures_on_xi/read1_adapter_content.png "Adapter Content")
->    > >  
+>    > >
 >    > > 2. The reads in `wt_H3K4me3_read2` are a bit worse:
 >    > >
 >    > >     - The "Per base sequence quality" is decreasing more at the end of the sequences, but it stays correct
@@ -197,7 +197,7 @@ It is often necessary to trim sequenced read, for example, to get rid of bases t
 >       > ### {% icon tip %} Tip: Not selectable files?
 >       >
 >       > If your FASTQ files cannot be selected, you might check whether their format is FASTQ with Sanger-scaled quality values (`fastqsanger`). You can edit the data type by clicking on the `pencil` symbol.
->      {: .tip}
+>       {: .tip}
 >
 >    - *"Trim Galore! advanced settings"*: `Full parameter list`
 >       - *"Trim low-quality ends from reads in addition to adapter removal"*: `15`
@@ -222,7 +222,7 @@ It is often necessary to trim sequenced read, for example, to get rid of bases t
 
 # Step 2: Mapping of the reads
 
-With ChiP sequencing, we obtain sequences corresponding to portion of DNA linked to histones with H3K4me3. As H3K4me3 opens the chromatime, nearby genes are more transcribed. It would be interesting to know if there is a difference in the quantity of DNA impacted by H3K4me3 and the impacted genes between active and inactive X chromosome.
+With ChiP sequencing, we obtain sequences corresponding to a portion of DNA linked to the histone mark of interest, H3K4me3 in this case. As H3K4me3 opens the chromatime, nearby genes are gioing to be more transcribed. It would be interesting to know if there is a difference in the quantity of DNA impacted by H3K4me3 and the impacted genes between active and inactive X chromosome.
 
 {% include topics/sequence-analysis/tutorials/mapping/mapping_explanation.md
     to_identify="binding sites"
@@ -305,7 +305,7 @@ Since in this tutorial we are interested in assessing H3K4me3, H3K27me3 and CTCF
 >       - {% icon param-files %} *"BAM/CRAM file"*: the 8 imported BAM files
 >    - *"Choose computation mode"*: `Bins`
 >       - *"Bin size in bp"*: `1000`
->       
+>
 >           This corresponds to the length of the fragments that were sequenced; it is not the read length!
 >
 >       - *"Distance between bins"*: `500`
@@ -313,13 +313,13 @@ Since in this tutorial we are interested in assessing H3K4me3, H3K27me3 and CTCF
 >           It reduces the computation time for the tutorial
 >
 >    - *"Region of the genome to limit the operation to"*: `chrX`
->  
+>
 >    Using these parameters, the tool will take bins of 1000 bp separated by 500 bp on the chromosome X. For each bin the overlapping reads in each sample will be computed and stored into a matrix.
 >
 > 4. **plotCorrelation** {% icon tool %} with the following parameters
 >    - {% icon param-files %} *"Matrix file from the multiBamSummary tool"*: `correlation matrix`(output of **multiBamSummary** {% icon tool %})
 >    - *"Correlation method"*: `Pearson`
->    
+>
 >    Feel free to try different parameters for the configuration of the plot (colors, title, etc)
 >
 {: .hands_on}
@@ -711,9 +711,9 @@ So far, we have only analyzed 2 samples, but we can do the same for all the 6 sa
 > >
 > > 2. As observed with the 2 samples, the peaks for H3K4me3 are wider than for CTCF. We also observe that the peaks found with one replicate are found with the other replicate.
 > > 3. The H3K4me3 sample has clear and large regions in which the read coverage are enriched. H3K4me3 is one of the least abundant histone modifications. It is highly enriched at active promoters near transcription start sites (TSS) and positively correlated with transcription.
-> >    
+> >
 > >    For H3K27me3, the coverage is more homogeneous. A gene is a broad domain of H3K27me3 enrichment across its body of genes corresponds to a gene with a transcription inhibited by H3K27me3. We can also identified some "bivalent" genes: gene with a peak around the TSS for H3K27me3(e.g. region_208 for gene Gpr173) but also H3K4me3. We also observe some H3K27me3-depleted regions sharply demarcated, with boundaries coinciding with gene borders (e.g. Kdm5c). This is a chromatin signature reminiscent of genes that escape XCI.
-> >    
+> >
 > >    To reproduce, run **bamCoverage** {% icon tool %}, **IGV** {% icon tool %} and **MACS2 callpeak** {% icon tool %} outputs.
 > {: .solution }
 {: .question}

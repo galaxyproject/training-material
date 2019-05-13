@@ -38,6 +38,31 @@ $details-color: $light-gray;
 $feedback-color: #86D486;
 
 
+@mixin matrix-table (){
+  table {
+      width:unset;
+      margin-left:auto;
+      margin-right:auto;
+  }
+
+  table thead th {
+      border-bottom: 2px solid #777;
+      text-align: left;
+  }
+
+  table td:first-child, table th:first-child  {
+      border-right: 2px solid #777;
+      font-weight: bold;
+      text-align: left;
+  }
+
+  table td:not(first-child), table th:not(first-child) {
+      text-align: center;
+      border-right: 1px solid #ddd;
+      border-left: 1px solid #ddd;
+  }
+}
+
 @mixin tutorial-box ($bg-color, $color: rgba(255,255,255,.75)) {
     margin-top: 3 * $tutorial-box-spacing;
     padding: $tutorial-box-spacing $tutorial-box-spacing - 0.11rem $tutorial-box-spacing;
@@ -65,9 +90,37 @@ $feedback-color: #86D486;
     }
 }
 
+@mixin matrix-table (){
+  table {
+      width:unset;
+      margin-left:auto;
+      margin-right:auto;
+      margin-top: 20pt;
+  }
+
+  table thead th {
+      border-bottom: 2px solid #777;
+      text-align: left;
+  }
+
+  table td:first-child, table th:first-child  {
+      border-right: 2px solid #777;
+      font-weight: bold;
+      text-align: left;
+  }
+
+  table td:not(first-child), table th:not(first-child) {
+      text-align: center;
+      border-right: 1px solid #ddd;
+      border-left: 1px solid #ddd;
+  }
+}
+
+
 body {
     font-size: $font-size;
     word-wrap: break-word;
+    position: relative;
 }
 
 h1,
@@ -97,6 +150,10 @@ figure {
 
   .figcaption-prefix {
       font-weight: 600;
+  }
+
+  figcaption {
+    text-align: justify;
   }
 }
 
@@ -149,7 +206,7 @@ footer {
 
 .tutorial {
     & > h1:first-child {
-        margin-bottom: 3rem;
+        margin-bottom: 1rem;
     }
 
     table {
@@ -213,12 +270,21 @@ footer {
             @include tutorial-box($overview-color, $text-color);
         }
 
-        &.warning-box {
+        &.warning {
             @include tutorial-box($warning-color, $text-color);
         }
 
         &.details {
             @include tutorial-box($details-color, $text-color);
+        }
+
+        &.quote {
+            border-left: 5px solid #eee;
+            padding-left: 1em;
+        }
+
+        &.matrix {
+            @include matrix-table();
         }
 
         &.feedback{
@@ -261,6 +327,12 @@ footer {
             font-size: 0.7em;
         }
     }
+}
+
+.contributors-line {
+    color: $gray;
+    font-size: 1.2em;
+    margin-bottom: 5rem;
 }
 
 .hall-of-fame {
@@ -317,7 +389,7 @@ footer {
 
 // This applies a "dark" style to the dropdown menus on small devices since
 // Bootstrap v4 does not do that by default.
-@media (max-width: 992px) {
+@media (max-width: 768px) {
     .navbar {
         .dropdown-menu {
             background-color: transparent;
@@ -403,4 +475,80 @@ a {
 
 code {
     color: #8b3035;
+}
+
+
+nav[data-toggle='toc'] {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    .nav {
+        li {
+            a {
+                padding-left: 0px;
+                &:hover,
+                &:focus,
+                &:active{
+                    padding-left: 0px;
+                    color: #004590;
+                    border-left: none;
+                }
+            }
+
+            .active {
+                padding-left: 0px;
+                color: #004590;
+                border-left: none;
+            }
+        }
+
+        .nav li {
+            a,
+            .active {
+                padding-left: 10px;
+                &:hover,
+                &:focus,
+                &:active{
+                    padding-left: 10px;
+                }
+            }
+
+            &:hover,
+            &:focus,
+            &:active{
+                padding-left: 10px;
+            }
+        }
+    }
+
+    .nav-link.active:hover {
+        padding-left: 0px;
+        color: #004590;
+        border-left: none;
+    }
+}
+
+.col-sm-2 {
+    padding-left: 0px;
+}
+
+/* small screens */
+@media screen and (max-width: 768px) {
+    nav[data-toggle='toc'] {
+        display: none !important;
+    }
+
+    .col-sm-10 {
+        max-width: 100%;
+    }
+}
+
+.contributor-badge {
+    /* prevent breaking across lines */
+    white-space: nowrap;
+
+    img {
+        height: 1.25em;
+        border-radius: 50%;
+        margin: 0.25em;
+    }
 }

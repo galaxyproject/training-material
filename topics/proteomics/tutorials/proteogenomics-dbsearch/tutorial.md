@@ -10,6 +10,18 @@ objectives:
 time_estimation: "15m"
 key_points:
   - "With SearchGUI and PeptideShaker you can gain access to multiple search engines"
+requirements:
+  -
+    type: "internal"
+    topic_name: proteomics
+    tutorials:
+      - proteogenomics-dbcreation
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: proteomics
+    tutorials:
+      - proteogenomics-novel-peptide-analysis
 
 contributors:
   - subinamehta
@@ -17,6 +29,7 @@ contributors:
   - pratikdjagtap
   - jraysajulga
   - jj-umn
+  - pravs3683
 ---
 
 # Introduction
@@ -340,11 +353,11 @@ Now that we have the list of known peptides, the query tabular tool is used to m
 >
 >    - *"Save the sqlite database in your history"*: `No`
 >
->      > ### {% icon tip %}Tip:
+>      > ### {% icon comment %} Querying an SQLite Database
 >      > **Query Tabular** can also use an existing SQLite database.
 >      > Activating `Save the sqlite database in your history`
 >      > will store the generated database in the history, allowing to reuse it directly.
->      {: .tip}
+>      {: .comment}
 >
 >    - *"SQL Query to generate tabular output"*:
 >      ```
@@ -453,8 +466,4 @@ The output FASTA file is going to be subjected to BLAST-P analysis.
 
 Once BlastP search is performed, it provides with a tabular output containing peptides corresponding to novel proteoforms termed as “**Novel peptides**”. Now this output is further processed by comparing the novel peptide output with the PSM report for selecting only distinct peptides which pass these criteria. This could be achieved by proceeding to the novel peptide analysis tutorial.
 
-# What's next?
 
-Please look at the following tutorials in this proteogenomics series:
-- Previous: [Proteogenomics database creation]({{ site.baseurl }}/topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.html)
-- Next: [Proteogenomics novel peptide analysis]({{ site.baseurl }}/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/tutorial.html)

@@ -20,7 +20,7 @@ contributors:
 Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you've got hundreds - it becomes very annoying. In Galaxy we have introduced **Dataset collections** that allow you to combine numerous datasets in a single entity that can be easily manipulated.
 
 # Getting data
-[Here](https://usegalaxy.org/library/list#folders/Fab5f788f07073c11) is a history containing a few datasets we will be practicing with (as with any Galaxy tutorial, you can upload your own data and play with it instead of the provided datasets):
+[Here](https://usegalaxy.org/library/list#folders/Fab5f788f07073c11) is a library containing a few datasets we will be practicing with (as with any Galaxy tutorial, you can upload your own data and play with it instead of the provided datasets):
 
 - `M117-bl_1` - family 117, mother, 1-st (**F**) read from **blood**
 - `M117-bl_2` - family 117, mother, 2-nd (**R**) read from **blood**
