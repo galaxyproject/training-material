@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>16S Microbial Analysis with mothur</title>
+        <title>16S Microbial Analysis with mothur (extended)</title>
         
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -29,7 +29,7 @@
         
         
         <meta name="description" content="Metagenomics is a discipline that enables the genomic stu..." />
-        <meta property="og:title" content="Galaxy Training: 16S Microbial Analysis with mothur" />
+        <meta property="og:title" content="Galaxy Training: 16S Microbial Analysis with mothur (extended)" />
         <meta property="og:description" content="Metagenomics is a discipline that enables the genomic stu..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
@@ -76,6 +76,10 @@
                                                 <a class="dropdown-item" href="/training-material/topics/metagenomics/slides/introduction.html">
                                                     Introduction to metagenomics
                                                 </a>
+                                            
+                                        
+                                    
+                                        
                                             
                                         
                                     
@@ -152,8 +156,6 @@
                                         <a class="dropdown-item" href="https://usegalaxy.eu" title="Galaxy Europe">
                                             Galaxy Europe
                                         </a>
-                                        
-                                    
                                         
                                     
                                         
@@ -333,7 +335,7 @@
     "url": "https://galaxyproject.org/teach/gtn/"
   },
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "16S Microbial Analysis with mothur",
+  "headline": "16S Microbial Analysis with mothur (extended)",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -362,11 +364,11 @@
   },
   "courseCode": "metagenomics / mothur-miseq-sop / hands-on",
   "learningResourceType": "hands-on tutorial",
-  "name": "Hands-on for '16S Microbial Analysis with mothur' tutorial",
+  "name": "Hands-on for '16S Microbial Analysis with mothur (extended)' tutorial",
   "isPartOf": {
     "@type": "Course",
-    "name": "16S Microbial Analysis with mothur",
-    "description": "16S Microbial Analysis with mothur",
+    "name": "16S Microbial Analysis with mothur (extended)",
+    "description": "16S Microbial Analysis with mothur (extended)",
     "learningResourceType": "tutorial",
     "interactivityType": "expositive",
     "provider": {
@@ -378,7 +380,7 @@
   },
   "url": "https://galaxyproject.github.io//training-material/topics/metagenomics/tutorials/mothur-miseq-sop/tutorial.html",
   "timeRequired": "PT4H",
-  "description": "16S Microbial Analysis with mothur\\nThe questions this  addresses are:\n - What is the effect of normal variation in the gut microbiome on host health?\n\n\\nThe objectives are:\n - Analyze of 16S rRNA sequencing data using the mothur toolsuite in Galaxy\n - Using a mock community to assess the error rate of your sequencing experiment\n - Visualize sample diversity using Krona and Phinch\n\n",
+  "description": "16S Microbial Analysis with mothur (extended)\\nThe questions this  addresses are:\n - What is the effect of normal variation in the gut microbiome on host health?\n\n\\nThe objectives are:\n - Analyze of 16S rRNA sequencing data using the mothur toolsuite in Galaxy\n - Using a mock community to assess the error rate of your sequencing experiment\n - Visualize sample diversity using Krona and Phinch\n\n",
   "coursePrerequisites": [
     {
       "@type": "CreativeWork",
@@ -400,7 +402,7 @@
     {
       "@type": "Thing",
       "url": "https://doi.org/10.5281/zenodo.800651",
-      "name": "Training data for 16S Microbial Analysis with mothur tutorial"
+      "name": "Training data for 16S Microbial Analysis with mothur (extended) tutorial"
     }
   ],
   "author": [
@@ -450,7 +452,7 @@
     </script>
 
     <section class="tutorial">
-        <h1 data-toc-skip>16S Microbial Analysis with mothur</h1>
+        <h1 data-toc-skip>16S Microbial Analysis with mothur (extended)</h1>
         <div class="contributors-line">By: 
 
 <a href="/training-material/hall-of-fame#shiltemann" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a>, <a href="/training-material/hall-of-fame#bebatut" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Bérénice Batut">Bérénice Batut</a>, <a href="/training-material/hall-of-fame#tnabtaf" class="contributor-badge"><img src="https://avatars.githubusercontent.com/tnabtaf" alt="Dave Clements">Dave Clements</a>
@@ -511,6 +513,18 @@
 <p>In this tutorial we will perform an analysis based on the
 <a href="https://www.mothur.org/wiki/MiSeq_SOP">Standard Operating Procedure (SOP) for MiSeq data</a>, developed by the <a href="http://www.schlosslab.org/">Schloss lab</a>, the creators of the mothur software package <a class="citation" href="#Schloss2009">(Schloss <i>et al.</i> 2009)</a>.</p>
 
+<blockquote class="comment">
+  <h3 id="comment-note-two-versions-of-this-tutorial"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note: Two versions of this tutorial</h3>
+
+  <p>Because this tutorial consists of many steps, we have made two versions of it, one long and one short.</p>
+
+  <p>This is the <strong>extended version</strong>. We will run every tool manually and discuss the results in detail.
+If you would like to run through the tutorial a bit quicker and use workflows to run groups of
+analysis steps (e.g. data cleaning) at once, please see the <a href="/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/tutorial.html">shorter version of this tutorial</a></p>
+
+  <p>You can also <strong>switch</strong> between the long and short version at the start of any section.</p>
+</blockquote>
+
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
 
@@ -526,12 +540,18 @@
       <li><a href="#create-contigs-from-paired-end-reads" id="markdown-toc-create-contigs-from-paired-end-reads">Create contigs from paired-end reads</a></li>
       <li><a href="#data-cleaning" id="markdown-toc-data-cleaning">Data Cleaning</a></li>
       <li><a href="#optimize-files-for-computation" id="markdown-toc-optimize-files-for-computation">Optimize files for computation</a></li>
-      <li><a href="#sequence-alignment" id="markdown-toc-sequence-alignment">Sequence Alignment</a></li>
-      <li><a href="#chimera-removal" id="markdown-toc-chimera-removal">Chimera Removal</a></li>
-      <li><a href="#removal-of-non-bacterial-sequences" id="markdown-toc-removal-of-non-bacterial-sequences">Removal of non-bacterial sequences</a></li>
-      <li><a href="#optional-calculate-error-rates-based-on-our-mock-community" id="markdown-toc-optional-calculate-error-rates-based-on-our-mock-community">Optional: Calculate error rates based on our mock community</a></li>
     </ol>
   </li>
+  <li><a href="#sequence-alignment" id="markdown-toc-sequence-alignment">Sequence Alignment</a>    <ol>
+      <li><a href="#more-data-cleaning" id="markdown-toc-more-data-cleaning">More Data Cleaning</a></li>
+      <li><a href="#chimera-removal" id="markdown-toc-chimera-removal">Chimera Removal</a></li>
+    </ol>
+  </li>
+  <li><a href="#taxonomic-classification" id="markdown-toc-taxonomic-classification">Taxonomic Classification</a>    <ol>
+      <li><a href="#removal-of-non-bacterial-sequences" id="markdown-toc-removal-of-non-bacterial-sequences">Removal of non-bacterial sequences</a></li>
+    </ol>
+  </li>
+  <li><a href="#optional-calculate-error-rates-based-on-our-mock-community" id="markdown-toc-optional-calculate-error-rates-based-on-our-mock-community">Optional: Calculate error rates based on our mock community</a></li>
   <li><a href="#otu-based-analysis" id="markdown-toc-otu-based-analysis">OTU-based Analysis</a>    <ol>
       <li><a href="#clustering-sequences-into-otus" id="markdown-toc-clustering-sequences-into-otus">Clustering sequences into OTUs</a></li>
       <li><a href="#calculate-species-diversity" id="markdown-toc-calculate-species-diversity">Calculate Species Diversity</a></li>
@@ -898,7 +918,7 @@ Median:      1        252        252        0        4        76181
 97.5%-tile:  1        253        253        6        6        148552
 Maximum:     1        502        502        249      243      152360
 Mean:        1        252.811    252.811    0.70063  4.44854
-# of Seqs:   152360
+ # of Seqs:   152360
 </code></pre></div></div>
 
 <p>In this dataset:</p>
@@ -1025,7 +1045,7 @@ the <em>group file</em> and the <em>names file</em> into a single <em>count tabl
   </ul>
 </blockquote>
 
-<p>The <em>count_table</em> output will look something like this:</p>
+<p>Have a look at the <em>count_table</em> output from the <strong>Count.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, it summarizes the number of times each unique sequence was observed across each of the samples. It will look something like this:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Representative_Sequence                      total   F3D0   F3D1  F3D141  F3D142  ...
 M00967_43_000000000-A3JHG_1_1101_14069_1827  4402    370    29    257     142
@@ -1037,7 +1057,16 @@ M00967_43_000000000-A3JHG_1_1101_13234_1983  10522   425    281   340     205
 <p>The first column contains the read names of the representative sequences, and the subsequent columns contain
 the number of duplicates of this sequence observed in each sample.</p>
 
-<h2 id="sequence-alignment">Sequence Alignment</h2>
+<blockquote class="comment">
+  <h3 id="comment-representative-sequences-vs-total-sequences"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Representative sequences vs Total sequences</h3>
+  <p>From now on, we will only work with the set of <em>unique sequences</em>, but it’s important to remember that these represent a larger
+number of <em>total sequences</em>, which we keep track of in the <em>count table</em>.</p>
+
+  <p>The <strong>Summary.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool will
+report both the number of unique <em>representative sequences</em> as well as the <em>total sequences</em> they represent.</p>
+</blockquote>
+
+<h1 id="sequence-alignment">Sequence Alignment</h1>
 
 <p>For more information on the topic of alignment, please see our training materials
 <a href="/training-material/topics/sequence-analysis/">here</a></p>
@@ -1055,10 +1084,37 @@ step to improve the clustering of your OTUs <a class="citation" href="#Schloss20
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“reference”</em>: <code class="highlighter-rouge">silva.v4.fasta</code> reference file from your history
 <br /><br /></li>
       </ul>
+
+      <blockquote class="question">
+        <h3 id="question-question-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>Have a look at the alignment output, what do you see?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>At first glance, it might look like there is not much information there. We see our read names, but only period <code class="highlighter-rouge">.</code> characters below it.</p>
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;M00967_43_000000000-A3JHG_1_1101_14069_1827
+............................................................................
+&gt;M00967_43_000000000-A3JHG_1_1101_18044_1900
+............................................................................
+</code></pre></div>          </div>
+          <p>This is because the V4 region is located further down our reference database and nothing aligns to the start of it. If you scroll to right you will start seeing some more informative bits:</p>
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.....T-------AC---GG-AG-GAT------------
+</code></pre></div>          </div>
+          <p>Here we start seeing how our sequences align to the reference database.
+There are different alignment characters in this output:</p>
+          <ul>
+            <li><code class="highlighter-rouge">.</code>: terminal gap character (before the first or after the last base in our query sequence)</li>
+            <li><code class="highlighter-rouge">-</code>: gap character within the query sequence</li>
+          </ul>
+
+          <p>We will cut out only the V4 region in a later step (<strong>Filter.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</p>
+        </blockquote>
+      </blockquote>
     </li>
-    <li><strong>Summary.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+    <li><strong>Summary.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the aligned output from <strong>Align.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">align</code> output from <strong>Align.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: <code class="highlighter-rouge">count_table</code> output from <strong>Count.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Output logfile?”</em>: <code class="highlighter-rouge">yes</code></li>
       </ul>
@@ -1093,13 +1149,16 @@ long stretches are likely the result of PCR errors and we would be wise to remov
 <p>Next we will clean our data further by removing poorly aligned sequences and any sequences with long
 homopolymer stretches.</p>
 
-<h3 id="more-data-cleaning">More Data Cleaning</h3>
+<h2 id="more-data-cleaning">More Data Cleaning</h2>
 
-<p>To ensure that all our reads overlap our region of interest, we will remove any reads not overlapping the region
-from position 1968 to 11550 using the <strong>Screen.seqs</strong> tool. To make sure they overlap <em>only</em> that region, we will
-use the <strong>Filter.seqs</strong> step to remove any overhang on either end of the V4 region. The <strong>Filter.seqs</strong> tool will
-additionally clean up our alignment file by removing any columns that have a gap character (<code class="highlighter-rouge">-</code>, or <code class="highlighter-rouge">.</code> for terminal gaps)
-in that position for every aligned sequence (<code class="highlighter-rouge">vertical</code> parameter).</p>
+<p>To ensure that all our reads overlap our region of interest, we will:</p>
+
+<ol>
+  <li>Remove any reads not overlapping the region V4 region (position 1968 to 11550) using <strong>Screen.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
+  <li>Remove any overhang on either end of the V4 region to ensure our sequences overlap <em>only</em> the V4 region, using <strong>Filter.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
+  <li>Clean our alignment file by removing any columns that have a gap character (<code class="highlighter-rouge">-</code>, or <code class="highlighter-rouge">.</code> for terminal gaps) at that position in every sequence (also using <strong>Filter.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>).</li>
+  <li>Group near-identical sequences together with <strong>Pre.cluster</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. Sequences that only differ by one or two bases at this point are likely to represent sequencing errors rather than true biological variation, so we will cluster such sequences together.</li>
+</ol>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-poorly-aligned-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove poorly aligned sequences</h3>
@@ -1117,11 +1176,11 @@ in that position for every aligned sequence (<code class="highlighter-rouge">ver
       <p><strong>Note:</strong> we supply the count table so that it can be updated for the sequences we’re removing.</p>
 
       <blockquote class="question">
-        <h3 id="question-question-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <h3 id="question-question-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
         <p>How many sequences were removed in this step?</p>
         <blockquote class="solution">
-          <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <p>128 sequences were removed. This is the number of lines in the bad.accnos output.</p>
         </blockquote>
       </blockquote>
@@ -1180,12 +1239,12 @@ the <strong>Unique.seqs</strong> tool:</p>
   </ul>
 
   <blockquote class="question">
-    <h3 id="question-question-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+    <h3 id="question-question-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
     <p>How many duplicate sequences did our filter step produce?</p>
 
     <blockquote class="solution">
-      <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
       <p>3: The number of unique sequences was reduced from 16298 to 16295</p>
     </blockquote>
   </blockquote>
@@ -1211,11 +1270,11 @@ our contigs are ~250 bp long, we will set the threshold to 2 mismatches.</p>
   </ul>
 
   <blockquote class="question">
-    <h3 id="question-question-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+    <h3 id="question-question-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
     <p>How many unique sequences are we left with after this clustering of highly similar sequences?</p>
     <blockquote class="solution">
-      <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
       <p>5720: This is the number of lines in the fasta output</p>
     </blockquote>
   </blockquote>
@@ -1224,9 +1283,12 @@ our contigs are ~250 bp long, we will set the threshold to 2 mismatches.</p>
 <h2 id="chimera-removal">Chimera Removal</h2>
 
 <p>We have now thoroughly cleaned our data and removed as much sequencing error as we can. Next, we will look
-at a class of sequencing artefacts known as <em>chimeras</em>. During PCR amplification, it is possible that two unrelated
-templates are combined to form a sort of hybrid sequence, also called a chimera. Needless to say, we do not want such
-sequencing artefacts confounding our results.</p>
+at a class of sequencing artefacts known as <em>chimeras</em>.</p>
+
+<p>During PCR amplification, it is possible that two unrelated templates are combined to form a sort of hybrid sequence,
+also called a <em>chimera</em>. Needless to say, we do not want such sequencing artefacts confounding our results. We’ll do
+this chimera removal using the <code class="highlighter-rouge">VSEARCH</code> algorithm <a class="citation" href="#Rognes2016">(Rognes <i>et al.</i> 2016)</a> that is called within mothur, using the
+<strong>Chimera.vsearch</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
 
 <blockquote class="comment">
   <h3 id="comment-background-chimeras"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: Chimeras</h3>
@@ -1234,8 +1296,7 @@ sequencing artefacts confounding our results.</p>
 (slide credit: <a href="http://slideplayer.com/slide/4559004/">http://slideplayer.com/slide/4559004/ </a>)</p>
 </blockquote>
 
-<p>We’ll do this chimera removal using the <code class="highlighter-rouge">VSEARCH</code> algorithm <a class="citation" href="#Rognes2016">(Rognes <i>et al.</i> 2016)</a> that is called within mothur, using the
-<strong>Chimera.vsearch</strong> tool. This command will split the data by sample and check for chimeras. The recommended
+<p>This command will split the data by sample and check for chimeras. The recommended
 way of doing this is to use the abundant sequences as our reference.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1263,16 +1324,57 @@ way of doing this is to use the abundant sequences as our reference.</p>
   </ol>
 
   <blockquote class="question">
-    <h3 id="question-question-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+    <h3 id="question-question-6"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
     <p>How many sequences were flagged as chimeric? what is the percentage? (Hint: summary.seqs)</p>
+
     <blockquote class="solution">
-      <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-      <p>If we run summary.seqs on the resulting fasta file and count table, we see that we went from 128,655
-sequences down to 118,091 sequences in this step, for a reduction of 8.2%. This is a reasonable number of
+      <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <p>Looking at the chimera.vsearch <code class="highlighter-rouge">accnos</code> output, we see that <strong>3,439 representative sequences</strong> were flagged as chimeric. If we run summary.seqs on the resulting fasta file and count table, we see that we went from 128,655
+sequences down to 118,091 total sequences in this step, for a reduction of <strong>10,564 total sequences</strong>, or 8.2%. This is a reasonable number of
 sequences to be flagged as chimeric.</p>
     </blockquote>
   </blockquote>
+</blockquote>
+
+<h1 id="taxonomic-classification">Taxonomic Classification</h1>
+
+<p>Now that we have thoroughly cleaned our data, we are finally ready to assign a taxonomy to our sequences.</p>
+
+<p>We will do this using a Bayesian classifier (via the <strong>Classify.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool) and a mothur-formatted <a href="https://www.mothur.org/wiki/RDP_reference_files">training
+set provided by the Schloss lab</a> based on the RDP (Ribosomal Database Project, <a class="citation" href="#Cole2013">(Cole <i>et al.</i> 2013)</a>) reference taxonomy.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-background-taxonomic-assignement"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: Taxonomic assignement</h3>
+
+  <p>In this tutorial we will use the RDP classifier and reference taxonomy for classification, but there are several different taxonomic
+assignment algorithms and reference databases available for this purpose.</p>
+
+  <p>An overview of different methods is given by <a class="citation" href="#Liu2008">(Liu <i>et al.</i> 2008)</a> and shown below:</p>
+
+  <p><img src="../../images/classification_methods.jpg" alt="overview of different methods for taxonomy assignment" width="50%" /></p>
+
+  <p>The most commonly used reference taxonomies are:</p>
+
+  <ul>
+    <li>SILVA (<a class="citation" href="#Quast2012">(Quast <i>et al.</i> 2012)</a>)</li>
+    <li>GreenGenes (<a class="citation" href="#DeSantis2006">(DeSantis <i>et al.</i> 2006)</a>)</li>
+    <li>RDP (<a class="citation" href="#Cole2013">(Cole <i>et al.</i> 2013)</a>)</li>
+    <li>NCBI Taxonomy Database (<a class="citation" href="#Federhen2011">(Federhen 2011)</a>)</li>
+  </ul>
+
+  <p>The choice of taxonomic classifier and reference taxonomy can impact downstream results. The figure from <a class="citation" href="#Liu2008">(Liu <i>et al.</i> 2008)</a>
+given below shows the taxonomic composition determined when using different classifiers and reference taxonomies, for different primer sets (16S regions).</p>
+
+  <p><img src="../../images/reference_taxonomy_comparison.jpg" alt="comparison of reference taxonomies" title="Compositions at the phylum level for each of the three datasets: (a) Guerrero Negro mat, (b) Human gut and (c) Mouse gut, using a range of different methods (separate subpanels within each group). The x-axis of each graph shows region sequenced. The y-axis shows abundance as a fraction of the total number of sequences in the community. The legend shows colors for phyla (consistent across graphs)." width="75%" /></p>
+
+  <!-- figure captions not working in includes, hardcode html til fixed -->
+  <figure><figcaption><span class="figcaption-prefix">Figure:</span> Compositions at the phylum level for each of the three datasets: (a) Guerrero Negro mat, (b) Human gut and (c) Mouse gut, using a range of different methods (separate subpanels within each group). The x-axis of each graph shows region sequenced. The y-axis shows abundance as a fraction of the total number of sequences in the community. The legend shows colors for phyla (consistent across graphs). </figcaption></figure>
+
+  <p>Which reference taxonomy is best for your experiments depends on a number of factors such as the type of sample and variable region sequenced.</p>
+
+  <p>Another discussion about how these different databases compare was described by <a class="citation" href="#Balvoit2017">(Balvočiūtė and Huson 2017)</a>.</p>
+
 </blockquote>
 
 <h2 id="removal-of-non-bacterial-sequences">Removal of non-bacterial sequences</h2>
@@ -1282,12 +1384,8 @@ there may be 18S rRNA gene fragments or 16S rRNA from Archaea, chloroplasts, and
 that have survived all the cleaning steps up to this point. We are generally not interested in these sequences
 and want to remove them from our dataset.</p>
 
-<p>Before we know which sequences may originate from sources other than our intended 16S bacterial genes, we must
-first classify those sequences. We can do this using a Bayesian classifier (via the <strong>Classify.seqs</strong> tool) and a <a href="https://www.mothur.org/wiki/RDP_reference_files">training
-set provided by the Schloss lab</a>.</p>
-
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-remove-undesired-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove undesired sequences</h3>
+  <h3 id="hands_on-hands-on-taxonomic-classification-and-removal-of-undesired-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Taxonomic Classification and Removal of undesired sequences</h3>
 
   <ol>
     <li><strong>Classify.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
@@ -1322,17 +1420,20 @@ set provided by the Schloss lab</a>.</p>
     </ol>
 
     <blockquote class="solution">
-      <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-      <p>20 representative sequences were removed.</p>
-
-      <p>The fasta file output from Remove.seqs had 2281 sequences while the fasta output from Remove.lineages
+      <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <ol>
+        <li>
+          <p>20 representative sequences were removed.
+The fasta file output from Remove.seqs had 2281 sequences while the fasta output from Remove.lineages
 contained 2261 sequences.</p>
-
-      <p>162 total sequences were removed.</p>
-
-      <p>If you run summary.seqs with the count table, you will see that we now have 2261 unique sequences
+        </li>
+        <li>
+          <p>162 total sequences were removed.
+If you run summary.seqs with the count table, you will see that we now have 2261 unique sequences
 representing a total of 117,929 total sequences (down from 118,091 before). This means 162 of our
 sequences were in represented by these 20 representative sequences.</p>
+        </li>
+      </ol>
     </blockquote>
   </blockquote>
 </blockquote>
@@ -1340,13 +1441,15 @@ sequences were in represented by these 20 representative sequences.</p>
 <p>The data is now as clean as we can get it. In the next section we will use the Mock sample to assess how accurate
 our sequencing and bioinformatics pipeline is.</p>
 
-<h2 id="optional-calculate-error-rates-based-on-our-mock-community">Optional: Calculate error rates based on our mock community</h2>
+<h1 id="optional-calculate-error-rates-based-on-our-mock-community">Optional: Calculate error rates based on our mock community</h1>
 
 <blockquote class="comment">
   <h3 id="comment-skipping-the-mock-community-analysis"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Skipping the mock community analysis</h3>
 
-  <p>The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to <a href="#removing-mock-sample">the next section</a>
-where we will cluster our sequences into OTUs, classify them and perform some visualisations.</p>
+  <p>The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to <a href="#otu-based-analysis">the next section</a>
+where we will cluster our sequences into OTUs, classify them and perform some visualisations.
+<br /><br />
+Click <a href="#otu-based-analysis">here</a> to skip this section and continue with the analysis.</p>
 
 </blockquote>
 
@@ -1384,7 +1487,7 @@ A mock community sample was sequenced for different combinations of sequencer an
 Since we know the expected outcome, we can assess the accuracy of each pipeline. A similar approach can be used to
 assess different parameter settings of the <em>in-silico</em>  analysis pipline.</p>
 
-  <figure id="figure-1"><img src="../../images/mock_community.jpg" alt="example results of mock community sequencing to assess error rates" title="Example of usage of a mock community to assess accuracy. On the left is the expected result given that we know the exact composition of the mock sample. This was then used to assess the accuracy of different combinations of sequencing platform and primer set (choice of V-region)" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Example of usage of a mock community to assess accuracy. On the left is the expected result given that we know the exact composition of the mock sample. This was then used to assess the accuracy of different combinations of sequencing platform and primer set (choice of V-region)</figcaption></figure>
+  <p><img src="../../images/mock_community.jpg" alt="example results of mock community sequencing to assess error rates" title="Example of usage of a mock community to assess accuracy. On the left is the expected result given that we know the exact composition of the mock sample. This was then used to assess the accuracy of different combinations of sequencing platform and primer set (choice of V-region)" /></p>
 
   <p><strong>Further reading</strong></p>
 
@@ -1408,7 +1511,7 @@ exactly what we would expect the analysis to produce as a result.</p>
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“group file or count table”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“groups”</em>: <code class="highlighter-rouge">Mock</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span><em>“fasta”</em>: <code class="highlighter-rouge">fasta</code> output from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: <code class="highlighter-rouge">fasta</code> output from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“output logfile?”</em>: <code class="highlighter-rouge">yes</code></li>
       </ul>
     </li>
@@ -1432,7 +1535,7 @@ the reads from our mock sample back to their known sequences, to see how many fa
   <ul>
     <li><strong>Seq.error</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">fasta</code> output from <strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pick.fasta”</em>: the <code class="highlighter-rouge">fasta</code> output from <strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“reference”</em>: <code class="highlighter-rouge">HMP_MOCK.v35.fasta</code> file from your history</li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“output log?”</em>: <code class="highlighter-rouge">yes</code></li>
@@ -1515,12 +1618,14 @@ separation.</p>
   </ol>
 
   <blockquote class="question">
-    <h3 id="question-question-6"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+    <h3 id="question-question-7"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
     <p>How many OTUs were identified in our mock community?</p>
     <blockquote class="solution">
-      <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-      <p>34: Open the shared file or OTU list and look at the header line. You will see a column for each OTU</p>
+      <h3 id="solution-solution-8"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <p>Answer: <strong>34</strong></p>
+
+      <p>This can be determined by opening the shared file or OTU list and looking at the header line. You will see a column for each OTU</p>
     </blockquote>
   </blockquote>
 </blockquote>
@@ -1575,6 +1680,11 @@ species rich habitat, only a small fraction has been sampled.</p>
 
 <p>Now that we have assessed our error rates we are ready for some real analysis.</p>
 
+<h1 id="otu-based-analysis">OTU-based Analysis</h1>
+
+<p>In this tutorial we will continue with an OTU-based approach, for the phylotype and phylogenic
+approaches, please refer to the <a href="https://www.mothur.org/wiki/MiSeq_SOP">mothur wiki page</a>.</p>
+
 <h3 id="removing-mock-sample">Removing Mock sample</h3>
 
 <p>Now that we have cleaned up our data set as best we can, and assured ourselves of the quality of our sequencing
@@ -1588,19 +1698,16 @@ the <strong>Remove.groups</strong> tool:</p>
   <ul>
     <li><strong>Remove.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><em>“Select input type”</em>: <code class="highlighter-rouge">fasta , name, taxonomy, or list with a group file or count table</code></li>
-        <li><em>“groups”</em>: <code class="highlighter-rouge">Mock</code></li>
-        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“count table”</em>, <em>“fasta”</em>, and <em>“taxonomy”</em> to the respective outputs from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select input type”</em>: <code class="highlighter-rouge">fasta , name, taxonomy, or list with a group file or count table</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“group or count table”</em>: the <code class="highlighter-rouge">pick.count_table</code> output from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“groups”</em>: <code class="highlighter-rouge">Mock</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">pick.fasta</code> output from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“taxonomy”</em>: the <code class="highlighter-rouge">pick.taxonomy</code> output from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
   </ul>
 
 </blockquote>
-
-<h1 id="otu-based-analysis">OTU-based Analysis</h1>
-
-<p>In this tutorial we will continue with an OTU-based approach, for the phylotype and phylogenic
-approaches, please refer to the <a href="https://www.mothur.org/wiki/MiSeq_SOP">mothur wiki page</a>.</p>
 
 <h2 id="clustering-sequences-into-otus">Clustering sequences into OTUs</h2>
 
@@ -1612,7 +1719,7 @@ cutoff, you’ll get just as good of clustering as you would with the “traditi
 is less computationally expensive and can be parallelized, which is especially advantageous when you have large
 datasets.</p>
 
-<p>We’ll now use the <strong>Cluster</strong> tool, with <code class="highlighter-rouge">taxlevel</code> set to <code class="highlighter-rouge">4</code>, requesting that clusering be done at the <em>Order</em> level.</p>
+<p>We’ll now use the <strong>Cluster</strong> tool, with <code class="highlighter-rouge">taxlevel</code> set to <code class="highlighter-rouge">4</code>, requesting that clustering be done at the <em>Order</em> level.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-cluster-our-data-into-otus"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Cluster our data into OTUs</h3>
@@ -1653,8 +1760,9 @@ OTU using the <strong>Classify.otu</strong> tool:</p>
 
 </blockquote>
 
-<p>The different levels of taxonomy are shown in the dataset names.
-Opening the taxonomy output for level 0.03 (meaning 97% similarity, or <em>species</em> level) shows a file structured like the following:</p>
+<p>Examine <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the <code class="highlighter-rouge">taxonomy</code> output of <strong>Classify.otu</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. This is a collection, and the different levels of taxonomy are shown in the names of the collection elements. In this example we only calculated one level, 0.03. This means we used a 97% similarity threshold. This threshold is commonly used to differentiate at <em>species level</em>.</p>
+
+<p>Opening the taxonomy output for level 0.03 (meaning 97% similarity, or <em>species</em> level) shows a file structured like the following:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OTU       Size    Taxonomy
 ..
@@ -1667,17 +1775,17 @@ Otu0013	1856	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lac
 ..
 </code></pre></div></div>
 
-<p>The first line shown indicates that Otu008 occurred 5260 times, and that all of the
+<p>The first line shown in the snippet above indicates that Otu008 occurred 5260 times, and that all of the
 sequences (100%) were binned in the genus <em><a href="https://en.wikipedia.org/wiki/Alistipes">Alistipes</a></em>.</p>
 
 <blockquote class="question">
-  <h3 id="question-question-7"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <h3 id="question-question-8"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
   <p>Which samples contained sequences belonging to an OTU classified as Staphylococcus?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-8"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <p>Examine the tax.summary file.</p>
+    <h3 id="solution-solution-9"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>Examine the <code class="highlighter-rouge">tax.summary</code> file output by <strong>Classify.otu</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
     <p>Samples F3D141, F3D142,  F3D144, F3D145, F3D2. This answer can be found by
 examining the tax.summary output and finding the columns with nonzero
@@ -1704,10 +1812,10 @@ dataset by subsampling.</p>
       </ul>
 
       <blockquote class="question">
-        <h3 id="question-question-8"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <h3 id="question-question-9"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
         <p>How many sequences did the smallest sample consist of?</p>
         <blockquote class="solution">
-          <h3 id="solution-solution-9"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-10"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <p>The smallest sample is <code class="highlighter-rouge">F3D143</code>, and consists of 2389 sequences. This is a reasonable number, so we will now subsample all the other samples down to this level.</p>
         </blockquote>
       </blockquote>
@@ -1720,11 +1828,11 @@ dataset by subsampling.</p>
       </ul>
 
       <blockquote class="question">
-        <h3 id="question-question-9"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <h3 id="question-question-10"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
         <p>What would you exect the result of <code class="highlighter-rouge">count.groups</code> on this new shared output collection to be? Check if you are correct.</p>
         <blockquote class="solution">
-          <h3 id="solution-solution-10"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-11"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <p>all groups (samples) should now have 2389 sequences. Run count.groups again on the shared output collection by the sub.sample
 tool to confirm that this is indeed what happened.</p>
         </blockquote>
@@ -1759,14 +1867,14 @@ To understand the difference between richness and evenness, consider the followi
   <p><img src="../../images/richness-evenness.png" alt="illustration of richness and evenness" /></p>
 
   <blockquote class="question">
-    <h3 id="question-question-10"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+    <h3 id="question-question-11"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
     <ol>
       <li>Which of these communities has the highest richness?</li>
       <li>Which of these communities has the highest evenness?</li>
     </ol>
 
     <blockquote class="solution">
-      <h3 id="solution-solution-11"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <h3 id="solution-solution-12"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
       <ol>
         <li>Both communities have 4 different species, so they have same richness.</li>
         <li>Communty B is more even, because each species has the same abundance.</li>
@@ -1794,9 +1902,27 @@ definition of diversity and as always, the metric you choose to use may influenc
 
 <h3 id="alpha-diversity">Alpha diversity</h3>
 
-<p>In order to estimate alpha diversity of the samples, we first generate the rarefaction curves. Recall that
-rarefaction measure the number of observed OTUs as a function of the subsampling size. We do this with the
-<strong>Rarefaction.single</strong> tool:</p>
+<p>In order to estimate alpha diversity of the samples, we first generate the <em>rarefaction curves</em>. Recall that
+rarefaction measure the number of observed OTUs as a function of the subsampling size.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-background-rarefaction-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: Rarefaction</h3>
+
+  <p>To estimate the fraction of species sequenced, rarefaction curves are typically used. A rarefaction curve
+plots the number of species as a function of the number of individuals sampled. The curve usually begins
+with a steep slope, which at some point begins to flatten as fewer species are being discovered per sample:
+the gentler the slope, the less contribution of the sampling to the total number of operational taxonomic
+units or OTUs.</p>
+
+  <p><img src="../../images/rarefaction.png" alt="Rarefaction curves" /></p>
+
+  <p>Green, most or all species have been sampled; blue, this habitat has not been exhaustively sampled; red,
+species rich habitat, only a small fraction has been sampled.</p>
+
+  <p>(<em>A Primer on Metagenomics</em> <a class="citation" href="#Wooley2010">(Wooley <i>et al.</i> 2010)</a> )</p>
+</blockquote>
+
+<p>We calculate rarefaction curves with the <strong>Rarefaction.single</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-calculate-rarefaction"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Calculate Rarefaction</h3>
@@ -2081,12 +2207,12 @@ innermost ring labeled “Bacteria”</p>
 <p><img src="../../images/krona.png" alt="Krona" /></p>
 
 <blockquote class="question">
-  <h3 id="question-question-11"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <h3 id="question-question-12"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
   <p>What percentage of your sample was labelled <code class="highlighter-rouge">Lactobacillus</code>?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-12"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-13"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <p>Explore the Krona plot, double click on Firmicutes, here you should see Lactobacillus
 clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
 any point in the hierarchy (here 5% of all)</p>
@@ -2129,7 +2255,25 @@ any point in the hierarchy (here 5% of all)</p>
 
                     
                     <h1 id="bibliography">References</h1>
-                    <ol class="bibliography"><li><span id="Schloss2009">Schloss, P. D., S. L. Westcott, T. Ryabin, J. R. Hall, M. Hartmann <i>et al.</i>, 2009 Introducing mothur: Open-Source,  Platform-Independent,  Community-Supported Software for Describing and Comparing Microbial Communities. Applied and Environmental Microbiology 75: 7537–7541.</span>
+                    <ol class="bibliography"><li><span id="DeSantis2006">DeSantis, T. Z., P. Hugenholtz, N. Larsen, M. Rojas, E. L. Brodie <i>et al.</i>, 2006 Greengenes,  a Chimera-Checked 16S rRNA Gene Database and Workbench Compatible with ARB. Applied and Environmental Microbiology 72: 5069–5072.</span>
+    
+    
+    <a href="https://doi.org/10.1128/aem.03006-05">https://doi.org/10.1128/aem.03006-05</a>
+    
+    
+    <a href="https://doi.org/10.1128/aem.03006-05">10.1128/aem.03006-05</a>
+    
+</li>
+<li><span id="Liu2008">Liu, Z., T. Z. DeSantis, G. L. Andersen, and R. Knight, 2008 Accurate taxonomy assignments from 16S rRNA sequences produced by highly parallel pyrosequencers. Nucleic Acids Research 36: e120–e120.</span>
+    
+    
+    <a href="https://doi.org/10.1093/nar/gkn491">https://doi.org/10.1093/nar/gkn491</a>
+    
+    
+    <a href="https://doi.org/10.1093/nar/gkn491">10.1093/nar/gkn491</a>
+    
+</li>
+<li><span id="Schloss2009">Schloss, P. D., S. L. Westcott, T. Ryabin, J. R. Hall, M. Hartmann <i>et al.</i>, 2009 Introducing mothur: Open-Source,  Platform-Independent,  Community-Supported Software for Describing and Comparing Microbial Communities. Applied and Environmental Microbiology 75: 7537–7541.</span>
     
     
     <a href="https://doi.org/10.1128/aem.01541-09">https://doi.org/10.1128/aem.01541-09</a>
@@ -2147,6 +2291,15 @@ any point in the hierarchy (here 5% of all)</p>
     <a href="https://doi.org/10.1371/journal.pcbi.1000667">10.1371/journal.pcbi.1000667</a>
     
 </li>
+<li><span id="Federhen2011">Federhen, S., 2011 The NCBI Taxonomy database. Nucleic Acids Research 40: D136–D143.</span>
+    
+    
+    <a href="https://doi.org/10.1093/nar/gkr1178">https://doi.org/10.1093/nar/gkr1178</a>
+    
+    
+    <a href="https://doi.org/10.1093/nar/gkr1178">10.1093/nar/gkr1178</a>
+    
+</li>
 <li><span id="Schloss2012">Schloss, P. D., 2012 Secondary structure improves OTU assignments of 16S rRNA gene sequences. The ISME Journal 7: 457–460.</span>
     
     
@@ -2154,6 +2307,24 @@ any point in the hierarchy (here 5% of all)</p>
     
     
     <a href="https://doi.org/10.1038/ismej.2012.102">10.1038/ismej.2012.102</a>
+    
+</li>
+<li><span id="Quast2012">Quast, C., E. Pruesse, P. Yilmaz, J. Gerken, T. Schweer <i>et al.</i>, 2012 The SILVA ribosomal RNA gene database project: improved data processing and web-based tools. Nucleic Acids Research 41: D590–D596.</span>
+    
+    
+    <a href="https://doi.org/10.1093/nar/gks1219">https://doi.org/10.1093/nar/gks1219</a>
+    
+    
+    <a href="https://doi.org/10.1093/nar/gks1219">10.1093/nar/gks1219</a>
+    
+</li>
+<li><span id="Cole2013">Cole, J. R., Q. Wang, J. A. Fish, B. Chai, D. M. McGarrell <i>et al.</i>, 2013 Ribosomal Database Project: data and tools for high throughput rRNA analysis. Nucleic Acids Research 42: D633–D642.</span>
+    
+    
+    <a href="https://doi.org/10.1093/nar/gkt1244">https://doi.org/10.1093/nar/gkt1244</a>
+    
+    
+    <a href="https://doi.org/10.1093/nar/gkt1244">10.1093/nar/gkt1244</a>
     
 </li>
 <li><span id="Fouhy2016">Fouhy, F., A. G. Clooney, C. Stanton, M. J. Claesson, and P. D. Cotter, 2016 16S rRNA gene sequencing of mock microbial populations- impact of DNA extraction method,  primer choice and sequencing platform. BMC Microbiology 16:</span>
@@ -2182,6 +2353,15 @@ any point in the hierarchy (here 5% of all)</p>
     
     <a href="https://doi.org/10.7717/peerj.2584">10.7717/peerj.2584</a>
     
+</li>
+<li><span id="Balvoit2017">Balvočiūtė, M., and D. H. Huson, 2017 SILVA,  RDP,  Greengenes,  NCBI and OTT — how do these taxonomies compare? BMC Genomics 18:</span>
+    
+    
+    <a href="https://doi.org/10.1186/s12864-017-3501-4">https://doi.org/10.1186/s12864-017-3501-4</a>
+    
+    
+    <a href="https://doi.org/10.1186/s12864-017-3501-4">10.1186/s12864-017-3501-4</a>
+    
 </li></ol>
                     
 
@@ -2198,12 +2378,12 @@ any point in the hierarchy (here 5% of all)</p>
         <hr>
         <br>
 
-        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=16S Microbial Analysis with mothur (Metagenomics)">Loading...
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=16S Microbial Analysis with mothur (extended) (Metagenomics)">Loading...
         </iframe>
 
         <blockquote class="feedback">
             <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
-            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=16S Microbial Analysis with mothur (Metagenomics)">Feedback Form</a>.</p>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=16S Microbial Analysis with mothur (extended) (Metagenomics)">Feedback Form</a>.</p>
         </blockquote>
     </section>
 </div>
