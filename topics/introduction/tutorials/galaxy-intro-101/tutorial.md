@@ -26,6 +26,7 @@ contributors:
   - nekrut
   - bgruening
   - pajanne
+  - erasche
 ---
 
 # 101 Introduction
@@ -470,7 +471,10 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    ![Settings for running the workflow](../../images/101_38.png)
 >
->    Once the workflow has started you will initially be able to see all its steps:
+>    > ### {% icon comment %} Potential workflow issues
+>    > Galaxy validates the workflow inputs to ensure they're correct. It may show a validation error at the start, until you select `Exons` for the Exons input, and your repeats for the Features input.
+>
+> 6. Once the workflow has started you will initially be able to see all its steps:
 >
 >    ![Datasets appearing in the history](../../images/101_39.png)
 {: .hands_on}
