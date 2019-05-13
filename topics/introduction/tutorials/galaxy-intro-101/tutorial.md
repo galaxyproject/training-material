@@ -51,7 +51,7 @@ Suppose you get the following question:
 > *Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?*
 {: .question}
 
-If you work with human data, you may be familiar with the [UCSC Genome Browser](https://genome.ucsc.edu/), and know that you can find the data there. For other organisms, you probably know better where you would find similar datasets.
+You may be familiar with the [UCSC Genome Browser](https://genome.ucsc.edu/) or another resource like it, and know that you can find the data there. For other organisms, you probably know better where you would find similar datasets.
 With your data in hand, you're left with the question: "but how do I actually compute this?" There is really a straightforward answer: **Galaxy**. So let's try it...
 
 Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and log in or register. The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the central panel will show the home page, a tool form or some dataset content.
