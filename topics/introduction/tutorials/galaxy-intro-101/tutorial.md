@@ -52,7 +52,7 @@ Suppose you get the following question:
 {: .question}
 
 You may be familiar with the [UCSC Genome Browser](https://genome.ucsc.edu/) or another resource like it, and know that you can find the data there.
-With your data in hand, you're left with the question: "but how do I actually compute this?" There is really a straightforward answer: **Galaxy**. So let's try it...
+With your data in hand, you are left with the question: "but how do I actually compute this?" There is really a straightforward answer: **Galaxy**. So let's try it...
 
 Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and log in or register. The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the central panel will show the home page, a tool form or some dataset content.
 
@@ -258,7 +258,7 @@ Now we have a list of all exons and the number of SNPs they contain, but we woul
 >
 >    ![Contents of the `Sort` output dataset](../../images/101_16.png)
 >
->    You should now see the same file as we had before, but the exons with the highest number of SNPs is now at the top.
+>    You should now see the same file as we had before, but the exons with the highest number of SNPs are now at the top.
 {: .hands_on}
 
 
@@ -417,7 +417,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >    - **Click** on the box corresponding to the `SNPs` input dataset
 >    - change the **Label** to `Features` on the right-hand side of your screen.
 >
-> 6. Let's also **rename the outputs**:
+> 5. Let's also **rename the outputs**:
 >
 >    - Click on the `Select first` tool in the workflow editor
 >    - In the menu on the right click on `Configure Output: 'out_file1'`
@@ -474,7 +474,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    > ### {% icon comment %} Potential workflow issues
 >    > Galaxy validates the workflow inputs to ensure they're correct. It may show a validation error at the start, until you select `Exons` for the Exons input, and your repeats for the Features input.
 >
-> 6. Once the workflow has started you will initially be able to see all its steps:
+> 6. Once the workflow has started, you will initially be able to see all its steps:
 >
 >    ![Datasets appearing in the history](../../images/101_39.png)
 {: .hands_on}
