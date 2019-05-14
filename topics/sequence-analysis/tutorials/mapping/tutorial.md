@@ -178,11 +178,10 @@ After that, you should have a look at the reads and inspect the BAM file where t
 So the BAM file integrates many information for each read, in particular the quality of mapping.
 
 > ### {% icon hands_on %} Hands-on: Summary of mapping quality
-> 1. **Stats generate statistics for BAM dataset** {% icon tool %} with the following parameters
+> 1. **Samtools stats - generate statistics for BAM dataset** {% icon tool %} with the following parameters
 >    - {% icon param-file %} *"BAM file"*: `aligned reads` (output of **Bowtie2** {% icon tool %})
->    - *"Use reference sequence"*: `Use reference`
->       - *"Choose a reference sequence for GC depth"*: `Locally cached`
->           - *"Using genome"*: `Mouse (Mus musculus): mm10 Full`
+>    - *"Use reference sequence"*: `Locally cached`
+>      - *"Using genome"*: `Mouse (Mus musculus): mm10 Full`
 >
 > 2. Inspect the {% icon param-file %} `Stats` file
 >
