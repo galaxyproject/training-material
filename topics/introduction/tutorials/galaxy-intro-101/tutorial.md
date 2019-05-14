@@ -178,9 +178,9 @@ Let's remind ourselves that our objective is to find which exon contains the mos
 >    {: .tip}
 >
 >
-> 3. Click **Execute**
-> 4. Wait for the job to finish
-> 5. View the resulting file (with the {% icon galaxy-eye %} (eye) icon). If everything went okay, you should see a file that looks similar to this:
+> 2. Click **Execute**
+> 3. Wait for the job to finish
+> 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon). If everything went okay, you should see a file that looks similar to this:
 >
 >    ![Contents of the `Join` output dataset](../../images/101_joined.png)
 >
