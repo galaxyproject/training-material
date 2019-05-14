@@ -473,6 +473,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    > ### {% icon comment %} Potential workflow issues
 >    > Galaxy validates the workflow inputs to ensure they're correct. It may show a validation error at the start, until you select `Exons` for the Exons input, and your repeats for the Features input.
+>    {: .comment}
 >
 > 6. Once the workflow has started, you will initially be able to see all its steps:
 >
