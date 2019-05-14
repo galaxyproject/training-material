@@ -473,6 +473,10 @@
     {
       "@type": "Person",
       "name": "Anne Pajon"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
     }
   ],
   "contributor": [
@@ -499,6 +503,10 @@
     {
       "@type": "Person",
       "name": "Anne Pajon"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
     }
   ],
   "about": [
@@ -516,7 +524,7 @@
         <h1 data-toc-skip>Galaxy 101</h1>
         <div class="contributors-line">By: 
 
-<a href="/training-material/hall-of-fame#shiltemann" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a>, <a href="/training-material/hall-of-fame#nsoranzo" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nsoranzo" alt="Nicola Soranzo">Nicola Soranzo</a>, <a href="/training-material/hall-of-fame#blankclemens" class="contributor-badge"><img src="https://avatars.githubusercontent.com/blankclemens" alt="Clemens Blank">Clemens Blank</a>, <a href="/training-material/hall-of-fame#nekrut" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nekrut" alt="Anton Nekrutenko">Anton Nekrutenko</a>, <a href="/training-material/hall-of-fame#bgruening" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bgruening" alt="Björn Grüning">Björn Grüning</a>, <a href="/training-material/hall-of-fame#pajanne" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pajanne" alt="Anne Pajon">Anne Pajon</a>
+<a href="/training-material/hall-of-fame#shiltemann" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a>, <a href="/training-material/hall-of-fame#nsoranzo" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nsoranzo" alt="Nicola Soranzo">Nicola Soranzo</a>, <a href="/training-material/hall-of-fame#blankclemens" class="contributor-badge"><img src="https://avatars.githubusercontent.com/blankclemens" alt="Clemens Blank">Clemens Blank</a>, <a href="/training-material/hall-of-fame#nekrut" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nekrut" alt="Anton Nekrutenko">Anton Nekrutenko</a>, <a href="/training-material/hall-of-fame#bgruening" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bgruening" alt="Björn Grüning">Björn Grüning</a>, <a href="/training-material/hall-of-fame#pajanne" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pajanne" alt="Anne Pajon">Anne Pajon</a>, <a href="/training-material/hall-of-fame#erasche" class="contributor-badge"><img src="https://avatars.githubusercontent.com/erasche" alt="Helena Rasche">Helena Rasche</a>
 
 </div>
         <blockquote class="overview">
@@ -604,9 +612,10 @@
   <p><em>Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?</em></p>
 </blockquote>
 
-<p>You are thinking “Wow! This is a simple question… I know where to find the data, at the <a href="https://genome.ucsc.edu/">UCSC Genome Browser</a>, but how do I actually compute this?” There is really a straightforward way of answering this question and it is called <strong>Galaxy</strong>. So let’s try it…</p>
+<p>You may be familiar with the <a href="https://genome.ucsc.edu/">UCSC Genome Browser</a> or another resource like it, and know that you can find the data there.
+With your data in hand, you are left with the question: “but how do I actually compute this?” There is really a straightforward answer: <strong>Galaxy</strong>. So let’s try it…</p>
 
-<p>Browse to your Galaxy instance and log in or register. The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the central panel will show the home page, a tool form or some dataset content.</p>
+<p>Browse to your favourite <a href="https://galaxyproject.org/use/">Galaxy instance</a> and log in or register. The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the central panel will show the home page, a tool form or some dataset content.</p>
 
 <p><img src="../../images/galaxy_interface.png" alt="Galaxy interface" /></p>
 
@@ -627,8 +636,9 @@
       </blockquote>
     </li>
     <li>
-      <p><strong>Rename your history</strong> to be meaningful and easy to find. You can do this by clicking on the title of the history (which by default is <em>Unnamed history</em>) and typing <strong>Galaxy 101</strong> as the name. Do  not forget to hit the <code class="highlighter-rouge">enter</code> key on your keyboard to save it.
-  <img src="../../../../shared/images/rename_history.png" alt="Rename the history" /></p>
+      <p><strong>Rename your history</strong> to be meaningful and easy to find. You can do this by clicking on the title of the history (which by default is <em>Unnamed history</em>) and typing <strong>Galaxy 101</strong> as the name. Do  not forget to hit the <kbd>Enter</kbd> key on your keyboard to save it.</p>
+
+      <p><img src="../../../../shared/images/rename_history.png" alt="Rename the history" /></p>
     </li>
   </ol>
 </blockquote>
@@ -656,7 +666,7 @@
         <li><em>“genome”</em>: <code class="highlighter-rouge">Human</code></li>
         <li><em>“assembly”</em>: <code class="highlighter-rouge">Dec. 2013 (GRCh38/hg38)</code></li>
         <li><em>“group”</em>: <code class="highlighter-rouge">Genes and Gene Predictions</code></li>
-        <li><em>“track”</em>: <code class="highlighter-rouge">GENCODE v24</code></li>
+        <li><em>“track”</em>: <code class="highlighter-rouge">GENCODE v29</code></li>
         <li><em>“table”</em>: <code class="highlighter-rouge">knownGene</code></li>
         <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“region”</em> should be changed to <code class="highlighter-rouge">position</code> with value <code class="highlighter-rouge">chr22</code></li>
         <li><em>“output format”</em> should be changed to <code class="highlighter-rouge">BED - browser extensible data</code></li>
@@ -746,20 +756,27 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
   <ol>
     <li>
-      <p><strong>Join</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Enter the word <code class="highlighter-rouge">join</code> in the search bar of the tool panel, and select the tool named <code class="highlighter-rouge">Join - the intervals of two datasets side-by-side</code></p>
-    </li>
-    <li>
-      <p>Select the <code class="highlighter-rouge">Exons</code> dataset as the first dataset, and the <code class="highlighter-rouge">SNPs</code> dataset as the second dataset, and make sure <em>“return”</em> is set to <code class="highlighter-rouge">INNER JOIN</code> so that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)</p>
+      <p><strong>Join</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> the intervals of two datasets side-by-side:</p>
 
-      <p><img src="../../images/101_11.png" alt="Settings for the `Join` tool" /></p>
+      <p>Enter the word <code class="highlighter-rouge">join</code> in the search bar of the tool panel, and select the
+tool named <code class="highlighter-rouge">Join - the intervals of two datasets side-by-side</code></p>
 
-      <blockquote class="comment">
-        <h3 id="comment-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
-        <p><strong>Note:</strong> if you scroll down on this page, you will find the help of the tool.</p>
+      <ul>
+        <li><em>“Join”</em>: Select <code class="highlighter-rouge">Exons</code></li>
+        <li><em>“With”</em>: Select <code class="highlighter-rouge">SNPs</code></li>
+        <li><em>“with min overlap”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><em>“Return”</em>: <code class="highlighter-rouge">Only records that are joined (INNER JOIN)</code>, so that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)</li>
+      </ul>
+
+      <blockquote class="tip">
+        <h3 id="tip-how-do-i-use-this-tool"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> How do I use this tool?</h3>
+        <p>If you scroll down on this page, you will find the help of the tool.</p>
       </blockquote>
     </li>
+    <li>Click <strong>Execute</strong></li>
+    <li>Wait for the job to finish</li>
     <li>
-      <p>Click the <strong>Execute</strong> button and view the resulting file (with the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon). If everything went okay, you should see a file that looks similar to this:</p>
+      <p>View the resulting file (with the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon). If everything went okay, you should see a file that looks similar to this:</p>
 
       <p><img src="../../images/101_joined.png" alt="Contents of the `Join` output dataset" /></p>
 
@@ -796,19 +813,27 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
   <ol>
     <li>
-      <p><strong>Group</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Open the tool <code class="highlighter-rouge">Group - data by a column and perform aggregate operation on other columns</code></p>
+      <p><strong>Group</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> data by a column and perform aggregate operation on other columns:</p>
+
+      <ul>
+        <li><em>“Select data”</em>: select the output dataset from <strong>Join</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Group by column”</em>: <code class="highlighter-rouge">Column: 4</code> (the column with the exon IDs)</li>
+        <li><em>“Insert Operation”</em>:
+          <ul>
+            <li>1: Operation
+              <ul>
+                <li><em>“Type”</em>: <code class="highlighter-rouge">Count</code></li>
+                <li><em>“On column”</em>: <code class="highlighter-rouge">Column: 4</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
 
       <p><img src="../../images/101_13.png" alt="Settings for the `Group` tool" /></p>
-
-      <p>Now set the following parameters:</p>
-      <ul>
-        <li><em>“Select data”</em>: select the output dataset from the <code class="highlighter-rouge">Join</code> tool</li>
-        <li><em>“Group by column”</em>: <code class="highlighter-rouge">Column: 4</code> (the column with the exon IDs)</li>
-        <li><em>“Insert Operation”</em>: click on this button, then set <em>“Type”</em> to <code class="highlighter-rouge">Count</code> and set <em>“On column”</em> to <code class="highlighter-rouge">Column: 4</code></li>
-      </ul>
     </li>
     <li>
-      <p>Make sure your screen looks like the image above and click <strong>Execute</strong> to perform the grouping. Your new output dataset will look something like this:</p>
+      <p>Click <strong>Execute</strong> to perform the grouping. Your new output dataset will look something like this:</p>
 
       <p><img src="../../images/101_14.png" alt="Contents of the `Group` output dataset" /></p>
     </li>
@@ -840,22 +865,32 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
   <ol>
     <li>
-      <p><strong>Sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Navigate to the tool <code class="highlighter-rouge">Sort - data in ascending or descending order</code></p>
-    </li>
-    <li>
-      <p>Make sure that the output of the <code class="highlighter-rouge">Group</code> tool from the previous step is selected as input</p>
-    </li>
-    <li>
-      <p>Set the <em>“on column”</em> parameter to <code class="highlighter-rouge">Column: 2</code>, by default it will select a numerical sort in descending order, which is exactly what we want in this case.</p>
+      <p><strong>Sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> data in ascending or descending order:</p>
 
-      <p><img src="../../images/101_15.png" alt="Settings for the `Sort` tool" /></p>
+      <ul>
+        <li><em>“Sort Query”</em>: Output from <strong>Group</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Column Selections”</em>:
+          <ul>
+            <li>1: Column Selections
+              <ul>
+                <li><em>“on column”</em>: <code class="highlighter-rouge">Column: 2</code></li>
+                <li><em>“in”</em>: <code class="highlighter-rouge">Descending order</code></li>
+                <li><em>“Flavor”</em>: <code class="highlighter-rouge">Fast numeric sort (-n)</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </li>
     <li>
-      <p>Click <strong>Execute</strong> and examine the output file.</p>
+      <p>Click <strong>Execute</strong></p>
+    </li>
+    <li>
+      <p>Examine the output file.</p>
 
       <p><img src="../../images/101_16.png" alt="Contents of the `Sort` output dataset" /></p>
 
-      <p>You should now see the same file as we had before, but the exons with the highest number of SNPs are now on top.</p>
+      <p>You should now see the same file as we had before, but the exons with the highest number of SNPs are now at the top.</p>
     </li>
   </ol>
 </blockquote>
@@ -864,7 +899,11 @@ the gray (preparing/queued) and yellow (running) states to become green (success
   <h3 id="question-question-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
   <p>Which exon has the highest number of SNPs in your file?</p>
 
-  <p>Keep in mind this may depend on your settings when getting the data from UCSC.</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>When this tutorial was last updated, <code class="highlighter-rouge">ENST00000343518.10_cds_0_0_chr22_15690078_f</code> had 40 SNPs.
+Keep in mind this may depend on your settings when getting the data from UCSC.</p>
+  </blockquote>
 </blockquote>
 
 <h2 id="select-the-top-five-exons">Select the top five exons</h2>
@@ -876,18 +915,18 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
   <ol>
     <li>
-      <p><strong>Select first</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Open the tool <code class="highlighter-rouge">Select first - lines from a dataset</code></p>
-    </li>
-    <li>
-      <p>Set <em>“Select first”</em> to <code class="highlighter-rouge">5</code></p>
-    </li>
-    <li>
-      <p>Make sure that the output of the <code class="highlighter-rouge">Sort</code> tool from the previous step is selected as input</p>
+      <p><strong>Select first</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> lines from a dataset:</p>
 
-      <p><img src="../../images/101_17.png" alt="Settings for the `Select first` tool" /></p>
+      <ul>
+        <li><em>“Select first”</em>: <code class="highlighter-rouge">5</code></li>
+        <li><em>“from”</em>: The output from <strong>Sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
     </li>
     <li>
-      <p>Click <strong>Execute</strong> and examine the output file, this should contain only the first 5 lines of the previous dataset.</p>
+      <p>Click <strong>Execute</strong></p>
+    </li>
+    <li>
+      <p>Examine the output file, this should contain only the first 5 lines of the previous dataset.</p>
 
       <p><img src="../../images/101_first_5.png" alt="Contents of the `Select first` output dataset" /></p>
     </li>
@@ -903,15 +942,19 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
   <ol>
     <li>
-      <p><strong>Compare two Datasets</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Open the tool <code class="highlighter-rouge">Compare two Datasets - to find common or distinct rows</code></p>
-    </li>
-    <li>
-      <p>Set the parameters to compare the column 4 of the exon file with column 1 of the top-5 exons file to find matching rows of the first dataset.</p>
+      <p><strong>Compare two Datasets</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to find common or distinct rows:</p>
 
-      <p><img src="../../images/101_18.png" alt="Settings for the `Compare two Datasets` tool" /></p>
+      <ul>
+        <li><em>“Compare”</em>: <code class="highlighter-rouge">Exons</code></li>
+        <li><em>“Using column”</em>: <code class="highlighter-rouge">Column: 4</code></li>
+        <li><em>“against”</em>: the output from <strong>Select first</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Using column”</em>: <code class="highlighter-rouge">Column: 1</code></li>
+        <li><em>“to find”</em>: <code class="highlighter-rouge">Matching rows of 1st dataset</code></li>
+      </ul>
     </li>
+    <li>Click <strong>Execute</strong></li>
     <li>
-      <p>Click <strong>Execute</strong> and examine your output file. It should contain the locations of your top 5 exons:</p>
+      <p>Examine your output file. It should contain the locations of your top 5 exons:</p>
 
       <p><img src="../../images/101_19.png" alt="Contents of the `Compare two Datasets` output dataset" /></p>
     </li>
@@ -929,7 +972,16 @@ the gray (preparing/queued) and yellow (running) states to become green (success
     <li>
       <p>First, check that the <strong>database</strong> of your latest history dataset is <code class="highlighter-rouge">hg38</code>. If not, click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> pencil icon and modify the <strong>Database/Build:</strong> field to <code class="highlighter-rouge">Human Dec. 2013 (GRCh38/hg38) (hg38)</code>.</p>
 
-      <p><img src="../../images/101_20.png" alt="Modify the database of the `Compare two Datasets` output dataset" /></p>
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-databasebuild-dbkey"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing Database/Build (dbkey)</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Database/Build</strong> field</li>
+          <li>Select your desired database key from the dropdown list: <code class="highlighter-rouge">hg38</code></li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
     </li>
     <li>
       <p>To <strong>visualize the data in UCSC genome browser</strong>, click on <code class="highlighter-rouge">display at UCSC main</code> option visible when you expand the history item.</p>
@@ -986,7 +1038,9 @@ the gray (preparing/queued) and yellow (running) states to become green (success
       <p><img src="../../images/101_25.png" alt="Selection of steps for `Extract Workflow` from history" /></p>
     </li>
     <li>
-      <p><strong>Uncheck</strong> any steps that shouldn’t be included in the workflow (if any), and <strong>rename</strong> the workflow to something descriptive, for example <code class="highlighter-rouge">Find exons with the highest number of SNPs</code>.</p>
+      <p><strong>Rename</strong> the workflow to something descriptive, for example <code class="highlighter-rouge">Find exons with the highest number of SNPs</code>.</p>
+
+      <p>If there are any steps that shouldn’t be included in the workflow, you can <strong>uncheck</strong> them.</p>
     </li>
     <li>
       <p>Click on the <strong>Create Workflow</strong> button near the top.</p>
@@ -1021,8 +1075,8 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
       <p>When you click on a component, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.</p>
 
-      <blockquote class="comment">
-        <h3 id="comment-hiding-intermediate-steps"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Hiding intermediate steps</h3>
+      <blockquote class="tip">
+        <h3 id="tip-hiding-intermediate-steps"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Hiding intermediate steps</h3>
         <p>When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which outputs to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
 <img src="../../../../shared/images/workflow_editor_mark_output.png" alt="Asterisk for `out_file1` in the `Select First` tool" /></p>
 
@@ -1030,31 +1084,38 @@ the gray (preparing/queued) and yellow (running) states to become green (success
       </blockquote>
     </li>
     <li>
-      <p>Click the <strong>asterisk</strong> next to <code class="highlighter-rouge">out_file1</code> in the <code class="highlighter-rouge">Select First</code> and <code class="highlighter-rouge">Compare two Datasets</code> tools.</p>
+      <p>Click the <strong>asterisk</strong> for <code class="highlighter-rouge">out_file1</code> in the <code class="highlighter-rouge">Select First</code> and <code class="highlighter-rouge">Compare two Datasets</code> tools.</p>
 
       <p>Now, when we run the workflow, we will only see the final two outputs, i.e. the table with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser. Once you have done this, you will notice that the <strong>minimap</strong> at the bottom-right corner of your screen will have a colour-coded view of your workflow, with orange boxes representing a tool with an output that will be shown.</p>
 
       <p><img src="../../images/101_31.png" alt="Workflow minimap" /></p>
 
-      <p>If you didn’t specify a name for the input datasets at the beginning, they will be labeled <code class="highlighter-rouge">Input Dataset</code>. In this case you can change the labels now to avoid confusion when using the workflow later on.</p>
-
-      <p><img src="../../images/101_32.png" alt="`Exons` input step selected in the workflow editor" /></p>
-
       <p>In the image above, you see that the top input dataset (with the blue border) connects to the first input of the <code class="highlighter-rouge">Join</code> tool, so this corresponds to the exon data.</p>
     </li>
     <li>
-      <p><strong>Click</strong> on the box corresponding to the exon input dataset, and change the <strong>Label</strong> to <code class="highlighter-rouge">Exons</code> on the right-hand side of your screen.</p>
+      <p>The box named <code class="highlighter-rouge">Exons</code> is named ok, but we want to change <code class="highlighter-rouge">SNPs</code> since this workflow is not specific to SNPs</p>
+
+      <ul>
+        <li><strong>Click</strong> on the box corresponding to the <code class="highlighter-rouge">SNPs</code> input dataset</li>
+        <li>change the <strong>Label</strong> to <code class="highlighter-rouge">Features</code> on the right-hand side of your screen.</li>
+      </ul>
     </li>
     <li>
-      <p><strong>Repeat</strong> this process for the other input dataset. Name it <code class="highlighter-rouge">Features</code>. We used it to calculate highest number of SNPs, but this workflow would also work with other features, so we give it a bit more generic name.</p>
-    </li>
-    <li>
-      <p>Let’s also <strong>rename the outputs</strong>. Click on the <code class="highlighter-rouge">Select first</code> tool and in the menu on the right click on <code class="highlighter-rouge">Configure Output: 'out_file1'</code> and enter a descriptive name for the output dataset in the <code class="highlighter-rouge">Rename dataset</code> box.</p>
+      <p>Let’s also <strong>rename the outputs</strong>:</p>
+
+      <ul>
+        <li>Click on the <code class="highlighter-rouge">Select first</code> tool in the workflow editor</li>
+        <li>In the menu on the right click on <code class="highlighter-rouge">Configure Output: 'out_file1'</code>
+          <ul>
+            <li>Under <code class="highlighter-rouge">Rename dataset</code>, and enter a descriptive name for the output dataset like <code class="highlighter-rouge">Top 5 exon IDs</code></li>
+          </ul>
+        </li>
+      </ul>
 
       <p><img src="../../images/101_34.png" alt="Rename the output of the `Select first` tool step" /></p>
     </li>
     <li>
-      <p><strong>Repeat</strong> this for the output of the <code class="highlighter-rouge">Compare two Datasets</code> tool.</p>
+      <p><strong>Repeat</strong> this for the output of the <code class="highlighter-rouge">Compare two Datasets</code> tool, naming it <code class="highlighter-rouge">Top 5 exons</code></p>
     </li>
     <li>
       <p><strong>Save your workflow</strong> (important!) by clicking on the gear icon at the top right of the screen, and selecting <code class="highlighter-rouge">Save</code>.</p>
@@ -1062,14 +1123,14 @@ the gray (preparing/queued) and yellow (running) states to become green (success
       <p><img src="../../images/workflow_editor_save.png" alt="Save option in the workflow editor menu" /></p>
     </li>
     <li>
-      <p><strong>Return</strong> to the analysis view by clicking on <code class="highlighter-rouge">Analyze Data</code> at the top menu bar.</p>
+      <p><strong>Return</strong> to the analysis view by clicking on <strong>Analyze Data</strong> at the top menu bar.</p>
     </li>
   </ol>
 
 </blockquote>
 
 <blockquote class="comment">
-  <h3 id="comment-comments-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
+  <h3 id="comment-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
   <p>We could <strong>validate</strong> our newly built workflow by running it on the same input datasets than the ones in the <code class="highlighter-rouge">Galaxy 101</code> history used to extract the workflow in order to make sure we do obtain the same results.</p>
 </blockquote>
 
@@ -1088,6 +1149,9 @@ the gray (preparing/queued) and yellow (running) states to become green (success
       <p>We will need the list of exons again. We don’t have to get this from UCSC again, we can just <strong>copy</strong> it from our previous history. The easiest way to do this is to go to the history overview (window icon at top of history panel). Here you can just drag and drop datasets from one history to another.</p>
 
       <p><img src="../../images/101_copydataset.png" alt="Drag and drop of `Exons` dataset in the history overview" /></p>
+    </li>
+    <li>
+      <p>Click <strong>Analyze Data</strong> at the top to return to the main analysis window</p>
     </li>
     <li>We wanted to know something about the repetitive elements per exon. We get this data from UCSC.
       <ul>
@@ -1111,7 +1175,13 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
       <p><img src="../../images/101_38.png" alt="Settings for running the workflow" /></p>
 
-      <p>Once the workflow has started you will initially be able to see all its steps:</p>
+      <blockquote>
+        <h3 id="comment-potential-workflow-issues"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Potential workflow issues</h3>
+        <p>Galaxy validates the workflow inputs to ensure they’re correct. It may show a validation error at the start, until you select <code class="highlighter-rouge">Exons</code> for the Exons input, and your repeats for the Features input.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Once the workflow has started, you will initially be able to see all its steps:</p>
 
       <p><img src="../../images/101_39.png" alt="Datasets appearing in the history" /></p>
     </li>
@@ -1209,7 +1279,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Saskia Hiltemann, Nicola Soranzo, Clemens Blank, Anton Nekrutenko, Björn Grüning, Anne Pajon)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Saskia Hiltemann, Nicola Soranzo, Clemens Blank, Anton Nekrutenko, Björn Grüning, Anne Pajon, Helena Rasche)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
