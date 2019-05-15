@@ -220,8 +220,20 @@ Examine each file, especially the stats files.
 > 1. **Bandage** {% icon tool %} with the following parameters:
 >    - *"Graphical Fragment Assembly"*: `assembly graph with scaffolds` output from **SPAdes** {% icon tool %}
 >
+> 2. Examine the output image {% icon galaxy-eye %}
+>
 {: .hands_on}
 
+The visualized assembly should look something like this:
+
+![](../../images/bandage_spades.svg)
+
+
+> ### {% icon question %} Questions
+>
+> 1. Which assembly looks better to you? why?
+>
+{: .question}
 
 
 
