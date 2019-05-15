@@ -47,6 +47,14 @@ We will be using the same data that we used in the introductory tutorial, so if 
 > 1. Create and name a new history for this tutorial.
 > 2. Import the sequence read raw data (\*.fastq) from [Zenodo](https://zenodo.org/record/582600)
 >
+>    ```
+>    https://zenodo.org/record/582600/files/mutant_R1.fastq
+>    https://zenodo.org/record/582600/files/mutant_R2.fastq
+>    https://zenodo.org/record/582600/files/wildtype.fna
+>    https://zenodo.org/record/582600/files/wildtype.gbk
+>    https://zenodo.org/record/582600/files/wildtype.gff
+>    ```
+>
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
 >    > * Copy the link location (Right-click on the filename <i class="fa fa-long-arrow-right"></i> Copy Link Address)
