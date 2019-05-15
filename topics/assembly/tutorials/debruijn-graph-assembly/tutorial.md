@@ -188,6 +188,13 @@ And now you should be able to see the graph that velvet produced:
 
 k-mer size has a [significant effect](https://github.com/rrwick/Bandage/wiki/Effect-of-kmer-size) on the assembly. You can play around with various k-mers to see this effect in practice.
 
+k-mer | graph
+----- | -----
+21    | [![21](../../images/bandage-velvet-21.svg)](../../images/bandage-velvet-21.svg)
+33    | [![33](../../images/bandage-velvet-33.svg)](../../images/bandage-velvet-33.svg)
+53    | [![53](../../images/bandage-velvet-53.svg)](../../images/bandage-velvet-53.svg)
+77    | [![77](../../images/bandage-velvet-77.svg)](../../images/bandage-velvet-77.svg)
+
 The next thing to be aware of is that there can be multiple valid interpretations of a graph, all equally valid in absence of other data. The following is taken verbatim [from Bandage's wiki](https://github.com/rrwick/Bandage/wiki/Simple-example):
 
 > For a simple case, imagine a bacterial genome that contains a single repeated element in two separate places in the chromosome:
