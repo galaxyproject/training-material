@@ -151,6 +151,16 @@ Examine each file, especially the stats files.
 {: .question}
 
 
+> ### {% icon hands_on %} Hands-on: Visualize assembly with Bandage
+>
+> 1. **Bandage** {% icon tool %} with the following parameters:
+>    - *"Graphical Fragment Assembly"*: `assembly graph with scaffolds` output from **SPAdes** {% icon tool %}
+>
+{: .hands_on}
+
+
+
+
 > ### {% icon hands_on %} Hands-on: Get contig statistics for SPAdes contigs
 >
 > 1. **Fasta Statistics** {% icon tool %}: Produce a summary of the SPAdes contigs:
