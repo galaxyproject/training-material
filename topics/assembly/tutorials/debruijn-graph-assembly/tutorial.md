@@ -117,6 +117,69 @@ Tables of results from **(a)** Simple assembly and **(b)** optimised assembly.
 
 **(b)** ![The results of the contigs from Optimised assembly. In contrast to simple assembly produced much higher n_50, while num_seq is lower.](../../images/optstats.png)
 
+
+## Visualisation of the Assembly
+
+Now that we've assembled the genomes, let's visualise this assembly using [Bandage](https://rrwick.github.io/Bandage/) ({% cite Wick2015 %}). This tool will let us better understand how the assembly graph really looks, and can give us a feeling for if the genome was well assembled or not.
+
+Currently VelvetOptimiser does not include the LastGraph output, so we will manually run `velveth` and `velvetg` with the optimised parameters.
+
+> ### {% icon hands_on %} Hands-on: Manually running velvetg/h
+>
+> 1. Locate the output called "VelvetOptimiser: Contigs" in your history
+>
+> 2. Click the (i) information icon
+>
+> 3. Check the tool `stderr` in the information page for the optimised k-mer value
+{: .hands_on}
+
+> ### {% icon question %} Question
+> What was the optimal hash value?
+> > ### {% icon solution %} Solution
+> > 55
+> {: .solution}
+{: .hands_on}
+
+With this information in hand, let's run velvet:
+
+> ### {% icon hands_on %} Hands-on: Manually running velvetg/h
+>
+> 1. **velveth** {% icon tool %}: Prepare a dataset for the Velvet velvetg Assembler
+>    - *"Hash length"*: `55`
+>    - *"Insert Input Files"*:
+>      - 1: Input Files
+>        - *"file format"*: `fastq`
+>        - *"read type"*: `shortPaired reads`
+>        - *"Dataset"*: `mutant_R1.fastq`
+>    - *"Insert Input Files"*:
+>      - 2: Input Files
+>        - *"file format"*: `fastq`
+>        - *"read type"*: `shortPaired reads`
+>        - *"Dataset"*: `mutant_R2.fastq`
+>
+> 2. **velvetg** {% icon tool %}: Velvet sequence assembler for very short reads
+>    - *"Velvet dataset"*: output from **velveth** {% icon tool %}
+>    - *"Generate velvet LastGraph file"*: `Yes`
+>    - *"Using Paired Reads"*: `Yes`
+>
+{: .hands_on}
+
+The LastGraph contains a detailed representation of the De Bruijn graph, which can give us an idea how velvet has assembled the genome and potentially resolved any conflicts.
+
+> ### {% icon hands_on %} Hands-on: Bandage
+>
+> 1. **Bandage Image** {% icon tool %}: visualize de novo assembly graphs
+>    - *"Graphical Fragment Assembly"*: The "LastGraph" output of **velvetg** {% icon tool %}
+>    - *"Produce jpg, png or svg file?"*: `.svg`
+>
+> 2. Execute
+> 3. View the output file
+{: .hands_on}
+
+And now you should be able to see the graph that velvet produced:
+
+![velvet graph](../../images/bandage-velvet.svg)
+
 # Assemble with SPAdes
 
 We will now perform an assembly with the much more modern SPAdes assembler. It goes through a similar process to Velvet in the fact that it uses and simplifies de Bruijn graphs but it uses multiple values for k-mer size and combines the resultant graphs. This combination produces very good assemblies. When using SPAdes it is typical to choose at least 3 k-mer sizes. One low, one medium and one high. We will use 33, 55 and 91.
