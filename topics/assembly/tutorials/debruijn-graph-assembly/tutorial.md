@@ -264,7 +264,7 @@ Examine each file, especially the stats files.
 
 The visualized assembly should look something like this:
 
-![](../../images/bandage_spades.svg)
+![bandage spades](../../images/bandage_spades.svg)
 
 
 > ### {% icon question %} Questions
