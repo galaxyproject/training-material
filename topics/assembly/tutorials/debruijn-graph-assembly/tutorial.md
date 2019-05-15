@@ -55,16 +55,7 @@ We will be using the same data that we used in the introductory tutorial, so if 
 >    https://zenodo.org/record/582600/files/wildtype.gff
 >    ```
 >
->    > ### {% icon tip %} Tip: Importing data via links
->    >
->    > * Copy the link location (Right-click on the filename <i class="fa fa-long-arrow-right"></i> Copy Link Address)
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > * Paste the link into the text field
->    > * Change the data-type to **fastqsanger**
->    > * Press **Start**
->    {: .tip}
->
+>    {% include snippets/import_via_link.md %}
 >
 > 3. Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the {% icon galaxy-pencil %} pencil icon icon next to the relevant history entry.
 >
