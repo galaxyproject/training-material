@@ -1,5 +1,6 @@
 ---
 layout: tutorial_hands_on
+enable: false
 
 title: Running molecular dynamics simulations using NAMD
 zenodo_link: ''
