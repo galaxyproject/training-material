@@ -126,6 +126,12 @@
                                         
                                     
                                         
+                                        <a class="dropdown-item" href="https://usegalaxy.eu" title="Galaxy Europe">
+                                            Galaxy Europe
+                                        </a>
+                                        
+                                    
+                                        
                                     
                                         
                                     
@@ -410,12 +416,28 @@
     {
       "@type": "Person",
       "name": "Simon Gladman"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Saskia Hiltemann"
     }
   ],
   "contributor": [
     {
       "@type": "Person",
       "name": "Simon Gladman"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Saskia Hiltemann"
     }
   ],
   "about": [
@@ -433,7 +455,7 @@
         <h1 data-toc-skip>De Bruijn Graph Assembly</h1>
         <div class="contributors-line">By: 
 
-<a href="/training-material/hall-of-fame#slugger70" class="contributor-badge"><img src="https://avatars.githubusercontent.com/slugger70" alt="Simon Gladman">Simon Gladman</a>
+<a href="/training-material/hall-of-fame#slugger70" class="contributor-badge"><img src="https://avatars.githubusercontent.com/slugger70" alt="Simon Gladman">Simon Gladman</a>, <a href="/training-material/hall-of-fame#erasche" class="contributor-badge"><img src="https://avatars.githubusercontent.com/erasche" alt="Helena Rasche">Helena Rasche</a>, <a href="/training-material/hall-of-fame#shiltemann" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a>
 
 </div>
         <blockquote class="overview">
@@ -557,32 +579,58 @@
     <li>
       <p>Import the sequence read raw data (*.fastq) from <a href="https://zenodo.org/record/582600">Zenodo</a></p>
 
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/582600/files/mutant_R1.fastq
+https://zenodo.org/record/582600/files/mutant_R2.fastq
+</code></pre></div>      </div>
+
       <blockquote class="tip">
+
         <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
 
         <ul>
-          <li>Copy the link location (Right-click on the filename <i class="fa fa-long-arrow-right"></i> Copy Link Address)</li>
-          <li>Open the Galaxy Upload Manager</li>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+          </li>
           <li>Select <strong>Paste/Fetch Data</strong></li>
-          <li>Paste the link into the text field</li>
-          <li>Change the data-type to <strong>fastqsanger</strong></li>
-          <li>Press <strong>Start</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
         </ul>
+
+        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
       </blockquote>
     </li>
-    <li>Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> pencil icon icon next to the relevant history entry.</li>
+    <li>Rename the files <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span>
+      <ul>
+        <li>The name of the files are the full URL, let’s make the names a little clearer</li>
+        <li>Change the names to just the last part, <code class="highlighter-rouge">Mutant_R1.fastq</code>, <code class="highlighter-rouge">Mutant_R2.fastq</code>  respectively</li>
+      </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="question">
+        <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>What are four key features of a FASTQ file?</li>
+          <li>What is the main difference between a FASTQ and a FASTA file?</li>
+        </ol>
+      </blockquote>
+    </li>
   </ol>
-
-  <p>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon next to one of the FASTQ sequence files.</p>
-
-  <blockquote class="question">
-    <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-
-    <ol>
-      <li>What are four key features of a FASTQ file?</li>
-      <li>What is the main difference between a FASTQ and a FASTA file?</li>
-    </ol>
-  </blockquote>
 
 </blockquote>
 
@@ -657,6 +705,162 @@
 
 <p><strong>(b)</strong> <img src="../../images/optstats.png" alt="The results of the contigs from Optimised assembly. In contrast to simple assembly produced much higher n_50, while num_seq is lower." /></p>
 
+<h2 id="visualisation-of-the-assembly">Visualisation of the Assembly</h2>
+
+<p>Now that we’ve assembled the genomes, let’s visualise this assembly using <a href="https://rrwick.github.io/Bandage/">Bandage</a> (<a class="citation" href="#Wick2015">(Wick <i>et al.</i> 2015)</a>). This tool will let us better understand how the assembly graph really looks, and can give us a feeling for if the genome was well assembled or not.</p>
+
+<p>Currently VelvetOptimiser does not include the LastGraph output, so we will manually run <code class="highlighter-rouge">velveth</code> and <code class="highlighter-rouge">velvetg</code> with the optimised parameters.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-manually-running-velvetgh"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Manually running velvetg/h</h3>
+
+  <ol>
+    <li>
+      <p>Locate the output called “VelvetOptimiser: Contigs” in your history</p>
+    </li>
+    <li>
+      <p>Click the (i) information icon</p>
+    </li>
+    <li>
+      <p>Check the tool <code class="highlighter-rouge">stderr</code> in the information page for the optimised k-mer value</p>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <p>What was the optimal k-mer value? (referred to as <em>“hash”</em> in the stderr log)</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>55</p>
+  </blockquote>
+</blockquote>
+
+<p>With this information in hand, let’s run velvet:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-manually-running-velvetgh-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Manually running velvetg/h</h3>
+
+  <ol>
+    <li><strong>velveth</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Prepare a dataset for the Velvet velvetg Assembler
+      <ul>
+        <li><em>“Hash length”</em>: <code class="highlighter-rouge">55</code></li>
+        <li><em>“Insert Input Files”</em>:
+          <ul>
+            <li>1: Input Files
+              <ul>
+                <li><em>“file format”</em>: <code class="highlighter-rouge">fastq</code></li>
+                <li><em>“read type”</em>: <code class="highlighter-rouge">shortPaired reads</code></li>
+                <li><em>“Dataset”</em>: <code class="highlighter-rouge">mutant_R1.fastq</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Insert Input Files”</em>:
+          <ul>
+            <li>2: Input Files
+              <ul>
+                <li><em>“file format”</em>: <code class="highlighter-rouge">fastq</code></li>
+                <li><em>“read type”</em>: <code class="highlighter-rouge">shortPaired reads</code></li>
+                <li><em>“Dataset”</em>: <code class="highlighter-rouge">mutant_R2.fastq</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>velvetg</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Velvet sequence assembler for very short reads
+      <ul>
+        <li><em>“Velvet dataset”</em>: output from <strong>velveth</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Generate velvet LastGraph file”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Coverage cutoff”</em>: <code class="highlighter-rouge">Specify Cutoff Value</code>
+          <ul>
+            <li><em>“Remove nodes with coverage below”</em>: <code class="highlighter-rouge">1.44</code></li>
+          </ul>
+        </li>
+        <li><em>“Using Paired Reads”</em>: <code class="highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The LastGraph contains a detailed representation of the De Bruijn graph, which can give us an idea how velvet has assembled the genome and potentially resolved any conflicts.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-bandage"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Bandage</h3>
+
+  <ol>
+    <li><strong>Bandage Image</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: visualize de novo assembly graphs
+      <ul>
+        <li><em>“Graphical Fragment Assembly”</em>: The “LastGraph” output of <strong>velvetg</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Produce jpg, png or svg file?”</em>: <code class="highlighter-rouge">.svg</code></li>
+      </ul>
+    </li>
+    <li>Execute</li>
+    <li>View the output file</li>
+  </ol>
+</blockquote>
+
+<p>And now you should be able to see the graph that velvet produced:</p>
+
+<p><img src="../../images/bandage-velvet.svg" alt="velvet graph" /></p>
+
+<h2 id="interpreting-bandage-graphs">Interpreting Bandage Graphs</h2>
+
+<p>k-mer size has a <a href="https://github.com/rrwick/Bandage/wiki/Effect-of-kmer-size">significant effect</a> on the assembly. You can play around with various k-mers to see this effect in practice.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>k-mer</th>
+      <th>graph</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>21</td>
+      <td><a href="../../images/bandage-velvet-21.svg"><img src="../../images/bandage-velvet-21.svg" alt="21" /></a></td>
+    </tr>
+    <tr>
+      <td>33</td>
+      <td><a href="../../images/bandage-velvet-33.svg"><img src="../../images/bandage-velvet-33.svg" alt="33" /></a></td>
+    </tr>
+    <tr>
+      <td>53</td>
+      <td><a href="../../images/bandage-velvet-53.svg"><img src="../../images/bandage-velvet-53.svg" alt="53" /></a></td>
+    </tr>
+    <tr>
+      <td>77</td>
+      <td><a href="../../images/bandage-velvet-77.svg"><img src="../../images/bandage-velvet-77.svg" alt="77" /></a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The next thing to be aware of is that there can be multiple valid interpretations of a graph, all equally valid in absence of other data. The following is taken verbatim <a href="https://github.com/rrwick/Bandage/wiki/Simple-example">from Bandage’s wiki</a>:</p>
+
+<blockquote class="quote">
+  <p>For a simple case, imagine a bacterial genome that contains a single repeated element in two separate places in the chromosome:</p>
+
+  <p><img src="https://camo.githubusercontent.com/03628b49f50ccf7a9c565d7712bfc70c7764cbeb/687474703a2f2f72727769636b2e6769746875622e696f2f42616e646167652f696d616765732f77696b692f73696d706c655f6578616d706c655f312e706e67" alt="Simple example 1" /></p>
+
+  <p>A researcher (who does not yet know the structure of the genome) sequences it, and the resulting 100 bp reads are assembled with a de novo assembler:</p>
+
+  <p><img src="https://camo.githubusercontent.com/a51f384b83fbb97590ce86b8ec14d4ebd1bb60d1/687474703a2f2f72727769636b2e6769746875622e696f2f42616e646167652f696d616765732f77696b692f73696d706c655f6578616d706c655f322e706e67" alt="Simple example 2" /></p>
+
+  <p>Because the repeated element is longer than the sequencing reads, the assembler was not able to reproduce the original genome as a single contig. Rather, three contigs are produced: one for the repeated sequence (even though it occurs twice) and one for each sequence between the repeated elements.</p>
+
+  <p>Given only the contigs, the relationship between these sequences is not clear. However, the assembly graph contains additional information which is made apparent in Bandage:</p>
+
+  <p><img src="https://camo.githubusercontent.com/406648509cf478ac0b2ab9f2447aec4e7575b7dd/687474703a2f2f72727769636b2e6769746875622e696f2f42616e646167652f696d616765732f77696b692f73696d706c655f6578616d706c655f332e706e67" alt="Simple example 3" /></p>
+
+  <p>There are two principal underlying sequences compatible with this graph: two separate circular sequences that share a region in common, or a single larger circular sequence with an element that occurs twice:</p>
+
+  <p><img src="https://camo.githubusercontent.com/58d0aa7eff4cfd3d36c9210e9f6a2f0265396715/687474703a2f2f72727769636b2e6769746875622e696f2f42616e646167652f696d616765732f77696b692f73696d706c655f6578616d706c655f342e706e67" alt="Simple example 4" /></p>
+
+  <p>Additional knowledge, such as information on the approximate size of the bacterial chromosome, can help the researcher to rule out the first alternative. In this way, Bandage has assisted in turning a fragmented assembly of three contigs into a completed genome of one sequence.</p>
+</blockquote>
+
 <h1 id="assemble-with-spades">Assemble with SPAdes</h1>
 
 <p>We will now perform an assembly with the much more modern SPAdes assembler. It goes through a similar process to Velvet in the fact that it uses and simplifies de Bruijn graphs but it uses multiple values for k-mer size and combines the resultant graphs. This combination produces very good assemblies. When using SPAdes it is typical to choose at least 3 k-mer sizes. One low, one medium and one high. We will use 33, 55 and 91.</p>
@@ -674,6 +878,7 @@
         <li><em>“Coverage cutoff”</em>: <code class="highlighter-rouge">auto</code></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Files -&gt; forward reads”</em>: <code class="highlighter-rouge">mutant_R1.fastq</code></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Files -&gt; reverse reads”</em>: <code class="highlighter-rouge">mutant_R2.fastq</code></li>
+        <li><em>“Output final assembly graph with scaffolds?”</em>: <code class="highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
@@ -703,6 +908,31 @@
 </blockquote>
 
 <blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-visualize-assembly-with-bandage"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize assembly with Bandage</h3>
+
+  <ol>
+    <li><strong>Bandage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Graphical Fragment Assembly”</em>: <code class="highlighter-rouge">assembly graph with scaffolds</code> output from <strong>SPAdes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li>Examine the output image <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span></li>
+  </ol>
+
+</blockquote>
+
+<p>The visualized assembly should look something like this:</p>
+
+<p><img src="../../images/bandage_spades.svg" alt="bandage spades" /></p>
+
+<blockquote class="question">
+  <h3 id="question-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Which assembly looks better to you? Why?</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-get-contig-statistics-for-spades-contigs"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get contig statistics for SPAdes contigs</h3>
 
   <ol>
@@ -715,7 +945,7 @@
       <p>Look at the output file.</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <h3 id="question-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
         <p>Compare the output we got here with the output of the simple assemblies obtained in the introductory tutorial.</p>
         <ol>
@@ -754,6 +984,17 @@
                     
 
                     
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="Wick2015">Wick, R. R., M. B. Schultz, J. Zobel, and K. E. Holt, 2015 Bandage: interactive visualization ofde novogenome assemblies: Fig. 1. Bioinformatics 31: 3350–3352.</span>
+    
+    
+    <a href="https://doi.org/10.1093/bioinformatics/btv383">https://doi.org/10.1093/bioinformatics/btv383</a>
+    
+    
+    <a href="https://doi.org/10.1093/bioinformatics/btv383">10.1093/bioinformatics/btv383</a>
+    
+</li></ol>
+                    
 
                 </div>
             </div>
@@ -784,7 +1025,7 @@
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Simon Gladman)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Simon Gladman, Helena Rasche, Saskia Hiltemann)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
