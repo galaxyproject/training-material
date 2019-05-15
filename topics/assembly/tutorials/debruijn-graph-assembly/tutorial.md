@@ -50,16 +50,15 @@ We will be using the same data that we used in the introductory tutorial, so if 
 >    ```
 >    https://zenodo.org/record/582600/files/mutant_R1.fastq
 >    https://zenodo.org/record/582600/files/mutant_R2.fastq
->    https://zenodo.org/record/582600/files/wildtype.fna
->    https://zenodo.org/record/582600/files/wildtype.gbk
->    https://zenodo.org/record/582600/files/wildtype.gff
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
 >
-> 3. Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the {% icon galaxy-pencil %} pencil icon icon next to the relevant history entry.
+> 3. Rename the files {% icon galaxy-pencil %}
+>    - The name of the files are the full URL, let's make the names a little clearer
+>    - Change the names to just the last part, `Mutant_R1.fastq`, `Mutant_R2.fastq`  respectively
 >
-> Click on the {% icon galaxy-eye %} (eye) icon next to one of the FASTQ sequence files.
+>    {% include snippets/rename_dataset.md %}
 >
 >    > ### {% icon question %} Questions
 >    >
