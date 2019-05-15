@@ -136,7 +136,7 @@ Currently VelvetOptimiser does not include the LastGraph output, so we will manu
 {: .hands_on}
 
 > ### {% icon question %} Question
-> What was the optimal hash value?
+> What was the optimal k-mer value? (referred to as *"hash"* in the stderr log)
 > > ### {% icon solution %} Solution
 > > 55
 > {: .solution}
