@@ -162,6 +162,8 @@ With this information in hand, let's run velvet:
 > 2. **velvetg** {% icon tool %}: Velvet sequence assembler for very short reads
 >    - *"Velvet dataset"*: output from **velveth** {% icon tool %}
 >    - *"Generate velvet LastGraph file"*: `Yes`
+>    - *"Coverage cutoff"*: `Specify Cutoff Value`
+>      - *"Remove nodes with coverage below"*: `1.44`
 >    - *"Using Paired Reads"*: `Yes`
 >
 {: .hands_on}
