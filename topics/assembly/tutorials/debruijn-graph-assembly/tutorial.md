@@ -259,7 +259,7 @@ The visualized assembly should look something like this:
 
 > ### {% icon question %} Questions
 >
-> 1. Which assembly looks better to you? why?
+> Which assembly looks better to you? Why?
 >
 {: .question}
 
