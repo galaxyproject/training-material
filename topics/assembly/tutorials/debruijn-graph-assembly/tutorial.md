@@ -19,6 +19,7 @@ key_points:
 contributors:
   - slugger70
   - erasche
+  - shiltemann
 ---
 
 # Optimised de Bruijn Graph assemblies using the Velvet Optimiser and SPAdes
