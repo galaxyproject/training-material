@@ -221,6 +221,7 @@ We will now perform an assembly with the much more modern SPAdes assembler. It g
 >    - *"Coverage cutoff"*: `auto`
 >    - {% icon param-file %} *"Files -> forward reads"*: `mutant_R1.fastq`
 >    - {% icon param-file %} *"Files -> reverse reads"*: `mutant_R2.fastq`
+>    - *"Output final assembly graph with scaffolds?"*: `Yes`
 >
 {: .hands_on}
 
