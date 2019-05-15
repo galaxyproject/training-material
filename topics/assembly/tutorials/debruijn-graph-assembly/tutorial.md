@@ -18,6 +18,7 @@ key_points:
   - "You should use SPAdes or another more modern assembler than Velvet for actual assemblies now."
 contributors:
   - slugger70
+  - erasche
 ---
 
 # Optimised de Bruijn Graph assemblies using the Velvet Optimiser and SPAdes
