@@ -42,7 +42,7 @@ contributors:
 {: .agenda}
 
 
-In this tutorial we will perform a simulation with the popular [NAMD](http://www.ks.uiuc.edu/Research/namd/) molecular dynamics software.
+In this tutorial we will perform a simulation with the popular [NAMD](http://www.ks.uiuc.edu/Research/namd/) molecular dynamics software. Please note NAMD tools are not currently available on a public Galaxy server due to licensing issues. If you are interested in following this tutorial, you will need to download the [BRIDGE docker container](https://github.com/scientificomputing/BRIDGE) and [download NAMD](https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=NAMD) yourself.
 
 This tutorial is made up of two parts. In the first section, we will look at preparation of a system (solvation, charge neutralisation, energy minimisation) using CHARMM. In the second section, we will perform an equilibration and production simulation, using NAMD. If you already completed the [Setting up molecular systems](../setting-up-molecular-systems/tutorial.html) tutorial, which covers the use of the CHARMM graphical user interface (GUI), you have already prepared your system, so go straight to the [second section](#namd-md-workflow), using the files you prepared earlier.
 
