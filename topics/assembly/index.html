@@ -1124,7 +1124,7 @@
                             
                                 <div class="">
                                     
-                                        <span class="label label-default" style="background-color: hsl(271, 80.0%, 99%); color: #333; border: 1px solid hsl(271, 80.0%, 59%)">prokaryote</span>
+                                        <span class="label label-default" style="background-color: hsl(271, 80.0%, 90%); color: #333; border: 1px solid hsl(271, 80.0%, 50%)">prokaryote</span>
                                     
                                 </div>
                             
@@ -1503,7 +1503,7 @@
                             
                                 <div class="">
                                     
-                                        <span class="label label-default" style="background-color: hsl(271, 80.0%, 99%); color: #333; border: 1px solid hsl(271, 80.0%, 59%)">prokaryote</span>
+                                        <span class="label label-default" style="background-color: hsl(271, 80.0%, 90%); color: #333; border: 1px solid hsl(271, 80.0%, 50%)">prokaryote</span>
                                     
                                 </div>
                             
@@ -1706,4 +1706,16 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
 </html>

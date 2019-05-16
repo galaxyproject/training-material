@@ -448,7 +448,7 @@
                             
                                 <div class="">
                                     
-                                        <span class="label label-default" style="background-color: hsl(271, 80.0%, 96%); color: #333; border: 1px solid hsl(271, 80.0%, 56%)">prokaryote</span>
+                                        <span class="label label-default" style="background-color: hsl(271, 80.0%, 85%); color: #333; border: 1px solid hsl(271, 80.0%, 45%)">prokaryote</span>
                                     
                                 </div>
                             
@@ -761,7 +761,7 @@
                             
                                 <div class="">
                                     
-                                        <span class="label label-default" style="background-color: hsl(124, 80.0%, 96%); color: #333; border: 1px solid hsl(124, 80.0%, 56%)">eukaryote</span>
+                                        <span class="label label-default" style="background-color: hsl(124, 80.0%, 85%); color: #333; border: 1px solid hsl(124, 80.0%, 45%)">eukaryote</span>
                                     
                                 </div>
                             
@@ -1005,7 +1005,7 @@
                             
                                 <div class="">
                                     
-                                        <span class="label label-default" style="background-color: hsl(271, 80.0%, 96%); color: #333; border: 1px solid hsl(271, 80.0%, 56%)">prokaryote</span>
+                                        <span class="label label-default" style="background-color: hsl(271, 80.0%, 85%); color: #333; border: 1px solid hsl(271, 80.0%, 45%)">prokaryote</span>
                                     
                                 </div>
                             
@@ -1204,7 +1204,7 @@
             <p>You can use a public Galaxy instance which has been tested for the availability of the used tools. They are listed along with the tutorials above.</p>
             
                 <p>You can also use the following Docker image for these tutorials:</p>
-                <pre><code>docker run -d -p 8080:80 quay.io/galaxy/genome-annotation-training</code></pre>
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -d -p 8080:80 quay.io/galaxy/genome-annotation-training</code></pre></div></div>
                 <p>It will launch a flavored Galaxy instance available on <a href="http://localhost:8080">http://localhost:8080</a>.</p>
             
         
@@ -1255,4 +1255,16 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
 </html>
