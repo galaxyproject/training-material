@@ -14,7 +14,7 @@ objectives:
 - Overlay the distribution of several m/z in one image.
 time_estimation: 1H
 key_points:
-- Average and annotated mass spectra show the relevant m/z range of the dataset and different compartment specific peaks.
+- Average and annotated mass spectra show the relevant m/z range of the dataset and different compartment-specific peaks.
 - MSI data can be filtered for m/z ranges of interest to speed up analysis time.
 - Distribution images for many analytes can be automatically generated with the MSI m/z image tool.
 - The MSI m/z image tools allow overlaying the distribution images for several analytes.
