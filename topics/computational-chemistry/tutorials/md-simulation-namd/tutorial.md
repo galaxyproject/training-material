@@ -20,6 +20,12 @@ key_points:
 - Several MD engines are available in BRIDGE
 - Workflows are available for common simulations tasks such as equilibration and production dynamics for various ensembles (NVT, NPT)
 - You've run an equilibrium and production MD simulation using NAMD
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: computational-chemistry
+    tutorials:
+      - analysis-md-simulations
 contributors:
 - chrisbarnettster
 - tsenapathi

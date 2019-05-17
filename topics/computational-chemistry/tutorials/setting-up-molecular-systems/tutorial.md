@@ -15,11 +15,17 @@ requirements:
     topic_name: computational-chemistry
     tutorials:
       - setting-up-molecular-systems
-time_estimation: 30m
+time_estimation: 2H
 key_points:
   - "The PDB is a key resource for finding protein structures."
   - "Using CHARMM-GUI is one way to prepare a protein and ligand system."
   - "To get data into Galaxy you can upload a file from your computer or paste in a web address."
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: computational-chemistry
+    tutorials:
+      - md-simulation-namd
 contributors:
   - chrisbarnettster
   - simonbray
@@ -122,27 +128,31 @@ Go to the correct section depending on which MD engine you will be using.
 ### Upload the PDB to CHARMM-GUI
 [Navigate to CHARMM-GUI](http://www.charmm-gui.org/?doc=input/pdbreader) and use the Input Generator, specifically the PDB Reader tool and upload the Cellulase PDB file. Press 'Next Step: Select Model/Chain' in the bottom right corner.
 
-![Snapshot of CHARMM-GUI PDB reader section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-reader.png %} "The CHARMM-GUI PDB Reader tool")
-
 > ### {% icon hands_on %} Hands-on: Upload the PDB to CHARMM-GUI
->
+> 
 > 1. Retrieve the modelled PDB structure from [Zenodo](https://doi.org/10.5281/zenodo.800651).
 > 2. Upload the PDB and choose CHARMM format.
+> ![Snapshot of CHARMM-GUI PDB reader section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-reader.png %} "The CHARMM-GUI PDB Reader tool")
 {: .hands_on}
 
 ### Select both protein and ligand models
-Two model chains are presented for selection: the protein (PROA) and the hetero residue, which is the ligand or glycan in this case (HETA). Select both, and press 'Next Step: Generate PDB' in the bottom right corner.
 
-![Snapshot of CHARMM-GUI model section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-modelchain.png %} "Select both ligand and protein models in CHARMM-GUI")
+> ### {% icon hands_on %} Hands-on: Generate PDB file
+> Two model chains are presented for selection: the protein (PROA) and the hetero residue, which is the ligand or glycan in this case (HETA). Select both, and press 'Next Step: Generate PDB' in the bottom right corner.
+> ![Snapshot of CHARMM-GUI model section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-modelchain.png %} "Select both ligand and protein models in CHARMM-GUI")
+{: .hands_on}
 
 ### Manipulate the system
-Rename the hetero chain to BGLC and add ten disulfide bonds to the protein, as shown in the figure. Then press 'Next Step: Manipulate PDB' in the bottom right corner.
-![Snapshot of CHARMM-GUI renaming section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-manipulate.png %} "Rename the chains in CHARMM-GUI")
+> ### {% icon hands_on %} Hands-on: Make necessary modifications
+> Rename the hetero chain to BGLC and add ten disulfide bonds to the protein, as shown in the figure. Then press 'Next Step: Manipulate PDB' in the bottom right corner.
+> ![Snapshot of CHARMM-GUI renaming section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-manipulate.png %} "Rename the chains in CHARMM-GUI")
+{: .hands_on}
 
 ### Download the output
-The output is a .tgz file (a tarball or zipped tarball). Inside the archive you will see all inputs and outputs from CHARMM-GUI.
-
-![Snapshot of CHARMM-GUI CHARMM output section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-charmmoutput.png %} "CHARMM output from CHARMM-GUI")
+> ### {% icon hands_on %} Hands-on: Download CHARMM output
+> The output is a .tgz file (a tarball or zipped tarball). Inside the archive you will see all inputs and outputs from CHARMM-GUI.
+> ![Snapshot of CHARMM-GUI CHARMM output section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-charmmoutput.png %} "CHARMM output from CHARMM-GUI")
+{: .hands_on}
 
 > ### {% icon tip %} What is a .tgz file?
 >
@@ -157,24 +167,30 @@ Upload the step1_pdbreader.psf and step1_pdbreader.crd to your BRIDGE instance a
 ## NAMD
 
 ### Upload the PDB to CHARMM-GUI
-Retrieve the modelled PDB structure from [Zenodo](https://doi.org/10.5281/zenodo.800651).
-[Navigate to CHARMM-GUI](http://www.charmm-gui.org/?doc=input/mdsetup) and use the Input Generator, specifically the Quick MD Simulator tool. Upload the PDB file, selecting 'CHARMM' as the file format. Press 'Next Step: Select Model/Chain' in the bottom right corner.
 
-![Snapshot of CHARMM-GUI Quick MD Simulator tool ]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-mdsimulator.png %} "The CHARMM-GUI Quick MD Simulator tool")
+> ### {% icon hands_on %} Hands-on: Upload the PDB to CHARMM-GUI
+> Retrieve the modelled PDB structure from [Zenodo](https://doi.org/10.5281/zenodo.800651).
+[Navigate to CHARMM-GUI](http://www.charmm-gui.org/?doc=input/mdsetup) and use the Input Generator, specifically the Quick MD Simulator tool. Upload the PDB file, selecting 'CHARMM' as the file format. Press 'Next Step: Select Model/Chain' in the bottom right corner.
+> ![Snapshot of CHARMM-GUI Quick MD Simulator tool ]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-mdsimulator.png %} "The CHARMM-GUI Quick MD Simulator tool")
+{: .hands_on}
 
 ### Select both protein and ligand models
-Two model chains are presented for selection: the protein (PROA) and the hetero residue, which is the ligand or glycan in this case (HETA). Select both, and press 'Next Step: Generate PDB' in the bottom right corner.
-
-![Snapshot of CHARMM-GUI model section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-modelchain.png %} "Select both ligand and protein models in CHARMM-GUI")
+> ### {% icon hands_on %} Hands-on: Generate PDB file
+> Two model chains are presented for selection: the protein (PROA) and the hetero residue, which is the ligand or glycan in this case (HETA). Select both, and press 'Next Step: Generate PDB' in the bottom right corner.
+> ![Snapshot of CHARMM-GUI model section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-modelchain.png %} "Select both ligand and protein models in CHARMM-GUI")
+{: .hands_on}
 
 ### Manipulate the system
-Rename the hetero chain to BGLC and add disulfide bonds.
-![Snapshot of CHARMM-GUI renaming section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-manipulate.png %} "Rename the chains in CHARMM-GUI")
+> ### {% icon hands_on %} Hands-on: Make necessary modifications
+> Rename the hetero chain to BGLC and add disulfide bonds.
+> ![Snapshot of CHARMM-GUI renaming section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-manipulate.png %} "Rename the chains in CHARMM-GUI")
+{: .hands_on}
 
 ### Set up the waterbox and add ions
-Set up a waterbox. Use a size of 10 angstroms and choose a cubic box ('rectangular' option).
-
-![Snapshot of CHARMM-GUI waterbox section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-waterbox.png %} "Setting up a waterbox in CHARMM-GUI")
+> ### {% icon hands_on %} Hands-on: Solvate the protein
+> Set up a waterbox. Use a size of 10 angstroms and choose a cubic box ('rectangular' option).
+> ![Snapshot of CHARMM-GUI waterbox section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-waterbox.png %} "Setting up a waterbox in CHARMM-GUI")
+{: .hands_on}
 
 > > ### {% icon question %} Question
 > >
@@ -192,13 +208,16 @@ Set up a waterbox. Use a size of 10 angstroms and choose a cubic box ('rectangul
 
 ### Generate the FFT automatically
 
-Particle Mesh Ewald (PME) summation is the method being used to calculate long-range interactions in this system. To improve the computational time a Fast Fourier Transform (FFT) is used. A detailed discussion of FFT will not be presented here; there are many articles on the subject. Try [Wikipedia](https://en.wikipedia.org/wiki/Ewald_summation) and [Ewald summation techniques in perspective: a survey](https://doi.org/10.1016/0010-4655(96)00016-1).
-![Snapshot of CHARMM-GUI FFT section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-fft.png %} "Setting up a FFT in CHARMM-GUI")
+> ### {% icon hands_on %} Hands-on: Generate the FFT
+> Particle Mesh Ewald (PME) summation is the method being used to calculate long-range interactions in this system. To improve the computational time a Fast Fourier Transform (FFT) is used. A detailed discussion of FFT will not be presented here; there are many articles on the subject. Try [Wikipedia](https://en.wikipedia.org/wiki/Ewald_summation) and [Ewald summation techniques in perspective: a survey](https://doi.org/10.1016/0010-4655(96)00016-1).
+> ![Snapshot of CHARMM-GUI FFT section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-fft.png %} "Setting up a FFT in CHARMM-GUI")
+{: .hands_on}
 
 ### Download the output
-The output is a .tgz file (a tarball or zipped tarball). Inside the archive you will see all inputs and outputs from CHARMM-GUI.
-
-![Snapshot of CHARMM-GUI NAMD output section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-namdoutput.png %} "NAMD output from CHARMM-GUI")
+> ### {% icon hands_on %} Hands-on: Solvate the protein
+> The output is a .tgz file (a tarball or zipped tarball). Inside the archive you will see all inputs and outputs from CHARMM-GUI.
+> ![Snapshot of CHARMM-GUI NAMD output section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-namdoutput.png %} "NAMD output from CHARMM-GUI")
+{: .hands_on}
 
 > ### {% icon tip %} What is a .tgz file?
 >
@@ -209,12 +228,13 @@ The output is a .tgz file (a tarball or zipped tarball). Inside the archive you 
 
 
 ### Upload to Galaxy
-
+> ### {% icon hands_on %} Hands-on: Upload files to Galaxy
 Upload the following files to your BRIDGE instance and ensure the correct datatype is selected:
  - step3_pbcsetup.xplor.ext.psf -> xplor psf input (psf format)
  - step3_pbcsetup.pdb -> pdb input (pdb format)
  - Checkfft.str -> PME grid specs (txt format)
 - step2.1_waterbox.prm -> waterbox prm input (txt format)
+{: .hands_on}
 
 You are now ready to run the NAMD workflow, which is discussed in another [tutorial]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %}).
 

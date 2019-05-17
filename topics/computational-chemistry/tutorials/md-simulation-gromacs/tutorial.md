@@ -14,6 +14,12 @@ time_estimation: 2H
 key_points:
 - Molecular dynamics produces a trajectory describing the atomic motion of a system.
 - Preparation of the system is required; setup, solvation, minimization, equilibration.
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: computational-chemistry
+    tutorials:
+      - analysis-md-simulations
 contributors:
 - simonbray
 
