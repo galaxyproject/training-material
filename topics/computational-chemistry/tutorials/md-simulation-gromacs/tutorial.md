@@ -25,7 +25,7 @@ contributors:
 
 Molecular dynamics (MD) is a method to simulate molecular motion by iterative application of Newton's laws of motion. It is often applied to large biomolecules such as proteins or nucleic acids.
 
-Multiple packages exist for performing MD simulations. One of the most popular is the open-source GROMACS, which is the subject of this tutorial. Other MD packages which are also wrapped in Galaxy are [NAMD]({{ site.baseurl }}{% link topics/computational-chemistry/md-simulation-namd/tutorial.html %}) and CHARMM (available in the [docker container](https://github.com/scientificomputing/BRIDGE)).
+Multiple packages exist for performing MD simulations. One of the most popular is the open-source GROMACS, which is the subject of this tutorial. Other MD packages which are also wrapped in Galaxy are [NAMD]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %}) and CHARMM (available in the [docker container](https://github.com/scientificomputing/BRIDGE)).
 
 This is a introductory guide to using GROMACS in Galaxy to prepare and perform molecular dynamics on a small protein. It is based on the GROMACS tutorial provided by Justin Lemkul [here](http://www.mdtutorials.com/gmx/lysozyme/index.html) - please consult it if you are interested in a more detailed, technical guide to GROMACS. For the tutorial, we will perform our simulations on hen egg white lysozyme.
 
@@ -40,13 +40,9 @@ This is a introductory guide to using GROMACS in Galaxy to prepare and perform m
 
 
 
-# Workflow
+# Process
 
-A GROMACS workflow is provided for this tutorial [here](https://usegalaxy.eu/u/simonbray/w/molecular-dynamics-1); we will discuss the tools that make up each of the steps.
-
-![GROMACS workflow]({% link topics/computational-chemistry/images/workflow_gromacs.png %} "The basic GROMACS workflow")
-
-Overall, the workflow takes a PDB (Protein Data Bank) structure file as input and returns a 'trajectory'. This is a binary file that records the atomic coordinates at multiple time steps, and therefore shows the dynamic motion of the molecule. Using visualization software, we can display this trajectory as a film displaying the molecular motion of the protein.
+Prior to performing simulations, a number of preparatory steps need to be executed.
 
 The process can be divided into multiple stages:
  1. Setup (loading data, solvation i.e. addition of water and ions)
@@ -54,28 +50,36 @@ The process can be divided into multiple stages:
  3. Equilibration of the solvent around the protein (with two ensembles, NVT and NPT)
  4. Production simulation, which produces our trajectory.
 
-We will discuss each tool making up the workflow in more detail.
+This is a binary file that records the atomic coordinates at multiple time steps, and therefore shows the dynamic motion of the molecule. Using visualization software, we can display this trajectory as a film displaying the molecular motion of the protein. We will discuss each step making up this workflow in more detail.
+
 
 # Getting data
 To perform simulation, an initial PDB file is required. This should be 'cleaned' of solvent and any other non-protein atoms. Solvent will be re-added in a subsequent step.
 
-A prepared file is available via Zenodo. Alternatively, you can prepare the file yourself. Download a PDB structure file from the [Protein Data Bank](https://www.rcsb.org/) and remove the unwanted atoms using [grep](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool). This simply removes the lines in the PDB file that refer to the unwanted atoms.
+A prepared file is available via Zenodo. Alternatively, you can prepare the file yourself. Download a PDB structure file from the [Protein Data Bank](https://www.rcsb.org/) and remove the unwanted atoms using the grep text processing tool. This simply removes the lines in the PDB file that refer to the unwanted atoms.
 
 
 > ### {% icon hands_on %} Hands-on: Upload an initial structure
-> First of all, create a new history.
+> 1. First of all, create a new history and give it a name.
 >
 >    {% include snippets/create_new_history.md %}
 >
-> **Option 1**
-> 1. Upload the file in Galaxy from the Zenodo link: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2598415.svg)](https://doi.org/10.5281/zenodo.2598415)
->
-> **Option 2**
-> 1. Go to the [PDB website](https://www.rcsb.org/) and search for the code 1AKI. Download the structure and upload to Galaxy.
-> 2. Use [grep](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool) to remove all lines that refer to non-protein atoms. Select 'Don't Match', enter 'HETATM' under 'Regular Expression'.
+> 2. Upload the file in Galaxy from the PDB:
+>    >    ```
+>    > https://files.rcsb.org/download/1AKI.pdb
+>    >    ```
 > {% include snippets/import_via_link.md %}
-{: .hands_on}
+>
+> 3. Use the **grep** {% icon tool %} text processing tool to remove all lines that refer to non-protein atoms.
+>    - *"Select lines from"*: uploaded PDB file
+>    - *"that"*: `Don't Match`
+>    - *"Regular Expression"*: `HETATM`
+> Alternatively, if you prefer to upload the cleaned file directly from Zenodo, you can do so with the following link:
+>    >    ```
+>    > check when Zenodo is running again
+>    >    ```
 
+{: .hands_on}
 > ### {% icon tip %} Background: What is the PDB (Protein Data Bank) and format?
 >
 > The Protein Data Bank (PDB) format contains atomic coordinates of biomolecules and provides a standard representation for macromolecular structure data derived from X-ray diffraction and NMR studies. Each structure is stored under a four-letter accession code. For example, the PDB file we will use is assigned the code [1AKI](https://www.rcsb.org/pdb/explore/explore.do?structureId=1AKI)).
@@ -89,7 +93,7 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 ## Lysozyme
 The protein we will look at in this tutorial is hen egg white [lysozyme](https://en.wikipedia.org/wiki/Lysozyme), a widely studied enzyme which is capable of breaking down the polysaccharides of many bacterial cell walls. It is a small (129 residues), highly stable globular protein, which makes it ideal for our purposes.
 
-![Structure of lysozyme openly available from https://commons.wikimedia.org/wiki/File:Lysozyme.png]({% link topics/computational-chemistry/images/Lysozyme.png %} "Structure of lysozyme")
+![Structure of lysozyme openly available from https://commons.wikimedia.org/wiki/File:Lysozyme.png]({{ site.baseurl }}{% link topics/computational-chemistry/images/Lysozyme.png %} "Structure of lysozyme")
 
 # Setup
 
@@ -132,10 +136,7 @@ In summary, this tool will:
 
 The next stage is protein solvation, performed using **GROMACS solvation and adding ions** {% icon tool %}. Water molecules are added to the structure and topology files to fill the unit cell. At this stage sodium or chloride ions are also automatically added to neutralize the charge of the system. In our case, as lysozyme has a charge of +8, 8 chloride anions are added.
 
-This tool will:
-- add water molecules to fill the box defined in the setup
-
-![Solvated protein]({% link topics/computational-chemistry/images/solvated_protein.png %} "Solvated protein in a cubic unit cell")
+![Solvated protein]({{ site.baseurl }}{% link topics/computational-chemistry/images/solvated_protein.png %} "Solvated protein in a cubic unit cell")
 
 > ### {% icon hands_on %} Hands-on: solvation
 >
@@ -152,11 +153,6 @@ This tool will:
 To remove any steric clashes or unusual geometry which would artificially raise the energy of the system, we must relax the structure by running an energy minimization (EM) algorithm.
 
 Here, and in the later steps, two options are presented under 'Parameter input'. Firstly, the default setting, which we will use for this tutorial, requires options to be selected through the Galaxy interface. Alternatively, you can choose to upload an MDP (molecular dynamics parameters) file to define the simulation parameters. Using your own MDP file will allow greater customization, as not all parameters are implemented in Galaxy (yet); however, it requires a more advanced knowledge of GROMACS. Description of all parameters can be found [here](http://manual.gromacs.org/documentation/2018/user-guide/mdp-options.html).
-
-![Parameter input]({% link topics/computational-chemistry/images/parameter_input.png %} "Choice of default or customizable parameter input")
-
-This tool will:
-- Run an energy minimization algorithm on the system.
 
 > ### {% icon hands_on %} Hands-on: energy minimization
 >
@@ -272,11 +268,17 @@ Now that equilibration is complete, we can release the position restraints. We a
 >    - *"Generate detailed log"*: `yes`
 {: .hands_on}
 
+# Workflow
+
+A GROMACS workflow is provided for this tutorial. Overall, the workflow takes a PDB (Protein Data Bank) structure file as input and returns a MD trajectory.
+
+![GROMACS workflow]({{ site.baseurl }}{% link topics/computational-chemistry/images/workflow_gromacs.png %} "The basic GROMACS workflow")
+
 # Conclusion
 
-After completing the steps, or running the workflow, we have successfully produced a trajectory (the xtc file) which describes the atomic motion of the system. This can be viewed using molecular visualization software or analysed further; please visit the visualization and [analysis]({{ site.baseurl }}{% link topics/computational-chemistry/analysis-md-simulations/tutorial.html %}) tutorials for more information.
+After completing the steps, or running the workflow, we have successfully produced a trajectory (the xtc file) which describes the atomic motion of the system. This can be viewed using molecular visualization software or analysed further; please visit the visualization and [analysis]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.md %}) tutorials for more information.
 
-![Trajectory]({% link topics/computational-chemistry/images/traj.gif %} "Trajectory produced using the GROMACS workflow, visualized with the NGL viewer")
+![Trajectory]({{ site.baseurl }}{% link topics/computational-chemistry/images/traj.gif %} "Trajectory produced using the GROMACS workflow, visualized with the NGL viewer")
 
 
 {:.no_toc}
