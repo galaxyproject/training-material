@@ -50,7 +50,7 @@ The process can be accomplished by selecting each tool from the tools menu, or b
 
 
 
-![Snapshot of CHARMM and NAMD analysis workflow](images/NAMD_CHARMMGUI_workflow.png"A simple simulation workflow starting with CHARMM for setup and NAMD to continue the production simulation")
+![Snapshot of CHARMM and NAMD analysis workflow]({% link topics/computational-chemistry/images/NAMD_CHARMMGUI_workflow.png %} "A simple simulation workflow starting with CHARMM for setup and NAMD to continue the production simulation")
 
 
 
@@ -109,17 +109,17 @@ This tools will:
 
 At this point we are ready to run the simulation workflow, which uses NAMD as a molecular dynamics engine. An NVT simulation is followed by an NPT simulation.
 
-![Snapshot of NAMD analysis workflow](images/NAMD_workflow.png "A simple NAMD simulation workflow")
+![Snapshot of NAMD analysis workflow]({% link topics/computational-chemistry/images/NAMD_workflow.png %} "A simple NAMD simulation workflow")
 
 
 
 > ### {% icon hands_on %} Hands-on: Access the workflow
 > Access the published workflows
-> ![List of published workflows](images/published_workflows_update.png "Published workflows")
+> ![List of published workflows]({% link topics/computational-chemistry/images/published_workflows_update.png %} "Published workflows")
 > Choose to import the NAMD MD workflow from published workflows
-> ![Import workflow](images/import_workflow.png "Import workflow")
+> ![Import workflow]({% link topics/computational-chemistry/images/import_workflow.png %} "Import workflow")
 > Choose to run a workflow from your available workflows
-> ![Your workflows](images/workflows_yours.png "Your workflows")
+> ![Your workflows]({% link topics/computational-chemistry/images/workflows_yours.png %} "Your workflows")
 {: .hands_on}
 
 
@@ -145,7 +145,7 @@ This tool runs classical molecular dynamics simulations in NAMD using an NVT ens
 >    - *"Simulation Time (ps)"*: `10`
 >    - *"Number of processors"*: `4`
 >
-> ![Snapshot of NAMD NVT tool parameters](images/namd_nvt_tool_params.png "NAMD NVT parameters")
+> ![Snapshot of NAMD NVT tool parameters]({% link topics/computational-chemistry/images/namd_nvt_tool_params.png %} "NAMD NVT parameters")
 {: .hands_on}
 
 
@@ -173,7 +173,7 @@ This tool runs classical molecular dynamics simulations in NAMD using an NPT ens
 >    - *"Simulation Time (ps)"*: `15`
 >    - *"Number of processors"*: `4`
 > 
-> ![Snapshot of NAMD NPT tool parameters](images/namd_npt_tool_params.png "NAMD NPT parameters")
+> ![Snapshot of NAMD NPT tool parameters]({% link topics/computational-chemistry/images/namd_npt_tool_params.png %} "NAMD NPT parameters")
 {: .hands_on}
 
 

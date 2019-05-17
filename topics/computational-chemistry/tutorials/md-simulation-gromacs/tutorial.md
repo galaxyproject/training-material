@@ -44,7 +44,7 @@ This is a introductory guide to using GROMACS in Galaxy to prepare and perform m
 
 A GROMACS workflow is provided for this tutorial [here](https://usegalaxy.eu/u/simonbray/w/molecular-dynamics-1); we will discuss the tools that make up each of the steps.
 
-![GROMACS workflow](images/workflow_gromacs.png "The basic GROMACS workflow")
+![GROMACS workflow]({% link topics/computational-chemistry/images/workflow_gromacs.png %} "The basic GROMACS workflow")
 
 Overall, the workflow takes a PDB (Protein Data Bank) structure file as input and returns a 'trajectory'. This is a binary file that records the atomic coordinates at multiple time steps, and therefore shows the dynamic motion of the molecule. Using visualization software, we can display this trajectory as a film displaying the molecular motion of the protein.
 
@@ -89,7 +89,7 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 ## Lysozyme
 The protein we will look at in this tutorial is hen egg white [lysozyme](https://en.wikipedia.org/wiki/Lysozyme), a widely studied enzyme which is capable of breaking down the polysaccharides of many bacterial cell walls. It is a small (129 residues), highly stable globular protein, which makes it ideal for our purposes.
 
-![Structure of lysozyme openly available from https://commons.wikimedia.org/wiki/File:Lysozyme.png](images/Lysozyme.png "Structure of lysozyme")
+![Structure of lysozyme openly available from https://commons.wikimedia.org/wiki/File:Lysozyme.png]({% link topics/computational-chemistry/images/Lysozyme.png %} "Structure of lysozyme")
 
 # Setup
 
@@ -135,7 +135,7 @@ The next stage is protein solvation, performed using **solvate** {% icon tool %}
 This tool will:
 - add water molecules to fill the box defined in the setup
 
-![Solvated protein](images/solvated_protein.png "Solvated protein in a cubic unit cell")
+![Solvated protein]({% link topics/computational-chemistry/images/solvated_protein.png %} "Solvated protein in a cubic unit cell")
 
 > ### {% icon hands_on %} Hands-on:
 >
@@ -153,7 +153,7 @@ To remove any steric clashes or unusual geometry which would artificially raise 
 
 Here, and in the later steps, two options are presented under 'Parameter input'. Firstly, the default setting, which we will use for this tutorial, requires options to be selected through the Galaxy interface. Alternatively, you can choose to upload an MDP (molecular dynamics parameters) file to define the simulation parameters. Using your own MDP file will allow greater customization, as not all parameters are implemented in Galaxy (yet); however, it requires a more advanced knowledge of GROMACS. Description of all parameters can be found [here](http://manual.gromacs.org/documentation/2018/user-guide/mdp-options.html).
 
-![Parameter input](images/parameter_input.png "Choice of default or customizable parameter input")
+![Parameter input]({% link topics/computational-chemistry/images/parameter_input.png %} "Choice of default or customizable parameter input")
 
 This tool will:
 - Run an energy minimization algorithm on the system.
@@ -276,7 +276,7 @@ Now that equilibration is complete, we can release the position restraints. We a
 
 After completing the steps, or running the workflow, we have successfully produced a trajectory (the xtc file) which describes the atomic motion of the system. This can be viewed using molecular visualization software or analysed further; please visit the visualization and [analysis](../analysis-md-simulations/tutorial.html) tutorials for more information.
 
-![Trajectory](images/traj.gif "Trajectory produced using the GROMACS workflow, visualized with the NGL viewer")
+![Trajectory]({% link topics/computational-chemistry/images/traj.gif %} "Trajectory produced using the GROMACS workflow, visualized with the NGL viewer")
 
 
 {:.no_toc}
