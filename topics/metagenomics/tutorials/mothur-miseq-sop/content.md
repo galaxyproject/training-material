@@ -1,3 +1,12 @@
+{% if include.short %}
+  {% assign other_tutorial = "../mothur-miseq-sop/tutorial.html" %}
+  {% assign other_tutorial_name = "extended" %}
+{% else %}
+  {% assign other_tutorial = "../mothur-miseq-sop-short/tutorial.html" %}
+  {% assign other_tutorial_name = "short"%}
+{% endif %}
+
+
 # Overview
 {:.no_toc}
 
@@ -223,6 +232,7 @@ convention, so that our tools will know which files belong together. We do this 
 
 
 # Quality Control
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="quality-control" %}
 
 For more information on the topic of quality control, please see our training materials
 [here]({{site.baseurl}}{% link topics/sequence-analysis/index.md %}).
@@ -473,16 +483,16 @@ the number of duplicates of this sequence observed in each sample.
 > report both the number of unique *representative sequences* as well as the *total sequences* they represent.
 {: .comment}
 
+
+
 # Sequence Alignment
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="sequence-alignment" %}
 
 For more information on the topic of alignment, please see our training materials
 [here]({{site.baseurl}}{% link topics/sequence-analysis/index.md %})
 
 We are now ready to align our sequences to the reference. This is an important
 step to improve the clustering of your OTUs {% cite Schloss2012 %}.
-
-
-
 
 
 > ### {% icon hands_on %} Hands-on: Align sequences
@@ -766,6 +776,7 @@ way of doing this is to use the abundant sequences as our reference.
 
 
 # Taxonomic Classification
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="taxonomic-classification" %}
 
 Now that we have thoroughly cleaned our data, we are finally ready to assign a taxonomy to our sequences.
 
@@ -862,6 +873,7 @@ our sequencing and bioinformatics pipeline is.
 
 
 # Optional: Calculate error rates based on our mock community
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="optional-calculate-error-rates-based-on-our-mock-community" %}
 
 
 > ### {% icon comment %} Skipping the mock community analysis
@@ -1083,7 +1095,9 @@ best efforts, some chimeras or other contaminations may have slipped through our
 Now that we have assessed our error rates we are ready for some real analysis.
 
 
-# OTU-based Analysis
+# OTU Clustering
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="otu-clustering" %}
+
 
 In this tutorial we will continue with an OTU-based approach, for the phylotype and phylogenic
 approaches, please refer to the [mothur wiki page](https://www.mothur.org/wiki/MiSeq_SOP).
