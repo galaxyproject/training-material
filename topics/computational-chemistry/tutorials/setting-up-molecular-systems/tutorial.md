@@ -72,7 +72,7 @@ In this section we'll access the PDB, download the correct structure, import it 
 > ### {% icon details %} Background: Why choose a cellulase?
 >
 > Using enzymes to break down abundant cellulose into disaccharide units (cellobiose) is a method to optimise the
-> biofuel process.
+> biofuel process. {% cite barnett11 %}
 >
 > More resources:
 >
@@ -111,7 +111,7 @@ The 7CEL [PDB](https://files.rcsb.org/download/7CEL.pdb) does not include a comp
 {: .hands_on}
 
 # Modelling with CHARMM-GUI
-It is convenient to set up the molecular system outside Galaxy using a tool such as CHARMM-GUI. Alternative methods are possible - see the [GROMACS tutorial]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/md-simulation-gromacs/tutorial.md %}) for an example.
+It is convenient to set up the molecular system outside Galaxy using a tool such as CHARMM-GUI. Alternative methods are possible - see the [GROMACS tutorial]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/md-simulation-gromacs/tutorial.md %}) for an example. {% cite jo17 %}
 
 > ### {% icon tip %} Tip: Viewing figures
 > * Some of the figures are screenshots and it may be difficult to make out details

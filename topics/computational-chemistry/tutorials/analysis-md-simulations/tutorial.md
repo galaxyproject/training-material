@@ -19,7 +19,13 @@ requirements:
 time_estimation: 1H
 key_points:
 - Multiple analyses including timeseries, RMSD, PCA are available
-- Analysis tools allow a further chemical understanding of the system 
+- Analysis tools allow a further chemical understanding of the system
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: computational-chemistry
+    tutorials:
+      - analysis-md-simulations
 contributors:
 - chrisbarnettster
 - tsenapathi

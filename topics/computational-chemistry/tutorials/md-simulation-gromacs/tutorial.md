@@ -33,7 +33,7 @@ Molecular dynamics (MD) is a method to simulate molecular motion by iterative ap
 
 Multiple packages exist for performing MD simulations. One of the most popular is the open-source GROMACS, which is the subject of this tutorial. Other MD packages which are also wrapped in Galaxy are [NAMD]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %}) and CHARMM (available in the [docker container](https://github.com/scientificomputing/BRIDGE)).
 
-This is a introductory guide to using GROMACS in Galaxy to prepare and perform molecular dynamics on a small protein. For the tutorial, we will perform our simulations on hen egg white lysozyme.
+This is a introductory guide to using GROMACS in Galaxy to prepare and perform molecular dynamics on a small protein. For the tutorial, we will perform our simulations on hen egg white lysozyme. {% cite abraham15 %}
 
 > ### {% icon comment %} More information
 > This guide is based on the GROMACS tutorial provided by Justin Lemkul [here](http://www.mdtutorials.com/gmx/lysozyme/index.html) - please consult it if you are interested in a more detailed, technical guide to GROMACS. 
