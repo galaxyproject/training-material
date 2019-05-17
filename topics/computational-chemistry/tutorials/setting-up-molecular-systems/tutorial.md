@@ -29,7 +29,8 @@ follow_up_training:
 contributors:
   - chrisbarnettster
   - simonbray
-
+level:
+- Intermediate
 ---
 
 > ### {% icon comment %} Audience
