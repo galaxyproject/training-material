@@ -1027,7 +1027,7 @@ and comparing the results with the expected outcome.
 >
 >     Next we group sequences into OTUs
 >
-> 2. **Cluster** {% icon tool %} with the following parameters
+> 2. **Cluster - Assign sequences to OTUs** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"column"*: the `dist` output from **Dist.seqs** {% icon tool %}
 >   - {% icon param-file %} *"count"*: the `count table` from **Get.groups** {% icon tool %}
 >
@@ -1264,7 +1264,9 @@ dataset by subsampling.
 
 {% endunless %}
 
-## Calculate Species Diversity
+
+# Diversity Analysis
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="diversity-analysis" %}
 
 Species diversity is a valuable tool for describing the ecological complexity of a single sample (alpha diversity)
 or between samples (beta diversity). However, diversity is not a physical quantity that can be measured directly,
@@ -1315,9 +1317,33 @@ and many different metrics have been proposed to quantify diversity [Finotello e
 ### Alpha diversity
 
 In order to estimate alpha diversity of the samples, we first generate the *rarefaction curves*. Recall that
-rarefaction measure the number of observed OTUs as a function of the subsampling size.
+rarefaction measures the number of observed OTUs as a function of the subsampling size.
 
 {% include topics/metagenomics/tutorials/mothur-miseq-sop/background_rarefaction.md %}
+
+
+{% if include.short %}
+
+We will use a plotting tool to visualize the rarefaction curves, and use **Summary.single** {% icon tool %} to calculate a number of different alpha diversity metrics on all our samples.
+
+> ### {% icon hands_on %} Hands-on: Alpha Diversity
+>
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow6_alpha_diversity.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
+>
+>    {% include snippets/import_workflow.md %}
+>
+> 2. Run **Workflow 6: Alpha Diversity** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *"1: Shared File"*: the `Shared file` output from **Make.shared** {% icon tool %}
+>
+>    {% include snippets/run_workflow.md %}
+>
+{: .hands_on}
+
+{% else %}
+
 
 We calculate rarefaction curves with the **Rarefaction.single** {% icon tool %} tool:
 
@@ -1348,9 +1374,10 @@ to see is the number of additional OTUs identified when adding more sequences re
 we have covered our full diversity. This information would be easier to interpret in the form of a graph.
 Let's plot the rarefaction curve for a couple of our sequences:
 
+
 > ### {% icon hands_on %} Hands-on: Plot Rarefaction
 >
-> - **Plotting tool** {% icon tool %} with the following parameters
+> - **Plotting tool - for multiple series and graph types** {% icon tool %} with the following parameters
 >   - *"Plot Title"*: `Rarefaction`
 >   - *"Label for x axis"*: `Number of Sequences`
 >   - *"Label for y axis"*: `Number of OTUs`
@@ -1364,11 +1391,14 @@ Let's plot the rarefaction curve for a couple of our sequences:
 >
 {: .hands_on}
 
-From the resulting image we can see that the rarefaction curves for all samples have started to level
+{% endif %}
+
+View the rarefaction plot output. From this image can see that the rarefaction curves for all samples have started to level
 off so we are confident we cover a large part of our sample diversity:
 
 ![Rarefaction curves](../../images/rarefaction_curves.png)
 
+{% unless include.short %}
 
 Finally, let's use the **Summary.single** tool to generate a summary report.  The following step
 will randomly subsample down to 2389 sequences, repeat this process 1000 times, and report several metrics:
@@ -1381,7 +1411,16 @@ will randomly subsample down to 2389 sequences, repeat this process 1000 times, 
 >   - *"size"*: `2389`
 {: .hands_on}
 
-The data will be outputted to a table called the *summary file*:
+{% endunless %}
+
+
+View the `summary` output from **Summary.single** {% icon tool %}. This shows several alpha diversity metrics:
+- [sobs](https://www.mothur.org/wiki/Sobs): observed richness (number of OTUs)
+- [coverage](https://mothur.org/wiki/Coverage): Good's coverage index
+- [invsimpson](https://en.wikipedia.org/wiki/Diversity_index#Simpson_index): Inverse Simpson Index
+- [nseqs](https://www.mothur.org/wiki/Nseqs): number of sequences
+
+
 
 ```
 label   group   sobs          coverage    invsimpson   invsimpson_lci   invsimpson_hci  nseqs
@@ -1406,11 +1445,11 @@ label   group   sobs          coverage    invsimpson   invsimpson_lci   invsimps
 0.03    F3D9    162.000000    0.994803    24.120541    23.105499        25.228865       5773.000000
 ```
 
-This shows the [number of sequences](https://www.mothur.org/wiki/Nseqs), the [sample coverage](https://www.mothur.org/wiki/Coverage), the number of [observed OTUs](https://www.mothur.org/wiki/Sobs), and the [Inverse Simpson diversity estimate](https://www.mothur.org/wiki/Invsimpson) for each group.
-
 There are a couple of things to note here:
 * The differences in diversity and richness between early and late time points is small.
 * All sample coverage is above 97%.
+
+There are many more diversity metrics, and for more information about the different calculators available in mothur, see [the mothur wiki page](https://mothur.org/wiki/Calculators)
 
 We could perform additional statistical tests (e.g. ANOVA) to confirm our feeling that there is no significant difference based on sex or early vs. late, but this is beyond the scope of this tutorial.
 
@@ -1418,8 +1457,36 @@ We could perform additional statistical tests (e.g. ANOVA) to confirm our feelin
 
 Beta diversity is a measure of the similarity of the membership and structure found between *different* samples.
 The default calculator in the following section is *thetaYC*, which is the [Yue & Clayton theta similarity
-coefficient](http://csyue.nccu.edu.tw/2005communicationindex.pdf).
+coefficient](http://csyue.nccu.edu.tw/2005communicationindex.pdf). We will also calculate the [Jaccard index](https://en.wikipedia.org/wiki/Jaccard_index) (termed `jclass` in mothur).
 
+{% if include.short %}
+
+In the following workflow we will:
+- Calculate pairwise distances between samples using the *thetaYC* calculator (**Dist.shared** {% icon tool %})
+- Create a **Venn diagram** to show the number of overlapping OTUs between 4 of our samples
+- Create a **heatmap** of the intersample similarities (**Heatmap.sim** {% icon tool %})
+- Create **pylogenetic tree** showing the relatedness of samples (**Newick Display** {% icon tool %})
+
+
+> ### {% icon hands_on %} Hands-on: Beta Diversity
+>
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow7_beta_diversity.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
+>
+>    {% include snippets/import_workflow.md %}
+>
+> 2. Run **Workflow 7: Beta Diversity** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *"1: Shared File"*: the `Shared file` output from **Make.shared** {% icon tool %}
+>    - {% icon param-collection %} *"2: Subsample shared"*: the `shared` output from **Sub.sample** {% icon tool %}
+>
+>    {% include snippets/run_workflow.md %}
+>
+{: .hands_on}
+
+
+{% else %}
 We calculate this with the **Dist.shared** tool, which will rarefy our data.
 
 > ### {% icon hands_on %} Hands-on: Beta diversity
@@ -1438,6 +1505,8 @@ We calculate this with the **Dist.shared** tool, which will rarefy our data.
 > <!-- TODO: add image conversion tool for Galaxy instances that do not support viewing of SVGs files? -->
 {: .hands_on}
 
+{% endif %}
+
 Look at some of the resulting heatmaps (you may have to download the SVG images first). In all of these
 heatmaps the red colors indicate communities that are more similar than those with black colors.
 
@@ -1448,6 +1517,9 @@ For example this is the heatmap for the `thetayc` calculator (output `thetayc.0.
 and the jclass calulator (output `jclass.0.03.lt.ave`):
 
 ![Heatmap for the jclass calculator](../../images/heatmap.sim_jclass.png)
+
+
+{% unless include.short %}
 
 When generating Venn diagrams we are limited by the number of samples that we can analyze simultaneously.
 Let's take a look at the Venn diagrams for the first 4 time points of female 3 using the **Venn** tool:
@@ -1461,12 +1533,17 @@ Let's take a look at the Venn diagrams for the first 4 time points of female 3 u
 
 This generates a 4-way Venn diagram and a table listing the shared OTUs.
 
+{% endunless %}
+
+Examine the Venn diagram:
+
 ![Venn diagram and table with shared OTUs](../../images/venn.png)
 
 This shows that there were a total of 180 OTUs observed between the 4 time points. Only 76 of those OTUs were
 shared by all four time points. We could look deeper at the shared file to see whether those OTUs were
 numerically rare or just had a low incidence.
 
+{% unless include.short %}
 Next, let's generate a dendrogram to describe the similarity of the samples to each other. We will generate a
 dendrogram using the jclass and thetayc calculators within the **Tree.shared** tool:
 
@@ -1480,8 +1557,11 @@ dendrogram using the jclass and thetayc calculators within the **Tree.shared** t
 >  - {% icon param-collection %} *"Newick file"*: output from **Tree.shared** {% icon tool %}
 {: .hands_on}
 
+{% endunless %}
+
 Inspection of the the tree shows that the early and late communities cluster with themselves to the exclusion
 of the others.
+
 
 `thetayc.0.03.lt.ave`:
 
@@ -1494,7 +1574,7 @@ of the others.
 
 # Visualisations
 
-We may now wish to visualize our results. We can convert our *shared* file to the more widely used `biom` format and
+We may now wish to further visualize our results. We can convert our *shared* file to the more widely used `biom` format and
 view it in a platform like [Phinch](http://www.phinch.org/).
 
 ## Phinch
