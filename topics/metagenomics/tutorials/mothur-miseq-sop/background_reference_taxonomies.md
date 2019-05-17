@@ -1,4 +1,4 @@
-> ### {% icon comment %} Background: Taxonomic assignement
+> ### {% icon comment %} Background: Taxonomic assignment
 >
 > In this tutorial we will use the RDP classifier and reference taxonomy for classification, but there are several different taxonomic
 > assignment algorithms and reference databases available for this purpose.
