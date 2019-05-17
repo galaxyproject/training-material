@@ -101,7 +101,7 @@ RMSD, or root-mean-square deviation, is a standard measure of structural distanc
 
 > > ### {% icon question %} Question
 > >
-> > What can we learn from the RMSD analysis?
+> > What do the features in the RMSD plot tell us?
 > >
 > > > ### {% icon solution %} Solution
 > > > The increase in the RMSD plot with time shows the protein steadily deviates from its original conformation.
@@ -130,7 +130,7 @@ The root-mean-square fluctuation (RMSF) measures the average deviation of a part
 
 > > ### {% icon question %} Question
 > >
-> > What can we learn from the RMSF analysis?
+> > What can we learn from the features in the RMSF plot?
 > >
 > > > ### {% icon solution %} Solution
 > > > Higher RMSF values most likely are loop regions with more conformational flexibility, where the structure is not as well defined.
@@ -176,7 +176,7 @@ In summary:
 
 > > ### {% icon question %} Question
 > >
-> > What can we learn from the PCA?
+> > What do the features in the RMSD plot tell us? Do the principal coordinates have a meaning?
 > >
 > > > ### {% icon solution %} Solution
 > > > Here, PCA shows the statistically meaningful conformations in the CBH1 trajectory. The principal motions within the trajectory and the vital motions needed for conformational changes can be identified. Two distinct groupings along the PC1 plane, indicating a non-periodic conformational change, are identified. The groupings along the PC2 and PC3 planes do not completely cluster separately, implying that these global motions are periodic. The PC1 is linked to an active site motion that limits the motion to a key glycosidic bond.
