@@ -27,7 +27,11 @@ Molecular dynamics (MD) is a method to simulate molecular motion by iterative ap
 
 Multiple packages exist for performing MD simulations. One of the most popular is the open-source GROMACS, which is the subject of this tutorial. Other MD packages which are also wrapped in Galaxy are [NAMD]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %}) and CHARMM (available in the [docker container](https://github.com/scientificomputing/BRIDGE)).
 
-This is a introductory guide to using GROMACS in Galaxy to prepare and perform molecular dynamics on a small protein. It is based on the GROMACS tutorial provided by Justin Lemkul [here](http://www.mdtutorials.com/gmx/lysozyme/index.html) - please consult it if you are interested in a more detailed, technical guide to GROMACS. For the tutorial, we will perform our simulations on hen egg white lysozyme.
+This is a introductory guide to using GROMACS in Galaxy to prepare and perform molecular dynamics on a small protein. For the tutorial, we will perform our simulations on hen egg white lysozyme.
+
+> ### {% icon comment %} More information
+> This guide is based on the GROMACS tutorial provided by Justin Lemkul [here](http://www.mdtutorials.com/gmx/lysozyme/index.html) - please consult it if you are interested in a more detailed, technical guide to GROMACS. 
+{: .comment}
 
 > ### Agenda
 >
@@ -78,9 +82,10 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 >    >    ```
 >    > check when Zenodo is running again
 >    >    ```
-
 {: .hands_on}
-> ### {% icon tip %} Background: What is the PDB (Protein Data Bank) and format?
+
+
+> ### {% icon details %} Background: What is the PDB (Protein Data Bank) and format?
 >
 > The Protein Data Bank (PDB) format contains atomic coordinates of biomolecules and provides a standard representation for macromolecular structure data derived from X-ray diffraction and NMR studies. Each structure is stored under a four-letter accession code. For example, the PDB file we will use is assigned the code [1AKI](https://www.rcsb.org/pdb/explore/explore.do?structureId=1AKI)).
 >
@@ -88,7 +93,7 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 >
 >  -  Multiple structures are stored and can be queried at [https://www.rcsb.org/](https://www.rcsb.org/)
 >  - Documentation describing the PDB file format is available from the wwPDB at [http://www.wwpdb.org/documentation/file-format.php](http://www.wwpdb.org/documentation/file-format.php).
-{: .tip}
+{: .details}
 
 ## Lysozyme
 The protein we will look at in this tutorial is hen egg white [lysozyme](https://en.wikipedia.org/wiki/Lysozyme), a widely studied enzyme which is capable of breaking down the polysaccharides of many bacterial cell walls. It is a small (129 residues), highly stable globular protein, which makes it ideal for our purposes.

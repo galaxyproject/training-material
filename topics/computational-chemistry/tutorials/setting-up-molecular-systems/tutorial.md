@@ -52,7 +52,7 @@ To start we'll look at the PDB and find the entry for a fungal enzyme that cleav
 
 In this section we'll access the PDB, download the correct structure, import it and view in Galaxy.
 
-> ### {% icon tip %} Background: What is the PDB (Protein Data Bank) and format?
+> ### {% icon details %} Background: What is the PDB (Protein Data Bank) and format?
 >
 > The Protein Data Bank (PDB) format contains atomic coordinates of biomolecules and provides a standard representation for macromolecular structure data derived from X-ray diffraction and NMR studies. Each structure is stored under a four-letter accession code. For example, the PDB file we will use is assigned the code [7CEL](https://www.rcsb.org/pdb/explore/explore.do?structureId=7CEL)).
 >
@@ -60,10 +60,10 @@ In this section we'll access the PDB, download the correct structure, import it 
 >
 >  -  Multiple structures are stored and can be queried at [https://www.rcsb.org/](https://www.rcsb.org/)
 >  - Documentation describing the PDB file format is available from the wwPDB at [http://www.wwpdb.org/documentation/file-format.php](http://www.wwpdb.org/documentation/file-format.php).
-{: .tip}
+{: .details}
 
 
-> ### {% icon tip %} Background: Why choose a cellulase?
+> ### {% icon details %} Background: Why choose a cellulase?
 >
 > Using enzymes to break down abundant cellulose into disaccharide units (cellobiose) is a method to optimise the
 > biofuel process.
@@ -74,7 +74,7 @@ In this section we'll access the PDB, download the correct structure, import it 
   - [https://en.wikipedia.org/wiki/Biofuel](https://en.wikipedia.org/wiki/Biofuel)
   - [Fungal Cellulases](https://pubs.acs.org/doi/full/10.1021/cr500351c)
   - [Cellobiohydrolase I Induced Conformational Stability and Glycosidic Bond Polarization ](https://pubs.acs.org/doi/10.1021/ja103766w)
-{: .tip}
+{: .details}
 
 ## Get data
 
