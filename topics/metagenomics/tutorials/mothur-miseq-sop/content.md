@@ -1284,7 +1284,7 @@ and many different metrics have been proposed to quantify diversity [Finotello e
 > <br><br>
 > To understand the difference between richness and evenness, consider the following example:
 >
-> ![illustration of richness and evenness](../../images/richness-evenness.png)
+> ![illustration of richness and evenness](../../images/richness-evenness-blank.png)
 >
 > > ### {% icon question %} Question
 > > 1. Which of these communities has the highest richness?
@@ -1293,6 +1293,8 @@ and many different metrics have been proposed to quantify diversity [Finotello e
 > > > ### {% icon solution %} Solution
 > > > 1. Both communities have 4 different species, so they have same richness.
 > > > 2. Communty B is more even, because each species has the same abundance.
+> > >
+> > > ![illustration of richness and evenness](../../images/richness-evenness.png)
 > > {: .solution }
 > >
 > {: .question}
@@ -1314,7 +1316,8 @@ and many different metrics have been proposed to quantify diversity [Finotello e
 >
 {: .comment}
 
-### Alpha diversity
+## Alpha diversity
+
 
 In order to estimate alpha diversity of the samples, we first generate the *rarefaction curves*. Recall that
 rarefaction measures the number of observed OTUs as a function of the subsampling size.
@@ -1453,7 +1456,7 @@ There are many more diversity metrics, and for more information about the differ
 
 We could perform additional statistical tests (e.g. ANOVA) to confirm our feeling that there is no significant difference based on sex or early vs. late, but this is beyond the scope of this tutorial.
 
-### Beta diversity
+## Beta diversity
 
 Beta diversity is a measure of the similarity of the membership and structure found between *different* samples.
 The default calculator in the following section is *thetaYC*, which is the [Yue & Clayton theta similarity
