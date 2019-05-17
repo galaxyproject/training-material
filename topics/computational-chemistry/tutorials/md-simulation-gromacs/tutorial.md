@@ -25,7 +25,7 @@ contributors:
 
 Molecular dynamics (MD) is a method to simulate molecular motion by iterative application of Newton's laws of motion. It is often applied to large biomolecules such as proteins or nucleic acids.
 
-Multiple packages exist for performing MD simulations. One of the most popular is the open-source GROMACS, which is the subject of this tutorial. Other MD packages which are also wrapped in Galaxy are [NAMD](../md-simulation-namd/tutorial.html) and CHARMM (available in the [docker container](https://github.com/scientificomputing/BRIDGE)).
+Multiple packages exist for performing MD simulations. One of the most popular is the open-source GROMACS, which is the subject of this tutorial. Other MD packages which are also wrapped in Galaxy are [NAMD]({{ site.baseurl }}{% link topics/computational-chemistry/md-simulation-namd/tutorial.html %}) and CHARMM (available in the [docker container](https://github.com/scientificomputing/BRIDGE)).
 
 This is a introductory guide to using GROMACS in Galaxy to prepare and perform molecular dynamics on a small protein. It is based on the GROMACS tutorial provided by Justin Lemkul [here](http://www.mdtutorials.com/gmx/lysozyme/index.html) - please consult it if you are interested in a more detailed, technical guide to GROMACS. For the tutorial, we will perform our simulations on hen egg white lysozyme.
 
@@ -62,7 +62,7 @@ To perform simulation, an initial PDB file is required. This should be 'cleaned'
 A prepared file is available via Zenodo. Alternatively, you can prepare the file yourself. Download a PDB structure file from the [Protein Data Bank](https://www.rcsb.org/) and remove the unwanted atoms using [grep](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool). This simply removes the lines in the PDB file that refer to the unwanted atoms.
 
 
-> ### {% icon hands_on %} Hands-on:
+> ### {% icon hands_on %} Hands-on: Upload an initial structure
 > First of all, create a new history.
 >
 >    {% include snippets/create_new_history.md %}
@@ -93,7 +93,7 @@ The protein we will look at in this tutorial is hen egg white [lysozyme](https:/
 
 # Setup
 
-The **setup** {% icon tool %} tool uses the PDB input to create three files which will be required for MD simulation.
+The **GROMACS initial setup** {% icon tool %} tool uses the PDB input to create three files which will be required for MD simulation.
 
 Firstly, a topology for the protein structure is prepared. The topology file contains all the information required to describe the molecule for the purposes of simulation - atom masses, bond lengths and angles, charges. Note that this automatic construction of a topology is only possible if the building blocks of the molecules (i.e. amino acids in the case of a protein) are precalculated for the given force field. A force field and water model must be selected for topology calculation. Multiple choices are available for each; we will use the OPLS/AA force field and SPC/E water model.
 
@@ -106,9 +106,9 @@ In summary, this tool will:
 - convert a PDB protein structure into a GRO file, with the structure centered in a simulation box (unit cell)
 - create a position restraint file
 
-> ### {% icon hands_on %} Hands-on:
+> ### {% icon hands_on %} Hands-on: perform initial processing
 >
-> Run **setup** {% icon tool %} with the following parameters:
+> Run **GROMACS initial setup** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"PDB input file"*: `1AKI_clean.pdb` (Input dataset)
 >    - *"Water model"*: `SPC/E`
 >    - *"Force field"*: `OPLS/AA`
@@ -130,16 +130,16 @@ In summary, this tool will:
 
 # Solvation
 
-The next stage is protein solvation, performed using **solvate** {% icon tool %}. Water molecules are added to the structure and topology files to fill the unit cell. At this stage sodium or chloride ions are also automatically added to neutralize the charge of the system. In our case, as lysozyme has a charge of +8, 8 chloride anions are added.
+The next stage is protein solvation, performed using **GROMACS solvation and adding ions** {% icon tool %}. Water molecules are added to the structure and topology files to fill the unit cell. At this stage sodium or chloride ions are also automatically added to neutralize the charge of the system. In our case, as lysozyme has a charge of +8, 8 chloride anions are added.
 
 This tool will:
 - add water molecules to fill the box defined in the setup
 
 ![Solvated protein]({% link topics/computational-chemistry/images/solvated_protein.png %} "Solvated protein in a cubic unit cell")
 
-> ### {% icon hands_on %} Hands-on:
+> ### {% icon hands_on %} Hands-on: solvation
 >
-> **solvate** {% icon tool %} with the following parameters:
+> **GROMACS solvation and adding ions** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file produced by setup
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology produced by setup
 >    - *"Water model for solvation"*: `SPC`
@@ -158,9 +158,9 @@ Here, and in the later steps, two options are presented under 'Parameter input'.
 This tool will:
 - Run an energy minimization algorithm on the system.
 
-> ### {% icon hands_on %} Hands-on: 
+> ### {% icon hands_on %} Hands-on: energy minimization
 >
-> **EM** {% icon tool %} with the following parameters:
+> **GROMACS energy minimization** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
 >    - *"Generate detailed log"*: `yes`
@@ -188,7 +188,7 @@ Firstly, we perform equilibration using classical NVT dynamics.
 
 > ### {% icon hands_on %} Hands-on: NVT dynamics
 >
-> **nvt** {% icon tool %} with the following parameters:
+> **GROMACS NVT equilibration** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
 >    - {% icon param-file %} *"Position restraint file"*: Position restraint file produced by setup
@@ -214,7 +214,7 @@ Having stabilized the temperature of the system with NVT equilibration, we also 
 
 > ### {% icon hands_on %} Hands-on: NPT dynamics
 >
-> **npt** {% icon tool %} with the following parameters:
+> **GROMACS NVT equilibration** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
 >    - {% icon param-file %} *"Checkpoint (TOP) file"*: Checkpoint file produced by NVT equilibration
@@ -251,7 +251,7 @@ Now that equilibration is complete, we can release the position restraints. We a
 
 > ### {% icon hands_on %} Hands-on: Production simulation
 >
-> 1. **mdrun** {% icon tool %} with the following parameters:
+> 1. **GROMACS production simulation** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
 >    - {% icon param-file %} *"Checkpoint (TOP) file"*: Checkpoint file produced by NPT equilibration
@@ -274,7 +274,7 @@ Now that equilibration is complete, we can release the position restraints. We a
 
 # Conclusion
 
-After completing the steps, or running the workflow, we have successfully produced a trajectory (the xtc file) which describes the atomic motion of the system. This can be viewed using molecular visualization software or analysed further; please visit the visualization and [analysis](../analysis-md-simulations/tutorial.html) tutorials for more information.
+After completing the steps, or running the workflow, we have successfully produced a trajectory (the xtc file) which describes the atomic motion of the system. This can be viewed using molecular visualization software or analysed further; please visit the visualization and [analysis]({{ site.baseurl }}{% link topics/computational-chemistry/analysis-md-simulations/tutorial.html %}) tutorials for more information.
 
 ![Trajectory]({% link topics/computational-chemistry/images/traj.gif %} "Trajectory produced using the GROMACS workflow, visualized with the NGL viewer")
 
