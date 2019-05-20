@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Running molecular dynamics simulations using GROMACS
-zenodo_link: 'https://zenodo.org/record/2598415#.XJDyvoUo9hE'
+zenodo_link: 'https://zenodo.org/record/2598415'
 questions:
 - How do I use the GROMACS engine in Galaxy?
 - What is the correct procedure for performing a simple molecular dynamics simulation of a protein?
@@ -35,7 +35,7 @@ Molecular dynamics (MD) is a method to simulate molecular motion by iterative ap
 
 Multiple packages exist for performing MD simulations. One of the most popular is the open-source GROMACS, which is the subject of this tutorial. Other MD packages which are also wrapped in Galaxy are [NAMD]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %}) and CHARMM (available in the [docker container](https://github.com/scientificomputing/BRIDGE)).
 
-This is a introductory guide to using GROMACS in Galaxy to prepare and perform molecular dynamics on a small protein. For the tutorial, we will perform our simulations on hen egg white lysozyme. {% cite abraham15 %}
+This is a introductory guide to using GROMACS {% cite abraham15 %} in Galaxy to prepare and perform molecular dynamics on a small protein. For the tutorial, we will perform our simulations on hen egg white lysozyme. 
 
 > ### {% icon comment %} More information
 > This guide is based on the GROMACS tutorial provided by Justin Lemkul [here](http://www.mdtutorials.com/gmx/lysozyme/index.html) - please consult it if you are interested in a more detailed, technical guide to GROMACS. 
@@ -62,7 +62,7 @@ The process can be divided into multiple stages:
  3. Equilibration of the solvent around the protein (with two ensembles, NVT and NPT)
  4. Production simulation, which produces our trajectory.
 
-This is a binary file that records the atomic coordinates at multiple time steps, and therefore shows the dynamic motion of the molecule. Using visualization software, we can display this trajectory as a film displaying the molecular motion of the protein. We will discuss each step making up this workflow in more detail.
+The trajectory is a binary file that records the atomic coordinates at multiple time steps, and therefore shows the dynamic motion of the molecule. Using visualization software, we can display this trajectory as a film displaying the molecular motion of the protein. We will discuss each step making up this workflow in more detail.
 
 
 # Getting data
@@ -80,15 +80,17 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 >    >    ```
 >    > https://files.rcsb.org/download/1AKI.pdb
 >    >    ```
-> {% include snippets/import_via_link.md %}
+>
+>    {% include snippets/import_via_link.md %}
 >
 > 3. Use the **grep** {% icon tool %} text processing tool to remove all lines that refer to non-protein atoms.
 >    - *"Select lines from"*: uploaded PDB file
 >    - *"that"*: `Don't Match`
 >    - *"Regular Expression"*: `HETATM`
+>
 > Alternatively, if you prefer to upload the cleaned file directly from Zenodo, you can do so with the following link:
 >    >    ```
->    > check when Zenodo is running again
+>    > https://zenodo.org/record/2598415
 >    >    ```
 {: .hands_on}
 

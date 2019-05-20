@@ -40,7 +40,7 @@ level:
 # Introduction
 {:.no_toc}
 
-In this tutorial, we'll cover the basics of molecular modelling by setting up a protein in complex with a ligand and uploading the structure to Galaxy.
+In this tutorial, we'll cover the basics of molecular modelling by setting up a protein in complex with a ligand and uploading the structure to Galaxy. This tutorial will make use of CHARMM-GUI. Please note that the follow-up to this tutorial (located [here]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %})) requires access to NAMD Galaxy tools, which can be accessed using the [Docker container](https://github.com/scientificomputing/BRIDGE) but are currently not available on any public Galaxy server.
 
 > ### Agenda
 >
@@ -99,7 +99,10 @@ The 7CEL [PDB](https://files.rcsb.org/download/7CEL.pdb) does not include a comp
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. Import the files from the Zenodo link provided. [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg)](https://doi.org/10.5281/zenodo.800651).
+> 2. Import the files from the Zenodo link provided.
+>    >    ```
+>    > https://zenodo.org/record/2600690
+>    >    ```
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
@@ -131,7 +134,7 @@ Go to the correct section depending on which MD engine you will be using.
 
 > ### {% icon hands_on %} Hands-on: Upload the PDB to CHARMM-GUI
 > 
-> 1. Retrieve the modelled PDB structure from [Zenodo](https://doi.org/10.5281/zenodo.800651).
+> 1. Retrieve the modelled PDB structure from [Zenodo](https://doi.org/10.5281/zenodo.2600690).
 > 2. Upload the PDB and choose CHARMM format.
 > ![Snapshot of CHARMM-GUI PDB reader section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-reader.png %} "The CHARMM-GUI PDB Reader tool")
 {: .hands_on}
@@ -162,15 +165,16 @@ Go to the correct section depending on which MD engine you will be using.
 
 
 ### Upload to Galaxy
-Upload the step1_pdbreader.psf and step1_pdbreader.crd to your BRIDGE instance and run the system setup tool.
-
+> ### {% icon hands_on %} Hands-on: Upload files to Galaxy
+> Upload the step1_pdbreader.psf and step1_pdbreader.crd files to your BRIDGE instance and run the system setup tool.
+{: .hands_on}
 
 ## NAMD
 
 ### Upload the PDB to CHARMM-GUI
 
 > ### {% icon hands_on %} Hands-on: Upload the PDB to CHARMM-GUI
-> Retrieve the modelled PDB structure from [Zenodo](https://doi.org/10.5281/zenodo.800651).
+> Retrieve the modelled PDB structure from [Zenodo](https://doi.org/10.5281/zenodo.2600690).
 [Navigate to CHARMM-GUI](http://www.charmm-gui.org/?doc=input/mdsetup) and use the Input Generator, specifically the Quick MD Simulator tool. Upload the PDB file, selecting 'CHARMM' as the file format. Press 'Next Step: Select Model/Chain' in the bottom right corner.
 > ![Snapshot of CHARMM-GUI Quick MD Simulator tool ]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-mdsimulator.png %} "The CHARMM-GUI Quick MD Simulator tool")
 {: .hands_on}
