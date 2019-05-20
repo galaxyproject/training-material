@@ -1,9 +1,9 @@
 {
-  "uuid": "435bcffc-74b9-4098-b5ac-db541640779e",
+  "uuid": "1d6c1562-ed41-437e-9ed6-f40dca6ec424",
   "tags": [],
   "format-version": "0.1",
   "name": "Genome annotation with Maker",
-  "version": 30,
+  "version": 31,
   "steps": {
     "0": {
       "tool_id": null,
@@ -131,8 +131,8 @@
       "type": "tool"
     },
     "4": {
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/3.0.2+galaxy0",
-      "tool_version": "3.0.2+galaxy0",
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/3.0.2+galaxy1",
+      "tool_version": "3.0.2+galaxy1",
       "outputs": [
         {
           "type": "txt",
@@ -174,7 +174,7 @@
       "id": 4,
       "tool_shed_repository": {
         "owner": "iuc",
-        "changeset_revision": "5ecdeca79a0d",
+        "changeset_revision": "1440ae06552f",
         "name": "busco",
         "tool_shed": "toolshed.g2.bx.psu.edu"
       },
@@ -190,11 +190,11 @@
         }
       ],
       "position": {
-        "top": 1062,
-        "left": 497
+        "top": 1063,
+        "left": 496
       },
       "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/3.0.2+galaxy0",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/3.0.2+galaxy1",
       "type": "tool"
     },
     "5": {
@@ -233,7 +233,7 @@
       "id": 5,
       "tool_shed_repository": {
         "owner": "iuc",
-        "changeset_revision": "d3a2072d8745",
+        "changeset_revision": "96ac930d84fa",
         "name": "maker",
         "tool_shed": "toolshed.g2.bx.psu.edu"
       },
@@ -298,15 +298,15 @@
       ],
       "position": {
         "top": 428.1166687011719,
-        "left": 474.86669921875
+        "left": 474.8666687011719
       },
       "annotation": "",
       "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.10",
       "type": "tool"
     },
     "6": {
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29",
-      "tool_version": "2013_11_29",
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1",
+      "tool_version": "2013_11_29+galaxy1",
       "outputs": [
         {
           "type": "snaphmm",
@@ -324,11 +324,11 @@
           "id": 5
         }
       },
-      "tool_state": "{\"__page__\": null, \"gene_num\": \"\\\"1000\\\"\", \"__rerun_remap_job_id__\": null, \"genome\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"maker_gff\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
+      "tool_state": "{\"__page__\": null, \"gene_num\": \"\\\"1000\\\"\", \"__rerun_remap_job_id__\": null, \"genome\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"maker_gff\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
       "id": 6,
       "tool_shed_repository": {
         "owner": "iuc",
-        "changeset_revision": "821bf8bc5623",
+        "changeset_revision": "2a598c0aa042",
         "name": "snap_training",
         "tool_shed": "toolshed.g2.bx.psu.edu"
       },
@@ -343,18 +343,27 @@
         }
       },
       "label": null,
-      "inputs": [],
+      "inputs": [
+        {
+          "name": "genome",
+          "description": "runtime parameter for tool Train SNAP"
+        },
+        {
+          "name": "maker_gff",
+          "description": "runtime parameter for tool Train SNAP"
+        }
+      ],
       "position": {
         "top": 437.6166687011719,
         "left": 803.86669921875
       },
       "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1",
       "type": "tool"
     },
     "7": {
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.2.3",
-      "tool_version": "3.2.3",
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.2.3+galaxy1",
+      "tool_version": "3.2.3+galaxy1",
       "outputs": [
         {
           "type": "augustus",
@@ -372,11 +381,11 @@
           "id": 5
         }
       },
-      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"genome\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"maker_gff\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"genome\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"maker_gff\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
       "id": 7,
       "tool_shed_repository": {
         "owner": "bgruening",
-        "changeset_revision": "86c89c3bd99d",
+        "changeset_revision": "1fbb1135da16",
         "name": "augustus_training",
         "tool_shed": "toolshed.g2.bx.psu.edu"
       },
@@ -391,13 +400,22 @@
         }
       },
       "label": null,
-      "inputs": [],
+      "inputs": [
+        {
+          "name": "genome",
+          "description": "runtime parameter for tool Train Augustus"
+        },
+        {
+          "name": "maker_gff",
+          "description": "runtime parameter for tool Train Augustus"
+        }
+      ],
       "position": {
         "top": 615.6166687011719,
         "left": 818.86669921875
       },
       "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.2.3",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.2.3+galaxy1",
       "type": "tool"
     },
     "8": {
@@ -457,8 +475,8 @@
           "action_type": "HideDatasetAction",
           "action_arguments": {}
         },
-        "HideDatasetActionoutput_dupinfo": {
-          "output_name": "output_dupinfo",
+        "HideDatasetActionoutput_gff": {
+          "output_name": "output_gff",
           "action_type": "HideDatasetAction",
           "action_arguments": {}
         },
@@ -467,8 +485,8 @@
           "action_type": "HideDatasetAction",
           "action_arguments": {}
         },
-        "HideDatasetActionoutput_gff": {
-          "output_name": "output_gff",
+        "HideDatasetActionoutput_dupinfo": {
+          "output_name": "output_dupinfo",
           "action_type": "HideDatasetAction",
           "action_arguments": {}
         },
@@ -578,24 +596,24 @@
           "output_name": "output_full",
           "id": 5
         },
-        "abinitio_gene_prediction|aug_prediction|augustus_model": {
-          "output_name": "output_tar",
-          "id": 7
+        "abinitio_gene_prediction|snaphmm": {
+          "output_name": "output",
+          "id": 6
         },
         "genome": {
           "output_name": "output",
           "id": 0
         },
-        "abinitio_gene_prediction|snaphmm": {
-          "output_name": "output",
-          "id": 6
+        "abinitio_gene_prediction|aug_prediction|augustus_model": {
+          "output_name": "output_tar",
+          "id": 7
         }
       },
       "tool_state": "{\"reannotation\": \"{\\\"__current_case__\\\": 1, \\\"altest_pass\\\": \\\"true\\\", \\\"est_pass\\\": \\\"true\\\", \\\"maker_gff\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"model_pass\\\": \\\"false\\\", \\\"other_pass\\\": \\\"false\\\", \\\"pred_pass\\\": \\\"false\\\", \\\"protein_pass\\\": \\\"true\\\", \\\"reannotate\\\": \\\"yes\\\", \\\"rm_pass\\\": \\\"true\\\"}\", \"__page__\": null, \"organism_type\": \"\\\"eukaryotic\\\"\", \"gene_prediction\": \"{\\\"model_gff\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"pred_gff\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"snoscan_rrna\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"trna\\\": \\\"false\\\"}\", \"__rerun_remap_job_id__\": null, \"repeat_masking\": \"{\\\"repeat_source\\\": {\\\"__current_case__\\\": 2, \\\"source_type\\\": \\\"no\\\"}}\", \"abinitio_gene_prediction\": \"{\\\"aug_prediction\\\": {\\\"__current_case__\\\": 1, \\\"augustus_mode\\\": \\\"history\\\", \\\"augustus_model\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}}, \\\"snaphmm\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"unmask\\\": \\\"false\\\"}\", \"est_evidences\": \"{\\\"altest\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"altest_gff\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"est\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"est2genome\\\": \\\"false\\\", \\\"est_gff\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"genome\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"protein_evidences\": \"{\\\"protein\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"protein2genome\\\": \\\"false\\\", \\\"protein_gff\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"advanced\": \"{\\\"AED_threshold\\\": \\\"1.0\\\", \\\"alt_peptide\\\": \\\"C\\\", \\\"alt_splice\\\": \\\"false\\\", \\\"always_complete\\\": \\\"false\\\", \\\"correct_est_fusion\\\": \\\"false\\\", \\\"keep_preds\\\": \\\"0.0\\\", \\\"map_forward\\\": \\\"false\\\", \\\"max_dna_len\\\": \\\"100000\\\", \\\"min_contig\\\": \\\"1\\\", \\\"min_protein\\\": \\\"0\\\", \\\"other_gff\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"pred_flank\\\": \\\"200\\\", \\\"pred_stats\\\": \\\"false\\\", \\\"single_exon\\\": {\\\"__current_case__\\\": 0, \\\"single_exon\\\": \\\"0\\\"}, \\\"split_hit\\\": \\\"10000\\\"}\"}",
       "id": 10,
       "tool_shed_repository": {
         "owner": "iuc",
-        "changeset_revision": "d3a2072d8745",
+        "changeset_revision": "96ac930d84fa",
         "name": "maker",
         "tool_shed": "toolshed.g2.bx.psu.edu"
       },
@@ -671,8 +689,8 @@
       "type": "tool"
     },
     "11": {
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/3.0.2+galaxy0",
-      "tool_version": "3.0.2+galaxy0",
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/3.0.2+galaxy1",
+      "tool_version": "3.0.2+galaxy1",
       "outputs": [
         {
           "type": "txt",
@@ -704,7 +722,7 @@
       "id": 11,
       "tool_shed_repository": {
         "owner": "iuc",
-        "changeset_revision": "5ecdeca79a0d",
+        "changeset_revision": "1440ae06552f",
         "name": "busco",
         "tool_shed": "toolshed.g2.bx.psu.edu"
       },
@@ -735,12 +753,12 @@
         "left": 1077
       },
       "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/3.0.2+galaxy0",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/3.0.2+galaxy1",
       "type": "tool"
     },
     "12": {
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29",
-      "tool_version": "2013_11_29",
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1",
+      "tool_version": "2013_11_29+galaxy1",
       "outputs": [
         {
           "type": "snaphmm",
@@ -764,11 +782,11 @@
           "id": 10
         }
       },
-      "tool_state": "{\"__page__\": null, \"gene_num\": \"\\\"1000\\\"\", \"__rerun_remap_job_id__\": null, \"genome\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"maker_gff\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
+      "tool_state": "{\"__page__\": null, \"gene_num\": \"\\\"1000\\\"\", \"__rerun_remap_job_id__\": null, \"genome\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"maker_gff\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
       "id": 12,
       "tool_shed_repository": {
         "owner": "iuc",
-        "changeset_revision": "821bf8bc5623",
+        "changeset_revision": "2a598c0aa042",
         "name": "snap_training",
         "tool_shed": "toolshed.g2.bx.psu.edu"
       },
@@ -777,18 +795,27 @@
       "name": "Train SNAP",
       "post_job_actions": {},
       "label": null,
-      "inputs": [],
+      "inputs": [
+        {
+          "name": "genome",
+          "description": "runtime parameter for tool Train SNAP"
+        },
+        {
+          "name": "maker_gff",
+          "description": "runtime parameter for tool Train SNAP"
+        }
+      ],
       "position": {
         "top": 433.6166687011719,
         "left": 1384.86669921875
       },
       "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1",
       "type": "tool"
     },
     "13": {
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.2.3",
-      "tool_version": "3.2.3",
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.2.3+galaxy1",
+      "tool_version": "3.2.3+galaxy1",
       "outputs": [
         {
           "type": "augustus",
@@ -812,11 +839,11 @@
           "id": 10
         }
       },
-      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"genome\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"maker_gff\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"genome\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"maker_gff\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
       "id": 13,
       "tool_shed_repository": {
         "owner": "bgruening",
-        "changeset_revision": "86c89c3bd99d",
+        "changeset_revision": "1fbb1135da16",
         "name": "augustus_training",
         "tool_shed": "toolshed.g2.bx.psu.edu"
       },
@@ -825,13 +852,22 @@
       "name": "Train Augustus",
       "post_job_actions": {},
       "label": null,
-      "inputs": [],
+      "inputs": [
+        {
+          "name": "genome",
+          "description": "runtime parameter for tool Train Augustus"
+        },
+        {
+          "name": "maker_gff",
+          "description": "runtime parameter for tool Train Augustus"
+        }
+      ],
       "position": {
         "top": 619.6166687011719,
         "left": 1403.86669921875
       },
       "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.2.3",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.2.3+galaxy1",
       "type": "tool"
     },
     "14": {
@@ -891,8 +927,8 @@
           "action_type": "HideDatasetAction",
           "action_arguments": {}
         },
-        "HideDatasetActionoutput_gff": {
-          "output_name": "output_gff",
+        "HideDatasetActionoutput_dupinfo": {
+          "output_name": "output_dupinfo",
           "action_type": "HideDatasetAction",
           "action_arguments": {}
         },
@@ -901,8 +937,8 @@
           "action_type": "HideDatasetAction",
           "action_arguments": {}
         },
-        "HideDatasetActionoutput_dupinfo": {
-          "output_name": "output_dupinfo",
+        "HideDatasetActionoutput_gff": {
+          "output_name": "output_gff",
           "action_type": "HideDatasetAction",
           "action_arguments": {}
         },
@@ -1029,7 +1065,7 @@
       "id": 16,
       "tool_shed_repository": {
         "owner": "iuc",
-        "changeset_revision": "d3a2072d8745",
+        "changeset_revision": "96ac930d84fa",
         "name": "maker",
         "tool_shed": "toolshed.g2.bx.psu.edu"
       },
@@ -1105,8 +1141,8 @@
       "type": "tool"
     },
     "17": {
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/3.0.2+galaxy0",
-      "tool_version": "3.0.2+galaxy0",
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/3.0.2+galaxy1",
+      "tool_version": "3.0.2+galaxy1",
       "outputs": [
         {
           "type": "txt",
@@ -1138,7 +1174,7 @@
       "id": 17,
       "tool_shed_repository": {
         "owner": "iuc",
-        "changeset_revision": "5ecdeca79a0d",
+        "changeset_revision": "1440ae06552f",
         "name": "busco",
         "tool_shed": "toolshed.g2.bx.psu.edu"
       },
@@ -1169,7 +1205,7 @@
         "left": 1812
       },
       "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/3.0.2+galaxy0",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/3.0.2+galaxy1",
       "type": "tool"
     },
     "18": {
@@ -1253,7 +1289,7 @@
         "track_groups_1|data_tracks_0|data_format|annotation": [
           {
             "output_name": "output_evidences",
-            "id": 16
+            "id": 5
           },
           {
             "output_name": "output_evidences",
@@ -1261,21 +1297,21 @@
           },
           {
             "output_name": "output_evidences",
-            "id": 5
+            "id": 16
           }
         ],
         "track_groups_0|data_tracks_0|data_format|annotation": [
           {
-            "output_name": "output_gff",
-            "id": 10
+            "output_name": "renamed",
+            "id": 18
           },
           {
             "output_name": "output_gff",
             "id": 5
           },
           {
-            "output_name": "renamed",
-            "id": 18
+            "output_name": "output_gff",
+            "id": 10
           }
         ],
         "reference_genome|genome": {
@@ -1373,13 +1409,13 @@
       "errors": null,
       "name": "gffread",
       "post_job_actions": {
-        "HideDatasetActionoutput_gff": {
-          "output_name": "output_gff",
+        "HideDatasetActionoutput_dupinfo": {
+          "output_name": "output_dupinfo",
           "action_type": "HideDatasetAction",
           "action_arguments": {}
         },
-        "HideDatasetActionoutput_dupinfo": {
-          "output_name": "output_dupinfo",
+        "HideDatasetActionoutput_gff": {
+          "output_name": "output_gff",
           "action_type": "HideDatasetAction",
           "action_arguments": {}
         },
@@ -1462,8 +1498,8 @@
       "type": "tool"
     },
     "22": {
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/3.0.2+galaxy0",
-      "tool_version": "3.0.2+galaxy0",
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/3.0.2+galaxy1",
+      "tool_version": "3.0.2+galaxy1",
       "outputs": [
         {
           "type": "txt",
@@ -1495,7 +1531,7 @@
       "id": 22,
       "tool_shed_repository": {
         "owner": "iuc",
-        "changeset_revision": "5ecdeca79a0d",
+        "changeset_revision": "1440ae06552f",
         "name": "busco",
         "tool_shed": "toolshed.g2.bx.psu.edu"
       },
@@ -1526,7 +1562,7 @@
         "left": 2590
       },
       "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/3.0.2+galaxy0",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/3.0.2+galaxy1",
       "type": "tool"
     }
   },
