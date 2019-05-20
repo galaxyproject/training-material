@@ -189,12 +189,6 @@
                     
 
                     
-                    <li class="nav-item">
-                        <a class="nav-link" href="/training-material/topics/assembly#references" title="References">
-                            <i class="fa fa-bookmark" aria-hidden="true"></i><span class="visually-hidden">references</span> Literature
-                        </a>
-                    </li>
-                    
 
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
@@ -654,7 +648,7 @@
 
 <p>points to a directory (rather than a file) containing many files, most of which we do not need:</p>
 
-<figure id="figure-1"><img src="../../images/genbank_dir.png" alt="GenBank assembly files for an E. coli strain" title="A list of files for an &lt;i&gt;E. coli&lt;/i&gt; assembly. For further analyses we need datasets ending with &lt;code&gt;_genomic.fna.gz&lt;/code&gt;." /><figcaption><span class="figcaption-prefix">Figure 1:</span> A list of files for an <i>E. coli</i> assembly. For further analyses we need datasets ending with <code>_genomic.fna.gz</code>.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/genbank_dir.png" alt="GenBank assembly files for an E. coli strain" /><figcaption><span class="figcaption-prefix">Figure 1:</span> A list of files for an <i>E. coli</i> assembly. For further analyses we need datasets ending with <code>_genomic.fna.gz</code>.</figcaption></figure>
 
 <p>So to download sequence files we need to edit URLs by adding filenames to them. For example, in the case of the URL shown above we need to add <code class="highlighter-rouge">/GCA_000008865.1_ASM886v1</code> and <code class="highlighter-rouge">_genomic.fna.gz</code> to the end to get this:</p>
 
@@ -697,7 +691,7 @@
 <blockquote class="tip">
   <h3 id="tip-tip-finding-tools-mentioned-in-this-tutorial"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Finding tools mentioned in this tutorial</h3>
   <p>Galaxy instances contain hundreds of tools. As a result, it can be hard to find tools mentioned in tutorials such as this one. To help with this challenge, Galaxy has a search box at the top of the left panel. Use this box to find the tools mentioned here.</p>
-  <figure id="figure-2"><img src="../../images/tool_search.png" alt="Tool search" title="Use search box to find tools!" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Use search box to find tools!</figcaption></figure>
+  <figure id="figure-2"><img src="../../images/tool_search.png" alt="Tool search" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Use search box to find tools!</figcaption></figure>
 </blockquote>
 
 <p>The assembly we just uploaded has two issues that need to be addressed before proceeding with our analysis:</p>
@@ -835,7 +829,7 @@ BA000007.2 Ecoli_C 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 
 <p>The alignment information produced by LASTZ is a collection. In this collection each element contains alignment data between each of the <em>E. coli</em> genomes and our assembly:</p>
 
-<figure id="figure-3"><img src="../../images/lastz_collection.png" alt="LASTZ collection" title="LASTZ produced a collection where each element corresponds to an alignment between an &lt;i&gt;E. coli&lt;/i&gt; genome and our assembly. Here one of the elements is expanded (to expand an element simply click on it)." /><figcaption><span class="figcaption-prefix">Figure 3:</span> LASTZ produced a collection where each element corresponds to an alignment between an <i>E. coli</i> genome and our assembly. Here one of the elements is expanded (to expand an element simply click on it).</figcaption></figure>
+<figure id="figure-3"><img src="../../images/lastz_collection.png" alt="LASTZ collection" /><figcaption><span class="figcaption-prefix">Figure 3:</span> LASTZ produced a collection where each element corresponds to an alignment between an <i>E. coli</i> genome and our assembly. Here one of the elements is expanded (to expand an element simply click on it).</figcaption></figure>
 <p>.</p>
 
 <h2 id="collapsing-collection">Collapsing collection</h2>
@@ -888,7 +882,7 @@ BA000007.2 Ecoli_C 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 
 <p>The relationship between the alignment identity and alignment length looks like this (remember that this is only a subsample of the data):</p>
 
-<figure id="figure-4"><img src="../../images/id_vs_len.png" alt="Identity versus length" title="Alignment identity (%) versus length (bp). This graph is truncated at the top" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Alignment identity (%) versus length (bp). This graph is truncated at the top</figcaption></figure>
+<figure id="figure-4"><img src="../../images/id_vs_len.png" alt="Identity versus length" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Alignment identity (%) versus length (bp). This graph is truncated at the top</figcaption></figure>
 
 <p>You can see that most alignments are short and have relatively low identity. Thus we can filter the original dataset by identity and length. Judging from this graph we can select alignment longer than 10,000 bp with identity above 90%.</p>
 
@@ -967,7 +961,7 @@ BA000007.2 Ecoli_C 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 
 <p>The relationship between the number of alignment blocks and total alignment length looks like this:</p>
 
-<figure id="figure-5"><img src="../../images/best_genomes_chart.png" alt="Identity versus length" title="Number of alignment blocks versus total alignment length (bp)." /><figcaption><span class="figcaption-prefix">Figure 5:</span> Number of alignment blocks versus total alignment length (bp).</figcaption></figure>
+<figure id="figure-5"><img src="../../images/best_genomes_chart.png" alt="Identity versus length" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Number of alignment blocks versus total alignment length (bp).</figcaption></figure>
 
 <p>A group of three dots in the upper left corner of this scatter plot represents genomes that are most similar to our assembly: they have a SMALL number of alignment blocks but HIGH total alignment length. Mousing over these three dots (if you set <strong>Data point labels</strong> correctly in the previous step) will reveal their accession numbers: <code class="highlighter-rouge">LT906474.1</code>, <code class="highlighter-rouge">CP024090.1</code>, and <code class="highlighter-rouge">CP020543.1</code>.</p>
 
@@ -1057,11 +1051,11 @@ LT906474.1  8 99.94	4575223
 
 <p>Because we chose to produce Dot Plots as well, LASTZ will generate two collections: one containing alignment data and the other containing DotPlots in PNG format:</p>
 
-<figure id="figure-6"><img src="../../images/three_dot_plots.png" alt="Dot Plots" title="Dot Plot representations of alignments between three &lt;i&gt;E. coli&lt;/i&gt; genomes and our assembly. Target (X-axis) is indicated above each dot plot. Query (Y-axis) is our assembly. Red circle indicates a region deleted in our assembly." /><figcaption><span class="figcaption-prefix">Figure 6:</span> Dot Plot representations of alignments between three <i>E. coli</i> genomes and our assembly. Target (X-axis) is indicated above each dot plot. Query (Y-axis) is our assembly. Red circle indicates a region deleted in our assembly.</figcaption></figure>
+<figure id="figure-6"><img src="../../images/three_dot_plots.png" alt="Dot Plots" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Dot Plot representations of alignments between three <i>E. coli</i> genomes and our assembly. Target (X-axis) is indicated above each dot plot. Query (Y-axis) is our assembly. Red circle indicates a region deleted in our assembly.</figcaption></figure>
 
 <p>A quick conclusion that can be drawn here is that there is a large inversion in CP020543 and deletion in our assembly. If you are not sure how to interpret Dot Plots here is a great explanation by <a href="http://schatz-lab.org/">Michael Schatz</a>:</p>
 
-<figure id="figure-7"><img src="../../images/dotplot.png" alt="Interpreting Dot Plots" title="A quick reference to interpreting Dot Plots. Our case is identical to &lt;i&gt;Insertion into Reference&lt;/i&gt; shown in the upper left." /><figcaption><span class="figcaption-prefix">Figure 7:</span> A quick reference to interpreting Dot Plots. Our case is identical to <i>Insertion into Reference</i> shown in the upper left.</figcaption></figure>
+<figure id="figure-7"><img src="../../images/dotplot.png" alt="Interpreting Dot Plots" /><figcaption><span class="figcaption-prefix">Figure 7:</span> A quick reference to interpreting Dot Plots. Our case is identical to <i>Insertion into Reference</i> shown in the upper left.</figcaption></figure>
 
 <p>For a moment let’s leave LASTZ result and create a browser that would allows us to display our results.</p>
 
@@ -1153,7 +1147,7 @@ LT906474.1  8 99.94	4575223
     <li>Wait a bit and IGV will refresh displaying “chromosomes” of our <em>hybrid</em> genome:</li>
   </ol>
 
-  <figure id="figure-8"><img src="../../images/igv_empty.png" alt="Empty IGV" title="IGV instance displaying &lt;i&gt;Hybrid&lt;/i&gt; genome without tracks" /><figcaption><span class="figcaption-prefix">Figure 8:</span> IGV instance displaying <i>Hybrid</i> genome without tracks</figcaption></figure>
+  <figure id="figure-8"><img src="../../images/igv_empty.png" alt="Empty IGV" /><figcaption><span class="figcaption-prefix">Figure 8:</span> IGV instance displaying <i>Hybrid</i> genome without tracks</figcaption></figure>
 </blockquote>
 
 <h2 id="preparing-and-displaying-alignments">Preparing and displaying alignments</h2>
@@ -1370,7 +1364,7 @@ Ecoli_C 128706 128828 CP020543.13  82.6 +
 
 <p>The result will look like this:</p>
 
-<figure id="figure-9"><img src="../../images/igv_panels.png" alt="IGV Collage" title="A collage of IGV screen-shots showing alignment tracks for the four genomes. The deletion from our assembly is highlighted with the red circle. It looks like a gap in alignments because target genomes are longer than our assembly by the amount equal to the length of the deletion." /><figcaption><span class="figcaption-prefix">Figure 9:</span> A collage of IGV screen-shots showing alignment tracks for the four genomes. The deletion from our assembly is highlighted with the red circle. It looks like a gap in alignments because target genomes are longer than our assembly by the amount equal to the length of the deletion.</figcaption></figure>
+<figure id="figure-9"><img src="../../images/igv_panels.png" alt="IGV Collage" /><figcaption><span class="figcaption-prefix">Figure 9:</span> A collage of IGV screen-shots showing alignment tracks for the four genomes. The deletion from our assembly is highlighted with the red circle. It looks like a gap in alignments because target genomes are longer than our assembly by the amount equal to the length of the deletion.</figcaption></figure>
 
 <p>Now it is time to think about the genes.</p>
 
@@ -1524,13 +1518,13 @@ CP020543.1 2557 3630 DNA replication and repair protein RecF        0 +
 
 <p>You can see that the genome ID is now appended at the beginning and this dataset looks like a legitimate BED that can be displayed in IGV. The one thing that remains is to tell Galaxy that it is BED as <a href="#hands_on-hands-on-changing-dataset-type">we did before</a>. After the format of the last dataset is set to BED it can be displayed in IGV by clicking the <strong>display with IGV local</strong> link (remember to give this new track a <a href="#comment-naming-igv-tracks">“human” name</a>):</p>
 
-<figure id="figure-10"><img src="../../images/igv_genes.png" alt="Displaying genes in IGV" title="Gene track is added to the browser. Here we are zoomed in at the gap region in LT906474." /><figcaption><span class="figcaption-prefix">Figure 10:</span> Gene track is added to the browser. Here we are zoomed in at the gap region in LT906474.</figcaption></figure>
+<figure id="figure-10"><img src="../../images/igv_genes.png" alt="Displaying genes in IGV" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Gene track is added to the browser. Here we are zoomed in at the gap region in LT906474.</figcaption></figure>
 
 <h2 id="extracting-genes-programmatically">Extracting genes programmatically</h2>
 
 <p>Above we’ve been able to look at genes that appear to be deleted in our assembly. But what we really need is to create a list that can be interrogated further. For example, which of these genes are essential? We can easily create such a list by overlapping coordinates of genes with coordinates of our deletion. But to do this we first need to create a set of coordinates corresponding to the deletion. This can be done by complementing coordinates of alignments we created <a href="#hands_on-hands-on-changing-dataset-type">above</a>:</p>
 
-<figure id="figure-11"><img src="../../images/complement.png" alt="Complementing genomic ranges" title="Any set of genomic intervals can &lt;i&gt;complemented&lt;/i&gt; or converted into a set of intervals that do not overlap the original set (image from BEDTools documentation)." /><figcaption><span class="figcaption-prefix">Figure 11:</span> Any set of genomic intervals can <i>complemented</i> or converted into a set of intervals that do not overlap the original set (image from BEDTools documentation).</figcaption></figure>
+<figure id="figure-11"><img src="../../images/complement.png" alt="Complementing genomic ranges" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Any set of genomic intervals can <i>complemented</i> or converted into a set of intervals that do not overlap the original set (image from BEDTools documentation).</figcaption></figure>
 
 <p>However, before we convert coordinates of alignments into their complements we need to prepare a so called <em>genome file</em>, which is a list of “chromosomes” and their lengths in our <a href="#hands_on-hands-on-concatenate-fasta-files">hybrid genome</a>:</p>
 
@@ -1615,11 +1609,11 @@ LT906474.1 4625968
 
 <p>The output of this step can directly viewed in IGV by clicking on <strong>display with IGV</strong> link:</p>
 
-<figure id="figure-12"><img src="../../images/igv_gaps.png" alt="Gaps in IGV" title="Complement of alignment bed shows the position of the insertion." /><figcaption><span class="figcaption-prefix">Figure 12:</span> Complement of alignment bed shows the position of the insertion.</figcaption></figure>
+<figure id="figure-12"><img src="../../images/igv_gaps.png" alt="Gaps in IGV" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Complement of alignment bed shows the position of the insertion.</figcaption></figure>
 
 <p>At this point we have two BEDs: one just created and the other containing <a href="#hands_on-hands-on-collapsing-annotations-into-a-single-bed-dataset">gene annotations</a>. We can simply intersect the two:</p>
 
-<figure id="figure-13"><img src="../../images/intersect.png" alt="Intersect between two BED datasets" title="Computing intersect means finding overlapping regions in two BED datasets (image from BEDTools documentation)." /><figcaption><span class="figcaption-prefix">Figure 13:</span> Computing intersect means finding overlapping regions in two BED datasets (image from BEDTools documentation).</figcaption></figure>
+<figure id="figure-13"><img src="../../images/intersect.png" alt="Intersect between two BED datasets" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Computing intersect means finding overlapping regions in two BED datasets (image from BEDTools documentation).</figcaption></figure>
 
 <p>But before we do that let’s filter all small intervals below 10,000 kb to remove noise:</p>
 
@@ -1679,7 +1673,7 @@ LT906474.1 3288166 3304009
 
 <p>We can look closely at these using IGV:</p>
 
-<figure id="figure-14"><img src="../../images/igv_gap_closeup.png" alt="Close up of the deleted region" title="Close up of deleted region (this region is deleted from our assembly and looks like a gap when our assembly is aligned to genomic sequences shown here). In CP0205543 and LT906474 the continuity of the region is interrupted by a small aligned region that has relatively low identity (~72%). This is a spurious alignment and can be ignored." /><figcaption><span class="figcaption-prefix">Figure 14:</span> Close up of deleted region (this region is deleted from our assembly and looks like a gap when our assembly is aligned to genomic sequences shown here). In CP0205543 and LT906474 the continuity of the region is interrupted by a small aligned region that has relatively low identity (~72%). This is a spurious alignment and can be ignored.</figcaption></figure>
+<figure id="figure-14"><img src="../../images/igv_gap_closeup.png" alt="Close up of the deleted region" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Close up of deleted region (this region is deleted from our assembly and looks like a gap when our assembly is aligned to genomic sequences shown here). In CP0205543 and LT906474 the continuity of the region is interrupted by a small aligned region that has relatively low identity (~72%). This is a spurious alignment and can be ignored.</figcaption></figure>
 
 <p>Now we are ready to intersect these regions with gene coordinates we formatted <a href="#hands_on-hands-on-collapsing-annotations-into-a-single-bed-dataset">earlier</a>:</p>
 
@@ -1806,9 +1800,6 @@ LT906474.1	3288166	3304009	LT906474.1	3288157	3289530	cusC	0	-	1364	cusC	0.23799
                     </blockquote>
                     
 
-                    
-                    <h1 data-toc-skip>Useful literature</h1>
-                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/assembly#references">here</a>.</p>
                     
 
                     

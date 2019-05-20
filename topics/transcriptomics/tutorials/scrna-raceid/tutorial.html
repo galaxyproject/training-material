@@ -1069,7 +1069,7 @@
 <blockquote class="details">
   <h3 id="details-details-library-size-and-number-of-features-definitions"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Details: Library Size and Number of Features (Definitions)</h3>
 
-  <figure id="figure-1"><img src="/training-material/topics/transcriptomics/images/raceid_libsize.svg" alt="Library Size and Detected Genes" title="Library Size and Number of Features" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Library Size and Number of Features</figcaption></figure>
+  <figure id="figure-1"><img src="/training-material/topics/transcriptomics/images/raceid_libsize.svg" alt="Library Size and Detected Genes" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Library Size and Number of Features</figcaption></figure>
 
   <ul>
     <li><strong>Library Size</strong>: The total number of transcripts in a cell, or a column sum. <em>The minimum threshold for this can be set by “Min Transcripts” (= 3000)</em>.</li>
@@ -1096,7 +1096,7 @@
 
 <p>Four histograms are generated with the top line giving the raw expression data fed into the tool, and the bottom line giving the filtered data (cells with at least 3,000 transcripts in total and genes with at least 5 transcripts in at least 5 cells).</p>
 
-<figure id="figure-2"><img src="/training-material/topics/transcriptomics/images/raceid_filter_plots.png" alt="Histograms of raw and filtered data" title="RaceID Histograms of raw and filtered data" /><figcaption><span class="figcaption-prefix">Figure 2:</span> RaceID Histograms of raw and filtered data</figcaption></figure>
+<figure id="figure-2"><img src="/training-material/topics/transcriptomics/images/raceid_filter_plots.png" alt="Histograms of raw and filtered data" /><figcaption><span class="figcaption-prefix">Figure 2:</span> RaceID Histograms of raw and filtered data</figcaption></figure>
 
 <p>The top row shows the count distributions of the Library Size and Number of Features of the raw data using a Log scale on the x-axis (e.g. 2.5 on the Log10 x-axis = <script type="math/tex">10^{2.5}</script> = 316 counts).</p>
 
@@ -1185,7 +1185,7 @@
 
 <h2 id="biological-variation">Biological Variation</h2>
 
-<figure id="figure-3"><img src="/training-material/topics/transcriptomics/images/raceid_cellcycle.svg" alt="Sources of variation" title="Sources of unwanted biological variation: (Left) Transcriptional Bursting, and (Right) Cell-cycle Variation" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Sources of unwanted biological variation: (Left) Transcriptional Bursting, and (Right) Cell-cycle Variation</figcaption></figure>
+<figure id="figure-3"><img src="/training-material/topics/transcriptomics/images/raceid_cellcycle.svg" alt="Sources of variation" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Sources of unwanted biological variation: (Left) Transcriptional Bursting, and (Right) Cell-cycle Variation</figcaption></figure>
 
 <p>Transcriptional bursting is a stochastic model for the transcription process in a cell, where transcription does not occur as a smooth or continuous process but occurs in spontaneous and discrete ‘bursts’ thought to be only loosely associated with chromatin conformation/availability. It is an effect that is not seen in bulk RNA-seq due to the smoothing effect of measuring average gene expression across a tissue. However, the effect is more pronounced in single-cell and it is hard to model against.</p>
 
@@ -1193,7 +1193,7 @@
 
 <h2 id="technical-variation">Technical Variation</h2>
 
-<figure id="figure-4"><img src="/training-material/topics/transcriptomics/images/raceid_technical_variation.svg" alt="Sources of variation" title="Sources of unwanted technical variation" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Sources of unwanted technical variation</figcaption></figure>
+<figure id="figure-4"><img src="/training-material/topics/transcriptomics/images/raceid_technical_variation.svg" alt="Sources of variation" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Sources of unwanted technical variation</figcaption></figure>
 
 <p>Technical variation appears in three main forms: <em>Library size variation</em>, <em>Amplification bias</em>, and <em>Dropout events</em>.</p>
 
@@ -1249,7 +1249,7 @@
   <p>In order to perform clustering, the proximity of cells to one another are first defined by a distance metric
 such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean distance or other</a>.</p>
 
-  <figure id="figure-5"><img src="/training-material/topics/transcriptomics/images/raceid_distance.svg" alt="Distances" title="Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)</figcaption></figure>
+  <figure id="figure-5"><img src="/training-material/topics/transcriptomics/images/raceid_distance.svg" alt="Distances" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)</figcaption></figure>
 
   <p>The clustering then tries to find groupings of cells using this distance matrix.</p>
 
@@ -1277,7 +1277,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
 
 <p>The first three plots in the PDF report tell us about the stability/reliability of our clusters, and are more important indicators for the quality of our clustering than any of the resultant graph projections, such as PCA or tSNE.</p>
 
-<figure id="figure-6"><img src="/training-material/topics/transcriptomics/images/raceid_sat_jacc.png" alt="Stability Plots" title="RaceID Saturation and Jaccard Distance Plots" /><figcaption><span class="figcaption-prefix">Figure 6:</span> RaceID Saturation and Jaccard Distance Plots</figcaption></figure>
+<figure id="figure-6"><img src="/training-material/topics/transcriptomics/images/raceid_sat_jacc.png" alt="Stability Plots" /><figcaption><span class="figcaption-prefix">Figure 6:</span> RaceID Saturation and Jaccard Distance Plots</figcaption></figure>
 
 <p>The first plot measures the levels of dispersion within each cluster and displays the mean dispersion over all clusters for each k value. The grey points indicate the mean change in dispersion for that k values, and the red bars show this dispersion as a box plot, which get smaller and smaller until a “saturation point” (blue) is reached where the change in dispersion no longer decreases for an increase in k.</p>
 
@@ -1297,7 +1297,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
 
   <p>In the case of single-cell data, sets are defined as the cells contained within a given cluster, and the Jaccard similarity score provides a quantitative measure for how distinct a given cluster is, based on it’s similarity to other sets.</p>
 
-  <figure id="figure-7"><img src="/training-material/topics/transcriptomics/images/raceid_jaccard.svg" alt="Jaccard" title="Example Jaccard Distance calculation" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Example Jaccard Distance calculation</figcaption></figure>
+  <figure id="figure-7"><img src="/training-material/topics/transcriptomics/images/raceid_jaccard.svg" alt="Jaccard" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Example Jaccard Distance calculation</figcaption></figure>
 
 </blockquote>
 
@@ -1311,7 +1311,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
 
 <p>The next three plots attempts to do this by describing the variation of the gene expression, given by; a Background plot, a Sensitivity plot, and an Outlier probability plot.</p>
 
-<figure id="figure-8"><img src="/training-material/topics/transcriptomics/images/raceid_gexpr.png" alt="Gene Expression Plots" title="RaceID Gene Expression Plots" /><figcaption><span class="figcaption-prefix">Figure 8:</span> RaceID Gene Expression Plots</figcaption></figure>
+<figure id="figure-8"><img src="/training-material/topics/transcriptomics/images/raceid_gexpr.png" alt="Gene Expression Plots" /><figcaption><span class="figcaption-prefix">Figure 8:</span> RaceID Gene Expression Plots</figcaption></figure>
 
 <ul>
   <li>
@@ -1396,7 +1396,7 @@ This is shown in the chart above as the number of outliers as a function of the 
     </li>
   </ul>
 
-  <figure id="figure-9"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/K-means_convergence.gif" alt="K-means" title="K-means convergence (Wikimedia Commons)" /><figcaption><span class="figcaption-prefix">Figure 9:</span> K-means convergence (Wikimedia Commons)</figcaption></figure>
+  <figure id="figure-9"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/K-means_convergence.gif" alt="K-means" /><figcaption><span class="figcaption-prefix">Figure 9:</span> K-means convergence (Wikimedia Commons)</figcaption></figure>
 
   <p>In terms of single-cell data, for <em>G</em> genes, each datapoint is a G-dimensional cell. The distances between cells are computed using a <a href="#performing-the-clustering">given metric</a>, and the k points are G-dimensional points indicating the centre of cluster. The k points are then updated for each iteration of the algorithm.</p>
 
@@ -1420,7 +1420,7 @@ This is shown in the chart above as the number of outliers as a function of the 
 
 </blockquote>
 
-<figure id="figure-10"><img src="/training-material/topics/transcriptomics/images/raceid_heatmaps.png" alt="Heatmaps" title="RaceID Heatmaps for initial and final clusters" /><figcaption><span class="figcaption-prefix">Figure 10:</span> RaceID Heatmaps for initial and final clusters</figcaption></figure>
+<figure id="figure-10"><img src="/training-material/topics/transcriptomics/images/raceid_heatmaps.png" alt="Heatmaps" /><figcaption><span class="figcaption-prefix">Figure 10:</span> RaceID Heatmaps for initial and final clusters</figcaption></figure>
 
 <p>The difference shown between the initial and final clustering is sometimes subtle depending which of the clusters the new clusters have been extracted from.</p>
 
@@ -1446,7 +1446,7 @@ This is shown in the chart above as the number of outliers as a function of the 
 
 <p>All the following plots are heatmaps for the individual genes expressed in each cluster.</p>
 
-<figure id="figure-11"><img src="/training-material/topics/transcriptomics/images/raceid_geneheatmaps.png" alt="Gene Heatmaps" title="RaceID Individual (final) heatmaps for the top 10 significant genes in clusters 1 to 4" /><figcaption><span class="figcaption-prefix">Figure 11:</span> RaceID Individual (final) heatmaps for the top 10 significant genes in clusters 1 to 4</figcaption></figure>
+<figure id="figure-11"><img src="/training-material/topics/transcriptomics/images/raceid_geneheatmaps.png" alt="Gene Heatmaps" /><figcaption><span class="figcaption-prefix">Figure 11:</span> RaceID Individual (final) heatmaps for the top 10 significant genes in clusters 1 to 4</figcaption></figure>
 
 <p>The top 10 defining genes from each cluster (above only <code class="highlighter-rouge">c1</code>-<code class="highlighter-rouge">c4</code> are shown) give us an idea of how unique these genes are to the cluster.</p>
 
@@ -1500,7 +1500,7 @@ This is shown in the chart above as the number of outliers as a function of the 
 
 <p>The main issue with visualising this data is that as before, we have C cells that serve as our observations which are described by G genes. Representing G dimensional data in the 2 or 3 dimensional plots that we are more familiar falls under the problem of <a href="https://en.wikipedia.org/wiki/Dimensionality_reduction"><em>dimensional reduction</em></a>, which aims to preserve the distances and relationship of the higher dimensional (G-dimensional) data in a lower dimensional (usually 2D) space.</p>
 
-<figure id="figure-12"><img src="/training-material/topics/transcriptomics/images/raceid_dimred.svg" alt="Dim red" title="Reducing a set of 4 observations from 3D to 2D space, whilst approximating the 3D relationships" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Reducing a set of 4 observations from 3D to 2D space, whilst approximating the 3D relationships</figcaption></figure>
+<figure id="figure-12"><img src="/training-material/topics/transcriptomics/images/raceid_dimred.svg" alt="Dim red" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Reducing a set of 4 observations from 3D to 2D space, whilst approximating the 3D relationships</figcaption></figure>
 
 <p>Preserving these higher dimensional distances in lower dimensional space is a complex and ongoing challenge in computer science, but there are various commonly-used methods such as PCA and tSNE often encountered in single cell RNA-seq datasets. For more information, see the box below.</p>
 
@@ -1530,7 +1530,7 @@ This is shown in the chart above as the number of outliers as a function of the 
 
 <p><strong>RaceID</strong> makes use of tSNE and force-directed (Fruchterman-Reingold) graph layouts to space the clusters in a visually meaningful manner to show the separation and relative proximity of clusters to one another.</p>
 
-<figure id="figure-13"><img src="/training-material/topics/transcriptomics/images/raceid_tsne_fr.png" alt="Clusters" title="RaceID Initial and Final clusters using tSNE and F-R projections" /><figcaption><span class="figcaption-prefix">Figure 13:</span> RaceID Initial and Final clusters using tSNE and F-R projections</figcaption></figure>
+<figure id="figure-13"><img src="/training-material/topics/transcriptomics/images/raceid_tsne_fr.png" alt="Clusters" /><figcaption><span class="figcaption-prefix">Figure 13:</span> RaceID Initial and Final clusters using tSNE and F-R projections</figcaption></figure>
 
 <p>The figure above displays the initial (left top/bottom) clusters detected during the clustering stage, as well as the final (right top/bottom) clusters determined during the outlier detection stage, projected using tSNE and Fruchterman-Rheingold graph layouts.</p>
 
@@ -1565,13 +1565,13 @@ This is shown in the chart above as the number of outliers as a function of the 
 <blockquote class="details">
   <h3 id="details-details-continuous-phenotypes-vs-discrete-clustering-methods"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Details: Continuous Phenotypes vs Discrete Clustering Methods</h3>
 
-  <figure id="figure-14"><img src="/training-material/topics/transcriptomics/images/raceid_contpheno.svg" alt="Continuous Phenotypes" title="The continuous phenotypes along a red blood cell development trajectory" /><figcaption><span class="figcaption-prefix">Figure 14:</span> The continuous phenotypes along a red blood cell development trajectory</figcaption></figure>
+  <figure id="figure-14"><img src="/training-material/topics/transcriptomics/images/raceid_contpheno.svg" alt="Continuous Phenotypes" /><figcaption><span class="figcaption-prefix">Figure 14:</span> The continuous phenotypes along a red blood cell development trajectory</figcaption></figure>
 
   <p>The gene expression profile for Reticulocytes is distinct from the gene expression profile for the mature Red Blood Cells that they will become, but the cells that are actually undergoing this short-lived transition from Reticulocyte to Red Blood Cell will not fit neatly into the two aforementioned gene expression profiles, instead having their own profile which lies somewhere in between.</p>
 
   <p>As a result it is often false to think of cell clustering as an exercise in classification, but better to be thought of as a desire to find the relatedness between expression profiles. A helpful visual example of this is to not think of assigning cells to different disconnected ‘peaks’ of expression, but to place cells along an expression peak landscape that describes not only which expression profile they resemble the most, but along which gradient (or development trajectory) they adhere to, allowing transient cell types to be better assigned.</p>
 
-  <figure id="figure-15"><img src="/training-material/topics/transcriptomics/images/raceid_mountains.svg" alt="Discrete vs Continuous" title="(Above) Cells assigned to discrete profiles, compared to (Below) Cells placed along a continuous expression profile landscape." /><figcaption><span class="figcaption-prefix">Figure 15:</span> (Above) Cells assigned to discrete profiles, compared to (Below) Cells placed along a continuous expression profile landscape.</figcaption></figure>
+  <figure id="figure-15"><img src="/training-material/topics/transcriptomics/images/raceid_mountains.svg" alt="Discrete vs Continuous" /><figcaption><span class="figcaption-prefix">Figure 15:</span> (Above) Cells assigned to discrete profiles, compared to (Below) Cells placed along a continuous expression profile landscape.</figcaption></figure>
 
   <p>The clustering of cells with single-cell RNA-seq data, is therefore not a classification problem, but a <em>manifold</em> detection one, where the manifold ultimately describes the topology of the data, and allows us to see relatedness between clusters.</p>
 
@@ -1648,7 +1648,7 @@ This is shown in the chart above as the number of outliers as a function of the 
 
 </blockquote>
 
-<figure id="figure-16"><img src="/training-material/topics/transcriptomics/images/raceid_clustinspect_cells.png" alt="Cluster Inspection of Cells" title="RaceID MA plot of cells in cluster 1 and cluster 3" /><figcaption><span class="figcaption-prefix">Figure 16:</span> RaceID MA plot of cells in cluster 1 and cluster 3</figcaption></figure>
+<figure id="figure-16"><img src="/training-material/topics/transcriptomics/images/raceid_clustinspect_cells.png" alt="Cluster Inspection of Cells" /><figcaption><span class="figcaption-prefix">Figure 16:</span> RaceID MA plot of cells in cluster 1 and cluster 3</figcaption></figure>
 
 <p>The genes shown as grey dots are not labelled because they are not so differentially expressed between the two clusters, but the genes as labelled red dots on the fringes do display significant variability between the clusters.</p>
 
@@ -1705,7 +1705,7 @@ This is shown in the chart above as the number of outliers as a function of the 
 
 </blockquote>
 
-<figure id="figure-17"><img src="/training-material/topics/transcriptomics/images/raceid_goi.png" alt="Expression Plot" title="RaceID Expression plot of genes of interest across different cells." /><figcaption><span class="figcaption-prefix">Figure 17:</span> RaceID Expression plot of genes of interest across different cells.</figcaption></figure>
+<figure id="figure-17"><img src="/training-material/topics/transcriptomics/images/raceid_goi.png" alt="Expression Plot" /><figcaption><span class="figcaption-prefix">Figure 17:</span> RaceID Expression plot of genes of interest across different cells.</figcaption></figure>
 
 <p>The above figure shows where the combined expression of <em>Gstm3</em>, <em>St3gal4</em>, and <em>Gna11</em> is centred, which from the tSNE plot (top-left) appears to be concentrated in cluster 6. The log expression plot (top-right) changes the scale so that lesser expression in other clusters is still visible. The bottom images provide the same information but using the F-R layout.</p>
 
@@ -1794,7 +1794,7 @@ This is shown in the chart above as the number of outliers as a function of the 
 
 </blockquote>
 
-<figure id="figure-18"><img src="/training-material/topics/transcriptomics/images/raceid_stemid_lineage.png" alt="Lineage Computation Plots" title="StemID Lineage Tree and Branches of significance." /><figcaption><span class="figcaption-prefix">Figure 18:</span> StemID Lineage Tree and Branches of significance.</figcaption></figure>
+<figure id="figure-18"><img src="/training-material/topics/transcriptomics/images/raceid_stemid_lineage.png" alt="Lineage Computation Plots" /><figcaption><span class="figcaption-prefix">Figure 18:</span> StemID Lineage Tree and Branches of significance.</figcaption></figure>
 
 <p>The first (top-left) plot shows a minimum spanning tree that summarises the most likely connections between clusters. The second plot (top-right) elucidates this lineage hierarchy by projecting the cells along the links given by StemID, ordering the cells along each link in such a way to suggest a time series, or <em>pseudo-time</em> analysis of each link. This is important, because by ordering the cells by lineage pseudo-time we can trace the up or down regulation of a gene as discrete time points. The interval between each time point is of course hard to accurately determine, but the order of events is still important.</p>
 
@@ -1837,7 +1837,7 @@ This is shown in the chart above as the number of outliers as a function of the 
 
 </blockquote>
 
-<figure id="figure-19"><img src="/training-material/topics/transcriptomics/images/raceid_stemid_linkscores.png" alt="Link scores" title="StemID Link scores between branches." /><figcaption><span class="figcaption-prefix">Figure 19:</span> StemID Link scores between branches.</figcaption></figure>
+<figure id="figure-19"><img src="/training-material/topics/transcriptomics/images/raceid_stemid_linkscores.png" alt="Link scores" /><figcaption><span class="figcaption-prefix">Figure 19:</span> StemID Link scores between branches.</figcaption></figure>
 
 <p>The top chart shows the number of links above a threshold that each cluster exhibits to another. The more links a cluster has, the more evidence that the cluster describes a progenitor cell type that gives rise to other more mature types. The middle chart describes the “Delta-Entropy” which measures the variability of gene expression values within a cluster as the number of potential states (or cell types) it could produce, where clusters with more variability are less likely to be mature cell types due to the sheer “noise” that they exhibit that is to be expected of a cell type that could potentially give rise to other types. The bottom chart is simply the top chart multiplied by the middle chart, which adds both pieces of evidence together to yield the link score.</p>
 
@@ -1875,7 +1875,7 @@ This is shown in the chart above as the number of outliers as a function of the 
 </blockquote>
 
 <!--
-<figure id="figure-20"><img src="/training-material/topics/transcriptomics/images/raceid_stemid_other.png" alt="Other link scores" title="Other link scores between branches."><figcaption><span class="figcaption-prefix">Figure 20:</span> Other link scores between branches.</figcaption></figure>
+<figure id="figure-20"><img src="/training-material/topics/transcriptomics/images/raceid_stemid_other.png" alt="Other link scores"><figcaption><span class="figcaption-prefix">Figure 20:</span> Other link scores between branches.</figcaption></figure>
 -->
 
 <p>In a similar vein to how clusters were explored individually in RaceID, we can also explore individual branches of the lineage tree to see how some genes are up or down regulated.</p>
@@ -1920,7 +1920,7 @@ This is shown in the chart above as the number of outliers as a function of the 
 
 </blockquote>
 
-<figure id="figure-21"><img src="/training-material/topics/transcriptomics/images/raceid_stemid_cells.png" alt="Heatmap Cells" title="(Top) StemID Minimal spanning tree of all cells projected along the links between clusters. (Bottom) StemID Heatmap of Cluster 3 cells compared to other clusters." /><figcaption><span class="figcaption-prefix">Figure 21:</span> (Top) StemID Minimal spanning tree of all cells projected along the links between clusters. (Bottom) StemID Heatmap of Cluster 3 cells compared to other clusters.</figcaption></figure>
+<figure id="figure-21"><img src="/training-material/topics/transcriptomics/images/raceid_stemid_cells.png" alt="Heatmap Cells" /><figcaption><span class="figcaption-prefix">Figure 21:</span> (Top) StemID Minimal spanning tree of all cells projected along the links between clusters. (Bottom) StemID Heatmap of Cluster 3 cells compared to other clusters.</figcaption></figure>
 
 <p>The vertical names along the heatmap are the cells from <code class="highlighter-rouge">c3</code> being compared to all other clusters.</p>
 
@@ -2004,7 +2004,7 @@ Unsurprisingly, there is a higher score for the 3 to 1 trajectory for `c1` cells
 
 </blockquote>
 
-<figure id="figure-22"><img src="/training-material/topics/transcriptomics/images/raceid_fateid.png" alt="Heatmap FateID" title="FateID Heatmap" /><figcaption><span class="figcaption-prefix">Figure 22:</span> FateID Heatmap</figcaption></figure>
+<figure id="figure-22"><img src="/training-material/topics/transcriptomics/images/raceid_fateid.png" alt="Heatmap FateID" /><figcaption><span class="figcaption-prefix">Figure 22:</span> FateID Heatmap</figcaption></figure>
 
 <p>The heatmaps generated depict the same data, but at different “heat” scales to better colourise the map. The genes here are not genes, but are gene expression modules, which can be interpreted as gene motifs that are present in both <code class="highlighter-rouge">c1</code> and <code class="highlighter-rouge">c5</code>, but at different levels of expression.</p>
 
@@ -2033,7 +2033,7 @@ Unsurprisingly, there is a higher score for the 3 to 1 trajectory for `c1` cells
 
 <p>The steps of this workflow can be found in the related workflow.</p>
 
-<figure id="figure-23"><img src="/training-material/topics/transcriptomics/images/raceid_workflow.png" alt="Workflow" title="RaceID Workflow" /><figcaption><span class="figcaption-prefix">Figure 23:</span> RaceID Workflow</figcaption></figure>
+<figure id="figure-23"><img src="/training-material/topics/transcriptomics/images/raceid_workflow.png" alt="Workflow" /><figcaption><span class="figcaption-prefix">Figure 23:</span> RaceID Workflow</figcaption></figure>
 
 <p>All steps of the workflow have produced an R Data object (RDS) that serves as an input into the next step, but these objects can also be loaded into an R environment and analysed using any desired library.</p>
 

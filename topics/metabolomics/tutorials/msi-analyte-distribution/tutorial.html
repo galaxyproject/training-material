@@ -109,12 +109,6 @@
                     
 
                     
-                    <li class="nav-item">
-                        <a class="nav-link" href="/training-material/topics/metabolomics#references" title="References">
-                            <i class="fa fa-bookmark" aria-hidden="true"></i><span class="visually-hidden">references</span> Literature
-                        </a>
-                    </li>
-                    
 
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
@@ -395,7 +389,7 @@
 
 <p>Depending on the analyte of interest and the application, different mass spectrometers are used. A mass spectrometer measures the analytes by ionizing, evaporating and sorting them by their mass-to-charge (m/z) ratio. Put simply, a mass spectrometer needs basically three parts: an ionization source, a mass analyzer and a detector. Most common ionization sources for MSI are MALDI (Matrix Assisted Laser Desorption/Ionization), DESI (Desorption Electrospray Ionization) and SIMS (Secondary Ion Mass Spectrometry).</p>
 
-<figure id="figure-1"><img src="../../images/msi_distribution_maldi_tof_imaging.png" alt="MSI measurement" title="MALDI TOF imaging of a mouse kidney" /><figcaption><span class="figcaption-prefix">Figure 1:</span> MALDI TOF imaging of a mouse kidney</figcaption></figure>
+<figure id="figure-1"><img src="../../images/msi_distribution_maldi_tof_imaging.png" alt="MSI measurement" /><figcaption><span class="figcaption-prefix">Figure 1:</span> MALDI TOF imaging of a mouse kidney</figcaption></figure>
 
 <p>One common type of mass spectrometer for MSI is a MALDI Time-Of-Flight (MALDI-TOF) device. During MALDI ionization a laser shoots onto the sample that was covered with a special matrix which absorbs the laser energy and transfers it to the analytes. This process evaporizes and ionizes the analytes that due to their charge can then be accelerated in an electrical field towards the TOF tube. The time of flight through the tube to the detector is measured and as this correlates with the mass over charge (m/z) of the analyte, the flight time allows the calculation of m/z. During measurement complete mass spectra with hundreds of m/z - intensity pairs are acquired in thousands of sample plots leading to big and complex data. Each mass spectrum is annotated with coordinates (x,y) that define its location in the sample. This allows to visualize the intensity distribution of each m/z feature in the sample as a heatmap.</p>
 
@@ -437,7 +431,7 @@
 
 <p>We will check the properties of the dataset and then perform similar steps as described by <a href="https://doi.org/10.1007/s00216-015-8744-9">Gamboa-Becerra et al.</a>: Plotting an average mass spectrum, filtering the dataset for the relevant m/z range, automatical generation of m/z images to find analytes that correspond to morphological features and generating an image that overlays three different analytes.</p>
 
-<figure id="figure-2"><img src="../../images/msi_distribution_chilli.png" alt="Chilli" title="Cross section of a chilli in a similar orientation as in the publication by Gamboa-Becerra" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Cross section of a chilli in a similar orientation as in the publication by Gamboa-Becerra</figcaption></figure>
+<figure id="figure-2"><img src="../../images/msi_distribution_chilli.png" alt="Chilli" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Cross section of a chilli in a similar orientation as in the publication by Gamboa-Becerra</figcaption></figure>
 
 <h2 id="get-data">Get data</h2>
 
@@ -484,7 +478,7 @@
         </ul>
       </blockquote>
 
-      <figure id="figure-3"><img src="../../images/msi_distribution_upload_imzml.png" alt="Upload imzML files" title="Upload an imzML file via the composite upload" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Upload an imzML file via the composite upload</figcaption></figure>
+      <figure id="figure-3"><img src="../../images/msi_distribution_upload_imzml.png" alt="Upload imzML files" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Upload an imzML file via the composite upload</figcaption></figure>
 
       <blockquote class="tip">
         <h3 id="tip-tip-ftp-upload-for-large-files"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: FTP upload for large files</h3>
@@ -605,7 +599,7 @@ This information can also be extracted by opening the local imzML component of t
 
 <p>The relevant m/z range for VOCs was not known before the measurement and therefore chosen quite liberally. The average mass spectra plots gives a hint about the relevant m/z range of the sample with most peaks below 750 Th and no distinct peaks above 750 Th.</p>
 
-<figure id="figure-4"><img src="../../images/msi_distribution_qc.png" alt="quality report" title="Example plots from the quality report" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Example plots from the quality report</figcaption></figure>
+<figure id="figure-4"><img src="../../images/msi_distribution_qc.png" alt="quality report" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Example plots from the quality report</figcaption></figure>
 
 <h2 id="plotting-average-mass-spectra">Plotting average mass spectra</h2>
 
@@ -697,7 +691,7 @@ This information can also be extracted by opening the local imzML component of t
 
 <p>In the average spectrum of the complete m/z range there are no visible peaks above 800 Th. Most of the high intense peaks are below 300 Th what corresponds to typical masses of VOCs. Even in the zoomed mass spectra between 1000 and 2000 Th only few distinct peaks can be guessed in the noise. In concordance with <a href="https://doi.org/10.1007/s00216-015-8744-9">Gamboa-Becerra et al.</a> we will restrict further analysis to the m/z range between 15 and 1000.</p>
 
-<figure id="figure-5"><img src="../../images/msi_distribution_average_spectra.png" alt="Average plots" title="Complete and zoomed in average mass spectra" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Complete and zoomed in average mass spectra</figcaption></figure>
+<figure id="figure-5"><img src="../../images/msi_distribution_average_spectra.png" alt="Average plots" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Complete and zoomed in average mass spectra</figcaption></figure>
 
 <p>We will rerun the msi spectra plot tool and add the annotation of the pixels that correspond to different chilli compartments.</p>
 
@@ -765,7 +759,7 @@ This information can also be extracted by opening the local imzML component of t
 
 </blockquote>
 
-<figure id="figure-6"><img src="../../images/msi_distribution_overlay_plot.png" alt="Annotated plots" title="Mass spectra for single pixels of different compartments" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Mass spectra for single pixels of different compartments</figcaption></figure>
+<figure id="figure-6"><img src="../../images/msi_distribution_overlay_plot.png" alt="Annotated plots" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Mass spectra for single pixels of different compartments</figcaption></figure>
 
 <p>The single spectra that derive from different chilli departments show quite some differences. One has to keep in mind that this are single spectra and therefore the intensities can be different from the average intensity of the compartment. Looking at the m/z range between 1000 and 2000 we realize that there are quite some distinct peaks which were hidden in the noise of the average spectrum that not only contained the spectra of the chilli but also all background spectra. In concordance with the original publication and to speed up computation times we also focus on the low m/z range but for a deeper analysis it could be worth to also analyze the higher m/z range.</p>
 
@@ -882,7 +876,7 @@ This information can also be extracted by opening the local imzML component of t
 
 </blockquote>
 
-<figure id="figure-7"><img src="../../images/msi_distribution_auto_images.png" alt="best images" title="Distribution images for the analytes with the most localized distribution" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Distribution images for the analytes with the most localized distribution</figcaption></figure>
+<figure id="figure-7"><img src="../../images/msi_distribution_auto_images.png" alt="best images" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Distribution images for the analytes with the most localized distribution</figcaption></figure>
 
 <p>In this tutorial we only evaluated 102 features, while the authors of this study evaluated more than 2000 images visually. This process is time consuming and biased by the judgment of the scientist, still this method seems to be quite common. Several attempts have been made to circumvent this process and obtain m/z features with localized distribution automatically <a href="https://doi.org/10.1093/bioinformatics/btt388">Alexandrov and Bartels</a> and <a href="https://doi.org/10.1093/bioinformatics/bty622">Ingelese et al.</a>.
 After m/z features with a localized distribution have been found, it is interesting to identify them. Therefore <a href="https://doi.org/10.1007/s00216-015-8744-9">Gamboa-Becerra et al.</a> performed additional gas and liquid chromatography mass spectrometry (GC-MS and LC-MS) which enabled the high certainty identification of several features. Unfortunately the highly localized features 62.2 and 84.2 could not be identified but the defined localization implies their biological importance. Several capsaicinoids could be identified amongst them capsaicine (306.6 Th).</p>
@@ -963,13 +957,13 @@ Targeted analysis can be performed if the m/z of the molecule of interest is alr
 
 </blockquote>
 
-<figure id="figure-8"><img src="../../images/msi_distribution_overlay_images.png" alt="overlay images" title="Distribution image for capsaicin and overlay of the three analytes" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Distribution image for capsaicin and overlay of the three analytes</figcaption></figure>
+<figure id="figure-8"><img src="../../images/msi_distribution_overlay_images.png" alt="overlay images" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Distribution image for capsaicin and overlay of the three analytes</figcaption></figure>
 
 <h1 id="conclusion">Conclusion</h1>
 
 <p>This tutorial covered the steps to explore the properties of a dataset and visualize the morphological distribution of molecules.</p>
 
-<figure id="figure-9"><img src="../../images/msi_distribution_workflow.png" alt="workflow" title="Workflow that was used during this tutorial." /><figcaption><span class="figcaption-prefix">Figure 9:</span> Workflow that was used during this tutorial.</figcaption></figure>
+<figure id="figure-9"><img src="../../images/msi_distribution_workflow.png" alt="workflow" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Workflow that was used during this tutorial.</figcaption></figure>
 
 
 
@@ -992,9 +986,6 @@ Targeted analysis can be performed if the m/z of the molecule of interest is alr
                     </blockquote>
                     
 
-                    
-                    <h1 data-toc-skip>Useful literature</h1>
-                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/metabolomics#references">here</a>.</p>
                     
 
                     
