@@ -982,19 +982,7 @@ are also of high quality, and we can continue with our analysis.
 We will now estimate the accuracy of our sequencing and analysis pipeline by clustering the Mock sequences into OTUs,
 and comparing the results with the expected outcome.
 
-> ### {% icon comment %} Background: What are Operational Taxonomic Units (OTUs)?
->
-> In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
-> sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
-> depending on the sequence similarity threshold. Typically, OTU cluster are defined by a 97% identity
-> threshold of the 16S gene sequence variants at species level. 98% or 99% identity is suggested for strain
-> separation.
->
-> ![OTU graph](../../images/OTU_graph.png)
->
-> (Image credit: Danzeisen et al. 2013, 10.7717/peerj.237)
-{: .comment}
-
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/background_otus.md %}
 
 > ### {% icon hands_on %} Hands-on: Cluster mock sequences into OTUs
 >
@@ -1099,10 +1087,11 @@ In this tutorial we will continue with an OTU-based approach, for the phylotype 
 approaches, please refer to the [mothur wiki page](https://www.mothur.org/wiki/MiSeq_SOP).
 
 
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/background_otus.md %}
 
 
 {% if include.short %}
-We will now repeat the OTU clustering for our real datasets. We use a slightly different workflow because these tools are faster for larger datasets. We will also normalize our data by subsampling to the level of the sample with the lowest number of sequences in it.
+We will now repeat the OTU clustering we performed on our mock community for our real datasets. We use a slightly different workflow because these tools are faster for larger datasets. We will also normalize our data by subsampling to the level of the sample with the lowest number of sequences in it.
 
 {% else %}
 
