@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Galaxy 101"
 zenodo_link: ""
+level: Introductory
 questions:
   - "Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?"
 objectives:
@@ -26,6 +27,7 @@ contributors:
   - nekrut
   - bgruening
   - pajanne
+  - erasche
 ---
 
 # Introduction
@@ -52,9 +54,10 @@ Suppose you get the following question:
 > *Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?*
 {: .question}
 
-You are thinking "Wow! This is a simple question... I know where to find the data, at the [UCSC Genome Browser](https://genome.ucsc.edu/), but how do I actually compute this?" There is really a straightforward way of answering this question and it is called **Galaxy**. So let's try it...
+You may be familiar with the [UCSC Genome Browser](https://genome.ucsc.edu/) or another resource like it, and know that you can find the data there.
+With your data in hand, you are left with the question: "but how do I actually compute this?" There is really a straightforward answer: **Galaxy**. So let's try it...
 
-Browse to your Galaxy instance and log in or register. The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the central panel will show the home page, a tool form or some dataset content.
+Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and log in or register. The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the central panel will show the home page, a tool form or some dataset content.
 
 ![Galaxy interface](../../images/galaxy_interface.png)
 
@@ -93,7 +96,7 @@ We are now ready to perform our analysis, but first we need to get some data int
 >     - *"genome"*: `Human`
 >     - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
 >     - *"group"*: `Genes and Gene Predictions`
->     - *"track"*: `GENCODE v24`
+>     - *"track"*: `GENCODE v29`
 >     - *"table"*: `knownGene`
 >     - {% icon param-text %} *"region"* should be changed to `position` with value `chr22`
 >     - *"output format"* should be changed to `BED - browser extensible data`
@@ -164,17 +167,24 @@ Let's remind ourselves that our objective is to find which exon contains the mos
 
 > ### {% icon hands_on %} Hands-on: Finding Exons
 >
-> 1. **Join** {% icon tool %}: Enter the word `join` in the search bar of the tool panel, and select the tool named `Join - the intervals of two datasets side-by-side`
+> 1. **Join** {% icon tool %} the intervals of two datasets side-by-side:
 >
-> 2. Select the `Exons` dataset as the first dataset, and the `SNPs` dataset as the second dataset, and make sure *"return"* is set to `INNER JOIN` so that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)
+>    Enter the word `join` in the search bar of the tool panel, and select the
+>    tool named `Join - the intervals of two datasets side-by-side`
 >
->    ![Settings for the `Join` tool](../../images/101_11.png)
+>    - *"Join"*: Select `Exons`
+>    - *"With"*: Select `SNPs`
+>    - *"with min overlap"*: `1`
+>    - *"Return"*: `Only records that are joined (INNER JOIN)`, so that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)
 >
->    > ### {% icon comment %} Comments
->    > **Note:** if you scroll down on this page, you will find the help of the tool.
->    {: .comment}
+>    > ### {% icon tip %} How do I use this tool?
+>    > If you scroll down on this page, you will find the help of the tool.
+>    {: .tip}
 >
-> 3. Click the **Execute** button and view the resulting file (with the {% icon galaxy-eye %} (eye) icon). If everything went okay, you should see a file that looks similar to this:
+>
+> 2. Click **Execute**
+> 3. Wait for the job to finish
+> 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon). If everything went okay, you should see a file that looks similar to this:
 >
 >    ![Contents of the `Join` output dataset](../../images/101_joined.png)
 >
@@ -203,16 +213,18 @@ We've just seen how to count the number of SNPs in each exon, so let's do this f
 
 > ### {% icon hands_on %} Hands-on: Counting SNPs
 >
-> 1. **Group** {% icon tool %}: Open the tool `Group - data by a column and perform aggregate operation on other columns`
+> 1. **Group** {% icon tool %} data by a column and perform aggregate operation on other columns:
+>
+>    - *"Select data"*: select the output dataset from **Join** {% icon tool %}
+>    - *"Group by column"*: `Column: 4` (the column with the exon IDs)
+>    - *"Insert Operation"*:
+>      - 1: Operation
+>        - *"Type"*: `Count`
+>        - *"On column"*: `Column: 4`
 >
 >    ![Settings for the `Group` tool](../../images/101_13.png)
 >
->    Now set the following parameters:
->    - *"Select data"*: select the output dataset from the `Join` tool
->    - *"Group by column"*: `Column: 4` (the column with the exon IDs)
->    - *"Insert Operation"*: click on this button, then set *"Type"* to `Count` and set *"On column"* to `Column: 4`
->
-> 2. Make sure your screen looks like the image above and click **Execute** to perform the grouping. Your new output dataset will look something like this:
+> 2. Click **Execute** to perform the grouping. Your new output dataset will look something like this:
 >
 >    ![Contents of the `Group` output dataset](../../images/101_14.png)
 >
@@ -235,26 +247,32 @@ Now we have a list of all exons and the number of SNPs they contain, but we woul
 
 > ### {% icon hands_on %} Hands-on: Sorting
 >
-> 1. **Sort** {% icon tool %}: Navigate to the tool `Sort - data in ascending or descending order`
+> 1. **Sort** {% icon tool %} data in ascending or descending order:
 >
-> 2. Make sure that the output of the `Group` tool from the previous step is selected as input
+>    - *"Sort Query"*: Output from **Group** {% icon tool %}
+>    - *"Column Selections"*:
+>      - 1: Column Selections
+>        - *"on column"*: `Column: 2`
+>        - *"in"*: `Descending order`
+>        - *"Flavor"*: `Fast numeric sort (-n)`
 >
-> 3. Set the *"on column"* parameter to `Column: 2`, by default it will select a numerical sort in descending order, which is exactly what we want in this case.
+> 2. Click **Execute**
 >
->    ![Settings for the `Sort` tool](../../images/101_15.png)
->
-> 4. Click **Execute** and examine the output file.
+> 3. Examine the output file.
 >
 >    ![Contents of the `Sort` output dataset](../../images/101_16.png)
 >
->    You should now see the same file as we had before, but the exons with the highest number of SNPs are now on top.
+>    You should now see the same file as we had before, but the exons with the highest number of SNPs are now at the top.
 {: .hands_on}
 
 
 > ### {% icon question %} Question
 > Which exon has the highest number of SNPs in your file?
 >
-> Keep in mind this may depend on your settings when getting the data from UCSC.
+> > ### {% icon solution %} Solution
+> > When this tutorial was last updated, `ENST00000343518.10_cds_0_0_chr22_15690078_f` had 40 SNPs.
+> > Keep in mind this may depend on your settings when getting the data from UCSC.
+> {: .solution}
 {: .question}
 
 ## Select the top five exons
@@ -263,15 +281,15 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 
 > ### {% icon hands_on %} Hands-on: Select first
 >
-> 1. **Select first** {% icon tool %}: Open the tool `Select first - lines from a dataset`
+> 1. **Select first** {% icon tool %} lines from a dataset:
 >
-> 2. Set *"Select first"* to `5`
+>    - *"Select first"*: `5`
+>    - *"from"*: The output from **Sort** {% icon tool %}
 >
-> 3. Make sure that the output of the `Sort` tool from the previous step is selected as input
 >
->    ![Settings for the `Select first` tool](../../images/101_17.png)
+> 2. Click **Execute**
 >
-> 4. Click **Execute** and examine the output file, this should contain only the first 5 lines of the previous dataset.
+> 3. Examine the output file, this should contain only the first 5 lines of the previous dataset.
 >
 >    ![Contents of the `Select first` output dataset](../../images/101_first_5.png)
 {: .hands_on}
@@ -282,13 +300,16 @@ Congratulations! You have now determined which exons on chromosome 22 have the h
 
 > ### {% icon hands_on %} Hands-on: Compare two Datasets
 >
-> 1. **Compare two Datasets** {% icon tool %}: Open the tool `Compare two Datasets - to find common or distinct rows`
+> 1. **Compare two Datasets** {% icon tool %} to find common or distinct rows:
 >
-> 2. Set the parameters to compare the column 4 of the exon file with column 1 of the top-5 exons file to find matching rows of the first dataset.
+>    - *"Compare"*: `Exons`
+>    - *"Using column"*: `Column: 4`
+>    - *"against"*: the output from **Select first** {% icon tool %}
+>    - *"Using column"*: `Column: 1`
+>    - *"to find"*: `Matching rows of 1st dataset`
 >
->    ![Settings for the `Compare two Datasets` tool](../../images/101_18.png)
->
-> 3. Click **Execute** and examine your output file. It should contain the locations of your top 5 exons:
+> 2. Click **Execute**
+> 3. Examine your output file. It should contain the locations of your top 5 exons:
 >
 >    ![Contents of the `Compare two Datasets` output dataset](../../images/101_19.png)
 {: .hands_on}
@@ -301,7 +322,7 @@ A good way to learn about these exons is to look at their genomic surrounding. T
 >
 > 1. First, check that the **database** of your latest history dataset is `hg38`. If not, click on the {% icon galaxy-pencil %} pencil icon and modify the **Database/Build:** field to `Human Dec. 2013 (GRCh38/hg38) (hg38)`.
 >
->    ![Modify the database of the `Compare two Datasets` output dataset](../../images/101_20.png)
+>    {% include snippets/change_dbkey.md dbkey="hg38" %}
 >
 > 2. To **visualize the data in UCSC genome browser**, click on `display at UCSC main` option visible when you expand the history item.
 >
@@ -350,7 +371,9 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >
 >    ![Selection of steps for `Extract Workflow` from history](../../images/101_25.png)
 >
-> 3. **Uncheck** any steps that shouldn't be included in the workflow (if any), and **rename** the workflow to something descriptive, for example `Find exons with the highest number of SNPs`.
+> 3. **Rename** the workflow to something descriptive, for example `Find exons with the highest number of SNPs`.
+>
+>    If there are any steps that shouldn't be included in the workflow, you can **uncheck** them.
 >
 > 4. Click on the **Create Workflow** button near the top.
 >
@@ -377,40 +400,42 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >
 >    When you click on a component, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.
 >
->    > ### {% icon comment %} Hiding intermediate steps
+>    > ### {% icon tip %} Hiding intermediate steps
 >    > When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which outputs to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
 >    > ![Asterisk for `out_file1` in the `Select First` tool](../../../../shared/images/workflow_editor_mark_output.png)
 >    >
 >    > If you click on this asterisk for any of the output datasets, then *only* files with an asterisk will be shown, and all outputs without an asterisk will be hidden. (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown.)
->    {: .comment}
+>    {: .tip}
 >
-> 3. Click the **asterisk** next to `out_file1` in the `Select First` and `Compare two Datasets` tools.
+> 3. Click the **asterisk** for `out_file1` in the `Select First` and `Compare two Datasets` tools.
 >
 >    Now, when we run the workflow, we will only see the final two outputs, i.e. the table with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser. Once you have done this, you will notice that the **minimap** at the bottom-right corner of your screen will have a colour-coded view of your workflow, with orange boxes representing a tool with an output that will be shown.
 >
 >    ![Workflow minimap](../../images/101_31.png)
 >
->    If you didn't specify a name for the input datasets at the beginning, they will be labeled `Input Dataset`. In this case you can change the labels now to avoid confusion when using the workflow later on.
->
->    ![`Exons` input step selected in the workflow editor](../../images/101_32.png)
 >
 >    In the image above, you see that the top input dataset (with the blue border) connects to the first input of the `Join` tool, so this corresponds to the exon data.
 >
-> 4. **Click** on the box corresponding to the exon input dataset, and change the **Label** to `Exons` on the right-hand side of your screen.
+> 4. The box named `Exons` is named ok, but we want to change `SNPs` since this workflow is not specific to SNPs
 >
-> 5. **Repeat** this process for the other input dataset. Name it `Features`. We used it to calculate highest number of SNPs, but this workflow would also work with other features, so we give it a bit more generic name.
+>    - **Click** on the box corresponding to the `SNPs` input dataset
+>    - change the **Label** to `Features` on the right-hand side of your screen.
 >
-> 6. Let's also **rename the outputs**. Click on the `Select first` tool and in the menu on the right click on `Configure Output: 'out_file1'` and enter a descriptive name for the output dataset in the `Rename dataset` box.
+> 5. Let's also **rename the outputs**:
+>
+>    - Click on the `Select first` tool in the workflow editor
+>    - In the menu on the right click on `Configure Output: 'out_file1'`
+>        - Under `Rename dataset`, and enter a descriptive name for the output dataset like `Top 5 exon IDs`
 >
 >    ![Rename the output of the `Select first` tool step](../../images/101_34.png)
 >
-> 7. **Repeat** this for the output of the `Compare two Datasets` tool.
+> 7. **Repeat** this for the output of the `Compare two Datasets` tool, naming it `Top 5 exons`
 >
 > 8. **Save your workflow** (important!) by clicking on the gear icon at the top right of the screen, and selecting `Save`.
 >
 >    ![Save option in the workflow editor menu](../../images/workflow_editor_save.png)
 >
-> 9. **Return** to the analysis view by clicking on `Analyze Data` at the top menu bar.
+> 9. **Return** to the analysis view by clicking on **Analyze Data** at the top menu bar.
 >
 {: .hands_on}
 
@@ -430,6 +455,8 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    ![Drag and drop of `Exons` dataset in the history overview](../../images/101_copydataset.png)
 >
+> 2. Click **Analyze Data** at the top to return to the main analysis window
+>
 > 3. We wanted to know something about the repetitive elements per exon. We get this data from UCSC.
 >    - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
 >    - *"group"* parameter should be changed to `Repeats`
@@ -448,7 +475,11 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    ![Settings for running the workflow](../../images/101_38.png)
 >
->    Once the workflow has started you will initially be able to see all its steps:
+>    > ### {% icon comment %} Potential workflow issues
+>    > Galaxy validates the workflow inputs to ensure they're correct. It may show a validation error at the start, until you select `Exons` for the Exons input, and your repeats for the Features input.
+>    {: .comment}
+>
+> 6. Once the workflow has started, you will initially be able to see all its steps:
 >
 >    ![Datasets appearing in the history](../../images/101_39.png)
 {: .hands_on}

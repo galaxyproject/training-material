@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Collections: Multisample Analysis"
 zenodo_link: ""
+level: Advanced
 questions:
 objectives:
 time_estimation: "1h"

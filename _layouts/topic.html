@@ -50,13 +50,16 @@ layout: base
                     <tr>
                         <td>
                             {{ material.title }}
-                            {% if material.tags %}
-                                <div class="">
-                                    {% for tag in material.tags %}
-                                        <span class="label label-default" style="{{ tag | colour_tag }}">{{ tag  }}</span>
-                                    {% endfor %}
-                                </div>
+                            <div class="">
+                            {% if material.level %}
+                                {% include _includes/difficulty-indicator.html level=material.level %}
                             {% endif %}
+                            {% if material.tags %}
+                                  {% for tag in material.tags %}
+                                       <span class="label label-default" style="{{ tag | colour_tag }}">{{ tag  }}</span>
+                                  {% endfor %}
+                            {% endif %}
+                            </div>
                         </td>
                         {% if material.type == "introduction" %}
                             <td>
@@ -162,31 +165,15 @@ layout: base
             <p>You can use a public Galaxy instance which has been tested for the availability of the used tools. They are listed along with the tutorials above.</p>
             {% if topic.docker_image and topic.docker_image != "" %}
                 <p>You can also use the following Docker image for these tutorials:</p>
-                <pre><code>docker run -d -p 8080:80 {{ topic.docker_image }}</code></pre>
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -d -p 8080:80 {{ topic.docker_image }}</code></pre></div></div>
                 <p>It will launch a flavored Galaxy instance available on <a href="http://localhost:8080">http://localhost:8080</a>.</p>
             {% endif %}
         {% endif %}
 
         <h2 id="maintainers">Maintainers</h2>
         <p>This material is maintained by:</p>
-        <ul>
         {% assign maintainers = topic.maintainers | sorted %}
-        {% for maintainer in maintainers %}
-            <li>
-                <a href="{{ site.baseurl }}/hall-of-fame#{{ maintainer }}">{{ contributors[maintainer].name | default: maintainer}}</a>
-                {% if contributors[maintainer].maintainer_contact %}
-                    {% if contributors[maintainer].maintainer_contact == 'email' %}
-                    (<a href="mailto:{{ contributors[maintainer].email }}">Contact {% icon email %}</a> )
-                    {% elsif contributors[maintainer].maintainer_contact == 'gitter' %}
-                    (<a href="https://gitter.im/{{ contributors[maintainer].gitter }}">Contact {% icon gitter %}</a> )
-                    {% else %}
-                    (<a href="{{ contributors[maintainer].maintainer_contact }}">Contact</a>)
-                    {% endif %}
-
-                {% endif %}
-            </li>
-        {% endfor %}
-        </ul>
+        {% include _includes/contributor-badge-list.html contributors=maintainers %}
 
         <p>
             <em>For any question related to this topic and the content, you can contact them or visit our <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter channel</a>.</em>
@@ -194,8 +181,6 @@ layout: base
 
         <h2 id="contributors">Contributors</h2>
         <p>This material was contributed to by:</p>
-
-        <!-- get list of unique contributors for all materials in the topic -->
         {% assign contributors_list = "" | split: ',' %}
         {% for material in topic_material %}
             {% for c in material.contributors %}
@@ -205,16 +190,8 @@ layout: base
                 {% endif %}
             {% endfor %}
         {% endfor %}
-
-        <ul>
         {% assign contributors_list_sorted = contributors_list | sorted %}
-        {% for username in contributors_list_sorted %}
-            {% assign contributor = contributors[username] | default: username %}
-            <li>
-                <a href="{{ site.baseurl }}/hall-of-fame#{{ username }}">{% if contributor.name %}{{ contributor.name }}{% else %}{{ username }}{% endif %}</a>
-            </li>
-        {% endfor %}
-        </ul>
+        {% include _includes/contributor-badge-list.html contributors=contributors_list_sorted %}
 
         {% if topic.references %}
         <h2 id="references">References</h2>
