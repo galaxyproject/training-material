@@ -381,7 +381,7 @@
     }
   },
   "url": "https://galaxyproject.github.io//training-material/topics/metagenomics/tutorials/mothur-miseq-sop/tutorial.html",
-  "timeRequired": "PT4H",
+  "timeRequired": "PT6H",
   "description": "16S Microbial Analysis with mothur (extended)\\nThe questions this  addresses are:\n - What is the effect of normal variation in the gut microbiome on host health?\n\n\\nThe objectives are:\n - Analyze of 16S rRNA sequencing data using the mothur toolsuite in Galaxy\n - Using a mock community to assess the error rate of your sequencing experiment\n - Visualize sample diversity using Krona and Phinch\n\n",
   "coursePrerequisites": [
     {
@@ -499,7 +499,7 @@
             
 
             
-            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 4 hours</p>
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 6 hours</p>
             
 
             
@@ -512,7 +512,8 @@
                     <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
                 </div>
                 <div class="col-sm-10">
-                    <h1 class="no_toc" id="overview">Overview</h1>
+                    
+<h1 class="no_toc" id="overview">Overview</h1>
 
 <p>In this tutorial we will perform an analysis based on the
 <a href="https://www.mothur.org/wiki/MiSeq_SOP">Standard Operating Procedure (SOP) for MiSeq data</a>, developed by the <a href="http://www.schlosslab.org/">Schloss lab</a>, the creators of the mothur software package <a class="citation" href="#Schloss2009">Schloss <i>et al.</i> 2009</a>.</p>
@@ -556,9 +557,10 @@ analysis steps (e.g. data cleaning) at once, please see the <a href="/training-m
     </ol>
   </li>
   <li><a href="#optional-calculate-error-rates-based-on-our-mock-community" id="markdown-toc-optional-calculate-error-rates-based-on-our-mock-community">Optional: Calculate error rates based on our mock community</a></li>
-  <li><a href="#otu-based-analysis" id="markdown-toc-otu-based-analysis">OTU-based Analysis</a>    <ol>
-      <li><a href="#clustering-sequences-into-otus" id="markdown-toc-clustering-sequences-into-otus">Clustering sequences into OTUs</a></li>
-      <li><a href="#calculate-species-diversity" id="markdown-toc-calculate-species-diversity">Calculate Species Diversity</a></li>
+  <li><a href="#otu-clustering" id="markdown-toc-otu-clustering">OTU Clustering</a></li>
+  <li><a href="#diversity-analysis" id="markdown-toc-diversity-analysis">Diversity Analysis</a>    <ol>
+      <li><a href="#alpha-diversity" id="markdown-toc-alpha-diversity">Alpha diversity</a></li>
+      <li><a href="#beta-diversity" id="markdown-toc-beta-diversity">Beta diversity</a></li>
     </ol>
   </li>
   <li><a href="#visualisations" id="markdown-toc-visualisations">Visualisations</a>    <ol>
@@ -759,8 +761,6 @@ https://zenodo.org/record/800651/files/Mock_R2.fastq
           <ul>
             <li><code class="highlighter-rouge">silva.v4.fasta</code></li>
             <li><code class="highlighter-rouge">HMP_MOCK.v35.fasta</code></li>
-            <li><code class="highlighter-rouge">mouse.dpw.metadata</code></li>
-            <li><code class="highlighter-rouge">mouse.time.design</code></li>
             <li><code class="highlighter-rouge">trainset9_032012.pds.fasta</code></li>
             <li><code class="highlighter-rouge">trainset9_032012.pds.tax</code></li>
           </ul>
@@ -770,8 +770,6 @@ https://zenodo.org/record/800651/files/Mock_R2.fastq
       <blockquote class="solution">
         <h3 id="solution-list-of-zenodo-urls-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> List of Zenodo URLs</h3>
         <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/800651/files/HMP_MOCK.v35.fasta
-https://zenodo.org/record/800651/files/mouse.dpw.metadata
-https://zenodo.org/record/800651/files/mouse.time.design
 https://zenodo.org/record/800651/files/silva.v4.fasta
 https://zenodo.org/record/800651/files/trainset9_032012.pds.fasta
 https://zenodo.org/record/800651/files/trainset9_032012.pds.tax
@@ -798,7 +796,7 @@ convention, so that our tools will know which files belong together. We do this 
     </li>
     <li>Select all the FASTQ files (40 in total)
       <ul>
-        <li><strong>Tip:</strong> type <code class="highlighter-rouge">fastq</code> in the search bar at the top of your history to filter only the fastq files; you can now use the <code class="highlighter-rouge">All</code> button at the top instead of having to individually select all 40 input files.</li>
+        <li><strong>Tip:</strong> type <code class="highlighter-rouge">fastq</code> in the search bar at the top of your history to filter only the FASTQ files; you can now use the <code class="highlighter-rouge">All</code> button at the top instead of having to individually select all 40 input files.</li>
         <li>Click on <strong>for all selected..</strong></li>
         <li>Select <strong>Build List of Dataset Pairs</strong> from the dropdown menu</li>
       </ul>
@@ -840,6 +838,7 @@ please remove everything except the sample name for each pair!</li>
 </blockquote>
 
 <h1 id="quality-control">Quality Control</h1>
+<p><a href="../mothur-miseq-sop-short/tutorial.html#quality-control"><i class="fa fa-exchange" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to short tutorial</a></p>
 
 <p>For more information on the topic of quality control, please see our training materials
 <a href="/training-material/topics/sequence-analysis/">here</a>.</p>
@@ -998,7 +997,7 @@ the original dataset. We do this by using the <strong>Unique.seqs</strong> tool.
   <blockquote class="question">
     <h3 id="question-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-    <p>How many sequences were unique? how many duplicates were removed?</p>
+    <p>How many sequences were unique? How many duplicates were removed?</p>
 
     <blockquote class="solution">
       <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
@@ -1071,6 +1070,7 @@ report both the number of unique <em>representative sequences</em> as well as th
 </blockquote>
 
 <h1 id="sequence-alignment">Sequence Alignment</h1>
+<p><a href="../mothur-miseq-sop-short/tutorial.html#sequence-alignment"><i class="fa fa-exchange" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to short tutorial</a></p>
 
 <p>For more information on the topic of alignment, please see our training materials
 <a href="/training-material/topics/sequence-analysis/">here</a></p>
@@ -1193,7 +1193,7 @@ homopolymer stretches.</p>
     </li>
     <li><strong>Filter.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: <code class="highlighter-rouge">good.fasta</code> output from the lastest <strong>Screen.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: <code class="highlighter-rouge">good.fasta</code> output from the latest <strong>Screen.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“vertical”</em>: <code class="highlighter-rouge">yes</code></li>
         <li><em>“trump”</em>: <code class="highlighter-rouge">.</code></li>
         <li><em>“Output logfile”</em>: <code class="highlighter-rouge">yes</code></li>
@@ -1342,6 +1342,7 @@ sequences to be flagged as chimeric.</p>
 </blockquote>
 
 <h1 id="taxonomic-classification">Taxonomic Classification</h1>
+<p><a href="../mothur-miseq-sop-short/tutorial.html#taxonomic-classification"><i class="fa fa-exchange" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to short tutorial</a></p>
 
 <p>Now that we have thoroughly cleaned our data, we are finally ready to assign a taxonomy to our sequences.</p>
 
@@ -1349,7 +1350,7 @@ sequences to be flagged as chimeric.</p>
 set provided by the Schloss lab</a> based on the RDP (Ribosomal Database Project, <a class="citation" href="#Cole2013">Cole <i>et al.</i> 2013</a>) reference taxonomy.</p>
 
 <blockquote class="comment">
-  <h3 id="comment-background-taxonomic-assignement"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: Taxonomic assignement</h3>
+  <h3 id="comment-background-taxonomic-assignment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: Taxonomic assignment</h3>
 
   <p>In this tutorial we will use the RDP classifier and reference taxonomy for classification, but there are several different taxonomic
 assignment algorithms and reference databases available for this purpose.</p>
@@ -1446,14 +1447,15 @@ sequences were in represented by these 20 representative sequences.</p>
 our sequencing and bioinformatics pipeline is.</p>
 
 <h1 id="optional-calculate-error-rates-based-on-our-mock-community">Optional: Calculate error rates based on our mock community</h1>
+<p><a href="../mothur-miseq-sop-short/tutorial.html#optional-calculate-error-rates-based-on-our-mock-community"><i class="fa fa-exchange" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to short tutorial</a></p>
 
 <blockquote class="comment">
   <h3 id="comment-skipping-the-mock-community-analysis"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Skipping the mock community analysis</h3>
 
-  <p>The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to <a href="#otu-based-analysis">the next section</a>
+  <p>The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to <a href="#otu-clustering">the next section</a>
 where we will cluster our sequences into OTUs, classify them and perform some visualisations.
 <br /><br />
-Click <a href="#otu-based-analysis">here</a> to skip this section and continue with the analysis.</p>
+Click <a href="#otu-clustering">here</a> to skip this section and continue with the analysis.</p>
 
 </blockquote>
 
@@ -1489,7 +1491,7 @@ results on the rest of our samples.</p>
   <p>As an example, consider the following image from Fouhy et al <a class="citation" href="#Fouhy2016">Fouhy <i>et al.</i> 2016</a>.
 A mock community sample was sequenced for different combinations of sequencer and primer sets (V-regions).
 Since we know the expected outcome, we can assess the accuracy of each pipeline. A similar approach can be used to
-assess different parameter settings of the <em>in-silico</em>  analysis pipline.</p>
+assess different parameter settings of the <em>in-silico</em>  analysis pipeline.</p>
 
   <p><img src="../../images/mock_community.jpg" alt="example results of mock community sequencing to assess error rates" title="Example of usage of a mock community to assess accuracy. On the left is the expected result given that we know the exact composition of the mock sample. This was then used to assess the accuracy of different combinations of sequencing platform and primer set (choice of V-region)" /></p>
 
@@ -1597,7 +1599,7 @@ separation.</p>
 
       <p>Next we group sequences into OTUs</p>
     </li>
-    <li><strong>Cluster</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+    <li><strong>Cluster - Assign sequences to OTUs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“column”</em>: the <code class="highlighter-rouge">dist</code> output from <strong>Dist.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1684,12 +1686,27 @@ species rich habitat, only a small fraction has been sampled.</p>
 
 <p>Now that we have assessed our error rates we are ready for some real analysis.</p>
 
-<h1 id="otu-based-analysis">OTU-based Analysis</h1>
+<h1 id="otu-clustering">OTU Clustering</h1>
+<p><a href="../mothur-miseq-sop-short/tutorial.html#otu-clustering"><i class="fa fa-exchange" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to short tutorial</a></p>
 
 <p>In this tutorial we will continue with an OTU-based approach, for the phylotype and phylogenic
 approaches, please refer to the <a href="https://www.mothur.org/wiki/MiSeq_SOP">mothur wiki page</a>.</p>
 
-<h3 id="removing-mock-sample">Removing Mock sample</h3>
+<blockquote class="comment">
+  <h3 id="comment-background-what-are-operational-taxonomic-units-otus-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: What are Operational Taxonomic Units (OTUs)?</h3>
+
+  <p>In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
+sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
+depending on the sequence similarity threshold. Typically, OTU cluster are defined by a 97% identity
+threshold of the 16S gene sequence variants at species level. 98% or 99% identity is suggested for strain
+separation.</p>
+
+  <p><img src="../../images/OTU_graph.png" alt="OTU graph" /></p>
+
+  <p>(Image credit: Danzeisen et al. 2013, 10.7717/peerj.237)</p>
+</blockquote>
+
+<h3 id="remove-mock-sample">Remove Mock Sample</h3>
 
 <p>Now that we have cleaned up our data set as best we can, and assured ourselves of the quality of our sequencing
 pipeline by considering a mock sample, we are almost ready to cluster and classify our real data. But
@@ -1713,7 +1730,7 @@ the <strong>Remove.groups</strong> tool:</p>
 
 </blockquote>
 
-<h2 id="clustering-sequences-into-otus">Clustering sequences into OTUs</h2>
+<h3 id="cluster-sequences-into-otus">Cluster sequences into OTUs</h3>
 
 <p>There are several ways we can perform clustering. For the Mock community, we used the traditional approach of
 using the <strong>Dist.seqs</strong> and <strong>Cluster</strong> tools. Alternatively, we can also use the <strong>Cluster.split</strong> tool. With
@@ -1834,7 +1851,7 @@ dataset by subsampling.</p>
       <blockquote class="question">
         <h3 id="question-question-10"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-        <p>What would you exect the result of <code class="highlighter-rouge">count.groups</code> on this new shared output collection to be? Check if you are correct.</p>
+        <p>What would you expect the result of <code class="highlighter-rouge">count.groups</code> on this new shared output collection to be? Check if you are correct.</p>
         <blockquote class="solution">
           <h3 id="solution-solution-11"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <p>all groups (samples) should now have 2389 sequences. Run count.groups again on the shared output collection by the sub.sample
@@ -1848,11 +1865,12 @@ tool to confirm that this is indeed what happened.</p>
 will deviate from the ones presented here.</p>
 </blockquote>
 
-<h2 id="calculate-species-diversity">Calculate Species Diversity</h2>
+<h1 id="diversity-analysis">Diversity Analysis</h1>
+<p><a href="../mothur-miseq-sop-short/tutorial.html#diversity-analysis"><i class="fa fa-exchange" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to short tutorial</a></p>
 
 <p>Species diversity is a valuable tool for describing the ecological complexity of a single sample (alpha diversity)
 or between samples (beta diversity). However, diversity is not a physical quantity that can be measured directly,
-and many different metrics have been proposed to quantify diversity <a href="https://www.ncbi.nlm.nih.gov/pubmed/28025179">Finotello et al. 2016</a>.</p>
+and many different metrics have been proposed to quantify diversity by <a class="citation" href="#Finotello2016">Finotello <i>et al.</i> 2016</a>.</p>
 
 <blockquote class="comment">
   <h3 id="comment-background-species-diversity"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: Species Diversity</h3>
@@ -1865,13 +1883,19 @@ and many different metrics have been proposed to quantify diversity <a href="htt
     <li><strong>Phylogenetic diversity</strong> = how closely related the species in a community are.</li>
   </ul>
 
-  <p><br /><br />
-To understand the difference between richness and evenness, consider the following example:</p>
+  <p><br /><br /></p>
 
-  <p><img src="../../images/richness-evenness.png" alt="illustration of richness and evenness" /></p>
+  <p>Each of these factors play a role in diversity, but how to combine them into a single measure of diversity is nontrivial.
+Many different metrics have been proposed for this, for example: <em>shannon, chao, pd, ace, simpson, sobs, jack, npshannon,
+smithwilson, heip bergerparker, boney, efron, shen, solow, bootstrap, qstat, coverage, anderberg, hamming, jclass, jest,
+ochiai, canberra, thetayc, invsimpson</em>, just to name a few ;). A comparison of several different diversity metrics is discussed in <a class="citation" href="#BonillaRosso2012">Bonilla-Rosso <i>et al.</i> 2012</a></p>
 
   <blockquote class="question">
     <h3 id="question-question-11"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+    <p>To understand the difference between richness and evenness, consider the following example:</p>
+
+    <p><img src="../../images/richness-evenness-blank.png" alt="illustration of richness and evenness" /></p>
+
     <ol>
       <li>Which of these communities has the highest richness?</li>
       <li>Which of these communities has the highest evenness?</li>
@@ -1881,8 +1905,10 @@ To understand the difference between richness and evenness, consider the followi
       <h3 id="solution-solution-12"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
       <ol>
         <li>Both communities have 4 different species, so they have same richness.</li>
-        <li>Communty B is more even, because each species has the same abundance.</li>
+        <li>Community B is more even, because each species has the same abundance.</li>
       </ol>
+
+      <p><img src="../../images/richness-evenness.png" alt="illustration of richness and evenness" /></p>
     </blockquote>
 
   </blockquote>
@@ -1894,20 +1920,15 @@ closely related to each other in the second sample.</p>
 
   <p><img src="../../images/phylogenetic-distance.png" alt="illustration of phylogenetic distance" width="50%" /></p>
 
-  <p>Each of these factors play a role in diversity, but how to combine them into a single measure of diversity is nontrivial.
-Many different metrics have been proposed for this, for example: <em>shannon, chao, pd, ace, simpson, sobs, jack, npshannon,
-smithwilson, heip bergerparker, boney, efron, shen, solow, bootstrap, qstat, coverage, anderberg, hamming, jclass, jest,
-ochiai, canberra, thetayc, invsimpson</em>, just to name a few ;).</p>
-
   <p>Now, you do not need to know what all these different metrics are, but just remember that there is not a single
 definition of diversity and as always, the metric you choose to use may influence your results.</p>
 
 </blockquote>
 
-<h3 id="alpha-diversity">Alpha diversity</h3>
+<h2 id="alpha-diversity">Alpha diversity</h2>
 
 <p>In order to estimate alpha diversity of the samples, we first generate the <em>rarefaction curves</em>. Recall that
-rarefaction measure the number of observed OTUs as a function of the subsampling size.</p>
+rarefaction measures the number of observed OTUs as a function of the subsampling size.</p>
 
 <blockquote class="comment">
   <h3 id="comment-background-rarefaction-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: Rarefaction</h3>
@@ -1955,7 +1976,7 @@ more options available under the <em>calc</em> parameter. The mothur wiki descri
 ...
 </code></pre></div></div>
 
-<p>This file displays the number of OTUs identified per amount of sequences used (numsampled). What we would like
+<p>This file displays the number of OTUs identified per amount of sequences used (<code class="highlighter-rouge">numsampled</code>). What we would like
 to see is the number of additional OTUs identified when adding more sequences reaching a plateau. Then we know
 we have covered our full diversity. This information would be easier to interpret in the form of a graph.
 Let’s plot the rarefaction curve for a couple of our sequences:</p>
@@ -1964,7 +1985,7 @@ Let’s plot the rarefaction curve for a couple of our sequences:</p>
   <h3 id="hands_on-hands-on-plot-rarefaction"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot Rarefaction</h3>
 
   <ul>
-    <li><strong>Plotting tool</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+    <li><strong>Plotting tool - for multiple series and graph types</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><em>“Plot Title”</em>: <code class="highlighter-rouge">Rarefaction</code></li>
         <li><em>“Label for x axis”</em>: <code class="highlighter-rouge">Number of Sequences</code></li>
@@ -1985,7 +2006,7 @@ skipping the low confidence and high confidence interval columns)</li>
 
 </blockquote>
 
-<p>From the resulting image we can see that the rarefaction curves for all samples have started to level
+<p>View the rarefaction plot output. From this image can see that the rarefaction curves for all samples have started to level
 off so we are confident we cover a large part of our sample diversity:</p>
 
 <p><img src="../../images/rarefaction_curves.png" alt="Rarefaction curves" /></p>
@@ -2007,7 +2028,13 @@ will randomly subsample down to 2389 sequences, repeat this process 1000 times, 
   </ul>
 </blockquote>
 
-<p>The data will be outputted to a table called the <em>summary file</em>:</p>
+<p>View the <code class="highlighter-rouge">summary</code> output from <strong>Summary.single</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. This shows several alpha diversity metrics:</p>
+<ul>
+  <li><a href="https://www.mothur.org/wiki/Sobs">sobs</a>: observed richness (number of OTUs)</li>
+  <li><a href="https://mothur.org/wiki/Coverage">coverage</a>: Good’s coverage index</li>
+  <li><a href="https://en.wikipedia.org/wiki/Diversity_index#Simpson_index">invsimpson</a>: Inverse Simpson Index</li>
+  <li><a href="https://www.mothur.org/wiki/Nseqs">nseqs</a>: number of sequences</li>
+</ul>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>label   group   sobs          coverage    invsimpson   invsimpson_lci   invsimpson_hci  nseqs
 0.03    F3D0    167.000000    0.994697    25.686387    24.648040        26.816067       6223.000000
@@ -2031,21 +2058,21 @@ will randomly subsample down to 2389 sequences, repeat this process 1000 times, 
 0.03    F3D9    162.000000    0.994803    24.120541    23.105499        25.228865       5773.000000
 </code></pre></div></div>
 
-<p>This shows the <a href="https://www.mothur.org/wiki/Nseqs">number of sequences</a>, the <a href="https://www.mothur.org/wiki/Coverage">sample coverage</a>, the number of <a href="https://www.mothur.org/wiki/Sobs">observed OTUs</a>, and the <a href="https://www.mothur.org/wiki/Invsimpson">Inverse Simpson diversity estimate</a> for each group.</p>
-
 <p>There are a couple of things to note here:</p>
 <ul>
   <li>The differences in diversity and richness between early and late time points is small.</li>
   <li>All sample coverage is above 97%.</li>
 </ul>
 
+<p>There are many more diversity metrics, and for more information about the different calculators available in mothur, see <a href="https://mothur.org/wiki/Calculators">the mothur wiki page</a></p>
+
 <p>We could perform additional statistical tests (e.g. ANOVA) to confirm our feeling that there is no significant difference based on sex or early vs. late, but this is beyond the scope of this tutorial.</p>
 
-<h3 id="beta-diversity">Beta diversity</h3>
+<h2 id="beta-diversity">Beta diversity</h2>
 
 <p>Beta diversity is a measure of the similarity of the membership and structure found between <em>different</em> samples.
 The default calculator in the following section is <em>thetaYC</em>, which is the <a href="http://csyue.nccu.edu.tw/2005communicationindex.pdf">Yue &amp; Clayton theta similarity
-coefficient</a>.</p>
+coefficient</a>. We will also calculate the <a href="https://en.wikipedia.org/wiki/Jaccard_index">Jaccard index</a> (termed <code class="highlighter-rouge">jclass</code> in mothur).</p>
 
 <p>We calculate this with the <strong>Dist.shared</strong> tool, which will rarefy our data.</p>
 
@@ -2102,6 +2129,8 @@ Let’s take a look at the Venn diagrams for the first 4 time points of female 3
 
 <p>This generates a 4-way Venn diagram and a table listing the shared OTUs.</p>
 
+<p>Examine the Venn diagram:</p>
+
 <p><img src="../../images/venn.png" alt="Venn diagram and table with shared OTUs" /></p>
 
 <p>This shows that there were a total of 180 OTUs observed between the 4 time points. Only 76 of those OTUs were
@@ -2109,7 +2138,7 @@ shared by all four time points. We could look deeper at the shared file to see w
 numerically rare or just had a low incidence.</p>
 
 <p>Next, let’s generate a dendrogram to describe the similarity of the samples to each other. We will generate a
-dendrogram using the jclass and thetayc calculators within the <strong>Tree.shared</strong> tool:</p>
+dendrogram using the <code class="highlighter-rouge">jclass</code> and <code class="highlighter-rouge">thetayc</code> calculators within the <strong>Tree.shared</strong> tool:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-tree"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Tree</h3>
@@ -2142,7 +2171,7 @@ of the others.</p>
 
 <h1 id="visualisations">Visualisations</h1>
 
-<p>We may now wish to visualize our results. We can convert our <em>shared</em> file to the more widely used <code class="highlighter-rouge">biom</code> format and
+<p>We may now wish to further visualize our results. We can convert our <em>shared</em> file to the more widely used <code class="highlighter-rouge">biom</code> format and
 view it in a platform like <a href="http://www.phinch.org/">Phinch</a>.</p>
 
 <h2 id="phinch">Phinch</h2>
@@ -2314,6 +2343,17 @@ any point in the hierarchy (here 5% of all)</p>
     
 
 </li>
+<li><span id="BonillaRosso2012">Bonilla-Rosso, G., L. E. Eguiarte, D. Romero, M. Travisano, and V. Souza, 2012 <b>Understanding microbial community diversity metrics derived from metagenomes: performance evaluation using simulated data sets</b>. FEMS Microbiology Ecology 82: 37–49.</span>
+    
+    
+    <a href="https://doi.org/10.1111/j.1574-6941.2012.01405.x">10.1111/j.1574-6941.2012.01405.x</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
 <li><span id="Schloss2012">Schloss, P. D., 2012 <b>Secondary structure improves OTU assignments of 16S rRNA gene sequences</b>. The ISME Journal 7: 457–460.</span>
     
     
@@ -2373,6 +2413,17 @@ any point in the hierarchy (here 5% of all)</p>
     
     
     <a href="https://doi.org/10.7717/peerj.2584">10.7717/peerj.2584</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Finotello2016">Finotello, F., E. Mastrorilli, and B. D. Camillo, 2016 <b>Measuring the diversity of the human microbiota with targeted next-generation sequencing</b>. Briefings in Bioinformatics bbw119.</span>
+    
+    
+    <a href="https://doi.org/10.1093/bib/bbw119">10.1093/bib/bbw119</a>
     
     
       <!-- prevent duplicate doi links -->
