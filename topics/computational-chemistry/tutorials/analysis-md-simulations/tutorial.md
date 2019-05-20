@@ -27,11 +27,11 @@ follow_up_training:
     tutorials:
       - analysis-md-simulations
 contributors:
-- chrisbarnettster
-- tsenapathi
-- simonbray
+  - chrisbarnettster
+  - tsenapathi
+  - simonbray
 level:
-- Intermediate
+  - "Intermediate"
 ---
 
 

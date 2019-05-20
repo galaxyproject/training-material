@@ -21,9 +21,9 @@ follow_up_training:
     tutorials:
       - analysis-md-simulations
 contributors:
-- simonbray
+  - simonbray
 level:
-- Intermediate
+  - "Intermediate"
 
 ---
 
