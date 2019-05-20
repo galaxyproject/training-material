@@ -1270,7 +1270,7 @@ dataset by subsampling.
 
 Species diversity is a valuable tool for describing the ecological complexity of a single sample (alpha diversity)
 or between samples (beta diversity). However, diversity is not a physical quantity that can be measured directly,
-and many different metrics have been proposed to quantify diversity [Finotello et al. 2016](https://www.ncbi.nlm.nih.gov/pubmed/28025179).
+and many different metrics have been proposed to quantify diversity by {% cite Finotello2016 %}.
 
 
 > ### {% icon comment %} Background: Species Diversity
@@ -1282,11 +1282,18 @@ and many different metrics have been proposed to quantify diversity [Finotello e
 > - **Phylogenetic diversity** = how closely related the species in a community are.
 >
 > <br><br>
-> To understand the difference between richness and evenness, consider the following example:
 >
-> ![illustration of richness and evenness](../../images/richness-evenness-blank.png)
+> Each of these factors play a role in diversity, but how to combine them into a single measure of diversity is nontrivial.
+> Many different metrics have been proposed for this, for example: *shannon, chao, pd, ace, simpson, sobs, jack, npshannon,
+> smithwilson, heip bergerparker, boney, efron, shen, solow, bootstrap, qstat, coverage, anderberg, hamming, jclass, jest,
+> ochiai, canberra, thetayc, invsimpson*, just to name a few ;). A comparison of several different diversity metrics is discussed in {% cite BonillaRosso2012 %}
+>
 >
 > > ### {% icon question %} Question
+> > To understand the difference between richness and evenness, consider the following example:
+> >
+> > ![illustration of richness and evenness](../../images/richness-evenness-blank.png)
+> >
 > > 1. Which of these communities has the highest richness?
 > > 2. Which of these communities has the highest evenness?
 > >
@@ -1305,11 +1312,6 @@ and many different metrics have been proposed to quantify diversity [Finotello e
 > closely related to each other in the second sample.
 >
 > ![illustration of phylogenetic distance](../../images/phylogenetic-distance.png){: width="50%"}
->
-> Each of these factors play a role in diversity, but how to combine them into a single measure of diversity is nontrivial.
-> Many different metrics have been proposed for this, for example: *shannon, chao, pd, ace, simpson, sobs, jack, npshannon,
-> smithwilson, heip bergerparker, boney, efron, shen, solow, bootstrap, qstat, coverage, anderberg, hamming, jclass, jest,
-> ochiai, canberra, thetayc, invsimpson*, just to name a few ;).
 >
 > Now, you do not need to know what all these different metrics are, but just remember that there is not a single
 > definition of diversity and as always, the metric you choose to use may influence your results.
