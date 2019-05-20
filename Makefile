@@ -129,6 +129,9 @@ check-yaml: ## lint yaml files
 check: check-yaml check-frontmatter check-html-internal check-html check-slides check-workflows check-references ## run all checks
 .PHONY: check
 
+lint: check-yaml check-frontmatter check-workflows check-references ## run all linting checks
+.PHONY: lint
+
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
 	$(ACTIVATE_ENV) && \
 	  	htmlproofer \
