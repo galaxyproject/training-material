@@ -39,7 +39,7 @@ In this tutorial you will learn how to perform a genome annotation, and how to e
 
 More information about Maker can be found [here](http://www.yandell-lab.org/software/maker.html).
 
-This tutorial was inspired by the MAKER Tutorial for [WGS Assembly and Annotation Winter School 2018 ](http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018), don't hesitate to consult it for more information on Maker, and on how to run it with command line.
+This tutorial was inspired by the MAKER Tutorial for [WGS Assembly and Annotation Winter School 2018](http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018), don't hesitate to consult it for more information on Maker, and on how to run it with command line.
 
 > ### Agenda
 >
@@ -161,7 +161,7 @@ BUSCO produces three output datasets
 >
 > > ### {% icon solution %} Solution
 > >
-> > The genome consists of the exepected 4 chromosomes sequences, with very few N, which is the ideal case. Most of the BUSCO genes are found as complete single copy, and very few are fragmented, which means that our genome have a good quality as it contains most of the expected content. That's a very good material to perform an annotation.
+> > The genome consists of the expected 4 chromosomes sequences, with very few N, which is the ideal case. Most of the BUSCO genes are found as complete single copy, and very few are fragmented, which means that our genome have a good quality as it contains most of the expected content. That's a very good material to perform an annotation.
 > >
 > {: .solution}
 >
@@ -205,7 +205,7 @@ For this first round, we configure Maker to construct gene models only by aligni
 Maker produces three GFF3 datasets:
 
 - The final annotation: the final consensus gene models produced by Maker
-- The evidences: the alignements of all the data Maker used to construct the final annotation (ESTs and proteins that we used)
+- The evidences: the alignments of all the data Maker used to construct the final annotation (ESTs and proteins that we used)
 - A GFF3 file containing both the final annotation and the evidences
 
 ## Annotation statistics
@@ -304,7 +304,7 @@ Augustus is trained in a very similar way.
 
 Both SNAP and Augustus produce a statistical model representing the observed general structure of genes in the analysed genome. Maker will use these models to create a new annotation for our genome.
 
-The Augustus training usually take around 2 hours to complete, to continue this tutorial without waiting for the result, you can use the file `augustus_training_1.tar.gz` imported from Zenodo.
+The Augustus training usually takes around 2 hours to complete, to continue this tutorial without waiting for the result, you can use the file `augustus_training_1.tar.gz` imported from Zenodo.
 
 # Second Maker annotation round
 
@@ -312,7 +312,7 @@ The Augustus training usually take around 2 hours to complete, to continue this 
 
 We need now to run a new round of Maker. As the evidences were already aligned on the genome on the first run, we can reuse these alignments as is.
 But this time, enable ab-initio gene prediction, and input the output of **Train SNAP** {% icon tool %} and **Train Augustus** {% icon tool %} tools.
-We also disable infering gene predictions directly from all ESTs and proteins: now we want Maker to infer gene predictions by reconciliating evidence alignments *and* ab-initio gene predictions.
+We also disable inferring gene predictions directly from all ESTs and proteins: now we want Maker to infer gene predictions by reconciliating evidence alignments *and* ab-initio gene predictions.
 
 > ### {% icon hands_on %} Hands-on: Second draft annotation with Maker
 >
@@ -566,7 +566,7 @@ Enable the three different tracks on the left side of JBrowse, then navigate alo
 
 ## More visualisation
 
-You might want to understand how a specific gene model was predicted by Maker. You can easily visualise the evidences used by Maker (EST ailgnements, protein aligments, ab-initio predictions, ...) by using JBrowse too.
+You might want to understand how a specific gene model was predicted by Maker. You can easily visualise the evidences used by Maker (EST alignments, protein alignments, ab-initio predictions, ...) by using JBrowse too.
 
 > ### {% icon hands_on %} Hands-on: Visualize evidences in JBrowse
 >
