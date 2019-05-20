@@ -33,7 +33,7 @@
       <substitute>
         <names variable="editor"/>
         <names variable="translator"/>
-        <text variable="title"/>
+        <text variable="title" font-weight="bold"/>
       </substitute>
     </names>
   </macro>
@@ -46,10 +46,10 @@
         <names variable="translator"/>
         <choose>
           <if type="bill book graphic legal_case legislation motion_picture report song" match="any">
-            <text variable="title" form="short" font-style="italic"/>
+            <text variable="title" form="short" font-weight="bold"/>
           </if>
           <else>
-            <text variable="title" form="short" quotes="true"/>
+            <text variable="title" font-weight="bold" form="short" quotes="true"/>
           </else>
         </choose>
       </substitute>
@@ -57,7 +57,7 @@
   </macro>
   <macro name="publisher">
     <group delimiter=", ">
-      <text variable="publisher"/>
+      <text variable="publisher" font-style="italic" />
       <text variable="publisher-place"/>
     </group>
   </macro>
@@ -93,7 +93,7 @@
       </group>
       <choose>
         <if type="report">
-          <text variable="title" prefix=" " suffix=":"/>
+          <text variable="title" font-weight="bold" prefix=" " suffix=":"/>
           <group prefix=" " delimiter=" ">
             <text variable="publisher"/>
             <text variable="collection-title"/>
@@ -104,13 +104,13 @@
         </if>
         <else-if type="bill book graphic legal_case legislation motion_picture song" match="any">
           <group suffix=".">
-            <text variable="title" form="long" font-style="italic" prefix=" "/>
+            <text variable="title" form="long" font-weight="bold" prefix=" "/>
             <text macro="editor-translator" prefix=" "/>
           </group>
           <text prefix=" " suffix="." macro="publisher"/>
         </else-if>
         <else-if type="chapter paper-conference" match="any">
-          <text variable="title" prefix=" "/>
+          <text variable="title" font-weight="bold" prefix=" "/>
           <group prefix=", ">
             <text variable="page" prefix="pp. " suffix=" "/>
             <text term="in" form="long" plural="false" font-style="normal"/>
@@ -131,7 +131,7 @@
           </group>
         </else-if>
         <else-if type="map">
-          <text variable="title" prefix=" " suffix=":"/>
+          <text variable="title" font-weight="bold" prefix=" " suffix=":"/>
           <group delimiter=" " prefix=" ">
             <text variable="publisher"/>
             <text variable="collection-title"/>
@@ -140,7 +140,7 @@
           <text variable="note" prefix=", scale "/>
         </else-if>
         <else-if type="thesis">
-          <text variable="title" prefix=" "/>
+          <text variable="title" font-weight="bold" prefix=" "/>
           <text variable="genre" prefix=" [" suffix="]"/>
           <group prefix=": " delimiter=", ">
             <text variable="publisher"/>
@@ -149,7 +149,7 @@
         </else-if>
         <else>
           <group suffix=".">
-            <text variable="title" prefix=" "/>
+            <text variable="title" font-weight="bold" prefix=" "/>
             <text macro="editor-translator" prefix=" "/>
           </group>
           <group prefix=" " suffix="." delimiter=" ">
