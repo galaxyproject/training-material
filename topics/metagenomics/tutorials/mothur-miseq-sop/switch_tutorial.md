@@ -1,2 +1,2 @@
-[{% icon exchange %} switch to {{ other_tutorial_name }} tutorial]({{ other_tutorial }}#{{ include.section }})
+[{% icon exchange %} Switch to {{ other_tutorial_name }} tutorial]({{ other_tutorial }}#{{ include.section }})
 
