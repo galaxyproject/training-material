@@ -30,7 +30,7 @@ contributors:
   - chrisbarnettster
   - simonbray
 level:
-- Intermediate
+  - "Intermediate"
 ---
 
 > ### {% icon comment %} Audience
