@@ -878,10 +878,10 @@ our sequencing and bioinformatics pipeline is.
 
 > ### {% icon comment %} Skipping the mock community analysis
 >
-> The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to [the next section](#otu-based-analysis)
+> The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to [the next section](#otu-clustering)
 > where we will cluster our sequences into OTUs, classify them and perform some visualisations.
 > <br><br>
-> Click [here](#otu-based-analysis) to skip this section and continue with the analysis.
+> Click [here](#otu-clustering) to skip this section and continue with the analysis.
 >
 {: .comment}
 
