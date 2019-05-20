@@ -23,6 +23,7 @@ contributors:
 ---
 
 # Optimised de Bruijn Graph assemblies using the Velvet Optimiser and SPAdes
+
 In this activity, we will perform *de novo* assemblies of a short read set using the Velvet Optimiser and the SPAdes assemblers. We are using the Velvet Optimiser for illustrative purposes. For real assembly work, a more suitable assembler should be chosen - such as SPAdes.
 
 The Velvet Optimiser is a script written by Simon Gladman to optimise the k-mer size and coverage cutoff parameters for Velvet. More information can be found [here](https://github.com/slugger70/VelvetOptimiser)
@@ -73,7 +74,7 @@ We will be using the same data that we used in the introductory tutorial, so if 
 
 # Assembly with the Velvet Optimiser
 
-We will perform an assembly with the Velvet Optimiser. It will automatically choose a suitable value for the k-mer size (**k**). It will then go on to optimise the coverage cutoff (**cov_cutoff**) which corrects for read errors. It will use the "*n50*" metric for optimising the k-mer size and the "*total number of bases in contigs*" for optimising the coverage cutoff.
+We will perform an assembly with the Velvet Optimiser, which automatically runs and optimises the output of the Velvet assembler ({% cite Velvet2008 %}). It will automatically choose a suitable value for the k-mer size (**k**). It will then go on to optimise the coverage cutoff (**cov_cutoff**) which corrects for read errors. It will use the "*n50*" metric for optimising the k-mer size and the "*total number of bases in contigs*" for optimising the coverage cutoff.
 
 > ### {% icon hands_on %} Hands-on: Assemble with the Velvet Optimiser
 >
@@ -119,6 +120,10 @@ Tables of results from **(a)** Simple assembly and **(b)** optimised assembly.
 
 **(b)** ![The results of the contigs from Optimised assembly. In contrast to simple assembly produced much higher n_50, while num_seq is lower.](../../images/optstats.png)
 
+> ### {% icon details %} Details: Further reading on assembly with Velvet
+> - Heuristic Resolution of Repeats and Scaffolding in the Velvet Short-Read de Novo Assembler ({% cite Zerbino2009 %})
+>
+{: .details}
 
 ## Visualisation of the Assembly
 
@@ -220,7 +225,7 @@ The next thing to be aware of is that there can be multiple valid interpretation
 
 # Assemble with SPAdes
 
-We will now perform an assembly with the much more modern SPAdes assembler. It goes through a similar process to Velvet in the fact that it uses and simplifies de Bruijn graphs but it uses multiple values for k-mer size and combines the resultant graphs. This combination produces very good assemblies. When using SPAdes it is typical to choose at least 3 k-mer sizes. One low, one medium and one high. We will use 33, 55 and 91.
+We will now perform an assembly with the much more modern SPAdes assembler ({% cite Bankevich2012 %}). It goes through a similar process to Velvet in the fact that it uses and simplifies de Bruijn graphs but it uses multiple values for k-mer size and combines the resultant graphs. This combination produces very good assemblies. When using SPAdes it is typical to choose at least 3 k-mer sizes. One low, one medium and one high. We will use 33, 55 and 91.
 
 > ### {% icon hands_on %} Hands-on: Assemble with SPAdes
 >

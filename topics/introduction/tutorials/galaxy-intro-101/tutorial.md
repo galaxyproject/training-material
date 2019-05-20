@@ -30,10 +30,12 @@ contributors:
   - erasche
 ---
 
-# 101 Introduction
+# Introduction
 {:.no_toc}
 
 This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
+
+{% include snippets/warning_results_may_vary.md %}
 
 > ### Agenda
 >
@@ -72,6 +74,7 @@ Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and l
 > 2. **Rename your history** to be meaningful and easy to find. You can do this by clicking on the title of the history (which by default is *Unnamed history*) and typing **Galaxy 101** as the name. Do  not forget to hit the <kbd>Enter</kbd> key on your keyboard to save it.
 >
 >    ![Rename the history](../../../../shared/images/rename_history.png)
+>
 {: .hands_on}
 
 ## Upload exon locations

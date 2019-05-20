@@ -30,7 +30,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-IWTomics implements the Interval-Wise Testing (IWT) for omics data. This
+IWTomics ({% cite Cremona2018 %}) implements the Interval-Wise Testing (IWT; {% cite Pini2017 %}) for omics data. This
 inferential procedure tests for differences in "Omics" data between two groups
 of genomic regions, and does not require fixing location and scale at the
 outset.
