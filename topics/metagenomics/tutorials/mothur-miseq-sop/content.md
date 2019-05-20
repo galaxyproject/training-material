@@ -174,8 +174,6 @@ All data required for this tutorial has been made available from Zenodo [![DOI](
 >    > ### {% icon solution %} List of Zenodo URLs
 >    > ```
 >    > https://zenodo.org/record/800651/files/HMP_MOCK.v35.fasta
->    > https://zenodo.org/record/800651/files/mouse.dpw.metadata
->    > https://zenodo.org/record/800651/files/mouse.time.design
 >    > https://zenodo.org/record/800651/files/silva.v4.fasta
 >    > https://zenodo.org/record/800651/files/trainset9_032012.pds.fasta
 >    > https://zenodo.org/record/800651/files/trainset9_032012.pds.tax
