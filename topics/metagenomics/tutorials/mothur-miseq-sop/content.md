@@ -199,7 +199,7 @@ convention, so that our tools will know which files belong together. We do this 
 > 1. Click on the **checkmark icon** {% icon param-check %} at top of your history.
 >
 > 2. Select all the FASTQ files (40 in total)
->    - **Tip:** type `fastq` in the search bar at the top of your history to filter only the fastq files; you can now use the `All` button at the top instead of having to individually select all 40 input files.
+>    - **Tip:** type `fastq` in the search bar at the top of your history to filter only the FASTQ files; you can now use the `All` button at the top instead of having to individually select all 40 input files.
 >    - Click on **for all selected..**
 >    - Select **Build List of Dataset Pairs** from the dropdown menu
 >
@@ -322,7 +322,7 @@ Next, we want to improve the quality of our data. To this end we will run a work
 > > > 1. The screening removed **23,488** sequences.
 > > >
 > > >    This can be determined by looking at the number of lines in `bad.accnos` output of **Screen.seqs** {% icon tool %}
-> > >    or by comparing the total number of sequencess before and after this screening step in the output of **Summary.seqs** {% icon tool %}
+> > >    or by comparing the total number of sequences before and after this screening step in the output of **Summary.seqs** {% icon tool %}
 > > >
 > > > 2. There are **16,426** unique sequences.
 > > >
@@ -415,7 +415,7 @@ the original dataset. We do this by using the **Unique.seqs** tool.
 >
 > > ### {% icon question %} Question
 > >
-> > How many sequences were unique? how many duplicates were removed?
+> > How many sequences were unique? How many duplicates were removed?
 > >
 > > > ### {% icon solution %} Solution
 > > > 16,426 unique sequences and 112,446 duplicates.
@@ -597,7 +597,7 @@ To ensure that all our reads overlap our region of interest, we will:
 >     Next, we will remove any overhang on either side of the V4 region, and
 >
 > 2. **Filter.seqs** {% icon tool %} with the following parameters
->   - {% icon param-file %} *"fasta"*: `good.fasta` output from the lastest **Screen.seqs** {% icon tool %}
+>   - {% icon param-file %} *"fasta"*: `good.fasta` output from the latest **Screen.seqs** {% icon tool %}
 >   - *"vertical"*: `yes`
 >   - *"trump"*: `.`
 >   - *"Output logfile"*: `yes`
@@ -916,7 +916,7 @@ accurate your sequencing and analysis protocol is.
 > As an example, consider the following image from Fouhy et al {% cite Fouhy2016 %}.
 > A mock community sample was sequenced for different combinations of sequencer and primer sets (V-regions).
 > Since we know the expected outcome, we can assess the accuracy of each pipeline. A similar approach can be used to
-> assess different parameter settings of the *in-silico*  analysis pipline.
+> assess different parameter settings of the *in-silico*  analysis pipeline.
 >
 > ![example results of mock community sequencing to assess error rates](../../images/mock_community.jpg "Example of usage of a mock community to assess accuracy. On the left is the expected result given that we know the exact composition of the mock sample. This was then used to assess the accuracy of different combinations of sequencing platform and primer set (choice of V-region)")
 >
@@ -1251,7 +1251,7 @@ dataset by subsampling.
 >
 >    > ### {% icon question %} Question
 >    >
->    >  What would you exect the result of `count.groups` on this new shared output collection to be? Check if you are correct.
+>    >  What would you expect the result of `count.groups` on this new shared output collection to be? Check if you are correct.
 >    > > ### {% icon solution %} Solution
 >    > > all groups (samples) should now have 2389 sequences. Run count.groups again on the shared output collection by the sub.sample
 >    > > tool to confirm that this is indeed what happened.
@@ -1299,7 +1299,7 @@ and many different metrics have been proposed to quantify diversity by {% cite F
 > >
 > > > ### {% icon solution %} Solution
 > > > 1. Both communities have 4 different species, so they have same richness.
-> > > 2. Communty B is more even, because each species has the same abundance.
+> > > 2. Community B is more even, because each species has the same abundance.
 > > >
 > > > ![illustration of richness and evenness](../../images/richness-evenness.png)
 > > {: .solution }
@@ -1374,7 +1374,7 @@ numsampled    0.03-F3D0    lci-F3D0    hci-F3D0    0.03-F3D1   ...
 ...
 ```
 
-This file displays the number of OTUs identified per amount of sequences used (numsampled). What we would like
+This file displays the number of OTUs identified per amount of sequences used (`numsampled`). What we would like
 to see is the number of additional OTUs identified when adding more sequences reaching a plateau. Then we know
 we have covered our full diversity. This information would be easier to interpret in the form of a graph.
 Let's plot the rarefaction curve for a couple of our sequences:
@@ -1550,7 +1550,7 @@ numerically rare or just had a low incidence.
 
 {% unless include.short %}
 Next, let's generate a dendrogram to describe the similarity of the samples to each other. We will generate a
-dendrogram using the jclass and thetayc calculators within the **Tree.shared** tool:
+dendrogram using the `jclass` and `thetayc` calculators within the **Tree.shared** tool:
 
 > ### {% icon hands_on %} Tree
 >
