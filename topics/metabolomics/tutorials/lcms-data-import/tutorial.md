@@ -23,10 +23,10 @@ contributors:
 
 **TODO** Explain why metabolomics, what do you want to do
 
-To illustrate this approach, we will use data from [Thévenot et al, 2015](https://pubs.acs.org/doi/10.1021/acs.jproteome.5b00354). The objectives of this paper was to analyze the inﬂuence of age, body mass index, and gender on the urine metabolome. To do that, the authors collected samples from 183 employees from CEA and did
+To illustrate this approach, we will use data from {% cite Thvenot2015 %}. The objectives of this paper was to analyze the inﬂuence of age, body mass index, and gender on the urine metabolome. To do that, the authors collected samples from 183 employees from CEA and did
 LC-HRMS LTQ-Orbitrap (negative ionization mode) (**TODO** explain the terms).
 
-To analyze these data, we will the follow the [LC-MS workflow](http://workflow4metabolomics.org/the-lc-ms-workflow), developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/). **TODO** Introduce with one or two sentence the workflow (explanation of the meaning of LC-MS, the big steps, etc). This workflow take as input **TODO** and perform several steps: pre-processing, statistics, and annotation.
+To analyze these data, we will the follow the [LC-MS workflow](http://workflow4metabolomics.org/the-lc-ms-workflow), developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/), ({% cite Giacomoni2014 %}, {% cite Guitton2017 %}). **TODO** Introduce with one or two sentence the workflow (explanation of the meaning of LC-MS, the big steps, etc). This workflow take as input **TODO** and perform several steps: pre-processing, statistics, and annotation.
 
 > ### Agenda
 >
@@ -112,7 +112,7 @@ Blanc17 | blank | blank | 0 | 1 | 173 | ne1 | NA | NA | NA | NA | NA
 
 # Preprocessing with XCMS
 
-The first step of the workflow is the pre-processing of the raw data with XCMS.  
+The first step of the workflow is the pre-processing of the raw data with XCMS ({% cite Smith2006 %}).
 
 XCMS is a free software dedicated to pre-processing any types of mass spectrometry acquisition files from low to high resolution including FT-MS data coupled with different kind of chromatography (liquid or gaz). This software is used worldwide by a majority of specialists of metabolomic using mass spectrometry methods.
 
@@ -141,7 +141,7 @@ We will not have to run these steps 4 times on each datasets, thanks to the Data
 > 3. **xcms findChromPeaks Merger** {% icon tool %} with the following parameters
 >    - {% icon param-collection %} *"RData file"*: the `raw.raw.xset.RData` Data Collection (output of **xcms findChromPeaks (xcmsSet)** {% icon tool %})
 >    - {% icon param-file %} *"Sample metadata file"*: the imported metadata file
->   
+>
 >    When the **xcms findChromPeaks Merger** step is done, you can observe that we now have a dataset called `xset.merged.RData` in the history. It's no longer a Dataset Collection.
 >
 > 4. **xcms.groupChromPeaks (group)** {% icon tool %} with the following parameters

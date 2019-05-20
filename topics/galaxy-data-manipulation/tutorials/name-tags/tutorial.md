@@ -88,7 +88,7 @@ If you're using a Galaxy server newer than 19.01, you will notice that the tags 
 > The colours are generated from a checksum of the text of each tag. Every time the same tag is used, the same colour will be generated. Different words will usually result in different colours.
 >
 > This allows tags with very similar lengths and word shapes (e.g. `peaks` and `genes`) which can be mistake at small font size if you aren't careful.
-> While current evidence {% cite microsoft-word-recognition %} doesn't support the "word shape" model of word recognition, it has still been seen to be beneficial to provide more contrast between words when mistakes can be costly {% cite ntrs-19930010781 %}. In the context of Galaxy, mistakes are usually not incredibly costly, but can be annoying. This gives an easy additional signal on which you can mentally filter your datasets.
+> While current evidence ({% cite microsoft-word-recognition %}) doesn't support the "word shape" model of word recognition, it has still been seen to be beneficial to provide more contrast between words when mistakes can be costly ({% cite ntrs-19930010781 %}). In the context of Galaxy, mistakes are usually not incredibly costly, but can be annoying. This gives an easy additional signal on which you can mentally filter your datasets.
 >
 > You can read some of the discussion that went into implementing the tags [in the pull request to Galaxy](https://github.com/galaxyproject/galaxy/pull/7072).
 {: .details}
